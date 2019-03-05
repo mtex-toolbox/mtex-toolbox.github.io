@@ -1,0 +1,47 @@
+---
+title: Contour Plot Demo
+last_updated: 05-Mar-2019
+sidebar: documentation_sidebar
+permalink: ContourPlotDemo.html
+folder: documentation_matlab
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Contour Plot Demo</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_ContourPlotDemo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ContourPlotDemo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to customize contour plots in MTEX</p><!--/introduction--><p>Lets consider an arbitrary spherical function which has no practical meaning at all but serves as a prototype for pole figures, inverse pole figures, Schmidt or Taylor factor maps, etc.</p><pre class="codeinput"><span class="comment">% define the spherical function</span>
+sF = 0.01 + 10*S2Fun.smiley
+
+<span class="comment">% and plot it as a smooth function</span>
+plot(sF,<span class="string">'upper'</span>)
+mtexColorMap <span class="string">blue2red</span>
+mtexColorbar
+</pre><p>Passing the option <tt>contour</tt> to the plot command we may add contours at specific levels on top of the smooth plot</p><pre class="codeinput"><span class="comment">% enable on top plotting</span>
+hold <span class="string">on</span>
+
+<span class="comment">% specify the contour levels</span>
+levels = -4:5;
+
+<span class="comment">% plot the contours</span>
+h = plot(sF,<span class="string">'contour'</span>,levels,<span class="string">'linewidth'</span>,2,<span class="string">'linecolor'</span>,<span class="string">'k'</span>)
+
+<span class="comment">% diable on top plotting</span>
+hold <span class="string">off</span>
+</pre><p>The plotting command return a handle <tt>h</tt> to the plotted contours. This handle can be used to customize the contour lines. In particular, one can use the Matlab command <a href="matlab:doc('clabel')">clabel</a> to add labels to specific contour levels.</p><pre class="codeinput">levels2label = [-2,0:5];
+clabel(h.ContourMatrix,h,levels2label,<span class="string">'FontSize'</span>,15)
+</pre><h2 id="4">A practical example</h2><p>The situation becomes a little bit more involved if contour lines should be added to multiple plot. Let us consider the pole figures of the following ODF</p><pre class="codeinput">mtexdata <span class="string">dubna</span>
+odf = calcODF(pf,<span class="string">'silent'</span>)
+</pre><p>Then we may use the option <tt>'ShowText','on'</tt> to display contour labels.</p><pre class="codeinput">h = pf{4:5}.h;
+plotPDF(odf,h)
+mtexColorMap <span class="string">LaboTeX</span>
+mtexColorbar
+
+hold <span class="string">on</span>
+plotPDF(odf,h,<span class="string">'contour'</span>,1:2:15,<span class="string">'linecolor'</span>,<span class="string">'black'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'ShowText'</span>,<span class="string">'on'</span>)
+hold <span class="string">off</span>
+</pre></div></body></html>

@@ -1,0 +1,73 @@
+---
+title: calcTaylor
+last_updated: 05-Mar-2019
+sidebar: documentation_sidebar
+permalink: strainTensor.calcTaylor.html
+folder: documentation_matlab
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>calcTaylor</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_strainTensor__calcTaylor.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit strainTensor__calcTaylor into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[strainTensor_index.html,strainTensor]])</p><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab">[M,b,mori] = calcTaylor(eps,sS)
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>eps</tt>
+         </td>
+         <td>
+               <p>[[strainTensor_index.html,strainTensor]] list in crystal coordinates</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sS</tt>
+         </td>
+         <td>
+               <p>[[slipSystem_index.html,slipSystem]] list in crystal coordinates</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+               <p>taylor factor</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>b</tt>
+         </td>
+         <td>
+               <p>coefficients for the acive slip systems</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mori</tt>
+         </td>
+         <td>
+               <p>misorientation</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% define 10 percent strain</span>
+eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
+</pre><pre class="codeinput"><span class="comment">% define a crystal orientation</span>
+cs = crystalSymmetry(<span class="string">'cubic'</span>)
+ori = orientation.byEuler(0,30*degree,15*degree,cs)
+</pre><pre class="codeinput"><span class="comment">% define a slip system</span>
+sS = slipSystem.fcc(cs)
+</pre><pre class="codeinput"><span class="comment">% compute the Taylor factor</span>
+[M,b,mori] = calcTaylor(inv(ori)*eps,sS.symmetrise)
+</pre></div></body></html>

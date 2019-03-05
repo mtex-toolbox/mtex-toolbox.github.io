@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content=" ">
+<title>quadratureS2Grid | MTEX</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme-mtex.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="mtex" href="http://localhost:4000/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> MTEX Toolbox</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="download">Download</a></li>
+                
+                
+                
+                <li><a href="documentation">Documentation</a></li>
+                
+                
+                
+                <li><a href="function_reference">Function References</a></li>
+                
+                
+                
+                <li><a href="people">People</a></li>
+                
+                
+                
+                <li><a href="publications">Publications</a></li>
+                
+                
+                
+                <li><a href="support">Support</a></li>
+                
+                
+                
+                <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="quadratureS2Grid">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">MTEX 5.1.0</li>
+  
+  
+  
+  <li>
+      <a href="#">Tutorials</a>
+      <ul>
+          
+          
+          
+          <li><a href="Contribute2Doc.html">MTEX Documentation Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="EBSDTutorial.html">EBSD Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="GrainTutorial.html">Grain Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="PoleFigureTutorial.html">Pole Figure Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ODFTutorial.html">ODF Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ImportFromVPSC.html">Import from VPSC</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">General Concepts</a>
+      <ul>
+          
+          
+          
+          <li><a href="ListsAndIndexing.html">Lists and Indexing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="properties.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="vectors.html">Vectors</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="rotations.html">Rotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ClusterDemo.html">Cluster demo</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Plotting</a>
+      <ul>
+          
+          
+          
+          <li><a href="AxesAlignment.html">Axes Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="multiplot.html">Multiplot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="annotations.html">Annotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="export_plotting.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SphericalProjections.html">Spherical Projections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="legends.html">Legends</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="colormaps.html">Colormaps</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ContourPlotDemo.html">Contour Plot Demo</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TransparencyDemo.html">Transparency demo</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Crystal Geometry</a>
+      <ul>
+          
+          
+          
+          <li><a href="CrystalSymmetries.html">Crystal Symmetries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="miller.html">Miller</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="FundamentalRegionMoraviecCell.html">Fundamental region/Moraviec cell</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="FundamentalSector.html">Fundamental Sector</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="CrystalReferenceSystem.html">Crystal Reference System</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="quasicrystals.html">Quasicrystal</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Misorientations</a>
+      <ul>
+          
+          
+          
+          <li><a href="twinning.html">Twinning</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="AxisDistributionFunction.html">Axis Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="AngleDistributionFunction.html">Angle Distribution Function</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">PhaseTransitions</a>
+      <ul>
+          
+          
+          
+          <li><a href="ParentChildVariants.html">Parent/Child Variants</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TransformationTexture.html">Transformation Texture</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ParentGrainReconstruction.html">Partent Grain Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="GrainMerging.html">Grain Merging</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">ODF Analysis</a>
+      <ul>
+          
+          
+          
+          <li><a href="ODFModeling.html">ODF Modeling</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DetectionOfSampleSymmetry.html">Detection of Sample Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="VisualizationOverview.html">Visualization - Overview</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="EulerAngleSections.html">Euler Angle Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SigmaSections.html">Sigma Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ODFCharacteristics.html">ODF Characteristics</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="UnimodalODFs.html">Unimodal ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="FibreODFs.html">Fibre ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="HarmonicODFs.html">Harmonic ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DiscretizationError.html">Discretization Error</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ImportExportODFAnalysis.html">Import/Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="BinghamODFFitting.html">Bingham ODF Fitting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="RandomSampling.html">Random Sampling</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Pole Figure Analysis</a>
+      <ul>
+          
+          
+          
+          <li><a href="ImportExportPoleFigureAnalysis.html">Import/Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DataCorrection.html">Data Correction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ODFReconstruction.html">ODF Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TheAmbiguityProblem.html">The Ambiguity Problem</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">EBSD</a>
+      <ul>
+          
+          
+          
+          <li><a href="ImportExportEBSD.html">Import/Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ReferenceFrameAlignment.html">Reference Frame Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DataPreprocessing.html">Data Preprocessing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="denoising.html">Denoising</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="visualization.html">Visualization</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="KernelAverageMisorientationKAM.html">Kernel Average Misorientation KAM</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Grains</a>
+      <ul>
+          
+          
+          
+          <li><a href="GrainReconstruction.html">Grain Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ShapeParameters.html">Shape Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="OriantationDistributionParameters.html">Oriantation Distribution Parameters</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Grain Boundaries</a>
+      <ul>
+          
+          
+          
+          <li><a href="GeometricProperties.html">Geometric Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SpecialBoundariesCSLTwinning.html">Special Boundaries CSL Twinning</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Tensors</a>
+      <ul>
+          
+          
+          
+          <li><a href="TensorArithmetic.html">Tensor Arithmetic</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="AverageTensors.html">Average Tensors</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="piezoelectricity.html">Piezoelectricity</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="BirefringenceDemo.html">Birefringence</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Elasticity</a>
+      <ul>
+          
+          
+          
+          <li><a href="WaveVelocities.html">Wave Velocities</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="IsotropicTheory.html">Isotropic Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SeismicPlots.html">Seismic Plots</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Plasticity</a>
+      <ul>
+          
+          
+          
+          <li><a href="SchmidtFactor.html">Schmidt Factor</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TaylorModel.html">Taylor Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SachsModel.html">Sachs Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SlipTransmission.html">Slip Transmission</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="GND.html">GND</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TextureEvolution.html">Texture Evolution</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Spherical Functions</a>
+      <ul>
+          
+          
+          
+          <li><a href="univariateS2Fun.html">univariate S2Fun</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div class="post-header">
+   <h1 class="post-title-main">quadratureS2Grid</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+
+    
+
+
+    
+
+   <!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>quadratureS2Grid</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_quadratureS2Grid.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit quadratureS2Grid into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">View Code</h2><h2 id="2">Syntax</h2><pre class="language-matlab">[S2G, W, M2] = quadratureS2Grid(M) quadrature <span class="string">grid</span> <span class="string">of</span> <span class="string">type</span> <span class="string">chebyshev</span>
+[S2G, W, M2] = quadratureS2Grid(M, <span class="string">'gauss'</span>) quadrature <span class="string">grid</span> <span class="string">of</span> <span class="string">type</span> <span class="string">gauss</span>
+</pre></div></body></html>
+
+    <div class="tags">
+        
+    </div>
+
+
+
+
+</div>
+
+
+
+<footer>
+<div class="row">
+<div class="col-lg-12 footer">
+<p><img src="images/company_logo.png" alt="Company logo"/></p>
+</div>
+</div>
+</footer>
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+</html>

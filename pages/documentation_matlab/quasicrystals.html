@@ -1,0 +1,47 @@
+---
+title: Quasicrystal
+last_updated: 05-Mar-2019
+sidebar: documentation_sidebar
+permalink: quasicrystals.html
+folder: documentation_matlab
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Quasicrystal</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_quasicrystals.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit quasicrystals into the Matlab commandline">edit page</a></font><div><h1>Quasicrystal</h1><p>Aufstellung 1 mit f&#65533;nfz&#65533;hliger Achse parallel zu z</p><pre class="codeinput"><span class="comment">%rot5 = rotation.byAxisAngle(zvector,(0:4)*72*degree)</span>
+<span class="comment">%rot3 = rotation.byAxisAngle(vector3d('polar',37.377*degree,0) ,(0:2)*120*degree)</span>
+
+<span class="comment">% Aufstellung 2</span>
+<span class="comment">% mit zweiz&#65533;hliger Achse parallel zu z</span>
+rot5 = rotation.byAxisAngle(vector3d(<span class="string">'polar'</span>,31.7171*degree,0),(0:4)*72*degree)
+rot3 = rotation.byAxisAngle(vector3d(<span class="string">'polar'</span>,20.9054*degree,90*degree),(0:2)*120*degree)
+
+<span class="comment">% generiere Gruppe indem wir die Operationen ein paar mal hintereinander</span>
+<span class="comment">% ausf&#65533;hren und alles doppelte wegschmeissen :)</span>
+rot = unique(rot3 * rot5 * rot3 * rot5 * rot3 * rot5)
+
+<span class="comment">% definiere das als crystal symmetry -&gt; enantiomorphe gruppe</span>
+cs = crystalSymmetry(rot)
+
+<span class="comment">% nehme inversion dazu</span>
+<span class="comment">%cs = crystalSymmetry([1 -1]*rot)</span>
+
+plot(cs,<span class="string">'symbolSize'</span>,0.4,<span class="string">'projection'</span>,<span class="string">'eangle'</span>,<span class="string">'grid'</span>,<span class="string">'on'</span>)
+
+hold <span class="string">on</span>
+plot(cs.fundamentalSector,<span class="string">'color'</span>,<span class="string">'red'</span>)
+hold <span class="string">off</span>
+</pre><pre class="codeinput">oR = cs.fundamentalRegion
+plot(oR)
+</pre><pre class="codeinput">ipfKey = ipfHSVKey(cs)
+
+plot(ipfKey,<span class="string">'complete'</span>,<span class="string">'upper'</span>,<span class="string">'projection'</span>,<span class="string">'eangle'</span>,<span class="string">'resolution'</span>,0.5*degree)
+
+<span class="comment">%saveFigure('ipfKey3.png')</span>
+</pre></div></body></html>

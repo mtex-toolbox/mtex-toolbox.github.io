@@ -1,0 +1,15 @@
+%% Slip Systems (The Class [[slipSystem_index.html,slipSystem]])
+% This section describes the class *slipSystem*.
+%
+%% Open in Editor
+%
+%% Contents
+%
+%% Class Description 
+% Atomic slip in crystale material ussualy occurs along lattice planes.
+
+%% PLEASE HELP AND ADD CONTENT HERE
+
+%% Complete Function list
+% 
+% <html><table width="90%"><tr><td width="200px"><a href="slipSystem.SchmidFactor.html"><tt>SchmidFactor</tt></a></td><td>compute the Schmid factor </td></tr><tr><td width="200px"><a href="slipSystem.deformationTensor.html"><tt>deformationTensor</tt></a></td><td>deformation tensor</td></tr><tr><td width="200px"><a href="slipSystem.end.html"><tt>end</tt></a></td><td>overloaded end function</td></tr><tr><td width="200px"><a href="slipSystem.eq.html"><tt>eq</tt></a></td><td>? sS1 == sS2</td></tr><tr><td width="200px"><a href="slipSystem.horzcat.html"><tt>horzcat</tt></a></td><td>overloads [v1,v2,v3..]</td></tr><tr><td width="200px"><a href="slipSystem.isempty.html"><tt>isempty</tt></a></td><td>overloads isempty</td></tr><tr><td width="200px"><a href="slipSystem.length.html"><tt>length</tt></a></td><td>overloads length</td></tr><tr><td width="200px"><a href="slipSystem.mPrime.html"><tt>mPrime</tt></a></td><td>m' parameter from Luster and Morris in 1995</td></tr><tr><td width="200px"><a href="slipSystem.ne.html"><tt>ne</tt></a></td><td>? sS1 ~= sS2</td></tr><tr><td width="200px"><a href="slipSystem.residualBurgersVector.html"><tt>residualBurgersVector</tt></a></td><td>compute the Schmid factor </td></tr><tr><td width="200px"><a href="slipSystem.rotate.html"><tt>rotate</tt></a></td><td>slip system</td></tr><tr><td width="200px"><a href="slipSystem.rotate_outer.html"><tt>rotate_outer</tt></a></td><td>rotate slip system</td></tr><tr><td width="200px"><a href="slipSystem.size.html"><tt>size</tt></a></td><td>overloads size</td></tr><tr><td width="200px"><a href="slipSystem.slipSystem.html"><tt>slipSystem</tt></a></td><td>class representing slip systems</td></tr><tr><td width="200px"><a href="slipSystem.subSet.html"><tt>subSet</tt></a></td><td>subindex vector3d</td></tr><tr><td width="200px"><a href="slipSystem.subsasgn.html"><tt>subsasgn</tt></a></td><td>overloads subsasgn</td></tr><tr><td width="200px"><a href="slipSystem.subsref.html"><tt>subsref</tt></a></td><td>overloads subsref</td></tr><tr><td width="200px"><a href="slipSystem.symmetrise.html"><tt>symmetrise</tt></a></td><td>find all symmetrically equivalent slips systems</td></tr><tr><td width="200px"><a href="slipSystem.trace.html"><tt>trace</tt></a></td><td>of the slip plane in the surface normal to n</td></tr><tr><td width="200px"><a href="slipSystem.transpose.html"><tt>transpose</tt></a></td><td>list of slipSystem</td></tr><tr><td width="200px"><a href="slipSystem.uminus.html"><tt>uminus</tt></a></td><td>overloads unitary minus</td></tr><tr><td width="200px"><a href="slipSystem.vertcat.html"><tt>vertcat</tt></a></td><td>overloads [v1,v2,v3..]</td></tr></table></html>
