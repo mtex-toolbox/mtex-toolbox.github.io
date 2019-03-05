@@ -1,0 +1,64 @@
+---
+title: variants
+last_updated: 05-Mar-2019
+sidebar: documentation_sidebar
+permalink: orientation.variants.html
+folder: documentation_matlab
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>variants</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_orientation__variants.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__variants into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[orientation_index.html,orientation]])</p><!--/introduction--><p>variants of an orientation relationship</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab">ori_variants = ori_parent * mori.variants
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mori</tt>
+         </td>
+         <td>
+               <p>child to parent [[orientation_index.html,orientation]] relationship</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ori_parent</tt>
+         </td>
+         <td>
+               <p>parent [[orientation_index.html,orientation]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ori_variants</tt>
+         </td>
+         <td>
+               <p>all possible child [[orientation_index.html,orientation]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% parent symmetry</span>
+cs_fcc = crystalSymmetry(<span class="string">'432'</span>, [3.6599 3.6599 3.6599], <span class="string">'mineral'</span>, <span class="string">'Iron fcc'</span>);
+</pre><pre class="codeinput"><span class="comment">% child symmetry</span>
+cs_bcc = crystalSymmetry(<span class="string">'432'</span>, [2.866 2.866 2.866], <span class="string">'mineral'</span>, <span class="string">'Iron bcc'</span>)
+</pre><pre class="codeinput"><span class="comment">% define a fcc parent orientation</span>
+ori_fcc = orientation.brass(cs_fcc)
+</pre><pre class="codeinput"><span class="comment">% define Nishiyama Wassermann fcc to bcc orientation relation ship</span>
+NW = orientation.NishiyamaWassermann(cs_fcc,cs_bcc)
+</pre><pre class="codeinput"><span class="comment">% compute a bcc child orientation related to the fcc orientation</span>
+ori_bcc = ori_fcc * inv(NW)
+</pre><pre class="codeinput"><span class="comment">% compute all symmetrically possible child orientations</span>
+ori_bcc = unique(ori_fcc.symmetrise * inv(NW))
+</pre><pre class="codeinput"><span class="comment">% same using the function variants</span>
+ori_bcc2 = ori_fcc * inv(NW.variants)
+</pre><pre class="codeinput"><span class="comment">% we may also compute all possible child to child misorientations</span>
+bcc2bcc = unique(NW.variants * inv(NW))
+</pre><h2 id="15">See also</h2><p>orientation/parents</p></div></body></html>

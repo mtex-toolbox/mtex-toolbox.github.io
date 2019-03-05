@@ -1,0 +1,103 @@
+---
+title: plot
+last_updated: 05-Mar-2019
+sidebar: documentation_sidebar
+permalink: EBSD.plot.html
+folder: documentation_matlab
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>plot</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_EBSD__plot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD__plot into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[EBSD_index.html,EBSD]])</p><!--/introduction--><p>spatial EBSD plot</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab"><span class="comment">% colorize according to phase</span>
+plot(ebsd)
+</pre><pre class="language-matlab"><span class="comment">% colorize according to arbitrary value - here MAD</span>
+plot(ebsd,ebsd.mad)
+</pre><pre class="language-matlab"><span class="comment">% colorize according to orientation</span>
+plot(ebsd(<span class="string">'phaseName'</span>),ebsd(<span class="string">'phaseName'</span>).orientation)
+</pre><pre class="language-matlab"><span class="comment">% colorize according to custom color</span>
+oM = ipfColorKey(ebsd(<span class="string">'phaseName'</span>))
+color = oM.orientation2color(ebsd(<span class="string">'phaseName'</span>).orientations);
+plot(ebsd(<span class="string">'phaseName'</span>),color)
+</pre><pre class="language-matlab"><span class="comment">% specify the color directly and show in Legend</span>
+badMAD = ebsd.mad &gt; 1;
+plot(ebsd(badMAD),<span class="string">'faceColor'</span>,<span class="string">'black,'</span>DisplayName',<span class="string">'bad values'</span>)
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+               <p>[[EBSD_index.html,EBSD]]</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>color</tt>
+         </td>
+         <td>
+               <p>length(ebsd) x 3 vector of RGB values</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>param,val</tt>
+         </td>
+         <td>Parameters and values that control plot<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
+               <tr>
+                  <td class="header" width="100px">Parameter</td>
+                  <td class="header">Description</td>
+               </tr>
+               <tr>
+                  <td width="150px">
+                     <tt>'micronbar'</tt>
+                  </td>
+                  <td>
+                        <p>'on'/'off'</p>
+                  </td>
+               </tr>
+               <tr>
+                  <td width="150px">
+                     <tt>'DisplayName'</tt>
+                  </td>
+                  <td>
+                        <p>add a legend entry</p>
+                  </td>
+               </tr>
+            </table>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>param</tt>
+         </td>
+         <td>Options that control the plot behavior<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
+               <tr>
+                  <td class="header" width="100px">Parameter</td>
+                  <td class="header">Description</td>
+               </tr>
+               <tr>
+                  <td width="150px">
+                     <tt>'points'</tt>
+                  </td>
+                  <td>
+                        <p>plot dots instead of unitcells</p>
+                  </td>
+               </tr>
+            </table>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Example</h2><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+plot(ebsd)
+</pre><pre class="codeinput"><span class="comment">% colorize accoding to orientations</span>
+plot(ebsd(<span class="string">'Forsterite'</span>),ebsd(<span class="string">'Forsterite'</span>).orientations)
+</pre><pre class="codeinput"><span class="comment">% colorize according to MAD</span>
+plot(ebsd,ebsd.mad,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
+</pre><h2 id="10">See also</h2><p>EBSDSpatialPlots</p></div></body></html>

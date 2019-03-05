@@ -1,0 +1,16 @@
+%% deformationGradientTensor
+% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+%% 
+%
+%% View Code
+% 
+%% Syntax
+% 
+% <html>
+%    <div class="syntax" width="100%">
+%       <div>
+%          <tt>F = deformationGradientTensor('param1',val1,'param2',val2)</tt>
+%       </div>
+%    </div>
+% </html>
+% 

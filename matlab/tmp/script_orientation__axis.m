@@ -1,0 +1,72 @@
+%% axis
+% (method of [[orientation_index.html,orientation]])
+%% 
+% rotational axis of an misorientation or two orientations
+% 
+%
+%% View Code
+% 
+%% Syntax
+%   % define a cubic and hexagonal symmetries
+%   csCube = crystalSymmetry('cubic')
+%   csHex = crystalSymmetry('hexagonal')
+% 
+%   % define two orientations
+%   o1 = orientation.byEuler(csCube)
+%   o2 = orientation.byEuler(csHex)
+% 
+%   % the misorientation axis with respect to the specimen coordinate
+%   % system is computed by
+%   a = axis(o1,o2)
+% 
+%   % the misorientation axis with respect to csCube is computed by
+%   a = axis(inv(o1)*o2,csCube)
+% 
+%   % the misorientation axis with respect to csHex is computed by
+%   a = axis(inv(o1)*o2,csHex)
+% 
+%   % compute the misorientation axis ignoring symmetry
+%   a = axis(inv(o1)*o2,'noSymmetry')
+% 
+
+%% Input
+% 
+% <html>
+%    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+%       <tr>
+%          <td width="100px">
+%             <tt>mori,o1,o2</tt>
+%          </td>
+%          <td>
+%                <p>[[orientation_index.html,orientation]]</p>
+%          </td>
+%       </tr>
+%    </table>
+% </html>
+% 
+%% Output
+% 
+% <html>
+%    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+%       <tr>
+%          <td width="100px">
+%             <tt>a</tt>
+%          </td>
+%          <td>
+%                <p>[[vector3d_index.html,vector3d]]</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>m</tt>
+%          </td>
+%          <td>
+%                <p>[[Miller_index.html,Miller]]</p>
+%          </td>
+%       </tr>
+%    </table>
+% </html>
+% 
+%% See also
+% orientation/angle
+%

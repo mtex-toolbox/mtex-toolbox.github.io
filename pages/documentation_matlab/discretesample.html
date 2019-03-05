@@ -1,0 +1,55 @@
+---
+title: discretesample
+last_updated: 05-Mar-2019
+sidebar: documentation_sidebar
+permalink: discretesample.html
+folder: documentation_matlab
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>discretesample</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_discretesample.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit discretesample into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Samples from a discrete distribution</p><pre class="language-matlab">x = discretesample(p, n)
+    independently <span class="string">draws</span> <span class="string">n</span> <span class="string">samples</span> <span class="string">(with replacement)</span> <span class="string">from</span> <span class="string">the</span>
+    distribution <span class="string">specified</span> <span class="string">by</span> <span class="string">p</span>, where <span class="string">p</span> <span class="string">is</span> <span class="string">a</span> <span class="string">probability</span> <span class="string">array</span>
+    whose <span class="string">elements</span> <span class="string">sum</span> <span class="string">to</span> <span class="string">1.</span>
+</pre><pre>     Suppose the sample space comprises K distinct objects, then
+     p should be an array with K elements. In the output, x(i) = k
+     means that the k-th object is drawn at the i-th trial.</pre><pre class="language-matlab">Remarks
+-------
+    - This <span class="keyword">function</span> is mainly <span class="string">for</span> <span class="string">efficient</span> <span class="string">sampling</span> <span class="string">in</span> <span class="string">non-uniform</span>
+      distribution, which <span class="string">can</span> <span class="string">be</span> <span class="string">either</span> <span class="string">parametric</span> <span class="string">or</span> <span class="string">non-parametric.</span>
+</pre><pre>     - The function is implemented based on histc, which has been
+       highly optimized by mathworks. The basic idea is to divide
+       the range [0, 1] into K bins, with the length of each bin
+       proportional to the probability mass. And then, n values are
+       drawn from a uniform distribution in [0, 1], and the bins that
+       these values fall into are picked as results.</pre><pre>     - This function can also be employed for continuous distribution
+       in 1D/2D dimensional space, where the distribution can be
+       effectively discretized.</pre><pre>     - This function can also be useful for sampling from distributions
+       which can be considered as weighted sum of "modes".
+       In this type of applications, you can first randomly choose
+       a mode, and then sample from that mode. The process of choosing
+       a mode according to the weights can be accomplished with this
+       function.</pre><!--/introduction--><h2 id="1">View Code</h2><h2 id="2">Syntax</h2><p>
+   <div class="syntax" width="100%">
+      <div>
+         <tt>x = discretesample(p, n,'param1',val1,'param2',val2)</tt>
+      </div>
+   </div>
+</p><h2 id="3">Example</h2><pre class="codeinput">--------
+<span class="comment">% sample from a uniform distribution for K objects.</span>
+p = ones(1, K) / K;
+x = discretesample(p, n);
+</pre><pre class="codeinput"><span class="comment">% sample from a non-uniform distribution given by user</span>
+x = discretesample([0.6 0.3 0.1], n);
+</pre><pre class="codeinput"><span class="comment">% sample from a parametric discrete distribution with</span>
+<span class="comment">% probability mass function given by f.</span>
+p = f(1:K);
+x = discretesample(p, n);
+</pre></div></body></html>
