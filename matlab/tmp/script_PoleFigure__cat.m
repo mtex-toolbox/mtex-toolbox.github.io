@@ -1,16 +1,53 @@
 %% cat
 % (method of [[PoleFigure_index.html,PoleFigure]])
 %% 
+% implement cat for PoleFigure
+% 
 %
 %% View Code
 % 
 %% Syntax
+%   pf = cat(dim,pf1,pf2,pf3)
+% 
+
+%% Input
 % 
 % <html>
-%    <div class="syntax" width="100%">
-%       <div>
-%          <tt>pf = cat(dim,'param1',val1,'param2',val2)</tt>
-%       </div>
-%    </div>
+%    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+%       <tr>
+%          <td width="100px">
+%             <tt>dim</tt>
+%          </td>
+%          <td>
+%                <p>dimension</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>pf1, pf2, pf3</tt>
+%          </td>
+%          <td>
+%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%          </td>
+%       </tr>
+%    </table>
 % </html>
 % 
+%% Output
+% 
+% <html>
+%    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+%       <tr>
+%          <td width="100px">
+%             <tt>pf</tt>
+%          </td>
+%          <td>
+%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%          </td>
+%       </tr>
+%    </table>
+% </html>
+% 
+%% See also
+% PoleFigure/horzcat, PoleFigure/vertcat
+%

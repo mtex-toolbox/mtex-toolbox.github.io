@@ -1,6 +1,8 @@
 %% mean
 % (method of [[S2FunTri_index.html,S2FunTri]])
 %% 
+% mean value of a spherical function
+% 
 %
 %% View Code
 % 

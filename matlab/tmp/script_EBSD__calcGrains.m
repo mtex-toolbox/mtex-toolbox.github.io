@@ -45,7 +45,7 @@
 %                      <tt>'boundary'</tt>
 %                   </td>
 %                   <td>
-%                         <p>bounds the spatial domain</p>
+%                         <p>bounds the spatial domain ('convexhull', 'tight')</p>
 %                   </td>
 %                </tr>
 %             </table>

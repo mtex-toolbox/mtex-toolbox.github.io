@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content=" ">
+<title>Miller Indices | MTEX</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme-mtex.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="mtex" href="http://localhost:4000/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> MTEX Toolbox</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="download">Download</a></li>
+                
+                
+                
+                <li><a href="documentation">Documentation</a></li>
+                
+                
+                
+                <li><a href="function_reference">Function References</a></li>
+                
+                
+                
+                <li><a href="people">People</a></li>
+                
+                
+                
+                <li><a href="publications">Publications</a></li>
+                
+                
+                
+                <li><a href="support">Support</a></li>
+                
+                
+                
+                <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="Miller Indices">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">MTEX 5.1.0</li>
+  
+  
+  
+  <li>
+      <a href="#">Tutorials</a>
+      <ul>
+          
+          
+          
+          <li><a href="Contribute2Doc.html">MTEX Documentation Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="EBSDTutorial.html">EBSD Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="GrainTutorial.html">Grain Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="PoleFigureTutorial.html">Pole Figure Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ODFTutorial.html">ODF Tutorial</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ImportFromVPSC.html">Import from VPSC</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">General Concepts</a>
+      <ul>
+          
+          
+          
+          <li><a href="ListsAndIndexing.html">Lists and Indexing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="Properties.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="vectors.html">Vectors</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="rotations.html">Rotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ClusterDemo.html">Cluster demo</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Plotting</a>
+      <ul>
+          
+          
+          
+          <li><a href="AxesAlignment.html">Axes Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="multiplot.html">Multiplot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="annotations.html">Annotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="export_plotting.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SphericalProjections.html">Spherical Projections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="legends.html">Legends</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="colormaps.html">Colormaps</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ContourPlotDemo.html">Contour Plot Demo</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TransparencyDemo.html">Transparency demo</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Crystal Geometry</a>
+      <ul>
+          
+          
+          
+          <li><a href="CrystalSymmetries.html">Crystal Symmetries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="miller.html">Miller</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="FundamentalRegionMoraviecCell.html">Fundamental region/Moraviec cell</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="FundamentalSector.html">Fundamental Sector</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="CrystalReferenceSystem.html">Crystal Reference System</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="quasicrystals.html">Quasicrystal</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Misorientations</a>
+      <ul>
+          
+          
+          
+          <li><a href="twinning.html">Twinning</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="AxisDistributionFunction.html">Axis Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="AngleDistributionFunction.html">Angle Distribution Function</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">PhaseTransitions</a>
+      <ul>
+          
+          
+          
+          <li><a href="ParentChildVariants.html">Parent/Child Variants</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TransformationTexture.html">Transformation Texture</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ParentGrainReconstruction.html">Partent Grain Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="GrainMerging.html">Grain Merging</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">ODF Analysis</a>
+      <ul>
+          
+          
+          
+          <li><a href="ODFModeling.html">ODF Modeling</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DetectionOfSampleSymmetry.html">Detection of Sample Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="VisualizationOverview.html">Visualization - Overview</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="EulerAngleSections.html">Euler Angle Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SigmaSections.html">Sigma Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ODFCharacteristics.html">ODF Characteristics</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="UnimodalODFs.html">Unimodal ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="FibreODFs.html">Fibre ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="HarmonicODFs.html">Harmonic ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DiscretizationError.html">Discretization Error</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ImportExportODFAnalysis.html">Import/Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="BinghamODFFitting.html">Bingham ODF Fitting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="RandomSampling.html">Random Sampling</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Pole Figure Analysis</a>
+      <ul>
+          
+          
+          
+          <li><a href="ImportExportPoleFigureAnalysis.html">Import/Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DataCorrection.html">Data Correction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ODFReconstruction.html">ODF Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TheAmbiguityProblem.html">The Ambiguity Problem</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">EBSD</a>
+      <ul>
+          
+          
+          
+          <li><a href="ImportExportEBSD.html">Import/Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ReferenceFrameAlignment.html">Reference Frame Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="DataPreprocessing.html">Data Preprocessing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="denoising.html">Denoising</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="visualization.html">Visualization</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="KernelAverageMisorientationKAM.html">Kernel Average Misorientation KAM</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Grains</a>
+      <ul>
+          
+          
+          
+          <li><a href="GrainReconstruction.html">Grain Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="ShapeParameters.html">Shape Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="OriantationDistributionParameters.html">Oriantation Distribution Parameters</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Grain Boundaries</a>
+      <ul>
+          
+          
+          
+          <li><a href="GeometricProperties.html">Geometric Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SpecialBoundariesCSLTwinning.html">Special Boundaries CSL Twinning</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Tensors</a>
+      <ul>
+          
+          
+          
+          <li><a href="TensorArithmetic.html">Tensor Arithmetic</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="AverageTensors.html">Average Tensors</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="piezoelectricity.html">Piezoelectricity</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="BirefringenceDemo.html">Birefringence</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Elasticity</a>
+      <ul>
+          
+          
+          
+          <li><a href="WaveVelocities.html">Wave Velocities</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="IsotropicTheory.html">Isotropic Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SeismicPlots.html">Seismic Plots</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Plasticity</a>
+      <ul>
+          
+          
+          
+          <li><a href="SchmidtFactor.html">Schmidt Factor</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TaylorModel.html">Taylor Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SachsModel.html">Sachs Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="SlipTransmission.html">Slip Transmission</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="GND.html">GND</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TextureEvolution.html">Texture Evolution</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Spherical Functions</a>
+      <ul>
+          
+          
+          
+          <li><a href="univariateS2Fun.html">univariate S2Fun</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div class="post-header">
+   <h1 class="post-title-main">Miller Indices</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+
+    
+
+
+    
+
+   <!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalDirections into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Contents</h2><h2 id="3">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry_index.html">crystalSymmetry</a></p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'triclinic'</span>,[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,<span class="keyword">...</span>
+  <span class="string">'X||a*'</span>,<span class="string">'Z||c'</span>,<span class="string">'mineral'</span>,<span class="string">'Talc'</span>);
+</pre><p>The variable <tt>cs</tt> containes the geometry of the crystal reference frame and, in particular, the alignment of the crystallographic a,b, and, c axis.</p><pre class="codeinput">a = cs.aAxis
+b = cs.bAxis
+c = cs.cAxis
+</pre><pre class="codeoutput"> 
+a = Miller  
+ size: 1 x 1
+ mineral: Talc (-1, X||a*, Z||c)
+  u 1
+  v 0
+  w 0
+ 
+b = Miller  
+ size: 1 x 1
+ mineral: Talc (-1, X||a*, Z||c)
+  u 0
+  v 1
+  w 0
+ 
+c = Miller  
+ size: 1 x 1
+ mineral: Talc (-1, X||a*, Z||c)
+  u 0
+  v 0
+  w 1
+</pre><p>A lattice direction <tt>m = u * a + v * b + w * c</tt> is a vector with coordinates u, v, w with respect to these crystallographic axes. Such a direction is commonly denoted by [uvw] with coordinates u, v, w called Miller indices. In MTEX a lattice direction is represented by a variable of type <a href="Miller_index.html">Miller</a> which is defined by</p><pre class="codeinput">m = Miller(1,0,1,cs,<span class="string">'uvw'</span>)
+</pre><pre class="codeoutput"> 
+m = Miller  
+ size: 1 x 1
+ mineral: Talc (-1, X||a*, Z||c)
+  u 1
+  v 0
+  w 1
+</pre><p>for values <tt>u = 1</tt>, <tt>v = 0</tt>, and, <tt>w = 1</tt>. To plot a crystal direction as a <a href="phericalProjection_index.html">spherical projections</a> do</p><pre class="codeinput">plot(m,<span class="string">'upper'</span>,<span class="string">'labeled'</span>,<span class="string">'grid'</span>)
+</pre>
+  <img class="inline" src="images/script_CrystalDirections_01.png" alt="" />
+
+<h2 id="7">Crystal Lattice Planes</h2><p>A crystal lattice plane (hkl) is commonly described by its normal vector <tt>n = h * a* + k * b* + l * c*</tt> where a*, b*, c* describes the reciprocal crystal coordinate system. In MTEX a lattice plane is defined by</p><pre class="codeinput">m = Miller(1,0,1,cs,<span class="string">'hkl'</span>)
+</pre><pre class="codeoutput"> 
+m = Miller  
+ size: 1 x 1
+ mineral: Talc (-1, X||a*, Z||c)
+  h 1
+  k 0
+  l 1
+</pre><p>By default lattice planes are plotted as normal directions. Using the option <tt>plane</tt> we may alternatively plot the trace of the lattice plane with the sphere.</p><pre class="codeinput">hold <span class="string">on</span>
+<span class="comment">% the normal direction</span>
+plot(m,<span class="string">'upper'</span>,<span class="string">'labeled'</span>)
+
+<span class="comment">% the trace of the corresponding lattice plane</span>
+plot(m,<span class="string">'plane'</span>,<span class="string">'linecolor'</span>,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
+hold <span class="string">off</span>
+</pre>
+  <img class="inline" src="images/script_CrystalDirections_02.png" alt="" />
+
+<p>Note that for non Euclidean crystal frames uvw and hkl notations usually lead to different directions.</p><pre class="codeinput"><span class="comment">%s</span>
+</pre><h2 id="10">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices [UVTW] and (HKIL) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is reduntant as the first three Miller indeces always sum up to zero, i.e., 
+  <img class="inline" src="images/script_CrystalDirections_eq08789495435140204831.png" alt="" />
+
+ and 
+  <img class="inline" src="images/script_CrystalDirections_eq05019324578161084208.png" alt="" />
+
+. The syntax is</p><pre class="codeinput"><span class="comment">% import trigonal Quartz lattice structure</span>
+cs = loadCIF(<span class="string">'quartz'</span>)
+
+<span class="comment">% a four digit lattice direction</span>
+m = Miller(2,1,-3,1,cs,<span class="string">'UVTW'</span>)
+
+plot(m,<span class="string">'upper'</span>,<span class="string">'labeled'</span>)
+
+n = Miller(1,1,-2,3,cs,<span class="string">'HKIL'</span>)
+
+hold <span class="string">on</span>
+plot(n,<span class="string">'upper'</span>,<span class="string">'labeled'</span>)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+cs = crystalSymmetry  
+ 
+  mineral        : Quartz            
+  symmetry       : 321               
+  a, b, c        : 4.9, 4.9, 5.4     
+  reference frame: X||a*, Y||b, Z||c*
+ 
+ 
+m = Miller  
+ size: 1 x 1
+ mineral: Quartz (321, X||a*, Y||b, Z||c*)
+  U  2
+  V  1
+  T -3
+  W  1
+ 
+n = Miller  
+ size: 1 x 1
+ mineral: Quartz (321, X||a*, Y||b, Z||c*)
+  h  1
+  k  1
+  i -2
+  l  3
+</pre>
+  <img class="inline" src="images/script_CrystalDirections_03.png" alt="" />
+
+<h2 id="11">Symmetrically Equivalent Crystal Directions</h2><p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indeces (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html">symmetrise</a></p><pre class="codeinput">symmetrise(m)
+</pre><pre class="codeoutput"> 
+ans = Miller  
+ size: 6 x 1
+ mineral: Quartz (321, X||a*, Y||b, Z||c*)
+  U  2  2 -3 -3  1  1
+  V  1 -3  2  1 -3  2
+  T -3  1  1  2  2 -3
+  W  1 -1  1 -1  1 -1
+</pre><p>As always the keyword <a href="AxialDirectional.html">antipodal</a> adds antipodal symmetry to this computation</p><pre class="codeinput">symmetrise(m,<span class="string">'antipodal'</span>)
+</pre><pre class="codeoutput"> 
+ans = Miller  
+ size: 12 x 1
+ mineral: Quartz (321, X||a*, Y||b, Z||c*)
+  U  2  2 -3 -3  1  1 -2 -2  3  3 -1 -1
+  V  1 -3  2  1 -3  2 -1  3 -2 -1  3 -2
+  T -3  1  1  2  2 -3  3 -1 -1 -2 -2  3
+  W  1 -1  1 -1  1 -1 -1  1 -1  1 -1  1
+</pre><p>Using the options <b>symmetrised</b> and <b>labeled</b> all symmetrically equivalent crystal directions are plotted together with their Miller indices.</p><pre class="codeinput">plot(m,<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'grid'</span>,<span class="string">'backgroundcolor'</span>,<span class="string">'w'</span>)
+</pre>
+  <img class="inline" src="images/script_CrystalDirections_04.png" alt="" />
+
+<p>The command [[vector3d.eq.html,eq or ==]] can be used to check whether two crystal directions are symmetrically equivalent. Compare</p><pre class="codeinput">Miller(1,1,-2,0,cs) == Miller(-1,-1,2,0,cs)
+</pre><pre class="codeoutput">ans =
+  logical
+   0
+</pre><p>and</p><pre class="codeinput">eq(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),<span class="string">'antipodal'</span>)
+</pre><pre class="codeoutput">ans =
+  logical
+   1
+</pre><h2 id="16">Angles</h2><p>The angle between two crystal directions m1 and m2 is defined as the smallest angle between m1 and all symmetrically equivalent directions to m2. This angle is in radians and it is calculated by the function <a href="vector3d.angle.html">angle</a></p><pre class="codeinput">angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs)) / degree
+</pre><pre class="codeoutput">ans =
+   60.0000
+</pre><p>As always the keyword <a href="AxialDirectional.html">antipodal</a> adds antipodal symmetry to this computation</p><pre class="codeinput">angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),<span class="string">'antipodal'</span>) / degree
+</pre><pre class="codeoutput">ans =
+     0
+</pre><h2 id="18">Conversions</h2><p>Converting a crystal direction which is represented by its coordinates with respect to the crystal coordinate system a, b, c into a representation with respect to the associated Euclidean coordinate system is done by the command <a href="Miller.vector3d.html">vectord3d</a>.</p><pre class="codeinput">vector3d(m)
+</pre><pre class="codeoutput"> 
+ans = vector3d  
+ size: 1 x 1
+        x       y       z
+  7.09563   2.458  1.8018
+</pre><p>Conversion into spherical coordinates requires the function <a href="vector3d.polar.html">polar</a></p><pre class="codeinput">[theta,rho] = polar(m)
+</pre><pre class="codeoutput">theta =
+    1.3353
+rho =
+    0.3335
+</pre><h2 id="20">Calculations</h2><p>Essentially all the operations defined for general directions, i.e. for variables of type [[vector3d_index.html,vector3d]] are also available for Miller indices. In addition Miller indices interact with crystal orientations. Consider the crystal orientation</p><pre class="codeinput">o = orientation.byEuler(10*degree,20*degree,30*degree,cs)
+</pre><pre class="codeoutput"> 
+o = orientation  
+  size: 1 x 1
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    10   20   30    0
+ 
+</pre><p>Then one can apply it to a crystal direction to find its coordinates with respect to the specimen coordinate system</p><pre class="codeinput">o * m
+</pre><pre class="codeoutput"> 
+ans = vector3d  
+ size: 1 x 1
+        x       y       z
+  4.02206  5.4999 3.63462
+</pre><p>By applying a <a href="symmetry_index.html">crystal symmetry</a> one obtains the coordinates with respect to the specimen coordinate system of all crystallographically equivalent specimen directions.</p><pre class="codeinput">p = o * symmetrise(m);
+plot(p,<span class="string">'grid'</span>)
+</pre>
+  <img class="inline" src="images/script_CrystalDirections_05.png" alt="" />
+
+</div></body></html>
+
+    <div class="tags">
+        
+    </div>
+
+
+
+
+</div>
+
+
+
+<footer>
+<div class="row">
+<div class="col-lg-12 footer">
+<p><img src="images/company_logo.png" alt="Company logo"/></p>
+</div>
+</div>
+</footer>
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,4476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keywords" content=" ">
+<title>simpleShear | MTEX</title>
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme-mtex.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<link rel="shortcut icon" href="images/favicon.ico">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="mtex" href="http://localhost:4000/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-lg navbar-brand" href="index.html">&nbsp;<span class="projectTitle"> MTEX Toolbox</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- entries without drop-downs appear here -->
+
+
+
+
+                
+                
+                
+                <li><a href="download">Download</a></li>
+                
+                
+                
+                <li><a href="documentation">Documentation</a></li>
+                
+                
+                
+                <li><a href="function_reference">Function References</a></li>
+                
+                
+                
+                <li><a href="people">People</a></li>
+                
+                
+                
+                <li><a href="publications">Publications</a></li>
+                
+                
+                
+                <li><a href="support">Support</a></li>
+                
+                
+                
+                <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">GitHub</a></li>
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: 'search.json',
+                                searchResultTemplate: '<li><a href="{url}" title="simpleShear">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">MTEX 5.1.0</li>
+  
+  
+  
+  <li>
+      <a href="#">Classes representing Geometry</a>
+      <ul>
+          
+          
+          
+          <li><a href="dummy.html">dummy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Specimen Directions (The Class @vector3d)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="vector3d.abs.html">abs</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.accumarray.html">accumarray</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.angle.html">angle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.angle_outer.html">angle_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.arrow3d.html">arrow3d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.byPolar.html">byPolar</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.calcDelaunay.html">calcDelaunay</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.calcDensity.html">calcDensity</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.calcQuadratureWeights.html">calcQuadratureWeights</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.calcVoronoi.html">calcVoronoi</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.calcVoronoiArea.html">calcVoronoiArea</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.centroid.html">centroid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.circle.html">circle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.contour.html">contour</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.contourf.html">contourf</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.cross.html">cross</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.cross_outer.html">cross_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.ctranspose.html">ctranspose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.det.html">det</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.dot.html">dot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.dot_outer.html">dot_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.double.html">double</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.dyad.html">dyad</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.eig.html">eig</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.end.html">end</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.exp.html">exp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.export.html">export</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.find.html">find</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.horzcat.html">horzcat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.interp.html">interp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.isPerp.html">isPerp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.isempty.html">isempty</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.line.html">line</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.mean.html">mean</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.mpower.html">mpower</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.mrdivide.html">mrdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.ne.html">ne</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.norm.html">norm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.normalize.html">normalize</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.orth.html">orth</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.orthProj.html">orthProj</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.pcolor.html">pcolor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.perp.html">perp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.planeIntersect.html">planeIntersect</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.plot3d.html">plot3d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.plotCustom.html">plotCustom</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.polar.html">polar</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.polyArea.html">polyArea</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.project2FundamentalRegion.html">project2FundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.quiver.html">quiver</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.quiver3.html">quiver3</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.rank.html">rank</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.rdivide.html">rdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.refine.html">refine</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.region.html">region</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.repmat.html">repmat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.reshape.html">reshape</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.scatter.html">scatter</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.scatter3d.html">scatter3d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.setdiff.html">setdiff</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.size.html">size</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.smooth.html">smooth</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.sparse.html">sparse</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.sum.html">sum</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.surf.html">surf</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.text.html">text</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.text3.html">text3</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.transpose.html">transpose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.unique.html">unique</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.vector3d.html">vector3d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="vector3d.vertcat.html">vertcat</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Crystal Directions (The Class @Miller)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="Miller.Miller.html">Miller</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.calcDensity.html">calcDensity</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.cross.html">cross</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.dot.html">dot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.dot_outer.html">dot_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.dspacing.html">dspacing</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.exp.html">exp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.perp.html">perp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.project2FundamentalRegion.html">project2FundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.region.html">region</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.round.html">round</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.scatter.html">scatter</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.smooth.html">smooth</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.surf.html">surf</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.text.html">text</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.transformReferenceFrame.html">transformReferenceFrame</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="Miller.unique.html">unique</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Crystal Shapes (The Class @crystalShape)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="crystalShape.crystalShape.html">crystalShape</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.fitArea.html">fitArea</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.repmat.html">repmat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.reshape.html">reshape</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.size.html">size</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="crystalShape.times.html">times</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Rotations (The Class @rotation)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="rotation.byAxisAngle.html">byAxisAngle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.byEuler.html">byEuler</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.byMatrix.html">byMatrix</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.byRodrigues.html">byRodrigues</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.dot.html">dot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.dot_outer.html">dot_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.getMinAxes.html">getMinAxes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.isImproper.html">isImproper</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.line.html">line</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.map.html">map</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.matrix.html">matrix</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.mldivide.html">mldivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.permute.html">permute</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.power.html">power</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.project2FundamentalRegion.html">project2FundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.repmat.html">repmat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.reshape.html">reshape</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.rotation.html">rotation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.transpose.html">transpose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="rotation.unique.html">unique</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Crystal and Specimen Symmetries (The Class @symmetry)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="symmetry.Laue.html">Laue</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.LaueName.html">LaueName</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.alignment.html">alignment</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.calcAngleDistribution.html">calcAngleDistribution</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.calcAxisDistribution.html">calcAxisDistribution</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.calcQuat.html">calcQuat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.check.html">check</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.disjoint.html">disjoint</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.elements.html">elements</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.ensureCS.html">ensureCS</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.factor.html">factor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.fundamentalRegion.html">fundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.fundamentalRegionEuler.html">fundamentalRegionEuler</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.fundamentalSector.html">fundamentalSector</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.maxAngle.html">maxAngle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.multiplicityPerpZ.html">multiplicityPerpZ</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.multiplicityZ.html">multiplicityZ</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.nfold.html">nfold</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.properGroup.html">properGroup</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.properSubGroup.html">properSubGroup</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.rotation_special.html">rotation_special</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.symmetry.html">symmetry</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="symmetry.union.html">union</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Crystal Orientations (The Class @orientation)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="orientation.BCV.html">BCV</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.KLCV.html">KLCV</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.LSCV.html">LSCV</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.angle.html">angle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.axis.html">axis</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.bingham_test.html">bingham_test</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.byAxisAngle.html">byAxisAngle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.byEuler.html">byEuler</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.byMatrix.html">byMatrix</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.byMiller.html">byMiller</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcAngleDistribution.html">calcAngleDistribution</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcBinghamODF.html">calcBinghamODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcCluster.html">calcCluster</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcFourierODF.html">calcFourierODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcInvTaylor.html">calcInvTaylor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcKernel.html">calcKernel</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcKernelODF.html">calcKernelODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcMDF.html">calcMDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcMIndex.html">calcMIndex</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcODF.html">calcODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.calcTensor.html">calcTensor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.crossCorrelation.html">crossCorrelation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.ctranspose.html">ctranspose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.doHClustering.html">doHClustering</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.dot.html">dot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.dot_outer.html">dot_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.exp.html">exp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.export_VPSC.html">export_VPSC</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.fibreVolume.html">fibreVolume</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.getFundamentalRegion.html">getFundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.isMisorientation.html">isMisorientation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.ldivide.html">ldivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.log.html">log</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.logm.html">logm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.map.html">map</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.mean.html">mean</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.mldivide.html">mldivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.niceEuler.html">niceEuler</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.orientation.html">orientation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.parents.html">parents</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.plotIPDF.html">plotIPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.plotPDF.html">plotPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.plotSection.html">plotSection</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.power.html">power</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.project2EulerFR.html">project2EulerFR</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.project2FundamentalRegion.html">project2FundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.qqplot.html">qqplot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.round2Miller.html">round2Miller</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.scatter.html">scatter</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.sphereVolume.html">sphereVolume</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.transformReferenceFrame.html">transformReferenceFrame</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.unique.html">unique</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.variants.html">variants</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="orientation.volume.html">volume</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Fibres</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="fibre.angle.html">angle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.end.html">end</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.fibre.html">fibre</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.horzcat.html">horzcat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.isempty.html">isempty</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.ne.html">ne</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.orientation.html">orientation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.plotIPDF.html">plotIPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.plotPDF.html">plotPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.rotation.html">rotation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.size.html">size</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.transpose.html">transpose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre.vertcat.html">vertcat</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Slip Systems (The Class @slipSystem)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="slipSystem.SchmidFactor.html">SchmidFactor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.SchmidTensor.html">SchmidTensor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.deformationTensor.html">deformationTensor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.end.html">end</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.horzcat.html">horzcat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.isempty.html">isempty</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.mPrime.html">mPrime</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.ne.html">ne</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.residualBurgersVector.html">residualBurgersVector</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.size.html">size</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.slipSystem.html">slipSystem</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.trace.html">trace</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.transpose.html">transpose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="slipSystem.vertcat.html">vertcat</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Quaternions (The Class @quaternion)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="quaternion.EinsteinSum.html">EinsteinSum</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.Euler.html">Euler</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.Rodrigues.html">Rodrigues</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.angle.html">angle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.angle_outer.html">angle_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.axis.html">axis</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.calcVoronoi.html">calcVoronoi</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.cross.html">cross</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.ctranspose.html">ctranspose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.dot.html">dot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.dot_angle.html">dot_angle</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.dot_outer.html">dot_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.double.html">double</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.end.html">end</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.export.html">export</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.find.html">find</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.geodesic.html">geodesic</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.horzcat.html">horzcat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.inv.html">inv</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.isempty.html">isempty</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.isnan.html">isnan</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.log.html">log</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.logm.html">logm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.matrix.html">matrix</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.mean.html">mean</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.mean_CS.html">mean_CS</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.mldivide.html">mldivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.mpower.html">mpower</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.mrdivide.html">mrdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.ndims.html">ndims</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.ne.html">ne</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.norm.html">norm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.normalize.html">normalize</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.permute.html">permute</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.perturbe.html">perturbe</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.power.html">power</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.prod.html">prod</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.project2EulerFR.html">project2EulerFR</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.project2FundamentalRegion.html">project2FundamentalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.qmatrix.html">qmatrix</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.qq.html">qq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.quaternion.html">quaternion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.rdivide.html">rdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.real.html">real</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.repmat.html">repmat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.reshape.html">reshape</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.scatter.html">scatter</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.setSubSet.html">setSubSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.size.html">size</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.sum.html">sum</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.transpose.html">transpose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.unique.html">unique</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quaternion.vertcat.html">vertcat</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Discretisation of 1-Sphere (The Class @S1Grid)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="S1Grid.GridLength.html">GridLength</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.S1Grid.html">S1Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.coarser.html">coarser</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.delete.html">delete</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.dist.html">dist</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.dist_outer.html">dist_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.double.html">double</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.find.html">find</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.max.html">max</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.min.html">min</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.refine.html">refine</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.shift.html">shift</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S1Grid.subGrid.html">subGrid</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Discretisation of 2 - Sphere (The Class @S2Grid)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="S2Grid.S2Grid.html">S2Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.copy.html">copy</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.delete.html">delete</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.find.html">find</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.getdata.html">getdata</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.polar.html">polar</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.refine.html">refine</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.subGrid.html">subGrid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="S2Grid.subsref.html">subsref</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Discretisation of Orientation Space (The Class SO3Grid)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="SO3Grid.SO3Grid.html">SO3Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.copy.html">copy</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.delete.html">delete</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.dot_outer.html">dot_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.find.html">find</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.spy.html">spy</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.subGrid.html">subGrid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SO3Grid.subsref.html">subsref</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Classes for Quantitative Texture Analysis</a>
+      <ul>
+          
+          
+          
+          <li><a href="dummy.html">dummy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Orientation Density Functions (The Class @ODF)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="ODF.FourierODF.html">FourierODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.ODF.html">ODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.bandwidth.html">bandwidth</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcAngleDistribution.html">calcAngleDistribution</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcAxisDistribution.html">calcAxisDistribution</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcAxisVolume.html">calcAxisVolume</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcComponents.html">calcComponents</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcError.html">calcError</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcFourier.html">calcFourier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcMDF.html">calcMDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcMIndex.html">calcMIndex</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcModes.html">calcModes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcOrientations.html">calcOrientations</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcPDF.html">calcPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcPoleFigure.html">calcPoleFigure</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcTensor.html">calcTensor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.calcpdf_special3.html">calcpdf_special3</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.centerSpecimen.html">centerSpecimen</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.concentration.html">concentration</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.conv.html">conv</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.discreteSample.html">discreteSample</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.entropy.html">entropy</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.eval.html">eval</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.export.html">export</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.export_VPSC.html">export_VPSC</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.export_generic.html">export_generic</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.export_mtex.html">export_mtex</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.fibreVolume.html">fibreVolume</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.grad.html">grad</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.hist.html">hist</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.interp.html">interp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.isFourier.html">isFourier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.max.html">max</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.mean.html">mean</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.mrdivide.html">mrdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.neuralgas.html">neuralgas</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.norm.html">norm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plot3d.html">plot3d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plotDiff.html">plotDiff</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plotFibre.html">plotFibre</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plotFourier.html">plotFourier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plotIPDF.html">plotIPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plotPDF.html">plotPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plotSection.html">plotSection</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.quantile.html">quantile</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.rdivide.html">rdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.slope.html">slope</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.smooth.html">smooth</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.steepestDescent.html">steepestDescent</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.steepestDescentX.html">steepestDescentX</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.textureindex.html">textureindex</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="ODF.volume.html">volume</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Standard ODFs</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="BinghamODF.html">BinghamODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="FourierODF.html">FourierODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="SantaFe.html">SantaFe</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="femODF.html">femODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibreODF.html">fibreODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="mix2.html">mix2</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="uniformODF.html">uniformODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="unimodalODF.html">unimodalODF</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">ODF Shapes (The class @kernel)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="kernel.K_symmetrised.html">K_symmetrised</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kernel.RK_symmetrised.html">RK_symmetrised</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kernel.kernel.html">kernel</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kernel.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kernel.plotFourier.html">plotFourier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kernel.plotPDF.html">plotPDF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kernel.volume.html">volume</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Pole Figure Data (The Class @PoleFigure)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="PoleFigure.PoleFigure.html">PoleFigure</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.calcError.html">calcError</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.calcErrorPF.html">calcErrorPF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.calcFEMODF.html">calcFEMODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.calcNormalization.html">calcNormalization</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.calcODF.html">calcODF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.calcPoleFigure.html">calcPoleFigure</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.correct.html">correct</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.export.html">export</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.findOutlier.html">findOutlier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.isOutlier.html">isOutlier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.isempty.html">isempty</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.max.html">max</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.mean.html">mean</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.min.html">min</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.mrdivide.html">mrdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.noisepf.html">noisepf</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.normalize.html">normalize</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.plotDiff.html">plotDiff</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.rdivide.html">rdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.scale.html">scale</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.select.html">select</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.union.html">union</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="PoleFigure.unique.html">unique</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Electron Backscatter Diffraction Data (The Class @EBSD)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="EBSD.EBSD.html">EBSD</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.KAM.html">KAM</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.affinetrans.html">affinetrans</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.calcGrains.html">calcGrains</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.calcMisorientation.html">calcMisorientation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.calcTensor.html">calcTensor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.cat.html">cat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.export.html">export</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.export_h5.html">export_h5</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.extend.html">extend</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.fill.html">fill</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.fillByGrainId.html">fillByGrainId</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.findByLocation.html">findByLocation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.findByOrientation.html">findByOrientation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.fliplr.html">fliplr</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.flipud.html">flipud</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.gridify.html">gridify</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.id2ind.html">id2ind</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.inpolygon.html">inpolygon</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.plotUnitCells.html">plotUnitCells</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.quiver.html">quiver</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.reduce.html">reduce</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.selectInteractive.html">selectInteractive</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.shift.html">shift</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.smooth.html">smooth</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.spatialProfile.html">spatialProfile</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.subSet.html">subSet</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.subsind.html">subsind</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EBSD.updateUnitCell.html">updateUnitCell</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">tensors (The Class @tensor)</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="tensor.Fourier.html">Fourier</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.Voigt.html">Voigt</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.antiSym.html">antiSym</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.char.html">char</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.checkSymmetry.html">checkSymmetry</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.colon.html">colon</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.conj.html">conj</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.ctranspose.html">ctranspose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.det.html">det</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.diag.html">diag</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.directionalMagnitude.html">directionalMagnitude</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.display.html">display</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.double.html">double</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.eig.html">eig</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.end.html">end</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.eq.html">eq</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.expm.html">expm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.export.html">export</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.horzcat.html">horzcat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.inv.html">inv</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.length.html">length</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.load.html">load</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.logm.html">logm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.matrix.html">matrix</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.max.html">max</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.mean.html">mean</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.min.html">min</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.minus.html">minus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.mpower.html">mpower</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.mrdivide.html">mrdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.mtimes.html">mtimes</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.ndims.html">ndims</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.ne.html">ne</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.norm.html">norm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.numel.html">numel</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.plot.html">plot</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.plus.html">plus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.polar.html">polar</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.quadric.html">quadric</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.rdivide.html">rdivide</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.real.html">real</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.reshape.html">reshape</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.rotate.html">rotate</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.rotate_outer.html">rotate_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.rotation.html">rotation</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.size.html">size</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.sqrtm.html">sqrtm</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.subsasgn.html">subsasgn</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.subsref.html">subsref</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.sum.html">sum</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.svd.html">svd</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.sym.html">sym</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.symmetrise.html">symmetrise</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.tensor.html">tensor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.tensorSize.html">tensorSize</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.times.html">times</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.trace.html">trace</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.transformReferenceFrame.html">transformReferenceFrame</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.transpose.html">transpose</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.uminus.html">uminus</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.vector3d.html">vector3d</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="tensor.vertcat.html">vertcat</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a href="#">Auxiliary Functions</a>
+      <ul>
+          
+          
+          
+          <li><a href="dummy.html">dummy</a></li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Plotting Tools</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="DubnaGrid.html">DubnaGrid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="DubnaPoleFigure.html">DubnaPoleFigure</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="calc_background.html">calc_background</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="loadallspectra.html">loadallspectra</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="loadspectra.html">loadspectra</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="plot_spectra.html">plot_spectra</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="proceed_spectra.html">proceed_spectra</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="work.html">work</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Geometry Tools</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="CSL.html">CSL</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="EulerAngleConvention.html">EulerAngleConvention</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="axis2quat.html">axis2quat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="axis2quat_outer.html">axis2quat_outer</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="checkEulerAngleConvention.html">checkEulerAngleConvention</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="equispacedS2Grid.html">equispacedS2Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="equispacedSO3Grid.html">equispacedSO3Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="euler2quat.html">euler2quat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="expquat.html">expquat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="extractSphericalRegion.html">extractSphericalRegion</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="fibre2quat.html">fibre2quat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="hr2quat.html">hr2quat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="loadCIF.html">loadCIF</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="loadPHL.html">loadPHL</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="localOrientationGrid.html">localOrientationGrid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="mat2quat.html">mat2quat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="plotS2Grid.html">plotS2Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="plotSO3Grid.html">plotSO3Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quadratureS2Grid.html">quadratureS2Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="reflection.html">reflection</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="regularS2Grid.html">regularS2Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="regularSO3Grid.html">regularSO3Grid</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="xvector.html">xvector</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="yvector.html">yvector</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="zvector.html">zvector</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Statistics</a>
+              <ul>
+                  
+                  
+                  
+                  <li><a href="c_hat.html">c_hat</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="cmeans.html">cmeans</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="kmeans.html">kmeans</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="quantile.html">quantile</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="randp.html">randp</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li><a href="range.html">range</a></li>
+                  
+                  
+                  
+              </ul>
+          </li>
+          
+          
+          
+          <li class="subfolders">
+              <a href="#">Plotting</a>
+              <ul>
+                  
+              </ul>
+          </li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            <div class="post-header">
+   <h1 class="post-title-main">simpleShear</h1>
+</div>
+
+
+
+<div class="post-content">
+
+   
+
+    
+
+
+    
+
+   <!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>simpleShear</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_velocityGradientTensor__simpleShear.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit velocityGradientTensor__simpleShear into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[velocityGradientTensor_index.html,velocityGradientTensor]])</p><!--/introduction--><p>defines velocity gradient tensors representing simple shear</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab">L = velocityGradientTensor.simpleShear(d,n)
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>d</tt>
+         </td>
+         <td>
+               <p>[[vector3d_index.html,vector3d]] shear direction</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>n</tt>
+         </td>
+         <td>
+               <p>[[vector3d_index.html,vector3d]] normal direction ???</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>e</tt>
+         </td>
+         <td>
+               <p>strain rate</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>L</tt>
+         </td>
+         <td>
+               <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+         </td>
+      </tr>
+   </table>
+</p></div></body></html>
+
+    <div class="tags">
+        
+    </div>
+
+
+
+
+</div>
+
+
+
+<footer>
+<div class="row">
+<div class="col-lg-12 footer">
+<p><img src="images/company_logo.png" alt="Company logo"/></p>
+</div>
+</div>
+</footer>
+
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+</html>

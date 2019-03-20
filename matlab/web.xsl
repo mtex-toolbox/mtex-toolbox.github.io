@@ -77,14 +77,6 @@ To make changes, update the MATLAB code and republish this document.
     </xsl:if>
     
 
-    <xsl:variable name="source">
-      <xsl:if test="count(cell[steptitle = 'Open in Editor']) or count(cell[steptitle = 'View Code'])">
-        <xsl:call-template name="backreplacelink">
-          <xsl:with-param name="string" select="m-file"/>
-        </xsl:call-template>
-      </xsl:if>
-    </xsl:variable>
-
     <xsl:variable name="body-cells" select="cell[not(@style = 'overview')]"/>
 
     
@@ -92,20 +84,22 @@ To make changes, update the MATLAB code and republish this document.
     <xsl:for-each select="$body-cells">
         <!-- Title of cell -->
         <xsl:if test="steptitle">
-          <xsl:variable name="headinglevel">
-            <xsl:choose>
-              <xsl:when test="steptitle[@style = 'document']">h1</xsl:when>
-              <xsl:otherwise>h2</xsl:otherwise>
-            </xsl:choose>
-          </xsl:variable>
-            <xsl:element name="{$headinglevel}">
-              <xsl:if test="not(steptitle[@style = 'document'])">
-                <xsl:attribute name="id">
-                  <xsl:value-of select="position()"/>
-                </xsl:attribute>
-              </xsl:if>
-              <xsl:apply-templates select="steptitle"/>
-            </xsl:element>
+          <xsl:if test="(steptitle != 'Open in Editor') and (steptitle != 'View Code')">
+            <xsl:variable name="headinglevel">
+              <xsl:choose>
+                <xsl:when test="steptitle[@style = 'document']">h1</xsl:when>
+                <xsl:otherwise>h2</xsl:otherwise>
+              </xsl:choose>
+            </xsl:variable>
+              <xsl:element name="{$headinglevel}">
+                <xsl:if test="not(steptitle[@style = 'document'])">
+                  <xsl:attribute name="id">
+                    <xsl:value-of select="position()"/>
+                  </xsl:attribute>
+                </xsl:if>
+                <xsl:apply-templates select="steptitle"/>
+              </xsl:element>
+          </xsl:if>
         </xsl:if>
 
         <!-- Contents of each cell -->

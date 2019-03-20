@@ -54,9 +54,10 @@ mtexHelpFiles = [mtexFunctionFiles,mtexDocFiles];
 
 %%
 
-options.outputDir = fullfile(pwd,'..','pages','documentation_matlab');
+options.outputDir = fullfile(pwd,'..','pages','function_reference_matlab');
 options.tempDir = fullfile(pwd,'tmp');
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
+dir2 = fullfile(pwd,'..','pages','documentation_matlab');
 
 %%
 
@@ -82,26 +83,29 @@ options.evalCode = true;
 options.force = false;
 publish(mtexFunctionFiles,options);
 
-%% Publish Examples Reference
+%% add frontmatter to html files
 
-%publish(mtexExampleFiles,options);
+files = dir(fullfile(options.outputDir, '*.html'));
+for idx = 1:length(files)
+  add_frontmatter(options.outputDir, files(idx), 'function_reference');
+end
 
 
 %% Publish Doc
 
+options.outputDir = dir2;
 options.evalCode = true;
 options.force = false;
 publish(mtexDocFiles,options);
 %copy(mtexDocFiles,fullfile(mtex_path,'examples','UsersGuide'));
 
-%%
+%% add frontmatter to html files
 
-%view(mtexHelpFiles,options)
+files = dir(fullfile(options.outputDir, '*.html'));
+for idx = 1:length(files)
+  add_frontmatter(options.outputDir, files(idx), 'documentation');
+end
 
-
-%%
-
-%view(mtexExampleFiles,outputDir);
 
 %%
 
@@ -111,43 +115,6 @@ deadlink(mtexDocFiles,options.outputDir);
 
 setMTEXpref('generatingHelpMode',false);
 mtex_progress = true;
-
-
-%% add frontmatter to html files
-
-files = dir(fullfile(options.outputDir, '*.html'));
-for j = 1:length(files)
-  filename = files(j);
-  filename = filename.name;
-  f = fopen(fullfile(options.outputDir, filename), 'r');
-  s = fread(f);
-  fclose(f);
-  s = reshape(s,1,[]);
-  if ~strcmp(sprintf('%s', s(1:3)), '---')
-    p1 = strfind(s, '<title>')+7;
-    p2 = strfind(s(p1:end), '</title>');
-    title = s(p1:p1+p2-2);
-
-    frontmatter = sprintf([ 
-      '---\n'...
-      'title: %s\n'...
-      'last_updated: %s\n'...
-      'sidebar: documentation_sidebar\n'...
-      'permalink: %s\n'...
-      'folder: documentation_matlab\n'...
-      'toc: false\n'...
-      '---\n'],...
-      title,...
-      date,...
-      filename);
-
-    s = [frontmatter s];
-
-    f = fopen(fullfile(options.outputDir, filename), 'w');
-    fwrite(f,s);
-    fclose(f);
-  end
-end
 
 %% move images
 
@@ -170,7 +137,38 @@ end
 
 end
 
+function add_frontmatter(dir, file, name)
+  filename = file;
+  filename = filename.name;
+  f = fopen(fullfile(dir, filename), 'r');
+  s = fread(f);
+  fclose(f);
+  s = reshape(s,1,[]);
+  if ~strcmp(sprintf('%s', s(1:3)), '---')
+    p1 = strfind(s, '<title>')+7;
+    p2 = strfind(s(p1:end), '</title>');
+    title = s(p1:p1+p2-2);
 
+    frontmatter = sprintf([ 
+      '---\n'...
+      'title: %s\n'...
+      'last_updated: %s\n'...
+      'sidebar: ' name '_sidebar\n'...
+      'permalink: %s\n'...
+      'folder: ' name '\n'...
+      'toc: false\n'...
+      '---\n'],...
+      title,...
+      date,...
+      filename);
+
+    s = [frontmatter s];
+
+    f = fopen(fullfile(dir, filename), 'w');
+    fwrite(f,s);
+    fclose(f);
+  end
+end
 
 
 

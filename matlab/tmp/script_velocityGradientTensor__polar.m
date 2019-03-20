@@ -7,8 +7,8 @@
 %% View Code
 % 
 %% Syntax
-%   [R,U,V] = polar(L)
-%   [R,U,V] = polar(L,t)
+%   [R,V,U] = polar(L)
+%   [R,V,U] = polar(L,t)
 % 
 
 %% Input
@@ -48,18 +48,18 @@
 %       </tr>
 %       <tr>
 %          <td width="100px">
-%             <tt>U</tt>
-%          </td>
-%          <td>
-%                <p>right stretch tensor</p>
-%          </td>
-%       </tr>
-%       <tr>
-%          <td width="100px">
 %             <tt>V</tt>
 %          </td>
 %          <td>
 %                <p>left stretch tensor</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>U</tt>
+%          </td>
+%          <td>
+%                <p>right stretch tensor</p>
 %          </td>
 %       </tr>
 %    </table>

@@ -83,5 +83,5 @@
 % </html>
 % 
 %% See also
-% ODF/calcEBSD EBSD/calcODF loadEBSD
+% ODF/calcEBSD EBSD/calcODF EBSD/load
 %

@@ -9,6 +9,7 @@
 %% Syntax
 %   oR = fundamentalRegion(cs)
 %   oR = fundamentalRegion(cs1,cs2)
+%   [oR,dcs,nSym] = fundamentalRegion(cs1,cs2)
 % 
 
 %% Input
@@ -34,6 +35,22 @@
 %       </tr>
 %       <tr>
 %          <td width="100px">
+%             <tt>dc</tt>
+%          </td>
+%          <td>
+%                <p>[[symmetry_index.html,symmetry]] intersection between cs1 and cs2</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>nSym</tt>
+%          </td>
+%          <td>
+%                <p>number of disjoined symmetry elements in cs2 * cs1</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
 %             <tt>param,val</tt>
 %          </td>
 %          <td>Parameters and values that control fundamentalRegion<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
@@ -46,7 +63,7 @@
 %                      <tt>'antipodal'</tt>
 %                   </td>
 %                   <td>
-%                         <p>wheter mori == inv(mori)</p>
+%                         <p>grain exchange symmetry, i.e.,  mori == inv(mori)</p>
 %                   </td>
 %                </tr>
 %                <tr>

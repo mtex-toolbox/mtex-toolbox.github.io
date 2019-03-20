@@ -258,7 +258,7 @@
           
           
           
-          <li><a href="properties.html">Properties</a></li>
+          <li><a href="Properties.html">Properties</a></li>
           
           
           
@@ -861,6 +861,13 @@
           
           
           
+          
+          
+          <li><a href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
       </ul>
    </li>
      
@@ -920,29 +927,149 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Crystal Orientations (The Class [[orientation_index.html,orientation]])</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_orientation_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This sections describes the class <b>orientation</b> and gives an overview how to work with crystal orientation in MTEX.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Class Description</h2><p>In texture analysis crystal orientations are used to describe the alignment of the crystals within the specimen. A crystal orientation is defined as the rotation that maps the specimen coordinate system onto the crystal coordinate system. Since the crystal coordinate system and the specimen coordinate system are well defined only up to crystal symmetry and specimen symmetry, an orientation is in general represented by a class of crystallographically equivalent rotations. In MTEX the class <b>orientation</b> is an inheritance of the class <a href="rotation_index.html">rotation</a>. In particular, every function that is defined for a rotation is also available for an orientation.</p><h2 id="3">SUB: Defining a Crystal Orientation</h2><p>In order to define a crystal orientation one has to define crystal and specimen symmetry first.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
+      --><title>Crystal Orientations (The Class [[orientation_index.html,orientation]])</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_orientation_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This sections describes the class <b>orientation</b> and gives an overview how to work with crystal orientation in MTEX.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Class Description</h2><p>In texture analysis crystal orientations are used to describe the alignment of the crystals within the specimen. A crystal orientation is defined as the rotation that maps the specimen coordinate system onto the crystal coordinate system. Since the crystal coordinate system and the specimen coordinate system are well defined only up to crystal symmetry and specimen symmetry, an orientation is in general represented by a class of crystallographically equivalent rotations. In MTEX the class <b>orientation</b> is an inheritance of the class <a href="rotation_index.html">rotation</a>. In particular, every function that is defined for a rotation is also available for an orientation.</p><h2 id="3">SUB: Defining a Crystal Orientation</h2><p>In order to define a crystal orientation one has to define crystal and specimen symmetry first.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
 ss = specimenSymmetry(<span class="string">'orthorhombic'</span>);
 </pre><p>Now a crystal orientation to a certain <a href="rotation_index.html">rotation</a></p><pre class="codeinput">rot = rotation.byEuler(30*degree,50*degree,10*degree);
 </pre><p>is defined by</p><pre class="codeinput">o = orientation(rot,cs,ss)
+</pre><pre class="codeoutput"> 
+o = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    30   50   10    0
+ 
 </pre><p>In order to streamline the definition the arguments to define the rotation can be directly pass to define a orientation:</p><pre class="codeinput">o = orientation.byEuler(30*degree,50*degree,10*degree,cs,ss)
+</pre><pre class="codeoutput"> 
+o = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    30   50   10    0
+ 
 </pre><p>Accordingly parameterisations of rotations are also available for orientations</p><div><ul><li>Bunge Euler Angle Convention</li><li>Matthies Euler Angle Convention</li><li>Axis angle parametrisation</li><li>Fibre of orientations</li><li>Four vectors defining a rotation</li><li>3 times 3 matrix</li><li>quaternion</li></ul></div><p>Have a look at <a href="rotation_index.html">rotation help page</a> for more details. Besides these parameterisations for rotations there are also some parameterisations which are unique for orientations</p><p><b>Miller indices</b></p><p>There is also a Miller indices convention for defining crystal orientations.</p><pre class="codeinput">o = orientation.byMiller([1 0 0],[0 1 1],cs,ss)
+</pre><pre class="codeoutput"> 
+o = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+   135   90   90    0
+ 
 </pre><p><b>Predifined Orientations</b></p><p>In the MTEX there is a list of predefined orientations:</p><div><ul><li>[[orientation.cube.html,cube]]</li><li>[[orientation.goss.html,goss]]</li><li>[[orientation.brass.html,brass]]</li></ul></div><pre class="codeinput">o = orientation.goss(cs,ss)
+</pre><pre class="codeoutput"> 
+o = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0   45    0    0
+ 
 </pre><h2 id="9">SUB: Rotating Crystal Directions onto Specimen Directions</h2><p>Let</p><pre class="codeinput">h = Miller(1,0,0,cs)
+</pre><pre class="codeoutput"> 
+h = Miller  
+ size: 1 x 1
+ symmetry: m-3m
+  h 1
+  k 0
+  l 0
 </pre><p>be a certain crystal direction and</p><pre class="codeinput">o = orientation.byEuler(90*degree,90*degree,0*degree,cs,ss)
+</pre><pre class="codeoutput"> 
+o = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    90   90    0    0
+ 
 </pre><p>a crystal orientation. Then the alignment of this crystal direction with respect to the specimen coordinate system can be computed via</p><pre class="codeinput">r = o * h
+</pre><pre class="codeoutput"> 
+r = vector3d  
+ size: 1 x 1
+  x y z
+  0 1 0
 </pre><p>Conversely the crystal direction that is mapped onto a certain specimen direction can be computed via the <a href="orientation.mldivide.html">backslash operator</a></p><pre class="codeinput">o \ r
+</pre><pre class="codeoutput"> 
+ans = Miller  
+ size: 1 x 1
+ symmetry: m-3m
+  h 1
+  k 0
+  l 0
 </pre><h2 id="13">SUB: Concatenating Rotations</h2><p>Let</p><pre class="codeinput">o = orientation.byEuler(90*degree,0,0,cs,ss);
 rot = rotation.byEuler(0,60*degree,0);
 </pre><p>be a crystal orientation and a rotation of the specimen coordinate system. Then the orientation of the crystal with respect to the rotated specimen coordinate system calculates by</p><pre class="codeinput">o1 = rot * o
+</pre><pre class="codeoutput"> 
+o1 = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0   60   90    0
+ 
 </pre><p>Then the class of rotations crystallographically equivalent to o can be computed in two ways. Either by using the command <a href="orientation.symmetrise.html">symmetrise</a></p><pre class="codeinput">symmetrise(o)
+</pre><pre class="codeoutput"> 
+ans = orientation  
+  size: 384 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
 </pre><p>or by using multiplication</p><pre class="codeinput">ss * o * cs
+</pre><pre class="codeoutput"> 
+ans = orientation  
+  size: 8 x 48
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
 </pre><h2 id="17">SUB: Calculating Misorientations</h2><p>Let cs and ss be crystal and specimen symmetry and o1 and o2 two crystal orientations. Then one can ask for the misorientation between both orientations. This misorientation can be calculated by the function <a href="orientation.angle.html">angle</a>.</p><pre class="codeinput">angle(rot * o1,o1) / degree
+</pre><pre class="codeoutput">ans =
+   30.0000
 </pre><p>This misorientation angle is, in general, smaller than the misorientation without crystal symmetry which can be computed via</p><pre class="codeinput">angle(rotation(o),rotation(o1)) /degree
+</pre><pre class="codeoutput">ans =
+   60.0000
 </pre><h2 id="19">SUB: Calculating with Orientations and Rotations</h2><p>Besides the standard linear algebra operations there are also the following functions available in MTEX. Then rotational angle and the axis of rotation can be computed via then commands <a href="quaternion.angle.html">angle(o)</a> and <a href="quaternion.axis.html">axis(o)</a></p><pre class="codeinput">angle(o1)/degree
 
 axis(o1)
+</pre><pre class="codeoutput">ans =
+   30.0000
+ 
+ans = Miller  
+ size: 1 x 1
+ symmetry: 1, X||a, Y||b*, Z||c*
+  h -1
+  k  0
+  l  0
 </pre><p>The inverse orientation to o you get from the command <a href="quaternion.inv.html">inv(q)</a></p><pre class="codeinput">inv(o1)
+</pre><pre class="codeoutput"> 
+ans = inverse orientation  
+  size: 1 x 1
+  specimen symmetry: 1
+  crystal symmetry : m-3m
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    90   60  180    0
+ 
 </pre><h2 id="21">SUB: Conversion into Euler Angles and Rodrigues Parametrisation</h2><p>There are methods to transform quaternion in almost any other parameterization of rotations as they are:</p><div><ul><li>[[quaternion.Euler.html,Euler(o)]]   in Euler angle</li><li>[[quaternion.Rodrigues.html,Rodrigues(o)]] % in Rodrigues parameter</li></ul></div><pre class="codeinput">[phi1,Phi,phi2] = Euler(o)
+</pre><pre class="codeoutput">phi1 =
+    1.5708
+Phi =
+     0
+phi2 =
+     0
 </pre><h2 id="22">SUB: Plotting Orientations</h2><p>The <a href="orientation.plot.html">plot</a> function allows you to visualize an orientation in axis angle space in relation to its fundamental region.</p><pre class="codeinput">oR = fundamentalRegion(o1.CS,o1.SS)
 plot(oR)
 hold <span class="string">on</span>
@@ -952,7 +1079,18 @@ plot(o1,<span class="string">'markercolor'</span>,<span class="string">'b'</span
 <span class="comment">% plot the orientation within the fundamental zone</span>
 plot(o1.project2FundamentalRegion,<span class="string">'markercolor'</span>,<span class="string">'r'</span>,<span class="string">'markerSize'</span>,10)
 hold <span class="string">off</span>
-</pre><h2 id="23">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="orientation.BCV.html"><tt>BCV</tt></a></td><td>biased cross validation</td></tr><tr><td width="200px"><a href="orientation.KLCV.html"><tt>KLCV</tt></a></td><td>Kullback Leibler cross validation for optimal kernel estimation</td></tr><tr><td width="200px"><a href="orientation.LSCV.html"><tt>LSCV</tt></a></td><td>least squares cross valiadation</td></tr><tr><td width="200px"><a href="orientation.angle.html"><tt>angle</tt></a></td><td>calculates rotational angle between orientations</td></tr><tr><td width="200px"><a href="orientation.axis.html"><tt>axis</tt></a></td><td>rotational axis of an misorientation or two orientations</td></tr><tr><td width="200px"><a href="orientation.bingham_test.html"><tt>bingham_test</tt></a></td><td>bingham test for spherical/prolat/oblat case</td></tr><tr><td width="200px"><a href="orientation.byAxisAngle.html"><tt>byAxisAngle</tt></a></td><td>define orientations by rotational axis and rotational angle</td></tr><tr><td width="200px"><a href="orientation.byEuler.html"><tt>byEuler</tt></a></td><td>define orientations by Euler angles</td></tr><tr><td width="200px"><a href="orientation.byMatrix.html"><tt>byMatrix</tt></a></td><td>define orientations by a matrix</td></tr><tr><td width="200px"><a href="orientation.byMiller.html"><tt>byMiller</tt></a></td><td>define orientations by Miller Bravais indeces</td></tr><tr><td width="200px"><a href="orientation.calcAngleDistribution.html"><tt>calcAngleDistribution</tt></a></td><td>calculate angle distribution</td></tr><tr><td width="200px"><a href="orientation.calcBinghamODF.html"><tt>calcBinghamODF</tt></a></td><td>calculate ODF from individuel orientations via kernel density estimation</td></tr><tr><td width="200px"><a href="orientation.calcCluster.html"><tt>calcCluster</tt></a></td><td>sort orientations into clusters</td></tr><tr><td width="200px"><a href="orientation.calcFourierODF.html"><tt>calcFourierODF</tt></a></td><td>calculate ODF from individuel orientations via kernel density estimation</td></tr><tr><td width="200px"><a href="orientation.calcInvTaylor.html"><tt>calcInvTaylor</tt></a></td><td>Taylor factor from orientation gradient</td></tr><tr><td width="200px"><a href="orientation.calcKernel.html"><tt>calcKernel</tt></a></td><td>compute an optimal kernel function for ODF estimation</td></tr><tr><td width="200px"><a href="orientation.calcKernelODF.html"><tt>calcKernelODF</tt></a></td><td>calculate ODF from individuel orientations via kernel density estimation</td></tr><tr><td width="200px"><a href="orientation.calcMDF.html"><tt>calcMDF</tt></a></td><td>computes an MDF from individuel orientations or misorientations</td></tr><tr><td width="200px"><a href="orientation.calcMIndex.html"><tt>calcMIndex</tt></a></td><td>TODO!!!</td></tr><tr><td width="200px"><a href="orientation.calcODF.html"><tt>calcODF</tt></a></td><td>computes an ODF from individuel orientations</td></tr><tr><td width="200px"><a href="orientation.calcTensor.html"><tt>calcTensor</tt></a></td><td>compute the average tensor for a vector of orientations</td></tr><tr><td width="200px"><a href="orientation.crossCorrelation.html"><tt>crossCorrelation</tt></a></td><td>computes the cross correlation for the kernel density estimator</td></tr><tr><td width="200px"><a href="orientation.ctranspose.html"><tt>ctranspose</tt></a></td><td>inverse orientation</td></tr><tr><td width="200px"><a href="orientation.display.html"><tt>display</tt></a></td><td>standart output</td></tr><tr><td width="200px"><a href="orientation.doHClustering.html"><tt>doHClustering</tt></a></td><td>sort orientations into clusters</td></tr><tr><td width="200px"><a href="orientation.dot.html"><tt>dot</tt></a></td><td>compute minimum dot(o1,o2) modulo symmetry</td></tr><tr><td width="200px"><a href="orientation.dot_outer.html"><tt>dot_outer</tt></a></td><td/></tr><tr><td width="200px"><a href="orientation.exp.html"><tt>exp</tt></a></td><td>onential function</td></tr><tr><td width="200px"><a href="orientation.export_VPSC.html"><tt>export_VPSC</tt></a></td><td>export individual orientations to the VPSC format</td></tr><tr><td width="200px"><a href="orientation.fibreVolume.html"><tt>fibreVolume</tt></a></td><td>ratio of orientations close to a certain fibre</td></tr><tr><td width="200px"><a href="orientation.getFundamentalRegion.html"><tt>getFundamentalRegion</tt></a></td><td>projects orientations to a fundamental region</td></tr><tr><td width="200px"><a href="orientation.isMisorientation.html"><tt>isMisorientation</tt></a></td><td>check whether o is a misorientation</td></tr><tr><td width="200px"><a href="orientation.ldivide.html"><tt>ldivide</tt></a></td><td>o .\ v </td></tr><tr><td width="200px"><a href="orientation.log.html"><tt>log</tt></a></td><td>the misorientation vector between two orientations </td></tr><tr><td width="200px"><a href="orientation.logm.html"><tt>logm</tt></a></td><td>the logarithmic map that translates a rotation into a spin tensor</td></tr><tr><td width="200px"><a href="orientation.map.html"><tt>map</tt></a></td><td>define orientations by pairs of vectors</td></tr><tr><td width="200px"><a href="orientation.mean.html"><tt>mean</tt></a></td><td>of a list of orientations, principle axes and moments of inertia</td></tr><tr><td width="200px"><a href="orientation.mldivide.html"><tt>mldivide</tt></a></td><td>o \ v </td></tr><tr><td width="200px"><a href="orientation.mtimes.html"><tt>mtimes</tt></a></td><td>orientation times Miller and orientation times orientation</td></tr><tr><td width="200px"><a href="orientation.niceEuler.html"><tt>niceEuler</tt></a></td><td>orientation to euler angle</td></tr><tr><td width="200px"><a href="orientation.orientation.html"><tt>orientation</tt></a></td><td>class representing orientations</td></tr><tr><td width="200px"><a href="orientation.parents.html"><tt>parents</tt></a></td><td>variants of an orientation relationship</td></tr><tr><td width="200px"><a href="orientation.plot.html"><tt>plot</tt></a></td><td>annotate a orientation to an existing plot</td></tr><tr><td width="200px"><a href="orientation.plotIPDF.html"><tt>plotIPDF</tt></a></td><td>plot orientations into inverse pole figures</td></tr><tr><td width="200px"><a href="orientation.plotPDF.html"><tt>plotPDF</tt></a></td><td>plot orientations into pole figures</td></tr><tr><td width="200px"><a href="orientation.plotSection.html"><tt>plotSection</tt></a></td><td>plot orientations to ODF sections</td></tr><tr><td width="200px"><a href="orientation.power.html"><tt>power</tt></a></td><td>ori.^n</td></tr><tr><td width="200px"><a href="orientation.project2EulerFR.html"><tt>project2EulerFR</tt></a></td><td>projects orientation to a fundamental region</td></tr><tr><td width="200px"><a href="orientation.project2FundamentalRegion.html"><tt>project2FundamentalRegion</tt></a></td><td>projects orientation to a fundamental region</td></tr><tr><td width="200px"><a href="orientation.qqplot.html"><tt>qqplot</tt></a></td><td>quantilequantile of misorientation angle against random angular</td></tr><tr><td width="200px"><a href="orientation.round2Miller.html"><tt>round2Miller</tt></a></td><td>find lattice alignements for arbitrary orientations and misorientations</td></tr><tr><td width="200px"><a href="orientation.scatter.html"><tt>scatter</tt></a></td><td>plots orientations in 3d</td></tr><tr><td width="200px"><a href="orientation.sphereVolume.html"><tt>sphereVolume</tt></a></td><td>ratio of orientations with a certain orientation</td></tr><tr><td width="200px"><a href="orientation.symmetrise.html"><tt>symmetrise</tt></a></td><td>all crystallographically equivalent orientations</td></tr><tr><td width="200px"><a href="orientation.times.html"><tt>times</tt></a></td><td>vec = ori .* Miller</td></tr><tr><td width="200px"><a href="orientation.transformReferenceFrame.html"><tt>transformReferenceFrame</tt></a></td><td>change reference frame of an orientation</td></tr><tr><td width="200px"><a href="orientation.unique.html"><tt>unique</tt></a></td><td>disjoint list of quaternions</td></tr><tr><td width="200px"><a href="orientation.variants.html"><tt>variants</tt></a></td><td>of an orientation relationship</td></tr><tr><td width="200px"><a href="orientation.volume.html"><tt>volume</tt></a></td><td>ratio of orientations with a certain orientation</td></tr></table></p></div></body></html>
+</pre><pre class="codeoutput"> 
+oR = orientationRegion  
+ 
+ crystal symmetry:  432
+ max angle: 62.7994&deg;
+ face normales: 14
+ vertices: 24
+ 
+</pre>
+  <img class="inline" src="images/script_orientation_index_01.png" alt="" />
+
+<h2 id="23">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="orientation.BCV.html"><tt>BCV</tt></a></td><td>biased cross validation</td></tr><tr><td width="200px"><a href="orientation.KLCV.html"><tt>KLCV</tt></a></td><td>Kullback Leibler cross validation for optimal kernel estimation</td></tr><tr><td width="200px"><a href="orientation.LSCV.html"><tt>LSCV</tt></a></td><td>least squares cross valiadation</td></tr><tr><td width="200px"><a href="orientation.angle.html"><tt>angle</tt></a></td><td>calculates rotational angle between orientations</td></tr><tr><td width="200px"><a href="orientation.axis.html"><tt>axis</tt></a></td><td>rotational axis of an misorientation or two orientations</td></tr><tr><td width="200px"><a href="orientation.bingham_test.html"><tt>bingham_test</tt></a></td><td>bingham test for spherical/prolat/oblat case</td></tr><tr><td width="200px"><a href="orientation.byAxisAngle.html"><tt>byAxisAngle</tt></a></td><td>define orientations by rotational axis and rotational angle</td></tr><tr><td width="200px"><a href="orientation.byEuler.html"><tt>byEuler</tt></a></td><td>define orientations by Euler angles</td></tr><tr><td width="200px"><a href="orientation.byMatrix.html"><tt>byMatrix</tt></a></td><td>define orientations by a matrix</td></tr><tr><td width="200px"><a href="orientation.byMiller.html"><tt>byMiller</tt></a></td><td>define orientations by Miller Bravais indeces</td></tr><tr><td width="200px"><a href="orientation.calcAngleDistribution.html"><tt>calcAngleDistribution</tt></a></td><td>calculate angle distribution</td></tr><tr><td width="200px"><a href="orientation.calcBinghamODF.html"><tt>calcBinghamODF</tt></a></td><td>calculate ODF from individuel orientations via kernel density estimation</td></tr><tr><td width="200px"><a href="orientation.calcCluster.html"><tt>calcCluster</tt></a></td><td>sort orientations into clusters</td></tr><tr><td width="200px"><a href="orientation.calcFourierODF.html"><tt>calcFourierODF</tt></a></td><td>calculate ODF from individuel orientations via kernel density estimation</td></tr><tr><td width="200px"><a href="orientation.calcInvTaylor.html"><tt>calcInvTaylor</tt></a></td><td>Taylor factor from orientation gradient</td></tr><tr><td width="200px"><a href="orientation.calcKernel.html"><tt>calcKernel</tt></a></td><td>compute an optimal kernel function for ODF estimation</td></tr><tr><td width="200px"><a href="orientation.calcKernelODF.html"><tt>calcKernelODF</tt></a></td><td>calculate ODF from individuel orientations via kernel density estimation</td></tr><tr><td width="200px"><a href="orientation.calcMDF.html"><tt>calcMDF</tt></a></td><td>computes an MDF from individuel orientations or misorientations</td></tr><tr><td width="200px"><a href="orientation.calcMIndex.html"><tt>calcMIndex</tt></a></td><td>Computes the Mindex from a discrete number of orientations</td></tr><tr><td width="200px"><a href="orientation.calcODF.html"><tt>calcODF</tt></a></td><td>computes an ODF from individuel orientations</td></tr><tr><td width="200px"><a href="orientation.calcTensor.html"><tt>calcTensor</tt></a></td><td>compute the average tensor for a vector of orientations</td></tr><tr><td width="200px"><a href="orientation.crossCorrelation.html"><tt>crossCorrelation</tt></a></td><td>computes the cross correlation for the kernel density estimator</td></tr><tr><td width="200px"><a href="orientation.ctranspose.html"><tt>ctranspose</tt></a></td><td>inverse orientation</td></tr><tr><td width="200px"><a href="orientation.display.html"><tt>display</tt></a></td><td>standart output</td></tr><tr><td width="200px"><a href="orientation.doHClustering.html"><tt>doHClustering</tt></a></td><td>sort orientations into clusters</td></tr><tr><td width="200px"><a href="orientation.dot.html"><tt>dot</tt></a></td><td>compute minimum dot(o1,o2) modulo symmetry</td></tr><tr><td width="200px"><a href="orientation.dot_outer.html"><tt>dot_outer</tt></a></td><td/></tr><tr><td width="200px"><a href="orientation.exp.html"><tt>exp</tt></a></td><td>onential function</td></tr><tr><td width="200px"><a href="orientation.export_VPSC.html"><tt>export_VPSC</tt></a></td><td>export individual orientations to the VPSC format</td></tr><tr><td width="200px"><a href="orientation.fibreVolume.html"><tt>fibreVolume</tt></a></td><td>ratio of orientations close to a certain fibre</td></tr><tr><td width="200px"><a href="orientation.getFundamentalRegion.html"><tt>getFundamentalRegion</tt></a></td><td>projects orientations to a fundamental region</td></tr><tr><td width="200px"><a href="orientation.isMisorientation.html"><tt>isMisorientation</tt></a></td><td>check whether o is a misorientation</td></tr><tr><td width="200px"><a href="orientation.ldivide.html"><tt>ldivide</tt></a></td><td>o .\ v </td></tr><tr><td width="200px"><a href="orientation.load.html"><tt>load</tt></a></td><td>import orientation data from data files</td></tr><tr><td width="200px"><a href="orientation.log.html"><tt>log</tt></a></td><td>the misorientation vector between two orientations </td></tr><tr><td width="200px"><a href="orientation.logm.html"><tt>logm</tt></a></td><td>the logarithmic map that translates a rotation into a spin tensor</td></tr><tr><td width="200px"><a href="orientation.map.html"><tt>map</tt></a></td><td>define orientations by pairs of vectors</td></tr><tr><td width="200px"><a href="orientation.mean.html"><tt>mean</tt></a></td><td>of a list of orientations, principle axes and moments of inertia</td></tr><tr><td width="200px"><a href="orientation.mldivide.html"><tt>mldivide</tt></a></td><td>o \ v </td></tr><tr><td width="200px"><a href="orientation.mtimes.html"><tt>mtimes</tt></a></td><td>orientation times Miller and orientation times orientation</td></tr><tr><td width="200px"><a href="orientation.niceEuler.html"><tt>niceEuler</tt></a></td><td>orientation to euler angle</td></tr><tr><td width="200px"><a href="orientation.orientation.html"><tt>orientation</tt></a></td><td>class representing orientations</td></tr><tr><td width="200px"><a href="orientation.parents.html"><tt>parents</tt></a></td><td>variants of an orientation relationship</td></tr><tr><td width="200px"><a href="orientation.plot.html"><tt>plot</tt></a></td><td>annotate a orientation to an existing plot</td></tr><tr><td width="200px"><a href="orientation.plotIPDF.html"><tt>plotIPDF</tt></a></td><td>plot orientations into inverse pole figures</td></tr><tr><td width="200px"><a href="orientation.plotPDF.html"><tt>plotPDF</tt></a></td><td>plot orientations into pole figures</td></tr><tr><td width="200px"><a href="orientation.plotSection.html"><tt>plotSection</tt></a></td><td>plot orientations to ODF sections</td></tr><tr><td width="200px"><a href="orientation.power.html"><tt>power</tt></a></td><td>ori.^n</td></tr><tr><td width="200px"><a href="orientation.project2EulerFR.html"><tt>project2EulerFR</tt></a></td><td>projects orientation to a fundamental region</td></tr><tr><td width="200px"><a href="orientation.project2FundamentalRegion.html"><tt>project2FundamentalRegion</tt></a></td><td>projects orientation to a fundamental region</td></tr><tr><td width="200px"><a href="orientation.qqplot.html"><tt>qqplot</tt></a></td><td>quantilequantile of misorientation angle against random angular</td></tr><tr><td width="200px"><a href="orientation.round2Miller.html"><tt>round2Miller</tt></a></td><td>find lattice alignements for arbitrary orientations and misorientations</td></tr><tr><td width="200px"><a href="orientation.scatter.html"><tt>scatter</tt></a></td><td>plots orientations in 3d</td></tr><tr><td width="200px"><a href="orientation.sphereVolume.html"><tt>sphereVolume</tt></a></td><td>ratio of orientations with a certain orientation</td></tr><tr><td width="200px"><a href="orientation.symmetrise.html"><tt>symmetrise</tt></a></td><td>all crystallographically equivalent orientations</td></tr><tr><td width="200px"><a href="orientation.times.html"><tt>times</tt></a></td><td>vec = ori .* Miller</td></tr><tr><td width="200px"><a href="orientation.transformReferenceFrame.html"><tt>transformReferenceFrame</tt></a></td><td>change reference frame of an orientation</td></tr><tr><td width="200px"><a href="orientation.unique.html"><tt>unique</tt></a></td><td>disjoint list of quaternions</td></tr><tr><td width="200px"><a href="orientation.variants.html"><tt>variants</tt></a></td><td>of an orientation relationship</td></tr><tr><td width="200px"><a href="orientation.volume.html"><tt>volume</tt></a></td><td>ratio of orientations with a certain orientation</td></tr></table></p></div></body></html>
 
     <div class="tags">
         

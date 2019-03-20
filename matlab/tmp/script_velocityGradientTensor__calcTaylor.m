@@ -7,7 +7,7 @@
 %% View Code
 % 
 %% Syntax
-%   [M,b,spin] = calcTaylor(eps,sS)
+%   [M,b,W] = calcTaylor(eps,sS)
 % 
 
 %% Input
@@ -16,10 +16,10 @@
 %    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
 %       <tr>
 %          <td width="100px">
-%             <tt>eps</tt>
+%             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[strainTensor_index.html,strainTensor]] list in crystal coordinates</p>
+%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +27,7 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]] list in crystal coordinates</p>
+%                <p>[[slipSystem_index.html,slipSystem]]</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -55,7 +55,7 @@
 %       </tr>
 %       <tr>
 %          <td width="100px">
-%             <tt>spin</tt>
+%             <tt>W</tt>
 %          </td>
 %          <td>
 %                <p>[[spinTensor_index.html,spinTensor]]</p>
@@ -68,8 +68,14 @@
 %% 
 % 
 
-% define 10 percent strain
-eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
+% consider uniaxial tension in (100) direction about 30 percent
+F = deformationGradientTensor.uniaxial(vector3d.X,1.3)
+
+%% 
+% 
+
+% the corresponding rate of deformation tensor becomes
+L = logm(F)
 
 %% 
 % 
@@ -88,7 +94,8 @@ sS = slipSystem.fcc(cs)
 % 
 
 % compute the Taylor factor
-[M,b,spin] = calcTaylor(inv(ori)*eps,sS.symmetrise)
+[M,b,spin] = calcTaylor(inv(ori)*L,sS.symmetrise)
 
 %% 
 % 
+%% 

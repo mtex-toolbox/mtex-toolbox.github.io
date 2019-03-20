@@ -11,7 +11,11 @@
 % 
 %
 %% Syntax
+% 
+%   % an arbitrary rotation that maps u1 parallel to v1
 %   rot = rotation(u1,v1)
+% 
+%   % a rotation that maps u1 parallel to v1 and u2 parallel to v2
 %   rot = rotation(u1,v1,u2,v2)
 % 
 
@@ -46,6 +50,6 @@
 % </html>
 % 
 %% See also
-% rotation_index rotation/byMiller rotation/byAxisAngle
+% rotation_index rotation/byMatrix rotation/byAxisAngle
 % rotation/byEuler
 %

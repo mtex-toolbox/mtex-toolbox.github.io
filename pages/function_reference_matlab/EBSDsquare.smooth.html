@@ -1,0 +1,95 @@
+---
+title: smooth
+last_updated: 20-Mar-2019
+sidebar: function_reference_sidebar
+permalink: EBSDsquare.smooth.html
+folder: function_reference
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>smooth</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_EBSDsquare__smooth.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDsquare__smooth into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[EBSDsquare_index.html,EBSDsquare]])</p><!--/introduction--><p>smooth spatial EBSD data</p><p>Synatx   ebsd = ebsd.gridify   ebsd = smooth(ebsd)</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><p>
+   <div class="syntax" width="100%">
+      <div>
+         <tt>[ebsd,filter] = smooth(ebsd,'param1',val1,'param2',val2)</tt>
+      </div>
+   </div>
+</p><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+               <p>[[EBSD_index.html,EBSD]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Example</h2><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+ebsd = ebsd(<span class="string">'indexed'</span>);
+<span class="comment">% segment grains</span>
+[grains,ebsd.grainId] = calcGrains(ebsd)
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1    1080  152345  Forsterite       mmm                         
+     2     515   26058   Enstatite       mmm                         
+     3    1496    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 43912
+ triple points: 3417
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral        Color  Symmetry  Crystal reference frame
+     1  152345 (81%)  Forsterite   light blue       mmm                         
+     2   26058 (14%)   Enstatite  light green       mmm                         
+     3   9064 (4.8%)    Diopside    light red     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+</pre><pre class="codeinput"><span class="comment">% find largest grains</span>
+largeGrains = grains(grains.grainSize&gt;800)
+ebsd = ebsd(largeGrains(1))
+</pre><pre class="codeoutput"> 
+largeGrains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      56   85514  Forsterite       mmm                         
+     2       2    1969   Enstatite       mmm                         
+ 
+ boundary segments: 17507
+ triple points: 1247
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral       Color  Symmetry  Crystal reference frame
+     1   1453 (100%)  Forsterite  light blue       mmm                         
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+</pre><pre class="codeinput">figure
+plot(largeGrains(1).boundary,<span class="string">'linewidth'</span>,2,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
+hold <span class="string">on</span>
+oM = axisAngleColorKey(ebsd);
+oM.oriRef = mean(ebsd.orientations);
+plot(ebsd,oM.orientation2color(ebsd.orientations))
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="script_EBSDsquare__smooth_01.png" %}
+</div></body></html>

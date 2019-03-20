@@ -9,7 +9,7 @@
 % <html>
 %    <div class="syntax" width="100%">
 %       <div>
-%          <tt>m = SchmidTensor(n,b,'param1',val1,'param2',val2)</tt>
+%          <tt>m = SchmidTensor(n,b)</tt>
 %       </div>
 %    </div>
 % </html>
@@ -34,36 +34,6 @@
 %                <p>Burgers vector (slip) or twin shear direction (twinning)</p>
 %          </td>
 %       </tr>
-%       <tr>
-%          <td width="100px">
-%             <tt>param,val</tt>
-%          </td>
-%          <td>Parameters and values that control SchmidTensor<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
-%                <tr>
-%                   <td class="header" width="100px">Parameter</td>
-%                   <td class="header">Description</td>
-%                </tr>
-%                <tr>
-%                   <td width="150px">
-%                      <tt>'generalized'</tt>
-%                   </td>
-%                </tr>
-%                <tr>
-%                   <td width="150px">
-%                      <tt>'symmetric'</tt>
-%                   </td>
-%                   <td>
-%                         <p>default</p>
-%                   </td>
-%                </tr>
-%                <tr>
-%                   <td width="150px">
-%                      <tt>'antisymmetric'</tt>
-%                   </td>
-%                </tr>
-%             </table>
-%          </td>
-%       </tr>
 %    </table>
 % </html>
 % 
@@ -76,7 +46,7 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>Schmid tensor</p>
+%                <p>Schmid tensor [[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
 %          </td>
 %       </tr>
 %    </table>

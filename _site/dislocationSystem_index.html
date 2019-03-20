@@ -258,7 +258,7 @@
           
           
           
-          <li><a href="properties.html">Properties</a></li>
+          <li><a href="Properties.html">Properties</a></li>
           
           
           
@@ -861,6 +861,13 @@
           
           
           
+          
+          
+          <li><a href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
       </ul>
    </li>
      
@@ -920,7 +927,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Dislocation Systems (The Class [[dislocationSystem_index.html,dislocationSystem]])</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_dislocationSystem_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit dislocationSystem_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This section describes the class <b>dislocationSystem</b>.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Contents</h2><h2 id="3">Class Description</h2><p>Dislocation are microscopic displacements within the regular atom lattice of a crystaline material ussualy as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p><h2 id="4">SUB: Edge Dislocations</h2><p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
+      --><title>Dislocation Systems (The Class [[dislocationSystem_index.html,dislocationSystem]])</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_dislocationSystem_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit dislocationSystem_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This section describes the class <b>dislocationSystem</b>.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Contents</h2><h2 id="3">Class Description</h2><p>Dislocation are microscopic displacements within the regular atom lattice of a crystaline material ussualy as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p><h2 id="4">SUB: Edge Dislocations</h2><p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
 cs = crystalSymmetry(<span class="string">'432'</span>);
 
 <span class="comment">% define a burgers vector in crystal coordinates</span>
@@ -931,6 +938,27 @@ l = Miller(1,-1,-2,cs,<span class="string">'uvw'</span>)
 
 <span class="comment">% setup the dislocation system</span>
 dS = dislocationSystem(b,l)
+</pre><pre class="codeoutput"> 
+b = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u 1
+  v 1
+  w 0
+ 
+l = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u  1
+  v -1
+  w -2
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ edge dislocations : 1 x 1
+ Burgers vector  line vector  energy
+      [1  1  0]    [1 -1 -2]       1
+ 
 </pre><h2 id="5">SUB: Screw Dislocations</h2><p>Screw dislocations are characterized by the fact that Burgers vector and line vector are perpendicular to each other.</p><pre class="codeinput"><span class="comment">% define a burgers vector in crystal coordinates</span>
 b = Miller(1,1,0,cs,<span class="string">'uvw'</span>)
 
@@ -939,14 +967,172 @@ l = Miller(1,1,0,cs,<span class="string">'uvw'</span>)
 
 <span class="comment">% setup the dislocation system</span>
 dS = dislocationSystem(b,l)
+</pre><pre class="codeoutput"> 
+b = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u 1
+  v 1
+  w 0
+ 
+l = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u 1
+  v 1
+  w 0
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ screw dislocations: 1 x 1
+ Burgers vector  energy
+      [1  1  0]       1
+ 
 </pre><h2 id="6">SUB: Slip Systems</h2><p>Dislocation systems are tightly related to <a href="slipSystem_index.html">slip systems</a>. Given a set of slip systems the corresponding dislocation systems can be computed by</p><pre class="codeinput"><span class="comment">% dominant slip systems in cubic fcc material</span>
 sS = symmetrise(slipSystem.fcc(cs))
 
 <span class="comment">% the corresponding dislocation systems</span>
 dS = dislocationSystem(sS)
+</pre><pre class="codeoutput"> 
+sS = slipSystem  
+ symmetry: 432
+ size: 24 x 1
+   u    v    w  | h    k    l CRSS
+   0    1   -1    1    1    1    1
+  -1    0    1    1    1    1    1
+   1   -1    0    1    1    1    1
+   0   -1    1    1    1    1    1
+   1    0   -1    1    1    1    1
+  -1    1    0    1    1    1    1
+   1   -1    0    1    1   -1    1
+   1    0    1    1    1   -1    1
+   0    1    1    1    1   -1    1
+  -1    0   -1    1    1   -1    1
+   0   -1   -1    1    1   -1    1
+  -1    1    0    1    1   -1    1
+   0    1   -1   -1    1    1    1
+   1    0    1   -1    1    1    1
+   1    1    0   -1    1    1    1
+  -1    0   -1   -1    1    1    1
+  -1   -1    0   -1    1    1    1
+   0   -1    1   -1    1    1    1
+  -1    0    1    1   -1    1    1
+   1    1    0    1   -1    1    1
+   0    1    1    1   -1    1    1
+  -1   -1    0    1   -1    1    1
+   0   -1   -1    1   -1    1    1
+   1    0   -1    1   -1    1    1
+Warning: Miller indices are converted to hkl 
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ edge dislocations : 24 x 1
+ Burgers vector  line vector  energy
+      [0  1 -1]    (2 -1 -1)       2
+     [-1  0  1]   (-1  2 -1)       2
+      [1 -1  0]   (-1 -1  2)       2
+      [0 -1  1]   (-2  1  1)       2
+      [1  0 -1]    (1 -2  1)       2
+     [-1  1  0]    (1  1 -2)       2
+      [1 -1  0]    (1  1  2)       2
+      [1  0  1]   (-1  2  1)       2
+      [0  1  1]   (-2  1 -1)       2
+     [-1  0 -1]    (1 -2 -1)       2
+      [0 -1 -1]    (2 -1  1)       2
+     [-1  1  0]   (-1 -1 -2)       2
+      [0  1 -1]    (2  1  1)       2
+      [1  0  1]   (-1 -2  1)       2
+      [1  1  0]    (1 -1  2)       2
+     [-1  0 -1]    (1  2 -1)       2
+     [-1 -1  0]   (-1  1 -2)       2
+      [0 -1  1]   (-2 -1 -1)       2
+     [-1  0  1]    (1  2  1)       2
+      [1  1  0]    (1 -1 -2)       2
+      [0  1  1]    (2  1 -1)       2
+     [-1 -1  0]   (-1  1  2)       2
+      [0 -1 -1]   (-2 -1  1)       2
+      [1  0 -1]   (-1 -2 -1)       2
+ 
+ screw dislocations: 6 x 1
+ Burgers vector  energy
+      (0 -1 -1)       1
+      (0 -1  1)       1
+     (-1  1  0)       1
+      (1  0 -1)       1
+      (1  0  1)       1
+      (1  1  0)       1
+ 
 </pre><h2 id="7">SUB: Dominant Dislocation Systems</h2><pre class="codeinput">dS = dislocationSystem.bcc(cs)
+</pre><pre class="codeoutput">Warning: Miller indices are converted to hkl 
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ edge dislocations : 48 x 1
+ Burgers vector  line vector  energy
+      [1 -1  1]   (-2 -1  1)       2
+      [1  1 -1]    (2 -1  1)       2
+      [1  1 -1]    (1 -2 -1)       2
+     [-1  1  1]    (1  2 -1)       2
+      [1 -1  1]   (-1  1  2)       2
+     [-1  1  1]   (-1  1 -2)       2
+      [1 -1  1]    (1  2  1)       2
+      [1  1  1]   (-1  2 -1)       2
+      [1  1 -1]    (1  1  2)       2
+      [1  1  1]   (-1 -1  2)       2
+     [-1  1  1]    (2  1  1)       2
+      [1  1  1]    (2 -1 -1)       2
+     [-1  1  1]    (0  1 -1)       2
+      [1 -1  1]   (-1  0  1)       2
+      [1  1 -1]    (1 -1  0)       2
+     [-1  1  1]   (-1  0 -1)       2
+      [1 -1  1]   (-1 -1  0)       2
+      [1  1 -1]    (0 -1 -1)       2
+      [1  1 -1]    (1  0  1)       2
+     [-1  1  1]    (1  1  0)       2
+      [1 -1  1]    (0  1  1)       2
+     [-1 -1 -1]    (0 -1  1)       2
+     [-1 -1 -1]    (1  0 -1)       2
+     [-1 -1 -1]   (-1  1  0)       2
+     [-1  1  1]   (-1  4 -5)       2
+      [1 -1  1]   (-5 -1  4)       2
+      [1  1 -1]    (4 -5 -1)       2
+     [-1  1  1]   (-4  1 -5)       2
+      [1 -1  1]   (-5 -4  1)       2
+      [1  1 -1]    (1 -5 -4)       2
+      [1  1 -1]    (4  1  5)       2
+     [-1  1  1]    (5  4  1)       2
+      [1 -1  1]    (1  5  4)       2
+     [-1 -1 -1]   (-1 -4  5)       2
+     [-1 -1 -1]    (5 -1 -4)       2
+     [-1 -1 -1]   (-4  5 -1)       2
+      [1 -1  1]    (1 -4 -5)       2
+      [1  1 -1]   (-5  1 -4)       2
+     [-1  1  1]   (-4 -5  1)       2
+      [1 -1  1]    (4 -1 -5)       2
+      [1  1 -1]   (-5  4 -1)       2
+     [-1  1  1]   (-1 -5  4)       2
+     [-1 -1 -1]   (-4 -1  5)       2
+     [-1 -1 -1]    (5 -4 -1)       2
+     [-1 -1 -1]   (-1  5 -4)       2
+      [1  1 -1]    (1  4  5)       2
+     [-1  1  1]    (5  1  4)       2
+      [1 -1  1]    (4  5  1)       2
+ 
+ screw dislocations: 4 x 1
+ Burgers vector  energy
+     (-1 -1 -1)       1
+      (1 -1  1)       1
+     (-1  1  1)       1
+      (1  1 -1)       1
+ 
 </pre><h2 id="8">The Dislocation Tensor</h2><p>As each dislocation corresponds to an deformation of the atom lattice a dislocation can also be described by a deformation matrix. This matrix is the dyadic product between the Burgers vector and the line vector and can be computed by</p><pre class="codeinput">dS.tensor
-</pre><p>The unit of the deformation tensor is the unit of the burgers vector which is assumet to be au in MTEX.</p><h2 id="10">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="dislocationSystem.dislocationSystem.html"><tt>dislocationSystem</tt></a></td><td>class representing dislocation systems</td></tr><tr><td width="200px"><a href="dislocationSystem.end.html"><tt>end</tt></a></td><td>overloaded end function</td></tr><tr><td width="200px"><a href="dislocationSystem.eq.html"><tt>eq</tt></a></td><td>? sS1 == sS2</td></tr><tr><td width="200px"><a href="dislocationSystem.horzcat.html"><tt>horzcat</tt></a></td><td>overloads [v1,v2,v3..]</td></tr><tr><td width="200px"><a href="dislocationSystem.isempty.html"><tt>isempty</tt></a></td><td>overloads isempty</td></tr><tr><td width="200px"><a href="dislocationSystem.length.html"><tt>length</tt></a></td><td>overloads length</td></tr><tr><td width="200px"><a href="dislocationSystem.ne.html"><tt>ne</tt></a></td><td>? sS1 ~= sS2</td></tr><tr><td width="200px"><a href="dislocationSystem.rotate.html"><tt>rotate</tt></a></td><td>dislocation systems system</td></tr><tr><td width="200px"><a href="dislocationSystem.rotate_outer.html"><tt>rotate_outer</tt></a></td><td>rotate dislocation systems</td></tr><tr><td width="200px"><a href="dislocationSystem.size.html"><tt>size</tt></a></td><td>overloads size</td></tr><tr><td width="200px"><a href="dislocationSystem.subSet.html"><tt>subSet</tt></a></td><td>subindex vector3d</td></tr><tr><td width="200px"><a href="dislocationSystem.subsasgn.html"><tt>subsasgn</tt></a></td><td>overloads subsasgn</td></tr><tr><td width="200px"><a href="dislocationSystem.subsref.html"><tt>subsref</tt></a></td><td>overloads subsref</td></tr><tr><td width="200px"><a href="dislocationSystem.symmetrise.html"><tt>symmetrise</tt></a></td><td>find all symmetrically equivalent slips systems</td></tr><tr><td width="200px"><a href="dislocationSystem.tensor.html"><tt>tensor</tt></a></td><td>representation of a dislocation system</td></tr><tr><td width="200px"><a href="dislocationSystem.transpose.html"><tt>transpose</tt></a></td><td>list of slipSystem</td></tr><tr><td width="200px"><a href="dislocationSystem.uminus.html"><tt>uminus</tt></a></td><td>overloads unitary minus</td></tr><tr><td width="200px"><a href="dislocationSystem.vertcat.html"><tt>vertcat</tt></a></td><td>overloads [v1,v2,v3..]</td></tr></table></p></div></body></html>
+</pre><pre class="codeoutput"> 
+ans = dislocationDensityTensor  
+  size   : 52 x 1   
+  unit   : au       
+  rank   : 2 (3 x 3)
+  mineral: 432      
+</pre><p>The unit of the deformation tensor is the unit of the burgers vector which is assumet to be au in MTEX.</p><h2 id="10">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="dislocationSystem.cat.html"><tt>cat</tt></a></td><td>implement cat for dislocationSystem</td></tr><tr><td width="200px"><a href="dislocationSystem.dislocationSystem.html"><tt>dislocationSystem</tt></a></td><td>class representing dislocation systems</td></tr><tr><td width="200px"><a href="dislocationSystem.end.html"><tt>end</tt></a></td><td>overloaded end function</td></tr><tr><td width="200px"><a href="dislocationSystem.eq.html"><tt>eq</tt></a></td><td>? sS1 == sS2</td></tr><tr><td width="200px"><a href="dislocationSystem.horzcat.html"><tt>horzcat</tt></a></td><td>overloads [v1,v2,v3..]</td></tr><tr><td width="200px"><a href="dislocationSystem.isempty.html"><tt>isempty</tt></a></td><td>overloads isempty</td></tr><tr><td width="200px"><a href="dislocationSystem.length.html"><tt>length</tt></a></td><td>overloads length</td></tr><tr><td width="200px"><a href="dislocationSystem.ne.html"><tt>ne</tt></a></td><td>? sS1 ~= sS2</td></tr><tr><td width="200px"><a href="dislocationSystem.rotate.html"><tt>rotate</tt></a></td><td>dislocation systems system</td></tr><tr><td width="200px"><a href="dislocationSystem.rotate_outer.html"><tt>rotate_outer</tt></a></td><td>rotate dislocation systems</td></tr><tr><td width="200px"><a href="dislocationSystem.size.html"><tt>size</tt></a></td><td>overloads size</td></tr><tr><td width="200px"><a href="dislocationSystem.subSet.html"><tt>subSet</tt></a></td><td>subindex vector3d</td></tr><tr><td width="200px"><a href="dislocationSystem.subsasgn.html"><tt>subsasgn</tt></a></td><td>overloads subsasgn</td></tr><tr><td width="200px"><a href="dislocationSystem.subsref.html"><tt>subsref</tt></a></td><td>overloads subsref</td></tr><tr><td width="200px"><a href="dislocationSystem.symmetrise.html"><tt>symmetrise</tt></a></td><td>find all symmetrically equivalent slips systems</td></tr><tr><td width="200px"><a href="dislocationSystem.tensor.html"><tt>tensor</tt></a></td><td>representation of a dislocation system</td></tr><tr><td width="200px"><a href="dislocationSystem.transpose.html"><tt>transpose</tt></a></td><td>list of slipSystem</td></tr><tr><td width="200px"><a href="dislocationSystem.uminus.html"><tt>uminus</tt></a></td><td>overloads unitary minus</td></tr><tr><td width="200px"><a href="dislocationSystem.vertcat.html"><tt>vertcat</tt></a></td><td>overloads [v1,v2,v3..]</td></tr></table></p></div></body></html>
 
     <div class="tags">
         

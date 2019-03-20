@@ -1,6 +1,8 @@
 %% cat
 % (method of [[S2Grid_index.html,S2Grid]])
 %% 
+% implements cat for S2Grid
+% 
 %
 %% View Code
 % 
