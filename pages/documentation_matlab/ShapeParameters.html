@@ -1,9 +1,9 @@
 ---
 title: Shape Parameters
-last_updated: 05-Mar-2019
+last_updated: 20-Mar-2019
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
-folder: documentation_matlab
+folder: documentation
 toc: false
 ---
 
@@ -14,17 +14,82 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">First Steps and Function Overview</h2><p>Get in touch with grains.</p><h2 id="2">Grain reconstruction from EBSD data</h2><p>So far grains can be exclusively computed from EBSD data using the command <a href="EBSD_calcGrains.html">calcGrains</a>. In order to demonstrate grain reconstruction we import some EBSD data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">First Steps and Function Overview</h2><p>Get in touch with grains.</p><h2 id="2">Grain reconstruction from EBSD data</h2><p>So far grains can be exclusively computed from EBSD data using the command <a href="EBSD.calcGrains.html">calcGrains</a>. In order to demonstrate grain reconstruction we import some EBSD data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
 plotx2east
 
 <span class="comment">% plot the Forsterite phase colorized according to orientation</span>
 plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
-</pre><p>When reconstructing grain there are two basic ways how to deal with not indexed measurements. The simplest way is to keep the not indexed pixels separately, i.e., do not assign them to any indexed grain.</p><pre class="codeinput">[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_01.png" %}
+<p>When reconstructing grain there are two basic ways how to deal with not indexed measurements. The simplest way is to keep the not indexed pixels separately, i.e., do not assign them to any indexed grain.</p><pre class="codeinput">[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     0   16334   58485  notIndexed                                   
+     1    4331  152345  Forsterite       mmm                         
+     2    1866   26058   Enstatite       mmm                         
+     3    2012    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 148741
+ triple points: 12065
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral        Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                
+     1  152345 (62%)  Forsterite   light blue       mmm                         
+     2   26058 (11%)   Enstatite  light green       mmm                         
+     3   9064 (3.7%)    Diopside    light red     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
 </pre><p>We observe that there are not only grains of specific phases but also not indexed grains. Let's add the grain boundaries to the previous plot.</p><pre class="codeinput">hold <span class="string">on</span>
 plot(grains.boundary)
 hold <span class="string">off</span>
-</pre><p>The resulting grains contain a lot of holes and one-pixel grains. The second way is to assign not indexed pixels to surrounding grains. In MTEX this is done if the not indexed data are removed from the measurements, i.e.</p><pre class="codeinput">ebsd = ebsd(<span class="string">'indexed'</span>) <span class="comment">% this removes all not indexed data</span>
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_02.png" %}
+<p>The resulting grains contain a lot of holes and one-pixel grains. The second way is to assign not indexed pixels to surrounding grains. In MTEX this is done if the not indexed data are removed from the measurements, i.e.</p><pre class="codeinput">ebsd = ebsd(<span class="string">'indexed'</span>) <span class="comment">% this removes all not indexed data</span>
 [grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral        Color  Symmetry  Crystal reference frame
+     1  152345 (81%)  Forsterite   light blue       mmm                         
+     2   26058 (14%)   Enstatite  light green       mmm                         
+     3   9064 (4.8%)    Diopside    light red     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1    1256  152345  Forsterite       mmm                         
+     2     518   26058   Enstatite       mmm                         
+     3    1526    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 45832
+ triple points: 3863
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral        Color  Symmetry  Crystal reference frame
+     1  152345 (81%)  Forsterite   light blue       mmm                         
+     2   26058 (14%)   Enstatite  light green       mmm                         
+     3   9064 (4.8%)    Diopside    light red     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
 </pre><p>Now, there are no not indexed grains computed. Let's visualize the result</p><pre class="codeinput"><span class="comment">% plot the orientation data of the Forsterite phase</span>
 plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
 
@@ -44,7 +109,9 @@ plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span
 hold <span class="string">on</span>
 plot(grains.boundary)
 hold <span class="string">off</span>
-</pre><h2 id="7">Area, Perimeter, Diameter</h2><h2 id="8">Holes</h2><h2 id="9">Neighbours</h2><h2 id="10">Fitted Ellipse</h2><h2 id="12">Convexity</h2><p>pari</p><h2 id="13">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_03.png" %}
+<h2 id="7">Area, Perimeter, Diameter</h2><h2 id="8">Holes</h2><h2 id="9">Neighbours</h2><h2 id="10">Fitted Ellipse</h2><h2 id="12">Convexity</h2><p>pari</p><h2 id="13">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
    <table class="usertable">
       <tr>
          <td>
@@ -333,15 +400,40 @@ hold <span class="string">off</span>
       </tr>
    </table>
 </p><p>Those grain properties can be used for colorization. E.g. we may colorize grains according to their area.</p><pre class="codeinput">plot(grains,grains.area)
-</pre><p>or a little bit more advanced according to the log quotient between grain size and boundary size.</p><pre class="codeinput">plot(grains,log(grains.grainSize ./ grains.boundarySize))
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_04.png" %}
+<p>or a little bit more advanced according to the log quotient between grain size and boundary size.</p><pre class="codeinput">plot(grains,log(grains.grainSize ./ grains.boundarySize))
 mtexColorbar
-</pre><p>Note that some properties are available for single phase lists of grains, e.g.</p><pre class="codeinput"><span class="comment">% colorize the Forsterite Phase according to its mean orientation</span>
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_05.png" %}
+<p>Note that some properties are available for single phase lists of grains, e.g.</p><pre class="codeinput"><span class="comment">% colorize the Forsterite Phase according to its mean orientation</span>
 plot(grains(<span class="string">'Fo'</span>),grains(<span class="string">'Fo'</span>).meanOrientation)
-</pre><h2 id="17">Changing lists of grains</h2><p>As with any list in MTEX, one can single out specific grains by conditions using the syntax</p><pre class="codeinput"><span class="comment">% this gives all grains with more the 1000 pixels</span>
+</pre><pre class="codeoutput">  I'm going to colorize the orientation data with the 
+  standard MTEX colorkey. To view the colorkey do:
+ 
+  oM = ipfColorKey(ori_variable_name)
+  plot(oM)
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_06.png" %}
+<h2 id="17">Changing lists of grains</h2><p>As with any list in MTEX, one can single out specific grains by conditions using the syntax</p><pre class="codeinput"><span class="comment">% this gives all grains with more the 1000 pixels</span>
 largeGrains = grains(grains.grainSize &gt; 1000)
 
 hold <span class="string">on</span>
 <span class="comment">% mark only large Forsterite grains</span>
 plot(largeGrains(<span class="string">'Fo'</span>).boundary,<span class="string">'linewidth'</span>,2,<span class="string">'linecolor'</span>,<span class="string">'k'</span>)
 hold <span class="string">off</span>
-</pre></div></body></html>
+</pre><pre class="codeoutput"> 
+largeGrains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      37   58902  Forsterite       mmm                         
+     2       1    1038   Enstatite       mmm                         
+ 
+ boundary segments: 10886
+ triple points: 816
+ 
+ Properties: GOS, meanRotation
+ 
+</pre>
+  {% include inline_image.html file="script_ShapeParameters_07.png" %}
+</div></body></html>

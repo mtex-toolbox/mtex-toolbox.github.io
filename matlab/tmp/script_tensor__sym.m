@@ -1,7 +1,7 @@
 %% sym
 % (method of [[tensor_index.html,tensor]])
 %% 
-% the symmetric part S = 0.5(T + T.') of a tensor
+% the symmetric part S = 0.5(T + T') of a tensor
 % 
 %
 %% View Code

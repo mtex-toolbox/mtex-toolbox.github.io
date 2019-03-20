@@ -1,0 +1,66 @@
+---
+title: fitEllipse
+last_updated: 20-Mar-2019
+sidebar: function_reference_sidebar
+permalink: grain2d.fitEllipse.html
+folder: function_reference
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>fitEllipse</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_grain2d__fitEllipse.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit grain2d__fitEllipse into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[grain2d_index.html,grain2d]])</p><!--/introduction--><p>fit ellipses to grains using the method described in Mulchrone&amp; Choudhury,2004 (https://doi.org/10.1016/S0191-8141(03)00093-2)</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab">[omega,a,b] = fitEllipse(grains);
+plotEllipse(grains.centroid,a,b,omega,<span class="string">'lineColor'</span>,<span class="string">'r'</span>)
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+               <p>[[grain2d_index.html,grain2d]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>omega</tt>
+         </td>
+         <td>
+               <p>angle giving trend of ellipse long axis</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>a</tt>
+         </td>
+         <td>
+               <p>long axis radius</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>b</tt>
+         </td>
+         <td>
+               <p>short axis radius</p>
+               <p>ion</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>boundary</tt>
+         </td>
+         <td>
+               <p>scale to fit boundary length</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2><p>mtexdata csl grains = calcGrains(ebsd('indexed')) grains = smooth(grains,10) plot(ebsd('indexed'),ebsd('indexed').orientations,'micronbar','off') hold on plot(grains.boundary,'lineWidth',2) grains = grains(grains.grainSize&gt;20) [omega,a,b] = fitEllipse(grains(grains)); plotEllipse(grains.centroid,a,b,omega,'lineColor','w','linewidth',2) hold off</p></div></body></html>

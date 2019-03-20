@@ -11,9 +11,9 @@
 % 
 %
 %% Syntax
-%   [alpha,beta,gamma] = Euler(quat) -
-%   [phi1,Phi,phi2] = Euler(quat,'Bunge') -
-%   euler = Euler(quat,'Bunge') -
+%   [alpha,beta,gamma] = Euler(quat,'ABG') -
+%   [phi1,Phi,phi2] = Euler(quat) -
+%   euler = Euler(quat) -
 % 
 
 %% Input
@@ -42,7 +42,7 @@
 %                      <tt>'ABG, ZYZ'</tt>
 %                   </td>
 %                   <td>
-%                         <p>Matthies (alpha,beta,gamma) convention (default)</p>
+%                         <p>Matthies (alpha,beta,gamma) convention</p>
 %                   </td>
 %                </tr>
 %                <tr>
@@ -50,7 +50,7 @@
 %                      <tt>'BUNGE, ZXZ'</tt>
 %                   </td>
 %                   <td>
-%                         <p>Bunge (phi, Phi, phi2) convention</p>
+%                         <p>Bunge (phi, Phi, phi2) convention (default)</p>
 %                   </td>
 %                </tr>
 %             </table>

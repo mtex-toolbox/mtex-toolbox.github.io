@@ -130,5 +130,5 @@
 % 
 %% See also
 % PoleFigure2odf ODF_demo PoleFigureSimulation_demo
-% loadPoleFigure ImportPoleFigureData examples_index
+% PoleFigure.load ImportPoleFigureData examples_index
 %

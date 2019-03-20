@@ -7,7 +7,7 @@
 %% View Code
 % 
 %% Syntax
-%   [M,b,mori] = calcTaylor(eps,sS)
+%   [M,b,W] = calcTaylor(eps,sS)
 % 
 
 %% Input
@@ -50,15 +50,15 @@
 %             <tt>b</tt>
 %          </td>
 %          <td>
-%                <p>coefficients for the acive slip systems</p>
+%                <p>vector of slip rates for all slip systems</p>
 %          </td>
 %       </tr>
 %       <tr>
 %          <td width="100px">
-%             <tt>mori</tt>
+%             <tt>W</tt>
 %          </td>
 %          <td>
-%                <p>misorientation</p>
+%                <p>[[spinTensor_index.html,spinTensor]]</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -88,7 +88,8 @@ sS = slipSystem.fcc(cs)
 % 
 
 % compute the Taylor factor
-[M,b,mori] = calcTaylor(inv(ori)*eps,sS.symmetrise)
+[M,b,W] = calcTaylor(inv(ori)*eps,sS.symmetrise)
 
 %% 
 % 
+%% 

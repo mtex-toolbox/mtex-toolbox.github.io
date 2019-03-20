@@ -7,6 +7,8 @@
 % 
 %   Omega = spinTensor(v)
 %   Omega = spinTensor(S)
+%   Omega = spinTensor(rot)
+%   Omega = spinTensor(mori)
 % 
 
 %% Input
@@ -27,6 +29,22 @@
 %          </td>
 %          <td>
 %                <p>[[vector3d_index.html,vector3d]]</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>rot</tt>
+%          </td>
+%          <td>
+%                <p>[[rotation_index.html,rotation]]</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>mori</tt>
+%          </td>
+%          <td>
+%                <p>mis[[orientation_index.html,orientation]]</p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,7 +1,7 @@
 %% rotate
 % (method of [[EBSD_index.html,EBSD]])
 %% 
-% rotate EBSD orientations or spatial data around point of origin
+% rotate EBSD
 % 
 %
 %% View Code
@@ -46,7 +46,7 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>[[rotation_index.html,rotation]]</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -63,7 +63,7 @@
 %                      <tt>'center'</tt>
 %                   </td>
 %                   <td>
-%                         <p>[x,y] center of rotation, default is center of the map</p>
+%                         <p>[x,y] center of rotation, default is (0,0)</p>
 %                   </td>
 %                </tr>
 %             </table>

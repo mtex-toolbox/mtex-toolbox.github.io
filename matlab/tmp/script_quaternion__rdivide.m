@@ -10,7 +10,7 @@
 % <html>
 %    <div class="syntax" width="100%">
 %       <div>
-%          <tt>q = rdivide(q1,d)</tt>
+%          <tt>q1 = rdivide(q1,d)</tt>
 %       </div>
 %    </div>
 % </html>

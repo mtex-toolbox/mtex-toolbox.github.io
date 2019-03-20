@@ -8,7 +8,8 @@
 % 
 %% Syntax
 %   m = matrix(T)
-%   m = matrix(T,'voigt')
+%   m = matrix(T,'Voigt')
+%   m = matrix(T,'Kelvin')
 % 
 
 %% Input
@@ -34,10 +35,18 @@
 %                </tr>
 %                <tr>
 %                   <td width="150px">
-%                      <tt>'voigt'</tt>
+%                      <tt>'Voigt'</tt>
 %                   </td>
 %                   <td>
-%                         <p>give a 4 rank tensor in voigt notation, i.e. as a 6 x 6 matrix</p>
+%                         <p>give a 4 rank tensor in Voigt notation, i.e. as a 6 x 6 matrix</p>
+%                   </td>
+%                </tr>
+%                <tr>
+%                   <td width="150px">
+%                      <tt>'Kelvin'</tt>
+%                   </td>
+%                   <td>
+%                         <p>same as above but with Kelvin normalization</p>
 %                   </td>
 %                </tr>
 %             </table>

@@ -27,7 +27,7 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elatic stiffness [[tensor_index.html,tensor]]</p>
+%                <p>elastic stiffness [[tensor_index.html,tensor]]</p>
 %          </td>
 %       </tr>
 %       <tr>

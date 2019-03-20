@@ -1,0 +1,159 @@
+---
+title: variants
+last_updated: 20-Mar-2019
+sidebar: function_reference_sidebar
+permalink: orientation.variants.html
+folder: function_reference
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>variants</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_orientation__variants.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__variants into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[orientation_index.html,orientation]])</p><!--/introduction--><p>variants of an orientation relationship</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab">ori_variants = ori_parent * mori.variants
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mori</tt>
+         </td>
+         <td>
+               <p>child to parent [[orientation_index.html,orientation]] relationship</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ori_parent</tt>
+         </td>
+         <td>
+               <p>parent [[orientation_index.html,orientation]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ori_variants</tt>
+         </td>
+         <td>
+               <p>all possible child [[orientation_index.html,orientation]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% parent symmetry</span>
+cs_fcc = crystalSymmetry(<span class="string">'432'</span>, [3.6599 3.6599 3.6599], <span class="string">'mineral'</span>, <span class="string">'Iron fcc'</span>);
+</pre><pre class="codeinput"><span class="comment">% child symmetry</span>
+cs_bcc = crystalSymmetry(<span class="string">'432'</span>, [2.866 2.866 2.866], <span class="string">'mineral'</span>, <span class="string">'Iron bcc'</span>)
+</pre><pre class="codeoutput"> 
+cs_bcc = crystalSymmetry  
+ 
+  mineral : Iron bcc     
+  symmetry: 432          
+  a, b, c : 2.9, 2.9, 2.9
+ 
+</pre><pre class="codeinput"><span class="comment">% define a fcc parent orientation</span>
+ori_fcc = orientation.brass(cs_fcc)
+</pre><pre class="codeoutput"> 
+ori_fcc = orientation  
+  size: 1 x 1
+  crystal symmetry : Iron fcc (432)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    35   45    0    0
+ 
+</pre><pre class="codeinput"><span class="comment">% define Nishiyama Wassermann fcc to bcc orientation relation ship</span>
+NW = orientation.NishiyamaWassermann(cs_fcc,cs_bcc)
+</pre><pre class="codeoutput"> 
+NW = misorientation  
+  size: 1 x 1
+  crystal symmetry : Iron fcc (432)
+  crystal symmetry : Iron bcc (432)
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+   180 99.7356      45       0
+ 
+</pre><pre class="codeinput"><span class="comment">% compute a bcc child orientation related to the fcc orientation</span>
+ori_bcc = ori_fcc * inv(NW)
+</pre><pre class="codeoutput"> 
+ori_bcc = orientation  
+  size: 1 x 1
+  crystal symmetry : Iron bcc (432)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  166.305 68.0853 32.6118       0
+ 
+</pre><pre class="codeinput"><span class="comment">% compute all symmetrically possible child orientations</span>
+ori_bcc = unique(ori_fcc.symmetrise * inv(NW))
+</pre><pre class="codeoutput"> 
+ori_bcc = orientation  
+  size: 12 x 1
+  crystal symmetry : Iron bcc (432)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  25.2644      90     270       0
+  224.736      90      90       0
+  96.8294 52.2388 140.768       0
+  96.8294 127.761 39.2315       0
+      305 9.73561       0       0
+      125 9.73561       0       0
+  346.305 68.0853 32.6118       0
+  166.305 68.0853 32.6118       0
+  263.695 68.0853 327.388       0
+  83.6949 68.0853 327.388       0
+  153.171 52.2388 219.232       0
+  153.171 127.761 320.768       0
+ 
+</pre><pre class="codeinput"><span class="comment">% same using the function variants</span>
+ori_bcc2 = ori_fcc * inv(NW.variants)
+</pre><pre class="codeoutput"> 
+ori_bcc2 = orientation  
+  size: 1 x 12
+  crystal symmetry : Iron bcc (432)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+      305 170.264     180       0
+      305 9.73561     360       0
+  224.736      90      90       0
+  25.2644      90     270       0
+  83.6949 68.0853 327.388       0
+  153.171 127.761 320.768       0
+  166.305 111.915 147.388       0
+  96.8294 52.2388 140.768       0
+  96.8294 127.761 39.2315       0
+  83.6949 111.915 212.612       0
+  166.305 68.0853 32.6118       0
+  153.171 52.2388 219.232       0
+ 
+</pre><pre class="codeinput"><span class="comment">% we may also compute all possible child to child misorientations</span>
+bcc2bcc = unique(NW.variants * inv(NW))
+</pre><pre class="codeoutput"> 
+bcc2bcc = misorientation  
+  size: 7 x 1
+  crystal symmetry : Iron bcc (432)
+  crystal symmetry : Iron bcc (432)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+      360       0       0       0
+      180 19.4712       0       0
+   80.402 88.3614 260.402       0
+  219.232 75.5225 39.2315       0
+  212.612 136.171 327.388       0
+  135.528 119.058 205.276       0
+  154.724 60.9415 135.528       0
+ 
+</pre><h2 id="15">See also</h2><p>orientation/parents</p></div></body></html>

@@ -7,8 +7,8 @@
 %% View Code
 % 
 %% Syntax
-%   [R,SR] = polar(T)
-%   [R,SR,SL] = polar(T)
+%   [R,SL] = polar(T)
+%   [R,SL,SR] = polar(T)
 % 
 
 %% Input
@@ -40,18 +40,18 @@
 %       </tr>
 %       <tr>
 %          <td width="100px">
-%             <tt>SR</tt>
-%          </td>
-%          <td>
-%                <p>symmetric rank 2 [[tensor_index.html,tensor]] such that R * SR = T</p>
-%          </td>
-%       </tr>
-%       <tr>
-%          <td width="100px">
 %             <tt>SL</tt>
 %          </td>
 %          <td>
 %                <p>symmetric rank 2 [[tensor_index.html,tensor]] such that SL * R = T</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>SR</tt>
+%          </td>
+%          <td>
+%                <p>symmetric rank 2 [[tensor_index.html,tensor]] such that R * SR = T</p>
 %          </td>
 %       </tr>
 %    </table>

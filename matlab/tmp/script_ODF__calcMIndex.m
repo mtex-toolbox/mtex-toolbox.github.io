@@ -1,14 +1,21 @@
 %% calcMIndex
 % (method of [[ODF_index.html,ODF]])
 %% 
-% M-index of Skemer et al.(2005) based on the difference between
+% Computes the M-index from an odf - in contrast to using a discrete number
+% of orientations (Skemer et al., 2005).
+% The M-index is derived from the difference between
 % uncorrelated and uniform misorientation angle distributions
 % 
 % Reference
 % Skemer, P., Katayama, I., Jiang, Z. & Karato, S.-I. (2005)
 % The misorientation index: development of
 % a new method for calculating the strength of latticepreferred
-% orientation. Tectonophysics, 411, 157?167.
+% 
+% Recommended read:
+% Schaeben, H., (2007) Comment on ÿThe misorientation index: Development
+% of a new method for calculating the strength of lattice-preferred
+% orientationÿ by Philip Skemer, Ikuo Katayama, Zhenting Jiang, Shun-ichiro Karato.
+% Tectonophysics 441, 115ÿ117
 % 
 % Reference for the computational method using MTEX
 % Mainprice, D., Bachmann, F., Hielscher, R., Schaeben, H. (2014)
@@ -38,7 +45,10 @@
 %    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
 %       <tr>
 %          <td width="100px">
-%             <tt>odf = @odf</tt>
+%             <tt>odf</tt>
+%          </td>
+%          <td>
+%                <pre>@odf</pre>
 %          </td>
 %       </tr>
 %    </table>
@@ -50,7 +60,7 @@
 %    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
 %       <tr>
 %          <td width="100px">
-%             <tt>MI = M</tt>
+%             <tt>M</tt>
 %          </td>
 %          <td>
 %                <p>ndex</p>
@@ -60,3 +70,6 @@
 %    </table>
 % </html>
 % 
+%% See also
+% orientation/calcMIndex
+%

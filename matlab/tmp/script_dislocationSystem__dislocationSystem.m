@@ -8,7 +8,7 @@
 % 
 %% Syntax
 %   dS = dislocationSystem(b,l)
-%   dS = slipSystem(sS)
+%   dS = dislocationSystem(sS)
 % 
 
 %% Input
@@ -44,7 +44,7 @@
 %             <tt>pr</tt>
 %          </td>
 %          <td>
-%                <p>poissson ratio</p>
+%                <p>poisson ratio</p>
 %          </td>
 %       </tr>
 %    </table>

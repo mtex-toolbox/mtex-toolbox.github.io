@@ -4,8 +4,10 @@
 %% View Code
 % 
 %% Syntax
-%   plotSection(sF,vector3d.Z)
-%   plotSection(sF,vector3d.Z,pi/3)
+%   N = vector3d.Z;
+%   omega = pi/3;
+%   plotSection(sF,N)
+%   plotSection(sF,N,omega)
 % 
 
 %% Input
@@ -18,6 +20,19 @@
 %          </td>
 %          <td>
 %                <p>[[S2Fun_index.html,S2Fun]]</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>N</tt>
+%          </td>
+%          <td>
+%                <p>normal direction</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>omega</tt>
 %          </td>
 %       </tr>
 %    </table>

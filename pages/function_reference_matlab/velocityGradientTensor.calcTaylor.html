@@ -1,0 +1,134 @@
+---
+title: calcTaylor
+last_updated: 20-Mar-2019
+sidebar: function_reference_sidebar
+permalink: velocityGradientTensor.calcTaylor.html
+folder: function_reference
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>calcTaylor</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_velocityGradientTensor__calcTaylor.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit velocityGradientTensor__calcTaylor into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[velocityGradientTensor_index.html,velocityGradientTensor]])</p><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="2">View Code</h2><h2 id="3">Syntax</h2><pre class="language-matlab">[M,b,W] = calcTaylor(eps,sS)
+</pre><h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>L</tt>
+         </td>
+         <td>
+               <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sS</tt>
+         </td>
+         <td>
+               <p>[[slipSystem_index.html,slipSystem]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+               <p>taylor factor</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>b</tt>
+         </td>
+         <td>
+               <p>coefficients for the acive slip systems</p>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>W</tt>
+         </td>
+         <td>
+               <p>[[spinTensor_index.html,spinTensor]]</p>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% consider uniaxial tension in (100) direction about 30 percent</span>
+F = deformationGradientTensor.uniaxial(vector3d.X,1.3)
+</pre><pre class="codeoutput"> 
+F = deformationGradientTensor  
+  rank   : 2 (3 x 3)            
+  mineral: 1, X||a, Y||b*, Z||c*
+ 
+    1.3      0      0
+      0 0.8771      0
+      0      0 0.8771
+</pre><pre class="codeinput"><span class="comment">% the corresponding rate of deformation tensor becomes</span>
+L = logm(F)
+</pre><pre class="codeoutput"> 
+L = velocityGradientTensor  
+  rank   : 2 (3 x 3)            
+  mineral: 1, X||a, Y||b*, Z||c*
+ 
+ *10^-2
+  26.236       0       0
+       0 -13.118       0
+       0       0 -13.118
+</pre><pre class="codeinput"><span class="comment">% define a crystal orientation</span>
+cs = crystalSymmetry(<span class="string">'cubic'</span>)
+ori = orientation.byEuler(0,30*degree,15*degree,cs)
+</pre><pre class="codeoutput"> 
+cs = crystalSymmetry  
+ 
+  symmetry: m-3m   
+  a, b, c : 1, 1, 1
+ 
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0   30   15    0
+ 
+</pre><pre class="codeinput"><span class="comment">% define a slip system</span>
+sS = slipSystem.fcc(cs)
+</pre><pre class="codeoutput"> 
+sS = slipSystem  
+ symmetry: m-3m
+ size: 1 x 1
+  u    v    w  | h    k    l CRSS
+  0    1   -1    1    1    1    1
+</pre><pre class="codeinput"><span class="comment">% compute the Taylor factor</span>
+[M,b,spin] = calcTaylor(inv(ori)*L,sS.symmetrise)
+</pre><pre class="codeoutput">M =
+    0.6584
+b =
+  Columns 1 through 7
+    0.0000    0.0000    0.0441    0.0402    0.0000    0.0000    0.0441
+  Columns 8 through 14
+    0.0000    0.0000    0.0000    0.0402    0.0000    0.0000    0.0000
+  Columns 15 through 21
+    0.0000    0.2008    0.0441    0.0000    0.0000    0.0441    0.0000
+  Columns 22 through 24
+    0.0000    0.0000    0.2008
+ 
+spin = spinTensor  
+  rank   : 2 (3 x 3)
+  mineral: m-3m     
+ 
+ *10^-3
+      0 -65.59      0
+  65.59      0      0
+      0      0      0
+</pre></div></body></html>

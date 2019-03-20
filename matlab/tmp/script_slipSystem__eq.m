@@ -1,7 +1,7 @@
 %% eq
 % (method of [[slipSystem_index.html,slipSystem]])
 %% 
-% ? sS1 == sS2
+% check sS1 == sS2
 % 
 %
 %% View Code

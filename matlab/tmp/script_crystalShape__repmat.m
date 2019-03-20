@@ -1,6 +1,8 @@
 %% repmat
 % (method of [[crystalShape_index.html,crystalShape]])
 %% 
+% implements repmat for crystalShape
+% 
 %
 %% View Code
 % 

@@ -11,7 +11,7 @@
 % <html>
 %    <div class="syntax" width="100%">
 %       <div>
-%          <tt>[pos,value,ax] = getDataCursorPos(mtexFig)</tt>
+%          <tt>[pos,id,value,ax] = getDataCursorPos(mtexFig,maxId)</tt>
 %       </div>
 %    </div>
 % </html>

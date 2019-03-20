@@ -1,16 +1,53 @@
 %% cat
 % (method of [[fibre_index.html,fibre]])
 %% 
+% implement cat for fibre
+% 
 %
 %% View Code
 % 
 %% Syntax
+%   f = cat(dim,f1,f2,f3)
+% 
+
+%% Input
 % 
 % <html>
-%    <div class="syntax" width="100%">
-%       <div>
-%          <tt>f = cat(dim,'param1',val1,'param2',val2)</tt>
-%       </div>
-%    </div>
+%    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+%       <tr>
+%          <td width="100px">
+%             <tt>dim</tt>
+%          </td>
+%          <td>
+%                <p>dimension</p>
+%          </td>
+%       </tr>
+%       <tr>
+%          <td width="100px">
+%             <tt>f1, f2, f3</tt>
+%          </td>
+%          <td>
+%                <p>[[fibre_index.html,fibre]]</p>
+%          </td>
+%       </tr>
+%    </table>
 % </html>
 % 
+%% Output
+% 
+% <html>
+%    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+%       <tr>
+%          <td width="100px">
+%             <tt>f</tt>
+%          </td>
+%          <td>
+%                <p>[[fibre_index.html,fibre]]</p>
+%          </td>
+%       </tr>
+%    </table>
+% </html>
+% 
+%% See also
+% fibre/horzcat, fibre/vertcat
+%
