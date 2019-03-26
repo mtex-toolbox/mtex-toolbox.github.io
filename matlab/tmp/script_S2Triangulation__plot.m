@@ -1,5 +1,5 @@
 %% plot
-% (method of [[S2Triangulation_index.html,S2Triangulation]])
+% (method of <S2Triangulation_index.html S2Triangulation>)
 %% 
 % find all edges given by vertex i and vertex j
 %

@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % rotate EBSD
 % 
@@ -30,7 +30,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -46,7 +48,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -109,7 +113,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% project2FundamentalRegion
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % projects quaternions to a fundamental region
 % 
@@ -21,7 +21,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,8 @@
 %             <tt>CS1, CS2</tt>
 %          </td>
 %          <td>
-%                <p>crystal [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +40,7 @@
 %             <tt>q_ref</tt>
 %          </td>
 %          <td>
-%                <p>reference [[quaternion_index.html,quaternion]] single or size(q) == size(q_ref)</p>
+%                <p>reference <a href="quaternion_index.html&#34;">quaternion</a> single or size(q) == size(q_ref)</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -52,7 +55,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

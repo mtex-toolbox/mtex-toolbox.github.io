@@ -1,5 +1,5 @@
 %% times
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % multiply a tensor by a scalar
 %

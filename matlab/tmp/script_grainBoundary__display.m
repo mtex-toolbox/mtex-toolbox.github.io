@@ -1,5 +1,5 @@
 %% display
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % standard output
 % 

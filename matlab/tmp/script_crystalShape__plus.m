@@ -1,5 +1,5 @@
 %% plus
-% (method of [[crystalShape_index.html,crystalShape]])
+% (method of <crystalShape_index.html crystalShape>)
 %% 
 % crystal shape should be first argument
 %

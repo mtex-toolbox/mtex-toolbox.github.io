@@ -1,5 +1,5 @@
 %% calcZeroRange
-% (method of [[zeroRangeMethod_index.html,zeroRangeMethod]])
+% (method of <zeroRangeMethod_index.html zeroRangeMethod>)
 %% 
 % calculate zero range
 % 
@@ -25,7 +25,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]]</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

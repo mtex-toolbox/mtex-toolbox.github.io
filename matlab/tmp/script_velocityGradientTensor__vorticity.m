@@ -1,5 +1,5 @@
 %% vorticity
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % vorticity Gamma
 %

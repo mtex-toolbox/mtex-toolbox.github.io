@@ -2,10 +2,10 @@
 % Maps an individual color to each given crystal directions being
 % parallel to a specimen direction (fibre)
 % Properties:
-% center  - list of crystal directions [[Miller_index.html,Miller]]
+% center  - list of crystal directions <Miller_index.html" Miller>
 % color   - n-by-3 list representing RGB values, one for each center
-% psi     - [[kernel_index.html,kernel]] providing the width and brightness for colored fibre
-% inversePoleFigureDirection - specimen direction [[vector3d_index.html,vector3d]]
+% psi     - <kernel_index.html" kernel> providing the width and brightness for colored fibre
+% inversePoleFigureDirection - specimen direction <vector3d_index.html" vector3d>
 %
 %% View Code
 % 

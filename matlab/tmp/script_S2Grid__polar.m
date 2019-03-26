@@ -1,5 +1,5 @@
 %% polar
-% (method of [[S2Grid_index.html,S2Grid]])
+% (method of <S2Grid_index.html S2Grid>)
 %% 
 % polar coordinates of S2Grid
 % 

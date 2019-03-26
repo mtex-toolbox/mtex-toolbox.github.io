@@ -1,5 +1,5 @@
 %% correct
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % corrects polfigures for background and defocussing
 % 
@@ -20,7 +20,8 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>list of [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>list of <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -71,7 +72,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

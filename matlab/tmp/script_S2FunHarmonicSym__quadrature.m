@@ -1,5 +1,5 @@
 %% quadrature
-% (method of [[S2FunHarmonicSym_index.html,S2FunHarmonicSym]])
+% (method of <S2FunHarmonicSym_index.html S2FunHarmonicSym>)
 %
 %% View Code
 % 
@@ -32,7 +32,9 @@
 %             <tt>nodes</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -91,7 +93,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

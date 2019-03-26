@@ -1,5 +1,5 @@
 %% specimenSymmetry
-% (method of [[specimenSymmetry_index.html,specimenSymmetry]])
+% (method of <specimenSymmetry_index.html specimenSymmetry>)
 %% 
 % defines a specimen symmetry
 % 

@@ -1,5 +1,5 @@
 %% display
-% (method of [[S2FunHarmonicSym_index.html,S2FunHarmonicSym]])
+% (method of <S2FunHarmonicSym_index.html S2FunHarmonicSym>)
 %% 
 % standard output
 %

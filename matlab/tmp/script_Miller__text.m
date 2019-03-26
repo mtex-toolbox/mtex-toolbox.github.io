@@ -1,5 +1,5 @@
 %% text
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % plot Miller indece
 % 

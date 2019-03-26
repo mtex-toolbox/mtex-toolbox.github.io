@@ -1,5 +1,5 @@
 %% ellipsoid
-% (method of [[strainTensor_index.html,strainTensor]])
+% (method of <strainTensor_index.html strainTensor>)
 %% 
 % Length (1+e) and direction of principal axes of strain ellipsoid from
 % finite, lagrangian/eulerian strain tensor E with eigenvalues lambda
@@ -22,7 +22,7 @@
 %             <tt>E</tt>
 %          </td>
 %          <td>
-%                <pre>[[strainTensor_index.html,strainTensor]]</pre>
+%                <pre>&lt;strainTensor_index.html" strainTensor&gt;</pre>
 %          </td>
 %       </tr>
 %    </table>
@@ -37,7 +37,8 @@
 %             <tt>fe</tt>
 %          </td>
 %          <td>
-%                <p>directions of prinicpal axes of strain ellipsoid [[vector3d_index.html,vector3d]]</p>
+%                <p>directions of prinicpal axes of strain ellipsoid <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

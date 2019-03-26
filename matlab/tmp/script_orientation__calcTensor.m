@@ -1,5 +1,5 @@
 %% calcTensor
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % compute the average tensor for a vector of orientations
 % 
@@ -7,10 +7,10 @@
 %% View Code
 % 
 %% Syntax
-%   %returns the Voigt--, Reuss-- and Hill-- average [[tensor_index.html,tensor]] of T
+%   %returns the Voigt--, Reuss-- and Hill-- average <tensor_index.html" tensor> of T
 %   [TVoigt, TReuss, THill] = calcTensor(ori,T,'weights',w) -
 % 
-%   % returns the specified [[tensor_index.html,tensor]], i.e. 'Hill' in this case
+%   % returns the specified <tensor_index.html" tensor>, i.e. 'Hill' in this case
 %   THill = calcTensor(ori,T,'Hill')
 % 
 %   % uses geometric mean instead of arithmetric one
@@ -26,7 +26,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -93,7 +97,9 @@
 %             <tt>TVoigt, TReuss, THill</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

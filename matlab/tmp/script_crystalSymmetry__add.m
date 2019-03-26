@@ -1,5 +1,5 @@
 %% add
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % add additional symmetry operations to a crystal symmetry
 %

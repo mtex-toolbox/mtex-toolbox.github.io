@@ -1,5 +1,5 @@
 %% calcPDF
-% (method of [[FourierComponent_index.html,FourierComponent]])
+% (method of <FourierComponent_index.html FourierComponent>)
 %% 
 % calculate pole figure from Fourier coefficients
 %

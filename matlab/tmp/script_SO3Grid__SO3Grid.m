@@ -1,5 +1,5 @@
 %% SO3Grid
-% (method of [[SO3Grid_index.html,SO3Grid]])
+% (method of <SO3Grid_index.html SO3Grid>)
 %% 
 % represent orientations in a gridded structure to allow quick access
 % 
@@ -28,7 +28,9 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +38,9 @@
 %             <tt>SS</tt>
 %          </td>
 %          <td>
-%                <p>[[specimenSymmetry_index.html,specimenSymmetry]]</p>
+%                <p>
+%                   <a href="specimenSymmetry_index.html&#34;">specimenSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -61,7 +65,9 @@
 %             <tt>S3G</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]]</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

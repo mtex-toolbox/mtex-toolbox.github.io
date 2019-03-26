@@ -1,5 +1,5 @@
 %% byAxisAngle
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % define orientations by rotational axis and rotational angle
 % 
@@ -20,7 +20,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>rotational axis [[vector3d_index.html,vector3d]]</p>
+%                <p>rotational axis <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +29,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>rotational axis [[Miller_index.html,Miller]]</p>
+%                <p>rotational axis <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -44,7 +46,9 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -59,7 +63,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

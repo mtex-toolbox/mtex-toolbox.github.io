@@ -1,5 +1,5 @@
 %% cross
-% (method of [[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]])
+% (method of <S2AxisFieldHarmonic_index.html S2AxisFieldHarmonic>)
 %% 
 % syntax
 %  f = cross(sAF,v)
@@ -28,7 +28,9 @@
 %             <tt>sAF,sAF1,sAF2</tt>
 %          </td>
 %          <td>
-%                <p>[[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2AxisFieldHarmonic_index.html&#34;">S2AxisFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +38,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -44,7 +48,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -59,7 +65,9 @@
 %             <tt>f</tt>
 %          </td>
 %          <td>
-%                <p>[[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2AxisFieldHarmonic_index.html&#34;">S2AxisFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

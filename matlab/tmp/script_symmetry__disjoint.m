@@ -1,5 +1,5 @@
 %% disjoint
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % returns the disjoint of two symmetry groups
 %

@@ -1,5 +1,5 @@
 %% calcMIndex
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % Computes the M-index from a discrete number of orientations
 % (Skemer et al., 2005).
@@ -49,7 +49,7 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <pre>[[orientation_index.html,orientation]]</pre>
+%                <pre>&lt;orientation_index.html" orientation&gt;</pre>
 %          </td>
 %       </tr>
 %    </table>

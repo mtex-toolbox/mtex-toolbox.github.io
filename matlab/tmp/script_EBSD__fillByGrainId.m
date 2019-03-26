@@ -1,5 +1,5 @@
 %% fillByGrainId
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % extrapolate spatial EBSD data by nearest neighbour for tetragonal lattice
 % 
@@ -19,7 +19,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

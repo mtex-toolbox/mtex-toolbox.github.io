@@ -1,5 +1,5 @@
 %% cleanUp
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % testing:
 % cs = crystalSymmetry('222');

@@ -1,5 +1,5 @@
 %% exp
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % misorientation vector to misorientation
 % 
@@ -25,7 +25,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] misorientation vector in crystal coordinates</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> misorientation vector in crystal coordinates</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +34,9 @@
 %             <tt>ori_ref</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +51,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

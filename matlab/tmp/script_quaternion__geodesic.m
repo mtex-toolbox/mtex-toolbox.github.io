@@ -1,5 +1,5 @@
 %% geodesic
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % Calculats the rotation, which is described by the geodesic
 % gamma(t)_{rot1,rot2} from rot1 to rot2 at the location t,

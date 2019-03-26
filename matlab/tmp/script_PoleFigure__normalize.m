@@ -1,5 +1,5 @@
 %% normalize
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % normalization of a meassured pole figure with respect to an ODF
 % 
@@ -20,7 +20,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +30,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -43,7 +47,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

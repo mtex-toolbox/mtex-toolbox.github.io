@@ -7,7 +7,7 @@
 %% Description
 % *fibreODF* defines a fibre symmetric ODF with respect to
 % a crystal direction |h| and a specimen directions |r|. The
-% shape of the ODF is defined by a [[kernel_index.html,kernel]] function.
+% shape of the ODF is defined by a <kernel_index.html" kernel> function.
 % 
 %
 %% Syntax
@@ -15,7 +15,7 @@
 %   r = vector3d(x,y,z);
 %   odf = fibreODF(h,r) % default halfwith 10*degree
 %   odf = fibreODF(h,r,'halfwidth',15*degree) % specify halfwidth
-%   odf = fibreODF(h,r,kernel) % specify [[kernel_index.html,kernel]] shape
+%   odf = fibreODF(h,r,kernel) % specify <kernel_index.html" kernel> shape
 %   odf = fibreODF(h,r,SS)  % specify crystal and specimen symmetry
 % 
 
@@ -28,7 +28,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] / [[vector3d_index.html,vector3d]] crystal direction</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> / <a href="vector3d_index.html&#34;">vector3d</a> crystal direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +37,8 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] specimen direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> specimen direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -44,7 +46,8 @@
 %             <tt>CS, SS</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -60,7 +63,8 @@
 %             <tt>kernel</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]] function (default - de la Vallee Poussin)</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a> function (default - de la Vallee Poussin)</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -75,7 +79,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

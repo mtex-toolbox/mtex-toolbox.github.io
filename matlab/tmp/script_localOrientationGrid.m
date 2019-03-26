@@ -23,7 +23,9 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -31,7 +33,9 @@
 %             <tt>SS</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -51,7 +55,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

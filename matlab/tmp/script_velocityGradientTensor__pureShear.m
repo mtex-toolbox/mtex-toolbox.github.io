@@ -1,5 +1,5 @@
 %% pureShear
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % defines velocityGradientTensor representing pure shear
 % 
@@ -19,7 +19,8 @@
 %             <tt>exp</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] expansion direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> expansion direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +28,8 @@
 %             <tt>comp</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] compression direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> compression direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -50,7 +52,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>
+%                   <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

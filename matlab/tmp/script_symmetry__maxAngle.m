@@ -1,5 +1,5 @@
 %% maxAngle
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % get the maximum angle of the fundamental region
 % 
@@ -21,7 +21,9 @@
 %             <tt>cs1, cs2</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,7 @@
 %             <tt>axis</tt>
 %          </td>
 %          <td>
-%                <p>axis([[vector3d_index.html,vector3d]]) of rotation</p>
+%                <p>axis(<a href="vector3d_index.html&#34;">vector3d</a>) of rotation</p>
 %          </td>
 %       </tr>
 %    </table>

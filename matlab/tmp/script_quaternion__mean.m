@@ -1,5 +1,5 @@
 %% mean
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % mean of a list of quaternions, principle axes and moments of inertia
 % 
@@ -22,7 +22,8 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>list of [[quaternion_index.html,quaternion]]</p>
+%                <p>list of <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -61,7 +62,7 @@
 %             <tt>V</tt>
 %          </td>
 %          <td>
-%                <p>principle axes of inertia ([[quaternion_index.html,quaternion]])</p>
+%                <p>principle axes of inertia (<a href="quaternion_index.html&#34;">quaternion</a>)</p>
 %          </td>
 %       </tr>
 %    </table>

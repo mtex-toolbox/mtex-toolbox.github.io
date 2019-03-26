@@ -1,5 +1,5 @@
 %% smooth
-% (method of [[FourierComponent_index.html,FourierComponent]])
+% (method of <FourierComponent_index.html FourierComponent>)
 %% 
 % smooth ODF component
 % 
@@ -25,7 +25,9 @@
 %             <tt>component</tt>
 %          </td>
 %          <td>
-%                <p>[[ODFComponent_index.html,ODFComponent]]</p>
+%                <p>
+%                   <a href="ODFComponent_index.html&#34;">ODFComponent</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -48,7 +50,8 @@
 %             <tt>component</tt>
 %          </td>
 %          <td>
-%                <p>smoothed [[ODFComponent_index.html,ODFComponent]]</p>
+%                <p>smoothed <a href="ODFComponent_index.html&#34;">ODFComponent</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

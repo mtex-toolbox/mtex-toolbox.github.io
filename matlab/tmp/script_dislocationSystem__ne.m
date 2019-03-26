@@ -1,5 +1,5 @@
 %% ne
-% (method of [[dislocationSystem_index.html,dislocationSystem]])
+% (method of <dislocationSystem_index.html dislocationSystem>)
 %% 
 % ? sS1 ~= sS2
 %

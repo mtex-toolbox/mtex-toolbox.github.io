@@ -1,5 +1,5 @@
 %% findByOrientation
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % select ebsd data by orientation
 % 
@@ -25,7 +25,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>q0</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]] | [[rotation_index.html,rotation]] | [[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a> | <a href="rotation_index.html&#34;">rotation</a> | <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -56,7 +60,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

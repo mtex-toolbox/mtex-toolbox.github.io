@@ -1,3 +1,0 @@
-%% Tilt and Twist Boundaries
-%
-%%

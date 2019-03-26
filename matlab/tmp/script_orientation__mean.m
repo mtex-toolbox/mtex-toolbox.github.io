@@ -1,5 +1,5 @@
 %% mean
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % mean of a list of orientations, principle axes and moments of inertia
 % 
@@ -21,7 +21,8 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>list of [[orientation_index.html,orientation]]</p>
+%                <p>list of <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -56,7 +57,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>mean [[orientation_index.html,orientation]]</p>
+%                <p>mean <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -72,7 +74,7 @@
 %             <tt>V</tt>
 %          </td>
 %          <td>
-%                <p>principle axes of inertia ([[orientation_index.html,orientation]])</p>
+%                <p>principle axes of inertia (<a href="orientation_index.html&#34;">orientation</a>)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -80,7 +82,7 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>crystallographic equivalent [[quaternion_index.html,quaternion]] projected to fundamental region</p>
+%                <p>crystallographic equivalent <a href="quaternion_index.html&#34;">quaternion</a> projected to fundamental region</p>
 %          </td>
 %       </tr>
 %    </table>

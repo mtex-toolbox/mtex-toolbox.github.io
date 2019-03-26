@@ -1,5 +1,5 @@
 %% text
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % plot directions at grain centers
 % 
@@ -22,7 +22,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

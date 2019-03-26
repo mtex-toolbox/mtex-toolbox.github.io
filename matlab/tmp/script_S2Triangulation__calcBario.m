@@ -1,5 +1,5 @@
 %% calcBario
-% (method of [[S2Triangulation_index.html,S2Triangulation]])
+% (method of <S2Triangulation_index.html S2Triangulation>)
 %% 
 %
 %% View Code

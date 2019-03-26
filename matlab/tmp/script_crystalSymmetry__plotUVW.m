@@ -1,5 +1,5 @@
 %% plotUVW
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % plot symmetry
 % 

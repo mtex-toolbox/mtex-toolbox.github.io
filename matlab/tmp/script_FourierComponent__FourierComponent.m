@@ -1,5 +1,5 @@
 %% FourierComponent
-% (method of [[FourierComponent_index.html,FourierComponent]])
+% (method of <FourierComponent_index.html FourierComponent>)
 %% 
 % defines an ODF component by its Fourier coefficients
 %

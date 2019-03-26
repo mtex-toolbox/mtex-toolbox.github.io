@@ -1,5 +1,5 @@
 %% transpose
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % transpose array of rotations
 %

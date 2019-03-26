@@ -1,5 +1,5 @@
 %% eq
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % ? sS1 == sS2
 % 
@@ -25,7 +25,9 @@
 %             <tt>f1, f2</tt>
 %          </td>
 %          <td>
-%                <p>[[fibre_index.html,fibre]]</p>
+%                <p>
+%                   <a href="fibre_index.html&#34;">fibre</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

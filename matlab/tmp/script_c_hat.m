@@ -23,7 +23,7 @@
 %             <tt>o</tt>
 %          </td>
 %          <td>
-%                <pre>[[EBSD_index.html,EBSD]] / [[orientation_index.html,orientation]] / @grain</pre>
+%                <pre>&lt;EBSD_index.html" EBSD&gt; / &lt;orientation_index.html" orientation&gt; / @grain</pre>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% dot
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % inner product of quaternions g1 and g2
 % 
@@ -25,7 +25,9 @@
 %             <tt>q1, q2</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

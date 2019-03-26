@@ -1,5 +1,5 @@
 %% gridify
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % extend EBSD data to an grid
 % 
@@ -31,7 +31,7 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>an [[EBSD_index.html,EBSD]] data set with a non regular grid</p>
+%                <p>an <a href="EBSD_index.html&#34;">EBSD</a> data set with a non regular grid</p>
 %          </td>
 %       </tr>
 %    </table>

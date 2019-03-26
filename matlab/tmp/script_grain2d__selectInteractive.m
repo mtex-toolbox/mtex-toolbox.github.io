@@ -1,5 +1,5 @@
 %% selectInteractive
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % select interactively a rectangular region of an EBSD data set
 % 
@@ -20,7 +20,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -35,7 +37,9 @@
 %             <tt>ebsd_small</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

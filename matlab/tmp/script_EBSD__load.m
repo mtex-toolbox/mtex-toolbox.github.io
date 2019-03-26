@@ -1,5 +1,5 @@
 %% load
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % load ebsd data from file
 % 
@@ -46,7 +46,9 @@
 %             <tt>cs</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]] or cell array of [[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a> or cell array of <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -126,7 +128,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

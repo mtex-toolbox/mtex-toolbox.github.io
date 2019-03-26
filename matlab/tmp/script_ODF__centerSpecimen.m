@@ -1,5 +1,5 @@
 %% centerSpecimen
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % rotatates an odf with specimen symmetry into its symmetry axes
 % 
@@ -31,7 +31,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -39,7 +41,8 @@
 %             <tt>v0</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] initial gues for a symmetry axis (default xvector)</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> initial gues for a symmetry axis (default xvector)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -56,7 +59,7 @@
 %                      <tt>'SO3Grid'</tt>
 %                   </td>
 %                   <td>
-%                         <p>a [[SO3Grid_index.html,SO3Grid]] the [[ODF_index.html,ODF]] is evaluatete on</p>
+%                         <p>a <a href="SO3Grid_index.html&#34;">SO3Grid</a> the <a href="ODF_index.html&#34;">ODF</a> is evaluatete on</p>
 %                   </td>
 %                </tr>
 %                <tr>
@@ -106,7 +109,8 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>rotated [[ODF_index.html,ODF]]</p>
+%                <p>rotated <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -114,7 +118,8 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]] such that rotate(odf_out,r) = odf_in</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a> such that rotate(odf_out,r) = odf_in</p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -1,5 +1,5 @@
 %% eq
-% (method of [[S1Grid_index.html,S1Grid]])
+% (method of <S1Grid_index.html S1Grid>)
 %% 
 % implements G1 == G2
 %

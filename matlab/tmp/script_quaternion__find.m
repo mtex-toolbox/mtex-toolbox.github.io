@@ -1,5 +1,5 @@
 %% find
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % return indece and distance of all nodes within a eps neighborhood
 % 
@@ -24,7 +24,9 @@
 %             <tt>table</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,9 @@
 %             <tt>ref</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

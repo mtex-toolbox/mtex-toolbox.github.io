@@ -1,5 +1,5 @@
 %% LaueName
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % get Laue name
 %

@@ -1,5 +1,5 @@
 %% char
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % standard output
 %

@@ -1,4 +1,4 @@
-%% Dislocation Systems (The Class [[dislocationSystem_index.html,dislocationSystem]])
+%% Dislocation Systems
 % This section describes the class *dislocationSystem*.
 %
 %% Open in Editor

@@ -1,5 +1,5 @@
 %% ne
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % ? sS1 ~= sS2
 %

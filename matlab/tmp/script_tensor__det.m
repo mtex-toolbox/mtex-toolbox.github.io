@@ -1,5 +1,5 @@
 %% det
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % compute the determinants of rank 2 tensors
 % 
@@ -29,7 +29,8 @@
 %             <tt>d</tt>
 %          </td>
 %          <td>
-%                <p>rank 2 [[tensor_index.html,tensor]]</p>
+%                <p>rank 2 <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

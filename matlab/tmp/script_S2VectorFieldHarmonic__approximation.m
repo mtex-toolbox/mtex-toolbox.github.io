@@ -1,5 +1,5 @@
 %% approximation
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %
 %% View Code
 % 
@@ -17,7 +17,9 @@
 %             <tt>value</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -25,7 +27,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -60,7 +64,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

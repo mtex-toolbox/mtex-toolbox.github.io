@@ -1,5 +1,5 @@
 %% transpose
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % transpose list of slipSystem
 %

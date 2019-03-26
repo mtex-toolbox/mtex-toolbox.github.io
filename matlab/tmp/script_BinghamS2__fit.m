@@ -1,5 +1,5 @@
 %% fit
-% (method of [[BinghamS2_index.html,BinghamS2]])
+% (method of <BinghamS2_index.html BinghamS2>)
 %% 
 % function to fit Bingham parameters
 % 
@@ -54,7 +54,9 @@
 %             <tt>BS2</tt>
 %          </td>
 %          <td>
-%                <p>[[BinghamS2_index.html,BinghamS2]]</p>
+%                <p>
+%                   <a href="BinghamS2_index.html&#34;">BinghamS2</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

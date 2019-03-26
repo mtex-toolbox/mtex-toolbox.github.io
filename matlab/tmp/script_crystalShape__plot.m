@@ -1,5 +1,5 @@
 %% plot
-% (method of [[crystalShape_index.html,crystalShape]])
+% (method of <crystalShape_index.html crystalShape>)
 %% 
 % colorize grains
 % 
@@ -24,7 +24,9 @@
 %             <tt>cS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalShape_index.html,crystalShape]]</p>
+%                <p>
+%                   <a href="crystalShape_index.html&#34;">crystalShape</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -37,7 +37,8 @@
 %             <tt>tq</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] element of the tangential space</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> element of the tangential space</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -60,7 +61,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

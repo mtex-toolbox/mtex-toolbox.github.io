@@ -1,5 +1,5 @@
 %% quantile
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % quantile orientations of an ODF
 % 
@@ -19,7 +19,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

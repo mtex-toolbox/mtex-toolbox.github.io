@@ -1,5 +1,5 @@
 %% subsref
-% (method of [[S2Grid_index.html,S2Grid]])
+% (method of <S2Grid_index.html S2Grid>)
 %% 
 %
 %% View Code

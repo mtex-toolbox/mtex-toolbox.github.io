@@ -1,5 +1,5 @@
 %% getdata
-% (method of [[S2Grid_index.html,S2Grid]])
+% (method of <S2Grid_index.html S2Grid>)
 %% 
 % return index of all points in a epsilon neighborhood of a vector
 % 
@@ -25,7 +25,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]]</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

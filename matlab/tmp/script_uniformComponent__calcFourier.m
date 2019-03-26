@@ -1,5 +1,5 @@
 %% calcFourier
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % called by ODF/calcFourier
 %

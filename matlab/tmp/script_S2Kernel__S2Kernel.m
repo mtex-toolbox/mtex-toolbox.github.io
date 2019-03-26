@@ -1,5 +1,5 @@
 %% S2Kernel
-% (method of [[S2Kernel_index.html,S2Kernel]])
+% (method of <S2Kernel_index.html S2Kernel>)
 %% 
 %
 %% View Code

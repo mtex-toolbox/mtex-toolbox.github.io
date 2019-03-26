@@ -1,5 +1,5 @@
 %% adjustFigurePosition
-% (method of [[mtexFigure_index.html,mtexFigure]])
+% (method of <mtexFigure_index.html mtexFigure>)
 %% 
 % determine optimal size
 %

@@ -8,4 +8,4 @@ folder: documentation
 toc: false
 ---
 
-Some function references.
+Here you can find the function references for the MTEX toolbox.

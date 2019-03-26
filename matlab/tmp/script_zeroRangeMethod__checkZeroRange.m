@@ -1,5 +1,5 @@
 %% checkZeroRange
-% (method of [[zeroRangeMethod_index.html,zeroRangeMethod]])
+% (method of <zeroRangeMethod_index.html zeroRangeMethod>)
 %% 
 % check for zero regions in experiementl pole figures
 % 
@@ -21,7 +21,9 @@
 %             <tt>zrm</tt>
 %          </td>
 %          <td>
-%                <p>[[zeroRangeMethod_index.html,zeroRangeMethod]]</p>
+%                <p>
+%                   <a href="zeroRangeMethod_index.html&#34;">zeroRangeMethod</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +41,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

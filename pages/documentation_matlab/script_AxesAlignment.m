@@ -1,3 +1,0 @@
-%% Axes Alignment
-%
-%%

@@ -1,5 +1,5 @@
 %% inpolygon
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % checks which gb data are within given polygon
 % 
@@ -21,7 +21,9 @@
 %             <tt>gb</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

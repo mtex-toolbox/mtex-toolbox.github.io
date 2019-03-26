@@ -1,4 +1,4 @@
-%% Orientation Density Functions (The Class [[ODF_index.html,ODF]])
+%% Orientation Density Functions
 % This sections describes the class *ODF* and gives an overview how to work
 % with orientation density functions in MTEX.
 %

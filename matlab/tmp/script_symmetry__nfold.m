@@ -1,5 +1,5 @@
 %% nfold
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % maximal n-fold of symmetry axes
 %

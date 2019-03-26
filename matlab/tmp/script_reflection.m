@@ -32,7 +32,8 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>improper [[rotation_index.html,rotation]]</p>
+%                <p>improper <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% mean
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % expected value of an ODF
 % 
@@ -20,7 +20,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -35,7 +37,9 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -51,7 +55,7 @@
 %             <tt>V</tt>
 %          </td>
 %          <td>
-%                <p>principle axes of inertia ([[orientation_index.html,orientation]])</p>
+%                <p>principle axes of inertia (<a href="orientation_index.html&#34;">orientation</a>)</p>
 %          </td>
 %       </tr>
 %    </table>

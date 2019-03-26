@@ -1,5 +1,5 @@
 %% mtimes
-% (method of [[SO3Grid_index.html,SO3Grid]])
+% (method of <SO3Grid_index.html SO3Grid>)
 %% 
 % outer quaternion multiplication
 % 
@@ -26,7 +26,9 @@
 %             <tt>a</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]]</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,9 @@
 %             <tt>b</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +46,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -57,7 +63,9 @@
 %             <tt>out</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]] / [[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a> / <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

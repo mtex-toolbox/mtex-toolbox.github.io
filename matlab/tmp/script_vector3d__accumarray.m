@@ -1,5 +1,5 @@
 %% accumarray
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % accumarray for vector3d
 % 
@@ -36,7 +36,7 @@
 %    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
 %       <tr>
 %          <td width="100px">
-%             <tt>[[vector3d_index.html,vector3d]]</tt>
+%             <tt>&lt;vector3d_index.html" vector3d&gt;</tt>
 %          </td>
 %          <td/>
 %       </tr>

@@ -1,5 +1,5 @@
 %% bingham_test
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % bingham test for spherical/prolat/oblat case
 % 
@@ -25,7 +25,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

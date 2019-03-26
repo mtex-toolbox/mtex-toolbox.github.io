@@ -1,5 +1,5 @@
 %% S2AxisField
-% (method of [[S2AxisField_index.html,S2AxisField]])
+% (method of <S2AxisField_index.html S2AxisField>)
 %% 
 % a class represeneting a axis field on the sphere
 %

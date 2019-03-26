@@ -1,5 +1,5 @@
 %% line
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %
 %% View Code
 % 
@@ -18,7 +18,9 @@
 %             <tt>v, v1, v2</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

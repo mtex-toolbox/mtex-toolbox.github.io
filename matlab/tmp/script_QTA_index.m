@@ -12,7 +12,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="ODF_index.html">Orientation Density Functions (The Class @ODF)<td valign="top" width="75%">This sections describes the class *ODF* and gives an overview how to work with orientation density functions in MTEX.</td></a>
+%          <a href="ODF_index.html">Orientation Density Functions<td valign="top" width="75%">This sections describes the class *ODF* and gives an overview how to work with orientation density functions in MTEX.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -71,7 +71,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="kernel_index.html">ODF Shapes (The class @kernel) <td valign="top" width="75%">standard distributions on SO(3)</td></a>
+%          <a href="kernel_index.html">ODF Shapes<td valign="top" width="75%">standard distributions on SO(3)</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -106,7 +106,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="PoleFigure_index.html">Pole Figure Data (The Class @PoleFigure)<td valign="top" width="75%">This section describes the class *PoleFigure* and gives an overview of the functionality MTEX offers to analyze pole figure data.</td></a>
+%          <a href="PoleFigure_index.html">Pole Figure Data<td valign="top" width="75%">This section describes the class *PoleFigure* and gives an overview of the functionality MTEX offers to analyze pole figure data.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -156,7 +156,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="EBSD_index.html">Electron Backscatter Diffraction Data (The Class @EBSD)<td valign="top" width="75%">This section describes the class *EBSD* and gives an overview over the functionality that MTEX offers to analyze EBSD data.</td></a>
+%          <a href="EBSD_index.html">Electron Backscatter Diffraction Data<td valign="top" width="75%">This section describes the class *EBSD* and gives an overview over the functionality that MTEX offers to analyze EBSD data.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -211,7 +211,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="tensor_index.html">tensors (The Class @tensor)<td valign="top" width="75%"/></a>
+%          <a href="tensor_index.html">Tensors<td valign="top" width="75%"/></a>
 %       </td>
 %    </tr>
 %    <tr>

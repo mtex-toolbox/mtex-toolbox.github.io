@@ -1,5 +1,5 @@
 %% plot
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % plots odf or append to a previous plot using 'add2all'
 % 

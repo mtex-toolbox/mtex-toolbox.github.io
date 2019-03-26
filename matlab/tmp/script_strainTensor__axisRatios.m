@@ -1,5 +1,5 @@
 %% axisRatios
-% (method of [[strainTensor_index.html,strainTensor]])
+% (method of <strainTensor_index.html strainTensor>)
 %% 
 % logarithmic axis ratios of the finite strain ellipsoid
 %

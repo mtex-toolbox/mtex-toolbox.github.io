@@ -19,7 +19,9 @@
 %             <tt>cs1, cs2</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]], [[specimenSymmetry_index.html,specimenSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>, <a href="specimenSymmetry_index.html&#34;">specimenSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

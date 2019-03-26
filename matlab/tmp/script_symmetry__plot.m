@@ -1,5 +1,5 @@
 %% plot
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % visualize symmetry elements according to international table
 % 

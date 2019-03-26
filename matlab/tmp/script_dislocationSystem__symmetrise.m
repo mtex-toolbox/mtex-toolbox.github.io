@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[dislocationSystem_index.html,dislocationSystem]])
+% (method of <dislocationSystem_index.html dislocationSystem>)
 %% 
 % find all symmetrically equivalent slips systems
 %

@@ -1,5 +1,5 @@
 %% calcBario
-% (method of [[DelaunaySO3_index.html,DelaunaySO3]])
+% (method of <DelaunaySO3_index.html DelaunaySO3>)
 %% 
 % compute bariocentric coordinates for an orientation
 % 
@@ -30,7 +30,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

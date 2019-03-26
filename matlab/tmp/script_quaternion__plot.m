@@ -1,5 +1,5 @@
 %% plot
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 %
 %% View Code

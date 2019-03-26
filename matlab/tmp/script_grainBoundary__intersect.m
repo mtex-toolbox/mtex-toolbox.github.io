@@ -1,5 +1,5 @@
 %% intersect
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % length of a boundary segment
 % 
@@ -20,7 +20,8 @@
 %             <tt>gb</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]] 1, xy2 coordinates of the endpoints of the line</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a> 1, xy2 coordinates of the endpoints of the line</p>
 %          </td>
 %       </tr>
 %    </table>

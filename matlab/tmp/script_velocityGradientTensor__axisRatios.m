@@ -1,5 +1,5 @@
 %% axisRatios
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % logarithmic axis ratios of the finite strain ellipsoid
 %

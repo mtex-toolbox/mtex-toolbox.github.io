@@ -1,5 +1,5 @@
 %% display
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % standart output
 %

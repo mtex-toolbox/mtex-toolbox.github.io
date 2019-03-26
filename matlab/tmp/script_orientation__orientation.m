@@ -1,5 +1,5 @@
 %% orientation
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % orientation - class representing orientations
 % 

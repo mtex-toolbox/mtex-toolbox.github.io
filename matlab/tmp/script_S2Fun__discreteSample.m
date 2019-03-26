@@ -1,5 +1,5 @@
 %% discreteSample
-% (method of [[S2Fun_index.html,S2Fun]])
+% (method of <S2Fun_index.html S2Fun>)
 %% 
 % takes a random sample of n directions from S2Fun
 % 
@@ -25,7 +25,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -48,7 +50,7 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <pre>[[vector3d_index.html,vector3d]]</pre>
+%                <pre>&lt;vector3d_index.html" vector3d&gt;</pre>
 %          </td>
 %       </tr>
 %    </table>

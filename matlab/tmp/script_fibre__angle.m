@@ -1,5 +1,5 @@
 %% angle
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % angle fibre to orientation or fibre to fibre
 % 

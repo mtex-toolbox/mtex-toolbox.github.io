@@ -1,3 +1,0 @@
-%% Sigma Sections
-%
-%%

@@ -1,3 +1,0 @@
-%% ODF Characteristics
-%
-%%

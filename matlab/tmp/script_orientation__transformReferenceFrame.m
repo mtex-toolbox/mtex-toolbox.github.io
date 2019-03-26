@@ -1,5 +1,5 @@
 %% transformReferenceFrame
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % change reference frame of an orientation
 % 
@@ -42,7 +42,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -58,7 +60,9 @@
 %             <tt>cs, cs1, cs2</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

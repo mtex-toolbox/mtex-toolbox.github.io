@@ -1,5 +1,5 @@
 %% copy
-% (method of [[SO3Grid_index.html,SO3Grid]])
+% (method of <SO3Grid_index.html SO3Grid>)
 %% 
 % copy nodes by indece
 % 
@@ -25,7 +25,9 @@
 %             <tt>S3G</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]]</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

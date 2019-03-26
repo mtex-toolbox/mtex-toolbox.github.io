@@ -1,5 +1,5 @@
 %% hull
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % replace grains by its convex hull
 %

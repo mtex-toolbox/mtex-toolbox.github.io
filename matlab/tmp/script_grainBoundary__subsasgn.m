@@ -1,5 +1,5 @@
 %% subsasgn
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % overloads subsasgn
 %

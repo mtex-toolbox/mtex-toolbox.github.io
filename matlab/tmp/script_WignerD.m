@@ -20,7 +20,9 @@
 %             <tt>g</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]] / [[rotation_index.html,rotation]] / [[orientation_index.html,orientation]] / [[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a> / <a href="rotation_index.html&#34;">rotation</a> / <a href="orientation_index.html&#34;">orientation</a> / <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

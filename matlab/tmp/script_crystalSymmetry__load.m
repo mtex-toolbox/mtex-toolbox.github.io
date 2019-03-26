@@ -1,5 +1,5 @@
 %% load
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % import crystal symmetry from phl or cif files
 % 

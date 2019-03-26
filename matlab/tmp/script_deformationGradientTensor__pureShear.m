@@ -1,5 +1,5 @@
 %% pureShear
-% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+% (method of <deformationGradientTensor_index.html deformationGradientTensor>)
 %% 
 % deformationGradientTensor representing pure shear
 % 
@@ -20,7 +20,8 @@
 %             <tt>exp</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] expansion direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> expansion direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +29,8 @@
 %             <tt>compr</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] compression direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> compression direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -51,7 +53,9 @@
 %             <tt>F</tt>
 %          </td>
 %          <td>
-%                <p>[[deformationGradientTensor_index.html,deformationGradientTensor]]</p>
+%                <p>
+%                   <a href="deformationGradientTensor_index.html&#34;">deformationGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

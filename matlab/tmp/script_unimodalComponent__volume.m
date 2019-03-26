@@ -1,5 +1,5 @@
 %% volume
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % for large angles or specimen symmetry take the quadrature based algorithm
 %

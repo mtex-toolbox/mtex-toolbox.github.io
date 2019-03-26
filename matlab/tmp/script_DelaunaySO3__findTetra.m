@@ -1,5 +1,5 @@
 %% findTetra
-% (method of [[DelaunaySO3_index.html,DelaunaySO3]])
+% (method of <DelaunaySO3_index.html DelaunaySO3>)
 %% 
 % find tetrahegon
 % 
@@ -25,7 +25,9 @@
 %             <tt>DSO3</tt>
 %          </td>
 %          <td>
-%                <p>[[DelaunaySO3_index.html,DelaunaySO3]]</p>
+%                <p>
+%                   <a href="DelaunaySO3_index.html&#34;">DelaunaySO3</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

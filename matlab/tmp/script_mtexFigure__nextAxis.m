@@ -1,5 +1,5 @@
 %% nextAxis
-% (method of [[mtexFigure_index.html,mtexFigure]])
+% (method of <mtexFigure_index.html mtexFigure>)
 %% 
 % go to next plot
 %

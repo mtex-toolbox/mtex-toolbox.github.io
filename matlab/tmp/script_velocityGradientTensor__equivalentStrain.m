@@ -1,5 +1,5 @@
 %% equivalentStrain
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % equivalent strain of a strain tensor
 %

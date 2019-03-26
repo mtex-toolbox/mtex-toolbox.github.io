@@ -1,5 +1,5 @@
 %% init
-% (method of [[zeroRangeMethod_index.html,zeroRangeMethod]])
+% (method of <zeroRangeMethod_index.html zeroRangeMethod>)
 %% 
 %
 %% View Code

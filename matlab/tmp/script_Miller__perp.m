@@ -1,5 +1,5 @@
 %% perp
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % best normal to a list of directions
 % 
@@ -19,7 +19,8 @@
 %             <tt>d</tt>
 %          </td>
 %          <td>
-%                <p>list of [[Miller_index.html,Miller]]</p>
+%                <p>list of <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +35,9 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

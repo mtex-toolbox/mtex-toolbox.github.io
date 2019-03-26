@@ -1,5 +1,5 @@
 %% project2FundamentalRegion
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % projects vectors to the fundamental sector of the inverse pole figure
 % 
@@ -25,7 +25,9 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -61,7 +63,9 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

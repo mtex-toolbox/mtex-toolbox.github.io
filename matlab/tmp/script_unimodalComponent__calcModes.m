@@ -1,5 +1,5 @@
 %% calcModes
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % return the modes of the component
 %

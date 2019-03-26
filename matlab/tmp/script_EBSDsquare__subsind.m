@@ -1,5 +1,5 @@
 %% subsind
-% (method of [[EBSDsquare_index.html,EBSDsquare]])
+% (method of <EBSDsquare_index.html EBSDsquare>)
 %% 
 % subindexing of EBSD data
 % 

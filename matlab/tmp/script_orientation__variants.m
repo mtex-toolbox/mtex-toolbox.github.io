@@ -1,5 +1,5 @@
 %% variants
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % variants of an orientation relationship
 % 
@@ -20,7 +20,7 @@
 %             <tt>mori</tt>
 %          </td>
 %          <td>
-%                <p>child to parent [[orientation_index.html,orientation]] relationship</p>
+%                <p>child to parent <a href="orientation_index.html&#34;">orientation</a> relationship</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +28,8 @@
 %             <tt>ori_parent</tt>
 %          </td>
 %          <td>
-%                <p>parent [[orientation_index.html,orientation]]</p>
+%                <p>parent <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -43,7 +44,8 @@
 %             <tt>ori_variants</tt>
 %          </td>
 %          <td>
-%                <p>all possible child [[orientation_index.html,orientation]]</p>
+%                <p>all possible child <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

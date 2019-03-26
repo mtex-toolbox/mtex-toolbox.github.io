@@ -1,5 +1,5 @@
 %% dot
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % compute rot1 . rot2
 %

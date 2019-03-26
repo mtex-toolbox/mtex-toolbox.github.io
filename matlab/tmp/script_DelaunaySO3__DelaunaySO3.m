@@ -1,5 +1,5 @@
 %% DelaunaySO3
-% (method of [[DelaunaySO3_index.html,DelaunaySO3]])
+% (method of <DelaunaySO3_index.html DelaunaySO3>)
 %
 %% View Code
 % 

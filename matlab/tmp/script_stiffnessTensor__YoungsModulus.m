@@ -1,5 +1,5 @@
 %% YoungsModulus
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % Young's modulus for an elasticity tensor
 % 
@@ -25,7 +25,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elastic stiffness [[tensor_index.html,tensor]]</p>
+%                <p>elastic stiffness <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +34,8 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>list of [[vector3d_index.html,vector3d]]</p>
+%                <p>list of <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

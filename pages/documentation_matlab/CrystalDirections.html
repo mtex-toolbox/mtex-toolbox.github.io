@@ -1,6 +1,6 @@
 ---
 title: Miller Indices
-last_updated: 20-Mar-2019
+last_updated: 26-Mar-2019
 sidebar: documentation_sidebar
 permalink: CrystalDirections.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalDirections into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Contents</h2><h2 id="3">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry_index.html">crystalSymmetry</a></p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'triclinic'</span>,[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,<span class="keyword">...</span>
+      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalDirections into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry_index.html">crystalSymmetry</a></p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'triclinic'</span>,[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,<span class="keyword">...</span>
   <span class="string">'X||a*'</span>,<span class="string">'Z||c'</span>,<span class="string">'mineral'</span>,<span class="string">'Talc'</span>);
 </pre><p>The variable <tt>cs</tt> containes the geometry of the crystal reference frame and, in particular, the alignment of the crystallographic a,b, and, c axis.</p><pre class="codeinput">a = cs.aAxis
 b = cs.bAxis
@@ -50,7 +50,7 @@ m = Miller
   w 1
 </pre><p>for values <tt>u = 1</tt>, <tt>v = 0</tt>, and, <tt>w = 1</tt>. To plot a crystal direction as a <a href="phericalProjection_index.html">spherical projections</a> do</p><pre class="codeinput">plot(m,<span class="string">'upper'</span>,<span class="string">'labeled'</span>,<span class="string">'grid'</span>)
 </pre>
-  {% include inline_image.html file="script_CrystalDirections_01.png" %}
+  {% include inline_image.html file="CrystalDirections_01.png" %}
 <h2 id="7">Crystal Lattice Planes</h2><p>A crystal lattice plane (hkl) is commonly described by its normal vector <tt>n = h * a* + k * b* + l * c*</tt> where a*, b*, c* describes the reciprocal crystal coordinate system. In MTEX a lattice plane is defined by</p><pre class="codeinput">m = Miller(1,0,1,cs,<span class="string">'hkl'</span>)
 </pre><pre class="codeoutput"> 
 m = Miller  
@@ -67,12 +67,12 @@ plot(m,<span class="string">'upper'</span>,<span class="string">'labeled'</span>
 plot(m,<span class="string">'plane'</span>,<span class="string">'linecolor'</span>,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
 hold <span class="string">off</span>
 </pre>
-  {% include inline_image.html file="script_CrystalDirections_02.png" %}
+  {% include inline_image.html file="CrystalDirections_02.png" %}
 <p>Note that for non Euclidean crystal frames uvw and hkl notations usually lead to different directions.</p><pre class="codeinput"><span class="comment">%s</span>
 </pre><h2 id="10">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices [UVTW] and (HKIL) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is reduntant as the first three Miller indeces always sum up to zero, i.e., 
-  {% include inline_image.html file="script_CrystalDirections_eq08789495435140204831.png" %}
+  {% include inline_image.html file="CrystalDirections_eq08789495435140204831.png" %}
  and 
-  {% include inline_image.html file="script_CrystalDirections_eq05019324578161084208.png" %}
+  {% include inline_image.html file="CrystalDirections_eq05019324578161084208.png" %}
 . The syntax is</p><pre class="codeinput"><span class="comment">% import trigonal Quartz lattice structure</span>
 cs = loadCIF(<span class="string">'quartz'</span>)
 
@@ -111,7 +111,7 @@ n = Miller
   i -2
   l  3
 </pre>
-  {% include inline_image.html file="script_CrystalDirections_03.png" %}
+  {% include inline_image.html file="CrystalDirections_03.png" %}
 <h2 id="11">Symmetrically Equivalent Crystal Directions</h2><p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indeces (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html">symmetrise</a></p><pre class="codeinput">symmetrise(m)
 </pre><pre class="codeoutput"> 
 ans = Miller  
@@ -132,7 +132,7 @@ ans = Miller
   W  1 -1  1 -1  1 -1 -1  1 -1  1 -1  1
 </pre><p>Using the options <b>symmetrised</b> and <b>labeled</b> all symmetrically equivalent crystal directions are plotted together with their Miller indices.</p><pre class="codeinput">plot(m,<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'grid'</span>,<span class="string">'backgroundcolor'</span>,<span class="string">'w'</span>)
 </pre>
-  {% include inline_image.html file="script_CrystalDirections_04.png" %}
+  {% include inline_image.html file="CrystalDirections_04.png" %}
 <p>The command [[vector3d.eq.html,eq or ==]] can be used to check whether two crystal directions are symmetrically equivalent. Compare</p><pre class="codeinput">Miller(1,1,-2,0,cs) == Miller(-1,-1,2,0,cs)
 </pre><pre class="codeoutput">ans =
   logical
@@ -178,5 +178,5 @@ ans = vector3d
 </pre><p>By applying a <a href="symmetry_index.html">crystal symmetry</a> one obtains the coordinates with respect to the specimen coordinate system of all crystallographically equivalent specimen directions.</p><pre class="codeinput">p = o * symmetrise(m);
 plot(p,<span class="string">'grid'</span>)
 </pre>
-  {% include inline_image.html file="script_CrystalDirections_05.png" %}
+  {% include inline_image.html file="CrystalDirections_05.png" %}
 </div></body></html>

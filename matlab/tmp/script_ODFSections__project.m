@@ -1,5 +1,5 @@
 %% project
-% (method of [[ODFSections_index.html,ODFSections]])
+% (method of <ODFSections_index.html ODFSections>)
 %% 
 % project orientation to ODF sections used by plotSection
 % 
@@ -25,7 +25,9 @@
 %             <tt>o</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]]</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -73,7 +75,8 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>vector of [[S2Grid_index.html,S2Grid]]</p>
+%                <p>vector of <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

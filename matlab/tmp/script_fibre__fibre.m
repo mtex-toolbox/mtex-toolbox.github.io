@@ -1,5 +1,5 @@
 %% fibre
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % fibre is a class representing a fibre in orientation space. Examples
 % are alpha, beta or gamma fibres. In general a fibre is defined by a

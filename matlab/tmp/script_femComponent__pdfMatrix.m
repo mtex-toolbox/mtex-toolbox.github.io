@@ -1,5 +1,5 @@
 %% pdfMatrix
-% (method of [[femComponent_index.html,femComponent]])
+% (method of <femComponent_index.html femComponent>)
 %% 
 % called by pdf
 %

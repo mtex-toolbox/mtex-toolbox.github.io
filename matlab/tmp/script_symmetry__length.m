@@ -1,5 +1,5 @@
 %% length
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % number of symmetry elements
 %

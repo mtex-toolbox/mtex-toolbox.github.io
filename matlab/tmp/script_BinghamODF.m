@@ -44,7 +44,8 @@
 %             <tt>CS, SS</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -59,7 +60,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

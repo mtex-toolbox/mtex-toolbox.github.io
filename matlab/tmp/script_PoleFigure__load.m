@@ -1,5 +1,5 @@
 %% load
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % import pole figure data
 % 
@@ -10,7 +10,7 @@
 % 
 % PoleFigure.load is a high level method for importing pole figure data
 % from external files. It autodetects the format of the file. As parameters
-% the method requires the crystal and specimen [[symmetry_index.html,symmetry]]. Additionally it
+% the method requires the crystal and specimen <symmetry_index.html" symmetry>. Additionally it
 % is sometimes required to pass a list of crystal directions and a list of
 % structure coefficients. See <ImportPoleFigureData.html interfaces> for an
 % example how to import superposed pole figures. In the case of generic
@@ -48,7 +48,8 @@
 %             <tt>h1,...,hN</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] crystal directions</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> crystal directions</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -64,7 +65,8 @@
 %             <tt>cs, ss</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -99,7 +101,8 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>vector of [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>vector of <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

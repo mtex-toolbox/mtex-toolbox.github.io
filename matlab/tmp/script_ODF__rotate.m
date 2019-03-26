@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % rotate ODF
 % 
@@ -25,7 +25,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +52,9 @@
 %             <tt>rotated odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

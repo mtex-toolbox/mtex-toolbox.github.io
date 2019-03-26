@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % rotate grainBoundaries
 % 
@@ -27,7 +27,9 @@
 %             <tt>gB</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -43,7 +45,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -106,7 +110,9 @@
 %             <tt>gB</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

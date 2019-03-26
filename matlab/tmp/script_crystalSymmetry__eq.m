@@ -1,5 +1,5 @@
 %% eq
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % check S1 == S2
 %

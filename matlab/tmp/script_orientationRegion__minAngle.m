@@ -1,5 +1,5 @@
 %% minAngle
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % get the minimum angle of the boundary of the fundamental region
 % 
@@ -19,7 +19,9 @@
 %             <tt>oR</tt>
 %          </td>
 %          <td>
-%                <p>[[orientationRegion_index.html,orientationRegion]]</p>
+%                <p>
+%                   <a href="orientationRegion_index.html&#34;">orientationRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

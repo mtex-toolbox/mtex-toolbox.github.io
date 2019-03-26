@@ -1,5 +1,5 @@
 %% export_VPSC
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % export an ODF to the VPSC format
 % 

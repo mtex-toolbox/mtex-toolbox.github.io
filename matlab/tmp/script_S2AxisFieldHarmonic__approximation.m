@@ -1,5 +1,5 @@
 %% approximation
-% (method of [[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]])
+% (method of <S2AxisFieldHarmonic_index.html S2AxisFieldHarmonic>)
 %
 %% View Code
 % 
@@ -17,7 +17,9 @@
 %             <tt>value</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -25,7 +27,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] (antipodal)</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> (antipodal)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -60,7 +63,9 @@
 %             <tt>sAF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2AxisFieldHarmonic_index.html&#34;">S2AxisFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

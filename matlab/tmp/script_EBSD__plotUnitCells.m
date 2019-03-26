@@ -1,5 +1,5 @@
 %% plotUnitCells
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % low level plotting routine for EBSD maps
 % 

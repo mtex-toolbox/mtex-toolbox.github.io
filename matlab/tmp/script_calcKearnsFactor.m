@@ -17,7 +17,8 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>orientation distribution function, [[ODF_index.html,ODF]]</p>
+%                <p>orientation distribution function, <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -25,7 +26,7 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>crystal direction, [[Miller_index.html,Miller]] (default is [0001])</p>
+%                <p>crystal direction, <a href="Miller_index.html&#34;">Miller</a> (default is [0001])</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +34,8 @@
 %             <tt>pdf</tt>
 %          </td>
 %          <td>
-%                <p>pole density function, [[S2Fun_index.html,S2Fun]]</p>
+%                <p>pole density function, <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +43,7 @@
 %             <tt>N</tt>
 %          </td>
 %          <td>
-%                <p>normal direction [[vector3d_index.html,vector3d]], (default is Z)</p>
+%                <p>normal direction <a href="vector3d_index.html&#34;">vector3d</a>, (default is Z)</p>
 %          </td>
 %       </tr>
 %    </table>

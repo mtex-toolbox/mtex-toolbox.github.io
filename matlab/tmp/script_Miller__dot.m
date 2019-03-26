@@ -1,5 +1,5 @@
 %% dot
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % inner product between two Miller indece
 % 
@@ -20,7 +20,9 @@
 %             <tt>m1,m2</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

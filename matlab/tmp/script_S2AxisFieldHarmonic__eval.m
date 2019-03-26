@@ -1,5 +1,5 @@
 %% eval
-% (method of [[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]])
+% (method of <S2AxisFieldHarmonic_index.html S2AxisFieldHarmonic>)
 %% 
 % syntax
 %  f = eval(sF,v)
@@ -26,7 +26,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] interpolation nodes</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> interpolation nodes</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -41,7 +42,9 @@
 %             <tt>f</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

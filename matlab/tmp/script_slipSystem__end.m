@@ -1,5 +1,5 @@
 %% end
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % overloaded end function
 %

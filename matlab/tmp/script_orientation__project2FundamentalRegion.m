@@ -1,5 +1,5 @@
 %% project2FundamentalRegion
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % projects orientation to a fundamental region
 % 
@@ -19,7 +19,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,8 @@
 %             <tt>ori_ref</tt>
 %          </td>
 %          <td>
-%                <p>reference [[rotation_index.html,rotation]]</p>
+%                <p>reference <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +45,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

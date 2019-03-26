@@ -1,5 +1,5 @@
 %% uminus
-% (method of [[S2FunTri_index.html,S2FunTri]])
+% (method of <S2FunTri_index.html S2FunTri>)
 %% 
 %
 %% View Code

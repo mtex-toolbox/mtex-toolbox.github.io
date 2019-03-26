@@ -1,5 +1,5 @@
 %% rotate_outer
-% (method of [[S2FunHandle_index.html,S2FunHandle]])
+% (method of <S2FunHandle_index.html S2FunHandle>)
 %% 
 % rotate a function by a rotation
 % 
@@ -19,7 +19,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHandle_index.html,S2FunHandle]]</p>
+%                <p>
+%                   <a href="S2FunHandle_index.html&#34;">S2FunHandle</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +46,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHandle_index.html,S2FunHandle]]</p>
+%                <p>
+%                   <a href="S2FunHandle_index.html&#34;">S2FunHandle</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

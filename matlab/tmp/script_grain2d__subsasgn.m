@@ -1,5 +1,5 @@
 %% subsasgn
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % overloads subsasgn
 %

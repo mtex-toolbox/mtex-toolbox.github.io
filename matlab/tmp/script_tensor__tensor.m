@@ -1,5 +1,5 @@
 %% tensor
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % constructor
 % 
@@ -36,7 +36,8 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>crystal [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

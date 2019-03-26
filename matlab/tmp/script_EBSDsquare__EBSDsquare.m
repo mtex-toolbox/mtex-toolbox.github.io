@@ -1,5 +1,5 @@
 %% EBSDsquare
-% (method of [[EBSDsquare_index.html,EBSDsquare]])
+% (method of <EBSDsquare_index.html EBSDsquare>)
 %% 
 % EBSD data on a rectangular grid. In contrast to arbitrary EBSD data the
 % values are stored in a matrix.

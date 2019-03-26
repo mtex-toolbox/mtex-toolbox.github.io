@@ -1,5 +1,5 @@
 %% directionalMagnitude
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % magnitude of a tensor in direction v
 % 
@@ -29,7 +29,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +39,7 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>direction ([[vector3d_index.html,vector3d]] / [[Miller_index.html,Miller]])</p>
+%                <p>direction (<a href="vector3d_index.html&#34;">vector3d</a> / <a href="Miller_index.html&#34;">Miller</a>)</p>
 %                <p>tut</p>
 %          </td>
 %       </tr>

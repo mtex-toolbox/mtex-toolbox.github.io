@@ -1,5 +1,5 @@
 %% matrix
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % quaternion to direction cosine matrix conversion
 % converts direction cosine matrix to quaternion
@@ -20,7 +20,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

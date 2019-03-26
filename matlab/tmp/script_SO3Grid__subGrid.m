@@ -1,5 +1,5 @@
 %% subGrid
-% (method of [[SO3Grid_index.html,SO3Grid]])
+% (method of <SO3Grid_index.html SO3Grid>)
 %% 
 % sub-SO3Grid as epsilon neigborhood of a node
 % 
@@ -19,7 +19,9 @@
 %             <tt>G</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]]</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>midpoint</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

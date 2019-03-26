@@ -1,5 +1,5 @@
 %% quiver
-% (method of [[S2AxisField_index.html,S2AxisField]])
+% (method of <S2AxisField_index.html S2AxisField>)
 %% 
 % quiver spherical axis field
 % 

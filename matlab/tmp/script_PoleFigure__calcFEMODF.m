@@ -1,5 +1,5 @@
 %% calcFEMODF
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % PDF to ODF inversion
 % 
@@ -35,7 +35,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

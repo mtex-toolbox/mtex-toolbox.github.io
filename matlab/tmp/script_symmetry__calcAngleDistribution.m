@@ -1,5 +1,5 @@
 %% calcAngleDistribution
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % compute the angle distribution of a uniform ODF for a crystal symmetry
 % 
@@ -21,7 +21,7 @@
 %             <tt>cs</tt>
 %          </td>
 %          <td>
-%                <pre>[[crystalSymmetry_index.html,crystalSymmetry]]</pre>
+%                <pre>&lt;crystalSymmetry_index.html" crystalSymmetry&gt;</pre>
 %          </td>
 %       </tr>
 %       <tr>

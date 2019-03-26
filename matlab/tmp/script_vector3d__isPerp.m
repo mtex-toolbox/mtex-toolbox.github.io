@@ -1,5 +1,5 @@
 %% isPerp
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % check whether v1 and v2 are orthogonal
 %

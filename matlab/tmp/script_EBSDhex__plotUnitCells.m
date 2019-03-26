@@ -1,5 +1,5 @@
 %% plotUnitCells
-% (method of [[EBSDhex_index.html,EBSDhex]])
+% (method of <EBSDhex_index.html EBSDhex>)
 %% 
 % approximate plot of hexagonal ebsd data
 % 

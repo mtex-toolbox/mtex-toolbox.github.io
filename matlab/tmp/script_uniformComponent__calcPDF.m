@@ -1,5 +1,5 @@
 %% calcPDF
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % calculate pdf
 %

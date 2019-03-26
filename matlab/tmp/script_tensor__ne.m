@@ -1,5 +1,5 @@
 %% ne
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % checks whether two tensors are not equal
 %

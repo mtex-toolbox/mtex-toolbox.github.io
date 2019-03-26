@@ -1,5 +1,5 @@
 %% rotationRate
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % rotation rate
 %

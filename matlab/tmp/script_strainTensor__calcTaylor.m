@@ -1,5 +1,5 @@
 %% calcTaylor
-% (method of [[strainTensor_index.html,strainTensor]])
+% (method of <strainTensor_index.html strainTensor>)
 %% 
 % compute Taylor factor and strain dependent orientation gradient
 % 
@@ -19,7 +19,8 @@
 %             <tt>eps</tt>
 %          </td>
 %          <td>
-%                <p>[[strainTensor_index.html,strainTensor]] list in crystal coordinates</p>
+%                <p>
+%                   <a href="strainTensor_index.html&#34;">strainTensor</a> list in crystal coordinates</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +28,8 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]] list in crystal coordinates</p>
+%                <p>
+%                   <a href="slipSystem_index.html&#34;">slipSystem</a> list in crystal coordinates</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -58,7 +60,9 @@
 %             <tt>W</tt>
 %          </td>
 %          <td>
-%                <p>[[spinTensor_index.html,spinTensor]]</p>
+%                <p>
+%                   <a href="spinTensor_index.html&#34;">spinTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,6 +1,6 @@
 ---
 title: Texture evolution in rolled magnesium during uniaxial tension
-last_updated: 20-Mar-2019
+last_updated: 26-Mar-2019
 sidebar: documentation_sidebar
 permalink: TaylorHex.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TaylorHex into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p><pre class="codeinput">cs = crystalSymmetry.load(<span class="string">'Mg-Magnesium.cif'</span>)
+      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TaylorHex into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p><pre class="codeinput">cs = crystalSymmetry.load(<span class="string">'Mg-Magnesium.cif'</span>)
 </pre><pre class="codeoutput"> 
 cs = crystalSymmetry  
  
@@ -32,7 +32,7 @@ pfAnnotations = @(varargin) text([-vector3d.X,vector3d.Y],{<span class="string">
   <span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>,<span class="string">'tag'</span>,<span class="string">'axesLabels'</span>,varargin{:});
 setMTEXpref(<span class="string">'pfAnnotations'</span>,pfAnnotations);
 </pre>
-  {% include inline_image.html file="script_TaylorHex_01.png" %}
+  {% include inline_image.html file="TaylorHex_01.png" %}
 <h2 id="4">setting up the slip systems</h2><p>The critical resolved shear stresses (CRSS) needed to activate certain slip systems is temperature AND material dependant. As it is not trivial to measure/define CRSS, there are many different values in literature.</p><p>In practise, at room temperature basal slip dominates and commonly simple tension twins are activated as well (they have very low CRSS). During tension stress perpendicular to the c-axis tension twinning cannot occur. Thats why it is sensible to only define compression twins (which in Mg have a very high CRSS)</p><pre class="codeinput"><span class="comment">% second argument is CRSS normalized to basal slip</span>
 sScold = [slipSystem.basal(cs,1),<span class="keyword">...</span>
   slipSystem.prismatic2A(cs,66),<span class="keyword">...</span>
@@ -85,7 +85,7 @@ nextAxis <span class="comment">%create a new axis on the existing figure and put
 plotPDF(oriWarm,h,<span class="string">'antipodal'</span>,<span class="string">'contourf'</span>,<span class="string">'grid'</span>,<span class="string">'grid_res'</span>,30*degree)
 mtexColorbar;
 </pre>
-  {% include inline_image.html file="script_TaylorHex_02.png" %}
+  {% include inline_image.html file="TaylorHex_02.png" %}
 <h2 id="10">statistics on activated slip systems</h2><p>By adding up the coefficients of the taylor calculation and grouping them according to their slip system type, a bar chart can be plotted</p><pre class="codeinput"><span class="comment">% ensure slipId has the same size as |bCold|</span>
 slipId = repmat(slipId.',length(ori),1);
 
@@ -100,5 +100,5 @@ legend({<span class="string">'Basal slip'</span>,<span class="string">'Prismatic
     <span class="string">'Location'</span>,<span class="string">'eastoutside'</span>)
 legend(<span class="string">'boxoff'</span>)
 </pre>
-  {% include inline_image.html file="script_TaylorHex_03.png" %}
+  {% include inline_image.html file="TaylorHex_03.png" %}
 </div></body></html>

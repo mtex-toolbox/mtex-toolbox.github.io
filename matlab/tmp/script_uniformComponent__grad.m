@@ -1,5 +1,5 @@
 %% grad
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % gradient of the ODF at orientation g
 % 

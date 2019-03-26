@@ -1,5 +1,5 @@
 %% subsref
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % implements gB(1:10)
 % 
@@ -21,7 +21,9 @@
 %             <tt>gB</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

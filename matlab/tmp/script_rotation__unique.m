@@ -1,5 +1,5 @@
 %% unique
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % disjoint list of rotations
 % 
@@ -21,7 +21,9 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -36,7 +38,9 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

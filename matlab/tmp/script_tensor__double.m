@@ -1,5 +1,5 @@
 %% double
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % convert tensor values to matrix
 %

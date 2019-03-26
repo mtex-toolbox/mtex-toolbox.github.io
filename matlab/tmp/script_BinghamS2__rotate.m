@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[BinghamS2_index.html,BinghamS2]])
+% (method of <BinghamS2_index.html BinghamS2>)
 %% 
 % rotate a BinghamS2 function
 % 
@@ -19,7 +19,9 @@
 %             <tt>BS2</tt>
 %          </td>
 %          <td>
-%                <p>[[BinghamS2_index.html,BinghamS2]]</p>
+%                <p>
+%                   <a href="BinghamS2_index.html&#34;">BinghamS2</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +46,9 @@
 %             <tt>BS2</tt>
 %          </td>
 %          <td>
-%                <p>[[BinghamS2_index.html,BinghamS2]]</p>
+%                <p>
+%                   <a href="BinghamS2_index.html&#34;">BinghamS2</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% smooth
-% (method of [[EBSDhex_index.html,EBSDhex]])
+% (method of <EBSDhex_index.html EBSDhex>)
 %% 
 % smooth spatial EBSD data
 % 
@@ -29,7 +29,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

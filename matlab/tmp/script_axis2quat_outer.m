@@ -23,7 +23,7 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>rotational axis ([[vector3d_index.html,vector3d]])</p>
+%                <p>rotational axis (<a href="vector3d_index.html&#34;">vector3d</a>)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -46,7 +46,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

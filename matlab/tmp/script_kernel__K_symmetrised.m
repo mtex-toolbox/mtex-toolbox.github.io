@@ -1,5 +1,5 @@
 %% K_symmetrised
-% (method of [[kernel_index.html,kernel]])
+% (method of <kernel_index.html kernel>)
 %% 
 % evaluate kernel modulo symmetries
 % 
@@ -25,7 +25,9 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]]</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,8 @@
 %             <tt>q1, q2</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]](s)</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>(s)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +44,8 @@
 %             <tt>CS, SS</tt>
 %          </td>
 %          <td>
-%                <p>crystal , specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal , specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

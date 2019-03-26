@@ -1,5 +1,5 @@
 %% byMiller
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % define orientations by Miller Bravais indeces
 % 
@@ -30,7 +30,9 @@
 %             <tt>hkl, uvw</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -54,7 +56,9 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -69,7 +73,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

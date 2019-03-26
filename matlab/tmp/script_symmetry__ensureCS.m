@@ -1,5 +1,5 @@
 %% ensureCS
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % ensures that an obj has the right crystal symmetry
 %

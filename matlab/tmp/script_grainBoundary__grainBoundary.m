@@ -1,5 +1,5 @@
 %% grainBoundary
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % grainBoundary list of grain boundaries in 2-D
 % 

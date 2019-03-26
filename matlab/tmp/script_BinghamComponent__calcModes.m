@@ -1,5 +1,5 @@
 %% calcModes
-% (method of [[BinghamComponent_index.html,BinghamComponent]])
+% (method of <BinghamComponent_index.html BinghamComponent>)
 %% 
 % return the modes of the component
 %

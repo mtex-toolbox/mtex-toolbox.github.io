@@ -1,5 +1,5 @@
 %% expm
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % deformation gradient tensor from velocity gradient tensor
 % 
@@ -20,7 +20,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>
+%                   <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

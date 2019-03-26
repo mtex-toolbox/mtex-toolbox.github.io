@@ -1,5 +1,5 @@
 %% discreteSample
-% (method of [[femComponent_index.html,femComponent]])
+% (method of <femComponent_index.html femComponent>)
 %% 
 % draw a random sample
 % 

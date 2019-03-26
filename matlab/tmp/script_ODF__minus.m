@@ -1,9 +1,9 @@
 %% minus
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % superposeing two ODFs
 % 
-% overload the - operator, i.e. one can now write [[ODF_index.html,ODF]] - [[ODF_index.html,ODF]] in order
+% overload the - operator, i.e. one can now write <ODF_index.html" ODF> - <ODF_index.html" ODF> in order
 % get the superposition of two ODFs
 % 
 %

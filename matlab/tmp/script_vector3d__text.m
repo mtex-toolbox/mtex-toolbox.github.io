@@ -1,5 +1,5 @@
 %% text
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % display a text in a spherical plot
 % 
@@ -23,7 +23,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -20,7 +20,9 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

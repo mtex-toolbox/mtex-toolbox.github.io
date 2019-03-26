@@ -1,5 +1,5 @@
 %% subsasgn
-% (method of [[triplePointList_index.html,triplePointList]])
+% (method of <triplePointList_index.html triplePointList>)
 %% 
 % overloads subsasgn
 %

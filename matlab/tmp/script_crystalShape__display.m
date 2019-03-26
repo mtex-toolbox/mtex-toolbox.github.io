@@ -1,5 +1,5 @@
 %% display
-% (method of [[crystalShape_index.html,crystalShape]])
+% (method of <crystalShape_index.html crystalShape>)
 %% 
 % standard output
 %

@@ -1,5 +1,5 @@
 %% updateUnitCell
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % this function should be called after the spatial coordinates of an EBSD
 % data set have been modified

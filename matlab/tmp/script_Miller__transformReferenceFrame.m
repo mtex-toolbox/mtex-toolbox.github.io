@@ -1,5 +1,5 @@
 %% transformReferenceFrame
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % change reference frame while keeping hkl or uvw
 %

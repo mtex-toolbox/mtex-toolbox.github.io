@@ -1,5 +1,5 @@
 %% plot
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % colorize grains
 % 
@@ -21,7 +21,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,9 @@
 %             <tt>cS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalShape_index.html,crystalShape]]</p>
+%                <p>
+%                   <a href="crystalShape_index.html&#34;">crystalShape</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

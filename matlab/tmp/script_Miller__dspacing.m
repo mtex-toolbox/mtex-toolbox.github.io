@@ -1,5 +1,5 @@
 %% dspacing
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % space between crystal planes
 %

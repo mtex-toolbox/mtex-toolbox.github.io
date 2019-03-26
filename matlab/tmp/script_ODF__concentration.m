@@ -1,5 +1,5 @@
 %% concentration
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % not yet implemeted
 %

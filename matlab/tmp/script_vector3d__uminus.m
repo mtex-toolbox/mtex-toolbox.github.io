@@ -1,5 +1,5 @@
 %% uminus
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % overloads unitary minus
 %

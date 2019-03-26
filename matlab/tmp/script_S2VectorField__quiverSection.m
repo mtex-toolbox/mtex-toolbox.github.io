@@ -1,5 +1,5 @@
 %% quiverSection
-% (method of [[S2VectorField_index.html,S2VectorField]])
+% (method of <S2VectorField_index.html S2VectorField>)
 %% 
 % plot a vector field along another vectorfield
 % 
@@ -22,7 +22,9 @@
 %             <tt>sVF1, sVF2</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorField_index.html,S2VectorField]]</p>
+%                <p>
+%                   <a href="S2VectorField_index.html&#34;">S2VectorField</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -30,7 +32,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +42,7 @@
 %             <tt>N</tt>
 %          </td>
 %          <td>
-%                <p>normal [[vector3d_index.html,vector3d]] of the section</p>
+%                <p>normal <a href="vector3d_index.html&#34;">vector3d</a> of the section</p>
 %          </td>
 %       </tr>
 %       <tr>

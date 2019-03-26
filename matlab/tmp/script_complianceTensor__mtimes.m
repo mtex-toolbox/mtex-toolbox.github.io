@@ -1,5 +1,5 @@
 %% mtimes
-% (method of [[complianceTensor_index.html,complianceTensor]])
+% (method of <complianceTensor_index.html complianceTensor>)
 %% 
 % tensor product S * sigma
 %

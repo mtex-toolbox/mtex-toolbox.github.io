@@ -1,5 +1,5 @@
 %% rdivide
-% (method of [[S2FunHarmonicSym_index.html,S2FunHarmonicSym]])
+% (method of <S2FunHarmonicSym_index.html S2FunHarmonicSym>)
 %
 %% View Code
 % 
@@ -24,7 +24,9 @@
 %             <tt>sF1, sF2</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -47,7 +49,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

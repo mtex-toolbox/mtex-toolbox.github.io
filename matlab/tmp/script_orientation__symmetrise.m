@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % all crystallographically equivalent orientations
 %

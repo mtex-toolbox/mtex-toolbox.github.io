@@ -1,5 +1,5 @@
 %% properGroup
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % return the corresponding Laue group
 %

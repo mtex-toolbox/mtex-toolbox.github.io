@@ -1,5 +1,5 @@
 %% zeroRangeMethod
-% (method of [[zeroRangeMethod_index.html,zeroRangeMethod]])
+% (method of <zeroRangeMethod_index.html zeroRangeMethod>)
 %% 
 % calculate zero range
 % 
@@ -25,7 +25,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,8 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]] reshold lta</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a> reshold lta</p>
 %                <p>pha</p>
 %          </td>
 %       </tr>

@@ -1,5 +1,5 @@
 %% char
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % object -> string
 %

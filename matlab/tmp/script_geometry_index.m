@@ -12,7 +12,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="vector3d_index.html">Specimen Directions (The Class @vector3d)<td valign="top" width="75%">This section describes the class *vector3d* and gives an overview how to deal with specimen directions in MTEX.</td></a>
+%          <a href="vector3d_index.html">Specimen Directions<td valign="top" width="75%">This section describes the class *vector3d* and gives an overview how to deal with specimen directions in MTEX.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -72,7 +72,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="Miller_index.html">Crystal Directions (The Class @Miller)<td valign="top" width="75%">This section describes the class *Miller* and gives an overview how to deal with crystal directions in MTEX.</td></a>
+%          <a href="Miller_index.html">Crystal Directions<td valign="top" width="75%">This section describes the class *Miller* and gives an overview how to deal with crystal directions in MTEX.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -127,7 +127,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="crystalShape_index.html">Crystal Shapes (The Class @crystalShape)<td valign="top" width="75%">How to draw threedimensional representations of crystals.</td></a>
+%          <a href="crystalShape_index.html">Crystal Shapes<td valign="top" width="75%">How to draw threedimensional representations of crystals.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -192,7 +192,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="rotation_index.html">Rotations (The Class @rotation)<td valign="top" width="75%">This section describes the class  &lt;rotation.rotation.html *rotation*&gt; and gives an overview on how to work with rotations in MTEX.</td></a>
+%          <a href="rotation_index.html">Rotations<td valign="top" width="75%">This section describes the class  &lt;rotation.rotation.html *rotation*&gt; and gives an overview on how to work with rotations in MTEX.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -242,7 +242,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="symmetry_index.html">Crystal and Specimen Symmetries (The Class @symmetry)<td valign="top" width="75%">This section describes the class *symmetry* and gives an overview how to deal with crystal symmetries in MTEX.</td></a>
+%          <a href="symmetry_index.html">Crystal and Specimen Symmetries<td valign="top" width="75%">This section describes the class *symmetry* and gives an overview how to deal with crystal symmetries in MTEX.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -277,7 +277,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="orientation_index.html">Crystal Orientations (The Class @orientation)<td valign="top" width="75%">This sections describes the class *orientation* and gives an overview how to work with crystal orientation in MTEX.</td></a>
+%          <a href="orientation_index.html">Crystal Orientations<td valign="top" width="75%">This sections describes the class *orientation* and gives an overview how to work with crystal orientation in MTEX.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -392,7 +392,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="slipSystem_index.html">Slip Systems (The Class @slipSystem)<td valign="top" width="75%">This section describes the class *slipSystem*.</td></a>
+%          <a href="slipSystem_index.html">Slip Systems<td valign="top" width="75%">This section describes the class *slipSystem*.</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -422,7 +422,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="quaternion_index.html">Quaternions (The Class @quaternion)<td valign="top" width="75%">class representing orientations</td></a>
+%          <a href="quaternion_index.html">Quaternions<td valign="top" width="75%">class representing orientations</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -467,7 +467,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="S1Grid_index.html">Discretisation of 1-Sphere (The Class @S1Grid)<td valign="top" width="75%">S1Grid is a class of purely internal use</td></a>
+%          <a href="S1Grid_index.html">Discretisation of 1-Sphere<td valign="top" width="75%">S1Grid is a class of purely internal use</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -486,7 +486,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="S2Grid_index.html">Discretisation of 2 - Sphere (The Class @S2Grid)<td valign="top" width="75%">represents a grid of nodes on the sphere</td></a>
+%          <a href="S2Grid_index.html">Discretisation of 2 - Sphere<td valign="top" width="75%">represents a grid of nodes on the sphere</td></a>
 %       </td>
 %    </tr>
 %    <tr>
@@ -521,7 +521,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="SO3Grid_index.html">Discretisation of Orientation Space (The Class SO3Grid)<td valign="top" width="75%">represents a set of orientations</td></a>
+%          <a href="SO3Grid_index.html">Discretisation of Orientation Space<td valign="top" width="75%">represents a set of orientations</td></a>
 %       </td>
 %    </tr>
 %    <tr>

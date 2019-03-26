@@ -1,5 +1,5 @@
 %% initIter
-% (method of [[MLSSolver_index.html,MLSSolver]])
+% (method of <MLSSolver_index.html MLSSolver>)
 %% 
 % maybe no starting vector of coefficients has been specified
 %

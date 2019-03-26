@@ -1,5 +1,5 @@
 %% femComponent
-% (method of [[femComponent_index.html,femComponent]])
+% (method of <femComponent_index.html femComponent>)
 %% 
 % defines an ODF by finite elements
 % 

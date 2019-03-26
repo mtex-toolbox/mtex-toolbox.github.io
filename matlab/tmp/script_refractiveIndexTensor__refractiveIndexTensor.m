@@ -1,5 +1,5 @@
 %% refractiveIndexTensor
-% (method of [[refractiveIndexTensor_index.html,refractiveIndexTensor]])
+% (method of <refractiveIndexTensor_index.html refractiveIndexTensor>)
 %% 
 %
 %% View Code

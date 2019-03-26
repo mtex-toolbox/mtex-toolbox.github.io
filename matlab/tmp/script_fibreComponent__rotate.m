@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[fibreComponent_index.html,fibreComponent]])
+% (method of <fibreComponent_index.html fibreComponent>)
 %% 
 % called by ODF/rotate
 %

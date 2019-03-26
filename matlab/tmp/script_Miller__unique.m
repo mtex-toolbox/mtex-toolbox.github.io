@@ -1,5 +1,5 @@
 %% unique
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % disjoint list of Miller indices
 % 
@@ -20,7 +20,9 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -35,7 +37,9 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -7,7 +7,7 @@
 %% Description
 % *unimodalODF* defines a radially symmetric, unimodal ODF
 % with respect to a crystal orientation |mod|. The
-% shape of the ODF is defined by a [[kernel_index.html,kernel]] function.
+% shape of the ODF is defined by a <kernel_index.html" kernel> function.
 % 
 %
 %% Syntax
@@ -15,7 +15,7 @@
 %   odf = unimodalODF(mod) % default halfwidth 10 degree
 %   odf = unimodalODF(mod,'halfwidth',15*degree) % specify halfwidth
 %   odf = unimodalODF(mod,CS,SS)  % specify crystal and specimen symmetry
-%   odf = unimodalODF(mod,kernel) % specify [[kernel_index.html,kernel]] shape
+%   odf = unimodalODF(mod,kernel) % specify <kernel_index.html" kernel> shape
 %   odf = unimodalODF(mod,'weights',weights) % specify weights for each component
 % 
 
@@ -28,7 +28,8 @@
 %             <tt>mod</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]] modal orientation</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a> modal orientation</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +37,8 @@
 %             <tt>CS, SS</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -52,7 +54,8 @@
 %             <tt>kernel</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]] function (default - de la Vallee Poussin)</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a> function (default - de la Vallee Poussin)</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -67,7 +70,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

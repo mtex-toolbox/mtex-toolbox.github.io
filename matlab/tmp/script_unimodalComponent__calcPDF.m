@@ -1,5 +1,5 @@
 %% calcPDF
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % compute the pole density function for a given unimodal component
 %

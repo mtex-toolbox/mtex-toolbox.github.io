@@ -1,5 +1,5 @@
 %% char
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % odf -> char
 %

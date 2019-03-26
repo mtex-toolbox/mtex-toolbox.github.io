@@ -1,5 +1,5 @@
 %% getDataCursorPos
-% (method of [[mtexFigure_index.html,mtexFigure]])
+% (method of <mtexFigure_index.html mtexFigure>)
 %% 
 % get the position and value of the data cursor
 % 

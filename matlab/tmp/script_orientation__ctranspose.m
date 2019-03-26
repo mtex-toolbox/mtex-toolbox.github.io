@@ -1,5 +1,5 @@
 %% ctranspose
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % inverse orientation
 %

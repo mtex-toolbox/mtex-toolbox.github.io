@@ -1,5 +1,5 @@
 %% checkSymmetry
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 %
 %% View Code

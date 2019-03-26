@@ -1,5 +1,5 @@
 %% display
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % standard output
 %

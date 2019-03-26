@@ -1,5 +1,5 @@
 %% merge
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % merge grains along special grain boundaries
 % 
@@ -29,7 +29,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +39,9 @@
 %             <tt>boundary</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -52,7 +56,9 @@
 %             <tt>grainsMerged</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

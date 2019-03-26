@@ -1,5 +1,5 @@
 %% slipSystem
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % class representing slip systems
 % 
@@ -20,7 +20,8 @@
 %             <tt>b</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] Burgers vector or slip direction</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> Burgers vector or slip direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +29,8 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] slip plane normal</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> slip plane normal</p>
 %          </td>
 %       </tr>
 %       <tr>

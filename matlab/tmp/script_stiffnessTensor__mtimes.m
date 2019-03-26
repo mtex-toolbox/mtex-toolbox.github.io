@@ -1,5 +1,5 @@
 %% mtimes
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % tensor product C * eps
 %

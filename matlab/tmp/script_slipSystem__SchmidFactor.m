@@ -1,5 +1,5 @@
 %% SchmidFactor
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % compute the Schmid factor
 % 
@@ -23,7 +23,8 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>list of [[slipSystem_index.html,slipSystem]]</p>
+%                <p>list of <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -31,7 +32,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] list of tension direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> list of tension direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -39,7 +41,9 @@
 %             <tt>sigma</tt>
 %          </td>
 %          <td>
-%                <p>[[stressTensor_index.html,stressTensor]]</p>
+%                <p>
+%                   <a href="stressTensor_index.html&#34;">stressTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -54,7 +58,8 @@
 %             <tt>SFfun</tt>
 %          </td>
 %          <td>
-%                <p>size(sS) x 1 list of [[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>size(sS) x 1 list of <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

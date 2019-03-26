@@ -1,5 +1,5 @@
 %% isUpper
-% (method of [[sphericalRegion_index.html,sphericalRegion]])
+% (method of <sphericalRegion_index.html sphericalRegion>)
 %% 
 %
 %% View Code

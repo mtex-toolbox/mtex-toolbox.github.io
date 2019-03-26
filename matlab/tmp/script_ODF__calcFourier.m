@@ -1,5 +1,5 @@
 %% calcFourier
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % compute Fourier coefficients of odf
 % 
@@ -23,7 +23,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -46,7 +48,8 @@
 %             <tt>nodf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]] where Fourier coefficients are stored for further use</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a> where Fourier coefficients are stored for further use</p>
 %          </td>
 %       </tr>
 %    </table>

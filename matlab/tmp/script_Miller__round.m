@@ -1,5 +1,5 @@
 %% round
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % tries to round miller indizes to greatest common divisor
 %

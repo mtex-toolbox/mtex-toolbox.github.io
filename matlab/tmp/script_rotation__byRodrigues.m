@@ -1,5 +1,5 @@
 %% byRodrigues
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % define rotations by Rodrigues vectors
 % 
@@ -19,7 +19,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>Rodrigues [[vector3d_index.html,vector3d]]</p>
+%                <p>Rodrigues <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +35,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[sphericalRegion_index.html,sphericalRegion]])
+% (method of <sphericalRegion_index.html sphericalRegion>)
 %% 
 % rotate of a spherical region
 % 

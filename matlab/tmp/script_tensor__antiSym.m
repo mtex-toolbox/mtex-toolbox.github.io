@@ -1,5 +1,5 @@
 %% antiSym
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % the antisymmetric part A = 0.5(T - T.') of a tensor
 % 
@@ -19,7 +19,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +36,9 @@
 %             <tt>A</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

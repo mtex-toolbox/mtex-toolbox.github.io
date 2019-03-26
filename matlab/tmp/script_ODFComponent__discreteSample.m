@@ -1,5 +1,5 @@
 %% discreteSample
-% (method of [[ODFComponent_index.html,ODFComponent]])
+% (method of <ODFComponent_index.html ODFComponent>)
 %% 
 % draw a random sample
 % 

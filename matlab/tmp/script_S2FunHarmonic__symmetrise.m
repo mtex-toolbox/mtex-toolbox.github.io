@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % symmetrises a function with respect to a symmetry or a direction
 % 
@@ -26,7 +26,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,9 @@
 %             <tt>cs,ss</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]], [[specimenSymmetry_index.html,specimenSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>, <a href="specimenSymmetry_index.html&#34;">specimenSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +46,9 @@
 %             <tt>d</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -57,7 +63,8 @@
 %             <tt>sFs</tt>
 %          </td>
 %          <td>
-%                <p>symmetrised [[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>symmetrised <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -65,7 +72,9 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Kernel_index.html,S2Kernel]]</p>
+%                <p>
+%                   <a href="S2Kernel_index.html&#34;">S2Kernel</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% angle_outer
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % calcualtes the rotational angle between all rotations q1 and q2
 % 
@@ -25,7 +25,9 @@
 %             <tt>q1, q2</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

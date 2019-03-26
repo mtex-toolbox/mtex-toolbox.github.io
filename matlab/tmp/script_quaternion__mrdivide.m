@@ -1,5 +1,5 @@
 %% mrdivide
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % scalar division
 %

@@ -1,5 +1,5 @@
 %% plot
-% (method of [[zeroRangeMethod_index.html,zeroRangeMethod]])
+% (method of <zeroRangeMethod_index.html zeroRangeMethod>)
 %% 
 % plot zero regions in pole figures
 % 
@@ -25,7 +25,9 @@
 %             <tt>zrm</tt>
 %          </td>
 %          <td>
-%                <p>[[zeroRangeMethod_index.html,zeroRangeMethod]]</p>
+%                <p>
+%                   <a href="zeroRangeMethod_index.html&#34;">zeroRangeMethod</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

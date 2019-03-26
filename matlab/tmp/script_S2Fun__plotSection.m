@@ -1,5 +1,5 @@
 %% plotSection
-% (method of [[S2Fun_index.html,S2Fun]])
+% (method of <S2Fun_index.html S2Fun>)
 %
 %% View Code
 % 
@@ -19,7 +19,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

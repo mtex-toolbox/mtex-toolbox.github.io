@@ -1,5 +1,5 @@
 %% ctranspose
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % transpose quaternion
 %

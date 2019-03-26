@@ -1,5 +1,5 @@
 %% subSet
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % restrict boundary
 % 
@@ -25,7 +25,9 @@
 %             <tt>gB</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +43,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

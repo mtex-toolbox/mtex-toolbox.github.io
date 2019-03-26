@@ -1,5 +1,5 @@
 %% length
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % overloads length
 %

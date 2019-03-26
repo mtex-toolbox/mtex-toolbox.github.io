@@ -1,5 +1,5 @@
 %% horzcat
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % overloads [T1,T2,T3..]
 %

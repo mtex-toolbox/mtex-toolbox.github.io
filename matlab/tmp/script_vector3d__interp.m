@@ -1,5 +1,5 @@
 %% interp
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % spherical interpolation - including some smoothing
 % 
@@ -25,7 +25,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>data points [[vector3d_index.html,vector3d]]</p>
+%                <p>data points <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +42,8 @@
 %             <tt>vi</tt>
 %          </td>
 %          <td>
-%                <p>interpolation points [[vector3d_index.html,vector3d]]</p>
+%                <p>interpolation points <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -56,7 +58,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

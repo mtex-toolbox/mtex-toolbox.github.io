@@ -1,5 +1,5 @@
 %% eval
-% (method of [[femComponent_index.html,femComponent]])
+% (method of <femComponent_index.html femComponent>)
 %% 
 % evaluate an odf at orientation ori
 %

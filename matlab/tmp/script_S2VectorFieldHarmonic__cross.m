@@ -1,5 +1,5 @@
 %% cross
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %% 
 % pointwise cross product
 % 
@@ -19,7 +19,9 @@
 %             <tt>sVF1, sVF2</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorField_index.html,S2VectorField]]</p>
+%                <p>
+%                   <a href="S2VectorField_index.html&#34;">S2VectorField</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +36,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

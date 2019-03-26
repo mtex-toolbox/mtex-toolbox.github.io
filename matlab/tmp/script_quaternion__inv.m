@@ -1,5 +1,5 @@
 %% inv
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % quaternion of the inverse roation
 % 
@@ -25,7 +25,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -40,7 +42,8 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]] of the inverse rotation</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a> of the inverse rotation</p>
 %          </td>
 %       </tr>
 %    </table>

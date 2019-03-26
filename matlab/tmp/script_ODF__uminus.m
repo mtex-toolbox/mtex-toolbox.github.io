@@ -1,9 +1,9 @@
 %% uminus
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % superposeing two ODFs
 % 
-% overload the - operator, i.e. one can now write - [[ODF_index.html,ODF]]
+% overload the - operator, i.e. one can now write - <ODF_index.html" ODF>
 % 
 %
 %% View Code

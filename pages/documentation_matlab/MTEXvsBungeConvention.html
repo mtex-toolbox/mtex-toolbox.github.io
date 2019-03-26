@@ -1,6 +1,6 @@
 ---
 title: MTEX vs. Bunge Convention
-last_updated: 20-Mar-2019
+last_updated: 26-Mar-2019
 sidebar: documentation_sidebar
 permalink: MTEXvsBungeConvention.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>MTEX vs. Bunge Convention</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_MTEXvsBungeConvention.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MTEXvsBungeConvention into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Crystal Orientations</h2><p>Explains how to define crystal orientations, how to switch between different convention and how to compute crystallographic equivalent orientations.</p><h2 id="2">Open in Editor</h2><h2 id="3">Contents</h2><p>In texture analysis crystal orientations are used to describe the alignment of the crystals within the specimen. A crystal orientation is defined as the rotation that maps the specimen coordinate system onto the crystal coordinate system.</p><p>The class <a href="orientation.orientation.html"><b>orientation</b></a> is inherited from the class <a href="rotation_index.html"><b>rotation</b></a> and allow to work with orientation in MTEX.</p><h2 id="6">Defining a crystal orientation</h2><p>In order to define a crystal orientation one has to define crystal and specimen symmetry first.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
+      --><title>MTEX vs. Bunge Convention</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_MTEXvsBungeConvention.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MTEXvsBungeConvention into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Crystal Orientations</h2><p>Explains how to define crystal orientations, how to switch between different convention and how to compute crystallographic equivalent orientations.</p><h2 id="3">Contents</h2><p>In texture analysis crystal orientations are used to describe the alignment of the crystals within the specimen. A crystal orientation is defined as the rotation that maps the specimen coordinate system onto the crystal coordinate system.</p><p>The class <a href="orientation.orientation.html"><b>orientation</b></a> is inherited from the class <a href="rotation_index.html"><b>rotation</b></a> and allow to work with orientation in MTEX.</p><h2 id="6">Defining a crystal orientation</h2><p>In order to define a crystal orientation one has to define crystal and specimen symmetry first.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
 ss = specimenSymmetry(<span class="string">'orthorhombic'</span>);
 </pre><p>Now a crystal orientation is defined in the same way as a rotation. A well known possibility is  so called <b>Euler angles</b>. Here two conventions are commonly used:</p><h2 id="8">SUB: Bunge Euler angle convention</h2><p>Here an arbitrary rotation is determined by three consecutive rotations in the sample reference frame. The first is about the z-axis, the second about the x-axis, and the third again about the z-axis. Hence, one needs three angles to define an orientation by Euler angles. In the literature these angles are known as "triplet of Euler angles" or simply "Euler angles" and you can find many definitions for them according to different authors.</p><pre class="codeinput">o = orientation.byEuler(30*degree,50*degree,10*degree,cs,ss)
 </pre><pre class="codeoutput"> 
@@ -181,8 +181,7 @@ ans = orientation
   specimen symmetry: 1
  
 </pre><p>Alternatively the list can be computed by multiplying with the specimen and the crystal symmetry from the left and from the right.</p><pre class="codeinput">ss * o * cs
-</pre><pre class="codeoutput">Warning: Symmetry missmatch! 
- 
+</pre><pre class="codeoutput"> 
 ans = orientation  
   size: 8 x 48
   crystal symmetry : m-3m
@@ -222,17 +221,17 @@ ans = vector3d
 </pre><h2 id="27">Plotting Orientations</h2><h2 id="28">SUB: in Euler angle space</h2><p>By default the function <a href="orientation.plot.html">plot</a> plots orientations in the three dimensional Bunge Euler angle space</p><pre class="codeinput">ori = orientation.rand(100,cs);
 plot(ori)
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_01.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_01.png" %}
 <p>Note that the orientations are automatically projected into the fundamental region. In the case of cubic symmetry this means that the Euler angles 
-  {% include inline_image.html file="script_MTEXvsBungeConvention_eq01908532921846404702.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_eq01908532921846404702.png" %}
  and 
-  {% include inline_image.html file="script_MTEXvsBungeConvention_eq10061829146660292328.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_eq10061829146660292328.png" %}
  are restricted to 90 degrees. If the orientations should be plotted at their specified Euler angles the option <tt>ignoreFundamentalRegion</tt> has to be used.</p><pre class="codeinput">plot(ori,<span class="string">'ignoreFundamentalRegion'</span>)
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_02.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_02.png" %}
 <h2 id="30">SUB: in axis angle space</h2><p>Alternatively, orientations can be plotted in the three dimensional axis angle space.</p><pre class="codeinput">plot(ori,<span class="string">'AxisAngle'</span>,<span class="string">'markerEdgeColor'</span>,[0 0 0.8],<span class="string">'markerSize'</span>,8)
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_03.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_03.png" %}
 <p>Note again that the orientations are automatically projected into its fundamental region. Again, this can be switched off with the option <tt>ignoreFundamentalRegion</tt>.</p><pre class="codeinput">plot(ori,<span class="string">'axisAngle'</span>,<span class="string">'ignoreFundamentalRegion'</span>,<span class="string">'markerEdgeColor'</span>,[0 0 0.8],<span class="string">'markerSize'</span>,8)
 
 <span class="comment">% visualize the fundamental region</span>
@@ -249,16 +248,16 @@ oR = orientationRegion
  vertices: 24
  
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_04.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_04.png" %}
 <h2 id="32">SUB: in (inverse) pole figures</h2><pre class="codeinput"><span class="comment">% a pole figure plot</span>
 plotPDF(ori,Miller({1,0,0},{1,1,1},ori.CS))
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_05.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_05.png" %}
 <p>an inverse pole figure plot</p><pre class="codeinput">plotIPDF(ori,[vector3d.X,vector3d.Z])
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_06.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_06.png" %}
 <h2 id="34">SUB: in sections of the orientations space</h2><pre class="codeinput"><span class="comment">% as phi2 sections</span>
 plotSection(ori,<span class="string">'phi2'</span>)
 </pre>
-  {% include inline_image.html file="script_MTEXvsBungeConvention_07.png" %}
+  {% include inline_image.html file="MTEXvsBungeConvention_07.png" %}
 </div></body></html>

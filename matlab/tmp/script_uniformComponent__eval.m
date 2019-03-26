@@ -1,5 +1,5 @@
 %% eval
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % evaluate an odf at orientation g
 % 

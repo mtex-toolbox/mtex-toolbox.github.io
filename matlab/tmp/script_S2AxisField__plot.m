@@ -1,5 +1,5 @@
 %% plot
-% (method of [[S2AxisField_index.html,S2AxisField]])
+% (method of <S2AxisField_index.html S2AxisField>)
 %% 
 % plot spherical axis field
 % 

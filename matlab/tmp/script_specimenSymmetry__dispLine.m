@@ -1,5 +1,5 @@
 %% dispLine
-% (method of [[specimenSymmetry_index.html,specimenSymmetry]])
+% (method of <specimenSymmetry_index.html specimenSymmetry>)
 %% 
 % display symmetry as a one-liner
 %

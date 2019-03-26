@@ -1,5 +1,5 @@
 %% linearCompressibility
-% (method of [[complianceTensor_index.html,complianceTensor]])
+% (method of <complianceTensor_index.html complianceTensor>)
 %% 
 % computes the linear compressibility of an elasticity tensor
 % 
@@ -30,7 +30,8 @@
 %             <tt>S</tt>
 %          </td>
 %          <td>
-%                <p>elastic [[complianceTensor_index.html,complianceTensor]]</p>
+%                <p>elastic <a href="complianceTensor_index.html&#34;">complianceTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +39,8 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>list of [[vector3d_index.html,vector3d]]</p>
+%                <p>list of <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

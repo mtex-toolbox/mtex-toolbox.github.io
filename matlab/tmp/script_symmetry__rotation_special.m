@@ -1,5 +1,5 @@
 %% rotation_special
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % returns symmetry elements different from rotation about c-axis
 % 
@@ -25,7 +25,9 @@
 %             <tt>cs</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

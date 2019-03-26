@@ -1,5 +1,5 @@
 %% l1TVFilter
-% (method of [[l1TVFilter_index.html,l1TVFilter]])
+% (method of <l1TVFilter_index.html l1TVFilter>)
 %% 
 % smoothes quaternions by projecting them into tangential space and
 % performing there smoothing spline approximation

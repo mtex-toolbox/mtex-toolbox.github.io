@@ -1,5 +1,5 @@
 %% simpleShear
-% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+% (method of <deformationGradientTensor_index.html deformationGradientTensor>)
 %% 
 % simple shear deformation tensor
 % 
@@ -20,7 +20,8 @@
 %             <tt>d</tt>
 %          </td>
 %          <td>
-%                <p>shearing direction [[vector3d_index.html,vector3d]]</p>
+%                <p>shearing direction <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +29,8 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>normal or compression direction [[vector3d_index.html,vector3d]]</p>
+%                <p>normal or compression direction <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -51,7 +53,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[deformationGradientTensor_index.html,deformationGradientTensor]]</p>
+%                <p>
+%                   <a href="deformationGradientTensor_index.html&#34;">deformationGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

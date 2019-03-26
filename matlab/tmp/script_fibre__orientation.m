@@ -1,5 +1,5 @@
 %% orientation
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % generate a list of orientation out of a fibre
 % 
@@ -19,7 +19,9 @@
 %             <tt>f</tt>
 %          </td>
 %          <td>
-%                <p>[[fibre_index.html,fibre]]</p>
+%                <p>
+%                   <a href="fibre_index.html&#34;">fibre</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -54,7 +56,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

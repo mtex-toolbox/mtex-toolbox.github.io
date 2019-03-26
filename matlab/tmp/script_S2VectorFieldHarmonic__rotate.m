@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %% 
 % rotate a function by a rotation
 % 
@@ -25,7 +25,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +52,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

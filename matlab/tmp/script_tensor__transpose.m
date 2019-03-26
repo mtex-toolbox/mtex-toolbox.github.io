@@ -1,5 +1,5 @@
 %% transpose
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % transpose a list of a tensors
 % 
@@ -28,7 +28,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -43,7 +45,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% minus
-% (method of [[S2Fun_index.html,S2Fun]])
+% (method of <S2Fun_index.html S2Fun>)
 %% 
 % overload minus
 %

@@ -1,5 +1,5 @@
 %% boundary
-% (method of [[sphericalRegion_index.html,sphericalRegion]])
+% (method of <sphericalRegion_index.html sphericalRegion>)
 %% 
 % compute boundary points
 %

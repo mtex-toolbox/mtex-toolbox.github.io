@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[FourierComponent_index.html,FourierComponent]])
+% (method of <FourierComponent_index.html FourierComponent>)
 %% 
 % called by ODF/rotate
 %

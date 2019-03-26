@@ -1,5 +1,5 @@
 %% plotSpektra
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % plots Fourier coefficients of a spherical function
 % 
@@ -19,7 +19,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

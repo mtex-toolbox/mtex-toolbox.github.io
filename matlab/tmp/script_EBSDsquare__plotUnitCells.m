@@ -1,5 +1,5 @@
 %% plotUnitCells
-% (method of [[EBSDsquare_index.html,EBSDsquare]])
+% (method of <EBSDsquare_index.html EBSDsquare>)
 %% 
 % plot EBSD map through imagesc
 %

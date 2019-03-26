@@ -1,5 +1,5 @@
 %% subSet
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % subindex vector3d
 %

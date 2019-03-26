@@ -1,5 +1,5 @@
 %% curvatureTensor
-% (method of [[curvatureTensor_index.html,curvatureTensor]])
+% (method of <curvatureTensor_index.html curvatureTensor>)
 %% 
 %
 %% View Code

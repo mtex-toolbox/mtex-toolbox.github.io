@@ -1,5 +1,5 @@
 %% calcMIndex
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % Computes the M-index from an odf - in contrast to using a discrete number
 % of orientations (Skemer et al., 2005).

@@ -1,5 +1,5 @@
 %% byVertices
-% (method of [[sphericalRegion_index.html,sphericalRegion]])
+% (method of <sphericalRegion_index.html sphericalRegion>)
 %% 
 % define a spherical region by its vertices
 % 
@@ -19,7 +19,9 @@
 %             <tt>V</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +36,9 @@
 %             <tt>sR</tt>
 %          </td>
 %          <td>
-%                <p>[[sphericalRegion_index.html,sphericalRegion]]</p>
+%                <p>
+%                   <a href="sphericalRegion_index.html&#34;">sphericalRegion</a>
+%                </p>
 %                <pre>also
 % ericalRegion_index</pre>
 %          </td>

@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % symmetrcially equivalent directions and its multiple
 % 
@@ -25,7 +25,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>S</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

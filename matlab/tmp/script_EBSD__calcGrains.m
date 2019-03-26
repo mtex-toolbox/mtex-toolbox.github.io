@@ -1,5 +1,5 @@
 %% calcGrains
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % grains reconstruction from 2d EBSD data
 % 
@@ -20,7 +20,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -83,7 +85,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

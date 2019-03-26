@@ -1,5 +1,5 @@
 %% region
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % return spherical region associated to a set of crystal directions
 %

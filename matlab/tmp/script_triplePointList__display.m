@@ -1,5 +1,5 @@
 %% display
-% (method of [[triplePointList_index.html,triplePointList]])
+% (method of <triplePointList_index.html triplePointList>)
 %% 
 % standard output
 % 

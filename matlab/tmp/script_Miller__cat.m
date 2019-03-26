@@ -1,5 +1,5 @@
 %% cat
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % concatenate lists of Miller indices to one list
 %

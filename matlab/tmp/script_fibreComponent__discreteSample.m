@@ -1,5 +1,5 @@
 %% discreteSample
-% (method of [[fibreComponent_index.html,fibreComponent]])
+% (method of <fibreComponent_index.html fibreComponent>)
 %% 
 % evaluate an odf at orientation g
 % 

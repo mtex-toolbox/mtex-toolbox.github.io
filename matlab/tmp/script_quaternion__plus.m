@@ -1,5 +1,5 @@
 %% plus
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % pointwise addition
 %

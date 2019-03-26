@@ -1,5 +1,5 @@
 %% conv
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % convolute ODF with kernel psi
 % 
@@ -25,7 +25,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +43,8 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>convolution [[kernel_index.html,kernel]]</p>
+%                <p>convolution <a href="kernel_index.html&#34;">kernel</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

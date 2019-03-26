@@ -1,5 +1,5 @@
 %% axesDual
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % return dual coordinate axes
 %

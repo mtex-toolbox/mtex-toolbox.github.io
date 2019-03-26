@@ -1,5 +1,5 @@
 %% round2Miller
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % find lattice alignements for arbitrary orientations and misorientations
 % 
@@ -34,7 +34,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +44,7 @@
 %             <tt>mori</tt>
 %          </td>
 %          <td>
-%                <p>mis[[orientation_index.html,orientation]]</p>
+%                <p>mis&lt;orientation_index.html" orientation&gt;</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -57,7 +59,9 @@
 %             <tt>uvw,hkl</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -65,7 +69,9 @@
 %             <tt>n1,n2,d1,d2</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

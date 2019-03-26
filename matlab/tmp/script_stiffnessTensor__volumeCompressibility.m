@@ -1,5 +1,5 @@
 %% volumeCompressibility
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % volume compressibility of an elasticity stiffness tensor
 % 
@@ -24,7 +24,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elastic stiffness [[tensor_index.html,tensor]]</p>
+%                <p>elastic stiffness <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

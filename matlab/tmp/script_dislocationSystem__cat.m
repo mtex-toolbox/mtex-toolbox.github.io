@@ -1,5 +1,5 @@
 %% cat
-% (method of [[dislocationSystem_index.html,dislocationSystem]])
+% (method of <dislocationSystem_index.html dislocationSystem>)
 %% 
 % implement cat for dislocationSystem
 % 
@@ -27,7 +27,9 @@
 %             <tt>dS1, dS2, dS3</tt>
 %          </td>
 %          <td>
-%                <p>[[dislocationSystem_index.html,dislocationSystem]]</p>
+%                <p>
+%                   <a href="dislocationSystem_index.html&#34;">dislocationSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +44,9 @@
 %             <tt>dS</tt>
 %          </td>
 %          <td>
-%                <p>[[dislocationSystem_index.html,dislocationSystem]]</p>
+%                <p>
+%                   <a href="dislocationSystem_index.html&#34;">dislocationSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

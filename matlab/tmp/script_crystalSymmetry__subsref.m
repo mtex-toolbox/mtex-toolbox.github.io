@@ -1,5 +1,5 @@
 %% subsref
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % overloads subsref
 %

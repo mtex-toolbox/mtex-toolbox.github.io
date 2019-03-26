@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[triplePointList_index.html,triplePointList]])
+% (method of <triplePointList_index.html triplePointList>)
 %% 
 % rotate triple points
 % 
@@ -27,7 +27,9 @@
 %             <tt>tP</tt>
 %          </td>
 %          <td>
-%                <p>[[triplePointList_index.html,triplePointList]]</p>
+%                <p>
+%                   <a href="triplePointList_index.html&#34;">triplePointList</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -43,7 +45,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -106,7 +110,9 @@
 %             <tt>tP</tt>
 %          </td>
 %          <td>
-%                <p>[[triplePointList_index.html,triplePointList]]</p>
+%                <p>
+%                   <a href="triplePointList_index.html&#34;">triplePointList</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

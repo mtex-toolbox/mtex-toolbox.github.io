@@ -1,5 +1,5 @@
 %% calcInvTaylor
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % Taylor factor from orientation gradient
 % 
@@ -19,7 +19,7 @@
 %             <tt>mori</tt>
 %          </td>
 %          <td>
-%                <p>mis[[orientation_index.html,orientation]]</p>
+%                <p>mis&lt;orientation_index.html" orientation&gt;</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +27,8 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]] list in crystal coordinates</p>
+%                <p>
+%                   <a href="slipSystem_index.html&#34;">slipSystem</a> list in crystal coordinates</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -58,7 +59,7 @@
 %             <tt>eps</tt>
 %          </td>
 %          <td>
-%                <p>strain [[tensor_index.html,tensor]] list in crystal coordinates</p>
+%                <p>strain <a href="tensor_index.html&#34;">tensor</a> list in crystal coordinates</p>
 %          </td>
 %       </tr>
 %    </table>

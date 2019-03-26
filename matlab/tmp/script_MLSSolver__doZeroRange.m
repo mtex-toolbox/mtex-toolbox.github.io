@@ -1,5 +1,5 @@
 %% doZeroRange
-% (method of [[MLSSolver_index.html,MLSSolver]])
+% (method of <MLSSolver_index.html MLSSolver>)
 %% 
 %
 %% View Code

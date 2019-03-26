@@ -1,5 +1,5 @@
 %% grad
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % calculates the gradiet of a spherical harmonic
 % 
@@ -20,7 +20,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +30,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -51,7 +55,9 @@
 %             <tt>g</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

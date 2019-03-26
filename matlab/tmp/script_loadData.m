@@ -8,7 +8,7 @@
 % *loadData* is a low level method for importing EBSD, PoleFigure, ODF and
 % Tensor data from external files. It autodetects the format of the file.
 % As parameters the method requires a filename and the crystal and specimen
-% [[symmetry_index.html,symmetry]].
+% <symmetry_index.html" symmetry>.
 % 
 %
 %% Syntax
@@ -38,7 +38,7 @@
 %             <tt>cs, ss</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]] (optional)</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a> (optional)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -81,7 +81,9 @@
 %             <tt>data</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]], [[PoleFigure_index.html,PoleFigure]], [[ODF_index.html,ODF]], [[tensor_index.html,tensor]], [[vector3d_index.html,vector3d]], [[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>, <a href="PoleFigure_index.html&#34;">PoleFigure</a>, <a href="ODF_index.html&#34;">ODF</a>, <a href="tensor_index.html&#34;">tensor</a>, <a href="vector3d_index.html&#34;">vector3d</a>, <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

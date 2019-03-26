@@ -1,5 +1,5 @@
 %% map
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % define orientations by pairs of vectors
 % 
@@ -25,7 +25,10 @@
 %             <tt>u1, v1, u2, v2</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] [[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> 
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +36,9 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +46,9 @@
 %             <tt>SS</tt>
 %          </td>
 %          <td>
-%                <p>[[specimenSymmetry_index.html,specimenSymmetry]]</p>
+%                <p>
+%                   <a href="specimenSymmetry_index.html&#34;">specimenSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -56,7 +63,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

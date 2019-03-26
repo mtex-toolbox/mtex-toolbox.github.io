@@ -1,5 +1,5 @@
 %% EBSD
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % constructor
 % 
@@ -24,7 +24,9 @@
 %             <tt>orientations</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,8 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>crystal / specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal / specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

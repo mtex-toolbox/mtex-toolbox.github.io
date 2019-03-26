@@ -1,5 +1,5 @@
 %% doIter
-% (method of [[MLSSolver_index.html,MLSSolver]])
+% (method of <MLSSolver_index.html MLSSolver>)
 %% 
 % perform one iteration step of the modified least squares algorithm
 % 

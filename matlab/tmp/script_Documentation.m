@@ -107,7 +107,7 @@
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="PhaseTransitions.html">PhaseTransitions<td valign="top" width="75%"/></a>
+%          <a href="PhaseTransitions.html">Phase Transitions<td valign="top" width="75%"/></a>
 %       </td>
 %    </tr>
 %    <tr>

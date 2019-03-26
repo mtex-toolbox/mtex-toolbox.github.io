@@ -1,4 +1,4 @@
-%% Crystal Directions (The Class [[Miller_index.html,Miller]])
+%% Crystal Directions
 % This section describes the class *Miller* and gives an overview how to
 % deal with crystal directions in MTEX.
 %
@@ -11,7 +11,7 @@
 % *Miller* which in turn represent a direction with respect to the crystal
 % coordinate system described  by three or four values h, l, k (,m) and a
 % <crystalSymmetry_index.html crystall symmetry>. Essentially all operations
-% defined for the [[vector3d_index.html,vector3d]] class are also available for Miller indices.
+% defined for the <vector3d_index.html" vector3d> class are also available for Miller indices.
 % Furthermore, You can ask for all crystallographically equivalent crystal
 % directions to one Miller index.
 %

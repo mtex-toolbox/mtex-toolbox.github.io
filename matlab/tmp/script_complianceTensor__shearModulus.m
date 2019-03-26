@@ -1,5 +1,5 @@
 %% shearModulus
-% (method of [[complianceTensor_index.html,complianceTensor]])
+% (method of <complianceTensor_index.html complianceTensor>)
 %% 
 % shear modulus for an compliance tensor
 % 
@@ -26,7 +26,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elastic [[stiffnessTensor_index.html,stiffnessTensor]]</p>
+%                <p>elastic <a href="stiffnessTensor_index.html&#34;">stiffnessTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +35,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>shear plane [[vector3d_index.html,vector3d]]</p>
+%                <p>shear plane <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +44,8 @@
 %             <tt>u</tt>
 %          </td>
 %          <td>
-%                <p>shear direction [[vector3d_index.html,vector3d]]</p>
+%                <p>shear direction <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% grad
-% (method of [[fibreComponent_index.html,fibreComponent]])
+% (method of <fibreComponent_index.html fibreComponent>)
 %% 
 % evaluate an odf at orientation g
 % 
@@ -24,7 +24,9 @@
 %             <tt>component</tt>
 %          </td>
 %          <td>
-%                <p>[[fibreComponent_index.html,fibreComponent]]</p>
+%                <p>
+%                   <a href="fibreComponent_index.html&#34;">fibreComponent</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -47,7 +51,9 @@
 %             <tt>g</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

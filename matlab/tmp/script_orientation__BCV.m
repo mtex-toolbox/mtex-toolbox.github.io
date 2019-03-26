@@ -1,5 +1,5 @@
 %% BCV
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % biased cross validation
 % 
@@ -25,7 +25,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]]</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

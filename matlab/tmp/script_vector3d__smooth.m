@@ -1,5 +1,5 @@
 %% smooth
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % low level function for plotting functions on the sphere
 % 

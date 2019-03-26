@@ -1,5 +1,5 @@
 %% plotPDF
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % plot a fibre into pole figures
 % 
@@ -22,7 +22,9 @@
 %             <tt>f</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -30,7 +32,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] crystallographic directions</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> crystallographic directions</p>
 %          </td>
 %       </tr>
 %       <tr>
