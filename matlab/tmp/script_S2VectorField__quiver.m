@@ -1,5 +1,5 @@
 %% quiver
-% (method of [[S2VectorField_index.html,S2VectorField]])
+% (method of <S2VectorField_index.html S2VectorField>)
 %% 
 % quiver spherical vector field
 % 

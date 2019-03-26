@@ -1,5 +1,5 @@
 %% circle
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % annotated a circle
 % 
@@ -21,7 +21,8 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>a normal [[vector3d_index.html,vector3d]]</p>
+%                <p>a normal <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

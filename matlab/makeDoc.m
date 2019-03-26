@@ -32,7 +32,7 @@ set(0,'DefaultFigureColor','white');
 addpath(fullfile(pwd,'..','..','makeDoc'))
 addpath(fullfile(pwd,'..','..','makeDoc','tools'))
 
-% DocFileso
+% DocFiles
 
 mtexFunctionFiles = [...
   DocFile( fullfile(mtex_path,'S2Fun')) ...
@@ -74,8 +74,7 @@ makeFunctionsReference(mtexHelpFiles,'FunctionReference','outputDir',options.out
 %% make help toc
 
 makeHelpToc(mtexHelpFiles,'Documentation','FunctionMainFile','FunctionReference','outputDir','.');
-makeToc();
-%copyfile(fullfile(outputDir,'helptoc.xml'), docPath);
+makeDocumentationToc();
 
 %% Publish Function Reference
 
@@ -83,13 +82,14 @@ options.evalCode = true;
 options.force = false;
 publish(mtexFunctionFiles,options);
 
-%% add frontmatter to html files
-
+% add frontmatter to html files
 files = dir(fullfile(options.outputDir, '*.html'));
 for idx = 1:length(files)
   add_frontmatter(options.outputDir, files(idx), 'function_reference');
 end
 
+move_images(options.outputDir);
+makeFunctionReferenceToc();
 
 %% Publish Doc
 
@@ -99,16 +99,15 @@ options.force = false;
 publish(mtexDocFiles,options);
 %copy(mtexDocFiles,fullfile(mtex_path,'examples','UsersGuide'));
 
-%% add frontmatter to html files
-
+% add frontmatter to html files
 files = dir(fullfile(options.outputDir, '*.html'));
 for idx = 1:length(files)
   add_frontmatter(options.outputDir, files(idx), 'documentation');
 end
 
+move_images(options.outputDir);
 
 %%
-
 deadlink(mtexDocFiles,options.outputDir);
 
 %% set back mtex options
@@ -116,24 +115,24 @@ deadlink(mtexDocFiles,options.outputDir);
 setMTEXpref('generatingHelpMode',false);
 mtex_progress = true;
 
-%% move images
-
-files = dir(fullfile(options.outputDir, '*.png'));
-for j = 1:length(files)
-  filename = files(j);
-  filename = filename.name;
-  movefile(fullfile(options.outputDir, filename), fullfile(options.outputDir, '..', '..', 'images', ['script_' filename]))
 end
 
 
-files = dir(fullfile(options.outputDir, '*.gif'));
-for j = 1:length(files)
-  filename = files(j);
-  filename = filename.name;
-  movefile(fullfile(options.outputDir, filename), fullfile(options.outputDir, '..', '..', 'images', ['script' filename]))
-end
+function move_images(Dir)
+  files = dir(fullfile(Dir, '*.png'));
+  for j = 1:length(files)
+    filename = files(j);
+    filename = filename.name;
+    movefile(fullfile(Dir, filename), fullfile(Dir, '..', '..', 'images', filename))
+  end
 
 
+  files = dir(fullfile(Dir, '*.gif'));
+  for j = 1:length(files)
+    filename = files(j);
+    filename = filename.name;
+    movefile(fullfile(Dir, filename), fullfile(Dir, '..', '..', 'images', filename))
+  end
 
 end
 

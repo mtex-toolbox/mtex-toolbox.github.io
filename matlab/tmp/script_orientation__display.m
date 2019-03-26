@@ -1,5 +1,5 @@
 %% display
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % standart output
 %

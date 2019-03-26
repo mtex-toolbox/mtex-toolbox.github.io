@@ -1,5 +1,5 @@
 %% subsref
-% (method of [[triplePointList_index.html,triplePointList]])
+% (method of <triplePointList_index.html triplePointList>)
 %% 
 % implements tP(1:10)
 % 
@@ -21,7 +21,9 @@
 %             <tt>tP</tt>
 %          </td>
 %          <td>
-%                <p>[[triplePointList_index.html,triplePointList]]</p>
+%                <p>
+%                   <a href="triplePointList_index.html&#34;">triplePointList</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

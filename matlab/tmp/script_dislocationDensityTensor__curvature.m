@@ -1,5 +1,5 @@
 %% curvature
-% (method of [[dislocationDensityTensor_index.html,dislocationDensityTensor]])
+% (method of <dislocationDensityTensor_index.html dislocationDensityTensor>)
 %% 
 % compute curvature tensor from a (complete) dislocation density tensor
 % 
@@ -25,7 +25,9 @@
 %             <tt>alpha</tt>
 %          </td>
 %          <td>
-%                <p>[[dislocationDensityTensor_index.html,dislocationDensityTensor]]</p>
+%                <p>
+%                   <a href="dislocationDensityTensor_index.html&#34;">dislocationDensityTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -40,7 +42,9 @@
 %             <tt>kappa</tt>
 %          </td>
 %          <td>
-%                <p>[[curvatureTensor_index.html,curvatureTensor]]</p>
+%                <p>
+%                   <a href="curvatureTensor_index.html&#34;">curvatureTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

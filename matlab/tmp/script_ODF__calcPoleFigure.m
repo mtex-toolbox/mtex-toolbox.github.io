@@ -1,5 +1,5 @@
 %% calcPoleFigure
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % simulate pole figures from an ODF
 % 
@@ -26,7 +26,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] / [[vector3d_index.html,vector3d]] crystallographic directions</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> / <a href="vector3d_index.html&#34;">vector3d</a> crystallographic directions</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +45,8 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] specimen directions</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> specimen directions</p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -1,5 +1,5 @@
 %% calcMeanDirection
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % compute a smoothed direction that ignores staircasing
 % 
@@ -25,7 +25,9 @@
 %             <tt>gB</tt>
 %          </td>
 %          <td>
-%                <p>[[grainBoundary_index.html,grainBoundary]]</p>
+%                <p>
+%                   <a href="grainBoundary_index.html&#34;">grainBoundary</a>
+%                </p>
 %                <p>tput</p>
 %          </td>
 %       </tr>
@@ -34,7 +36,9 @@
 %             <tt>dir</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

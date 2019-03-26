@@ -1,5 +1,5 @@
 %% conv
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % spherical convolution of sF with a radial function psi
 % 
@@ -21,7 +21,9 @@
 %             <tt>sF, sF1, sF1</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,9 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Kernel_index.html,S2Kernel]]</p>
+%                <p>
+%                   <a href="S2Kernel_index.html&#34;">S2Kernel</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -52,7 +56,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -60,7 +66,9 @@
 %             <tt>SO3F</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

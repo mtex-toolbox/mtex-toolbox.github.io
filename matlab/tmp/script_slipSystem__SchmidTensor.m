@@ -1,5 +1,5 @@
 %% SchmidTensor
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % Schmid tensors for a list of slip systems
 % 
@@ -22,7 +22,8 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>list of [[slipSystem_index.html,slipSystem]]</p>
+%                <p>list of <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -37,7 +38,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>Schmid tensor [[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>Schmid tensor <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

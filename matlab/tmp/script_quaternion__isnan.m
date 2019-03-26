@@ -1,5 +1,5 @@
 %% isnan
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % check for nan values
 %

@@ -1,5 +1,5 @@
 %% calcPoleFigure
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % simulate pole figure
 % 
@@ -19,7 +19,8 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>meassured [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>meassured <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +28,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +45,8 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>recomputed [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>recomputed <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

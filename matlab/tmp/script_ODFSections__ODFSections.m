@@ -1,5 +1,5 @@
 %% ODFSections
-% (method of [[ODFSections_index.html,ODFSections]])
+% (method of <ODFSections_index.html ODFSections>)
 %% 
 %
 %% View Code

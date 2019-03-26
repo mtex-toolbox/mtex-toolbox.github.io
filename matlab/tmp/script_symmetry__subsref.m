@@ -1,5 +1,5 @@
 %% subsref
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % overloads subsref
 %

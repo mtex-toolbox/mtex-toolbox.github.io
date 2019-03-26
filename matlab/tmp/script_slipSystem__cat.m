@@ -1,5 +1,5 @@
 %% cat
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % implement cat for slipSystem
 % 
@@ -27,7 +27,9 @@
 %             <tt>sS1, sS2, sS3</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]]</p>
+%                <p>
+%                   <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +44,9 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]]</p>
+%                <p>
+%                   <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

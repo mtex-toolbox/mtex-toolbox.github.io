@@ -1,5 +1,5 @@
 %% complianceTensor
-% (method of [[complianceTensor_index.html,complianceTensor]])
+% (method of <complianceTensor_index.html complianceTensor>)
 %% 
 %
 %% View Code

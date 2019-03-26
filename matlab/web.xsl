@@ -220,11 +220,11 @@ To make changes, update the MATLAB code and republish this document.
 
 <!-- Figure and model snapshots and equations -->
 <xsl:template match="img[@class='equation']">
-  {% include inline_image.html file="<xsl:value-of select="@src"/>" %}
+  {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
 </xsl:template>
 
 <xsl:template match="img">
-  {% include inline_image.html file="<xsl:value-of select="@src"/>" %}
+  {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
 </xsl:template>
 
 <!-- Stash original code in HTML for easy slurping later. -->

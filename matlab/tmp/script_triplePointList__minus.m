@@ -1,5 +1,5 @@
 %% minus
-% (method of [[triplePointList_index.html,triplePointList]])
+% (method of <triplePointList_index.html triplePointList>)
 %% 
 % shift triple points in x/y direction
 % 
@@ -21,7 +21,9 @@
 %             <tt>tP</tt>
 %          </td>
 %          <td>
-%                <p>[[triplePointList_index.html,triplePointList]]</p>
+%                <p>
+%                   <a href="triplePointList_index.html&#34;">triplePointList</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -44,7 +46,9 @@
 %             <tt>tP</tt>
 %          </td>
 %          <td>
-%                <p>[[triplePointList_index.html,triplePointList]]</p>
+%                <p>
+%                   <a href="triplePointList_index.html&#34;">triplePointList</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

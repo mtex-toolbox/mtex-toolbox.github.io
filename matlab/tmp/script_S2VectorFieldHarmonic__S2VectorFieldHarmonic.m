@@ -1,5 +1,5 @@
 %% S2VectorFieldHarmonic
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %% 
 % a class represeneting a function on the sphere
 %

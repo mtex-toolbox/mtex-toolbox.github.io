@@ -1,5 +1,5 @@
 %% plotIPDF
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % plot orientations into inverse pole figures
 % 
@@ -24,7 +24,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,8 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] specimen directions</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> specimen directions</p>
 %          </td>
 %       </tr>
 %       <tr>

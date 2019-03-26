@@ -1,5 +1,5 @@
 %% plotFibre
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % plot odf along a fibre
 % 
@@ -25,7 +25,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>f</tt>
 %          </td>
 %          <td>
-%                <p>[[fibre_index.html,fibre]]</p>
+%                <p>
+%                   <a href="fibre_index.html&#34;">fibre</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

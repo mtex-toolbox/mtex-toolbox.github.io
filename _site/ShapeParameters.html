@@ -32,7 +32,7 @@
 <script src="js/toc.js"></script>
 <script src="js/customscripts.js"></script>
 
-<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="images/mtex.ico">
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -190,7 +190,7 @@
                 
 
 <ul id="mysidebar" class="nav">
-  <li class="sidebarTitle">MTEX 5.1.0</li>
+  <li class="sidebarTitle">Documentation </li>
   
   
   
@@ -457,7 +457,7 @@
       
   
   <li>
-      <a href="#">PhaseTransitions</a>
+      <a href="#">Phase Transitions</a>
       <ul>
           
           
@@ -927,13 +927,13 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">First Steps and Function Overview</h2><p>Get in touch with grains.</p><h2 id="2">Grain reconstruction from EBSD data</h2><p>So far grains can be exclusively computed from EBSD data using the command <a href="EBSD.calcGrains.html">calcGrains</a>. In order to demonstrate grain reconstruction we import some EBSD data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">First Steps and Function Overview</h2><p>Get in touch with grains.</p><h2 id="2">Grain reconstruction from EBSD data</h2><p>So far grains can be exclusively computed from EBSD data using the command <a href="EBSD.calcGrains.html">calcGrains</a>. In order to demonstrate grain reconstruction we import some EBSD data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
 plotx2east
 
 <span class="comment">% plot the Forsterite phase colorized according to orientation</span>
 plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_01.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_01.png" alt="" />
 
 <p>When reconstructing grain there are two basic ways how to deal with not indexed measurements. The simplest way is to keep the not indexed pixels separately, i.e., do not assign them to any indexed grain.</p><pre class="codeinput">[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
 </pre><pre class="codeoutput"> 
@@ -966,7 +966,7 @@ ebsd = EBSD
 plot(grains.boundary)
 hold <span class="string">off</span>
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_02.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_02.png" alt="" />
 
 <p>The resulting grains contain a lot of holes and one-pixel grains. The second way is to assign not indexed pixels to surrounding grains. In MTEX this is done if the not indexed data are removed from the measurements, i.e.</p><pre class="codeinput">ebsd = ebsd(<span class="string">'indexed'</span>) <span class="comment">% this removes all not indexed data</span>
 [grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
@@ -1025,7 +1025,7 @@ hold <span class="string">on</span>
 plot(grains.boundary)
 hold <span class="string">off</span>
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_03.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_03.png" alt="" />
 
 <h2 id="7">Area, Perimeter, Diameter</h2><h2 id="8">Holes</h2><h2 id="9">Neighbours</h2><h2 id="10">Fitted Ellipse</h2><h2 id="12">Convexity</h2><p>pari</p><h2 id="13">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
    <table class="usertable">
@@ -1317,12 +1317,12 @@ hold <span class="string">off</span>
    </table>
 </p><p>Those grain properties can be used for colorization. E.g. we may colorize grains according to their area.</p><pre class="codeinput">plot(grains,grains.area)
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_04.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_04.png" alt="" />
 
 <p>or a little bit more advanced according to the log quotient between grain size and boundary size.</p><pre class="codeinput">plot(grains,log(grains.grainSize ./ grains.boundarySize))
 mtexColorbar
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_05.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_05.png" alt="" />
 
 <p>Note that some properties are available for single phase lists of grains, e.g.</p><pre class="codeinput"><span class="comment">% colorize the Forsterite Phase according to its mean orientation</span>
 plot(grains(<span class="string">'Fo'</span>),grains(<span class="string">'Fo'</span>).meanOrientation)
@@ -1332,7 +1332,7 @@ plot(grains(<span class="string">'Fo'</span>),grains(<span class="string">'Fo'</
   oM = ipfColorKey(ori_variable_name)
   plot(oM)
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_06.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_06.png" alt="" />
 
 <h2 id="17">Changing lists of grains</h2><p>As with any list in MTEX, one can single out specific grains by conditions using the syntax</p><pre class="codeinput"><span class="comment">% this gives all grains with more the 1000 pixels</span>
 largeGrains = grains(grains.grainSize &gt; 1000)
@@ -1354,7 +1354,7 @@ largeGrains = grain2d
  Properties: GOS, meanRotation
  
 </pre>
-  <img class="inline" src="images/script_ShapeParameters_07.png" alt="" />
+  <img class="inline" src="images/ShapeParameters_07.png" alt="" />
 
 </div></body></html>
 

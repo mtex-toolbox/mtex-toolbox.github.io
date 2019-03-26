@@ -1,5 +1,5 @@
 %% polarCoordinates
-% (method of [[sphericalRegion_index.html,sphericalRegion]])
+% (method of <sphericalRegion_index.html sphericalRegion>)
 %% 
 % compute polar coordinates of with respect to a spherical region
 % 
@@ -25,7 +25,9 @@
 %             <tt>sR</tt>
 %          </td>
 %          <td>
-%                <p>[[sphericalRegion_index.html,sphericalRegion]]</p>
+%                <p>
+%                   <a href="sphericalRegion_index.html&#34;">sphericalRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +45,9 @@
 %             <tt>center</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

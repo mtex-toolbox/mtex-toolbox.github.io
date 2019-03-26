@@ -1,5 +1,5 @@
 %% plot3d
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % plot spherical data
 % 

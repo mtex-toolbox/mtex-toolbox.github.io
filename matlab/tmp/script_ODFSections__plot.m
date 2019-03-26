@@ -1,5 +1,5 @@
 %% plot
-% (method of [[ODFSections_index.html,ODFSections]])
+% (method of <ODFSections_index.html ODFSections>)
 %% 
 % plot data into ODF sections
 % 
@@ -24,7 +24,9 @@
 %             <tt>oS</tt>
 %          </td>
 %          <td>
-%                <p>[[ODFSections_index.html,ODFSections]]</p>
+%                <p>
+%                   <a href="ODFSections_index.html&#34;">ODFSections</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -40,7 +44,9 @@
 %             <tt>fibre</tt>
 %          </td>
 %          <td>
-%                <p>[[fibre_index.html,fibre]]</p>
+%                <p>
+%                   <a href="fibre_index.html&#34;">fibre</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

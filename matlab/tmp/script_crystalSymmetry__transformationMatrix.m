@@ -1,5 +1,5 @@
 %% transformationMatrix
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % compute the transformation matrix from cs1 to cs2
 % 
@@ -25,7 +25,9 @@
 %             <tt>cs1, cs2</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% S2Fun
-% (method of [[S2Fun_index.html,S2Fun]])
+% (method of <S2Fun_index.html S2Fun>)
 %% 
 % a class represeneting a function on the sphere
 %

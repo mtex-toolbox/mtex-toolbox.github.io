@@ -1,5 +1,5 @@
 %% calcQuat
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % calculate quaternions for Laue groups
 %

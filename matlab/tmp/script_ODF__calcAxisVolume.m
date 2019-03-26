@@ -1,5 +1,5 @@
 %% calcAxisVolume
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % amount of orientations with a specific misorientation axis
 % 
@@ -19,7 +19,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>axis</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] / [[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> / <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -1,5 +1,5 @@
 %% GreenStrain
-% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+% (method of <deformationGradientTensor_index.html deformationGradientTensor>)
 %
 %% View Code
 % 
@@ -31,7 +31,9 @@
 %             <tt>epsilon</tt>
 %          </td>
 %          <td>
-%                <p>[[strainTensor_index.html,strainTensor]]</p>
+%                <p>
+%                   <a href="strainTensor_index.html&#34;">strainTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

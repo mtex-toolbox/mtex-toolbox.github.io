@@ -1,3 +1,0 @@
-%% Crystal Reference System
-%
-%%

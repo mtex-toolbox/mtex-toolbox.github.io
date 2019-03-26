@@ -1,5 +1,5 @@
 %% unique
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % remove dublicated points in a polefigure
 %

@@ -1,3 +1,0 @@
-%% Kernel Average Misorientation KAM
-%
-%%

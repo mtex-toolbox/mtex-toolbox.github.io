@@ -1,5 +1,5 @@
 %% triplePointList
-% (method of [[triplePointList_index.html,triplePointList]])
+% (method of <triplePointList_index.html triplePointList>)
 %% 
 % grainBoundary list of grain boundaries in 2-D
 % 

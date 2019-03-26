@@ -1,5 +1,5 @@
 %% display
-% (method of [[SO3Grid_index.html,SO3Grid]])
+% (method of <SO3Grid_index.html SO3Grid>)
 %% 
 % standard output
 %

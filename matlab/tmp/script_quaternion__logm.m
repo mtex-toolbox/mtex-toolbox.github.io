@@ -1,5 +1,5 @@
 %% logm
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % the logarithmic map that translates a rotation into a spin tensor
 % 
@@ -20,7 +20,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +30,9 @@
 %             <tt>q_ref</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -43,7 +47,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[spinTensor_index.html,spinTensor]]</p>
+%                <p>
+%                   <a href="spinTensor_index.html&#34;">spinTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

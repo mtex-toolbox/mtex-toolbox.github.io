@@ -1,5 +1,5 @@
 %% spy
-% (method of [[SO3Grid_index.html,SO3Grid]])
+% (method of <SO3Grid_index.html SO3Grid>)
 %% 
 % spy distance matrix
 %

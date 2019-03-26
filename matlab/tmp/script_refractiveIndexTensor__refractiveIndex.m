@@ -1,5 +1,5 @@
 %% refractiveIndex
-% (method of [[refractiveIndexTensor_index.html,refractiveIndexTensor]])
+% (method of <refractiveIndexTensor_index.html refractiveIndexTensor>)
 %% 
 % refractive index with respect to a propagation direction
 % 
@@ -28,7 +28,8 @@
 %             <tt>vProp</tt>
 %          </td>
 %          <td>
-%                <p>propagation direction [[vector3d_index.html,vector3d]]</p>
+%                <p>propagation direction <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -51,7 +52,9 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

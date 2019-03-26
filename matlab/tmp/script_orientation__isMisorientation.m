@@ -1,5 +1,5 @@
 %% isMisorientation
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % check whether o is a misorientation
 %

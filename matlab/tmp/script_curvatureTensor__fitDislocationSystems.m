@@ -1,5 +1,5 @@
 %% fitDislocationSystems
-% (method of [[curvatureTensor_index.html,curvatureTensor]])
+% (method of <curvatureTensor_index.html curvatureTensor>)
 %% 
 % fit dislocation systems to a curvature tensor
 % 
@@ -29,7 +29,8 @@
 %             <tt>kappa</tt>
 %          </td>
 %          <td>
-%                <p>(incomplete) [[curvatureTensor_index.html,curvatureTensor]]</p>
+%                <p>(incomplete) <a href="curvatureTensor_index.html&#34;">curvatureTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +38,8 @@
 %             <tt>dS</tt>
 %          </td>
 %          <td>
-%                <p>list of [[dislocationSystem_index.html,dislocationSystem]]</p>
+%                <p>list of <a href="dislocationSystem_index.html&#34;">dislocationSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

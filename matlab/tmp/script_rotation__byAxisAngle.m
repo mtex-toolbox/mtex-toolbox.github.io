@@ -1,5 +1,5 @@
 %% byAxisAngle
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % define rotations by rotational axis and rotational angle
 % 
@@ -19,7 +19,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>rotational axis [[vector3d_index.html,vector3d]]</p>
+%                <p>rotational axis <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +43,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

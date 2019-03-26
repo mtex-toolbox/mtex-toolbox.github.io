@@ -1,5 +1,5 @@
 %% vector3d
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % convert rank one tensors to vector3d
 % 
@@ -19,7 +19,8 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>rank one [[tensor_index.html,tensor]]</p>
+%                <p>rank one <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +35,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

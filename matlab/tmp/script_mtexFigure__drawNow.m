@@ -1,5 +1,5 @@
 %% drawNow
-% (method of [[mtexFigure_index.html,mtexFigure]])
+% (method of <mtexFigure_index.html mtexFigure>)
 %% 
 %
 %% View Code

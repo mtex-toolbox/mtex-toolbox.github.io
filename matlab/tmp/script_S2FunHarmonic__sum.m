@@ -1,5 +1,5 @@
 %% sum
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % calculates the integral for an univariate S2Fun or sums up along a specified dimension fo a multimodal S2Fun
 % 
@@ -27,7 +27,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

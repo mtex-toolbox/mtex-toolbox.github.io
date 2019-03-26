@@ -1,5 +1,5 @@
 %% deviatoricStress
-% (method of [[stressTensor_index.html,stressTensor]])
+% (method of <stressTensor_index.html stressTensor>)
 %% 
 % deviatoric stress
 % 
@@ -20,7 +20,9 @@
 %             <tt>sigma</tt>
 %          </td>
 %          <td>
-%                <p>[[stressTensor_index.html,stressTensor]]</p>
+%                <p>
+%                   <a href="stressTensor_index.html&#34;">stressTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -35,7 +37,9 @@
 %             <tt>s</tt>
 %          </td>
 %          <td>
-%                <p>[[stressTensor_index.html,stressTensor]]</p>
+%                <p>
+%                   <a href="stressTensor_index.html&#34;">stressTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

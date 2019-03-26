@@ -26,18 +26,18 @@
 %    <tr>
 %       <td valign="top" width="15">
 %          <div align="center">
-%             <a href="#" onClick="return toggleexpander('properties_block','properties_expandable_text');" valign="top" width="15">
-%                <img id="properties_expandable_text" src="arrow_right.gif" style="border:0px"/></a>
+%             <a href="#" onClick="return toggleexpander('Properties_block','Properties_expandable_text');" valign="top" width="15">
+%                <img id="Properties_expandable_text" src="arrow_right.gif" style="border:0px"/></a>
 %          </div>
 %       </td>
 %       <td valign="top" width="250px">
-%          <a href="properties.html">Properties<td valign="top" width="75%"/></a>
+%          <a href="Properties.html">Properties<td valign="top" width="75%"/></a>
 %       </td>
 %    </tr>
 %    <tr>
 %       <td/>
 %       <td colspan="2">
-%          <div class="expander" id="properties_block" style="display:none; background:#e7ebf7; padding-left:2ex;">
+%          <div class="expander" id="Properties_block" style="display:none; background:#e7ebf7; padding-left:2ex;">
 %             <table/>
 %          </div>
 %       </td>

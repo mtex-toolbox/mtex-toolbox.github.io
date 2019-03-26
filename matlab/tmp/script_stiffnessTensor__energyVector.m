@@ -1,5 +1,5 @@
 %% energyVector
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % Calculates Energy velocity vector (km/s)
 % 
@@ -31,7 +31,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>[[stiffnessTensor_index.html,stiffnessTensor]] (units GPa)</p>
+%                <p>
+%                   <a href="stiffnessTensor_index.html&#34;">stiffnessTensor</a> (units GPa)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -39,7 +40,8 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] propagation direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> propagation direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -55,7 +57,8 @@
 %             <tt>p</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] plane wave polarization vector e.g. pp,ps1 or ps2</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> plane wave polarization vector e.g. pp,ps1 or ps2</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -63,7 +66,8 @@
 %             <tt>vFun</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]] plane wave velocity (unit km/s) e.g. vp,vs1 or vs2</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a> plane wave velocity (unit km/s) e.g. vp,vs1 or vs2</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -71,7 +75,8 @@
 %             <tt>pFun</tt>
 %          </td>
 %          <td>
-%                <p>[[S2AxisField_index.html,S2AxisField]] plane wave polarization vector e.g. pp,ps1 or ps2</p>
+%                <p>
+%                   <a href="S2AxisField_index.html&#34;">S2AxisField</a> plane wave polarization vector e.g. pp,ps1 or ps2</p>
 %          </td>
 %       </tr>
 %       <tr>

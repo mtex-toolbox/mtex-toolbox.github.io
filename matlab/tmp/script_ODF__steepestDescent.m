@@ -1,5 +1,5 @@
 %% steepestDescent
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % find maximum with steepest descent
 %

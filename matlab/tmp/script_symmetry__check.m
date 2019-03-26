@@ -1,5 +1,5 @@
 %% check
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % check symmetry
 %

@@ -1,5 +1,5 @@
 %% load
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % import orientation data from data files
 % 
@@ -41,7 +41,9 @@
 %             <tt>cs</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalSymmetry_index.html,crystalSymmetry]]</p>
+%                <p>
+%                   <a href="crystalSymmetry_index.html&#34;">crystalSymmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -49,7 +51,8 @@
 %             <tt>ss</tt>
 %          </td>
 %          <td>
-%                <p>[[specimenSymmetry_index.html,specimenSymmetry]] (optional)</p>
+%                <p>
+%                   <a href="specimenSymmetry_index.html&#34;">specimenSymmetry</a> (optional)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -129,7 +132,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

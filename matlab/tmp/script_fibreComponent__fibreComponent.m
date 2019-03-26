@@ -1,5 +1,5 @@
 %% fibreComponent
-% (method of [[fibreComponent_index.html,fibreComponent]])
+% (method of <fibreComponent_index.html fibreComponent>)
 %% 
 % defines an fibre symmetric component
 %

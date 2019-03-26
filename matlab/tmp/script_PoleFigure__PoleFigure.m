@@ -1,5 +1,5 @@
 %% PoleFigure
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % constructor
 % 
@@ -28,7 +28,7 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>crystal directions ([[vector3d_index.html,vector3d]] | [[Miller_index.html,Miller]])</p>
+%                <p>crystal directions (<a href="vector3d_index.html&#34;">vector3d</a> | <a href="Miller_index.html&#34;">Miller</a>)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +36,7 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>specimen directions ([[S2Grid_index.html,S2Grid]])</p>
+%                <p>specimen directions (<a href="S2Grid_index.html&#34;">S2Grid</a>)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -52,7 +52,8 @@
 %             <tt>CS,SS</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

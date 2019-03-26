@@ -1,5 +1,5 @@
 %% spectralTransmission
-% (method of [[refractiveIndexTensor_index.html,refractiveIndexTensor]])
+% (method of <refractiveIndexTensor_index.html refractiveIndexTensor>)
 %
 %% View Code
 % 
@@ -23,7 +23,9 @@
 %             <tt>rI</tt>
 %          </td>
 %          <td>
-%                <p>[[refractiveIndexTensor_index.html,refractiveIndexTensor]]</p>
+%                <p>
+%                   <a href="refractiveIndexTensor_index.html&#34;">refractiveIndexTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

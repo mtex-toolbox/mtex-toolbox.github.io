@@ -1,5 +1,5 @@
 %% sum
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % sum of vectors
 % 
@@ -20,7 +20,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -32,7 +34,7 @@
 %    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
 %       <tr>
 %          <td width="100px">
-%             <tt>[[vector3d_index.html,vector3d]]</tt>
+%             <tt>&lt;vector3d_index.html" vector3d&gt;</tt>
 %          </td>
 %          <td/>
 %       </tr>

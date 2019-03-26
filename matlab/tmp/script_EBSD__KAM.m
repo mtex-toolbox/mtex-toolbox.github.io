@@ -1,5 +1,5 @@
 %% KAM
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % intragranular average misorientation angle per orientation
 % 

@@ -1,5 +1,5 @@
 %% calcModes
-% (method of [[fibreComponent_index.html,fibreComponent]])
+% (method of <fibreComponent_index.html fibreComponent>)
 %% 
 % return the modes of the component
 %

@@ -1,5 +1,5 @@
 %% calcTensor
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % compute the average tensor for an EBSD data set
 % 
@@ -29,7 +29,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +39,8 @@
 %             <tt>T_phaseN</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]] for the N-th phase</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a> for the N-th phase</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -96,7 +99,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

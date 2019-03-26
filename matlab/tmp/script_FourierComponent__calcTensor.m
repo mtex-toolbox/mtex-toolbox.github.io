@@ -1,5 +1,5 @@
 %% calcTensor
-% (method of [[FourierComponent_index.html,FourierComponent]])
+% (method of <FourierComponent_index.html FourierComponent>)
 %% 
 % compute the average tensor for an ODF
 %

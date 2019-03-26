@@ -1,5 +1,5 @@
 %% calcGND
-% (method of [[EBSDsquare_index.html,EBSDsquare]])
+% (method of <EBSDsquare_index.html EBSDsquare>)
 %% 
 % compute the geometrically necessary dislocation
 % 
@@ -33,7 +33,9 @@
 %             <tt>dS</tt>
 %          </td>
 %          <td>
-%                <p>[[dislocationSystem_index.html,dislocationSystem]]</p>
+%                <p>
+%                   <a href="dislocationSystem_index.html&#34;">dislocationSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

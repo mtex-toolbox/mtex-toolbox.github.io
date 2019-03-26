@@ -1,5 +1,5 @@
 %% CauchyStrain
-% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+% (method of <deformationGradientTensor_index.html deformationGradientTensor>)
 %% 
 % Cauchy strain or small strain
 % 
@@ -34,7 +34,9 @@
 %             <tt>epsilon</tt>
 %          </td>
 %          <td>
-%                <p>[[strainTensor_index.html,strainTensor]]</p>
+%                <p>
+%                   <a href="strainTensor_index.html&#34;">strainTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% fitEllipse
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % fit ellipses to grains using the method described in Mulchrone&
 % Choudhury,2004 (https://doi.org/10.1016/S0191-8141(03)00093-2)
@@ -22,7 +22,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

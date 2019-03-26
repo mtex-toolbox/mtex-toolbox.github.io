@@ -1,5 +1,5 @@
 %% plot
-% (method of [[sphericalRegion_index.html,sphericalRegion]])
+% (method of <sphericalRegion_index.html sphericalRegion>)
 %% 
 % plots a spherical region
 % 

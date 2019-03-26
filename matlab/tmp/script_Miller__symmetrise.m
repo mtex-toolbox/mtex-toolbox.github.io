@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % directions symmetrically equivalent to m
 % 
@@ -16,7 +16,8 @@
 %    </div>
 %    <div class="syntax" width="100%">
 %       <tt>m = symmetrise(m)</tt>
-%          <span>[[Miller_index.html,Miller]] indice symmetrically equivalent to m</span>
+%          <span>
+%             <a href="Miller_index.html&#34;">Miller</a> indice symmetrically equivalent to m</span>
 %    </div>
 % </html>
 % 
@@ -29,7 +30,9 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -64,7 +67,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% display
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %% 
 % standard output
 %

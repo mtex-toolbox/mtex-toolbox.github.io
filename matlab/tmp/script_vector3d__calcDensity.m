@@ -1,5 +1,5 @@
 %% calcDensity
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % calculate a density function out of (weighted) unit vectors
 % 
@@ -24,7 +24,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>sampling points for density estimation [[vector3d_index.html,vector3d]]</p>
+%                <p>sampling points for density estimation <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +33,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -56,7 +59,8 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]] function, default is de la Vallee Poussin</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a> function, default is de la Vallee Poussin</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -107,7 +111,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

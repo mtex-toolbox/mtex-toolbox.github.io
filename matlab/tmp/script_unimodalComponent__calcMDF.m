@@ -1,5 +1,5 @@
 %% calcMDF
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % calculate the uncorrelated misorientation distribution function (MDF) from one or two ODF
 %

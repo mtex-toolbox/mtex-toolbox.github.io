@@ -1,5 +1,5 @@
 %% steepestDescent
-% (method of [[S2FunHarmonicSym_index.html,S2FunHarmonicSym]])
+% (method of <S2FunHarmonicSym_index.html S2FunHarmonicSym>)
 %% 
 % calculates the minimum of a spherical harminc
 %
@@ -31,7 +31,9 @@
 %             <tt>pos</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

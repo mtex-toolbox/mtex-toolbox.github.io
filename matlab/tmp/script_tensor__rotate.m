@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % rotate a tensor by a list of rotations
 % 
@@ -30,7 +30,9 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>[[tensor_index.html,tensor]]</p>
+%                <p>
+%                   <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +40,8 @@
 %             <tt>R</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]] or rotation matrix or a list of them</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a> or rotation matrix or a list of them</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -53,7 +56,8 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>rotated [[tensor_index.html,tensor]]</p>
+%                <p>rotated <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

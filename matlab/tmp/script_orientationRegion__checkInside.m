@@ -1,5 +1,5 @@
 %% checkInside
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % check for points to be inside the orientation region
 %

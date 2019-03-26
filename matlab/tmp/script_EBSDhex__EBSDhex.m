@@ -1,5 +1,5 @@
 %% EBSDhex
-% (method of [[EBSDhex_index.html,EBSDhex]])
+% (method of <EBSDhex_index.html EBSDhex>)
 %% 
 % EBSD data on a hexagonal grid. In contrast to arbitrary EBSD data the
 % values are stored in a matrix.

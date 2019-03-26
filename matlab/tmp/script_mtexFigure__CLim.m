@@ -1,5 +1,5 @@
 %% CLim
-% (method of [[mtexFigure_index.html,mtexFigure]])
+% (method of <mtexFigure_index.html mtexFigure>)
 %% 
 % set color range for figures
 % 

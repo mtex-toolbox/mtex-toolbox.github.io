@@ -1,5 +1,5 @@
 %% neuralgas
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % attempt to distribute measure-sites equally according to invers polefigure density (experimental)
 % 
@@ -19,7 +19,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]]</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -44,7 +48,8 @@
 %                      <tt>'Grid'</tt>
 %                   </td>
 %                   <td>
-%                         <p>[[S2Grid_index.html,S2Grid]], reference Grid to evaluate PDF</p>
+%                         <p>
+%                            <a href="S2Grid_index.html&#34;">S2Grid</a>, reference Grid to evaluate PDF</p>
 %                   </td>
 %                </tr>
 %                <tr>

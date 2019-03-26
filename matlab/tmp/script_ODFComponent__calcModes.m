@@ -1,5 +1,5 @@
 %% calcModes
-% (method of [[ODFComponent_index.html,ODFComponent]])
+% (method of <ODFComponent_index.html ODFComponent>)
 %% 
 % return the modes of the component
 %

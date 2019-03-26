@@ -1,5 +1,5 @@
 %% calcMisorientation
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % calculate uncorrelated misorientations between two ebsd phases
 % 
@@ -32,7 +32,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -47,7 +49,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]], such that</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>, such that</p>
 %                <p>
 %                   <equation text="$$m = (g{_i}^{-1}*CS^{-1}) * (CS *\circ g_j)$$">
 %                      <img alt="$$m = (g{_i}^{-1}*CS^{-1}) * (CS *\circ g_j)$$" class="equation" height="18px" src="EBSD.calcMisorientation_tmp_eq12272854558270220507.png" width="198px"/>
@@ -55,7 +58,8 @@
 %                </p>
 %                <p>or two neighbored orientations <equation>
 %                      <img alt="$g_i, g_j$" class="equation" height="11px" src="EBSD.calcMisorientation_tmp_eq17370096838039086876.png" width="29px"/>
-%                   </equation> with crystal [[symmetry_index.html,symmetry]] <equation>
+%                   </equation> with crystal <a href="symmetry_index.html&#34;">symmetry</a> 
+%                   <equation>
 %                      <img alt="$CS$" class="equation" height="11px" src="EBSD.calcMisorientation_tmp_eq05113710701194688000.png" width="21px"/>
 %                   </equation> of he same phase located on a grain boundary.</p>
 %          </td>

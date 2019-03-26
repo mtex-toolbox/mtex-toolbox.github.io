@@ -1,5 +1,5 @@
 %% calcQuadratureWeights
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % compute the area of the Voronoi decomposition
 % 
@@ -25,7 +25,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]]</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

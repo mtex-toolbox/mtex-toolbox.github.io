@@ -1,10 +1,10 @@
 %% rdivide
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % implements pf1 ./ b and a ./ pf2
 % 
 % overload the .* operator, i.e. one can now write x .* pf in order to
-% scale the [[PoleFigure_index.html,PoleFigure]] pf by the factor x
+% scale the <PoleFigure_index.html" PoleFigure> pf by the factor x
 % 
 %
 %% View Code

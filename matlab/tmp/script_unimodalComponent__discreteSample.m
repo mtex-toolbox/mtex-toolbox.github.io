@@ -1,5 +1,5 @@
 %% discreteSample
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % draw a random sample
 % 

@@ -1,5 +1,5 @@
 %% subsind
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % subindexing of EBSD data
 % 

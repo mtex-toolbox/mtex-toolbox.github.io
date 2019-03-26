@@ -1,5 +1,5 @@
 %% planeIntersect
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % pointwise determinant or triple product of three vector3d
 % 
@@ -25,7 +25,8 @@
 %             <tt>n1,n2,n3</tt>
 %          </td>
 %          <td>
-%                <p>normal [[vector3d_index.html,vector3d]]</p>
+%                <p>normal <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -1,5 +1,5 @@
 %% max
-% (method of [[S2Fun_index.html,S2Fun]])
+% (method of <S2Fun_index.html S2Fun>)
 %% 
 % global, local and pointwise maxima of spherical functions
 % 
@@ -28,7 +28,9 @@
 %             <tt>sF, sF1, sF2</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +38,8 @@
 %             <tt>sFmulti</tt>
 %          </td>
 %          <td>
-%                <p>a multivariate [[S2Fun_index.html,S2Fun]]</p>
+%                <p>a multivariate <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -77,7 +80,9 @@
 %                      <tt>'startingNodes'</tt>
 %                   </td>
 %                   <td>
-%                         <p>[[vector3d_index.html,vector3d]]</p>
+%                         <p>
+%                            <a href="vector3d_index.html&#34;">vector3d</a>
+%                         </p>
 %                   </td>
 %                </tr>
 %                <tr>
@@ -127,7 +132,9 @@
 %             <tt>pos</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

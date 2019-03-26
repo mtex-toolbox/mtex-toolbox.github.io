@@ -1,5 +1,5 @@
 %% exp
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % exponential function
 % 
@@ -26,7 +26,9 @@
 %             <tt>ori_1</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] axis of rotation scaled by the angle of rotation</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> axis of rotation scaled by the angle of rotation</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +45,8 @@
 %             <tt>S</tt>
 %          </td>
 %          <td>
-%                <p>skew symmetry [[tensor_index.html,tensor]]</p>
+%                <p>skew symmetry <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -57,7 +61,8 @@
 %             <tt>ori_2</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]] rotate ori_1 about axis v with angle norm(v)</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a> rotate ori_1 about axis v with angle norm(v)</p>
 %          </td>
 %       </tr>
 %    </table>

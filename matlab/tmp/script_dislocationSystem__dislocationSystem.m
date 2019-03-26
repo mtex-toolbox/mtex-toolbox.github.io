@@ -1,5 +1,5 @@
 %% dislocationSystem
-% (method of [[dislocationSystem_index.html,dislocationSystem]])
+% (method of <dislocationSystem_index.html dislocationSystem>)
 %% 
 % class representing dislocation systems
 % 
@@ -20,7 +20,8 @@
 %             <tt>b</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] Burgers vector</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> Burgers vector</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +29,8 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] line vector</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> line vector</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +38,9 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]]</p>
+%                <p>
+%                   <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

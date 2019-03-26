@@ -1,5 +1,5 @@
 %% alignment
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % 
 %                                                          <html>

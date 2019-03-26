@@ -1,5 +1,5 @@
 %% fundamentalSector
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % get the fundamental sector for a symmetry in the inverse pole figure
 % 
@@ -22,7 +22,9 @@
 %             <tt>cs</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -39,7 +41,9 @@
 %             <tt>sR</tt>
 %          </td>
 %          <td>
-%                <p>[[sphericalRegion_index.html,sphericalRegion]]</p>
+%                <p>
+%                   <a href="sphericalRegion_index.html&#34;">sphericalRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

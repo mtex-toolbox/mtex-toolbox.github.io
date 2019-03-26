@@ -1,5 +1,5 @@
 %% getFundamentalRegion
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % projects orientations to a fundamental region
 % 
@@ -25,7 +25,9 @@
 %             <tt>o</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,8 @@
 %             <tt>q_ref</tt>
 %          </td>
 %          <td>
-%                <p>reference [[quaternion_index.html,quaternion]]</p>
+%                <p>reference <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +51,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

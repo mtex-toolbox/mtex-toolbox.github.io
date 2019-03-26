@@ -1,5 +1,5 @@
 %% rdivide
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %
 %% View Code
 % 
@@ -18,7 +18,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -26,7 +28,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -49,7 +53,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]]</p>
+%                <p>
+%                   <a href="S2VectorFieldHarmonic_index.html&#34;">S2VectorFieldHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

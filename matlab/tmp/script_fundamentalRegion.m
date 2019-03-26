@@ -20,7 +20,9 @@
 %             <tt>cs,cs1,cs2</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +30,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +40,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %                <p>ut</p>
 %          </td>
 %       </tr>
@@ -45,7 +51,9 @@
 %             <tt>oR</tt>
 %          </td>
 %          <td>
-%                <p>[[orientationRegion_index.html,orientationRegion]]</p>
+%                <p>
+%                   <a href="orientationRegion_index.html&#34;">orientationRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

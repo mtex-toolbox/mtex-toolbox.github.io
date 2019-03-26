@@ -1,5 +1,5 @@
 %% rho
-% (method of [[S2VectorField_index.html,S2VectorField]])
+% (method of <S2VectorField_index.html S2VectorField>)
 %% 
 % Gives the vector in the tangential plane in v in the direction rho
 % 

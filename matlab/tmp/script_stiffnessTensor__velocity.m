@@ -1,5 +1,5 @@
 %% velocity
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % computes the elastic wave velocity(km/s) from
 % the elastic stiffness Cijkl tensor and density (g/cm3)
@@ -26,7 +26,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elasticity [[stiffnessTensor_index.html,stiffnessTensor]] Cijkl (UNITS GPa) [[tensor_index.html,tensor]]</p>
+%                <p>elasticity <a href="stiffnessTensor_index.html&#34;">stiffnessTensor</a> Cijkl (UNITS GPa) <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +35,7 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>list of propagation directions ([[vector3d_index.html,vector3d]])</p>
+%                <p>list of propagation directions (<a href="vector3d_index.html&#34;">vector3d</a>)</p>
 %          </td>
 %       </tr>
 %       <tr>

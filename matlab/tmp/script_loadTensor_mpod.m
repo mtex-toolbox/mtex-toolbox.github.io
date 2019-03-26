@@ -38,7 +38,7 @@
 %             <tt>cs, ss</tt>
 %          </td>
 %          <td>
-%                <p>crystal, specimen [[symmetry_index.html,symmetry]] (optional)</p>
+%                <p>crystal, specimen <a href="symmetry_index.html&#34;">symmetry</a> (optional)</p>
 %          </td>
 %       </tr>
 %    </table>

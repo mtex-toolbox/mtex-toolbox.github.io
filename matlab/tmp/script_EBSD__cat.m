@@ -1,5 +1,5 @@
 %% cat
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % overloads [ebsd1,ebsd2,ebsd3..]
 % 

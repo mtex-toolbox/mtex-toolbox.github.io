@@ -1,5 +1,5 @@
 %% export_mtex
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % export an ODF into the MTEX format
 % 

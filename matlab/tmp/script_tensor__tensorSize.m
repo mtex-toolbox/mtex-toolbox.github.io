@@ -1,5 +1,5 @@
 %% tensorSize
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % overloads size
 %

@@ -1,5 +1,5 @@
 %% ChristoffelTensor
-% (method of [[ChristoffelTensor_index.html,ChristoffelTensor]])
+% (method of <ChristoffelTensor_index.html ChristoffelTensor>)
 %% 
 %
 %% View Code

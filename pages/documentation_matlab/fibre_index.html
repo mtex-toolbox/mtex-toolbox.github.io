@@ -1,6 +1,6 @@
 ---
 title: Fibres
-last_updated: 20-Mar-2019
+last_updated: 26-Mar-2019
 sidebar: documentation_sidebar
 permalink: fibre_index.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fibres</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-20"><meta name="DC.source" content="script_fibre_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit fibre_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This sections describes the class <a href="fibre_index.html">fibre</a> and gives an overview how to work with fibres in MTEX.</p><!--/introduction--><h2 id="1">Open in Editor</h2><h2 id="2">Defining a Fibre</h2><p>A fibre in orientation space can be seen as a line connecting two orientations.</p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
+      --><title>Fibres</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_fibre_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit fibre_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This sections describes the class <a href="fibre_index.html">fibre</a> and gives an overview how to work with fibres in MTEX.</p><!--/introduction--><h2 id="2">Defining a Fibre</h2><p>A fibre in orientation space can be seen as a line connecting two orientations.</p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
 cs = crystalSymmetry(<span class="string">'432'</span>)
 ss = specimenSymmetry(<span class="string">'222'</span>)
 
@@ -48,7 +48,7 @@ f = fibre
  o1: (0&deg;,0&deg;,0&deg;)
  o2: (0&deg;,45&deg;,0&deg;)
 </pre>
-  {% include inline_image.html file="script_fibre_index_01.png" %}
+  {% include inline_image.html file="fibre_index_01.png" %}
 <pre class="codeinput"><span class="comment">%Since, the orientation space has no boundary a full fibre</span>
 <span class="comment">% is best thought of as a circle that passes trough two fixed orientations.</span>
 </pre><h2 id="4">SUB: by two orientations</h2><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
@@ -82,7 +82,7 @@ oR = orientationRegion
  vertices: 24
  
 </pre>
-  {% include inline_image.html file="script_fibre_index_02.png" %}
+  {% include inline_image.html file="fibre_index_02.png" %}
 <p>Now we can define the partial fibre connecting the cube orientation with the goss orientation by</p><pre class="codeinput">f = fibre(ori1,ori2)
 
 hold <span class="string">on</span>
@@ -95,7 +95,7 @@ f = fibre
  o1: (0&deg;,0&deg;,0&deg;)
  o2: (0&deg;,45&deg;,0&deg;)
 </pre>
-  {% include inline_image.html file="script_fibre_index_03.png" %}
+  {% include inline_image.html file="fibre_index_03.png" %}
 <p>In order to define the full fibre us the option <tt>full</tt></p><pre class="codeinput">f = fibre(ori1,ori2,<span class="string">'full'</span>)
 
 hold <span class="string">on</span>
@@ -108,7 +108,7 @@ f = fibre
  o1: (0&deg;,0&deg;,0&deg;)
  h: (100)
 </pre>
-  {% include inline_image.html file="script_fibre_index_04.png" %}
+  {% include inline_image.html file="fibre_index_04.png" %}
 <h2 id="8">SUB: by two directions</h2><p>Alternatively, a fibre can also be defined by a crystal direction and a specimen direction. In this case it consists of all orientations that alignes the crystal direction parallel to the specimen direction. As an example we can define the fibre of all orientations such that the c-axis (001) is parallel to the z-axis by</p><pre class="codeinput">f = fibre(Miller(0,0,1,cs),vector3d.Z)
 
 plot(oR)
@@ -122,7 +122,7 @@ f = fibre
  o1: (0&deg;,0&deg;,0&deg;)
  h: (001)
 </pre>
-  {% include inline_image.html file="script_fibre_index_05.png" %}
+  {% include inline_image.html file="fibre_index_05.png" %}
 <p>If the second argument is a of type Miller as well the fibre defines a set of misorientations which have one direcetion aligned.</p><h2 id="10">SUB: by one orientation and an orientation gradient</h2><p>Finally, a fibre can be defined by an initial orientation <tt>ori1</tt> and a direction <tt>h</tt>, i.e., all orientations of this fibre satisfy</p><p>ori = ori1 * rot(h,omega)</p><p>ori * h = ori1 * h</p><p>The following code defines a fibre that passes through the cube orientation and rotates about the 111 axis.</p><pre class="codeinput">f = fibre(ori1,Miller(1,1,1,cs))
 
 plot(oR)
@@ -136,7 +136,7 @@ f = fibre
  o1: (0&deg;,0&deg;,0&deg;)
  h: (111)
 </pre>
-  {% include inline_image.html file="script_fibre_index_06.png" %}
+  {% include inline_image.html file="fibre_index_06.png" %}
 <h2 id="11">SUB: predefined fibres</h2><p>There exist a list of predefined fibres in MTEX which include alpha-, beta-, gamma-, epsilon-, eta- and tau fibre. Those can be defined by</p><pre class="codeinput">beta = fibre.beta(cs,<span class="string">'full'</span>);
 </pre><p>Note, that it is now straight forward to define a corresponding fibre ODF by</p><pre class="codeinput">odf = fibreODF(beta,<span class="string">'halfwidth'</span>,10*degree)
 
@@ -158,10 +158,10 @@ odf = ODF
     weight: 1
  
 </pre>
-  {% include inline_image.html file="script_fibre_index_07.png" %}
+  {% include inline_image.html file="fibre_index_07.png" %}
 <h2 id="13">Visualize an ODF along a fibre</h2><pre class="codeinput">plot(odf,fibre.gamma(cs))
 </pre>
-  {% include inline_image.html file="script_fibre_index_08.png" %}
+  {% include inline_image.html file="fibre_index_08.png" %}
 <h2 id="14">Compute volume of fibre portions</h2><pre class="codeinput">100 * volume(odf,beta,10*degree)
 </pre><pre class="codeoutput">ans =
    54.3540

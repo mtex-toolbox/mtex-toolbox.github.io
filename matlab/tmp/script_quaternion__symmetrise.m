@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % symmetrcially equivalent orientations
 % 
@@ -25,7 +25,9 @@
 %             <tt>q</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,8 @@
 %             <tt>CS</tt>
 %          </td>
 %          <td>
-%                <p>crystal [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -41,7 +44,8 @@
 %             <tt>SS</tt>
 %          </td>
 %          <td>
-%                <p>specimen [[symmetry_index.html,symmetry]]</p>
+%                <p>specimen <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

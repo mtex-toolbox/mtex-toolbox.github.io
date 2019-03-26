@@ -1,5 +1,5 @@
 %% maxAngle
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % get the maximum angle of the fundamental region
 % 
@@ -24,7 +24,9 @@
 %             <tt>oR</tt>
 %          </td>
 %          <td>
-%                <p>[[orientationRegion_index.html,orientationRegion]]</p>
+%                <p>
+%                   <a href="orientationRegion_index.html&#34;">orientationRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

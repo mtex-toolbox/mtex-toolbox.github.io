@@ -1,5 +1,5 @@
 %% export_VPSC
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % export individual orientations to the VPSC format
 % 
@@ -20,7 +20,7 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>individual [[orientation_index.html,orientation]] to be exported</p>
+%                <p>individual <a href="orientation_index.html&#34;">orientation</a> to be exported</p>
 %          </td>
 %       </tr>
 %       <tr>

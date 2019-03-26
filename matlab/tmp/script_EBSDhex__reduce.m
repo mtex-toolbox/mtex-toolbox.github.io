@@ -1,5 +1,5 @@
 %% reduce
-% (method of [[EBSDhex_index.html,EBSDhex]])
+% (method of <EBSDhex_index.html EBSDhex>)
 %% 
 % reduce ebsd data by taking only second pixel
 % 
@@ -19,7 +19,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSDhex_index.html,EBSDhex]]</p>
+%                <p>
+%                   <a href="EBSDhex_index.html&#34;">EBSDhex</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +36,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSDhex_index.html,EBSDhex]]</p>
+%                <p>
+%                   <a href="EBSDhex_index.html&#34;">EBSDhex</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

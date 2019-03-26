@@ -1,5 +1,5 @@
 %% line
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % draw rotations connected by lines
 % 
@@ -19,7 +19,8 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>list of [[rotation_index.html,rotation]]</p>
+%                <p>list of <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

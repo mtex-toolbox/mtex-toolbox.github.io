@@ -1,5 +1,5 @@
 %% plotSection
-% (method of [[S2VectorField_index.html,S2VectorField]])
+% (method of <S2VectorField_index.html S2VectorField>)
 %
 %% View Code
 % 
@@ -17,7 +17,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]]</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

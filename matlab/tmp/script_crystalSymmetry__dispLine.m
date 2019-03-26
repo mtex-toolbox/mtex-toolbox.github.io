@@ -1,5 +1,5 @@
 %% dispLine
-% (method of [[crystalSymmetry_index.html,crystalSymmetry]])
+% (method of <crystalSymmetry_index.html crystalSymmetry>)
 %% 
 % display symmetry as a one-liner
 %

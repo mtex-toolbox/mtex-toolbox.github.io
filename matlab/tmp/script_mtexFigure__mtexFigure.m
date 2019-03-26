@@ -1,5 +1,5 @@
 %% mtexFigure
-% (method of [[mtexFigure_index.html,mtexFigure]])
+% (method of <mtexFigure_index.html mtexFigure>)
 %% 
 % class to handles figures with equaly sized axes
 % 

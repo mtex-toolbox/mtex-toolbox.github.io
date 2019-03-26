@@ -1,5 +1,5 @@
 %% subsasgn
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % overloads subsasgn
 % 

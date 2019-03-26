@@ -1,5 +1,5 @@
 %% export_generic
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % export an ODF to an ASCII file
 % 

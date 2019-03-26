@@ -1,5 +1,5 @@
 %% logm
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % the logarithmic map that translates a rotation into a spin tensor
 % 
@@ -30,7 +30,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +40,9 @@
 %             <tt>ori_ref</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -53,7 +57,9 @@
 %             <tt>Omega</tt>
 %          </td>
 %          <td>
-%                <p>[[spinTensor_index.html,spinTensor]]</p>
+%                <p>
+%                   <a href="spinTensor_index.html&#34;">spinTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

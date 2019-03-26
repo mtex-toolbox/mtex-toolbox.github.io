@@ -1,5 +1,5 @@
 %% finiteStrain
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % derive finte strain axes and magnitudes from deformation tensor
 % after n-steps (in strain rate units of L)

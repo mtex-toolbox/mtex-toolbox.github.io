@@ -1,5 +1,5 @@
 %% eval
-% (method of [[S2FunTri_index.html,S2FunTri]])
+% (method of <S2FunTri_index.html S2FunTri>)
 %% 
 % syntax
 %  f = eval(sF,v)

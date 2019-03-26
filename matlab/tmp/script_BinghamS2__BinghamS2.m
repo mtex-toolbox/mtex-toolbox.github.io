@@ -1,5 +1,5 @@
 %% BinghamS2
-% (method of [[BinghamS2_index.html,BinghamS2]])
+% (method of <BinghamS2_index.html BinghamS2>)
 %
 %% View Code
 % 
@@ -49,7 +49,8 @@
 %             <tt>BS2</tt>
 %          </td>
 %          <td>
-%                <p>[[BinghamS2_index.html,BinghamS2]] spherical Bingham distribution</p>
+%                <p>
+%                   <a href="BinghamS2_index.html&#34;">BinghamS2</a> spherical Bingham distribution</p>
 %          </td>
 %       </tr>
 %    </table>

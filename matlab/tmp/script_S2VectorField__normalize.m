@@ -1,5 +1,5 @@
 %% normalize
-% (method of [[S2VectorField_index.html,S2VectorField]])
+% (method of <S2VectorField_index.html S2VectorField>)
 %% 
 % Gives the normal vector of the tangential plane in v
 % 

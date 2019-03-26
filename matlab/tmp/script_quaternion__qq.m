@@ -1,5 +1,5 @@
 %% qq
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % returns w * q' * q
 % 

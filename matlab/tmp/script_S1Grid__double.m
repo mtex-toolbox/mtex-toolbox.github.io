@@ -1,5 +1,5 @@
 %% double
-% (method of [[S1Grid_index.html,S1Grid]])
+% (method of <S1Grid_index.html S1Grid>)
 %% 
 % convert to double
 %

@@ -1,5 +1,5 @@
 %% equivalentStrain
-% (method of [[strainTensor_index.html,strainTensor]])
+% (method of <strainTensor_index.html strainTensor>)
 %% 
 % von Mises equivalent strain
 %

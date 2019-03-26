@@ -1,5 +1,5 @@
 %% grad
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % gradient of odf at orientation ori
 % 
@@ -23,7 +23,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -31,7 +33,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -46,7 +50,8 @@
 %             <tt>g</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] gradient of the ODF at the orientations ori</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> gradient of the ODF at the orientations ori</p>
 %          </td>
 %       </tr>
 %    </table>

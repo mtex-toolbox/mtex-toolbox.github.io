@@ -1,5 +1,5 @@
 %% angle
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % calculates rotational angle between orientations
 % 
@@ -21,7 +21,9 @@
 %             <tt>o1, o2</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% eig
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % compute the eigenvalues and eigenvectors of a tensor
 % 
@@ -20,7 +20,8 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>list of M rank 2 [[tensor_index.html,tensor]]</p>
+%                <p>list of M rank 2 <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -43,7 +44,8 @@
 %             <tt>V</tt>
 %          </td>
 %          <td>
-%                <p>3xM list eigen [[vector3d_index.html,vector3d]]</p>
+%                <p>3xM list eigen <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

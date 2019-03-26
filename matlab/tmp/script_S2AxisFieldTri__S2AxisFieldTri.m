@@ -1,5 +1,5 @@
 %% S2AxisFieldTri
-% (method of [[S2AxisFieldTri_index.html,S2AxisFieldTri]])
+% (method of <S2AxisFieldTri_index.html S2AxisFieldTri>)
 %% 
 % a class represeneting a function on the sphere
 %

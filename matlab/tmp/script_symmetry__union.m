@@ -1,5 +1,5 @@
 %% union
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % returns the union of two symmetry groups
 %

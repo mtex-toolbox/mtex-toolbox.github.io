@@ -1,5 +1,5 @@
 %% dot_angle
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % compute minimum q1 . q2 modulo rotation about zaxis and angle omega
 %

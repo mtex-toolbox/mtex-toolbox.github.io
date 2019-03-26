@@ -1,5 +1,5 @@
 %% calcAngleDistribution
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % compute the angle distribution of a uniform ODF for a crystal symmetry
 % 
@@ -20,7 +20,9 @@
 %             <tt>oR</tt>
 %          </td>
 %          <td>
-%                <p>[[orientationRegion_index.html,orientationRegion]]</p>
+%                <p>
+%                   <a href="orientationRegion_index.html&#34;">orientationRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

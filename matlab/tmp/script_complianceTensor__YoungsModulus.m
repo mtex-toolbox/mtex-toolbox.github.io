@@ -1,5 +1,5 @@
 %% YoungsModulus
-% (method of [[complianceTensor_index.html,complianceTensor]])
+% (method of <complianceTensor_index.html complianceTensor>)
 %% 
 % Young's modulus for an elasticity tensor
 % 
@@ -31,7 +31,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elastic stiffness [[tensor_index.html,tensor]]</p>
+%                <p>elastic stiffness <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -39,7 +40,8 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>list of [[vector3d_index.html,vector3d]]</p>
+%                <p>list of <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -62,7 +64,9 @@
 %             <tt>E</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonic_index.html,S2FunHarmonic]]</p>
+%                <p>
+%                   <a href="S2FunHarmonic_index.html&#34;">S2FunHarmonic</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

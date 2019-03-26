@@ -1,11 +1,11 @@
 %% calcErrorPF
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % error polefigure between meassured and recalculated pole figures
 % 
-% returns a [[PoleFigure_index.html,PoleFigure]] with valuess given as the difference between the
-% meassured intensities and the recalculated [[ODF_index.html,ODF]] or between two meassured
-% [[PoleFigure_index.html,PoleFigure]].
+% returns a <PoleFigure_index.html" PoleFigure> with valuess given as the difference between the
+% meassured intensities and the recalculated <ODF_index.html" ODF> or between two meassured
+% <PoleFigure_index.html" PoleFigure>.
 % 
 %
 %% View Code
@@ -24,7 +24,8 @@
 %             <tt>pfmeas</tt>
 %          </td>
 %          <td>
-%                <p>meassured [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>meassured <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +33,8 @@
 %             <tt>pfcalc</tt>
 %          </td>
 %          <td>
-%                <p>recalculated [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>recalculated <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -40,7 +42,8 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>recalculated [[ODF_index.html,ODF]]</p>
+%                <p>recalculated <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -91,7 +94,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

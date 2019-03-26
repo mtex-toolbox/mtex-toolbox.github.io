@@ -1,5 +1,5 @@
 %% polar
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % compute the polar decomposition of rank 2 tensors
 % 
@@ -20,7 +20,8 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>rank 2 [[tensor_index.html,tensor]]</p>
+%                <p>rank 2 <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -35,7 +36,8 @@
 %             <tt>R</tt>
 %          </td>
 %          <td>
-%                <p>orthogonal rank 2 [[tensor_index.html,tensor]]</p>
+%                <p>orthogonal rank 2 <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -43,7 +45,7 @@
 %             <tt>SL</tt>
 %          </td>
 %          <td>
-%                <p>symmetric rank 2 [[tensor_index.html,tensor]] such that SL * R = T</p>
+%                <p>symmetric rank 2 <a href="tensor_index.html&#34;">tensor</a> such that SL * R = T</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -51,7 +53,7 @@
 %             <tt>SR</tt>
 %          </td>
 %          <td>
-%                <p>symmetric rank 2 [[tensor_index.html,tensor]] such that R * SR = T</p>
+%                <p>symmetric rank 2 <a href="tensor_index.html&#34;">tensor</a> such that R * SR = T</p>
 %          </td>
 %       </tr>
 %    </table>

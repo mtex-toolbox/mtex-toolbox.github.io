@@ -1,5 +1,5 @@
 %% subGrid
-% (method of [[S2Grid_index.html,S2Grid]])
+% (method of <S2Grid_index.html S2Grid>)
 %% 
 % subgrid
 % 
@@ -65,7 +65,8 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]] (not indexed)</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a> (not indexed)</p>
 %          </td>
 %       </tr>
 %       <tr>

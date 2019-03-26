@@ -1,5 +1,5 @@
 %% vertcat
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % overloads [v1,v2,v3..]
 %

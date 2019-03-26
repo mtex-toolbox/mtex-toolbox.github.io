@@ -1,5 +1,5 @@
 %% calcAxisDistribution
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % compute the axis distribution of an ODF or MDF
 % 
@@ -21,7 +21,8 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]] orientation or misorientation distribution function</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a> orientation or misorientation distribution function</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +30,8 @@
 %             <tt>a</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] rotational axis</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> rotational axis</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -44,7 +46,8 @@
 %             <tt>afd</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Fun_index.html,S2Fun]] axis distribution function</p>
+%                <p>
+%                   <a href="S2Fun_index.html&#34;">S2Fun</a> axis distribution function</p>
 %          </td>
 %       </tr>
 %       <tr>

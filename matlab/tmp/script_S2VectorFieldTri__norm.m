@@ -1,5 +1,5 @@
 %% norm
-% (method of [[S2VectorFieldTri_index.html,S2VectorFieldTri]])
+% (method of <S2VectorFieldTri_index.html S2VectorFieldTri>)
 %% 
 % pointwise norm of the vectorfield
 % 

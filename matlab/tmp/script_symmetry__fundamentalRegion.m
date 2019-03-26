@@ -1,5 +1,5 @@
 %% fundamentalRegion
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % fundamental region in orientation space for a (pair) of symmetries
 % 
@@ -21,7 +21,9 @@
 %             <tt>cs,cs1,cs2</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]]</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %                <p>ut</p>
 %          </td>
 %       </tr>
@@ -30,7 +32,9 @@
 %             <tt>sR</tt>
 %          </td>
 %          <td>
-%                <p>[[orientationRegion_index.html,orientationRegion]]</p>
+%                <p>
+%                   <a href="orientationRegion_index.html&#34;">orientationRegion</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +42,8 @@
 %             <tt>dc</tt>
 %          </td>
 %          <td>
-%                <p>[[symmetry_index.html,symmetry]] intersection between cs1 and cs2</p>
+%                <p>
+%                   <a href="symmetry_index.html&#34;">symmetry</a> intersection between cs1 and cs2</p>
 %          </td>
 %       </tr>
 %       <tr>

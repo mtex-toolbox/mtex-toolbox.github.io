@@ -1,5 +1,5 @@
 %% mtimes
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % implements T1 * T2
 %

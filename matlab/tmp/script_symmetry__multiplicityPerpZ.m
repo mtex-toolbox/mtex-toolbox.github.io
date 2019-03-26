@@ -1,5 +1,5 @@
 %% multiplicityPerpZ
-% (method of [[symmetry_index.html,symmetry]])
+% (method of <symmetry_index.html symmetry>)
 %% 
 % maximum angle rho
 %

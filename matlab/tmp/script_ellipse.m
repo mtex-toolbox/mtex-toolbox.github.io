@@ -23,7 +23,7 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <pre>[[rotation_index.html,rotation]] i.e. matrix of three orthogonal vectors specifying
+%                <pre>&lt;rotation_index.html" rotation&gt; i.e. matrix of three orthogonal vectors specifying
 %          ellipse position</pre>
 %          </td>
 %       </tr>

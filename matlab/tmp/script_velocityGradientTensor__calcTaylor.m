@@ -1,5 +1,5 @@
 %% calcTaylor
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % compute Taylor factor and strain dependent orientation gradient
 % 
@@ -19,7 +19,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>
+%                   <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>[[slipSystem_index.html,slipSystem]]</p>
+%                <p>
+%                   <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -58,7 +62,9 @@
 %             <tt>W</tt>
 %          </td>
 %          <td>
-%                <p>[[spinTensor_index.html,spinTensor]]</p>
+%                <p>
+%                   <a href="spinTensor_index.html&#34;">spinTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

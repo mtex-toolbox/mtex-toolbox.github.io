@@ -1,5 +1,5 @@
 %% calcTensor
-% (method of [[ODFComponent_index.html,ODFComponent]])
+% (method of <ODFComponent_index.html ODFComponent>)
 %% 
 % compute the average tensor for an ODF
 %

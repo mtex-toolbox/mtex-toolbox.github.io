@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[crystalShape_index.html,crystalShape]])
+% (method of <crystalShape_index.html crystalShape>)
 %% 
 % rotate a crystal shape by an rotation or orientation
 % 
@@ -21,7 +21,9 @@
 %             <tt>cS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalShape_index.html,crystalShape]]</p>
+%                <p>
+%                   <a href="crystalShape_index.html&#34;">crystalShape</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -37,7 +41,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -52,7 +58,9 @@
 %             <tt>cS</tt>
 %          </td>
 %          <td>
-%                <p>[[crystalShape_index.html,crystalShape]]</p>
+%                <p>
+%                   <a href="crystalShape_index.html&#34;">crystalShape</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

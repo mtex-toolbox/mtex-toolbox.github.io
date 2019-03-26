@@ -1,5 +1,5 @@
 %% refine
-% (method of [[S1Grid_index.html,S1Grid]])
+% (method of <S1Grid_index.html S1Grid>)
 %% 
 % refine S1Grid
 % 
@@ -25,7 +25,9 @@
 %             <tt>G</tt>
 %          </td>
 %          <td>
-%                <p>[[S1Grid_index.html,S1Grid]]</p>
+%                <p>
+%                   <a href="S1Grid_index.html&#34;">S1Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -40,7 +42,8 @@
 %             <tt>G</tt>
 %          </td>
 %          <td>
-%                <p>[[S1Grid_index.html,S1Grid]] with double the points</p>
+%                <p>
+%                   <a href="S1Grid_index.html&#34;">S1Grid</a> with double the points</p>
 %          </td>
 %       </tr>
 %    </table>

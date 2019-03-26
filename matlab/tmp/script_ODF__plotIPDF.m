@@ -1,5 +1,5 @@
 %% plotIPDF
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % plot inverse pole figures
 % 
@@ -25,7 +25,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,8 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] specimen directions</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> specimen directions</p>
 %          </td>
 %       </tr>
 %       <tr>

@@ -1,5 +1,5 @@
 %% horzcat
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % overloads [v1,v2,v3..]
 %

@@ -1,5 +1,5 @@
 %% plotFourier
-% (method of [[kernel_index.html,kernel]])
+% (method of <kernel_index.html kernel>)
 %% 
 % plot the Chybeyshev coefficients of the kernel function
 %

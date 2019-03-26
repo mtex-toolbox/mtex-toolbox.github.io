@@ -1,5 +1,5 @@
 %% find
-% (method of [[S1Grid_index.html,S1Grid]])
+% (method of <S1Grid_index.html S1Grid>)
 %% 
 % find close points
 % 
@@ -20,7 +20,9 @@
 %             <tt>S1G</tt>
 %          </td>
 %          <td>
-%                <p>[[S1Grid_index.html,S1Grid]]</p>
+%                <p>
+%                   <a href="S1Grid_index.html&#34;">S1Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

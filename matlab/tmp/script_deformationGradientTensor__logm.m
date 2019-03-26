@@ -1,5 +1,5 @@
 %% logm
-% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+% (method of <deformationGradientTensor_index.html deformationGradientTensor>)
 %% 
 % velocity gradient tensor from deformation gradient tensor
 % 
@@ -19,7 +19,9 @@
 %             <tt>F</tt>
 %          </td>
 %          <td>
-%                <p>[[deformationGradientTensor_index.html,deformationGradientTensor]]</p>
+%                <p>
+%                   <a href="deformationGradientTensor_index.html&#34;">deformationGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +36,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>
+%                   <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

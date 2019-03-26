@@ -38,7 +38,8 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>vector of [[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>vector of <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

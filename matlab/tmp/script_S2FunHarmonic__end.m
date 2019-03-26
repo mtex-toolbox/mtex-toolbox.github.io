@@ -1,5 +1,5 @@
 %% end
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % overloaded end function
 %

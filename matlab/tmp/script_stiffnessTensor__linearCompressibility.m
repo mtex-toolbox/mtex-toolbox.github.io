@@ -1,5 +1,5 @@
 %% linearCompressibility
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % computes the linear compressibility of an elasticity tensor
 % 
@@ -30,7 +30,8 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>elastic [[stiffnessTensor_index.html,stiffnessTensor]]</p>
+%                <p>elastic <a href="stiffnessTensor_index.html&#34;">stiffnessTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +39,8 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>list of [[vector3d_index.html,vector3d]]</p>
+%                <p>list of <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

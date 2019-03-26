@@ -1,5 +1,5 @@
 %% cross
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % pointwise cross product of three quaternions
 % 
@@ -25,7 +25,9 @@
 %             <tt>q1,q2,q3</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -37,7 +39,7 @@
 %    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
 %       <tr>
 %          <td width="100px">
-%             <tt>[[quaternion_index.html,quaternion]]</tt>
+%             <tt>&lt;quaternion_index.html" quaternion&gt;</tt>
 %          </td>
 %          <td/>
 %       </tr>

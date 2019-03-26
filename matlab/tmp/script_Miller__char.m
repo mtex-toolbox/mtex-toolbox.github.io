@@ -1,5 +1,5 @@
 %% char
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % Miller indece to string
 % 

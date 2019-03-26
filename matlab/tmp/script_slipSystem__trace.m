@@ -1,5 +1,5 @@
 %% trace
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % trace of the slip plane in the surface normal to n
 % 
@@ -21,7 +21,8 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>list of [[slipSystem_index.html,slipSystem]]</p>
+%                <p>list of <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +30,8 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] normal vector</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> normal vector</p>
 %          </td>
 %       </tr>
 %    </table>
@@ -44,7 +46,9 @@
 %             <tt>t</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

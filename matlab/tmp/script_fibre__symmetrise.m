@@ -1,5 +1,5 @@
 %% symmetrise
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % all crystallographically equivalent fibres
 %

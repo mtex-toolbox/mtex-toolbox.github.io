@@ -1,5 +1,5 @@
 %% reorder
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % nicely reorder grain boundaries
 %

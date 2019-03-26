@@ -1,5 +1,5 @@
 %% plus
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % implements pf1 + pf2
 % 

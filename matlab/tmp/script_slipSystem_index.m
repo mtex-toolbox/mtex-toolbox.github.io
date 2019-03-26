@@ -1,4 +1,4 @@
-%% Slip Systems (The Class [[slipSystem_index.html,slipSystem]])
+%% Slip Systems
 % This section describes the class *slipSystem*.
 %
 %% Open in Editor

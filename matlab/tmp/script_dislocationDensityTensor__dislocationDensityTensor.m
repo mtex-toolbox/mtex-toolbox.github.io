@@ -1,5 +1,5 @@
 %% dislocationDensityTensor
-% (method of [[dislocationDensityTensor_index.html,dislocationDensityTensor]])
+% (method of <dislocationDensityTensor_index.html dislocationDensityTensor>)
 %% 
 % dislocation density or Nye tensor
 %

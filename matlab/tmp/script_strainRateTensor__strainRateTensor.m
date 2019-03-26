@@ -1,5 +1,5 @@
 %% strainRateTensor
-% (method of [[strainRateTensor_index.html,strainRateTensor]])
+% (method of <strainRateTensor_index.html strainRateTensor>)
 %% 
 % strainRateTensor is the symmetric part of a velocity gradient tensor
 %

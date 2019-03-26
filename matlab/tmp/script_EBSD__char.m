@@ -1,5 +1,5 @@
 %% char
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % ebsd -> char
 %

@@ -1,5 +1,5 @@
 %% eval
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % evaluate sum of unimodal components at orientation g
 % 
@@ -24,7 +24,9 @@
 %             <tt>component</tt>
 %          </td>
 %          <td>
-%                <p>[[unimodalComponent_index.html,unimodalComponent]]</p>
+%                <p>
+%                   <a href="unimodalComponent_index.html&#34;">unimodalComponent</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,9 @@
 %             <tt>g</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

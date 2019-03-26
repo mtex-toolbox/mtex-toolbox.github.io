@@ -1,5 +1,5 @@
 %% times
-% (method of [[crystalShape_index.html,crystalShape]])
+% (method of <crystalShape_index.html crystalShape>)
 %% 
 %
 %% View Code

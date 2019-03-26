@@ -1,5 +1,5 @@
 %% eval
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % evaluates the spherical harmonic on a given set of points
 %
@@ -18,7 +18,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] interpolation nodes</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> interpolation nodes</p>
 %          </td>
 %       </tr>
 %    </table>

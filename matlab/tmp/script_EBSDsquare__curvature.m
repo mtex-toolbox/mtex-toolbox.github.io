@@ -1,5 +1,5 @@
 %% curvature
-% (method of [[EBSDsquare_index.html,EBSDsquare]])
+% (method of <EBSDsquare_index.html EBSDsquare>)
 %% 
 % computes the incomplete curvature tensor
 % 
@@ -34,7 +34,9 @@
 %             <tt>kappa</tt>
 %          </td>
 %          <td>
-%                <p>[[curvatureTensor_index.html,curvatureTensor]]</p>
+%                <p>
+%                   <a href="curvatureTensor_index.html&#34;">curvatureTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

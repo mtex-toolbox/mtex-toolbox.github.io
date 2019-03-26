@@ -1,5 +1,5 @@
 %% length
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % returns the number of tensors
 %

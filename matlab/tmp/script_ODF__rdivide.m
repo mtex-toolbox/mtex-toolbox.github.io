@@ -1,9 +1,9 @@
 %% rdivide
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % scaling of the ODF
 % 
-% overload the ./ operator, i.e. one can now write [[ODF_index.html,ODF]] ./ [1 2 3]  in order
+% overload the ./ operator, i.e. one can now write <ODF_index.html" ODF> ./ [1 2 3]  in order
 % to scale an ODF by different factors
 % 
 %

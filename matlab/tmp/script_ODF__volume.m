@@ -1,5 +1,5 @@
 %% volume
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % ratio of orientations with a certain orientation
 % 
@@ -26,7 +26,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,9 @@
 %             <tt>center</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +46,9 @@
 %             <tt>fibre</tt>
 %          </td>
 %          <td>
-%                <p>[[fibre_index.html,fibre]]</p>
+%                <p>
+%                   <a href="fibre_index.html&#34;">fibre</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

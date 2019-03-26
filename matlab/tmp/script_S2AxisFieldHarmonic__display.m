@@ -1,5 +1,5 @@
 %% display
-% (method of [[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]])
+% (method of <S2AxisFieldHarmonic_index.html S2AxisFieldHarmonic>)
 %% 
 % standard output
 %

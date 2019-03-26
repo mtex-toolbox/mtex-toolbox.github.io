@@ -1,5 +1,5 @@
 %% plot
-% (method of [[S1Grid_index.html,S1Grid]])
+% (method of <S1Grid_index.html S1Grid>)
 %% 
 % plot grid
 %

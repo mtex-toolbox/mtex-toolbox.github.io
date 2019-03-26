@@ -1,5 +1,5 @@
 %% calcError
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % calculate approximation error between two ODFs
 % 
@@ -20,7 +20,9 @@
 %             <tt>odf1, odf2</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -28,7 +30,9 @@
 %             <tt>pf</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +40,8 @@
 %             <tt>S3G</tt>
 %          </td>
 %          <td>
-%                <p>[[SO3Grid_index.html,SO3Grid]] of quadrature nodes (optional)</p>
+%                <p>
+%                   <a href="SO3Grid_index.html&#34;">SO3Grid</a> of quadrature nodes (optional)</p>
 %          </td>
 %       </tr>
 %       <tr>

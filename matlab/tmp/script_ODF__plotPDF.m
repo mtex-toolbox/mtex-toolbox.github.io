@@ -1,5 +1,5 @@
 %% plotPDF
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % plot pole figures
 % 
@@ -21,7 +21,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -29,7 +31,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] crystallographic directions</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> crystallographic directions</p>
 %          </td>
 %       </tr>
 %       <tr>

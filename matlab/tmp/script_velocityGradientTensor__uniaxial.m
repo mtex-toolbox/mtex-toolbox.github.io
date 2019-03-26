@@ -1,5 +1,5 @@
 %% uniaxial
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % defines uniaxial tension/compression tensors
 % 
@@ -24,7 +24,8 @@
 %             <tt>d</tt>
 %          </td>
 %          <td>
-%                <p>tension direction [[vector3d_index.html,vector3d]]</p>
+%                <p>tension direction <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -47,7 +48,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>
+%                   <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

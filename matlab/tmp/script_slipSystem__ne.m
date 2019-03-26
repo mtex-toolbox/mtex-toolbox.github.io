@@ -1,5 +1,5 @@
 %% ne
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % ? sS1 ~= sS2
 %

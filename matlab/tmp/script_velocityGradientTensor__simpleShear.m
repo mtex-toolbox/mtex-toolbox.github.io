@@ -1,5 +1,5 @@
 %% simpleShear
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % defines velocity gradient tensors representing simple shear
 % 
@@ -19,7 +19,8 @@
 %             <tt>d</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] shear direction</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> shear direction</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +28,8 @@
 %             <tt>n</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] normal direction ???</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> normal direction ???</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -50,7 +52,9 @@
 %             <tt>L</tt>
 %          </td>
 %          <td>
-%                <p>[[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>
+%                   <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

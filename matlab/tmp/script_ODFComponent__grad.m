@@ -1,5 +1,5 @@
 %% grad
-% (method of [[ODFComponent_index.html,ODFComponent]])
+% (method of <ODFComponent_index.html ODFComponent>)
 %% 
 % gradient at orientation g
 % 
@@ -19,7 +19,9 @@
 %             <tt>component</tt>
 %          </td>
 %          <td>
-%                <p>[[unimodalComponent_index.html,unimodalComponent]]</p>
+%                <p>
+%                   <a href="unimodalComponent_index.html&#34;">unimodalComponent</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -42,7 +46,9 @@
 %             <tt>g</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

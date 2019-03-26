@@ -1,5 +1,5 @@
 %% bandwidth
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % bandwidth of the ODF
 %

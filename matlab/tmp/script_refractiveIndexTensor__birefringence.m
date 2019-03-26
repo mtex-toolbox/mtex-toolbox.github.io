@@ -1,5 +1,5 @@
 %% birefringence
-% (method of [[refractiveIndexTensor_index.html,refractiveIndexTensor]])
+% (method of <refractiveIndexTensor_index.html refractiveIndexTensor>)
 %% 
 % birefringence from refractive index tensor
 % 
@@ -34,7 +34,9 @@
 %             <tt>rI</tt>
 %          </td>
 %          <td>
-%                <p>[[refractiveIndexTensor_index.html,refractiveIndexTensor]]</p>
+%                <p>
+%                   <a href="refractiveIndexTensor_index.html&#34;">refractiveIndexTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -42,7 +44,8 @@
 %             <tt>vprop</tt>
 %          </td>
 %          <td>
-%                <p>propagation direction [[vector3d_index.html,vector3d]]</p>
+%                <p>propagation direction <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -81,7 +84,8 @@
 %             <tt>pMin</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] polarization direction with the lowest refractive index</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> polarization direction with the lowest refractive index</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -89,7 +93,8 @@
 %             <tt>pMax</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] polarization direction with the highest refractive index</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> polarization direction with the highest refractive index</p>
 %          </td>
 %       </tr>
 %    </table>

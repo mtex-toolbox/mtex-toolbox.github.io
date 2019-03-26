@@ -1,5 +1,5 @@
 %% qqplot
-% (method of [[orientation_index.html,orientation]])
+% (method of <orientation_index.html orientation>)
 %% 
 % quantile-quantile of misorientation angle against random angular
 % misorientation

@@ -1,5 +1,5 @@
 %% plus
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % impements sF1 + sF2
 % 

@@ -1,5 +1,5 @@
 %% plot
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % plots a spherical region
 % 

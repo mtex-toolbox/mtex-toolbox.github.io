@@ -1,5 +1,5 @@
 %% eval
-% (method of [[S2VectorFieldTri_index.html,S2VectorFieldTri]])
+% (method of <S2VectorFieldTri_index.html S2VectorFieldTri>)
 %
 %% View Code
 % 
@@ -16,7 +16,9 @@
 %             <tt>sFV</tt>
 %          </td>
 %          <td>
-%                <p>[[S2VectorField_index.html,S2VectorField]]</p>
+%                <p>
+%                   <a href="S2VectorField_index.html&#34;">S2VectorField</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -24,7 +26,8 @@
 %             <tt>nodes</tt>
 %          </td>
 %          <td>
-%                <p>interpolation nodes [[vector3d_index.html,vector3d]]</p>
+%                <p>interpolation nodes <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -39,7 +42,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

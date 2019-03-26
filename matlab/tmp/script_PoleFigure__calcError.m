@@ -1,5 +1,5 @@
 %% calcError
-% (method of [[PoleFigure_index.html,PoleFigure]])
+% (method of <PoleFigure_index.html PoleFigure>)
 %% 
 % RP and mean square error
 % 
@@ -13,8 +13,8 @@
 %% View Code
 % 
 %% Syntax
-%   e = calcError(pf,pf2) % compares two different [[PoleFigure_index.html,PoleFigure]] with same [[S2Grid_index.html,S2Grid]]
-%   e = calcError(pf,rec) % compares [[PoleFigure_index.html,PoleFigure]] with the Recalculated [[ODF_index.html,ODF]]
+%   e = calcError(pf,pf2) % compares two different <PoleFigure_index.html" PoleFigure> with same <S2Grid_index.html" S2Grid>
+%   e = calcError(pf,rec) % compares <PoleFigure_index.html" PoleFigure> with the Recalculated <ODF_index.html" ODF>
 % 
 
 %% Input
@@ -26,7 +26,9 @@
 %             <tt>pf,pf2</tt>
 %          </td>
 %          <td>
-%                <p>[[PoleFigure_index.html,PoleFigure]]</p>
+%                <p>
+%                   <a href="PoleFigure_index.html&#34;">PoleFigure</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -34,7 +36,9 @@
 %             <tt>rec</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

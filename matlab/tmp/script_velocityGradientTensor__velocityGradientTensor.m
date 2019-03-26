@@ -1,5 +1,5 @@
 %% velocityGradientTensor
-% (method of [[velocityGradientTensor_index.html,velocityGradientTensor]])
+% (method of <velocityGradientTensor_index.html velocityGradientTensor>)
 %% 
 % since solids are no compressible the all velovity gradient tensors have
 % traec 0

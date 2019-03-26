@@ -1,5 +1,5 @@
 %% PatalaColorKey
-% (method of [[PatalaColorKey_index.html,PatalaColorKey]])
+% (method of <PatalaColorKey_index.html PatalaColorKey>)
 %% 
 % converts misorientations to rgb values as described in
 % 

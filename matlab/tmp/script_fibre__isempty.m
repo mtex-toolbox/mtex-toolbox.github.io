@@ -1,5 +1,5 @@
 %% isempty
-% (method of [[fibre_index.html,fibre]])
+% (method of <fibre_index.html fibre>)
 %% 
 % overloads isempty
 %

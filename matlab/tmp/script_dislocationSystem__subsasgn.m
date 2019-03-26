@@ -1,5 +1,5 @@
 %% subsasgn
-% (method of [[dislocationSystem_index.html,dislocationSystem]])
+% (method of <dislocationSystem_index.html dislocationSystem>)
 %% 
 % overloads subsasgn
 %

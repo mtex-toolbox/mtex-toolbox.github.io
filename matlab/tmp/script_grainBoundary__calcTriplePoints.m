@@ -1,5 +1,5 @@
 %% calcTriplePoints
-% (method of [[grainBoundary_index.html,grainBoundary]])
+% (method of <grainBoundary_index.html grainBoundary>)
 %% 
 % compute triple points
 %

@@ -1,5 +1,5 @@
 %% calcDensity
-% (method of [[Miller_index.html,Miller]])
+% (method of <Miller_index.html Miller>)
 %% 
 % calculate a density function out of (weighted) crystal directions
 % 
@@ -24,7 +24,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>list of crystal directions [[Miller_index.html,Miller]]</p>
+%                <p>list of crystal directions <a href="Miller_index.html&#34;">Miller</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +33,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -56,7 +59,8 @@
 %             <tt>psi</tt>
 %          </td>
 %          <td>
-%                <p>[[kernel_index.html,kernel]] function, default is de la Vallee Poussin</p>
+%                <p>
+%                   <a href="kernel_index.html&#34;">kernel</a> function, default is de la Vallee Poussin</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -107,7 +111,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunHarmonicSym_index.html,S2FunHarmonicSym]]</p>
+%                <p>
+%                   <a href="S2FunHarmonicSym_index.html&#34;">S2FunHarmonicSym</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

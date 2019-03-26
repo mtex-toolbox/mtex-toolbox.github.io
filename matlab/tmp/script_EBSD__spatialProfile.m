@@ -1,5 +1,5 @@
 %% spatialProfile
-% (method of [[EBSD_index.html,EBSD]])
+% (method of <EBSD_index.html EBSD>)
 %% 
 % select EBSD data along line segments
 % 
@@ -25,7 +25,9 @@
 %             <tt>ebsd</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]]</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -65,7 +67,8 @@
 %             <tt>ebsdLine</tt>
 %          </td>
 %          <td>
-%                <p>[[EBSD_index.html,EBSD]] restrcited to the line of interest</p>
+%                <p>
+%                   <a href="EBSD_index.html&#34;">EBSD</a> restrcited to the line of interest</p>
 %          </td>
 %       </tr>
 %       <tr>

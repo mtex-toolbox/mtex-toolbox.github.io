@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 % rotate of a orientation region
 % 

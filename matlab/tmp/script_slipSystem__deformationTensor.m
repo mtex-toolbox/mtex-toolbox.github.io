@@ -1,5 +1,5 @@
 %% deformationTensor
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % deformation tensor
 % 
@@ -19,7 +19,8 @@
 %             <tt>sS</tt>
 %          </td>
 %          <td>
-%                <p>list of [[slipSystem_index.html,slipSystem]]</p>
+%                <p>list of <a href="slipSystem_index.html&#34;">slipSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

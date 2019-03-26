@@ -1,5 +1,5 @@
 %% mPrime
-% (method of [[slipSystem_index.html,slipSystem]])
+% (method of <slipSystem_index.html slipSystem>)
 %% 
 % m' parameter from Luster and Morris in 1995
 % 

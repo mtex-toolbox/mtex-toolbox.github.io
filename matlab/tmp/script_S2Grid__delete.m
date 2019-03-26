@@ -1,5 +1,5 @@
 %% delete
-% (method of [[S2Grid_index.html,S2Grid]])
+% (method of <S2Grid_index.html S2Grid>)
 %% 
 % elilinates points from grid
 % 
@@ -25,7 +25,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]]</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +35,8 @@
 %             <tt>points</tt>
 %          </td>
 %          <td>
-%                <p>logical | double | [[vector3d_index.html,vector3d]]</p>
+%                <p>logical | double | <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +51,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]]</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[unimodalComponent_index.html,unimodalComponent]])
+% (method of <unimodalComponent_index.html unimodalComponent>)
 %% 
 % called by ODF/rotate
 %

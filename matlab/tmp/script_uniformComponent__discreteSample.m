@@ -1,5 +1,5 @@
 %% discreteSample
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % draw a random sample
 % 

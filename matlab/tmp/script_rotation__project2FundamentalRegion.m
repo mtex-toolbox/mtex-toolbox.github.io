@@ -1,5 +1,5 @@
 %% project2FundamentalRegion
-% (method of [[rotation_index.html,rotation]])
+% (method of <rotation_index.html rotation>)
 %% 
 % projects rotation to a fundamental region
 % 
@@ -19,7 +19,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,8 @@
 %             <tt>CS1,CS2</tt>
 %          </td>
 %          <td>
-%                <p>crystal [[symmetry_index.html,symmetry]]</p>
+%                <p>crystal <a href="symmetry_index.html&#34;">symmetry</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -35,7 +38,8 @@
 %             <tt>rot_ref</tt>
 %          </td>
 %          <td>
-%                <p>reference [[rotation_index.html,rotation]]</p>
+%                <p>reference <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -50,7 +54,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

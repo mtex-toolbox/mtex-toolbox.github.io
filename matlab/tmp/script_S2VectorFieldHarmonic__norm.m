@@ -1,5 +1,5 @@
 %% norm
-% (method of [[S2VectorFieldHarmonic_index.html,S2VectorFieldHarmonic]])
+% (method of <S2VectorFieldHarmonic_index.html S2VectorFieldHarmonic>)
 %% 
 % pointwise norm of the vectorfield
 % 

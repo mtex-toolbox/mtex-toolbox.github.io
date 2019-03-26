@@ -1,5 +1,5 @@
 %% volume
-% (method of [[uniformComponent_index.html,uniformComponent]])
+% (method of <uniformComponent_index.html uniformComponent>)
 %% 
 % for large angles or specimen symmetry take the quadrature based algorithm
 %

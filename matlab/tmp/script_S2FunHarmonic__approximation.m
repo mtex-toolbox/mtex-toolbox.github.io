@@ -1,5 +1,5 @@
 %% approximation
-% (method of [[S2FunHarmonic_index.html,S2FunHarmonic]])
+% (method of <S2FunHarmonic_index.html S2FunHarmonic>)
 %% 
 % computes a least square problem to get an approximation
 %

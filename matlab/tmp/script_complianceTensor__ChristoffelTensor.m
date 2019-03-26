@@ -1,5 +1,5 @@
 %% ChristoffelTensor
-% (method of [[complianceTensor_index.html,complianceTensor]])
+% (method of <complianceTensor_index.html complianceTensor>)
 %% 
 % Christoffel tensor of an elasticity tensor for a given direction
 % 
@@ -27,7 +27,8 @@
 %             <tt>S</tt>
 %          </td>
 %          <td>
-%                <p>elatic compliance [[tensor_index.html,tensor]]</p>
+%                <p>elatic compliance <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -35,7 +36,8 @@
 %             <tt>x</tt>
 %          </td>
 %          <td>
-%                <p>list of [[vector3d_index.html,vector3d]]</p>
+%                <p>list of <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -50,7 +52,8 @@
 %             <tt>E</tt>
 %          </td>
 %          <td>
-%                <p>Christoffel [[tensor_index.html,tensor]]</p>
+%                <p>Christoffel <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

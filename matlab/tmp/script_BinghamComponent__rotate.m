@@ -1,5 +1,5 @@
 %% rotate
-% (method of [[BinghamComponent_index.html,BinghamComponent]])
+% (method of <BinghamComponent_index.html BinghamComponent>)
 %% 
 % rotate component
 %

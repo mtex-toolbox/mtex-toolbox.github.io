@@ -1,5 +1,5 @@
 %% mean_CS
-% (method of [[quaternion_index.html,quaternion]])
+% (method of <quaternion_index.html quaternion>)
 %% 
 % fast mean of
 % 
@@ -19,7 +19,8 @@
 %             <tt>o</tt>
 %          </td>
 %          <td>
-%                <p>list of [[orientation_index.html,orientation]]</p>
+%                <p>list of <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +35,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>mean [[orientation_index.html,orientation]]</p>
+%                <p>mean <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

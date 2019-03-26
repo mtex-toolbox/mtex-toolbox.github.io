@@ -1,5 +1,5 @@
 %% strainTensor
-% (method of [[strainTensor_index.html,strainTensor]])
+% (method of <strainTensor_index.html strainTensor>)
 %% 
 %
 %% View Code

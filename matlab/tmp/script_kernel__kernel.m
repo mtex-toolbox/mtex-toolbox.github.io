@@ -1,5 +1,5 @@
 %% kernel
-% (method of [[kernel_index.html,kernel]])
+% (method of <kernel_index.html kernel>)
 %% 
 %
 %% View Code

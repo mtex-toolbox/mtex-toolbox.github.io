@@ -1,5 +1,5 @@
 %% calcPDF
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % calcPDF computed the PDF corresponding to an ODF
 % 
@@ -22,7 +22,9 @@
 %             <tt>odf</tt>
 %          </td>
 %          <td>
-%                <p>[[ODF_index.html,ODF]]</p>
+%                <p>
+%                   <a href="ODF_index.html&#34;">ODF</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -30,7 +32,8 @@
 %             <tt>h</tt>
 %          </td>
 %          <td>
-%                <p>[[Miller_index.html,Miller]] / [[vector3d_index.html,vector3d]] crystal directions</p>
+%                <p>
+%                   <a href="Miller_index.html&#34;">Miller</a> / <a href="vector3d_index.html&#34;">vector3d</a> crystal directions</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -38,7 +41,8 @@
 %             <tt>r</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] specimen directions</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> specimen directions</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -93,7 +97,8 @@
 %             <tt>pdf</tt>
 %          </td>
 %          <td>
-%                <p>pole density function [[S2FunHarmonicSym_index.html,S2FunHarmonicSym]]</p>
+%                <p>pole density function <a href="S2FunHarmonicSym_index.html&#34;">S2FunHarmonicSym</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -101,7 +106,8 @@
 %             <tt>ipdf</tt>
 %          </td>
 %          <td>
-%                <p>inverse pole density function [[S2FunHarmonicSym_index.html,S2FunHarmonicSym]]</p>
+%                <p>inverse pole density function <a href="S2FunHarmonicSym_index.html&#34;">S2FunHarmonicSym</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

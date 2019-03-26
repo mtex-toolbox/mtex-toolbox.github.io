@@ -1,5 +1,5 @@
 %% stressTensor
-% (method of [[stressTensor_index.html,stressTensor]])
+% (method of <stressTensor_index.html stressTensor>)
 %% 
 %
 %% View Code

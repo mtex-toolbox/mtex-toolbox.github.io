@@ -1,5 +1,5 @@
 %% plot
-% (method of [[kernel_index.html,kernel]])
+% (method of <kernel_index.html kernel>)
 %% 
 % plot the kernel function
 %

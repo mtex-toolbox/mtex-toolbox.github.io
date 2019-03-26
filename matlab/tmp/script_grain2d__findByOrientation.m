@@ -1,5 +1,5 @@
 %% findByOrientation
-% (method of [[grain2d_index.html,grain2d]])
+% (method of <grain2d_index.html grain2d>)
 %% 
 % select grains by orientation
 % 
@@ -19,7 +19,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -27,7 +29,9 @@
 %             <tt>q0</tt>
 %          </td>
 %          <td>
-%                <p>[[quaternion_index.html,quaternion]] | [[rotation_index.html,rotation]] | [[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="quaternion_index.html&#34;">quaternion</a> | <a href="rotation_index.html&#34;">rotation</a> | <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -50,7 +54,9 @@
 %             <tt>grains</tt>
 %          </td>
 %          <td>
-%                <p>[[grain2d_index.html,grain2d]]</p>
+%                <p>
+%                   <a href="grain2d_index.html&#34;">grain2d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

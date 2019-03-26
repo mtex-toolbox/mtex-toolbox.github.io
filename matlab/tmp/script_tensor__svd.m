@@ -1,5 +1,5 @@
 %% svd
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % singular value decomposition of a rank two tensor
 % 
@@ -20,7 +20,8 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>list of M rank 2 [[tensor_index.html,tensor]]</p>
+%                <p>list of M rank 2 <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -43,7 +44,8 @@
 %             <tt>U</tt>
 %          </td>
 %          <td>
-%                <p>3xM left singular [[vector3d_index.html,vector3d]]</p>
+%                <p>3xM left singular <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -51,7 +53,8 @@
 %             <tt>V</tt>
 %          </td>
 %          <td>
-%                <p>3xM right singular [[vector3d_index.html,vector3d]]</p>
+%                <p>3xM right singular <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

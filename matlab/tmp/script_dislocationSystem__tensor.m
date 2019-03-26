@@ -1,5 +1,5 @@
 %% tensor
-% (method of [[dislocationSystem_index.html,dislocationSystem]])
+% (method of <dislocationSystem_index.html dislocationSystem>)
 %% 
 % tensor representation of a dislocation system
 % 
@@ -19,7 +19,8 @@
 %             <tt>dS</tt>
 %          </td>
 %          <td>
-%                <p>list of [[dislocationSystem_index.html,dislocationSystem]]</p>
+%                <p>list of <a href="dislocationSystem_index.html&#34;">dislocationSystem</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +35,8 @@
 %             <tt>alpha</tt>
 %          </td>
 %          <td>
-%                <p>list of [[tensor_index.html,tensor]]</p>
+%                <p>list of <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

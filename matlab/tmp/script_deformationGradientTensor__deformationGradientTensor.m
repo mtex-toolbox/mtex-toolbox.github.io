@@ -1,5 +1,5 @@
 %% deformationGradientTensor
-% (method of [[deformationGradientTensor_index.html,deformationGradientTensor]])
+% (method of <deformationGradientTensor_index.html deformationGradientTensor>)
 %% 
 % The deformation gradient F contains the full information about the
 % local rotation and deformation of the material. It also shows, for

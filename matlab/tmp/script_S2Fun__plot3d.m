@@ -1,5 +1,5 @@
 %% plot3d
-% (method of [[S2Fun_index.html,S2Fun]])
+% (method of <S2Fun_index.html S2Fun>)
 %% 
 % plot spherical Function
 % 

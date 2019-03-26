@@ -1,5 +1,5 @@
 %% refine
-% (method of [[S2Grid_index.html,S2Grid]])
+% (method of <S2Grid_index.html S2Grid>)
 %% 
 % refine S2Grid
 % 
@@ -25,7 +25,9 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]]</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -40,7 +42,8 @@
 %             <tt>S2G</tt>
 %          </td>
 %          <td>
-%                <p>[[S2Grid_index.html,S2Grid]] with half the resolution</p>
+%                <p>
+%                   <a href="S2Grid_index.html&#34;">S2Grid</a> with half the resolution</p>
 %          </td>
 %       </tr>
 %    </table>

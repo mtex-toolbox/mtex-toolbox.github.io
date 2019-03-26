@@ -1,5 +1,5 @@
 %% spinTensor
-% (method of [[spinTensor_index.html,spinTensor]])
+% (method of <spinTensor_index.html spinTensor>)
 %
 %% View Code
 % 
@@ -28,7 +28,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -36,7 +38,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -44,7 +48,7 @@
 %             <tt>mori</tt>
 %          </td>
 %          <td>
-%                <p>mis[[orientation_index.html,orientation]]</p>
+%                <p>mis&lt;orientation_index.html" orientation&gt;</p>
 %          </td>
 %       </tr>
 %    </table>

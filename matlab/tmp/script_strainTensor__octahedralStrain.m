@@ -1,5 +1,5 @@
 %% octahedralStrain
-% (method of [[strainTensor_index.html,strainTensor]])
+% (method of <strainTensor_index.html strainTensor>)
 %% 
 % the octahedral strains
 % 
@@ -19,7 +19,7 @@
 %             <tt>E</tt>
 %          </td>
 %          <td>
-%                <pre>[[strainTensor_index.html,strainTensor]]</pre>
+%                <pre>&lt;strainTensor_index.html" strainTensor&gt;</pre>
 %          </td>
 %       </tr>
 %    </table>

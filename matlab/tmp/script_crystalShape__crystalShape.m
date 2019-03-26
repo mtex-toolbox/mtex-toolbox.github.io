@@ -1,5 +1,5 @@
 %% crystalShape
-% (method of [[crystalShape_index.html,crystalShape]])
+% (method of <crystalShape_index.html crystalShape>)
 %% 
 % a class representing crystal shapes.
 % 
@@ -9,6 +9,7 @@
 % Mathematica Journal, 7(1).
 % 
 % we need more :)
+% 
 %
 %% View Code
 % 
@@ -21,4 +22,15 @@
 %       </div>
 %    </div>
 % </html>
+% 
+%% Example
+%% 
+% 
+
+mtexdata titanium;
+cS = crystalShape.hex(ebsd.CS)
+close all
+plot(cS)
+
+%% 
 % 

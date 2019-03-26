@@ -1,5 +1,5 @@
 %% exp
-% (method of [[vector3d_index.html,vector3d]])
+% (method of <vector3d_index.html vector3d>)
 %% 
 % rotation vector to rotation
 % 
@@ -25,7 +25,8 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] rotation vector in specimen coordinates</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> rotation vector in specimen coordinates</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +34,10 @@
 %             <tt>ori_ref</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]] [[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a> 
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +52,9 @@
 %             <tt>mori</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -56,7 +62,9 @@
 %             <tt>ori</tt>
 %          </td>
 %          <td>
-%                <p>[[orientation_index.html,orientation]]</p>
+%                <p>
+%                   <a href="orientation_index.html&#34;">orientation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

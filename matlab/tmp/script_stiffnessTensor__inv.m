@@ -1,5 +1,5 @@
 %% inv
-% (method of [[stiffnessTensor_index.html,stiffnessTensor]])
+% (method of <stiffnessTensor_index.html stiffnessTensor>)
 %% 
 % stiffness to compliance tensor
 % 
@@ -25,7 +25,9 @@
 %             <tt>C</tt>
 %          </td>
 %          <td>
-%                <p>[[complianceTensor_index.html,complianceTensor]]</p>
+%                <p>
+%                   <a href="complianceTensor_index.html&#34;">complianceTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -40,7 +42,9 @@
 %             <tt>S</tt>
 %          </td>
 %          <td>
-%                <p>[[complianceTensor_index.html,complianceTensor]]</p>
+%                <p>
+%                   <a href="complianceTensor_index.html&#34;">complianceTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

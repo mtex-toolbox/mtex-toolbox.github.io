@@ -1,5 +1,5 @@
 %% quadrature
-% (method of [[S2AxisFieldHarmonic_index.html,S2AxisFieldHarmonic]])
+% (method of <S2AxisFieldHarmonic_index.html S2AxisFieldHarmonic>)
 %
 %% View Code
 % 
@@ -24,7 +24,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -32,7 +34,8 @@
 %             <tt>value</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]] (antipodal)</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a> (antipodal)</p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -40,7 +43,8 @@
 %             <tt>f</tt>
 %          </td>
 %          <td>
-%                <p>function handle in [[vector3d_index.html,vector3d]]</p>
+%                <p>function handle in <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>

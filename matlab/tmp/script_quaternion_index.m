@@ -1,4 +1,4 @@
-%% Quaternions (The Class [[quaternion_index.html,quaternion]])
+%% Quaternions
 % class representing orientations
 %
 %% Contents

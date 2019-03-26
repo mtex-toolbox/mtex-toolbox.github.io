@@ -1,5 +1,5 @@
 %% angle
-% (method of [[S2AxisFieldTri_index.html,S2AxisFieldTri]])
+% (method of <S2AxisFieldTri_index.html S2AxisFieldTri>)
 %
 %% View Code
 % 
@@ -17,7 +17,9 @@
 %             <tt>sVF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2AxisFieldTri_index.html,S2AxisFieldTri]]</p>
+%                <p>
+%                   <a href="S2AxisFieldTri_index.html&#34;">S2AxisFieldTri</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -25,7 +27,9 @@
 %             <tt>sVF2</tt>
 %          </td>
 %          <td>
-%                <p>[[S2AxisField_index.html,S2AxisField]]</p>
+%                <p>
+%                   <a href="S2AxisField_index.html&#34;">S2AxisField</a>
+%                </p>
 %          </td>
 %       </tr>
 %       <tr>
@@ -33,7 +37,9 @@
 %             <tt>v</tt>
 %          </td>
 %          <td>
-%                <p>[[vector3d_index.html,vector3d]]</p>
+%                <p>
+%                   <a href="vector3d_index.html&#34;">vector3d</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -48,7 +54,9 @@
 %             <tt>sF</tt>
 %          </td>
 %          <td>
-%                <p>[[S2FunTri_index.html,S2FunTri]]</p>
+%                <p>
+%                   <a href="S2FunTri_index.html&#34;">S2FunTri</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

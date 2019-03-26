@@ -1,5 +1,5 @@
 %% calcShearStress
-% (method of [[stressTensor_index.html,stressTensor]])
+% (method of <stressTensor_index.html stressTensor>)
 %% 
 % shear stress
 % 
@@ -23,7 +23,7 @@
 %             <tt>sigma</tt>
 %          </td>
 %          <td>
-%                <pre>[[stressTensor_index.html,stressTensor]]</pre>
+%                <pre>&lt;stressTensor_index.html" stressTensor&gt;</pre>
 %          </td>
 %       </tr>
 %       <tr>

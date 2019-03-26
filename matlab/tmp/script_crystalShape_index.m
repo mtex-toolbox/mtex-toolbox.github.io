@@ -1,4 +1,4 @@
-%% Crystal Shapes (The Class [[crystalShape_index.html,crystalShape]])
+%% Crystal Shapes
 % How to draw threedimensional representations of crystals.
 %
 %% Open in Editor

@@ -46,7 +46,8 @@
 %             <tt>m</tt>
 %          </td>
 %          <td>
-%                <p>Schmid tensor [[velocityGradientTensor_index.html,velocityGradientTensor]]</p>
+%                <p>Schmid tensor <a href="velocityGradientTensor_index.html&#34;">velocityGradientTensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

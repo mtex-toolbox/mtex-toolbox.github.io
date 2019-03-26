@@ -1,5 +1,5 @@
 %% char
-% (method of [[specimenSymmetry_index.html,specimenSymmetry]])
+% (method of <specimenSymmetry_index.html specimenSymmetry>)
 %% 
 % object -> string
 %

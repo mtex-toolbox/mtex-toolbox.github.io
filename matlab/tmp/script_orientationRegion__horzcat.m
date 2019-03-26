@@ -1,5 +1,5 @@
 %% horzcat
-% (method of [[orientationRegion_index.html,orientationRegion]])
+% (method of <orientationRegion_index.html orientationRegion>)
 %% 
 %
 %% View Code

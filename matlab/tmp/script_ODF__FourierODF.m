@@ -1,5 +1,5 @@
 %% FourierODF
-% (method of [[ODF_index.html,ODF]])
+% (method of <ODF_index.html ODF>)
 %% 
 % compute FourierODF from another ODF
 %

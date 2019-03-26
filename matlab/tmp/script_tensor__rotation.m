@@ -1,5 +1,5 @@
 %% rotation
-% (method of [[tensor_index.html,tensor]])
+% (method of <tensor_index.html tensor>)
 %% 
 % convertes orthogonal rank 2 tensors into rotations
 % 
@@ -19,7 +19,8 @@
 %             <tt>T</tt>
 %          </td>
 %          <td>
-%                <p>orthogonal rank 2 [[tensor_index.html,tensor]]</p>
+%                <p>orthogonal rank 2 <a href="tensor_index.html&#34;">tensor</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>
@@ -34,7 +35,9 @@
 %             <tt>rot</tt>
 %          </td>
 %          <td>
-%                <p>[[rotation_index.html,rotation]]</p>
+%                <p>
+%                   <a href="rotation_index.html&#34;">rotation</a>
+%                </p>
 %          </td>
 %       </tr>
 %    </table>

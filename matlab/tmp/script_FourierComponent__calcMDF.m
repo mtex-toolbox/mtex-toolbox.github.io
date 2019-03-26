@@ -1,5 +1,5 @@
 %% calcMDF
-% (method of [[FourierComponent_index.html,FourierComponent]])
+% (method of <FourierComponent_index.html FourierComponent>)
 %% 
 % calculate the uncorrelated misorientation distribution function (MDF) from one or two ODF
 %
