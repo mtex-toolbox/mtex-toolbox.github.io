@@ -7,33 +7,35 @@ addpath ../../makeDoc; DocHelpInstall;
 
 if check_option(varargin,'clear')
   !rm -r ../pages/function_reference_matlab/*
-  !rm -r ../pages//*
+  !rm -r ../pages/documentation_matlab/*
   !rm -r ./tmp/*
   mtexdata clear
 end
+
+
+
+
+%% settings
 
 mtex_settings
 clear
 close all
 setMTEXpref('FontSize',12)
 setMTEXpref('figSize',0.5)
-
-
-%%
 plotx2east
 
 global mtex_progress;
 mtex_progress = false;
 setMTEXpref('generatingHelpMode',true);
 set(0,'FormatSpacing','compact')
-
 set(0,'DefaultFigureColor','white');
 
-addpath(fullfile(pwd,'..','..','makeDoc'))
-addpath(fullfile(pwd,'..','..','makeDoc','tools'))
+options.outputDir = fullfile(pwd,'..','pages','function_reference_matlab');
+options.tempDir = fullfile(pwd,'tmp');
+options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
+dir2 = fullfile(pwd,'..','pages','documentation_matlab');
 
-% DocFiles
-
+%% DocFiles
 mtexFunctionFiles = [...
   DocFile( fullfile(mtex_path,'S2Fun')) ...
   DocFile( fullfile(mtex_path,'EBSDAnalysis')) ...
@@ -52,21 +54,6 @@ mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html');
 
 mtexHelpFiles = [mtexFunctionFiles,mtexDocFiles];
 
-%%
-
-options.outputDir = fullfile(pwd,'..','pages','function_reference_matlab');
-options.tempDir = fullfile(pwd,'tmp');
-options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
-dir2 = fullfile(pwd,'..','pages','documentation_matlab');
-
-%% make function reference overview pages
-
-makeFunctionsReference(mtexHelpFiles,'FunctionReference','outputDir',options.outputDir);
-
-%% make help toc
-
-makeHelpToc(mtexHelpFiles,'Documentation','FunctionMainFile','FunctionReference','outputDir','.');
-makeDocumentationToc();
 
 %% Publish Function Reference
 
@@ -101,6 +88,19 @@ move_images(options.outputDir);
 
 %%
 deadlink(mtexDocFiles,options.outputDir);
+
+%%
+%% make help toc
+
+makeHelpToc(mtexHelpFiles,'Documentation','FunctionMainFile','FunctionReference','outputDir','.');
+makeDocumentationToc();
+
+%% make function reference overview pages
+
+makeFunctionsReference(mtexHelpFiles,'FunctionReference','outputDir',options.outputDir);
+makeFunctionReferenceToc
+
+
 
 %% set back mtex options
 
