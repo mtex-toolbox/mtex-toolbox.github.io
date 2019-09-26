@@ -1,6 +1,6 @@
 ---
 title: calcODF
-last_updated: 26-Mar-2019
+last_updated: 26-Sep-2019
 sidebar: function_reference_sidebar
 permalink: PoleFigure.calcODF.html
 folder: function_reference
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcODF</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_PoleFigure__calcODF.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigure__calcODF into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="PoleFigure_index.html">PoleFigure</a>)</p><!--/introduction--><p>PDF to ODF inversion</p><p><b>calcODF</b> is one of the main function of the MTEX toolbox. It estimates an ODF from given Polefigure intensities by <a href="PoleFigure2odf.html">fitting an ODF that consists of a large number of unimodal ODFs to the data</a>. It does so by minimizing a least squares functional. The command <b>calcODF</b> supports <a href="ghost_demo.html">automatic ghost correction</a> and <a href="dubna_demo.html">the zero range method</a>. The function <b>calcODF</b> has several options to control convergence, resolution, smoothing, etc. See below for a complete description.</p><h2 id="3">Syntax</h2><pre class="language-matlab">odf = calcODF(pf)
+      --><title>calcODF</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_PoleFigure__calcODF.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigure__calcODF into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[PoleFigure_index.html,PoleFigure]])</p><!--/introduction--><p>PDF to ODF inversion</p><p><b>calcODF</b> is one of the main function of the MTEX toolbox. It estimates an ODF from given Polefigure intensities by <a href="PoleFigure2odf.html">fitting an ODF that consists of a large number of unimodal ODFs to the data</a>. It does so by minimizing a least squares functional. The command <b>calcODF</b> supports <a href="ghost_demo.html">automatic ghost correction</a> and <a href="dubna_demo.html">the zero range method</a>. The function <b>calcODF</b> has several options to control convergence, resolution, smoothing, etc. See below for a complete description.</p><h2 id="3">Syntax</h2><pre class="language-matlab">odf = calcODF(pf)
 odf = calcODF(pf,<span class="string">'halfwidth'</span>,5*degree)
 odf = calcODF(pf,<span class="string">'zeroRange'</span>)
 odf = calcODF(pf,<span class="string">'resolution'</span>,2.5*degree)
@@ -25,133 +25,112 @@ odf = calcODF(pf,<span class="string">'resolution'</span>,2.5*degree)
             <tt>pf</tt>
          </td>
          <td>
-               <p>
-                  <a href="PoleFigure_index.html&#34;">PoleFigure</a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>param,val</tt>
-         </td>
-         <td>Parameters and values that control calcODF<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
-               <tr>
-                  <td class="header" width="100px">Parameter</td>
-                  <td class="header">Description</td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'kernel'</tt>
-                  </td>
-                  <td>
-                        <p>the ansatz functions (default = de la Vallee Poussin)</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'halfwidth'</tt>
-                  </td>
-                  <td>
-                        <p>halfwidth of the ansatz functions (default = 2/3 * resolution)</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'resolution'</tt>
-                  </td>
-                  <td>
-                        <p>localization grid for the ansatz fucntions (default = 3/2 resolution(pf))</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'iter_max'</tt>
-                  </td>
-                  <td>
-                        <p>maximum number of iterations (default = 11)</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'iter_min'</tt>
-                  </td>
-                  <td>
-                        <p>minimum number of iterations (default = 5)</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'c0'</tt>
-                  </td>
-                  <td>
-                        <p>initial guess (default = [1 1 1 1 ... 1])</p>
-                  </td>
-               </tr>
-            </table>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>param</tt>
-         </td>
-         <td>Options that control the calcODF behavior<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
-               <tr>
-                  <td class="header" width="100px">Parameter</td>
-                  <td class="header">Description</td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'zeroRange'</tt>
-                  </td>
-                  <td>
-                        <p>apply zero range method (default = )</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'noGhostCorrection'</tt>
-                  </td>
-                  <td>
-                        <p>omit ghost correction</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'ensure_descent'</tt>
-                  </td>
-                  <td>
-                        <p>stop iteration whenever no procress if observed</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'force_iter_max'</tt>
-                  </td>
-                  <td>
-                        <p>allway go until ITER_MAX</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'silent'</tt>
-                  </td>
-                  <td>
-                        <p>no output</p>
-                  </td>
-               </tr>
-            </table>
+            <tt>[[PoleFigure_index.html,PoleFigure]]</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="5">Output</h2><p>
+</p><h2 id="5">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>kernel</tt>
+         </td>
+         <td>
+            <tt>the ansatz functions (default = de la Vallee Poussin)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>halfwidth</tt>
+         </td>
+         <td>
+            <tt>halfwidth of the ansatz functions (default = 2/3 * resolution)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>resolution</tt>
+         </td>
+         <td>
+            <tt>localization grid for the ansatz fucntions (default = 3/2 resolution(pf))</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iter_max</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations (default = 11)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iter_min</tt>
+         </td>
+         <td>
+            <tt>minimum number of iterations (default = 5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>c0</tt>
+         </td>
+         <td>
+            <tt>initial guess (default = [1 1 1 1 ... 1])</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Flags</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>zeroRange</tt>
+         </td>
+         <td>
+            <tt>apply zero range method (default = )</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noGhostCorrection</tt>
+         </td>
+         <td>
+            <tt>omit ghost correction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ensure_descent</tt>
+         </td>
+         <td>
+            <tt>stop iteration whenever no procress if observed</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>force_iter_max</tt>
+         </td>
+         <td>
+            <tt>allway go until ITER_MAX</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>silent</tt>
+         </td>
+         <td>
+            <tt>no output</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="7">Output</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>odf</tt>
          </td>
          <td>
-               <p>reconstructed <a href="ODF_index.html&#34;">ODF</a>
-               </p>
+            <tt>reconstructed [[ODF_index.html,ODF]]</tt>
          </td>
       </tr>
       <tr>
@@ -159,8 +138,8 @@ odf = calcODF(pf,<span class="string">'resolution'</span>,2.5*degree)
             <tt>alpha</tt>
          </td>
          <td>
-               <p>scaling factors, calculated during reconstruction</p>
+            <tt>scaling factors, calculated during reconstruction</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="6">See also</h2><p>PoleFigure2odf ODF_demo PoleFigureSimulation_demo PoleFigure/load ImportPoleFigureData examples_index</p></div></body></html>
+</p><h2 id="8">See also</h2><p>PoleFigure2odf ODF_demo PoleFigureSimulation_demo PoleFigure/load ImportPoleFigureData examples_index</p></div></body></html>

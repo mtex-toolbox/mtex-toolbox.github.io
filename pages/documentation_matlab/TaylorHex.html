@@ -1,6 +1,6 @@
 ---
 title: Texture evolution in rolled magnesium during uniaxial tension
-last_updated: 26-Mar-2019
+last_updated: 26-Sep-2019
 sidebar: documentation_sidebar
 permalink: TaylorHex.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TaylorHex into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p><pre class="codeinput">cs = crystalSymmetry.load(<span class="string">'Mg-Magnesium.cif'</span>)
+      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TaylorHex into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p><pre class="codeinput">cs = crystalSymmetry.load(<span class="string">'Mg-Magnesium.cif'</span>)
 </pre><pre class="codeoutput"> 
 cs = crystalSymmetry  
  
@@ -73,8 +73,6 @@ ori = odf.discreteSample(10000);
 <span class="comment">% apply the Taylor model</span>
 [~,bCold,Wcold] = calcTaylor( inv(ori) .* epsCold, sScold);
 [~,bWarm,Wwarm] = calcTaylor( inv(ori) .* epsWarm, sSwarm);
-</pre><pre class="codeoutput"> computing Taylor factor: 100%
- computing Taylor factor: 100%
 </pre><p>Apply the Taylor spin to the initial orientation distribution</p><pre class="codeinput">oriCold = ori .* orientation(-Wcold);
 oriWarm = ori .* orientation(-Wwarm);
 </pre><p>Then plot pole figures in comparison to inital texture</p><pre class="codeinput">nextAxis <span class="comment">%create a new axis on the existing figure and put along side</span>

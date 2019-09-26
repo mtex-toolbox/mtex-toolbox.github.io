@@ -1,6 +1,6 @@
 ---
 title: doHClustering
-last_updated: 26-Mar-2019
+last_updated: 26-Sep-2019
 sidebar: function_reference_sidebar
 permalink: orientation.doHClustering.html
 folder: function_reference
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>doHClustering</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_orientation__doHClustering.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__doHClustering into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>sort orientations into clusters</p><h2 id="3">Syntax</h2><pre class="language-matlab">[c,center] = doHCluster(ori,<span class="string">'numCluster'</span>,n)
+      --><title>doHClustering</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_orientation__doHClustering.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__doHClustering into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[orientation_index.html,orientation]])</p><!--/introduction--><p>sort orientations into clusters</p><h2 id="3">Syntax</h2><pre class="language-matlab">[c,center] = doHCluster(ori,<span class="string">'numCluster'</span>,n)
 [c,center] = doHCluster(ori,<span class="string">'maxAngle'</span>,omega)
 </pre><h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -23,9 +23,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>ori</tt>
          </td>
          <td>
-               <p>
-                  <a href="orientation_index.html&#34;">orientation</a>
-               </p>
+            <tt>[[orientation_index.html,orientation]]</tt>
          </td>
       </tr>
       <tr>
@@ -33,7 +31,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>n</tt>
          </td>
          <td>
-               <p>number of clusters</p>
+            <tt>number of clusters</tt>
          </td>
       </tr>
       <tr>
@@ -41,7 +39,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>omega</tt>
          </td>
          <td>
-               <p>maximum angle</p>
+            <tt>maximum angle</tt>
          </td>
       </tr>
    </table>
@@ -52,7 +50,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>c</tt>
          </td>
          <td>
-               <p>list of clusters</p>
+            <tt>list of clusters</tt>
          </td>
       </tr>
       <tr>
@@ -60,7 +58,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>center</tt>
          </td>
          <td>
-               <p>center of the clusters</p>
+            <tt>center of the clusters</tt>
          </td>
       </tr>
    </table>
@@ -81,8 +79,7 @@ odf = ODF
  
 </pre><pre class="codeinput"><span class="comment">% find the clusters and its centers</span>
 tic; [c,centerRec] = calcCluster(ori,<span class="string">'method'</span>,<span class="string">'hierarchical'</span>,<span class="string">'numCluster'</span>,5); toc
-</pre><pre class="codeoutput">progress: 100%
-Elapsed time is 10.983826 seconds.
+</pre><pre class="codeoutput">Elapsed time is 13.149658 seconds.
 </pre><pre class="codeinput"><span class="comment">% visualize result</span>
 oR = fundamentalRegion(cs)
 plot(oR)
@@ -108,33 +105,5 @@ hold <span class="string">off</span>
 <pre class="codeinput"><span class="comment">%check the accuracy of the recomputed centers</span>
 min(angle_outer(center,centerRec)./degree)
 </pre><pre class="codeoutput">ans =
-    0.5395   11.2142    0.3816    0.3461    7.8138
-</pre><pre class="codeinput">odfRec = calcODF(ori)
-[~,centerRec2] = max(odfRec,5)
-min(angle_outer(center,centerRec2)./degree)
-</pre><pre class="codeoutput"> 
-odfRec = ODF  
-  crystal symmetry : m-3m
-  specimen symmetry: 1
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
- 
- 
-centerRec2 = orientation  
-  size: 1 x 5
-  crystal symmetry : m-3m
-  specimen symmetry: 1
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  250.903 37.9003 68.5479       0
-  85.2246  7.1051 304.314       0
-  335.906  38.275 8.76441       0
-  85.4646 7.13237  304.17       0
-  76.7374 37.8735 254.798       0
- 
-ans =
-    4.7466    0.4527    0.3071    0.3870   25.9197
+   16.0475    8.8697    0.3124   13.3416   14.6114
 </pre></div></body></html>

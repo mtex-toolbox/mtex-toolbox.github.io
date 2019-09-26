@@ -1,6 +1,6 @@
 ---
 title: Miller Indices
-last_updated: 26-Mar-2019
+last_updated: 26-Sep-2019
 sidebar: documentation_sidebar
 permalink: CrystalDirections.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalDirections into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry_index.html">crystalSymmetry</a></p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'triclinic'</span>,[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,<span class="keyword">...</span>
+      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalDirections into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry_index.html">crystalSymmetry</a></p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'triclinic'</span>,[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,<span class="keyword">...</span>
   <span class="string">'X||a*'</span>,<span class="string">'Z||c'</span>,<span class="string">'mineral'</span>,<span class="string">'Talc'</span>);
 </pre><p>The variable <tt>cs</tt> containes the geometry of the crystal reference frame and, in particular, the alignment of the crystallographic a,b, and, c axis.</p><pre class="codeinput">a = cs.aAxis
 b = cs.bAxis
@@ -69,7 +69,7 @@ hold <span class="string">off</span>
 </pre>
   {% include inline_image.html file="CrystalDirections_02.png" %}
 <p>Note that for non Euclidean crystal frames uvw and hkl notations usually lead to different directions.</p><pre class="codeinput"><span class="comment">%s</span>
-</pre><h2 id="10">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices [UVTW] and (HKIL) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is reduntant as the first three Miller indeces always sum up to zero, i.e., 
+</pre><h2 id="10">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices [UVTW] and (HKIL) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is redundant as the first three Miller indeces always sum up to zero, i.e., 
   {% include inline_image.html file="CrystalDirections_eq08789495435140204831.png" %}
  and 
   {% include inline_image.html file="CrystalDirections_eq05019324578161084208.png" %}
@@ -81,7 +81,7 @@ m = Miller(2,1,-3,1,cs,<span class="string">'UVTW'</span>)
 
 plot(m,<span class="string">'upper'</span>,<span class="string">'labeled'</span>)
 
-n = Miller(1,1,-2,3,cs,<span class="string">'HKIL'</span>)
+n = Miller(1,1,-2,3,cs,<span class="string">'hkil'</span>)
 
 hold <span class="string">on</span>
 plot(n,<span class="string">'upper'</span>,<span class="string">'labeled'</span>)
@@ -106,10 +106,6 @@ m = Miller
 n = Miller  
  size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
-  h  1
-  k  1
-  i -2
-  l  3
 </pre>
   {% include inline_image.html file="CrystalDirections_03.png" %}
 <h2 id="11">Symmetrically Equivalent Crystal Directions</h2><p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indeces (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html">symmetrise</a></p><pre class="codeinput">symmetrise(m)
@@ -179,4 +175,15 @@ ans = vector3d
 plot(p,<span class="string">'grid'</span>)
 </pre>
   {% include inline_image.html file="CrystalDirections_05.png" %}
+<h2 id="23">Plotting</h2><p>One can also visualize crystal symmetries by plotting the main axes and the corresponding equivalent directions</p><pre class="codeinput">h = Miller({1,0,-1,0},{1,1,-2,0},{1,0,-1,1},{1,1,-2,1},{0,0,0,1},cs);
+
+<span class="keyword">for</span> i = 1:length(h)
+  plot(h(i),<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'backgroundColor'</span>,<span class="string">'w'</span>,<span class="string">'doNotDraw'</span>,<span class="string">'grid'</span>,<span class="string">'upper'</span>)
+  hold <span class="string">all</span>
+<span class="keyword">end</span>
+hold <span class="string">off</span>
+
+drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'normal'</span>)
+</pre>
+  {% include inline_image.html file="CrystalDirections_06.png" %}
 </div></body></html>
