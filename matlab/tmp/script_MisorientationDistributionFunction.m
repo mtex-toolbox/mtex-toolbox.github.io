@@ -1,3 +1,0 @@
-%% Misorientation Distribution Function
-%
-%%

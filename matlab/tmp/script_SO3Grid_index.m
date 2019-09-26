@@ -1,8 +1,0 @@
-%% Discretisation of Orientation Space
-% represents a set of orientations
-%%
-%
-
-%% Complete Function list
-% 
-% <html><table width="90%"><tr><td width="200px"><a href="SO3Grid.SO3Grid.html"><tt>SO3Grid</tt></a></td><td>represent orientations in a gridded structure to allow quick access</td></tr><tr><td width="200px"><a href="SO3Grid.char.html"><tt>char</tt></a></td><td>convert to char</td></tr><tr><td width="200px"><a href="SO3Grid.copy.html"><tt>copy</tt></a></td><td>nodes by indece</td></tr><tr><td width="200px"><a href="SO3Grid.delete.html"><tt>delete</tt></a></td><td>clear nodes by indece</td></tr><tr><td width="200px"><a href="SO3Grid.display.html"><tt>display</tt></a></td><td>standard output</td></tr><tr><td width="200px"><a href="SO3Grid.dot_outer.html"><tt>dot_outer</tt></a></td><td>return outer inner product of all nodes within a eps neighborhood</td></tr><tr><td width="200px"><a href="SO3Grid.find.html"><tt>find</tt></a></td><td>return indece and distance of all nodes within a eps neighborhood</td></tr><tr><td width="200px"><a href="SO3Grid.mtimes.html"><tt>mtimes</tt></a></td><td>outer quaternion multiplication</td></tr><tr><td width="200px"><a href="SO3Grid.spy.html"><tt>spy</tt></a></td><td>distance matrix</td></tr><tr><td width="200px"><a href="SO3Grid.subGrid.html"><tt>subGrid</tt></a></td><td>subSO3Grid as epsilon neigborhood of a node</td></tr><tr><td width="200px"><a href="SO3Grid.subsasgn.html"><tt>subsasgn</tt></a></td><td>overloads subsasgn</td></tr><tr><td width="200px"><a href="SO3Grid.subsref.html"><tt>subsref</tt></a></td><td>overloads subsref</td></tr></table></html>

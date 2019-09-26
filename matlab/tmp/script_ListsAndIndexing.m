@@ -1,3 +1,0 @@
-%% Lists and Indexing
-%
-%%

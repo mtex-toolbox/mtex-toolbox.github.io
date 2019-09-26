@@ -1,3 +1,0 @@
-%% Seismic Plots
-%
-%%

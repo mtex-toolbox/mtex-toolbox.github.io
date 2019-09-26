@@ -1,3 +1,0 @@
-%% Orientation Visualization - Sections
-%
-%%

@@ -1,8 +1,0 @@
-%% Compliance Tensor
-%
-%% PLEASE HELP AND ADD CONTENT HERE
-%
-
-%% Complete Function list
-% 
-% <html><table width="90%"><tr><td width="200px"><a href="complianceTensor.ChristoffelTensor.html"><tt>ChristoffelTensor</tt></a></td><td>Christoffel tensor of an elasticity tensor for a given direction</td></tr><tr><td width="200px"><a href="complianceTensor.PoissonRatio.html"><tt>PoissonRatio</tt></a></td><td>computes the Poisson ratio of an elasticity tensor</td></tr><tr><td width="200px"><a href="complianceTensor.YoungsModulus.html"><tt>YoungsModulus</tt></a></td><td>Young's modulus for an elasticity tensor</td></tr><tr><td width="200px"><a href="complianceTensor.inv.html"><tt>inv</tt></a></td><td>compliance to stiffness tensor</td></tr><tr><td width="200px"><a href="complianceTensor.linearCompressibility.html"><tt>linearCompressibility</tt></a></td><td>computes the linear compressibility of an elasticity tensor</td></tr><tr><td width="200px"><a href="complianceTensor.mtimes.html"><tt>mtimes</tt></a></td><td>tensor product S * sigma</td></tr><tr><td width="200px"><a href="complianceTensor.shearModulus.html"><tt>shearModulus</tt></a></td><td>shear modulus for an compliance tensor</td></tr><tr><td width="200px"><a href="complianceTensor.velocity.html"><tt>velocity</tt></a></td><td>computes the elastic wave velocity(km/s) from the elastic stiffness Cijkl</td></tr><tr><td width="200px"><a href="complianceTensor.volumeCompressibility.html"><tt>volumeCompressibility</tt></a></td><td>computes the volume compressibility of an elasticity tensor</td></tr></table></html>
