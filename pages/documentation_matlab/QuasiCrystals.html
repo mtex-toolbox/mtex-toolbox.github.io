@@ -1,0 +1,108 @@
+---
+title: Quasicrystal
+last_updated: 26-Sep-2019
+sidebar: documentation_sidebar
+permalink: QuasiCrystals.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Quasicrystal</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_QuasiCrystals.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit QuasiCrystals into the Matlab commandline">edit page</a></font><div><h1>Quasicrystal</h1><p>Aufstellung 1 mit f&#65533;nfz&#65533;hliger Achse parallel zu z</p><pre class="codeinput"><span class="comment">%rot5 = rotation.byAxisAngle(zvector,(0:4)*72*degree)</span>
+<span class="comment">%rot3 = rotation.byAxisAngle(vector3d('polar',37.377*degree,0) ,(0:2)*120*degree)</span>
+
+<span class="comment">% Aufstellung 2</span>
+<span class="comment">% mit zweiz&#65533;hliger Achse parallel zu z</span>
+rot5 = rotation.byAxisAngle(vector3d(<span class="string">'polar'</span>,31.7171*degree,0),(0:4)*72*degree)
+rot3 = rotation.byAxisAngle(vector3d(<span class="string">'polar'</span>,20.9054*degree,90*degree),(0:2)*120*degree)
+
+<span class="comment">% generiere Gruppe indem wir die Operationen ein paar mal hintereinander</span>
+<span class="comment">% ausf&#65533;hren und alles doppelte wegschmeissen :)</span>
+rot = unique(rot3 * rot5 * rot3 * rot5 * rot3 * rot5)
+
+<span class="comment">% definiere das als crystal symmetry -&gt; enantiomorphe gruppe</span>
+cs = crystalSymmetry(rot)
+
+<span class="comment">% nehme inversion dazu</span>
+<span class="comment">%cs = crystalSymmetry([1 -1]*rot)</span>
+
+plot(cs,<span class="string">'symbolSize'</span>,0.4,<span class="string">'projection'</span>,<span class="string">'eangle'</span>,<span class="string">'grid'</span>,<span class="string">'on'</span>)
+
+hold <span class="string">on</span>
+plot(cs.fundamentalSector,<span class="string">'color'</span>,<span class="string">'red'</span>)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+rot5 = rotation  
+  size: 1 x 5
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+        0       0       0       0
+  31.7176 35.9996 31.7176       0
+  69.0949 59.9993 69.0949       0
+  110.905 59.9993 110.905       0
+  148.282 35.9996 148.282       0
+ 
+ 
+rot3 = rotation  
+  size: 1 x 3
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+        0       0       0       0
+  148.282 36.0004 328.282       0
+  211.718 36.0004 31.7175       0
+ 
+ 
+rot = rotation  
+  size: 60 x 1
+ 
+ 
+cs = crystalSymmetry  
+ 
+  symmetry          : unkwown      
+  a, b, c           : 1, 1, 1      
+  alpha, beta, gamma: 90&deg;, 90&deg;, 90&deg;
+ 
+</pre>
+  {% include inline_image.html file="QuasiCrystals_01.png" %}
+<pre class="codeinput">oR = cs.fundamentalRegion
+plot(oR)
+</pre><pre class="codeoutput"> 
+oR = orientationRegion  
+ 
+ crystal symmetry:  unknown
+ max angle: 44.4779&deg;
+ face normales: 12
+ vertices: 20
+ 
+</pre>
+  {% include inline_image.html file="QuasiCrystals_02.png" %}
+<pre class="codeinput">ipfKey = ipfHSVKey(cs)
+
+plot(ipfKey,<span class="string">'complete'</span>,<span class="string">'upper'</span>,<span class="string">'projection'</span>,<span class="string">'eangle'</span>,<span class="string">'resolution'</span>,0.5*degree)
+
+<span class="comment">%saveFigure('ipfKey3.png')</span>
+</pre><pre class="codeoutput">ipfKey = 
+  ipfHSVKey with properties:
+
+             colorPostRotation: [1&times;1 rotation]
+               colorStretching: 1
+                   whiteCenter: [1&times;1 vector3d]
+                     grayValue: [0.2000 0.5000]
+                  grayGradient: 0.5000
+                      maxAngle: Inf
+    inversePoleFigureDirection: [1&times;1 vector3d]
+                        dirMap: [1&times;1 HSVDirectionKey]
+                           CS1: [60&times;1 crystalSymmetry]
+                           CS2: [1&times;1 specimenSymmetry]
+                     antipodal: 0
+</pre>
+  {% include inline_image.html file="QuasiCrystals_03.png" %}
+</div></body></html>

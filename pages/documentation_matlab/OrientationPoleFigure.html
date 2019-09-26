@@ -1,6 +1,6 @@
 ---
-title: Orientation Pole Figure
-last_updated: 26-Mar-2019
+title: script_OrientationPoleFigure
+last_updated: 26-Sep-2019
 sidebar: documentation_sidebar
 permalink: OrientationPoleFigure.html
 folder: documentation
@@ -14,4 +14,47 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Orientation Pole Figure</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_OrientationPoleFigure.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationPoleFigure into the Matlab commandline">edit page</a></font><div><h1>Orientation Pole Figure</h1></div></body></html>
+      --><title>script_OrientationPoleFigure</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_OrientationPoleFigure.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationPoleFigure into the Matlab commandline">edit page</a></font><div><h2 id="1">Pole Figures</h2><p>Pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'321'</span>)
+ori = orientation.rand(cs)
+</pre><pre class="codeoutput"> 
+cs = crystalSymmetry  
+ 
+  symmetry       : 321               
+  a, b, c        : 1, 1, 1           
+  reference frame: X||a*, Y||b, Z||c*
+ 
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : 321, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  53.2376 142.956 254.735       0
+ 
+</pre><p>Starting point is a fixed crystal direction <tt>h</tt>, e.g.,</p><pre class="codeinput"><span class="comment">% the fixed crystal directions (100)</span>
+h = Miller({1,0,0},cs);
+</pre><p>Next the specimen directions corresponding to all crystal directions symmetrically equivalent to <tt>h</tt> are computed</p><pre class="codeinput">r = ori * h.symmetrise
+</pre><pre class="codeoutput"> 
+r = vector3d  
+ size: 1 x 6
+           x          y          z
+   -0.894254   0.288593  -0.671087
+   -0.856159  -0.754334  -0.176934
+    0.856159   0.754334   0.176934
+    0.894254  -0.288593   0.671087
+   0.0380949   -1.04293   0.494152
+  -0.0380949    1.04293  -0.494152
+</pre><p>and ploted in a spherical projection</p><pre class="codeinput">plot(r)
+</pre>
+  {% include inline_image.html file="OrientationPoleFigure_01.png" %}
+<p>Since the trigonal symmetry group has six symmetry elements the orientation appears at six possitions.</p><p>A shortcut for the above computations is the command</p><pre class="codeinput"><span class="comment">% a pole figure plot</span>
+plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS))
+</pre>
+  {% include inline_image.html file="OrientationPoleFigure_02.png" %}
+<p>We observe, that for some crystal directions only the upper hemisphere is plotted while for other upper and lower hemisphere are plotted. The reason is that if <tt>h</tt> and <tt>-h</tt> are symmetrically equivalent the upper and lower hemisphere of the pole figure are symmetric as well.</p><h2 id="7">Contour plots</h2><pre class="codeinput">plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS),<span class="string">'contourf'</span>)
+mtexColorbar
+</pre>
+  {% include inline_image.html file="OrientationPoleFigure_03.png" %}
+</div></body></html>

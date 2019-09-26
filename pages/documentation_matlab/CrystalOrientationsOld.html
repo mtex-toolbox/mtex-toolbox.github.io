@@ -1,0 +1,218 @@
+---
+title: Defining Orientations
+last_updated: 26-Sep-2019
+sidebar: documentation_sidebar
+permalink: CrystalOrientationsOld.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Defining Orientations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_CrystalOrientationsOld.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalOrientationsOld into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Explains how to define crystal orientations and how to switch between different convention</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">General Concept</h2><p>Since, orientations are essentialy rotations from a crystal into a specimen fixed reference frame they consist of three components: (1) a description of the crystal reference frame by means of a variable of type <a href="crystalSymmetry_index.htm">crystalSymmetry</a></p><pre class="codeinput"><span class="comment">% consider cubic crystal symmetry m-3m</span>
+cs = crystalSymmetry(<span class="string">'cubic'</span>)
+</pre><pre class="codeoutput"> 
+cs = crystalSymmetry  
+ 
+  symmetry: m-3m   
+  a, b, c : 1, 1, 1
+ 
+</pre><p>(2) a description of the specimen reference frame (optional) by means of of a variable of type specimen symmetry</p><pre class="codeinput"><span class="comment">% consider orthorhombic specimen symmetry mmm</span>
+ss = specimenSymmetry(<span class="string">'orthorhombic'</span>)
+</pre><pre class="codeoutput"> 
+ss = orthorhombic specimenSymmetry  
+ 
+</pre><p>and (3) a <a href="rotation_index.html">rotation</a></p><pre class="codeinput"><span class="comment">% take random rotation</span>
+rot = rotation.rand
+</pre><pre class="codeoutput"> 
+rot = rotation  
+  size: 1 x 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  232.657 93.3816 252.629       0
+ 
+</pre><p>Combining all the incredients we obtain an orientation by</p><pre class="codeinput">ori = orientation(rot,cs,ss)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  232.657 93.3816 252.629       0
+ 
+</pre><h2 id="7">Bunge Euler angles - ZXZ convention</h2><p>Most commonly orientations are defined in terms of Euler angles. Hereby an orientation is composed of three consecutive rotations in the crystal reference frame. The first is about the z-axis, the second about the x-axis, and the third again about the z-axis. The corresponding three angles are called  Euler angles and are commonly denoted by phi1, Phi, phi2.</p><pre class="codeinput">ori = orientation.byEuler(30*degree,50*degree,10*degree,cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    30   50   10    0
+ 
+</pre><h2 id="8">Matthies Euler angles - ZYZ</h2><p>In contrast to the Bunge convention here the three rotations are taken about the z-axis, the y-axis, and the z-axis.</p><pre class="codeinput">ori = orientation.byEuler(30*degree,50*degree,10*degree,<span class="string">'ZYZ'</span>,cs,ss)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+   120   50  280    0
+ 
+</pre><p>Note that although the orientation was specified in Matthies Euler angles the output is in Bunge Euler angles. This can be changed by setting</p><pre class="codeinput"><span class="comment">% set display style to Matthies</span>
+setMTEXpref(<span class="string">'EulerAngleConvention'</span>,<span class="string">'ZYZ'</span>)
+
+<span class="comment">% display orientation</span>
+ori
+
+<span class="comment">% set back the default to Bunge</span>
+setMTEXpref(<span class="string">'EulerAngleConvention'</span>,<span class="string">'Bunge'</span>)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: mmm
+ 
+  ZYZ Euler angles in degree
+  alpha  beta gamma  Inv.
+     30    50    10     0
+ 
+</pre><p>MTEX supports a varity of other Euler angle conventions which use different axes of rotation as discuses in the topic <a href="EulerAngleConventions.html">Euler angle conventions</a>.</p><h2 id="11">Axis angle paramterization</h2><p>Another possibility to specify an orientation is to give its rotational axis and its rotational angle.</p><pre class="codeinput">ori = orientation.byAxisAngle(xvector,30*degree,cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0   30    0    0
+ 
+</pre><h2 id="12">Miller indices</h2><p>There is also a Miller indice convention for defining crystal orientations.</p><pre class="codeinput">ori = orientation.byMiller([1 0 0],[0 1 1],cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+   135   90   90    0
+ 
+</pre><h2 id="13">Rotation Matrix</h2><pre class="codeinput">ori = orientation.byMatrix(eye(3),cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    0
+ 
+</pre><h2 id="14">Predefined orientations</h2><p>MTEX includes a list of standard standard orientations. For example the identical or cube orientation can be defined by the syntax</p><pre class="codeinput">ori = orientation.id(cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    0
+ 
+</pre><p>In the samy way the following orientations can be defined: cube, brass, brass2, copper, copper2, cubeND22, cubeND45, cubeRD, goss, inverse goss, PLage, PLage2, QLage, QLage2, QLage3, QLage4, SR, SR2, SR3, SR4.</p><p>Note that a list of orientations can be defined using the same syntax as for the matlab commands ones, zeros, ..</p><pre class="codeinput">ori = orientation.id(100,1,cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 100 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+</pre><h2 id="16">Random orientations</h2><p>You may generate random orientations with</p><pre class="codeinput">ori = orientation.rand(1000,cs)
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1000 x 1
+  crystal symmetry : m-3m
+  specimen symmetry: 1
+ 
+</pre><h2 id="17">Specimen Symmetry</h2><p>If the texture forming process has been symmetric the resulting is often as well. The resulting symmetry is then aligned with the specimen reference system. In MTEX specimen symmetry axes may only be defined parallel to the specimen axes x, y, and z. The syntax is very similar to the definition of crystal symmetries.</p><pre class="codeinput"><span class="comment">% define cubic crystal symmetry</span>
+cs = crystalSymmetry(<span class="string">'432'</span>)
+
+<span class="comment">% and orthorhombic specimen symmetry</span>
+ss = specimenSymmetry(<span class="string">'222'</span>)
+</pre><pre class="codeoutput"> 
+cs = crystalSymmetry  
+ 
+  symmetry: 432    
+  a, b, c : 1, 1, 1
+ 
+ 
+ss = orthorhombic specimenSymmetry  
+ 
+</pre><p>Orientations that respect crystal as well as specimen symmetries are defined by passign the specimen symmetry as an additional argument after the crystal symmetry.</p><pre class="codeinput">ori = orientation.brass(cs,ss)
+
+<span class="comment">%</span>
+</pre><pre class="codeoutput"> 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : 432
+  specimen symmetry: 222
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    35   45    0    0
+ 
+</pre><h2 id="19">Conversion into Euler angles, matrix, quaternion or Rodrigues vector</h2><p>There are methods to transform quaternion in almost any other of rotations as they are:</p><pre class="codeinput"><span class="comment">% as Euler angles</span>
+ori.phi1, ori.Phi, ori.phi2
+
+<span class="comment">% as quaternion</span>
+quaternion(ori)
+
+<span class="comment">% as matrix</span>
+ori.matrix
+
+<span class="comment">% as Rodrigues vector</span>
+ori.Rodrigues
+</pre><pre class="codeoutput">ans =
+    0.6109
+ans =
+    0.7854
+ans =
+     0
+ 
+ans = Quaternion  
+  size: 1 x 1
+         a         b         c         d
+  -0.88112 -0.364972 -0.115075 -0.277816
+ans =
+    0.8192   -0.4056    0.4056
+    0.5736    0.5792   -0.5792
+    0.0000    0.7071    0.7071
+ 
+ans = vector3d  
+ size: 1 x 1
+         x        y        z
+  0.414214 0.130601 0.315299
+</pre><h2 id="20">Plotting Orientations</h2><p>Orientations can be visualized in many different ways. The most popular way are <a href="OrientationPoleFigure.html">pole figures</a></p><pre class="codeinput">ori = orientation.rand(5,cs);
+plotPDF(ori,Miller({1,0,0},{1,1,1},{1,1,0},cs))
+</pre>
+  {% include inline_image.html file="CrystalOrientationsOld_01.png" %}
+<p>Other options are <a href="OrientationInversePoleFigure.html">inverse pole figures</a>, <a href="EulerAngleSections.html">sections through the Euler space</a> and <a href="OrientationPlot3d">three dimensional orientation plots</a>.</p><pre class="codeinput"><span class="comment">% in Euler angle space</span>
+plot(ori,<span class="string">'filled'</span>)
+</pre>
+  {% include inline_image.html file="CrystalOrientationsOld_02.png" %}
+<p>in axis angle space</p><pre class="codeinput">plot(ori,<span class="string">'axisAngle'</span>,<span class="string">'filled'</span>)
+</pre>
+  {% include inline_image.html file="CrystalOrientationsOld_03.png" %}
+</div></body></html>

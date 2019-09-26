@@ -1,0 +1,66 @@
+---
+title: fit
+last_updated: 26-Sep-2019
+sidebar: function_reference_sidebar
+permalink: BinghamS2.fit.html
+folder: function_reference
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>fit</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_BinghamS2__fit.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BinghamS2__fit into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[BinghamS2_index.html,BinghamS2]])</p><!--/introduction--><p>function to fit Bingham parameters</p><h2 id="3">Description</h2><p>confidence ellipse for the mean direction based on Tanaka (1999) <a href="https://doi.org/10.1186/BF03351601">https://doi.org/10.1186/BF03351601</a></p><h2 id="4">Syntax</h2><pre class="language-matlab">BS2 = BinghamS2.fit(v)
+</pre><h2 id="5">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>v</tt>
+         </td>
+         <td>
+            <tt>vector3d</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ConfElli</tt>
+         </td>
+         <td>
+            <tt>confidence level p (default at 0.95)</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="7">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>BS2</tt>
+         </td>
+         <td>
+            <tt>[[BinghamS2_index.html,BinghamS2]]</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="8">Example</h2><pre class="codeinput"><span class="comment">% simulate some directions</span>
+odf = unimodalODF(quaternion.id,<span class="string">'halfwidth'</span>,10*degree);
+N = 100;
+v = odf.discreteSample(N) .* <span class="keyword">...</span>
+rotation.byAxisAngle(vector3d.X,rand(N,1)*2*pi) * vector3d.Y;
+</pre><pre class="codeinput"><span class="comment">% fit a Bingham distribution</span>
+S2F = BinghamS2.fit(v)
+</pre><pre class="codeoutput">S2F = 
+  BinghamS2 with properties:
+
+            a: [3&times;1 vector3d]
+            Z: [3&times;1 double]
+            N: 1.9902
+    antipodal: 1
+     cEllipse: [34.5692 0.1082]
+</pre></div></body></html>

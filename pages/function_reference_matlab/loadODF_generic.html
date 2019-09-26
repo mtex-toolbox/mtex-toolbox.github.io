@@ -1,6 +1,6 @@
 ---
 title: loadODF_generic
-last_updated: 26-Mar-2019
+last_updated: 26-Sep-2019
 sidebar: function_reference_sidebar
 permalink: loadODF_generic.html
 folder: function_reference
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>loadODF_generic</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_loadODF_generic.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit loadODF_generic into the Matlab commandline">edit page</a></font><div><!--introduction--><p>load pole figure data from (alpha,beta,gamma) files</p><!--/introduction--><h2 id="2">Description</h2><p><b>loadEBSD_txt</b> loads an ODF from any txt or exel files are of the following format</p><pre>alpha_1 beta_1 gamma_1 weight_1
+      --><title>loadODF_generic</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_loadODF_generic.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit loadODF_generic into the Matlab commandline">edit page</a></font><div><!--introduction--><p>load pole figure data from (alpha,beta,gamma) files</p><!--/introduction--><h2 id="2">Description</h2><p><b>loadEBSD_txt</b> loads an ODF from any txt or exel files are of the following format</p><pre>alpha_1 beta_1 gamma_1 weight_1
 alpha_2 beta_2 gamma_2 weight_2
 alpha_3 beta_3 gamma_3 weight_3
 .      .       .       .
@@ -29,107 +29,89 @@ odf   = loadODF_generic(fname,<span class="string">'cs'</span>,cs,<span class="s
             <tt>fname</tt>
          </td>
          <td>
-               <p>file name (text files only)</p>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>param,val</tt>
-         </td>
-         <td>Parameters and values that control loadODF_generic<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
-               <tr>
-                  <td class="header" width="100px">Parameter</td>
-                  <td class="header">Description</td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'ColumnNames'</tt>
-                  </td>
-                  <td>
-                        <p>names of the colums to be imported, mandatory are euler 1, euler 2, euler 3</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'Columns'</tt>
-                  </td>
-                  <td>
-                        <p>postions of the columns to be imported</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'radians'</tt>
-                  </td>
-                  <td>
-                        <p>treat input in radiand</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'delimiter'</tt>
-                  </td>
-                  <td>
-                        <p>delimiter between numbers</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'header'</tt>
-                  </td>
-                  <td>
-                        <p>number of header lines</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'ZXZ, BUNGE'</tt>
-                  </td>
-                  <td>
-                        <p>[phi1 Phi phi2] Euler angle in Bunge convention (default)</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'ZYZ, ABG'</tt>
-                  </td>
-                  <td>
-                        <p>[alpha beta gamma] Euler angle in Mathies convention</p>
-                  </td>
-               </tr>
-            </table>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>param</tt>
-         </td>
-         <td>Options that control the loadODF_generic behavior<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
-               <tr>
-                  <td class="header" width="100px">Parameter</td>
-                  <td class="header">Description</td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'interp'</tt>
-                  </td>
-                  <td>
-                        <p>determine the ODF by interpolation the weights</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'density'</tt>
-                  </td>
-                  <td>
-                        <p>determine the ODF as the density of the orientations</p>
-                  </td>
-               </tr>
-            </table>
+            <tt>file name (text files only)</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="5">Example</h2><pre class="codeinput">fname = fullfile(mtexDataPath,<span class="string">'ODF'</span>,<span class="string">'odf.txt'</span>);
+</p><h2 id="5">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ColumnNames</tt>
+         </td>
+         <td>
+            <tt>names of the colums to be imported, mandatory are euler 1, euler 2, euler 3</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Columns</tt>
+         </td>
+         <td>
+            <tt>postions of the columns to be imported</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>radians</tt>
+         </td>
+         <td>
+            <tt>treat input in radiand</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>delimiter</tt>
+         </td>
+         <td>
+            <tt>delimiter between numbers</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>header</tt>
+         </td>
+         <td>
+            <tt>number of header lines</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ZXZ, BUNGE</tt>
+         </td>
+         <td>
+            <tt>[phi1 Phi phi2] Euler angle in Bunge convention (default)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ZYZ, ABG</tt>
+         </td>
+         <td>
+            <tt>[alpha beta gamma] Euler angle in Mathies convention</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Flags</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>interp</tt>
+         </td>
+         <td>
+            <tt>determine the ODF by interpolation the weights</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>density</tt>
+         </td>
+         <td>
+            <tt>determine the ODF as the density of the orientations</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="7">Example</h2><pre class="codeinput">fname = fullfile(mtexDataPath,<span class="string">'ODF'</span>,<span class="string">'odf.txt'</span>);
 odf = loadODF_generic(fname,<span class="string">'cs'</span>,crystalSymmetry(<span class="string">'cubic'</span>),<span class="string">'header'</span>,5,<span class="keyword">...</span>
 <span class="string">'ColumnNames'</span>,{<span class="string">'Euler 1'</span> <span class="string">'Euler 2'</span> <span class="string">'Euler 3'</span> <span class="string">'weight'</span>},<span class="keyword">...</span>
 <span class="string">'Columns'</span>,[1,2,3,4])
@@ -147,4 +129,4 @@ odf = ODF
     center: 22875 orientations, resolution: 3&deg;
     weight: 0.48254
  
-</pre><h2 id="8">See also</h2><p>import_wizard loadODF ODF_demo</p></div></body></html>
+</pre><h2 id="10">See also</h2><p>import_wizard loadODF ODF_demo</p></div></body></html>

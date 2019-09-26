@@ -1,13 +1,13 @@
 function makeDoc(varargin)
 
-addpath ../../mtex; startup_mtex;
 addpath ../../makeDoc; DocHelpInstall;
 
 % build help with the DocHelp Toolbox
 %
 
 if check_option(varargin,'clear')
-  !rm -r ../files/doc/*
+  !rm -r ../pages/function_reference_matlab/*
+  !rm -r ../pages/documentation_matlab/*
   !rm -r ./tmp/*
   mtexdata clear
 end
@@ -58,14 +58,6 @@ options.outputDir = fullfile(pwd,'..','pages','function_reference_matlab');
 options.tempDir = fullfile(pwd,'tmp');
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
 dir2 = fullfile(pwd,'..','pages','documentation_matlab');
-
-%%
-
-makeToolboxXML('name','MTEX',...
-  'fullname','<b>MTEX</b> - A MATLAB Toolbox for Quantitative Texture Analysis',...
-  'versionname',getMTEXpref('version'),...
-  'procuctpage','mtex_product_page.html')
-
 
 %% make function reference overview pages
 
@@ -168,18 +160,4 @@ function add_frontmatter(dir, file, name)
     fclose(f);
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

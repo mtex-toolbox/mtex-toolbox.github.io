@@ -1,6 +1,6 @@
 ---
 title: checkInside
-last_updated: 26-Mar-2019
+last_updated: 26-Sep-2019
 sidebar: function_reference_sidebar
 permalink: grain2d.checkInside.html
 folder: function_reference
@@ -14,19 +14,17 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>checkInside</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-26"><meta name="DC.source" content="script_grain2d__checkInside.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit grain2d__checkInside into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="grain2d_index.html">grain2d</a>)</p><!--/introduction--><p>check for points or grains to be inside a big grain</p><h2 id="3">Syntax</h2><pre class="language-matlab">isInside = checkInside(hostGrains, [x,y])
+      --><title>checkInside</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_grain2d__checkInside.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit grain2d__checkInside into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of [[grain2d_index.html,grain2d]])</p><!--/introduction--><p>check for points or grains to be inside a big grain</p><h2 id="3">Description</h2><p>Note, for an EBSD pixel to be inside a grain it has to be completely inside the grain. Pixels at the boundary may belong to no grain.</p><h2 id="4">Syntax</h2><pre class="language-matlab">isInside = checkInside(hostGrains, [x,y])
 isInside = checkInside(hostGrains, inclusionGrains)
 isInside = checkInside(hostGrains, ebsd)
-</pre><h2 id="4">Input</h2><p>
+</pre><h2 id="5">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>hostGrains</tt>
          </td>
          <td>
-               <p>
-                  <a href="grain2d_index.html&#34;">grain2d</a>
-               </p>
+            <tt>[[grain2d_index.html,grain2d]]</tt>
          </td>
       </tr>
       <tr>
@@ -34,9 +32,7 @@ isInside = checkInside(hostGrains, ebsd)
             <tt>inclusionGrains</tt>
          </td>
          <td>
-               <p>
-                  <a href="grain2d_index.html&#34;">grain2d</a>
-               </p>
+            <tt>[[grain2d_index.html,grain2d]]</tt>
          </td>
       </tr>
       <tr>
@@ -44,47 +40,37 @@ isInside = checkInside(hostGrains, ebsd)
             <tt>[x,y]</tt>
          </td>
          <td>
-               <p>list of [x(:) y(:)] coordinates</p>
+            <tt>list of [x(:) y(:)] coordinates</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>includeBoundary</tt>
+         </td>
+         <td>
+            <tt>points on the boundary are considered as inside</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>param,val</tt>
+            <tt>ignoreInclusions</tt>
          </td>
-         <td>Parameters and values that control checkInside<table cellpadding="4" cellspacing="0" class="paramval" width="100%">
-               <tr>
-                  <td class="header" width="100px">Parameter</td>
-                  <td class="header">Description</td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'includeBoundary'</tt>
-                  </td>
-                  <td>
-                        <p>points on the boundary are considered as inside</p>
-                  </td>
-               </tr>
-               <tr>
-                  <td width="150px">
-                     <tt>'ignoreInclusions'</tt>
-                  </td>
-                  <td>
-                        <p>points within inclusions belong to the host grain</p>
-                        <p>e, for an EBSD pixel to be inside a grain it has to be completely ide the grain. Pixels at the boundary may belong to no grain.</p>
-                  </td>
-               </tr>
-            </table>
+         <td>
+            <tt>points within inclusions belong to the host grain</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="5">Output</h2><p>
+</p><h2 id="7">Output</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>isInside</tt>
          </td>
          <td>
-               <p>numInclusionGrains x numHostGrains matrix</p>
+            <tt>numInclusionGrains x numHostGrains matrix</tt>
          </td>
       </tr>
       <tr>
@@ -92,7 +78,7 @@ isInside = checkInside(hostGrains, ebsd)
             <tt>isInside</tt>
          </td>
          <td>
-               <p>numEBSD x numHostGrains matrix</p>
+            <tt>numEBSD x numHostGrains matrix</tt>
          </td>
       </tr>
       <tr>
@@ -100,10 +86,10 @@ isInside = checkInside(hostGrains, ebsd)
             <tt>isInside</tt>
          </td>
          <td>
-               <p>numXY x numHostGrains matrix</p>
+            <tt>numXY x numHostGrains matrix</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="6">Example</h2><pre>mtexdata small
+</p><h2 id="8">Example</h2><pre>mtexdata small
 grains = calcGrains(ebsd('indexed'))
-plot(grains(grains(75).checkInside(grains)))</pre><h2 id="8">See also</h2><p>EBSD/findByLocation grain2d/findByOrientation</p></div></body></html>
+plot(grains(grains(75).checkInside(grains)))</pre><h2 id="10">See also</h2><p>EBSD/findByLocation grain2d/findByOrientation</p></div></body></html>
