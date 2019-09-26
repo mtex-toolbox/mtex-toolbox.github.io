@@ -1,3 +1,0 @@
-%% Fundamental Sector
-%
-%%

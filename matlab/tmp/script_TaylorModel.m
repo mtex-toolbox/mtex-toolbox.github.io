@@ -1,3 +1,0 @@
-%% Taylor Model
-%
-%%

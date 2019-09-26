@@ -1,3 +1,0 @@
-%% Harmonic ODFs
-%
-%%

@@ -1,3 +1,0 @@
-%% Isotropic Theory
-%
-%%

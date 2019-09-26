@@ -1,3 +1,0 @@
-%% Parent/Child Variants
-%
-%%
