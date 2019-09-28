@@ -1,6 +1,6 @@
 ---
-title: Grain Reconstruction
-last_updated: 26-Sep-2019
+title: script_GrainReconstruction
+last_updated: 28-Sep-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstruction.html
 folder: documentation
@@ -14,4 +14,307 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstruction into the Matlab commandline">edit page</a></font><div><h1>Grain Reconstruction</h1></div></body></html>
+      --><title>script_GrainReconstruction</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-28"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstruction into the Matlab commandline">edit page</a></font><div><h2 id="1">Grain Reconstruction</h2><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grain. Note that their is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
+
+<span class="comment">% import the data</span>
+mtexdata <span class="string">forsterite</span>
+
+<span class="comment">% restrict it to a subregion of interest.</span>
+ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+
+<span class="comment">% make a phase plot</span>
+plot(ebsd)
+</pre>
+  {% include inline_image.html file="GrainReconstruction_01.png" %}
+<h2 id="2">Basic grain reconstruction</h2><p>We see that there are a lot of not indexed measurements. For grain reconstruction, we have  three different choices how to deal with these unindexed regions:</p><div><ol><li>leaf them unindexed</li><li>assign them to the surrounding grains</li><li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li></ol></div><p>By default, MTEX uses the first method.</p><p>The second parameter that is involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p><p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html">calcGrains</a> which takes as input an EBSD data set and returns a list of grain.</p><pre class="codeinput">grains = calcGrains(ebsd,<span class="string">'angle'</span>,10*degree)
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     0    1139    4052  notIndexed                                   
+     1     244   14093  Forsterite       mmm                         
+     2     177    1397   Enstatite       mmm                         
+     3     104     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 10422
+ triple points: 905
+ 
+ Properties: GOS, meanRotation
+ 
+</pre><p>The reconstructed grains are stored in the variable <b>grains</b>. Note that also the notIndexed measurements are grouped into grains. This allows later to analyze the shape of these unindexed regions.</p><p>To visualize the grains we can plot its boundaries by the command <a href="Grain2d.plotBoundary.html">plotBoundary</a>.</p><pre class="codeinput"><span class="comment">% start overide mode</span>
+hold <span class="string">on</span>
+
+<span class="comment">% plot the boundary of all grains</span>
+plot(grains.boundary,<span class="string">'linewidth'</span>,1.5)
+
+<span class="comment">% stop overide mode</span>
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainReconstruction_02.png" %}
+<h2 id="4">Filling notindexed holes</h2><p>It is important to understand that MTEX distinguishes the following two situations</p><div><ol><li>a location is marked as notindexed</li><li>a location does not occur in the data set</li></ol></div><p>A location marked as <b>notindexed</b> is interpreted by MTEX as at this position, there is <b>no crystal</b>, whereas for a location that does not occur in the data set is interpreted by MTEX as: it is not known whether there is a crystal or not. Just to remind you, the later assumption is nothing special as it applies at all locations but the measurement points.</p><p>A location that does not occur in the data is assigned in MTEX to the same grain and phase as the closest measurement point - this may also be a notindexed point. Hence, filling holes in MTEX means to erase them from the list of measurements, i.e., instead of telling MTEX there is no crystal we are telling MTEX: we do not know what there is.</p><p>The extremal case is to say whenever there is a not indexed measurement we actually do not know anything and allow MTEX to freely guess what happens there. This is realized by removing all not indexed measurements or, equivalently, computing the grains only from the indexed measurements</p><pre class="codeinput"><span class="comment">% compute the grains from the indexed measurements only</span>
+grains = calcGrains(ebsd(<span class="string">'indexed'</span>))
+
+plot(ebsd)
+
+<span class="comment">% start overide mode</span>
+hold <span class="string">on</span>
+
+<span class="comment">% plot the boundary of all grains</span>
+plot(grains.boundary,<span class="string">'linewidth'</span>,1.5)
+
+<span class="comment">% mark two grains by location</span>
+plot(grains(11300,6100).boundary,<span class="string">'linecolor'</span>,<span class="string">'DarkGreen'</span>,<span class="string">'linewidth'</span>,5,<span class="keyword">...</span>
+  <span class="string">'DisplayName'</span>,<span class="string">'grain A'</span>)
+plot(grains(12000,4000).boundary,<span class="string">'linecolor'</span>,<span class="string">'DarkBlue'</span>,<span class="string">'linewidth'</span>,5,<span class="keyword">...</span>
+  <span class="string">'DisplayName'</span>,<span class="string">'grain B'</span>)
+
+<span class="comment">% stop overide mode</span>
+hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1     103   14093  Forsterite       mmm                         
+     2      32    1397   Enstatite       mmm                         
+     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 3784
+ triple points: 240
+ 
+ Properties: GOS, meanRotation
+ 
+</pre>
+  {% include inline_image.html file="GrainReconstruction_03.png" %}
+<p>We observe, especially in the marked grains, how MTEX fills notindexed regions and connects otherwise separate measurements to grains. As all information about not indexed regions were removed the reconstructed grains fill the map completely</p><pre class="codeinput">plot(grains,<span class="string">'linewidth'</span>,2)
+</pre>
+  {% include inline_image.html file="GrainReconstruction_04.png" %}
+<p>Inside of grain B, there is a large not indexed region and we might argue that is not very meaningful to assign such a large region to some grain but should have kept it not indexed. In order to decide which not indexed region is large enough to be kept not indexed and which not indexed regions can be filled it is helpful to know that the command calcGrains also separates the not indexed regions into "grains" and we can standard grain functions like area or perimeter to analyze these regions.</p><pre class="codeinput">[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
+notIndexed = grains(<span class="string">'notIndexed'</span>)
+</pre><pre class="codeoutput"> 
+notIndexed = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     0    1139    4052  notIndexed                                   
+ 
+ boundary segments: 8694
+ triple points: 868
+ 
+ Properties: GOS, meanRotation
+ 
+</pre><p>We see that we have 1139 not indexed regions. A good measure for compact regions vs. cluttered regions is the quotient between the area and the boundary length. Lets, therefore, plot the "not indexed grains" colorized by this quotient</p><pre class="codeinput"><span class="comment">% plot the not indexed regions colorcoded according the the quotient between</span>
+<span class="comment">% number of measurements and number of boundary segments</span>
+plot(notIndexed,log(notIndexed.grainSize ./ notIndexed.boundarySize))
+mtexColorbar
+</pre>
+  {% include inline_image.html file="GrainReconstruction_05.png" %}
+<p>Regions with a high quotient are blocks which can be hardly correctly assigned to a grain. Hence, we should keep these regions as not indexed and only remove the not indexed information from locations with a low quotient.</p><pre class="codeinput"><span class="comment">% the "not indexed grains" we want to remove</span>
+toRemove = notIndexed(notIndexed.grainSize ./ notIndexed.boundarySize&lt;0.8)
+
+<span class="comment">% now we remove the corresponding EBSD measurements</span>
+ebsd(toRemove) = []
+
+<span class="comment">% and perform grain reconstruction with the reduces EBSD data set</span>
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
+
+plot(grains,<span class="string">'lineWidth'</span>,2)
+</pre><pre class="codeoutput"> 
+toRemove = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     0    1134    3442  notIndexed                                   
+ 
+ boundary segments: 8256
+ triple points: 837
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0    610 (3.6%)  notIndexed                                                 
+     1   14093 (84%)  Forsterite  LightSkyBlue       mmm                         
+     2   1397 (8.3%)   Enstatite  DarkSeaGreen       mmm                         
+     3    759 (4.5%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
+ Scan unit : um
+ 
+</pre>
+  {% include inline_image.html file="GrainReconstruction_06.png" %}
+<p>We see that that all the narrow not indexed regions have been assigned to the surounding grains while the large regions have been left unindexed. Finally, the image with the raw EBSD data and on top the grain boundaries.</p><pre class="codeinput"><span class="comment">% plot the raw data</span>
+plot(ebsd)
+
+<span class="comment">% start overide mode</span>
+hold <span class="string">on</span>
+
+<span class="comment">% plot the boundary of all grains</span>
+plot(grains.boundary,<span class="string">'linewidth'</span>,1.5)
+
+<span class="comment">% mark two grains by location</span>
+plot(grains(11300,6100).boundary,<span class="string">'linecolor'</span>,<span class="string">'DarkGreen'</span>,<span class="string">'linewidth'</span>,4,<span class="keyword">...</span>
+  <span class="string">'DisplayName'</span>,<span class="string">'grain A'</span>)
+plot(grains(12000,4000).boundary,<span class="string">'linecolor'</span>,<span class="string">'DarkBlue'</span>,<span class="string">'linewidth'</span>,4,<span class="keyword">...</span>
+  <span class="string">'DisplayName'</span>,<span class="string">'grain B'</span>)
+
+<span class="comment">% stop overide mode</span>
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainReconstruction_07.png" %}
+<h2 id="11">Non convex data sets</h2><p>By default MTEX uses the convex hull when computing the outer boundary for an EBSD data set. This leads to poor results in the case of non convex EBSD data sets.</p><pre class="codeinput"><span class="comment">% cut of a non convex region from our previous data set</span>
+poly = 1.0e+04 *[<span class="keyword">...</span>
+  0.6853    0.2848
+  0.7102    0.6245
+  0.8847    0.3908
+  1.1963    0.6650
+  1.1371    0.2880
+  0.6853    0.2833
+  0.6853    0.2848];
+
+ebsdP = ebsd(ebsd.inpolygon(poly))
+
+plot(ebsdP,<span class="string">'micronBar'</span>,<span class="string">'off'</span>)
+legend <span class="string">off</span>
+
+<span class="comment">% compute the grains</span>
+grains = calcGrains(ebsdP(<span class="string">'indexed'</span>))
+
+<span class="comment">% plot the grain boundary</span>
+hold <span class="string">on</span>
+plot(grains.boundary,<span class="string">'linewidth'</span>,1.5)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+ebsdP = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0      107 (3%)  notIndexed                                                 
+     1    2756 (78%)  Forsterite  LightSkyBlue       mmm                         
+     2     452 (13%)   Enstatite  DarkSeaGreen       mmm                         
+     3    231 (6.5%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      26    2756  Forsterite       mmm                         
+     2       8     452   Enstatite       mmm                         
+     3      22     231    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 1024
+ triple points: 66
+ 
+ Properties: GOS, meanRotation
+ 
+</pre>
+  {% include inline_image.html file="GrainReconstruction_08.png" %}
+<p>We see that the grains badly fill up the entire convex hull of the data points. This can be avoided by specifying the option <tt>tight</tt> for the determination of the outer boundary.</p><pre class="codeinput">plot(ebsdP,<span class="string">'micronBar'</span>,<span class="string">'off'</span>)
+legend <span class="string">off</span>
+
+<span class="comment">% compute the grains</span>
+grains = calcGrains(ebsdP(<span class="string">'indexed'</span>),<span class="string">'boundary'</span>,<span class="string">'tight'</span>)
+
+<span class="comment">% plot the grain boundary</span>
+hold <span class="string">on</span>
+plot(grains.boundary,<span class="string">'linewidth'</span>,1.5)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      28    2756  Forsterite       mmm                         
+     2       9     452   Enstatite       mmm                         
+     3      22     231    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 1244
+ triple points: 61
+ 
+ Properties: GOS, meanRotation
+ 
+</pre>
+  {% include inline_image.html file="GrainReconstruction_09.png" %}
+<h2 id="13">Grain reconstruction by the multiscale clustering method</h2><p>When analyzing grains with gradual and subtle boundaries the threshold based method may not lead to the desired result.</p><p>Let us consider the following example</p><pre class="codeinput">mtexdata <span class="string">single</span>
+
+ipfKey = axisAngleColorKey(ebsd);
+ipfKey.oriRef = mean(ebsd.orientations);
+
+plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+</pre>
+  {% include inline_image.html file="GrainReconstruction_10.png" %}
+<p>We obeserve that the are no rapid changes in the orientation which would allow for applying the threshold based algorithm. Setting the threshold angle to a very small value would include many irrelevant or false regions.</p><pre class="codeinput">grains_high = calcGrains(ebsd,<span class="string">'angle'</span>,1*degree);
+grains_low  = calcGrains(ebsd,<span class="string">'angle'</span>,0.5*degree);
+
+figure
+plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+hold <span class="string">on</span>
+plot(grains_high.boundary)
+hold <span class="string">off</span>
+
+figure
+plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+hold <span class="string">on</span>
+plot(grains_low.boundary)
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainReconstruction_11.png" %}
+
+  {% include inline_image.html file="GrainReconstruction_12.png" %}
+<p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p><pre class="codeinput">grains_FMC = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'FMC'</span>,3.8)
+grains = calcGrains(ebsd(<span class="string">'indexed'</span>))
+
+<span class="comment">% smooth grains to remove staircase effect</span>
+grains_FMC = smooth(grains_FMC);
+</pre><pre class="codeoutput"> 
+grains_FMC = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1      17   10201       Al      m-3m                         
+ 
+ boundary segments: 1552
+ triple points: 14
+ 
+ Id   Phase   Pixels          GOS   phi1   Phi   phi2
+  1       1        7   0.00851854    318   128    159
+  2       1     1120    0.0238482    239    75    320
+  3       1      517    0.0100044    238    76    320
+  4       1     1783    0.0220796     56   103     40
+  5       1       11   0.00748579     57   104    221
+  6       1        2   0.00276888    237    79    322
+  7       1        7   0.00810474    343    43    249
+  8       1      989    0.0126317    236    79    322
+  9       1     1060    0.0197436    239    75    320
+ 10       1       76   0.00792457    238    75    320
+ 11       1     1556    0.0218341    238    77    320
+ 12       1      349    0.0114275    237    77    320
+ 13       1      401    0.0103653    342    41    252
+ 14       1      402     0.012066    238    77    320
+ 15       1      184    0.0128148    237    77    319
+ 16       1      957    0.0175949    316   129     74
+ 17       1      780    0.0122539    238    78    321
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1       1   10201       Al      m-3m                         
+ 
+ boundary segments: 404
+ triple points: 0
+ 
+ Id   Phase   Pixels         GOS   phi1   Phi   phi2
+  1       1    10201   0.0343764    237    77    320
+ 
+</pre><p>We observe how this method nicely splits the measurements into clusters of similar orientation</p><pre class="codeinput"><span class="comment">%plot(ebsd,oM.orientation2color(ebsd.orientations))</span>
+plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+
+<span class="comment">% start overide mode</span>
+hold <span class="string">on</span>
+plot(grains_FMC.boundary,<span class="string">'linewidth'</span>,1.5)
+
+<span class="comment">% stop overide mode</span>
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainReconstruction_13.png" %}
+</div></body></html>

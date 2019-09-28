@@ -1,0 +1,114 @@
+---
+title: Grain reconstruction from EBSD data
+last_updated: 28-Sep-2019
+sidebar: documentation_sidebar
+permalink: GrainReconstructionAdvanced.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Grain reconstruction from EBSD data</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-28"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstructionAdvanced into the Matlab commandline">edit page</a></font><div><h1>Grain reconstruction from EBSD data</h1><p>So far grains can be exclusively computed from EBSD data using the command <a href="EBSD.calcGrains.html">calcGrains</a>. In order to demonstrate grain reconstruction we import some EBSD data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+plotx2east
+
+<span class="comment">% plot the Forsterite phase colorized according to orientation</span>
+plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
+</pre>
+  {% include inline_image.html file="GrainReconstructionAdvanced_01.png" %}
+<p>When reconstructing grain there are two basic ways how to deal with not indexed measurements. The simplest way is to keep the not indexed pixels separately, i.e., do not assign them to any indexed grain.</p><pre class="codeinput">[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     0   16334   58485  notIndexed                                   
+     1    4331  152345  Forsterite       mmm                         
+     2    1866   26058   Enstatite       mmm                         
+     3    2012    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 148741
+ triple points: 12065
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+</pre><p>We observe that there are not only grains of specific phases but also not indexed grains. Let's add the grain boundaries to the previous plot.</p><pre class="codeinput">hold <span class="string">on</span>
+plot(grains.boundary)
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainReconstructionAdvanced_02.png" %}
+<p>The resulting grains contain a lot of holes and one-pixel grains. The second way is to assign not indexed pixels to surrounding grains. In MTEX this is done if the not indexed data are removed from the measurements, i.e.</p><pre class="codeinput">ebsd = ebsd(<span class="string">'indexed'</span>) <span class="comment">% this removes all not indexed data</span>
+[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1  152345 (81%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (14%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (4.8%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1    1256  152345  Forsterite       mmm                         
+     2     518   26058   Enstatite       mmm                         
+     3    1526    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 45832
+ triple points: 3863
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1  152345 (81%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (14%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (4.8%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+</pre><p>Now, there are no not indexed grains computed. Let's visualize the result</p><pre class="codeinput"><span class="comment">% plot the orientation data of the Forsterite phase</span>
+plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
+
+<span class="comment">% plot the grain boundary on top of it</span>
+hold <span class="string">on</span>
+plot(grains.boundary)
+hold <span class="string">off</span>
+
+
+<span class="comment">% smooth the grains</span>
+grains = smooth(grains);
+
+<span class="comment">% plot the orientation data of the Forsterite phase</span>
+plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
+
+<span class="comment">% plot the grain boundary on top of it</span>
+hold <span class="string">on</span>
+plot(grains.boundary)
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainReconstructionAdvanced_03.png" %}
+</div></body></html>
