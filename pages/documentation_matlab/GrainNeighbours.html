@@ -1,0 +1,110 @@
+---
+title: Grain Neighbors
+last_updated: 28-Sep-2019
+sidebar: documentation_sidebar
+permalink: GrainNeighbours.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Grain Neighbors</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-28"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainNeighbours into the Matlab commandline">edit page</a></font><div><h1>Grain Neighbors</h1><p>TODO: This page needs to be improved</p><p>In this section we discuss .... We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p><pre class="codeinput"><span class="comment">% load sample EBSD data set</span>
+mtexdata <span class="string">forsterite</span>
+
+<span class="comment">% restrict it to a subregion of interest.</span>
+ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+
+<span class="comment">% remove all not indexed pixels</span>
+ebsd = ebsd(<span class="string">'indexed'</span>)
+
+<span class="comment">% reconstruct grains</span>
+[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+
+<span class="comment">% smooth them</span>
+grains = smooth(grains,5);
+
+<span class="comment">% plot the orientation data of the Forsterite phase</span>
+plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
+
+<span class="comment">% plot the grain boundary on top of it</span>
+hold <span class="string">on</span>
+plot(grains.boundary,<span class="string">'lineWidth'</span>,2)
+hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1   14093 (87%)  Forsterite  LightSkyBlue       mmm                         
+     2   1397 (8.6%)   Enstatite  DarkSeaGreen       mmm                         
+     3    759 (4.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1     118   14093  Forsterite       mmm                         
+     2      32    1397   Enstatite       mmm                         
+     3      76     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 3915
+ triple points: 284
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1   14093 (87%)  Forsterite  LightSkyBlue       mmm                         
+     2   1397 (8.6%)   Enstatite  DarkSeaGreen       mmm                         
+     3    759 (4.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+ 
+</pre>
+  {% include inline_image.html file="GrainNeighbours_01.png" %}
+<pre class="codeinput"><span class="comment">% The function neighbors for grains returns the (i) the number of neighbors</span>
+<span class="comment">% of the grains in the EBSD map and (ii) the possible pairs of grains with</span>
+<span class="comment">% this map. This is defined in MTEX as</span>
+
+[g_NN, g_PAIRS] = grains.neighbors; <span class="comment">% grain pairs are given by grain.Id</span>
+
+<span class="comment">% A simple histogram showing the distribution of number of neighbors in the</span>
+<span class="comment">% map can be plotted as</span>
+
+figure(1)
+histogram(g_NN,0:1:20)
+xlabel(<span class="string">'Number of neighbors'</span>)
+ylabel(<span class="string">'Number of counts'</span>)
+
+<span class="comment">% whereas pairs generates a list of grain pairs of size size N x 2, where</span>
+<span class="comment">% $$N = 2 \sum n_i $$ is the total number of neighborhood relations</span>
+<span class="comment">% (without self-reference). In this case, pairs(i,:) gives the indexes of</span>
+<span class="comment">% two neighboring grains</span>
+</pre>
+  {% include inline_image.html file="GrainNeighbours_02.png" %}
+<pre class="codeinput"><span class="comment">% take a specific grain</span>
+id = 94;
+plot(grains(id),<span class="string">'micronbar'</span>,<span class="string">'off'</span>,<span class="string">'FaceColor'</span>,<span class="string">'Chocolate'</span>,<span class="string">'displayName'</span>,<span class="string">'id=94'</span>)
+
+<span class="comment">% extract neighbors of this grain</span>
+[~,neighbors] = grains(id).neighbors;
+neighbors(neighbors == id) = [];
+
+<span class="comment">% plot the neighbors</span>
+hold <span class="string">on</span>
+plot(grains(neighbors));
+hold <span class="string">off</span>
+</pre>
+  {% include inline_image.html file="GrainNeighbours_03.png" %}
+</div></body></html>
