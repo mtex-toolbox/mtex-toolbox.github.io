@@ -1,0 +1,110 @@
+---
+title: Grain Boundary Properties
+last_updated: 29-Sep-2019
+sidebar: documentation_sidebar
+permalink: BoundaryProperties.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-29"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Grain boundaries generation</h2><p>To work with grain boundaries we need some ebsd data and have to detect grains within the data set.</p><pre class="codeinput"><span class="comment">% load some example data</span>
+mtexdata <span class="string">twins</span>
+
+<span class="comment">% detect grains</span>
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>))
+
+<span class="comment">% smooth them</span>
+grains = grains.smooth
+
+<span class="comment">% visualize the grains</span>
+plot(grains,grains.meanOrientation)
+
+<span class="comment">% extract the grain boundaries</span>
+gB = grains.boundary
+</pre><pre class="codeoutput"> 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
+     1     121   22833  Magnesium     6/mmm       X||a*, Y||b, Z||c*
+ 
+ boundary segments: 3825
+ triple points: 114
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
+ Scan unit : um
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
+     1     121   22833  Magnesium     6/mmm       X||a*, Y||b, Z||c*
+ 
+ boundary segments: 3825
+ triple points: 114
+ 
+ Properties: GOS, meanRotation
+ 
+  I'm going to colorize the orientation data with the 
+  standard MTEX colorkey. To view the colorkey do:
+ 
+  colorKey = ipfColorKey(ori_variable_name)
+  plot(colorKey)
+ 
+gB = grainBoundary  
+ 
+ Segments   mineral 1  mineral 2
+      606  notIndexed  Magnesium
+     3219   Magnesium  Magnesium
+</pre>
+  {% include inline_image.html file="BoundaryProperties_01.png" %}
+<h2 id="2">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p><pre class="codeinput">plot(gB(<span class="string">'indexed'</span>),gB(<span class="string">'indexed'</span>).misorientation.angle./degree,<span class="string">'linewidth'</span>,2)
+mtexColorbar
+</pre>
+  {% include inline_image.html file="BoundaryProperties_02.png" %}
+<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p><pre class="codeinput">plot(gB,gB.direction.rho,<span class="string">'linewidth'</span>,2)
+</pre>
+  {% include inline_image.html file="BoundaryProperties_03.png" %}
+<h2 id="4">Line intersections</h2><p>Let start by defining some line by its endpoints and plot in on top of the boundary plot</p><pre class="codeinput">xy1 = [0,10];   <span class="comment">% staring point</span>
+xy2 = [31,41]; <span class="comment">% end point</span>
+
+plot(grains.boundary)
+line([xy1(1);xy2(1)],[xy1(2);xy2(2)],<span class="string">'linestyle'</span>,<span class="string">':'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'color'</span>,<span class="string">'cyan'</span>)
+</pre>
+  {% include inline_image.html file="BoundaryProperties_04.png" %}
+<p>The command <a href="grainBoundary_intersect.html">intersect</a> computes the intersections of all boundary segments with the given line</p><pre class="codeinput">[x,y] = grains.boundary.intersect(xy1,xy2);
+hold <span class="string">on</span>
+scatter(x,y,<span class="string">'red'</span>)
+hold <span class="string">off</span>
+<span class="comment">% find the number of intersection points</span>
+sum(~isnan(x))
+</pre><pre class="codeoutput">ans =
+    10
+</pre>
+  {% include inline_image.html file="BoundaryProperties_05.png" %}
+</div></body></html>

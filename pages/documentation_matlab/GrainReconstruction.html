@@ -1,6 +1,6 @@
 ---
 title: Grain Reconstruction
-last_updated: 28-Sep-2019
+last_updated: 29-Sep-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstruction.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-28"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstruction into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grain. Note that their is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
+      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-29"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstruction into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
 
 <span class="comment">% import the data</span>
 mtexdata <span class="string">forsterite</span>
@@ -235,86 +235,4 @@ grains = grain2d
  
 </pre>
   {% include inline_image.html file="GrainReconstruction_09.png" %}
-<h2 id="13">Grain reconstruction by the multiscale clustering method</h2><p>When analyzing grains with gradual and subtle boundaries the threshold based method may not lead to the desired result.</p><p>Let us consider the following example</p><pre class="codeinput">mtexdata <span class="string">single</span>
-
-ipfKey = axisAngleColorKey(ebsd);
-ipfKey.oriRef = mean(ebsd.orientations);
-
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-</pre>
-  {% include inline_image.html file="GrainReconstruction_10.png" %}
-<p>We obeserve that the are no rapid changes in the orientation which would allow for applying the threshold based algorithm. Setting the threshold angle to a very small value would include many irrelevant or false regions.</p><pre class="codeinput">grains_high = calcGrains(ebsd,<span class="string">'angle'</span>,1*degree);
-grains_low  = calcGrains(ebsd,<span class="string">'angle'</span>,0.5*degree);
-
-figure
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-hold <span class="string">on</span>
-plot(grains_high.boundary)
-hold <span class="string">off</span>
-
-figure
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-hold <span class="string">on</span>
-plot(grains_low.boundary)
-hold <span class="string">off</span>
-</pre>
-  {% include inline_image.html file="GrainReconstruction_11.png" %}
-
-  {% include inline_image.html file="GrainReconstruction_12.png" %}
-<p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p><pre class="codeinput">grains_FMC = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'FMC'</span>,3.8)
-grains = calcGrains(ebsd(<span class="string">'indexed'</span>))
-
-<span class="comment">% smooth grains to remove staircase effect</span>
-grains_FMC = smooth(grains_FMC);
-</pre><pre class="codeoutput"> 
-grains_FMC = grain2d  
- 
- Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     1      17   10201       Al      m-3m                         
- 
- boundary segments: 1552
- triple points: 14
- 
- Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  1       1        7   0.00851854    318   128    159
-  2       1     1120    0.0238482    239    75    320
-  3       1      517    0.0100044    238    76    320
-  4       1     1783    0.0220796     56   103     40
-  5       1       11   0.00748579     57   104    221
-  6       1        2   0.00276888    237    79    322
-  7       1        7   0.00810474    343    43    249
-  8       1      989    0.0126317    236    79    322
-  9       1     1060    0.0197436    239    75    320
- 10       1       76   0.00792457    238    75    320
- 11       1     1556    0.0218341    238    77    320
- 12       1      349    0.0114275    237    77    320
- 13       1      401    0.0103653    342    41    252
- 14       1      402     0.012066    238    77    320
- 15       1      184    0.0128148    237    77    319
- 16       1      957    0.0175949    316   129     74
- 17       1      780    0.0122539    238    78    321
- 
- 
-grains = grain2d  
- 
- Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     1       1   10201       Al      m-3m                         
- 
- boundary segments: 404
- triple points: 0
- 
- Id   Phase   Pixels         GOS   phi1   Phi   phi2
-  1       1    10201   0.0343764    237    77    320
- 
-</pre><p>We observe how this method nicely splits the measurements into clusters of similar orientation</p><pre class="codeinput"><span class="comment">%plot(ebsd,oM.orientation2color(ebsd.orientations))</span>
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-
-<span class="comment">% start overide mode</span>
-hold <span class="string">on</span>
-plot(grains_FMC.boundary,<span class="string">'linewidth'</span>,1.5)
-
-<span class="comment">% stop overide mode</span>
-hold <span class="string">off</span>
-</pre>
-  {% include inline_image.html file="GrainReconstruction_13.png" %}
 </div></body></html>
