@@ -18,73 +18,25 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata <span class="string">twins</span>
 
 <span class="comment">% detect grains</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>))
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>));
 
 <span class="comment">% smooth them</span>
-grains = grains.smooth
+grains = grains.smooth;
 
 <span class="comment">% visualize the grains</span>
 plot(grains,grains.meanOrientation)
 
 <span class="comment">% extract all grain boundaries</span>
-gB = grains.boundary
+gB = grains.boundary;
 
 hold <span class="string">on</span>
 plot(gB,<span class="string">'LineWidth'</span>,2)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
-grains = grain2d  
- 
- Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
-     1     121   22833  Magnesium     6/mmm       X||a*, Y||b, Z||c*
- 
- boundary segments: 3825
- triple points: 114
- 
- Properties: GOS, meanRotation
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
- 
-grains = grain2d  
- 
- Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
-     1     121   22833  Magnesium     6/mmm       X||a*, Y||b, Z||c*
- 
- boundary segments: 3825
- triple points: 114
- 
- Properties: GOS, meanRotation
- 
-  I'm going to colorize the orientation data with the 
+</pre><pre class="codeoutput">  I'm going to colorize the orientation data with the 
   standard MTEX colorkey. To view the colorkey do:
  
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
- 
-gB = grainBoundary  
- 
- Segments   mineral 1  mineral 2
-      606  notIndexed  Magnesium
-     3219   Magnesium  Magnesium
 </pre>
   {% include inline_image.html file="BoundaryProperties_01.png" %}
 <h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary_index.html">grainBoundary</a> contains the following properties</p><p>
@@ -279,7 +231,13 @@ axes = vector3d
 plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),<span class="string">'linewidth'</span>,3)
 </pre>
   {% include inline_image.html file="BoundaryProperties_05.png" %}
-<p>The <b>midPoint</b> property is usefull when  TODO:</p><h2 id="13">Connected components</h2><p>TODO: explain this in more detail</p><pre class="codeinput">components = unique(gB.componentId);
+<p>The <b>midPoint</b> property is usefull when  TODO:</p><p>While the command</p><pre class="codeinput">length(gB_Mg)
+</pre><pre class="codeoutput">ans =
+        3219
+</pre><p>gives us the total number of all Magnesium to Magnesium grain boundary segements the following command gives us its their total length in um.</p><pre class="codeinput">sum(gB_Mg.segLength)
+</pre><pre class="codeoutput">ans =
+  755.5302
+</pre><h2 id="15">Connected components</h2><p>TODO: explain this in more detail</p><pre class="codeinput">components = unique(gB.componentId);
 <span class="keyword">for</span> cId = components.'
   plot(gB(gB.componentId == cId),<span class="string">'lineColor'</span>,ind2color(cId),<span class="keyword">...</span>
     <span class="string">'micronbar'</span>,<span class="string">'off'</span>,<span class="string">'lineWidth'</span>,3,<span class="string">'displayName'</span>,num2str(cId))

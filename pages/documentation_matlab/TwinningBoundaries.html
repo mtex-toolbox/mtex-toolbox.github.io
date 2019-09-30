@@ -1,6 +1,6 @@
 ---
 title: Twinning Analysis
-last_updated: 29-Sep-2019
+last_updated: 30-Sep-2019
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-29"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Explains how to detect and quantify twin boundaries</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Data import and grain detection</h2><p>Lets import some Magnesium data that are full of grains and segment grain within the data set.</p><pre class="codeinput"><span class="comment">% load some example data</span>
+      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-30"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p><pre class="codeinput"><span class="comment">% load some example data</span>
 mtexdata <span class="string">twins</span>
 
 <span class="comment">% segment grains</span>
@@ -52,7 +52,7 @@ gB_MgMg = grainBoundary
  
  Segments  mineral 1  mineral 2
      3164  Magnesium  Magnesium
-</pre><h2 id="6">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p><pre class="codeinput">plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,<span class="string">'linewidth'</span>,2)
+</pre><h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p><pre class="codeinput">plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,<span class="string">'linewidth'</span>,2)
 mtexColorbar
 </pre>
   {% include inline_image.html file="TwinningBoundaries_02.png" %}
@@ -134,7 +134,7 @@ twinBoundary = grainBoundary
   plot(colorKey)
 </pre>
   {% include inline_image.html file="TwinningBoundaries_05.png" %}
-<h2 id="14">Merge twins along twin boundaries</h2><p>Grains that have a common twin boundary are assumed to inherite from one common grain. To reconstruct those initial grains we merge grains together which have a common twin boundary. This is done by the command <a href="grain2d.merge.html">merge</a>.</p><pre class="codeinput">[mergedGrains,parentId] = merge(grains,twinBoundary);
+<h2 id="12">Merge twins along twin boundaries</h2><p>Grains that have a common twin boundary are assumed to inherite from one common grain. To reconstruct those initial grains we merge grains together which have a common twin boundary. This is done by the command <a href="grain2d.merge.html">merge</a>.</p><pre class="codeinput">[mergedGrains,parentId] = merge(grains,twinBoundary);
 
 <span class="comment">% plot the merged grains</span>
 <span class="comment">%plot(ebsd,ebsd.orientations)</span>
@@ -144,7 +144,7 @@ plot(mergedGrains.boundary,<span class="string">'linecolor'</span>,<span class="
 hold <span class="string">off</span>
 </pre>
   {% include inline_image.html file="TwinningBoundaries_06.png" %}
-<h2 id="15">Grain relationships</h2><p>The second output argument <tt>paraentId</tt> of <a href="grain2d.merge.html">merge</a> is a list with the same size as grains which indicates for each grain into which common grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p><pre class="codeinput">mergedGrains(16).id
+<h2 id="13">Grain relationships</h2><p>The second output argument <tt>paraentId</tt> of <a href="grain2d.merge.html">merge</a> is a list with the same size as grains which indicates for each grain into which common grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p><pre class="codeinput">mergedGrains(16).id
 </pre><pre class="codeoutput">ans =
     16
 </pre><p>Hence, we can find all childs of grain 16 by</p><pre class="codeinput">childs = grains(parentId == mergedGrains(16).id)
@@ -167,7 +167,7 @@ childs = grain2d
  29       1      293   0.00910428     94   146    185
  33       1      250    0.0106861    179    89    235
  
-</pre><h2 id="17">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p><pre class="codeinput">twinId = unique(gB_MgMg(isTwinning).grainId);
+</pre><h2 id="15">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p><pre class="codeinput">twinId = unique(gB_MgMg(isTwinning).grainId);
 
 <span class="comment">% compute the area fraction</span>
 sum(area(grains(twinId))) / sum(area(grains)) * 100
@@ -214,7 +214,7 @@ mtexColorbar
 caxis([0,1.5])
 </pre>
   {% include inline_image.html file="TwinningBoundaries_09.png" %}
-<h2 id="20">Setting Up the EBSD Data for the Merged Grains</h2><p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p><pre class="codeinput">close <span class="string">all</span>
+<h2 id="18">Setting Up the EBSD Data for the Merged Grains</h2><p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p><pre class="codeinput">close <span class="string">all</span>
 plot(mergedGrains(16).boundary,<span class="string">'linewidth'</span>,2)
 hold <span class="string">on</span>
 plot(ebsd(mergedGrains(16)),ebsd(mergedGrains(16)).orientations)
