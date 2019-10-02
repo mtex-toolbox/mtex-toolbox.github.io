@@ -1,6 +1,6 @@
 ---
 title: Crystal Orientations
-last_updated: 26-Sep-2019
+last_updated: 02-Oct-2019
 sidebar: documentation_sidebar
 permalink: orientation_index.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Crystal Orientations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_orientation_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This sections describes the class <b>orientation</b> and gives an overview how to work with crystal orientation in MTEX.</p><!--/introduction--><h2 id="2">Class Description</h2><p>In texture analysis crystal orientations are used to describe the alignment of the crystals within the specimen. A crystal orientation is defined as the rotation that maps the specimen coordinate system onto the crystal coordinate system. Since the crystal coordinate system and the specimen coordinate system are well defined only up to crystal symmetry and specimen symmetry, an orientation is in general represented by a class of crystallographically equivalent rotations. In MTEX the class <b>orientation</b> is an inheritance of the class <a href="rotation_index.html">rotation</a>. In particular, every function that is defined for a rotation is also available for an orientation.</p><h2 id="3">SUB: Defining a Crystal Orientation</h2><p>In order to define a crystal orientation one has to define crystal and specimen symmetry first.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
+      --><title>Crystal Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_orientation_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This sections describes the class <b>orientation</b> and gives an overview how to work with crystal orientation in MTEX.</p><!--/introduction--><h2 id="2">Class Description</h2><p>In texture analysis crystal orientations are used to describe the alignment of the crystals within the specimen. A crystal orientation is defined as the rotation that maps the specimen coordinate system onto the crystal coordinate system. Since the crystal coordinate system and the specimen coordinate system are well defined only up to crystal symmetry and specimen symmetry, an orientation is in general represented by a class of crystallographically equivalent rotations. In MTEX the class <b>orientation</b> is an inheritance of the class <a href="rotation_index.html">rotation</a>. In particular, every function that is defined for a rotation is also available for an orientation.</p><h2 id="3">SUB: Defining a Crystal Orientation</h2><p>In order to define a crystal orientation one has to define crystal and specimen symmetry first.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
 ss = specimenSymmetry(<span class="string">'orthorhombic'</span>);
 </pre><p>Now a crystal orientation to a certain <a href="rotation_index.html">rotation</a></p><pre class="codeinput">rot = rotation.byEuler(30*degree,50*degree,10*degree);
 </pre><p>is defined by</p><pre class="codeinput">o = orientation(rot,cs,ss)
@@ -50,7 +50,7 @@ o = orientation
   phi1  Phi phi2 Inv.
    135   90   90    0
  
-</pre><p><b>Predifined Orientations</b></p><p>In the MTEX there is a list of predefined orientations:</p><div><ul><li>[[orientation.cube.html,cube]]</li><li>[[orientation.goss.html,goss]]</li><li>[[orientation.brass.html,brass]]</li></ul></div><pre class="codeinput">o = orientation.goss(cs,ss)
+</pre><p><b>Predifined Orientations</b></p><p>In the MTEX there is a list of predefined orientations:</p><div><ul><li><a href="orientation.cube.html">cube</a></li><li><a href="orientation.goss.html">goss</a></li><li><a href="orientation.brass.html">brass</a></li></ul></div><pre class="codeinput">o = orientation.goss(cs,ss)
 </pre><pre class="codeoutput"> 
 o = orientation  
   size: 1 x 1
@@ -150,7 +150,7 @@ ans = inverse orientation
   phi1  Phi phi2 Inv.
     90   60  180    0
  
-</pre><h2 id="21">SUB: Conversion into Euler Angles and Rodrigues Parametrisation</h2><p>There are methods to transform quaternion in almost any other parameterization of rotations as they are:</p><div><ul><li>[[quaternion.Euler.html,Euler(o)]]   in Euler angle</li><li>[[quaternion.Rodrigues.html,Rodrigues(o)]] % in Rodrigues parameter</li></ul></div><pre class="codeinput">[phi1,Phi,phi2] = Euler(o)
+</pre><h2 id="21">SUB: Conversion into Euler Angles and Rodrigues Parametrisation</h2><p>There are methods to transform quaternion in almost any other parameterization of rotations as they are:</p><div><ul><li><a href="quaternion.Euler.html">Euler(o)</a>   in Euler angle</li><li><a href="quaternion.Rodrigues.html">Rodrigues(o)</a> % in Rodrigues parameter</li></ul></div><pre class="codeinput">[phi1,Phi,phi2] = Euler(o)
 </pre><pre class="codeoutput">phi1 =
     1.5708
 Phi =

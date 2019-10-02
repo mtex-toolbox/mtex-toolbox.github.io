@@ -1,6 +1,6 @@
 ---
 title: Plotting
-last_updated: 01-Oct-2019
+last_updated: 02-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDPlotting.html
 folder: documentation
@@ -14,16 +14,20 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_EBSDPlotting.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDPlotting into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This section gives you an overview of the functionality MTEX offers to visualize spatial orientation data. Let us first import some EBSD data with a <a href="matlab:edit">mtexdata  script file</a></p><pre class="codeinput">close <span class="string">all</span>; plotx2east
+      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_EBSDPlotting.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDPlotting into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This section gives you an overview of the functionality MTEX offers to visualize spatial orientation data. Let us first import some sample EBSD data.</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
 mtexdata <span class="string">forsterite</span>
-csFo = ebsd(<span class="string">'Forsterite'</span>).CS
+csFo = ebsd(<span class="string">'Forsterite'</span>).CS;
 </pre><pre class="codeoutput"> 
-csFo = crystalSymmetry  
+ebsd = EBSD  
  
-  mineral : Forsterite  
-  color   : LightSkyBlue
-  symmetry: mmm         
-  a, b, c : 4.8, 10, 6  
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
  
 </pre><h2 id="2">Phase Plots</h2><p>By default, MTEX plots a phase map for EBSD data.</p><pre class="codeinput">plot(ebsd)
 </pre>
@@ -31,13 +35,25 @@ csFo = crystalSymmetry
 <p>You can access the color of each phase by</p><pre class="codeinput">ebsd(<span class="string">'Diopside'</span>).color
 </pre><pre class="codeoutput">ans =
     0.8549    0.6471    0.1255
-</pre><p>These values are RGB values, e.g. to make the color for diopside even more red we can do</p><pre class="codeinput">ebsd(<span class="string">'Diopside'</span>).color = [1 0 0];
+</pre><p>These values are RGB values which can be altered to any other RGB triple. A more convinient way for changing the color is the function <a href="str2rgb.html">str2rgb</a> which converts color names into RGB triplets</p><pre class="codeinput">ebsd(<span class="string">'Diopside'</span>).color = str2rgb(<span class="string">'salmon'</span>)
 
 plot(ebsd(<span class="string">'indexed'</span>))
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside        Salmon     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
 </pre>
   {% include inline_image.html file="EBSDPlotting_02.png" %}
-<p>By default, not indexed phases are plotted as white. To directly specify a color for some EBSD data use the option <tt>FaceColor</tt>.</p><pre class="codeinput">hold <span class="string">on</span>
-plot(ebsd(<span class="string">'notIndexed'</span>),<span class="string">'FaceColor'</span>,<span class="string">'black'</span>)
+<p>By default, not indexed phases are plotted as white and it is impossible to assign a different color as we did it for real phases. Instead we need to use option <tt>FaceColor</tt> to specify the color directly in the plotting command.</p><pre class="codeinput">hold <span class="string">on</span>
+plot(ebsd(<span class="string">'notIndexed'</span>),<span class="string">'FaceColor'</span>,<span class="string">'Gray'</span>)
 hold <span class="string">off</span>
 </pre>
   {% include inline_image.html file="EBSDPlotting_03.png" %}
