@@ -1,6 +1,6 @@
 ---
-title: Visualizing EBSD data with sharp textures
-last_updated: 01-Oct-2019
+title: Sharp Color Keys
+last_updated: 02-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDSharpPlot.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Visualizing EBSD data with sharp textures</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_EBSDSharpPlot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSharpPlot into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How visualize texture gradients within grains</p><!--/introduction--><h2 id="2">Contents</h2><p>Using advanced color keys is particularly useful when visualizing sharp data. Let us consider the following calcite data set</p><pre class="codeinput"><span class="comment">% plotting conventions</span>
+      --><title>Sharp Color Keys</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_EBSDSharpPlot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSharpPlot into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss color keys that are particular useful when analyzing data with very small deviation in orientation. Let us consider the following calcite data set</p><pre class="codeinput"><span class="comment">% plotting conventions</span>
 plotx2east, plotb2east
 mtexdata <span class="string">sharp</span>
 
@@ -24,8 +24,16 @@ ipfKey = ipfColorKey(ebsd);
 
 close <span class="string">all</span>;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-</pre><pre class="codeoutput"> loading data ...
- saving data to /home/hielscher/mtex/master/data/sharp.mat
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral       Color  Symmetry  Crystal reference frame
+     0    32 (0.16%)  notIndexed                                               
+     1  20119 (100%)     calcite  light blue      -3m1       X||a*, Y||b, Z||c*
+ 
+ Properties: x, y
+ Scan unit : um
+ 
 </pre>
   {% include inline_image.html file="EBSDSharpPlot_01.png" %}
 <p>and have a look into the 100 inverse pole figure.</p><pre class="codeinput"><span class="comment">% compute the positions in the inverse pole figure</span>
@@ -40,7 +48,7 @@ mtexColorbar
 </pre><pre class="codeoutput">  I'm plotting 8333 random orientations out of 20119 given orientations
 </pre>
   {% include inline_image.html file="EBSDSharpPlot_02.png" %}
-<p>We see that all individual orientations are clustered around azimuth angle 115 degrees with some outliers at 125 and 130 degree. In order to increase the contrast for the main group, we restrict the color range from 110 degree to 120 degree.</p><pre class="codeinput">caxis([110 120]);
+<p>We see that all individual orientations are clustered around azimuth angle 115 degrees with some outliers at 65 degree. In order to increase the contrast for the main group, we restrict the color range from 110 degree to 120 degree.</p><pre class="codeinput">caxis([110 120]);
 
 <span class="comment">% by the following lines we colorcode the outliers in purple.</span>
 cmap = colormap;
@@ -62,7 +70,7 @@ cmap(1,:) = [1 0 1];
 colormap(cmap)
 </pre>
   {% include inline_image.html file="EBSDSharpPlot_04.png" %}
-<h2 id="7">Sharpening the default colorcoding</h2><p>Next, we want to apply the same ideas as above to the default MTEX color key, i.e. we want to stretch the colors such that they cover just the orientations of interest.</p><pre class="codeinput">ipfKey = ipfHSVKey(ebsd.CS.properGroup);
+<h2 id="5">Sharpening the default colorcoding</h2><p>Next, we want to apply the same ideas as above to the default MTEX color key, i.e. we want to stretch the colors such that they cover just the orientations of interest.</p><pre class="codeinput">ipfKey = ipfHSVKey(ebsd.CS.properGroup);
 
 <span class="comment">% To this end, we first compute the inverse pole figure direction such that</span>
 <span class="comment">% the mean orientation is just at the gray spot of the inverse pole figure</span>
@@ -70,8 +78,6 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations,<span class="string">
 
 close <span class="string">all</span>;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-</pre><pre class="codeoutput">Warning: Possibly applying an orientation to an object in
-specimen coordinates! 
 </pre>
   {% include inline_image.html file="EBSDSharpPlot_05.png" %}
 <p>We observe that the orientation map is almost completely gray, except for the  outliers which appears black. Next, we use the option <tt>maxAngle</tt> to increase contrast in the grayish part</p><pre class="codeinput">ipfKey.maxAngle = 7.5*degree;
@@ -87,7 +93,7 @@ hold <span class="string">off</span>
 </pre><pre class="codeoutput">  I'm plotting 10 random orientations out of 20119 given orientations
 </pre>
   {% include inline_image.html file="EBSDSharpPlot_07.png" %}
-<p>observe how in the inverse pole figure the orientations are scattered closely around the white center. Together with the fact that the transition from white to color is quite rapidly, this gives a high contrast.</p><pre class="codeinput">[grains,ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,1.5*degree);
+<p>observe how in the inverse pole figure the orientations are scattered closely around the white center. Together with the fact that the transition from white to color is quite rapidly, this gives a high contrast.</p><h2 id="9">The axis angle color key</h2><pre class="codeinput">[grains,ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,1.5*degree);
 ebsd(grains(grains.grainSize&lt;=3)) = [];
 [grains,ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,1.5*degree);
 
@@ -156,6 +162,18 @@ largeGrains = grains(grains.grainSize &gt; 800)
 
 ebsd = ebsd(largeGrains(1))
 </pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+ 
 largeGrains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -192,8 +210,6 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations) * ipfKey.whiteCenter
 ipfKey.maxAngle = 2*degree;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 hold <span class="string">off</span>
-</pre><pre class="codeoutput">Warning: Possibly applying an orientation to an object in
-specimen coordinates! 
 </pre>
   {% include inline_image.html file="EBSDSharpPlot_12.png" %}
 </div></body></html>
