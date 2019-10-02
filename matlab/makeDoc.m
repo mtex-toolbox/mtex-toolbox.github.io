@@ -18,7 +18,6 @@ end
 %% settings
 
 mtex_settings
-clear
 close all
 setMTEXpref('FontSize',12)
 setMTEXpref('figSize',0.5)
@@ -87,7 +86,9 @@ end
 move_images(options.outputDir);
 
 %%
-deadlink(mtexDocFiles,options.outputDir);
+if check_option(varargin,'checkLinks')
+  deadlink(mtexDocFiles,options.outputDir);
+end
 
 %% make help toc
 
