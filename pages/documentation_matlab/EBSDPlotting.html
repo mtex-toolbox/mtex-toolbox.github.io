@@ -35,21 +35,9 @@ ebsd = EBSD
 <p>You can access the color of each phase by</p><pre class="codeinput">ebsd(<span class="string">'Diopside'</span>).color
 </pre><pre class="codeoutput">ans =
     0.8549    0.6471    0.1255
-</pre><p>These values are RGB values which can be altered to any other RGB triple. A more convinient way for changing the color is the function <a href="str2rgb.html">str2rgb</a> which converts color names into RGB triplets</p><pre class="codeinput">ebsd(<span class="string">'Diopside'</span>).color = str2rgb(<span class="string">'salmon'</span>)
+</pre><p>These values are RGB values which can be altered to any other RGB triple. A more convinient way for changing the color is the function <a href="str2rgb.html">str2rgb</a> which converts color names into RGB triplets</p><pre class="codeinput">ebsd(<span class="string">'Diopside'</span>).color = str2rgb(<span class="string">'salmon'</span>);
 
 plot(ebsd(<span class="string">'indexed'</span>))
-</pre><pre class="codeoutput"> 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside        Salmon     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
 </pre>
   {% include inline_image.html file="EBSDPlotting_02.png" %}
 <p>By default, not indexed phases are plotted as white and it is impossible to assign a different color as we did it for real phases. Instead we need to use option <tt>FaceColor</tt> to specify the color directly in the plotting command.</p><pre class="codeinput">hold <span class="string">on</span>
@@ -59,8 +47,7 @@ hold <span class="string">off</span>
   {% include inline_image.html file="EBSDPlotting_03.png" %}
 <h2 id="6">Visualizing arbitrary properties</h2><p>Apart from the phase information, we can use any other property to colorize the EBSD data. As an example, we may plot the band contrast</p><pre class="codeinput">plot(ebsd,ebsd.bc)
 
-colormap <span class="string">gray</span> <span class="comment">% this makes the image grayscale</span>
-
+colormap <span class="string">gray</span> <span class="comment">% make the image grayscale</span>
 mtexColorbar
 </pre>
   {% include inline_image.html file="EBSDPlotting_04.png" %}
@@ -69,141 +56,18 @@ mtexColorbar
 </pre>
   {% include inline_image.html file="EBSDPlotting_05.png" %}
 <p>Obviously, the rotational angle is not a very distintive representative for orientations. A more common approach is to define a colorization of the fundamental secor of the inverse pole figure, a so called ipf color key, and to colorize orientations according to their position in a fixed inverse pole figure. Let's consider the following standard key.</p><pre class="codeinput"><span class="comment">% this defines an ipf color key for the Forsterite phase</span>
-ipfKey = ipfHSVKey(ebsd(<span class="string">'Forsterite'</span>))
+ipfKey = ipfColorKey(ebsd(<span class="string">'Forsterite'</span>));
+ipfKey.inversePoleFigureDirection = vector3d.Z;
 
 <span class="comment">% this is the colored fundamental sector</span>
 plot(ipfKey)
-</pre><pre class="codeoutput">ipfKey = 
-  ipfHSVKey with properties:
-
-             colorPostRotation: [1&times;1 rotation]
-               colorStretching: 1
-                   whiteCenter: [1&times;1 vector3d]
-                     grayValue: [0.2000 0.5000]
-                  grayGradient: 0.5000
-                      maxAngle: Inf
-    inversePoleFigureDirection: [1&times;1 vector3d]
-                        dirMap: [1&times;1 HSVDirectionKey]
-                           CS1: [4&times;2 crystalSymmetry]
-                           CS2: [1&times;1 specimenSymmetry]
-                     antipodal: 0
 </pre>
   {% include inline_image.html file="EBSDPlotting_06.png" %}
-<p>In order to apply this color key for colorizing the map we proceed as follows</p><pre class="codeinput"><span class="comment">% compute the colors</span>
-color = ipfKey.orientation2color(ebsd(<span class="string">'Fo'</span>).orientations);
-
-<span class="comment">% plot the colors</span>
-close <span class="string">all</span>
-plot(ebsd(<span class="string">'Forsterite'</span>),color)
+<p>Next we may utilize this key to turn the orientations into colors, which are than passed to the <a href="EBSD.plot.html">plot</a> command.</p><pre class="codeinput">colors = ipfKey.orientation2color(ebsd(<span class="string">'Forsterite'</span>).orientations);
+plot(ebsd(<span class="string">'Forsterite'</span>),colors)
 </pre>
   {% include inline_image.html file="EBSDPlotting_07.png" %}
-<p>Orientation color key usually provide several options to alter the alignment of colors. Let's give some examples</p><pre class="codeinput"><span class="comment">% we may interchange green and blue by setting</span>
-ipfKey.colorPostRotation = reflection(yvector);
-
-plot(ipfKey)
-</pre>
-  {% include inline_image.html file="EBSDPlotting_08.png" %}
-<p>or cycle of colors red, green, blue by</p><pre class="codeinput">ipfKey.colorPostRotation = rotation.byAxisAngle(zvector,120*degree);
-
-plot(ipfKey)
-</pre>
-  {% include inline_image.html file="EBSDPlotting_09.png" %}
-<p>Furthermore, we can explicitly set the inverse pole figure directions by</p><pre class="codeinput">ipfKey.inversePoleFigureDirection = zvector;
-
-<span class="comment">% compute the colors again</span>
-color = ipfKey.orientation2color(ebsd(<span class="string">'Forsterite'</span>).orientations);
-
-<span class="comment">% and plot them</span>
-close <span class="string">all</span>
-plot(ebsd(<span class="string">'Forsterite'</span>),color)
-</pre>
-  {% include inline_image.html file="EBSDPlotting_10.png" %}
-<p>Besides the recommended color key <a href="ipfHSVKey.html">ipfHSVKey</a> MTEX includes a bunch of other color keys</p><div><ul><li><a href="ipfTSLKey.html">ipfTSLKey</a></li><li><a href="ipfHKLKey.html">ipfHKLKey</a></li><li><a href="BungeColorKey.html">BungeColorKey</a></li><li><a href="PatalaColorKey.html">PatalaColorKey</a></li><li><a href="axisAngleColorKey.html">axisAngleColorKey</a></li><li><a href="spotColorKey.html">spotColorKey</a></li><li><a href="ipfSpotKey.html">ipfSpotKey</a></li></ul></div><h2 id="14">Customizing the color</h2><p>In some cases, it might be useful to color certain orientations after one needs. This can be done in two ways, either to color a certain fibre or a certain orientation.</p><h2 id="15">SUB: Coloring certain fibres</h2><p>To color a fibre, one has to specify the crystal direction <b>h</b> together with its RGB color and the specimen direction <b>r</b>, which should be marked.</p><pre class="codeinput"><span class="comment">% define a fibre</span>
-f = fibre(Miller(1,1,1,csFo),zvector);
-
-<span class="comment">% set up coloring</span>
-ipfKey = ipfSpotKey(csFo);
-ipfKey.inversePoleFigureDirection = f.r;
-ipfKey.center = f.h;
-ipfKey.color = [0 0 1];
-ipfKey.psi = deLaValleePoussinKernel(<span class="string">'halfwidth'</span>,7.5*degree);
-
-plot(ebsd(<span class="string">'fo'</span>),ipfKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
-</pre>
-  {% include inline_image.html file="EBSDPlotting_11.png" %}
-<p>the option <tt>halfwidth</tt> controls half of the intensity of the color at a given distance. Here we have chosen the (111)[001] fibre to be drawn in blue, and at 7.5 degrees, where the blue should be only lighter.</p><pre class="codeinput">plot(ipfKey)
-hold <span class="string">on</span>
-circle(f.h.project2FundamentalRegion,15*degree,<span class="string">'linewidth'</span>,2)
-</pre>
-  {% include inline_image.html file="EBSDPlotting_12.png" %}
-<p>the percentage of blue colored area in the map is equivalent to the fibre volume</p><pre class="codeinput">vol = volume(ebsd(<span class="string">'fo'</span>).orientations,f,15*degree)
-
-plotIPDF(ebsd(<span class="string">'fo'</span>).orientations,zvector,<span class="string">'markercolor'</span>,<span class="string">'k'</span>,<span class="string">'marker'</span>,<span class="string">'x'</span>,<span class="string">'points'</span>,200)
-hold <span class="string">off</span>
-</pre><pre class="codeoutput">vol =
-    0.2480
-  I'm plotting 200 random orientations out of 152345 given orientations
-</pre>
-  {% include inline_image.html file="EBSDPlotting_13.png" %}
-<p>we can easily extend the colorcoding</p><pre class="codeinput"><span class="comment">% the centers in the inverse pole figure</span>
-ipfKey.center = Miller({0 0 1},{0 1 1},{1 1 1},{11 4 4},{5 0 2},{5 5 2},csFo);
-
-<span class="comment">% the correspnding collors</span>
-ipfKey.color = [[1 0 0];[0 1 0];[0 0 1];[1 0 1];[1 1 0];[0 1 1]];
-
-<span class="comment">% plot the key</span>
-plot(ipfKey)
-hold <span class="string">on</span>
-plot(ebsd(<span class="string">'fo'</span>).orientations,<span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerSize'</span>,3,<span class="string">'points'</span>,1000)
-hold <span class="string">off</span>
-</pre><pre class="codeoutput">  I'm plotting 1000 random orientations out of 152345 given orientations
-</pre>
-  {% include inline_image.html file="EBSDPlotting_14.png" %}
-<pre class="codeinput">close <span class="string">all</span>;
-plot(ebsd(<span class="string">'fo'</span>),ipfKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
-</pre>
-  {% include inline_image.html file="EBSDPlotting_15.png" %}
-<h2 id="20">SUB: Coloring certain orientations</h2><p>We might be interested in locating some special orientation in our orientation map. The definition of colors for certain orientations is carried out similarly as in the case of fibres</p><pre class="codeinput">ipfKey = spotColorKey(ebsd(<span class="string">'Fo'</span>));
-ipfKey.center = mean(ebsd(<span class="string">'Forsterite'</span>).orientations,<span class="string">'robust'</span>);
-ipfKey.color = [0,0,1];
-ipfKey.psi = deLaValleePoussinKernel(<span class="string">'halfwidth'</span>,20*degree);
-
-plot(ebsd(<span class="string">'fo'</span>),ipfKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
-
-<span class="comment">% and the correspoding colormap</span>
-figure(2)
-plot(ipfKey,<span class="string">'sections'</span>,9,<span class="string">'sigma'</span>)
-</pre>
-  {% include inline_image.html file="EBSDPlotting_16.png" %}
-
-  {% include inline_image.html file="EBSDPlotting_17.png" %}
-<p>the area of the colored EBSD data in the map corresponds to the volume portion (in percent)</p><pre class="codeinput">vol = 100 * volume(ebsd(<span class="string">'fo'</span>).orientations,ipfKey.center,20*degree)
-</pre><pre class="codeoutput">vol =
-    1.3227
-</pre><p>actually, the colored measurements stress a peak in the ODF</p><pre class="codeinput">close <span class="string">all</span>
-odf = calcODF(ebsd(<span class="string">'fo'</span>).orientations,<span class="string">'halfwidth'</span>,10*degree,<span class="string">'silent'</span>);
-plot(odf,<span class="string">'sections'</span>,9,<span class="string">'silent'</span>,<span class="string">'sigma'</span>)
-mtexColorbar
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
-</pre>
-  {% include inline_image.html file="EBSDPlotting_18.png" %}
-<h2 id="23">Combining different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <tt>'faceAlpha'</tt>. Note that the option <tt>'faceAlpha'</tt> requires the renderer of the figure to be set to <tt>'opengl'</tt>.</p><pre class="codeinput">close <span class="string">all</span>;
-plot(ebsd,ebsd.bc,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-mtexColorMap <span class="string">black2white</span>
-
-ipfKey = ipfSpotKey(csFo);
-ipfKey.inversePoleFigureDirection = zvector;
-ipfKey.center = Miller(1,1,1,csFo);
-ipfKey.color = [0 0 1];
-ipfKey.psi = deLaValleePoussinKernel(<span class="string">'halfwidth'</span>,7.5*degree);
-
-hold <span class="string">on</span>
-plot(ebsd(<span class="string">'fo'</span>),ipfKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations),<span class="string">'FaceAlpha'</span>,0.5)
-hold <span class="string">off</span>
-</pre>
-  {% include inline_image.html file="EBSDPlotting_19.png" %}
-<p>another example</p><pre class="codeinput">close <span class="string">all</span>;
+<p>The above ipf color key can be largely customizied. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p><h2 id="11">Superposing different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <tt>'faceAlpha'</tt>. Note that the option <tt>'faceAlpha'</tt> requires the renderer of the figure to be set to <tt>'opengl'</tt>.</p><pre class="codeinput">close <span class="string">all</span>;
 plot(ebsd,ebsd.bc)
 mtexColorMap <span class="string">black2white</span>
 
@@ -211,5 +75,5 @@ hold <span class="string">on</span>
 plot(ebsd(<span class="string">'fo'</span>),<span class="string">'FaceAlpha'</span>,0.5)
 hold <span class="string">off</span>
 </pre>
-  {% include inline_image.html file="EBSDPlotting_20.png" %}
+  {% include inline_image.html file="EBSDPlotting_08.png" %}
 </div></body></html>

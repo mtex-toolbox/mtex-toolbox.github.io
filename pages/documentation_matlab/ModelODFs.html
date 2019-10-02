@@ -75,64 +75,7 @@ odf = ODF
 <pre class="codeinput">plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,0,cs)],<span class="string">'antipodal'</span>)
 </pre>
   {% include inline_image.html file="ModelODFs_03.png" %}
-<h2 id="9">Bingham ODFs</h2><p>The Bingham quaternion distribution</p><p>
-  {% include inline_image.html file="ModelODFs_eq11455625306311351361.png" %}
-</p><p>has a (4x4)-orthogonal matrix 
-  {% include inline_image.html file="ModelODFs_eq02619125812656254059.png" %}
- and shape parameters 
-  {% include inline_image.html file="ModelODFs_eq03845174387838694102.png" %}
- as argument. The (4x4) matrix can be interpreted as 4 orthogonal <a href="quaternion_index.html">quaternions</a> 
-  {% include inline_image.html file="ModelODFs_eq16982490052868600911.png" %}
-, where the 
-  {% include inline_image.html file="ModelODFs_eq15602978728784385692.png" %}
- allow different shapes, e.g.</p><div><ul><li>unimodal ODFs</li><li>fibre ODF</li><li>spherical ODFs</li></ul></div><p>A Bingham distribution is characterized by</p><div><ul><li>four <a href="orientation_index.html">orientations</a></li><li>four values lambda</li></ul></div><pre class="codeinput">cs = crystalSymmetry(<span class="string">'-3m'</span>);
-</pre><p><b>Bingham unimodal ODF</b></p><pre class="codeinput"><span class="comment">% a modal orientation</span>
-mod = orientation.byEuler(45*degree,0*degree,0*degree);
-
-<span class="comment">% the corresponding Bingham ODF</span>
-odf = BinghamODF(20,mod,cs)
-
-plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>,<span class="string">'contourf'</span>,<span class="string">'sigma'</span>)
-</pre><pre class="codeoutput"> 
-odf = ODF  
-  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
- 
-  Bingham portion:
-     kappa: 20 0 0 0
-    weight: 1
- 
-</pre>
-  {% include inline_image.html file="ModelODFs_04.png" %}
-<p><b>Bingham fibre ODF</b></p><pre class="codeinput">odf = BinghamODF([-10,-10,10,10],quaternion(eye(4)),cs)
-
-plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>,<span class="string">'sigma'</span>)
-</pre><pre class="codeoutput"> 
-odf = ODF  
-  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
- 
-  Bingham portion:
-     kappa: -10 -10 10 10
-    weight: 1
- 
-</pre>
-  {% include inline_image.html file="ModelODFs_05.png" %}
-<p><b>Bingham spherical ODF</b></p><pre class="codeinput">odf = BinghamODF([-10,10,10,10],quaternion(eye(4)),cs)
-
-plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>,<span class="string">'sigma'</span>);
-</pre><pre class="codeoutput"> 
-odf = ODF  
-  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
- 
-  Bingham portion:
-     kappa: -10 10 10 10
-    weight: 1
- 
-</pre>
-  {% include inline_image.html file="ModelODFs_06.png" %}
-<h2 id="13">Combining model ODFs</h2><p>All the above can be arbitrarily rotated and combined. For instance, the classical Santafe example can be defined by commands</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
+<h2 id="9">Combining model ODFs</h2><p>All the above can be arbitrarily rotated and combined. For instance, the classical Santafe example can be defined by commands</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'cubic'</span>);
 ss = specimenSymmetry(<span class="string">'orthorhombic'</span>);
 
 psi = vonMisesFisherKernel(<span class="string">'halfwidth'</span>,10*degree);
@@ -156,5 +99,5 @@ odf = ODF
     weight: 0.27
  
 </pre>
-  {% include inline_image.html file="ModelODFs_07.png" %}
+  {% include inline_image.html file="ModelODFs_04.png" %}
 </div></body></html>
