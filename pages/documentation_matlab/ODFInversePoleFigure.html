@@ -1,0 +1,66 @@
+---
+title: Visualizing ODFs
+last_updated: 02-Oct-2019
+sidebar: documentation_sidebar
+permalink: ODFInversePoleFigure.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_ODFInversePoleFigure.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODFInversePoleFigure into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Let us first define some model ODFs to be plotted later on.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'32'</span>);
+mod1 = orientation.byEuler(90*degree,40*degree,110*degree,<span class="string">'ZYZ'</span>,cs);
+mod2 = orientation.byEuler(50*degree,30*degree,-30*degree,<span class="string">'ZYZ'</span>,cs);
+
+odf = 0.2*unimodalODF(mod1) <span class="keyword">...</span>
+  + 0.3*unimodalODF(mod2) <span class="keyword">...</span>
+  + 0.5*fibreODF(Miller(0,0,1,cs),vector3d(1,0,0),<span class="string">'halfwidth'</span>,10*degree)
+
+<span class="comment">%odf = 0.2*unimodalODF(mod2)</span>
+</pre><pre class="codeoutput"> 
+odf = ODF  
+  crystal symmetry : 321, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    center: (180&deg;,40&deg;,20&deg;)
+    weight: 0.2
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    center: (140&deg;,30&deg;,240&deg;)
+    weight: 0.3
+ 
+  Fibre symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    fibre: (0001) - 1,0,0
+    weight: 0.5
+ 
+</pre><p>and lets switch to the LaboTex colormap</p><pre class="codeinput">setMTEXpref(<span class="string">'defaultColorMap'</span>,LaboTeXColorMap);
+
+<span class="comment">% Plotting inverse pole figures is analogously to plotting pole figures</span>
+<span class="comment">% with the only difference that you have to use the command</span>
+<span class="comment">% &lt;ODF.plotIPDF.html plotIPDF&gt; and you to specify specimen directions and</span>
+<span class="comment">% not crystal directions.</span>
+
+plotIPDF(odf,[xvector,zvector])
+</pre>
+  {% include inline_image.html file="ODFInversePoleFigure_01.png" %}
+<p>Imposing antipodal symmetry to the inverse pole figures halfes the fundamental region</p><pre class="codeinput">plotIPDF(odf,[xvector,zvector],<span class="string">'antipodal'</span>)
+</pre>
+  {% include inline_image.html file="ODFInversePoleFigure_02.png" %}
+<p>By default MTEX always plots only the fundamental region with respect to the crystal symmetry. In order to plot the complete inverse pole figure you have to use the option <b>complete</b>.</p><pre class="codeinput">plotIPDF(odf,[xvector,zvector],<span class="string">'complete'</span>,<span class="string">'upper'</span>)
+</pre>
+  {% include inline_image.html file="ODFInversePoleFigure_03.png" %}
+<p>This illustrates also more clearly the effect of the antipodal symmetry</p><pre class="codeinput">plotIPDF(odf,[xvector,zvector],<span class="string">'complete'</span>,<span class="string">'antipodal'</span>,<span class="string">'upper'</span>)
+</pre>
+  {% include inline_image.html file="ODFInversePoleFigure_04.png" %}
+<p>Finally, lets set back the default colormap.</p><pre class="codeinput">setMTEXpref(<span class="string">'defaultColorMap'</span>,WhiteJetColorMap);
+</pre></div></body></html>
