@@ -1,6 +1,6 @@
 ---
 title: Importing EBSD Data
-last_updated: 01-Oct-2019
+last_updated: 02-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDImport.html
 folder: documentation
@@ -14,33 +14,57 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Importing EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_EBSDImport.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDImport into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Importing EBSD data into MTEX is mainly done by creating an instance of the class [[EBSD_index.html,EBSD]] from an EBSD data file. Once such an [[EBSD_index.html,EBSD]] variable has been created, the data can be further <a href="EBSDModifyData.html">manipulated</a>, <a href="EBSDOrientationPlots.html">visualized</a> and <a href="EBSD2odf.html">analyzed</a>, or further, be generalized by means of <a href="GrainReconstruction.html">grain reconstruction</a> with the help of its class [[EBSD_index.html#12,methods]].</p><h2 id="2">Importing EBSD data using the import wizard</h2><p>The simplest way to import EBSD data is to use the <a href="matlab:import_wizard('EBSD')"><tt>import wizard</tt></a>. The <tt>import_wizard</tt> can be started either by typing into the command line</p><pre class="codeinput">import_wizard(<span class="string">'EBSD'</span>);
+      --><title>Importing EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_EBSDImport.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDImport into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX allows you to import EBSD data from a wide variety of file format. In the most simplest case import can be done by the command <a href="EBSD.load.html">EBSD.load</a></p><pre class="codeinput">ebsd = EBSD.load([mtexEBSDPath filesep <span class="string">'twins.ctf'</span>])
+</pre><pre class="codeoutput">Warning: .ctf files have usualy inconsistent conventions for
+spatial coordinates and Euler angles. You may want to use one
+of the options 'convertSpatial2EulerReferenceFrame' or
+'convertEuler2SpatialReferenceFrame' to correct for this 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+</pre><p>This command automatically detects the file format and generates a variable of type <a href="EBSD_index.html">EBSD</a> which contains all the information of the EBSD data set. Let us quickly do an orientation plot of the Magnesium phase</p><pre class="codeinput">plot(ebsd(<span class="string">'Magnesium'</span>),ebsd(<span class="string">'Magnesium'</span>).orientations)
 </pre>
   {% include inline_image.html file="EBSDImport_01.png" %}
-<p>or by using the start menu item <i>Start/Toolboxes/MTEX/Import Wizard</i> and switch to the EBSD tab. EBSD Data files can be also imported via the <a href="matlab:filebrowser">file browser</a> by choosing <i>Import Data</i> from the context menu of the selected file if its file extension was registered with <a href="matlab:opentoline(fullfile(mtex_path,'mtex_settings.m'),25,1)"><tt>mtex_settings.m</tt></a></p><p>The import wizard guides through the correct setup of:</p><div><ul><li><a href="CrystalSymmetries.html">crystal symmetries</a> associated with phases</li><li>specimen symmetry and plotting conventions</li></ul></div><p>In the end, the imported wizard creates a workspace variable or generates an m-file loading the data automatically. Furthermore appending a template script allows radip data processing.</p><h2 id="4">Supported Data Formats</h2><p>The import wizard supports the import of the following EBSD data formats:</p><p><a href="loadEBSD_ang.html">.ang</a>  TSL single orientation files.        <a href="loadEBSD_brukertxt.html">.txt</a>  Bruker single orientation files.   <a href="loadEBSD_crc.html">.crc</a>  single orientation files.   <a href="loadEBSD_csv.html">.csv</a>  Oxford single orientation files.     <a href="loadEBSD_ctf.html">.ctf</a>  HKL single orientation files.||  <a href="loadEBSD_dream3d.html">.txt</a>  Dream 3d single orientation files.||  <a href="loadEBSD_ang.DRex">.DRex</a>  single orientation files.   <a href="loadEBSD_h5.html">.h5</a>  single orientation files.   <a href="loadEBSD_osc.html">.osc</a>  single orientation files.   <a href="loadEBSD_Oxfordcsv.html">.csv</a>  single orientation files.   <a href="loadEBSD_generic.html">.txt</a>  ASCII files with Euler angles as columns. </p><p>If the data is recognized as an ASCII list of orientations, phase and spatial coordinates in the form</p><pre>alpha_1 beta_1 gamma_1 phase_1 x_1 y_1
-alpha_2 beta_2 gamma_2 phase_2 x_2 y_2
-alpha_3 beta_3 gamma_3 phase_3 x_3 y_3
-.      .       .       .       .   .
-.      .       .       .       .   .
-.      .       .       .       .   .
-alpha_M beta_M gamma_M phase_m x_m y_m</pre><p>an additional tool supports to associated the columns with the corresponding properties.</p><h2 id="5">The Import Script</h2><p>EBSD data can be also imported by the command <a href="EBSD.load.html">EBSD.load</a>. The <tt>EBSD.load</tt> function automatically detects the data format and imports the data, but it might be necessary to specify the crystal symmetries of all occurring phases and additional information about the format.</p><p>A script generated by the import wizard has the following form:</p><pre class="codeinput"><span class="comment">% crystal symmetry</span>
+<p>The variable of type EBSD is the starting point for all further analysis, e.g., <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="EBSD2ODF.html">ODF reconstruction</a>, <a href="EBSDMisorientation">misorientation analysis</a>, etc.</p><h2 id="4">Importing EBSD data using the import wizard</h2><p>In many cases however, importing EBSD data is not that straight forward as suggested above. The reason is that during the measuring process different reference systems are involved and resulting coordinates, i.e., the spatial coordinates and the Euler angles, are often not stored in a consistent way by comercials software. Please read <a href="EBSDReferenceFrame.html">EBSD Reference Systems</a> for more information about how to set up reference frames correctly.</p><p>In order to help the user to import EBSD data consistently to fixed specimen reference frame, which the user should know, MTEX provide the <a href="matlab:import_wizard('EBSD')">import wizard</a> as a graphical user interface. The <tt>import_wizard</tt> can be started either by typing into the command line</p><pre class="codeinput">import_wizard(<span class="string">'EBSD'</span>)
+</pre>
+  {% include inline_image.html file="EBSDImport_02.png" %}
+<p>EBSD Data files can be also imported via the <a href="matlab:filebrowser">file browser</a> by choosing <i>Import Data</i> from the context menu of the selected file if its file extension was registered with <a href="matlab:opentoline(fullfile(mtex_path,'mtex_settings.m'),25,1)"><tt>mtex_settings.m</tt></a></p><p>The import wizard guides through the correct setup of:</p><div><ul><li><a href="CrystalSymmetries.html">crystal symmetries</a> associated with phases</li><li>specimen symmetry and plotting conventions</li></ul></div><p>The import wizard allows you to either creates directly a workspace variable of type <a href="EBSD_index.html">EBSD</a> or to generates an m-file which contains all the customizations and allows you to import the data in future sessions without the import wizzard. This last option is highly recommended as the created script is also a good starting point for further analysis and data processing.</p><h2 id="6">The Import Script</h2><p>A script generated by the import wizard has approximately the following form:</p><pre class="codeinput"><span class="comment">% crystal symmetry</span>
 CS = {<span class="keyword">...</span>
   <span class="string">'notIndexed'</span>,<span class="keyword">...</span>
-  crystalSymmetry(<span class="string">'mmm'</span>, [4.756 10.207 5.98], <span class="string">'mineral'</span>, <span class="string">'Forsterite'</span>, <span class="string">'color'</span>, <span class="string">'light blue'</span>),<span class="keyword">...</span>
-  crystalSymmetry(<span class="string">'mmm'</span>, [18.2406 8.8302 5.1852], <span class="string">'mineral'</span>, <span class="string">'Enstatite'</span>, <span class="string">'color'</span>, <span class="string">'light green'</span>),<span class="keyword">...</span>
-  crystalSymmetry(<span class="string">'2/m'</span>, [9.746 8.99 5.251], [90,105.63,90]*degree, <span class="string">'X||a*'</span>, <span class="string">'Y||b*'</span>, <span class="string">'Z||c'</span>, <span class="string">'mineral'</span>, <span class="string">'Diopside'</span>, <span class="string">'color'</span>, <span class="string">'light red'</span>)};
+  crystalSymmetry(<span class="string">'6/mmm'</span>, [3.2 3.2 5.2], <span class="string">'X||a*'</span>, <span class="string">'Y||b'</span>, <span class="string">'Z||c*'</span>,<span class="keyword">...</span>
+  <span class="string">'mineral'</span>, <span class="string">'Magnesium'</span>, <span class="string">'color'</span>, [0.53 0.81 0.98])};
 
 <span class="comment">% plotting convention</span>
 setMTEXpref(<span class="string">'xAxisDirection'</span>,<span class="string">'east'</span>);
 setMTEXpref(<span class="string">'zAxisDirection'</span>,<span class="string">'outOfPlane'</span>);
 
-<span class="comment">% file name</span>
-fname = fullfile(mtexDataPath,<span class="string">'EBSD'</span>,<span class="string">'Forsterite.ctf'</span>);
+<span class="comment">% path to files</span>
+pname = mtexEBSDPath;
+
+<span class="comment">% which files to be imported</span>
+fname = [pname filesep <span class="string">'twins.ctf'</span>];
 
 <span class="comment">% create an EBSD variable containing the data</span>
 ebsd = EBSD.load(fname,CS,<span class="string">'interface'</span>,<span class="string">'ctf'</span>,<span class="keyword">...</span>
   <span class="string">'convertEuler2SpatialReferenceFrame'</span>);
-</pre><p>Running this script imports the data into a variable named <tt>ebsd</tt>. From this point, the script can be extended to your needs, e.g:</p><pre class="codeinput">plot(ebsd)
+
+<span class="comment">% Running this script imports the data into a variable named</span>
+<span class="comment">% |ebsd|. From this point, the script can be extended to your needs, e.g:</span>
+
+plot(ebsd)
 </pre>
-  {% include inline_image.html file="EBSDImport_02.png" %}
-<h2 id="8">Writing your own interface</h2><p>In case that the EBSD format is not supported, you can write an interface by your own to import the data. Once you have written such an interface that reads data from certain data files and generates an EBSD object you can integrate this method into MTEX by copying it into the folder <tt>MTEX/qta/interfaces</tt> and rename your function <tt>loadEBSD_xxx</tt>. Then it will be automatical recognized by the import wizard. Examples how to write such an interface can be found in the directory <tt>MTEX/qta/interfaces</tt>.</p></div></body></html>
+  {% include inline_image.html file="EBSDImport_03.png" %}
+<h2 id="7">Supported Data Formats</h2><p>MTEX supports the following EBSD data formats:</p><p><a href="loadEBSD_ang.html">.ang</a>  TSL single orientation files.        <a href="loadEBSD_brukertxt.html">.txt</a>  Bruker single orientation files.   <a href="loadEBSD_crc.html">.crc</a>  single orientation files.   <a href="loadEBSD_csv.html">.csv</a>  Oxford single orientation files.     <a href="loadEBSD_ctf.html">.ctf</a>  HKL single orientation files.||  <a href="loadEBSD_dream3d.html">.txt</a>  Dream 3d single orientation files.||  <a href="loadEBSD_ang.DRex">.DRex</a>  single orientation files.   <a href="loadEBSD_h5.html">.h5</a>  single orientation files.   <a href="loadEBSD_osc.html">.osc</a>  single orientation files.   <a href="loadEBSD_Oxfordcsv.html">.csv</a>  single orientation files.   <a href="loadEBSD_generic.html">.txt</a>  ASCII files with Euler angles as columns. </p><p>If the data is recognized as an ASCII list of orientations, phase and spatial coordinates in the form</p><pre>alpha_1 beta_1 gamma_1 phase_1 x_1 y_1
+alpha_2 beta_2 gamma_2 phase_2 x_2 y_2
+alpha_3 beta_3 gamma_3 phase_3 x_3 y_3
+.      .       .       .       .   .
+.      .       .       .       .   .
+.      .       .       .       .   .
+alpha_M beta_M gamma_M phase_m x_m y_m</pre><p>an additional tool supports you to associated the columns with the corresponding properties.</p><h2 id="8">Writing your own interface</h2><p>In case that the EBSD format is not supported, you can write an interface by your own to import the data. Once you have written such an interface that reads data from certain data files and generates an EBSD object you can integrate this method into MTEX by copying it into the folder <tt>MTEX/qta/interfaces</tt> and rename your function <tt>loadEBSD_xxx</tt>. Then it will be automatical recognized by the import wizard. Examples how to write such an interface can be found in the directory <tt>MTEX/qta/interfaces</tt>.</p></div></body></html>

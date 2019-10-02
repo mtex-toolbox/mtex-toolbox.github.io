@@ -1,6 +1,6 @@
 ---
 title: script_EBSD2ODF
-last_updated: 01-Oct-2019
+last_updated: 02-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSD2ODF.html
 folder: documentation
@@ -14,7 +14,19 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_EBSD2ODF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD2ODF into the Matlab commandline">edit page</a></font><div><h2 id="1">ODF Estimation from EBSD data</h2><p>The starting point of any ODF estimation from EBSD data is the <a href="EBSD_index.html">EBSD</a> object, which here is imported by a [[matlab:edit mtexdata, script file]]</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+      --><title>script_EBSD2ODF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD2ODF into the Matlab commandline">edit page</a></font><div><h2 id="1">ODF Estimation from EBSD data</h2><p>In order to discuss ODF estimation from EBSD data we start by loading a sample MTEX data set.s</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
 </pre><h2 id="2">ODF Estimation</h2><p>These EBSD datasets consist of two phases, Iron, and Magnesium. The ODF of the Iron phase is computed by the command</p><pre class="codeinput">odf = calcODF(ebsd(<span class="string">'fo'</span>).orientations)
 </pre><pre class="codeoutput"> 
 odf = ODF  
