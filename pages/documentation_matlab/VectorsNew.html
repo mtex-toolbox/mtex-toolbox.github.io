@@ -1,0 +1,56 @@
+---
+title: Vectors
+last_updated: 03-Oct-2019
+sidebar: documentation_sidebar
+permalink: VectorsNew.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Vectors</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-03"><meta name="DC.source" content="script_VectorsNew.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit VectorsNew into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This section describes the class <b>vector3d</b> and gives an overview how to deal with specimen directions in MTEX.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Class Description</h2><p>Specimen directions are three-dimensional vectors in the Euclidean space represented by coordinates with respect to an outer specimen coordinate system x, y, z. In MTEX Specimen directions are represented by variables of the class <b>vector3d</b>.</p><h2 id="4">SUB: Defining Specimen Directions</h2><p>The standard way to define a specimen directions is by its coordinates.</p><pre class="codeinput">v = vector3d(1,1,0);
+</pre><p>This gives a single vector with coordinates (1,1,0) with respect to the x, y , z coordinate system. A second way to define a specimen directions is by its spherical coordinates, i.e. by its polar angle and its azimuth angle. This is done by the option <b>polar</b>.</p><pre class="codeinput">polar_angle = 60*degree;
+azimuth_angle = 45*degree;
+v = vector3d.byPolar(polar_angle,azimuth_angle);
+</pre><p>Finally, one can also define a vector as a linear combination of the predefined vectors <b>xvector3d.X</b>, <b>xvector3d.Y</b> and <b>xvector3d.Z</b></p><pre class="codeinput">v = vector3d.X + 2*vector3d.Y;
+</pre><h2 id="7">SUB: Calculating with Specimen Directions</h2><p>As we have seen in the last example. One can calculate with specimen directions as with ordinary number. Moreover, all basic vector operation as <b>+</b>, <b>-</b>, <a href="vector3d.times.html">"*"</a>, <a href="vector3d.dot.html">inner product</a>, <a href="vector3d.cross.html">cross product</a> are implemented.</p><pre class="codeinput">u = dot(v,xvector) * yvector + 2 * cross(v,zvector);
+</pre><p>Using the brackets <tt>v = [v1,v2]</tt> two specimen directions can be concatened. Now each single vector is accesable via <tt>v(1)</tt> and <tt>v(2)</tt>.</p><pre class="codeinput">w = [v,u];
+w(1)
+w(2)
+</pre><pre class="codeoutput"> 
+ans = vector3d  
+ size: 1 x 1
+  x y z
+  1 2 0
+ 
+ans = vector3d  
+ size: 1 x 1
+  x  y  z
+  4 -1  0
+</pre><p>When calculating with concatenated specimen directions all operations are performed componentwise for each specimen direction.</p><pre class="codeinput">w = w + v;
+</pre><p>Besides the standard linear algebra operations, there are also the following functions available in MTEX.</p><pre>[[vector3d.angle.html,angle(v1,v2)]] % angle between two specimen  directions
+[[vector3d.dot.html,dot(v1,v2)]]   % inner product
+[[vector3d.cross.html,cross(v1,v2)]] % cross product
+[[vector3d.norm.html,norm(v)]]      % length of the specimen directions
+[[vector3d.sum.html,sum(v)]]       % sum over all specimen directions in v
+[[vector3d.mean.html,mean(v)]]      % mean over all specimen directions in v
+[[vector3d.polar.html,polar(v)]]     % conversion to spherical coordinates</pre><pre class="codeinput"><span class="comment">% A simple example for applying the norm function is to normalize a set of</span>
+<span class="comment">% specimen directions</span>
+
+w = w ./ norm(w)
+</pre><pre class="codeoutput"> 
+w = vector3d  
+ size: 1 x 2
+         x        y        z
+  0.447214 0.894427        0
+  0.980581 0.196116        0
+</pre><h2 id="11">SUB: Plotting three dimensionl vectors</h2><p>The [[vector3d.plot.html,plot]] function allows you to visualize an arbitrary number of specimen directions in a spherical projection</p><pre class="codeinput">plot([zvector,xvector+yvector+zvector],<span class="string">'labeled'</span>)
+</pre>
+  {% include inline_image.html file="VectorsNew_01.png" %}
+<h2 id="12">random vectors</h2><h2 id="13">equispaced grids</h2><h2 id="14">regular grids</h2><h2 id="15">alginment of the plot</h2></div></body></html>
