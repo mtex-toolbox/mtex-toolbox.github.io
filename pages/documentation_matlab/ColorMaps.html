@@ -1,6 +1,6 @@
 ---
-title: Colormaps
-last_updated: 28-Sep-2019
+title: Color Mapping
+last_updated: 04-Oct-2019
 sidebar: documentation_sidebar
 permalink: ColorMaps.html
 folder: documentation
@@ -14,4 +14,83 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Colormaps</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-28"><meta name="DC.source" content="script_ColorMaps.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ColorMaps into the Matlab commandline">edit page</a></font><div><h1>Colormaps</h1></div></body></html>
+      --><title>Color Mapping</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-04"><meta name="DC.source" content="script_ColorMaps.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ColorMaps into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>A central issue when interpreting plots is to have a consistent color coding among all plots. In MTEX this can be achieved in two ways. If the the minimum and maximum value are known then one can specify the color range directly using the options <b>colorrange</b> or <b>contourf</b>, or the command <a href="setcolorrange.html">setcolorrange</a> is used which allows to set the color range afterwards.</p><h2 id="2">A sample ODFs and Simulated Pole Figure Data</h2><p>Let us first define some model <a href="ODF_index.html">ODFs</a> to be plotted later on.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'-3m'</span>);
+odf = fibreODF(Miller(1,1,0,cs),zvector)
+pf = calcPoleFigure(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],<span class="keyword">...</span>
+  equispacedS2Grid(<span class="string">'points'</span>,500,<span class="string">'antipodal'</span>));
+</pre><pre class="codeoutput"> 
+odf = ODF  
+  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Fibre symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    fibre: (11-20) - 0,0,1
+    weight: 1
+ 
+</pre><h2 id="3">Tight Colorcoding</h2><p>When <a href="PoleFigure.plot.html">plot</a> is called without any colorcoding option, the plots are constructed using the  <b>tight</b> option to the range of the data independently from the other plots. This means that different pole figures may have different color coding and in principle cannot be compared to each other.</p><pre class="codeinput">close <span class="string">all</span>
+plot(pf)
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_01.png" %}
+<h2 id="4">Equal Colorcoding</h2><p>The <b>tight</b> colorcoding can make the reading and comparison of two pole figures a bit hard. If you want to have one colorcoding for all plots within one figure use the option <b>colorrange</b> to <b>equal</b>.</p><pre class="codeinput">plot(pf,<span class="string">'colorRange'</span>,<span class="string">'equal'</span>)
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_02.png" %}
+<h2 id="5">Setting an Explicite Colorrange</h2><p>If you want to have a unified colorcoding for several figures you can set the colorrange directly in the <a href="ODF.plotPDF.html">plot command</a></p><pre class="codeinput">close <span class="string">all</span>
+plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],<span class="keyword">...</span>
+  <span class="string">'colorrange'</span>,[0 4],<span class="string">'antipodal'</span>);
+mtexColorbar
+
+figure
+plotPDF(.5*odf+.5*uniformODF(cs),[Miller(1,0,0,cs),Miller(1,1,1,cs)],<span class="keyword">...</span>
+  <span class="string">'colorrange'</span>,[0 4],<span class="string">'antipodal'</span>);
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_03.png" %}
+
+  {% include inline_image.html file="ColorMaps_04.png" %}
+<h2 id="6">Setting the Contour Levels</h2><p>In the case of contour plots you can also specify the <b>contour levels</b> directly</p><pre class="codeinput">close <span class="string">all</span>
+plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],<span class="keyword">...</span>
+  <span class="string">'contourf'</span>,0:1:5,<span class="string">'antipodal'</span>)
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_05.png" %}
+<h2 id="7">Modifying the Colorrange After Plotting</h2><p>The color range of the figures can also be adjusted afterwards using the command <a href="mtexFigure.CLim.html">CLim</a></p><pre class="codeinput">CLim(gcm,[0.38,3.9])
+</pre>
+  {% include inline_image.html file="ColorMaps_06.png" %}
+<h2 id="8">Logarithmic Plots</h2><p>Sometimes logarithmic scaled plots are of interest. For this case all plots in MTEX understand the option <b>logarithmic</b>, e.g.</p><pre class="codeinput">close <span class="string">all</span>;
+plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],<span class="string">'antipodal'</span>,<span class="string">'logarithmic'</span>)
+CLim(gcm,[0.01 12]);
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_07.png" %}
+<h2 id="9">Changing the Colormap</h2><p>The colormap can be changed by the command mtexColorMap, e.g., in order to set a white to black colormap one has the commands</p><pre class="codeinput">plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],<span class="string">'antipodal'</span>)
+mtexColorMap <span class="string">white2black</span>
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_08.png" %}
+<h2 id="10">Multiple Colormaps</h2><p>One can even use different colormaps within one figure</p><pre class="codeinput"><span class="comment">% initialize an MTEXFigure</span>
+mtexFig = newMtexFigure;
+
+<span class="comment">% for three different colormaps</span>
+<span class="keyword">for</span> cm = {<span class="string">'hot'</span>, <span class="string">'cool'</span>, <span class="string">'parula'</span>}
+
+  <span class="comment">% generate a new axis</span>
+  nextAxis
+
+  <span class="comment">% plot some random data in different axis</span>
+  plot(vector3d.rand(100),<span class="string">'smooth'</span>,<span class="string">'grid'</span>,<span class="string">'grid_res'</span>,90*degree,<span class="string">'upper'</span>);
+
+  <span class="comment">% and apply an individual colormap</span>
+  mtexColorMap(mtexFig.gca,char(cm))
+
+  <span class="comment">% set the title to be the name of the colormap</span>
+  mtexTitle(char(cm))
+<span class="keyword">end</span>
+
+<span class="comment">% plot a colorbar for each plot</span>
+mtexColorbar
+</pre>
+  {% include inline_image.html file="ColorMaps_09.png" %}
+</div></body></html>
