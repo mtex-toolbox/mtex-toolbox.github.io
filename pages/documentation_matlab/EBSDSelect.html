@@ -1,6 +1,6 @@
 ---
-title: Modify EBSD Data
-last_updated: 01-Oct-2019
+title: Select EBSD data
+last_updated: 04-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDSelect.html
 folder: documentation
@@ -14,12 +14,24 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Modify EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSelect into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to correct EBSD data for measurement errors.</p><!--/introduction--><h2 id="2">Contents</h2><p>First, let us import some example <a href="mtexdata.html">EBSD data</a>. and plot the raw data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+      --><title>Select EBSD data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-04"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSelect into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example <a href="mtexdata.html">EBSD data</a>. and plot the raw data</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
 </pre><p>These data consist of two indexed phases, <i>Iron</i>, and <i>Magnesium</i>. The not indexed phase called <i>not Indexed</i>. The phases can be visualized by</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
 plot(ebsd)
 </pre>
   {% include inline_image.html file="EBSDSelect_01.png" %}
-<h2 id="5">Selecting a certain phase</h2><p>In order to restrict the EBSD data to a certain phase just use the mineral name as an index, i.e.</p><pre class="codeinput">ebsd(<span class="string">'Forsterite'</span>)
+<h2 id="3">Selecting a certain phase</h2><p>After import the EBSD data are stored in the variable <tt>ebsd</tt> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p><pre class="codeinput">ebsd(<span class="string">'Forsterite'</span>)
 </pre><pre class="codeoutput"> 
 ans = EBSD  
  
@@ -56,7 +68,7 @@ plot(ipfKey)
                      antipodal: 0
 </pre>
   {% include inline_image.html file="EBSDSelect_03.png" %}
-<h2 id="9">Restricting to a region of interest</h2><p>If one is not interested in the whole data set but only in those measurements inside a certain polygon, the restriction can be constructed as follows:</p><p>First define a region by [xmin ymin xmax-xmin ymax-ymin]</p><pre class="codeinput">region = [5 2 10 5]*10^3;
+<h2 id="7">Restricting to a region of interest</h2><p>If one is not interested in the whole data set but only in those measurements inside a certain polygon, the restriction can be constructed as follows:</p><p>First define a region by [xmin ymin xmax-xmin ymax-ymin]</p><pre class="codeinput">region = [5 2 10 5]*10^3;
 </pre><p>plot the ebsd data together with the region of interest</p><pre class="codeinput">close <span class="string">all</span>
 plot(ebsd)
 rectangle(<span class="string">'position'</span>,region,<span class="string">'edgecolor'</span>,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
@@ -81,7 +93,7 @@ plot(ebsd)
 </pre>
   {% include inline_image.html file="EBSDSelect_05.png" %}
 <p>Note, that you can also select a polygon by mouse using the command</p><pre class="language-matlab">poly = selectPolygon
-</pre><h2 id="16">Remove Inaccurate Orientation Measurements</h2><p><b>By MAD (mean angular deviation)</b> in the case of Oxford Channel programs, or <b>by CI (Confidence Index)</b> in the case of OIM-TSL programs</p><p>Most EBSD measurements contain quantities indicating inaccurate measurements.</p><pre class="codeinput">close <span class="string">all</span>
+</pre><h2 id="14">Remove Inaccurate Orientation Measurements</h2><p><b>By MAD (mean angular deviation)</b> in the case of Oxford Channel programs, or <b>by CI (Confidence Index)</b> in the case of OIM-TSL programs</p><p>Most EBSD measurements contain quantities indicating inaccurate measurements.</p><pre class="codeinput">close <span class="string">all</span>
 plot(ebsd,ebsd.mad)
 mtexColorbar
 </pre>
