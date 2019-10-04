@@ -1,0 +1,60 @@
+---
+title: Improper Rotations
+last_updated: 04-Oct-2019
+sidebar: documentation_sidebar
+permalink: RotationImproper.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Improper Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-04"><meta name="DC.source" content="script_RotationImproper.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit RotationImproper into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Improper rotations are coordinate transformations from a left hand into a right handed coordinate system as, e.g. mirroring or inversion. In MTEX the inversion is defined as the negative identy rotation</p><pre class="codeinput">I = - rotation.byEuler(0,0,0)
+</pre><pre class="codeoutput"> 
+I = rotation  
+  size: 1 x 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    1
+ 
+</pre><p>Note that this is convenient as both groupings of the operations "-" and "*" should give the same result</p><pre class="codeinput">- (rotation.byEuler(0,0,0) * xvector)
+(- rotation.byEuler(0,0,0)) * xvector
+</pre><pre class="codeoutput"> 
+ans = vector3d  
+ size: 1 x 1
+   x  y  z
+  -1  0  0
+ 
+ans = vector3d  
+ size: 1 x 1
+   x  y  z
+  -1  0  0
+</pre><p><b>Mirroring</b></p><p>As a mirroring is nothing else then a rotation about 180 degree about the normal of the mirroring plane followed by a inversion we can defined a mirroring about the axis (111) by</p><pre class="codeinput">mir = -rotation.byAxisAngle(vector3d(1,1,1),180*degree)
+</pre><pre class="codeoutput"> 
+mir = rotation  
+  size: 1 x 1
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+   135 109.471      45       1
+ 
+</pre><p>A convenient shortcut is the command</p><pre class="codeinput">mir = reflection(vector3d(1,1,1))
+</pre><pre class="codeoutput"> 
+mir = rotation  
+  size: 1 x 1
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+   135 109.471      45       1
+ 
+</pre><p>To check whether a rotation is improper or not you can do</p><pre class="codeinput">mir.isImproper
+</pre><pre class="codeoutput">ans =
+  logical
+   1
+</pre></div></body></html>
