@@ -1,0 +1,108 @@
+---
+title: Antipodal Symmetry
+last_updated: 04-Oct-2019
+sidebar: documentation_sidebar
+permalink: AxialDirectional.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Antipodal Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-04"><meta name="DC.source" content="script_AxialDirectional.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit AxialDirectional into the Matlab commandline">edit page</a></font><div><!--introduction--><p>MTEX allows to identify antipodal directions to model axes and to identify misorientations with opposite rotational angle. The later is required when working with misorientations between grains of the same phase and the order of the grains is arbitrary.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Directions vs. Axes</h2><p>In MTEX it is possible to consider three dimensional vectors either as directions or as axes. The key option to distinguish between both interpretations is <b>antipodal</b>.</p><p>Consider a pair of vectors</p><pre class="codeinput">v1 = vector3d(1,1,2);
+v2 = vector3d(1,1,-2);
+</pre><p>and plots them in a spherical projection</p><pre class="codeinput">plot([v1,v2],<span class="string">'label'</span>,{<span class="string">'v_1'</span>,<span class="string">'v_2'</span>})
+</pre>
+  {% include inline_image.html file="AxialDirectional_01.png" %}
+<p>These vectors will appear either on the upper or on the lower hemisphere. In order to treat these vectors as axes, i.e. in order to assume antipodal symmetry - one has to use the keyword <b>antipodal</b>.</p><pre class="codeinput">plot([v1,v2],<span class="string">'label'</span>,{<span class="string">'v_1'</span>,<span class="string">'v_2'</span>},<span class="string">'antipodal'</span>)
+</pre>
+  {% include inline_image.html file="AxialDirectional_02.png" %}
+<p>Now the direction <tt>v_2</tt> is identified with the direction <tt>-v_2</tt> which plots at the upper hemisphere.</p><h2 id="7">The Angle between Directions and Axes</h2><p>Another example, where antipodal symmetry matters is the angle between two vectors. In the absence of antipodal geometry we have</p><pre class="codeinput">angle(v1,v2) / degree
+</pre><pre class="codeoutput">ans =
+  109.4712
+</pre><p>whereas, if antipodal symmetry is assumed we obtain</p><pre class="codeinput">angle(v1,v2,<span class="string">'antipodal'</span>) / degree
+</pre><pre class="codeoutput">ans =
+   70.5288
+</pre><h2 id="9">Antipodal Symmetry in Experimental Pole Figures</h2><p>Due to Friedel's law experimental pole figures always provide antipodal symmetry. One consequence of this fact is that MTEX plots pole figure data always on the upper hemisphere. Moreover if you annotate a certain direction to pole figure data, it is always interpreted as an axis, i.e. projected to the upper hemisphere if necessary</p><pre class="codeinput">mtexdata <span class="string">dubna</span>
+
+<span class="comment">% plot the first pole figure</span>
+plot(pf({1}))
+
+<span class="comment">% annotate a axis on the souther hemisphere</span>
+annotate(vector3d(1,0,-1),<span class="string">'labeled'</span>,<span class="string">'backgroundColor'</span>,<span class="string">'w'</span>)
+</pre><pre class="codeoutput"> 
+pf = PoleFigure  
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  specimen symmetry: 1
+ 
+  h = (02-21), r = 72 x 19 points
+  h = (10-10), r = 72 x 19 points
+  h = (01-11)(10-11), r = 72 x 19 points
+  h = (10-12), r = 72 x 19 points
+  h = (11-20), r = 72 x 19 points
+  h = (11-21), r = 72 x 19 points
+  h = (11-22), r = 72 x 19 points
+</pre>
+  {% include inline_image.html file="AxialDirectional_03.png" %}
+<h2 id="10">Antipodal Symmetry in Recalculated Pole Figures</h2><p>However, in the case of pole figures calculated from an ODF antipodal symmetry is in general not present.</p><pre class="codeinput"><span class="comment">% some prefered orientation</span>
+o = orientation.byEuler(20*degree,30*degree,0,<span class="string">'ZYZ'</span>,CS);
+
+<span class="comment">% define an unimodal ODF</span>
+odf = unimodalODF(o);
+
+<span class="comment">% plot pole figures</span>
+plotPDF(odf,[Miller(1,2,2,CS),-Miller(1,2,2,CS)])
+</pre>
+  {% include inline_image.html file="AxialDirectional_04.png" %}
+<p>Hence, if one wants to compare calculated pole figures with experimental ones, one has to add antipodal symmetry.</p><pre class="codeinput">plotPDF(odf,Miller(1,2,2,CS),<span class="string">'antipodal'</span>)
+</pre>
+  {% include inline_image.html file="AxialDirectional_05.png" %}
+<h2 id="12">Antipodal Symmetry in Inverse Pole Figures</h2><p>The same reasoning as above holds true for inverse pole figures. If we look at complete, inverse pole figures they do not posses antipodal symmetry in general</p><pre class="codeinput">plotIPDF(odf,[yvector,-yvector],<span class="string">'complete'</span>)
+</pre>
+  {% include inline_image.html file="AxialDirectional_06.png" %}
+<p>However, if we add the keyword antipodal, antipodal symmetry is enforced.</p><pre class="codeinput">plotIPDF(odf,yvector,<span class="string">'antipodal'</span>,<span class="string">'complete'</span>)
+</pre>
+  {% include inline_image.html file="AxialDirectional_07.png" %}
+<p>Notice how MTEX, automatically reduces the fundamental region of inverse pole figures in the case that antipodal symmetry is present.</p><pre class="codeinput">plotIPDF(odf,yvector)
+</pre>
+  {% include inline_image.html file="AxialDirectional_08.png" %}
+<pre class="codeinput">plotIPDF(odf,yvector,<span class="string">'antipodal'</span>)
+</pre>
+  {% include inline_image.html file="AxialDirectional_09.png" %}
+<h2 id="16">EBSD Colocoding</h2><p>Antipodal symmetry effects also the colocoding of ebsd plots. Let's first import some data.</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+</pre><p>Now we plot these data with a colorcoding according to the inverse (100) pole figure. If we use the Laue group for inverse pole figure color coding we add antipodal symmetry to the inverse pole figure</p><pre class="codeinput">ipfKey = ipfColorKey(ebsd(<span class="string">'fo'</span>).CS.Laue);
+
+<span class="comment">% plot the color key</span>
+plot(ipfKey)
+</pre>
+  {% include inline_image.html file="AxialDirectional_10.png" %}
+<p>Here the colorized data</p><pre class="codeinput">plot(ebsd(<span class="string">'fo'</span>),ipfKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
+</pre>
+  {% include inline_image.html file="AxialDirectional_11.png" %}
+<p>If we use the point group of proper rotations this antipodal symmetry is not present and a larger region of the inverse pole figure is colorized</p><pre class="codeinput">ipfKey = ipfColorKey(ebsd(<span class="string">'fo'</span>).CS.properGroup);
+
+<span class="comment">% the colorcode</span>
+plot(ipfKey)
+</pre>
+  {% include inline_image.html file="AxialDirectional_12.png" %}
+<p>Here the colorized data</p><pre class="codeinput">plot(ebsd(<span class="string">'fo'</span>),ipfKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
+</pre>
+  {% include inline_image.html file="AxialDirectional_13.png" %}
+</div></body></html>
