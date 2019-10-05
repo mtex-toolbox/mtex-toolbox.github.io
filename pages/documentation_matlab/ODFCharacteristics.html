@@ -1,6 +1,6 @@
 ---
 title: ODF Characteristics
-last_updated: 02-Oct-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: ODFCharacteristics.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Characteristics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-02"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODFCharacteristics into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p><b>Some Sample ODFs</b></p><p>Let us first begin with some constructed ODFs to be analyzed below</p><p>A bimodal ODF:</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'mmm'</span>);
+      --><title>ODF Characteristics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODFCharacteristics into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p><b>Some Sample ODFs</b></p><p>Let us first begin with some constructed ODFs to be analyzed below</p><p>A bimodal ODF:</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'mmm'</span>);
 odf1 = unimodalODF(orientation.byEuler(0,0,0,cs)) + <span class="keyword">...</span>
   unimodalODF(orientation.byEuler(30*degree,0,0,cs))
 </pre><pre class="codeoutput"> 
@@ -69,7 +69,8 @@ odf3 = ODF
     weight: 1
  
 </pre><h2 id="5">Modal Orientations</h2><p>The modal orientation of an ODF is the crystallographic prefered orientation of the texture. It is characterized as the maximum of the ODF. In MTEX it can be computed by the command <a href="ODF.calcModes.html">calcModes</a></p><p>Determine the modalorientation as an <a href="orientation_index.html">orientation</a>:</p><pre class="codeinput">center = calcModes(odf3)
-</pre><pre class="codeoutput"> 
+</pre><pre class="codeoutput">progress: 100%
+ 
 center = orientation  
   size: 1 x 1
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
@@ -90,7 +91,8 @@ annotate(center,<span class="string">'marker'</span>,<span class="string">'s'</s
 </pre><pre class="codeoutput">ans =
    -2.8402
 </pre><h2 id="11">Volume Portions</h2><p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="ODF.volume.html">volume</a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="ODF.fibreVolume.html">fibreVolume</a></p><p>The relative volume in percent of crystals with missorientation maximum 30 degree from the modal orientation:</p><pre class="codeinput">volume(odf3,calcModes(odf3),30*degree)*100
-</pre><pre class="codeoutput">ans =
+</pre><pre class="codeoutput">progress: 100%
+ans =
    50.1732
 </pre><p>The relative volume of crystals with missorientation maximum 20 degree from the prefered fibre in percent: TODO</p><pre class="codeinput"><span class="comment">%fibreVolume(odf2,Miller(0,0,1),xvector,20*degree) * 100</span>
 </pre><h2 id="14">Extract Internal Representation</h2><p>The internal representation of the ODF can be addressed by the command</p><pre class="codeinput">properties(odf3.components{1})

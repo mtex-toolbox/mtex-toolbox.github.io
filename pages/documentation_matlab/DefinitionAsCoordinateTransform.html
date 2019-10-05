@@ -1,6 +1,6 @@
 ---
 title: Coordinate Transform
-last_updated: 26-Sep-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: DefinitionAsCoordinateTransform.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Coordinate Transform</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_DefinitionAsCoordinateTransform.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DefinitionAsCoordinateTransform into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Definition</h2><p>In MTEX a crystal orientation is defined as the rotation that transforms <a href="CrystalDirections.html">crystal coordinates</a>, i.e., a description of a vector or a tensor with respect to the <a href="CrystalReferenceFrame.html">crystal reference frame</a>, into specimen coordinates, i.e., a desciption of the same object with respect to a specimen fixed reference frame.</p><p>In MTEX any orientation consists of two incredients. A <a href="rotation_index.html">rotation</a></p><pre class="codeinput"><span class="comment">% lets take a random one</span>
+      --><title>Coordinate Transform</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_DefinitionAsCoordinateTransform.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DefinitionAsCoordinateTransform into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Definition</h2><p>In MTEX a crystal orientation is defined as the rotation that transforms <a href="CrystalDirections.html">crystal coordinates</a>, i.e., a description of a vector or a tensor with respect to the <a href="CrystalReferenceFrame.html">crystal reference frame</a>, into specimen coordinates, i.e., a desciption of the same object with respect to a specimen fixed reference frame.</p><p>In MTEX any orientation consists of two incredients. A <a href="rotation_index.html">rotation</a></p><pre class="codeinput"><span class="comment">% lets take a random one</span>
 rot = rotation.rand
 </pre><pre class="codeoutput"> 
 rot = rotation  
@@ -22,7 +22,7 @@ rot = rotation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  51.3436 40.3827 162.002       0
+  335.694 98.9268 74.0671       0
  
 </pre><p>and a description of the crystal lattice, which are represented in MTEX by variables of type <a href="crystalSymmetry_index.html">crystalSymmetry</a></p><pre class="codeinput"><span class="comment">% lets take cubic crystal symmetry</span>
 cs = crystalSymmetry(<span class="string">'cubic'</span>)
@@ -41,7 +41,7 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  51.3436 40.3827 162.002       0
+  335.694 98.9268 74.0671       0
  
 </pre><p>As a consequence a variable of type orientation is at the same time of type <a href="rotation_index.html">rotation</a> and hence allows for all <a href="RotationOperations.html">operations</a> that are available for rotations.</p><h2 id="5">Crystal coordinates to specimen coordinates</h2><p>Let us consider to following direction with respect to the crystal reference system</p><pre class="codeinput">h = Miller(1,0,0,cs,<span class="string">'uvw'</span>)
 </pre><pre class="codeoutput"> 
@@ -55,8 +55,8 @@ h = Miller
 </pre><pre class="codeoutput"> 
 r = vector3d  
  size: 1 x 1
-          x         y         z
-  -0.777881 -0.595672   0.20019
+         x         y         z
+  0.188764 -0.248976  0.949936
 </pre><p>Similarly, orientations transform tensors given with respect to the crystal reference frame, e.g., the following single crystal stiffness tensor</p><pre class="codeinput">C = stiffnessTensor(<span class="keyword">...</span>
   [[2 1 1 0 0 0];<span class="keyword">...</span>
   [1 2 1 0 0 0];<span class="keyword">...</span>
@@ -84,12 +84,12 @@ ans = stiffnessTensor
   rank: 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
-   2.549  0.6765  0.7745  0.0917  0.0275  -0.192
-  0.6765  2.6155   0.708  -0.113  0.1027 -0.0064
-  0.7745   0.708  2.5176  0.0213 -0.1302  0.1984
-  0.0917  -0.113  0.0213   0.708  0.1984  0.1027
-  0.0275  0.1027 -0.1302  0.1984  0.7745  0.0917
-  -0.192 -0.0064  0.1984  0.1027  0.0917  0.6765
+  2.3329   0.762  0.9051  -0.092  0.1769  0.1961
+   0.762  2.3229  0.9152 -0.1109 -0.0314 -0.2532
+  0.9051  0.9152  2.1797  0.2029 -0.1455  0.0571
+  -0.092 -0.1109  0.2029  0.9152  0.0571 -0.0314
+  0.1769 -0.0314 -0.1455  0.0571  0.9051  -0.092
+  0.1961 -0.2532  0.0571 -0.0314  -0.092   0.762
 </pre><p>Objects that can be translated by orientations from crystal into specimen cooordinates and vice verca include</p><div><ul><li><a href="Miller_index.html">crystal directions</a></li><li><a href="tensor_index.html">tensors</a></li><li><a href="slipSystem_index.html">slip systems</a></li><li><a href="twinningSystem_index.html">twinning systems</a></li><li><a href="dislocationSystem_index.html">dislocation systems</a></li><li><a href="crystalShape_index.html">crystal shapes</a></li></ul></div><h2 id="10">Specimen coordinates into crystal coordinates</h2><p>Conversely, we can go back from specimen coordinates to crystal coordinates by multiplying with the inverse orientation</p><pre class="codeinput">inv(ori) * r
 </pre><pre class="codeoutput"> 
 ans = Miller  
@@ -108,7 +108,7 @@ ori_new = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  30.4094 88.2589  204.58       0
+  307.833 149.014 30.2486       0
  
 </pre><p>It should also be noted, that orientations are sensitiv with respect to the alignment of the Euclidean reference frame 
   {% include inline_image.html file="DefinitionAsCoordinateTransform_eq04350167453634413328.png" %}

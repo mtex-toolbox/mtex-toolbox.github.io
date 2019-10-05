@@ -1,6 +1,6 @@
 ---
 title: Plotting
-last_updated: 29-Sep-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainSpatialPlots.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-29"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainSpatialPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p><pre class="codeinput"><span class="comment">% import a demo data set</span>
+      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainSpatialPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p><pre class="codeinput"><span class="comment">% import a demo data set</span>
 mtexdata <span class="string">forsterite</span>
 plotx2east
 
@@ -23,6 +23,18 @@ ebsd = ebsd(<span class="string">'indexed'</span>);
 
 <span class="comment">% perform grain segmentation</span>
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
 </pre><h2 id="2">Phase maps</h2><p>When using the <a href="grain2d.plot.html">plot</a> command without additional argument the associated color is defined by color stored in the crystal symmetry for each phase</p><pre class="codeinput">close <span class="string">all</span>
 plot(grains)
 
@@ -151,7 +163,16 @@ len = 0.25*grains.diameter;
 hold <span class="string">on</span>
 quiver(grains,len.*dir,<span class="string">'autoScale'</span>,<span class="string">'off'</span>,<span class="string">'color'</span>,<span class="string">'black'</span>)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput">  I'm going to colorize the orientation data with the 
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
+    -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
+ 
+ Properties: ci, error, iq, x, y
+ Scan unit : um
+ 
+  I'm going to colorize the orientation data with the 
   standard MTEX colorkey. To view the colorkey do:
  
   colorKey = ipfColorKey(ori_variable_name)
