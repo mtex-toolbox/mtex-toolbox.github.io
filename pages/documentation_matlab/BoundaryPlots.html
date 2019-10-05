@@ -1,6 +1,6 @@
 ---
 title: Boundary Plots
-last_updated: 29-Sep-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryPlots.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-29"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
+      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
 
 <span class="comment">% import the data</span>
 mtexdata <span class="string">forsterite</span>
@@ -32,6 +32,18 @@ ebsd(grains(grains.grainSize&lt;=5)) = [];
 
 <span class="comment">% smooth the grains a bit</span>
 grains = smooth(grains,4);
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
 </pre><p>The grain boundary segments of a list of grains are stored within the field</p><pre class="codeinput">gB = grains.boundary
 </pre><pre class="codeoutput"> 
 gB = grainBoundary  

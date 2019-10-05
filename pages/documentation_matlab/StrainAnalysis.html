@@ -1,6 +1,6 @@
 ---
 title: Slip Transmition
-last_updated: 26-Sep-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: StrainAnalysis.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Slip Transmition</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="script_StrainAnalysis.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit StrainAnalysis into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to analyse slip transmission at grain boundaries</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Import Titanium data</h2><p>From Mercier D. - MTEX 2016 Workshop - TU Chemnitz (Germany) Calculation and plot on GBs of m' parameter Dataset from Mercier D. - cp-Ti (alpha phase - hcp)</p><pre class="codeinput">mtexdata <span class="string">csl</span>
+      --><title>Slip Transmition</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_StrainAnalysis.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit StrainAnalysis into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to analyse slip transmission at grain boundaries</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Import Titanium data</h2><p>From Mercier D. - MTEX 2016 Workshop - TU Chemnitz (Germany) Calculation and plot on GBs of m' parameter Dataset from Mercier D. - cp-Ti (alpha phase - hcp)</p><pre class="codeinput">mtexdata <span class="string">csl</span>
 
 <span class="comment">% compute grains</span>
 [grains, ebsd.grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
@@ -29,6 +29,15 @@ plot(ebsd,ebsd.orientations)
 hold <span class="string">on</span>
 plot(grains.boundary)
 hold <span class="string">off</span>
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
+    -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
+ 
+ Properties: ci, error, iq, x, y
+ Scan unit : um
+ 
 </pre>
   {% include inline_image.html file="StrainAnalysis_01.png" %}
 <h2 id="4">Taylor model</h2><pre class="codeinput"><span class="comment">% consider Basal slip</span>
@@ -49,6 +58,7 @@ sS = slipSystem
  size: 1 x 1
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
+ computing Taylor factor: 100%
 </pre><pre class="codeinput"><span class="comment">% find the maximum</span>
 [~,id] = max(b,[],2);
 </pre><p>The variable <tt>id</tt> contains now for each grain the id of the slip system with the largest Schmidt factor. In order to visualize it we first rotate for each grain the slip system with largest Schmid factor in specimen coordinates</p><pre class="codeinput">sSGrain = grains.meanOrientation .* sS(id)

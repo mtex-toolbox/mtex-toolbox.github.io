@@ -1,6 +1,6 @@
 ---
 title: Grain Boundary Properties
-last_updated: 30-Sep-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryProperties.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-30"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p><pre class="codeinput"><span class="comment">% load some example data</span>
+      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p><pre class="codeinput"><span class="comment">% load some example data</span>
 mtexdata <span class="string">twins</span>
 
 <span class="comment">% detect grains</span>
@@ -32,97 +32,24 @@ gB = grains.boundary;
 hold <span class="string">on</span>
 plot(gB,<span class="string">'LineWidth'</span>,2)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput">  I'm going to colorize the orientation data with the 
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+  I'm going to colorize the orientation data with the 
   standard MTEX colorkey. To view the colorkey do:
  
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 </pre>
   {% include inline_image.html file="BoundaryProperties_01.png" %}
-<h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary_index.html">grainBoundary</a> contains the following properties</p><p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>ebsdId</p>
-         </td>
-         <td>
-               <p>id of the EBSD pixel on both sides of the grain boundary</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>phaseId</p>
-         </td>
-         <td>
-               <p>id of the phase on both sides of the grain boundary</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>grainId</p>
-         </td>
-         <td>
-               <p>id of the grains on both sides of the grain boundary</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>misorientation</p>
-         </td>
-         <td>
-               <p>misorientation between ebsdId(:,1) and ebsdId(:,2)</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>F</p>
-         </td>
-         <td>
-               <p>F(:,1), F(:,2) ids of the two vertices of the segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>direction</p>
-         </td>
-         <td>
-               <p>vector connecting vertice 1 with vertice 2</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>midPoint</p>
-         </td>
-         <td>
-               <p>mid point of the segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>segLength</p>
-         </td>
-         <td>
-               <p>length of the segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>componentId</p>
-         </td>
-         <td>
-               <p>id of the connected component with respect to all segments</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>componentSize</p>
-         </td>
-         <td>
-               <p>number of segments within the component</p>
-         </td>
-      </tr>
-   </table>
-</p><p>The first three properties refer to N x 2 matrices where N is the number of boundary segments. Each row of these matrices contains the information about the EBSD data, and grain data on both sides of the grain boundary. To illustrate this consider the grain boundary of one specific grain</p><pre class="codeinput">gB8 = grains(8).boundary
+<h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary_index.html">grainBoundary</a> contains the following properties</p><p>ebsdId          id of the EBSD pixel on both sides of the grain boundary   phaseId         id of the phase on both sides of the grain boundary   grainId         id of the grains on both sides of the grain boundary   misorientation  misorientation between ebsdId(:,1) and ebsdId(:,2)   F               F(:,1), F(:,2) ids of the two vertices of the segment   direction       vector connecting vertice 1 with vertice 2   midPoint        mid point of the segment   segLength       length of the segment   componentId     id of the connected component with respect to all segments   componentSize   number of segments within the component </p><p>The first three properties refer to N x 2 matrices where N is the number of boundary segments. Each row of these matrices contains the information about the EBSD data, and grain data on both sides of the grain boundary. To illustrate this consider the grain boundary of one specific grain</p><pre class="codeinput">gB8 = grains(8).boundary
 </pre><pre class="codeoutput"> 
 gB8 = grainBoundary  
  
@@ -163,7 +90,7 @@ ans = EBSD
   842       1      5    80    195       0   167   170       3   0.5   1.8   1.5        21     15     1    345
   676       1      5    80    195       8   176   196       0   0.5   2.1   1.2        21     15     1    345
  Scan unit : um
- Grid size : 8 x 2
+ Grid size (square): 8 x 2
  
 </pre><p>Similarly</p><pre class="codeinput">gB8.grainId
 </pre><pre class="codeoutput">ans =

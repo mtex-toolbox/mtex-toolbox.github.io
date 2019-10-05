@@ -1,6 +1,6 @@
 ---
 title: Grain Reconstruction
-last_updated: 29-Sep-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstruction.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-29"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstruction into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
+      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstruction into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
 
 <span class="comment">% import the data</span>
 mtexdata <span class="string">forsterite</span>
@@ -24,6 +24,18 @@ ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
 <span class="comment">% make a phase plot</span>
 plot(ebsd)
+</pre><pre class="codeoutput"> 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
 </pre>
   {% include inline_image.html file="GrainReconstruction_01.png" %}
 <h2 id="2">Basic grain reconstruction</h2><p>We see that there are a lot of not indexed measurements. For grain reconstruction, we have  three different choices how to deal with these unindexed regions:</p><div><ol><li>leaf them unindexed</li><li>assign them to the surrounding grains</li><li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li></ol></div><p>By default, MTEX uses the first method.</p><p>The second parameter that is involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p><p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html">calcGrains</a> which takes as input an EBSD data set and returns a list of grain.</p><pre class="codeinput">grains = calcGrains(ebsd,<span class="string">'angle'</span>,10*degree)

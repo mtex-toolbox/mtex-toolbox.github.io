@@ -1,0 +1,100 @@
+---
+title: MTEX - Analysing Neutron Pole Figures (Dubna)
+last_updated: 05-Oct-2019
+sidebar: documentation_sidebar
+permalink: dubna_demo.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>MTEX - Analysing Neutron Pole Figures (Dubna)</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_dubna_demo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit dubna_demo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Detailed demonstration of the MTEX toolbox at the Dubna data example.</p><p>The data where meassured by Florian Wobbe at Dubna 2005 of a Quarz specimen using Neutron diffraction.</p><!--/introduction--><h2 id="2">Import diffraction data</h2><pre class="codeinput"><span class="comment">% specify scrystal and specimen symmetry</span>
+cs = crystalSymmetry(<span class="string">'-3m'</span>,[1.4,1.4,1.5]);
+
+<span class="comment">% specify file names</span>
+fname = {<span class="keyword">...</span>
+  fullfile(mtexDataPath,<span class="string">'PoleFigure'</span>,<span class="string">'dubna'</span>, <span class="string">'Q(10-10)_amp.cnv'</span>),<span class="keyword">...</span>
+  fullfile(mtexDataPath,<span class="string">'PoleFigure'</span>,<span class="string">'dubna'</span>,<span class="string">'Q(10-11)(01-11)_amp.cnv'</span>),<span class="keyword">...</span>
+  fullfile(mtexDataPath,<span class="string">'PoleFigure'</span>,<span class="string">'dubna'</span>,<span class="string">'Q(11-22)_amp.cnv'</span>)};
+
+<span class="comment">% specify crystal directions</span>
+h = {Miller(1,0,-1,0,cs),[Miller(0,1,-1,1,cs),Miller(1,0,-1,1,cs)],Miller(1,1,-2,2,cs)};
+
+<span class="comment">% specify structure coefficients</span>
+c = {1,[0.52 ,1.23],1};
+
+<span class="comment">% import pole figure data</span>
+pf = PoleFigure.load(fname,h,cs,<span class="string">'superposition'</span>,c)
+</pre><pre class="codeoutput"> 
+pf = PoleFigure  
+  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  h = (10-10), r = 72 x 19 points
+  h = (01-11)(10-11), r = 72 x 19 points
+  h = (11-22), r = 72 x 19 points
+</pre><h2 id="3">plot pole figures</h2><pre class="codeinput">plot(pf)
+</pre>
+  {% include inline_image.html file="dubna_demo_01.png" %}
+<h2 id="4">Correct pole figures</h2><pre class="codeinput">pf_corrected = pf(pf.r.theta &lt; 70*degree | pf.r.theta &gt; 75*degree);
+
+plot(pf_corrected)
+</pre>
+  {% include inline_image.html file="dubna_demo_02.png" %}
+<h2 id="5">Rotate pole figures</h2><pre class="codeinput">pf_rotated = rotate(pf_corrected,axis2quat(xvector,45*degree));
+plot(pf_rotated,<span class="string">'antipodal'</span>)
+</pre>
+  {% include inline_image.html file="dubna_demo_03.png" %}
+<h2 id="6">Recalculate ODF</h2><p>We use here the option 'background' to specify the approximative background radiation and to increase the accuracy of the reconstruction. Furthermore, we have seen from the pole figures that the ODF is quit sharp and hence using the zero range method reduces the computational time.</p><pre class="codeinput">odf = calcODF(pf_corrected,<span class="string">'background'</span>,10,<span class="string">'zero_range'</span>)
+</pre><pre class="codeoutput"> 
+odf = ODF  
+  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    center: 19777 orientations, resolution: 5&deg;
+    weight: 1
+ 
+</pre><h2 id="7">Error analysis</h2><pre class="codeinput"><span class="comment">% calc RP1 error</span>
+calcError(pf_corrected,odf,<span class="string">'RP'</span>,1)
+
+<span class="comment">% difference plot</span>
+plotDiff(pf,odf)
+
+mtexColorbar
+</pre><pre class="codeoutput">progress: 100%
+ans =
+    0.6324    0.3336    0.4106
+progress: 100%
+</pre>
+  {% include inline_image.html file="dubna_demo_04.png" %}
+<h2 id="8">Recalculate c-axis pole figures</h2><pre class="codeinput">plotPDF(odf,Miller(0,0,1,cs),<span class="string">'antipodal'</span>)
+</pre>
+  {% include inline_image.html file="dubna_demo_05.png" %}
+<h2 id="9">Plot inverse pole figure</h2><pre class="codeinput">plotIPDF(odf,vector3d(1,1,2))
+</pre>
+  {% include inline_image.html file="dubna_demo_06.png" %}
+<h2 id="10">plot recalculated ODF</h2><pre class="codeinput">plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>,<span class="string">'sigma'</span>)
+</pre><pre class="codeoutput">progress: 100%
+</pre>
+  {% include inline_image.html file="dubna_demo_07.png" %}
+<h2 id="11">rotate ODF back</h2><pre class="codeinput">odfrotated = rotate(odf,axis2quat(xvector,45*degree));
+plot(odfrotated,<span class="string">'sections'</span>,8,<span class="string">'sigma'</span>);
+annotate(calcModes(odfrotated),<span class="string">'marker'</span>,<span class="string">'o'</span>,<span class="keyword">...</span>
+  <span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>);
+</pre><pre class="codeoutput">progress: 100%
+progress: 100%
+</pre>
+  {% include inline_image.html file="dubna_demo_08.png" %}
+<h2 id="12">volume analysis</h2><pre class="codeinput">volume(odf,calcModes(odf),20*degree)
+</pre><pre class="codeoutput">progress: 100%
+ans =
+    0.2617
+</pre></div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: Random Sampling
-last_updated: 01-Oct-2019
+last_updated: 05-Oct-2019
 sidebar: documentation_sidebar
 permalink: RandomSampling.html
 folder: documentation
@@ -14,11 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit RandomSampling into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX allows one to simulate an arbitrary number of EBSD data from any ODF. This is quite helpful if you want to analyze the EBSD to ODF estimation routine.</p><p><b>Define a Model ODF</b></p><p>Let us first define a simple fibre symmetric ODF.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'32'</span>);
+      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit RandomSampling into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX allows one to simulate an arbitrary number of EBSD data from any ODF. This is quite helpful if you want to analyze the EBSD to ODF estimation routine.</p><p><b>Define a Model ODF</b></p><p>Let us first define a simple fibre symmetric ODF.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'32'</span>);
 fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(Miller(0,0,0,1,cs),zvector);
 </pre><pre class="codeinput">plot(fibre_odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
 </pre>
   {% include inline_image.html file="RandomSampling_01.png" %}
 <h2 id="4">Simulate EBSD Data</h2><p>This ODF we use now to simulate 10000 individual orientations.</p><pre class="codeinput">ori = calcOrientations(fibre_odf,10000)
@@ -29,7 +27,8 @@ ori = orientation
   specimen symmetry: 1
  
 </pre><h2 id="5">ODF Estimation from EBSD Data</h2><p>From the 10000 individual orientations, we can now estimate an ODF. First, we determine the optimal kernel function</p><pre class="codeinput">psi = calcKernel(ori)
-</pre><pre class="codeoutput"> 
+</pre><pre class="codeoutput"> estimate optimal kernel halfwidth: 100%
+ 
 psi = deLaValleePoussinKernel  
   bandwidth: 43
   halfwidth: 5.7&deg;
@@ -45,13 +44,11 @@ odf = ODF
     weight: 1
  
 </pre><p>which can be plotted,</p><pre class="codeinput">plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
 </pre>
   {% include inline_image.html file="RandomSampling_02.png" %}
 <p>and compared to the original model ODF.</p><pre class="codeinput">calcError(odf,fibre_odf,<span class="string">'resolution'</span>,5*degree)
 </pre><pre class="codeoutput">ans =
-    0.0926
+    0.0971
 </pre><h2 id="9">Exploration of the relationship between estimation error and number of single orientations</h2><p>For a more systematic analysis of the estimation error, we simulate 10, 100, ..., 1000000 single orientations of the model ODF and calculate the approximation error for the ODFs estimated from these data.</p><pre class="codeinput">e = [];
 <span class="keyword">for</span> i = 1:6
 
@@ -75,18 +72,26 @@ I'going to create a new figure.
     ]);
 
 <span class="keyword">end</span>
-</pre><pre class="codeoutput">RuleOfThumb: 82&deg; KLCV: 24&deg; magicRule: 31&deg;
-RuleOfThumb: 38&deg; KLCV: 15&deg; magicRule: 22&deg;
-RuleOfThumb: 19&deg; KLCV: 9&deg; magicRule: 16&deg;
+</pre><pre class="codeoutput">progress: 100%
+progress: 75%
+progress: 75%
+RuleOfThumb: 59&deg; KLCV: 24&deg; magicRule: 31&deg;
+progress: 100%
+progress: 81%
+progress: 95%
+RuleOfThumb: 34&deg; KLCV: 15&deg; magicRule: 22&deg;
+RuleOfThumb: 18&deg; KLCV: 9&deg; magicRule: 16&deg;
 RuleOfThumb: 10&deg; KLCV: 6&deg; magicRule: 11&deg;
 RuleOfThumb: 9&deg; KLCV: 5&deg; magicRule: 8&deg;
 RuleOfThumb: 7&deg; KLCV: 4&deg; magicRule: 6&deg;
-</pre><p>Plot the error in dependency of the number of single orientations.</p><pre class="codeinput">close <span class="string">all</span>;
+</pre>
+  {% include inline_image.html file="RandomSampling_03.png" %}
+<p>Plot the error in dependency of the number of single orientations.</p><pre class="codeinput">close <span class="string">all</span>;
 loglog(10.^(1:length(e)),e)
 legend(<span class="string">'Default'</span>,<span class="string">'RuleOfThumb'</span>,<span class="string">'magicRule'</span>)
 xlabel(<span class="string">'Number of orientations'</span>)
 ylabel(<span class="string">'Estimation Error'</span>)
 title(<span class="string">'Error between original fibre ODF model and simulated ebsd'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>)
 </pre>
-  {% include inline_image.html file="RandomSampling_03.png" %}
+  {% include inline_image.html file="RandomSampling_04.png" %}
 </div></body></html>
