@@ -1,6 +1,6 @@
 ---
-title: Operations with Rotations
-last_updated: 05-Oct-2019
+title: script_VectorsOperations
+last_updated: 06-Oct-2019
 sidebar: documentation_sidebar
 permalink: VectorsOperations.html
 folder: documentation
@@ -14,28 +14,25 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Operations with Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_VectorsOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit VectorsOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Calculating with Specimen Directions</h2><p>In MTEX, one can calculate with specimen directions as with ordinary numbers, i.e. we can use the predefined vectors  <a href="xvector.html">vector3d.X</a>, <a href="yvector.html">vector3d.Y</a>, and <a href="zvector.html">vector3d.Z</a> and set</p><pre class="codeinput">v = vector3d.X + 2*vector3d.Y
+      --><title>script_VectorsOperations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-06"><meta name="DC.source" content="script_VectorsOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit VectorsOperations into the Matlab commandline">edit page</a></font><div><h2 id="1">Vector Operations</h2><pre class="codeinput"><span class="comment">%s</span>
+<span class="comment">% In MTEX, one can calculate with three dimensional directions as with</span>
+<span class="comment">% ordinary numbers, i.e. we can use the predefined vectors  &lt;xvector.html</span>
+<span class="comment">% vector3d.X&gt;, &lt;yvector.html vector3d.Y&gt;, and &lt;zvector.html vector3d.Z&gt; and</span>
+<span class="comment">% set</span>
+
+v = vector3d.X + 2*vector3d.Y
 </pre><pre class="codeoutput"> 
 v = vector3d  
  size: 1 x 1
   x y z
   1 2 0
-</pre><p>Moreover, all basic vector operations as <a href="vector3d.plus.html">"+"</a>, <a href="vector3d.minus.html">"-"</a>, <a href="vector3d.times.html">"*"</a>, <a href="vector3d.dot.html">inner product</a>, <a href="vector3d.cross.html,cross">product</a> are implemented in MTEX.</p><pre class="codeinput">u = dot(v,vector3d.Y) * vector3d.Y + 2 * cross(v,vector3d.Z)
+</pre><p>Moreover, all basic vector operations as <a href="vector3d.plus.html">"+"</a>, <a href="vector3d.minus.html">"-"</a>, <a href="vector3d.times.html">"*"</a>, <a href="vector3d.dot.html">inner product</a>, <a href="vector3d.cross.html">cross product</a> are implemented in MTEX.</p><pre class="codeinput">u = dot(v,vector3d.Y) * vector3d.Y + 2 * cross(v,vector3d.Z)
 </pre><pre class="codeoutput"> 
 u = vector3d  
  size: 1 x 1
   x y z
   4 0 0
-</pre><p>Besides the standard linear algebra operations, there are also the following functions available in MTEX.</p><pre>&lt;vector3d.angle.html angle(v1,v2)&gt;  % angle between two specimen  directions
-&lt;vector3d.dot.html dot(v1,v2)&gt;      % inner product
-&lt;vector3d.cross.html cross(v1,v2)&gt;  % cross product
-&lt;vector3d.norm.html norm(v)&gt;        % length of the specimen directions
-&lt;vector3d.sum.html sum(v)&gt;          % sum over all specimen directions in v
-&lt;vector3d.mean.html mean(v)&gt;        % mean over all specimen directions in v
-&lt;vector3d.polar.html,polar(v)&gt;      % conversion to spherical coordinates</pre><pre class="codeinput"><span class="comment">% A simple example for applying the norm function is to normalize a set of</span>
-<span class="comment">% specimen directions</span>
-
-u = u ./ norm(u)
+</pre><p>Besides the standard linear algebra operations, there are also the following functions available in MTEX.</p><p>&lt;vector3d.angle.html angle(v1,v2)&gt;   angle between two specimen  directions|| &lt;vector3d.dot.html dot(v1,v2)&gt;       inner product|| &lt;vector3d.cross.html cross(v1,v2)&gt;   cross product|| &lt;vector3d.norm.html norm(v)&gt;         length of the specimen directions|| &lt;vector3d.normalize.html normalize(v)&gt;  normalize length to 1|| &lt;vector3d.sum.html sum(v)&gt;           sum over all specimen directions in v|| &lt;vector3d.mean.html mean(v)&gt;         mean over all specimen directions in v   &lt;vector3d.polar.html,polar(v)&gt;       conversion to spherical coordinates||</p><p>A simple example for applying the norm function is to normalize a set of specimen directions</p><pre class="codeinput">u = u ./ norm(u)
 </pre><pre class="codeoutput"> 
 u = vector3d  
  size: 1 x 1
