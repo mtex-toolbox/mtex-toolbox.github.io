@@ -14,105 +14,59 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fibres of Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-06"><meta name="DC.source" content="script_OrientationFibre.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationFibre into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>A fibre in orientation space is essentially a line connecting two orientations and can be represented in MTEX by a single variable of type <a href="fibre_index.html">fibre</a></p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
-cs = crystalSymmetry(<span class="string">'432'</span>)
-ss = specimenSymmetry(<span class="string">'222'</span>)
+      --><title>Fibres of Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-06"><meta name="DC.source" content="script_OrientationFibre.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationFibre into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>A fibre in orientation space is essentially a line connecting two orientations and can be represented in MTEX by a single variable of type <a href="fibre_index.html">fibre</a>. To illustrate the definition of a fibre we first define <b>cube</b> and <b>goss</b> orientation</p><pre class="codeinput"><span class="comment">% define crystal and specimen symmetry</span>
+cs = crystalSymmetry(<span class="string">'432'</span>);
+ss = specimenSymmetry(<span class="string">'222'</span>);
 
 <span class="comment">% and two orientations</span>
 ori1 = orientation.cube(cs,ss);
 ori2 = orientation.goss(cs,ss);
-
-<span class="comment">% the connecting fibre</span>
-f = fibre(ori1,ori2)
-
-<span class="comment">% lets plot the two orientations together with the fibre</span>
-plot(ori1,<span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>)
-hold <span class="string">on</span>
-plot(ori2,<span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerFaceColor'</span>,<span class="string">'b'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>)
-plot(f,<span class="string">'linewidth'</span>,3,<span class="string">'linecolor'</span>,<span class="string">'g'</span>)
-hold <span class="string">off</span>
+</pre><p>and then the fibre connecting both orientations</p><pre class="codeinput">f = fibre(ori1,ori2)
 </pre><pre class="codeoutput"> 
-cs = crystalSymmetry  
- 
-  symmetry: 432    
-  a, b, c : 1, 1, 1
- 
- 
-ss = orthorhombic specimenSymmetry  
- 
- 
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
  specimen symmetry: 222
- o1: (2.5e-14&deg;,0&deg;,0&deg;)
- o2: (1.3e-14&deg;,45&deg;,0&deg;)
+ o1: (0&deg;,0&deg;,0&deg;)
+ o2: (0&deg;,45&deg;,0&deg;)
+</pre><p>Finally we plot everything into the Euler space</p><pre class="codeinput"><span class="comment">% plot the fibre</span>
+plot(f,<span class="string">'DisplayName'</span>,<span class="string">'Fibre'</span>,<span class="string">'linewidth'</span>,4,<span class="string">'linecolor'</span>,<span class="string">'green'</span>)
+
+<span class="comment">% and on top of it the orientations</span>
+hold <span class="string">on</span>
+plot(ori1,<span class="string">'DisplayName'</span>,<span class="string">'CUBE'</span>,<span class="string">'MarkerSize'</span>,12,<span class="string">'MarkerFaceColor'</span>,<span class="string">'darkred'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>)
+plot(ori2,<span class="string">'DisplayName'</span>,<span class="string">'GOSS'</span>,<span class="string">'MarkerSize'</span>,12,<span class="string">'MarkerFaceColor'</span>,<span class="string">'blue'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>)
+hold <span class="string">off</span>
+legend
 </pre>
   {% include inline_image.html file="OrientationFibre_01.png" %}
-<p>Since, the orientation space has no boundary a full fibre is best thought of as a circle that passes trough two fixed orientations.</p><h2 id="3"><b>by two orientations</b></h2><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
-cs = crystalSymmetry(<span class="string">'432'</span>)
+<p>Alternatively, we may visualize the fibre also in axis angle space</p><pre class="codeinput"><span class="comment">% plot the fibre</span>
+plot(f,<span class="string">'linecolor'</span>,<span class="string">'green'</span>,<span class="string">'linewidth'</span>,6,<span class="string">'axisAngle'</span>)
 
-<span class="comment">% the corresponding fundamental region</span>
-oR = fundamentalRegion(cs)
-
-<span class="comment">% two orientations</span>
-ori1 = orientation.cube(cs);
-ori2 = orientation.goss(cs);
-
-<span class="comment">% visualize the orientation region as well as the two orientations</span>
-plot(oR)
+<span class="comment">% and on top of it the orientations</span>
 hold <span class="string">on</span>
-plot(ori1,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerSize'</span>,10)
-plot(ori2,<span class="string">'MarkerFaceColor'</span>,<span class="string">'g'</span>,<span class="string">'MarkerSize'</span>,10)
+plot(ori1,<span class="string">'MarkerFaceColor'</span>,<span class="string">'darkred'</span>,<span class="string">'MarkerSize'</span>,15,<span class="string">'axisAngle'</span>)
+plot(ori2,<span class="string">'MarkerFaceColor'</span>,<span class="string">'blue'</span>,<span class="string">'MarkerSize'</span>,15)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
-cs = crystalSymmetry  
- 
-  symmetry: 432    
-  a, b, c : 1, 1, 1
- 
- 
-oR = orientationRegion  
- 
- crystal symmetry:  432
- max angle: 62.7994&deg;
- face normales: 14
- vertices: 24
- 
 </pre>
   {% include inline_image.html file="OrientationFibre_02.png" %}
-<p>Now we can define the partial fibre connecting the cube orientation with the goss orientation by</p><pre class="codeinput">f = fibre(ori1,ori2)
+<p>Obviously, <b>f</b> is not a full fibre. Since, the orientation space has no boundary a full fibre is best thought of as a circle that passes trough two fixed orientations. In order to define the full fibre us the option <b>full</b></p><pre class="codeinput">f = fibre(ori1,ori2,<span class="string">'full'</span>)
 
 hold <span class="string">on</span>
-plot(f,<span class="string">'linecolor'</span>,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,2)
+plot(f,<span class="string">'linecolor'</span>,<span class="string">'gold'</span>,<span class="string">'linewidth'</span>,3,<span class="string">'project2FundamentalRegion'</span>)
 hold <span class="string">off</span>
 </pre><pre class="codeoutput"> 
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
- o1: (2.5e-14&deg;,0&deg;,0&deg;)
- o2: (1.3e-14&deg;,45&deg;,0&deg;)
-</pre>
-  {% include inline_image.html file="OrientationFibre_03.png" %}
-<p>In order to define the full fibre us the option <tt>full</tt></p><pre class="codeinput">f = fibre(ori1,ori2,<span class="string">'full'</span>)
-
-hold <span class="string">on</span>
-plot(f,<span class="string">'linecolor'</span>,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'project2FundamentalRegion'</span>)
-hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
-f = fibre  
- size: 1 x 1
- crystal symmetry:  432
- o1: (2.5e-14&deg;,0&deg;,0&deg;)
+ specimen symmetry: 222
+ o1: (0&deg;,0&deg;,0&deg;)
  h: (100)
 </pre>
-  {% include inline_image.html file="OrientationFibre_04.png" %}
-<h2 id="6"><b>by two directions</b></h2><p>Alternatively, a fibre can also be defined by a crystal direction and a specimen direction. In this case it consists of all orientations that alignes the crystal direction parallel to the specimen direction. As an example we can define the fibre of all orientations such that the c-axis (001) is parallel to the z-axis by</p><pre class="codeinput">f = fibre(Miller(0,0,1,cs),vector3d.Z)
+  {% include inline_image.html file="OrientationFibre_03.png" %}
+<h2 id="6">Defining a fibre by directions</h2><p>Alternatively, a fibre can also be defined by a pair of a crystal and a specimen direction. In this case it consists of all orientations that alignes the crystal direction parallel to the specimen direction. As an example we define the fibre of all orientations such that the c-axis (001) is parallel to the z-axis by</p><pre class="codeinput">f = fibre(Miller(0,0,1,cs),vector3d.Z)
 
-plot(oR)
-hold <span class="string">on</span>
-plot(f,<span class="string">'linecolor'</span>,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'project2FundamentalRegion'</span>)
-hold <span class="string">off</span>
+plot(f,<span class="string">'linecolor'</span>,<span class="string">'gold'</span>,<span class="string">'linewidth'</span>,4,<span class="string">'project2FundamentalRegion'</span>,<span class="string">'axisAngle'</span>)
 </pre><pre class="codeoutput"> 
 f = fibre  
  size: 1 x 1
@@ -120,22 +74,22 @@ f = fibre
  o1: (0&deg;,0&deg;,0&deg;)
  h: (001)
 </pre>
-  {% include inline_image.html file="OrientationFibre_05.png" %}
-<p>If the second argument is a of type Miller as well the fibre defines a set of misorientations which have one direcetion aligned.</p><h2 id="8"><b>by one orientation and an orientation gradient</b></h2><p>Finally, a fibre can be defined by an initial orientation <tt>ori1</tt> and a direction <tt>h</tt>, i.e., all orientations of this fibre satisfy</p><p>ori = ori1 * rot(h,omega)</p><p>ori * h = ori1 * h</p><p>The following code defines a fibre that passes through the cube orientation and rotates about the 111 axis.</p><pre class="codeinput">f = fibre(ori1,Miller(1,1,1,cs))
+  {% include inline_image.html file="OrientationFibre_04.png" %}
+<p>If both directions of type Miller the fibre corresponds to all misorientations which have these two direcetion parallel.</p><p>Finally, a fibre can be defined by an initial orientation <b>ori1</b> and a direction <b>h</b>, i.e., all orientations of this fibre satisfy</p><pre class="language-matlab">ori = ori1 * rot(h,omega)
+</pre><p>and</p><pre class="language-matlab">ori * h = ori1 * h
+</pre><p>The following code defines a fibre that passes through the cube orientation and rotates about the (111) axis.</p><pre class="codeinput">f = fibre(ori1,Miller(1,1,1,cs))
 
-plot(oR)
-hold <span class="string">on</span>
-plot(f,<span class="string">'linecolor'</span>,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'project2FundamentalRegion'</span>)
-hold <span class="string">off</span>
+plot(f,<span class="string">'linecolor'</span>,<span class="string">'darkred'</span>,<span class="string">'linewidth'</span>,4,<span class="string">'project2FundamentalRegion'</span>,<span class="string">'axisAngle'</span>)
 </pre><pre class="codeoutput"> 
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
- o1: (2.5e-14&deg;,0&deg;,0&deg;)
+ specimen symmetry: 222
+ o1: (0&deg;,0&deg;,0&deg;)
  h: (111)
 </pre>
-  {% include inline_image.html file="OrientationFibre_06.png" %}
-<h2 id="9"><b>predefined fibres</b></h2><p>There exist a list of predefined fibres in MTEX which include alpha-, beta-, gamma-, epsilon-, eta- and tau fibre. Those can be defined by</p><pre class="codeinput">beta = fibre.beta(cs,<span class="string">'full'</span>);
+  {% include inline_image.html file="OrientationFibre_05.png" %}
+<h2 id="8">predefined fibres</h2><p>MTEX includes also a list of predefined fibres, e.g., alpha-, beta-, gamma-, epsilon-, eta- and tau fibres. Those can be defined by</p><pre class="codeinput">beta = fibre.beta(cs,<span class="string">'full'</span>);
 </pre><p>Note, that it is now straight forward to define a corresponding fibre ODF by</p><pre class="codeinput">odf = fibreODF(beta,<span class="string">'halfwidth'</span>,10*degree)
 
 <span class="comment">% and plot it in 3d</span>
@@ -143,7 +97,7 @@ plot3d(odf)
 
 <span class="comment">% this adds the fibre to the plots</span>
 hold <span class="string">on</span>
-plot(beta.symmetrise,<span class="string">'lineColor'</span>,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,2)
+plot(beta.symmetrise,<span class="string">'lineColor'</span>,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,4)
 hold <span class="string">off</span>
 </pre><pre class="codeoutput"> 
 odf = ODF  
@@ -156,11 +110,11 @@ odf = ODF
     weight: 1
  
 </pre>
-  {% include inline_image.html file="OrientationFibre_07.png" %}
-<h2 id="11">Visualize an ODF along a fibre</h2><pre class="codeinput">plot(odf,fibre.gamma(cs))
+  {% include inline_image.html file="OrientationFibre_06.png" %}
+<h2 id="10">Visualize an ODF along a fibre</h2><pre class="codeinput">plot(odf,fibre.gamma(cs))
 </pre>
-  {% include inline_image.html file="OrientationFibre_08.png" %}
-<h2 id="12">Compute volume of fibre portions</h2><pre class="codeinput">100 * volume(odf,beta,10*degree)
+  {% include inline_image.html file="OrientationFibre_07.png" %}
+<h2 id="11">Compute volume of fibre portions</h2><pre class="codeinput">100 * volume(odf,beta,10*degree)
 </pre><pre class="codeoutput">ans =
    54.3540
 </pre></div></body></html>
