@@ -19,7 +19,7 @@ end
 
 mtex_settings
 close all
-setMTEXpref('FontSize',12)
+setMTEXpref('FontSize',13)
 setMTEXpref('figSize',0.5)
 plotx2east
 

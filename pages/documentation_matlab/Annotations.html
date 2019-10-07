@@ -47,9 +47,7 @@ mtexColorMap <span class="string">white2black</span>
 
 annotate([Miller(1,0,0,cs),Miller(1,1,0,cs),Miller(0,0,1,cs),Miller(2,-1,0,cs)],<span class="keyword">...</span>
   <span class="string">'all'</span>,<span class="string">'labeled'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>)
-</pre>
-  {% include inline_image.html file="Annotations_05.png" %}
-<p>One can also mark specific orientations in pole figures or in inverse pole figures.</p><pre class="codeinput">plotIPDF(odf,[xvector,zvector],<span class="string">'antipodal'</span>)
+</pre><p>One can also mark specific orientations in pole figures or in inverse pole figures.</p><pre class="codeinput">plotIPDF(odf,[xvector,zvector],<span class="string">'antipodal'</span>)
 mtexColorMap <span class="string">white2black</span>
 annotate(mod1,<span class="keyword">...</span>
     <span class="string">'marker'</span>,<span class="string">'s'</span>,<span class="string">'MarkerSize'</span>,6,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="keyword">...</span>
@@ -60,26 +58,20 @@ annotate(mod2,<span class="keyword">...</span>
     <span class="string">'label'</span>,<span class="string">'B'</span>)
 
 drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'normal'</span>)
-</pre>
-  {% include inline_image.html file="Annotations_06.png" %}
-<p>as well as in ODF plots</p><pre class="codeinput">plot(odf,<span class="string">'sigma'</span>)
+</pre><p>as well as in ODF plots</p><pre class="codeinput">plot(odf,<span class="string">'sigma'</span>)
 mtexColorMap <span class="string">white2black</span>
 annotate(mod1,<span class="keyword">...</span>
     <span class="string">'MarkerSize'</span>,15,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>)
 
 annotate(mod2,<span class="keyword">...</span>
   <span class="string">'MarkerSize'</span>,15,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'b'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>)
-</pre>
-  {% include inline_image.html file="Annotations_07.png" %}
-<p>or orientation scatter plots</p><pre class="codeinput">ori = odf.discreteSample(200);
+</pre><p>or orientation scatter plots</p><pre class="codeinput">ori = odf.discreteSample(200);
 scatter(ori);
 annotate(mod1,<span class="keyword">...</span>
   <span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>)
 annotate(mod2,<span class="keyword">...</span>
   <span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'g'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'g'</span>)
-</pre>
-  {% include inline_image.html file="Annotations_08.png" %}
-<h2 id="9">Legends</h2><p>If you have multiple data in one plot then it makes sense to add a legend saying which color / symbol correspond to which data set. The key is to use the option <b>DisplayName</b> available for all plotting commands to include the resulting graphical object into the legend and give it a name.</p><pre class="codeinput">plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
+</pre><h2 id="9">Legends</h2><p>If you have multiple data in one plot then it makes sense to add a legend saying which color / symbol correspond to which data set. The key is to use the option <b>DisplayName</b> available for all plotting commands to include the resulting graphical object into the legend and give it a name.</p><pre class="codeinput">plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
 plot(ori,<span class="string">'MarkerFaceColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'black'</span>,<span class="string">'add2all'</span>,<span class="keyword">...</span>
   <span class="string">'DisplayName'</span>,<span class="string">'randomSample'</span>)
 
@@ -87,19 +79,13 @@ f = fibre(Miller({1,1,-2,1},cs),vector3d.Y);
 plot(f,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'add2all'</span>,<span class="string">'DisplayName'</span>,<span class="string">'fibre'</span>)
 
 legend <span class="string">show</span>
-</pre>
-  {% include inline_image.html file="Annotations_09.png" %}
-<p>The following example compares the Fourier coefficients of the fibre ODF with the Fourier coefficients of an unimodal ODF.</p><pre class="codeinput">close <span class="string">all</span>
+</pre><p>The following example compares the Fourier coefficients of the fibre ODF with the Fourier coefficients of an unimodal ODF.</p><pre class="codeinput">close <span class="string">all</span>
 plotFourier(FourierODF(odf,32),<span class="string">'DisplayName'</span>,<span class="string">'Unimodal ODF'</span>)
 hold <span class="string">all</span>
 fodf = fibreODF(Miller(1,0,0,cs),zvector);
 plotFourier(FourierODF(fodf,32),<span class="string">'DisplayName'</span>,<span class="string">'Fibre ODF'</span>);
 hold <span class="string">off</span>
 legend <span class="string">show</span>
-</pre>
-  {% include inline_image.html file="Annotations_10.png" %}
-<p>Adding a Spherical Grid</p><p>Sometimes it is useful to have a spherical grid in your plot to make the projection easier to understand or if you need to know some angular relationships. For this reason, there is the option <b>grid</b>, which enables the grid and the option <b>grid_res</b>, which allows to specify the spacing of the grid lines.</p><pre class="codeinput">plotPDF(odf,[Miller(1,0,0,cs),Miller(0,0,1,cs)],<span class="string">'grid'</span>,<span class="string">'grid_res'</span>,15*degree,<span class="string">'antipodal'</span>);
+</pre><p>Adding a Spherical Grid</p><p>Sometimes it is useful to have a spherical grid in your plot to make the projection easier to understand or if you need to know some angular relationships. For this reason, there is the option <b>grid</b>, which enables the grid and the option <b>grid_res</b>, which allows to specify the spacing of the grid lines.</p><pre class="codeinput">plotPDF(odf,[Miller(1,0,0,cs),Miller(0,0,1,cs)],<span class="string">'grid'</span>,<span class="string">'grid_res'</span>,15*degree,<span class="string">'antipodal'</span>);
 mtexColorMap <span class="string">white2black</span>
-</pre>
-  {% include inline_image.html file="Annotations_11.png" %}
-</div></body></html>
+</pre></div></body></html>

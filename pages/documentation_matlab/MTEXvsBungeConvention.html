@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>MTEX vs. Bunge Convention</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-06"><meta name="DC.source" content="script_MTEXvsBungeConvention.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MTEXvsBungeConvention into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Discusses the differences of the orientations definition by Bunge and MTEX.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">The different definitions</h2><p>For histrical reasons MTEX defines orientations in a slightly different way than they have been defined by Bunge. As explained in topic <a href="CrystalOrientations.html">orientations</a> MTEX defines them as coordinate transformations from the crystal reference frame into the specimen reference frame. In contrast to this Bunge orientations are coordinate transformations from the specimen reference frame into the crystal reference frame. Lets demonstrate this at a simple example</p><pre class="codeinput"><span class="comment">% consider cubic symmetry</span>
+      --><title>MTEX vs. Bunge Convention</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_MTEXvsBungeConvention.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MTEXvsBungeConvention into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Discusses the differences of the orientations definition by Bunge and MTEX.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">The different definitions</h2><p>For histrical reasons MTEX defines orientations in a slightly different way than they have been defined by Bunge. As explained in topic <a href="CrystalOrientations.html">orientations</a> MTEX defines them as coordinate transformations from the crystal reference frame into the specimen reference frame. In contrast to this Bunge orientations are coordinate transformations from the specimen reference frame into the crystal reference frame. Lets demonstrate this at a simple example</p><pre class="codeinput"><span class="comment">% consider cubic symmetry</span>
 cs = crystalSymmetry(<span class="string">'cubic'</span>)
 
 <span class="comment">% and a random orientation</span>
@@ -33,7 +33,7 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  103.584 142.993 74.5756       0
+  183.704  177.43 37.3595       0
  
 </pre><p>This is now an MTEX orientation and can be used to translate crystal coordinates, i.e., Miller indices into specimen coordinates,</p><pre class="codeinput"><span class="comment">% either by multiplying from the left</span>
 r = ori * Miller({1,0,0},cs)
@@ -43,13 +43,13 @@ rotate(Miller({1,0,0},cs),ori)
 </pre><pre class="codeoutput"> 
 r = vector3d  
  size: 1 x 1
-         x        y        z
-  0.685802 0.439329 0.580228
+          x         y         z
+  -0.832345   0.55359 0.0272098
  
 ans = vector3d  
  size: 1 x 1
-         x        y        z
-  0.685802 0.439329 0.580228
+          x         y         z
+  -0.832345   0.55359 0.0272098
 </pre><p>A Bunge orientation is exactly the inverse of an MTEX orientation, i.e.,</p><pre class="codeinput">ori_Bunge = inv(ori)
 </pre><pre class="codeoutput"> 
 ori_Bunge = inverse orientation  
@@ -58,8 +58,8 @@ ori_Bunge = inverse orientation
   crystal symmetry : m-3m
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  105.424 142.993 76.4161       0
+    phi1     Phi    phi2    Inv.
+  142.64  177.43 356.296       0
  
 </pre><p>and translates specimen coordinates into Miller indices</p><pre class="codeinput">ori_Bunge * r
 </pre><pre class="codeoutput"> 
@@ -81,7 +81,7 @@ mori = misorientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  89.1832  79.575 194.702       0
+  355.625 113.863 203.518       0
  
 </pre><p>as they are commonly defined coordinate transformations from crystal to crystal coordinates. This formula is different to the misorientation formula for Bunge orientations</p><pre class="codeinput">ori1_Bunge = inv(ori1);
 ori2_Bunge = inv(ori2);
@@ -95,6 +95,6 @@ mori = misorientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  89.1832  79.575 194.702       0
+  355.625 113.863 203.518       0
  
 </pre><p>However, both formula results in exactly the same misorientation.</p><h2 id="11">Summary</h2><p>This list summarizes the differences between MTEX orientations and Bunge orientations.</p><div><ul><li>formulas involving orientations - invert orientation</li><li>orientation Euler angles - unchanged</li><li>orientation matrix - transpose matrix</li><li>misorientations - unchanged</li><li>misorientation Euler angles - take Euler angles of inverse misorientation</li></ul></div></div></body></html>

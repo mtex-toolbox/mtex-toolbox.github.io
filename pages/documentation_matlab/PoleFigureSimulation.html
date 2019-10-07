@@ -53,21 +53,19 @@ odf = ODF
   specimen symmetry: 1
  
   Uniform portion:
-    weight: 0.46455
+    weight: 0.46118
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
     center: 29750 orientations, resolution: 5&deg;
-    weight: 0.53545
+    weight: 0.53882
  
 </pre><p>which can be plotted,</p><pre class="codeinput">plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>,<span class="string">'sigma'</span>)
-</pre><pre class="codeoutput">progress: 100%
 </pre>
   {% include inline_image.html file="PoleFigureSimulation_03.png" %}
 <p>and compared to the original model ODF.</p><pre class="codeinput">calcError(odf,model_odf,<span class="string">'resolution'</span>,5*degree)
-</pre><pre class="codeoutput">progress: 100%
-ans =
-    0.0950
+</pre><pre class="codeoutput">ans =
+    0.0954
 </pre><h2 id="14">Exploration of the relationship between estimation error and number of single orientations</h2><p>For a more systematic analysis of the estimation error, we vary the number of pole figures used for ODF estimation from 1 to 7 and calculate for any number of pole figures the approximation error. Furthermore, we also apply ghost correction and compare the approximation error to the previous reconstructions.</p><pre class="codeinput">e = [];
 <span class="keyword">for</span> i = 1:pf.numPF
 
@@ -77,20 +75,6 @@ ans =
   e(i,2) = calcError(odf,model_odf,<span class="string">'resolution'</span>,2.5*degree);
 
 <span class="keyword">end</span>
-</pre><pre class="codeoutput">progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
-progress: 99%
 </pre><p>Plot the error in dependency of the number of single orientations.</p><pre class="codeinput">close <span class="string">all</span>;
 plot(1:pf.numPF,e)
 ylim([0.07 0.32])
