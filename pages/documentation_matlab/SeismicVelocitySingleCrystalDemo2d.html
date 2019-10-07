@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Seismic velocities and anisotropy - single crystal plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-06"><meta name="DC.source" content="script_SeismicVelocitySingleCrystalDemo2d.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SeismicVelocitySingleCrystalDemo2d into the Matlab commandline">edit page</a></font><div><!--introduction--><p>plot 2D velocity surfaces - phase, slowness &amp; wavefront For given plane normal direction, for example xvector, yvector or zvector Stishovite (SiO2) at high pressure</p><p>David Mainprice 1/05/2018</p><!--/introduction--><h2 id="1">The Elastic Stiffness Tensor of Stishovite</h2><pre>Reference: Elastic constants Stishovite, Weidner et al 1982 JGR
+      --><title>Seismic velocities and anisotropy - single crystal plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_SeismicVelocitySingleCrystalDemo2d.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SeismicVelocitySingleCrystalDemo2d into the Matlab commandline">edit page</a></font><div><!--introduction--><p>plot 2D velocity surfaces - phase, slowness &amp; wavefront For given plane normal direction, for example xvector, yvector or zvector Stishovite (SiO2) at high pressure</p><p>David Mainprice 1/05/2018</p><!--/introduction--><h2 id="1">The Elastic Stiffness Tensor of Stishovite</h2><pre>Reference: Elastic constants Stishovite, Weidner et al 1982 JGR
 Reference: Crystal Structure Sinclair and Ringwood 78 Nature P422
 d=4.2901</pre><pre class="codeinput"><span class="comment">% Define density (g/cm3)</span>
  rho= 4.2901;
@@ -127,6 +127,8 @@ hold <span class="string">off</span>
 drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
 </pre>
   {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_02.png" %}
+
+  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_03.png" %}
 <h2 id="6">Select the two S-waves (Vs1 and Vs2 where Vs1&gt;Vs2 in velocity)</h2><p>by the orientation of the polarization vectors ps1 and ps2 with respect to the specimen Z direction. So that sv (v=vertical) is S-wave with polarization closest to Z sh (h=horizontal) has the polarization closest to the plane normal to Z Both polarizations pairs (sv and sh) and (ps1 and ps2) are orthogonal</p><p>which values to switch this defines a function which is either one or zero</p><pre class="codeinput">id = angle(ps1,vector3d.Z) &lt;= 89.9*degree;
 vsv = id .* vs1 + (1-id) .* vs2;
 vsh = id .* vs2 + (1-id) .* vs1;
@@ -161,7 +163,7 @@ mtexColorbar(<span class="string">'Title'</span>,<span class="string">'(km/s)'</
 hold <span class="string">off</span>
 drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
 </pre>
-  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_03.png" %}
+  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_04.png" %}
 <h2 id="8">2: Phase velocity surface (km/s) with svs &amp; vsh</h2><pre class="codeinput">figure(2)
 <span class="comment">% phase velocities</span>
 plotSection(vp,planeNormal,optSec{:})
@@ -191,7 +193,7 @@ mtexColorbar(<span class="string">'Title'</span>,<span class="string">'(km/s)'</
 hold <span class="string">off</span>
 drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
 </pre>
-  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_04.png" %}
+  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_05.png" %}
 <h2 id="9">3: plot slowness in plane normal Z</h2><pre class="codeinput">figure(3)
 plotSection(1./vp,planeNormal,optSec{:})
 hold <span class="string">on</span>
@@ -218,7 +220,7 @@ mtexColorbar(<span class="string">'Title'</span>,<span class="string">'(s/km)'</
 hold <span class="string">off</span>
 drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
 </pre>
-  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_05.png" %}
+  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_06.png" %}
 <h2 id="10">Compute WaveFront as spherical functions: EnergyVectors Evp, Evs1 &amp; Evs2</h2><pre class="codeinput">Evp = energyVector(C,[],vp,pp);
 Evs1 = energyVector(C,[],vs1,ps1);
 Evs2 = energyVector(C,[],vs2,ps2);
@@ -253,5 +255,5 @@ drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'large'</
 
 <span class="comment">% End of demo</span>
 </pre>
-  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_06.png" %}
+  {% include inline_image.html file="SeismicVelocitySingleCrystalDemo2d_07.png" %}
 </div></body></html>
