@@ -1,6 +1,6 @@
 ---
 title: Simulating Pole Figure data
-last_updated: 05-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigureSimulation.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Simulating Pole Figure data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_PoleFigureSimulation.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureSimulation into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Simulate arbitrary pole figure data</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Introduction</h2><p>MTEX allows to <i>simulate</i> an arbitrary number of pole figure data from any ODF. This is quite helpful if you want to analyze the pole figure to ODF estimation routine. Let us start with a model ODF given as the superposition of 6 components.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'orthorhombic'</span>);
+      --><title>Simulating Pole Figure data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_PoleFigureSimulation.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureSimulation into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Simulate arbitrary pole figure data</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Introduction</h2><p>MTEX allows to <i>simulate</i> an arbitrary number of pole figure data from any ODF. This is quite helpful if you want to analyze the pole figure to ODF estimation routine. Let us start with a model ODF given as the superposition of 6 components.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'orthorhombic'</span>);
 mod1 = orientation.byAxisAngle(xvector,45*degree,cs);
 mod2 = orientation.byAxisAngle(yvector,65*degree,cs);
 model_odf = 0.5*uniformODF(cs) + <span class="keyword">...</span>
@@ -53,12 +53,12 @@ odf = ODF
   specimen symmetry: 1
  
   Uniform portion:
-    weight: 0.4596
+    weight: 0.46455
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
     center: 29750 orientations, resolution: 5&deg;
-    weight: 0.5404
+    weight: 0.53545
  
 </pre><p>which can be plotted,</p><pre class="codeinput">plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>,<span class="string">'sigma'</span>)
 </pre><pre class="codeoutput">progress: 100%
@@ -67,7 +67,7 @@ odf = ODF
 <p>and compared to the original model ODF.</p><pre class="codeinput">calcError(odf,model_odf,<span class="string">'resolution'</span>,5*degree)
 </pre><pre class="codeoutput">progress: 100%
 ans =
-    0.0953
+    0.0950
 </pre><h2 id="14">Exploration of the relationship between estimation error and number of single orientations</h2><p>For a more systematic analysis of the estimation error, we vary the number of pole figures used for ODF estimation from 1 to 7 and calculate for any number of pole figures the approximation error. Furthermore, we also apply ghost correction and compare the approximation error to the previous reconstructions.</p><pre class="codeinput">e = [];
 <span class="keyword">for</span> i = 1:pf.numPF
 

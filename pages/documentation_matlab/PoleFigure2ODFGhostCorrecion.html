@@ -1,6 +1,6 @@
 ---
 title: Ghost Effect Analysis
-last_updated: 05-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigure2ODFGhostCorrecion.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ghost Effect Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_PoleFigure2ODFGhostCorrecion.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigure2ODFGhostCorrecion into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>A general problem in estimating an ODF from pole figure data is the fact that the odd order Fourier coefficients of the ODF are not present anymore in the pole figure data and therefore it is difficult to estimate them. Artifacts in the estimated ODF that are due to underestimated odd order Fourier coefficients are called <b>ghost effects</b>. It is known that for sharp textures the ghost effect is relatively small due to the strict non-negativity condition. For weak textures, however, the ghost effect might be remarkable. For those cases, <b>MTEX</b> provides the option <b>ghost_correction</b> which tries to determine the uniform portion of the unknown ODF and to transform the unknown weak ODF into a sharp ODF by substracting this uniform portion. This is almost the approach Matthies proposed in his book (He called the uniform portion <b>phon</b>). In this section, we are going to demonstrate the power of ghost correction at a simple, synthetic example.</p><h2 id="2">Construct Model ODF</h2><p>A unimodal ODF with a high uniform portion.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'222'</span>);
+      --><title>Ghost Effect Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_PoleFigure2ODFGhostCorrecion.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigure2ODFGhostCorrecion into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>A general problem in estimating an ODF from pole figure data is the fact that the odd order Fourier coefficients of the ODF are not present anymore in the pole figure data and therefore it is difficult to estimate them. Artifacts in the estimated ODF that are due to underestimated odd order Fourier coefficients are called <b>ghost effects</b>. It is known that for sharp textures the ghost effect is relatively small due to the strict non-negativity condition. For weak textures, however, the ghost effect might be remarkable. For those cases, <b>MTEX</b> provides the option <b>ghost_correction</b> which tries to determine the uniform portion of the unknown ODF and to transform the unknown weak ODF into a sharp ODF by substracting this uniform portion. This is almost the approach Matthies proposed in his book (He called the uniform portion <b>phon</b>). In this section, we are going to demonstrate the power of ghost correction at a simple, synthetic example.</p><h2 id="2">Construct Model ODF</h2><p>A unimodal ODF with a high uniform portion.</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'222'</span>);
 mod1 = orientation.byEuler(0,0,0,cs);
 odf = 0.9*uniformODF(cs) + <span class="keyword">...</span>
   0.1*unimodalODF(mod1,<span class="string">'halfwidth'</span>,10*degree)
@@ -28,7 +28,7 @@ odf = ODF
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: (2.5e-14&deg;,0&deg;,0&deg;)
+    center: (0&deg;,0&deg;,0&deg;)
     weight: 0.1
  
 </pre><h2 id="3">Simulate pole figures</h2><pre class="codeinput"><span class="comment">% specimen directions</span>

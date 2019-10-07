@@ -1,6 +1,6 @@
 ---
 title: Bingham Distribution
-last_updated: 05-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: BinghamODFs.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Bingham Distribution</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_BinghamODFs.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BinghamODFs into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>The Bingham distribution has the density</p><p>
+      --><title>Bingham Distribution</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_BinghamODFs.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BinghamODFs into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>The Bingham distribution has the density</p><p>
   {% include inline_image.html file="BinghamODFs_eq05340943576548919889.png" %}
 </p><p>where 
   {% include inline_image.html file="BinghamODFs_eq02619125812656254059.png" %}
@@ -88,7 +88,7 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 0.72 2.5 26
+     kappa: 0 1.2 1.8 26
     weight: 1
  
 </pre><p>where <tt>U</tt> is the orthogonal matrix of eigenvectors of the orientation tensor and <tt>kappa</tt> the shape parameters associated with the <tt>U</tt>.</p><p>next, we test the different cases of the distribution on rejection</p><pre class="codeinput">T_spherical = bingham_test(ori_spherical,<span class="string">'spherical'</span>,<span class="string">'approximated'</span>);
@@ -97,7 +97,7 @@ T_prolate   = bingham_test(ori_spherical,<span class="string">'oblate'</span>,  
 
 t = [T_spherical T_oblate T_prolate]
 </pre><pre class="codeoutput">t =
-    0.2910    0.0981    0.5160
+    0.0724    0.2550    0.0701
 </pre><p>The spherical test case failed to reject it for some level of significance, hence we would dismiss the hypothesis prolate and oblate.</p><pre class="codeinput">odf_spherical = BinghamODF(kappa,U,crystalSymmetry,specimenSymmetry)
 </pre><pre class="codeoutput"> 
 odf_spherical = ODF  
@@ -138,7 +138,7 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 8.6 54 55
+     kappa: 0 5.7 49 50
     weight: 1
  
 </pre><p>and test on the three cases</p><pre class="codeinput">T_spherical = bingham_test(ori_prolate,<span class="string">'spherical'</span>,<span class="string">'approximated'</span>);
@@ -147,7 +147,7 @@ T_prolate   = bingham_test(ori_prolate,<span class="string">'oblate'</span>,   <
 
 t = [T_spherical T_oblate T_prolate]
 </pre><pre class="codeoutput">t =
-    1.0000    0.9737    1.0000
+    1.0000    0.8368    1.0000
 </pre><p>The test clearly rejects the spherical and prolate case, but not the prolate. We construct the Bingham distribution from the parameters, it might show some skewness</p><pre class="codeinput">odf_prolate = BinghamODF(kappa,U,crystalSymmetry,specimenSymmetry)
 </pre><pre class="codeoutput"> 
 odf_prolate = ODF  
@@ -186,7 +186,7 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 52 52 54
+     kappa: 0 49 49 51
     weight: 1
  
 </pre><p>and do the tests</p><pre class="codeinput">T_spherical = bingham_test(ori_oblate,<span class="string">'spherical'</span>,<span class="string">'approximated'</span>);
@@ -195,7 +195,7 @@ T_prolate   = bingham_test(ori_oblate,<span class="string">'oblate'</span>,   <s
 
 t = [T_spherical T_oblate T_prolate]
 </pre><pre class="codeoutput">t =
-    1.0000    1.0000    0.0200
+    1.0000    1.0000    0.1585
 </pre><p>the spherical and oblate case are clearly rejected, the prolate case failed to reject for some level of significance</p><pre class="codeinput">odf_oblate = BinghamODF(kappa, U,crystalSymmetry,specimenSymmetry)
 </pre><pre class="codeoutput"> 
 odf_oblate = ODF  
