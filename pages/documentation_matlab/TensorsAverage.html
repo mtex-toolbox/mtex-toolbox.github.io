@@ -1,6 +1,6 @@
 ---
 title: Average Material Tensors
-last_updated: 05-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: TensorsAverage.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Average Material Tensors</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_TensorsAverage.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TensorsAverage into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX offers several ways to compute average material tensors from ODFs or EBSD data. We start by importing some EBSD data of Glaucophane and Epidote.</p><pre class="codeinput"><span class="comment">% set up a nice colormap</span>
+      --><title>Average Material Tensors</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_TensorsAverage.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TensorsAverage into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX offers several ways to compute average material tensors from ODFs or EBSD data. We start by importing some EBSD data of Glaucophane and Epidote.</p><pre class="codeinput"><span class="comment">% set up a nice colormap</span>
 setMTEXpref(<span class="string">'defaultColorMap'</span>,blue2redColorMap);
 
 <span class="comment">% import some EBSD data</span>
@@ -110,74 +110,74 @@ CVoigt = stiffnessTensor
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
-  tensor in Voigt matrix representation: *10^-3
- 11.852  2.893  3.712 -0.107  -0.23  0.284
-  2.893  8.642  2.982 -0.185 -0.025  0.135
-  3.712  2.982 11.306 -0.398  -0.13  0.094
- -0.107 -0.185 -0.398  3.329   0.12 -0.045
-  -0.23 -0.025  -0.13   0.12  4.118 -0.086
-  0.284  0.135  0.094 -0.045 -0.086  3.336
+  tensor in Voigt matrix representation:
+ 216.77  52.91  67.88  -1.96   -4.2   5.19
+  52.91 158.05  54.54  -3.39  -0.46   2.47
+  67.88  54.54 206.78  -7.29  -2.37   1.72
+  -1.96  -3.39  -7.29  60.88    2.2  -0.82
+   -4.2  -0.46  -2.37    2.2  75.31  -1.58
+   5.19   2.47   1.72  -0.82  -1.58  61.01
  
 CReuss = stiffnessTensor  
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
-  tensor in Voigt matrix representation: *10^-3
- 10.812  2.657  3.316 -0.094 -0.233  0.258
-  2.657  7.931  2.732 -0.157 -0.021  0.111
-  3.316  2.732 10.302 -0.345  -0.12  0.077
- -0.094 -0.157 -0.345  3.024  0.119 -0.033
- -0.233 -0.021  -0.12  0.119  3.814 -0.088
-  0.258  0.111  0.077 -0.033 -0.088  3.029
+  tensor in Voigt matrix representation:
+ 197.74  48.59  60.64  -1.71  -4.26   4.72
+  48.59 145.04  49.96  -2.86  -0.38   2.02
+  60.64  49.96 188.42   -6.3   -2.2   1.41
+  -1.71  -2.86   -6.3  55.31   2.18   -0.6
+  -4.26  -0.38   -2.2   2.18  69.75  -1.61
+   4.72   2.02   1.41   -0.6  -1.61  55.39
  
 CHill = stiffnessTensor  
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
-  tensor in Voigt matrix representation: *10^-3
- 11.332  2.775  3.514   -0.1 -0.231  0.271
-  2.775  8.286  2.857 -0.171 -0.023  0.123
-  3.514  2.857 10.804 -0.372 -0.125  0.086
-   -0.1 -0.171 -0.372  3.176   0.12 -0.039
- -0.231 -0.023 -0.125   0.12  3.966 -0.087
-  0.271  0.123  0.086 -0.039 -0.087  3.182
+  tensor in Voigt matrix representation:
+ 207.25  50.75  64.26  -1.83  -4.23   4.96
+  50.75 151.55  52.25  -3.13  -0.42   2.24
+  64.26  52.25  197.6  -6.79  -2.28   1.57
+  -1.83  -3.13  -6.79  58.09   2.19  -0.71
+  -4.23  -0.42  -2.28   2.19  72.53  -1.59
+   4.96   2.24   1.57  -0.71  -1.59   58.2
 </pre><p>for a single phase the syntax is</p><pre class="codeinput">[CVoigtEpidote,CReussEpidote,CHillEpidote] =  calcTensor(ebsd(<span class="string">'Epidote'</span>),CEpidote)
 </pre><pre class="codeoutput"> 
 CVoigtEpidote = stiffnessTensor  
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
-  tensor in Voigt matrix representation: *10^-3
- 46.61  12.5 15.17 -0.33 -0.59  0.95
-  12.5 39.33 12.67     0  0.17 -0.03
- 15.17 12.67 45.65  -0.4 -0.02  0.28
- -0.33     0  -0.4 13.13  0.34  0.12
- -0.59  0.17 -0.02  0.34 16.15 -0.18
-  0.95 -0.03  0.28  0.12 -0.18 13.19
+  tensor in Voigt matrix representation:
+ 210.22  56.37  68.44  -1.49  -2.64   4.27
+  56.37  177.4  57.14   0.01   0.75  -0.11
+  68.44  57.14 205.87   -1.8  -0.08   1.24
+  -1.49   0.01   -1.8  59.21   1.55   0.53
+  -2.64   0.75  -0.08   1.55  72.83  -0.79
+   4.27  -0.11   1.24   0.53  -0.79  59.51
  
 CReussEpidote = stiffnessTensor  
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
-  tensor in Voigt matrix representation: *10^-3
- 43.69 12.79 15.43 -0.37 -0.52  0.92
- 12.79 35.77 13.14 -0.02  0.27  0.01
- 15.43 13.14 42.89 -0.39  0.17  0.23
- -0.37 -0.02 -0.39 11.46  0.37   0.1
- -0.52  0.27  0.17  0.37 14.74 -0.16
-  0.92  0.01  0.23   0.1 -0.16 11.53
+  tensor in Voigt matrix representation:
+ 197.04  57.67  69.57  -1.69  -2.32   4.16
+  57.67 161.32  59.28  -0.11   1.21   0.03
+  69.57  59.28 193.44  -1.78   0.78   1.05
+  -1.69  -0.11  -1.78   51.7   1.69   0.44
+  -2.32   1.21   0.78   1.69  66.46  -0.71
+   4.16   0.03   1.05   0.44  -0.71  51.98
  
 CHillEpidote = stiffnessTensor  
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
-  tensor in Voigt matrix representation: *10^-3
- 45.15 12.64  15.3 -0.35 -0.55  0.93
- 12.64 37.55 12.91 -0.01  0.22 -0.01
-  15.3 12.91 44.27  -0.4  0.08  0.25
- -0.35 -0.01  -0.4  12.3  0.36  0.11
- -0.55  0.22  0.08  0.36 15.44 -0.17
-  0.93 -0.01  0.25  0.11 -0.17 12.36
+  tensor in Voigt matrix representation:
+ 203.63  57.02     69  -1.59  -2.48   4.22
+  57.02 169.36  58.21  -0.05   0.98  -0.04
+     69  58.21 199.66  -1.79   0.35   1.14
+  -1.59  -0.05  -1.79  55.46   1.62   0.48
+  -2.48   0.98   0.35   1.62  69.65  -0.75
+   4.22  -0.04   1.14   0.48  -0.75  55.74
 </pre><h2 id="7">ODF Estimation</h2><p>Next, we estimate an ODF for the Epidote phase</p><pre class="codeinput">odfEpidote = calcODF(ebsd(<span class="string">'Epidote'</span>).orientations,<span class="string">'halfwidth'</span>,10*degree)
 </pre><pre class="codeoutput"> 
 odfEpidote = ODF  
@@ -195,8 +195,9 @@ odfEpidote = ODF
 setMTEXpref(<span class="string">'defaultColorMap'</span>,WhiteJetColorMap);
 </pre><pre class="codeoutput"> 
 CVoigtEpidote = stiffnessTensor  
-  unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+  unit   : GPa                                
+  rank   : 4 (3 x 3 x 3 x 3)                  
+  mineral: Epidote (12/m1, X||a*, Y||b*, Z||c)
  
   tensor in Voigt matrix representation:
  208.94  57.35  67.73  -1.31  -2.25   3.75
@@ -207,8 +208,9 @@ CVoigtEpidote = stiffnessTensor
    3.75   0.23   1.08   0.37  -0.66  60.49
  
 CReussEpidote = stiffnessTensor  
-  unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+  unit   : GPa                                
+  rank   : 4 (3 x 3 x 3 x 3)                  
+  mineral: Epidote (12/m1, X||a*, Y||b*, Z||c)
  
   tensor in Voigt matrix representation:
  195.18  58.63  68.58  -1.49  -1.82   3.66
@@ -219,8 +221,9 @@ CReussEpidote = stiffnessTensor
    3.66    0.3   0.87   0.35  -0.57  52.74
  
 CHillEpidote = stiffnessTensor  
-  unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+  unit   : GPa                                
+  rank   : 4 (3 x 3 x 3 x 3)                  
+  mineral: Epidote (12/m1, X||a*, Y||b*, Z||c)
  
   tensor in Voigt matrix representation:
  202.06  57.99  68.15   -1.4  -2.03    3.7

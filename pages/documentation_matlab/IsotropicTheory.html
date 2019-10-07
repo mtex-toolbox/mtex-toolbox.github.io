@@ -1,6 +1,6 @@
 ---
 title: Isotropic Theory
-last_updated: 05-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: IsotropicTheory.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Isotropic Theory</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_IsotropicTheory.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit IsotropicTheory into the Matlab commandline">edit page</a></font><div><!--introduction--><p>While the linear elastic model for anisotropic materials is based on the fourth order elastic stiffness tensor <tt>C</tt> the linear elastic model for isotropic models is most often developed in terms of the elastic moduli shear, bulk, Youngs modulus and the Poisson ratio.</p><!--/introduction--><h2 id="1">The single crystal stiffness tensor</h2><p>Lets start our discussion with a single crystal stiffness tensor of Albite.</p><pre class="codeinput"><span class="comment">% density (g/cm3)</span>
+      --><title>Isotropic Theory</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-06"><meta name="DC.source" content="script_IsotropicTheory.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit IsotropicTheory into the Matlab commandline">edit page</a></font><div><!--introduction--><p>While the linear elastic model for anisotropic materials is based on the fourth order elastic stiffness tensor <tt>C</tt> the linear elastic model for isotropic models is most often developed in terms of the elastic moduli shear, bulk, Youngs modulus and the Poisson ratio.</p><!--/introduction--><h2 id="1">The single crystal stiffness tensor</h2><p>Lets start our discussion with a single crystal stiffness tensor of Albite.</p><pre class="codeinput"><span class="comment">% density (g/cm3)</span>
  rho= 2.6230;
 <span class="comment">%</span>
 <span class="comment">% crystal symmetry &amp; frame</span>
@@ -184,18 +184,18 @@ sigma = stressTensor
   rank   : 2 (3 x 3)                        
   mineral: An0 Albite 2016 (-1, X||a*, Y||b)
  
-  42.33   44.2  35.62
-   44.2 102.49  59.16
-  35.62  59.16  45.46
+ 125.32  74.75  32.52
+  74.75 102.66  26.27
+  32.52  26.27 108.87
 </pre><p>in terms of the Lame constants by</p><pre class="codeinput">sigma = stressTensor(2 * mu * eps + lambda * trace(eps) * tensor.eye)
 </pre><pre class="codeoutput"> 
 sigma = stressTensor  
   rank   : 2 (3 x 3)                        
   mineral: An0 Albite 2016 (-1, X||a*, Y||b)
  
-  42.33   44.2  35.62
-   44.2 102.49  59.16
-  35.62  59.16  45.46
+ 125.32  74.75  32.52
+  74.75 102.66  26.27
+  32.52  26.27 108.87
 </pre><h2 id="11">Hashin Shtrikman Bounds</h2><p>While the Voigt and Reuss bounds are tight without additional assumptions, the extreme cases require a very specific layered microstructure. If one additionally assumes that the material is quasihomogeneous, i.e., it is constant elastic properties within each subregion that is significantly larger then the grain size, then the Voigt and Reuss bounds are to wide. More narrow bounds for this settings have been established by Hashin and Shtrikman in 1962.</p><p>The following deviation follows the paper by J.M. Brown (2015) <i>Determination of Hashin-Shtrikman bounds on the isotropic effective elastic moduli of polycrystals of any symmetry</i>, Computers &amp; Geosciences, 80 (2015) 95-99.</p><p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimzation problem. Lets first set up the search domain</p><pre class="codeinput"><span class="comment">% define a 2 dimensional domain of bulk and shear moduli</span>
 KMin = 1; KMax = 150; <span class="comment">% minimum and maximum bulk moduli</span>
 GMin = 1; GMax = 150; <span class="comment">% minimum and maximum shear moduli</span>
@@ -232,7 +232,7 @@ axis <span class="string">equal</span> <span class="string">tight</span>
 <span class="comment">%xlabel('shear modulus')</span>
 <span class="comment">%ylabel('bulk modulus')</span>
 <span class="comment">%axis equal tight</span>
-</pre><pre class="codeoutput">Elapsed time is 2.771471 seconds.
+</pre><pre class="codeoutput">Elapsed time is 2.832318 seconds.
 </pre>
   {% include inline_image.html file="IsotropicTheory_01.png" %}
 <h2 id="14">lower and upper Hashin Shtrikman bulk and shear modulus bounds</h2><p>We find the lower Hashin Shtrikman bound of the bulk modulus by minimizing the effective Hashin Shtrikman bulk modulus over the positive definite domains of the residual stiffness tensor <tt>R</tt>. Accordingly we find the upper bound as the maximum over the negative definite domain.</p><pre class="codeinput">khsLower = max(khs(def==1));

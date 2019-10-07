@@ -1,6 +1,6 @@
 ---
 title: MTEX - Analysis of EBSD Data
-last_updated: 01-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: ebsd_demo.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>MTEX - Analysis of EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-01"><meta name="DC.source" content="script_ebsd_demo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ebsd_demo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Analysis of single orientation measurement.</p><!--/introduction--><h2 id="2">Specify Crystal and Specimen Symmetry</h2><pre class="codeinput"><span class="comment">% specify crystal and specimen symmetry</span>
+      --><title>MTEX - Analysis of EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_ebsd_demo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ebsd_demo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Analysis of single orientation measurement.</p><!--/introduction--><h2 id="2">Specify Crystal and Specimen Symmetry</h2><pre class="codeinput"><span class="comment">% specify crystal and specimen symmetry</span>
 CS = {<span class="keyword">...</span>
   <span class="string">'Not Indexed'</span>,<span class="keyword">...</span>
   crystalSymmetry(<span class="string">'m-3m'</span>,<span class="string">'mineral'</span>,<span class="string">'Fe'</span>),<span class="keyword">...</span><span class="comment"> % crystal symmetry phase 1</span>
@@ -66,8 +66,6 @@ plotPDF(odf2,h,<span class="string">'antipodal'</span>)
   {% include inline_image.html file="ebsd_demo_04.png" %}
 <h2 id="8">Plot ODF</h2><pre class="codeinput">plot(odf2,<span class="string">'sections'</span>,9,<span class="string">'resolution'</span>,2*degree,<span class="keyword">...</span>
   <span class="string">'FontSize'</span>,10,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
 </pre>
   {% include inline_image.html file="ebsd_demo_05.png" %}
 <h2 id="9">Estimation of Fourier Coefficients</h2><p>Once, a ODF has been estimated from EBSD data it is straight forward to calculate Fourier coefficients. E.g. by</p><pre class="codeinput">close <span class="string">all</span>
@@ -92,9 +90,7 @@ hold <span class="string">off</span>
 fibre_odf = 0.5*uniformODF(CS) + 0.5*fibreODF(Miller(0,0,0,1,CS),zvector);
 plot(fibre_odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>)
 ori = calcOrientations(fibre_odf,10000)
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
- 
+</pre><pre class="codeoutput"> 
 ori = orientation  
   size: 10000 x 1
   crystal symmetry : -31m, X||a*, Y||b, Z||c*
@@ -113,13 +109,11 @@ odf = ODF
     weight: 1
  
 </pre><p>plot the estimated ODF</p><pre class="codeinput">plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
 </pre>
   {% include inline_image.html file="ebsd_demo_10.png" %}
 <p>calculate estimation error</p><pre class="codeinput">calcError(odf,fibre_odf,<span class="string">'resolution'</span>,5*degree)
 </pre><pre class="codeoutput">ans =
-    0.0949
+    0.0941
 </pre><p>For a more exhausive example see the <a href="EBSDSimulation_demo.html">EBSD Simulation demo</a>!</p><h2 id="17">Exercises</h2><p>5)</p><p>a) Load the EBSD data: <tt>data/ebsd\_txt/85\_829grad\_07\_09\_06.txt</tt>!</p><pre class="codeinput">import_wizard(<span class="string">'ebsd'</span>)
 </pre>
   {% include inline_image.html file="ebsd_demo_11.png" %}
@@ -134,8 +128,6 @@ odf = ODF
     weight: 1
  
 </pre><p>c) Visualize the ODF and some of its pole figures!</p><pre class="codeinput">plot(odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput">Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
 </pre>
   {% include inline_image.html file="ebsd_demo_12.png" %}
 <p>d) Explore the influence of the halfwidth to the kernel density estimation by looking at the pole figures!</p></div></body></html>

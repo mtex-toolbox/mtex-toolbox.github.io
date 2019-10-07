@@ -1,6 +1,6 @@
 ---
 title: Detection of Sample Symmetry
-last_updated: 05-Oct-2019
+last_updated: 07-Oct-2019
 sidebar: documentation_sidebar
 permalink: DetectionOfSampleSymmetry.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-05"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DetectionOfSampleSymmetry into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p><pre class="codeinput">CS = crystalSymmetry(<span class="string">'cubic'</span>);
+      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DetectionOfSampleSymmetry into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p><pre class="codeinput">CS = crystalSymmetry(<span class="string">'cubic'</span>);
 SS = specimenSymmetry(<span class="string">'222'</span>);
 
 <span class="comment">% some component center</span>
@@ -71,12 +71,8 @@ odf_est = ODF
  
   Harmonic portion:
     degree: 25
-    progress: 100%
-progress: 100%
-progress: 100%
-progress: 100%
-ans =
-   15.6088
+    weight: 1
+ 
 </pre>
   {% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
 <h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p><pre class="codeinput">[odf_corrected,rot_inv] = centerSpecimen(odf_est);
@@ -86,6 +82,12 @@ plotPDF(odf_corrected,h,<span class="string">'antipodal'</span>,8,<span class="s
 
 <span class="comment">% the difference between the applied rotation and the estimate rotation</span>
 angle(rot,inv(rot_inv)) / degree
+</pre><pre class="codeoutput">progress: 100%
+progress: 100%
+progress: 100%
+progress: 100%
+ans =
+   15.6088
 </pre>
   {% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
 <h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <tt>centerSpecimen</tt> to an ODF estimated from pole figure data. Lets start by importing them</p><pre class="codeinput">fname = fullfile(mtexDataPath,<span class="string">'PoleFigure'</span>,<span class="string">'aachen_exp.EXP'</span>);
