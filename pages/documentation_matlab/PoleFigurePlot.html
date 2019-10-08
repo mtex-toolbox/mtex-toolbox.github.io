@@ -1,6 +1,6 @@
 ---
 title: Plotting of Pole Figures
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigurePlot.html
 folder: documentation
@@ -14,10 +14,13 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting of Pole Figures</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_PoleFigurePlot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigurePlot into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Describes various possibilities to visualize pole figure data.</p><!--/introduction--><h2 id="1">Contents</h2><h2 id="3">Import of Pole Figures</h2><p>Let us start by loading some pole figures.</p><pre class="codeinput">mtexdata <span class="string">ptx</span>
-</pre><pre class="codeoutput"> loading data ...
- saving data to /home/hielscher/mtex/master/data/ptx.mat
- 
+      --><title>Plotting of Pole Figures</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_PoleFigurePlot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigurePlot into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Describes various possibilities to visualize pole figure data.</p><!--/introduction--><h2 id="1">Contents</h2><h2 id="3">Import of Pole Figures</h2><p>Let us start by loading some pole figures.</p>
+  {% highlight matlab %}
+  mtexdata <span class="string">ptx</span>
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 pf = PoleFigure  
   crystal symmetry : mmm
   specimen symmetry: -1
@@ -25,25 +28,44 @@ pf = PoleFigure
   h = (104), r = 72 x 17 points
   h = (110), r = 72 x 17 points
   h = (202), r = 72 x 17 points
-</pre><h2 id="4">Visualize the Data</h2><p>By default MTEX plots pole figures by drawing a circle at every measurement position of a pole figure and coloring it corresponding to the measured intensity.</p><pre class="codeinput">plot(pf)
+
+        {% endhighlight %}
+    <h2 id="4">Visualize the Data</h2><p>By default MTEX plots pole figures by drawing a circle at every measurement position of a pole figure and coloring it corresponding to the measured intensity.</p>
+  {% highlight matlab %}
+  plot(pf)
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigurePlot_01.png" %}
-<p>MTEX tries to guess the right size of the circle in order to produce a pleasing result. However, you can adjust this size using the option <b>MarkerSize</b>.</p><pre class="codeinput">plot(pf,<span class="string">'MarkerSize'</span>,4)
+<p>MTEX tries to guess the right size of the circle in order to produce a pleasing result. However, you can adjust this size using the option <b>MarkerSize</b>.</p>
+  {% highlight matlab %}
+  plot(pf,<span class="string">'MarkerSize'</span>,4)
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigurePlot_02.png" %}
-<h2 id="6">Contour Plots</h2><p>Some people like to have their raw pole figures to be drawn as contour plots. This feature is not yet generally supported by MTEX. Note that measured pole figure may be given at a very irregular grid which would make it necessary to interpolate before drawing contours. In this case, however, it seems to be more reasonable to first compute an ODF and than to draw contour plots of the recalculated pole figures.</p><p>Nevertheless, MTEX offers basic contour plots in the case of regular measurement grids.</p><pre class="codeinput">plot(pf,<span class="string">'contourf'</span>)
+<h2 id="6">Contour Plots</h2><p>Some people like to have their raw pole figures to be drawn as contour plots. This feature is not yet generally supported by MTEX. Note that measured pole figure may be given at a very irregular grid which would make it necessary to interpolate before drawing contours. In this case, however, it seems to be more reasonable to first compute an ODF and than to draw contour plots of the recalculated pole figures.</p><p>Nevertheless, MTEX offers basic contour plots in the case of regular measurement grids.</p>
+  {% highlight matlab %}
+  plot(pf,<span class="string">'contourf'</span>)
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigurePlot_03.png" %}
-<p>When drawing a colorbar next to the pole figure plots it is necessary to have the same color coding in all plots. This can be done as following</p><pre class="codeinput">mtexColorbar <span class="comment">% remove colorbars</span>
+<p>When drawing a colorbar next to the pole figure plots it is necessary to have the same color coding in all plots. This can be done as following</p>
+  {% highlight matlab %}
+  mtexColorbar <span class="comment">% remove colorbars</span>
 CLim(gcm,<span class="string">'equal'</span>);
 mtexColorbar <span class="comment">% add a single colorbar</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigurePlot_04.png" %}
-<h2 id="8">Plotting Recalculated Pole Figures</h2><p>In order to draw recalculated one first needs to compute an ODF.</p><pre class="codeinput">odf = calcODF(pf,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput"> 
+<h2 id="8">Plotting Recalculated Pole Figures</h2><p>In order to draw recalculated one first needs to compute an ODF.</p>
+  {% highlight matlab %}
+  odf = calcODF(pf,<span class="string">'silent'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : mmm
   specimen symmetry: -1
@@ -53,7 +75,12 @@ odf = ODF
     center: 29690 orientations, resolution: 5&deg;
     weight: 1
  
-</pre><p>Now smooth pole figures can be plotted for arbitrary crystallographic directions.</p><pre class="codeinput">plotPDF(odf,pf.h,<span class="string">'antipodal'</span>)
-</pre>
+
+        {% endhighlight %}
+    <p>Now smooth pole figures can be plotted for arbitrary crystallographic directions.</p>
+  {% highlight matlab %}
+  plotPDF(odf,pf.h,<span class="string">'antipodal'</span>)
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigurePlot_05.png" %}
 </div></body></html>

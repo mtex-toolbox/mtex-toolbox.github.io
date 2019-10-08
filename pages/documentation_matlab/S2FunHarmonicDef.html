@@ -1,6 +1,6 @@
 ---
 title: S2FunHarmonic
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunHarmonicDef.html
 folder: documentation
@@ -14,23 +14,36 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_S2FunHarmonicDef.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunHarmonicDef into the Matlab commandline">edit page</a></font><div><!--introduction--><p>S2FunHarmonic is the heart of S2Fun, therefore much effort is put into its functionality.</p><!--/introduction--><h2 id="1">Contents</h2><p>In the first part we will cover how to deal with univariate functions of the form</p><p>
+      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_S2FunHarmonicDef.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunHarmonicDef into the Matlab commandline">edit page</a></font><div><!--introduction--><p>S2FunHarmonic is the heart of S2Fun, therefore much effort is put into its functionality.</p><!--/introduction--><h2 id="1">Contents</h2><p>In the first part we will cover how to deal with univariate functions of the form</p><p>
   {% include inline_image.html file="S2FunHarmonicDef_eq12688510093716008662.png" %}
-</p><h2 id="3">Defining an univariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p><pre class="codeinput">nodes = equispacedS2Grid(<span class="string">'resolution'</span>,3*degree,<span class="string">'antipodal'</span>);
+</p><h2 id="3">Defining an univariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
+  {% highlight matlab %}
+  nodes = equispacedS2Grid(<span class="string">'resolution'</span>,3*degree,<span class="string">'antipodal'</span>);
 nodes = nodes(:);
-</pre><p>next we need to define function values for the vertices</p><pre class="codeinput">y = S2Fun.smiley(nodes);
+  {% endhighlight %}
+<p>next we need to define function values for the vertices</p>
+  {% highlight matlab %}
+  y = S2Fun.smiley(nodes);
 <span class="comment">% plot the discrete data</span>
 plot(nodes,y)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_01.png" %}
-<p>Finally the actual command to get <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p><pre class="codeinput">sF1 = interp(nodes, y, <span class="string">'harmonicApproximation'</span>)
+<p>Finally the actual command to get <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
+  {% highlight matlab %}
+  sF1 = interp(nodes, y, <span class="string">'harmonicApproximation'</span>)
 <span class="comment">% plot the spherical function</span>
 plot(sF1)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF1 = S2FunHarmonic  
  bandwidth: 48
  antipodal: true
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="S2FunHarmonicDef_02.png" %}
 <div><ul><li>The <tt>bandwidth</tt> property shows the maximal polynomial degree of the function.Internally for a given bandwidth there are stored 
   {% include inline_image.html file="S2FunHarmonicDef_eq07204186098443340480.png" %}
@@ -38,45 +51,83 @@ sF1 = S2FunHarmonic
   {% include inline_image.html file="S2FunHarmonicDef_eq05142536305060616777.png" %}
  holds for all 
   {% include inline_image.html file="S2FunHarmonicDef_eq03296369778268784901.png" %}
-.</li></ul></div><p>For the same result we could also run <tt>S2FunHarmonic.approximation(nodes, y)</tt> and give some additional options (<a href="S2FunHarmonic.approximation.html">see here</a>).</p><p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first lets define a function handle which takes <a href="vector3d_index.html"><tt>vector3d</tt></a> as an argument and returns double:</p><pre class="codeinput">f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
+.</li></ul></div><p>For the same result we could also run <tt>S2FunHarmonic.approximation(nodes, y)</tt> and give some additional options (<a href="S2FunHarmonic.approximation.html">see here</a>).</p><p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first lets define a function handle which takes <a href="vector3d_index.html"><tt>vector3d</tt></a> as an argument and returns double:</p>
+  {% highlight matlab %}
+  f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
 <span class="comment">% plot the function at discrete points</span>
 plot(nodes,f(nodes))
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_03.png" %}
-<p>Now we can call the quadrature command to get <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p><pre class="codeinput">sF2 = S2FunHarmonic.quadrature(f, <span class="string">'bandwidth'</span>, 150)
+<p>Now we can call the quadrature command to get <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
+  {% highlight matlab %}
+  sF2 = S2FunHarmonic.quadrature(f, <span class="string">'bandwidth'</span>, 150)
 
 plot(sF2)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF2 = S2FunHarmonic  
  bandwidth: 150
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="S2FunHarmonicDef_04.png" %}
-<div><ul><li>If we would leave the <tt>'bandwidth'</tt> option empty the default bandwidth would be considered, which is 128.</li><li>The quadrature is faster than the approximation, because it does not have to solve a system of equations. But the knowledge of the function handle is also a strong requirement.</li><li>For more options <a href="S2FunHarmonic.quadrature.html">see here</a>.</li></ul></div><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them as a column vector to the constructor of <tt>S2FunHarmonic</tt></p><pre class="codeinput">fhat = rand(25, 1);
+<div><ul><li>If we would leave the <tt>'bandwidth'</tt> option empty the default bandwidth would be considered, which is 128.</li><li>The quadrature is faster than the approximation, because it does not have to solve a system of equations. But the knowledge of the function handle is also a strong requirement.</li><li>For more options <a href="S2FunHarmonic.quadrature.html">see here</a>.</li></ul></div><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them as a column vector to the constructor of <tt>S2FunHarmonic</tt></p>
+  {% highlight matlab %}
+  fhat = rand(25, 1);
 sF3 = S2FunHarmonic(fhat)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF3 = S2FunHarmonic  
  bandwidth: 4
-</pre><h2 id="12">Visualization of univariate S2FunHarmonic</h2><p>There are different ways to visualize a <tt>S2FunHarmonic</tt></p><p>The default <tt>plot</tt>-command be default plots the function on the upper hemisphere</p><pre class="codeinput">plot(sF1);
-</pre>
+
+        {% endhighlight %}
+    <h2 id="12">Visualization of univariate S2FunHarmonic</h2><p>There are different ways to visualize a <tt>S2FunHarmonic</tt></p><p>The default <tt>plot</tt>-command be default plots the function on the upper hemisphere</p>
+  {% highlight matlab %}
+  plot(sF1);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_05.png" %}
-<div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p><pre class="codeinput">contour(sF1, <span class="string">'LineWidth'</span>, 2);
-</pre>
+<div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
+  {% highlight matlab %}
+  contour(sF1, <span class="string">'LineWidth'</span>, 2);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_06.png" %}
-<p>color plot without the contour lines</p><pre class="codeinput">pcolor(sF1);
-</pre>
+<p>color plot without the contour lines</p>
+  {% highlight matlab %}
+  pcolor(sF1);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_07.png" %}
-<p>3D plot of a sphere colored accordingly to the function values.</p><pre class="codeinput">plot3d(sF2);
-</pre>
+<p>3D plot of a sphere colored accordingly to the function values.</p>
+  {% highlight matlab %}
+  plot3d(sF2);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_08.png" %}
-<p>3D plot where the radius of the sphere is transformed according to the function values</p><pre class="codeinput">surf(sF2);
-</pre>
+<p>3D plot where the radius of the sphere is transformed according to the function values</p>
+  {% highlight matlab %}
+  surf(sF2);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_09.png" %}
-<p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p><pre class="codeinput">plotSection(sF2, zvector);
-</pre>
+<p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
+  {% highlight matlab %}
+  plotSection(sF2, zvector);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_10.png" %}
-<p>plotting the Fourier coefficients</p><pre class="codeinput">plotSpektra(sF1);
+<p>plotting the Fourier coefficients</p>
+  {% highlight matlab %}
+  plotSpektra(sF1);
 set(gca,<span class="string">'FontSize'</span>, 20);
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_11.png" %}
 <h2 id="20">Structural conventions of the input and output of multivariate S2FunHarmonic</h2><p>In this part we deal with multivariate functions of the form</p><p>
   {% include inline_image.html file="S2FunHarmonicDef_eq02005284333143081024.png" %}
@@ -98,56 +149,122 @@ set(gca,<span class="string">'FontSize'</span>, 20);
   {% include inline_image.html file="S2FunHarmonicDef_eq14700050704426719036.png" %}
  as follows. 
   {% include inline_image.html file="S2FunHarmonicDef_eq06598518767156971297.png" %}
-</p><h2 id="21">Defining a multivariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p><pre class="codeinput">nodes = equispacedS2Grid(<span class="string">'points'</span>, 1e5);
+</p><h2 id="21">Defining a multivariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
+  {% highlight matlab %}
+  nodes = equispacedS2Grid(<span class="string">'points'</span>, 1e5);
 nodes = nodes(:);
-</pre><p>Next we define function values for the vertices</p><pre class="codeinput">y = [S2Fun.smiley(nodes), (nodes.x.*nodes.y).^(1/4)];
-</pre><p>Now the actual command to get a 2x1 <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p><pre class="codeinput">sF1 = S2FunHarmonic.approximation(nodes, y)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+<p>Next we define function values for the vertices</p>
+  {% highlight matlab %}
+  y = [S2Fun.smiley(nodes), (nodes.x.*nodes.y).^(1/4)];
+  {% endhighlight %}
+<p>Now the actual command to get a 2x1 <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
+  {% highlight matlab %}
+  sF1 = S2FunHarmonic.approximation(nodes, y)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF1 = S2FunHarmonic  
  size: 2 x 1
  bandwidth: 224
-</pre><p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first let us define a function handle which takes <a href="vector3d_index.html"><tt>vector3d</tt></a> as an argument and returns double:</p><pre class="codeinput">f = @(v) [exp(v.x+v.y+v.z)+50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3) &gt; 0), v.x, v.y, v.z];
-</pre><p>Now we call the quadrature command to get 4x1 <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p><pre class="codeinput">sF2 = S2FunHarmonic.quadrature(f, <span class="string">'bandwidth'</span>, 50)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first let us define a function handle which takes <a href="vector3d_index.html"><tt>vector3d</tt></a> as an argument and returns double:</p>
+  {% highlight matlab %}
+  f = @(v) [exp(v.x+v.y+v.z)+50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3) &gt; 0), v.x, v.y, v.z];
+  {% endhighlight %}
+<p>Now we call the quadrature command to get 4x1 <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
+  {% highlight matlab %}
+  sF2 = S2FunHarmonic.quadrature(f, <span class="string">'bandwidth'</span>, 50)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF2 = S2FunHarmonic  
  size: 4 x 1
  bandwidth: 50
-</pre><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <tt>S2FunHarmonic</tt>.</p><pre class="codeinput">sF3 = S2FunHarmonic(eye(9))
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <tt>S2FunHarmonic</tt>.</p>
+  {% highlight matlab %}
+  sF3 = S2FunHarmonic(eye(9))
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF3 = S2FunHarmonic  
  size: 9 x 1
  bandwidth: 2
-</pre><div><ul><li>This command stores the nine first spherical harmonics in <tt>sF3</tt></li></ul></div><h2 id="29">Operations which differ from an univariate S2FunHarmonic</h2><p><b>Some default matrix and vector operations</b></p><p>You can concatenate and refer to functions as Matlab does with vectors and matrices</p><pre class="codeinput">sF4 = [sF1; sF2];
+
+        {% endhighlight %}
+    <div><ul><li>This command stores the nine first spherical harmonics in <tt>sF3</tt></li></ul></div><h2 id="29">Operations which differ from an univariate S2FunHarmonic</h2><p><b>Some default matrix and vector operations</b></p><p>You can concatenate and refer to functions as Matlab does with vectors and matrices</p>
+  {% highlight matlab %}
+  sF4 = [sF1; sF2];
 sF4(2:3);
-</pre><p>You can conjugate the Fourier-coefficients and transpose/ctranspose the multivariate <tt>S2FunHarmonic</tt>.</p><pre class="codeinput">conj(sF1);
+  {% endhighlight %}
+<p>You can conjugate the Fourier-coefficients and transpose/ctranspose the multivariate <tt>S2FunHarmonic</tt>.</p>
+  {% highlight matlab %}
+  conj(sF1);
 sF1.';
 sF1';
-</pre><p>Some other operations</p><pre class="codeinput">length(sF1);
+  {% endhighlight %}
+<p>Some other operations</p>
+  {% highlight matlab %}
+  length(sF1);
 size(sF2);
 sF3 = reshape(sF3, 3, []);
-</pre><p><b><tt>sum</tt> and <tt>mean</tt></b></p><p>If we do not specify further options to <tt>sum</tt> or <tt>mean</tt> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the meanvalue over a dimension of a multivariate <tt>S2FunHarmonic</tt>.</p><pre class="codeinput">sum(sF1, 1);
+  {% endhighlight %}
+<p><b><tt>sum</tt> and <tt>mean</tt></b></p><p>If we do not specify further options to <tt>sum</tt> or <tt>mean</tt> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the meanvalue over a dimension of a multivariate <tt>S2FunHarmonic</tt>.</p>
+  {% highlight matlab %}
+  sum(sF1, 1);
 sum(sF3, 2);
-</pre><p><b>min/max</b></p><p>If the <tt>min</tt> or <tt>max</tt> command gets a multivariate <tt>S2FunHarmonic</tt> the pointwise minimum or maximum is calculated along the first non-singelton dimension if not specified otherwise.</p><pre class="codeinput">min(sF3);
-</pre><p><b>Remark for matrix product</b></p><p>At this point the matrix product is implemented per element and not as the usual matrix product.</p><h2 id="36">Visualization of multivariate S2FunHarmonic</h2><p>There are different ways to visualize a multivariate <tt>S2FunHarmonic</tt></p><p>The default <tt>plot</tt>-command be default plots the functions on the upper hemisphere</p><pre class="codeinput">plot(sF1);
-</pre>
+  {% endhighlight %}
+<p><b>min/max</b></p><p>If the <tt>min</tt> or <tt>max</tt> command gets a multivariate <tt>S2FunHarmonic</tt> the pointwise minimum or maximum is calculated along the first non-singelton dimension if not specified otherwise.</p>
+  {% highlight matlab %}
+  min(sF3);
+  {% endhighlight %}
+<p><b>Remark for matrix product</b></p><p>At this point the matrix product is implemented per element and not as the usual matrix product.</p><h2 id="36">Visualization of multivariate S2FunHarmonic</h2><p>There are different ways to visualize a multivariate <tt>S2FunHarmonic</tt></p><p>The default <tt>plot</tt>-command be default plots the functions on the upper hemisphere</p>
+  {% highlight matlab %}
+  plot(sF1);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_12.png" %}
-<div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p><pre class="codeinput">contour(sF2, <span class="string">'LineWidth'</span>, 2);
-</pre>
+<div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
+  {% highlight matlab %}
+  contour(sF2, <span class="string">'LineWidth'</span>, 2);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_13.png" %}
-<p>color plot without the contour lines</p><pre class="codeinput">pcolor(sF3);
-</pre>
+<p>color plot without the contour lines</p>
+  {% highlight matlab %}
+  pcolor(sF3);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_14.png" %}
-<p>3D plot of a sphere colored accordingly to the function values.</p><pre class="codeinput">plot3d(sF2);
-</pre>
+<p>3D plot of a sphere colored accordingly to the function values.</p>
+  {% highlight matlab %}
+  plot3d(sF2);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_15.png" %}
-<p>3D plot where the radius of the sphere is transformed according to the function values</p><pre class="codeinput">surf(sF3);
-</pre>
+<p>3D plot where the radius of the sphere is transformed according to the function values</p>
+  {% highlight matlab %}
+  surf(sF3);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_16.png" %}
-<p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p><pre class="codeinput">plotSection(sF1, zvector);
-</pre>
+<p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
+  {% highlight matlab %}
+  plotSection(sF1, zvector);
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_17.png" %}
-<p>plotting the Fourier coefficients</p><pre class="codeinput">plotSpektra(sF2);
+<p>plotting the Fourier coefficients</p>
+  {% highlight matlab %}
+  plotSpektra(sF2);
 set(gca,<span class="string">'FontSize'</span>, 20);
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunHarmonicDef_18.png" %}
 </div></body></html>

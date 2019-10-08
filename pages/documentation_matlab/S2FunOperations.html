@@ -1,6 +1,6 @@
 ---
 title: script_S2FunOperations
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunOperations.html
 folder: documentation
@@ -14,42 +14,91 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_S2FunOperations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_S2FunOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunOperations into the Matlab commandline">edit page</a></font><div><h2 id="1">Operations</h2><p>The idea of <tt>S2Fun</tt> is to calculate with spherical functions similarly as Matlab does with vectors and matrices. In order to illustrate this consider the following two spherical functions</p><pre class="codeinput">sF1 = S2Fun.smiley;
+      --><title>script_S2FunOperations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_S2FunOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunOperations into the Matlab commandline">edit page</a></font><div><h2 id="1">Operations</h2><p>The idea of <tt>S2Fun</tt> is to calculate with spherical functions similarly as Matlab does with vectors and matrices. In order to illustrate this consider the following two spherical functions</p>
+  {% highlight matlab %}
+  sF1 = S2Fun.smiley;
 sF2 = S2FunHarmonic.unimodal(<span class="string">'halfwidth'</span>,10*degree)
 
 plot(sF1,<span class="string">'upper'</span>)
 nextAxis
 plot(sF2,<span class="string">'upper'</span>)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sF2 = S2FunHarmonic  
  bandwidth: 50
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="S2FunOperations_01.png" %}
-<h2 id="2">Basic arithmetic operations</h2><pre class="codeinput">plot(15 * sF1 + sF2,<span class="string">'upper'</span>)
-</pre>
+<h2 id="2">Basic arithmetic operations</h2>
+  {% highlight matlab %}
+  plot(15 * sF1 + sF2,<span class="string">'upper'</span>)
+  {% endhighlight %}
+
   {% include inline_image.html file="S2FunOperations_02.png" %}
-<pre class="codeinput"><span class="comment">% addition/subtraction</span>
+
+  {% highlight matlab %}
+  <span class="comment">% addition/subtraction</span>
 sF1+sF2; sF1+2;
 sF1-sF2; sF2-4;
-</pre><p>multiplication/division</p><pre class="codeinput">sF1.*sF2; 2.*sF1;
+  {% endhighlight %}
+<p>multiplication/division</p>
+  {% highlight matlab %}
+  sF1.*sF2; 2.*sF1;
 sF1./(sF2+1); 2./sF2; sF2./4;
-</pre><p>power</p><pre class="codeinput">sF1.^sF2; 2.^sF1; sF2.^4;
-</pre><p>absolute value of a function</p><pre class="codeinput">abs(sF1);
-</pre><p><b>min/max</b></p><p>calculates the local min/max of a single function</p><pre class="codeinput">[minvalue, minnodes] = min(sF1);
+  {% endhighlight %}
+<p>power</p>
+  {% highlight matlab %}
+  sF1.^sF2; 2.^sF1; sF2.^4;
+  {% endhighlight %}
+<p>absolute value of a function</p>
+  {% highlight matlab %}
+  abs(sF1);
+  {% endhighlight %}
+<p><b>min/max</b></p><p>calculates the local min/max of a single function</p>
+  {% highlight matlab %}
+  [minvalue, minnodes] = min(sF1);
 [maxvalue, maxnodes] = max(sF1);
-</pre><div><ul><li>as default <tt>min</tt> or <tt>max</tt> returns the smallest or the biggest value (global optima) with all nodes for which the value is obtained</li><li>with the option <tt>min(sF1, 'numLocal', n)</tt> the <tt>n</tt> nodes with the belonging biggest or smallest values are returned</li><li><tt>min(sF1)</tt> is the same as running <a href="S2Funharmonic.steepestDescent.html"><tt>steepestDescent</tt></a>|(sF1)|</li></ul></div><p>min/max of two functions in the pointwise sense</p><pre class="codeinput">min(sF1, sF2);
-</pre><div><ul><li>See all options of min/max <a href="S2FunHarmonic.min.html">here</a></li></ul></div><p><b>Other operations</b></p><p>calculate the 
+  {% endhighlight %}
+<div><ul><li>as default <tt>min</tt> or <tt>max</tt> returns the smallest or the biggest value (global optima) with all nodes for which the value is obtained</li><li>with the option <tt>min(sF1, 'numLocal', n)</tt> the <tt>n</tt> nodes with the belonging biggest or smallest values are returned</li><li><tt>min(sF1)</tt> is the same as running <a href="S2Funharmonic.steepestDescent.html"><tt>steepestDescent</tt></a>|(sF1)|</li></ul></div><p>min/max of two functions in the pointwise sense</p>
+  {% highlight matlab %}
+  min(sF1, sF2);
+  {% endhighlight %}
+<div><ul><li>See all options of min/max <a href="S2FunHarmonic.min.html">here</a></li></ul></div><p><b>Other operations</b></p><p>calculate the 
   {% include inline_image.html file="S2FunOperations_eq11809360406450963432.png" %}
 -norm, which is only the 
   {% include inline_image.html file="S2FunOperations_eq06246994178291117440.png" %}
--norm of the Fourier-coefficients</p><pre class="codeinput">norm(sF1);
-</pre><p>calculate the mean value of a function</p><pre class="codeinput">mean(sF1);
-</pre><p>calculate the surface integral of a function</p><pre class="codeinput">sum(sF1);
-</pre><p>rotate a function</p><pre class="codeinput">r = rotation.byEuler( [pi/4 0 0]);
+-norm of the Fourier-coefficients</p>
+  {% highlight matlab %}
+  norm(sF1);
+  {% endhighlight %}
+<p>calculate the mean value of a function</p>
+  {% highlight matlab %}
+  mean(sF1);
+  {% endhighlight %}
+<p>calculate the surface integral of a function</p>
+  {% highlight matlab %}
+  sum(sF1);
+  {% endhighlight %}
+<p>rotate a function</p>
+  {% highlight matlab %}
+  r = rotation.byEuler( [pi/4 0 0]);
 rotate(sF1, r);
-</pre><p>symmetrise a given function</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'6/m'</span>);
+  {% endhighlight %}
+<p>symmetrise a given function</p>
+  {% highlight matlab %}
+  cs = crystalSymmetry(<span class="string">'6/m'</span>);
 sFs = symmetrise(sF1, cs);
-</pre><div><ul><li><tt>sFs</tt> is of type <a href="S2FunHarmonicSym_index.html"><tt>S2FunHarmonicSym</tt></a></li></ul></div><p><b>Gradient</b></p><p>Calculate the gradient as a function <tt>G</tt> of type <a href="S2VectorFieldHarmonic_index.html"><tt>S2VectorFieldHarmonic</tt></a></p><pre class="codeinput">G = grad(sF1);
-</pre><p>The direct evaluation of the gradient is faster and returns <a href="vector3d_index.html"><tt>vector3d</tt></a></p><pre class="codeinput">nodes = vector3d.rand(100);
+  {% endhighlight %}
+<div><ul><li><tt>sFs</tt> is of type <a href="S2FunHarmonicSym_index.html"><tt>S2FunHarmonicSym</tt></a></li></ul></div><p><b>Gradient</b></p><p>Calculate the gradient as a function <tt>G</tt> of type <a href="S2VectorFieldHarmonic_index.html"><tt>S2VectorFieldHarmonic</tt></a></p>
+  {% highlight matlab %}
+  G = grad(sF1);
+  {% endhighlight %}
+<p>The direct evaluation of the gradient is faster and returns <a href="vector3d_index.html"><tt>vector3d</tt></a></p>
+  {% highlight matlab %}
+  nodes = vector3d.rand(100);
 grad(sF1, nodes);
-</pre></div></body></html>
+  {% endhighlight %}
+</div></body></html>

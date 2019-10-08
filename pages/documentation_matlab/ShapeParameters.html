@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss various geometric properties of grains. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p><pre class="codeinput"><span class="comment">% load sample EBSD data set</span>
+      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss various geometric properties of grains. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+  {% highlight matlab %}
+  <span class="comment">% load sample EBSD data set</span>
 mtexdata <span class="string">forsterite</span>
 
 <span class="comment">% restrict it to a subregion of interest.</span>
@@ -36,7 +38,10 @@ plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span
 hold <span class="string">on</span>
 plot(grains.boundary,<span class="string">'lineWidth'</span>,2)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -83,85 +88,160 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId
  Scan unit : um
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="ShapeParameters_01.png" %}
-<h2 id="2">Grain size, area, diameter, perimeter and calliper</h2><p>Once grains have been reconstructed, several shape parameters can be computed. Those can be visualized either as histograms, or used to colorize an grain map.</p><p>The most basic properties are grainSize and grain area. Those can be computed by</p><pre class="codeinput">grains(9).grainSize
+<h2 id="2">Grain size, area, diameter, perimeter and calliper</h2><p>Once grains have been reconstructed, several shape parameters can be computed. Those can be visualized either as histograms, or used to colorize an grain map.</p><p>The most basic properties are grainSize and grain area. Those can be computed by</p>
+  {% highlight matlab %}
+  grains(9).grainSize
 grains(9).area
-</pre><pre class="codeoutput">ans =
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
      1
 ans =
   170.6081
-</pre><p>Hereby <b>grainSize</b> referes to the number of pixels the belong to a certain grain while <b>area</b> represents the actual area measured in (um)^2. Simarly the two one-dimensional meassures <b>boundarySize</b> and <b>perimeter</b> gives the length of the grain boundary in number of segments and in in um, respectively.</p><pre class="codeinput">grains(9).boundarySize
+
+        {% endhighlight %}
+    <p>Hereby <b>grainSize</b> referes to the number of pixels the belong to a certain grain while <b>area</b> represents the actual area measured in (um)^2. Simarly the two one-dimensional meassures <b>boundarySize</b> and <b>perimeter</b> gives the length of the grain boundary in number of segments and in in um, respectively.</p>
+  {% highlight matlab %}
+  grains(9).boundarySize
 grains(9).perimeter
-</pre><pre class="codeoutput">ans =
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
      4
 ans =
    83.9653
-</pre><p>Another, one dimensional measure is the <b>diameter</b> which refers to the longest distance between any two boundary points and is given im um as well</p><pre class="codeinput">grains(9).diameter
-</pre><pre class="codeoutput">ans =
+
+        {% endhighlight %}
+    <p>Another, one dimensional measure is the <b>diameter</b> which refers to the longest distance between any two boundary points and is given im um as well</p>
+  {% highlight matlab %}
+  grains(9).diameter
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
    40.5107
-</pre><p>The diameter is a special case of the caliper or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain</p><pre class="codeinput">grains(9).calliper(<span class="string">'longest'</span>)
+
+        {% endhighlight %}
+    <p>The diameter is a special case of the caliper or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain</p>
+  {% highlight matlab %}
+  grains(9).calliper(<span class="string">'longest'</span>)
 grains(9).calliper(<span class="string">'shortest'</span>)
-</pre><pre class="codeoutput">ans =
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
    40.5107
 ans =
     6.3359
-</pre><p>Another way to investigate the perimeter is using the grain boundary. The first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p><pre class="codeinput">length(grains(9).boundary)
+
+        {% endhighlight %}
+    <p>Another way to investigate the perimeter is using the grain boundary. The first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
+  {% highlight matlab %}
+  length(grains(9).boundary)
 sum(grains(9).boundary.segLength)
-</pre><pre class="codeoutput">ans =
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
      4
 ans =
    83.9653
-</pre><h2 id="7">Fitted ellipses</h2><p>Many shape parameters refers to ellipses fit to the grains</p><pre class="codeinput">[omega,a,b] = grains.fitEllipse;
+
+        {% endhighlight %}
+    <h2 id="7">Fitted ellipses</h2><p>Many shape parameters refers to ellipses fit to the grains</p>
+  {% highlight matlab %}
+  [omega,a,b] = grains.fitEllipse;
 plot(grains,<span class="string">'linewidth'</span>,4)
 plotEllipse(grains.centroid,a,b,omega,<span class="string">'lineColor'</span>,<span class="string">'w'</span>,<span class="string">'linewidth'</span>,2)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_02.png" %}
-<p>in the above lines the midpoint of the ellipse is given by <a href="grain2d.centroid.html"><b>grains.centroid</b></a>. The variable <b>omega</b> is the angle describing the rotation of the ellipses and <b>a</b> and <b>b</b> are the length of the longest and shortest half axis of the ellipses, respectively. Note, that the ellipses are scalled such that their areas coincide with the actual grain areas.</p><p>The quotient a/b between the longest and the shortest axis is called aspect ration and can be computed via</p><pre class="codeinput">grains(9).aspectRatio
-</pre><pre class="codeoutput">ans =
+<p>in the above lines the midpoint of the ellipse is given by <a href="grain2d.centroid.html"><b>grains.centroid</b></a>. The variable <b>omega</b> is the angle describing the rotation of the ellipses and <b>a</b> and <b>b</b> are the length of the longest and shortest half axis of the ellipses, respectively. Note, that the ellipses are scalled such that their areas coincide with the actual grain areas.</p><p>The quotient a/b between the longest and the shortest axis is called aspect ration and can be computed via</p>
+  {% highlight matlab %}
+  grains(9).aspectRatio
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
     6.5087
-</pre><p>The radius and perimeter of the fitted ellipse can be computed by</p><pre class="codeinput">grains(9).equivalentRadius
+
+        {% endhighlight %}
+    <p>The radius and perimeter of the fitted ellipse can be computed by</p>
+  {% highlight matlab %}
+  grains(9).equivalentRadius
 grains(9).equivalentPerimeter
-</pre><pre class="codeoutput">ans =
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
     7.3693
 ans =
    46.3025
-</pre><p>Let have a look at the difference between perimeter of the ellipse and perimeter of the grain:</p><pre class="codeinput">plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
+
+        {% endhighlight %}
+    <p>Let have a look at the difference between perimeter of the ellipse and perimeter of the grain:</p>
+  {% highlight matlab %}
+  plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
 setColorRange([0,0.5])
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_03.png" %}
-<p>In this plot round shapes will have values close to zero while concave shapes will get large values. A similar measure is the shape factor which is defined as the ratio between the grain perimeter and the equivalent perimeter</p><pre class="codeinput">plot(grains,grains.shapeFactor)
+<p>In this plot round shapes will have values close to zero while concave shapes will get large values. A similar measure is the shape factor which is defined as the ratio between the grain perimeter and the equivalent perimeter</p>
+  {% highlight matlab %}
+  plot(grains,grains.shapeFactor)
 setColorRange([1,2])
 mtexColorbar(<span class="string">'title'</span>,<span class="string">'shape factor'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_04.png" %}
-<p>Another simular measures is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull.</p><pre class="codeinput">plot(grains,grains.paris)
+<p>Another simular measures is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull.</p>
+  {% highlight matlab %}
+  plot(grains,grains.paris)
 mtexColorbar(<span class="string">'title'</span>,<span class="string">'paris'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_05.png" %}
-<p>A bit strange quantity</p><pre class="codeinput">plot(grains,log10(2.*grains.equivalentRadius))
+<p>A bit strange quantity</p>
+  {% highlight matlab %}
+  plot(grains,log10(2.*grains.equivalentRadius))
 cb = mtexColorbar;
 labels = num2str(round(10.^(cb.Ticks))');
 cb.TickLabels=labels;
 drawNow(gcm)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_06.png" %}
-<h2 id="15">Histograms</h2><pre class="codeinput">close <span class="string">all</span>
+<h2 id="15">Histograms</h2>
+  {% highlight matlab %}
+  close <span class="string">all</span>
 histogram(grains.area)
 xlabel(<span class="string">'grain area'</span>)
 ylabel(<span class="string">'number of grains'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_07.png" %}
-<p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p><pre class="codeinput">hist(grains,grains.area)
+<p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p>
+  {% highlight matlab %}
+  hist(grains,grains.area)
 xlabel(<span class="string">'grain area'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_08.png" %}
-<h2 id="17">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p><pre class="codeinput">close <span class="string">all</span>
+<h2 id="17">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p>
+  {% highlight matlab %}
+  close <span class="string">all</span>
 scatter(grains.paris,grains.shapeFactor)
 xlabel(<span class="string">'paris'</span>)
 ylabel(<span class="string">'shape factor'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="ShapeParameters_09.png" %}
 <p>Obviously, there is a strong correlation between those two quantities.</p><h2 id="19">List of all geometric grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
    <table class="usertable">

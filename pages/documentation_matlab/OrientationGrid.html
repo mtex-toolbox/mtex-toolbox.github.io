@@ -1,6 +1,6 @@
 ---
 title: Grids of Orientation
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: OrientationGrid.html
 folder: documentation
@@ -14,12 +14,17 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grids of Orientation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_OrientationGrid.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationGrid into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In many usecases one is interested in grid of orientations that somehow uniformely cover the orientation space. As there are many different grid there is a seperate topic <a href="SO3GridDemo.html">orientation grids</a>. The simplest way of generating equispaced orientations with given resolution is by the command</p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
+      --><title>Grids of Orientation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_OrientationGrid.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationGrid into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In many usecases one is interested in grid of orientations that somehow uniformely cover the orientation space. As there are many different grid there is a seperate topic <a href="SO3GridDemo.html">orientation grids</a>. The simplest way of generating equispaced orientations with given resolution is by the command</p>
+  {% highlight matlab %}
+  <span class="comment">% define a crystal symmetry</span>
 cs = crystalSymmetry(<span class="string">'432'</span>)
 
 <span class="comment">% define a grid of orientations</span>
 ori = equispacedSO3Grid(cs,<span class="string">'resolution'</span>,5*degree)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 cs = crystalSymmetry  
  
   symmetry: 432    
@@ -29,15 +34,29 @@ cs = crystalSymmetry
 ori = SO3Grid  
   symmetry: "432" - "1"
   grid    : 4958 orientations, resolution: 5&deg;
-</pre><p>Lets visualize them</p><pre class="codeinput">plot(ori,<span class="string">'axisAngle'</span>)
-</pre><pre class="codeoutput">plot 2000 random orientations out of 4958 given orientations
-</pre>
+
+        {% endhighlight %}
+    <p>Lets visualize them</p>
+  {% highlight matlab %}
+  plot(ori,<span class="string">'axisAngle'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        plot 2000 random orientations out of 4958 given orientations
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="OrientationGrid_01.png" %}
-<h2 id="3">Check for equidistribution</h2><pre class="codeinput">odf = unimodalODF(ori)
+<h2 id="3">Check for equidistribution</h2>
+  {% highlight matlab %}
+  odf = unimodalODF(ori)
 
 plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs))
 mtexColorbar
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : 432
   specimen symmetry: 1
@@ -47,24 +66,45 @@ odf = ODF
     center: 4958 orientations, resolution: 5&deg;
     weight: 1
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="OrientationGrid_02.png" %}
-<pre class="codeinput">ori = regularSO3Grid(cs,<span class="string">'resolution'</span>,5*degree)
-</pre><pre class="codeoutput"> 
+
+  {% highlight matlab %}
+  ori = regularSO3Grid(cs,<span class="string">'resolution'</span>,5*degree)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ori = orientation  
   size: 72 x 19 x 18
   crystal symmetry : 432
   specimen symmetry: 1
  
-</pre><pre class="codeinput">plot(ori,<span class="string">'axisAngle'</span>)
-</pre><pre class="codeoutput">plot 2000 random orientations out of 24624 given orientations
-</pre>
+
+        {% endhighlight %}
+    
+  {% highlight matlab %}
+  plot(ori,<span class="string">'axisAngle'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        plot 2000 random orientations out of 24624 given orientations
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="OrientationGrid_03.png" %}
-<pre class="codeinput">odf = unimodalODF(ori)
+
+  {% highlight matlab %}
+  odf = unimodalODF(ori)
 
 plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs))
 mtexColorbar
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : 432
   specimen symmetry: 1
@@ -74,6 +114,8 @@ odf = ODF
     center: Rotations: 24624 x 1
     weight: 1
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="OrientationGrid_04.png" %}
 </div></body></html>

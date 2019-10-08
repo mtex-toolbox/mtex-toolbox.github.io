@@ -1,6 +1,6 @@
 ---
 title: Slip Systems
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: SlipSystems.html
 folder: documentation
@@ -14,8 +14,13 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Slip Systems</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_SlipSystems.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SlipSystems into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to analyze slip transmission at grain boundaries</p><!--/introduction--><h2 id="3">Contents</h2><h2 id="4">Burgers vector and normal directions</h2><p>Consider hexagonal symmetry of alpha-Titanium</p><pre class="codeinput">cs = crystalSymmetry(<span class="string">'622'</span>,[3,3,4.7],<span class="string">'x||a'</span>,<span class="string">'mineral'</span>,<span class="string">'Titanium (Alpha)'</span>)
-</pre><pre class="codeoutput"> 
+      --><title>Slip Systems</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_SlipSystems.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SlipSystems into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to analyze slip transmission at grain boundaries</p><!--/introduction--><h2 id="3">Contents</h2><h2 id="4">Burgers vector and normal directions</h2><p>Consider hexagonal symmetry of alpha-Titanium</p>
+  {% highlight matlab %}
+  cs = crystalSymmetry(<span class="string">'622'</span>,[3,3,4.7],<span class="string">'x||a'</span>,<span class="string">'mineral'</span>,<span class="string">'Titanium (Alpha)'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 cs = crystalSymmetry  
  
   mineral        : Titanium (Alpha) 
@@ -23,8 +28,15 @@ cs = crystalSymmetry
   a, b, c        : 3, 3, 4.7        
   reference frame: X||a, Y||b*, Z||c
  
-</pre><p>Then basal slip is defined by the Burgers vector (or slip direction)</p><pre class="codeinput">b = Miller(2,-1,-1,0,cs,<span class="string">'UVTW'</span>)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>Then basal slip is defined by the Burgers vector (or slip direction)</p>
+  {% highlight matlab %}
+  b = Miller(2,-1,-1,0,cs,<span class="string">'UVTW'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 b = Miller  
  size: 1 x 1
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
@@ -32,27 +44,55 @@ b = Miller
   V -1
   T -1
   W  0
-</pre><p>and the slip plane normal</p><pre class="codeinput">n = Miller(0,1,-1,0,cs,<span class="string">'HKIL'</span>)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>and the slip plane normal</p>
+  {% highlight matlab %}
+  n = Miller(0,1,-1,0,cs,<span class="string">'HKIL'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 n = Miller  
  size: 1 x 1
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
-</pre><p>Accordingly we can define a slip system in MTEX by</p><pre class="codeinput">sSBasal = slipSystem(b,n)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>Accordingly we can define a slip system in MTEX by</p>
+  {% highlight matlab %}
+  sSBasal = slipSystem(b,n)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sSBasal = slipSystem  
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
  size: 1 x 1
   U    V    T    W  | H    K    I    L CRSS
   2   -1   -1    0    0    1   -1    0    1
-</pre><p>The most important slip systems for cubic, hexagonal and trigonal crystal lattices are already implemented into MTEX. Those can be accessed by</p><pre class="codeinput">sSBasal = slipSystem.basal(cs)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>The most important slip systems for cubic, hexagonal and trigonal crystal lattices are already implemented into MTEX. Those can be accessed by</p>
+  {% highlight matlab %}
+  sSBasal = slipSystem.basal(cs)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sSBasal = slipSystem  
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
  size: 1 x 1
   U    V    T    W  | H    K    I    L CRSS
   1    1   -2    0    0    0    0    1    1
-</pre><p>Obviously, this is not the only basal slip system in hexagonal lattices. There are also symmetrically equivalent ones, which can be computed by</p><pre class="codeinput">sSBasalSym = sSBasal.symmetrise(<span class="string">'antipodal'</span>)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>Obviously, this is not the only basal slip system in hexagonal lattices. There are also symmetrically equivalent ones, which can be computed by</p>
+  {% highlight matlab %}
+  sSBasalSym = sSBasal.symmetrise(<span class="string">'antipodal'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sSBasalSym = slipSystem  
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
  size: 3 x 1
@@ -60,9 +100,18 @@ sSBasalSym = slipSystem
    1    1   -2    0    0    0    0    1    1
    1   -2    1    0    0    0    0    1    1
   -2    1    1    0    0    0    0    1    1
-</pre><p>The length of the burgers vector, i.e., the amount of displacment is</p><pre class="codeinput">sSBasalSym.b.norm
-</pre><pre class="codeoutput">ans =
+
+        {% endhighlight %}
+    <p>The length of the burgers vector, i.e., the amount of displacment is</p>
+  {% highlight matlab %}
+  sSBasalSym.b.norm
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
     3.0000
     3.0000
     3.0000
-</pre><h2 id="11">Rotating slip systems</h2></div></body></html>
+
+        {% endhighlight %}
+    <h2 id="11">Rotating slip systems</h2></div></body></html>

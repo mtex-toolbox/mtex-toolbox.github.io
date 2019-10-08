@@ -1,6 +1,6 @@
 ---
 title: The Piezoelectricity Tensor
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: PiezoElectricity.html
 folder: documentation
@@ -14,12 +14,17 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Piezoelectricity Tensor</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_PiezoElectricity.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PiezoElectricity into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to work with piezoelectricity</p><!--/introduction--><p>This m-file mainly demonstrates how to illustrate the directional magnitude of a tensor with mtex</p><h2 id="3">Contents</h2><p>at first, let us import some piezoelectric contents for a quartz specimen.</p><pre class="codeinput">CS = crystalSymmetry(<span class="string">'32'</span>, [4.916 4.916 5.4054], <span class="string">'X||a*'</span>, <span class="string">'Z||c'</span>, <span class="string">'mineral'</span>, <span class="string">'Quartz'</span>);
+      --><title>The Piezoelectricity Tensor</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_PiezoElectricity.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PiezoElectricity into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to work with piezoelectricity</p><!--/introduction--><p>This m-file mainly demonstrates how to illustrate the directional magnitude of a tensor with mtex</p><h2 id="3">Contents</h2><p>at first, let us import some piezoelectric contents for a quartz specimen.</p>
+  {% highlight matlab %}
+  CS = crystalSymmetry(<span class="string">'32'</span>, [4.916 4.916 5.4054], <span class="string">'X||a*'</span>, <span class="string">'Z||c'</span>, <span class="string">'mineral'</span>, <span class="string">'Quartz'</span>);
 
 fname = fullfile(mtexDataPath,<span class="string">'tensor'</span>, <span class="string">'Single_RH_quartz_poly.P'</span>);
 
 P = tensor.load(fname,CS,<span class="string">'propertyname'</span>,<span class="string">'piecoelectricity'</span>,<span class="string">'unit'</span>,<span class="string">'C/N'</span>,<span class="string">'DoubleConvention'</span>)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 P = tensor  
   propertyname    : piecoelectricity                
   unit            : C/N                             
@@ -31,49 +36,78 @@ P = tensor
      0     0     0 -0.67     0   4.6
    2.3  -2.3     0     0  0.67     0
      0     0     0     0     0     0
-</pre><h2 id="5">Plotting the magnitude surface</h2><p>The default plot of the magnitude, which indicates, in which direction we have the most polarization. By default, we restrict ourselves to the unique region implied by crystal symmetry</p><pre class="codeinput"><span class="comment">% set some colormap well suited for tensor visualisation</span>
+
+        {% endhighlight %}
+    <h2 id="5">Plotting the magnitude surface</h2><p>The default plot of the magnitude, which indicates, in which direction we have the most polarization. By default, we restrict ourselves to the unique region implied by crystal symmetry</p>
+  {% highlight matlab %}
+  <span class="comment">% set some colormap well suited for tensor visualisation</span>
 setMTEXpref(<span class="string">'defaultColorMap'</span>,blue2redColorMap);
 
 plot(P)
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PiezoElectricity_01.png" %}
-<p>but also, we can plot the whole crystal behavior</p><pre class="codeinput">close <span class="string">all</span>
+<p>but also, we can plot the whole crystal behavior</p>
+  {% highlight matlab %}
+  close <span class="string">all</span>
 plot(P,<span class="string">'complete'</span>,<span class="string">'smooth'</span>,<span class="string">'upper'</span>)
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PiezoElectricity_02.png" %}
-<p>Most often, the polarization is illustrated as surface magnitude</p><pre class="codeinput">close <span class="string">all</span>
+<p>Most often, the polarization is illustrated as surface magnitude</p>
+  {% highlight matlab %}
+  close <span class="string">all</span>
 surf(P.directionalMagnitude)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PiezoElectricity_03.png" %}
-<p>Note, that for directions of negative polarization the surface is mapped onto the axis of positive, which then let the surface appear as a double coverage</p><p>Quite a famous example in various standard literature is a section through the surface because it can easily be described as an analytical solution. We just specify the plane normal vector</p><pre class="codeinput">plotSection(P.directionalMagnitude,vector3d.Z)
+<p>Note, that for directions of negative polarization the surface is mapped onto the axis of positive, which then let the surface appear as a double coverage</p><p>Quite a famous example in various standard literature is a section through the surface because it can easily be described as an analytical solution. We just specify the plane normal vector</p>
+  {% highlight matlab %}
+  plotSection(P.directionalMagnitude,vector3d.Z)
 xlabel(<span class="string">'x'</span>)
 ylabel(<span class="string">'y'</span>)
 drawNow(gcm)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PiezoElectricity_04.png" %}
-<p>so we are plotting the polarization in the xy-plane, or the yz-plane with</p><pre class="codeinput">plotSection(P.directionalMagnitude,vector3d.X)
+<p>so we are plotting the polarization in the xy-plane, or the yz-plane with</p>
+  {% highlight matlab %}
+  plotSection(P.directionalMagnitude,vector3d.X)
 ylabel(<span class="string">'y'</span>)
 zlabel(<span class="string">'z'</span>)
 drawNow(gcm)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PiezoElectricity_05.png" %}
-<h2 id="11">Mean Tensor Calculation</h2><p>Let us import some data, which was originally published by Mainprice, D., Lloyd, G.E. and Casey , M. (1993) Individual orientation measurements in quartz polycrystals: advantages and limitations for texture and petrophysical property determinations. J. of Structural Geology, 15, pp.1169-1187</p><pre class="codeinput">fname = fullfile(mtexDataPath,<span class="string">'orientation'</span>, <span class="string">'Tongue_Quartzite_Bunge_Euler'</span>);
+<h2 id="11">Mean Tensor Calculation</h2><p>Let us import some data, which was originally published by Mainprice, D., Lloyd, G.E. and Casey , M. (1993) Individual orientation measurements in quartz polycrystals: advantages and limitations for texture and petrophysical property determinations. J. of Structural Geology, 15, pp.1169-1187</p>
+  {% highlight matlab %}
+  fname = fullfile(mtexDataPath,<span class="string">'orientation'</span>, <span class="string">'Tongue_Quartzite_Bunge_Euler'</span>);
 
 ori = loadOrientation(fname,CS,<span class="string">'interface'</span>,<span class="string">'generic'</span> <span class="keyword">...</span>
   , <span class="string">'ColumnNames'</span>, { <span class="string">'Euler 1'</span> <span class="string">'Euler 2'</span> <span class="string">'Euler 3'</span>}, <span class="string">'Bunge'</span>, <span class="string">'active rotation'</span>)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ori = orientation  
   size: 382 x 1
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
  
-</pre><p>The figure on p.1184 of the publication</p><pre class="codeinput">Pm = ori.calcTensor(P)
+
+        {% endhighlight %}
+    <p>The figure on p.1184 of the publication</p>
+  {% highlight matlab %}
+  Pm = ori.calcTensor(P)
 
 plot(Pm)
 mtexColorbar
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 Pm = tensor  
   propertyname    : piecoelectricity
   unit            : C/N             
@@ -84,13 +118,18 @@ Pm = tensor
  -10.48   34.2 -23.72 -32.75 -64.24 -26.18
  -18.02  -3.15  21.17  62.42  29.67  44.39
  -41.35  40.44   0.91  32.48 -23.42   6.47
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="PiezoElectricity_06.png" %}
-<pre class="codeinput">close <span class="string">all</span>
+
+  {% highlight matlab %}
+  close <span class="string">all</span>
 plot(Pm)
 mtexColorbar
 
 setMTEXpref(<span class="string">'defaultColorMap'</span>,WhiteJetColorMap)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="PiezoElectricity_07.png" %}
 </div></body></html>
