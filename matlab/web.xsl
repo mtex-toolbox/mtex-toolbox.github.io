@@ -190,17 +190,17 @@ To make changes, update the MATLAB code and republish this document.
 
 <!-- Detecting M-Code in Comments-->
 <xsl:template match="text/mcode-xmlized">
-  {% highlight matlab %}
-  <xsl:apply-templates/><xsl:text></xsl:text>
-  {% endhighlight %}
+{% highlight matlab %}
+<xsl:apply-templates/><xsl:text></xsl:text>
+{% endhighlight %}
 </xsl:template>
 
 <!-- Code input and output -->
 
 <xsl:template match="mcode-xmlized">
-  {% highlight matlab %}
-  <xsl:apply-templates/><xsl:text></xsl:text>
-  {% endhighlight %}
+{% highlight matlab %}
+<xsl:apply-templates/><xsl:text></xsl:text>
+{% endhighlight %}
 </xsl:template>
 
 <xsl:template match="mcodeoutput">
@@ -209,9 +209,9 @@ To make changes, update the MATLAB code and republish this document.
       <xsl:value-of select="substring(.,7,string-length(.)-14)" disable-output-escaping="yes"/>
     </xsl:when>
     <xsl:otherwise>
-        {% highlight matlab %}
-        <xsl:apply-templates/><xsl:text></xsl:text>
-        {% endhighlight %}
+{% highlight matlab %}
+<xsl:apply-templates/><xsl:text></xsl:text>
+{% endhighlight %}
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
