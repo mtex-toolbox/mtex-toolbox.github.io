@@ -191,7 +191,7 @@ To make changes, update the MATLAB code and republish this document.
 <!-- Detecting M-Code in Comments-->
 <xsl:template match="text/mcode-xmlized">
 {% highlight matlab %}
-<xsl:apply-templates/><xsl:text></xsl:text>
+<xsl:value-of select="."/>
 {% endhighlight %}
 </xsl:template>
 
@@ -199,13 +199,13 @@ To make changes, update the MATLAB code and republish this document.
 
 <xsl:template match="mcode-xmlized">
 {% highlight matlab %}
-<xsl:apply-templates/><xsl:text></xsl:text>
+<xsl:value-of select="."/>
 {% endhighlight %}
 </xsl:template>
 
 <xsl:template match="mcodeoutput">
 {% highlight plaintext %}
-<xsl:apply-templates/><xsl:text></xsl:text>
+<xsl:value-of select="."/>
 {% endhighlight %}
 </xsl:template>
 
