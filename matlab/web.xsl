@@ -204,16 +204,9 @@ To make changes, update the MATLAB code and republish this document.
 </xsl:template>
 
 <xsl:template match="mcodeoutput">
-  <xsl:choose>
-    <xsl:when test="concat(substring(.,0,7),substring(.,string-length(.)-7,7))='&lt;html&gt;&lt;/html&gt;'">
-      <xsl:value-of select="substring(.,7,string-length(.)-14)" disable-output-escaping="yes"/>
-    </xsl:when>
-    <xsl:otherwise>
-{% highlight matlab %}
+{% highlight plaintext %}
 <xsl:apply-templates/><xsl:text></xsl:text>
 {% endhighlight %}
-    </xsl:otherwise>
-  </xsl:choose>
 </xsl:template>
 
 
