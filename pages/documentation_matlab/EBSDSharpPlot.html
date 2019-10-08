@@ -1,6 +1,6 @@
 ---
 title: Sharp Color Keys
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDSharpPlot.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Sharp Color Keys</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_EBSDSharpPlot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSharpPlot into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss color keys that are particular useful when analyzing data with very small deviation in orientation. Let us consider the following calcite data set</p><pre class="codeinput"><span class="comment">% plotting conventions</span>
+      --><title>Sharp Color Keys</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_EBSDSharpPlot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSharpPlot into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss color keys that are particular useful when analyzing data with very small deviation in orientation. Let us consider the following calcite data set</p>
+  {% highlight matlab %}
+  <span class="comment">% plotting conventions</span>
 plotx2east, plotb2east
 mtexdata <span class="string">sharp</span>
 
@@ -24,9 +26,10 @@ ipfKey = ipfColorKey(ebsd);
 
 close <span class="string">all</span>;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-</pre><pre class="codeoutput"> loading data ...
- saving data to /home/hielscher/mtex/master/data/sharp.mat
- 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral       Color  Symmetry  Crystal reference frame
@@ -36,9 +39,13 @@ ebsd = EBSD
  Properties: x, y
  Scan unit : um
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="EBSDSharpPlot_01.png" %}
-<p>and have a look into the 100 inverse pole figure.</p><pre class="codeinput"><span class="comment">% compute the positions in the inverse pole figure</span>
+<p>and have a look into the 100 inverse pole figure.</p>
+  {% highlight matlab %}
+  <span class="comment">% compute the positions in the inverse pole figure</span>
 h = ebsd.orientations .\ vector3d.X;
 h = project2FundamentalRegion(h);
 
@@ -47,19 +54,29 @@ color = h.rho ./ degree;
 
 plotIPDF(ebsd.orientations,vector3d.X,<span class="string">'property'</span>,color,<span class="string">'MarkerSize'</span>,3,<span class="string">'grid'</span>)
 mtexColorbar
-</pre><pre class="codeoutput">  I'm plotting 8333 random orientations out of 20119 given orientations
-</pre>
+  {% endhighlight %}
+
+        {% highlight matlab %}
+          I'm plotting 8333 random orientations out of 20119 given orientations
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="EBSDSharpPlot_02.png" %}
-<p>We see that all individual orientations are clustered around azimuth angle 115 degrees with some outliers at 65 degree. In order to increase the contrast for the main group, we restrict the color range from 110 degree to 120 degree.</p><pre class="codeinput">caxis([110 120]);
+<p>We see that all individual orientations are clustered around azimuth angle 115 degrees with some outliers at 65 degree. In order to increase the contrast for the main group, we restrict the color range from 110 degree to 120 degree.</p>
+  {% highlight matlab %}
+  caxis([110 120]);
 
 <span class="comment">% by the following lines we colorcode the outliers in purple.</span>
 cmap = colormap;
 cmap(end,:) = [1 0 1]; <span class="comment">% make last color purple</span>
 cmap(1,:) = [1 0 1];   <span class="comment">% make first color purple</span>
 colormap(cmap)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_03.png" %}
-<p>The same colorcoding we can now apply to the EBSD map.</p><pre class="codeinput"><span class="comment">% plot the data with the customized color</span>
+<p>The same colorcoding we can now apply to the EBSD map.</p>
+  {% highlight matlab %}
+  <span class="comment">% plot the data with the customized color</span>
 plot(ebsd,color)
 
 <span class="comment">% set scaling of the angles to 110 - 120 degree</span>
@@ -70,9 +87,12 @@ cmap = colormap;
 cmap(end,:) = [1 0 1];
 cmap(1,:) = [1 0 1];
 colormap(cmap)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_04.png" %}
-<h2 id="5">Sharpening the default colorcoding</h2><p>Next, we want to apply the same ideas as above to the default MTEX color key, i.e. we want to stretch the colors such that they cover just the orientations of interest.</p><pre class="codeinput">ipfKey = ipfHSVKey(ebsd.CS.properGroup);
+<h2 id="5">Sharpening the default colorcoding</h2><p>Next, we want to apply the same ideas as above to the default MTEX color key, i.e. we want to stretch the colors such that they cover just the orientations of interest.</p>
+  {% highlight matlab %}
+  ipfKey = ipfHSVKey(ebsd.CS.properGroup);
 
 <span class="comment">% To this end, we first compute the inverse pole figure direction such that</span>
 <span class="comment">% the mean orientation is just at the gray spot of the inverse pole figure</span>
@@ -80,27 +100,49 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations,<span class="string">
 
 close <span class="string">all</span>;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-</pre>
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        Warning: Possibly applying an orientation to an object in
+specimen coordinates! 
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="EBSDSharpPlot_05.png" %}
-<p>We observe that the orientation map is almost completely gray, except for the  outliers which appears black. Next, we use the option <tt>maxAngle</tt> to increase contrast in the grayish part</p><pre class="codeinput">ipfKey.maxAngle = 7.5*degree;
+<p>We observe that the orientation map is almost completely gray, except for the  outliers which appears black. Next, we use the option <tt>maxAngle</tt> to increase contrast in the grayish part</p>
+  {% highlight matlab %}
+  ipfKey.maxAngle = 7.5*degree;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_06.png" %}
-<p>You may play around with the option <tt>maxAngle</tt> to obtain better results. As for interpretation keep in mind that white color represents the mean orientation and the color becomes more saturated and later dark as the orientation to color diverges from the mean orientation.</p><p>Let's have a look at the corresponding color map.</p><pre class="codeinput">plot(ipfKey,<span class="string">'resolution'</span>,0.25*degree)
+<p>You may play around with the option <tt>maxAngle</tt> to obtain better results. As for interpretation keep in mind that white color represents the mean orientation and the color becomes more saturated and later dark as the orientation to color diverges from the mean orientation.</p><p>Let's have a look at the corresponding color map.</p>
+  {% highlight matlab %}
+  plot(ipfKey,<span class="string">'resolution'</span>,0.25*degree)
 
 <span class="comment">% plot orientations into the color key</span>
 hold <span class="string">on</span>
 plotIPDF(ebsd.orientations,<span class="string">'points'</span>,10,<span class="string">'MarkerSize'</span>,1,<span class="string">'MarkerFaceColor'</span>,<span class="string">'w'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'w'</span>)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput">  I'm plotting 10 random orientations out of 20119 given orientations
-</pre>
+  {% endhighlight %}
+
+        {% highlight matlab %}
+          I'm plotting 10 random orientations out of 20119 given orientations
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="EBSDSharpPlot_07.png" %}
-<p>observe how in the inverse pole figure the orientations are scattered closely around the white center. Together with the fact that the transition from white to color is quite rapidly, this gives a high contrast.</p><h2 id="9">The axis angle color key</h2><pre class="codeinput">[grains,ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,1.5*degree);
+<p>observe how in the inverse pole figure the orientations are scattered closely around the white center. Together with the fact that the transition from white to color is quite rapidly, this gives a high contrast.</p><h2 id="9">The axis angle color key</h2>
+  {% highlight matlab %}
+  [grains,ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,1.5*degree);
 ebsd(grains(grains.grainSize&lt;=3)) = [];
 [grains,ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,1.5*degree);
 
 grains = smooth(grains,5);
-</pre><pre class="codeinput">ipfKey = axisAngleColorKey(ebsd(<span class="string">'indexed'</span>));
+  {% endhighlight %}
+
+  {% highlight matlab %}
+  ipfKey = axisAngleColorKey(ebsd(<span class="string">'indexed'</span>));
 
 <span class="comment">% use for the reference orientation the grain mean orientation</span>
 ipfKey.oriRef = grains.meanOrientation(ebsd.grainId);
@@ -110,9 +152,12 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 hold <span class="string">on</span>
 plot(grains.boundary,<span class="string">'lineWidth'</span>,4)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_08.png" %}
-<pre class="codeinput">F = halfQuadraticFilter;
+
+  {% highlight matlab %}
+  F = halfQuadraticFilter;
 F.alpha = 0.01;
 F.eps = 1e-6;
 F.tol = 1e-10;
@@ -127,9 +172,12 @@ plot(ebsdS(<span class="string">'indexed'</span>),ipfKey.orientation2color(ebsdS
 <span class="comment">%hold on</span>
 <span class="comment">%plot(grains.boundary,'lineWidth',4)</span>
 <span class="comment">%hold off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_09.png" %}
-<pre class="codeinput">F = infimalConvolutionFilter;
+
+  {% highlight matlab %}
+  F = infimalConvolutionFilter;
 F.lambda = 0.01;
 F.mu = 0.02;
 
@@ -151,9 +199,12 @@ plot(ebsdS(<span class="string">'indexed'</span>),ipfKey.orientation2color(ebsdS
 hold <span class="string">on</span>
 plot(grains.boundary,<span class="string">'lineWidth'</span>,4)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_10.png" %}
-<p>Another example is when analyzing the orientation distribution within grains</p><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+<p>Another example is when analyzing the orientation distribution within grains</p>
+  {% highlight matlab %}
+  mtexdata <span class="string">forsterite</span>
 ebsd = ebsd(<span class="string">'indexed'</span>);
 
 <span class="comment">% segment grains</span>
@@ -163,7 +214,10 @@ ebsd = ebsd(<span class="string">'indexed'</span>);
 largeGrains = grains(grains.grainSize &gt; 800)
 
 ebsd = ebsd(largeGrains(1))
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -196,15 +250,22 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId
  Scan unit : um
  
-</pre><p>When plotting one specific grain with its orientations we see that they all are very similar and, hence, get the same color</p><pre class="codeinput"><span class="comment">% plot a grain</span>
+
+        {% endhighlight %}
+    <p>When plotting one specific grain with its orientations we see that they all are very similar and, hence, get the same color</p>
+  {% highlight matlab %}
+  <span class="comment">% plot a grain</span>
 close <span class="string">all</span>
 plot(largeGrains(1).boundary,<span class="string">'linewidth'</span>,2)
 hold <span class="string">on</span>
 plot(ebsd,ebsd.orientations)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDSharpPlot_11.png" %}
-<p>when applying the option sharp MTEX colors the mean orientation as white and scales the maximum saturation to fit the maximum misorientation angle. This way deviations of the orientation within one grain can be visualized.</p><pre class="codeinput"><span class="comment">% plot a grain</span>
+<p>when applying the option sharp MTEX colors the mean orientation as white and scales the maximum saturation to fit the maximum misorientation angle. This way deviations of the orientation within one grain can be visualized.</p>
+  {% highlight matlab %}
+  <span class="comment">% plot a grain</span>
 plot(largeGrains(1).boundary,<span class="string">'linewidth'</span>,2)
 hold <span class="string">on</span>
 ipfKey = ipfHSVKey(ebsd);
@@ -212,6 +273,13 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations) * ipfKey.whiteCenter
 ipfKey.maxAngle = 2*degree;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        Warning: Possibly applying an orientation to an object in
+specimen coordinates! 
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="EBSDSharpPlot_12.png" %}
 </div></body></html>

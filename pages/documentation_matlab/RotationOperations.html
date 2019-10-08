@@ -1,6 +1,6 @@
 ---
 title: Calculating with Rotations
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: RotationOperations.html
 folder: documentation
@@ -14,8 +14,13 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Calculating with Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_RotationOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit RotationOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Rotating Vectors</h2><p>Let</p><pre class="codeinput">o = rotation.byEuler(90*degree,90*degree,0*degree)
-</pre><pre class="codeoutput"> 
+      --><title>Calculating with Rotations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_RotationOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit RotationOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Rotating Vectors</h2><p>Let</p>
+  {% highlight matlab %}
+  o = rotation.byEuler(90*degree,90*degree,0*degree)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 o = rotation  
   size: 1 x 1
  
@@ -23,22 +28,46 @@ o = rotation
   phi1  Phi phi2 Inv.
     90   90    0    0
  
-</pre><p>a certain rotation. Then the rotation of the xvector is computed via</p><pre class="codeinput">v = o * xvector
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>a certain rotation. Then the rotation of the xvector is computed via</p>
+  {% highlight matlab %}
+  v = o * xvector
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 v = vector3d  
  size: 1 x 1
   x y z
   0 1 0
-</pre><p>The inverse rotation is computed via the <a href="rotation.mldivide.html">backslash operator</a></p><pre class="codeinput">o \ v
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>The inverse rotation is computed via the <a href="rotation.mldivide.html">backslash operator</a></p>
+  {% highlight matlab %}
+  o \ v
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = vector3d  
  size: 1 x 1
   x y z
   1 0 0
-</pre><h2 id="4">Concatenating Rotations</h2><p>Let</p><pre class="codeinput">rot1 = rotation.byEuler(90*degree,0,0);
+
+        {% endhighlight %}
+    <h2 id="4">Concatenating Rotations</h2><p>Let</p>
+  {% highlight matlab %}
+  rot1 = rotation.byEuler(90*degree,0,0);
 rot2 = rotation.byEuler(0,60*degree,0);
-</pre><p>be two rotations. Then the rotation defined by applying first rotation one and then rotation two is computed by</p><pre class="codeinput">rot = rot2 * rot1
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+<p>be two rotations. Then the rotation defined by applying first rotation one and then rotation two is computed by</p>
+  {% highlight matlab %}
+  rot = rot2 * rot1
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 rot = rotation  
   size: 1 x 1
  
@@ -46,21 +75,42 @@ rot = rotation
   phi1  Phi phi2 Inv.
      0   60   90    0
  
-</pre><h2 id="6">Rotational angle and the rotational axis</h2><p>Then rotational angle and the axis of rotation can be computed via then commands <a href="quaternion.angle.html">angle(rot)</a> and <a href="quaternion.axis.html">axis(rot)</a></p><pre class="codeinput">rot.angle / degree
+
+        {% endhighlight %}
+    <h2 id="6">Rotational angle and the rotational axis</h2><p>Then rotational angle and the axis of rotation can be computed via then commands <a href="quaternion.angle.html">angle(rot)</a> and <a href="quaternion.axis.html">axis(rot)</a></p>
+  {% highlight matlab %}
+  rot.angle / degree
 
 rot.axis
-</pre><pre class="codeoutput">ans =
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
   104.4775
  
 ans = vector3d  
  size: 1 x 1
          x         y         z
   0.447214 -0.447214  0.774597
-</pre><p>If two rotations are specifies the command <a href="quaternion.angle.html">angle(rot1,rot2)</a> computes the rotational angle between both rotations</p><pre class="codeinput">angle(rot1,rot2) / degree
-</pre><pre class="codeoutput">ans =
+
+        {% endhighlight %}
+    <p>If two rotations are specifies the command <a href="quaternion.angle.html">angle(rot1,rot2)</a> computes the rotational angle between both rotations</p>
+  {% highlight matlab %}
+  angle(rot1,rot2) / degree
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        ans =
   104.4775
-</pre><h2 id="8">The inverse Rotation</h2><p>The inverse rotation you get from the command <a href="quaternion.inv.html">inv(rot)</a></p><pre class="codeinput">inv(rot)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <h2 id="8">The inverse Rotation</h2><p>The inverse rotation you get from the command <a href="quaternion.inv.html">inv(rot)</a></p>
+  {% highlight matlab %}
+  inv(rot)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = rotation  
   size: 1 x 1
  
@@ -68,11 +118,20 @@ ans = rotation
   phi1  Phi phi2 Inv.
     90   60  180    0
  
-</pre><h2 id="9">Conversion into Euler Angles and Rodrigues Parametrisation</h2><p>There are methods to transform rotations in almost any other parameterization of rotations as they are:</p><div><ul><li><a href="quaternion.Euler.html,">Euler(rot)</a>   in Euler angle</li><li><a href="quaternion.Rodrigues.html,">Rodrigues(rot)</a>  in Rodrigues parameter</li></ul></div><pre class="codeinput">[alpha,beta,gamma] = Euler(rot,<span class="string">'Matthies'</span>)
-</pre><pre class="codeoutput">alpha =
+
+        {% endhighlight %}
+    <h2 id="9">Conversion into Euler Angles and Rodrigues Parametrisation</h2><p>There are methods to transform rotations in almost any other parameterization of rotations as they are:</p><div><ul><li><a href="quaternion.Euler.html,">Euler(rot)</a>   in Euler angle</li><li><a href="quaternion.Rodrigues.html,">Rodrigues(rot)</a>  in Rodrigues parameter</li></ul></div>
+  {% highlight matlab %}
+  [alpha,beta,gamma] = Euler(rot,<span class="string">'Matthies'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        alpha =
     4.7124
 beta =
     1.0472
 gamma =
     3.1416
-</pre></div></body></html>
+
+        {% endhighlight %}
+    </div></body></html>

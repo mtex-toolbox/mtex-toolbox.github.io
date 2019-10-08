@@ -1,6 +1,6 @@
 ---
 title: Triple points
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: TriplePoints.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Triple points</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_TriplePoints.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TriplePoints into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to detect triple points</p><!--/introduction--><h2 id="1">Calculation of triple points</h2><p>MTEX automatically computes triple points during grain reconstruction. They are acessable similarly to <a href="BoundaryAnalysis.html">grain boundaries</a> as an property of the grain list.</p><pre class="codeinput"><span class="comment">% import some EBSD data set</span>
+      --><title>Triple points</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_TriplePoints.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TriplePoints into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to detect triple points</p><!--/introduction--><h2 id="1">Calculation of triple points</h2><p>MTEX automatically computes triple points during grain reconstruction. They are acessable similarly to <a href="BoundaryAnalysis.html">grain boundaries</a> as an property of the grain list.</p>
+  {% highlight matlab %}
+  <span class="comment">% import some EBSD data set</span>
 mtexdata <span class="string">small</span>
 
 <span class="comment">% compute grains</span>
@@ -22,7 +24,10 @@ grains = calcGrains(ebsd(<span class="string">'indexed'</span>));
 
 <span class="comment">% extract all triple points</span>
 tP = grains.triplePoints
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -47,8 +52,15 @@ tP = triplePointList
       2   Enstatite   Enstatite    Diopside
       1   Enstatite    Diopside    Diopside
      11    Diopside    Diopside    Diopside
-</pre><h2 id="2">Index triple points by phase</h2><p>You may index triple points by the adjacent phases. The following command gives you all triple points with at least one phase being Forsterite</p><pre class="codeinput">tP(<span class="string">'Forsterite'</span>)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <h2 id="2">Index triple points by phase</h2><p>You may index triple points by the adjacent phases. The following command gives you all triple points with at least one phase being Forsterite</p>
+  {% highlight matlab %}
+  tP(<span class="string">'Forsterite'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = triplePointList  
  
  points   mineral 1   mineral 2   mineral 3
@@ -58,15 +70,26 @@ ans = triplePointList
       8  Forsterite  Forsterite    Diopside
      16  Forsterite   Enstatite    Diopside
       4  Forsterite    Diopside    Diopside
-</pre><p>The following command gives you all triple points with at least two phases being Forsterite</p><pre class="codeinput">tP(<span class="string">'Forsterite'</span>,<span class="string">'Forsterite'</span>)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>The following command gives you all triple points with at least two phases being Forsterite</p>
+  {% highlight matlab %}
+  tP(<span class="string">'Forsterite'</span>,<span class="string">'Forsterite'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = triplePointList  
  
  points   mineral 1   mineral 2   mineral 3
      15  Forsterite  Forsterite  Forsterite
       7  Forsterite  Forsterite   Enstatite
       8  Forsterite  Forsterite    Diopside
-</pre><p>Finaly, we may mark all inner Diopside triple points</p><pre class="codeinput"><span class="comment">% smooth the grains a bit</span>
+
+        {% endhighlight %}
+    <p>Finaly, we may mark all inner Diopside triple points</p>
+  {% highlight matlab %}
+  <span class="comment">% smooth the grains a bit</span>
 grains = smooth(grains,2);
 
 <span class="comment">% and plot them</span>
@@ -76,9 +99,12 @@ plot(grains);
 hold <span class="string">on</span>
 plot(tP(<span class="string">'Diopside'</span>,<span class="string">'Diopside'</span>,<span class="string">'Diopside'</span>),<span class="string">'displayName'</span>,<span class="string">'Di-Di-Di'</span>,<span class="string">'color'</span>,<span class="string">'b'</span>)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="TriplePoints_01.png" %}
-<h2 id="5">Index triple points by grains</h2><p>Since, triple points are asociated to grains we may single out triple points that belong to a specific grain or some subset of grains.</p><pre class="codeinput"><span class="comment">% find the index of the largest grain</span>
+<h2 id="5">Index triple points by grains</h2><p>Since, triple points are asociated to grains we may single out triple points that belong to a specific grain or some subset of grains.</p>
+  {% highlight matlab %}
+  <span class="comment">% find the index of the largest grain</span>
 [~,id] = max(grains.area);
 
 <span class="comment">% the triple points that belong to the largest grain</span>
@@ -90,9 +116,12 @@ hold <span class="string">on</span>
 plot(grains.boundary)
 plot(tP,<span class="string">'color'</span>,<span class="string">'r'</span>)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="TriplePoints_02.png" %}
-<h2 id="6">Index triple points by grain boundary</h2><p>Triple points are not only a property of grains but also of grain boundaries. Thus we may ask for all triple points that belong to Fosterite - Forsterite boundaries with misorientation angle larger then 60 degree</p><pre class="codeinput"><span class="comment">% all Fosterite - Forsterite boundary segments</span>
+<h2 id="6">Index triple points by grain boundary</h2><p>Triple points are not only a property of grains but also of grain boundaries. Thus we may ask for all triple points that belong to Fosterite - Forsterite boundaries with misorientation angle larger then 60 degree</p>
+  {% highlight matlab %}
+  <span class="comment">% all Fosterite - Forsterite boundary segments</span>
 gB_Fo = grains.boundary(<span class="string">'Forsterite'</span>,<span class="string">'Forsterite'</span>)
 
 <span class="comment">% Fo - Fo segments with misorientation angle larger 60 degree</span>
@@ -104,7 +133,10 @@ hold <span class="string">on</span>
 plot(gB_large,<span class="string">'linewidth'</span>,2,<span class="string">'linecolor'</span>,<span class="string">'w'</span>)
 plot(gB_large.triplePoints,<span class="string">'color'</span>,<span class="string">'m'</span>)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 gB_Fo = grainBoundary  
  
  Segments   mineral 1   mineral 2
@@ -114,9 +146,13 @@ gB_large = grainBoundary
  
  Segments   mineral 1   mineral 2
        55  Forsterite  Forsterite
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="TriplePoints_03.png" %}
-<h2 id="7">Boundary segments from triple points</h2><p>On the other hand we may also ask for the boundary segments that build up a triple point. These are stored as the property boundaryId for each triple points.</p><pre class="codeinput"><span class="comment">% lets take Forsterite triple points</span>
+<h2 id="7">Boundary segments from triple points</h2><p>On the other hand we may also ask for the boundary segments that build up a triple point. These are stored as the property boundaryId for each triple points.</p>
+  {% highlight matlab %}
+  <span class="comment">% lets take Forsterite triple points</span>
 tP = grains.triplePoints(<span class="string">'Fo'</span>,<span class="string">'Fo'</span>,<span class="string">'Fo'</span>);
 
 <span class="comment">% the boundary segments which form the triple points</span>
@@ -127,24 +163,38 @@ plot(grains)
 hold <span class="string">on</span>
 plot(gB,<span class="string">'lineColor'</span>,<span class="string">'w'</span>,<span class="string">'linewidth'</span>,2)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="TriplePoints_04.png" %}
-<p>Once we have extracted the boundary segments adjecent to a triple point we may also extract the corresponding misorientations. The following command gives a n x 3 list of misorientations where n is the number of triple points</p><pre class="codeinput">mori = gB.misorientation
-</pre><pre class="codeoutput"> 
+<p>Once we have extracted the boundary segments adjecent to a triple point we may also extract the corresponding misorientations. The following command gives a n x 3 list of misorientations where n is the number of triple points</p>
+  {% highlight matlab %}
+  mori = gB.misorientation
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 mori = misorientation  
   size: 15 x 3
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
   antipodal:         true
  
-</pre><p>Hence, we can compute for each triple point the sum of misorientation angles by</p><pre class="codeinput">sumMisAngle = sum(mori.angle,2);
-</pre><p>and my visualize it by</p><pre class="codeinput">plot(grains,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
+
+        {% endhighlight %}
+    <p>Hence, we can compute for each triple point the sum of misorientation angles by</p>
+  {% highlight matlab %}
+  sumMisAngle = sum(mori.angle,2);
+  {% endhighlight %}
+<p>and my visualize it by</p>
+  {% highlight matlab %}
+  plot(grains,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
 hold <span class="string">on</span>
 plot(tP,sumMisAngle ./ degree,<span class="string">'markerEdgeColor'</span>,<span class="string">'w'</span>)
 hold <span class="string">off</span>
 mtexColorMap(blue2redColorMap)
 CLim(gcm,[80,180])
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="TriplePoints_05.png" %}
 </div></body></html>

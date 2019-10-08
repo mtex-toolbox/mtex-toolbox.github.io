@@ -1,6 +1,6 @@
 ---
 title: Dislocation Systems
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: dislocationSystem_index.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Dislocation Systems</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_dislocationSystem_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit dislocationSystem_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This section describes the class <b>dislocationSystem</b>.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Class Description</h2><p>Dislocation are microscopic displacements within the regular atom lattice of a crystaline material ussualy as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p><h2 id="4">SUB: Edge Dislocations</h2><p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p><pre class="codeinput"><span class="comment">% define a crystal symmetry</span>
+      --><title>Dislocation Systems</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_dislocationSystem_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit dislocationSystem_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This section describes the class <b>dislocationSystem</b>.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Class Description</h2><p>Dislocation are microscopic displacements within the regular atom lattice of a crystaline material ussualy as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p><h2 id="4">SUB: Edge Dislocations</h2><p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p>
+  {% highlight matlab %}
+  <span class="comment">% define a crystal symmetry</span>
 cs = crystalSymmetry(<span class="string">'432'</span>);
 
 <span class="comment">% define a burgers vector in crystal coordinates</span>
@@ -25,7 +27,10 @@ l = Miller(1,-1,-2,cs,<span class="string">'uvw'</span>)
 
 <span class="comment">% setup the dislocation system</span>
 dS = dislocationSystem(b,l)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 b = Miller  
  size: 1 x 1
  symmetry: 432
@@ -46,7 +51,11 @@ dS = dislocationSystem
  Burgers vector  line vector  energy
       [1  1  0]    [1 -1 -2]       1
  
-</pre><h2 id="5">SUB: Screw Dislocations</h2><p>Screw dislocations are characterized by the fact that Burgers vector and line vector are perpendicular to each other.</p><pre class="codeinput"><span class="comment">% define a burgers vector in crystal coordinates</span>
+
+        {% endhighlight %}
+    <h2 id="5">SUB: Screw Dislocations</h2><p>Screw dislocations are characterized by the fact that Burgers vector and line vector are perpendicular to each other.</p>
+  {% highlight matlab %}
+  <span class="comment">% define a burgers vector in crystal coordinates</span>
 b = Miller(1,1,0,cs,<span class="string">'uvw'</span>)
 
 <span class="comment">% define a line vector in crystal coordinates</span>
@@ -54,7 +63,10 @@ l = Miller(1,1,0,cs,<span class="string">'uvw'</span>)
 
 <span class="comment">% setup the dislocation system</span>
 dS = dislocationSystem(b,l)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 b = Miller  
  size: 1 x 1
  symmetry: 432
@@ -75,12 +87,19 @@ dS = dislocationSystem
  Burgers vector  energy
       [1  1  0]       1
  
-</pre><h2 id="6">SUB: Slip Systems</h2><p>Dislocation systems are tightly related to <a href="slipSystem_index.html">slip systems</a>. Given a set of slip systems the corresponding dislocation systems can be computed by</p><pre class="codeinput"><span class="comment">% dominant slip systems in cubic fcc material</span>
+
+        {% endhighlight %}
+    <h2 id="6">SUB: Slip Systems</h2><p>Dislocation systems are tightly related to <a href="slipSystem_index.html">slip systems</a>. Given a set of slip systems the corresponding dislocation systems can be computed by</p>
+  {% highlight matlab %}
+  <span class="comment">% dominant slip systems in cubic fcc material</span>
 sS = symmetrise(slipSystem.fcc(cs))
 
 <span class="comment">% the corresponding dislocation systems</span>
 dS = dislocationSystem(sS)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 sS = slipSystem  
  symmetry: 432
  size: 24 x 1
@@ -109,6 +128,7 @@ sS = slipSystem
   -1   -1    0    1   -1    1    1
    0   -1   -1    1   -1    1    1
    1    0   -1    1   -1    1    1
+Warning: Miller indices are converted to hkl 
  
 dS = dislocationSystem  
  symmetry: 432
@@ -148,8 +168,16 @@ dS = dislocationSystem
       (1  1  0)       1
       (1  0 -1)       1
  
-</pre><h2 id="7">SUB: Dominant Dislocation Systems</h2><pre class="codeinput">dS = dislocationSystem.bcc(cs)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <h2 id="7">SUB: Dominant Dislocation Systems</h2>
+  {% highlight matlab %}
+  dS = dislocationSystem.bcc(cs)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        Warning: Miller indices are converted to hkl 
+ 
 dS = dislocationSystem  
  symmetry: 432
  edge dislocations : 48 x 1
@@ -210,11 +238,20 @@ dS = dislocationSystem
      (-1  1  1)       1
       (1  1 -1)       1
  
-</pre><h2 id="8">The Dislocation Tensor</h2><p>As each dislocation corresponds to an deformation of the atom lattice a dislocation can also be described by a deformation matrix. This matrix is the dyadic product between the Burgers vector and the line vector and can be computed by</p><pre class="codeinput">dS.tensor
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <h2 id="8">The Dislocation Tensor</h2><p>As each dislocation corresponds to an deformation of the atom lattice a dislocation can also be described by a deformation matrix. This matrix is the dyadic product between the Burgers vector and the line vector and can be computed by</p>
+  {% highlight matlab %}
+  dS.tensor
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = dislocationDensityTensor  
   size   : 52 x 1   
   unit   : au       
   rank   : 2 (3 x 3)
   mineral: 432      
-</pre><p>The unit of the deformation tensor is the unit of the burgers vector which is assumet to be au in MTEX.</p><h2 id="10">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="dislocationSystem..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.  Syntax.html"><tt>  Syntax</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.    dS = dislocationSystem(b,l).html"><tt>    dS = dislocationSystem(b,l)</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.    dS = dislocationSystem(sS).html"><tt>    dS = dislocationSystem(sS)</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.  Input.html"><tt>  Input</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.   b.html"><tt>   b</tt></a></td><td>@Miller Burgers vector</td></tr><tr><td width="200px"><a href="dislocationSystem.   n.html"><tt>   n</tt></a></td><td>@Miller line vector</td></tr><tr><td width="200px"><a href="dislocationSystem.   sS.html"><tt>   sS</tt></a></td><td>@slipSystem</td></tr><tr><td width="200px"><a href="dislocationSystem.   pr.html"><tt>   pr</tt></a></td><td>poisson ratio</td></tr></table></p></div></body></html>
+
+        {% endhighlight %}
+    <p>The unit of the deformation tensor is the unit of the burgers vector which is assumet to be au in MTEX.</p><h2 id="10">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="dislocationSystem..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.  Syntax.html"><tt>  Syntax</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.    dS = dislocationSystem(b,l).html"><tt>    dS = dislocationSystem(b,l)</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.    dS = dislocationSystem(sS).html"><tt>    dS = dislocationSystem(sS)</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.  Input.html"><tt>  Input</tt></a></td><td/></tr><tr><td width="200px"><a href="dislocationSystem.   b.html"><tt>   b</tt></a></td><td>@Miller Burgers vector</td></tr><tr><td width="200px"><a href="dislocationSystem.   n.html"><tt>   n</tt></a></td><td>@Miller line vector</td></tr><tr><td width="200px"><a href="dislocationSystem.   sS.html"><tt>   sS</tt></a></td><td>@slipSystem</td></tr><tr><td width="200px"><a href="dislocationSystem.   pr.html"><tt>   pr</tt></a></td><td>poisson ratio</td></tr></table></p></div></body></html>

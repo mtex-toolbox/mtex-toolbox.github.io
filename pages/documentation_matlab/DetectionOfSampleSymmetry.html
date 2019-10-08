@@ -1,6 +1,6 @@
 ---
 title: Detection of Sample Symmetry
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: DetectionOfSampleSymmetry.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DetectionOfSampleSymmetry into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p><pre class="codeinput">CS = crystalSymmetry(<span class="string">'cubic'</span>);
+      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DetectionOfSampleSymmetry into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p>
+  {% highlight matlab %}
+  CS = crystalSymmetry(<span class="string">'cubic'</span>);
 SS = specimenSymmetry(<span class="string">'222'</span>);
 
 <span class="comment">% some component center</span>
@@ -32,7 +34,10 @@ odf = unimodalODF(ori(:),<span class="string">'weights'</span>,c,<span class="st
 <span class="comment">% lets plot some pole figures</span>
 h = [Miller(1,1,1,CS),Miller(2,0,0,CS),Miller(2,2,0,CS)];
 plotPDF(odf,h,<span class="string">'antipodal'</span>,<span class="string">'silent'</span>,<span class="string">'complete'</span>)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 222
@@ -42,9 +47,13 @@ odf = ODF
     center: Rotations: 4 x 1
     weight: 1
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="DetectionOfSampleSymmetry_01.png" %}
-<h2 id="2">Reconstruct an ODF from simulated EBSD data</h2><p>Next we simulated some EBSD data, rotate them and estimate an ODF from the individual orientations.</p><pre class="codeinput"><span class="comment">% define a sample rotation</span>
+<h2 id="2">Reconstruct an ODF from simulated EBSD data</h2><p>Next we simulated some EBSD data, rotate them and estimate an ODF from the individual orientations.</p>
+  {% highlight matlab %}
+  <span class="comment">% define a sample rotation</span>
 <span class="comment">%rot = rotation.byEuler(0*degree,0*degree,1*degree);</span>
 rot = rotation.byEuler(15*degree,12*degree,-5*degree);
 
@@ -58,7 +67,10 @@ odf_est = calcODF(ori,<span class="string">'halfwidth'</span>,10*degree)
 
 <span class="comment">% and visualize it</span>
 figure, plotPDF(odf_est,h,<span class="string">'antipodal'</span>,8,<span class="string">'silent'</span>);
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ori = orientation  
   size: 1 x 1000
   crystal symmetry : m-3m
@@ -71,51 +83,69 @@ odf_est = ODF
  
   Harmonic portion:
     degree: 25
-    weight: 1
- 
-</pre>
+    progress: 100%
+progress: 100%
+progress: 100%
+progress: 100%
+ans =
+   15.6088
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
-<h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p><pre class="codeinput">[odf_corrected,rot_inv] = centerSpecimen(odf_est);
+<h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p>
+  {% highlight matlab %}
+  [odf_corrected,rot_inv] = centerSpecimen(odf_est);
 
 figure
 plotPDF(odf_corrected,h,<span class="string">'antipodal'</span>,8,<span class="string">'silent'</span>)
 
 <span class="comment">% the difference between the applied rotation and the estimate rotation</span>
 angle(rot,inv(rot_inv)) / degree
-</pre><pre class="codeoutput">progress: 100%
-progress: 100%
-progress: 100%
-progress: 100%
-ans =
-   15.6088
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
-<h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <tt>centerSpecimen</tt> to an ODF estimated from pole figure data. Lets start by importing them</p><pre class="codeinput">fname = fullfile(mtexDataPath,<span class="string">'PoleFigure'</span>,<span class="string">'aachen_exp.EXP'</span>);
+<h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <tt>centerSpecimen</tt> to an ODF estimated from pole figure data. Lets start by importing them</p>
+  {% highlight matlab %}
+  fname = fullfile(mtexDataPath,<span class="string">'PoleFigure'</span>,<span class="string">'aachen_exp.EXP'</span>);
 pf = PoleFigure.load(fname);
 
 plot(pf,<span class="string">'silent'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="DetectionOfSampleSymmetry_04.png" %}
-<p>In a second step we compute an ODF from the pole figure data</p><pre class="codeinput">odf = calcODF(pf,<span class="string">'silent'</span>)
+<p>In a second step we compute an ODF from the pole figure data</p>
+  {% highlight matlab %}
+  odf = calcODF(pf,<span class="string">'silent'</span>)
 
 plotPDF(odf,h,<span class="string">'antipodal'</span>,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 1
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: 4895 orientations, resolution: 5&deg;
+    center: 4892 orientations, resolution: 5&deg;
     weight: 1
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}
-<p>Finally, we detect the orthotropic symmetry axes a1, a2, a3 by</p><pre class="codeinput">[~,~,a1,a2] = centerSpecimen(odf,yvector)
+<p>Finally, we detect the orthotropic symmetry axes a1, a2, a3 by</p>
+  {% highlight matlab %}
+  [~,~,a1,a2] = centerSpecimen(odf,yvector)
 a3 = cross(a1,a2)
 
 annotate([a1,a2,a3],<span class="string">'label'</span>,{<span class="string">'RD'</span>,<span class="string">'TD'</span>,<span class="string">'ND'</span>},<span class="string">'backgroundcolor'</span>,<span class="string">'w'</span>,<span class="string">'MarkerSize'</span>,8)
-</pre><pre class="codeoutput">progress: 100%
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        progress: 100%
 progress: 100%
 progress: 100%
 progress: 100%
@@ -135,6 +165,8 @@ a3 = vector3d
  size: 1 x 1
              x            y            z
   -0.000162903  -0.00325478     0.999995
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="DetectionOfSampleSymmetry_06.png" %}
 </div></body></html>

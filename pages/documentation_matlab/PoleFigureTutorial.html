@@ -1,6 +1,6 @@
 ---
 title: Pole Figure Tutorial
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigureTutorial.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Pole Figure Tutorial</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_PoleFigureTutorial.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureTutorial into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This tutorial explains the basic concepts on ananyzing x-ray, synchrotron and neutron diffraction data.</p><h2 id="2">Import diffraction data</h2><p>Click on <a href="matlab:import_wizard('PoleFigure')">Import pole figure data</a> to start the import wizard which is a GUI leading you through the import of pole figure data. After finishing the wizard you will end with a script similar to the following one.</p><pre class="codeinput"><span class="comment">% This script was automatically created by the import wizard. You should</span>
+      --><title>Pole Figure Tutorial</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_PoleFigureTutorial.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureTutorial into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This tutorial explains the basic concepts on ananyzing x-ray, synchrotron and neutron diffraction data.</p><h2 id="2">Import diffraction data</h2><p>Click on <a href="matlab:import_wizard('PoleFigure')">Import pole figure data</a> to start the import wizard which is a GUI leading you through the import of pole figure data. After finishing the wizard you will end with a script similar to the following one.</p>
+  {% highlight matlab %}
+  <span class="comment">% This script was automatically created by the import wizard. You should</span>
 <span class="comment">% run the whole script or parts of it in order to import your data. There</span>
 <span class="comment">% is no problem in making any changes to this script.</span>
 <span class="comment">%</span>
@@ -29,7 +31,10 @@ SS = specimenSymmetry(<span class="string">'1'</span>);
 <span class="comment">% plotting convention</span>
 setMTEXpref(<span class="string">'xAxisDirection'</span>,<span class="string">'north'</span>);
 setMTEXpref(<span class="string">'zAxisDirection'</span>,<span class="string">'outOfPlane'</span>);
-</pre><p><b>Specify File Names</b></p><pre class="codeinput"><span class="comment">% path to files</span>
+  {% endhighlight %}
+<p><b>Specify File Names</b></p>
+  {% highlight matlab %}
+  <span class="comment">% path to files</span>
 pname = [mtexDataPath filesep <span class="string">'PoleFigure'</span> filesep <span class="string">'ZnCuTi'</span> filesep];
 
 <span class="comment">% which files to be imported</span>
@@ -47,13 +52,19 @@ fname_def = {<span class="keyword">...</span>
   [pname <span class="string">'ZnCuTi_defocusing_PF_101_R.UXD'</span>],<span class="keyword">...</span>
   [pname <span class="string">'ZnCuTi_defocusing_PF_102_R.UXD'</span>],<span class="keyword">...</span>
   };
-</pre><p><b>Specify Miller Indices</b></p><pre class="codeinput">h = { <span class="keyword">...</span>
+  {% endhighlight %}
+<p><b>Specify Miller Indices</b></p>
+  {% highlight matlab %}
+  h = { <span class="keyword">...</span>
   Miller(0,0,2,CS),<span class="keyword">...</span>
   Miller(1,0,0,CS),<span class="keyword">...</span>
   Miller(1,0,1,CS),<span class="keyword">...</span>
   Miller(1,0,2,CS),<span class="keyword">...</span>
   };
-</pre><p><b>Import the Data</b></p><pre class="codeinput"><span class="comment">% create a Pole Figure variable containing the data</span>
+  {% endhighlight %}
+<p><b>Import the Data</b></p>
+  {% highlight matlab %}
+  <span class="comment">% create a Pole Figure variable containing the data</span>
 pf = PoleFigure.load(fname,h,CS,SS,<span class="string">'interface'</span>,<span class="string">'uxd'</span>);
 
 <span class="comment">% defocusing</span>
@@ -61,11 +72,20 @@ pf_def = PoleFigure.load(fname_def,h,CS,SS,<span class="string">'interface'</spa
 
 <span class="comment">% correct data</span>
 pf = correct(pf,<span class="string">'def'</span>,pf_def);
-</pre><h2 id="6">Plot Raw Data</h2><p>You should run the script section wise to see how MTEX imports the pole figure data. Next, you can plot your data</p><pre class="codeinput">plot(pf)
-</pre>
+  {% endhighlight %}
+<h2 id="6">Plot Raw Data</h2><p>You should run the script section wise to see how MTEX imports the pole figure data. Next, you can plot your data</p>
+  {% highlight matlab %}
+  plot(pf)
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigureTutorial_01.png" %}
-<p>Make sure that the Miller indices are correctly assigned to the pole figures and that the alignment of the specimen coordinate system, i.e., X, Y, Z is correct. In case of outliers or misaligned data, you may want to correct your raw data. See <a href="ModifyPoleFigureData.html">how to modify pole figure data</a> for further information.</p><h2 id="8">ODF Estimation</h2><p>Once your data are in a good shape, i.e. defocusing correction has been done and only few outliers are left you can stop to reconstruct an ODF out of these data. This is done by the command <a href="PoleFigure_calcODF.html">calcODF</a>.</p><pre class="codeinput">odf = calcODF(pf,<span class="string">'silent'</span>)
-</pre><pre class="codeoutput"> 
+<p>Make sure that the Miller indices are correctly assigned to the pole figures and that the alignment of the specimen coordinate system, i.e., X, Y, Z is correct. In case of outliers or misaligned data, you may want to correct your raw data. See <a href="ModifyPoleFigureData.html">how to modify pole figure data</a> for further information.</p><h2 id="8">ODF Estimation</h2><p>Once your data are in a good shape, i.e. defocusing correction has been done and only few outliers are left you can stop to reconstruct an ODF out of these data. This is done by the command <a href="PoleFigure_calcODF.html">calcODF</a>.</p>
+  {% highlight matlab %}
+  odf = calcODF(pf,<span class="string">'silent'</span>)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : 6/mmm, X||a*, Y||b, Z||c*
   specimen symmetry: 1
@@ -78,15 +98,39 @@ odf = ODF
     center: 9922 orientations, resolution: 5&deg;
     weight: 0.46584
  
-</pre><p>Note that reconstructing an ODF from pole figure data is a severely ill- posed problem, i.e., it does <b>not</b> provide a unique solution. A more throughout the discussion on the ambiguity of ODF reconstruction from pole figure data can be found <a href="PF2ODFAmbiguity.html">here</a>. As a rule of thumb: as more pole figures you have and as more consistent you pole figure data are as better you reconstructed ODF will be.</p><p>To check how well your reconstructed ODF fits the measured pole figure data do</p><pre class="codeinput">plotPDF(odf,pf.h)
-</pre>
+
+        {% endhighlight %}
+    <p>Note that reconstructing an ODF from pole figure data is a severely ill- posed problem, i.e., it does <b>not</b> provide a unique solution. A more throughout the discussion on the ambiguity of ODF reconstruction from pole figure data can be found <a href="PF2ODFAmbiguity.html">here</a>. As a rule of thumb: as more pole figures you have and as more consistent you pole figure data are as better you reconstructed ODF will be.</p><p>To check how well your reconstructed ODF fits the measured pole figure data do</p>
+  {% highlight matlab %}
+  plotPDF(odf,pf.h)
+  {% endhighlight %}
+
   {% include inline_image.html file="PoleFigureTutorial_02.png" %}
-<p>Compare the recalculated pole figures with the measured data. A quantitative measure for the fitting are the so called RP values. They can be computed by</p><pre class="codeinput">calcError(odf,pf)
-</pre><pre class="codeoutput">ans =
-    0.0556    0.0450    0.0609    0.0444
-</pre><p>In the case of a bad fitting, you may want to tweak the reconstruction algorithm. See <a href="PoleFigure2ODF.html">here</a> for more information.</p><h2 id="12">Quantify the Reconstruction Error</h2><h2 id="13">Visualize the ODF</h2><pre class="codeinput">plot(odf)
+<p>Compare the recalculated pole figures with the measured data. A quantitative measure for the fitting are the so called RP values. They can be computed by</p>
+  {% highlight matlab %}
+  calcError(odf,pf)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        progress: 100%
+ans =
+    0.0556    0.0449    0.0610    0.0444
+
+        {% endhighlight %}
+    <p>In the case of a bad fitting, you may want to tweak the reconstruction algorithm. See <a href="PoleFigure2ODF.html">here</a> for more information.</p><h2 id="12">Quantify the Reconstruction Error</h2><h2 id="13">Visualize the ODF</h2>
+  {% highlight matlab %}
+  plot(odf)
 mtexColorMap <span class="string">LaboTeX</span>
-</pre>
+  {% endhighlight %}
+
+        {% highlight matlab %}
+        progress: 100%
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="PoleFigureTutorial_03.png" %}
-<p>restore old setting</p><pre class="codeinput">setMTEXpref(<span class="string">'xAxisDirection'</span>,<span class="string">'east'</span>);
-</pre></div></body></html>
+<p>restore old setting</p>
+  {% highlight matlab %}
+  setMTEXpref(<span class="string">'xAxisDirection'</span>,<span class="string">'east'</span>);
+  {% endhighlight %}
+</div></body></html>

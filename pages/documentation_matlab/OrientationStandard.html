@@ -1,6 +1,6 @@
 ---
 title: Standard Orientations
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: OrientationStandard.html
 folder: documentation
@@ -14,11 +14,16 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Standard Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_OrientationStandard.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationStandard into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><pre class="codeinput">CS = crystalSymmetry(<span class="string">'m-3m'</span>);
+      --><title>Standard Orientations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_OrientationStandard.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationStandard into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction-->
+  {% highlight matlab %}
+  CS = crystalSymmetry(<span class="string">'m-3m'</span>);
 SS = specimenSymmetry(<span class="string">'orthorhombic'</span>);
 setMTEXpref(<span class="string">'xAxisDirection'</span>,<span class="string">'north'</span>);
 setMTEXpref(<span class="string">'zAxisDirection'</span>,<span class="string">'outofPlane'</span>);
-</pre><h2 id="2">some stadanrd orientations</h2><pre class="codeinput">components = [<span class="keyword">...</span>
+  {% endhighlight %}
+<h2 id="2">some stadanrd orientations</h2>
+  {% highlight matlab %}
+  components = [<span class="keyword">...</span>
   orientation.goss(CS,SS),<span class="keyword">...</span>
   orientation.brass(CS,SS),<span class="keyword">...</span>
   orientation.cube(CS,SS),<span class="keyword">...</span>
@@ -29,15 +34,21 @@ setMTEXpref(<span class="string">'zAxisDirection'</span>,<span class="string">'o
   orientation.PLage(CS,SS),<span class="keyword">...</span>
   orientation.QLage(CS,SS),<span class="keyword">...</span>
   ];
-</pre><h2 id="3">3d Euler angle space</h2><pre class="codeinput"><span class="keyword">for</span> i = 1:length(components)
+  {% endhighlight %}
+<h2 id="3">3d Euler angle space</h2>
+  {% highlight matlab %}
+  <span class="keyword">for</span> i = 1:length(components)
   plot(components(i),<span class="string">'bunge'</span>,<span class="string">'MarkerSize'</span>,10,<span class="string">'filled'</span>,<span class="string">'DisplayName'</span>,round2Miller(components(i),<span class="string">'LaTex'</span>))
   hold <span class="string">on</span>
 <span class="keyword">end</span>
 legend(<span class="string">'show'</span>,<span class="string">'interpreter'</span>,<span class="string">'LaTeX'</span>,<span class="string">'location'</span>,<span class="string">'southoutside'</span>,<span class="string">'numColumns'</span>,3,<span class="string">'FontSize'</span>,1.2*getMTEXpref(<span class="string">'FontSize'</span>));
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_01.png" %}
-<h2 id="4">2d phi2 sections</h2><pre class="codeinput">figure
+<h2 id="4">2d phi2 sections</h2>
+  {% highlight matlab %}
+  figure
 <span class="keyword">for</span> i = 1:length(components)
   plotSection(components(i),<span class="string">'add2all'</span>,<span class="string">'DisplayName'</span>,round2Miller(components(i),<span class="string">'LaTex'</span>))
 <span class="keyword">end</span>
@@ -45,9 +56,12 @@ hold <span class="string">off</span>
 legend(<span class="string">'show'</span>,<span class="string">'interpreter'</span>,<span class="string">'LaTeX'</span>,<span class="string">'location'</span>,<span class="string">'southeast'</span>,<span class="string">'FontSize'</span>,1.2*getMTEXpref(<span class="string">'FontSize'</span>));
 
 <span class="comment">% saveFigure('componentsSections.png')</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_02.png" %}
-<h2 id="5">3d axis angle space</h2><pre class="codeinput">close <span class="string">all</span>
+<h2 id="5">3d axis angle space</h2>
+  {% highlight matlab %}
+  close <span class="string">all</span>
 figure
 <span class="keyword">for</span> i = 1:length(components)
   hold <span class="string">on</span>
@@ -55,9 +69,12 @@ figure
   axis <span class="string">off</span>
 <span class="keyword">end</span>
 legend(<span class="string">'show'</span>,<span class="string">'interpreter'</span>,<span class="string">'LaTeX'</span>,<span class="string">'location'</span>,<span class="string">'southoutside'</span>,<span class="string">'numColumns'</span>,3,<span class="string">'FontSize'</span>,1.2*getMTEXpref(<span class="string">'FontSize'</span>));
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_03.png" %}
-<h2 id="6">pole figures</h2><pre class="codeinput">h = Miller({1,0,0},{1,1,0},{1,1,1},{3,1,1},CS);
+<h2 id="6">pole figures</h2>
+  {% highlight matlab %}
+  h = Miller({1,0,0},{1,1,0},{1,1,1},{3,1,1},CS);
 
 <span class="keyword">for</span> i = 1:length(components)
   plotPDF(components(i),h,<span class="string">'MarkerSize'</span>,10,<span class="string">'filled'</span>,<span class="string">'DisplayName'</span>,round2Miller(components(i),<span class="string">'LaTex'</span>))
@@ -67,9 +84,12 @@ legend(<span class="string">'show'</span>,<span class="string">'interpreter'</sp
 hold <span class="string">off</span>
 
 legend(<span class="string">'show'</span>,<span class="string">'interpreter'</span>,<span class="string">'LaTeX'</span>,<span class="string">'location'</span>,<span class="string">'northeast'</span>,<span class="string">'numColumns'</span>,2,<span class="string">'FontSize'</span>,1.2*getMTEXpref(<span class="string">'FontSize'</span>));
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_04.png" %}
-<h2 id="7">inverse pole figures</h2><pre class="codeinput">r = [vector3d.X,vector3d.Y,vector3d.Z];
+<h2 id="7">inverse pole figures</h2>
+  {% highlight matlab %}
+  r = [vector3d.X,vector3d.Y,vector3d.Z];
 
 <span class="keyword">for</span> i = 1:length(components)
   plotIPDF(components(i),r,<span class="string">'MarkerSize'</span>,(12-i)^1.5,<span class="string">'filled'</span>,<span class="string">'DisplayName'</span>,round2Miller(components(i),<span class="string">'LaTex'</span>))
@@ -79,15 +99,21 @@ legend(<span class="string">'show'</span>,<span class="string">'interpreter'</sp
 hold <span class="string">off</span>
 
 legend(<span class="string">'show'</span>,<span class="string">'interpreter'</span>,<span class="string">'LaTeX'</span>,<span class="string">'location'</span>,<span class="string">'northeast'</span>,<span class="string">'numColumns'</span>,2,<span class="string">'FontSize'</span>,1.2*getMTEXpref(<span class="string">'FontSize'</span>));
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_05.png" %}
-<pre class="codeinput">odf = unimodalODF(components(3),<span class="string">'halfwidth'</span>,7.5*degree)
+
+  {% highlight matlab %}
+  odf = unimodalODF(components(3),<span class="string">'halfwidth'</span>,7.5*degree)
 
 plotPDF(odf,h)
 hold <span class="string">on</span>
 plotPDF(odf,h,<span class="string">'contour'</span>,<span class="string">'lineColor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: mmm
@@ -97,15 +123,22 @@ odf = ODF
     center: (0&deg;,0&deg;,0&deg;)
     weight: 1
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="OrientationStandard_06.png" %}
-<pre class="codeinput">plotIPDF(odf,r)
+
+  {% highlight matlab %}
+  plotIPDF(odf,r)
 hold <span class="string">on</span>
 plotIPDF(odf,r,<span class="string">'contour'</span>,<span class="string">'lineColor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_07.png" %}
-<pre class="codeinput">plotSection(odf)
+
+  {% highlight matlab %}
+  plotSection(odf)
 
 hold <span class="string">on</span>
 plotSection(odf,<span class="string">'contour'</span>,<span class="string">'lineColor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
@@ -117,6 +150,7 @@ plotSection(odf,<span class="string">'contour'</span>,<span class="string">'line
 <span class="keyword">end</span>
 
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="OrientationStandard_08.png" %}
 </div></body></html>

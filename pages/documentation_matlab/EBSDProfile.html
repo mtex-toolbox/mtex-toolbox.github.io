@@ -1,6 +1,6 @@
 ---
 title: Line Profiles
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDProfile.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Line Profiles</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_EBSDProfile.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDProfile into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>When analyzing texture gradients it is sometime helpful to look at the EBSD data rstricted to a single line and plot profiles of certain properties along this line. In order to illustarte this at an example let us import some EBSD data, reconstruct grains and select the grain with the largest GOS (grain orientation spread) for further analysis.</p><pre class="codeinput">close <span class="string">all</span>
+      --><title>Line Profiles</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_EBSDProfile.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDProfile into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>When analyzing texture gradients it is sometime helpful to look at the EBSD data rstricted to a single line and plot profiles of certain properties along this line. In order to illustarte this at an example let us import some EBSD data, reconstruct grains and select the grain with the largest GOS (grain orientation spread) for further analysis.</p>
+  {% highlight matlab %}
+  close <span class="string">all</span>
 mtexdata <span class="string">forsterite</span>
 plotx2east
 
@@ -31,7 +33,10 @@ plot(grain_selected.boundary,<span class="string">'linewidth'</span>,2)
 hold <span class="string">on</span>
 plot(ebsd(grain_selected),ebsd(grain_selected).orientations)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -55,17 +60,27 @@ grain_selected = grain2d
    Id   Phase   Pixels        GOS   phi1   Phi   phi2
  1856       1     2614   0.170662    153   109    247
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="EBSDProfile_01.png" %}
-<p>Next we specify a line segment through the grain</p><pre class="codeinput"><span class="comment">% line segment</span>
+<p>Next we specify a line segment through the grain</p>
+  {% highlight matlab %}
+  <span class="comment">% line segment</span>
 lineSec =  [18826   6438; 18089 10599];
 
 <span class="comment">% draw the line into the plot</span>
 line(lineSec(:,1),lineSec(:,2),<span class="string">'linewidth'</span>,2)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDProfile_02.png" %}
-<p>The command <a href="EBSD.spatialProfile.html">spatialProfile</a> restricts the EBSD data to this line</p><pre class="codeinput">ebsd_line = spatialProfile(ebsd(grain_selected),lineSec)
-</pre><pre class="codeoutput"> 
+<p>The command <a href="EBSD.spatialProfile.html">spatialProfile</a> restricts the EBSD data to this line</p>
+  {% highlight matlab %}
+  ebsd_line = spatialProfile(ebsd(grain_selected),lineSec)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd_line = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -74,7 +89,11 @@ ebsd_line = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
  Scan unit : um
  
-</pre><p>Next, we plot the misorientation angle to the first point of the line as well as the orientation gradient</p><pre class="codeinput">close <span class="string">all</span> <span class="comment">% close previous plots</span>
+
+        {% endhighlight %}
+    <p>Next, we plot the misorientation angle to the first point of the line as well as the orientation gradient</p>
+  {% highlight matlab %}
+  close <span class="string">all</span> <span class="comment">% close previous plots</span>
 
 <span class="comment">% misorientation angle to the first orientation on the line</span>
 plot(ebsd_line.y,<span class="keyword">...</span>
@@ -89,13 +108,17 @@ hold <span class="string">off</span>
 xlabel(<span class="string">'y'</span>); ylabel(<span class="string">'misorientation angle in degree'</span>)
 
 legend(<span class="string">'to reference orientation'</span>,<span class="string">'orientation gradient'</span>)
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDProfile_03.png" %}
-<p>We can also plot the orientations along this line into inverse pole figures and colorize them according to their y-coordinate</p><pre class="codeinput">close
+<p>We can also plot the orientations along this line into inverse pole figures and colorize them according to their y-coordinate</p>
+  {% highlight matlab %}
+  close
 plotIPDF(ebsd_line.orientations,[xvector,yvector,zvector],<span class="keyword">...</span>
   <span class="string">'property'</span>,ebsd_line.y,<span class="string">'markersize'</span>,20,<span class="string">'antipodal'</span>)
 
 mtexColorbar
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="EBSDProfile_04.png" %}
 </div></body></html>

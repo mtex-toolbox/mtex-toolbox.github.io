@@ -1,6 +1,6 @@
 ---
 title: Grain Neighbors
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainNeighbours.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Neighbors</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainNeighbours into the Matlab commandline">edit page</a></font><div><!--introduction--><p>TODO: This page needs to be improved</p><!--/introduction--><p>In this section we discuss .... We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p><pre class="codeinput"><span class="comment">% load sample EBSD data set</span>
+      --><title>Grain Neighbors</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainNeighbours into the Matlab commandline">edit page</a></font><div><!--introduction--><p>TODO: This page needs to be improved</p><!--/introduction--><p>In this section we discuss .... We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+  {% highlight matlab %}
+  <span class="comment">% load sample EBSD data set</span>
 mtexdata <span class="string">forsterite</span>
 
 <span class="comment">% restrict it to a subregion of interest.</span>
@@ -36,7 +38,10 @@ plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span
 hold <span class="string">on</span>
 plot(grains.boundary,<span class="string">'lineWidth'</span>,2)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -83,9 +88,13 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId
  Scan unit : um
  
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="GrainNeighbours_01.png" %}
-<pre class="codeinput"><span class="comment">% The function neighbors for grains returns the (i) the number of neighbors</span>
+
+  {% highlight matlab %}
+  <span class="comment">% The function neighbors for grains returns the (i) the number of neighbors</span>
 <span class="comment">% of the grains in the EBSD map and (ii) the possible pairs of grains with</span>
 <span class="comment">% this map. This is defined in MTEX as</span>
 
@@ -103,9 +112,12 @@ ylabel(<span class="string">'Number of counts'</span>)
 <span class="comment">% $$N = 2 \sum n_i $$ is the total number of neighborhood relations</span>
 <span class="comment">% (without self-reference). In this case, pairs(i,:) gives the indexes of</span>
 <span class="comment">% two neighboring grains</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="GrainNeighbours_02.png" %}
-<pre class="codeinput"><span class="comment">% take a specific grain</span>
+
+  {% highlight matlab %}
+  <span class="comment">% take a specific grain</span>
 id = 94;
 plot(grains(id),<span class="string">'micronbar'</span>,<span class="string">'off'</span>,<span class="string">'FaceColor'</span>,<span class="string">'Chocolate'</span>,<span class="string">'displayName'</span>,<span class="string">'id=94'</span>)
 
@@ -117,6 +129,7 @@ neighbors(neighbors == id) = [];
 hold <span class="string">on</span>
 plot(grains(neighbors));
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="GrainNeighbours_03.png" %}
 </div></body></html>

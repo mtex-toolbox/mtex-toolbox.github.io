@@ -1,6 +1,6 @@
 ---
 title: Select Grain Boundaries
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundarySelect.html
 folder: documentation
@@ -14,7 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Select Grain Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_BoundarySelect.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundarySelect into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we explain how to extract specific grain boundaries. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p><pre class="codeinput">close <span class="string">all</span>; plotx2east
+      --><title>Select Grain Boundaries</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_BoundarySelect.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundarySelect into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we explain how to extract specific grain boundaries. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
+  {% highlight matlab %}
+  close <span class="string">all</span>; plotx2east
 
 <span class="comment">% import the data</span>
 mtexdata <span class="string">forsterite</span>
@@ -32,7 +34,10 @@ ebsd(grains(grains.grainSize&lt;=5)) = [];
 
 <span class="comment">% smooth the grains a bit</span>
 grains = smooth(grains,4);
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -44,13 +49,20 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
  
-</pre><p>visualize as a phase map</p><pre class="codeinput">plot(ebsd)
+
+        {% endhighlight %}
+    <p>visualize as a phase map</p>
+  {% highlight matlab %}
+  plot(ebsd)
 hold <span class="string">on</span>
 plot(grains.boundary,<span class="string">'linewidth'</span>,2)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="BoundarySelect_01.png" %}
-<p>The output of</p><pre class="codeinput">grains.boundary
+<p>The output of</p>
+  {% highlight matlab %}
+  grains.boundary
 
 <span class="comment">% tells us the number of boundary segments between the different phsaes.</span>
 <span class="comment">% Those segments with notIndexed phase include also those boundary segments</span>
@@ -60,7 +72,10 @@ hold <span class="string">off</span>
 hold <span class="string">on</span>
 plot(grains.boundary(<span class="string">'Fo'</span>,<span class="string">'Fo'</span>),<span class="string">'lineColor'</span>,<span class="string">'blue'</span>,<span class="string">'micronbar'</span>,<span class="string">'off'</span>,<span class="string">'lineWidth'</span>,2)
 hold <span class="string">off</span>
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = grainBoundary  
  
  Segments   mineral 1   mineral 2
@@ -73,16 +88,26 @@ ans = grainBoundary
        35   Enstatite   Enstatite
       112   Enstatite    Diopside
        28    Diopside    Diopside
-</pre>
+
+        {% endhighlight %}
+    
   {% include inline_image.html file="BoundarySelect_02.png" %}
-<p>Similarly we may select all Forsterite to enstatite boundary segements.</p><pre class="codeinput">hold <span class="string">on</span>
+<p>Similarly we may select all Forsterite to enstatite boundary segements.</p>
+  {% highlight matlab %}
+  hold <span class="string">on</span>
 plot(grains.boundary(<span class="string">'Fo'</span>,<span class="string">'En'</span>),<span class="string">'lineColor'</span>,<span class="string">'darkgreen'</span>,<span class="string">'micronbar'</span>,<span class="string">'off'</span>,<span class="string">'lineWidth'</span>,2)
 hold <span class="string">off</span>
-</pre>
+  {% endhighlight %}
+
   {% include inline_image.html file="BoundarySelect_03.png" %}
-<p>Note, that the order of the phase names matter when considering the corresponding misorintations</p><pre class="codeinput">grains.boundary(<span class="string">'Fo'</span>,<span class="string">'En'</span>).misorientation(1)
+<p>Note, that the order of the phase names matter when considering the corresponding misorintations</p>
+  {% highlight matlab %}
+  grains.boundary(<span class="string">'Fo'</span>,<span class="string">'En'</span>).misorientation(1)
 grains.boundary(<span class="string">'En'</span>,<span class="string">'Fo'</span>).misorientation(1)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = misorientation  
   size: 1 x 1
   crystal symmetry : Forsterite (mmm)
@@ -102,4 +127,6 @@ ans = misorientation
      phi1     Phi    phi2    Inv.
   98.9215 128.248 125.574       0
  
-</pre><p>In the fist case the misorientation returned is from Forsterite to Enstatite and in the second case its exactly the inverse</p><p>The selection of grain boundaries according to specific misorientationsm according to twist / tild character or twinning is explained in linked sections.</p></div></body></html>
+
+        {% endhighlight %}
+    <p>In the fist case the misorientation returned is from Forsterite to Enstatite and in the second case its exactly the inverse</p><p>The selection of grain boundaries according to specific misorientationsm according to twist / tild character or twinning is explained in linked sections.</p></div></body></html>

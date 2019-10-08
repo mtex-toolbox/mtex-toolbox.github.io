@@ -1,6 +1,6 @@
 ---
 title: Vector Operations
-last_updated: 07-Oct-2019
+last_updated: 08-Oct-2019
 sidebar: documentation_sidebar
 permalink: VectorsOperations.html
 folder: documentation
@@ -14,19 +14,33 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Vector Operations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_VectorsOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit VectorsOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In MTEX, one can calculate with three dimensional directions as with ordinary numbers, i.e. we can use the predefined vectors  <a href="xvector.html">vector3d.X</a>, <a href="yvector.html">vector3d.Y</a>, and <a href="zvector.html">vector3d.Z</a> and set</p><pre class="codeinput">v = vector3d.X + 2*vector3d.Y
-</pre><pre class="codeoutput"> 
+      --><title>Vector Operations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_VectorsOperations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit VectorsOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In MTEX, one can calculate with three dimensional directions as with ordinary numbers, i.e. we can use the predefined vectors  <a href="xvector.html">vector3d.X</a>, <a href="yvector.html">vector3d.Y</a>, and <a href="zvector.html">vector3d.Z</a> and set</p>
+  {% highlight matlab %}
+  v = vector3d.X + 2*vector3d.Y
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 v = vector3d  
  size: 1 x 1
   x y z
   1 2 0
-</pre><p>Moreover, all basic vector operations as <a href="vector3d.plus.html">"+"</a>, <a href="vector3d.minus.html">"-"</a>, <a href="vector3d.times.html">"*"</a>, <a href="vector3d.dot.html">inner product</a>, <a href="vector3d.cross.html">cross product</a> are implemented in MTEX.</p><pre class="codeinput">u = dot(v,vector3d.Y) * vector3d.Y + 2 * cross(v,vector3d.Z)
-</pre><pre class="codeoutput"> 
+
+        {% endhighlight %}
+    <p>Moreover, all basic vector operations as <a href="vector3d.plus.html">"+"</a>, <a href="vector3d.minus.html">"-"</a>, <a href="vector3d.times.html">"*"</a>, <a href="vector3d.dot.html">inner product</a>, <a href="vector3d.cross.html">cross product</a> are implemented in MTEX.</p>
+  {% highlight matlab %}
+  u = dot(v,vector3d.Y) * vector3d.Y + 2 * cross(v,vector3d.Z)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 u = vector3d  
  size: 1 x 1
   x y z
   4 0 0
-</pre><p>Besides the standard linear algebra operations, there are also the following functions available in MTEX.</p><p>
+
+        {% endhighlight %}
+    <p>Besides the standard linear algebra operations, there are also the following functions available in MTEX.</p><p>
    <table class="usertable">
       <tr>
          <td>
@@ -109,16 +123,28 @@ u = vector3d
          </td>
       </tr>
    </table>
-</p><p>A simple example for applying the norm function is to normalize a set of specimen directions</p><pre class="codeinput">u = u ./ norm(u)
-</pre><pre class="codeoutput"> 
+</p><p>A simple example for applying the norm function is to normalize a set of specimen directions</p>
+  {% highlight matlab %}
+  u = u ./ norm(u)
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 u = vector3d  
  size: 1 x 1
   x y z
   1 0 0
-</pre><h2 id="4">Lists of vectors</h2><p>As any other MTEX variable you can combine several vectors to a list of vectors and all bevor mentioned operators operations will work elementwise on a list of vectors. See <a href="WorkinWithLists.html">Working with lists</a> on how to manipulate lists in Matlab.</p><p>Using the brackets <tt>v = [v1,v2]</tt> two lists of vectors can be joined to a single list. Now each single vector is accesable via <tt>v(1)</tt> and <tt>v(2)</tt>.</p><pre class="codeinput">w = [v,u];
+
+        {% endhighlight %}
+    <h2 id="4">Lists of vectors</h2><p>As any other MTEX variable you can combine several vectors to a list of vectors and all bevor mentioned operators operations will work elementwise on a list of vectors. See <a href="WorkinWithLists.html">Working with lists</a> on how to manipulate lists in Matlab.</p><p>Using the brackets <tt>v = [v1,v2]</tt> two lists of vectors can be joined to a single list. Now each single vector is accesable via <tt>v(1)</tt> and <tt>v(2)</tt>.</p>
+  {% highlight matlab %}
+  w = [v,u];
 w(1)
 w(2)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 ans = vector3d  
  size: 1 x 1
   x y z
@@ -128,14 +154,24 @@ ans = vector3d
  size: 1 x 1
   x y z
   1 0 0
-</pre><p>When calculating with concatenated specimen directions all operations are performed componentwise for each specimen direction.</p><pre class="codeinput">w = w + v;
-</pre><p>A list of vectors can be indexed directly by specifying the ids of the vectors one is interested in, e.g.</p><pre class="codeinput"><span class="comment">% import many vectors from a file</span>
+
+        {% endhighlight %}
+    <p>When calculating with concatenated specimen directions all operations are performed componentwise for each specimen direction.</p>
+  {% highlight matlab %}
+  w = w + v;
+  {% endhighlight %}
+<p>A list of vectors can be indexed directly by specifying the ids of the vectors one is interested in, e.g.</p>
+  {% highlight matlab %}
+  <span class="comment">% import many vectors from a file</span>
 fname = fullfile(mtexDataPath,<span class="string">'vector3d'</span>,<span class="string">'vectors.txt'</span>);
 v = vector3d.load(fname,<span class="string">'ColumnNames'</span>,{<span class="string">'polar angle'</span>,<span class="string">'azimuth angle'</span>})
 
 <span class="comment">% extract vectors 1 to 5</span>
 v(1:5)
-</pre><pre class="codeoutput"> 
+  {% endhighlight %}
+
+        {% highlight matlab %}
+         
 v = vector3d  
  size: 1000 x 1
  
@@ -147,7 +183,12 @@ ans = vector3d
     0.430105   0.900869  0.0586948
    -0.447234  0.0186977   0.894221
    -0.139746   0.555614   0.819612
-</pre><p>gives the first 5 vectors from the list, or by logical indexing. The following command plots all vectors with an polar angle smaller then 60 degree</p><pre class="codeinput">scatter(v(v.theta&lt;60*degree),<span class="string">'grid'</span>,<span class="string">'on'</span>)
-</pre>
+
+        {% endhighlight %}
+    <p>gives the first 5 vectors from the list, or by logical indexing. The following command plots all vectors with an polar angle smaller then 60 degree</p>
+  {% highlight matlab %}
+  scatter(v(v.theta&lt;60*degree),<span class="string">'grid'</span>,<span class="string">'on'</span>)
+  {% endhighlight %}
+
   {% include inline_image.html file="VectorsOperations_01.png" %}
 </div></body></html>
