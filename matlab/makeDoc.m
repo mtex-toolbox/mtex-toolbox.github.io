@@ -29,9 +29,9 @@ setMTEXpref('generatingHelpMode',true);
 set(0,'FormatSpacing','compact')
 set(0,'DefaultFigureColor','white');
 
-options.outputDir = fullfile(pwd,'..','pages','function_reference_matlab');
 options.tempDir = fullfile(pwd,'tmp');
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
+dir1 = fullfile(pwd,'..','pages','function_reference_matlab');
 dir2 = fullfile(pwd,'..','pages','documentation_matlab');
 
 %% DocFiles
@@ -56,6 +56,7 @@ mtexHelpFiles = [mtexFunctionFiles,mtexDocFiles];
 
 %% Publish Function Reference
 
+options.outputDir = dir1;
 options.evalCode = true;
 options.force = false;
 publish(mtexFunctionFiles,options);
@@ -87,7 +88,7 @@ move_images(options.outputDir);
 
 %%
 if check_option(varargin,'checkLinks')
-  deadlink(mtexDocFiles,options.outputDir);
+  deadlink(mtexDocFiles,{dir1,dir2});
 end
 
 %% make help toc
