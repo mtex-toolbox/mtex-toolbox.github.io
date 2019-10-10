@@ -1,6 +1,6 @@
 ---
 title: Anisotropic Elasticity
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: AnisotropicElasticity.html
 folder: documentation
@@ -14,17 +14,17 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_AnisotropicElasticity.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit AnisotropicElasticity into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to calculate and plot the elasticity properties</p><!--/introduction--><p>MTEX offers a very simple way to compute elasticity properties of materials. This includes Young's modulus, linear compressibility, Christoffel tensor, and elastic wave velocities.</p><h2 id="2">Import an Elasticity Tensor</h2><p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
-  {% highlight matlab %}
-  fname = fullfile(mtexDataPath,<span class="string">'tensor'</span>,<span class="string">'Olivine1997PC.GPa'</span>);
+      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_AnisotropicElasticity.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit AnisotropicElasticity into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to calculate and plot the elasticity properties</p><!--/introduction--><p>MTEX offers a very simple way to compute elasticity properties of materials. This includes Young's modulus, linear compressibility, Christoffel tensor, and elastic wave velocities.</p><h2 id="2">Import an Elasticity Tensor</h2><p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
 
-cs = crystalSymmetry(<span class="string">'mmm'</span>,[4.7646 10.2296 5.9942],<span class="string">'mineral'</span>,<span class="string">'Olivin'</span>);
+cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
 
 C = stiffnessTensor.load(fname,cs)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 C = stiffnessTensor  
   unit   : GPa              
   rank   : 4 (3 x 3 x 3 x 3)
@@ -38,17 +38,17 @@ C = stiffnessTensor
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 
-        {% endhighlight %}
-    <h2 id="3">Hooks Law</h2>
-  {% highlight matlab %}
-  eps = strainTensor(diag([1,1.1,0.9]),cs)
+{% endhighlight %}
+<h2 id="3">Hooks Law</h2>
+{% highlight matlab %}
+eps = strainTensor(diag([1,1.1,0.9]),cs)
 
-<span class="comment">% the resulting stress</span>
+% the resulting stress
 sigma = C : eps
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 eps = strainTensor  
   rank   : 2 (3 x 3)   
   mineral: Olivin (mmm)
@@ -65,33 +65,33 @@ sigma = stressTensor
      0 353.4     0
      0     0 366.2
 
-        {% endhighlight %}
-    <h2 id="4">Elastic Energy</h2>
-  {% highlight matlab %}
-  <span class="comment">% the elastic energy</span>
+{% endhighlight %}
+<h2 id="4">Elastic Energy</h2>
+{% highlight matlab %}
+% the elastic energy
 U = sigma : eps
 U = EinsteinSum(C,[-1 -2 -3 -4],eps,[-1 -2],eps,[-3 -4])
 
 (C : eps) : eps
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        U =
+{% highlight plaintext %}
+U =
    1.1783e+03
 U =
    1.1783e+03
 ans =
    1.1783e+03
 
-        {% endhighlight %}
-    <h2 id="5">Young's Modulus</h2><p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction d by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
-  {% highlight matlab %}
-  d = vector3d.X
+{% endhighlight %}
+<h2 id="5">Young's Modulus</h2><p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction d by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
+{% highlight matlab %}
+d = vector3d.X
 E = C.YoungsModulus(vector3d.X)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 d = vector3d  
  size: 1 x 1
   x y z
@@ -99,45 +99,45 @@ d = vector3d
 E =
   286.9284
 
-        {% endhighlight %}
-    <p>If the direction is ommited Youngs modulus is returned as a <a href="S2FunHarmonic_index.html">spherical function</a>.</p>
-  {% highlight matlab %}
-  <span class="comment">% compute Young's modulus as a directional dependend function</span>
+{% endhighlight %}
+<p>If the direction is ommited Youngs modulus is returned as a <a href="S2FunHarmonic_index.html">spherical function</a>.</p>
+{% highlight matlab %}
+% compute Young's modulus as a directional dependend function
 E = C.YoungsModulus
 
-<span class="comment">% which can be evaluated at any direction</span>
+% which can be evaluated at any direction
 E.eval(d)
 
-<span class="comment">% or plot it</span>
-setMTEXpref(<span class="string">'defaultColorMap'</span>,blue2redColorMap);
-plot(C.YoungsModulus,<span class="string">'complete'</span>,<span class="string">'upper'</span>)
-  {% endhighlight %}
+% or plot it
+setMTEXpref('defaultColorMap',blue2redColorMap);
+plot(C.YoungsModulus,'complete','upper')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 E = S2FunHarmonic  
  mineral: Olivin (mmm)
  bandwidth: 8
 ans =
   286.1748
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="AnisotropicElasticity_01.png" %}
 <h2 id="7">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similarly as the Youngs modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <tt>d</tt> or as a spherical function</p>
-  {% highlight matlab %}
-  <span class="comment">% compute as a spherical function</span>
+{% highlight matlab %}
+% compute as a spherical function
 beta = linearCompressibility(C)
 
-<span class="comment">% plot it</span>
-plot(beta,<span class="string">'complete'</span>,<span class="string">'upper'</span>)
+% plot it
+plot(beta,'complete','upper')
 
-<span class="comment">% evaluate the function at a specific direction</span>
+% evaluate the function at a specific direction
 beta.eval(d)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 beta = S2FunHarmonic  
  mineral: Olivin (mmm)
  bandwidth: 2
@@ -145,19 +145,19 @@ beta = S2FunHarmonic
 ans =
     0.0018
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="AnisotropicElasticity_02.png" %}
 <h2 id="8">Christoffel Tensor</h2><p>The Christoffel Tensor is symmetric because of the symmetry of the elastic constants. The eigenvalues of the 3x3 Christoffel tensor are three positive values of the wave moduli which corresponds to \rho Vp^2 , \rho Vs1^2 and \rho Vs2^2 of the plane waves propagating in the direction n. The three eigenvectors of this tensor are then the polarization directions of the three waves. Because the Christoffel tensor is symmetric, the polarization vectors are perpendicular to each other.</p>
-  {% highlight matlab %}
-  <span class="comment">% It is computed for a specific direction x by the</span>
-<span class="comment">% command &lt;tensor.ChristoffelTensor.html ChristoffelTensor&gt;.</span>
+{% highlight matlab %}
+% It is computed for a specific direction x by the
+% command &lt;tensor.ChristoffelTensor.html ChristoffelTensor&gt;.
 
 T = ChristoffelTensor(C,vector3d.X)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 T = ChristoffelTensor  
   rank   : 2 (3 x 3)   
   mineral: Olivin (mmm)
@@ -166,24 +166,24 @@ T = ChristoffelTensor
      0  78.7     0
      0     0    77
 
-        {% endhighlight %}
-    <h2 id="9">Elastic Wave Velocity</h2><p>The Christoffel tensor is the basis for computing the direction dependent wave velocities of the p, s1, and s2 wave, as well as of the polarization directions. Therefore, we need also the density of the material, e.g.,</p>
-  {% highlight matlab %}
-  rho = 3.355
-  {% endhighlight %}
+{% endhighlight %}
+<h2 id="9">Elastic Wave Velocity</h2><p>The Christoffel tensor is the basis for computing the direction dependent wave velocities of the p, s1, and s2 wave, as well as of the polarization directions. Therefore, we need also the density of the material, e.g.,</p>
+{% highlight matlab %}
+rho = 3.355
+{% endhighlight %}
 
-        {% highlight matlab %}
-        rho =
+{% highlight plaintext %}
+rho =
     3.3550
 
-        {% endhighlight %}
-    <p>which we can write directly into the elastic stiffness tensor</p>
-  {% highlight matlab %}
-  C = addOption(C,<span class="string">'density'</span>,rho)
-  {% endhighlight %}
+{% endhighlight %}
+<p>which we can write directly into the elastic stiffness tensor</p>
+{% highlight matlab %}
+C = addOption(C,'density',rho)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 C = stiffnessTensor  
   unit   : GPa              
   density: 3.355            
@@ -198,14 +198,14 @@ C = stiffnessTensor
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 
-        {% endhighlight %}
-    <p>Then the velocities are computed by the command <a href="tensor.velocity.html">velocity</a></p>
-  {% highlight matlab %}
-  [vp,vs1,vs2,pp,ps1,ps2] = velocity(C)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Then the velocities are computed by the command <a href="tensor.velocity.html">velocity</a></p>
+{% highlight matlab %}
+[vp,vs1,vs2,pp,ps1,ps2] = velocity(C)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 vp = S2FunTri  
  
  vertices: 1 x 18338
@@ -242,99 +242,99 @@ ps2 =
      vertices: [1&times;18338 S2Grid]
     antipodal: 0
 
-        {% endhighlight %}
-    <p>In order to visualize these quantities, there are several possibilities. Let us first plot the direction dependent wave speed of the p-wave</p>
-  {% highlight matlab %}
-  plot(vp,<span class="string">'complete'</span>,<span class="string">'upper'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<p>In order to visualize these quantities, there are several possibilities. Let us first plot the direction dependent wave speed of the p-wave</p>
+{% highlight matlab %}
+plot(vp,'complete','upper')
+{% endhighlight %}
 
   {% include inline_image.html file="AnisotropicElasticity_03.png" %}
 <p>Next, we plot on the top of this plot the p-wave polarization direction.</p>
-  {% highlight matlab %}
-  hold <span class="string">on</span>
+{% highlight matlab %}
+hold on
 plot(pp)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="AnisotropicElasticity_04.png" %}
 <p>We may even compute with these spherical functions as width ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
-  {% highlight matlab %}
-  plot(vs1-vs2,<span class="string">'complete'</span>,<span class="string">'upper'</span>)
+{% highlight matlab %}
+plot(vs1-vs2,'complete','upper')
 
-hold <span class="string">on</span>
+hold on
 plot(ps1)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="AnisotropicElasticity_05.png" %}
 <p>When projected to a plane the different wave speeds</p>
-  {% highlight matlab %}
-  planeNormal = vector3d.X;
+{% highlight matlab %}
+planeNormal = vector3d.X;
 
-<span class="comment">% options for sections</span>
-optSec = {<span class="string">'color'</span>,<span class="string">'interp'</span>,<span class="string">'linewidth'</span>,6,<span class="string">'doNotDraw'</span>};
+% options for sections
+optSec = {'color','interp','linewidth',6,'doNotDraw'};
 
-<span class="comment">% options for quiver</span>
-optQuiver = {<span class="string">'linewidth'</span>,2,<span class="string">'autoScaleFactor'</span>,0.35,<span class="string">'doNotDraw'</span>};
-optQuiverProp = {<span class="string">'color'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'autoScaleFactor'</span>,0.25,<span class="string">'doNotDraw'</span>};
-prop = S2VectorFieldHarmonic.normal; <span class="comment">% the propagation direction</span>
+% options for quiver
+optQuiver = {'linewidth',2,'autoScaleFactor',0.35,'doNotDraw'};
+optQuiverProp = {'color','k','linewidth',2,'autoScaleFactor',0.25,'doNotDraw'};
+prop = S2VectorFieldHarmonic.normal; % the propagation direction
 
-<span class="comment">% wave velocyties</span>
-close <span class="string">all</span>
-plotSection(vp,planeNormal,optSec{:},<span class="string">'DisplayName'</span>,<span class="string">'Vp'</span>)
-hold <span class="string">on</span>
-plotSection(vs1,planeNormal,optSec{:},<span class="string">'DisplayName'</span>,<span class="string">'Vs1'</span>)
-plotSection(vs2,planeNormal,optSec{:},<span class="string">'DisplayName'</span>,<span class="string">'Vs2'</span>)
+% wave velocyties
+close all
+plotSection(vp,planeNormal,optSec{:},'DisplayName','Vp')
+hold on
+plotSection(vs1,planeNormal,optSec{:},'DisplayName','Vs1')
+plotSection(vs2,planeNormal,optSec{:},'DisplayName','Vs2')
 
-<span class="comment">% polarisation directions</span>
-quiverSection(vp,pp,planeNormal,<span class="string">'color'</span>,<span class="string">'c'</span>,optQuiver{:},<span class="string">'DisplayName'</span>,<span class="string">'pp'</span>)
-quiverSection(vs1,ps1,planeNormal,<span class="string">'color'</span>,<span class="string">'g'</span>,optQuiver{:},<span class="string">'DisplayName'</span>,<span class="string">'ps1'</span>)
-quiverSection(vs2,ps2,planeNormal,<span class="string">'color'</span>,<span class="string">'m'</span>,optQuiver{:},<span class="string">'DisplayName'</span>,<span class="string">'ps2'</span>)
+% polarisation directions
+quiverSection(vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
+quiverSection(vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
+quiverSection(vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
 
-<span class="comment">% plot propagation directions as reference</span>
-quiverSection(vp,prop,planeNormal,optQuiverProp{:},<span class="string">'DisplayName'</span>,<span class="string">'x'</span>)
+% plot propagation directions as reference
+quiverSection(vp,prop,planeNormal,optQuiverProp{:},'DisplayName','x')
 quiverSection(vs1,prop,planeNormal,optQuiverProp{:})
 quiverSection(vs2,prop,planeNormal,optQuiverProp{:})
-hold <span class="string">off</span>
+hold off
 
-axis <span class="string">off</span> <span class="string">tight</span>
-legend(<span class="string">'Vp'</span>,<span class="string">'Vs1'</span>,<span class="string">'Vs2'</span>,<span class="string">'pp'</span>,<span class="string">'ps1'</span>,<span class="string">'ps2'</span>,<span class="string">'x'</span>,<span class="string">'Location'</span>,<span class="string">'eastOutSide'</span>)
-mtexTitle(<span class="string">'Phase velocity surface (km/s)'</span>)
+axis off tight
+legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
+mtexTitle('Phase velocity surface (km/s)')
 
-mtexColorMap <span class="string">blue2red</span>
-mtexColorbar(<span class="string">'Title'</span>,<span class="string">'(km/s)'</span>,<span class="string">'location'</span>,<span class="string">'southOutSide'</span>)
-  {% endhighlight %}
+mtexColorMap blue2red
+mtexColorbar('Title','(km/s)','location','southOutSide')
+{% endhighlight %}
 
   {% include inline_image.html file="AnisotropicElasticity_06.png" %}
 <p>Similarly, we can visualize the slowness surfaces (s/km)</p>
-  {% highlight matlab %}
-  <span class="comment">% plot slowness surfaces</span>
-plotSection(1./vp,planeNormal,optSec{:},<span class="string">'DisplayName'</span>,<span class="string">'Vp'</span>)
-hold <span class="string">on</span>
-plotSection(1./vs1,planeNormal,optSec{:},<span class="string">'DisplayName'</span>,<span class="string">'Vs1'</span>)
-plotSection(1./vs2,planeNormal,optSec{:},<span class="string">'DisplayName'</span>,<span class="string">'Vs2'</span>)
+{% highlight matlab %}
+% plot slowness surfaces
+plotSection(1./vp,planeNormal,optSec{:},'DisplayName','Vp')
+hold on
+plotSection(1./vs1,planeNormal,optSec{:},'DisplayName','Vs1')
+plotSection(1./vs2,planeNormal,optSec{:},'DisplayName','Vs2')
 
-<span class="comment">% polarisation directions</span>
-quiverSection(1./vp,pp,planeNormal,<span class="string">'color'</span>,<span class="string">'c'</span>,optQuiver{:},<span class="string">'DisplayName'</span>,<span class="string">'pp'</span>)
-quiverSection(1./vs1,ps1,planeNormal,<span class="string">'color'</span>,<span class="string">'g'</span>,optQuiver{:},<span class="string">'DisplayName'</span>,<span class="string">'ps1'</span>)
-quiverSection(1./vs2,ps2,planeNormal,<span class="string">'color'</span>,<span class="string">'m'</span>,optQuiver{:},<span class="string">'DisplayName'</span>,<span class="string">'ps2'</span>)
+% polarisation directions
+quiverSection(1./vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
+quiverSection(1./vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
+quiverSection(1./vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
 
-<span class="comment">% plot propagation directions as reference</span>
-quiverSection(1./vp,prop,planeNormal,optQuiverProp{:},<span class="string">'DisplayName'</span>,<span class="string">'x'</span>)
+% plot propagation directions as reference
+quiverSection(1./vp,prop,planeNormal,optQuiverProp{:},'DisplayName','x')
 quiverSection(1./vs1,prop,planeNormal,optQuiverProp{:})
 quiverSection(1./vs2,prop,planeNormal,optQuiverProp{:})
-hold <span class="string">off</span>
-axis <span class="string">off</span> <span class="string">tight</span>
-legend(<span class="string">'Vp'</span>,<span class="string">'Vs1'</span>,<span class="string">'Vs2'</span>,<span class="string">'pp'</span>,<span class="string">'ps1'</span>,<span class="string">'ps2'</span>,<span class="string">'x'</span>,<span class="string">'Location'</span>,<span class="string">'eastOutSide'</span>)
-mtexTitle(<span class="string">'Slowness surface (km/s)'</span>)
+hold off
+axis off tight
+legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
+mtexTitle('Slowness surface (km/s)')
 
-mtexColorMap <span class="string">blue2red</span>
-mtexColorbar(<span class="string">'Title'</span>,<span class="string">'(s/km)'</span>,<span class="string">'location'</span>,<span class="string">'southOutSide'</span>)
-  {% endhighlight %}
+mtexColorMap blue2red
+mtexColorbar('Title','(s/km)','location','southOutSide')
+{% endhighlight %}
 
   {% include inline_image.html file="AnisotropicElasticity_07.png" %}
 <p>set back default colormap</p>
-  {% highlight matlab %}
-  setMTEXpref(<span class="string">'defaultColorMap'</span>,WhiteJetColorMap)
-  {% endhighlight %}
+{% highlight matlab %}
+setMTEXpref('defaultColorMap',WhiteJetColorMap)
+{% endhighlight %}
 </div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: script_OrientationInversePoleFigure
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: OrientationInversePoleFigure.html
 folder: documentation
@@ -14,14 +14,14 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_OrientationInversePoleFigure</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_OrientationInversePoleFigure.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationInversePoleFigure into the Matlab commandline">edit page</a></font><div><h2 id="1">Inverse Pole Figure</h2><p>Inverse pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
-  {% highlight matlab %}
-  cs = crystalSymmetry(<span class="string">'321'</span>)
+      --><title>script_OrientationInversePoleFigure</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_OrientationInversePoleFigure.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationInversePoleFigure into the Matlab commandline">edit page</a></font><div><h2 id="1">Inverse Pole Figure</h2><p>Inverse pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
+{% highlight matlab %}
+cs = crystalSymmetry('321')
 ori = orientation.rand(cs)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 cs = crystalSymmetry  
  
   symmetry       : 321               
@@ -36,65 +36,65 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  324.088 85.8333 24.0304       0
+  176.724 14.1515 7.29536       0
  
 
-        {% endhighlight %}
-    <p>Starting point is a fixed specimen direction <tt>r</tt>, e.g.,</p>
-  {% highlight matlab %}
-  <span class="comment">% the fixed crystal directions z</span>
+{% endhighlight %}
+<p>Starting point is a fixed specimen direction <tt>r</tt>, e.g.,</p>
+{% highlight matlab %}
+% the fixed crystal directions z
 r = vector3d.Z
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 r = vector3d  
  size: 1 x 1
   x y z
   0 0 1
 
-        {% endhighlight %}
-    <p>Next the crystal direction corresponding to the specimen direction <tt>r</tt> according to the orientation <tt>r</tt> are computed</p>
-  {% highlight matlab %}
-  h = inv(ori) * r
-  {% endhighlight %}
+{% endhighlight %}
+<p>Next the crystal direction corresponding to the specimen direction <tt>r</tt> according to the orientation <tt>r</tt> are computed</p>
+{% highlight matlab %}
+h = inv(ori) * r
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 h = Miller  
  size: 1 x 1
  symmetry: 321, X||a*, Y||b, Z||c*
-  h -0.1037
-  k  0.9109
-  i -0.8072
-  l  0.0727
+  h -0.0944
+  k  0.2425
+  i -0.1481
+  l  0.9697
 
-        {% endhighlight %}
-    <p>and ploted in a spherical projection</p>
-  {% highlight matlab %}
-  plot(h.symmetrise,<span class="string">'fundamentalRegion'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<p>and ploted in a spherical projection</p>
+{% highlight matlab %}
+plot(h.symmetrise,'fundamentalRegion')
+{% endhighlight %}
 
   {% include inline_image.html file="OrientationInversePoleFigure_01.png" %}
 <p>A shortcut for the above computations is the command</p>
-  {% highlight matlab %}
-  <span class="comment">% a pole figure plot</span>
+{% highlight matlab %}
+% a pole figure plot
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z])
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="OrientationInversePoleFigure_02.png" %}
 <h2 id="6">Contour plots</h2>
-  {% highlight matlab %}
-  plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],<span class="string">'contourf'</span>)
+{% highlight matlab %}
+plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],'contourf')
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="OrientationInversePoleFigure_03.png" %}
 
-  {% highlight matlab %}
-  plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],<span class="string">'contourf'</span>,<span class="string">'complete'</span>,<span class="string">'upper'</span>)
+{% highlight matlab %}
+plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],'contourf','complete','upper')
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="OrientationInversePoleFigure_04.png" %}
 </div></body></html>

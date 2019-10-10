@@ -1,6 +1,6 @@
 ---
 title: Twinning Analysis
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
@@ -14,30 +14,30 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
-  {% highlight matlab %}
-  <span class="comment">% load some example data</span>
-mtexdata <span class="string">twins</span>
+      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
+{% highlight matlab %}
+% load some example data
+mtexdata twins
 
-<span class="comment">% segment grains</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'angle'</span>,5*degree);
+% segment grains
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
-<span class="comment">% remove two pixel grains</span>
+% remove two pixel grains
 ebsd(grains(grains.grainSize&lt;=2)) = [];
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'angle'</span>,5*degree);
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
-<span class="comment">% smooth them</span>
+% smooth them
 grains = grains.smooth(5);
 
-<span class="comment">% visualize the grains</span>
+% visualize the grains
 plot(grains,grains.meanOrientation)
 
-<span class="comment">% store crystal symmetry of Magnesium</span>
+% store crystal symmetry of Magnesium
 CS = grains.CS;
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -53,72 +53,72 @@ ebsd = EBSD
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="TwinningBoundaries_01.png" %}
 <p>Now we can extract from the grains its boundary and save it to a separate variable</p>
-  {% highlight matlab %}
-  gB = grains.boundary
-  {% endhighlight %}
+{% highlight matlab %}
+gB = grains.boundary
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB = grainBoundary  
  
  Segments   mineral 1  mineral 2
       600  notIndexed  Magnesium
      3164   Magnesium  Magnesium
 
-        {% endhighlight %}
-    <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
-  {% highlight matlab %}
-  gB_MgMg = gB(<span class="string">'Magnesium'</span>,<span class="string">'Magnesium'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
+{% highlight matlab %}
+gB_MgMg = gB('Magnesium','Magnesium')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB_MgMg = grainBoundary  
  
  Segments  mineral 1  mineral 2
      3164  Magnesium  Magnesium
 
-        {% endhighlight %}
-    <h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p>
-  {% highlight matlab %}
-  plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,<span class="string">'linewidth'</span>,2)
+{% endhighlight %}
+<h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p>
+{% highlight matlab %}
+plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,'linewidth',2)
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_02.png" %}
 <p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogramm.</p>
-  {% highlight matlab %}
-  histogram(gB_MgMg.misorientation.angle./degree,40)
-xlabel(<span class="string">'misorientation angle (degree)'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+histogram(gB_MgMg.misorientation.angle./degree,40)
+xlabel('misorientation angle (degree)')
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_03.png" %}
 <p>Lets analyze the misorientations corresponding to the peak around 86 degree in more detail. Therefore, we consider only those misorientations with misorientation angle between 85 and 87 degree</p>
-  {% highlight matlab %}
-  ind = gB_MgMg.misorientation.angle&gt;85*degree &amp; gB_MgMg.misorientation.angle&lt;87*degree;
+{% highlight matlab %}
+ind = gB_MgMg.misorientation.angle&gt;85*degree &amp; gB_MgMg.misorientation.angle&lt;87*degree;
 mori = gB_MgMg.misorientation(ind);
-  {% endhighlight %}
+{% endhighlight %}
 <p>and observe that when plotted in axis angle domain they form a strong cluster close to one of the corners of the domain.</p>
-  {% highlight matlab %}
-  scatter(mori)
-  {% endhighlight %}
+{% highlight matlab %}
+scatter(mori)
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_04.png" %}
 <p>We may determin the center of the cluster and check whether it is close to some special orientation relation ship</p>
-  {% highlight matlab %}
-  <span class="comment">% determine the mean of the cluster</span>
-mori_mean = mean(mori,<span class="string">'robust'</span>)
+{% highlight matlab %}
+% determine the mean of the cluster
+mori_mean = mean(mori,'robust')
 
-<span class="comment">% determine the closest special orientation relation ship</span>
+% determine the closest special orientation relation ship
 round2Miller(mori_mean)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 mori_mean = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
@@ -133,15 +133,15 @@ mori_mean = misorientation
 (01-1-2) || (0-11-2)   [2-1-10] || [2-1-10]   error: 0.47&deg;
  
 
-        {% endhighlight %}
-    <p>Bases on the output above we may now define the special orientation relationship as</p>
-  {% highlight matlab %}
-  twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),<span class="keyword">...</span>
+{% endhighlight %}
+<p>Bases on the output above we may now define the special orientation relationship as</p>
+{% highlight matlab %}
+twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
   Miller(2,-1,-1,0,CS),Miller(2,-1,-1,0,CS))
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 twinning = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
@@ -152,18 +152,18 @@ twinning = misorientation
    150 86.3471     210       0
  
 
-        {% endhighlight %}
-    <p>and observe that it is actually a rotation about axis (-1210) and angle 86.3 degree</p>
-  {% highlight matlab %}
-  <span class="comment">% the rotational axis</span>
+{% endhighlight %}
+<p>and observe that it is actually a rotation about axis (-1210) and angle 86.3 degree</p>
+{% highlight matlab %}
+% the rotational axis
 round(twinning.axis)
 
-<span class="comment">% the rotational angle</span>
+% the rotational angle
 twinning.angle / degree
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = Miller  
  size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
@@ -174,24 +174,24 @@ ans = Miller
 ans =
    86.3471
 
-        {% endhighlight %}
-    <p>Next, we check for each boundary segment whether it is a twinning boundary, i.e., whether boundary misorientation is close to the twinning.</p>
-  {% highlight matlab %}
-  <span class="comment">% restrict to twinnings with threshold 5 degree</span>
+{% endhighlight %}
+<p>Next, we check for each boundary segment whether it is a twinning boundary, i.e., whether boundary misorientation is close to the twinning.</p>
+{% highlight matlab %}
+% restrict to twinnings with threshold 5 degree
 isTwinning = angle(gB_MgMg.misorientation,twinning) &lt; 5*degree;
 twinBoundary = gB_MgMg(isTwinning)
 
-<span class="comment">% plot the twinning boundaries</span>
+% plot the twinning boundaries
 plot(grains,grains.meanOrientation)
-<span class="comment">%plot(ebsd('indexed'),ebsd('indexed').orientations)</span>
-hold <span class="string">on</span>
-<span class="comment">%plot(gB_MgMg,angle(gB_MgMg.misorientation,twinning),'linewidth',4)</span>
-plot(twinBoundary,<span class="string">'linecolor'</span>,<span class="string">'w'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'displayName'</span>,<span class="string">'twin boundary'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+%plot(ebsd('indexed'),ebsd('indexed').orientations)
+hold on
+%plot(gB_MgMg,angle(gB_MgMg.misorientation,twinning),'linewidth',4)
+plot(twinBoundary,'linecolor','w','linewidth',2,'displayName','twin boundary')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 twinBoundary = grainBoundary  
  
  Segments  mineral 1  mineral 2
@@ -202,39 +202,39 @@ twinBoundary = grainBoundary
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="TwinningBoundaries_05.png" %}
 <h2 id="12">Merge twins along twin boundaries</h2><p>Grains that have a common twin boundary are assumed to inherite from one common grain. To reconstruct those initial grains we merge grains together which have a common twin boundary. This is done by the command <a href="grain2d.merge.html">merge</a>.</p>
-  {% highlight matlab %}
-  [mergedGrains,parentId] = merge(grains,twinBoundary);
+{% highlight matlab %}
+[mergedGrains,parentId] = merge(grains,twinBoundary);
 
-<span class="comment">% plot the merged grains</span>
-<span class="comment">%plot(ebsd,ebsd.orientations)</span>
-hold <span class="string">on</span>
-plot(mergedGrains.boundary,<span class="string">'linecolor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2.5,<span class="string">'linestyle'</span>,<span class="string">'-'</span>,<span class="keyword">...</span>
-  <span class="string">'displayName'</span>,<span class="string">'merged grains'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% plot the merged grains
+%plot(ebsd,ebsd.orientations)
+hold on
+plot(mergedGrains.boundary,'linecolor','k','linewidth',2.5,'linestyle','-',...
+  'displayName','merged grains')
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_06.png" %}
 <h2 id="13">Grain relationships</h2><p>The second output argument <tt>paraentId</tt> of <a href="grain2d.merge.html">merge</a> is a list with the same size as grains which indicates for each grain into which common grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p>
-  {% highlight matlab %}
-  mergedGrains(16).id
-  {% endhighlight %}
+{% highlight matlab %}
+mergedGrains(16).id
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
     16
 
-        {% endhighlight %}
-    <p>Hence, we can find all childs of grain 16 by</p>
-  {% highlight matlab %}
-  childs = grains(parentId == mergedGrains(16).id)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Hence, we can find all childs of grain 16 by</p>
+{% highlight matlab %}
+childs = grains(parentId == mergedGrains(16).id)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 childs = grain2d  
  
  Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
@@ -254,38 +254,38 @@ childs = grain2d
  33       1      250    0.0106861    179    89    235
  
 
-        {% endhighlight %}
-    <h2 id="15">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p>
-  {% highlight matlab %}
-  twinId = unique(gB_MgMg(isTwinning).grainId);
+{% endhighlight %}
+<h2 id="15">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p>
+{% highlight matlab %}
+twinId = unique(gB_MgMg(isTwinning).grainId);
 
-<span class="comment">% compute the area fraction</span>
+% compute the area fraction
 sum(area(grains(twinId))) / sum(area(grains)) * 100
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
    73.5716
 
-        {% endhighlight %}
-    <p>The <tt>parentId</tt> may also used to compute properties of the parent grains by averaging over the corresponding child grain properties.</p>
-  {% highlight matlab %}
-  mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@nanmean)
+{% endhighlight %}
+<p>The <tt>parentId</tt> may also used to compute properties of the parent grains by averaging over the corresponding child grain properties.</p>
+{% highlight matlab %}
+mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@nanmean)
 
 figure(1)
 plot(grains,grains.GOS ./ degree)
-hold <span class="string">on</span>
-plot(mergedGrains.boundary,<span class="string">'lineColor'</span>,<span class="string">'white'</span>,<span class="string">'lineWidth'</span>,2)
+hold on
+plot(mergedGrains.boundary,'lineColor','white','lineWidth',2)
 mtexColorbar
 
 figure(2)
 plot(mergedGrains,mergedGrains.GOS  ./ degree)
 mtexColorbar
 caxis([0,1.5])
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 mergedGrains = grain2d  
  
  Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
@@ -297,49 +297,49 @@ mergedGrains = grain2d
  Properties: GOS
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="TwinningBoundaries_07.png" %}
 
   {% include inline_image.html file="TwinningBoundaries_08.png" %}
 <p>The above result is a bit unrealistic since the averages are computed between the childs ignoring their relative areas. A better approach is to compute a weighted average by the following lines.</p>
-  {% highlight matlab %}
-  <span class="comment">% extract GOS and area</span>
+{% highlight matlab %}
+% extract GOS and area
 childGOS = grains.GOS;
 childArea = grains.area;
 
-<span class="comment">% compute the weighted averages</span>
-mergedGrains.prop.GOS = accumarray(parentId,1:length(grains),size(mergedGrains),<span class="keyword">...</span>
+% compute the weighted averages
+mergedGrains.prop.GOS = accumarray(parentId,1:length(grains),size(mergedGrains),...
   @(id) nanmeanWeights(childGOS(id),childArea(id)));
 
 figure(3)
 plot(mergedGrains,mergedGrains.GOS  ./ degree)
 mtexColorbar
 caxis([0,1.5])
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_09.png" %}
 <h2 id="18">Setting Up the EBSD Data for the Merged Grains</h2><p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-plot(mergedGrains(16).boundary,<span class="string">'linewidth'</span>,2)
-hold <span class="string">on</span>
+{% highlight matlab %}
+close all
+plot(mergedGrains(16).boundary,'linewidth',2)
+hold on
 plot(ebsd(mergedGrains(16)),ebsd(mergedGrains(16)).orientations)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_10.png" %}
 <p>In order to update the grainId in the ebsd variable to the merged grains, we proceed as follows.</p>
-  {% highlight matlab %}
-  <span class="comment">% copy ebsd data into a new variable to not change the old data</span>
+{% highlight matlab %}
+% copy ebsd data into a new variable to not change the old data
 ebsd_merged = ebsd;
 
-<span class="comment">% update the grainIds to the parentIds</span>
-ebsd_merged(<span class="string">'indexed'</span>).grainId = parentId(ebsd(<span class="string">'indexed'</span>).grainId)
-  {% endhighlight %}
+% update the grainIds to the parentIds
+ebsd_merged('indexed').grainId = parentId(ebsd('indexed').grainId)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd_merged = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -350,14 +350,14 @@ ebsd_merged = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>Now the variable <tt>ebsd_merged</tt> can be indexed by the merged grains, i.e.</p>
-  {% highlight matlab %}
-  plot(ebsd_merged(mergedGrains(16)),ebsd_merged(mergedGrains(16)).orientations)
-hold <span class="string">on</span>
-plot(mergedGrains(16).boundary,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% endhighlight %}
+<p>Now the variable <tt>ebsd_merged</tt> can be indexed by the merged grains, i.e.</p>
+{% highlight matlab %}
+plot(ebsd_merged(mergedGrains(16)),ebsd_merged(mergedGrains(16)).orientations)
+hold on
+plot(mergedGrains(16).boundary,'linewidth',2)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="TwinningBoundaries_11.png" %}
 </div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: Boundary Plots
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryPlots.html
 folder: documentation
@@ -14,30 +14,30 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>; plotx2east
+      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
+{% highlight matlab %}
+close all; plotx2east
 
-<span class="comment">% import the data</span>
-mtexdata <span class="string">forsterite</span>
+% import the data
+mtexdata forsterite
 
-<span class="comment">% restrict it to a subregion of interest.</span>
+% restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-[grains,ebsd.grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
-<span class="comment">% remove very small grains</span>
+% remove very small grains
 ebsd(grains(grains.grainSize&lt;=5)) = [];
 
-<span class="comment">% and recompute grains</span>
-[grains,ebsd.grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+% and recompute grains
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
-<span class="comment">% smooth the grains a bit</span>
+% smooth the grains a bit
 grains = smooth(grains,4);
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -50,14 +50,14 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>The grain boundary segments of a list of grains are stored within the field</p>
-  {% highlight matlab %}
-  gB = grains.boundary
-  {% endhighlight %}
+{% endhighlight %}
+<p>The grain boundary segments of a list of grains are stored within the field</p>
+{% highlight matlab %}
+gB = grains.boundary
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB = grainBoundary  
  
  Segments   mineral 1   mineral 2
@@ -71,29 +71,29 @@ gB = grainBoundary
       112   Enstatite    Diopside
        28    Diopside    Diopside
 
-        {% endhighlight %}
-    <p>We may use the <a href="grainBoundary.plot.html">plot</a> command to visualize the grain boundaries in the map</p>
-  {% highlight matlab %}
-  <span class="comment">% plot phases and grain boundaries</span>
+{% endhighlight %}
+<p>We may use the <a href="grainBoundary.plot.html">plot</a> command to visualize the grain boundaries in the map</p>
+{% highlight matlab %}
+% plot phases and grain boundaries
 plot(ebsd)
-hold <span class="string">on</span>
-plot(gB,<span class="string">'lineWidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(gB,'lineWidth',2)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_01.png" %}
 <h2 id="4">Specific boundaries</h2><p>Accordingly, we can access the grain boundary of a specific grain by</p>
-  {% highlight matlab %}
-  grains(45).boundary
+{% highlight matlab %}
+grains(45).boundary
 
-<span class="comment">% lets highlight this specific grain by its boundary</span>
-hold <span class="string">on</span>
-plot(grains(45).boundary,<span class="string">'lineWidth'</span>,4,<span class="string">'lineColor'</span>,<span class="string">'DarkBlue'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% lets highlight this specific grain by its boundary
+hold on
+plot(grains(45).boundary,'lineWidth',4,'lineColor','DarkBlue')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = grainBoundary  
  
  Segments   mineral 1   mineral 2
@@ -101,99 +101,99 @@ ans = grainBoundary
        69  Forsterite   Enstatite
        29  Forsterite    Diopside
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryPlots_02.png" %}
 <p>For a multi-phase system, the location of specific phase transistions may be of interest. The following plot highlights all Forsterite to Enstatite phase transitions</p>
-  {% highlight matlab %}
-  hold <span class="string">on</span>
-plot(grains.boundary(<span class="string">'Fo'</span>,<span class="string">'En'</span>),<span class="string">'linecolor'</span>,<span class="string">'DarkGreen'</span>,<span class="string">'linewidth'</span>,4)
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% highlight matlab %}
+hold on
+plot(grains.boundary('Fo','En'),'linecolor','DarkGreen','linewidth',4)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_03.png" %}
 <p>Another type of boundaries is boundaries between measurements that belong to the same grain. This happens if a grain has a texture gradient that loops around these two measurements.</p>
-  {% highlight matlab %}
-  hold <span class="string">on</span>
-plot(grains.innerBoundary,<span class="string">'linecolor'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,4)
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% highlight matlab %}
+hold on
+plot(grains.innerBoundary,'linecolor','red','linewidth',4)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_04.png" %}
 <h2 id="7">Misorientation angle</h2><p>The boundary misorientation is the misorientation between the two neighboring pixels of a boundary segment. Depending of the misorientation angle one distinguishes between high angle and low angle grain boundaries. In MTEX we can visualize the boundary misorientation angle by the commands</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-gB_Fo = grains.boundary(<span class="string">'Fo'</span>,<span class="string">'Fo'</span>);
-plot(grains,<span class="string">'translucent'</span>,1,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-legend <span class="string">off</span>
-hold <span class="string">on</span>
-plot(gB_Fo,gB_Fo.misorientation.angle./degree,<span class="string">'linewidth'</span>,4)
-hold <span class="string">off</span>
-mtexColorbar(<span class="string">'title'</span>,<span class="string">'misorientation angle'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+close all
+gB_Fo = grains.boundary('Fo','Fo');
+plot(grains,'translucent',1,'micronbar','off')
+legend off
+hold on
+plot(gB_Fo,gB_Fo.misorientation.angle./degree,'linewidth',4)
+hold off
+mtexColorbar('title','misorientation angle')
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_05.png" %}
 <h2 id="8">The misorientation axes in crystal coordinates</h2><p>Similarly as the rotational angle we may colorize the grain boundaries also according the misorientation axes. First of all we have to decide wheter we want to visualize the rotational axis in crystal or coordinate system. Second we have to define a color key that translates rotational axes into colors.</p><p>Lets start with the rotational axes in crystal coordinates</p>
-  {% highlight matlab %}
-  <span class="comment">% computed the axes in specien coordinates</span>
+{% highlight matlab %}
+% computed the axes in specien coordinates
 axes = gB_Fo.misorientation.axis
 
-<span class="comment">% define a color key</span>
+% define a color key
 colorKey = HSVDirectionKey(axes);
 
-<span class="comment">% compute colors</span>
+% compute colors
 color = colorKey.direction2color(axes);
 
-hold <span class="string">on</span>
-plot(gB_Fo,<span class="string">'lineColor'</span>,<span class="string">'black'</span>,<span class="string">'linewidth'</span>,6) <span class="comment">% some black background for contrast</span>
-plot(gB_Fo,color,<span class="string">'linewidth'</span>,4)
-hold <span class="string">off</span>
-mtexColorbar(<span class="string">'off'</span>)
-  {% endhighlight %}
+hold on
+plot(gB_Fo,'lineColor','black','linewidth',6) % some black background for contrast
+plot(gB_Fo,color,'linewidth',4)
+hold off
+mtexColorbar('off')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 axes = Miller  
  size: 1386 x 1
  mineral: Forsterite (mmm)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryPlots_06.png" %}
 <p>As a colorbar replacement we plot the color key and on top of it the misorientation axes at the grain boundaries</p>
-  {% highlight matlab %}
-  figure(2)
+{% highlight matlab %}
+figure(2)
 plot(colorKey)
-hold <span class="string">on</span>
-plot(axes,<span class="string">'MarkerFaceAlpha'</span>,0.1,<span class="string">'MarkerEdgeAlpha'</span>,0.3)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(axes,'MarkerFaceAlpha',0.1,'MarkerEdgeAlpha',0.3)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_07.png" %}
 <h2 id="10">The misorientation axes in specimen coordinates</h2><p>Analyzing the misorientation axis in specimen coordinates is a bit more involved as it requires to extract the two neighbouring orientations to each boundary segment. To do this we use the <b>ebsdId</b> stored in the boundary segments.</p>
-  {% highlight matlab %}
-  figure(1)
+{% highlight matlab %}
+figure(1)
 
-<span class="comment">% first we reduce the number of boundary segments a bit</span>
-<span class="comment">% in order to avoid that the plot becomes to messy</span>
+% first we reduce the number of boundary segments a bit
+% in order to avoid that the plot becomes to messy
 gB_red = reduce(gB_Fo,5)
 
-<span class="comment">% next we extract for every boundary segment the two orientations at both</span>
-<span class="comment">% sides</span>
-ori = ebsd(<span class="string">'id'</span>,gB_red.ebsdId).orientations
+% next we extract for every boundary segment the two orientations at both
+% sides
+ori = ebsd('id',gB_red.ebsdId).orientations
 
-<span class="comment">% the two orientations we use to compute the misorientation axis in</span>
-<span class="comment">% specimen coordinates</span>
+% the two orientations we use to compute the misorientation axis in
+% specimen coordinates
 axes = axis(ori(:,1),ori(:,2))
 
-<span class="comment">% plot the projection of the misorientation axis on the measurement surface</span>
-hold <span class="string">on</span>
-quiver(gB_red,axes,<span class="string">'autoScaleFactor'</span>,0.4,<span class="string">'color'</span>,<span class="string">'black'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% plot the projection of the misorientation axis on the measurement surface
+hold on
+quiver(gB_red,axes,'autoScaleFactor',0.4,'color','black')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB_red = grainBoundary  
  
  Segments   mineral 1   mineral 2
@@ -208,38 +208,38 @@ ori = orientation
 axes = vector3d  
  size: 278 x 1
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryPlots_08.png" %}
 <h2 id="11">Full Misorientation Colorization</h2><p>In order to visuale the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <tt>Improved representations of misorientation information for grain boundary</tt>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
-  {% highlight matlab %}
-  <span class="comment">% plot the grains</span>
-close <span class="string">all</span>
-plot(grains,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-legend <span class="string">off</span>
+{% highlight matlab %}
+% plot the grains
+close all
+plot(grains,'micronbar','off')
+legend off
 
-<span class="comment">% define the color key</span>
+% define the color key
 colorKey = PatalaColorKey(gB_Fo);
 
-hold <span class="string">on</span>
-plot(gB_Fo,<span class="string">'linewidth'</span>,7)
-set(gcf,<span class="string">'Renderer'</span>,<span class="string">'painters'</span>)
-hold <span class="string">on</span>
-plot(gB_Fo,colorKey.orientation2color(gB_Fo.misorientation),<span class="string">'linewidth'</span>,4)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(gB_Fo,'linewidth',7)
+set(gcf,'Renderer','painters')
+hold on
+plot(gB_Fo,colorKey.orientation2color(gB_Fo.misorientation),'linewidth',4)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_09.png" %}
 <p>Lets visualize the color key as axis angle sections through the misorientation space</p>
-  {% highlight matlab %}
-  figure(2)
+{% highlight matlab %}
+figure(2)
 plot(colorKey)
 
-<span class="comment">% and plot the misorienations on top</span>
-hold <span class="string">on</span>
-plot(gB_Fo.misorientation,<span class="string">'MarkerFacecolor'</span>,<span class="string">'black'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% and plot the misorienations on top
+hold on
+plot(gB_Fo.misorientation,'MarkerFacecolor','black')
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryPlots_10.png" %}
 </div></body></html>

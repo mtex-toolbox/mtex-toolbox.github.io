@@ -1,6 +1,6 @@
 ---
 title: calcMDF
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: orientation.calcMDF.html
 folder: function_reference
@@ -14,26 +14,41 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcMDF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_orientation__calcMDF.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__calcMDF into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>computes an MDF from individuel orientations or misorientations</p><p>The function <b>calcMDF</b> applies one of the following algorithms to compute an MDF from a list of orientations.</p><div><ol><li>direct kernel density estimation</li><li>kernel density estimation via Fourier series</li><li>Bingham estimation</li></ol></div><h2 id="3">Syntax</h2><pre class="language-matlab"><span class="comment">% use kernel density estimation with a 10 degree kernel</span>
+      --><title>calcMDF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_orientation__calcMDF.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__calcMDF into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>computes an MDF from individuel orientations or misorientations</p><p>The function <b>calcMDF</b> applies one of the following algorithms to compute an MDF from a list of orientations.</p><div><ol><li>direct kernel density estimation</li><li>kernel density estimation via Fourier series</li><li>Bingham estimation</li></ol></div><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+% use kernel density estimation with a 10 degree kernel
 mori = grains.boundary.misorientation
-mdf = calcMDF(mori,<span class="string">'halfwidth'</span>,10*degree)
-</pre><pre class="language-matlab"><span class="comment">% compute an uncorrelated MDF</span>
-mdf = calcMDF(grains(<span class="string">'phase1'</span>).meanorientation)
-</pre><pre class="language-matlab"><span class="comment">% use grain area as weights for the orientations</span>
-mdf = calcMDF(grains(<span class="string">'phase1'</span>).meanOrientation,<span class="string">'weights'</span>,grains(<span class="string">'phase1'</span>).diameter)
-</pre><pre class="language-matlab"><span class="comment">% use a specific kernel</span>
-psi = AbelPoissonKernel(<span class="string">'halfwidth'</span>,10*degree)
-mdf = calcMDF(mori,<span class="string">'kernel'</span>,psi)
-</pre><pre class="language-matlab"><span class="comment">% compute the MDF as a Fourier series of order 16</span>
-mdf = calcMDF(mori,<span class="string">'order'</span>,16)
-</pre><h2 id="4">Input</h2><p>
+mdf = calcMDF(mori,'halfwidth',10*degree)
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute an uncorrelated MDF
+mdf = calcMDF(grains('phase1').meanorientation)
+{% endhighlight %}
+
+{% highlight matlab %}
+% use grain area as weights for the orientations
+mdf = calcMDF(grains('phase1').meanOrientation,'weights',grains('phase1').diameter)
+{% endhighlight %}
+
+{% highlight matlab %}
+% use a specific kernel
+psi = AbelPoissonKernel('halfwidth',10*degree)
+mdf = calcMDF(mori,'kernel',psi)
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute the MDF as a Fourier series of order 16
+mdf = calcMDF(mori,'order',16)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>ori</tt>
          </td>
          <td>
-            <tt>&lt;a href="orientation_index.html"&gt;orientation&lt;/a&gt;</tt>
+            <tt><a href="orientation_index.html">orientation</a></tt>
          </td>
       </tr>
       <tr>
@@ -138,7 +153,7 @@ mdf = calcMDF(mori,<span class="string">'order'</span>,16)
             <tt>mdf</tt>
          </td>
          <td>
-            <tt>&lt;a href="ODF_index.html"&gt;ODF&lt;/a&gt;</tt>
+            <tt><a href="ODF_index.html">ODF</a></tt>
          </td>
       </tr>
    </table>

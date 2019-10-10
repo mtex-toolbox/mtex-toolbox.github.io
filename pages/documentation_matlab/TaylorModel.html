@@ -1,0 +1,271 @@
+---
+title: Taylor Model
+last_updated: 10-Oct-2019
+sidebar: documentation_sidebar
+permalink: TaylorModel.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Taylor Model</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_TaylorModel.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TaylorModel into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">basic settings</h2><p>display pole figure plots with RD on top and ND west</p>
+{% highlight matlab %}
+plotx2north
+
+% store old annotation style
+storepfA = getMTEXpref('pfAnnotations');
+
+% set new annotation style to display RD and ND
+pfAnnotations = @(varargin) text(-[vector3d.X,vector3d.Y],{'RD','ND'},...
+  'BackgroundColor','w','tag','axesLabels',varargin{:});
+
+setMTEXpref('pfAnnotations',pfAnnotations);
+{% endhighlight %}
+<h2 id="2">Set up</h2><p>consider cubic crystal symmetry</p>
+{% highlight matlab %}
+cs = crystalSymmetry('432');
+
+% define a family of slip systems
+sS = slipSystem.bcc(cs);
+
+% some plane strain
+q = 0;
+epsilon = strainTensor(diag([1 -q -(1-q)]))
+
+% define a crystal orientation
+ori = orientation.byEuler(0,30*degree,15*degree,cs)
+
+% compute the Taylor factor
+[M,b,W] = calcTaylor(inv(ori)*epsilon,sS.symmetrise);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+epsilon = strainTensor  
+  rank: 2 (3 x 3)
+ 
+  1  0  0
+  0  0  0
+  0  0 -1
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : 432
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0   30   15    0
+ 
+
+{% endhighlight %}
+<h2 id="3">The orientation dependence of the Taylor factor</h2><p>The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970). Some applications of the Taylor theory of polycrystal plasticity. Kristall Und Technik, 5(1), 145-175. <a href="http://doi.org/10.1002/crat.19700050112">http://doi.org/10.1002/crat.19700050112</a></p>
+{% highlight matlab %}
+% set up an phi1 section plot
+sP = phi1Sections(cs,specimenSymmetry('222'));
+sP.phi1 = (0:10:90)*degree;
+
+% generate an orientations grid
+oriGrid = sP.makeGrid('resolution',2.5*degree);
+oriGrid.SS = specimenSymmetry;
+
+% compute Taylor factor for all orientations
+tic
+[M,~,W] = calcTaylor(inv(oriGrid)*epsilon,sS.symmetrise);
+toc
+
+% plot the taylor factor
+sP.plot(M,'smooth')
+
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+ computing Taylor factor: 100%
+Elapsed time is 37.713382 seconds.
+
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_01.png" %}
+<h2 id="4">The orientation dependence of the spin</h2><p>Compare Fig. 8 of the above paper</p>
+{% highlight matlab %}
+sP.plot(W.angle./degree,'smooth')
+mtexColorbar
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_02.png" %}
+<p>Display the crystallographic spin in sigma sections</p>
+{% highlight matlab %}
+sP = sigmaSections(cs,specimenSymmetry);
+oriGrid = sP.makeGrid('resolution',2.5*degree);
+[M,~,W] = calcTaylor(inv(oriGrid)*epsilon,sS.symmetrise);
+sP.plot(W.angle./degree,'smooth')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+ computing Taylor factor: 100%
+
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_03.png" %}
+<h2 id="6">Most active slip direction</h2><p>Next we consider a real world data set.</p>
+{% highlight matlab %}
+mtexdata csl
+
+% compute grains
+grains = calcGrains(ebsd('indexed'));
+grains = smooth(grains,5);
+
+% remove small grains
+grains(grains.grainSize &lt;= 2) = []
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ebsd = EBSD  
+ 
+ Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
+    -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
+ 
+ Properties: ci, error, iq, x, y
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+    -1     527  153693     iron      m-3m                         
+ 
+ boundary segments: 21937
+ triple points: 1451
+ 
+ Properties: GOS, meanRotation
+ 
+
+{% endhighlight %}
+<p>Next we apply the Taylor model to each grain of our data set</p>
+{% highlight matlab %}
+% some strain
+q = 0;
+epsilon = strainTensor(diag([1 -q -(1-q)]))
+
+% consider fcc slip systems
+sS = symmetrise(slipSystem.fcc(grains.CS));
+
+% apply Taylor model
+[M,b,W] = calcTaylor(inv(grains.meanOrientation)*epsilon,sS);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+epsilon = strainTensor  
+  rank: 2 (3 x 3)
+ 
+  1  0  0
+  0  0  0
+  0  0 -1
+ computing Taylor factor: 100%
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize grains according to Taylor factor
+plot(grains,M)
+mtexColorMap white2black
+mtexColorbar
+
+% index of the most active slip system - largest b
+[~,bMaxId] = max(b,[],2);
+
+% rotate the moste active slip system in specimen coordinates
+sSGrains = grains.meanOrientation .* sS(bMaxId);
+
+% visualize slip direction and slip plane for each grain
+hold on
+quiver(grains,sSGrains.b,'autoScaleFactor',0.5,'displayName','Burgers vector')
+hold on
+quiver(grains,sSGrains.trace,'autoScaleFactor',0.5,'displayName','slip plane trace')
+hold off
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_04.png" %}
+<p>plot the most active slip directions observe that they point all towards the lower hemisphere - why? they do change if q is changed</p>
+{% highlight matlab %}
+figure(2)
+plot(sSGrains.b)
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_05.png" %}
+<h2 id="10">Texture evolution during rolling</h2>
+{% highlight matlab %}
+% define some random orientations
+ori = orientation.rand(10000,cs);
+
+% 30 percent plane strain
+q = 0;
+epsilon = 0.3 * strainTensor(diag([1 -q -(1-q)]));
+
+%
+numIter = 10;
+progress(0,numIter);
+for sas=1:numIter
+
+  % compute the Taylor factors and the orientation gradients
+  [M,~,W] = calcTaylor(inv(ori) * epsilon ./ numIter, sS.symmetrise,'silent');
+
+  % rotate the individual orientations
+  ori = ori .* orientation(-W);
+  progress(sas,numIter);
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% plot the resulting pole figures
+
+% set new annotation style to display RD and ND
+pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y,vector3d.Z],{'RD','TD','ND'},...
+  'BackgroundColor','w','tag','axesLabels',varargin{:});
+setMTEXpref('pfAnnotations',pfAnnotations);
+
+plotPDF(ori,Miller({0,0,1},{1,1,1},cs),'contourf')
+mtexColorbar
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_06.png" %}
+<h2 id="12">restore MTEX preferences</h2>
+{% highlight matlab %}
+setMTEXpref('pfAnnotations',storepfA);
+{% endhighlight %}
+<h2 id="13">Inverse Taylor</h2><p>Use with care!</p>
+{% highlight matlab %}
+oS = axisAngleSections(cs,cs,'antipodal');
+oS.angles = 10*degree;
+
+ori = oS.makeGrid;
+
+[M,b,eps] = calcInvTaylor(ori,sS.symmetrise);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ computing Taylor factor: 100%
+
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(oS,M,'contourf')
+{% endhighlight %}
+
+  {% include inline_image.html file="TaylorModel_07.png" %}
+</div></body></html>

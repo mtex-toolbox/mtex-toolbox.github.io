@@ -1,6 +1,6 @@
 ---
 title: Quasi symmetry
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: QuasiCrystals.html
 folder: documentation
@@ -14,37 +14,37 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Quasi symmetry</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_QuasiCrystals.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit QuasiCrystals into the Matlab commandline">edit page</a></font><div><h1>Quasi symmetry</h1>
-  {% highlight matlab %}
-  <span class="comment">% Aufstellung 1</span>
-<span class="comment">% mit f&#65533;nfz&#65533;hliger Achse parallel zu z</span>
-<span class="comment">%rot5 = rotation.byAxisAngle(zvector,(0:4)*72*degree)</span>
-<span class="comment">%rot3 = rotation.byAxisAngle(vector3d('polar',37.377*degree,0) ,(0:2)*120*degree)</span>
+      --><title>Quasi symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_QuasiCrystals.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit QuasiCrystals into the Matlab commandline">edit page</a></font><div><h1>Quasi symmetry</h1>
+{% highlight matlab %}
+% Aufstellung 1
+% mit f&#65533;nfz&#65533;hliger Achse parallel zu z
+%rot5 = rotation.byAxisAngle(zvector,(0:4)*72*degree)
+%rot3 = rotation.byAxisAngle(vector3d('polar',37.377*degree,0) ,(0:2)*120*degree)
 
-<span class="comment">% Aufstellung 2</span>
-<span class="comment">% mit zweiz&#65533;hliger Achse parallel zu z</span>
-rot5 = rotation.byAxisAngle(vector3d(<span class="string">'polar'</span>,31.7171*degree,0),(0:4)*72*degree)
-rot3 = rotation.byAxisAngle(vector3d(<span class="string">'polar'</span>,20.9054*degree,90*degree),(0:2)*120*degree)
+% Aufstellung 2
+% mit zweiz&#65533;hliger Achse parallel zu z
+rot5 = rotation.byAxisAngle(vector3d('polar',31.7171*degree,0),(0:4)*72*degree)
+rot3 = rotation.byAxisAngle(vector3d('polar',20.9054*degree,90*degree),(0:2)*120*degree)
 
-<span class="comment">% generiere Gruppe indem wir die Operationen ein paar mal hintereinander</span>
-<span class="comment">% ausf&#65533;hren und alles doppelte wegschmeissen :)</span>
+% generiere Gruppe indem wir die Operationen ein paar mal hintereinander
+% ausf&#65533;hren und alles doppelte wegschmeissen :)
 rot = unique(rot3 * rot5 * rot3 * rot5 * rot3 * rot5)
 
-<span class="comment">% definiere das als crystal symmetry -&gt; enantiomorphe gruppe</span>
+% definiere das als crystal symmetry -&gt; enantiomorphe gruppe
 cs = crystalSymmetry(rot)
 
-<span class="comment">% nehme inversion dazu</span>
-<span class="comment">%cs = crystalSymmetry([1 -1]*rot)</span>
+% nehme inversion dazu
+%cs = crystalSymmetry([1 -1]*rot)
 
-plot(cs,<span class="string">'symbolSize'</span>,0.4,<span class="string">'projection'</span>,<span class="string">'eangle'</span>,<span class="string">'grid'</span>,<span class="string">'on'</span>)
+plot(cs,'symbolSize',0.4,'projection','eangle','grid','on')
 
-hold <span class="string">on</span>
-plot(cs.fundamentalSector,<span class="string">'color'</span>,<span class="string">'red'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(cs.fundamentalSector,'color','red')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rot5 = rotation  
   size: 1 x 5
  
@@ -78,17 +78,17 @@ cs = crystalSymmetry
   alpha, beta, gamma: 90&deg;, 90&deg;, 90&deg;
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="QuasiCrystals_01.png" %}
 
-  {% highlight matlab %}
-  oR = cs.fundamentalRegion
+{% highlight matlab %}
+oR = cs.fundamentalRegion
 plot(oR)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 oR = orientationRegion  
  
  crystal symmetry:  unknown
@@ -97,17 +97,17 @@ oR = orientationRegion
  vertices: 20
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="QuasiCrystals_02.png" %}
 
-  {% highlight matlab %}
-  ipfKey = ipfHSVKey(cs);
+{% highlight matlab %}
+ipfKey = ipfHSVKey(cs);
 
-plot(ipfKey,<span class="string">'complete'</span>,<span class="string">'upper'</span>,<span class="string">'projection'</span>,<span class="string">'eangle'</span>,<span class="string">'resolution'</span>,0.5*degree)
+plot(ipfKey,'complete','upper','projection','eangle','resolution',0.5*degree)
 
-<span class="comment">%saveFigure('ipfKey3.png')</span>
-  {% endhighlight %}
+%saveFigure('ipfKey3.png')
+{% endhighlight %}
 
   {% include inline_image.html file="QuasiCrystals_03.png" %}
 </div></body></html>

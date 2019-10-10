@@ -1,6 +1,6 @@
 ---
 title: The SantaFe example
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigureSantaFe.html
 folder: documentation
@@ -14,129 +14,129 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The SantaFe example</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_PoleFigureSantaFe.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureSantaFe into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Simulate a set of pole figures for the SantaFe standard ODF, estimate an ODF and compare it to the inital SantaFe ODF.</p><!--/introduction--><h2 id="2">Simulate pole figures</h2>
-  {% highlight matlab %}
-  CS = crystalSymmetry(<span class="string">'m-3m'</span>);
+      --><title>The SantaFe example</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_PoleFigureSantaFe.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureSantaFe into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Simulate a set of pole figures for the SantaFe standard ODF, estimate an ODF and compare it to the inital SantaFe ODF.</p><!--/introduction--><h2 id="2">Simulate pole figures</h2>
+{% highlight matlab %}
+CS = crystalSymmetry('m-3m');
 
-<span class="comment">% crystal directions</span>
+% crystal directions
 h = [Miller(1,0,0,CS),Miller(1,1,0,CS),Miller(1,1,1,CS),Miller(2,1,1,CS)];
 
-<span class="comment">% specimen directions</span>
-r = equispacedS2Grid(<span class="string">'resolution'</span>,5*degree,<span class="string">'antipodal'</span>);
+% specimen directions
+r = equispacedS2Grid('resolution',5*degree,'antipodal');
 
-<span class="comment">% pole figures</span>
+% pole figures
 pf = calcPoleFigure(SantaFe,h,r);
 
-<span class="comment">% add some noise</span>
+% add some noise
 pf = noisepf(pf,100);
 
-<span class="comment">% plot them</span>
-plot(pf,<span class="string">'MarkerSize'</span>,5)
-mtexColorMap <span class="string">LaboTeX</span>
-  {% endhighlight %}
+% plot them
+plot(pf,'MarkerSize',5)
+mtexColorMap LaboTeX
+{% endhighlight %}
 
   {% include inline_image.html file="PoleFigureSantaFe_01.png" %}
 <h2 id="3">ODF Estimation with Ghost Correction</h2>
-  {% highlight matlab %}
-  rec = calcODF(pf)
-  {% endhighlight %}
+{% highlight matlab %}
+rec = calcODF(pf)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rec = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 222
  
   Uniform portion:
-    weight: 0.58755
+    weight: 0.58682
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: 1230 orientations, resolution: 5&deg;
-    weight: 0.41245
+    center: 1231 orientations, resolution: 5&deg;
+    weight: 0.41318
  
 
-        {% endhighlight %}
-    <h2 id="4">ODF Estimation without Ghost Correction</h2>
-  {% highlight matlab %}
-  rec2 = calcODF(pf,<span class="string">'NoGhostCorrection'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<h2 id="4">ODF Estimation without Ghost Correction</h2>
+{% highlight matlab %}
+rec2 = calcODF(pf,'NoGhostCorrection')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rec2 = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 222
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: 1231 orientations, resolution: 5&deg;
+    center: 1232 orientations, resolution: 5&deg;
     weight: 1
  
 
-        {% endhighlight %}
-    <h2 id="5">Error analysis</h2>
-  {% highlight matlab %}
-  <span class="comment">% calculate RP error</span>
+{% endhighlight %}
+<h2 id="5">Error analysis</h2>
+{% highlight matlab %}
+% calculate RP error
 calcError(rec,SantaFe)
 
-<span class="comment">% difference plot between meassured and recalculated pole figures</span>
+% difference plot between meassured and recalculated pole figures
 plotDiff(pf,rec)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
-    0.0782
+{% highlight plaintext %}
+ans =
+    0.0791
 progress: 100%
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="PoleFigureSantaFe_02.png" %}
 <h2 id="6">Plot estimated pole figures</h2>
-  {% highlight matlab %}
-  plotPDF(rec,pf.h,<span class="string">'antipodal'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+plotPDF(rec,pf.h,'antipodal')
+{% endhighlight %}
 
   {% include inline_image.html file="PoleFigureSantaFe_03.png" %}
 <h2 id="7">Plot estimated ODF (Ghost Corrected)</h2>
-  {% highlight matlab %}
-  plot(rec,<span class="string">'sections'</span>,18,<span class="string">'resolution'</span>,5*degree,<span class="keyword">...</span>
-  <span class="string">'contourf'</span>,<span class="string">'FontSize'</span>,10,<span class="string">'silent'</span>,<span class="string">'figSize'</span>,<span class="string">'large'</span>,<span class="string">'minmax'</span>)
-mtexColorMap <span class="string">white2black</span>
-  {% endhighlight %}
+{% highlight matlab %}
+plot(rec,'sections',18,'resolution',5*degree,...
+  'contourf','FontSize',10,'silent','figSize','large','minmax')
+mtexColorMap white2black
+{% endhighlight %}
 
-        {% highlight matlab %}
-        progress: 100%
+{% highlight plaintext %}
+progress: 100%
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="PoleFigureSantaFe_04.png" %}
 <h2 id="8">Plot odf</h2>
-  {% highlight matlab %}
-  plot(SantaFe,<span class="string">'sections'</span>,18,<span class="string">'contourf'</span>,<span class="string">'FontSize'</span>,10,<span class="string">'silent'</span>,<span class="keyword">...</span>
-  <span class="string">'figSize'</span>,<span class="string">'large'</span>,<span class="string">'minmax'</span>)
-mtexColorMap <span class="string">white2black</span>
-  {% endhighlight %}
+{% highlight matlab %}
+plot(SantaFe,'sections',18,'contourf','FontSize',10,'silent',...
+  'figSize','large','minmax')
+mtexColorMap white2black
+{% endhighlight %}
 
   {% include inline_image.html file="PoleFigureSantaFe_05.png" %}
 <h2 id="9">Plot Fourier Coefficients</h2>
-  {% highlight matlab %}
-  close <span class="string">all</span>;
-<span class="comment">% true ODF</span>
-plotFourier(SantaFe,<span class="string">'bandwidth'</span>,32,<span class="string">'linewidth'</span>,2)
-<span class="comment">% keep plot for adding the next plots</span>
-hold <span class="string">all</span>
+{% highlight matlab %}
+close all;
+% true ODF
+plotFourier(SantaFe,'bandwidth',32,'linewidth',2)
+% keep plot for adding the next plots
+hold all
 
-<span class="comment">% With ghost correction:</span>
-plotFourier(rec,<span class="string">'bandwidth'</span>,32,<span class="string">'linewidth'</span>,2)
+% With ghost correction:
+plotFourier(rec,'bandwidth',32,'linewidth',2)
 
-<span class="comment">% Without ghost correction:</span>
-plotFourier(rec2,<span class="string">'bandwidth'</span>,32,<span class="string">'linewidth'</span>,2)
+% Without ghost correction:
+plotFourier(rec2,'bandwidth',32,'linewidth',2)
 
-legend({<span class="string">'true ODF'</span>,<span class="string">'with ghost correction'</span>,<span class="string">'without ghost correction'</span>})
-<span class="comment">% next plot command overwrites plot</span>
-hold <span class="string">off</span>
-  {% endhighlight %}
+legend({'true ODF','with ghost correction','without ghost correction'})
+% next plot command overwrites plot
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="PoleFigureSantaFe_06.png" %}
 </div></body></html>

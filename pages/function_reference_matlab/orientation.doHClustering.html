@@ -1,6 +1,6 @@
 ---
 title: doHClustering
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: orientation.doHClustering.html
 folder: function_reference
@@ -14,16 +14,19 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>doHClustering</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_orientation__doHClustering.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__doHClustering into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>sort orientations into clusters</p><h2 id="3">Syntax</h2><pre class="language-matlab">[c,center] = doHCluster(ori,<span class="string">'numCluster'</span>,n)
-[c,center] = doHCluster(ori,<span class="string">'maxAngle'</span>,omega)
-</pre><h2 id="4">Input</h2><p>
+      --><title>doHClustering</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_orientation__doHClustering.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__doHClustering into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>sort orientations into clusters</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[c,center] = doHCluster(ori,'numCluster',n)
+[c,center] = doHCluster(ori,'maxAngle',omega)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>ori</tt>
          </td>
          <td>
-            <tt>&lt;a href="orientation_index.html"&gt;orientation&lt;/a&gt;</tt>
+            <tt><a href="orientation_index.html">orientation</a></tt>
          </td>
       </tr>
       <tr>
@@ -62,12 +65,17 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
-</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% generate orientation clustered around 5 centers</span>
-cs = crystalSymmetry(<span class="string">'m-3m'</span>);
+</p><h2 id="6">Example</h2>
+{% highlight matlab %}
+% generate orientation clustered around 5 centers
+cs = crystalSymmetry('m-3m');
 center = orientation.rand(5,cs);
-odf = unimodalODF(center,<span class="string">'halfwidth'</span>,5*degree)
+odf = unimodalODF(center,'halfwidth',5*degree)
 ori = odf.calcOrientations(3000);
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 1
@@ -77,13 +85,27 @@ odf = ODF
     center: Rotations: 5 x 1
     weight: 1
  
-</pre><pre class="codeinput"><span class="comment">% find the clusters and its centers</span>
-tic; [c,centerRec] = calcCluster(ori,<span class="string">'method'</span>,<span class="string">'hierarchical'</span>,<span class="string">'numCluster'</span>,5); toc
-</pre><pre class="codeoutput">Elapsed time is 9.977297 seconds.
-</pre><pre class="codeinput"><span class="comment">% visualize result</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% find the clusters and its centers
+tic; [c,centerRec] = calcCluster(ori,'method','hierarchical','numCluster',5); toc
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 7.380210 seconds.
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% visualize result
 oR = fundamentalRegion(cs)
 plot(oR)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 oR = orientationRegion  
  
  crystal symmetry:  432
@@ -91,19 +113,35 @@ oR = orientationRegion
  face normales: 14
  vertices: 24
  
-</pre>
+
+{% endhighlight %}
+
   {% include inline_image.html file="orientation.doHClustering_01.png" %}
-<pre class="codeinput">hold <span class="string">on</span>
+
+{% highlight matlab %}
+hold on
 plot(ori,c)
 caxis([1,5])
-plot(center,<span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerFaceColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>)
-plot(centerRec,<span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>)
-hold <span class="string">off</span>
-</pre><pre class="codeoutput">plot 2000 random orientations out of 3000 given orientations
-</pre>
+plot(center,'MarkerSize',10,'MarkerFaceColor','k','MarkerEdgeColor','k')
+plot(centerRec,'MarkerSize',10,'MarkerFaceColor','r','MarkerEdgeColor','k')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+plot 2000 random orientations out of 3000 given orientations
+
+{% endhighlight %}
+
   {% include inline_image.html file="orientation.doHClustering_02.png" %}
-<pre class="codeinput"><span class="comment">%check the accuracy of the recomputed centers</span>
+
+{% highlight matlab %}
+%check the accuracy of the recomputed centers
 min(angle_outer(center,centerRec)./degree)
-</pre><pre class="codeoutput">ans =
-    6.3628    9.8355    9.3792    6.9338    0.2066
-</pre></div></body></html>
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.4912   11.2802   31.1581    0.0960   10.9264
+
+{% endhighlight %}
+</div></body></html>

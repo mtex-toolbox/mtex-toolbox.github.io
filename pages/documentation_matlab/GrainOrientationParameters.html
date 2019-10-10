@@ -1,6 +1,6 @@
 ---
 title: Orientation Parameters
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainOrientationParameters.html
 folder: documentation
@@ -14,22 +14,22 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Orientation Parameters</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainOrientationParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction-->
-  {% highlight matlab %}
-  close <span class="string">all</span>; plotx2east
+      --><title>Orientation Parameters</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainOrientationParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction-->
+{% highlight matlab %}
+close all; plotx2east
 
-<span class="comment">% import the data</span>
-mtexdata <span class="string">forsterite</span>
+% import the data
+mtexdata forsterite
 
-<span class="comment">% restrict it to a subregion of interest.</span>
+% restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-<span class="comment">% make a phase plot</span>
+% make a phase plot
 plot(ebsd)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -42,24 +42,24 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainOrientationParameters_01.png" %}
 <h2 id="2">Connection between grains and EBSD data</h2><p>As usual, we start by importing some EBSD data and computing grains</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-mtexdata <span class="string">forsterite</span>
+{% highlight matlab %}
+close all
+mtexdata forsterite
 plotx2east
 
-<span class="comment">% consider only indexed data for grain segmentation</span>
-ebsd = ebsd(<span class="string">'indexed'</span>);
+% consider only indexed data for grain segmentation
+ebsd = ebsd('indexed');
 
-<span class="comment">% compute the grains</span>
+% compute the grains
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -72,15 +72,15 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>The <a href="grain2d_index.html">grains</a> contain. We can access these data by</p>
-  {% highlight matlab %}
-  grain_selected = grains( grains.grainSize &gt;=  1160)
+{% endhighlight %}
+<p>The <a href="grain2d_index.html">grains</a> contain. We can access these data by</p>
+{% highlight matlab %}
+grain_selected = grains( grains.grainSize &gt;=  1160)
 ebsd_selected = ebsd(grain_selected)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 grain_selected = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -101,14 +101,14 @@ ebsd_selected = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>A more convenient way to select grains in daily practice is by spatial coordinates.</p>
-  {% highlight matlab %}
-  grain_selected = grains(12000,3000)
-  {% endhighlight %}
+{% endhighlight %}
+<p>A more convenient way to select grains in daily practice is by spatial coordinates.</p>
+{% highlight matlab %}
+grain_selected = grains(12000,3000)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 grain_selected = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -121,25 +121,25 @@ grain_selected = grain2d
  640       1     1208   0.00806772    153    68    237
  
 
-        {% endhighlight %}
-    <p>you can get the id of this grain by</p>
-  {% highlight matlab %}
-  grain_selected.id
-  {% endhighlight %}
+{% endhighlight %}
+<p>you can get the id of this grain by</p>
+{% highlight matlab %}
+grain_selected.id
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
    640
 
-        {% endhighlight %}
-    <p>let's look for the grain with the largest grain orientation spread</p>
-  {% highlight matlab %}
-  [~,id] = max(grains.GOS)
+{% endhighlight %}
+<p>let's look for the grain with the largest grain orientation spread</p>
+{% highlight matlab %}
+[~,id] = max(grains.GOS)
 grain_selected = grains(id)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        id =
+{% highlight plaintext %}
+id =
         1856
  
 grain_selected = grain2d  
@@ -154,49 +154,49 @@ grain_selected = grain2d
  1856       1     2614   0.170662    153   109    247
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  plot(grain_selected.boundary,<span class="string">'linewidth'</span>,2)
-hold <span class="string">on</span>
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(grain_selected.boundary,'linewidth',2)
+hold on
 plot(ebsd(grain_selected))
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_02.png" %}
 <h2 id="8">Visualize the misorientation within a grain</h2>
-  {% highlight matlab %}
-  close
-plot(grain_selected.boundary,<span class="string">'linewidth'</span>,2)
-hold <span class="string">on</span>
+{% highlight matlab %}
+close
+plot(grain_selected.boundary,'linewidth',2)
+hold on
 plot(ebsd(grain_selected),ebsd(grain_selected).mis2mean.angle./degree)
-hold <span class="string">off</span>
+hold off
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_03.png" %}
 <h2 id="9">Testing on Bingham distribution for a single grain</h2><p>Although the orientations of an individual grain are highly concentrated, they may vary in the shape. In particular, if the grain was deformed by some process, we are interested in quantifications.</p>
-  {% highlight matlab %}
-  cs = ebsd(grain_selected).CS;
+{% highlight matlab %}
+cs = ebsd(grain_selected).CS;
 ori = ebsd(grain_selected).orientations;
-plotPDF(ori,[Miller(0,0,1,cs),Miller(0,1,1,cs),Miller(1,1,1,cs)],<span class="string">'antipodal'</span>)
-  {% endhighlight %}
+plotPDF(ori,[Miller(0,0,1,cs),Miller(0,1,1,cs),Miller(1,1,1,cs)],'antipodal')
+{% endhighlight %}
 
-        {% highlight matlab %}
-          I'm plotting 1250 random orientations out of 2614 given orientations
+{% highlight plaintext %}
+  I'm plotting 1250 random orientations out of 2614 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainOrientationParameters_04.png" %}
 <p>Testing on the distribution shows a gentle prolatness, nevertheless we would reject the hypothesis for some level of significance, since the distribution is highly concentrated and the numerical results vague.</p>
-  {% highlight matlab %}
-  calcBinghamODF(ori,<span class="string">'approximated'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+calcBinghamODF(ori,'approximated')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = ODF  
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
@@ -206,50 +206,50 @@ ans = ODF
     weight: 1
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  T_spherical = bingham_test(ori,<span class="string">'spherical'</span>,<span class="string">'approximated'</span>);
-T_prolate   = bingham_test(ori,<span class="string">'prolate'</span>,  <span class="string">'approximated'</span>);
-T_oblate    = bingham_test(ori,<span class="string">'oblate'</span>,   <span class="string">'approximated'</span>);
+{% endhighlight %}
+
+{% highlight matlab %}
+T_spherical = bingham_test(ori,'spherical','approximated');
+T_prolate   = bingham_test(ori,'prolate',  'approximated');
+T_oblate    = bingham_test(ori,'oblate',   'approximated');
 
 [T_spherical T_prolate T_oblate]
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
      1     1     1
 
-        {% endhighlight %}
-    <p>Misorientation to mean orientation</p><p>The third output argument is again a list of the same size as the ebsd measurements. The entries are the misorientation to the mean orientation of the corresponding grain.</p>
-  {% highlight matlab %}
-  [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,<span class="string">'angle'</span>,7.5*degree);
+{% endhighlight %}
+<p>Misorientation to mean orientation</p><p>The third output argument is again a list of the same size as the ebsd measurements. The entries are the misorientation to the mean orientation of the corresponding grain.</p>
+{% highlight matlab %}
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',7.5*degree);
 
 plot(ebsd,ebsd.mis2mean.angle ./ degree)
 
-hold <span class="string">on</span>
+hold on
 plot(grains.boundary)
-hold <span class="string">off</span>
+hold off
 
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_05.png" %}
 <p>We can examine the misorientation to mean for one specific grain as follows</p>
-  {% highlight matlab %}
-  <span class="comment">% select a grain by coordinates</span>
+{% highlight matlab %}
+% select a grain by coordinates
 myGrain = grains(9075,3275)
-plot(myGrain.boundary,<span class="string">'linewidth'</span>,2)
+plot(myGrain.boundary,'linewidth',2)
 
-<span class="comment">% plot mis2mean angle for this specific grain</span>
-hold <span class="string">on</span>
+% plot mis2mean angle for this specific grain
+hold on
 plot(ebsd(myGrain),ebsd(myGrain).mis2mean.angle ./ degree)
-hold <span class="string">off</span>
+hold off
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 myGrain = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -262,19 +262,19 @@ myGrain = grain2d
  517       1      504   0.0404403    131    64    249
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainOrientationParameters_06.png" %}
 <h2 id="14">Misorientation Analysis</h2><p>How to analyze misorientations.</p><h2 id="15">Definition</h2><p>In MTEX the misorientation between two orientations o1, o2 is defined as</p><p>
   {% include inline_image.html file="GrainOrientationParameters_eq10473485919243981333.png" %}
 </p><p>In the case of EBSD data, intragranular misorientations, misorientations between neighbouring grains, and misorientations between random measurements are of interest.</p><h2 id="16">The sample data set</h2><p>Let us first import some EBSD data</p>
-  {% highlight matlab %}
-  mtexdata <span class="string">forsterite</span>
+{% highlight matlab %}
+mtexdata forsterite
 plotx2east
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -287,179 +287,179 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>and <a href="EBSD.calcGrains.html">reconstruct</a> grains by</p>
-  {% highlight matlab %}
-  <span class="comment">% perform grain segmentation</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'threshold'</span>,5*degree);
+{% endhighlight %}
+<p>and <a href="EBSD.calcGrains.html">reconstruct</a> grains by</p>
+{% highlight matlab %}
+% perform grain segmentation
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'threshold',5*degree);
 
-<span class="comment">% remove small grains</span>
+% remove small grains
 ebsd(grains(grains.grainSize&lt;5)) = [];
 
-<span class="comment">% repeat grain reconstruction</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'threshold'</span>,5*degree);
+% repeat grain reconstruction
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'threshold',5*degree);
 
-<span class="comment">% smooth the grain boundaries a bit</span>
+% smooth the grain boundaries a bit
 grains = smooth(grains,5);
-  {% endhighlight %}
+{% endhighlight %}
 <h2 id="18">Intragranular misorientations</h2><p>The intragranular misorientation is automatically computed while reconstructing the grain structure. It is stored as the property <tt>mis2mean</tt> within the ebsd variable and can be accessed by</p>
-  {% highlight matlab %}
-  <span class="comment">% get the misorientations to mean</span>
-mori = ebsd(<span class="string">'Fo'</span>).mis2mean
+{% highlight matlab %}
+% get the misorientations to mean
+mori = ebsd('Fo').mis2mean
 
-<span class="comment">% plot a histogram of the misorientation angles</span>
+% plot a histogram of the misorientation angles
 plotAngleDistribution(mori)
-xlabel(<span class="string">'Misorientation angles in degree'</span>)
-  {% endhighlight %}
+xlabel('Misorientation angles in degree')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 mori = misorientation  
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainOrientationParameters_07.png" %}
 <p>The visualization of the misorientation angle can be done by</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-plot(ebsd(<span class="string">'Forsterite'</span>),ebsd(<span class="string">'Forsterite'</span>).mis2mean.angle./degree)
-mtexColorMap <span class="string">hot</span>
+{% highlight matlab %}
+close all
+plot(ebsd('Forsterite'),ebsd('Forsterite').mis2mean.angle./degree)
+mtexColorMap hot
 mtexColorbar
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'edgecolor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,.5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'edgecolor','k','linewidth',.5)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_08.png" %}
 <p>In order to visualize the misorientation axis we have two choices. We can consider the misorientation axis either with respect to the crystal reference frame or with the specimen reference frame. The misorientation axes with respect to the crystal reference frame can be computed via</p>
-  {% highlight matlab %}
-  mori.axis
-  {% endhighlight %}
+{% highlight matlab %}
+mori.axis
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = Miller  
  size: 151452 x 1
  mineral: Forsterite (222)
 
-        {% endhighlight %}
-    <p>The axes are unique up to crystal symmetry. Accordingly, the corresponding color key needs to colorize only the fundamental sector. This is done by</p>
-  {% highlight matlab %}
-  <span class="comment">% define the color key</span>
+{% endhighlight %}
+<p>The axes are unique up to crystal symmetry. Accordingly, the corresponding color key needs to colorize only the fundamental sector. This is done by</p>
+{% highlight matlab %}
+% define the color key
 oM = axisAngleColorKey(mori);
 
 plot(oM)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_09.png" %}
 <p>We see that according to the above color key orientation gradients with respect to the (001) axis will be  displayed in red, spins around the (010) will be displayed in green and spins around the (100) axis will be displayed in blue. Pixels with no misorientation will be displayed in gray and as the misorientation angle increases the color gets more saturated.</p>
-  {% highlight matlab %}
-  plot(ebsd(<span class="string">'Forsterite'</span>),oM.orientation2color(mori))
+{% highlight matlab %}
+plot(ebsd('Forsterite'),oM.orientation2color(mori))
 
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'edgecolor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'edgecolor','k','linewidth',2)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_10.png" %}
 <p>The misorientation axis with respect to the specimen coordinate system can unfortunaltely not be computed from the misorientation alone. Therefore, we require the pair consisting of grain mean orientation and the orientation of the pixel.</p><p>Lets computed first for every pixel the corresponding reference orientation, i.e. the mean orientation of the grain the pixel belongs to.</p>
-  {% highlight matlab %}
-  oriRef = grains(ebsd(<span class="string">'Forsterite'</span>).grainId).meanOrientation
-  {% endhighlight %}
+{% highlight matlab %}
+oriRef = grains(ebsd('Forsterite').grainId).meanOrientation
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 oriRef = orientation  
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
  
 
-        {% endhighlight %}
-    <p>Now the misorientation axis with respect to the specimen reference system is computed via</p>
-  {% highlight matlab %}
-  v = axis(ebsd(<span class="string">'Forsterite'</span>).orientations,oriRef)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Now the misorientation axis with respect to the specimen reference system is computed via</p>
+{% highlight matlab %}
+v = axis(ebsd('Forsterite').orientations,oriRef)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 v = vector3d  
  size: 151452 x 1
 
-        {% endhighlight %}
-    <p>With respect to the specimen reference frame the misorientation axes are unique and not symmetry has to be considered. Accordingly, our color key will contain the entire sphere.</p>
-  {% highlight matlab %}
-  oM = axisAngleColorKey(ebsd(<span class="string">'Forsterite'</span>));
+{% endhighlight %}
+<p>With respect to the specimen reference frame the misorientation axes are unique and not symmetry has to be considered. Accordingly, our color key will contain the entire sphere.</p>
+{% highlight matlab %}
+oM = axisAngleColorKey(ebsd('Forsterite'));
 plot(oM)
 
-plot(discreteSample(v,1000),<span class="string">'add2all'</span>,<span class="string">'MarkerSize'</span>,2,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'black'</span>)
-  {% endhighlight %}
+plot(discreteSample(v,1000),'add2all','MarkerSize',2,'MarkerEdgeColor','black')
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_11.png" %}
 <p>With respect to the above color key rotations around the 001 specimen direction will become visible as a black to white gradient while rotations around the 100 directions will show up as a red to magenta gradient.</p>
-  {% highlight matlab %}
-  oM.oriRef = oriRef;
+{% highlight matlab %}
+oM.oriRef = oriRef;
 
-color = oM.orientation2color(ebsd(<span class="string">'Forsterite'</span>).orientations);
-plot(ebsd(<span class="string">'Forsterite'</span>),color,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'edgecolor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+color = oM.orientation2color(ebsd('Forsterite').orientations);
+plot(ebsd('Forsterite'),color,'micronbar','off')
+hold on
+plot(grains.boundary,'edgecolor','k','linewidth',2)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_12.png" %}
 <h2 id="27">Grain orientation spread (GOS)</h2>
-  {% highlight matlab %}
-  plot(grains(<span class="string">'fo'</span>),grains(<span class="string">'fo'</span>).GOS./degree,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
+{% highlight matlab %}
+plot(grains('fo'),grains('fo').GOS./degree,'micronbar','off')
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_13.png" %}
 <h2 id="28">Kernel average misorientation (KAM)</h2>
-  {% highlight matlab %}
-  KAM = ebsd(<span class="string">'fo'</span>).KAM;
-plot(ebsd(<span class="string">'fo'</span>),KAM);
+{% highlight matlab %}
+KAM = ebsd('fo').KAM;
+plot(ebsd('fo'),KAM);
 mtexColorbar
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_14.png" %}
 <h2 id="29">Grain average misorientation (GAM)</h2><p>The grain average misorientation (GAM) is defined as the mean KAM within each grain. The following line can be taken as a blueprint how to average arbitrary properties within grains. The last argument <tt>@nanmean</tt> in this command indicates that the average should be taken as the mean ignoring NaNs. In order to a assign the maximum value to each grain replace this with <tt>@max</tt>.</p>
-  {% highlight matlab %}
-  GAM = accumarray(ebsd(<span class="string">'fo'</span>).grainId, KAM, size(grains), @nanmean) ./degree;
-  {% endhighlight %}
+{% highlight matlab %}
+GAM = accumarray(ebsd('fo').grainId, KAM, size(grains), @nanmean) ./degree;
+{% endhighlight %}
 
-  {% highlight matlab %}
-  <span class="comment">% plot the GAM</span>
-plot(grains(<span class="string">'fo'</span>),GAM(grains(<span class="string">'fo'</span>).id),<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
+{% highlight matlab %}
+% plot the GAM
+plot(grains('fo'),GAM(grains('fo').id),'micronbar','off')
 
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_15.png" %}
 <h2 id="31">Boundary misorientations</h2><p>The misorientation between adjacent grains can be computed by the command <a href="grainBoundary.misorientation.html">grainBoundary.misorientation.html</a></p>
-  {% highlight matlab %}
-  plot(grains)
+{% highlight matlab %}
+plot(grains)
 
-hold <span class="string">on</span>
+hold on
 
-bnd_FoFo = grains.boundary(<span class="string">'Fo'</span>,<span class="string">'Fo'</span>)
+bnd_FoFo = grains.boundary('Fo','Fo')
 
-plot(bnd_FoFo,<span class="string">'linecolor'</span>,<span class="string">'r'</span>)
+plot(bnd_FoFo,'linecolor','r')
 
-hold <span class="string">off</span>
+hold off
 
 bnd_FoFo.misorientation
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 bnd_FoFo = grainBoundary  
  
  Segments   mineral 1   mineral 2
@@ -472,75 +472,75 @@ ans = misorientation
   antipodal:         true
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainOrientationParameters_16.png" %}
 
-  {% highlight matlab %}
-  plot(ebsd,<span class="string">'facealpha'</span>,0.5)
+{% highlight matlab %}
+plot(ebsd,'facealpha',0.5)
 
-hold <span class="string">on</span>
+hold on
 plot(grains.boundary)
-plot(bnd_FoFo,bnd_FoFo.misorientation.angle./degree,<span class="string">'linewidth'</span>,2)
-mtexColorMap <span class="string">blue2red</span>
-mtexColorbar(<span class="string">'title'</span>,<span class="string">'misorientation angle'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+plot(bnd_FoFo,bnd_FoFo.misorientation.angle./degree,'linewidth',2)
+mtexColorMap blue2red
+mtexColorbar('title','misorientation angle')
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_17.png" %}
 <p>In order to visualize the misorientation between any two adjacent grains, there are two possibilities in MTEX.</p><div><ul><li>plot the angle distribution for all phase combinations</li><li>plot the axis distribution for all phase combinations</li></ul></div><h2 id="34">The angle distribution</h2><p>The following commands plot the angle distributions of all phase transitions from Forsterite to any other phase.</p>
-  {% highlight matlab %}
-  plotAngleDistribution(grains.boundary(<span class="string">'Fo'</span>,<span class="string">'Fo'</span>).misorientation,<span class="keyword">...</span>
-  <span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Forsterite'</span>)
-hold <span class="string">on</span>
-plotAngleDistribution(grains.boundary(<span class="string">'Fo'</span>,<span class="string">'En'</span>).misorientation,<span class="keyword">...</span>
-  <span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Enstatite'</span>)
-plotAngleDistribution(grains.boundary(<span class="string">'Fo'</span>,<span class="string">'Di'</span>).misorientation,<span class="keyword">...</span>
-  <span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Diopside'</span>)
-hold <span class="string">off</span>
-legend(<span class="string">'show'</span>,<span class="string">'Location'</span>,<span class="string">'northwest'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+plotAngleDistribution(grains.boundary('Fo','Fo').misorientation,...
+  'DisplayName','Forsterite-Forsterite')
+hold on
+plotAngleDistribution(grains.boundary('Fo','En').misorientation,...
+  'DisplayName','Forsterite-Enstatite')
+plotAngleDistribution(grains.boundary('Fo','Di').misorientation,...
+  'DisplayName','Forsterite-Diopside')
+hold off
+legend('show','Location','northwest')
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_18.png" %}
 <p>The above angle distributions can be compared with the uncorrelated misorientation angle distributions. This is done by</p>
-  {% highlight matlab %}
-  <span class="comment">% compute uncorrelated misorientations</span>
-mori = calcMisorientation(ebsd(<span class="string">'Fo'</span>),ebsd(<span class="string">'Fo'</span>));
+{% highlight matlab %}
+% compute uncorrelated misorientations
+mori = calcMisorientation(ebsd('Fo'),ebsd('Fo'));
 
-<span class="comment">% plot the angle distribution</span>
-plotAngleDistribution(mori,<span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Forsterite'</span>)
+% plot the angle distribution
+plotAngleDistribution(mori,'DisplayName','Forsterite-Forsterite')
 
-hold <span class="string">on</span>
+hold on
 
-mori = calcMisorientation(ebsd(<span class="string">'Fo'</span>),ebsd(<span class="string">'En'</span>));
-plotAngleDistribution(mori,<span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Enstatite'</span>)
+mori = calcMisorientation(ebsd('Fo'),ebsd('En'));
+plotAngleDistribution(mori,'DisplayName','Forsterite-Enstatite')
 
-mori = calcMisorientation(ebsd(<span class="string">'Fo'</span>),ebsd(<span class="string">'Di'</span>));
-plotAngleDistribution(mori,<span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Diopside'</span>)
+mori = calcMisorientation(ebsd('Fo'),ebsd('Di'));
+plotAngleDistribution(mori,'DisplayName','Forsterite-Diopside')
 
-hold <span class="string">off</span>
-legend(<span class="string">'show'</span>,<span class="string">'Location'</span>,<span class="string">'northwest'</span>)
-  {% endhighlight %}
+hold off
+legend('show','Location','northwest')
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_19.png" %}
 <p>Another possibility is to compute an uncorrelated angle distribution from EBSD data by taking only into account those pairs of measurements that are sufficiently far from each other (uncorrelated points). The uncorrelated angle distribution is plotted by</p>
-  {% highlight matlab %}
-  <span class="comment">% compute the Forsterite ODF</span>
-odf_Fo = calcODF(ebsd(<span class="string">'Fo'</span>).orientations,<span class="string">'Fourier'</span>)
+{% highlight matlab %}
+% compute the Forsterite ODF
+odf_Fo = calcODF(ebsd('Fo').orientations,'Fourier')
 
-<span class="comment">% compute the uncorrelated Forsterite to Forsterite MDF</span>
+% compute the uncorrelated Forsterite to Forsterite MDF
 mdf_Fo_Fo = calcMDF(odf_Fo,odf_Fo)
 
-<span class="comment">% plot the uncorrelated angle distribution</span>
-hold <span class="string">on</span>
-plotAngleDistribution(mdf_Fo_Fo,<span class="string">'DisplayName'</span>,<span class="string">'Forsterite-Forsterite'</span>)
-hold <span class="string">off</span>
+% plot the uncorrelated angle distribution
+hold on
+plotAngleDistribution(mdf_Fo_Fo,'DisplayName','Forsterite-Forsterite')
+hold off
 
-legend(<span class="string">'-dynamicLegend'</span>,<span class="string">'Location'</span>,<span class="string">'northwest'</span>) <span class="comment">% update legend</span>
-  {% endhighlight %}
+legend('-dynamicLegend','Location','northwest') % update legend
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 odf_Fo = ODF  
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
@@ -560,333 +560,105 @@ mdf_Fo_Fo = MDF
     weight: 1
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainOrientationParameters_20.png" %}
 <p>What we have plotted above is the uncorrelated misorientation angle distribution for the Forsterite ODF. We can compare it to the uncorrelated misorientation angle distribution of the uniform ODF by</p>
-  {% highlight matlab %}
-  hold <span class="string">on</span>
-plotAngleDistribution(odf_Fo.CS,odf_Fo.CS,<span class="string">'DisplayName'</span>,<span class="string">'untextured'</span>)
-hold <span class="string">off</span>
+{% highlight matlab %}
+hold on
+plotAngleDistribution(odf_Fo.CS,odf_Fo.CS,'DisplayName','untextured')
+hold off
 
-legend(<span class="string">'-dynamicLegend'</span>,<span class="string">'Location'</span>,<span class="string">'northwest'</span>) <span class="comment">% update legend</span>
-  {% endhighlight %}
+legend('-dynamicLegend','Location','northwest') % update legend
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_21.png" %}
 <h2 id="38">The axis distribution</h2><p>Let's start with the boundary misorientation axis distribution</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-plotAxisDistribution(bnd_FoFo.misorientation,<span class="string">'smooth'</span>)
-mtexTitle(<span class="string">'boundary axis distribution'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+close all
+plotAxisDistribution(bnd_FoFo.misorientation,'smooth')
+mtexTitle('boundary axis distribution')
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_22.png" %}
 <p>Next we plot with the uncorrelated axis distribution, which depends only on the underlying ODFs.</p>
-  {% highlight matlab %}
-  nextAxis
-mori = calcMisorientation(ebsd(<span class="string">'Fo'</span>));
-plotAxisDistribution(mori,<span class="string">'smooth'</span>)
-mtexTitle(<span class="string">'uncorrelated axis distribution'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+nextAxis
+mori = calcMisorientation(ebsd('Fo'));
+plotAxisDistribution(mori,'smooth')
+mtexTitle('uncorrelated axis distribution')
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_23.png" %}
 <p>and finally the axis misorientation distribution of a random texture</p>
-  {% highlight matlab %}
-  nextAxis
-plotAxisDistribution(ebsd(<span class="string">'Fo'</span>).CS,ebsd(<span class="string">'Fo'</span>).CS,<span class="string">'antipodal'</span>)
-mtexTitle(<span class="string">'random texture'</span>)
-mtexColorMap <span class="string">parula</span>
-setColorRange(<span class="string">'equal'</span>)
-mtexColorbar(<span class="string">'multiples of random distribution'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+nextAxis
+plotAxisDistribution(ebsd('Fo').CS,ebsd('Fo').CS,'antipodal')
+mtexTitle('random texture')
+mtexColorMap parula
+setColorRange('equal')
+mtexColorbar('multiples of random distribution')
+{% endhighlight %}
 
   {% include inline_image.html file="GrainOrientationParameters_24.png" %}
-<h2 id="41">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.area.html">
-                     <b>grains.area</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>grain area in square <a href="grain2d.index.html">grains.scanUnit</a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.aspectRatio.html">
-                     <b>grains.aspectRatio</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>grain length / grain width</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grainBoundary.html">
-                     <b>grains.boundary</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>list of boundary segments</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.boundarySize.html">
-                     <b>grains.boundarySize</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>number of boundary segments</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.paris.html">
-                     <b>grains.paris</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>area difference between grain and its convex hull</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.centroid.html">
-                     <b>grains.centroid</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>x,y coordinates of the barycenter of the grain</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.CS</b>
-               </p>
-         </td>
-         <td>
-               <p>crystal symmetry (single phase only)</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.diameter.html">
-                     <b>grains.diameter</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>diameter in <a href="grain2d.index.html">grains.scanUnit</a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.equivalentPerimeter.html">
-                     <b>grains.equivalentPerimeter</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>the perimeter of the fitted ellipse</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.equivalentRadius.html">
-                     <b>grains.equivalentRadius</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>the radius of the fitted ellipse</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.GOS</b>
-               </p>
-         </td>
-         <td>
-               <p>grain orientation spread</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.grainSize</b>
-               </p>
-         </td>
-         <td>
-               <p>number of measurements per grain</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.hasHole.html">
-                     <b>grains.hasHole</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>check for inclusions</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.id</b>
-               </p>
-         </td>
-         <td>
-               <p>grain id</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grainBoundary.html">
-                     <b>grains.innerBoundary</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>list of inner boundary segments</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.meanOrientation</b>
-               </p>
-         </td>
-         <td>
-               <p>meanOrientation (single phase only)</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.mineral</b>
-               </p>
-         </td>
-         <td>
-               <p>mineral name (single phase only)</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.neigbours.html">
-                     <b>grains.neighbours</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>number and ids of neighboring grains</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.phase</b>
-               </p>
-         </td>
-         <td>
-               <p>phase identifier</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.perimeter.html">
-                     <b>grains.perimeter</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>perimeter in <a href="grain2d.index.html">grains.scanUnit</a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.principalComponents.html">
-                     <b>grains.principalComponents</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>length and width of the fitted ellipse</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.shapeFactor.html">
-                     <b>grains.shapeFactor</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>quotient perimeter / perimeter of the fitted ellipse</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="triplePoints.html">
-                     <b>grains.triplePoints</b>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>list of  triple points</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.x</b>
-               </p>
-         </td>
-         <td>
-               <p>x coordinates of the vertices</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <b>grains.y</b>
-               </p>
-         </td>
-         <td>
-               <p>y coordinates of the vertices</p>
-         </td>
-      </tr>
-   </table>
-</p></div></body></html>
+<h2 id="41">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p>
+{% highlight matlab %}
+%&lt;html&gt;
+%   &lt;table class="usertable"&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| &lt;b&gt;grains.CS&lt;/b&gt;
+%               &lt;/p&gt;
+%         &lt;/td&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| crystal symmetry (single phase only)&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| &lt;b&gt;grains.GOS&lt;/b&gt;
+%               &lt;/p&gt;
+%         &lt;/td&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| grain orientation spread&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| &lt;b&gt;grains.id&lt;/b&gt;
+%               &lt;/p&gt;
+%         &lt;/td&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| grain id&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| &lt;b&gt;grains.meanOrientation&lt;/b&gt;
+%               &lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| &lt;b&gt;grains.mineral&lt;/b&gt;
+%               &lt;/p&gt;
+%         &lt;/td&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| mineral name (single phase only)&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| &lt;b&gt;grains.phase&lt;/b&gt;
+%               &lt;/p&gt;
+%         &lt;/td&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| phase identifier&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%   &lt;/table&gt;
+%&lt;/html&gt;
+%
+%
+{% endhighlight %}
+</div></body></html>

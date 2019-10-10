@@ -1,6 +1,6 @@
 ---
 title: Grain Boundary Properties
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryProperties.html
 folder: documentation
@@ -14,30 +14,30 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
-  {% highlight matlab %}
-  <span class="comment">% load some example data</span>
-mtexdata <span class="string">twins</span>
+      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
+{% highlight matlab %}
+% load some example data
+mtexdata twins
 
-<span class="comment">% detect grains</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+% detect grains
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'));
 
-<span class="comment">% smooth them</span>
+% smooth them
 grains = grains.smooth;
 
-<span class="comment">% visualize the grains</span>
+% visualize the grains
 plot(grains,grains.meanOrientation)
 
-<span class="comment">% extract all grain boundaries</span>
+% extract all grain boundaries
 gB = grains.boundary;
 
-hold <span class="string">on</span>
-plot(gB,<span class="string">'LineWidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(gB,'LineWidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -53,112 +53,90 @@ ebsd = EBSD
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
-  {% include inline_image.html file="BoundaryProperties_01.png" %}
-<h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary_index.html">grainBoundary</a> contains the following properties</p><p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>ebsdId</p>
-         </td>
-         <td>
-               <p>id of the EBSD pixel on both sides of the grain boundary</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>phaseId</p>
-         </td>
-         <td>
-               <p>id of the phase on both sides of the grain boundary</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>grainId</p>
-         </td>
-         <td>
-               <p>id of the grains on both sides of the grain boundary</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>misorientation</p>
-         </td>
-         <td>
-               <p>misorientation between ebsdId(:,1) and ebsdId(:,2)</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>F</p>
-         </td>
-         <td>
-               <p>F(:,1), F(:,2) ids of the two vertices of the segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>direction</p>
-         </td>
-         <td>
-               <p>vector connecting vertice 1 with vertice 2</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>midPoint</p>
-         </td>
-         <td>
-               <p>mid point of the segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>segLength</p>
-         </td>
-         <td>
-               <p>length of the segment</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>componentId</p>
-         </td>
-         <td>
-               <p>id of the connected component with respect to all segments</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>componentSize</p>
-         </td>
-         <td>
-               <p>number of segments within the component</p>
-         </td>
-      </tr>
-   </table>
-</p><p>The first three properties refer to N x 2 matrices where N is the number of boundary segments. Each row of these matrices contains the information about the EBSD data, and grain data on both sides of the grain boundary. To illustrate this consider the grain boundary of one specific grain</p>
-  {% highlight matlab %}
-  gB8 = grains(8).boundary
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+  {% include inline_image.html file="BoundaryProperties_01.png" %}
+<h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary_index.html">grainBoundary</a> contains the following properties</p>
+{% highlight matlab %}
+%&lt;html&gt;
+%   &lt;table class="usertable"&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| ebsdId&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| phaseId&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| grainId&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| misorientation&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| F&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| direction&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| midPoint&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| segLength&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| componentId&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| componentSize&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%   &lt;/table&gt;
+%&lt;/html&gt;
+%
+%
+% The first three properties refer to N x 2 matrices where N is the number
+% of boundary segments. Each row of these matrices contains the information
+% about the EBSD data, and grain data on both sides of the grain boundary.
+% To illustrate this consider the grain boundary of one specific grain
+
+gB8 = grains(8).boundary
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 gB8 = grainBoundary  
  
  Segments  mineral 1  mineral 2
         8  Magnesium  Magnesium
 
-        {% endhighlight %}
-    <p>This boundary consists of 8 segemts and hence ebsdId forms a 8x2 matrix</p>
-  {% highlight matlab %}
-  gB8.ebsdId
-  {% endhighlight %}
+{% endhighlight %}
+<p>This boundary consists of 8 segemts and hence ebsdId forms a 8x2 matrix</p>
+{% highlight matlab %}
+gB8.ebsdId
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
         1010        1177
         1010        1009
         1011        1178
@@ -168,14 +146,14 @@ gB8 = grainBoundary
          843         842
          843         676
 
-        {% endhighlight %}
-    <p>It is important to understand that the <b>id</b> is not neccesarily the same as the index in the list. In order to index an variable of type EBSD by id and not by index the following syntax has to be used</p>
-  {% highlight matlab %}
-  ebsd(<span class="string">'id'</span>,gB8.ebsdId)
-  {% endhighlight %}
+{% endhighlight %}
+<p>It is important to understand that the <b>id</b> is not neccesarily the same as the index in the list. In order to index an variable of type EBSD by id and not by index the following syntax has to be used</p>
+{% highlight matlab %}
+ebsd('id',gB8.ebsdId)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = EBSD  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
@@ -202,14 +180,14 @@ ans = EBSD
  Grid size (square): 8 x 2
  
 
-        {% endhighlight %}
-    <p>Similarly</p>
-  {% highlight matlab %}
-  gB8.grainId
-  {% endhighlight %}
+{% endhighlight %}
+<p>Similarly</p>
+{% highlight matlab %}
+gB8.grainId
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
      8    21
      8    21
      8    21
@@ -219,25 +197,25 @@ ans = EBSD
      8    21
      8    21
 
-        {% endhighlight %}
-    <p>results in 8x2 matrix indicating that grain 8 is an inclusion of grain 21.</p>
-  {% highlight matlab %}
-  plot(grains(8),<span class="string">'FaceColor'</span>,<span class="string">'DarkBlue'</span>,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-hold <span class="string">on</span>
-plot(grains(21),<span class="string">'FaceColor'</span>,<span class="string">'LightCoral'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% endhighlight %}
+<p>results in 8x2 matrix indicating that grain 8 is an inclusion of grain 21.</p>
+{% highlight matlab %}
+plot(grains(8),'FaceColor','DarkBlue','micronbar','off')
+hold on
+plot(grains(21),'FaceColor','LightCoral')
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryProperties_02.png" %}
 <h2 id="7">Grain boundary misorientations</h2><p>The grain boundary misorientation defined as the misorientation between the orientations corresponding to ids in first and second column of ebsdId, i.e. following two commands should give the same result</p>
-  {% highlight matlab %}
-  gB8(1).misorientation
+{% highlight matlab %}
+gB8(1).misorientation
 
-inv(ebsd(<span class="string">'id'</span>,gB8.ebsdId(1,2)).orientations) .* ebsd(<span class="string">'id'</span>,gB8.ebsdId(1,1)).orientations
-  {% endhighlight %}
+inv(ebsd('id',gB8.ebsdId(1,2)).orientations) .* ebsd('id',gB8.ebsdId(1,1)).orientations
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
@@ -259,83 +237,83 @@ ans = misorientation
   330.069 86.0994  150.22       0
  
 
-        {% endhighlight %}
-    <p>Note that in the first result the antipodal flag is true while it is false in the second result.</p><p>Obviously, misorientations of a list of grain boundaries can only be extracted if all of them have the same type of phase transition. Let us consider only Magnesium to Magnesium grain boundaries, i.e., ommit all grain boundaries to an not indexed region.</p>
-  {% highlight matlab %}
-  gB_Mg = gB(<span class="string">'Magnesium'</span>,<span class="string">'Magnesium'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Note that in the first result the antipodal flag is true while it is false in the second result.</p><p>Obviously, misorientations of a list of grain boundaries can only be extracted if all of them have the same type of phase transition. Let us consider only Magnesium to Magnesium grain boundaries, i.e., ommit all grain boundaries to an not indexed region.</p>
+{% highlight matlab %}
+gB_Mg = gB('Magnesium','Magnesium')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB_Mg = grainBoundary  
  
  Segments  mineral 1  mineral 2
      3219  Magnesium  Magnesium
 
-        {% endhighlight %}
-    <p>Then the misorientation angles can be plotted by</p>
-  {% highlight matlab %}
-  plot(gB_Mg,gB_Mg.misorientation.angle./degree,<span class="string">'linewidth'</span>,3)
-mtexColorbar(<span class="string">'title'</span>,<span class="string">'misorientation angle (&#65533;)'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Then the misorientation angles can be plotted by</p>
+{% highlight matlab %}
+plot(gB_Mg,gB_Mg.misorientation.angle./degree,'linewidth',3)
+mtexColorbar('title','misorientation angle (&#65533;)')
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryProperties_03.png" %}
 <h2 id="10">Geometric properties</h2><p>The <b>direction</b> property of the boundary segments is usefull when checking for tilt and twist boundaries, i.e., when we want to compare the misorientation axis with the interface between the grains</p>
-  {% highlight matlab %}
-  <span class="comment">% compute misorientation axes in specimen coordinates</span>
-ori = ebsd(<span class="string">'id'</span>,gB_Mg.ebsdId).orientations;
-axes = axis(ori(:,1),ori(:,2),<span class="string">'antipodal'</span>)
+{% highlight matlab %}
+% compute misorientation axes in specimen coordinates
+ori = ebsd('id',gB_Mg.ebsdId).orientations;
+axes = axis(ori(:,1),ori(:,2),'antipodal')
 
-<span class="comment">% plot the angle between the misorientation axis and the boundary direction</span>
-plot(gB_Mg,angle(gB_Mg.direction,axes),<span class="string">'linewidth'</span>,3)
-  {% endhighlight %}
+% plot the angle between the misorientation axis and the boundary direction
+plot(gB_Mg,angle(gB_Mg.direction,axes),'linewidth',3)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 axes = vector3d  
  size: 3219 x 1
  antipodal: true
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryProperties_04.png" %}
 <p>We observe that the angle is quite oscilatory. This is because of the stair casing effect when reconstructing grains from gridded EBSD data. The weaken this effect we may average the segment directions using the command <a href="grainBoundary.calcMeanDirection.html">calcMeanDirection</a></p>
-  {% highlight matlab %}
-  <span class="comment">% plot the angle between the misorientation axis and the boundary direction</span>
-plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),<span class="string">'linewidth'</span>,3)
-  {% endhighlight %}
+{% highlight matlab %}
+% plot the angle between the misorientation axis and the boundary direction
+plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),'linewidth',3)
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryProperties_05.png" %}
 <p>The <b>midPoint</b> property is usefull when  TODO:</p><p>While the command</p>
-  {% highlight matlab %}
-  length(gB_Mg)
-  {% endhighlight %}
+{% highlight matlab %}
+length(gB_Mg)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
         3219
 
-        {% endhighlight %}
-    <p>gives us the total number of all Magnesium to Magnesium grain boundary segements the following command gives us its their total length in um.</p>
-  {% highlight matlab %}
-  sum(gB_Mg.segLength)
-  {% endhighlight %}
+{% endhighlight %}
+<p>gives us the total number of all Magnesium to Magnesium grain boundary segements the following command gives us its their total length in um.</p>
+{% highlight matlab %}
+sum(gB_Mg.segLength)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
   755.5302
 
-        {% endhighlight %}
-    <h2 id="15">Connected components</h2><p>TODO: explain this in more detail</p>
-  {% highlight matlab %}
-  components = unique(gB.componentId);
-<span class="keyword">for</span> cId = components.'
-  plot(gB(gB.componentId == cId),<span class="string">'lineColor'</span>,ind2color(cId),<span class="keyword">...</span>
-    <span class="string">'micronbar'</span>,<span class="string">'off'</span>,<span class="string">'lineWidth'</span>,3,<span class="string">'displayName'</span>,num2str(cId))
-  hold <span class="string">on</span>
-<span class="keyword">end</span>
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% endhighlight %}
+<h2 id="15">Connected components</h2><p>TODO: explain this in more detail</p>
+{% highlight matlab %}
+components = unique(gB.componentId);
+for cId = components.'
+  plot(gB(gB.componentId == cId),'lineColor',ind2color(cId),...
+    'micronbar','off','lineWidth',3,'displayName',num2str(cId))
+  hold on
+end
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryProperties_06.png" %}
 </div></body></html>

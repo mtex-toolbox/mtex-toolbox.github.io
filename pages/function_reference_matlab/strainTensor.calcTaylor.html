@@ -1,6 +1,6 @@
 ---
 title: calcTaylor
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: strainTensor.calcTaylor.html
 folder: function_reference
@@ -14,15 +14,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcTaylor</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_strainTensor__calcTaylor.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit strainTensor__calcTaylor into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="strainTensor_index.html">strainTensor</a>)</p><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="3">Syntax</h2><pre class="language-matlab">[M,b,W] = calcTaylor(eps,sS)
-</pre><h2 id="4">Input</h2><p>
+      --><title>calcTaylor</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_strainTensor__calcTaylor.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit strainTensor__calcTaylor into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="strainTensor_index.html">strainTensor</a>)</p><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[M,b,W] = calcTaylor(eps,sS)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>eps</tt>
          </td>
          <td>
-            <tt>&lt;a href="strainTensor_index.html"&gt;strainTensor&lt;/a&gt; list in crystal coordinates</tt>
+            <tt><a href="strainTensor_index.html">strainTensor</a> list in crystal coordinates</tt>
          </td>
       </tr>
       <tr>
@@ -30,7 +33,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>sS</tt>
          </td>
          <td>
-            <tt>&lt;a href="slipSystem_index.html"&gt;slipSystem&lt;/a&gt; list in crystal coordinates</tt>
+            <tt><a href="slipSystem_index.html">slipSystem</a> list in crystal coordinates</tt>
          </td>
       </tr>
    </table>
@@ -57,13 +60,18 @@ To make changes, update the MATLAB code and republish this document.
             <tt>W</tt>
          </td>
          <td>
-            <tt>&lt;a href="spinTensor_index.html"&gt;spinTensor&lt;/a&gt;</tt>
+            <tt><a href="spinTensor_index.html">spinTensor</a></tt>
          </td>
       </tr>
    </table>
-</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% define 10 percent strain</span>
+</p><h2 id="6">Example</h2>
+{% highlight matlab %}
+% define 10 percent strain
 eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 eps = strainTensor  
   rank: 2 (3 x 3)
  
@@ -71,10 +79,17 @@ eps = strainTensor
    10    0    0
     0 -7.5    0
     0    0 -2.5
-</pre><pre class="codeinput"><span class="comment">% define a crystal orientation</span>
-cs = crystalSymmetry(<span class="string">'cubic'</span>)
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% define a crystal orientation
+cs = crystalSymmetry('cubic')
 ori = orientation.byEuler(0,30*degree,15*degree,cs)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 cs = crystalSymmetry  
  
   symmetry: m-3m   
@@ -90,17 +105,31 @@ ori = orientation
   phi1  Phi phi2 Inv.
      0   30   15    0
  
-</pre><pre class="codeinput"><span class="comment">% define a slip system</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% define a slip system
 sS = slipSystem.fcc(cs)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 sS = slipSystem  
  symmetry: m-3m
  size: 1 x 1
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
-</pre><pre class="codeinput"><span class="comment">% compute the Taylor factor</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute the Taylor factor
 [M,b,W] = calcTaylor(inv(ori)*eps,sS.symmetrise)
-</pre><pre class="codeoutput">M =
+{% endhighlight %}
+
+{% highlight plaintext %}
+M =
     0.2719
 b =
   Columns 1 through 7
@@ -120,4 +149,6 @@ W = spinTensor
       0 -20.77  31.63
   20.77      0 -15.51
  -31.63  15.51      0
-</pre></div></body></html>
+
+{% endhighlight %}
+</div></body></html>

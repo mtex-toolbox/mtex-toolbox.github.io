@@ -1,6 +1,6 @@
 ---
 title: Grain Boundary Tutorial
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryTutorial.html
 folder: documentation
@@ -14,23 +14,23 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Tutorial</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_BoundaryTutorial.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryTutorial into the Matlab commandline">edit page</a></font><div><!--introduction--><p>A quick guide to grain boundary analysis</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Grain boundaries generation</h2><p>To work with grain boundaries we need some ebsd data and have to detect grains within the data set.</p>
-  {% highlight matlab %}
-  <span class="comment">% load some example data</span>
-mtexdata <span class="string">twins</span>
+      --><title>Grain Boundary Tutorial</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_BoundaryTutorial.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryTutorial into the Matlab commandline">edit page</a></font><div><!--introduction--><p>A quick guide to grain boundary analysis</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Grain boundaries generation</h2><p>To work with grain boundaries we need some ebsd data and have to detect grains within the data set.</p>
+{% highlight matlab %}
+% load some example data
+mtexdata twins
 
-<span class="comment">% detect grains</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>))
+% detect grains
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'))
 
-<span class="comment">% smooth them</span>
+% smooth them
 grains = grains.smooth
 
-<span class="comment">% visualize the grains</span>
+% visualize the grains
 plot(grains,grains.meanOrientation)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -88,62 +88,62 @@ grains = grain2d
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryTutorial_01.png" %}
 <p>Now we can extract from the grains its boundary and save it to a seperate variable</p>
-  {% highlight matlab %}
-  gB = grains.boundary
-  {% endhighlight %}
+{% highlight matlab %}
+gB = grains.boundary
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB = grainBoundary  
  
  Segments   mineral 1  mineral 2
       606  notIndexed  Magnesium
      3219   Magnesium  Magnesium
 
-        {% endhighlight %}
-    <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
-  {% highlight matlab %}
-  gB_MgMg = gB(<span class="string">'Magnesium'</span>,<span class="string">'Magnesium'</span>)
-  {% endhighlight %}
+{% endhighlight %}
+<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
+{% highlight matlab %}
+gB_MgMg = gB('Magnesium','Magnesium')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gB_MgMg = grainBoundary  
  
  Segments  mineral 1  mineral 2
      3219  Magnesium  Magnesium
 
-        {% endhighlight %}
-    <h2 id="6">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p>
-  {% highlight matlab %}
-  plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,<span class="string">'linewidth'</span>,2)
+{% endhighlight %}
+<h2 id="6">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p>
+{% highlight matlab %}
+plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,'linewidth',2)
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryTutorial_02.png" %}
 
-  {% highlight matlab %}
-  hold <span class="string">on</span>
-plot(gB(<span class="string">'notIndexed'</span>),<span class="string">'lineColor'</span>,<span class="string">'blue'</span>,<span class="string">'linewith'</span>,5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% highlight matlab %}
+hold on
+plot(gB('notIndexed'),'lineColor','blue','linewith',5)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryTutorial_03.png" %}
 
-  {% highlight matlab %}
-  grains.innerBoundary
-  {% endhighlight %}
+{% highlight matlab %}
+grains.innerBoundary
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = grainBoundary  
  
  Segments  mineral 1  mineral 2
         4  Magnesium  Magnesium
 
-        {% endhighlight %}
-    </div></body></html>
+{% endhighlight %}
+</div></body></html>

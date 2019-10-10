@@ -1,0 +1,208 @@
+---
+title: MTEX - Analysis of EBSD Data
+last_updated: 10-Oct-2019
+sidebar: documentation_sidebar
+permalink: ebsd_demo.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>MTEX - Analysis of EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_ebsd_demo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ebsd_demo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Analysis of single orientation measurement.</p><!--/introduction--><h2 id="2">Specify Crystal and Specimen Symmetry</h2>
+{% highlight matlab %}
+% specify crystal and specimen symmetry
+CS = {...
+  'Not Indexed',...
+  crystalSymmetry('m-3m','mineral','Fe'),... % crystal symmetry phase 1
+  crystalSymmetry('m-3m','mineral','Mg')};   % crystal symmetry phase 2
+{% endhighlight %}
+<h2 id="3">import ebsd data</h2>
+{% highlight matlab %}
+% file name
+fname = fullfile(mtexDataPath,'EBSD','85_829grad_07_09_06.txt');
+
+ebsd = EBSD.load(fname,'CS',CS,...
+  'ColumnNames', { 'Phase' 'x' 'y' 'Euler 1' 'Euler 2' 'Euler 3' 'Mad' 'BC'},...
+  'Columns', [2 3 4 5 6 7 8 9],...
+  'ignorePhase', 0, 'Bunge');
+{% endhighlight %}
+<h2 id="4">Plot Spatial Data</h2>
+{% highlight matlab %}
+plot(ebsd)
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_01.png" %}
+<h2 id="5">Plot Pole Figures as Scatter Plots</h2>
+{% highlight matlab %}
+h = [Miller(1,0,0,CS{2}),Miller(1,1,0,CS{2}),Miller(1,1,1,CS{2})];
+
+plotPDF(ebsd('Fe').orientations,h,'points',500,'antipodal')
+{% endhighlight %}
+
+{% highlight plaintext %}
+  I'm plotting 500 random orientations out of 48184 given orientations
+  You can specify the the number points by the option "points".
+  The option "all" ensures that all data are plotted
+
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_02.png" %}
+<h2 id="6">Kernel Density Estimation</h2><p>The crucial point in kernel density estimation in the choice of the halfwidth of the kernel function used for estimation. If the halfwidth of is chosen to small the single orientations are visible rather then the ODF (compare plot of ODF1). If the halfwidth is chosen to wide the estimated ODF becomes very smooth (ODF2).</p>
+{% highlight matlab %}
+odf1 = calcODF(ebsd('Fe').orientations)
+odf2 = calcODF(ebsd('Fe').orientations,'halfwidth',5*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+odf1 = ODF  
+  crystal symmetry : Fe (m-3m)
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+ 
+odf2 = ODF  
+  crystal symmetry : Fe (m-3m)
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 48
+    weight: 1
+ 
+
+{% endhighlight %}
+<h2 id="7">Plot pole figures</h2>
+{% highlight matlab %}
+plotPDF(odf1,h,'antipodal')
+figure
+plotPDF(odf2,h,'antipodal')
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_03.png" %}
+
+  {% include inline_image.html file="ebsd_demo_04.png" %}
+<h2 id="8">Plot ODF</h2>
+{% highlight matlab %}
+plot(odf2,'sections',9,'resolution',2*degree,...
+  'FontSize',10,'silent')
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_05.png" %}
+<h2 id="9">Estimation of Fourier Coefficients</h2><p>Once, a ODF has been estimated from EBSD data it is straight forward to calculate Fourier coefficients. E.g. by</p>
+{% highlight matlab %}
+close all
+odf2 = FourierODF(odf2);
+imagesc(abs(odf2.calcFourier('order',10)))
+mtexColorbar
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_06.png" %}
+<p>However this is a biased estimator of the Fourier coefficents which underestimates the true Fourier coefficients by a factor that correspondes to the decay rate of the Fourier coeffients of the kernel used for ODF estimation. One obtains an <b>unbiased</b> estimator of the Fourier coefficients if they are calculated from the ODF estimated with the help fo the Direchlet kernel. I.e.</p>
+{% highlight matlab %}
+dirichlet = DirichletKernel(32);
+odf3 = calcODF(ebsd('Fe').orientations,'kernel',dirichlet);
+imagesc(abs(odf3.calcFourier('order',10)))
+mtexColorbar
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_07.png" %}
+<p>Let us compare the Fourier coefficients obtained by both methods.</p>
+{% highlight matlab %}
+plotFourier(odf2,'bandwidth',32)
+hold all
+plotFourier(odf3,'bandwidth',32)
+hold off
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_08.png" %}
+<h2 id="12">A Sythetic Example</h2><p>Simulate EBSD data from a given standard ODF</p>
+{% highlight matlab %}
+CS = crystalSymmetry('trigonal');
+fibre_odf = 0.5*uniformODF(CS) + 0.5*fibreODF(Miller(0,0,0,1,CS),zvector);
+plot(fibre_odf,'sections',6,'silent')
+ori = calcOrientations(fibre_odf,10000)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ori = orientation  
+  size: 10000 x 1
+  crystal symmetry : -31m, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_09.png" %}
+<p>Estimate an ODF from the simulated EBSD data</p>
+{% highlight matlab %}
+odf = calcODF(ori)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+odf = ODF  
+  crystal symmetry : -31m, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+
+{% endhighlight %}
+<p>plot the estimated ODF</p>
+{% highlight matlab %}
+plot(odf,'sections',6,'silent')
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_10.png" %}
+<p>calculate estimation error</p>
+{% highlight matlab %}
+calcError(odf,fibre_odf,'resolution',5*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0968
+
+{% endhighlight %}
+<p>For a more exhausive example see the <a href="EBSDSimulation_demo.html">EBSD Simulation demo</a>!</p><h2 id="17">Exercises</h2><p>5)</p><p>a) Load the EBSD data: <tt>data/ebsd\_txt/85\_829grad\_07\_09\_06.txt</tt>!</p>
+{% highlight matlab %}
+import_wizard('ebsd')
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_11.png" %}
+<p>b) Estimate an ODF from the above EBSD data.</p>
+{% highlight matlab %}
+odf = calcODF(ori)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+odf = ODF  
+  crystal symmetry : -31m, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+
+{% endhighlight %}
+<p>c) Visualize the ODF and some of its pole figures!</p>
+{% highlight matlab %}
+plot(odf,'sections',6,'silent')
+{% endhighlight %}
+
+  {% include inline_image.html file="ebsd_demo_12.png" %}
+<p>d) Explore the influence of the halfwidth to the kernel density estimation by looking at the pole figures!</p></div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: loadODF_generic
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: loadODF_generic.html
 folder: function_reference
@@ -14,15 +14,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>loadODF_generic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_loadODF_generic.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit loadODF_generic into the Matlab commandline">edit page</a></font><div><!--introduction--><p>load pole figure data from (alpha,beta,gamma) files</p><!--/introduction--><h2 id="2">Description</h2><p><b>loadEBSD_txt</b> loads an ODF from any txt or exel files are of the following format</p><pre>alpha_1 beta_1 gamma_1 weight_1
+      --><title>loadODF_generic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_loadODF_generic.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit loadODF_generic into the Matlab commandline">edit page</a></font><div><!--introduction--><p>load pole figure data from (alpha,beta,gamma) files</p><!--/introduction--><h2 id="2">Description</h2><p><b>loadEBSD_txt</b> loads an ODF from any txt or exel files are of the following format</p><pre>alpha_1 beta_1 gamma_1 weight_1
 alpha_2 beta_2 gamma_2 weight_2
 alpha_3 beta_3 gamma_3 weight_3
 .      .       .       .
 .      .       .       .
 .      .       .       .
-alpha_M beta_M gamma_M weight_m</pre><p>The assoziation of the columns as Euler angles, phase informationl, etc. is specified by the options <tt>ColumnNames</tt> and <tt>Columns</tt>. The file can contain any number of header lines.</p><h2 id="3">Syntax</h2><pre class="language-matlab">cs = crystalSymmetry(<span class="string">'432'</span>)
-odf   = loadODF_generic(fname,<span class="string">'cs'</span>,cs,<span class="string">'ColumnNames'</span>,{<span class="string">'Euler 1'</span> <span class="string">'Euler 2'</span> <span class="string">'Euler 3'</span> <span class="string">'weight'</span>})
-</pre><h2 id="4">Input</h2><p>
+alpha_M beta_M gamma_M weight_m</pre><p>The assoziation of the columns as Euler angles, phase informationl, etc. is specified by the options <tt>ColumnNames</tt> and <tt>Columns</tt>. The file can contain any number of header lines.</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+cs = crystalSymmetry('432')
+odf   = loadODF_generic(fname,'cs',cs,'ColumnNames',{'Euler 1' 'Euler 2' 'Euler 3' 'weight'})
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
@@ -111,11 +114,16 @@ odf   = loadODF_generic(fname,<span class="string">'cs'</span>,cs,<span class="s
          </td>
       </tr>
    </table>
-</p><h2 id="7">Example</h2><pre class="codeinput">fname = fullfile(mtexDataPath,<span class="string">'ODF'</span>,<span class="string">'odf.txt'</span>);
-odf = loadODF_generic(fname,<span class="string">'cs'</span>,crystalSymmetry(<span class="string">'cubic'</span>),<span class="string">'header'</span>,5,<span class="keyword">...</span>
-<span class="string">'ColumnNames'</span>,{<span class="string">'Euler 1'</span> <span class="string">'Euler 2'</span> <span class="string">'Euler 3'</span> <span class="string">'weight'</span>},<span class="keyword">...</span>
-<span class="string">'Columns'</span>,[1,2,3,4])
-</pre><pre class="codeoutput">  Interpolating the ODF. This might take some time...
+</p><h2 id="7">Example</h2>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'ODF','odf.txt');
+odf = loadODF_generic(fname,'cs',crystalSymmetry('cubic'),'header',5,...
+'ColumnNames',{'Euler 1' 'Euler 2' 'Euler 3' 'weight'},...
+'Columns',[1,2,3,4])
+{% endhighlight %}
+
+{% highlight plaintext %}
+  Interpolating the ODF. This might take some time...
  
 odf = ODF  
   crystal symmetry : m-3m
@@ -129,4 +137,6 @@ odf = ODF
     center: 22875 orientations, resolution: 3&deg;
     weight: 0.48254
  
-</pre><h2 id="10">See also</h2><p>import_wizard loadODF ODF_demo</p></div></body></html>
+
+{% endhighlight %}
+<h2 id="10">See also</h2><p>import_wizard loadODF ODF_demo</p></div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: smooth
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: EBSDsquare.smooth.html
 folder: function_reference
@@ -14,23 +14,31 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>smooth</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_EBSDsquare__smooth.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDsquare__smooth into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="EBSDsquare_index.html">EBSDsquare</a>)</p><!--/introduction--><p>smooth spatial EBSD data</p><p>Synatx   ebsd = ebsd.gridify   ebsd = smooth(ebsd)</p><h2 id="3">Syntax</h2><pre class="language-matlab">[ebsd,filter] = smooth(ebsd,varargin)
-</pre><h2 id="4">Input</h2><p>
+      --><title>smooth</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_EBSDsquare__smooth.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDsquare__smooth into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="EBSDsquare_index.html">EBSDsquare</a>)</p><!--/introduction--><p>smooth spatial EBSD data</p><p>Synatx   ebsd = ebsd.gridify   ebsd = smooth(ebsd)</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[ebsd,filter] = smooth(ebsd,varargin)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt>&lt;a href="EBSD_index.html"&gt;EBSD&lt;/a&gt;</tt>
+            <tt><a href="EBSD_index.html">EBSD</a></tt>
          </td>
       </tr>
    </table>
-</p><h2 id="5">Example</h2><pre class="codeinput">mtexdata <span class="string">forsterite</span>
-ebsd = ebsd(<span class="string">'indexed'</span>);
-<span class="comment">% segment grains</span>
+</p><h2 id="5">Example</h2>
+{% highlight matlab %}
+mtexdata forsterite
+ebsd = ebsd('indexed');
+% segment grains
 [grains,ebsd.grainId] = calcGrains(ebsd)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -66,10 +74,17 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId
  Scan unit : um
  
-</pre><pre class="codeinput"><span class="comment">% find largest grains</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% find largest grains
 largeGrains = grains(grains.grainSize&gt;800)
 ebsd = ebsd(largeGrains(1))
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 largeGrains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -90,13 +105,18 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId
  Scan unit : um
  
-</pre><pre class="codeinput">figure
-plot(largeGrains(1).boundary,<span class="string">'linewidth'</span>,2,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-hold <span class="string">on</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+figure
+plot(largeGrains(1).boundary,'linewidth',2,'micronbar','off')
+hold on
 oM = axisAngleColorKey(ebsd);
 oM.oriRef = mean(ebsd.orientations);
 plot(ebsd,oM.orientation2color(ebsd.orientations))
-hold <span class="string">off</span>
-</pre>
+hold off
+{% endhighlight %}
+
   {% include inline_image.html file="EBSDsquare.smooth_01.png" %}
 </div></body></html>

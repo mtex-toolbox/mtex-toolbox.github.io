@@ -1,0 +1,234 @@
+---
+title: Ghost Effect Analysis
+last_updated: 10-Oct-2019
+sidebar: documentation_sidebar
+permalink: PoleFigure2ODFGhostCorrection.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Ghost Effect Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_PoleFigure2ODFGhostCorrection.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigure2ODFGhostCorrection into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>A general problem in estimating an ODF from pole figure data is the fact that the odd order Fourier coefficients of the ODF are not present anymore in the pole figure data and therefore it is difficult to estimate them. Artifacts in the estimated ODF that are due to underestimated odd order Fourier coefficients are called <b>ghost effects</b>. It is known that for sharp textures the ghost effect is relatively small due to the strict non-negativity condition. For weak textures, however, the ghost effect might be remarkable. For those cases, <b>MTEX</b> provides the option <b>ghost_correction</b> which tries to determine the uniform portion of the unknown ODF and to transform the unknown weak ODF into a sharp ODF by substracting this uniform portion. This is almost the approach Matthies proposed in his book (He called the uniform portion <b>phon</b>). In this section, we are going to demonstrate the power of ghost correction at a simple, synthetic example.</p><h2 id="2">Construct Model ODF</h2><p>A unimodal ODF with a high uniform portion.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('222');
+mod1 = orientation.byEuler(0,0,0,cs);
+odf = 0.9*uniformODF(cs) + ...
+  0.1*unimodalODF(mod1,'halfwidth',10*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+odf = ODF  
+  crystal symmetry : 222
+  specimen symmetry: 1
+ 
+  Uniform portion:
+    weight: 0.9
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    center: (0&deg;,0&deg;,0&deg;)
+    weight: 0.1
+ 
+
+{% endhighlight %}
+<h2 id="3">Simulate pole figures</h2>
+{% highlight matlab %}
+% specimen directions
+r = equispacedS2Grid('resolution',5*degree,'antipodal');
+
+% crystal directions
+h = [Miller(1,0,0,cs),Miller(0,1,0,cs),Miller(0,0,1,cs)];
+
+% compute pole figures
+pf = calcPoleFigure(odf,h,r);
+
+plot(pf)
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_01.png" %}
+<h2 id="4">ODF Estimation</h2><p>without ghost correction:</p>
+{% highlight matlab %}
+rec = calcODF(pf,'noGhostCorrection','silent');
+{% endhighlight %}
+<p>with ghost correction:</p>
+{% highlight matlab %}
+rec_cor = calcODF(pf,'silent');
+{% endhighlight %}
+<h2 id="6">Compare RP Errors</h2><p>without ghost correction:</p>
+{% highlight matlab %}
+calcError(pf,rec,'RP')
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+ans =
+    0.1617    0.1600    0.1685
+
+{% endhighlight %}
+<p>with ghost correction:</p>
+{% highlight matlab %}
+calcError(pf,rec_cor,'RP')
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+ans =
+    0.1547    0.1519    0.1584
+
+{% endhighlight %}
+<h2 id="9">Compare Reconstruction Errors</h2><p>without ghost correction:</p>
+{% highlight matlab %}
+calcError(rec,odf)
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+ans =
+    0.1142
+
+{% endhighlight %}
+<p>with ghost correction:</p>
+{% highlight matlab %}
+calcError(rec_cor,odf)
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+ans =
+    0.0269
+
+{% endhighlight %}
+<h2 id="12">Plot the ODFs</h2><p>without ghost correction:</p>
+{% highlight matlab %}
+plot(rec,'sections',9,'silent','sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_02.png" %}
+<p>with ghost correction:</p>
+{% highlight matlab %}
+plot(rec_cor,'sections',9,'silent','sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+progress: 100%
+
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_03.png" %}
+<p>radial plot of the true ODF</p>
+{% highlight matlab %}
+close all
+f = fibre(Miller(0,1,0,cs),yvector);
+plot(odf,f,'linewidth',2);
+hold all
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_04.png" %}
+<p>radial plot without ghost correction:</p>
+{% highlight matlab %}
+plot(rec,f,'linewidth',2);
+{% endhighlight %}
+<p>radial plot with ghost correction:</p>
+{% highlight matlab %}
+plot(rec_cor,f,'linestyle','--','linewidth',2);
+hold off
+legend({'true ODF','without ghost correction','with ghost correction'})
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_05.png" %}
+<h2 id="18">Calculate Fourier coefficients</h2><p>Next, we want to analyze the fit of the Fourier coefficients of the reconstructed ODFs. To this end, we first compute Fourier representations for each ODF</p>
+{% highlight matlab %}
+odf = FourierODF(odf,25)
+rec = FourierODF(rec,25)
+rec_cor = FourierODF(rec_cor,25)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+odf = ODF  
+  crystal symmetry : 222
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+ 
+rec = ODF  
+  crystal symmetry : 222
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+ 
+rec_cor = ODF  
+  crystal symmetry : 222
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+
+{% endhighlight %}
+<h2 id="19">Calculate Reconstruction Errors from Fourier Coefficients</h2><p>without ghost correction:</p>
+{% highlight matlab %}
+calcError(rec,odf,'L2')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.4926
+
+{% endhighlight %}
+<p>with ghost correction:</p>
+{% highlight matlab %}
+calcError(rec_cor,odf,'L2')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.3400
+
+{% endhighlight %}
+<h2 id="22">Plot Fourier Coefficients</h2><p>Plotting the Fourier coefficients of the recalculated ODFs shows that the Fourier coefficients without ghost correction oscillates much more than the Fourier coefficients with ghost correction</p><p>true ODF</p>
+{% highlight matlab %}
+close all;
+plotFourier(odf,'linewidth',2)
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_06.png" %}
+<p>keep plotting windows and add next plots</p>
+{% highlight matlab %}
+hold all
+{% endhighlight %}
+<p>Without ghost correction:</p>
+{% highlight matlab %}
+plotFourier(rec,'linewidth',2)
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_07.png" %}
+<p>with ghost correction</p>
+{% highlight matlab %}
+plotFourier(rec_cor,'linewidth',2)
+legend({'true ODF','without ghost correction','with ghost correction'})
+% next plot command overwrites plot window
+hold off
+{% endhighlight %}
+
+  {% include inline_image.html file="PoleFigure2ODFGhostCorrection_08.png" %}
+</div></body></html>

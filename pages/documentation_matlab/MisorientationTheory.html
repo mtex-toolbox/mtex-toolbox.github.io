@@ -1,6 +1,6 @@
 ---
 title: Theory of Misorientations
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
 folder: documentation
@@ -14,23 +14,23 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MisorientationTheory into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice),</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">The misorientation angle</h2><p>First we import some EBSD data set, compute grains and plot them according to their mean orientation. Next we highlight grain 70 and grain 80</p>
-  {% highlight matlab %}
-  mtexdata <span class="string">twins</span>
-<span class="comment">% use only proper symmetry operations</span>
-ebsd(<span class="string">'M'</span>).CS = ebsd(<span class="string">'M'</span>).CS.properGroup;
-grains = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'threshold'</span>,5*degree)
-CS = grains.CS; <span class="comment">% extract crystal symmetry</span>
+      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MisorientationTheory into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice),</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">The misorientation angle</h2><p>First we import some EBSD data set, compute grains and plot them according to their mean orientation. Next we highlight grain 70 and grain 80</p>
+{% highlight matlab %}
+mtexdata twins
+% use only proper symmetry operations
+ebsd('M').CS = ebsd('M').CS.properGroup;
+grains = calcGrains(ebsd('indexed'),'threshold',5*degree)
+CS = grains.CS; % extract crystal symmetry
 
-plot(grains,grains.meanOrientation,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-hold <span class="string">on</span>
-plot(grains([74,85]).boundary,<span class="string">'edgecolor'</span>,<span class="string">'w'</span>,<span class="string">'linewidth'</span>,2)
+plot(grains,grains.meanOrientation,'micronbar','off')
+hold on
+plot(grains([74,85]).boundary,'edgecolor','w','linewidth',2)
 
-text(grains([74,85]),{<span class="string">'1'</span>,<span class="string">'2'</span>})
-  {% endhighlight %}
+text(grains([74,85]),{'1','2'})
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -57,17 +57,17 @@ grains = grain2d
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="MisorientationTheory_01.png" %}
 <p>After extracting the mean orientation of grain 70 and 80</p>
-  {% highlight matlab %}
-  ori1 = grains(74).meanOrientation
+{% highlight matlab %}
+ori1 = grains(74).meanOrientation
 ori2 = grains(85).meanOrientation
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ori1 = orientation  
   size: 1 x 1
   crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
@@ -88,45 +88,45 @@ ori2 = orientation
   71.4509 167.781 200.741       0
  
 
-        {% endhighlight %}
-    <p>we may compute the misorientation angle between both orientations by</p>
-  {% highlight matlab %}
-  angle(ori1, ori2) ./ degree
-  {% endhighlight %}
+{% endhighlight %}
+<p>we may compute the misorientation angle between both orientations by</p>
+{% highlight matlab %}
+angle(ori1, ori2) ./ degree
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
-   85.7093
-
-        {% endhighlight %}
-    <p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
-  {% highlight matlab %}
-  angle(ori1, ori2.symmetrise) ./ degree
-  {% endhighlight %}
-
-        {% highlight matlab %}
-        ans =
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
-   85.7093
+{% highlight plaintext %}
+ans =
    85.7093
 
-        {% endhighlight %}
-    <p>The misorientation angle neglecting crystal symmetry can be computed by</p>
-  {% highlight matlab %}
-  angle(ori1, ori2.symmetrise,<span class="string">'noSymmetry'</span>)./ degree
-  {% endhighlight %}
+{% endhighlight %}
+<p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
+{% highlight matlab %}
+angle(ori1, ori2.symmetrise) ./ degree
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+   85.7093
+
+{% endhighlight %}
+<p>The misorientation angle neglecting crystal symmetry can be computed by</p>
+{% highlight matlab %}
+angle(ori1, ori2.symmetrise,'noSymmetry')./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
   107.9464
   100.9175
    94.2925
@@ -140,14 +140,14 @@ ori2 = orientation
   140.4168
    85.7093
 
-        {% endhighlight %}
-    <p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="9">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
-  {% highlight matlab %}
-  mori = inv(ori1) * ori2
-  {% endhighlight %}
+{% endhighlight %}
+<p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="9">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
+{% highlight matlab %}
+mori = inv(ori1) * ori2
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
@@ -158,14 +158,14 @@ mori = misorientation
   149.581 94.2922 150.134       0
  
 
-        {% endhighlight %}
-    <p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 80 into the reference frame of crystal 70. Take as an example the plane {11-20} with respect to the grain 80. Then the plane in grain 70 which alignes parallel to this plane can be computed by</p>
-  {% highlight matlab %}
-  round(mori * Miller(1,1,-2,0,CS))
-  {% endhighlight %}
+{% endhighlight %}
+<p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 80 into the reference frame of crystal 70. Take as an example the plane {11-20} with respect to the grain 80. Then the plane in grain 70 which alignes parallel to this plane can be computed by</p>
+{% highlight matlab %}
+round(mori * Miller(1,1,-2,0,CS))
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = Miller  
  size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
@@ -174,14 +174,14 @@ ans = Miller
   i -1
   l  0
 
-        {% endhighlight %}
-    <p>Conversely, the inverse of mori is the coordinate transform from crystal 70 to grain 80.</p>
-  {% highlight matlab %}
-  round(inv(mori) * Miller(2,-1,-1,0,CS))
-  {% endhighlight %}
+{% endhighlight %}
+<p>Conversely, the inverse of mori is the coordinate transform from crystal 70 to grain 80.</p>
+{% highlight matlab %}
+round(inv(mori) * Miller(2,-1,-1,0,CS))
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = Miller  
  size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
@@ -190,43 +190,43 @@ ans = Miller
   i -2
   l  0
 
-        {% endhighlight %}
-    <h2 id="12">Coincident lattice planes</h2><p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyse whether there are some more alignments between major lattice planes.</p>
-  {% highlight matlab %}
-  <span class="comment">%m = Miller({1,-1,0,0},{1,1,-2,0},{1,-1,0,1},{0,0,0,1},CS);</span>
+{% endhighlight %}
+<h2 id="12">Coincident lattice planes</h2><p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyse whether there are some more alignments between major lattice planes.</p>
+{% highlight matlab %}
+%m = Miller({1,-1,0,0},{1,1,-2,0},{1,-1,0,1},{0,0,0,1},CS);
 m = Miller({1,-1,0,0},{1,1,-2,0},{-1,0,1,1},{0,0,0,1},CS);
 
-<span class="comment">% cycle through all major lattice planes</span>
-close <span class="string">all</span>
-<span class="keyword">for</span> im = 1:length(m)
-  <span class="comment">% plot the lattice planes of grains 80 with respect to the</span>
-  <span class="comment">% reference frame of grain 70</span>
-  plot(mori * m(im).symmetrise,<span class="string">'MarkerSize'</span>,10,<span class="keyword">...</span>
-    <span class="string">'DisplayName'</span>,char(m(im)),<span class="string">'figSize'</span>,<span class="string">'large'</span>,<span class="string">'noLabel'</span>,<span class="string">'upper'</span>)
-  hold <span class="string">all</span>
-<span class="keyword">end</span>
-hold <span class="string">off</span>
+% cycle through all major lattice planes
+close all
+for im = 1:length(m)
+  % plot the lattice planes of grains 80 with respect to the
+  % reference frame of grain 70
+  plot(mori * m(im).symmetrise,'MarkerSize',10,...
+    'DisplayName',char(m(im)),'figSize','large','noLabel','upper')
+  hold all
+end
+hold off
 
-<span class="comment">% mark the corresponding lattice planes in the twin</span>
-mm = round(unique(mori*m.symmetrise,<span class="string">'noSymmetry'</span>),<span class="string">'maxHKL'</span>,6);
-annotate(mm,<span class="string">'labeled'</span>,<span class="string">'MarkerSize'</span>,5,<span class="string">'figSize'</span>,<span class="string">'large'</span>,<span class="string">'textAboveMarker'</span>)
+% mark the corresponding lattice planes in the twin
+mm = round(unique(mori*m.symmetrise,'noSymmetry'),'maxHKL',6);
+annotate(mm,'labeled','MarkerSize',5,'figSize','large','textAboveMarker')
 
-<span class="comment">% show legend</span>
-legend({},<span class="string">'location'</span>,<span class="string">'SouthEast'</span>,<span class="string">'FontSize'</span>,13);
-  {% endhighlight %}
+% show legend
+legend({},'location','SouthEast','FontSize',13);
+{% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_02.png" %}
 <p>we observe an almost perfect match for the lattice planes {11-20} to {-2110} and {1-101} to {-1101} and good coincidences for the lattice plane {1-100} to {0001} and {0001} to {0-661}. Lets compute the angles explicitly</p>
-  {% highlight matlab %}
-  angle(mori * Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS)) / degree
+{% highlight matlab %}
+angle(mori * Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS)) / degree
 angle(mori * Miller(1,0,-1,-1,CS),Miller(1,-1,0,1,CS)) / degree
-angle(mori * Miller(0,0,0,1,CS) ,Miller(1,0,-1,0,CS),<span class="string">'noSymmetry'</span>) / degree
+angle(mori * Miller(0,0,0,1,CS) ,Miller(1,0,-1,0,CS),'noSymmetry') / degree
 angle(mori * Miller(1,1,-2,2,CS),Miller(1,0,-1,0,CS)) / degree
 angle(mori * Miller(1,0,-1,0,CS),Miller(1,1,-2,2,CS)) / degree
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
     0.4489
 ans =
     0.2193
@@ -237,22 +237,22 @@ ans =
 ans =
     2.5387
 
-        {% endhighlight %}
-    <h2 id="14">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
-  {% highlight matlab %}
-  mori = orientation.map(Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS),<span class="keyword">...</span>
+{% endhighlight %}
+<h2 id="14">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
+{% highlight matlab %}
+mori = orientation.map(Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS),...
   Miller(-1,0,1,1,CS),Miller(-1,1,0,1,CS))
 
 
-<span class="comment">% the rotational axis</span>
+% the rotational axis
 round(mori.axis)
 
-<span class="comment">% the rotational angle</span>
+% the rotational angle
 mori.angle / degree
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
@@ -273,75 +273,75 @@ ans = Miller
 ans =
      0
 
-        {% endhighlight %}
-    <p>and plot the same figure as before with the exact twinning misorientation.</p>
-  {% highlight matlab %}
-  <span class="comment">% cycle through all major lattice planes</span>
-close <span class="string">all</span>
-<span class="keyword">for</span> im = 1:length(m)
-  <span class="comment">% plot the lattice planes of grains 80 with respect to the</span>
-  <span class="comment">% reference frame of grain 70</span>
-  plot(mori * m(im).symmetrise,<span class="string">'MarkerSize'</span>,10,<span class="keyword">...</span>
-    <span class="string">'DisplayName'</span>,char(m(im)),<span class="string">'figSize'</span>,<span class="string">'large'</span>,<span class="string">'noLabel'</span>,<span class="string">'upper'</span>)
-  hold <span class="string">all</span>
-<span class="keyword">end</span>
-hold <span class="string">off</span>
+{% endhighlight %}
+<p>and plot the same figure as before with the exact twinning misorientation.</p>
+{% highlight matlab %}
+% cycle through all major lattice planes
+close all
+for im = 1:length(m)
+  % plot the lattice planes of grains 80 with respect to the
+  % reference frame of grain 70
+  plot(mori * m(im).symmetrise,'MarkerSize',10,...
+    'DisplayName',char(m(im)),'figSize','large','noLabel','upper')
+  hold all
+end
+hold off
 
-<span class="comment">% mark the corresponding lattice planes in the twin</span>
-mm = round(unique(mori*m.symmetrise,<span class="string">'noSymmetry'</span>),<span class="string">'maxHKL'</span>,6);
-annotate(mm,<span class="string">'labeled'</span>,<span class="string">'MarkerSize'</span>,5,<span class="string">'figSize'</span>,<span class="string">'large'</span>)
+% mark the corresponding lattice planes in the twin
+mm = round(unique(mori*m.symmetrise,'noSymmetry'),'maxHKL',6);
+annotate(mm,'labeled','MarkerSize',5,'figSize','large')
 
-<span class="comment">% show legend</span>
-legend({},<span class="string">'location'</span>,<span class="string">'NorthWest'</span>,<span class="string">'FontSize'</span>,13);
-  {% endhighlight %}
+% show legend
+legend({},'location','NorthWest','FontSize',13);
+{% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_03.png" %}
 <h2 id="16">Highlight twinning boundaries</h2><p>It turns out that in the previous EBSD map many grain boundaries have a misorientation close to the twinning misorientation we just defined. Lets Lets highlight those twinning boundaries</p>
-  {% highlight matlab %}
-  <span class="comment">% consider only Magnesium to Magnesium grain boundaries</span>
-gB = grains.boundary(<span class="string">'Mag'</span>,<span class="string">'Mag'</span>);
+{% highlight matlab %}
+% consider only Magnesium to Magnesium grain boundaries
+gB = grains.boundary('Mag','Mag');
 
-<span class="comment">% check for small deviation from the twinning misorientation</span>
+% check for small deviation from the twinning misorientation
 isTwinning = angle(gB.misorientation,mori) &lt; 5*degree;
 
-<span class="comment">% plot the grains and highlight the twinning boundaries</span>
-plot(grains,grains.meanOrientation,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-hold <span class="string">on</span>
-plot(gB(isTwinning),<span class="string">'edgecolor'</span>,<span class="string">'w'</span>,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% plot the grains and highlight the twinning boundaries
+plot(grains,grains.meanOrientation,'micronbar','off')
+hold on
+plot(gB(isTwinning),'edgecolor','w','linewidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-          I'm going to colorize the orientation data with the 
+{% highlight plaintext %}
+  I'm going to colorize the orientation data with the 
   standard MTEX colorkey. To view the colorkey do:
  
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="MisorientationTheory_04.png" %}
 <p>From this picture we see that large fraction of grain boudaries are twinning boundaries. To make this observation more evident we may plot the boundary misorientation angle distribution function. This is simply the angle distribution of all boundary misorientations and can be displayed with</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
+{% highlight matlab %}
+close all
 plotAngleDistribution(gB.misorientation)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_05.png" %}
 <p>From this we observe that we have about 50 percent twinning boundaries. Analogously we may also plot the axis distribution</p>
-  {% highlight matlab %}
-  plotAxisDistribution(gB.misorientation,<span class="string">'contour'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+plotAxisDistribution(gB.misorientation,'contour')
+{% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_06.png" %}
 <p>which emphasises a strong portion of rotations about the (-12-10) axis.</p><h2 id="20">Phase transitions</h2><p>Misorientations may not only be defined between crystal frames of the same phase. Lets consider the phases Magnetite and Hematite.</p>
-  {% highlight matlab %}
-  CS_Mag = loadCIF(<span class="string">'Magnetite'</span>)
-CS_Hem = loadCIF(<span class="string">'Hematite'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+CS_Mag = loadCIF('Magnetite')
+CS_Hem = loadCIF('Hematite')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 CS_Mag = crystalSymmetry  
  
   mineral : Magnetite    
@@ -357,16 +357,16 @@ CS_Hem = crystalSymmetry
   reference frame: X||a*, Y||b, Z||c*
  
 
-        {% endhighlight %}
-    <p>The phase transition from Magnetite to Hematite is described in literature by {111}_m parallel {0001}_h and {-101}_m parallel {10-10}_h The corresponding misorientation is defined in MTEX by</p>
-  {% highlight matlab %}
-  Mag2Hem = orientation.map(<span class="keyword">...</span>
-  Miller(1,1,1,CS_Mag),Miller(0,0,0,1,CS_Hem),<span class="keyword">...</span>
+{% endhighlight %}
+<p>The phase transition from Magnetite to Hematite is described in literature by {111}_m parallel {0001}_h and {-101}_m parallel {10-10}_h The corresponding misorientation is defined in MTEX by</p>
+{% highlight matlab %}
+Mag2Hem = orientation.map(...
+  Miller(1,1,1,CS_Mag),Miller(0,0,0,1,CS_Hem),...
   Miller(-1,0,1,CS_Mag),Miller(1,0,-1,0,CS_Hem))
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 Mag2Hem = misorientation  
   size: 1 x 1
   crystal symmetry : Magnetite (m-3m)
@@ -377,14 +377,14 @@ Mag2Hem = misorientation
    120 54.7356      45       0
  
 
-        {% endhighlight %}
-    <p>Assume a Magnetite grain with orientation</p>
-  {% highlight matlab %}
-  ori_Mag = orientation.byEuler(0,0,0,CS_Mag)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Assume a Magnetite grain with orientation</p>
+{% highlight matlab %}
+ori_Mag = orientation.byEuler(0,0,0,CS_Mag)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ori_Mag = orientation  
   size: 1 x 1
   crystal symmetry : Magnetite (m-3m)
@@ -395,26 +395,26 @@ ori_Mag = orientation
      0    0    0    0
  
 
-        {% endhighlight %}
-    <p>Then we can compute all variants of the phase transition by</p>
-  {% highlight matlab %}
-  symmetrise(ori_Mag) * inv(Mag2Hem)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Then we can compute all variants of the phase transition by</p>
+{% highlight matlab %}
+symmetrise(ori_Mag) * inv(Mag2Hem)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = orientation  
   size: 48 x 1
   crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
  
 
-        {% endhighlight %}
-    <p>and the corresponding pole figures by</p>
-  {% highlight matlab %}
-  plotPDF(symmetrise(ori_Mag) * inv(Mag2Hem),<span class="keyword">...</span>
+{% endhighlight %}
+<p>and the corresponding pole figures by</p>
+{% highlight matlab %}
+plotPDF(symmetrise(ori_Mag) * inv(Mag2Hem),...
   Miller({1,0,-1,0},{1,1,-2,0},{0,0,0,1},CS_Hem))
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_07.png" %}
 </div></body></html>

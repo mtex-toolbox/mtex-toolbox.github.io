@@ -1,6 +1,6 @@
 ---
 title: Birefrigence
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: BirefringenceDemo.html
 folder: documentation
@@ -14,24 +14,26 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Birefrigence</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BirefringenceDemo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustarte the effect of birefringence lets consider a olivine data set.</p>
-  {% highlight matlab %}
-  mtexdata <span class="string">olivine</span>
+      --><title>Birefrigence</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BirefringenceDemo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustarte the effect of birefringence lets consider a olivine data set.</p>
+{% highlight matlab %}
+mtexdata olivine
 
-<span class="comment">% reconstruct grains</span>
-[grains,ebsd.grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+% reconstruct grains
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 ebsd(grains(grains.grainSize &lt; 5)) = [];
-[grains,ebsd.grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
-<span class="comment">% some data denoising</span>
+% some data denoising
 grains = smooth(grains,5);
 
 F = splineFilter;
-ebsd = smooth(ebsd,F,<span class="string">'fill'</span>,grains);
-  {% endhighlight %}
+ebsd = smooth(ebsd,F,'fill',grains);
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/olivine.mat
+ 
 ebsd = EBSD  
  
  Phase  Orientations       Mineral         Color  Symmetry  Crystal reference frame
@@ -45,25 +47,25 @@ ebsd = EBSD
  
  denoising EBSD data: 100%
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  <span class="comment">% plot the olivine phase</span>
-plot(ebsd(<span class="string">'olivine'</span>),ebsd(<span class="string">'olivine'</span>).orientations);
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineWidth'</span>,2)
-hold <span class="string">off</span>
+{% endhighlight %}
+
+{% highlight matlab %}
+% plot the olivine phase
+plot(ebsd('olivine'),ebsd('olivine').orientations);
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
 
 gg = grains(grains.grainSize &gt; 100);
-gg = gg(<span class="string">'o'</span>)
+gg = gg('o')
 cS = crystalShape.olivine;
-hold <span class="string">on</span>
-plot(gg,0.8*cS,<span class="string">'FaceColor'</span>,<span class="string">'none'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(gg,0.8*cS,'FaceColor','none')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 gg = grain2d  
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
@@ -75,21 +77,21 @@ gg = grain2d
  Properties: GOS, meanRotation
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BirefringenceDemo_01.png" %}
 <h2 id="3">The refractive index tensor</h2><p>The refractive index of a material describes the dependence of the speed of light with respect to the propagation direction and the polarization direction. In a linear world this relation ship is modeled by a symmetric rank 2 tensor - the so called refractive index tensor, which is usually given by it principle values: n_alpha, n_beta and n_gamma. In orthorhombic minerals such as olivine the principal values are parallel to the crystallographic axes. Care has to be applied when associating the principle values with the correct axes.</p><p>For Forsterite the priniple refractive values are</p>
-  {% highlight matlab %}
-  n_alpha = 1.635; n_beta = 1.651; n_gamma = 1.670;
-  {% endhighlight %}
+{% highlight matlab %}
+n_alpha = 1.635; n_beta = 1.651; n_gamma = 1.670;
+{% endhighlight %}
 <p>with the largest refractive index n_gamma beeing alligned with the a-axis, the intermediate index n_beta with the c-axis and the smallest refractive index n_alpha with the b-axis. Hence, the refractive index tensor for Forsterite takes the form</p>
-  {% highlight matlab %}
-  cs = ebsd(<span class="string">'olivine'</span>).CS;
+{% highlight matlab %}
+cs = ebsd('olivine').CS;
 rI_Fo = refractiveIndexTensor(diag([ n_gamma  n_alpha  n_beta]),cs)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rI_Fo = refractiveIndexTensor  
   rank   : 2 (3 x 3)    
   mineral: olivine (222)
@@ -98,18 +100,18 @@ rI_Fo = refractiveIndexTensor
      0 1.635     0
      0     0 1.651
 
-        {% endhighlight %}
-    <p>For Fayalite the priniple refractive values</p>
-  {% highlight matlab %}
-  n_alpha = 1.82; n_beta = 1.869; n_gamma = 1.879;
-  {% endhighlight %}
+{% endhighlight %}
+<p>For Fayalite the priniple refractive values</p>
+{% highlight matlab %}
+n_alpha = 1.82; n_beta = 1.869; n_gamma = 1.879;
+{% endhighlight %}
 <p>are aligned to the crystallograhic axes in an analogous way. Which leads to the refractive index tensor</p>
-  {% highlight matlab %}
-  rI_Fa = refractiveIndexTensor(diag([ n_gamma  n_alpha  n_beta]),cs)
-  {% endhighlight %}
+{% highlight matlab %}
+rI_Fa = refractiveIndexTensor(diag([ n_gamma  n_alpha  n_beta]),cs)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rI_Fa = refractiveIndexTensor  
   rank   : 2 (3 x 3)    
   mineral: olivine (222)
@@ -118,18 +120,18 @@ rI_Fa = refractiveIndexTensor
      0  1.82     0
      0     0 1.869
 
-        {% endhighlight %}
-    <p>The refractive index of composite materials like Olivine can now be modelled as the weighted sum of the of the refractive index tensors of Forsterite and Fayalite. Lets assume that the relative Forsterite content (atomic percentage) is sgiven my</p>
-  {% highlight matlab %}
-  XFo = 0.86; <span class="comment">% 86 percent Forsterite</span>
-  {% endhighlight %}
+{% endhighlight %}
+<p>The refractive index of composite materials like Olivine can now be modelled as the weighted sum of the of the refractive index tensors of Forsterite and Fayalite. Lets assume that the relative Forsterite content (atomic percentage) is sgiven my</p>
+{% highlight matlab %}
+XFo = 0.86; % 86 percent Forsterite
+{% endhighlight %}
 <p>Then is refractive index tensor becomes</p>
-  {% highlight matlab %}
-  rI = XFo*rI_Fo + (1-XFo) * rI_Fa
-  {% endhighlight %}
+{% highlight matlab %}
+rI = XFo*rI_Fo + (1-XFo) * rI_Fa
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rI = refractiveIndexTensor  
   rank   : 2 (3 x 3)    
   mineral: olivine (222)
@@ -138,18 +140,18 @@ rI = refractiveIndexTensor
       0 1.6609      0
       0      0 1.6815
 
-        {% endhighlight %}
-    <h2 id="10">Birefringence</h2><p>The birefringence describes the difference <tt>n</tt> in diffraction index between the fastest polarization direction <tt>pMax</tt> and the slowest polarization direction <tt>pMin</tt> for a given propagation direction <tt>vprop</tt>.</p>
-  {% highlight matlab %}
-  <span class="comment">% lets define a propagation direction</span>
+{% endhighlight %}
+<h2 id="10">Birefringence</h2><p>The birefringence describes the difference <tt>n</tt> in diffraction index between the fastest polarization direction <tt>pMax</tt> and the slowest polarization direction <tt>pMin</tt> for a given propagation direction <tt>vprop</tt>.</p>
+{% highlight matlab %}
+% lets define a propagation direction
 vprop = Miller(1,1,1,cs);
 
-<span class="comment">% and compute the birefringence</span>
+% and compute the birefringence
 [dn,pMin,pMax] = rI.birefringence(vprop)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        dn =
+{% highlight plaintext %}
+dn =
     0.0245
  
 pMin = vector3d  
@@ -162,25 +164,25 @@ pMax = vector3d
           x         y         z
   -0.650059  0.114293  0.751239
 
-        {% endhighlight %}
-    <p>If the polarization direction is ommited the results are spherical functions which can be easily visualized.</p>
-  {% highlight matlab %}
-  <span class="comment">% compute the birefringence as a spherical function</span>
+{% endhighlight %}
+<p>If the polarization direction is ommited the results are spherical functions which can be easily visualized.</p>
+{% highlight matlab %}
+% compute the birefringence as a spherical function
 [dn,pMin,pMax] = rI.birefringence
 
-<span class="comment">% plot it</span>
-plot3d(dn,<span class="string">'complete'</span>)
+% plot it
+plot3d(dn,'complete')
 mtexColorbar
 
-<span class="comment">% and on top of it the polarization directions</span>
-hold <span class="string">on</span>
-quiver3(pMin,<span class="string">'color'</span>,<span class="string">'white'</span>)
+% and on top of it the polarization directions
+hold on
+quiver3(pMin,'color','white')
 quiver3(pMax)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 dn = S2FunHarmonic  
  mineral: olivine (222)
  bandwidth: 48
@@ -191,25 +193,25 @@ pMin = S2AxisFieldHarmonic
 pMax = S2AxisFieldHarmonic  
  bandwidth: 48
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BirefringenceDemo_02.png" %}
 <h2 id="12">The Optical Axis</h2><p>The optial axes are all directions where the birefringence is zero</p>
-  {% highlight matlab %}
-  <span class="comment">% compute the optical axes</span>
+{% highlight matlab %}
+% compute the optical axes
 vOptical = rI.opticalAxis
 
-<span class="comment">% and check the birefringence is zero</span>
+% and check the birefringence is zero
 rI.birefringence(rI.opticalAxis)
 
-<span class="comment">% annotate them to the birefringence plot</span>
-hold <span class="string">on</span>
-arrow3d(vOptical,<span class="string">'antipodal'</span>,<span class="string">'facecolor'</span>,<span class="string">'red'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% annotate them to the birefringence plot
+hold on
+arrow3d(vOptical,'antipodal','facecolor','red')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 vOptical = vector3d  
  size: 1 x 2
  antipodal: true
@@ -221,176 +223,176 @@ ans =
     0.4441
     0.4441
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BirefringenceDemo_03.png" %}
 <h2 id="13">Spectral Transmission</h2><p>If white with a certain polarization is transmited though a crystal with isotropic refrative index the light changes wavelength and hence appears collored. The resulting color depending on the propagation direction, the polarization direction and the thickness can be computed by</p>
-  {% highlight matlab %}
-  vprop = Miller(1,1,1,cs);
+{% highlight matlab %}
+vprop = Miller(1,1,1,cs);
 thickness = 30000;
 p =  Miller(-1,1,0,cs);
-rgb = rI.spectralTransmission(vprop,thickness,<span class="string">'polarizationDirection'</span>,p)
-  {% endhighlight %}
+rgb = rI.spectralTransmission(vprop,thickness,'polarizationDirection',p)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        rgb =
+{% highlight plaintext %}
+rgb =
     0.3635    0.7380    0.6967
 
-        {% endhighlight %}
-    <p>Effectively, the rgb value depend only on the angle tau between the polariztzion direction and the slowest polarization direction <tt>pMin</tt>. Instead of the polarization direction this angle may be specified directly</p>
-  {% highlight matlab %}
-  rgb = rI.spectralTransmission(vprop,thickness,<span class="string">'tau'</span>,30*degree)
-  {% endhighlight %}
+{% endhighlight %}
+<p>Effectively, the rgb value depend only on the angle tau between the polariztzion direction and the slowest polarization direction <tt>pMin</tt>. Instead of the polarization direction this angle may be specified directly</p>
+{% highlight matlab %}
+rgb = rI.spectralTransmission(vprop,thickness,'tau',30*degree)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        rgb =
+{% highlight plaintext %}
+rgb =
     0.3128    0.6350    0.5994
 
-        {% endhighlight %}
-    <p>If the angle tau is fixed and the propagation direction is ommited as input MTEX returns the rgb values as a spherical function. Lets plot these functions for different values of tau.</p>
-  {% highlight matlab %}
-  newMtexFigure(<span class="string">'layout'</span>,[1,3]);
+{% endhighlight %}
+<p>If the angle tau is fixed and the propagation direction is ommited as input MTEX returns the rgb values as a spherical function. Lets plot these functions for different values of tau.</p>
+{% highlight matlab %}
+newMtexFigure('layout',[1,3]);
 
-mtexTitle(<span class="string">'$\tau = 15^{\circ}$'</span>)
-plot(rI.spectralTransmission(thickness,<span class="string">'tau'</span>,15*degree),<span class="string">'rgb'</span>)
-
-nextAxis
-mtexTitle(<span class="string">'$\tau = 30^{\circ}$'</span>)
-plot(rI.spectralTransmission(thickness,<span class="string">'tau'</span>,30*degree),<span class="string">'rgb'</span>)
+mtexTitle('$\tau = 15^{\circ}$')
+plot(rI.spectralTransmission(thickness,'tau',15*degree),'rgb')
 
 nextAxis
-mtexTitle(<span class="string">'$\tau = 45^{\circ}$'</span>)
-plot(rI.spectralTransmission(thickness,<span class="string">'tau'</span>,45*degree),<span class="string">'rgb'</span>)
+mtexTitle('$\tau = 30^{\circ}$')
+plot(rI.spectralTransmission(thickness,'tau',30*degree),'rgb')
 
-drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'normal'</span>)
-  {% endhighlight %}
+nextAxis
+mtexTitle('$\tau = 45^{\circ}$')
+plot(rI.spectralTransmission(thickness,'tau',45*degree),'rgb')
+
+drawNow(gcm,'figSize','normal')
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_04.png" %}
 <p>Usually, the polarization direction is chosen at angle phi = 90 degree of the analyzer. The following plots demonstrate how to change this angle</p>
-  {% highlight matlab %}
-  newMtexFigure(<span class="string">'layout'</span>,[1,3]);
+{% highlight matlab %}
+newMtexFigure('layout',[1,3]);
 
-mtexTitle(<span class="string">'$\tau = 15^{\circ}$'</span>)
-plot(rI.spectralTransmission(thickness,<span class="string">'tau'</span>,45*degree,<span class="string">'phi'</span>,30*degree),<span class="string">'rgb'</span>)
-
-nextAxis
-mtexTitle(<span class="string">'$\tau = 30^{\circ}$'</span>)
-plot(rI.spectralTransmission(thickness,<span class="string">'tau'</span>,45*degree,<span class="string">'phi'</span>,60*degree),<span class="string">'rgb'</span>)
+mtexTitle('$\tau = 15^{\circ}$')
+plot(rI.spectralTransmission(thickness,'tau',45*degree,'phi',30*degree),'rgb')
 
 nextAxis
-mtexTitle(<span class="string">'$\tau = 45^{\circ}$'</span>)
-plot(rI.spectralTransmission(thickness,<span class="string">'tau'</span>,45*degree,<span class="string">'phi'</span>,90*degree),<span class="string">'rgb'</span>)
+mtexTitle('$\tau = 30^{\circ}$')
+plot(rI.spectralTransmission(thickness,'tau',45*degree,'phi',60*degree),'rgb')
 
-drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'normal'</span>)
-  {% endhighlight %}
+nextAxis
+mtexTitle('$\tau = 45^{\circ}$')
+plot(rI.spectralTransmission(thickness,'tau',45*degree,'phi',90*degree),'rgb')
+
+drawNow(gcm,'figSize','normal')
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_05.png" %}
 <h2 id="17">Spectral Transmission at Thin Sections</h2><p>All the above computations have been performed in crystal coordinates. However, in practical applications the direction of the polarizer as well as the propagation direction are given in terms of specimen coordinates.</p>
-  {% highlight matlab %}
-  <span class="comment">% the propagation direction</span>
+{% highlight matlab %}
+% the propagation direction
 vprop = vector3d.Z;
 
-<span class="comment">% the direction of the polarizer</span>
+% the direction of the polarizer
 polarizer = vector3d.X;
 
-<span class="comment">% the thickness of the thin section</span>
+% the thickness of the thin section
 thickness = 22800;
-  {% endhighlight %}
+{% endhighlight %}
 <p>As usal we have two options: Either we transform the refractive index tensor into specimen coordinates or we transform the polarization direction and the propagation directions into crystal coordinates. Lets start with the first option:</p>
-  {% highlight matlab %}
-  <span class="comment">% extract the olivine orientations</span>
-ori = ebsd(<span class="string">'olivine'</span>).orientations;
+{% highlight matlab %}
+% extract the olivine orientations
+ori = ebsd('olivine').orientations;
 
-<span class="comment">% transform the tensor into a list of tensors with respect to specimen</span>
-<span class="comment">% coordinates</span>
+% transform the tensor into a list of tensors with respect to specimen
+% coordinates
 rISpecimen = ori * rI;
 
-<span class="comment">% compute RGB values</span>
-rgb = rISpecimen.spectralTransmission(vprop,thickness,<span class="string">'polarizationDirection'</span>,polarizer);
+% compute RGB values
+rgb = rISpecimen.spectralTransmission(vprop,thickness,'polarizationDirection',polarizer);
 
-<span class="comment">% colorize the EBSD maps according to spectral transmission</span>
-plot(ebsd(<span class="string">'olivine'</span>),rgb)
-  {% endhighlight %}
+% colorize the EBSD maps according to spectral transmission
+plot(ebsd('olivine'),rgb)
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_06.png" %}
 <p>and compare it with option two:</p>
-  {% highlight matlab %}
-  <span class="comment">% transfom the propation direction and the polarizer direction into a list</span>
-<span class="comment">% of directions with respect to crystal coordinates</span>
+{% highlight matlab %}
+% transfom the propation direction and the polarizer direction into a list
+% of directions with respect to crystal coordinates
 vprop_crystal = ori \ vprop;
 polarizer_crystal = ori \ polarizer;
 
-<span class="comment">% compute RGB values</span>
-rgb = rI.spectralTransmission(vprop_crystal,thickness,<span class="string">'polarizationDirection'</span>,polarizer_crystal);
+% compute RGB values
+rgb = rI.spectralTransmission(vprop_crystal,thickness,'polarizationDirection',polarizer_crystal);
 
-<span class="comment">% colorize the EBSD maps according to spectral transmission</span>
-plot(ebsd(<span class="string">'olivine'</span>),rgb)
-  {% endhighlight %}
+% colorize the EBSD maps according to spectral transmission
+plot(ebsd('olivine'),rgb)
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_07.png" %}
 <h2 id="20">Spectral Transmission as a color key</h2><p>The above computations can be automized by defining a spectral transmission color key.</p>
-  {% highlight matlab %}
-  <span class="comment">% define the colorKey</span>
+{% highlight matlab %}
+% define the colorKey
 colorKey  = spectralTransmissionColorKey(rI,thickness);
 
-<span class="comment">% the following are the defaults and can be ommited</span>
+% the following are the defaults and can be ommited
 colorKey.propagationDirection = vector3d.Z;
 colorKey.polarizer = vector3d.X;
 colorKey.phi = 90 * degree;
 
-<span class="comment">% compute the spectral transmission color of the olivine orientations</span>
+% compute the spectral transmission color of the olivine orientations
 rgb = colorKey.orientation2color(ori);
 
-plot(ebsd(<span class="string">'olivine'</span>), rgb)
-  {% endhighlight %}
+plot(ebsd('olivine'), rgb)
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_08.png" %}
 <p>As usual we me visualize the color key as a colorization of the orientation space, e.g., by plotting it in sigma sections:</p>
-  {% highlight matlab %}
-  plot(colorKey,<span class="string">'sigma'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+plot(colorKey,'sigma')
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_09.png" %}
 <h2 id="22">Circular Polarizer</h2><p>In order to simulate we a circular polarizer we simply set the polarizer direction to empty, i.e.</p>
-  {% highlight matlab %}
-  colorKey.polarizer = [];
+{% highlight matlab %}
+colorKey.polarizer = [];
 
-<span class="comment">% compute the spectral transmission color of the olivine orientations</span>
+% compute the spectral transmission color of the olivine orientations
 rgb = colorKey.orientation2color(ori);
 
-plot(ebsd(<span class="string">'olivine'</span>), rgb)
-  {% endhighlight %}
+plot(ebsd('olivine'), rgb)
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_10.png" %}
 <h2 id="23">Illustrating the effect of rotating polarizer and analyser simultanously</h2>
-  {% highlight matlab %}
-  colorKey.polarizer = vector3d.X;
+{% highlight matlab %}
+colorKey.polarizer = vector3d.X;
 figure
-plotHandle = plot(ebsd(<span class="string">'olivine'</span>),colorKey.orientation2color(ori),<span class="string">'micronbar'</span>,<span class="string">'off'</span>);
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineWidth'</span>,2)
-hold <span class="string">off</span>
-textHandle = text(750,50,[num2str(0,<span class="string">'%10.1f'</span>) <span class="string">'\circ'</span>],<span class="string">'fontSize'</span>,15,<span class="keyword">...</span>
-  <span class="string">'color'</span>,<span class="string">'w'</span>,<span class="string">'backGroundColor'</span>, <span class="string">'k'</span>);
+plotHandle = plot(ebsd('olivine'),colorKey.orientation2color(ori),'micronbar','off');
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+textHandle = text(750,50,[num2str(0,'%10.1f') '\circ'],'fontSize',15,...
+  'color','w','backGroundColor', 'k');
 
-<span class="comment">% define the step size in degree</span>
+% define the step size in degree
 stepSize = 2.5;
 
-<span class="keyword">for</span> omega = 0:stepSize:90-stepSize
+for omega = 0:stepSize:90-stepSize
 
-  <span class="comment">% update polarsation direction</span>
+  % update polarsation direction
   colorKey.polarizer = rotate(vector3d.X, omega * degree);
 
-  <span class="comment">% update rgb values</span>
+  % update rgb values
   plotHandle.FaceVertexCData = colorKey.orientation2color(ori);
 
-  <span class="comment">% update text</span>
-  textHandle.String = [num2str(omega,<span class="string">'%10.1f'</span>) <span class="string">'\circ'</span>];
+  % update text
+  textHandle.String = [num2str(omega,'%10.1f') '\circ'];
 
   drawnow
 
-<span class="keyword">end</span>
-  {% endhighlight %}
+end
+{% endhighlight %}
 
   {% include inline_image.html file="BirefringenceDemo_11.png" %}
 </div></body></html>

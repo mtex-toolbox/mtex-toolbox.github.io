@@ -1,6 +1,6 @@
 ---
 title: calcTaylor
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: velocityGradientTensor.calcTaylor.html
 folder: function_reference
@@ -14,15 +14,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcTaylor</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_velocityGradientTensor__calcTaylor.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit velocityGradientTensor__calcTaylor into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="velocityGradientTensor_index.html">velocityGradientTensor</a>)</p><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="3">Syntax</h2><pre class="language-matlab">[M,b,W] = calcTaylor(eps,sS)
-</pre><h2 id="4">Input</h2><p>
+      --><title>calcTaylor</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_velocityGradientTensor__calcTaylor.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit velocityGradientTensor__calcTaylor into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="velocityGradientTensor_index.html">velocityGradientTensor</a>)</p><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[M,b,W] = calcTaylor(eps,sS)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>L</tt>
          </td>
          <td>
-            <tt>&lt;a href="velocityGradientTensor_index.html"&gt;velocityGradientTensor&lt;/a&gt;</tt>
+            <tt><a href="velocityGradientTensor_index.html">velocityGradientTensor</a></tt>
          </td>
       </tr>
       <tr>
@@ -30,7 +33,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>sS</tt>
          </td>
          <td>
-            <tt>&lt;a href="slipSystem_index.html"&gt;slipSystem&lt;/a&gt;</tt>
+            <tt><a href="slipSystem_index.html">slipSystem</a></tt>
          </td>
       </tr>
    </table>
@@ -57,13 +60,18 @@ To make changes, update the MATLAB code and republish this document.
             <tt>W</tt>
          </td>
          <td>
-            <tt>&lt;a href="spinTensor_index.html"&gt;spinTensor&lt;/a&gt;</tt>
+            <tt><a href="spinTensor_index.html">spinTensor</a></tt>
          </td>
       </tr>
    </table>
-</p><h2 id="6">Example</h2><pre class="codeinput"><span class="comment">% consider uniaxial tension in (100) direction about 30 percent</span>
+</p><h2 id="6">Example</h2>
+{% highlight matlab %}
+% consider uniaxial tension in (100) direction about 30 percent
 F = deformationGradientTensor.uniaxial(vector3d.X,1.3)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 F = deformationGradientTensor  
   rank   : 2 (3 x 3)            
   mineral: 1, X||a, Y||b*, Z||c*
@@ -71,9 +79,16 @@ F = deformationGradientTensor
     1.3      0      0
       0 0.8771      0
       0      0 0.8771
-</pre><pre class="codeinput"><span class="comment">% the corresponding rate of deformation tensor becomes</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% the corresponding rate of deformation tensor becomes
 L = logm(F)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 L = velocityGradientTensor  
   rank   : 2 (3 x 3)            
   mineral: 1, X||a, Y||b*, Z||c*
@@ -82,10 +97,17 @@ L = velocityGradientTensor
   26.236       0       0
        0 -13.118       0
        0       0 -13.118
-</pre><pre class="codeinput"><span class="comment">% define a crystal orientation</span>
-cs = crystalSymmetry(<span class="string">'cubic'</span>)
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% define a crystal orientation
+cs = crystalSymmetry('cubic')
 ori = orientation.byEuler(0,30*degree,15*degree,cs)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 cs = crystalSymmetry  
  
   symmetry: m-3m   
@@ -101,17 +123,31 @@ ori = orientation
   phi1  Phi phi2 Inv.
      0   30   15    0
  
-</pre><pre class="codeinput"><span class="comment">% define a slip system</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% define a slip system
 sS = slipSystem.fcc(cs)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 sS = slipSystem  
  symmetry: m-3m
  size: 1 x 1
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
-</pre><pre class="codeinput"><span class="comment">% compute the Taylor factor</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute the Taylor factor
 [M,b,spin] = calcTaylor(inv(ori)*L,sS.symmetrise)
-</pre><pre class="codeoutput">M =
+{% endhighlight %}
+
+{% highlight plaintext %}
+M =
     0.6584
 b =
   Columns 1 through 7
@@ -131,4 +167,6 @@ spin = spinTensor
       0 -65.59      0
   65.59      0      0
       0      0      0
-</pre></div></body></html>
+
+{% endhighlight %}
+</div></body></html>

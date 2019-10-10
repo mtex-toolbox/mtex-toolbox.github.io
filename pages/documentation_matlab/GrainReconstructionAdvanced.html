@@ -1,6 +1,6 @@
 ---
 title: Advanced Grain Reconstruction
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstructionAdvanced.html
 folder: documentation
@@ -14,9 +14,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstructionAdvanced into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
-  {% highlight matlab %}
-  mtexdata <span class="string">small</span>
+      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstructionAdvanced into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
+{% highlight matlab %}
+mtexdata small
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
 ebsd(grains(grains.grainSize&lt;=3)) = [];
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
@@ -24,13 +24,13 @@ F = splineFilter;
 ebsd = smooth(ebsd,F);
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
 plot(ebsd)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineColor'</span>,[1 0 0],<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'lineColor',[1 0 0],'linewidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -43,28 +43,28 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_01.png" %}
 <h2 id="2">2) no fill, no grains, indexed pixels</h2>
-  {% highlight matlab %}
-  mtexdata <span class="string">small</span>
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+{% highlight matlab %}
+mtexdata small
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 ebsd(grains(grains.grainSize&lt;=3)) = [];
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
-ebsd = smooth(ebsd(<span class="string">'indexed'</span>),F);
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+ebsd = smooth(ebsd('indexed'),F);
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 
 nextAxis
 plot(ebsd)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineColor'</span>,[1 0 0],<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'lineColor',[1 0 0],'linewidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -77,28 +77,28 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_02.png" %}
 <h2 id="3">3) fill, no grains, all pixels</h2>
-  {% highlight matlab %}
-  mtexdata <span class="string">small</span>
+{% highlight matlab %}
+mtexdata small
 [grains,ebsd.grainId] = calcGrains(ebsd);
 ebsd(grains(grains.grainSize&lt;=3)) = [];
 [grains,ebsd.grainId] = calcGrains(ebsd);
 F = splineFilter;
-ebsd = smooth(ebsd,F,<span class="string">'fill'</span>);
+ebsd = smooth(ebsd,F,'fill');
 [grains,ebsd.grainId] = calcGrains(ebsd);
 
 nextAxis
 plot(ebsd)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineColor'</span>,[1 0 0],<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'lineColor',[1 0 0],'linewidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -111,28 +111,28 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_03.png" %}
 <h2 id="4">4) fill, no grains, indexed pixels</h2>
-  {% highlight matlab %}
-  mtexdata <span class="string">small</span>
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+{% highlight matlab %}
+mtexdata small
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 ebsd(grains(grains.grainSize&lt;=3)) = [];
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
-ebsd = smooth(ebsd(<span class="string">'indexed'</span>),F,<span class="string">'fill'</span>);
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+ebsd = smooth(ebsd('indexed'),F,'fill');
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 
 nextAxis
 plot(ebsd)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineColor'</span>,[1 0 0],<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary,'lineColor',[1 0 0],'linewidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -145,29 +145,29 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_04.png" %}
 <h2 id="5">5) fill, grains, indexed pixels</h2>
-  {% highlight matlab %}
-  mtexdata <span class="string">small</span>
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+{% highlight matlab %}
+mtexdata small
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 ebsd(grains(grains.grainSize&lt;=3)) = [];
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
-ebsd = smooth(ebsd(<span class="string">'indexed'</span>),F,<span class="string">'fill'</span>,grains);
-[grains,ebsd(<span class="string">'indexed'</span>).grainId] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+ebsd = smooth(ebsd('indexed'),F,'fill',grains);
+[grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 
 nextAxis
 plot(ebsd)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineColor'</span>,[1 0 0],<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
+hold on
+plot(grains.boundary,'lineColor',[1 0 0],'linewidth',2)
+hold off
 drawNow(gcm)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -180,23 +180,23 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_05.png" %}
 <h2 id="6">6) Multiscale clustering method</h2>
-  {% highlight matlab %}
-  mtexdata <span class="string">small</span>
-grains = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'FMC'</span>,1)
+{% highlight matlab %}
+mtexdata small
+grains = calcGrains(ebsd('indexed'),'FMC',1)
 nextAxis
 plot(ebsd)
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineColor'</span>,[1 0 0],<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
+hold on
+plot(grains.boundary,'lineColor',[1 0 0],'linewidth',2)
+hold off
 drawNow(gcm)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -222,21 +222,23 @@ grains = grain2d
  Properties: GOS, meanRotation
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_06.png" %}
 <h2 id="7">Multiscale clustering method</h2><p>When analyzing grains with gradual and subtle boundaries the threshold based method may not lead to the desired result.</p><p>Let us consider the following example</p>
-  {% highlight matlab %}
-  mtexdata <span class="string">single</span>
+{% highlight matlab %}
+mtexdata single
 
 ipfKey = axisAngleColorKey(ebsd);
 ipfKey.oriRef = mean(ebsd.orientations);
 
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/single.mat
+ 
 ebsd = EBSD  
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
@@ -246,41 +248,41 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainReconstructionAdvanced_07.png" %}
 <p>We obeserve that the are no rapid changes in the orientation which would allow for applying the threshold based algorithm. Setting the threshold angle to a very small value would include many irrelevant or false regions.</p>
-  {% highlight matlab %}
-  grains_high = calcGrains(ebsd,<span class="string">'angle'</span>,1*degree);
-grains_low  = calcGrains(ebsd,<span class="string">'angle'</span>,0.5*degree);
+{% highlight matlab %}
+grains_high = calcGrains(ebsd,'angle',1*degree);
+grains_low  = calcGrains(ebsd,'angle',0.5*degree);
 
 figure
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-hold <span class="string">on</span>
+hold on
 plot(grains_high.boundary)
-hold <span class="string">off</span>
+hold off
 
 figure
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
-hold <span class="string">on</span>
+hold on
 plot(grains_low.boundary)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainReconstructionAdvanced_08.png" %}
 
   {% include inline_image.html file="GrainReconstructionAdvanced_09.png" %}
 <p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p>
-  {% highlight matlab %}
-  grains_FMC = calcGrains(ebsd(<span class="string">'indexed'</span>),<span class="string">'FMC'</span>,3.8)
-grains = calcGrains(ebsd(<span class="string">'indexed'</span>))
+{% highlight matlab %}
+grains_FMC = calcGrains(ebsd('indexed'),'FMC',3.8)
+grains = calcGrains(ebsd('indexed'))
 
-<span class="comment">% smooth grains to remove staircase effect</span>
+% smooth grains to remove staircase effect
 grains_FMC = smooth(grains_FMC);
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 grains_FMC = grain2d  
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
@@ -321,19 +323,19 @@ grains = grain2d
   1       1    10201   0.0343764    237    77    320
  
 
-        {% endhighlight %}
-    <p>We observe how this method nicely splits the measurements into clusters of similar orientation</p>
-  {% highlight matlab %}
-  <span class="comment">%plot(ebsd,oM.orientation2color(ebsd.orientations))</span>
+{% endhighlight %}
+<p>We observe how this method nicely splits the measurements into clusters of similar orientation</p>
+{% highlight matlab %}
+%plot(ebsd,oM.orientation2color(ebsd.orientations))
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 
-<span class="comment">% start overide mode</span>
-hold <span class="string">on</span>
-plot(grains_FMC.boundary,<span class="string">'linewidth'</span>,1.5)
+% start overide mode
+hold on
+plot(grains_FMC.boundary,'linewidth',1.5)
 
-<span class="comment">% stop overide mode</span>
-hold <span class="string">off</span>
-  {% endhighlight %}
+% stop overide mode
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainReconstructionAdvanced_10.png" %}
 </div></body></html>

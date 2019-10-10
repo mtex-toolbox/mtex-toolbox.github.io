@@ -1,6 +1,6 @@
 ---
 title: centerSpecimen
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: ODF.centerSpecimen.html
 folder: function_reference
@@ -14,15 +14,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>centerSpecimen</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_ODF__centerSpecimen.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODF__centerSpecimen into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="ODF_index.html">ODF</a>)</p><!--/introduction--><p>rotatates an odf with specimen symmetry into its symmetry axes</p><p>centerSpecimen(odf,center) trys to find the normal vectors of orthorhombic symmetry for the x mirror and y mirror plane and calculates an rotation needed to rotate the odf back into these mirror planes. the routine starts with an lookaround grid for a given center (default xvector) to find a starting value for newton iteration.</p><h2 id="3">Syntax</h2><pre class="language-matlab">[odf,rot,v1,v2] = centerSpecimen(odf,v0,varargin)
-</pre><h2 id="4">Input</h2><p>
+      --><title>centerSpecimen</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_ODF__centerSpecimen.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODF__centerSpecimen into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="ODF_index.html">ODF</a>)</p><!--/introduction--><p>rotatates an odf with specimen symmetry into its symmetry axes</p><p>centerSpecimen(odf,center) trys to find the normal vectors of orthorhombic symmetry for the x mirror and y mirror plane and calculates an rotation needed to rotate the odf back into these mirror planes. the routine starts with an lookaround grid for a given center (default xvector) to find a starting value for newton iteration.</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[odf,rot,v1,v2] = centerSpecimen(odf,v0,varargin)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>odf</tt>
          </td>
          <td>
-            <tt>&lt;a href="ODF_index.html"&gt;ODF&lt;/a&gt;</tt>
+            <tt><a href="ODF_index.html">ODF</a></tt>
          </td>
       </tr>
       <tr>
@@ -30,7 +33,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>v0</tt>
          </td>
          <td>
-            <tt>&lt;a href="vector3d_index.html"&gt;vector3d&lt;/a&gt; initial gues for a symmetry axis (default xvector)</tt>
+            <tt><a href="vector3d_index.html">vector3d</a> initial gues for a symmetry axis (default xvector)</tt>
          </td>
       </tr>
    </table>
@@ -41,7 +44,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>SO3Grid</tt>
          </td>
          <td>
-            <tt>a &lt;a href="SO3Grid_index.html"&gt;SO3Grid&lt;/a&gt; the &lt;a href="ODF_index.html"&gt;ODF&lt;/a&gt; is evaluatete on</tt>
+            <tt>a <a href="SO3Grid_index.html">SO3Grid</a> the <a href="ODF_index.html">ODF</a> is evaluatete on</tt>
          </td>
       </tr>
       <tr>
@@ -84,7 +87,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>odf</tt>
          </td>
          <td>
-            <tt>rotated &lt;a href="ODF_index.html"&gt;ODF&lt;/a&gt;</tt>
+            <tt>rotated <a href="ODF_index.html">ODF</a></tt>
          </td>
       </tr>
       <tr>
@@ -92,7 +95,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>rot</tt>
          </td>
          <td>
-            <tt>&lt;a href="rotation_index.html"&gt;rotation&lt;/a&gt; such that rotate(odf_out,r) = odf_in</tt>
+            <tt><a href="rotation_index.html">rotation</a> such that rotate(odf_out,r) = odf_in</tt>
          </td>
       </tr>
       <tr>
@@ -104,14 +107,19 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
-</p><h2 id="7">Example</h2><pre class="codeinput"><span class="comment">%Starting with an synthetic odf with orthorhombic symmetry</span>
-CS = crystalSymmetry(<span class="string">'cubic'</span>)
-SS = specimenSymmetry(<span class="string">'orthorhombic'</span>)
-ori = [orientation.byEuler(135*degree,45*degree,120*degree,CS,SS) <span class="keyword">...</span>
-orientation.byEuler( 60*degree, 54.73*degree, 45*degree,CS,SS) <span class="keyword">...</span>
-orientation.byEuler(70*degree,90*degree,45*degree,CS,SS)<span class="keyword">...</span>
+</p><h2 id="7">Example</h2>
+{% highlight matlab %}
+%Starting with an synthetic odf with orthorhombic symmetry
+CS = crystalSymmetry('cubic')
+SS = specimenSymmetry('orthorhombic')
+ori = [orientation.byEuler(135*degree,45*degree,120*degree,CS,SS) ...
+orientation.byEuler( 60*degree, 54.73*degree, 45*degree,CS,SS) ...
+orientation.byEuler(70*degree,90*degree,45*degree,CS,SS)...
 orientation.byEuler(0*degree,0*degree,0*degree,CS,SS)];
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 CS = crystalSymmetry  
  
   symmetry: m-3m   
@@ -120,13 +128,23 @@ CS = crystalSymmetry
  
 SS = orthorhombic specimenSymmetry  
  
-</pre><pre class="codeinput">odf = unimodalODF(SS*ori);
-</pre><pre class="codeinput"><span class="comment">%we define a rotational displacement</span>
+
+{% endhighlight %}
+
+{% highlight matlab %}
+odf = unimodalODF(SS*ori);
+{% endhighlight %}
+
+{% highlight matlab %}
+%we define a rotational displacement
 r2 = rotation.byEuler( 6*degree,4*degree,0*degree)
 odf = rotate(odf,r2);
 h = [Miller(0,0,1,CS),Miller(0,1,1,CS),Miller(1,1,1,CS)];
-plotPDF(odf,h,<span class="string">'antipodal'</span>,<span class="string">'complete'</span>);
-</pre><pre class="codeoutput"> 
+plotPDF(odf,h,'antipodal','complete');
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 r2 = rotation  
   size: 1 x 1
  
@@ -134,6 +152,10 @@ r2 = rotation
   phi1  Phi phi2 Inv.
      6    4    0    0
  
-</pre>
+Warning: Rotating an ODF with specimen symmetry will remove the specimen
+symmetry 
+
+{% endhighlight %}
+
   {% include inline_image.html file="ODF.centerSpecimen_01.png" %}
 </div></body></html>
