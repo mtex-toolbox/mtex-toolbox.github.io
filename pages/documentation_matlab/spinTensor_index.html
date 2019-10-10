@@ -1,6 +1,6 @@
 ---
 title: Spin Tensors
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: spinTensor_index.html
 folder: documentation
@@ -14,13 +14,13 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spin Tensors</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_spinTensor_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit spinTensor_index into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Spin Tensors as Ininitesimal Changes of Rotations</h2><p>Spin tensors are skew symmetric tensors that can be used to small rotational changes. Lets consider an arbitrary reference rotation</p>
-  {% highlight matlab %}
-  rot_ref = rotation.byEuler(10*degree,20*degree,30*degree)
-  {% endhighlight %}
+      --><title>Spin Tensors</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_spinTensor_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit spinTensor_index into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Spin Tensors as Ininitesimal Changes of Rotations</h2><p>Spin tensors are skew symmetric tensors that can be used to small rotational changes. Lets consider an arbitrary reference rotation</p>
+{% highlight matlab %}
+rot_ref = rotation.byEuler(10*degree,20*degree,30*degree)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rot_ref = rotation  
   size: 1 x 1
  
@@ -29,21 +29,21 @@ rot_ref = rotation
     10   20   30    0
  
 
-        {% endhighlight %}
-    <p>and pertube it by a rotating about the axis (123) and angle delta. Since multiplication of rotations is not communatativ we have to distinguish between left and right pertubations</p>
-  {% highlight matlab %}
-  delta = 0.01*degree;
+{% endhighlight %}
+<p>and pertube it by a rotating about the axis (123) and angle delta. Since multiplication of rotations is not communatativ we have to distinguish between left and right pertubations</p>
+{% highlight matlab %}
+delta = 0.01*degree;
 rot_right = rotation.byAxisAngle(vector3d(1,2,3),delta) * rot_ref;
 rot_left = rot_ref * rotation.byAxisAngle(vector3d(1,2,3),delta);
-  {% endhighlight %}
+{% endhighlight %}
 <p>We may now ask for the first order Taylor coefficients of the pertubation as delta goes to zero which we find by the formula</p><p>$$ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta}</p>
-  {% highlight matlab %}
-  T_right = (rot_right.matrix - rot_ref.matrix)./delta
+{% highlight matlab %}
+T_right = (rot_right.matrix - rot_ref.matrix)./delta
 T_left = (rot_left.matrix - rot_ref.matrix)./delta
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        T_right =
+{% highlight plaintext %}
+T_right =
    -0.4002   -0.4146    0.7724
     0.5727   -0.5873   -0.2035
    -0.2484    0.5297   -0.1218
@@ -52,18 +52,18 @@ T_left =
     0.7530   -0.5816    0.1368
    -0.2648    0.1140    0.0122
 
-        {% endhighlight %}
-    <p>Both matrices <tt>T_right</tt> and <tt>T_left</tt> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes scew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
-  {% highlight matlab %}
-  S_right_L =  matrix(inv(rot_ref)) * T_right
+{% endhighlight %}
+<p>Both matrices <tt>T_right</tt> and <tt>T_left</tt> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes scew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
+{% highlight matlab %}
+S_right_L =  matrix(inv(rot_ref)) * T_right
 S_right_R = T_right * matrix(inv(rot_ref))
 
 S_left_L =  matrix(inv(rot_ref)) * T_left
 S_left_R = T_left * matrix(inv(rot_ref))
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        S_right_L =
+{% highlight plaintext %}
+S_right_L =
    -0.0000   -0.5892    0.4501
     0.5893   -0.0001   -0.6709
    -0.4501    0.6710   -0.0001
@@ -80,8 +80,8 @@ S_left_R =
     0.9575   -0.0001    0.0850
    -0.2758   -0.0850   -0.0000
 
-        {% endhighlight %}
-    <p>A scew symmetric 3x3 matrix <tt>S</tt> is essentially determined by its entries 
+{% endhighlight %}
+<p>A scew symmetric 3x3 matrix <tt>S</tt> is essentially determined by its entries 
   {% include inline_image.html file="spinTensor_index_eq14915280026360965098.png" %}
 , 
   {% include inline_image.html file="spinTensor_index_eq16890332314244088567.png" %}
@@ -90,14 +90,14 @@ S_left_R =
 . Writing these values as a vector 
   {% include inline_image.html file="spinTensor_index_eq12578543884773640078.png" %}
  we obtain for the matrices <tt>S_right_R</tt> and <tt>S_left_L</tt> exactly the rotational axis of our pertubation</p>
-  {% highlight matlab %}
-  vector3d(spinTensor(S_right_R)) * sqrt(14)
+{% highlight matlab %}
+vector3d(spinTensor(S_right_R)) * sqrt(14)
 
 vector3d(spinTensor(S_left_L))  *sqrt(14)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = vector3d  
  size: 1 x 1
   x y z
@@ -108,16 +108,16 @@ ans = vector3d
   x y z
   1 2 3
 
-        {% endhighlight %}
-    <p>For the other two matrices those vectors are related to the rotatinal axis by the reference rotation <tt>rot_ref</tt></p>
-  {% highlight matlab %}
-  rot_ref * vector3d(spinTensor(S_right_L)) * sqrt(14)
+{% endhighlight %}
+<p>For the other two matrices those vectors are related to the rotatinal axis by the reference rotation <tt>rot_ref</tt></p>
+{% highlight matlab %}
+rot_ref * vector3d(spinTensor(S_right_L)) * sqrt(14)
 
 inv(rot_ref) * vector3d(spinTensor(S_left_R)) * sqrt(14)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = vector3d  
  size: 1 x 1
   x y z
@@ -128,22 +128,22 @@ ans = vector3d
   x y z
   1 2 3
 
-        {% endhighlight %}
-    <h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works only well if the pertupation rotation has small rotational angle. For large pertubations the matrix logarithm</p>
-  {% highlight matlab %}
-  <span class="comment">% Given a reference rotation rot_ref and a spin vector |s| one could ask</span>
-<span class="comment">% for the rotation that is obtained by applying the inifitimal change s to</span>
-<span class="comment">% to rot_ref</span>
+{% endhighlight %}
+<h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works only well if the pertupation rotation has small rotational angle. For large pertubations the matrix logarithm</p>
+{% highlight matlab %}
+% Given a reference rotation rot_ref and a spin vector |s| one could ask
+% for the rotation that is obtained by applying the inifitimal change s to
+% to rot_ref
 
 
 rot_123 = rotation.byAxisAngle(vector3d(1,2,3),1)
 log(rot_ref * rot_123,rot_ref) * sqrt(14)
 
-log(rot_123 * rot_ref,rot_ref,<span class="string">'left'</span>) * sqrt(14)
-  {% endhighlight %}
+log(rot_123 * rot_ref,rot_ref,'left') * sqrt(14)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 rot_123 = rotation  
   size: 1 x 1
  
@@ -162,19 +162,19 @@ ans = vector3d
   x y z
   1 2 3
 
-        {% endhighlight %}
-    <h2 id="8">logarithm to skew symmetric matrix</h2>
-  {% highlight matlab %}
-  S = logm(rot_ref * rot_123,rot_ref)
+{% endhighlight %}
+<h2 id="8">logarithm to skew symmetric matrix</h2>
+{% highlight matlab %}
+S = logm(rot_ref * rot_123,rot_ref)
 
 vector3d(S) * sqrt(14)
 
-S = logm(rot_123 * rot_ref,rot_ref,<span class="string">'left'</span>)
+S = logm(rot_123 * rot_ref,rot_ref,'left')
 vector3d(S) * sqrt(14)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 S = spinTensor  
   rank: 2 (3 x 3)
  
@@ -201,19 +201,19 @@ ans = vector3d
   x y z
   1 2 3
 
-        {% endhighlight %}
-    <h2 id="9">The other way round</h2>
-  {% highlight matlab %}
-  S = logm(rot_ref * rot_123,rot_ref);
+{% endhighlight %}
+<h2 id="9">The other way round</h2>
+{% highlight matlab %}
+S = logm(rot_ref * rot_123,rot_ref);
 rot_ref * rot_123
 exp(S,rot_ref)
 
 v = log(rot_ref * rot_123,rot_ref);
 exp(v,rot_ref)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = rotation  
   size: 1 x 1
  
@@ -238,19 +238,19 @@ ans = rotation
   94.0497 29.4341 358.508       0
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  S = logm(rot_123 * rot_ref,rot_ref,<span class="string">'left'</span>);
+{% endhighlight %}
+
+{% highlight matlab %}
+S = logm(rot_123 * rot_ref,rot_ref,'left');
 rot_123 * rot_ref
-exp(S,rot_ref,<span class="string">'left'</span>)
+exp(S,rot_ref,'left')
 
-v = log(rot_123 * rot_ref,rot_ref,<span class="string">'left'</span>);
-exp(v,rot_ref,<span class="string">'left'</span>)
-  {% endhighlight %}
+v = log(rot_123 * rot_ref,rot_ref,'left');
+exp(v,rot_ref,'left')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = rotation  
   size: 1 x 1
  
@@ -275,23 +275,23 @@ ans = rotation
   74.5535 51.5051 9.61062       0
  
 
-        {% endhighlight %}
-    <h2 id="11">Now the same with orientations</h2>
-  {% highlight matlab %}
-  cs = crystalSymmetry(<span class="string">'321'</span>)
+{% endhighlight %}
+<h2 id="11">Now the same with orientations</h2>
+{% highlight matlab %}
+cs = crystalSymmetry('321')
 
-<span class="comment">% consider an arbitrary rotation</span>
+% consider an arbitrary rotation
 ori_ref = orientation.byEuler(10*degree,20*degree,30*degree,cs)
 
-<span class="comment">% next we disturb rot_ref by a rotation about the axis (123)</span>
+% next we disturb rot_ref by a rotation about the axis (123)
 mori_123 = orientation.byAxisAngle(Miller(1,2,-3,3,cs),1)
 
-<span class="comment">% first we multiply from the right</span>
+% first we multiply from the right
 ori = ori_ref * mori_123;
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 cs = crystalSymmetry  
  
   symmetry       : 321               
@@ -319,18 +319,18 @@ mori_123 = misorientation
   61.8386 40.0064 340.052       0
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  S_right_L =  matrix(inv(rot_ref)) * T_right
+{% endhighlight %}
+
+{% highlight matlab %}
+S_right_L =  matrix(inv(rot_ref)) * T_right
 S_right_R = T_right * matrix(inv(rot_ref))
 
 S_left_L =  matrix(inv(rot_ref)) * T_left
 S_left_R = T_left * matrix(inv(rot_ref))
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        S_right_L =
+{% highlight plaintext %}
+S_right_L =
    -0.0000   -0.5892    0.4501
     0.5893   -0.0001   -0.6709
    -0.4501    0.6710   -0.0001
@@ -347,18 +347,18 @@ S_left_R =
     0.9575   -0.0001    0.0850
    -0.2758   -0.0850   -0.0000
 
-        {% endhighlight %}
-    <h2 id="13">make it a vector</h2>
-  {% highlight matlab %}
-  vR1 = vector3d(spinTensor(S_right_L))  *sqrt(14)
+{% endhighlight %}
+<h2 id="13">make it a vector</h2>
+{% highlight matlab %}
+vR1 = vector3d(spinTensor(S_right_L))  *sqrt(14)
 vR2 = inv(rot_ref) * vector3d(spinTensor(S_right_R)) * sqrt(14)
 
 lR1 = rot_ref * vector3d(spinTensor(S_left_L))  *sqrt(14)
 lR2 = vector3d(spinTensor(S_left_R)) * sqrt(14)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 vR1 = vector3d  
  size: 1 x 1
         x       y       z
@@ -379,16 +379,16 @@ lR2 = vector3d
           x         y         z
   -0.317983   1.03184   3.58248
 
-        {% endhighlight %}
-    <h2 id="14">logarithm to vector3d</h2>
-  {% highlight matlab %}
-  log(ori_ref * mori_123,ori_ref)
+{% endhighlight %}
+<h2 id="14">logarithm to vector3d</h2>
+{% highlight matlab %}
+log(ori_ref * mori_123,ori_ref)
 
-log(rot_123 * ori_ref,ori_ref,<span class="string">'left'</span>) * sqrt(14)
-  {% endhighlight %}
+log(rot_123 * ori_ref,ori_ref,'left') * sqrt(14)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = Miller  
  size: 1 x 1
  symmetry: 321, X||a*, Y||b, Z||c*
@@ -402,18 +402,18 @@ ans = vector3d
   x y z
   1 2 3
 
-        {% endhighlight %}
-    <h2 id="15">logarithm to skew symmetric matrix</h2>
-  {% highlight matlab %}
-  S = logm(ori_ref * mori_123,ori_ref)
+{% endhighlight %}
+<h2 id="15">logarithm to skew symmetric matrix</h2>
+{% highlight matlab %}
+S = logm(ori_ref * mori_123,ori_ref)
 round(vector3d(S))
 
-S = logm(rot_123 * ori_ref,ori_ref,<span class="string">'left'</span>)
+S = logm(rot_123 * ori_ref,ori_ref,'left')
 vector3d(S) * sqrt(14)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 S = spinTensor  
   rank   : 2 (3 x 3)              
   mineral: 321, X||a*, Y||b, Z||c*
@@ -444,19 +444,19 @@ ans = vector3d
   x y z
   1 2 3
 
-        {% endhighlight %}
-    <h2 id="16">The other way round</h2>
-  {% highlight matlab %}
-  S = logm(ori_ref * mori_123,ori_ref);
+{% endhighlight %}
+<h2 id="16">The other way round</h2>
+{% highlight matlab %}
+S = logm(ori_ref * mori_123,ori_ref);
 ori_ref * mori_123
 exp(S,ori_ref)
 
 v = log(ori_ref * mori_123,ori_ref);
 exp(v,ori_ref)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = orientation  
   size: 1 x 1
   crystal symmetry : 321, X||a*, Y||b, Z||c*
@@ -487,19 +487,19 @@ ans = orientation
   79.3156 43.3785  9.9013       0
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  S = logm(rot_123 * ori_ref,ori_ref,<span class="string">'left'</span>);
+{% endhighlight %}
+
+{% highlight matlab %}
+S = logm(rot_123 * ori_ref,ori_ref,'left');
 rot_123 * ori_ref
-exp(S,ori_ref,<span class="string">'left'</span>)
+exp(S,ori_ref,'left')
 
-v = log(rot_123 * ori_ref,ori_ref,<span class="string">'left'</span>);
-exp(v,ori_ref,<span class="string">'left'</span>)
-  {% endhighlight %}
+v = log(rot_123 * ori_ref,ori_ref,'left');
+exp(v,ori_ref,'left')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = orientation  
   size: 1 x 1
   crystal symmetry : 321, X||a*, Y||b, Z||c*
@@ -530,23 +530,23 @@ ans = orientation
   74.5535 51.5051 9.61062       0
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  v = vector3d.rand(100);
+{% endhighlight %}
+
+{% highlight matlab %}
+v = vector3d.rand(100);
 v.x = 0;
 v = rotation.rand * v + vector3d.rand;
 
 vsave = v;
-  {% endhighlight %}
+{% endhighlight %}
 
-  {% highlight matlab %}
-  s = v(1);
+{% highlight matlab %}
+s = v(1);
 
-<span class="comment">% shift to origin</span>
+% shift to origin
 v = v - s;
 
-<span class="comment">% compute normal vector</span>
+% compute normal vector
 [n,~] = eig3(v*v);
 
 
@@ -554,64 +554,64 @@ r = rotation.map(n(1),zvector);
 
 v = r * v;
 
-plot3(v.x,v.y,v.z,<span class="string">'.'</span>)
-  {% endhighlight %}
+plot3(v.x,v.y,v.z,'.')
+{% endhighlight %}
 
   {% include inline_image.html file="spinTensor_index_01.png" %}
 
-  {% highlight matlab %}
-  P = [v.x(:),v.y(:)];
+{% highlight matlab %}
+P = [v.x(:),v.y(:)];
 T = delaunayn(P);
 n = size(T,1);
 W = zeros(n,1);
 C=0;
-<span class="keyword">for</span> m = 1:n
+for m = 1:n
     sp = P(T(m,:),:);
     [null,W(m)]=convhulln(sp);
     C = C + W(m) * mean(sp);
-<span class="keyword">end</span>
+end
 
 C = vector3d(C(1),C(2),0)./sum(W);
-  {% endhighlight %}
+{% endhighlight %}
 
-  {% highlight matlab %}
-  hold <span class="string">on</span>
-plot3(C.x,C.y,C.z,<span class="string">'MarkerSize'</span>,10)
-hold <span class="string">off</span>
-
-
+{% highlight matlab %}
+hold on
+plot3(C.x,C.y,C.z,'MarkerSize',10)
+hold off
 
 
-<span class="keyword">function</span> test
-  <span class="comment">% some testing code</span>
 
-  cs = crystalSymmetry(<span class="string">'321'</span>);
+
+function test
+  % some testing code
+
+  cs = crystalSymmetry('321');
   ori1 = orientation.rand(cs);
   ori2 = orientation.rand(cs);
 
   v = log(ori2,ori1);
 
-  <span class="comment">% this should be the same</span>
+  % this should be the same
   [norm(v),angle(ori1,ori2)] ./ degree
 
-  <span class="comment">% and this too</span>
+  % and this too
   [ori1 * orientation.byAxisAngle(v,norm(v)) ,project2FundamentalRegion(ori2,ori1)]
 
-  <span class="comment">% in specimen coordinates</span>
-  r = log(ori2,ori1,<span class="string">'left'</span>);
+  % in specimen coordinates
+  r = log(ori2,ori1,'left');
 
-  <span class="comment">% now we have to multiply from the left</span>
+  % now we have to multiply from the left
   [rotation.byAxisAngle(r,norm(v)) * ori1 ,project2FundamentalRegion(ori2,ori1)]
 
-  <span class="comment">% the following output should be constant</span>
-  <span class="comment">% gO = log(ori1,ori2.symmetrise) % but not true for this</span>
-  <span class="comment">% gO = log(ori1.symmetrise,ori2) % true for this</span>
-  <span class="comment">%</span>
-  <span class="comment">% gO = ori2.symmetrise .* log(ori1,ori2.symmetrise) % true for this</span>
-  <span class="comment">% gO = ori2 .* log(ori1.symmetrise,ori2) % true for this</span>
+  % the following output should be constant
+  % gO = log(ori1,ori2.symmetrise) % but not true for this
+  % gO = log(ori1.symmetrise,ori2) % true for this
+  %
+  % gO = ori2.symmetrise .* log(ori1,ori2.symmetrise) % true for this
+  % gO = ori2 .* log(ori1.symmetrise,ori2) % true for this
 
-<span class="keyword">end</span>
-  {% endhighlight %}
+end
+{% endhighlight %}
 
   {% include inline_image.html file="spinTensor_index_02.png" %}
 <h2 id="22">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="spinTensor.  Syntax.html"><tt>  Syntax</tt></a></td><td/></tr><tr><td width="200px"><a href="spinTensor..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="spinTensor.    Omega = spinTensor(v).html"><tt>    Omega = spinTensor(v)</tt></a></td><td/></tr><tr><td width="200px"><a href="spinTensor.    Omega = spinTensor(S).html"><tt>    Omega = spinTensor(S)</tt></a></td><td/></tr><tr><td width="200px"><a href="spinTensor.    Omega = spinTensor(rot).html"><tt>    Omega = spinTensor(rot)</tt></a></td><td/></tr><tr><td width="200px"><a href="spinTensor.    Omega = spinTensor(mori).html"><tt>    Omega = spinTensor(mori)</tt></a></td><td/></tr><tr><td width="200px"><a href="spinTensor..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="spinTensor.  Input.html"><tt>  Input</tt></a></td><td/></tr><tr><td width="200px"><a href="spinTensor.   S.html"><tt>   S</tt></a></td><td>skew symmetry matrix</td></tr><tr><td width="200px"><a href="spinTensor.   v.html"><tt>   v</tt></a></td><td>@vector3d</td></tr><tr><td width="200px"><a href="spinTensor.   rot.html"><tt>   rot</tt></a></td><td>@rotation</td></tr><tr><td width="200px"><a href="spinTensor.   mori.html"><tt>   mori</tt></a></td><td>mis@orientation</td></tr></table></p></div></body></html>

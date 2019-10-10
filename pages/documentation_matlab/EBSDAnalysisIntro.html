@@ -1,0 +1,56 @@
+---
+title: First Steps
+last_updated: 10-Oct-2019
+sidebar: documentation_sidebar
+permalink: EBSDAnalysisIntro.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>First Steps</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_EBSDAnalysisIntro.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDAnalysisIntro into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Get in touch with EBSD data in MTEX</p><!--/introduction--><h2 id="1">Contents</h2><h2 id="2">Import EBSD data</h2><p>Importing EBSD data can be done guided by the import wizard</p>
+{% highlight matlab %}
+import_wizard('EBSD')
+{% endhighlight %}
+
+  {% include inline_image.html file="EBSDAnalysisIntro_01.png" %}
+<p>or directly by the command <a href="EBSD.load.html">EBSD.load</a></p>
+{% highlight matlab %}
+% specify file name
+fname = fullfile(mtexDataPath,'EBSD','Forsterite.ctf');
+
+ebsd = EBSD.load(fname,'convertEuler2SpatialReferenceFrame')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+
+{% endhighlight %}
+<h2 id="4">Correct EBSD data</h2>
+{% highlight matlab %}
+% EBSD data is stored in the class &lt;EBSD_index.html EBSD&gt; while grains are
+% stored as variables of type &lt;grain2d_index.html grain2d&gt;. The following
+% mindmap may induce a general idea analysing EBSD Data with MTEX.
+%
+% &lt;&lt;grain.png&gt;&gt;
+%
+%
+{% endhighlight %}
+<h2 id="7">Modelling Grains</h2><p><b><a href="GrainReconstruction.html">Grains</a></b>  are a basic concept for spatially indexed EBSD Data. With grain modelling comes up the possebility getting more information out of EBSD Data - e.g. fabric analysis, characterisation of misorientation</p><h2 id="8">Analyzing EBSD Data</h2><p><b><a href="EBSDOrientationPlots.html">Visualizing EBSD Data</a></b> is a central to understand a specimen. The most naive way is plotting of the individual orientations as pole point plots or spatially indexed in some map with colorcoded orientations. Moreover one gets with grains the possibility to take a closer look on grain boundaries.</p><p><b><a href="EBSD2odf.html">Estimating ODFs from EBSD Data</a></b> is of interest, furthermore selecting the optimal halfwidth is a difficult question, in particular in matters of grains.</p></div></body></html>

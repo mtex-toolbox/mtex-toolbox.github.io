@@ -1,6 +1,6 @@
 ---
 title: Select EBSD data
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDSelect.html
 folder: documentation
@@ -14,13 +14,13 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Select EBSD data</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSelect into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example <a href="mtexdata.html">EBSD data</a>. and plot the raw data</p>
-  {% highlight matlab %}
-  mtexdata <span class="string">forsterite</span>
-  {% endhighlight %}
+      --><title>Select EBSD data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDSelect into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example <a href="mtexdata.html">EBSD data</a>. and plot the raw data</p>
+{% highlight matlab %}
+mtexdata forsterite
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -33,21 +33,21 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>These data consist of three indexed phases, Forsterite, Enstatite and Diopside. The not indexed phase called <i>not Indexed</i>. The phases can be visualized by</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>; plotx2east
+{% endhighlight %}
+<p>These data consist of three indexed phases, Forsterite, Enstatite and Diopside. The not indexed phase called <i>not Indexed</i>. The phases can be visualized by</p>
+{% highlight matlab %}
+close all; plotx2east
 plot(ebsd)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_01.png" %}
 <h2 id="3">Selecting a certain phase</h2><p>After import the EBSD data are stored in the variable <tt>ebsd</tt> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p>
-  {% highlight matlab %}
-  ebsd(<span class="string">'Forsterite'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+ebsd('Forsterite')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = EBSD  
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -57,14 +57,14 @@ ans = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>contains only the Forsterite measurements. In order to extract a couple of phases, the mineral names have to be grouped in curled parenthesis.</p>
-  {% highlight matlab %}
-  ebsd({<span class="string">'Fo'</span>,<span class="string">'En'</span>})
-  {% endhighlight %}
+{% endhighlight %}
+<p>contains only the Forsterite measurements. In order to extract a couple of phases, the mineral names have to be grouped in curled parenthesis.</p>
+{% highlight matlab %}
+ebsd({'Fo','En'})
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -75,22 +75,22 @@ ans = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>As an example, let us plot the Forsterite data.</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-plot(ebsd(<span class="string">'Forsterite'</span>),ebsd(<span class="string">'Forsterite'</span>).orientations)
-  {% endhighlight %}
+{% endhighlight %}
+<p>As an example, let us plot the Forsterite data.</p>
+{% highlight matlab %}
+close all
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_02.png" %}
 <p>The data is colorized according to its orientation. By default color of an orientation is determined by its position in the 001 inverse pole figure which itself is colored as</p>
-  {% highlight matlab %}
-  ipfKey = ipfColorKey(ebsd(<span class="string">'Forsterite'</span>))
+{% highlight matlab %}
+ipfKey = ipfColorKey(ebsd('Forsterite'))
 plot(ipfKey)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ipfKey = 
+{% highlight plaintext %}
+ipfKey = 
   ipfColorKey with properties:
 
     inversePoleFigureDirection: [1&times;1 vector3d]
@@ -99,32 +99,32 @@ plot(ipfKey)
                            CS2: [1&times;1 specimenSymmetry]
                      antipodal: 0
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="EBSDSelect_03.png" %}
 <h2 id="7">Restricting to a region of interest</h2><p>If one is not interested in the whole data set but only in those measurements inside a certain polygon, the restriction can be constructed as follows:</p><p>First define a region by [xmin ymin xmax-xmin ymax-ymin]</p>
-  {% highlight matlab %}
-  region = [5 2 10 5]*10^3;
-  {% endhighlight %}
+{% highlight matlab %}
+region = [5 2 10 5]*10^3;
+{% endhighlight %}
 <p>plot the ebsd data together with the region of interest</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
+{% highlight matlab %}
+close all
 plot(ebsd)
-rectangle(<span class="string">'position'</span>,region,<span class="string">'edgecolor'</span>,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
-  {% endhighlight %}
+rectangle('position',region,'edgecolor','r','linewidth',2)
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_04.png" %}
 <p>The command <a href="EBSD.inpolygon.html">inpolygon</a> checks for each EBSD data point whether it is inside a polygon or not, i.e.</p>
-  {% highlight matlab %}
-  condition = inpolygon(ebsd,region);
-  {% endhighlight %}
+{% highlight matlab %}
+condition = inpolygon(ebsd,region);
+{% endhighlight %}
 <p>results in a large vector of <tt>TRUE</tt> and <tt>FALSE</tt> stating which data points are inside the region. Restricting the EBSD data by this condition is done via</p>
-  {% highlight matlab %}
-  ebsd = ebsd(condition)
-  {% endhighlight %}
+{% highlight matlab %}
+ebsd = ebsd(condition)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -137,50 +137,50 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>plot</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
+{% endhighlight %}
+<p>plot</p>
+{% highlight matlab %}
+close all
 plot(ebsd)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_05.png" %}
 <p>Note, that you can also select a polygon by mouse using the command</p>
-  {% highlight matlab %}
-  poly = selectPolygon
-  {% endhighlight %}
+{% highlight matlab %}
+poly = selectPolygon
+{% endhighlight %}
 <h2 id="14">Remove Inaccurate Orientation Measurements</h2><p><b>By MAD (mean angular deviation)</b> in the case of Oxford Channel programs, or <b>by CI (Confidence Index)</b> in the case of OIM-TSL programs</p><p>Most EBSD measurements contain quantities indicating inaccurate measurements.</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
+{% highlight matlab %}
+close all
 plot(ebsd,ebsd.mad)
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_06.png" %}
 <p>or</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
+{% highlight matlab %}
+close all
 plot(ebsd,ebsd.bc)
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_07.png" %}
 <p>Here we will use the MAD to identify and eliminate inaccurate measurements.</p>
-  {% highlight matlab %}
-  <span class="comment">% plot a histogram</span>
-close <span class="string">all</span>
+{% highlight matlab %}
+% plot a histogram
+close all
 hist(ebsd.mad)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_08.png" %}
 
-  {% highlight matlab %}
-  <span class="comment">% take only those measurements with MAD smaller then one</span>
+{% highlight matlab %}
+% take only those measurements with MAD smaller then one
 ebsd_corrected = ebsd(ebsd.mad&lt;0.8)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd_corrected = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -193,12 +193,12 @@ ebsd_corrected = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
-  {% highlight matlab %}
-  close <span class="string">all</span>
+{% endhighlight %}
+
+{% highlight matlab %}
+close all
 plot(ebsd_corrected)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDSelect_09.png" %}
 </div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: Combined Plots
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: CombinedPlots.html
 folder: documentation
@@ -14,90 +14,90 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Combined Plots</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_CombinedPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CombinedPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Explains how to combine several plots, e.g. plotting on the top of an inverse pole figure some important crystal directions.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">General Principle</h2><p>In order to tell MATLAB to plot one plot right on the top of an older plot one has to use the commands <a href="matlab:doc('hold')">hold all</a> and <a href="matlab:doc('hold')">hold off</a>. Let's demonstrate this using a simple example.</p>
-  {% highlight matlab %}
-  plot([2 2])
+      --><title>Combined Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_CombinedPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CombinedPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Explains how to combine several plots, e.g. plotting on the top of an inverse pole figure some important crystal directions.</p><h2 id="2">General Principle</h2><p>In order to tell MATLAB to plot one plot right on the top of an older plot one has to use the commands <a href="matlab:doc('hold')">hold all</a> and <a href="matlab:doc('hold')">hold off</a>. Let's demonstrate this using a simple example.</p>
+{% highlight matlab %}
+plot([2 2])
 
-hold <span class="string">all</span>
+hold all
 
 plot([1 3])
 
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="CombinedPlots_01.png" %}
-<h2 id="4">Combine Different EBSD Data</h2><p>First, we want to show up two different EBSD data sets in one plot</p><p>let's simulate some EBSD data</p>
-  {% highlight matlab %}
-  cs = crystalSymmetry(<span class="string">'-3m'</span>);
+<h2 id="3">Combine Different EBSD Data</h2><p>First, we want to show up two different EBSD data sets in one plot</p><p>let's simulate some EBSD data</p>
+{% highlight matlab %}
+cs = crystalSymmetry('-3m');
 odf = unimodalODF(orientation.byEuler(0,0,0,cs));
 ori = calcOrientations(odf,100);
 ori_rotated = calcOrientations(rotate(odf,rotation.byEuler(60*degree,60*degree,0*degree)),100);
-  {% endhighlight %}
+{% endhighlight %}
 <p>plot them as a scatter plot in axis / angle parametrized orientation space</p>
-  {% highlight matlab %}
-  scatter(ori)
-hold <span class="string">all</span>
+{% highlight matlab %}
+scatter(ori)
+hold all
 scatter(ori_rotated);
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="CombinedPlots_02.png" %}
 <p>a second way would be to superpose the pole figures of both EBSD data sets.</p>
-  {% highlight matlab %}
-  h = [Miller(0,0,0,1,cs),Miller(1,0,-1,0,cs)];
-plotPDF(ori,h,<span class="string">'antipodal'</span>,<span class="string">'MarkerSize'</span>,4)
-hold <span class="string">all</span> <span class="comment">% keep plot</span>
-plotPDF(ori_rotated,h,<span class="string">'MarkerSize'</span>,4);
-hold <span class="string">off</span> <span class="comment">% next plot command deletes all plots</span>
-  {% endhighlight %}
+{% highlight matlab %}
+h = [Miller(0,0,0,1,cs),Miller(1,0,-1,0,cs)];
+plotPDF(ori,h,'antipodal','MarkerSize',4)
+hold all % keep plot
+plotPDF(ori_rotated,h,'MarkerSize',4);
+hold off % next plot command deletes all plots
+{% endhighlight %}
 
   {% include inline_image.html file="CombinedPlots_03.png" %}
-<h2 id="8">Combine countoured pole figures (smooth ODF plots) with EBSD Data Scatter Plots</h2><p>You can also combine a contour plot of a model ODF with a scatter plot of single orientations.</p>
-  {% highlight matlab %}
-  plotPDF(odf,h,<span class="string">'antipodal'</span>,<span class="string">'contourf'</span>,<span class="string">'grid'</span>)
-mtexColorMap <span class="string">white2black</span>
+<h2 id="7">Combine countoured pole figures (smooth ODF plots) with EBSD Data Scatter Plots</h2><p>You can also combine a contour plot of a model ODF with a scatter plot of single orientations.</p>
+{% highlight matlab %}
+plotPDF(odf,h,'antipodal','contourf','grid')
+mtexColorMap white2black
 
-plot(ori,<span class="string">'DisplayName'</span>,<span class="string">'EBSD 1'</span>,<span class="keyword">...</span>
-  <span class="string">'MarkerSize'</span>,5,<span class="string">'MarkerColor'</span>,<span class="string">'b'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'w'</span>,<span class="string">'add2all'</span>)
+plot(ori,'DisplayName','EBSD 1',...
+  'MarkerSize',5,'MarkerColor','b','MarkerEdgeColor','w','add2all')
 
-plot(ori_rotated,<span class="string">'DisplayName'</span>,<span class="string">'EBSD 2'</span>,<span class="keyword">...</span>
-  <span class="string">'MarkerSize'</span>,5,<span class="string">'MarkerColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>,<span class="string">'add2all'</span>);
+plot(ori_rotated,'DisplayName','EBSD 2',...
+  'MarkerSize',5,'MarkerColor','r','MarkerEdgeColor','k','add2all');
 
-legend(<span class="string">'show'</span>,<span class="string">'location'</span>,<span class="string">'northeast'</span>)
-  {% endhighlight %}
+legend('show','location','northeast')
+{% endhighlight %}
 
   {% include inline_image.html file="CombinedPlots_04.png" %}
 <p>and, of course, you can do the same with ODF plots:</p>
-  {% highlight matlab %}
-  plot(odf,<span class="string">'sections'</span>,8,<span class="string">'contourf'</span>,<span class="string">'sigma'</span>)
-mtexColorMap <span class="string">white2black</span>
-plot(ori,<span class="string">'MarkerSize'</span>,6,<span class="string">'MarkerColor'</span>,<span class="string">'b'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'w'</span>,<span class="string">'add2all'</span>)
-plot(ori_rotated,<span class="string">'MarkerSize'</span>,6,<span class="string">'MarkerColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>,<span class="string">'add2all'</span>);
-  {% endhighlight %}
+{% highlight matlab %}
+plot(odf,'sections',8,'contourf','sigma')
+mtexColorMap white2black
+plot(ori,'MarkerSize',6,'MarkerColor','b','MarkerEdgeColor','w','add2all')
+plot(ori_rotated,'MarkerSize',6,'MarkerColor','r','MarkerEdgeColor','k','add2all');
+{% endhighlight %}
 
   {% include inline_image.html file="CombinedPlots_05.png" %}
-<h2 id="10">Add Miller Indices to an Inverse Pole Figure Plot</h2><p>Next, we are going to add some Miller indices to an inverse pole figure plot.</p>
-  {% highlight matlab %}
-  plotIPDF(odf,xvector,<span class="string">'noLabel'</span>);
-mtexColorMap <span class="string">white2black</span>
+<h2 id="9">Add Miller Indices to an Inverse Pole Figure Plot</h2><p>Next, we are going to add some Miller indices to an inverse pole figure plot.</p>
+{% highlight matlab %}
+plotIPDF(odf,xvector,'noLabel');
+mtexColorMap white2black
 
-hold <span class="string">all</span> <span class="comment">% keep plot</span>
-plot(Miller(0,0,0,1,cs),<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'backgroundColor'</span>,<span class="string">'w'</span>)
-plot(Miller(1,1,-2,0,cs),<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'backgroundColor'</span>,<span class="string">'w'</span>)
-plot(Miller(0,1,-1,0,cs),<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'backgroundColor'</span>,<span class="string">'w'</span>)
-plot(Miller(0,1,-1,1,cs),<span class="string">'symmetrised'</span>,<span class="string">'labeled'</span>,<span class="string">'backgroundColor'</span>,<span class="string">'w'</span>)
-hold <span class="string">off</span> <span class="comment">% next plot command deletes all plots</span>
-  {% endhighlight %}
+hold all % keep plot
+plot(Miller(0,0,0,1,cs),'symmetrised','labeled','backgroundColor','w')
+plot(Miller(1,1,-2,0,cs),'symmetrised','labeled','backgroundColor','w')
+plot(Miller(0,1,-1,0,cs),'symmetrised','labeled','backgroundColor','w')
+plot(Miller(0,1,-1,1,cs),'symmetrised','labeled','backgroundColor','w')
+hold off % next plot command deletes all plots
+{% endhighlight %}
 
   {% include inline_image.html file="CombinedPlots_06.png" %}
-<h2 id="11">Combining different plots in one figure</h2><p>The next example demonstrates how to arrange arbitrary plots into one figure</p>
-  {% highlight matlab %}
-  <span class="comment">% let us import some pole figure data</span>
-mtexdata <span class="string">dubna</span>
-  {% endhighlight %}
+<h2 id="10">Combining different plots in one figure</h2><p>The next example demonstrates how to arrange arbitrary plots into one figure</p>
+{% highlight matlab %}
+% let us import some pole figure data
+mtexdata dubna
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 pf = PoleFigure  
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
@@ -110,14 +110,14 @@ pf = PoleFigure
   h = (11-21), r = 72 x 19 points
   h = (11-22), r = 72 x 19 points
 
-        {% endhighlight %}
-    <p>next, we compute an ODF out of them</p>
-  {% highlight matlab %}
-  odf = calcODF(pf)
-  {% endhighlight %}
+{% endhighlight %}
+<p>next, we compute an ODF out of them</p>
+{% highlight matlab %}
+odf = calcODF(pf)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 odf = ODF  
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
@@ -128,34 +128,34 @@ odf = ODF
     weight: 1
  
 
-        {% endhighlight %}
-    <p>now we want to plot the original data alongsite with the recalculated pole figures and with a difference plot</p>
-  {% highlight matlab %}
-  figure(<span class="string">'position'</span>,[50 50 1200 500])
+{% endhighlight %}
+<p>now we want to plot the original data alongsite with the recalculated pole figures and with a difference plot</p>
+{% highlight matlab %}
+figure('position',[50 50 1200 500])
 
-<span class="comment">% set position 1 in a 1x3 matrix as the current plotting position</span>
+% set position 1 in a 1x3 matrix as the current plotting position
 axesPos = subplot(1,3,1);
 
-<span class="comment">% plot pole figure 1 at this position</span>
-plot(pf({1}),<span class="string">'parent'</span>,axesPos)
+% plot pole figure 1 at this position
+plot(pf({1}),'parent',axesPos)
 
-<span class="comment">% set position 2 in a 1x3 matrix as the current plotting position</span>
+% set position 2 in a 1x3 matrix as the current plotting position
 axesPos = subplot(1,3,2);
 
-<span class="comment">% plot the recalculated pole figure at this position</span>
-plotPDF(odf,h{1},<span class="string">'antipodal'</span>,<span class="string">'parent'</span>,axesPos)
+% plot the recalculated pole figure at this position
+plotPDF(odf,h{1},'antipodal','parent',axesPos)
 
-<span class="comment">% set position 3 in a 1x3 matrix as the current plotting position</span>
+% set position 3 in a 1x3 matrix as the current plotting position
 axesPos = subplot(1,3,3);
 
-<span class="comment">% plot the difference pole figure at this position</span>
-plotDiff(odf,pf({1}),<span class="string">'parent'</span>,axesPos)
-  {% endhighlight %}
+% plot the difference pole figure at this position
+plotDiff(odf,pf({1}),'parent',axesPos)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        progress: 100%
+{% highlight plaintext %}
+progress: 100%
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="CombinedPlots_07.png" %}
 </div></body></html>

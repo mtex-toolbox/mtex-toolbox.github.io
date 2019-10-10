@@ -1,6 +1,6 @@
 ---
 title: Advanced Color Keys
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDAdvancedMaps.html
 folder: documentation
@@ -14,15 +14,15 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Color Keys</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_EBSDAdvancedMaps.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDAdvancedMaps into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Besides the recommended color key <a href="ipfHSVKey.html">ipfHSVKey</a> MTEX includes a bunch of other color keys</p><div><ul><li><a href="ipfTSLKey.html">ipfTSLKey</a></li><li><a href="ipfHKLKey.html">ipfHKLKey</a></li><li><a href="BungeColorKey.html">BungeColorKey</a></li><li><a href="PatalaColorKey.html">PatalaColorKey</a></li><li><a href="axisAngleColorKey.html">axisAngleColorKey</a></li><li><a href="spotColorKey.html">spotColorKey</a></li><li><a href="ipfSpotKey.html">ipfSpotKey</a></li></ul></div>
-  {% highlight matlab %}
-  close <span class="string">all</span>; plotx2east
-mtexdata <span class="string">forsterite</span>
-csFo = ebsd(<span class="string">'Forsterite'</span>).CS;
-  {% endhighlight %}
+      --><title>Advanced Color Keys</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_EBSDAdvancedMaps.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDAdvancedMaps into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Besides the recommended color key <a href="ipfHSVKey.html">ipfHSVKey</a> MTEX includes a bunch of other color keys</p><div><ul><li><a href="ipfTSLKey.html">ipfTSLKey</a></li><li><a href="ipfHKLKey.html">ipfHKLKey</a></li><li><a href="BungeColorKey.html">BungeColorKey</a></li><li><a href="PatalaColorKey.html">PatalaColorKey</a></li><li><a href="axisAngleColorKey.html">axisAngleColorKey</a></li><li><a href="spotColorKey.html">spotColorKey</a></li><li><a href="ipfSpotKey.html">ipfSpotKey</a></li></ul></div>
+{% highlight matlab %}
+close all; plotx2east
+mtexdata forsterite
+csFo = ebsd('Forsterite').CS;
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -35,147 +35,147 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <h2 id="2">Euler Angle Coloring</h2><p>The oldest way to colorize orientations is to simply map the three Euler angles into the RGB values. This can be done by</p>
-  {% highlight matlab %}
-  colorKey = BungeColorKey(csFo);
+{% endhighlight %}
+<h2 id="2">Euler Angle Coloring</h2><p>The oldest way to colorize orientations is to simply map the three Euler angles into the RGB values. This can be done by</p>
+{% highlight matlab %}
+colorKey = BungeColorKey(csFo);
 
-plot(ebsd(<span class="string">'fo'</span>),colorKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
-  {% endhighlight %}
+plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_01.png" %}
 
-  {% highlight matlab %}
-  plot(colorKey)
-  {% endhighlight %}
+{% highlight matlab %}
+plot(colorKey)
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_02.png" %}
 <h2 id="4">Coloring certain orientations</h2><p>We might be interested in locating some special orientation in our orientation map. The definition of colors for certain orientations is carried out similarly as in the case of fibres</p>
-  {% highlight matlab %}
-  colorKey = spotColorKey(ebsd(<span class="string">'Fo'</span>));
-colorKey.center = mean(ebsd(<span class="string">'Forsterite'</span>).orientations,<span class="string">'robust'</span>);
+{% highlight matlab %}
+colorKey = spotColorKey(ebsd('Fo'));
+colorKey.center = mean(ebsd('Forsterite').orientations,'robust');
 colorKey.color = [0,0,1];
-colorKey.psi = deLaValleePoussinKernel(<span class="string">'halfwidth'</span>,20*degree);
+colorKey.psi = deLaValleePoussinKernel('halfwidth',20*degree);
 
-plot(ebsd(<span class="string">'fo'</span>),colorKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
+plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 
-<span class="comment">% and the correspoding colormap</span>
+% and the correspoding colormap
 figure(2)
-plot(colorKey,<span class="string">'sections'</span>,9,<span class="string">'sigma'</span>)
-  {% endhighlight %}
+plot(colorKey,'sections',9,'sigma')
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_03.png" %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_04.png" %}
 <p>the area of the colored EBSD data in the map corresponds to the volume portion (in percent)</p>
-  {% highlight matlab %}
-  vol = 100 * volume(ebsd(<span class="string">'fo'</span>).orientations,colorKey.center,20*degree)
-  {% endhighlight %}
+{% highlight matlab %}
+vol = 100 * volume(ebsd('fo').orientations,colorKey.center,20*degree)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        vol =
+{% highlight plaintext %}
+vol =
     1.3227
 
-        {% endhighlight %}
-    <p>actually, the colored measurements stress a peak in the ODF</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-odf = calcODF(ebsd(<span class="string">'fo'</span>).orientations,<span class="string">'halfwidth'</span>,10*degree,<span class="string">'silent'</span>);
-plot(odf,<span class="string">'sections'</span>,9,<span class="string">'silent'</span>,<span class="string">'sigma'</span>)
+{% endhighlight %}
+<p>actually, the colored measurements stress a peak in the ODF</p>
+{% highlight matlab %}
+close all
+odf = calcODF(ebsd('fo').orientations,'halfwidth',10*degree,'silent');
+plot(odf,'sections',9,'silent','sigma')
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        Warning: Plot properties not compatible to previous plot!
-I'going to create a new figure. 
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot! I'going to create a
+new figure. 
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="EBSDAdvancedMaps_05.png" %}
 <h2 id="7">Coloring fibres</h2><p>To color a fibre, one has to specify the crystal direction <b>h</b> together with its RGB color and the specimen direction <b>r</b>, which should be marked.</p>
-  {% highlight matlab %}
-  <span class="comment">% define a fibre</span>
+{% highlight matlab %}
+% define a fibre
 f = fibre(Miller(1,1,1,csFo),zvector);
 
-<span class="comment">% set up coloring</span>
+% set up coloring
 colorKey = ipfSpotKey(csFo);
 colorKey.inversePoleFigureDirection = f.r;
 colorKey.center = f.h;
 colorKey.color = [0 0 1];
-colorKey.psi = deLaValleePoussinKernel(<span class="string">'halfwidth'</span>,7.5*degree);
+colorKey.psi = deLaValleePoussinKernel('halfwidth',7.5*degree);
 
-plot(ebsd(<span class="string">'fo'</span>),colorKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
-  {% endhighlight %}
+plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_06.png" %}
 <p>the option <tt>halfwidth</tt> controls half of the intensity of the color at a given distance. Here we have chosen the (111)[001] fibre to be drawn in blue, and at 7.5 degrees, where the blue should be only lighter.</p>
-  {% highlight matlab %}
-  plot(colorKey)
-hold <span class="string">on</span>
-circle(f.h.project2FundamentalRegion,15*degree,<span class="string">'linewidth'</span>,2)
-  {% endhighlight %}
+{% highlight matlab %}
+plot(colorKey)
+hold on
+circle(f.h.project2FundamentalRegion,15*degree,'linewidth',2)
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_07.png" %}
 <p>the percentage of blue colored area in the map is equivalent to the fibre volume</p>
-  {% highlight matlab %}
-  vol = volume(ebsd(<span class="string">'fo'</span>).orientations,f,15*degree)
+{% highlight matlab %}
+vol = volume(ebsd('fo').orientations,f,15*degree)
 
-plotIPDF(ebsd(<span class="string">'fo'</span>).orientations,zvector,<span class="string">'markercolor'</span>,<span class="string">'k'</span>,<span class="string">'marker'</span>,<span class="string">'x'</span>,<span class="string">'points'</span>,200)
-hold <span class="string">off</span>
-  {% endhighlight %}
+plotIPDF(ebsd('fo').orientations,zvector,'markercolor','k','marker','x','points',200)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-        vol =
+{% highlight plaintext %}
+vol =
     0.2480
   I'm plotting 200 random orientations out of 152345 given orientations
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="EBSDAdvancedMaps_08.png" %}
 <p>we can easily extend the colorcoding</p>
-  {% highlight matlab %}
-  <span class="comment">% the centers in the inverse pole figure</span>
+{% highlight matlab %}
+% the centers in the inverse pole figure
 colorKey.center = Miller({0 0 1},{0 1 1},{1 1 1},{11 4 4},{5 0 2},{5 5 2},csFo);
 
-<span class="comment">% the correspnding collors</span>
+% the correspnding collors
 colorKey.color = [[1 0 0];[0 1 0];[0 0 1];[1 0 1];[1 1 0];[0 1 1]];
 
-<span class="comment">% plot the key</span>
+% plot the key
 plot(colorKey)
-hold <span class="string">on</span>
-plot(ebsd(<span class="string">'fo'</span>).orientations,<span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerSize'</span>,3,<span class="string">'points'</span>,1000)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(ebsd('fo').orientations,'MarkerFaceColor','none','MarkerEdgeColor','k','MarkerSize',3,'points',1000)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-          I'm plotting 1000 random orientations out of 152345 given orientations
+{% highlight plaintext %}
+  I'm plotting 1000 random orientations out of 152345 given orientations
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="EBSDAdvancedMaps_09.png" %}
 
-  {% highlight matlab %}
-  close <span class="string">all</span>;
-plot(ebsd(<span class="string">'fo'</span>),colorKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations))
-  {% endhighlight %}
+{% highlight matlab %}
+close all;
+plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_10.png" %}
 <h2 id="12">Combining different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <tt>'faceAlpha'</tt>. Note that the option <tt>'faceAlpha'</tt> requires the renderer of the figure to be set to <tt>'opengl'</tt>.</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>;
-plot(ebsd,ebsd.bc,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-mtexColorMap <span class="string">black2white</span>
+{% highlight matlab %}
+close all;
+plot(ebsd,ebsd.bc,'micronbar','off')
+mtexColorMap black2white
 
 colorKey = ipfSpotKey(csFo);
 colorKey.inversePoleFigureDirection = zvector;
 colorKey.center = Miller(1,1,1,csFo);
 colorKey.color = [0 0 1];
-colorKey.psi = deLaValleePoussinKernel(<span class="string">'halfwidth'</span>,7.5*degree);
+colorKey.psi = deLaValleePoussinKernel('halfwidth',7.5*degree);
 
-hold <span class="string">on</span>
-plot(ebsd(<span class="string">'fo'</span>),colorKey.orientation2color(ebsd(<span class="string">'fo'</span>).orientations),<span class="string">'FaceAlpha'</span>,0.5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations),'FaceAlpha',0.5)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="EBSDAdvancedMaps_11.png" %}
 </div></body></html>

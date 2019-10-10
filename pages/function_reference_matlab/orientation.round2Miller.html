@@ -1,6 +1,6 @@
 ---
 title: round2Miller
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: orientation.round2Miller.html
 folder: function_reference
@@ -14,18 +14,24 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>round2Miller</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_orientation__round2Miller.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__round2Miller into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>find lattice alignements for arbitrary orientations and misorientations</p><h2 id="3">Description</h2><p>Given an orienation ori find [hkl](uvw) such that ori * [hkl] = Z and ori * (uvw) = X.</p><p>Given a misorientation mori find corresponding face normals n1, n2 and crystal directions d1, d2, i.e., such that mori * n1 = n2 and mori * d1 = d2.</p><h2 id="4">Syntax</h2><pre class="language-matlab">[uvw,hkl] = round2Miller(ori)
-</pre><pre class="language-matlab">[n1,n2,d1,d2] = round2Miller(mori)
-[n1,n2,d1,d2] = round2Miller(mori,<span class="string">'penalty'</span>,0.01)
-[n1,n2,d1,d2] = round2Miller(mori,<span class="string">'maxIndex'</span>,6)
-</pre><h2 id="5">Input</h2><p>
+      --><title>round2Miller</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_orientation__round2Miller.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit orientation__round2Miller into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="orientation_index.html">orientation</a>)</p><!--/introduction--><p>find lattice alignements for arbitrary orientations and misorientations</p><h2 id="3">Description</h2><p>Given an orienation ori find [hkl](uvw) such that ori * [hkl] = Z and ori * (uvw) = X.</p><p>Given a misorientation mori find corresponding face normals n1, n2 and crystal directions d1, d2, i.e., such that mori * n1 = n2 and mori * d1 = d2.</p><h2 id="4">Syntax</h2>
+{% highlight matlab %}
+[uvw,hkl] = round2Miller(ori)
+{% endhighlight %}
+
+{% highlight matlab %}
+[n1,n2,d1,d2] = round2Miller(mori)
+[n1,n2,d1,d2] = round2Miller(mori,'penalty',0.01)
+[n1,n2,d1,d2] = round2Miller(mori,'maxIndex',6)
+{% endhighlight %}
+<h2 id="5">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>ori</tt>
          </td>
          <td>
-            <tt>&lt;a href="orientation_index.html"&gt;orientation&lt;/a&gt;</tt>
+            <tt><a href="orientation_index.html">orientation</a></tt>
          </td>
       </tr>
       <tr>
@@ -33,7 +39,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>mori</tt>
          </td>
          <td>
-            <tt>mis&lt;a href="orientation_index.html"&gt;orientation&lt;/a&gt;</tt>
+            <tt>mis<a href="orientation_index.html">orientation</a></tt>
          </td>
       </tr>
    </table>
@@ -44,7 +50,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>uvw,hkl</tt>
          </td>
          <td>
-            <tt>&lt;a href="Miller_index.html"&gt;Miller&lt;/a&gt;</tt>
+            <tt><a href="Miller_index.html">Miller</a></tt>
          </td>
       </tr>
       <tr>
@@ -52,13 +58,18 @@ To make changes, update the MATLAB code and republish this document.
             <tt>n1,n2,d1,d2</tt>
          </td>
          <td>
-            <tt>&lt;a href="Miller_index.html"&gt;Miller&lt;/a&gt;</tt>
+            <tt><a href="Miller_index.html">Miller</a></tt>
          </td>
       </tr>
    </table>
-</p><h2 id="7">Example</h2><pre class="codeinput"><span class="comment">% revert sigma3 misorientation relationship</span>
-[n1,n2,d1,d2] = round2Miller(CSL(3,crystalSymmetry(<span class="string">'432'</span>)))
-</pre><pre class="codeoutput"> 
+</p><h2 id="7">Example</h2>
+{% highlight matlab %}
+% revert sigma3 misorientation relationship
+[n1,n2,d1,d2] = round2Miller(CSL(3,crystalSymmetry('432')))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 n1 = Miller  
  size: 1 x 1
  symmetry: 432
@@ -86,12 +97,19 @@ d2 = Miller
   u -1
   v  1
   w  0
-</pre><pre class="codeinput"><span class="comment">% revert back Bain misorientation ship</span>
-cs_alpha = crystalSymmetry(<span class="string">'m-3m'</span>, [2.866 2.866 2.866], <span class="string">'mineral'</span>, <span class="string">'Ferrite'</span>);
-cs_gamma = crystalSymmetry(<span class="string">'m-3m'</span>, [3.66 3.66 3.66], <span class="string">'mineral'</span>, <span class="string">'Austenite'</span>);
+
+{% endhighlight %}
+
+{% highlight matlab %}
+% revert back Bain misorientation ship
+cs_alpha = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Ferrite');
+cs_gamma = crystalSymmetry('m-3m', [3.66 3.66 3.66], 'mineral', 'Austenite');
 mori = orientation.Bain(cs_alpha,cs_gamma)
 [n_gamma,n_alpha,d_gamma,d_alpha] = round2Miller(mori)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : Ferrite (m-3m)
@@ -129,4 +147,6 @@ d_alpha = Miller
   u  0
   v  0
   w -1
-</pre><h2 id="10">See also</h2><p>CSL</p></div></body></html>
+
+{% endhighlight %}
+<h2 id="10">See also</h2><p>CSL</p></div></body></html>

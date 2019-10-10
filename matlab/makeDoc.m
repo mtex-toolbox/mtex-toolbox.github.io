@@ -5,15 +5,13 @@ addpath ../../makeDoc; DocHelpInstall;
 % build help with the DocHelp Toolbox
 %
 
-if check_option(varargin,'clear')
+if check_option(varargin,'clear') && ...
+    strcmpi(input('Really want to remove all files? Y/N [N]:','s'),'Y')
   !rm -r ../pages/function_reference_matlab/*
   !rm -r ../pages/documentation_matlab/*
   !rm -r ./tmp/*
   mtexdata clear
 end
-
-
-
 
 %% settings
 

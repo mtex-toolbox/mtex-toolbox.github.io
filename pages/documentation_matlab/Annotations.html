@@ -1,6 +1,6 @@
 ---
 title: Annotations
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: Annotations.html
 folder: documentation
@@ -14,125 +14,125 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Annotations</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_Annotations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit Annotations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Colorbars</h2><p>Unlike the common Matlab command <tt>colorbar</tt> the MTEX command <a href="mtexColorbar.html">mtexColorbar</a> allows you to add a colorbar to all subplots in a figure.</p>
-  {% highlight matlab %}
-  <span class="comment">% this defines some model ODFs</span>
-cs = crystalSymmetry(<span class="string">'-3m'</span>);
+      --><title>Annotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_Annotations.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit Annotations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Colorbars</h2><p>Unlike the common Matlab command <tt>colorbar</tt> the MTEX command <a href="mtexColorbar.html">mtexColorbar</a> allows you to add a colorbar to all subplots in a figure.</p>
+{% highlight matlab %}
+% this defines some model ODFs
+cs = crystalSymmetry('-3m');
 mod1 = orientation.byEuler(30*degree,40*degree,10*degree,cs);
 mod2 = orientation.byEuler(10*degree,80*degree,70*degree,cs);
 odf = 0.7*unimodalODF(mod1) + 0.3*unimodalODF(mod2);
 
-<span class="comment">% plot some pole figurs</span>
+% plot some pole figurs
 plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
 
-<span class="comment">% and add a colorbar to each pole figure</span>
+% and add a colorbar to each pole figure
 mtexColorbar
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_01.png" %}
 <p>Executing the command <a href="mtexColorbar.html">mtexColorbar</a> twice deletes the colorbar. You can also have a horizontal colorbar at the bottom of the figure by setting the option <tt>location</tt> to <tt>southOutside</tt>. Further, we can set a title to the colorbar to describe the unit.</p>
-  {% highlight matlab %}
-  <span class="comment">% delete vertical colorbar</span>
+{% highlight matlab %}
+% delete vertical colorbar
 mtexColorbar
 
-<span class="comment">% add horizontal colorbars</span>
-mtexColorbar(<span class="string">'location'</span>,<span class="string">'southOutSide'</span>,<span class="string">'title'</span>,<span class="string">'mrd'</span>)
-  {% endhighlight %}
+% add horizontal colorbars
+mtexColorbar('location','southOutSide','title','mrd')
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_02.png" %}
 <p>If color range is set to equal in an MTEX figure only one colorbar is added (see. <a href="ColorCoding_demo.html">Color Coding</a>).</p>
-  {% highlight matlab %}
-  mtexColorbar       <span class="comment">% delete colorbar</span>
-CLim(gcm,<span class="string">'equal'</span>); <span class="comment">% set equal color range to all plots</span>
-mtexColorbar       <span class="comment">% create a new colorbar</span>
-  {% endhighlight %}
+{% highlight matlab %}
+mtexColorbar       % delete colorbar
+CLim(gcm,'equal'); % set equal color range to all plots
+mtexColorbar       % create a new colorbar
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_03.png" %}
 <h2 id="4">Annotating Directions, Orientations, Fibres</h2><p>Pole figures and inverse pole figures are much better readable if they include specimen or crystal directions. Using the MTEX command <a href="annotate.html">annotate</a> one can easily add <a href="vector3d_index.html">specimen coordinate axes</a> to a pole figure plot.</p>
-  {% highlight matlab %}
-  annotate(zvector,<span class="string">'label'</span>,{<span class="string">'Z'</span>},<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+annotate(zvector,'label',{'Z'},'BackgroundColor','w')
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_04.png" %}
 <p>The command <a href="annotate.html">annotate</a> allows also to mark <a href="Miller_index.html">crystal directions</a> in inverse pole figures.</p>
-  {% highlight matlab %}
-  plotIPDF(odf,[xvector,zvector],<span class="string">'antipodal'</span>,<span class="string">'marginx'</span>,10)
-mtexColorMap <span class="string">white2black</span>
+{% highlight matlab %}
+plotIPDF(odf,[xvector,zvector],'antipodal','marginx',10)
+mtexColorMap white2black
 
-annotate([Miller(1,0,0,cs),Miller(1,1,0,cs),Miller(0,0,1,cs),Miller(2,-1,0,cs)],<span class="keyword">...</span>
-  <span class="string">'all'</span>,<span class="string">'labeled'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'w'</span>)
-  {% endhighlight %}
+annotate([Miller(1,0,0,cs),Miller(1,1,0,cs),Miller(0,0,1,cs),Miller(2,-1,0,cs)],...
+  'all','labeled','BackgroundColor','w')
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_05.png" %}
 <p>One can also mark specific orientations in pole figures or in inverse pole figures.</p>
-  {% highlight matlab %}
-  plotIPDF(odf,[xvector,zvector],<span class="string">'antipodal'</span>)
-mtexColorMap <span class="string">white2black</span>
-annotate(mod1,<span class="keyword">...</span>
-    <span class="string">'marker'</span>,<span class="string">'s'</span>,<span class="string">'MarkerSize'</span>,6,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>,<span class="keyword">...</span>
-    <span class="string">'label'</span>,<span class="string">'A'</span>,<span class="string">'color'</span>,<span class="string">'w'</span>)
+{% highlight matlab %}
+plotIPDF(odf,[xvector,zvector],'antipodal')
+mtexColorMap white2black
+annotate(mod1,...
+    'marker','s','MarkerSize',6,'MarkerFaceColor','r',...
+    'label','A','color','w')
 
-annotate(mod2,<span class="keyword">...</span>
-    <span class="string">'marker'</span>,<span class="string">'s'</span>,<span class="string">'MarkerSize'</span>,6,<span class="string">'MarkerFaceColor'</span>,<span class="string">'g'</span>,<span class="keyword">...</span>
-    <span class="string">'label'</span>,<span class="string">'B'</span>)
+annotate(mod2,...
+    'marker','s','MarkerSize',6,'MarkerFaceColor','g',...
+    'label','B')
 
-drawNow(gcm,<span class="string">'figSize'</span>,<span class="string">'normal'</span>)
-  {% endhighlight %}
+drawNow(gcm,'figSize','normal')
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_06.png" %}
 <p>as well as in ODF plots</p>
-  {% highlight matlab %}
-  plot(odf,<span class="string">'sigma'</span>)
-mtexColorMap <span class="string">white2black</span>
-annotate(mod1,<span class="keyword">...</span>
-    <span class="string">'MarkerSize'</span>,15,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>)
+{% highlight matlab %}
+plot(odf,'sigma')
+mtexColorMap white2black
+annotate(mod1,...
+    'MarkerSize',15,'MarkerEdgeColor','r','MarkerFaceColor','none')
 
-annotate(mod2,<span class="keyword">...</span>
-  <span class="string">'MarkerSize'</span>,15,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'b'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'none'</span>)
-  {% endhighlight %}
+annotate(mod2,...
+  'MarkerSize',15,'MarkerEdgeColor','b','MarkerFaceColor','none')
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_07.png" %}
 <p>or orientation scatter plots</p>
-  {% highlight matlab %}
-  ori = odf.discreteSample(200);
+{% highlight matlab %}
+ori = odf.discreteSample(200);
 scatter(ori);
-annotate(mod1,<span class="keyword">...</span>
-  <span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'r'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'r'</span>)
-annotate(mod2,<span class="keyword">...</span>
-  <span class="string">'MarkerSize'</span>,10,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'g'</span>,<span class="string">'MarkerFaceColor'</span>,<span class="string">'g'</span>)
-  {% endhighlight %}
+annotate(mod1,...
+  'MarkerSize',10,'MarkerEdgeColor','r','MarkerFaceColor','r')
+annotate(mod2,...
+  'MarkerSize',10,'MarkerEdgeColor','g','MarkerFaceColor','g')
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_08.png" %}
 <h2 id="9">Legends</h2><p>If you have multiple data in one plot then it makes sense to add a legend saying which color / symbol correspond to which data set. The key is to use the option <b>DisplayName</b> available for all plotting commands to include the resulting graphical object into the legend and give it a name.</p>
-  {% highlight matlab %}
-  plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
-plot(ori,<span class="string">'MarkerFaceColor'</span>,<span class="string">'k'</span>,<span class="string">'MarkerEdgeColor'</span>,<span class="string">'black'</span>,<span class="string">'add2all'</span>,<span class="keyword">...</span>
-  <span class="string">'DisplayName'</span>,<span class="string">'randomSample'</span>)
+{% highlight matlab %}
+plotPDF(odf,Miller({1,0,0},{1,1,1},cs))
+plot(ori,'MarkerFaceColor','k','MarkerEdgeColor','black','add2all',...
+  'DisplayName','randomSample')
 
 f = fibre(Miller({1,1,-2,1},cs),vector3d.Y);
-plot(f,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'add2all'</span>,<span class="string">'DisplayName'</span>,<span class="string">'fibre'</span>)
+plot(f,'color','red','linewidth',2,'add2all','DisplayName','fibre')
 
-legend <span class="string">show</span>
-  {% endhighlight %}
+legend show
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_09.png" %}
 <p>The following example compares the Fourier coefficients of the fibre ODF with the Fourier coefficients of an unimodal ODF.</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-plotFourier(FourierODF(odf,32),<span class="string">'DisplayName'</span>,<span class="string">'Unimodal ODF'</span>)
-hold <span class="string">all</span>
+{% highlight matlab %}
+close all
+plotFourier(FourierODF(odf,32),'DisplayName','Unimodal ODF')
+hold all
 fodf = fibreODF(Miller(1,0,0,cs),zvector);
-plotFourier(FourierODF(fodf,32),<span class="string">'DisplayName'</span>,<span class="string">'Fibre ODF'</span>);
-hold <span class="string">off</span>
-legend <span class="string">show</span>
-  {% endhighlight %}
+plotFourier(FourierODF(fodf,32),'DisplayName','Fibre ODF');
+hold off
+legend show
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_10.png" %}
 <p>Adding a Spherical Grid</p><p>Sometimes it is useful to have a spherical grid in your plot to make the projection easier to understand or if you need to know some angular relationships. For this reason, there is the option <b>grid</b>, which enables the grid and the option <b>grid_res</b>, which allows to specify the spacing of the grid lines.</p>
-  {% highlight matlab %}
-  plotPDF(odf,[Miller(1,0,0,cs),Miller(0,0,1,cs)],<span class="string">'grid'</span>,<span class="string">'grid_res'</span>,15*degree,<span class="string">'antipodal'</span>);
-mtexColorMap <span class="string">white2black</span>
-  {% endhighlight %}
+{% highlight matlab %}
+plotPDF(odf,[Miller(1,0,0,cs),Miller(0,0,1,cs)],'grid','grid_res',15*degree,'antipodal');
+mtexColorMap white2black
+{% endhighlight %}
 
   {% include inline_image.html file="Annotations_11.png" %}
 </div></body></html>

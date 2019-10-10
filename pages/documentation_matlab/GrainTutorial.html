@@ -1,6 +1,6 @@
 ---
 title: Grain Tutorial
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainTutorial.html
 folder: documentation
@@ -14,16 +14,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Tutorial</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_GrainTutorial.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainTutorial into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>The following script is a quick guide through the grain reconstruction capabilities of MTEX. It uses the same data set as in the corresponding publication <a href="https://www.researchgate.net/publication/51806709_Grain_detection_from_2d_and_3d_EBSD_data-Specification_of_the_MTEX_algorithm">Grain detection from 2d and 3d EBSD data</a>. Data courtasy was by Daniel Rutte and Bret Hacker, Stanford.</p>
-  {% highlight matlab %}
-  mtexdata <span class="string">mylonite</span>
+      --><title>Grain Tutorial</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_GrainTutorial.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainTutorial into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>The following script is a quick guide through the grain reconstruction capabilities of MTEX. It uses the same data set as in the corresponding publication <a href="https://www.researchgate.net/publication/51806709_Grain_detection_from_2d_and_3d_EBSD_data-Specification_of_the_MTEX_algorithm">Grain detection from 2d and 3d EBSD data</a>. Data courtasy was by Daniel Rutte and Bret Hacker, Stanford.</p>
+{% highlight matlab %}
+mtexdata mylonite
 
-<span class="comment">% plot a phase map</span>
+% plot a phase map
 plot(ebsd)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/mylonite.mat
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -36,23 +38,23 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainTutorial_01.png" %}
 <p>The phase map shows a multi-phase rock specimen with Andesina, Quartz, Biotite and Orthoclase. Lets restrict it some smaller region of interest. The box is given by [xmin, ymin, xmax-xmin, ymax-ymin].</p>
-  {% highlight matlab %}
-  region = [19000 1500 4000 1500];
-rectangle(<span class="string">'position'</span>,region,<span class="string">'edgecolor'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
-  {% endhighlight %}
+{% highlight matlab %}
+region = [19000 1500 4000 1500];
+rectangle('position',region,'edgecolor','k','linewidth',2)
+{% endhighlight %}
 
   {% include inline_image.html file="GrainTutorial_02.png" %}
 <p>to which we restrict the data</p>
-  {% highlight matlab %}
-  ebsd_region = ebsd(inpolygon(ebsd,region))
-  {% endhighlight %}
+{% highlight matlab %}
+ebsd_region = ebsd(inpolygon(ebsd,region))
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd_region = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -65,22 +67,22 @@ ebsd_region = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <h2 id="4">Grain Reconstruction</h2><p>Next we reconstruct the grains and grain boundareis in the region of interest</p>
-  {% highlight matlab %}
-  grains = calcGrains(ebsd_region,<span class="string">'angle'</span>,15*degree)
+{% endhighlight %}
+<h2 id="4">Grain Reconstruction</h2><p>Next we reconstruct the grains and grain boundareis in the region of interest</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd_region,'angle',15*degree)
 
-<span class="comment">% phase map of the region of interest</span>
+% phase map of the region of interest
 plot(ebsd_region)
 
-<span class="comment">% the grain boundaries</span>
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'color'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,1.5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% the grain boundaries
+hold on
+plot(grains.boundary,'color','k','linewidth',1.5)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -95,69 +97,69 @@ grains = grain2d
  Properties: GOS, meanRotation
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainTutorial_03.png" %}
 <p>We may also visualize the different quarz orientations together with the grain boundaries.</p>
-  {% highlight matlab %}
-  <span class="comment">% phase map</span>
-plot(grains({<span class="string">'Andesina'</span>,<span class="string">'Biotite'</span>,<span class="string">'Orthoclase'</span>}),<span class="string">'FaceAlpha'</span>,0.4)
+{% highlight matlab %}
+% phase map
+plot(grains({'Andesina','Biotite','Orthoclase'}),'FaceAlpha',0.4)
 
-hold <span class="string">on</span>
-<span class="comment">% quarz orientations as ipf map</span>
-plot(ebsd_region(<span class="string">'Quartz'</span>),ebsd_region(<span class="string">'Quartz'</span>).orientations)
+hold on
+% quarz orientations as ipf map
+plot(ebsd_region('Quartz'),ebsd_region('Quartz').orientations)
 
-<span class="comment">% grain boundaries</span>
-plot(grains.boundary,<span class="string">'color'</span>,<span class="string">'black'</span>);
-legend <span class="string">off</span>
-hold <span class="string">off</span>
-  {% endhighlight %}
+% grain boundaries
+plot(grains.boundary,'color','black');
+legend off
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainTutorial_04.png" %}
 <p>colored according to the following ipf color key</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-ipfKey = ipfColorKey(ebsd_region(<span class="string">'Quartz'</span>));
-plot(ipfKey,<span class="string">'Position'</span>,[825 100 300 300])
-  {% endhighlight %}
+{% highlight matlab %}
+close all
+ipfKey = ipfColorKey(ebsd_region('Quartz'));
+plot(ipfKey,'Position',[825 100 300 300])
+{% endhighlight %}
 
   {% include inline_image.html file="GrainTutorial_05.png" %}
 <p>Alternatively, we may also colorize the entire quarz grains according to its mean orientations</p>
-  {% highlight matlab %}
-  plot(grains({<span class="string">'Andesina'</span>,<span class="string">'Biotite'</span>,<span class="string">'Orthoclase'</span>}),<span class="string">'FaceAlpha'</span>,0.4)
-hold <span class="string">on</span>
-plot(grains(<span class="string">'Quartz'</span>),grains(<span class="string">'Quartz'</span>).meanOrientation)
-legend <span class="string">off</span>
-  {% endhighlight %}
+{% highlight matlab %}
+plot(grains({'Andesina','Biotite','Orthoclase'}),'FaceAlpha',0.4)
+hold on
+plot(grains('Quartz'),grains('Quartz').meanOrientation)
+legend off
+{% endhighlight %}
 
-        {% highlight matlab %}
-          I'm going to colorize the orientation data with the 
+{% highlight plaintext %}
+  I'm going to colorize the orientation data with the 
   standard MTEX colorkey. To view the colorkey do:
  
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="GrainTutorial_06.png" %}
 <h2 id="8">Highlight specific boundaries</h2><p>Phase map with grain boundaries highlighted, where adjacent grains have a misorientation with rotational axis close to the c-axis. TODO</p>
-  {% highlight matlab %}
-  close <span class="string">all</span>
-AOboundary = grains.boundary(<span class="string">'Andesina'</span>,<span class="string">'Orthoclase'</span>);
+{% highlight matlab %}
+close all
+AOboundary = grains.boundary('Andesina','Orthoclase');
 angle = AOboundary.misorientation.angle;
 
 hist(angle./degree)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="GrainTutorial_07.png" %}
 
-  {% highlight matlab %}
-  plot(grains,<span class="string">'FaceAlpha'</span>,0.4)
-hold <span class="string">on</span>
+{% highlight matlab %}
+plot(grains,'FaceAlpha',0.4)
+hold on
 
-plot(AOboundary(angle&gt;160*degree),<span class="string">'linewidth'</span>,2,<span class="string">'linecolor'</span>,<span class="string">'red'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+plot(AOboundary(angle&gt;160*degree),'linewidth',2,'linecolor','red')
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="GrainTutorial_08.png" %}
 </div></body></html>

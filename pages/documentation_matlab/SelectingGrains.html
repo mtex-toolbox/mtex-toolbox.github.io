@@ -1,6 +1,6 @@
 ---
 title: Selecting Grains
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: SelectingGrains.html
 folder: documentation
@@ -14,34 +14,34 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SelectingGrains into the Matlab commandline">edit page</a></font><div><!--introduction--><p>TODO: This help page needs to be improved</p><!--/introduction--><p>In this section we discuss how to select grains by properties. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
-  {% highlight matlab %}
-  <span class="comment">% load sample EBSD data set</span>
-mtexdata <span class="string">forsterite</span>
+      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SelectingGrains into the Matlab commandline">edit page</a></font><div><!--introduction--><p>TODO: This help page needs to be improved</p><!--/introduction--><p>In this section we discuss how to select grains by properties. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+{% highlight matlab %}
+% load sample EBSD data set
+mtexdata forsterite
 
-<span class="comment">% restrict it to a subregion of interest.</span>
+% restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-<span class="comment">% remove all not indexed pixels</span>
-ebsd = ebsd(<span class="string">'indexed'</span>)
+% remove all not indexed pixels
+ebsd = ebsd('indexed')
 
-<span class="comment">% reconstruct grains</span>
-[grains, ebsd.grainId] = calcGrains(ebsd,<span class="string">'angle'</span>,5*degree)
+% reconstruct grains
+[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree)
 
-<span class="comment">% smooth them</span>
+% smooth them
 grains = smooth(grains,5);
 
-<span class="comment">% plot the orientation data of the Forsterite phase</span>
-plot(ebsd(<span class="string">'fo'</span>),ebsd(<span class="string">'fo'</span>).orientations)
+% plot the orientation data of the Forsterite phase
+plot(ebsd('fo'),ebsd('fo').orientations)
 
-<span class="comment">% plot the grain boundary on top of it</span>
-hold <span class="string">on</span>
-plot(grains.boundary,<span class="string">'lineWidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+% plot the grain boundary on top of it
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -89,38 +89,38 @@ ebsd = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="SelectingGrains_01.png" %}
 <h2 id="2">Accessing individual grains</h2><p>The variable <tt>grains</tt> is essentially a large vector of grains. Thus when applying a function like <a href="Grain2d.area.html">area</a> to this variable we obtain a vector of the same lenght with numbers representing the area of each grain</p>
-  {% highlight matlab %}
-  grain_area = grains.area;
-  {% endhighlight %}
+{% highlight matlab %}
+grain_area = grains.area;
+{% endhighlight %}
 <p>As a first rather simple application we could colorize the grains according to their area, i.e., according to the numbers stored in <tt>grain_area</tt></p>
-  {% highlight matlab %}
-  plot(grains,grain_area)
-  {% endhighlight %}
+{% highlight matlab %}
+plot(grains,grain_area)
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_02.png" %}
 <p>As a second application, we can ask for the largest grain within our data set. The maximum value and its position within a vector are found by the Matlab command <tt>max</tt>.</p>
-  {% highlight matlab %}
-  [max_area,max_id] = max(grain_area)
-  {% endhighlight %}
+{% highlight matlab %}
+[max_area,max_id] = max(grain_area)
+{% endhighlight %}
 
-        {% highlight matlab %}
-        max_area =
+{% highlight plaintext %}
+max_area =
    4.1191e+06
 max_id =
    208
 
-        {% endhighlight %}
-    <p>The number <tt>max_id</tt> is the position of the grain with a maximum area within the variable <tt>grains</tt>. We can access this specific grain by direct indexing</p>
-  {% highlight matlab %}
-  grains(max_id)
-  {% endhighlight %}
+{% endhighlight %}
+<p>The number <tt>max_id</tt> is the position of the grain with a maximum area within the variable <tt>grains</tt>. We can access this specific grain by direct indexing</p>
+{% highlight matlab %}
+grains(max_id)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -133,65 +133,65 @@ ans = grain2d
  208       1     1545   0.0124718    167    81    251
  
 
-        {% endhighlight %}
-    <p>and so we can plot it</p>
-  {% highlight matlab %}
-  hold <span class="string">on</span>
-plot(grains(max_id).boundary,<span class="string">'linecolor'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,1.5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+{% endhighlight %}
+<p>and so we can plot it</p>
+{% highlight matlab %}
+hold on
+plot(grains(max_id).boundary,'linecolor','red','linewidth',1.5)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_03.png" %}
 <p>Note that this way of addressing individual grains can be generalized to many grains. E.g. assume we are interested in the largest 5 grains. Then we can sort the vector <tt>grain_area</tt> and take the indices of the 5 largest grains.</p>
-  {% highlight matlab %}
-  [sorted_area,sorted_id] = sort(grain_area,<span class="string">'descend'</span>);
+{% highlight matlab %}
+[sorted_area,sorted_id] = sort(grain_area,'descend');
 
 large_grain_id = sorted_id(1:5);
 
-hold <span class="string">on</span>
-plot(grains(large_grain_id).boundary,<span class="string">'linecolor'</span>,<span class="string">'green'</span>,<span class="string">'linewidth'</span>,1.5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains(large_grain_id).boundary,'linecolor','green','linewidth',1.5)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_04.png" %}
 <h2 id="8">Indexing by a Condition</h2><p>By the same syntax as above we can also single out grains that satisfy a certain condition. I.e., to access are grains that are at least half as large as the largest grain we can do</p>
-  {% highlight matlab %}
-  condition = grain_area &gt; max_area/2;
+{% highlight matlab %}
+condition = grain_area &gt; max_area/2;
 
-hold <span class="string">on</span>
-plot(grains(condition).boundary,<span class="string">'linecolor'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,1.5)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains(condition).boundary,'linecolor','red','linewidth',1.5)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_05.png" %}
 <p>This is a very powerful way of accessing grains as the condition can be build up using any grain property. As an example let us consider the phase. The phase of the first five grains we get by</p>
-  {% highlight matlab %}
-  grains(1:5).phase
-  {% endhighlight %}
+{% highlight matlab %}
+grains(1:5).phase
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
      2
      1
      1
      1
      2
 
-        {% endhighlight %}
-    <p>Now we can access or grains of the first phase Forsterite by the condition</p>
-  {% highlight matlab %}
-  condition = grains.phase == 1;
+{% endhighlight %}
+<p>Now we can access or grains of the first phase Forsterite by the condition</p>
+{% highlight matlab %}
+condition = grains.phase == 1;
 plot(grains(condition))
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_06.png" %}
 <p>To make the above more directly you can use the mineral name for indexing</p>
-  {% highlight matlab %}
-  grains(<span class="string">'forsterite'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+grains('forsterite')
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -203,18 +203,18 @@ ans = grain2d
  Properties: GOS, meanRotation
  
 
-        {% endhighlight %}
-    <p>Logical indexing allows also for more complex queries, e.g. selecting all grains perimeter larger than 6000 and at least 600 measurements within</p>
-  {% highlight matlab %}
-  condition = grains.perimeter&gt;6000 &amp; grains.grainSize &gt;= 600;
+{% endhighlight %}
+<p>Logical indexing allows also for more complex queries, e.g. selecting all grains perimeter larger than 6000 and at least 600 measurements within</p>
+{% highlight matlab %}
+condition = grains.perimeter&gt;6000 &amp; grains.grainSize &gt;= 600;
 
 selected_grains = grains(condition)
 
 plot(selected_grains)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 selected_grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -230,24 +230,24 @@ selected_grains = grain2d
  208       1     1545    0.0124718    167    81    251
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="SelectingGrains_07.png" %}
 <h2 id="13">The grainId and how to select EBSD inside specific grains</h2><p>Besides, the list of grains the command <a href="EBSD.calcGrains.html">calcGrains</a> returns also two other output arguments.</p>
-  {% highlight matlab %}
-  largeGrains = grains(grains.grainSize &gt; 50);
+{% highlight matlab %}
+largeGrains = grains(grains.grainSize &gt; 50);
 
 text(largeGrains,largeGrains.id)
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_08.png" %}
 <p>The second output argument grainId is a list with the same size as the EBSD measurements that stores for each measurement the corresponding grainId. The above syntax stores this list directly inside the ebsd variable. This enables MTEX to select EBSD data by grains. The following command returns all the EBSD data that belong to grain number 33.</p>
-  {% highlight matlab %}
-  ebsd(grains(33))
-  {% endhighlight %}
+{% highlight matlab %}
+ebsd(grains(33))
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = EBSD  
  
  Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
@@ -258,14 +258,14 @@ ans = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <p>and is equivalent to the command</p>
-  {% highlight matlab %}
-  ebsd(ebsd.grainId == 33)
-  {% endhighlight %}
+{% endhighlight %}
+<p>and is equivalent to the command</p>
+{% highlight matlab %}
+ebsd(ebsd.grainId == 33)
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ans = EBSD  
  
  Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
@@ -276,39 +276,39 @@ ans = EBSD
  Scan unit : um
  
 
-        {% endhighlight %}
-    <h2 id="17">Indexing by orientation or position</h2><p>One can also select a grain by its spatial coordinates using the syntax <tt>grains(x,y)</tt></p>
-  {% highlight matlab %}
-  x = 12000; y = 4000;
+{% endhighlight %}
+<h2 id="17">Indexing by orientation or position</h2><p>One can also select a grain by its spatial coordinates using the syntax <tt>grains(x,y)</tt></p>
+{% highlight matlab %}
+x = 12000; y = 4000;
 
 plot(grains);
 
-hold <span class="string">on</span>
+hold on
 
-plot(grains(x,y).boundary,<span class="string">'linewidth'</span>,2,<span class="string">'linecolor'</span>,<span class="string">'r'</span>)
+plot(grains(x,y).boundary,'linewidth',2,'linecolor','r')
 
-plot(x,y,<span class="string">'marker'</span>,<span class="string">'s'</span>,<span class="string">'markerfacecolor'</span>,<span class="string">'k'</span>,<span class="keyword">...</span>
-  <span class="string">'markersize'</span>,10,<span class="string">'markeredgecolor'</span>,<span class="string">'w'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+plot(x,y,'marker','s','markerfacecolor','k',...
+  'markersize',10,'markeredgecolor','w')
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_09.png" %}
 <p>In order to select all grains with a certain orientation one can do</p>
-  {% highlight matlab %}
-  <span class="comment">% restrict first to Forsterite phase</span>
-grains_fo = grains(<span class="string">'fo'</span>)
+{% highlight matlab %}
+% restrict first to Forsterite phase
+grains_fo = grains('fo')
 
-<span class="comment">% the reference orientation</span>
-ori = orientation.byEuler(350*degree,50*degree,100*degree,grains(<span class="string">'fo'</span>).CS)
+% the reference orientation
+ori = orientation.byEuler(350*degree,50*degree,100*degree,grains('fo').CS)
 
-<span class="comment">% select all grain with misorientation angle to ori less then 20 degree</span>
+% select all grain with misorientation angle to ori less then 20 degree
 grains_selected = grains_fo(angle(grains_fo.meanOrientation,ori)&lt;20*degree)
 
 plot(grains_selected)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 grains_fo = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -350,22 +350,22 @@ grains_selected = grain2d
  226       1      133   0.00806938      1    47    279
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="SelectingGrains_10.png" %}
 <h2 id="19">Changing lists of grains</h2><p>As with any list in MTEX, one can single out specific grains by conditions using the syntax</p>
-  {% highlight matlab %}
-  <span class="comment">% this gives all grains with more the 1000 pixels</span>
+{% highlight matlab %}
+% this gives all grains with more the 1000 pixels
 largeGrains = grains(grains.grainSize &gt; 1000)
 
-hold <span class="string">on</span>
-<span class="comment">% mark only large Forsterite grains</span>
-plot(largeGrains(<span class="string">'Fo'</span>).boundary,<span class="string">'linewidth'</span>,2,<span class="string">'linecolor'</span>,<span class="string">'k'</span>)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+% mark only large Forsterite grains
+plot(largeGrains('Fo').boundary,'linewidth',2,'linecolor','k')
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 largeGrains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -381,43 +381,43 @@ largeGrains = grain2d
  208       1     1545    0.0124718    167    81    251
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="SelectingGrains_11.png" %}
 <h2 id="20">boundary grains</h2><p>Sometimes it is desirable to remove all boundary grains as they might distort grain statistics. To do so one should remember that each grain boundary has a property <tt>grainId</tt> which stores the ids of the neigbouring grains. In the case of an outer grain boundary, one of the neighbouring grains has the id zero. We can filter out all these boundary segments by</p>
-  {% highlight matlab %}
-  <span class="comment">% ids of the outer boundary segment</span>
+{% highlight matlab %}
+% ids of the outer boundary segment
 outerBoundary_id = any(grains.boundary.grainId==0,2);
 
 plot(grains)
-hold <span class="string">on</span>
-plot(grains.boundary(outerBoundary_id),<span class="string">'linecolor'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(grains.boundary(outerBoundary_id),'linecolor','red','linewidth',2)
+hold off
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_12.png" %}
 <p>Now <tt>grains.boundary(outerBoundary_id).grainId</tt> is a list of grain ids where the first column is zero, indicating the outer boundary, and the second column contains the id of the boundary grain. Hence, it remains to remove all grains with these ids.</p>
-  {% highlight matlab %}
-  <span class="comment">% next we compute the corresponding grain_id</span>
+{% highlight matlab %}
+% next we compute the corresponding grain_id
 grain_id = grains.boundary(outerBoundary_id).grainId;
 
-<span class="comment">% remove all zeros</span>
+% remove all zeros
 grain_id(grain_id==0) = [];
 
-<span class="comment">% and plot the boundary grains</span>
+% and plot the boundary grains
 plot(grains(grain_id))
-  {% endhighlight %}
+{% endhighlight %}
 
   {% include inline_image.html file="SelectingGrains_13.png" %}
 <p>finally, we can remove the boundary grains by</p>
-  {% highlight matlab %}
-  grains(grain_id) = []
+{% highlight matlab %}
+grains(grain_id) = []
 
 plot(grains)
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -431,7 +431,7 @@ grains = grain2d
  Properties: GOS, meanRotation
  
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="SelectingGrains_14.png" %}
 </div></body></html>

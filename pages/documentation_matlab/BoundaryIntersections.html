@@ -1,6 +1,6 @@
 ---
 title: Line intersections
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryIntersections.html
 folder: documentation
@@ -14,30 +14,30 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Line intersections</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_BoundaryIntersections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryIntersections into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus how to analyze grain boundary by intersecting them with certain lines. Lets start by importing some EBSD data and computing grain boundaries.</p>
-  {% highlight matlab %}
-  <span class="comment">% load some example data</span>
-mtexdata <span class="string">twins</span>
+      --><title>Line intersections</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_BoundaryIntersections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryIntersections into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus how to analyze grain boundary by intersecting them with certain lines. Lets start by importing some EBSD data and computing grain boundaries.</p>
+{% highlight matlab %}
+% load some example data
+mtexdata twins
 
-<span class="comment">% detect grains</span>
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd(<span class="string">'indexed'</span>));
+% detect grains
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'));
 
-<span class="comment">% smooth them</span>
+% smooth them
 grains = grains.smooth;
 
-<span class="comment">% visualize the grains</span>
+% visualize the grains
 plot(grains,grains.meanOrientation)
 
-<span class="comment">% extract all grain boundaries</span>
+% extract all grain boundaries
 gB = grains.boundary;
 
-hold <span class="string">on</span>
-plot(gB,<span class="string">'LineWidth'</span>,2)
-hold <span class="string">off</span>
-  {% endhighlight %}
+hold on
+plot(gB,'LineWidth',2)
+hold off
+{% endhighlight %}
 
-        {% highlight matlab %}
-         
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -53,33 +53,33 @@ ebsd = EBSD
   colorKey = ipfColorKey(ori_variable_name)
   plot(colorKey)
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryIntersections_01.png" %}
 <p>Let start by defining some line by its endpoints and plot in on top of the boundary plot</p>
-  {% highlight matlab %}
-  xy1 = [0,10];   <span class="comment">% staring point</span>
-xy2 = [31,41]; <span class="comment">% end point</span>
+{% highlight matlab %}
+xy1 = [0,10];   % staring point
+xy2 = [31,41]; % end point
 
-line([xy1(1);xy2(1)],[xy1(2);xy2(2)],<span class="string">'linestyle'</span>,<span class="string">':'</span>,<span class="string">'linewidth'</span>,4,<span class="string">'color'</span>,<span class="string">'white'</span>)
-  {% endhighlight %}
+line([xy1(1);xy2(1)],[xy1(2);xy2(2)],'linestyle',':','linewidth',4,'color','white')
+{% endhighlight %}
 
   {% include inline_image.html file="BoundaryIntersections_02.png" %}
 <p>The command <a href="grainBoundary_intersect.html">intersect</a> computes the intersections of all boundary segments with the given line</p>
-  {% highlight matlab %}
-  [x,y] = grains.boundary.intersect(xy1,xy2);
-hold <span class="string">on</span>
-scatter(x,y,<span class="string">'blue'</span>,<span class="string">'linewidth'</span>,2)
-hold <span class="string">off</span>
-<span class="comment">% find the number of intersection points</span>
+{% highlight matlab %}
+[x,y] = grains.boundary.intersect(xy1,xy2);
+hold on
+scatter(x,y,'blue','linewidth',2)
+hold off
+% find the number of intersection points
 sum(~isnan(x))
-  {% endhighlight %}
+{% endhighlight %}
 
-        {% highlight matlab %}
-        ans =
+{% highlight plaintext %}
+ans =
     10
 
-        {% endhighlight %}
-    
+{% endhighlight %}
+
   {% include inline_image.html file="BoundaryIntersections_03.png" %}
 </div></body></html>

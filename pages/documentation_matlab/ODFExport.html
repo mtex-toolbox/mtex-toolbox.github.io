@@ -1,6 +1,6 @@
 ---
 title: ODF Export
-last_updated: 08-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: ODFExport.html
 folder: documentation
@@ -14,53 +14,53 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Export</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="script_ODFExport.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODFExport into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX support the following formats for storing and importing of ODFs:</p><div><ul><li>.mat file - lossless, specific for MTEX, binary format</li><li>MTEX file - lossless, specific for MTEX, ASCII format</li><li>VPSC file - not lossless, ASCII format</li><li>.txt file - not lossless, ASCII format</li></ul></div><h2 id="2">Define an Model ODF</h2><p>We will demonstrate the the import and export of ODFs at the following sample ODF which is defined as the superposition of several model ODFs.</p>
-  {% highlight matlab %}
-  cs = crystalSymmetry(<span class="string">'cubic'</span>);
+      --><title>ODF Export</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_ODFExport.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ODFExport into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX support the following formats for storing and importing of ODFs:</p><div><ul><li>.mat file - lossless, specific for MTEX, binary format</li><li>MTEX file - lossless, specific for MTEX, ASCII format</li><li>VPSC file - not lossless, ASCII format</li><li>.txt file - not lossless, ASCII format</li></ul></div><h2 id="2">Define an Model ODF</h2><p>We will demonstrate the the import and export of ODFs at the following sample ODF which is defined as the superposition of several model ODFs.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('cubic');
 mod1 = orientation.byAxisAngle(xvector,45*degree,cs);
 mod2 = orientation.byAxisAngle(yvector,65*degree,cs);
-model_odf = 0.5*uniformODF(cs) + <span class="keyword">...</span>
-  0.05*fibreODF(Miller(1,0,0,cs),xvector,<span class="string">'halfwidth'</span>,10*degree) + <span class="keyword">...</span>
-  0.05*fibreODF(Miller(0,1,0,cs),yvector,<span class="string">'halfwidth'</span>,10*degree) + <span class="keyword">...</span>
-  0.05*fibreODF(Miller(0,0,1,cs),zvector,<span class="string">'halfwidth'</span>,10*degree) + <span class="keyword">...</span>
-  0.05*unimodalODF(mod1,<span class="string">'halfwidth'</span>,15*degree) + <span class="keyword">...</span>
-  0.3*unimodalODF(mod2,<span class="string">'halfwidth'</span>,25*degree);
-plot(model_odf,<span class="string">'sections'</span>,6,<span class="string">'silent'</span>)
-  {% endhighlight %}
+model_odf = 0.5*uniformODF(cs) + ...
+  0.05*fibreODF(Miller(1,0,0,cs),xvector,'halfwidth',10*degree) + ...
+  0.05*fibreODF(Miller(0,1,0,cs),yvector,'halfwidth',10*degree) + ...
+  0.05*fibreODF(Miller(0,0,1,cs),zvector,'halfwidth',10*degree) + ...
+  0.05*unimodalODF(mod1,'halfwidth',15*degree) + ...
+  0.3*unimodalODF(mod2,'halfwidth',25*degree);
+plot(model_odf,'sections',6,'silent')
+{% endhighlight %}
 
   {% include inline_image.html file="ODFExport_01.png" %}
 <h2 id="3">Save as .mat file</h2><p>The most simplest way to store an ODF is to store the corresponding variable odf as any other MATLAB variable.</p>
-  {% highlight matlab %}
-  <span class="comment">% the filename</span>
-fname = fullfile(mtexDataPath, <span class="string">'ODF'</span>, <span class="string">'odf.mat'</span>);
-save(fname,<span class="string">'model_odf'</span>)
-  {% endhighlight %}
+{% highlight matlab %}
+% the filename
+fname = fullfile(mtexDataPath, 'ODF', 'odf.mat');
+save(fname,'model_odf')
+{% endhighlight %}
 <p>Importing a .mat file is done simply by</p>
-  {% highlight matlab %}
-  load(fname)
-  {% endhighlight %}
+{% highlight matlab %}
+load(fname)
+{% endhighlight %}
 <h2 id="5">Export as an generic ASCII file</h2><p>By default and ODF is exported in an ASCII file which consists of a large table with four columns, where the first three column describe the Euler angles of a regular 5&#65533; grid in the orientation space and the fourth column contains the value of the ODF at this specific position.</p>
-  {% highlight matlab %}
-  <span class="comment">% the filename</span>
-fname = fullfile(mtexDataPath, <span class="string">'ODF'</span>, <span class="string">'odf.txt'</span>);
+{% highlight matlab %}
+% the filename
+fname = fullfile(mtexDataPath, 'ODF', 'odf.txt');
 
-<span class="comment">% export the ODF</span>
-export(model_odf,fname,<span class="string">'Bunge'</span>)
-  {% endhighlight %}
+% export the ODF
+export(model_odf,fname,'Bunge')
+{% endhighlight %}
 <p>Other Euler angle conventions or other resolutions can by specified by options to <a href="ODF.export.html">export</a>. Even more control you have, if you specify the grid in the orientation space directly.</p>
-  {% highlight matlab %}
-  <span class="comment">% define a equispaced grid in orientation space with resolution of 5 degree</span>
-S3G = equispacedSO3Grid(cs,<span class="string">'resolution'</span>,5*degree);
+{% highlight matlab %}
+% define a equispaced grid in orientation space with resolution of 5 degree
+S3G = equispacedSO3Grid(cs,'resolution',5*degree);
 
-<span class="comment">% export the ODF by values at these locations</span>
-export(model_odf,fname,S3G,<span class="string">'Bunge'</span>,<span class="string">'generic'</span>)
-  {% endhighlight %}
+% export the ODF by values at these locations
+export(model_odf,fname,S3G,'Bunge','generic')
+{% endhighlight %}
 <h2 id="7">Export an ODF to an MTEX ASCII File</h2><p>Using the options <b>MTEX</b> the ODF is exported to an ASCII file which contains descriptions of all components of the ODF in a human readable fassion. This format can be imported by MTEX without loss.</p>
-  {% highlight matlab %}
-  <span class="comment">% the filename</span>
-fname = [mtexDataPath <span class="string">'/ODF/odf.mtex'</span>];
+{% highlight matlab %}
+% the filename
+fname = [mtexDataPath '/ODF/odf.mtex'];
 
-<span class="comment">% export the ODF</span>
-export(model_odf,fname,<span class="string">'Bunge'</span>,<span class="string">'MTEX'</span>)
-  {% endhighlight %}
+% export the ODF
+export(model_odf,fname,'Bunge','MTEX')
+{% endhighlight %}
 <h2 id="8">Export to VPSC format</h2><p>TODO!!!</p></div></body></html>

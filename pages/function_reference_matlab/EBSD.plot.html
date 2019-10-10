@@ -1,6 +1,6 @@
 ---
 title: plot
-last_updated: 07-Oct-2019
+last_updated: 10-Oct-2019
 sidebar: function_reference_sidebar
 permalink: EBSD.plot.html
 folder: function_reference
@@ -14,27 +14,42 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>plot</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-07"><meta name="DC.source" content="script_EBSD__plot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD__plot into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="EBSD_index.html">EBSD</a>)</p><!--/introduction--><p>spatial EBSD plot</p><h2 id="3">Syntax</h2><pre class="language-matlab"><span class="comment">% colorize according to phase</span>
+      --><title>plot</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_EBSD__plot.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD__plot into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="EBSD_index.html">EBSD</a>)</p><!--/introduction--><p>spatial EBSD plot</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+% colorize according to phase
 plot(ebsd)
-</pre><pre class="language-matlab"><span class="comment">% colorize according to arbitrary value - here MAD</span>
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize according to arbitrary value - here MAD
 plot(ebsd,ebsd.mad)
-</pre><pre class="language-matlab"><span class="comment">% colorize according to orientation</span>
-plot(ebsd(<span class="string">'phaseName'</span>),ebsd(<span class="string">'phaseName'</span>).orientation)
-</pre><pre class="language-matlab"><span class="comment">% colorize according to custom color</span>
-oM = ipfColorKey(ebsd(<span class="string">'phaseName'</span>))
-color = oM.orientation2color(ebsd(<span class="string">'phaseName'</span>).orientations);
-plot(ebsd(<span class="string">'phaseName'</span>),color)
-</pre><pre class="language-matlab"><span class="comment">% specify the color directly and show in Legend</span>
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize according to orientation
+plot(ebsd('phaseName'),ebsd('phaseName').orientation)
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize according to custom color
+oM = ipfColorKey(ebsd('phaseName'))
+color = oM.orientation2color(ebsd('phaseName').orientations);
+plot(ebsd('phaseName'),color)
+{% endhighlight %}
+
+{% highlight matlab %}
+% specify the color directly and show in Legend
 badMAD = ebsd.mad &gt; 1;
-plot(ebsd(badMAD),<span class="string">'faceColor'</span>,<span class="string">'black,'</span>DisplayName',<span class="string">'bad values'</span>)
-</pre><h2 id="4">Input</h2><p>
+plot(ebsd(badMAD),'faceColor','black,'DisplayName','bad values')
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt>&lt;a href="EBSD_index.html"&gt;EBSD&lt;/a&gt;</tt>
+            <tt><a href="EBSD_index.html">EBSD</a></tt>
          </td>
       </tr>
       <tr>
@@ -84,9 +99,14 @@ plot(ebsd(badMAD),<span class="string">'faceColor'</span>,<span class="string">'
          </td>
       </tr>
    </table>
-</p><h2 id="7">Example</h2><pre class="codeinput">mtexdata <span class="string">forsterite</span>
+</p><h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata forsterite
 plot(ebsd)
-</pre><pre class="codeoutput"> 
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -98,14 +118,22 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
  
-</pre>
+
+{% endhighlight %}
+
   {% include inline_image.html file="EBSD.plot_01.png" %}
-<pre class="codeinput"><span class="comment">% colorize accoding to orientations</span>
-plot(ebsd(<span class="string">'Forsterite'</span>),ebsd(<span class="string">'Forsterite'</span>).orientations)
-</pre>
+
+{% highlight matlab %}
+% colorize accoding to orientations
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
+{% endhighlight %}
+
   {% include inline_image.html file="EBSD.plot_02.png" %}
-<pre class="codeinput"><span class="comment">% colorize according to MAD</span>
-plot(ebsd,ebsd.mad,<span class="string">'micronbar'</span>,<span class="string">'off'</span>)
-</pre>
+
+{% highlight matlab %}
+% colorize according to MAD
+plot(ebsd,ebsd.mad,'micronbar','off')
+{% endhighlight %}
+
   {% include inline_image.html file="EBSD.plot_03.png" %}
 <h2 id="12">See also</h2><p>EBSDSpatialPlots</p></div></body></html>
