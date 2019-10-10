@@ -1,5 +1,5 @@
 ---
-title: Specimen Directions
+title: The Class vector3d
 last_updated: 10-Oct-2019
 sidebar: documentation_sidebar
 permalink: vector3d_index.html
@@ -14,75 +14,63 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Specimen Directions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_vector3d_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit vector3d_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This section describes the class <b>vector3d</b> and gives an overview how to deal with specimen directions in MTEX.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Class Description</h2><p>Specimen directions are three-dimensional vectors in the Euclidean space represented by coordinates with respect to an outer specimen coordinate system x, y, z. In MTEX Specimen directions are represented by variables of the class <b>vector3d</b>.</p><h2 id="4">SUB: Defining Specimen Directions</h2><p>The standard way to define a specimen directions is by its coordinates.</p>
+      --><title>The Class vector3d</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_vector3d_index.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit vector3d_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Variables of type vector3d represent three dimensional vectors given by coordinates x, y, z.</p><!--/introduction--><h2 id="1">Properties</h2>
 {% highlight matlab %}
-v = vector3d(1,1,0);
+%&lt;html&gt;
+%   &lt;table class="usertable"&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| x, y, z&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| isNormalized&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%      &lt;tr&gt;
+%         &lt;td&gt;
+%               &lt;p&gt;| antipodal&lt;/p&gt;
+%         &lt;/td&gt;
+%      &lt;/tr&gt;
+%   &lt;/table&gt;
+%&lt;/html&gt;
+%
+%
 {% endhighlight %}
-<p>This gives a single vector with coordinates (1,1,0) with respect to the x, y , z coordinate system. A second way to define a specimen directions is by its spherical coordinates, i.e. by its polar angle and its azimuth angle. This is done by the option <b>polar</b>.</p>
-{% highlight matlab %}
-polar_angle = 60*degree;
-azimuth_angle = 45*degree;
-v = vector3d('polar',polar_angle,azimuth_angle);
-{% endhighlight %}
-<p>Finally, one can also define a vector as a linear combination of the predefined vectors <a href="xvector.html">xvector</a>, <a href="yvector.html">yvector</a>, and <a href="zvector.html">zvector</a></p>
-{% highlight matlab %}
-v = xvector + 2*yvector;
-{% endhighlight %}
-<h2 id="7">SUB: Calculating with Specimen Directions</h2><p>As we have seen in the last example. One can calculate with specimen directions as with ordinary number. Moreover, all basic vector operation as <a href="vector3d.plus.html">"+"</a>, <a href="vector3d.minus.html">"-"</a>, <a href="vector3d.times.html">"*"</a>, <a href="vector3d.dot.html">inner product</a>, <a href="vector3d.cross.html">cross product</a> are implemented.</p>
-{% highlight matlab %}
-u = dot(v,xvector) * yvector + 2 * cross(v,zvector);
-{% endhighlight %}
-<p>Using the brackets <tt>v = [v1,v2]</tt> two specimen directions can be concatened. Now each single vector is accesable via <tt>v(1)</tt> and <tt>v(2)</tt>.</p>
-{% highlight matlab %}
-w = [v,u];
-w(1)
-w(2)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-ans = vector3d  
- size: 1 x 1
-  x y z
-  1 2 0
- 
-ans = vector3d  
- size: 1 x 1
-  x  y  z
-  4 -1  0
-
-{% endhighlight %}
-<p>When calculating with concatenated specimen directions all operations are performed componentwise for each specimen direction.</p>
-{% highlight matlab %}
-w = w + v;
-{% endhighlight %}
-<p>Besides the standard linear algebra operations, there are also the following functions available in MTEX.</p><pre>&lt;vector3d.angle.html angle(v1,v2)&gt; % angle between two specimen  directions
-&lt;vector3d.dot.html dot(v1,v2)&gt;   % inner product
-&lt;vector3d.cross.html cross(v1,v2)&gt; % cross product
-&lt;vector3d.norm.html norm(v)&gt;      % length of the specimen directions
-&lt;vector3d.sum.html sum(v)&gt;       % sum over all specimen directions in v
-&lt;vector3d.mean.html mean(v)&gt;      % mean over all specimen directions in v
-&lt;vector3d.polar.html polar(v)&gt;     % conversion to spherical coordinates</pre>
-{% highlight matlab %}
-% A simple example for applying the norm function is to normalize a set of
-% specimen directions
-
-w = w ./ norm(w)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-w = vector3d  
- size: 1 x 2
-         x        y        z
-  0.447214 0.894427        0
-  0.980581 0.196116        0
-
-{% endhighlight %}
-<h2 id="11">SUB: Plotting three dimensionl vectors</h2><p>The <a href="vector3d.plot.html">plot</a> function allows you to visualize an arbitrary number of specimen directions in a spherical projection</p>
-{% highlight matlab %}
-plot([zvector,xvector+yvector+zvector],'labeled')
-{% endhighlight %}
-
-  {% include inline_image.html file="vector3d_index_01.png" %}
-<h2 id="12">random vectors</h2><h2 id="13">equispaced grids</h2><h2 id="14">regular grids</h2><h2 id="15">alginment of the plot</h2><h2 id="16">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  Syntax.html"><tt>  Syntax</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    v = vector3d(x,y,z).html"><tt>    v = vector3d(x,y,z)</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    v = vector3d(x,y,z,'antipodal').html"><tt>    v = vector3d(x,y,z,'antipodal')</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    v = vector3d('polar',theta,rho).html"><tt>    v = vector3d('polar',theta,rho)</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  Input.html"><tt>  Input</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.   x,y,z.html"><tt>   x,y,z</tt></a></td><td>cart. coordinates</td></tr><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  Flags.html"><tt>  Flags</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    antipodal.html"><tt>    antipodal</tt></a></td><td>consider vector as an axis and not as an direction</td></tr><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  See also.html"><tt>  See also</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  AxialDirectional.html"><tt>  AxialDirectional</tt></a></td><td/></tr></table></p></div></body></html>
+<h2 id="2">Dependent Properties</h2><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>theta</p>
+         </td>
+         <td>
+               <p>polar angle in radiant</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>rho</p>
+         </td>
+         <td>
+               <p>azimuthal angle in radiant</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>resolution</p>
+         </td>
+         <td>
+               <p>mean distance between the points on the sphere</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>xyz</p>
+         </td>
+         <td>
+            <text/>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="3">Derived Classes</h2><div><ul><li><a href="Miller_index.html">Miller</a></li><li><a href="S2Grid_index.html">S2Grid</a></li></ul></div><h2 id="4">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  Syntax.html"><tt>  Syntax</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    v = vector3d(x,y,z).html"><tt>    v = vector3d(x,y,z)</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    v = vector3d(x,y,z,'antipodal').html"><tt>    v = vector3d(x,y,z,'antipodal')</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    v = vector3d('polar',theta,rho).html"><tt>    v = vector3d('polar',theta,rho)</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  Input.html"><tt>  Input</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.   x,y,z.html"><tt>   x,y,z</tt></a></td><td>cart. coordinates</td></tr><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  Flags.html"><tt>  Flags</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.    antipodal.html"><tt>    antipodal</tt></a></td><td>consider vector as an axis and not as an direction</td></tr><tr><td width="200px"><a href="vector3d..html"><tt/></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  See also.html"><tt>  See also</tt></a></td><td/></tr><tr><td width="200px"><a href="vector3d.  AxialDirectional.html"><tt>  AxialDirectional</tt></a></td><td/></tr></table></p></div></body></html>
