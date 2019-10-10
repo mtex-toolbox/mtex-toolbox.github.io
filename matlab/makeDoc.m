@@ -66,7 +66,7 @@ for idx = 1:length(files)
 end
 
 move_images(options.outputDir);
-makeFunctionReferenceToc();
+
 
 %% Publish Doc
 
@@ -92,13 +92,10 @@ end
 %% make help toc
 
 makeHelpToc(mtexHelpFiles,'Documentation','FunctionMainFile','FunctionReference','outputDir','.');
-makeDocumentationToc();
+xml2yml('helptoc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
 
-%% make function reference overview pages
-
-makeFunctionsReference(mtexHelpFiles,'FunctionReference','outputDir',options.outputDir);
-makeFunctionReferenceToc
-
+makeHelpToc(mtexHelpFiles,'FunctionReference','outputDir','.');
+xml2yml('helptoc.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
 
 
 %% set back mtex options
