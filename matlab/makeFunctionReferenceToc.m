@@ -1,4 +1,5 @@
 function makeFunctionReferenceToc()
+
 f = fopen('FunctionReferences.toc', 'r');
 s = fread(f);
 fclose(f);
