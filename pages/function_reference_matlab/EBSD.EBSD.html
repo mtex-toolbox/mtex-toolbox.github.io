@@ -1,6 +1,6 @@
 ---
 title: EBSD
-last_updated: 10-Oct-2019
+last_updated: 11-Oct-2019
 sidebar: function_reference_sidebar
 permalink: EBSD.EBSD.html
 folder: function_reference
@@ -14,26 +14,58 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>EBSD</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-10"><meta name="DC.source" content="script_EBSD__EBSD.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD__EBSD into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="EBSD_index.html">EBSD</a>)</p><!--/introduction--><p>constructor</p><p><b>EBSD</b> is the low level constructor for an <b>EBSD</b> object representing EBSD data. For importing real world data you might want to use the predefined <a href="ImportEBSDData.html">EBSD interfaces</a>. You can also simulate EBSD data from an ODF by the command <a href="ODF.calcEBSD.html">calcEBSD</a>.</p><h2 id="3">Syntax</h2>
+      --><title>EBSD</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_EBSD__EBSD.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSD__EBSD into the Matlab commandline">edit page</a></font><div><!--introduction--><p>(method of <a href="EBSD_index.html">EBSD</a>)</p><!--/introduction--><p>class representing EBSD measurements</p><p>In MTEX a variable of type <b>EBSD</b> is used to store EBSD measurements as a table with rows containing the orientation, the spatial coordinates and the phase of each indiviudal measurement.</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-ebsd = EBSD(rotations,phases,CSList)
+prop.xy = xy;
+prop.mad = mad;
+CSList = {'notIndexed',CS1,CS2,CS3};
+rot = rotation.byEuler(phi1,Phi,phi2);
+{% endhighlight %}
+
+{% highlight matlab %}
+ebsd = EBSD(rot,phaseId,CSList,prop)
+ebsd = EBSD(rot,phaseId,CSList,prop,'unitCell',unitCell)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>orientations</tt>
+            <tt>rot</tt>
          </td>
          <td>
-            <tt><a href="orientation_index.html">orientation</a></tt>
+            <tt><a href="rotation_index.html">rotation</a></tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>CS</tt>
+            <tt>phaseId</tt>
          </td>
          <td>
-            <tt>crystal / specimen <a href="symmetry_index.html">symmetry</a></tt>
+            <tt>phase as index to CSList</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS1,CS2,CS3</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry_index.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>prop</tt>
+         </td>
+         <td>
+            <tt>struct with properties, xy is mandatory</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>unitCell</tt>
+         </td>
+         <td>
+            <tt>vertices a single pixel</tt>
          </td>
       </tr>
    </table>
@@ -72,4 +104,114 @@ ebsd = EBSD(rotations,phases,CSList)
          </td>
       </tr>
    </table>
-</p><h2 id="6">See also</h2><p>ODF/calcEBSD EBSD/calcODF EBSD/load</p></div></body></html>
+</p><h2 id="6">Class Properties</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>id</tt>
+         </td>
+         <td>
+            <tt>unique id of each pixel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CSList</tt>
+         </td>
+         <td>
+            <tt>cell list of <a href="crystalSymmetry_index.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phaseId</tt>
+         </td>
+         <td>
+            <tt>phase of each pixel as entry of CSList</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phase</tt>
+         </td>
+         <td>
+            <tt>phase of each pixel as imported</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phaseMap</tt>
+         </td>
+         <td>
+            <tt>convert between phase = phaseMap(phaseId)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rotations</tt>
+         </td>
+         <td>
+            <tt><a href="rotation_index.html">rotation</a> of each pixel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>x, y</tt>
+         </td>
+         <td>
+            <tt>coordinates of the center of each pixel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scanUnit</tt>
+         </td>
+         <td>
+            <tt>unit of the x,y coordinates (um is default)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>prop</tt>
+         </td>
+         <td>
+            <tt>auxilary properties, e.g., MAD, BC, mis2mean</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isIndexed</tt>
+         </td>
+         <td>
+            <tt>is pixel indexed or not</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>indexedPhaseId</tt>
+         </td>
+         <td>
+            <tt>phaseIds of all indexed phases</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="7">Derived Classes</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>@EBSDSquare</tt>
+         </td>
+         <td>
+            <tt>EBSD data measured on a square grid</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>@EBSDHex</tt>
+         </td>
+         <td>
+            <tt>EBSD data measured on a hex grid</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="8">See also</h2><p><a href="EBSDImport.html">EBSDImport</a> <a href="EBSDSelect.html">EBSDSelect</a> <a href="EBSDPlotting.html">EBSDPlotting</a> <a href="GrainReconstruction.html">GrainReconstruction</a></p></div></body></html>
