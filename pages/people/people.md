@@ -31,7 +31,7 @@ toc: false
   <p><b>David Mainprice</b> contributes to the tensor functionality of MTEX.</p>
   <p>Geosciences Montpellier, France</p>
   <p> 
-  <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
+  <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon glyphicon-envelope"></span> David.Mainprice@gm.univ-montp2.fr</a></p>
   <p> <a href="http://www.gm.univ-montp2.fr/PERSO/mainprice/"><span class="glyphicon glyphicon-home"></span> http://www.gm.univ-montp2.fr/PERSO/mainprice/</a></p>
   </p>
 </td>
