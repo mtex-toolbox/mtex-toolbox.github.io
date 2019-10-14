@@ -1,6 +1,6 @@
 ---
 title: Theory of Misorientations
-last_updated: 11-Oct-2019
+last_updated: 14-Oct-2019
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
 folder: documentation
@@ -14,19 +14,16 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MisorientationTheory into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice),</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">The misorientation angle</h2><p>First we import some EBSD data set, compute grains and plot them according to their mean orientation. Next we highlight grain 70 and grain 80</p>
+      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit MisorientationTheory into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice) misorientations. To illustrate this concept at a practical example let us first import some Magnesium EBSD data.</p>
 {% highlight matlab %}
 mtexdata twins
+
 % use only proper symmetry operations
 ebsd('M').CS = ebsd('M').CS.properGroup;
+
+% compute grains
 grains = calcGrains(ebsd('indexed'),'threshold',5*degree)
 CS = grains.CS; % extract crystal symmetry
-
-plot(grains,grains.meanOrientation,'micronbar','off')
-hold on
-plot(grains([74,85]).boundary,'edgecolor','w','linewidth',2)
-
-text(grains([74,85]),{'1','2'})
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -51,6 +48,20 @@ grains = grain2d
  
  Properties: GOS, meanRotation
  
+
+{% endhighlight %}
+<p>Next we plot the grains together with their mean orientation and highlight grain 70 and grain 80</p>
+{% highlight matlab %}
+plot(grains,grains.meanOrientation,'micronbar','off')
+
+hold on
+plot(grains([74,85]).boundary,'edgecolor','w','linewidth',2)
+hold off
+
+text(grains([74,85]),{'1','2'})
+{% endhighlight %}
+
+{% highlight plaintext %}
   I'm going to colorize the orientation data with the 
   standard MTEX colorkey. To view the colorkey do:
  
@@ -141,7 +152,7 @@ ans =
    85.7093
 
 {% endhighlight %}
-<p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="9">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
+<p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="8">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
 {% highlight matlab %}
 mori = inv(ori1) * ori2
 {% endhighlight %}
@@ -191,7 +202,7 @@ ans = Miller
   l  0
 
 {% endhighlight %}
-<h2 id="12">Coincident lattice planes</h2><p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyse whether there are some more alignments between major lattice planes.</p>
+<h2 id="11">Coincident lattice planes</h2><p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyse whether there are some more alignments between major lattice planes.</p>
 {% highlight matlab %}
 %m = Miller({1,-1,0,0},{1,1,-2,0},{1,-1,0,1},{0,0,0,1},CS);
 m = Miller({1,-1,0,0},{1,1,-2,0},{-1,0,1,1},{0,0,0,1},CS);
@@ -238,7 +249,7 @@ ans =
     2.5387
 
 {% endhighlight %}
-<h2 id="14">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
+<h2 id="13">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
 {% highlight matlab %}
 mori = orientation.map(Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS),...
   Miller(-1,0,1,1,CS),Miller(-1,1,0,1,CS))
@@ -296,7 +307,7 @@ legend({},'location','NorthWest','FontSize',13);
 {% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_03.png" %}
-<h2 id="16">Highlight twinning boundaries</h2><p>It turns out that in the previous EBSD map many grain boundaries have a misorientation close to the twinning misorientation we just defined. Lets Lets highlight those twinning boundaries</p>
+<h2 id="15">Highlight twinning boundaries</h2><p>It turns out that in the previous EBSD map many grain boundaries have a misorientation close to the twinning misorientation we just defined. Lets Lets highlight those twinning boundaries</p>
 {% highlight matlab %}
 % consider only Magnesium to Magnesium grain boundaries
 gB = grains.boundary('Mag','Mag');
@@ -334,7 +345,7 @@ plotAxisDistribution(gB.misorientation,'contour')
 {% endhighlight %}
 
   {% include inline_image.html file="MisorientationTheory_06.png" %}
-<p>which emphasises a strong portion of rotations about the (-12-10) axis.</p><h2 id="20">Phase transitions</h2><p>Misorientations may not only be defined between crystal frames of the same phase. Lets consider the phases Magnetite and Hematite.</p>
+<p>which emphasises a strong portion of rotations about the (-12-10) axis.</p><h2 id="19">Phase transitions</h2><p>Misorientations may not only be defined between crystal frames of the same phase. Lets consider the phases Magnetite and Hematite.</p>
 {% highlight matlab %}
 CS_Mag = loadCIF('Magnetite')
 CS_Hem = loadCIF('Hematite')

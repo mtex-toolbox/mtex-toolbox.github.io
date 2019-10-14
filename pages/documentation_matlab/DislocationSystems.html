@@ -1,0 +1,295 @@
+---
+title: Dislocations
+last_updated: 14-Oct-2019
+sidebar: documentation_sidebar
+permalink: DislocationSystems.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_DislocationSystems.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DislocationSystems into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Dislocation are microscopic displacements within the regular atom lattice of a crystaline material ussualy as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p><h2 id="2">Edge Dislocations</h2><p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p>
+{% highlight matlab %}
+% define a crystal symmetry
+cs = crystalSymmetry('432');
+
+% define a burgers vector in crystal coordinates
+b = Miller(1,1,0,cs,'uvw')
+
+% define a line vector in crystal coordinates
+l = Miller(1,-1,-2,cs,'uvw')
+
+% setup the dislocation system
+dS = dislocationSystem(b,l)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+b = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u 1
+  v 1
+  w 0
+ 
+l = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u  1
+  v -1
+  w -2
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ edge dislocations : 1 x 1
+ Burgers vector  line vector  energy
+      [1  1  0]    [1 -1 -2]       1
+ 
+
+{% endhighlight %}
+<h2 id="3">Screw Dislocations</h2><p>Screw dislocations are characterized by the fact that Burgers vector and line vector are perpendicular to each other.</p>
+{% highlight matlab %}
+% define a burgers vector in crystal coordinates
+b = Miller(1,1,0,cs,'uvw')
+
+% define a line vector in crystal coordinates
+l = Miller(1,1,0,cs,'uvw')
+
+% setup the dislocation system
+dS = dislocationSystem(b,l)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+b = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u 1
+  v 1
+  w 0
+ 
+l = Miller  
+ size: 1 x 1
+ symmetry: 432
+  u 1
+  v 1
+  w 0
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ screw dislocations: 1 x 1
+ Burgers vector  energy
+      [1  1  0]       1
+ 
+
+{% endhighlight %}
+<h2 id="4">Relation to Slip Systems</h2><p>Dislocation systems are tightly related to <a href="slipSystem.slipSystem.html">slip systems</a>. Given a set of slip systems the corresponding edge and screw dislocations can be computed by</p>
+{% highlight matlab %}
+% dominant slip systems in cubic fcc material
+sS = symmetrise(slipSystem.fcc(cs))
+
+% the corresponding edge and screw dislocation
+dS = dislocationSystem(sS)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sS = slipSystem  
+ symmetry: 432
+ size: 24 x 1
+   u    v    w  | h    k    l CRSS
+   0    1   -1    1    1    1    1
+  -1    0    1    1    1    1    1
+   1   -1    0    1    1    1    1
+   0   -1    1    1    1    1    1
+   1    0   -1    1    1    1    1
+  -1    1    0    1    1    1    1
+   1   -1    0    1    1   -1    1
+   1    0    1    1    1   -1    1
+   0    1    1    1    1   -1    1
+  -1    0   -1    1    1   -1    1
+   0   -1   -1    1    1   -1    1
+  -1    1    0    1    1   -1    1
+   0    1   -1   -1    1    1    1
+   1    0    1   -1    1    1    1
+   1    1    0   -1    1    1    1
+  -1    0   -1   -1    1    1    1
+  -1   -1    0   -1    1    1    1
+   0   -1    1   -1    1    1    1
+  -1    0    1    1   -1    1    1
+   1    1    0    1   -1    1    1
+   0    1    1    1   -1    1    1
+  -1   -1    0    1   -1    1    1
+   0   -1   -1    1   -1    1    1
+   1    0   -1    1   -1    1    1
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ edge dislocations : 24 x 1
+ Burgers vector  line vector  energy
+      [0  1 -1]    (2 -1 -1)       2
+     [-1  0  1]   (-1  2 -1)       2
+      [1 -1  0]   (-1 -1  2)       2
+      [0 -1  1]   (-2  1  1)       2
+      [1  0 -1]    (1 -2  1)       2
+     [-1  1  0]    (1  1 -2)       2
+      [1 -1  0]    (1  1  2)       2
+      [1  0  1]   (-1  2  1)       2
+      [0  1  1]   (-2  1 -1)       2
+     [-1  0 -1]    (1 -2 -1)       2
+      [0 -1 -1]    (2 -1  1)       2
+     [-1  1  0]   (-1 -1 -2)       2
+      [0  1 -1]    (2  1  1)       2
+      [1  0  1]   (-1 -2  1)       2
+      [1  1  0]    (1 -1  2)       2
+     [-1  0 -1]    (1  2 -1)       2
+     [-1 -1  0]   (-1  1 -2)       2
+      [0 -1  1]   (-2 -1 -1)       2
+     [-1  0  1]    (1  2  1)       2
+      [1  1  0]    (1 -1 -2)       2
+      [0  1  1]    (2  1 -1)       2
+     [-1 -1  0]   (-1  1  2)       2
+      [0 -1 -1]   (-2 -1  1)       2
+      [1  0 -1]   (-1 -2 -1)       2
+ 
+ screw dislocations: 6 x 1
+ Burgers vector  energy
+      (0 -1 -1)       1
+      (0 -1  1)       1
+     (-1  1  0)       1
+      (1  0  1)       1
+      (1  1  0)       1
+      (1  0 -1)       1
+ 
+
+{% endhighlight %}
+<p>A shortcut for the above lines is</p>
+{% highlight matlab %}
+dS = dislocationSystem.bcc(cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+dS = dislocationSystem  
+ symmetry: 432
+ edge dislocations : 48 x 1
+ Burgers vector  line vector  energy
+      [1 -1  1]   (-2 -1  1)       2
+      [1  1 -1]    (2 -1  1)       2
+      [1  1 -1]    (1 -2 -1)       2
+     [-1  1  1]    (1  2 -1)       2
+      [1 -1  1]   (-1  1  2)       2
+     [-1  1  1]   (-1  1 -2)       2
+      [1 -1  1]    (1  2  1)       2
+      [1  1  1]   (-1  2 -1)       2
+      [1  1 -1]    (1  1  2)       2
+      [1  1  1]   (-1 -1  2)       2
+     [-1  1  1]    (2  1  1)       2
+      [1  1  1]    (2 -1 -1)       2
+     [-1  1  1]    (0  1 -1)       2
+      [1 -1  1]   (-1  0  1)       2
+      [1  1 -1]    (1 -1  0)       2
+     [-1  1  1]   (-1  0 -1)       2
+      [1 -1  1]   (-1 -1  0)       2
+      [1  1 -1]    (0 -1 -1)       2
+      [1  1 -1]    (1  0  1)       2
+     [-1  1  1]    (1  1  0)       2
+      [1 -1  1]    (0  1  1)       2
+     [-1 -1 -1]    (0 -1  1)       2
+     [-1 -1 -1]    (1  0 -1)       2
+     [-1 -1 -1]   (-1  1  0)       2
+     [-1  1  1]   (-1  4 -5)       2
+      [1 -1  1]   (-5 -1  4)       2
+      [1  1 -1]    (4 -5 -1)       2
+     [-1  1  1]   (-4  1 -5)       2
+      [1 -1  1]   (-5 -4  1)       2
+      [1  1 -1]    (1 -5 -4)       2
+      [1  1 -1]    (4  1  5)       2
+     [-1  1  1]    (5  4  1)       2
+      [1 -1  1]    (1  5  4)       2
+     [-1 -1 -1]   (-1 -4  5)       2
+     [-1 -1 -1]    (5 -1 -4)       2
+     [-1 -1 -1]   (-4  5 -1)       2
+      [1 -1  1]    (1 -4 -5)       2
+      [1  1 -1]   (-5  1 -4)       2
+     [-1  1  1]   (-4 -5  1)       2
+      [1 -1  1]    (4 -1 -5)       2
+      [1  1 -1]   (-5  4 -1)       2
+     [-1  1  1]   (-1 -5  4)       2
+     [-1 -1 -1]   (-4 -1  5)       2
+     [-1 -1 -1]    (5 -4 -1)       2
+     [-1 -1 -1]   (-1  5 -4)       2
+      [1  1 -1]    (1  4  5)       2
+     [-1  1  1]    (5  1  4)       2
+      [1 -1  1]    (4  5  1)       2
+ 
+ screw dislocations: 4 x 1
+ Burgers vector  energy
+     (-1 -1 -1)       1
+      (1 -1  1)       1
+     (-1  1  1)       1
+      (1  1 -1)       1
+ 
+
+{% endhighlight %}
+<h2 id="6">The Dislocation Tensor</h2><p>As each dislocation corresponds to an deformation of the atom lattice a dislocation can also be described by a deformation matrix. This matrix is the dyadic product between the Burgers vector and the line vector and can be computed by</p>
+{% highlight matlab %}
+dS.tensor
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = dislocationDensityTensor  
+  size   : 52 x 1   
+  unit   : au       
+  rank   : 2 (3 x 3)
+  mineral: 432      
+
+{% endhighlight %}
+<p>Note that the unit of this tensors is the same as the unit used for describing the length of the unit cell, which is in most cases Angstrom (au). For amount of deformation the norm of the Burgers vectors is important</p>
+{% highlight matlab %}
+% size of the unit cell
+a = norm(cs.aAxis);
+
+% in bcc and fcc the norm of the burgers vector is sqrt(3)/2 * a
+[norm(dS(1).b), norm(dS(end).b), sqrt(3)/2 * a]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.8660    0.8660    0.8660
+
+{% endhighlight %}
+<h2 id="8">The Energy of Dislocations</h2><p>The energy of each dislocation system can be stored in the property <tt>u</tt>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p><p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p><p>
+  {% include inline_image.html file="DislocationSystems_eq10151767036785061618.png" %}
+</p><p>
+  {% include inline_image.html file="DislocationSystems_eq06307640569981345809.png" %}
+</p><p>where</p><div><ul><li><tt>G</tt> is</li><li><tt>b</tt> is the length of the Burgers vector</li><li><tt>nu</tt> is the Poisson ratio</li><li><tt>R</tt></li><li><tt>r</tt></li></ul></div><p>In this example we assume</p>
+{% highlight matlab %}
+%
+%R =
+%r_0 =
+%U = norm(dS.b).^2
+
+nu = 0.3;
+
+
+% energy of the edge dislocations
+dS(dS.isEdge).u = 1;
+
+% energy of the screw dislocations
+dS(dS.isScrew).u = 1 - 0.3;
+
+% Question to verybody: what is the best way to set the enegry? I found
+% different formulae
+%
+% E = 1 - poisson ratio
+% E = c * G * |b|^2,  - G - Schubmodul / Shear Modulus Energy per (unit length)^2
+{% endhighlight %}
+</div></body></html>

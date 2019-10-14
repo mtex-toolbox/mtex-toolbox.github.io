@@ -1,6 +1,6 @@
 ---
-title: Slip Systems
-last_updated: 11-Oct-2019
+title: script_SlipSystems
+last_updated: 14-Oct-2019
 sidebar: documentation_sidebar
 permalink: SlipSystems.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Slip Systems</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_SlipSystems.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SlipSystems into the Matlab commandline">edit page</a></font><div><!--introduction--><p>How to analyze slip transmission at grain boundaries</p><!--/introduction--><h2 id="3">Contents</h2><h2 id="4">Burgers vector and normal directions</h2><p>Consider hexagonal symmetry of alpha-Titanium</p>
+      --><title>script_SlipSystems</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_SlipSystems.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SlipSystems into the Matlab commandline">edit page</a></font><div><h2 id="1">Slip Systems</h2><p>Plastic deformation in crystaline materials almost exclusively appears as dislocation along lattice planes. Such deformations are described by the normal vector <b>n</b> of the lattice plane and direction <b>b</b> of the slip. In the case of hexagonal alpha-Titanium with</p>
 {% highlight matlab %}
 cs = crystalSymmetry('622',[3,3,4.7],'x||a','mineral','Titanium (Alpha)')
 {% endhighlight %}
@@ -30,7 +30,7 @@ cs = crystalSymmetry
  
 
 {% endhighlight %}
-<p>Then basal slip is defined by the Burgers vector (or slip direction)</p>
+<p>basal slip is defined by the Burgers vector (or slip direction)</p>
 {% highlight matlab %}
 b = Miller(2,-1,-1,0,cs,'UVTW')
 {% endhighlight %}
@@ -58,7 +58,7 @@ n = Miller
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
 
 {% endhighlight %}
-<p>Accordingly we can define a slip system in MTEX by</p>
+<p>Putting both incredience together we can define a slip system in MTEX by</p>
 {% highlight matlab %}
 sSBasal = slipSystem(b,n)
 {% endhighlight %}
@@ -114,4 +114,65 @@ ans =
     3.0000
 
 {% endhighlight %}
-<h2 id="11">Rotating slip systems</h2></div></body></html>
+<h2 id="8">Displacement</h2><p>In linear theory the displacement of a slip system is described by the strain tensor</p>
+{% highlight matlab %}
+sSBasal.deformationTensor
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = tensor  
+  rank   : 2 (3 x 3)                                
+  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+ 
+ *10^-2
+    0    0   50
+    0    0 86.6
+    0    0    0
+
+{% endhighlight %}
+<p>This displacement tensor is exactly the same as the so called Schmid tensor</p>
+{% highlight matlab %}
+sSBasal.SchmidTensor
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = velocityGradientTensor  
+  rank   : 2 (3 x 3)                                
+  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+ 
+ *10^-2
+    0    0   50
+    0    0 86.6
+    0    0    0
+
+{% endhighlight %}
+<h2 id="10">Rotating slip systems</h2><p>By definition the slip system and accordingly the deformation tensor are with the respect to the crystal coordinate system. In order to transform the quantities into specimen coordinates we have to multiply with some grain orientation</p>
+{% highlight matlab %}
+% some random grain orientation
+ori = orientation.rand(cs)
+
+% transfer slip system into specimen coordinates
+ori * sSBasal
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  111.731 153.988 89.3666       0
+ 
+ 
+ans = slipSystem  
+ size: 1 x 1
+     x      y      z  |   x      y      z
+  2.23  -1.89   0.67   0.09   0.03  -0.19
+
+{% endhighlight %}
+</div></body></html>
