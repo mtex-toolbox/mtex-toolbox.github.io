@@ -124,7 +124,7 @@ To make changes, update the MATLAB code and republish this document.
 
 <!-- Header -->
 <xsl:template name="header">
-<font size="2"><a href="documentation/Contribute2Doc.html" data-toggle="tooltip"><xsl:attribute name="data-original-title"><xsl:text>To edit this page type edit </xsl:text><xsl:value-of select="$filename"/><xsl:text> into the Matlab commandline</xsl:text></xsl:attribute>edit page</a></font>
+<font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip"><xsl:attribute name="data-original-title"><xsl:text>To edit this page type edit </xsl:text><xsl:value-of select="$filename"/><xsl:text> into the Matlab commandline</xsl:text></xsl:attribute>edit page</a></font>
 </xsl:template>
 
 <!-- Footer -->
