@@ -1,5 +1,5 @@
 ---
-title: script_GND
+title: Geometrically Necessary Dislocations
 last_updated: 14-Oct-2019
 sidebar: documentation_sidebar
 permalink: GND.html
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_GND</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GND into the Matlab commandline">edit page</a></font><div><h2 id="1">Geometrically Necessary Dislocations</h2><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
+      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GND into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
 {% highlight matlab %}
 % set up the plotting convention
 plotx2north
@@ -30,9 +30,9 @@ ipfKey.inversePoleFigureDirection = yvector;
 % and plot the orientation data
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize','medium')
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_01.png" %}
-<p>In the next step we reconstruct grains, remove all grains with less then 5 pixels and smooth the grain boundaries.</p>
+<center>
+{% include inline_image.html file="GND_01.png" %}
+</center><p>In the next step we reconstruct grains, remove all grains with less then 5 pixels and smooth the grain boundaries.</p>
 {% highlight matlab %}
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
@@ -50,9 +50,9 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_02.png" %}
-<h2 id="3">Data cleaning</h2><p>The computation of geometrically neccesary dislocations from EBSD maps depends on local orientation changes in the map. In order to make those visible we switch to a different color key that colorises the misorientation of an pixel with respect to the grain meanorientation.</p>
+<center>
+{% include inline_image.html file="GND_02.png" %}
+</center><h2 id="3">Data cleaning</h2><p>The computation of geometrically neccesary dislocations from EBSD maps depends on local orientation changes in the map. In order to make those visible we switch to a different color key that colorises the misorientation of an pixel with respect to the grain meanorientation.</p>
 {% highlight matlab %}
 % a key the colorizes according to misorientation angle and axis
 ipfKey = axisAngleColorKey(ebsd);
@@ -67,9 +67,9 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_03.png" %}
-<p>We observe that the data are quite noisy. As noisy orientation data lead to overestimate the GND density we apply sime denoising techniques to the data.</p>
+<center>
+{% include inline_image.html file="GND_03.png" %}
+</center><p>We observe that the data are quite noisy. As noisy orientation data lead to overestimate the GND density we apply sime denoising techniques to the data.</p>
 {% highlight matlab %}
 % denoise orientation data
 F = halfQuadraticFilter;
@@ -86,9 +86,9 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_04.png" %}
-<h2 id="5">The incomplete curvature tensor</h2><p>Starting point of any GND computation is the curvature tensor, which is a rank two tensor that is defined for every pixel in the EBSD map by the directional derivatives in x, y and z direction.</p>
+<center>
+{% include inline_image.html file="GND_04.png" %}
+</center><h2 id="5">The incomplete curvature tensor</h2><p>Starting point of any GND computation is the curvature tensor, which is a rank two tensor that is defined for every pixel in the EBSD map by the directional derivatives in x, y and z direction.</p>
 {% highlight matlab %}
 % consider only the Fe(alpha) phase
 ebsd = ebsd('indexed').gridify;
@@ -149,9 +149,9 @@ end
 setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_05.png" %}
-<h2 id="8">The incomplete dislocation density tensor</h2><p>According to Kroener the curvature tensor is directly related to the dislocation density tensor.</p>
+<center>
+{% include inline_image.html file="GND_05.png" %}
+</center><h2 id="8">The incomplete dislocation density tensor</h2><p>According to Kroener the curvature tensor is directly related to the dislocation density tensor.</p>
 {% highlight matlab %}
 alpha = kappa.dislocationDensity
 {% endhighlight %}
@@ -397,9 +397,9 @@ end
 setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large');
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_06.png" %}
-<h2 id="19">The total dislocation energy</h2><p>The unit of the densities <tt>h</tt> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <tt>h</tt> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <tt>factor</tt> by the function <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
+<center>
+{% include inline_image.html file="GND_06.png" %}
+</center><h2 id="19">The total dislocation energy</h2><p>The unit of the densities <tt>h</tt> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <tt>h</tt> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <tt>factor</tt> by the function <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
 {% highlight matlab %}
 factor
 {% endhighlight %}
@@ -423,9 +423,9 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GND_07.png" %}
-
+<center>
+{% include inline_image.html file="GND_07.png" %}
+</center>
 {% highlight matlab %}
 plotx2east
 {% endhighlight %}
