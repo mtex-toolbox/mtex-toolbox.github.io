@@ -216,7 +216,9 @@ To make changes, update the MATLAB code and republish this document.
 </xsl:template>
 
 <xsl:template match="img">
-  {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
+<center>
+{% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
+</center>
 </xsl:template>
 
 <!-- Stash original code in HTML for easy slurping later. -->
