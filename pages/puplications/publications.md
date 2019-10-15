@@ -17,9 +17,8 @@ following paper that best fits your application.
 #### 2019
 
 * **Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere**, R. Hielscher, F. Bartel, T. B. Britton: [Ultramicroscopy](https://doi.org/10.1016/j.ultramic.2019.112836).
-[![PDF]( {% include inline_image.html file="icon_pdf_32x32.png" %} "Download PDF file")](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
-[{% include inline_image.html file="icon_pdf_32x32.png" %}](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
-<a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
+[{% include inline_image.html file="icon_pdf_32x32.png" %} "Download PDF file"](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
+<a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
   [script files](https://github.com/mtex-toolbox/mtex-paper/tree/master/GazingAtCrystalBalls)
 
