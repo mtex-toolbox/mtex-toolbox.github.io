@@ -17,13 +17,14 @@ following paper that best fits your application.
 #### 2019
 
 * **Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere**, R. Hielscher, F. Bartel, T. B. Britton: [Ultramicroscopy](https://doi.org/10.1016/j.ultramic.2019.112836).
-[![PDF]( {% include inline_image.html file="icon_pdf_32x32.png" %} "Download PDF
-  file")](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
+[![PDF]( {% include inline_image.html file="icon_pdf_32x32.png" %} "Download PDF file")](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
+[{% include inline_image.html file="icon_pdf_32x32.png" %}](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
+<a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
   [script files](https://github.com/mtex-toolbox/mtex-paper/tree/master/GazingAtCrystalBalls)
 
 * **Denoising of Crystal Orientation Maps**, R. Hielscher, C. Silbermann, E. Schmidl, J. Ihlemann: [Journal of Applied Crystallography, 52](https://doi.org/10.1107/S1600576719009075).
-[![PDF](/images/icon_pdf_32x32.png "Download PDF
+[![PDF](icon_pdf_32x32.png "Download PDF
   file")](https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf)
 
   [script files](https://github.com/mtex-toolbox/mtex-paper/tree/master/DenoisingCrystalOrientationMaps)
