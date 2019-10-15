@@ -1,6 +1,6 @@
 ---
-title: Definition of Orientations
-last_updated: 14-Oct-2019
+title: Defining Orientations
+last_updated: 15-Oct-2019
 sidebar: documentation_sidebar
 permalink: OrientationDefinition.html
 folder: documentation
@@ -14,4 +14,133 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Definition of Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_OrientationDefinition.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationDefinition into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Euler Angles</h2></div></body></html>
+      --><title>Defining Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-15"><meta name="DC.source" content="script_OrientationDefinition.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationDefinition into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This sections covers the definition of orientations as MTEX variables. The theoretical definition can be found in the section <a href="DefinitionAsCoordinateTransform.html">Theory</a> and <a href="MTEXvsBungeConvention.html">MTEX vs Bunge Convention</a>.</p><p>Technically, a variable of type <a href="orientations.orientations.html">orientation</a> is nothing else then a <a href="rotation.rotation.html">rotation</a> that is accompanied by a crystal symmetry. Hence, all methods for defining rotations (<a href="RotationDefinition.html">as explained here</a>) are also applicable for orientations with the only difference that the crystal symmetry has to be specified in form of a variable of type <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>.</p>
+{% highlight matlab %}
+% load copper cif file
+cs = crystalSymmetry.load('Cu-Copper.cif')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+cs = crystalSymmetry  
+ 
+  mineral : Copper       
+  symmetry: m-3m         
+  a, b, c : 3.6, 3.6, 3.6
+ 
+
+{% endhighlight %}
+<p>Most importantly we may use Euler angles to define orientations</p>
+{% highlight matlab %}
+ori = orientation.byEuler(30*degree,50*degree,10*degree,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : Copper (m-3m)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    30   50   10    0
+ 
+
+{% endhighlight %}
+<p>or a 3x3 rotation matrix</p>
+{% highlight matlab %}
+M = eye(3)
+
+ori = orientation.byMatrix(M)
+{% endhighlight %}
+
+{% highlight plaintext %}
+M =
+     1     0     0
+     0     1     0
+     0     0     1
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : 1, X||a, Y||b*, Z||c*
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    0
+ 
+
+{% endhighlight %}
+<h2 id="4">Miller indices</h2><p>Another common way to specify an orientation is by the crystal directions point towards the specimen directions Z and X. This can be done by the command <a href="orientation.byMiller.html">byMiller</a>. E.g. in order to define the GOSS orientation (011)[100] we can write</p>
+{% highlight matlab %}
+orientation.byMiller([0 1 1],[1 0 0],cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = orientation  
+  size: 1 x 1
+  crystal symmetry : Copper (m-3m)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0   45    0    0
+ 
+
+{% endhighlight %}
+<p>Note that MTEX comes already with a long list of <a href="OrientationStandard.html">predefined orientations</a>.</p><h2 id="6">Random Orientations</h2><p>To simulate random orientations we may apply the same syntax as for rotations and write</p>
+{% highlight matlab %}
+ori = orientation.rand(100,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ori = orientation  
+  size: 100 x 1
+  crystal symmetry : Copper (m-3m)
+  specimen symmetry: 1
+ 
+
+{% endhighlight %}
+<h2 id="7">Specimen Symmetry</h2><p>If one needs to consider also specimen symmetry this can be defined as a variable of type <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> and passed as an additional argument to all commands discussed above, e.g.,</p>
+{% highlight matlab %}
+% define orthotropic specimen symmetry
+ss = specimenSymmetry('orthorhombic')
+
+% define a corresponding orientation
+ori = orientation.byEuler(30*degree,50*degree,10*degree,cs,ss)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ss = orthorhombic specimenSymmetry  
+ 
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : Copper (m-3m)
+  specimen symmetry: mmm
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    30   50   10    0
+ 
+
+{% endhighlight %}
+<p>Symmetrisation will now result in a very long list of symmetrically equivalent orientations</p>
+{% highlight matlab %}
+ori.symmetrise
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = orientation  
+  size: 384 x 1
+  crystal symmetry : Copper (m-3m)
+  specimen symmetry: mmm
+ 
+
+{% endhighlight %}
+</div></body></html>
