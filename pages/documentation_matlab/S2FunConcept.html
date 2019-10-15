@@ -1,0 +1,163 @@
+---
+title: Spherical Functions
+last_updated: 15-Oct-2019
+sidebar: documentation_sidebar
+permalink: S2FunConcept.html
+folder: documentation
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Spherical Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-15"><meta name="DC.source" content="script_S2FunConcept.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunConcept into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>By a variable of type <a href="S2Fun.S2Fun.html">S2Fun</a> it is possible to represent an entire function on the two dimensional sphere. A typical example of such a function is the pole density function of a given ODF with respect to a fixed crystal direction.</p>
+{% highlight matlab %}
+% the famouse Santa Fe orientation distribution function
+odf = SantaFe;
+
+% the (100) pole density function
+pdf = odf.calcPDF(Miller(1,0,0,odf.CS))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+pdf = S2FunHarmonic  
+ bandwidth: 25
+ antipodal: true
+
+{% endhighlight %}
+<p>Since, the variable <b>pdf</b> stores all information about this function we may evaluate it for any direction <b>r</b></p>
+{% highlight matlab %}
+% take a random direction
+r = vector3d.rand;
+
+% and evaluate the pdf at this direction
+pdf.eval(r)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.1474
+
+{% endhighlight %}
+<p>We may also plot the function in any spherical projection</p>
+{% highlight matlab %}
+plot(pdf)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunConcept_01.png" %}
+</center><p>or find its local maxima</p>
+{% highlight matlab %}
+[~,localMax] = max(pdf,'numLocal',12)
+
+annotate(localMax)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+localMax = vector3d  
+ size: 12 x 1
+ antipodal: true
+          x         y         z
+  -0.665336 -0.665361  0.338559
+   0.665338 -0.338523  0.665377
+   0.665338  0.338523  0.665377
+  -0.665326  0.665363  0.338575
+  -0.665377 -0.338479  0.665361
+  -0.665377  0.338479  0.665361
+    0.33859   -0.6653  0.665381
+   0.338591  0.665299  0.665382
+  -0.338596  0.665298  0.665381
+  -0.338596 -0.665298  0.665381
+   0.665508  0.665195  0.338548
+   0.665518 -0.665187  0.338544
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunConcept_02.png" %}
+</center><p>A complete list of operations that can be performed with spherical functions can be found in section <a href="S2FunOperations.html">Operations</a>.</p><h2 id="6">Representation of Spherical Functions</h2><p>In MTEX there exist different ways for representing spherical functions internally.</p><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>harmonic expansion</p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>finite elements</p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2FunTri.S2FunTri.html">S2FunTri</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>function handle</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>Bingham distribution</p>
+         </td>
+         <td>
+               <p>
+                  <a href="BinghamS2.BinghamS2.html">BinghamS2</a>
+               </p>
+         </td>
+      </tr>
+   </table>
+</p><p>All representations allow for the same operations which are specified for the abstact class <a href="S2Fun.S2Fun.html">S2Fun</a>. In particular it is possible to calculate with spherical functions as with ordinary numbers, i.e., you can add, multiply arbitrary functions, take the mean, integrate them or compute gradients.</p><h2 id="7">Generalizations of Spherical Functions</h2><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>spherical vector fields</p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>spherical axis fields</p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2FunTri.S2FunTri.html">S2FunTri</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>radial spherical functions</p>
+         </td>
+         <td>
+               <p>
+                  <a href="BinghamS2.BinghamS2.html">BinghamS2</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>symmetric spherical functions</p>
+         </td>
+         <td>
+               <p>
+                  <a href="S2FunHandle.S2FunHandle.html">S2FunHandle</a>
+               </p>
+         </td>
+      </tr>
+   </table>
+</p></div></body></html>

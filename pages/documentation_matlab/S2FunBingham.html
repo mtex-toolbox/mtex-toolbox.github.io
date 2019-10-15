@@ -1,6 +1,6 @@
 ---
-title: S2FunBingham
-last_updated: 11-Oct-2019
+title: The Spherical Bingham Distribution
+last_updated: 15-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunBingham.html
 folder: documentation
@@ -14,14 +14,113 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2FunBingham</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_S2FunBingham.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunBingham into the Matlab commandline">edit page</a></font><div><!--introduction--><p>The Bingham distribution</p><p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probabiliy density function given by</p><p>
-  {% include inline_image.html file="S2FunBingham_eq08746242956034488143.png" %}
+      --><title>The Spherical Bingham Distribution</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-15"><meta name="DC.source" content="script_S2FunBingham.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunBingham into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probabiliy density function given by</p><p>
+  {% include inline_image.html file="S2FunBingham_eq14797696958592296987.png" %}
 </p><p>where A is an orthognal covariance matrix, and Z a concentration matrix with 
   {% include inline_image.html file="S2FunBingham_eq02587373517082466763.png" %}
  with 
   {% include inline_image.html file="S2FunBingham_eq15065425265083699199.png" %}
-.</p><p>In mtex Z is given by Z = [k1,k2,k3] with k3 =0 and A is given by three orthognal vectors.</p><p>Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225 https://www.jstor.org/stable/2958339</p><!--/introduction--><h2 id="2">Syntax</h2>
+.</p><p>In mtex Z is given by Z = [k1,k2,k3] with k3 = 0 and A is given by three orthognal vectors.</p><p>Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225 https://www.jstor.org/stable/2958339</p>
 {% highlight matlab %}
-given by
+% A simple example:
+Z = [-10 -4 0]
+a = rotation.rand(1).*vector3d([xvector yvector zvector])
+bs2=BinghamS2(Z,a);
+plot(bs2)
 {% endhighlight %}
-</div></body></html>
+
+{% highlight plaintext %}
+Z =
+   -10    -4     0
+ 
+a = vector3d  
+ size: 1 x 3
+          x         y         z
+   0.555682  0.707455  0.436721
+    0.53461 0.0982355  -0.83937
+  -0.636718  0.699898 -0.323625
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunBingham_01.png" %}
+</center><h2 id="2">Meaning of Z</h2><p>k1 = k2 defines a rotationally symmetric point maximum and k2 = 0 defines a girdle distribution.</p>
+{% highlight matlab %}
+close
+kappa = [0 4 8 12 24];
+mtexFig = newMtexFigure('layout',[length(kappa) length(kappa)]);
+for k2 = kappa
+  for k1 = kappa
+    if k1 &gt;= k2
+      bs=BinghamS2([-k1 -k2 0]);
+      plot(bs,'colorRange',[0,25],'TR',['$\kappa_1$:' num2str(k1)],'BR',['$\kappa_2$: ' num2str(k2)],'doNotDraw')
+      nextAxis
+    else
+      nextAxis
+    end
+  end
+end
+CLim(mtexFig,'equal')
+mtexFig.drawNow;
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunBingham_02.png" %}
+</center><h2 id="3">Drawing a random sample of the Bingham distribution</h2>
+{% highlight matlab %}
+close
+v = bs2.discreteSample(500)
+plot(bs2)
+hold on
+plot(v,'MarkerFaceColor','k')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+v = vector3d  
+ size: 500 x 1
+ antipodal: true
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunBingham_03.png" %}
+</center><h2 id="4">Estimating a spherical Bingham distribution from discrete data</h2><p>Given arbitrarily scattered data <tt>v</tt> on the sphere we can estimate the best fitting Bingham distribution by</p>
+{% highlight matlab %}
+% estimate a Bingham distribution
+bs = BinghamS2.fit(v,'confElli',0.99)
+{% endhighlight %}
+
+{% highlight plaintext %}
+bs = 
+  BinghamS2 with properties:
+
+            a: [3&times;1 vector3d]
+            Z: [3&times;1 double]
+            N: 1.0679
+    antipodal: 1
+     cEllipse: [0.5293 0.2106]
+
+{% endhighlight %}
+<p>Lets plot the fitted distribution with the data on on</p>
+{% highlight matlab %}
+plot(bs)
+hold on
+plot(v,'MarkerFaceColor','Black')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunBingham_04.png" %}
+</center><p>Under the assumption of sufficiently many and sufficently concetrated data we may also estimate a confidence ellipse for the mean direction (default p = 0.95). The center of the ellipse is given by the largest principle vector stored in <tt>bs.a(3)</tt></p>
+{% highlight matlab %}
+annotate(bs.a(3),'MarkerFaceColor','red','MarkerSize',10)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunBingham_05.png" %}
+</center><p>The orientation of the ellipse is specified by all the pricimple vectors <tt>bs.a</tt> and the a and b axes are computed by the commands <tt>cEllipse</tt></p>
+{% highlight matlab %}
+% annotate the ellipse
+ellipse(rotation('matrix',bs.a.xyz'),bs.cEllipse(1),bs.cEllipse(2), ...
+    'linewidth',2,'lineColor','r','linestyle','-.')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunBingham_06.png" %}
+</center></div></body></html>
