@@ -1,6 +1,6 @@
 ---
 title: Standard Orientations
-last_updated: 11-Oct-2019
+last_updated: 15-Oct-2019
 sidebar: documentation_sidebar
 permalink: OrientationStandard.html
 folder: documentation
@@ -14,101 +14,97 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Standard Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_OrientationStandard.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationStandard into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction-->
+      --><title>Standard Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-15"><meta name="DC.source" content="script_OrientationStandard.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit OrientationStandard into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This section displays some of the standard orientations that are build into MTEX. The full list of predefined orientations consists of</p><div><ul><li>Cube, CubeND22, CubeND45, CubeRD</li><li>Goss, invGoss</li><li>Copper, Copper2</li><li>SR, SR2, SR3, SR4</li><li>Brass, Brass2</li><li>PLage, PLage2, QLage, QLage2, QLage3, QLage4</li></ul></div><p>For visualisation we fix a generic cubic crystal symmetry and orthorhombic specimen symmetry</p>
 {% highlight matlab %}
-CS = crystalSymmetry('m-3m');
-SS = specimenSymmetry('orthorhombic');
-setMTEXpref('xAxisDirection','north');
-setMTEXpref('zAxisDirection','outofPlane');
+cs = crystalSymmetry('m-3m');
+ss = specimenSymmetry('orthorhombic');
 {% endhighlight %}
-<h2 id="2">some stadanrd orientations</h2><p>predefined orientations</p><pre>  * 'Cube', 'CubeND22', 'CubeND45', 'CubeRD'
-  * 'Goss', 'invGoss'
-  * 'Copper', 'Copper2'
-  * 'SR', 'SR2', 'SR3', 'SR4'
-  * 'Brass', 'Brass2'
-  * 'PLage', 'PLage2', 'QLage', 'QLage2', 'QLage3', 'QLage4'
-defines an orientation</pre>
+<p>and select a subset of the above predifined orientations</p>
 {% highlight matlab %}
 components = [...
-  orientation.goss(CS,SS),...
-  orientation.brass(CS,SS),...
-  orientation.cube(CS,SS),...
-  orientation.cubeND22(CS,SS),...
-  orientation.cubeND45(CS,SS),...
-  orientation.cubeRD(CS,SS),...
-  orientation.copper(CS,SS),...
-  orientation.PLage(CS,SS),...
-  orientation.QLage(CS,SS),...
+  orientation.goss(cs,ss),...
+  orientation.brass(cs,ss),...
+  orientation.cube(cs,ss),...
+  orientation.cubeND22(cs,ss),...
+  orientation.cubeND45(cs,ss),...
+  orientation.cubeRD(cs,ss),...
+  orientation.copper(cs,ss),...
+  orientation.PLage(cs,ss),...
+  orientation.QLage(cs,ss),...
   ];
 {% endhighlight %}
-<h2 id="3">3d Euler angle space</h2>
+<h2 id="3">3d Euler angle space</h2><p>Lets first visualize the orientations in the three dimensional Euler angle space</p>
 {% highlight matlab %}
+close all
 for i = 1:length(components)
-  plot(components(i),'bunge','MarkerSize',10,'filled','DisplayName',round2Miller(components(i),'LaTex'))
+  plot(components(i),'bunge','MarkerSize',10,'MarkerColor', ind2color(i),...
+    'DisplayName',round2Miller(components(i),'LaTex'))
   hold on
 end
 legend('show','interpreter','LaTeX','location','southoutside','numColumns',3,'FontSize',1.2*getMTEXpref('FontSize'));
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_01.png" %}
-<h2 id="4">2d phi2 sections</h2>
+<center>
+{% include inline_image.html file="OrientationStandard_01.png" %}
+</center><h2 id="4">2d phi2 sections</h2><p>A second common way of visualizing the orientation space are sections with fixed Euler angle phi2</p>
 {% highlight matlab %}
-figure
+close all
 for i = 1:length(components)
-  plotSection(components(i),'add2all','DisplayName',round2Miller(components(i),'LaTex'))
+  plotSection(components(i), 'add2all', 'MarkerColor', ind2color(i),...
+    'DisplayName', round2Miller(components(i),'LaTex'))
 end
 
 legend('show','interpreter','LaTeX','location','southeast','FontSize',1.2*getMTEXpref('FontSize'));
-
-% saveFigure('componentsSections.png')
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_02.png" %}
-<h2 id="5">3d axis angle space</h2>
+<center>
+{% include inline_image.html file="OrientationStandard_02.png" %}
+</center><h2 id="5">3d axis angle space</h2><p>In the three dimensional axis angle space the orientation appear inside the fundamental sector</p>
 {% highlight matlab %}
 close all
-figure
 for i = 1:length(components)
   hold on
-  plot(components(i),'axisAngle','MarkerSize',10,'filled','DisplayName',round2Miller(components(i),'LaTex'))
+  plot(components(i),'axisAngle','MarkerSize',10,'MarkerColor', ind2color(i),...
+    'DisplayName',round2Miller(components(i),'LaTex'))
   axis off
 end
 legend('show','interpreter','LaTeX','location','southoutside','numColumns',3,'FontSize',1.2*getMTEXpref('FontSize'));
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_03.png" %}
-<h2 id="6">pole figures</h2>
+<center>
+{% include inline_image.html file="OrientationStandard_03.png" %}
+</center><h2 id="6">pole figures</h2><p>In the major pole figures the predefined orientations appear at the following spots</p>
 {% highlight matlab %}
-h = Miller({1,0,0},{1,1,0},{1,1,1},{3,1,1},CS);
+plotx2north
+h = Miller({1,0,0},{1,1,0},{1,1,1},{3,1,1},cs);
 
+close all
 for i = 1:length(components)
-  plotPDF(components(i),h,'MarkerSize',10,'filled','DisplayName',round2Miller(components(i),'LaTex'))
+  plotPDF(components(i),h,'MarkerSize',10,'MarkerColor', ind2color(i),...
+    'DisplayName',round2Miller(components(i),'LaTex'))
   hold on
 end
-
 hold off
 
 legend('show','interpreter','LaTeX','location','northeast','numColumns',2,'FontSize',1.2*getMTEXpref('FontSize'));
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_04.png" %}
-<h2 id="7">inverse pole figures</h2>
+<center>
+{% include inline_image.html file="OrientationStandard_04.png" %}
+</center><h2 id="7">inverse pole figures</h2><p>In the inverse pole figure the sitations is as follows. Note that the different size of the markers has been chosen to avoid overprinting.</p>
 {% highlight matlab %}
 r = [vector3d.X,vector3d.Y,vector3d.Z];
 
+close all
 for i = 1:length(components)
-  plotIPDF(components(i),r,'MarkerSize',(12-i)^1.5,'filled','DisplayName',round2Miller(components(i),'LaTex'))
+  plotIPDF(components(i),r,'MarkerSize',(12-i)^1.5,'MarkerColor', ind2color(i),...
+    'DisplayName',round2Miller(components(i),'LaTex'))
   hold on
 end
-
 hold off
 
 legend('show','interpreter','LaTeX','location','northeast','numColumns',2,'FontSize',1.2*getMTEXpref('FontSize'));
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_05.png" %}
-
+<center>
+{% include inline_image.html file="OrientationStandard_05.png" %}
+</center><h2 id="8">Defining an Model ODF</h2>
 {% highlight matlab %}
 odf = unimodalODF(components(3),'halfwidth',7.5*degree)
 
@@ -131,18 +127,18 @@ odf = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_06.png" %}
-
+<center>
+{% include inline_image.html file="OrientationStandard_06.png" %}
+</center>
 {% highlight matlab %}
 plotIPDF(odf,r)
 hold on
 plotIPDF(odf,r,'contour','lineColor','k','linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_07.png" %}
-
+<center>
+{% include inline_image.html file="OrientationStandard_07.png" %}
+</center>
 {% highlight matlab %}
 plotSection(odf)
 
@@ -157,6 +153,6 @@ end
 
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="OrientationStandard_08.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="OrientationStandard_08.png" %}
+</center></div></body></html>
