@@ -1,6 +1,6 @@
 ---
 title: Operations on Spherical Functions
-last_updated: 15-Oct-2019
+last_updated: 16-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunOperations.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Operations on Spherical Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-15"><meta name="DC.source" content="script_S2FunOperations.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>The idea of <tt>S2Fun</tt> is to calculate with spherical functions similarly as Matlab does with vectors and matrices. In order to illustrate this consider the following two spherical functions</p>
+      --><title>Operations on Spherical Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-16"><meta name="DC.source" content="script_S2FunOperations.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunOperations into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>The idea of <tt>S2Fun</tt> is to calculate with spherical functions similarly as Matlab does with vectors and matrices. In order to illustrate this we consider the following two spherical functions</p>
 {% highlight matlab %}
 sF1 = S2Fun.smiley;
 sF2 = S2FunHarmonic.unimodal('halfwidth',10*degree)
@@ -32,73 +32,163 @@ sF2 = S2FunHarmonic
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_01.png" %}
-</center><h2 id="2">Basic arithmetic operations</h2>
+</center><h2 id="2">Basic arithmetic operations</h2><p>Now the sum of these two spherical functions is again a spherical function</p>
 {% highlight matlab %}
+1 + 15 * sF1 + sF2
+
 plot(15 * sF1 + sF2,'upper')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = S2FunHarmonic  
+ bandwidth: 128
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_02.png" %}
-</center>
+</center><p>Accordingly, one use all basic operations like '-', '*', '^', '/', <a href="S2Fun.min.html">min</a>, <a href="S2Fun.max.html">max</a>, <a href="S2Fun.abs.html">abs</a>, <a href="S2Fun.sqrt.html">sqrt</a> to compute with variables of type <a href="S2Fun.S2Fun.html">S2Fun</a></p>
 {% highlight matlab %}
-% addition/subtraction
-sF1+sF2; sF1+2;
-sF1-sF2; sF2-4;
+% the maximum between two functions
+plot(max(15*sF1,sF2),'upper');
+
+nextAxis
+% the minimum between two functions
+plot(min(15*sF1,sF2),'upper');
 {% endhighlight %}
-<p>multiplication/division</p>
+<center>
+{% include inline_image.html file="S2FunOperations_03.png" %}
+</center><h2 id="4">Local Extrema</h2><p>The obove mentioned functions <a href="S2Fun.min.html">min</a> and <a href="S2Fun.max.html">max</a> have very different use cases</p><div><ul><li>if two spherical functions are passed as arguments a spherical functions defined as the pointwise min/max between these two functions is computed</li><li>if a spherical function and single number are passed as arguments a spherical functions defined as the pointwise min/max between these the function and the value is computed</li><li>if only a single spherical function is provided the global maximum / minimum of the function is returned</li><li>if additionally the option 'numLocal' is provided the certain number of local minima / maxima is computed</li></ul></div>
 {% highlight matlab %}
-sF1.*sF2; 2.*sF1;
-sF1./(sF2+1); 2./sF2; sF2./4;
+plot(15 * sF1 + sF2,'upper')
+
+% compute and mark the global maximum
+[maxvalue, maxnodes] = max(15 * sF1 + sF2);
+annotate(maxnodes)
+
+% compute and mark the local minimum
+[minvalue, minnodes] = min(15 * sF1 + sF2,'numLocal',2);
+annotate(minnodes)
 {% endhighlight %}
-<p>power</p>
+<center>
+{% include inline_image.html file="S2FunOperations_04.png" %}
+</center><h2 id="5">Integration</h2><p>The surface integral of a spherical function can be computed by either <a href="S2Fun.mean.html">mean</a> or <a href="S2Fun.sum.html">sum</a>. The difference between both commands is that <a href="S2Fun.sum.html">sum</a> normalizes the integral of the identical function on the sphere to 
+  {% include inline_image.html file="S2FunOperations_eq12586085190606786913.png" %}
+ the command <a href="S2Fun.mean.html">mean</a> normalizes it to one. Compare</p>
 {% highlight matlab %}
-sF1.^sF2; 2.^sF1; sF2.^4;
+mean(sF1)
+
+sum(sF1) / 4 / pi
 {% endhighlight %}
-<p>absolute value of a function</p>
-{% highlight matlab %}
-abs(sF1);
+
+{% highlight plaintext %}
+ans =
+    0.0329
+ans =
+    0.0329
+
 {% endhighlight %}
-<p><b>min/max</b></p><p>calculates the local min/max of a single function</p>
-{% highlight matlab %}
-[minvalue, minnodes] = min(sF1);
-[maxvalue, maxnodes] = max(sF1);
-{% endhighlight %}
-<div><ul><li>as default <tt>min</tt> or <tt>max</tt> returns the smallest or the biggest value (global optima) with all nodes for which the value is obtained</li><li>with the option <tt>min(sF1, 'numLocal', n)</tt> the <tt>n</tt> nodes with the belonging biggest or smallest values are returned</li><li><tt>min(sF1)</tt> is the same as running <a href="S2Funharmonic.steepestDescent.html"><tt>steepestDescent</tt></a>|(sF1)|</li></ul></div><p>min/max of two functions in the pointwise sense</p>
-{% highlight matlab %}
-min(sF1, sF2);
-{% endhighlight %}
-<div><ul><li>See all options of min/max <a href="S2FunHarmonic.min.html">here</a></li></ul></div><p><b>Other operations</b></p><p>calculate the 
+<p>A practical application of integration is the computation of the 
   {% include inline_image.html file="S2FunOperations_eq11809360406450963432.png" %}
--norm, which is only the 
-  {% include inline_image.html file="S2FunOperations_eq06246994178291117440.png" %}
--norm of the Fourier-coefficients</p>
+-norm which is defined for a spherical function 
+  {% include inline_image.html file="S2FunOperations_eq18096895394918367257.png" %}
+ as</p><p>
+  {% include inline_image.html file="S2FunOperations_eq00716988343388260260.png" %}
+</p><p>accordingly we can compute it by</p>
 {% highlight matlab %}
-norm(sF1);
+sqrt(sum(sF1.^2))
 {% endhighlight %}
-<p>calculate the mean value of a function</p>
+
+{% highlight plaintext %}
+ans =
+    0.4138
+
+{% endhighlight %}
+<p>or more efficiently by the command <a href="S2Fun.norm.html">norm</a></p>
 {% highlight matlab %}
-mean(sF1);
+norm(sF1)
 {% endhighlight %}
-<p>calculate the surface integral of a function</p>
+
+{% highlight plaintext %}
+ans =
+    0.4138
+
+{% endhighlight %}
+<h2 id="8">Differentiation</h2><p>The differential of a spherical function in a specific point is a gradient, i.e., a <a href="vector3d.vector3d.html">three dimensional vector</a> which can be computed by the command <a href="S2Fun.grad.html">grad</a></p>
 {% highlight matlab %}
-sum(sF1);
+grad(sF1,xvector)
 {% endhighlight %}
-<p>rotate a function</p>
+
+{% highlight plaintext %}
+ 
+ans = vector3d  
+ size: 1 x 1
+  x            y            z
+  0 -0.000291054 -0.000490867
+
+{% endhighlight %}
+<p>The gradients of a spherical function in all points form a spherical vector field and are returned by the function <a href="S2Fun.grad.html">grad</a> as a variable of type <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic.html"><tt>S2VectorFieldHarmonic</tt></a></p>
 {% highlight matlab %}
-r = rotation.byEuler( [pi/4 0 0]);
-rotate(sF1, r);
+% compute the gradient as a vector field
+G = grad(sF1)
+
+% plot the gradient on top of the function
+plot(sF1,'upper')
+hold on
+plot(G)
+hold off
 {% endhighlight %}
-<p>symmetrise a given function</p>
+
+{% highlight plaintext %}
+ 
+G = S2VectorFieldHarmonic  
+ bandwidth: 129
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunOperations_05.png" %}
+</center><p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p><h2 id="11">Rotating spherical functions</h2><p>Rotating a spherical function works with the command <a href="S2Fun.rotate.html">rotate</a></p>
 {% highlight matlab %}
-cs = crystalSymmetry('6/m');
-sFs = symmetrise(sF1, cs);
+% define a rotation
+rot = rotation.byAxisAngle(yvector,-30*degree)
+
+% plot the rotated spherical function
+plot(rotate(15 * sF1 + sF2,rot),'upper')
 {% endhighlight %}
-<div><ul><li><tt>sFs</tt> is of type <a href="S2FunHarmonicSym.S2FunHarmonicSym.html"><tt>S2FunHarmonicSym</tt></a></li></ul></div><p><b>Gradient</b></p><p>Calculate the gradient as a function <tt>G</tt> of type <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic.html"><tt>S2VectorFieldHarmonic</tt></a></p>
+
+{% highlight plaintext %}
+ 
+rot = rotation  
+  size: 1 x 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+   270   30   90    0
+ 
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunOperations_06.png" %}
+</center><p>A special case of rotation is symmetrysing it with respect to some symmetry. The following example symmetrises our smily with respect to a two fold axis in z direction</p>
 {% highlight matlab %}
-G = grad(sF1);
+% define the symmetry
+cs = crystalSymmetry('112');
+
+% compute the symmetrised function
+sFs = symmetrise(sF1, cs)
+
+% plot it
+plota2east
+plot(sFs,'upper','complete')
 {% endhighlight %}
-<p>The direct evaluation of the gradient is faster and returns <a href="vector3d.vector3d.html"><tt>vector3d</tt></a></p>
-{% highlight matlab %}
-nodes = vector3d.rand(100);
-grad(sF1, nodes);
+
+{% highlight plaintext %}
+ 
+sFs = S2FunHarmonic  
+ symmetry: 112, X||a, Y||b*, Z||c*
+ bandwidth: 128
+
 {% endhighlight %}
-</div></body></html>
+<center>
+{% include inline_image.html file="S2FunOperations_07.png" %}
+</center><p>The resulting function is of type <a href="S2FunHarmonicSym.S2FunHarmonicSym.html"><tt>S2FunHarmonicSym</tt></a> and knows about its symmetry</p></div></body></html>
