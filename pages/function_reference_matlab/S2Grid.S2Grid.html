@@ -1,6 +1,6 @@
 ---
 title: S2Grid
-last_updated: 11-Oct-2019
+last_updated: 17-Oct-2019
 sidebar: function_reference_sidebar
 permalink: S2Grid.S2Grid.html
 folder: function_reference
@@ -14,36 +14,35 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2Grid</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_S2Grid__S2Grid.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2Grid__S2Grid into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="3">Syntax</h2>
+      --><title>S2Grid</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-17"><meta name="DC.source" content="script_S2Grid__S2Grid.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit S2Grid__S2Grid into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>The class S2Grid represent spherical grids. The central difference to a simple list of <a href="vector3d.vector3d.html">vector3d</a> is that S2Grid provides more efficient methods for finding the closes points in the grid with respect to a given direction.</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-S2Grid(theta,rho)      % fills a Sphere with N--nodes
-regularS2Grid('resolution',5*degree)     % construct regular polar and azimuthal spacing
-equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
+% regular grid with fixed polar and azimuthal spacing
+S2G = regularS2Grid('resolution',5*degree)
+S2G = regularS2Grid('theta',(0:5:80)*degree,'rho',(0:5:355)*degree)
 {% endhighlight %}
-<h2 id="4">Input</h2><p>
+
+{% highlight matlab %}
+% regular grid optimized for plotting
+S2G = plotS2Grid('resolution',1.5*degree,'upper')
+{% endhighlight %}
+
+{% highlight matlab %}
+% equispaced nodes  with given resolution
+S2G = equispacedS2Grid('resolution',5*degree)
+{% endhighlight %}
+<h2 id="4">Options</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>nodes</tt>
+            <tt>points</tt>
          </td>
          <td>
-            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
-         </td>
-      </tr>
-   </table>
-</p><h2 id="5">Options</h2><p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>POINTS</tt>
-         </td>
-         <td>
-            <tt>[nrho,ntheta] number of points to be generated</tt>
+            <tt>[nrho,ntheta] number of points</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>RESOLUTION</tt>
+            <tt>resolution</tt>
          </td>
          <td>
             <tt>resolution of a equispaced grid</tt>
@@ -51,31 +50,23 @@ equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
       </tr>
       <tr>
          <td width="100px">
-            <tt>HEMISPHERE</tt>
+            <tt>theta</tt>
          </td>
          <td>
-            <tt>'lower', 'uper', 'complete', 'sphere', 'identified'}</tt>
+            <tt>polar angle</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>THETA</tt>
+            <tt>rho</tt>
          </td>
          <td>
-            <tt>theta angle</tt>
+            <tt>azimuthal angle</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>RHO</tt>
-         </td>
-         <td>
-            <tt>rho angle</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>MINRHO</tt>
+            <tt>minRho</tt>
          </td>
          <td>
             <tt>starting rho angle (default 0)</tt>
@@ -83,7 +74,7 @@ equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
       </tr>
       <tr>
          <td width="100px">
-            <tt>MAXRHO</tt>
+            <tt>maxRho</tt>
          </td>
          <td>
             <tt>maximum rho angle (default 2*pi)</tt>
@@ -91,7 +82,7 @@ equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
       </tr>
       <tr>
          <td width="100px">
-            <tt>MINTHETA</tt>
+            <tt>minTheta</tt>
          </td>
          <td>
             <tt>starting theta angle (default 0)</tt>
@@ -99,34 +90,26 @@ equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
       </tr>
       <tr>
          <td width="100px">
-            <tt>MAXTHETA</tt>
+            <tt>maxTheta</tt>
          </td>
          <td>
             <tt>maximum theta angle (default pi)</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="6">Flags</h2><p>
+</p><h2 id="5">Flags</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>REGULAR</tt>
+            <tt>lower, uper, complete</tt>
          </td>
          <td>
-            <tt>generate a regular grid</tt>
+            <tt>restrict hemisphere</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>EQUISPACED</tt>
-         </td>
-         <td>
-            <tt>generate equidistribution</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ANTIPODAL</tt>
+            <tt>antipodal</tt>
          </td>
          <td>
             <tt>include <a href="AxialDirectional.html">antipodal symmetry</a></tt>
@@ -134,15 +117,7 @@ equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
       </tr>
       <tr>
          <td width="100px">
-            <tt>PLOT</tt>
-         </td>
-         <td>
-            <tt>generate plotting grid</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>NO_CENTER</tt>
+            <tt>no_center</tt>
          </td>
          <td>
             <tt>ommit point at center</tt>
@@ -150,48 +125,26 @@ equispacedS2Grid('resolution',5*degree)  % construct equispaced nodes
       </tr>
       <tr>
          <td width="100px">
-            <tt>RESTRICT2MINMAX</tt>
+            <tt>restrict2minmax</tt>
          </td>
          <td>
             <tt>restrict margins to min / max</tt>
          </td>
       </tr>
    </table>
-</p><h2 id="7">Example</h2>
+</p><h2 id="6">Example</h2>
 {% highlight matlab %}
-regularS2Grid('points',[72 19])
+S2G = equispacedS2Grid('resolution',5*degree,'maxTheta',70*degree)
+plot(S2G)
 {% endhighlight %}
 
 {% highlight plaintext %}
  
-ans = S2Grid  
- size: 72 x 19
-
-{% endhighlight %}
-
-{% highlight matlab %}
-regularS2Grid('resolution',[5*degree 2.5*degree])
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-ans = S2Grid  
- size: 72 x 73
-
-{% endhighlight %}
-
-{% highlight matlab %}
-equispacedS2Grid('resolution',5*degree,'maxrho',pi)
-plot(ans)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-ans = S2Grid  
- size: 1 x 824
+S2G = S2Grid  
+ size: 1 x 577
  resolution: 5&deg;
 
 {% endhighlight %}
-
-  {% include inline_image.html file="S2Grid.S2Grid_01.png" %}
-<h2 id="11">See also</h2><p><a href="vector3d.html">vector3d</a>/&lt;vector3d.html vector3d&gt;</p></div></body></html>
+<center>
+{% include inline_image.html file="S2Grid.S2Grid_01.png" %}
+</center><h2 id="9">See also</h2><p><a href="vector3d.vector3d.html">vector3d.vector3d</a> <a href="plotS2Grid.html">plotS2Grid</a> <a href="regularS2Grid.html">regularS2Grid</a> <a href="equispaceS2Grid.html">equispaceS2Grid</a></p></div></body></html>
