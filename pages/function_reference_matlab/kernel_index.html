@@ -1,0 +1,74 @@
+---
+title: ODF Shapes
+last_updated: 17-Oct-2019
+sidebar: function_reference_sidebar
+permalink: kernel_index.html
+folder: function_reference
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ODF Shapes</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-17"><meta name="DC.source" content="script_kernel_index.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit kernel_index into the Matlab commandline">edit page</a></font><div><!--introduction--><p>standard distributions on SO(3)</p><!--/introduction--><h2 id="1">Contents</h2><h2 id="2">Class Description</h2><p>The class <b>kernel</b> is needed in MTEX to define the specific form of unimodal and fibre symmetric ODFs. It has to be passed as an argument when calling the methods <a href="uniformODF.html">uniformODF</a> and <a href="fibreODF.html">fibreODF</a>.</p><h2 id="3">SUB: Defining a kernel function</h2><p>A kernel is defined by specifying its name and its free parameter. Alternatively one can also specify the halfwidth of the kernel. Below you find a list of all kernel functions supported by MTEX.</p>
+{% highlight matlab %}
+psi{1} = AbelPoissonKernel(0.79);
+psi{2} = deLaValeePoussinKernel(13);
+psi{3} = vonMisesFisherKernel(7.5);
+psi{4} = bumpKernel(35*degree);
+psi{5} = DirichletKernel(3);
+psi{6} = GaussWeierstrassKernel(0.07);
+psi{7} = fibreVonMisesFisherKernel(7.2);
+psi{8} = SquareSingularityKernel(0.72);
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: The syntax "deLaValeePoussinKernel" is obsolete. Please use
+"deLaValleePoussinKernel" instead. 
+
+{% endhighlight %}
+<h2 id="4">SUB: Plotting the kernel</h2><p>Using the plot command you can plot the kernel as a function on SO(3) as well as the corresponding PDF, or its Fourier coefficients</p>
+{% highlight matlab %}
+% the kernel on SO(3)
+close; figure('position',[100,100,700,450])
+hold all
+for i = 1:numel(psi)
+  plot(psi{i},'DisplayName',class(psi{i}));
+end
+hold off
+legend(gca,'show')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="kernel_index_01.png" %}
+</center><p>the corresponding PDF</p>
+{% highlight matlab %}
+close; figure('position',[100,100,700,450])
+hold all
+for i = 1:numel(psi)
+  plotPDF(psi{i},'RK','DisplayName',class(psi{i}));
+end
+hold off
+
+ylim([-1,20])
+
+legend(gca,'show')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="kernel_index_02.png" %}
+</center><p>the Fourier coefficients of the kernels</p>
+{% highlight matlab %}
+close; figure('position',[100,100,500,450])
+hold all
+for i = 1:numel(psi)
+  plotFourier(psi{i},'bandwidth',32,'DisplayName',class(psi{i}));
+end
+hold off
+legend(gca,'show')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="kernel_index_03.png" %}
+</center><h2 id="7">Complete Function list</h2><p><table width="90%"><tr><td width="200px"><a href="kernel.    psi = kernel(A).html"><tt>    psi = kernel(A)</tt></a></td><td/></tr></table></p></div></body></html>
