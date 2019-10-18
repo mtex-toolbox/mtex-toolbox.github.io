@@ -21,10 +21,13 @@ rot_ref = rotation.byEuler(10*degree,20*degree,30*degree);
 <p>and pertube it by a rotation about the axis (123) and angle delta. Since multiplication of rotations is not communatativ we have to distinguish between left and right pertubations</p>
 {% highlight matlab %}
 delta = 0.01*degree;
-rot_right = rotation.byAxisAngle(vector3d(1,2,3),delta) * rot_ref;
-rot_left = rot_ref * rotation.byAxisAngle(vector3d(1,2,3),delta);
+rot_123 = rotation.byAxisAngle(vector3d(1,2,3),delta);
+rot_right = rot_123 * rot_ref;
+rot_left = rot_ref * rot_123;
 {% endhighlight %}
-<p>We may now ask for the first order Taylor coefficients of the pertubation as delta goes to zero which we find by the formula</p><p>$$ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta}</p>
+<p>We may now ask for the first order Taylor coefficients of the pertubation as delta goes to zero which we find by the formula</p><p>
+  {% include inline_image.html file="RotationSpinTensor_eq01003992423481972930.png" %}
+</p>
 {% highlight matlab %}
 T_right = (rot_right.matrix - rot_ref.matrix)./delta
 T_left = (rot_left.matrix - rot_ref.matrix)./delta
@@ -74,7 +77,7 @@ S_left_R =
 , 
   {% include inline_image.html file="RotationSpinTensor_eq16890332314244088567.png" %}
  and 
-  {% include inline_image.html file="RotationSpinTensor_eq02767885496838317483.png" %}
+  {% include inline_image.html file="RotationSpinTensor_eq02366758171439524728.png" %}
 . Writing these values as a vector 
   {% include inline_image.html file="RotationSpinTensor_eq12578543884773640078.png" %}
  we obtain for the matrices <tt>S_right_R</tt> and <tt>S_left_L</tt> exactly the rotational axis of our pertubation</p>
@@ -97,7 +100,7 @@ ans = vector3d
   1 2 3
 
 {% endhighlight %}
-<p>For the other two matrices those vectors are related to the rotatinal axis by the reference rotation <tt>rot_ref</tt></p>
+<p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <tt>rot_ref</tt></p>
 {% highlight matlab %}
 rot_ref * vector3d(spinTensor(S_right_L)) * sqrt(14)
 
@@ -117,13 +120,53 @@ ans = vector3d
   1 2 3
 
 {% endhighlight %}
-<h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works only well if the pertupation rotation has small rotational angle. For large pertubations the matrix logarithm</p>
+<h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works only well if the pertupation rotation has small rotational angle. For large pertubations the <a href="rotation.logm.html">matrix logarithm</a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
 {% highlight matlab %}
-% Given a reference rotation rot_ref and a spin vector |s| one could ask
-% for the rotation that is obtained by applying the inifitimal change s to
-% to rot_ref
+S = logm(rot_ref * rot_123,rot_ref)
 
+S = logm(rot_123 * rot_ref,rot_ref,'left')
+{% endhighlight %}
 
+{% highlight plaintext %}
+ 
+S = spinTensor  
+  rank: 2 (3 x 3)
+ 
+ *10^-5
+       0 -13.994   9.329
+  13.994       0  -4.665
+  -9.329   4.665       0
+ 
+S = spinTensor  
+  rank: 2 (3 x 3)
+ 
+ *10^-5
+       0 -13.994   9.329
+  13.994       0  -4.665
+  -9.329   4.665       0
+
+{% endhighlight %}
+<p>Again the entries 
+  {% include inline_image.html file="RotationSpinTensor_eq14915280026360965098.png" %}
+, 
+  {% include inline_image.html file="RotationSpinTensor_eq16890332314244088567.png" %}
+ and 
+  {% include inline_image.html file="RotationSpinTensor_eq02366758171439524728.png" %}
+ exactly coincide with the rotional axis multiplied with the rotational angle</p>
+{% highlight matlab %}
+vector3d(S) * sqrt(14)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = vector3d  
+ size: 1 x 1
+            x           y           z
+  0.000174533 0.000349066 0.000523599
+
+{% endhighlight %}
+<p>More directly this disorientation vector may be computed from two rotations by the command <a href="rotation.log.html">log</a></p>
+{% highlight matlab %}
 rot_123 = rotation.byAxisAngle(vector3d(1,2,3),1)
 log(rot_ref * rot_123,rot_ref) * sqrt(14)
 
@@ -151,46 +194,7 @@ ans = vector3d
   1 2 3
 
 {% endhighlight %}
-<h2 id="8">logarithm to skew symmetric matrix</h2>
-{% highlight matlab %}
-S = logm(rot_ref * rot_123,rot_ref)
-
-vector3d(S) * sqrt(14)
-
-S = logm(rot_123 * rot_ref,rot_ref,'left')
-vector3d(S) * sqrt(14)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-S = spinTensor  
-  rank: 2 (3 x 3)
- 
- *10^-2
-      0 -80.18  53.45
-  80.18      0 -26.73
- -53.45  26.73      0
- 
-ans = vector3d  
- size: 1 x 1
-  x y z
-  1 2 3
- 
-S = spinTensor  
-  rank: 2 (3 x 3)
- 
- *10^-2
-      0 -80.18  53.45
-  80.18      0 -26.73
- -53.45  26.73      0
- 
-ans = vector3d  
- size: 1 x 1
-  x y z
-  1 2 3
-
-{% endhighlight %}
-<h2 id="9">The other way round</h2>
+<h2 id="10">The other way round</h2><p>Given a skew symmetric matrix <b>S</b> or a disorientation vector <b>v</b> we may use the command <a href="vector3d.exp.html">exp</a> to apply this rotational pertubation to a reference rotation <b>rot_ref</b></p>
 {% highlight matlab %}
 S = logm(rot_ref * rot_123,rot_ref);
 rot_ref * rot_123
@@ -264,38 +268,21 @@ ans = rotation
  
 
 {% endhighlight %}
-<h2 id="11">Now the same with orientations</h2>
+<h2 id="12">Disorientations under the presence of crystal symmetry</h2><p>Under the presence of crystal symmetry the order whether a rotational pertupation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
 {% highlight matlab %}
-cs = crystalSymmetry('321')
+cs = crystalSymmetry('321');
 
 % consider an arbitrary rotation
-ori_ref = orientation.byEuler(10*degree,20*degree,30*degree,cs)
+ori_ref = orientation.byEuler(10*degree,20*degree,30*degree,cs);
 
 % next we disturb rot_ref by a rotation about the axis (123)
 mori_123 = orientation.byAxisAngle(Miller(1,2,-3,3,cs),1)
 
 % first we multiply from the right
-ori = ori_ref * mori_123;
+ori = ori_ref * mori_123
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
-cs = crystalSymmetry  
- 
-  symmetry       : 321               
-  a, b, c        : 1, 1, 1           
-  reference frame: X||a*, Y||b, Z||c*
- 
- 
-ori_ref = orientation  
-  size: 1 x 1
-  crystal symmetry : 321, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    10   20   30    0
- 
  
 mori_123 = misorientation  
   size: 1 x 1
@@ -306,9 +293,19 @@ mori_123 = misorientation
      phi1     Phi    phi2    Inv.
   61.8386 40.0064 340.052       0
  
+ 
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : 321, X||a*, Y||b, Z||c*
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  79.3156 43.3785  9.9013       0
+ 
 
 {% endhighlight %}
-
+<p>and compute the scew symmetric pertubation matrices</p>
 {% highlight matlab %}
 S_right_L =  matrix(inv(rot_ref)) * T_right
 S_right_R = T_right * matrix(inv(rot_ref))
@@ -336,7 +333,7 @@ S_left_R =
    -0.2758   -0.0850   -0.0000
 
 {% endhighlight %}
-<h2 id="13">make it a vector</h2>
+<h2 id="14">make it a vector</h2>
 {% highlight matlab %}
 vR1 = vector3d(spinTensor(S_right_L))  *sqrt(14)
 vR2 = inv(rot_ref) * vector3d(spinTensor(S_right_R)) * sqrt(14)
@@ -368,7 +365,7 @@ lR2 = vector3d
   -0.317983   1.03184   3.58248
 
 {% endhighlight %}
-<h2 id="14">logarithm to vector3d</h2>
+<h2 id="15">logarithm to vector3d</h2>
 {% highlight matlab %}
 log(ori_ref * mori_123,ori_ref)
 
@@ -391,7 +388,7 @@ ans = vector3d
   1 2 3
 
 {% endhighlight %}
-<h2 id="15">logarithm to skew symmetric matrix</h2>
+<h2 id="16">logarithm to skew symmetric matrix</h2>
 {% highlight matlab %}
 S = logm(ori_ref * mori_123,ori_ref)
 round(vector3d(S))
@@ -433,7 +430,7 @@ ans = vector3d
   1 2 3
 
 {% endhighlight %}
-<h2 id="16">The other way round</h2>
+<h2 id="17">The other way round</h2>
 {% highlight matlab %}
 S = logm(ori_ref * mori_123,ori_ref);
 ori_ref * mori_123
@@ -519,87 +516,4 @@ ans = orientation
  
 
 {% endhighlight %}
-
-{% highlight matlab %}
-v = vector3d.rand(100);
-v.x = 0;
-v = rotation.rand * v + vector3d.rand;
-
-vsave = v;
-{% endhighlight %}
-
-{% highlight matlab %}
-s = v(1);
-
-% shift to origin
-v = v - s;
-
-% compute normal vector
-[n,~] = eig3(v*v);
-
-
-r = rotation.map(n(1),zvector);
-
-v = r * v;
-
-plot3(v.x,v.y,v.z,'.')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="RotationSpinTensor_01.png" %}
-</center>
-{% highlight matlab %}
-P = [v.x(:),v.y(:)];
-T = delaunayn(P);
-n = size(T,1);
-W = zeros(n,1);
-C=0;
-for m = 1:n
-    sp = P(T(m,:),:);
-    [null,W(m)]=convhulln(sp);
-    C = C + W(m) * mean(sp);
-end
-
-C = vector3d(C(1),C(2),0)./sum(W);
-{% endhighlight %}
-
-{% highlight matlab %}
-hold on
-plot3(C.x,C.y,C.z,'MarkerSize',10)
-hold off
-
-
-
-
-function test
-  % some testing code
-
-  cs = crystalSymmetry('321');
-  ori1 = orientation.rand(cs);
-  ori2 = orientation.rand(cs);
-
-  v = log(ori2,ori1);
-
-  % this should be the same
-  [norm(v),angle(ori1,ori2)] ./ degree
-
-  % and this too
-  [ori1 * orientation.byAxisAngle(v,norm(v)) ,project2FundamentalRegion(ori2,ori1)]
-
-  % in specimen coordinates
-  r = log(ori2,ori1,'left');
-
-  % now we have to multiply from the left
-  [rotation.byAxisAngle(r,norm(v)) * ori1 ,project2FundamentalRegion(ori2,ori1)]
-
-  % the following output should be constant
-  % gO = log(ori1,ori2.symmetrise) % but not true for this
-  % gO = log(ori1.symmetrise,ori2) % true for this
-  %
-  % gO = ori2.symmetrise .* log(ori1,ori2.symmetrise) % true for this
-  % gO = ori2 .* log(ori1.symmetrise,ori2) % true for this
-
-end
-{% endhighlight %}
-<center>
-{% include inline_image.html file="RotationSpinTensor_02.png" %}
-</center></div></body></html>
+</div></body></html>
