@@ -1,6 +1,6 @@
 ---
 title: Fundamental Sector
-last_updated: 11-Oct-2019
+last_updated: 21-Oct-2019
 sidebar: documentation_sidebar
 permalink: FundamentalSector.html
 folder: documentation
@@ -14,11 +14,14 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fundamental Sector</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_FundamentalSector.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit FundamentalSector into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction-->
+      --><title>Fundamental Sector</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-21"><meta name="DC.source" content="script_FundamentalSector.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit FundamentalSector into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO</h2><p>please expand this chapter</p>
 {% highlight matlab %}
 cs = crystalSymmetry('432')
 
-plot(cs.fundamentalSector)
+plot(cs)
+hold on
+plot(cs.fundamentalSector,'color','Red')
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -30,6 +33,86 @@ cs = crystalSymmetry
  
 
 {% endhighlight %}
+<center>
+{% include inline_image.html file="FundamentalSector_01.png" %}
+</center>
+{% highlight matlab %}
+sR = cs.fundamentalSector
+{% endhighlight %}
 
-  {% include inline_image.html file="FundamentalSector_01.png" %}
-</div></body></html>
+{% highlight plaintext %}
+ 
+sR = sphericalRegion  
+ 
+ edge normales: 5
+ 
+
+{% endhighlight %}
+
+{% highlight matlab %}
+sR.N
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = vector3d  
+ size: 1 x 5
+         x         y         z
+  0.707107         0  0.707107
+         0 -0.707107  0.707107
+         0         1         0
+        -1         0         0
+         0         0         1
+
+{% endhighlight %}
+
+{% highlight matlab %}
+v = Miller(2,3,1,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+v = Miller  
+ size: 1 x 1
+ symmetry: 432
+  h 2
+  k 3
+  l 1
+
+{% endhighlight %}
+<p>We may check wether a direction is inside the fundamental region by the command <a href="sphericalRegion.checkInside.html">checkInside</a></p>
+{% highlight matlab %}
+sR.checkInside(v)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+  logical
+   0
+
+{% endhighlight %}
+
+{% highlight matlab %}
+v.project2FundamentalRegion
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = Miller  
+ size: 1 x 1
+ symmetry: 432
+  h -2
+  k  1
+  l  3
+
+{% endhighlight %}
+
+{% highlight matlab %}
+hold on
+plot(v)
+plot(v.project2FundamentalRegion,'MarkerFaceColor','Red')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="FundamentalSector_02.png" %}
+</center></div></body></html>
