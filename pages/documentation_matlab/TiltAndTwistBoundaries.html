@@ -1,6 +1,6 @@
 ---
 title: Tilt and Twist Boundaries
-last_updated: 11-Oct-2019
+last_updated: 22-Oct-2019
 sidebar: documentation_sidebar
 permalink: TiltAndTwistBoundaries.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit TiltAndTwistBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>If a material deforms through the movement of dislocations, re- arrangement of dislocationsto a low-energy configuration may happen during deformation (i.e. in slow, geologic deformation) or or afterwards (in many metals). In any case, the arrangement of dislocation walls can lead to so-called subgrains boundaries. If such a boundary is composed of edge dislocations, it is called a tilt boundary and the rotation axis relating both parts of the grain at each side can be expected to be within the boudnary plane (ideally parallel to the edge dislocation line). If the boundary is composed of screw dislocations, the rotation axis should be normal to the boundary. Between those end-members, there are general boundaries where the rotation axis is not easily realted to the type of dislocations unless further information is available.</p><h2 id="2">Data import and grain detection</h2><p>Lets start by loading an MTEX standard data set, reconstuct grains and grain boundaries</p>
+      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-22"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TiltAndTwistBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>If a material deforms through the movement of dislocations, re- arrangement of dislocationsto a low-energy configuration may happen during deformation (i.e. in slow, geologic deformation) or or afterwards (in many metals). In any case, the arrangement of dislocation walls can lead to so-called subgrains boundaries. If such a boundary is composed of edge dislocations, it is called a tilt boundary and the rotation axis relating both parts of the grain at each side can be expected to be within the boudnary plane (ideally parallel to the edge dislocation line). If the boundary is composed of screw dislocations, the rotation axis should be normal to the boundary. Between those end-members, there are general boundaries where the rotation axis is not easily related to the type of dislocations unless further information is available.</p><h2 id="2">Data import and grain detection</h2><p>Lets start by loading an MTEX standard data set, reconstuct grains and grain boundaries</p>
 {% highlight matlab %}
 % import data
 mtexdata forsterite
@@ -84,9 +84,9 @@ ind = 73;
 plot(grains(ind).boundary,'lineColor','red','lineWidth',3)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_01.png" %}
-<p>Lets restrict ourself to one specific grain and investigate its microtexture in more detail.</p>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_01.png" %}
+</center><p>Lets restrict ourself to one specific grain and investigate its microtexture in more detail.</p>
 {% highlight matlab %}
 % restrict the
 ebsd = ebsd(grains(ind));
@@ -113,7 +113,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_02.png" %}
+</center>
 {% highlight matlab %}
 colorKey.oriRef = mean(ebsd.orientations);
 plot(ebsd,colorKey.orientation2color(ebsd.orientations),'micronbar','off')
@@ -123,9 +125,9 @@ hold on
 plot(grains(ind).boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_02.png" %}
-<h2 id="6">Low angle subgrain boundaries</h2><p>Since we want to investiage the microtexture of the low angle boundaries, let's segment at a small angle</p>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_03.png" %}
+</center><h2 id="6">Low angle subgrain boundaries</h2><p>Since we want to investiage the microtexture of the low angle boundaries, let's segment at a small angle</p>
 {% highlight matlab %}
 [grains, ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',1.5*degree,'boundary','tight')
 
@@ -223,18 +225,18 @@ grains = grain2d
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_03.png" %}
-<h2 id="7">The misorientation axes in crystal coordinats</h2><p>Our next goal is to investiage the misorientation axes at the subgrain boundaries. Lets start by plotting them with respect to the crystal coordinate system while colorizing them according to the misorientation angle.</p>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_04.png" %}
+</center><h2 id="7">The misorientation axes in crystal coordinats</h2><p>Our next goal is to investiage the misorientation axes at the subgrain boundaries. Lets start by plotting them with respect to the crystal coordinate system while colorizing them according to the misorientation angle.</p>
 {% highlight matlab %}
 plot(gbfo.misorientation.axis,gbfo.misorientation.angle./degree,...
   'fundamentalRegion','MarkerEdgeColor','k')
 mtexColorMap white2black
 mtexColorbar('Title','Misorientation angle [\circ]','locacation','southoutside')
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_04.png" %}
-<p>We observe that the misorientation axes have a strong tendency to be perpendicular to [100].</p><h2 id="9">The misorientation axis in specimen coordinats</h2><p>The computation of the misorientation axis in specimen coordinates is a little bit more complicated as it is impossible using only the misorientions. In fact we require the adjecent orientations on both sides of the subgrain boundaries. We can find those by the command</p>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_05.png" %}
+</center><p>We observe that the misorientation axes have a strong tendency to be perpendicular to [100].</p><h2 id="9">The misorientation axis in specimen coordinats</h2><p>The computation of the misorientation axis in specimen coordinates is a little bit more complicated as it is impossible using only the misorientions. In fact we require the adjecent orientations on both sides of the subgrain boundaries. We can find those by the command</p>
 {% highlight matlab %}
 ori_boundary = ebsd('id',gbfo.ebsdId).orientations
 {% endhighlight %}
@@ -266,9 +268,9 @@ plot(axS,gbfo.misorientation.angle./degree,'upper','MarkerEdgeColor','k','Marker
 mtexColorMap white2black
 mtexColorbar('Title','Misorientation angle [\circ]','locacation','southoutside')
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_05.png" %}
-<h2 id="12">Colorize low angle boundaries by misorientation axes</h2>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_06.png" %}
+</center><h2 id="12">Colorize low angle boundaries by misorientation axes</h2>
 {% highlight matlab %}
 % First, we plot some crytsal directions of the grain in a pole figure
 % so we understand the orientation of the grain a little better
@@ -284,9 +286,9 @@ plotPDF(ori,colorKey.orientation2color(ori),h,'MarkerSize',5)
   The option "all" ensures that all data are plotted
 
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_06.png" %}
-<p>now we plot the grain with subboundaries color coded with the direction mapping according to the misorientation axes in crystal coordinates</p>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_07.png" %}
+</center><p>now we plot the grain with subboundaries color coded with the direction mapping according to the misorientation axes in crystal coordinates</p>
 {% highlight matlab %}
 plot(ebsd,colorKey.orientation2color(ori),'faceAlpha',0.3)
 hold on
@@ -297,9 +299,9 @@ plot(gbfo,color,'linewidth',4)
 hold off
 mtexTitle('misor crystal')
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_07.png" %}
-<p>Next we plot the grain with subboundaries colorcoded with the direction mapping according to the misorientation axes in specimen coordinates</p>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_08.png" %}
+</center><p>Next we plot the grain with subboundaries colorcoded with the direction mapping according to the misorientation axes in specimen coordinates</p>
 {% highlight matlab %}
 plot(ebsd,colorKey.orientation2color(ori),'faceAlpha',0.3)
 hold on
@@ -310,6 +312,6 @@ plot(gbfo,color,'linewidth',4)
 hold off
 mtexTitle('misor specimen')
 {% endhighlight %}
-
-  {% include inline_image.html file="TiltAndTwistBoundaries_08.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="TiltAndTwistBoundaries_09.png" %}
+</center></div></body></html>
