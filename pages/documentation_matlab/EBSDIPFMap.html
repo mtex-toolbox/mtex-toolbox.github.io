@@ -1,6 +1,6 @@
 ---
 title: IPF Maps
-last_updated: 11-Oct-2019
+last_updated: 22-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDIPFMap.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>IPF Maps</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_EBSDIPFMap.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDIPFMap into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This section explains various options to customize ipf orientation maps. The mathematics behind the default MTEX color key is explained in detail in the paper <a href="http://dx.doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>. Let us first import some sample EBSD data.</p>
+      --><title>IPF Maps</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-22"><meta name="DC.source" content="script_EBSDIPFMap.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDIPFMap into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This section explains various options to customize ipf orientation maps. The mathematics behind the default MTEX color key is explained in detail in the paper <a href="http://dx.doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>. Let us first import some sample EBSD data.</p>
 {% highlight matlab %}
 close all; plotx2east
 mtexdata forsterite
@@ -62,9 +62,9 @@ ipfKey =
 {% highlight matlab %}
 plot(ipfKey)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_01.png" %}
-<p>In order to apply this color key for colorizing the map we proceed as follows</p>
+<center>
+{% include inline_image.html file="EBSDIPFMap_01.png" %}
+</center><p>In order to apply this color key for colorizing the map we proceed as follows</p>
 {% highlight matlab %}
 % compute the colors
 color = ipfKey.orientation2color(ebsd('Fo').orientations);
@@ -73,26 +73,38 @@ color = ipfKey.orientation2color(ebsd('Fo').orientations);
 close all
 plot(ebsd('Forsterite'),color)
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDIPFMap_02.png" %}
+</center><p>We can also visualize the orientations of the forsterite phase by plotting them into the inverse pole figure map.</p>
+{% highlight matlab %}
+plotIPDF(ebsd('Forsterite').orientations,color,ipfKey.inversePoleFigureDirection,...
+  'MarkerSize',6,'MarkerEdgeColor','k')
+{% endhighlight %}
 
-  {% include inline_image.html file="EBSDIPFMap_02.png" %}
-<h2 id="5">Customizing the color key</h2><p>Orientation color keys usually provide several options to alter the alignment of colors. Let's give some examples</p>
+{% highlight plaintext %}
+  I'm plotting 12500 random orientations out of 152345 given orientations
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDIPFMap_03.png" %}
+</center><h2 id="6">Customizing the color key</h2><p>Orientation color keys usually provide several options to alter the alignment of colors. Let's give some examples</p>
 {% highlight matlab %}
 % we may interchange green and blue by setting
 ipfKey.colorPostRotation = reflection(yvector);
 
 plot(ipfKey)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_03.png" %}
-<p>or cycle of colors red, green, blue by</p>
+<center>
+{% include inline_image.html file="EBSDIPFMap_04.png" %}
+</center><p>or cycle of colors red, green, blue by</p>
 {% highlight matlab %}
 ipfKey.colorPostRotation = rotation.byAxisAngle(zvector,120*degree);
 
 plot(ipfKey)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_04.png" %}
-<p>Furthermore, we can explicitly set the inverse pole figure directions by</p>
+<center>
+{% include inline_image.html file="EBSDIPFMap_05.png" %}
+</center><p>Furthermore, we can explicitly set the inverse pole figure directions by</p>
 {% highlight matlab %}
 ipfKey.inversePoleFigureDirection = zvector;
 
@@ -103,9 +115,9 @@ color = ipfKey.orientation2color(ebsd('Forsterite').orientations);
 close all
 plot(ebsd('Forsterite'),color)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_05.png" %}
-<h2 id="8">Laue or Enantiomorphic symmetry groups</h2><p>As the Euler angles provided by the EBSD measurement devices describe proper rotations only they do not include any improper symmetry operation. For this reason it is entirely justified to consider for the ipf map proper symmetries only. Lets define the corresponding color key</p>
+<center>
+{% include inline_image.html file="EBSDIPFMap_06.png" %}
+</center><h2 id="9">Laue or Enantiomorphic symmetry groups</h2><p>As the Euler angles provided by the EBSD measurement devices describe proper rotations only they do not include any improper symmetry operation. For this reason it is entirely justified to consider for the ipf map proper symmetries only. Lets define the corresponding color key</p>
 {% highlight matlab %}
 % the colore key corresponding to the purely enantiomorphic symmetry group
 ipfKey = ipfHSVKey(ebsd('Forsterite').CS.properGroup)
@@ -129,26 +141,43 @@ ipfKey =
                      antipodal: 0
 
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_06.png" %}
-<p>We oberseve that the key is twice as large and hence allows for a better distinction between orientations.</p>
+<center>
+{% include inline_image.html file="EBSDIPFMap_07.png" %}
+</center><p>We oberseve that the key is twice as large and hence allows for a better distinction between orientations.</p>
 {% highlight matlab %}
 close all
 color = ipfKey.orientation2color(ebsd('Fo').orientations);
 plot(ebsd('Forsterite'),color)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_07.png" %}
-<h2 id="10">Other inverse pole figure keys</h2><p>Beside the default ipf color key MTEX provides the default color keys are they are used by other popular EBSD systems.</p>
+<center>
+{% include inline_image.html file="EBSDIPFMap_08.png" %}
+</center><h2 id="11">Other inverse pole figure keys</h2><p>Beside the default ipf color key MTEX provides the default color keys are they are used by other popular EBSD systems.</p>
 {% highlight matlab %}
 plot(ipfTSLKey(csFo))
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDIPFMap_08.png" %}
-
+<center>
+{% include inline_image.html file="EBSDIPFMap_09.png" %}
+</center>
 {% highlight matlab %}
 plot(ipfHKLKey(csFo))
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDIPFMap_10.png" %}
+</center><p>The user should be aware that for certain symmetry groups these color key lead to color jumps.</p><h2 id="14">Other Visualitations of Color Keys</h2><p>We may also look at the inverse pole figure sphere in 3d. One can nicely observe how the color map follows the given symmetry group.</p>
+{% highlight matlab %}
+close all
+plot(ipfKey,'3d')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDIPFMap_11.png" %}
+</center><p>Alternatively, we may plot the color mapping in 2d together with the symmetry elements</p>
+{% highlight matlab %}
+plot(ipfKey,'complete','upper')
 
-  {% include inline_image.html file="EBSDIPFMap_09.png" %}
-<p>The user should be aware that for certain symmetry groups these color key lead to color jumps.</p></div></body></html>
+hold on
+plot(ipfKey.CS1)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDIPFMap_12.png" %}
+</center></div></body></html>
