@@ -60,13 +60,11 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronbar','off')
 hold on
 plot(oneGrain.boundary,'linewidth',2)
 hold off
-
-% *The Mean Filter*
-%
-% The simplest filter to apply to the orientation data is the
-% |meanFilter| which simply takes the mean of all orientations within a
-% certain neighborhood.
-
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_03.png" %}
+</center><p><b>The Mean Filter</b></p><p>The simplest filter to apply to the orientation data is the <tt>meanFilter</tt> which simply takes the mean of all orientations within a certain neighborhood.</p>
+{% highlight matlab %}
 % define the meanFilter
 F = meanFilter;
 
@@ -82,7 +80,7 @@ plot(oneGrain.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_03.png" %}
+{% include inline_image.html file="EBSDDenoising_04.png" %}
 </center><p>As an additional option, one can specify the size of the neighborhood and weights for the averaging. Let's define a 5x5 window with weights coming from the Gaussian distribution.</p>
 {% highlight matlab %}
 [x,y] = meshgrid(-2:2);
@@ -90,109 +88,6 @@ F.weights = exp(-(x.^2+y.^2)/10);
 
 % smooth the data
 ebsd_smoothed = smooth(ebsd,F)
-
-% plot the smoothed data
-plot(ebsd_smoothed('indexed'),...
-  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
-
-hold on
-plot(oneGrain.boundary,'linewidth',2)
-hold off
-
-% *The Median Filter*
-%
-% The disadvantage of the mean filter is that is smoothes away all subgrain
-% boundaries and is quite sensitive against outliers. A more robust filter
-% which also preserves subgrain boundaries is the median filter
-
-F = medianFilter;
-
-% define the size of the window to be used for finding the median
-F.numNeighbours = 3; % this corresponds to a 7x7 window
-
-% smooth the data
-ebsd_smoothed = smooth(ebsd,F);
-
-% plot the smoothed data
-plot(ebsd_smoothed('indexed'),...
-  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
-
-hold on
-plot(oneGrain.boundary,'linewidth',2)
-hold off
-
-% *The Kuwahara Filer*
-%
-%
-
-F = KuwaharaFilter;
-F.numNeighbours = 5;
-
-% smooth the data
-ebsd_smoothed = smooth(ebsd,F);
-
-% plot the smoothed data
-plot(ebsd_smoothed('indexed'),...
-  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
-
-hold on
-plot(oneGrain.boundary,'linewidth',2)
-hold off
-
-% *The Smoothing Spline Filter*
-%
-% The smoothing spline filter is up to now the only filter that
-% automatically calibrates the smoothing parameter
-
-F = splineFilter;
-
-% smooth the data
-ebsd_smoothed = smooth(ebsd,F);
-
-% plot the smoothed data
-plot(ebsd_smoothed('indexed'),...
-  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
-
-hold on
-plot(oneGrain.boundary,'linewidth',2)
-hold off
-
-% the smoothing parameter determined during smoothing is
-F.alpha
-
-% *The halfquadratic Filter*
-%
-% The halfquadratic filter differs from the smoothing spline filter by the
-% fact that it better preserves inner grain boundaries. We will see this in
-% a later example.
-
-F = halfQuadraticFilter;
-F.alpha = 0.25; %set the smoothing parameter
-
-% smooth the data
-ebsd_smoothed = smooth(ebsd,F);
-
-% plot the smoothed data
-plot(ebsd_smoothed('indexed'),...
-  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
-
-hold on
-plot(oneGrain.boundary,'linewidth',2)
-hold off
-
-
-% *The Infimal Convolution Filter*
-%
-% The infimal convolution filter differs from the smoothing spline filter by the
-% fact that it better preserves inner grain boundaries. We will see this in
-% a later example.
-
-F = infimalConvolutionFilter;
-F.lambda = 0.01; %smoothing parameter for the gradient
-F.mu = 0.005;% smoothing parameter for the hessian
-
-% smooth the data
-ebsd_smoothed = smooth(ebsd,F);
 
 % plot the smoothed data
 plot(ebsd_smoothed('indexed'),...
@@ -214,13 +109,112 @@ ebsd_smoothed = EBSD
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
  Scan unit : um
  
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_05.png" %}
+</center><p><b>The Median Filter</b></p><p>The disadvantage of the mean filter is that is smoothes away all subgrain boundaries and is quite sensitive against outliers. A more robust filter which also preserves subgrain boundaries is the median filter</p>
+{% highlight matlab %}
+F = medianFilter;
+
+% define the size of the window to be used for finding the median
+F.numNeighbours = 3; % this corresponds to a 7x7 window
+
+% smooth the data
+ebsd_smoothed = smooth(ebsd,F);
+
+% plot the smoothed data
+plot(ebsd_smoothed('indexed'),...
+  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
+
+hold on
+plot(oneGrain.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_06.png" %}
+</center><p><b>The Kuwahara Filer</b></p>
+{% highlight matlab %}
+F = KuwaharaFilter;
+F.numNeighbours = 5;
+
+% smooth the data
+ebsd_smoothed = smooth(ebsd,F);
+
+% plot the smoothed data
+plot(ebsd_smoothed('indexed'),...
+  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
+
+hold on
+plot(oneGrain.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_07.png" %}
+</center><p><b>The Smoothing Spline Filter</b></p><p>The smoothing spline filter is up to now the only filter that automatically calibrates the smoothing parameter</p>
+{% highlight matlab %}
+F = splineFilter;
+
+% smooth the data
+ebsd_smoothed = smooth(ebsd,F);
+
+% plot the smoothed data
+plot(ebsd_smoothed('indexed'),...
+  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
+
+hold on
+plot(oneGrain.boundary,'linewidth',2)
+hold off
+
+% the smoothing parameter determined during smoothing is
+F.alpha
+{% endhighlight %}
+
+{% highlight plaintext %}
 ans =
     4.6123
 
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_04.png" %}
-</center><h2 id="5">Interpolating Missing Data</h2><p>The filters above can also be used to interpolate missindexed orientations.</p><p><b>A synthetic example</b></p><p>In the following example, we randomly set 50 percent of the measured orientations to <tt>nan</tt>.</p>
+{% include inline_image.html file="EBSDDenoising_08.png" %}
+</center><p><b>The halfquadratic Filter</b></p><p>The halfquadratic filter differs from the smoothing spline filter by the fact that it better preserves inner grain boundaries. We will see this in a later example.</p>
+{% highlight matlab %}
+F = halfQuadraticFilter;
+F.alpha = 0.25; %set the smoothing parameter
+
+% smooth the data
+ebsd_smoothed = smooth(ebsd,F);
+
+% plot the smoothed data
+plot(ebsd_smoothed('indexed'),...
+  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
+
+hold on
+plot(oneGrain.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_09.png" %}
+</center><p><b>The Infimal Convolution Filter</b></p><p>The infimal convolution filter differs from the smoothing spline filter by the fact that it better preserves inner grain boundaries. We will see this in a later example.</p>
+{% highlight matlab %}
+F = infimalConvolutionFilter;
+F.lambda = 0.01; %smoothing parameter for the gradient
+F.mu = 0.005;% smoothing parameter for the hessian
+
+% smooth the data
+ebsd_smoothed = smooth(ebsd,F);
+
+% plot the smoothed data
+plot(ebsd_smoothed('indexed'),...
+  ipfKey.orientation2color(ebsd_smoothed('indexed').orientations),'micronbar','off')
+
+hold on
+plot(oneGrain.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_10.png" %}
+</center><h2 id="11">Interpolating Missing Data</h2><p>The filters above can also be used to interpolate missindexed orientations.</p><p><b>A synthetic example</b></p><p>In the following example, we randomly set 50 percent of the measured orientations to <tt>nan</tt>.</p>
 {% highlight matlab %}
 ebsdNaN = ebsd;
 
@@ -235,7 +229,7 @@ plot(oneGrain.boundary,'micronbar','off')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_05.png" %}
+{% include inline_image.html file="EBSDDenoising_11.png" %}
 </center><p>By default, all orientations that are set to <tt>nan</tt> are interpolated.</p>
 {% highlight matlab %}
 % interpolate the missing data with the smoothing spline filter
@@ -247,7 +241,7 @@ plot(oneGrain.boundary)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_06.png" %}
+{% include inline_image.html file="EBSDDenoising_12.png" %}
 </center><p>We may plot the misorientation angle between the interpolated orientations and the measured orientations</p>
 {% highlight matlab %}
 omega = angle(ebsdNaN_smoothed('indexed').orientations, ...
@@ -258,10 +252,11 @@ mtexColorbar
 hold on
 plot(oneGrain.boundary)
 hold off
-
-% *A real world example*
-% Let's consider a subset of the
-
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_13.png" %}
+</center><p><b>A real world example</b> Let's consider a subset of the</p>
+{% highlight matlab %}
 close all; plotx2east
 mtexdata forsterite
 ebsd = ebsd(inpolygon(ebsd,[10 4 5 3]*10^3));
@@ -304,7 +299,7 @@ ebsd = EBSD
 
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_07.png" %}
+{% include inline_image.html file="EBSDDenoising_14.png" %}
 </center><p>Using the option <tt>fill</tt> the command <tt>smooth</tt> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <tt>grain</tt> variable has to be passed as an additional argument.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
@@ -324,7 +319,7 @@ plot(grains.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_08.png" %}
+{% include inline_image.html file="EBSDDenoising_15.png" %}
 </center><p>In order to visualize the orientation gradient within the grains, we plot the misorientation to the meanorientation. We observe that the mis2mean varies smoothly also within the regions of not indexed orientations.</p>
 {% highlight matlab %}
 % plot mis2mean for all phases
@@ -347,7 +342,7 @@ plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_09.png" %}
+{% include inline_image.html file="EBSDDenoising_16.png" %}
 </center><p>For comparison</p>
 {% highlight matlab %}
 ipfKey.oriRef = grains(ebsd('fo').grainId).meanOrientation;
@@ -368,7 +363,7 @@ plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_10.png" %}
+{% include inline_image.html file="EBSDDenoising_17.png" %}
 </center><p>If no <tt>grain</tt> variable is passed to the smoothing command the not indexed pixels are assigned to the nearest neighbor.</p>
 {% highlight matlab %}
 ebsd_smoothed = smooth(ebsd('indexed'),F,'fill');
@@ -385,5 +380,5 @@ plot(grains.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_11.png" %}
+{% include inline_image.html file="EBSDDenoising_18.png" %}
 </center></div></body></html>
