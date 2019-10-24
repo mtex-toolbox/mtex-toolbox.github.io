@@ -31,8 +31,6 @@ ebsd = smooth(ebsd,F,'fill',grains);
 {% endhighlight %}
 
 {% highlight plaintext %}
- loading data ...
- saving data to /home/hielscher/mtex/master/data/olivine.mat
  
 ebsd = EBSD  
  
@@ -45,6 +43,7 @@ ebsd = EBSD
  Properties: ci, fit, iq, sem_signal, unknown1, unknown2, unknown3, unknown4, x, y
  Scan unit : um
  
+ denoising EBSD data: 23%
  denoising EBSD data: 100%
 
 {% endhighlight %}
@@ -298,9 +297,7 @@ polarizer = vector3d.X;
 % the thickness of the thin section
 thickness = 22800;
 {% endhighlight %}
-<center>
-{% include inline_image.html file="BirefringenceDemo_06.png" %}
-</center><p>As usal we have two options: Either we transform the refractive index tensor into specimen coordinates or we transform the polarization direction and the propagation directions into crystal coordinates. Lets start with the first option:</p>
+<p>As usal we have two options: Either we transform the refractive index tensor into specimen coordinates or we transform the polarization direction and the propagation directions into crystal coordinates. Lets start with the first option:</p>
 {% highlight matlab %}
 % extract the olivine orientations
 ori = ebsd('olivine').orientations;
@@ -316,7 +313,7 @@ rgb = rISpecimen.spectralTransmission(vprop,thickness,'polarizationDirection',po
 plot(ebsd('olivine'),rgb)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BirefringenceDemo_07.png" %}
+{% include inline_image.html file="BirefringenceDemo_06.png" %}
 </center><p>and compare it with option two:</p>
 {% highlight matlab %}
 % transfom the propation direction and the polarizer direction into a list
@@ -331,7 +328,7 @@ rgb = rI.spectralTransmission(vprop_crystal,thickness,'polarizationDirection',po
 plot(ebsd('olivine'),rgb)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BirefringenceDemo_08.png" %}
+{% include inline_image.html file="BirefringenceDemo_07.png" %}
 </center><h2 id="20">Spectral Transmission as a color key</h2><p>The above computations can be automized by defining a spectral transmission color key.</p>
 {% highlight matlab %}
 % define the colorKey
@@ -348,13 +345,13 @@ rgb = colorKey.orientation2color(ori);
 plot(ebsd('olivine'), rgb)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BirefringenceDemo_09.png" %}
+{% include inline_image.html file="BirefringenceDemo_08.png" %}
 </center><p>As usual we me visualize the color key as a colorization of the orientation space, e.g., by plotting it in sigma sections:</p>
 {% highlight matlab %}
 plot(colorKey,'sigma')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BirefringenceDemo_10.png" %}
+{% include inline_image.html file="BirefringenceDemo_09.png" %}
 </center><h2 id="22">Circular Polarizer</h2><p>In order to simulate we a circular polarizer we simply set the polarizer direction to empty, i.e.</p>
 {% highlight matlab %}
 colorKey.polarizer = [];
@@ -365,7 +362,7 @@ rgb = colorKey.orientation2color(ori);
 plot(ebsd('olivine'), rgb)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BirefringenceDemo_11.png" %}
+{% include inline_image.html file="BirefringenceDemo_10.png" %}
 </center><h2 id="23">Illustrating the effect of rotating polarizer and analyser simultanously</h2>
 {% highlight matlab %}
 colorKey.polarizer = vector3d.X;
@@ -396,5 +393,5 @@ for omega = 0:stepSize:90-stepSize
 end
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BirefringenceDemo_12.png" %}
+{% include inline_image.html file="BirefringenceDemo_11.png" %}
 </center></div></body></html>
