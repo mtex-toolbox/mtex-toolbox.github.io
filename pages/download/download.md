@@ -22,17 +22,17 @@ In case you experience any problems have a look at our [trouble shooting page]()
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2/mtex-5.2.zip) ||| October 2019 ||| plasticity tensors, [changelog](files/doc/changelog.html) ||| 0
-[**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](files/doc/changelog.html) ||| 6845
+[**mtex-5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2/mtex-5.2.zip) ||| October 2019 ||| plasticity tensors, [changelog](changelog.html) ||| 0
+[**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](changelog.html) ||| 6845
 [**MTEXGUI-2.4.zip**](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/327848702_MTEX_GUI_for_EBSD_and_Pole_Figure_Plotting_Rev_24/data/5ba97639299bf13e604a3c43/Annotate2p4.zip) ||| Sep 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
-[**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions, [changelog](files/doc/changelog.html) ||| 1901
+[**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions, [changelog](changelog.html) ||| 1901
 [**MTEXannotateGUI.zip**](https://groups.google.com/group/mtexmail/attach/e87c480486f4/MTEXannotateGUI.zip?part=0.1&authuser=0) ||| February 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
-[**mtex-4.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.5.2/mtex-4.5.2.zip) ||| November 2017 ||| 3d orientation and ODF plots, [changelog](files/doc/changelog.html) ||| 4420
-[**mtex-4.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.4.0/mtex-4.4.0.zip) ||| January 2017 ||| Slip Systems, Taylor calculation, [changelog](files/doc/changelog.html) ||| 678
-[**mtex-4.3.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.3.2/mtex-4.3.2.zip) ||| July 2016 ||| GND calculation, [changelog](files/doc/changelog.html) ||| 1662
-[**mtex-4.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.2.1/mtex-4.2.1.zip) ||| November 2015 ||| introduces triple points, [changelog](files/doc/changelog.html) ||| 1831
-[**mtex-4.1.4.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.1.4/mtex-4.1.4.zip) ||| September 2015    ||| major release with many new features and syntax changes, [changelog](files/doc/changelog.html) ||| 1132
-[__mtex-4.0.23.zip__](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.0.23/mtex-4.0.23.zip) ||| April 2015    ||| major release with many new features and syntax changes, [changelog](files/doc/changelog.html) ||| 1076
+[**mtex-4.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.5.2/mtex-4.5.2.zip) ||| November 2017 ||| 3d orientation and ODF plots, [changelog](changelog.html) ||| 4420
+[**mtex-4.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.4.0/mtex-4.4.0.zip) ||| January 2017 ||| Slip Systems, Taylor calculation, [changelog](changelog.html) ||| 678
+[**mtex-4.3.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.3.2/mtex-4.3.2.zip) ||| July 2016 ||| GND calculation, [changelog](changelog.html) ||| 1662
+[**mtex-4.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.2.1/mtex-4.2.1.zip) ||| November 2015 ||| introduces triple points, [changelog](changelog.html) ||| 1831
+[**mtex-4.1.4.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.1.4/mtex-4.1.4.zip) ||| September 2015    ||| major release with many new features and syntax changes, [changelog](changelog.html) ||| 1132
+[__mtex-4.0.23.zip__](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.0.23/mtex-4.0.23.zip) ||| April 2015    ||| major release with many new features and syntax changes, [changelog](changelog.html) ||| 1076
 [**mtex-3.5.0.zip**](http://mtex.googlecode.com/files/mtex-3.5.0.zip) ||| December 2013   ||| minor release, [changelog]()||| 2398
 [**mtex-3.4.2.zip**](http://mtex.googlecode.com/files/mtex-3.4.2.zip) ||| June 2013       ||| minor release, [changelog]()||| 1660
 
