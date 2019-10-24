@@ -43,10 +43,6 @@ S. J. Laine, J. F. Einsle, Paul A. Midgley, C. M. F. Rae, R. Hielscher: [Proceed
 
   [script files](https://github.com/mtex-toolbox/mtex-paper/tree/master/orientationsPerfectlyColored)
 
-  script files: [section1.m](files/matlab/ipfColoring/section1.m), [section2.m](files/matlab/ipfColoring/section2.m), [section3_1.m](files/matlab/ipfColoring/section3_1.m), [section3_2.m](files/matlab/ipfColoring/section3_2.m),
-  [appendix.m](files/matlab/ipfColoring/appendix.m), [data.zip](files/matlab/ipfColoring/data.zip)
-
-
 #### 2014
 
 * **Descriptive tools for the analysis of texture projects with large datasets
