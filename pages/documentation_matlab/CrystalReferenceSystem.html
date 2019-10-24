@@ -1,6 +1,6 @@
 ---
 title: The Crystal Reference System
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: CrystalReferenceSystem.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Crystal Reference System</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_CrystalReferenceSystem.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalReferenceSystem into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Commonly the crystal coordinate system is defined by the crystallographic axes a, b, c. The length [a,b,c] and the angles [alpha,beta,gamma] between theses axes needs to be specified when defining a variable of type <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>.</p>
+      --><title>The Crystal Reference System</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_CrystalReferenceSystem.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalReferenceSystem into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Commonly the crystal coordinate system is defined by the crystallographic axes a, b, c. The length [a,b,c] and the angles [alpha,beta,gamma] between theses axes needs to be specified when defining a variable of type <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('triclinic',[1,2.2,3.1],[80*degree,85*degree,95*degree])
 {% endhighlight %}
@@ -41,9 +41,9 @@ annotate(cs_x2a.bAxis,'MarkerFaceColor','r','label','b','backgroundColor','w')
 annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y','backgroundColor','w')
 annotate(-vector3d.X,'MarkerFaceColor','green','label','-x','backgroundColor','w')
 {% endhighlight %}
-
-  {% include inline_image.html file="CrystalReferenceSystem_01.png" %}
-<p>In contrast the following command alignes the y axes to the a axes and the z axes to the c axes.</p>
+<center>
+{% include inline_image.html file="CrystalReferenceSystem_01.png" %}
+</center><p>In contrast the following command alignes the y axes to the a axes and the z axes to the c axes.</p>
 {% highlight matlab %}
 cs_y2a = crystalSymmetry('321',[1.7,1.7,1.4],'y||a','Z||c');
 plot(cs_y2a)
@@ -52,9 +52,9 @@ annotate(cs_y2a.bAxis,'MarkerFaceColor','r','label','b','backgroundColor','w')
 annotate(-vector3d.Y,'MarkerFaceColor','green','label','-y','backgroundColor','w')
 annotate(-vector3d.X,'MarkerFaceColor','green','label','-x','backgroundColor','w')
 {% endhighlight %}
-
-  {% include inline_image.html file="CrystalReferenceSystem_02.png" %}
-<p>The only difference between the above two plots is the position of the x and y axes. The reason is that visualizations relative to the crystal reference system, e.g., inverse pole figures, are in MTEX aligned on the screen according to the b-axis.</p><p>This on secreen alignment can be easily modified by</p>
+<center>
+{% include inline_image.html file="CrystalReferenceSystem_02.png" %}
+</center><p>The only difference between the above two plots is the position of the x and y axes. The reason is that visualizations relative to the crystal reference system, e.g., inverse pole figures, are in MTEX aligned on the screen according to the b-axis.</p><p>This on secreen alignment can be easily modified by</p>
 {% highlight matlab %}
 % change on screen alignment
 plota2east
@@ -69,9 +69,9 @@ annotate(-vector3d.X,'MarkerFaceColor','green','label','-x','backgroundColor','w
 % set old default back
 plotb2east
 {% endhighlight %}
-
-  {% include inline_image.html file="CrystalReferenceSystem_03.png" %}
-<p>It should be stressed that the alignment between the Eucledean crystal axes x, y, z and the crystallographic axes a, b and c is crucial for many computations. The difference between both setups becomes more vsible if we plot crystal shapes in the x, y, z coordinate system</p>
+<center>
+{% include inline_image.html file="CrystalReferenceSystem_03.png" %}
+</center><p>It should be stressed that the alignment between the Eucledean crystal axes x, y, z and the crystallographic axes a, b and c is crucial for many computations. The difference between both setups becomes more vsible if we plot crystal shapes in the x, y, z coordinate system</p>
 {% highlight matlab %}
 cS_x2a = crystalShape.quartz(cs_x2a)
 
@@ -91,9 +91,9 @@ cS_x2a = crystalShape
  faces: 30
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CrystalReferenceSystem_04.png" %}
-
+<center>
+{% include inline_image.html file="CrystalReferenceSystem_04.png" %}
+</center>
 {% highlight matlab %}
 cS_y2a = crystalShape.quartz(cs_y2a)
 
@@ -112,9 +112,9 @@ cS_y2a = crystalShape
  faces: 30
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CrystalReferenceSystem_05.png" %}
-<p>Most important is the difference if Euler angles are used to describe orientation. Lets consider the following two orientations</p>
+<center>
+{% include inline_image.html file="CrystalReferenceSystem_05.png" %}
+</center><p>Most important is the difference if Euler angles are used to describe orientation. Lets consider the following two orientations</p>
 {% highlight matlab %}
 ori_x2a = orientation.byEuler(0,0,0,cs_x2a)
 ori_y2a = orientation.byEuler(0,0,0,cs_y2a)
@@ -153,9 +153,11 @@ plotPDF(ori_y2a,Miller(1,0,0,cs_y2a),'MarkerSize',20)
 annotate([xvector,yvector],'label',{'x','y'},'backgroundColor','w')
 drawNow(gcm,'figSize','medium')
 {% endhighlight %}
-
-  {% include inline_image.html file="CrystalReferenceSystem_06.png" %}
-<p>We observe that both pole figures are rotated with respect to each other by 30 degree. Indeed computing the misorientation angle between both orientations gives us</p>
+<center>
+{% include inline_image.html file="CrystalReferenceSystem_06.png" %}
+</center><center>
+{% include inline_image.html file="CrystalReferenceSystem_07.png" %}
+</center><p>We observe that both pole figures are rotated with respect to each other by 30 degree. Indeed computing the misorientation angle between both orientations gives us</p>
 {% highlight matlab %}
 angle(ori_x2a, ori_y2a) ./ degree
 {% endhighlight %}

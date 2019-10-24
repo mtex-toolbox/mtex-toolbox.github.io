@@ -1,6 +1,6 @@
 ---
 title: Detection of Sample Symmetry
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: DetectionOfSampleSymmetry.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit DetectionOfSampleSymmetry into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p>
+      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit DetectionOfSampleSymmetry into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic');
 SS = specimenSymmetry('222');
@@ -49,9 +49,9 @@ odf = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_01.png" %}
-<h2 id="2">Reconstruct an ODF from simulated EBSD data</h2><p>Next we simulated some EBSD data, rotate them and estimate an ODF from the individual orientations.</p>
+<center>
+{% include inline_image.html file="DetectionOfSampleSymmetry_01.png" %}
+</center><h2 id="2">Reconstruct an ODF from simulated EBSD data</h2><p>Next we simulated some EBSD data, rotate them and estimate an ODF from the individual orientations.</p>
 {% highlight matlab %}
 % define a sample rotation
 %rot = rotation.byEuler(0*degree,0*degree,1*degree);
@@ -70,6 +70,7 @@ figure, plotPDF(odf_est,h,'antipodal',8,'silent');
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Rotation does not respect symmetry! 
  
 ori = orientation  
   size: 1 x 1000
@@ -87,9 +88,9 @@ odf_est = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
-<h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p>
+<center>
+{% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
+</center><h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p>
 {% highlight matlab %}
 [odf_corrected,rot_inv] = centerSpecimen(odf_est);
 
@@ -109,18 +110,18 @@ ans =
    15.6088
 
 {% endhighlight %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
-<h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <tt>centerSpecimen</tt> to an ODF estimated from pole figure data. Lets start by importing them</p>
+<center>
+{% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
+</center><h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <tt>centerSpecimen</tt> to an ODF estimated from pole figure data. Lets start by importing them</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'PoleFigure','aachen_exp.EXP');
 pf = PoleFigure.load(fname);
 
 plot(pf,'silent')
 {% endhighlight %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_04.png" %}
-<p>In a second step we compute an ODF from the pole figure data</p>
+<center>
+{% include inline_image.html file="DetectionOfSampleSymmetry_04.png" %}
+</center><p>In a second step we compute an ODF from the pole figure data</p>
 {% highlight matlab %}
 odf = calcODF(pf,'silent')
 
@@ -140,9 +141,9 @@ odf = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}
-<p>Finally, we detect the orthotropic symmetry axes a1, a2, a3 by</p>
+<center>
+{% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}
+</center><p>Finally, we detect the orthotropic symmetry axes a1, a2, a3 by</p>
 {% highlight matlab %}
 [~,~,a1,a2] = centerSpecimen(odf,yvector)
 a3 = cross(a1,a2)
@@ -173,8 +174,6 @@ a3 = vector3d
   -0.000162903  -0.00325478     0.999995
 
 {% endhighlight %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_06.png" %}
-
-  {% include inline_image.html file="DetectionOfSampleSymmetry_07.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="DetectionOfSampleSymmetry_06.png" %}
+</center></div></body></html>

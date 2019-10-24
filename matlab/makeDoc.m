@@ -23,16 +23,15 @@ setMTEXpref('FontSize',13)
 setMTEXpref('figSize',0.5)
 plotx2east
 
-global mtex_progress;
-mtex_progress = false;
 setMTEXpref('generatingHelpMode',true);
 set(0,'FormatSpacing','compact')
 set(0,'DefaultFigureColor','white');
 
-options.tempDir = fullfile(pwd,'tmp');
-options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
-dir1 = fullfile(pwd,'..','pages','function_reference_matlab');
-dir2 = fullfile(pwd,'..','pages','documentation_matlab');
+tmpDir = fullfile(pwd,'tmp');
+stylesheet = fullfile(pwd,'web.xsl');
+
+funRefOut = fullfile(pwd,'..','pages','function_reference_matlab');
+docOut = fullfile(pwd,'..','pages','documentation_matlab');
 
 %% DocFiles
 mtexFunctionFiles = [...
@@ -45,66 +44,57 @@ mtexFunctionFiles = [...
   DocFile( fullfile(mtex_path,'geometry')) ...
   DocFile( fullfile(mtex_path,'interfaces')) ...
   DocFile( fullfile(mtex_path,'tools')) ...
-  DocFile( fullfile(mtex_path,'doc2','FunctionReference'));];
+  DocFile( fullfile(mtex_path,'doc','FunctionReference'));];
 
 %mtexFunctionFiles = exclude(mtexFunctionFiles,'Patala');
 
-mtexDocFiles = DocFile( fullfile(mtex_path,'doc2'));
+mtexDocFiles = DocFile( fullfile(mtex_path,'doc'));
 mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html','FunctionReference');
 
 mtexHelpFiles = [mtexFunctionFiles,mtexDocFiles];
 
-
 %% Publish Function Reference
 
-options.outputDir = dir1;
-options.evalCode = true;
-options.force = false;
-publish(mtexFunctionFiles,options);
+publish(mtexFunctionFiles,'outDir',funRefOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
 
 % add frontmatter to html files
-files = dir(fullfile(options.outputDir, '*.html'));
+files = dir(fullfile(funRefOut, '*.html'));
 for idx = 1:length(files)
-  add_frontmatter(options.outputDir, files(idx), 'function_reference');
+  add_frontmatter(funRefOut, files(idx), 'function_reference');
 end
 
-move_images(options.outputDir);
-
+move_images(funRefOut);
 
 %% Publish Doc
 
-options.outputDir = dir2;
-options.evalCode = true;
-options.force = false;
-publish(mtexDocFiles,options);
-%copy(mtexDocFiles,fullfile(mtex_path,'examples','UsersGuide'));
+publish(mtexDocFiles,'outDir',docOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
 
 % add frontmatter to html files
-files = dir(fullfile(options.outputDir, '*.html'));
+files = dir(fullfile(docOut, '*.html'));
 for idx = 1:length(files)
-  add_frontmatter(options.outputDir, files(idx), 'documentation');
+  add_frontmatter(docOut, files(idx), 'documentation');
 end
 
-move_images(options.outputDir);
+move_images(docOut);
 
 %%
 if check_option(varargin,'checkLinks')
-  deadlink(mtexDocFiles,{dir1,dir2});
+  deadlink(mtexDocFiles,{funRefOut,docOut});
 end
 
 %% make help toc
 
-makeHelpToc(mtexHelpFiles,'Documentation','FunctionMainFile','FunctionReference','outputDir','.');
-xml2yml('helptoc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
+makeHelpToc(mtexHelpFiles,'Documentation','doc.xml');
+xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
 
-makeHelpToc(mtexHelpFiles,'FunctionReference','outputDir','.');
-xml2yml('helptoc.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
+makeHelpToc(mtexHelpFiles,'FunctionReference','funcRef.xml');
+xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
 
 
 %% set back mtex options
 
 setMTEXpref('generatingHelpMode',false);
-mtex_progress = true;
+
 
 end
 

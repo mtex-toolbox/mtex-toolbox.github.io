@@ -1,6 +1,6 @@
 ---
 title: S2FunHarmonic
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunHarmonicDef.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_S2FunHarmonicDef.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunHarmonicDef into the Matlab commandline">edit page</a></font><div><!--introduction--><p>S2FunHarmonic is the heart of S2Fun, therefore much effort is put into its functionality.</p><!--/introduction--><h2 id="1">Contents</h2><p>In the first part we will cover how to deal with univariate functions of the form</p><p>
+      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_S2FunHarmonicDef.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit S2FunHarmonicDef into the Matlab commandline">edit page</a></font><div><!--introduction--><p>S2FunHarmonic is the heart of S2Fun, therefore much effort is put into its functionality.</p><!--/introduction--><h2 id="1">Contents</h2><p>In the first part we will cover how to deal with univariate functions of the form</p><p>
   {% include inline_image.html file="S2FunHarmonicDef_eq12688510093716008662.png" %}
 </p><h2 id="3">Defining an univariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
 {% highlight matlab %}
@@ -27,9 +27,9 @@ y = S2Fun.smiley(nodes);
 % plot the discrete data
 plot(nodes,y)
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_01.png" %}
-<p>Finally the actual command to get <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_01.png" %}
+</center><p>Finally the actual command to get <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
 {% highlight matlab %}
 sF1 = interp(nodes, y, 'harmonicApproximation')
 % plot the spherical function
@@ -43,9 +43,9 @@ sF1 = S2FunHarmonic
  antipodal: true
 
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_02.png" %}
-<div><ul><li>The <tt>bandwidth</tt> property shows the maximal polynomial degree of the function.Internally for a given bandwidth there are stored 
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_02.png" %}
+</center><div><ul><li>The <tt>bandwidth</tt> property shows the maximal polynomial degree of the function.Internally for a given bandwidth there are stored 
   {% include inline_image.html file="S2FunHarmonicDef_eq07204186098443340480.png" %}
  Fourier-coefficients.</li><li>The <tt>antipodal</tt> flag shows that 
   {% include inline_image.html file="S2FunHarmonicDef_eq05142536305060616777.png" %}
@@ -57,9 +57,9 @@ f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
 % plot the function at discrete points
 plot(nodes,f(nodes))
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_03.png" %}
-<p>Now we can call the quadrature command to get <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_03.png" %}
+</center><p>Now we can call the quadrature command to get <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
 {% highlight matlab %}
 sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150)
 
@@ -72,9 +72,9 @@ sF2 = S2FunHarmonic
  bandwidth: 150
 
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_04.png" %}
-<div><ul><li>If we would leave the <tt>'bandwidth'</tt> option empty the default bandwidth would be considered, which is 128.</li><li>The quadrature is faster than the approximation, because it does not have to solve a system of equations. But the knowledge of the function handle is also a strong requirement.</li><li>For more options <a href="S2FunHarmonic.quadrature.html">see here</a>.</li></ul></div><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them as a column vector to the constructor of <tt>S2FunHarmonic</tt></p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_04.png" %}
+</center><div><ul><li>If we would leave the <tt>'bandwidth'</tt> option empty the default bandwidth would be considered, which is 128.</li><li>The quadrature is faster than the approximation, because it does not have to solve a system of equations. But the knowledge of the function handle is also a strong requirement.</li><li>For more options <a href="S2FunHarmonic.quadrature.html">see here</a>.</li></ul></div><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them as a column vector to the constructor of <tt>S2FunHarmonic</tt></p>
 {% highlight matlab %}
 fhat = rand(25, 1);
 sF3 = S2FunHarmonic(fhat)
@@ -90,46 +90,46 @@ sF3 = S2FunHarmonic
 {% highlight matlab %}
 plot(sF1);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_05.png" %}
-<div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_05.png" %}
+</center><div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
 {% highlight matlab %}
 contour(sF1, 'LineWidth', 2);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_06.png" %}
-<p>color plot without the contour lines</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_06.png" %}
+</center><p>color plot without the contour lines</p>
 {% highlight matlab %}
 pcolor(sF1);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_07.png" %}
-<p>3D plot of a sphere colored accordingly to the function values.</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_07.png" %}
+</center><p>3D plot of a sphere colored accordingly to the function values.</p>
 {% highlight matlab %}
 plot3d(sF2);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_08.png" %}
-<p>3D plot where the radius of the sphere is transformed according to the function values</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_08.png" %}
+</center><p>3D plot where the radius of the sphere is transformed according to the function values</p>
 {% highlight matlab %}
 surf(sF2);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_09.png" %}
-<p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_09.png" %}
+</center><p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
 {% highlight matlab %}
 plotSection(sF2, zvector);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_10.png" %}
-<p>plotting the Fourier coefficients</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_10.png" %}
+</center><p>plotting the Fourier coefficients</p>
 {% highlight matlab %}
 plotSpektra(sF1);
 set(gca,'FontSize', 20);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_11.png" %}
-<h2 id="20">Structural conventions of the input and output of multivariate S2FunHarmonic</h2><p>In this part we deal with multivariate functions of the form</p><p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_11.png" %}
+</center><h2 id="20">Structural conventions of the input and output of multivariate S2FunHarmonic</h2><p>In this part we deal with multivariate functions of the form</p><p>
   {% include inline_image.html file="S2FunHarmonicDef_eq02005284333143081024.png" %}
 .</p><div><ul><li>the structure of the nodes is always interpreted as a column vector</li><li>the node index is the first dimension</li><li>the dimensions of the <tt>S2FunHarmonic</tt> itself is counted from the second dimension</li></ul></div><p>For example we got four nodes 
   {% include inline_image.html file="S2FunHarmonicDef_eq17926179084054814593.png" %}
@@ -154,7 +154,9 @@ set(gca,'FontSize', 20);
 nodes = equispacedS2Grid('points', 1e5);
 nodes = nodes(:);
 {% endhighlight %}
-<p>Next we define function values for the vertices</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_12.png" %}
+</center><p>Next we define function values for the vertices</p>
 {% highlight matlab %}
 y = [S2Fun.smiley(nodes), (nodes.x.*nodes.y).^(1/4)];
 {% endhighlight %}
@@ -228,43 +230,43 @@ min(sF3);
 {% highlight matlab %}
 plot(sF1);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_12.png" %}
-<div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_13.png" %}
+</center><div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
 {% highlight matlab %}
 contour(sF2, 'LineWidth', 2);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_13.png" %}
-<p>color plot without the contour lines</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_14.png" %}
+</center><p>color plot without the contour lines</p>
 {% highlight matlab %}
 pcolor(sF3);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_14.png" %}
-<p>3D plot of a sphere colored accordingly to the function values.</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_15.png" %}
+</center><p>3D plot of a sphere colored accordingly to the function values.</p>
 {% highlight matlab %}
 plot3d(sF2);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_15.png" %}
-<p>3D plot where the radius of the sphere is transformed according to the function values</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_16.png" %}
+</center><p>3D plot where the radius of the sphere is transformed according to the function values</p>
 {% highlight matlab %}
 surf(sF3);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_16.png" %}
-<p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_17.png" %}
+</center><p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
 {% highlight matlab %}
 plotSection(sF1, zvector);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_17.png" %}
-<p>plotting the Fourier coefficients</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_18.png" %}
+</center><p>plotting the Fourier coefficients</p>
 {% highlight matlab %}
 plotSpektra(sF2);
 set(gca,'FontSize', 20);
 {% endhighlight %}
-
-  {% include inline_image.html file="S2FunHarmonicDef_18.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="S2FunHarmonicDef_19.png" %}
+</center></div></body></html>

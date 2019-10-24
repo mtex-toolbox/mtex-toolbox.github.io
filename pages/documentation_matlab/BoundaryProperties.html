@@ -1,6 +1,6 @@
 ---
 title: Grain Boundary Properties
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryProperties.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
+      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryProperties into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins
@@ -54,9 +54,9 @@ ebsd = EBSD
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryProperties_01.png" %}
-<h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary.grainBoundary.html">grainBoundary</a> contains the following properties</p><p>
+<center>
+{% include inline_image.html file="BoundaryProperties_01.png" %}
+</center><h2 id="2">Property overview</h2><p>A variable of type <a href="grainBoundary.grainBoundary.html">grainBoundary</a> contains the following properties</p><p>
    <table class="usertable">
       <tr>
          <td>
@@ -227,9 +227,9 @@ hold on
 plot(grains(21),'FaceColor','LightCoral')
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryProperties_02.png" %}
-<h2 id="7">Grain boundary misorientations</h2><p>The grain boundary misorientation defined as the misorientation between the orientations corresponding to ids in first and second column of ebsdId, i.e. following two commands should give the same result</p>
+<center>
+{% include inline_image.html file="BoundaryProperties_02.png" %}
+</center><h2 id="7">Grain boundary misorientations</h2><p>The grain boundary misorientation defined as the misorientation between the orientations corresponding to ids in first and second column of ebsdId, i.e. following two commands should give the same result</p>
 {% highlight matlab %}
 gB8(1).misorientation
 
@@ -278,9 +278,9 @@ gB_Mg = grainBoundary
 plot(gB_Mg,gB_Mg.misorientation.angle./degree,'linewidth',3)
 mtexColorbar('title','misorientation angle (&#65533;)')
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryProperties_03.png" %}
-<h2 id="10">Geometric properties</h2><p>The <b>direction</b> property of the boundary segments is usefull when checking for tilt and twist boundaries, i.e., when we want to compare the misorientation axis with the interface between the grains</p>
+<center>
+{% include inline_image.html file="BoundaryProperties_03.png" %}
+</center><h2 id="10">Geometric properties</h2><p>The <b>direction</b> property of the boundary segments is usefull when checking for tilt and twist boundaries, i.e., when we want to compare the misorientation axis with the interface between the grains</p>
 {% highlight matlab %}
 % compute misorientation axes in specimen coordinates
 ori = ebsd('id',gB_Mg.ebsdId).orientations;
@@ -297,16 +297,16 @@ axes = vector3d
  antipodal: true
 
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryProperties_04.png" %}
-<p>We observe that the angle is quite oscilatory. This is because of the stair casing effect when reconstructing grains from gridded EBSD data. The weaken this effect we may average the segment directions using the command <a href="grainBoundary.calcMeanDirection.html">calcMeanDirection</a></p>
+<center>
+{% include inline_image.html file="BoundaryProperties_04.png" %}
+</center><p>We observe that the angle is quite oscilatory. This is because of the stair casing effect when reconstructing grains from gridded EBSD data. The weaken this effect we may average the segment directions using the command <a href="grainBoundary.calcMeanDirection.html">calcMeanDirection</a></p>
 {% highlight matlab %}
 % plot the angle between the misorientation axis and the boundary direction
 plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),'linewidth',3)
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryProperties_05.png" %}
-<p>The <b>midPoint</b> property is usefull when  TODO:</p><p>While the command</p>
+<center>
+{% include inline_image.html file="BoundaryProperties_05.png" %}
+</center><p>The <b>midPoint</b> property is usefull when  TODO:</p><p>While the command</p>
 {% highlight matlab %}
 length(gB_Mg)
 {% endhighlight %}
@@ -336,6 +336,6 @@ for cId = components.'
 end
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryProperties_06.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="BoundaryProperties_06.png" %}
+</center></div></body></html>

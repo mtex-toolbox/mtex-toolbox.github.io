@@ -1,6 +1,6 @@
 ---
 title: Importing EBSD Data
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDImport.html
 folder: documentation
@@ -14,12 +14,16 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Importing EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_EBSDImport.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDImport into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX allows you to import EBSD data from a wide variety of file format. In the most simplest case import can be done by the command <a href="EBSD.load.html">EBSD.load</a></p>
+      --><title>Importing EBSD Data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_EBSDImport.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit EBSDImport into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX allows you to import EBSD data from a wide variety of file format. In the most simplest case import can be done by the command <a href="EBSD.load.html">EBSD.load</a></p>
 {% highlight matlab %}
 ebsd = EBSD.load([mtexEBSDPath filesep 'twins.ctf'])
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: .ctf files have usualy inconsistent conventions
+for spatial coordinates and Euler angles. You may want to
+use one of the options 'convertSpatial2EulerReferenceFrame'
+or 'convertEuler2SpatialReferenceFrame' to correct for this 
  
 ebsd = EBSD  
  
@@ -36,15 +40,15 @@ ebsd = EBSD
 {% highlight matlab %}
 plot(ebsd('Magnesium'),ebsd('Magnesium').orientations)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDImport_01.png" %}
-<p>The variable of type EBSD is the starting point for all further analysis, e.g., <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="EBSD2ODF.html">ODF reconstruction</a>, <a href="EBSDMisorientation">misorientation analysis</a>, etc.</p><h2 id="4">Importing EBSD data using the import wizard</h2><p>In many cases however, importing EBSD data is not that straight forward as suggested above. The reason is that during the measuring process different reference systems are involved and resulting coordinates, i.e., the spatial coordinates and the Euler angles, are often not stored in a consistent way by comercials software. Please read <a href="EBSDReferenceFrame.html">EBSD Reference Systems</a> for more information about how to set up reference frames correctly.</p><p>In order to help the user to import EBSD data consistently to fixed specimen reference frame, which the user should know, MTEX provide the <a href="matlab:import_wizard('EBSD')">import wizard</a> as a graphical user interface. The <tt>import_wizard</tt> can be started either by typing into the command line</p>
+<center>
+{% include inline_image.html file="EBSDImport_01.png" %}
+</center><p>The variable of type EBSD is the starting point for all further analysis, e.g., <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="EBSD2ODF.html">ODF reconstruction</a>, <a href="EBSDMisorientation">misorientation analysis</a>, etc.</p><h2 id="4">Importing EBSD data using the import wizard</h2><p>In many cases however, importing EBSD data is not that straight forward as suggested above. The reason is that during the measuring process different reference systems are involved and resulting coordinates, i.e., the spatial coordinates and the Euler angles, are often not stored in a consistent way by comercials software. Please read <a href="EBSDReferenceFrame.html">EBSD Reference Systems</a> for more information about how to set up reference frames correctly.</p><p>In order to help the user to import EBSD data consistently to fixed specimen reference frame, which the user should know, MTEX provide the <a href="matlab:import_wizard('EBSD')">import wizard</a> as a graphical user interface. The <tt>import_wizard</tt> can be started either by typing into the command line</p>
 {% highlight matlab %}
 import_wizard('EBSD')
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDImport_02.png" %}
-<p>EBSD Data files can be also imported via the <a href="matlab:filebrowser">file browser</a> by choosing <i>Import Data</i> from the context menu of the selected file if its file extension was registered with <a href="matlab:opentoline(fullfile(mtex_path,'mtex_settings.m'),25,1)"><tt>mtex_settings.m</tt></a></p><p>The import wizard guides through the correct setup of:</p><div><ul><li><a href="CrystalSymmetries.html">crystal symmetries</a> associated with phases</li><li>specimen symmetry and plotting conventions</li></ul></div><p>The import wizard allows you to either creates directly a workspace variable of type <a href="EBSD.EBSD.html">EBSD</a> or to generates an m-file which contains all the customizations and allows you to import the data in future sessions without the import wizzard. This last option is highly recommended as the created script is also a good starting point for further analysis and data processing.</p><h2 id="6">The Import Script</h2><p>A script generated by the import wizard has approximately the following form:</p>
+<center>
+{% include inline_image.html file="EBSDImport_02.png" %}
+</center><p>EBSD Data files can be also imported via the <a href="matlab:filebrowser">file browser</a> by choosing <i>Import Data</i> from the context menu of the selected file if its file extension was registered with <a href="matlab:opentoline(fullfile(mtex_path,'mtex_settings.m'),25,1)"><tt>mtex_settings.m</tt></a></p><p>The import wizard guides through the correct setup of:</p><div><ul><li><a href="CrystalSymmetries.html">crystal symmetries</a> associated with phases</li><li>specimen symmetry and plotting conventions</li></ul></div><p>The import wizard allows you to either creates directly a workspace variable of type <a href="EBSD.EBSD.html">EBSD</a> or to generates an m-file which contains all the customizations and allows you to import the data in future sessions without the import wizzard. This last option is highly recommended as the created script is also a good starting point for further analysis and data processing.</p><h2 id="6">The Import Script</h2><p>A script generated by the import wizard has approximately the following form:</p>
 {% highlight matlab %}
 % crystal symmetry
 CS = {...
@@ -71,9 +75,9 @@ ebsd = EBSD.load(fname,CS,'interface','ctf',...
 
 plot(ebsd)
 {% endhighlight %}
-
-  {% include inline_image.html file="EBSDImport_03.png" %}
-<h2 id="7">Supported Data Formats</h2><p>MTEX supports the following EBSD data formats:</p><p>
+<center>
+{% include inline_image.html file="EBSDImport_03.png" %}
+</center><h2 id="7">Supported Data Formats</h2><p>MTEX supports the following EBSD data formats:</p><p>
    <table class="usertable">
       <tr>
          <td>

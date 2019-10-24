@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss various geometric properties of grains. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit ShapeParameters into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss various geometric properties of grains. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
 mtexdata forsterite
@@ -90,9 +90,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_01.png" %}
-<h2 id="2">Grain size, area, diameter, perimeter and calliper</h2><p>Once grains have been reconstructed, several shape parameters can be computed. Those can be visualized either as histograms, or used to colorize an grain map.</p><p>The most basic properties are grainSize and grain area. Those can be computed by</p>
+<center>
+{% include inline_image.html file="ShapeParameters_01.png" %}
+</center><h2 id="2">Grain size, area, diameter, perimeter and calliper</h2><p>Once grains have been reconstructed, several shape parameters can be computed. Those can be visualized either as histograms, or used to colorize an grain map.</p><p>The most basic properties are grainSize and grain area. Those can be computed by</p>
 {% highlight matlab %}
 grains(9).grainSize
 grains(9).area
@@ -160,9 +160,9 @@ ans =
 plot(grains,'linewidth',4)
 plotEllipse(grains.centroid,a,b,omega,'lineColor','w','linewidth',2)
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_02.png" %}
-<p>in the above lines the midpoint of the ellipse is given by <a href="grain2d.centroid.html"><b>grains.centroid</b></a>. The variable <b>omega</b> is the angle describing the rotation of the ellipses and <b>a</b> and <b>b</b> are the length of the longest and shortest half axis of the ellipses, respectively. Note, that the ellipses are scalled such that their areas coincide with the actual grain areas.</p><p>The quotient a/b between the longest and the shortest axis is called aspect ration and can be computed via</p>
+<center>
+{% include inline_image.html file="ShapeParameters_02.png" %}
+</center><p>in the above lines the midpoint of the ellipse is given by <a href="grain2d.centroid.html"><b>grains.centroid</b></a>. The variable <b>omega</b> is the angle describing the rotation of the ellipses and <b>a</b> and <b>b</b> are the length of the longest and shortest half axis of the ellipses, respectively. Note, that the ellipses are scalled such that their areas coincide with the actual grain areas.</p><p>The quotient a/b between the longest and the shortest axis is called aspect ration and can be computed via</p>
 {% highlight matlab %}
 grains(9).aspectRatio
 {% endhighlight %}
@@ -191,24 +191,24 @@ plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
 setColorRange([0,0.5])
 mtexColorbar
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_03.png" %}
-<p>In this plot round shapes will have values close to zero while concave shapes will get large values. A similar measure is the shape factor which is defined as the ratio between the grain perimeter and the equivalent perimeter</p>
+<center>
+{% include inline_image.html file="ShapeParameters_03.png" %}
+</center><p>In this plot round shapes will have values close to zero while concave shapes will get large values. A similar measure is the shape factor which is defined as the ratio between the grain perimeter and the equivalent perimeter</p>
 {% highlight matlab %}
 plot(grains,grains.shapeFactor)
 setColorRange([1,2])
 mtexColorbar('title','shape factor')
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_04.png" %}
-<p>Another simular measures is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull.</p>
+<center>
+{% include inline_image.html file="ShapeParameters_04.png" %}
+</center><p>Another simular measures is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull.</p>
 {% highlight matlab %}
 plot(grains,grains.paris)
 mtexColorbar('title','paris')
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_05.png" %}
-<p>A bit strange quantity</p>
+<center>
+{% include inline_image.html file="ShapeParameters_05.png" %}
+</center><p>A bit strange quantity</p>
 {% highlight matlab %}
 plot(grains,log10(2.*grains.equivalentRadius))
 cb = mtexColorbar;
@@ -216,34 +216,34 @@ labels = num2str(round(10.^(cb.Ticks))');
 cb.TickLabels=labels;
 drawNow(gcm)
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_06.png" %}
-<h2 id="15">Histograms</h2>
+<center>
+{% include inline_image.html file="ShapeParameters_06.png" %}
+</center><h2 id="15">Histograms</h2>
 {% highlight matlab %}
 close all
 histogram(grains.area)
 xlabel('grain area')
 ylabel('number of grains')
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_07.png" %}
-<p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p>
+<center>
+{% include inline_image.html file="ShapeParameters_07.png" %}
+</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p>
 {% highlight matlab %}
 hist(grains,grains.area)
 xlabel('grain area')
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_08.png" %}
-<h2 id="17">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p>
+<center>
+{% include inline_image.html file="ShapeParameters_08.png" %}
+</center><h2 id="17">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p>
 {% highlight matlab %}
 close all
 scatter(grains.paris,grains.shapeFactor)
 xlabel('paris')
 ylabel('shape factor')
 {% endhighlight %}
-
-  {% include inline_image.html file="ShapeParameters_09.png" %}
-<p>Obviously, there is a strong correlation between those two quantities.</p><h2 id="19">List of all geometric grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
+<center>
+{% include inline_image.html file="ShapeParameters_09.png" %}
+</center><p>Obviously, there is a strong correlation between those two quantities.</p><h2 id="19">List of all geometric grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
    <table class="usertable">
       <tr>
          <td>

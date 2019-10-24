@@ -1,6 +1,6 @@
 ---
 title: CSL Boundaries
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: CSLBoundaries.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit CSLBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of CSL boundaries. Therefore lets start by importing some Iron data and reconstructing the grain structure.</p>
+      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit CSLBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of CSL boundaries. Therefore lets start by importing some Iron data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 mtexdata csl
 plotx2east
@@ -30,6 +30,8 @@ plot(grains,grains.meanOrientation)
 {% endhighlight %}
 
 {% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/csl.mat
  
 ebsd = EBSD  
  
@@ -46,9 +48,9 @@ ebsd = EBSD
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_01.png" %}
-<p>Next we plot image quality as it makes the grain boundaries visible. and overlay it with the orientation map</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_01.png" %}
+</center><p>Next we plot image quality as it makes the grain boundaries visible. and overlay it with the orientation map</p>
 {% highlight matlab %}
 plot(ebsd,log(ebsd.prop.iq),'figSize','large')
 mtexColorMap black2white
@@ -68,9 +70,9 @@ hold off
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_02.png" %}
-<h2 id="3">Detecting CSL Boundaries</h2><p>In order to detect CSL boundaries within the data set we first restrict the grain boundaries to iron to iron phase transitions and check then the boundary misorientations to be a CSL(3) misorientation with threshold of 3 degree.</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_02.png" %}
+</center><h2 id="3">Detecting CSL Boundaries</h2><p>In order to detect CSL boundaries within the data set we first restrict the grain boundaries to iron to iron phase transitions and check then the boundary misorientations to be a CSL(3) misorientation with threshold of 3 degree.</p>
 {% highlight matlab %}
 % restrict to iron to iron phase transition
 gB = grains.boundary('iron','iron')
@@ -92,9 +94,9 @@ gB = grainBoundary
     20356       iron       iron
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_03.png" %}
-<h2 id="4">Mark triple points</h2><p>Next we want to mark all triple points with at least 2 CSL boundaries</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_03.png" %}
+</center><h2 id="4">Mark triple points</h2><p>Next we want to mark all triple points with at least 2 CSL boundaries</p>
 {% highlight matlab %}
 % logical list of CSL boundaries
 isCSL3 = grains.boundary.isTwinning(CSL(3,ebsd.CS),3*degree);
@@ -107,9 +109,9 @@ hold on
 plot(grains.triplePoints(tPid),'color','r')
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_04.png" %}
-<h2 id="5">Merging grains with common CSL(3) boundary</h2><p>Next we merge all grains together which have a common CSL(3) boundary. This is done with the command <a href="grain2d_merge.html">merge</a>.</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_04.png" %}
+</center><h2 id="5">Merging grains with common CSL(3) boundary</h2><p>Next we merge all grains together which have a common CSL(3) boundary. This is done with the command <a href="grain2d_merge.html">merge</a>.</p>
 {% highlight matlab %}
 % this merges the grains
 [mergedGrains,parentIds] = merge(grains,gB3);
@@ -119,9 +121,9 @@ hold on
 plot(mergedGrains.boundary,'linecolor','w','linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_05.png" %}
-<p>Finaly, we check for all other types of CSL boundaries and overlay them with our plot.</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_05.png" %}
+</center><p>Finaly, we check for all other types of CSL boundaries and overlay them with our plot.</p>
 {% highlight matlab %}
 delta = 5*degree;
 gB5 = gB(gB.isTwinning(CSL(5,ebsd.CS),delta));
@@ -139,9 +141,9 @@ hold on
 plot(gB11,'lineColor','c','linewidth',2,'DisplayName','CSL 11')
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_06.png" %}
-<h2 id="7">Colorizing misorientations</h2><p>In the previous sections we have checked whether the boundary misorientations belong to certain specific classes of misorientations. In order to analyze the distribution of misorientations we may colorize the grain boundaries according to their misorientation. See S. Patala, J. K. Mason, and C. A. Schuh, 2012, for details. The coresponding orientation to color mapping is implemented into MTEX as</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_06.png" %}
+</center><h2 id="7">Colorizing misorientations</h2><p>In the previous sections we have checked whether the boundary misorientations belong to certain specific classes of misorientations. In order to analyze the distribution of misorientations we may colorize the grain boundaries according to their misorientation. See S. Patala, J. K. Mason, and C. A. Schuh, 2012, for details. The coresponding orientation to color mapping is implemented into MTEX as</p>
 {% highlight matlab %}
 moriKey = PatalaColorKey(gB)
 {% endhighlight %}
@@ -178,9 +180,9 @@ hold off
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_07.png" %}
-<p>Lets examine the colormap. We plot it as axis angle sections and add 300 random boundary misorientations on top of it. Note that in this plot misorientations <tt>mori</tt> and <tt>inv(mori)</tt> are associated.</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_07.png" %}
+</center><p>Lets examine the colormap. We plot it as axis angle sections and add 300 random boundary misorientations on top of it. Note that in this plot misorientations <tt>mori</tt> and <tt>inv(mori)</tt> are associated.</p>
 {% highlight matlab %}
 plot(moriKey,'axisAngle',(5:5:60)*degree)
 
@@ -192,9 +194,9 @@ plot(gB.misorientation,'points',300,'add2all',...
   plotting 300 random orientations out of 20356 given orientations
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_08.png" %}
-<h2 id="10">Misorientations in the 3d fundamental zone</h2><p>We can also look at the boundary misorienations in the 3 dimensional fundamental orientation zone.</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_08.png" %}
+</center><h2 id="10">Misorientations in the 3d fundamental zone</h2><p>We can also look at the boundary misorienations in the 3 dimensional fundamental orientation zone.</p>
 {% highlight matlab %}
 % compute the boundary of the fundamental zone
 oR = fundamentalRegion(moriKey.CS1,moriKey.CS2,'antipodal');
@@ -214,9 +216,9 @@ csl3 = CSL(3,ebsd.CS);
 plot(csl3.project2FundamentalRegion('antipodal') ,'MarkerColor','r','DisplayName','CSL 3','MarkerSize',20)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_09.png" %}
-<h2 id="11">Analyzing the misorientation distribution function</h2><p>In order to analyze more quantitatively the boundary misorientation distribution we can compute the so called misorientation distribution function. The option <tt>antipodal</tt> is applied since we want to identify <tt>mori</tt> and <tt>inv(mori)</tt>.</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_09.png" %}
+</center><h2 id="11">Analyzing the misorientation distribution function</h2><p>In order to analyze more quantitatively the boundary misorientation distribution we can compute the so called misorientation distribution function. The option <tt>antipodal</tt> is applied since we want to identify <tt>mori</tt> and <tt>inv(mori)</tt>.</p>
 {% highlight matlab %}
 mdf = calcMDF(gB.misorientation,'halfwidth',2.5*degree,'bandwidth',32)
 {% endhighlight %}
@@ -245,9 +247,9 @@ annotate(CSL(9,ebsd.CS),'label','$CSL_9$','backgroundcolor','w')
 
 drawNow(gcm)
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_10.png" %}
-<p>The MDF can be now used to compute prefered misorientations</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_10.png" %}
+</center><p>The MDF can be now used to compute prefered misorientations</p>
 {% highlight matlab %}
 mori = mdf.calcModes(2)
 {% endhighlight %}
@@ -317,9 +319,9 @@ fibre101 = misorientation
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="CSLBoundaries_11.png" %}
-<p>or to evaluate it in an misorientation directly</p>
+<center>
+{% include inline_image.html file="CSLBoundaries_11.png" %}
+</center><p>or to evaluate it in an misorientation directly</p>
 {% highlight matlab %}
 mori = orientation.byEuler(15*degree,28*degree,14*degree,mdf.CS,mdf.CS)
 

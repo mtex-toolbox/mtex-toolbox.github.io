@@ -1,6 +1,6 @@
 ---
 title: Plotting
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainSpatialPlots.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainSpatialPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p>
+      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GrainSpatialPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p>
 {% highlight matlab %}
 % import a demo data set
 mtexdata forsterite
@@ -55,9 +55,9 @@ ans =
     0.5294    0.8078    0.9804
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_01.png" %}
-<p>Accodingly, changing the color stored in the crystal symmetry changes the color in the map</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_01.png" %}
+</center><p>Accodingly, changing the color stored in the crystal symmetry changes the color in the map</p>
 {% highlight matlab %}
 grains('Fo').CS.color = str2rgb('salmon')
 plot(grains)
@@ -79,9 +79,9 @@ grains = grain2d
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_02.png" %}
-<p>The color can also been specified directly by using the option <tt>FaceColor</tt>. Note, that this requires the color to be specified by RGB values.</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_02.png" %}
+</center><p>The color can also been specified directly by using the option <tt>FaceColor</tt>. Note, that this requires the color to be specified by RGB values.</p>
 {% highlight matlab %}
 % detect the largest grain
 [~,id] = max(grains.area);
@@ -91,9 +91,9 @@ hold on
 plot(grains(id),'FaceColor','darkgray','FaceAlpha',0.5)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_03.png" %}
-<h2 id="5">Orientation Maps</h2><p>Coloring grains according to their mean orientations is very similar to EBSD maps colored by orientations. The most important thing is that the misorientation can only extracte from grains of the same phase.</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_03.png" %}
+</center><h2 id="5">Orientation Maps</h2><p>Coloring grains according to their mean orientations is very similar to EBSD maps colored by orientations. The most important thing is that the misorientation can only extracte from grains of the same phase.</p>
 {% highlight matlab %}
 % the implicite way
 plot(grains('Fo'),grains('fo').meanOrientation)
@@ -107,9 +107,9 @@ plot(grains('Fo'),grains('fo').meanOrientation)
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_04.png" %}
-<p>This implicte way gives no control about how the color is computed from the meanorientation. When using the explicite way by defining a orientation to color map</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_04.png" %}
+</center><p>This implicte way gives no control about how the color is computed from the meanorientation. When using the explicite way by defining a orientation to color map</p>
 {% highlight matlab %}
 % this defines a ipf color key
 ipfKey = ipfColorKey(grains('Fo'));
@@ -124,21 +124,21 @@ color = ipfKey.orientation2color(grains('Fo').meanOrientation);
 % and use them for plotting
 plot(grains('fo'),color)
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_05.png" %}
-<h2 id="8">Plotting arbitrary properties</h2><p>As we have seen in the previous section the <tt>plot</tt> command accepts as second argument any list of RGB values specifying a color. Instead of RGB values the second argument can also be a list of values which are then transformed by a colormap into color.</p><p>As an example we colorize the grains according to their aspect ratio.</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_05.png" %}
+</center><h2 id="8">Plotting arbitrary properties</h2><p>As we have seen in the previous section the <tt>plot</tt> command accepts as second argument any list of RGB values specifying a color. Instead of RGB values the second argument can also be a list of values which are then transformed by a colormap into color.</p><p>As an example we colorize the grains according to their aspect ratio.</p>
 {% highlight matlab %}
 plot(grains,grains.aspectRatio)
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_06.png" %}
-<p>we see that we have a very alongated grain which makes it difficult to distinguesh the aspect ration of the other grains. A solution for this is to specify the values of the aspect ration which should maped to the top and bottom color of the colormap</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_06.png" %}
+</center><p>we see that we have a very alongated grain which makes it difficult to distinguesh the aspect ration of the other grains. A solution for this is to specify the values of the aspect ration which should maped to the top and bottom color of the colormap</p>
 {% highlight matlab %}
 CLim(gcm,[1 5])
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_07.png" %}
-<h2 id="11">Colorizing circular properties</h2><p>Sometimes the property we want to display is a circular, e.g., the direction of the grain alongation. In this case it is important to use a circular colormap which assign the same color to high values and low values. In the case of the direction of the grain alongation the angles 0 and 180 should get the same color since they represent the same direction.</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_07.png" %}
+</center><h2 id="11">Colorizing circular properties</h2><p>Sometimes the property we want to display is a circular, e.g., the direction of the grain alongation. In this case it is important to use a circular colormap which assign the same color to high values and low values. In the case of the direction of the grain alongation the angles 0 and 180 should get the same color since they represent the same direction.</p>
 {% highlight matlab %}
 % consider only alongated grains
 alongated_grains = grains(grains.aspectRatio &gt; 5);
@@ -158,9 +158,9 @@ mtexColorMap HSV
 % display the colormap
 mtexColorbar
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_08.png" %}
-<h2 id="12">Plotting the orientation within a grain</h2><p>In order to plot the orientations of EBSD data within certain grains one first has to extract the EBSD data that belong to the specific grains.</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_08.png" %}
+</center><h2 id="12">Plotting the orientation within a grain</h2><p>In order to plot the orientations of EBSD data within certain grains one first has to extract the EBSD data that belong to the specific grains.</p>
 {% highlight matlab %}
 % let have a look at the bigest grain
 [~,id] = max(grains.area)
@@ -199,9 +199,9 @@ hold on
 plot(grains(id).boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_09.png" %}
-<h2 id="14">Visualizing directions</h2><p>We may also visualize directions by arrows placed at the center of the grains.</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_09.png" %}
+</center><h2 id="14">Visualizing directions</h2><p>We may also visualize directions by arrows placed at the center of the grains.</p>
 {% highlight matlab %}
 % load some single phase data set
 mtexdata csl
@@ -240,9 +240,9 @@ ebsd = EBSD
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_10.png" %}
-<h2 id="15">Labeling Grains</h2><p>In the above example the vectors are centered at the centroids of the grains. Other elements</p>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_10.png" %}
+</center><h2 id="15">Labeling Grains</h2><p>In the above example the vectors are centered at the centroids of the grains. Other elements</p>
 {% highlight matlab %}
 % only the very big grains
 big_grains = grains(grains.grainSize&gt;1000);
@@ -262,6 +262,6 @@ text(big_grains,int2str(big_grains.id))
   plot(colorKey)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainSpatialPlots_11.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="GrainSpatialPlots_11.png" %}
+</center></div></body></html>
