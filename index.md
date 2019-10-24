@@ -10,6 +10,7 @@ MTEX is a free Matlab toolbox for analyzing and modeling crystallographic textur
 
 ### News
 * MTEX 5.2 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2/mtex-5.2.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
+* new homepage with much extended documentation: [old homepage](https://mtex-toolbox.github.io/HomepageOld)
 * New paper: [Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
 * New paper: [Denoising of Crystal Orientation Maps](https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf)
 * Chemnitz MTEX Workshop 2019: ・ [Announcement](https://groups.google.com/forum/#!topic/mtexmail/XkXVO2wRN3M) ・ [Homepage](http://www-user.tu-chemnitz.de/~rahi/mtexWorkshop19) ・  [Registration](http://www-user.tu-chemnitz.de/~rahi/mtexWorkshop19/registration.php) ・
