@@ -32,8 +32,7 @@ J. Bennett, D. N. Johnstone, Z. Vukmanovic, W. Solano-Alvarez,
 S. J. Laine, J. F. Einsle, Paul A. Midgley, C. M. F. Rae, R. Hielscher: [Proceedings of the Royal Society A, 473, 2017](https://doi.org/10.1098/rspa.2017.0274).
 <a href="https://www-user.tu-chemnitz.de/~rahi/paper/misori.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
-  script files: [section3.m](files/matlab/ipfColoring/section3.m), [section2.m](files/matlab/ipfColoring/section2.m), [section3_1.m](files/matlab/ipfColoring/section3_1.m), [section3_2.m](files/matlab/ipfColoring/section3_2.m),
-  [appendix.m](files/matlab/ipfColoring/appendix.m), [data.zip](files/matlab/ipfColoring/data.zip)
+  [script files](https://github.com/mtex-toolbox/mtex-paper/tree/master/3dMisorientationSpace)
 
 #### 2016
 
@@ -41,6 +40,8 @@ S. J. Laine, J. F. Einsle, Paul A. Midgley, C. M. F. Rae, R. Hielscher: [Proceed
   [Journal of Applied Crystallography, 49, 1786-1802, 2016](
   http://dx.doi.org/10.1107/S1600576716012942).
 <a href="https://www-user.tu-chemnitz.de/~rahi/paper/so3Colors.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
+
+  [script files](https://github.com/mtex-toolbox/mtex-paper/tree/master/orientationsPerfectlyColored)
 
   script files: [section1.m](files/matlab/ipfColoring/section1.m), [section2.m](files/matlab/ipfColoring/section2.m), [section3_1.m](files/matlab/ipfColoring/section3_1.m), [section3_2.m](files/matlab/ipfColoring/section3_2.m),
   [appendix.m](files/matlab/ipfColoring/appendix.m), [data.zip](files/matlab/ipfColoring/data.zip)
