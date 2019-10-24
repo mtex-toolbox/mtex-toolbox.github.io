@@ -1,6 +1,6 @@
 ---
 title: Anisotropic Elasticity
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: AnisotropicElasticity.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_AnisotropicElasticity.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit AnisotropicElasticity into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to calculate and plot the elasticity properties</p><!--/introduction--><p>MTEX offers a very simple way to compute elasticity properties of materials. This includes Young's modulus, linear compressibility, Christoffel tensor, and elastic wave velocities.</p><h2 id="2">Import an Elasticity Tensor</h2><p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
+      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_AnisotropicElasticity.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit AnisotropicElasticity into the Matlab commandline">edit page</a></font><div><!--introduction--><p>how to calculate and plot the elasticity properties</p><!--/introduction--><p>MTEX offers a very simple way to compute elasticity properties of materials. This includes Young's modulus, linear compressibility, Christoffel tensor, and elastic wave velocities.</p><h2 id="2">Import an Elasticity Tensor</h2><p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
 
@@ -122,9 +122,9 @@ ans =
   286.1748
 
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_01.png" %}
-<h2 id="7">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similarly as the Youngs modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <tt>d</tt> or as a spherical function</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_01.png" %}
+</center><h2 id="7">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similarly as the Youngs modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <tt>d</tt> or as a spherical function</p>
 {% highlight matlab %}
 % compute as a spherical function
 beta = linearCompressibility(C)
@@ -146,9 +146,9 @@ ans =
     0.0018
 
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_02.png" %}
-<h2 id="8">Christoffel Tensor</h2><p>The Christoffel Tensor is symmetric because of the symmetry of the elastic constants. The eigenvalues of the 3x3 Christoffel tensor are three positive values of the wave moduli which corresponds to \rho Vp^2 , \rho Vs1^2 and \rho Vs2^2 of the plane waves propagating in the direction n. The three eigenvectors of this tensor are then the polarization directions of the three waves. Because the Christoffel tensor is symmetric, the polarization vectors are perpendicular to each other.</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_02.png" %}
+</center><h2 id="8">Christoffel Tensor</h2><p>The Christoffel Tensor is symmetric because of the symmetry of the elastic constants. The eigenvalues of the 3x3 Christoffel tensor are three positive values of the wave moduli which corresponds to \rho Vp^2 , \rho Vs1^2 and \rho Vs2^2 of the plane waves propagating in the direction n. The three eigenvectors of this tensor are then the polarization directions of the three waves. Because the Christoffel tensor is symmetric, the polarization vectors are perpendicular to each other.</p>
 {% highlight matlab %}
 % It is computed for a specific direction x by the
 % command &lt;tensor.ChristoffelTensor.html ChristoffelTensor&gt;.
@@ -247,17 +247,17 @@ ps2 =
 {% highlight matlab %}
 plot(vp,'complete','upper')
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_03.png" %}
-<p>Next, we plot on the top of this plot the p-wave polarization direction.</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_03.png" %}
+</center><p>Next, we plot on the top of this plot the p-wave polarization direction.</p>
 {% highlight matlab %}
 hold on
 plot(pp)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_04.png" %}
-<p>We may even compute with these spherical functions as width ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_04.png" %}
+</center><p>We may even compute with these spherical functions as width ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
 {% highlight matlab %}
 plot(vs1-vs2,'complete','upper')
 
@@ -265,9 +265,9 @@ hold on
 plot(ps1)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_05.png" %}
-<p>When projected to a plane the different wave speeds</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_05.png" %}
+</center><p>When projected to a plane the different wave speeds</p>
 {% highlight matlab %}
 planeNormal = vector3d.X;
 
@@ -304,9 +304,9 @@ mtexTitle('Phase velocity surface (km/s)')
 mtexColorMap blue2red
 mtexColorbar('Title','(km/s)','location','southOutSide')
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_06.png" %}
-<p>Similarly, we can visualize the slowness surfaces (s/km)</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_06.png" %}
+</center><p>Similarly, we can visualize the slowness surfaces (s/km)</p>
 {% highlight matlab %}
 % plot slowness surfaces
 plotSection(1./vp,planeNormal,optSec{:},'DisplayName','Vp')
@@ -331,9 +331,9 @@ mtexTitle('Slowness surface (km/s)')
 mtexColorMap blue2red
 mtexColorbar('Title','(s/km)','location','southOutSide')
 {% endhighlight %}
-
-  {% include inline_image.html file="AnisotropicElasticity_07.png" %}
-<p>set back default colormap</p>
+<center>
+{% include inline_image.html file="AnisotropicElasticity_07.png" %}
+</center><p>set back default colormap</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap)
 {% endhighlight %}

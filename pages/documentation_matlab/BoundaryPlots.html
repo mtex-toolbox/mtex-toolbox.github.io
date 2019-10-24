@@ -1,6 +1,6 @@
 ---
 title: Boundary Plots
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryPlots.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
+      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
 
@@ -80,9 +80,9 @@ hold on
 plot(gB,'lineWidth',2)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_01.png" %}
-<h2 id="4">Specific boundaries</h2><p>Accordingly, we can access the grain boundary of a specific grain by</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_01.png" %}
+</center><h2 id="4">Specific boundaries</h2><p>Accordingly, we can access the grain boundary of a specific grain by</p>
 {% highlight matlab %}
 grains(45).boundary
 
@@ -102,25 +102,25 @@ ans = grainBoundary
        29  Forsterite    Diopside
 
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_02.png" %}
-<p>For a multi-phase system, the location of specific phase transistions may be of interest. The following plot highlights all Forsterite to Enstatite phase transitions</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_02.png" %}
+</center><p>For a multi-phase system, the location of specific phase transistions may be of interest. The following plot highlights all Forsterite to Enstatite phase transitions</p>
 {% highlight matlab %}
 hold on
 plot(grains.boundary('Fo','En'),'linecolor','DarkGreen','linewidth',4)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_03.png" %}
-<p>Another type of boundaries is boundaries between measurements that belong to the same grain. This happens if a grain has a texture gradient that loops around these two measurements.</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_03.png" %}
+</center><p>Another type of boundaries is boundaries between measurements that belong to the same grain. This happens if a grain has a texture gradient that loops around these two measurements.</p>
 {% highlight matlab %}
 hold on
 plot(grains.innerBoundary,'linecolor','red','linewidth',4)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_04.png" %}
-<h2 id="7">Misorientation angle</h2><p>The boundary misorientation is the misorientation between the two neighboring pixels of a boundary segment. Depending of the misorientation angle one distinguishes between high angle and low angle grain boundaries. In MTEX we can visualize the boundary misorientation angle by the commands</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_04.png" %}
+</center><h2 id="7">Misorientation angle</h2><p>The boundary misorientation is the misorientation between the two neighboring pixels of a boundary segment. Depending of the misorientation angle one distinguishes between high angle and low angle grain boundaries. In MTEX we can visualize the boundary misorientation angle by the commands</p>
 {% highlight matlab %}
 close all
 gB_Fo = grains.boundary('Fo','Fo');
@@ -131,9 +131,9 @@ plot(gB_Fo,gB_Fo.misorientation.angle./degree,'linewidth',4)
 hold off
 mtexColorbar('title','misorientation angle')
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_05.png" %}
-<h2 id="8">The misorientation axes in crystal coordinates</h2><p>Similarly as the rotational angle we may colorize the grain boundaries also according the misorientation axes. First of all we have to decide wheter we want to visualize the rotational axis in crystal or coordinate system. Second we have to define a color key that translates rotational axes into colors.</p><p>Lets start with the rotational axes in crystal coordinates</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_05.png" %}
+</center><h2 id="8">The misorientation axes in crystal coordinates</h2><p>Similarly as the rotational angle we may colorize the grain boundaries also according the misorientation axes. First of all we have to decide wheter we want to visualize the rotational axis in crystal or coordinate system. Second we have to define a color key that translates rotational axes into colors.</p><p>Lets start with the rotational axes in crystal coordinates</p>
 {% highlight matlab %}
 % computed the axes in specien coordinates
 axes = gB_Fo.misorientation.axis
@@ -158,9 +158,9 @@ axes = Miller
  mineral: Forsterite (mmm)
 
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_06.png" %}
-<p>As a colorbar replacement we plot the color key and on top of it the misorientation axes at the grain boundaries</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_06.png" %}
+</center><p>As a colorbar replacement we plot the color key and on top of it the misorientation axes at the grain boundaries</p>
 {% highlight matlab %}
 figure(2)
 plot(colorKey)
@@ -168,9 +168,9 @@ hold on
 plot(axes,'MarkerFaceAlpha',0.1,'MarkerEdgeAlpha',0.3)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_07.png" %}
-<h2 id="10">The misorientation axes in specimen coordinates</h2><p>Analyzing the misorientation axis in specimen coordinates is a bit more involved as it requires to extract the two neighbouring orientations to each boundary segment. To do this we use the <b>ebsdId</b> stored in the boundary segments.</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_07.png" %}
+</center><h2 id="10">The misorientation axes in specimen coordinates</h2><p>Analyzing the misorientation axis in specimen coordinates is a bit more involved as it requires to extract the two neighbouring orientations to each boundary segment. To do this we use the <b>ebsdId</b> stored in the boundary segments.</p>
 {% highlight matlab %}
 figure(1)
 
@@ -209,9 +209,9 @@ axes = vector3d
  size: 278 x 1
 
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_08.png" %}
-<h2 id="11">Full Misorientation Colorization</h2><p>In order to visuale the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <tt>Improved representations of misorientation information for grain boundary</tt>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_08.png" %}
+</center><h2 id="11">Full Misorientation Colorization</h2><p>In order to visuale the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <tt>Improved representations of misorientation information for grain boundary</tt>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
 {% highlight matlab %}
 % plot the grains
 close all
@@ -228,9 +228,9 @@ hold on
 plot(gB_Fo,colorKey.orientation2color(gB_Fo.misorientation),'linewidth',4)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_09.png" %}
-<p>Lets visualize the color key as axis angle sections through the misorientation space</p>
+<center>
+{% include inline_image.html file="BoundaryPlots_09.png" %}
+</center><p>Lets visualize the color key as axis angle sections through the misorientation space</p>
 {% highlight matlab %}
 figure(2)
 plot(colorKey)
@@ -240,6 +240,6 @@ hold on
 plot(gB_Fo.misorientation,'MarkerFacecolor','black')
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="BoundaryPlots_10.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="BoundaryPlots_10.png" %}
+</center></div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: Schmid Factor Analysis
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: PlasticDeformation.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Schmid Factor Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_PlasticDeformation.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PlasticDeformation into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This script describes how to analyze Schmid factors.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Geometric Definition</h2><p>Let us assume a Nickel crystal</p>
+      --><title>Schmid Factor Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_PlasticDeformation.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit PlasticDeformation into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This script describes how to analyze Schmid factors.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Geometric Definition</h2><p>Let us assume a Nickel crystal</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic',[3.523,3.523,3.523],'mineral','Nickel')
 {% endhighlight %}
@@ -135,9 +135,9 @@ pos = vector3d
   0.408421 -0.0919374   0.908152
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_01.png" %}
-<h2 id="11">Stress Tensor</h2><p>Instead by the tension direction the stress might be specified by a stress tensor</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_01.png" %}
+</center><h2 id="11">Stress Tensor</h2><p>Instead by the tension direction the stress might be specified by a stress tensor</p>
 {% highlight matlab %}
 sigma = stressTensor.uniaxial(vector3d.Z)
 {% endhighlight %}
@@ -237,17 +237,17 @@ tau = sSAll.SchmidFactor(r);
 contourf(r,tauMax)
 mtexColorbar
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_02.png" %}
-<p>We may also plot the index of the active slip system</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_02.png" %}
+</center><p>We may also plot the index of the active slip system</p>
 {% highlight matlab %}
 pcolor(r,id)
 
 mtexColorMap black2white
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_03.png" %}
-<p>and observe that within the fundamental sectors the active slip system remains the same. We can even visualize the the plane normal and the slip direction</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_03.png" %}
+</center><p>and observe that within the fundamental sectors the active slip system remains the same. We can even visualize the the plane normal and the slip direction</p>
 {% highlight matlab %}
 % if we ommit the option antipodal we can distinguish
 % between the oposite burger vectors
@@ -305,9 +305,9 @@ sSAll = slipSystem
   -1    0    1    1   -1    1    1
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_04.png" %}
-<p>If we perform this computation in terms of spherical functions we obtain</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_04.png" %}
+</center><p>If we perform this computation in terms of spherical functions we obtain</p>
 {% highlight matlab %}
 % ommiting |r| gives us a list of 12 spherical functions
 tau = sSAll.SchmidFactor
@@ -325,9 +325,9 @@ tau = S2FunHarmonic
  antipodal: true
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_05.png" %}
-<h2 id="20">The Schmid factor for EBSD data</h2><p>So far we have always assumed that the stress tensor is already given relatively to the crystal coordinate system. Next, we want to examine the case where the stress is given in specimen coordinates and we know the orientation of the crystal. Lets import some EBSD data and computet the grains</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_05.png" %}
+</center><h2 id="20">The Schmid factor for EBSD data</h2><p>So far we have always assumed that the stress tensor is already given relatively to the crystal coordinate system. Next, we want to examine the case where the stress is given in specimen coordinates and we know the orientation of the crystal. Lets import some EBSD data and computet the grains</p>
 {% highlight matlab %}
 mtexdata csl
 
@@ -364,9 +364,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_06.png" %}
-<p>We want to consider the following slip systems</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_06.png" %}
+</center><p>We want to consider the following slip systems</p>
 {% highlight matlab %}
 sS = slipSystem.fcc(ebsd.CS)
 sS = sS.symmetrise;
@@ -418,9 +418,9 @@ sigma = stressTensor
  0 0 0
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_07.png" %}
-<p>Next we want to visualize the active slip systems.</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_07.png" %}
+</center><p>Next we want to visualize the active slip systems.</p>
 {% highlight matlab %}
 % take the active slip system and rotate it in specimen coordinates
 sSactive = grains.meanOrientation .* sS(active);
@@ -433,9 +433,9 @@ quiver(grains,sSactive.trace,'color','b')
 quiver(grains,sSactive.b,'color','r')
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_08.png" %}
-<p>We observe that the Burgers vector is in most case aligned with the trace. In those cases where trace and Burgers vector are not aligned the slip plane is not perpendicular to the surface and the Burgers vector sticks out of the surface.</p><p>Next we want to demonstrate the alternative route</p>
+<center>
+{% include inline_image.html file="PlasticDeformation_08.png" %}
+</center><p>We observe that the Burgers vector is in most case aligned with the trace. In those cases where trace and Burgers vector are not aligned the slip plane is not perpendicular to the surface and the Burgers vector sticks out of the surface.</p><p>Next we want to demonstrate the alternative route</p>
 {% highlight matlab %}
 % rotate the stress tensor into crystal coordinates
 sigmaLocal = inv(grains.meanOrientation) * sigma
@@ -474,9 +474,9 @@ quiver(grains,sSactive.b,'color','r')
 
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_09.png" %}
-<h2 id="28">Strain based analysis on the same data set</h2>
+<center>
+{% include inline_image.html file="PlasticDeformation_09.png" %}
+</center><h2 id="28">Strain based analysis on the same data set</h2>
 {% highlight matlab %}
 eps = strainTensor(diag([1,0,-1]))
 
@@ -504,9 +504,9 @@ epsCrystal = strainTensor
  computing Taylor factor: 100%
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_10.png" %}
-
+<center>
+{% include inline_image.html file="PlasticDeformation_10.png" %}
+</center>
 {% highlight matlab %}
 [ bMax , bMaxId ] = max( b , [ ] , 2 ) ;
 sSGrains = grains.meanOrientation .* sS(bMaxId) ;
@@ -515,6 +515,6 @@ quiver ( grains , sSGrains.b)
 quiver ( grains , sSGrains.trace)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="PlasticDeformation_11.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="PlasticDeformation_11.png" %}
+</center></div></body></html>

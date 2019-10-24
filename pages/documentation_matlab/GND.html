@@ -1,6 +1,6 @@
 ---
 title: Geometrically Necessary Dislocations
-last_updated: 14-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: GND.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-14"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GND into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
+      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GND into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
 {% highlight matlab %}
 % set up the plotting convention
 plotx2north
@@ -85,6 +85,11 @@ plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'mic
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ denoising EBSD data: 100%
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_04.png" %}
@@ -328,6 +333,7 @@ dSRot = dislocationSystem
 
 Optimal solution found.
 
+ fitting: 100%
 
 {% endhighlight %}
 <p>As result we obtain a matrix of densities <tt>rho</tt> such that the product with the dislocation systems yields the incomplete dislocation density tensors derived from the curvature, i.e.,</p>

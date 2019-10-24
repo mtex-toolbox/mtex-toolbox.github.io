@@ -1,6 +1,6 @@
 ---
 title: Spherical Projections
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: SphericalProjections.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spherical Projections</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_SphericalProjections.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit SphericalProjections into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX supports four types of spherical projection which are available for all spherical plot, e.g. <a href="ODF.plotPDF.html">polefigure plots</a>, <a href="ODF.plotIPDF.html">inverse polefigure plots</a> or <a href="ODF.plotSection.html">ODF plots</a>. These are the equal area projection (Schmidt projection), the equal distance projection, the stereographic projection (equal angle projection), the three-dimensional projection and the flat projection.</p><p>In order to demonstrate the different projections we start by defining a model ODF.</p>
+      --><title>Spherical Projections</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_SphericalProjections.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit SphericalProjections into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX supports four types of spherical projection which are available for all spherical plot, e.g. <a href="ODF.plotPDF.html">polefigure plots</a>, <a href="ODF.plotIPDF.html">inverse polefigure plots</a> or <a href="ODF.plotSection.html">ODF plots</a>. These are the equal area projection (Schmidt projection), the equal distance projection, the stereographic projection (equal angle projection), the three-dimensional projection and the flat projection.</p><p>In order to demonstrate the different projections we start by defining a model ODF.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321');
 odf = fibreODF(Miller(1,1,0,cs),zvector)
@@ -37,67 +37,67 @@ odf = ODF
 {% highlight matlab %}
 plotPDF(odf,Miller(1,1,0,cs),'minmax')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_01.png" %}
-<p>MTEX allows also to plot only the upper or the lower hemisphere by passing the options <tt>upper</tt> or <tt>lower</tt>.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_01.png" %}
+</center><p>MTEX allows also to plot only the upper or the lower hemisphere by passing the options <tt>upper</tt> or <tt>lower</tt>.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,1,0,cs),'lower','minmax')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_02.png" %}
-<p>Due to Friedel's law measured pole figures are a superposition of the upper and the lower hemisphere (since antipodal directions are associated). In order to plot pole figures as a superposition of the upper and lower hemisphere one has to enforce <a href="AxialDirectional.html">antipodal symmetry</a>. This is done by the option <b>antipodal</b>.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_02.png" %}
+</center><p>Due to Friedel's law measured pole figures are a superposition of the upper and the lower hemisphere (since antipodal directions are associated). In order to plot pole figures as a superposition of the upper and lower hemisphere one has to enforce <a href="AxialDirectional.html">antipodal symmetry</a>. This is done by the option <b>antipodal</b>.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,1,0,cs),'antipodal','minmax')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_03.png" %}
-<h2 id="5">Alignment of the Coordinate Axes</h2><p><b>Rotate and Flip Plots</b></p><p>Sometimes it is more convenient to have the coordinate system rotated or flipped in some way. For this reason, all plot commands in MTEX allows for the options <b>rotate</b>, <b>flipud</b> and <b>fliplr</b>. A more direct way for changing the orientation of the plot is to specify the direction of the x-axis by the commands <a href="plotx2east.html">plotx2east</a>, <a href="plotx2north.html">plotx2north</a>, <a href="plotx2west.html">plotx2west</a>, <a href="plotx2south.html">plotx2south</a>.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_03.png" %}
+</center><h2 id="5">Alignment of the Coordinate Axes</h2><p><b>Rotate and Flip Plots</b></p><p>Sometimes it is more convenient to have the coordinate system rotated or flipped in some way. For this reason, all plot commands in MTEX allows for the options <b>rotate</b>, <b>flipud</b> and <b>fliplr</b>. A more direct way for changing the orientation of the plot is to specify the direction of the x-axis by the commands <a href="plotx2east.html">plotx2east</a>, <a href="plotx2north.html">plotx2north</a>, <a href="plotx2west.html">plotx2west</a>, <a href="plotx2south.html">plotx2south</a>.</p>
 {% highlight matlab %}
 plotx2north
 
 plotPDF(odf,Miller(1,0,0,cs),'antipodal')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_04.png" %}
-
+<center>
+{% include inline_image.html file="SphericalProjections_04.png" %}
+</center>
 {% highlight matlab %}
 plotx2east
 
 plotPDF(odf,Miller(1,0,0,cs),'antipodal')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_05.png" %}
-<h2 id="7">Equal Area Projection (Schmidt Projection)</h2><p>Equal area projection is defined by the characteristic that it preserves the spherical area. Since pole figures are defined as relative frequency by area equal area projection is the default projection in MTEX. In can be set explicitly by the flags <b>earea</b> or <b>schmidt</b>.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_05.png" %}
+</center><h2 id="7">Equal Area Projection (Schmidt Projection)</h2><p>Equal area projection is defined by the characteristic that it preserves the spherical area. Since pole figures are defined as relative frequency by area equal area projection is the default projection in MTEX. In can be set explicitly by the flags <b>earea</b> or <b>schmidt</b>.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'antipodal')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_06.png" %}
-<h2 id="8">Equal Distance Projection</h2><p>The equal distance projection differs from the equal area projection by the characteristic that it preserves the distances of points to the origin. Hence it might be a more intuitive projection if you look at crystal directions.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_06.png" %}
+</center><h2 id="8">Equal Distance Projection</h2><p>The equal distance projection differs from the equal area projection by the characteristic that it preserves the distances of points to the origin. Hence it might be a more intuitive projection if you look at crystal directions.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('m-3m');
 plotHKL(cs,'projection','edist','upper','grid_res',15*degree,'BackGroundColor','w')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_07.png" %}
-<h2 id="9">Stereographic Projection (Equal Angle Projection)</h2><p>Another famous spherical projection is the stereographic projection which preserves the angle between arbitrary great circles. It can be chosen by setting the option <b>stereo</b> or <b>eangle</b>.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_07.png" %}
+</center><h2 id="9">Stereographic Projection (Equal Angle Projection)</h2><p>Another famous spherical projection is the stereographic projection which preserves the angle between arbitrary great circles. It can be chosen by setting the option <b>stereo</b> or <b>eangle</b>.</p>
 {% highlight matlab %}
 plotHKL(cs,'projection','eangle','upper','grid_res',15*degree,'BackGroundColor','w')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_08.png" %}
-<h2 id="10">Plain Projection</h2><p><b>Plain</b> means that the polar angles theta / rho are plotted in a simple rectangular plot. This projection is often chosen for ODF plots, e.g.</p>
+<center>
+{% include inline_image.html file="SphericalProjections_08.png" %}
+</center><h2 id="10">Plain Projection</h2><p><b>Plain</b> means that the polar angles theta / rho are plotted in a simple rectangular plot. This projection is often chosen for ODF plots, e.g.</p>
 {% highlight matlab %}
 plot(SantaFe,'alpha','sections',18,'resolution',5*degree,...
   'projection','plain','contourf','FontSize',10,'silent')
 mtexColorMap white2black
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_09.png" %}
-<h2 id="11">Three-dimensional Plots</h2><p>MTEX also offers a three-dimensional plot of pole figures which even might be rotated freely in space</p>
+<center>
+{% include inline_image.html file="SphericalProjections_09.png" %}
+</center><h2 id="11">Three-dimensional Plots</h2><p>MTEX also offers a three-dimensional plot of pole figures which even might be rotated freely in space</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,1,0,odf.CS),'3d')
 {% endhighlight %}
-
-  {% include inline_image.html file="SphericalProjections_10.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="SphericalProjections_10.png" %}
+</center></div></body></html>

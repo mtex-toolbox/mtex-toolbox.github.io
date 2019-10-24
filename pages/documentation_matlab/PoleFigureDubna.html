@@ -1,6 +1,6 @@
 ---
 title: Orientation Density Functions
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigureDubna.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Orientation Density Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_PoleFigureDubna.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureDubna into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This example demonstrates the most important MTEX tools for analysing Pole Figure Data.</p>
+      --><title>Orientation Density Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_PoleFigureDubna.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureDubna into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>This example demonstrates the most important MTEX tools for analysing Pole Figure Data.</p>
 {% highlight matlab %}
 % specify crystal and specimen symmetry
 CS = crystalSymmetry('-3m',[1.4 1.4 1.5]);
@@ -40,9 +40,9 @@ pf = PoleFigure.load(fname,h,CS,SS,'interface','dubna','superposition',c);
 plot(pf)
 mtexColorbar
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_01.png" %}
-<h2 id="2">Extract information from imported pole figure data</h2><p><b>get raw data</b> Data stored in a <a href="PoleFigure.PoleFigure.html">PoleFigure</a> variable can be extracted by</p>
+<center>
+{% include inline_image.html file="PoleFigureDubna_01.png" %}
+</center><h2 id="2">Extract information from imported pole figure data</h2><p><b>get raw data</b> Data stored in a <a href="PoleFigure.PoleFigure.html">PoleFigure</a> variable can be extracted by</p>
 {% highlight matlab %}
 I = pf.intensities; % intensities
 h = pf.h;            % Miller indice
@@ -81,9 +81,9 @@ pf_modified = PoleFigure
   h = (11-22), r = 1 x 1224 points
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_02.png" %}
-
+<center>
+{% include inline_image.html file="PoleFigureDubna_02.png" %}
+</center>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(xvector-yvector,25*degree);
 pf_modified = rotate(pf,rot)
@@ -102,9 +102,9 @@ pf_modified = PoleFigure
   h = (11-22), r = 72 x 19 points
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_03.png" %}
-<h2 id="7">PDF - to - ODF Reconstruction</h2>
+<center>
+{% include inline_image.html file="PoleFigureDubna_03.png" %}
+</center><h2 id="7">PDF - to - ODF Reconstruction</h2>
 {% highlight matlab %}
 rec = calcODF(pf,'RESOLUTION',10*degree,'iter_max',6)
 
@@ -125,9 +125,9 @@ rec = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_04.png" %}
-
+<center>
+{% include inline_image.html file="PoleFigureDubna_04.png" %}
+</center>
 {% highlight matlab %}
 odf = SantaFe
 
@@ -185,9 +185,9 @@ rec = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_05.png" %}
-<p>without ghost correction</p>
+<center>
+{% include inline_image.html file="PoleFigureDubna_05.png" %}
+</center><p>without ghost correction</p>
 {% highlight matlab %}
 rec_ng = calcODF(pf_SantaFe,'RESOLUTION',10*degree,'background',10,'NoGhostCorrection')
 
@@ -207,9 +207,9 @@ rec_ng = ODF
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_06.png" %}
-<h2 id="13">Error Analysis</h2>
+<center>
+{% include inline_image.html file="PoleFigureDubna_06.png" %}
+</center><h2 id="13">Error Analysis</h2>
 {% highlight matlab %}
 calcError(pf_SantaFe,rec)
 calcError(pf_SantaFe,rec_ng)
@@ -233,9 +233,9 @@ plotDiff(pf_SantaFe,rec)
 progress: 100%
 
 {% endhighlight %}
-
-  {% include inline_image.html file="PoleFigureDubna_07.png" %}
-<p><b>ODF error</b></p>
+<center>
+{% include inline_image.html file="PoleFigureDubna_07.png" %}
+</center><p><b>ODF error</b></p>
 {% highlight matlab %}
 calcError(SantaFe,rec)
 calcError(SantaFe,rec_ng)

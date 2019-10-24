@@ -1,6 +1,6 @@
 ---
 title: Advanced Grain Reconstruction
-last_updated: 11-Oct-2019
+last_updated: 24-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstructionAdvanced.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-11"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="#" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstructionAdvanced into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
+      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstructionAdvanced into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
@@ -44,9 +44,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_01.png" %}
-<h2 id="2">2) no fill, no grains, indexed pixels</h2>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_01.png" %}
+</center><h2 id="2">2) no fill, no grains, indexed pixels</h2>
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
@@ -78,9 +78,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_02.png" %}
-<h2 id="3">3) fill, no grains, all pixels</h2>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_02.png" %}
+</center><h2 id="3">3) fill, no grains, all pixels</h2>
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd.grainId] = calcGrains(ebsd);
@@ -110,11 +110,14 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
  
+Warning: Maximum number of iterations (100) has been
+exceeded. Increase MaxIter option (OPTIONS.MaxIter) or
+decrease TolZ (OPTIONS.TolZ) value. 
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_03.png" %}
-<h2 id="4">4) fill, no grains, indexed pixels</h2>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_03.png" %}
+</center><h2 id="4">4) fill, no grains, indexed pixels</h2>
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
@@ -146,9 +149,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_04.png" %}
-<h2 id="5">5) fill, grains, indexed pixels</h2>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_04.png" %}
+</center><h2 id="5">5) fill, grains, indexed pixels</h2>
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
@@ -181,9 +184,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_05.png" %}
-<h2 id="6">6) Multiscale clustering method</h2>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_05.png" %}
+</center><h2 id="6">6) Multiscale clustering method</h2>
 {% highlight matlab %}
 mtexdata small
 grains = calcGrains(ebsd('indexed'),'FMC',1)
@@ -223,9 +226,9 @@ grains = grain2d
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_06.png" %}
-<h2 id="7">Multiscale clustering method</h2><p>When analyzing grains with gradual and subtle boundaries the threshold based method may not lead to the desired result.</p><p>Let us consider the following example</p>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_06.png" %}
+</center><h2 id="7">Multiscale clustering method</h2><p>When analyzing grains with gradual and subtle boundaries the threshold based method may not lead to the desired result.</p><p>Let us consider the following example</p>
 {% highlight matlab %}
 mtexdata single
 
@@ -236,6 +239,8 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
 
 {% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/single.mat
  
 ebsd = EBSD  
  
@@ -247,9 +252,9 @@ ebsd = EBSD
  
 
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_07.png" %}
-<p>We obeserve that the are no rapid changes in the orientation which would allow for applying the threshold based algorithm. Setting the threshold angle to a very small value would include many irrelevant or false regions.</p>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_07.png" %}
+</center><p>We obeserve that the are no rapid changes in the orientation which would allow for applying the threshold based algorithm. Setting the threshold angle to a very small value would include many irrelevant or false regions.</p>
 {% highlight matlab %}
 grains_high = calcGrains(ebsd,'angle',1*degree);
 grains_low  = calcGrains(ebsd,'angle',0.5*degree);
@@ -266,11 +271,11 @@ hold on
 plot(grains_low.boundary)
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_08.png" %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_09.png" %}
-<p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_08.png" %}
+</center><center>
+{% include inline_image.html file="GrainReconstructionAdvanced_09.png" %}
+</center><p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p>
 {% highlight matlab %}
 grains_FMC = calcGrains(ebsd('indexed'),'FMC',3.8)
 grains = calcGrains(ebsd('indexed'))
@@ -334,6 +339,6 @@ plot(grains_FMC.boundary,'linewidth',1.5)
 % stop overide mode
 hold off
 {% endhighlight %}
-
-  {% include inline_image.html file="GrainReconstructionAdvanced_10.png" %}
-</div></body></html>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_10.png" %}
+</center></div></body></html>
