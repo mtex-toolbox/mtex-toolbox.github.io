@@ -8,8 +8,6 @@ folder: publications
 toc: false
 ---
 
-### Reference Publications
-
 If you are using MTEX for your research, please cite one of the
 following paper that best fits your application.
 
