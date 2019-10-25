@@ -95,7 +95,7 @@ publish(mtexExFiles,'outDir',exOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',
 % add frontmatter to html files
 files = dir(fullfile(exOut, '*.html'));
 for idx = 1:length(files)
-  add_frontmatter(exOut, files(idx), 'function_reference');
+  add_frontmatter(exOut, files(idx), 'examples');
 end
 
 move_images(exOut);
