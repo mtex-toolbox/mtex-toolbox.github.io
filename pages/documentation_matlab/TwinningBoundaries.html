@@ -1,6 +1,6 @@
 ---
 title: Twinning Analysis
-last_updated: 24-Oct-2019
+last_updated: 25-Oct-2019
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
+      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-25"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins
@@ -56,7 +56,7 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_01.png" %}
-</center><p>Now we can extract from the grains its boundary and save it to a separate variable</p>
+</center><p>Next we extract the grainboundaries and save them to a separate variable</p>
 {% highlight matlab %}
 gB = grains.boundary
 {% endhighlight %}
@@ -92,6 +92,7 @@ mtexColorbar
 {% include inline_image.html file="TwinningBoundaries_02.png" %}
 </center><p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogramm.</p>
 {% highlight matlab %}
+close all
 histogram(gB_MgMg.misorientation.angle./degree,40)
 xlabel('misorientation angle (degree)')
 {% endhighlight %}
@@ -186,7 +187,7 @@ plot(grains,grains.meanOrientation)
 %plot(ebsd('indexed'),ebsd('indexed').orientations)
 hold on
 %plot(gB_MgMg,angle(gB_MgMg.misorientation,twinning),'linewidth',4)
-plot(twinBoundary,'linecolor','w','linewidth',2,'displayName','twin boundary')
+plot(twinBoundary,'linecolor','w','linewidth',4,'displayName','twin boundary')
 hold off
 {% endhighlight %}
 
@@ -205,159 +206,4 @@ twinBoundary = grainBoundary
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_05.png" %}
-</center><h2 id="12">Merge twins along twin boundaries</h2><p>Grains that have a common twin boundary are assumed to inherite from one common grain. To reconstruct those initial grains we merge grains together which have a common twin boundary. This is done by the command <a href="grain2d.merge.html">merge</a>.</p>
-{% highlight matlab %}
-[mergedGrains,parentId] = merge(grains,twinBoundary);
-
-% plot the merged grains
-%plot(ebsd,ebsd.orientations)
-hold on
-plot(mergedGrains.boundary,'linecolor','k','linewidth',2.5,'linestyle','-',...
-  'displayName','merged grains')
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TwinningBoundaries_06.png" %}
-</center><h2 id="13">Grain relationships</h2><p>The second output argument <tt>paraentId</tt> of <a href="grain2d.merge.html">merge</a> is a list with the same size as grains which indicates for each grain into which common grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p>
-{% highlight matlab %}
-mergedGrains(16).id
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    16
-
-{% endhighlight %}
-<p>Hence, we can find all childs of grain 16 by</p>
-{% highlight matlab %}
-childs = grains(parentId == mergedGrains(16).id)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-childs = grain2d  
- 
- Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
-     1       8    1698  Magnesium     6/mmm       X||a*, Y||b, Z||c*
- 
- boundary segments: 442
- triple points: 25
- 
- Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  6       1       40   0.00752395    178    90    236
- 14       1      254    0.0113434     81    25    187
- 17       1        4    0.0135723     80    26    189
- 19       1       38   0.00595743     95   145    186
- 24       1      774    0.0102947    178    90    235
- 28       1       45    0.0107243     81    26    188
- 29       1      293   0.00910428     94   146    185
- 33       1      250    0.0106861    179    89    235
- 
-
-{% endhighlight %}
-<h2 id="15">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p>
-{% highlight matlab %}
-twinId = unique(gB_MgMg(isTwinning).grainId);
-
-% compute the area fraction
-sum(area(grains(twinId))) / sum(area(grains)) * 100
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-   73.5716
-
-{% endhighlight %}
-<p>The <tt>parentId</tt> may also used to compute properties of the parent grains by averaging over the corresponding child grain properties.</p>
-{% highlight matlab %}
-mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@nanmean)
-
-figure(1)
-plot(grains,grains.GOS ./ degree)
-hold on
-plot(mergedGrains.boundary,'lineColor','white','lineWidth',2)
-mtexColorbar
-
-figure(2)
-plot(mergedGrains,mergedGrains.GOS  ./ degree)
-mtexColorbar
-caxis([0,1.5])
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-mergedGrains = grain2d  
- 
- Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
-     1      28   22794  Magnesium     6/mmm       X||a*, Y||b, Z||c*
- 
- boundary segments: 2099
- triple points: 34
- 
- Properties: GOS
- 
-
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TwinningBoundaries_07.png" %}
-</center><center>
-{% include inline_image.html file="TwinningBoundaries_08.png" %}
-</center><p>The above result is a bit unrealistic since the averages are computed between the childs ignoring their relative areas. A better approach is to compute a weighted average by the following lines.</p>
-{% highlight matlab %}
-% extract GOS and area
-childGOS = grains.GOS;
-childArea = grains.area;
-
-% compute the weighted averages
-mergedGrains.prop.GOS = accumarray(parentId,1:length(grains),size(mergedGrains),...
-  @(id) nanmeanWeights(childGOS(id),childArea(id)));
-
-figure(3)
-plot(mergedGrains,mergedGrains.GOS  ./ degree)
-mtexColorbar
-caxis([0,1.5])
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TwinningBoundaries_09.png" %}
-</center><h2 id="18">Setting Up the EBSD Data for the Merged Grains</h2><p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p>
-{% highlight matlab %}
-close all
-plot(mergedGrains(16).boundary,'linewidth',2)
-hold on
-plot(ebsd(mergedGrains(16)),ebsd(mergedGrains(16)).orientations)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TwinningBoundaries_10.png" %}
-</center><p>In order to update the grainId in the ebsd variable to the merged grains, we proceed as follows.</p>
-{% highlight matlab %}
-% copy ebsd data into a new variable to not change the old data
-ebsd_merged = ebsd;
-
-% update the grainIds to the parentIds
-ebsd_merged('indexed').grainId = parentId(ebsd('indexed').grainId)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-ebsd_merged = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22794 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
-
-{% endhighlight %}
-<p>Now the variable <tt>ebsd_merged</tt> can be indexed by the merged grains, i.e.</p>
-{% highlight matlab %}
-plot(ebsd_merged(mergedGrains(16)),ebsd_merged(mergedGrains(16)).orientations)
-hold on
-plot(mergedGrains(16).boundary,'linewidth',2)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TwinningBoundaries_11.png" %}
-</center></div></body></html>
+</center><p>A common next step is to reconstruct the grain structure parent to twinning by merging the twinned grains. This is explained in detail in the section <a href="GrainMerge.html">Merging Grains</a>.</p></div></body></html>
