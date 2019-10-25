@@ -101,7 +101,7 @@ end
 move_images(exOut);
 
 makeHelpToc(mtexExFiles,'Examples','examples.xml');
-xml2yml('examples.xml','../_data/sidebars/example_sidebar.yml','Examples')
+xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
 
 %%
 if check_option(varargin,'checkLinks')
