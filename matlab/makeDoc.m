@@ -32,6 +32,7 @@ stylesheet = fullfile(pwd,'web.xsl');
 
 funRefOut = fullfile(pwd,'..','pages','function_reference_matlab');
 docOut = fullfile(pwd,'..','pages','documentation_matlab');
+exOut = fullfile(pwd,'..','pages','examples_matlab');
 
 %% DocFiles
 mtexFunctionFiles = [...
@@ -65,6 +66,10 @@ end
 
 move_images(funRefOut);
 
+makeHelpToc(mtexHelpFiles,'Documentation','doc.xml');
+xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
+
+
 %% Publish Doc
 
 publish(mtexDocFiles,'outDir',docOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
@@ -77,19 +82,31 @@ end
 
 move_images(docOut);
 
+makeHelpToc(mtexHelpFiles,'FunctionReference','funcRef.xml');
+xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
+
+%% make examples
+
+mtexExFiles = DocFile( fullfile(mtex_path,'..','examples'));
+
+
+publish(mtexExFiles,'outDir',exOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
+
+% add frontmatter to html files
+files = dir(fullfile(exOut, '*.html'));
+for idx = 1:length(files)
+  add_frontmatter(exOut, files(idx), 'function_reference');
+end
+
+move_images(exOut);
+
+makeHelpToc(mtexHelpFiles,'Documentation','examples.xml');
+xml2yml('examples.xml','../_data/sidebars/example_sidebar.yml','Examples')
+
 %%
 if check_option(varargin,'checkLinks')
   deadlink(mtexDocFiles,{funRefOut,docOut});
 end
-
-%% make help toc
-
-makeHelpToc(mtexHelpFiles,'Documentation','doc.xml');
-xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
-
-makeHelpToc(mtexHelpFiles,'FunctionReference','funcRef.xml');
-xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
-
 
 %% set back mtex options
 
