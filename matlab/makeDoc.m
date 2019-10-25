@@ -100,7 +100,7 @@ end
 
 move_images(exOut);
 
-makeHelpToc(mtexHelpFiles,'Documentation','examples.xml');
+makeHelpToc(mtexExFiles,'Examples','examples.xml');
 xml2yml('examples.xml','../_data/sidebars/example_sidebar.yml','Examples')
 
 %%

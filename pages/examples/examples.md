@@ -3,7 +3,7 @@ title: Examples
 keywords: examples
 last_updated: November, 2019
 sidebar: example_sidebar
-permalink: documentation.html
+permalink: examples.html
 folder: examples
 toc: false
 ---
