@@ -58,7 +58,7 @@ toc: false
   {% include image.html file="kilian.jpg" alt="Picture of Rüdiger Kilian" max-width='120'%}
 </td><td valign="top">
   <p><b>Rüdiger Kilian</b> contributes to EBSD and grain analysis</p>
-  <p>University of Basel, Switzerland</p>
+  <p>MLU Halle, Germany</p>
 </td>
 </tr></table>
 </div>
