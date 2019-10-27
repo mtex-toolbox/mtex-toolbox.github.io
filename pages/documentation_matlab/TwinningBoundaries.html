@@ -1,6 +1,6 @@
 ---
 title: Twinning Analysis
-last_updated: 25-Oct-2019
+last_updated: 27-Oct-2019
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-25"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
+      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-27"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TwinningBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins
@@ -23,7 +23,7 @@ mtexdata twins
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
 % remove two pixel grains
-ebsd(grains(grains.grainSize&lt;=2)) = [];
+ebsd(grains(grains.grainSize<=2)) = [];
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
 % smooth them
@@ -47,11 +47,6 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
  
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
 
 {% endhighlight %}
 <center>
@@ -100,7 +95,7 @@ xlabel('misorientation angle (degree)')
 {% include inline_image.html file="TwinningBoundaries_03.png" %}
 </center><p>Lets analyze the misorientations corresponding to the peak around 86 degree in more detail. Therefore, we consider only those misorientations with misorientation angle between 85 and 87 degree</p>
 {% highlight matlab %}
-ind = gB_MgMg.misorientation.angle&gt;85*degree &amp; gB_MgMg.misorientation.angle&lt;87*degree;
+ind = gB_MgMg.misorientation.angle>85*degree & gB_MgMg.misorientation.angle<87*degree;
 mori = gB_MgMg.misorientation(ind);
 {% endhighlight %}
 <p>and observe that when plotted in axis angle domain they form a strong cluster close to one of the corners of the domain.</p>
@@ -179,7 +174,7 @@ ans =
 <p>Next, we check for each boundary segment whether it is a twinning boundary, i.e., whether boundary misorientation is close to the twinning.</p>
 {% highlight matlab %}
 % restrict to twinnings with threshold 5 degree
-isTwinning = angle(gB_MgMg.misorientation,twinning) &lt; 5*degree;
+isTwinning = angle(gB_MgMg.misorientation,twinning) < 5*degree;
 twinBoundary = gB_MgMg(isTwinning)
 
 % plot the twinning boundaries
@@ -197,11 +192,6 @@ twinBoundary = grainBoundary
  
  Segments  mineral 1  mineral 2
      1649  Magnesium  Magnesium
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
 
 {% endhighlight %}
 <center>

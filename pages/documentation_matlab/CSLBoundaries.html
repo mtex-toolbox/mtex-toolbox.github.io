@@ -1,6 +1,6 @@
 ---
 title: CSL Boundaries
-last_updated: 24-Oct-2019
+last_updated: 27-Oct-2019
 sidebar: documentation_sidebar
 permalink: CSLBoundaries.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit CSLBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of CSL boundaries. Therefore lets start by importing some Iron data and reconstructing the grain structure.</p>
+      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-27"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit CSLBoundaries into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of CSL boundaries. Therefore lets start by importing some Iron data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 mtexdata csl
 plotx2east
@@ -39,11 +39,6 @@ ebsd = EBSD
  Properties: ci, error, iq, x, y
  Scan unit : um
  
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
 
 {% endhighlight %}
 <center>
@@ -59,15 +54,6 @@ hold on
 plot(grains,grains.meanOrientation,'FaceAlpha',0.4)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_02.png" %}
 </center><h2 id="3">Detecting CSL Boundaries</h2><p>In order to detect CSL boundaries within the data set we first restrict the grain boundaries to iron to iron phase transitions and check then the boundary misorientations to be a CSL(3) misorientation with threshold of 3 degree.</p>
@@ -76,7 +62,7 @@ hold off
 gB = grains.boundary('iron','iron')
 
 % select CSL(3) grain boundaries
-gB3 = gB(angle(gB.misorientation,CSL(3,ebsd.CS)) &lt; 3*degree);
+gB3 = gB(angle(gB.misorientation,CSL(3,ebsd.CS)) < 3*degree);
 
 % overlay CSL(3) grain boundaries with the existing plot
 hold on
@@ -100,7 +86,7 @@ gB = grainBoundary
 isCSL3 = grains.boundary.isTwinning(CSL(3,ebsd.CS),3*degree);
 
 % logical list of triple points with at least 2 CSL boundaries
-tPid = sum(isCSL3(grains.triplePoints.boundaryId),2)&gt;=2;
+tPid = sum(isCSL3(grains.triplePoints.boundaryId),2)>=2;
 
 % plot these triple points
 hold on
@@ -109,7 +95,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_04.png" %}
-</center><h2 id="5">Merging grains with common CSL(3) boundary</h2><p>Next we merge all grains together which have a common CSL(3) boundary. This is done with the command <a href="grain2d_merge.html">merge</a>.</p>
+</center><h2 id="5">Merging grains with common CSL(3) boundary</h2><p>Next we merge all grains together which have a common CSL(3) boundary. This is done with the command <a href="grain2d.merge.html">merge</a>.</p>
 {% highlight matlab %}
 % this merges the grains
 [mergedGrains,parentIds] = merge(grains,gB3);
@@ -168,15 +154,6 @@ plot(grains,grains.meanOrientation,'FaceAlpha',0.4)
 hold on
 plot(gB,moriKey.orientation2color(gB.misorientation),'linewidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_07.png" %}
