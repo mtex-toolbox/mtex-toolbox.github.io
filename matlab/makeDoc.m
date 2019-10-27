@@ -135,6 +135,7 @@ function move_images(Dir)
 end
 
 function add_frontmatter(dir, file, name)
+% this can be done more efficently within the xsl
   filename = file;
   filename = filename.name;
   f = fopen(fullfile(dir, filename), 'r');

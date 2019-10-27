@@ -13,7 +13,7 @@ Use the XSLT command to perform the conversion.
   xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd"
   exclude-result-prefixes="mwsh">
   <xsl:output method="html"
-    indent="no" 
+    indent="no"
     doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
   <xsl:strip-space elements="mwsh:code"/>
 
@@ -59,7 +59,7 @@ To make changes, update the MATLAB code and republish this document.
   </head>
 
   <body>
-    
+
     <xsl:call-template name="header"/>
 
     <div>
@@ -75,11 +75,11 @@ To make changes, update the MATLAB code and republish this document.
       <xsl:apply-templates select="cell[1]/mcodeoutput"/>
       <xsl:comment>/introduction</xsl:comment>
     </xsl:if>
-    
+
 
     <xsl:variable name="body-cells" select="cell[not(@style = 'overview')]"/>
 
-    
+
     <!-- Loop over each cell -->
     <xsl:for-each select="$body-cells">
         <!-- Title of cell -->
@@ -112,7 +112,7 @@ To make changes, update the MATLAB code and republish this document.
     <xsl:call-template name="footer"/>
 
     </div>
-    
+
     <xsl:apply-templates select="originalCode"/>
 
   </body>
@@ -124,7 +124,10 @@ To make changes, update the MATLAB code and republish this document.
 
 <!-- Header -->
 <xsl:template name="header">
-<font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip"><xsl:attribute name="data-original-title"><xsl:text>To edit this page type edit </xsl:text><xsl:value-of select="$filename"/><xsl:text> into the Matlab commandline</xsl:text></xsl:attribute>edit page</a></font>
+<font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip">
+  <xsl:attribute name="data-original-title">
+    <xsl:text>To edit this page type edit </xsl:text><xsl:value-of select="$filename"/>
+    <xsl:text> into the Matlab commandline</xsl:text></xsl:attribute>edit page</a></font>
 </xsl:template>
 
 <!-- Footer -->
@@ -137,7 +140,7 @@ To make changes, update the MATLAB code and republish this document.
   <h2>Contents</h2>
   <div><ul>
     <xsl:for-each select="$body-cells">
-      <xsl:if test="./steptitle">        
+      <xsl:if test="./steptitle">
         <li><a><xsl:attribute name="href">#<xsl:value-of select="position()"/></xsl:attribute><xsl:apply-templates select="steptitle"/></a></li>
       </xsl:if>
     </xsl:for-each>
@@ -199,7 +202,7 @@ To make changes, update the MATLAB code and republish this document.
 
 <xsl:template match="mcode-xmlized">
 {% highlight matlab %}
-<xsl:value-of select="."/>
+<xsl:value-of select="." disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
 
@@ -269,10 +272,10 @@ To make changes, update the MATLAB code and republish this document.
       <xsl:value-of select=
         "concat(substring-before($outputString,$target),$replacement)"/>
       <xsl:call-template name="globalReplace">
-        <xsl:with-param name="outputString" 
+        <xsl:with-param name="outputString"
           select="substring-after($outputString,$target)"/>
         <xsl:with-param name="target" select="$target"/>
-        <xsl:with-param name="replacement" 
+        <xsl:with-param name="replacement"
           select="$replacement"/>
       </xsl:call-template>
     </xsl:when>
