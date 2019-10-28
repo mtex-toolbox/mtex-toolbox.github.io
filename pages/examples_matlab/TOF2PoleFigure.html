@@ -1,0 +1,101 @@
+---
+title: Convert Time of Flight Neutron Data into Pole Figures
+last_updated: 28-Oct-2019
+sidebar: examples_sidebar
+permalink: TOF2PoleFigure.html
+folder: examples
+toc: false
+---
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Convert Time of Flight Neutron Data into Pole Figures</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TOF2PoleFigure.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TOF2PoleFigure into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This example demonstrates how to convert SKAT time of flight neutron intensities into pole figure intensities</p><!--/introduction--><h2 id="1">Step 1: Import and Analyze the Spectra</h2>
+{% highlight matlab %}
+% import all spectra
+spec = loadallspectra(fullfile(mtexExamplePath,'NeutronData','Knie_10','Knie_10'));
+
+% compute background
+bg = calc_background(spec);
+
+% plot
+plot_spectra(spec,bg)
+{% endhighlight %}
+
+{% highlight plaintext %}
+load detector: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, .
+calculate background: &#155;100%
+.
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TOF2PoleFigure_01.png" %}
+</center><h2 id="2">Step 2: Peak Detection and Integration</h2>
+{% highlight matlab %}
+%Range fits measure period in '2005'
+peakpos = [2520 1995 1480 1376 1354 1280 1206 1110];
+peakrange = [[2509      2550];...
+	[1981      2009];...
+	[1470      1500];...
+	[1366      1390];...
+	[1344      1366];...
+	[1280      1295];...
+	[1196      1211];...
+	[1103      1117];...
+  [1015      1030]];
+
+% specify scrystal and specimen symmetry
+CS = crystalSymmetry('-3m',[1.4,1.4,1.5]);
+
+% file with structure factors for quartz
+sf = txt2mat('quartz.txt');
+
+%
+sfpos  = {1,[2 3],4,[5 6],7,8,[9,10],11,[13,14]};
+
+for k = 1:length(sfpos)
+  i = sfpos{k};
+  h{k} = Miller(sf(i,2),sf(i,3),sf(i,4),sf(i,5),CS);
+  c{k} = sf(i,end).';
+end
+
+
+% extract peaks and calculate spectra sums
+[sumdetectr,sumphi,sumspectr,peaks,peaksbg] = proceed_spectra(spec,bg,300:1200,peakrange);
+{% endhighlight %}
+
+{% highlight plaintext %}
+************
+* quartz.txt
+* read mode: auto
+* 83 data lines analysed
+* 0 header line(s)
+* 12 data column(s)
+* 0 string replacement(s)
+************
+
+{% endhighlight %}
+<h2 id="3">Step 3: Set up the Pole Figures</h2>
+{% highlight matlab %}
+r = DubnaGrid(19);
+
+pf = PoleFigure(h{1},r,fliplr(squeeze(peaks(1,:,:))),CS);
+
+for k = 2:length(h)
+
+  pf({k}) = PoleFigure(h{k}.',r,fliplr(squeeze(peaks(k,:,:))),CS);
+
+end
+
+pf.c = c;
+
+%plot(rotate(pf,rotation('axis',xvector,'angle',90*degree)))
+plot(pf)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TOF2PoleFigure_02.png" %}
+</center></div></body></html>
