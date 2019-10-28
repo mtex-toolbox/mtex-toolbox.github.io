@@ -1,6 +1,6 @@
 ---
 title: Birefrigence
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: BirefringenceDemo.html
 folder: documentation
@@ -14,13 +14,14 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Birefrigence</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit BirefringenceDemo into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustarte the effect of birefringence lets consider a olivine data set.</p>
+      --><title>Birefrigence</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/BirefringenceDemo.m">
+    edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustarte the effect of birefringence lets consider a olivine data set.</p>
 {% highlight matlab %}
 mtexdata olivine
 
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize &lt; 5)) = [];
+ebsd(grains(grains.grainSize < 5)) = [];
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
 % some data denoising
@@ -31,6 +32,8 @@ ebsd = smooth(ebsd,F,'fill',grains);
 {% endhighlight %}
 
 {% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/olivine.mat
  
 ebsd = EBSD  
  
@@ -55,7 +58,7 @@ hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
 
-gg = grains(grains.grainSize &gt; 100);
+gg = grains(grains.grainSize > 100);
 gg = gg('o')
 cS = crystalShape.olivine;
 hold on

@@ -1,6 +1,6 @@
 ---
 title: Tensor Arithmetics
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: TensorArithmetics.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TensorArithmetics into the Matlab commandline">edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2>
+      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
+    edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2>
 {% highlight matlab %}
 T1 = tensor.rand('rank',2)
 T2 = tensor.rand('rank',2)
@@ -33,32 +34,32 @@ T1 = tensor
   rank: 2 (3 x 3)
  
  *10^-2
-  22.8 75.41 20.05
- 41.23  52.4 21.89
- 30.23    71 50.16
+  83.5    92 15.94
+ 33.42 99.57 15.75
+ 93.83 33.81 28.21
  
 T2 = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
- 84.21 10.56 92.76
- 84.41 74.44 28.68
-   3.2  84.1 91.66
+ 10.73 36.24 30.38
+ 47.91 79.48 59.38
+ 84.89 13.49  43.2
  
 ans = tensor  
   rank: 2 (3 x 3)
  
- 1.9121 0.9653 2.0558
- 2.1005 2.0128 0.7926
- 0.3664  2.392 2.3347
+ 1.0496 1.6449  0.767
+ 1.2925 2.5853 1.3451
+ 2.6362 0.6079 1.1461
  
 ans = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
-  19.2  7.96  18.6
-  34.8    39  6.28
-  0.97 59.71 45.97
+  8.96 33.34  4.84
+ 16.01 79.14  9.35
+ 79.65  4.56 12.19
 
 {% endhighlight %}
 <h2 id="2">Tensor Products</h2><p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
@@ -133,25 +134,25 @@ a = tensor
   rank: 1 (3)
  
  *10^-2
- 99.89
- 63.36
- 34.45
+ 17.74
+ 67.74
+ 13.05
  
 b = tensor  
   rank: 1 (3)
  
  *10^-2
- 40.96
- 75.01
- 70.44
+ 11.02
+ 67.93
+ 25.62
  
 ans = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
- 40.91 74.93 70.37
- 25.95 47.52 44.63
- 14.11 25.84 24.27
+  1.95 12.05  4.55
+  7.47 46.02 17.36
+  1.44  8.86  3.34
 
 {% endhighlight %}
 <p>and the inner product</p><p>$$ a \cdot b = \sum_i a_i b_i</p><p>by</p>
@@ -161,7 +162,7 @@ EinsteinSum(a,-1,b,-1)
 
 {% highlight plaintext %}
 ans =
-    1.1270
+    0.5131
 
 {% endhighlight %}
 <p>As a final example we consider the e linear compressibility in a certain direction <b>v</b> can be computed by the formula</p><p>
@@ -232,13 +233,13 @@ det(T1)
 
 {% highlight plaintext %}
 ans =
-    2.3250
+    2.4805
 ans =
-    2.3250
+    2.4805
 ans =
-    2.3250
+    2.4805
 ans =
-   -0.0546
+    0.1084
 
 {% endhighlight %}
 <h2 id="10">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html">rotate</a>. Let's define a rotation</p>
@@ -268,10 +269,9 @@ plot(Trot)
 Trot = tensor  
   rank: 2 (3 x 3)
  
- *10^-2
- -20.72    2.3   -1.3
- -31.89  95.92  29.66
- -28.83  71.58  50.16
+  0.2883  0.2125  0.0014
+ -0.3732  1.5425  0.2241
+  0.4244  0.9025  0.2821
 
 {% endhighlight %}
 <center>

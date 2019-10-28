@@ -1,6 +1,6 @@
 ---
 title: Merging Grains
-last_updated: 25-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainMerge.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-25"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GrainMerge into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be usefull when reconstructing parent grain structures, i.e., before phase transistion or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magenesium data and reconstructing the grain structure:</p>
+      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be usefull when reconstructing parent grain structures, i.e., before phase transistion or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magenesium data and reconstructing the grain structure:</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins silent
@@ -23,7 +24,7 @@ mtexdata twins silent
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
 % remove two pixel grains
-ebsd(grains(grains.grainSize&lt;=2)) = [];
+ebsd(grains(grains.grainSize<=2)) = [];
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
 % smooth them
@@ -45,7 +46,7 @@ twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
 gB = grains.boundary('Magnesium','Magnesium');
 
 % and check which of them are twinning boundaries with threshold 5 degree
-isTwinning = angle(gB.misorientation,twinning) &lt; 5*degree;
+isTwinning = angle(gB.misorientation,twinning) < 5*degree;
 twinBoundary = gB(isTwinning)
 
 % plot the twinning boundaries

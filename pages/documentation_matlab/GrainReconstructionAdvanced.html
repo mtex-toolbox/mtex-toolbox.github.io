@@ -1,6 +1,6 @@
 ---
 title: Advanced Grain Reconstruction
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstructionAdvanced.html
 folder: documentation
@@ -14,11 +14,12 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GrainReconstructionAdvanced into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
+      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstructionAdvanced.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
-ebsd(grains(grains.grainSize&lt;=3)) = [];
+ebsd(grains(grains.grainSize<=3)) = [];
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
 F = splineFilter;
 ebsd = smooth(ebsd,F);
@@ -51,7 +52,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize&lt;=3)) = [];
+ebsd(grains(grains.grainSize<=3)) = [];
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
 ebsd = smooth(ebsd('indexed'),F);
@@ -86,7 +87,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd.grainId] = calcGrains(ebsd);
-ebsd(grains(grains.grainSize&lt;=3)) = [];
+ebsd(grains(grains.grainSize<=3)) = [];
 [grains,ebsd.grainId] = calcGrains(ebsd);
 F = splineFilter;
 ebsd = smooth(ebsd,F,'fill');
@@ -113,9 +114,6 @@ ebsd = EBSD
  Scan unit : um
  
  denoising EBSD data: 100%
-Warning: Maximum number of iterations (100) has been
-exceeded. Increase MaxIter option (OPTIONS.MaxIter) or
-decrease TolZ (OPTIONS.TolZ) value. 
 
 {% endhighlight %}
 <center>
@@ -124,7 +122,7 @@ decrease TolZ (OPTIONS.TolZ) value.
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize&lt;=3)) = [];
+ebsd(grains(grains.grainSize<=3)) = [];
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill');
@@ -159,7 +157,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize&lt;=3)) = [];
+ebsd(grains(grains.grainSize<=3)) = [];
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
@@ -244,6 +242,8 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
 
 {% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/single.mat
  
 ebsd = EBSD  
  

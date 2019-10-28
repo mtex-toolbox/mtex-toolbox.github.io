@@ -1,6 +1,6 @@
 ---
 title: Texture evolution in rolled magnesium during uniaxial tension
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: TaylorHex.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit TaylorHex into the Matlab commandline">edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p>
+      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorHex.m">
+    edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p>
 {% highlight matlab %}
 cs = crystalSymmetry.load('Mg-Magnesium.cif')
 {% endhighlight %}
@@ -108,9 +109,7 @@ ori = odf.discreteSample(10000);
  computing Taylor factor: 100%
 
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TaylorHex_02.png" %}
-</center><p>Apply the Taylor spin to the initial orientation distribution</p>
+<p>Apply the Taylor spin to the initial orientation distribution</p>
 {% highlight matlab %}
 oriCold = ori .* orientation(-Wcold);
 oriWarm = ori .* orientation(-Wwarm);
@@ -126,7 +125,7 @@ plotPDF(oriWarm,h,'antipodal','contourf','grid','grid_res',30*degree)
 mtexColorbar;
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TaylorHex_03.png" %}
+{% include inline_image.html file="TaylorHex_02.png" %}
 </center><h2 id="10">statistics on activated slip systems</h2><p>By adding up the coefficients of the taylor calculation and grouping them according to their slip system type, a bar chart can be plotted</p>
 {% highlight matlab %}
 % ensure slipId has the same size as |bCold|
@@ -141,11 +140,11 @@ statSsWarm = accumarray(slipId(:),bWarm(:));
 {% highlight matlab %}
 figure(2)
 bar([statSsCold.';statSsWarm.'])
-set(gca, 'YScale', 'log','XTickLabel', {'RT' '250 &#65533;C'})
+set(gca, 'YScale', 'log','XTickLabel', {'RT' '250 �C'})
 legend({'Basal slip','Prismatic slip','Pyramidal slip','Comp. Twin'},...
     'Location','eastoutside')
 legend('boxoff')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TaylorHex_04.png" %}
+{% include inline_image.html file="TaylorHex_03.png" %}
 </center></div></body></html>
