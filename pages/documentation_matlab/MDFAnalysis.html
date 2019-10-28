@@ -1,6 +1,6 @@
 ---
 title: Misorientation Distribution Function
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: MDFAnalysis.html
 folder: documentation
@@ -14,7 +14,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_MDFAnalysis.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit MDFAnalysis into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Explains how to compute and analyze misorientation distribution functions.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Computing a misorientation distribution function from EBSD data</h2><p>Lets import some EBSD data and reconstruct the grains.</p>
+      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_MDFAnalysis.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit MDFAnalysis into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Explains how to compute and analyze misorientation distribution functions.</p><!--/introduction--><h2 id="1">TODO</h2><p>Please help to redo the section</p><h2 id="2">Computing a misorientation distribution function from EBSD data</h2><p>Lets import some EBSD data and reconstruct the grains.</p>
 {% highlight matlab %}
 mtexdata forsterite
 grains = calcGrains(ebsd)
@@ -49,7 +49,7 @@ grains = grain2d
  
 
 {% endhighlight %}
-<h2 id="4">SUB: The boundary misorientation distribution function</h2><p>The boundary misorientation distribution function for the phase transition from Forsterite to Enstatite can be computed by</p>
+<h2 id="3">SUB: The boundary misorientation distribution function</h2><p>The boundary misorientation distribution function for the phase transition from Forsterite to Enstatite can be computed by</p>
 {% highlight matlab %}
 mdf_boundary = calcODF(grains.boundary('Fo','En').misorientation,'halfwidth',10*degree)
 {% endhighlight %}
@@ -92,7 +92,7 @@ plotPDF(mdf_boundary,Miller(1,0,0,ebsd('Fo').CS))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MDFAnalysis_01.png" %}
-</center><h2 id="7">SUB: The uncorrelated misorientation distribution function</h2><p>Alternatively the uncorrelated misorientation distribution function can be computed by providing the option <b>uncorrelated</b></p>
+</center><h2 id="6">SUB: The uncorrelated misorientation distribution function</h2><p>Alternatively the uncorrelated misorientation distribution function can be computed by providing the option <b>uncorrelated</b></p>
 {% highlight matlab %}
 mori = calcMisorientation(ebsd('En'),ebsd('Fo'))
 mdf_uncor = calcODF(mori)
@@ -101,7 +101,7 @@ mdf_uncor = calcODF(mori)
 {% highlight plaintext %}
  
 mori = misorientation  
-  size: 98586 x 1
+  size: 98539 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Enstatite (mmm)
  
@@ -122,7 +122,7 @@ plotPDF(mdf_uncor,Miller(1,0,0,ebsd('Fo').CS))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MDFAnalysis_02.png" %}
-</center><h2 id="9">Computing the uncorrelated misorientation function from two ODFs</h2><p>Let given two odfs</p>
+</center><h2 id="8">Computing the uncorrelated misorientation function from two ODFs</h2><p>Let given two odfs</p>
 {% highlight matlab %}
 odf_fo = calcODF(ebsd('fo').orientations,'halfwidth',10*degree)
 odf_en = calcODF(ebsd('en').orientations,'halfwidth',10*degree)
@@ -172,7 +172,7 @@ plotPDF(mdf,Miller(1,0,0,ebsd('Fo').CS))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MDFAnalysis_03.png" %}
-</center><h2 id="12">Analyzing misorientation functions</h2><h2 id="13">SUB: Angle distribution</h2><p>Let us first compare the actual angle distribution of the boundary misorientations with the theoretical angle distribution of the uncorrelated MDF.</p>
+</center><h2 id="11">Analyzing misorientation functions</h2><h2 id="12">SUB: Angle distribution</h2><p>Let us first compare the actual angle distribution of the boundary misorientations with the theoretical angle distribution of the uncorrelated MDF.</p>
 {% highlight matlab %}
 close all
 plotAngleDistribution(grains.boundary('fo','en').misorientation)
@@ -185,7 +185,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MDFAnalysis_04.png" %}
-</center><p>For computing the exact values see the commands <a href="ODF.calcAngleDistribution.html">calcAngleDistribution(mdf)</a> and <a href="orientation.calcAngleDistribution.html">calcAngleDistribution(ori)</a>.</p><h2 id="15">SUB: Axis distribution</h2><p>The same we can do with the axis distribution. First the actual angle distribution of the boundary misorientations</p>
+</center><p>For computing the exact values see the commands <a href="ODF.calcAngleDistribution.html">calcAngleDistribution(mdf)</a> and <a href="orientation.calcAngleDistribution.html">calcAngleDistribution(ori)</a>.</p><h2 id="14">SUB: Axis distribution</h2><p>The same we can do with the axis distribution. First the actual angle distribution of the boundary misorientations</p>
 {% highlight matlab %}
 plotAxisDistribution(grains.boundary('fo','en').misorientation,'smooth')
 {% endhighlight %}
