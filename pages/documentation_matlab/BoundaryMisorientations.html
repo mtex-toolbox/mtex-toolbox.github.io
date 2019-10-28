@@ -1,6 +1,6 @@
 ---
 title: Misorientations at grain boundaries
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: BoundaryMisorientations.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Misorientations at grain boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_BoundaryMisorientations.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit BoundaryMisorientations into the Matlab commandline">edit page</a></font><div><!--introduction--><p>Analyse misorientations along grain boundaries</p><p>This example explains how to analyse boundary misorientation by means of misorientation axes</p><!--/introduction--><h2 id="1">Import EBSD data and select a subregion</h2><p>First step is as always to import the data. Here we restrict the big data set to a subregion to make the results easier to visulize</p>
+      --><title>Misorientations at grain boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_BoundaryMisorientations.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryMisorientations.m">
+    edit page</a></font><div><!--introduction--><p>Analyse misorientations along grain boundaries</p><p>This example explains how to analyse boundary misorientation by means of misorientation axes</p><!--/introduction--><h2 id="1">Import EBSD data and select a subregion</h2><p>First step is as always to import the data. Here we restrict the big data set to a subregion to make the results easier to visulize</p>
 {% highlight matlab %}
 % take some MTEX data set
 mtexdata forsterite
@@ -67,7 +68,7 @@ min_points = 10;
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',seg_angle*degree);
 
 % remove small grains with less than min_points indexed points
-grains = grains(grains.grainSize &gt; min_points);
+grains = grains(grains.grainSize > min_points);
 
 % re-calculate grain model to cleanup grain boundaries with less than
 % minimum index points used ebsd points within grains having the minium
@@ -85,15 +86,6 @@ plot(grains('fo'),grains('fo').meanOrientation,'micronbar','off','figSize','larg
 hold on
 plot(grains.boundary)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryMisorientations_02.png" %}

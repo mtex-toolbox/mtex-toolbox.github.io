@@ -1,6 +1,6 @@
 ---
 title: Data Correction
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: PoleFigureCorrection.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Data Correction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_PoleFigureCorrection.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit PoleFigureCorrection into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to manipulate pole figure data, e.g., to correct for measurement errors. To illustrate lets start by importing some sample XRD data.</p>
+      --><title>Data Correction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_PoleFigureCorrection.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureCorrection.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to manipulate pole figure data, e.g., to correct for measurement errors. To illustrate lets start by importing some sample XRD data.</p>
 {% highlight matlab %}
 mtexdata geesthacht
 
@@ -23,6 +24,8 @@ plot(pf)
 {% endhighlight %}
 
 {% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/geesthacht.mat
  
 pf = PoleFigure  
   crystal symmetry : m-3m
@@ -137,7 +140,7 @@ plot(pf)
 </center><h2 id="10">Remove certain measurements from the data</h2><p>In the same way, as we removed the outlier one can manipulate and delete pole figure data by any criteria. Lets, e.g. cap all values that are larger than 500.</p>
 {% highlight matlab %}
 % find those values
-condition = pf.intensities &gt; 500;
+condition = pf.intensities > 500;
 
 % cap the values in the pole figures
 pf(condition).intensities = 500;

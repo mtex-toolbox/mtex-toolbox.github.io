@@ -1,6 +1,6 @@
 ---
 title: Plotting
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: GrainSpatialPlots.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit GrainSpatialPlots into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p>
+      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainSpatialPlots.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p>
 {% highlight matlab %}
 % import a demo data set
 mtexdata forsterite
@@ -98,15 +99,6 @@ hold off
 % the implicite way
 plot(grains('Fo'),grains('fo').meanOrientation)
 {% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSpatialPlots_04.png" %}
 </center><p>This implicte way gives no control about how the color is computed from the meanorientation. When using the explicite way by defining a orientation to color map</p>
@@ -141,7 +133,7 @@ CLim(gcm,[1 5])
 </center><h2 id="11">Colorizing circular properties</h2><p>Sometimes the property we want to display is a circular, e.g., the direction of the grain alongation. In this case it is important to use a circular colormap which assign the same color to high values and low values. In the case of the direction of the grain alongation the angles 0 and 180 should get the same color since they represent the same direction.</p>
 {% highlight matlab %}
 % consider only alongated grains
-alongated_grains = grains(grains.aspectRatio &gt; 5);
+alongated_grains = grains(grains.aspectRatio > 5);
 
 % get the grain alongation
 dir = alongated_grains.principalComponents;
@@ -233,11 +225,6 @@ ebsd = EBSD
  Properties: ci, error, iq, x, y
  Scan unit : um
  
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
 
 {% endhighlight %}
 <center>
@@ -245,22 +232,13 @@ ebsd = EBSD
 </center><h2 id="15">Labeling Grains</h2><p>In the above example the vectors are centered at the centroids of the grains. Other elements</p>
 {% highlight matlab %}
 % only the very big grains
-big_grains = grains(grains.grainSize&gt;1000);
+big_grains = grains(grains.grainSize>1000);
 
 % plot them
 plot(big_grains,big_grains.meanOrientation,'micronbar','off')
 
 % plot on top their ids
 text(big_grains,int2str(big_grains.id))
-{% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSpatialPlots_11.png" %}

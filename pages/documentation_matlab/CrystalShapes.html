@@ -1,6 +1,6 @@
 ---
 title: Crystal Shapes
-last_updated: 24-Oct-2019
+last_updated: 28-Oct-2019
 sidebar: documentation_sidebar
 permalink: CrystalShapes.html
 folder: documentation
@@ -14,7 +14,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Crystal Shapes</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-24"><meta name="DC.source" content="script_CrystalShapes.m"></head><body><font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip" data-original-title="To edit this page type edit CrystalShapes into the Matlab commandline">edit page</a></font><div><!--introduction--><!--/introduction--><p>Crystal Shapes are used to visualize crystal orientations, twinning or lattice planes.</p><h2 id="2">Simple crystal shapes</h2><p>In the case of cubic or hexagonal materials the corresponding crystal are often represented as cubes or hexagons, where the faces correspond to the lattice planes {100} in the cubic case and {1,0,-1,0},{0,0,0,1} in the hexagonal case. Such simple crystal shapes may be created in MTEX with the commands</p>
+      --><title>Crystal Shapes</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_CrystalShapes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalShapes.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Crystal Shapes are used to visualize crystal orientations, twinning or lattice planes.</p><h2 id="2">Simple crystal shapes</h2><p>In the case of cubic or hexagonal materials the corresponding crystal are often represented as cubes or hexagons, where the faces correspond to the lattice planes {100} in the cubic case and {1,0,-1,0},{0,0,0,1} in the hexagonal case. Such simple crystal shapes may be created in MTEX with the commands</p>
 {% highlight matlab %}
 % import some hexagonal data
 mtexdata titanium;
@@ -28,6 +29,8 @@ plot(cS)
 {% endhighlight %}
 
 {% highlight plaintext %}
+ loading data ...
+ saving data to /home/hielscher/mtex/master/data/titanium.mat
  
 ebsd = EBSD  
  
@@ -83,12 +86,6 @@ scaling = 100; % scale the crystal shape to have a nice size
 plot(500,500,50, ebsd(500,500).orientations * cS * scaling)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Possibly applying an orientation to an object in
-specimen coordinates! 
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_02.png" %}
 </center><p>As we have seen in the previous section we can apply several operations on crystal shapes. These include</p><div><ul><li><tt>factor * cS</tt> scales the crystal shape in size</li><li><tt>ori * cS</tt> rotates the crystal shape in the defined orientation</li><li><tt>[xy] + cS</tt> or <tt>[xyz] + cS</tt> shifts the crystal shape in the specified positions</li></ul></div><p>At this point it comes into help that MTEX supports lists of crystal shapes, i.e., whenever one of the operations listed above includes a list (e.g. a list of orientations) the multiplication will yield a list of crystal shapes. Lets illustrate this</p>
@@ -101,7 +98,7 @@ grains = smooth(grains,5);
 plot(grains,grains.meanOrientation)
 
 % find the big ones
-isBig = grains.grainSize&gt;50;
+isBig = grains.grainSize>50;
 
 % define a list of crystal shape that is oriented as the grain mean
 % orientation and scaled according to the grain area
@@ -111,17 +108,6 @@ cSGrains = grains(isBig).meanOrientation * cS * 0.7 * sqrt(grains(isBig).area);
 hold on
 plot(grains(isBig).centroid + cSGrains)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-Warning: Possibly applying an orientation to an object in
-specimen coordinates! 
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_03.png" %}
@@ -134,17 +120,6 @@ plot(grains,grains.meanOrientation)
 hold on
 plot(grains(isBig),0.7*cS,'FaceColor','none','linewidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-  I'm going to colorize the orientation data with the 
-  standard MTEX colorkey. To view the colorkey do:
- 
-  colorKey = ipfColorKey(ori_variable_name)
-  plot(colorKey)
-Warning: Possibly applying an orientation to an object in
-specimen coordinates! 
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_04.png" %}
@@ -195,8 +170,6 @@ mori = misorientation
   phi1  Phi phi2 Inv.
    330 34.9   30    0
  
-Warning: Possibly applying an orientation to an object in
-specimen coordinates! 
 
 {% endhighlight %}
 <center>
