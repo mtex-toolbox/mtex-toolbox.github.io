@@ -24,17 +24,21 @@ setMTEXpref('figSize',0.5)
 plotx2east
 
 setMTEXpref('generatingHelpMode',true);
+global mtex_progress; mtex_progress = 0; %#ok<NASGU>
 set(0,'FormatSpacing','compact')
 set(0,'DefaultFigureColor','white');
 
-tmpDir = fullfile(pwd,'tmp');
-stylesheet = fullfile(pwd,'web.xsl');
+options.tmpDir = fullfile(pwd,'tmp');
+options.imageDir = fullfile(pwd,'..','images');
+options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
+options.xmlDom = makeToolboxXML('.','name','MTEX',...
+  'fullname','<b>MTEX</b> - A MATLAB Toolbox for Quantitative Texture Analysis',...
+  'versionname',getMTEXpref('version'),...
+  'procuctpage','DocumentationMatlab.html');
 
-funRefOut = fullfile(pwd,'..','pages','function_reference_matlab');
-docOut = fullfile(pwd,'..','pages','documentation_matlab');
-exOut = fullfile(pwd,'..','pages','examples_matlab');
+%% Publish Function Reference
 
-%% DocFiles
+% define source files
 mtexFunctionFiles = [...
   DocFile( fullfile(mtex_path,'S2Fun')) ...
   DocFile( fullfile(mtex_path,'EBSDAnalysis')) ...
@@ -47,61 +51,61 @@ mtexFunctionFiles = [...
   DocFile( fullfile(mtex_path,'tools')) ...
   DocFile( fullfile(mtex_path,'doc','FunctionReference'));];
 
-%mtexFunctionFiles = exclude(mtexFunctionFiles,'Patala');
+% make sidebar
+makeHelpToc(mtexFunctionFiles,'FunctionReference','funcRef.xml');
+xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
 
-mtexDocFiles = DocFile( fullfile(mtex_path,'doc'));
-mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html','FunctionReference');
-
-mtexHelpFiles = [mtexFunctionFiles,mtexDocFiles];
-
-%% Publish Function Reference
-
-publish(mtexFunctionFiles,'outDir',funRefOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
+% publsih files
+options.outDir = fullfile(pwd,'..','pages','function_reference_matlab');
+publish(mtexFunctionFiles,options);
 
 % add frontmatter to html files
-files = dir(fullfile(funRefOut, '*.html'));
+files = dir(fullfile(options.outDir, '*.html'));
 for idx = 1:length(files)
-  add_frontmatter(funRefOut, files(idx), 'function_reference');
+  add_frontmatter(options.outDir, files(idx), 'function_reference');
 end
-
-move_images(funRefOut);
-
-makeHelpToc(mtexHelpFiles,'Documentation','doc.xml');
-xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
 
 
 %% Publish Doc
 
-publish(mtexDocFiles,'outDir',docOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
+% define source files
+mtexDocFiles = DocFile( fullfile(mtex_path,'doc'));
+mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html','FunctionReference');
+
+% make sidebar
+makeHelpToc(mtexDocFiles,'Documentation','doc.xml');
+xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
+
+% publsih files
+options.outDir = fullfile(pwd,'..','pages','documentation_matlab');
+publish(mtexDocFiles,options);
 
 % add frontmatter to html files
-files = dir(fullfile(docOut, '*.html'));
+files = dir(fullfile(options.outDir, '*.html'));
 for idx = 1:length(files)
-  add_frontmatter(docOut, files(idx), 'documentation');
+  add_frontmatter(options.outDir, files(idx), 'documentation');
 end
 
-move_images(docOut);
-
-makeHelpToc(mtexHelpFiles,'FunctionReference','funcRef.xml');
-xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
 
 %% make examples
 
+% define source files
 mtexExFiles = DocFile( fullfile(mtex_path,'..','examples'));
 
-
-publish(mtexExFiles,'outDir',exOut,'tmpDir',tmpDir,'evalCode',true,'stylesheet',stylesheet);
-
-% add frontmatter to html files
-files = dir(fullfile(exOut, '*.html'));
-for idx = 1:length(files)
-  add_frontmatter(exOut, files(idx), 'examples');
-end
-
-move_images(exOut);
-
+% make sidebar
 makeHelpToc(mtexExFiles,'Examples','examples.xml');
 xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
+
+% publsih files
+options.outDir = fullfile(pwd,'..','pages','examples_matlab');
+publish(mtexExFiles,options);
+
+% add frontmatter to html files
+files = dir(fullfile(options.outDir, '*.html'));
+for idx = 1:length(files)
+  add_frontmatter(options.outDir, files(idx), 'examples');
+end
+
 
 %%
 if check_option(varargin,'checkLinks')
@@ -111,28 +115,10 @@ end
 %% set back mtex options
 
 setMTEXpref('generatingHelpMode',false);
-
-
-end
-
-
-function move_images(Dir)
-  files = dir(fullfile(Dir, '*.png'));
-  for j = 1:length(files)
-    filename = files(j);
-    filename = filename.name;
-    movefile(fullfile(Dir, filename), fullfile(Dir, '..', '..', 'images', filename))
-  end
-
-
-  files = dir(fullfile(Dir, '*.gif'));
-  for j = 1:length(files)
-    filename = files(j);
-    filename = filename.name;
-    movefile(fullfile(Dir, filename), fullfile(Dir, '..', '..', 'images', filename))
-  end
+mtex_progress = 1;
 
 end
+
 
 function add_frontmatter(dir, file, name)
 % this can be done more efficently within the xsl
@@ -167,4 +153,3 @@ function add_frontmatter(dir, file, name)
     fclose(f);
   end
 end
-
