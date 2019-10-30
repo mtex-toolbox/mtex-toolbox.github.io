@@ -31,10 +31,11 @@ set(0,'DefaultFigureColor','white');
 options.tmpDir = fullfile(pwd,'tmp');
 options.imageDir = fullfile(pwd,'..','images');
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
-options.xmlDom = makeToolboxXML('.','name','MTEX',...
-  'fullname','<b>MTEX</b> - A MATLAB Toolbox for Quantitative Texture Analysis',...
-  'versionname',getMTEXpref('version'),...
-  'procuctpage','DocumentationMatlab.html');
+
+options.xml.toolbox.versionName.Text = getMTEXpref('version');
+options.xml.toolbox.name.Text = 'MTEX';
+options.xml.toolbox.fullname.Text = '<b>MTEX</b> - A MATLAB Toolbox for Quantitative Texture Analysis';
+options.xml.toolbox.lastUpdated.Text = date;
 
 %% Publish Function Reference
 
@@ -55,16 +56,11 @@ mtexFunctionFiles = [...
 makeHelpToc(mtexFunctionFiles,'FunctionReference','funcRef.xml');
 xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
 
-% publsih files
+% publish files
 options.outDir = fullfile(pwd,'..','pages','function_reference_matlab');
+options.xml.toolbox.folder.Text = 'function_reference';
+
 publish(mtexFunctionFiles,options);
-
-% add frontmatter to html files
-files = dir(fullfile(options.outDir, '*.html'));
-for idx = 1:length(files)
-  add_frontmatter(options.outDir, files(idx), 'function_reference');
-end
-
 
 %% Publish Doc
 
@@ -78,14 +74,9 @@ xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
 
 % publsih files
 options.outDir = fullfile(pwd,'..','pages','documentation_matlab');
+options.xml.toolbox.folder.Text = 'documentation';
+
 publish(mtexDocFiles,options);
-
-% add frontmatter to html files
-files = dir(fullfile(options.outDir, '*.html'));
-for idx = 1:length(files)
-  add_frontmatter(options.outDir, files(idx), 'documentation');
-end
-
 
 %% make examples
 
@@ -98,13 +89,9 @@ xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
 
 % publsih files
 options.outDir = fullfile(pwd,'..','pages','examples_matlab');
-publish(mtexExFiles,options);
+options.xml.toolbox.folder.Text = 'examples';
 
-% add frontmatter to html files
-files = dir(fullfile(options.outDir, '*.html'));
-for idx = 1:length(files)
-  add_frontmatter(options.outDir, files(idx), 'examples');
-end
+publish(mtexExFiles,options);
 
 
 %%
@@ -120,36 +107,3 @@ mtex_progress = 1;
 end
 
 
-function add_frontmatter(dir, file, name)
-% this can be done more efficently within the xsl
-  filename = file;
-  filename = filename.name;
-  f = fopen(fullfile(dir, filename), 'r');
-  s = fread(f);
-  fclose(f);
-  s = reshape(s,1,[]);
-  if ~strcmp(sprintf('%s', s(1:3)), '---')
-    p1 = strfind(s, '<title>')+7;
-    p2 = strfind(s(p1:end), '</title>');
-    title = s(p1:p1+p2-2);
-
-    frontmatter = sprintf([ 
-      '---\n'...
-      'title: %s\n'...
-      'last_updated: %s\n'...
-      'sidebar: ' name '_sidebar\n'...
-      'permalink: %s\n'...
-      'folder: ' name '\n'...
-      'toc: false\n'...
-      '---\n'],...
-      title,...
-      date,...
-      filename);
-
-    s = [frontmatter s];
-
-    f = fopen(fullfile(dir, filename), 'w');
-    fwrite(f,s);
-    fclose(f);
-  end
-end
