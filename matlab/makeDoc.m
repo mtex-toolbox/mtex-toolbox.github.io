@@ -1,8 +1,8 @@
 function makeDoc(varargin)
 
-dispPerm('start building documentation ...')
-
 addpath ../../makeDoc; DocHelpInstall;
+
+dispPerm('start building documentation ...')
 
 % build help with the DocHelp Toolbox
 %
