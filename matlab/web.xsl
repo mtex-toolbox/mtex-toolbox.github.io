@@ -5,35 +5,38 @@ This is an XSL stylesheet which converts mscript XML files into HTML.
 Use the XSLT command to perform the conversion.
 -->
 
-
 <!DOCTYPE xsl:stylesheet [ <!ENTITY nbsp "&#160;"> <!ENTITY reg "&#174;"> ]>
-<xsl:stylesheet
-  version="1.0"
+<xsl:stylesheet version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd"
-  exclude-result-prefixes="mwsh">
-  <xsl:output method="html"
-    indent="no"
-    doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"/>
+  xmlns:f="http://fxsl.sf.net/"
+  exclude-result-prefixes="f mwsh">
+  <xsl:import href="fxsl-xslt2/f/trim.xsl"/>
+
+  <xsl:output method="html" indent="no"/>
   <xsl:strip-space elements="mwsh:code"/>
 
-<xsl:variable name="filename">
-  <xsl:value-of select="substring(mscript/m-file,8)"/>
-</xsl:variable>
+  <xsl:variable name="toolbox" select="document('toolbox.xml')/toolbox"/>
+  <xsl:variable name="filename"><xsl:value-of select="substring(mscript/m-file,8)"/></xsl:variable>
 
-<xsl:variable name="title">
-  <xsl:variable name="dTitle" select="//steptitle[@style='document']"/>
-  <xsl:choose>
-    <xsl:when test="$dTitle"><xsl:value-of select="$dTitle"/></xsl:when>
-    <xsl:otherwise><xsl:value-of select="mscript/m-file"/></xsl:otherwise>
-  </xsl:choose>
-</xsl:variable>
+  <xsl:variable name="title">
+    <xsl:variable name="dTitle" select="//steptitle[@style='document']"/>
+    <xsl:choose>
+      <xsl:when test="$dTitle"><xsl:value-of select="$dTitle"/></xsl:when>
+      <xsl:otherwise><xsl:value-of select="mscript/m-file"/></xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
 
-<xsl:include href="makelink.xsl"/>
-
-<xsl:template match="mscript">
-<html>
-
+  <xsl:include href="makelink.xsl"/>
+  <xsl:template match="mscript">---
+title: <xsl:value-of select="$title"/>
+last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>
+sidebar: <xsl:value-of select="$toolbox/folder"/>_sidebar
+permalink: <xsl:value-of select="$toolbox/htmlTarget"/>
+folder: <xsl:value-of select="$toolbox/folder"/>
+toc: false
+---
+    <html>
   <!-- head -->
   <head>
 <xsl:comment>
@@ -124,10 +127,10 @@ To make changes, update the MATLAB code and republish this document.
 
 <!-- Header -->
 <xsl:template name="header">
-<font size="2"><a href="/documentation/Contribute2Doc.html" data-toggle="tooltip">
-  <xsl:attribute name="data-original-title">
-    <xsl:text>To edit this page type edit </xsl:text><xsl:value-of select="$filename"/>
-    <xsl:text> into the Matlab commandline</xsl:text></xsl:attribute>edit page</a></font>
+  <font size="2">
+    <a><xsl:attribute name="href">https://github.com/mtex-toolbox/mtex/blob/develop<xsl:value-of select="$toolbox/pageSource"/></xsl:attribute>
+    edit page</a>
+  </font>
 </xsl:template>
 
 <!-- Footer -->
@@ -198,20 +201,24 @@ To make changes, update the MATLAB code and republish this document.
 {% endhighlight %}
 </xsl:template>
 
-<!-- Code input and output -->
-
+<!-- Code input -->
 <xsl:template match="mcode-xmlized">
 {% highlight matlab %}
 <xsl:value-of select="." disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
 
+<!-- Code output -->
 <xsl:template match="mcodeoutput">
 {% highlight plaintext %}
-<xsl:value-of select="."/>
+<xsl:value-of select="." disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
-
+<!--<xsl:value-of select="." disable-output-escaping="yes"/>-->
+<!--<xsl:value-of select="mwsh:trim(.)" disable-output-escaping="yes"/>-->
+<!--<xsl:value-of select="replace(replace($arg,'\s+$',''),'^\s+','')"
+    disable-output-escaping="yes"/>-->
+<!--<xsl:value-of select="f:trim(.)" disable-output-escaping="yes"/>-->
 
 <!-- Figure and model snapshots and equations -->
 <xsl:template match="img[@class='equation']">
@@ -284,5 +291,9 @@ To make changes, update the MATLAB code and republish this document.
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-
+<!--  <func:function name="mwsh:trim" as="xs:string">
+    <xsl:param name="arg" as="xs:string?"/>
+    <xsl:sequence select="replace(replace($arg,'\s+$',''),'^\s+','')"/>
+  </func:function>
+-->
 </xsl:stylesheet>
