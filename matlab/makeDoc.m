@@ -57,7 +57,8 @@ makeHelpToc(mtexFunctionFiles,'FunctionReference','funcRef.xml');
 xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
 
 % publish files
-options.outDir = fullfile(pwd,'..','pages','function_reference_matlab');
+funOut = fullfile(pwd,'..','pages','function_reference_matlab');
+options.outDir = funOut;
 options.xml.toolbox.folder.Text = 'function_reference';
 
 publish(mtexFunctionFiles,options);
@@ -73,7 +74,8 @@ makeHelpToc(mtexDocFiles,'Documentation','doc.xml');
 xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
 
 % publsih files
-options.outDir = fullfile(pwd,'..','pages','documentation_matlab');
+docOut = fullfile(pwd,'..','pages','documentation_matlab');;
+options.outDir = docOut;
 options.xml.toolbox.folder.Text = 'documentation';
 
 publish(mtexDocFiles,options);
@@ -88,15 +90,16 @@ makeHelpToc(mtexExFiles,'Examples','examples.xml');
 xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
 
 % publsih files
-options.outDir = fullfile(pwd,'..','pages','examples_matlab');
+exOut = fullfile(pwd,'..','pages','examples_matlab');
+options.outDir = exOut;
 options.xml.toolbox.folder.Text = 'examples';
 
 publish(mtexExFiles,options);
 
+%% check links
 
-%%
 if check_option(varargin,'checkLinks')
-  deadlink(mtexDocFiles,{funRefOut,docOut});
+  deadlink([mtexFunctionFiles,mtexDocFiles,mtexExFiles], {funOut,docOut,exOut}); 
 end
 
 %% set back mtex options
