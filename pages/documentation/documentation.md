@@ -22,7 +22,7 @@ with different parameters, different input files or further analysis
 steps. Eventually, these documentation scripts may serve as a good starting
 point for your own analysis scripts.
 
-#### Contibuting to the Documentation
+### Contibuting to the Documentation
 
 Documenting a project like MTEX is a challenging and ongoing task. Therefore
 we are extremely happy about any spelling fixes, examples, theoretical
@@ -45,7 +45,7 @@ Github. This is done as follows:
 
 Alternatively, you can send us you changes simply by [email](mailto: ralf.hielscher@mathematik.tu-chemnitz.de).
 
-#### The Publish Command
+### The Publish Command
 
 You may get a visual preview of your altered documentation page by using the
 matlab function
