@@ -13,7 +13,7 @@ documentation pages are essentially MTEX scripts. This means you can open them
 in Matlab by typing
 
 {% highlight matlab %}
-import fileName
+edit fileName
 {% endhighlight %}
 
 This allows you to execute the sections by step by step and investiage the
@@ -28,7 +28,7 @@ Documenting a project like MTEX is a challenging and ongoing task. Therefore
 we are extremely happy about any spelling fixes, examples, theoretical
 explainations, special use cases, etc. As a bonus everybody who contributed to
 MTEX will automatically appear at the [contributors
-page]https://github.com/mtex-toolbox/mtex/graphs/contributors).
+page](https://github.com/mtex-toolbox/mtex/graphs/contributors).
 
 The easiest way to suggest changes to the MTEX documentation is online via
 Github. This is done as follows:
@@ -40,8 +40,8 @@ Github. This is done as follows:
  4. click the little pencil in the top right corner which allows you to
  edit the script online
  5. enter of copy and paste your changes into the site
- 6. click at the bottom *suggest changes*
- 7. click create *pull request*
+ 6. click at the bottom [suggest changes]()
+ 7. click create [pull request]()
 
 Alternatively, you can send us you changes simply by [email](mailto: ralf.hielscher@mathematik.tu-chemnitz.de).
 
