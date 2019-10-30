@@ -36,7 +36,7 @@ Github. This is done as follows:
  1. sign into [GitHub](https://github.com)
  2. open the help page you want to change, e.g., this one
  3. click [edit page](https://github.com/mtex-toolbox/mtex-toolbox.github.io/blob/master/pages/documentation/documentation.md)
-  - this leads you to the file on [GitHub](https://github.com)
+   which leads you to the file on [GitHub](https://github.com)
  4. click the little pencil in the top right corner which allows you to
  edit the script online
  5. enter of copy and paste your changes into the site
