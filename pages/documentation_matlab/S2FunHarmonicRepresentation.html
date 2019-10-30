@@ -1,0 +1,87 @@
+---
+title: S2FunHarmonic
+last_updated: 30-Oct-2019
+sidebar: documentation_sidebar
+permalink: S2FunHarmonicRepresentation.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-30"><meta name="DC.source" content="script_S2FunHarmonicRepresentation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunHarmonicRepresentation.m">
+    edit page</a></font><div><!--introduction--><p>S2FunHarmonic is the heart of S2Fun, therefore much effort is put into its functionality.</p><!--/introduction--><h2 id="1">Contents</h2><p>In the first part we will cover how to deal with univariate functions of the form</p><p>
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq12688510093716008662.png" %}
+</p><h2 id="3">Defining an univariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
+{% highlight matlab %}
+nodes = equispacedS2Grid('resolution',3*degree,'antipodal');
+nodes = nodes(:);
+{% endhighlight %}
+<p>next we need to define function values for the vertices</p>
+{% highlight matlab %}
+y = S2Fun.smiley(nodes);
+% plot the discrete data
+plot(nodes,y)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_01.png" %}
+</center><p>Finally the actual command to get <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
+{% highlight matlab %}
+sF1 = interp(nodes, y, 'harmonicApproximation')
+% plot the spherical function
+plot(sF1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sF1 = S2FunHarmonic  
+ bandwidth: 48
+ antipodal: true
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
+</center><div><ul><li>The <tt>bandwidth</tt> property shows the maximal polynomial degree of the function.Internally for a given bandwidth there are stored 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq07204186098443340480.png" %}
+ Fourier-coefficients.</li><li>The <tt>antipodal</tt> flag shows that 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq05142536305060616777.png" %}
+ holds for all 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq03296369778268784901.png" %}
+.</li></ul></div><p>For the same result we could also run <tt>S2FunHarmonic.approximation(nodes, y)</tt> and give some additional options (<a href="S2FunHarmonic.approximation.html">see here</a>).</p><p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><tt>vector3d</tt></a> as an argument and returns double:</p>
+{% highlight matlab %}
+f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
+% plot the function at discrete points
+plot(nodes,f(nodes))
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
+</center><p>Now we can call the quadrature command to get <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
+{% highlight matlab %}
+sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150)
+
+plot(sF2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sF2 = S2FunHarmonic  
+ bandwidth: 150
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
+</center><div><ul><li>If we would leave the <tt>'bandwidth'</tt> option empty the default bandwidth would be considered, which is 128.</li><li>The quadrature is faster than the approximation, because it does not have to solve a system of equations. But the knowledge of the function handle is also a strong requirement.</li><li>For more options <a href="S2FunHarmonic.quadrature.html">see here</a>.</li></ul></div><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them as a column vector to the constructor of <tt>S2FunHarmonic</tt></p>
+{% highlight matlab %}
+fhat = rand(25, 1);
+sF3 = S2FunHarmonic(fhat)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sF3 = S2FunHarmonic  
+ bandwidth: 4
+
+{% endhighlight %}
+</div></body></html>

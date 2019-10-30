@@ -1,0 +1,153 @@
+---
+title: Multivariate S2Fun
+last_updated: 30-Oct-2019
+sidebar: documentation_sidebar
+permalink: S2FunMultivariate.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Multivariate S2Fun</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-30"><meta name="DC.source" content="script_S2FunMultivariate.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunMultivariate.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Structural conventions of the input and output of multivariate S2FunHarmonic</h2><p>In this part we deal with multivariate functions of the form</p><p>
+  {% include inline_image.html file="S2FunMultivariate_eq02005284333143081024.png" %}
+.</p><div><ul><li>the structure of the nodes is always interpreted as a column vector</li><li>the node index is the first dimension</li><li>the dimensions of the <tt>S2FunHarmonic</tt> itself is counted from the second dimension</li></ul></div><p>For example we got four nodes 
+  {% include inline_image.html file="S2FunMultivariate_eq17926179084054814593.png" %}
+ and 
+  {% include inline_image.html file="S2FunMultivariate_eq15343079787092772057.png" %}
+ and six functions 
+  {% include inline_image.html file="S2FunMultivariate_eq16376045287472918887.png" %}
+ and 
+  {% include inline_image.html file="S2FunMultivariate_eq15320233978921149458.png" %}
+, which we want to store in a 3x2 array, then the following scheme applies to function evaluations:</p><p>
+  {% include inline_image.html file="S2FunMultivariate_eq17112665209624934517.png" %}
+</p><p>For the intern Fourier-coefficient matrix the first dimension is reserved for for the Fourier-coefficients of a single function; the dimension of the functions itself begin again with the second dimension.</p><p>If 
+  {% include inline_image.html file="S2FunMultivariate_eq10132426415324670699.png" %}
+ and 
+  {% include inline_image.html file="S2FunMultivariate_eq05650264891671257785.png" %}
+ would be the column vectors of the Fourier-coefficients of the functions above, internally they would be stored in 
+  {% include inline_image.html file="S2FunMultivariate_eq14700050704426719036.png" %}
+ as follows. 
+  {% include inline_image.html file="S2FunMultivariate_eq06598518767156971297.png" %}
+</p><h2 id="2">Defining a multivariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
+{% highlight matlab %}
+nodes = equispacedS2Grid('points', 1e5);
+nodes = nodes(:);
+{% endhighlight %}
+<p>Next we define function values for the vertices</p>
+{% highlight matlab %}
+y = [S2Fun.smiley(nodes), (nodes.x.*nodes.y).^(1/4)];
+{% endhighlight %}
+<p>Now the actual command to get a 2x1 <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
+{% highlight matlab %}
+sF1 = S2FunHarmonic.approximation(nodes, y)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sF1 = S2FunHarmonic  
+ size: 2 x 1
+ bandwidth: 224
+
+{% endhighlight %}
+<p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first let us define a function handle which takes <a href="vector3d.vector3d.html"><tt>vector3d</tt></a> as an argument and returns double:</p>
+{% highlight matlab %}
+f = @(v) [exp(v.x+v.y+v.z)+50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3) > 0), v.x, v.y, v.z];
+{% endhighlight %}
+<p>Now we call the quadrature command to get 4x1 <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
+{% highlight matlab %}
+sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 50)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sF2 = S2FunHarmonic  
+ size: 4 x 1
+ bandwidth: 50
+
+{% endhighlight %}
+<p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <tt>S2FunHarmonic</tt>.</p>
+{% highlight matlab %}
+sF3 = S2FunHarmonic(eye(9))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+sF3 = S2FunHarmonic  
+ size: 9 x 1
+ bandwidth: 2
+
+{% endhighlight %}
+<div><ul><li>This command stores the nine first spherical harmonics in <tt>sF3</tt></li></ul></div><h2 id="10">Operations which differ from an univariate S2FunHarmonic</h2><p><b>Some default matrix and vector operations</b></p><p>You can concatenate and refer to functions as Matlab does with vectors and matrices</p>
+{% highlight matlab %}
+sF4 = [sF1; sF2];
+sF4(2:3);
+{% endhighlight %}
+<p>You can conjugate the Fourier-coefficients and transpose/ctranspose the multivariate <tt>S2FunHarmonic</tt>.</p>
+{% highlight matlab %}
+conj(sF1);
+sF1.';
+sF1';
+{% endhighlight %}
+<p>Some other operations</p>
+{% highlight matlab %}
+length(sF1);
+size(sF2);
+sF3 = reshape(sF3, 3, []);
+{% endhighlight %}
+<p><b><tt>sum</tt> and <tt>mean</tt></b></p><p>If we do not specify further options to <tt>sum</tt> or <tt>mean</tt> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the meanvalue over a dimension of a multivariate <tt>S2FunHarmonic</tt>.</p>
+{% highlight matlab %}
+sum(sF1, 1);
+sum(sF3, 2);
+{% endhighlight %}
+<p><b>min/max</b></p><p>If the <tt>min</tt> or <tt>max</tt> command gets a multivariate <tt>S2FunHarmonic</tt> the pointwise minimum or maximum is calculated along the first non-singelton dimension if not specified otherwise.</p>
+{% highlight matlab %}
+min(sF3);
+{% endhighlight %}
+<p><b>Remark for matrix product</b></p><p>At this point the matrix product is implemented per element and not as the usual matrix product.</p><h2 id="17">Visualization of multivariate S2FunHarmonic</h2><p>There are different ways to visualize a multivariate <tt>S2FunHarmonic</tt></p><p>The default <tt>plot</tt>-command be default plots the functions on the upper hemisphere</p>
+{% highlight matlab %}
+plot(sF1);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_01.png" %}
+</center><div><ul><li><tt>plot(sF1)</tt> is the same as <tt>contourf(sF1)</tt></li></ul></div><p>nonfilled contour plot plots only the contour lines</p>
+{% highlight matlab %}
+contour(sF2, 'LineWidth', 2);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_02.png" %}
+</center><p>color plot without the contour lines</p>
+{% highlight matlab %}
+pcolor(sF3);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_03.png" %}
+</center><p>3D plot of a sphere colored accordingly to the function values.</p>
+{% highlight matlab %}
+plot3d(sF2);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_04.png" %}
+</center><p>3D plot where the radius of the sphere is transformed according to the function values</p>
+{% highlight matlab %}
+surf(sF3);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_05.png" %}
+</center><p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
+{% highlight matlab %}
+plotSection(sF1, zvector);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_06.png" %}
+</center><p>plotting the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(sF2);
+set(gca,'FontSize', 20);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunMultivariate_07.png" %}
+</center></div></body></html>
