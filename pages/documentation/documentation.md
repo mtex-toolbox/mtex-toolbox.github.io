@@ -22,7 +22,7 @@ with different parameters, different input files or further analysis
 steps. Eventually, these documentation scripts may serve as a good starting
 point for your own analysis scripts.
 
-### Contibuting to the Documentation
+### Contributing to the Documentation
 
 Documenting a project like MTEX is a challenging and ongoing task. Therefore
 we are extremely happy about any spelling fixes, examples, theoretical
