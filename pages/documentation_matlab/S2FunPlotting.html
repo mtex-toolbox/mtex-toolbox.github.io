@@ -1,46 +1,71 @@
 ---
 title: Plotting Spherical Functions
-last_updated: 28-Oct-2019
+last_updated: 30-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunPlotting.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting Spherical Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_S2FunPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunPlotting.m">
-    edit page</a></font><div><!--introduction--><p>In this chapter various way of plotting spherical functions are explained.</p><!--/introduction-->
+      --><title>Plotting Spherical Functions</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-30"><meta name="DC.source" content="script_S2FunPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunPlotting.m">
+    edit page</a></font><div><!--introduction--><p>In this chapter various ways of plotting spherical functions are explained.</p><!--/introduction-->
 {% highlight matlab %}
-sF = S2Fun.smiley;
+sF1 = S2Fun.smiley;
+f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
+sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150)
 {% endhighlight %}
 
+{% highlight plaintext %}
+ 
+sF2 = S2FunHarmonic  
+ bandwidth: 150
+
+{% endhighlight %}
+<h2 id="2">Smooth Plot</h2><p>The default <tt>plot</tt>-command is a colored plot without contours</p>
 {% highlight matlab %}
-plot(sF)
+plot(sF1);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_01.png" %}
-</center>
+</center><div><ul><li><tt>plot(sF1)</tt> is the same as <tt>pcolor(sF1)</tt></li></ul></div><h2 id="4">Contour Plot</h2><p>nonfilled contour plot plots only the contour lines</p>
 {% highlight matlab %}
-contourf(sF)
+contour(sF1, 'LineWidth', 2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_02.png" %}
-</center>
+</center><h2 id="5">Filled Contour Plot</h2><p>filled contour plot plots the contour lines</p>
 {% highlight matlab %}
-contour(sF)
+contour(sF1, 'LineWidth', 2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_03.png" %}
-</center>
+</center><h2 id="6">3D Plot</h2><p>3D plot of a sphere colored accordingly to the function values.</p>
 {% highlight matlab %}
-plot3d(sF)
+plot3d(sF2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_04.png" %}
+</center><h2 id="7">Surface Plot</h2><p>3D plot where the radius of the sphere is transformed according to the function values</p>
+{% highlight matlab %}
+surf(sF2);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunPlotting_05.png" %}
+</center><h2 id="8">Section Plot</h2><p>Plot the intersection of the surf plot with a plane with normal vector <tt>v</tt></p>
+{% highlight matlab %}
+plotSection(sF2, zvector);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunPlotting_06.png" %}
+</center><h2 id="9">Spectral Plot</h2><p>plotting the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(sF1);
+set(gca,'FontSize', 20);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunPlotting_07.png" %}
 </center></div></body></html>

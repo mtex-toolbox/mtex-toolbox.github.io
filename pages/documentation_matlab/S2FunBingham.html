@@ -1,27 +1,32 @@
 ---
 title: The Spherical Bingham Distribution
-last_updated: 28-Oct-2019
+last_updated: 30-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunBingham.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Spherical Bingham Distribution</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_S2FunBingham.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunBingham.m">
+      --><title>The Spherical Bingham Distribution</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-30"><meta name="DC.source" content="script_S2FunBingham.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunBingham.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probabiliy density function given by</p><p>
   {% include inline_image.html file="S2FunBingham_eq14797696958592296987.png" %}
-</p><p>where A is an orthognal covariance matrix, and Z a concentration matrix with 
+</p><p>where 
+  {% include inline_image.html file="S2FunBingham_eq05147331747641807187.png" %}
+ is an orthognal covariance matrix, and 
+  {% include inline_image.html file="S2FunBingham_eq05013124788323701083.png" %}
+ a concentration matrix with 
   {% include inline_image.html file="S2FunBingham_eq02587373517082466763.png" %}
  with 
   {% include inline_image.html file="S2FunBingham_eq15065425265083699199.png" %}
-.</p><p>In mtex Z is given by Z = [k1,k2,k3] with k3 = 0 and A is given by three orthognal vectors.</p><p>Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225 https://www.jstor.org/stable/2958339</p>
+.</p><p>In mtex 
+  {% include inline_image.html file="S2FunBingham_eq05013124788323701083.png" %}
+ is given by <tt>Z = [k1,k2,k3]</tt> with <tt>k3 = 0</tt> and 
+  {% include inline_image.html file="S2FunBingham_eq05147331747641807187.png" %}
+ is given by three orthognal vectors.</p><p><a href="https://www.jstor.org/stable/2958339">Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225</a></p>
 {% highlight matlab %}
 % A simple example:
 Z = [-10 -4 0]
@@ -37,14 +42,20 @@ Z =
 a = vector3d  
  size: 1 x 3
           x         y         z
-  -0.270525  0.851083  0.449971
-   0.824855 -0.036101   0.56419
-   0.496417  0.523788 -0.692254
+  -0.252817 -0.167005 -0.952992
+  -0.112005 -0.973315  0.200281
+  -0.961009  0.157374  0.227365
 
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_01.png" %}
-</center><h2 id="2">Meaning of Z</h2><p>k1 = k2 defines a rotationally symmetric point maximum and k2 = 0 defines a girdle distribution.</p>
+</center><h2 id="2">Meaning of 
+  {% include inline_image.html file="S2FunBingham_eq05013124788323701083.png" %}
+</h2><p>
+  {% include inline_image.html file="S2FunBingham_eq17849047336115541980.png" %}
+ defines a rotationally symmetric point maximum and 
+  {% include inline_image.html file="S2FunBingham_eq15074469217648866065.png" %}
+ defines a girdle distribution.</p>
 {% highlight matlab %}
 close
 kappa = [0 4 8 12 24];
@@ -94,11 +105,11 @@ bs = BinghamS2.fit(v,'confElli',0.99)
 bs = 
   BinghamS2 with properties:
 
-            a: [3&times;1 vector3d]
-            Z: [3&times;1 double]
-            N: 1.0574
+            a: [3×1 vector3d]
+            Z: [3×1 double]
+            N: 1.0800
     antipodal: 1
-     cEllipse: [0.6068 0.1865]
+     cEllipse: [0.5770 0.2028]
 
 {% endhighlight %}
 <p>Lets plot the fitted distribution with the data on on</p>
