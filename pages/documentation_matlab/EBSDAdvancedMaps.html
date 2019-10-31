@@ -1,20 +1,17 @@
 ---
 title: Advanced Color Keys
-last_updated: 28-Oct-2019
+last_updated: 31-Oct-2019
 sidebar: documentation_sidebar
 permalink: EBSDAdvancedMaps.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Color Keys</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSDAdvancedMaps.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDAdvancedMaps.m">
+      --><title>Advanced Color Keys</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_EBSDAdvancedMaps.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDAdvancedMaps.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In order to visualize orientation maps one has to assign a color to each possible orientation. As an example, one may think of representing an orientation by its Euler angles ph1, Phi, phi2 and taking these as the RGB values of a color. Of course, there are many other ways to do this. Before presenting all the possibilities MTEX offers to assign a color to each orientation let us shortly summarize what properties we expect from such an assignment.</p><div><ol><li>crystallographic equivalent orientations should have the same color</li><li>similar orientations should have similar colors</li><li>different orientations should have different colors</li><li>the whole colorspace should be used for full contrast</li><li>if the orientations are concentrated in a small region of the orientation space, the colorspace should be exhaust by this region</li></ol></div><p>It should be noted that it is impossible to have all the 4 points mentioned above be satisfied by a single colorcoding. Hence, some compromises have to be accepted and some assumptions have to be made. While the traditional <a href="EBSDAdvancedMaps.html#2">Euler angle coloring</a> will assign different colors to similar orientations, i.e. will introduce color jumps and break with the first requirement the default <a href="ipfHSVKey.html">MTEX color key</a> will assign the same color to different orientations.</p><p>Hence, there is no perfect color key, but it should be chosen depending on the information one want to extract from the orientation data. To do so MTEX offers the following possibilities:</p><div><ul><li><a href="ipfHSVKey.html">ipfHSVKey</a> the default color key</li><li><a href="ipfTSLKey.html">ipfTSLKey</a></li><li><a href="ipfHKLKey.html">ipfHKLKey</a></li><li><a href="BungeColorKey.html">BungeColorKey</a></li><li><a href="PatalaColorKey.PatalaColorKey.html">PatalaColorKey</a></li><li><a href="axisAngleColorKey.html">axisAngleColorKey</a></li><li><a href="spotColorKey.html">spotColorKey</a></li><li><a href="ipfSpotKey.html">ipfSpotKey</a></li></ul></div><p>In order to demonstrate these color keys we first import some toy data set.</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -51,7 +48,9 @@ plot(colorKey)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDAdvancedMaps_02.png" %}
-</center><p>Although this visualization looks very smooth, the orientation map using Euler angles introduces many of color jumps. This becomes obvious when plotting the colors as <a href="SigmaSections.html">sigma sections</a>, i.e., for fixed differences phi_1 - phi_2</p>
+</center><p>Although this visualization looks very smooth, the orientation map using Euler angles introduces many of color jumps. This becomes obvious when plotting the colors as <a href="SigmaSections.html">sigma sections</a>, i.e., for fixed differences 
+  {% include inline_image.html file="EBSDAdvancedMaps_eq13264926642850675753.png" %}
+</p>
 {% highlight matlab %}
 plot(colorKey,'sections',6,'sigma')
 {% endhighlight %}
@@ -91,9 +90,15 @@ odf = calcODF(ebsd('fo').orientations,'halfwidth',10*degree,'silent');
 plot(odf,'sections',9,'silent','sigma')
 mtexColorbar
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot! I'going to
+create a new figure. 
+
+{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDAdvancedMaps_06.png" %}
-</center><h2 id="8">Coloring fibres</h2><p>To color a fibre, one has to specify the crystal direction <b>h</b> together with its RGB color and the specimen direction <b>r</b>, which should be marked.</p>
+</center><h2 id="8">Coloring fibres</h2><p>To color a fibre, one has to specify the crystal direction <code class="language-plaintext highlighter-rouge">h</code> together with its RGB color and the specimen direction <code class="language-plaintext highlighter-rouge">r</code>, which should be marked.</p>
 {% highlight matlab %}
 % define a fibre
 f = fibre(Miller(1,1,1,csFo),zvector);
@@ -103,13 +108,13 @@ colorKey = ipfSpotKey(csFo);
 colorKey.inversePoleFigureDirection = f.r;
 colorKey.center = f.h;
 colorKey.color = [0 0 1];
-colorKey.psi = deLaValleePoussinKernel('halfwidth',7.5*degree);
+colorKey.psi = S2DeLaValleePoussin('halfwidth',7.5*degree);
 
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDAdvancedMaps_07.png" %}
-</center><p>the option <tt>halfwidth</tt> controls half of the intensity of the color at a given distance. Here we have chosen the (111)[001] fibre to be drawn in blue, and at 7.5 degrees, where the blue should be only lighter.</p>
+</center><p>the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code> controls half of the intensity of the color at a given distance. Here we have chosen the (111)[001] fibre to be drawn in blue, and at 7.5 degrees, where the blue should be only lighter.</p>
 {% highlight matlab %}
 plot(colorKey)
 hold on
@@ -161,7 +166,7 @@ plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDAdvancedMaps_11.png" %}
-</center><h2 id="13">Combining different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <tt>'faceAlpha'</tt>. Note that the option <tt>'faceAlpha'</tt> requires the renderer of the figure to be set to <tt>'opengl'</tt>.</p>
+</center><h2 id="13">Combining different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>.</p>
 {% highlight matlab %}
 close all;
 plot(ebsd,ebsd.bc,'micronbar','off')
@@ -171,7 +176,7 @@ colorKey = ipfSpotKey(csFo);
 colorKey.inversePoleFigureDirection = zvector;
 colorKey.center = Miller(1,1,1,csFo);
 colorKey.color = [0 0 1];
-colorKey.psi = deLaValleePoussinKernel('halfwidth',7.5*degree);
+colorKey.psi = S2DeLaValleePoussin('halfwidth',7.5*degree);
 
 hold on
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations),'FaceAlpha',0.5)
