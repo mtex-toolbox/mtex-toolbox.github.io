@@ -23,9 +23,9 @@ type. There are many different types of variables (called classes) for
 different objects, like
 [vectors](https://mtex-toolbox.github.io/vector3d.vector3d.html),
 [rotations](https://mtex-toolbox.github.io/rotation.rotation.html), [EBSD
-data](vector3https://mtex-toolbox.github.io/EBSD.EBSD.html),
-[grains](https://mtex-toolbox.github.io/graind2d.grain2d.html) or
-[ODFs](https://mtex-toolbox.github.io/ODF.ODF.html]. The sidebar on the left
+data](https://mtex-toolbox.github.io/EBSD.EBSD.html),
+[grains](https://mtex-toolbox.github.io/grain2d.grain2d.html) or
+[ODFs](https://mtex-toolbox.github.io/ODF.ODF.html). The sidebar on the left
 lets you browse through all different MTEX class and the corresponding
 functions.
 
