@@ -54,5 +54,5 @@ matlab function
 publish filename
 {% endhighlight %}
 
-which creates an folder, named 'html', in your current directory where you can
+which creates an folder, named `html`, in your current directory where you can
 find the generated html page.
