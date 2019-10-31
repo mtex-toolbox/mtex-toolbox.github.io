@@ -1,6 +1,6 @@
 ---
 title: S2VectorFieldHarmonic
-last_updated: 30-Oct-2019
+last_updated: 31-Oct-2019
 sidebar: documentation_sidebar
 permalink: S2FunVectorField.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2VectorFieldHarmonic</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-30"><meta name="DC.source" content="script_S2FunVectorField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunVectorField.m">
+      --><title>S2VectorFieldHarmonic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_S2FunVectorField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunVectorField.m">
     edit page</a></font><div><!--introduction--><p>S2VectorField handles three-dimensional functions on the sphere. For instance the gradient of an univariate S2FunHarmonic can return a S2VectorFieldHarmonic.</p><!--/introduction--><h2 id="1">Defining a S2VectorFieldHarmonic</h2><p><b>Definition via function values</b></p><p>At first you need some vertices</p>
 {% highlight matlab %}
 nodes = equispacedS2Grid('points', 1e5);
@@ -21,7 +21,7 @@ nodes = nodes(:);
 {% highlight matlab %}
 y = vector3d.byPolar(sin(3*nodes.theta), nodes.rho+pi/2);
 {% endhighlight %}
-<p>Now the actual command to get <tt>sVF1</tt> of type <tt>S2VectorFieldHarmonic</tt></p>
+<p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sVF1</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code></p>
 {% highlight matlab %}
 sVF1 = S2VectorFieldHarmonic.approximation(nodes, y)
 {% endhighlight %}
@@ -32,11 +32,11 @@ sVF1 = S2VectorFieldHarmonic
  bandwidth: 128
 
 {% endhighlight %}
-<p><b>Definition via function handle</b></p><p>If you have a function handle for the function you could create a <tt>S2VectorFieldHarmonic</tt> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><tt>vector3d</tt></a> as an argument and returns also <a href="vector3d_index.html"><tt>vector3d</tt></a>:</p>
+<p><b>Definition via function handle</b></p><p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns also <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
 {% highlight matlab %}
 f = @(v) vector3d(v.x, v.y, 0*v.x);
 {% endhighlight %}
-<p>Now you can call the quadrature command to get <tt>sVF2</tt> of type <tt>S2VectorFieldHarmonic</tt></p>
+<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sVF2</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code></p>
 {% highlight matlab %}
 sVF2 = S2VectorFieldHarmonic.quadrature(@(v) f(v))
 {% endhighlight %}
@@ -47,7 +47,7 @@ sVF2 = S2VectorFieldHarmonic
  bandwidth: 128
 
 {% endhighlight %}
-<p><b>Definition via <a href="S2FunHarmonic_index"><tt>S2FunHarmonic</tt></a></b></p><p>If you directly call the constructor with a multivariate <a href="S2FunHarmonic_multi_index"><tt>S2FunHarmonic sF</tt></a> with two or three entries it will create a <tt>S2VectorFieldHarmonic</tt> with <tt>sF(1)</tt> the polar angle and <tt>sF(2)</tt> the azimuth or <tt>sF(1), sF(2)</tt> and <tt>sF(3)</tt> the 
+<p><b>Definition via <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></b></p><p>If you directly call the constructor with a multivariate <a href="S2FunHarmonic_multi.S2FunHarmonic_multi"><code class="language-plaintext highlighter-rouge">S2FunHarmonic sF</code></a> with two or three entries it will create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> with <code class="language-plaintext highlighter-rouge">sF(1)</code> the polar angle and <code class="language-plaintext highlighter-rouge">sF(2)</code> the azimuth or <code class="language-plaintext highlighter-rouge">sF(1), sF(2)</code> and <code class="language-plaintext highlighter-rouge">sF(3)</code> the 
   {% include inline_image.html file="S2FunVectorField_eq09465107182849804810.png" %}
  and 
   {% include inline_image.html file="S2FunVectorField_eq17119888974628994297.png" %}
@@ -99,7 +99,7 @@ rotate(sVF1, r);
 {% highlight matlab %}
 norm(sVF1);
 {% endhighlight %}
-<h2 id="18">Visualization</h2><p>the default <tt>plot</tt>-command</p>
+<h2 id="18">Visualization</h2><p>the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
 {% highlight matlab %}
 plot(sVF1);
 {% endhighlight %}
