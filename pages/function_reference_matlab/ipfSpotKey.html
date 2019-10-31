@@ -1,22 +1,62 @@
 ---
 title: ipfSpotKey
-last_updated: 28-Oct-2019
+last_updated: 31-Oct-2019
 sidebar: function_reference_sidebar
 permalink: ipfSpotKey.html
 folder: function_reference
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ipfSpotKey</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_ipfSpotKey.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/orientationColorKeys/ipfSpotKey.m">
-    edit page</a></font><div><!--introduction--><p>Maps an individual color to each given crystal directions being parallel to a specimen direction (fibre) Properties: center  - list of crystal directions <a href="Miller.Miller.html">Miller</a> color   - n-by-3 list representing RGB values, one for each center psi     - <a href="kernel.kernel.html">kernel</a> providing the width and brightness for colored fibre inversePoleFigureDirection - specimen direction <a href="vector3d.vector3d.html">vector3d</a></p><!--/introduction--><h2 id="2">Syntax</h2>
+      --><title>ipfSpotKey</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_ipfSpotKey.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/orientationColorKeys/ipfSpotKey.m">
+    edit page</a></font><div><!--introduction--><p>Colorizes single spots in the inverse pole figure with individual colors.</p><!--/introduction--><h2 id="2">Syntax</h2>
 {% highlight matlab %}
-oM = ipfSpotKey(varargin)
+ipfKey = ipfSpotKey
+ipfKey.inversePoleFigureDirection = zvector;
+ipfKey.center = Miller(1,0,0,cs); % the centers of the spots in the inverse pole figure
+ipfKey.color = [0 0 1];           % the color of the spots
+ipfKey.psi = S2DeLaValleePoussin('halfwidth',7.5*degree);
 {% endhighlight %}
-</div></body></html>
+
+{% highlight matlab %}
+color = ipfKey.orientation2color(ori)
+{% endhighlight %}
+<h2 id="3">Class Properties</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>center</tt>
+         </td>
+         <td>
+            <tt>list of crystal directions <a href="Miller.Miller.html">Miller</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>color</tt>
+         </td>
+         <td>
+            <tt>n-by-3 list representing RGB values, one for each center</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>psi</tt>
+         </td>
+         <td>
+            <tt><a href="S2Kernel.S2Kernel.html">S2Kernel</a> providing the width and brightness for colored fibre</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>inversePoleFigureDirection</tt>
+         </td>
+         <td>
+            <tt>specimen direction <a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="4">See also</h2><p><a href="EBSDAdvancedMapping.html">EBSDAdvancedMapping</a></p></div></body></html>

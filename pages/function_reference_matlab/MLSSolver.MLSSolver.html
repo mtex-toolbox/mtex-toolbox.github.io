@@ -1,22 +1,98 @@
 ---
 title: MLSSolver
-last_updated: 28-Oct-2019
+last_updated: 31-Oct-2019
 sidebar: function_reference_sidebar
 permalink: MLSSolver.MLSSolver.html
 folder: function_reference
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>MLSSolver</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_MLSSolver__MLSSolver.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/PoleFigureAnalysis/@MLSSolver/MLSSolver.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>modified least squares solver</p><h2 id="3">Syntax</h2>
+      --><title>MLSSolver</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_MLSSolver__MLSSolver.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/PoleFigureAnalysis/@MLSSolver/MLSSolver.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The class MLSSolver implements the modified least squares solver for reconstructing an ODF from arbitrarily scattered pole figure intensities. The resulting ODF is represented as a weighted sum of unimodal components. The shape and the number of component centers can be specified. The algorithm is explained in detail in <b>A novel pole figure inversion method: specification of the MTEX algorithm</b>, Hielscher, Schaeben: J. of Appl. Cryst., 41(6), 2008.</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-solver = MLSSolver(pf,varargin)
+solver = MLSSolver(pf,'resolution',5*degree,'halfwidth',7.5*degree);
+[odf,alpha] = solver.calcODF;
 {% endhighlight %}
-</div></body></html>
+<h2 id="4">Class Properties</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>psi</tt>
+         </td>
+         <td>
+            <tt><a href="kernel.kernel.html">kernel</a> describing the shape of the unimodal components</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>S3G</tt>
+         </td>
+         <td>
+            <tt>the centers of the unimodal components as <a href="SO3Grid.SO3Grid.html">SO3Grid</a> in orientation space</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>c</tt>
+         </td>
+         <td>
+            <tt>weighting coefficients to the unimodal components</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt/>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>zrm</tt>
+         </td>
+         <td>
+            <tt><a href="zeroRangeMethod.zeroRangeMethod.html">zeroRangeMethod</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ghostCorrection</tt>
+         </td>
+         <td>
+            <tt>whether to use ghost correction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMax</tt>
+         </td>
+         <td>
+            <tt>max number of iterations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMin</tt>
+         </td>
+         <td>
+            <tt>min number of iterations</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Dependent Class Properties</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="ODF.ODF.html">ODF</a> the reconstructed ODF</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">See also</h2><p><a href="PoleFigureTutorial.html">PoleFigureTutorial</a> <a href="PoleFigure2ODFAmbiguity.html">PoleFigure2ODFAmbiguity</a> <a href="PoleFigure2ODFGhostCorrection.html">PoleFigure2ODFGhostCorrection</a></p></div></body></html>
