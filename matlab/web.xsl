@@ -11,7 +11,7 @@ Use the XSLT command to perform the conversion.
   xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd"
   xmlns:f="http://fxsl.sf.net/"
   exclude-result-prefixes="f mwsh">
-  <xsl:import href="fxsl-xslt2/f/trim.xsl"/>
+  <!--<xsl:import href="fxsl-xslt2/f/trim.xsl"/>-->
 
   <xsl:output method="html" indent="no"/>
   <xsl:strip-space elements="mwsh:code"/>
@@ -152,6 +152,7 @@ To make changes, update the MATLAB code and republish this document.
 
 
 <!-- HTML Tags in text sections -->
+<!-- <code class="language-plaintext highlighter-rouge">fileName.ctf</code> -->
 <xsl:template match="p">
   <p><xsl:apply-templates/></p>
 </xsl:template>
@@ -181,7 +182,7 @@ To make changes, update the MATLAB code and republish this document.
   <i><xsl:apply-templates/></i>
 </xsl:template>
 <xsl:template match="tt">
-  <tt><xsl:apply-templates/></tt>
+  <code class="language-plaintext highlighter-rouge"><xsl:apply-templates/></code>
 </xsl:template>
 <xsl:template match="a">
   <a>
@@ -193,6 +194,12 @@ To make changes, update the MATLAB code and republish this document.
     <xsl:value-of select="@text" disable-output-escaping="yes"/>
 </xsl:template>
 <xsl:template match="latex"/>
+
+<!--replace tt by inline code -->
+<!-- <code class="language-plaintext highlighter-rouge">fileName.ctf</code> -->
+<!--<xsl:template match="tt">
+  <code class="language-plaintext highlighter-rouge"><xsl:value-of select="."/></code>
+</xsl:template>-->
 
 <!-- Detecting M-Code in Comments-->
 <xsl:template match="text/mcode-xmlized">
