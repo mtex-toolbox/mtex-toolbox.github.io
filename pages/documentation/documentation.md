@@ -27,8 +27,7 @@ point for your own analysis scripts.
 Documenting a project like MTEX is a challenging and ongoing task. Therefore
 we are extremely happy about any spelling fixes, examples, theoretical
 explainations, special use cases, etc. As a bonus everybody who contributed to
-MTEX will automatically appear at the [contributors
-page](https://github.com/mtex-toolbox/mtex/graphs/contributors).
+MTEX will automatically appear at the [contributors page](https://github.com/mtex-toolbox/mtex/graphs/contributors).
 
 The easiest way to suggest changes to the MTEX documentation is online via
 Github. This is done as follows:
