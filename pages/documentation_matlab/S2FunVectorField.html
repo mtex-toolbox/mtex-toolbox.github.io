@@ -1,6 +1,6 @@
 ---
-title: S2VectorFieldHarmonic
-last_updated: 31-Oct-2019
+title: S2VectorField
+last_updated: 01-Nov-2019
 sidebar: documentation_sidebar
 permalink: S2FunVectorField.html
 folder: documentation
@@ -11,13 +11,13 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2VectorFieldHarmonic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_S2FunVectorField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunVectorField.m">
-    edit page</a></font><div><!--introduction--><p>S2VectorField handles three-dimensional functions on the sphere. For instance the gradient of an univariate S2FunHarmonic can return a S2VectorFieldHarmonic.</p><!--/introduction--><h2 id="1">Defining a S2VectorFieldHarmonic</h2><p><b>Definition via function values</b></p><p>At first you need some vertices</p>
+      --><title>S2VectorField</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-01"><meta name="DC.source" content="script_S2FunVectorField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunVectorField.m">
+    edit page</a></font><div><!--introduction--><p><a href="S2VectorField.S2VectorField">S2VectorField</a> handles three-dimensional functions on the sphere. For instance the gradient of an univariate <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> can return a <a href="S2VectorFieldHarmonic.S2VectorFieldHarmonic">S2VectorFieldHarmonic</a>.</p><!--/introduction--><h2 id="1">Defining a S2VectorFieldHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some example vertices</p>
 {% highlight matlab %}
 nodes = equispacedS2Grid('points', 1e5);
 nodes = nodes(:);
 {% endhighlight %}
-<p>Next you define function values for the vertices</p>
+<p>Next, we define function values for the vertices</p>
 {% highlight matlab %}
 y = vector3d.byPolar(sin(3*nodes.theta), nodes.rho+pi/2);
 {% endhighlight %}
@@ -32,11 +32,11 @@ sVF1 = S2VectorFieldHarmonic
  bandwidth: 128
 
 {% endhighlight %}
-<p><b>Definition via function handle</b></p><p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns also <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
+<p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns again <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
 {% highlight matlab %}
 f = @(v) vector3d(v.x, v.y, 0*v.x);
 {% endhighlight %}
-<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sVF2</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code></p>
+<p>Now we can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sVF2</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code></p>
 {% highlight matlab %}
 sVF2 = S2VectorFieldHarmonic.quadrature(@(v) f(v))
 {% endhighlight %}
@@ -47,9 +47,11 @@ sVF2 = S2VectorFieldHarmonic
  bandwidth: 128
 
 {% endhighlight %}
-<p><b>Definition via <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></b></p><p>If you directly call the constructor with a multivariate <a href="S2FunHarmonic_multi.S2FunHarmonic_multi"><code class="language-plaintext highlighter-rouge">S2FunHarmonic sF</code></a> with two or three entries it will create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> with <code class="language-plaintext highlighter-rouge">sF(1)</code> the polar angle and <code class="language-plaintext highlighter-rouge">sF(2)</code> the azimuth or <code class="language-plaintext highlighter-rouge">sF(1), sF(2)</code> and <code class="language-plaintext highlighter-rouge">sF(3)</code> the 
-  {% include inline_image.html file="S2FunVectorField_eq09465107182849804810.png" %}
- and 
+<p><b>Definition via <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></b></p><p>If we directly call the constructor with a multivariate <a href="S2FunHarmonic_multi.S2FunHarmonic_multi"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> with two or three entries it will create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> with <code class="language-plaintext highlighter-rouge">sF(1)</code> the polar angle and <code class="language-plaintext highlighter-rouge">sF(2)</code> the azimuth or <code class="language-plaintext highlighter-rouge">sF(1)</code>, <code class="language-plaintext highlighter-rouge">sF(2)</code>, and <code class="language-plaintext highlighter-rouge">sF(3)</code> the 
+  {% include inline_image.html file="S2FunVectorField_eq12428413953531653171.png" %}
+, 
+  {% include inline_image.html file="S2FunVectorField_eq08830444604280721118.png" %}
+, and 
   {% include inline_image.html file="S2FunVectorField_eq17119888974628994297.png" %}
  component.</p>
 {% highlight matlab %}
@@ -69,28 +71,34 @@ sVF4 = S2VectorFieldHarmonic
  bandwidth: 3
 
 {% endhighlight %}
-<h2 id="8">Operations</h2><p><b>Basic arithmetic operations</b></p><p>addition/subtraction</p>
+<h2 id="8">Operations</h2><p><b>Basic arithmetic operations</b></p><p>Again the basic mathematical operations are supported:</p><p>addition/subtraction of a vector field and a vector or addition/subtraction of two vector fields</p>
 {% highlight matlab %}
 sVF1+sVF2; sVF1+vector3d(1, 0, 0);
 sVF1-sVF2; sVF2-vector3d(sqrt(2)/2, sqrt(2)/2, 0);
 {% endhighlight %}
-<p>multiplication/division</p>
+<p>multiplication/division by a scalar or a <code class="language-plaintext highlighter-rouge">S2Fun</code></p>
 {% highlight matlab %}
 2.*sVF1; sVF1./4;
+S2Fun.smiley*sVF1;
 {% endhighlight %}
-<p>dot product</p>
+
+{% highlight plaintext %}
+Warning: not implemented yet; use .* instead 
+
+{% endhighlight %}
+<p>dot product with a vector or another vector field</p>
 {% highlight matlab %}
 dot(sVF1, sVF2); dot(sVF1, vector3d(0, 0, 1));
 {% endhighlight %}
-<p>cross product</p>
+<p>cross product with a vector or another vector field</p>
 {% highlight matlab %}
 cross(sVF1, sVF2); cross(sVF1, vector3d(0, 0, 1));
 {% endhighlight %}
-<p><b>Other operations</b></p><p>mean value</p>
+<p>mean vector of the vector field</p>
 {% highlight matlab %}
 mean(sVF1);
 {% endhighlight %}
-<p>Rotation</p>
+<p>rotation of the vector field</p>
 {% highlight matlab %}
 r = rotation.byEuler( [pi/4 0 0]);
 rotate(sVF1, r);
@@ -99,13 +107,13 @@ rotate(sVF1, r);
 {% highlight matlab %}
 norm(sVF1);
 {% endhighlight %}
-<h2 id="18">Visualization</h2><p>the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
+<h2 id="17">Visualization</h2><p>One can use the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
 {% highlight matlab %}
 plot(sVF1);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunVectorField_01.png" %}
-</center><div><ul><li>same as quiver(sVF1)</li></ul></div><p>3D plot of a sphere with the vectors on itself</p>
+</center><div><ul><li>same as quiver(sVF1)</li></ul></div><p>or the 3D plot of a sphere with the vectors on itself</p>
 {% highlight matlab %}
 clf;
 quiver3(sVF2);
