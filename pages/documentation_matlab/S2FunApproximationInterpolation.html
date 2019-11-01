@@ -1,6 +1,6 @@
 ---
 title: Spherical Approximation and Interpolation
-last_updated: 31-Oct-2019
+last_updated: 01-Nov-2019
 sidebar: documentation_sidebar
 permalink: S2FunApproximationInterpolation.html
 folder: documentation
@@ -11,5 +11,53 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spherical Approximation and Interpolation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_S2FunApproximationInterpolation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunApproximationInterpolation.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--></div></body></html>
+      --><title>Spherical Approximation and Interpolation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-01"><meta name="DC.source" content="script_S2FunApproximationInterpolation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunApproximationInterpolation.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Given data nodes</p>
+{% highlight matlab %}
+load(fullfile(mtexDataPath, 'vector3d', 'smiley.mat'));
+
+scatter(nodes, f);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunApproximationInterpolation_01.png" %}
+</center><h2 id="2">Interpolation!</h2>
+{% highlight matlab %}
+sFTri = interp(nodes, f, 'linear');
+
+% Very wow!
+
+norm(eval(sFTri, nodes)-f)
+
+% Plotting it is meh
+
+contourf(sFTri, 'upper');
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   2.4016e-15
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunApproximationInterpolation_02.png" %}
+</center><h2 id="3">Approximation?</h2>
+{% highlight matlab %}
+sF = interp(nodes, f, 'harmonicApproximation');
+
+% Error meh
+
+norm(eval(sF, nodes)-f)
+
+% Plot wow!
+
+contourf(sF, 'upper');
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0427
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunApproximationInterpolation_03.png" %}
+</center></div></body></html>
