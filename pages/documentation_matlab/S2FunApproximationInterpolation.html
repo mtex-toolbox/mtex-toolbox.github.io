@@ -16,21 +16,17 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 load(fullfile(mtexDataPath, 'vector3d', 'smiley.mat'));
 
-scatter(nodes, f);
+scatter(nodes, f, 'upper');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunApproximationInterpolation_01.png" %}
 </center><h2 id="2">Interpolation!</h2>
 {% highlight matlab %}
 sFTri = interp(nodes, f, 'linear');
-
-% Very wow!
-
+{% endhighlight %}
+<p>Very wow!</p>
+{% highlight matlab %}
 norm(eval(sFTri, nodes)-f)
-
-% Plotting it is meh
-
-contourf(sFTri, 'upper');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -38,25 +34,29 @@ ans =
    2.4016e-15
 
 {% endhighlight %}
+<p>Plotting it is meh</p>
+{% highlight matlab %}
+contourf(sFTri, 'upper');
+{% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunApproximationInterpolation_02.png" %}
-</center><h2 id="3">Approximation?</h2>
+</center><h2 id="5">Approximation?</h2>
 {% highlight matlab %}
 sF = interp(nodes, f, 'harmonicApproximation');
-
-% Error meh
-
+{% endhighlight %}
+<p>Error meh</p>
+{% highlight matlab %}
 norm(eval(sF, nodes)-f)
-
-% Plot wow!
-
-contourf(sF, 'upper');
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
     0.0427
 
+{% endhighlight %}
+<p>Plot wow!</p>
+{% highlight matlab %}
+contourf(sF, 'upper');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunApproximationInterpolation_03.png" %}
