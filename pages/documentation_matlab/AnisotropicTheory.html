@@ -1,6 +1,6 @@
 ---
 title: Anisotropic Elasticity
-last_updated: 30-Oct-2019
+last_updated: 04-Nov-2019
 sidebar: documentation_sidebar
 permalink: AnisotropicTheory.html
 folder: documentation
@@ -11,13 +11,16 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-30"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO</h2><p>Please help to extend this section.</p><p>MTEX offers a very simple way to compute elasticity properties of materials. This includes Young's modulus, linear compressibility, Christoffel tensor, and elastic wave velocities.</p><h2 id="3">Import an Elasticity Tensor</h2><p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
+      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-04"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the sitiffness tensor for Olivine</p>
 {% highlight matlab %}
+% file name
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
 
+% crytsal symmetry
 cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
 
+% define the tentos
 C = stiffnessTensor.load(fname,cs)
 {% endhighlight %}
 
@@ -37,12 +40,9 @@ C = stiffnessTensor
      0     0     0     0     0  78.7
 
 {% endhighlight %}
-<h2 id="4">Hooks Law</h2>
+<h2 id="2">Hooks Law</h2><p>The stiffness tensor tensor of a material is defined as the stress the material expreances for a given strain</p>
 {% highlight matlab %}
 eps = strainTensor(diag([1,1.1,0.9]),cs)
-
-% the resulting stress
-sigma = C : eps
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -54,6 +54,14 @@ eps = strainTensor
    1   0   0
    0 1.1   0
    0   0 0.9
+
+{% endhighlight %}
+<p>Now Hools law states that the resulting stress can be computed by</p>
+{% highlight matlab %}
+sigma = C : eps
+{% endhighlight %}
+
+{% highlight plaintext %}
  
 sigma = stressTensor  
   rank   : 2 (3 x 3)   
@@ -64,13 +72,29 @@ sigma = stressTensor
      0     0 366.2
 
 {% endhighlight %}
-<h2 id="5">Elastic Energy</h2>
+<p>The other way the compliance tensor <code class="language-plaintext highlighter-rouge">S = inv(C)</code> translates stress into strain</p>
+{% highlight matlab %}
+inv(C) : sigma
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ans = strainTensor  
+  rank   : 2 (3 x 3)   
+  mineral: Olivin (mmm)
+ 
+   1   0   0
+   0 1.1   0
+   0   0 0.9
+
+{% endhighlight %}
+<p>The ellastic energy of the strain <code class="language-plaintext highlighter-rouge">eps</code> can be computed equivalently computed by the following equations</p>
 {% highlight matlab %}
 % the elastic energy
 U = sigma : eps
 U = EinsteinSum(C,[-1 -2 -3 -4],eps,[-1 -2],eps,[-3 -4])
 
-(C : eps) : eps
+U = (C : eps) : eps
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -78,14 +102,14 @@ U =
    1.1783e+03
 U =
    1.1783e+03
-ans =
+U =
    1.1783e+03
 
 {% endhighlight %}
-<h2 id="6">Young's Modulus</h2><p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction d by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
+<h2 id="6">Young's Modulus</h2><p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction <code class="language-plaintext highlighter-rouge">d</code> by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
 {% highlight matlab %}
 d = vector3d.X
-E = C.YoungsModulus(vector3d.X)
+E = C.YoungsModulus(d)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -98,7 +122,7 @@ E =
   286.9284
 
 {% endhighlight %}
-<p>If the direction is ommited Youngs modulus is returned as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>.</p>
+<p>If the direction <code class="language-plaintext highlighter-rouge">d</code> is ommited Youngs modulus is returned as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>.</p>
 {% highlight matlab %}
 % compute Young's modulus as a directional dependend function
 E = C.YoungsModulus
@@ -113,7 +137,7 @@ plot(C.YoungsModulus,'complete','upper')
 
 {% highlight plaintext %}
  
-E = S2FunHarmonic  
+E = S2FunHarmonicSym  
  mineral: Olivin (mmm)
  bandwidth: 8
 ans =
@@ -122,7 +146,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_01.png" %}
-</center><h2 id="8">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similarly as the Youngs modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <tt>d</tt> or as a spherical function</p>
+</center><h2 id="8">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similarly as the Youngs modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <code class="language-plaintext highlighter-rouge">d</code> or as a spherical function</p>
 {% highlight matlab %}
 % compute as a spherical function
 beta = linearCompressibility(C)
@@ -136,7 +160,7 @@ beta.eval(d)
 
 {% highlight plaintext %}
  
-beta = S2FunHarmonic  
+beta = S2FunHarmonicSym  
  mineral: Olivin (mmm)
  bandwidth: 2
  antipodal: true
@@ -146,193 +170,109 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_02.png" %}
-</center><h2 id="9">Christoffel Tensor</h2><p>The Christoffel Tensor is symmetric because of the symmetry of the elastic constants. The eigenvalues of the 3x3 Christoffel tensor are three positive values of the wave moduli which corresponds to \rho Vp^2 , \rho Vs1^2 and \rho Vs2^2 of the plane waves propagating in the direction n. The three eigenvectors of this tensor are then the polarization directions of the three waves. Because the Christoffel tensor is symmetric, the polarization vectors are perpendicular to each other.</p>
+</center><h2 id="9">Poisson Ratio</h2><p>The rate of compression/ decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ration.</p>
 {% highlight matlab %}
-% It is computed for a specific direction x by the
-% command <tensor.ChristoffelTensor.html ChristoffelTensor>.
+% the pulling direction
+p = vector3d.Z;
 
-T = ChristoffelTensor(C,vector3d.X)
+% two orthogonal directions
+n = [vector3d.X,vector3d.Y];
+
+% the Poisson ratio
+nu = C.PoissonRatio(p,n)
+{% endhighlight %}
+
+{% highlight plaintext %}
+nu =
+    0.1515    0.3383
+
+{% endhighlight %}
+<p>If we ommit in the call to <a href="stiffnessTensor.PoissonRatio.html"><code class="language-plaintext highlighter-rouge">PoissonRatio</code></a> the last argument</p>
+{% highlight matlab %}
+nu = C.PoissonRatio(p)
 {% endhighlight %}
 
 {% highlight plaintext %}
  
-T = ChristoffelTensor  
-  rank   : 2 (3 x 3)   
-  mineral: Olivin (mmm)
- 
- 320.5     0     0
-     0  78.7     0
-     0     0    77
+nu = S2FunHarmonicSym  
+ mineral: Olivin (mmm)
+ bandwidth: 4
+ antipodal: true
 
 {% endhighlight %}
-<h2 id="10">Elastic Wave Velocity</h2><p>The Christoffel tensor is the basis for computing the direction dependent wave velocities of the p, s1, and s2 wave, as well as of the polarization directions. Therefore, we need also the density of the material, e.g.,</p>
+<p>we again obtain a spherical function. However, this time it is only meaningfull to evaluate this function at directions perpendicular to the pulling direction <code class="language-plaintext highlighter-rouge">p</code>. Hence, a good way to visualize this function is to plot it as a section in the x/y plane</p>
 {% highlight matlab %}
-rho = 3.355
-{% endhighlight %}
-
-{% highlight plaintext %}
-rho =
-    3.3550
-
-{% endhighlight %}
-<p>which we can write directly into the elastic stiffness tensor</p>
-{% highlight matlab %}
-C = addOption(C,'density',rho)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-C = stiffnessTensor  
-  unit   : GPa              
-  density: 3.355            
-  rank   : 4 (3 x 3 x 3 x 3)
-  mineral: Olivin (mmm)     
- 
-  tensor in Voigt matrix representation:
- 320.5  68.2  71.6     0     0     0
-  68.2 196.5  76.8     0     0     0
-  71.6  76.8 233.5     0     0     0
-     0     0     0    64     0     0
-     0     0     0     0    77     0
-     0     0     0     0     0  78.7
-
-{% endhighlight %}
-<p>Then the velocities are computed by the command <a href="stiffnessTensor.velocity.html">velocity</a></p>
-{% highlight matlab %}
-[vp,vs1,vs2,pp,ps1,ps2] = velocity(C)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-vp = S2FunTri  
- 
- vertices: 1 x 18338
- values:   1 x 18338
- 
-vs1 = S2FunTri  
- 
- vertices: 1 x 18338
- values:   1 x 18338
- 
-vs2 = S2FunTri  
- 
- vertices: 1 x 18338
- values:   1 x 18338
-pp = 
-  S2AxisFieldTri with properties:
-
-          tri: [1×1 S2Triangulation]
-       values: [1×18338 vector3d]
-     vertices: [1×18338 S2Grid]
-    antipodal: 0
-ps1 = 
-  S2AxisFieldTri with properties:
-
-          tri: [1×1 S2Triangulation]
-       values: [1×18338 vector3d]
-     vertices: [1×18338 S2Grid]
-    antipodal: 0
-ps2 = 
-  S2AxisFieldTri with properties:
-
-          tri: [1×1 S2Triangulation]
-       values: [1×18338 vector3d]
-     vertices: [1×18338 S2Grid]
-    antipodal: 0
-
-{% endhighlight %}
-<p>In order to visualize these quantities, there are several possibilities. Let us first plot the direction dependent wave speed of the p-wave</p>
-{% highlight matlab %}
-plot(vp,'complete','upper')
+plotSection(nu,p,'color','interp','linewidth',5)
+axis off
+mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_03.png" %}
-</center><p>Next, we plot on the top of this plot the p-wave polarization direction.</p>
+</center><h2 id="12">Shear Modulus</h2><p>The shear modulus is TODO</p>
 {% highlight matlab %}
-hold on
-plot(pp)
+% shear plane
+n = Miller(0,0,1,cs)
+
+% shear direction
+d = Miller(1,0,0,cs)
+
+G = C.shearModulus(n,d)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+n = Miller  
+ size: 1 x 1
+ mineral: Olivin (mmm)
+  h 0
+  k 0
+  l 1
+ 
+d = Miller  
+ size: 1 x 1
+ mineral: Olivin (mmm)
+  h 1
+  k 0
+  l 0
+G =
+   6.2807e+04
+
+{% endhighlight %}
+
+{% highlight matlab %}
+newMtexFigure('layout',[1,3])
+% shear plane
+n = Miller(1,0,0,cs);
+plotSection(C.shearModulus(n),n,'color','interp','linewidth',5)
+mtexTitle(char(n))
+axis off
+
+nextAxis
+n = Miller(1,1,0,cs);
+plotSection(C.shearModulus(n),n,'color','interp','linewidth',5)
+mtexTitle(char(n))
+
+nextAxis
+n = Miller(1,1,1,cs)
+plotSection(C.shearModulus(n),n,'color','interp','linewidth',5)
+mtexTitle(char(n))
 hold off
+
+setColorRange('equal')
+mtexColorbar
+drawNow(gcm,'figSize','large')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+n = Miller  
+ size: 1 x 1
+ mineral: Olivin (mmm)
+  h 1
+  k 1
+  l 1
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_04.png" %}
-</center><p>We may even compute with these spherical functions as width ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
-{% highlight matlab %}
-plot(vs1-vs2,'complete','upper')
-
-hold on
-plot(ps1)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AnisotropicTheory_05.png" %}
-</center><p>When projected to a plane the different wave speeds</p>
-{% highlight matlab %}
-planeNormal = vector3d.X;
-
-% options for sections
-optSec = {'color','interp','linewidth',6,'doNotDraw'};
-
-% options for quiver
-optQuiver = {'linewidth',2,'autoScaleFactor',0.35,'doNotDraw'};
-optQuiverProp = {'color','k','linewidth',2,'autoScaleFactor',0.25,'doNotDraw'};
-prop = S2VectorFieldHarmonic.normal; % the propagation direction
-
-% wave velocyties
-close all
-plotSection(vp,planeNormal,optSec{:},'DisplayName','Vp')
-hold on
-plotSection(vs1,planeNormal,optSec{:},'DisplayName','Vs1')
-plotSection(vs2,planeNormal,optSec{:},'DisplayName','Vs2')
-
-% polarisation directions
-quiverSection(vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
-quiverSection(vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
-quiverSection(vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
-
-% plot propagation directions as reference
-quiverSection(vp,prop,planeNormal,optQuiverProp{:},'DisplayName','x')
-quiverSection(vs1,prop,planeNormal,optQuiverProp{:})
-quiverSection(vs2,prop,planeNormal,optQuiverProp{:})
-hold off
-
-axis off tight
-legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
-mtexTitle('Phase velocity surface (km/s)')
-
-mtexColorMap blue2red
-mtexColorbar('Title','(km/s)','location','southOutSide')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AnisotropicTheory_06.png" %}
-</center><p>Similarly, we can visualize the slowness surfaces (s/km)</p>
-{% highlight matlab %}
-% plot slowness surfaces
-plotSection(1./vp,planeNormal,optSec{:},'DisplayName','Vp')
-hold on
-plotSection(1./vs1,planeNormal,optSec{:},'DisplayName','Vs1')
-plotSection(1./vs2,planeNormal,optSec{:},'DisplayName','Vs2')
-
-% polarisation directions
-quiverSection(1./vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
-quiverSection(1./vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
-quiverSection(1./vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
-
-% plot propagation directions as reference
-quiverSection(1./vp,prop,planeNormal,optQuiverProp{:},'DisplayName','x')
-quiverSection(1./vs1,prop,planeNormal,optQuiverProp{:})
-quiverSection(1./vs2,prop,planeNormal,optQuiverProp{:})
-hold off
-axis off tight
-legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
-mtexTitle('Slowness surface (km/s)')
-
-mtexColorMap blue2red
-mtexColorbar('Title','(s/km)','location','southOutSide')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AnisotropicTheory_07.png" %}
-</center><p>set back default colormap</p>
-{% highlight matlab %}
-setMTEXpref('defaultColorMap',WhiteJetColorMap)
-{% endhighlight %}
-</div></body></html>
+</center><h2 id="14">Wave Velocities</h2><p>Since elastic compression and decompression is mechanics of waves traveling through a medium anisotropic compressibility causes also anisotropic waves speeds. The analysis of this anisotropy is explained in the section <a href="WaveVelocities.html">wave velocities</a>.</p></div></body></html>

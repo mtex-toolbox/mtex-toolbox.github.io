@@ -1,18 +1,229 @@
 ---
 title: Wave Velocities
-last_updated: 28-Oct-2019
+last_updated: 04-Nov-2019
 sidebar: documentation_sidebar
 permalink: WaveVelocities.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Wave Velocities</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_WaveVelocities.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/WaveVelocities.m">
-    edit page</a></font><div><h1>Wave Velocities</h1></div></body></html>
+      --><title>Wave Velocities</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-04"><meta name="DC.source" content="script_WaveVelocities.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/WaveVelocities.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO</h2><h2 id="2">Import an Elasticity Tensor</h2><p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
+
+cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
+
+C = stiffnessTensor.load(fname,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+C = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Olivin (mmm)     
+ 
+  tensor in Voigt matrix representation:
+ 320.5  68.2  71.6     0     0     0
+  68.2 196.5  76.8     0     0     0
+  71.6  76.8 233.5     0     0     0
+     0     0     0    64     0     0
+     0     0     0     0    77     0
+     0     0     0     0     0  78.7
+
+{% endhighlight %}
+<h2 id="3">Christoffel Tensor</h2><p>The Christoffel Tensor is symmetric because of the symmetry of the elastic constants. The eigenvalues of the 3x3 Christoffel tensor are three positive values of the wave moduli which corresponds to \rho Vp^2 , \rho Vs1^2 and \rho Vs2^2 of the plane waves propagating in the direction n. The three eigenvectors of this tensor are then the polarization directions of the three waves. Because the Christoffel tensor is symmetric, the polarization vectors are perpendicular to each other.</p>
+{% highlight matlab %}
+% It is computed for a specific direction x by the
+% command <tensor.ChristoffelTensor.html ChristoffelTensor>.
+
+T = ChristoffelTensor(C,vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+T = ChristoffelTensor  
+  rank   : 2 (3 x 3)   
+  mineral: Olivin (mmm)
+ 
+ 320.5     0     0
+     0  78.7     0
+     0     0    77
+
+{% endhighlight %}
+<h2 id="4">Elastic Wave Velocity</h2><p>The Christoffel tensor is the basis for computing the direction dependent wave velocities of the p, s1, and s2 wave, as well as of the polarization directions. Therefore, we need also the density of the material, e.g.,</p>
+{% highlight matlab %}
+rho = 3.355
+{% endhighlight %}
+
+{% highlight plaintext %}
+rho =
+    3.3550
+
+{% endhighlight %}
+<p>which we can write directly into the elastic stiffness tensor</p>
+{% highlight matlab %}
+C = addOption(C,'density',rho)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+C = stiffnessTensor  
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Olivin (mmm)     
+ 
+  tensor in Voigt matrix representation:
+ 320.5  68.2  71.6     0     0     0
+  68.2 196.5  76.8     0     0     0
+  71.6  76.8 233.5     0     0     0
+     0     0     0    64     0     0
+     0     0     0     0    77     0
+     0     0     0     0     0  78.7
+
+{% endhighlight %}
+<p>Then the velocities are computed by the command <a href="stiffnessTensor.velocity.html">velocity</a></p>
+{% highlight matlab %}
+[vp,vs1,vs2,pp,ps1,ps2] = velocity(C)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+vp = S2FunTri  
+ 
+ vertices: 1 x 18338
+ values:   1 x 18338
+ 
+vs1 = S2FunTri  
+ 
+ vertices: 1 x 18338
+ values:   1 x 18338
+ 
+vs2 = S2FunTri  
+ 
+ vertices: 1 x 18338
+ values:   1 x 18338
+pp = 
+  S2AxisFieldTri with properties:
+
+          tri: [1×1 S2Triangulation]
+       values: [1×18338 vector3d]
+     vertices: [1×18338 S2Grid]
+    antipodal: 0
+ps1 = 
+  S2AxisFieldTri with properties:
+
+          tri: [1×1 S2Triangulation]
+       values: [1×18338 vector3d]
+     vertices: [1×18338 S2Grid]
+    antipodal: 0
+ps2 = 
+  S2AxisFieldTri with properties:
+
+          tri: [1×1 S2Triangulation]
+       values: [1×18338 vector3d]
+     vertices: [1×18338 S2Grid]
+    antipodal: 0
+
+{% endhighlight %}
+<p>In order to visualize these quantities, there are several possibilities. Let us first plot the direction dependent wave speed of the p-wave</p>
+{% highlight matlab %}
+plot(vp,'complete','upper')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_01.png" %}
+</center><p>Next, we plot on the top of this plot the p-wave polarization direction.</p>
+{% highlight matlab %}
+hold on
+plot(pp)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_02.png" %}
+</center><p>We may even compute with these spherical functions as width ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
+{% highlight matlab %}
+plot(vs1-vs2,'complete','upper')
+
+hold on
+plot(ps1)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_03.png" %}
+</center><p>When projected to a plane the different wave speeds</p>
+{% highlight matlab %}
+planeNormal = vector3d.X;
+
+% options for sections
+optSec = {'color','interp','linewidth',6,'doNotDraw'};
+
+% options for quiver
+optQuiver = {'linewidth',2,'autoScaleFactor',0.35,'doNotDraw'};
+optQuiverProp = {'color','k','linewidth',2,'autoScaleFactor',0.25,'doNotDraw'};
+prop = S2VectorFieldHarmonic.normal; % the propagation direction
+
+% wave velocyties
+close all
+plotSection(vp,planeNormal,optSec{:},'DisplayName','Vp')
+hold on
+plotSection(vs1,planeNormal,optSec{:},'DisplayName','Vs1')
+plotSection(vs2,planeNormal,optSec{:},'DisplayName','Vs2')
+
+% polarisation directions
+quiverSection(vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
+quiverSection(vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
+quiverSection(vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
+
+% plot propagation directions as reference
+quiverSection(vp,prop,planeNormal,optQuiverProp{:},'DisplayName','x')
+quiverSection(vs1,prop,planeNormal,optQuiverProp{:})
+quiverSection(vs2,prop,planeNormal,optQuiverProp{:})
+hold off
+
+axis off tight
+legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
+mtexTitle('Phase velocity surface (km/s)')
+
+mtexColorMap blue2red
+mtexColorbar('Title','(km/s)','location','southOutSide')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_04.png" %}
+</center><p>Similarly, we can visualize the slowness surfaces (s/km)</p>
+{% highlight matlab %}
+% plot slowness surfaces
+plotSection(1./vp,planeNormal,optSec{:},'DisplayName','Vp')
+hold on
+plotSection(1./vs1,planeNormal,optSec{:},'DisplayName','Vs1')
+plotSection(1./vs2,planeNormal,optSec{:},'DisplayName','Vs2')
+
+% polarisation directions
+quiverSection(1./vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
+quiverSection(1./vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
+quiverSection(1./vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
+
+% plot propagation directions as reference
+quiverSection(1./vp,prop,planeNormal,optQuiverProp{:},'DisplayName','x')
+quiverSection(1./vs1,prop,planeNormal,optQuiverProp{:})
+quiverSection(1./vs2,prop,planeNormal,optQuiverProp{:})
+hold off
+axis off tight
+legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
+mtexTitle('Slowness surface (km/s)')
+
+mtexColorMap blue2red
+mtexColorbar('Title','(s/km)','location','southOutSide')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_05.png" %}
+</center><p>set back default colormap</p>
+{% highlight matlab %}
+setMTEXpref('defaultColorMap',WhiteJetColorMap)
+{% endhighlight %}
+</div></body></html>
