@@ -1,6 +1,6 @@
 ---
 title: S2FunHarmonic
-last_updated: 31-Oct-2019
+last_updated: 04-Nov-2019
 sidebar: documentation_sidebar
 permalink: S2FunHarmonicRepresentation.html
 folder: documentation
@@ -11,77 +11,51 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_S2FunHarmonicRepresentation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunHarmonicRepresentation.m">
-    edit page</a></font><div><!--introduction--><p>S2FunHarmonic is the heart of S2Fun, therefore much effort is put into its functionality.</p><!--/introduction--><h2 id="1">Contents</h2><p>In the first part we will cover how to deal with univariate functions of the form</p><p>
+      --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-04"><meta name="DC.source" content="script_S2FunHarmonicRepresentation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunHarmonicRepresentation.m">
+    edit page</a></font><div><!--introduction--><p>The class <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> is the heart of S2Fun, therefore, much effort is put into its functionality. So lets cover the mathematical basics.</p><!--/introduction--><p>The general problem is to approximate functions of the form</p><p>
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq12688510093716008662.png" %}
-</p><h2 id="3">Defining an univariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
+</p><p>For that we use linear combinations of spherical harmonics, which constitude a basis of all square-integrable functions on the sphere $L_2(\mathbb S^2)$. The spherical harmonic of degree 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq11319871188381094158.png" %}
+ and order 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq11306495728221823791.png" %}
+ is defined by</p><pre class="error">Error updating Text.
+
+ String scalar or character vector must have valid interpreter syntax: 
+$L_2(\mathbb S^2)$
+</pre><p>$$ Y_{m,l}(\theta, \rho) = \sqrt{\frac{2m+1}{4\pi}P_{m,|l|}(\cos\rho)\mathrm e^{\mathrm i l\theta} $$</p><pre class="error">Error updating Text.
+
+ String scalar or character vector must have valid interpreter syntax: 
+$$ Y_{m,l}(\theta, \rho) = \sqrt{\frac{2m+1}{4\pi}P_{m,|l|}(\cos\rho)\mathrm e^{\mathrm i l\theta} $$
+</pre><p>for 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq00504858358480559463.png" %}
+ being the associated Legendre-Polynomial, $m\in\mathbb N_0$, and 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq12319429999823797161.png" %}
+.</p><pre class="error">Error updating Text.
+
+ String scalar or character vector must have valid interpreter syntax: 
+$m\in\mathbb N_0$
+</pre><p>The first 16 spherical harmonics look as follows</p>
 {% highlight matlab %}
-nodes = equispacedS2Grid('resolution',3*degree,'antipodal');
-nodes = nodes(:);
-{% endhighlight %}
-<p>next we need to define function values for the vertices</p>
-{% highlight matlab %}
-y = S2Fun.smiley(nodes);
-% plot the discrete data
-plot(nodes,y)
+surf(S2FunHarmonic(eye(16)))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunHarmonicRepresentation_01.png" %}
-</center><p>Finally the actual command to get <tt>sF1</tt> of type <tt>S2FunHarmonic</tt></p>
-{% highlight matlab %}
-sF1 = interp(nodes, y, 'harmonicApproximation')
-% plot the spherical function
-plot(sF1)
-{% endhighlight %}
+</center><p>If you think you remember these from the windows 200 flowerbox screensaver, you are wrong. But they play a fundamental role in the computation of atomic orbital electron configurations and may have appeared in a chemistry book you've seen.</p><p>Now we seek fot so-called Fourier-coefficients 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq03170805165790058823.png" %}
+ such that</p><p>
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq02597294378154449509.png" %}
+</p><p>approximates our function. A basic strategy to achieve that is least squares, where we minimize the functional 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq01352763972028051437.png" %}
+</p><p>for some nodes 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq08064257365002422487.png" %}
+, 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq07710141230993437949.png" %}
+, 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq09421588773943226644.png" %}
+ the target function values and 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq17152385268655187882.png" %}
+ our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we have to multiply with the Fourier-matrix</p><p>$$ \bm F = [Y_{m,l}(x_n)]_{n = 1,\dots,N;m = 0,\dots,M,l = -m,\dots,m}. $$</p><pre class="error">Error updating Text.
 
-{% highlight plaintext %}
- 
-sF1 = S2FunHarmonic  
- bandwidth: 48
- antipodal: true
-
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
-</center><div><ul><li>The <tt>bandwidth</tt> property shows the maximal polynomial degree of the function.Internally for a given bandwidth there are stored 
-  {% include inline_image.html file="S2FunHarmonicRepresentation_eq07204186098443340480.png" %}
- Fourier-coefficients.</li><li>The <tt>antipodal</tt> flag shows that 
-  {% include inline_image.html file="S2FunHarmonicRepresentation_eq05142536305060616777.png" %}
- holds for all 
-  {% include inline_image.html file="S2FunHarmonicRepresentation_eq03296369778268784901.png" %}
-.</li></ul></div><p>For the same result we could also run <tt>S2FunHarmonic.approximation(nodes, y)</tt> and give some additional options (<a href="S2FunHarmonic.approximation.html">see here</a>).</p><p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <tt>S2FunHarmonic</tt> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><tt>vector3d</tt></a> as an argument and returns double:</p>
-{% highlight matlab %}
-f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
-% plot the function at discrete points
-plot(nodes,f(nodes))
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
-</center><p>Now we can call the quadrature command to get <tt>sF2</tt> of type <tt>S2FunHarmonic</tt></p>
-{% highlight matlab %}
-sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150)
-
-plot(sF2)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-sF2 = S2FunHarmonic  
- bandwidth: 150
-
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
-</center><div><ul><li>If we would leave the <tt>'bandwidth'</tt> option empty the default bandwidth would be considered, which is 128.</li><li>The quadrature is faster than the approximation, because it does not have to solve a system of equations. But the knowledge of the function handle is also a strong requirement.</li><li>For more options <a href="S2FunHarmonic.quadrature.html">see here</a>.</li></ul></div><p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them as a column vector to the constructor of <tt>S2FunHarmonic</tt></p>
-{% highlight matlab %}
-fhat = rand(25, 1);
-sF3 = S2FunHarmonic(fhat)
-{% endhighlight %}
-
-{% highlight plaintext %}
- 
-sF3 = S2FunHarmonic  
- bandwidth: 4
-
-{% endhighlight %}
-</div></body></html>
+ String scalar or character vector must have valid interpreter syntax: 
+$$ \bm F = [Y_{m,l}(x_n)]_{n = 1,\dots,N;m = 0,\dots,M,l = -m,\dots,m}. $$
+</pre><p>This can be done with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p></div></body></html>
