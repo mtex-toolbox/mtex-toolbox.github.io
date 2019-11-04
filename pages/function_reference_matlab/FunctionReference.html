@@ -1,6 +1,6 @@
 ---
 title: Function Reference
-last_updated: 31-Oct-2019
+last_updated: 04-Nov-2019
 sidebar: function_reference_sidebar
 permalink: FunctionReference.html
 folder: function_reference
@@ -11,24 +11,71 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Function Reference</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_FunctionReference.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/FunctionReference/FunctionReference.m">
+      --><title>Function Reference</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-04"><meta name="DC.source" content="script_FunctionReference.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/FunctionReference/FunctionReference.m">
     edit page</a></font><div><h1>Function Reference</h1><p>Unlike most other texture analysis software MTEX does not have any graphical user interface. Instead the user is suposed to write scripts. Those scripts usually have the following structure</p><pre># import data
 # inspect the data
 # correct the data
 # analyze the data
 # plot and export the results of the analysis</pre><p>During all these steps the data are stored as variables of different type. There are many different types of variables (called classes) for different objects, like <a href="https://mtex-toolbox.github.io/vector3d.vector3d.html">vectors</a>, <a href="https://mtex-toolbox.github.io/rotation.rotation.html">rotations</a>, <a href="https://mtex-toolbox.github.io/EBSD.EBSD.html">EBSD data</a>, <a href="https://mtex-toolbox.github.io/graind2d.grain2d.html">grains</a> or <a href="https://mtex-toolbox.github.io/ODF.ODF.html">ODFs</a>. The sidebar on the left lets you browse through all different MTEX class and the corresponding functions.</p><p>Variables are generated automatically when data are imported. E.g., the command</p>
 {% highlight matlab %}
-ebsd = EBSD.load('fileName.ctf')
+fileName = [mtexEBSDPath filesep 'Forsterite.ctf'];
+ebsd = EBSD.load(fileName)
 {% endhighlight %}
-<p>imports data from the file <code class="language-plaintext highlighter-rouge">fileName.ctf</code> and stores them in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> of type <a href="https://mtex-toolbox.github.io/EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a>. In the command window the variable <code class="language-plaintext highlighter-rouge">ebsd</code> is displayed as follows</p><pre>ebsd = EBSD (show methods, plot)</pre><pre>Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    0   58485 (24%)  notIndexed
-    1  152345 (62%)  Forsterite  LightSkyBlue       mmm
-    2   26058 (11%)   Enstatite  DarkSeaGreen       mmm
-    3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c</pre><pre>Properties: bands, bc, bs, error, mad, x, y
-Scan unit : um
-{% endhighlight %}</pre><p>Next one can pass the variable `ebsd` to diferent MTEX function. E.g. to plot the EBSD one simply does {% highlight matlab %} plot(ebsd) {% endhighlight %}</p><p>The grain structure is reconstructed by the command {% highlight matlab %} grains = calcGrains(ebsd) {% endhighlight %}</p><p>which returns a new variable, here called `grains`</p><p>{% highlight plaintext %} grains = grain2d (show methods, plot)</p><pre>Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-    1    1256  152345  Forsterite       mmm
-    2     518   26058   Enstatite       mmm
-    3    1526    9064    Diopside     12/m1       X||a*, Y||b*, Z||c</pre><pre>boundary segments: 45832
-triple points: 3863</pre><pre>Properties: GOS, meanRotation
-{% endhighlight %}</pre><p>which is of type [grain2d](https://mtex-toolbox.github.io/grain2d.grain2d.html) and contains the entire grain structure. Finally, we my visualize this structure by</p><p>{% highlight matlab %} plot(grains.boundary) {% endhighlight %}</p></div></body></html>
+
+{% highlight plaintext %}
+Warning: .ctf files have usualy inconsistent conventions
+for spatial coordinates and Euler angles. You may want to
+use one of the options
+'convertSpatial2EulerReferenceFrame' or
+'convertEuler2SpatialReferenceFrame' to correct for this 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+
+{% endhighlight %}
+<p>imports data from the file <code class="language-plaintext highlighter-rouge">fileName.ctf</code> and stores them in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> of type <a href="https://mtex-toolbox.github.io/EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a>.</p><p>Next one can pass the variable <code class="language-plaintext highlighter-rouge">ebsd</code> to diferent MTEX function. E.g. to plot a phase plot one simply does</p>
+{% highlight matlab %}
+plot(ebsd)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="FunctionReference_01.png" %}
+</center><p>The grain structure is reconstructed by the command</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     0   16334   58485  notIndexed                                   
+     1    4092  152345  Forsterite       mmm                         
+     2    1864   26058   Enstatite       mmm                         
+     3    1991    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 147957
+ triple points: 11456
+ 
+ Properties: GOS, meanRotation
+ 
+
+{% endhighlight %}
+<p>which returns a new variable of type <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a>, here called <code class="language-plaintext highlighter-rouge">grains</code>. This variable contains the entire grain structure. Finally, we my visualize this structure by</p>
+{% highlight matlab %}
+hold on
+plot(grains.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="FunctionReference_02.png" %}
+</center></div></body></html>
