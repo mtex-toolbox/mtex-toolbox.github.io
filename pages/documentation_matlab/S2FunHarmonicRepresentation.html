@@ -34,13 +34,13 @@ surf(S2FunHarmonic(eye(10)))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunHarmonicRepresentation_01.png" %}
-</center><p>If you think you remember these from the windows 200 flowerbox screensaver, you are wrong. But they play a fundamental role in the computation of atomic orbital electron configurations and may have appeared in a chemistry book you've seen.</p><p>Now we seek fot so-called Fourier-coefficients 
+</center><p>If you think you remember these from the Windows 2000 flowerbox screensaver, you are wrong. But they play a fundamental role in the computation of atomic orbital electron configurations and may have appeared in a chemistry book you've seen.</p><p>Now we seek for so-called Fourier-coefficients 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq06555639083441694270.png" %}
  such that</p><p>
-  {% include inline_image.html file="S2FunHarmonicRepresentation_eq02597294378154449509.png" %}
-</p><p>approximates our function. A basic strategy to achieve that is least squares, where we minimize the functional 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq05988222900342699238.png" %}
+</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq01352763972028051437.png" %}
-</p><p>for some nodes 
+</p><p>for the data nodes 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq08064257365002422487.png" %}
 , 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq07710141230993437949.png" %}
@@ -48,6 +48,8 @@ surf(S2FunHarmonic(eye(10)))
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq09421588773943226644.png" %}
  the target function values and 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq17152385268655187882.png" %}
- our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we have to multiply with the Fourier-matrix</p><p>
+ our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p><p>
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq17442220960550767857.png" %}
-</p><p>This can be done with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p></div></body></html>
+</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq07585311203459331132.png" %}
+, which describe our approximation.</p><p>There are other variants to obtain these Fourier-coefficients, but we only wanted to give a feel for what they are for.</p></div></body></html>
