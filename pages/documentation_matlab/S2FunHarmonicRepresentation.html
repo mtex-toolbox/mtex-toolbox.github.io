@@ -14,35 +14,33 @@ To make changes, update the MATLAB code and republish this document.
       --><title>S2FunHarmonic</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-04"><meta name="DC.source" content="script_S2FunHarmonicRepresentation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunHarmonicRepresentation.m">
     edit page</a></font><div><!--introduction--><p>The class <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> is the heart of S2Fun, therefore, much effort is put into its functionality. So lets cover the mathematical basics.</p><!--/introduction--><p>The general problem is to approximate functions of the form</p><p>
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq12688510093716008662.png" %}
-</p><p>For that we use linear combinations of spherical harmonics, which constitude a basis of all square-integrable functions on the sphere $L_2(\mathbb S^2)$. The spherical harmonic of degree 
+</p><p>For that we use linear combinations of spherical harmonics, which constitude a basis of all square-integrable functions on the sphere 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq06984502416654360419.png" %}
+. The spherical harmonic of degree 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq11319871188381094158.png" %}
  and order 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq11306495728221823791.png" %}
- is defined by</p><pre class="error">Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax: 
-$L_2(\mathbb S^2)$
-</pre><p>$$ Y_{m,l}(\theta, \rho) = \sqrt{\frac{2m+1}{4\pi}P_{m,|l|}(\cos\rho)\mathrm e^{\mathrm i l\theta} $$</p><pre class="error">Error updating Text.
+ is defined by</p><p>$$ Y_{m,l}(\theta, \rho) = \sqrt{\frac{2m+1}{4\pi}P_{m,|l|}(\cos\rho)\mathrm e^{\mathrm i l\theta} $$</p><pre class="error">Error updating Text.
 
  String scalar or character vector must have valid interpreter syntax: 
 $$ Y_{m,l}(\theta, \rho) = \sqrt{\frac{2m+1}{4\pi}P_{m,|l|}(\cos\rho)\mathrm e^{\mathrm i l\theta} $$
 </pre><p>for 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq00504858358480559463.png" %}
- being the associated Legendre-Polynomial, $m\in\mathbb N_0$, and 
+ being the associated Legendre-Polynomial, 
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq02013426684416792931.png" %}
+, and 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq12319429999823797161.png" %}
-.</p><pre class="error">Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax: 
-$m\in\mathbb N_0$
-</pre><p>The first 16 spherical harmonics look as follows</p>
+.</p><p>The first ten spherical harmonics look as follows</p>
 {% highlight matlab %}
-surf(S2FunHarmonic(eye(16)))
+surf(S2FunHarmonic(eye(10)))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunHarmonicRepresentation_01.png" %}
-</center><p>If you think you remember these from the windows 200 flowerbox screensaver, you are wrong. But they play a fundamental role in the computation of atomic orbital electron configurations and may have appeared in a chemistry book you've seen.</p><p>Now we seek fot so-called Fourier-coefficients 
-  {% include inline_image.html file="S2FunHarmonicRepresentation_eq03170805165790058823.png" %}
- such that</p><p>
+</center><p>If you think you remember these from the windows 200 flowerbox screensaver, you are wrong. But they play a fundamental role in the computation of atomic orbital electron configurations and may have appeared in a chemistry book you've seen.</p><p>Now we seek fot so-called Fourier-coefficients $\bm{\hat f} = (\hat f_{0,0},\dots,\hat f_{M,M})^T$ such that</p><pre class="error">Error updating Text.
+
+ String scalar or character vector must have valid interpreter syntax: 
+$\bm{\hat f} = (\hat f_{0,0},\dots,\hat f_{M,M})^T$
+</pre><p>
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq02597294378154449509.png" %}
 </p><p>approximates our function. A basic strategy to achieve that is least squares, where we minimize the functional 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq01352763972028051437.png" %}
@@ -54,8 +52,6 @@ surf(S2FunHarmonic(eye(16)))
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq09421588773943226644.png" %}
  the target function values and 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq17152385268655187882.png" %}
- our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we have to multiply with the Fourier-matrix</p><p>$$ \bm F = [Y_{m,l}(x_n)]_{n = 1,\dots,N;m = 0,\dots,M,l = -m,\dots,m}. $$</p><pre class="error">Error updating Text.
-
- String scalar or character vector must have valid interpreter syntax: 
-$$ \bm F = [Y_{m,l}(x_n)]_{n = 1,\dots,N;m = 0,\dots,M,l = -m,\dots,m}. $$
-</pre><p>This can be done with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p></div></body></html>
+ our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we have to multiply with the Fourier-matrix</p><p>
+  {% include inline_image.html file="S2FunHarmonicRepresentation_eq17442220960550767857.png" %}
+</p><p>This can be done with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p></div></body></html>
