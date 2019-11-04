@@ -1,6 +1,6 @@
 ---
 title: Spherical Approximation and Interpolation
-last_updated: 01-Nov-2019
+last_updated: 04-Nov-2019
 sidebar: documentation_sidebar
 permalink: S2FunApproximationInterpolation.html
 folder: documentation
@@ -11,20 +11,28 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spherical Approximation and Interpolation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-01"><meta name="DC.source" content="script_S2FunApproximationInterpolation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunApproximationInterpolation.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Given data nodes</p>
+      --><title>Spherical Approximation and Interpolation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-04"><meta name="DC.source" content="script_S2FunApproximationInterpolation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunApproximationInterpolation.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>On this page, we want to cover the topic of function approximation from discrete values on the sphere. To simulate this, we have stored some nodes and corresponding function values which we can load.</p>
 {% highlight matlab %}
 load(fullfile(mtexDataPath, 'vector3d', 'smiley.mat'));
-
+{% endhighlight %}
+<p>Note that if you don't have the the nodes and function values stored convieniently in a Matlab-file, you can alway use the <a href="vector3d.import"><code class="language-plaintext highlighter-rouge">import</code></a> function of the class vector3d. Next, we can make a scatter plot to see, what we a dealing with.</p>
+{% highlight matlab %}
 scatter(nodes, f, 'upper');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunApproximationInterpolation_01.png" %}
-</center><h2 id="2">Interpolation!</h2>
+</center><p>The next thing is to find a function which coincides with the given function values in the nodes reasonably well.</p><h2 id="4">Interpolation</h2><p>The idea of the first approach is reasonably simple. We create a function which has <b>exaclty</b> the value of the given data in the nodes. But we still have to decide what happens inbetween these nodes. For that, we linearly interpolate between them, similarly as matlap plots a one-dimensional function</p>
+{% highlight matlab %}
+plot(rand(10,1),'.-')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunApproximationInterpolation_02.png" %}
+</center><p>With some mathematics we can lift this concept to the sphere. This is done by the <a href="vector3d.interp"><code class="language-plaintext highlighter-rouge">interp</code></a> command of the class <a href="vector3d.vector3d"><code class="language-plaintext highlighter-rouge">vector3d</code></a> when the argument <code class="language-plaintext highlighter-rouge">'linear'</code> is given</p>
 {% highlight matlab %}
 sFTri = interp(nodes, f, 'linear');
 {% endhighlight %}
-<p>Very wow!</p>
+<p>To see that we realy have the exact function values, we can evaluate <code class="language-plaintext highlighter-rouge">sFTri</code> of type <a href="S2FunTri.S2FunTri"><code class="language-plaintext highlighter-rouge">S2FunTri</code></a> and compare it against our original data values.</p>
 {% highlight matlab %}
 norm(eval(sFTri, nodes)-f)
 {% endhighlight %}
@@ -34,17 +42,20 @@ ans =
    2.4016e-15
 
 {% endhighlight %}
-<p>Plotting it is meh</p>
+<p>Indeed, we an error of machine precision. Now we can work with the function defined on the whole sphere. We can, for instance, plot it</p>
 {% highlight matlab %}
 contourf(sFTri, 'upper');
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunApproximationInterpolation_02.png" %}
-</center><h2 id="5">Approximation?</h2>
+{% include inline_image.html file="S2FunApproximationInterpolation_03.png" %}
+</center><p>That does not look like what we had in mind. There are other variants to fill the gaps between the data nodes, which can improve the result. But if we don't restrict ourselfs to the given function values in the nodes, we have more freedom, which can be seen with Approximation.</p><h2 id="10">Approximation</h2><p>In contrast to interpolation we are now not restricted to the function values in the nodes but still want to keep the error reasonably small. One way to achieve this is to approximate it with a series of spherical harmonics. We don't take as many spherical harmonics as there are nodes, such that we are in the overdetermined case. In that way we don't have a chance of getting the error in the nodes zero but hope for a smoother approximation. This can be achieved by the <a href="vector3d.interp"><code class="language-plaintext highlighter-rouge">interp</code></a> command of the class <a href="vector3d.vector3d"><code class="language-plaintext highlighter-rouge">vector3d</code></a> when the argument <code class="language-plaintext highlighter-rouge">'harmnicApproximation'</code></p>
 {% highlight matlab %}
 sF = interp(nodes, f, 'harmonicApproximation');
+contourf(sF, 'upper');
 {% endhighlight %}
-<p>Error meh</p>
+<center>
+{% include inline_image.html file="S2FunApproximationInterpolation_04.png" %}
+</center><p>Plotting this function, we can immidiately see, that we have a much smoother function. But one has to keep in mind that the error in the data nodes is not zero as in the case of interpolation.</p>
 {% highlight matlab %}
 norm(eval(sF, nodes)-f)
 {% endhighlight %}
@@ -54,10 +65,4 @@ ans =
     0.0427
 
 {% endhighlight %}
-<p>Plot wow!</p>
-{% highlight matlab %}
-contourf(sF, 'upper');
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2FunApproximationInterpolation_03.png" %}
-</center></div></body></html>
+<p>But this may not be important like with function approximation from noisy function values, where we don't know the exact function values anyways.</p></div></body></html>
