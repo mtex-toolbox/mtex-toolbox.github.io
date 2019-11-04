@@ -1,20 +1,17 @@
 ---
 title: Boundary Plots
-last_updated: 28-Oct-2019
+last_updated: 03-Nov-2019
 sidebar: documentation_sidebar
 permalink: BoundaryPlots.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryPlots.m">
+      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-03"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryPlots.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -212,7 +209,7 @@ axes = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_08.png" %}
-</center><h2 id="11">Full Misorientation Colorization</h2><p>In order to visuale the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <tt>Improved representations of misorientation information for grain boundary</tt>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
+</center><h2 id="11">Full Misorientation Colorization</h2><p>In order to visuale the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <code class="language-plaintext highlighter-rouge">Improved representations of misorientation information for grain boundary</code>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
 {% highlight matlab %}
 % plot the grains
 close all
@@ -243,4 +240,62 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_10.png" %}
+</center><p>Lets illustrate this color coding also at a iron sample.</p>
+{% highlight matlab %}
+% import the data
+mtexdata csl
+
+% grain segementation and smoothing
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+grains = smooth(grains,2);
+gB = grains.boundary('iron','iron');
+
+% and plot image quality + orientation
+plot(ebsd,log(ebsd.prop.iq),'figSize','large')
+mtexColorMap black2white
+CLim(gcm,[.5,5])
+hold on
+plot(grains,grains.meanOrientation,'FaceAlpha',0.4)
+
+% define the color key and colorize the grain boundaries
+colorKey = PatalaColorKey(gB)
+hold on
+plot(gB,colorKey.orientation2color(gB.misorientation),'linewidth',4,'smooth')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ 
+ebsd = EBSD  
+ 
+ Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
+    -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
+ 
+ Properties: ci, error, iq, x, y
+ Scan unit : um
+ 
+colorKey = 
+  PatalaColorKey with properties:
+
+          CS1: [24×2 crystalSymmetry]
+          CS2: [24×2 crystalSymmetry]
+    antipodal: 1
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="BoundaryPlots_11.png" %}
+</center><p>At the end we plot the colorized misorientation space in axis angle sections. Note that in this plot misorientations <code class="language-plaintext highlighter-rouge">mori</code> and <code class="language-plaintext highlighter-rouge">inv(mori)</code> are associated.</p>
+{% highlight matlab %}
+plot(colorKey,'axisAngle',(5:5:60)*degree)
+
+plot(gB.misorientation,'points',300,'add2all',...
+  'MarkerFaceColor','none','MarkerEdgeColor','w')
+{% endhighlight %}
+
+{% highlight plaintext %}
+  plotting 300 random orientations out of 20356 given orientations
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="BoundaryPlots_12.png" %}
 </center></div></body></html>
