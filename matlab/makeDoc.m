@@ -30,6 +30,7 @@ set(0,'DefaultFigureColor','white');
 
 options.tmpDir = fullfile(pwd,'tmp');
 options.imageDir = fullfile(pwd,'..','images');
+options.LaTex = 'mathJax';
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
 
 options.xml.toolbox.versionName.Text = getMTEXpref('version');
