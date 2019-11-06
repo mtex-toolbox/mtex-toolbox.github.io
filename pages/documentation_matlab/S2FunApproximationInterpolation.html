@@ -73,4 +73,22 @@ ans =
     0.0572
 
 {% endhighlight %}
-<p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p></div></body></html>
+<p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p><p>The strategy underlying the <code class="language-plaintext highlighter-rouge">interp(...,'harmonicApproximation')</code>-command to obtain such an approximation works via spherical harmonics (<a href="S2FunHarmonicRepresentation">Basics of spherical harmonics</a>). For that, we seek for so-called Fourier-coefficients 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq04709227244918925271.png" %}
+ such that</p><p>
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq05988222900342699238.png" %}
+</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq01352763972028051437.png" %}
+</p><p>for the data nodes 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq08064257365002422487.png" %}
+, 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq07710141230993437949.png" %}
+, 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq09421588773943226644.png" %}
+ the target function values and 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq17152385268655187882.png" %}
+ our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p><p>
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq17442220960550767857.png" %}
+</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation 
+  {% include inline_image.html file="S2FunApproximationInterpolation_eq07585311203459331132.png" %}
+, which describe our approximation.</p></div></body></html>
