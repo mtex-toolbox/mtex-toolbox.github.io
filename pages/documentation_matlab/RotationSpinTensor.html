@@ -1,20 +1,17 @@
 ---
 title: Spin Tensors as Ininitesimal Changes of Rotations
-last_updated: 28-Oct-2019
+last_updated: 06-Nov-2019
 sidebar: documentation_sidebar
 permalink: RotationSpinTensor.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spin Tensors as Ininitesimal Changes of Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_RotationSpinTensor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationSpinTensor.m">
+      --><title>Spin Tensors as Ininitesimal Changes of Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-06"><meta name="DC.source" content="script_RotationSpinTensor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationSpinTensor.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Spin tensors are skew symmetric tensors that can be used to describe small rotational changes. Lets consider an arbitrary reference rotation</p>
 {% highlight matlab %}
 rot_ref = rotation.byEuler(10*degree,20*degree,30*degree);
@@ -26,9 +23,7 @@ rot_123 = rotation.byAxisAngle(vector3d(1,2,3),delta);
 rot_right = rot_123 * rot_ref;
 rot_left = rot_ref * rot_123;
 {% endhighlight %}
-<p>We may now ask for the first order Taylor coefficients of the pertubation as delta goes to zero which we find by the formula</p><p>
-  {% include inline_image.html file="RotationSpinTensor_eq01003992423481972930.png" %}
-</p>
+<p>We may now ask for the first order Taylor coefficients of the pertubation as delta goes to zero which we find by the formula</p><p>\[ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta} \]</p>
 {% highlight matlab %}
 T_right = (rot_right.matrix - rot_ref.matrix)./delta
 T_left = (rot_left.matrix - rot_ref.matrix)./delta
@@ -45,7 +40,7 @@ T_left =
    -0.2648    0.1140    0.0122
 
 {% endhighlight %}
-<p>Both matrices <tt>T_right</tt> and <tt>T_left</tt> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes scew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
+<p>Both matrices <code class="language-plaintext highlighter-rouge">T_right</code> and <code class="language-plaintext highlighter-rouge">T_left</code> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes scew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
 {% highlight matlab %}
 S_right_L =  matrix(inv(rot_ref)) * T_right
 S_right_R = T_right * matrix(inv(rot_ref))
@@ -73,15 +68,7 @@ S_left_R =
    -0.2758   -0.0850   -0.0000
 
 {% endhighlight %}
-<p>A scew symmetric 3x3 matrix <tt>S</tt> is essentially determined by its entries 
-  {% include inline_image.html file="RotationSpinTensor_eq14915280026360965098.png" %}
-, 
-  {% include inline_image.html file="RotationSpinTensor_eq16890332314244088567.png" %}
- and 
-  {% include inline_image.html file="RotationSpinTensor_eq02366758171439524728.png" %}
-. Writing these values as a vector 
-  {% include inline_image.html file="RotationSpinTensor_eq12578543884773640078.png" %}
- we obtain for the matrices <tt>S_right_R</tt> and <tt>S_left_L</tt> exactly the rotational axis of our pertubation</p>
+<p>A scew symmetric 3x3 matrix <code class="language-plaintext highlighter-rouge">S</code> is essentially determined by its entries \(S_{21}\), \(S_{31}\) and \(S_{32}\). Writing these values as a vector \((S_32,-S_{31},S_{21})\) we obtain for the matrices <code class="language-plaintext highlighter-rouge">S_right_R</code> and <code class="language-plaintext highlighter-rouge">S_left_L</code> exactly the rotational axis of our pertubation</p>
 {% highlight matlab %}
 vector3d(spinTensor(S_right_R)) * sqrt(14)
 
@@ -101,7 +88,7 @@ ans = vector3d
   1 2 3
 
 {% endhighlight %}
-<p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <tt>rot_ref</tt></p>
+<p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code></p>
 {% highlight matlab %}
 rot_ref * vector3d(spinTensor(S_right_L)) * sqrt(14)
 
@@ -147,13 +134,7 @@ S = spinTensor
   -9.329   4.665       0
 
 {% endhighlight %}
-<p>Again the entries 
-  {% include inline_image.html file="RotationSpinTensor_eq14915280026360965098.png" %}
-, 
-  {% include inline_image.html file="RotationSpinTensor_eq16890332314244088567.png" %}
- and 
-  {% include inline_image.html file="RotationSpinTensor_eq02366758171439524728.png" %}
- exactly coincide with the rotional axis multiplied with the rotational angle</p>
+<p>Again the entries \(S_{21}\), \(S_{31}\) and \(S_{32}\) exactly coincide with the rotional axis multiplied with the rotational angle</p>
 {% highlight matlab %}
 vector3d(S) * sqrt(14)
 {% endhighlight %}
