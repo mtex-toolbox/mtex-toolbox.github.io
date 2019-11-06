@@ -57,7 +57,21 @@ fun = S2FunHarmonic
 {% include inline_image.html file="S2FunHarmonicRepresentation_01.png" %}
 </center><p>This function has the cut off degree 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq06762312781999995911.png" %}
-. As a rule of thumb: smooth functions require only a small cut off degree whereas functions with jumps or sharp edges requires a high cut off degree. If the cut off degree is choosen to small truncation error in the form of high order oscillations are observable.</p><p>The computation of the Fourier coefficients can be done in several ways. Lets first assume that the function 
+. As a rule of thumb: smooth functions require only a small cut off degree whereas functions with jumps or sharp edges requires a high cut off degree. If the cut off degree is choosen to small truncation error in the form of high order oscillations are observable like in the following demonstration</p>
+{% highlight matlab %}
+sF = S2FunHarmonic.quadrature(@(v) abs(mod(v.rho, 2*pi/5)-pi/5));
+
+clf;
+for bw = [128 32 8]
+  sFtmp = S2FunHarmonic(sF.fhat(1:(bw+1)^2));
+  nextAxis;
+  contourf(sFtmp, 'upper');
+  mtexTitle(['M = ' num2str(bw)]);
+end
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
+</center><p>The computation of the Fourier coefficients can be done in several ways. Lets first assume that the function 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq18096895394918367257.png" %}
  is known explicitely, e.g., 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq04783894058054071956.png" %}
@@ -82,7 +96,7 @@ S2F = S2FunHarmonic
 
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
 </center><p>We observe that by default Fourier coefficients up the harmonic cut off degree 
   {% include inline_image.html file="S2FunHarmonicRepresentation_eq05356272896705009685.png" %}
  are computed. This default value can changed using the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code>. The decay of the Fourier coefficients can be visualized using the command <a href="S2FunHarmonic.plotSpektra.html">plotSpektra</a> which plot for each harmonic degree 
@@ -96,7 +110,7 @@ $\sum_{k=-m}^m \lvert \hat f(m,k)\rvert^2$
 plotSpektra(S2F)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
 </center><p>In the present example we observe that almost all Fourier coefficients are zero except for very first one. Hence, it might be reasonable to restrict the cut of degree to the non zero Fourier coefficients</p>
 {% highlight matlab %}
 % restrict to non zero Fourier coefficients
@@ -113,8 +127,8 @@ S2F = S2FunHarmonic
 
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
-</center><p>In The robust estimation of these Fourier coefficients from discrete data is doiscussed in the secion <a href="S2FunApproximationInterpolation.html">Spherical Approximation</a></p>
+{% include inline_image.html file="S2FunHarmonicRepresentation_05.png" %}
+</center><p>In The robust estimation of these Fourier coefficients from discrete data is discussed in the secion <a href="S2FunApproximationInterpolation.html">Spherical Approximation</a></p>
 {% highlight matlab %}
 % In particular all
 % operation on those functions are implmented as operations on the Fourier
@@ -124,10 +138,10 @@ S2F = S2FunHarmonic
 % harmonic series expansion is the harmonic cut off degree $M$. .
 %
 {% endhighlight %}
-<p>But they play a fundamental role in the computation of atomic orbital electron configurations and may have appeared in a chemistry book you've seen.</p><p>To concluse this session we plot the first ten spherical harmonics</p>
+<p>To concluse this session we plot the first ten spherical harmonics</p>
 {% highlight matlab %}
 surf(S2FunHarmonic(eye(10)))
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_05.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_06.png" %}
 </center></div></body></html>
