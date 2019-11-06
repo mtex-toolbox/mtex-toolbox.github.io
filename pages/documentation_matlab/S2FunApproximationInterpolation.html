@@ -11,14 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spherical Approximation and Interpolation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-06"><meta name="DC.source" content="script_S2FunApproximationInterpolation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunApproximationInterpolation.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>On this page, we want to cover the topic of function approximation from discrete values on the sphere. To simulate this, we have stored some nodes and corresponding function values which we can load. The csv-file contains the 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq12428413953531653171.png" %}
--, 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq08830444604280721118.png" %}
--, and 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq17119888974628994297.png" %}
--component of the nodes and the function value in the fourth column.</p>
+      --><title>Spherical Approximation and Interpolation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-06"><meta name="DC.source" content="script_S2FunApproximationInterpolation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunApproximationInterpolation.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>On this page, we want to cover the topic of function approximation from discrete values on the sphere. To simulate this, we have stored some nodes and corresponding function values which we can load. The csv-file contains the \(x\)-, \(y\)-, and \(z\)-component of the nodes and the function value in the fourth column.</p>
 {% highlight matlab %}
 data = importdata(fullfile(mtexDataPath, 'vector3d', 'smiley.csv'));
 nodes = vector3d(data.data(:,1:3)')';
@@ -32,7 +26,8 @@ scatter(nodes, f, 'upper');
 {% include inline_image.html file="S2FunApproximationInterpolation_01.png" %}
 </center><p>Now, we want to find a function which coincides with the given function values in the nodes reasonably well.</p><h2 id="4">Interpolation</h2><p>The idea of the first approach is fairly simple. We create a function which has <b>exaclty</b> the value of the given data in the nodes. But we still have to decide what happens inbetween these nodes. For that, we linearly interpolate between them, similarly as Matlat plots a one-dimensional function</p>
 {% highlight matlab %}
-plot(rand(10,1), '.-')
+close all
+plot(rand(10,1), '.-','linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunApproximationInterpolation_02.png" %}
@@ -47,7 +42,7 @@ norm(eval(sFTri, nodes)-f)
 
 {% highlight plaintext %}
 ans =
-   4.3048e-15
+   8.4129e-15
 
 {% endhighlight %}
 <p>Indeed, the error is within machine precision. Now we can work with the function defined on the whole sphere. We can, for instance, plot it</p>
@@ -70,25 +65,7 @@ norm(eval(sF, nodes)-f)
 
 {% highlight plaintext %}
 ans =
-    0.0572
+    0.0606
 
 {% endhighlight %}
-<p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p><p>The strategy underlying the <code class="language-plaintext highlighter-rouge">interp(...,'harmonicApproximation')</code>-command to obtain such an approximation works via spherical harmonics (<a href="S2FunHarmonicRepresentation">Basics of spherical harmonics</a>). For that, we seek for so-called Fourier-coefficients 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq04709227244918925271.png" %}
- such that</p><p>
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq05988222900342699238.png" %}
-</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional</p><p>
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq01352763972028051437.png" %}
-</p><p>for the data nodes 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq08064257365002422487.png" %}
-, 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq07710141230993437949.png" %}
-, 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq09421588773943226644.png" %}
- the target function values and 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq17152385268655187882.png" %}
- our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p><p>
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq17442220960550767857.png" %}
-</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation 
-  {% include inline_image.html file="S2FunApproximationInterpolation_eq07585311203459331132.png" %}
-, which describe our approximation.</p></div></body></html>
+<p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p><p>The strategy underlying the <code class="language-plaintext highlighter-rouge">interp(...,'harmonicApproximation')</code>-command to obtain such an approximation works via spherical harmonics (<a href="S2FunHarmonicRepresentation">Basics of spherical harmonics</a>). For that, we seek for so-called Fourier-coefficients \({\bf \hat f} = (\hat f_{0,0},\dots,\hat f_{M,M})^T\) such that</p><p>\[ g(x) = \sum_{m=0}^M\sum_{l = -m}^m \hat f_{m,l} Y_{m,l}(x) \]</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional</p><p>\[ \sum_{n=1}^N|f(x_n)-g(x_n)|^2 \]</p><p>for the data nodes \(x_n\), \(n=1,\dots,N\), \(f(x_n)\) the target function values and \(g(x_n)\) our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p><p>\[ F = [Y_{m,l}(x_n)]_{n = 1,\dots,N;m = 0,\dots,M,l = -m,\dots,m}. \]</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation \(g\), which describe our approximation.</p></div></body></html>
