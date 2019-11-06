@@ -21,6 +21,7 @@ In case you experience any problems have a look at our [trouble shooting page]()
 
 ### Downloads ###
 
+
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
 [**mtex-5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2/mtex-5.2.zip) ||| October 2019 ||| plasticity tensors, [changelog](changelog.html) ||| 264
@@ -39,18 +40,18 @@ File Name  |||  Release Date||| Comments ||| Downloads
 
 A full list of previous releases and downloads can be found [here](http://code.google.com/p/mtex/downloads/list).
 
-Since MTEX is a MATLAB toolbox, <a href="http://www.mathworks.com">MATLAB</a> has to be installed in order to use MTEX. It works fine with the student version and does not require any additional toolboxes, addons or packages. There are some very few exceptions like GND and Taylor computation that currently require the optimization toolbox to be installed.
-Check the table below to see whether MTEX will run with your Matlab version.
+Since MTEX is a MATLAB toolbox, <a href="http://www.mathworks.com">MATLAB</a> has to be installed in order to use MTEX. It works fine with the student version and does not require any additional toolboxes, addons or packages. There are some very few exceptions like GND and Taylor computation that currently require the optimization toolbox to be installed. Check the table below to see whether MTEX will run with your Matlab version.
 
 | Matlab | 2018b | 2018a | 2017b | 2017a | 2016b | 2016a | 2015b | 2015a | 2014b | 2014a | 2013b | 2013a | 2012b | 2012a | 2011b | 2011a | 2010b | 2010a | 
 |--------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
-|MTEX 5.1| \(\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( |
-|MTEX 5.0| \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( |
-|MTEX 4.X|  |  | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( |
-|MTEX 4.1|  |  | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( |
-|MTEX 4.0|  |  | | | | | | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)\checkmark\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( | \)(\checkmark )\( |
-|MTEX 3.5|  |  | | | | | | | | \)\checkmark\( | \)\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) |
+|MTEX 5.1| \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) |
+|MTEX 5.0| \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) |
+|MTEX 4.X|  |  | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) |
+|MTEX 4.1|  |  | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) |
+|MTEX 4.0|  |  | | | | | | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) | \((\checkmark )\) |
+|MTEX 3.5|  |  | | | | | | | | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) |
 |MTEX 3.3|  |  | | | | | | | | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) | \(\checkmark\) |
+
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
