@@ -1,20 +1,17 @@
 ---
 title: Tensor Arithmetics
-last_updated: 28-Oct-2019
+last_updated: 06-Nov-2019
 sidebar: documentation_sidebar
 permalink: TensorArithmetics.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
+      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-06"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
     edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2>
 {% highlight matlab %}
 T1 = tensor.rand('rank',2)
@@ -34,32 +31,32 @@ T1 = tensor
   rank: 2 (3 x 3)
  
  *10^-2
-  83.5    92 15.94
- 33.42 99.57 15.75
- 93.83 33.81 28.21
+ 63.49 96.06 70.85
+ 70.01 31.94 25.98
+ 63.89 45.97 16.19
  
 T2 = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
- 10.73 36.24 30.38
- 47.91 79.48 59.38
- 84.89 13.49  43.2
+  13.6 69.11 48.58
+ 57.51 34.35 85.69
+ 86.56 70.18 66.66
  
 ans = tensor  
   rank: 2 (3 x 3)
  
- 1.0496 1.6449  0.767
- 1.2925 2.5853 1.3451
- 2.6362 0.6079 1.1461
+ 0.9069 2.3428 1.6801
+ 1.8503 1.0064 1.9737
+ 2.3701 1.8633  1.495
  
 ans = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
-  8.96 33.34  4.84
- 16.01 79.14  9.35
- 79.65  4.56 12.19
+  8.64 66.38 34.42
+ 40.26 10.97 22.27
+  55.3 32.26 10.79
 
 {% endhighlight %}
 <h2 id="2">Tensor Products</h2><p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
@@ -97,11 +94,7 @@ eps = strainTensor
   0  0 -1
 
 {% endhighlight %}
-<p>according to the formula</p><p>
-  {% include inline_image.html file="TensorArithmetics_eq04666365713434560706.png" %}
-</p><p>and turns it into the stress tensor 
-  {% include inline_image.html file="TensorArithmetics_eq11373214381793991308.png" %}
-. In MTEX such tensor products can be computed in its mpst general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
+<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its mpst general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
 {% highlight matlab %}
 sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
@@ -116,9 +109,7 @@ sigma = tensor
       0      0 -161.9
 
 {% endhighlight %}
-<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>
-  {% include inline_image.html file="TensorArithmetics_eq08426592857783047995.png" %}
-</p><p>beween two rank one tensors</p>
+<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>\[ (a \otimes b)_{ij} = a_i b_j \]</p><p>beween two rank one tensors</p>
 {% highlight matlab %}
 a = tensor.rand('rank',1)
 b = tensor.rand('rank',1)
@@ -134,42 +125,38 @@ a = tensor
   rank: 1 (3)
  
  *10^-2
- 17.74
- 67.74
- 13.05
+ 44.34
+  15.3
+ 93.02
  
 b = tensor  
   rank: 1 (3)
  
  *10^-2
- 11.02
- 67.93
- 25.62
+ 66.12
+ 86.85
+ 33.24
  
 ans = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
-  1.95 12.05  4.55
-  7.47 46.02 17.36
-  1.44  8.86  3.34
+ 29.31 38.51 14.74
+ 10.12 13.29  5.09
+  61.5 80.79 30.92
 
 {% endhighlight %}
-<p>and the inner product</p><p>$$ a \cdot b = \sum_i a_i b_i</p><p>by</p>
+<p>and the inner product</p><p>\[ a \cdot b = \sum_i a_i b_i</p><p>by</p>
 {% highlight matlab %}
 EinsteinSum(a,-1,b,-1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.5131
+    0.7353
 
 {% endhighlight %}
-<p>As a final example we consider the e linear compressibility in a certain direction <b>v</b> can be computed by the formula</p><p>
-  {% include inline_image.html file="TensorArithmetics_eq12220407834657261148.png" %}
-</p><p>where 
-  {% include inline_image.html file="TensorArithmetics_eq15370134012321810737.png" %}
- is the inverse of the comcompliance thensor, i.e. the stiffness tensor</p>
+<p>As a final example we consider the e linear compressibility in a certain direction <b>v</b> can be computed by the formula</p><p>\] c = \sum_{i,j,k} S_{ijkk} v_i v_j$$</p><p>where \(C = S^{-1}\) is the inverse of the comcompliance thensor, i.e. the stiffness tensor</p>
 {% highlight matlab %}
 v = xvector;
 S = inv(C)
@@ -233,13 +220,13 @@ det(T1)
 
 {% highlight plaintext %}
 ans =
-    2.4805
+    2.8130
 ans =
-    2.4805
+    2.8130
 ans =
-    2.4805
+    2.8130
 ans =
-    0.1084
+    0.0910
 
 {% endhighlight %}
 <h2 id="10">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html">rotate</a>. Let's define a rotation</p>
@@ -269,9 +256,9 @@ plot(Trot)
 Trot = tensor  
   rank: 2 (3 x 3)
  
-  0.2883  0.2125  0.0014
- -0.3732  1.5425  0.2241
-  0.4244  0.9025  0.2821
+ -0.3532   0.288  0.3172
+  0.0275  1.3075  0.6847
+  0.1267  0.7768  0.1619
 
 {% endhighlight %}
 <center>

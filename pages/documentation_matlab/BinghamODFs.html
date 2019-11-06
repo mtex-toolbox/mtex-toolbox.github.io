@@ -1,47 +1,18 @@
 ---
 title: Bingham Distribution
-last_updated: 28-Oct-2019
+last_updated: 06-Nov-2019
 sidebar: documentation_sidebar
 permalink: BinghamODFs.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Bingham Distribution</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_BinghamODFs.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/BinghamODFs.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>The Bingham distribution has the density</p><p>
-  {% include inline_image.html file="BinghamODFs_eq05340943576548919889.png" %}
-</p><p>where 
-  {% include inline_image.html file="BinghamODFs_eq02619125812656254059.png" %}
- are an 
-  {% include inline_image.html file="BinghamODFs_eq17452142193152507074.png" %}
- orthogonal matrix with unit quaternions 
-  {% include inline_image.html file="BinghamODFs_eq16547169682649117252.png" %}
- in the column and 
-  {% include inline_image.html file="BinghamODFs_eq03845174387838694102.png" %}
-  a 
-  {% include inline_image.html file="BinghamODFs_eq17452142193152507074.png" %}
- diagonal matrix with the entries 
-  {% include inline_image.html file="BinghamODFs_eq10077891534842131870.png" %}
- describing the shape of the distribution. 
-  {% include inline_image.html file="BinghamODFs_eq17454643056377931030.png" %}
- is the hypergeometric function with matrix argument normalizing the density.</p><p>The shape parameters 
-  {% include inline_image.html file="BinghamODFs_eq17406183697768129620.png" %}
- give</p><div><ul><li>a <i>bipolar</i>   distribution, if 
-  {% include inline_image.html file="BinghamODFs_eq12904346392585024444.png" %}
-,</li><li>a <i>circular</i>  distribution, if 
-  {% include inline_image.html file="BinghamODFs_eq17959291001473903768.png" %}
-,</li><li>a <i>spherical</i> distribution, if 
-  {% include inline_image.html file="BinghamODFs_eq07201422564525560515.png" %}
-,</li><li>a <i>uniform</i>  distribution, if 
-  {% include inline_image.html file="BinghamODFs_eq16083675247562721536.png" %}
-,</li></ul></div><p>The general setup of the Bingham distribution in MTEX is done as follows</p>
+      --><title>Bingham Distribution</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-06"><meta name="DC.source" content="script_BinghamODFs.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/BinghamODFs.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>The Bingham distribution has the density</p><p>\[ f(g;K,U) = _1F_1 \left(\frac{1}{2},2,K \right)^{-1} \exp \left\{ g^T UKU  g \right\},\qquad g\in S^3, \]</p><p>where \(U\) are an \(4 \times 4\) orthogonal matrix with unit quaternions \(u_{1,..,4}\in S^3\) in the column and \(K\)  a \(4 \times 4\) diagonal matrix with the entries \(k_1,..,k_4\) describing the shape of the distribution. \(_1F_1(,,)\) is the hypergeometric function with matrix argument normalizing the density.</p><p>The shape parameters \(k_1 \ge k_2 \ge k_3 \ge k4\) give</p><div><ul><li>a <i>bipolar</i>   distribution, if \(k_1 + k_4 &gt; k_2 + k_3\),</li><li>a <i>circular</i>  distribution, if \(k_1 + k_4 = k_2 + k_3\),</li><li>a <i>spherical</i> distribution, if \(k_1 + k_4 &lt; k_2 + k_3\),</li><li>a <i>uniform</i>  distribution, if \(k_1 = k_2 = k_3 = k_4\),</li></ul></div><p>The general setup of the Bingham distribution in MTEX is done as follows</p>
 {% highlight matlab %}
 cs = crystalSymmetry('1');
 
@@ -85,8 +56,8 @@ odf_spherical = ODF
   specimen symmetry: 1
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 20&deg;
-    center: (0&deg;,0&deg;,0&deg;)
+    kernel: de la Vallee Poussin, halfwidth 20°
+    center: (0°,0°,0°)
     weight: 1
  
 
@@ -117,12 +88,12 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 1.5 2.1 26
+     kappa: 0 1.9 2.4 27
     weight: 1
  
 
 {% endhighlight %}
-<p>where <tt>U</tt> is the orthogonal matrix of eigenvectors of the orientation tensor and <tt>kappa</tt> the shape parameters associated with the <tt>U</tt>.</p><p>next, we test the different cases of the distribution on rejection</p>
+<p>where <code class="language-plaintext highlighter-rouge">U</code> is the orthogonal matrix of eigenvectors of the orientation tensor and <code class="language-plaintext highlighter-rouge">kappa</code> the shape parameters associated with the <code class="language-plaintext highlighter-rouge">U</code>.</p><p>next, we test the different cases of the distribution on rejection</p>
 {% highlight matlab %}
 T_spherical = bingham_test(ori_spherical,'spherical','approximated');
 T_oblate    = bingham_test(ori_spherical,'prolate',  'approximated');
@@ -133,7 +104,7 @@ t = [T_spherical T_oblate T_prolate]
 
 {% highlight plaintext %}
 t =
-    0.1429    0.3833    0.0639
+    0.2254    0.5064    0.0481
 
 {% endhighlight %}
 <p>The spherical test case failed to reject it for some level of significance, hence we would dismiss the hypothesis prolate and oblate.</p>
@@ -172,7 +143,7 @@ odf_prolate = ODF
   specimen symmetry: 1
  
   Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 20&deg;
+    kernel: de la Vallee Poussin, halfwidth 20°
     fibre: (001) - 0,0,1
     weight: 1
  
@@ -204,7 +175,7 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 1 50 51
+     kappa: 0 0.9 46 47
     weight: 1
  
 
@@ -220,7 +191,7 @@ t = [T_spherical T_oblate T_prolate]
 
 {% highlight plaintext %}
 t =
-    1.0000    0.0517    1.0000
+    1.0000    0.0468    1.0000
 
 {% endhighlight %}
 <p>The test clearly rejects the spherical and prolate case, but not the prolate. We construct the Bingham distribution from the parameters, it might show some skewness</p>
@@ -289,7 +260,7 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 51 51 52
+     kappa: 0 49 49 50
     weight: 1
  
 
@@ -305,7 +276,7 @@ t = [T_spherical T_oblate T_prolate]
 
 {% highlight plaintext %}
 t =
-    1.0000    1.0000    0.2807
+    1.0000    1.0000    0.1697
 
 {% endhighlight %}
 <p>the spherical and oblate case are clearly rejected, the prolate case failed to reject for some level of significance</p>
@@ -353,6 +324,8 @@ odf = ODF
      kappa: 20 0 0 0
     weight: 1
  
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure. 
 
 {% endhighlight %}
 <center>
@@ -374,6 +347,8 @@ odf = ODF
      kappa: -10 -10 10 10
     weight: 1
  
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure. 
 
 {% endhighlight %}
 <center>
@@ -395,6 +370,8 @@ odf = ODF
      kappa: -10 10 10 10
     weight: 1
  
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure. 
 
 {% endhighlight %}
 <center>
