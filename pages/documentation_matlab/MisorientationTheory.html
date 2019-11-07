@@ -1,20 +1,17 @@
 ---
 title: Theory of Misorientations
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
+      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice) misorientations. To illustrate this concept at a practical example let us first import some Magnesium EBSD data.</p>
 {% highlight matlab %}
 mtexdata twins silent
@@ -50,8 +47,7 @@ angle(ori1, ori2) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.7093
-
+   85.7093'
 {% endhighlight %}
 <p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
 {% highlight matlab %}
@@ -71,8 +67,7 @@ ans =
    85.7093
    85.7093
    85.7093
-   85.7093
-
+   85.7093'
 {% endhighlight %}
 <p>The misorientation angle neglecting crystal symmetry can be computed by</p>
 {% highlight matlab %}
@@ -92,8 +87,7 @@ ans =
   179.8061
   101.4414
   140.4168
-   85.7093
-
+   85.7093'
 {% endhighlight %}
 <p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="8">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
 {% highlight matlab %}
@@ -101,7 +95,6 @@ mori = inv(ori1) * ori2
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
@@ -109,9 +102,7 @@ mori = misorientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  149.581 94.2922 150.134       0
- 
-
+  149.581 94.2922 150.134       0'
 {% endhighlight %}
 <p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 80 into the reference frame of crystal 70. Take as an example the plane {11-20} with respect to the grain 80. Then the plane in grain 70 which alignes parallel to this plane can be computed by</p>
 {% highlight matlab %}
@@ -119,15 +110,13 @@ round(mori * Miller(1,1,-2,0,CS))
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = Miller  
  size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
   h  2
   k -1
   i -1
-  l  0
-
+  l  0'
 {% endhighlight %}
 <p>Conversely, the inverse of mori is the coordinate transform from crystal 70 to grain 80.</p>
 {% highlight matlab %}
@@ -135,15 +124,13 @@ round(inv(mori) * Miller(2,-1,-1,0,CS))
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = Miller  
  size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
   h  1
   k  1
   i -2
-  l  0
-
+  l  0'
 {% endhighlight %}
 <h2 id="11">Coincident lattice planes</h2><p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyse whether there are some more alignments between major lattice planes.</p>
 {% highlight matlab %}
@@ -189,8 +176,7 @@ ans =
 ans =
     2.6092
 ans =
-    2.5387
-
+    2.5387'
 {% endhighlight %}
 <h2 id="13">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
 {% highlight matlab %}
@@ -206,7 +192,6 @@ mori.angle / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
@@ -225,8 +210,7 @@ ans = Miller
   i -1
   l  0
 ans =
-     0
-
+     0'
 {% endhighlight %}
 <p>and plot the same figure as before with the exact twinning misorientation.</p>
 {% highlight matlab %}
@@ -286,7 +270,6 @@ CS_Hem = loadCIF('Hematite')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 CS_Mag = crystalSymmetry  
  
   mineral : Magnetite    
@@ -299,9 +282,7 @@ CS_Hem = crystalSymmetry
   mineral        : Hematite          
   symmetry       : -3m1              
   a, b, c        : 5, 5, 14          
-  reference frame: X||a*, Y||b, Z||c*
- 
-
+  reference frame: X||a*, Y||b, Z||c*'
 {% endhighlight %}
 <p>The phase transition from Magnetite to Hematite is described in literature by {111}_m parallel {0001}_h and {-101}_m parallel {10-10}_h The corresponding misorientation is defined in MTEX by</p>
 {% highlight matlab %}
@@ -311,7 +292,6 @@ Mag2Hem = orientation.map(...
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 Mag2Hem = misorientation  
   size: 1 x 1
   crystal symmetry : Magnetite (m-3m)
@@ -319,9 +299,7 @@ Mag2Hem = misorientation
  
   Bunge Euler angles in degree
   phi1     Phi    phi2    Inv.
-   120 54.7356      45       0
- 
-
+   120 54.7356      45       0'
 {% endhighlight %}
 <p>Assume a Magnetite grain with orientation</p>
 {% highlight matlab %}
@@ -329,7 +307,6 @@ ori_Mag = orientation.byEuler(0,0,0,CS_Mag)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori_Mag = orientation  
   size: 1 x 1
   crystal symmetry : Magnetite (m-3m)
@@ -337,9 +314,7 @@ ori_Mag = orientation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-     0    0    0    0
- 
-
+     0    0    0    0'
 {% endhighlight %}
 <p>Then we can compute all variants of the phase transition by</p>
 {% highlight matlab %}
@@ -347,13 +322,10 @@ symmetrise(ori_Mag) * inv(Mag2Hem)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = orientation  
   size: 48 x 1
   crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c*)
-  specimen symmetry: 1
- 
-
+  specimen symmetry: 1'
 {% endhighlight %}
 <p>and the corresponding pole figures by</p>
 {% highlight matlab %}

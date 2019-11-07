@@ -1,20 +1,17 @@
 ---
 title: The SantaFe example
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: PoleFigureSantaFe.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The SantaFe example</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_PoleFigureSantaFe.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureSantaFe.m">
+      --><title>The SantaFe example</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_PoleFigureSantaFe.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureSantaFe.m">
     edit page</a></font><div><!--introduction--><p>Simulate a set of pole figures for the SantaFe standard ODF, estimate an ODF and compare it to the inital SantaFe ODF.</p><!--/introduction--><h2 id="2">Simulate pole figures</h2>
 {% highlight matlab %}
 CS = crystalSymmetry('m-3m');
@@ -43,20 +40,17 @@ rec = calcODF(pf)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rec = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 222
  
   Uniform portion:
-    weight: 0.57825
+    weight: 0.57764
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    kernel: de la Vallee Poussin, halfwidth 5&deg;
     center: 1230 orientations, resolution: 5&deg;
-    weight: 0.42175
- 
-
+    weight: 0.42236'
 {% endhighlight %}
 <h2 id="4">ODF Estimation without Ghost Correction</h2>
 {% highlight matlab %}
@@ -64,17 +58,14 @@ rec2 = calcODF(pf,'NoGhostCorrection')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rec2 = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 222
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: 1232 orientations, resolution: 5&deg;
-    weight: 1
- 
-
+    kernel: de la Vallee Poussin, halfwidth 5&deg;
+    center: 1231 orientations, resolution: 5&deg;
+    weight: 1'
 {% endhighlight %}
 <h2 id="5">Error analysis</h2>
 {% highlight matlab %}
@@ -87,9 +78,7 @@ plotDiff(pf,rec)
 
 {% highlight plaintext %}
 ans =
-    0.0795
-progress: 100%
-
+    0.0429'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_02.png" %}
@@ -104,11 +93,6 @@ plotPDF(rec,pf.h,'antipodal')
 plot(rec,'sections',18,'resolution',5*degree,...
   'contourf','FontSize',10,'silent','figSize','large','minmax')
 mtexColorMap white2black
-{% endhighlight %}
-
-{% highlight plaintext %}
-progress: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_04.png" %}

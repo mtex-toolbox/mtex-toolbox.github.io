@@ -1,20 +1,17 @@
 ---
 title: Visualizing ODFs
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: ODFPlot.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
+      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
     edit page</a></font><div><!--introduction--><p>Explains all possibilities to visualize ODfs, i.e. pole figure plots, inverse pole figure plots, ODF sections, fibre sections.</p><!--/introduction--><h2 id="2">Contents</h2><p>Let us first define some model ODFs to be plotted later on.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
@@ -29,7 +26,6 @@ odf = 0.2*unimodalODF(mod1) ...
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : 321, X||a*, Y||b, Z||c*
   specimen symmetry: 1
@@ -47,9 +43,7 @@ odf = ODF
   Fibre symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10&deg;
     fibre: (0001) - 1,0,0
-    weight: 0.5
- 
-
+    weight: 0.5'
 {% endhighlight %}
 <p>and lets switch to the LaboTex colormap</p>
 {% highlight matlab %}
@@ -97,15 +91,25 @@ plotIPDF(odf,[xvector,zvector],'complete','antipodal','upper')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_07.png" %}
-</center><h2 id="12">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles phi2. The number of sections can be specified by the option <tt>sections</tt></p>
+</center><h2 id="12">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles phi2. The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">sections</code></p>
 {% highlight matlab %}
 plot(odf,'sections',6,'silent')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_08.png" %}
 </center><p>One can also specify the phi2 angles of the sections explicitly</p>
 {% highlight matlab %}
 plot(odf,'phi2',[25 30 35 40]*degree,'contourf','silent')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_09.png" %}
@@ -118,6 +122,11 @@ plotPDF(odf,Miller(0,0,0,1,cs))
 </center><p>We observe three spots. Two in the center and one at 100. When splitting the pole figure, i.e. plotting the odf as sigma sections</p>
 {% highlight matlab %}
 plot(odf,'sections',6,'silent','sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_11.png" %}
@@ -137,16 +146,13 @@ plotFourier(fodf)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 fodf = ODF  
   crystal symmetry : 321, X||a*, Y||b, Z||c*
   specimen symmetry: 1
  
   Harmonic portion:
     degree: 25
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_13.png" %}
@@ -156,7 +162,6 @@ mdf = calcMDF(odf)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mdf = MDF  
   crystal symmetry : 321, X||a*, Y||b, Z||c*
   crystal symmetry : 321, X||a*, Y||b, Z||c*
@@ -164,9 +169,7 @@ mdf = MDF
  
   Harmonic portion:
     degree: 23
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <p>Then we can plot the distribution of the rotation axes of this missorientation ODF</p>
 {% highlight matlab %}

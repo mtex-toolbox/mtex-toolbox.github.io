@@ -1,20 +1,17 @@
 ---
 title: Taylor Model
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: TaylorModel.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Taylor Model</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TaylorModel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorModel.m">
+      --><title>Taylor Model</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_TaylorModel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorModel.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">basic settings</h2><p>display pole figure plots with RD on top and ND west</p>
 {% highlight matlab %}
 plotx2north
@@ -47,7 +44,6 @@ ori = orientation.byEuler(0,30*degree,15*degree,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 epsilon = strainTensor  
   rank: 2 (3 x 3)
  
@@ -62,9 +58,7 @@ ori = orientation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-     0   30   15    0
- 
-
+     0   30   15    0'
 {% endhighlight %}
 <h2 id="3">The orientation dependence of the Taylor factor</h2><p>The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970). Some applications of the Taylor theory of polycrystal plasticity. Kristall Und Technik, 5(1), 145-175. <a href="http://doi.org/10.1002/crat.19700050112">http://doi.org/10.1002/crat.19700050112</a></p>
 {% highlight matlab %}
@@ -88,12 +82,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
- computing Taylor factor: 0%
- computing Taylor factor: 10%
- computing Taylor factor: 95%
- computing Taylor factor: 100%
-Elapsed time is 36.785174 seconds.
-
+Elapsed time is 37.232510 seconds.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_01.png" %}
@@ -112,19 +101,6 @@ oriGrid = sP.makeGrid('resolution',2.5*degree);
 sP.plot(W.angle./degree,'smooth')
 mtexColorbar
 {% endhighlight %}
-
-{% highlight plaintext %}
- computing Taylor factor: 4%
- computing Taylor factor: 13%
- computing Taylor factor: 50%
- computing Taylor factor: 52%
- computing Taylor factor: 56%
- computing Taylor factor: 58%
- computing Taylor factor: 60%
- computing Taylor factor: 67%
- computing Taylor factor: 100%
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_03.png" %}
 </center><h2 id="6">Most active slip direction</h2><p>Next we consider a real world data set.</p>
@@ -140,7 +116,6 @@ grains(grains.grainSize <= 2) = []
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
@@ -158,9 +133,7 @@ grains = grain2d
  boundary segments: 21937
  triple points: 1451
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <p>Next we apply the Taylor model to each grain of our data set</p>
 {% highlight matlab %}
@@ -176,15 +149,12 @@ sS = symmetrise(slipSystem.fcc(grains.CS));
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 epsilon = strainTensor  
   rank: 2 (3 x 3)
  
   1  0  0
   0  0  0
-  0  0 -1
- computing Taylor factor: 100%
-
+  0  0 -1'
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -238,16 +208,6 @@ for sas=1:numIter
 end
 {% endhighlight %}
 
-{% highlight plaintext %}
-progress: 10%
-progress: 20%
-progress: 40%
-progress: 50%
-progress: 90%
-progress: 100%
-
-{% endhighlight %}
-
 {% highlight matlab %}
 % plot the resulting pole figures
 
@@ -273,11 +233,6 @@ oS.angles = 10*degree;
 ori = oS.makeGrid;
 
 [M,b,eps] = calcInvTaylor(ori,sS.symmetrise);
-{% endhighlight %}
-
-{% highlight plaintext %}
- computing Taylor factor: 100%
-
 {% endhighlight %}
 
 {% highlight matlab %}

@@ -1,23 +1,18 @@
 ---
 title: ODF Modeling
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: ODFModeling.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Modeling</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_ODFModeling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFModeling.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX provides a very simple way to define model ODFs. Generally, there are five different ODF types in MTEX:</p><div><ul><li><a href="uniformODF.html">uniform ODFs</a></li><li><a href="UnimodalODFs.html">unimodal ODFs</a></li><li><a href="FibreODFs.html">fibre ODFs</a></li><li><a href="BinghamODFs">Bingham ODFs</a></li><li><a href="HarmonicODFs">ODFs given by harmonic series expansion</a></li></ul></div><p>The central idea is that MTEX allows you to calculate mixture models, by adding and subtracting arbitrary ODFs. Model ODFs may be used as references for ODFs estimated from pole figure data or EBSD data and are instrumental for simulating texture evolutions.</p><h2 id="2">The Uniform ODF</h2><p>The most simplest case of a model ODF is the uniform ODF</p><p>
-  {% include inline_image.html file="ODFModeling_eq15409799391995383922.png" %}
-</p><p>which is everywhere identical to one. In order to define a uniform ODF one needs only to specify its crystal and specimen symmetry and to use the command <a href="uniformODF.html">uniformODF</a>.</p>
+      --><title>ODF Modeling</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_ODFModeling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFModeling.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX provides a very simple way to define model ODFs. Generally, there are five different ODF types in MTEX:</p><div><ul><li><a href="uniformODF.html">uniform ODFs</a></li><li><a href="UnimodalODFs.html">unimodal ODFs</a></li><li><a href="FibreODFs.html">fibre ODFs</a></li><li><a href="BinghamODFs">Bingham ODFs</a></li><li><a href="HarmonicODFs">ODFs given by harmonic series expansion</a></li></ul></div><p>The central idea is that MTEX allows you to calculate mixture models, by adding and subtracting arbitrary ODFs. Model ODFs may be used as references for ODFs estimated from pole figure data or EBSD data and are instrumental for simulating texture evolutions.</p><h2 id="2">The Uniform ODF</h2><p>The most simplest case of a model ODF is the uniform ODF</p><p>\[f(g) = 1,\quad  g \in SO(3),\]</p><p>which is everywhere identical to one. In order to define a uniform ODF one needs only to specify its crystal and specimen symmetry and to use the command <a href="uniformODF.html">uniformODF</a>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('cubic');
 ss = specimenSymmetry('orthorhombic');
@@ -25,15 +20,12 @@ odf = uniformODF(cs,ss)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: mmm
  
   Uniform portion:
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <h2 id="3">Combining model ODFs</h2><p>All the above can be arbitrarily rotated and combined. For instance, the classical Santafe example can be defined by commands</p>
 {% highlight matlab %}
@@ -50,7 +42,6 @@ plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,0,cs)],'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: mmm
@@ -61,9 +52,7 @@ odf = ODF
   Radially symmetric portion:
     kernel: van Mises Fisher, halfwidth 10&deg;
     center: (296.6&deg;,48.2&deg;,26.6&deg;)
-    weight: 0.27
- 
-
+    weight: 0.27'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFModeling_01.png" %}

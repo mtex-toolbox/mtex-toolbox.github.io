@@ -1,20 +1,17 @@
 ---
 title: Harmonic Series Expansion of an ODF
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: HarmonicODFs.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Harmonic Series Expansion of an ODF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_HarmonicODFs.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/HarmonicODFs.m">
+      --><title>Harmonic Series Expansion of an ODF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_HarmonicODFs.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/HarmonicODFs.m">
     edit page</a></font><div><!--introduction--><!--/introduction-->
 {% highlight matlab %}
 mtexdata dubna
@@ -23,9 +20,6 @@ odf3 = calcODF(pf,'resolution',5*degree,'zero_Range')
 {% endhighlight %}
 
 {% highlight plaintext %}
- loading data ...
- saving data to /home/hielscher/mtex/master/data/dubna.mat
- 
 pf = PoleFigure  
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
@@ -43,11 +37,9 @@ odf3 = ODF
   specimen symmetry: 1
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: 19833 orientations, resolution: 5&deg;
-    weight: 1
- 
-
+    kernel: de la Vallee Poussin, halfwidth 5&deg;
+    center: 19841 orientations, resolution: 5&deg;
+    weight: 1'
 {% endhighlight %}
 <h2 id="2">Fourier Coefficients</h2><p>The Fourier coefficients allow for a complete characterization of the ODF. The are of particular importance for the calculation of mean macroscopic properties e.g. the second order Fourier coefficients characterize thermal expansion, optical refraction index, and electrical conductivity whereas the fourth order Fourier coefficients characterize the elastic properties of the specimen. Moreover, the decay of the Fourier coefficients is directly related to the smoothness of the ODF. The decay of the Fourier coefficients might also hint for the presents of a ghost effect. See <a href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a>.</p><p>transform into an odf given by Fourier coefficients</p>
 {% highlight matlab %}
@@ -55,16 +47,13 @@ fodf = FourierODF(odf3,32)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 fodf = ODF  
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
  
   Harmonic portion:
-    degree: 25
-    weight: 1
- 
-
+    degree: 32
+    weight: 1'
 {% endhighlight %}
 <p>The Fourier coefficients of order 2:</p>
 {% highlight matlab %}
@@ -74,18 +63,17 @@ reshape(fodf.components{1}.f_hat(11:35),5,5)
 {% highlight plaintext %}
 ans =
   Columns 1 through 4
-   0.0000 + 0.0000i  -0.0000 - 0.0000i   0.0000 + 0.0000i  -0.0000 + 0.0000i
-  -0.0000 + 0.0000i  -0.0000 - 0.0000i   0.0000 - 0.0000i  -0.0000 + 0.0000i
-   0.1419 - 0.4669i   1.5281 - 0.9319i   2.1387 + 0.0000i   1.5281 + 0.9319i
-  -0.0000 - 0.0000i  -0.0000 - 0.0000i   0.0000 + 0.0000i  -0.0000 + 0.0000i
-   0.0000 - 0.0000i  -0.0000 - 0.0000i   0.0000 - 0.0000i  -0.0000 + 0.0000i
+   0.0000 - 0.0000i   0.0000 - 0.0000i   0.0000 + 0.0000i   0.0000 + 0.0000i
+  -0.0000 + 0.0000i  -0.0000 + 0.0000i  -0.0000 + 0.0000i  -0.0000 - 0.0000i
+   0.1490 - 0.4903i   1.6046 - 0.9786i   2.2458 - 0.0000i   1.6046 + 0.9786i
+  -0.0000 + 0.0000i  -0.0000 + 0.0000i  -0.0000 - 0.0000i  -0.0000 - 0.0000i
+   0.0000 - 0.0000i   0.0000 - 0.0000i   0.0000 - 0.0000i   0.0000 + 0.0000i
   Column 5
    0.0000 + 0.0000i
-  -0.0000 + 0.0000i
-   0.1419 + 0.4669i
   -0.0000 - 0.0000i
-   0.0000 - 0.0000i
-
+   0.1490 + 0.4903i
+  -0.0000 - 0.0000i
+   0.0000 + 0.0000i'
 {% endhighlight %}
 <p>The decay of the Fourier coefficients:</p>
 {% highlight matlab %}
@@ -94,11 +82,7 @@ plotFourier(fodf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HarmonicODFs_01.png" %}
-</center><h2 id="6">ODFs given by Fourier coefficients</h2><p>In order to define a ODF by it <b>Fourier coefficients</b> the Fourier coefficients <b>C</b> has to be given as a literally ordered, complex valued vector of the form</p><p>
-  {% include inline_image.html file="HarmonicODFs_eq03059004171824837318.png" %}
-</p><p>where 
-  {% include inline_image.html file="HarmonicODFs_eq07539466353696451391.png" %}
- denotes the order of the Fourier coefficients.</p>
+</center><h2 id="6">ODFs given by Fourier coefficients</h2><p>In order to define a ODF by it <b>Fourier coefficients</b> the Fourier coefficients <b>C</b> has to be given as a literally ordered, complex valued vector of the form</p><p>\[ C = [C_0,C_1^{-1-1},\ldots,C_1^{11},C_2^{-2-2},\ldots,C_L^{LL}] \]</p><p>where \(l=0,\ldots,L\) denotes the order of the Fourier coefficients.</p>
 {% highlight matlab %}
 cs   = crystalSymmetry('1');    % crystal symmetry
 C = [1;reshape(eye(3),[],1);reshape(eye(5),[],1)]; % Fourier coefficients
@@ -108,7 +92,6 @@ plot(odf,'sections',6,'silent','sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : 1, X||a, Y||b*, Z||c*
   specimen symmetry: 1
@@ -118,7 +101,8 @@ odf = ODF
     degree: 2
     weight: 1
  
-
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HarmonicODFs_02.png" %}

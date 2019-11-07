@@ -1,20 +1,17 @@
 ---
 title: script_OrientationPoleFigure
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: OrientationPoleFigure.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_OrientationPoleFigure</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_OrientationPoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationPoleFigure.m">
+      --><title>script_OrientationPoleFigure</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_OrientationPoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationPoleFigure.m">
     edit page</a></font><div><h2 id="1">Pole Figures</h2><p>Pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321')
@@ -22,7 +19,6 @@ ori = orientation.rand(cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   symmetry       : 321               
@@ -37,32 +33,28 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  22.3207 11.3811 60.1707       0
- 
-
+  107.923 90.6753  183.56       0'
 {% endhighlight %}
-<p>Starting point is a fixed crystal direction <tt>h</tt>, e.g.,</p>
+<p>Starting point is a fixed crystal direction <code class="language-plaintext highlighter-rouge">h</code>, e.g.,</p>
 {% highlight matlab %}
 % the fixed crystal directions (100)
 h = Miller({1,0,0},cs);
 {% endhighlight %}
-<p>Next the specimen directions corresponding to all crystal directions symmetrically equivalent to <tt>h</tt> are computed</p>
+<p>Next the specimen directions corresponding to all crystal directions symmetrically equivalent to <code class="language-plaintext highlighter-rouge">h</code> are computed</p>
 {% highlight matlab %}
 r = ori * h.symmetrise
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 r = vector3d  
  size: 1 x 6
-          x            y            z
-   0.158372      1.12658     0.197672
-     1.0669     0.441662  0.000678932
-    -1.0669    -0.441662 -0.000678932
-  -0.158372     -1.12658    -0.197672
-   0.908525    -0.684916    -0.196994
-  -0.908525     0.684916     0.196994
-
+          x          y          z
+   0.353849   -1.09681 -0.0717012
+   0.207226  -0.603869    0.96215
+  -0.207226   0.603869   -0.96215
+  -0.353849    1.09681  0.0717012
+  -0.146623   0.492937    1.03385
+   0.146623  -0.492937   -1.03385'
 {% endhighlight %}
 <p>and ploted in a spherical projection</p>
 {% highlight matlab %}
@@ -77,7 +69,7 @@ plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationPoleFigure_02.png" %}
-</center><p>We observe, that for some crystal directions only the upper hemisphere is plotted while for other upper and lower hemisphere are plotted. The reason is that if <tt>h</tt> and <tt>-h</tt> are symmetrically equivalent the upper and lower hemisphere of the pole figure are symmetric as well.</p><h2 id="7">Contour plots</h2>
+</center><p>We observe, that for some crystal directions only the upper hemisphere is plotted while for other upper and lower hemisphere are plotted. The reason is that if <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">-h</code> are symmetrically equivalent the upper and lower hemisphere of the pole figure are symmetric as well.</p><h2 id="7">Contour plots</h2>
 {% highlight matlab %}
 plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS),'contourf')
 mtexColorbar

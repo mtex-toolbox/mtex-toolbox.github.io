@@ -1,20 +1,17 @@
 ---
 title: Detection of Sample Symmetry
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: DetectionOfSampleSymmetry.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/DetectionOfSampleSymmetry.m">
+      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/DetectionOfSampleSymmetry.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic');
@@ -38,7 +35,6 @@ plotPDF(odf,h,'antipodal','silent','complete')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 222
@@ -46,9 +42,7 @@ odf = ODF
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 12&deg;
     center: Rotations: 4 x 1
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_01.png" %}
@@ -71,6 +65,7 @@ figure, plotPDF(odf_est,h,'antipodal',8,'silent');
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Rotation does not respect symmetry! 
  
 ori = orientation  
   size: 1 x 1000
@@ -84,9 +79,7 @@ odf_est = ODF
  
   Harmonic portion:
     degree: 25
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
@@ -102,17 +95,12 @@ angle(rot,inv(rot_inv)) / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-progress: 100%
-progress: 100%
-progress: 100%
-progress: 100%
 ans =
-   15.6088
-
+   15.6088'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
-</center><h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <tt>centerSpecimen</tt> to an ODF estimated from pole figure data. Lets start by importing them</p>
+</center><h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <code class="language-plaintext highlighter-rouge">centerSpecimen</code> to an ODF estimated from pole figure data. Lets start by importing them</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'PoleFigure','aachen_exp.EXP');
 pf = PoleFigure.load(fname);
@@ -129,17 +117,14 @@ plotPDF(odf,h,'antipodal','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : m-3m
   specimen symmetry: 1
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: 4895 orientations, resolution: 5&deg;
-    weight: 1
- 
-
+    kernel: de la Vallee Poussin, halfwidth 5&deg;
+    center: 4933 orientations, resolution: 5&deg;
+    weight: 1'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}
@@ -152,12 +137,6 @@ annotate([a1,a2,a3],'label',{'RD','TD','ND'},'backgroundcolor','w','MarkerSize',
 {% endhighlight %}
 
 {% highlight plaintext %}
-progress: 100%
-progress: 100%
-progress: 100%
-progress: 100%
-progress: 100%
- 
 a1 = vector3d  
  size: 1 x 1
           x          y          z
@@ -171,8 +150,7 @@ a2 = vector3d
 a3 = vector3d  
  size: 1 x 1
              x            y            z
-  -0.000162903  -0.00325478     0.999995
-
+  -0.000162903  -0.00325478     0.999995'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_06.png" %}

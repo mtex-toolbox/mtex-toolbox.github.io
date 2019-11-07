@@ -1,20 +1,17 @@
 ---
 title: EBSD Orientation Anaylsis
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSDOrientationAnalysis.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>EBSD Orientation Anaylsis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSDOrientationAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDOrientationAnalysis.m">
+      --><title>EBSD Orientation Anaylsis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSDOrientationAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDOrientationAnalysis.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we discuss tools for the analysis of EBSD data which are independent of its spatial coordinates. For spatial analysis, we refer to <a href="xxx.html">this page</a>. Let us first import some EBSD data:</p>
 {% highlight matlab %}
 plotx2east
@@ -33,7 +30,6 @@ plotPDF(ebsd('Forsterite').orientations,h,'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   mineral : Forsterite  
@@ -43,8 +39,7 @@ cs = crystalSymmetry
  
   I'm plotting 1250 random orientations out of 152345 given orientations
   You can specify the the number points by the option "points".
-  The option "all" ensures that all data are plotted
-
+  The option "all" ensures that all data are plotted'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_02.png" %}
@@ -65,7 +60,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori = orientation  
   size: 152345 x 1
   crystal symmetry : Forsterite (mmm)
@@ -79,22 +73,20 @@ rOrth = vector3d
  size: 1 x 1
  antipodal: true
          x         y         z
-  0.944141 -0.189955  0.269287
-
+  0.944141 -0.189955  0.269287'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_03.png" %}
-</center><p>we can check how large is the number of orientations that are in the (100) polegigure within a 10-degree fibre around the great circle with center <tt>rOrth</tt>. The following line gives the result in percent</p>
+</center><p>we can check how large is the number of orientations that are in the (100) polegigure within a 10-degree fibre around the great circle with center <code class="language-plaintext highlighter-rouge">rOrth</code>. The following line gives the result in percent</p>
 {% highlight matlab %}
 100 * sum(angle(r,rOrth)>80*degree) / length(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   61.7854
-
+   61.7854'
 {% endhighlight %}
-<p>Next, we want to answer the question which crystal direction is mapped to <tt>rOrth</tt>. To this end, we look at the corresponding inverse pole figure</p>
+<p>Next, we want to answer the question which crystal direction is mapped to <code class="language-plaintext highlighter-rouge">rOrth</code>. To this end, we look at the corresponding inverse pole figure</p>
 {% highlight matlab %}
 plotIPDF(ebsd('Forsterite').orientations,rOrth,'smooth')
 mtexColorbar
@@ -112,8 +104,7 @@ f = fibre(Miller(0,1,0,cs),rOrth);
 
 {% highlight plaintext %}
 ans =
-   27.9806
-
+   27.9806'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_04.png" %}
@@ -127,22 +118,24 @@ ylim([0,26])
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
  
   Harmonic portion:
     degree: 25
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_05.png" %}
 </center><p>We see that to ODF is far from beeing constant along the fibre. Thus, together with an observation about the small fibre volume, we would reject the hypothesis of a fibre texture.</p><p>Let's finally plot the ODF in orientation space to verify our decision</p>
 {% highlight matlab %}
 plot(odf,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot!
+I'going to create a new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_06.png" %}

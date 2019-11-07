@@ -1,20 +1,17 @@
 ---
 title: Denoising Orientation Maps
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSDDenoising.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Denoising Orientation Maps</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSDDenoising.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDDenoising.m">
+      --><title>Denoising Orientation Maps</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSDDenoising.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDDenoising.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO</h2><p>Let's start out analysis by considering a single magnesium grain</p>
 {% highlight matlab %}
 % import standard data set
@@ -51,6 +48,11 @@ ipfKey.maxAngle = 1.5*degree;
 % plot the colormap
 plot(ipfKey,'resolution',0.25*degree)
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Possibly applying an orientation to an object in
+specimen coordinates!'
+{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_02.png" %}
 </center><p>With the new colormap, we can clearly see the noise overlapping the texture gradient within the grain.</p>
@@ -64,7 +66,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_03.png" %}
-</center><p><b>The Mean Filter</b></p><p>The simplest filter to apply to the orientation data is the <tt>meanFilter</tt> which simply takes the mean of all orientations within a certain neighborhood.</p>
+</center><p><b>The Mean Filter</b></p><p>The simplest filter to apply to the orientation data is the <code class="language-plaintext highlighter-rouge">meanFilter</code> which simply takes the mean of all orientations within a certain neighborhood.</p>
 {% highlight matlab %}
 % define the meanFilter
 F = meanFilter;
@@ -79,11 +81,6 @@ plot(ebsd_smoothed('indexed'),...
 hold on
 plot(oneGrain.boundary,'linewidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_04.png" %}
@@ -105,8 +102,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- denoising EBSD data: 100%
- 
 ebsd_smoothed = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -114,9 +109,7 @@ ebsd_smoothed = EBSD
      1    2016 (61%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_05.png" %}
@@ -138,11 +131,6 @@ hold on
 plot(oneGrain.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_06.png" %}
 </center><p><b>The Kuwahara Filer</b></p>
@@ -160,11 +148,6 @@ plot(ebsd_smoothed('indexed'),...
 hold on
 plot(oneGrain.boundary,'linewidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_07.png" %}
@@ -188,10 +171,8 @@ F.alpha
 {% endhighlight %}
 
 {% highlight plaintext %}
- denoising EBSD data: 100%
 ans =
-    4.6123
-
+    4.6123'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_08.png" %}
@@ -210,11 +191,6 @@ plot(ebsd_smoothed('indexed'),...
 hold on
 plot(oneGrain.boundary,'linewidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_09.png" %}
@@ -235,14 +211,9 @@ hold on
 plot(oneGrain.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_10.png" %}
-</center><h2 id="11">Interpolating Missing Data</h2><p>The filters above can also be used to interpolate missindexed orientations.</p><p><b>A synthetic example</b></p><p>In the following example, we randomly set 50 percent of the measured orientations to <tt>nan</tt>.</p>
+</center><h2 id="11">Interpolating Missing Data</h2><p>The filters above can also be used to interpolate missindexed orientations.</p><p><b>A synthetic example</b></p><p>In the following example, we randomly set 50 percent of the measured orientations to <code class="language-plaintext highlighter-rouge">nan</code>.</p>
 {% highlight matlab %}
 ebsdNaN = ebsd;
 
@@ -258,7 +229,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_11.png" %}
-</center><p>By default, all orientations that are set to <tt>nan</tt> are interpolated.</p>
+</center><p>By default, all orientations that are set to <code class="language-plaintext highlighter-rouge">nan</code> are interpolated.</p>
 {% highlight matlab %}
 % interpolate the missing data with the smoothing spline filter
 ebsdNaN_smoothed = smooth(ebsdNaN,splineFilter);
@@ -267,11 +238,6 @@ plot(ebsdNaN_smoothed('indexed'),color,'micronbar','off')
 hold on
 plot(oneGrain.boundary)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_12.png" %}
@@ -317,7 +283,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -327,13 +292,11 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_14.png" %}
-</center><p>Using the option <tt>fill</tt> the command <tt>smooth</tt> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <tt>grain</tt> variable has to be passed as an additional argument.</p>
+</center><p>Using the option <code class="language-plaintext highlighter-rouge">fill</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 F.alpha = 0.01;
@@ -350,11 +313,6 @@ plot(grains.boundary,'linewidth',1.5)
 
 % stop overide mode
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_15.png" %}
@@ -402,7 +360,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_17.png" %}
-</center><p>If no <tt>grain</tt> variable is passed to the smoothing command the not indexed pixels are assigned to the nearest neighbor.</p>
+</center><p>If no <code class="language-plaintext highlighter-rouge">grain</code> variable is passed to the smoothing command the not indexed pixels are assigned to the nearest neighbor.</p>
 {% highlight matlab %}
 ebsd_smoothed = smooth(ebsd('indexed'),F,'fill');
 
@@ -416,11 +374,6 @@ plot(grains.boundary,'linewidth',1.5)
 
 % stop overide mode
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
- denoising EBSD data: 100%
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_18.png" %}

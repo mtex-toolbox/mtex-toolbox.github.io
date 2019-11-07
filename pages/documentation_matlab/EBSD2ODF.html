@@ -18,7 +18,6 @@ mtexdata forsterite
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -28,9 +27,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <h2 id="2">ODF Estimation</h2><p>These EBSD datasets consist of two phases, Iron, and Magnesium. The ODF of the Iron phase is computed by the command</p>
 {% highlight matlab %}
@@ -38,16 +35,13 @@ odf = calcODF(ebsd('fo').orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
  
   Harmonic portion:
     degree: 25
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <p>The function <a href="orientation.calcODF.html">calcODF</a> implements the ODF estimation from EBSD data in MTEX. The underlying statistical method is called kernel density estimation, which can be seen as a generalized histogram. To be more precise, let's \(\psi : SO(3) \to R\) be a radially symmetric, unimodal model ODF. Then the kernel density estimator for the individual orientation data \(o_1,o_2,\ldots,o_M\) is defined as</p><p>\[f(o) = \frac{1}{M} \sum_{i=1}^{M} \psi(o o_i^{-1})\]</p><p>The choice of the model ODF \(\psi\) and in particular its halfwidth has a great impact in the resulting ODF. If no halfwidth is specified the default halfwidth of 10 degrees is selected.</p><h2 id="4">Automatic halfwidth selection</h2><p>MTEX includes an automatic halfwidth selection algorithm which is called by the command <a href="orientation.calcKernel.html">calcKernel</a>. To work properly, this algorithm needs spatially independent EBSD data as in the case of this dataset of very rough EBSD measurements (only one measurement per grain).</p>
 {% highlight matlab %}
@@ -56,12 +50,9 @@ psi = calcKernel(ebsd('fo').orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 psi = deLaValleePoussinKernel  
   bandwidth: 98
-  halfwidth: 2.3°
- 
-
+  halfwidth: 2.3&deg;'
 {% endhighlight %}
 <p>In the above example, the EBSD measurements are spatial dependent and the resulting halfwidth is too small. To avoid this problem we have to perform grain reconstruction first and then estimate the halfwidth from the grains.</p>
 {% highlight matlab %}
@@ -79,10 +70,9 @@ odf = calcODF(ebsd('fo').orientations,'kernel',psi)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 psi = deLaValleePoussinKernel  
   bandwidth: 41
-  halfwidth: 6°
+  halfwidth: 6&deg;
  
  
 odf = ODF  
@@ -91,9 +81,7 @@ odf = ODF
  
   Harmonic portion:
     degree: 41
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <p>Once an ODF is estimated all the functionality MTEX offers for <a href="ODFCharacteristics.html">ODF analysis</a> and <a href="ODFPlot.html">ODF visualization</a> is available.</p>
 {% highlight matlab %}
@@ -109,13 +97,10 @@ ori = calcOrientations(modelODF,10000)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori = orientation  
   size: 10000 x 1
   crystal symmetry : m-3m
-  specimen symmetry: 1
- 
-
+  specimen symmetry: 1'
 {% endhighlight %}
 <p>Next we define a list of kernel halfwidth ,</p>
 {% highlight matlab %}

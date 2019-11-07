@@ -1,20 +1,17 @@
 ---
 title: Grain Boundary Properties
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: BoundaryProperties.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryProperties.m">
+      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryProperties.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
 {% highlight matlab %}
 % load some example data
@@ -38,7 +35,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -46,9 +42,7 @@ ebsd = EBSD
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryProperties_01.png" %}
@@ -141,12 +135,10 @@ gB8 = grains(8).boundary
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 gB8 = grainBoundary  
  
  Segments  mineral 1  mineral 2
-        8  Magnesium  Magnesium
-
+        8  Magnesium  Magnesium'
 {% endhighlight %}
 <p>This boundary consists of 8 segemts and hence ebsdId forms a 8x2 matrix</p>
 {% highlight matlab %}
@@ -162,8 +154,7 @@ ans =
         1011         844
          843         844
          843         842
-         843         676
-
+         843         676'
 {% endhighlight %}
 <p>It is important to understand that the <b>id</b> is not neccesarily the same as the index in the list. In order to index an variable of type EBSD by id and not by index the following syntax has to be used</p>
 {% highlight matlab %}
@@ -171,7 +162,6 @@ ebsd('id',gB8.ebsdId)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = EBSD  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
@@ -195,9 +185,7 @@ ans = EBSD
   842       1      5    80    195       0   167   170       3   0.5   1.8   1.5        21     15     1    345
   676       1      5    80    195       8   176   196       0   0.5   2.1   1.2        21     15     1    345
  Scan unit : um
- Grid size (square): 8 x 2
- 
-
+ Grid size (square): 8 x 2'
 {% endhighlight %}
 <p>Similarly</p>
 {% highlight matlab %}
@@ -213,8 +201,7 @@ ans =
      8    21
      8    21
      8    21
-     8    21
-
+     8    21'
 {% endhighlight %}
 <p>results in 8x2 matrix indicating that grain 8 is an inclusion of grain 21.</p>
 {% highlight matlab %}
@@ -233,7 +220,6 @@ inv(ebsd('id',gB8.ebsdId(1,2)).orientations) .* ebsd('id',gB8.ebsdId(1,1)).orien
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
@@ -252,9 +238,7 @@ ans = misorientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  330.069 86.0994  150.22       0
- 
-
+  330.069 86.0994  150.22       0'
 {% endhighlight %}
 <p>Note that in the first result the antipodal flag is true while it is false in the second result.</p><p>Obviously, misorientations of a list of grain boundaries can only be extracted if all of them have the same type of phase transition. Let us consider only Magnesium to Magnesium grain boundaries, i.e., ommit all grain boundaries to an not indexed region.</p>
 {% highlight matlab %}
@@ -262,12 +246,10 @@ gB_Mg = gB('Magnesium','Magnesium')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 gB_Mg = grainBoundary  
  
  Segments  mineral 1  mineral 2
-     3219  Magnesium  Magnesium
-
+     3219  Magnesium  Magnesium'
 {% endhighlight %}
 <p>Then the misorientation angles can be plotted by</p>
 {% highlight matlab %}
@@ -287,11 +269,9 @@ plot(gB_Mg,angle(gB_Mg.direction,axes),'linewidth',3)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 axes = vector3d  
  size: 3219 x 1
- antipodal: true
-
+ antipodal: true'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryProperties_04.png" %}
@@ -309,8 +289,7 @@ length(gB_Mg)
 
 {% highlight plaintext %}
 ans =
-        3219
-
+        3219'
 {% endhighlight %}
 <p>gives us the total number of all Magnesium to Magnesium grain boundary segements the following command gives us its their total length in um.</p>
 {% highlight matlab %}
@@ -319,8 +298,7 @@ sum(gB_Mg.segLength)
 
 {% highlight plaintext %}
 ans =
-  755.5302
-
+  755.5302'
 {% endhighlight %}
 <h2 id="15">Connected components</h2><p>TODO: explain this in more detail</p>
 {% highlight matlab %}

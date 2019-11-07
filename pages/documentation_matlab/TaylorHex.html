@@ -1,35 +1,29 @@
 ---
 title: Texture evolution in rolled magnesium during uniaxial tension
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: TaylorHex.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorHex.m">
+      --><title>Texture evolution in rolled magnesium during uniaxial tension</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_TaylorHex.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorHex.m">
     edit page</a></font><div><!--introduction--><p>This examples models the texture evolution of rolled magnesium under unixaxial tension using the Taylor model. The undeformed material is assumed to have a basal fibre texture perpendicular to tension direction. Then tension experiment has been performed twice: at room temperature and at 250 degree Celcius. The strain at fracture was approx. 30 percent and 70 percent, respectively.</p><!--/introduction--><h2 id="1">setting up hexagonal crystal symmetry</h2><p>First we need to set up hexagonal crystal symmetry.</p>
 {% highlight matlab %}
 cs = crystalSymmetry.load('Mg-Magnesium.cif')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   mineral        : Mg                
   symmetry       : 6/mmm             
   a, b, c        : 3.2, 3.2, 5.2     
-  reference frame: X||a*, Y||b, Z||c*
- 
-
+  reference frame: X||a*, Y||b, Z||c*'
 {% endhighlight %}
 <h2 id="2">setting up the basal fibre texture</h2><p>Second, we set up the initial fibre texture which has the c-axis perpendicular to the (x,y)-sheet plane and the a-axes are randomized. This is typical for rolled Mg-sheet</p>
 {% highlight matlab %}
@@ -76,7 +70,6 @@ epsWarm = 0.7 * strainTensor(diag([1 -0.5 -0.5]))
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 epsCold = strainTensor  
   rank: 2 (3 x 3)
  
@@ -91,8 +84,7 @@ epsWarm = strainTensor
  *10^-2
   70   0   0
    0 -35   0
-   0   0 -35
-
+   0   0 -35'
 {% endhighlight %}
 <h2 id="7">calculate texture evolution</h2><p>The Tayor calculation is used to get the resulting spin of each vector as well as the coeffeicients for each slip system for cold and hot state</p>
 {% highlight matlab %}
@@ -102,12 +94,6 @@ ori = odf.discreteSample(10000);
 % apply the Taylor model
 [~,bCold,Wcold] = calcTaylor( inv(ori) .* epsCold, sScold);
 [~,bWarm,Wwarm] = calcTaylor( inv(ori) .* epsWarm, sSwarm);
-{% endhighlight %}
-
-{% highlight plaintext %}
- computing Taylor factor: 100%
- computing Taylor factor: 100%
-
 {% endhighlight %}
 <p>Apply the Taylor spin to the initial orientation distribution</p>
 {% highlight matlab %}

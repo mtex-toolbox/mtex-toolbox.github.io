@@ -1,20 +1,17 @@
 ---
 title: Fundamental Regions
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: OrientationFundamentalRegion.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fundamental Regions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_OrientationFundamentalRegion.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationFundamentalRegion.m">
+      --><title>Fundamental Regions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_OrientationFundamentalRegion.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationFundamentalRegion.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Thanks to crystal symmetry the space of all rotations can be reduced to a so called fundamental or asymmetric region which has the property that each for orientation there is "exactly" one symmetrically equivalent orientation that is within the fundamental region. Those regions play an important role for visualizing orientations and ODFs as well as for the computation of axis and angle distributions of misorientations.</p><p>The space of all orientations can be imagined as a three dimensional ball with radius 180 degree. The distance of some point in the ball to the origin represent the rotational angle and the vector represents the rotational axis. In MTEX this can be represented as follows</p>
 {% highlight matlab %}
 % triclic crystal symmetry
@@ -28,15 +25,12 @@ plot(oR_all)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   symmetry          : -1                
   a, b, c           : 1, 1, 1           
   alpha, beta, gamma: 90&deg;, 90&deg;, 90&deg;     
-  reference frame   : X||a, Y||b*, Z||c*
- 
-
+  reference frame   : X||a, Y||b*, Z||c*'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_01.png" %}
@@ -84,13 +78,12 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   symmetry: 222    
   a, b, c : 1, 1, 1
  
-
+Warning: Possible symmetry mismach!'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_04.png" %}
@@ -100,7 +93,6 @@ mtexdata forsterite
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -110,9 +102,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>we can visualize the Forsterite orientations by</p>
 {% highlight matlab %}
@@ -120,8 +110,7 @@ plot(ebsd('Fo').orientations,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 152345 given orientations
-
+plot 2000 random orientations out of 152345 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_05.png" %}
@@ -131,13 +120,10 @@ ori =  ebsd('Fo').orientations.project2FundamentalRegion
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori = orientation  
   size: 152345 x 1
   crystal symmetry : Forsterite (mmm)
-  specimen symmetry: 1
- 
-
+  specimen symmetry: 1'
 {% endhighlight %}
 <h2 id="8">Change the center of the fundamental region</h2><p>There is no necessity that the fundamental region has to be centered in the origin - it can be centered at any orientation, e.g. at the mean orientation of a grain.</p>
 {% highlight matlab %}
@@ -161,7 +147,6 @@ plot(ori,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 largeGrain = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -185,8 +170,7 @@ ori = orientation
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
  
-plot 2000 random orientations out of 2683 given orientations
-
+plot 2000 random orientations out of 2683 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_06.png" %}
@@ -204,8 +188,7 @@ plot(grains.boundary('fo','En').misorientation)
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 11814 given orientations
-
+plot 2000 random orientations out of 11814 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_08.png" %}
@@ -224,15 +207,13 @@ plot(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori = misorientation  
   size: 15974 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
   antipodal:         true
  
-plot 2000 random orientations out of 15974 given orientations
-
+plot 2000 random orientations out of 15974 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_10.png" %}
@@ -244,8 +225,7 @@ plot(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 15974 given orientations
-
+plot 2000 random orientations out of 15974 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_11.png" %}
@@ -255,19 +235,17 @@ plotSection(mori,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-  plotting 2000 random orientations out of 15974 given orientations
-
+plotting 2000 random orientations out of 15974 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_12.png" %}
-</center><p>Note that in the previous plot we distinguish between <tt>mori</tt> and <tt>inv(mori)</tt>. Adding antipodal symmetry those are considered as equivalent</p>
+</center><p>Note that in the previous plot we distinguish between <code class="language-plaintext highlighter-rouge">mori</code> and <code class="language-plaintext highlighter-rouge">inv(mori)</code>. Adding antipodal symmetry those are considered as equivalent</p>
 {% highlight matlab %}
 plotSection(mori,'axisAngle','antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-  plotting 2000 random orientations out of 15974 given orientations
-
+plotting 2000 random orientations out of 15974 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_13.png" %}
