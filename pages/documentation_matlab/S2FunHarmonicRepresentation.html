@@ -39,11 +39,13 @@ for bw = [256 128 64 32 16 8]
   mtexTitle(['M = ' num2str(bw)]);
 end
 {% endhighlight %}
-<p>The computation of the Fourier coefficients can be done in several ways. Lets first assume that the function \(f\) is known explicitely, e.g., \(f({\bf v})=({\bf v} \cdot {\bf x})^3\). In MTEX we can express this as</p>
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
+</center><p>The computation of the Fourier coefficients can be done in several ways. Lets first assume that the function \(f\) is known explicitely, e.g., \(f({\bf v})=({\bf v} \cdot {\bf x})^3\). In MTEX we can express this as</p>
 {% highlight matlab %}
 fun = @(v) dot(v,vector3d.X).^9;
 {% endhighlight %}
-<p>Now we can compute the Harmonic representation this function and turn it into a variable of type |<a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a>|s using the command <a href="S2FunHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">S2FunHarmonic.quadrature</code></a></p>
+<p>Now we can compute the Harmonic representation this function and turn it into a variable of type <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></code> using the command <a href="S2FunHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">S2FunHarmonic.quadrature</code></a></p>
 {% highlight matlab %}
 S2F = S2FunHarmonic.quadrature(fun)
 
@@ -57,13 +59,13 @@ S2F = S2FunHarmonic
 
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
 </center><p>We observe that by default Fourier coefficients up the harmonic cut off degree \(M=128\) are computed. This default value can changed using the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code>. The decay of the Fourier coefficients can be visualized using the command <a href="S2FunHarmonic.plotSpektra.html">plotSpektra</a> which plot for each harmonic degree \(m\) the sum of the squared moduli of the corresponding Fourier coefficients, i.e. \(\sum_{k=-m}^m \lvert \hat f(m,k)\rvert^2\)</p>
 {% highlight matlab %}
 plotSpektra(S2F,'FontSize',15)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
 </center><p>In the present example we observe that almost all Fourier coefficients are zero except for very first one. Hence, it might be reasonable to restrict the cut of degree to the non zero Fourier coefficients</p>
 {% highlight matlab %}
 % restrict to non zero Fourier coefficients
@@ -80,11 +82,11 @@ S2F = S2FunHarmonic
 
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_05.png" %}
 </center><p>In The robust estimation of these Fourier coefficients from discrete data is discussed in the secion <a href="S2FunApproximationInterpolation.html">Spherical Approximation</a></p><p>In particular all operation on those functions are implmented as operations on the Fourier coefficients.</p><p>The crucial parameter when representing spherical functions by their harmonic series expansion is the harmonic cut off degree \(M\). .</p><p>To concluse this session we plot the first ten spherical harmonics</p>
 {% highlight matlab %}
 surf(S2FunHarmonic(eye(10)))
 {% endhighlight %}
 <center>
-{% include inline_image.html file="S2FunHarmonicRepresentation_05.png" %}
+{% include inline_image.html file="S2FunHarmonicRepresentation_06.png" %}
 </center></div></body></html>
