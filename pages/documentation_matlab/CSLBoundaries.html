@@ -1,6 +1,6 @@
 ---
 title: CSL Boundaries
-last_updated: 03-Nov-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: CSLBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-03"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/CSLBoundaries.m">
+      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/CSLBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of CSL boundaries. Therefore lets start by importing some Iron data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 mtexdata csl
@@ -28,16 +28,13 @@ plot(grains,grains.meanOrientation)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
     -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
  
  Properties: ci, error, iq, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_01.png" %}
@@ -69,12 +66,10 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 gB = grainBoundary  
  
  Segments  mineral 1  mineral 2
-    20356       iron       iron
-
+    20356       iron       iron'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_03.png" %}
@@ -152,7 +147,6 @@ mdf = calcMDF(gB.misorientation,'halfwidth',5*degree,'bandwidth',48)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mdf = MDF  
   crystal symmetry : iron (m-3m)
   crystal symmetry : iron (m-3m)
@@ -160,18 +154,16 @@ mdf = MDF
  
   Harmonic portion:
     degree: 48
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <p>Next we can visualize the misorientation distribution function in axis angle sections.</p>
 {% highlight matlab %}
 plot(mdf,'axisAngle',(25:5:60)*degree,'colorRange',[0 15])
 
-annotate(CSL(3,ebsd.CS),'label','$CSL_3$','backgroundcolor','w')
-annotate(CSL(5,ebsd.CS),'label','$CSL_5$','backgroundcolor','w')
-annotate(CSL(7,ebsd.CS),'label','$CSL_7$','backgroundcolor','w')
-annotate(CSL(9,ebsd.CS),'label','$CSL_9$','backgroundcolor','w')
+annotate(CSL(3,ebsd.CS),'label','\(CSL_3\)','backgroundcolor','w')
+annotate(CSL(5,ebsd.CS),'label','\(CSL_5\)','backgroundcolor','w')
+annotate(CSL(7,ebsd.CS),'label','\(CSL_7\)','backgroundcolor','w')
+annotate(CSL(9,ebsd.CS),'label','\(CSL_9\)','backgroundcolor','w')
 
 drawNow(gcm)
 {% endhighlight %}
@@ -183,7 +175,6 @@ mori = mdf.calcModes(2)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori = misorientation  
   size: 1 x 2
   crystal symmetry : iron (m-3m)
@@ -192,13 +183,9 @@ mori = misorientation
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
   151.113 49.0581  244.56       0
-  75.9667 27.9971 258.803       0
- 
-
+  75.9667 27.9971 258.803       0'
 {% endhighlight %}
-<center>
-{% include inline_image.html file="CSLBoundaries_09.png" %}
-</center><p>and their volumes in percent</p>
+<p>and their volumes in percent</p>
 {% highlight matlab %}
 100 * volume(gB.misorientation,CSL(3,ebsd.CS),2*degree)
 
@@ -209,8 +196,7 @@ mori = misorientation
 ans =
    40.9904
 ans =
-    2.0338
-
+    2.0338'
 {% endhighlight %}
 <p>or to plot the MDF along certain fibres</p>
 {% highlight matlab %}
@@ -231,7 +217,6 @@ ylabel('mrd');
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 fibre100 = misorientation  
   size: 1 x 100
   crystal symmetry : iron (m-3m)
@@ -247,12 +232,10 @@ fibre111 = misorientation
 fibre101 = misorientation  
   size: 1 x 100
   crystal symmetry : iron (m-3m)
-  crystal symmetry : iron (m-3m)
- 
-
+  crystal symmetry : iron (m-3m)'
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CSLBoundaries_10.png" %}
+{% include inline_image.html file="CSLBoundaries_09.png" %}
 </center><p>or to evaluate it in an misorientation directly</p>
 {% highlight matlab %}
 mori = orientation.byEuler(15*degree,28*degree,14*degree,mdf.CS,mdf.CS)
@@ -263,7 +246,6 @@ mdf.eval(csl3)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : iron (m-3m)
@@ -276,7 +258,6 @@ mori = misorientation
 ans =
     1.5276
 ans =
-   54.2486
-
+   54.2486'
 {% endhighlight %}
 </div></body></html>

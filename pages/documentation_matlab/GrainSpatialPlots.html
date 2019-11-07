@@ -1,20 +1,17 @@
 ---
 title: Plotting
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: GrainSpatialPlots.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainSpatialPlots.m">
+      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_GrainSpatialPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainSpatialPlots.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>We start by importing some EBSD data and reconstructing some grains</p>
 {% highlight matlab %}
 % import a demo data set
@@ -29,7 +26,6 @@ ebsd = ebsd('indexed');
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -39,9 +35,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <h2 id="2">Phase maps</h2><p>When using the <a href="grain2d.plot.html">plot</a> command without additional argument the associated color is defined by color stored in the crystal symmetry for each phase</p>
 {% highlight matlab %}
@@ -53,8 +47,7 @@ grains('Fo').CS.color
 
 {% highlight plaintext %}
 ans =
-    0.5294    0.8078    0.9804
-
+    0.5294    0.8078    0.9804'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSpatialPlots_01.png" %}
@@ -65,7 +58,6 @@ plot(grains)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -76,13 +68,11 @@ grains = grain2d
  boundary segments: 43912
  triple points: 3417
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSpatialPlots_02.png" %}
-</center><p>The color can also been specified directly by using the option <tt>FaceColor</tt>. Note, that this requires the color to be specified by RGB values.</p>
+</center><p>The color can also been specified directly by using the option <code class="language-plaintext highlighter-rouge">FaceColor</code>. Note, that this requires the color to be specified by RGB values.</p>
 {% highlight matlab %}
 % detect the largest grain
 [~,id] = max(grains.area);
@@ -118,7 +108,7 @@ plot(grains('fo'),color)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSpatialPlots_05.png" %}
-</center><h2 id="8">Plotting arbitrary properties</h2><p>As we have seen in the previous section the <tt>plot</tt> command accepts as second argument any list of RGB values specifying a color. Instead of RGB values the second argument can also be a list of values which are then transformed by a colormap into color.</p><p>As an example we colorize the grains according to their aspect ratio.</p>
+</center><h2 id="8">Plotting arbitrary properties</h2><p>As we have seen in the previous section the <code class="language-plaintext highlighter-rouge">plot</code> command accepts as second argument any list of RGB values specifying a color. Instead of RGB values the second argument can also be a list of values which are then transformed by a colormap into color.</p><p>As an example we colorize the grains according to their aspect ratio.</p>
 {% highlight matlab %}
 plot(grains,grains.aspectRatio)
 {% endhighlight %}
@@ -174,9 +164,7 @@ ebsd_maxGrain = EBSD
      1   2683 (100%)  Forsterite  LightSkyBlue       mmm                         
  
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -216,16 +204,13 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
     -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
  
  Properties: ci, error, iq, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSpatialPlots_10.png" %}

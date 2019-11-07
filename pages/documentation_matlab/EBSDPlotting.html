@@ -1,20 +1,17 @@
 ---
 title: Plotting
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSDPlotting.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSDPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDPlotting.m">
+      --><title>Plotting</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSDPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDPlotting.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This section gives you an overview of the functionality MTEX offers to visualize spatial orientation data. Let us first import some sample EBSD data.</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -23,7 +20,6 @@ csFo = ebsd('Forsterite').CS;
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -33,9 +29,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <h2 id="2">Phase Plots</h2><p>By default, MTEX plots a phase map for EBSD data.</p>
 {% highlight matlab %}
@@ -50,8 +44,7 @@ ebsd('Diopside').color
 
 {% highlight plaintext %}
 ans =
-    0.8549    0.6471    0.1255
-
+    0.8549    0.6471    0.1255'
 {% endhighlight %}
 <p>These values are RGB values which can be altered to any other RGB triple. A more convinient way for changing the color is the function <a href="str2rgb.html">str2rgb</a> which converts color names into RGB triplets</p>
 {% highlight matlab %}
@@ -61,7 +54,7 @@ plot(ebsd('indexed'))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_02.png" %}
-</center><p>By default, not indexed phases are plotted as white and it is impossible to assign a different color as we did it for real phases. Instead we need to use option <tt>FaceColor</tt> to specify the color directly in the plotting command.</p>
+</center><p>By default, not indexed phases are plotted as white and it is impossible to assign a different color as we did it for real phases. Instead we need to use option <code class="language-plaintext highlighter-rouge">FaceColor</code> to specify the color directly in the plotting command.</p>
 {% highlight matlab %}
 hold on
 plot(ebsd('notIndexed'),'FaceColor','Gray')
@@ -103,7 +96,7 @@ plot(ebsd('Forsterite'),colors)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_07.png" %}
-</center><p>The above ipf color key can be largely customizied. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p><h2 id="11">Superposing different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <tt>'faceAlpha'</tt>. Note that the option <tt>'faceAlpha'</tt> requires the renderer of the figure to be set to <tt>'opengl'</tt>.</p>
+</center><p>The above ipf color key can be largely customizied. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p><h2 id="11">Superposing different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>.</p>
 {% highlight matlab %}
 close all;
 plot(ebsd,ebsd.bc)

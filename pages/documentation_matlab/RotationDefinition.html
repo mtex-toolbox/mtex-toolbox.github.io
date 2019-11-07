@@ -1,6 +1,6 @@
 ---
 title: Defining Rotations
-last_updated: 06-Nov-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: RotationDefinition.html
 folder: documentation
@@ -11,22 +11,19 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Defining Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-06"><meta name="DC.source" content="script_RotationDefinition.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationDefinition.m">
+      --><title>Defining Rotations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_RotationDefinition.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationDefinition.m">
     edit page</a></font><div><!--introduction--><p>In this section we describe many different ways to define or to describe rotations. In the end however, every description results in an variable of type <a href="rotation.rotation.html">rotation.rotation.html</a>.</p><!--/introduction--><h2 id="1">Euler Angles</h2><p>One of the most common ways to describe a rotation is as three subsequent rotations about fixed axes, e.g., first around the z axis, second around the x axis and third again around the z. The corresponding rotational angles are commonly called Euler angles. As for the axes different conventions are in use. Sorted by popularity in the texture analysis community these are</p><div><ul><li>Bunge (phi1,Phi,phi2)       - ZXZ</li><li>Matthies (alpha,beta,gamma) - ZYZ</li><li>Roe (Psi,Theta,Phi)</li><li>Kocks (Psi,Theta,phi)</li><li>Canova (omega,Theta,phi)</li></ul></div><p>The default Euler angle convention in MTEX are the Bunge Euler angles, with axes Z, X, and Z. The following command defines a rotation by its three Bunge Euler angles</p>
 {% highlight matlab %}
 rot = rotation.byEuler(30*degree,50*degree,10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    30   50   10    0
- 
-
+    30   50   10    0'
 {% endhighlight %}
 <p>Note that the angles needs to be multiplied with <b>degree</b> since all commands in MTEX expect the input in radiant. Furthermore, the order of the first and the third Euler angle are interchanged in comparison to standard notation for reasons explained <a href="MTEXvsBungeConvention.html">here</a>.</p><p>In order to define a rotation by a Euler angle convention different to the default Euler angle convention you to specify the convention as an additional parameter, e.g.</p>
 {% highlight matlab %}
@@ -34,15 +31,12 @@ rot = rotation.byEuler(30*degree,50*degree,10*degree,'Roe')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-   120   50  280    0
- 
-
+   120   50  280    0'
 {% endhighlight %}
 <p>This does not change the way MTEX displays the rotation on the screen. The default Euler angle convention for displaying a rotation can be changed by the command <a href="setMTEXpref.html">setMTEXpref</a>, for a permanent change the <a href="matlab:edit('mtex_settings.m')">mtex_settings</a> should be edited. Compare</p>
 {% highlight matlab %}
@@ -51,15 +45,12 @@ rot
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Roe Euler angles in degree
   Psi Theta   Phi  Inv.
-   30    50    10     0
- 
-
+   30    50    10     0'
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -68,15 +59,12 @@ rot
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-   120   50  280    0
- 
-
+   120   50  280    0'
 {% endhighlight %}
 <h2 id="5">Axis angle parametrisation and Rodrigues Frank vector</h2><p>A very simple possibility to specify a rotation is to specify the rotation axis and the rotation angle.</p>
 {% highlight matlab %}
@@ -84,15 +72,12 @@ rot = rotation.byAxisAngle(xvector,30*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-     0   30    0    0
- 
-
+     0   30    0    0'
 {% endhighlight %}
 <p>Conversely, we can extract the rotational axis and the rotation angle of a rotation by</p>
 {% highlight matlab %}
@@ -101,14 +86,12 @@ rot.angle ./degree
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = vector3d  
  size: 1 x 1
   x y z
   1 0 0
 ans =
-   30.0000
-
+   30.0000'
 {% endhighlight %}
 <p>Closely related to the axis angle parameterisation of a rotation is the Rodriguess Frank vector. This is the rotational axis scaled by \(\tan \omega/2\), where \(\omega\) is the rotational angle.</p>
 {% highlight matlab %}
@@ -118,14 +101,12 @@ R = rot.Rodrigues
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 R = vector3d  
  size: 1 x 1
          x        y        z
   0.267949        0        0
 ans =
-   30.0000
-
+   30.0000'
 {% endhighlight %}
 <p>We can also define a rotation by a Rodrigues Frank vector by</p>
 {% highlight matlab %}
@@ -133,15 +114,12 @@ rotation.byRodrigues(R)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-     0   30    0    0
- 
-
+     0   30    0    0'
 {% endhighlight %}
 <h2 id="9">Rotation Matrix</h2><p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
 {% highlight matlab %}
@@ -152,8 +130,7 @@ M = rot.matrix
 M =
     1.0000         0         0
          0    0.8660   -0.5000
-         0    0.5000    0.8660
-
+         0    0.5000    0.8660'
 {% endhighlight %}
 <p>Conversely, we may define a rotation by its matrix with the command</p>
 {% highlight matlab %}
@@ -161,15 +138,12 @@ rot = rotation.byMatrix(M)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-     0   30    0    0
- 
-
+     0   30    0    0'
 {% endhighlight %}
 <h2 id="11">Four vectors defining a rotation</h2><p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors u1, v1, u2, v2 there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
 {% highlight matlab %}
@@ -183,15 +157,12 @@ rot = rotation.map(u1,v1,u2,v2)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    90    0    0    0
- 
-
+    90    0    0    0'
 {% endhighlight %}
 <p>The above definition require that the angle between u1 and u2 is the same as between v1 and v2. The function gives an error if this condition is not meet. If only two vectors are specified, then the rotation with the smallest angle is returned that rotates the first vector onto the second one.</p>
 {% highlight matlab %}
@@ -199,15 +170,12 @@ rot = rotation.map(xvector,yvector)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    90    0    0    0
- 
-
+    90    0    0    0'
 {% endhighlight %}
 <h2 id="13">Logarithm, Exponential Mapping, Spin Tensor</h2><p>TODO</p>
 {% highlight matlab %}
@@ -219,7 +187,6 @@ vector3d(S)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 S = spinTensor  
   rank: 2 (3 x 3)
  
@@ -238,8 +205,7 @@ ans = rotation
 ans = vector3d  
  size: 1 x 1
   x      y      z
-  0      0 1.5708
-
+  0      0 1.5708'
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -249,7 +215,6 @@ rotation(exp(v))
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 v = vector3d  
  size: 1 x 1
   x      y      z
@@ -260,9 +225,7 @@ ans = rotation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    90    0    0    0
- 
-
+    90    0    0    0'
 {% endhighlight %}
 <h2 id="15">Quaternions</h2><p>A last possibility to describe a rotation is by quaternions given by components a, b, c, d.</p>
 {% highlight matlab %}
@@ -270,12 +233,10 @@ q = quaternion(rot)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 q = quaternion  
   size: 1 x 1
          a        b        c        d
-  0.707107        0        0 0.707107
-
+  0.707107        0        0 0.707107'
 {% endhighlight %}
 <p>Actually, MTEX represents internally every rotation as a <a href="quaternion.quaternion.html">quaternion</a>. To transform a quaternion back into a rotation do</p>
 {% highlight matlab %}
@@ -283,14 +244,11 @@ rot = rotation(q)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 rot = rotation  
   size: 1 x 1
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    90    0    0    0
- 
-
+    90    0    0    0'
 {% endhighlight %}
 </div></body></html>

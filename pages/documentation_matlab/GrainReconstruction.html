@@ -1,20 +1,17 @@
 ---
 title: Grain Reconstruction
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: GrainReconstruction.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstruction.m">
+      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -30,7 +27,6 @@ plot(ebsd)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -40,9 +36,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_01.png" %}
@@ -52,7 +46,6 @@ grains = calcGrains(ebsd,'angle',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -64,9 +57,7 @@ grains = grain2d
  boundary segments: 10422
  triple points: 905
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <p>The reconstructed grains are stored in the variable <b>grains</b>. Note that also the notIndexed measurements are grouped into grains. This allows later to analyze the shape of these unindexed regions.</p><p>To visualize the grains we can plot its boundaries by the command <a href="grainBoundary.plot.html">plot</a>.</p>
 {% highlight matlab %}
@@ -105,7 +96,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -116,9 +106,7 @@ grains = grain2d
  boundary segments: 3784
  triple points: 240
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_03.png" %}
@@ -135,7 +123,6 @@ notIndexed = grains('notIndexed')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 notIndexed = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -144,9 +131,7 @@ notIndexed = grain2d
  boundary segments: 8694
  triple points: 868
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <p>We see that we have 1139 not indexed regions. A good measure for compact regions vs. cluttered regions is the quotient between the area and the boundary length. Lets, therefore, plot the "not indexed grains" colorized by this quotient</p>
 {% highlight matlab %}
@@ -172,7 +157,6 @@ plot(grains,'lineWidth',2)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 toRemove = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -193,9 +177,7 @@ ebsd = EBSD
      3    759 (4.5%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_06.png" %}
@@ -248,7 +230,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsdP = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -271,13 +252,11 @@ grains = grain2d
  boundary segments: 1024
  triple points: 66
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_08.png" %}
-</center><p>We see that the grains badly fill up the entire convex hull of the data points. This can be avoided by specifying the option <tt>tight</tt> for the determination of the outer boundary.</p>
+</center><p>We see that the grains badly fill up the entire convex hull of the data points. This can be avoided by specifying the option <code class="language-plaintext highlighter-rouge">tight</code> for the determination of the outer boundary.</p>
 {% highlight matlab %}
 plot(ebsdP,'micronBar','off')
 legend off
@@ -292,7 +271,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -303,9 +281,7 @@ grains = grain2d
  boundary segments: 1244
  triple points: 61
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_09.png" %}

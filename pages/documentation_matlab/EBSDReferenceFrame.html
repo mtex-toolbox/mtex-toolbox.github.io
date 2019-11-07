@@ -21,7 +21,6 @@ plot(ebsd,'coordinates','on')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -31,9 +30,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_01.png" %}
@@ -82,12 +79,14 @@ ebsd_rot = rotate(ebsd,rot);
 % plot the rotated EBSD data
 plot(ebsd_rot)
 {% endhighlight %}
-<p>It should be stressed that this rotation on does not only effect the spatial data, i.e. the x, y values, but also the Euler angles are rotated accordingly.</p>
+<center>
+{% include inline_image.html file="EBSDReferenceFrame_07.png" %}
+</center><p>It should be stressed that this rotation on does not only effect the spatial data, i.e. the x, y values, but also the Euler angles are rotated accordingly.</p>
 {% highlight matlab %}
 plotPDF(ebsd_rot('fo').orientations,Miller(1,2,3,CS),'contourf')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_07.png" %}
+{% include inline_image.html file="EBSDReferenceFrame_08.png" %}
 </center><h2 id="11">See also</h2><p>EBSD/rotate EBSD/shift EBSD/affinetrans</p><h2 id="12">Correcting for different reference frames in spatial data and Euler angles</h2><p>Sometimes the imported spatial data and the imported Euler angles do not coresspond to the same reference frame. Since MTEX always assumes these reference frames to be the same it might be neccessary to correct for this misalignment. This can be done by rotating the spatial data or the Euler angles seperately using the options <code class="language-plaintext highlighter-rouge">'keepXY'</code> or <code class="language-plaintext highlighter-rouge">'keepEuler'</code>. E.g. the following command only effect the spatial coordinates but not the Euler angles</p>
 {% highlight matlab %}
 % rotate the EBSD data
@@ -97,13 +96,13 @@ ebsd_rot = rotate(ebsd,rot,'keepEuler');
 plot(ebsd_rot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_08.png" %}
+{% include inline_image.html file="EBSDReferenceFrame_09.png" %}
 </center><p>The pole figure remains unchanged:</p>
 {% highlight matlab %}
 plotPDF(ebsd_rot('forsterite').orientations,Miller(1,2,3,CS),'contourf')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_09.png" %}
+{% include inline_image.html file="EBSDReferenceFrame_10.png" %}
 </center><h2 id="14">Correcting HKL and CTF files</h2><p>Both *.ctf and *.ang data files are known to use different reference frames for spatial data and Euler angles. To corrrect for misalignment the interface supports the options <code class="language-plaintext highlighter-rouge">convertSpatial2EulerReferenceFrame</code> and <code class="language-plaintext highlighter-rouge">'convertEuler2SpatialReferenceFrame'</code>, e.g.,</p>
 {% highlight matlab %}
 EBSD.load('fname.ang','convertSpatial2EulerReferenceFrame')

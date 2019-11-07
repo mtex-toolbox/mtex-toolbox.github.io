@@ -1,35 +1,29 @@
 ---
 title: Operations Crystal Directions
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: CrystalOperations.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Operations Crystal Directions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_CrystalOperations.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalOperations.m">
+      --><title>Operations Crystal Directions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_CrystalOperations.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalOperations.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic operations with crystal directions. Therefore, lets start by importing the trigonal Quartz crystal symmetry</p>
 {% highlight matlab %}
 cs = loadCIF('quartz')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   mineral        : Quartz            
   symmetry       : 321               
   a, b, c        : 4.9, 4.9, 5.4     
-  reference frame: X||a*, Y||b, Z||c*
- 
-
+  reference frame: X||a*, Y||b, Z||c*'
 {% endhighlight %}
 <p>and consider two hexgonal prism normal</p>
 {% highlight matlab %}
@@ -43,7 +37,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 m1 = Miller  
  size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
@@ -58,8 +51,7 @@ m2 = Miller
   h  1
   k  0
   i -1
-  l  0
-
+  l  0'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalOperations_01.png" %}
@@ -69,15 +61,13 @@ d = round(cross(m1,m2))
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 d = Miller  
  size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   U 0
   V 0
   T 0
-  W 1
-
+  W 1'
 {% endhighlight %}
 <p>Note that MTEX automatically switches from reciprocal to direct coordinates for displaying the zone axis.</p><p>The other way round two, not paralllel, zone axes</p>
 {% highlight matlab %}
@@ -90,15 +80,13 @@ round(cross(d1,d2))
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = Miller  
  size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   h  1
   k  0
   i -1
-  l  0
-
+  l  0'
 {% endhighlight %}
 <h2 id="6">Symmetrically Equivalent Crystal Directions</h2><p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indeces (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -106,15 +94,13 @@ symmetrise(d2)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = Miller  
  size: 6 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   U  1  1  1  1 -2 -2
   V -2  1  1 -2  1  1
   T  1 -2 -2  1  1  1
-  W  3 -3  3 -3  3 -3
-
+  W  3 -3  3 -3  3 -3'
 {% endhighlight %}
 <p>As always the keyword <a href="VectorsAxes.html">antipodal</a> adds antipodal symmetry to this computation</p>
 {% highlight matlab %}
@@ -122,15 +108,13 @@ symmetrise(d2,'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = Miller  
  size: 12 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   U  1  1  1  1 -2 -2 -1 -1 -1 -1  2  2
   V -2  1  1 -2  1  1  2 -1 -1  2 -1 -1
   T  1 -2 -2  1  1  1 -1  2  2 -1 -1 -1
-  W  3 -3  3 -3  3 -3 -3  3 -3  3 -3  3
-
+  W  3 -3  3 -3  3 -3 -3  3 -3  3 -3  3'
 {% endhighlight %}
 <p>Using the options <b>symmetrised</b> and <b>labeled</b> all symmetrically equivalent crystal directions are plotted together with their Miller indices. Lets apply this to a list of lattice planes</p>
 {% highlight matlab %}
@@ -153,8 +137,7 @@ Miller(1,1,-2,0,cs) == Miller(-1,-1,2,0,cs)
 {% highlight plaintext %}
 ans =
   logical
-   0
-
+   0'
 {% endhighlight %}
 <p>and</p>
 {% highlight matlab %}
@@ -164,8 +147,7 @@ eq(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'antipodal')
 {% highlight plaintext %}
 ans =
   logical
-   1
-
+   1'
 {% endhighlight %}
 <h2 id="11">Angles</h2><p>The angle between two crystal directions m1 and m2 is defined as the smallest angle between m1 and all symmetrically equivalent directions to m2. This angle is in radians and it is calculated by the function <a href="vector3d.angle.html">angle</a></p>
 {% highlight matlab %}
@@ -174,8 +156,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs)) / degree
 
 {% highlight plaintext %}
 ans =
-   60.0000
-
+   60.0000'
 {% endhighlight %}
 <p>As always the keyword <a href="VectorsAxes.html">antipodal</a> adds antipodal symmetry to this computation</p>
 {% highlight matlab %}
@@ -184,8 +165,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'antipodal') / degree
 
 {% highlight plaintext %}
 ans =
-     0
-
+     0'
 {% endhighlight %}
 <p>In order to ignore the crystal symmetry, i.e., to compute the actual angle between two directions use the option <b>noSymmetry</b></p>
 {% highlight matlab %}
@@ -194,8 +174,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'noSymmetry') / degree
 
 {% highlight plaintext %}
 ans =
-   180
-
+   180'
 {% endhighlight %}
 <p>This option is available for many other functions involving crystal directions and crystal orientations.</p><h2 id="15">Calculations</h2><p>Essentially all the operations defined for general directions, i.e. for variables of type <a href="vector3d.vector3d.html">vector3d</a> are also available for Miller indices. In addition Miller indices interact with crystal orientations. Consider the crystal orientation</p>
 {% highlight matlab %}
@@ -203,7 +182,6 @@ ori = orientation.byEuler(10*degree,20*degree,30*degree,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori = orientation  
   size: 1 x 1
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
@@ -211,9 +189,7 @@ ori = orientation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    10   20   30    0
- 
-
+    10   20   30    0'
 {% endhighlight %}
 <p>Then one can apply it to a crystal direction to find its coordinates with respect to the specimen coordinate system</p>
 {% highlight matlab %}
@@ -221,12 +197,10 @@ ori * m1
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = vector3d  
  size: 1 x 1
          x          y          z
-  0.219491 -0.0733607 -0.0401679
-
+  0.219491 -0.0733607 -0.0401679'
 {% endhighlight %}
 <p>By applying a <a href="crystalSymmetry.crystalSymmetry.html">crystal symmetry</a> one obtains the coordinates with respect to the specimen coordinate system of all crystallographically equivalent specimen directions.</p>
 {% highlight matlab %}
@@ -246,12 +220,10 @@ vector3d(m1)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = vector3d  
  size: 1 x 1
          x         y         z
-  0.117443 -0.203417         0
-
+  0.117443 -0.203417         0'
 {% endhighlight %}
 <p>Conversion into spherical coordinates requires the function <a href="vector3d.polar.html">polar</a></p>
 {% highlight matlab %}
@@ -262,7 +234,6 @@ ans = vector3d
 theta =
     1.5708
 rho =
-    5.2360
-
+    5.2360'
 {% endhighlight %}
 </div></body></html>

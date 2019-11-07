@@ -1,27 +1,23 @@
 ---
 title: Select EBSD data
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSDSelect.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Select EBSD data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDSelect.m">
+      --><title>Select EBSD data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDSelect.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example <a href="mtexdata.html">EBSD data</a>. and plot the raw data</p>
 {% highlight matlab %}
 mtexdata forsterite
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -31,9 +27,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>These data consist of three indexed phases, Forsterite, Enstatite and Diopside. The not indexed phase called <i>not Indexed</i>. The phases can be visualized by</p>
 {% highlight matlab %}
@@ -42,22 +36,19 @@ plot(ebsd)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_01.png" %}
-</center><h2 id="3">Selecting a certain phase</h2><p>After import the EBSD data are stored in the variable <tt>ebsd</tt> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p>
+</center><h2 id="3">Selecting a certain phase</h2><p>After import the EBSD data are stored in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p>
 {% highlight matlab %}
 ebsd('Forsterite')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = EBSD  
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1  152345 (100%)  Forsterite  LightSkyBlue       mmm                         
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>contains only the Forsterite measurements. In order to extract a couple of phases, the mineral names have to be grouped in curled parenthesis.</p>
 {% highlight matlab %}
@@ -65,7 +56,6 @@ ebsd({'Fo','En'})
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -73,9 +63,7 @@ ans = EBSD
      2   26058 (15%)   Enstatite  DarkSeaGreen       mmm                         
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>As an example, let us plot the Forsterite data.</p>
 {% highlight matlab %}
@@ -98,8 +86,7 @@ ipfKey =
                         dirMap: [1&times;1 HSVDirectionKey]
                            CS1: [4&times;2 crystalSymmetry]
                            CS2: [1&times;1 specimenSymmetry]
-                     antipodal: 0
-
+                     antipodal: 0'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_03.png" %}
@@ -119,13 +106,12 @@ rectangle('position',region,'edgecolor','r','linewidth',2)
 {% highlight matlab %}
 condition = inpolygon(ebsd,region);
 {% endhighlight %}
-<p>results in a large vector of <tt>TRUE</tt> and <tt>FALSE</tt> stating which data points are inside the region. Restricting the EBSD data by this condition is done via</p>
+<p>results in a large vector of <code class="language-plaintext highlighter-rouge">TRUE</code> and <code class="language-plaintext highlighter-rouge">FALSE</code> stating which data points are inside the region. Restricting the EBSD data by this condition is done via</p>
 {% highlight matlab %}
 ebsd = ebsd(condition)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -135,9 +121,7 @@ ebsd = EBSD
      3    759 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>plot</p>
 {% highlight matlab %}
@@ -181,7 +165,6 @@ ebsd_corrected = ebsd(ebsd.mad<0.8)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd_corrected = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -191,9 +174,7 @@ ebsd_corrected = EBSD
      3    676 (3.5%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 
 {% highlight matlab %}

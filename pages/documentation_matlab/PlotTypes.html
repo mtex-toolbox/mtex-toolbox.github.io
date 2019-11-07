@@ -1,6 +1,6 @@
 ---
 title: Plot Types
-last_updated: 31-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: PlotTypes.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plot Types</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_PlotTypes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/PlotTypes.m">
+      --><title>Plot Types</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_PlotTypes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/PlotTypes.m">
     edit page</a></font><div><!--introduction--><p>Explains the different plot types, i.e., scatter plots, contour plots, and line plots.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">A Sample ODFs</h2><p>Let us first define a model ODF to be plotted later on.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
@@ -20,17 +20,14 @@ pf = calcPoleFigure(odf,Miller(1,0,0,cs),equispacedS2Grid('antipodal'));
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 odf = ODF  
   crystal symmetry : -3m1, X||a*, Y||b, Z||c*
   specimen symmetry: 1
  
   Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
+    kernel: de la Vallee Poussin, halfwidth 10&deg;
     fibre: (11-20) - 0,0,1
-    weight: 1
- 
-
+    weight: 1'
 {% endhighlight %}
 <p>and simulate some EBSD data</p>
 {% highlight matlab %}
@@ -38,13 +35,10 @@ ori = calcOrientations(odf,100)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori = orientation  
   size: 100 x 1
   crystal symmetry : -3m1, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
- 
-
+  specimen symmetry: 1'
 {% endhighlight %}
 <h2 id="5">Scatter Plots</h2><p>In a scatter plots individual points are plotted. This plot is usually applied when individual orientations or pole figure measurements are visualized.</p>
 {% highlight matlab %}
@@ -53,13 +47,13 @@ scatter(ori)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlotTypes_01.png" %}
-</center><p>Three-dimensional vectors, Miller indices, spherical grids are plotted as single markers in a spherical projection. The shape, size, and color of the markers can be adjusted using the following parameters (see also <a href="matlab:doc('scattergroupproperties')">scattergroup_properties</a>)</p><p><tt>Marker</tt>, <tt>MarkerSize</tt>, <tt>MarkerFaceColor</tt>, <tt>MarkerEdgeColor</tt></p>
+</center><p>Three-dimensional vectors, Miller indices, spherical grids are plotted as single markers in a spherical projection. The shape, size, and color of the markers can be adjusted using the following parameters (see also <a href="matlab:doc('scattergroupproperties')">scattergroup_properties</a>)</p><p><code class="language-plaintext highlighter-rouge">Marker</code>, <code class="language-plaintext highlighter-rouge">MarkerSize</code>, <code class="language-plaintext highlighter-rouge">MarkerFaceColor</code>, <code class="language-plaintext highlighter-rouge">MarkerEdgeColor</code></p>
 {% highlight matlab %}
 plot(zvector,'Marker','p','MarkerSize',15,'MarkerFaceColor','red','MarkerEdgeColor','black')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlotTypes_02.png" %}
-</center><p>One can also assign a label to a marker. The main options controlling the label are (see <a href="matlab:doc('text_props')">text_properties</a>)</p><p><tt>Label</tt>, <tt>Color</tt>, <tt>BackgroundColor</tt>, <tt>FontSize</tt></p>
+</center><p>One can also assign a label to a marker. The main options controlling the label are (see <a href="matlab:doc('text_props')">text_properties</a>)</p><p><code class="language-plaintext highlighter-rouge">Label</code>, <code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">BackgroundColor</code>, <code class="language-plaintext highlighter-rouge">FontSize</code></p>
 {% highlight matlab %}
 plot([Miller(1,1,1,cs),Miller(-1,1,1,cs)],...
   'label',{'X','Y'},...
@@ -85,7 +79,7 @@ plotPDF(odf,Miller(1,0,0,cs),'contourf','antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlotTypes_06.png" %}
-</center><h2 id="12">Smooth Interpolated Plots</h2><p>The default plotting style for pole figures and ODFs is <b>smooth</b>. Which results in a colored plot without contour lines. Here one can specify the resolution of the plot using the option <tt>resolution</tt>.</p>
+</center><h2 id="12">Smooth Interpolated Plots</h2><p>The default plotting style for pole figures and ODFs is <b>smooth</b>. Which results in a colored plot without contour lines. Here one can specify the resolution of the plot using the option <code class="language-plaintext highlighter-rouge">resolution</code>.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'antipodal','resolution',10*degree)
 {% endhighlight %}

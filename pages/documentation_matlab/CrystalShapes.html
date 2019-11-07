@@ -1,20 +1,17 @@
 ---
 title: Crystal Shapes
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: CrystalShapes.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Crystal Shapes</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_CrystalShapes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalShapes.m">
+      --><title>Crystal Shapes</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_CrystalShapes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalShapes.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Crystal Shapes are used to visualize crystal orientations, twinning or lattice planes.</p><h2 id="2">Simple crystal shapes</h2><p>In the case of cubic or hexagonal materials the corresponding crystal are often represented as cubes or hexagons, where the faces correspond to the lattice planes {100} in the cubic case and {1,0,-1,0},{0,0,0,1} in the hexagonal case. Such simple crystal shapes may be created in MTEX with the commands</p>
 {% highlight matlab %}
 % import some hexagonal data
@@ -29,9 +26,6 @@ plot(cS)
 {% endhighlight %}
 
 {% highlight plaintext %}
- loading data ...
- saving data to /home/hielscher/mtex/master/data/titanium.mat
- 
 ebsd = EBSD  
  
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
@@ -44,8 +38,7 @@ ebsd = EBSD
 cS = crystalShape  
  mineral: Titanium (Alpha) (622, X||a, Y||b*, Z||c)
  vertices: 12
- faces: 8
-
+ faces: 8'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_01.png" %}
@@ -55,7 +48,6 @@ cS.V
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = vector3d  
  size: 12 x 1
           x         y         z
@@ -70,8 +62,7 @@ ans = vector3d
    0.196807  -0.34088 -0.308331
    0.196807   0.34088  0.308331
    0.393614         0 -0.308331
-   0.393614         0  0.308331
-
+   0.393614         0  0.308331'
 {% endhighlight %}
 <h2 id="4">Calculating with crystal shapes</h2><p>Crystal shapes are defined in crystal coordinates. Thus applying an orientation rotates them into specimen coordinates. This functionality can be used to visualize crystal orientations in EBSD maps</p>
 {% highlight matlab %}
@@ -86,9 +77,14 @@ scaling = 100; % scale the crystal shape to have a nice size
 plot(500,500,50, ebsd(500,500).orientations * cS * scaling)
 hold off
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Possibly applying an orientation to an object in
+specimen coordinates!'
+{% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_02.png" %}
-</center><p>As we have seen in the previous section we can apply several operations on crystal shapes. These include</p><div><ul><li><tt>factor * cS</tt> scales the crystal shape in size</li><li><tt>ori * cS</tt> rotates the crystal shape in the defined orientation</li><li><tt>[xy] + cS</tt> or <tt>[xyz] + cS</tt> shifts the crystal shape in the specified positions</li></ul></div><p>At this point it comes into help that MTEX supports lists of crystal shapes, i.e., whenever one of the operations listed above includes a list (e.g. a list of orientations) the multiplication will yield a list of crystal shapes. Lets illustrate this</p>
+</center><p>As we have seen in the previous section we can apply several operations on crystal shapes. These include</p><div><ul><li><code class="language-plaintext highlighter-rouge">factor * cS</code> scales the crystal shape in size</li><li><code class="language-plaintext highlighter-rouge">ori * cS</code> rotates the crystal shape in the defined orientation</li><li><code class="language-plaintext highlighter-rouge">[xy] + cS</code> or <code class="language-plaintext highlighter-rouge">[xyz] + cS</code> shifts the crystal shape in the specified positions</li></ul></div><p>At this point it comes into help that MTEX supports lists of crystal shapes, i.e., whenever one of the operations listed above includes a list (e.g. a list of orientations) the multiplication will yield a list of crystal shapes. Lets illustrate this</p>
 {% highlight matlab %}
 % compute some grains
 grains = calcGrains(ebsd);
@@ -109,6 +105,11 @@ hold on
 plot(grains(isBig).centroid + cSGrains)
 hold off
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Possibly applying an orientation to an object in
+specimen coordinates!'
+{% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_03.png" %}
 </center><h2 id="6">Plotting crystal shapes</h2><p>The above can be accomplished a bit more directly and a bit more nice with</p>
@@ -120,6 +121,11 @@ plot(grains,grains.meanOrientation)
 hold on
 plot(grains(isBig),0.7*cS,'FaceColor','none','linewidth',2)
 hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Possibly applying an orientation to an object in
+specimen coordinates!'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_04.png" %}
@@ -160,7 +166,6 @@ view(45,20)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori = misorientation  
   size: 1 x 1
   crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
@@ -170,7 +175,8 @@ mori = misorientation
   phi1  Phi phi2 Inv.
    330 34.9   30    0
  
-
+Warning: Possibly applying an orientation to an object in
+specimen coordinates!'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_07.png" %}
@@ -180,15 +186,12 @@ cs = loadCIF('quartz')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   mineral        : Quartz            
   symmetry       : 321               
   a, b, c        : 4.9, 4.9, 5.4     
-  reference frame: X||a*, Y||b, Z||c*
- 
-
+  reference frame: X||a*, Y||b, Z||c*'
 {% endhighlight %}
 <p>Its shape is mainly bounded by the following faces</p>
 {% highlight matlab %}
@@ -209,12 +212,10 @@ plot(cS)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cS = crystalShape  
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
  vertices: 8
- faces: 18
-
+ faces: 18'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_08.png" %}
@@ -265,7 +266,7 @@ end
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_13.png" %}
-</center><h2 id="19">Defining complicated crystals more simple</h2><p>We see that defining a complicated crystal shape is a tedious work. To this end MTEX allows to model the shape with a habitus and a extension parameter. This approach has been developed by J&#65533;rg Enderlein in <tt>Enderlein, J., 1997. A package for displaying crystal morphology. Mathematica Journal, 7(1).</tt> The two paraters are used to model the distance of a phase from the origin. Setting all parameters to one we obtain</p>
+</center><h2 id="19">Defining complicated crystals more simple</h2><p>We see that defining a complicated crystal shape is a tedious work. To this end MTEX allows to model the shape with a habitus and a extension parameter. This approach has been developed by J&#65533;rg Enderlein in <code class="language-plaintext highlighter-rouge">Enderlein, J., 1997. A package for displaying crystal morphology. Mathematica Journal, 7(1).</code> The two paraters are used to model the distance of a phase from the origin. Setting all parameters to one we obtain</p>
 {% highlight matlab %}
 % take the face normals unscaled
 N = [m,r,z,s2,x2];

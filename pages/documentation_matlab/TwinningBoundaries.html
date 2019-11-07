@@ -1,20 +1,17 @@
 ---
 title: Twinning Analysis
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
+      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 % load some example data
@@ -38,7 +35,6 @@ CS = grains.CS;
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -46,9 +42,7 @@ ebsd = EBSD
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_01.png" %}
@@ -58,13 +52,11 @@ gB = grains.boundary
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 gB = grainBoundary  
  
  Segments   mineral 1  mineral 2
       600  notIndexed  Magnesium
-     3164   Magnesium  Magnesium
-
+     3164   Magnesium  Magnesium'
 {% endhighlight %}
 <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
 {% highlight matlab %}
@@ -72,12 +64,10 @@ gB_MgMg = gB('Magnesium','Magnesium')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 gB_MgMg = grainBoundary  
  
  Segments  mineral 1  mineral 2
-     3164  Magnesium  Magnesium
-
+     3164  Magnesium  Magnesium'
 {% endhighlight %}
 <h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p>
 {% highlight matlab %}
@@ -115,7 +105,6 @@ round2Miller(mori_mean)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 mori_mean = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
@@ -127,9 +116,7 @@ mori_mean = misorientation
   150.217 86.1004 210.319       0
  
  
-(01-1-2) || (0-11-2)   [2-1-10] || [2-1-10]   error: 0.47&deg;
- 
-
+(01-1-2) || (0-11-2)   [2-1-10] || [2-1-10]   error: 0.47&deg;'
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
@@ -138,7 +125,6 @@ twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 twinning = misorientation  
   size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
@@ -146,9 +132,7 @@ twinning = misorientation
  
   Bunge Euler angles in degree
   phi1     Phi    phi2    Inv.
-   150 86.3471     210       0
- 
-
+   150 86.3471     210       0'
 {% endhighlight %}
 <p>and observe that it is actually a rotation about axis (-1210) and angle 86.3 degree</p>
 {% highlight matlab %}
@@ -160,7 +144,6 @@ twinning.angle / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = Miller  
  size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
@@ -169,8 +152,7 @@ ans = Miller
   i -1
   l  0
 ans =
-   86.3471
-
+   86.3471'
 {% endhighlight %}
 <p>Next, we check for each boundary segment whether it is a twinning boundary, i.e., whether boundary misorientation is close to the twinning.</p>
 {% highlight matlab %}
@@ -188,12 +170,10 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 twinBoundary = grainBoundary  
  
  Segments  mineral 1  mineral 2
-     1649  Magnesium  Magnesium
-
+     1649  Magnesium  Magnesium'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_05.png" %}

@@ -1,6 +1,6 @@
 ---
 title: EBSD Tutorial
-last_updated: 31-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSDTutorial.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>EBSD Tutorial</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-31"><meta name="DC.source" content="script_EBSDTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/EBSDTutorial.m">
+      --><title>EBSD Tutorial</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSDTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/EBSDTutorial.m">
     edit page</a></font><div><!--introduction--><p>A quick guide about how to work with EBSD data in MTEX.</p><!--/introduction--><h2 id="1">Data import</h2><p>MTEX allows to import EBSD from all big vendors of EBSD systems. Prefered data formats are text based data files like <code class="language-plaintext highlighter-rouge">.ang</code>, <code class="language-plaintext highlighter-rouge">.ctf</code> or open binary formats like <code class="language-plaintext highlighter-rouge">.osc</code> or <code class="language-plaintext highlighter-rouge">.h5</code>. Most comfortably, EBSD data may be imported using the import wizard, by typing</p>
 {% highlight matlab %}
 import_wizard
@@ -25,11 +25,6 @@ ebsd = EBSD.load(fileName)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: .ctf files have usualy inconsistent conventions for spatial
-coordinates and Euler angles. You may want to use one of the options
-'convertSpatial2EulerReferenceFrame' or
-'convertEuler2SpatialReferenceFrame' to correct for this 
- 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -39,9 +34,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>As a result the ebsd data are stored in a single variable, here called <code class="language-plaintext highlighter-rouge">ebsd</code>. This variable contains all relevant information, i.e., the spatial coordinates, the orientation information, a description of the crystal symmetries and all other parameters contained in the data file.</p><h2 id="4">Phase Plots</h2><p>In the present case the output shows that the data sets is a composition of three different phases Forsterite, Enstatite, and Diopside. The spatial distribution of the different phases can be visualized by the plotting command</p>
 {% highlight matlab %}
@@ -56,16 +49,13 @@ ebsd('Forsterite')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = EBSD  
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1  152345 (100%)  Forsterite  LightSkyBlue       mmm                         
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
-
+ Scan unit : um'
 {% endhighlight %}
 <p>Now we may extract all Forsterite orientations by</p>
 {% highlight matlab %}
@@ -73,13 +63,10 @@ ebsd('Forsterite').orientations
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = orientation  
   size: 152345 x 1
   crystal symmetry : Forsterite (mmm)
-  specimen symmetry: 1
- 
-
+  specimen symmetry: 1'
 {% endhighlight %}
 <p>and may use them to plot an ipf map of all Forsterite orientations</p>
 {% highlight matlab %}
@@ -102,7 +89,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
@@ -126,9 +112,7 @@ grains = grain2d
  boundary segments: 43912
  triple points: 3417
  
- Properties: GOS, meanRotation
- 
-
+ Properties: GOS, meanRotation'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDTutorial_04.png" %}
@@ -148,14 +132,10 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cS = crystalShape  
  mineral: Forsterite (mmm)
  vertices: 36
- faces: 20
-Warning: Possibly applying an orientation to an object in specimen
-coordinates! 
-
+ faces: 20'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDTutorial_05.png" %}
@@ -169,7 +149,6 @@ plotPDF(ebsd('Forsterite').orientations,h,'figSize','medium')
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 h = Miller  
  size: 1 x 3
  mineral: Forsterite (mmm)
@@ -178,8 +157,7 @@ h = Miller
   l 0 0 1
   I'm plotting 1250 random orientations out of 152345 given orientations
   You can specify the the number points by the option "points".
-  The option "all" ensures that all data are plotted
-
+  The option "all" ensures that all data are plotted'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDTutorial_06.png" %}
@@ -193,8 +171,7 @@ plotIPDF(ebsd('Forsterite').orientations,r)
 {% endhighlight %}
 
 {% highlight plaintext %}
-  I'm plotting 12500 random orientations out of 152345 given orientations
-
+I'm plotting 12500 random orientations out of 152345 given orientations'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDTutorial_07.png" %}

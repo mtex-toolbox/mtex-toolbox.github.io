@@ -1,35 +1,29 @@
 ---
 title: The Crystal Reference System
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: CrystalReferenceSystem.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Crystal Reference System</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_CrystalReferenceSystem.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalReferenceSystem.m">
+      --><title>The Crystal Reference System</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_CrystalReferenceSystem.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalReferenceSystem.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Commonly the crystal coordinate system is defined by the crystallographic axes a, b, c. The length [a,b,c] and the angles [alpha,beta,gamma] between theses axes needs to be specified when defining a variable of type <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('triclinic',[1,2.2,3.1],[80*degree,85*degree,95*degree])
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   symmetry          : -1           
   a, b, c           : 1, 2.2, 3.1  
   alpha, beta, gamma: 80&deg;, 85&deg;, 95&deg;
-  reference frame   : X||a*, Z||c  
- 
-
+  reference frame   : X||a*, Z||c'
 {% endhighlight %}
 <h2 id="2">Need of a Euclidean reference system</h2><p>However, there are may crystal properties, like orientation or tensorial properties, that are most commonly described with respect to an Euclidean reference system as oposed to the crystallographic axes a, b, c. Most importantly, Euler angles as a decription of an orientations is described as subsequent rotations about the z, x and z axis. Hence, we need to inscribe an Eucledian reference system x, y, z into crystallogaphic reference system a, b, c.</p><h2 id="3">Cubic, tetragona and orthorhombic symmetries</h2><p>In orthorhombic, tetragonal and cubic crystal symmetry the crystal reference system a, b, c is itsself an Euclidean one and, hence, setting x parallel to a, y parallel to b and z parallel to c is a canonical choice.</p><p>As for such symmetries this is also the default in MTEX there is no need to specify the alignment seperately.</p><h2 id="4">Trigonal and hexagonal materials</h2><p>For trigonal and hexagonal materials the z axis is commonly aligned with the c axis. As for the x and y axes they are either aligned with the a or b axes.</p><p>The following command alignes the x axes to the a axes and the z axes to the c axes.</p>
 {% highlight matlab %}
@@ -85,12 +79,10 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cS_x2a = crystalShape  
  symmetry: 321, X||a, Y||b*, Z||c*
  vertices: 56
- faces: 30
-
+ faces: 30'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalReferenceSystem_04.png" %}
@@ -106,12 +98,10 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cS_y2a = crystalShape  
  symmetry: 321, X||b*, Y||a, Z||c*
  vertices: 56
- faces: 30
-
+ faces: 30'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalReferenceSystem_05.png" %}
@@ -122,7 +112,6 @@ ori_y2a = orientation.byEuler(0,0,0,cs_y2a)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ori_x2a = orientation  
   size: 1 x 1
   crystal symmetry : 321, X||a, Y||b*, Z||c*
@@ -140,9 +129,7 @@ ori_y2a = orientation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-     0    0    0    0
- 
-
+     0    0    0    0'
 {% endhighlight %}
 <p>and visualize them in a pole figure.</p>
 {% highlight matlab %}
@@ -156,31 +143,26 @@ drawNow(gcm,'figSize','medium')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalReferenceSystem_06.png" %}
-</center><center>
-{% include inline_image.html file="CrystalReferenceSystem_07.png" %}
 </center><p>We observe that both pole figures are rotated with respect to each other by 30 degree. Indeed computing the misorientation angle between both orientations gives us</p>
 {% highlight matlab %}
 angle(ori_x2a, ori_y2a) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
-  The involved symmetries have different reference systems
+The involved symmetries have different reference systems
   1: 321, X||b*, Y||a, Z||c*
   2: 321, X||a, Y||b*, Z||c*
   I'm going to transform the data from the first one to the second one
  
 ans =
-   30.0000
-
+   30.0000'
 {% endhighlight %}
-<p>In many cases MTEX automatically recognizes different setups and corrects for this. In order to manually transform orientations or tensors from one reference frame into another reference frame one might use the command <a href="orientation.transformReferenceFrame.html">transformReferenceFrame</a>. The following command transfroms the reference frame of orientation <tt>ori_y2a</tt> into the reference frame <tt>cs_x2a</tt></p>
+<p>In many cases MTEX automatically recognizes different setups and corrects for this. In order to manually transform orientations or tensors from one reference frame into another reference frame one might use the command <a href="orientation.transformReferenceFrame.html">transformReferenceFrame</a>. The following command transfroms the reference frame of orientation <code class="language-plaintext highlighter-rouge">ori_y2a</code> into the reference frame <code class="language-plaintext highlighter-rouge">cs_x2a</code></p>
 {% highlight matlab %}
 ori_x2a.transformReferenceFrame(cs_y2a)
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 ans = orientation  
   size: 1 x 1
   crystal symmetry : 321, X||b*, Y||a, Z||c*
@@ -188,9 +170,7 @@ ans = orientation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-   270    0    0    0
- 
-
+   270    0    0    0'
 {% endhighlight %}
 <h2 id="13">Triclinic and monoclinic symmetries</h2><p>In triclinic and monoclinic symmetries even more different setups are used. As two perpedicular crystal axes are required to align with x, y or z one ussually chooses one crystal axis from the direct coordinate system, i.e., a, b or c, and the second crystal axis from the reciprocal axes a*, b* or c*. Typical examples for such setups are</p>
 {% highlight matlab %}
@@ -199,16 +179,13 @@ cs = crystalSymmetry('-1', [8.290 12.966 7.151], [91.18 116.31 90.14]*degree,...
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   mineral           : An0 Albite 2016        
   symmetry          : -1                     
   a, b, c           : 8.3, 13, 7.2           
   alpha, beta, gamma: 91.18&deg;, 116.31&deg;, 90.14&deg;
-  reference frame   : X||a*, Y||b            
- 
-
+  reference frame   : X||a*, Y||b'
 {% endhighlight %}
 <p>or</p>
 {% highlight matlab %}
@@ -217,15 +194,12 @@ cs = crystalSymmetry('-1', [8.290 12.966 7.151], [91.18 116.31 90.14]*degree,...
 {% endhighlight %}
 
 {% highlight plaintext %}
- 
 cs = crystalSymmetry  
  
   mineral           : An0 Albite 2016        
   symmetry          : -1                     
   a, b, c           : 8.3, 13, 7.2           
   alpha, beta, gamma: 91.18&deg;, 116.31&deg;, 90.14&deg;
-  reference frame   : X||a, Z||c*            
- 
-
+  reference frame   : X||a, Z||c*'
 {% endhighlight %}
 </div></body></html>
