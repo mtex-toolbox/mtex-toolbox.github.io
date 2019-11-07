@@ -11,7 +11,7 @@ Use the XSLT command to perform the conversion.
   xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd"
   xmlns:f="http://fxsl.sf.net/"
   exclude-result-prefixes="f mwsh">
-  <!--<xsl:import href="fxsl-xslt2/f/trim.xsl"/>-->
+  <xsl:import href="../../fxsl-xslt2/f/trim.xsl"/>
 
   <xsl:output method="html" indent="no"/>
   <xsl:strip-space elements="mwsh:code"/>
@@ -218,7 +218,9 @@ To make changes, update the MATLAB code and republish this document.
 <!-- Code output -->
 <xsl:template match="mcodeoutput">
 {% highlight plaintext %}
-<xsl:value-of select="." disable-output-escaping="yes"/>
+<xsl:call-template name="trim">
+  <xsl:with-param name="pStr" select="."/>
+</xsl:call-template>'
 {% endhighlight %}
 </xsl:template>
 <!--<xsl:value-of select="." disable-output-escaping="yes"/>-->
@@ -226,7 +228,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--<xsl:value-of select="replace(replace($arg,'\s+$',''),'^\s+','')"
     disable-output-escaping="yes"/>-->
 <!--<xsl:value-of select="f:trim(.)" disable-output-escaping="yes"/>-->
-
+<!--<xsl:value-of select="." disable-output-escaping="yes"/>-->
 <!-- Figure and model snapshots and equations -->
 <xsl:template match="img[@class='equation']">
   {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
