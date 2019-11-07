@@ -24,7 +24,7 @@ In case you experience any problems have a look at our [trouble shooting page]()
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2/mtex-5.2.zip) ||| October 2019 ||| plasticity tensors, [changelog](changelog.html) ||| 264
+[**mtex-5.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.1/mtex-5.2.1.zip) ||| November 2019 ||| plasticity tensors, [changelog](changelog.html) ||| 498
 [**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](changelog.html) ||| 6845
 [**MTEXGUI-2.4.zip**](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/327848702_MTEX_GUI_for_EBSD_and_Pole_Figure_Plotting_Rev_24/data/5ba97639299bf13e604a3c43/Annotate2p4.zip) ||| Sep 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
 [**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions, [changelog](changelog.html) ||| 1901
@@ -42,7 +42,7 @@ A full list of previous releases and downloads can be found [here](http://code.g
 
 Since MTEX is a MATLAB toolbox, <a href="http://www.mathworks.com">MATLAB</a> has to be installed in order to use MTEX. It works fine with the student version and does not require any additional toolboxes, addons or packages. There are some very few exceptions like GND and Taylor computation that currently require the optimization toolbox to be installed. Check the table below to see whether MTEX will run with your Matlab version.
 
-| Matlab | 2018 | 2017 | 2016 | 2015 | 2014 | 2013 | 2012 | 2011 | 2010 | 
+| Matlab | 2018 | 2017 | 2016 | 2015 | 2014 | 2013 | 2012 | 2011 | 2010 |
 |--------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
 |MTEX 5.1| <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) |
 |MTEX 5.0| <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) |
