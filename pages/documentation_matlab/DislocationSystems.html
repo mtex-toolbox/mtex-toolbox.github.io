@@ -1,20 +1,17 @@
 ---
 title: Dislocations
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: DislocationSystems.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_DislocationSystems.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/DislocationSystems.m">
+      --><title>Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_DislocationSystems.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/DislocationSystems.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Dislocation are microscopic displacements within the regular atom lattice of a crystaline material ussualy as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p><h2 id="2">Edge Dislocations</h2><p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p>
 {% highlight matlab %}
 % define a crystal symmetry
@@ -129,6 +126,7 @@ sS = slipSystem
   -1   -1    0    1   -1    1    1
    0   -1   -1    1   -1    1    1
    1    0   -1    1   -1    1    1
+Warning: Miller indices are converted to hkl 
  
 dS = dislocationSystem  
  symmetry: 432
@@ -176,6 +174,7 @@ dS = dislocationSystem.bcc(cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Miller indices are converted to hkl 
  
 dS = dislocationSystem  
  symmetry: 432
@@ -267,19 +266,9 @@ ans =
     0.8660    0.8660    0.8660
 
 {% endhighlight %}
-<h2 id="8">The Energy of Dislocations</h2><p>The energy of each dislocation system can be stored in the property <tt>u</tt>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p><p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p><p>
-  {% include inline_image.html file="DislocationSystems_eq10151767036785061618.png" %}
-</p><p>
-  {% include inline_image.html file="DislocationSystems_eq06307640569981345809.png" %}
-</p><p>where</p><div><ul><li><tt>G</tt> is</li><li><tt>b</tt> is the length of the Burgers vector</li><li><tt>nu</tt> is the Poisson ratio</li><li><tt>R</tt></li><li><tt>r</tt></li></ul></div><p>In this example we assume</p>
+<h2 id="8">The Energy of Dislocations</h2><p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p><p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p><p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p><p>\[ U_{\mathrm{edge}} = (1-\nu) U_{\mathrm{screw}} \]</p><p>where</p><div><ul><li><code class="language-plaintext highlighter-rouge">G</code> is</li><li><code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li><li><code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li><li><code class="language-plaintext highlighter-rouge">R</code></li><li><code class="language-plaintext highlighter-rouge">r</code></li></ul></div><p>In this example we assume</p><p>R = r_0 = U = norm(dS.b).^2</p>
 {% highlight matlab %}
-%
-%R =
-%r_0 =
-%U = norm(dS.b).^2
-
 nu = 0.3;
-
 
 % energy of the edge dislocations
 dS(dS.isEdge).u = 1;

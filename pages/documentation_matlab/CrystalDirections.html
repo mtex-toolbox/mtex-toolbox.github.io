@@ -1,26 +1,23 @@
 ---
 title: Miller Indices
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: CrystalDirections.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalDirections.m">
-    edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="1">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></p>
+      --><title>Miller Indices</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_CrystalDirections.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalDirections.m">
+    edit page</a></font><div><!--introduction--><p>Miller indices are used to describe directions with respect to the crystal reference system.</p><!--/introduction--><h2 id="1">Crystal Lattice Directions</h2><p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('triclinic',[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,...
   'X||a*','Z||c','mineral','Talc');
 {% endhighlight %}
-<p>The variable <tt>cs</tt> containes the geometry of the crystal reference frame and, in particular, the alignment of the crystallographic a,b, and, c axis.</p>
+<p>The variable <code class="language-plaintext highlighter-rouge">cs</code> containes the geometry of the crystal reference frame and, in particular, the alignment of the crystallographic a,b, and, c axis.</p>
 {% highlight matlab %}
 a = cs.aAxis
 b = cs.bAxis
@@ -51,7 +48,7 @@ c = Miller
   w 1
 
 {% endhighlight %}
-<p>A lattice direction <tt>m = u * a + v * b + w * c</tt> is a vector with coordinates u, v, w with respect to these crystallographic axes. Such a direction is commonly denoted by [uvw] with coordinates u, v, w called Miller indices. In MTEX a lattice direction is represented by a variable of type <a href="Miller.Miller.html">Miller</a> which is defined by</p>
+<p>A lattice direction \(\vec m = u \cdot \vec a + v \cdot \vec b + w \cdot \vec c\) is a vector with coordinates \(u\), \(v\), \(w\) with respect to these crystallographic axes. Such a direction is commonly denoted by \([uvw]\) with coordinates \(u\), \(v\), \(w\) called Miller indices. In MTEX a lattice direction is represented by a variable of type <a href="Miller.Miller.html">Miller</a> which is defined by</p>
 {% highlight matlab %}
 m = Miller(1,0,1,cs,'uvw')
 {% endhighlight %}
@@ -66,13 +63,13 @@ m = Miller
   w 1
 
 {% endhighlight %}
-<p>for values <tt>u = 1</tt>, <tt>v = 0</tt>, and, <tt>w = 1</tt>. To plot a crystal direction as a <a href="SphericalProjections.html">spherical projections</a> do</p>
+<p>for values \(u = 1\), \(v = 0\), and, \(w = 1\). To plot a crystal direction as a <a href="SphericalProjections.html">spherical projections</a> do</p>
 {% highlight matlab %}
 plot(m,'upper','labeled','grid')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalDirections_01.png" %}
-</center><h2 id="5">Crystal Lattice Planes</h2><p>A crystal lattice plane (hkl) is commonly described by its normal vector <tt>n = h * a* + k * b* + l * c*</tt> where a*, b*, c* describes the reciprocal crystal coordinate system. In MTEX a lattice plane is defined by</p>
+</center><h2 id="5">Crystal Lattice Planes</h2><p>A crystal lattice plane \((hkl)\) is commonly described by its normal vector \(\vec n = h \cdot \vec a^* + k \cdot \vec b^* + \ell \times \vec c^*\) where \(\vec a^*\), \(\vec b^*\) and \(\vec c^*\) describe the reciprocal crystal coordinate system. In MTEX a lattice plane is defined by</p>
 {% highlight matlab %}
 m = Miller(1,0,1,cs,'hkl')
 {% endhighlight %}
@@ -87,7 +84,7 @@ m = Miller
   l 1
 
 {% endhighlight %}
-<p>By default lattice planes are plotted as normal directions. Using the option <tt>plane</tt> we may alternatively plot the trace of the lattice plane with the sphere.</p>
+<p>By default lattice planes are plotted as normal directions. Using the option <code class="language-plaintext highlighter-rouge">'plane'</code> we may alternatively plot the trace of the lattice plane with the sphere.</p>
 {% highlight matlab %}
 hold on
 % the normal direction
@@ -103,11 +100,7 @@ hold off
 {% highlight matlab %}
 %s
 {% endhighlight %}
-<h2 id="8">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices [UVTW] and (HKIL) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is redundant as the first three Miller indeces always sum up to zero, i.e., 
-  {% include inline_image.html file="CrystalDirections_eq08789495435140204831.png" %}
- and 
-  {% include inline_image.html file="CrystalDirections_eq05019324578161084208.png" %}
-. The syntax is</p>
+<h2 id="8">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices \([UVTW]\) and \((HKIL)\) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is redundant as the first three Miller indeces always sum up to zero, i.e., \(U + V + T = 0\) and \(H + K + I = 0\). The syntax is</p>
 {% highlight matlab %}
 % import trigonal Quartz lattice structure
 cs = loadCIF('quartz')

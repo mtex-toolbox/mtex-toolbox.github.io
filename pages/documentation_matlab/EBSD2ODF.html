@@ -1,21 +1,18 @@
 ---
 title: script_EBSD2ODF
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSD2ODF.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_EBSD2ODF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSD2ODF.m">
-    edit page</a></font><div><h2 id="1">ODF Estimation from EBSD data</h2><p>In order to discuss ODF estimation from EBSD data we start by loading a sample MTEX data set.s</p>
+      --><title>script_EBSD2ODF</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSD2ODF.m">
+    edit page</a></font><div><h2 id="1">ODF Estimation from EBSD data</h2><p>In order to discuss ODF estimation from EBSD data we start by loading a sample MTEX data set.</p>
 {% highlight matlab %}
 mtexdata forsterite
 {% endhighlight %}
@@ -52,26 +49,17 @@ odf = ODF
  
 
 {% endhighlight %}
-<p>The function <a href="orientation.calcODF.html">calcODF</a> implements the ODF estimation from EBSD data in MTEX. The underlying statistical method is called kernel density estimation, which can be seen as a generalized histogram. To be more precise, let's 
-  {% include inline_image.html file="EBSD2ODF_eq15027334617265588240.png" %}
- be a radially symmetric, unimodal model ODF. Then the kernel density estimator for the individual orientation data 
-  {% include inline_image.html file="EBSD2ODF_eq04809259543156815891.png" %}
- is defined as</p><p>
-  {% include inline_image.html file="EBSD2ODF_eq08260128012335872965.png" %}
-</p><p>The choice of the model ODF 
-  {% include inline_image.html file="EBSD2ODF_eq01982406464486259838.png" %}
- and in particular its halfwidth has a great impact in the resulting ODF. If no halfwidth is specified the default halfwidth of 10 degrees is selected.</p><h2 id="4">Automatic halfwidth selection</h2><p>MTEX includes an automatic halfwidth selection algorithm which is called by the command <a href="orientation.calcKernel.html">calcKernel</a>. To work properly, this algorithm needs spatially independent EBSD data as in the case of this dataset of very rough EBSD measurements (only one measurement per grain).</p>
+<p>The function <a href="orientation.calcODF.html">calcODF</a> implements the ODF estimation from EBSD data in MTEX. The underlying statistical method is called kernel density estimation, which can be seen as a generalized histogram. To be more precise, let's \(\psi : SO(3) \to R\) be a radially symmetric, unimodal model ODF. Then the kernel density estimator for the individual orientation data \(o_1,o_2,\ldots,o_M\) is defined as</p><p>\[f(o) = \frac{1}{M} \sum_{i=1}^{M} \psi(o o_i^{-1})\]</p><p>The choice of the model ODF \(\psi\) and in particular its halfwidth has a great impact in the resulting ODF. If no halfwidth is specified the default halfwidth of 10 degrees is selected.</p><h2 id="4">Automatic halfwidth selection</h2><p>MTEX includes an automatic halfwidth selection algorithm which is called by the command <a href="orientation.calcKernel.html">calcKernel</a>. To work properly, this algorithm needs spatially independent EBSD data as in the case of this dataset of very rough EBSD measurements (only one measurement per grain).</p>
 {% highlight matlab %}
 % try to compute an optimal kernel
 psi = calcKernel(ebsd('fo').orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
- estimate optimal kernel halfwidth: 100%
  
 psi = deLaValleePoussinKernel  
   bandwidth: 98
-  halfwidth: 2.3&deg;
+  halfwidth: 2.3°
  
 
 {% endhighlight %}
@@ -91,11 +79,10 @@ odf = calcODF(ebsd('fo').orientations,'kernel',psi)
 {% endhighlight %}
 
 {% highlight plaintext %}
- estimate optimal kernel halfwidth: 100%
  
 psi = deLaValleePoussinKernel  
   bandwidth: 41
-  halfwidth: 6&deg;
+  halfwidth: 6°
  
  
 odf = ODF  

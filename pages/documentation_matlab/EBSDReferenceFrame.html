@@ -1,27 +1,18 @@
 ---
 title: Reference Frame Alignment
-last_updated: 28-Oct-2019
+last_updated: 07-Nov-2019
 sidebar: documentation_sidebar
 permalink: EBSDReferenceFrame.html
 folder: documentation
 toc: false
 ---
-
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head>
+    <html><head>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Reference Frame Alignment</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-28"><meta name="DC.source" content="script_EBSDReferenceFrame.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDReferenceFrame.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how you can put your data into MTEX while keeping track with the correct reference system. Many peoply are concerned when the images produced by MTEX are not aligned exactly as they are in their commercial software. It is very important indeed  to understand exactly the alignment of you data. However, the important point is not whether a map upside down on you screen or not. The important point is how your map alignes with the specimen, as we want to use the map to describe properties of the specimen.</p><p>There are basicaly two components in an EBSD data set that refers to the specimen reference frame: the spatial coordinates x,y and the Euler angles 
-  {% include inline_image.html file="EBSDReferenceFrame_eq06418280246876342884.png" %}
-, 
-  {% include inline_image.html file="EBSDReferenceFrame_eq01908532921846404702.png" %}
-, 
-  {% include inline_image.html file="EBSDReferenceFrame_eq17001684417795047500.png" %}
-. The spatial coordinates are important when plotting an EBSD map, e.g. by</p>
+      --><title>Reference Frame Alignment</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EBSDReferenceFrame.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDReferenceFrame.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how you can put your data into MTEX while keeping track with the correct reference system. Many peoply are concerned when the images produced by MTEX are not aligned exactly as they are in their commercial software. It is very important indeed  to understand exactly the alignment of you data. However, the important point is not whether a map upside down on you screen or not. The important point is how your map alignes with the specimen, as we want to use the map to describe properties of the specimen.</p><p>There are basicaly two components in an EBSD data set that refers to the specimen reference frame: the spatial coordinates x,y and the Euler angles \(\phi_1\), \(\Phi\), \(\phi_2\). The spatial coordinates are important when plotting an EBSD map, e.g. by</p>
 {% highlight matlab %}
 mtexdata forsterite;
 
@@ -46,7 +37,7 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_01.png" %}
-</center><p>In MTEX you can freely adjust the orientation of the map on the screen by adjusting the alignment of the x and y axis, e.g., the following lines will show the map upside down</p>
+</center><p>In MTEX you can freely adjust the orientation of the map on the screen by adjusting the alignment of the \(x\) and \(y\) axis, e.g., the following lines will show the map upside down</p>
 {% highlight matlab %}
 plotx2east; plotzIntoPlane
 plot(ebsd,'coordinates','on')
@@ -91,15 +82,13 @@ ebsd_rot = rotate(ebsd,rot);
 % plot the rotated EBSD data
 plot(ebsd_rot)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDReferenceFrame_07.png" %}
-</center><p>It should be stressed that this rotation on does not only effect the spatial data, i.e. the x, y values, but also the Euler angles are rotated accordingly.</p>
+<p>It should be stressed that this rotation on does not only effect the spatial data, i.e. the x, y values, but also the Euler angles are rotated accordingly.</p>
 {% highlight matlab %}
 plotPDF(ebsd_rot('fo').orientations,Miller(1,2,3,CS),'contourf')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_08.png" %}
-</center><h2 id="11">See also</h2><p>EBSD/rotate EBSD/shift EBSD/affinetrans</p><h2 id="12">Correcting for different reference frames in spatial data and Euler angles</h2><p>Sometimes the imported spatial data and the imported Euler angles do not coresspond to the same reference frame. Since MTEX always assumes these reference frames to be the same it might be neccessary to correct for this misalignment. This can be done by rotating the spatial data or the Euler angles seperately using the options <tt>keepXY</tt> or <tt>keepEuler</tt>. E.g. the following command only effect the spatial coordinates but not the Euler angles</p>
+{% include inline_image.html file="EBSDReferenceFrame_07.png" %}
+</center><h2 id="11">See also</h2><p>EBSD/rotate EBSD/shift EBSD/affinetrans</p><h2 id="12">Correcting for different reference frames in spatial data and Euler angles</h2><p>Sometimes the imported spatial data and the imported Euler angles do not coresspond to the same reference frame. Since MTEX always assumes these reference frames to be the same it might be neccessary to correct for this misalignment. This can be done by rotating the spatial data or the Euler angles seperately using the options <code class="language-plaintext highlighter-rouge">'keepXY'</code> or <code class="language-plaintext highlighter-rouge">'keepEuler'</code>. E.g. the following command only effect the spatial coordinates but not the Euler angles</p>
 {% highlight matlab %}
 % rotate the EBSD data
 ebsd_rot = rotate(ebsd,rot,'keepEuler');
@@ -108,14 +97,14 @@ ebsd_rot = rotate(ebsd,rot,'keepEuler');
 plot(ebsd_rot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_09.png" %}
+{% include inline_image.html file="EBSDReferenceFrame_08.png" %}
 </center><p>The pole figure remains unchanged:</p>
 {% highlight matlab %}
 plotPDF(ebsd_rot('forsterite').orientations,Miller(1,2,3,CS),'contourf')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_10.png" %}
-</center><h2 id="14">Correcting HKL and CTF files</h2><p>Both *.ctf and *.ang data files are known to use different reference frames for spatial data and Euler angles. To corrrect for misalignment the interface supports the options <tt>convertSpatial2EulerReferenceFrame</tt> and <tt>convertEuler2SpatialReferenceFrame</tt>, e.g.,</p>
+{% include inline_image.html file="EBSDReferenceFrame_09.png" %}
+</center><h2 id="14">Correcting HKL and CTF files</h2><p>Both *.ctf and *.ang data files are known to use different reference frames for spatial data and Euler angles. To corrrect for misalignment the interface supports the options <code class="language-plaintext highlighter-rouge">convertSpatial2EulerReferenceFrame</code> and <code class="language-plaintext highlighter-rouge">'convertEuler2SpatialReferenceFrame'</code>, e.g.,</p>
 {% highlight matlab %}
 EBSD.load('fname.ang','convertSpatial2EulerReferenceFrame')
 EBSD.load('fname.ang','convertEuler2SpatialReferenceFrame')
