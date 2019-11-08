@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-08"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Density estimation is a concept to estimate a probability density function \(f_N\) from given random samples \(x_n\), \(n=1,\ldots,N\). In the simplest case the random samples \(x_n\) are real numbers and come from a unknown distribution function \(f\) and the goal is that \(f_N\) approximates \(f\) as best as possible.</p><p>Lets illustrate this setting at a the example of a mixed Gaussian distribution</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Density estimation is a concept to estimate a probability density function \(f_N\) from given random samples \(x_n\), \(n=1,\ldots,N\). In the simplest case the random samples \(x_n\) are real numbers and come from an unknown distribution function \(f\). The goal is than that \(f_N\) approximates \(f\) as best as possible.</p><p>Lets illustrate this setting at a the example of a mixed Gaussian distribution</p>
 {% highlight matlab %}
 % the true density function
 f = @(x) Gaussian(0.2,0.05,x) + Gaussian(0.5,0.2,x);
@@ -32,7 +32,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_01.png" %}
-</center><h2 id="2">The Histogramm</h2><p>The easiest way to estimate a density function from the samples \(x_n\) is compute a histgram</p>
+</center><h2 id="2">The Histogramm</h2><p>The easiest way to estimate a density function from the samples \(x_n\) is a histogram</p>
 {% highlight matlab %}
 histogram(xN,10)
 hold on
@@ -42,14 +42,17 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_02.png" %}
-</center><p>However, since the histogram allways leads to a picewice constant function the fit to the true density function \(f\) is usually not so good. A better alternative is kernel density estimation.</p><h2 id="4">Kernel Density Estimation</h2><p>The idea of kernel density estimation is to fix some kernel function \(\psi\), e.g. a Gaussian,</p>
+</center><p>However, since the histogram allways leads to a picewice constant function the fit to the true density function \(f\) is usually not so good. A better alternative is kernel density estimation.</p><h2 id="4">Kernel Density Estimation</h2><p>The idea of kernel density estimation is to fix some kernel function \(\psi\), e.g. a Gaussian with mean \(0\) and stadard deviation \(0.05\),</p>
 {% highlight matlab %}
 psi = Gaussian(0,0.05);
 {% endhighlight %}
 <p>shift its center to the position of each sample points \(x_n\)</p>
 {% highlight matlab %}
+% plot the random sample
 plot(xN,zeros(size(xN)),'o','LineWidth',2,'MarkerEdgeColor','r')
 hold on
+
+% for each random sample plot a centered Gaussian
 for n = 1:N, plot(x,psi(x-xN(n)),'k'); end
 hold off
 {% endhighlight %}
@@ -57,10 +60,14 @@ hold off
 {% include inline_image.html file="DensityEstimation_03.png" %}
 </center><p>and take the mean</p><p>\[ f(x) = \frac{1}{N} \sum_{n=1}^N \psi(x-x_n) \]</p><p>of all the these shifted kernel functions</p>
 {% highlight matlab %}
+% take the mean over all shifted kernel functions
 fN = @(x) mean(psi(x-xN),1);
 
 hold on
+% plot the resulting function
 plot(x,fN(x),'linewidth',2)
+
+% plot the "true" density function
 plot(x,f(x),'linewidth',2)
 hold off
 {% endhighlight %}
@@ -112,7 +119,7 @@ scatter(xN,yN)
 </center><p>Similarly to the one dimensional example we need to specify the range of the \(x\) and \(y\) coordinates for the estimated density function. The format is <code class="language-plaintext highlighter-rouge">[xMin yMin; xMax yMax]</code>.</p>
 {% highlight matlab %}
 % compte the two dimensional density function
-fN = calcDensity([xN,yN],'range',[0 0;1 1])
+fN = calcDensity([xN,yN],'range',[0 0;1 1]);
 
 % plot the two dimensional density function
 [x,y] = ndgrid(linspace(0,1));
@@ -123,16 +130,6 @@ shading interp
 hold on
 scatter(xN,yN,'.','k')
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-fN = 
-  griddedInterpolant with properties:
-
-            GridVectors: {[1&times;1000 double]  [1&times;1000 double]}
-                 Values: [1000&times;1000 double]
-                 Method: 'spline'
-    ExtrapolationMethod: 'spline''
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_08.png" %}
