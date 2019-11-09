@@ -9,7 +9,7 @@ toc: false
 MTEX is a free Matlab toolbox for analyzing and modeling crystallographic textures by means of EBSD or pole figure data.
 
 ### News
-* MTEX 5.2.2 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.2/mtex-5.2.2.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
+* MTEX 5.2.3 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.3/mtex-5.2.3.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
 * new homepage with much extended documentation: [old homepage](https://mtex-toolbox.github.io/HomepageOld)
 * New paper: [Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
 * New paper: [Denoising of Crystal Orientation Maps](https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf)
