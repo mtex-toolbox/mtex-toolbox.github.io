@@ -1,6 +1,6 @@
 ---
 title: Plotting Spherical Functions
-last_updated: 07-Nov-2019
+last_updated: 13-Nov-2019
 sidebar: documentation_sidebar
 permalink: S2FunPlotting.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting Spherical Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_S2FunPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunPlotting.m">
+      --><title>Plotting Spherical Functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-13"><meta name="DC.source" content="script_S2FunPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunPlotting.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this chapter various ways of plotting spherical functions are explained. We start by defining some example functions.</p>
 {% highlight matlab %}
 % the smiley
@@ -19,18 +19,7 @@ sF1 = S2Fun.smiley;
 
 % some osilatory function
 f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
-sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150)
-
-% some other crazy function
-sF3 = S2FunHarmonic.quadrature(@(v) 0.5+abs(sin(7/2*v.rho)))
-{% endhighlight %}
-
-{% highlight plaintext %}
-sF2 = S2FunHarmonic  
- bandwidth: 150
- 
-sF3 = S2FunHarmonic  
- bandwidth: 128'
+sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150);
 {% endhighlight %}
 <h2 id="2">Smooth Plot</h2><p>The default <a href="S2Fun.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command generates a colored plot without contours</p>
 {% highlight matlab %}
@@ -52,7 +41,7 @@ contourf(sF1, 'LineWidth', 2);
 {% include inline_image.html file="S2FunPlotting_03.png" %}
 </center><h2 id="6">3D Plot</h2><p>3D plot of a sphere colored accordingly to the function values.</p>
 {% highlight matlab %}
-plot3d(sF2);
+plot3d(sF1);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_04.png" %}
@@ -64,7 +53,7 @@ surf(sF2);
 {% include inline_image.html file="S2FunPlotting_05.png" %}
 </center><h2 id="8">Section Plot</h2><p>Plot the intersection of the surf plot with a plane defined by a normal vector <code class="language-plaintext highlighter-rouge">v</code></p>
 {% highlight matlab %}
-plotSection(sF3, zvector,'color','interp','linewidth',10)
+plotSection(sF2, zvector,'color','interp','linewidth',10)
 colormap spring
 mtexTitle('Flowerpower!')
 {% endhighlight %}

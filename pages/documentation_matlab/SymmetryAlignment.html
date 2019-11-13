@@ -1,0 +1,78 @@
+---
+title: Alignment of the Crystal Axes
+last_updated: 13-Nov-2019
+sidebar: documentation_sidebar
+permalink: SymmetryAlignment.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Alignment of the Crystal Axes</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-13"><meta name="DC.source" content="script_SymmetryAlignment.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/SymmetryAlignment.m">
+    edit page</a></font><div><!--introduction--><p>Default is \(\vec c\) axis of highest symmetry.</p><p>TODO: Explain the default setting in more detail.</p><!--/introduction--><h2 id="1">Switching between different Alignment Options</h2><p>Since, especialy for lower symmetry groups, different conventions for aligning the crystal axes are used it might be necessary to transform data, e.g, orientations or tensors, from one convention into another. This can be done using the command <a href="tensor.transformReferenceFrame.html">transformReferenceFrame</a> as it illustrated below.</p><p>First we import the stiffness tensor Forsterite with respect to the axes alignment</p>
+{% highlight matlab %}
+cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
+
+% import some stiffness tensor
+fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
+C = stiffnessTensor.load(fname,cs)
+
+plot(C)
+{% endhighlight %}
+
+{% highlight plaintext %}
+C = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Olivin (mmm)     
+ 
+  tensor in Voigt matrix representation:
+ 320.5  68.2  71.6     0     0     0
+  68.2 196.5  76.8     0     0     0
+  71.6  76.8 233.5     0     0     0
+     0     0     0    64     0     0
+     0     0     0     0    77     0
+     0     0     0     0     0  78.7'
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SymmetryAlignment_01.png" %}
+</center><p>Let us now consider a different setup of the Forsterite symmetry, where the \(\vec a\) axis is the longest and the \(\vec c\)-axis is the shortest.</p>
+{% highlight matlab %}
+cs_new = crystalSymmetry('mmm',[10.2296 5.9942 4.7646],'mineral','Olivin')
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs_new = crystalSymmetry  
+ 
+  mineral : Olivin    
+  symmetry: mmm       
+  a, b, c : 10, 6, 4.8'
+{% endhighlight %}
+<p>In order to represent the stiffness tensor <code class="language-plaintext highlighter-rouge">C</code> with respect to this setupt we use the command <a href="tensor.transformReferenceFrame.html">transformReferenceFrame</a>.</p>
+{% highlight matlab %}
+C_new = C.transformReferenceFrame(cs_new)
+
+nextAxis
+plot(C_new)
+{% endhighlight %}
+
+{% highlight plaintext %}
+C_new = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Olivin (mmm)     
+ 
+  tensor in Voigt matrix representation:
+ 196.5  76.8  68.2     0     0     0
+  76.8 233.5  71.6     0     0     0
+  68.2  71.6 320.5     0     0     0
+     0     0     0    77     0     0
+     0     0     0     0  78.7     0
+     0     0     0     0     0    64'
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SymmetryAlignment_02.png" %}
+</center></div></body></html>
