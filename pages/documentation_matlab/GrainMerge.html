@@ -1,6 +1,6 @@
 ---
 title: Merging Grains
-last_updated: 07-Nov-2019
+last_updated: 13-Nov-2019
 sidebar: documentation_sidebar
 permalink: GrainMerge.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
+      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-13"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be usefull when reconstructing parent grain structures, i.e., before phase transistion or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magenesium data and reconstructing the grain structure:</p>
 {% highlight matlab %}
 % load some example data
@@ -96,14 +96,14 @@ childs = grain2d
  triple points: 25
  
  Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  6       1       40   0.00752395    178    90    236
- 14       1      254    0.0113434     81    25    187
+  6       1       40   0.00752328    178    90    236
+ 14       1      254    0.0113429     81    25    187
  17       1        4    0.0135723     80    26    189
- 19       1       38   0.00595743     95   145    186
- 24       1      774    0.0102947    178    90    235
- 28       1       45    0.0107243     81    26    188
- 29       1      293   0.00910428     94   146    185
- 33       1      250    0.0106861    179    89    235'
+ 19       1       38   0.00596057     95   145    186
+ 24       1      774    0.0102951    178    90    235
+ 28       1       45    0.0107595     80    26    188
+ 29       1      293   0.00910473     94   146    185
+ 33       1      250    0.0106871    179    89    235'
 {% endhighlight %}
 <h2 id="6">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p>
 {% highlight matlab %}
@@ -150,6 +150,7 @@ mergedGrains.prop.GOS = accumarray(parentId,1:length(grains),size(mergedGrains),
 
 nextAxis(2), hold on
 plot(mergedGrains,mergedGrains.GOS  ./ degree)
+setColorRange equal
 mtexColorbar
 caxis([0,1.5])
 {% endhighlight %}
@@ -171,7 +172,7 @@ hold off
 ebsd_merged = ebsd;
 
 % update the grainIds to the parentIds
-ebsd_merged('indexed').grainId = parentId(ebsd('indexed').grainId)
+ebsd_merged('indexed').grainId = parentId(grains.id2ind(ebsd('indexed').grainId))
 {% endhighlight %}
 
 {% highlight plaintext %}
