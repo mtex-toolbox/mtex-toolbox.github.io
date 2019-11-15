@@ -204,7 +204,7 @@ To make changes, update the MATLAB code and republish this document.
 <!-- Detecting M-Code in Comments-->
 <xsl:template match="text/mcode-xmlized">
 {% highlight matlab %}
-<xsl:value-of select="."/>
+<xsl:value-of select="." disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
 
@@ -217,10 +217,15 @@ To make changes, update the MATLAB code and republish this document.
 
 <!-- Code output -->
 <xsl:template match="mcodeoutput">
+  <xsl:variable name="replaced">
+    <xsl:call-template name="trim">
+      <xsl:with-param name="pStr">
+	<xsl:value-of select="."/>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:variable>
 {% highlight plaintext %}
-<xsl:call-template name="trim">
-  <xsl:with-param name="pStr" select="."/>
-</xsl:call-template>'
+<xsl:value-of select="$replaced" disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
 <!--<xsl:value-of select="." disable-output-escaping="yes"/>-->
