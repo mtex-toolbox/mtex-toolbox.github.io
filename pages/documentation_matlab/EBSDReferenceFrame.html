@@ -45,63 +45,93 @@ plot(ebsd('olivine'),ebsd('olivine').orientations,'coordinates','on')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_02.png" %}
-</center><h2 id="3">TODO: TO BE CONTINUED</h2><p>The spatial coordinates are important when plotting an EBSD map, e.g. by</p>
+</center><p>Other plotting conventions are <code class="language-plaintext highlighter-rouge">plotx2north</code>, <code class="language-plaintext highlighter-rouge">plotx2west</code>, <code class="language-plaintext highlighter-rouge">plotx2south</code> and <code class="language-plaintext highlighter-rouge">plotzOutOfPlane</code>. Note that these options only alter the orientation of the EBSD map and the pole figures on the screen but does not change any data.</p><h2 id="4">Verify the reference system</h2><p>One way of veryfying the reference systems is to visualize crystal shapes on top of the orientation map. To do this we proceed as follows</p>
 {% highlight matlab %}
-mtexdata forsterite;
+% reconstruct grains
+grains = calcGrains(ebsd('indexed'));
 
-plotx2east; plotzOutOfPlane
-plot(ebsd,'coordinates','on')
+% chose the correct crystal shape (cubic, hex are generic forms)
+cS = crystalShape.olivine;
+
+% select only large grains
+largeGrains = grains(grains.grainSize>500)
+
+% and plot the crystal shapes
+hold on
+plot(largeGrains,cS)
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD  
+largeGrains = grain2d  
  
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1       8    9556  olivine       222                         
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ boundary segments: 1980
+ triple points: 582
+ 
+   Id   Phase   Pixels          GOS   phi1   Phi   phi2
+ 1215       1      508   0.00431724     11   117     42
+ 1684       1      510   0.00586777    201   111     37
+ 2911       1      708    0.0319892     48    67    194
+ 3954       1     3199     0.050366    131     6    324
+ 5018       1     1191    0.0554841     25    59    191
+ 9750       1      502   0.00283587    108   121    182
+ 9761       1     1463    0.0870672     25    53     24
+ 9768       1     1475    0.0904355     26    53     20
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_03.png" %}
-</center><p>In MTEX you can freely adjust the orientation of the map on the screen by adjusting the alignment of the \(x\) and \(y\) axis, e.g., the following lines will show the map upside down</p>
+</center><p>It may also be helpfull to inspect pole figures</p>
 {% highlight matlab %}
-plotx2east; plotzIntoPlane
-plot(ebsd,'coordinates','on')
+h = Miller({1,0,0},{0,1,0},{0,0,1},ebsd('O').CS);
+plotPDF(ebsd('O').orientations,h,'contourf')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_04.png" %}
-</center><p>Note that we did not changed the data but only displayed them differently on the screen.</p><p>The reference frame of the Euler angles commes into importance when plotting ODFs or pole figures.</p>
+</center><p>As pole figures display data relative to the specimen reference frame MTEX automatically aligns them on the screen exatcly as the spatial map above, i.e., according to our last definition with x pointing towards east and y to the south.</p><h2 id="7">Change the map reference system</h2><p>In order to manualy change the map reference frame one may apply a rotation to the map coordinates only. E.g. to flip the map left to right while preserving the Euler angles one can do</p>
 {% highlight matlab %}
-plotPDF(ebsd('Fo').orientations,Miller(1,0,0,ebsd('Fo').CS),'contourf')
+rot = rotation.byAxisAngle(yvector,180*degree);
+ebsd_rot = rotate(ebsd,rot,'keepEuler');
+
+% reconstruct grains
+grains = calcGrains(ebsd_rot('indexed'));
+
+% select only large grains
+largeGrains = grains(grains.grainSize>500);
+
+
+plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
+
+% and plot the crystal shapes
+hold on
+plot(largeGrains,cS)
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_05.png" %}
-</center><h2 id="6">TODO: TO BE CONTINUED</h2><p>As the pole figure displays data relative to the specimen reference frame MTEX automatically aligns it on the screen exatcly as the spatial map above, i.e., according to our last definition with x pointing towards east and y to the south.</p><p>as well as some pole figure data</p>
+</center><h2 id="8">Change the Euler angle reference system</h2><p>Analogously we may change the Euler angle reference frame while keeping the map coordinates</p>
 {% highlight matlab %}
-close all
-CS = ebsd('forsterite').CS;
-plotPDF(ebsd('forsterite').orientations,Miller(1,2,3,CS),'contourf')
+ebsd_rot = rotate(ebsd,rot,'keepXY');
+
+% reconstruct grains
+grains = calcGrains(ebsd_rot('indexed'));
+
+% select only large grains
+largeGrains = grains(grains.grainSize>500);
+
+
+plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
+
+% and plot the crystal shapes
+hold on
+plot(largeGrains,cS)
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_06.png" %}
-</center><h2 id="8">Altering the graphical output</h2><p>If you are unsatisfied with the orientation of your EBSD map in the graphical output this might be simply because the alignment of the reference frame of your data on your plot is not correct. In the above pictures the x-axis is plotted to east and the z-axis is plotted out of plane. Assume you want to change this to z-axis into plane you need to do</p>
-{% highlight matlab %}
-plotzIntoPlane;
-plot(ebsd)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDReferenceFrame_07.png" %}
-</center><p>Observe, how the y-axis is inverted but the x-axis is still plotted in east direction. This change of the alignment of the reference frame does not only effect spatial EBSD plots but also all pole figure plots.</p>
-{% highlight matlab %}
-plotPDF(ebsd('fo').orientations,Miller(1,2,3,CS),'contourf')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDReferenceFrame_08.png" %}
-</center><p>However, by changing the alignment of the reference frame in the graphical output non of the imported spatial coordinats nor the Euler angles are changed. In particular any estimated ODF is not effected by those changes of the alignment of the reference frame in the plots.</p><h2 id="11">Rotatating the data - realigning the reference frame</h2><p>Sometimes it is necessary to relate the EBSD data to a different external reference frame, or to  change the external reference frame from one to the other, e.g. if one wants to concatenate several ebsd data sets where the mounting was not done in perfect coincidence. In these cases the data has to be rotated or shifted by the commands <a href="EBSD.rotate.html">rotate</a> and <a href="EBSD.shift.html">shift</a>. The following commands rotate the reference frame of the entire data set by 5 degree about the z-axis.</p>
+</center><h2 id="9">Changing both reference system simultanously</h2><p>Sometimes it is necessary to relate the EBSD data to a different external reference frame, or to  change the external reference frame from one to the other, e.g. if one wants to concatenate several ebsd data sets where the mounting was not done in perfect coincidence. In these cases the data has to be rotated or shifted by the commands <a href="EBSD.rotate.html">rotate</a> and <a href="EBSD.shift.html">shift</a>. The following commands rotate both reference frames of the entire data set by 5 degree about the z-axis.</p>
 {% highlight matlab %}
 % define a rotation
 rot = rotation.byAxisAngle(zvector,5*degree);
@@ -109,41 +139,20 @@ rot = rotation.byAxisAngle(zvector,5*degree);
 % rotate the EBSD data
 ebsd_rot = rotate(ebsd,rot);
 
-% plot the rotated EBSD data
-plot(ebsd_rot)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDReferenceFrame_09.png" %}
-</center><p>It should be stressed that this rotation on does not only effect the spatial data, i.e. the x, y values, but also the Euler angles are rotated accordingly.</p>
-{% highlight matlab %}
-plotPDF(ebsd_rot('fo').orientations,Miller(1,2,3,CS),'contourf')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDReferenceFrame_10.png" %}
-</center><h2 id="13">See also</h2><p>EBSD/rotate EBSD/shift EBSD/affinetrans</p><h2 id="14">Correcting for different reference frames in spatial data and Euler angles</h2><p>Sometimes the imported spatial data and the imported Euler angles do not coresspond to the same reference frame. Since MTEX always assumes these reference frames to be the same it might be neccessary to correct for this misalignment. This can be done by rotating the spatial data or the Euler angles seperately using the options <code class="language-plaintext highlighter-rouge">'keepXY'</code> or <code class="language-plaintext highlighter-rouge">'keepEuler'</code>. E.g. the following command only effect the spatial coordinates but not the Euler angles</p>
-{% highlight matlab %}
-% rotate the EBSD data
-ebsd_rot = rotate(ebsd,rot,'keepEuler');
+% reconstruct grains
+grains = calcGrains(ebsd_rot('indexed'));
 
-% plot the rotated EBSD data
-plot(ebsd_rot)
+% select only large grains
+largeGrains = grains(grains.grainSize>500);
+
+
+plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
+
+% and plot the crystal shapes
+hold on
+plot(largeGrains,cS)
+hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDReferenceFrame_11.png" %}
-</center><p>The pole figure remains unchanged:</p>
-{% highlight matlab %}
-plotPDF(ebsd_rot('forsterite').orientations,Miller(1,2,3,CS),'contourf')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDReferenceFrame_12.png" %}
-</center><h2 id="16">Correcting HKL and CTF files</h2><p>Both *.ctf and *.ang data files are known to use different reference frames for spatial data and Euler angles. To corrrect for misalignment the interface supports the options <code class="language-plaintext highlighter-rouge">convertSpatial2EulerReferenceFrame</code> and <code class="language-plaintext highlighter-rouge">'convertEuler2SpatialReferenceFrame'</code>, e.g.,</p>
-{% highlight matlab %}
-EBSD.load('fname.ang','convertSpatial2EulerReferenceFrame')
-EBSD.load('fname.ang','convertEuler2SpatialReferenceFrame')
-{% endhighlight %}
-<p>In the first case the spatial data are changed such that the Euler angles referene frame coincides with the spatial reference frame and in the second case the Euler angles are altered to get coincidence.</p>
-{% highlight matlab %}
-% revert z-axis convention
-plotzOutOfPlane;
-{% endhighlight %}
-</div></body></html>
+{% include inline_image.html file="EBSDReferenceFrame_07.png" %}
+</center></div></body></html>
