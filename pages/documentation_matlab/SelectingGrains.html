@@ -1,6 +1,6 @@
 ---
 title: Selecting Grains
-last_updated: 08-Nov-2019
+last_updated: 15-Nov-2019
 sidebar: documentation_sidebar
 permalink: SelectingGrains.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-08"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/SelectingGrains.m">
+      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-15"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/SelectingGrains.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select grains by properties. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
@@ -39,7 +39,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_01.png" %}
-</center><h2 id="2">Selecting grains by mouse</h2><p>The most easiest way to select a grain is by using the mouse and the command <a href="grain2d.selectInteractive.html">selectInteractive</a> which allows you to select an arbitrary amount of grains. The index of the selected grains appear as the global variable <b>indSelected</b> in your workspace</p>
+</center><h2 id="2">Selecting grains by mouse</h2><p>The most easiest way to select a grain is by using the mouse and the command <a href="grain2d.selectInteractive.html">selectInteractive</a> which allows you to select an arbitrary amount of grains. The index of the selected grains appear as the global variable <code class="language-plaintext highlighter-rouge">indSelected</code> in your workspace</p>
 {% highlight matlab %}
 selectInteractive(grains,'lineColor','gold')
 
@@ -68,11 +68,11 @@ ans = grain2d
  triple points: 10
  
  Id   Phase   Pixels          GOS   phi1   Phi   phi2
- 94       1      323   0.00794442    131    64    250'
+ 94       1      323   0.00794289    131    64    250
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_02.png" %}
-</center><h2 id="3">Indexing by orientation or position</h2><p>One can also to select a grain by spatial coordinates without user interaction. This is done using the syntax <b>grains(x,y)</b>, i.e.,</p>
+</center><h2 id="3">Indexing by orientation or position</h2><p>One can also to select a grain by spatial coordinates without user interaction. This is done using the syntax <code class="language-plaintext highlighter-rouge">grains(x,y)</code>, i.e.,</p>
 {% highlight matlab %}
 x = 12000; y = 4000;
 
@@ -106,9 +106,9 @@ grains_selected = grain2d
  
   Id   Phase   Pixels          GOS   phi1   Phi   phi2
   26       1        1            0    130    68    258
-  62       1      181   0.00699944    131    64    245
-  94       1      323   0.00794442    131    64    250
- 123       1       19   0.00995125    144    74    251'
+  62       1      181   0.00699477    131    64    245
+  94       1      323   0.00794289    131    64    250
+ 123       1       19   0.00982775    144    74    251
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_04.png" %}
@@ -131,7 +131,7 @@ plot(grains,grain_area)
 max_area =
    4.1191e+06
 max_id =
-   208'
+   208
 {% endhighlight %}
 <p>The number <code class="language-plaintext highlighter-rouge">max_id</code> is the position of the grain with a maximum area within the variable <code class="language-plaintext highlighter-rouge">grains</code>. We can access this specific grain by direct indexing</p>
 {% highlight matlab %}
@@ -148,7 +148,7 @@ ans = grain2d
  triple points: 31
  
   Id   Phase   Pixels         GOS   phi1   Phi   phi2
- 208       1     1545   0.0124718    167    81    251'
+ 208       1     1545   0.0124723    167    81    251
 {% endhighlight %}
 <p>and so we can plot it</p>
 {% highlight matlab %}
@@ -191,7 +191,7 @@ ans =
      1
      1
      1
-     2'
+     2
 {% endhighlight %}
 <p>Now we can access or grains of the first phase Forsterite by the condition</p>
 {% highlight matlab %}
@@ -214,7 +214,7 @@ ans = grain2d
  boundary segments: 3541
  triple points: 257
  
- Properties: GOS, meanRotation'
+ Properties: GOS, meanRotation
 {% endhighlight %}
 <p>Logical indexing allows also for more complex queries, e.g. selecting all grains perimeter larger than 6000 and at least 600 measurements within</p>
 {% highlight matlab %}
@@ -235,10 +235,10 @@ selected_grains = grain2d
  triple points: 79
  
   Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  99       1     1448    0.0132296    166   127    259
- 119       1     1047   0.00740757     89    99    224
- 122       1     1208   0.00806772    153    68    237
- 208       1     1545    0.0124718    167    81    251'
+  99       1     1448    0.0132286    166   127    259
+ 119       1     1047   0.00740876     89    99    224
+ 122       1     1208   0.00806782    153    68    237
+ 208       1     1545    0.0124723    167    81    251
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_10.png" %}
@@ -264,7 +264,7 @@ ans = EBSD
  
     Id   Phase   phi1   Phi   phi2   bands   bc    bs   error   mad       x      y   grainId
  37553       3     80    16    152       7   65   113       0   0.7   11000   2550        33
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <p>and is equivalent to the command</p>
 {% highlight matlab %}
@@ -279,7 +279,7 @@ ans = EBSD
  
     Id   Phase   phi1   Phi   phi2   bands   bc    bs   error   mad       x      y   grainId
  37553       3     80    16    152       7   65   113       0   0.7   11000   2550        33
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <p>The following picture plots the largest grains together with its individual orientation measurements.</p>
 {% highlight matlab %}
@@ -334,7 +334,7 @@ grains = grain2d
  boundary segments: 2700
  triple points: 268
  
- Properties: GOS, meanRotation'
+ Properties: GOS, meanRotation
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_15.png" %}
