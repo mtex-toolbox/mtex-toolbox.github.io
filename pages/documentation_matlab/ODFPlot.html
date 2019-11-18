@@ -32,7 +32,18 @@ plot3d(odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_01.png" %}
-</center><p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p><p>| symmetry | \(\varphi_1\)   | \(\Phi\)        | \(\varphi_2\) | |    1     | \(360^{\circ}\) | \(180^{\circ}\) | \(360^{\circ}\) | |    2     | \(360^{\circ}\) | \(180^{\circ}\) | \(180^{\circ}\) | |   222    | \(360^{\circ}\) | \(90^{\circ}\)  | \(180^{\circ}\) | |    3     | \(360^{\circ}\) | \(180^{\circ}\) | \(120^{\circ}\) | |   32     | \(360^{\circ}\) | \(90^{\circ}\)  | \(120^{\circ}\) | |    4     | \(360^{\circ}\) | \(180^{\circ}\) | \(90^{\circ}\) | |   422    | \(360^{\circ}\) | \(90^{\circ}\)  | \(90^{\circ}\) | |    6     | \(360^{\circ}\) | \(180^{\circ}\) | \(60^{\circ}\) | |   622    | \(360^{\circ}\) | \(90^{\circ}\)  | \(60^{\circ}\) | |    23    | \(360^{\circ}\) | \(90^{\circ}\)  | \(180^{\circ}\) | |   432    | \(360^{\circ}\) | \(90^{\circ}\)  | \(90^{\circ}\) |</p><p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p>
+</center><p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p><pre>| symmetry | \(\varphi_1\)   | \(\Phi\)        | \(\varphi_2\) |
+|    1     | \(360^{\circ}\) | \(180^{\circ}\) | \(360^{\circ}\) |
+|    2     | \(360^{\circ}\) | \(180^{\circ}\) | \(180^{\circ}\) |
+|   222    | \(360^{\circ}\) | \(90^{\circ}\)  | \(180^{\circ}\) |
+|    3     | \(360^{\circ}\) | \(180^{\circ}\) | \(120^{\circ}\) |
+|   32     | \(360^{\circ}\) | \(90^{\circ}\)  | \(120^{\circ}\) |
+|    4     | \(360^{\circ}\) | \(180^{\circ}\) | \(90^{\circ}\) |
+|   422    | \(360^{\circ}\) | \(90^{\circ}\)  | \(90^{\circ}\) |
+|    6     | \(360^{\circ}\) | \(180^{\circ}\) | \(60^{\circ}\) |
+|   622    | \(360^{\circ}\) | \(90^{\circ}\)  | \(60^{\circ}\) |
+|    23    | \(360^{\circ}\) | \(90^{\circ}\)  | \(180^{\circ}\) |
+|   432    | \(360^{\circ}\) | \(90^{\circ}\)  | \(90^{\circ}\) |</pre><p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p>
 {% highlight matlab %}
 [maxphi1,maxPhi,maxphi2] = fundamentalRegionEuler(crystalSymmetry('432'),specimenSymmetry('222'))
 {% endhighlight %}
@@ -45,15 +56,9 @@ maxPhi =
 maxphi2 =
     1.5708
 {% endhighlight %}
-<p>This return the common \(90^{\circ} \ times 90^{\circ} \ times 90^{\circ}\) cube for cubic crystal and orthorombic specimen symmetry. For an arbitrary orientation</p>
+<p>This return the common \(90^{\circ} \times 90^{\circ} \times 90^{\circ}\) cube for cubic crystal and orthorombic specimen symmetry. For an arbitrary orientation</p>
 {% highlight matlab %}
 ori = orientation.rand(crystalSymmetry('432'),specimenSymmetry('222'))
-
-% the symmetrically equivalent orientation within the fundamental region
-% can be computed using the command <orientation.project2EulerFR.html
-% project2EulerFR>
-
-[phi1,Phi,phi2] = ori.project2EulerFR
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -64,14 +69,17 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  131.067 73.8235 283.804       0
- 
-phi1 =
-    0.1313
-Phi =
-    0.3691
-phi2 =
-    0.6883
+  153.745 171.026 12.3085       0
+{% endhighlight %}
+<p>the symmetrically equivalent orientation within the fundamental region can be computed using the command <a href="orientation.project2EulerFR.html">project2EulerFR</a></p>
+{% highlight matlab %}
+[phi1,Phi,phi2] = ori.project2EulerFR;
+[phi1,Phi,phi2] ./degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   26.2548    8.9743   12.3085
 {% endhighlight %}
 <p>A big disadvantage of the Euler angle representation of the orientation space is that it very badly follows the curved geometry of the space.</p><p>Especially for misorientation distribution functions a better alternativ is the three dimensional axis angle space. To visualize an ODF with respect to this parameterization simply add the option <code class="language-plaintext highlighter-rouge">'axisAngle'</code></p>
 {% highlight matlab %}
@@ -79,7 +87,7 @@ plot3d(odf,'axisAngle','figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_02.png" %}
-</center><h2 id="8">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles phi2. The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">sections</code></p>
+</center><h2 id="9">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles phi2. The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">sections</code></p>
 {% highlight matlab %}
 plot(odf,'sections',6,'silent')
 {% endhighlight %}
@@ -118,7 +126,7 @@ create a new figure.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_06.png" %}
-</center><p>we can clearly distinguish the two spots in the middle indicating two radial symmetric portions. On the other hand the spots at 001 appear in every section indicating a fibre at position [001](100). Knowing that sigma sections are nothing else then the splitted 001 pole figure they are much more simple to interpret then usual phi2 sections.</p><h2 id="14">Plotting the ODF along a fibre</h2><p>For plotting the ODF along a certain fibre we have the command</p>
+</center><p>we can clearly distinguish the two spots in the middle indicating two radial symmetric portions. On the other hand the spots at 001 appear in every section indicating a fibre at position [001](100). Knowing that sigma sections are nothing else then the splitted 001 pole figure they are much more simple to interpret then usual phi2 sections.</p><h2 id="15">Plotting the ODF along a fibre</h2><p>For plotting the ODF along a certain fibre we have the command</p>
 {% highlight matlab %}
 close all
 f = fibre(Miller(1,2,-3,2,cs),vector3d(2,1,1));
@@ -126,7 +134,7 @@ plot(odf,f,'LineWidth',2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_07.png" %}
-</center><h2 id="15">Fourier Coefficients</h2><p>A last way to visualize an ODF is to plot its Fourier coefficients</p>
+</center><h2 id="16">Fourier Coefficients</h2><p>A last way to visualize an ODF is to plot its Fourier coefficients</p>
 {% highlight matlab %}
 close all;
 fodf = FourierODF(odf,32)
@@ -144,7 +152,7 @@ fodf = ODF
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_08.png" %}
-</center><h2 id="16">Axis / Angle Distribution</h2><p>Let us consider the uncorrelated missorientation ODF corresponding to our model ODF.</p>
+</center><h2 id="17">Axis / Angle Distribution</h2><p>Let us consider the uncorrelated missorientation ODF corresponding to our model ODF.</p>
 {% highlight matlab %}
 mdf = calcMDF(odf)
 {% endhighlight %}
