@@ -1,6 +1,6 @@
 ---
 title: Visualizing ODFs
-last_updated: 18-Nov-2019
+last_updated: 19-Nov-2019
 sidebar: documentation_sidebar
 permalink: ODFPlot.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-18"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
+      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-19"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Since an orientation density function (ODF) is a function on the three dimensional, non Euclidean orientation space its proper visualization is a challenging task. In general one distinguishes two approaches</p><div><ol><li>Choose a parameterisation of the orientation space by three variables, e.g., by the Euler angles \(\varphi_1\), \(\Phi\), \(\varphi_2\) and make a three dimensional half transluent contour plot of the function</li><li>Choose a series of two dimensional sections through the orientation space and plot the ODF only at the sections.</li></ol></div><p>In order to demonstrate the different visualization techniques let us first define a model ODF.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
@@ -213,7 +213,7 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  289.924 114.438 61.7657       0
+  336.722 77.4854  108.19       0
 {% endhighlight %}
 <p>the symmetrically equivalent orientation within the fundamental region can be computed using the command <a href="orientation.project2EulerFR.html">project2EulerFR</a></p>
 {% highlight matlab %}
@@ -223,7 +223,7 @@ ori = orientation
 
 {% highlight plaintext %}
 ans =
-   70.0756   65.5622   61.7657
+   33.3188   21.9585   35.4140
 {% endhighlight %}
 <p>A big disadvantage of the Euler angle representation of the orientation space is that it very badly follows the curved geometry of the space.</p><p>Especially for misorientation distribution functions a better alternativ is the three dimensional axis angle space. To visualize an ODF with respect to this parameterization simply add the option <code class="language-plaintext highlighter-rouge">'axisAngle'</code></p>
 {% highlight matlab %}
@@ -231,7 +231,7 @@ plot3d(odf,'axisAngle','figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_02.png" %}
-</center><h2 id="9">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles phi2. The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">sections</code></p>
+</center><h2 id="9">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code></p>
 {% highlight matlab %}
 plot(odf,'sections',6,'silent')
 {% endhighlight %}
@@ -242,7 +242,7 @@ create a new figure.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_03.png" %}
-</center><p>One can also specify the phi2 angles of the sections explicitly</p>
+</center><p>One can also specify the \(\varphi_2\) angles of the sections explicitly</p>
 {% highlight matlab %}
 plot(odf,'phi2',[25 30 35 40]*degree,'contourf','silent')
 {% endhighlight %}
@@ -278,25 +278,7 @@ plot(odf,f,'LineWidth',2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_07.png" %}
-</center><h2 id="16">Fourier Coefficients</h2><p>A last way to visualize an ODF is to plot its Fourier coefficients</p>
-{% highlight matlab %}
-close all;
-fodf = FourierODF(odf,32)
-plotFourier(fodf)
-{% endhighlight %}
-
-{% highlight plaintext %}
-fodf = ODF  
-  crystal symmetry : 321, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_08.png" %}
-</center><h2 id="17">Axis / Angle Distribution</h2><p>Let us consider the uncorrelated missorientation ODF corresponding to our model ODF.</p>
+</center><h2 id="16">Axis / Angle Distribution</h2><p>Let us consider the uncorrelated missorientation ODF corresponding to our model ODF.</p>
 {% highlight matlab %}
 mdf = calcMDF(odf)
 {% endhighlight %}
@@ -316,7 +298,7 @@ mdf = MDF
 plotAxisDistribution(mdf)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFPlot_09.png" %}
+{% include inline_image.html file="ODFPlot_08.png" %}
 </center><p>and the distribution of the missorientation angles and compare them to a uniform ODF</p>
 {% highlight matlab %}
 close all
@@ -327,7 +309,7 @@ hold off
 legend('model ODF','uniform ODF')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFPlot_10.png" %}
+{% include inline_image.html file="ODFPlot_09.png" %}
 </center><p>Finally, lets set back the default colormap.</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap);
