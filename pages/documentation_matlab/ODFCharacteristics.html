@@ -1,6 +1,6 @@
 ---
 title: ODF Characteristics
-last_updated: 07-Nov-2019
+last_updated: 19-Nov-2019
 sidebar: documentation_sidebar
 permalink: ODFCharacteristics.html
 folder: documentation
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Characteristics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFCharacteristics.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p><b>Some Sample ODFs</b></p><p>Let us first begin with some constructed ODFs to be analyzed below</p><p>A bimodal ODF:</p>
+      --><title>ODF Characteristics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-19"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFCharacteristics.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Let us first begin with some constructed ODFs to be analyzed below</p><p>A bimodal ODF:</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mmm');
 odf1 = unimodalODF(orientation.byEuler(0,0,0,cs)) + ...
@@ -25,14 +25,14 @@ odf1 = ODF
   specimen symmetry: 1
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: (0&deg;,0&deg;,0&deg;)
+    kernel: de la Vallee Poussin, halfwidth 10°
+    center: (0°,0°,0°)
     weight: 1
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: (30&deg;,0&deg;,0&deg;)
-    weight: 1'
+    kernel: de la Vallee Poussin, halfwidth 10°
+    center: (30°,0°,0°)
+    weight: 1
 {% endhighlight %}
 <p>A fibre ODF:</p>
 {% highlight matlab %}
@@ -45,9 +45,9 @@ odf2 = ODF
   specimen symmetry: 1
  
   Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
+    kernel: de la Vallee Poussin, halfwidth 10°
     fibre: (001) - 1,0,0
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <p>An ODF estimated from diffraction data</p>
 {% highlight matlab %}
@@ -74,9 +74,9 @@ odf3 = ODF
   specimen symmetry: 1
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5&deg;
-    center: 19841 orientations, resolution: 5&deg;
-    weight: 1'
+    kernel: de la Vallee Poussin, halfwidth 5°
+    center: 19841 orientations, resolution: 5°
+    weight: 1
 {% endhighlight %}
 <h2 id="5">Modal Orientations</h2><p>The modal orientation of an ODF is the crystallographic prefered orientation of the texture. It is characterized as the maximum of the ODF. In MTEX it can be computed by the command <a href="ODF.calcModes.html">calcModes</a></p><p>Determine the modalorientation as an <a href="orientation.orientation.html">orientation</a>:</p>
 {% highlight matlab %}
@@ -91,7 +91,7 @@ center = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  135.745 35.7265 203.567       0'
+  135.745 35.7265 203.567       0
 {% endhighlight %}
 <p>Lets mark this prefered orientation in the pole figures</p>
 {% highlight matlab %}
@@ -107,7 +107,7 @@ textureindex(odf1)
 
 {% highlight plaintext %}
 ans =
-  288.6802'
+  288.6802
 {% endhighlight %}
 <p>Compute the entropy:</p>
 {% highlight matlab %}
@@ -116,7 +116,7 @@ entropy(odf2)
 
 {% highlight plaintext %}
 ans =
-   -2.8402'
+   -2.8402
 {% endhighlight %}
 <h2 id="11">Volume Portions</h2><p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="ODF.volume.html">volume</a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="ODF.fibreVolume.html">fibreVolume</a></p><p>The relative volume in percent of crystals with missorientation maximum 30 degree from the modal orientation:</p>
 {% highlight matlab %}
@@ -125,7 +125,7 @@ volume(odf3,calcModes(odf3),30*degree)*100
 
 {% highlight plaintext %}
 ans =
-   52.8426'
+   52.8426
 {% endhighlight %}
 <p>The relative volume of crystals with missorientation maximum 20 degree from the prefered fibre in percent: TODO</p>
 {% highlight matlab %}
@@ -144,7 +144,7 @@ Properties for class unimodalComponent:
     CS
     SS
     antipodal
-    bandwidth'
+    bandwidth
 {% endhighlight %}
 <p>The properties in this list can be accessed by</p>
 {% highlight matlab %}
@@ -156,10 +156,10 @@ odf3.components{1}.psi
 {% highlight plaintext %}
 ans = SO3Grid  
   symmetry: "321" - "1"
-  grid    : 19841 orientations, resolution: 5&deg;
+  grid    : 19841 orientations, resolution: 5°
  
 ans = deLaValleePoussinKernel  
   bandwidth: 48
-  halfwidth: 5&deg;'
+  halfwidth: 5°
 {% endhighlight %}
 </div></body></html>
