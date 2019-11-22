@@ -65,9 +65,11 @@ ori2 = orientation
 <p>that maps the c-axis parallel to the x-axis and the a-axis parallel to the z-axis.</p>
 {% highlight matlab %}
 hold on
+% visualize the a-axes directions of ori1
 quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis,...
   'color','r','arrowSize',0.01,'linewidth',2)
-hold on
+
+% visualize the a-axes directions of ori2
 quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis,...
   'color','green','arrowSize',0.01,'linewidth',2)
 hold off
@@ -85,17 +87,12 @@ ori1 = orientation.byEuler(60*degree,40*degree,60*degree,cs);
 ori2 = orientation.byEuler(200*degree,80*degree,110*degree,cs);
 ori3 = orientation.byEuler(40*degree,0*degree,0*degree,cs);
 
+hold on
+quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis, 'color','red','arrowSize',0.01,'linewidth',2)
 
+quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis, 'color','green','arrowSize',0.01,'linewidth',2)
 
-hold on
-quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis,...
-  'color','r','arrowSize',0.01,'linewidth',2)
-hold on
-quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis,...
-  'color','green','arrowSize',0.01,'linewidth',2)
-hold on
-quiver(ori3.symmetrise,ori3.symmetrise*cs.aAxis,...
-  'color','blue','arrowSize',0.01,'linewidth',2)
+quiver(ori3.symmetrise,ori3.symmetrise*cs.aAxis, 'color','blue','arrowSize',0.01,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
@@ -148,30 +145,12 @@ create a new figure.
 oS = sigmaSections(odf.CS,odf.SS);
 
 % we may choose the crystal direction (10-10) as the reference direction
-oS.h2 = Miller(1,0,-1,0,cs)
+oS.h2 = Miller(1,0,-1,0,cs);
 
 % we may even change the reference vector field
 %oS.referenceField = S2VectorField.polar(xvector);
 
 plotSection(odf,oS)
-{% endhighlight %}
-
-{% highlight plaintext %}
-oS = 
-  sigmaSections with properties:
-
-                h1: [1×1 Miller]
-                h2: [1×1 Miller]
-             omega: [0 0.1745 0.3491 0.5236 0.6981 0.8727]
-                sR: [1×1 sphericalRegion]
-    referenceField: [1×1 S2VectorFieldHandle]
-               CS1: [12×1 crystalSymmetry]
-               CS2: [1×1 specimenSymmetry]
-               tol: 0.0873
-          plotGrid: []
-          gridSize: []
-                CS: [12×1 crystalSymmetry]
-                SS: [1×1 specimenSymmetry]
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_10.png" %}
