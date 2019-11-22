@@ -1,6 +1,6 @@
 ---
 title: Visualizing ODFs
-last_updated: 19-Nov-2019
+last_updated: 22-Nov-2019
 sidebar: documentation_sidebar
 permalink: ODFPlot.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-19"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
+      --><title>Visualizing ODFs</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-22"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Since an orientation density function (ODF) is a function on the three dimensional, non Euclidean orientation space its proper visualization is a challenging task. In general one distinguishes two approaches</p><div><ol><li>Choose a parameterisation of the orientation space by three variables, e.g., by the Euler angles \(\varphi_1\), \(\Phi\), \(\varphi_2\) and make a three dimensional half transluent contour plot of the function</li><li>Choose a series of two dimensional sections through the orientation space and plot the ODF only at the sections.</li></ol></div><p>In order to demonstrate the different visualization techniques let us first define a model ODF.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
@@ -212,8 +212,8 @@ ori = orientation
   specimen symmetry: 222
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  336.722 77.4854  108.19       0
+    phi1     Phi    phi2    Inv.
+  280.43 36.0059 302.539       0
 {% endhighlight %}
 <p>the symmetrically equivalent orientation within the fundamental region can be computed using the command <a href="orientation.project2EulerFR.html">project2EulerFR</a></p>
 {% highlight matlab %}
@@ -223,7 +223,7 @@ ori = orientation
 
 {% highlight plaintext %}
 ans =
-   33.3188   21.9585   35.4140
+   41.3063   60.2916   21.3493
 {% endhighlight %}
 <p>A big disadvantage of the Euler angle representation of the orientation space is that it very badly follows the curved geometry of the space.</p><p>Especially for misorientation distribution functions a better alternativ is the three dimensional axis angle space. To visualize an ODF with respect to this parameterization simply add the option <code class="language-plaintext highlighter-rouge">'axisAngle'</code></p>
 {% highlight matlab %}
@@ -231,85 +231,29 @@ plot3d(odf,'axisAngle','figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_02.png" %}
-</center><h2 id="9">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code></p>
+</center><h2 id="9">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\).</p>
 {% highlight matlab %}
-plot(odf,'sections',6,'silent')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Plot properties not compatible to previous plot! I'going to
-create a new figure.
+plotSection(odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_03.png" %}
-</center><p>One can also specify the \(\varphi_2\) angles of the sections explicitly</p>
+</center><p>More information how to customize such plots can be found in the chapter <a href="EulerAngleSections.html">Euler angle sections</a>. Beside the standard \(\varphi_2\) sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>phi2 (default)</li><li>phi1</li><li>alpha (Matthies Euler angles)</li><li>gamma (Matthies Euler angles)</li><li>sigma (alpha+gamma) (recommended)</li></ul></div><p>In fact MTEX highly recommend the so called sigma sections as they provide a much less distorted representation of the orientation space. A detailed description of the sigma sections can be found in the chaper <a href="SigmaSections.html">sigma sections</a>.</p>
 {% highlight matlab %}
-plot(odf,'phi2',[25 30 35 40]*degree,'contourf','silent')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Plot properties not compatible to previous plot! I'going to
-create a new figure.
+plotSection(odf,'sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_04.png" %}
-</center><p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>phi2 (default)</li><li>phi1</li><li>alpha (Matthies Euler angles)</li><li>gamma (Matthies Euler angles)</li><li>sigma (alpha+gamma)</li></ul></div><p>In this context the authors of MTEX recommend the sigma sections as they provide a much less distorted representation of the orientation space. They can be seen as the (001) pole figure splitted according to rotations about the (001) axis. Lets have a look at the 001 pole figure</p>
-{% highlight matlab %}
-plotPDF(odf,Miller(0,0,0,1,cs))
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_05.png" %}
-</center><p>We observe three spots. Two in the center and one at 100. When splitting the pole figure, i.e. plotting the odf as sigma sections</p>
-{% highlight matlab %}
-plot(odf,'sections',6,'silent','sigma')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Plot properties not compatible to previous plot! I'going to
-create a new figure.
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_06.png" %}
-</center><p>we can clearly distinguish the two spots in the middle indicating two radial symmetric portions. On the other hand the spots at 001 appear in every section indicating a fibre at position [001](100). Knowing that sigma sections are nothing else then the splitted 001 pole figure they are much more simple to interpret then usual phi2 sections.</p><h2 id="15">Plotting the ODF along a fibre</h2><p>For plotting the ODF along a certain fibre we have the command</p>
+</center><h2 id="11">Plotting the ODF along a fibre</h2><p>For plotting the ODF along a certain fibre we have the command</p>
 {% highlight matlab %}
 close all
+
+% select a fibre of interest
 f = fibre(Miller(1,2,-3,2,cs),vector3d(2,1,1));
+
 plot(odf,f,'LineWidth',2);
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFPlot_07.png" %}
-</center><h2 id="16">Axis / Angle Distribution</h2><p>Let us consider the uncorrelated missorientation ODF corresponding to our model ODF.</p>
-{% highlight matlab %}
-mdf = calcMDF(odf)
-{% endhighlight %}
-
-{% highlight plaintext %}
-mdf = MDF  
-  crystal symmetry : 321, X||a*, Y||b, Z||c*
-  crystal symmetry : 321, X||a*, Y||b, Z||c*
-  antipodal:         true
- 
-  Harmonic portion:
-    degree: 22
-    weight: 1
-{% endhighlight %}
-<p>Then we can plot the distribution of the rotation axes of this missorientation ODF</p>
-{% highlight matlab %}
-plotAxisDistribution(mdf)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_08.png" %}
-</center><p>and the distribution of the missorientation angles and compare them to a uniform ODF</p>
-{% highlight matlab %}
-close all
-plotAngleDistribution(mdf)
-hold all
-plotAngleDistribution(cs,cs)
-hold off
-legend('model ODF','uniform ODF')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFPlot_09.png" %}
+{% include inline_image.html file="ODFPlot_05.png" %}
 </center><p>Finally, lets set back the default colormap.</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap);

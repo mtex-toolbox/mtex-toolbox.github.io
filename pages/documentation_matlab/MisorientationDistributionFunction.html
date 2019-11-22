@@ -1,6 +1,6 @@
 ---
 title: Misorientation Distribution Function
-last_updated: 07-Nov-2019
+last_updated: 22-Nov-2019
 sidebar: documentation_sidebar
 permalink: MisorientationDistributionFunction.html
 folder: documentation
@@ -11,5 +11,69 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_MisorientationDistributionFunction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationDistributionFunction.m">
-    edit page</a></font><div><h1>Misorientation Distribution Function</h1></div></body></html>
+      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-22"><meta name="DC.source" content="script_MisorientationDistributionFunction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationDistributionFunction.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO: Please help to extend this section</h2><p>Let us consider the uncorrelated missorientation ODF corresponding to our model ODF.</p>
+{% highlight matlab %}
+mtexdata titanium
+
+odf = calcDensity(ebsd.orientations)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
+     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
+ 
+ Properties: ci, grainid, iq, sem_signal, x, y
+ Scan unit : um
+ 
+ 
+odf = ODF  
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+{% endhighlight %}
+
+{% highlight matlab %}
+% the uncorrelated
+mdf = calcMDF(odf)
+{% endhighlight %}
+
+{% highlight plaintext %}
+mdf = MDF  
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  antipodal:         true
+ 
+  Harmonic portion:
+    degree: 20
+    weight: 1
+{% endhighlight %}
+
+{% highlight matlab %}
+plotSection(mdf,'axisAngle')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="MisorientationDistributionFunction_01.png" %}
+</center><h2 id="4">Axis / Angle Distribution</h2><p>Then we can plot the distribution of the rotation axes of this missorientation ODF</p>
+{% highlight matlab %}
+plotAxisDistribution(mdf)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="MisorientationDistributionFunction_02.png" %}
+</center><p>and the distribution of the missorientation angles and compare them to a uniform ODF</p>
+{% highlight matlab %}
+close all
+plotAngleDistribution(mdf)
+hold all
+plotAngleDistribution(ebsd.CS,ebsd.CS)
+hold off
+legend('model ODF','uniform ODF')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="MisorientationDistributionFunction_03.png" %}
+</center></div></body></html>
