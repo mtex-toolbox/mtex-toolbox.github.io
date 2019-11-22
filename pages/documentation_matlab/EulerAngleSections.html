@@ -1,6 +1,6 @@
 ---
 title: Euler Angle Sections
-last_updated: 07-Nov-2019
+last_updated: 22-Nov-2019
 sidebar: documentation_sidebar
 permalink: EulerAngleSections.html
 folder: documentation
@@ -11,5 +11,255 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Euler Angle Sections</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_EulerAngleSections.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/EulerAngleSections.m">
-    edit page</a></font><div><h1>Euler Angle Sections</h1></div></body></html>
+      --><title>Euler Angle Sections</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-22"><meta name="DC.source" content="script_EulerAngleSections.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/EulerAngleSections.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO: Please help extending this section</h2>
+{% highlight matlab %}
+cs = crystalSymmetry.load('Al-Aluminum.cif')
+
+ori1 = orientation.brass(cs);
+ori2 = orientation.copper(cs);
+f = fibre.beta(cs);
+
+odf = 0.2*unimodalODF(ori1) + ...
+  0.3*unimodalODF(ori2) + ...
+  0.5*fibreODF(f);
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs = crystalSymmetry  
+ 
+  mineral : Aluminum
+  symmetry: m-3m    
+  a, b, c : 4, 4, 4
+{% endhighlight %}
+<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code></p>
+{% highlight matlab %}
+plot(odf,'sections',9,'silent','layout',[5 2])
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot! I'going to
+create a new figure.
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EulerAngleSections_01.png" %}
+</center>
+{% highlight matlab %}
+annotate(ori1,'MarkerSize',15)
+annotate(ori2,'Marker','v','MarkerSize',15)
+
+plot(f,'linewidth',2,'add2all')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EulerAngleSections_02.png" %}
+</center><p>One can also specify the \(\varphi_2\) angles of the sections explicitly</p>
+{% highlight matlab %}
+plot(odf,'phi2',[25 30 35 40]*degree,'silent')
+
+annotate(ori1,'MarkerSize',15)
+annotate(ori2,'Marker','v','MarkerSize',15)
+
+plot(f,'linewidth',2,'add2all')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Plot properties not compatible to previous plot! I'going to
+create a new figure.
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EulerAngleSections_03.png" %}
+</center><p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>phi2 (default)</li><li>phi1</li><li>alpha (Matthies Euler angles)</li><li>gamma (Matthies Euler angles)</li><li>sigma (alpha+gamma)</li></ul></div>
+{% highlight matlab %}
+plotSection(odf)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EulerAngleSections_04.png" %}
+</center><p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>symmetry</p>
+         </td>
+         <td>
+               <p>1</p>
+         </td>
+         <td>
+               <p>2</p>
+         </td>
+         <td>
+               <p>222</p>
+         </td>
+         <td>
+               <p>3</p>
+         </td>
+         <td>
+               <p>32</p>
+         </td>
+         <td>
+               <p>4</p>
+         </td>
+         <td>
+               <p>422</p>
+         </td>
+         <td>
+               <p>6</p>
+         </td>
+         <td>
+               <p>622</p>
+         </td>
+         <td>
+               <p>23</p>
+         </td>
+         <td>
+               <p>432</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>\(\varphi_1\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>\(\Phi\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>\(\varphi_2\)</p>
+         </td>
+         <td>
+               <p>\(360^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(120^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(120^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(60^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(60^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(180^{\circ}\)</p>
+         </td>
+         <td>
+               <p>\(90^{\circ}\)</p>
+         </td>
+      </tr>
+   </table>
+</p><p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p><h2 id="7">Specimen Symmetry</h2><p>As we can see from the above table the first Euler angles \(\varphi_1\) ranges for all symmetries from zero to 360 degree. The only way to restrict this angle is to consider specimen symmetry. In the classical case of orthotropic specimen symmetry the range of the first Euler angles reduces to 90 degree and we obtain the common square shaped ODF section plots</p>
+{% highlight matlab %}
+odf.SS = specimenSymmetry('222')
+
+plot(odf,'sections',18,'layout',[5 4],...
+  'coordinates','off','xlabel','','ylabel','')
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf = ODF  
+  crystal symmetry : Aluminum (m-3m)
+  specimen symmetry: 222
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10°
+    center: (35°,45°,0°)
+    weight: 0.2
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10°
+    center: (90°,35°,45°)
+    weight: 0.3
+ 
+  Fibre symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10°
+    fibre: (---) - -0.23141,-0.23141,0.94494
+    weight: 0.5
+ 
+Warning: Plot properties not compatible to previous plot! I'going to
+create a new figure.
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EulerAngleSections_05.png" %}
+</center></div></body></html>
