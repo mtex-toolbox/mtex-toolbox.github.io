@@ -1,6 +1,6 @@
 ---
 title: Importing Crystal Orientations
-last_updated: 07-Nov-2019
+last_updated: 24-Nov-2019
 sidebar: documentation_sidebar
 permalink: OrientationImport.html
 folder: documentation
@@ -11,5 +11,39 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Importing Crystal Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_OrientationImport.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationImport.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO</h2></div></body></html>
+      --><title>Importing Crystal Orientations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-24"><meta name="DC.source" content="script_OrientationImport.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationImport.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In order to import orientation data from a text file we first need to defined the corresponding <a href="CrystalSymmetries.html">crystal symmetry</a>, e.g. by a cif file</p>
+{% highlight matlab %}
+cs = crystalSymmetry.load('quartz.cif')
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs = crystalSymmetry  
+ 
+  mineral        : Quartz            
+  symmetry       : 321               
+  a, b, c        : 4.9, 4.9, 5.4     
+  reference frame: X||a*, Y||b, Z||c*
+{% endhighlight %}
+<p>In the second step we may use the command <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a> to load the data. This function requires that one specifies the meaning of the column of the import file by the option <code class="language-plaintext highlighter-rouge">columnNames</code>.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'orientation','Tongue_Quartzite_Bunge_Euler')
+ori = orientation.load(fname,'columnNames',{'phi1','Phi','phi2'},cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+fname =
+    '/home/hielscher/mtex/master/data/orientation/Tongue_Quartzite_Bunge_Euler'
+ 
+ori = orientation  
+  size: 382 x 1
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  specimen symmetry: 1
+{% endhighlight %}
+<p>This creates a variable of type <a href="orientation.orientation.html">orientation</a> which can be used for further analysis, e.g. to plot pole figures</p>
+{% highlight matlab %}
+plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs))
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationImport_01.png" %}
+</center></div></body></html>
