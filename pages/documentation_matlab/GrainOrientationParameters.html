@@ -1,6 +1,6 @@
 ---
 title: Orientation Parameters
-last_updated: 08-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: GrainOrientationParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Orientation Parameters</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-08"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainOrientationParameters.m">
+      --><title>Orientation Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainOrientationParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction-->
 {% highlight matlab %}
 close all; plotx2east
@@ -36,7 +36,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_01.png" %}
@@ -63,7 +63,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <p>The <a href="grain2d.grain2d.html">grains</a> contain. We can access these data by</p>
 {% highlight matlab %}
@@ -89,7 +89,7 @@ ebsd_selected = EBSD
      1  62262 (100%)  Forsterite  LightSkyBlue       mmm                         
  
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <p>A more convenient way to select grains in daily practice is by spatial coordinates.</p>
 {% highlight matlab %}
@@ -106,7 +106,7 @@ grain_selected = grain2d
  triple points: 18
  
   Id   Phase   Pixels          GOS   phi1   Phi   phi2
- 640       1     1208   0.00806772    153    68    237'
+ 640       1     1208   0.00806782    153    68    237
 {% endhighlight %}
 <p>you can get the id of this grain by</p>
 {% highlight matlab %}
@@ -115,7 +115,7 @@ grain_selected.id
 
 {% highlight plaintext %}
 ans =
-   640'
+   640
 {% endhighlight %}
 <p>let's look for the grain with the largest grain orientation spread</p>
 {% highlight matlab %}
@@ -136,7 +136,7 @@ grain_selected = grain2d
  triple points: 28
  
    Id   Phase   Pixels        GOS   phi1   Phi   phi2
- 1856       1     2614   0.170662    153   109    247'
+ 1856       1     2614   0.170665    153   108    247
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -168,7 +168,7 @@ plotPDF(ori,[Miller(0,0,1,cs),Miller(0,1,1,cs),Miller(1,1,1,cs)],'antipodal')
 {% highlight plaintext %}
 I'm plotting 1250 random orientations out of 2614 given orientations
   You can specify the the number points by the option "points".
-  The option "all" ensures that all data are plotted'
+  The option "all" ensures that all data are plotted
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_04.png" %}
@@ -183,8 +183,8 @@ ans = ODF
   specimen symmetry: 1
  
   Bingham portion:
-     kappa: 0 4019 4021 4023
-    weight: 1'
+     kappa: 0 1157 1494 1580
+    weight: 1
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -197,7 +197,7 @@ T_oblate    = bingham_test(ori,'oblate',   'approximated');
 
 {% highlight plaintext %}
 ans =
-     1     1     1'
+     1     1     1
 {% endhighlight %}
 <p>Misorientation to mean orientation</p><p>The third output argument is again a list of the same size as the ebsd measurements. The entries are the misorientation to the mean orientation of the corresponding grain.</p>
 {% highlight matlab %}
@@ -236,7 +236,7 @@ myGrain = grain2d
  triple points: 16
  
   Id   Phase   Pixels         GOS   phi1   Phi   phi2
- 517       1      504   0.0404403    131    64    249'
+ 517       1      504   0.0404828    131    64    249
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_06.png" %}
@@ -256,7 +256,7 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <p>and <a href="EBSD.calcGrains.html">reconstruct</a> grains by</p>
 {% highlight matlab %}
@@ -286,7 +286,7 @@ xlabel('Misorientation angles in degree')
 mori = misorientation  
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
-  crystal symmetry : Forsterite (mmm)'
+  crystal symmetry : Forsterite (mmm)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_07.png" %}
@@ -310,7 +310,7 @@ mori.axis
 {% highlight plaintext %}
 ans = Miller  
  size: 151452 x 1
- mineral: Forsterite (222)'
+ mineral: Forsterite (222)
 {% endhighlight %}
 <p>The axes are unique up to crystal symmetry. Accordingly, the corresponding color key needs to colorize only the fundamental sector. This is done by</p>
 {% highlight matlab %}
@@ -340,7 +340,7 @@ oriRef = grains(ebsd('Forsterite').grainId).meanOrientation
 oriRef = orientation  
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
-  specimen symmetry: 1'
+  specimen symmetry: 1
 {% endhighlight %}
 <p>Now the misorientation axis with respect to the specimen reference system is computed via</p>
 {% highlight matlab %}
@@ -349,7 +349,7 @@ v = axis(ebsd('Forsterite').orientations,oriRef)
 
 {% highlight plaintext %}
 v = vector3d  
- size: 151452 x 1'
+ size: 151452 x 1
 {% endhighlight %}
 <p>With respect to the specimen reference frame the misorientation axes are unique and not symmetry has to be considered. Accordingly, our color key will contain the entire sphere.</p>
 {% highlight matlab %}
@@ -428,7 +428,7 @@ ans = misorientation
   size: 15676 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
-  antipodal:         true'
+  antipodal:         true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_16.png" %}
@@ -513,7 +513,7 @@ mdf_Fo_Fo = MDF
  
   Harmonic portion:
     degree: 20
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_20.png" %}

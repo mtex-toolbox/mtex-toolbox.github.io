@@ -1,6 +1,6 @@
 ---
 title: Random Sampling
-last_updated: 08-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: RandomSampling.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-08"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
+      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX allows one to simulate an arbitrary number of EBSD data from any ODF. This is quite helpful if you want to analyze the EBSD to ODF estimation routine.</p><p><b>Define a Model ODF</b></p><p>Let us first define a simple fibre symmetric ODF.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
@@ -20,11 +20,6 @@ fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(Miller(0,0,0,1,cs),zvector);
 
 {% highlight matlab %}
 plot(fibre_odf,'sections',6,'silent')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Plot properties not compatible to previous plot! I'going to create a
-new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_01.png" %}
@@ -37,7 +32,7 @@ ori = calcOrientations(fibre_odf,10000)
 ori = orientation  
   size: 10000 x 1
   crystal symmetry : 321, X||a*, Y||b, Z||c*
-  specimen symmetry: 1'
+  specimen symmetry: 1
 {% endhighlight %}
 <h2 id="5">ODF Estimation from EBSD Data</h2><p>From the 10000 individual orientations, we can now estimate an ODF. First, we determine the optimal kernel function</p>
 {% highlight matlab %}
@@ -47,7 +42,7 @@ psi = calcKernel(ori)
 {% highlight plaintext %}
 psi = deLaValleePoussinKernel  
   bandwidth: 43
-  halfwidth: 5.7&deg;'
+  halfwidth: 5.7°
 {% endhighlight %}
 <p>and then we use this kernel function for kernel density estimation</p>
 {% highlight matlab %}
@@ -61,16 +56,11 @@ odf = ODF
  
   Harmonic portion:
     degree: 43
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <p>which can be plotted,</p>
 {% highlight matlab %}
 plot(odf,'sections',6,'silent')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Plot properties not compatible to previous plot! I'going to create a
-new figure.'
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_02.png" %}
@@ -81,7 +71,7 @@ calcError(odf,fibre_odf,'resolution',5*degree)
 
 {% highlight plaintext %}
 ans =
-    0.1004'
+    0.0909
 {% endhighlight %}
 <h2 id="9">Exploration of the relationship between estimation error and number of single orientations</h2><p>For a more systematic analysis of the estimation error, we simulate 10, 100, ..., 1000000 single orientations of the model ODF and calculate the approximation error for the ODFs estimated from these data.</p>
 {% highlight matlab %}
@@ -111,12 +101,12 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-RuleOfThumb: 80&deg; KLCV: 24&deg; magicRule: 31&deg;
-RuleOfThumb: 42&deg; KLCV: 15&deg; magicRule: 22&deg;
-RuleOfThumb: 18&deg; KLCV: 9&deg; magicRule: 16&deg;
-RuleOfThumb: 10&deg; KLCV: 6&deg; magicRule: 11&deg;
-RuleOfThumb: 9&deg; KLCV: 5&deg; magicRule: 8&deg;
-RuleOfThumb: 7&deg; KLCV: 4&deg; magicRule: 6&deg;'
+RuleOfThumb: 46° KLCV: 24° magicRule: 31°
+RuleOfThumb: 37° KLCV: 15° magicRule: 22°
+RuleOfThumb: 18° KLCV: 9° magicRule: 16°
+RuleOfThumb: 10° KLCV: 6° magicRule: 11°
+RuleOfThumb: 9° KLCV: 5° magicRule: 8°
+RuleOfThumb: 7° KLCV: 4° magicRule: 6°
 {% endhighlight %}
 <p>Plot the error in dependency of the number of single orientations.</p>
 {% highlight matlab %}
