@@ -1,6 +1,6 @@
 ---
 title: ODF Modeling
-last_updated: 24-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: ODFModeling.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Modeling</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-24"><meta name="DC.source" content="script_ODFModeling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFModeling.m">
+      --><title>ODF Modeling</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_ODFModeling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFModeling.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX provides a very simple way to define model ODFs. Generally, there are five different ODF types in MTEX:</p><div><ul><li><a href="uniformODF.html">uniform ODFs</a></li><li><a href="UnimodalODFs.html">unimodal ODFs</a></li><li><a href="FibreODFs.html">fibre ODFs</a></li><li><a href="BinghamODFs">Bingham ODFs</a></li><li><a href="HarmonicODFs">ODFs given by harmonic series expansion</a></li></ul></div><p>The central idea is that MTEX allows you to calculate mixture models, by adding and subtracting arbitrary ODFs. Model ODFs may be used as references for ODFs estimated from pole figure data or EBSD data and are instrumental for simulating texture evolutions.</p><h2 id="2">The Uniform ODF</h2><p>The most simplest case of a model ODF is the uniform ODF</p><p>\[f(g) = 1,\quad  g \in SO(3),\]</p><p>which is everywhere identical to one. In order to define a uniform ODF one needs only to specify its crystal and specimen symmetry and to use the command <a href="uniformODF.html">uniformODF</a>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('cubic');
@@ -56,61 +56,4 @@ odf = ODF
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFModeling_01.png" %}
-</center>
-{% highlight matlab %}
-mtexdata dubna
-odf = calcODF(pf,'zeroRange')
-{% endhighlight %}
-
-{% highlight plaintext %}
-pf = PoleFigure  
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
-  specimen symmetry: 1
- 
-  h = (02-21), r = 72 x 19 points
-  h = (10-10), r = 72 x 19 points
-  h = (01-11)(10-11), r = 72 x 19 points
-  h = (10-12), r = 72 x 19 points
-  h = (11-20), r = 72 x 19 points
-  h = (11-21), r = 72 x 19 points
-  h = (11-22), r = 72 x 19 points
- 
-odf = ODF  
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
-  specimen symmetry: 1
- 
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 2028 orientations, resolution: 5°
-    weight: 1
-{% endhighlight %}
-
-{% highlight matlab %}
-cS = crystalShape.quartz(odf.CS)
-plot(odf,'sigma','sections',10)
-
-[~,ori] = max(odf,3)
-
-plot(ori,ori * cS,'add2all')
-{% endhighlight %}
-
-{% highlight plaintext %}
-cS = crystalShape  
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
- vertices: 56
- faces: 30
- 
-ori = orientation  
-  size: 3 x 1
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
-  specimen symmetry: 1
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  135.363 35.2789 204.214       0
-  69.4925 29.4417 284.219       0
-  73.0937 27.5164 280.789       0
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ODFModeling_02.png" %}
 </center></div></body></html>

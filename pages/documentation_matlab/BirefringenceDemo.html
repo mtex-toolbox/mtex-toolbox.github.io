@@ -1,6 +1,6 @@
 ---
 title: Birefrigence
-last_updated: 07-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: BirefringenceDemo.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Birefrigence</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/BirefringenceDemo.m">
+      --><title>Birefrigence</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/BirefringenceDemo.m">
     edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustarte the effect of birefringence lets consider a olivine data set.</p>
 {% highlight matlab %}
 mtexdata olivine
@@ -38,7 +38,7 @@ ebsd = EBSD
      4   1095 (2.2%)  Chalcopyrite    LightCoral       422                         
  
  Properties: ci, fit, iq, sem_signal, unknown1, unknown2, unknown3, unknown4, x, y
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -65,7 +65,7 @@ gg = grain2d
  boundary segments: 6806
  triple points: 561
  
- Properties: GOS, meanRotation'
+ Properties: GOS, meanRotation
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_01.png" %}
@@ -86,7 +86,7 @@ rI_Fo = refractiveIndexTensor
  
   1.67     0     0
      0 1.635     0
-     0     0 1.651'
+     0     0 1.651
 {% endhighlight %}
 <p>For Fayalite the priniple refractive values</p>
 {% highlight matlab %}
@@ -104,7 +104,7 @@ rI_Fa = refractiveIndexTensor
  
  1.879     0     0
      0  1.82     0
-     0     0 1.869'
+     0     0 1.869
 {% endhighlight %}
 <p>The refractive index of composite materials like Olivine can now be modelled as the weighted sum of the of the refractive index tensors of Forsterite and Fayalite. Lets assume that the relative Forsterite content (atomic percentage) is sgiven my</p>
 {% highlight matlab %}
@@ -122,7 +122,7 @@ rI = refractiveIndexTensor
  
  1.6993      0      0
       0 1.6609      0
-      0      0 1.6815'
+      0      0 1.6815
 {% endhighlight %}
 <h2 id="10">Birefringence</h2><p>The birefringence describes the difference <code class="language-plaintext highlighter-rouge">n</code> in diffraction index between the fastest polarization direction <code class="language-plaintext highlighter-rouge">pMax</code> and the slowest polarization direction <code class="language-plaintext highlighter-rouge">pMin</code> for a given propagation direction <code class="language-plaintext highlighter-rouge">vprop</code>.</p>
 {% highlight matlab %}
@@ -145,7 +145,7 @@ pMin = vector3d
 pMax = vector3d  
  size: 1 x 1
           x         y         z
-  -0.650059  0.114293  0.751239'
+  -0.650059  0.114293  0.751239
 {% endhighlight %}
 <p>If the polarization direction is ommited the results are spherical functions which can be easily visualized.</p>
 {% highlight matlab %}
@@ -172,7 +172,7 @@ pMin = S2AxisFieldHarmonic
  bandwidth: 48
  
 pMax = S2AxisFieldHarmonic  
- bandwidth: 48'
+ bandwidth: 48
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_02.png" %}
@@ -200,11 +200,11 @@ vOptical = vector3d
 ans =
    1.0e-15 *
     0.4441
-    0.4441'
+    0.4441
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_03.png" %}
-</center><h2 id="13">Spectral Transmission</h2><p>If white with a certain polarization is transmited though a crystal with isotropic refrative index the light changes wavelength and hence appears collored. The resulting color depending on the propagation direction, the polarization direction and the thickness can be computed by</p>
+</center><h2 id="13">Spectral Transmission</h2><p>If white light with a certain polarization is transmited though a crystal with isotropic refrative index the light changes wavelength and hence appears collored. The resulting color depending on the propagation direction, the polarization direction and the thickness can be computed by</p>
 {% highlight matlab %}
 vprop = Miller(1,1,1,cs);
 thickness = 30000;
@@ -214,7 +214,7 @@ rgb = rI.spectralTransmission(vprop,thickness,'polarizationDirection',p)
 
 {% highlight plaintext %}
 rgb =
-    0.3635    0.7380    0.6967'
+    0.3635    0.7380    0.6967
 {% endhighlight %}
 <p>Effectively, the rgb value depend only on the angle tau between the polariztzion direction and the slowest polarization direction <code class="language-plaintext highlighter-rouge">pMin</code>. Instead of the polarization direction this angle may be specified directly</p>
 {% highlight matlab %}
@@ -223,7 +223,7 @@ rgb = rI.spectralTransmission(vprop,thickness,'tau',30*degree)
 
 {% highlight plaintext %}
 rgb =
-    0.3128    0.6350    0.5994'
+    0.3128    0.6350    0.5994
 {% endhighlight %}
 <p>If the angle tau is fixed and the propagation direction is ommited as input MTEX returns the rgb values as a spherical function. Lets plot these functions for different values of tau.</p>
 {% highlight matlab %}
