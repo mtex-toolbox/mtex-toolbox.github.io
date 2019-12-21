@@ -1,6 +1,6 @@
 ---
 title: Density Estimation
-last_updated: 08-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: DensityEstimation.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-08"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
+      --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Density estimation is a concept to estimate a probability density function \(f_N\) from given random samples \(x_n\), \(n=1,\ldots,N\). In the simplest case the random samples \(x_n\) are real numbers and come from an unknown distribution function \(f\). The goal is than that \(f_N\) approximates \(f\) as best as possible.</p><p>Lets illustrate this setting at a the example of a mixed Gaussian distribution</p>
 {% highlight matlab %}
 % the true density function
@@ -195,7 +195,7 @@ odf = ODF
  
   Harmonic portion:
     degree: 25
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <p>Lets visualize the ODF in phi2 sections and plot on top of it the individual orientation measurements from the EBSD map</p>
 {% highlight matlab %}
@@ -209,8 +209,26 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-plotting 2000 random orientations out of 152345 given orientations'
+plotting 2000 random orientations out of 152345 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_12.png" %}
-</center><p>A more detailed describtion of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p><h2 id="17">Parametric Density Estimation</h2><p>In contrast to kernel density estimation parametric density estimation makes the assumption that the true distribution function belong to a parametric distribution family, e.g. the Gaussian. In this case it remains the estimate the parameters of this distribution from the random sample. In the case of the Gaussian distribution these are the mean value and the standard deviation. The analogous to the Gaussian on the sphere and the orientation space are the Bingham distributions. The estimation of Bingham parameters from directional and rotational data are explained in the sections <a href="S2FunBingham.html">The Spherical Bingham Distribution</a> and <a href="BinghamODFs.html">The Rotational Bingham Distribution</a>.</p></div></body></html>
+</center><p>A more detailed describtion of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p><h2 id="17">Parametric Density Estimation</h2><p>In contrast to kernel density estimation parametric density estimation makes the assumption that the true distribution function belong to a parametric distribution family, e.g. the Gaussian. In this case it remains the estimate the parameters of this distribution from the random sample. In the case of the Gaussian distribution these are the mean value and the standard deviation. The analogous to the Gaussian on the sphere and the orientation space are the Bingham distributions. The estimation of Bingham parameters from directional and rotational data are explained in the sections <a href="S2FunBingham.html">The Spherical Bingham Distribution</a> and <a href="BinghamODFs.html">The Rotational Bingham Distribution</a>.</p><h2 id="18">Density Estimtation with Weights</h2><p>In many use cases one has a weighted random sample. A typical example is if one wants to estimate a orientation distribution function from grain orientations. In this cases big grains should contribute more to the ODF than small grains. For that reason the functions <code class="language-plaintext highlighter-rouge">calcDensity</code> allow for an additional option <code class="language-plaintext highlighter-rouge">'weights'</code> which allows to pass weights to the density estimation.</p>
+{% highlight matlab %}
+mtexdata titanium silent
+grains = calcGrains(ebsd);
+
+odf = calcDensity(grains.meanOrientation,'weights',grains.grainSize)
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf = ODF  
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  specimen symmetry: 1
+ 
+  Radially symmetric portion:
+    kernel: de la Vallee Poussin, halfwidth 10°
+    center: Rotations: 85 x 1
+    weight: 1
+{% endhighlight %}
+</div></body></html>
