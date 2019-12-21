@@ -1,6 +1,6 @@
 ---
 title: Merging Grains
-last_updated: 13-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: GrainMerge.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-13"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
+      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be usefull when reconstructing parent grain structures, i.e., before phase transistion or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magenesium data and reconstructing the grain structure:</p>
 {% highlight matlab %}
 % load some example data
@@ -56,7 +56,7 @@ hold off
 twinBoundary = grainBoundary  
  
  Segments  mineral 1  mineral 2
-     1649  Magnesium  Magnesium'
+     1649  Magnesium  Magnesium
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_02.png" %}
@@ -79,7 +79,7 @@ mergedGrains(16).id
 
 {% highlight plaintext %}
 ans =
-    16'
+    16
 {% endhighlight %}
 <p>Hence, we can find all childs of grain 16 by</p>
 {% highlight matlab %}
@@ -103,7 +103,7 @@ childs = grain2d
  24       1      774    0.0102951    178    90    235
  28       1       45    0.0107595     80    26    188
  29       1      293   0.00910473     94   146    185
- 33       1      250    0.0106871    179    89    235'
+ 33       1      250    0.0106871    179    89    235
 {% endhighlight %}
 <h2 id="6">Calculate the twinned area</h2><p>We can also answer the question about the relative area of these initial grains that have undergone twinning to total area.</p>
 {% highlight matlab %}
@@ -115,7 +115,7 @@ sum(area(grains(twinId))) / sum(area(grains)) * 100
 
 {% highlight plaintext %}
 ans =
-   73.5716'
+   73.5716
 {% endhighlight %}
 <p>The <code class="language-plaintext highlighter-rouge">parentId</code> may also used to compute properties of the parent grains by averaging over the corresponding child grain properties. This can be done with the Matlab command <a href="mathworks.com/help/matlab/ref/accumarray.html">accumarray</a></p>
 {% highlight matlab %}
@@ -183,7 +183,7 @@ ebsd_merged = EBSD
      1  22794 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <p>Now the variable <code class="language-plaintext highlighter-rouge">ebsd_merged</code> can be indexed by the merged grains, i.e.</p>
 {% highlight matlab %}

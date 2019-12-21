@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters
-last_updated: 07-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
+      --><title>Shape Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss various geometric properties of grains. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
@@ -83,7 +83,7 @@ ebsd = EBSD
      3    759 (4.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y, grainId
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_01.png" %}
@@ -97,7 +97,7 @@ grains(9).area
 ans =
      1
 ans =
-  170.6081'
+  170.6081
 {% endhighlight %}
 <p>Hereby <b>grainSize</b> referes to the number of pixels the belong to a certain grain while <b>area</b> represents the actual area measured in (um)^2. Simarly the two one-dimensional meassures <b>boundarySize</b> and <b>perimeter</b> gives the length of the grain boundary in number of segments and in in um, respectively.</p>
 {% highlight matlab %}
@@ -109,7 +109,7 @@ grains(9).perimeter
 ans =
      4
 ans =
-   83.9653'
+   83.9653
 {% endhighlight %}
 <p>Another, one dimensional measure is the <b>diameter</b> which refers to the longest distance between any two boundary points and is given im um as well</p>
 {% highlight matlab %}
@@ -118,7 +118,7 @@ grains(9).diameter
 
 {% highlight plaintext %}
 ans =
-   40.5107'
+   40.5107
 {% endhighlight %}
 <p>The diameter is a special case of the caliper or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain</p>
 {% highlight matlab %}
@@ -130,7 +130,7 @@ grains(9).calliper('shortest')
 ans =
    40.5107
 ans =
-    6.3359'
+    6.3359
 {% endhighlight %}
 <p>Another way to investigate the perimeter is using the grain boundary. The first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
 {% highlight matlab %}
@@ -142,7 +142,7 @@ sum(grains(9).boundary.segLength)
 ans =
      4
 ans =
-   83.9653'
+   83.9653
 {% endhighlight %}
 <h2 id="7">Fitted ellipses</h2><p>Many shape parameters refers to ellipses fit to the grains</p>
 {% highlight matlab %}
@@ -159,7 +159,7 @@ grains(9).aspectRatio
 
 {% highlight plaintext %}
 ans =
-    6.5087'
+    6.5087
 {% endhighlight %}
 <p>The radius and perimeter of the fitted ellipse can be computed by</p>
 {% highlight matlab %}
@@ -171,7 +171,7 @@ grains(9).equivalentPerimeter
 ans =
     7.3693
 ans =
-   46.3025'
+   46.3025
 {% endhighlight %}
 <p>Let have a look at the difference between perimeter of the ellipse and perimeter of the grain:</p>
 {% highlight matlab %}

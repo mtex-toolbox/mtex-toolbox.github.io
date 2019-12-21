@@ -1,6 +1,6 @@
 ---
 title: Geometrically Necessary Dislocations
-last_updated: 07-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: GND.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/GND.m">
+      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/GND.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
 {% highlight matlab %}
 % set up the plotting convention
@@ -112,7 +112,7 @@ ans = curvatureTensor
  *10^-4
    1.767  15.127     NaN
   -5.178   1.493     NaN
- -12.003  16.171     NaN'
+ -12.003  16.171     NaN
 {% endhighlight %}
 <h2 id="6">The components of the curvature tensor</h2><p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d EBSD maps.</p><p>We can access the different components of the curvature tensor with</p>
 {% highlight matlab %}
@@ -123,7 +123,7 @@ size(kappa12)
 
 {% highlight plaintext %}
 ans =
-   101    51'
+   101    51
 {% endhighlight %}
 <p>which results in a variable of the same size as our EBSD map. This allows us to visualize the different components of the curvature tensor</p>
 {% highlight matlab %}
@@ -155,7 +155,7 @@ alpha = kappa.dislocationDensity
 alpha = dislocationDensityTensor  
   size: 101 x 51 
   unit: 1/um     
-  rank: 2 (3 x 3)'
+  rank: 2 (3 x 3)
 {% endhighlight %}
 <p>which has the same unit as the curvature tensor and is incomplete as well as we can see when looking at a particular one.</p>
 {% highlight matlab %}
@@ -170,7 +170,7 @@ ans = dislocationDensityTensor
  *10^-4
      NaN  -5.178 -12.003
   15.127     NaN  16.171
-     NaN     NaN   -3.26'
+     NaN     NaN   -3.26
 {% endhighlight %}
 <h2 id="10">Crystallographic Dislocations</h2><p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the attomic lattice different dislocattion systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
 {% highlight matlab %}
@@ -236,7 +236,7 @@ dS = dislocationSystem
      (-1 -1 -1)       1
       (1 -1  1)       1
      (-1  1  1)       1
-      (1  1 -1)       1'
+      (1  1 -1)       1
 {% endhighlight %}
 <p>Here the norm of the Burgers vectors is important</p>
 {% highlight matlab %}
@@ -249,7 +249,7 @@ a = norm(ebsd.CS.aAxis);
 
 {% highlight plaintext %}
 ans =
-    2.4855    2.4855    2.4855'
+    2.4855    2.4855    2.4855
 {% endhighlight %}
 <h2 id="12">The Energy of Dislocations</h2><p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p><p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p><p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p><p>\[ U_{\mathrm{edge}} = (1-\nu) U_{\mathrm{screw}} \]</p><p>where</p><div><ul><li><code class="language-plaintext highlighter-rouge">G</code> is</li><li><code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li><li><code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li><li><code class="language-plaintext highlighter-rouge">R</code></li><li><code class="language-plaintext highlighter-rouge">r</code></li></ul></div><p>In this example we assume</p>
 {% highlight matlab %}
@@ -286,7 +286,7 @@ ans = dislocationDensityTensor
  
  -1.1717 -0.5858  0.5858
   1.1717  0.5858 -0.5858
- -1.1717 -0.5858  0.5858'
+ -1.1717 -0.5858  0.5858
 {% endhighlight %}
 <p>Note that the unit of this tensors is the same as the unit used for describing the length of the unit cell, which is in most cases Angstrom (au). Furthremore, we observe that the tensor is given with respect to the crystal reference frame while the dislocation densitiy tensors are given with respect to the specimen reference frame. Hence, to make them compatible we have to rotate the dislocation tensors into the specimen reference frame as well. This is done by</p>
 {% highlight matlab %}
@@ -296,7 +296,7 @@ dSRot = ebsd.orientations * dS
 {% highlight plaintext %}
 dSRot = dislocationSystem  
  edge dislocations : 5144 x 48
- screw dislocations: 5144 x 4'
+ screw dislocations: 5144 x 4
 {% endhighlight %}
 <h2 id="15">Fitting Dislocations to the incomplete dislocation density tensor</h2><p>Now we are ready for fitting the dislocation tensors to the dislocation densitiy tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
 {% highlight matlab %}
@@ -304,7 +304,7 @@ dSRot = dislocationSystem
 {% endhighlight %}
 
 {% highlight plaintext %}
-Optimal solution found.'
+Optimal solution found.
 {% endhighlight %}
 <p>As result we obtain a matrix of densities <code class="language-plaintext highlighter-rouge">rho</code> such that the product with the dislocation systems yields the incomplete dislocation density tensors derived from the curvature, i.e.,</p>
 {% highlight matlab %}
@@ -338,7 +338,7 @@ ans = dislocationDensityTensor
  *10^-5
     NaN   1.96 -29.17
   48.71    NaN  44.63
-    NaN    NaN   5.26'
+    NaN    NaN   5.26
 {% endhighlight %}
 <p>we may also restore the complete curvature tensor with</p>
 {% highlight matlab %}
@@ -349,7 +349,7 @@ kappa = alpha.curvature
 kappa = curvatureTensor  
   size: 5151 x 1 
   unit: 1/um     
-  rank: 2 (3 x 3)'
+  rank: 2 (3 x 3)
 {% endhighlight %}
 <p>and plot it as we did before</p>
 {% highlight matlab %}
@@ -378,7 +378,7 @@ factor
 
 {% highlight plaintext %}
 factor =
-   1.0000e+16'
+   1.0000e+16
 {% endhighlight %}
 <p>Multiplying the densities <code class="language-plaintext highlighter-rouge">rho</code> with this factor and the individual energies of the the dislocation systems we end up with the total dislocation energy. Lets plot this at a logarithmic scale</p>
 {% highlight matlab %}

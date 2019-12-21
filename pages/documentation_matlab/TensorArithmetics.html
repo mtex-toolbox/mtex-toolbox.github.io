@@ -1,6 +1,6 @@
 ---
 title: Tensor Arithmetics
-last_updated: 07-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: TensorArithmetics.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
+      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
     edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2>
 {% highlight matlab %}
 T1 = tensor.rand('rank',2)
@@ -30,32 +30,32 @@ T1 = tensor
   rank: 2 (3 x 3)
  
  *10^-2
- 39.63 48.49 49.36
- 32.54 46.95 89.84
- 72.14 51.83  52.7
+  0.54 75.06 64.57
+ 41.29 17.37 82.97
+ 78.99  5.99 67.61
  
 T2 = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
-  35.9 88.67 92.46
- 14.75 44.17 85.78
- 95.87 99.54 97.43
+  5.97  74.6 60.15
+ 25.82 17.35  0.33
+ 53.67 11.92 33.79
  
 ans = tensor  
   rank: 2 (3 x 3)
  
- 1.1143 2.2583 2.3429
- 0.6204 1.3528  2.614
- 2.6388 2.5092 2.4756
+ 0.1248 2.2425 1.8486
+ 0.9292 0.5208 0.8362
+ 1.8632 0.2983 1.3518
  
 ans = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
- 14.23 42.99 45.64
-   4.8 20.74 77.06
- 69.16 51.59 51.34'
+  0.03 55.99 38.83
+ 10.66  3.01  0.27
+ 42.39  0.71 22.84
 {% endhighlight %}
 <h2 id="2">Tensor Products</h2><p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
 {% highlight matlab %}
@@ -73,7 +73,7 @@ C = stiffnessTensor
   71.6  76.8 233.5     0     0     0
      0     0     0    64     0     0
      0     0     0     0    77     0
-     0     0     0     0     0  78.7'
+     0     0     0     0     0  78.7
 {% endhighlight %}
 <p>Then by Hooks law the stiffness tensor acts on a strain tensor, e.g.,</p>
 {% highlight matlab %}
@@ -86,7 +86,7 @@ eps = strainTensor
  
   1  0  0
   0  0  0
-  0  0 -1'
+  0  0 -1
 {% endhighlight %}
 <p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its mpst general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
 {% highlight matlab %}
@@ -99,7 +99,7 @@ sigma = tensor
  
   248.9      0      0
       0  -8.65      0
-      0      0 -161.9'
+      0      0 -161.9
 {% endhighlight %}
 <p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>\[ (a \otimes b)_{ij} = a_i b_j \]</p><p>beween two rank one tensors</p>
 {% highlight matlab %}
@@ -116,25 +116,25 @@ a = tensor
   rank: 1 (3)
  
  *10^-2
-  3.64
- 20.83
- 97.41
+ 92.53
+ 13.99
+ 95.08
  
 b = tensor  
   rank: 1 (3)
  
  *10^-2
- 41.19
-  22.1
- 89.87
+  69.3
+ 41.93
+    86
  
 ans = tensor  
   rank: 2 (3 x 3)
  
  *10^-2
-   1.5   0.8  3.27
-  8.58   4.6 18.72
- 40.12 21.53 87.55'
+ 64.12  38.8 79.57
+  9.69  5.86 12.03
+ 65.89 39.86 81.76
 {% endhighlight %}
 <p>and the inner product</p><p>\[ a \cdot b = \sum_i a_i b_i</p><p>by</p>
 {% highlight matlab %}
@@ -143,7 +143,7 @@ EinsteinSum(a,-1,b,-1)
 
 {% highlight plaintext %}
 ans =
-    0.9365'
+    1.5175
 {% endhighlight %}
 <p>As a final example we consider the e linear compressibility in a certain direction <b>v</b> can be computed by the formula</p><p>\] c = \sum_{i,j,k} S_{ijkk} v_i v_j$$</p><p>where \(C = S^{-1}\) is the inverse of the comcompliance thensor, i.e. the stiffness tensor</p>
 {% highlight matlab %}
@@ -166,7 +166,7 @@ S = complianceTensor
       0      0      0      0 129.87      0
       0      0      0      0      0 127.06
 c =
-  460.2500'
+  460.2500
 {% endhighlight %}
 <p>Here we used the <a href="tensor.inv.html">inv</a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a double dot product</p>
 {% highlight matlab %}
@@ -187,7 +187,7 @@ ans = stressTensor
  
   248.9      0      0
       0  -8.65      0
-      0      0 -161.9'
+      0      0 -161.9
 {% endhighlight %}
 <p>More examples for tensor products ares</p>
 {% highlight matlab %}
@@ -205,13 +205,13 @@ det(T1)
 
 {% highlight plaintext %}
 ans =
-    3.7755
+    1.7475
 ans =
-    3.7755
+    1.7475
 ans =
-    3.7755
+    1.7475
 ans =
-    0.0607'
+    0.2101
 {% endhighlight %}
 <h2 id="10">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html">rotate</a>. Let's define a rotation</p>
 {% highlight matlab %}
@@ -224,7 +224,7 @@ r = rotation
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
-    45    0    0    0'
+    45    0    0    0
 {% endhighlight %}
 <p>Then the rotated tensor is given by</p>
 {% highlight matlab %}
@@ -236,10 +236,9 @@ plot(Trot)
 Trot = tensor  
   rank: 2 (3 x 3)
  
- *10^-2
-   2.78   4.31 -28.62
- -11.63  83.81  98.43
-  14.36  87.66   52.7'
+ -0.4922  0.0847 -0.1301
+  -0.253  0.6713  1.0432
+  0.5162  0.6009  0.6761
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TensorArithmetics_01.png" %}
@@ -272,6 +271,6 @@ T = tensor
   tensor in compact matrix form: *10^-12
      0     0     0     0   1.7     0
      0     0     0  -1.7     0     0
-  51.7 -51.7     0     0     0     0'
+  51.7 -51.7     0     0     0     0
 {% endhighlight %}
 </div></body></html>

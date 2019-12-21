@@ -1,6 +1,6 @@
 ---
 title: ODF Estimation from EBSD data
-last_updated: 08-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: EBSD2ODF.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Estimation from EBSD data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-08"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSD2ODF.m">
+      --><title>ODF Estimation from EBSD data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSD2ODF.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In order to discuss ODF estimation from individual orientation data we start by loading an EBSD data set</p>
 {% highlight matlab %}
 mtexdata copper
@@ -20,13 +20,26 @@ plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
+loading data ...
+Warning: more column data was passed in than expected. Check your column names make sense!
+Warning: You have choosen to correct your EBSD data for differently aligned
+reference frames for the Euler angles and the map coordinates. However, you have
+not specified which reference system setting has been used on your Edax system .
+I'm going to assume "setting 1". Be careful, the default setting of EDAX is
+"setting 2". Click <a href="matlab:MTEXdoc('EBSDReferenceFrame')">here</a> for
+more information.Please make sure you have chosen the correct setting and
+specify it explicitely using the syntax
+
+ ebsd = EBSD.load(fileName,'convertEuler2SpatialReferenceFrame','setting 2') 
+ saving data to /home/hielscher/mtex/master/data/copper.mat
+ 
 ebsd = EBSD  
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y
- Scan unit : um'
+ Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_01.png" %}
@@ -46,7 +59,7 @@ odf = ODF
  
   Harmonic portion:
     degree: 25
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_02.png" %}
@@ -59,7 +72,7 @@ psi = calcKernel(ebsd.orientations)
 {% highlight plaintext %}
 psi = deLaValleePoussinKernel  
   bandwidth: 84
-  halfwidth: 2.7&deg;'
+  halfwidth: 2.7°
 {% endhighlight %}
 <p>In the above example, the EBSD measurements are spatial dependent and the resulting halfwidth is too small. To avoid this problem we have to perform grain reconstruction first and then estimate the halfwidth from the grains.</p>
 {% highlight matlab %}
@@ -79,7 +92,7 @@ odf = calcDensity(ebsd('co').orientations,'kernel',psi)
 {% highlight plaintext %}
 psi = deLaValleePoussinKernel  
   bandwidth: 51
-  halfwidth: 4.7&deg;
+  halfwidth: 4.7°
  
  
 odf = ODF  
@@ -88,7 +101,7 @@ odf = ODF
  
   Harmonic portion:
     degree: 51
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <p>Once an ODF is estimated all the functionality MTEX offers for <a href="ODFCharacteristics.html">ODF analysis</a> and <a href="ODFPlot.html">ODF visualization</a> is available.</p>
 {% highlight matlab %}
@@ -107,7 +120,7 @@ ori = calcOrientations(modelODF,10000)
 ori = orientation  
   size: 10000 x 1
   crystal symmetry : m-3m
-  specimen symmetry: 1'
+  specimen symmetry: 1
 {% endhighlight %}
 <p>Next we define a list of kernel halfwidth ,</p>
 {% highlight matlab %}

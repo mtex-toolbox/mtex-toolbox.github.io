@@ -1,6 +1,6 @@
 ---
 title: Ghost Effect Analysis
-last_updated: 07-Nov-2019
+last_updated: 21-Dec-2019
 sidebar: documentation_sidebar
 permalink: PoleFigure2ODFGhostCorrection.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ghost Effect Analysis</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-11-07"><meta name="DC.source" content="script_PoleFigure2ODFGhostCorrection.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigure2ODFGhostCorrection.m">
+      --><title>Ghost Effect Analysis</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_PoleFigure2ODFGhostCorrection.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigure2ODFGhostCorrection.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>A general problem in estimating an ODF from pole figure data is the fact that the odd order Fourier coefficients of the ODF are not present anymore in the pole figure data and therefore it is difficult to estimate them. Artifacts in the estimated ODF that are due to underestimated odd order Fourier coefficients are called <b>ghost effects</b>. It is known that for sharp textures the ghost effect is relatively small due to the strict non-negativity condition. For weak textures, however, the ghost effect might be remarkable. For those cases, <b>MTEX</b> provides the option <b>ghost_correction</b> which tries to determine the uniform portion of the unknown ODF and to transform the unknown weak ODF into a sharp ODF by substracting this uniform portion. This is almost the approach Matthies proposed in his book (He called the uniform portion <b>phon</b>). In this section, we are going to demonstrate the power of ghost correction at a simple, synthetic example.</p><h2 id="2">Construct Model ODF</h2><p>A unimodal ODF with a high uniform portion.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('222');
@@ -29,9 +29,9 @@ odf = ODF
     weight: 0.9
  
   Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10&deg;
-    center: (0&deg;,0&deg;,0&deg;)
-    weight: 0.1'
+    kernel: de la Vallee Poussin, halfwidth 10°
+    center: (0°,0°,0°)
+    weight: 0.1
 {% endhighlight %}
 <h2 id="3">Simulate pole figures</h2>
 {% highlight matlab %}
@@ -63,7 +63,7 @@ calcError(pf,rec,'RP')
 
 {% highlight plaintext %}
 ans =
-    0.0089    0.0088    0.0106'
+    0.0089    0.0088    0.0106
 {% endhighlight %}
 <p>with ghost correction:</p>
 {% highlight matlab %}
@@ -72,7 +72,7 @@ calcError(pf,rec_cor,'RP')
 
 {% highlight plaintext %}
 ans =
-    0.0262    0.0250    0.0265'
+    0.0262    0.0250    0.0265
 {% endhighlight %}
 <h2 id="9">Compare Reconstruction Errors</h2><p>without ghost correction:</p>
 {% highlight matlab %}
@@ -81,7 +81,7 @@ calcError(rec,odf)
 
 {% highlight plaintext %}
 ans =
-    0.1253'
+    0.1253
 {% endhighlight %}
 <p>with ghost correction:</p>
 {% highlight matlab %}
@@ -90,7 +90,7 @@ calcError(rec_cor,odf)
 
 {% highlight plaintext %}
 ans =
-    0.0055'
+    0.0055
 {% endhighlight %}
 <h2 id="12">Plot the ODFs</h2><p>without ghost correction:</p>
 {% highlight matlab %}
@@ -157,7 +157,7 @@ rec_cor = ODF
  
   Harmonic portion:
     degree: 25
-    weight: 1'
+    weight: 1
 {% endhighlight %}
 <h2 id="19">Calculate Reconstruction Errors from Fourier Coefficients</h2><p>without ghost correction:</p>
 {% highlight matlab %}
@@ -166,7 +166,7 @@ calcError(rec,odf,'L2')
 
 {% highlight plaintext %}
 ans =
-    0.3592'
+    0.3592
 {% endhighlight %}
 <p>with ghost correction:</p>
 {% highlight matlab %}
@@ -175,7 +175,7 @@ calcError(rec_cor,odf,'L2')
 
 {% highlight plaintext %}
 ans =
-    0.0322'
+    0.0322
 {% endhighlight %}
 <h2 id="22">Plot Fourier Coefficients</h2><p>Plotting the Fourier coefficients of the recalculated ODFs shows that the Fourier coefficients without ghost correction oscillates much more than the Fourier coefficients with ghost correction</p><p>true ODF</p>
 {% highlight matlab %}
