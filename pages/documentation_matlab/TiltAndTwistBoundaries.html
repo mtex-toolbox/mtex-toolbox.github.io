@@ -1,6 +1,6 @@
 ---
 title: Tilt and Twist Boundaries
-last_updated: 21-Dec-2019
+last_updated: 08-Jan-2020
 sidebar: documentation_sidebar
 permalink: TiltAndTwistBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TiltAndTwistBoundaries.m">
+      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-08"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TiltAndTwistBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>If a material deforms through the movement of dislocations, re- arrangement of dislocationsto a low-energy configuration may happen during deformation (i.e. in slow, geologic deformation) or or afterwards (in many metals). In any case, the arrangement of dislocation walls can lead to so-called subgrains boundaries. If such a boundary is composed of edge dislocations, it is called a tilt boundary and the rotation axis relating both parts of the grain at each side can be expected to be within the boudnary plane (ideally parallel to the edge dislocation line). If the boundary is composed of screw dislocations, the rotation axis should be normal to the boundary. Between those end-members, there are general boundaries where the rotation axis is not easily related to the type of dislocations unless further information is available.</p><h2 id="2">Data import and grain detection</h2><p>Lets start by loading an MTEX standard data set, reconstuct grains and grain boundaries</p>
 {% highlight matlab %}
 % import data
@@ -23,10 +23,10 @@ ebsd = ebsd(grains(grains.grainSize>10));
 [grains, ebsd.grainId, ebsd.mis2mean] = calcGrains(ebsd);
 
 % smooth grain boundaries to avoid stair casing effect
-grains = smooth(grains,5)
+grains = smooth(grains,5);
 
 % consider only the very big grains
-grains = grains(grains.grainSize>300,'fo');
+grains = grains(grains.grainSize>300,'fo')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -45,13 +45,10 @@ ebsd = EBSD
 grains = grain2d  
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     0     461   29269  notIndexed                                   
-     1     480  145310  Forsterite       mmm                         
-     2     192   22804   Enstatite       mmm                         
-     3     109    6219    Diopside     12/m1       X||a*, Y||b*, Z||c
+     1     126  115173  Forsterite       mmm                         
  
- boundary segments: 49750
- triple points: 2000
+ boundary segments: 26459
+ triple points: 1312
  
  Properties: GOS, meanRotation
 {% endhighlight %}
@@ -85,30 +82,19 @@ hold off
 {% highlight matlab %}
 % restrict the
 ebsd = ebsd(grains(ind));
-%ebsd = ebsd(ebsd.inpolygon([3000,8500,2700,-3100]));
 
 % and denoise a little and fill
-f = halfQuadraticFilter;
-f.alpha =0.05;
-f.threshold=1.5*degree;
+F = halfQuadraticFilter;
+F.alpha = 1;
+F.threshold  = 1.5*degree;
 
-ebsd = smooth(ebsd,f,grains,'fill');
-ebsd = ebsd('indexed')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1   3153 (100%)  Forsterite  LightSkyBlue       mmm                         
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
+ebsdS = smooth(ebsd,F,'fill',grains(ind));
+ebsdS = ebsdS('indexed');
 {% endhighlight %}
 
 {% highlight matlab %}
 colorKey.oriRef = mean(ebsd.orientations);
-plot(ebsd,colorKey.orientation2color(ebsd.orientations),'micronbar','off')
+plot(ebsdS,colorKey.orientation2color(ebsdS.orientations),'micronbar','off')
 
 % plot grain boundaries
 hold on
@@ -119,98 +105,23 @@ hold off
 {% include inline_image.html file="TiltAndTwistBoundaries_02.png" %}
 </center><h2 id="6">Low angle subgrain boundaries</h2><p>Since we want to investiage the microtexture of the low angle boundaries, let's segment at a small angle</p>
 {% highlight matlab %}
-[grains, ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',1.5*degree,'boundary','tight')
+[subGrains, ebsdS.grainId,ebsdS.mis2mean] = calcGrains(ebsdS,'angle',1.25*degree,'boundary','tight');
 
-grains = smooth(grains,5)
+subGrains = smooth(subGrains,5);
 
 % gather all subgrain boundaries
-gbfo = [grains.boundary('f','f') grains.innerBoundary('f','f')];
+gbfo = [subGrains.boundary('f','f') subGrains.innerBoundary('f','f')];
 
 % colorize orientation according to their misorientation to the meanorientation
-plot(ebsd,colorKey.orientation2color(ebsd.orientations),'micronbar','off')
+plot(ebsdS,colorKey.orientation2color(ebsdS.orientations),'micronbar','off')
 hold on
 
 % colorize subgrain boundaries according to their misorientation angle
-plot(gbfo,gbfo.misorientation.angle./degree,'lineWidth',6)
-plot(grains.boundary('notIndexed'),'lineWidth',3)
+plot(gbfo,gbfo.misorientation.angle./degree,'lineWidth',3)
+plot(subGrains.boundary('notIndexed'),'lineWidth',2)
 hold off
 mtexColorbar('Title','Misorientation angle [\circ]','locacation','southoutside')
 mtexColorMap blue2red
-{% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      17    3153  Forsterite       mmm                         
- 
- boundary segments: 547
- triple points: 12
- 
- Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  1       1        1            0     11    45    284
-  2       1        7   0.00252537     10    43    283
-  3       1        1            0     13    48    281
-  4       1        1            0     13    49    283
-  5       1        1            0     12    42    280
-  6       1        1            0     11    41    281
-  7       1        2            0     13    40    281
-  8       1        1            0     13    39    281
-  9       1        1            0     16    45    277
- 10       1        1            0     12    41    280
- 11       1        1            0     15    44    277
- 12       1       91   0.00276528     16    47    275
- 13       1        1            0     11    37    283
- 14       1     1737     0.025659     13    46    282
- 15       1        1            0     12    39    284
- 16       1      278   0.00491655     11    40    285
- 17       1     1027    0.0287535     13    43    280
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1   3153 (100%)  Forsterite  LightSkyBlue       mmm                         
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1   3153 (100%)  Forsterite  LightSkyBlue       mmm                         
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
- 
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      17    3153  Forsterite       mmm                         
- 
- boundary segments: 547
- triple points: 12
- 
- Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  1       1        1            0     11    45    284
-  2       1        7   0.00252537     10    43    283
-  3       1        1            0     13    48    281
-  4       1        1            0     13    49    283
-  5       1        1            0     12    42    280
-  6       1        1            0     11    41    281
-  7       1        2            0     13    40    281
-  8       1        1            0     13    39    281
-  9       1        1            0     16    45    277
- 10       1        1            0     12    41    280
- 11       1        1            0     15    44    277
- 12       1       91   0.00276528     16    47    275
- 13       1        1            0     11    37    283
- 14       1     1737     0.025659     13    46    282
- 15       1        1            0     12    39    284
- 16       1      278   0.00491655     11    40    285
- 17       1     1027    0.0287535     13    43    280
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiltAndTwistBoundaries_03.png" %}
@@ -225,12 +136,12 @@ mtexColorbar('Title','Misorientation angle [\circ]','locacation','southoutside')
 {% include inline_image.html file="TiltAndTwistBoundaries_04.png" %}
 </center><p>We observe that the misorientation axes have a strong tendency to be perpendicular to [100].</p><h2 id="9">The misorientation axis in specimen coordinats</h2><p>The computation of the misorientation axis in specimen coordinates is a little bit more complicated as it is impossible using only the misorientions. In fact we require the adjecent orientations on both sides of the subgrain boundaries. We can find those by the command</p>
 {% highlight matlab %}
-ori_boundary = ebsd('id',gbfo.ebsdId).orientations
+ori_boundary = ebsdS('id',gbfo.ebsdId).orientations
 {% endhighlight %}
 
 {% highlight plaintext %}
 ori_boundary = orientation  
-  size: 273 x 2
+  size: 322 x 2
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
 {% endhighlight %}
@@ -241,7 +152,7 @@ axS = axis(ori_boundary(:,1),ori_boundary(:,2),'antipodal')
 
 {% highlight plaintext %}
 axS = vector3d  
- size: 273 x 1
+ size: 322 x 1
  antipodal: true
 {% endhighlight %}
 <p>and we may visualize them in a spherical plot using</p>
@@ -254,11 +165,11 @@ mtexColorbar('Title','Misorientation angle [\circ]','locacation','southoutside')
 {% include inline_image.html file="TiltAndTwistBoundaries_05.png" %}
 </center><h2 id="12">Colorize low angle boundaries by misorientation axes</h2>
 {% highlight matlab %}
-% First, we plot some crytsal directions of the grain in a pole figure
+% First, we plot some crystal directions of the grain in a pole figure
 % so we understand the orientation of the grain a little better
 close all
 h = Miller({1,0,0},{0,1,0},{0,0,1},ebsd.CS);
-ori = ebsd.orientations;
+ori = ebsdS.orientations;
 plotPDF(ori,colorKey.orientation2color(ori),h,'MarkerSize',5)
 {% endhighlight %}
 
@@ -271,7 +182,7 @@ I'm plotting 1250 random orientations out of 3153 given orientations
 {% include inline_image.html file="TiltAndTwistBoundaries_06.png" %}
 </center><p>now we plot the grain with subboundaries color coded with the direction mapping according to the misorientation axes in crystal coordinates</p>
 {% highlight matlab %}
-plot(ebsd,colorKey.orientation2color(ori),'faceAlpha',0.3)
+plot(ebsdS,colorKey.orientation2color(ori),'faceAlpha',0.3)
 hold on
 axisKey = HSVDirectionKey(ori.CS);
 color = axisKey.direction2color(gbfo.misorientation.axis);
@@ -284,7 +195,7 @@ mtexTitle('misor crystal')
 {% include inline_image.html file="TiltAndTwistBoundaries_07.png" %}
 </center><p>Next we plot the grain with subboundaries colorcoded with the direction mapping according to the misorientation axes in specimen coordinates</p>
 {% highlight matlab %}
-plot(ebsd,colorKey.orientation2color(ori),'faceAlpha',0.3)
+plot(ebsdS,colorKey.orientation2color(ori),'faceAlpha',0.3)
 hold on
 axisKey = HSVDirectionKey;
 color = axisKey.direction2color(axS);

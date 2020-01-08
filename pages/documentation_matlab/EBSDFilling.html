@@ -1,0 +1,248 @@
+---
+title: Fill Missing Data in Orientation Maps
+last_updated: 08-Jan-2020
+sidebar: documentation_sidebar
+permalink: EBSDFilling.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Fill Missing Data in Orientation Maps</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-08"><meta name="DC.source" content="script_EBSDFilling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDFilling.m">
+    edit page</a></font><div><!--introduction--><p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indecing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p><!--/introduction--><p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium</p>
+{% highlight matlab %}
+% import the data
+mtexdata twin
+
+% consider only indexed data
+ebsd = ebsd('indexed');
+
+% reconstruct the grain structure
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',10*degree);
+
+% remove some very small grains
+ebsd(grains(grains.grainSize<5)) = [];
+
+% redo grain segementation
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',10*degree);
+
+% smooth grain boundaries
+grains = smooth(grains,5);
+
+% plot the orientation map
+plot(ebsd,ebsd.orientations)
+
+% and on top the grain boundaries
+hold on
+plot(grains.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_01.png" %}
+</center><p>In order to visualize orientation gradients within the grains we next colorize the orientations according to their misorientation axis and angle with respect to the grain mean orientation.</p>
+{% highlight matlab %}
+% define the color key
+colorKey = axisAngleColorKey;
+
+% we need to set the reference orientations are the mean orientation of each grain
+colorKey.oriRef = grains(ebsd.grainId).meanOrientation;
+
+% lets plot the result
+plot(ebsd,colorKey.orientation2color(ebsd.orientations))
+hold on
+plot(grains.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_02.png" %}
+</center><h2 id="3">A Very Sparse Measured Data Set</h2><p>In order to demonstrate the fill capabilities of the MTEX algorithms we randomly throw away 75 percent of all data.</p>
+{% highlight matlab %}
+ebsdSub = ebsd(discretesample(length(ebsd),round(length(ebsd)*25/100)));
+
+% plot the reduced data
+plot(ebsdSub,ebsdSub.orientations)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_03.png" %}
+</center><p>In a first step we reconstruct the grain structure from these 25 percent pixels.</p>
+{% highlight matlab %}
+% reconstruct the grain structure
+[grainsSub,ebsdSub.grainId] = calcGrains(ebsdSub,'angle',10*degree);
+
+grainsSub = smooth(grainsSub,5)
+
+hold on
+plot(grainsSub.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+grainsSub = grain2d  
+ 
+ Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
+     1      84    5691  Magnesium     6/mmm       X||a*, Y||b, Z||c*
+ 
+ boundary segments: 2359
+ triple points: 109
+ 
+ Properties: GOS, meanRotation
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_04.png" %}
+</center><p>In order to fill the 75 percent missing orientations we use the option <code class="language-plaintext highlighter-rouge">fill</code> when denoising the data.</p>
+{% highlight matlab %}
+F = splineFilter;
+
+% interpolate the missing data
+ebsdSub_filled = smooth(ebsdSub,F,'fill',grainsSub);
+ebsdSub_filled = ebsdSub_filled('indexed');
+
+% plot the result
+colorKey.oriRef = grainsSub(ebsdSub_filled.grainId).meanOrientation;
+plot(ebsdSub_filled,colorKey.orientation2color(ebsdSub_filled.orientations))
+
+hold on
+plot(grainsSub.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_05.png" %}
+</center>
+{% highlight matlab %}
+F = halfQuadraticFilter;
+
+% interpolate the missing data
+ebsdSub_filled = smooth(ebsdSub,F,'fill',grainsSub);
+ebsdSub_filled = ebsdSub_filled('indexed');
+
+% plot the result
+colorKey.oriRef = grainsSub(ebsdSub_filled.grainId).meanOrientation;
+plot(ebsdSub_filled,colorKey.orientation2color(ebsdSub_filled.orientations))
+
+hold on
+plot(grainsSub.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_06.png" %}
+</center><h2 id="7">A real world example</h2><p>Let's consider a subset of the</p>
+{% highlight matlab %}
+close all; plotx2east
+mtexdata forsterite
+ebsd = ebsd(inpolygon(ebsd,[10 4 5 3]*10^3));
+plot(ebsd('Fo'),ebsd('Fo').orientations)
+hold on
+plot(ebsd('En'),ebsd('En').orientations)
+plot(ebsd('Di'),ebsd('Di').orientations)
+
+% compute grains
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',10*degree);
+
+
+% remove small grains
+ebsd(grains(grains.grainSize < 3)) = [];
+
+% and repeat the grain computation
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',10*degree);
+
+%
+grains = smooth(grains,5);
+
+% plot the boundary of all grains
+plot(grains.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_07.png" %}
+</center><p>Using the option <code class="language-plaintext highlighter-rouge">fill</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
+{% highlight matlab %}
+F = halfQuadraticFilter;
+F.alpha = 10;
+
+ebsdS = smooth(ebsd('indexed'),F,'fill',grains);
+
+plot(ebsdS('Fo'),ebsdS('Fo').orientations)
+hold on
+plot(ebsdS('En'),ebsdS('En').orientations)
+plot(ebsdS('Di'),ebsdS('Di').orientations)
+
+% plot the boundary of all grains
+plot(grains.boundary,'linewidth',1.5)
+
+% stop overide mode
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_08.png" %}
+</center><p>In order to visualize the orientation gradient within the grains, we plot the misorientation to the meanorientation. We observe that the mis2mean varies smoothly also within the regions of not indexed orientations.</p>
+{% highlight matlab %}
+% plot mis2mean for all phases
+ipfKey = axisAngleColorKey(ebsdS('Fo'));
+ipfKey.oriRef = grains(ebsdS('fo').grainId).meanOrientation;
+ipfKey.maxAngle = 2.5*degree;
+
+color = ipfKey.orientation2color(ebsdS('Fo').orientations);
+plot(ebsdS('Fo'),color,'micronbar','off')
+
+hold on
+ipfKey.oriRef = grains(ebsdS('En').grainId).meanOrientation;
+
+plot(ebsdS('En'),ipfKey.orientation2color(ebsdS('En').orientations))
+
+
+% plot boundary
+plot(grains.boundary,'linewidth',4)
+plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_09.png" %}
+</center><p>For comparison</p>
+{% highlight matlab %}
+ipfKey.oriRef = grains(ebsd('fo').grainId).meanOrientation;
+ipfKey.maxAngle = 2.5*degree;
+
+color = ipfKey.orientation2color(ebsd('Fo').orientations);
+plot(ebsd('Fo'),color,'micronbar','off')
+
+hold on
+ipfKey.oriRef = grains(ebsd('En').grainId).meanOrientation;
+
+plot(ebsd('En'),ipfKey.orientation2color(ebsd('En').orientations))
+
+
+% plot boundary
+plot(grains.boundary,'linewidth',4)
+plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_10.png" %}
+</center></div></body></html>
