@@ -1,6 +1,6 @@
 ---
-title: Schmid Factor Analysis
-last_updated: 21-Dec-2019
+title: script_PlasticDeformation
+last_updated: 08-Jan-2020
 sidebar: documentation_sidebar
 permalink: PlasticDeformation.html
 folder: documentation
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Schmid Factor Analysis</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_PlasticDeformation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/PlasticDeformation.m">
-    edit page</a></font><div><!--introduction--><p>This script describes how to analyze Schmid factors.</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Geometric Definition</h2><p>Let us assume a Nickel crystal</p>
+      --><title>script_PlasticDeformation</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-08"><meta name="DC.source" content="script_PlasticDeformation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/PlasticDeformation.m">
+    edit page</a></font><div><h2 id="1">Schmid Factor Analysis</h2><p>This script describes how to analyze Schmid factors.</p><p>Let us assume a Nickel crystal</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic',[3.523,3.523,3.523],'mineral','Nickel')
 {% endhighlight %}
@@ -120,7 +120,7 @@ pos = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlasticDeformation_01.png" %}
-</center><h2 id="11">Stress Tensor</h2><p>Instead by the tension direction the stress might be specified by a stress tensor</p>
+</center><h2 id="9">Stress Tensor</h2><p>Instead by the tension direction the stress might be specified by a stress tensor</p>
 {% highlight matlab %}
 sigma = stressTensor.uniaxial(vector3d.Z)
 {% endhighlight %}
@@ -142,7 +142,7 @@ sS.SchmidFactor(sigma)
 ans =
     0.4082
 {% endhighlight %}
-<h2 id="13">Active Slip System</h2><p>In general a crystal contains not only one slip system but at least all symmetrically equivalent ones. Those can be computed with</p>
+<h2 id="11">Active Slip System</h2><p>In general a crystal contains not only one slip system but at least all symmetrically equivalent ones. Those can be computed with</p>
 {% highlight matlab %}
 sSAll = sS.symmetrise('antipodal')
 {% endhighlight %}
@@ -241,11 +241,11 @@ tau = sSAll.SchmidFactor(r);
 
 % plot active slip plane in red
 hold on
-quiver(r,sSAll(id).n,'ArrowSize',0.25,'LineWidth',2,'Color','r');
+quiver(r,sSAll(id).n,'LineWidth',2,'Color','r');
 
 % plot active slip direction in green
 hold on
-quiver(r,sSAll(id).b.normalize,'ArrowSize',0.12,'LineWidth',2,'Color','g');
+quiver(r,sSAll(id).b.normalize,'LineWidth',2,'Color','g');
 hold off
 {% endhighlight %}
 
@@ -299,7 +299,7 @@ tau = S2FunHarmonic
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlasticDeformation_05.png" %}
-</center><h2 id="20">The Schmid factor for EBSD data</h2><p>So far we have always assumed that the stress tensor is already given relatively to the crystal coordinate system. Next, we want to examine the case where the stress is given in specimen coordinates and we know the orientation of the crystal. Lets import some EBSD data and computet the grains</p>
+</center><h2 id="18">The Schmid factor for EBSD data</h2><p>So far we have always assumed that the stress tensor is already given relatively to the crystal coordinate system. Next, we want to examine the case where the stress is given in specimen coordinates and we know the orientation of the crystal. Lets import some EBSD data and computet the grains</p>
 {% highlight matlab %}
 mtexdata csl
 
@@ -437,7 +437,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlasticDeformation_09.png" %}
-</center><h2 id="28">Strain based analysis on the same data set</h2>
+</center><h2 id="26">Strain based analysis on the same data set</h2>
 {% highlight matlab %}
 eps = strainTensor(diag([1,0,-1]))
 

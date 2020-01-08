@@ -1,6 +1,6 @@
 ---
 title: Geometrically Necessary Dislocations
-last_updated: 21-Dec-2019
+last_updated: 08-Jan-2020
 sidebar: documentation_sidebar
 permalink: GND.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/GND.m">
+      --><title>Geometrically Necessary Dislocations</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-08"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/GND.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
 {% highlight matlab %}
 % set up the plotting convention
@@ -27,6 +27,13 @@ ipfKey.inversePoleFigureDirection = yvector;
 
 % and plot the orientation data
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize','medium')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: .ang files have usualy inconsistent conventions for
+spatial coordinates and Euler angles. You may want to use one of
+the options 'convertSpatial2EulerReferenceFrame' or
+'convertEuler2SpatialReferenceFrame' to correct for this
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_01.png" %}
@@ -71,9 +78,7 @@ hold off
 {% highlight matlab %}
 % denoise orientation data
 F = halfQuadraticFilter;
-F.threshold = 1.5*degree;
-F.eps = 1e-2;
-F.alpha = 0.01;
+
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
 
 % plot the denoised data
@@ -110,9 +115,9 @@ ans = curvatureTensor
   rank: 2 (3 x 3)
  
  *10^-4
-   1.767  15.127     NaN
-  -5.178   1.493     NaN
- -12.003  16.171     NaN
+   0.379  15.305     NaN
+  -4.591   2.269     NaN
+ -11.952  17.293     NaN
 {% endhighlight %}
 <h2 id="6">The components of the curvature tensor</h2><p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d EBSD maps.</p><p>We can access the different components of the curvature tensor with</p>
 {% highlight matlab %}
@@ -168,9 +173,9 @@ ans = dislocationDensityTensor
   rank: 2 (3 x 3)
  
  *10^-4
-     NaN  -5.178 -12.003
-  15.127     NaN  16.171
-     NaN     NaN   -3.26
+     NaN  -4.591 -11.952
+  15.305     NaN  17.293
+     NaN     NaN  -2.649
 {% endhighlight %}
 <h2 id="10">Crystallographic Dislocations</h2><p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the attomic lattice different dislocattion systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
 {% highlight matlab %}
@@ -178,6 +183,8 @@ dS = dislocationSystem.bcc(ebsd.CS)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Miller indices are converted to hkl 
+ 
 dS = dislocationSystem  
  mineral: Iron (Alpha) (432)
  edge dislocations : 48 x 1
@@ -327,18 +334,18 @@ ans = dislocationDensityTensor
   rank: 2 (3 x 3)
  
  *10^-5
- -22.73   1.96 -29.17
-  48.71   6.38  44.63
-  -5.15   1.79   5.26
+  -32.8  -2.35 -33.18
+  41.89    2.1  32.27
+  -7.56   6.68   8.92
  
 ans = dislocationDensityTensor  
   unit: 1/um     
   rank: 2 (3 x 3)
  
  *10^-5
-    NaN   1.96 -29.17
-  48.71    NaN  44.63
-    NaN    NaN   5.26
+    NaN  -2.35 -33.18
+  41.89    NaN  32.27
+    NaN    NaN   8.92
 {% endhighlight %}
 <p>we may also restore the complete curvature tensor with</p>
 {% highlight matlab %}
