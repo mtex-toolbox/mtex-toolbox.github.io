@@ -1,6 +1,6 @@
 ---
 title: Fill Missing Data in Orientation Maps
-last_updated: 08-Jan-2020
+last_updated: 10-Jan-2020
 sidebar: documentation_sidebar
 permalink: EBSDFilling.html
 folder: documentation
@@ -11,11 +11,11 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fill Missing Data in Orientation Maps</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-08"><meta name="DC.source" content="script_EBSDFilling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDFilling.m">
+      --><title>Fill Missing Data in Orientation Maps</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-10"><meta name="DC.source" content="script_EBSDFilling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDFilling.m">
     edit page</a></font><div><!--introduction--><p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indecing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p><!--/introduction--><p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium</p>
 {% highlight matlab %}
 % import the data
-mtexdata twin
+mtexdata ferrite
 
 % consider only indexed data
 ebsd = ebsd('indexed');
@@ -37,39 +37,22 @@ plot(ebsd,ebsd.orientations)
 
 % and on top the grain boundaries
 hold on
-plot(grains.boundary,'linewidth',2)
+plot(grains.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 ebsd = EBSD  
  
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     0  63044 (100%)  Ferrite  LightSkyBlue       432                         
  
- Properties: bands, bc, bs, error, mad, x, y
+ Properties: ci, fit, iq, sem_signal, x, y
  Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_01.png" %}
-</center><p>In order to visualize orientation gradients within the grains we next colorize the orientations according to their misorientation axis and angle with respect to the grain mean orientation.</p>
-{% highlight matlab %}
-% define the color key
-colorKey = axisAngleColorKey;
-
-% we need to set the reference orientations are the mean orientation of each grain
-colorKey.oriRef = grains(ebsd.grainId).meanOrientation;
-
-% lets plot the result
-plot(ebsd,colorKey.orientation2color(ebsd.orientations))
-hold on
-plot(grains.boundary,'linewidth',2)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDFilling_02.png" %}
-</center><h2 id="3">A Very Sparse Measured Data Set</h2><p>In order to demonstrate the fill capabilities of the MTEX algorithms we randomly throw away 75 percent of all data.</p>
+</center><h2 id="2">A Very Sparse Measured Data Set</h2><p>Although the data set has already some not indexed pixels we artificially make the situation more worse by throwing away 75 percent of all data.</p>
 {% highlight matlab %}
 ebsdSub = ebsd(discretesample(length(ebsd),round(length(ebsd)*25/100)));
 
@@ -77,69 +60,50 @@ ebsdSub = ebsd(discretesample(length(ebsd),round(length(ebsd)*25/100)));
 plot(ebsdSub,ebsdSub.orientations)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDFilling_03.png" %}
-</center><p>In a first step we reconstruct the grain structure from these 25 percent pixels.</p>
+{% include inline_image.html file="EBSDFilling_02.png" %}
+</center><p>Our aim is now to recover the orginal orientation map. In a first step we reconstruct the grain structure from the remaining 25 percent of pixels.</p>
 {% highlight matlab %}
 % reconstruct the grain structure
 [grainsSub,ebsdSub.grainId] = calcGrains(ebsdSub,'angle',10*degree);
 
-grainsSub = smooth(grainsSub,5)
+grainsSub = smooth(grainsSub,5);
 
 hold on
-plot(grainsSub.boundary,'linewidth',2)
+plot(grainsSub.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDFilling_03.png" %}
+</center><p>The easiest way to reconstruct missing data is to use the command <a href="EBSD.fill.html">fill</a> which interpolates missing data using the method of nearest neighbor. It is very recommended to pass the grain structure <code class="language-plaintext highlighter-rouge">grainsSub</code> as an additional argument to the <code class="language-plaintext highlighter-rouge">fill</code> function. In this case the nearest neighbors are choosen within the grains.</p>
+{% highlight matlab %}
+ebsdSub_filled = fill(ebsdSub,grainsSub);
 
-{% highlight plaintext %}
-grainsSub = grain2d  
- 
- Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
-     1      84    5691  Magnesium     6/mmm       X||a*, Y||b, Z||c*
- 
- boundary segments: 2359
- triple points: 109
- 
- Properties: GOS, meanRotation
+plot(ebsdSub_filled('indexed'),ebsdSub_filled('indexed').orientations);
+
+hold on
+plot(grainsSub.boundary,'linewidth',1.5)
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_04.png" %}
-</center><p>In order to fill the 75 percent missing orientations we use the option <code class="language-plaintext highlighter-rouge">fill</code> when denoising the data.</p>
+</center><p>A much more powerful method is to use any denoising method and set the option <code class="language-plaintext highlighter-rouge">fill</code>.</p>
 {% highlight matlab %}
-F = splineFilter;
+F = halfQuadraticFilter;
+F.alpha = 0.25;
 
 % interpolate the missing data
 ebsdSub_filled = smooth(ebsdSub,F,'fill',grainsSub);
 ebsdSub_filled = ebsdSub_filled('indexed');
 
-% plot the result
-colorKey.oriRef = grainsSub(ebsdSub_filled.grainId).meanOrientation;
-plot(ebsdSub_filled,colorKey.orientation2color(ebsdSub_filled.orientations))
+plot(ebsdSub_filled('indexed'),ebsdSub_filled('indexed').orientations);
 
 hold on
-plot(grainsSub.boundary,'linewidth',2)
+plot(grainsSub.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_05.png" %}
-</center>
-{% highlight matlab %}
-F = halfQuadraticFilter;
-
-% interpolate the missing data
-ebsdSub_filled = smooth(ebsdSub,F,'fill',grainsSub);
-ebsdSub_filled = ebsdSub_filled('indexed');
-
-% plot the result
-colorKey.oriRef = grainsSub(ebsdSub_filled.grainId).meanOrientation;
-plot(ebsdSub_filled,colorKey.orientation2color(ebsdSub_filled.orientations))
-
-hold on
-plot(grainsSub.boundary,'linewidth',2)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDFilling_06.png" %}
-</center><h2 id="7">A real world example</h2><p>Let's consider a subset of the</p>
+</center><h2 id="6">An Example from Geoscience</h2><p>Data sets with many missing pixels most often appear when measuring geological samples. The following data set of forsterite contains about 25 percent missing pixels. Lets start by importing the data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
 mtexdata forsterite
@@ -180,8 +144,8 @@ ebsd = EBSD
  Scan unit : um
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDFilling_07.png" %}
-</center><p>Using the option <code class="language-plaintext highlighter-rouge">fill</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
+{% include inline_image.html file="EBSDFilling_06.png" %}
+</center><p>Using the option <code class="language-plaintext highlighter-rouge">fill</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries are kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 F.alpha = 10;
@@ -200,7 +164,7 @@ plot(grains.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDFilling_08.png" %}
+{% include inline_image.html file="EBSDFilling_07.png" %}
 </center><p>In order to visualize the orientation gradient within the grains, we plot the misorientation to the meanorientation. We observe that the mis2mean varies smoothly also within the regions of not indexed orientations.</p>
 {% highlight matlab %}
 % plot mis2mean for all phases
@@ -223,7 +187,7 @@ plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDFilling_09.png" %}
+{% include inline_image.html file="EBSDFilling_08.png" %}
 </center><p>For comparison</p>
 {% highlight matlab %}
 ipfKey.oriRef = grains(ebsd('fo').grainId).meanOrientation;
@@ -244,5 +208,5 @@ plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDFilling_10.png" %}
+{% include inline_image.html file="EBSDFilling_09.png" %}
 </center></div></body></html>
