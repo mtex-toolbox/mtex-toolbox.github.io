@@ -1,6 +1,6 @@
 ---
 title: The Orientation Distribution Function
-last_updated: 21-Dec-2019
+last_updated: 12-Jan-2020
 sidebar: documentation_sidebar
 permalink: ODFTheory.html
 folder: documentation
@@ -11,11 +11,22 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Orientation Distribution Function</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_ODFTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFTheory.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Definition</h2><p>TODO</p>
+      --><title>The Orientation Distribution Function</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-12"><meta name="DC.source" content="script_ODFTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFTheory.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The orientation distribution function (ODF), sometimes also called orientation density function, is a function on the orienttion space that associates to each orientation \(g\) the volume percentage of crystals in a polycrystaline specimen that are in this specific orientation. Formaly, this is often expressed by the formula</p><p>\[\mathrm{odf}(g) = \frac{1}{V} \frac{\mathrm{d}V(g)}{\mathrm{d}g}.\]</p><p>Let us demonstrate the concept of an ODF at the example of an Titanium alloy. Using EBSD crystal orientations \(g_j\) have been measured at a hexagonal grid \((x_j,y_j)\) on the surface of the specimen. We may visualize these orientations by plotting accordingly rotated crystal shapes at the positions \((x_j,y_j)\).</p>
 {% highlight matlab %}
+% import the data
 mtexdata titanium
-odf = calcDensity(ebsd.orientations)
+
+% define the habitus of titanium as a somple hexagonal prism
+cS = crystalShape.hex(ebsd.CS);
+
+% plot colored orientations
+plot(ebsd,ebsd.orientations,'micronbar','off')
+
+% and on top the orientations represented by rotated hexagonal prism
+hold on
+plot(reduce(ebsd,4),40*cS)
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -26,8 +37,25 @@ ebsd = EBSD
  
  Properties: ci, grainid, iq, sem_signal, x, y
  Scan unit : um
- 
- 
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ODFTheory_01.png" %}
+</center><p>The idea of the orientation distribution function is to forget about the spatial coordinates \((x_j,y_j)\) and consider the orientations as points in the three dimensional orientation space.</p>
+{% highlight matlab %}
+plot(ebsd.orientations,'Euler')
+{% endhighlight %}
+
+{% highlight plaintext %}
+plot 2000 random orientations out of 8100 given orientations
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ODFTheory_02.png" %}
+</center><p>As the orientation space is not an Euclidean one there is no canonical way of visualizing it. In the above figure orientations are represented by its three Euler angles \((\varphi_1, \Phi, \varphi_2)\). Other visualizations are discussed in the section <a href="OrientationVisualization3d.html">3D Plots</a>. The orientation distribution function is now the relative frequency of the above points per volume element and can be computed by the command <a href="orientation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
+{% highlight matlab %}
+odf = calcDensity(ebsd.orientations)
+{% endhighlight %}
+
+{% highlight plaintext %}
 odf = ODF  
   crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
   specimen symmetry: 1
@@ -36,13 +64,47 @@ odf = ODF
     degree: 25
     weight: 1
 {% endhighlight %}
-<h2 id="3">Pole Figures and Values at Specific Orientations</h2><p>Using the command <a href="ODF.eval.html">eval</a> any ODF can be evaluated at any (set of) orientation(s).</p>
+<p>More detais about the computation of a density function from discrete measurements can be found in the section <a href="DensityEstimation.html">Density Estimation</a>.</p><p>The resulting orientation distribution function <code class="language-plaintext highlighter-rouge">odf</code> can be evaluated for any arbitrary orientation. Lets us e.g. consider the orientation</p>
 {% highlight matlab %}
-odf.eval(orientation.byEuler(0*degree,20*degree,30*degree,odf.CS))
+ori = orientation('Euler',0,0,0,ebsd.CS)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori = orientation  
+  size: 1 x 1
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  specimen symmetry: 1
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    0
+{% endhighlight %}
+<p>Then value of the ODF at this orientation is</p>
+{% highlight matlab %}
+odf.eval(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.7888
+    0.8166
 {% endhighlight %}
-</div></body></html>
+<p>The resulting value needs to be interpreted as multiple of random distribution (mrd). This means given specimen under investiagtion it is less likely to have an crystal with orientation (0,0,0) compared to a completely untextured specimen which has the orientation distribution function constant to \(1\).</p><p>Since, an ODF can be evaluated at any point in the orientation space we may visualize it as an contour plot in 3d</p>
+{% highlight matlab %}
+plot3d(odf,'Euler')
+hold on
+plot(ebsd.orientations,'Euler','MarkerEdgeColor','k')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+plot 2000 random orientations out of 8100 given orientations
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ODFTheory_03.png" %}
+</center><p>Three dimensional plot of an ODF in Euler angle space are for various reason not very recommendet. A geometrically much more reasonable representation are so called <a href="SigmaSections.html">sigma sections</a>.</p>
+{% highlight matlab %}
+plotSection(odf,'sigma')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ODFTheory_04.png" %}
+</center></div></body></html>
