@@ -24,7 +24,7 @@ In case you experience any problems have a look at our [trouble shooting page]()
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.3.beta.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.1.beta.1/mtex-5.3.beta.1.zip) ||| March 2020 ||| plasticity tensors, [changelog](changelog.html) ||| 1
+[**mtex-5.3.beta.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.beta.1/mtex-5.3.beta.1.zip) ||| March 2020 ||| plasticity tensors, [changelog](changelog.html) ||| 1
 [**mtex-5.2.8.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.8/mtex-5.2.8.zip) ||| January 2020 ||| plasticity tensors, [changelog](changelog.html) ||| 1677
 [**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](changelog.html) ||| 7677
 [**MTEXGUI-2.4.zip**](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/327848702_MTEX_GUI_for_EBSD_and_Pole_Figure_Plotting_Rev_24/data/5ba97639299bf13e604a3c43/Annotate2p4.zip) ||| Sep 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
