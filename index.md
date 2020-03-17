@@ -36,6 +36,13 @@ be up and running in seconds.
  * [contribute](https://github.com/mtex-toolbox/mtex) -- MTEX is open
    source and adding new features is more simple then you might think.
 
+### Development
+
+[![](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/curvature%20for%20grain%20boundary)](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/curvature%20for%20grain%20boundary/vote)
+[![](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/orientation%20mean%20to%20operate%20along%20a%20certain%20dimension)](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/orientation%20mean%20to%20operate%20along%20a%20certain%20dimension/vote)
+[![](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/nanmean%20for%20vector3d)](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/nanmean%20for%20vector3d/vote)
+[![](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/opening%20angle%20at%triple%20junctions)](https://api.gh-polls.com/poll/01E3MNB4B6Q5M07JCRW3Q3FT8N/opening%20angle%20at%triple%20junctions/vote)
+
 ### Toolboxes that work with MTEX
 
 * [PolyLX](http://petrol.natur.cuni.cz/~ondro/polylx) -- a Matlab toolbox for microstructure
