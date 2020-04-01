@@ -1,6 +1,6 @@
 ---
 title: Tilt and Twist Boundaries
-last_updated: 08-Jan-2020
+last_updated: 01-Apr-2020
 sidebar: documentation_sidebar
 permalink: TiltAndTwistBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-01-08"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TiltAndTwistBoundaries.m">
+      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TiltAndTwistBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>If a material deforms through the movement of dislocations, re- arrangement of dislocationsto a low-energy configuration may happen during deformation (i.e. in slow, geologic deformation) or or afterwards (in many metals). In any case, the arrangement of dislocation walls can lead to so-called subgrains boundaries. If such a boundary is composed of edge dislocations, it is called a tilt boundary and the rotation axis relating both parts of the grain at each side can be expected to be within the boudnary plane (ideally parallel to the edge dislocation line). If the boundary is composed of screw dislocations, the rotation axis should be normal to the boundary. Between those end-members, there are general boundaries where the rotation axis is not easily related to the type of dislocations unless further information is available.</p><h2 id="2">Data import and grain detection</h2><p>Lets start by loading an MTEX standard data set, reconstuct grains and grain boundaries</p>
 {% highlight matlab %}
 % import data
@@ -48,6 +48,7 @@ grains = grain2d
      1     126  115173  Forsterite       mmm                         
  
  boundary segments: 26459
+ inner boundary segments: 165
  triple points: 1312
  
  Properties: GOS, meanRotation
@@ -144,6 +145,8 @@ ori_boundary = orientation
   size: 322 x 2
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
+ 
+  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <p>which results in a Nx2 matrix of orientations with rows corresponding to the boundary segments and the two columns to the both sides of the boundary. The misorientation axis in specimen coordinates is now computed by</p>
 {% highlight matlab %}

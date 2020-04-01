@@ -1,6 +1,6 @@
 ---
 title: Crystal Symmetries
-last_updated: 21-Dec-2019
+last_updated: 01-Apr-2020
 sidebar: documentation_sidebar
 permalink: CrystalSymmetries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Crystal Symmetries</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_CrystalSymmetries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalSymmetries.m">
+      --><title>Crystal Symmetries</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_CrystalSymmetries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalSymmetries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Crystal symmetries are a sets of rotations and mirroring operations that leave the lattice of a crystal invariant. They form so called groups since the concatenation of to symmetry operations is again a symmetry operation.</p><p>Depending which symmetry operations are coonsidered the symmetry groups are categorized either into 230 space groups, 32 point groups or 11 Laue groups.</p><h2 id="2">Purely enatiomorphic (rotational) symmetry groups</h2><p>There exist exactly 11 symmetry groups consisting of proper rotations only, namely, 1, 2, 222, 3, 32, 4, 422, 6, 622, 32, 432. These are the so called enatiomorphic groups. All the groups can be defined in MTEX either by its international notation</p>
 {% highlight matlab %}
 cs = crystalSymmetry('432')
@@ -21,6 +21,7 @@ cs = crystalSymmetry('432')
 cs = crystalSymmetry  
  
   symmetry: 432    
+  elements: 24     
   a, b, c : 1, 1, 1
 {% endhighlight %}
 <p>or by the Schoenflies notation</p>
@@ -34,6 +35,7 @@ plot(cs)
 cs = crystalSymmetry  
  
   symmetry: 432    
+  elements: 24     
   a, b, c : 1, 1, 1
 {% endhighlight %}
 <center>
@@ -49,6 +51,7 @@ plot(csLaue)
 csLaue = crystalSymmetry  
  
   symmetry: m-3m   
+  elements: 48     
   a, b, c : 1, 1, 1
 {% endhighlight %}
 <center>
@@ -62,6 +65,7 @@ cs.Laue
 ans = crystalSymmetry  
  
   symmetry: m-3m   
+  elements: 48     
   a, b, c : 1, 1, 1
 {% endhighlight %}
 <p>Since all Laue groups can be derived from the 11 enantiomorphic groups there are also 11 Laue groups, namely -1, 2/m, mmm, -3, -3m, -4/m, 4/mmm, 6/m, 6/mmm, m-3, m-3m.</p><p>The Laue groups have always exactly twice as many symmetry elements as the corresponding enantiomorphic group. As the following example illustrates each symmetry element from the enantiomorphic group occurs two times - with and without inversion - in the corresponding Laue group.</p>
@@ -108,6 +112,7 @@ plot(cs)
 cs = crystalSymmetry  
  
   symmetry: mm2    
+  elements: 4      
   a, b, c : 1, 1, 1
  
  
@@ -142,6 +147,7 @@ mtexTitle(char(cs.Laue,'LaTex'))
 cs = crystalSymmetry  
  
   symmetry: -4m2   
+  elements: 8      
   a, b, c : 1, 1, 1
 {% endhighlight %}
 <center>
@@ -193,12 +199,14 @@ disjoint(crystalSymmetry('432'),crystalSymmetry('622'))
 ans = crystalSymmetry  
  
   symmetry: 432    
+  elements: 24     
   a, b, c : 1, 1, 1
  
  
 ans = crystalSymmetry  
  
   symmetry: 222    
+  elements: 4      
   a, b, c : 1, 1, 1
 {% endhighlight %}
 <h2 id="14">Import from CIF and PHL files</h2><p>MTEX allows to define a crystal symmetry by importing a crystallographic information file (*.cif)</p>
@@ -211,6 +219,7 @@ cs = crystalSymmetry
  
   mineral        : Quartz            
   symmetry       : 321               
+  elements       : 6                 
   a, b, c        : 4.9, 4.9, 5.4     
   reference frame: X||a*, Y||b, Z||c*
 {% endhighlight %}
@@ -227,8 +236,8 @@ cs_list{1}
 ans = crystalSymmetry  
  
   mineral : Magnetite    
-  density : 5.054        
   symmetry: m-3m         
+  elements: 48           
   a, b, c : 8.4, 8.4, 8.4
 {% endhighlight %}
 </div></body></html>

@@ -62,7 +62,9 @@ funOut = fullfile(pwd,'..','pages','function_reference_matlab');
 options.outDir = funOut;
 options.xml.toolbox.folder.Text = 'function_reference';
 
+options.force = true;
 publish(mtexFunctionFiles,options);
+options.force = false;
 
 %% Publish Doc
 
@@ -80,6 +82,7 @@ options.outDir = docOut;
 options.xml.toolbox.folder.Text = 'documentation';
 
 publish(mtexDocFiles,options);
+
 
 %% make examples
 

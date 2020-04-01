@@ -1,6 +1,6 @@
 ---
 title: Density Estimation
-last_updated: 21-Dec-2019
+last_updated: 01-Apr-2020
 sidebar: documentation_sidebar
 permalink: DensityEstimation.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
+      --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Density estimation is a concept to estimate a probability density function \(f_N\) from given random samples \(x_n\), \(n=1,\ldots,N\). In the simplest case the random samples \(x_n\) are real numbers and come from an unknown distribution function \(f\). The goal is than that \(f_N\) approximates \(f\) as best as possible.</p><p>Lets illustrate this setting at a the example of a mixed Gaussian distribution</p>
 {% highlight matlab %}
 % the true density function
@@ -96,6 +96,9 @@ legend('\(f\)','\(f_{0.01}\)','\(f_{0.05}\)','\(f_{0.25}\)','interpreter','Latex
 </center><p>In general a too small halfwidth leads to heavily oscillating functions, while a to large halfwdith will result in too smooth functions. In the case of one dimensional data the optimal half width is determined automatically when using the command <a href="calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
 {% highlight matlab %}
 fN = calcDensity(xN,'range',[0;1]);
+
+% we may control the halfwidth by the option 'bandwidth'
+%fN = calcDensity(xN,'range',[0;1],'bandwidth',0.004);
 
 plot(x,f(x),'linewidth',2)
 hold on
