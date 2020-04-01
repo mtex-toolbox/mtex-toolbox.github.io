@@ -1,6 +1,6 @@
 ---
 title: Theory of Misorientations
-last_updated: 21-Dec-2019
+last_updated: 01-Apr-2020
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
+      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice) misorientations. To illustrate this concept at a practical example let us first import some Magnesium EBSD data.</p>
 {% highlight matlab %}
 mtexdata twins silent
@@ -23,7 +23,7 @@ ebsd('M').CS = ebsd('M').CS.properGroup;
 grains = calcGrains(ebsd('indexed'),'threshold',5*degree);
 CS = grains.CS; % extract crystal symmetry
 {% endhighlight %}
-<p>Next we plot the grains together with their mean orientation and highlight grain 70 and grain 80</p>
+<p>Next we plot the grains together with their mean orientation and highlight grain 74 and grain 85</p>
 {% highlight matlab %}
 plot(grains,grains.meanOrientation,'micronbar','off')
 
@@ -35,7 +35,7 @@ text(grains([74,85]),{'1','2'})
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MisorientationTheory_01.png" %}
-</center><p>After extracting the mean orientation of grain 70 and 80</p>
+</center><p>After extracting the mean orientation of grain 74 and 85</p>
 {% highlight matlab %}
 ori1 = grains(74).meanOrientation;
 ori2 = grains(85).meanOrientation;
@@ -47,7 +47,7 @@ angle(ori1, ori2) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.7090
+   85.6996
 {% endhighlight %}
 <p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
 {% highlight matlab %}
@@ -56,18 +56,18 @@ angle(ori1, ori2.symmetrise) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
-   85.7090
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
+   85.6996
 {% endhighlight %}
 <p>The misorientation angle neglecting crystal symmetry can be computed by</p>
 {% highlight matlab %}
@@ -76,18 +76,18 @@ angle(ori1, ori2.symmetrise,'noSymmetry')./ degree
 
 {% highlight plaintext %}
 ans =
-  107.9460
-  100.9187
-   94.2928
-  136.6201
-  107.7074
-  179.5974
-  140.0609
-  137.3695
-  179.8072
-  101.4398
-  140.4160
-   85.7090
+  107.9490
+  100.9100
+   94.3022
+  136.6144
+  107.7191
+  179.5950
+  140.0710
+  137.3683
+  179.8142
+  101.4342
+  140.4132
+   85.6996
 {% endhighlight %}
 <p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="8">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
 {% highlight matlab %}
@@ -102,9 +102,9 @@ mori = misorientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  149.584 94.2924 150.133       0
+  149.587 94.3019  150.14       0
 {% endhighlight %}
-<p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 80 into the reference frame of crystal 70. Take as an example the plane {11-20} with respect to the grain 80. Then the plane in grain 70 which alignes parallel to this plane can be computed by</p>
+<p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 85 into the reference frame of crystal 74. Take as an example the plane {11-20} with respect to the grain 85. Then the plane in grain 74 which alignes parallel to this plane can be computed by</p>
 {% highlight matlab %}
 round(mori * Miller(1,1,-2,0,CS))
 {% endhighlight %}
@@ -118,7 +118,7 @@ ans = Miller
   i -1
   l  0
 {% endhighlight %}
-<p>Conversely, the inverse of mori is the coordinate transform from crystal 70 to grain 80.</p>
+<p>Conversely, the inverse of mori is the coordinate transform from crystal 74 to grain 85.</p>
 {% highlight matlab %}
 round(inv(mori) * Miller(2,-1,-1,0,CS))
 {% endhighlight %}
@@ -140,8 +140,8 @@ m = Miller({1,-1,0,0},{1,1,-2,0},{-1,0,1,1},{0,0,0,1},CS);
 % cycle through all major lattice planes
 close all
 for im = 1:length(m)
-  % plot the lattice planes of grains 80 with respect to the
-  % reference frame of grain 70
+  % plot the lattice planes of grains 85 with respect to the
+  % reference frame of grain 74
   plot(mori * m(im).symmetrise,'MarkerSize',10,...
     'DisplayName',char(m(im)),'figSize','large','noLabel','upper')
   hold all
@@ -168,15 +168,15 @@ angle(mori * Miller(1,0,-1,0,CS),Miller(1,1,-2,2,CS)) / degree
 
 {% highlight plaintext %}
 ans =
-    0.4464
+    0.4456
 ans =
-    0.2193
+    0.2152
 ans =
-   59.6780
+   59.6819
 ans =
-    2.6097
+    2.6206
 ans =
-    2.5396
+    2.5497
 {% endhighlight %}
 <h2 id="13">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
 {% highlight matlab %}
@@ -217,8 +217,8 @@ ans =
 % cycle through all major lattice planes
 close all
 for im = 1:length(m)
-  % plot the lattice planes of grains 80 with respect to the
-  % reference frame of grain 70
+  % plot the lattice planes of grains 85 with respect to the
+  % reference frame of grain 74
   plot(mori * m(im).symmetrise,'MarkerSize',10,...
     'DisplayName',char(m(im)),'figSize','large','noLabel','upper')
   hold all
@@ -274,6 +274,7 @@ CS_Mag = crystalSymmetry
  
   mineral : Magnetite    
   symmetry: m-3m         
+  elements: 48           
   a, b, c : 8.4, 8.4, 8.4
  
  
@@ -281,6 +282,7 @@ CS_Hem = crystalSymmetry
  
   mineral        : Hematite          
   symmetry       : -3m1              
+  elements       : 12                
   a, b, c        : 5, 5, 14          
   reference frame: X||a*, Y||b, Z||c*
 {% endhighlight %}
@@ -326,6 +328,8 @@ ans = orientation
   size: 48 x 1
   crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
+ 
+  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <p>and the corresponding pole figures by</p>
 {% highlight matlab %}

@@ -1,6 +1,6 @@
 ---
 title: find
-last_updated: 21-Dec-2019
+last_updated: 01-Apr-2020
 sidebar: function_reference_sidebar
 permalink: quaternion.find.html
 folder: function_reference
@@ -11,17 +11,22 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>find</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_quaternion__find.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@quaternion/find.m">
+      --><title>find</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_quaternion__find.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@quaternion/find.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>return indece and distance of all nodes within a eps neighborhood</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-% find for each quaternion in ref the closest quaternion in lookup
-[ind,d] = find(table,ref,radius)
+% find for each quaternion in ref the closest quaternion in table
+[ind,d] = find(table, ref)
 {% endhighlight %}
 
 {% highlight matlab %}
 % find for each quaternion in ref all quaternion in lookup that have
 % angle not larger then epsilon
-[ind,d] = find(table,rotation,epsilon)
+[ind,d] = find(table, rot_ref, epsilon)
+{% endhighlight %}
+
+{% highlight matlab %}
+% find all quaternion which have distant to fibre f less then epsilon
+[ind,d] = find(table, f_ref, epsilon)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -35,10 +40,18 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
       <tr>
          <td width="100px">
-            <tt>ref</tt>
+            <tt>rot_ref</tt>
          </td>
          <td>
-            <tt><a href="quaternion.quaternion.html">quaternion</a></tt>
+            <tt>reference <a href="quaternion.quaternion.html">quaternion</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>f_ref</tt>
+         </td>
+         <td>
+            <tt>reference <a href="fibre.fibre.html">fibre</a></tt>
          </td>
       </tr>
       <tr>
@@ -46,7 +59,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>epsilon</tt>
          </td>
          <td>
-            <tt>double</tt>
+            <tt>maximum distance</tt>
          </td>
       </tr>
    </table>
@@ -57,7 +70,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>ind</tt>
          </td>
          <td>
-            <tt/>
+            <tt>index of the found @quaternions</tt>
          </td>
       </tr>
       <tr>
@@ -65,7 +78,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>d</tt>
          </td>
          <td>
-            <tt/>
+            <tt>actual distances</tt>
          </td>
       </tr>
    </table>

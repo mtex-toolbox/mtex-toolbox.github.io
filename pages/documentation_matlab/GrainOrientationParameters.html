@@ -1,6 +1,6 @@
 ---
 title: Orientation Parameters
-last_updated: 21-Dec-2019
+last_updated: 01-Apr-2020
 sidebar: documentation_sidebar
 permalink: GrainOrientationParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Orientation Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-12-21"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainOrientationParameters.m">
+      --><title>Orientation Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainOrientationParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction-->
 {% highlight matlab %}
 close all; plotx2east
@@ -78,6 +78,7 @@ grain_selected = grain2d
      1      32   62262  Forsterite       mmm                         
  
  boundary segments: 11070
+ inner boundary segments: 192
  triple points: 782
  
  Properties: GOS, meanRotation
@@ -103,10 +104,11 @@ grain_selected = grain2d
      1       1    1208  Forsterite       mmm                         
  
  boundary segments: 238
+ inner boundary segments: 0
  triple points: 18
  
   Id   Phase   Pixels          GOS   phi1   Phi   phi2
- 640       1     1208   0.00806782    153    68    237
+ 640       1     1208   0.00807919    153    68    237
 {% endhighlight %}
 <p>you can get the id of this grain by</p>
 {% highlight matlab %}
@@ -133,10 +135,11 @@ grain_selected = grain2d
      1       1    2614  Forsterite       mmm                         
  
  boundary segments: 458
+ inner boundary segments: 48
  triple points: 28
  
    Id   Phase   Pixels        GOS   phi1   Phi   phi2
- 1856       1     2614   0.170665    153   108    247
+ 1856       1     2614   0.170049    153   109    246
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -188,16 +191,11 @@ ans = ODF
 {% endhighlight %}
 
 {% highlight matlab %}
-T_spherical = bingham_test(ori,'spherical','approximated');
-T_prolate   = bingham_test(ori,'prolate',  'approximated');
-T_oblate    = bingham_test(ori,'oblate',   'approximated');
+%T_spherical = bingham_test(ori,'spherical','approximated');
+%T_prolate   = bingham_test(ori,'prolate',  'approximated');
+%T_oblate    = bingham_test(ori,'oblate',   'approximated');
 
-[T_spherical T_prolate T_oblate]
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-     1     1     1
+%[T_spherical T_prolate T_oblate]
 {% endhighlight %}
 <p>Misorientation to mean orientation</p><p>The third output argument is again a list of the same size as the ebsd measurements. The entries are the misorientation to the mean orientation of the corresponding grain.</p>
 {% highlight matlab %}
@@ -233,10 +231,11 @@ myGrain = grain2d
      1       1     504  Forsterite       mmm                         
  
  boundary segments: 139
+ inner boundary segments: 0
  triple points: 16
  
   Id   Phase   Pixels         GOS   phi1   Phi   phi2
- 517       1      504   0.0404828    131    64    249
+ 517       1      504   0.0445432    131    64    248
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_06.png" %}
@@ -287,6 +286,8 @@ mori = misorientation
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
+ 
+  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_07.png" %}
@@ -341,6 +342,8 @@ oriRef = orientation
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
+ 
+  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <p>Now the misorientation axis with respect to the specimen reference system is computed via</p>
 {% highlight matlab %}
@@ -429,6 +432,8 @@ ans = misorientation
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
   antipodal:         true
+ 
+  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_16.png" %}

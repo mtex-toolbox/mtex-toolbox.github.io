@@ -1,0 +1,711 @@
+---
+title: script_CPOSeismicProperties
+last_updated: 01-Apr-2020
+sidebar: documentation_sidebar
+permalink: CPOSeismicProperties.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>script_CPOSeismicProperties</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_CPOSeismicProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/CPOSeismicProperties.m">
+    edit page</a></font><div><h2 id="1">Plot seismic wave velocities and polarization directions</h2><pre>In this section we will calculate the elastic properties of an aggregate
+and plot its seismic properties in pole figures that can be directly
+compare to the pole figures for CPO</pre><pre>Let's first import an example dataset from the MTEX toolboox</pre>
+{% highlight matlab %}
+mtexdata forsterite
+
+% This dataset consist of the three main phases, olivine, enstatite and
+% diopside. As we want to plot the seismic properties of this aggregate, we
+% need (i) the modal proportions of each phase in this sample, (ii) their
+% orientations, which is given by their ODFs, (iii) the elastic constants
+% of the minerals and (iv) their densities. One can use the modal
+% proportions that appear in the command window (ol=62 %, en=11%, dio=4%),
+% but there is a lot of non-indexed data. You can recalculate the data only
+% for the indexed data
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
+<h2 id="2">Correct EBSD spatial coordinates</h2><p>This EBSD dataset has the foliation N-S, but standard CPO plots and physical properties in geosciences use an external reference frame where the foliation is vertical E-W and the lineation is also E-W but horizontal. We can correct the data by rotating the whole dataset like</p>
+{% highlight matlab %}
+ebsd = rotate(ebsd,rotation('axis',-zvector,'angle',90*degree))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
+<h2 id="3">Calculate the area fraction of each phase in this map</h2>
+{% highlight matlab %}
+% list of phase names
+Phase_names = ebsd.mineralList;
+% zero area fractions
+Area_Fractions = zeros(numel(Phase_names));
+% number of measurement points in the map
+Map_points = length(ebsd);
+% default first phase is indexed the perfect sample !
+N_first_indexed_phase = 1;
+% remove 'nonIndexed' points from total
+% if 'notIndexed' is present
+if(strcmp(Phase_names(1),'notIndexed'))
+    N_first_indexed_phase = 2;
+end
+{% endhighlight %}
+<h2 id="4">Calculate the area fraction considering the non-indexed pixels</h2>
+{% highlight matlab %}
+fprintf(' \n')
+fprintf(' Area fractions for all phases in the EBSD object \n')
+fprintf(' \n')
+fprintf('   #      Phase       Points  Area fraction \n')
+for i=1:numel(Phase_names);
+% indexed point for mineral
+N_Points = length(ebsd(Phase_names(i)));
+   if(N_Points > 0)
+% area fraction for mineral
+Area_Fractions(i) = N_Points/Map_points;
+% retain first part of mineral name
+P_Name = strtok(char(Phase_names{i}),' ');
+      fprintf(' %3i %12s %10i %11.4f \n',...
+      i,P_Name,N_Points,Area_Fractions(i))
+   end
+end
+AF_total = sum(sum(Area_Fractions));
+fprintf(' \n')
+fprintf(' Total area fraction = %8.4f \n',AF_total)
+fprintf(' \n')
+
+% total number of indexed points in map without 'notIndexed' phase
+Indexed_map_points = sum(length(ebsd(Phase_names(N_first_indexed_phase:numel(Phase_names)))));
+% percentage of indexed point in map
+Percent_indexed = 100*Indexed_map_points/Map_points;
+% print to screen
+fprintf(' \n')
+fprintf(' Percentage indexed points in map = %5.1f \n',Percent_indexed)
+fprintf(' \n')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Area fractions for all phases in the EBSD object 
+ 
+   #      Phase       Points  Area fraction 
+   1   notIndexed      58485      0.2378 
+   2   Forsterite     152345      0.6194 
+   3    Enstatite      26058      0.1059 
+   4     Diopside       9064      0.0369 
+ 
+ Total area fraction =   1.0000 
+ 
+ 
+ Percentage indexed points in map =  76.2
+{% endhighlight %}
+<h2 id="5">Calculate the area fraction considering only indexed pixels</h2>
+{% highlight matlab %}
+fprintf(' \n')
+fprintf(' Area fractions based on minerals with EBSD indexed points only \n')
+fprintf(' \n')
+fprintf('   #      Phase       Points  Area fraction \n')
+for i=N_first_indexed_phase:numel(Phase_names);
+% indexed point for mineral
+N_Points = length(ebsd(Phase_names(i)));
+   if(N_Points > 0)
+% area fraction for mineral
+Area_Fractions(i) = N_Points/Indexed_map_points;
+% retain first part of mineral name
+P_Name = strtok(char(Phase_names{i}),' ');
+      fprintf(' %3i %12s %10i %11.4f \n',...
+      i,P_Name,N_Points,Area_Fractions(i))
+   end
+end
+AF_total = sum((Area_Fractions(N_first_indexed_phase:numel(Phase_names))));
+fprintf(' \n')
+fprintf(' Total area fraction = %8.4f \n',AF_total)
+fprintf(' \n')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Area fractions based on minerals with EBSD indexed points only 
+ 
+   #      Phase       Points  Area fraction 
+   2   Forsterite     152345      0.8126 
+   3    Enstatite      26058      0.1390 
+   4     Diopside       9064      0.0483 
+ 
+ Total area fraction =   1.0000
+{% endhighlight %}
+<h2 id="6">Define elastic stiffness tensor of Olivine (Abramson et al., 1997 JGR)</h2>
+{% highlight matlab %}
+M = [[320.5  68.15  71.6     0     0     0];...
+    [ 68.15  196.5  76.8     0     0     0];...
+    [  71.6   76.8 233.5     0     0     0];...
+    [   0      0      0     64     0     0];...
+    [   0      0      0      0    77     0];...
+    [   0      0      0      0     0  78.7]];
+% Define Olivine density (from the paper above, g/cm^3)
+rho_olivine = 3.3550;
+% Define Cartesian Tensor crystal symmetry & frame
+CS_Tensor_olivine = crystalSymmetry('222', [4.762 10.225 5.994],...
+    'mineral', 'olivine', 'color', 'light red')
+% Define elastic stiffness tensor Cijkl with MTEX load tensor command
+C_olivine = stiffnessTensor(M,CS_Tensor_olivine,'name','elastic stiffness',...
+    'unit','GPa','density',rho_olivine)
+{% endhighlight %}
+
+{% highlight plaintext %}
+CS_Tensor_olivine = crystalSymmetry  
+ 
+  mineral : olivine   
+  color   : light red 
+  symmetry: 222       
+  elements: 4         
+  a, b, c : 4.8, 10, 6
+ 
+ 
+C_olivine = stiffnessTensor  
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: olivine (222)    
+ 
+  tensor in Voigt matrix representation:
+ 320.5  68.2  71.6     0     0     0
+  68.2 196.5  76.8     0     0     0
+  71.6  76.8 233.5     0     0     0
+     0     0     0    64     0     0
+     0     0     0     0    77     0
+     0     0     0     0     0  78.7
+{% endhighlight %}
+<h2 id="7">Define elastic stiffness tensor of Enstatite (Chai et al. 1997 - JGR)</h2>
+{% highlight matlab %}
+M =....
+ [[  236.90   79.60   63.20    0.00    0.00    0.00];...
+ [    79.60  180.50   56.80    0.00    0.00    0.00];...
+ [    63.20   56.80  230.40    0.00    0.00    0.00];...
+ [     0.00    0.00    0.00   84.30    0.00    0.00];...
+ [     0.00    0.00    0.00    0.00   79.40    0.00];...
+ [     0.00    0.00    0.00    0.00    0.00   80.10]];
+rho_opx = 3.3060;
+cs_Tensor_opx = crystalSymmetry('mmm',[ 18.2457  8.7984  5.1959],...
+ [  90.0000  90.0000  90.0000]*degree,'x||a','z||c',...
+ 'mineral','Enstatite');
+C_opx = stiffnessTensor(M,cs_Tensor_opx)
+{% endhighlight %}
+
+{% highlight plaintext %}
+C_opx = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Enstatite (mmm)  
+ 
+  tensor in Voigt matrix representation:
+ 236.9  79.6  63.2     0     0     0
+  79.6 180.5  56.8     0     0     0
+  63.2  56.8 230.4     0     0     0
+     0     0     0  84.3     0     0
+     0     0     0     0  79.4     0
+     0     0     0     0     0  80.1
+{% endhighlight %}
+<h2 id="8">Define elastic stiffness tensor of Diopside (Isaak et al., 2005 - PCM)</h2>
+{% highlight matlab %}
+M =....
+ [[  228.10   78.80   70.20    0.00    7.90    0.00];...
+ [    78.80  181.10   61.10    0.00    5.90    0.00];...
+ [    70.20   61.10  245.40    0.00   39.70    0.00];...
+ [     0.00    0.00    0.00   78.90    0.00    6.40];...
+ [     7.90    5.90   39.70    0.00   68.20    0.00];...
+ [     0.00    0.00    0.00    6.40    0.00   78.10]];
+
+rho_cpx = 3.2860;
+cs_Tensor_cpx = crystalSymmetry('121',[9.585  8.776  5.26],...
+ [90.0000 105.8600  90.0000]*degree,'x||a*','z||c',...
+ 'mineral','Diopside');
+crystalSymmetry('121', [9.585 8.776 5.26], [90,106.85,90]*degree,...
+    'X||a*', 'Y||b', 'Z||c', 'mineral', 'diopside', 'color', 'light blue')
+C_cpx = stiffnessTensor(M,cs_Tensor_cpx)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = crystalSymmetry  
+ 
+  mineral           : diopside          
+  color             : light blue        
+  symmetry          : 121               
+  elements          : 2                 
+  a, b, c           : 9.6, 8.8, 5.3     
+  alpha, beta, gamma: 90°, 106.85°, 90° 
+  reference frame   : X||a*, Y||b*, Z||c
+ 
+ 
+C_cpx = stiffnessTensor  
+  unit   : GPa                               
+  rank   : 4 (3 x 3 x 3 x 3)                 
+  mineral: Diopside (121, X||a*, Y||b*, Z||c)
+ 
+  tensor in Voigt matrix representation:
+ 228.1  78.8  70.2     0   7.9     0
+  78.8 181.1  61.1     0   5.9     0
+  70.2  61.1 245.4     0  39.7     0
+     0     0     0  78.9     0   6.4
+   7.9   5.9  39.7     0  68.2     0
+     0     0     0   6.4     0  78.1
+{% endhighlight %}
+<h2 id="9">Let's calculate the olivine single crystal seismic velocities</h2>
+{% highlight matlab %}
+[vp_ol,vs1_ol,vs2_ol,pp_ol,ps1_ol,ps2_ol] = C_olivine.velocity('harmonic');
+
+% here Vp, Vs1 and Vs2 stands for the velocities of P, fast and slow
+% S-waves respectively, where ps1 and ps2 are the polarization directions
+{% endhighlight %}
+<h2 id="10">Plot some single crystal seismic velocities</h2><pre>Let's first define some preferences</pre>
+{% highlight matlab %}
+plota2east;
+setMTEXpref('defaultColorMap',blue2redColorMap)
+
+blackMarker = {'Marker','s','MarkerSize',10,'antipodal',...
+  'MarkerEdgeColor','white','MarkerFaceColor','black','doNotDraw'};
+whiteMarker = {'Marker','o','MarkerSize',10,'antipodal',...
+  'MarkerEdgeColor','black','MarkerFaceColor','white','doNotDraw'};
+
+titleOpt = {'visible','on','color','k'};
+
+% Setup multiplot
+% define plot size [origin X,Y,Width,Height]
+mtexFig = mtexFigure('position',[0 0 1000 1000]);
+
+%  Vp : Plot P-wave velocity (km/s)
+
+plot(vp_ol,'contourf','complete','upper','minmax')
+mtexTitle('Vp (km/s)',titleOpt{:})
+
+% Calculate maximum and minimum
+
+[maxVp_ol, maxVpPos_ol] = max(vp_ol);
+[minVp_ol, minVpPos_ol] = min(vp_ol);
+
+% Calculate Vp anisotropy
+
+AVp_qtz = 200*(maxVp_ol-minVp_ol) / (maxVp_ol+minVp_ol);
+
+% Add some markers to help visualization
+
+hold on
+plot(maxVpPos_ol.symmetrise,blackMarker{:})
+plot(minVpPos_ol.symmetrise,whiteMarker{:})
+hold off
+xlabel(['Vp Anisotropy = ',num2str(AVp_qtz,'%27.7f')],titleOpt{:})
+drawNow(gcm,'figSize','large')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_01.png" %}
+</center><h2 id="11">Plot S-wave anisotropy</h2>
+{% highlight matlab %}
+% create a new axis
+nextAxis
+% Plot S-wave anisotropy (percent)
+AVs_ol = 200*(vs1_ol-vs2_ol)./(vs1_ol+vs2_ol);
+plot(AVs_ol,'contourf','complete','upper');
+mtexTitle('S-wave anisotropy (%)',titleOpt{:})
+% Max percentage anisotropy
+[maxAVs_ol,maxAVsPos_ol] = max(AVs_ol);
+[minAVs_ol,minAVsPos_ol] = min(AVs_ol);
+xlabel(['Max Vs Anisotropy = ',num2str(maxAVs_ol,'%6.1f')],titleOpt{:})
+% mark maximum with black square and minimum with white circle
+hold on
+plot(maxAVsPos_ol.symmetrise,blackMarker{:})
+plot(minAVsPos_ol.symmetrise,whiteMarker{:})
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_02.png" %}
+</center><h2 id="12">Plot the fast shear wave (S1) polarization direction</h2>
+{% highlight matlab %}
+nextAxis
+plot(AVs_ol,'contourf','complete','upper');
+mtexTitle('Vs1 polarization',titleOpt{:})
+hold on
+plot(ps1_ol,'linewidth',2,'color','black','doNotDraw')
+hold off
+
+% essentiall by adding nextAxis on the beginning of each section for a
+% plot, you can have all your plots in one single figure. Once you finish,
+% you may want to have a scalebar for all the plots, this can be done as
+
+mtexColorbar
+drawNow(gcm,'figSize','large')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_03.png" %}
+</center><h2 id="13">Now let's estimate the elastic tensor of our sample</h2><p>First we need to calculate the ODF of the individual phases</p>
+{% highlight matlab %}
+odf_ol = calcDensity(ebsd('f').orientations,'halfwidth',10*degree)
+odf_opx = calcDensity(ebsd('e').orientations,'halfwidth',10*degree)
+odf_cpx = calcDensity(ebsd('d').orientations,'halfwidth',10*degree)
+
+% Note that you do don't need to write the full name of each phase, only
+% the initial, that works when phases start with different letters, you can
+% setup this also in the import_wizard
+%
+% To calculate the elastic constant of each phase considering their
+% orientations within this sample, you do
+
+[CVoigt_ol_poly, CReuss_ol_poly, CHill_ol_poly] =  ...
+  calcTensor(odf_ol,C_olivine)
+
+[CVoigt_opx_poly, CReuss_opx_poly, CHill_opx_poly] =  ...
+  calcTensor(odf_opx,C_opx)
+
+[CVoigt_cpx_poly, CReuss_cpx_poly, CHill_cpx_poly] =  ...
+  calcTensor(odf_cpx,C_cpx)
+
+% Now to calculate the elastic tensor considering the three phases, you do
+
+CHill_all = 0.81*CHill_ol_poly + 0.14*CHill_opx_poly + 0.05*CHill_cpx_poly
+
+% And finally you calculate the seismic velocities
+
+[vp_poly_all,vs1_poly_all,vs2_poly_all,pp_poly_all,ps1_poly_all,ps2_poly_all] = ...
+    CHill_all.velocity('harmonic')
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf_ol = ODF  
+  crystal symmetry : Forsterite (mmm)
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+ 
+odf_opx = ODF  
+  crystal symmetry : Enstatite (mmm)
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+ 
+odf_cpx = ODF  
+  crystal symmetry : Diopside (12/m1, X||a*, Y||b*, Z||c)
+  specimen symmetry: 1
+ 
+  Harmonic portion:
+    degree: 25
+    weight: 1
+ 
+ 
+CVoigt_ol_poly = stiffnessTensor  
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: olivine (222)    
+ 
+  tensor in Voigt matrix representation:
+ 246.94  76.43  81.88    0.8   5.76  -3.87
+  76.43 208.52  75.83   4.31   -0.4   -2.1
+  81.88  75.83 259.86      8   5.87  -0.46
+    0.8   4.31      8  76.91  -0.62   1.95
+   5.76   -0.4   5.87  -0.62   86.3   2.71
+  -3.87   -2.1  -0.46   1.95   2.71  74.07
+ 
+CReuss_ol_poly = stiffnessTensor  
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: olivine (222)    
+ 
+  tensor in Voigt matrix representation:
+ 239.72  75.78  80.02   0.24   4.83  -3.39
+  75.78 206.34  75.01   3.72  -0.34  -1.81
+  80.02  75.01 250.54    6.4   5.12  -0.31
+   0.24   3.72    6.4  74.78  -0.53   1.87
+   4.83  -0.34   5.12  -0.53  83.15   2.32
+  -3.39  -1.81  -0.31   1.87   2.32   72.3
+ 
+CHill_ol_poly = stiffnessTensor  
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: olivine (222)    
+ 
+  tensor in Voigt matrix representation:
+ 243.33  76.11  80.95   0.52   5.29  -3.63
+  76.11 207.43  75.42   4.02  -0.37  -1.96
+  80.95  75.42  255.2    7.2    5.5  -0.39
+   0.52   4.02    7.2  75.85  -0.58   1.91
+   5.29  -0.37    5.5  -0.58  84.73   2.52
+  -3.63  -1.96  -0.39   1.91   2.52  73.19
+ 
+CVoigt_opx_poly = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Enstatite (mmm)  
+ 
+  tensor in Voigt matrix representation:
+ 220.11  64.65  62.33   0.66   0.48  -0.28
+  64.65 220.14  64.09   0.01  -1.04  -0.94
+  62.33  64.09 224.62   0.15  -0.44   0.06
+   0.66   0.01   0.15  77.97    0.4   0.63
+   0.48  -1.04  -0.44    0.4  80.13  -0.04
+  -0.28  -0.94   0.06   0.63  -0.04  77.17
+ 
+CReuss_opx_poly = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Enstatite (mmm)  
+ 
+  tensor in Voigt matrix representation:
+ 216.47  63.69  61.45    0.7    0.6  -0.27
+  63.69 216.25  63.18      0  -1.13  -1.05
+  61.45  63.18 222.29   0.15  -0.41  -0.01
+    0.7      0   0.15  76.52   0.39   0.68
+    0.6  -1.13  -0.41   0.39  79.12  -0.04
+  -0.27  -1.05  -0.01   0.68  -0.04  75.68
+ 
+CHill_opx_poly = stiffnessTensor  
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: Enstatite (mmm)  
+ 
+  tensor in Voigt matrix representation:
+ 218.29  64.17  61.89   0.68   0.54  -0.28
+  64.17 218.19  63.64   0.01  -1.08  -0.99
+  61.89  63.64 223.45   0.15  -0.42   0.03
+   0.68   0.01   0.15  77.24   0.39   0.66
+   0.54  -1.08  -0.42   0.39  79.63  -0.04
+  -0.28  -0.99   0.03   0.66  -0.04  76.43
+ 
+CVoigt_cpx_poly = stiffnessTensor  
+  unit   : GPa                               
+  rank   : 4 (3 x 3 x 3 x 3)                 
+  mineral: Diopside (121, X||a*, Y||b*, Z||c)
+ 
+  tensor in Voigt matrix representation:
+ 226.49  69.57  69.38  -0.07   0.33   0.62
+  69.57 216.43  69.47   1.84  -1.06   0.11
+  69.38  69.47 215.02   0.36   0.35   1.14
+  -0.07   1.84   0.36  73.15   0.95  -0.41
+   0.33  -1.06   0.35   0.95  76.01  -0.16
+   0.62   0.11   1.14  -0.41  -0.16  74.38
+ 
+CReuss_cpx_poly = stiffnessTensor  
+  unit   : GPa                               
+  rank   : 4 (3 x 3 x 3 x 3)                 
+  mineral: Diopside (121, X||a*, Y||b*, Z||c)
+ 
+  tensor in Voigt matrix representation:
+ 213.21  66.12  65.42  -0.19  -0.11      1
+  66.12 207.68  66.46   1.76  -1.29   0.47
+  65.42  66.46 204.44    0.4  -0.11   1.22
+  -0.19   1.76    0.4  69.93   0.95   -0.5
+  -0.11  -1.29  -0.11   0.95  71.84   -0.4
+      1   0.47   1.22   -0.5   -0.4  70.27
+ 
+CHill_cpx_poly = stiffnessTensor  
+  unit   : GPa                               
+  rank   : 4 (3 x 3 x 3 x 3)                 
+  mineral: Diopside (121, X||a*, Y||b*, Z||c)
+ 
+  tensor in Voigt matrix representation:
+ 219.85  67.85   67.4  -0.13   0.11   0.81
+  67.85 212.06  67.97    1.8  -1.17   0.29
+   67.4  67.97 209.73   0.38   0.12   1.18
+  -0.13    1.8   0.38  71.54   0.95  -0.45
+   0.11  -1.17   0.12   0.95  73.92  -0.28
+   0.81   0.29   1.18  -0.45  -0.28  72.32
+ 
+CHill_all = stiffnessTensor  
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+  mineral: olivine (222)    
+ 
+  tensor in Voigt matrix representation:
+ 238.65  74.02   77.6   0.51   4.37  -2.94
+  74.02 209.17   73.4   3.35  -0.51  -1.71
+   77.6   73.4 248.48   5.87    4.4  -0.25
+   0.51   3.35   5.87  75.83  -0.37   1.61
+   4.37  -0.51    4.4  -0.37  83.47   2.02
+  -2.94  -1.71  -0.25   1.61   2.02   73.6
+ 
+vp_poly_all = S2FunHarmonicSym  
+ mineral: olivine (222)
+ bandwidth: 48
+ antipodal: true
+ 
+vs1_poly_all = S2FunHarmonicSym  
+ mineral: olivine (222)
+ bandwidth: 48
+ antipodal: true
+ 
+vs2_poly_all = S2FunHarmonicSym  
+ mineral: olivine (222)
+ bandwidth: 48
+ antipodal: true
+ 
+pp_poly_all = S2AxisFieldHarmonic  
+ bandwidth: 48
+ antipodal: true
+ 
+ps1_poly_all = S2AxisFieldHarmonic  
+ bandwidth: 48
+ 
+ps2_poly_all = S2AxisFieldHarmonic  
+ bandwidth: 48
+{% endhighlight %}
+<h2 id="14">Plot P-wave velocity (km/s)</h2>
+{% highlight matlab %}
+plota2east;
+setMTEXpref('defaultColorMap',blue2redColorMap)
+
+blackMarker = {'Marker','s','MarkerSize',10,'antipodal',...
+  'MarkerEdgeColor','white','MarkerFaceColor','black','doNotDraw'};
+whiteMarker = {'Marker','o','MarkerSize',10,'antipodal',...
+  'MarkerEdgeColor','black','MarkerFaceColor','white','doNotDraw'};
+
+titleOpt = {'visible','on','color','k'};
+
+% Setup multiplot
+% define plot size [origin X,Y,Width,Height]
+mtexFig = mtexFigure('position',[0 0 1000 1000]);
+
+
+plot(vp_poly_all,'contourf','doNotDraw','complete','upper')
+mtexTitle('Vp (km/s)',titleOpt{:})
+% extrema
+[maxVp_poly_all, maxVpPos_poly_all] = max(vp_poly_all);
+[minVp_poly_all, minVpPos_poly_all] = min(vp_poly_all);
+% percentage anisotropy
+AVp_poly_all = 200*(maxVp_poly_all-minVp_poly_all) / (maxVp_poly_all...
+    +minVp_poly_all);
+% mark maximum with black square and minimum with white circle
+hold on
+plot(maxVpPos_poly_all,blackMarker{:})
+plot(minVpPos_poly_all,whiteMarker{:})
+hold off
+% subTitle
+xlabel(['Vp Anisotropy = ',num2str(AVp_poly_all,'%27.7f')],titleOpt{:})
+drawNow(gcm,'figSize','large')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_04.png" %}
+</center><h2 id="15">Plot fast shear-wave velocity S1 (km/s)</h2>
+{% highlight matlab %}
+nextAxis
+plot(vs1_poly_all,'contourf','doNotDraw','complete','upper');
+mtexTitle('Vs1 (km/s)',titleOpt{:})
+[maxS1_poly_all,maxS1pos_poly_all] = max(vs1_poly_all);
+[minS1_poly_all,minS1pos_poly_all] = min(vs1_poly_all);
+AVs1_poly_all=200*(maxS1_poly_all-minS1_poly_all)./(maxS1_poly_all+minS1_poly_all);
+xlabel(['Vs1 Anisotropy = ',num2str(AVs1_poly_all,'%6.1f')],titleOpt{:})
+hold on
+plot(ps1_poly_all,'linewidth',2,'color','black')
+hold on
+plot(maxS1pos_poly_all,blackMarker{:})
+plot(minS1pos_poly_all,whiteMarker{:})
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_05.png" %}
+</center><h2 id="16">Plot slow shear-wave velocity S2 (km/s)</h2>
+{% highlight matlab %}
+nextAxis
+plot(vs2_poly_all,'contourf','doNotDraw','complete','upper');
+mtexTitle('Vs2 (km/s)',titleOpt{:})
+% Percentage anisotropy
+[maxS2_poly_all,maxS2pos_poly_all] = max(vs2_poly_all);
+[minS2_poly_all,minS2pos_poly_all] = min(vs2_poly_all);
+AVs2_poly_all=200*(maxS2_poly_all-minS2_poly_all)./(maxS2_poly_all+minS2_poly_all);
+xlabel(['Vs2 Anisotropy = ',num2str(AVs2_poly_all,'%6.1f')],titleOpt{:})
+hold on
+plot(ps2_poly_all,'linewidth',2,'color','black')
+% mark maximum with black square and minimum with white circle
+hold on
+plot(maxS2pos_poly_all,blackMarker{:})
+plot(minS2pos_poly_all,whiteMarker{:})
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_06.png" %}
+</center><h2 id="17">Plot S-wave anisotropy (%)</h2>
+{% highlight matlab %}
+nextAxis
+AVs_poly_all = 200*(vs1_poly_all-vs2_poly_all)./(vs1_poly_all+vs2_poly_all);
+plot(AVs_poly_all,'contourf','complete','upper');
+mtexTitle('S-wave anisotropy (%)',titleOpt{:})
+[maxAVs_poly_all,maxAVsPos_poly_all] = max(AVs_poly_all);
+[minAVs_poly_all,minAVsPos_poly_all] = min(AVs_poly_all);
+xlabel(['Max Vs Anisotropy = ',num2str(maxAVs_poly_all,'%6.1f')],titleOpt{:})
+hold on
+plot(maxAVsPos_poly_all,blackMarker{:})
+plot(minAVsPos_poly_all,whiteMarker{:})
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_07.png" %}
+</center><h2 id="18">Plot Velocity difference Vs1-Vs2 (km/s) plus Vs1 polarizations</h2>
+{% highlight matlab %}
+nextAxis
+dVs_poly_all = vs1_poly_all-vs2_poly_all;
+plot(dVs_poly_all,'contourf','complete','upper');
+mtexTitle('dVs=Vs1-Vs2 (km/s)',titleOpt{:})
+[maxdVs_poly_all,maxdVsPos_poly_all] = max(dVs_poly_all);
+[mindVs_poly_all,mindVsPos_poly_all] = min(dVs_poly_all);
+xlabel(['Max dVs (km/s) = ',num2str(maxdVs_poly_all,'%6.2f')],titleOpt{:})
+hold on
+plot(maxdVsPos_poly_all,blackMarker{:})
+plot(mindVsPos_poly_all,whiteMarker{:})
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_08.png" %}
+</center><h2 id="19">Plot Vp/Vs1 ratio (no units)</h2>
+{% highlight matlab %}
+nextAxis
+vpvs1_poly_all = vp_poly_all./vs1_poly_all;
+plot(vpvs1_poly_all,'contourf','complete','upper');
+mtexTitle('Vp/Vs1',titleOpt{:})
+% Percentage anisotropy
+[maxVpVs1_poly_all,maxVpVs1Pos_poly_all] = max(vpvs1_poly_all);
+[minVpVs1_poly_all,minVpVs1Pos_poly_all] = min(vpvs1_poly_all);
+AVpVs1_poly_all=200*(maxVpVs1_poly_all-minVpVs1_poly_all)/(maxVpVs1_poly_all+minVpVs1_poly_all);
+xlabel(['Vp/Vs1 Anisotropy = ',num2str(AVpVs1_poly_all,'%6.1f')],titleOpt{:})
+% mark maximum with black square and minimum with white circle
+hold on
+plot(maxVpVs1Pos_poly_all,blackMarker{:})
+plot(minVpVs1Pos_poly_all,whiteMarker{:})
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_09.png" %}
+</center><h2 id="20">Add colorbars in all pole figures and return default color code</h2>
+{% highlight matlab %}
+mtexColorbar
+drawNow(gcm,'figSize','large')
+setMTEXpref('defaultColorMap',WhiteJetColorMap)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CPOSeismicProperties_10.png" %}
+</center></div></body></html>
