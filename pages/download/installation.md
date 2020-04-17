@@ -121,13 +121,15 @@ c. `configure` (the path to gcc and matlab might obviously vary) and `make`
 ```
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
-./configure --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft
-  --enable-nfsft --enable-openmp --enable-portable-binary
-  --with-apple-gcc-arch=x86_64 - without openMOP
+./configure --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft\
+  --enable-nfsft --enable-openmp --enable-portable-binary\
+  --with-apple-gcc-arch=x86_64 - 
+```
+or if for some reason you can not use openMOP
+```
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
-./configure
-  --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft
+./configure --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft\
   --enable-nfsft --enable-portable-binary --with-apple-gcc-arch=x86_64
   
 make
