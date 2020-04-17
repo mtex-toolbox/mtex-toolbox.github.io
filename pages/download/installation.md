@@ -14,7 +14,7 @@ Since binaries are sometimes not compatible accros different version of MAC
 OSX and increasing security measures of Apple some extra work might be
 required to get MTEX running on Mac OSX.
 
-## library load disallowed by system policy ##
+#### library load disallowed by system policy ####
 
 If you experience the following error message
 
@@ -32,7 +32,7 @@ process using Library Validation: library load disallowed by system policy
 you can either download MTEX with a command line tool such as
 [```curl```](https://www.youtube.com/watch?v=6pyVl3GdSuU) or ```wget```
 ```
-curl
+curl --output mtex.zip https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip
 ```
 or, if you have downloaded MTEX with a browser, type in Matlab
 
@@ -40,7 +40,7 @@ or, if you have downloaded MTEX with a browser, type in Matlab
 !sudo xattr -r -d com.apple.quarantine /path/to/mtexfolder
 ```
 
-## unable to compile mex files during startup_mtex ##
+#### Unable to compile mex files during startup_mtex ####
 
 If the above solution does not work you will need to recompile the mex files
 on your own. MTEX tries to perform the compilation automatically. However, in
