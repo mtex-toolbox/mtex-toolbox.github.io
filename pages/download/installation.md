@@ -75,17 +75,14 @@ or
 ```
 
 1. Make sure that after upgrading your system, to also upgrade ```xcode```
-(via appstore) and install the command line tools and accept the licence by
-
+ (via appstore) and install the command line tools and accept the licence by
 ``` bash
 sudo xcodebuild -license accept
 xcode-select --install
 ```
-2. You might need to modify the compiler options used by Matlab:
-
-Get options path (example output) from within Matlab (you can also add -v to
-the mex compile options and look for the line starting with Options file: /):
-
+2. You might need to modify the compiler options used by Matlab. Therefore you need to figure out the
+ options path (example output) from within Matlab (you can also add -v to
+ the mex compile options and look for the line starting with Options file: /):
 ``` matlab
 m  = mex.getCompilerConfigurations
 m.MexOpt
