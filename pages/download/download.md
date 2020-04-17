@@ -11,12 +11,13 @@ toc: false
 ### Installation ###
 
 1. download and extract the zip file to an arbitrary folder
-2. start Matlab (version 2012b or newer required - older versions have not been tested)
+2. start Matlab (version 2016b or newer required - older versions have not been tested)
 3. change the current folder in Matlab to the folder where MTEX is installed
 4. type `startup_mtex` into the command window
 5. click one of the menu items to import data or to consult the documentation
 
-In case you experience any problems have a look at our [trouble shooting page]()
+In case you experience any problems, especiall on Mac OSX, have a look at our
+[trouble shooting page](installation)
 
 
 ### Downloads ###
