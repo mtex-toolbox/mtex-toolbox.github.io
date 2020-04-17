@@ -88,7 +88,7 @@ ans =
       /Users/rk/Library/Application/MathWorks/MATLAB/R2019b/mex_C_maci64.xml
 ```
 The exact file name depends on the compiler installed on your system, e.g. ```/Applications/MATLAB_R2019a.app/bin/maci64/mexopts/clang_maci64.xml```.
-Within the configuration file change the lines ```mex_C_maci64.xml
+Within the configuration file change the lines
 ```
   <SDKVER>
      <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
@@ -104,7 +104,6 @@ and do a
 ```matlab
 mex -setup C
 ```
-
-from within Matlab. Now startup_mtex.m will hopefully run without any trouble.
+from within Matlab. Now ```startup_mtex.m```s will hopefully run without any trouble.
 
 ## Compiling the nfft ##
