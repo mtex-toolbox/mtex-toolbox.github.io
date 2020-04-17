@@ -8,13 +8,13 @@ folder: download
 toc: false
 ---
 
-### MAC installation issues ###
+## MAC installation issues ##
 
 Since binaries are sometimes not compatible accros different version of MAC
 OSX and increasing security measures of Apple some extra work might be
 required to get MTEX running on Mac OSX.
 
-#### library load disallowed by system policy ####
+### library load disallowed by system policy ###
 
 If you experience the following error message
 
@@ -40,7 +40,7 @@ or, if you have downloaded MTEX with a browser, type in Matlab
 !sudo xattr -r -d com.apple.quarantine /path/to/mtexfolder
 ```
 
-#### Unable to compile mex files during startup_mtex ####
+### Unable to compile mex files during startup_mtex ###
 
 If the above solution does not work you will need to recompile the mex files
 on your own. MTEX tries to perform the compilation automatically. However, in
@@ -96,17 +96,15 @@ it might also be elsewhere, e.g. in
 Within the file ```mex_C_maci64.xml``` change the line
 
 ```
-                  <SDKVER>
-                          <cmdReturns name="xcrun -sdk macosx
---show-sdk-version"/>
-                  </SDKVER>
+<SDKVER>
+   <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
+</SDKVER>
 ```
 to
 ```
-                  <SDKVER>
-                          <cmdReturns name="xcrun -sdk macosx
---show-sdk-version  | cut -c1-5"/>
-                  </SDKVER>
+<SDKVER>
+   <cmdReturns name="xcrun -sdk macosx --show-sdk-version  | cut -c1-5"/>
+</SDKVER>
 ```
 and do a
 
@@ -116,4 +114,4 @@ mex -setup C
 
 from within Matlab. Now startup_mtex.m will hopefully run without any trouble.
 
-### Compiling the nfft ###
+## Compiling the nfft ##
