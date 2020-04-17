@@ -80,21 +80,15 @@ or
 sudo xcodebuild -license accept
 xcode-select --install
 ```
-2. You might need to modify the compiler options used by Matlab. Therefore you need to figure out the
- options path (example output) from within Matlab (you can also add -v to
- the mex compile options and look for the line starting with Options file: /):
-``` matlab
+2. You might need to modify the compiler options used by Matlab. The configuration file can be found by the command
+```matlab
 m  = mex.getCompilerConfigurations
 m.MexOpt
 ans =
-      /Users/rk/Library/Application
-Support/MathWorks/MATLAB/R2019b/mex_C_maci64.xml
+      /Users/rk/Library/Application/MathWorks/MATLAB/R2019b/mex_C_maci64.xml
 ```
-
-it might also be elsewhere, e.g. in
-```/Applications/MATLAB_R2019a.app/bin/maci64/mexopts/clang_maci64.xml```.
-Within the file ```mex_C_maci64.xml``` change the line
-
+The exact file name depends on the compiler installed on your system, e.g. ```/Applications/MATLAB_R2019a.app/bin/maci64/mexopts/clang_maci64.xml```.
+Within the configuration file change the lines
 ```
 <SDKVER>
    <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
@@ -107,8 +101,7 @@ to
 </SDKVER>
 ```
 and do a
-
-``` matlab
+```matlab
 mex -setup C
 ```
 
