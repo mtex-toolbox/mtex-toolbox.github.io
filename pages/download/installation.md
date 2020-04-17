@@ -142,7 +142,12 @@ MATLABDIR=/Applications/MATLAB_R2018b.app
 for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst
  do
   cd matlab/"$LIB"
-  "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o -Wl,-force_load,../../.libs/libnfft3_matlab.a -Wl,-force_load,../../matlab/.libs/libmatlab.a -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex -lmat -fopenmp -O3 -malign-double -march=core2 -arch x86_64 -fopenmp -static-libgcc
+  "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
+  -Wl,-force_load,../../.libs/libnfft3_matlab.a \
+  -Wl,-force_load,../../matlab/.libs/libmatlab.a \
+  -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \ 
+  -lmat -fopenmp -O3 -malign-double -march=core2 \
+  -arch x86_64 -fopenmp -static-libgcc
   cp .libs/lib"$LIB".mexmaci64 "$LIB"mex.mexmaci64
   cd ../.. 
 done
@@ -154,7 +159,12 @@ CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
  for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst 
   do cd matlab/"$LIB"
-  "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o -Wl,-force_load,../../.libs/libnfft3_matlab.a -Wl,-force_load,../../matlab/.libs/libmatlab.a -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex -lmat -O3 -malign-double -march=core2 -arch x86_64 -static-libgcc
+  "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
+-Wl,-force_load,../../.libs/libnfft3_matlab.a \
+-Wl,-force_load,../../matlab/.libs/libmatlab.a \
+-L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \
+-lmat -O3 -malign-double -march=core2 \
+-arch x86_64 -static-libgcc
   cp .libs/lib"$LIB".mexmaci64 "$LIB"mex.mexmaci64
 cd ../..
 done
