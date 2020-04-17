@@ -10,9 +10,9 @@ toc: false
 
 ## MAC installation issues ##
 
-Since binaries are sometimes not compatible accros different version of MAC
-OSX and increasing security measures of Apple some extra work might be
-required to get MTEX running on Mac OSX.
+Since binaries are sometimes not compatible across different versions of
+macOS and due to increasing security measures of Apple, some extra work might be
+required to get MTEX running on macOS.
 
 ### library load disallowed by system policy ###
 
@@ -42,7 +42,7 @@ or, if you have downloaded MTEX with a browser, type in Matlab
 
 ### Unable to compile mex files during startup_mtex ###
 
-If the above solution does not work you will need to recompile the mex files
+If you (still) get the following error, you will need to recompile the mex files
 on your own. MTEX tries to perform the compilation automatically. However, in
 some case you might experience error messages like
 
