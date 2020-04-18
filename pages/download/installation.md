@@ -134,7 +134,7 @@ LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
   --enable-nfsft --enable-openmp --enable-portable-binary\
   --with-apple-gcc-arch=x86_64 -
 ```
-or if for some reason you can not use openMOP
+or if for some reason you can not use openMP
 ``` bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
