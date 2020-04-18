@@ -87,17 +87,21 @@ ans =
 ```
 The exact file name depends on the compiler installed on your system, e.g. ```/Applications/MATLAB_R2019a.app/bin/maci64/mexopts/clang_maci64.xml```.
 Within the configuration file change the lines
+
 ```xml
-  <SDKVER>
-     <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
-  </SDKVER>
+   <SDKVER>
+      <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
+   </SDKVER>
 ```
+
 to
+
 ```xml
-  <SDKVER>
-     <cmdReturns name="xcrun -sdk macosx --show-sdk-version  | cut -c1-5"/>
-  </SDKVER>
+   <SDKVER>
+      <cmdReturns name="xcrun -sdk macosx --show-sdk-version  | cut -c1-5"/>
+   </SDKVER>
 ```
+
 and do from within Matlab
 ``` matlab
 mex -setup C
@@ -153,15 +157,15 @@ definitions of gcc and Matlab pathes from above
 #!/bin/bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
-for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst
- do
+
+for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst do
   cd matlab/"$LIB"
   "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
-  -Wl,-force_load,../../.libs/libnfft3_matlab.a \
-  -Wl,-force_load,../../matlab/.libs/libmatlab.a \
-  -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \
-  -lmat -fopenmp -O3 -malign-double -march=core2 \
-  -arch x86_64 -fopenmp -static-libgcc
+    -Wl,-force_load,../../.libs/libnfft3_matlab.a \
+    -Wl,-force_load,../../matlab/.libs/libmatlab.a \
+    -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \
+    -lmat -fopenmp -O3 -malign-double -march=core2 \
+    -arch x86_64 -fopenmp -static-libgcc
   cp .libs/lib"$LIB".mexmaci64 "$LIB"mex.mexmaci64
   cd ../..
 done
@@ -173,20 +177,21 @@ the vesion without ```openMP```
 #!/bin/bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
- for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst
-  do cd matlab/"$LIB"
+
+for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst do
+  cd matlab/"$LIB"
   "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
--Wl,-force_load,../../.libs/libnfft3_matlab.a \
--Wl,-force_load,../../matlab/.libs/libmatlab.a \
--L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \
--lmat -O3 -malign-double -march=core2 \
--arch x86_64 -static-libgcc
+    -Wl,-force_load,../../.libs/libnfft3_matlab.a \
+    -Wl,-force_load,../../matlab/.libs/libmatlab.a \
+    -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \
+    -lmat -O3 -malign-double -march=core2 \
+    -arch x86_64 -static-libgcc
   cp .libs/lib"$LIB".mexmaci64 "$LIB"mex.mexmaci64
-cd ../..
+  cd ../..
 done
 ```
 
-6. copy the generated mex-files into the MTEX installation
+### 6. copy the generated mex-files into the MTEX installation ###
 
 ``` bash
 make install
