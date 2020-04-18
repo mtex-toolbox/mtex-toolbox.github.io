@@ -89,13 +89,8 @@ ans =
 ```
 The exact file name depends on the compiler installed on your system, e.g. ```/Applications/MATLAB_R2019a.app/bin/maci64/mexopts/clang_maci64.xml```.
 Within the configuration file change the lines
-``` xml
-  <SDKVER>
-     <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
-  </SDKVER>
-```
 to
-``` xml
+```xml
   <SDKVER>
      <cmdReturns name="xcrun -sdk macosx --show-sdk-version  | cut -c1-5"/>
   </SDKVER>
@@ -108,36 +103,49 @@ from within Matlab. Now ```startup_mtex.m```s will hopefully run without any tro
 
 ## Compiling the nfft ##
 
-a. install gcc with openmp, libtools (using [homebrew](https://brew.sh/) is probably the easiest)
-```
+### 1. install gcc with openmp and libtools###
+
+Using [homebrew](https://brew.sh/) is probably the easiest
+``` bash
 brew install gcc libtool
 ```
-b. get nfft source from github
-```
+
+### 2. get nfft source from github ###
+
+``` bash
 git clone https://github.com/NFFT/nfft/tree/develop
 ./bootstrap.sh
 ```
-c. `configure` (the path to gcc and matlab might obviously vary) and `make`
+
+### 3. set the compilation parameters ###
+The path to gcc and matlab depends on your system and should be set accordingly
 ```
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
 ./configure --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft\
   --enable-nfsft --enable-openmp --enable-portable-binary\
-  --with-apple-gcc-arch=x86_64 - 
+  --with-apple-gcc-arch=x86_64 -
 ```
 or if for some reason you can not use openMOP
-```
+``` bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
 ./configure --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft\
   --enable-nfsft --enable-portable-binary --with-apple-gcc-arch=x86_64
-  
+```
+
+### 4. compile the nfft ###
+
+``` bash
 make
 ```
 
-d. script to run after `make` terminated successfully (path for gcc and Matlab may vary again)
-Easiest is to copy and adapt the paths and make it an executable shell script. 
-```
+### 5. link the nfft ###
+
+The easists way is to make out of the following lines an executable shell script. Please do not forget to include the
+definitions of gcc and Matlab pathes from above
+
+``` bash
 #!/bin/bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
@@ -147,19 +155,21 @@ for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst
   "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
   -Wl,-force_load,../../.libs/libnfft3_matlab.a \
   -Wl,-force_load,../../matlab/.libs/libmatlab.a \
-  -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \ 
+  -L"$MATLABDIR"/bin/maci64 -lm -lmwfftw3 -lmx -lmex \
   -lmat -fopenmp -O3 -malign-double -march=core2 \
   -arch x86_64 -fopenmp -static-libgcc
   cp .libs/lib"$LIB".mexmaci64 "$LIB"mex.mexmaci64
-  cd ../.. 
+  cd ../..
 done
 ```
-or in the case you do not want to use openMP
-```
+
+the vesion without ```openMP```
+
+``` bash
 #!/bin/bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
- for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst 
+ for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst
   do cd matlab/"$LIB"
   "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
 -Wl,-force_load,../../.libs/libnfft3_matlab.a \
@@ -171,21 +181,22 @@ MATLABDIR=/Applications/MATLAB_R2018b.app
 cd ../..
 done
 ```
-e. install the generated mex-files
+
+6. copy the generated mex-files into the MTEX installation
+
 ```
-make install 
+make install
 ```
-for mtex, copy the two files in
+for mtex, copy the two files
 ```
-matlab/nfsft/.libs/libnfsft.mexmaci64 
+matlab/nfsft/.libs/libnfsft.mexmaci64
 matlab/nfsoft/.libs/libnfsoft.mexmaci64
 ```
-to your mtex installation into
+into your mtex installation into
 ```
-mtex-5.3/extern/nfft_openMP/
+mtex/extern/nfft_openMP/
 ```
 or
 ```
-mtex-5.3/extern/nfft/
+mtex/extern/nfft/
 ```
-
