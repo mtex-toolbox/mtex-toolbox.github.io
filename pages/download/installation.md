@@ -106,25 +106,25 @@ and do from within Matlab
 ``` matlab
 mex -setup C
 ```
-Now ```startup_mtex.m```s will hopefully run without any trouble.
+Now ```startup_mtex.m``` will hopefully run without any trouble.
 
-## Compiling the nfft##
+## Compiling the nfft ##
 
-### 1. Install gcc with openmp and libtools###
+### 1. Install gcc with openmp and libtools ###
 
 Using [homebrew](https://brew.sh/) is probably the easiest
 ``` bash
 brew install gcc libtool
 ```
 
-### 2. get nfft source from github ###
+### 2. Get nfft source from github ###
 
 ``` bash
 git clone https://github.com/NFFT/nfft/tree/develop
 ./bootstrap.sh
 ```
 
-### 3. set the compilation parameters ###
+### 3. Set the compilation parameters ###
 
 The path to gcc and matlab depends on your system and should be set accordingly
 ``` bash
@@ -142,13 +142,13 @@ LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
   --enable-nfsft --enable-portable-binary --with-apple-gcc-arch=x86_64
 ```
 
-### 4. compile the nfft ###
+### 4. Compile the nfft ###
 
 ``` bash
 make
 ```
 
-### 5. link the nfft ###
+### 5. Link the nfft ###
 
 The easists way is to make out of the following lines an executable shell script. Please do not forget to include the
 definitions of gcc and Matlab pathes from above
@@ -191,7 +191,8 @@ for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst do
 done
 ```
 
-### 6. copy the generated mex-files into the MTEX installation ###
+
+### 6. Copy the generated mex-files into the MTEX installation ###
 
 ``` bash
 make install
