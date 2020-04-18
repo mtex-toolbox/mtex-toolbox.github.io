@@ -1,5 +1,5 @@
 ---
-title: Installation Issues
+title: Installation Issues for Mac OSX
 keywords: installation
 last_updated: January 8, 2018
 hide_sidebar: true
@@ -8,13 +8,11 @@ folder: download
 toc: false
 ---
 
-## MAC installation issues ##
-
 Since binaries are sometimes not compatible across different versions of
 macOS and due to increasing security measures of Apple, some extra work might be
 required to get MTEX running on macOS.
 
-### library load disallowed by system policy ###
+## library load disallowed by system policy ##
 
 If you experience the following error message
 
@@ -31,7 +29,7 @@ process using Library Validation: library load disallowed by system policy
 
 you can either download MTEX with a command line tool such as
 [```curl```](https://www.youtube.com/watch?v=6pyVl3GdSuU) or ```wget```
-```
+``` bash
 curl --output mtex.zip https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip
 ```
 or, if you have downloaded MTEX with a browser, type in Matlab
@@ -40,7 +38,7 @@ or, if you have downloaded MTEX with a browser, type in Matlab
 !sudo xattr -r -d com.apple.quarantine /path/to/mtexfolder
 ```
 
-### Unable to compile mex files during startup_mtex ###
+## Unable to compile mex files during startup_mtex ##
 
 If you (still) get the following error, you will need to recompile the mex files
 on your own. MTEX tries to perform the compilation automatically. However, in
@@ -89,21 +87,26 @@ ans =
 ```
 The exact file name depends on the compiler installed on your system, e.g. ```/Applications/MATLAB_R2019a.app/bin/maci64/mexopts/clang_maci64.xml```.
 Within the configuration file change the lines
+```xml
+  <SDKVER>
+     <cmdReturns name="xcrun -sdk macosx --show-sdk-version"/>
+  </SDKVER>
+```
 to
 ```xml
   <SDKVER>
      <cmdReturns name="xcrun -sdk macosx --show-sdk-version  | cut -c1-5"/>
   </SDKVER>
 ```
-and do a
+and do from within Matlab
 ``` matlab
 mex -setup C
 ```
-from within Matlab. Now ```startup_mtex.m```s will hopefully run without any trouble.
+Now ```startup_mtex.m```s will hopefully run without any trouble.
 
-## Compiling the nfft ##
+## Compiling the nfft##
 
-### 1. install gcc with openmp and libtools###
+### 1. Install gcc with openmp and libtools###
 
 Using [homebrew](https://brew.sh/) is probably the easiest
 ``` bash
@@ -118,8 +121,9 @@ git clone https://github.com/NFFT/nfft/tree/develop
 ```
 
 ### 3. set the compilation parameters ###
+
 The path to gcc and matlab depends on your system and should be set accordingly
-```
+``` bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
 ./configure --with-matlab=/Applications/MATLAB_R2018b.app --enable-nfsoft\
@@ -184,7 +188,7 @@ done
 
 6. copy the generated mex-files into the MTEX installation
 
-```
+``` bash
 make install
 ```
 for mtex, copy the two files
