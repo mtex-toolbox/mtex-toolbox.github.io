@@ -1,6 +1,6 @@
 ---
 title: Gridded EBSD Data
-last_updated: 01-Apr-2020
+last_updated: 07-May-2020
 sidebar: documentation_sidebar
 permalink: EBSDGrid.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Gridded EBSD Data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_EBSDGrid.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGrid.m">
+      --><title>Gridded EBSD Data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-07"><meta name="DC.source" content="script_EBSDGrid.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGrid.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss specific operations that are available for EBSD data which are measured on a square or hexagonal grid.</p><p>By default MTEX ignores any gridding in the data. The reason for this is that when restricting to some subset, e.g. to a certain phase, the data will not form a regular grid anyway. For that reason, almost all functions in MTEX are implemented to work for arbitrarily aligned data.</p><p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a>, <a href="EBSDGradient.html">gradient computation</a> and <a href="EBSDDenoising.html">denoising</a>. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html">gridify</a>.</p><p>In order to explain the corresponding concept in more detail lets import some sample data.</p>
 {% highlight matlab %}
 plotx2east
@@ -123,6 +123,7 @@ caxis([0,4*degree])
 {% highlight matlab %}
 mtexdata copper
 
+[grains, ebsd.grainId] = calcGrains(ebsd)
 ebsd = ebsd.gridify
 
 plot(ebsd,ebsd.orientations)
@@ -138,12 +139,33 @@ ebsd = EBSD
  Scan unit : um
  
  
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     0     751   16116   Copper       432                         
+ 
+ boundary segments: 12324
+ inner boundary segments: 4
+ triple points: 1266
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     0  16116 (100%)   Copper  LightSkyBlue       432                         
+ 
+ Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId
+ Scan unit : um
+ 
+ 
 ebsd = EBSDhex  
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y
+ Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId
  Scan unit : um
  Grid size (hex): 136 x 119
 {% endhighlight %}
@@ -161,4 +183,103 @@ plot(ebsd(:,1:10),ebsd(:,1:10).orientations,'micronbar','off')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_06.png" %}
+</center><h2 id="12">Switching from Hexagonal to Square Grid</h2><p>Sometimes it is required to resample EBSD data on a hex grid on a square grid. This can be accomplished by passing to the command <a href="EBSD.gridify.html">gridify</a> a square unit cell by the option <code class="language-plaintext highlighter-rouge">unitCell</code>.</p>
+{% highlight matlab %}
+% define a square unit cell
+unitCell = [-2.5 -2.5; -2.5 2.5; 2.5 2.5; 2.5 -2.5];
+
+% use the square unit cell for gridify
+ebsdS = ebsd.gridify('unitCell',unitCell)
+
+% visualize the result
+plot(ebsdS, ebsdS.orientations)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdS = EBSDsquare  
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     0   13992 (99%)   Copper  LightSkyBlue       432                         
+ 
+ Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId
+ Scan unit : um
+ Grid size (square): 118 x 120
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_07.png" %}
+</center><p>In the above example we have chosen the square unit cell to have approximately the same size as the hexgonal unit cell. This leads to quite some distortions as squares can not reproduces all the shapes of the hexagones. We can reduce this issue by chosing the quare unit cell significantly smaller then the hexagonal unit cell.</p>
+{% highlight matlab %}
+% a smaller unit cell
+unitCell = [-1 -1; -1 1; 1 1; 1 -1];
+
+% use the small square unit cell for gridify
+ebsdS = ebsd.gridify('unitCell',unitCell)
+
+plot(ebsdS,ebsdS.orientations)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdS = EBSDsquare  
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     0   16116 (19%)   Copper  LightSkyBlue       432                         
+ 
+ Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId
+ Scan unit : um
+ Grid size (square): 293 x 297
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_08.png" %}
+</center><p>It is important to understand that the command <a href="EBSD.gridify.html">gridify</a> does not increase the number of data points. As a consquence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html">fill</a> which performs nearest neighbour interpolation or the command <a href="EBSD.smooth">smooth</a> which allows for more suffisticated interpolation methods.</p>
+{% highlight matlab %}
+% nearest neigbour interpolation
+ebsdS1 = fill(ebsdS,grains)
+
+plot(ebsdS1('indexed'),ebsdS1('indexed').orientations)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdS1 = EBSDsquare  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+    -1   19224 (22%)  notIndexed                                                 
+     0   67797 (78%)      Copper  LightSkyBlue       432                         
+ 
+ Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId
+ Scan unit : um
+ Grid size (square): 293 x 297
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_09.png" %}
+</center>
+{% highlight matlab %}
+% interpolation using a TV regularisation term
+F = halfQuadraticFilter;
+F.alpha = 0.5;
+ebsdS2 = smooth(ebsdS,F,'fill',grains)
+
+plot(ebsdS2('indexed'),ebsdS2('indexed').orientations)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdS2 = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+    -1   19224 (22%)  notIndexed                                                 
+     0   67797 (78%)      Copper  LightSkyBlue       432                         
+ 
+ Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, quality
+ Scan unit : um
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_10.png" %}
 </center></div></body></html>
