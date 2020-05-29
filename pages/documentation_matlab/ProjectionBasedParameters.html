@@ -1,0 +1,140 @@
+---
+title: Projection Based Shape Parameters
+last_updated: 29-May-2020
+sidebar: documentation_sidebar
+permalink: ProjectionBasedParameters.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Projection Based Shape Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-29"><meta name="DC.source" content="script_ProjectionBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ProjectionBasedParameters.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss shape parameters grains that depend on one dimensional projections. Lets start with a overview of all such parameters.</p><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.calliper.html">
+                     <tt>grains.calliper</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>calliper or Feret diameter</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.boundarySize.html">
+                     <tt>grains.boundarySize</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>number of boundary segments</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.paris.html">
+                     <tt>grains.paris</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>2| quotient excess perimeter of convex hull / perimeter</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.diameter.html">
+                     <tt>grains.diameter</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>diameter in <tt>grains.scanUnit</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.paror.html">
+                     <tt>grains.paror</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>cummulative particle projection function</p>
+         </td>
+      </tr>
+   </table>
+</p><p>In order to demonstrate these parameters we first import a small sample data set.</p>
+{% highlight matlab %}
+% load sample EBSD data set
+mtexdata forsterite
+
+% restrict it to a subregion of interest.
+ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+
+% remove all not indexed pixels
+ebsd = ebsd('indexed');
+
+% reconstruct grains
+[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
+
+% smooth them
+grains = smooth(grains,5);
+
+% plot the orientation data of the Forsterite phase
+plot(ebsd('fo'),ebsd('fo').orientations)
+
+% plot the grain boundary on top of it
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_01.png" %}
+</center><h2 id="2">Direct Shape Paramters - size, area, diameter, perimeter and calliper</h2><p>The most well known projection based paramter  is the <a href="grain2d.diamter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code></p>
+{% highlight matlab %}
+grains(9).diameter
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   40.5107
+{% endhighlight %}
+<p>The diameter is a special case of the <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain</p>
+{% highlight matlab %}
+grains(9).calliper('longest')
+grains(9).calliper('shortest')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   40.5107
+ans =
+    6.3359
+{% endhighlight %}
+<p>TODO: some more to explain</p></div></body></html>

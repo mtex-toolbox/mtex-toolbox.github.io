@@ -1,0 +1,193 @@
+---
+title: Ellipse Based Shape Parameters
+last_updated: 29-May-2020
+sidebar: documentation_sidebar
+permalink: EllipseBasedParameters.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-29"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. The table below summarizes all these propeties</p><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.centroid.html">
+                     <tt>grains.centroid</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>midpoint of the ellipse</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.longAxis.html">
+                     <tt>grains.longAxis</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>long axis of the ellipse</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.shortAxis.html">
+                     <tt>grains.shortAxis</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>short axis of the ellipse</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.aspectRatio.html">
+                     <tt>grains.aspectRatio</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.equivalentPerimeter.html">
+                     <tt>grains.equivalentPerimeter</tt>
+                  </a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.equivalentRadius.html">
+                     <tt>grains.equivalentRadius</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>radius of the ellipse</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.shapeFactor.html">
+                     <tt>grains.shapeFactor</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>quotient grain perimeter / ellipse perimeter</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.principalComponents.html">
+                     <tt>grains.principalComponents</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>angle, length and width of the fitted ellipse</p>
+         </td>
+      </tr>
+   </table>
+</p><p>In order to demonstrate these properties we start by reconstructing the grain structure from a sample EBSD data set.</p>
+{% highlight matlab %}
+% load sample EBSD data set
+mtexdata forsterite
+
+% restrict it to a subregion of interest.
+ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+
+% remove all not indexed pixels
+ebsd = ebsd('indexed');
+
+% reconstruct grains
+[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
+
+% smooth them
+grains = smooth(grains,5);
+
+% plot the orientation data of the Forsterite phase
+plot(ebsd('fo'),ebsd('fo').orientations)
+
+% plot the grain boundary on top of it
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_01.png" %}
+</center><h2 id="2">Fit Ellipses</h2><p>The basic command for fitting ellipses is <a href="grain2d.fitEllipse"><code class="language-plaintext highlighter-rouge">fitEllipse</code></a></p>
+{% highlight matlab %}
+[omega,a,b] = grains.fitEllipse;
+plot(grains,'linewidth',4,'micronbar','off')
+plotEllipse(grains.centroid,a,b,omega,'lineColor','w','linewidth',2)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_02.png" %}
+</center><p>The returned variable <code class="language-plaintext highlighter-rouge">omega</code> is the angle describing the rotation of the ellipses and <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are the length of the longest and shortest half axis. The midpoints of the ellipses can be computed by the command <a href="grain2d.centroid.html"><code class="language-plaintext highlighter-rouge">grains.centroid</code></a>.  Note, that the ellipses are scaled such that the area of the ellipse coincides with the actual grain area. Alternatively, one can also scale the ellipse to fit the boundary length by using the option <code class="language-plaintext highlighter-rouge">boundary</code>.</p><h2 id="4">Long and Short Axes</h2><p>The direction of the long and the short axis of the fitted ellipse can be obtained by the comands <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a>. These directions are only well defined if the fitted ellipse is not to close to a perfect circle. A measure for how distinct the ellipse is from a perfect circle is the <a href="grain2d.aspectRatio.html">aspect ratio</a> which is defined as the quotient \(a/b\) between the longest and the shortest axis. For a perfect circle the apect ratio is \(1\) and increases to infinity when the ellipse becomes more and more elongated.</p><p>Lets colorize the grains by their apect ratio and plot on top the long axis directions:</p>
+{% highlight matlab %}
+% visualize the aspect ratio
+plot(grains,grains.aspectRatio,'linewidth',4,'micronbar','off')
+setColorRange([0,4])
+mtexColorbar('title','aspect ratio')
+
+% and on top the long axes
+hold on
+quiver(grains,grains.longAxis,'Color','white')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_03.png" %}
+</center><h2 id="5">Radius and Perimeter of the Ellipses</h2><p>Remember that the fitted ellipses are scaled shuch that they have the same area as the grains. However, the <a href="grain2d.equivalentRadius.html">radius</a> and the <a href="grain2d.equivalentPerimeter.html">perimeter</a> of the ellipses are usually different then the actual perimeter of the grains. Hence, the difference between grain perimeter and ellipse perimeter can be interpreted as a measure for the goodness of fit.</p>
+{% highlight matlab %}
+plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
+setColorRange([0,0.5])
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_04.png" %}
+</center><p>In this plot round shapes will have values close to zero while concave shapes will get large values. A similar measure is the <a href="grain2d.shapeFactor.html">shape factor</a> which is defined as the ratio between the grain perimeter and the equivalent perimeter</p>
+{% highlight matlab %}
+plot(grains,grains.shapeFactor)
+setColorRange([1,2])
+mtexColorbar('title','shape factor')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_05.png" %}
+</center><p>A similar measure is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull.</p>
+{% highlight matlab %}
+plot(grains,grains.paris)
+mtexColorbar('title','paris')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_06.png" %}
+</center></div></body></html>

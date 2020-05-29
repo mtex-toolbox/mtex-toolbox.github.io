@@ -1,0 +1,53 @@
+---
+title: script_ColorMap4
+last_updated: 29-May-2020
+sidebar: examples_sidebar
+permalink: ColorMap4.html
+folder: examples
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>script_ColorMap4</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-29"><meta name="DC.source" content="script_ColorMap4.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/../examples/JAC-Creuziger/ColorMap4.m">
+    edit page</a></font><div>
+{% highlight matlab %}
+% Mtex color maps
+
+% Needed to produce test ODF
+%clc
+%clear
+%close all
+{% endhighlight %}
+<h2 id="2">set colomap with grayscale less than 1, colors to 4 MUD</h2>
+{% highlight matlab %}
+mtexColorMap([0 0 0; .1 .1 .1 ;.2 .2 .2;.3 .3 .3;     .4 .4 .4 ;     .5 .5 .5;     .6 .6 .6;     .7 .7 .7;     .8 .8 .8;     .9 .9 .9;     0 0 1 ;     0 .1 .9;     0 .2 .8;     0 .3 .7;     0 .4 .6;     0 .5 .5;     0 .6 .4;     0 .7 .3;     0 .8 .2;     0 .9 .1;     0 1 0  ;     .1 1 0;     .2 1 0;     .3 1 0;     .4 1 0;     .5 1 0;     .6 1 0;     .7 1 0;     .8 1 0;     .9 1 0;     1 1 0      ;     1 .9 0;     1 .8 0 ;     1 .7 0;     1 .6 0;     1 .5 0;     1 .4 0;     1 .3 0;     1 .2 0;     1 .1 0;     1 0 0 ])
+cmap = colormap;
+setMTEXpref('defaultColorMap',cmap);
+setMTEXpref('FontSize',20);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ColorMap4_01.png" %}
+</center><h2 id="3">test ODF</h2>
+{% highlight matlab %}
+%{
+savepath='.';
+
+HW=20*degree;
+
+cs = crystalSymmetry('m-3m');
+ss = specimenSymmetry('orthorhombic');
+Cube = orientation('Miller',[0 0 1],[1 0 0],cs,ss);
+odf = unimodalODF(Cube,'halfwidth',HW,cs,ss);
+figure; plot(odf,'phi2',[45]*degree,'projection','plain','minmax', 'off',cs,ss);CLim(gcm,[0, 4]);mtexColorbar;
+export_fig(strcat(savepath,'/','ColorMapExample-phi2-45ODF.tiff'),'-r300')
+%export_fig(strcat('ColorMapExample-phi2-45ODF.tiff'),'-r300')
+%}
+{% endhighlight %}
+<h2 id="4">reset to default Mtex colomaps</h2>
+{% highlight matlab %}
+%setMTEXpref('defaultColorMap',WhiteJetColorpMap);
+{% endhighlight %}
+</div></body></html>
