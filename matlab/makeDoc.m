@@ -88,6 +88,8 @@ publish(mtexDocFiles,options);
 
 % define source files
 mtexExFiles = DocFile( fullfile(mtex_path,'..','examples'));
+mtexExFiles = exclude(mtexExFiles,'JAC-Creuziger');
+
 
 % make sidebar
 makeHelpToc(mtexExFiles,'Examples','examples.xml');

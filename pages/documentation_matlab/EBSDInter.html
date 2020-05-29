@@ -1,0 +1,109 @@
+---
+title: script_EBSDInter
+last_updated: 29-May-2020
+sidebar: documentation_sidebar
+permalink: EBSDInter.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>script_EBSDInter</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-29"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
+    edit page</a></font><div>
+{% highlight matlab %}
+mtexdata twins;
+
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'));
+
+ebsd = ebsd.project2FundamentalRegion(grains)
+
+ebsd = ebsd.gridify;
+
+x = linspace(ebsd.xmin,ebsd.xmax,1000);
+y = linspace(ebsd.ymin,ebsd.ymax,1000);
+[x,y] = meshgrid(x,y);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y, grainId
+ Scan unit : um
+{% endhighlight %}
+
+{% highlight matlab %}
+%ebsd2 = interp(ebsd,x,y,'method','none')
+ebsd2 = interp(ebsd,x,y)
+
+key = axisAngleColorKey
+
+meanOri = grains.meanOrientation;
+key.oriRef = meanOri(ebsd('indexed').grainId);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd2 = EBSD  
+ 
+ Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1    2025 (0.2%)  notIndexed                                                 
+     2  997975 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: x, y, bands, bc, bs, error, mad, grainId, oldId
+ Scan unit : um
+ 
+key = 
+  axisAngleColorKey with properties:
+
+        dirMapping: [1×1 HSVDirectionKey]
+            oriRef: []
+          maxAngle: Inf
+    thresholdAngle: Inf
+               CS1: [1×1 crystalSymmetry]
+               CS2: [1×1 specimenSymmetry]
+         antipodal: 0
+{% endhighlight %}
+
+{% highlight matlab %}
+figure(1)
+key.oriRef = meanOri(ebsd('indexed').grainId);
+%key.maxAngle =1 *degree
+
+
+color = key.orientation2color(ebsd('indexed').orientations);
+plot(ebsd('indexed'),color)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDInter_01.png" %}
+</center>
+{% highlight matlab %}
+figure(2)
+key.oriRef = meanOri(ebsd2('indexed').grainId);
+color = key.orientation2color(ebsd2('indexed').orientations);
+plot(ebsd2('indexed'),color)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDInter_02.png" %}
+</center></div></body></html>
