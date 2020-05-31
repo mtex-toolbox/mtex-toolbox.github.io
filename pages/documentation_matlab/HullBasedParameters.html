@@ -1,6 +1,6 @@
 ---
 title: Convex Hull Based Shape Parameters
-last_updated: 29-May-2020
+last_updated: 31-May-2020
 sidebar: documentation_sidebar
 permalink: HullBasedParameters.html
 folder: documentation
@@ -11,143 +11,62 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Convex Hull Based Shape Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-29"><meta name="DC.source" content="script_HullBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/HullBasedParameters.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to the convex hull of the grains. The table below summarizes all these propeties</p><p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.convHull.html">
-                     <tt>grains.convHull</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>convex hull</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.areaHull.html">
-                     <tt>grains.areaHull</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>area of the convex hull in square <tt>grains.scanUnit</tt>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.perimeterHull.html">
-                     <tt>grains.perimeterHull</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>perimeter of the convex hull in square <tt>grains.scanUnit</tt>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.paris.html">
-                     <tt>grains.paris</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>2 * quotient excess perimeter of convex hull / perimeter</p>
-         </td>
-      </tr>
-   </table>
-</p><p>In order to demonstrate these properties we start by reconstructing the grain structure from a sample EBSD data set.</p>
+      --><title>Convex Hull Based Shape Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-31"><meta name="DC.source" content="script_HullBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/HullBasedParameters.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to the convex hull of the grains. In the follwing we illustarte these properties with some artificial grain shapes</p>
 {% highlight matlab %}
-% load sample EBSD data set
-mtexdata forsterite
+% import the artificial grain shapes
+mtexdata testgrains silent
 
-% restrict it to a subregion of interest.
-ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
-
-% remove all not indexed pixels
-ebsd = ebsd('indexed');
-
-% reconstruct grains
-[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
-
-% smooth them
-grains = smooth(grains,5);
-
-% plot the orientation data of the Forsterite phase
-plot(grains,'lineWidth',4)
+% select and smooth a few interesting grains
+grains = smooth(grains('id',[4 5 20 22 26 27 29 34 42 44 49 51 50]),3);
 {% endhighlight %}
+<p><a href="grain2d.smooth.html">Smoothing</a> of grains is necessary since otherwise many grain segments are either vertical or horizontal (for a square grid) and perimeters rather measure the "cityblock" distance. See also <a href="https://t.co/1vQ3SR8noy?amp=1">https://t.co/1vQ3SR8noy?amp=1</a> for examples. Note, that for very small grains, the error between the smoothed grains and their convex hull may lead to unsatisfactory results.</p><p>The convex hull of a list of grains can be computed by the command <a href="grain2d.hull.html"><code class="language-plaintext highlighter-rouge">hull</code></a>. The result is a list of convex grains which can be analyzed almost analogously like the original list of grains.</p>
+{% highlight matlab %}
+chGrains = grains.hull;
 
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+plot(grains,'micronbar','off')
+legend off
+hold on
+plot(chGrains.boundary,'lineWidth',2,'lineColor','r')
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HullBasedParameters_01.png" %}
-</center><h2 id="2">Computing the Convex Hull</h2><p>The convex hull of a list of grains can be computed by the command <a href="grain2d.hull.html"><code class="language-plaintext highlighter-rouge">hull</code></a>. The result is a list of convex grains which can be analyzed almost analogously like the original list of grains.</p>
+</center><p>One major difference is that the grains may now overlap. Accordingly, a boundary of the convex hull is not a boundary between two adjecent grains anymore. Therefore, the second phase in all boundary segments is set to not indexed.</p><h2 id="4">Deviation from fully convex shapes</h2><p>There are various measures to describe the deviation from fully convex shapes, i.e. the lobateness of grains. Many of these are based on the differences between the convex hull of the grain and the grain itself. Depending on the type of deviation from the fully convex shape, some measures might be more appropriate over others.</p><p>One measure is the relative difference between the grain perimeter and the perimeter of the convex hull. It most strongly discriminizes grains with thin, narrow indenting parts, e.g. fracture which not entirely dissect a grain.</p>
 {% highlight matlab %}
-chGrains = grains.hull
-
-hold on
-plot(chGrains.boundary,'lineWidth',2,'lineColor','w')
-hold off
+deltaP = 100 * (grains.perimeter-chGrains.perimeter) ./ grains.perimeter;
 {% endhighlight %}
+<p>A similar measure is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the difference between the actual perimeter and the perimeter of the convex hull, relative to the convex hull.</p>
+{% highlight matlab %}
+paris = 200 * (grains.perimeter - chGrains.perimeter) ./ chGrains.perimeter;
+{% endhighlight %}
+<p>The relative difference between the grain area and the area within the convex hull is more indicative for a broad lobateness of grains</p>
+{% highlight matlab %}
+deltaA = 100 * (chGrains.area - grains.area) ./ chGrains.area;
+{% endhighlight %}
+<p>The total deviation from the fully convex shape can be expressed by</p>
+{% highlight matlab %}
+radiusD = sqrt(deltaP.^2 + deltaA.^2);
+{% endhighlight %}
+<p>Lets visualize all these shape parameters in one plot</p>
+{% highlight matlab %}
+plot(grains,deltaP,'layout',[2 2],'micronbar','off')
+mtexTitle('deltaP')
 
-{% highlight plaintext %}
-chGrains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1     118   14093  Forsterite       mmm                         
-     2      32    1397   Enstatite       mmm                         
-     3      76     759    Diopside     12/m1        X||a*, Y||b, Z||c
- 
- boundary segments: 2796
- inner boundary segments: 14
- triple points: 0
- 
- Properties: GOS, meanRotation
+nextAxis
+plot(grains,grains.paris,'micronbar','off')
+mtexTitle('paris')
+
+
+nextAxis
+plot(grains,deltaA,'micronbar','off')
+mtexTitle('deltaA')
+
+nextAxis
+plot(grains,radiusD,'micronbar','off')
+mtexTitle('radiusD')
+mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HullBasedParameters_02.png" %}
-</center><p>One majore difference is that the grains may now overlap. Accordingly, a boundary of the convex hull is not a boundary between two adjecent grains anymore. Therefore, the second phase in all boundary segments is set to not indexed.</p>
-{% highlight matlab %}
-chGrains.boundary
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = grainBoundary  
- 
- Segments   mineral 1   mineral 2
-     1682  Forsterite  notIndexed
-      410   Enstatite  notIndexed
-      704    Diopside  notIndexed
-{% endhighlight %}
-<p>We may now investigate the difference between original grains and their convex hull. An example is the relative difference in area</p>
-{% highlight matlab %}
-plot(grains,(chGrains.area-grains.area)./grains.area)
-setColorRange([0,0.5])
-{% endhighlight %}
-<center>
-{% include inline_image.html file="HullBasedParameters_03.png" %}
-</center><p>A similar measure is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull.</p>
-{% highlight matlab %}
-plot(grains,grains.paris)
-mtexColorbar('title','paris')
-{% endhighlight %}
-</div></body></html>
+</center></div></body></html>
