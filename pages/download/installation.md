@@ -30,7 +30,7 @@ process using Library Validation: library load disallowed by system policy
 you can either download MTEX with a command line tool such as
 [```curl```](https://www.youtube.com/watch?v=6pyVl3GdSuU) or ```wget```
 ``` bash
-curl --output mtex.zip https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip
+curl -LJO --output mtex.zip https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip
 ```
 or, if you have downloaded MTEX with a browser, type in Matlab
 
