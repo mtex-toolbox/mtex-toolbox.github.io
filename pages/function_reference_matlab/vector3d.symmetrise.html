@@ -1,6 +1,6 @@
 ---
 title: symmetrise
-last_updated: 07-May-2020
+last_updated: 11-Jun-2020
 sidebar: function_reference_sidebar
 permalink: vector3d.symmetrise.html
 folder: function_reference
@@ -11,11 +11,30 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>symmetrise</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-07"><meta name="DC.source" content="script_vector3d__symmetrise.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@vector3d/symmetrise.m">
+      --><title>symmetrise</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-11"><meta name="DC.source" content="script_vector3d__symmetrise.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@vector3d/symmetrise.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>symmetrcially equivalent directions and its multiple</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 vSym = symmetrise(v,S)
+{% endhighlight %}
+
+{% highlight matlab %}
+% include antipodal symmetry
+vSym = symmetrise(v,S,'antipodal')
+{% endhighlight %}
+
+{% highlight matlab %}
+% exclude antipodal symmetry
+vSym = symmetrise(v,S,'noAntipodal')
+{% endhighlight %}
+
+{% highlight matlab %}
+% every symmetrically equivalent direction only once
 [vSym,l,sym] = symmetrise(v,S,'unique')
+{% endhighlight %}
+
+{% highlight matlab %}
+% every symmetrically equivalent axis only once
+[vSym,l,sym] = symmetrise(v,S,'unique','noAntipodal')
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -40,10 +59,10 @@ vSym = symmetrise(v,S)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>Sv</tt>
+            <tt>vSym</tt>
          </td>
          <td>
-            <tt>symmetrically equivalent vectors</tt>
+            <tt>S * v  <a href="vector3d.vector3d.html">vector3d</a></tt>
          </td>
       </tr>
       <tr>
@@ -51,7 +70,15 @@ vSym = symmetrise(v,S)
             <tt>l</tt>
          </td>
          <td>
-            <tt>number of symmetrically equivalent vectors</tt>
+            <tt>multiplicity of the crystal directions</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sym</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a></tt>
          </td>
       </tr>
    </table>
@@ -67,10 +94,18 @@ vSym = symmetrise(v,S)
       </tr>
       <tr>
          <td width="100px">
-            <tt>skipAntipodal</tt>
+            <tt>noAntipodal</tt>
          </td>
          <td>
-            <tt>do not include antipodal symmetry</tt>
+            <tt>do not include antipodal symmetry (without option unique)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noAntipodal</tt>
+         </td>
+         <td>
+            <tt>do not remove antipdal vectors (with option unique)</tt>
          </td>
       </tr>
       <tr>
@@ -78,14 +113,8 @@ vSym = symmetrise(v,S)
             <tt>unique</tt>
          </td>
          <td>
-            <tt>only return distinct directions, adding 'keepAntipodal'</tt>
+            <tt>only return distinct axes or directions (noAntipodal)</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>treats axes as vectors</tt>
-         </td>
-         <td/>
       </tr>
    </table>
 </p></div></body></html>
