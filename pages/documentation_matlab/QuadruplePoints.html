@@ -1,0 +1,124 @@
+---
+title: script_QuadruplePoints
+last_updated: 14-Jun-2020
+sidebar: documentation_sidebar
+permalink: QuadruplePoints.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>script_QuadruplePoints</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-14"><meta name="DC.source" content="script_QuadruplePoints.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/QuadruplePoints.m">
+    edit page</a></font><div>
+{% highlight matlab %}
+cs = crystalSymmetry('1','mineral','test');
+
+
+id = [...
+  0 0 0 0 0 0; ...
+  0 1 1 1 1 0; ...
+  0 1 1 1 1 0; ...
+  0 1 0 0 1 0; ...
+  0 1 0 0 1 0; ...
+  0 1 1 1 0 0; ...
+  0 0 0 0 0 0]==1;
+
+rot = rotation.id(size(id));
+
+rot(id) = rotation.rand;
+
+
+ebsd = EBSDsquare(rot,2*ones(size(rot)),1:2,{'not indexed',cs},[1 1]);
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(ebsd,ebsd.orientations)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="QuadruplePoints_01.png" %}
+</center>
+{% highlight matlab %}
+grains = calcGrains(ebsd,'removeQuadruplePoints')
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     2       2      42     test         1         X||a, Y||b, Z||c
+ 
+ boundary segments: 52
+ inner boundary segments: 0
+ triple points: 0
+ 
+ Id   Phase   Pixels           GOS   phi1   Phi   phi2
+  1       2       15   4.21468e-08    147    93     19
+  2       2       27             0      0     0      0
+{% endhighlight %}
+
+{% highlight matlab %}
+gB = grains.boundary
+grains = merge(grains,gB(end),'calcMeanOrientation')
+{% endhighlight %}
+
+{% highlight plaintext %}
+gB = grainBoundary  
+ 
+ Segments   mineral 1  mineral 2
+       26  notIndexed       test
+       26        test       test
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     2       2      42     test         1         X||a, Y||b, Z||c
+ 
+ boundary segments: 52
+ inner boundary segments: 0
+ triple points: 0
+ 
+ Id   Phase   Pixels           GOS   phi1   Phi   phi2
+  1       2       15   4.21468e-08    147    93     19
+  2       2       27             0      0     0      0
+{% endhighlight %}
+
+{% highlight matlab %}
+grains = smooth(grains,1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     2       2      42     test         1         X||a, Y||b, Z||c
+ 
+ boundary segments: 52
+ inner boundary segments: 0
+ triple points: 0
+ 
+ Id   Phase   Pixels           GOS   phi1   Phi   phi2
+  1       2       15   4.21468e-08    147    93     19
+  2       2       27             0      0     0      0
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(grains.boundary)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="QuadruplePoints_02.png" %}
+</center>
+{% highlight matlab %}
+id = 2;
+gB = grains(id).boundary;
+
+plot(gB,gB.curvature(10),'linewidth',6)
+
+mtexColorMap blue2red
+setColorRange(0.5*[-1,1])
+{% endhighlight %}
+<center>
+{% include inline_image.html file="QuadruplePoints_03.png" %}
+</center></div></body></html>
