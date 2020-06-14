@@ -1,6 +1,6 @@
 ---
 title: Merging Grains
-last_updated: 01-Apr-2020
+last_updated: 14-Jun-2020
 sidebar: documentation_sidebar
 permalink: GrainMerge.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
+      --><title>Merging Grains</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-14"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be usefull when reconstructing parent grain structures, i.e., before phase transistion or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magenesium data and reconstructing the grain structure:</p>
 {% highlight matlab %}
 % load some example data
@@ -22,7 +22,7 @@ mtexdata twins silent
 
 % remove two pixel grains
 ebsd(grains(grains.grainSize<=2)) = [];
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree,'removeQuadruplePoints');
 
 % smooth them
 grains = grains.smooth(5);
@@ -90,7 +90,7 @@ childs = grains(parentId == mergedGrains(16).id)
 childs = grain2d  
  
  Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
-     1       8    1698  Magnesium     6/mmm       X||a*, Y||b, Z||c*
+     1       8    1698  Magnesium     6/mmm        X||a*, Y||b, Z||c
  
  boundary segments: 442
  inner boundary segments: 0
@@ -181,7 +181,7 @@ ebsd_merged = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
-     1  22794 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1  22794 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
  Scan unit : um
