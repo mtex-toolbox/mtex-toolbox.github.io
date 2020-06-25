@@ -97,7 +97,7 @@ hold off
 {% highlight matlab %}
 consistenTP = fit(:,1) < 2.5*degree & fit(:,2) > 2.5*degree;
 
-% marke thse triple points by a red cicle
+% marke these triple points by a red cicle
 hold on
 plot(tP(consistenTP),'MarkerEdgecolor','r','MarkerSize',10,...
   'MarkerFaceColor','none','linewidth',2,'region',region)
@@ -151,12 +151,12 @@ plot(parentGrains('Ti (beta)'), ...
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_06.png" %}
-</center><h2 id="12">Merge alpha grains to beta grains</h2><p>After the first two steps we have quite some beta grains some alpha grains have not yet transformed into beta grains. In order to merge those left over alpha grains we check wether their misorientation with one of the neighbouring beta grains coincides with the parent to grain orientation relationship and if yes merge them evantually with the already reconstructed beta grains.</p><p>First extract a list of all neighbouring alpha - beta grains</p>
+</center><h2 id="12">Merge alpha grains to beta grains</h2><p>After the first two steps we have quite some alpha grains have not yet transformed into beta grains. In order to merge those left over alpha grains we check whether their misorientation with one of the neighbouring beta grains coincides with the parent to grain orientation relationship and if yes merge them evantually with the already reconstructed beta grains.</p><p>First extract a list of all neighbouring alpha - beta grains</p>
 {% highlight matlab %}
 % all neighbouring alpha - beta grains
 grainPairs = neighbors(parentGrains('Ti (alpha)'), parentGrains('Ti (Beta)'));
 {% endhighlight %}
-<p>and check whether how well they fit to a common parent orientation</p>
+<p>and check how well they fit to a common parent orientation</p>
 {% highlight matlab %}
 % extract the corresponding meanorientations
 oriAlpha = parentGrains( grainPairs(:,1) ).meanOrientation;
@@ -165,7 +165,7 @@ oriBeta = parentGrains( grainPairs(:,2) ).meanOrientation;
 % compute for each alpha / beta pair of grains the best fitting parentId
 [parentId, fit] = calcParent(oriAlpha,oriBeta,beta2alpha,'numFit',2,'id');
 {% endhighlight %}
-<p>Similarly, as in the first step the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> return a list of <code class="language-plaintext highlighter-rouge">parentId</code> that allows the convert the child orientations into parent orientations using the command <a href="variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> and the fitting to the given parent orientation. Similarly, as for the triple point we select only those alpha beta pairs such that the fit is below the threshold of 2.5 degree and at the same time the second best fit is above 2.5 degree.</p>
+<p>Similarly, as in the first step the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> returns a list of <code class="language-plaintext highlighter-rouge">parentId</code> that allows the convert the child orientations into parent orientations using the command <a href="variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> and the fitting to the given parent orientation. Similarly, as for the triple point we select only those alpha beta pairs such that the fit is below the threshold of 2.5 degree and at the same time the second best fit is above 2.5 degree.</p>
 {% highlight matlab %}
 % consistent pairs are those with a very small misfit
 consistenPairs = fit(:,1) < 2.5*degree & fit(:,2) > 2.5*degree;
