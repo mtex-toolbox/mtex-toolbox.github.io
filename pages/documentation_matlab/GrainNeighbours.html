@@ -1,6 +1,6 @@
 ---
 title: Grain Neighbors
-last_updated: 01-Apr-2020
+last_updated: 25-Jun-2020
 sidebar: documentation_sidebar
 permalink: GrainNeighbours.html
 folder: documentation
@@ -11,121 +11,111 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Neighbors</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainNeighbours.m">
-    edit page</a></font><div><!--introduction--><p>TODO: This page needs to be improved</p><!--/introduction--><p>In this section we discuss .... We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+      --><title>Grain Neighbors</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-25"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainNeighbours.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to analyze the neighbouring relationships between grains. While most of this can be done also on the level of grain boundaries an local misorientations it is for large data sets sometimes useful to consider misorientations between the meanorienations of grains. We shall use the following Magnesium data set of our explainations.</p>
 {% highlight matlab %}
 % load sample EBSD data set
-mtexdata forsterite
-
-% restrict it to a subregion of interest.
-ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
-
-% remove all not indexed pixels
-ebsd = ebsd('indexed')
+mtexdata twins silent
+CS = ebsd('indexed').CS;
 
 % reconstruct grains
-[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree)
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
 
-% smooth them
 grains = smooth(grains,5);
 
-% plot the orientation data of the Forsterite phase
-plot(ebsd('fo'),ebsd('fo').orientations)
-
-% plot the grain boundary on top of it
-hold on
-plot(grains.boundary,'lineWidth',2)
-hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1   14093 (87%)  Forsterite  LightSkyBlue       mmm                         
-     2   1397 (8.6%)   Enstatite  DarkSeaGreen       mmm                         
-     3    759 (4.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
- 
- 
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1     118   14093  Forsterite       mmm                         
-     2      32    1397   Enstatite       mmm                         
-     3      76     759    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 3915
- inner boundary segments: 14
- triple points: 284
- 
- Properties: GOS, meanRotation
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1   14093 (87%)  Forsterite  LightSkyBlue       mmm                         
-     2   1397 (8.6%)   Enstatite  DarkSeaGreen       mmm                         
-     3    759 (4.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId
- Scan unit : um
+% plot the grains
+plot(grains,grains.meanOrientation)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_01.png" %}
-</center>
+</center><p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighbouring grain ids. Each row of the list containes the ids of two neighbouring grains. In the following lines choose the row number 170 and outline the corresponding grains</p>
 {% highlight matlab %}
-% The function neighbors for grains returns the (i) the number of neighbors
-% of the grains in the EBSD map and (ii) the possible pairs of grains with
-% this map. This is defined in MTEX as
+pairs = grains.neighbors;
 
-[g_NN, g_PAIRS] = grains.neighbors; % grain pairs are given by grain.Id
-
-% A simple histogram showing the distribution of number of neighbors in the
-% map can be plotted as
-
-figure(1)
-histogram(g_NN,0:1:20)
-xlabel('Number of neighbors')
-ylabel('Number of counts')
-
-% whereas pairs generates a list of grain pairs of size size N x 2, where
-% \[N = 2 \sum n_i \] is the total number of neighborhood relations
-% (without self-reference). In this case, pairs(i,:) gives the indexes of
-% two neighboring grains
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainNeighbours_02.png" %}
-</center>
-{% highlight matlab %}
-% take a specific grain
-id = 94;
-plot(grains(id),'micronbar','off','FaceColor','Chocolate','displayName','id=94')
-
-% extract neighbors of this grain
-[~,neighbors] = grains(id).neighbors;
-neighbors(neighbors == id) = [];
-
-% plot the neighbors
 hold on
-plot(grains(neighbors));
+plot(grains(pairs(170,:)).boundary,'LineWidth',4,'linecolor','b')
 hold off
 {% endhighlight %}
 <center>
+{% include inline_image.html file="GrainNeighbours_02.png" %}
+</center><p>In order to compute the misorentation between these two grains we can do</p>
+{% highlight matlab %}
+mori = inv(grains(pairs(170,1)).meanOrientation) * grains(pairs(170,2)).meanOrientation
+{% endhighlight %}
+
+{% highlight plaintext %}
+mori = misorientation  
+  size: 1 x 1
+  crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c)
+  crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  107.142 58.9469  309.49       0
+{% endhighlight %}
+<p>This can be generalized to compute the misorientations between neighbouring grains using</p>
+{% highlight matlab %}
+mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation
+
+close all
+histogram(mori.angle./degree)
+xlabel('misorientation angle')
+{% endhighlight %}
+
+{% highlight plaintext %}
+mori = misorientation  
+  size: 251 x 1
+  crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c)
+  crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c)
+ 
+  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
+{% endhighlight %}
+<center>
 {% include inline_image.html file="GrainNeighbours_03.png" %}
+</center><p>We observe a high peak at about 85 degree. This angle corresponds to twinning. In Magnesium the twinning orientation relationship is given by</p>
+{% highlight matlab %}
+twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
+  Miller(2,-1,-1,0,CS),Miller(2,-1,-1,0,CS))
+{% endhighlight %}
+
+{% highlight plaintext %}
+twinning = misorientation  
+  size: 1 x 1
+  crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c)
+  crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c)
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+   150 86.3471     210       0
+{% endhighlight %}
+<p>In order to determine the percentage of twinnig pairs we do</p>
+{% highlight matlab %}
+% which of the pairs are twinning
+isTwinning = angle(mori,twinning) < 3*degree;
+
+% percentage of twinning pairs
+100 * sum(isTwinning) / length(isTwinning)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   37.0518
+{% endhighlight %}
+<p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> containes only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbour relation ships within one phase.</p><p>In some case, e.g. if we ask for all neighbouring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
+{% highlight matlab %}
+% get all pairs containing grain 83
+pairs = grains(83).neighbors('full');
+
+% remove center grain 83 from this list
+pairs(pairs == 83) = [];
+
+plot(grains,grains.meanOrientation,'micronbar','off')
+hold on
+plot(grains(pairs).boundary,'lineColor','blue','lineWidth',3)
+hold on
+plot(grains(83).boundary,'lineColor','red','lineWidth',3)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="GrainNeighbours_04.png" %}
 </center></div></body></html>
