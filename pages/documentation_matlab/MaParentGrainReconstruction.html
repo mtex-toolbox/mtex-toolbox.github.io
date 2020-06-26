@@ -1,6 +1,6 @@
 ---
 title: Martensite Parent Grain Reconstruction
-last_updated: 25-Jun-2020
+last_updated: 26-Jun-2020
 sidebar: documentation_sidebar
 permalink: MaParentGrainReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-25"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
+      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-26"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent martensite phase from a measured austenite phase. Most of the ideas are from <a href="https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1007%2Fs11661-018-4904-9?_sg%5B0%5D=gRJGzFvY4PyFk-FFoOIj2jDqqumCsy3e8TU6qDnJoVtZaeUoXjzpsGmpe3TDKsNukQYQX9AtKGniFzbdpymYvzYwhg.5jfOl5Ohgg7pW_6yACRXN3QiR-oTn8UsxZjTbJoS_XqwSaaB7r8NgifJyjSES2iXP6iOVx57sy8HC4q2XyZZaA">Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel</a> by Tuomo Nyyss&ouml;nen. We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
@@ -70,15 +70,29 @@ xlabel('disorientation angle')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_02.png" %}
-</center><h2 id="4">Create a similarity matrix</h2><p>Next we set up a adjecency matrix <code class="language-plaintext highlighter-rouge">A</code> that describes the probability that two neighbouring grains belong to the same parent grains. This probability is is computed from the misfit of misorientation between to child grains to the theoretical child to child misorientation. Here we use the cumulativ density function of the Burr distribution to map the misfit in degree into the interval [0,1]. The matrix <code class="language-plaintext highlighter-rouge">A</code> is than split into clusters using the command <a href="calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> which implements the Marlovian clustering algorithm.</p>
+</center><h2 id="4">Create a similarity matrix</h2><p>Next we set up a adjecency matrix <code class="language-plaintext highlighter-rouge">A</code> that describes the probability that two neighbouring grains belong to the same parent grains. This probability is is computed from the misfit of misorientation between to child grains to the theoretical child to child misorientation. More precisely, we model the probability by a cumulativ Gaussian distribution with mean value <code class="language-plaintext highlighter-rouge">threshold</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">tol</code></p>
 {% highlight matlab %}
-% the probability that two child grains belong to the same parent grain
-sim = 1-cdf('Burr',fit./degree,2,5,1);
+omega = linspace(0,5)*degree;
+threshold = 2*degree;
+tol = 1.5*degree;
+
+close all
+plot(omega./degree,1 - 0.5 * (1 + erf(2*(omega - threshold)./tol)),'linewidth',2)
+xlabel('misfit in degree')
+ylabel('probability')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="MaParentGrainReconstruction_03.png" %}
+</center><p>The above diagram describes the probablity distribution as a function of the misfit. After filling the matrix <code class="language-plaintext highlighter-rouge">A</code> with these probabilities</p>
+{% highlight matlab %}
+% compute the probabilities
+prob = 1 - 0.5 * (1 + erf(2*(fit - threshold)./tol));
 
 % the corresponding similarity matrix
-A = sparse(grainPairs(:,1),grainPairs(:,2),sim,length(grains),length(grains));
-
-% apply the Markovian clustering algorithm
+A = sparse(grainPairs(:,1),grainPairs(:,2),prob,length(grains),length(grains));
+{% endhighlight %}
+<p>we can split it into clusters using the command <a href="calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> which implements the <a href="https://micans.org/mcl">Markovian clustering algorithm</a>. Here an important parameter is the so called inflation power, which controls the size of the clusters.</p>
+{% highlight matlab %}
 p = 1.6; % inflation power:
 A = mclComponents(A,p);
 {% endhighlight %}
@@ -99,8 +113,8 @@ plot(parentGrains.boundary,'linewidth',5)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="MaParentGrainReconstruction_03.png" %}
-</center><h2 id="7">Compute parent grain orientations</h2><p>In the next step we compute for each parent grain its parent martensite orientation. This can be done usig the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a>. Note, that we ensure that et least two child grains have been merged and that the misfit is smaller the 5 degree.</p>
+{% include inline_image.html file="MaParentGrainReconstruction_04.png" %}
+</center><h2 id="9">Compute parent grain orientations</h2><p>In the next step we compute for each parent grain its parent martensite orientation. This can be done usig the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a>. Note, that we ensure that et least two child grains have been merged and that the misfit is smaller the 5 degree.</p>
 {% highlight matlab %}
 % the measured child orientations
 childOri = grains('Iron bcc').meanOrientation;
@@ -132,7 +146,7 @@ parentGrains = parentGrains.update;
 plot(parentGrains('Iron fcc'),parentGrains('Iron fcc').meanOrientation)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="MaParentGrainReconstruction_04.png" %}
+{% include inline_image.html file="MaParentGrainReconstruction_05.png" %}
 </center><p>Once parent grain orientations have been computed we may use them to compute parent orientations of each pixel in our original EBSD map. To this end we first find a pixels that now belong to a martensite grain.</p>
 {% highlight matlab %}
 % consider only austenite pixels that now belong to martensite grains
@@ -146,7 +160,7 @@ isNowFCC = parentGrains.phaseId(max(1,parentEBSD.grainId)) == 3 & parentEBSD.pha
 plot(parentEBSD('Iron fcc'),parentEBSD('Iron fcc').orientations,'figSize','large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="MaParentGrainReconstruction_05.png" %}
+{% include inline_image.html file="MaParentGrainReconstruction_06.png" %}
 </center><p>As a second output argument we obtain the <code class="language-plaintext highlighter-rouge">misfit</code> between the parent orientation computed for the pixel and the meanorientation of the corresponding parent grain. Lets plot this misfit as a map.</p>
 {% highlight matlab %}
 plot(parentEBSD(isNowFCC),fit ./ degree,'figSize','large')
@@ -154,12 +168,12 @@ mtexColorMap LaboTeX
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="MaParentGrainReconstruction_06.png" %}
-</center><h2 id="11">Denoise the parent map</h2><p>Finaly we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
+{% include inline_image.html file="MaParentGrainReconstruction_07.png" %}
+</center><h2 id="13">Denoise the parent map</h2><p>Finaly we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
 {% highlight matlab %}
 [parentGrains, parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',3*degree);
 
-parentEBSD(parentGrains(parentGrains.grainSize<5)) = [];
+parentEBSD(parentGrains(parentGrains.grainSize<10)) = [];
 
 [parentGrains, parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',3*degree);
 parentGrains = smooth(parentGrains,5);
@@ -175,18 +189,21 @@ plot(parentGrains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="MaParentGrainReconstruction_07.png" %}
-</center><p>and then use the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> to fill the holes</p>
+{% include inline_image.html file="MaParentGrainReconstruction_08.png" %}
+</center><p>and then use the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> to fill the holes in the reconstructed parent map</p>
 {% highlight matlab %}
+% fill the holes
 F = halfQuadraticFilter;
 parentEBSD = smooth(parentEBSD('indexed'),F,'fill',parentGrains);
 
+% plot the parent map
 plot(parentEBSD('Iron fcc'),parentEBSD('Iron fcc').orientations,'figSize','large')
 
+% with grain boundaries
 hold on
 plot(parentGrains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="MaParentGrainReconstruction_08.png" %}
-</center></div></body></html>
+{% include inline_image.html file="MaParentGrainReconstruction_09.png" %}
+</center><h2 id="15">Summary of relevant thresholds</h2><p>In the above script several parameters are decicive for the success of the reconstruction</p><div><ul><li>threshold for initial grain segmentation (3 degree)</li><li>theshold (2 degree), tolerance (1.5 degree) and inflation power (p = 1.6) of the Markovian clustering algorithm</li><li>maximum misfit within a parent grain (5 degree)</li><li>minimum number of merged childs</li></ul></div></div></body></html>
