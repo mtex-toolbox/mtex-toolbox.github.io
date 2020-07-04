@@ -1,6 +1,6 @@
 ---
 title: Parent Beta Phase Reconstruction in Titanium Alloys
-last_updated: 29-Jun-2020
+last_updated: 04-Jul-2020
 sidebar: documentation_sidebar
 permalink: TiBetaReconstruction.html
 folder: documentation
@@ -11,13 +11,17 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-29"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
+      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-04"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss parent grain reconstruction at the example of a titanium alloy. Lets start by importing a sample data set</p>
 {% highlight matlab %}
 mtexdata alphaBetaTitanium
 
+% the phase names for the alpha and beta phases
+alphaName = 'Ti (alpha)';
+betaName = 'Ti (Beta)';
+
 % and plot the alpha phase as an inverse pole figure map
-plot(ebsd('Ti (alpha)'),ebsd('Ti (alpha)').orientations,'figSize','large')
+plot(ebsd(alphaName),ebsd(alphaName).orientations,'figSize','large')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -33,10 +37,10 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_01.png" %}
-</center><p>The data set contains 99.8 percent alpha titanium and 0.2 percent alpha titanium. Our goal is to reconstuct the original beta phase. The original grain structure appears almost visible for human eyes. Our computations will be based on the following parent to child orientation relationship</p>
+</center><p>The data set contains 99.8 percent alpha titanium and 0.2 percent beta titanium. Our goal is to reconstuct the original beta phase. The original grain structure appears almost visible for human eyes. Our computations will be based on the following parent to child orientation relationship</p>
 {% highlight matlab %}
 beta2alpha = inv(orientation.byEuler(135*degree, 90*degree, 355*degree,...
-  ebsd('Ti (alpha)').CS,ebsd('Ti (Beta)').CS))
+  ebsd(alphaName).CS,ebsd(betaName).CS))
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -52,12 +56,13 @@ beta2alpha = misorientation
 <p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Detecting triple points that belong to the same parent orientation</h2><p>In a first step we want to identify triple junctions that have misorientations that are compatible with a common parent orientations. To this end we first compute alpha grains using the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> which turn all quadruple junctions into 2 triple junctions. Furthermore, we choose a very small threshold of 1.5 degree for the identification of grain boundaries to avoid alpha orientations that belong to different beta grains get merged into the same alpha grain.</p>
 {% highlight matlab %}
 % reconstruct grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'removeQuadruplePoints','threshold',1.5*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
+  'removeQuadruplePoints');
 grains = smooth(grains);
 
 % plot all alpha pixels
 region = [300 400 -500 -440];
-plot(ebsd('Ti (alpha)'),ebsd('Ti (alpha)').orientations,...
+plot(ebsd(alphaName),ebsd(alphaName).orientations,...
   'region',region,'micronbar','off','figSize','large');
 
 % and on top the grain boundaries
@@ -70,7 +75,7 @@ hold off
 </center><p>Above we have plotted only a very small subregion of the original data set to make the seperation of the qudruple junctions better visible.</p><p>Next we extract all alpha - alpha - alpha triple junctions and use the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> to find for each of these triple junctions the best fitting parent orientations.</p>
 {% highlight matlab %}
 % extract all alpha - alpha - alpha triple points
-tP = grains.triplePoints('Ti (alpha)','Ti (alpha)','Ti (alpha)')
+tP = grains.triplePoints(alphaName,alphaName,alphaName)
 
 % compute for each triple point the best fitting parentId and how well the fit is
 tPori = grains(tP.grainId).meanOrientation;
@@ -127,16 +132,30 @@ parentGrains = parentGrains.update;
 <p>Lets plot map of these reconstructed beta grains</p>
 {% highlight matlab %}
 % define a color key
-ipfKey = ipfColorKey(ebsd('Ti (beta)'));
+ipfKey = ipfColorKey(ebsd(betaName));
 ipfKey.inversePoleFigureDirection = vector3d.Y;
 
 % and plot
-plot(parentGrains('Ti (beta)'), ...
-  ipfKey.orientation2color(parentGrains('Ti (beta)').meanOrientation),'figSize','large')
+plot(parentGrains(betaName), ...
+  ipfKey.orientation2color(parentGrains(betaName).meanOrientation),'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_05.png" %}
-</center><p>We observe that this first step already results in very many Beta grains. However, the grain boundaries are still the boundaries of the original alpha grains. To overcome this, we merge all Beta grains that have a misorientation angle smaller then 2.5 degree</p>
+</center><p>We observe that this first step already results in very many Beta grains. However, the grain boundaries are still the boundaries of the original alpha grains. To overcome this, we merge all Beta grains that have a misorientation angle smaller then 2.5 degree.</p><p>As an additional consistency check we verify that each parent grain has been reconstructed from at least 2 child grains. To this end we first make a testrun the merge operation and then revert all parent grains that that have less then two childs. This step may not nessesary in many case.</p>
+{% highlight matlab %}
+% test run of the merge operation
+[~,parentId] = merge(parentGrains,'threshold',2.5*degree,'testRun');
+
+% count the number of neighbouring child that would get merged with each child
+counts = accumarray(parentId,1);
+
+% revert all beta grains back to alpha grains if they would get merged with
+% less then 1 other child grains
+setBack = counts(parentId) < 2 & grains.phaseId == grains.name2id(alphaName);
+parentGrains(setBack).meanOrientation = grains(setBack).meanOrientation;
+parentGrains = parentGrains.update;
+{% endhighlight %}
+<p>Now we perform the actual merge and the reconstruction of the parent grain boundaries.</p>
 {% highlight matlab %}
 % merge beta grains
 [parentGrains,parentId] = merge(parentGrains,'threshold',2.5*degree);
@@ -147,15 +166,15 @@ parentEBSD = ebsd;
 % and store there the grainIds of the parent grains
 parentEBSD('indexed').grainId = parentId(ebsd('indexed').grainId);
 
-plot(parentGrains('Ti (beta)'), ...
-  ipfKey.orientation2color(parentGrains('Ti (beta)').meanOrientation),'figSize','large')
+plot(parentGrains(betaName), ...
+  ipfKey.orientation2color(parentGrains(betaName).meanOrientation),'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_06.png" %}
-</center><h2 id="12">Merge alpha grains to beta grains</h2><p>After the first two steps we have quite some alpha grains have not yet transformed into beta grains. In order to merge those left over alpha grains we check whether their misorientation with one of the neighbouring beta grains coincides with the parent to grain orientation relationship and if yes merge them evantually with the already reconstructed beta grains.</p><p>First extract a list of all neighbouring alpha - beta grains</p>
+</center><h2 id="13">Merge alpha grains to beta grains</h2><p>After the first two steps we have quite some alpha grains have not yet transformed into beta grains. In order to merge those left over alpha grains we check whether their misorientation with one of the neighbouring beta grains coincides with the parent to grain orientation relationship and if yes merge them evantually with the already reconstructed beta grains.</p><p>First extract a list of all neighbouring alpha - beta grains</p>
 {% highlight matlab %}
 % all neighbouring alpha - beta grains
-grainPairs = neighbors(parentGrains('Ti (alpha)'), parentGrains('Ti (Beta)'));
+grainPairs = neighbors(parentGrains(alphaName), parentGrains(betaName));
 {% endhighlight %}
 <p>and check how well they fit to a common parent orientation</p>
 {% highlight matlab %}
@@ -169,7 +188,7 @@ oriBeta = parentGrains( grainPairs(:,2) ).meanOrientation;
 <p>Similarly, as in the first step the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> returns a list of <code class="language-plaintext highlighter-rouge">parentId</code> that allows the convert the child orientations into parent orientations using the command <a href="variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> and the fitting to the given parent orientation. Similarly, as for the triple point we select only those alpha beta pairs such that the fit is below the threshold of 2.5 degree and at the same time the second best fit is above 2.5 degree.</p>
 {% highlight matlab %}
 % consistent pairs are those with a very small misfit
-consistenPairs = fit(:,1) < 2.5*degree & fit(:,2) > 2.5*degree;
+consistenPairs = fit(:,1) < 5*degree & fit(:,2) > 5*degree;
 {% endhighlight %}
 <p>Next we compute for all alpha grains the majority vote of the surounding beta grains and change their orientation from alpha to beta</p>
 {% highlight matlab %}
@@ -185,14 +204,14 @@ parentGrains(hasVote).meanOrientation = ...
 parentGrains = parentGrains.update;
 
 % merge new beta grains into the old beta grains
-[parentGrains,parentId] = merge(parentGrains,'threshold',2.5*degree);
+[parentGrains,parentId] = merge(parentGrains,'threshold',5*degree);
 
 % update grainId in the ebsd map
 parentEBSD('indexed').grainId = parentId(parentEBSD('indexed').grainId);
 
 % plot the result
-color = ipfKey.orientation2color(parentGrains('Ti (beta)').meanOrientation);
-plot(parentGrains('Ti (beta)'),color,'linewidth',2)
+color = ipfKey.orientation2color(parentGrains(betaName).meanOrientation);
+plot(parentGrains(betaName),color,'linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_07.png" %}
@@ -203,7 +222,7 @@ sum(hasVote)
 
 {% highlight plaintext %}
 ans =
-       14564
+       15963
 {% endhighlight %}
 <p>alpha grains into the already reconstructed beta grain. This reduces the amount of grains not yet reconstructed to</p>
 {% highlight matlab %}
@@ -212,12 +231,14 @@ sum(parentGrains('Ti (alpha').grainSize) ./ sum(parentGrains.grainSize)*100
 
 {% highlight plaintext %}
 ans =
-    2.8497
+    1.9542
 {% endhighlight %}
-<p>percent. One way to proceed would be to repeat the steps of this section multiple time, maybe with increasing threshold, until the percentage of reconstructed beta grains is sufficiently high. Another approach in to consider the left over alpha grains as noise and use denoising techniques to replace them with beta orientations. This will be done in the last section.</p><h2 id="19">Reconstruct beta orientations in EBSD map</h2><p>Until now we have only recovered the beta orientations as the mean orientations of the beta grains. In this section we want to set up the EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> to contain for each pixel a reconstruction of the parent phase orientation.</p><p>Therefore, we first identify all pixels that previously have been alpha titanium but now belong to a beta grain.</p>
+<p>percent. One way to proceed would be to repeat the steps of this section multiple time, maybe with increasing threshold, until the percentage of reconstructed beta grains is sufficiently high. Another approach in to consider the left over alpha grains as noise and use denoising techniques to replace them with beta orientations. This will be done in the last section.</p><h2 id="20">Reconstruct beta orientations in EBSD map</h2><p>Until now we have only recovered the beta orientations as the mean orientations of the beta grains. In this section we want to set up the EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> to contain for each pixel a reconstruction of the parent phase orientation.</p><p>Therefore, we first identify all pixels that previously have been alpha titanium but now belong to a beta grain.</p>
 {% highlight matlab %}
 % consider only original alpha pixels that now belong to beta grains
-isNowBeta = parentGrains.phaseId(max(1,parentEBSD.grainId)) == 2 & parentEBSD.phaseId == 3;
+
+isNowBeta = parentGrains.phaseId(max(1,parentEBSD.grainId)) == ebsd.name2id(betaName) &...
+  parentEBSD.phaseId == ebsd.name2id(alphaName);
 {% endhighlight %}
 <p>Next we can use once again the function <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> to recover the original beta orientation from the measured alpha orientation giving the mean beta orientation of the grain.</p>
 {% highlight matlab %}
@@ -234,18 +255,18 @@ setColorRange([0,5])
 mtexColorMap('LaboTeX')
 
 hold on
-plot(parentGrains.boundary)
+plot(parentGrains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_08.png" %}
 </center><p>Lets finaly plot the reconstructed beta phase</p>
 {% highlight matlab %}
-plot(parentEBSD('Ti (beta)'),ipfKey.orientation2color(parentEBSD('Ti (beta)').orientations),'figSize','large')
+plot(parentEBSD(betaName),ipfKey.orientation2color(parentEBSD(betaName).orientations),'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_09.png" %}
-</center><h2 id="23">Denoising of the reconstructed beta phase</h2><p>As promised we end our discussion by applying denoising techniques to fill the remaining holes of alpha grains. To this end we first reconstruct grains from the parent orientations and throw away all small grains</p>
+</center><h2 id="24">Denoising of the reconstructed beta phase</h2><p>As promised we end our discussion by applying denoising techniques to fill the remaining holes of alpha grains. To this end we first reconstruct grains from the parent orientations and throw away all small grains</p>
 {% highlight matlab %}
 [parentGrains,parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',5*degree);
 
@@ -258,13 +279,14 @@ parentEBSD = parentEBSD(parentGrains(parentGrains.grainSize > 15));
 % smooth the grains a bit
 parentGrains = smooth(parentGrains,5);
 {% endhighlight %}
-<p>Finally, we denoise the remaining beta orientations and at the same time fill the empty holes</p>
+<p>Finally, we denoise the remaining beta orientations and at the same time fill the empty holes. We choose a very small smoothing parameter <code class="language-plaintext highlighter-rouge">alpha</code> to keep as many details as possible.</p>
 {% highlight matlab %}
 F= halfQuadraticFilter;
+F.alpha = 0.1;
 parentEBSD = smooth(parentEBSD,F,'fill',parentGrains);
 
 % plot the resulting beta phase
-plot(parentEBSD('Ti (beta)'),ipfKey.orientation2color(parentEBSD('Ti (beta)').orientations),'figSize','large')
+plot(parentEBSD(betaName),ipfKey.orientation2color(parentEBSD(betaName).orientations),'figSize','large')
 
 hold on
 plot(parentGrains.boundary,'lineWidth',3)
@@ -274,7 +296,7 @@ hold off
 {% include inline_image.html file="TiBetaReconstruction_10.png" %}
 </center><p>For comparison the map with original alpha phase and on top the recovered beta grain boundaries</p>
 {% highlight matlab %}
-plot(ebsd('Ti (alpha)'),ebsd('Ti (alpha)').orientations,'figSize','large')
+plot(ebsd(alphaName),ebsd(alphaName).orientations,'figSize','large')
 
 hold on
 plot(parentGrains.boundary,'lineWidth',3)
@@ -282,4 +304,16 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_11.png" %}
-</center><h2 id="26">Summary of relevant thresholds</h2><p>In parent grain reconstruction several parameters are involve are decicive for the success of the reconstruction</p><div><ul><li>threshold for initial grain segmentation (1.5*degree)</li><li>maximum misfit at triple junctions (2.5 degree)</li><li>minimal misfit of the second best solution at triple junctions (2.5 degree)</li><li>minimum number of consistent votes (2)</li><li>threshold for merging beta grains (can be skipped)</li><li>threshold for merging alpha and beta grains (2.5 degree)</li></ul></div></div></body></html>
+</center><h2 id="27">Summary of relevant thresholds</h2><p>In parent grain reconstruction several parameters are involve are decicive for the success of the reconstruction</p><div><ul><li>threshold for initial grain segmentation (1.5*degree)</li><li>maximum misfit at triple junctions (2.5 degree)</li><li>minimal misfit of the second best solution at triple junctions (2.5 degree)</li><li>minimum number of consistent votes (2)</li><li>threshold for merging beta grains (can be skipped)</li><li>threshold for merging alpha and beta grains (2.5 degree)</li></ul></div><p>Visualize the misorientation to the mean reveals quite some fine structure in the reconstructed parent orientations.</p>
+{% highlight matlab %}
+cKey = axisAngleColorKey;
+color = cKey.orientation2color(parentEBSD(betaName).orientations, parentGrains(parentEBSD(betaName).grainId).meanOrientation);
+plot(parentEBSD(betaName),color)
+
+hold on
+plot(parentGrains.boundary,'lineWidth',3)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TiBetaReconstruction_12.png" %}
+</center></div></body></html>
