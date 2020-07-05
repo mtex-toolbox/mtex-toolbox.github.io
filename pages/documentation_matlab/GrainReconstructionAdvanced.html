@@ -1,6 +1,6 @@
 ---
 title: Advanced Grain Reconstruction
-last_updated: 01-Apr-2020
+last_updated: 05-Jul-2020
 sidebar: documentation_sidebar
 permalink: GrainReconstructionAdvanced.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstructionAdvanced.m">
+      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-05"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstructionAdvanced.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
 {% highlight matlab %}
 mtexdata small
@@ -34,7 +34,7 @@ ebsd = EBSD
      0    1197 (32%)  notIndexed                                                 
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -65,7 +65,7 @@ ebsd = EBSD
      0    1197 (32%)  notIndexed                                                 
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -96,7 +96,7 @@ ebsd = EBSD
      0    1197 (32%)  notIndexed                                                 
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -127,7 +127,7 @@ ebsd = EBSD
      0    1197 (32%)  notIndexed                                                 
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -159,7 +159,7 @@ ebsd = EBSD
      0    1197 (32%)  notIndexed                                                 
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -185,7 +185,7 @@ ebsd = EBSD
      0    1197 (32%)  notIndexed                                                 
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -196,7 +196,7 @@ grains = grain2d
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1      23    1952  Forsterite       mmm                         
      2       7     290   Enstatite       mmm                         
-     3      38     282    Diopside     12/m1       X||a*, Y||b*, Z||c
+     3      38     282    Diopside     12/m1        X||a*, Y||b, Z||c
  
  boundary segments: 999
  inner boundary segments: 0
@@ -210,16 +210,13 @@ grains = grain2d
 {% highlight matlab %}
 mtexdata single
 
-ipfKey = axisAngleColorKey(ebsd);
-ipfKey.oriRef = mean(ebsd.orientations);
+colorKey = axisAngleColorKey(ebsd);
+colorKey.oriRef = mean(ebsd.orientations);
 
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
 
 {% highlight plaintext %}
-loading data ...
- saving data to /home/hielscher/mtex/master/data/single.mat
- 
 ebsd = EBSD  
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
@@ -236,13 +233,13 @@ grains_high = calcGrains(ebsd,'angle',1*degree);
 grains_low  = calcGrains(ebsd,'angle',0.5*degree);
 
 figure
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 hold on
 plot(grains_high.boundary)
 hold off
 
 figure
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 hold on
 plot(grains_low.boundary)
 hold off
@@ -305,7 +302,7 @@ grains = grain2d
 <p>We observe how this method nicely splits the measurements into clusters of similar orientation</p>
 {% highlight matlab %}
 %plot(ebsd,oM.orientation2color(ebsd.orientations))
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 
 % start overide mode
 hold on
@@ -316,4 +313,80 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstructionAdvanced_10.png" %}
+</center><h2 id="11">Markovian Clustering Algorithm</h2>
+{% highlight matlab %}
+F = halfQuadraticFilter
+F.alpha = 0.5
+ebsd = smooth(ebsd,F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+F = 
+  halfQuadraticFilter with properties:
+
+    l1DataFit: 1
+         l1TV: 1
+        alpha: 1
+      iterMax: 1000
+          tol: 3.4907e-04
+          eps: 1.0000e-03
+    threshold: 0.2618
+        isHex: 0
+F = 
+  halfQuadraticFilter with properties:
+
+    l1DataFit: 1
+         l1TV: 1
+        alpha: 0.5000
+      iterMax: 1000
+          tol: 3.4907e-04
+          eps: 1.0000e-03
+    threshold: 0.2618
+        isHex: 0
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     1  10201 (100%)       Al  LightSkyBlue      m-3m                         
+ 
+ Properties: x, y, oldId, quality
+ Scan unit : um
+{% endhighlight %}
+
+{% highlight matlab %}
+grains = calcGrains(ebsd,'mcl',[1.24 50],'soft',[0.2 0.3]*degree)
+
+grains = smooth(grains,5)
+
+plot(ebsd,colorKey.orientation2color(ebsd.orientations))
+
+hold on;plot(grains.boundary,'linewidth',2); hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1     167   10201       Al      m-3m                         
+ 
+ boundary segments: 2702
+ inner boundary segments: 17691
+ triple points: 221
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1     167   10201       Al      m-3m                         
+ 
+ boundary segments: 2702
+ inner boundary segments: 17691
+ triple points: 221
+ 
+ Properties: GOS, meanRotation
+{% endhighlight %}
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_11.png" %}
 </center></div></body></html>
