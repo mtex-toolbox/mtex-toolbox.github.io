@@ -1,6 +1,6 @@
 ---
 title: symmetrise
-last_updated: 02-Apr-2020
+last_updated: 08-Jul-2020
 sidebar: function_reference_sidebar
 permalink: Miller.symmetrise.html
 folder: function_reference
@@ -11,23 +11,32 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>symmetrise</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-02"><meta name="DC.source" content="script_Miller__symmetrise.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@Miller/symmetrise.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>directions symmetrically equivalent to m</p><h2 id="3">Syntax</h2>
+      --><title>symmetrise</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-08"><meta name="DC.source" content="script_Miller__symmetrise.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@Miller/symmetrise.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>symmetrcially equivalent directions and its multiple</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-m = symmetrise(m) % <Miller.Miller.html Miller> indices symmetrically equivalent to m
+mSym = symmetrise(m)
+{% endhighlight %}
+
+{% highlight matlab %}
+% include antipodal symmetry
+mSym = symmetrise(m,'antipodal')
+{% endhighlight %}
+
+{% highlight matlab %}
+% exclude antipodal symmetry
+mSym = symmetrise(m,'noAntipodal')
+{% endhighlight %}
+
+{% highlight matlab %}
+% every symmetrically equivalent direction only once
+[mSym,l,sym] = symmetrise(m,'unique')
+{% endhighlight %}
+
+{% highlight matlab %}
+% every symmetrically equivalent axis only once
+[mSym,l,sym] = symmetrise(v,S,'unique','noAntipodal')
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>m</tt>
-         </td>
-         <td>
-            <tt><a href="Miller.Miller.html">Miller</a></tt>
-         </td>
-      </tr>
-   </table>
-</p><h2 id="5">Output</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
@@ -38,7 +47,34 @@ m = symmetrise(m) % <Miller.Miller.html Miller> indices symmetrically equivalent
          </td>
       </tr>
    </table>
-</p><h2 id="6">Options</h2><p>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mSym</tt>
+         </td>
+         <td>
+            <tt>sym * m  <a href="Miller.Miller.html">Miller</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>l</tt>
+         </td>
+         <td>
+            <tt>multiplicity of the crystal directions</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sym</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a></tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Flags</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
@@ -50,10 +86,26 @@ m = symmetrise(m) % <Miller.Miller.html Miller> indices symmetrically equivalent
       </tr>
       <tr>
          <td width="100px">
-            <tt>skipAntipodal</tt>
+            <tt>noAntipodal</tt>
          </td>
          <td>
-            <tt>do not include antipodal symmetry</tt>
+            <tt>do not include antipodal symmetry (without option unique)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noAntipodal</tt>
+         </td>
+         <td>
+            <tt>do not remove antipodal vectors (with option unique)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>unique</tt>
+         </td>
+         <td>
+            <tt>only return distinct axes or directions (noAntipodal)</tt>
          </td>
       </tr>
    </table>
