@@ -1,6 +1,6 @@
 ---
 title: Triple points
-last_updated: 14-Jun-2020
+last_updated: 09-Jul-2020
 sidebar: documentation_sidebar
 permalink: TriplePoints.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Triple points</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-14"><meta name="DC.source" content="script_TriplePoints.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TriplePoints.m">
+      --><title>Triple points</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-09"><meta name="DC.source" content="script_TriplePoints.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TriplePoints.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Triple points are automaticaly computed during grain reconstruction. They are accessable similarly to <a href="GrainBoundaries.html">grain boundaries</a> as the property <a href="triplePointList.triplePointList.html">triplePoints</a> of the grain list. When analyzing triple points it is a good idea to use the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> in <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> to convert all quadruple points into triple points.</p>
 {% highlight matlab %}
 % import some EBSD data set
@@ -166,4 +166,17 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_06.png" %}
+</center><h2 id="11">Angles at triple points</h2><p>The angles at the triplepoints can be accessed by <code class="language-plaintext highlighter-rouge">tP.angles</code>. This is a 3 column matrix with one column for each of the three angles enclosed by the boundary segments of a triple point. Obviously, the sum of each row is always <code class="language-plaintext highlighter-rouge">2*pi</code>. More interestingly is the difference between the largest and the smallest angle. Lets plot this for our test data set.</p>
+{% highlight matlab %}
+plot(grains,'figSize','large')
+hold on
+tP = grains.triplePoints;
+plot(tP,(max(tP.angles,[],2)-min(tP.angles,[],2))./degree,'markerEdgeColor','w','MarkerSize',8)
+hold off
+mtexColorMap LaboTeX
+setColorRange([0,180])
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TriplePoints_07.png" %}
 </center></div></body></html>
