@@ -1,6 +1,6 @@
 ---
 title: Martensite Variants
-last_updated: 08-Jul-2020
+last_updated: 09-Jul-2020
 sidebar: documentation_sidebar
 permalink: MartensiteVariants.html
 folder: documentation
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Variants</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-08"><meta name="DC.source" content="script_MartensiteVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MartensiteVariants.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss the Austenite to Ferrite phase transition. We do so at hand of an EBSD data set of the famous Emsland metereoid.</p>
+      --><title>Martensite Variants</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-09"><meta name="DC.source" content="script_MartensiteVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MartensiteVariants.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss the Austenite to Ferrite phase transition. We do so at hand of an EBSD data set of the Emsland iron meteorite.</p>
 {% highlight matlab %}
 plotx2east
 
@@ -44,7 +44,7 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
 {% endhighlight %}
-<p>The following lines plots the Martensite phase colorized according to its orientation and the Austenite phase in blue.</p>
+<p>The following lines plots the Ferrite colorized according to its orientation and the Austenite phase in blue.</p>
 {% highlight matlab %}
 plot(ebsd('Fe'),ebsd('Fe').orientations)
 hold on
@@ -54,7 +54,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_01.png" %}
-</center><p>We observe quite many small austenite grains surrounding the ferrite grains. Considering only the parent austenite phase and plotting the orientations into an axis angle plot</p>
+</center><p>We observe quite small remaining taeinite (austenite) grains reflecting the former orientation of the parent grain. This high-temperatur phase is stabilized by the increasing nickel content during transformation. The low-temperature phase kamacite (ferrite) can solve in maximum only 6\% nickel so that taenite has to assimilate the excess nickel. Considering only the parent taenite phase and plotting the orientations into an axis angle plot</p>
 {% highlight matlab %}
 plot(ebsd('Aus').orientations,'axisAngle')
 {% endhighlight %}
@@ -64,7 +64,7 @@ plot 2000 random orientations out of 30123 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_02.png" %}
-</center><p>we observe that they concentrated around one single orientations, i.e., the all measurements most likely originates from a single austenite crystal. We can find this parent austenite orientation by taking the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> and compute the fit by the command <a href="orientation.std.html"><code class="language-plaintext highlighter-rouge">std</code></a></p>
+</center><p>we recognize the expected single orientations. We can get this parent orientation by taking the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> and compute the fit by the command <a href="orientation.std.html"><code class="language-plaintext highlighter-rouge">std</code></a></p>
 {% highlight matlab %}
 parenOri = mean(ebsd('Aus').orientations)
 
@@ -84,14 +84,14 @@ parenOri = orientation
 fit =
     1.2738
 {% endhighlight %}
-<p>Next we plot the martensite orientations into pole figures and plot on top of them the parent austenite orientation.</p>
+<p>Next we display the kamacite orientations (blue) in pole figures and additionally plot on top of them the parent taenite orientation (red).</p>
 {% highlight matlab %}
 childOri = grains('Fe').meanOrientation;
 
 h_bcc = Miller({1,0,0},{1,1,0},{1,1,1},cs_bcc);
 h_fcc = Miller({1,0,0},{1,1,0},{1,1,1},cs_aus);
 
-plotPDF(childOri,h_bcc,'MarkerSize',5);
+plotPDF(childOri,h_bcc,'MarkerSize',5,'MarkerFaceAlpha',0.05,'MarkerEdgeAlpha',0.1,'points',500);
 
 nextAxis(1)
 hold on
@@ -111,13 +111,13 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 208 random orientations out of 3886 given orientations
+I'm plotting 500 random orientations out of 3886 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_03.png" %}
-</center><p>Here we marked in red the parent austenite orientation and in blue the child martensite orientations. As the superposition of the martensite (111) pole figure and the (110) austenite pole figure sugest there seems to be a orientation relation ship with respect to these two crystallographic axes. In fact, the Kurdjumov Sachs orientation relationship is exactly defined by alligning the (111) axis of the austenite phase with the (100) axes of the martensite phase and vice versa. Lets define it the explicite way. We could have used also the command <code class="language-plaintext highlighter-rouge">orientation.KurdjumovSachs(cs_aus,cs_bcc)</code>.</p>
+</center><p>The coincidence of kamacite and taenite poles suggests an existing orientation relationship between both phases. The Kurdjumov-Sachs (KS) orientation relationship model assumes a transformation of one of the {111}-taenite into one of the {110} kamacite planes. Within these planes one of the <a href="110">110</a> directions in taenite is assumes to aline parallel to one of the <a href="111">111</a> directions of kamacite. Since for cubic crystals identically indices of (hkl) and [uvw] generate identical poles the pole figures can be used for both, directions as well as lattice plane normals. Although we could alternatively use the MTEX command <code class="language-plaintext highlighter-rouge">orientation.KurdjumovSachs(cs_aus,cs_bcc)</code>, let us define the orientation relationship explicitely:</p>
 {% highlight matlab %}
 KS = orientation.map(Miller(1,1,1,cs_aus),Miller(0,1,1,cs_bcc),...
       Miller(-1,0,1,cs_aus),Miller(-1,-1,1,cs_bcc));
@@ -127,12 +127,12 @@ plotPDF(variants(KS,parenOri),'add2all','MarkerFaceColor','none','MarkerEdgeColo
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_04.png" %}
-</center><p>In order to quantify the fit between the Kurdjumov Sachs orientation relationship and the actual orientation relation ship in the data we compute the mean angular deviation between all parent to child misorientaitons and the Kurdjumov Sachs orientation relationship</p>
+</center><p>In order to quantify the match between the Kurdjumov-Sachs model and the actual orientation relation ship in the meteorite, we compute the mean angular deviation between all parent-to-child misorientaitons and the KS model</p>
 {% highlight matlab %}
-% all parent to child misorientations
+% The parent-to-child misorientations are given by
 mori = inv(childOri) * parenOri;
 
-% mean angular deviation in degree
+% whereas the mean angular deviation in degree can be computed by
 mean(angle(mori, KS)) ./ degree
 
 %fit = sqrt(mean(min(angle_outer(childOri,variants(KS,parenOri)),[],2).^2))./degree
@@ -147,7 +147,7 @@ ans =
 % the mean of all measured parent to child misorientations
 p2cMean = mean(mori,'robust')
 
-plotPDF(childOri,h_bcc,'MarkerSize',5);
+plotPDF(childOri,h_bcc,'MarkerSize',5,'MarkerFaceAlpha',0.05,'MarkerEdgeAlpha',0.1,'points',500);
 hold on
 plotPDF(variants(p2cMean,parenOri),'add2all','MarkerFaceColor','none','MarkerEdgeColor','k','linewidth',2)
 hold off
@@ -166,7 +166,7 @@ p2cMean = misorientation
   phi1     Phi    phi2    Inv.
    289 8.11984 27.0131       0
  
-  I'm plotting 208 random orientations out of 3886 given orientations
+  I'm plotting 500 random orientations out of 3886 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 ans =
