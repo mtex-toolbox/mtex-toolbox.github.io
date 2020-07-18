@@ -1,6 +1,6 @@
 ---
-title: script_EBSDInter
-last_updated: 09-Jul-2020
+title: Interpolating EBSD Data
+last_updated: 17-Jul-2020
 sidebar: documentation_sidebar
 permalink: EBSDInter.html
 folder: documentation
@@ -11,20 +11,14 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_EBSDInter</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-09"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
-    edit page</a></font><div>
+      --><title>Interpolating EBSD Data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-17"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In the section <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> we have discussed how to work with noisy EBSD data the contained non indexed pixels. Hereby, we made the assumption that the grid before and after the operations is the same.</p><p>In this section we explain how to interpolate an EBSD map at positions that do not belong to the grid. Lets us consider a simple example</p>
 {% highlight matlab %}
 mtexdata twins;
 
 [grains, ebsd.grainId] = calcGrains(ebsd('indexed'));
 
-ebsd = ebsd.project2FundamentalRegion(grains)
-
-ebsd = ebsd.gridify;
-
-x = linspace(ebsd.xmin,ebsd.xmax,1000);
-y = linspace(ebsd.ymin,ebsd.ymax,1000);
-[x,y] = meshgrid(x,y);
+plot(ebsd('indexed'),ebsd('indexed').orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -36,74 +30,93 @@ ebsd = EBSD
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
- 
- 
-ebsd = EBSD  
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDInter_01.png" %}
+</center><p>As this functionality is currently only available for EBSD data on a rectangular grid we have to apply the command |<a href="EBSD.gridify.html">gridify|</a> first</p>
+{% highlight matlab %}
+ebsd = ebsd.gridify;
+ebsd = ebsd.project2FundamentalRegion(grains)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSDsquare  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, x, y, grainId
+ Properties: bands, bc, bs, error, mad, x, y, grainId, oldId
  Scan unit : um
+ Grid size (square): 137 x 167
 {% endhighlight %}
-
+<p>Now we can use the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> to interpolate the orientation at any arbitrary coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</p>
 {% highlight matlab %}
-%ebsd2 = interp(ebsd,x,y,'method','none')
-ebsd2 = interp(ebsd,x,y)
-
-key = axisAngleColorKey
-
-meanOri = grains.meanOrientation;
-key.oriRef = meanOri(ebsd('indexed').grainId);
+x = 30.5; y = 5.5;
+e1 = interp(ebsd,x,y)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd2 = EBSD  
+e1 = EBSD  
  
- Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1    2025 (0.2%)  notIndexed                                                 
-     2  997975 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+ Id   Phase   phi1   Phi   phi2      x     y   bands    bc    bs   error   mad   grainId   oldId
+  1       1    163   112    186   30.5   5.5      10   160   255       0   0.4        36    3109
+ Scan unit : um
+{% endhighlight %}
+<p>By default the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
+{% highlight matlab %}
+e2 = ebsd('xy',x,y)
+{% endhighlight %}
+
+{% highlight plaintext %}
+e2 = EBSD  
+ 
+ Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+    Id   Phase   phi1   Phi   phi2   bands    bc    bs   error   mad      x     y   grainId   oldId
+ 13993       1    163   112    186      10   160   255       0   0.4   30.6   5.4        36    3109
+ Scan unit : um
+{% endhighlight %}
+<p>which returns the nearest neighbour EBSD measurement. Lets have a look at the difference</p>
+{% highlight matlab %}
+angle(e1.orientations,e2.orientations)./degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.1508
+{% endhighlight %}
+<h2 id="6">Change of the measurement grid</h2><p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> can be used to evaluate the EBSD map on a different grid, which might have higher or lower resolution or might even be rotated. Lets demonstrate this</p>
+{% highlight matlab %}
+% define a rotated coarse grid
+omega = 5*degree;
+x = linspace(ebsd.xmin-cos(omega)*ebsd.ymax,ebsd.xmax,100);
+y = linspace(ebsd.ymin-sin(omega)*ebsd.xmax,ebsd.ymax,50);
+[x,y] = meshgrid(x,y);
+
+xy = [cos(omega) -sin(omega); sin(omega) cos(omega) ] * [x(:),y(:)].';
+
+% define the EBSD data set on this new grid
+ebsdNewGrid = interp(ebsd,xy(1,:),xy(2,:))
+
+% plot the regridded EBSD data set
+plot(ebsdNewGrid('indexed'),ebsdNewGrid('indexed').orientations)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdNewGrid = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0    2624 (52%)  notIndexed                                                 
+     1    2376 (48%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: x, y, bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
- 
-key = 
-  axisAngleColorKey with properties:
-
-        dirMapping: [1×1 HSVDirectionKey]
-            oriRef: []
-          maxAngle: Inf
-    thresholdAngle: Inf
-               CS1: [1×1 crystalSymmetry]
-               CS2: [1×1 specimenSymmetry]
-         antipodal: 0
-{% endhighlight %}
-
-{% highlight matlab %}
-figure(1)
-key.oriRef = meanOri(ebsd('indexed').grainId);
-%key.maxAngle =1 *degree
-
-
-color = key.orientation2color(ebsd('indexed').orientations);
-plot(ebsd('indexed'),color)
-hold on
-plot(grains.boundary,'lineWidth',2)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDInter_01.png" %}
-</center>
-{% highlight matlab %}
-figure(2)
-key.oriRef = meanOri(ebsd2('indexed').grainId);
-color = key.orientation2color(ebsd2('indexed').orientations);
-plot(ebsd2('indexed'),color)
-hold on
-plot(grains.boundary,'lineWidth',2)
-hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_02.png" %}
-</center></div></body></html>
+</center><p>Note, that we have not rotated the EBSD but only the grid. All orientations as well as the position of all grains remains unchanged.</p></div></body></html>
