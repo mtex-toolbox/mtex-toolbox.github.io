@@ -11,6 +11,19 @@ toc: false
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
+  {% include image.html file="MTEXGUI.png" max-width='120'%}
+  </td><td valign="top">
+  <p><b>MTEX GUI</b> is a graphical user interface to MTEX that allows to perform many analysis step in a non programming way.</p>
+  <p> <a href="https://www.researchgate.net/profile/Jessica_Hiscocks"><span class="glyphicon glyphicon-user"></span> Jessica Hiscocks</a></p>
+  <p> <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX"><span class="glyphicon glyphicon-home"></span> </a></p>
+</td>
+</tr></table>
+</div>
+
+
+<div class='row'>
+<table border='0' cellpadding='10'><tr>
+<td width="140" valign="top">
   {% include image.html file="Logo-titanium-large.png" max-width='120'%}
   </td><td valign="top">
   <p><b>MTEX2Gmsh</b> allows to generate meshes from EBSD data.
@@ -25,11 +38,11 @@ toc: false
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
-  {% include image.html file="MTEXGUI.png" max-width='120'%}
+  {% include image.html file="stabix.png" max-width='120'%}
   </td><td valign="top">
-  <p><b>MTEX GUI</b> is a graphical user interface to MTEX that allows to perform many analysis step in a non programming way.</p>
-  <p> <a href="https://www.researchgate.net/profile/Jessica_Hiscocks"><span class="glyphicon glyphicon-user"></span> Jessica Hiscocks</a></p>
-  <p> <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX"><span class="glyphicon glyphicon-home"></span> </a></p>
+  <p><b>Stabix</b> Slip transfer analysis toolbox</p>
+  <p> <a href="https://www.researchgate.net/profile/David_Mercier3"><span class="glyphicon glyphicon-user"></span> David Mercier</a></p>
+  <p> <a href="https://stabix.readthedocs.io/en/latest/index.html"><span class="glyphicon glyphicon-home"></span> https://stabix.readthedocs.io/en/latest/index.html</a></p>
 </td>
 </tr></table>
 </div>
