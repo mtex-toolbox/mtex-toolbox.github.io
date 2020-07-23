@@ -1,5 +1,5 @@
 ---
-title: Addons, Toolboxes, Resources
+title: MTEX Based Toolboxes
 keywords: addons
 last_updated: July, 2020
 hide_sidebar: true
@@ -56,6 +56,7 @@ toc: false
   <p><b>crystalAligner</b> allows to determine the alignment of one or two crystal directions
   of arbitrary crystal orientation and structure with the coordinate system of a scanning electron microscope.</p>
   <p>
+  <p> <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
   <p> <a href="github.com/frankNiessen/crystalAligner"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/crystalAligner</a></p>
   </p>
 </td>
