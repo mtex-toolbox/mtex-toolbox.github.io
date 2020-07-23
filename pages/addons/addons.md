@@ -47,7 +47,6 @@ toc: false
 </tr></table>
 </div>
 
-
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
@@ -58,6 +57,20 @@ toc: false
   <p>
   <p> <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
   <p> <a href="github.com/frankNiessen/crystalAligner"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/crystalAligner</a></p>
+  </p>
+</td>
+</tr></table>
+</div>
+
+<div class='row'>
+<table border='0' cellpadding='10'><tr>
+<td width="140" valign="top">
+  {% include image.html file="mainprice.jpg" alt="" max-width='120'%}
+</td><td valign="top">
+  <p><b>phaseSegmenter</b> enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.</p>
+  <p>
+  <p> <a href="https://wwws.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
+  <p> <a href="github.com/frankNiessen/phaseSegmenter"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/phaseSegmenter</a></p>
   </p>
 </td>
 </tr></table>
