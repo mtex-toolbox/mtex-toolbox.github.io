@@ -43,7 +43,7 @@ ylabel('Rodrigues distance')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_01.png" %}
-</center><p>We observe that orientations may be far from each other in Rodrigues Frank space but have small misorientation angle. As a consequence, we not simply compute the average of two orientation by taking the mean of the corresponding Rodrigues vectors. Lets have a look at an extremal case of finding the mean orientations of the orientations (44,0,0) and (46,0,0)</p>
+</center><p>We observe that orientations that have very small misorientation angle may be very far from each other in Rodrigues Frank space. As a consequence, we can not simply compute the average of two orientations by taking the mean of the corresponding Rodrigues vectors. Lets have a look at an extremal case of finding the mean orientations of the orientations (44,0,0) and (46,0,0)</p>
 {% highlight matlab %}
 % define two orientations
 ori = orientation.byEuler([44 46]*degree,0,0,cs);
@@ -76,7 +76,7 @@ ans = orientation
   phi1  Phi phi2 Inv.
     45    0    0    0
 {% endhighlight %}
-<p>This issue does not only apply to the mean but actually to all statistical methods that work well for vectorial data and that one would like to apply to orientation data.</p><p>The crucial idea of an embedding is to replace the vectorial representation with a higher dimensional tensorial representation that preserves the geometry and the distances of the orientation space as good as possible.</p><h2 id="5">Defining an embedding</h2><p>Defining an embedding of an orientation <code class="language-plaintext highlighter-rouge">ori</code> is done by calling the function <a href="embedding.html"><code class="language-plaintext highlighter-rouge">embedding</code></a>.</p>
+<p>This issue does not only apply to the mean but actually to all statistical methods that work well for vectorial data and that one would like to apply to orientation data.</p><p>The crucial idea of an embedding is to replace the vectorial representation by a higher dimensional tensorial representation that preserves the geometry and the distances of the orientation space as good as possible.</p><h2 id="5">Defining an embedding</h2><p>Defining an embedding of an orientation <code class="language-plaintext highlighter-rouge">ori</code> is done by calling the function <a href="embedding.html"><code class="language-plaintext highlighter-rouge">embedding</code></a>.</p>
 {% highlight matlab %}
 e1 = embedding(ori1);
 e2 = embedding(ori2)
@@ -99,7 +99,7 @@ ylabel('embedding distance')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_02.png" %}
-</center><p>We observe that distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations (44,0,0) and (46,0,0). If we compute the embedding of both orientations, average the resulting tensors and then project to mean tensor back to an orientation we end up with the correct result (0,0,0).</p>
+</center><p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations (44,0,0) and (46,0,0). If we compute the embedding of both orientations, average the resulting tensors and then project to mean tensor back to an orientation we end up with the correct result (0,0,0).</p>
 {% highlight matlab %}
 % compute the embedding of the two orientations
 e = embedding(ori)
@@ -134,7 +134,7 @@ norm(embedding(orientation.rand(5,cs))).'
 ans =
     1.0000    1.0000    1.0000    1.0000    1.0000
 {% endhighlight %}
-<p>In other words the embeddings a located on the surface of a ball with a specific radius. When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a prefered orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p><p>Lets demonstrate this with a simple example</p>
+<p>In other words the embeddings are located on the surface of a ball with a radius \(1\). When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a prefered orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p><p>Lets compare the norm</p><p>\[ \lVert\frac{1}{n} \sum_{i=1}^N \mathcal E(\mathtt{ori}_i) \rVert\]</p><p>of the mean embedding with the standard deviation</p><p>\[ \sigma \left(\frac{1}{N} \sum_{i=1}^N \omega(\mathtt{ori}_i, \mathtt{mori})^2\right)^{1/2}\]</p><p>where \(\omega(\mathtt{ori}_i, \mathtt{mori}))\) denotes the misorientation angle between the orientations \(\mathtt{ori}_i\) and the mean orientation \(\mathtt{mori}\).</p>
 {% highlight matlab %}
 % genrate samples of orientations of different dispersion
 n = []; sigma = [];
@@ -157,7 +157,7 @@ ylabel('norm of the mean')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_03.png" %}
-</center><p>In the previous section we have generated the orientations out of a family of random variables - unimodal de la Vallee Poussin distributed density function. A broader family of density function are the Bingham distributions. Lets repeat the experiment for this family.</p>
+</center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - unimodal de la Vallee Poussin distributed density functions. A broader family of density function are the Bingham distributions. Lets repeat the experiment for this family.</p>
 {% highlight matlab %}
 % genrate ODF of different halfwidth
 n = []; sigma = [];
@@ -169,7 +169,6 @@ for k = 1:2:600
   ori = discreteSample(odf,1000);
 
   n(end+1) = norm(mean(embedding(ori)));
-
   sigma(end+1) = std(ori);
 
 end
@@ -180,4 +179,4 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_04.png" %}
-</center></div></body></html>
+</center><p>We observe that there is no one-to-one relatioenship between the discrete standard deviation.</p><h2 id="13">Operations</h2><p>The following operations are supported for embeddings:</p><div><ul><li><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">./</code></li><li><code class="language-plaintext highlighter-rouge">sum</code>, <code class="language-plaintext highlighter-rouge">mean</code></li><li><code class="language-plaintext highlighter-rouge">norm</code>, <code class="language-plaintext highlighter-rouge">normalize</code></li><li><code class="language-plaintext highlighter-rouge">dot</code></li><li><code class="language-plaintext highlighter-rouge">rotate</code>, rotate_outer|</li></ul></div></div></body></html>
