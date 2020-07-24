@@ -76,7 +76,7 @@ ans = orientation
   phi1  Phi phi2 Inv.
     45    0    0    0
 {% endhighlight %}
-<p>This issue does not only apply to the mean but actually to all statistical methods that work well for vectorial data and that one would like to apply to orientation data.</p><p>The crucial idea of an embedding is to replace the vectorial representation by a higher dimensional tensorial representation that preserves the geometry and the distances of the orientation space as good as possible.</p><h2 id="5">Defining an embedding</h2><p>Defining an embedding of an orientation <code class="language-plaintext highlighter-rouge">ori</code> is done by calling the function <a href="embedding.html"><code class="language-plaintext highlighter-rouge">embedding</code></a>.</p>
+<p>This issue does not only apply to the mean but actually to all statistical methods that work well for vectorial data and that one would like to apply to orientation data.</p><p>The crucial idea of an embedding is to replace the vectorial representation by a higher dimensional tensorial representation that preserves the geometry and the distances of the orientation space as good as possible.</p><h2 id="5">Defining an embedding</h2><p>Defining an embedding of an orientation <code class="language-plaintext highlighter-rouge">ori</code> is done by calling the function <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code>.</p>
 {% highlight matlab %}
 e1 = embedding(ori1);
 e2 = embedding(ori2)
@@ -87,7 +87,7 @@ e2 = embedding
  symmetry: 432
  size: 100000 x 1
 {% endhighlight %}
-<p>This creates a variable of type <a href="embedding.html"><code class="language-plaintext highlighter-rouge">embedding</code></a> that behaves like list of vectors, i.e., variable of type <a href="embedding.html"><code class="language-plaintext highlighter-rouge">embedding</code></a> can be summed, rotated, scaled and one can compute the inner product between two embeddings. Lets have a look at the Euclidean distances between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code></p>
+<p>This creates a variable of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> that behaves like list of vectors, i.e., variable of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> can be summed, rotated, scaled and one can compute the inner product between two embeddings. Lets have a look at the Euclidean distances between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and |e2|s</p>
 {% highlight matlab %}
 % the Euclidean distance in the embedding
 distE = norm(e1-e2) ./ degree;
@@ -134,7 +134,7 @@ norm(embedding(orientation.rand(5,cs))).'
 ans =
     1.0000    1.0000    1.0000    1.0000    1.0000
 {% endhighlight %}
-<p>In other words the embeddings are located on the surface of a ball with a radius \(1\). When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a prefered orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p><p>Lets compare the norm</p><p>\[ \lVert\frac{1}{n} \sum_{i=1}^N \mathcal E(\mathtt{ori}_i) \rVert\]</p><p>of the mean embedding with the standard deviation</p><p>\[ \sigma \left(\frac{1}{N} \sum_{i=1}^N \omega(\mathtt{ori}_i, \mathtt{mori})^2\right)^{1/2}\]</p><p>where \(\omega(\mathtt{ori}_i, \mathtt{mori}))\) denotes the misorientation angle between the orientations \(\mathtt{ori}_i\) and the mean orientation \(\mathtt{mori}\).</p>
+<p>In other words the embeddings are located on the surface of a ball with a radius \(1\). When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a prefered orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p><p>Lets compare the norm</p><p>\[ n=\left\lVert\frac{1}{n} \sum_{i=1}^N \mathcal E(\mathtt{ori}_i) \right\rVert\]</p><p>of the mean embedding with the standard deviation</p><p>\[ \sigma = \left(\frac{1}{N} \sum_{i=1}^N \omega(\mathtt{ori}_i, \mathtt{mori})^2\right)^{1/2}\]</p><p>where \(\omega(\mathtt{ori}_i, \mathtt{mori}))\) denotes the misorientation angle between the orientations \(\mathtt{ori}_i\) and the mean orientation \(\mathtt{mori}\).</p>
 {% highlight matlab %}
 % genrate samples of orientations of different dispersion
 n = []; sigma = [];
@@ -152,8 +152,8 @@ for hw = logspace(-1,1.75,40)*degree
 end
 
 plot(sigma,real(sqrt(1-n)),'linewidth',2)
-xlabel('dispersion')
-ylabel('norm of the mean')
+xlabel('standard deviation \(\sigma\)','Interpreter','latex')
+ylabel('\(\sqrt{1-n}\)','Interpreter','latex')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_03.png" %}
@@ -179,4 +179,4 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_04.png" %}
-</center><p>We observe that there is no one-to-one relatioenship between the discrete standard deviation.</p><h2 id="13">Operations</h2><p>The following operations are supported for embeddings:</p><div><ul><li><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">./</code></li><li><code class="language-plaintext highlighter-rouge">sum</code>, <code class="language-plaintext highlighter-rouge">mean</code></li><li><code class="language-plaintext highlighter-rouge">norm</code>, <code class="language-plaintext highlighter-rouge">normalize</code></li><li><code class="language-plaintext highlighter-rouge">dot</code></li><li><code class="language-plaintext highlighter-rouge">rotate</code>, rotate_outer|</li></ul></div><h2 id="14">Rerference</h2><p>The theory behind these embeddings is explained in the paper</p><div><ul><li>R. Arnold, P. E. Jupp, H. Schaeben, Statistics of ambiguous rotations, Journal of Multivariate Analysis (165), 2018</li><li>R. Hielscher, L. Lippert, <i>Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries</i>, <a href="https://arxiv.org/abs/2007.09664">arXiv:2007.09664</a>, 2020.</li></ul></div></div></body></html>
+</center><p>We observe that there is no one-to-one relatioenship between the discrete standard deviation.</p><h2 id="13">Operations</h2><p>The following operations are supported for embeddings:</p><div><ul><li><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">./</code></li><li><code class="language-plaintext highlighter-rouge">sum</code>, <code class="language-plaintext highlighter-rouge">mean</code></li><li><code class="language-plaintext highlighter-rouge">norm</code>, <code class="language-plaintext highlighter-rouge">normalize</code></li><li><code class="language-plaintext highlighter-rouge">dot</code></li><li><code class="language-plaintext highlighter-rouge">rotate</code>, <code class="language-plaintext highlighter-rouge">rotate_outer</code></li></ul></div><h2 id="14">Rerference</h2><p>The theory behind these embeddings is explained in the paper</p><div><ul><li>R. Arnold, P. E. Jupp, H. Schaeben, Statistics of ambiguous rotations, Journal of Multivariate Analysis (165), 2018</li><li>R. Hielscher, L. Lippert, <i>Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries</i>, <a href="https://arxiv.org/abs/2007.09664">arXiv:2007.09664</a>, 2020.</li></ul></div></div></body></html>
