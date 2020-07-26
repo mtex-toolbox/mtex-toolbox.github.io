@@ -95,9 +95,7 @@ e2 = embedding
  ranks: 4
  size: 100000 x 1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationEmbeddings_02.png" %}
-</center><p>This creates variables <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code> of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> that behaves like lists of vectors, i.e., they can be <a href="embedding.sum.html">summed</a>, <a href="embedding.rotate.html">rotated</a>, <a href="embedding.mtimes.html">scaled</a> and one can compute their <a href="embedding.dot.html">inner product</a>. Lets have a look at the Euclidean distances \(\lVert\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_1}) \rVert_2\) between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code></p>
+<p>This creates variables <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code> of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> that behaves like lists of vectors, i.e., they can be <a href="embedding.sum.html">summed</a>, <a href="embedding.rotate.html">rotated</a>, <a href="embedding.mtimes.html">scaled</a> and one can compute their <a href="embedding.dot.html">inner product</a>. Lets have a look at the Euclidean distances \(\lVert\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_1}) \rVert_2\) between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code></p>
 {% highlight matlab %}
 % the Euclidean distance in the embedding
 distE = norm(e1-e2) ./ degree;
@@ -108,8 +106,8 @@ xlabel('\(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\)','Interpreter','latex')
 ylabel('\(||\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_1}) ||\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_03.png" %}
-</center><p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations \((44^{\circ},0^{\circ},0^{\circ})\) and \((46^{\circ},0^{\circ},0^{\circ})\). If we compute the embedding of both orientations, average the resulting tensors and then <a href="embedding.orientation.html">project to mean tensor back to an orientation</a> we end up with the correct result \((0^{\circ},0^{\circ},0^{\circ})\).</p>
+{% include inline_image.html file="OrientationEmbeddings_02.png" %}
+</center><p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations \((44^{\circ},0^{\circ},0^{\circ})\) and \((46^{\circ},0^{\circ},0^{\circ})\). If we compute the embedding of both orientations, average the resulting tensors and <a href="embedding.orientation.html">project the mean tensor back to an orientation</a> we end up with the correct result \((0^{\circ},0^{\circ},0^{\circ})\).</p>
 {% highlight matlab %}
 % compute the embedding of the two orientations
 e = embedding(ori);
@@ -162,7 +160,7 @@ xlabel('standard deviation \(\sigma\)','Interpreter','latex')
 ylabel('\(\sqrt{1-n}\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_04.png" %}
+{% include inline_image.html file="OrientationEmbeddings_03.png" %}
 </center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - <a href="UnimodalODFs.html">unimodal de la Vallee Poussin distributed density functions</a>. A broader family of density function are the <a href="BinghamODFs.html">Bingham distributions</a>. Lets repeat the experiment for this family.</p>
 {% highlight matlab %}
 % genrate ODF of different halfwidth
@@ -184,5 +182,5 @@ scatter(sigma,sqrt(1-n),'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_05.png" %}
+{% include inline_image.html file="OrientationEmbeddings_04.png" %}
 </center><p>We observe that there is no one-to-one relatioenship between the discrete standard deviation.</p><h2 id="14">Operations</h2><p>The following operations are supported for embeddings:</p><div><ul><li><code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <a href="embedding.mtimes.html"><code class="language-plaintext highlighter-rouge">*</code></a>, <a href="embedding.times.html"><code class="language-plaintext highlighter-rouge">.*</code></a>, <code class="language-plaintext highlighter-rouge">./</code></li><li><a href="embedding.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a>, <a href="embedding.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a></li><li><a href="embedding.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>, <a href="embedding.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a></li><li><a href="embedding.dot.html"><code class="language-plaintext highlighter-rouge">dot</code></a></li><li><a href="embedding.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>, <a href="embedding.rotate_outer.html"><code class="language-plaintext highlighter-rouge">rotate_outer</code></a></li></ul></div><h2 id="15">Rerference</h2><p>The theory behind these embeddings is explained in the paper</p><div><ul><li>R. Arnold, P. E. Jupp, H. Schaeben, Statistics of ambiguous rotations, Journal of Multivariate Analysis (165), 2018</li><li>R. Hielscher, L. Lippert, <i>Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries</i>, <a href="https://arxiv.org/abs/2007.09664">arXiv:2007.09664</a>, 2020.</li></ul></div></div></body></html>
