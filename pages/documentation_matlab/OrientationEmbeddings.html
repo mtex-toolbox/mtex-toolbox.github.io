@@ -21,7 +21,7 @@ cs = crystalSymmetry('432');
 ori1 = project2FundamentalRegion(orientation.rand(100000,cs));
 ori2 = project2FundamentalRegion(orientation.rand(100000,cs));
 {% endhighlight %}
-<p>and compare their misorientation angle \(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\) with the Euclidean distance \( \mathtt{tensor(ori_1)} - \mathtt{tensor(ori_2)}||_2\) of the corresponding rotational matrices and the Euclidean distance \( \mathtt{R(ori_1)} - \mathtt{R(ori_2)}||_2\) of the corresponding <a href="rotation.Rodrigues.html">Rodrigues Frank vectors</a>.</p>
+<p>and compare their misorientation angle \(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\) with the Euclidean distance \(\lVert \mathtt{tensor(ori_1)} - \mathtt{tensor(ori_2)} \rVert_2\) of the corresponding rotational matrices and the Euclidean distance \( \lVert \mathtt{R(ori_1)} - \mathtt{R(ori_2)} \rVert_2\) of the corresponding <a href="rotation.Rodrigues.html">Rodrigues Frank vectors</a>.</p>
 {% highlight matlab %}
 % compute the misorienation angles in degree
 omega = angle(ori1,ori2)./degree;
@@ -51,7 +51,7 @@ ylabel('\(|| \mathtt{R(ori_1)} - \mathtt{R(ori_2)}||_2\)','Interpreter','latex')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_01.png" %}
-</center><p>We observe that orientations with very small misorientation angle \(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\) may be very far from each other in Rodrigues Frank space, i.e. \( \mathtt{R(ori_1)} - \mathtt{R(ori_2)}||_2\) is large. As a consequence, we can not simply compute the average of two orientations by taking the mean of the corresponding Rodrigues vectors.</p><p>Lets have a look at an extremal case of finding the mean orientations of the orientations (44,0,0) and (46,0,0)</p>
+</center><p>We observe that orientations with very small misorientation angle \(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\) may be very far from each other in Rodrigues Frank space, i.e. \( \mathtt{R(ori_1)} - \mathtt{R(ori_2)}||_2\) is large. As a consequence, we can not simply compute the average of two orientations by taking the mean of the corresponding Rodrigues vectors.</p><p>Lets have a look at an extremal case of finding the mean orientations of the orientations \((44^{circ},0^{circ},0^{circ})\) and \((46^{circ},0^{circ},0^{circ})\)</p>
 {% highlight matlab %}
 % define two orientations
 ori = project2FundamentalRegion(orientation.byEuler([44 46]*degree,0,0,cs));
@@ -68,7 +68,7 @@ mori = rotation
   phi1  Phi phi2 Inv.
      0    0    0    0
 {% endhighlight %}
-<p>The  mean orientation computed from the average of the Rodrigues vectors is (0,0,0) is far away from the true mean.</p>
+<p>The  mean orientation \((0^{circ},0^{circ},0^{circ})\) computed from the average of the Rodrigues vectors is far away from the true mean.</p>
 {% highlight matlab %}
 mean(ori)
 {% endhighlight %}
@@ -95,7 +95,7 @@ e2 = embedding
  ranks: 4
  size: 100000 x 1
 {% endhighlight %}
-<p>This creates variables <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code> of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> that behaves like lists of vectors, i.e., they can be <a href="embedding.sum.html">summed</a>, <a href="embedding.rotate.html">rotated</a>, <a href="embedding.mtimes.html">scaled</a> and one can compute their <a href="embedding.dot.html">inner product</a>. Lets have a look at the Euclidean distances \(\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_1}) \) between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code></p>
+<p>This creates variables <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code> of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> that behaves like lists of vectors, i.e., they can be <a href="embedding.sum.html">summed</a>, <a href="embedding.rotate.html">rotated</a>, <a href="embedding.mtimes.html">scaled</a> and one can compute their <a href="embedding.dot.html">inner product</a>. Lets have a look at the Euclidean distances \(\lVert\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_1}) \rVert_2\) between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code></p>
 {% highlight matlab %}
 % the Euclidean distance in the embedding
 distE = norm(e1-e2) ./ degree;
@@ -107,10 +107,10 @@ ylabel('\(||\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_1}) ||\)','Inter
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_02.png" %}
-</center><p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations (44,0,0) and (46,0,0). If we compute the embedding of both orientations, average the resulting tensors and then project to mean tensor back to an orientation we end up with the correct result (0,0,0).</p>
+</center><p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations \((44^{circ},0^{circ},0^{circ})\) and \((46^{circ},0^{circ},0^{circ})\). If we compute the embedding of both orientations, average the resulting tensors and then <a href="embedding.orientation.html">project to mean tensor back to an orientation</a> we end up with the correct result \((0^{circ},0^{circ},0^{circ})\).</p>
 {% highlight matlab %}
 % compute the embedding of the two orientations
-e = embedding(ori)
+e = embedding(ori);
 
 % take the mean of the embeddings
 me = mean(e);
@@ -120,11 +120,6 @@ orientation(me)
 {% endhighlight %}
 
 {% highlight plaintext %}
-e = embedding  
- symmetry: 432
- ranks: 4
- size: 2 x 1
- 
 ans = orientation  
   size: 1 x 1
   crystal symmetry : 432
@@ -143,7 +138,7 @@ norm(embedding(orientation.rand(5,cs))).'
 ans =
     1.0000    1.0000    1.0000    1.0000    1.0000
 {% endhighlight %}
-<p>In other words the embeddings are located on the surface of a ball with a radius \(1\). When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a prefered orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p><p>Lets compare the norm</p><p>\[ n=\left\lVert\frac{1}{n} \sum_{i=1}^N \mathcal E(\mathtt{ori}_i) \right\rVert\]</p><p>of the mean embedding with the standard deviation</p><p>\[ \sigma = \left(\frac{1}{N} \sum_{i=1}^N \omega(\mathtt{ori}_i, \mathtt{mori})^2\right)^{1/2}\]</p><p>where \(\omega(\mathtt{ori}_i, \mathtt{mori}))\) denotes the misorientation angle between the orientations \(\mathtt{ori}_i\) and the mean orientation \(\mathtt{mori}\).</p>
+<p>In other words the embeddings are located on the surface of a ball with a radius \(1\). When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a prefered orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p><p>Lets compare the norm</p><p>\[ n=\left\lVert\frac{1}{n} \sum_{i=1}^N \mathcal E(\mathtt{ori}_i) \right\rVert\]</p><p>of the mean embedding with the standard deviation</p><p>\[ \sigma = \left(\frac{1}{N} \sum_{i=1}^N \omega(\mathtt{ori}_i, \mathtt{mori})^2\right)^{1/2}\]</p><p>where \(\omega(\mathtt{ori}_i, \mathtt{mori})\) denotes the misorientation angle between the orientations \(\mathtt{ori}_i\) and the mean orientation \(\mathtt{mori}\).</p>
 {% highlight matlab %}
 % genrate samples of orientations of different dispersion
 n = []; sigma = [];
@@ -166,7 +161,7 @@ ylabel('\(\sqrt{1-n}\)','Interpreter','latex')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_03.png" %}
-</center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - unimodal de la Vallee Poussin distributed density functions. A broader family of density function are the Bingham distributions. Lets repeat the experiment for this family.</p>
+</center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - <a href="UnimodalODFs.html">unimodal de la Vallee Poussin distributed density functions</a>. A broader family of density function are the <a href="BinghamODFs.html">Bingham distributions</a>. Lets repeat the experiment for this family.</p>
 {% highlight matlab %}
 % genrate ODF of different halfwidth
 n = []; sigma = [];
