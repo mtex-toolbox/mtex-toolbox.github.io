@@ -15,10 +15,10 @@ toc: false
   {% include image.html file="hielscher2.jpg" alt="Picture of Ralf Hielscher" max-width='120'%}
 </td><td valign="top">
   <p><b>Ralf Hielscher</b> invented MTEX in 2002 by implementing the pole
-    figure to ODF inversion algorithm and leads since then the development.</p>
+    figure to ODF inversion algorithm and leads since than the development.</p>
   <p></p>
   <p> <a href="mailto:Ralf.Hielscher@mathematik.tu-chemnitz.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
-  <p> <a href="www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz, Germany</a></p>
+  <p> <a href="www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
 </td>
 </tr></table>
 </div>
@@ -34,7 +34,7 @@ toc: false
   and grain analysis functionalities in MTEX.</p>
   <p></p>
   <p> <a href="https://geodynamik.geologie.uni-halle.de/arbeitsgruppe/dr._ruediger_kilian"><span class="glyphicon
-      glyphicon-home"></span>Martin-Luther-Universität Halle-Wittenberg, Germany</a></p>
+      glyphicon-home"></span> Martin-Luther-Universität Halle-Wittenberg</a></p>
 </td>
 </tr></table>
 </div>
@@ -50,7 +50,8 @@ toc: false
   on tensorial properties and seismic velocities. Since than he is
   continuously working on promoting MTEX to the world of geologists.</p>
   <p></p>
-  <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon glyphicon-envelope"></span> David.Mainprice@gm.univ-montp2.fr</a></p>
+  <!-- <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon --
+    -- glyphicon-envelope"></span> David.Mainprice@gm.univ-montp2.fr</a></p> -->
   <p> <a href="http://www.gm.univ-montp2.fr/PERSO/mainprice/"><span class="glyphicon glyphicon-home"></span> Geosciences Montpellier, France</a></p>
 </td>
 </tr></table>
@@ -79,8 +80,8 @@ toc: false
   {% include image.html file="bartel.jpg" alt="Picture of Felix Bartel" max-width='120'%}
 </td><td valign="top"> <p><b>Felix Bartel</b>
 	worked on MTEX during his master thesis at the TU Chemnitz in 2019. He
-	wrote the code for spherical functions classes.</p>
-  <p>Institute of Mathematics, TU Chemnitz, Germany</p>
+	wrote the code for spherical function classes.</p>
+      <p> <a href="www.tu-chemnitz.de/~febar"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
 </td>
 </tr></table>
 </div>
