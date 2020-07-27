@@ -10,4 +10,10 @@ toc: false
 
 The following list provides links to videos that explain MTEX.
 
-* [Installation and first steps in MTEX (Chinese)](https://www.youtube.com/watch?v=v_3oanfptEw)
+### Chinese Language
+
+* [Installation and first steps](https://www.youtube.com/watch?v=v_3oanfptEw)
+* [IPF maps](https://www.youtube.com/watch?v=ulbE4c_-Vfw)
+* [EBSD analysis](https://www.youtube.com/watch?v=etse5oJM54c)
+* [Slip Transmision](https://www.youtube.com/watch?v=zbBYa7VlFpw)
+* [GND Computation](https://www.youtube.com/watch?v=zbBYa7VlFpw)
