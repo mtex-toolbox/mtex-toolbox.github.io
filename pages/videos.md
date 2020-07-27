@@ -12,6 +12,8 @@ The following list provides links to videos that explain MTEX.
 
 ### Chinese Language
 
+from [Dikai Guan](https://www.sheffield.ac.uk/materials/people/research-staff/dikai-guan), Sheffield University
+
 * [Installation and first steps](https://www.youtube.com/watch?v=v_3oanfptEw)
 * [IPF maps](https://www.youtube.com/watch?v=ulbE4c_-Vfw)
 * [EBSD analysis](https://www.youtube.com/watch?v=etse5oJM54c)
