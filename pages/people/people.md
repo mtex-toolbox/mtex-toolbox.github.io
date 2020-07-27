@@ -49,10 +49,9 @@ toc: false
   <p><b>David Mainprice</b> joined the MTEX team in 2009 by sharing his code
   on tensorial properties and seismic velocities. Since than he is
   continuously working on promoting MTEX to the world of geologists.</p>
-  <p>
+  <p></p>
   <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon glyphicon-envelope"></span> David.Mainprice@gm.univ-montp2.fr</a></p>
   <p> <a href="http://www.gm.univ-montp2.fr/PERSO/mainprice/"><span class="glyphicon glyphicon-home"></span> Geosciences Montpellier, France</a></p>
-  </p>
 </td>
 </tr></table>
 </div>
