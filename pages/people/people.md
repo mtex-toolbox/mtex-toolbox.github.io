@@ -101,6 +101,20 @@ toc: false
 </div>
 
 <div class='row'>
+
+<div class="col-md-6">
+<table border='0' cellpadding='10'><tr>
+<td width="140" valign="top">
+  {% include image.html file="Tuomo_Nyyssoenen.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
+</td><td valign="top">
+      <p><b>Tuomo Nyyssoenen</b> worked on parent austenite reconstruction
+      during his PhD at Swerim. He wrote the initial MTEX code the
+      reconstruction of parent grain structures and the determination of
+      the parent to child orientation relationship.</p>
+</td>
+</tr></table>
+</div>
+
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
