@@ -50,10 +50,10 @@ toc: false
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
-  {% include image.html file="mainprice.jpg" alt="Picture of David Mainprice" max-width='120'%}
+  {% include image.html file="addons_crystalAligner.png" alt="Graphical Abstract crystalAligner" max-width='120'%}
 </td><td valign="top">
-  <p><b>crystalAligner</b> allows to determine the alignment of one or two crystal directions
-  of arbitrary crystal orientation and structure with the coordinate system of a scanning electron microscope.</p>
+  <p><b>crystalAligner</b> is an experimental tool that allows to determine the alignment of one or two crystal directions or plane normals
+  of arbitrary crystal orientation and structure with the coordinate system of a scanning electron microscope. The program outputs are stage rotation instructions for crystal alignment. </p>
   <p>
   <p> <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
   <p> <a href="github.com/frankNiessen/crystalAligner"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/crystalAligner</a></p>
@@ -65,11 +65,12 @@ toc: false
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
-  {% include image.html file="mainprice.jpg" alt="" max-width='120'%}
+  {% include image.html file="addons_phaseSegmenter.png" alt="" max-width='120'%}
 </td><td valign="top">
   <p><b>phaseSegmenter</b> enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.</p>
   <p>
-  <p> <a href="https://wwws.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
+  <p> <a href="https://wwws.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a>, 
+      <a href="https://www.researchgate.net/profile/Azdiar_Gazder"><span class="glyphicon glyphicon-user"></span> Azdiar A. Gazder</a></p>
   <p> <a href="github.com/frankNiessen/phaseSegmenter"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/phaseSegmenter</a></p>
   </p>
 </td>
