@@ -30,7 +30,7 @@ toc: false
 </td><td valign="top">
   <p><b>David Mainprice</b> contributes to the tensor functionality of MTEX.</p>
   <p>Geosciences Montpellier, France</p>
-  <p> 
+  <p>
   <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon glyphicon-envelope"></span> David.Mainprice@gm.univ-montp2.fr</a></p>
   <p> <a href="http://www.gm.univ-montp2.fr/PERSO/mainprice/"><span class="glyphicon glyphicon-home"></span> http://www.gm.univ-montp2.fr/PERSO/mainprice/</a></p>
   </p>
@@ -46,7 +46,10 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="FlorianBachmann.jpg" alt="Picture of Florian Bachmann" max-width='120'%}
 </td><td valign="top">
-  <p><b>Florian Bachmann</b> contributed to grain analysis, the import wizard and the documentation center.</p>
+  <p><b>Florian Bachmann</b> started with MTEX during his diploma thesis at TU
+  Freiberg, when he implemented the MTEX grain reconstruction
+  algorithm. Furthermore, he was responsible for the import wizard and the
+  documentation center.</p>
   <p><a href="https://xnovotech.com/">Xnovo Technology ApS, Denmark</a></p>
 </td>
 </tr></table>
@@ -57,8 +60,13 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="kilian.jpg" alt="Picture of Rüdiger Kilian" max-width='120'%}
 </td><td valign="top">
-  <p><b>Rüdiger Kilian</b> contributes to EBSD and grain analysis</p>
-  <p>MLU Halle, Germany</p>
+  <p><b>Rüdiger Kilian</b> joined the MTEX team in 2003 as a PhD student of
+  Rene Heilbronner, Basel. Since than he answered hundreds of questions in the
+  MTEX forum. Rüdiger spends much afford in continuously improving the EBSD
+  and grain analysis functionalities in MTEX.</p>
+  <p>Martin-Luther-Universität Halle-Wittenberg, Germany</a></p>
+  <p> <a href="https://geodynamik.geologie.uni-halle.de/arbeitsgruppe/dr._ruediger_kilian"><span class="glyphicon
+      glyphicon-home"></span> https://geodynamik.geologie.uni-halle.de/arbeitsgruppe/dr._ruediger_kilian</a></p>
 </td>
 </tr></table>
 </div>
