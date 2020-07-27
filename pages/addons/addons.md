@@ -56,7 +56,7 @@ toc: false
   of arbitrary crystal orientation and structure with the coordinate system of a scanning electron microscope. The program outputs instructions for stage tilt and rotation for crystal alignment. </p>
   <p>
   <p> <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
-  <p> <a href="github.com/frankNiessen/crystalAligner"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/crystalAligner</a></p>
+  <p> <a href="https://www.github.com/frankNiessen/crystalAligner"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/crystalAligner</a></p>
   </p>
 </td>
 </tr></table>
@@ -71,7 +71,7 @@ toc: false
   <p>
   <p> <a href="https://wwws.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a>, 
       <a href="https://www.researchgate.net/profile/Azdiar_Gazder"><span class="glyphicon glyphicon-user"></span> Azdiar A. Gazder</a></p>
-  <p> <a href="github.com/frankNiessen/phaseSegmenter"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/phaseSegmenter</a></p>
+  <p> <a href="https://www.github.com/frankNiessen/phaseSegmenter"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/phaseSegmenter</a></p>
   </p>
 </td>
 </tr></table>
