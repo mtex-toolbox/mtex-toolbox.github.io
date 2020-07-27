@@ -12,7 +12,7 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="hielscher2.jpg" alt="Picture of Ralf Hielscher" max-width='120'%}
 </td><td valign="top">
   <p><b>Ralf Hielscher</b> invented MTEX in 2002 by implementing the pole figure to ODF inversion algorithm and leads since then the development.</p>
@@ -25,7 +25,7 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="mainprice.jpg" alt="Picture of David Mainprice" max-width='120'%}
 </td><td valign="top">
   <p><b>David Mainprice</b> contributes to the tensor functionality of MTEX.</p>
@@ -43,11 +43,11 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="FlorianBachmann.jpg" alt="Picture of Florian Bachmann" max-width='120'%}
 </td><td valign="top">
   <p><b>Florian Bachmann</b> started with MTEX during his diploma thesis at TU
-  Freiberg, when he implemented the MTEX grain reconstruction
+  Freiberg in 2008, when he implemented the MTEX grain reconstruction
   algorithm. Furthermore, he was responsible for the import wizard and the
   documentation center.</p>
   <p><a href="https://xnovotech.com/">Xnovo Technology ApS, Denmark</a></p>
@@ -57,10 +57,10 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="kilian.jpg" alt="Picture of Rüdiger Kilian" max-width='120'%}
 </td><td valign="top">
-  <p><b>Rüdiger Kilian</b> joined the MTEX team in 2003 as a PhD student of
+  <p><b>Rüdiger Kilian</b> joined the MTEX team in 2007 as a PhD student of
   Rene Heilbronner, Basel. Since than he answered hundreds of questions in the
   MTEX forum. Rüdiger spends much afford in continuously improving the EBSD
   and grain analysis functionalities in MTEX.</p>
@@ -76,10 +76,11 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="bartel.jpg" alt="Picture of Felix Bartel" max-width='120'%}
-</td><td valign="top">
-  <p><b>Felix Bartel</b> contributes to spherical functions.</p>
+</td><td valign="top"> <p><b>Felix Bartel</b>
+	worked on MTEX during his master thesis at the TU Chemnitz in 2019. He
+	wrote the code for spherical functions classes.</p>
   <p>Institute of Mathematics, TU Chemnitz, Germany</p>
 </td>
 </tr></table>
@@ -87,11 +88,12 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="Oliver_Johnson.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
 </td><td valign="top">
-  <p><b>Oliver Kent Johnson</b> contributed the misorientation color coding.</p>
-  <p>Department of Materials Science and Engineering, Massachusetts Institute of Technology, USA</p>
+      <p><b>Oliver Kent Johnson</b> finished his PhD in 2015 under the
+      supervision of Christopher A. Schuh at the Massachusetts Institute of
+      Technology. He implemented the misorientation color key.</p>
 </td>
 </tr></table>
 </div>
@@ -101,7 +103,7 @@ toc: false
 
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td width="150" valign="top">
   {% include image.html file="soerensen.jpg" alt="Picture of Bjoern Eske Soerensen" max-width='120'%}
 </td><td valign="top">
   <p><b>Bj&oslash;rn Eske S&oslash;rensen</b> contributes to spectral difraction and birefringence.</p>
