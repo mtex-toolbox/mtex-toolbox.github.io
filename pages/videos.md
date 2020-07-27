@@ -18,8 +18,8 @@ from [Dikai Guan](https://www.sheffield.ac.uk/materials/people/research-staff/di
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ulbE4c_-Vfw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-* [Installation and first steps](https://www.youtube.com/watch?v=v_3oanfptEw)
-* [IPF maps](https://www.youtube.com/watch?v=ulbE4c_-Vfw)
-* [EBSD analysis](https://www.youtube.com/watch?v=etse5oJM54c)
-* [Slip Transmision](https://www.youtube.com/watch?v=zbBYa7VlFpw)
-* [GND Computation](https://www.youtube.com/watch?v=zbBYa7VlFpw)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/etse5oJM54c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zbBYa7VlFpw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zbBYa7VlFpw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
