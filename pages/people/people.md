@@ -9,7 +9,6 @@ toc: false
 ---
 
 <div class='row'>
-
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
@@ -17,7 +16,7 @@ toc: false
 </td><td valign="top">
   <p><b>Ralf Hielscher</b> invented MTEX in 2002 by implementing the pole
     figure to ODF inversion algorithm and leads since then the development.</p>
-  <p>
+  <p></p>
   <p> <a href="mailto:Ralf.Hielscher@mathematik.tu-chemnitz.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
   <p> <a href="www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz, Germany</a></p>
 </td>
