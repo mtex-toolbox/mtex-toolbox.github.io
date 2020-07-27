@@ -15,10 +15,11 @@ toc: false
 <td width="150" valign="top">
   {% include image.html file="hielscher2.jpg" alt="Picture of Ralf Hielscher" max-width='120'%}
 </td><td valign="top">
-  <p><b>Ralf Hielscher</b> invented MTEX in 2002 by implementing the pole figure to ODF inversion algorithm and leads since then the development.</p>
-  <p> Institute of Mathematics, TU Chemnitz, Germany</p>
+  <p><b>Ralf Hielscher</b> invented MTEX in 2002 by implementing the pole
+    figure to ODF inversion algorithm and leads since then the development.</p>
+  <p>
   <p> <a href="mailto:Ralf.Hielscher@mathematik.tu-chemnitz.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
-  <p> <a href="www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> www.tu-chemnitz.de/~rahi</a></p>
+  <p> <a href="www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz, Germany</a></p>
 </td>
 </tr></table>
 </div>
@@ -28,11 +29,12 @@ toc: false
 <td width="150" valign="top">
   {% include image.html file="mainprice.jpg" alt="Picture of David Mainprice" max-width='120'%}
 </td><td valign="top">
-  <p><b>David Mainprice</b> contributes to the tensor functionality of MTEX.</p>
-  <p>Geosciences Montpellier, France</p>
+  <p><b>David Mainprice</b> joined the MTEX team in 2009 by sharing his code
+  on tensorial properties and seismic velocities. Since than he is
+  continuously working on promoting MTEX to the world of geologists.</p>
   <p>
   <p> <a href="mailto:David.Mainprice@gm.univ-montp2.fr"><span class="glyphicon glyphicon-envelope"></span> David.Mainprice@gm.univ-montp2.fr</a></p>
-  <p> <a href="http://www.gm.univ-montp2.fr/PERSO/mainprice/"><span class="glyphicon glyphicon-home"></span> http://www.gm.univ-montp2.fr/PERSO/mainprice/</a></p>
+  <p> <a href="http://www.gm.univ-montp2.fr/PERSO/mainprice/"><span class="glyphicon glyphicon-home"></span> Geosciences Montpellier, France</a></p>
   </p>
 </td>
 </tr></table>
@@ -64,9 +66,9 @@ toc: false
   Rene Heilbronner, Basel. Since than he answered hundreds of questions in the
   MTEX forum. Rüdiger spends much afford in continuously improving the EBSD
   and grain analysis functionalities in MTEX.</p>
-  <p>Martin-Luther-Universität Halle-Wittenberg, Germany</a></p>
+  <p></p>
   <p> <a href="https://geodynamik.geologie.uni-halle.de/arbeitsgruppe/dr._ruediger_kilian"><span class="glyphicon
-      glyphicon-home"></span> https://geodynamik.geologie.uni-halle.de/arbeitsgruppe/dr._ruediger_kilian</a></p>
+      glyphicon-home"></span>Martin-Luther-Universität Halle-Wittenberg, Germany</a></p>
 </td>
 </tr></table>
 </div>
