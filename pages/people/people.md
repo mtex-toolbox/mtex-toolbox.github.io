@@ -108,9 +108,9 @@ toc: false
   {% include image.html file="Tuomo_Nyyssoenen.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
 </td><td valign="top">
       <p><b>Tuomo Nyyssoenen</b> worked on parent austenite reconstruction
-      during his PhD at Swerim. He wrote the initial MTEX code the
-      reconstruction of parent grain structures and the determination of
-      the parent to child orientation relationship.</p>
+      during his PhD at Swerim. He wrote the initial MTEX code for the
+      reconstruction of parent grain structures and the determination of the
+      parent to child orientation relationship.</p>
 </td>
 </tr></table>
 </div>
