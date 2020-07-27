@@ -53,7 +53,7 @@ toc: false
   {% include image.html file="addons_crystalAligner.png" alt="Graphical Abstract crystalAligner" max-width='120'%}
 </td><td valign="top">
   <p><b>crystalAligner</b> is an experimental tool that allows to determine the alignment of one or two crystal directions or plane normals
-  of arbitrary crystal orientation and structure with the coordinate system of a scanning electron microscope. The program outputs are stage rotation instructions for crystal alignment. </p>
+  of arbitrary crystal orientation and structure with the coordinate system of a scanning electron microscope. The program outputs instructions for stage tilt and rotation for crystal alignment. </p>
   <p>
   <p> <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
   <p> <a href="github.com/frankNiessen/crystalAligner"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/crystalAligner</a></p>
