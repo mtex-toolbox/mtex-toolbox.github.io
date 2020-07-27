@@ -10,12 +10,13 @@ toc: false
 
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
-<td width="140" valign="top">
+<td valign="top">
   {% include image.html file="MTEXGUI.png" max-width='120'%}
   </td><td valign="top">
   <p><b>MTEX GUI</b> is a graphical user interface to MTEX that allows to perform many analysis step in a non programming way.</p>
   <p> <a href="https://www.researchgate.net/profile/Jessica_Hiscocks"><span class="glyphicon glyphicon-user"></span> Jessica Hiscocks</a></p>
-  <p> <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX"><span class="glyphicon glyphicon-home"></span> </a></p>
+  <p> <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX"><span class="glyphicon
+  glyphicon-home"></span> https://www.researchgate.net/publication/327848702_MTEX_GUI_for_EBSD_and_Pole_Figure_Plotting_Rev_24</a></p>
 </td>
 </tr></table>
 </div>
@@ -69,7 +70,7 @@ toc: false
 </td><td valign="top">
   <p><b>phaseSegmenter</b> enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.</p>
   <p>
-  <p> <a href="https://wwws.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a>, 
+  <p> <a href="https://wwws.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a>,
       <a href="https://www.researchgate.net/profile/Azdiar_Gazder"><span class="glyphicon glyphicon-user"></span> Azdiar A. Gazder</a></p>
   <p> <a href="https://www.github.com/frankNiessen/phaseSegmenter"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/phaseSegmenter</a></p>
   </p>
