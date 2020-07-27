@@ -11,6 +11,10 @@ toc: false
 If you are using MTEX for your research, please cite one of the
 following paper that best fits your application.
 
+#### 2020
+
+* **Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries**, R. Hielscher, L. Lippert:
+[https://arxiv.org/abs/2007.09664](arXiv:2007.09664, 2020). <a href="https://www-user.tu-chemnitz.de/~rahi/paper/embeddings.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
 #### 2019
 
