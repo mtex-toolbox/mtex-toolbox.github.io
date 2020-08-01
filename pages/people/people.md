@@ -14,7 +14,7 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="hielscher2.jpg" alt="Picture of Ralf Hielscher" max-width='120'%}
 </td><td valign="top">
-  <p><b>Ralf Hielscher</b> invented MTEX in 2002 by implementing the pole
+  <p><b>Ralf Hielscher</b> invented MTEX in 2007 by implementing the pole
     figure to ODF inversion algorithm and leads since than the development.</p>
   <p></p>
   <p> <a href="mailto:Ralf.Hielscher@mathematik.tu-chemnitz.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
@@ -28,7 +28,7 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="kilian.jpg" alt="Picture of Rüdiger Kilian" max-width='120'%}
 </td><td valign="top">
-  <p><b>Rüdiger Kilian</b> joined the MTEX team in 2007 as a PhD student of
+  <p><b>Rüdiger Kilian</b> joined the MTEX team in 2008 as a PhD student of
   Rene Heilbronner, Basel. Since than he answered hundreds of questions in the
   MTEX forum. Rüdiger spends much afford in continuously improving the EBSD
   and grain analysis functionalities in MTEX.</p>
@@ -105,12 +105,12 @@ toc: false
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
-  {% include image.html file="Tuomo_Nyyssoenen.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
+  {% include image.html file="Tuomo_Nyyssoenen.jpg" alt="Picture of Tuomo Nyyssoenen" max-width='120'%}
 </td><td valign="top">
       <p><b>Tuomo Nyyssoenen</b> worked on parent austenite reconstruction
-      during his PhD at Swerim. He wrote the initial MTEX code for the
-      reconstruction of parent grain structures and the determination of the
-      parent to child orientation relationship.</p>
+      during his PhD at Tampere University of Technology. He wrote the initial
+      MTEX code for the reconstruction of parent grain structures and the
+      determination of the parent to child orientation relationship.</p>
 </td>
 </tr></table>
 </div>
