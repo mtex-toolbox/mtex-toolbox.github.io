@@ -1,6 +1,6 @@
 ---
 title: Random Sampling
-last_updated: 01-Aug-2020
+last_updated: 02-Aug-2020
 sidebar: documentation_sidebar
 permalink: RandomSampling.html
 folder: documentation
@@ -11,22 +11,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-01"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
+      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-02"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Assume an arbitrary <a href="ODFTheorie.html">ODF</a> either from texture modelling or recovered from XRD pole figure measurements a common problem is the simulation of random individual orientations that are distributed according the given ODF. This is helpful crucial in many application, e.g., for running plastic deformation models like VPSC or verifying the accuracy <a href="DensityEstimation.html">density estimation methods</a>. Here we start with a trigonal alpha-fibre ODF which we define by</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
-%fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(Miller(0,0,0,1,cs),zvector,'halfwidth',20*degree);
-
 fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(fibre.alpha(cs),'halfwidth',20*degree);
-{% endhighlight %}
 
-{% highlight matlab %}
 plot(fibre_odf,'sections',6,'silent')
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_01.png" %}
-</center><h2 id="3">Computing Random Orientations</h2><p>In order to compute \(50000\) random orientation from the ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> we use the command <a href="ODF.discreteSample.html">discreteSample</a>.</p>
+</center><h2 id="2">Computing Random Orientations</h2><p>In order to compute \(50000\) random orientation from the ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> we use the command <a href="ODF.discreteSample.html">discreteSample</a>.</p>
 {% highlight matlab %}
 ori = fibre_odf.discreteSample(50000)
 
@@ -41,8 +37,6 @@ ori = orientation
   size: 50000 x 1
   crystal symmetry : 321, X||a*, Y||b, Z||c
   specimen symmetry: 1
- 
-  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_02.png" %}
@@ -58,19 +52,13 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_03.png" %}
-</center><h2 id="5">ODF Estimation from Random Orientations</h2><p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative meaure for how well do the orientations approximate the ODF we may use the orientations to estimate a new ODF and compare the fit of this estimate ODF with the initial ODF.</p><p>First, we determine the optimal kernel function</p>
+</center><h2 id="4">ODF Estimation from Random Orientations</h2><p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative meaure for how well do the orientations approximate the ODF we may use the orientations to <a href="DensityEstimation.html">estimate a new ODF</a> and compare the fit of this estimate ODF with the initial ODF.</p>
 {% highlight matlab %}
-psi = calcKernel(ori)
-{% endhighlight %}
+% estimate an ODF from the random orientations
+odf_rec = calcDensity(ori)
 
-{% highlight plaintext %}
-psi = deLaValleePoussinKernel  
-  bandwidth: 31
-  halfwidth: 8°
-{% endhighlight %}
-<p>and then we use this kernel function for <a href="DensityEstimation.html">kernel density estimation</a></p>
-{% highlight matlab %}
-odf_rec = calcDensity(ori,'kernel',psi)
+% plot the estimated ODF
+plot(odf_rec,'sections',6,'silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -79,22 +67,18 @@ odf_rec = ODF
   specimen symmetry: 1
  
   Harmonic portion:
-    degree: 31
+    degree: 25
     weight: 1
-{% endhighlight %}
-<p>which results in the ODF <code class="language-plaintext highlighter-rouge">odf</code></p>
-{% highlight matlab %}
-plot(odf_rec,'sections',6,'silent')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_04.png" %}
-</center><p>We may now compare the original model ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> with the reconstructed ODF <code class="language-plaintext highlighter-rouge">odf</code>.</p>
+</center><p>We may now compare the original model ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> with the reconstructed ODF <code class="language-plaintext highlighter-rouge">odf_rec</code>.</p>
 {% highlight matlab %}
 calcError(odf_rec,fibre_odf)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.0783
+    0.0553
 {% endhighlight %}
-</div></body></html>
+<h2 id="6">Exporting Random Orientations</h2><p>In order to make use of the sampled orientations you pronbably want to export them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <a href="orientation.export.html">export</a> and <a href="orientation.export_VPSC.html">export_VPSC</a>.</p></div></body></html>
