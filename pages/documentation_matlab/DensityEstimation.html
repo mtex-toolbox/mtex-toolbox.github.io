@@ -1,6 +1,6 @@
 ---
 title: Density Estimation
-last_updated: 17-Jul-2020
+last_updated: 02-Aug-2020
 sidebar: documentation_sidebar
 permalink: DensityEstimation.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-17"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
+      --><title>Density Estimation</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-02"><meta name="DC.source" content="script_DensityEstimation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/DensityEstimation.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Density estimation is a concept to estimate a probability density function \(f_N\) from given random samples \(x_n\), \(n=1,\ldots,N\). In the simplest case the random samples \(x_n\) are real numbers and come from an unknown distribution function \(f\). The goal is than that \(f_N\) approximates \(f\) as best as possible.</p><p>Lets illustrate this setting at a the example of a mixed Gaussian distribution</p>
 {% highlight matlab %}
 % the true density function
@@ -107,7 +107,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_06.png" %}
-</center><h2 id="9">Kernel Density Estimation in d-Dimensions</h2><p>The command <a href="calcDensity.html">calcDensity</a> may also be applied to \(d\)-dimenional data. For simplicity lets consider a two dimensional example where both \(x\) and \(y\) coordinates are distributed according to the distribution \(f\) defined at the very beginning of this section.</p>
+</center><h2 id="9">Optimal Halfwidth Selection</h2><p>Selecting an optimal kernel halfwidth is a tough problem. MTEX provides a couple of methods for this purpose which are explained in detail in the section <a href="OptimalKernel.html">Optimal Kernel Selection</a>.</p><h2 id="10">Kernel Density Estimation in d-Dimensions</h2><p>The command <a href="calcDensity.html">calcDensity</a> may also be applied to \(d\)-dimenional data. For simplicity lets consider a two dimensional example where both \(x\) and \(y\) coordinates are distributed according to the distribution \(f\) defined at the very beginning of this section.</p>
 {% highlight matlab %}
 % the number of sample points
 N = 100;
@@ -139,7 +139,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_08.png" %}
-</center><h2 id="11">Density Estimation for Directional Data</h2><p>Kernel density for directional data works analogously as for real valued data. Again we have to choose a kernel function \(\psi\) with a certain halfwidth \(\delta\). Than the kernel functions are centered at each direction of our random sampling and summed up. Lets us demonstrate this procedure misorientation axes between two phases in an EBSD map</p>
+</center><h2 id="12">Density Estimation for Directional Data</h2><p>Kernel density for directional data works analogously as for real valued data. Again we have to choose a kernel function \(\psi\) with a certain halfwidth \(\delta\). Than the kernel functions are centered at each direction of our random sampling and summed up. Lets us demonstrate this procedure misorientation axes between two phases in an EBSD map</p>
 {% highlight matlab %}
 % import ebsd data
 mtexdata forsterite silent
@@ -186,7 +186,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_11.png" %}
-</center><h2 id="14">Density Estimation for Orientation Data</h2><p>Density estimation from orientations sets the connection between individal crystal orientations, as e.g. measured by EBSD, and the orientation distribution function of a specimen. Considering the Forsterite orientations from the above EBSD map the corresponding ODF computes to</p>
+</center><h2 id="15">Density Estimation for Orientation Data</h2><p>Density estimation from orientations sets the connection between individal crystal orientations, as e.g. measured by EBSD, and the orientation distribution function of a specimen. Considering the Forsterite orientations from the above EBSD map the corresponding ODF computes to</p>
 {% highlight matlab %}
 odf = calcDensity(ebsd('Forsterite').orientations,'halfwidth',10*degree)
 {% endhighlight %}
@@ -216,7 +216,7 @@ plotting 2000 random orientations out of 152345 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_12.png" %}
-</center><p>A more detailed describtion of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p><h2 id="17">Parametric Density Estimation</h2><p>In contrast to kernel density estimation parametric density estimation makes the assumption that the true distribution function belong to a parametric distribution family, e.g. the Gaussian. In this case it remains the estimate the parameters of this distribution from the random sample. In the case of the Gaussian distribution these are the mean value and the standard deviation. The analogous to the Gaussian on the sphere and the orientation space are the Bingham distributions. The estimation of Bingham parameters from directional and rotational data are explained in the sections <a href="S2FunBingham.html">The Spherical Bingham Distribution</a> and <a href="BinghamODFs.html">The Rotational Bingham Distribution</a>.</p><h2 id="18">Density Estimtation with Weights</h2><p>In many use cases one has a weighted random sample. A typical example is if one wants to estimate a orientation distribution function from grain orientations. In this cases big grains should contribute more to the ODF than small grains. For that reason the functions <code class="language-plaintext highlighter-rouge">calcDensity</code> allow for an additional option <code class="language-plaintext highlighter-rouge">'weights'</code> which allows to pass weights to the density estimation.</p>
+</center><p>A more detailed describtion of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p><h2 id="18">Parametric Density Estimation</h2><p>In contrast to kernel density estimation parametric density estimation makes the assumption that the true distribution function belong to a parametric distribution family, e.g. the Gaussian. In this case it remains the estimate the parameters of this distribution from the random sample. In the case of the Gaussian distribution these are the mean value and the standard deviation. The analogous to the Gaussian on the sphere and the orientation space are the Bingham distributions. The estimation of Bingham parameters from directional and rotational data are explained in the sections <a href="S2FunBingham.html">The Spherical Bingham Distribution</a> and <a href="BinghamODFs.html">The Rotational Bingham Distribution</a>.</p><h2 id="19">Density Estimtation with Weights</h2><p>In many use cases one has a weighted random sample. A typical example is if one wants to estimate a orientation distribution function from grain orientations. In this cases big grains should contribute more to the ODF than small grains. For that reason the functions <code class="language-plaintext highlighter-rouge">calcDensity</code> allow for an additional option <code class="language-plaintext highlighter-rouge">'weights'</code> which allows to pass weights to the density estimation.</p>
 {% highlight matlab %}
 mtexdata titanium silent
 grains = calcGrains(ebsd);
