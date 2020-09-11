@@ -56,19 +56,14 @@ M = tensor
  0
  0
 {% endhighlight %}
-<p>In this case we have a single vector with coordinates (1,0,0) with respect to the x,y,z coordinate system</p><h2 id="6">Tensors (tensor of second rank)</h2><p>We have now to expand the idea of a vector to three-dimensional space. Let's take the example of stress (force per unit of area). Imagine a cube of material subjected to load as shown below. As can be seen, one can measure ther stresses in this cube in various directions, and in various planes. These measurements will for a second rank sensor, where each component is associated with a pair of axes, taken in an specific order. The generalized second rank stress tensor can be written as</p><p>\[ \sigma_ij = \begin{bmatrix} \sigma_{11} &amp; \sigma_{12} &amp; \sigma_{13}  \\ \sigma_{21} &amp; \sigma_{22} &amp; \sigma_{23}  \\ \sigma_{31} &amp; \sigma_{32} &amp; \sigma_{33}  \\ \end{bmatrix} \]</p><p>In MTEX, a second-rank tensor where only the main diagonal components are of interest is defined as</p>
+<p>In this case we have a single vector with coordinates (1,0,0) with respect to the x,y,z coordinate system</p><h2 id="6">Tensors (tensor of second rank)</h2><p>We have now to expand the idea of a vector to three-dimensional space. Let's take the example of stress (force per unit of area). Imagine a cube of material subjected to load as shown below. As can be seen, one can measure ther stresses in this cube in various directions, and in various planes. These measurements will for a second rank sensor, where each component is associated with a pair of axes, taken in an specific order. The generalized second rank stress tensor can be written as</p><p>\[ \sigma_{ij} = \begin{bmatrix} \sigma_{11} &amp; \sigma_{12} &amp; \sigma_{13}  \\ \sigma_{21} &amp; \sigma_{22} &amp; \sigma_{23}  \\ \sigma_{31} &amp; \sigma_{32} &amp; \sigma_{33}  \\ \end{bmatrix} \]</p><p>In MTEX, a second-rank tensor where only the main diagonal components are of interest is defined as</p>
 {% highlight matlab %}
-M = diag([1,2,3])
+M = diag([1,2,3]);
 
 t = tensor(M,'rank',2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-M =
-     1     0     0
-     0     2     0
-     0     0     3
- 
 t = tensor  
   rank: 2 (3 x 3)
  
@@ -80,17 +75,12 @@ t = tensor
 {% highlight matlab %}
 M2 = [1     0.75  0.5;...
       0.75  1     0.25;...
-      0.5   0.25  1]
+      0.5   0.25  1];
 
 t2 = tensor(M2,'rank',2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-M2 =
-    1.0000    0.7500    0.5000
-    0.7500    1.0000    0.2500
-    0.5000    0.2500    1.0000
- 
 t2 = tensor  
   rank: 2 (3 x 3)
  
@@ -98,9 +88,9 @@ t2 = tensor
  0.75    1 0.25
   0.5 0.25    1
 {% endhighlight %}
-<p>One can also define a tensor in which the components are pseudorandom, by using the function rotation, that allows the working with three dimensional matrices</p>
+<p>One can also define a tensor in which the components are pseudorandom, by using the function <code class="language-plaintext highlighter-rouge"><a href="tensor.rand.html">tensor.rand</a></code></p>
 {% highlight matlab %}
-t = tensor(rotation.rand)
+t = tensor.rand
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -108,9 +98,9 @@ t = tensor
   rank: 2 (3 x 3)
  
  *10^-2
- -30.68  66.52  68.07
- -76.27 -59.96  24.22
-  56.93 -44.49  69.14
+ 77.73  51.4 12.99
+ 17.59 71.16 89.78
+  1.45 57.01 11.51
 {% endhighlight %}
 <h2 id="9">Tensors (tensor of third rank)</h2><p>Smart materials are materials that have one or more properties that change significantly under external stimuli. A typical example is the voltage resulting to applied stress that certain materials have, named piezoeletric effect. This property is described as a third rank tensor that relates induced electric displacement vector to the second-order stress tensor. This is expressed in the form \(P_i=d_{ijk} \sigma_{jk}\). In MTEX, a third rank tensor can be described as</p>
 {% highlight matlab %}
@@ -130,7 +120,7 @@ t = tensor
       0      0      0      0  0.142  3.844
       0      0      0      0      0      0
 {% endhighlight %}
-<h2 id="10">Tensors (tensor of fourth rank)</h2><p>Fourth rank tensors are tensors that describe the relation between 2 second rank tensors. A typical example is the tensor describing the elastic properties of materials, which translate the linear relationship between the second rank stress and infinitesimal strain tensors. The Hooke's Law describing the shape changes in a material subject to stress can be written as \(\sigma_{ij]=c_{ijkl] \epsilon_{kl], where \)c_{ijkl}\( is a fourth rank tensor.</p><p>The four indices \)(ijkl)\( of the elastic tensor have values between 1 and 3, so that there are 3^4=81 coefficients. As the stress and strain tensors are symmetric, both stress and strain second rank tensors only have 6 independent values rather than 9. In addition, crystal symmetry reduces even more the number of independent components on the elastic tensor, from 21 in the case of triclinic phases, to 3 in the case of cubic materials. In MTEX, a fourth rank tensor can be defined as:</p>
+<h2 id="10">Tensors (tensor of fourth rank)</h2><p>Fourth rank tensors are tensors that describe the relation between 2 second rank tensors. A typical example is the tensor describing the elastic properties of materials, which translate the linear relationship between the second rank stress and infinitesimal strain tensors. The Hooke's Law describing the shape changes in a material subject to stress can be written as \(\sigma_{ij}=c_{ijkl} \epsilon_{kl}\), where \(c_{ijkl}\) is a fourth rank tensor.</p><p>The four indices (ijkl) of the elastic tensor have values between 1 and 3, so that there are \(3^4=81\) coefficients. As the stress and strain tensors are symmetric, both stress and strain second rank tensors only have 6 independent values rather than 9. In addition, crystal symmetry reduces even more the number of independent components on the elastic tensor, from 21 in the case of triclinic phases, to 3 in the case of cubic materials. In MTEX, a fourth rank tensor can be defined as:</p>
 {% highlight matlab %}
 M = [[320   50  50   0     0     0];...
     [  50  320  50   0     0     0];...
@@ -181,7 +171,7 @@ t = tensor
  0 1 0
  0 0 1
 {% endhighlight %}
-<h2 id="14">The Levi Civita tensor</h2><p>The Levi-Civita symbol \)\epsilon_{ijk}\( is a third rank tensor and is defined by 0, if i=j, j=k or k=1, by 1, if \)(i,j,k)=(1,2,3)\(, \)(2,3,1)\( or \)(3,1,2)\( and by \)-1\(, if \)(i,j,k)=(3,2,1)\(, \)(1,3,2)\( or \)(2,1,3)$. The Levi-Civita symbol allows the cross product of two vectors in 3D Euclidean space and the determinant of a square matrix to be expressed in Einstein's index notation. With MTEX the Levi Civita tensor is expressed as</p>
+<h2 id="14">The Levi Civita tensor</h2><p>The Levi-Civita symbol \(\epsilon_{ijk}\) is a third rank tensor and is defined by 0, if \(i=j\), \(j=k\) or \(k=1\), by 1, if \((i,j,k)=(1,2,3)\), \((2,3,1)\) or \((3,1,2)\) and by \(-1\), if \((i,j,k)=(3,2,1)\), \((1,3,2)\) or \((2,1,3)\). The Levi-Civita symbol allows the cross product of two vectors in 3D Euclidean space and the determinant of a square matrix to be expressed in Einstein's index notation. With MTEX the Levi Civita tensor is expressed as</p>
 {% highlight matlab %}
 t=tensor.leviCivita
 {% endhighlight %}
