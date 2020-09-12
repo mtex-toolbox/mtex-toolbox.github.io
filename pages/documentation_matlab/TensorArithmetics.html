@@ -1,6 +1,6 @@
 ---
 title: Tensor Arithmetics
-last_updated: 01-Apr-2020
+last_updated: 12-Sep-2020
 sidebar: documentation_sidebar
 permalink: TensorArithmetics.html
 folder: documentation
@@ -11,51 +11,17 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
-    edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2>
+      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-12"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
+    edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2><p>First of all, all basic operations like <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">.^</code> known from linear algebra work also on lists of tensors.</p>
 {% highlight matlab %}
-T1 = tensor.rand('rank',2)
-T2 = tensor.rand('rank',2)
-
+T1 = tensor.rand('rank',2);
+T2 = tensor.rand('rank',2);
 
 % addition and multiplication
-T1 + 2*T2
+T = T1 + 2 * T2;
 
 % pointwise product
-T1.*T2
-{% endhighlight %}
-
-{% highlight plaintext %}
-T1 = tensor  
-  rank: 2 (3 x 3)
- 
- *10^-2
-  9.09 51.56 71.73
-  1.48 14.06 10.39
- 73.64 74.58 28.84
- 
-T2 = tensor  
-  rank: 2 (3 x 3)
- 
- *10^-2
- 81.94 74.44 43.96
- 81.74 10.54 95.52
- 87.84 68.44 32.05
- 
-ans = tensor  
-  rank: 2 (3 x 3)
- 
- 1.7296 2.0043 1.5964
- 1.6495 0.3513 2.0143
- 2.4931 2.1145 0.9294
- 
-ans = tensor  
-  rank: 2 (3 x 3)
- 
- *10^-2
-  7.45 38.38 31.53
-  1.21  1.48  9.93
- 64.68 51.04  9.24
+T = T1 .* T2;
 {% endhighlight %}
 <h2 id="2">Tensor Products</h2><p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
 {% highlight matlab %}
@@ -88,7 +54,7 @@ eps = strainTensor
   0  0  0
   0  0 -1
 {% endhighlight %}
-<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its mpst general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
+<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
 {% highlight matlab %}
 sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
@@ -103,38 +69,21 @@ sigma = tensor
 {% endhighlight %}
 <p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>\[ (a \otimes b)_{ij} = a_i b_j \]</p><p>beween two rank one tensors</p>
 {% highlight matlab %}
-a = tensor.rand('rank',1)
-b = tensor.rand('rank',1)
-
-% by the command
-
+a = tensor([1;2;3],'rank',1);
+b = tensor([0;2;1],'rank',1);
+{% endhighlight %}
+<p>by the command</p>
+{% highlight matlab %}
 EinsteinSum(a,1,b,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-a = tensor  
-  rank: 1 (3)
- 
- *10^-2
- 49.25
- 27.48
- 80.54
- 
-b = tensor  
-  rank: 1 (3)
- 
- *10^-2
- 96.97
- 50.47
-  73.4
- 
 ans = tensor  
   rank: 2 (3 x 3)
  
- *10^-2
- 47.75 24.86 36.15
- 26.65 13.87 20.18
-  78.1 40.65 59.12
+ 0 2 1
+ 0 4 2
+ 0 6 3
 {% endhighlight %}
 <p>and the inner product</p><p>\[ a \cdot b = \sum_i a_i b_i</p><p>by</p>
 {% highlight matlab %}
@@ -143,9 +92,9 @@ EinsteinSum(a,-1,b,-1)
 
 {% highlight plaintext %}
 ans =
-    1.2075
+     7
 {% endhighlight %}
-<p>As a final example we consider the e linear compressibility in a certain direction <b>v</b> can be computed by the formula</p><p>\] c = \sum_{i,j,k} S_{ijkk} v_i v_j$$</p><p>where \(C = S^{-1}\) is the inverse of the comcompliance thensor, i.e. the stiffness tensor</p>
+<p>As a final example we consider the linear compressibility in a certain direction <code class="language-plaintext highlighter-rouge">v</code> which can be computed by the formula</p><p>\] c = \sum_{i,j,k} S_{ijkk} v_i v_j$$</p><p>where \(C = S^{-1}\) is the inverse of the comcompliance thensor, i.e. the stiffness tensor</p>
 {% highlight matlab %}
 v = xvector;
 S = inv(C)
@@ -189,56 +138,38 @@ ans = stressTensor
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>More examples for tensor products ares</p>
+<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <code class="language-plaintext highlighter-rouge"><a href="tensor.trace.html">trace</a></code> of their matrix product</p>
 {% highlight matlab %}
-% double dot product between two rank two tensors
 T1 : T2
-
-% trace
 trace(T1 * T2')
-
 trace(T1' * T2)
+{% endhighlight %}
 
-% determinant
+{% highlight plaintext %}
+ans =
+    2.2874
+ans =
+    2.2874
+ans =
+    2.2874
+{% endhighlight %}
+<h2 id="11">Determinant</h2><p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a></p>
+{% highlight matlab %}
 det(T1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    2.1493
-ans =
-    2.1493
-ans =
-    2.1493
-ans =
-   -0.0325
+   -0.1205
 {% endhighlight %}
-<h2 id="10">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html">rotate</a>. Let's define a rotation</p>
+<h2 id="12">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
 {% highlight matlab %}
-r = rotation.byEuler(45*degree,0*degree,0*degree)
-{% endhighlight %}
-
-{% highlight plaintext %}
-r = rotation  
-  size: 1 x 1
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    45    0    0    0
+r = rotation.byEuler(45*degree,0*degree,0*degree);
 {% endhighlight %}
 <p>Then the rotated tensor is given by</p>
 {% highlight matlab %}
-Trot = rotate(T1,r)
+Trot = rotate(T1,r);
 plot(Trot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Trot = tensor  
-  rank: 2 (3 x 3)
- 
- -0.1494  0.2256  0.4337
- -0.2753  0.3809  0.5807
- -0.0067  1.0481  0.2884
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TensorArithmetics_01.png" %}
