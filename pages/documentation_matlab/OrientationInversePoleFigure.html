@@ -1,6 +1,6 @@
 ---
-title: Inverse Pole Figure
-last_updated: 02-Aug-2020
+title: script_OrientationInversePoleFigure
+last_updated: 11-Sep-2020
 sidebar: documentation_sidebar
 permalink: OrientationInversePoleFigure.html
 folder: documentation
@@ -11,14 +11,22 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Inverse Pole Figure</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-02"><meta name="DC.source" content="script_OrientationInversePoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationInversePoleFigure.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Inverse pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
+      --><title>script_OrientationInversePoleFigure</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-11"><meta name="DC.source" content="script_OrientationInversePoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationInversePoleFigure.m">
+    edit page</a></font><div><h2 id="1">Inverse Pole Figure</h2><p>Inverse pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
 {% highlight matlab %}
-cs = crystalSymmetry('321');
+cs = crystalSymmetry('321')
 ori = orientation.rand(cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
+cs = crystalSymmetry  
+ 
+  symmetry       : 321              
+  elements       : 6                
+  a, b, c        : 1, 1, 1          
+  reference frame: X||a*, Y||b, Z||c
+ 
+ 
 ori = orientation  
   size: 1 x 1
   crystal symmetry : 321, X||a*, Y||b, Z||c
@@ -26,7 +34,7 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  63.0747 150.699  208.23       0
+  140.666 96.6729 21.3231       0
 {% endhighlight %}
 <p>Starting point is a fixed specimen direction <code class="language-plaintext highlighter-rouge">r</code>, e.g.,</p>
 {% highlight matlab %}
@@ -40,7 +48,7 @@ r = vector3d
   x y z
   0 0 1
 {% endhighlight %}
-<p>Next the crystal direction <code class="language-plaintext highlighter-rouge">h</code> corresponding to the specimen direction <code class="language-plaintext highlighter-rouge">r</code> according to the orientation <code class="language-plaintext highlighter-rouge">ori</code> is computed</p>
+<p>Next the crystal direction corresponding to the specimen direction <code class="language-plaintext highlighter-rouge">r</code> according to the orientation <code class="language-plaintext highlighter-rouge">r</code> are computed</p>
 {% highlight matlab %}
 h = inv(ori) * r
 {% endhighlight %}
@@ -49,10 +57,10 @@ h = inv(ori) * r
 h = Miller  
  size: 1 x 1
  symmetry: 321, X||a*, Y||b, Z||c
-  h  0.0151
-  k -0.4312
-  i  0.4161
-  l -0.8721
+  h -0.1498
+  k  0.9252
+  i -0.7754
+  l -0.1162
 {% endhighlight %}
 <p>and ploted in a spherical projection</p>
 {% highlight matlab %}
@@ -60,9 +68,9 @@ plot(h.symmetrise,'fundamentalRegion')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_01.png" %}
-</center><p>A shortcut for the above computations is the command <code class="language-plaintext highlighter-rouge"><a href="orientation.plotIPDF.html">plotIPDF</a></code></p>
+</center><p>A shortcut for the above computations is the command</p>
 {% highlight matlab %}
-% an inverse pole figure plot
+% a pole figure plot
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z])
 {% endhighlight %}
 <center>

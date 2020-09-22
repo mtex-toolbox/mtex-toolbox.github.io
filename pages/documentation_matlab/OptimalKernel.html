@@ -1,6 +1,6 @@
 ---
 title: Optimal Kernel Selection
-last_updated: 02-Aug-2020
+last_updated: 11-Sep-2020
 sidebar: documentation_sidebar
 permalink: OptimalKernel.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Optimal Kernel Selection</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-08-02"><meta name="DC.source" content="script_OptimalKernel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/OptimalKernel.m">
+      --><title>Optimal Kernel Selection</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-11"><meta name="DC.source" content="script_OptimalKernel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/OptimalKernel.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In the section <a href="DensityEstimation.html">density estimation</a> we have seen that the correct choice of the kernel halfwidth is essential for good match between the true density function and the reconstructed density function. If the halfwidth is set to small the reconstructed density function is ussualy oszilating and the indiviudual sampling points are visible as sharp peaks. If the halfwidth is to large the resulting density function is usually too smooth and does not reproduce the features of the original density function.</p><p>Finding an optimal kernel halfwidth is a hard problem as the optimal kernel halfwidth depends not only on the number sampling points but also on the smoothness of the true but unknown density function. A very conserative choice of the kernel halfwidth that takes into account only the number of sampling points is implemented in MTEX as <code class="language-plaintext highlighter-rouge">'magicRule'</code>. In the <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> considers additionaly to the number of sampling points also the variance of the sampling point as an estimate of the smoothness of the true density function. The most advanced (and default) method for estimating the optimal kernel halfwidth is <a href="orientation.KLCV.html">Kullback Leibler cross validation</a>. The idea of this method is to test different kernel halfwidth on a subset of the random sampling and to select the halfwidth which best reproduces the ommited points of the random sampling.</p><p>In order to demonstrate this functionality lets start with the following orientation density function</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
@@ -21,6 +21,10 @@ odf = 0.25*uniformODF(cs) + 0.25*unimodalODF(orientation.brass(cs)) + ...
 
 plot(odf,'sections',6,'silent','sigma')
 mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Miller indece are not orthogonal. Maximum deviation is 27 degree
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_01.png" %}
@@ -92,11 +96,11 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-RuleOfThumb: 66° KLCV: 24° magicRule: 31°
-RuleOfThumb: 28° KLCV: 12° magicRule: 22°
+RuleOfThumb: 90° KLCV: 24° magicRule: 31°
+RuleOfThumb: 26° KLCV: 12° magicRule: 22°
 RuleOfThumb: 18° KLCV: 8° magicRule: 16°
 RuleOfThumb: 10° KLCV: 6° magicRule: 11°
-RuleOfThumb: 8° KLCV: 5° magicRule: 8°
+RuleOfThumb: 9° KLCV: 5° magicRule: 8°
 RuleOfThumb: 7° KLCV: 4° magicRule: 6°
 {% endhighlight %}
 <p>Plot the error in dependency of the number of single orientations.</p>

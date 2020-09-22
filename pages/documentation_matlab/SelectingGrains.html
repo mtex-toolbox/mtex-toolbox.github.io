@@ -1,6 +1,6 @@
 ---
 title: Selecting Grains
-last_updated: 01-Apr-2020
+last_updated: 22-Sep-2020
 sidebar: documentation_sidebar
 permalink: SelectingGrains.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/SelectingGrains.m">
+      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-22"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/SelectingGrains.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select grains by properties. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
@@ -59,15 +59,15 @@ hold off
 {% highlight plaintext %}
 ans = grain2d  
  
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1       1     323  Forsterite       mmm                         
+ Phase  Grains  Pixels   Mineral  Symmetry  Crystal reference frame
+     3       1      56  Diopside     12/m1        X||a*, Y||b, Z||c
  
- boundary segments: 107
+ boundary segments: 69
  inner boundary segments: 0
  triple points: 10
  
- Id   Phase   Pixels          GOS   phi1   Phi   phi2
- 94       1      323   0.00796443    131    64    250
+  Id   Phase   Pixels         GOS   phi1   Phi   phi2
+ 121       3       56   0.0107971     38   157    122
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_02.png" %}
@@ -97,18 +97,15 @@ hold off
 {% highlight plaintext %}
 grains_selected = grain2d  
  
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1       4     524  Forsterite       mmm                         
+ Phase  Grains  Pixels   Mineral  Symmetry  Crystal reference frame
+     3       1      56  Diopside     12/m1        X||a*, Y||b, Z||c
  
- boundary segments: 204
+ boundary segments: 69
  inner boundary segments: 0
- triple points: 23
+ triple points: 10
  
-  Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  26       1        1            0    130    68    258
-  62       1      181   0.00699418    131    64    245
-  94       1      323   0.00796443    131    64    250
- 123       1       19    0.0103622    144    74    250
+  Id   Phase   Pixels         GOS   phi1   Phi   phi2
+ 121       3       56   0.0107971     38   157    122
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_04.png" %}
@@ -129,7 +126,7 @@ plot(grains,grain_area)
 
 {% highlight plaintext %}
 max_area =
-   4.1191e+06
+   4.1013e+06
 max_id =
    208
 {% endhighlight %}
@@ -263,7 +260,7 @@ ebsd(grains(33))
 ans = EBSD  
  
  Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
-     3      1 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3      1 (100%)  Diopside  Goldenrod     12/m1        X||a*, Y||b, Z||c
  
     Id   Phase   phi1   Phi   phi2   bands   bc    bs   error   mad       x      y   grainId
  37553       3     80    16    152       7   65   113       0   0.7   11000   2550        33
@@ -278,7 +275,7 @@ ebsd(ebsd.grainId == 33)
 ans = EBSD  
  
  Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
-     3      1 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3      1 (100%)  Diopside  Goldenrod     12/m1        X||a*, Y||b, Z||c
  
     Id   Phase   phi1   Phi   phi2   bands   bc    bs   error   mad       x      y   grainId
  37553       3     80    16    152       7   65   113       0   0.7   11000   2550        33
@@ -319,26 +316,13 @@ plot(grains(grain_id))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_14.png" %}
-</center><p>finally, we can remove the boundary grains by</p>
+</center><p>finally, we could remove the boundary grains by</p>
 {% highlight matlab %}
 grains(grain_id) = []
-
-plot(grains)
 {% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      79    5925  Forsterite       mmm                         
-     2      25    1111   Enstatite       mmm                         
-     3      70     565    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 2700
- inner boundary segments: 9
- triple points: 268
- 
- Properties: GOS, meanRotation
+<p>However, boundary grains can be selected more easily be the command <code class="language-plaintext highlighter-rouge"><a href="grain2d/isBoundary.html">isBoundary</a></code>.</p>
+{% highlight matlab %}
+plot(grains(~grains.isBoundary))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_15.png" %}
