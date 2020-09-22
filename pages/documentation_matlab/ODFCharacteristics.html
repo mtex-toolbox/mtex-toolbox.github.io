@@ -1,6 +1,6 @@
 ---
 title: ODF Characteristics
-last_updated: 01-Apr-2020
+last_updated: 11-Sep-2020
 sidebar: documentation_sidebar
 permalink: ODFCharacteristics.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Characteristics</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFCharacteristics.m">
+      --><title>ODF Characteristics</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-11"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFCharacteristics.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Let us first begin with some constructed ODFs to be analyzed below</p><p>A bimodal ODF:</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mmm');
@@ -57,25 +57,27 @@ odf3 = calcODF(pf,'resolution',5*degree,'zero_Range')
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf = PoleFigure  
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+saving data to /home/hielscher/mtex/master/data/dubna.mat
+ 
+ans = PoleFigure  
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
   specimen symmetry: 1
  
   h = (02-21), r = 72 x 19 points
   h = (10-10), r = 72 x 19 points
-  h = (01-11)(10-11), r = 72 x 19 points
+  h = (10-11)(01-11), r = 72 x 19 points
   h = (10-12), r = 72 x 19 points
   h = (11-20), r = 72 x 19 points
   h = (11-21), r = 72 x 19 points
   h = (11-22), r = 72 x 19 points
  
 odf3 = ODF  
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
   specimen symmetry: 1
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 5°
-    center: 19843 orientations, resolution: 5°
+    center: 19836 orientations, resolution: 5°
     weight: 1
 {% endhighlight %}
 <h2 id="5">Modal Orientations</h2><p>The modal orientation of an ODF is the crystallographic prefered orientation of the texture. It is characterized as the maximum of the ODF. In MTEX it can be computed by the command <a href="ODF.calcModes.html">calcModes</a></p><p>Determine the modalorientation as an <a href="orientation.orientation.html">orientation</a>:</p>
@@ -86,16 +88,16 @@ center = calcModes(odf3)
 {% highlight plaintext %}
 center = orientation  
   size: 1 x 1
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
   specimen symmetry: 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  134.717 33.6565 205.111       0
+  132.861 34.7431 207.126       0
 {% endhighlight %}
 <p>Lets mark this prefered orientation in the pole figures</p>
 {% highlight matlab %}
-plotPDF(odf3,h,'antipodal','superposition',c);
+plotPDF(odf3,pf.allH,'antipodal','superposition',pf.c);
 annotate(center,'marker','s','MarkerFaceColor','black')
 {% endhighlight %}
 <center>
@@ -125,7 +127,7 @@ volume(odf3,calcModes(odf3),30*degree)*100
 
 {% highlight plaintext %}
 ans =
-   46.8333
+   35.6911
 {% endhighlight %}
 <p>The relative volume of crystals with missorientation maximum 20 degree from the prefered fibre in percent: TODO</p>
 {% highlight matlab %}
@@ -156,7 +158,7 @@ odf3.components{1}.psi
 {% highlight plaintext %}
 ans = SO3Grid  
   symmetry: "321" - "1"
-  grid    : 19843 orientations, resolution: 5°
+  grid    : 19836 orientations, resolution: 5°
  
 ans = deLaValleePoussinKernel  
   bandwidth: 48

@@ -1,6 +1,6 @@
 ---
 title: Interpolating EBSD Data
-last_updated: 17-Jul-2020
+last_updated: 11-Sep-2020
 sidebar: documentation_sidebar
 permalink: EBSDInter.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Interpolating EBSD Data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-07-17"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
+      --><title>Interpolating EBSD Data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-11"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In the section <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> we have discussed how to work with noisy EBSD data the contained non indexed pixels. Hereby, we made the assumption that the grid before and after the operations is the same.</p><p>In this section we explain how to interpolate an EBSD map at positions that do not belong to the grid. Lets us consider a simple example</p>
 {% highlight matlab %}
 mtexdata twins;
@@ -20,37 +20,14 @@ mtexdata twins;
 
 plot(ebsd('indexed'),ebsd('indexed').orientations)
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
-{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_01.png" %}
-</center><p>As this functionality is currently only available for EBSD data on a rectangular grid we have to apply the command |<a href="EBSD.gridify.html">gridify|</a> first</p>
+</center><p>As this functionality is currently only available for EBSD data on a rectangular grid we have to apply the command <code class="language-plaintext highlighter-rouge"><a href="EBSD.gridify.html">gridify</a></code> first</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify;
-ebsd = ebsd.project2FundamentalRegion(grains)
+ebsd = ebsd.project2FundamentalRegion(grains);
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, oldId
- Scan unit : um
- Grid size (square): 137 x 167
-{% endhighlight %}
-<p>Now we can use the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> to interpolate the orientation at any arbitrary coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</p>
+<p>Now we can use the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> to interpolate the orientation at arbitrary coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</p>
 {% highlight matlab %}
 x = 30.5; y = 5.5;
 e1 = interp(ebsd,x,y)
@@ -119,4 +96,4 @@ ebsdNewGrid = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_02.png" %}
-</center><p>Note, that we have not rotated the EBSD but only the grid. All orientations as well as the position of all grains remains unchanged.</p></div></body></html>
+</center><p>Note, that we have not rotated the EBSD data but only the grid. All orientations as well as the position of all grains remains unchanged.</p></div></body></html>

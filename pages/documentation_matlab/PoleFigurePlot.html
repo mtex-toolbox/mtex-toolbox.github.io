@@ -1,6 +1,6 @@
 ---
 title: Plotting of Pole Figures
-last_updated: 01-Apr-2020
+last_updated: 11-Sep-2020
 sidebar: documentation_sidebar
 permalink: PoleFigurePlot.html
 folder: documentation
@@ -11,19 +11,18 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting of Pole Figures</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_PoleFigurePlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigurePlot.m">
+      --><title>Plotting of Pole Figures</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-11"><meta name="DC.source" content="script_PoleFigurePlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigurePlot.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This section describes various possibilities to visualize pole figure data. Lets start by loading some XRD data</p>
 {% highlight matlab %}
 mtexdata ptx
 {% endhighlight %}
 
 {% highlight plaintext %}
-loading data ...
- saving data to /home/hielscher/mtex/master/data/ptx.mat
+saving data to /home/hielscher/mtex/master/data/ptx.mat
  
-pf = PoleFigure  
+ans = PoleFigure  
   crystal symmetry : mmm
-  specimen symmetry: -1
+  specimen symmetry: 1
  
   h = (104), r = 72 x 17 points
   h = (110), r = 72 x 17 points
@@ -47,6 +46,7 @@ mtexColorbar
 {% highlight matlab %}
 plot(pf,'contourf')
 mtexColorbar
+mtexColorMap parula
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigurePlot_03.png" %}
@@ -66,7 +66,7 @@ odf = calcODF(pf,'silent')
 {% highlight plaintext %}
 odf = ODF  
   crystal symmetry : mmm
-  specimen symmetry: -1
+  specimen symmetry: 1
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 5°
@@ -76,6 +76,7 @@ odf = ODF
 <p>Now smooth pole figures can be plotted for arbitrary crystallographic directions.</p>
 {% highlight matlab %}
 plotPDF(odf,pf.h,'antipodal')
+mtexColorMap parula
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigurePlot_05.png" %}
