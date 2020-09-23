@@ -1,0 +1,81 @@
+---
+title: Subgrain Boundaries
+last_updated: 23-Sep-2020
+sidebar: documentation_sidebar
+permalink: SubGrainBoundaries.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Subgrain Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-23"><meta name="DC.source" content="script_SubGrainBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/SubGrainBoundaries.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO: expand this page</h2>
+{% highlight matlab %}
+mtexdata ferrite silent
+
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+
+% remove one pixel grains
+ebsd(grains(grains.grainSize<3)) = [];
+{% endhighlight %}
+
+{% highlight matlab %}
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',[1*degree, 5*degree])
+
+grains = smooth(grains,5)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     0     585   59408  Ferrite       432                         
+ 
+ boundary segments: 14503
+ inner boundary segments: 27423
+ triple points: 912
+ 
+ Properties: GOS, meanRotation
+ 
+ 
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+    -1   136 (0.23%)  notIndexed                                                 
+     0  59408 (100%)     Ferrite  LightSkyBlue       432                         
+ 
+ Properties: ci, fit, iq, sem_signal, x, y, oldId, grainId
+ Scan unit : um
+ 
+ 
+grains = grain2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     0     585   59408  Ferrite       432                         
+ 
+ boundary segments: 14503
+ inner boundary segments: 27423
+ triple points: 912
+ 
+ Properties: GOS, meanRotation
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(grains,grains.meanOrientation,'faceAlpha',0.5,'linewidth',2,'figSize','large')
+
+hold on
+
+omega = grains.innerBoundary.misorientation.angle;
+plot(grains.innerBoundary,'linewidth',1)
+%plot(grains.innerBoundary,omega ./ degree,'linewidth',1.5)
+%mtexColorMap white2black
+%setColorRange([1,5])
+
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SubGrainBoundaries_01.png" %}
+</center></div></body></html>

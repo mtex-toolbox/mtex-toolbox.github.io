@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters - Basic Properties
-last_updated: 22-Sep-2020
+last_updated: 23-Sep-2020
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-22"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
+      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-23"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedProperties.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasesParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p><p>
    <table class="usertable">
       <tr>
@@ -160,6 +160,9 @@ To make changes, update the MATLAB code and republish this document.
                   </a>
                </p>
          </td>
+         <td>
+               <p>x,y coordinates of the barycenter</p>
+         </td>
       </tr>
    </table>
 </p><p>We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
@@ -266,16 +269,12 @@ histogram(grains.area)
 xlabel('grain area')
 ylabel('number of grains')
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_02.png" %}
-</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p>
+<p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p>
 {% highlight matlab %}
 hist(grains,grains.area)
 xlabel('grain area')
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_03.png" %}
-</center><h2 id="10">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p>
+<h2 id="10">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p>
 {% highlight matlab %}
 close all
 scatter(grains.paris,grains.shapeFactor)
@@ -283,5 +282,5 @@ xlabel('paris')
 ylabel('shape factor')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_04.png" %}
+{% include inline_image.html file="ShapeParameters_03.png" %}
 </center><p>Obviously, there is a strong correlation between those two quantities.</p></div></body></html>
