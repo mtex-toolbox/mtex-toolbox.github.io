@@ -1,6 +1,6 @@
 ---
 title: Subgrain Boundaries
-last_updated: 23-Sep-2020
+last_updated: 24-Sep-2020
 sidebar: documentation_sidebar
 permalink: SubGrainBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Subgrain Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-23"><meta name="DC.source" content="script_SubGrainBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/SubGrainBoundaries.m">
+      --><title>Subgrain Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-24"><meta name="DC.source" content="script_SubGrainBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/SubGrainBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO: expand this page</h2>
 {% highlight matlab %}
 mtexdata ferrite silent
@@ -56,10 +56,22 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_01.png" %}
+</center><p>The number of subgrain boundary segments inside each grain can be computed by the command <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a>. In the following figure we use it to visualize the density of subgrain boundaries per grain pixel.</p>
+{% highlight matlab %}
+plot(grains, grains.subBoundarySize ./ grains.grainSize)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SubGrainBoundaries_02.png" %}
+</center><p>We may compute also the density of subgrain boundaries per grain as the length of the subgrain boundaries devided by the grain area. This can be done using the commands <a href="grain2d.subBoundaryLength.html"><code class="language-plaintext highlighter-rouge">subBoundaryLength</code></a> and <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a></p>
+{% highlight matlab %}
+plot(grains, grains.subBoundaryLength ./ grains.area)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SubGrainBoundaries_03.png" %}
 </center><p>Analyse the misorientation axes of the subgrain boundary misorientations</p>
 {% highlight matlab %}
 plot(grains.innerBoundary.misorientation.axis,'fundamentalRegion','contourf')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SubGrainBoundaries_02.png" %}
+{% include inline_image.html file="SubGrainBoundaries_04.png" %}
 </center></div></body></html>
