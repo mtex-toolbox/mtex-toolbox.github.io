@@ -12,18 +12,18 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Subgrain Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-24"><meta name="DC.source" content="script_SubGrainBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/SubGrainBoundaries.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO: expand this page</h2>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Low-angle grain boundaries (LAGB) or subgrain boundaries are those with a misorientation less than about 15 degrees. Generally speaking they are composed of an array of dislocations and their properties and structure are a function of the misorientation. In contrast the properties of high-angle grain boundaries, whose misorientation is greater than about 15 degrees, are normally found to be independent of the misorientation. However, there are special boundaries at particular orientations whose interfacial energies are markedly lower than those of general high-angle grain boundaries.</p><p>In order to demonstrate the analysis of subgrain boundaries in MTEX we start by importing an sample EBSD data set and preforming some polishing by removing all 5 pixel grains.</p>
 {% highlight matlab %}
 mtexdata ferrite silent
 
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
 % remove one pixel grains
-ebsd(grains(grains.grainSize<3)) = [];
+ebsd(grains(grains.grainSize<5)) = [];
 {% endhighlight %}
-<p>When specifying two threshold the first value controls the grain boundaries whereas the second is used for the subgrain boundaries</p>
+<p>For the computation of the subgrain boundaries we specify two thresholds: the first value controls the subgrain boundaries whereas the second is used for the high-angle grain boundaries.</p>
 {% highlight matlab %}
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',[1*degree, 5*degree]);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',[1*degree, 15*degree]);
 
 % lets smooth the grain boundaries a bit
 grains = smooth(grains,5)
@@ -33,15 +33,15 @@ grains = smooth(grains,5)
 grains = grain2d  
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     0     585   59408  Ferrite       432                         
+     0     220   58967  Ferrite       432                         
  
- boundary segments: 14503
- inner boundary segments: 27423
- triple points: 912
+ boundary segments: 11339
+ subgrain boundary segments: 29476
+ triple points: 357
  
  Properties: GOS, meanRotation
 {% endhighlight %}
-<p>In order to visualize the the subgrain boundaries we first plot the ebsd data colorized by orientation. On top we plot with solid lines the grain boundaries and with thinner lines the subgrain boundaries. We even make the misorientation angle at the subgrain boundaries visible by setting it as the transparency value of the segments.</p>
+<p>We observe that we have 11330 high-angle boundary segments and 29476 low-angle boundary segments. In order to visualize the the subgrain boundaries we first plot the ebsd data colorized by orientation. On top we plot with solid lines the grain boundaries and with thinner lines the subgrain boundaries. We even make the misorientation angle at the subgrain boundaries visible by setting it as the transparency value of the segments.</p>
 {% highlight matlab %}
 % plot the ebsd data
 plot(ebsd('indexed'),ebsd('indexed').orientations,'faceAlpha',0.5,'figSize','large')
@@ -53,17 +53,17 @@ hold on
 plot(grains.boundary,'linewidth',2)
 
 % compute transparency from misorientation angle
-alpha = grains.innerBoundary.misorientation.angle / (5*degree);
+alpha = grains.subBoundary.misorientation.angle / (5*degree);
 
 % plot the subgrain boundaries
-plot(grains.innerBoundary,'linewidth',1.5,'edgeAlpha',alpha);
+plot(grains.subBoundary,'linewidth',1.5,'edgeAlpha',alpha);
 
 % stop override mode
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_01.png" %}
-</center><p>The number of subgrain boundary segments inside each grain can be computed by the command <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a>. In the following figure we use it to visualize the density of subgrain boundaries per grain pixel.</p>
+</center><h2 id="4">Subgrain Boundary Density</h2><p>The number of subgrain boundary segments inside each grain can be computed by the command <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a>. In the following figure we use it to visualize the density of subgrain boundaries per grain pixel.</p>
 {% highlight matlab %}
 plot(grains, grains.subBoundarySize ./ grains.grainSize)
 {% endhighlight %}
@@ -75,9 +75,11 @@ plot(grains, grains.subBoundaryLength ./ grains.area)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_03.png" %}
-</center><p>Analyse the misorientation axes of the subgrain boundary misorientations</p>
+</center><h2 id="6">Misorientation Axes</h2><p>Analyse the misorientation axes of the subgrain boundary misorientations</p>
 {% highlight matlab %}
-plot(grains.innerBoundary.misorientation.axis,'fundamentalRegion','contourf')
+plot(grains.subBoundary.misorientation.axis,'fundamentalRegion','contourf')
+
+mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_04.png" %}

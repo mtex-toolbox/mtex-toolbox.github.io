@@ -1,6 +1,6 @@
 ---
 title: Boundary Plots
-last_updated: 01-Apr-2020
+last_updated: 24-Sep-2020
 sidebar: documentation_sidebar
 permalink: BoundaryPlots.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryPlots.m">
+      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-24"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryPlots.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -41,7 +41,7 @@ ebsd = EBSD
      0   58485 (24%)  notIndexed                                                 
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -106,7 +106,7 @@ hold off
 </center><p>Another type of boundaries is boundaries between measurements that belong to the same grain. This happens if a grain has a texture gradient that loops around these two measurements.</p>
 {% highlight matlab %}
 hold on
-plot(grains.innerBoundary,'linecolor','red','linewidth',4)
+plot(grains.subBoundary,'linecolor','red','linewidth',4)
 hold off
 {% endhighlight %}
 <center>
@@ -192,9 +192,6 @@ ori = orientation
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
  
-  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
- 
- 
 axes = vector3d  
  size: 278 x 1
 {% endhighlight %}
@@ -231,6 +228,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_10.png" %}
+</center><center>
+{% include inline_image.html file="BoundaryPlots_11.png" %}
 </center><p>Lets illustrate this color coding also at a iron sample.</p>
 {% highlight matlab %}
 % import the data
@@ -256,9 +255,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-loading data ...
- saving data to /home/hielscher/mtex/master/data/csl.mat
- 
 ebsd = EBSD  
  
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
@@ -275,7 +271,7 @@ colorKey =
     antipodal: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryPlots_11.png" %}
+{% include inline_image.html file="BoundaryPlots_12.png" %}
 </center><p>At the end we plot the colorized misorientation space in axis angle sections. Note that in this plot misorientations <code class="language-plaintext highlighter-rouge">mori</code> and <code class="language-plaintext highlighter-rouge">inv(mori)</code> are associated.</p>
 {% highlight matlab %}
 plot(colorKey,'axisAngle',(5:5:60)*degree)
@@ -288,5 +284,5 @@ plot(gB.misorientation,'points',300,'add2all',...
 plotting 300 random orientations out of 20356 given orientations
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryPlots_12.png" %}
+{% include inline_image.html file="BoundaryPlots_13.png" %}
 </center></div></body></html>
