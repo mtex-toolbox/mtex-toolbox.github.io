@@ -1,6 +1,6 @@
 ---
 title: Grain Reconstruction
-last_updated: 07-May-2020
+last_updated: 28-Sep-2020
 sidebar: documentation_sidebar
 permalink: GrainReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-07"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstruction.m">
+      --><title>Grain Reconstruction</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-28"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -33,7 +33,7 @@ ebsd = EBSD
      0   58485 (24%)  notIndexed                                                 
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -52,10 +52,10 @@ grains = grain2d
      0    1139    4052  notIndexed                                   
      1     244   14093  Forsterite       mmm                         
      2     177    1397   Enstatite       mmm                         
-     3     104     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+     3     104     759    Diopside     12/m1        X||a*, Y||b, Z||c
  
  boundary segments: 10422
- inner boundary segments: 0
+ subgrain boundary segments: 0
  triple points: 905
  
  Properties: GOS, meanRotation
@@ -102,10 +102,10 @@ grains = grain2d
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1     103   14093  Forsterite       mmm                         
      2      32    1397   Enstatite       mmm                         
-     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+     3      71     759    Diopside     12/m1        X||a*, Y||b, Z||c
  
  boundary segments: 3784
- inner boundary segments: 12
+ subgrain boundary segments: 12
  triple points: 240
  
  Properties: GOS, meanRotation
@@ -131,7 +131,7 @@ notIndexed = grain2d
      0    1139    4052  notIndexed                                   
  
  boundary segments: 8694
- inner boundary segments: 0
+ subgrain boundary segments: 0
  triple points: 868
  
  Properties: GOS, meanRotation
@@ -148,40 +148,15 @@ mtexColorbar
 </center><p>Regions with a high quotient are blocks which can be hardly correctly assigned to a grain. Hence, we should keep these regions as not indexed and only remove the not indexed information from locations with a low quotient.</p>
 {% highlight matlab %}
 % the "not indexed grains" we want to remove
-toRemove = notIndexed(notIndexed.grainSize ./ notIndexed.boundarySize<0.8)
+toRemove = notIndexed(notIndexed.grainSize ./ notIndexed.boundarySize<0.8);
 
 % now we remove the corresponding EBSD measurements
-ebsd(toRemove) = []
+ebsd(toRemove) = [];
 
 % and perform grain reconstruction with the reduces EBSD data set
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
 
 plot(grains,'lineWidth',2)
-{% endhighlight %}
-
-{% highlight plaintext %}
-toRemove = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     0    1134    3442  notIndexed                                   
- 
- boundary segments: 8256
- inner boundary segments: 0
- triple points: 837
- 
- Properties: GOS, meanRotation
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    610 (3.6%)  notIndexed                                                 
-     1   14093 (84%)  Forsterite  LightSkyBlue       mmm                         
-     2   1397 (8.3%)   Enstatite  DarkSeaGreen       mmm                         
-     3    759 (4.5%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_06.png" %}
@@ -219,45 +194,18 @@ poly = 1.0e+04 *[...
   0.6853    0.2833
   0.6853    0.2848];
 
-ebsdP = ebsd(ebsd.inpolygon(poly))
+ebsdP = ebsd(ebsd.inpolygon(poly));
 
 plot(ebsdP,'micronBar','off')
 legend off
 
 % compute the grains
-grains = calcGrains(ebsdP('indexed'))
+grains = calcGrains(ebsdP('indexed'));
 
 % plot the grain boundary
 hold on
 plot(grains.boundary,'linewidth',1.5)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsdP = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0      107 (3%)  notIndexed                                                 
-     1    2756 (78%)  Forsterite  LightSkyBlue       mmm                         
-     2     452 (13%)   Enstatite  DarkSeaGreen       mmm                         
-     3    231 (6.5%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
- 
- 
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      26    2756  Forsterite       mmm                         
-     2       8     452   Enstatite       mmm                         
-     3      22     231    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 1024
- inner boundary segments: 0
- triple points: 66
- 
- Properties: GOS, meanRotation
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_08.png" %}
@@ -267,27 +215,12 @@ plot(ebsdP,'micronBar','off')
 legend off
 
 % compute the grains
-grains = calcGrains(ebsdP('indexed'),'boundary','tight')
+grains = calcGrains(ebsdP('indexed'),'boundary','tight');
 
 % plot the grain boundary
 hold on
 plot(grains.boundary,'linewidth',1.5)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      28    2756  Forsterite       mmm                         
-     2       9     452   Enstatite       mmm                         
-     3      22     231    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 1244
- inner boundary segments: 0
- triple points: 61
- 
- Properties: GOS, meanRotation
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_09.png" %}

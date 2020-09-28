@@ -1,6 +1,6 @@
 ---
 title: grainMean
-last_updated: 07-May-2020
+last_updated: 28-Sep-2020
 sidebar: function_reference_sidebar
 permalink: EBSD.grainMean.html
 folder: function_reference
@@ -11,17 +11,41 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>grainMean</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-05-07"><meta name="DC.source" content="script_EBSD__grainMean.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/grainMean.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>calculate grain average scalar properties based on all ebsd points that are within a grain</p><h2 id="3">Syntax</h2><pre>   [grains,ebsd.grainId]=calcGrains(ebsd)
-   [gmp, gid] = grainMean(ebsd,ebsd.ci)
-   plot(grains(gid),gmp)</pre><h2 id="4">Input</h2><p>
+      --><title>grainMean</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-28"><meta name="DC.source" content="script_EBSD__grainMean.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/grainMean.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>grain average property from ebsd properties</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+% recover grains and store grainId
+[grains,ebsd.grainId]=calcGrains(ebsd)
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute average grain property
+meanProp = grainMean(ebsd, ebsd.ci);
+plot(grains,meanProp(grains.id))
+{% endhighlight %}
+
+{% highlight matlab %}
+% ensures meanProp has the same ordering as grains
+meanProp = grainMean(ebsd, ebsd.ci, grains);
+{% endhighlight %}
+
+{% highlight matlab %}
+% take not the mean but the maximum per grain
+meanProp = grainMean(ebsd, ebsd.ci, @max);
+{% endhighlight %}
+
+{% highlight matlab %}
+% full syntax
+meanProp = grainMean(ebsd, prop, grains, method)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a> (which must contain a grainID)</tt>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> (which must contain a grainId)</tt>
          </td>
       </tr>
       <tr>
@@ -29,7 +53,23 @@ To make changes, update the MATLAB code and republish this document.
             <tt>prop</tt>
          </td>
          <td>
-            <tt>property to average (of length(ebsd))</tt>
+            <tt>property to average, same size as ebsd</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>method</tt>
+         </td>
+         <td>
+            <tt>function_handle</tt>
          </td>
       </tr>
    </table>
@@ -37,18 +77,18 @@ To make changes, update the MATLAB code and republish this document.
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>gmp</tt>
+            <tt>meanProp</tt>
          </td>
          <td>
-            <tt>average property (of length grainID)</tt>
+            <tt>average property, sorted by grainId</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>gid</tt>
+            <tt>meanProp</tt>
          </td>
          <td>
-            <tt>grainId from ebsd of length(property)</tt>
+            <tt>average property, same size as grains (if specified)</tt>
          </td>
       </tr>
    </table>
