@@ -1,5 +1,5 @@
 ---
-title: Grain Reference Orientation Deviation (GROD / Mis2mean)
+title: Grain Reference Orientation Deviation (GROD)
 last_updated: 28-Sep-2020
 sidebar: documentation_sidebar
 permalink: EBSDGROD.html
@@ -11,10 +11,10 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Reference Orientation Deviation (GROD / Mis2mean)</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-28"><meta name="DC.source" content="script_EBSDGROD.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGROD.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The grain reference orientation deviation is the misorientation \(\mathrm{GROD}_{i,j}\) between the orientation \(o_{i,j}\) at position \((i,j)\) and the reference or mean orientation \(o_g\) of the grain the position \((i,j)\) belongs to, i.e.,</p><p>\[ \mathrm{GROD}_{i,j} = S \mathrm{inv}(o_g) o_{i,j} \]</p><p>In the above formula the symmetry elements \(S_{i,j}\) are chosen to minimize the misorientation angle of \(\mathrm{GROD}_{i,j}\).</p><p>Let us demonstrate the computation of the grain reference orientation feviation at the example of a deformed Ferrite specimen. Lets import the data first, reconstruct the grain structure and perform some denoising of the orientation data as the we are going to analyse the misorientation axes which are very noise senitive.</p>
+      --><title>Grain Reference Orientation Deviation (GROD)</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-28"><meta name="DC.source" content="script_EBSDGROD.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGROD.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The grain reference orientation deviation is the misorientation \(\mathrm{GROD}_{i,j}\) between the orientation \(o_{i,j}\) at position \((i,j)\) and the reference or mean orientation \(o_g\) of the grain the position \((i,j)\) belongs to, i.e.,</p><p>\[ \mathrm{GROD}_{i,j} = \mathbf S_{i,j} \cdot \mathrm{inv}(o_g) \cdot o_{i,j} \]</p><p>In the above formula the symmetry elements \(\mathbf S_{i,j}\) are chosen to minimize the misorientation angle of \(\mathrm{GROD}_{i,j}\).</p><p>Let us demonstrate the computation of the grain reference orientation feviation at the example of a deformed Ferrite specimen. Lets import the data first, reconstruct the grain structure and perform some denoising of the orientation data as the we are going to analyse the misorientation axes which are very noise senitive.</p>
 {% highlight matlab %}
-mtexdata ferrite
+mtexdata ferrite silent
 
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 % remove one-three pixel grains
@@ -26,33 +26,12 @@ grains = smooth(grains,5);
 
 % denoise the orientations
 F = halfQuadraticFilter;
-ebsd = smooth(ebsd,F,grains,'fill')
+ebsd = smooth(ebsd,F,grains,'fill');
 
 plot(ebsd('indexed'),ebsd('indexed').orientations)
 hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   136 (0.22%)  notIndexed                                                 
-     0  63044 (100%)     Ferrite  LightSkyBlue       432                         
- 
- Properties: ci, fit, iq, sem_signal, x, y, oldId
- Scan unit : um
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   2696 (4.2%)  notIndexed                                                 
-     0   60754 (96%)     Ferrite  LightSkyBlue       432                         
- 
- Properties: ci, fit, iq, sem_signal, x, y, oldId, grainId, quality
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_01.png" %}
@@ -60,11 +39,15 @@ ebsd = EBSD
 {% highlight matlab %}
 % compute the grain reference orientation deviation
 grod = ebsd.calcGROD(grains);
-
-% lets misorientation angle of the GROD
+{% endhighlight %}
+<p>As a first application we simply plot the misorientation angle of the grain reference orientation deviation and overlay it with the subgrain boundaries</p>
+{% highlight matlab %}
+% plot the misorientation angle of the GROD
 plot(ebsd,grod.angle./degree,'micronbar','off')
 mtexColorbar('title','misorientation angle to meanorientation in degree')
 mtexColorMap LaboTeX
+
+% overlay grain and subgrain boundaries
 hold on
 plot(grains.boundary,'lineWidth',1.5)
 plot(grains.subBoundary,'edgeAlpha',grains.subBoundary.misorientation.angle / (5*degree))
@@ -72,7 +55,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_02.png" %}
-</center><h2 id="3">GOS</h2><p>The grain orientation spread (GOS) is the averaged misorientation angle of the grain reference orientation deviations of each grain. We may compute it using the Matlab command <a href="ebsd.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a> from the denoised EBSD data.</p>
+</center><h2 id="4">Grain Orientation Spread (GOS)</h2><p>The grain orientation spread (GOS) is the averaged misorientation angle of the grain reference orientation deviations of each grain. We may compute this average by using the command <a href="ebsd.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a>.</p>
 {% highlight matlab %}
 GOS = grainMean(ebsd, grod.angle);
 
@@ -81,18 +64,12 @@ mtexColorbar('title','GOS in degree')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_03.png" %}
-</center><h2 id="4">The Misorientation Axis in Crystal Coordinates</h2><p>When analysing the misorientation axis of the grain reference orientation deviations we have to distinguish whether we look at them in crystal coordinates or in specimen coordinates. Let's start with the crystal coordinates. In this case we use the command <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> to compute the corresponding \((hk\ell)\) values.</p><p>Lets first plot the distribution of misorientation axes in the fundamental sector.</p>
+</center><h2 id="5">The Misorientation Axis in Crystal Coordinates</h2><p>When analysing the misorientation axis of the grain reference orientation deviations we have to distinguish whether we look at them in crystal coordinates or in specimen coordinates. Let's start with the crystal coordinates. In this case we use the command <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> to compute the corresponding \((hk\ell)\) values.</p><p>Lets first plot the distribution of misorientation axes in the fundamental sector.</p>
 {% highlight matlab %}
-axCrystal = grod.axis
+axCrystal = grod.axis;
 
-plot(axCrystal,'contourf','fundamentalRegion','antipodal')
+plot(axCrystal,'contourf','fundamentalRegion','antipodal','figSize','small')
 mtexColorbar('title','distribution of misorientation axes in mrd')
-{% endhighlight %}
-
-{% highlight plaintext %}
-axCrystal = Miller  
- size: 63450 x 1
- mineral: Ferrite (432)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_04.png" %}
@@ -100,7 +77,7 @@ axCrystal = Miller
 {% highlight matlab %}
 colorKey = HSVDirectionKey(ebsd.CS,'antipodal');
 
-plot(colorKey)
+plot(colorKey,'figSize','small')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_05.png" %}
@@ -122,7 +99,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_06.png" %}
-</center><p>The misorientation axis in crystal coordinates can be related to active slipsystems. See: V. Tong, E. Wielewski, B. Britton <a href="https://arxiv.org/abs/1803.00236">Characterisation of slip and twinning in high rate deformed zirconium with electron backscatter diffraction</a>, 2018.</p><p>TODO: explain this at some new documentation page</p><h2 id="8">The Misorientation Axis in Specimen Coordinates</h2><p>The misorientation axis in specimen coordinates is computed by applying the EBSD orientations to the the misorientation axes in crystal coordinates. It is important to use here the option <code class="language-plaintext highlighter-rouge">'noSymmetry'</code>.</p>
+</center><p>The misorientation axis in crystal coordinates can be related to active slipsystems. See: V. Tong, E. Wielewski, B. Britton <a href="https://arxiv.org/abs/1803.00236">Characterisation of slip and twinning in high rate deformed zirconium with electron backscatter diffraction</a>, 2018.</p><p>TODO: explain this at some new documentation page</p><h2 id="9">The Misorientation Axis in Specimen Coordinates</h2><p>The misorientation axis in specimen coordinates is computed by applying the EBSD orientations to the the misorientation axes in crystal coordinates. It is important to use here the option <code class="language-plaintext highlighter-rouge">'noSymmetry'</code>.</p>
 {% highlight matlab %}
 axSpecimen = ebsd.orientations .* grod.axis('noSymmetry');
 
@@ -135,7 +112,7 @@ mtexColorbar('title','distribution of misorientation axes in mrd')
 {% highlight matlab %}
 colorKey = HSVDirectionKey;
 
-plot(colorKey)
+plot(colorKey,'figSize','small')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_08.png" %}
