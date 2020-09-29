@@ -1,6 +1,6 @@
 ---
 title: Grain Orientation Parameters
-last_updated: 14-Jun-2020
+last_updated: 29-Sep-2020
 sidebar: documentation_sidebar
 permalink: GrainOrientationParameters.html
 folder: documentation
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Orientation Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-14"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainOrientationParameters.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss properties of grains that are related to the distribution of orientations within the grains, i.e.,</p><p>
+      --><title>Grain Orientation Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-29"><meta name="DC.source" content="script_GrainOrientationParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainOrientationParameters.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="2">TODO: This page new a rewrite</h2><p>In this section we discuss properties of grains that are related to the distribution of orientations within the grains, i.e.,</p><p>
    <table class="usertable">
       <tr>
          <td>
@@ -41,7 +41,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>grain orientation spread</p>
+               <p>grain average misorientation</p>
          </td>
       </tr>
    </table>
@@ -50,7 +50,7 @@ To make changes, update the MATLAB code and republish this document.
 close all; plotx2east
 
 % import the data
-mtexdata forsterite
+mtexdata forsterite silent
 
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
@@ -58,22 +58,9 @@ ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 % make a phase plot
 plot(ebsd)
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
-{% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_01.png" %}
-</center><h2 id="2">Connection between grains and EBSD data</h2><p>As usual, we start by importing some EBSD data and computing grains</p>
+</center><h2 id="3">Connection between grains and EBSD data</h2><p>As usual, we start by importing some EBSD data and computing grains</p>
 {% highlight matlab %}
 close all
 mtexdata forsterite
@@ -183,7 +170,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_02.png" %}
-</center><h2 id="8">Visualize the misorientation within a grain</h2>
+</center><h2 id="9">Visualize the misorientation within a grain</h2>
 {% highlight matlab %}
 close
 plot(grain_selected.boundary,'linewidth',2)
@@ -194,7 +181,7 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_03.png" %}
-</center><h2 id="9">Testing on Bingham distribution for a single grain</h2><p>Although the orientations of an individual grain are highly concentrated, they may vary in the shape. In particular, if the grain was deformed by some process, we are interested in quantifications.</p>
+</center><h2 id="10">Testing on Bingham distribution for a single grain</h2><p>Although the orientations of an individual grain are highly concentrated, they may vary in the shape. In particular, if the grain was deformed by some process, we are interested in quantifications.</p>
 {% highlight matlab %}
 cs = ebsd(grain_selected).CS;
 ori = ebsd(grain_selected).orientations;
@@ -272,7 +259,7 @@ myGrain = grain2d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_06.png" %}
-</center><h2 id="14">Misorientation Analysis</h2><p>How to analyze misorientations.</p><h2 id="15">Definition</h2><p>In MTEX the misorientation between two orientations o1, o2 is defined as</p><p>\[ mis(o_1,o_2) = o_1^{-1} * o_2  \]</p><p>In the case of EBSD data, intragranular misorientations, misorientations between neighbouring grains, and misorientations between random measurements are of interest.</p><h2 id="16">The sample data set</h2><p>Let us first import some EBSD data</p>
+</center><h2 id="15">Misorientation Analysis</h2><p>How to analyze misorientations.</p><h2 id="16">Definition</h2><p>In MTEX the misorientation between two orientations o1, o2 is defined as</p><p>\[ mis(o_1,o_2) = o_1^{-1} * o_2  \]</p><p>In the case of EBSD data, intragranular misorientations, misorientations between neighbouring grains, and misorientations between random measurements are of interest.</p><h2 id="17">The sample data set</h2><p>Let us first import some EBSD data</p>
 {% highlight matlab %}
 mtexdata forsterite
 plotx2east
@@ -304,7 +291,7 @@ ebsd(grains(grains.grainSize<5)) = [];
 % smooth the grain boundaries a bit
 grains = smooth(grains,5);
 {% endhighlight %}
-<h2 id="18">Intragranular misorientations</h2><p>The intragranular misorientation is automatically computed while reconstructing the grain structure. It is stored as the property <code class="language-plaintext highlighter-rouge">mis2mean</code> within the ebsd variable and can be accessed by</p>
+<h2 id="19">Intragranular misorientations</h2><p>The intragranular misorientation is automatically computed while reconstructing the grain structure. It is stored as the property <code class="language-plaintext highlighter-rouge">mis2mean</code> within the ebsd variable and can be accessed by</p>
 {% highlight matlab %}
 % get the misorientations to mean
 mori = ebsd('Fo').mis2mean
@@ -319,8 +306,6 @@ mori = misorientation
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
- 
-  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_07.png" %}
@@ -375,8 +360,6 @@ oriRef = orientation
   size: 151452 x 1
   crystal symmetry : Forsterite (mmm)
   specimen symmetry: 1
- 
-  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <p>Now the misorientation axis with respect to the specimen reference system is computed via</p>
 {% highlight matlab %}
@@ -408,14 +391,14 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_12.png" %}
-</center><h2 id="27">Grain orientation spread (GOS)</h2>
+</center><h2 id="28">Grain orientation spread (GOS)</h2>
 {% highlight matlab %}
 plot(grains('fo'),grains('fo').GOS./degree,'micronbar','off')
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_13.png" %}
-</center><h2 id="28">Kernel average misorientation (KAM)</h2>
+</center><h2 id="29">Kernel average misorientation (KAM)</h2>
 {% highlight matlab %}
 KAM = ebsd('fo').KAM;
 plot(ebsd('fo'),KAM);
@@ -426,7 +409,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_14.png" %}
-</center><h2 id="29">Grain average misorientation (GAM)</h2><p>The grain average misorientation (GAM) is defined as the mean KAM within each grain. The following line can be taken as a blueprint how to average arbitrary properties within grains. The last argument <code class="language-plaintext highlighter-rouge">@nanmean</code> in this command indicates that the average should be taken as the mean ignoring NaNs. In order to a assign the maximum value to each grain replace this with <code class="language-plaintext highlighter-rouge">@max</code>.</p>
+</center><h2 id="30">Grain average misorientation (GAM)</h2><p>The grain average misorientation (GAM) is defined as the mean KAM within each grain. The following line can be taken as a blueprint how to average arbitrary properties within grains. The last argument <code class="language-plaintext highlighter-rouge">@nanmean</code> in this command indicates that the average should be taken as the mean ignoring NaNs. In order to a assign the maximum value to each grain replace this with <code class="language-plaintext highlighter-rouge">@max</code>.</p>
 {% highlight matlab %}
 GAM = accumarray(ebsd('fo').grainId, KAM, size(grains), @nanmean) ./degree;
 {% endhighlight %}
@@ -439,7 +422,7 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_15.png" %}
-</center><h2 id="31">Boundary misorientations</h2><p>The misorientations between adjacent grains are stored for each boundary segment seperately in <b>grains.boundary.misorientation</b></p>
+</center><h2 id="32">Boundary misorientations</h2><p>The misorientations between adjacent grains are stored for each boundary segment seperately in <b>grains.boundary.misorientation</b></p>
 {% highlight matlab %}
 plot(grains)
 
@@ -465,8 +448,6 @@ ans = misorientation
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Forsterite (mmm)
   antipodal:         true
- 
-  <a href="matlab:Euler(getappdata(0,'data2beDisplayed'))">show Euler angles</a>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_16.png" %}
@@ -483,7 +464,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_17.png" %}
-</center><p>In order to visualize the misorientation between any two adjacent grains, there are two possibilities in MTEX.</p><div><ul><li>plot the angle distribution for all phase combinations</li><li>plot the axis distribution for all phase combinations</li></ul></div><h2 id="34">The angle distribution</h2><p>The following commands plot the angle distributions of all phase transitions from Forsterite to any other phase.</p>
+</center><p>In order to visualize the misorientation between any two adjacent grains, there are two possibilities in MTEX.</p><div><ul><li>plot the angle distribution for all phase combinations</li><li>plot the axis distribution for all phase combinations</li></ul></div><h2 id="35">The angle distribution</h2><p>The following commands plot the angle distributions of all phase transitions from Forsterite to any other phase.</p>
 {% highlight matlab %}
 plotAngleDistribution(grains.boundary('Fo','Fo').misorientation,...
   'DisplayName','Forsterite-Forsterite')
@@ -565,7 +546,7 @@ legend('-dynamicLegend','Location','northwest') % update legend
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_21.png" %}
-</center><h2 id="38">The axis distribution</h2><p>Let's start with the boundary misorientation axis distribution</p>
+</center><h2 id="39">The axis distribution</h2><p>Let's start with the boundary misorientation axis distribution</p>
 {% highlight matlab %}
 close all
 plotAxisDistribution(bnd_FoFo.misorientation,'smooth')
@@ -593,7 +574,7 @@ mtexColorbar('multiples of random distribution')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainOrientationParameters_24.png" %}
-</center><h2 id="41">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
+</center><h2 id="42">Grain properties</h2><p>Grains are stored as a long list of several properties. Please find below a table of most of the properties that are stored or can be computed for grains</p><p>
    <table class="usertable">
       <tr>
          <td>
