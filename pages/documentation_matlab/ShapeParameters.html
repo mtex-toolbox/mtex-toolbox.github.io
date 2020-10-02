@@ -65,7 +65,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number of subgrain boundaries</p>
+               <p>number of inner boundaries</p>
          </td>
          <td>
                <p>
@@ -75,7 +75,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>length subgrain boundaries in \(\mu m\)</p>
+               <p>length of inner boundaries in \(\mu m\)</p>
          </td>
       </tr>
       <tr>
@@ -88,6 +88,50 @@ To make changes, update the MATLAB code and republish this document.
          </td>
          <td>
                <p>diameter in \(\mu m\)</p>
+         </td>
+         <td>
+               <p>
+                  <a href="grain2d.calliper.html">
+                     <tt>grains.calliper</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>calliper or Feret diameter</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.equivalentPerimeter.html">
+                     <tt>grains.equivalentPerimeter</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>perimeter of a circle with the same area</p>
+         </td>
+         <td>
+               <p>
+                  <a href="grain2d.equivalentRadius.html">
+                     <tt>grains.equivalentRadius</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>radius of a circle with the same area</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain2d.shapeFactor.html">
+                     <tt>grains.shapeFactor</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>perimeter / equivalent perimeter</p>
          </td>
          <td>
                <p>
@@ -227,7 +271,7 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_01.png" %}
-</center><h2 id="3">Grain size vs. grain area</h2><p>The most basic properties are grainSize and grain area. Those can be computed by</p>
+</center><h2 id="3">Grain size vs. grain area and boundary size vs. perimeter</h2><p>The most basic properties are grainSize and grain area. Those can be computed by</p>
 {% highlight matlab %}
 grains(9).grainSize
 grains(9).area
@@ -239,52 +283,7 @@ ans =
 ans =
    1.9540e+03
 {% endhighlight %}
-<p>Hereby <code class="language-plaintext highlighter-rouge">grainSize</code> referes to the number of pixels that belong to a certain grain while <code class="language-plaintext highlighter-rouge">area</code> represents the actual area measured in <code class="language-plaintext highlighter-rouge">(&micro;m)^2</code>. Simarly the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary in number of segments and in in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
-{% highlight matlab %}
-grains(9).boundarySize
-grains(9).perimeter
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-     4
-ans =
-  233.1561
-{% endhighlight %}
-<p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
-{% highlight matlab %}
-grains(9).diameter
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-  106.0660
-{% endhighlight %}
-<p>The diameter is a special case of the caliper or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain.</p>
-{% highlight matlab %}
-grains(9).calliper('longest')
-grains(9).calliper('shortest')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-  106.0660
-ans =
-   28.8870
-{% endhighlight %}
-<p>Another way to investigate the perimeter is using the grain boundary. The first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
-{% highlight matlab %}
-length(grains(9).boundary)
-sum(grains(9).boundary.segLength)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-     4
-ans =
-  233.1561
-{% endhighlight %}
-<h2 id="8">Histograms</h2>
+<p>Hereby <code class="language-plaintext highlighter-rouge">grainSize</code> referes to the number of pixels that belong to a certain grain while <code class="language-plaintext highlighter-rouge">area</code> represents the actual area measured in <code class="language-plaintext highlighter-rouge">(&micro;m)^2</code>. We may analyze the distribution of grains by grain area using a histogram.</p>
 {% highlight matlab %}
 close all
 histogram(grains.area)
@@ -300,17 +299,70 @@ xlabel('grain area')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_03.png" %}
-</center><h2 id="10">Scatter plot</h2><p>Scatter plots provide an efficient way to check whether two or more properties are correlated. As an example lets look at the paris and the shape factor</p>
+</center><p>Simarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary in number of segments and in in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
 {% highlight matlab %}
-close all
-scatter(grains.paris,grains.shapeFactor)
-xlabel('paris')
-ylabel('shape factor')
+grains(9).boundarySize
+grains(9).perimeter
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     4
+ans =
+  233.1561
+{% endhighlight %}
+<p>We may compute these quantities also explicitely from the grain boundary segents. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
+{% highlight matlab %}
+length(grains(9).boundary)
+sum(grains(9).boundary.segLength)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     4
+ans =
+  233.1561
+{% endhighlight %}
+<h2 id="8">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
+{% highlight matlab %}
+grains(9).diameter
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+  106.0660
+{% endhighlight %}
+<p>The diameter is a special case of the caliper or Feret diameter of a grain that is explained in detail in the section <a href="ProjectionBasedParameters.html">Projection based parameters</a>.</p><p>In contrast the <a href="grain2d.equivalentRadius.html">equivalent radius</a> is the radius of a circle with the same area as the grain. Naturally, the equivalent radius is always smaller than the actual radius of the grains. Similarly, the <a href="grain2d.equivalentPerimeter">equivalent perimeter</a> is defined as the perimeter of the circle the same area and is always smaller then the actual perimeter.</p>
+{% highlight matlab %}
+2*grains(9).equivalentRadius
+
+grains(9).equivalentPerimeter
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   49.8787
+ans =
+  156.6986
+{% endhighlight %}
+<p>As a consequence, the quotient between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The shape factor is measure on how different a certain shape is from a circle. A similar measure is the <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a> that is explained in detail in the section <a href="https://mtex-toolbox.github.io/HullBasedParameters.html">convex hull parameters.</a></p>
+{% highlight matlab %}
+plot(grains,grains.shapeFactor)
+mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_04.png" %}
-</center><p>Obviously, there is a strong correlation between those two quantities.</p><h2 id="12">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+</center><h2 id="11">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
 {% highlight matlab %}
+% consider the entire data set
+mtexdata forsterite
+
+% reconstruct grains
+grains = calcGrains(ebsd('indexed'));
+
+% smooth them
+grains = smooth(grains,5);
+
 close all
 scatter(grains.equivalentRadius,grains.perimeter)
 xlabel('equivalent radius')
@@ -327,6 +379,19 @@ hold on
 plot([10,10^4],exp(ab(2) + ab(1) * log([10,10^4])),'LineWidth',3)
 hold off
 {% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD  
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, x, y
+ Scan unit : um
+{% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_05.png" %}
 </center><p>The slope of the linear function is the fractal dimension.</p>
@@ -336,6 +401,6 @@ fractalDimension = ab(1)
 
 {% highlight plaintext %}
 fractalDimension =
-    1.0222
+    1.0340
 {% endhighlight %}
-</div></body></html>
+<p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p></div></body></html>
