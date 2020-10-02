@@ -25,7 +25,7 @@ In case you experience any problems, especiall on Mac OSX, have a look at our
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.5.beta.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.5.beta.3.zip) ||| October 2020 ||| low angle grain boundary analysis, orientation embeddings, [changelog](changelog.html) ||| 0
+[**mtex-5.5.beta.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.beta.3/mtex-5.5.beta.3.zip) ||| October 2020 ||| low angle grain boundary analysis, orientation embeddings, [changelog](changelog.html) ||| 0
 [**mtex-5.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ||| July 2020 ||| parent grain reconstruction, [changelog](changelog.html) ||| 2071
 [**mtex-5.3.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.1/mtex-5.3.1.zip) ||| June 2020 ||| bug fixes, boundary curvature, [changelog](changelog.html) ||| 980
 [**mtex-5.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip) ||| April 2020 ||| performance updates, [changelog](changelog.html) ||| 1980
