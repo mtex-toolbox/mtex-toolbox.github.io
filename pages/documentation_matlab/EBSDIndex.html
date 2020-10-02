@@ -1,6 +1,6 @@
 ---
 title: The Index of EBSD data
-last_updated: 01-Apr-2020
+last_updated: 02-Oct-2020
 sidebar: documentation_sidebar
 permalink: EBSDIndex.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Index of EBSD data</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_EBSDIndex.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDIndex.m">
+      --><title>The Index of EBSD data</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-02"><meta name="DC.source" content="script_EBSDIndex.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDIndex.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In previous chapters we have discussed how to select EBSD data by properties. In this chapter we are intested in the order the EBSD are stored within MTEX. Lets start by importing some sample data</p>
 {% highlight matlab %}
 mtexdata twins
@@ -22,7 +22,7 @@ ebsd = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -36,13 +36,13 @@ plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_01.png" %}
-</center><p>In the above plot each square corresponds to entry in the variable <code class="language-plaintext highlighter-rouge">ebsd</code>. Lets visualize the order</p>
+</center><p>In the above plot each square corresponds to one entry in the variable <code class="language-plaintext highlighter-rouge">ebsd</code>. Lets visualize the order</p>
 {% highlight matlab %}
 text(ebsd,1:length(ebsd))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_02.png" %}
-</center><p>We may easily select specific measurement pixels by specifying its indeces</p>
+</center><p>We may easily select specific measurement pixels by specifying their indeces</p>
 {% highlight matlab %}
 hold on
 plot(ebsd(16:18),'edgeColor','red','facecolor','none','linewidth',4)
@@ -108,7 +108,7 @@ ebsd = EBSDhex
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
      0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
  
- Properties: ci, grainid, iq, sem_signal, x, y
+ Properties: ci, grainid, iq, sem_signal, x, y, oldId
  Scan unit : um
  Grid size (hex): 97 x 84
 {% endhighlight %}
@@ -127,4 +127,16 @@ text(ebsd,str)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_09.png" %}
+</center><h2 id="13">Cube Coordinates</h2><p>In hexognal grids it is sometimes advantageous to use three digit cube coordinates to index the cell. This can be done using the commands <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a>. Much more details on indexing hex grids can be found at <a href="https://www.redblobgames.com/grids/hexagons/">here</a>.</p>
+{% highlight matlab %}
+plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off')
+axis off
+
+[i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));
+[x,y,z] = ebsd.hex2cube(i,j);
+str = arrayfun(@(a,b,c) ['(' int2str(a) ',' int2str(b) ',' int2str(c) ')'],x,y,z,'UniformOutput',false);
+text(ebsd,str)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDIndex_10.png" %}
 </center></div></body></html>
