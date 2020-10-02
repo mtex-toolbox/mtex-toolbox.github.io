@@ -17,32 +17,33 @@ To make changes, update the MATLAB code and republish this document.
       <tr>
          <td>
                <p>
-                  <a href="grain2d.centroid.html">
-                     <tt>grains.centroid</tt>
+                  <a href="grain2d.principalComponents.html">
+                     <tt>principalComponents</tt>
                   </a>
                </p>
          </td>
          <td>
-               <p>midpoint of the ellipse</p>
+               <p>angle, length and width of the fitted ellipse</p>
+         </td>
+         <td>
+               <p/>
          </td>
       </tr>
       <tr>
          <td>
                <p>
                   <a href="grain2d.longAxis.html">
-                     <tt>grains.longAxis</tt>
+                     <tt>longAxis</tt>
                   </a>
                </p>
          </td>
          <td>
                <p>long axis of the ellipse</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <a href="grain2d.shortAxis.html">
-                     <tt>grains.shortAxis</tt>
+                     <tt>shortAxis</tt>
                   </a>
                </p>
          </td>
@@ -53,8 +54,18 @@ To make changes, update the MATLAB code and republish this document.
       <tr>
          <td>
                <p>
+                  <a href="grain2d.centroid.html">
+                     <tt>centroid</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>midpoint of the ellipse</p>
+         </td>
+         <td>
+               <p>
                   <a href="grain2d.aspectRatio.html">
-                     <tt>grains.aspectRatio</tt>
+                     <tt>aspectRatio</tt>
                   </a>
                </p>
          </td>
@@ -62,23 +73,11 @@ To make changes, update the MATLAB code and republish this document.
                <p>quotient long axis / short axis</p>
          </td>
       </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.principalComponents.html">
-                     <tt>grains.principalComponents</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>angle, length and width of the fitted ellipse</p>
-         </td>
-      </tr>
    </table>
 </p><p>In order to demonstrate these properties we start by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
-mtexdata forsterite
+mtexdata forsterite silent
 
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
@@ -99,19 +98,6 @@ plot(ebsd('fo'),ebsd('fo').orientations)
 hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_01.png" %}

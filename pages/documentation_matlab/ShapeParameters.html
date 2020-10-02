@@ -234,7 +234,7 @@ To make changes, update the MATLAB code and republish this document.
 </p><p>We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
-mtexdata forsterite
+mtexdata forsterite silent
 
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
@@ -255,19 +255,6 @@ plot(ebsd('fo'),ebsd('fo').orientations)
 hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_01.png" %}
@@ -299,7 +286,7 @@ xlabel('grain area')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_03.png" %}
-</center><p>Simarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary in number of segments and in in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
+</center><p>Simarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
 {% highlight matlab %}
 grains(9).boundarySize
 grains(9).perimeter
@@ -345,14 +332,14 @@ ans =
 ans =
   156.6986
 {% endhighlight %}
-<p>As a consequence, the quotient between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The shape factor is measure on how different a certain shape is from a circle.</p>
+<p>As a consequence, the ratio between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> amd measures how different a certain shape is from a circle.</p>
 {% highlight matlab %}
 plot(grains,grains.shapeFactor)
-mtexColorbar
+mtexColorbar('title','shape factor')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_04.png" %}
-</center><p>A second measure for the discrepancy between the actual shape and a circle is the relative difference between the <a href="grain2d.perimeter.html">perimeter</a> and the <a href="grain2d.equivalentPerimeter.html">equivalentPerimeter</a></p>
+</center><p>A second measure for the discrepancy between the actual shape and a circle is the relative difference between the <a href="grain2d.perimeter.html"><code class="language-plaintext highlighter-rouge">perimeter</code></a> and the <a href="grain2d.equivalentPerimeter.html"><code class="language-plaintext highlighter-rouge">equivalentPerimeter</code></a></p>
 {% highlight matlab %}
 plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
 setColorRange([0,0.5])
@@ -360,22 +347,14 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_05.png" %}
-</center><p>In this plot round shapes will have values close to zero while concave shapes will get values up to \(0.5\). A similar measure is the <a href="grain2d.shapeFactor.html">shape factor</a> which is defined as the ratio between the grain perimeter and the equivalent perimeter</p>
-{% highlight matlab %}
-plot(grains,grains.shapeFactor)
-setColorRange([1,2])
-mtexColorbar('title','shape factor')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_06.png" %}
-</center><p>A third measure is the <a href="grain2d.paris.html">paris</a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull. It is explained in more detail in the section <a href="https://mtex-toolbox.github.io/HullBasedParameters.html">convex hull parameters.</a></p>
+</center><p>In this plot round shapes will have values close to zero while concave shapes will get values up to \(0.5\).</p><p>A third measure is the <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull. It is explained in more detail in the section <a href="HullBasedParameters.html">convex hull parameters.</a></p>
 {% highlight matlab %}
 plot(grains,grains.paris)
 mtexColorbar('title','paris')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_07.png" %}
-</center><h2 id="14">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+{% include inline_image.html file="ShapeParameters_06.png" %}
+</center><h2 id="13">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
 {% highlight matlab %}
 % consider the entire data set
 mtexdata forsterite
@@ -416,7 +395,7 @@ ebsd = EBSD
  Scan unit : um
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_08.png" %}
+{% include inline_image.html file="ShapeParameters_07.png" %}
 </center><p>The slope of the linear function is the fractal dimension.</p>
 {% highlight matlab %}
 fractalDimension = ab(1)
