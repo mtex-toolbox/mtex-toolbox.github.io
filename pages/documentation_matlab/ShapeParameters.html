@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters - Basic Properties
-last_updated: 29-Sep-2020
+last_updated: 02-Oct-2020
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-29"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
+      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-02"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedProperties.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasesParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p><p>
    <table class="usertable">
       <tr>
@@ -309,4 +309,33 @@ ylabel('shape factor')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_04.png" %}
-</center><p>Obviously, there is a strong correlation between those two quantities.</p></div></body></html>
+</center><p>Obviously, there is a strong correlation between those two quantities.</p><h2 id="12">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+{% highlight matlab %}
+close all
+scatter(grains.equivalentRadius,grains.perimeter)
+xlabel('equivalent radius')
+ylabel('perimeter')
+
+% set axes to logarithmic
+logAxis(gca, [10,10^4],[10^2,10^5])
+
+% fit a linear function in log space
+ab = polyfit(log(grains.equivalentRadius),log(grains.perimeter),1);
+
+% plot it
+hold on
+plot([10,10^4],exp(ab(2) + ab(1) * log([10,10^4])),'LineWidth',3)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ShapeParameters_05.png" %}
+</center><p>The slope of the linear function is the fractal dimension.</p>
+{% highlight matlab %}
+fractalDimension = ab(1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+fractalDimension =
+    1.0222
+{% endhighlight %}
+</div></body></html>
