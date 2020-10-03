@@ -1,6 +1,6 @@
 ---
 title: Projection Based Shape Parameters
-last_updated: 14-Jun-2020
+last_updated: 03-Oct-2020
 sidebar: documentation_sidebar
 permalink: ProjectionBasedParameters.html
 folder: documentation
@@ -11,71 +11,115 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Projection Based Shape Parameters</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-14"><meta name="DC.source" content="script_ProjectionBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ProjectionBasedParameters.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss shape parameters grains that depend on one dimensional projections. Lets start with a overview of all such parameters.</p><p>
+      --><title>Projection Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-03"><meta name="DC.source" content="script_ProjectionBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ProjectionBasedParameters.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss shape parameters grains that depend on one dimensional projections, i.e.,</p><p>
    <table class="usertable">
       <tr>
          <td>
                <p>
-                  <a href="grain2d.calliper.html">
-                     <tt>grains.calliper</tt>
+                  <a href="grain2d.caliper.html">
+                     <tt>caliper</tt>
                   </a>
                </p>
          </td>
          <td>
-               <p>calliper or Feret diameter</p>
+               <p>caliper or Feret diameter in \(\mu m\)</p>
          </td>
-      </tr>
-      <tr>
          <td>
                <p>
                   <a href="grain2d.diameter.html">
-                     <tt>grains.diameter</tt>
+                     <tt>diameter</tt>
                   </a>
                </p>
          </td>
          <td>
-               <p>diameter in <tt>grains.scanUnit</tt>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.paror.html">
-                     <tt>grains.paror</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>cummulative particle projection function</p>
+               <p>diameter in \(\mu m\)</p>
          </td>
       </tr>
    </table>
 </p><p>In order to demonstrate these parameters we first import a small sample data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
-mtexdata forsterite
+mtexdata forsterite silent
 
-% restrict it to a subregion of interest.
-ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
-
-% remove all not indexed pixels
-ebsd = ebsd('indexed');
-
-% reconstruct grains
-[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
-
-% smooth them
+% reconstruct grains and smooth them
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
+ebsd(grains(grains.grainSize<5)) = [];
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
 grains = smooth(grains,5);
 
-% plot the orientation data of the Forsterite phase
-plot(ebsd('fo'),ebsd('fo').orientations)
+% plot all grains and highlight a specific one
+plot(grains)
 
-% plot the grain boundary on top of it
+id = 734;
 hold on
-plot(grains.boundary,'lineWidth',2)
+plot(grains(id).boundary,'lineWidth',5,'linecolor','blue')
 hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_01.png" %}
+</center><p>The most well known projection based paramter is the <a href="grain2d.diamter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> which refers to the longest distance between any two boundary points and is given in \(\mu m\).</p>
+{% highlight matlab %}
+grains(id).diameter
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   6.9584e+03
+{% endhighlight %}
+<p>The diameter is a special case of the <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain</p>
+{% highlight matlab %}
+grains(id).caliper('longest')
+grains(id).caliper('shortest')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   6.9584e+03
+ans =
+   1.6078e+03
+{% endhighlight %}
+<p>We may trace the caliper with respect to projection direction</p>
+{% highlight matlab %}
+close all
+omega = linspace(0,180);
+plot(omega,grains(id+(-1:2)).caliper(omega*degree),'LineWidth',2)
+xlim([0,180])
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_02.png" %}
+</center><p>The difference between the longest and the shortest caliper can also be taken as a measure how round a grain is. The function <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> provides as second output argument also the angle <code class="language-plaintext highlighter-rouge">omega</code> of the longest distance between any vertices of the grain. This direction is comparable to the <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> computed from an ellipse fitted to the grain.</p>
+{% highlight matlab %}
+cMin = grains.caliper('shortest');
+[cMax, omega] = grains.caliper('longest');
+
+longAxis = vector3d.byPolar(pi/2,omega,'antipodal');
+
+plot(grains,(cMax - cMin)./cMax,'micronbar','off')
+mtexColorbar('title','TODO')
+
+% and on top the long axes
+hold on
+quiver(grains,grains.longAxis,'Color','white')
+quiver(grains,longAxis,'Color','red')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_03.png" %}
+</center><p>TODO: some more to explain <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">grains.paror</code></a>   cummulative particle projection function</p>
+{% highlight matlab %}
+mtexdata forsterite
+[grains,ebsd.grainId] = ebsd.calcGrains;
+ebsd(grains(grains.grainSize<50))=[];
+[grains,ebsd.grainId] =ebsd.calcGrains;
+outerBoundary_id = any(grains.boundary.grainId==0,2);
+grain_id = grains.boundary(outerBoundary_id).grainId;
+ grain_id(grain_id==0) = [];
+ grains(grain_id) = [];
+ grains=grains('indexed');
+
+ cumpl = paror(grains);
+ plot(grains)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -91,26 +135,12 @@ ebsd = EBSD
  Scan unit : um
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_01.png" %}
-</center><h2 id="2">Direct Shape Paramters - size, area, diameter, perimeter and calliper</h2><p>The most well known projection based paramter  is the <a href="grain2d.diamter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> which refers to the longest distance between any two boundary points and is given in &micro;m.</p>
+{% include inline_image.html file="ProjectionBasedParameters_04.png" %}
+</center>
 {% highlight matlab %}
-grains(9).diameter
+ figure
+ plot(0:180,cumpl);
 {% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-   40.5107
-{% endhighlight %}
-<p>The diameter is a special case of the <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. Hence, the length of the longest projection is coincides with the diameter, while the quotient between longest and shortest projection gives an indication about the shape of the grain</p>
-{% highlight matlab %}
-grains(9).calliper('longest')
-grains(9).calliper('shortest')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-   40.5107
-ans =
-    6.3359
-{% endhighlight %}
-<p>TODO: some more to explain</p></div></body></html>
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_05.png" %}
+</center></div></body></html>
