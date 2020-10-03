@@ -1,6 +1,6 @@
 ---
 title: Ellipse Based Shape Parameters
-last_updated: 02-Oct-2020
+last_updated: 03-Oct-2020
 sidebar: documentation_sidebar
 permalink: EllipseBasedParameters.html
 folder: documentation
@@ -11,24 +11,9 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-02"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. The table below summarizes all these propeties</p><p>
+      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-03"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a>  the following properties based on the fitted ellipses are avaiable.</p><p>
    <table class="usertable">
-      <tr>
-         <td>
-               <p>
-                  <a href="grain2d.principalComponents.html">
-                     <tt>principalComponents</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>angle, length and width of the fitted ellipse</p>
-         </td>
-         <td>
-               <p/>
-         </td>
-      </tr>
       <tr>
          <td>
                <p>
@@ -38,7 +23,8 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>long axis of the ellipse</p>
+               <p>long axis as <a href="vector3d.vector3d.html">vector3d</a>
+               </p>
          </td>
          <td>
                <p>
@@ -48,7 +34,8 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>short axis of the ellipse</p>
+               <p>short axis as <a href="vector3d.vector3d.html">vector3d</a>
+               </p>
          </td>
       </tr>
       <tr>
@@ -60,7 +47,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>midpoint of the ellipse</p>
+               <p>midpoint</p>
          </td>
          <td>
                <p>
@@ -70,7 +57,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>quotient long axis / short axis</p>
+               <p>long axis / short axis</p>
          </td>
       </tr>
    </table>
@@ -82,13 +69,8 @@ mtexdata forsterite silent
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-% remove all not indexed pixels
-ebsd = ebsd('indexed');
-
-% reconstruct grains
-[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
-
-% smooth them
+% reconstruct grains and smooth them
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
 grains = smooth(grains,5);
 
 % plot the orientation data of the Forsterite phase
