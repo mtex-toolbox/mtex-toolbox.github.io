@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters - Basic Properties
-last_updated: 02-Oct-2020
+last_updated: 08-Oct-2020
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-02"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
+      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-08"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedProperties.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasesParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p><p>
    <table class="usertable">
       <tr>
@@ -92,12 +92,12 @@ To make changes, update the MATLAB code and republish this document.
          <td>
                <p>
                   <a href="grain2d.calliper.html">
-                     <tt>calliper</tt>
+                     <tt>caliper</tt>
                   </a>
                </p>
          </td>
          <td>
-               <p>calliper or Feret diameter</p>
+               <p>caliper or Feret diameter</p>
          </td>
       </tr>
       <tr>
@@ -279,15 +279,16 @@ ylabel('number of grains')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_02.png" %}
-</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.hist.html">hist</a></p>
+</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a></p>
 {% highlight matlab %}
-hist(grains,grains.area)
+histogram(grains)
 xlabel('grain area')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_03.png" %}
-</center><p>Simarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
-{% highlight matlab %}
+
+%
+% Simarly as |grainSize| and |area|, the one-dimensional meassures
+% |boundarySize| and |perimeter| give the length of the grain boundary as
+% number of segments and in |µm|, respectively.
+
 grains(9).boundarySize
 grains(9).perimeter
 {% endhighlight %}
@@ -298,7 +299,9 @@ ans =
 ans =
   233.1561
 {% endhighlight %}
-<p>We may compute these quantities also explicitely from the grain boundary segents. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
+<center>
+{% include inline_image.html file="ShapeParameters_03.png" %}
+</center><p>We may compute these quantities also explicitely from the grain boundary segents. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
 {% highlight matlab %}
 length(grains(9).boundary)
 sum(grains(9).boundary.segLength)
@@ -310,7 +313,7 @@ ans =
 ans =
   233.1561
 {% endhighlight %}
-<h2 id="8">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
+<h2 id="7">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
 {% highlight matlab %}
 grains(9).diameter
 {% endhighlight %}
@@ -354,10 +357,10 @@ mtexColorbar('title','paris')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_06.png" %}
-</center><h2 id="13">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+</center><h2 id="12">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
 {% highlight matlab %}
 % consider the entire data set
-mtexdata forsterite
+mtexdata forsterite silent
 
 % reconstruct grains
 grains = calcGrains(ebsd('indexed'));
@@ -380,19 +383,6 @@ ab = polyfit(log(grains.equivalentRadius),log(grains.perimeter),1);
 hold on
 plot([10,10^4],exp(ab(2) + ab(1) * log([10,10^4])),'LineWidth',3)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_07.png" %}
