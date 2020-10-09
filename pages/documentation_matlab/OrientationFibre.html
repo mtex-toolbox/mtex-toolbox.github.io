@@ -1,6 +1,6 @@
 ---
 title: Fibres of Orientations
-last_updated: 01-Apr-2020
+last_updated: 09-Oct-2020
 sidebar: documentation_sidebar
 permalink: OrientationFibre.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fibres of Orientations</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_OrientationFibre.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationFibre.m">
+      --><title>Fibres of Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-09"><meta name="DC.source" content="script_OrientationFibre.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationFibre.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>A fibre in orientation space is essentially a line connecting two orientations and can be represented in MTEX by a single variable of type <a href="fibre.fibre.html">fibre</a>. To illustrate the definition of a fibre we first define <b>cube</b> and <b>goss</b> orientation</p>
 {% highlight matlab %}
 % define crystal and specimen symmetry
@@ -79,7 +79,27 @@ f = fibre
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_03.png" %}
-</center><h2 id="6">Defining a fibre by directions</h2><p>Alternatively, a fibre can also be defined by a pair of a crystal and a specimen direction. In this case it consists of all orientations that alignes the crystal direction parallel to the specimen direction. As an example we define the fibre of all orientations such that the c-axis (001) is parallel to the z-axis by</p>
+</center><h2 id="6">Fibres in pole figures and inverse pole figures</h2><p>MTEX supports for fibres all the plotting options that are available for orientations. This included <a href="OrientationPoleFigure.html">pole figures</a> and <a href="OrientationInversePoleFigure.html">inverse pole figures</a> using the commands <a href="fibre.plotPDF.html"><code class="language-plaintext highlighter-rouge">plotPDF</code></a> and <a href="fibre.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a>.</p>
+{% highlight matlab %}
+plotPDF(f,Miller({1,1,0},{1,1,1},cs),'linewidth',3,'lineColor','orange')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationFibre_04.png" %}
+</center><p>An important difference to orientation plots is that fibres are not automatically symmetrised when plotted. To achieve this use the command <a href="fibre.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>.</p>
+{% highlight matlab %}
+plotPDF(f.symmetrise,Miller({1,1,0},{2,1,0},{1,1,1},cs),'linewidth',3,'lineColor','orange')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationFibre_05.png" %}
+</center><p>Inverse pole figures are by default restricted to the fundamental sector. You may use the option <code class="language-plaintext highlighter-rouge">'complete'</code> to plot the entire sphere.</p>
+{% highlight matlab %}
+% an inverse pole figure plot
+r = [vector3d(1,1,0),vector3d(2,1,0),vector3d(1,1,1)];
+plotIPDF(f.symmetrise,r,'linewidth',3,'lineColor','orange')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationFibre_06.png" %}
+</center><h2 id="9">Defining a fibre by directions</h2><p>Alternatively, a fibre can also be defined by a pair of a crystal and a specimen direction. In this case it consists of all orientations that alignes the crystal direction parallel to the specimen direction. As an example we define the fibre of all orientations such that the c-axis (001) is parallel to the z-axis by</p>
 {% highlight matlab %}
 f = fibre(Miller(0,0,1,cs),vector3d.Z)
 
@@ -94,7 +114,7 @@ f = fibre
  h: (001)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationFibre_04.png" %}
+{% include inline_image.html file="OrientationFibre_07.png" %}
 </center><p>If both directions of type Miller the fibre corresponds to all misorientations which have these two direcetion parallel.</p><p>Finally, a fibre can be defined by an initial orientation <b>ori1</b> and a direction <b>h</b>, i.e., all orientations of this fibre satisfy</p>
 {% highlight matlab %}
 ori = ori1 * rot(h,omega)
@@ -118,8 +138,8 @@ f = fibre
  h: (111)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationFibre_05.png" %}
-</center><h2 id="8">predefined fibres</h2><p>MTEX includes also a list of predefined fibres, e.g., alpha-, beta-, gamma-, epsilon-, eta- and tau fibres. Those can be defined by</p>
+{% include inline_image.html file="OrientationFibre_08.png" %}
+</center><h2 id="11">Predefined fibres</h2><p>MTEX includes also a list of predefined fibres, e.g., alpha-, beta-, gamma-, epsilon-, eta- and tau fibres. Those can be defined by</p>
 {% highlight matlab %}
 beta = fibre.beta(cs,'full');
 {% endhighlight %}
@@ -147,14 +167,14 @@ odf = ODF
     weight: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationFibre_06.png" %}
-</center><h2 id="10">Visualize an ODF along a fibre</h2>
+{% include inline_image.html file="OrientationFibre_09.png" %}
+</center><h2 id="13">Visualize an ODF along a fibre</h2>
 {% highlight matlab %}
 plot(odf,fibre.gamma(cs))
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationFibre_07.png" %}
-</center><h2 id="11">Compute volume of fibre portions</h2>
+{% include inline_image.html file="OrientationFibre_10.png" %}
+</center><h2 id="14">Compute volume of fibre portions</h2>
 {% highlight matlab %}
 100 * volume(odf,beta,10*degree)
 {% endhighlight %}
