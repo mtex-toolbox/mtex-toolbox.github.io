@@ -27,7 +27,7 @@ scientists, geologists and mathematicians.
 ### Troubleshooting, Bugs, Contact and Mailing List
 
 
- * [MTEX forum](https://groups.google.com/forum/?fromgroups=#!forum/mtexmail)
+ * [MTEX forum](https://github.com/mtex-toolbox/mtex/discussions)
   -- Questions, Discussions, Announcements.
  * [report issues](https://github.com/mtex-toolbox/mtex/issues) -- Every bug
    report is welcome.
