@@ -1,6 +1,6 @@
 ---
 title: Ellipse Based Shape Parameters
-last_updated: 15-Oct-2020
+last_updated: 16-Oct-2020
 sidebar: documentation_sidebar
 permalink: EllipseBasedParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-15"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
+      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-16"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a>  the following properties based on the fitted ellipses are avaiable.</p><p>
    <table class="usertable">
       <tr>
@@ -138,7 +138,8 @@ hold off
 {% include inline_image.html file="EllipseBasedParameters_05.png" %}
 </center>
 {% highlight matlab %}
-figure
+close all
+
 [freq,bc] = calcTDF(grains('fo'),'binwidth',3*degree);
 plotTDF(bc,freq/sum(freq),'linecolor','g');
 
@@ -159,13 +160,11 @@ cPerpE = caliper(grains('en'),'shortestPerp');
 [freqF,bcF] = calcTDF(cPerpF.rho, 'weights',cPerpF.norm, 'binwidth',3*degree);
 [freqE,bcE] = calcTDF(cPerpE.rho, 'weights',cPerpE.norm, 'binwidth',3*degree);
 
-legend('hide'); nextAxis
-plotTDF(bcF,freqF/sum(freqF),'linecolor','g');
+plotTDF(bcF,freqF/sum(freqF));
 hold on
-plotTDF(bcE,freqE/sum(freqE),'linecolor','b');
+plotTDF(bcE,freqE/sum(freqE));
 hold off
 legend('Forsterite','Enstatite','Location','eastoutside')
-mtexTitle('normal to shortest axis [n.t.s.]')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_07.png" %}
@@ -174,10 +173,9 @@ mtexTitle('normal to shortest axis [n.t.s.]')
 pdfF = circdensity(bcF, freqF, 5*degree,'sum');
 pdfE = circdensity(bcE, freqE, 5*degree,'sum');
 
-legend('hide'); nextAxis(1,3)
-plotTDF(bcF,pdfF,'linecolor','g','linestyle',':');
+plotTDF(bcF,pdfF);
 hold on
-plotTDF(bcE,pdfE,'linecolor','b','linestyle',':');
+plotTDF(bcE,pdfE);
 hold off
 mtexTitle('n.t.s. density estimate')
 legend('Forsterite','Enstatite','Location','eastoutside')
@@ -190,7 +188,7 @@ legend('Forsterite','Enstatite','Location','eastoutside')
 plotTDF(bcF,freqF/sum(freqF));
 pdfF = circdensity(bcF, freqF, 5*degree,'sum');
 hold on
-plotTDF(bcF,pdfF,'linecolor','g');
+plotTDF(bcF,pdfF);
 hold off
 mtexTitle('Forsterite grain boundaries')
 nextAxis
@@ -198,23 +196,23 @@ nextAxis
 plotTDF(bcE,freqE/sum(freqE));
 pdfE = circdensity(bcE, freqE, 5*degree,'sum');
 hold on
-plotTDF(bcE,pdfE,'linecolor','b');
+plotTDF(bcE,pdfE);
 hold off
 mtexTitle('Enstatite grain boundaries')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_09.png" %}
-</center><p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. The little peaks at 0 and 90 degree are very likely still related to this sampling artifact.</p><p>If we just add up all the individual elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape.</p>
+</center><p><b>Characteristic Shape</b></p><p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. The little peaks at 0 and 90 degree are very likely still related to this sampling artifact.</p><p>If we just add up all the individual elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape.</p>
 {% highlight matlab %}
 [csAngleF, csRadiusF] = characteristicShape(bcF,freqF);
 [csAngleE, csRadiusE] = characteristicShape(bcE,freqE);
-nextAxis
-plotTDF(csAngleF,csRadiusF,'nogrid','nolabels','linecolor','g');
+
+close all
+plotTDF(csAngleF,csRadiusF,'nolabels');
 hold on
-plotTDF(csAngleE,csRadiusE,'nogrid','nolabels','linecolor','b');
+plotTDF(csAngleE,csRadiusE,'nolabels');
 hold off
-mtexTitle('Characteristic shapes')
-legend('Forsterite','Enstatite','Location','southoutside')
+legend('Forsterite','Enstatite','Location','eastoutside')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_10.png" %}
