@@ -25,17 +25,17 @@ In case you experience any problems, especiall on Mac OSX, have a look at our
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.5.beta.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.beta.3/mtex-5.5.beta.3.zip) ||| October 2020 ||| low angle grain boundary analysis, orientation embeddings, [changelog](changelog.html) ||| 0
-[**mtex-5.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ||| July 2020 ||| parent grain reconstruction, [changelog](changelog.html) ||| 2071
-[**mtex-5.3.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.1/mtex-5.3.1.zip) ||| June 2020 ||| bug fixes, boundary curvature, [changelog](changelog.html) ||| 980
-[**mtex-5.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip) ||| April 2020 ||| performance updates, [changelog](changelog.html) ||| 1980
-[**mtex-5.2.8.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.8/mtex-5.2.8.zip) ||| January 2020 ||| plasticity tensors, [changelog](changelog.html) ||| 2693
-[**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](changelog.html) ||| 8069
+[**mtex-5.5.beta.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.beta.3/mtex-5.5.beta.3.zip) ||| October 2020 ||| low angle grain boundary analysis, orientation embeddings, [changelog](changelog.html) ||| https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.5.beta.3/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square
+[**mtex-5.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ||| July 2020 ||| parent grain reconstruction, [changelog](changelog.html) ||| 2310
+[**mtex-5.3.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.1/mtex-5.3.1.zip) ||| June 2020 ||| bug fixes, boundary curvature, [changelog](changelog.html) ||| 1034
+[**mtex-5.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip) ||| April 2020 ||| performance updates, [changelog](changelog.html) ||| 2118
+[**mtex-5.2.8.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.8/mtex-5.2.8.zip) ||| January 2020 ||| plasticity tensors, [changelog](changelog.html) ||| 2899
+[**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](changelog.html) ||| 8291
 [**MTEXGUI-2.4.zip**](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/327848702_MTEX_GUI_for_EBSD_and_Pole_Figure_Plotting_Rev_24/data/5ba97639299bf13e604a3c43/Annotate2p4.zip) ||| Sep 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
-[**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions, [changelog](changelog.html) ||| 2753
+[**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions, [changelog](changelog.html) ||| 2796
 [**MTEXannotateGUI.zip**](https://groups.google.com/group/mtexmail/attach/e87c480486f4/MTEXannotateGUI.zip?part=0.1&authuser=0) ||| February 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
 [**mtex-4.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.5.2/mtex-4.5.2.zip) ||| November 2017 ||| 3d orientation and ODF plots, [changelog](changelog.html) ||| 4420
-[**mtex-4.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.4.0/mtex-4.4.0.zip) ||| January 2017 ||| Slip Systems, Taylor calculation, [changelog](changelog.html) ||| 678
+[**mtex-4.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.4.0/mtex-4.4.0.zip) ||| January 2017 ||| Slip Systems, Taylor calculation, [changelog](changelog.html) ||| 1252
 [**mtex-4.3.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.3.2/mtex-4.3.2.zip) ||| July 2016 ||| GND calculation, [changelog](changelog.html) ||| 1662
 [**mtex-4.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.2.1/mtex-4.2.1.zip) ||| November 2015 ||| introduces triple points, [changelog](changelog.html) ||| 1831
 [**mtex-4.1.4.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.1.4/mtex-4.1.4.zip) ||| September 2015    ||| major release with many new features and syntax changes, [changelog](changelog.html) ||| 1132
