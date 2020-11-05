@@ -9,7 +9,7 @@ toc: false
 ---
 
 [{% include inline_image.html
-file="vw.png"%}](https://www.volkswagenag.com)
+file="vw.png" max-width='120'%}](https://www.volkswagenag.com)
 [{% include inline_image.html
 file="Infineon"%}](https://www.infineon.com)
 [{% include inline_image.html
