@@ -1,5 +1,12 @@
-
-## Industrial Partners
+---
+title: Industrial Partners
+keywords: people
+last_updated: January 8, 2018
+hide_sidebar: true
+permalink: companies.html
+folder: companies
+toc: false
+---
 
 [{% include inline_image.html
 file="vw.png"%}](https://www.volkswagenag.com)
