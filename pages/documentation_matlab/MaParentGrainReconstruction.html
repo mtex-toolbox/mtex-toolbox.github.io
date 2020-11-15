@@ -1,6 +1,6 @@
 ---
 title: Martensite Parent Grain Reconstruction
-last_updated: 11-Sep-2020
+last_updated: 15-Nov-2020
 sidebar: documentation_sidebar
 permalink: MaParentGrainReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-11"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
+      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. Most of the ideas are from <a href="https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1007%2Fs11661-018-4904-9?_sg%5B0%5D=gRJGzFvY4PyFk-FFoOIj2jDqqumCsy3e8TU6qDnJoVtZaeUoXjzpsGmpe3TDKsNukQYQX9AtKGniFzbdpymYvzYwhg.5jfOl5Ohgg7pW_6yACRXN3QiR-oTn8UsxZjTbJoS_XqwSaaB7r8NgifJyjSES2iXP6iOVx57sy8HC4q2XyZZaA">Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel</a> by Tuomo Nyyss&ouml;nen. We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
@@ -39,7 +39,9 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = EBSD  
+saving data to /home/hielscher/mtex/master/data/martensite.mat
+ 
+ebsd = EBSD  
  
  Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
      0   92415 (27%)      notIndexed                                                 
@@ -47,7 +49,6 @@ ans = EBSD
  
  Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
  Scan unit : um
- cprInfo: <a href="matlab:dispStruct(pullTemp(1))">show struct</a>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_01.png" %}
@@ -84,13 +85,13 @@ xlabel('disorientation angle')
 {% highlight matlab %}
 plot(ebsd('Iron bcc'),ebsd('Iron bcc').orientations,'figSize','large')
 hold on;
-plot(gB,fit(pairId),'linewidth',3,'smooth')
+plot(gB,fit(pairId) ./ degree,'linewidth',3,'smooth')
 hold off
 
 mtexColorMap LaboTeX
 mtexColorbar
 
-setColorRange([0,5]*degree)
+setColorRange([0,5])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_03.png" %}

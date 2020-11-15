@@ -1,6 +1,6 @@
 ---
 title: script_PlasticDeformation
-last_updated: 01-Apr-2020
+last_updated: 15-Nov-2020
 sidebar: documentation_sidebar
 permalink: PlasticDeformation.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>script_PlasticDeformation</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_PlasticDeformation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/PlasticDeformation.m">
+      --><title>script_PlasticDeformation</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_PlasticDeformation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/PlasticDeformation.m">
     edit page</a></font><div><h2 id="1">Schmid Factor Analysis</h2><p>This script describes how to analyze Schmid factors.</p><p>Let us assume a Nickel crystal</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic',[3.523,3.523,3.523],'mineral','Nickel')
@@ -34,9 +34,8 @@ n = Miller(1,1,1,CS,'hkl')
 n = Miller  
  size: 1 x 1
  mineral: Nickel (m-3m)
-  h 1
-  k 1
-  l 1
+  h k l
+  1 1 1
 {% endhighlight %}
 <p>and the slip direction (which needs to be orthogonal)</p>
 {% highlight matlab %}
@@ -47,9 +46,8 @@ d = Miller(0,-1,1,CS,'uvw')
 d = Miller  
  size: 1 x 1
  mineral: Nickel (m-3m)
-  u  0
-  v -1
-  w  1
+  u  v  w
+  0 -1  1
 {% endhighlight %}
 <p>For tension in direction 123</p>
 {% highlight matlab %}
@@ -117,7 +115,7 @@ pos = vector3d
  size: 1 x 1
  antipodal: true
          x          y          z
-  0.408421 -0.0919374   0.908152
+  0.408235 -0.0915401   0.908275
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlasticDeformation_01.png" %}
@@ -153,18 +151,18 @@ sSAll = slipSystem
  mineral: Nickel (m-3m)
  size: 12 x 1
    u    v    w  | h    k    l CRSS
-   0   -1   -1    1   -1    1    1
-  -1   -1    0    1   -1    1    1
-   1    0   -1    1   -1    1    1
    0   -1    1   -1    1    1    1
   -1    0   -1   -1    1    1    1
   -1   -1    0   -1    1    1    1
+   0   -1   -1    1   -1    1    1
+   1    0   -1    1   -1    1    1
+  -1   -1    0    1   -1    1    1
    0   -1   -1    1    1   -1    1
-   1   -1    0    1    1   -1    1
   -1    0   -1    1    1   -1    1
+  -1    1    0    1    1   -1    1
    0   -1    1    1    1    1    1
-   1   -1    0    1    1    1    1
    1    0   -1    1    1    1    1
+  -1    1    0    1    1    1    1
 {% endhighlight %}
 <p>The option <code class="language-plaintext highlighter-rouge">antipodal</code> indicates that Burgers vectors in oposite direction should not be distinguished. Now</p>
 {% highlight matlab %}
@@ -174,9 +172,9 @@ tau = sSAll.SchmidFactor(r)
 {% highlight plaintext %}
 tau =
   Columns 1 through 7
-   -0.2916   -0.1750   -0.1166    0.1166   -0.4666   -0.3499   -0.0000
+    0.1166   -0.4666   -0.3499   -0.2916   -0.1166   -0.1750   -0.0000
   Columns 8 through 12
-   -0.0000   -0.0000    0.1750   -0.1750   -0.3499
+   -0.0000    0.0000    0.1750   -0.3499    0.1750
 {% endhighlight %}
 <p>returns a list of Schmid factors and we can find the slip system with the largest Schmid factor using</p>
 {% highlight matlab %}
@@ -189,7 +187,7 @@ sSAll(id)
 tauMax =
     0.4666
 id =
-     5
+     2
  
 ans = slipSystem  
  mineral: Nickel (m-3m)
@@ -255,22 +253,22 @@ sSAll = slipSystem
  mineral: Nickel (m-3m)
  size: 24 x 1
    u    v    w  | h    k    l CRSS
-  -1    0    1    1   -1    1    1
-  -1   -1    0    1   -1    1    1
-   0    1    1    1   -1    1    1
-   0   -1   -1    1   -1    1    1
-   1    0   -1    1   -1    1    1
-   1    1    0    1   -1    1    1
   -1   -1    0   -1    1    1    1
   -1    0   -1   -1    1    1    1
    0   -1    1   -1    1    1    1
    0    1   -1   -1    1    1    1
    1    0    1   -1    1    1    1
    1    1    0   -1    1    1    1
+  -1   -1    0    1   -1    1    1
+  -1    0    1    1   -1    1    1
+   0   -1   -1    1   -1    1    1
+   0    1    1    1   -1    1    1
+   1    0   -1    1   -1    1    1
+   1    1    0    1   -1    1    1
   -1    0   -1    1    1   -1    1
   -1    1    0    1    1   -1    1
-   0    1    1    1    1   -1    1
    0   -1   -1    1    1   -1    1
+   0    1    1    1    1   -1    1
    1   -1    0    1    1   -1    1
    1    0    1    1    1   -1    1
   -1    0    1    1    1    1    1

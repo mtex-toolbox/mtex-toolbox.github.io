@@ -1,6 +1,6 @@
 ---
 title: Anisotropic Elasticity
-last_updated: 01-Apr-2020
+last_updated: 15-Nov-2020
 sidebar: documentation_sidebar
 permalink: AnisotropicTheory.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-04-01"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
+      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the sitiffness tensor for Olivine</p>
 {% highlight matlab %}
 % file name
@@ -80,34 +80,26 @@ ans = strainTensor
    0 1.1   0
    0   0 0.9
 {% endhighlight %}
-<p>The ellastic energy of the strain <code class="language-plaintext highlighter-rouge">eps</code> can be computed equivalently computed by the following equations</p>
+<p>The ellastic energy of the strain <code class="language-plaintext highlighter-rouge">eps</code> can be computed equivalently by the following equations</p>
 {% highlight matlab %}
 % the elastic energy
 U = sigma : eps
-U = EinsteinSum(C,[-1 -2 -3 -4],eps,[-1 -2],eps,[-3 -4])
+U = EinsteinSum(C,[-1 -2 -3 -4],eps,[-1 -2],eps,[-3 -4]);
 
-U = (C : eps) : eps
+U = (C : eps) : eps;
 {% endhighlight %}
 
 {% highlight plaintext %}
-U =
-   1.1783e+03
-U =
-   1.1783e+03
 U =
    1.1783e+03
 {% endhighlight %}
 <h2 id="6">Young's Modulus</h2><p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction <code class="language-plaintext highlighter-rouge">d</code> by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
 {% highlight matlab %}
-d = vector3d.X
+d = vector3d.X;
 E = C.YoungsModulus(d)
 {% endhighlight %}
 
 {% highlight plaintext %}
-d = vector3d  
- size: 1 x 1
-  x y z
-  1 0 0
 E =
   286.9284
 {% endhighlight %}
@@ -155,7 +147,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_02.png" %}
-</center><h2 id="9">Poisson Ratio</h2><p>The rate of compression/ decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ration.</p>
+</center><h2 id="9">Poisson Ratio</h2><p>The rate of compression / decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ration.</p>
 {% highlight matlab %}
 % the pulling direction
 p = vector3d.Z;
@@ -182,7 +174,7 @@ nu = S2FunHarmonicSym
  bandwidth: 4
  antipodal: true
 {% endhighlight %}
-<p>we again obtain a spherical function. However, this time it is only meaningfull to evaluate this function at directions perpendicular to the pulling direction <code class="language-plaintext highlighter-rouge">p</code>. Hence, a good way to visualize this function is to plot it as a section in the x/y plane</p>
+<p>we again obtain a spherical function. However, this time it is only meaningfull to evaluate this function at directions perpendicular to the pulling direction <code class="language-plaintext highlighter-rouge">p</code>. Hence, a good way to visualize this function is to plot it as a <a href="S2Fun.plotSection.html">section</a> in the x/y plane</p>
 {% highlight matlab %}
 plotSection(nu,p,'color','interp','linewidth',5)
 axis off
@@ -193,28 +185,15 @@ mtexColorbar
 </center><h2 id="12">Shear Modulus</h2><p>The shear modulus is TODO</p>
 {% highlight matlab %}
 % shear plane
-n = Miller(0,0,1,cs)
+n = Miller(0,0,1,cs);
 
 % shear direction
-d = Miller(1,0,0,cs)
+d = Miller(1,0,0,cs);
 
 G = C.shearModulus(n,d)
 {% endhighlight %}
 
 {% highlight plaintext %}
-n = Miller  
- size: 1 x 1
- mineral: Olivin (mmm)
-  h 0
-  k 0
-  l 1
- 
-d = Miller  
- size: 1 x 1
- mineral: Olivin (mmm)
-  h 1
-  k 0
-  l 0
 G =
    6.2807e+04
 {% endhighlight %}
@@ -247,9 +226,8 @@ drawNow(gcm,'figSize','large')
 n = Miller  
  size: 1 x 1
  mineral: Olivin (mmm)
-  h 1
-  k 1
-  l 1
+  h k l
+  1 1 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_04.png" %}

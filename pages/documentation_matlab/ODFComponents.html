@@ -1,6 +1,6 @@
 ---
 title: ODF Component Analysis
-last_updated: 25-Jun-2020
+last_updated: 15-Nov-2020
 sidebar: documentation_sidebar
 permalink: ODFComponents.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Component Analysis</title><meta name="generator" content="MATLAB 9.8"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-06-25"><meta name="DC.source" content="script_ODFComponents.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFComponents.m">
+      --><title>ODF Component Analysis</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_ODFComponents.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFComponents.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>A common way to interprete ODFs is to think of them as superposition of different components that originates from different deformation processes and describe the texture of the material. In this section we describe how these components can be identified from a given ODF.</p><p>We start by reconstruction a Quarz ODF from Neutron pole figure data.</p>
 {% highlight matlab %}
 % import Neutron pole figure data from a Quarz specimen
@@ -33,7 +33,7 @@ mtexColorbar
 
 {% highlight plaintext %}
 value =
-  121.0463
+  114.1485
  
 ori = orientation  
   size: 1 x 1
@@ -41,8 +41,8 @@ ori = orientation
   specimen symmetry: 1
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  134.749 33.0821 205.638       0
+    phi1     Phi    phi2    Inv.
+  133.18 34.7802 207.235       0
 {% endhighlight %}
 <p>Note that, similarly as the Matlab <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is atained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>.  To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
 {% highlight matlab %}
@@ -59,9 +59,9 @@ annotate(ori)
 
 {% highlight plaintext %}
 value =
-  121.0414
-   34.3893
-   26.8680
+  114.1462
+   48.7619
+   38.2143
  
 ori = orientation  
   size: 3 x 1
@@ -70,9 +70,9 @@ ori = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  134.851 33.0252 205.544       0
-  134.565 36.8447  266.02       0
-    67.91 32.8748 285.598       0
+  133.247 34.8138 207.149       0
+  140.257 36.4757 257.527       0
+    85.86 22.8855 269.678       0
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_03.png" %}
@@ -84,9 +84,9 @@ volume(odf,ori,delta) * 100
 
 {% highlight plaintext %}
 ans =
-   12.1213
-    3.5156
-    3.0515
+   11.2426
+    4.8859
+    4.1376
 {% endhighlight %}
 <p>We observe that the sum of all volume portions is far from \(100\) percent. This is very typical. The reason is that the portion of the full orientations space that is within the \(10\) degree disorientation distance from the preferred orientations is very small. More precisely, it represents only</p>
 {% highlight matlab %}
@@ -106,9 +106,9 @@ volume(odf,ori,delta) ./ volume(uniformODF(odf.CS),ori,delta)
 
 {% highlight plaintext %}
 ans =
-   71.7348
-   20.8054
-   18.0589
+   66.5344
+   28.9149
+   24.4866
 {% endhighlight %}
 <p>It is important to understand, that all these values above depend significantly from the chosen disorientation angle <code class="language-plaintext highlighter-rouge">delta</code>. If <code class="language-plaintext highlighter-rouge">delta</code> is chosen too large</p>
 {% highlight matlab %}
@@ -120,9 +120,9 @@ volume(odf,ori,delta)*100
 delta =
     0.6981
 ans =
-   70.6308
-   28.5918
-   41.1210
+   56.3015
+   38.7448
+   53.0299
 {% endhighlight %}
 <p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p><h2 id="11">Non circular components</h2><p>A disadvantage of the approach above is that one is restricted to circular components with a fixed disorientation angle which makes it hard to analyze components that are close together. In such settings one may want to use the command <a href="ODF.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents</code></a>. This command starts with evenly distributed orientations and lets the crawl towards the closest prefered orientation. At the end of this process the command returns these prefered orientation and the percentage of orientations that crawled to each of them.</p>
 {% highlight matlab %}
@@ -133,22 +133,24 @@ vol * 100
 
 {% highlight plaintext %}
 ori = orientation  
-  size: 4 x 1
+  size: 5 x 1
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
   specimen symmetry: 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-   134.77 33.0506 325.647       0
-  67.8921 32.9607 285.552       0
-  134.653 36.9131 265.962       0
-  85.6961 29.3126 210.625       0
+   133.24 34.7506 207.154       0
+  140.292 36.4614 257.407       0
+  86.1429 22.8787 269.339       0
+  78.5283 34.5109 335.254       0
+  148.513 46.9322 152.863       0
  
 ans =
-   66.6379
-   14.5771
-   11.4302
-    7.3548
+   45.2858
+   28.0220
+   19.5702
+    5.9479
+    1.1740
 {% endhighlight %}
 <p>This volumes allways sums up to apprximately 100 percent. While the prefered orientations should be the same as those computed by the <code class="language-plaintext highlighter-rouge">max</code> command.</p>
 {% highlight matlab %}
