@@ -1,6 +1,6 @@
 ---
-title: Tild and Twist Boundaries
-last_updated: 29-Sep-2020
+title: Tilt and Twist Boundaries
+last_updated: 15-Nov-2020
 sidebar: documentation_sidebar
 permalink: TiltAndTwistBoundaries.html
 folder: documentation
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tild and Twist Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-29"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TiltAndTwistBoundaries.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>If a material deforms through the movement of dislocations, rearrangement of dislocationsto a low-energy configuration may happen during deformation (i.e. in slow, geologic deformation) or or afterwards (in many metals). In any case, the arrangement of dislocation walls can lead to so-called subgrains boundaries. If such a boundary is composed of edge dislocations, it is called a tilt boundary and the rotation axis relating both parts of the grain at each side can be expected to be within the boudnary plane (ideally parallel to the edge dislocation line). If the boundary is composed of screw dislocations, the rotation axis should be normal to the boundary. Between those end-members, there are general boundaries where the rotation axis is not easily related to the type of dislocations unless further information is available.</p><p>In this chapter we discuss the computation of the misorientation axes at subgrain boundaries and discuss whether they vote for twist or tild boundaries. We start by importing an sample EBSD data set and computing all subgrain boundaries as it is described in more detail in the chapter <a href="subGrainBoundaries.html">Subgrain Boundaries</a>.</p>
+      --><title>Tilt and Twist Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_TiltAndTwistBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TiltAndTwistBoundaries.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>If a material deforms through the movement of dislocations, rearrangement of dislocations to a low-energy configuration may happen during deformation (i.e. in slow, geologic deformation) or or afterwards (in many metals). In any case, the arrangement of dislocation walls can lead to so-called subgrains boundaries. If such a boundary is composed of edge dislocations, it is called a tilt boundary and the rotation axis relating both parts of the grain at each side can be expected to be within the boundary plane (ideally parallel to the edge dislocation line). If the boundary is composed of screw dislocations, the rotation axis should be normal to the boundary. Between those end-members, there are general boundaries where the rotation axis is not easily related to the type of dislocations unless further information is available.</p><p>In this chapter we discuss the computation of the misorientation axes at subgrain boundaries and discuss whether they vote for twist or tilt boundaries. We start by importing an sample EBSD data set and computing all subgrain boundaries as it is described in more detail in the chapter <a href="subGrainBoundaries.html">Subgrain Boundaries</a>.</p>
 {% highlight matlab %}
 % load some test data
 mtexdata forsterite silent
@@ -52,7 +52,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiltAndTwistBoundaries_01.png" %}
-</center><p>In the above plot we have marked all subgrain boundaries in blue and adjusted the transperency value according to the misorientation angle.</p><h2 id="3">Misorientation Axes</h2><p>When analysing the misorientation axes of the subgrain boundary misorientations we need to distinguish whether we look at the misorientation axes in crystal coordinates or in specimen coordinates. Lets start with the misorientation axes in crystal coordinates which can directly be computed by the command <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a>.</p>
+</center><p>In the above plot we have marked all subgrain boundaries in blue and adjusted the transparency value according to the misorientation angle.</p><h2 id="3">Misorientation Axes</h2><p>When analysing the misorientation axes of the subgrain boundary misorientations we need to distinguish whether we look at the misorientation axes in crystal coordinates or in specimen coordinates. Lets start with the misorientation axes in crystal coordinates which can directly be computed by the command <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a>.</p>
 {% highlight matlab %}
 % extract the Forsterite subgrain boundaries
 subGB = grains('fo').innerBoundary;
@@ -79,13 +79,13 @@ mtexColorbar
 ans = Miller  
  size: 2 x 1
  mineral: Forsterite (mmm)
-  h 0 0
-  k 0 7
-  l 1 1
+  h k l
+  0 0 1
+  0 7 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiltAndTwistBoundaries_03.png" %}
-</center><p>We find two prefered misorientation axes - (001) and (071). <b>TODO</b>: can this be interpreted?</p><h2 id="6">The misorientation axis in specimen coordinats</h2><p>The computation of the misorientation axis in specimen coordinates is a little bit more complicated as it is impossible using only the misoriention. In fact we require the adjecent orientations on both sides of the subgrain boundaries. We can find those by making use of the <code class="language-plaintext highlighter-rouge">ebsdId</code> stored in the grain boundaries. The command</p>
+</center><p>We find two preferred misorientation axes - (001) and (071). <b>TODO</b>: can this be interpreted?</p><h2 id="6">The misorientation axis in specimen coordinates</h2><p>The computation of the misorientation axis in specimen coordinates is a little bit more complicated as it is impossible using only the misoriention. In fact we require the adjacent orientations on both sides of the subgrain boundaries. We can find those by making use of the <code class="language-plaintext highlighter-rouge">ebsdId</code> stored in the grain boundaries. The command</p>
 {% highlight matlab %}
 oriGB = ebsd('id',subGB.ebsdId).orientations
 {% endhighlight %}
@@ -111,7 +111,7 @@ axS = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiltAndTwistBoundaries_04.png" %}
-</center><p>We have used here the option <code class="language-plaintext highlighter-rouge">antipodal</code> as we have no fixed ordering of the grains at the two sides of the grain boundaries. For a more quantitative analyis we again compute the corresponding density distribution and find the prefered misorientation axes in specimen coordinates</p>
+</center><p>We have used here the option <code class="language-plaintext highlighter-rouge">antipodal</code> as we have no fixed ordering of the grains at the two sides of the grain boundaries. For a more quantitative analysis we again compute the corresponding density distribution and find the preferred misorientation axes in specimen coordinates</p>
 {% highlight matlab %}
 density = calcDensity(axS,'halfwidth',5*degree);
 plot(density,'figSize','small')
@@ -130,7 +130,7 @@ pos = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiltAndTwistBoundaries_05.png" %}
-</center><h2 id="9">Tilt and Twist Boundaries</h2><p>Subgrain boundaries are often assumed to form during deformation by the accumulation of edge or screw dislocations. In first extremal case of exclusive edge dislocations the misorientation axis is parallel to deformation line and within the boundary plane. Such boundaries are called <b>tild boundaries</b>. In the second extremal case of exclusive screw dislocations the misorientation axis is the screw axis and is parallel to the boundary axis. Such boundaries are called <b>twist boundaries</b>.</p><p>In the case of 2d EBSD data one usually has not full boundary information, but only the trace of the boundary with the measurement surface. Hence, it is impossible to distinguish tilt and twist boundaries. However, for twist boundaries the trace must be allways perpendicular to the trace of the boundary as the trace is always perpendicular to the boundary normal. This can be easliy checked from our EBSD data and allows us to exclude certain boundaries to be tild boundaries. To do so we colorize in the following plot all subgrain boundaries according to the angle between the boundary trace and the misorientation axis. Red subgrain boundaries indicate potential tild boundaries while blue subgrain boundaries are for sure no tild boundaries.</p>
+</center><h2 id="9">Tilt and Twist Boundaries</h2><p>Subgrain boundaries are often assumed to form during deformation by the accumulation of edge or screw dislocations. In first extremal case of exclusive edge dislocations the misorientation axis is parallel to deformation line and within the boundary plane. Such boundaries are called <b>tild boundaries</b>. In the second extremal case of exclusive screw dislocations the misorientation axis is the screw axis and is parallel to the boundary axis. Such boundaries are called <b>twist boundaries</b>.</p><p>In the case of 2d EBSD data one usually has not full boundary information, but only the trace of the boundary with the measurement surface. Hence, it is impossible to distinguish tilt and twist boundaries. However, for twist boundaries the trace must be always perpendicular to the trace of the boundary as the trace is always perpendicular to the boundary normal. This can be easily checked from our EBSD data and allows us to exclude certain boundaries to be tilt boundaries. To do so we colorize in the following plot all subgrain boundaries according to the angle between the boundary trace and the misorientation axis. Red subgrain boundaries indicate potential tilt boundaries while blue subgrain boundaries are for sure no tilt boundaries.</p>
 {% highlight matlab %}
 plot(ebsd('fo'),color,'faceAlpha',0.5,'figSize','large')
 

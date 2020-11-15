@@ -1,6 +1,6 @@
 ---
 title: Ellipse Based Shape Parameters
-last_updated: 16-Oct-2020
+last_updated: 15-Nov-2020
 sidebar: documentation_sidebar
 permalink: EllipseBasedParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-10-16"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
+      --><title>Ellipse Based Shape Parameters</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a>  the following properties based on the fitted ellipses are avaiable.</p><p>
    <table class="usertable">
       <tr>
@@ -66,9 +66,6 @@ To make changes, update the MATLAB code and republish this document.
 % load sample EBSD data set
 mtexdata forsterite silent
 
-% restrict it to a subregion of interest.
-%ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
-
 % reconstruct grains and smooth them
 [grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
 ebsd(grains(grains.grainSize<10)) = [];
@@ -104,23 +101,23 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_03.png" %}
-</center><h2 id="5">Shape perfered orientation</h2><p>If we look at the grains, we might wonder if there is a characteristic difference in the grain shape fabric - shape and alignment of the grains- between e.g. Forsterite and Enstatite.</p><p>In order to say something about the bulk shape fabric, sometimes referred to as SPO (shape preferred "orientation", totally unrelated to a crystal orientation as defined in MTEX), the most basic attempt is to look at a length weighted rose diagram (circular histogram) of any of the long axes.</p>
+</center><h2 id="5">Shape perfered orientation</h2><p>If we look at grains, we might wonder if there is a characteristic difference in the grain shape fabric between e.g. Forsterite and Enstatite. In contrast to crystal prefered orientations which which describe on the alignment of the atome lattices the shape prefered orientation (SPO) describes the algnment of the grains by shape in the bulk fabric.</p><p><b>Long Axis Distribution</b></p><p>The most direct way to analyse shape prefered orientations are rose diagrams of the distribution of the grain long axes. For those diagrams it is useful to weight the long axis by the grain area such that larger grains have a bigger impact on the distribution and by the aspect ratio as for grains with a small aspect ratio the long axis is not so well defined.</p>
 {% highlight matlab %}
 numBin = 50;
 
 subplot(1,2,1)
-histogram(grains('forsterite').longAxis,numBin,...
-  'weights',norm(grains('forsterite').longAxis))
+weights = grains('forsterite').area .* (grains('forsterite').aspectRatio-1);
+histogram(grains('forsterite').longAxis,numBin, 'weights', weights)
 title('Forsterite')
 
 subplot(1,2,2)
-histogram(grains('enstatite').longAxis,numBin,...
-  'weights',norm(grains('enstatite').longAxis))
+weights = grains('enstatite').area .* (grains('enstatite').aspectRatio - 1);
+histogram(grains('enstatite').longAxis,numBin,'weights',weights)
 title('Enstatite')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_04.png" %}
-</center><h2 id="6"><b>Long Axis Distribution</b></h2><p>Instead of the histogram we may also fit a circular density distribution to the to the long axes using the command <a href="calcDensity.thml"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
+</center><p>Instead of the histogram we may also fit a circular density distribution to the to the long axes using the command <a href="calcDensity.thml"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
 {% highlight matlab %}
 tdfForsterite = calcDensity(grains('forsterite').longAxis,...
   'weights',norm(grains('forsterite').longAxis),'halfwidth');
@@ -139,13 +136,12 @@ hold off
 </center>
 {% highlight matlab %}
 close all
-
 [freq,bc] = calcTDF(grains('fo'),'binwidth',3*degree);
-plotTDF(bc,freq/sum(freq),'linecolor','g');
+plotTDF(bc,freq/sum(freq));
 
 [freq,bc] = calcTDF(grains('en'),'binwidth',3*degree);
 hold on
-plotTDF(bc,freq/sum(freq),'linecolor','b');
+plotTDF(bc,freq/sum(freq));
 hold off
 legend('Forsterite','Enstatite','Location','eastoutside')
 mtexTitle('long axes')
@@ -202,7 +198,7 @@ mtexTitle('Enstatite grain boundaries')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_09.png" %}
-</center><p><b>Characteristic Shape</b></p><p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. The little peaks at 0 and 90 degree are very likely still related to this sampling artifact.</p><p>If we just add up all the individual elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape.</p>
+</center><h2 id="11">Characteristic Shape</h2><p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. The little peaks at 0 and 90 degree are very likely still related to this sampling artifact.</p><p>If we just add up all the individual elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape.</p>
 {% highlight matlab %}
 [csAngleF, csRadiusF] = characteristicShape(bcF,freqF);
 [csAngleE, csRadiusE] = characteristicShape(bcE,freqE);
