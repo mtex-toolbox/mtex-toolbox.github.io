@@ -12,7 +12,7 @@ opensource basis by an interdisciplinary [team](people) of material
 scientists, geologists and mathematicians.
 
 ### News
-* MTEX 5.5.beta.3 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.beta.3/mtex-5.5.beta.3.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
+* MTEX 5.5.beta.6 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.beta.6/mtex-5.5.beta.6.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
 * MTEX 5.4.0 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
 * MTEX GUI 2.4 by J. Hiscocks released: ・ [Download](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip) ・ [Announcment](https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX) ・
 * Chemnitz MTEX Workshop 2020: ・ [Announcement](https://groups.google.com/forum/#!topic/mtexmail/-U5zoGb_olc) ・ [Homepage](http://www-user.tu-chemnitz.de/~rahi/mtexWorkshop20) ・  [Registration](http://www-user.tu-chemnitz.de/~rahi/mtexWorkshop20/registration.php) ・
