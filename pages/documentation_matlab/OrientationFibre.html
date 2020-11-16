@@ -1,6 +1,6 @@
 ---
 title: Fibres of Orientations
-last_updated: 15-Nov-2020
+last_updated: 16-Nov-2020
 sidebar: documentation_sidebar
 permalink: OrientationFibre.html
 folder: documentation
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fibres of Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_OrientationFibre.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationFibre.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>A fibre in orientation space is essentially a line connecting two orientations and can be represented in MTEX by a single variable of type <a href="fibre.fibre.html">fibre</a>. To illustrate the definition of a fibre we first define <b>cube</b> and <b>goss</b> orientation</p>
+      --><title>Fibres of Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-16"><meta name="DC.source" content="script_OrientationFibre.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationFibre.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>A fibre in orientation space is essentially a line connecting two orientations and can be represented in MTEX by a single variable of type <a href="fibre.fibre.html">fibre</a>. To illustrate the definition of a fibre we first define <a href="orientation.cube.html"><code class="language-plaintext highlighter-rouge">cube</code></a> and <a href="orientation.goss.html"><code class="language-plaintext highlighter-rouge">goss</code></a> orientation</p>
 {% highlight matlab %}
 % define crystal and specimen symmetry
 cs = crystalSymmetry('432');
@@ -31,8 +31,8 @@ f = fibre(ori1,ori2)
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
- o1: (0°,0°,0°)
- o2: (0°,45°,0°)
+ h || r: (100) || (1,0,0)
+ o1 -> o2: (0°,0°,0°) -> (0°,45°,0°)
 {% endhighlight %}
 <p>Finally we plot everything into the Euler space</p>
 {% highlight matlab %}
@@ -61,7 +61,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_02.png" %}
-</center><p>Obviously, <b>f</b> is not a full fibre. Since, the orientation space has no boundary a full fibre is best thought of as a circle that passes trough two fixed orientations. In order to define the full fibre us the option <b>full</b></p>
+</center><p>Obviously, <code class="language-plaintext highlighter-rouge">f</code> is not a full fibre. Since, the orientation space has no boundary a full fibre is best thought of as a circle that passes trough two fixed orientations. In order to define the full fibre us the option <code class="language-plaintext highlighter-rouge">'full'</code></p>
 {% highlight matlab %}
 f = fibre(ori1,ori2,'full')
 
@@ -74,8 +74,7 @@ hold off
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
- o1: (0°,0°,0°)
- h: (100)
+ h || r: (100) || (1,0,0)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_03.png" %}
@@ -110,16 +109,11 @@ plot(f,'linecolor','gold','linewidth',4,'project2FundamentalRegion','axisAngle')
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
- o1: (0°,0°,0°)
- h: (001)
+ h || r: (001) || (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_07.png" %}
-</center><p>If both directions of type Miller the fibre corresponds to all misorientations which have these two direcetion parallel.</p><p>Finally, a fibre can be defined by an initial orientation <b>ori1</b> and a direction <b>h</b>, i.e., all orientations of this fibre satisfy</p>
-{% highlight matlab %}
-ori = ori1 * rot(h,omega)
-{% endhighlight %}
-<p>and</p>
+</center><p>If both directions of type Miller the fibre corresponds to all misorientations which have these two direcetion parallel.</p><p>Finally, a fibre can be defined by an initial orientation <code class="language-plaintext highlighter-rouge">ori1</code> and a direction <code class="language-plaintext highlighter-rouge">h</code>, i.e., all orientations <code class="language-plaintext highlighter-rouge">ori</code> of this fibre satisfy</p>
 {% highlight matlab %}
 ori * h = ori1 * h
 {% endhighlight %}
@@ -134,16 +128,40 @@ plot(f,'linecolor','darkred','linewidth',4,'project2FundamentalRegion','axisAngl
 f = fibre  
  size: 1 x 1
  crystal symmetry:  432
- o1: (0°,0°,0°)
- h: (111)
+ h || r: (111) || (1,1,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_08.png" %}
-</center><h2 id="11">Predefined fibres</h2><p>MTEX includes also a list of predefined fibres, e.g., alpha-, beta-, gamma-, epsilon-, eta- and tau fibres. Those can be defined by</p>
+</center><h2 id="11">Predefined fibres</h2><p>MTEX includes also a list of predefined fibres, e.g., alpha, beta, gamma, epsilon, eta, tau and theta fibres. Those can be defined by</p>
 {% highlight matlab %}
-beta = fibre.beta(cs,'full');
+ss = specimenSymmetry('orthorhombic');
+beta = fibre.beta(cs,ss,'full')
 {% endhighlight %}
-<p>Note, that it is now straight forward to define a corresponding fibre ODF by</p>
+
+{% highlight plaintext %}
+beta = fibre  
+ size: 1 x 1
+ crystal symmetry:  432
+ specimen symmetry: mmm
+ h || r: (12 6 11) || (1,1,4)
+ o1 -> o2: (0°,35.3°,45°) -> (0°,35.3°,45°)
+{% endhighlight %}
+<p>Lets plot an overview of all predefined fibres with respect to orthorhombic specimen symmetry</p>
+{% highlight matlab %}
+plot(fibre.alpha(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(1),'DisplayName','alpha')
+hold on
+plot(fibre.beta(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(2),'DisplayName','beta')
+plot(fibre.gamma(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(3),'DisplayName','gamma')
+plot(fibre.epsilon(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(4),'DisplayName','epsilon')
+plot(fibre.eta(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(5),'DisplayName','eta')
+plot(fibre.tau(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(6),'DisplayName','tau')
+plot(fibre.theta(cs,ss,'full'),'linewidth',3,'lineColor',ind2color(7),'DisplayName','theta')
+hold off
+legend('Location','best')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationFibre_09.png" %}
+</center><h2 id="13">Fibre ODFs</h2><p>Note, that it is straight forward to define a corresponding fibre ODF by the command <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a></p>
 {% highlight matlab %}
 odf = fibreODF(beta,'halfwidth',10*degree)
 
@@ -159,28 +177,28 @@ hold off
 {% highlight plaintext %}
 odf = ODF  
   crystal symmetry : 432
-  specimen symmetry: 1
+  specimen symmetry: mmm
  
   Fibre symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (0.7 0.4 0.6 ) - 0.23141,0.23141,0.94494
+    fibre: (0.7 0.4 0.6) - 0.23141,0.23141,0.94494
     weight: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationFibre_09.png" %}
-</center><h2 id="13">Visualize an ODF along a fibre</h2>
+{% include inline_image.html file="OrientationFibre_10.png" %}
+</center><h2 id="14">Visualize an ODF along a fibre</h2><p>We may also visualize an ODF along a fibre</p>
 {% highlight matlab %}
-plot(odf,fibre.gamma(cs))
+plot(odf,fibre.eta(cs,ss),'linewidth',2)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationFibre_10.png" %}
-</center><h2 id="14">Compute volume of fibre portions</h2>
+{% include inline_image.html file="OrientationFibre_11.png" %}
+</center><h2 id="15">Compute volume of fibre portions</h2><p>or compute the volume of an ODF in a tube around a fibre using the command <a href="ODF.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a></p>
 {% highlight matlab %}
 100 * volume(odf,beta,10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   54.3540
+   25.9490
 {% endhighlight %}
 </div></body></html>
