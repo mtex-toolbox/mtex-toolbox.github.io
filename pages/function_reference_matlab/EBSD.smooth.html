@@ -29,10 +29,10 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p><h2 id="5">Example</h2>
 {% highlight matlab %}
-mtexdata forsterite
+mtexdata forsterite;
 ebsd = ebsd('indexed');
 % segment grains
-[grains,ebsd.grainId] = calcGrains(ebsd)
+[grains,ebsd.grainId] = calcGrains(ebsd);
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -46,60 +46,12 @@ ebsd = EBSD
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
- 
- 
-grains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1    1080  152345  Forsterite       mmm                         
-     2     515   26058   Enstatite       mmm                         
-     3    1496    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 43912
- inner boundary segments: 266
- triple points: 3417
- 
- Properties: GOS, meanRotation
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1  152345 (81%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (14%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (4.8%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId
- Scan unit : um
 {% endhighlight %}
 
 {% highlight matlab %}
 % find largest grains
-largeGrains = grains(grains.grainSize>800)
-ebsd = ebsd(largeGrains(1))
-{% endhighlight %}
-
-{% highlight plaintext %}
-largeGrains = grain2d  
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      56   85514  Forsterite       mmm                         
-     2       2    1969   Enstatite       mmm                         
- 
- boundary segments: 17507
- inner boundary segments: 222
- triple points: 1247
- 
- Properties: GOS, meanRotation
- 
- 
-ebsd = EBSD  
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1   1453 (100%)  Forsterite  LightSkyBlue       mmm                         
- 
- Properties: bands, bc, bs, error, mad, x, y, grainId
- Scan unit : um
+largeGrains = grains(grains.grainSize>800);
+ebsd = ebsd(largeGrains(1));
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -111,10 +63,6 @@ oM.inversePoleFigureDirection = mean(ebsd.orientations) * oM.whiteCenter;
 oM.colorStretching = 50;
 plot(ebsd,oM.orientation2color(ebsd.orientations))
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Possibly applying an orientation to an object in specimen coordinates!
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD.smooth_01.png" %}
