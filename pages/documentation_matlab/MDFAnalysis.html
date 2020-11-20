@@ -1,6 +1,6 @@
 ---
 title: Misorientation Distribution Function
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: MDFAnalysis.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_MDFAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MDFAnalysis.m">
+      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_MDFAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MDFAnalysis.m">
     edit page</a></font><div><!--introduction--><p>Explains how to compute and analyze misorientation distribution functions.</p><!--/introduction--><h2 id="1">TODO</h2><p>Please help to redo the section</p><p>When speaking about the misorientation distribution function (MDF) one has to differentiate to cases</p><div><ol><li>the boundary (correlated) misorientation distribution function</li><li>the uncorelated misorientation distribution function</li></ol></div><p>While the first one considers only misorientations at grain boundaries the second one considers misorietation between arbitrary crystal orientations. To illustrate the difference lets consider the following EBSD data set</p>
 {% highlight matlab %}
 % Lets import some EBSD data and reconstruct the grains.
@@ -27,7 +27,7 @@ ebsd = EBSD
      0   58485 (24%)  notIndexed                                                 
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -39,7 +39,7 @@ grains = grain2d
      0   16334   58485  notIndexed                                   
      1    4092  152345  Forsterite       mmm                         
      2    1864   26058   Enstatite       mmm                         
-     3    1991    9064    Diopside     12/m1        X||a*, Y||b, Z||c
+     3    1991    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
  
  boundary segments: 147957
  inner boundary segments: 33
@@ -93,7 +93,7 @@ adf_boundary = S2FunHarmonicSym
 
 {% highlight plaintext %}
 v =
-  275.8298
+  275.8325
  
 mori = misorientation  
   size: 1 x 1
@@ -102,7 +102,7 @@ mori = misorientation
  
   Bunge Euler angles in degree
      phi1       Phi      phi2      Inv.
-  319.419 0.0714283   310.577         0
+  333.014 0.0472046   297.035         0
 {% endhighlight %}
 <p>or plot the pole figure corresponding to the crystal axis (1,0,0)</p>
 {% highlight matlab %}
@@ -118,7 +118,7 @@ mdf_uncor = calcDensity(mori)
 
 {% highlight plaintext %}
 mori = misorientation  
-  size: 98616 x 1
+  size: 98537 x 1
   crystal symmetry : Forsterite (mmm)
   crystal symmetry : Enstatite (mmm)
  

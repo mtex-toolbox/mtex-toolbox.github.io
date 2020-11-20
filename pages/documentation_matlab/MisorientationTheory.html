@@ -1,6 +1,6 @@
 ---
 title: Theory of Misorientations
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
+      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Misorientation describe the relative orientation of two crystal with respect to each other. Those crystal may be of the same phase or of different phases. Misorientation are used to describe</p><h2 id="2">Grain Exchange Symmetry</h2><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice) misorientations. To illustrate this concept at a practical example let us first import some Magnesium EBSD data.</p>
 {% highlight matlab %}
 mtexdata twins silent
@@ -97,8 +97,8 @@ mori = inv(ori1) * ori2
 {% highlight plaintext %}
 mori = misorientation  
   size: 1 x 1
-  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c)
-  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c)
+  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
+  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
@@ -112,7 +112,7 @@ round(mori * Miller(1,1,-2,0,CS))
 {% highlight plaintext %}
 ans = Miller  
  size: 1 x 1
- mineral: Magnesium (622, X||a*, Y||b, Z||c)
+ mineral: Magnesium (622, X||a*, Y||b, Z||c*)
   h  k  i  l
   2 -1 -1  0
 {% endhighlight %}
@@ -124,7 +124,7 @@ round(inv(mori) * Miller(2,-1,-1,0,CS))
 {% highlight plaintext %}
 ans = Miller  
  size: 1 x 1
- mineral: Magnesium (622, X||a*, Y||b, Z||c)
+ mineral: Magnesium (622, X||a*, Y||b, Z||c*)
   h  k  i  l
   1  1 -2  0
 {% endhighlight %}
@@ -190,8 +190,8 @@ mori.angle / degree
 {% highlight plaintext %}
 mori = misorientation  
   size: 1 x 1
-  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c)
-  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c)
+  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
+  crystal symmetry : Magnesium (622, X||a*, Y||b, Z||c*)
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
@@ -200,7 +200,7 @@ mori = misorientation
  
 ans = Miller  
  size: 1 x 1
- mineral: Magnesium (622, X||a*, Y||b, Z||c)
+ mineral: Magnesium (622, X||a*, Y||b, Z||c*)
   h  k  i  l
   1  0 -1  0
 ans =
@@ -274,11 +274,11 @@ CS_Mag = crystalSymmetry
  
 CS_Hem = crystalSymmetry  
  
-  mineral        : Hematite         
-  symmetry       : -3m1             
-  elements       : 12               
-  a, b, c        : 5, 5, 14         
-  reference frame: X||a*, Y||b, Z||c
+  mineral        : Hematite          
+  symmetry       : -3m1              
+  elements       : 12                
+  a, b, c        : 5, 5, 14          
+  reference frame: X||a*, Y||b, Z||c*
 {% endhighlight %}
 <p>The phase transition from Magnetite to Hematite is described in literature by {111}_m parallel {0001}_h and {-101}_m parallel {10-10}_h The corresponding misorientation is defined in MTEX by</p>
 {% highlight matlab %}
@@ -291,7 +291,7 @@ Mag2Hem = orientation.map(...
 Mag2Hem = misorientation  
   size: 1 x 1
   crystal symmetry : Magnetite (m-3m)
-  crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c)
+  crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c*)
  
   Bunge Euler angles in degree
   phi1     Phi    phi2    Inv.
@@ -320,7 +320,7 @@ symmetrise(ori_Mag) * inv(Mag2Hem)
 {% highlight plaintext %}
 ans = orientation  
   size: 48 x 1
-  crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c)
+  crystal symmetry : Hematite (-3m1, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
 {% endhighlight %}
 <p>and the corresponding pole figures by</p>

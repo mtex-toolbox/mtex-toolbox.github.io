@@ -1,6 +1,6 @@
 ---
 title: Embeddings of Orientations
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: OrientationEmbeddings.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Embeddings of Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_OrientationEmbeddings.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationEmbeddings.m">
+      --><title>Embeddings of Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_OrientationEmbeddings.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationEmbeddings.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Orientational embeddings are tensorial representations of orientations with the specific property that each class of symmetrically equivalent orientations has a unique tensor representation. The easiest tensorial representation of a rotation is its rotational matrix. However, in the presense of crystal symmetry multiple rotational matrices describe the same orientation. This can be avoided by restricting the space of admissible matrices to the so called fundamental region. However, this creates the problem that two similar orientations may be represented by very different matrices in the fundamental region. This usually happens if the orientations are close to the boundary of the fundamental region.</p><p>The central problem is that the geometry of the fundamental region is not the geometry of the orientation space. Lets demonstate this by taking pairs \(\mathtt{ori_1}\), \(\mathtt{ori_2}\) of random orientations in the fundamental region</p>
 {% highlight matlab %}
 % consider cubic symmetry
@@ -68,7 +68,9 @@ mori = rotation
   phi1  Phi phi2 Inv.
      0    0    0    0
 {% endhighlight %}
-<p>The  mean orientation \((0^{\circ},0^{\circ},0^{\circ})\) computed from the average of the Rodrigues vectors is far away from the true mean.</p>
+<center>
+{% include inline_image.html file="OrientationEmbeddings_02.png" %}
+</center><p>The  mean orientation \((0^{\circ},0^{\circ},0^{\circ})\) computed from the average of the Rodrigues vectors is far away from the true mean.</p>
 {% highlight matlab %}
 mean(ori)
 {% endhighlight %}
@@ -107,7 +109,7 @@ xlabel('\(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\)','Interpreter','latex')
 ylabel('\(||\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_2}) ||_2\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_02.png" %}
+{% include inline_image.html file="OrientationEmbeddings_03.png" %}
 </center><p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p><p>Lets go back to our second example of averaging the orientations \((44^{\circ},0^{\circ},0^{\circ})\) and \((46^{\circ},0^{\circ},0^{\circ})\). If we compute the embedding of both orientations, average the resulting tensors and <a href="embedding.orientation.html">project the mean tensor back to an orientation</a> we end up with the correct result \((0^{\circ},0^{\circ},0^{\circ})\).</p>
 {% highlight matlab %}
 % compute the embedding of the two orientations
@@ -161,7 +163,7 @@ xlabel('standard deviation \(\sigma\)','Interpreter','latex')
 ylabel('\(\sqrt{1-n}\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_03.png" %}
+{% include inline_image.html file="OrientationEmbeddings_04.png" %}
 </center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - <a href="UnimodalODFs.html">unimodal de la Vallee Poussin distributed density functions</a>. A broader family of density function are the <a href="BinghamODFs.html">Bingham distributions</a>. Lets repeat the experiment for this family.</p>
 {% highlight matlab %}
 % genrate ODF of different halfwidth
@@ -183,5 +185,5 @@ scatter(sigma,sqrt(1-n),'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_04.png" %}
+{% include inline_image.html file="OrientationEmbeddings_05.png" %}
 </center><p>We observe that there is no one-to-one relatioenship between the discrete standard deviation.</p><h2 id="14">Operations</h2><p>The following operations are supported for embeddings:</p><div><ul><li><code class="language-plaintext highlighter-rouge"><a href="embedding.plus.html">+</a></code>, <code class="language-plaintext highlighter-rouge"><a href="embedding.minus.html">-</a></code>, <code class="language-plaintext highlighter-rouge"><a href="embedding.mtimes.html">*</a></code>, <code class="language-plaintext highlighter-rouge"><a href="embedding.times.html">.*</a></code>, <code class="language-plaintext highlighter-rouge">./</code></li><li><a href="embedding.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a>, <a href="embedding.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a></li><li><a href="embedding.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>, <a href="embedding.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a></li><li><a href="embedding.dot.html"><code class="language-plaintext highlighter-rouge">dot</code></a></li><li><a href="embedding.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>, <a href="embedding.rotate_outer.html"><code class="language-plaintext highlighter-rouge">rotate_outer</code></a></li></ul></div><h2 id="15">Rerference</h2><p>The theory behind these embeddings is explained in the paper</p><div><ul><li>R. Arnold, P. E. Jupp, H. Schaeben, Statistics of ambiguous rotations, Journal of Multivariate Analysis (165), 2018</li><li>R. Hielscher, L. Lippert, <i>Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries</i>, <a href="https://arxiv.org/abs/2007.09664">arXiv:2007.09664</a>, 2020.</li></ul></div></div></body></html>
