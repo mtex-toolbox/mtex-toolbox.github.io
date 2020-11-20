@@ -1,6 +1,6 @@
 ---
 title: Gridded EBSD Data
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: EBSDGrid.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Gridded EBSD Data</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_EBSDGrid.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGrid.m">
+      --><title>Gridded EBSD Data</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_EBSDGrid.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGrid.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss specific operations that are available for EBSD data which are measured on a square or hexagonal grid.</p><p>By default MTEX ignores any gridding in the data. The reason for this is that when restricting to some subset, e.g. to a certain phase, the data will not form a regular grid anyway. For that reason, almost all functions in MTEX are implemented to work for arbitrarily aligned data.</p><p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a>, <a href="EBSDGradient.html">gradient computation</a> and <a href="EBSDDenoising.html">denoising</a>. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html">gridify</a>.</p><p>In order to explain the corresponding concept in more detail lets import some sample data.</p>
 {% highlight matlab %}
 plotx2east
@@ -25,7 +25,7 @@ ebsd = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -54,7 +54,7 @@ ebsd = EBSDsquare
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y, oldId
  Scan unit : um
@@ -69,7 +69,7 @@ ebsd(50,100)
 ans = EBSD  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
     Id   Phase   phi1   Phi   phi2   bands    bc    bs   error   mad      x      y   oldId
  13613       1    156   101    239      10   149   133       0   0.7   29.7   14.7    8283
@@ -84,7 +84,7 @@ ebsdMg = ebsd('Magnesium')
 ebsdMg = EBSD  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y, oldId
  Scan unit : um
@@ -98,7 +98,7 @@ ebsdMg = ebsd('Magnesium').gridify
 ebsdMg = EBSDsquare  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y, oldId
  Scan unit : um

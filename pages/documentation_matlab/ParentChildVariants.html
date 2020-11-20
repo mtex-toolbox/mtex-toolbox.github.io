@@ -1,6 +1,6 @@
 ---
 title: Parent Child Variants
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: ParentChildVariants.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Child Variants</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_ParentChildVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/ParentChildVariants.m">
+      --><title>Parent Child Variants</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_ParentChildVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/ParentChildVariants.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>The crystallographic structure of most materials is dependend on external conditions as temperature and pressure. When the external conditions change the crystals may undergo a phase transition from the inital phase, often called parent phase, into the child phase. While both phases still have the same chemical composition their crystallographic structure might be quite different. A typical example are the alpha and beta phase of titanium. While the alpha phase is hexagonal</p>
 {% highlight matlab %}
 csAlpha = crystalSymmetry('622',[3 3 4.7],'mineral','Ti (alpha)')
@@ -20,11 +20,11 @@ csAlpha = crystalSymmetry('622',[3 3 4.7],'mineral','Ti (alpha)')
 {% highlight plaintext %}
 csAlpha = crystalSymmetry  
  
-  mineral        : Ti (alpha)       
-  symmetry       : 622              
-  elements       : 12               
-  a, b, c        : 3, 3, 4.7        
-  reference frame: X||a*, Y||b, Z||c
+  mineral        : Ti (alpha)        
+  symmetry       : 622               
+  elements       : 12                
+  a, b, c        : 3, 3, 4.7         
+  reference frame: X||a*, Y||b, Z||c*
 {% endhighlight %}
 <p>the beta phase is cubic</p>
 {% highlight matlab %}
@@ -47,12 +47,12 @@ oriParent = orientation.rand(csAlpha)
 {% highlight plaintext %}
 oriParent = orientation  
   size: 1 x 1
-  crystal symmetry : Ti (alpha) (622, X||a*, Y||b, Z||c)
+  crystal symmetry : Ti (alpha) (622, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2    Inv.
-  134.68 59.1395  149.41       0
+     phi1     Phi    phi2    Inv.
+  175.257 133.873 8.67486       0
 {% endhighlight %}
 <p>be the orientation of the atomic lattice befor phase transition and <code class="language-plaintext highlighter-rouge">oriChild</code> the orientation of the atomic lattice after the phase transition. Since during a phase transition the atoms reorder with respect to a minimal energy constraint, both orientations <code class="language-plaintext highlighter-rouge">oriParent</code> and <code class="language-plaintext highlighter-rouge">oriChild</code> are in a specific orientation relationship with respect to each other. In the case of alpha and beta Titanium the dominant orientation relationship is described by the Euler angles</p>
 {% highlight matlab %}
@@ -71,7 +71,7 @@ oriChild = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  91.6455 140.734 9.13896       0
+  155.913 45.5375 238.815       0
 {% endhighlight %}
 <p>This orientation relationship is characterised by the properties that it alignes the c-axis direction of the hexagonal alpha phase with the [110] direction of the cubic beta phase and the [2-1-10] direction of the alpha phase with the  [-11-1] direction of the beta phase.</p>
 {% highlight matlab %}
@@ -86,7 +86,7 @@ plotPDF(oriChild,hBeta)
 {% highlight plaintext %}
 hAlpha = Miller  
  size: 1 x 2
- mineral: Ti (alpha) (622, X||a*, Y||b, Z||c)
+ mineral: Ti (alpha) (622, X||a*, Y||b, Z||c*)
   h  k  i  l
   0  0  0  1
   2 -1 -1  0
@@ -109,7 +109,7 @@ alpha2beta = orientation.map(Miller(0,0,0,1,csAlpha),Miller(1,1,0,csBeta),...
 {% highlight plaintext %}
 alpha2beta = misorientation  
   size: 1 x 1
-  crystal symmetry : Ti (alpha) (622, X||a*, Y||b, Z||c)
+  crystal symmetry : Ti (alpha) (622, X||a*, Y||b, Z||c*)
   crystal symmetry : Ti (beta) (432)
  
   Bunge Euler angles in degree
@@ -124,23 +124,23 @@ oriParentSym = oriParent.symmetrise
 {% highlight plaintext %}
 oriParentSym = orientation  
   size: 12 x 1
-  crystal symmetry : Ti (alpha) (622, X||a*, Y||b, Z||c)
+  crystal symmetry : Ti (alpha) (622, X||a*, Y||b, Z||c*)
   specimen symmetry: 1
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2    Inv.
-  134.68 59.1395  149.41       0
-  314.68  120.86 90.5905       0
-  134.68 59.1395  209.41       0
-  314.68  120.86  150.59       0
-  134.68 59.1395  269.41       0
-  314.68  120.86  210.59       0
-  134.68 59.1395  329.41       0
-  314.68  120.86  270.59       0
-  134.68 59.1395 29.4095       0
-  314.68  120.86  330.59       0
-  134.68 59.1395 89.4095       0
-  314.68  120.86 30.5905       0
+     phi1     Phi    phi2    Inv.
+  175.257 133.873 8.67486       0
+  355.257 46.1269 231.325       0
+  175.257 133.873 68.6749       0
+  355.257 46.1269 291.325       0
+  175.257 133.873 128.675       0
+  355.257 46.1269 351.325       0
+  175.257 133.873 188.675       0
+  355.257 46.1269 51.3251       0
+  175.257 133.873 248.675       0
+  355.257 46.1269 111.325       0
+  175.257 133.873 308.675       0
+  355.257 46.1269 171.325       0
 {% endhighlight %}
 <p>Applying the <code class="language-plaintext highlighter-rouge">alpha2beta</code> phase relationship to these 12 different represenations we obtain 12 child orientations.</p>
 {% highlight matlab %}
@@ -155,18 +155,18 @@ oriChild = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  91.9852 140.888 9.40222       0
-  221.669 95.0236 284.007       0
-  188.123 134.908 88.5932       0
-  175.831 141.565 259.393       0
-  227.082  85.989 104.055       0
-   80.047 134.087 180.572       0
-  271.985  39.112 80.5978       0
-  41.6693 84.9764 165.993       0
-  8.12285 45.0923 1.40679       0
-  355.831 38.4346 190.607       0
-  47.0817  94.011 345.945       0
-  260.047 45.9129 269.428       0
+  155.553 45.6012 239.066       0
+  60.6885 113.387  85.966       0
+   96.541 78.4961 269.987       0
+  104.389 71.1761 87.9266       0
+  51.5195 120.014 261.832       0
+  170.343 43.9785 48.5407       0
+  335.553 134.399 210.934       0
+  240.689 66.6131 4.03396       0
+  276.541 101.504 180.013       0
+  284.389 108.824  2.0734       0
+   231.52 59.9859 188.168       0
+  350.343 136.021 41.4593       0
 {% endhighlight %}
 <p>However, with respect to cubic crystal symmetry the 12 child orientations are not all symmetrically equivalent anymore. In fact, they form 6 pairs of symmetrically equivalent orientations as depicted in the following inverse pole figure.</p>
 {% highlight matlab %}
@@ -194,12 +194,12 @@ oriChild = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  91.9852 140.888 9.40222       0
-   80.047 134.087 180.572       0
-  47.0817  94.011 345.945       0
-  175.831 141.565 259.393       0
-  8.12285 45.0923 1.40679       0
-  221.669 95.0236 284.007       0
+  170.343 43.9785 48.5407       0
+  155.553 45.6012 239.066       0
+   231.52 59.9859 188.168       0
+  104.389 71.1761 87.9266       0
+  276.541 101.504 180.013       0
+  60.6885 113.387  85.966       0
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParentChildVariants_03.png" %}
@@ -216,7 +216,7 @@ oriChild = orientation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-   80.047 134.087 180.572       0
-  47.0817  94.011 345.945       0
+  155.553 45.6012 239.066       0
+   231.52 59.9859 188.168       0
 {% endhighlight %}
 <p>Sometimes one faces the inverse question, i.e., determine the <code class="language-plaintext highlighter-rouge">variantId</code> from a parent and a child orientation or a pair of child orientations. This can be done using the command <a href="calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a> which is discussed in detail in the section <a href="ParentGrainReconstruction.html">parent grain reconstruction</a>.</p><h2 id="15">Parent Variants</h2><p>TODO</p></div></body></html>

@@ -1,6 +1,6 @@
 ---
 title: ODF Tutorial
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: ODFTutorial.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Tutorial</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_ODFTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/ODFTutorial.m">
+      --><title>ODF Tutorial</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_ODFTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/ODFTutorial.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>The orientation distribution function (ODF) is a function on the orientation space that associates to each orientation \(g\) the volume percentage of crystals in a polycrystaline specimen that are in this specific orientation, i.e.,</p><p>\[\mathrm{odf}(g) = \frac{1}{V} \frac{\mathrm{d}V(g)}{\mathrm{d}g}.\]</p><p>In MTEX an entirely random texure will have an ODF constant to one. In other word the values of ODFs in MTEX can be interpreted as multiples of the random distribution (mrd).</p><h2 id="2">Computing an ODF from Individual Orientations</h2><p>Individual orientations data may be obtained by experimental by EBSD, ACOM or 3d X-ray imaging; or from simulations, like VPSC. In the following we consider an EBSD map of an Titanium alloy.</p>
 {% highlight matlab %}
 % import the titanium data
@@ -25,7 +25,7 @@ plot(ebsd, ebsd.orientations)
 ebsd = EBSD  
  
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
+     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622       X||a, Y||b*, Z||c*
  
  Properties: ci, grainid, iq, sem_signal, x, y
  Scan unit : um
@@ -43,7 +43,7 @@ odf = calcDensity(ori)
 
 {% highlight plaintext %}
 odf = ODF  
-  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c)
+  crystal symmetry : Titanium (Alpha) (622, X||a, Y||b*, Z||c*)
   specimen symmetry: 1
  
   Harmonic portion:
@@ -116,7 +116,7 @@ odf = ODF
  
   Fibre symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (0.6 0.6 0.6 ) - 0,0,1
+    fibre: (0.6 0.6 0.6) - 0,0,1
     weight: 1
 {% endhighlight %}
 <center>

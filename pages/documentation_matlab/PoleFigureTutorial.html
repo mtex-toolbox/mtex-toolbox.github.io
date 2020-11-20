@@ -1,6 +1,6 @@
 ---
 title: Pole Figure Tutorial
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: PoleFigureTutorial.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Pole Figure Tutorial</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_PoleFigureTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/PoleFigureTutorial.m">
+      --><title>Pole Figure Tutorial</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_PoleFigureTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/PoleFigureTutorial.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This tutorial explains the basic concepts on ananyzing x-ray, synchrotron and neutron diffraction data.</p><h2 id="2">Import diffraction data</h2><p>Click on <a href="matlab:import_wizard('PoleFigure')">Import pole figure data</a> to start the import wizard which is a GUI leading you through the import of pole figure data. After finishing the wizard you will end up with a script similar to the following one.</p>
 {% highlight matlab %}
 % This script was automatically created by the import wizard. You should
@@ -93,7 +93,7 @@ odf = calcODF(pf,'silent')
 
 {% highlight plaintext %}
 odf = ODF  
-  crystal symmetry : 6/mmm, X||a*, Y||b, Z||c
+  crystal symmetry : 6/mmm, X||a*, Y||b, Z||c*
   specimen symmetry: 1
  
   Uniform portion:
@@ -101,17 +101,15 @@ odf = ODF
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 5°
-    center: 9923 orientations, resolution: 5°
+    center: 9922 orientations, resolution: 5°
     weight: 0.46584
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureTutorial_03.png" %}
-</center><p>Note that reconstructing an ODF from pole figure data is a severely ill- posed problem, i.e., it does <b>not</b> provide a unique solution. A more throughout discussion on the ambiguity of ODF reconstruction from pole figure data can be found <a href="PoleFigure2ODFAmbiguity.html">here</a>. As a rule of thumb: as more pole figures you have and as more consistent you pole figure data are the better your reconstructed ODF will be.</p><p>To check how well your reconstructed ODF fits the measured pole figure data do</p>
+<p>Note that reconstructing an ODF from pole figure data is a severely ill- posed problem, i.e., it does <b>not</b> provide a unique solution. A more throughout discussion on the ambiguity of ODF reconstruction from pole figure data can be found <a href="PoleFigure2ODFAmbiguity.html">here</a>. As a rule of thumb: as more pole figures you have and as more consistent you pole figure data are the better your reconstructed ODF will be.</p><p>To check how well your reconstructed ODF fits the measured pole figure data do</p>
 {% highlight matlab %}
 plotPDF(odf,pf.h)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigureTutorial_04.png" %}
+{% include inline_image.html file="PoleFigureTutorial_03.png" %}
 </center><p>Compare the recalculated pole figures with the measured data. A quantitative measure for the fitting are the so called RP values. They can be computed by</p>
 {% highlight matlab %}
 calcError(odf,pf)
@@ -119,7 +117,7 @@ calcError(odf,pf)
 
 {% highlight plaintext %}
 ans =
-    0.0414    0.0452    0.0584    0.0440
+    0.0413    0.0452    0.0584    0.0440
 {% endhighlight %}
 <p>In the case of a bad fitting, you may want to tweak the reconstruction algorithm. See <a href="PoleFigure2ODF.html">here</a> for more information.</p><h2 id="12">Visualize the ODF</h2><p>Finally one can plot the resulting ODF</p>
 {% highlight matlab %}
@@ -127,7 +125,7 @@ plot(odf)
 mtexColorMap LaboTeX
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigureTutorial_05.png" %}
+{% include inline_image.html file="PoleFigureTutorial_04.png" %}
 </center><p>restore old setting</p>
 {% highlight matlab %}
 setMTEXpref('xAxisDirection','east');

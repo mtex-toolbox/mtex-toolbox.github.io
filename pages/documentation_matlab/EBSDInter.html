@@ -1,6 +1,6 @@
 ---
 title: Interpolating EBSD Data
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: EBSDInter.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Interpolating EBSD Data</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
+      --><title>Interpolating EBSD Data</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_EBSDInter.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInter.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In the section <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> we have discussed how to work with noisy EBSD data the contained non indexed pixels. Hereby, we made the assumption that the grid before and after the operations is the same.</p><p>In this section we explain how to interpolate an EBSD map at positions that do not belong to the grid. Lets us consider a simple example</p>
 {% highlight matlab %}
 mtexdata twins;
@@ -29,7 +29,7 @@ ebsd = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
@@ -46,7 +46,7 @@ e1 = interp(ebsd,x,y)
 e1 = EBSD  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Id   Phase   phi1   Phi   phi2      x     y   bands    bc    bs   error   mad   grainId   oldId
   1       1    163   112    186   30.5   5.5      10   160   255       0   0.4        36    3109
@@ -61,7 +61,7 @@ e2 = ebsd('xy',x,y)
 e2 = EBSD  
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
    Id   Phase   phi1   Phi   phi2   bands    bc    bs   error   mad      x     y   grainId
  3109       1    163   112    186      10   160   255       0   0.4   30.6   5.4        36
@@ -99,7 +99,7 @@ ebsdNewGrid = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    2624 (52%)  notIndexed                                                 
-     1    2376 (48%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     1    2376 (48%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: x, y, bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um

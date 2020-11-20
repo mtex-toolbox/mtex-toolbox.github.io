@@ -1,6 +1,6 @@
 ---
 title: Symmetricaly Equivalent Orientations
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: documentation_sidebar
 permalink: OrientationSymmetry.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Symmetricaly Equivalent Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_OrientationSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationSymmetry.m">
+      --><title>Symmetricaly Equivalent Orientations</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_OrientationSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationSymmetry.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>A crystal orientation always appears as a class of symmetrically equivalent rotations which all transform the crystal reference frame into the specimen reference frame and are physicaly not distinguishable.</p><p>Lets start by defining some random orientation</p>
 {% highlight matlab %}
 % trigonal crystal symmetry
@@ -27,10 +27,10 @@ ori = orientation.rand(cs,ss)
 {% highlight plaintext %}
 cs = crystalSymmetry  
  
-  symmetry       : 6                
-  elements       : 6                
-  a, b, c        : 1, 1, 1          
-  reference frame: X||a*, Y||b, Z||c
+  symmetry       : 6                 
+  elements       : 6                 
+  a, b, c        : 1, 1, 1           
+  reference frame: X||a*, Y||b, Z||c*
  
  
 ss = monoclinic specimenSymmetry  
@@ -38,12 +38,12 @@ ss = monoclinic specimenSymmetry
  
 ori = orientation  
   size: 1 x 1
-  crystal symmetry : 6, X||a*, Y||b, Z||c
+  crystal symmetry : 6, X||a*, Y||b, Z||c*
   specimen symmetry: 112
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  214.452 122.893 162.039       0
+  332.767 69.3165 25.0703       0
 {% endhighlight %}
 <p>Since orientations transform crystal coordinates into specimen coordinates crystal symmetries will act from the right and specimen symmetries from the left</p>
 {% highlight matlab %}
@@ -54,17 +54,17 @@ ori * cs
 {% highlight plaintext %}
 ans = orientation  
   size: 1 x 6
-  crystal symmetry : 6, X||a*, Y||b, Z||c
+  crystal symmetry : 6, X||a*, Y||b, Z||c*
   specimen symmetry: 112
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  214.452 122.893 162.039       0
-  214.452 122.893 222.039       0
-  214.452 122.893 282.039       0
-  214.452 122.893 342.039       0
-  214.452 122.893 42.0394       0
-  214.452 122.893 102.039       0
+  332.767 69.3165 25.0703       0
+  332.767 69.3165 85.0703       0
+  332.767 69.3165  145.07       0
+  332.767 69.3165  205.07       0
+  332.767 69.3165  265.07       0
+  332.767 69.3165  325.07       0
 {% endhighlight %}
 <p>We observe that only the third Euler angle phi2 changes as this Euler angle applies first to the crystal coordinates.</p>
 {% highlight matlab %}
@@ -75,13 +75,13 @@ ss * ori
 {% highlight plaintext %}
 ans = orientation  
   size: 2 x 1
-  crystal symmetry : 6, X||a*, Y||b, Z||c
+  crystal symmetry : 6, X||a*, Y||b, Z||c*
   specimen symmetry: 112
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  214.452 122.893 162.039       0
-  34.4522 122.893 162.039       0
+  332.767 69.3165 25.0703       0
+  152.767 69.3165 25.0703       0
 {% endhighlight %}
 <p>Combining crystal and specimen symmetry we obtain 6 crystallographically equivalent orientations to <code class="language-plaintext highlighter-rouge">ori</code></p>
 {% highlight matlab %}
@@ -91,23 +91,23 @@ ss * ori * cs
 {% highlight plaintext %}
 ans = orientation  
   size: 2 x 6
-  crystal symmetry : 6, X||a*, Y||b, Z||c
+  crystal symmetry : 6, X||a*, Y||b, Z||c*
   specimen symmetry: 112
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  214.452 122.893 162.039       0
-  34.4522 122.893 162.039       0
-  214.452 122.893 222.039       0
-  34.4522 122.893 222.039       0
-  214.452 122.893 282.039       0
-  34.4522 122.893 282.039       0
-  214.452 122.893 342.039       0
-  34.4522 122.893 342.039       0
-  214.452 122.893 42.0394       0
-  34.4522 122.893 42.0394       0
-  214.452 122.893 102.039       0
-  34.4522 122.893 102.039       0
+  332.767 69.3165 25.0703       0
+  152.767 69.3165 25.0703       0
+  332.767 69.3165 85.0703       0
+  152.767 69.3165 85.0703       0
+  332.767 69.3165  145.07       0
+  152.767 69.3165  145.07       0
+  332.767 69.3165  205.07       0
+  152.767 69.3165  205.07       0
+  332.767 69.3165  265.07       0
+  152.767 69.3165  265.07       0
+  332.767 69.3165  325.07       0
+  152.767 69.3165  325.07       0
 {% endhighlight %}
 <p>A shortcut for this operation is the command <a href="orientation.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -117,23 +117,23 @@ symmetrise(ori)
 {% highlight plaintext %}
 ans = orientation  
   size: 12 x 1
-  crystal symmetry : 6, X||a*, Y||b, Z||c
+  crystal symmetry : 6, X||a*, Y||b, Z||c*
   specimen symmetry: 112
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  214.452 122.893 162.039       0
-  34.4522 122.893 162.039       0
-  214.452 122.893 222.039       0
-  34.4522 122.893 222.039       0
-  214.452 122.893 282.039       0
-  34.4522 122.893 282.039       0
-  214.452 122.893 342.039       0
-  34.4522 122.893 342.039       0
-  214.452 122.893 42.0394       0
-  34.4522 122.893 42.0394       0
-  214.452 122.893 102.039       0
-  34.4522 122.893 102.039       0
+  332.767 69.3165 25.0703       0
+  152.767 69.3165 25.0703       0
+  332.767 69.3165 85.0703       0
+  152.767 69.3165 85.0703       0
+  332.767 69.3165  145.07       0
+  152.767 69.3165  145.07       0
+  332.767 69.3165  205.07       0
+  152.767 69.3165  205.07       0
+  332.767 69.3165  265.07       0
+  152.767 69.3165  265.07       0
+  332.767 69.3165  325.07       0
+  152.767 69.3165  325.07       0
 {% endhighlight %}
 <p>For specific orientations, e.g. for the cube orientations, symmetrisation leads to multiple identical orientations. This can be prevented by passing the option <code class="language-plaintext highlighter-rouge">unique</code> to the command <a href="orientation.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -143,7 +143,7 @@ symmetrise(orientation.id(cs,ss),'unique')
 {% highlight plaintext %}
 ans = orientation  
   size: 6 x 1
-  crystal symmetry : 6, X||a*, Y||b, Z||c
+  crystal symmetry : 6, X||a*, Y||b, Z||c*
   specimen symmetry: 112
  
   Bunge Euler angles in degree
@@ -163,12 +163,12 @@ angle(ori,symmetrise(orientation.goss(cs))) ./ degree
 
 {% highlight plaintext %}
 ans =
-   29.5193
-   29.5193
-   29.5193
-   29.5193
-   29.5193
-   29.5193
+  130.0915
+  130.0915
+  130.0915
+  130.0915
+  130.0915
+  130.0915
 {% endhighlight %}
 <p>The value is the same for all orientations and equal to the smallest angle to one of the symmetrally equivalent orientations. This can be verified by computing the rotational angle ignoring symmetry.</p>
 {% highlight matlab %}
@@ -177,11 +177,11 @@ angle(ori,symmetrise(orientation.goss(cs)),'noSymmetry') ./ degree
 
 {% highlight plaintext %}
 ans =
-  159.9064
-  141.1684
-   82.7806
-   29.5193
-   44.7610
-  101.2220
+  130.0915
+  139.2094
+  159.0604
+  176.1316
+  152.2061
+  135.0541
 {% endhighlight %}
 <p>Functions that respect crystal symmetry but allow to switch it off using the flag <code class="language-plaintext highlighter-rouge">noSymmetry</code> include <a href="orientation.dot.html">dot</a>, <a href="orientation.unique.html">unique</a>, <a href="orientation.calcCluster.html">calcCluster</a>.</p></div></body></html>

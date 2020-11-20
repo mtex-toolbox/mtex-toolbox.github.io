@@ -1,6 +1,6 @@
 ---
 title: calcGrains
-last_updated: 15-Nov-2020
+last_updated: 20-Nov-2020
 sidebar: function_reference_sidebar
 permalink: EBSD.calcGrains.html
 folder: function_reference
@@ -11,11 +11,25 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcGrains</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-15"><meta name="DC.source" content="script_EBSD__calcGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/calcGrains.m">
+      --><title>calcGrains</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_EBSD__calcGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/calcGrains.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>grains reconstruction from 2d EBSD data</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 grains = calcGrains(ebsd,'angle',10*degree)
+{% endhighlight %}
+
+{% highlight matlab %}
+% allow grains to grow into not indexed regions
+grains = calcGrains(ebsd('indexed'),'angle',10*degree)
+{% endhighlight %}
+
+{% highlight matlab %}
+% do not allow grains to grow into not indexed regions
 grains = calcGrains(ebsd,'unitCell')
+{% endhighlight %}
+
+{% highlight matlab %}
+% follow non convex outer boundary
+grains = calcGrains(ebsd,'boundary','tight')
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -43,7 +57,7 @@ grains = calcGrains(ebsd,'unitCell')
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>threshold|angle</tt>
+            <tt>threshold, angle</tt>
          </td>
          <td>
             <tt>array of threshold angles per phase of mis/disorientation in radians</tt>
@@ -62,11 +76,35 @@ grains = calcGrains(ebsd,'unitCell')
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>unitcell</tt>
+            <tt>unitCell</tt>
          </td>
          <td>
             <tt>omit voronoi decomposition and treat a unitcell lattice</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>FMC</tt>
+         </td>
+         <td>
+            <tt>use fast multiscale clustering method</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>soft</tt>
+         </td>
+         <td>
+            <tt>use markovian clustering algorithm</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>custom</tt>
+         </td>
+         <td>
+            <tt>use a custom property for grain separation</tt>
+         </td>
+      </tr>
    </table>
-</p><h2 id="8">See also</h2></div></body></html>
+</p><h2 id="8">References</h2><div><ul><li>C. McMahon, B. Soe, A. Loeb, A. Vemulkar, M. Ferry, L. Bassman,   Boundary identification in EBSD data with a generalization of fast   multiscale clustering, <a href="https://doi.org/10.1016/j.ultramic.2013.04.009">Ultramicroscopy, 2013, 133:16-25</a>.</li></ul></div><h2 id="9">See also</h2><p><a href="GrainReconstruction.html">GrainReconstruction</a> <a href="GrainReconstructionAdvanced.html">GrainReconstructionAdvanced</a></p></div></body></html>
