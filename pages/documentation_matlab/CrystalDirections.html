@@ -26,19 +26,16 @@ c = cs.cAxis
 
 {% highlight plaintext %}
 a = Miller  
- size: 1 x 1
  mineral: Talc (-1, X||a*, Z||c)
   u v w
   1 0 0
  
 b = Miller  
- size: 1 x 1
  mineral: Talc (-1, X||a*, Z||c)
   u v w
   0 1 0
  
 c = Miller  
- size: 1 x 1
  mineral: Talc (-1, X||a*, Z||c)
   u v w
   0 0 1
@@ -50,7 +47,6 @@ m = Miller(1,0,1,cs,'uvw')
 
 {% highlight plaintext %}
 m = Miller  
- size: 1 x 1
  mineral: Talc (-1, X||a*, Z||c)
   u v w
   1 0 1
@@ -70,7 +66,6 @@ m = Miller(1,0,1,cs,'hkl')
 
 {% highlight plaintext %}
 m = Miller  
- size: 1 x 1
  mineral: Talc (-1, X||a*, Z||c)
   h k l
   1 0 1
@@ -90,40 +85,27 @@ hold off
 </center><p>Note that for non Euclidean crystal frames uvw and hkl notations usually lead to different directions.</p><h2 id="9">Trigonal and Hexagonal Convention</h2><p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices \([UVTW]\) and \((HKIL)\) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is redundant as the first three Miller indeces always sum up to zero, i.e., \(U + V + T = 0\) and \(H + K + I = 0\). The syntax is</p>
 {% highlight matlab %}
 % import trigonal Quartz lattice structure
-cs = loadCIF('quartz')
+cs = loadCIF('quartz');
 
 % a four digit lattice direction
 m = Miller(2,1,-3,1,cs,'UVTW')
 
-plot(m,'upper','labeled')
-
+% a four digit plane normal
 n = Miller(1,1,-2,3,cs,'hkil')
 
+plot(m,'upper','labeled','backgroundColor','white','grid','on')
 hold on
 plot(n,'upper','labeled')
 hold off
-
-drawNow(gcm,'figSize','normal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs = crystalSymmetry  
- 
-  mineral        : Quartz            
-  symmetry       : 321               
-  elements       : 6                 
-  a, b, c        : 4.9, 4.9, 5.4     
-  reference frame: X||a*, Y||b, Z||c*
- 
- 
 m = Miller  
- size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   U  V  T  W
   2  1 -3  1
  
 n = Miller  
- size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   h  k  i  l
   1  1 -2  3
@@ -138,7 +120,6 @@ round(m)
 
 {% highlight plaintext %}
 ans = Miller  
- size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   u v w
   5 4 1
@@ -151,7 +132,6 @@ round(n)
 
 {% highlight plaintext %}
 ans = Miller  
- size: 1 x 1
  mineral: Quartz (321, X||a*, Y||b, Z||c*)
   U  V  T  W
   3  3 -6 11
