@@ -33,7 +33,7 @@ toc: false
   MTEX forum. Rüdiger spends much afford in continuously improving the EBSD
   and grain analysis functionalities in MTEX.</p>
   <p></p>
-  <p> <a href="https://geodynamik.geologie.uni-halle.de/arbeitsgruppe/dr._ruediger_kilian"><span class="glyphicon
+  <p> <a href="https://geodynamics.geo.uni-halle.de/ruediger-kilian"><span class="glyphicon
       glyphicon-home"></span> Martin-Luther-Universität Halle-Wittenberg</a></p>
 </td>
 </tr></table>
