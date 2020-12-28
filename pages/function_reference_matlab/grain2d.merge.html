@@ -1,6 +1,6 @@
 ---
 title: merge
-last_updated: 20-Nov-2020
+last_updated: 28-Dec-2020
 sidebar: function_reference_sidebar
 permalink: grain2d.merge.html
 folder: function_reference
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>merge</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_grain2d__merge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain2d/merge.m">
+      --><title>merge</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-28"><meta name="DC.source" content="script_grain2d__merge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain2d/merge.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>merge grains along special grain boundaries</p><p>Whenever two grains share a grain boundary that is in the list <code class="language-plaintext highlighter-rouge">gB</code> both grains are merged and the common grain boundary is removed. All the properties of the unmerged grains are removed in the merged grains, since there is no common convention for a mean. In case of merging allong small angle grain boundaries one can force MTEX to compute a new meanOrientation using the option <code class="language-plaintext highlighter-rouge">calcMeanOrientation</code>.</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 [grainsMerged,parentId] = merge(grains,gB)
@@ -41,8 +41,8 @@ To make changes, update the MATLAB code and republish this document.
 {% endhighlight %}
 
 {% highlight matlab %}
-% merge inclusions
-[grainsMerged,parentId] = merge(grains,'inclusions')
+% merge all inclusions with a maximum pixel size
+[grainsMerged,parentId] = merge(grains,'inclusions','maxSize',5)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -106,7 +106,26 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
-</p><h2 id="6">Example</h2>
+</p><h2 id="6">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>threshold</tt>
+         </td>
+         <td>
+            <tt>maximum misorientation angle to be merged as similar</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxSize</tt>
+         </td>
+         <td>
+            <tt>maximum number of pixels to be merged as an inclusion</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="7">Example</h2>
 {% highlight matlab %}
 mtexdata small
 grains = smooth(calcGrains(ebsd))

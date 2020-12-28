@@ -1,6 +1,6 @@
 ---
 title: calcParent2Child
-last_updated: 15-Dec-2020
+last_updated: 28-Dec-2020
 sidebar: function_reference_sidebar
 permalink: calcParent2Child.html
 folder: function_reference
@@ -11,19 +11,19 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcParent2Child</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-15"><meta name="DC.source" content="script_calcParent2Child.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/misorientation/calcParent2Child.m">
+      --><title>calcParent2Child</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-28"><meta name="DC.source" content="script_calcParent2Child.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/misorientation/calcParent2Child.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="2">Syntax</h2>
 {% highlight matlab %}
-p2c = calcParent(childOri,p2c)
+p2c = calcParent(childOri,p2c0)
 {% endhighlight %}
 
 {% highlight matlab %}
-p2c = calcParent(c2c,p2c)
-p2c = calcParent(c2c,p2c,alpha)
+p2c = calcParent(c2c,p2c0)
+p2c = calcParent(c2c,p2c0,'dampingFactor',alpha)
 {% endhighlight %}
 
 {% highlight matlab %}
-[p2c, fit] = calcParent(c2c,p2c)
+[p2c, fit] = calcParent(c2c,p2c0)
 {% endhighlight %}
 <h2 id="3">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -45,18 +45,10 @@ p2c = calcParent(c2c,p2c,alpha)
       </tr>
       <tr>
          <td width="100px">
-            <tt>p2c</tt>
+            <tt>p2c0</tt>
          </td>
          <td>
-            <tt>initial gues or list of measured parent to child boundary mis@orientations</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>alpha</tt>
-         </td>
-         <td>
-            <tt>damping factor ( default - 0)</tt>
+            <tt>initial guess of the parent to child orienation relationship</tt>
          </td>
       </tr>
    </table>
@@ -67,7 +59,7 @@ p2c = calcParent(c2c,p2c,alpha)
             <tt>p2c</tt>
          </td>
          <td>
-            <tt>parent to child mis<a href="orientation.orientation.html">orientation</a></tt>
+            <tt>parent to child orienation relationship</tt>
          </td>
       </tr>
       <tr>
@@ -75,7 +67,7 @@ p2c = calcParent(c2c,p2c,alpha)
             <tt>fit</tt>
          </td>
          <td>
-            <tt>disorientation angle between all c2cs misorientations and the computed one</tt>
+            <tt>disorientation angle between all c2c misorientations and the computed one</tt>
          </td>
       </tr>
    </table>
@@ -94,7 +86,15 @@ p2c = calcParent(c2c,p2c,alpha)
             <tt>threshold</tt>
          </td>
          <td>
-            <tt>consider only misorientation within the threshold to the initial p2c (default - 5*degree)</tt>
+            <tt>consider only misorientation within the threshold to the initial p2c (default - 10*degree)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dampingFactor</tt>
+         </td>
+         <td>
+            <tt>default - 1/numVariants</tt>
          </td>
       </tr>
    </table>
