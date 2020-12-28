@@ -1,0 +1,197 @@
+---
+title: parentGrainReconstructor
+last_updated: 28-Dec-2020
+sidebar: function_reference_sidebar
+permalink: parentGrainReconstructor.parentGrainReconstructor.html
+folder: function_reference
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>parentGrainReconstructor</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-12-28"><meta name="DC.source" content="script_parentGrainReconstructor__parentGrainReconstructor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/parentGrainReconstructor.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>class guiding through the parent grain reconstruction process</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+job = parentGrainReconstructor(ebsd, grains)
+{% endhighlight %}
+
+{% highlight matlab %}
+job = parentGrainReconstructor(ebsd, grains, p2c0)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>p2c0</tt>
+         </td>
+         <td>
+            <tt>initial guess for the parent to child orientation relationship</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Class Properties</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>csParent</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> of the parent phase</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>csChild</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> of the child phase</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>p2c</tt>
+         </td>
+         <td>
+            <tt>parent to child orientation relationship</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt>measured <a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grainsMeasured</tt>
+         </td>
+         <td>
+            <tt>measured <a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt>reconstructed grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mergeId</tt>
+         </td>
+         <td>
+            <tt>list of ids to the merged grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fit</tt>
+         </td>
+         <td>
+            <tt/>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>graph</tt>
+         </td>
+         <td>
+            <tt/>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>votes</tt>
+         </td>
+         <td>
+            <tt/>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>numChilds</tt>
+         </td>
+         <td>
+            <tt>s number of child grains for each parent grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isTransformed</tt>
+         </td>
+         <td>
+            <tt>child grains that have been reverted from child to parent phase</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isMerged</tt>
+         </td>
+         <td>
+            <tt>child grains that have been merged into a parent grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>transformedGrains</tt>
+         </td>
+         <td>
+            <tt>transformed measured grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>parentGrains</tt>
+         </td>
+         <td>
+            <tt>measured and reconstructed parent grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>childGrains</tt>
+         </td>
+         <td>
+            <tt>not yet reconstructed child grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>variantId</tt>
+         </td>
+         <td>
+            <tt>reconstructed variant ids</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>packetId</tt>
+         </td>
+         <td>
+            <tt>reconstructed packet ids</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">See also</h2><p><a href="MaParentGrainReconstruction.html">MaParentGrainReconstruction</a> <a href="TiBetaReconstruction.html">TiBetaReconstruction</a></p></div></body></html>
