@@ -93,8 +93,8 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="soerensen.jpg" alt="Picture of Bjoern Eske Soerensen" max-width='120'%}
 </td><td valign="top">
-  <p><b>Bj&oslash;rn Eske S&oslash;rensen</b> contributes to spectral difraction and birefringence.</p>
-  <p><a href="https://www.ntnu.edu/employees/bjorn.sorensen">Department of Geoscience and Petroleum,<b> Norwegian University of Science and Technology</a></p>
+  <p><b><a href="https://www.ntnu.edu/employees/bjorn.sorensen">Bj&oslash;rn Eske S&oslash;rensen</a></b> contributes to spectral difraction and birefringence.</p>
+  <p><span class="glyphicon glyphicon-home"></span> Department of Geoscience and Petroleum, <b>Norwegian University of Science and Technology</p>
 </td>
 </tr></table>
 </div>
