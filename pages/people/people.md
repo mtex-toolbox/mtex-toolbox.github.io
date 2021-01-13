@@ -18,7 +18,7 @@ toc: false
     figure to ODF inversion algorithm and leads since than the development.</p>
   <p></p>
   <p> <a href="mailto:Ralf.Hielscher@mathematik.tu-chemnitz.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
-  <p> <a href="www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
+  <p> <a href="https://www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
 </td>
 </tr></table>
 </div>
@@ -81,7 +81,7 @@ toc: false
 </td><td valign="top"> <p><b>Felix Bartel</b>
 	worked on MTEX during his master thesis at the TU Chemnitz in 2019. He
 	wrote the code for spherical function classes.</p>
-      <p> <a href="www.tu-chemnitz.de/~febar"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
+      <p> <a href="https://www.tu-chemnitz.de/~febar"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
 </td>
 </tr></table>
 </div>
@@ -94,7 +94,7 @@ toc: false
   {% include image.html file="soerensen.jpg" alt="Picture of Bjoern Eske Soerensen" max-width='120'%}
 </td><td valign="top">
   <p><b>Bj&oslash;rn Eske S&oslash;rensen</b> contributes to spectral difraction and birefringence.</p>
-  <p><a href="https://www.ntnu.edu/employees/bjorn.sorensen">Department of Geoscience and Petroleum, NTNU, Norway</a></p>
+  <p><a href="https://www.ntnu.edu/employees/bjorn.sorensen">Department of Geoscience and Petroleum,<b> Norwegian University of Science and Technology</a></p>
 </td>
 </tr></table>
 </div>
@@ -126,7 +126,7 @@ toc: false
 	  the orientation relationship analysis and parent grain reconstruction
 	  algorithm in MTEX towards arbitrary phase combinations. He is also the
 	  author of export functions for ctf and ang files.</p>
-	  <p> <a href=""><span class="glyphicon glyphicon-home"></span> Department of Mechanical Engineering,<br> Technical University of Denmark</a></p>
+	  <p> <a href="https://www.dtu.dk/english/service/phonebook/person?id=74988&tab=3&qt=dtuprojectquery"><span class="glyphicon glyphicon-home"></span> Department of Mechanical Engineering,<br> Technical University of Denmark</a></p>
 </td>
 </tr></table>
 </div>
