@@ -107,7 +107,7 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="Tuomo_Nyyssoenen.jpg" alt="Picture of Tuomo Nyyssoenen" max-width='120'%}
 </td><td valign="top">
-      <p><b>Tuomo Nyyssoenen</b> worked on parent austenite reconstruction
+      <p><b><a href="https://www.researchgate.net/profile/Tuomo-Nyyssoenen">Tuomo Nyyssoenen</a></b> worked on parent austenite reconstruction
       during his PhD at Tampere University of Technology. He wrote the initial
       MTEX code for the reconstruction of parent grain structures and the
       determination of the parent to child orientation relationship.</p>
