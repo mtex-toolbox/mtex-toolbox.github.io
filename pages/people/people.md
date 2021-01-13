@@ -118,12 +118,36 @@ toc: false
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
-  {% include image.html file="Oliver_Johnson.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
+  {% include image.html file="niessen.jpg" alt="Picture of Frank Niessen" max-width='120'%}
+</td><td valign="top">
+      <p><b><a href="https://www.researchgate.net/profile/Frank_Niessen4">Frank Niessen</a></b> worked on MTEX by generalizing and optimizing
+	  the orientation relationship analysis and parent grain reconstruction
+	  algorithm to solve for arbitrary phase combinations and degrees of
+	  transformation. Frank also wrote MTEX's export functions for ctf and ang
+	  files.</p>
+	  <p> <a href=""><span class="glyphicon glyphicon-home"></span>Department of Mechanical Engineering,<br> Technical University of Denmark</a></p>
+</td>
+</tr></table>
+</div>
+</div>
+
+<div class='row'>
+
+<div class="col-md-6">
+<table border='0' cellpadding='10'><tr>
+<td width="140" valign="top">
+  {%s include image.html file="Oliver_Johnson.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
 </td><td valign="top">
       <p><b>Oliver Kent Johnson</b> finished his PhD in 2015 under the
       supervision of Christopher A. Schuh at the Massachusetts Institute of
       Technology. He implemented the misorientation color key.</p>
 </td>
+</tr></table>
+</div>
+
+<div class="col-md-6">
+<table border='0' cellpadding='10'><tr>
+
 </tr></table>
 </div>
 </div>
