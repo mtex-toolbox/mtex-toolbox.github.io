@@ -136,7 +136,7 @@ toc: false
 <div class="col-md-6">
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
-  {%s include image.html file="Oliver_Johnson.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
+  {% include image.html file="Oliver_Johnson.jpg" alt="Picture of Oliver kent Johnson" max-width='120'%}
 </td><td valign="top">
       <p><b>Oliver Kent Johnson</b> finished his PhD in 2015 under the
       supervision of Christopher A. Schuh at the Massachusetts Institute of
