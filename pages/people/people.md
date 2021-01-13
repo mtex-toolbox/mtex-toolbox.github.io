@@ -120,12 +120,13 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="niessen.jpg" alt="Picture of Frank Niessen" max-width='120'%}
 </td><td valign="top">
-      <p><b><a href="https://www.researchgate.net/profile/Frank_Niessen4">Frank Niessen</a></b> worked on MTEX by generalizing and optimizing
+      <p><b><a
+	  href="https://www.researchgate.net/profile/Frank_Niessen4">Frank
+	  Niessen</a></b> generalized and optimized
 	  the orientation relationship analysis and parent grain reconstruction
-	  algorithm to solve for arbitrary phase combinations and degrees of
-	  transformation. Frank also wrote MTEX's export functions for ctf and ang
-	  files.</p>
-	  <p> <a href=""><span class="glyphicon glyphicon-home"></span>Department of Mechanical Engineering,<br> Technical University of Denmark</a></p>
+	  algorithm in MTEX towards arbitrary phase combinations. He is also the
+	  author of export functions for ctf and ang files.</p>
+	  <p> <a href=""><span class="glyphicon glyphicon-home"></span> Department of Mechanical Engineering,<br> Technical University of Denmark</a></p>
 </td>
 </tr></table>
 </div>
