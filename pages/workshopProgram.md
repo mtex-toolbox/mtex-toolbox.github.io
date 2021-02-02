@@ -31,7 +31,8 @@ Lecture 5: _*Orientations*_
 Lecture 6: _*Density Estimation, ODF, Pole Figures, texture strength*_
 
 Exercise 2:
-
+  -  import orientations, compute ODF,PDF, IPDF, plotting
+  - (maybe already import the xrf data for the next day, even though ODF from PF is still far away?)
 
 ## Wednesday
 
@@ -55,15 +56,17 @@ Lecture 8: _*Grains*_
   - shape properties, ellipse fitting, convex hull
   - selecting grains
 
-Exercise 3: X-ray pole figures + EBSD 
-  (Luiz)
-  - with data from same sample -> Luiz quartz mylonite  
-  - I think it is very important to explain here a lot about aligning the reference system
-  - therefore a combined example helps a lot the understanding
-
-Exercise 4: Introduction from grain properties - EBSD 
+Exercise 3: Introduction to EBSD 
+  (Luiz/Rüdiger)
+  - importing, coordintate system alignment
+  - comparison with pf data from same sample -> Luiz quartz mylonite  
+  - orientation mappings, direction mappings
+  
+Exercise 4: Introduction grains 
   (Rüdiger)
-  - I think ebsd + grain is so important that we should have 2 exercises here 
+  - grain segmentation, different segmentation possibilities 
+  - computing grain properties
+  - plotting grains and properties
   
 
 ## Thursday
@@ -93,9 +96,14 @@ Lecture 11: _*Plastic and elastic deformation*_
   - the GND
   - m-prime ?
 
-Exercise 5:
-  - mostly grain boundaries ?
+Exercise 5: Grains and grain boundaries
   (Rüdiger)
+  - grains and orientations (mean and merging)
+  - intragranular misorientations
+  - grain boundaries (properties etc)
+  - intergranular misorientation axes
+  - plotting of misorientation axes / angles
+  - selecting grain boundaries (based on everything)
   
 ## Friday
 
