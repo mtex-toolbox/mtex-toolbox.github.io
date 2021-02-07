@@ -11,7 +11,7 @@ Lecture 2: _*Crystal Lattices*_
 
   - direct, reciprocal coordinates, zone equation, crystal shape
 
-Lecture 3: _*Rotations*_
+Lecture 3: _*Rotations and Symmetries*_
 (Ralf)
 
   - definition, operations, representations, visualization (no quaternions :))
@@ -22,17 +22,29 @@ Exercise 1:
 
 ## Tuesday
 
-Lecture 4: _*Crystal Symmetries*_
-
-Lecture 5: _*Orientations*_
+Lecture 4: _*Orientations*_
   
-  - definition, pole figures, inverse pole figures
+  - definition, pole figures, inverse pole figures 
 
-Lecture 6: _*Density Estimation, ODF, Pole Figures, texture strength*_
+Lecture 5: _*Density Functions*_
+
+  - Density Estimation
+  - Spherical Functions
+  - ODF
+  - Visualization
+  - Properties
+
+Lecture 6: _*ODF Reconstruction from XRD*_ (Ralf)
+
+  - Pole Figures, texture strength
+  - Data import
+  - Plot and modifiy
+  - Ghost effect and ghost correction
+  - ODF estimation
 
 Exercise 2:
-  -  import orientations, compute ODF,PDF, IPDF, plotting
-  - (maybe already import the xrf data for the next day, even though ODF from PF is still far away?)
+  - import orientations, compute ODF,PDF, IPDF, plotting
+  - maybe already import the xrf
 
 ## Wednesday
 
@@ -107,12 +119,8 @@ Exercise 5: Grains and grain boundaries
   
 ## Friday
 
-Lecture 12: _*ODF Reconstruction from XRD*_ (Ralf)
 
-  - Data import
-  - Plot and modifiy
-  - Ghost effect and ghost correction
-  - ODF estimation
+Lecture 12: 
 
 Lecture 13: _*Tensorial properties*_
   (Luiz)
