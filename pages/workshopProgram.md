@@ -33,14 +33,16 @@ Lecture 5: _*Density Functions*_
   - ODF
   - Visualization
   - Properties
+  - texture strength
 
 Lecture 6: _*ODF Reconstruction from XRD*_ (Ralf)
 
-  - Pole Figures, texture strength
+  - experimental Pole Figures
   - Data import
   - Plot and modifiy
-  - Ghost effect and ghost correction
   - ODF estimation
+  - uniqueness of the inversion problem
+  - Ghost effect and ghost correction
 
 Exercise 2:
   - import orientations, compute ODF,PDF, IPDF, plotting
