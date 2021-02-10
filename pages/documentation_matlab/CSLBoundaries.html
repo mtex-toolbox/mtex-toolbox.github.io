@@ -1,6 +1,6 @@
 ---
 title: CSL Boundaries
-last_updated: 20-Nov-2020
+last_updated: 09-Feb-2021
 sidebar: documentation_sidebar
 permalink: CSLBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/CSLBoundaries.m">
+      --><title>CSL Boundaries</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-02-09"><meta name="DC.source" content="script_CSLBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/CSLBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of CSL boundaries. Therefore lets start by importing some Iron data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 mtexdata csl
@@ -95,7 +95,7 @@ hold off
 
 % overlay the boundaries of the merged grains with the previous plot
 hold on
-plot(mergedGrains.boundary,'linecolor','w','linewidth',2)
+plot(mergedGrains.boundary,'linecolor','w','linewidth',3)
 hold off
 {% endhighlight %}
 <center>
@@ -171,7 +171,7 @@ drawNow(gcm)
 {% include inline_image.html file="CSLBoundaries_08.png" %}
 </center><p>The MDF can be now used to compute prefered misorientations</p>
 {% highlight matlab %}
-mori = mdf.calcModes(2)
+[~,mori] = max(mdf,'numLocal',2)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -245,7 +245,6 @@ mdf.eval(csl3)
 
 {% highlight plaintext %}
 mori = misorientation  
-  size: 1 x 1
   crystal symmetry : iron (m-3m)
   crystal symmetry : iron (m-3m)
  

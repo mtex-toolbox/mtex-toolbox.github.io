@@ -1,6 +1,6 @@
 ---
 title: Martensite Variants
-last_updated: 20-Nov-2020
+last_updated: 10-Feb-2021
 sidebar: documentation_sidebar
 permalink: MartensiteVariants.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Variants</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_MartensiteVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MartensiteVariants.m">
+      --><title>Martensite Variants</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-02-10"><meta name="DC.source" content="script_MartensiteVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MartensiteVariants.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss the austenite (fcc) to ferrite (bcc) phase transformation on the example of an EBSD data set collected on a plessitic microstructure of the Emsland iron meteorite. Plessite is the greek description for filling iron and occurs as remaining volumes between the already transformed kamacite (bcc in meteorites) rims. Plessite regionons are commonly surrounded by a very thin taenite (fcc) ribbons. The filling iron contains as major phases again bcc and fcc, where the orientation of fcc practically always indicates the orientation of the formerly huge fcc grain in the planetary body which can easily reach the dimension of meters.</p>
 {% highlight matlab %}
 plotx2east
@@ -73,9 +73,7 @@ fit = std(ebsd('Aus').orientations) ./ degree
 
 {% highlight plaintext %}
 parenOri = orientation  
-  size: 1 x 1
   crystal symmetry : Austenite (m-3m)
-  specimen symmetry: 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
@@ -158,7 +156,6 @@ mean(angle(mori, p2cMean)) ./ degree
 
 {% highlight plaintext %}
 p2cMean = misorientation  
-  size: 1 x 1
   crystal symmetry : Austenite (m-3m)
   crystal symmetry : Ferrite, bcc (m-3m)
  
@@ -191,32 +188,41 @@ mean(angle(mori,p2cIter)) ./degree
 {% endhighlight %}
 
 {% highlight plaintext %}
--> Convergence reached after 11 iterations
+optimizing parent to child orientation relationship
+  (180°,99.7°,45°)      5
+  (181.1°,98.6°,43.2°)  3.1
+  (181.8°,98.3°,43.5°)  2.9
+  (182.4°,98.1°,44.8°)  2.7
+  (182.1°,97.9°,44.2°)  2.7
+  (182.5°,97.7°,44.5°)  2.7
+  (182.6°,97.7°,44.7°)  2.7
+ 
  
 p2cIter = misorientation  
-  size: 1 x 1
   crystal symmetry : Austenite (m-3m)
   crystal symmetry : Ferrite, bcc (m-3m)
  
   Bunge Euler angles in degree
     phi1     Phi    phi2    Inv.
-  182.65 98.0182  46.564       0
+  182.65 97.6263 44.6938       0
  
 ans =
-    2.5032
+    2.8184
 {% endhighlight %}
 <p>We observe that the parent to child orientation relationship computed solely from the child to child misorientations fits the actual orientation relationship equaly well.</p><h2 id="11">Classification of child variants</h2><p>Once we have determined parent orientations and a parent to child orientation relationship we may proceed further by classifying the child orientations into different variants. This is computed by the command <a href="calcChildVariant.html"><code class="language-plaintext highlighter-rouge">calcChildVariant</code></a>.</p>
 {% highlight matlab %}
 % compute for each child orientation a variantId
-[variantId, packetId] = calcChildVariant(parenOri,childOri,p2cIter);
+[variantId, packetId] = calcChildVariant(parenOri,childOri,p2cIter,'morito');
 
 % colorize the orientations according to the variantID
-color = ind2color(variantId);
+color = ind2color(variantId,'ordered');
 plotPDF(childOri,color,h_bcc,'MarkerSize',5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 208 random orientations out of 3886 given orientations
+Warning: Packet ID calculation
+assuming {111}_p||{110}_c 
+  I'm plotting 208 random orientations out of 3886 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
