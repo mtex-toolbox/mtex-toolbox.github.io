@@ -128,7 +128,7 @@ To make changes, update the MATLAB code and republish this document.
 <!-- Header -->
 <xsl:template name="header">
   <font size="2">
-    <a><xsl:attribute name="href">https://github.com/mtex-toolbox/mtex/blob/develop<xsl:value-of select="$toolbox/pageSource"/></xsl:attribute>
+    <a><xsl:attribute name="href">https://github.com/mtex-toolbox/examples/blob/master<xsl:value-of select="$toolbox/pageSource"/></xsl:attribute>
     edit page</a>
     author: <xsl:value-of select="$toolbox/author"/>
   </font>
