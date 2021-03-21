@@ -1,6 +1,6 @@
 ---
 title: Parent Beta Phase Reconstruction in Titanium Alloys
-last_updated: 09-Feb-2021
+last_updated: 21-Mar-2021
 sidebar: documentation_sidebar
 permalink: TiBetaReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-02-09"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
+      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss parent grain reconstruction at the example of a titanium alloy. Lets start by importing a sample data set</p>
 {% highlight matlab %}
 mtexdata alphaBetaTitanium
@@ -21,6 +21,8 @@ plot(ebsd('Ti (alpha)'),ebsd('Ti (alpha)').orientations,'figSize','large')
 {% endhighlight %}
 
 {% highlight plaintext %}
+saving data to /home/hielscher/mtex/master/data/alphabetatitanium.mat
+ 
 ebsd = EBSD  
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
@@ -40,7 +42,8 @@ round2Miller(beta2alpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-(110) || (0001)   [1-11] || [-2110]   error: 0°
+plane parallel   direction parallel    fit
+(110) || (0001)   [-11-1] || [2-1-10]     0°
 {% endhighlight %}
 <p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initital child grains from out EBSD data set.</p>
 {% highlight matlab %}
@@ -63,7 +66,7 @@ job = parentGrainReconstructor
  parent to child OR: (185.3°,90°,45°)
    fit with parent to child misorientations: 0.84°, 1.2°, 1.7°, 3.2° (quintiles)
    fit with child to child misorientations: 0.69°, 0.97°, 1.3°, 1.7° (quintiles)
-   closest ideal OR: (110) || (0001)   [1-11] || [-2110]   error: 0°
+   closest ideal OR: (110) || (0001)   [-11-1] || [2-1-10]   error: 0°
 {% endhighlight %}
 <p>The output of the <code class="language-plaintext highlighter-rouge">job</code> variable allows you to keep track of the amount of already recovered parent grains. Using the variable <code class="language-plaintext highlighter-rouge">job</code> you have access to the following properties</p><div><ul><li><code class="language-plaintext highlighter-rouge">job.grainsMeasured</code> - the reference grain reconstruction from your EBSD data</li><li><code class="language-plaintext highlighter-rouge">job.grains</code> - the grains at the current stage of parent grain reconstruction</li><li><code class="language-plaintext highlighter-rouge">job.mergeId</code> - the relationship between the reference grains <code class="language-plaintext highlighter-rouge">job.grainsMeasured</code> and the current grains <code class="language-plaintext highlighter-rouge">job.grains</code>, i.e., <code class="language-plaintext highlighter-rouge">job.grainsMeasured(ind)</code> goes into the merged grain <code class="language-plaintext highlighter-rouge">job.grains(job.mergeId(ind))</code></li><li><code class="language-plaintext highlighter-rouge">job.numChilds</code> - number of childs of each current parent grain</li><li><code class="language-plaintext highlighter-rouge">job.parenGrains</code> - the current parent grains</li><li><code class="language-plaintext highlighter-rouge">job.childGrains</code> - the current child grains</li><li><code class="language-plaintext highlighter-rouge">job.isTransformed</code> - which of the <code class="language-plaintext highlighter-rouge">grainsMeasured</code> have a computed parent</li><li><code class="language-plaintext highlighter-rouge">job.isMerged</code> - which of the <code class="language-plaintext highlighter-rouge">grainsMeasured</code> have been merged into a parent grain</li><li><code class="language-plaintext highlighter-rouge">job.transformedGrains</code> - child grains in <code class="language-plaintext highlighter-rouge">grainsMeasured</code> with computed parent grain</li></ul></div><p>Additionaly, the <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a> class provides the following operations for parent grain reconstruction. These operators can be applied multiple times and in any order to archieve the best possible reconstruction.</p><div><ul><li><code class="language-plaintext highlighter-rouge">job.calcGBVotes</code> - detect child/child and parent/child grain boundaries</li><li><code class="language-plaintext highlighter-rouge">job.calcTPVotes</code> - detect child/child/child triple points</li><li><code class="language-plaintext highlighter-rouge">job.calcParentFromVote</code> - recover parent grains from votes</li><li><code class="language-plaintext highlighter-rouge">job.calcParentFromGraph</code> - recover parent grains from graph clustering</li><li><code class="language-plaintext highlighter-rouge">job.mergeSimilar</code> - merge similar parent grains</li><li><code class="language-plaintext highlighter-rouge">job.mergeInclusions</code> - merge inclusions</li></ul></div><h2 id="7">Compute parent orientations from triple junctions</h2><p>In present datas set we have very little and unreliable parent measurements. Therefore, we use triple junctions as germ cells for the parent parent grains. In a first step we identify triple junctions that have misorientations that are compatible with a common parent orientation using the command <a href="parentGrainReconstructor.calcTPVotes.html"><code class="language-plaintext highlighter-rouge">calcTPVotes</code></a>. This common parent orientation is then stored as votes for the three adjacent grains.</p>
 {% highlight matlab %}
@@ -80,7 +83,7 @@ ans = parentGrainReconstructor
  parent to child OR: (185.3°,90°,45°)
    fit with parent to child misorientations: 0.84°, 1.2°, 1.7°, 3.2° (quintiles)
    fit with child to child misorientations: 0.69°, 0.97°, 1.3°, 1.7° (quintiles)
-   closest ideal OR: (110) || (0001)   [1-11] || [-2110]   error: 0°
+   closest ideal OR: (110) || (0001)   [-11-1] || [2-1-10]   error: 0°
  
  votes: 281787 
    best fit: 1.1°, 1.4°, 1.7°, 2.1°         (quintiles)
@@ -103,7 +106,7 @@ ans = parentGrainReconstructor
  parent to child OR: (185.3°,90°,45°)
    fit with parent to child misorientations: 0.82°, 1.2°, 1.9°, 3.8° (quintiles)
    fit with child to child misorientations: 0.81°, 1.3°, 2.5°, 24° (quintiles)
-   closest ideal OR: (110) || (0001)   [1-11] || [-2110]   error: 0°
+   closest ideal OR: (110) || (0001)   [-11-1] || [2-1-10]   error: 0°
 {% endhighlight %}
 <p>We observe that after this step more then 90 percent of the grains became parent grains. Lets visualize these reconstructed beta grains</p>
 {% highlight matlab %}
@@ -140,7 +143,7 @@ ans = parentGrainReconstructor
  parent to child OR: (185.3°,90°,45°)
    fit with parent to child misorientations: 29°, 35°, 41°, 42° (quintiles)
    fit with child to child misorientations: 1.7°, 6.4°, 18°, 25° (quintiles)
-   closest ideal OR: (110) || (0001)   [1-11] || [-2110]   error: 0°
+   closest ideal OR: (110) || (0001)   [-11-1] || [2-1-10]   error: 0°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_03.png" %}
@@ -163,7 +166,7 @@ ans = parentGrainReconstructor
  parent to child OR: (185.3°,90°,45°)
    fit with parent to child misorientations: 20°, 34°, 35°, 42° (quintiles)
    fit with child to child misorientations: 1.7°, 6.7°, 17°, 25° (quintiles)
-   closest ideal OR: (110) || (0001)   [1-11] || [-2110]   error: 0°
+   closest ideal OR: (110) || (0001)   [-11-1] || [2-1-10]   error: 0°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_04.png" %}
@@ -186,7 +189,7 @@ ans = parentGrainReconstructor
  parent to child OR: (185.3°,90°,45°)
    fit with parent to child misorientations: 2.5°, 12°, 28°, 33° (quintiles)
    fit with child to child misorientations: 1.7°, 5.5°, 11°, 25° (quintiles)
-   closest ideal OR: (110) || (0001)   [1-11] || [-2110]   error: 0°
+   closest ideal OR: (110) || (0001)   [-11-1] || [2-1-10]   error: 0°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_05.png" %}

@@ -1,6 +1,6 @@
 ---
 title: Parent Beta Phase Reconstruction in Titanium Alloys
-last_updated: 09-Feb-2021
+last_updated: 21-Mar-2021
 sidebar: documentation_sidebar
 permalink: TiBetaReconstructionAdvanced.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-02-09"><meta name="DC.source" content="script_TiBetaReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstructionAdvanced.m">
+      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_TiBetaReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstructionAdvanced.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss parent grain reconstruction at the example of a titanium alloy. Lets start by importing a sample data set</p>
 {% highlight matlab %}
 mtexdata alphaBetaTitanium
@@ -44,7 +44,8 @@ round2Miller(beta2alpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-(110) || (0001)   [1-11] || [-2110]   error: 0°
+plane parallel   direction parallel    fit
+(110) || (0001)   [-11-1] || [2-1-10]     0°
 {% endhighlight %}
 <p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Detecting triple points that belong to the same parent orientation</h2><p>In a first step we want to identify triple junctions that have misorientations that are compatible with a common parent orientations. To this end we first compute alpha grains using the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> which turn all quadruple junctions into 2 triple junctions. Furthermore, we choose a very small threshold of 1.5 degree for the identification of grain boundaries to avoid alpha orientations that belong to different beta grains get merged into the same alpha grain.</p>
 {% highlight matlab %}

@@ -1,6 +1,6 @@
 ---
 title: Grain Boundary Properties
-last_updated: 20-Nov-2020
+last_updated: 21-Mar-2021
 sidebar: documentation_sidebar
 permalink: BoundaryProperties.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryProperties.m">
+      --><title>Grain Boundary Properties</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_BoundaryProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryProperties.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discus geometric properties that can be derived from grain boundaries. Lets start by importing some EBSD data and computing grain boundaries.</p>
 {% highlight matlab %}
 % load some example data
@@ -250,7 +250,6 @@ inv(ebsd('id',gB8.ebsdId(1,2)).orientations) .* ebsd('id',gB8.ebsdId(1,1)).orien
 
 {% highlight plaintext %}
 ans = misorientation  
-  size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
   antipodal:         true
@@ -261,7 +260,6 @@ ans = misorientation
  
  
 ans = misorientation  
-  size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
  
@@ -282,7 +280,7 @@ gB_Mg = grainBoundary
 {% endhighlight %}
 <p>Then the misorientation angles can be plotted by</p>
 {% highlight matlab %}
-plot(gB_Mg,gB_Mg.misorientation.angle./degree,'linewidth',3)
+plot(gB_Mg,gB_Mg.misorientation.angle./degree,'linewidth',4)
 mtexColorbar('title','misorientation angle (°)')
 {% endhighlight %}
 <center>
@@ -294,7 +292,7 @@ ori = ebsd('id',gB_Mg.ebsdId).orientations;
 axes = axis(ori(:,1),ori(:,2),'antipodal')
 
 % plot the angle between the misorientation axis and the boundary direction
-plot(gB_Mg,angle(gB_Mg.direction,axes),'linewidth',3)
+plot(gB_Mg,angle(gB_Mg.direction,axes),'linewidth',4)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -307,7 +305,7 @@ axes = vector3d
 </center><p>We observe that the angle is quite oscilatory. This is because of the stair casing effect when reconstructing grains from gridded EBSD data. The weaken this effect we may average the segment directions using the command <a href="grainBoundary.calcMeanDirection.html">calcMeanDirection</a></p>
 {% highlight matlab %}
 % plot the angle between the misorientation axis and the boundary direction
-plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),'linewidth',3)
+plot(gB_Mg,angle(gB_Mg.calcMeanDirection(4),axes),'linewidth',4)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryProperties_05.png" %}
@@ -334,7 +332,7 @@ ans =
 components = unique(gB.componentId);
 for cId = components.'
   plot(gB(gB.componentId == cId),'lineColor',ind2color(cId),...
-    'micronbar','off','lineWidth',3,'displayName',num2str(cId))
+    'micronbar','off','lineWidth',4,'displayName',num2str(cId))
   hold on
 end
 hold off
