@@ -99,6 +99,7 @@ xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
 exOut = fullfile(pwd,'..','pages','examples_matlab');
 options.outDir = exOut;
 options.xml.toolbox.folder.Text = 'examples';
+options.publishSettings.stylesheet = fullfile(pwd,'examples.xsl');
 
 publish(mtexExFiles,options);
 

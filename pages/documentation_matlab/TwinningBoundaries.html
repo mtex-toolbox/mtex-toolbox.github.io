@@ -1,6 +1,6 @@
 ---
 title: Twinning Analysis
-last_updated: 20-Nov-2020
+last_updated: 21-Mar-2021
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-11-20"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
+      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 % load some example data
@@ -106,7 +106,6 @@ round2Miller(mori_mean)
 
 {% highlight plaintext %}
 mori_mean = misorientation  
-  size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
   antipodal:         true
@@ -116,7 +115,8 @@ mori_mean = misorientation
   90.5949 86.0962 269.995       0
  
  
-(10-1-2) || (-101-2)   [1-210] || [1-210]   error: 0.63°
+    plane parallel   direction parallel     fit
+(0-111) || (1-101)   [30-33] || [10-1-1]     0.628°
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
@@ -126,7 +126,6 @@ twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
 
 {% highlight plaintext %}
 twinning = misorientation  
-  size: 1 x 1
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
   crystal symmetry : Magnesium (6/mmm, X||a*, Y||b, Z||c*)
  
@@ -145,7 +144,6 @@ twinning.angle / degree
 
 {% highlight plaintext %}
 ans = Miller  
- size: 1 x 1
  mineral: Magnesium (622, X||a*, Y||b, Z||c*)
    h  k  i  l
   -1  2 -1  0
