@@ -68,7 +68,7 @@ toc: false
 <td width="140" valign="top">
   {% include image.html file="addons_ORTools.png" alt="Graphical Abstract ORTools" max-width='120'%}
 </td><td valign="top">
-  <p><b>ORTools</b> (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full orientation-related phase transformation. ORTools works serves as an add-on to the phase transition functionalities in MTEX.</p>
+  <p><b>ORTools</b> (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full orientation-related phase transformation. ORTools serves as an add-on to the phase transition functionalities in MTEX.</p>
   <p>
   <p> <a href="https://www.researchgate.net/profile/Azdiar_Gazder"><span class="glyphicon glyphicon-user"></span> Azdiar A. Gazder</a>, 
       <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
