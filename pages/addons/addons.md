@@ -66,6 +66,21 @@ toc: false
 <div class='row'>
 <table border='0' cellpadding='10'><tr>
 <td width="140" valign="top">
+  {% include image.html file="addons_ORTools.png" alt="Graphical Abstract ORTools" max-width='120'%}
+</td><td valign="top">
+  <p><b>ORTools</b> (orientation relationship tools) is a function library for OR discovery, advanced OR analysis and the plotting of visually stunning and informative publication-ready figures particular to microstructures undergone partial or full orientation-related phase transformation. It as used as an add-on to the phase transition functionalities in MTEX.</p>
+  <p>
+  <p> <a href="https://www.researchgate.net/profile/Azdiar_Gazder"><span class="glyphicon glyphicon-user"></span> Azdiar A. Gazder</a>, 
+      <a href="https://www.researchgate.net/profile/Frank_Niessen4"><span class="glyphicon glyphicon-user"></span> Frank Niessen</a></p>
+  <p> <a href="https://www.github.com/frankNiessen/ORTools"><span class="glyphicon glyphicon-home"></span> https://github.com/frankNiessen/ORTools</a></p>
+  </p>
+</td>
+</tr></table>
+</div>
+
+<div class='row'>
+<table border='0' cellpadding='10'><tr>
+<td width="140" valign="top">
   {% include image.html file="addons_phaseSegmenter.png" alt="" max-width='120'%}
 </td><td valign="top">
   <p><b>phaseSegmenter</b> enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.</p>
