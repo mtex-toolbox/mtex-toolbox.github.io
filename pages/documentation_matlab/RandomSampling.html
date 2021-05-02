@@ -1,6 +1,6 @@
 ---
 title: Random Sampling
-last_updated: 21-Mar-2021
+last_updated: 01-May-2021
 sidebar: documentation_sidebar
 permalink: RandomSampling.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
+      --><title>Random Sampling</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Assume an arbitrary <a href="ODFTheorie.html">ODF</a> either from texture modelling or recovered from XRD pole figure measurements a common problem is the simulation of random individual orientations that are distributed according the given ODF. This is helpful crucial in many application, e.g., for running plastic deformation models like VPSC or verifying the accuracy <a href="DensityEstimation.html">density estimation methods</a>. Here we start with a trigonal alpha-fibre ODF which we define by</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
@@ -19,11 +19,6 @@ fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(fibre.alpha(cs),'halfwidth',20*deg
 
 plot(fibre_odf,'sections',6,'silent')
 mtexColorbar
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Miller indece are not orthogonal.
-Maximum deviation is 27 degree
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_01.png" %}
@@ -38,9 +33,8 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation  
+ori = orientation (321 -> xyz)
   size: 50000 x 1
-  crystal symmetry : 321, X||a*, Y||b, Z||c*
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_02.png" %}
@@ -82,6 +76,6 @@ calcError(odf_rec,fibre_odf)
 
 {% highlight plaintext %}
 ans =
-    0.0517
+    0.0527
 {% endhighlight %}
 <h2 id="6">Exporting Random Orientations</h2><p>In order to make use of the sampled orientations you pronbably want to <a href="OrientationExport.html">export</a> them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <code class="language-plaintext highlighter-rouge"><a href="quaternion.export.html">export</a></code> and <code class="language-plaintext highlighter-rouge"><a href="orientation.export_VPSC.html">export_VPSC</a></code>.</p></div></body></html>
