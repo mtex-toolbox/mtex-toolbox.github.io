@@ -1,6 +1,6 @@
 ---
 title: calcGBFit
-last_updated: 21-Mar-2021
+last_updated: 01-May-2021
 sidebar: function_reference_sidebar
 permalink: parentGrainReconstructor.calcGBFit.html
 folder: function_reference
@@ -11,19 +11,28 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcGBFit</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_parentGrainReconstructor__calcGBFit.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/calcGBFit.m">
+      --><title>calcGBFit</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_parentGrainReconstructor__calcGBFit.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/calcGBFit.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>fit between child to child misorientations and job.p2c</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-[fit, c2cPairs] = job.calcGBFit
+[fit, pairs] = job.calcGBFit
 {% endhighlight %}
 
 {% highlight matlab %}
 % visualize the result
-[fit,c2cPairs] = job.calcGBFit;
-[gB,pairId] = job.grains.boundary.selectByGrainId(c2cPairs);
-plot(gB, fit(pairId) ./ degree,'linewidth',2);
+[gB, pairId] = job.grains.boundary.selectByGrainId(pairs);
+plot(gB, fit(pairId) ./ degree, 'linewidth',2);
 setColorRange([2,8])
 mtexColorMap white2black
+{% endhighlight %}
+
+{% highlight matlab %}
+% consider only P2C neighbors
+[fit, p2cPairs] = job.calcGBFit('p2c')
+{% endhighlight %}
+
+{% highlight matlab %}
+% consider only C2C neighbors
+[fit, c2cPairs] = job.calcGBFit('c2c')
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -43,15 +52,15 @@ mtexColorMap white2black
             <tt>fit</tt>
          </td>
          <td>
-            <tt>fit between child to child misorientations and job.p2c</tt>
+            <tt>fit between the grain boundary misorientations and job.p2c</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>c2cPairs</tt>
+            <tt>pairs</tt>
          </td>
          <td>
-            <tt>list of grainId of child to child neighbours</tt>
+            <tt>list of grainId of the neighboring grains</tt>
          </td>
       </tr>
    </table>

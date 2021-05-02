@@ -1,6 +1,6 @@
 ---
 title: Martensite Parent Grain Reconstruction
-last_updated: 21-Mar-2021
+last_updated: 01-May-2021
 sidebar: documentation_sidebar
 permalink: MaParentGrainReconstructionAdvanced.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_MaParentGrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstructionAdvanced.m">
+      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_MaParentGrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstructionAdvanced.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. Most of the ideas are from <a href="https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1007%2Fs11661-018-4904-9?_sg%5B0%5D=gRJGzFvY4PyFk-FFoOIj2jDqqumCsy3e8TU6qDnJoVtZaeUoXjzpsGmpe3TDKsNukQYQX9AtKGniFzbdpymYvzYwhg.5jfOl5Ohgg7pW_6yACRXN3QiR-oTn8UsxZjTbJoS_XqwSaaB7r8NgifJyjSES2iXP6iOVx57sy8HC4q2XyZZaA">Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel</a> by Tuomo Nyyss&ouml;nen. We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
@@ -72,10 +72,9 @@ grainPairs(angle(mori(:,1),mori(:,2)) < 5*degree,:) = [];
 optimizing parent to child orientation relationship
   (335.8°,10.5°,65.8°)  3.7
   (345.6°,10.3°,60°)    2.7
-  (356.4°,9.6°,49.9°)   2.6
-  (343.1°,8.4°,63.8°)   2.9
-  (348.6°,8.9°,55.8°)   2.1
-  (347.2°,9°,57.2°)     2.1
+  (351.8°,9.7°,54.4°)   2.6
+  (348.3°,9.4°,57.6°)   2.4
+  (347.8°,9.4°,58°)     2.4
 {% endhighlight %}
 <p>Beside the optimized parent to child orientation relationship the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> returns as a second output argument the misfit between all grain to grain misorientations and the theoretical child to child misorientations. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
 {% highlight matlab %}
@@ -198,11 +197,6 @@ id = parentGrains.findByLocation([100,80]);
 plot(parentGrains(id).boundary,'linewidth',3,'lineColor','w')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Packet ID calculation assuming
-{111}_p||{110}_c
-{% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstructionAdvanced_07.png" %}
 </center><p>In order to check our parent grain reconstruction we chose the single parent grain outlines in the above map and plot all child variants of its reconstructed parent orientation together with the actually measured child orientations inside the parent grain.</p>
@@ -223,7 +217,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 416 random orientations out of 7158 given orientations
+I'm plotting 416 random orientations out of 7140 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}

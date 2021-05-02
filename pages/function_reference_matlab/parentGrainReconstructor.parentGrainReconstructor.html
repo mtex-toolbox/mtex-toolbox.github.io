@@ -1,6 +1,6 @@
 ---
 title: parentGrainReconstructor
-last_updated: 21-Mar-2021
+last_updated: 01-May-2021
 sidebar: function_reference_sidebar
 permalink: parentGrainReconstructor.parentGrainReconstructor.html
 folder: function_reference
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>parentGrainReconstructor</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_parentGrainReconstructor__parentGrainReconstructor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/parentGrainReconstructor.m">
+      --><title>parentGrainReconstructor</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_parentGrainReconstructor__parentGrainReconstructor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/parentGrainReconstructor.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>class guiding through the parent grain reconstruction process</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 job = parentGrainReconstructor(ebsd, grains)
@@ -51,6 +51,22 @@ job = parentGrainReconstructor(ebsd, grains, p2c0)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt>grains at the current stage of reconstruction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt>EBSD at the current stage of reconstruction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>csParent</tt>
          </td>
          <td>
@@ -70,31 +86,7 @@ job = parentGrainReconstructor(ebsd, grains, p2c0)
             <tt>p2c</tt>
          </td>
          <td>
-            <tt>parent to child orientation relationship</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ebsd</tt>
-         </td>
-         <td>
-            <tt>measured <a href="EBSD.EBSD.html">EBSD</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>grainsMeasured</tt>
-         </td>
-         <td>
-            <tt>measured <a href="grain2d.grain2d.html">grain2d</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt>reconstructed grains</tt>
+            <tt>refined parent to child orientation relationship</tt>
          </td>
       </tr>
       <tr>
@@ -107,18 +99,10 @@ job = parentGrainReconstructor(ebsd, grains, p2c0)
       </tr>
       <tr>
          <td width="100px">
-            <tt>fit</tt>
-         </td>
-         <td>
-            <tt/>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
             <tt>graph</tt>
          </td>
          <td>
-            <tt/>
+            <tt>grain graph with edges representing probabilities of adjecent grains to form a parent grain</tt>
          </td>
       </tr>
       <tr>
@@ -126,7 +110,7 @@ job = parentGrainReconstructor(ebsd, grains, p2c0)
             <tt>votes</tt>
          </td>
          <td>
-            <tt/>
+            <tt>table of of votes for each grain</tt>
          </td>
       </tr>
       <tr>
@@ -140,6 +124,14 @@ job = parentGrainReconstructor(ebsd, grains, p2c0)
       <tr>
          <td width="100px">
             <tt>isTransformed</tt>
+         </td>
+         <td>
+            <tt>child grains that have been reverted from child to parent phase</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isChild</tt>
          </td>
          <td>
             <tt>child grains that have been reverted from child to parent phase</tt>

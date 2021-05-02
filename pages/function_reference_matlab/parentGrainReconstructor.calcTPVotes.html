@@ -1,6 +1,6 @@
 ---
 title: calcTPVotes
-last_updated: 21-Mar-2021
+last_updated: 01-May-2021
 sidebar: function_reference_sidebar
 permalink: parentGrainReconstructor.calcTPVotes.html
 folder: function_reference
@@ -11,10 +11,16 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>calcTPVotes</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-21"><meta name="DC.source" content="script_parentGrainReconstructor__calcTPVotes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/calcTPVotes.m">
+      --><title>calcTPVotes</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_parentGrainReconstructor__calcTPVotes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@parentGrainReconstructor/calcTPVotes.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>compute votes from triple points</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 job.calcTPVotes
+{% endhighlight %}
+
+{% highlight matlab %}
+% only consider triple junctions with the best fit is below 2.5 degree
+% and the second best fit is worse then 5 degree
+job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -45,7 +51,31 @@ job.calcTPVotes
             <tt>threshold</tt>
          </td>
          <td>
-            <tt>maximum allowed mean misfit</tt>
+            <tt>threshold fitting angle between job.p2c and the boundary OR</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tolerance</tt>
+         </td>
+         <td>
+            <tt>range over which the probability increases from 0 to 1 (default 1.5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minFit</tt>
+         </td>
+         <td>
+            <tt>minimum required fit for a TP to produce votes</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxFit</tt>
+         </td>
+         <td>
+            <tt>maximum second best fit for a TP to produce votes</tt>
          </td>
       </tr>
       <tr>
