@@ -14,9 +14,8 @@ following paper that best fits your application.
 #### 2021
 
 * **Parent grain reconstruction from partially or fully transformed microstructures in MTEX**, F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher:
-[http://arxiv.org/abs/2104.14603](http://arxiv.org/abs/2104.14603, 2021).
+[https://arxiv.org/abs/2104.14603, 2021](https://arxiv.org/abs/2104.14603).
 <a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
-
 
 
 #### 2020
