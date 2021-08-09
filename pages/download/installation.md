@@ -120,7 +120,7 @@ brew install gcc libtool
 ### 2. Get nfft source from github ###
 
 ``` bash
-git clone https://github.com/NFFT/nfft/tree/develop
+git clone https://github.com/NFFT/nfft/
 ./bootstrap.sh
 ```
 
