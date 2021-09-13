@@ -1,6 +1,6 @@
 ---
 title: Grain Boundary Smoothing
-last_updated: 01-May-2021
+last_updated: 13-Sep-2021
 sidebar: documentation_sidebar
 permalink: GrainSmoothing.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Smoothing</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_GrainSmoothing.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/GrainSmoothing.m">
+      --><title>Grain Boundary Smoothing</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-13"><meta name="DC.source" content="script_GrainSmoothing.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/GrainSmoothing.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>EBSD data is usually acquired on a regular grid. Hence, even over a finite number of grid points, all possible grain boundary directions can not be uniquely represented.  One way of overcoming this problem - and also allowing to compute grid-independent curvatures and grain boundary directions - is the interpolation of grain boundary coordinates using <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a>.</p><p>Proper smoothing has an influence on measures such as total grain boundary length, grain boundary curvature, triple point angles or grain boundary directions among others.</p><p>While we used <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> before, here we will illustrate the different options.</p>
 {% highlight matlab %}
 mtexdata csl
@@ -20,8 +20,11 @@ ebsd(grains(grains.grainSize<2))=[];
 grains = ebsd.calcGrains;
 
 % the data was accquired on a regular grid;
-plot(grains.boundary('indexed'),'linewidth',2,'linecolor','Fuchsia')
-axis([25 100 150 200])
+plot(ebsd,ebsd.orientations,'micronbar','off')
+hold on
+plot(grains.boundary('indexed'),'linewidth',5,'linecolor','YellowGreen')
+hold off
+axis([313 353 140 156])
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -35,7 +38,7 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_01.png" %}
-</center>
+</center><p>With the default parameters we have the following result</p>
 {% highlight matlab %}
 % smooth the grains with default paramters
 grains_smooth = smooth(grains);
@@ -46,7 +49,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_02.png" %}
-</center><p>The grain boundary map look smooth and the total grain boundary length is reasonable reduced.</p>
+</center><p>The grain boundary boundaries look noew a little bit more smooth and the total grain boundary length is reasonable reduced.</p>
 {% highlight matlab %}
 sum(grains.boundary('indexed').segLength)
 sum(grains_smooth.boundary('indexed').segLength)
@@ -58,7 +61,7 @@ ans =
 ans =
    1.7416e+04
 {% endhighlight %}
-<p>However, if we look at the frequnecy distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> only performs just a single iteration</p>
+<p>However, if we look at the frequnecy distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> performs just a single iteration</p>
 {% highlight matlab %}
 histogram(grains_smooth.boundary('indexed').direction, ...
           'weights',norm(grains_smooth.boundary('indexed').direction),180)
@@ -78,7 +81,7 @@ for i = 1:length(iter)
   d{i} = grains_smooth.boundary('i','i').direction;
 end
 hold off
-axis([25 100 150 200])
+axis([313 353 140 156])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_04.png" %}
@@ -102,7 +105,7 @@ for i = 1:length(iter)
   d{i} = grains_smooth.boundary('i','i').direction;
 end
 hold off
-axis([25 100 150 200])
+axis([313 353 140 156])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_06.png" %}

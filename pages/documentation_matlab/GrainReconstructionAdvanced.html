@@ -1,6 +1,6 @@
 ---
 title: Advanced Grain Reconstruction
-last_updated: 01-May-2021
+last_updated: 10-Sep-2021
 sidebar: documentation_sidebar
 permalink: GrainReconstructionAdvanced.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstructionAdvanced.m">
+      --><title>Advanced Grain Reconstruction</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_GrainReconstructionAdvanced.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstructionAdvanced.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">1) no fill, no grains, all pixels</h2>
 {% highlight matlab %}
 mtexdata small
@@ -250,6 +250,8 @@ hold off
 {% include inline_image.html file="GrainReconstructionAdvanced_08.png" %}
 </center><center>
 {% include inline_image.html file="GrainReconstructionAdvanced_09.png" %}
+</center><center>
+{% include inline_image.html file="GrainReconstructionAdvanced_10.png" %}
 </center><p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p>
 {% highlight matlab %}
 grains_FMC = calcGrains(ebsd('indexed'),'FMC',3.8)
@@ -301,7 +303,11 @@ grains = grain2d
  Id   Phase   Pixels         GOS   phi1   Phi   phi2
   1       1    10201   0.0344807    237    77    320
 {% endhighlight %}
-<p>We observe how this method nicely splits the measurements into clusters of similar orientation</p>
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_11.png" %}
+</center><center>
+{% include inline_image.html file="GrainReconstructionAdvanced_12.png" %}
+</center><p>We observe how this method nicely splits the measurements into clusters of similar orientation</p>
 {% highlight matlab %}
 %plot(ebsd,oM.orientation2color(ebsd.orientations))
 plot(ebsd,colorKey.orientation2color(ebsd.orientations))
@@ -314,7 +320,7 @@ plot(grains_FMC.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainReconstructionAdvanced_10.png" %}
+{% include inline_image.html file="GrainReconstructionAdvanced_13.png" %}
 </center><h2 id="11">Markovian Clustering Algorithm</h2>
 {% highlight matlab %}
 F = halfQuadraticFilter
@@ -354,7 +360,9 @@ ebsd = EBSD
  Properties: x, y, oldId, quality
  Scan unit : um
 {% endhighlight %}
-
+<center>
+{% include inline_image.html file="GrainReconstructionAdvanced_14.png" %}
+</center>
 {% highlight matlab %}
 grains = calcGrains(ebsd,'mcl',[1.24 50],'soft',[0.2 0.3]*degree)
 
@@ -390,5 +398,5 @@ grains = grain2d
  Properties: GOS, meanRotation
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainReconstructionAdvanced_11.png" %}
+{% include inline_image.html file="GrainReconstructionAdvanced_15.png" %}
 </center></div></body></html>
