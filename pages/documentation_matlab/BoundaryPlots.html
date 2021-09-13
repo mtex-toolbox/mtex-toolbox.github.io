@@ -1,6 +1,6 @@
 ---
 title: Boundary Plots
-last_updated: 01-May-2021
+last_updated: 13-Sep-2021
 sidebar: documentation_sidebar
 permalink: BoundaryPlots.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryPlots.m">
+      --><title>Boundary Plots</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-13"><meta name="DC.source" content="script_BoundaryPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/BoundaryPlots.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we describe how to visualize grain boundary properties, e.g., misorientation angle, misorientation axes. Therefore lets start by importing some EBSD data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -154,7 +154,7 @@ axes = Miller
 figure(2)
 plot(colorKey)
 hold on
-plot(axes,'MarkerFaceAlpha',0.1,'MarkerEdgeAlpha',0.3)
+plot(axes,'MarkerFaceAlpha',0.1,'MarkerEdgeAlpha',0.3,'MarkerColor','black')
 hold off
 {% endhighlight %}
 <center>
@@ -216,12 +216,11 @@ hold off
 </center><p>Lets visualize the color key as axis angle sections through the misorientation space</p>
 {% highlight matlab %}
 figure(2)
-plot(colorKey)
+plot(colorKey,'layout',[3,4])
 
 % and plot the misorienations on top
-hold on
-plot(gB_Fo.misorientation,'MarkerFacecolor','black')
-hold off
+plot(gB_Fo.misorientation,...
+  'MarkerFacecolor','none','add2all','MarkerSize',4)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_10.png" %}
@@ -236,6 +235,7 @@ grains = smooth(grains,2);
 gB = grains.boundary('iron','iron');
 
 % and plot image quality + orientation
+close all
 plot(ebsd,log(ebsd.prop.iq),'figSize','large')
 mtexColorMap black2white
 CLim(gcm,[.5,5])
@@ -250,8 +250,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-saving data to /home/hielscher/mtex/master/data/csl.mat
- 
 ebsd = EBSD  
  
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
@@ -271,7 +269,7 @@ colorKey =
 {% include inline_image.html file="BoundaryPlots_11.png" %}
 </center><p>At the end we plot the colorized misorientation space in axis angle sections. Note that in this plot misorientations <code class="language-plaintext highlighter-rouge">mori</code> and <code class="language-plaintext highlighter-rouge">inv(mori)</code> are associated.</p>
 {% highlight matlab %}
-plot(colorKey,'axisAngle',(5:5:60)*degree)
+plot(colorKey,'axisAngle',(5:5:60)*degree,'layout',[3,4])
 
 plot(gB.misorientation,'points',300,'add2all',...
   'MarkerFaceColor','none','MarkerEdgeColor','w')

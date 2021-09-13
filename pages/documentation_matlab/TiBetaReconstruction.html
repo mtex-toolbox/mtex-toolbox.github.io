@@ -1,6 +1,6 @@
 ---
 title: Parent Beta Phase Reconstruction in Titanium Alloys
-last_updated: 01-May-2021
+last_updated: 10-Sep-2021
 sidebar: documentation_sidebar
 permalink: TiBetaReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-05-01"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
+      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss parent grain reconstruction at the example of a titanium alloy. Lets start by importing a sample data set</p>
 {% highlight matlab %}
 mtexdata alphaBetaTitanium
@@ -82,9 +82,9 @@ ans = parentGrainReconstructor
  
  OR: (110)||(0001)  [-11-1]||[2-1-10]
    p2c fit: 0.84°, 1.2°, 1.7°, 3.2° (quintiles)
-   c2c fit: 0.7°, 0.98°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 0.99°, 1.3°, 1.7° (quintiles)
  
- votes: 41478 x 2
+ votes: 41478 x 1
    probabilities: 93%, 88%, 82%, 69% (quintiles)
 {% endhighlight %}
 <p>The above command does not only compute the best fitting but also the second best fitting parent orientation. This allows us to ignore ambigues triple points which may vote equally well for different parent orientations. In the above command we did this by the option <code class="language-plaintext highlighter-rouge">'maxFit'</code> which tells MTEX to ignore all triple points where the fit to the second best parent orientation is below 5 degree.</p><p>From all remaining triple points the command <a href="parentGrainReconstructor.calcTPVotes.html"><code class="language-plaintext highlighter-rouge">calcTPVotes</code></a> compute a list of votes stored in <code class="language-plaintext highlighter-rouge">job.votes</code> that contain for each child grain the most likely parent orientation and a corresponding probability <code class="language-plaintext highlighter-rouge">job.votes.prob</code>. We may visualize this probability for each grain</p>
@@ -103,12 +103,15 @@ job.calcParentFromVote('minProb',0.7)
 ans = parentGrainReconstructor  
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       33277   84%   67%          
- child   Ti (alpha)  622       16389   16%                
+ parent  Ti (BETA)   432       33276   84%   67%          
+ child   Ti (alpha)  622       16390   16%                
  
  OR: (110)||(0001)  [-11-1]||[2-1-10]
-   p2c fit: 0.95°, 1.4°, 1.8°, 2.3° (quintiles)
+   p2c fit: 0.94°, 1.4°, 1.8°, 2.3° (quintiles)
    c2c fit: 1°, 1.6°, 2°, 2.7° (quintiles)
+ 
+ votes: 8633 x 1
+   probabilities: 66%, 61%, 54%, 43% (quintiles)
 {% endhighlight %}
 <p>We observe that after this step more then 66 percent of the grains became parent grains. Lets visualize these reconstructed beta grains</p>
 {% highlight matlab %}
@@ -138,12 +141,15 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor  
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       48094   99%   97%          
- child   Ti (alpha)  622       1572    1%                 
+ parent  Ti (BETA)   432       48096   99%   97%          
+ child   Ti (alpha)  622       1570    1%                 
  
  OR: (110)||(0001)  [-11-1]||[2-1-10]
    p2c fit: 14°, 34°, 38°, 42° (quintiles)
    c2c fit: 1.5°, 2.7°, 9.9°, 25° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
  
  
 ans = parentGrainReconstructor  
@@ -156,6 +162,9 @@ ans = parentGrainReconstructor
    p2c fit: 33°, 35°, 41°, 42° (quintiles)
    c2c fit: 1.7°, 7.3°, 19°, 28° (quintiles)
  
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
+ 
  
 ans = parentGrainReconstructor  
  
@@ -166,6 +175,9 @@ ans = parentGrainReconstructor
  OR: (110)||(0001)  [-11-1]||[2-1-10]
    p2c fit: 34°, 35°, 41°, 42° (quintiles)
    c2c fit: 1.7°, 7.3°, 19°, 31° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_04.png" %}
@@ -188,6 +200,9 @@ ans = parentGrainReconstructor
  OR: (110)||(0001)  [-11-1]||[2-1-10]
    p2c fit: 33°, 35°, 41°, 42° (quintiles)
    c2c fit: 6.5°, 17°, 19°, 28° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_05.png" %}
@@ -210,6 +225,9 @@ ans = parentGrainReconstructor
  OR: (110)||(0001)  [-11-1]||[2-1-10]
    p2c fit: 22°, 29°, 33°, 35° (quintiles)
    c2c fit: 2.4°, 9.2°, 19°, 32° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_06.png" %}

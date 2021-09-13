@@ -1,0 +1,287 @@
+---
+title: script_Forsterite_to_WadsleyiteMainprice
+last_updated: 10-Sep-2021
+sidebar: examples_sidebar
+permalink: Forsterite_to_WadsleyiteMainprice.html
+folder: examples
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>script_Forsterite_to_WadsleyiteMainprice</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_Forsterite_to_WadsleyiteMainprice.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/../examples/phaseTransformation/Forsterite_to_WadsleyiteMainprice.m">
+    edit page</a>
+    author: </font><div>
+{% highlight matlab %}
+%
+%
+% Forsterite - Wadsleyite
+%
+%
+% David Mainprice 23/01/2018
+%
+{% endhighlight %}
+<h2 id="2">Clear workspace and close all plot</h2>
+{% highlight matlab %}
+clear all
+close all
+{% endhighlight %}
+<h2 id="3">Specify Crystal Symmetries</h2>
+{% highlight matlab %}
+% crystal symmetry
+Fo_CS  = crystalSymmetry('222', [4.756 10.207 5.98], 'mineral', 'Forsterite', 'color', 'light green')
+Wad_CS = crystalSymmetry('222', [5.6978 11.462 8.2571], 'mineral', 'Wadsleyite', 'color', 'light blue')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Fo_CS = crystalSymmetry  
+ 
+  mineral : Forsterite 
+  color   : light green
+  symmetry: 222        
+  elements: 4          
+  a, b, c : 4.8, 10, 6 
+ 
+ 
+Wad_CS = crystalSymmetry  
+ 
+  mineral : Wadsleyite  
+  color   : light blue  
+  symmetry: 222         
+  elements: 4           
+  a, b, c : 5.7, 11, 8.3
+{% endhighlight %}
+<h2 id="4">Define Burgers orientation relation between parent and child phases</h2>
+{% highlight matlab %}
+%**************************************************************************
+%
+%                  <html>
+%                     <table class="usertable">
+%                        <tr>
+%                           <td>
+%                                 <p>(01-1)Wad &amp; [001]ol</p>
+%                           </td>
+%                        </tr>
+%                     </table>
+%                  </html>
+%
+%
+%
+%      Parent           Child
+%
+%                  <html>
+%                     <table class="usertable"/>
+%                  </html>
+%
+
+Fo2Wa = orientation.map(...
+  Miller(1,0,0,Fo_CS,'hkl'),Miller(0,1,-1,Wad_CS,'hkl'),...
+  Miller(0,0,1,Fo_CS,'uvw'),Miller(1,0,0,Wad_CS,'uvw'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+Fo2Wa = misorientation (Forsterite -> Wadsleyite)
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+    90      90 305.769       0
+{% endhighlight %}
+<h2 id="5">axis/angle pair for Forsterite to Wadsleyite misorientation</h2>
+{% highlight matlab %}
+mis_axis_wrt_Fo = round(axis(Fo2Wa))
+mis_axis_wrt_Wad = round(Miller(mis_axis_wrt_Fo,Wad_CS,'hkl'))
+mis_angle_Fo_Wad = angle(Fo2Wa)/degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+mis_axis_wrt_Fo = Miller  
+ symmetry: 222
+   h  k  l
+  -1 -3  1
+ 
+mis_axis_wrt_Wad = Miller  
+ mineral: Wadsleyite (222)
+   h   k   l
+  -2 -12   3
+mis_angle_Fo_Wad =
+   95.4115
+{% endhighlight %}
+<h2 id="6">generate Child Wadsleyite orientations using misorientation 'Forsterite2Wadsleyite'</h2>
+{% highlight matlab %}
+% Forsterite Parent orientation
+ori_Fo_Parent = orientation.id(Fo_CS)
+% compute a Wadsleyite child orientation related to the Parent Forsterite orientation
+Wad_Child = ori_Fo_Parent * inv(Fo2Wa)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori_Fo_Parent = orientation (Forsterite -> xyz)
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    0
+ 
+ 
+Wad_Child = orientation (Wadsleyite -> xyz)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  234.231      90      90       0
+{% endhighlight %}
+<p>compute all symmetrically possible child orientations - strange angles like 144.231 144.231       0       0 etc - maybe I made a mistake here ? RH: this is incorrect</p>
+{% highlight matlab %}
+Wad_Child_orientations_Symm = unique(Wad_Child.symmetrise * inv(Fo2Wa))
+
+% RH: this is correct - you have to symmetrise the parent and then apply
+% the orientation relation ship to get all possibe variants
+Wad_Child_orientations = unique(ori_Fo_Parent.symmetrise * inv(Fo2Wa))
+
+% Childs using the function variants
+% RH: this is correct as well and gives the same result as above
+Wad_Child_orientations = ori_Fo_Parent * inv(Fo2Wa.variants)
+
+
+% all possible child to child misorientations- I get the same result here !
+% Wad_Child_mori = (100)/71.5371
+% RH: this is correct
+Wad_Child_mori = unique(Fo2Wa.variants * inv(Fo2Wa))
+%
+%
+% Wad_Wad misorientation peak - N.B. This not an variant or child rather a twin
+% Data analysis from an experiment at T = 1600C & P = 16 GPa
+gB_Child_Child = orientation('axis',Miller(0,0,1,Wad_CS,'uvw'),'angle',90.0*degree,Wad_CS,Wad_CS)
+%**************************************************************************
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Symmetry missmatch! The following crystal frames seem to be different
+
+  Wadsleyite (222)
+  Forsterite (222)
+ 
+ 
+Wad_Child_orientations_Symm = orientation (Wadsleyite -> xyz)
+  size: 2 x 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  144.231 144.231       0       0
+  324.231 144.231       0       0
+ 
+ 
+Wad_Child_orientations = orientation (Wadsleyite -> xyz)
+  size: 2 x 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  305.769      90     270       0
+  234.231      90      90       0
+ 
+ 
+Wad_Child_orientations = orientation (Wadsleyite -> xyz)
+  size: 1 x 2
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  234.231      90      90       0
+  305.769      90     270       0
+ 
+ 
+Wad_Child_mori = misorientation (Wadsleyite -> Wadsleyite)
+  size: 2 x 1
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+     0 71.5371     180       0
+     0       0       0       0
+ 
+ 
+gB_Child_Child = misorientation (Wadsleyite -> Wadsleyite)
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+    90    0    0    0
+{% endhighlight %}
+<h2 id="8">Parent (Forsterite) to 4 Daughter (Wadsleyite) variants</h2><p>Mis = inv(O1)*O2</p>
+{% highlight matlab %}
+%**************************************************************************
+% all crystallographically equivalent orientations using symmetry of Parent
+% Parent (Forsterite) reference orientation Euler (0,0,0)
+ori_Fo_Parent = orientation('Euler',0,0,0,Fo_CS)
+% all crystallographically equivalent Child orientations
+ori_Wad_Childs = symmetrise(ori_Fo_Parent) * inv(Fo2Wa)
+%**************************************************************************
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori_Fo_Parent = orientation (Forsterite -> xyz)
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2 Inv.
+     0    0    0    0
+ 
+ 
+ori_Wad_Childs = orientation (Wadsleyite -> xyz)
+  size: 4 x 1
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  234.231      90      90       0
+  305.769      90     270       0
+  54.2314      90      90       0
+  125.769      90     270       0
+{% endhighlight %}
+<h2 id="9">Find all combinations of ori_Wad_Childs to define misorientations for child</h2>
+{% highlight matlab %}
+%**************************************************************************
+
+n=0;
+nsymm = length(ori_Wad_Childs);
+for i=1:nsymm
+    ori_Wad_Childs(i);
+    for j=1:nsymm
+        if(ne(i,j))
+            n=n+1;
+           %fprintf('%i %i %i \n',i,j,n);
+          Mis_deltaO(n) = inv(ori_Wad_Childs(i))*ori_Wad_Childs(j);
+        end
+    end
+end
+Mis_deltaO
+{% endhighlight %}
+
+{% highlight plaintext %}
+Mis_deltaO = misorientation (Wadsleyite -> Wadsleyite)
+  size: 1 x 12
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2    Inv.
+     0 71.5371     180       0
+     0     180       0       0
+   180 108.463       0       0
+     0 71.5371     180       0
+   180 108.463       0       0
+     0     180       0       0
+   180     180     180       0
+   180 108.463       0       0
+     0 71.5371     180       0
+   180 108.463       0       0
+   180     180     180       0
+     0 71.5371     180       0
+{% endhighlight %}
+
+{% highlight matlab %}
+%Mis_Axes = round(axis(Mis_unique))
+%Mis_Angles = angle(Mis_unique)./degree
+{% endhighlight %}
+
+{% highlight matlab %}
+%Mis_unique = unique(Mis_deltaO)
+%axis(Mis_unique(1))
+%angle(Mis_unique(1))/degree
+%axis(Mis_unique(2))
+%angle(Mis_unique(2))/degree
+{% endhighlight %}
+</div></body></html>
