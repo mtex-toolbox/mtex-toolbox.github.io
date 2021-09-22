@@ -1,6 +1,6 @@
 ---
 title: Martensite Parent Grain Reconstruction
-last_updated: 10-Sep-2021
+last_updated: 22-Sep-2021
 sidebar: documentation_sidebar
 permalink: MaParentGrainReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
+      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-22"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. Some of the ideas are from <a href="https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1007%2Fs11661-018-4904-9?_sg%5B0%5D=gRJGzFvY4PyFk-FFoOIj2jDqqumCsy3e8TU6qDnJoVtZaeUoXjzpsGmpe3TDKsNukQYQX9AtKGniFzbdpymYvzYwhg.5jfOl5Ohgg7pW_6yACRXN3QiR-oTn8UsxZjTbJoS_XqwSaaB7r8NgifJyjSES2iXP6iOVx57sy8HC4q2XyZZaA">Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel</a> by Tuomo Nyyss&ouml;nen. We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
@@ -36,8 +36,6 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-saving data to /home/hielscher/mtex/master/data/martensite.mat
- 
 ebsd = EBSD  
  
  Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
@@ -69,7 +67,7 @@ job = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (111)||(011)  [10-1]||[11-1]
-   c2c fit: 2.4°, 3.4°, 4.4°, 5.4° (quintiles)
+   c2c fit: 2.5°, 3.4°, 4.4°, 5.4° (quintiles)
 {% endhighlight %}
 <p>The output of the variable <code class="language-plaintext highlighter-rouge">job</code> tells us the amount of parent and child grains as well as the percentage of already recovered parent grains. Furthermore, it displays how well the current guess of the parent to child orientation relationship fits the child to child misorientations within our data. In our sample data set this fit is described by the 4 quintiles 2.5&deg;, 3.5&deg;, 4.5&deg; and 5.5&deg;.</p><h2 id="5">Optimizing the parent child orientation relationship</h2><p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individualy. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
 {% highlight matlab %}
@@ -99,7 +97,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
    closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
 {% endhighlight %}
 <center>
@@ -157,7 +155,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.3°, 3.3° (quintiles)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
    closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
  
  graph: 6943 grains in 273 clusters + 59 single grain clusters
@@ -315,6 +313,10 @@ hold on
 plot(grainSelected.boundary,'linewidth',3,'lineColor','w')
 hold off
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Packet ID calculation assuming {111}_p||{110}_c
+{% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_12.png" %}
 </center><p>We can also directly identify the child grains belonging to the selected parent grains. Remeber that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
@@ -356,6 +358,10 @@ plot(parentOri.symmetrise * Miller(0,0,1,parentOri.CS),'markerSize',10,...
 childVariants = variants(job.p2c, parentOri);
 plotPDF(childVariants, 'markerFaceColor','none','linewidth',1.5,'markerEdgeColor','k')
 hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Packet ID calculation assuming {111}_p||{110}_c
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_14.png" %}
