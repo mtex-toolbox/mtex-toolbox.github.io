@@ -20,7 +20,7 @@ During the first week we provide on a daily basis two morning lectures covering 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMonday"><b>Monday:** Crystal Lattices and Rotations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMonday"><b>Monday</b> Crystal Lattices and Rotations</a>
             </h4>
         </div>
         <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
@@ -50,7 +50,7 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:** Crystal Symmetries and Orientations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday</b> Crystal Symmetries and Orientations</a>
             </h4>
         </div>
         <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
@@ -80,7 +80,7 @@ X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF e
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWednesday"><b>Wednesday:** Electron Backsactter Diffraction (EBSD)</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWednesday"><b>Wednesday</b> Electron Backsactter Diffraction (EBSD)</a>
             </h4>
         </div>
         <div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
@@ -107,7 +107,7 @@ grain reconstruction, shape properties, orientation properties
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThursday"><b>Thursday:** Misorientations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThursday"><b>Thursday</b> Misorientations</a>
             </h4>
         </div>
         <div id="collapseThursday" class="panel-collapse collapse noCrossRef">
@@ -134,7 +134,7 @@ geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:** Tensorial Properties</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday</b> Tensorial Properties</a>
             </h4>
         </div>
         <div id="collapseFriday" class="panel-collapse collapse noCrossRef">
