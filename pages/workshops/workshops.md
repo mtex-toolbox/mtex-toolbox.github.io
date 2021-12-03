@@ -25,37 +25,21 @@ During the first week we provide on a daily basis two morning lectures covering 
         </div>
         <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-<div markdown="span">
-**Lecture 1 - General Concepts:** [free video](https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212)
-<br>
-Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
-<br>
-**Lecture 2 - Crystal Lattice:**
-<br>
-crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
-<br>
-**Lecture 3 - Rotations and Crystal Symmetries:**
-<br>
-rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
-<br>
-**Exercise 1:**
-</div>
-				<!-- <b>Lecture 1 - General Concepts:</b> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a> -->
-                <!-- <br> -->
-                <!-- Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates -->
-                <!-- <br> -->
-                <!-- <br> -->
-                <!-- <b>Lecture 2 - Crystal Lattice:</b> -->
-                <!-- <br> -->
-                <!-- crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes -->
-                <!-- <br> -->
-                <!-- <br> -->
-                <!-- <b>Lecture 3 - Rotations and Crystal Symmetries:</b> -->
-                <!-- <br> -->
-                <!-- rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors -->
-                <!-- <br> -->
-                <!-- <br> -->
-                <!-- <br>Exercise 1:</b> -->
+				<div markdown="span">
+				**Lecture 1 - General Concepts:** <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
+				<br>
+					Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
+				<br>
+				**Lecture 2 - Crystal Lattice:**
+				<br>
+				crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
+				<br>
+				**Lecture 3 - Rotations and Crystal Symmetries:**
+				<br>
+				rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
+				<br>
+				**Exercise 1:**
+				</div>
             </div>
         </div>
     </div>
@@ -68,22 +52,24 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
         </div>
         <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-                <b>Lecture 4 - Orientations:</b>
-                <br>
-                symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parameterization
-                <br>
-                <br>
-                <b>Lecture 5 - Density Functions:</b>
-                <br>
-                kernel density estimation, orientation density function, pole density function, inverse pole density function, model ODFs, ODF characteristics, random sampling
-                <br>
-                <br>
-                <b>Lecture 6 - ODF Reconstruction from Pole Figure Data:</b>
-                <br>
-                X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF estimation
-                <br>
-                <br>
-                <br>Exercise 2:</b>
+<div markdown="span">
+**Lecture 4 - Orientations:**
+<br>
+symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parameterization
+<br>
+<br>
+**Lecture 5 - Density Functions:**
+<br>
+kernel density estimation, orientation density function, pole density function, inverse pole density function, model ODFs, ODF characteristics, random sampling
+<br>
+<br>
+**Lecture 6 - ODF Reconstruction from Pole Figure Data:**
+<br>
+X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF estimation
+<br>
+<br>
+**Exercise 2:**
+</div>
             </div>
         </div>
     </div>
@@ -106,7 +92,7 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
                 grain reconstruction, shape properties, orientation properties
                 <br>
                 <br>
-                <br>Exercise 3 - EBSD:</b>
+                <b>Exercise 3 - EBSD:</b>
 				<br>
                 <b>Exercise 4 - Grains:</b>
             </div>
@@ -131,10 +117,10 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
                 geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundaries misorientations
                 <br>
                 <br>
-                <br>Exercise 5 - Grain Boundaries:</b>
+                <b>Exercise 5 - Grain Boundaries:</b>
                 <br>
                 <br>
-                <br>Exercise 6 - Denoising EBSD Data and Misorientations:</b>
+                <b>Exercise 6 - Denoising EBSD Data and Misorientations:</b>
             </div>
         </div>
     </div>
@@ -157,7 +143,7 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
                 wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD and ODF
                 <br>
                 <br>
-                <br>Exercise 7 - Tensorial Properties:</b>
+                <b>Exercise 7 - Tensorial Properties:</b>
             </div>
         </div>
     </div>
@@ -180,79 +166,30 @@ The second week will consist of lectures by invited experts that explain in deta
         </div>
         <div id="collapseInvitedSpeakers" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-				<table>
-					<colgroup>
-						<col width="30%" />
-						<col width="70%" />
-					</colgroup>
-					<thead>
-						<tr class="header">
-							<th>Field</th>
-							<th>Description</th>
-						</tr>
-					</thead>
+				<table width="100%">
 					<tbody>
 						<tr>
-							<td markdown="span">First column **fields**</td>
-							<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link][mydoc_tags].</td>
+							<td markdown="span">[Wolfgang Pantleon](https://www.mek.dtu.dk/)<br>(DTU Dänemark)</td>
+							<td markdown="span">lorem ipsum</td>
 						</tr>
 						<tr>
-							<td markdown="span">Second column **fields**</td>
-							<td markdown="span">Some more descriptive text.
-						</td>
+							<td markdown="span">[Vermeij](lorem)<br>(lorem)</td>
+							<td markdown="span">lorem ipsum</td>
+						</tr>
+						<tr>
+							<td markdown="span">[Tijmen](lorem)<br>(lorem)</td>
+							<td markdown="span">lorem ipsum</td>
+						</tr>
+						<tr>
+							<td markdown="span">[Björn Eske Sörensen](lorem)<br>(lorem)</td>
+							<td markdown="span">lorem ipsum</td>
+						</tr>
+						<tr>
+							<td markdown="span">[Omero Felipe (Phil) Orlandini](lorem)<br>(lorem)</td>
+							<td markdown="span">lorem ipsum</td>
 						</tr>
 					</tbody>
 				</table>
-				<br>
-				<br>
-				<br>
-				<table>
-					<thead>
-						<tr class="header">
-							<th>Field</th>
-							<th>Description</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td markdown="span">First column **fields**</td>
-							<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link](mydoc_tags).</td>
-						</tr>
-						<tr>
-							<td markdown="span">Second column **fields**</td>
-							<td markdown="span">Some more descriptive text.
-						</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-				<br>
-				<br>
-				<table>
-					<tbody>
-						<tr>
-							<td markdown="span">First column **fields**</td>
-							<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link](mydoc_tags).</td>
-						</tr>
-						<tr>
-							<td markdown="span">Second column **fields**</td>
-							<td markdown="span">Some more descriptive text.
-						</td>
-						</tr>
-					</tbody>
-				</table>
-				<br>
-				<br>
-				<br>
-<div markdown="span">
-| | |
-|:---|:---|
-| [Wolfgang Pantleon](https://www.mek.dtu.dk/)<br>(DTU Dänemark) | lorem ipsum |
-| [Vermeij](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
-| [Tijmen](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
-| [Björn Eske Sörensen](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
-| [Omero Felipe (Phil) Orlandini](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
-</div>
             </div>
         </div>
     </div>
