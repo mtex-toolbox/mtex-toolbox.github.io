@@ -20,39 +20,42 @@ During the first week we provide on a daily basis two morning lectures covering 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><b>Monday:</b> Crystal Lattices and Rotations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMonday"><b>Monday:</b> Crystal Lattices and Rotations</a>
             </h4>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse noCrossRef">
+        <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-				<b>Lecture 1 - General Concepts:</b> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
-                <br>
-                Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
-                <br>
-                <b>Lecture 2 - Crystal Lattice:</b>
-                <br>
-                crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
-                <br>
-                <b>Lecture 3 - Rotations and Crystal Symmetries:</b>
-                <br>
-                rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
-                <br>
-                <b>Exercise 1:</b>
- 				<!-- <div markdown="1"> -->
-<!-- **Lecture 1 - General Concepts:** [free video](https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212) -->
+<div markdown="span">
+**Lecture 1 - General Concepts:** [free video](https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212)
 
-<!-- Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates -->
+Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
 
-<!-- **Lecture 2 - Crystal Lattice:** -->
+**Lecture 2 - Crystal Lattice:**
 
-<!-- crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes -->
+crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 
-<!-- **Lecture 3 - Rotations and Crystal Symmetries:** -->
+**Lecture 3 - Rotations and Crystal Symmetries:**
 
-<!-- rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors -->
+rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 
-<!-- **Exercise 1:** -->
-				<!-- </div> -->
+**Exercise 1:**
+</div>
+				<!-- <b>Lecture 1 - General Concepts:</b> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a> -->
+                <!-- <br> -->
+                <!-- Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates -->
+                <!-- <br> -->
+                <!-- <br> -->
+                <!-- <b>Lecture 2 - Crystal Lattice:</b> -->
+                <!-- <br> -->
+                <!-- crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes -->
+                <!-- <br> -->
+                <!-- <br> -->
+                <!-- <b>Lecture 3 - Rotations and Crystal Symmetries:</b> -->
+                <!-- <br> -->
+                <!-- rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors -->
+                <!-- <br> -->
+                <!-- <br> -->
+                <!-- <br>Exercise 1:</b> -->
             </div>
         </div>
     </div>
@@ -60,24 +63,27 @@ During the first week we provide on a daily basis two morning lectures covering 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><b>Tuesday:</b> Crystal Symmetries and Orientations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:</b> Crystal Symmetries and Orientations</a>
             </h4>
         </div>
-        <div id="collapseTwo" class="panel-collapse collapse noCrossRef">
+        <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
                 <b>Lecture 4 - Orientations:</b>
                 <br>
                 symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parameterization
                 <br>
+                <br>
                 <b>Lecture 5 - Density Functions:</b>
                 <br>
                 kernel density estimation, orientation density function, pole density function, inverse pole density function, model ODFs, ODF characteristics, random sampling
+                <br>
                 <br>
                 <b>Lecture 6 - ODF Reconstruction from Pole Figure Data:</b>
                 <br>
                 X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF estimation
                 <br>
-                <b>Exercise 2:</b>
+                <br>
+                <br>Exercise 2:</b>
             </div>
         </div>
     </div>
@@ -85,20 +91,22 @@ During the first week we provide on a daily basis two morning lectures covering 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><b>Wednesday:</b> Electron Backsactter Diffraction (EBSD)</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWednesday"><b>Wednesday:</b> Electron Backsactter Diffraction (EBSD)</a>
             </h4>
         </div>
-        <div id="collapseThree" class="panel-collapse collapse noCrossRef">
+        <div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
                 <b>Lecture 7 - EBSD:</b>
                 <br>
                 data import, pole figures, inverse pole figures, color keys, reference frame, properties
                 <br>
+                <br>
                 <b>Lecture 8 - Grains:</b>
                 <br>
                 grain reconstruction, shape properties, orientation properties
                 <br>
-                <b>Exercise 3 - EBSD:</b>
+                <br>
+                <br>Exercise 3 - EBSD:</b>
 				<br>
                 <b>Exercise 4 - Grains:</b>
             </div>
@@ -108,22 +116,25 @@ During the first week we provide on a daily basis two morning lectures covering 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><b>Thursday:</b> Misorientations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThursday"><b>Thursday:</b> Misorientations</a>
             </h4>
         </div>
-        <div id="collapseFour" class="panel-collapse collapse noCrossRef">
+        <div id="collapseThursday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
                 <b>Lecture 9 - Misorientations:</b>
                 <br>
                 definition, visualization, phase transitions, misorientation axis, misorientation angle distribution, KAM, GOS
                 <br>
+                <br>
                 <b>Lecture 10 - Grain Boundaries:</b>
                 <br>
                 geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundaries misorientations
                 <br>
-                <b>Exercise 5 - Grain Boundaries:</b>
                 <br>
-                <b>Exercise 6 - Denoising EBSD Data and Misorientations:</b>
+                <br>Exercise 5 - Grain Boundaries:</b>
+                <br>
+                <br>
+                <br>Exercise 6 - Denoising EBSD Data and Misorientations:</b>
             </div>
         </div>
     </div>
@@ -131,20 +142,22 @@ During the first week we provide on a daily basis two morning lectures covering 
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><b>Friday:</b> Tensorial Properties</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:</b> Tensorial Properties</a>
             </h4>
         </div>
-        <div id="collapseFive" class="panel-collapse collapse noCrossRef">
+        <div id="collapseFriday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
                 <b>Lecture 11 - Plastic / Elastic Deformation:</b>
                 <br>
                 stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
                 <br>
+                <br>
                 <b>Lecture 12 - Tensorial Properties:</b>
                 <br>
                 wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD and ODF
                 <br>
-                <b>Exercise 7 - Tensorial Properties:</b>
+                <br>
+                <br>Exercise 7 - Tensorial Properties:</b>
             </div>
         </div>
     </div>
@@ -162,12 +175,34 @@ The second week will consist of lectures by invited experts that explain in deta
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><b>Invited Speakers</b></a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseInvitedSpeakers"><b>Invited Speakers</b></a>
             </h4>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse noCrossRef">
+        <div id="collapseInvitedSpeakers" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-				<div markdown="1">
+				<table>
+					<colgroup>
+						<col width="30%" />
+						<col width="70%" />
+					</colgroup>
+					<thead>
+						<tr class="header">
+							<th>Field</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td markdown="span">First column **fields**</td>
+							<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link][mydoc_tags].</td>
+						</tr>
+						<tr>
+							<td markdown="span">Second column **fields**</td>
+							<td markdown="span">Some more descriptive text.
+						</td>
+						</tr>
+					</tbody>
+				</table>
 | | |
 |:---|:---|
 | [Wolfgang Pantleon](https://www.mek.dtu.dk/)<br>(DTU Dänemark) | lorem ipsum |
@@ -175,7 +210,6 @@ The second week will consist of lectures by invited experts that explain in deta
 | [Tijmen](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
 | [Björn Eske Sörensen](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
 | [Omero Felipe (Phil) Orlandini](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
-				</div>
             </div>
         </div>
     </div>
