@@ -25,21 +25,34 @@ During the first week we provide on a daily basis two morning lectures covering 
         </div>
         <div id="collapseOne" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
- 				<div markdown="1">
-**Lecture 1 - General Concepts:** [free video](https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212)
+				<b>Lecture 1 - General Concepts:</b> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
+                <br>
+                Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
+                <br>
+                <b>Lecture 2 - Crystal Lattice:</b>
+                <br>
+                crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
+                <br>
+                <b>Lecture 3 - Rotations and Crystal Symmetries:</b>
+                <br>
+                rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
+                <br>
+                <b>Exercise 1:</b>
+ 				<!-- <div markdown="1"> -->
+<!-- **Lecture 1 - General Concepts:** [free video](https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212) -->
 
-Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
+<!-- Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates -->
 
-**Lecture 2 - Crystal Lattice:**
+<!-- **Lecture 2 - Crystal Lattice:** -->
 
-crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
+<!-- crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes -->
 
-**Lecture 3 - Rotations and Crystal Symmetries:**
+<!-- **Lecture 3 - Rotations and Crystal Symmetries:** -->
 
-rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
+<!-- rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors -->
 
-**Exercise 1:**
-				</div>
+<!-- **Exercise 1:** -->
+				<!-- </div> -->
             </div>
         </div>
     </div>
