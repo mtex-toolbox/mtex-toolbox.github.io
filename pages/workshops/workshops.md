@@ -175,45 +175,17 @@ The second week will consist of lectures by invited experts that explain in deta
         <div id="collapseInvitedSpeakers" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-[Wolfgang Pantleon](https://www.mek.dtu.dk/) (DTU Dänemark)
+**[Wolfgang Pantleon](https://www.mek.dtu.dk/) - DTU Dänemark:**
 <br>
 <br>
-[Vermeij]() ()
+**Tijem Vermeij:**
 <br>
 <br>
-[Tijem]() ()
+**[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen) - Norwegian University of Science and Technology:**
 <br>
 <br>
-[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen) ()
-<br>
-<br>
-[Omero Felipe (Phil) Orlandini]() ()
+**[Omero Felipe (Phil) Orlandini](https://www.linkedin.com/in/omero-phil-orlandini-96100a4a) - The University of Texas at Austin, University of Colorado Boulder:**
 </div>
-<br>
-<br>
-<br>
-				<table width="100%" border="0">
-					<tr>
-						<td markdown="span">[Wolfgang Pantleon](https://www.mek.dtu.dk/)<br>(DTU Dänemark)</td>
-						<td markdown="span">lorem ipsum</td>
-					</tr>
-					<tr>
-						<td markdown="span">[Vermeij](lorem)<br>(lorem)</td>
-						<td markdown="span">lorem ipsum</td>
-					</tr>
-					<tr>
-						<td markdown="span">[Tijmen](lorem)<br>(lorem)</td>
-						<td markdown="span">lorem ipsum</td>
-					</tr>
-					<tr>
-						<td markdown="span">[Björn Eske Sörensen](lorem)<br>(lorem)</td>
-						<td markdown="span">lorem ipsum</td>
-					</tr>
-					<tr>
-						<td markdown="span">[Omero Felipe (Phil) Orlandini](lorem)<br>(lorem)</td>
-						<td markdown="span">lorem ipsum</td>
-					</tr>
-				</table>
             </div>
         </div>
     </div>
@@ -224,6 +196,6 @@ The second week will consist of lectures by invited experts that explain in deta
 ## Organizers:
 
 - Ralf Hielscher
-- [Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4)
-- [Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/)
+- [Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4), DTU Dänemark
+- [Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/), Universität Halle
 - Luiz Morales
