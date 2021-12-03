@@ -27,17 +27,17 @@ During the first week we provide on a daily basis two morning lectures covering 
             <div class="panel-body">
 <div markdown="span">
 **Lecture 1 - General Concepts:** [free video](https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212)
-
+<br>
 Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
-
+<br>
 **Lecture 2 - Crystal Lattice:**
-
+<br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
-
+<br>
 **Lecture 3 - Rotations and Crystal Symmetries:**
-
+<br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
-
+<br>
 **Exercise 1:**
 </div>
 				<!-- <b>Lecture 1 - General Concepts:</b> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a> -->
@@ -203,6 +203,48 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 					</tbody>
 				</table>
+				<br>
+				<br>
+				<br>
+				<table>
+					<thead>
+						<tr class="header">
+							<th>Field</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td markdown="span">First column **fields**</td>
+							<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link](mydoc_tags).</td>
+						</tr>
+						<tr>
+							<td markdown="span">Second column **fields**</td>
+							<td markdown="span">Some more descriptive text.
+						</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<br>
+				<br>
+				<table>
+					<tbody>
+						<tr>
+							<td markdown="span">First column **fields**</td>
+							<td markdown="span">Some descriptive text. This is a markdown link to [Google](http://google.com). Or see [some link](mydoc_tags).</td>
+						</tr>
+						<tr>
+							<td markdown="span">Second column **fields**</td>
+							<td markdown="span">Some more descriptive text.
+						</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<br>
+				<br>
+<div markdown="span">
 | | |
 |:---|:---|
 | [Wolfgang Pantleon](https://www.mek.dtu.dk/)<br>(DTU Dänemark) | lorem ipsum |
@@ -210,6 +252,7 @@ The second week will consist of lectures by invited experts that explain in deta
 | [Tijmen](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
 | [Björn Eske Sörensen](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
 | [Omero Felipe (Phil) Orlandini](lorem ipsum)<br>(lorem ipsum) | [lorem ipsum](lorem ipsum) |
+</div>
             </div>
         </div>
     </div>
