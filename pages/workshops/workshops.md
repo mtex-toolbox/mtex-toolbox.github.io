@@ -178,7 +178,7 @@ The second week will consist of lectures by invited experts that explain in deta
 **[Wolfgang Pantleon](https://www.mek.dtu.dk/) - DTU Dänemark:**
 <br>
 <br>
-**Tijem Vermeij:**
+**[Tijem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/): - TU/e Eindhoven University of Technology**
 <br>
 <br>
 **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen) - Norwegian University of Science and Technology:**
@@ -193,9 +193,16 @@ The second week will consist of lectures by invited experts that explain in deta
 </div>
 <!-- /.panel-group -->
 
+## Registration:
+
+- Please use our [registration form](https://www-user.tu-chemnitz.de/~rahi/mtexWorkshop21/registration.php) to subscribe or write an email to <a href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
+- Deadline for registration is 19th of February 2022
+- Registration fee first and second week: students - 100 Euro, other - 200 Euro
+- Registration fee second week only: 100 Euro
+
 ## Organizers:
 
-- Ralf Hielscher
+- [Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher), Bergakademie TU Freiberg
 - [Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4), DTU Dänemark
 - [Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/), Universität Halle
-- Luiz Morales
+- [Luiz Morales](https://structuretectonics.org/people/luiz-morales/), ETH Zürich
