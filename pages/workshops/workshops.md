@@ -202,7 +202,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Organizers:
 
-- [Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher) - Bergakademie TU Freiberg
+- [Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher) - TU Bergakademie Freiberg
 - [Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4) - DTU Dänemark
 - [Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/) - Universität Halle
 - [Luiz Morales](https://structuretectonics.org/people/luiz-morales/) - ETH Zürich
