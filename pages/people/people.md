@@ -17,8 +17,8 @@ toc: false
   <p><b>Ralf Hielscher</b> invented MTEX in 2007 by implementing the pole
     figure to ODF inversion algorithm and leads since than the development.</p>
   <p></p>
-  <p> <a href="mailto:Ralf.Hielscher@mathematik.tu-chemnitz.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@mathematik.tu-chemnitz.de</a></p>
-  <p> <a href="https://www.tu-chemnitz.de/~rahi"><span class="glyphicon glyphicon-home"></span> Institute of Mathematics, TU Chemnitz</a></p>
+  <p> <a href="mailto:Ralf.Hielscher@math.tu-freiberg.de"><span class="glyphicon glyphicon-envelope"></span> Ralf.Hielscher@math.tu-freiberg.de</a></p>
+  <p> <a href="https://tu-freiberg.de/fakult1/ana/hielscher"><span class="glyphicon glyphicon-home"></span> Institute of Applied Analysis, TU Bergakademie Freiberg</a></p>
 </td>
 </tr></table>
 </div>
