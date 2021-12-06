@@ -195,7 +195,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Registration:
 
-- Please use our [registration form](https://www-user.tu-chemnitz.de/~rahi/mtexWorkshop21/registration.php) to subscribe or write an email to <a href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
+- Please use our [registration form](https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration) to subscribe or write an email to <a href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
 - Deadline for registration is 19th of February 2022
 - Registration fee first and second week: students - 100 Euro, other - 200 Euro
 - Registration fee second week only: 100 Euro
