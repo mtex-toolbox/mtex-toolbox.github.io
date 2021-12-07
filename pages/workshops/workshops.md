@@ -25,24 +25,18 @@ During the first week we provide on a daily basis two morning lectures covering 
         </div>
         <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-<div markdown="span">
-**Lecture 1 - General Concepts:** <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
-<br>
-Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
-<br>
-<br>
-**Lecture 2 - Crystal Lattice:**
-<br>
-crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
-<br>
-<br>
-**Lecture 3 - Rotations and Crystal Symmetries:**
-<br>
-rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
-<br>
-<br>
-**Exercise 1:**
-</div>
+				<dl>
+					<dt>Lecture 1 - General Concepts: <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a></dt>
+					<dd>Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates</dd>
+					
+					<dt>Lecture 2 - Crystal Lattice:</dt>
+					<dd>crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes</dd>
+					
+					<dt>Lecture 3 - Rotations and Crystal Symmetries:</dt>
+					<dd>rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors</dd>
+					
+					<dt>Exercise 1:</dt>
+				</dl>
             </div>
         </div>
     </div>
