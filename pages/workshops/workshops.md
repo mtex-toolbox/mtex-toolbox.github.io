@@ -43,6 +43,7 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
 <br>
 **Exercise 1:**
 </div>
+			</div>
         </div>
     </div>
     <!-- /.panel -->
