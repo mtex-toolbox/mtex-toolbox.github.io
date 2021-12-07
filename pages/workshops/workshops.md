@@ -10,11 +10,11 @@ toc: false
 
 ## Learning Crystallographic Texture Analysis with MTEX
 
-The workshop extends over two weeks and is part of the Master Course Introduction into the crystallographic texture analysis and counts for **4 ETCS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
+The workshop extends over two weeks and is part of the Master Course Introduction into the crystallographic texture analysis and counts for **4 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
 
 ### Week 1: 21.03.2022 - 25.03.2022
 
-During the first week we provide on a daily basis two morning lectures covering the basic theoretical principles of crystallography, diffraction and texture analysis. During the two afternoon exercises the theoretical concepts will be demonstrated at practical examples within MTEX.
+During the first week we provide on a daily basis two morning lectures covering the basic theoretical principles of crystallography, diffraction and texture analysis. During the two afternoon exercises the theoretical concepts will be demonstrated via practical examples within MTEX.
 
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
@@ -28,7 +28,7 @@ During the first week we provide on a daily basis two morning lectures covering 
 <div markdown="span">
 **Lecture 1 - General Concepts:** <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
 <br>
-Matlab basics and general concepts of MTEX the class vector3d, spherical coordinates
+Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
 **Lecture 2 - Crystal Lattice:**
@@ -79,7 +79,7 @@ X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF e
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWednesday"><b>Wednesday:</b> Electron Backsactter Diffraction (EBSD)</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWednesday"><b>Wednesday:</b> Electron Backscatter Diffraction (EBSD)</a>
             </h4>
         </div>
         <div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
@@ -119,7 +119,7 @@ definition, visualization, phase transitions, misorientation axis, misorientatio
 <br>
 **Lecture 10 - Grain Boundaries:**
 <br>
-geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundaries misorientations
+geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundary misorientations
 <br>
 <br>
 **Exercise 5 - Grain Boundaries:**
@@ -162,7 +162,7 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 
 ### Week 2: 28.03.2022 - 30.03.2022
 
-The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by a 10 minutes discussion. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
+The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
 
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
