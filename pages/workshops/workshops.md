@@ -8,9 +8,9 @@ folder: workshops
 toc: false
 ---
 
-The workshop extends over two weeks and is part of the Master Course Introduction into the crystallographic texture analysis and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
+The workshop extends over two weeks and is part of the master course *Introduction into crystallographic texture analysis* and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
 
-{% include note.html content="Due to the ongoing Corona crisis the workshop will be held entirely online via zoom. This does not mean mean that communication 
+{% include note.html content="Due to the ongoing Corona crisis the workshop will be held entirely online via zoom. This does not mean that communication 
 is one directional. Instead all participants are allowed at all time to interact with the lecturer. We also encourage the participants to send data files to the organiziers prior to the workshop which will than be discussed during the exercises." %}
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
@@ -172,7 +172,7 @@ The second week will consist of lectures by invited experts that explain in deta
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseInvitedSpeakers"><b>Invited Speakers</b></a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseInvitedSpeakers"><b>Keynote Speakers</b></a>
             </h4>
         </div>
         <div id="collapseInvitedSpeakers" class="panel-collapse collapse noCrossRef">
@@ -202,10 +202,11 @@ The second week will consist of lectures by invited experts that explain in deta
 - Deadline for registration is 19th of February 2022
 - Registration fee first and second week: students - 100 Euro, other - 200 Euro
 - Registration fee second week only: 100 Euro
+- Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
 ## Organizers:
 
-- [Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher) - TU Bergakademie Freiberg
-- [Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4) - DTU Dänemark
-- [Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/) - Universität Halle
-- [Luiz Morales](https://structuretectonics.org/people/luiz-morales/) - ETH Zürich
+[Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher) (TU Bergakademie Freiberg),
+[Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/) (Universität Halle),
+[Luiz Morales](https://structuretectonics.org/people/luiz-morales/) (ETH Zürich),
+[Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4) (DTU Dänemark)
