@@ -8,11 +8,13 @@ folder: workshops
 toc: false
 ---
 
-## Learning Crystallographic Texture Analysis with MTEX
+The workshop extends over two weeks and is part of the Master Course Introduction into the crystallographic texture analysis and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
 
-The workshop extends over two weeks and is part of the Master Course Introduction into the crystallographic texture analysis and counts for **4 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
+{% include note.html content="Due to the ongoing Corona crisis the workshop will be held entirely online via zoom. This does not mean mean that communication 
+is one directional. Instead all participants are allowed at all time to interact with the lecturer. We also encourage the participants to send data files to the organiziers prior to the workshop which will than be discussed during the exercises." %}
 
-### Week 1: 21.03.2022 - 25.03.2022
+## Week 1: Learning Crystallographic Texture Analysis with MTEX 
+Date: 21.03.2022 - 25.03.2022
 
 During the first week we provide on a daily basis two morning lectures covering the basic theoretical principles of crystallography, diffraction and texture analysis. During the two afternoon exercises the theoretical concepts will be demonstrated via practical examples within MTEX.
 
@@ -161,7 +163,8 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 
 **Times:** Lecture 1: 8:45-10:00, Lecture 2: 10:30 - 11:45, Exercise 1: 13:00-14:30, Exercise 2: 15:00 - 16:00
 
-### Week 2: 28.03.2022 - 30.03.2022
+## Week 2: MTEX in Applications
+Date: 28.03.2022 - 30.03.2022
 
 The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
 
