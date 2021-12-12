@@ -121,12 +121,20 @@ brew install gcc libtool
 
 ``` bash
 git clone https://github.com/NFFT/nfft/
+cd  nfft
 ./bootstrap.sh
 ```
 
 ### 3. Set the compilation parameters ###
 
-The path to gcc and matlab depends on your system and should be set accordingly
+The path to gcc and matlab depends on your system and should be set accordingly.
+If you uesd homebrew to install gcc, it should have ended up in some place called
+`Cellar` typically found in `/usr/local/`. Check the right version and replace them
+accordingly in the lines below. The same of coure applies to the Mathlab path and
+version. If you are one an architecture other than x86_64, also set this one correctly
+(e.g. or leave the option out completely and hope that automatic recognition will work).
+For the ARMv8 from Apple this is currectly untested.
+
 ``` bash
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 LDFLAGS=-Wl,-L/usr/local/Cellar/gcc/8.2.0/lib/gcc/8
@@ -150,8 +158,9 @@ make
 
 ### 5. Link the nfft ###
 
-The easists way is to make out of the following lines an executable shell script. Please do not forget to include the
-definitions of gcc and Matlab pathes from above
+The easists way is to make out of the following lines an executable shell script.
+Please do not forget to include the definitions of gcc and Matlab pathes from above.
+Most likely you changed the exact version and path, so do this here accordingly.
 
 ``` bash
 #!/bin/bash
