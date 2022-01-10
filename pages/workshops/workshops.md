@@ -181,7 +181,7 @@ The second week will consist of lectures by invited experts that explain in deta
 **[Wolfgang Pantleon](https://www.mek.dtu.dk/) - DTU Dänemark:**
 <br>
 <br>
-**[Tijem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/) - TU/e Eindhoven University of Technology:**
+**[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/) - TU/e Eindhoven University of Technology:**
 <br>
 <br>
 **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen) - Norwegian University of Science and Technology:**
