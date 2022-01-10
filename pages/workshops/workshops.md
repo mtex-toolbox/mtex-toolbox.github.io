@@ -168,38 +168,15 @@ Date: 28.03.2022 - 30.03.2022
 
 The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
 
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseInvitedSpeakers"><b>Keynote Speakers</b></a>
-            </h4>
-        </div>
-        <div id="collapseInvitedSpeakers" class="panel-collapse collapse noCrossRef">
-            <div class="panel-body">
-<div markdown="span">
-**[Sébastien Merkel](http://merkel.texture.rocks/)** (Université de Lille, France)
-<br>
-<br>
-**[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
-<br>
-<br>
-**[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
+### Keynote Speakers
+
+* **[Sébastien Merkel](http://merkel.texture.rocks/)** (Université de Lille, France)
+* **[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
+* **[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
     (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
-<br>
-<br>
-**[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)** (Norwegian University of Science and Technology):
-<br>
-<br>
-**[Omero Felipe (Phil)
-    Orlandini](https://www.linkedin.com/in/omero-phil-orlandini-96100a4a)** (University of Texas):
-</div>
-            </div>
-        </div>
-    </div>
-    <!-- /.panel -->
-</div>
-<!-- /.panel-group -->
+* **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)** (Norwegian University of Science and Technology):
+* **[Omero Felipe (Phil) Orlandini](https://www.linkedin.com/in/omero-phil-orlandini-96100a4a)** (University of Texas):
+
 
 ## Registration:
 
