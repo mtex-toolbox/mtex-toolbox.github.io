@@ -12,9 +12,11 @@ opensource basis by an interdisciplinary [team](people) of material
 scientists, geologists and mathematicians.
 
 ### News
+* MTEX Online Workshop 2022: ・ [Announcement](https://github.com/mtex-toolbox/mtex/discussions/1314) ・ [Homepage](https://mtex-toolbox.github.io/workshops) ・
+* New paper: [The variant graph approach to improved parent grain reconstruction](https://arxiv.org/pdf/2201.02103.pdf)
+* Manual "Getting Started with MTEX for EBSD Analysis" by J. Hiscocks released:  [Download](https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6)
 * New paper: [Parent grain reconstruction from partially or fully transformed microstructures in MTEX](https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf)
 * MTEX 5.7.0 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
-* MTEX Online Workshop 2021: ・ [Announcement](https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-139964) ・ [Homepage](http://www-user.tu-chemnitz.de/~rahi/mtexWorkshop21) ・
 * MTEX GUI 2.4 by J. Hiscocks released: ・ [Download](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip) ・ [Announcment](https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX) ・
 * New paper: [Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
 * New paper: [Denoising of Crystal Orientation Maps](https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf)
