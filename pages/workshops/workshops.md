@@ -175,7 +175,8 @@ The second week will consist of lectures by invited experts that explain in deta
 * **[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
     (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
 * **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)** (Norwegian University of Science and Technology):
-* **[Omero Felipe (Phil) Orlandini](https://www.linkedin.com/in/omero-phil-orlandini-96100a4a)** (University of Texas):
+* **[Omero Orlandini](https://www.researchgate.net/profile/Omero-Orlandini)**
+  (University of Colorado Boulder):
 
 
 ## Registration:
