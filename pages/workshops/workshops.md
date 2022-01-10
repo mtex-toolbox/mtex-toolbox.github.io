@@ -178,16 +178,21 @@ The second week will consist of lectures by invited experts that explain in deta
         <div id="collapseInvitedSpeakers" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**[Wolfgang Pantleon](https://www.mek.dtu.dk/) - DTU Dänemark:**
+**[Sébastien Merkel](http://merkel.texture.rocks/)** (Université de Lille, France)
 <br>
 <br>
-**[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/) - TU/e Eindhoven University of Technology:**
+**[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
 <br>
 <br>
-**[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen) - Norwegian University of Science and Technology:**
+**[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
+    (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
 <br>
 <br>
-**[Omero Felipe (Phil) Orlandini](https://www.linkedin.com/in/omero-phil-orlandini-96100a4a) - The University of Texas at Austin, University of Colorado Boulder:**
+**[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)** (Norwegian University of Science and Technology):
+<br>
+<br>
+**[Omero Felipe (Phil)
+    Orlandini](https://www.linkedin.com/in/omero-phil-orlandini-96100a4a)** (University of Texas):
 </div>
             </div>
         </div>
