@@ -166,7 +166,14 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 ## Week 2: MTEX in Applications
 Date: 28.03.2022 - 30.03.2022
 
-The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
+The second week will consist of lectures by invited experts that explain in
+detail the application of MTEX to specific problems as listed
+below. Furthermore, current or future users of MTEX are invited to share their
+experiences with MTEX or ask questions about specific use cases. To encourage
+discussions we plan with slots of 20 minutes talk given by the participants
+followed by 10 minute discussions. As we expect a very heterogeneous
+auditorium we kindly ask the participant to keep their talks as simple as
+possible.
 
 ### Keynote Speakers
 
@@ -174,7 +181,10 @@ The second week will consist of lectures by invited experts that explain in deta
 * **[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
 * **[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
     (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
-* **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)** (Norwegian University of Science and Technology):
+* **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)**
+  (Norwegian University of Science and Technology): *MTEX a versatile toolbox
+  for the geologist enabling better implementation of crystallography and
+  texture analysis in teaching and research*
 * **[Omero Orlandini](https://www.researchgate.net/profile/Omero-Orlandini)**
   (University of Colorado Boulder):
 
