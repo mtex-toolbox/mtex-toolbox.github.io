@@ -77,7 +77,7 @@ makeHelpToc(mtexDocFiles,'Documentation','doc.xml');
 xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
 
 % publsih files
-docOut = fullfile(pwd,'..','pages','documentation_matlab');;
+docOut = fullfile(pwd,'..','pages','documentation_matlab');
 options.outDir = docOut;
 options.xml.toolbox.folder.Text = 'documentation';
 
