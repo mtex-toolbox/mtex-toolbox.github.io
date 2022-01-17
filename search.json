@@ -9,10 +9,10 @@ search: exclude
 		{% unless page.search == "exclude" %}
 			{
 				"title"			: "{{ page.title | strip | escape }}",
-				"url"			: "{{ page.url | remove: "/" }}",
+				"url"			: "{{ page.url | remove: '/' }}",
 				"last_updated"	: "{{ page.last_updated }}",
 				"keywords"		: "{{ page.keywords }}",
-				"summary"		: "{{ page.summary | strip | escape }}"
+				"summary"		: "{{ page.summary | strip | escape | truncate: 150, ' ...' }}"
 			}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
@@ -22,7 +22,7 @@ search: exclude
 		{% unless post.published == false %}
 			{
 				"title"			: "{{ post.title | strip | escape }}",
-				"url"			: "{{ post.url | remove: "/" }}",
+				"url"			: "{{ post.url | remove: '/' }}",
 				"date"			: "{{ post.date }}",
 				"tags"			: "{{ post.tags }}",
 				"categories"	: "{{ post.categories }}"
