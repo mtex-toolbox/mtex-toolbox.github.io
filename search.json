@@ -8,24 +8,26 @@ search: exclude
 	{% for page in site.pages %}
 		{% unless page.search == "exclude" %}
 			{
-				"title": "{{ page.title | escape }}",
-				"tags": "{{ page.tags }}",
-				"keywords": "{{page.keywords}}",
-				"url": "{{ page.url | remove: "/"}}",
-				"summary": "{{page.summary | strip }}"
+				"title"			: "{{ page.title | strip | escape }}",
+				"url"			: "{{ page.url | remove: "/"}}",
+				"last_updated"	: "{{ page.last_updated }}",
+				"keywords"		: "{{ page.keywords }}",
+				"summary"		: "{{page.summary | strip }}"
 			}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
 	{% endfor %}
 
 	{% for post in site.posts %}
-		{
-			"title": "{{ post.title | escape }}",
-			"tags": "{{ post.tags }}",
-			"keywords": "{{post.keywords}}",
-			"url": "{{ post.url | remove: "/" }}",
-			"summary": "{{post.summary | strip }}"
-		}
-		{% unless forloop.last %},{% endunless %}
+		{% unless post.published == false %}
+			{
+				"title"			: "{{ post.title | strip | escape }}",
+				"url"			: "{{ post.url | remove: "/" }}",
+				"date"			: "{{ post.date }}",
+				"tags"			: "{{ post.tags }}",
+				"categories"	: "{{ post.categories }}"
+			}
+			{% unless forloop.last %},{% endunless %}
+		{% endunless %}
 	{% endfor %}
 ]
