@@ -16,7 +16,7 @@ toc: false
 			searchInput: document.getElementById('_search-input'),
 			resultsContainer: document.getElementById('_results-container'),
 			dataSource: '{{ "search.json" }}',
-			searchResultTemplate: '<a href="{url}"><dt>{tit}</dt><dd>{url}<br>{summary}</dd></a></li>',
+			searchResultTemplate: '<a href="{url}"><dt>{title}</dt><dd>{url}<br>{keywords}</dd></a></li>',
 			noResultsText: '{{ site.data.strings.search_no_results_text }}',
 			limit: 30,
 			fuzzy: true
