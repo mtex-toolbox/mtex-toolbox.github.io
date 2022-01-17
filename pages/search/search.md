@@ -9,7 +9,7 @@ toc: false
 
 <!--start search-->
 <input type="text" id="_search-input" placeholder="{{ site.data.strings.search_placeholder_text }}">
-<ul id="_results-container"></ul>
+<ul id="_results-container" style="list-style: none;"></ul>
 <script src="{{ 'js/jekyll-search.js' }}" type="text/javascript"></script>
 <script type="text/javascript">
 		SimpleJekyllSearch.init({
