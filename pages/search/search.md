@@ -8,7 +8,7 @@ toc: false
 ---
 
 <!--start search-->
-<input type="text" id="_search-input" placeholder="{{site.data.strings.search_placeholder_text}}">
+<input type="text" id="_search-input" placeholder="{{ site.data.strings.search_placeholder_text }}">
 <ul id="_results-container"></ul>
 <script src="{{ "js/jekyll-search.js"}}" type="text/javascript"></script>
 <script type="text/javascript">
@@ -16,8 +16,8 @@ toc: false
 			searchInput: document.getElementById('_search-input'),
 			resultsContainer: document.getElementById('_results-container'),
 			dataSource: '{{ "search.json" }}',
-			searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>',
-			noResultsText: '{{site.data.strings.search_no_results_text}}',
+			searchResultTemplate: '<li><a href="{url}">{title}</a><br>{date}</li>',
+			noResultsText: '{{ site.data.strings.search_no_results_text }}',
 			limit: 30,
 			fuzzy: true
 })
