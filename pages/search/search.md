@@ -18,7 +18,7 @@ toc: false
 			dataSource: '{{ "search.json" }}',
 			searchResultTemplate: '<li><a href="{url}" title="{title}">{title}</a></li>',
 			noResultsText: '{{site.data.strings.search_no_results_text}}',
-			limit: 10,
+			limit: 30,
 			fuzzy: true
 })
 </script>
