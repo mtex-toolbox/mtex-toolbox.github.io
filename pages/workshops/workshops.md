@@ -1,11 +1,12 @@
 ---
 title: Freiberg MTEX Workshop 2022
 keywords: workshop
-last_updated: December, 2021
+last_updated: 27-Jan-2022
 hide_sidebar: true
 permalink: workshops.html
 folder: workshops
 toc: false
+summary: The workshop extends over two weeks and is part of the master course *Introduction into crystallographic texture analysis* and counts for **5 ECTS** p...
 ---
 
 The workshop extends over two weeks and is part of the master course *Introduction into crystallographic texture analysis* and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX.
