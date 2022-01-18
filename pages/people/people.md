@@ -1,7 +1,7 @@
 ---
 title: People that have contributed to MTEX
 keywords: people
-last_updated: January 8, 2018
+last_updated: 07-Dec-2021
 hide_sidebar: true
 permalink: people.html
 folder: people
