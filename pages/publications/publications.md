@@ -11,17 +11,21 @@ toc: false
 If you are using MTEX for your research, please cite one of the
 following paper that best fits your application.
 
-#### 2021
+
+### 2022
+
+* **The variant graph approach to improved parent grain reconstruction**, R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder:
+[arXiv:2201.02103](https://arxiv.org/abs/2201.02103).
+<a href="https://arxiv.org/pdf/2201.02103.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
 * **Parent grain reconstruction from partially or fully transformed microstructures in MTEX**, F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher:
-[https://arxiv.org/abs/2104.14603, 2021](https://arxiv.org/abs/2104.14603).
-<a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
+[J. Appl. Cryst. 55](https://doi.org/10.1107/S1600576721011560).
+<a href="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
-
-#### 2020
+#### 2021
 
 * **Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries**, R. Hielscher, L. Lippert:
-[https://arxiv.org/abs/2007.09664](arXiv:2007.09664, 2020). <a href="https://www-user.tu-chemnitz.de/~rahi/paper/embeddings.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
+[J. Multivariate Analysis 185, 104764](https://doi.org/10.1016/j.jmva.2021.104764). <a href="https://www-user.tu-chemnitz.de/~rahi/paper/embeddings.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
 
 #### 2019
 
