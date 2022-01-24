@@ -7,10 +7,12 @@ search: exclude
 [
 	{% for page in site.pages %}
 		{% unless page.search == "exclude" %}
+			{% assign path = page.url | split: '/' %}
 			{
 				"title"			: "{{ page.title | strip | escape }}",
 				"url"			: "{{ page.url | remove: '/' }}",
-				"date"			: "{{ page.last_updated }}",
+				"path"			: "{% for part in path %}{{ '>' | part }}{% endfor %}",
+				"date"			: "{{ page.last_updated | capitalize }}",
 				"keywords"		: "{{ page.keywords }}",
 				"content"		: "{{ page.summary | strip | escape | truncate: 150 }}"
 			}
@@ -23,7 +25,7 @@ search: exclude
 			{
 				"title"			: "{{ post.title | strip | escape }}",
 				"url"			: "{{ post.url | remove: '/' }}",
-				"date"			: "{{ post.date }}",
+				"date"			: "{{ post.date | capitalize }}",
 				"tags"			: "{{ post.tags }}",
 				"categories"	: "{{ post.categories }}"
 			}
