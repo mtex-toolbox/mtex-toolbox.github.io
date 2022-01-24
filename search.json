@@ -11,8 +11,8 @@ search: exclude
 			{
 				"title"			: "{{ page.title | strip | escape }}",
 				"url"			: "{{ page.url | remove: '/' }}",
-				"path"			: "{% for part in path %}{{ '>' | part }}{% endfor %}",
-				"date"			: "{{ page.last_updated | capitalize }}",
+				"path"			: "{{ path | join: ' > ' }}",
+				"date"			: "{{ page.last_updated | replace_first: '-', '. ' | capitalize }}",
 				"keywords"		: "{{ page.keywords }}",
 				"content"		: "{{ page.body | strip_newlines | strip_html | strip | escape | truncate: 150 }}"
 			}
@@ -25,7 +25,7 @@ search: exclude
 			{
 				"title"			: "{{ post.title | strip | escape }}",
 				"url"			: "{{ post.url | remove: '/' }}",
-				"date"			: "{{ post.date | capitalize }}",
+				"date"			: "{{ post.date | replace_first: '-', '. ' | capitalize }}",
 				"tags"			: "{{ post.tags }}",
 				"categories"	: "{{ post.categories }}"
 			}
