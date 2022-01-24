@@ -12,7 +12,8 @@ search: exclude
 				"url"			: "{{ page.url | remove: '/' }}",
 				"path"			: "{{ page.url | remove_first: '/' | split: '/' | join: ' > ' }}",
 				"date"			: "{{ page.last_updated | replace_first: '-', '. ' | replace_last: '-', ' ' | capitalize }}",
-				"keywords"		: "{{ page.keywords }}"
+				"keywords"		: "{{ page.keywords }}",
+				"content"		: "{{ page.summary | strip | escape | truncate: 150 }}"
 			}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
@@ -23,7 +24,7 @@ search: exclude
 			{
 				"title"			: "{{ post.title | strip | escape }}",
 				"url"			: "{{ post.url | remove: '/' }}",
-				"date"			: "{{ post.date | replace_first: '-', '. ' | capitalize }}",
+				"date"			: "{{ post.date | replace_first: '-', '. ' | replace_last: '-', ' ' | capitalize }}",
 				"tags"			: "{{ post.tags }}",
 				"categories"	: "{{ post.categories }}"
 			}
