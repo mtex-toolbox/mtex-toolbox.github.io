@@ -17,7 +17,7 @@ toc: false
 		searchInput: document.getElementById('_search-input'),
 		resultsContainer: document.getElementById('onpage_results-container'),
 		dataSource: '{{ "search.json" }}',
-		searchResultTemplate: '<li><a href="{url}" style="font-size: 110%;">{title}</a><br>{date}&nbsp;&minus;&nbsp;{path}<br>{content}</li>',
+		searchResultTemplate: '<li><a href="{url}" style="font-size: 110%;">{title}</a><br><span style="font-size: 80%;">{date}&nbsp;&minus;&nbsp;{path}</span><br>{content}</li>',
 		noResultsText: '{{ site.data.strings.search_no_results_text }}',
 		fuzzy: true
 	})
