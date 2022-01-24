@@ -13,7 +13,7 @@ search: exclude
 				"path"			: "{{ page.url | remove_first: '/' | split: '/' | join: ' > ' }}",
 				"date"			: "{{ page.last_updated | replace_first: '-', '. ' | replace_last: '-', ' ' | capitalize }}",
 				"keywords"		: "{{ page.keywords }}",
-				"content"		: "{{ page.content | strip_html | strip_newlines | replace: '\', '\\\\' | replace: '"', '\\"' | replace: '	', '    ' | replace: '^t', ' ' | strip | escape | truncate: 150 }}"
+				"content"		: "{{ page.content | strip_html | strip_newlines | strip | escape | truncate: 150 }}"
 			}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
