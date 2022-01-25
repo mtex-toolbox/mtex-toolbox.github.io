@@ -1,7 +1,7 @@
 ---
 title: Freiberg MTEX Workshop 2022
 keywords: workshop
-last_updated: December, 2021
+last_updated: 27-Jan-2022
 hide_sidebar: true
 permalink: workshops.html
 folder: workshops
