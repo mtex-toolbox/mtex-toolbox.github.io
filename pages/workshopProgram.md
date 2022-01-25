@@ -1,3 +1,7 @@
+---
+search: exclude
+---
+
 ## Monday
 
 Lecture 1: _*Matlab Basics and conception of the MTEX Toolbox*_

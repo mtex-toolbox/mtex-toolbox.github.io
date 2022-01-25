@@ -1,3 +1,7 @@
+---
+search: exclude
+---
+
 to
 ```xml
   <SDKVER>
