@@ -3,7 +3,7 @@ title:  "Welcome to Jekyll!"
 categories: jekyll update
 permalink: myupdate.html
 tags: [news]
-date: February 24, 2017
+date: February 24, 2016
 ---
 
 
