@@ -181,19 +181,26 @@ possible.
   France): *Microstructures in Earth mantle minerals: using MTEX to track
   grains and physical properties of polycrystals in high pressure experiments*
 * **[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
-* **[Tijmem Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
-    (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
+* **[Tijmem
+    Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
+    (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment,
+    analysis and identification of microstructure-correlated strain fields in
+    micron-scale testing*
 * **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)**
   (Norwegian University of Science and Technology): *MTEX a versatile toolbox
   for the geologist enabling better implementation of crystallography and
   texture analysis in teaching and research*
 * **[Omero Orlandini](https://www.researchgate.net/profile/Omero-Orlandini)**
-  (University of Colorado Boulder):
+  (University of Colorado Boulder): *Deep earthquakes, super-volcanoes, fossil
+  eggs, and historic buildings: MTEX's ability to solve many problems*
 
 
 ## Registration:
 
-- Please use our [registration form](https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration) to subscribe or write an email to <a href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
+- Please use our [registration
+  form](https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration)
+  to subscribe or write an email to <a
+  href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
 - Deadline for registration is 19th of February 2022
 - Registration fee first week: students - 100 Euro, other - 200 Euro
 - Registration for second week is free
