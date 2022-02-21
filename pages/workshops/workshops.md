@@ -201,7 +201,7 @@ possible.
   form](https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration)
   to subscribe or write an email to <a
   href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
-- Deadline for registration is 19th of February 2022
+- Deadline for registration is 28th of February 2022
 - Registration fee first week: students - 100 Euro, other - 200 Euro
 - Registration for second week is free
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
