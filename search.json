@@ -9,20 +9,20 @@ search: exclude
 		{% unless page.search == "exclude" %}
 			
 			{% if page.sidebar %}
-				{% assign foundSidebar = page.sidebar | capitalize | replace: "_sidebar", "." | replace: "_", " " %}
+				{% assign foundSidebar = page.sidebar | replace: "_sidebar", "." | replace: "_", " " %}
 				{% assign found = 0 %}
 				
 				{% for entry in site.data.sidebars[page.sidebar].entries %}
 					{% if found == 1 %}{% break %}{% endif %}
-					{% assign foundEntry = entry.product | capitalize %}
+					{% assign foundEntry = entry.product %}
 					
 					{% for folder in entry.folders %}
 						{% if found == 1 %}{% break %}{% endif %}
-						{% assign foundFolder = folder.title | capitalize %}
+						{% assign foundFolder = folder.title %}
 						
 						{% for item in folder.folderitems %}
 							{% if found == 1 %}{% break %}{% endif %}
-							{% assign foundItem = item.title | capitalize %}
+							{% assign foundItem = item.title %}
 							
 							{% if folder.output contains "web" %}
 								{% if foundItem == page.title %}
