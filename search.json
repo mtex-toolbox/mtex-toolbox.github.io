@@ -7,10 +7,45 @@ search: exclude
 [
 	{% for page in site.pages %}
 		{% unless page.search == "exclude" %}
+			
+			{% if page.sidebar %}
+				{% assign foundSidebar = page.sidebar | capitalize | split: "_" %}
+				{% assign found = 0 %}
+				
+				{% for entry in site.data.sidebars[page.sidebar].entries %}
+					{% if found == 1 %}{% break %}{% endif %}
+					{% assign foundEntry = entry.product | capitalize %}
+					
+					{% for folder in entry.folders %}
+						{% if found == 1 %}{% break %}{% endif %}
+						{% assign foundFolder = folder.title | capitalize %}
+						
+						{% for item in folder.folderitems %}
+							{% if found == 1 %}{% break %}{% endif %}
+							{% assign foundItem = item.title | capitalize %}
+							
+							{% if folder.output contains "web" %}
+								{% if foundItem contains page.title %}
+									{% assign found = 1 %}
+								{% endif %}
+							{% endif %}
+						{% endfor %}
+					{% endfor %}
+				{% endfor %}
+				
+				{% assign path = foundSidebar.first %}
+				{% if foundEntry %}{% assign path = path | concat: "." | concat: foundEntry %}{% endif %}
+				{% if foundFolder %}{% assign path = path | concat: "." | concat: foundFolder %}{% endif %}
+				{% if foundItem %}{% assign path = path | concat: "." | concat: foundItem %}{% endif %}
+				
+			{% else %}
+				{% assign path = page.url | remove: '.html' | replace: '/', '.' %}
+			{% endif %}
+			
 			{
 				"title"			: "{{ page.title | strip | escape }}",
 				"url"			: "{{ page.url | remove: '/' }}",
-				"path"			: "{{ page.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
+				"path"			: "{{ path | split: '.' | join: ' > ' | replace_first: ' > ' }}",
 				"date"			: "{{ page.last_updated | date_to_xmlschema | date: '%b %d, %Y' }}",
 				"keywords"		: "{{ page.keywords }}",
 				"summary"		: "{{ page.summary | strip | escape | truncate: 200 }}"
