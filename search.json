@@ -34,27 +34,14 @@ search: exclude
 							{% assign foundItem = item.title %}
 
 							{% if subfolder %}
-								{% for subfolder in item.subfolders %}
-									{% if found == 1 %}{% break %}{% endif %}
-									{% assign foundSubFolder = subfolder.title %}
-
-									{% for subitem in subfolder %}
-										{% if found == 1 %}{% break %}{% endif %}
-										{% assign foundSubItem = subitem.title %}
-
-										{% if subitem.output contains "web" %}
-											{% if foundSubItem == page.title %}
-												{% assign found = 1 %}
-											{% endif %}
-										{% endif %}
-									{% endfor %}
-								{% endfor %}
+								{% assign found = 1 %}
+								{% assign foundSub = page.url | remove: '.html' %}
 							{% else %}
-								{% if item.output contains "web" %}
+								{%comment%} {% if item.output contains "web" %} {%endcomment%}
 									{% if foundItem == page.title %}
 										{% assign found = 1 %}
 									{% endif %}
-								{% endif %}
+								{%comment%} {% endif %} {%endcomment%}
 							{% endif %}
 						{% endfor %}
 					{% endfor %}
@@ -64,8 +51,7 @@ search: exclude
 				{% if foundEntry %}{% assign path = path | append: "." | append: foundEntry %}{% endif %}
 				{% if foundFolder %}{% assign path = path | append: "." | append: foundFolder %}{% endif %}
 				{% if foundItem %}{% assign path = path | append: "." | append: foundItem %}{% endif %}
-				{% if foundSubFolder %}{% assign path = path | append: "." | append: foundSubFolder %}{% endif %}
-				{% if foundSubItem %}{% assign path = path | append: "." | append: foundSubItem %}{% endif %}
+				{% if foundSub %}{% assign path = path | append: "." | append: foundSub %}{% endif %}
 
 			{% else %}
 				{% assign path = page.url | remove: '.html' | replace: '/', '.' %}
