@@ -9,8 +9,17 @@ search: exclude
 		{% unless page.search == "exclude" %}
 
 			{% if page.sidebar %}
-				{% assign foundSidebar = page.sidebar | replace: "_sidebar", "." | replace: "_", " " %}
 				{% assign found = 0 %}
+				
+				{% assign tempSidebar = page.sidebar | replace: "_sidebar", "." | replace: "_", " " | split: " " %}
+				{% assign foundSidebar = "" %}
+				{% for word in tempSidebar %}
+					{% assign word = word | capitalize %}
+					{% assign foundSidebar = foundSidebar | append: word %}
+					{% unless forloop.last %}
+						{% assign foundSidebar = foundSidebar | append: " " %}
+					{% endunless %}
+				{% endfor %}
 
 				{% for entry in site.data.sidebars[page.sidebar].entries %}
 					{% if found == 1 %}{% break %}{% endif %}
