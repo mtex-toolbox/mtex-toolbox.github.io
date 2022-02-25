@@ -7,63 +7,82 @@ search: exclude
 [
 	{% for page in site.pages %}
 		{% unless page.search == "exclude" %}
-			
+
 			{% if page.sidebar %}
 				{% assign foundSidebar = page.sidebar | replace: "_sidebar", "." | replace: "_", " " %}
 				{% assign found = 0 %}
-				
+
 				{% for entry in site.data.sidebars[page.sidebar].entries %}
 					{% if found == 1 %}{% break %}{% endif %}
 					{% assign foundEntry = entry.product %}
-					
+
 					{% for folder in entry.folders %}
 						{% if found == 1 %}{% break %}{% endif %}
 						{% assign foundFolder = folder.title %}
-						
+
 						{% for item in folder.folderitems %}
 							{% if found == 1 %}{% break %}{% endif %}
 							{% assign foundItem = item.title %}
-							
-							{% if folder.output contains "web" %}
-								{% if foundItem == page.title %}
-									{% assign found = 1 %}
+
+							{% if subfolder %}
+								{% for subfolder in item.subfolders %}
+									{% if found == 1 %}{% break %}{% endif %}
+									{% assign foundSubFolder = subfolder.title %}
+
+									{% for subitem in subfolder %}
+										{% if found == 1 %}{% break %}{% endif %}
+										{% assign foundSubItem = subitem.title %}
+
+										{% if subitem.output contains "web" %}
+											{% if foundSubItem == page.title %}
+												{% assign found = 1 %}
+											{% endif %}
+										{% endif %}
+									{% endfor %}
+								{% endfor %}
+							{% else %}
+								{% if item.output contains "web" %}
+									{% if foundItem == page.title %}
+										{% assign found = 1 %}
+									{% endif %}
 								{% endif %}
 							{% endif %}
 						{% endfor %}
 					{% endfor %}
 				{% endfor %}
-				
+
 				{% assign path = foundSidebar %}
 				{% if foundEntry %}{% assign path = path | append: "." | append: foundEntry %}{% endif %}
 				{% if foundFolder %}{% assign path = path | append: "." | append: foundFolder %}{% endif %}
 				{% if foundItem %}{% assign path = path | append: "." | append: foundItem %}{% endif %}
-				
+				{% if foundSubFolder %}{% assign path = path | append: "." | append: foundSubFolder %}{% endif %}
+				{% if foundSubItem %}{% assign path = path | append: "." | append: foundSubItem %}{% endif %}
+
 			{% else %}
 				{% assign path = page.url | remove: '.html' | replace: '/', '.' %}
 			{% endif %}
-			
-			{
-				"title"			: "{{ page.title | strip | escape }}",
-				"url"			: "{{ page.url | remove: '/' }}",
-				"path"			: "{{ path | split: '.' | join: ' > ' | replace_first: ' > ' }}",
-				"date"			: "{{ page.last_updated | date_to_xmlschema | date: '%b %d, %Y' }}",
-				"keywords"		: "{{ page.keywords }}",
-				"summary"		: "{{ page.summary | strip | escape | truncate: 200 }}"
-			}
+	{
+		"title"			: "{{ page.title | strip | escape }}",
+		"url"			: "{{ page.url | remove: '/' }}",
+		"path"			: "{{ path | split: '.' | join: ' > ' | replace_first: ' > ' }}",
+		"date"			: "{{ page.last_updated | date_to_xmlschema | date: '%b %d, %Y' }}",
+		"keywords"		: "{{ page.keywords }}",
+		"summary"		: "{{ page.summary | strip | escape | truncate: 200 }}"
+	}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
 	{% endfor %}
-	
+
 	{% for post in site.posts %}
 		{% unless post.published == false %}
-			{
-				"title"			: "{{ post.title | strip | escape }}",
-				"url"			: "{{ post.url | remove: '/' }}",
-				"path"			: "{{ post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
-				"date"			: "{{ post.date | date_to_xmlschema | date: '%b %d, %Y' }}",
-				"tags"			: "{{ post.tags }}",
-				"categories"	: "{{ post.categories }}"
-			}
+	{
+		"title"			: "{{ post.title | strip | escape }}",
+		"url"			: "{{ post.url | remove: '/' }}",
+		"path"			: "{{ post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
+		"date"			: "{{ post.date | date_to_xmlschema | date: '%b %d, %Y' }}",
+		"tags"			: "{{ post.tags }}",
+		"categories"	: "{{ post.categories }}"
+	}
 			{% unless forloop.last %},{% endunless %}
 		{% endunless %}
 	{% endfor %}
