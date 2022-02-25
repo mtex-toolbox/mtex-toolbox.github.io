@@ -10,16 +10,7 @@ search: exclude
 
 			{% if page.sidebar %}
 				{% assign found = 0 %}
-				
-				{% assign tempSidebar = page.sidebar | replace: "_sidebar", "." | replace: "_", " " | split: " " %}
-				{% assign foundSidebar = "" %}
-				{% for word in tempSidebar %}
-					{% assign word = word | capitalize %}
-					{% assign foundSidebar = foundSidebar | append: word %}
-					{% unless forloop.last %}
-						{% assign foundSidebar = foundSidebar | append: " " %}
-					{% endunless %}
-				{% endfor %}
+				{% assign foundSidebar = page.sidebar | replace: "_sidebar", " . " | split: " " | join: "-----" | camelcase | split: "-----" | join: " " %} | replace: " . ", "." %}
 
 				{% for entry in site.data.sidebars[page.sidebar].entries %}
 					{% if found == 1 %}{% break %}{% endif %}
@@ -35,7 +26,7 @@ search: exclude
 
 							{% if subfolder %}
 								{% assign found = 1 %}
-								{% assign foundSub = page.url | remove: '.html' %}
+								{% assign foundSub = page.url | remove: ".html" %}
 							{% else %}
 								{%comment%} {% if item.output contains "web" %} {%endcomment%}
 									{% if foundItem == page.title %}
