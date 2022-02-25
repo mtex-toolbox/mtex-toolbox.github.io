@@ -9,7 +9,7 @@ search: exclude
 		{% unless page.search == "exclude" %}
 			
 			{% if page.sidebar %}
-				{% assign foundSidebar = page.sidebar | capitalize | split: "_" %}
+				{% assign foundSidebar = page.sidebar | capitalize %}
 				{% assign found = 0 %}
 				
 				{% for entry in site.data.sidebars[page.sidebar].entries %}
@@ -25,7 +25,7 @@ search: exclude
 							{% assign foundItem = item.title | capitalize %}
 							
 							{% if folder.output contains "web" %}
-								{% if foundItem contains page.title %}
+								{% if foundItem == page.title %}
 									{% assign found = 1 %}
 								{% endif %}
 							{% endif %}
@@ -33,7 +33,7 @@ search: exclude
 					{% endfor %}
 				{% endfor %}
 				
-				{% assign path = foundSidebar.first %}
+				{% assign path = foundSidebar %}
 				{% if foundEntry %}{% assign path = path | append: "." | append: foundEntry %}{% endif %}
 				{% if foundFolder %}{% assign path = path | append: "." | append: foundFolder %}{% endif %}
 				{% if foundItem %}{% assign path = path | append: "." | append: foundItem %}{% endif %}
