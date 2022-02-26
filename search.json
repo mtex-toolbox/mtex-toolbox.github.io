@@ -53,7 +53,7 @@ search: exclude
 		"keywords"		: "{{ page.keywords }}",
 		"summary"		: "{{ page.summary | strip | escape | truncate: 200 }}"
 	}
-			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
+			{% unless forloop.last %},{% endunless %}
 		{% endunless %}
 	{% endfor %}
 
@@ -67,7 +67,7 @@ search: exclude
 		"keywords"		: "{{ post.tags }}",
 		"summary"		: "{{ post.categories }}"
 	}
-			{% unless forloop.last %},{% endunless %}
+			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
 	{% endfor %}
 ]
