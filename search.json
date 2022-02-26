@@ -48,10 +48,10 @@ search: exclude
 	{
 		"title"			: "{{ page.title | strip | escape }}",
 		"url"			: "{{ page.url | remove: '/' }}",
-		"path"			: "{{ path | split: '.' | join: ' > ' | replace_first: ' > ' }}",
+		"path"			: "{{ path | split: '.' | join: ' > ' | remove_first: ' > ' }}",
 		"date"			: "{{ page.last_updated | date_to_xmlschema | date: '%b %d, %Y' }}",
 		"keywords"		: "{{ page.keywords }}",
-		"summary"		: "{{ page.content | truncatewords: 50 | strip_html }}"
+		"summary"		: "{{ page.summary | strip | escape | truncate: 200 }}"
 	}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
@@ -62,7 +62,7 @@ search: exclude
 	{
 		"title"			: "{{ post.title | strip | escape }}",
 		"url"			: "{{ post.url | remove: '/' }}",
-		"path"			: "{{ post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
+		"path"			: "{{ post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | remove_first: ' > ' }}",
 		"date"			: "{{ post.date | date_to_xmlschema | date: '%b %d, %Y' }}",
 		"keywords"		: "{{ post.tags }}",
 		"summary"		: "{{ post.categories }}"
