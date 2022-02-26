@@ -65,7 +65,7 @@ search: exclude
 		"path"			: "{{ post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
 		"date"			: "{{ post.date | date_to_xmlschema | date: '%b %d, %Y' }}",
 		"keywords"		: "{{ post.tags | append: post.categories }}",
-		"summary"		: "{% if page.summary %}{{ post.summary | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ post.content | truncatewords: 50 | strip_html }}{% endif %}"
+		"summary"		: "{% if post.summary %}{{ post.summary | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ post.content | truncatewords: 50 | strip_html }}{% endif %}"
 	}
 			{% unless forloop.last %},{% endunless %}
 		{% endunless %}
