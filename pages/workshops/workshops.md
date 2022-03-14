@@ -200,7 +200,7 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday, 28.03.2022:</b></a>
             </h4>
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
@@ -225,7 +225,7 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday, 29.03.2022:</b></a>
             </h4>
         </div>
         <div id="collapseTue" class="panel-collapse collapse noCrossRef">
@@ -250,7 +250,7 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday, 30.03.2022:</b></a>
             </h4>
         </div>
         <div id="collapseWe" class="panel-collapse collapse noCrossRef">
