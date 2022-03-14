@@ -206,6 +206,23 @@ possible.
 - Registration for second week is free
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
+## Time Schedule 
+
+||| Mondy  |||  Tuesday ||| Wednesday 
+:-|-|-|:-|-|-|:-|-|-|-
+ 9:00-10:00 ||| F. Niessen   ||| B. Soerensen  ||| W. Pantleon
+10:00-10:30 ||| T. Nyyssonen ||| F. Ferreira   ||| D. Depriester 
+10:30-11:00 ||| M. Witte     ||| Lopez-Sanchez ||| K. Frydrych
+11:00-11:30 |||              ||| Sheng Fan     ||| P. Lehto
+Lunch		|||              |||               |||   
+13:30-14:30 |||  T. Vermeij  ||| O. Orlandini  ||| D. Savage / ???
+14:30-15:00 |||  C. Cayron   ||| Z. Michels    ||| J. Hisccocks
+15:00-15:30 |||  L. Germain  ||| Mael          ||| Round Table Discussion
+15:30-16:00 |||  B. Britton  ||| S. Merkel     ||| Round Table Discussion
+16:00-16:30 |||              ||| S. Merkel	   |||
+
+
+
 ## Organizers:
 
 [Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher) (TU Bergakademie Freiberg),
