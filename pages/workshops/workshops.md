@@ -235,22 +235,22 @@ possible.
 						<tr>
 							<td style="text-align: left">10:00-10:30</td>
 							<td style="text-align: left">T. Nyyssonen</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">10:30-11:00</td>
 							<td style="text-align: left">M. Witte</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">11:00-11:30</td>
-							<td style="text-align: left"> </td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
-							<td style="text-align: left"> </td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">13:30-14:30</td>
@@ -330,8 +330,8 @@ possible.
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
-							<td style="text-align: left"> </td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">13:30-14:30</td>
@@ -341,7 +341,7 @@ possible.
 						<tr>
 							<td style="text-align: left">14:30-15:00</td>
 							<td style="text-align: left">Z. Michels</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">15:00-15:30</td>
@@ -392,12 +392,12 @@ possible.
 						<tr>
 							<td style="text-align: left">9:00-10:00</td>
 							<td style="text-align: left">W. Pantleon</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">11:00-11:30</td>
 							<td style="text-align: left">P. Lehto</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">10:00-10:30</td>
@@ -411,18 +411,18 @@ possible.
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
-							<td style="text-align: left"> </td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">13:30-14:00</td>
 							<td style="text-align: left">D. Savage</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">14:00-14:30</td>
-							<td style="text-align: left"> </td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">14:30-15:00</td>
@@ -432,12 +432,12 @@ possible.
 						<tr>
 							<td style="text-align: left">15:00-15:30</td>
 							<td style="text-align: left">Round Table Discussion</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">15:30-16:00</td>
 							<td style="text-align: left">Round Table Discussion</td>
-							<td style="text-align: left"> </td>
+							<td style="text-align: left"></td>
 						</tr>
 					</tbody>
 				</table>
