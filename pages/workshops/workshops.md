@@ -181,7 +181,7 @@ possible.
   France): *Microstructures in Earth mantle minerals: using MTEX to track
   grains and physical properties of polycrystals in high pressure experiments*
 * **[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
-* **[Tijmem
+* **[Tijmen
     Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)**
     (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment,
     analysis and identification of microstructure-correlated strain fields in
