@@ -200,13 +200,13 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMonday"><b>Monday:</b> Crystal Lattices and Rotations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
             </h4>
         </div>
-        <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
+        <div id="collapseMo" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-| Monday      | Speaker  |  Title |
+| Time      | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
 | 10:00-10:30 | T. Nyyssonen | |
@@ -225,13 +225,13 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:</b> Crystal Symmetries and Orientations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
             </h4>
         </div>
-        <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
+        <div id="collapseTue" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-| Tuesday  | Speaker  |  Title |
+| Time  | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
 | 10:00-10:30 | F. Ferreira   | Influence of grain boundaries on the rheology of the Earth's upper mantle|
@@ -250,13 +250,13 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:</b> Crystal Symmetries and Orientations</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
             </h4>
         </div>
-        <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
+        <div id="collapseWe" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-| Wednesday  | Speaker  |  Title |
+| Time  | Speaker  |  Title |
 |  9:00-10:00 |  W. Pantleon              ||
 | 11:00-11:30 |  P. Lehto				  | |
 | 10:00-10:30 |  D. Depriester 			  | Coupled in situ SEM-DIC/CPFEM analyses of pure copper |
