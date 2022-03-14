@@ -196,17 +196,29 @@ possible.
 
 ## Time Schedule 
 
-| Time      | Speaker  |  Title |
+| Time  | Speaker  |  Title |
 | :----       | :------  | :--- |
-|  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
-| 10:00-10:30 | T. Nyyssonen | |
-| 10:30-11:00 | M. Witte     | |
-| 11:00-11:30 |              | |
-| Lunch	      |              | |
-| 13:30-14:30 |  T. Vermeij  | Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing|
-| 14:30-15:00 |  C. Cayron   | Grain reconstruction by using groupoid composition tables|
-| 15:00-15:30 |  L. Germain  | Reconstructions with Merengue 2 and perspectives of development|
-| 15:30-16:00 |  B. Britton  | Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing|
+|  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
+| 10:00-10:30 | F. Ferreira   | Influence of grain boundaries on the rheology of the Earth's upper mantle|
+| 10:30-11:00 | Lopez-Sanchez | Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX|
+| 11:00-11:30 | Sheng Fan     | Weighted Burgers vector method combined with MTEX to quantify the slip system in ice|
+| Lunch		|               | |
+| 13:30-14:30 | O. Orlandini  | Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems|
+| 14:30-15:00 | Z. Michels    | |
+| 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
+| 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
+
+| Time  | Speaker  |  Title |
+|  9:00-10:00 |  W. Pantleon              ||
+| 11:00-11:30 |  P. Lehto				  | |
+| 10:00-10:30 |  D. Depriester 			  | Coupled in situ SEM-DIC/CPFEM analyses of pure copper |
+| 10:30-11:00 |  K. Frydrych			  | Texture-based optimization of crystal plasticity parameters using MTEX |
+| Lunch		|    						  ||
+| 13:30-14:00 |  D. Savage 	        	  ||
+| 14:00-14:30 |          	        	  ||
+| 14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide|
+| 15:00-15:30 |  Round Table Discussion	  ||
+| 15:30-16:00 |  Round Table Discussion	  ||
 
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
@@ -218,7 +230,6 @@ possible.
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 {% comment %}
-<div markdown="block">
 | Time      | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
@@ -230,8 +241,63 @@ possible.
 | 14:30-15:00 |  C. Cayron   | Grain reconstruction by using groupoid composition tables|
 | 15:00-15:30 |  L. Germain  | Reconstructions with Merengue 2 and perspectives of development|
 | 15:30-16:00 |  B. Britton  | Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing|
-</div>
 {% endcomment %}
+				<table>
+				  <thead>
+					<tr>
+					  <th style="text-align: left">Time</th>
+					  <th style="text-align: left">Speaker</th>
+					  <th style="text-align: left">Title</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td style="text-align: left">9:00-10:00</td>
+					  <td style="text-align: left">F. Niessen</td>
+					  <td style="text-align: left">Parent Grain Reconstruction in MTEX</td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">10:00-10:30</td>
+					  <td style="text-align: left">T. Nyyssonen</td>
+					  <td style="text-align: left"> </td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">10:30-11:00</td>
+					  <td style="text-align: left">M. Witte</td>
+					  <td style="text-align: left"> </td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">11:00-11:30</td>
+					  <td style="text-align: left"> </td>
+					  <td style="text-align: left"> </td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">Lunch</td>
+					  <td style="text-align: left"> </td>
+					  <td style="text-align: left"> </td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">13:30-14:30</td>
+					  <td style="text-align: left">T. Vermeij</td>
+					  <td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">14:30-15:00</td>
+					  <td style="text-align: left">C. Cayron</td>
+					  <td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">15:00-15:30</td>
+					  <td style="text-align: left">L. Germain</td>
+					  <td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
+					</tr>
+					<tr>
+					  <td style="text-align: left">15:30-16:00</td>
+					  <td style="text-align: left">B. Britton</td>
+					  <td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
+					</tr>
+				  </tbody>
+				</table>
 			</div>
         </div>
     </div>
@@ -244,7 +310,7 @@ possible.
         </div>
         <div id="collapseTue" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-<div markdown="block">
+{% comment %}
 | Time  | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
@@ -256,7 +322,7 @@ possible.
 | 14:30-15:00 | Z. Michels    | |
 | 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
 | 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
-</div>
+{% endcomment %}
 			</div>
         </div>
     </div>
@@ -269,7 +335,7 @@ possible.
         </div>
         <div id="collapseWe" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-<div markdown="block">
+{% comment %}
 | Time  | Speaker  |  Title |
 |  9:00-10:00 |  W. Pantleon              ||
 | 11:00-11:30 |  P. Lehto				  | |
@@ -281,7 +347,7 @@ possible.
 | 14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide|
 | 15:00-15:30 |  Round Table Discussion	  ||
 | 15:30-16:00 |  Round Table Discussion	  ||
-</div>
+{% endcomment %}
             </div>
         </div>
     </div>
