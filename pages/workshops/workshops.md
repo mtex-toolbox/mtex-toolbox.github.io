@@ -194,6 +194,42 @@ possible.
   (University of Colorado Boulder): *Deep earthquakes, super-volcanoes, fossil
   eggs, and historic buildings: MTEX's ability to solve many problems*
 
+## Time Schedule 
+
+||| Moday  ||| Speaker  |||  Title
+ 9:00-10:00 ||| F. Niessen   ||| Parent Grain Reconstruction in MTEX
+10:00-10:30 ||| T. Nyyssonen ||| 
+10:30-11:00 ||| M. Witte     ||| 
+11:00-11:30 |||              ||| 
+Lunch		|||              ||| 
+13:30-14:30 |||  T. Vermeij  ||| Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing
+14:30-15:00 |||  C. Cayron   ||| Grain reconstruction by using groupoid composition tables
+15:00-15:30 |||  L. Germain  ||| Reconstructions with Merengue 2 and perspectives of development
+15:30-16:00 |||  B. Britton  ||| Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing
+
+||| Moday  ||| Speaker  |||  Title
+ 9:00-10:00 ||| B. Soerensen  ||| MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research
+10:00-10:30 ||| F. Ferreira   ||| Influence of grain boundaries on the rheology of the Earth's upper mantle
+10:30-11:00 ||| Lopez-Sanchez ||| Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX
+11:00-11:30 ||| Sheng Fan     ||| Weighted Burgers vector method combined with MTEX to quantify the slip system in ice
+Lunch		|||               ||| 
+13:30-14:30 ||| O. Orlandini  ||| Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems
+14:30-15:00 ||| Z. Michels    ||| 
+15:00-15:30 ||| Mael          ||| EBSD & EPMA maps in plastically deformed gabbros
+15:30-16:30 ||| S. Merkel     ||| Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments
+
+||| Moday  ||| Speaker  |||  Title
+ 9:00-10:00 |||  W. Pantleon              |||
+10:00-10:30 |||  D. Depriester 			  ||| Coupled in situ SEM-DIC/CPFEM analyses of pure copper
+10:30-11:00 |||  K. Frydrych			  ||| Texture-based optimization of crystal plasticity parameters using MTEX
+11:00-11:30 |||  P. Lehto				  ||| 
+Lunch		|||    						  |||
+13:30-14:00 |||  D. Savage 	        	  |||
+14:00-14:30 |||          	        	  |||
+14:30-15:00 |||  J. Hisccocks			  ||| Making a graphical user interface for MTEX: a how-to guide
+15:00-15:30 |||  Round Table Discussion	  |||
+15:30-16:00 |||  Round Table Discussion	  |||
+
 
 ## Registration:
 
@@ -205,61 +241,6 @@ possible.
 - Registration fee first week: students - 100 Euro, other - 200 Euro
 - Registration for second week is free
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
-
-## Time Schedule 
-
-<table>
-<colgroup>
- <col width="16%" /><col width="28%" /><col width="28%" /><col width="28%" />
-</colgroup>
-<thead>
- <tr class="header"><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th></tr>
-</thead>
-<tbody>
-<tr>
-<td markdown="span">9:00-10:00</td>
-<td markdown="span">10:00-10:30</td>
-</tr>
-<tr>
-<td markdown="span">F. Niessen</td>
-<td markdown="span">Some more descriptive text.
-</td>
-</tr>
-</tbody>
-</table>
-
-
-
-||| Time  ||| Mondy  |||  Tuesday ||| Wednesday 
-:-|-|-|:-|-|-|:-|-|-|-
- 9:00-10:00 ||| F. Niessen   ||| B. Soerensen  ||| W. Pantleon
-10:00-10:30 ||| T. Nyyssonen ||| F. Ferreira   ||| D. Depriester 
-10:30-11:00 ||| M. Witte     ||| Lopez-Sanchez ||| K. Frydrych
-11:00-11:30 |||              ||| Sheng Fan     ||| P. Lehto
-Lunch		|||              |||               |||   
-13:30-14:30 |||  T. Vermeij  ||| O. Orlandini  ||| D. Savage / ???
-14:30-15:00 |||  C. Cayron   ||| Z. Michels    ||| J. Hisccocks
-15:00-15:30 |||  L. Germain  ||| Mael          ||| Round Table Discussion
-15:30-16:00 |||  B. Britton  ||| S. Merkel     ||| Round Table Discussion
-16:00-16:30 |||              ||| S. Merkel	   |||
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">
-      <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsePresentations"><b>Presentations:</b></a>
-    </h4>
-  </div>
-  <div id="collapsePresentations" class="panel-collapse collapse noCrossRef">
-   <div class="panel-body">
-    <div markdown="span">
-     **Frank Niessen Concepts:** Parent Grain Reconstruction in MTEX <br>
-     **Tuomo Nyyssonen:**<br>
-	</div>
-   </div>
-  </div>
-</div>
-
 
 
 
