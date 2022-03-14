@@ -196,16 +196,17 @@ possible.
 
 ## Time Schedule 
 
-||| Moday  ||| Speaker  |||  Title
- 9:00-10:00 ||| F. Niessen   ||| Parent Grain Reconstruction in MTEX
-10:00-10:30 ||| T. Nyyssonen ||| 
-10:30-11:00 ||| M. Witte     ||| 
-11:00-11:30 |||              ||| 
-Lunch		|||              ||| 
-13:30-14:30 |||  T. Vermeij  ||| Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing
-14:30-15:00 |||  C. Cayron   ||| Grain reconstruction by using groupoid composition tables
-15:00-15:30 |||  L. Germain  ||| Reconstructions with Merengue 2 and perspectives of development
-15:30-16:00 |||  B. Britton  ||| Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing
+| Monday      | Speaker  |  Title |
+| :----       | :------  | :--- |
+|  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
+| 10:00-10:30 | T. Nyyssonen | |
+| 10:30-11:00 | M. Witte     | |
+| 11:00-11:30 |              | |
+| Lunch	      |              | |
+| 13:30-14:30 |  T. Vermeij  | Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing|
+| 14:30-15:00 |  C. Cayron   | Grain reconstruction by using groupoid composition tables|
+| 15:00-15:30 |  L. Germain  | Reconstructions with Merengue 2 and perspectives of development|
+| 15:30-16:00 |  B. Britton  | Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing|
 
 ||| Moday  ||| Speaker  |||  Title
  9:00-10:00 ||| B. Soerensen  ||| MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research
