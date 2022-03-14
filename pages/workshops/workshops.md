@@ -208,7 +208,29 @@ possible.
 
 ## Time Schedule 
 
-   ||| Mondy  |||  Tuesday ||| Wednesday 
+<table>
+<colgroup>
+ <col width="16%" /><col width="28%" /><col width="28%" /><col width="28%" />
+</colgroup>
+<thead>
+ <tr class="header"><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th></tr>
+</thead>
+<tbody>
+<tr>
+<td markdown="span">9:00-10:00</td>
+<td markdown="span">10:00-10:30</td>
+</tr>
+<tr>
+<td markdown="span">F. Niessen</td>
+<td markdown="span">Some more descriptive text.
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+||| Time  ||| Mondy  |||  Tuesday ||| Wednesday 
 :-|-|-|:-|-|-|:-|-|-|-
  9:00-10:00 ||| F. Niessen   ||| B. Soerensen  ||| W. Pantleon
 10:00-10:30 ||| T. Nyyssonen ||| F. Ferreira   ||| D. Depriester 
