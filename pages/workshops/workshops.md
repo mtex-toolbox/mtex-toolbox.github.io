@@ -208,7 +208,7 @@ possible.
 
 ## Time Schedule 
 
-||| Mondy  |||  Tuesday ||| Wednesday 
+   ||| Mondy  |||  Tuesday ||| Wednesday 
 :-|-|-|:-|-|-|:-|-|-|-
  9:00-10:00 ||| F. Niessen   ||| B. Soerensen  ||| W. Pantleon
 10:00-10:30 ||| T. Nyyssonen ||| F. Ferreira   ||| D. Depriester 
@@ -220,6 +220,24 @@ Lunch		|||              |||               |||
 15:00-15:30 |||  L. Germain  ||| Mael          ||| Round Table Discussion
 15:30-16:00 |||  B. Britton  ||| S. Merkel     ||| Round Table Discussion
 16:00-16:30 |||              ||| S. Merkel	   |||
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapsePresentations"><b>Presentations:</b></a>
+    </h4>
+  </div>
+  <div id="collapsePresentations" class="panel-collapse collapse noCrossRef">
+   <div class="panel-body">
+    <div markdown="span">
+     **Frank Niessen Concepts:** Parent Grain Reconstruction in MTEX <br>
+     **Tuomo Nyyssonen:**<br>
+	</div>
+   </div>
+  </div>
+</div>
+
 
 
 
