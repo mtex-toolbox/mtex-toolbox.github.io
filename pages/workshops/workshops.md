@@ -196,6 +196,16 @@ possible.
 
 ## Time Schedule 
 
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMonday"><b>Monday:</b> Crystal Lattices and Rotations</a>
+            </h4>
+        </div>
+        <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+<div markdown="span">
 | Monday      | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
@@ -207,7 +217,20 @@ possible.
 | 14:30-15:00 |  C. Cayron   | Grain reconstruction by using groupoid composition tables|
 | 15:00-15:30 |  L. Germain  | Reconstructions with Merengue 2 and perspectives of development|
 | 15:30-16:00 |  B. Britton  | Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing|
-
+</div>
+			</div>
+        </div>
+    </div>
+    <!-- /.panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:</b> Crystal Symmetries and Orientations</a>
+            </h4>
+        </div>
+        <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+<div markdown="span">
 | Tuesday  | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
@@ -219,19 +242,38 @@ possible.
 | 14:30-15:00 | Z. Michels    | |
 | 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
 | 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
-
-| Moday  | Speaker  |  Title
- 9:00-10:00 |  W. Pantleon              |
-10:00-10:30 |  D. Depriester 			  | Coupled in situ SEM-DIC/CPFEM analyses of pure copper
-10:30-11:00 |  K. Frydrych			  | Texture-based optimization of crystal plasticity parameters using MTEX
-11:00-11:30 |  P. Lehto				  | 
-Lunch		|    						  |
-13:30-14:00 |  D. Savage 	        	  |
-14:00-14:30 |          	        	  |
-14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide
-15:00-15:30 |  Round Table Discussion	  |
-15:30-16:00 |  Round Table Discussion	  |
-
+</div>
+			</div>
+        </div>
+    </div>
+    <!-- /.panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:</b> Crystal Symmetries and Orientations</a>
+            </h4>
+        </div>
+        <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+<div markdown="span">
+| Wednesday  | Speaker  |  Title |
+|  9:00-10:00 |  W. Pantleon              ||
+| 11:00-11:30 |  P. Lehto				  | |
+| 10:00-10:30 |  D. Depriester 			  | Coupled in situ SEM-DIC/CPFEM analyses of pure copper |
+| 10:30-11:00 |  K. Frydrych			  | Texture-based optimization of crystal plasticity parameters using MTEX |
+| Lunch		|    						  ||
+| 13:30-14:00 |  D. Savage 	        	  ||
+| 14:00-14:30 |          	        	  ||
+| 14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide|
+| 15:00-15:30 |  Round Table Discussion	  ||
+| 15:30-16:00 |  Round Table Discussion	  ||
+</div>
+            </div>
+        </div>
+    </div>
+    <!-- /.panel -->
+</div>
+<!-- /.panel-group -->
 
 ## Registration:
 
