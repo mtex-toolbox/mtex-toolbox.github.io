@@ -196,30 +196,6 @@ possible.
 
 ## Time Schedule 
 
-| Time  | Speaker  |  Title |
-| :----       | :------  | :--- |
-|  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
-| 10:00-10:30 | F. Ferreira   | Influence of grain boundaries on the rheology of the Earth's upper mantle|
-| 10:30-11:00 | Lopez-Sanchez | Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX|
-| 11:00-11:30 | Sheng Fan     | Weighted Burgers vector method combined with MTEX to quantify the slip system in ice|
-| Lunch		|               | |
-| 13:30-14:30 | O. Orlandini  | Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems|
-| 14:30-15:00 | Z. Michels    | |
-| 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
-| 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
-
-| Time  | Speaker  |  Title |
-|  9:00-10:00 |  W. Pantleon              ||
-| 11:00-11:30 |  P. Lehto				  | |
-| 10:00-10:30 |  D. Depriester 			  | Coupled in situ SEM-DIC/CPFEM analyses of pure copper |
-| 10:30-11:00 |  K. Frydrych			  | Texture-based optimization of crystal plasticity parameters using MTEX |
-| Lunch		|    						  ||
-| 13:30-14:00 |  D. Savage 	        	  ||
-| 14:00-14:30 |          	        	  ||
-| 14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide|
-| 15:00-15:30 |  Round Table Discussion	  ||
-| 15:30-16:00 |  Round Table Discussion	  ||
-
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -229,7 +205,7 @@ possible.
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-{% comment %}
+				{% comment %}
 | Time      | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
@@ -241,62 +217,62 @@ possible.
 | 14:30-15:00 |  C. Cayron   | Grain reconstruction by using groupoid composition tables|
 | 15:00-15:30 |  L. Germain  | Reconstructions with Merengue 2 and perspectives of development|
 | 15:30-16:00 |  B. Britton  | Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing|
-{% endcomment %}
+				{% endcomment %}
 				<table>
-				  <thead>
+					<thead>
 					<tr>
-					  <th style="text-align: left">Time</th>
-					  <th style="text-align: left">Speaker</th>
-					  <th style="text-align: left">Title</th>
+						<th style="text-align: left">Time</th>
+						<th style="text-align: left">Speaker</th>
+						<th style="text-align: left">Title</th>
 					</tr>
-				  </thead>
-				  <tbody>
+					</thead>
+					<tbody>
 					<tr>
-					  <td style="text-align: left">9:00-10:00</td>
-					  <td style="text-align: left">F. Niessen</td>
-					  <td style="text-align: left">Parent Grain Reconstruction in MTEX</td>
-					</tr>
-					<tr>
-					  <td style="text-align: left">10:00-10:30</td>
-					  <td style="text-align: left">T. Nyyssonen</td>
-					  <td style="text-align: left"> </td>
+						<td style="text-align: left">9:00-10:00</td>
+						<td style="text-align: left">F. Niessen</td>
+						<td style="text-align: left">Parent Grain Reconstruction in MTEX</td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">10:30-11:00</td>
-					  <td style="text-align: left">M. Witte</td>
-					  <td style="text-align: left"> </td>
+						<td style="text-align: left">10:00-10:30</td>
+						<td style="text-align: left">T. Nyyssonen</td>
+						<td style="text-align: left"> </td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">11:00-11:30</td>
-					  <td style="text-align: left"> </td>
-					  <td style="text-align: left"> </td>
+						<td style="text-align: left">10:30-11:00</td>
+						<td style="text-align: left">M. Witte</td>
+						<td style="text-align: left"> </td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">Lunch</td>
-					  <td style="text-align: left"> </td>
-					  <td style="text-align: left"> </td>
+						<td style="text-align: left">11:00-11:30</td>
+						<td style="text-align: left"> </td>
+						<td style="text-align: left"> </td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">13:30-14:30</td>
-					  <td style="text-align: left">T. Vermeij</td>
-					  <td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
+						<td style="text-align: left">Lunch</td>
+						<td style="text-align: left"> </td>
+						<td style="text-align: left"> </td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">14:30-15:00</td>
-					  <td style="text-align: left">C. Cayron</td>
-					  <td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
+						<td style="text-align: left">13:30-14:30</td>
+						<td style="text-align: left">T. Vermeij</td>
+						<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">15:00-15:30</td>
-					  <td style="text-align: left">L. Germain</td>
-					  <td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
+						<td style="text-align: left">14:30-15:00</td>
+						<td style="text-align: left">C. Cayron</td>
+						<td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
 					</tr>
 					<tr>
-					  <td style="text-align: left">15:30-16:00</td>
-					  <td style="text-align: left">B. Britton</td>
-					  <td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
+						<td style="text-align: left">15:00-15:30</td>
+						<td style="text-align: left">L. Germain</td>
+						<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
 					</tr>
-				  </tbody>
+					<tr>
+						<td style="text-align: left">15:30-16:00</td>
+						<td style="text-align: left">B. Britton</td>
+						<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
+					</tr>
+					</tbody>
 				</table>
 			</div>
         </div>
@@ -310,7 +286,7 @@ possible.
         </div>
         <div id="collapseTue" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-{% comment %}
+				{% comment %}
 | Time  | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
@@ -322,7 +298,63 @@ possible.
 | 14:30-15:00 | Z. Michels    | |
 | 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
 | 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
-{% endcomment %}
+				{% endcomment %}
+				<table>
+					<thead>
+					<tr>
+						<th style="text-align: left">Time</th>
+						<th style="text-align: left">Speaker</th>
+						<th style="text-align: left">Title</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td style="text-align: left">9:00-10:00</td>
+						<td style="text-align: left">B. Soerensen</td>
+						<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">10:00-10:30</td>
+						<td style="text-align: left">F. Ferreira</td>
+						<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">10:30-11:00</td>
+						<td style="text-align: left">Lopez-Sanchez</td>
+						<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">11:00-11:30</td>
+						<td style="text-align: left">Sheng Fan</td>
+						<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">Lunch</td>
+						<td style="text-align: left"> </td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">13:30-14:30</td>
+						<td style="text-align: left">O. Orlandini</td>
+						<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">14:30-15:00</td>
+						<td style="text-align: left">Z. Michels</td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">15:00-15:30</td>
+						<td style="text-align: left">Mael</td>
+						<td style="text-align: left">EBSD &amp; EPMA maps in plastically deformed gabbros</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">15:30-16:30</td>
+						<td style="text-align: left">S. Merkel</td>
+						<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments</td>
+					</tr>
+					</tbody>
+				</table>
 			</div>
         </div>
     </div>
@@ -335,7 +367,7 @@ possible.
         </div>
         <div id="collapseWe" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-{% comment %}
+				{% comment %}
 | Time  | Speaker  |  Title |
 |  9:00-10:00 |  W. Pantleon              ||
 | 11:00-11:30 |  P. Lehto				  | |
@@ -347,7 +379,68 @@ possible.
 | 14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide|
 | 15:00-15:30 |  Round Table Discussion	  ||
 | 15:30-16:00 |  Round Table Discussion	  ||
-{% endcomment %}
+				{% endcomment %}
+				<table>
+					<thead>
+					<tr>
+						<th style="text-align: left">Time</th>
+						<th style="text-align: left">Speaker</th>
+						<th style="text-align: left">Title</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td style="text-align: left">9:00-10:00</td>
+						<td style="text-align: left">W. Pantleon</td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">11:00-11:30</td>
+						<td style="text-align: left">P. Lehto</td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">10:00-10:30</td>
+						<td style="text-align: left">D. Depriester</td>
+						<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">10:30-11:00</td>
+						<td style="text-align: left">K. Frydrych</td>
+						<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">Lunch</td>
+						<td style="text-align: left"> </td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">13:30-14:00</td>
+						<td style="text-align: left">D. Savage</td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">14:00-14:30</td>
+						<td style="text-align: left"> </td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">14:30-15:00</td>
+						<td style="text-align: left">J. Hisccocks</td>
+						<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide</td>
+					</tr>
+					<tr>
+						<td style="text-align: left">15:00-15:30</td>
+						<td style="text-align: left">Round Table Discussion</td>
+						<td style="text-align: left"> </td>
+					</tr>
+					<tr>
+						<td style="text-align: left">15:30-16:00</td>
+						<td style="text-align: left">Round Table Discussion</td>
+						<td style="text-align: left"> </td>
+					</tr>
+					</tbody>
+				</table>
             </div>
         </div>
     </div>
