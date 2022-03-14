@@ -208,28 +208,29 @@ possible.
 | 15:00-15:30 |  L. Germain  | Reconstructions with Merengue 2 and perspectives of development|
 | 15:30-16:00 |  B. Britton  | Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing|
 
-||| Moday  ||| Speaker  |||  Title
- 9:00-10:00 ||| B. Soerensen  ||| MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research
-10:00-10:30 ||| F. Ferreira   ||| Influence of grain boundaries on the rheology of the Earth's upper mantle
-10:30-11:00 ||| Lopez-Sanchez ||| Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX
-11:00-11:30 ||| Sheng Fan     ||| Weighted Burgers vector method combined with MTEX to quantify the slip system in ice
-Lunch		|||               ||| 
-13:30-14:30 ||| O. Orlandini  ||| Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems
-14:30-15:00 ||| Z. Michels    ||| 
-15:00-15:30 ||| Mael          ||| EBSD & EPMA maps in plastically deformed gabbros
-15:30-16:30 ||| S. Merkel     ||| Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments
+| Tuesday  | Speaker  |  Title |
+| :----       | :------  | :--- |
+|  9:00-10:00 | B. Soerensen  | MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research|
+| 10:00-10:30 | F. Ferreira   | Influence of grain boundaries on the rheology of the Earth's upper mantle|
+| 10:30-11:00 | Lopez-Sanchez | Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX|
+| 11:00-11:30 | Sheng Fan     | Weighted Burgers vector method combined with MTEX to quantify the slip system in ice|
+| Lunch		|               | |
+| 13:30-14:30 | O. Orlandini  | Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems|
+| 14:30-15:00 | Z. Michels    | |
+| 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
+| 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
 
-||| Moday  ||| Speaker  |||  Title
- 9:00-10:00 |||  W. Pantleon              |||
-10:00-10:30 |||  D. Depriester 			  ||| Coupled in situ SEM-DIC/CPFEM analyses of pure copper
-10:30-11:00 |||  K. Frydrych			  ||| Texture-based optimization of crystal plasticity parameters using MTEX
-11:00-11:30 |||  P. Lehto				  ||| 
-Lunch		|||    						  |||
-13:30-14:00 |||  D. Savage 	        	  |||
-14:00-14:30 |||          	        	  |||
-14:30-15:00 |||  J. Hisccocks			  ||| Making a graphical user interface for MTEX: a how-to guide
-15:00-15:30 |||  Round Table Discussion	  |||
-15:30-16:00 |||  Round Table Discussion	  |||
+| Moday  | Speaker  |  Title
+ 9:00-10:00 |  W. Pantleon              |
+10:00-10:30 |  D. Depriester 			  | Coupled in situ SEM-DIC/CPFEM analyses of pure copper
+10:30-11:00 |  K. Frydrych			  | Texture-based optimization of crystal plasticity parameters using MTEX
+11:00-11:30 |  P. Lehto				  | 
+Lunch		|    						  |
+13:30-14:00 |  D. Savage 	        	  |
+14:00-14:30 |          	        	  |
+14:30-15:00 |  J. Hisccocks			  | Making a graphical user interface for MTEX: a how-to guide
+15:00-15:30 |  Round Table Discussion	  |
+15:30-16:00 |  Round Table Discussion	  |
 
 
 ## Registration:
