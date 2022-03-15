@@ -228,22 +228,22 @@ possible.
 					</thead>
 					<tbody>
 						<tr>
-							<td style="text-align: left">&nbsp;9:00&minus;10:00</td>
+							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">F.&nbsp;Niessen</td>
 							<td style="text-align: left">Parent Grain Reconstruction in MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">10:00&minus;10:30</td>
+							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">T.&nbsp;Nyyssonen</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">10:30&minus;11:00</td>
+							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">M.&nbsp;Witte</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">11:00&minus;11:30</td>
+							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -253,22 +253,22 @@ possible.
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">13:30&minus;14:30</td>
+							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">T.&nbsp;Vermeij</td>
 							<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">14:30&minus;15:00</td>
+							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">C.&nbsp;Cayron</td>
 							<td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">15:00&minus;15:30</td>
+							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">L.&nbsp;Germain</td>
 							<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">15:30&minus;16:00</td>
+							<td style="text-align: right">15:30&minus;16:00</td>
 							<td style="text-align: left">B.&nbsp;Britton</td>
 							<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
 						</tr>
@@ -309,22 +309,22 @@ possible.
 					</thead>
 					<tbody>
 						<tr>
-							<td style="text-align: left">&nbsp;9:00&minus;10:00</td>
+							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">B.&nbsp;Soerensen</td>
 							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">10:00&minus;10:30</td>
+							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">F.&nbsp;Ferreira</td>
 							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">10:30&minus;11:00</td>
+							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">Lopez&minus;Sanchez</td>
 							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">11:00&minus;11:30</td>
+							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">Sheng&nbsp;Fan</td>
 							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice</td>
 						</tr>
@@ -334,22 +334,22 @@ possible.
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">13:30&minus;14:30</td>
+							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">O.&nbsp;Orlandini</td>
 							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">14:30&minus;15:00</td>
+							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">Z.&nbsp;Michels</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">15:00&minus;15:30</td>
+							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">Mael</td>
 							<td style="text-align: left">EBSD &amp; EPMA maps in plastically deformed gabbros</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">15:30&minus;16:30</td>
+							<td style="text-align: right">15:30&minus;16:30</td>
 							<td style="text-align: left">S.&nbsp;Merkel</td>
 							<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments</td>
 						</tr>
@@ -390,22 +390,22 @@ possible.
 					</thead>
 					<tbody>
 						<tr>
-							<td style="text-align: left">&nbsp;9:00&minus;10:00</td>
+							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">W.&nbsp;Pantleon</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">11:00&minus;11:30</td>
+							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">P.&nbsp;Lehto</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">10:00&minus;10:30</td>
+							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">D.&nbsp;Depriester</td>
 							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">10:30&minus;11:00</td>
+							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">K.&nbsp;Frydrych</td>
 							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX</td>
 						</tr>
@@ -415,27 +415,27 @@ possible.
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">13:30&minus;14:00</td>
+							<td style="text-align: right">13:30&minus;14:00</td>
 							<td style="text-align: left">D.&nbsp;Savage</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">14:00&minus;14:30</td>
+							<td style="text-align: right">14:00&minus;14:30</td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">14:30&minus;15:00</td>
+							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">J.&nbsp;Hisccocks</td>
 							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">15:00&minus;15:30</td>
+							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">Round&nbsp;Table Discussion</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">15:30&minus;16:00</td>
+							<td style="text-align: right">15:30&minus;16:00</td>
 							<td style="text-align: left">Round&nbsp;Table Discussion</td>
 							<td style="text-align: left"></td>
 						</tr>
