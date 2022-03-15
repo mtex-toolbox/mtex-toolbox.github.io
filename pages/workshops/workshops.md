@@ -228,7 +228,7 @@ possible.
 					</thead>
 					<tbody>
 						<tr>
-							<td style="text-align: left">9:00&minus;10:00</td>
+							<td style="text-align: left">&nbsp;9:00&minus;10:00</td>
 							<td style="text-align: left">F.&nbsp;Niessen</td>
 							<td style="text-align: left">Parent Grain Reconstruction in MTEX</td>
 						</tr>
@@ -309,7 +309,7 @@ possible.
 					</thead>
 					<tbody>
 						<tr>
-							<td style="text-align: left">9:00&minus;10:00</td>
+							<td style="text-align: left">&nbsp;9:00&minus;10:00</td>
 							<td style="text-align: left">B.&nbsp;Soerensen</td>
 							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research</td>
 						</tr>
@@ -390,7 +390,7 @@ possible.
 					</thead>
 					<tbody>
 						<tr>
-							<td style="text-align: left">9:00&minus;10:00</td>
+							<td style="text-align: left">&nbsp;9:00&minus;10:00</td>
 							<td style="text-align: left">W.&nbsp;Pantleon</td>
 							<td style="text-align: left"></td>
 						</tr>
