@@ -210,7 +210,7 @@ possible.
 | Time      | Speaker  |  Title |
 | :----       | :------  | :--- |
 |  9:00-10:00 | F. Niessen   | Parent Grain Reconstruction in MTEX |
-| 10:00-10:30 | T. Nyyssonen | |
+| 10:00-10:30 | T. Nyyssönen | |
 | 10:30-11:00 | M. Witte     | |
 | 11:00-11:30 |              | |
 | Lunch	      |              | |
@@ -236,7 +236,7 @@ possible.
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
-							<td style="text-align: left">T.&nbsp;Nyyssonen</td>
+							<td style="text-align: left">T.&nbsp;Nyyssönen</td>
 							<td style="text-align: left">Challenges in reconstructing Austenitinic twins  Reconstruction</td>
 						</tr>
 						<tr>
@@ -298,7 +298,7 @@ possible.
 | Lunch		|               | |
 | 13:30-14:30 | O. Orlandini  | Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems|
 | 14:30-15:00 | Z. Michels    | |
-| 15:00-15:30 | Mael          | EBSD & EPMA maps in plastically deformed gabbros|
+| 15:00-15:30 | M. Allard          | EBSD & EPMA maps in plastically deformed gabbros|
 | 15:30-16:30 | S. Merkel     | Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments|
 				{% endcomment %}
 				<table>
@@ -347,7 +347,7 @@ possible.
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
-							<td style="text-align: left">Mael</td>
+							<td style="text-align: left">M. Allard</td>
 							<td style="text-align: left">EBSD &amp; EPMA maps in plastically deformed gabbros</td>
 						</tr>
 						<tr>
