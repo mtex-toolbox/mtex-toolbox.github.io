@@ -200,8 +200,9 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday, 28.03.2022:</b></a>
-            </h4>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
+            </h4>Parent Grain Reconstruction and more
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
@@ -282,8 +283,8 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday, 29.03.2022:</b></a>
-            </h4>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
+            </h4>MTEX in Geology
         </div>
         <div id="collapseTue" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
@@ -363,8 +364,8 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday, 30.03.2022:</b></a>
-            </h4>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
+            </h4>MTEX in Material Science
         </div>
         <div id="collapseWe" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
@@ -431,12 +432,7 @@ possible.
 							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:00&minus;15:30</td>
-							<td style="text-align: left">Round&nbsp;Table Discussion</td>
-							<td style="text-align: left"></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">15:30&minus;16:00</td>
+							<td style="text-align: right">15:00&minus;16:00</td>
 							<td style="text-align: left">Round&nbsp;Table Discussion</td>
 							<td style="text-align: left"></td>
 						</tr>
