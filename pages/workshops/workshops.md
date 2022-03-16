@@ -201,8 +201,8 @@ possible.
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a class="noCrossRef accordion-toggle" data-toggle="collapse"
-    data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
-            </h4>Parent Grain Reconstruction and more
+    data-parent="#accordion" href="#collapseMo"><b>Monday:</b>Parent Grain Reconstruction and more</a>
+            </h4>
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
@@ -283,8 +283,8 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
-            </h4>MTEX in Geology
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b>MTEX in Geology</a>
+            </h4>
         </div>
         <div id="collapseTue" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
@@ -364,8 +364,8 @@ possible.
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
-            </h4>MTEX in Material Science
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b>MTEX in Material Science</a>
+            </h4>
         </div>
         <div id="collapseWe" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
