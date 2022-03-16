@@ -230,17 +230,18 @@ possible.
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">F.&nbsp;Niessen</td>
-							<td style="text-align: left">Parent Grain Reconstruction in MTEX</td>
+							<td style="text-align: left">Parent Grain
+				Reconstruction in MTEX - the new variant graph approach</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">T.&nbsp;Nyyssonen</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Challenges in reconstructing Austenitinic twins  Reconstruction</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">M.&nbsp;Witte</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Applications of Austenite Reconstruction</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:00&minus;11:30</td>
