@@ -317,18 +317,18 @@ possible.
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
-							<td style="text-align: left">F.&nbsp;Ferreira</td>
-							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">Lopez&minus;Sanchez</td>
 							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:00&minus;11:30</td>
+							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">Sheng&nbsp;Fan</td>
 							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">11:00&minus;11:30</td>
+							<td style="text-align: left">K.&nbsp;Marquardt</td>
+							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -348,7 +348,7 @@ possible.
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">M. Allard</td>
-							<td style="text-align: left">EBSD &amp; EPMA maps in plastically deformed gabbros</td>
+							<td style="text-align: left">Coupled in situ EBSD &amp; EPMA maps unfolding the deformation history in oceanic gabbros</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:30&minus;16:30</td>
@@ -397,17 +397,17 @@ possible.
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:00&minus;11:30</td>
+							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">P.&nbsp;Lehto</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:00&minus;10:30</td>
+							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">D.&nbsp;Depriester</td>
 							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:30&minus;11:00</td>
+							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">K.&nbsp;Frydrych</td>
 							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX</td>
 						</tr>
