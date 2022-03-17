@@ -399,7 +399,7 @@ possible.
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">P.&nbsp;Lehto</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Misorientation gradients in polycrystalline engineering materials – characterization of grains and grain sub-structures</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
