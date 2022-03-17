@@ -218,8 +218,8 @@ possible.
 					<tbody>
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
-							<td style="text-align: left">F.&nbsp;Niessen&nbsp;<a class="course_material" href="">video</a></td>
-							<td style="text-align: left">Parent Grain Reconstruction in MTEX&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">F.&nbsp;Niessen&nbsp;<a class="course_material" href="https://videocampus.sachsen.de/m/dbb180bafc53e9fad4e9f3c59df7e898fa1f4ea9cb4f8f8610ebdf3c5508be793de7b151c2a8b05f35a91c75af7bfab9b38a1aeac2cd858256161982138665d1">video</a></td>
+							<td style="text-align: left">Parent Grain Reconstruction in MTEX&nbsp;<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/slides/Niessen.pdf">open&nbsp;here</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
@@ -244,22 +244,22 @@ possible.
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">T.&nbsp;Vermeij</td>
-							<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">C.&nbsp;Cayron</td>
-							<td style="text-align: left">Grain reconstruction by using groupoid composition tables&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">L.&nbsp;Germain</td>
-							<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:30&minus;16:00</td>
 							<td style="text-align: left">B.&nbsp;Britton</td>
-							<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
 						</tr>
 					</tbody>
 				</table>
@@ -287,22 +287,22 @@ possible.
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">B.&nbsp;Soerensen</td>
-							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">F.&nbsp;Ferreira</td>
-							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">Lopez&minus;Sanchez</td>
-							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">Sheng&nbsp;Fan</td>
-							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice</td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -312,7 +312,7 @@ possible.
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">O.&nbsp;Orlandini</td>
-							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
@@ -322,12 +322,12 @@ possible.
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">Mael</td>
-							<td style="text-align: left">EBSD &amp; EPMA maps in plastically deformed gabbros&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">EBSD &amp; EPMA maps in plastically deformed gabbros</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:30&minus;16:30</td>
 							<td style="text-align: left">S.&nbsp;Merkel</td>
-							<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments</td>
 						</tr>
 					</tbody>
 				</table>
@@ -365,12 +365,12 @@ possible.
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">D.&nbsp;Depriester</td>
-							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">K.&nbsp;Frydrych</td>
-							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX</td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -390,7 +390,7 @@ possible.
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">J.&nbsp;Hisccocks</td>
-							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide&nbsp;<a class="course_material" href="">open&nbsp;here</a></td>
+							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
