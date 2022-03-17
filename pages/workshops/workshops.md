@@ -30,22 +30,22 @@ During the first week we provide on a daily basis two morning lectures covering 
         <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 1 - General Concepts:** <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
+**Lecture 1 - General Concepts:** <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides,</a> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">video</a>
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
-**Lecture 2 - Crystal Lattice:**
+**Lecture 2 - Crystal Lattice:** <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/2_crystalLattice.pdf">slides,</a> <a class="course_material" href="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031">video 1,</a> <a class="course_material" href="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177">video 2</a>
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
-**Lecture 3 - Rotations and Crystal Symmetries:**
+**Lecture 3 - Rotations and Crystal Symmetries:** <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/3_rotations.pdf">slides,</a> <a class="course_material" href="https://videocampus.sachsen.de/m/9fb8bff8f322e108c45862523db3b8e1fc31501e8730f0d8d3f1ff3ddbab57bb567f62e601c60bbd98a2525df0fa721a6e13b267b3a333286cbd6fa2173388d1">video</a>
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 <br>
 <br>
-**Exercise 1:**
+**Exercise 1:** <a class="course_material" href="https://videocampus.sachsen.de/m/c4245e7188e54ea2ccd4f75e80e73aa1ca07f19510f9c23cf57b2318f704078d381ff629b39cff80ca968499522dba1f598cffc06f46e7eb8722c67b2da9ddb0">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1_solution.m">solutions</a>
 </div>
 			</div>
         </div>
