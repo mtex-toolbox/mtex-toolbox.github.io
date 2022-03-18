@@ -14,8 +14,7 @@ The workshop extends over two weeks and is part of the master course *Introducti
 {% include note.html content="Due to the ongoing Corona crisis the workshop will be held entirely online via zoom. This does not mean that communication 
 is one directional. Instead all participants are allowed at all time to interact with the lecturer. We also encourage the participants to send data files to the organiziers prior to the workshop which will than be discussed during the exercises." %}
 -->
-
-{% include password_access_restriction.html content_default="Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers." content_access="You are logged in. <a href='https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09'>Enter Workshop zoom session.</a>" %}
+{% include note.html content='{% include password_access_restriction.html content_default="Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers." content_access="You are logged in. <a href='https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09'>Enter Workshop zoom session.</a>" %}' %}
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
 Date: 21.03.2022 - 25.03.2022
