@@ -61,12 +61,12 @@ function checkCoursePassword() {
 	let passwordHash = CryptoJS.MD5(inputValue).toString();
 	
 	if (passwordHash === "3c4fc8ddb124a0c8b4e83130acd5b265") {
-		courseTextDefault.classList.remove() = "not_hidden";
-		courseTextAccess.classList.add() = "not_hidden";
+		courseTextDefault.classList.remove("not_hidden");
+		courseTextAccess.classList.add("not_hidden");
 		showCourseMaterial(true);
 	} else {
-		courseTextDefault.classList.add() = "not_hidden";
-		courseTextAccess.classList.remove() = "not_hidden";
+		courseTextDefault.classList.add("not_hidden");
+		courseTextAccess.classList.remove("not_hidden");
 		showCourseMaterial(false);
 	}
 }
