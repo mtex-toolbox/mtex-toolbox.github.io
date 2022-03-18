@@ -52,3 +52,32 @@ $(function() {
         }
     });
 });
+
+// functions for password access restriction
+function checkCoursePassword() {
+	let courseTextDefault = document.getElementById("course_content_default");
+	let courseTextAccess = document.getElementById("course_content_access");
+	let inputValue = document.getElementById("course_password").value;
+	let passwordHash = CryptoJS.MD5(inputValue).toString();
+	
+	if (passwordHash === "3c4fc8ddb124a0c8b4e83130acd5b265") {
+		courseTextDefault.classList.remove() = "not_hidden";
+		courseTextAccess.classList.add() = "not_hidden";
+		showCourseMaterial(true);
+	} else {
+		courseTextDefault.classList.add() = "not_hidden";
+		courseTextAccess.classList.remove() = "not_hidden";
+		showCourseMaterial(false);
+	}
+}
+function showCourseMaterial(showMaterial=true) {
+	let course_elements = document.getElementsByClassName("course_material");
+	
+	for (let i=0; i<course_elements.length; i++) {
+		if (showMaterial) {
+			course_elements[i].classList.add("not_hidden");
+		} else {
+			course_elements[i].classList.remove("not_hidden");
+		}
+	}
+}
