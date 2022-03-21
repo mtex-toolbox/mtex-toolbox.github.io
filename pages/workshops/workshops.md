@@ -56,11 +56,9 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
-**Lecture 3 - Rotations and Crystal Symmetries:** <a class="course_material"
-    href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides,</a>
-    <a class="course_material"
-    href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom
-    seesion 13:00-14:15</a>
+**Lecture 3 - Rotations and Crystal Symmetries:** 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides, </a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 <br>
@@ -69,10 +67,10 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
     href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom
     session 14:45-16:00, </a><a class="course_material"
     href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>
-<!--<a class="course_material"    href="https://videocampus.sachsen.de/m/c4245e7188e54ea2ccd4f75e80e73aa1ca07f19510f9c23cf57b2318f704078d381ff629b39cff80ca968499522dba1f598cffc06f46e7eb8722c67b2da9ddb0">video,</a><!--
+<!--<a class="course_material"    href="https://videocampus.sachsen.de/m/c4245e7188e54ea2ccd4f75e80e73aa1ca07f19510f9c23cf57b2318f704078d381ff629b39cff80ca968499522dba1f598cffc06f46e7eb8722c67b2da9ddb0">video,</a>-->
     <a class="course_material"
     href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>, 
-	<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1_solution.m">solutions</a>-->
+	<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1_solution.m">solutions</a>
 </div>
 			</div>
         </div>
@@ -87,22 +85,33 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
         <div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 4 - Orientations:** <a class="course_material" href="https://videocampus.sachsen.de/m/421bcadc047032bb32346b3fbdf3bf197a0275d9565684740f8063457c5f4e7f60d2261891651cc669dc7f33af6d33b17f63de47f4e364ab6e7bba846d9d374b">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/4_orientations.pdf">slides</a>
+**Lecture 4 - Orientations:** <a class="course_material"
+    href="https://videocampus.sachsen.de/m/421bcadc047032bb32346b3fbdf3bf197a0275d9565684740f8063457c5f4e7f60d2261891651cc669dc7f33af6d33b17f63de47f4e364ab6e7bba846d9d374b">video,
+    </a> <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TiWbw4WsDriYMGS">slides</a>
 <br>
 symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parameterization
 <br>
 <br>
-**Lecture 5 - Density Functions:** <a class="course_material" href="https://videocampus.sachsen.de/m/6da6baa2b4ddcacf4a917e7dbf0fa2a4c55f28724d45013e5ffce765e343f2e4763d63b593841287c1155fbb4a5bdadf53dd25e79cd2f80766227fa8244e6572">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/5_DensityEstimation.pdf">slides</a>
+**Lecture 5 - Density Functions:** 
+<a class="course_material" href="https://videocampus.sachsen.de/m/6da6baa2b4ddcacf4a917e7dbf0fa2a4c55f28724d45013e5ffce765e343f2e4763d63b593841287c1155fbb4a5bdadf53dd25e79cd2f80766227fa8244e6572">video,</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/iykQdJXHoLSwPgG">slides</a>
 <br>
 kernel density estimation, orientation density function, pole density function, inverse pole density function, model ODFs, ODF characteristics, random sampling
 <br>
 <br>
-**Lecture 6 - ODF Reconstruction from Pole Figure Data:** <a class="course_material" href="https://videocampus.sachsen.de/m/3e27654ede4be88745fe1dfb40aeee376d1d53bc66af7d0163429e6806777d0828e70f9f05e943ddef1cb5ade6fc23ee1b6ad7ddab30fb15f7a631278274097e">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/6_XRD2ODF.pdf">slides</a>
+**Lecture 6 - ODF Reconstruction from Pole Figure Data:** 
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/3e27654ede4be88745fe1dfb40aeee376d1d53bc66af7d0163429e6806777d0828e70f9f05e943ddef1cb5ade6fc23ee1b6ad7ddab30fb15f7a631278274097e">video, </a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w3fyNjc9kXEEq9p">slides</a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>
 <br>
 X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF estimation
 <br>
 <br>
-**Exercise 2:** <a class="course_material" href="https://videocampus.sachsen.de/m/41db5e863ee56757f807c5abb62d9a044ea97aa17003e48ea91cb73869b275861b04a0a55b3203bca46ea099be5d80d2cf148c3bd7ba724a5176c203d1f80f8c">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_2.m">exercises,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_2_solution.m">solutions</a>
+**Exercise 2:** 
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/41db5e863ee56757f807c5abb62d9a044ea97aa17003e48ea91cb73869b275861b04a0a55b3203bca46ea099be5d80d2cf148c3bd7ba724a5176c203d1f80f8c">video,</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/y7qYwBS3zaz8EJa">exercises,</a>
+<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_2_solution.m">solutions</a>-->
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 14:45-16:00</a>
 </div>
             </div>
         </div>
@@ -190,7 +199,7 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 </div>
 <!-- /.panel-group -->
 
-**Times:** Lecture 1: 8:45-10:00, Lecture 2: 10:30 - 11:45, Exercise 1: 13:00-14:30, Exercise 2: 15:00 - 16:00
+<!-- **Times:** Lecture 1: 8:45-10:00, Lecture 2: 10:30 - 11:45, Exercise 1: 13:00-14:30, Exercise 2: 15:00 - 16:00-->
 
 ## Week 2: MTEX in Applications
 
