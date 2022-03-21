@@ -203,7 +203,7 @@ The second week will consist of lectures by invited experts that explain in deta
 ### Keynote Speakers
 
 * **[Sébastien Merkel](http://merkel.texture.rocks/)** (Université de Lille, France): *Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments*
-* **[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark)
+* **[Wolfgang Pantleon](https://www.mek.dtu.dk/)** (DTU Dänemark): *Revealing Cyclic Textures or Tungsten and the Amazing Technicolor Dreamcoat(ing)*
 * **[Tijmen Vermeij](https://www.tue.nl/en/research/researchers/tijmen-vermeij/)** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
 * **[Bjørn Eske Sørensen](https://www.ntnu.edu/employees/bjorn.sorensen)** (Norwegian University of Science and Technology): *MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research*
 * **[Omero Orlandini](https://www.researchgate.net/profile/Omero-Orlandini)** (University of Colorado Boulder): *Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems*
@@ -368,7 +368,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">W.&nbsp;Pantleon</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Revealing Cyclic Textures or Tungsten and the Amazing Technicolor Dreamcoat(ing)</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
