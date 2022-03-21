@@ -16,6 +16,10 @@ is one directional. Instead all participants are allowed at all time to interact
 -->
 {% include password_access_restriction.html content_default="Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers." content_access="You are logged in. <a href='https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09'>Enter Workshop zoom session.</a>" %}
 
+{% include note.html content="*Timezone:* All times are local times of
+Germany, which UTC+1 in the first week and UTC+2 in the second week." %}
+
+
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
 Date: 21.03.2022 - 25.03.2022
 
@@ -31,7 +35,16 @@ During the first week we provide on a daily basis two morning lectures covering 
         <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 1 - General Concepts:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy">slides,</a> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides</a>
+**Lecture 1 - General Concepts:** <a class="course_material"
+    href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy">slides,</a>
+    <a
+    href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212"
+    target="_blank">free video,</a> 
+    <!--- <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides,
+    </a>-->
+	<a class="course_material"
+    href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">welcome
+    zoom seesion at 8:45</a>
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
