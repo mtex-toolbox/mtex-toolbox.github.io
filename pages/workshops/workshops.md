@@ -16,8 +16,9 @@ is one directional. Instead all participants are allowed at all time to interact
 -->
 {% include password_access_restriction.html content_default="Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers." content_access="You are logged in. <a href='https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09'>Enter Workshop zoom session.</a>" %}
 
-{% include note.html content="*Timezone:* All times are local times of
-Germany, which UTC+1 in the first week and UTC+2 in the second week." %}
+
+{% include callout.html content="**Timezone:** All times are local times of
+Germany, which is UTC+1 in the first week and UTC+2 in the second week." %}
 
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
@@ -44,7 +45,7 @@ During the first week we provide on a daily basis two morning lectures covering 
     </a>-->
 	<a class="course_material"
     href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">welcome
-    zoom seesion at 8:45</a>
+    zoom session at 8:45</a>
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
