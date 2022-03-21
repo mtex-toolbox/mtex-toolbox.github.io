@@ -54,14 +54,18 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
-**Lecture 3 - Rotations and Crystal Symmetries:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides,</a> <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom seesion</a>
+**Lecture 3 - Rotations and Crystal Symmetries:** <a class="course_material"
+    href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides,</a>
+    <a class="course_material"
+    href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom
+    seesion 13:00-14:15</a>
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 <br>
 <br>
 **Exercise 1:** <a class="course_material"
     href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom
-    session 13:00-14:00, </a><a class="course_material"
+    session 14:45-16:00, </a><a class="course_material"
     href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>
 <!--<a class="course_material"    href="https://videocampus.sachsen.de/m/c4245e7188e54ea2ccd4f75e80e73aa1ca07f19510f9c23cf57b2318f704078d381ff629b39cff80ca968499522dba1f598cffc06f46e7eb8722c67b2da9ddb0">video,</a><!--
     <a class="course_material"
