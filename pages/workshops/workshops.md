@@ -38,9 +38,10 @@ During the first week we provide on a daily basis two morning lectures covering 
 <div markdown="span">
 **Lecture 1 - General Concepts:** <a class="course_material"
     href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy">slides,</a>
-    <a
-    href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212"
+    <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212"
     target="_blank">free video,</a> 
+<a   href="https://videocampus.sachsen.de/m/2d4c72181f296b2f117449195e04e73f4eb01c71176f096b4cece77d5f2929d7af0087c0d3b6ae4f19a79fa8b61c000c5d90ed118ff2a81d70ab1c04563a25eb"
+    target="_blank">video 1,</a>	
     <!--- <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides,
     </a>-->
 	<a class="course_material"
