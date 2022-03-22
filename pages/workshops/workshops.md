@@ -51,17 +51,18 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
-**Lecture 3 - Rotations and Crystal Symmetries:** 
+**Lecture 3 - Rotations and Crystal Symmetries:**
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides, </a>
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>
+<a href="https://video.tu-freiberg.de/m/f32cc28b0650aa970b00a50a993731d3a2501c513159f81f33d4f9d06ca5d9192780abba8cbcb986c0a778472cae7c36906abc2270965fe563d6b3ea3b061439" target="_blank">video</a>
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>-->
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 <br>
 <br>
 **Exercise 1:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 14:45-16:00, </a>
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>
-<!--<a class="course_material"    href="https://videocampus.sachsen.de/m/c4245e7188e54ea2ccd4f75e80e73aa1ca07f19510f9c23cf57b2318f704078d381ff629b39cff80ca968499522dba1f598cffc06f46e7eb8722c67b2da9ddb0">video,</a>-->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 14:45-16:00, </a>-->
+<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>-->
+<a class="course_material"    href="https://video.tu-freiberg.de/m/547571083b4772b39076db9a69aa0cbe41744470974c8df15135c3bb2d18d07a28e5a544057a95881bef986bbdcf4aa593330897f9b473e0f523df8471b98e5e">video, </a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/j9dM6XPmpz8rStX">exercises, </a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XNYKDnCZAnCgE69">solutions</a>
 </div>
