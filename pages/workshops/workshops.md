@@ -124,33 +124,33 @@ X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF e
             <div class="panel-body">
 <div markdown="span">
 **Lecture 7 - EBSD:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00, </a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a>-->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/893LCwTYWGiCZ7p">slides</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/893LCwTYWGiCZ7p"> ,slides</a>
 <br>
 data import, pole figures, inverse pole figures, color keys, reference frame, properties
 <br>
 <br>
 **Lecture 8 - Grains:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45, </a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/d214f14e430d85e00322a414d89a7700214214a3460572420f9272b82753d47fe1ffe354cd2a2c1ef95e92d6dd1d97966cbf77b07a288801886d9a7a690fbca7">video,</a>-->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/atTyoXQjJzW8GB7">slides</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/atTyoXQjJzW8GB7"> ,slides</a>
 <br>
 grain reconstruction, shape properties, orientation properties
 <br>
 <br>
 **Exercise 3 - EBSD:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15, </a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video,</a> -->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/A9X83APDw4fj9Bx">exercises,</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XAqp9p9Y6ceX28s">data,</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/A9X83APDw4fj9Bx"> ,exercises</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XAqp9p9Y6ceX28s"> ,data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 <br>
 **Exercise 4 - Grains:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00, </a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/eea272365fb2437a9073691a60421874e1f689087ba8480f7d8198c47fa0e173881c5e3fdae4b085e48c4870c30e62211589f689782dfac0a344edede2c69b28">video,</a>-->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TyWJzAGpK3EwgGQ">exercises, </a> 
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/zmDPdqijNzNCbxE">data, </a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TyWJzAGpK3EwgGQ"> ,exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/zmDPdqijNzNCbxE"> ,data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_4_solution.m">solutions</a>-->
 </div>
             </div>
@@ -166,7 +166,8 @@ grain reconstruction, shape properties, orientation properties
         <div id="collapseThursday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 9 - Misorientations:** <a class="course_material" href="https://videocampus.sachsen.de/m/adcd4b546858da0304f30a54a9851abf5ba73acd09804d9c07f94eadad4ce40e8ced9d893d140ce363fe2a9a0fbe00463db07dc3cd2447d48ef172c4913615cf">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/9_misori.pdf">slides</a>
+**Lecture 9 - Misorientations:** 
+<a class="course_material" href="https://videocampus.sachsen.de/m/adcd4b546858da0304f30a54a9851abf5ba73acd09804d9c07f94eadad4ce40e8ced9d893d140ce363fe2a9a0fbe00463db07dc3cd2447d48ef172c4913615cf">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/9_misori.pdf">slides</a>
 <br>
 definition, visualization, phase transitions, misorientation axis, misorientation angle distribution, KAM, GOS
 <br>
