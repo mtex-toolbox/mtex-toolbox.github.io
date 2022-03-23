@@ -104,7 +104,7 @@ X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF e
 **Exercise 2:** 
 <a class="course_material" href="https://video.tu-freiberg.de/m/b636ff959d2b09a1eed975d318669fc61d30453c2cf83e3685a7a98b7c29911351156c357036134e5b18567e8447cc751930a8bea52b5076d5447a4c00a96a88">video,</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/y7qYwBS3zaz8EJa">exercises,</a>
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_2_solution.m">solutions</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/kBzaZ33n8wayZmX">solutions</a>
 <!-- <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>-->
 </div>
             </div>
