@@ -167,19 +167,34 @@ grain reconstruction, shape properties, orientation properties
             <div class="panel-body">
 <div markdown="span">
 **Lecture 9 - Misorientations:** 
-<a class="course_material" href="https://videocampus.sachsen.de/m/adcd4b546858da0304f30a54a9851abf5ba73acd09804d9c07f94eadad4ce40e8ced9d893d140ce363fe2a9a0fbe00463db07dc3cd2447d48ef172c4913615cf">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/9_misori.pdf">slides</a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/BDRtCzFapetq3Er"> ,slides</a>
 <br>
 definition, visualization, phase transitions, misorientation axis, misorientation angle distribution, KAM, GOS
 <br>
 <br>
-**Lecture 10 - Grain Boundaries:** <a class="course_material" href="https://videocampus.sachsen.de/m/92c31e9508c2a525a8b0f4ccfe8e104f5253cedaf569364fda6bb4aecadbfcd3f6ef30e8e5fc7281d4af76a0c0bbd5188334a91b664bc8cc725a5090d0072152">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/10_grainBoundaries.pdf">slides</a>
+**Lecture 10 - Grain Boundaries:**
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/MWn9rTZBq4zMfft"> ,slides</a>
 <br>
 geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundary misorientations
 <br>
 <br>
-**Exercise 5 - Grain Boundaries:** <a class="course_material" href="https://videocampus.sachsen.de/m/b5fd43361bdedd4a1c98574b472417246eb938d1fd70d07c942568a82ca264ef1e681aed6a31ca0517bf5502de4f6127e6c20124c7b1f1923e9912cd53e8de18">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5.m">exercises,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exp_qtz_crop.mat">data,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5_solution.m">solutions</a>
+**Exercise 5 - Grain Boundaries:** 
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video,</a> -->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w2WYEQRKbJi73aC"> ,exercises</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/gsiLJzNRxwfai48"> ,data</a> 
+<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 <br>
-**Exercise 6 - Denoising EBSD Data and Misorientations:** <a class="course_material" href="https://videocampus.sachsen.de/m/3889ae54285956da464ca17e979058652aea4f73d4eb16024f0c830309f5caff4e7397bc8d149d3a066cbb845338fbc5f2ab814088648ebe9a2015500fac269f">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/talk.pdf">slides,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/fast_PTP_2_samll_big_grains.ang">data</a>
+**Exercise 6 - Denoising EBSD Data and Misorientations:**
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video,</a> -->
+<a class="course_material" href=""> ,exercises</a>
+<a class="course_material" href=""> ,data</a> 
+<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 </div>
             </div>
         </div>
