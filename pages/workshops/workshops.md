@@ -53,7 +53,7 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 **Lecture 3 - Rotations and Crystal Symmetries:**
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides, </a>
-<a href="https://video.tu-freiberg.de/video/MTEX-Workshop-2022-Lecture-3-Rotations-and-Crystal-Symmetry/9c13bccea9dbb0a848da7332928574eb" target="_blank">video</a>
+<a href="https://video.tu-freiberg.de/m/40d003bf04acff3395afe8a28e32f611e61bb73ee82e8bbe3993044508b8276ee8fd3dfd486d8aa16ff5b23768f945a6c6138baad9669987fc5b00f431e834f3" target="_blank">video</a>
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>-->
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
@@ -62,7 +62,7 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
 **Exercise 1:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 14:45-16:00, </a>-->
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>-->
-<a class="course_material" href="https://video.tu-freiberg.de/video/MTEX-Workshop-2022-Exercise-1-Matlab-Basics-and-Rotations/ad4752c2e3c9ff144075e9bcfc352c16">video, </a>
+<a class="course_material" href="https://video.tu-freiberg.de/m/547571083b4772b39076db9a69aa0cbe41744470974c8df15135c3bb2d18d07a28e5a544057a95881bef986bbdcf4aa593330897f9b473e0f523df8471b98e5e">video, </a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/j9dM6XPmpz8rStX">exercises, </a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XNYKDnCZAnCgE69">solutions</a>
 </div>
@@ -94,18 +94,18 @@ kernel density estimation, orientation density function, pole density function, 
 <br>
 <br>
 **Lecture 6 - ODF Reconstruction from Pole Figure Data:** 
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/3e27654ede4be88745fe1dfb40aeee376d1d53bc66af7d0163429e6806777d0828e70f9f05e943ddef1cb5ade6fc23ee1b6ad7ddab30fb15f7a631278274097e">video, </a>-->
+<a class="course_material" href="https://video.tu-freiberg.de/m/0091f1a741f92f6382f1b5cdb769ae6ce69ac4428451f40a85a3cec224c8975a38655b76b967f793c22d5fd8bfae99073bb2a985e68b94751ca74c39dad24224">video, </a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w3fyNjc9kXEEq9p">slides</a>
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>-->
 <br>
 X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF estimation
 <br>
 <br>
 **Exercise 2:** 
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/41db5e863ee56757f807c5abb62d9a044ea97aa17003e48ea91cb73869b275861b04a0a55b3203bca46ea099be5d80d2cf148c3bd7ba724a5176c203d1f80f8c">video,</a>-->
+<a class="course_material" href="https://video.tu-freiberg.de/m/b636ff959d2b09a1eed975d318669fc61d30453c2cf83e3685a7a98b7c29911351156c357036134e5b18567e8447cc751930a8bea52b5076d5447a4c00a96a88">video,</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/y7qYwBS3zaz8EJa">exercises,</a>
-<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_2_solution.m">solutions</a>-->
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_2_solution.m">solutions</a>
+<!-- <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>-->
 </div>
             </div>
         </div>
