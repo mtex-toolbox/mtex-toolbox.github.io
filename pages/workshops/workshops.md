@@ -175,7 +175,7 @@ definition, visualization, phase transitions, misorientation axis, misorientatio
 <br>
 <br>
 **Lecture 10 - Grain Boundaries:**
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a> 
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:15-11:30</a> 
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video</a> -->
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/MWn9rTZBq4zMfft">slides</a>
 <br>
