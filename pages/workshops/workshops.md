@@ -37,10 +37,10 @@ During the first week we provide on a daily basis two morning lectures covering 
             <div class="panel-body">
 <div markdown="span">
 **Lecture 1 - General Concepts:**
-<a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy"> ,slides</a>
-<a class="course_material" href="https://videocampus.sachsen.de/m/2d4c72181f296b2f117449195e04e73f4eb01c71176f096b4cece77d5f2929d7af0087c0d3b6ae4f19a79fa8b61c000c5d90ed118ff2a81d70ab1c04563a25eb" target="_blank">, video 1</a>
-<!--- <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides, </a>-->
+<a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy">slides</a> 
+<a class="course_material" href="https://videocampus.sachsen.de/m/2d4c72181f296b2f117449195e04e73f4eb01c71176f096b4cece77d5f2929d7af0087c0d3b6ae4f19a79fa8b61c000c5d90ed118ff2a81d70ab1c04563a25eb" target="_blank">video 1</a> 
+<!--- <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides</a>-->
 <!--- <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">welcome zoom session at 8:45</a>-->
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
@@ -48,15 +48,15 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 <br>
 **Lecture 2 - Crystal Lattice:** 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/GfH27MesxNek5sA">slides</a> 
-<a class="course_material" href="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031"> ,video 1</a> 
-<a class="course_material" href="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177"> ,video 2</a>
+<a class="course_material" href="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031">video 1</a> 
+<a class="course_material" href="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177">video 2</a> 
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
 **Lecture 3 - Rotations and Crystal Symmetries:**
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides</a>
-<a class="course_material" href="https://video.tu-freiberg.de/m/40d003bf04acff3395afe8a28e32f611e61bb73ee82e8bbe3993044508b8276ee8fd3dfd486d8aa16ff5b23768f945a6c6138baad9669987fc5b00f431e834f3" target="_blank"> ,video</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides</a> 
+<a class="course_material" href="https://video.tu-freiberg.de/m/40d003bf04acff3395afe8a28e32f611e61bb73ee82e8bbe3993044508b8276ee8fd3dfd486d8aa16ff5b23768f945a6c6138baad9669987fc5b00f431e834f3" target="_blank">video</a> 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>-->
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
@@ -65,9 +65,9 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
 **Exercise 1:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 14:45-16:00, </a>-->
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>-->
-<a class="course_material" href="https://video.tu-freiberg.de/m/547571083b4772b39076db9a69aa0cbe41744470974c8df15135c3bb2d18d07a28e5a544057a95881bef986bbdcf4aa593330897f9b473e0f523df8471b98e5e">video</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/j9dM6XPmpz8rStX"> ,exercises, </a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XNYKDnCZAnCgE69"> ,solutions</a>
+<a class="course_material" href="https://video.tu-freiberg.de/m/547571083b4772b39076db9a69aa0cbe41744470974c8df15135c3bb2d18d07a28e5a544057a95881bef986bbdcf4aa593330897f9b473e0f523df8471b98e5e">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/j9dM6XPmpz8rStX">exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XNYKDnCZAnCgE69">solutions</a> 
 </div>
 			</div>
         </div>
@@ -83,31 +83,31 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
             <div class="panel-body">
 <div markdown="span">
 **Lecture 4 - Orientations:** 
-<a class="course_material" href="https://videocampus.sachsen.de/m/421bcadc047032bb32346b3fbdf3bf197a0275d9565684740f8063457c5f4e7f60d2261891651cc669dc7f33af6d33b17f63de47f4e364ab6e7bba846d9d374b">video</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TiWbw4WsDriYMGS"> ,slides</a>
+<a class="course_material" href="https://videocampus.sachsen.de/m/421bcadc047032bb32346b3fbdf3bf197a0275d9565684740f8063457c5f4e7f60d2261891651cc669dc7f33af6d33b17f63de47f4e364ab6e7bba846d9d374b">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TiWbw4WsDriYMGS">slides</a>
 <br>
 symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parameterization
 <br>
 <br>
 **Lecture 5 - Density Functions:** 
 <a class="course_material" href="https://videocampus.sachsen.de/m/6da6baa2b4ddcacf4a917e7dbf0fa2a4c55f28724d45013e5ffce765e343f2e4763d63b593841287c1155fbb4a5bdadf53dd25e79cd2f80766227fa8244e6572">video</a> 
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/iykQdJXHoLSwPgG"> ,slides</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/iykQdJXHoLSwPgG">slides</a>
 <br>
 kernel density estimation, orientation density function, pole density function, inverse pole density function, model ODFs, ODF characteristics, random sampling
 <br>
 <br>
 **Lecture 6 - ODF Reconstruction from Pole Figure Data:** 
-<a class="course_material" href="https://video.tu-freiberg.de/m/0091f1a741f92f6382f1b5cdb769ae6ce69ac4428451f40a85a3cec224c8975a38655b76b967f793c22d5fd8bfae99073bb2a985e68b94751ca74c39dad24224">video</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w3fyNjc9kXEEq9p"> ,slides</a>
+<a class="course_material" href="https://video.tu-freiberg.de/m/0091f1a741f92f6382f1b5cdb769ae6ce69ac4428451f40a85a3cec224c8975a38655b76b967f793c22d5fd8bfae99073bb2a985e68b94751ca74c39dad24224">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w3fyNjc9kXEEq9p">slides</a> 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:15</a>-->
 <br>
 X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF estimation
 <br>
 <br>
 **Exercise 2:** 
-<a class="course_material" href="https://video.tu-freiberg.de/m/b636ff959d2b09a1eed975d318669fc61d30453c2cf83e3685a7a98b7c29911351156c357036134e5b18567e8447cc751930a8bea52b5076d5447a4c00a96a88">video</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/y7qYwBS3zaz8EJa"> ,exercises</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/kBzaZ33n8wayZmX"> ,solutions</a>
+<a class="course_material" href="https://video.tu-freiberg.de/m/b636ff959d2b09a1eed975d318669fc61d30453c2cf83e3685a7a98b7c29911351156c357036134e5b18567e8447cc751930a8bea52b5076d5447a4c00a96a88">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/y7qYwBS3zaz8EJa">exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/kBzaZ33n8wayZmX">solutions</a> 
 <!-- <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>-->
 </div>
             </div>
@@ -125,32 +125,32 @@ X-ray, neutron and synchrotron diffraction, data import, ghost correction, ODF e
 <div markdown="span">
 **Lecture 7 - EBSD:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>-->
-<a class="course_material" href="https://video.tu-freiberg.de/m/aec7cf5229b38d87743a2a61854c42bbb104f9f613f94177dc9c72cb39a18af945d5eb23d2b3f4516593be3a6270380f2147458482f3616240368cff16bac938">video,</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/893LCwTYWGiCZ7p"> ,slides</a>
+<a class="course_material" href="https://video.tu-freiberg.de/m/aec7cf5229b38d87743a2a61854c42bbb104f9f613f94177dc9c72cb39a18af945d5eb23d2b3f4516593be3a6270380f2147458482f3616240368cff16bac938">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/893LCwTYWGiCZ7p">slides</a> 
 <br>
 data import, pole figures, inverse pole figures, color keys, reference frame, properties
 <br>
 <br>
 **Lecture 8 - Grains:** 
-<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>-->
-<a class="course_material" href="https://video.tu-freiberg.de/m/d4f2ebff01b49c5543fdb7d2c8e339e6514a12c2bdb791bf0f4effd1a52cc8e4f01e9265549a4759182c53dd940be99aa0a3181ec9b34c87836f80d140dc9a59">video,</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/atTyoXQjJzW8GB7"> ,slides</a>
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a> --> 
+<a class="course_material" href="https://video.tu-freiberg.de/m/d4f2ebff01b49c5543fdb7d2c8e339e6514a12c2bdb791bf0f4effd1a52cc8e4f01e9265549a4759182c53dd940be99aa0a3181ec9b34c87836f80d140dc9a59">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/atTyoXQjJzW8GB7">slides</a> 
 <br>
 grain reconstruction, shape properties, orientation properties
 <br>
 <br>
 **Exercise 3 - EBSD:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>-->
-<a class="course_material" href="https://video.tu-freiberg.de/m/df2750ea1438f911b605795fb0109ea6ca1dad94e035bf9bea8d7216f6abcbcc0a3d7bc035ebf1dc9513db4dae11e2f3072a824764e839a6a035165b2e57eb2f">video,</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/A9X83APDw4fj9Bx"> ,exercises</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XAqp9p9Y6ceX28s"> ,data</a> 
+<a class="course_material" href="https://video.tu-freiberg.de/m/df2750ea1438f911b605795fb0109ea6ca1dad94e035bf9bea8d7216f6abcbcc0a3d7bc035ebf1dc9513db4dae11e2f3072a824764e839a6a035165b2e57eb2f">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/A9X83APDw4fj9Bx">exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XAqp9p9Y6ceX28s">data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 <br>
 **Exercise 4 - Grains:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>-->
-<a class="course_material" href="https://video.tu-freiberg.de/m/2be1d86f1165f29f53483cff5f967fff9488a07aa84ed53c55f3a6f081d4e1385d63eed7a76b4c18dd45290ab9c8ed255ef9976fa31ed2e22bf35ac38c702564">video,</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TyWJzAGpK3EwgGQ"> ,exercises</a> 
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/zmDPdqijNzNCbxE"> ,data</a> 
+<a class="course_material" href="https://video.tu-freiberg.de/m/2be1d86f1165f29f53483cff5f967fff9488a07aa84ed53c55f3a6f081d4e1385d63eed7a76b4c18dd45290ab9c8ed255ef9976fa31ed2e22bf35ac38c702564">video</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TyWJzAGpK3EwgGQ">exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/zmDPdqijNzNCbxE">data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_4_solution.m">solutions</a>-->
 </div>
             </div>
@@ -167,33 +167,33 @@ grain reconstruction, shape properties, orientation properties
             <div class="panel-body">
 <div markdown="span">
 **Lecture 9 - Misorientations:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a>-->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/BDRtCzFapetq3Er"> ,slides</a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a> 
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a> -->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/BDRtCzFapetq3Er">slides</a> 
 <br>
 definition, visualization, phase transitions, misorientation axis, misorientation angle distribution, KAM, GOS
 <br>
 <br>
 **Lecture 10 - Grain Boundaries:**
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a>-->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/MWn9rTZBq4zMfft"> ,slides</a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a> 
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video</a> -->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/MWn9rTZBq4zMfft">slides</a>
 <br>
 geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundary misorientations
 <br>
 <br>
 **Exercise 5 - Grain Boundaries:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video,</a> -->
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w2WYEQRKbJi73aC"> ,exercises</a>
-<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/gsiLJzNRxwfai48"> ,data</a> 
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a> 
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video</a> -->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w2WYEQRKbJi73aC">exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/gsiLJzNRxwfai48">data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 <br>
 **Exercise 6 - Denoising EBSD Data and Misorientations:**
 <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video,</a> -->
-<a class="course_material" href=""> ,exercises</a>
-<a class="course_material" href=""> ,data</a> 
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video</a>  -->
+<a class="course_material" href="">exercises</a> 
+<a class="course_material" href="">data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 </div>
             </div>
@@ -209,17 +209,26 @@ geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain
         <div id="collapseFriday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 11 - Plastic / Elastic Deformation:** <a class="course_material" href="https://videocampus.sachsen.de/m/2921dd50a0350caef9b3b8157e9598e2f4662457d3880fd275521795af9225b519c0aa8b9bc92588d38e43b87068a19ce953b280372296989cf0e2fb2750946c">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/11_plasticity.pdf">slides</a>
+**Lecture 11 - Plastic / Elastic Deformation:** 
+<a class="course_material" href="https://videocampus.sachsen.de/m/2921dd50a0350caef9b3b8157e9598e2f4662457d3880fd275521795af9225b519c0aa8b9bc92588d38e43b87068a19ce953b280372296989cf0e2fb2750946c">video</a>
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/11_plasticity.pdf">slides</a>
 <br>
 stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
 <br>
 <br>
-**Lecture 12 - Tensorial Properties:** <a class="course_material" href="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.pdf">slides,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.mlx">m-file</a>
+**Lecture 12 - Tensorial Properties:** 
+<a class="course_material" href="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce">video</a> 
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.pdf">slides</a>  
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.mlx">m-file</a>
 <br>
 wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
 <br>
-**Exercise 7 - Tensorial Properties:** <a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7.m">exercises,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/mtex_2021_physical_properties.zip">data,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m">solutions</a>
+**Exercise 7 - Tensorial Properties:** 
+<a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video</a> 
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7.m">exercises</a> 
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/mtex_2021_physical_properties.zip">data</a> 
+<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m">solutions</a>
 </div>
             </div>
         </div>

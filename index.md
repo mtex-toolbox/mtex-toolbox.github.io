@@ -13,7 +13,7 @@ opensource basis by an interdisciplinary [team](people) of material
 scientists, geologists and mathematicians.
 
 ### News
-* MTEX 5.8.0 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.0/mtex-5.8.0.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
+* MTEX 5.8.1 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
 * MTEX Online Workshop 2022: ・ [Announcement](https://github.com/mtex-toolbox/mtex/discussions/1314) ・ [Homepage](https://mtex-toolbox.github.io/workshops) ・
 * New paper: [The variant graph approach to improved parent grain reconstruction](https://arxiv.org/pdf/2201.02103.pdf)
 * Manual [Getting Started with MTEX for EBSD Analysis](https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6) by J. Hiscocks released
