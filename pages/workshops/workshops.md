@@ -218,10 +218,10 @@ geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain
 wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
 <br>
-**Lecture 12 - Plastic / Elastic Deformation:** 
+**Lecture 12 - Plastic Deformations:** 
 <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce">video</a> -->
-<a class="course_material" href="">slides</a>
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/oDLRqns8inTzmDG">slides</a>
 <br>
 stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
 <br>
