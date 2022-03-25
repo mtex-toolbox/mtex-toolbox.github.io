@@ -167,33 +167,33 @@ grain reconstruction, shape properties, orientation properties
             <div class="panel-body">
 <div markdown="span">
 **Lecture 9 - Misorientations:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a> -->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>-->
+<a class="course_material" href="https://video.tu-freiberg.de/m/4d4581dd504f53f26ce28eb04a84fefdc81fe1d3e7a1d0b50da365d9f11011540f2b36d33ae59b56be253f84e295354b76b2b1ddc229601ebc2426f4614d146e">video,</a> -->
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/BDRtCzFapetq3Er">slides</a> 
 <br>
 definition, visualization, phase transitions, misorientation axis, misorientation angle distribution, KAM, GOS
 <br>
 <br>
 **Lecture 10 - Grain Boundaries:**
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:15-11:30</a> 
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video</a> -->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:15-11:30</a> -->
+<a class="course_material" href="https://video.tu-freiberg.de/m/2599072c1e3e382328fe1fdd902da01f0846b4b9df975ddb8deca938a4faf6311ae9789c86dede8fc07dda706f59d8ae47796b7eebe05cbe69d692389a7a3710">video</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/MWn9rTZBq4zMfft">slides</a>
 <br>
 geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain boundary misorientations
 <br>
 <br>
 **Exercise 5 - Grain Boundaries:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a> 
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video</a> -->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a> -->
+<a class="course_material" href="https://video.tu-freiberg.de/m/e652f8b4496b1b3a06289b2ec6e5eddda2774ab9219a79d8b4074a8abebd465cf3bfa902b8b79abf617cfada36850db549480be491130fb6397e232822349810">video</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/w2WYEQRKbJi73aC">exercises</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/gsiLJzNRxwfai48">data</a> 
-<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/m9K2pyek2iGHPmz">solutions</a>
 <br>
 **Exercise 6 - Denoising EBSD Data and Misorientations:**
 <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/05fc744d727ec467e3abcc1692813a1fd1763667e9e07339b5fda50e26043b367657f938b05ffb3af67176b1969627d9c2b8dc915591a21a27758ae95acc2725">video</a>  -->
-<a class="course_material" href="">exercises</a> 
-<a class="course_material" href="">data</a> 
+<a class="course_material" href="https://video.tu-freiberg.de/m/753175f184c7932c8743033de3d5f97f6620840e925f4046f860a431374a7dfa892a41105ddf8d68d8f0e308310fd6ddb750863f4452f358e849d6754312fb23">video</a> 
+<!--<a class="course_material" href="">exercises</a> -->
+<!-- <a class="course_material" href="">data</a> -->
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
 </div>
             </div>
