@@ -86,7 +86,7 @@ rotation representations, Euler angles, Rodrigues vectors, visualizations, fiber
 <a class="course_material" href="https://videocampus.sachsen.de/m/421bcadc047032bb32346b3fbdf3bf197a0275d9565684740f8063457c5f4e7f60d2261891651cc669dc7f33af6d33b17f63de47f4e364ab6e7bba846d9d374b">video</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TiWbw4WsDriYMGS">slides</a>
 <br>
-symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parameterization
+symmetrically equivalent orientations, pole figures, inverse pole figures, visualizations, parametrization
 <br>
 <br>
 **Lecture 5 - Density Functions:** 
@@ -144,14 +144,14 @@ grain reconstruction, shape properties, orientation properties
 <a class="course_material" href="https://video.tu-freiberg.de/m/df2750ea1438f911b605795fb0109ea6ca1dad94e035bf9bea8d7216f6abcbcc0a3d7bc035ebf1dc9513db4dae11e2f3072a824764e839a6a035165b2e57eb2f">video</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/A9X83APDw4fj9Bx">exercises</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/XAqp9p9Y6ceX28s">data</a> 
-<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_3_solution.m">solutions</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/9m6MSYyyAYs9yfC">solutions</a>
 <br>
 **Exercise 4 - Grains:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 14:45-16:00</a>-->
 <a class="course_material" href="https://video.tu-freiberg.de/m/2be1d86f1165f29f53483cff5f967fff9488a07aa84ed53c55f3a6f081d4e1385d63eed7a76b4c18dd45290ab9c8ed255ef9976fa31ed2e22bf35ac38c702564">video</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/TyWJzAGpK3EwgGQ">exercises</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/zmDPdqijNzNCbxE">data</a> 
-<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_4_solution.m">solutions</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/4T745fyAss2rRwN">solutions</a>
 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@ grain reconstruction, shape properties, orientation properties
             <div class="panel-body">
 <div markdown="span">
 **Lecture 9 - Misorientations:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a> 
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
 <!--<a class="course_material" href="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c">video,</a> -->
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/BDRtCzFapetq3Er">slides</a> 
 <br>
@@ -209,26 +209,29 @@ geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain
         <div id="collapseFriday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 11 - Plastic / Elastic Deformation:** 
-<a class="course_material" href="https://videocampus.sachsen.de/m/2921dd50a0350caef9b3b8157e9598e2f4662457d3880fd275521795af9225b519c0aa8b9bc92588d38e43b87068a19ce953b280372296989cf0e2fb2750946c">video</a>
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/11_plasticity.pdf">slides</a>
-<br>
-stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
-<br>
-<br>
-**Lecture 12 - Tensorial Properties:** 
-<a class="course_material" href="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce">video</a> 
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.pdf">slides</a>  
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.mlx">m-file</a>
+**Lecture 11 - Tensorial Properties:** 
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/2921dd50a0350caef9b3b8157e9598e2f4662457d3880fd275521795af9225b519c0aa8b9bc92588d38e43b87068a19ce953b280372296989cf0e2fb2750946c">video</a>-->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/QwpKMBQk2GiTc8j">slides</a>  
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/LBZJoasLPpSxkfa">m-file</a>
 <br>
 wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
 <br>
+**Lecture 12 - Plastic / Elastic Deformation:** 
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce">video</a> -->
+<a class="course_material" href="">slides</a>
+<br>
+stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
+<br>
+<br>
 **Exercise 7 - Tensorial Properties:** 
-<a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video</a> 
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7.m">exercises</a> 
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/mtex_2021_physical_properties.zip">data</a> 
-<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m">solutions</a>
+<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>
+<!--<a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video</a> -->
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/4yZJWMCSx7EX6aZ">exercises</a> 
+<a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/EZrCDCpRaMgqyDL">data</a> 
+<!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m">solutions</a>-->
 </div>
             </div>
         </div>
