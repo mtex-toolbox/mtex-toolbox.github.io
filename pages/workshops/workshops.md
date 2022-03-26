@@ -378,7 +378,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">Z.&nbsp;Michels</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Linking specimen structures with field-scale structures</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
