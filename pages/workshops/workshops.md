@@ -210,8 +210,8 @@ geometric properties, visualization, smoothing, tilt vs. twist boundaries, grain
             <div class="panel-body">
 <div markdown="span">
 **Lecture 11 - Tensorial Properties:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/2921dd50a0350caef9b3b8157e9598e2f4662457d3880fd275521795af9225b519c0aa8b9bc92588d38e43b87068a19ce953b280372296989cf0e2fb2750946c">video</a>-->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 8:45-10:00</a>-->
+<a class="course_material" href="https://video.tu-freiberg.de/m/184db8481ac87c7b03c1a65f829a79392e2a1bc10304b463a99527eb1208e618673456c8b4a2b7df255c1c36328fd87522be66ee3fb1a8b6afd85e7932f81741">video</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/QwpKMBQk2GiTc8j">slides</a>  
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/LBZJoasLPpSxkfa">m-file</a>
 <br>
@@ -219,16 +219,16 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 <br>
 <br>
 **Lecture 12 - Plastic Deformations:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce">video</a> -->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>-->
+<a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/oDLRqns8inTzmDG">slides</a>
 <br>
 stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
 <br>
 <br>
 **Exercise 7 - Tensorial Properties:** 
-<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>
-<!--<a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video</a> -->
+<!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 13:00-14:15</a>-->
+<a class="course_material" href="https://video.tu-freiberg.de/m/0935a17e38672477f4f02f77b197671bf466648072f35637c287cf5b17a6a65a9da45922ec6f2eb61ea35a34b65ec3be5665d42aad5216314b27aa4c2b48390f">video</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/4yZJWMCSx7EX6aZ">exercises</a> 
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/EZrCDCpRaMgqyDL">data</a> 
 <!--<a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m">solutions</a>-->
@@ -280,22 +280,26 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">9:00&minus;9:30</td>
 							<td style="text-align: left">R.&nbsp;Hielscher</td>
-							<td style="text-align: left">Parent Child Orientation Relationships in MTEX</td>
+							<td style="text-align: left">Parent Child Orientation Relationships in MTEX, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/7823d44cf8d6b84312c1229028f5076e2e436886c38d158109328b4a18309056d276beaaba5baff5e0aeca6e3b24e25cbbec78f0c90595199e38a26d9c2be201" target="_blank">video</a> </td>
 						</tr>
 						<tr>
 							<td style="text-align: right">9:30&minus;10:30</td>
 							<td style="text-align: left">F.&nbsp;Niessen</td>
-							<td style="text-align: left">Parent Grain Reconstruction in MTEX - the new variant graph approach</td>
+							<td style="text-align: left">Parent Grain Reconstruction in MTEX - the new variant graph approach, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/c97017446f0645d2b0c79752302fe1d924326ba178b10b257429cf8f66820f906788f7ed61ad9c1f415ab7790d8b001722d1024839d0041b5b13cedbf65585b5" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">T.&nbsp;Nyyssönen</td>
-							<td style="text-align: left">Challenges in reconstructing Austenitinic twins  Reconstruction</td>
+							<td style="text-align: left">Twinning ambiguity at packet boundaries after reconstruction, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/747c7447dce5710b0a9742da7abfb89f5fad19ba4a8cbdee753bdc2df6556c22c47840ee6e09ac88449cedf2212947fb32bc7d38689e0c980813a97178904ad6" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">M.&nbsp;Witte</td>
-							<td style="text-align: left">Applications of Austenite Reconstruction</td>
+							<td style="text-align: left">Applications of Austenite Reconstruction, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/e4124df45ee7f70b8a3983c1bcb9d3924e62531b7b4e39e4f1d547f8c30d20dc5a277368f5876d130f0e7cbb386844cf80a3a584468ace7bba58ca59e225e4e9" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
