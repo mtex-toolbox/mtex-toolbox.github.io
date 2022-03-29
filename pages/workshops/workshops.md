@@ -309,22 +309,26 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">T.&nbsp;Vermeij</td>
-							<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
+							<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing,
+							 <a class="course_material" href="https://video.tu-freiberg.de/m/302076ce01c2092049cb1f693adc420ff136e68eb4d83ce102d7f1d60d62ba6482cc47cf9c4c45a502369932b3a513af6e1af32e1a92b40adc891e49fd6915b7" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">C.&nbsp;Cayron</td>
-							<td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
+							<td style="text-align: left">Grain reconstruction by using groupoid composition tables, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/e4844ca12511edfa3d7b58e8bccb5075f65b8595d2e9bad392f595fa04004dc4a1976d2b92d5237f5e2a5c8a60f1f87ba522966ffa99dc5e53ae6d3bb77921b3" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">L.&nbsp;Germain</td>
-							<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
+							<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/8d48717fe5f7a0fa7c294ee2f0239ed895550a29aa550547a46b908f990a4f23f6c5ece299a875672c98d1405d738b46dc1edaf5fce92aba55163ad83e75a0e4" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:30&minus;16:00</td>
 							<td style="text-align: left">B.&nbsp;Britton</td>
-							<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
+							<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/13dca892ef444024dbf4cfa2bf3286b013e145554f1fc09b20fa7bc336cc18e45b862bb7c01dddf0b9dfe0a929178991c2bd8fcd33b068414b36763c778aff13" target="_blank">video</a></td>
 						</tr>
 					</tbody>
 				</table>
