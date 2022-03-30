@@ -455,14 +455,9 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">13:30&minus;14:00</td>
-							<td style="text-align: left">D.&nbsp;Savage</td>
-							<td style="text-align: left">Using SIFT and general B-spline elastic deformation to unwarp EBSD in MTEX</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">14:00&minus;14:30</td>
-							<td style="text-align: left"></td>
-							<td style="text-align: left"></td>
+							<td style="text-align: right">13:30&minus;14:30</td>
+							<td style="text-align: left">R.&nbsp;Hielscher</td>
+							<td style="text-align: left">Tensorial Orientation Representations</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
