@@ -356,22 +356,26 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">B.&nbsp;Soerensen</td>
-							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research</td>
+							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/b04b10254782463aee819be1928b2580dd045c3b260a4d54ca44cd109f790c055e1c9a2e5eee01816a0d27d8d4d5824cb9183df12cbfd5d3d8ea6ba8b25cfe58" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">Lopez&minus;Sanchez</td>
-							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX</td>
+							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/632e0d12a0457e8cb6bd789a8d834e12d15e1e783b79d20cf5cbdc0780ae832ed966a8aa87d693cc647dcd1f700a671a853f05aff95e76ecfac9a6e324aee6c2" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">Sheng&nbsp;Fan</td>
-							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice</td>
+							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/4af9a18f5c85082be2acc814622f2db732be623f2fd41d86b7f4f1a19b93e3e29a22aec152adfac11dd5b6f7a27a13108c5aa07780688a31a2e8a89564e5e87f" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">K.&nbsp;Marquardt</td>
-							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
+							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/5e60ca47002f3802b17058f1b6e147a79defacad218b16824fe9c8532291e6fe03a4588f5915448c651d28c1b5b40ba347b82b3d6ceb6b53a88d5fc123fa85de" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -381,22 +385,26 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">O.&nbsp;Orlandini</td>
-							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems</td>
+							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/1b5b67592d8114c50e6417aecf2eac7a27da1e3997e6d5613feaf8107d18cee8b165d544bff931fb30e156de6167e8cb34ccae78de674a2a8e50e1c271d378a6" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">Z.&nbsp;Michels</td>
-							<td style="text-align: left">Linking specimen structures with field-scale structures</td>
+							<td style="text-align: left">Linking specimen structures with field-scale structures, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/1dd260eb4d0d88dd8dd0e0f6beb32e7008a6c8935001450bc35e5e0f886e12356cf8112fda5e172dbed01027961460bb0e509aad76ba2b2698376adde3c7337f" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;15:30</td>
 							<td style="text-align: left">M. Allard</td>
-							<td style="text-align: left">Coupled in situ EBSD &amp; EPMA maps unfolding the deformation history in oceanic gabbros</td>
+							<td style="text-align: left">Coupled in situ EBSD &amp; EPMA maps unfolding the deformation history in oceanic gabbros, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/556ca61628df16807e135a9b86d1480260710a6c8bb830ee9df762712e74a911e0846ee024d2f76c35636d76546c4a720db5d5be448fe86ab1558ee521a9192b" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:30&minus;16:30</td>
 							<td style="text-align: left">S.&nbsp;Merkel</td>
-							<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments</td>
+							<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments, 
+                        	<a class="course_material" href="https://video.tu-freiberg.de/m/3b31031e3067b7cb46f26bbee9718402b54556ff73032197d6d2c2960cbfddf780fe77f74b84126f63ab9e9153bfcd79e085a8beeaabebcca49b42efb6512960" target="_blank">video</a></td>
 						</tr>
 					</tbody>
 				</table>
