@@ -220,7 +220,7 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 <br>
 **Lecture 12 - Plastic Deformations:** 
 <!--<a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session: 10:30-11:45</a>-->
-<a class="course_material" href="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc">video</a>
+<a class="course_material" href="https://video.tu-freiberg.de/m/d70f421253d858b44ecca5a8cf5ae89b238f4f3a26800c28e1c049f9839f3e3c7b638ae5ccf2472d2e53fe71c5eafe840a12b0abd7cc01a8dd7ae3b845bc5732">video</a>
 <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/oDLRqns8inTzmDG">slides</a>
 <br>
 stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
@@ -437,17 +437,21 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">10:00&minus;10:30</td>
 							<td style="text-align: left">P.&nbsp;Lehto</td>
-							<td style="text-align: left">Misorientation gradients in polycrystalline engineering materials – characterization of grains and grain sub-structures</td>
+							<td style="text-align: left">Misorientation gradients in polycrystalline engineering materials – characterization of grains and grain sub-structures, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/888c52da8f79162e6105000f24bd8edc2be19ccdbaaaf5a04b0d523c5288fc7df26fa49922f74bc0e165e026546f603043015b1729e6b638d1afa3ea66048d62" target="_blank">video</a>
+						</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:30&minus;11:00</td>
 							<td style="text-align: left">D.&nbsp;Depriester</td>
-							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper</td>
+							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/1ffcddaa6d75d162b71843fca6dcd0213d1043fe7abadc5c5a1d3ceaf555f3f2f95108401f16de7370216ff9fb24becf9c4e1022a423357511fda4be2f1bbf07" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">K.&nbsp;Frydrych</td>
-							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX</td>
+							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/fe91fbc808b0756ee1bbc88912219ac6e02701af6c12bbaf2c3f764350cf755ba87676e4cefaaebf39a5dba43fa3eadf26c0f366dfc6e6ebfcca3c16e3ecc8de" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -457,12 +461,14 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">R.&nbsp;Hielscher</td>
-							<td style="text-align: left">Tensorial Orientation Representations</td>
+							<td style="text-align: left">Tensorial Orientation Representations, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/a6677a5e63b2bf51b07c7df93d9a2fe4c8214be341c76c7fdc1de3aba6aeb339ba3c1e7b7451de0596bbb6a150526fa64fae7959455086bc35b5e7c447532314" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
 							<td style="text-align: left">J.&nbsp;Hisccocks</td>
-							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide</td>
+							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide, 
+							<a class="course_material" href="https://video.tu-freiberg.de/m/a1b6a32614def97e5a755b628c83566082ce64064009e1f13bf07617a31a37eacfa70b428025343179f6478c2ca6432fc088d1db015981f83e190f59ee003772" target="_blank">video</a></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:00&minus;16:00</td>
