@@ -1,6 +1,6 @@
 ---
 title: Plot seismic wave velocities and polarization directions for aggregates
-last_updated: 10-Sep-2021
+last_updated: 01-Apr-2022
 sidebar: documentation_sidebar
 permalink: CPOSeismicProperties.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plot seismic wave velocities and polarization directions for aggregates</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_CPOSeismicProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/CPOSeismicProperties.m">
+      --><title>Plot seismic wave velocities and polarization directions for aggregates</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_CPOSeismicProperties.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/CPOSeismicProperties.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we will calculate the elastic properties of an aggregate and plot its seismic properties in pole figures that can be directly compare to the pole figures for CPO</p><p>Let's first import an example dataset from the MTEX toolbox</p>
 {% highlight matlab %}
 mtexdata forsterite
@@ -132,7 +132,9 @@ odf_ol = calcDensity(ebsd('f').orientations,'halfwidth',10*degree);
 odf_opx = calcDensity(ebsd('e').orientations,'halfwidth',10*degree);
 odf_cpx = calcDensity(ebsd('d').orientations,'halfwidth',10*degree);
 {% endhighlight %}
-<p>Note that you do don't need to write the full name of each phase, only the initial, that works when phases start with different letters. Also note that although we use an EBSD dataset in this example, you can perform the same calculations with CPO data obtain by other methods (e.g. x-ray/neutron diffraction) as you only need the ODF variable for the calculations</p><p>To calculate the average stiffness tensor from the ODFs we first compute them from each phase seperately</p>
+<center>
+{% include inline_image.html file="CPOSeismicProperties_04.png" %}
+</center><p>Note that you do don't need to write the full name of each phase, only the initial, that works when phases start with different letters. Also note that although we use an EBSD dataset in this example, you can perform the same calculations with CPO data obtain by other methods (e.g. x-ray/neutron diffraction) as you only need the ODF variable for the calculations</p><p>To calculate the average stiffness tensor from the ODFs we first compute them from each phase seperately</p>
 {% highlight matlab %}
 [CVoigt_ol, CReuss_ol, CHill_ol]    = mean(C_olivine,odf_ol);
 [CVoigt_opx, CReuss_opx, CHill_opx] = mean(C_opx,odf_opx);
@@ -144,12 +146,30 @@ vol_ol  = length(ebsd('f')) ./ length(ebsd('indexed'));
 vol_opx = length(ebsd('e')) ./ length(ebsd('indexed'));
 vol_cpx = length(ebsd('d')) ./ length(ebsd('indexed'));
 
-CHill = vol_ol * CHill_ol + vol_opx * CHill_opx + vol_cpx * CHill_cpx;
+[CVoigt, CReuss, CHill] = mean([CVoigt_ol, CVoigt_opx, CVoigt_cpx],...
+  'weights',[vol_ol, vol_opx, vol_cpx]);
+
+CHill
+{% endhighlight %}
+
+{% highlight plaintext %}
+CHill = stiffnessTensor  
+  density: 3.3449           
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
+ 
+  tensor in Voigt matrix representation:
+ 241.93  74.34  78.25   0.71   4.68  -3.15
+  74.34 210.34   73.7   3.59  -0.56  -1.83
+  78.25   73.7 252.19   6.46   4.61  -0.32
+   0.71   3.59   6.46  76.84  -0.41   1.65
+   4.68  -0.56   4.61  -0.41  84.87   2.19
+  -3.15  -1.83  -0.32   1.65   2.19  74.49
 {% endhighlight %}
 <p>Finally, we visualize the polycrystal wave velocities as above</p>
 {% highlight matlab %}
 plotSeismicVelocities(CHill)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CPOSeismicProperties_04.png" %}
+{% include inline_image.html file="CPOSeismicProperties_05.png" %}
 </center></div></body></html>

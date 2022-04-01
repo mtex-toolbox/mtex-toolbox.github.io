@@ -1,6 +1,6 @@
 ---
 title: Projection Based Shape Parameters
-last_updated: 10-Sep-2021
+last_updated: 01-Apr-2022
 sidebar: documentation_sidebar
 permalink: ProjectionBasedParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Projection Based Shape Parameters</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_ProjectionBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ProjectionBasedParameters.m">
+      --><title>Projection Based Shape Parameters</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_ProjectionBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ProjectionBasedParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss shape parameters grains that depend on one dimensional projections, i.e.,</p><p>
    <table class="usertable">
       <tr>
@@ -25,7 +25,7 @@ To make changes, update the MATLAB code and republish this document.
          <td>
                <p>caliper or Feret diameter in <equation>
                      <img alt="\(\mu m\)" class="equation" height="10px"
-                          src="0994919369_tmp_eq17376418037532559476.png"
+                          src="0041862081_tmp_eq17376418037532559476.png"
                           width="22px"/>
                   </equation>
                </p>
@@ -40,7 +40,7 @@ To make changes, update the MATLAB code and republish this document.
          <td>
                <p>diameter in <equation>
                      <img alt="\(\mu m\)" class="equation" height="10px"
-                          src="0870219143_tmp_eq17376418037532559476.png"
+                          src="0303996546_tmp_eq17376418037532559476.png"
                           width="22px"/>
                   </equation>
                </p>
@@ -58,7 +58,7 @@ ebsd(grains(grains.grainSize<5)) = [];
 [grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
 grains(grains.isBoundary) = [];
 
-grains=smooth(grains('indexed'),10,'moveTriplePoints');
+grains = smooth(grains('indexed'),10,'moveTriplePoints');
 
 % plot all grains and highlight a specific one
 plot(grains)
@@ -227,7 +227,7 @@ ans =
 {% highlight matlab %}
 close all
 pairs = [1 1; nchoosek(1:3,2)];
-phase = {'fo' 'en' 'di'};
+phase = {'Fo' 'En' 'Di'};
 for i=1:length(pairs)
 
   gB = grains.boundary(phase{pairs(i,:)});
@@ -237,8 +237,80 @@ for i=1:length(pairs)
 
 end
 hold off
-legend('Location','best' )
+legend('Location','southoutside','Orientation','horizontal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ProjectionBasedParameters_08.png" %}
-</center><p>We can see that Forsterite-Forsterite boundaries form a fabric slightly more inclined with respect to the other phase boundariesand that the phase boundaries between the two pyroxenes (Enstatite and Diopside) show the lowest anisotropy.</p></div></body></html>
+</center><p>We can see that Forsterite-Forsterite boundaries form a fabric slightly more inclined with respect to the other phase boundariesand that the phase boundaries between the two pyroxenes (Enstatite and Diopside) show the lowest anisotropy.</p><h2 id="13">Characteristic Shape</h2><p>The characteristic shape results from the cummulative sum of all grain boundary segements ordered by the angle of the segment direction. It can be regarded as to represent the average grain shape, however without the need to use closed areas such as it would be required when working with grains.</p><p>Here we can compare the shape defined by Forterite-Forsterite, Enstatite-Enstatite and Forsterite-Enstatite boundaries</p>
+{% highlight matlab %}
+plotopts = {'normalize','linewidth',2, 'plain'};
+
+shapeF = characteristicShape(grains.boundary('Fo','Fo'))
+plot(shapeF,plotopts{:},'DisplayName','Fo-Fo')
+
+hold on
+shapeE = characteristicShape(grains.boundary('En','En'))
+plot(shapeE,plotopts{:},'DisplayName','En-En')
+
+hold on
+shapeEF = characteristicShape(grains.boundary('En','Fo'))
+plot(shapeEF,plotopts{:},'DisplayName','En-Fo')
+hold off
+
+legend('Location','southoutside','Orientation','horizontal')
+{% endhighlight %}
+
+{% highlight plaintext %}
+shapeF = shape2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1       1       1    Hallo                                   
+ 
+ boundary segments: 29012
+ inner boundary segments: 29012
+ triple points: 0
+ 
+ Properties: 
+ 
+ 
+shapeE = shape2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1       1       1    Hallo                                   
+ 
+ boundary segments: 1164
+ inner boundary segments: 1164
+ triple points: 0
+ 
+ Properties: 
+ 
+ 
+shapeEF = shape2d  
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     1       1       1    Hallo                                   
+ 
+ boundary segments: 20468
+ inner boundary segments: 20468
+ triple points: 0
+ 
+ Properties:
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_09.png" %}
+</center><p>The output of the command <a href="grainBoundary.characteristicShape.html"><code class="language-plaintext highlighter-rouge">characteristicShape</code></a> is a <a href="shape2d.shape2d.html"><code class="language-plaintext highlighter-rouge">shape2d</code></a> object which behaves very similar to a <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a> object. Hence it is easy to derive things such as a long axis or e.g. the angle between the longest and the shortest caliper which can be regarded as a measure of asymmetry.</p>
+{% highlight matlab %}
+angle(shapeF.caliper('longest'),shapeF.caliper('shortest'))/degree
+angle(shapeE.caliper('longest'),shapeE.caliper('shortest'))/degree
+angle(shapeEF.caliper('longest'),shapeF.caliper('shortest'))/degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   78.8006
+ans =
+   86.9482
+ans =
+   79.6522
+{% endhighlight %}
+</div></body></html>
