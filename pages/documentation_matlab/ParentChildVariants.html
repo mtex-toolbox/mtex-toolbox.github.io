@@ -1,6 +1,6 @@
 ---
 title: Parent Child Variants
-last_updated: 22-Sep-2021
+last_updated: 01-Apr-2022
 sidebar: documentation_sidebar
 permalink: ParentChildVariants.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Child Variants</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-22"><meta name="DC.source" content="script_ParentChildVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/ParentChildVariants.m">
+      --><title>Parent Child Variants</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_ParentChildVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/ParentChildVariants.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>The crystallographic structure of most materials is dependend on external conditions as temperature and pressure. When the external conditions change the crystals may undergo a phase transition from the inital phase, often called parent phase, into the child phase. While both phases still have the same chemical composition their crystallographic structure might be quite different. A typical example are the alpha and beta phase of titanium. While the parent beta phase is cubic</p>
 {% highlight matlab %}
 csBeta = crystalSymmetry('432',[3.3 3.3 3.3],'mineral','Ti (beta)');
@@ -30,7 +30,7 @@ beta2alpha = orientation.Burgers(csBeta,csAlpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-beta2alpha = misorientation (Ti (beta) -> Ti (alpha))
+beta2alpha = misorientation (Ti (beta) → Ti (alpha))
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
@@ -42,11 +42,11 @@ oriChild = oriParent * inv(beta2alpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriChild = orientation (Ti (alpha) -> xyz)
+oriChild = orientation (Ti (alpha) → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  12.8486 102.856 107.826       0
+  51.4212 137.296 71.0526       0
 {% endhighlight %}
 <p>This orientation relationship is characterised by alignment of hexagonal (0001) plane with the cubic (110) plane and alignment of the hexagonal [2-1-10] direction with the cubic [-11-1] direction.</p>
 {% highlight matlab %}
@@ -83,7 +83,7 @@ oriParentSym = oriParent.symmetrise
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriParentSym = orientation (Ti (beta) -> xyz)
+oriParentSym = orientation (Ti (beta) → xyz)
   size: 24 x 1
 {% endhighlight %}
 <p>Applying the <code class="language-plaintext highlighter-rouge">beta2alpha</code> phase relationship to these 24 different represenations we obtain 24 child orientations.</p>
@@ -92,7 +92,7 @@ oriChild = oriParentSym * inv(beta2alpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriChild = orientation (Ti (alpha) -> xyz)
+oriChild = orientation (Ti (alpha) → xyz)
   size: 24 x 1
 {% endhighlight %}
 <p>Some of these child orientations are symmetrically equivalent with respect to the hexagonal child symmetry. In fact there are 12 pairs of symmetrically equivalent child orientations as depicted in the following inverse pole figure.</p>
@@ -119,13 +119,13 @@ oriChild = variants(beta2alpha,oriParent,2:3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriChild = orientation (Ti (alpha) -> xyz)
+oriChild = orientation (Ti (alpha) → xyz)
   size: 1 x 2
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  12.8486 102.856 107.826       0
-  138.292 33.8985 205.982       0
+  328.851 125.695 80.9461       0
+  69.7511 48.7793  252.42       0
 {% endhighlight %}
 <p>It is important to understand that the reduction to 12 variants from 24 symmetrically equivalent parent orientations comes from the specific Burger orientation relationship. For a general orientation relationship, e.g., if we disturb the OR a little bit</p>
 {% highlight matlab %}
@@ -133,11 +133,11 @@ beta2alpha = beta2alpha .* orientation.rand(csBeta,csBeta,'maxAngle',2*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-beta2alpha = misorientation (Ti (beta) -> Ti (alpha))
+beta2alpha = misorientation (Ti (beta) → Ti (alpha))
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  185.762 88.9156 45.7624       0
+  185.172 89.9011 45.8397       0
 {% endhighlight %}
 <p>we will always have exactly 24 variants. For the above example we observe how the 12 pairs of orientations which diverge slightly.</p>
 {% highlight matlab %}

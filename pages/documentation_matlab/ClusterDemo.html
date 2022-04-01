@@ -1,6 +1,6 @@
 ---
 title: Cluster demo
-last_updated: 25-Sep-2021
+last_updated: 01-Apr-2022
 sidebar: documentation_sidebar
 permalink: ClusterDemo.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Cluster demo</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-25"><meta name="DC.source" content="script_ClusterDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/ClusterDemo.m">
+      --><title>Cluster demo</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_ClusterDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/ClusterDemo.m">
     edit page</a></font><div><!--introduction--><p>This code demonstrates how the clustering algorithm can be used to assign vector3d and crystal directions to groups by proximity.</p><!--/introduction--><p>define an octohedral crystal symmetry</p>
 {% highlight matlab %}
 cs  = crystalSymmetry('432');
@@ -94,13 +94,21 @@ d(d<0.01) = 0;
 %d = d(triu(true(size(d)),1));
 
 % use the statistic toolbox
-d = squareform(d);
-z = linkage(d,'single');
+try
+  d = squareform(d);
+  z = linkage(d,'single');
 
-%cId = cluster(z,'cutoff',30*degree);
-cId = cluster(z,'maxclust',12);
+  %cId = cluster(z,'cutoff',30*degree);
+  cId = cluster(z,'maxclust',12);
 
-plotCluster(r,cId)
+  plotCluster(r,cId)
+catch
+  warning('Statistics Toolbox not installed!')
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Statistics Toolbox not installed!
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -114,6 +122,4 @@ end
 hold off
 end
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ClusterDemo_06.png" %}
-</center></div></body></html>
+</div></body></html>

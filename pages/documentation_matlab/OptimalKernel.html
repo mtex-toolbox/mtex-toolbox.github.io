@@ -1,6 +1,6 @@
 ---
 title: Optimal Kernel Selection
-last_updated: 14-Jan-2022
+last_updated: 01-Apr-2022
 sidebar: documentation_sidebar
 permalink: OptimalKernel.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Optimal Kernel Selection</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-01-14"><meta name="DC.source" content="script_OptimalKernel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/OptimalKernel.m">
+      --><title>Optimal Kernel Selection</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_OptimalKernel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/OptimalKernel.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In the section <a href="DensityEstimation.html">density estimation</a> we have seen that the correct choice of the kernel halfwidth is essential for creating a good match between the true density function and the reconstructed density function. If the halfwidth is set too small the reconstructed density function is usually oscillating and the indiviudual sampling points are visible as sharp peaks. If the halfwidth is too large the resulting density function is usually too smooth and does not reproduce the features of the original density function.</p><p>Finding an optimal kernel halfwidth is a hard problem as the optimal kernel halfwidth depends not only on the number of sampling points but also on the smoothness of the true but unknown density function. MTEX offers several options set by flags during the kernel calculation operation.  A very conserative choice for the kernel halfwidth that takes into account only the number of sampling points is implemented in MTEX with the flag <code class="language-plaintext highlighter-rouge">'magicRule'</code>. The flag <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> considers both the number of sampling points and the variance of the sampling points as an estimate of the smoothness of the true density function. The most advanced (and default) method for estimating the optimal kernel halfwidth is <a href="orientation.KLCV.html">Kullback Leibler cross validation</a>. This method tests different kernel halfwidths on a subset of the random sample and selects the halfwidth which best reproduces the ommited points of the random sample.</p><p>In order to demonstrate this functionality let's start with the following orientation density function</p>
 {% highlight matlab %}
 % Define trigonal crystal symmetry using Enantiomorphic Point Group notation
@@ -27,8 +27,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Miller indece are not orthogonal.
-Maximum deviation is 27 degree
+Warning: Miller indece are not orthogonal. Maximum deviation is 27 degree
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_01.png" %}
@@ -38,7 +37,7 @@ ori = odf.discreteSample(10000)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (321 -> xyz)
+ori = orientation (321 → xyz)
   size: 10000 x 1
 {% endhighlight %}
 <p>Next we estimate the optimal <a href="ODFShapes.html">kernel function</a> using the command <code class="language-plaintext highlighter-rouge"><a href="orientation.calcKernel.html">calcKernel</a></code> with the default settings.</p>
@@ -61,8 +60,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_rec = ODF  
-  crystal symmetry : 321, X||a*, Y||b, Z||c*
+odf_rec = ODF (321 → xyz)
  
   Harmonic portion:
     degree: 43
@@ -104,9 +102,9 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-RuleOfThumb: 67° KLCV: 24° magicRule: 31°
-RuleOfThumb: 36° KLCV: 12° magicRule: 22°
-RuleOfThumb: 18° KLCV: 8° magicRule: 16°
+RuleOfThumb: 35° KLCV: 15° magicRule: 31°
+RuleOfThumb: 32° KLCV: 12° magicRule: 22°
+RuleOfThumb: 17° KLCV: 8° magicRule: 16°
 RuleOfThumb: 10° KLCV: 6° magicRule: 11°
 RuleOfThumb: 9° KLCV: 5° magicRule: 8°
 RuleOfThumb: 7° KLCV: 4° magicRule: 6°
