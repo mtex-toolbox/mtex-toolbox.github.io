@@ -1,6 +1,6 @@
 ---
 title: Bingham Distribution
-last_updated: 10-Sep-2021
+last_updated: 28-May-2022
 sidebar: documentation_sidebar
 permalink: BinghamODFs.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Bingham Distribution</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_BinghamODFs.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/BinghamODFs.m">
+      --><title>Bingham Distribution</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-05-28"><meta name="DC.source" content="script_BinghamODFs.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/BinghamODFs.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>The Bingham distribution has the density</p><p>\[ f(g;K,U) = _1\!F_1 \left(\frac{1}{2},2,K \right)^{-1} \exp \left\{ g^T UKU  g \right\},\qquad g\in S^3, \]</p><p>where \(U\) are an \(4 \times 4\) orthogonal matrix with unit quaternions \(u_{1,..,4}\in S^3\) in the column and \(K\)  a \(4 \times 4\) diagonal matrix with the entries \(k_1,..,k_4\) describing the shape of the distribution. \(_1F_1(\cdot,\cdot,\cdot)\) is the hypergeometric function with matrix argument normalizing the density.</p><p>The shape parameters \(k_1 \ge k_2 \ge k_3 \ge k4\) give</p><div><ul><li>a <i>bipolar</i>   distribution, if \(k_1 + k_4 &gt; k_2 + k_3\),</li><li>a <i>circular</i>  distribution, if \(k_1 + k_4 = k_2 + k_3\),</li><li>a <i>spherical</i> distribution, if \(k_1 + k_4 &lt; k_2 + k_3\),</li><li>a <i>uniform</i>  distribution, if \(k_1 = k_2 = k_3 = k_4\),</li></ul></div><p>The general setup of the Bingham distribution in MTEX is done as follows</p>
 {% highlight matlab %}
 cs = crystalSymmetry('1');
@@ -23,8 +23,7 @@ odf = BinghamODF(kappa,U,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF  
-  crystal symmetry : 1, X||a*, Y||b*, Z||c*
+odf = ODF (1 → xyz)
  
   Bingham portion:
      kappa: 100 90 80 0
@@ -46,12 +45,11 @@ odf_spherical = unimodalODF(orientation.rand(cs),'halfwidth',20*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_spherical = ODF  
-  crystal symmetry : 1, X||a*, Y||b*, Z||c*
+odf_spherical = ODF (1 → xyz)
  
   Radially symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 20°
-    center: (281.6°,136.2°,349.2°)
+    center: (282°,102.7°,31°)
     weight: 1
 {% endhighlight %}
 
@@ -76,11 +74,10 @@ plotPDF(odf_est,h,'antipodal','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_est = ODF  
-  crystal symmetry : 1, X||a*, Y||b*, Z||c*
+odf_est = ODF (1 → xyz)
  
   Bingham portion:
-     kappa: 0 3.5 3.9 28
+     kappa: 0 2.6 3.3 26
     weight: 1
 {% endhighlight %}
 <center>
@@ -108,8 +105,7 @@ odf_prolate = fibreODF(Miller(0,0,1,crystalSymmetry('1')),zvector,...
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_prolate = ODF  
-  crystal symmetry : 1, X||a*, Y||b*, Z||c*
+odf_prolate = ODF (1 → xyz)
  
   Fibre symmetric portion:
     kernel: de la Vallee Poussin, halfwidth 20°
@@ -136,11 +132,10 @@ calcBinghamODF(ori_prolate)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = ODF  
-  crystal symmetry : 1, X||a*, Y||b*, Z||c*
+ans = ODF (1 → xyz)
  
   Bingham portion:
-     kappa: 0 3.6 48 49
+     kappa: 0 2.8 51 52
     weight: 1
 {% endhighlight %}
 <p>and test on the three cases</p>
@@ -157,8 +152,7 @@ odf_prolate = BinghamODF(kappa,U,crystalSymmetry,specimenSymmetry)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_prolate = ODF  
-  crystal symmetry : 1, X||a, Y||b, Z||c
+odf_prolate = ODF (1 → xyz)
  
   Bingham portion:
      kappa: 100 90 80 0
@@ -176,8 +170,7 @@ odf_oblate = BinghamODF([50 50 50 0],eye(4),crystalSymmetry,specimenSymmetry)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_oblate = ODF  
-  crystal symmetry : 1, X||a, Y||b, Z||c
+odf_oblate = ODF (1 → xyz)
  
   Bingham portion:
      kappa: 50 50 50 0
@@ -203,8 +196,7 @@ calcBinghamODF(ori_oblate)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = ODF  
-  crystal symmetry : 1, X||a, Y||b, Z||c
+ans = ODF (1 → xyz)
  
   Bingham portion:
      kappa: 0 47 48 49
@@ -224,8 +216,7 @@ odf_oblate = BinghamODF(kappa, U,crystalSymmetry,specimenSymmetry)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_oblate = ODF  
-  crystal symmetry : 1, X||a, Y||b, Z||c
+odf_oblate = ODF (1 → xyz)
  
   Bingham portion:
      kappa: 100 90 80 0
@@ -250,8 +241,7 @@ plot(odf,'sections',6,'silent','contourf','sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF  
-  crystal symmetry : 1, X||a, Y||b, Z||c
+odf = ODF (1 → xyz)
  
   Bingham portion:
      kappa: 20 0 0 0
@@ -267,8 +257,7 @@ plot(odf,'sections',6,'silent','sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF  
-  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
+odf = ODF (-3m1 → xyz)
  
   Bingham portion:
      kappa: -10 -10 10 10
@@ -284,8 +273,7 @@ plot(odf,'sections',6,'silent','sigma');
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF  
-  crystal symmetry : -3m1, X||a*, Y||b, Z||c*
+odf = ODF (-3m1 → xyz)
  
   Bingham portion:
      kappa: -10 10 10 10
