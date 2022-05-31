@@ -1,6 +1,6 @@
 ---
 title: Shape Parameters - Basic Properties
-last_updated: 10-Sep-2021
+last_updated: 28-May-2022
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
+      --><title>Shape Parameters - Basic Properties</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-05-28"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedProperties.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasesParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p><p>
    <table class="usertable">
       <tr>
@@ -31,12 +31,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>grain area in <equation>
-                     <img alt="\(\mu m^2\)" class="equation" height="16px"
-                          src="0660542528_tmp_eq00834383673360099952.png"
-                          width="27px"/>
-                  </equation>
-               </p>
+               <p>grain area in \(\mu m^2\)</p>
          </td>
       </tr>
       <tr>
@@ -58,12 +53,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>perimeter in <equation>
-                     <img alt="\(\mu m\)" class="equation" height="10px"
-                          src="0695118704_tmp_eq17376418037532559476.png"
-                          width="22px"/>
-                  </equation>
-               </p>
+               <p>perimeter in \(\mu m\)</p>
          </td>
       </tr>
       <tr>
@@ -85,12 +75,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>length of inner boundaries in <equation>
-                     <img alt="\(\mu m\)" class="equation" height="10px"
-                          src="0358932058_tmp_eq17376418037532559476.png"
-                          width="22px"/>
-                  </equation>
-               </p>
+               <p>length of inner boundaries in \(\mu m\)</p>
          </td>
       </tr>
       <tr>
@@ -102,12 +87,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>diameter in <equation>
-                     <img alt="\(\mu m\)" class="equation" height="10px"
-                          src="0695915220_tmp_eq17376418037532559476.png"
-                          width="22px"/>
-                  </equation>
-               </p>
+               <p>diameter in \(\mu m\)</p>
          </td>
          <td>
                <p>
@@ -162,6 +142,24 @@ To make changes, update the MATLAB code and republish this document.
          </td>
          <td>
                <p>is it a boundary grain</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="IceSphericity.html">
+                     <tt>sphericity</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>irregularity of grain boundary</p>
+         </td>
+         <td>
+            <text/>
+         </td>
+         <td>
+            <text/>
          </td>
       </tr>
       <tr>
@@ -299,29 +297,31 @@ ylabel('number of grains')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_02.png" %}
-</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a></p>
+</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a> or <a href="grain2d.hist.html"><code class="language-plaintext highlighter-rouge">hist(grains)</code></a></p>
+{% highlight matlab %}
+hist(grains)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ShapeParameters_03.png" %}
+</center>
 {% highlight matlab %}
 histogram(grains)
-xlabel('grain area')
-
-%
-% Simarly as |grainSize| and |area|, the one-dimensional meassures
-% |boundarySize| and |perimeter| give the length of the grain boundary as
-% number of segments and in |µm|, respectively.
-
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ShapeParameters_04.png" %}
+</center><p>Simarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
+{% highlight matlab %}
 grains(9).boundarySize
 grains(9).perimeter
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-     4
+     5
 ans =
   233.1561
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_03.png" %}
-</center><p>We may compute these quantities also explicitely from the grain boundary segents. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
+<p>We may compute these quantities also explicitely from the grain boundary segents. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
 {% highlight matlab %}
 length(grains(9).boundary)
 sum(grains(9).boundary.segLength)
@@ -329,11 +329,11 @@ sum(grains(9).boundary.segLength)
 
 {% highlight plaintext %}
 ans =
-     4
+     5
 ans =
   233.1561
 {% endhighlight %}
-<h2 id="7">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
+<h2 id="9">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
 {% highlight matlab %}
 grains(9).diameter
 {% endhighlight %}
@@ -361,7 +361,7 @@ plot(grains,grains.shapeFactor)
 mtexColorbar('title','shape factor')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_04.png" %}
+{% include inline_image.html file="ShapeParameters_05.png" %}
 </center><p>A second measure for the discrepancy between the actual shape and a circle is the relative difference between the <a href="grain2d.perimeter.html"><code class="language-plaintext highlighter-rouge">perimeter</code></a> and the <a href="grain2d.equivalentPerimeter.html"><code class="language-plaintext highlighter-rouge">equivalentPerimeter</code></a></p>
 {% highlight matlab %}
 plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
@@ -369,15 +369,15 @@ setColorRange([0,0.5])
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_05.png" %}
+{% include inline_image.html file="ShapeParameters_06.png" %}
 </center><p>In this plot round shapes will have values close to zero while concave shapes will get values up to \(0.5\).</p><p>A third measure is the <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull. It is explained in more detail in the section <a href="HullBasedParameters.html">convex hull parameters.</a></p>
 {% highlight matlab %}
 plot(grains,grains.paris)
 mtexColorbar('title','paris')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_06.png" %}
-</center><h2 id="12">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+{% include inline_image.html file="ShapeParameters_07.png" %}
+</center><h2 id="14">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
 {% highlight matlab %}
 % consider the entire data set
 mtexdata forsterite silent
@@ -405,7 +405,7 @@ plot([10,10^4],exp(ab(2) + ab(1) * log([10,10^4])),'LineWidth',3)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ShapeParameters_07.png" %}
+{% include inline_image.html file="ShapeParameters_08.png" %}
 </center><p>The slope of the linear function is the fractal dimension.</p>
 {% highlight matlab %}
 fractalDimension = ab(1)
@@ -413,6 +413,6 @@ fractalDimension = ab(1)
 
 {% highlight plaintext %}
 fractalDimension =
-    1.0340
+    1.0596
 {% endhighlight %}
 <p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p></div></body></html>
