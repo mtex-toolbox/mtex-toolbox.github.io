@@ -1,13 +1,17 @@
 ---
 title: Documentation
-keywords: documentation
-last_updated: November, 2019
+search: exclude
+last_updated: 31-May-2022
 sidebar: documentation_sidebar
 permalink: documentation.html
 folder: documentation
 toc: false
 ---
 
+<!-- auto redirect to the actual documentation page -->
+<meta http-equiv="refresh" content="0; url=Documentation.html" />
+
+<!--
 Use the left sidebar to navigate through the different topics. Note that all
 documentation pages are essentially MTEX scripts. This means you can open them
 in Matlab by typing
@@ -56,3 +60,4 @@ publish filename
 
 which creates an folder, named `html`, in your current directory where you can
 find the generated html page.
+-->
