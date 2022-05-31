@@ -9,4 +9,4 @@ toc: false
 ---
 
 <!-- auto redirect to the last workshop page -->
-<meta http-equiv="refresh" content="0; url=workshop22.html" />
+<meta http-equiv="refresh" content="0; url=workshop22.html?" />
