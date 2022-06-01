@@ -8,7 +8,7 @@ toc: false
 ---
 
 <div id="grid-news-paper" class="row">
-  <div class="col-xs-6">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">News</div>
       <div class="panel-body">
@@ -23,7 +23,7 @@ toc: false
       </div>
     </div>
   </div>
-  <div class="col-xs-6">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">Latest Publications</div>
       <div class="panel-body">
@@ -41,7 +41,7 @@ toc: false
 <br>
 
 <div id="grid-featured-examples" class="row">
-  <div class="col">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">Featured Examples</div>
       <div class="panel-body">
@@ -54,7 +54,7 @@ toc: false
 <br>
 
 <div id="grid-community-addons" class="row">
-  <div class="col-xs-6">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">Community</div>
       <div class="panel-body">
@@ -67,7 +67,7 @@ toc: false
       </div>
     </div>
   </div>
-  <div class="col-xs-6">
+  <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">Addons</div>
       <div class="panel-body">
@@ -87,7 +87,7 @@ toc: false
 <br>
 
 <div id="grid-requirements-licensing" class="row">
-  <div class="col">
+  <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">Requirements and Licensing</div>
       <div class="panel-body">
