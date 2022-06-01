@@ -35,6 +35,8 @@ toc: false
       </div>
     </div>
   </div>
+  <!-- sizer -->
+  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
 </div><!-- /#grid -->
 
 <br>
@@ -75,6 +77,8 @@ toc: false
       </div>
     </div>
   </div>
+  <!-- sizer -->
+  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
 </div><!-- /#grid -->
 
 <br>
@@ -91,4 +95,6 @@ toc: false
       </div>
     </div>
   </div>
+  <!-- sizer -->
+  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
 </div><!-- /#grid -->
