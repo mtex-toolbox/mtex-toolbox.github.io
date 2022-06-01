@@ -24,15 +24,13 @@ toc: false
   </div>
   <div class="col-xs-6">
     <div class="panel panel-default">
-      <div class="panel-heading"><a href="/addons">Latest Publications</a></div>
+      <div class="panel-heading">Latest Publications</div>
       <div class="panel-body">
         <ul>
-          <li>MTEX GUI</li>
-          <li>MTEX2Gmsh</li>
-          <li>Stabix</li>
-          <li>crystalAligner</li>
-          <li>ORTools</li>
-          <li>phaseSegmenter</li>
+          <li><a href="https://arxiv.org/pdf/2201.02103.pdf">The variant graph approach to improved parent grain reconstruction</a></li>
+          <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a></li>
+          <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf">Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere</a></li>
+          <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf">Denoising of Crystal Orientation Maps</a></li>
         </ul>
       </div>
     </div>
@@ -66,10 +64,12 @@ toc: false
       <div class="panel-heading">Addons</div>
       <div class="panel-body">
         <ul>
-          <li><a href="https://arxiv.org/pdf/2201.02103.pdf">The variant graph approach to improved parent grain reconstruction</a></li>
-          <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a></li>
-          <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf">Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere</a></li>
-          <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf">Denoising of Crystal Orientation Maps</a></li>
+          <li>MTEX GUI</li>
+          <li>MTEX2Gmsh</li>
+          <li>Stabix</li>
+          <li>crystalAligner</li>
+          <li>ORTools</li>
+          <li>phaseSegmenter</li>
         </ul>
       </div>
     </div>
