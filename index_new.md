@@ -8,7 +8,7 @@ toc: false
 ---
 
 <div id="grid-news-paper" class="row">
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">News</div>
       <div class="panel-body">
@@ -22,7 +22,7 @@ toc: false
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">Latest Publications</div>
       <div class="panel-body">
@@ -35,19 +35,16 @@ toc: false
       </div>
     </div>
   </div>
-</div><!-- /#grid-news-paper -->
+</div>
 
 <br>
 
 <div id="grid-featured-examples" class="row">
   <div class="col">
     <div class="panel panel-default">
-      <div class="panel-heading">Requirements and Licensing</div>
+      <div class="panel-heading">Featured Examples</div>
       <div class="panel-body">
-        <ul>
-          <li>MTEX is free and runs in standard Matlab. For GND and Taylor computation the optimization toolbox is required.</li>
-          <li>MTEX comes with binaries from the <a href="https://www-user.tu-chemnitz.de/~potts/nfft/">{% include inline_image.html file="nfft_logo.png"%}</a> which build up the core of MTEX. Read[here]() for more details how fast Fourier transforms on the sphere and in the orientation space speed up texture computations.</li>
-        </ul>
+        IMAGE SLIDER COMING SOON
       </div>
     </div>
   </div>
@@ -56,20 +53,20 @@ toc: false
 <br>
 
 <div id="grid-community-addons" class="row">
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">Community</div>
       <div class="panel-body">
         <ul>
           <li><a href="https://github.com/mtex-toolbox/mtex/discussions">MTEX forum]</a> - Questions, Discussions, Announcements.</li>
           <li><a href="https://github.com/mtex-toolbox/mtex/issues">report issues</a> - Every bug report is welcome.</li>
-          <li><a href="https://gist.github.com/search?utf8=%E2%9C%93&q=%23mtexScript">community scripts</a> - see how other MTEX users have utilized MTEX. Click [here](scripts) to see how you can share your scripts.</li>
+          <li><a href="https://gist.github.com/search?utf8=%E2%9C%93&q=%23mtexScript">community scripts</a> - see how other MTEX users have utilized MTEX. Click <a href="/scripts">here</a> to see how you can share your scripts.</li>
           <li><a href="https://github.com/mtex-toolbox/mtex">contribute</a> - MTEX is open source and adding new features is more simple then you might think.</li>
         </ul>
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">Addons</div>
       <div class="panel-body">
@@ -95,7 +92,7 @@ toc: false
       <div class="panel-body">
         <ul>
           <li>MTEX is free and runs in standard Matlab. For GND and Taylor computation the optimization toolbox is required.</li>
-          <li>MTEX comes with binaries from the <a href="https://www-user.tu-chemnitz.de/~potts/nfft/">{% include inline_image.html file="nfft_logo.png"%}</a> which build up the core of MTEX. Read[here]() for more details how fast Fourier transforms on the sphere and in the orientation space speed up texture computations.</li>
+          <li>MTEX comes with binaries from the <a href="https://www-user.tu-chemnitz.de/~potts/nfft/">{% include inline_image.html file="nfft_logo.png"%}</a> which build up the core of MTEX. <!-- Read[here]() for more details how fast Fourier transforms on the sphere and in the orientation space speed up texture computations. --></li>
         </ul>
       </div>
     </div>
