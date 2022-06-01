@@ -38,8 +38,6 @@ toc: false
   </div>
 </div>
 
-<br>
-
 <div id="grid-featured-examples" class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
@@ -50,8 +48,6 @@ toc: false
     </div>
   </div>
 </div>
-
-<br>
 
 <div id="grid-community-addons" class="row">
   <div class="col-md-6">
@@ -83,8 +79,6 @@ toc: false
     </div>
   </div>
 </div>
-
-<br>
 
 <div id="grid-requirements-licensing" class="row">
   <div class="col-md-12">
