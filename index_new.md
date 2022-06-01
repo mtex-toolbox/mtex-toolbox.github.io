@@ -7,9 +7,8 @@ permalink: index_new.html
 toc: false
 ---
 
-<!-- <div id="grid-news-paper" class="row"> -->
 <div id="grid-index-page" class="row">
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">News</div>
       <div class="panel-body">
@@ -24,7 +23,7 @@ toc: false
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">Latest Publications</div>
       <div class="panel-body">
@@ -37,11 +36,9 @@ toc: false
       </div>
     </div>
   </div>
-<!-- </div>/#grid-news-paper -->
-  <div class="w-100"></div>
-<!-- <br>
 
-<div id="grid-featured-examples" class="row"> -->
+  <div class="w-100"></div>
+
   <div class="col">
     <div class="panel panel-default">
       <div class="panel-heading">Requirements and Licensing</div>
@@ -53,13 +50,10 @@ toc: false
       </div>
     </div>
   </div>
+
   <div class="w-100"></div>
-<!-- </div>
 
-<br>
-
-<div id="grid-community-addons" class="row"> -->
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">Community</div>
       <div class="panel-body">
@@ -72,7 +66,7 @@ toc: false
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col-xs-6">
     <div class="panel panel-default">
       <div class="panel-heading">Addons</div>
       <div class="panel-body">
@@ -87,12 +81,9 @@ toc: false
       </div>
     </div>
   </div>
+
   <div class="w-100"></div>
-<!-- </div>
 
-<br>
-
-<div id="grid-requirements-licensing" class="row"> -->
   <div class="col">
     <div class="panel panel-default">
       <div class="panel-heading">Requirements and Licensing</div>
