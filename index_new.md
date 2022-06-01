@@ -8,71 +8,87 @@ toc: false
 ---
 
 <div id="grid" class="row">
-
-  <div class="col-xs-6 col-sm-4 col-md-4">
-
+  <div class="col-xs-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Getting started</div>
+      <div class="panel-heading">News</div>
       <div class="panel-body">
-        If you're getting started with Jekyll, see the links in this section. It will take you from the beginning level
-        to comfortable.
+        <div markdown="1">
+* MTEX 5.8.1 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
+* MTEX Online Workshop 2022: ・ [Announcement](https://github.com/mtex-toolbox/mtex/discussions/1314) ・ [Homepage](https://mtex-toolbox.github.io/workshops) ・
+* Manual [Getting Started with MTEX for EBSD Analysis](https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6) by J. Hiscocks released
+* MTEX 5.7.0 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ・ [Release Notes](changelog.html) ・ [Installation](download) ・
+* MTEX GUI 2.4 by J. Hiscocks released: ・ [Download](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip) ・ [Announcment](https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX) ・
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-xs-6 col-sm-4 col-md-4">
+  <div class="col-xs-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Content types</div>
+      <div class="panel-heading"><a href="/addons">Latest Publications</a></div>
       <div class="panel-body">
-        This section lists different content types and how to work with them.
+* MTEX GUI
+* MTEX2Gmsh
+* Stabix
+* crystalAligner
+* ORTools
+* phaseSegmenter
       </div>
     </div>
   </div>
+</div><!-- /#grid -->
 
-  <br>
+<br>
 
-  <div class="col-xs-6 col-sm-4 col-md-4">
+**Featured Examples**
+
+*IMAGE SLIDER*
+
+<br>
+
+<div id="grid" class="row">
+  <div class="col-xs-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Formatting</div>
+      <div class="panel-heading">Community</div>
       <div class="panel-body">
-        These topics get into formatting syntax, such as images and tables, that you'll use on each of your pages:
+        <div markdown="1">
+ * [MTEX forum](https://github.com/mtex-toolbox/mtex/discussions)
+  -- Questions, Discussions, Announcements.
+ * [report issues](https://github.com/mtex-toolbox/mtex/issues) -- Every bug
+   report is welcome.
+ * [community scripts](https://gist.github.com/search?utf8=%E2%9C%93&q=%23mtexScript)
+   -- see how other MTEX users have utilized MTEX. Click [here](scripts) to see how
+   you can share your scripts.
+ * [contribute](https://github.com/mtex-toolbox/mtex) -- MTEX is open
+   source and adding new features is more simple then you might think.
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-xs-6 col-sm-4 col-md-4">
+  <div class="col-xs-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Single Sourcing</div>
-      <div class="panel-body">These topics cover strategies for single_sourcing. Single sourcing refers to strategies
-        for re-using the same source in different outputs for different audiences or purposes.
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="col-xs-6 col-sm-4 col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">Publishing</div>
-      <div class="panel-body">When you're building, publishing, and deploying your Jekyll site, you might find these
-        topics helpful.
-      </div>
-    </div>
-  </div>
-
-  <br>
-
-  <div class="col-xs-6 col-sm-4 col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">Special Layouts</div>
+      <div class="panel-heading">Addons</div>
       <div class="panel-body">
-        These pages highlight special layouts outside of the conventional page and TOC hierarchy.
+* [The variant graph approach to improved parent grain reconstruction](https://arxiv.org/pdf/2201.02103.pdf)
+* [Parent grain reconstruction from partially or fully transformed microstructures in MTEX](https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf)
+* [Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere](https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf)
+* [Denoising of Crystal Orientation Maps](https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf)
       </div>
     </div>
-
   </div>
-  <!-- sizer -->
-  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
+</div><!-- /#grid -->
 
+<br>
 
+<div id="grid" class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Requirements and Licensing</div>
+      <div class="panel-body">
+        <div markdown="1">
+* MTEX is free and runs in standard Matlab. For GND and Taylor computation the optimization toolbox is required.
+* MTEX comes with binaries from the [{% include inline_image.html file="nfft_logo.png"%}](https://www-user.tu-chemnitz.de/~potts/nfft/) which build up the core of MTEX. Read [here]() for more details how fast Fourier transforms on the sphere and in the orientation space speed up texture computations.
+        </div>
+      </div>
+    </div>
+  </div>
 </div><!-- /#grid -->
