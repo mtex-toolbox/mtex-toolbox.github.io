@@ -13,11 +13,11 @@ toc: false
       <div class="panel-heading">News</div>
       <div class="panel-body">
         <ul>
-          <li>MTEX 5.8.1 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ・ [Release Notes](changelog.html) ・ [Installation](download)</li>
-          <li>MTEX Online Workshop 2022: ・ [Announcement](https://github.com/mtex-toolbox/mtex/discussions/1314) ・ [Homepage](https://mtex-toolbox.github.io/workshops)</li>
-          <li>Manual [Getting Started with MTEX for EBSD Analysis](https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6) by J. Hiscocks released</li>
-          <li>MTEX 5.7.0 released: ・ [Download](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ・ [Release Notes](changelog.html) ・ [Installation](download)</li>
-          <li>MTEX GUI 2.4 by J. Hiscocks released: ・ [Download](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip) ・ [Announcment](https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX)</li>
+          <li>MTEX 5.8.1 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip">Download</a> ・ <a href="changelog.html">Release Notes</a> ・ <a href="download">Installation</a></li>
+          <li>MTEX Online Workshop 2022: ・ <a href="https://github.com/mtex-toolbox/mtex/discussions/1314">Announcement</a> ・ <a href="https://mtex-toolbox.github.io/workshops">Homepage</a></li>
+          <li>Manual <a href="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6">Getting Started with MTEX for EBSD Analysis</a> by J. Hiscocks released</li>
+          <li>MTEX 5.7.0 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip">Download</a> ・ <a href="changelog.html">Release Notes</a> ・ <a href="download">Installation</a></li>
+          <li>MTEX GUI 2.4 by J. Hiscocks released: ・ <a href="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip">Download</a> ・ <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX">Announcment</a></li>
         </ul>
       </div>
     </div>
@@ -37,8 +37,6 @@ toc: false
       </div>
     </div>
   </div>
-  <!-- sizer -->
-  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
 </div><!-- /#grid-1 -->
 
 <br>
@@ -76,14 +74,12 @@ toc: false
       </div>
     </div>
   </div>
-  <!-- sizer -->
-  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
 </div><!-- /#grid-2 -->
 
 <br>
 
 <div id="grid-3" class="row">
-  <div class="col-xs-6">
+  <div class="">
     <div class="panel panel-default">
       <div class="panel-heading">Requirements and Licensing</div>
       <div class="panel-body">
@@ -94,6 +90,4 @@ toc: false
       </div>
     </div>
   </div>
-  <!-- sizer -->
-  <div class="col-xs-6 col-sm-4 col-md-1 shuffle_sizer"></div>
 </div><!-- /#grid-3 -->
