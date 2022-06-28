@@ -5,8 +5,9 @@ last_updated: 01-Jul-2022
 hide_sidebar: true
 permalink: index_new.html
 toc: false
+image_sliders_load_all: true
 image_sliders:
-  - test_slider
+  - slider1
 ---
 
 <div id="grid-news-paper" class="row">
