@@ -72,28 +72,15 @@ image_sliders:
       <div class="iis-caption-content">Also, this image has no link</div>
     </div>
   </a>
-  <a class="iis-previous-nav"></a>
-  <a class="iis-next-nav"></a>
-  <div class="iis-bullet-nav" role="tablist">
-    <a aria-selected="true"  class="iis-bullet-active" role="tab">1</a>
-    <a aria-selected="false" class="iis-bullet-active" role="tab">2</a>
-    <a aria-selected="false" class="iis-bullet-active" role="tab">3</a>
-    <a aria-selected="false" class="iis-bullet-active" role="tab">4</a>
-  </div>
 </div>
 <script>new IdealImageSlider.Slider('#slider2').start();</script>
 
 <div class="row">
-  <div class="col-lg-12">
-      <h2 class="page-header">Knowledge Base Categories</h2>
-  </div>
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-12">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <span class="fa-stack fa-5x">
-          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-          <i class="fa fa-tree fa-stack-1x fa-inverse"></i>
-        </span>
+        {% include slider.html selector="slider1" %}
+        <script>new IdealImageSlider.Slider('#slider1').start();</script>
       </div>
       <div class="panel-body">
         <h4>Getting started</h4>
@@ -102,49 +89,17 @@ image_sliders:
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-6">
+  <div class="col-md-12">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <span class="fa-stack fa-5x">
-          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-          <i class="fa fa-car fa-stack-1x fa-inverse"></i>
-        </span>
+        {% include slider.html selector="slider1" %}
+        <script>new IdealImageSlider.Slider('#slider1').start();</script>
       </div>
       <div class="panel-body">
-        <h4>Navigation</h4>
+        <h4>Getting started</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <a href="tag_navigation.html" class="btn btn-primary">Learn More</a>
+        <a href="tag_getting_started.html" class="btn btn-primary">Learn More</a>
       </div>
-    </div>
-  </div>
-  <div class="col-md-3 col-sm-6">
-    <div class="panel panel-default text-center">
-      <div class="panel-heading">
-        <span class="fa-stack fa-5x">
-          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-          <i class="fa fa-support fa-stack-1x fa-inverse"></i>
-        </span>
-      </div>
-      <div class="panel-body">
-        <h4>Single sourcing</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <a href="tag_single_sourcing.html" class="btn btn-primary">Learn More</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-3 col-sm-6">
-    <div class="panel panel-default text-center">
-      <div class="panel-heading">
-        <span class="fa-stack fa-5x">
-          <i class="fa fa-circle fa-stack-2x text-primary"></i>
-          <i class="fa fa-database fa-stack-1x fa-inverse"></i>
-        </span>
-    </div>
-    <div class="panel-body">
-      <h4>Formatting</h4>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-      <a href="tag_formatting.html" class="btn btn-primary">Learn More</a>
-    </div>
     </div>
   </div>
 </div>
