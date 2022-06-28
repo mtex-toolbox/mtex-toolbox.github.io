@@ -51,7 +51,7 @@ image_sliders:
   </div>
 </div>
 
-{% include slider.html selector="test_slider" %}
+{% include slider.html selector="slider1" %}
 
 <div id="slider2">
   <img src="/images/AnisotropicTheory_01.png" alt="Slide 1" />
