@@ -53,6 +53,18 @@ image_sliders:
 
 {% include slider.html selector="test_slider" %}
 
+<div id="slider2">
+  <img src="/images/AnisotropicTheory_01.png" alt="Slide 1" />
+  <img src="/images/AnisotropicTheory_02.png" alt="Slide 2" />
+  <img src="/images/AnisotropicTheory_03.png" alt="Slide 3" />
+</div>
+
+<script src="js/ideal-image-slider.js"></script>
+<script>
+  var slider2 = new IdealImageSlider.Slider('#slider2');
+  slider2.start();
+</script>
+
 <div id="grid-community-addons" class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
