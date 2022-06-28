@@ -108,60 +108,42 @@ image_sliders:
   </div>
 </div>
 
-<div id="grid-featured-examples" class="row">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">Featured Examples (1)</div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-3">
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">
-                <img src="images/AnisotropicTheory_01.png">
-              </div>
-              <div class="panel-body">
-                <h4>Anisotropic Theory 1</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <a href="tag_getting_started.html" class="btn btn-primary">Learn More</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">
-                <img src="images/AnisotropicTheory_02.png">
-              </div>
-              <div class="panel-body">
-                <h4>Anisotropic Theory 2</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <a href="tag_navigation.html" class="btn btn-primary">Learn More</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">
-                <img src="images/AnisotropicTheory_03.png">
-              </div>
-              <div class="panel-body">
-                <h4>Anisotropic Theory 3</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <a href="tag_single_sourcing.html" class="btn btn-primary">Learn More</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="panel panel-default text-center">
-              <div class="panel-heading">
-                <img src="images/AnisotropicTheory_04.png">
-              </div>
-              <div class="panel-body">
-                <h4>Anisotropic Theory 4</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                <a href="tag_formatting.html" class="btn btn-primary">Learn More</a>
-              </div>
-            </div>
-          </div>
+<div class="panel-heading">Featured Examples (3)</div>
+<div class="panel-body">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <img src="images/AnisotropicTheory_01.png">
+        </div>
+        <div class="panel-body">
+          <h4>Anisotropic Theory 1</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <a href="tag_getting_started.html" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <img src="images/AnisotropicTheory_02.png">
+        </div>
+        <div class="panel-body">
+          <h4>Anisotropic Theory 2</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <a href="tag_navigation.html" class="btn btn-primary">Learn More</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel panel-default text-center">
+        <div class="panel-heading">
+          <img src="images/AnisotropicTheory_03.png">
+        </div>
+        <div class="panel-body">
+          <h4>Anisotropic Theory 3</h4>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+          <a href="tag_single_sourcing.html" class="btn btn-primary">Learn More</a>
         </div>
       </div>
     </div>
