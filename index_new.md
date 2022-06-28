@@ -46,15 +46,13 @@ image_sliders:
     <div class="panel panel-default">
       <div class="panel-heading">Featured Examples</div>
       <div class="panel-body">
-        IMAGE SLIDER COMING SOON
+        {% include slider.html selector="slider1" %}
       </div>
     </div>
   </div>
 </div>
 
-{% include slider.html selector="slider1" %}
-
-<script src="/js/ideal-image-slider.js"></script>
+<!-- <script src="js/ideal-image-slider.js"></script> -->
 <script>
   var slider1 = new IdealImageSlider.Slider('#slider1');
   slider1.start();
