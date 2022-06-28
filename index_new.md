@@ -13,7 +13,9 @@ image_sliders:
 <div id="grid-news-paper" class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading">News</div>
+      <div class="panel-heading">
+        News&nbsp;|&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;<a href="changelog">Complete changelog</a>
+      </div>
       <div class="panel-body">
         <ul>
           <li>MTEX 5.8.1 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" download>Download</a> ・ <a href="changelog">Release Notes</a> ・ <a href="download">Installation</a></li>
@@ -22,13 +24,14 @@ image_sliders:
           <li>MTEX 5.7.0 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" download>Download</a> ・ <a href="changelog">Release Notes</a> ・ <a href="download">Installation</a></li>
           <li>MTEX GUI 2.4 by J. Hiscocks released: ・ <a href="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" download>Download</a> ・ <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" target="_blank">Announcment</a></li>
         </ul>
-        <i class="fa fa-list-alt"></i>&nbsp;<a href="changelog">Complete changelog</a>
       </div>
     </div>
   </div>
   <div class="col-md-6">
     <div class="panel panel-default">
-      <div class="panel-heading">Latest Publications</div>
+      <div class="panel-heading">
+        Latest Publications&nbsp;|&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;<a href="publications">All publication</a>
+      </div>
       <div class="panel-body">
         <ul>
           <li><a href="https://arxiv.org/pdf/2201.02103.pdf" target="_blank">The variant graph approach to improved parent grain reconstruction</a></li>
@@ -36,8 +39,6 @@ image_sliders:
           <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" target="_blank">Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere</a></li>
           <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" target="_blank">Denoising of Crystal Orientation Maps</a></li>
         </ul>
-        <i class="fa fa-book"></i>&nbsp;<a href="publications">All publication</a><br>
-        <i class="fa fa-long-arrow-right"></i>&nbsp;<a href="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" target="_blank">Researchgate Project</a>
       </div>
     </div>
   </div>
@@ -114,12 +115,8 @@ image_sliders:
 <div id="grid-requirements-licensing" class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
-      <div class="panel-heading">Featured Examples</div>
-      <div class="panel-body">
-        <ul>
-          <li><a href="function_reference">Function Reference</a></li>
-          <li><a href="documentation">Documentation</a></li>
-        </ul>
+      <div class="panel-heading">
+        Featured Examples&nbsp;|&nbsp;<i class="fa fa-angle-double-right"></i><a href="function_reference">Function Reference</a>
       </div>
     </div>
   </div>
@@ -173,6 +170,7 @@ image_sliders:
           <li><a href="https://github.com/mtex-toolbox/mtex/issues" target="_blank">report issues</a> - Every bug report is welcome.</li>
           <li><a href="https://gist.github.com/search?utf8=%E2%9C%93&q=%23mtexScript" target="_blank">community scripts</a> - see how other MTEX users have utilized MTEX. Click <a href="scripts">here</a> to see how you can share your scripts.</li>
           <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">contribute</a> - MTEX is open source and adding new features is more simple then you might think.</li>
+          <li><a href="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" target="_blank">Researchgate Project</a></li>
           <li><a href="videos">user videos explaining MTEX</a></li>
         </ul>
       </div>
