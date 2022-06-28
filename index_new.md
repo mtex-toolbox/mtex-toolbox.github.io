@@ -24,7 +24,8 @@ image_sliders:
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        News&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;<a href="changelog">Complete changelog</a>
+        News
+        <i class="fa fa-angle-double-right"></i>&nbsp;<a href="changelog">Complete changelog</a>
       </div>
       <div class="panel-body">
         <ul>
@@ -40,7 +41,8 @@ image_sliders:
   <div class="col-md-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Latest Publications&nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;<a href="publications">All publication</a>
+        Latest Publications
+        <i class="fa fa-angle-double-right"></i>&nbsp;<a href="publications">All publication</a>
       </div>
       <div class="panel-body">
         <ul>
@@ -126,7 +128,8 @@ image_sliders:
   <div class="col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Featured Examples&nbsp;<i class="fa fa-angle-double-right">&nbsp;</i><a href="function_reference">Function Reference</a>
+        Featured Examples
+        <i class="fa fa-angle-double-right"></i>&nbsp;<a href="function_reference">Function Reference</a>&nbsp;&amp;&nbsp;<a href="documentation">Documentation</a>
       </div>
     </div>
   </div>
