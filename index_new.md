@@ -56,8 +56,8 @@ image_sliders:
 
 <script src="/js/ideal-image-slider.js"></script>
 <script>
-  var slider2 = new IdealImageSlider.Slider('#slider1');
-  slider2.start();
+  var slider1 = new IdealImageSlider.Slider('#slider1');
+  slider1.start();
 </script>
 
 <div id="grid-community-addons" class="row">
