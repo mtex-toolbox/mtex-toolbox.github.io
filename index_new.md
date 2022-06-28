@@ -5,6 +5,8 @@ last_updated: 01-Jul-2022
 hide_sidebar: true
 permalink: index_new.html
 toc: false
+image_sliders:
+  - test_slider
 ---
 
 <div id="grid-news-paper" class="row">
@@ -48,6 +50,8 @@ toc: false
     </div>
   </div>
 </div>
+
+{% include slider.html selector="test_slider" %}
 
 <div id="grid-community-addons" class="row">
   <div class="col-md-6">
