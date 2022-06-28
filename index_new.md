@@ -47,16 +47,107 @@ image_sliders:
       <div class="panel-heading">Featured Examples</div>
       <div class="panel-body">
         {% include slider.html selector="slider1" %}
+        <script>new IdealImageSlider.Slider('#slider1').start();</script>
       </div>
     </div>
   </div>
 </div>
 
-<!-- <script src="js/ideal-image-slider.js"></script> -->
-<script>
-  var slider1 = new IdealImageSlider.Slider('#slider1');
-  slider1.start();
-</script>
+<div class="ideal-image-slider iis-effect-fade iis-has-bullet-nav iis-has-captions" id="slider2" style="height: 351px;">
+  <a aria-hidden="false" class="iis-slide iis-current-slide" data-actual-height="350" data-actual-width="350" data-src-2x="" data-src="https://fabianbartl.github.io/mtex-toolbox/images/AnisotropicTheory_01.png" role="tabpanel" style="transition-duration: 700ms; background-image: url(&quot;https://fabianbartl.github.io/mtex-toolbox/images/AnisotropicTheory_01.png&quot;);" title="title 1">
+    <div class="iis-caption">
+      <div class="iis-caption-title">Balloons!</div>
+      <div class="iis-caption-content">This slider has caption titles</div>
+    </div>
+  </a>
+  <a aria-hidden="true" class="iis-slide iis-next-slide" data-actual-height="350" data-actual-width="350" data-src-2x="" data-src="https://fabianbartl.github.io/mtex-toolbox/images/AnisotropicTheory_02.png" role="tabpanel" style="transition-duration: 700ms; background-image: url(&quot;https://fabianbartl.github.io/mtex-toolbox/images/AnisotropicTheory_02.png&quot;);" title="AnisotropicTheory 2">
+    <div class="iis-caption">
+      <div class="iis-caption-title">This slider uses the fade effect</div>
+      <div class="iis-caption-content">Instead of the default slide effect</div>
+    </div>
+  </a>
+  <a aria-hidden="true" class="iis-slide iis-previous-slide" data-actual-height="479" data-actual-width="297" data-src-2x="" data-src="https://fabianbartl.github.io/mtex-toolbox/images/AnisotropicTheory_03.png" href="https://fabianbartl.github.io/mtex-toolbox/AnisotropicTheory.html" role="tabpanel" style="transition-duration: 700ms; background-image: url(&quot;https://fabianbartl.github.io/mtex-toolbox/images/AnisotropicTheory_03.png&quot;);" title="AnisotropicTheory 3">
+    <div class="iis-caption">
+      <div class="iis-caption-title">Last image had no caption!</div>
+      <div class="iis-caption-content">Also, this image has no link</div>
+    </div>
+  </a>
+  <a class="iis-previous-nav"></a>
+  <a class="iis-next-nav"></a>
+  <div class="iis-bullet-nav" role="tablist">
+    <a aria-selected="true"  class="iis-bullet-active" role="tab">1</a>
+    <a aria-selected="false" class="iis-bullet-active" role="tab">2</a>
+    <a aria-selected="false" class="iis-bullet-active" role="tab">3</a>
+    <a aria-selected="false" class="iis-bullet-active" role="tab">4</a>
+  </div>
+</div>
+<script>new IdealImageSlider.Slider('#slider2').start();</script>
+
+<div class="row">
+  <div class="col-lg-12">
+      <h2 class="page-header">Knowledge Base Categories</h2>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-tree fa-stack-1x fa-inverse"></i>
+        </span>
+      </div>
+      <div class="panel-body">
+        <h4>Getting started</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <a href="tag_getting_started.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-car fa-stack-1x fa-inverse"></i>
+        </span>
+      </div>
+      <div class="panel-body">
+        <h4>Navigation</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <a href="tag_navigation.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-support fa-stack-1x fa-inverse"></i>
+        </span>
+      </div>
+      <div class="panel-body">
+        <h4>Single sourcing</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <a href="tag_single_sourcing.html" class="btn btn-primary">Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-6">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <span class="fa-stack fa-5x">
+          <i class="fa fa-circle fa-stack-2x text-primary"></i>
+          <i class="fa fa-database fa-stack-1x fa-inverse"></i>
+        </span>
+    </div>
+    <div class="panel-body">
+      <h4>Formatting</h4>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <a href="tag_formatting.html" class="btn btn-primary">Learn More</a>
+    </div>
+    </div>
+  </div>
+</div>
 
 <div id="grid-community-addons" class="row">
   <div class="col-md-6">
