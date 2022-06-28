@@ -42,7 +42,7 @@ image_sliders:
   </div>
 </div>
 
-<!--
+{% comment %}
 <div id="grid-featured-examples" class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
@@ -108,7 +108,7 @@ image_sliders:
     </div>
   </div>
 </div>
--->
+{% endcomment %}
 
 <div id="grid-requirements-licensing" class="row">
   <div class="col-md-12">
