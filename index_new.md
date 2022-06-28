@@ -21,8 +21,8 @@ image_sliders:
           <li>Manual <a href="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" target="_blank">Getting Started with MTEX for EBSD Analysis</a> by J. Hiscocks released</li>
           <li>MTEX 5.7.0 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" download>Download</a> ・ <a href="changelog">Release Notes</a> ・ <a href="download">Installation</a></li>
           <li>MTEX GUI 2.4 by J. Hiscocks released: ・ <a href="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" download>Download</a> ・ <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" target="_blank">Announcment</a></li>
-          <li><a href="changelog">Complete changelog</a>&nbsp;<i class="fa fa-list-alt"></i></li>
         </ul>
+        <i class="fa fa-list-alt"></i>&nbsp;<a href="changelog">Complete changelog</a>
       </div>
     </div>
   </div>
@@ -35,8 +35,9 @@ image_sliders:
           <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" target="_blank">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a></li>
           <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" target="_blank">Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere</a></li>
           <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" target="_blank">Denoising of Crystal Orientation Maps</a></li>
-          <li><a href="publications">All publication</a>&nbsp;<i class="fa fa-book"></i></li>
         </ul>
+        <i class="fa fa-book"></i>&nbsp;<a href="publications">All publication</a><br>
+        <i class="fa fa-long-arrow-right"></i>&nbsp;<a href="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" target="_blank">Researchgate Project</a>
       </div>
     </div>
   </div>
@@ -116,7 +117,7 @@ image_sliders:
       <div class="panel-heading">Featured Examples</div>
       <div class="panel-body">
         <ul>
-          <li><a href="function_reference">Function Reference</a>&nbsp;<i class="fa fa-sitemap"></i></li>
+          <li><a href="function_reference">Function Reference</a></li>
           <li><a href="documentation">Documentation</a></li>
         </ul>
       </div>
@@ -130,9 +131,9 @@ image_sliders:
         <img src="images/AnisotropicTheory_01.png">
       </div>
       <div class="panel-body">
-        <h4>Anisotropic Theory 1</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <a href="tag_getting_started.html" class="btn btn-primary">Learn More</a>
+        <h4>Anisotropic Theory</h4>
+        <p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor C</p>
+        <a href="AnisotropicTheory.html" class="btn btn-primary">Learn More</a>
       </div>
     </div>
   </div>
@@ -142,7 +143,7 @@ image_sliders:
         <img src="images/AnisotropicTheory_02.png">
       </div>
       <div class="panel-body">
-        <h4>Anisotropic Theory 2</h4>
+        <h4>Lorem Ipsum 1</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         <a href="tag_navigation.html" class="btn btn-primary">Learn More</a>
       </div>
@@ -154,7 +155,7 @@ image_sliders:
         <img src="images/AnisotropicTheory_03.png">
       </div>
       <div class="panel-body">
-        <h4>Anisotropic Theory 3</h4>
+        <h4>Lorem Ipsum 2</h4>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
         <a href="tag_single_sourcing.html" class="btn btn-primary">Learn More</a>
       </div>
@@ -172,7 +173,7 @@ image_sliders:
           <li><a href="https://github.com/mtex-toolbox/mtex/issues" target="_blank">report issues</a> - Every bug report is welcome.</li>
           <li><a href="https://gist.github.com/search?utf8=%E2%9C%93&q=%23mtexScript" target="_blank">community scripts</a> - see how other MTEX users have utilized MTEX. Click <a href="scripts">here</a> to see how you can share your scripts.</li>
           <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">contribute</a> - MTEX is open source and adding new features is more simple then you might think.</li>
-          <li><a href="videos" target="_blank">user videos</a></li>
+          <li><a href="videos">user videos explaining MTEX</a></li>
         </ul>
       </div>
     </div>
