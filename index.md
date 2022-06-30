@@ -1,9 +1,9 @@
 ---
 title: MTEX Toolbox
-keywords: homepage
-last_updated: 26-Jul-2022
+keywords: homepage, home, news, featured examples
+last_updated: 30-Jun-2022
 hide_sidebar: true
-permalink: index_new.html
+permalink: index
 toc: false
 ---
 
