@@ -1,9 +1,9 @@
 ---
-title: "MTEX Toolbox"
-keywords: homepage
+title: MTEX Toolbox
+search: exclude
 last_updated: 18-Jan-2022
 hide_sidebar: true
-permalink: index.html
+permalink: index_old
 toc: false
 ---
 
