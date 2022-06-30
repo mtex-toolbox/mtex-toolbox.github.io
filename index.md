@@ -144,36 +144,36 @@ image_sliders:
   <div class="col-md-4">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <img src="images/AnisotropicTheory_01.png">
+        <img src="images/featured-examples_GrainBoundaries.jpg">
       </div>
       <div class="panel-body">
-        <h4>Anisotropic Theory</h4>
-        <p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor C</p>
-        <a href="AnisotropicTheory.html" class="btn btn-primary">Learn More</a>
+        <h4>Grain Boundaries</h4>
+        <p>In this section we explain how to extract specific grain boundaries.</p>
+        <a href="BoundarySelect.html" class="btn btn-primary">Learn More</a>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <img src="images/AnisotropicTheory_02.png">
+        <img src="images/featured-examples_PoleFigures.jpg">
       </div>
       <div class="panel-body">
-        <h4>Lorem Ipsum 1</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <a href="tag_navigation.html" class="btn btn-primary">Learn More</a>
+        <h4>Pole Figures</h4>
+        <p>By default MTEX plots pole figures by drawing a circle at every measurement position of a pole figure and coloring it corresponding to the measured intensity.</p>
+        <a href="PoleFigurePlot.html" class="btn btn-primary">Learn More</a>
       </div>
     </div>
   </div>
   <div class="col-md-4">
     <div class="panel panel-default text-center">
       <div class="panel-heading">
-        <img src="images/AnisotropicTheory_03.png">
+        <img src="images/featured-examples_TensorAverages.jpg">
       </div>
       <div class="panel-body">
-        <h4>Lorem Ipsum 2</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <a href="tag_single_sourcing.html" class="btn btn-primary">Learn More</a>
+        <h4>Tensor Averages</h4>
+        <p>MTEX offers several ways to compute average material tensors from ODFs or EBSD data.</p>
+        <a href="TensorAverage.html" class="btn btn-primary">Learn More</a>
       </div>
     </div>
   </div>
@@ -187,7 +187,7 @@ image_sliders:
         <ul>
           <li><a href="https://github.com/mtex-toolbox/mtex/discussions" target="_blank">MTEX forum</a> - Questions, Discussions, Announcements.</li>
           <li><a href="https://github.com/mtex-toolbox/mtex/issues" target="_blank">report issues</a> - Every bug report is welcome.</li>
-          <li><a href="https://gist.github.com/search?utf8=%E2%9C%93&q=%23mtexScript" target="_blank">community scripts</a> - see how other MTEX users have utilized MTEX. Click <a href="scripts">here</a> to see how you can share your scripts.</li>
+          <li><a href="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc" target="_blank">community scripts</a> - see how other MTEX users have utilized MTEX. Click <a href="scripts">here</a> to see how you can share your scripts.</li>
           <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">contribute</a> - MTEX is open source and adding new features is more simple then you might think.</li>
           <li><a href="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" target="_blank">Researchgate Project</a></li>
           <li><a href="videos">user videos</a> explaining MTEX</li>
