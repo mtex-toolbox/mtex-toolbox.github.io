@@ -12,7 +12,7 @@ toc: false
     <div class="panel panel-default">
       <div class="panel-body">
         MTEX is a free Matlab toolbox for analyzing and modeling crystallographic textures by means of EBSD or pole figure data. It is developed on a free and opensource basis by an interdisciplinary <a href="people">team</a> of material scientists, geologists and mathematicians.<br>
-        <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983">
+        <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only">
       </div>
     </div>
   </div>
