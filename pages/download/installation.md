@@ -167,7 +167,7 @@ Most likely you changed the exact version and path, so do this here accordingly.
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
 
-for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst do
+for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst; do
   cd matlab/"$LIB"
   "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
     -Wl,-force_load,../../.libs/libnfft3_matlab.a \
@@ -187,7 +187,7 @@ the vesion without ```openMP```
 CC=/usr/local/Cellar/gcc/8.2.0/bin/gcc-8
 MATLABDIR=/Applications/MATLAB_R2018b.app
 
-for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst do
+for LIB in nfft nfsft nfsoft nnfft fastsum nfct nfst; do
   cd matlab/"$LIB"
   "$CC" -o .libs/lib"$LIB".mexmaci64 -bundle .libs/lib"$LIB"_la-"$LIB"mex.o \
     -Wl,-force_load,../../.libs/libnfft3_matlab.a \
