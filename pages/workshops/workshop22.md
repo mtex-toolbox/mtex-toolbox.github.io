@@ -231,11 +231,13 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ### Keynote Speakers
 
+<div markdown="span">
 * **{% include reference.html link="http://merkel.texture.rocks/" content="S&#x00e9;bastien Merkel" %}** (Université de Lille, France): *Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments*
 * **{% include reference.html link="https://www.mek.dtu.dk/" content="Wolfgang Pantleon" %}** (DTU Dänemark)
 * **{% include reference.html link="https://www.tue.nl/en/research/researchers/tijmen-vermeij/" content="Tijmen Vermeij" %}** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
 * **{% include reference.html link="https://www.ntnu.edu/employees/bjorn.sorensen" content="Bj&#x00f8;rn Eske S&#x00f8;rensen" %}** (Norwegian University of Science and Technology): *MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research*
 * **{% include reference.html link="https://www.researchgate.net/profile/Omero-Orlandini" content="Omero Orlandini" %}** (University of Colorado Boulder): *Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems*
+</div>
 
 ## Time Schedule 
 
