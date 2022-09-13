@@ -1,4 +1,11 @@
---- title: MTEX Toolbox keywords: homepage, home, news, featured examples last_updated: 30-Jun-2022 hide_sidebar: true permalink: index toc: false ---
+---
+title: MTEX Toolbox
+keywords: homepage, home, news, featured examples
+last_updated: 30-Jun-2022
+hide_sidebar: true
+permalink: index
+toc: false
+---
 
 <div id="grid-requirements-licensing" class="row">
     <div class="col-md-12">
