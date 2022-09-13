@@ -26,7 +26,8 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 News
-                <i class="fa fa-angle-double-right"></i>&nbsp;<a href="changelog">Complete changelog</a>
+                <i class="fa fa-angle-double-right"></i>&nbsp;
+                {% include reference.html link="changelog" content="Complete changelog" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -63,7 +64,8 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Latest Publications
-                <i class="fa fa-angle-double-right"></i>&nbsp;<a href="publications">All publication</a>
+                <i class="fa fa-angle-double-right"></i>&nbsp;
+                {% include reference.html link="publications" content="All publication" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -82,7 +84,9 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Featured Examples
-                <i class="fa fa-angle-double-right"></i>&nbsp;<a href="function_reference">Function&nbsp;Reference</a>&nbsp;&amp;&nbsp;<a href="documentation">Documentation</a>
+                <i class="fa fa-angle-double-right"></i>&nbsp;
+                {% include reference.html link="function_reference" content="Function Reference" %} &amp;&nbsp;
+                {% include reference.html link="documentation" content="Documentation" %}
             </div>
         </div>
     </div>
@@ -96,7 +100,7 @@ toc: false
             <div class="panel-body">
                 <h4>Grain Boundaries</h4>
                 <p>In this section we explain how to extract specific grain boundaries.</p>
-                <a href="BoundarySelect.html" class="btn btn-primary">Learn More</a>
+                {% include reference.html link="BoundarySelect.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
     </div>
@@ -108,7 +112,7 @@ toc: false
             <div class="panel-body">
                 <h4>Pole Figures</h4>
                 <p>By default MTEX plots pole figures by drawing a circle at every measurement position of a pole figure and coloring it corresponding to the measured intensity.</p>
-                <a href="PoleFigurePlot.html" class="btn btn-primary">Learn More</a>
+                {% include reference.html link="PoleFigurePlot.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
     </div>
@@ -120,7 +124,7 @@ toc: false
             <div class="panel-body">
                 <h4>Tensor Averages</h4>
                 <p>MTEX offers several ways to compute average material tensors from ODFs or EBSD data.</p>
-                <a href="TensorAverage.html" class="btn btn-primary">Learn More</a>
+                {% include reference.html link="TensorAverage.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
     </div>
@@ -132,12 +136,28 @@ toc: false
             <div class="panel-heading">Community</div>
             <div class="panel-body">
                 <ul>
-                    <li><a href="https://github.com/mtex-toolbox/mtex/discussions" target="_blank">MTEX forum</a> - Questions, Discussions, Announcements.</li>
-                    <li><a href="https://github.com/mtex-toolbox/mtex/issues" target="_blank">report issues</a> - Every bug report is welcome.</li>
-                    <li><a href="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc" target="_blank">community scripts</a> - see how other MTEX users have utilized MTEX. Click <a href="scripts">here</a> to see how you can share your scripts.</li>
-                    <li><a href="https://github.com/mtex-toolbox/mtex" target="_blank">contribute</a> - MTEX is open source and adding new features is more simple then you might think.</li>
-                    <li><a href="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" target="_blank">Researchgate Project</a></li>
-                    <li><a href="videos">user videos</a> explaining MTEX</li>
+                    <li>
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="MTEX forum" %}
+                        - Questions, Discussions, Announcements.
+                    </li>
+                    <li>
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="report issues" %}
+                        - Every bug report is welcome.
+                    </li>
+                    <li>
+                        {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc" content="community scripts" %}
+                        - see how other MTEX users have utilized MTEX. Click {% include reference.html link="scripts" content="here" %} to see how you can share your scripts.
+                    </li>
+                    <li>
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex" content="contribute" %}
+                        - MTEX is open source and adding new features is more simple then you might think.
+                    </li>
+                    <li>
+                        {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content="Researchgate Project" %}
+                    </li>
+                    <li>
+                        {% include reference.html link="videos" content="user videos" %} explaining MTEX
+                    </li>
                 </ul>
             </div>
         </div>
@@ -146,7 +166,8 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Addons
-                <i class="fa fa-angle-double-right"></i>&nbsp;<a href="addons">MTEX Based Toolboxes</a>
+                <i class="fa fa-angle-double-right"></i>&nbsp;
+                {% include reference.html link="addons" content="MTEX Based Toolboxes" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -168,9 +189,13 @@ toc: false
             <div class="panel-heading">Requirements and Licensing</div>
             <div class="panel-body">
                 <ul>
-                    <li>MTEX is free and runs in standard Matlab. For GND and Taylor computation the optimization toolbox is required.</li>
-                    <li>MTEX comes with binaries from the <a href="https://www-user.tu-chemnitz.de/~potts/nfft/" target="_blank">{% include inline_image.html file="nfft_logo.png" %}</a> which build up the core of MTEX.
-                        <!-- Read[here]() for more details how fast Fourier transforms on the sphere and in the orientation space speed up texture computations. -->
+                    <li>
+                        MTEX is free and runs in standard Matlab. For GND and Taylor computation the optimization toolbox is required.
+                    </li>
+                    <li>
+                        MTEX comes with binaries from the
+                        {% include reference.html link="https://www-user.tu-chemnitz.de/~potts/nfft/" content="{% include inline_image.html file="nfft_logo.png" %}" %}
+                        which build up the core of MTEX.
                     </li>
                 </ul>
             </div>
