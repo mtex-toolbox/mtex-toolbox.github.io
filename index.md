@@ -94,7 +94,7 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Featured Examples
-                <i class="fa fa-angle-double-right"></i>&nbsp;<a href="function_reference">Function Reference</a>&nbsp;&amp;&nbsp;<a href="documentation">Documentation</a>
+                <i class="fa fa-angle-double-right"></i>&nbsp;<a href="function_reference">Function&nbsp;Reference</a>&nbsp;&amp;&nbsp;<a href="documentation">Documentation</a>
             </div>
         </div>
     </div>
