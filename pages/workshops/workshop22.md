@@ -22,7 +22,7 @@ is one directional. Instead all participants are allowed at all time to interact
 	You are logged in.
 	{% include link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="Enter Workshop zoom session." %}
 {% endcapture %}
-{% include password_access_restriction.html content_default=par_default content_access=par_access %}
+{% include password_access_restriction.html content_default="{{par_default}}" content_access="{{par_access}}" %}
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
 Date: 21.03.2022 - 25.03.2022
