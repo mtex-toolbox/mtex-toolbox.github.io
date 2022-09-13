@@ -32,9 +32,9 @@ toc: false
                 <ul>
                     <li>
                         MTEX 5.8.1 released:
-                        ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" download>Download</a>
-                        ・ <a href="changelog">Release Notes</a>
-                        ・ <a href="download">Installation</a>
+                        ・ {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="Download" download %}
+                        ・ {% include reference.html link="changelog" content="Release Notes" %}
+                        ・ {% include reference.html link="download" content="Installation" %}
                     </li>
                     <li>
                         MTEX Online Workshop 2022:
@@ -68,20 +68,24 @@ toc: false
             <div class="panel-body">
                 <ul>
                     <li>
-                        The variant graph approach to improved parent grain reconstruction:
-                        ・ <a href="https://arxiv.org/pdf/2201.02103.pdf" download>Download</a>
+                        <a href="https://arxiv.org/pdf/2201.02103.pdf" target="_blank">
+                            The variant graph approach to improved parent grain reconstruction:
+                        </a>
                     </li>
                     <li>
-                        Parent grain reconstruction from partially or fully transformed microstructures in MTEX:
-                        ・ <a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" download>Download</a>
+                        <a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" target="_blank">
+                            Parent grain reconstruction from partially or fully transformed microstructures in MTEX:
+                        </a>
                     </li>
                     <li>
-                        Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere:
-                        ・ <a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" download>Download</a>
+                        <a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" target="_blank">
+                            Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere:
+                        </a>
                     </li>
                     <li>
-                        Denoising of Crystal Orientation Maps:
-                        ・ <a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" download>Download</a>
+                        <a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" target="_blank">
+                            Denoising of Crystal Orientation Maps:
+                        </a>
                     </li>
                 </ul>
             </div>
