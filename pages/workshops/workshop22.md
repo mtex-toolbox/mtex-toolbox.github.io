@@ -364,7 +364,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">11:00&minus;11:30</td>
 							<td style="text-align: left">K.&nbsp;Marquardt</td>
-							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth’s upper mantle</td>
+							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth's upper mantle</td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -374,7 +374,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">O.&nbsp;Orlandini</td>
-							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX’s ability to solve many problems</td>
+							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
@@ -470,7 +470,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Registration:
 
-- Please use our [registration form](https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration) to subscribe or write an email to <a href="mailto:Ralf.Hielscher@math.tu-freiberg.de">Ralf.Hielscher@math.tu-freiberg.de</a>
+- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
 - Deadline for registration is 28th of February 2022
 - Registration fee first week: students - 100 Euro, other - 200 Euro
 - Registration for second week is free
