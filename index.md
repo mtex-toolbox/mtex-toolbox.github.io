@@ -194,7 +194,8 @@ toc: false
                     </li>
                     <li>
                         MTEX comes with binaries from the
-                        {% include reference.html link="https://www-user.tu-chemnitz.de/~potts/nfft/" content="{% include inline_image.html file="nfft_logo.png" %}" %}
+                        {% capture ref_content %}{% include inline_image.html file="nfft_logo.png" %}{% endcapture %}
+                        {% include reference.html link="https://www-user.tu-chemnitz.de/~potts/nfft/" content=ref_content %}
                         which build up the core of MTEX.
                     </li>
                 </ul>
