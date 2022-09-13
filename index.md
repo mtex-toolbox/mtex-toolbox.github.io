@@ -32,7 +32,7 @@ toc: false
                 <ul>
                     <li>
                         MTEX 5.8.1 released:
-                        ・ {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="Download" download %}
+                        ・ {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="Download" download=true %}
                         ・ {% include reference.html link="changelog" content="Release Notes" %}
                         ・ {% include reference.html link="download" content="Installation" %}
                     </li>

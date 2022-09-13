@@ -19,7 +19,8 @@ is one directional. Instead all participants are allowed at all time to interact
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
 {% endcapture %}
 {% capture par_access %}
-	You are logged in. <a href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">Enter Workshop zoom session.</a>
+	You are logged in.
+	{% include link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="Enter Workshop zoom session." %}
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
 
