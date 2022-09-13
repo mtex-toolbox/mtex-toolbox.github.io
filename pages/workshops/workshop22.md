@@ -470,18 +470,11 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Registration:
 
-<ul>
-	<li>
-		Please use our
-		{% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %}
-		to subscribe or write an email to
-		{% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
-	</li>
-	<li>Deadline for registration is 28th of February 2022</li>
-	<li>Registration fee first week: students - 100 Euro, other - 200 Euro</li>
-	<li>Registration for second week is free</li>
-	<li>Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge</li>
-</ul>
+- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration"content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
+- Deadline for registration is 28th of February 2022
+- Registration fee first week: students - 100 Euro, other - 200 Euro
+- Registration for second week is free
+- Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
 ## Organizers:
 
