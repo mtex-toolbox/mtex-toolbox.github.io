@@ -20,7 +20,7 @@ is one directional. Instead all participants are allowed at all time to interact
 {% endcapture %}
 {% capture par_access %}
 	You are logged in.
-	{% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="Enter Workshop zoom session." %}
+	{% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="Enter Workshop zoom session" %}
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
 
@@ -39,25 +39,25 @@ During the first week we provide on a daily basis two morning lectures covering 
         <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 1 - General Concepts:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy">slides,</a> <a href="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" target="_blank">free video,</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf">slides</a>
+**Lecture 1 - General Concepts:**
+{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy" content="slides" class="course_material" %}<span class="course_material">, </span>
+{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="slides" %}<span class="course_material">, </span>
+{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}<span class="course_material">, </span>
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
-**Lecture 2 - Crystal Lattice:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/GfH27MesxNek5sA">slides,</a> <a class="course_material" href="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031">video 1,</a> <a class="course_material" href="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177">video 2</a>
+**Lecture 2 - Crystal Lattice:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/GfH27MesxNek5sA">slides</a> <a class="course_material" href="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031">video 1</a> <a class="course_material" href="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177">video 2</a>
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
-**Lecture 3 - Rotations and Crystal Symmetries:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides,</a> <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom seesion</a>
+**Lecture 3 - Rotations and Crystal Symmetries:** <a class="course_material" href="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN">slides</a> <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom seesion</a>
 <br>
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 <br>
 <br>
-**Exercise 1:** <a class="course_material"
-    href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom
-    session 13:00-14:00, </a><a class="course_material"
-    href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>
+**Exercise 1:** <a class="course_material" href="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09">zoom session 13:00-14:00</a> <a class="course_material" href="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m">exercises</a>
 </div>
 			</div>
         </div>
