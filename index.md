@@ -26,7 +26,8 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 News
-                <i class="fa fa-angle-double-right"></i>&nbsp;{% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -63,7 +64,8 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Latest Publications
-                <i class="fa fa-angle-double-right"></i>&nbsp;{% include reference.html link="publications" content="All&nbsp;publication" %}
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="publications" content="All&nbsp;publication" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -82,8 +84,9 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Featured&nbsp;Examples
-                <i class="fa fa-angle-double-right"></i>&nbsp;{% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
-                &amp;&nbsp;{% include reference.html link="documentation" content="Documentation" %}
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="function_reference" content="Function&nbsp;Reference" %} &amp;
+                {% include reference.html link="documentation" content="Documentation" %}
             </div>
         </div>
     </div>
@@ -163,7 +166,8 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 Addons
-                <i class="fa fa-angle-double-right"></i>&nbsp;{% include reference.html link="addons" content="MTEX&nbsp;Based&nbsp;Toolboxes" %}
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="addons" content="MTEX&nbsp;Based&nbsp;Toolboxes" %}
             </div>
             <div class="panel-body">
                 <ul>

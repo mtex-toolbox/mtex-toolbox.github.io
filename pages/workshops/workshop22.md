@@ -62,7 +62,7 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 rotation representations, Euler angles, Rodrigues vectors, visualizations, fibers, crystal symmetries, point groups, Laue groups, space groups, fundamental sectors
 <br>
 <br>
-**Exercise 1:**>
+**Exercise 1:**
 {% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="zoom session 13:00-14:00" class="course_material" %}<span class="course_material">, </span>
 {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m" content="exercises" class="course_material" download=true %}
 </div>
