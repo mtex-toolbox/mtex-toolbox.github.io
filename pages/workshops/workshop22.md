@@ -470,15 +470,22 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Registration:
 
-- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
-- Deadline for registration is 28th of February 2022
-- Registration fee first week: students - 100 Euro, other - 200 Euro
-- Registration for second week is free
-- Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
+<ul>
+	<li>
+		Please use our
+		{% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %}
+		to subscribe or write an email to
+		{% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
+	</li>
+	<li>Deadline for registration is 28th of February 2022</li>
+	<li>Registration fee first week: students - 100 Euro, other - 200 Euro</li>
+	<li>Registration for second week is free</li>
+	<li>Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge</li>
+</ul>
 
 ## Organizers:
 
-[Ralf Hielscher](https://tu-freiberg.de/fakult1/ana/hielscher) (TU Bergakademie Freiberg),
-[Rüdiger Kilian](https://geodynamics.geo.uni-halle.de/ruediger-kilian/) (Universität Halle),
-[Luiz Morales](https://structuretectonics.org/people/luiz-morales/) (ETH Zürich),
-[Frank Niessen](https://www.researchgate.net/profile/Frank-Niessen-4) (DTU Dänemark)
+{% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg),
+{% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian/" content="Rüdiger Kilian" %} (Universität Halle),
+{% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Luiz Morales" %} (ETH Zürich),
+{% include reference.html link="https://www.researchgate.net/profile/Frank-Niessen-4" content="Frank Niessen" %} (DTU Dänemark)
