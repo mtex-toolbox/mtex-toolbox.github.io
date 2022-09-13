@@ -30,11 +30,31 @@ toc: false
             </div>
             <div class="panel-body">
                 <ul>
-                    <li>MTEX 5.8.1 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" download><i class="fa fa-download"></i>&nbsp;Download</a> ・ <a href="changelog">Release Notes</a>                        ・ <a href="download">Installation</a></li>
-                    <li>MTEX Online Workshop 2022: ・ <a href="https://github.com/mtex-toolbox/mtex/discussions/1314" target="_blank">Announcement</a> ・ <a href="workshop22?">Homepage</a></li>
-                    <li>Manual <a href="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" target="_blank">Getting Started with MTEX for EBSD Analysis</a> by J. Hiscocks released</li>
-                    <li>MTEX 5.7.0 released: ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" download>Download</a> ・ <a href="changelog">Release Notes</a> ・ <a href="download">Installation</a></li>
-                    <li>MTEX GUI 2.4 by J. Hiscocks released: ・ <a href="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" download>Download</a>                        ・ <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" target="_blank">Announcment</a></li>
+                    <li>
+                        MTEX 5.8.1 released:
+                        ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" download>Download</a>
+                        ・ <a href="changelog">Release Notes</a>
+                        ・ <a href="download">Installation</a>
+                    </li>
+                    <li>
+                        MTEX Online Workshop 2022:
+                        ・ <a href="https://github.com/mtex-toolbox/mtex/discussions/1314" target="_blank">Announcement</a>
+                        ・ <a href="workshop22?">Homepage</a>
+                    </li>
+                    <li>
+                        Manual <a href="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" target="_blank">Getting Started with MTEX for EBSD Analysis</a> by J. Hiscocks released
+                    </li>
+                    <li>
+                        MTEX 5.7.0 released:
+                        ・ <a href="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" download>Download</a>
+                        ・ <a href="changelog">Release Notes</a>
+                        ・ <a href="download">Installation</a>
+                    </li>
+                    <li>
+                        MTEX GUI 2.4 by J. Hiscocks released:
+                        ・ <a href="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" download>Download</a>
+                        ・ <a href="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" target="_blank">Announcment</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -47,10 +67,22 @@ toc: false
             </div>
             <div class="panel-body">
                 <ul>
-                    <li><a href="https://arxiv.org/pdf/2201.02103.pdf" target="_blank">The variant graph approach to improved parent grain reconstruction</a></li>
-                    <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" target="_blank">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a></li>
-                    <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" target="_blank">Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere</a></li>
-                    <li><a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" target="_blank">Denoising of Crystal Orientation Maps</a></li>
+                    <li>
+                        The variant graph approach to improved parent grain reconstruction:
+                        ・ <a href="https://arxiv.org/pdf/2201.02103.pdf" download>Download</a>
+                    </li>
+                    <li>
+                        Parent grain reconstruction from partially or fully transformed microstructures in MTEX:
+                        ・ <a href="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" download>Download</a>
+                    </li>
+                    <li>
+                        Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere:
+                        ・ <a href="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" download>Download</a>
+                    </li>
+                    <li>
+                        Denoising of Crystal Orientation Maps:
+                        ・ <a href="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" download>Download</a>
+                    </li>
                 </ul>
             </div>
         </div>
