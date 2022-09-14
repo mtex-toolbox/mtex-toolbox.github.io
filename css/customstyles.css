@@ -350,10 +350,10 @@ a.accordion-toggle, a.accordion-collapsed {
 }
 
 
-.nav li > a > span:after {
+.nav li > a > span::after {
     content: '\25be';
 }
-.nav li.active > a > span:after {
+.nav li.active > a > span::after {
     content: '\25b4';
 }
 
@@ -580,7 +580,7 @@ a[data-toggle] {
 
 }
 
-.summary:before {
+.summary::before {
     content: "Summary: ";
     font-weight: bold;
 }
@@ -1175,8 +1175,14 @@ h4.panel-title {
     }
 }
 
-/* icon after link style */
-a::last-letter:after {
+/* selection color */
+::selection {
+	color: #fff;
+	background: #149983;
+}
+
+/* icon after link, actually after last letter of link to prevent breaking  */
+a::last-letter::after {
     font-family: "FontAwesome";
     font-weight: normal;
     font-style: normal;
@@ -1187,19 +1193,19 @@ a::last-letter:after {
 
 /* set FontAwesome icons */
 /* links */
-a[href*="#"]::last-letter:after         { content: "\f0c6"; } /* paperclip */
-a[href^="http://"]::last-letter:after,
-a[href^="https://"]::last-letter:after,
-a[target="_blank"]::last-letter:after   { content: "\f08e"; } /* external_link */
-a[href$=".pdf"]::last-letter:after      { content: "\f1c1"; } /* file-pdf-o */
-a[href^="mailto:"]::last-letter:after   { content: "\f0e0"; } /* email */
-a[download]::last-letter:after          { content: "\f019"; } /* download_alt */
+a[href*="#"]::last-letter::after         { content: "\f0c6"; } /* paperclip */
+a[href^="http://"]::last-letter::after,
+a[href^="https://"]::last-letter::after,
+a[target="_blank"]::last-letter::after   { content: "\f08e"; } /* external_link */
+a[href$=".pdf"]::last-letter::after      { content: "\f1c1"; } /* file-pdf-o */
+a[href^="mailto:"]::last-letter::after   { content: "\f0e0"; } /* email */
+a[download]::last-letter::after          { content: "\f019"; } /* download_alt */
 
 /* abbrevation icon */
-abbr[title]::last-letter:after { content: "\f129"; } /* info */
+abbr[title]::last-letter::after { content: "\f129"; } /* info */
 
 /* anchor-js icon */
-*:hover > .anchorjs-link::last-letter:after {
+*:hover > .anchorjs-link::last-letter::after {
     transition: color .25s linear;
     content: "\f0c6"; /* paperclip */
 }
@@ -1233,9 +1239,9 @@ abbr[title] {
 }
 
 /* no icon links */
-#toc a::last-letter:after,
-a.noCrossRef::last-letter:after,
-a.no_icon::last-letter:after {
+#toc a::last-letter::after,
+a.noCrossRef::last-letter::after,
+a.no_icon::last-letter::after {
     content:"" !important;
     padding-left: 0;
 }
