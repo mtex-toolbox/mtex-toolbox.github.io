@@ -1,7 +1,7 @@
 ---
 title: MTEX Toolbox
 keywords: homepage, home, news, featured examples
-last_updated: 30-Jun-2022
+last_updated: 14-Sep-2022
 hide_sidebar: true
 permalink: index
 toc: false
@@ -12,7 +12,7 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-body">
                 MTEX is a free Matlab toolbox for analyzing and modeling crystallographic textures by means of EBSD or pole figure data. It is developed on a free and opensource basis by an interdisciplinary
-                {% include reference.html link="people" content="<i class='fa fa-group'></i> team" %}
+                {% include reference.html link="people" content='<i class="fa fa-group"></i> team' %}
                 of material scientists, geologists and mathematicians.
                 <br>
                 <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only">
@@ -35,28 +35,29 @@ toc: false
                 <ul>
                     <li>
                         MTEX 5.8.1 released:
-                        ・ {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="changelog" content="Release Notes" %}
-                        ・ {% include reference.html link="download" content="Installation" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="Download" download=true %}
+                        ・ {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
                     <li>
                         MTEX Online Workshop 2022:
-                        ・ {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
-                        ・ {% include reference.html link="workshop22?" content="Homepage" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
+                        ・ {% include reference.html link="workshop22?" content="Workshop page" %}
                     </li>
                     <li>
-                        Manual {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" %} by J. Hiscocks released
+                        Manual
+                        {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" %}
+                        by J. Hiscocks released
                     </li>
                     <li>
                         MTEX 5.7.0 released:
-                        ・ {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="changelog" content="Release Notes" %}
-                        ・ {% include reference.html link="download" content="Installation" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" content="Download" download=true %}
+                        ・ {% include reference.html link="changelog#2" content="Release Notes" %}
                     </li>
                     <li>
                         MTEX GUI 2.4 by J. Hiscocks released:
-                        ・ {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="Download" download=true %}
+                        {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="Download" download=true %}
                         ・ {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcment" %}
+                        ・ {% include reference.html link="addons" content="All addons" %}
                     </li>
                 </ul>
             </div>
@@ -67,7 +68,7 @@ toc: false
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
                 Community
-            </div>
+           </div>
             <div class="panel-body">
                 <ul>
                     <li>
@@ -80,7 +81,7 @@ toc: false
                     </li>
                     <li>
                         {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc" content="community scripts" %}
-                        - see how other MTEX users have utilized MTEX. Click {% include reference.html link="scripts" content="here" %} to see how you can share your scripts.
+                        - see how other MTEX users have utilized MTEX.
                     </li>
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex" content="contribute" %}
@@ -106,9 +107,21 @@ toc: false
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="documentation" content="All&nbsp;Topics" %}
-                , {% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
-                , {% include reference.html link="examples" content="Examples" %}
-                , {% include reference.html link="videos" content="Videos" %}
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>
+                        {% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
+                    </li>
+                    <li>
+                        {% include reference.html link="download" content="Download" %} &amp;
+                        {% include reference.html link="download#installation" content="Installation" %}
+                    </li>
+                    <li>
+                        {% include reference.html link="examples" content="Examples" %} &amp;
+                        {% include reference.html link="videos" content="Videos" %}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -159,7 +172,7 @@ toc: false
                 <i class="fa fa-file-pdf-o"></i>
                 Latest Publications
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="publications" content="All&nbsp;publication" %}
+                {% include reference.html link="publications" content="All&nbsp;publications" %}
             </div>
             <div class="panel-body">
                 <ul>
