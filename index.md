@@ -105,10 +105,10 @@ toc: false
                 <i class="fa fa-book"></i>
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="documentation" content="All Topics" %}
-                {% include reference.html link="function_reference" content="Function&nbsp;Reference" %} &amp;
-                {% include reference.html link="examples" content="Examples" %}
-                {% include reference.html link="videos" content="Videos" %}
+                {% include reference.html link="documentation" content="All&nbsp;Topics" %}
+                , {% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
+                , {% include reference.html link="examples" content="Examples" %}
+                , {% include reference.html link="videos" content="Videos" %}
             </div>
         </div>
     </div>
