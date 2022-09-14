@@ -919,35 +919,6 @@ span.soft {
     padding:10px;
 }
 
-/* this part adds an icon after links, using FontAwesome */
-a:after {
-    font-family: "FontAwesome";
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    word-wrap: none;
-    text-decoration: none;
-    padding-left: 3px;
-}
-a[href*="#"]:after                                  { content: "\f0c6"; } /* paperclip */
-a[href^="http://"]:after, a[href^="https://"]:after { content: "\f08e"; } /* external_link */
-a[href$=".pdf"]:after                               { content: "\f1c1"; } /* file-pdf-o */
-a[href^="mailto:"]:after                            { content: "\f0e0"; } /* email */
-a[download]:after                                   { content: "\f019"; } /* download_alt */
-
-/* anchor js icon */
-*:hover > .anchorjs-link:after {
-    transition: color .25s linear;
-    content: "\f1dd"; /* paragraph */
-}
-
-/* Strip the outbound icon when this class is present */
-a.noCrossRef:after,
-a.no_icon:after {
-    content:"" !important;
-    padding-left: 0;
-}
-
 .btn-default {
     margin-bottom: 10px;
 }
@@ -1204,6 +1175,34 @@ h4.panel-title {
     }
 }
 
+/* icon after link style */
+a:after {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    word-wrap: none;
+    text-decoration: none;
+    padding-left: 3px;
+}
+
+/* set FontAwesome icons */
+/* links */
+a[href*="#"]:after                                  { content: "\f0c6"; } /* paperclip */
+a[href^="http://"]:after, a[href^="https://"]:after { content: "\f08e"; } /* external_link */
+a[href$=".pdf"]:after                               { content: "\f1c1"; } /* file-pdf-o */
+a[href^="mailto:"]:after                            { content: "\f0e0"; } /* email */
+a[download]:after                                   { content: "\f019"; } /* download_alt */
+
+/* abbrevation icon */
+abbr[title]:after { content: "\f129"; } /* info */
+
+/* anchor-js icon */
+*:hover > .anchorjs-link:after {
+    transition: color .25s linear;
+    content: "\f0c6"; /* paperclip */
+}
+
 /* design for password access restriction */
 #course_submit {
     background-color: #f5f5f5;
@@ -1220,7 +1219,7 @@ label { font-weight: normal; }
 
 /* important / override rules */
 
-/* additional design for password access restriction */
+/* hidden elements of password access restriction */
 .course_material:not(.not_hidden),
 #course_content_default:not(.not_hidden),
 #course_content_access:not(.not_hidden) { display: none !important; }
@@ -1230,5 +1229,11 @@ abbr[title] {
     cursor: help;
     border-bottom: 1px dotted #777 !important;
     text-decoration: none !important;
-    font-style: italic;
+}
+
+/* no icon links */
+a.noCrossRef:after,
+a.no_icon:after {
+    content:"" !important;
+    padding-left: 0;
 }
