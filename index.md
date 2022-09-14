@@ -56,7 +56,7 @@ toc: false
                     <li>
                         MTEX GUI 2.4 by J. Hiscocks released:
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcment" %}
+                        ・ {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" %}
                     </li>
                 </ul>
             </div>
