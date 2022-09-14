@@ -83,10 +83,12 @@ toc: false
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Featured&nbsp;Examples
+                Documentation
                 <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="documentation" content="All Topics" %}
                 {% include reference.html link="function_reference" content="Function&nbsp;Reference" %} &amp;
-                {% include reference.html link="documentation" content="Documentation" %}
+                {% include reference.html link="examples" content="Examples" %}
+                {% include reference.html link="videos" content="Videos" %}
             </div>
         </div>
     </div>
