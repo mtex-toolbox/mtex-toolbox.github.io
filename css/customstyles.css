@@ -1182,7 +1182,8 @@ h4.panel-title {
 }
 
 /* icon after link, actually after last letter of link to prevent breaking  */
-a::last-letter::after {
+:target::after,
+a::after {
     font-family: "FontAwesome";
     font-weight: normal;
     font-style: normal;
@@ -1193,21 +1194,24 @@ a::last-letter::after {
 
 /* set FontAwesome icons */
 /* links */
-a[href*="#"]::last-letter::after         { content: "\f0c6"; } /* paperclip */
-a[href^="http://"]::last-letter::after,
-a[href^="https://"]::last-letter::after,
-a[target="_blank"]::last-letter::after   { content: "\f08e"; } /* external_link */
-a[href$=".pdf"]::last-letter::after      { content: "\f1c1"; } /* file-pdf-o */
-a[href^="mailto:"]::last-letter::after   { content: "\f0e0"; } /* email */
-a[download]::last-letter::after          { content: "\f019"; } /* download_alt */
+a[href*="#"]::after         { content: "\f0c6"; } /* paperclip */
+a[href^="http://"]::after,
+a[href^="https://"]::after,
+a[target="_blank"]::after   { content: "\f08e"; } /* external_link */
+a[href$=".pdf"]::after      { content: "\f1c1"; } /* file-pdf-o */
+a[href^="mailto:"]::after   { content: "\f0e0"; } /* email */
+a[download]::after          { content: "\f019"; } /* download_alt */
 
 /* abbrevation icon */
-abbr[title]::last-letter::after { content: "\f129"; } /* info */
+abbr[title]::after { content: "\f129"; } /* info */
 
 /* anchor-js icon */
-*:hover > .anchorjs-link::last-letter::after {
+*:hover > .anchorjs-link::after {
     transition: color .25s linear;
     content: "\f0c6"; /* paperclip */
+}
+:target::after {
+    content: "\f13d"; /* anchor */
 }
 
 /* design for password access restriction */
@@ -1239,9 +1243,9 @@ abbr[title] {
 }
 
 /* no icon links */
-#toc a::last-letter::after,
-a.noCrossRef::last-letter::after,
-a.no_icon::last-letter::after {
+#toc a::after,
+a.noCrossRef::after,
+a.no_icon::after {
     content:"" !important;
     padding-left: 0;
 }
