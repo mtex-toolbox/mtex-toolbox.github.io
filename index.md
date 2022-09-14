@@ -7,7 +7,7 @@ permalink: index
 toc: false
 ---
 
-<div id="grid-requirements-licensing" class="row">
+<div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -21,7 +21,7 @@ toc: false
     </div>
 </div>
 
-<div id="grid-news-paper" class="row">
+<div class="row">
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -97,7 +97,7 @@ toc: false
     </div>
 </div>
 
-<div id="grid-requirements-licensing" class="row">
+<div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -151,7 +151,7 @@ toc: false
     </div>
 </div>
 
-<div id="grid-community-addons" class="row">
+<div class="row">
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -192,7 +192,7 @@ toc: false
     </div>
 </div>
 
-<div id="grid-requirements-licensing" class="row">
+<div class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
