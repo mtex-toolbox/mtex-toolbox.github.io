@@ -9,7 +9,7 @@ toc: false
 ---
 
 <div class="row">
-    <div class="col-md-6">
+    <div id="addons-mtex-gui" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/MTEX-GUI_screenshot.png">
@@ -30,7 +30,7 @@ toc: false
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div id="addons-stabix" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/stabix_screenshot.gif">
@@ -54,7 +54,7 @@ toc: false
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div id="addons-crystal-aligner" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/crystalAligner_logo.png">
@@ -75,7 +75,7 @@ toc: false
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div id="addons-or-tools" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/ORTools_logo.png">
@@ -100,7 +100,7 @@ toc: false
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div id="addons-mtex2gmsh" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/MTEX2Gmsh_logo.png">
@@ -121,7 +121,7 @@ toc: false
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div id="addons-phase-segmenter" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/phaseSegmenter_screenshot.png">
