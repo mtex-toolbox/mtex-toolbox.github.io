@@ -106,22 +106,9 @@ toc: false
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="documentation" content="All&nbsp;Topics" %}
-            </div>
-            <div class="panel-body">
-                <ul>
-                    <li>
-                        {% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
-                    </li>
-                    <li>
-                        {% include reference.html link="download#all-releases" content="All&nbsp;Releases" %}
-                        | {% include reference.html link="download#installation" content="Installation" %}
-                        | {% include reference.html link="download#compatibility" content="Compatibility" %}
-                    </li>
-                    <li>
-                        {% include reference.html link="examples" content="Examples" %}
-                        | {% include reference.html link="videos" content="Videos" %}
-                    </li>
-                </ul>
+                | {% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
+                | {% include reference.html link="download#installation" content="Installation" no_icon=true %}
+                | {% include reference.html link="examples" content="Examples" %}
             </div>
         </div>
     </div>
