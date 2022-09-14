@@ -62,79 +62,6 @@ toc: false
     </div>
     <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Latest Publications
-                <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="publications" content="All&nbsp;publication" %}
-            </div>
-            <div class="panel-body">
-                <ul>
-                    <li>{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="The variant graph approach to improved parent grain reconstruction" %}</li>
-                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" content="Parent grain reconstruction from partially or fully transformed microstructures in MTEX" %}</li>
-                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" content="Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere" %}</li>
-                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" content="Denoising of Crystal Orientation Maps" %}</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="grid-requirements-licensing" class="row">
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Documentation
-                <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="documentation" content="All Topics" %}
-                {% include reference.html link="function_reference" content="Function&nbsp;Reference" %} &amp;
-                {% include reference.html link="examples" content="Examples" %}
-                {% include reference.html link="videos" content="Videos" %}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <img src="images/featured-examples_GrainBoundaries.jpg">
-            </div>
-            <div class="panel-body">
-                <h4>Grain Boundaries</h4>
-                <p>In this section we explain how to extract specific grain boundaries.</p>
-                {% include reference.html link="BoundarySelect.html" content="Learn More" class="btn btn-primary" %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <img src="images/featured-examples_PoleFigures.jpg">
-            </div>
-            <div class="panel-body">
-                <h4>Pole Figures</h4>
-                <p>By default MTEX plots pole figures by drawing a circle at every measurement position of a pole figure and coloring it corresponding to the measured intensity.</p>
-                {% include reference.html link="PoleFigurePlot.html" content="Learn More" class="btn btn-primary" %}
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <img src="images/featured-examples_TensorAverages.jpg">
-            </div>
-            <div class="panel-body">
-                <h4>Tensor Averages</h4>
-                <p>MTEX offers several ways to compute average material tensors from ODFs or EBSD data.</p>
-                {% include reference.html link="TensorAverage.html" content="Learn More" class="btn btn-primary" %}
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="grid-community-addons" class="row">
-    <div class="col-md-6">
-        <div class="panel panel-default">
             <div class="panel-heading">Community</div>
             <div class="panel-body">
                 <ul>
@@ -160,6 +87,79 @@ toc: false
                     <li>
                         {% include reference.html link="videos" content="Videos" %} explaining MTEX
                     </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="grid-requirements-licensing" class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Documentation
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="documentation" content="All Topics" %}
+                {% include reference.html link="function_reference" content="Function&nbsp;Reference" %} &amp;
+                {% include reference.html link="examples" content="Examples" %}
+                {% include reference.html link="videos" content="Videos" %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/GrainTutorial.jpg">
+            </div>
+            <div class="panel-body">
+                <h4>Grain Tutorial</h4>
+                <p>A quick guide through the grain reconstruction capabilities of MTEX.</p>
+                {% include reference.html link="GrainTutorial.html" content="Learn More" class="btn btn-primary" %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/EBSDDenoising.jpg">
+            </div>
+            <div class="panel-body">
+                <h4>Denoising Orientation Maps</h4>
+                <p>In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p>
+                {% include reference.html link="EBSDDenoising.html" content="Learn More" class="btn btn-primary" %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/MaParentGrainReconstruction.jpg">
+            </div>
+            <div class="panel-body">
+                <h4>Martensite Parent Grain Reconstruction</h4>
+                <p>Here we demonstrate the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase.</p>
+                {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="grid-community-addons" class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Latest Publications
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="publications" content="All&nbsp;publication" %}
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li>{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="The variant graph approach to improved parent grain reconstruction" %}</li>
+                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" content="Parent grain reconstruction from partially or fully transformed microstructures in MTEX" %}</li>
+                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" content="Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere" %}</li>
+                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" content="Denoising of Crystal Orientation Maps" %}</li>
                 </ul>
             </div>
         </div>
