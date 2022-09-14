@@ -34,7 +34,7 @@ $( document ).ready(function() {
         
         if (a_href === null) { continue; }
 
-        if (a_href.startsWith("http") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
+        if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
     }
 });
 
