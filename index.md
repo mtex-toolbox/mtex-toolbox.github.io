@@ -25,6 +25,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <i class="fa fa-newspaper-o"></i>
                 News
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
@@ -62,7 +63,10 @@ toc: false
     </div>
     <div class="col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">Community</div>
+            <div class="panel-heading">
+                <i class="fa fa-comments-o"></i>
+                Community
+            </div>
             <div class="panel-body">
                 <ul>
                     <li>
@@ -97,6 +101,7 @@ toc: false
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <i class="fa fa-book"></i>
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="documentation" content="All Topics" %}
@@ -111,7 +116,7 @@ toc: false
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/GrainTutorial.jpg">
+                <img src="images/thumbnails/GrainTutorial.jpg">
             </div>
             <div class="panel-body">
                 <h4>Grain Tutorial</h4>
@@ -123,7 +128,7 @@ toc: false
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/EBSDDenoising.jpg">
+                <img src="images/thumbnails/EBSDDenoising.jpg">
             </div>
             <div class="panel-body">
                 <h4>Denoising Orientation Maps</h4>
@@ -135,7 +140,7 @@ toc: false
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/MaParentGrainReconstruction.jpg">
+                <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
             </div>
             <div class="panel-body">
                 <h4>Martensite Parent Grain Reconstruction</h4>
@@ -150,6 +155,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <i class="fa fa-file-pdf-o"></i>
                 Latest Publications
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="publications" content="All&nbsp;publication" %}
@@ -167,6 +173,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
+                <i class="fa fa-code-fork"></i>
                 Addons
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="addons" content="MTEX&nbsp;Based&nbsp;Toolboxes" %}
@@ -188,7 +195,10 @@ toc: false
 <div id="grid-requirements-licensing" class="row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Requirements and Licensing</div>
+            <div class="panel-heading">
+                <i class="fa fa-copyright"></i>
+                Requirements and Licensing
+            </div>
             <div class="panel-body">
                 <ul>
                     <li>
