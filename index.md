@@ -176,16 +176,16 @@ toc: false
                 <i class="fa fa-code-fork"></i>
                 Addons
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="addons" content="MTEX&nbsp;Based&nbsp;Toolboxes" %}
+                {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
             </div>
             <div class="panel-body">
                 <ul>
-                    <li>MTEX GUI</li>
-                    <li>MTEX2Gmsh</li>
-                    <li>Stabix</li>
-                    <li>crystalAligner</li>
-                    <li>ORTools</li>
-                    <li>phaseSegmenter</li>
+                    <li>{% include reference.html link="" content="MTEX GUI" %}</li>
+                    <li>{% include reference.html link="" content="MTEX2Gmsh" %}</li>
+                    <li>{% include reference.html link="" content="Stabix" %}</li>
+                    <li>{% include reference.html link="" content="crystalAligner" %}</li>
+                    <li>{% include reference.html link="" content="ORTools" %}</li>
+                    <li>{% include reference.html link="" content="phaseSegmenter" %}</li>
                 </ul>
             </div>
         </div>
