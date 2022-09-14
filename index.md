@@ -8,7 +8,7 @@ toc: false
 ---
 
 <div class="row">
-    <div class="col-md-12">
+    <div id="home-introduction" class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 MTEX is a free Matlab toolbox for analyzing and modeling crystallographic textures by means of EBSD or pole figure data. It is developed on a free and opensource basis by an interdisciplinary
@@ -23,7 +23,7 @@ toc: false
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div id="home-news" class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-newspaper-o"></i>
@@ -62,7 +62,7 @@ toc: false
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div id="home-community" class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
@@ -99,7 +99,7 @@ toc: false
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div id="home-documentation" class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-book"></i>
@@ -153,7 +153,7 @@ toc: false
 </div>
 
 <div class="row">
-    <div class="col-md-6">
+    <div id="home-latest-publications" class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-file-pdf-o"></i>
@@ -171,7 +171,7 @@ toc: false
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div id="home-addons" class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-code-fork"></i>
@@ -181,12 +181,12 @@ toc: false
             </div>
             <div class="panel-body">
                 <ul>
-                    <li>{% include reference.html link="" content="MTEX GUI" %}</li>
-                    <li>{% include reference.html link="" content="MTEX2Gmsh" %}</li>
-                    <li>{% include reference.html link="" content="Stabix" %}</li>
-                    <li>{% include reference.html link="" content="crystalAligner" %}</li>
-                    <li>{% include reference.html link="" content="ORTools" %}</li>
-                    <li>{% include reference.html link="" content="phaseSegmenter" %}</li>
+                    <li>{% include reference.html link="addons#addons-mtex-gui" content="MTEX GUI" %}</li>
+                    <li>{% include reference.html link="addons#addons-mtex2gmsh" content="MTEX2Gmsh" %}</li>
+                    <li>{% include reference.html link="addons#addons-stabix" content="Stabix" %}</li>
+                    <li>{% include reference.html link="addons#addons-crystal-aligner" content="crystalAligner" %}</li>
+                    <li>{% include reference.html link="addons#addons-or-tools" content="ORTools" %}</li>
+                    <li>{% include reference.html link="addons#addons-phase-segmenter" content="phaseSegmenter" %}</li>
                 </ul>
             </div>
         </div>
@@ -194,7 +194,7 @@ toc: false
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div id="home-requirements-and-licensing" class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-copyright"></i>
