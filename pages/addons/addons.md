@@ -25,7 +25,7 @@ toc: false
                 </p>
                 <p>
                     <i class="fa fa-home"></i>
-                    {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="ResearchGate: MTEX GUI 3pt4- An updated graphical interface for MTEX" %}
+                    {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="ResearchGate: An updated graphical interface for MTEX" %}
                 </p>
             </div>
         </div>
@@ -47,52 +47,6 @@ toc: false
                 <p>
                     <i class="fa fa-home"></i>
                     {% include reference.html link="https://stabix.readthedocs.io/en/latest/index.html" content="Read the Docs: Stabix" %}
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <img src="images/thumbnails/MTEX2Gmsh_logo.png">
-            </div>
-            <div class="panel-body">
-                <h4>MTEX2Gmsh</h4>
-                <p>
-                    allows to generate meshes from EBSD data. It is intended to perform Finite Element Analysis (FEA) at grain scale on polycrystal imaged by EBSD.
-                </p>
-                <p>
-                    <i class="fa fa-user"></i>
-                    {% include reference.html link="https://www.researchgate.net/profile/Dorian_Depriester" content="Dorian Depriester" %}
-                </p>
-                <p>
-                    <i class="fa fa-home"></i>
-                    {% include reference.html link="https://github.com/DorianDepriester/MTEX2Gmsh" content="GitHub: DorianDepriester/MTEX2Gmsh" %}
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="panel panel-default text-center">
-            <div class="panel-heading">
-                <img src="images/thumbnails/phaseSegmenter_screenshot.png">
-            </div>
-            <div class="panel-body">
-                <h4>phaseSegmenter</h4>
-                <p>
-                    enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.
-                </p>
-                <p>
-                    <i class="fa fa-user"></i>
-                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="Azdiar A. Gazder" %}
-                    , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="Frank Niessen" %}
-                </p>
-                <p>
-                    <i class="fa fa-home"></i>
-                    {% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="GitHub: frankNiessen/phaseSegmenter" %}
                 </p>
             </div>
         </div>
@@ -139,6 +93,52 @@ toc: false
                 <p>
                     <i class="fa fa-home"></i>
                     {% include reference.html link="https://www.github.com/frankNiessen/ORTools" content="GitHub: frankNiessen/ORTools" %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/thumbnails/MTEX2Gmsh_logo.png">
+            </div>
+            <div class="panel-body">
+                <h4>MTEX2Gmsh</h4>
+                <p>
+                    allows to generate meshes from EBSD data. It is intended to perform Finite Element Analysis (FEA) at grain scale on polycrystal imaged by EBSD.
+                </p>
+                <p>
+                    <i class="fa fa-user"></i>
+                    {% include reference.html link="https://www.researchgate.net/profile/Dorian_Depriester" content="Dorian Depriester" %}
+                </p>
+                <p>
+                    <i class="fa fa-home"></i>
+                    {% include reference.html link="https://github.com/DorianDepriester/MTEX2Gmsh" content="GitHub: DorianDepriester/MTEX2Gmsh" %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/thumbnails/phaseSegmenter_screenshot.png">
+            </div>
+            <div class="panel-body">
+                <h4>phaseSegmenter</h4>
+                <p>
+                    enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.
+                </p>
+                <p>
+                    <i class="fa fa-user"></i>
+                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="Azdiar A. Gazder" %}
+                    , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="Frank Niessen" %}
+                </p>
+                <p>
+                    <i class="fa fa-home"></i>
+                    {% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="GitHub: frankNiessen/phaseSegmenter" %}
                 </p>
             </div>
         </div>
