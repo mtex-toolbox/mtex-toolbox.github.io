@@ -83,10 +83,12 @@ toc: false
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Featured&nbsp;Examples
+                Documentation
                 <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="documentation" content="All Topics" %}
                 {% include reference.html link="function_reference" content="Function&nbsp;Reference" %} &amp;
-                {% include reference.html link="documentation" content="Documentation" %}
+                {% include reference.html link="examples" content="Examples" %}
+                {% include reference.html link="videos" content="Videos" %}
             </div>
         </div>
     </div>
@@ -137,11 +139,11 @@ toc: false
             <div class="panel-body">
                 <ul>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="MTEX forum" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="Forum" %}
                         - Questions, Discussions, Announcements.
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="report issues" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
                         - Every bug report is welcome.
                     </li>
                     <li>
@@ -156,7 +158,7 @@ toc: false
                         {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content="Researchgate Project" %}
                     </li>
                     <li>
-                        {% include reference.html link="videos" content="user videos" %} explaining MTEX
+                        {% include reference.html link="videos" content="Videos" %} explaining MTEX
                     </li>
                 </ul>
             </div>
