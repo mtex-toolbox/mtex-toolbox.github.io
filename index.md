@@ -114,12 +114,12 @@ toc: false
                     </li>
                     <li>
                         {% include reference.html link="download#all-releases" content="All&nbsp;Releases" %}
-                        ,     {% include reference.html link="download#installation" content="Installation" %}
-                        &amp; {% include reference.html link="download#compatibility" content="Compatibility" %}
+                        | {% include reference.html link="download#installation" content="Installation" %}
+                        | {% include reference.html link="download#compatibility" content="Compatibility" %}
                     </li>
                     <li>
-                        {% include reference.html link="examples" content="Examples" %} &amp;
-                        {% include reference.html link="videos" content="Videos" %}
+                        {% include reference.html link="examples" content="Examples" %}
+                        | {% include reference.html link="videos" content="Videos" %}
                     </li>
                 </ul>
             </div>
