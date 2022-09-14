@@ -20,6 +20,24 @@ $( document ).ready(function() {
      */
     // anchors.add('h2,h3,h4,h5');
 
+    // add target="_blank" to external links afterwards, if not set
+    var all_a_tags;
+    if (document.querySelectorAll) { all_a_tags = document.querySelectorAll("a"); }
+    else { all_a_tags = document.getElementsByTagName("a"); }
+
+    var a_tag, a_target, a_href;
+    for (var i=0; i < all_a_tags.length; i++) {
+        a_tag = all_a_tags[i];
+
+        a_target = a_tag.getAttribute("target");
+        a_href = a_tag.getAttribute("href");
+        
+        if (a_href === null) { continue; }
+
+        if ( (a_href.startsWith("https://") || a_href.startsWith("http://")) && (a_target === null) ) {
+            a_tag.setAttribute("target", "_blank");
+        }
+    }
 });
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
