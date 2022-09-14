@@ -137,11 +137,11 @@ toc: false
             <div class="panel-body">
                 <ul>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="MTEX forum" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="Forum" %}
                         - Questions, Discussions, Announcements.
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="report issues" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
                         - Every bug report is welcome.
                     </li>
                     <li>
@@ -156,7 +156,7 @@ toc: false
                         {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content="Researchgate Project" %}
                     </li>
                     <li>
-                        {% include reference.html link="videos" content="user videos" %} explaining MTEX
+                        {% include reference.html link="videos" content="Videos" %} explaining MTEX
                     </li>
                 </ul>
             </div>
