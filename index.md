@@ -67,8 +67,6 @@ toc: false
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
                 Community
-                <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="https://github.com/mtex-toolbox" content='GitHub <i class="fa fa-github"></i>' %}
           </div>
             <div class="panel-body">
                 <ul>
@@ -89,6 +87,8 @@ toc: false
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
                     <li>
+                        {% include reference.html link="https://github.com/mtex-toolbox" content='<i class="fa fa-github"></i> GitHub Repository' %}
+                        and
                         {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content="Researchgate Project" %}
                     </li>
                     <li>
