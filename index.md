@@ -67,7 +67,9 @@ toc: false
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
                 Community
-           </div>
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="https://github.com/mtex-toolbox" content='GitHub <i class="fa fa-github"></i>' %}
+          </div>
             <div class="panel-body">
                 <ul>
                     <li>
@@ -106,7 +108,7 @@ toc: false
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="documentation" content="All&nbsp;Topics" %}
-                | {% include reference.html link="function_reference" content="Function&nbsp;Reference" %}
+                | {% include reference.html link="function_reference" content="Function&nbsp;References" %}
                 | {% include reference.html link="download#installation" content="Installation" no_icon=true %}
                 | {% include reference.html link="examples" content="Examples" %}
             </div>
