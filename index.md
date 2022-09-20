@@ -159,7 +159,7 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-file-pdf-o"></i>
-                Latest Publications
+                Latest&nbsp;Publications
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="publications" content="All&nbsp;publications" %}
             </div>
@@ -177,7 +177,7 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-code-fork"></i>
-                Featured Addons
+                Featured&nbsp;Addons
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
             </div>
