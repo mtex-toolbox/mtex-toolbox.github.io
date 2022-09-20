@@ -8,7 +8,7 @@ folder: videos
 toc: false
 ---
 
-<div class="alert alert-info" role="alert">This page is not finished yet.</div>
+<div class="alert alert-info" role="alert"><div>This page is not finished yet.</div></div>
 
 The following list provides links to videos that explain MTEX.
 
