@@ -79,7 +79,7 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox" content='<i class="fa fa-github"></i> GitHub Repository' %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex" content='<i class="fa fa-github"></i> GitHub Repository' %}
                         and
                         {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content="Researchgate Project" %}
                     </li>
