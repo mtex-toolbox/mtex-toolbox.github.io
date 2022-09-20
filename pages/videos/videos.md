@@ -1,10 +1,10 @@
 ---
 title: Videos
-keywords: videos
-last_updated: 2020
+keywords: videos, video, user videos, documentation, tutorials, chinese, icotom 21, presentation
+last_updated: 1-Jan-2020
 hide_sidebar: true
 permalink: videos.html
-folder:
+folder: videos
 toc: false
 ---
 

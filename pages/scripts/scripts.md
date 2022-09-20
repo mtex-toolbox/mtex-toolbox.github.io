@@ -1,12 +1,12 @@
 ---
 title: Scripts
-layout: main
-permalink: scipts.html
-folder:
+keywords: script, gist, user script
+last_updated: 1-Jan-2020
+hide_sidebar: true
+permalink: scripts.html
+folder: scripts
 toc: false
 ---
-
-
 
 ### Scripts ###
 

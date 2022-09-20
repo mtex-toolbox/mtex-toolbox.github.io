@@ -1,7 +1,7 @@
 ---
 title: Publications
 keywords: publications
-last_updated: January 8, 2018
+last_updated: 6-Jan-2022
 hide_sidebar: true
 permalink: publications.html
 folder: publications
