@@ -1,6 +1,6 @@
 ---
 title: Scripts
-keywords: script, gist, user script
+keywords: script, gist, user scripts, community scripts, mtexScript
 last_updated: 1-Jan-2020
 hide_sidebar: true
 permalink: scripts.html
