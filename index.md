@@ -1,6 +1,6 @@
 ---
-title: 
-keywords: homepage, home, news, featured examples, mtex toolbox, community, featured addons, documentation, latest publications, requirements, licensing, licencing
+title: false
+keywords: Homepage, home, news, featured examples, mtex toolbox, community, featured addons, documentation, latest publications, requirements, licensing, licencing
 last_updated: 14-Sep-2022
 hide_sidebar: true
 permalink: index
@@ -48,7 +48,7 @@ of material scientists, geologists and mathematicians.
                     <li>
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="MTEX GUI 2.4" download=true %}
                         by J. Hiscocks released:
-                        {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" download=true %}
+                        {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" %}
                     </li>
                 </ul>
             </div>
