@@ -25,7 +25,7 @@ toc: false
                 </p>
                 <p>
                     <i class="fa fa-home"></i>
-                    {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip?origin=publication_detail" content="ResearchGate: An updated graphical interface for MTEX" download=true %}
+                    {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="ResearchGate: An updated graphical interface for MTEX" download=true %}
                 </p>
             </div>
         </div>

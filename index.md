@@ -45,7 +45,7 @@ toc: false
                     </li>
                     <li>
                         Manual
-                        {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6/links/60f4cc489541032c6d4da75e/Getting-Started-with-MTEX-for-EBSD-analysis-Rev6?origin=publication_detail" content="Getting Started with MTEX for EBSD Analysis" download=true %}
+                        {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" download=true %}
                         by J. Hiscocks released
                     </li>
                     <li>
@@ -56,7 +56,7 @@ toc: false
                     <li>
                         MTEX GUI 2.4 by J. Hiscocks released:
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip?origin=publication_detail" content="Announcement" download=true %}
+                        ・ {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" download=true %}
                     </li>
                 </ul>
             </div>
