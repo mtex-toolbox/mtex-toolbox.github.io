@@ -11,29 +11,36 @@ layout: default
 <div class="post-content">
 
     {% if page.summary %}
-        <div class="summary">{{page.summary}}</div>
+        <div class="summary">{{ page.summary }}</div>
     {% endif %}
 
-    {% unless page.toc == false %}
-    {% include toc.html %}
-    {% endunless %}
+    {% if page.toc %}
+        {% include toc.html %}
+    {% endif %}
 
 
     {% if site.github_editme_path %}
-        <a target="_blank" href="https://github.com/{{site.github_editme_path}}{{page.path}}" class="btn btn-default githubEditButton" role="button"><i class="fa fa-github fa-lg"></i> Edit me</a>
+        {% capture github_editme_link %}
+            https://github.com/{{ site.github_editme_path }}{{ page.path }}
+        {% endcapture %}
+        {% capture github_editme_content %}
+            <i class="fa fa-github fa-lg"></i> Edit me
+        {% endcapture %}
+
+        {% include reference.html link=github_editme_link content=github_editme_content class="btn btn-default githubEditButton" attr='role="button"' %}
     {% endif %}
 
     {{ content }}
 
     <div class="tags">
-        {% if page.tags != null %}
-        <b>Tags: </b>
-        {% assign projectTags = site.data.tags.allowed-tags %}
-        {% for tag in page.tags %}
-        {% if projectTags contains tag %}
-        <a href="{{ "tag_" | append: tag | append: ".html" }}" class="btn btn-default navbar-btn cursorNorm" role="button">{{page.tagName}}{{tag}}</a>
-        {% endif %}
-        {% endfor %}
+        {% if page.tags %}
+            <b>Tags: </b>
+            {% assign projectTags = site.data.tags.allowed-tags %}
+            {% for tag in page.tags %}
+                {% if projectTags contains tag %}
+                    <a href="{{ "tag_" | append: tag | append: ".html" }}" class="btn btn-default navbar-btn cursorNorm" role="button">{{ page.tagName }}{{ tag }}</a>
+                {% endif %}
+            {% endfor %}
         {% endif %}
     </div>
 
