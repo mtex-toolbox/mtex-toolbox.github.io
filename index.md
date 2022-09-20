@@ -34,14 +34,14 @@ toc: false
             <div class="panel-body">
                 <ul>
                     <li>
-                        MTEX 5.8.1 released:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="changelog#1" content="Release Notes" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="MTEX 5.8.1" download=true %}
+                        released:
+                        {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
                     <li>
-                        MTEX Online Workshop 2022:
+                        MTEX Online
+                        {% include reference.html link="workshop22?" content="Workshop 2022" %}:
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
-                        ・ {% include reference.html link="workshop22?" content="Workshop page" %}
                     </li>
                     <li>
                         Manual
@@ -49,14 +49,14 @@ toc: false
                         by J. Hiscocks released
                     </li>
                     <li>
-                        MTEX 5.7.0 released:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="changelog#2" content="Release Notes" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" content="MTEX 5.7.0" download=true %}
+                        released:
+                        {% include reference.html link="changelog#2" content="Release Notes" %}
                     </li>
                     <li>
-                        MTEX GUI 2.4 by J. Hiscocks released:
-                        {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="Download" download=true %}
-                        ・ {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" download=true %}
+                        {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="MTEX GUI 2.4" download=true %}
+                        by J. Hiscocks released:
+                        {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" download=true %}
                     </li>
                 </ul>
             </div>
