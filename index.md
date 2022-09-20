@@ -177,7 +177,7 @@ toc: false
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-code-fork"></i>
-                Addons
+                Featured Addons
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
             </div>
