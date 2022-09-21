@@ -26,31 +26,34 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul>
                     <li>
+                        9/2022 - newly designed homepage
+                    </li>
+                    <li> 3/2022 - addon 
+                        {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
+                        for parent grain reconstruction                         
+                    </li>                    
+                    <li> 3/2022
+                        {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB/data/6240e80b5e2f8c7a034418cf/MTEX-GUI-3pt5.zip" content="MTEX GUI 3.5" download=true %}
+                        by 
+                        {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks" content="J. Hiscocks" %}
+                    </li>
+                    <li>
+                        3/2022 -
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="MTEX 5.8.1" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
                     <li>
-                        MTEX Online
-                        {% include reference.html link="workshop22?" content="Workshop 2022" %}:
+                        03/2022 - 
+                        {% include reference.html link="workshop22?" content="MTEX Online Workshop" %}:
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
                     </li>
                     <li>
-                        Manual
+                        7/2021 -
                         {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" download=true %}
-                        by J. Hiscocks released
+                        by J. Hiscocks
                     </li>
-                    <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip" content="MTEX 5.7.0" download=true %}
-                        released:
-                        {% include reference.html link="changelog#2" content="Release Notes" %}
-                    </li>
-                    <li>
-                        {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX/data/5ed1b00e299bf1c67d274ede/MTEX-GUI-3pt4.zip" content="MTEX GUI 2.4" download=true %}
-                        by J. Hiscocks released:
-                        {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="Announcement" %}
-                    </li>
-                </ul>
+                 </ul>
             </div>
         </div>
     </div>
