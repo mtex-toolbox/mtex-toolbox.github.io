@@ -104,11 +104,11 @@ of material scientists, geologists and mathematicians.
                 <i class="fa fa-book"></i>
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
-                <ul class="inline">
-                    <li>{% include reference.html link="documentation" content="All&nbsp;Topics" %}</li>
-                    <li>{% include reference.html link="function_reference" content="Function&nbsp;References" %}</li>
-                    <li>{% include reference.html link="download#installation" content="Installation" no_icon=true %}</li>
-                    <li>{% include reference.html link="examples" content="Examples" %}</li>
+                <div class="ul-inline">
+                    <span class="li-inline">{% include reference.html link="documentation" content="All&nbsp;Topics" %}</span>
+                    <span class="li-inline">{% include reference.html link="function_reference" content="Function&nbsp;References" %}</span>
+                    <span class="li-inline">{% include reference.html link="download#installation" content="Installation" no_icon=true %}</span>
+                    <span class="li-inline">{% include reference.html link="examples" content="Examples" %}</span>
                 </ul>
             </div>
         </div>
@@ -158,9 +158,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-file-pdf-o"></i>
-                All&nbsp;publications
+                {% include reference.html link="publications" content="All&nbsp;publications" %}
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="publications" content="Latest&nbsp;Publications:" %}
+                Latest&nbsp;Publications:
             </div>
             <div class="panel-body">
                 <ul>
@@ -176,9 +176,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-code-fork"></i>
-                All&nbsp;Toolboxes
+                {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="addons" content="Featured&nbsp;Addons:" %}
+                Featured&nbsp;Addons:
             </div>
             <div class="panel-body">
                 <ul>
