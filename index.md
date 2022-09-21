@@ -11,8 +11,8 @@ toc: false
 {% include reference.html link="people" content='<i class="fa fa-group"></i> team' %}
 of material scientists, geologists and mathematicians.
 <br>
-<img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only">
-<!-- <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983"> -->
+<img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983">
+<!-- <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only"> -->
 
 <div class="row">
     <div id="home-news" class="col-md-6">
