@@ -158,9 +158,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-file-pdf-o"></i>
-                Latest&nbsp;Publications
+                All&nbsp;publications
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="publications" content="All&nbsp;publications" %}
+                {% include reference.html link="publications" content="Latest&nbsp;Publications:" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -176,9 +176,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-code-fork"></i>
-                Featured&nbsp;Addons
+                All&nbsp;Toolboxes
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
+                {% include reference.html link="addons" content="Featured&nbsp;Addons:" %}
             </div>
             <div class="panel-body">
                 <ul>
