@@ -12,18 +12,27 @@ If you are using MTEX for your research, please cite one of the following paper 
 
 ### 2022
 
-<ul>
-    <li>
-        <strong>The variant graph approach to improved parent grain reconstruction</strong>,
-        R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder:
-        {% include reference.html link="https://arxiv.org/abs/2201.02103" content="arXiv:2201.02103" %}.
-        {% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="download" %}
-    </li>
-</ul>
+<dl>
+    <dt>
+        The variant graph approach to improved parent grain reconstruction
+    </dt>
+    <dd>
+        R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder
+        <br>
+        {% include reference.html link="https://arxiv.org/abs/2201.02103" content="arXiv:2201.02103" %}
+        {% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="open PDF" %}
+    </dd>
 
-- **Parent grain reconstruction from partially or fully transformed microstructures in MTEX**, F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher:
-[J. Appl. Cryst. 55](https://doi.org/10.1107/S1600576721011560).
-<a href="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" title="Download PDF file">{% include inline_image.html file="icon_pdf_32x32.png" %}</a>
+    <dt>
+        Parent grain reconstruction from partially or fully transformed microstructures in MTEX
+    </dt>
+    <dd>
+        F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher
+        <br>
+        {% include reference.html link="https://doi.org/10.1107/S1600576721011560" content="J. Appl. Cryst. 55" %}
+        {% include reference.html link="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" content="open PDF" %}
+    </dd>
+</dl>
 
 #### 2021
 
