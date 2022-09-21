@@ -19,8 +19,14 @@ If you are using MTEX for your research, please cite one of the following paper 
     <dd>
         R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder
         <br>
-        {% include reference.html link="https://arxiv.org/abs/2201.02103" content="arXiv:2201.02103" %}
-        {% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="open PDF" %}
+        <ul class="inline">
+            <li>
+                {% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="open PDF" %}
+            </li>
+            <li>
+                {% include reference.html link="https://arxiv.org/abs/2201.02103" content="arXiv:2201.02103" %}
+            </li>
+        </ul>
     </dd>
 
     <dt>
