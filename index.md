@@ -86,15 +86,13 @@ of material scientists, geologists and mathematicians.
                     <li>
                         {% capture ref_content %}
                             GitHub Repository
-                            <img src="{{ "images/icons/GitHub_512px.png" }}" style="border-radius: 100%; height: 1em; vertical-align: sub;">
-                            <i class="gh-icon-inline"></i>
+                            <i class="fa fa-github"></i>
                         {% endcapture %}
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex" content=ref_content no_icon=true %}
                         and
                         {% capture ref_content %}
                             ResearchGate Project
-                            <img src="{{ "images/icons/ResearchGate_256px.png" }}" style="border-radius: 100%; height: 1em; vertical-align: sub;">
-                            <i class="rg-icon-inline"></i>
+                            <img src="{{ "images/icons/ResearchGate_256px.png" }}" class="icon-inline">
                         {% endcapture %}
                         {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content=ref_content no_icon=true %}
                     </li>
