@@ -19,9 +19,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-newspaper-o"></i>
-                News
-                <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
+                <i class="fa fa-angle-double-right"></i>
+                News:
             </div>
             <div class="panel-body">
                 <ul class="no_bullet">
@@ -84,9 +84,17 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex" content='<i class="fa fa-github"></i> GitHub Repository' %}
+                        {% capture ref_content %}
+                            GitHub Repository
+                            <i class="fa fa-github"></i>
+                        {% endcapture %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex" content=ref_content no_icon=true %}
                         and
-                        {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content="ResearchGate Project" %}
+                        {% capture ref_content %}
+                            ResearchGate Project
+                            <img src="{{ "images/icons/ResearchGate_256px.png" }}" height="15px" style="filter: grayscale(1); border-radius: 100%;">
+                        {% endcapture %}
+                        {% include reference.html link="https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software" content=ref_content no_icon=true %}
                     </li>
                     <li>
                         {% include reference.html link="videos" content="Videos" %} explaining MTEX
