@@ -77,9 +77,9 @@ If you are using MTEX for your research, please cite one of the following paper 
         R. Hielscher, C. Silbermann, E. Schmidl, J. Ihlemann
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="https://doi.org/10.1107/S1600576719009075" content="Journal of Applied Crystallography, 52" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" content="open PDF" %}</li>
-            {% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/DenoisingCrystalOrientationMaps" content='scripts <i class="fa fa-file-code-o"></i>' %}</li>
+            <li>{% include reference.html link="https://doi.org/10.1107/S1600576719009075" content="Journal of Applied Crystallography, 52" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/DenoisingCrystalOrientationMaps" content='scripts <i class="fa fa-file-code-o"></i>' %}</li>
         </ul>
     </dd>
 </dl>
@@ -94,9 +94,9 @@ If you are using MTEX for your research, please cite one of the following paper 
         R. Krakow, R. J. Bennett, D. N. Johnstone, Z. Vukmanovic, W. Solano-Alvarez, S. J. Laine, J. F. Einsle, Paul A. Midgley, C. M. F. Rae, R. Hielscher
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="https://doi.org/10.1098/rspa.2017.0274" content="Proceedings of the Royal Society A, 473, 2017" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/misori.pdf" content="open PDF" %}</li>
-            {% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/3dMisorientationSpace" content='scripts <i class="fa fa-file-code-o"></i>' %}</li>
+            <li>{% include reference.html link="https://doi.org/10.1098/rspa.2017.0274" content="Proceedings of the Royal Society A, 473, 2017" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/misori.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/3dMisorientationSpace" content='scripts <i class="fa fa-file-code-o"></i>' %}</li>
         </ul>
     </dd>
 </dl>
@@ -111,9 +111,9 @@ If you are using MTEX for your research, please cite one of the following paper 
         G. Nolze, R. Hielscher
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.1107/S1600576716012942" content="Journal of Applied Crystallography, 49, 1786-1802, 2016" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/so3Colors.pdf" content="open PDF" %}</li>
-            {% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/orientationsPerfectlyColored" content='scripts <i class="fa fa-file-code-o"></i>' %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.1107/S1600576716012942" content="Journal of Applied Crystallography, 49, 1786-1802, 2016" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/so3Colors.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/orientationsPerfectlyColored" content='scripts <i class="fa fa-file-code-o"></i>' %}</li>
         </ul>
     </dd>
 </dl>
@@ -128,8 +128,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         D. Mainprice, F. Bachmann, R. Hielscher, H. Schaeben
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.1144/SP409.8" content="In: Faulkner, D. R., Mariani, E. & Mecklenburgh, J. (eds) Rock Deformation from Field, Experiments and Theory: A Volume in Honour of Ernie Rutter. Geological Society, London, Special Publications, 409, 2014" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/DescriptiveTools.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.1144/SP409.8" content="In: Faulkner, D. R., Mariani, E. & Mecklenburgh, J. (eds) Rock Deformation from Field, Experiments and Theory: A Volume in Honour of Ernie Rutter. Geological Society, London, Special Publications, 409, 2014" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/DescriptiveTools.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 
@@ -140,8 +140,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         D. Mainprice, F. Bachmann, R. Hielscher, H. Schaeben, G. E Lloyd
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/doi:10.1144/SP409.2" content="Geological Society, London, Special Publications, 409, 2014" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/piezo.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/doi:10.1144/SP409.2" content="Geological Society, London, Special Publications, 409, 2014" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/piezo.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 </dl>
@@ -156,8 +156,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         D. Mainprice, R.Hielscher, H. Schaeben: in Prior, D.J., Rutter, E.H., Tatham, D. J. (eds)
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://link.aps.org/doi/10.1144/SP360.10" content="Deformation Mechanisms, Rheology and Tectonics: Microstructures, Mechanics and Anisotropy. Geological Society, London, Special Publications, 360, 175-192, 2011" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/tensors.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://link.aps.org/doi/10.1144/SP360.10" content="Deformation Mechanisms, Rheology and Tectonics: Microstructures, Mechanics and Anisotropy. Geological Society, London, Special Publications, 360, 175-192, 2011" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/tensors.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 
@@ -168,8 +168,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         F.Bachmann, R. Hielscher, H. Schaeben
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.1016/j.ultramic.2011.08.002" content="Ultramicroscopy, 111, 1720-1733, 2011" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/grains.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.1016/j.ultramic.2011.08.002" content="Ultramicroscopy, 111, 1720-1733, 2011" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/grains.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 </dl>
@@ -184,8 +184,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         F. Bachmann, R. Hielscher, P. E. Jupp, W. Pantleon, H. Schaeben and E. Wegert
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.1107/S002188981003027X" content="J. Appl. Cryst., 43, 2010." %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/JAC43_CG5145.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.1107/S002188981003027X" content="J. Appl. Cryst., 43, 2010." %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/JAC43_CG5145.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 
@@ -196,8 +196,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         F. Bachmann, R. Hielscher, H. Schaeben
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.4028/www.scientific.net/SSP.160.63" content="Solid State Phenomena, 160, 63-68, 2010" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/mtex.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.4028/www.scientific.net/SSP.160.63" content="Solid State Phenomena, 160, 63-68, 2010" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/mtex.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 
@@ -208,8 +208,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         R. Hielscher, H. Schaeben, H. Siemes
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.1007/s11004-010-9271-z" content="Math. Geosci., 42, 395-375, 2010" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/hematite.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.1007/s11004-010-9271-z" content="Math. Geosci., 42, 395-375, 2010" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/hematite.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 </dl>
@@ -224,8 +224,8 @@ If you are using MTEX for your research, please cite one of the following paper 
         Hielscher, Schaeben
         <br>
         <ul class="inline no_bullet">
-            {% include reference.html link="http://dx.doi.org/10.1107/S0021889808030112" content="J. of Appl. Cryst., 41(6), 2008" %}</li>
-            {% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/mtex_paper.pdf" content="open PDF" %}</li>
+            <li>{% include reference.html link="http://dx.doi.org/10.1107/S0021889808030112" content="J. of Appl. Cryst., 41(6), 2008" %}</li>
+            <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/mtex_paper.pdf" content="open PDF" %}</li>
         </ul>
     </dd>
 </dl>
