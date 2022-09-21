@@ -19,7 +19,7 @@ If you are using MTEX for your research, please cite one of the following paper 
     <dd>
         R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder
         <br>
-        <ul class="inline">
+        <ul class="inline no_bullet">
             <li>
                 {% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="open PDF" %}
             </li>

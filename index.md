@@ -24,7 +24,7 @@ of material scientists, geologists and mathematicians.
                 {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
             </div>
             <div class="panel-body">
-                <ul>
+                <ul class="no_bullet">
                     <li>
                         9/22 &minus; newly designed homepage
                     </li>
