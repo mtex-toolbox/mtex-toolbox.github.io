@@ -117,7 +117,7 @@ of material scientists, geologists and mathematicians.
                     <span class="li-inline">{% include reference.html link="function_reference" content="Function&nbsp;References" %}</span>
                     <span class="li-inline">{% include reference.html link="download#installation" content="Installation" no_icon=true %}</span>
                     <span class="li-inline">{% include reference.html link="examples" content="Examples" %}</span>
-                </ul>
+                </div>
             </div>
         </div>
     </div>
