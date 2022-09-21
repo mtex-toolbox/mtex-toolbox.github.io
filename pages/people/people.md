@@ -13,7 +13,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/ralf-hielscher.jpg' }}" alt="Picture of Ralf Hielscher" max-width='120'%}
+                    {% include image.html file="profiles/ralf-hielscher.jpg" alt="Picture of Ralf Hielscher" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -35,7 +35,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/ruediger-kilian.jpg' }}" alt="Picture of Rüdiger Kilian" max-width='120'%}
+                    {% include image.html file="profiles/ruediger-kilian.jpg" alt="Picture of Rüdiger Kilian" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -59,7 +59,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/david-mainprice.jpg' }}" alt="Picture of David Mainprice" max-width='120'%}
+                    {% include image.html file="profiles/david-mainprice.jpg" alt="Picture of David Mainprice" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -80,7 +80,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/florian-bachmann.jpg' }}" alt="Picture of Florian Bachmann" max-width='120'%}
+                    {% include image.html file="profiles/florian-bachmann.jpg" alt="Picture of Florian Bachmann" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -105,7 +105,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/felix-bartel.jpg' }}" alt="Picture of Felix Bartel" max-width='120'%}
+                    {% include image.html file="profiles/felix-bartel.jpg" alt="Picture of Felix Bartel" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -127,7 +127,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/bjorn-eske-soerensen.jpg' }}" alt="Picture of Bjoern Eske Soerensen" max-width='120'%}
+                    {% include image.html file="profiles/bjorn-eske-soerensen.jpg" alt="Picture of Bjoern Eske Soerensen" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -153,7 +153,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/tuomo-nyyssoenen.jpg' }}" alt="Picture of Tuomo Nyyssoenen"
+                    {% include image.html file="profiles/tuomo-nyyssoenen.jpg" alt="Picture of Tuomo Nyyssoenen"
                     max-width='120'%}
                 </td>
                 <td valign="top">
@@ -172,7 +172,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/frank-niessen.jpg' }}" alt="Picture of Frank Niessen" max-width='120'%}
+                    {% include image.html file="profiles/frank-niessen.jpg" alt="Picture of Frank Niessen" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
@@ -196,7 +196,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/oliver-kent-johnson.jpg' }}" alt="Picture of Oliver kent Johnson"
+                    {% include image.html file="profiles/oliver-kent-johnson.jpg" alt="Picture of Oliver kent Johnson"
                     max-width='120'%}
                 </td>
                 <td valign="top">
@@ -213,7 +213,7 @@ toc: false
         <table border='0' cellpadding='10'>
             <tr>
                 <td width="140" valign="top">
-                    {% include image.html file="{{ 'images/profiles/fabian-bartl.jpg' }}" alt="Picture of Fabian Bartl" max-width='120'%}
+                    {% include image.html file="profiles/fabian-bartl.jpg" alt="Picture of Fabian Bartl" max-width='120'%}
                 </td>
                 <td valign="top">
                     <p>
