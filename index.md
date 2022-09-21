@@ -62,7 +62,7 @@ of material scientists, geologists and mathematicians.
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
                 Community
-          </div>
+            </div>
             <div class="panel-body">
                 <ul>
                     <li>
