@@ -19,9 +19,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-newspaper-o"></i>
-                {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
+                News
                 <i class="fa fa-angle-double-right"></i>
-                News:
+                {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
             </div>
             <div class="panel-body">
                 <ul class="no_bullet">
@@ -63,7 +63,7 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
-                Community:
+                Community
             </div>
             <div class="panel-body">
                 <ul>
@@ -167,9 +167,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-file-pdf-o"></i>
-                {% include reference.html link="publications" content="All&nbsp;publications" %}
+                Latest&nbsp;Publications
                 <i class="fa fa-angle-double-right"></i>
-                Latest&nbsp;Publications:
+                {% include reference.html link="publications" content="All&nbsp;publications" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -185,9 +185,9 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-code-fork"></i>
-                {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
+                Featured&nbsp;Addons
                 <i class="fa fa-angle-double-right"></i>
-                Featured&nbsp;Addons:
+                {% include reference.html link="addons" content="All&nbsp;Toolboxes" %}
             </div>
             <div class="panel-body">
                 <ul>
@@ -208,7 +208,7 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-copyright"></i>
-                Requirements and Licensing:
+                Requirements and Licensing
             </div>
             <div class="panel-body">
                 <ul>
