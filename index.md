@@ -63,7 +63,7 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-comments-o"></i>
-                Community
+                Community:
             </div>
             <div class="panel-body">
                 <ul>
@@ -120,6 +120,7 @@ of material scientists, geologists and mathematicians.
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-default text-center">
@@ -205,7 +206,7 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-copyright"></i>
-                Requirements and Licensing
+                Requirements and Licensing:
             </div>
             <div class="panel-body">
                 <ul>
