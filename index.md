@@ -42,15 +42,10 @@ scientists, geologists and mathematicians.
    source and adding new features is more simple then you might think.
 
 
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage)
-
+![visitors](https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage)&nbsp;
+![](https://img.shields.io/github/stars/mtex-toolbox/mtex?style=social)&nbsp;
 ![](https://img.shields.io/github/languages/top/mtex-toolbox/mtex)&nbsp;
-4
-![](https://img.shields.io/github/v/release/mtex-toolbox/mtex)&nbsp;
-5
-[![contributions welcome](https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=0059b3&style=flat-square)](https://github.com/mtex-toolbox/mtex/blob/master/CONTRIBUTING.md)&nbsp;
-7
 ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/total)&nbsp;
-8
 ![](https://img.shields.io/github/contributors/mtex-toolbox/mtex)&nbsp;
-![](https://img.shields.io/github/stars/:user/:repo?style=social)
+[![ResearchGate Badge](https://img.shields.io/badge/Research-Gate-9cf)](https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software)
+
