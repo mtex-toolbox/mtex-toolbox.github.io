@@ -1,9 +1,17 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160 }}{% endif %}">
-<meta name="keywords" content="{{page.tags}}{% if page.tags %}, {% endif %} {{page.keywords}}">
-<title>{{ page.title }} | {{ site.site_title }}</title>
+<meta name="keywords" content="{{page.tags}}{% if page.tags %}, {% endif %}{{page.keywords}}">
+
+{% if page.title %}
+  {% assign title = page.title | strip | escape %}
+{% else %}
+  {% assign title = page.keywords | split: ',' | first %}
+{% endif %}
+<title>{{ title }} | {{ site.site_title }}</title>
+
 <link rel="stylesheet" href="{{ "css/syntax.css" }}">
 
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -17,6 +25,7 @@
 <link rel="stylesheet" href="css/boxshadowproperties.css">
 
 <!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/theme-mtex.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -59,3 +68,4 @@
   });
 </script>-->
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+

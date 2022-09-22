@@ -8,12 +8,24 @@ search: exclude
 	{% for page in site.pages %}
 		{% unless page.search == "exclude" %}
 			{
-				"title"			: "{{ page.title | strip | escape }}",
-				"url"			: "{{ page.url | remove: '/' }}",
-				"path"			: "{{ page.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
-				"date"			: "{{ page.last_updated | date_to_xmlschema | date: '%b %d, %Y' }}",
-				"keywords"		: "{{ page.keywords }}",
-				"summary"		: "{{ page.summary | strip | escape | truncate: 200 }}"
+				{% if page.title %}
+					{% assign title = page.title | strip | escape %}
+				{% else %}
+					{% assign title = page.keywords | split: ',' | first %}
+				{% endif %}
+
+				{% assign url = page.url | remove: '/' %}
+				{% assign path = page.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' %}
+				{% assign date = page.last_updated | date_to_xmlschema | date: '%b %d, %Y' %}
+				{% assign keywords = page.keywords %}
+				{% assign summary = page.summary | strip | escape | truncate: 200 %}
+
+				"title"			: "{{ title }}",
+				"url"			: "{{ url }}",
+				"path"			: "{{ path }}",
+				"date"			: "{{ date }}",
+				"keywords"		: "{{ keywords }}",
+				"summary"		: "{{ summary }}"
 			}
 			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
 		{% endunless %}
@@ -22,12 +34,19 @@ search: exclude
 	{% for post in site.posts %}
 		{% unless post.published == false %}
 			{
-				"title"			: "{{ post.title | strip | escape }}",
-				"url"			: "{{ post.url | remove: '/' }}",
-				"path"			: "{{ post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' }}",
-				"date"			: "{{ post.date | date_to_xmlschema | date: '%b %d, %Y' }}",
-				"tags"			: "{{ post.tags }}",
-				"categories"	: "{{ post.categories }}"
+				{% assign title = post.title | strip | escape %}
+				{% assign url = post.url | remove: '/' %}
+				{% assign path = post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' %}
+				{% assign date = post.date | date_to_xmlschema | date: '%b %d, %Y' %}
+				{% assign tags = post.tags %}
+				{% assign categories = post.categories %}
+
+				"title"			: "{{ title }}",
+				"url"			: "{{ url }}",
+				"path"			: "{{ path }}",
+				"date"			: "{{ date }}",
+				"tags"			: "{{ tags }}",
+				"categories"	: "{{ categories }}"
 			}
 			{% unless forloop.last %},{% endunless %}
 		{% endunless %}

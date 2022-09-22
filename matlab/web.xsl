@@ -184,12 +184,23 @@ To make changes, update the MATLAB code and republish this document.
 <xsl:template match="tt">
   <code class="language-plaintext highlighter-rouge"><xsl:apply-templates/></code>
 </xsl:template>
-<xsl:template match="a">
-  <a>
-    <xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>
-    <xsl:apply-templates/>
-  </a>
+
+<xsl:template match="img[@class='equation']">
+  {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
 </xsl:template>
+
+<xsl:template match="img">
+<center>
+{% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
+</center>
+</xsl:template>
+
+<!-- use refernce.html to generate a-tags -->
+<xsl:template match="a">
+  <!-- gar kein plan, ob das so funktioniert: -->
+  {% include reference.html link="<xsl:attribute name="href"><xsl:value-of select="@href"/></xsl:attribute>" content="<xsl:apply-templates/>" %}
+</xsl:template>
+
 <xsl:template match="html">
     <xsl:value-of select="@text" disable-output-escaping="yes"/>
 </xsl:template>
