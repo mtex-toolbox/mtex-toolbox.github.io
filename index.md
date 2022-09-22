@@ -13,6 +13,11 @@ of material scientists, geologists and mathematicians.
 <br>
 <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983">
 <!-- <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only"> -->
+![](https://img.shields.io/github/languages/top/mtex-toolbox/mtex)&nbsp;
+![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/total)&nbsp;
+![](https://img.shields.io/github/contributors/mtex-toolbox/mtex)&nbsp;
+[![ResearchGate Badge](https://img.shields.io/badge/Research-Gate-9cf)](https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software)
+
 
 <div class="row">
     <div id="home-news" class="col-md-6">
@@ -83,6 +88,7 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex" content="contribute" %}
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
+					<!--
                     <li>
                         {% capture ref_content %}
                             GitHub Repository
@@ -98,7 +104,7 @@ of material scientists, geologists and mathematicians.
                     </li>
                     <li>
                         {% include reference.html link="videos" content="Videos" %} explaining MTEX
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
@@ -116,6 +122,7 @@ of material scientists, geologists and mathematicians.
                 | {% include reference.html link="function_reference" content="Function&nbsp;References" %}
                 | {% include reference.html link="download#installation" content="Installation" no_icon=true %}
                 | {% include reference.html link="examples" content="Examples" %}
+                | {% include reference.html link="videos" content="Videos" %}
             </div>
         </div>
     </div>
