@@ -1,14 +1,14 @@
 ---
 title: Download
-keywords: download
-last_updated: January 8, 2018
+keywords: download, installation, all releases, compatibility
+last_updated: 14-Sep-2022
 hide_sidebar: true
-permalink: download.html
+permalink: download
 folder: download
 toc: false
 ---
 
-### Installation ###
+## Installation
 
 1. download and extract the zip file to an arbitrary folder
 2. start Matlab (version 2016b or newer required - older versions have not been tested)
@@ -17,11 +17,9 @@ toc: false
 5. click one of the menu items to import data or to consult the documentation
 
 In case you experience any problems, especiall on Mac OSX, have a look at our
-[trouble shooting page](installation)
+{% include reference.html link="installation" content='<i class="fa fa-exclamation-triangle"></i> trouble shooting page' %}
 
-
-### Downloads ###
-
+## All Releases
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
@@ -48,9 +46,14 @@ File Name  |||  Release Date||| Comments ||| Downloads
 [**mtex-3.5.0.zip**](http://mtex.googlecode.com/files/mtex-3.5.0.zip) ||| December 2013   ||| minor release, [changelog]()||| 2398
 [**mtex-3.4.2.zip**](http://mtex.googlecode.com/files/mtex-3.4.2.zip) ||| June 2013       ||| minor release, [changelog]()||| 1660
 
-A full list of previous releases and downloads can be found [here](http://code.google.com/p/mtex/downloads/list).
+A full list of previous releases and downloads can be found
+{% include reference.html link="http://code.google.com/p/mtex/downloads/list" content="here" %}.
 
-Since MTEX is a MATLAB toolbox, <a href="http://www.mathworks.com">MATLAB</a> has to be installed in order to use MTEX. It works fine with the student version and does not require any additional toolboxes, addons or packages. There are some very few exceptions like GND and Taylor computation that currently require the optimization toolbox to be installed. Check the table below to see whether MTEX will run with your Matlab version.
+## Compatibility
+
+Since MTEX is a MATLAB toolbox,
+{% include reference.html link="http://www.mathworks.com" content="MATLAB" %}
+has to be installed in order to use MTEX. It works fine with the student version and does not require any additional toolboxes, addons or packages. There are some very few exceptions like GND and Taylor computation that currently require the optimization toolbox to be installed. Check the table below to see whether MTEX will run with your Matlab version.
 
 | Matlab | 2018 | 2017 | 2016 | 2015 | 2014 | 2013 | 2012 | 2011 | 2010 |
 |--------|-------|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -61,7 +64,6 @@ Since MTEX is a MATLAB toolbox, <a href="http://www.mathworks.com">MATLAB</a> ha
 |MTEX 4.0|  | | | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) |
 |MTEX 3.5|  | | | | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> |
 |MTEX 3.3|  | | | | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> |
-
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

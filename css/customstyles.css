@@ -1,3 +1,6 @@
+
+@import url("theme.css");
+
 body {
     font-size:15px;
 }
@@ -258,11 +261,11 @@ div#toc ul li ul {
 
 }
 
-div#toc ul li ul li::before {
+div#toc ul li ul li:before {
     content: "–  ";
 }
 
-div#toc >ul::before {
+div#toc >ul:before {
     content: "Table of Contents";
     font-weight: 500;
     color: #555;
@@ -822,7 +825,7 @@ span.soft {
 }
 
 .githubEditButton {
-    margin-bottom:7px;
+    margin-bottom: 7px;
 }
 
 .endpoint {
@@ -913,34 +916,10 @@ span.soft {
     }
 }
 
-*:hover > .anchorjs-link {
-    transition: color .25s linear;
-    text-decoration: none;
-}
-
 .kbCaption {
     color: white;
     background-color: #444;
     padding:10px;
-}
-
-/* this part adds an icon after external links, using FontAwesome*/
-a[href^="http://"]:after, a[href^="https://"]:after {
-    content: "\f08e";
-    font-family: FontAwesome;
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: none;
-    padding-left: 3px;
-}
-
-/* Strip the outbound icon when this class is present */
-a[href].noCrossRef::after,
-a.no_icon:after
- {
-    content:"" !important;
-    padding-left: 0;
 }
 
 .btn-default {
@@ -1197,22 +1176,96 @@ h4.panel-title {
     .collapse.in{
         display:block !important;
     }
+    .post-content > p:first-of-type {
+        margin-top: 1em;
+    }
 }
 
-/* design for password access restriction */
-#course_submit {
-	background-color: #f5f5f5;
-	border: 1px #ddd solid;
-	border-radius: 3px;
-	border-collapse: border-box;
-	padding: 5px 10px 5px 7px;
-	color: #248ec2;
-	text-decoration: none;
+/* color of selected text */
+::selection {
+	color: #fff;
+	background: #149983;
 }
 
-label { font-weight: normal; }
-#course_submit:hover { background-color: #f0f0f0; }
+/* icon after link  */
+.ul-inline > .li-inline:not(:first-of-type):before,
+abbr[title]:after,
+:hover > .anchorjs-link:after,
+a:after {
+    font-family: "FontAwesome";
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+    padding-left: 3px;
+}
 
+/* set FontAwesome icons */
+/* links */
+a[href*="#"]:after                             { content: "\f0c6"; } /* paperclip */
+a[href*="://"]:after, a[target="_blank"]:after { content: "\f08e"; } /* external_link */
+a[href$=".pdf"]:after                          { content: "\f1c1"; } /* file-pdf-o */
+a[href*="videocampus.sachsen.de"]:after        { content: "\f008"; } /* film */
+a[href^="mailto:"]:after                       { content: "\f0e0"; } /* email */
+a[download]:after                              { content: "\f019"; } /* download_alt */
+
+/* download icon for only downloadable file types (without download attribute) */
+a[href$=".zip"]:after { content: "\f019"; } /* download_alt */
+
+/* abbrevation icon */
+abbr[title]:after { content: "\f129"; } /* info */
+
+/* anchor-js icon */
+:hover > .anchorjs-link:after {
+    transition: color .25s linear;
+    content: "\f0c6"; /* paperclip */
+}
+
+/* icon inline with text */
+.icon-inline {
+    border-radius: 100%;
+    vertical-align: sub;
+}
+
+/* inline list with font awesome separator */
+.ul-inline > .li-inline:not(:first-of-type):before {
+    content: "\f111"; /* circle */
+    font-size: 30%;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+/* -------------------------- */
+/* important / override rules */
+/* -------------------------- */
+
+/* icon inline with text */
+.icon-inline { height: 1em !important; }
+
+/* list without bullets */
+ul.no_bullet {
+    list-style-position: inside;
+    list-style-type: none;
+    padding-left: 0;
+}
+
+/* hidden elements of password access restriction */
 .course_material:not(.not_hidden),
 #course_content_default:not(.not_hidden),
-#course_content_access:not(.not_hidden) { display: none !important; }
+#course_content_access:not(.not_hidden) { display: none; }
+
+/* override abbreviation style */
+abbr[title] {
+    cursor: help;
+    border-bottom: 1px dotted var(--gray);
+    text-decoration: none;
+}
+
+/* no icon links */
+#toc a:after,
+a.noCrossRef:after,
+a.no_icon:after {
+    content: "";
+    padding-left: 0;
+}

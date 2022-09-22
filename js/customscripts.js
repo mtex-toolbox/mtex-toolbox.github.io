@@ -18,8 +18,24 @@ $( document ).ready(function() {
     /**
      * AnchorJS
      */
-    anchors.add('h2,h3,h4,h5');
+    // anchors.add('h2,h3,h4,h5');
 
+    // add target="_blank" to external links afterwards, if not set
+    var all_a_tags;
+    if (document.querySelectorAll) { all_a_tags = document.querySelectorAll("a"); }
+    else { all_a_tags = document.getElementsByTagName("a"); }
+
+    var a_tag, a_target, a_href;
+    for (var i=0; i < all_a_tags.length; i++) {
+        a_tag = all_a_tags[i];
+
+        a_target = a_tag.getAttribute("target");
+        a_href = a_tag.getAttribute("href");
+        
+        if (a_href === null) { continue; }
+
+        if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
+    }
 });
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
@@ -81,3 +97,8 @@ function showCourseMaterial(showMaterial=true) {
 		}
 	}
 }
+
+// minified cookie functions
+function setCookie(e,t,a=1,s="h"){const c=new Date;let i=1;switch(s){case"y":i=31557600;break;case"d":i=86400;break;case"m":i=60;break;case"s":i=1;break;case"h":default:i=3600}c.setTime(c.getTime()+a*i*1e3);let o="expires="+c.toUTCString();document.cookie=e+"="+t+";"+o+";path=/"}
+function getCookie(e){let o=e+"=",t=document.cookie.split(";");for(let e=0;e<t.length;e++){let i=t[e];for(;" "==i.charAt(0);)i=i.substring(1);if(0==i.indexOf(o))return i.substring(o.length,i.length)}return null}
+
