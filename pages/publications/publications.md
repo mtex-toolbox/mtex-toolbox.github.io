@@ -24,7 +24,6 @@ If you are using MTEX for your research, please cite one of the following paper 
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.mtla.2022.101399" content="Materialia 22" %}</span>
         </div>
     </dd>
-
     <dt>
         {% include reference.html link="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" 
 		content="Parent grain reconstruction from partially or fdivly transformed microstructures in MTEX" %}
@@ -34,6 +33,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         <br>
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1107/S1600576721011560" content="J. Appl. Cryst. 55" %}</span>
+            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/ParentGrainReconstruction" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>			
         </div>
     </dd>
 </dl>
@@ -66,7 +66,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.divtramic.2019.112836" content="divtramicroscopy" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" content="open PDF" %}</span>
-            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/GazingAtCrystalBalls" content='scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
+            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/GazingAtCrystalBalls" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
         </div>
     </dd>
     
@@ -79,7 +79,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1107/S1600576719009075" content="Journal of Applied Crystallography, 52" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" content="open PDF" %}</span>
-            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/DenoisingCrystalOrientationMaps" content='scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
+            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/DenoisingCrystalOrientationMaps" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
         </div>
     </dd>
 </dl>
@@ -96,7 +96,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1098/rspa.2017.0274" content="Proceedings of the Royal Society A, 473, 2017" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/misori.pdf" content="open PDF" %}</span>
-            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/3dMisorientationSpace" content='scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
+            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/3dMisorientationSpace" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
         </div>
     </dd>
 </dl>
@@ -113,7 +113,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="http://dx.doi.org/10.1107/S1600576716012942" content="Journal of Applied Crystallography, 49, 1786-1802, 2016" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/so3Colors.pdf" content="open PDF" %}</span>
-            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/orientationsPerfectlyColored" content='scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
+            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/orientationsPerfectlyColored" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
         </div>
     </dd>
 </dl>
