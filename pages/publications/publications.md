@@ -20,20 +20,20 @@ If you are using MTEX for your research, please cite one of the following paper 
         R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder
         <br>
         <div class="ul-inline">
-            <span class="li-inline">{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="open PDF" %}</span>
-            <span class="li-inline">{% include reference.html link="https://arxiv.org/abs/2201.02103" content="arXiv:2201.02103" %}</span>
+            <!--<span class="li-inline">{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="open PDF" %}</span>-->
+            <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.mtla.2022.101399" content="Materialia 22" %}</span>
         </div>
     </dd>
 
     <dt>
-        Parent grain reconstruction from partially or fdivly transformed microstructures in MTEX
+        {% include reference.html link="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" 
+		content="Parent grain reconstruction from partially or fdivly transformed microstructures in MTEX" %}
     </dt>
     <dd>
         F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher
         <br>
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1107/S1600576721011560" content="J. Appl. Cryst. 55" %}</span>
-            <span class="li-inline">{% include reference.html link="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" content="open PDF" %}</span>
         </div>
     </dd>
 </dl>
