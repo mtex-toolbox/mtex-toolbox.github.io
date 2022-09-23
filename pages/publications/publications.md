@@ -14,7 +14,7 @@ If you are using MTEX for your research, please cite one of the following paper 
 
 <dl>
     <dt>
-        The variant graph approach to improved parent grain reconstruction
+		{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="The variant graph approach to improved parent grain reconstruction" %}
     </dt>
     <dd>
         R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder
