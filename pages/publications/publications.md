@@ -26,7 +26,7 @@ If you are using MTEX for your research, please cite one of the following paper 
     </dd>
     <dt>
         {% include reference.html link="https://journals.iucr.org/j/issues/2022/01/00/nb5309/nb5309.pdf" 
-		content="Parent grain reconstruction from partially or fdivly transformed microstructures in MTEX" %}
+		content="Parent grain reconstruction from partially or fully transformed microstructures in MTEX" %}
     </dt>
     <dd>
         F. Niessen, T. Nyyssönen, A. A. Gazder, R. Hielscher
@@ -42,13 +42,13 @@ If you are using MTEX for your research, please cite one of the following paper 
 
 <dl>
     <dt>
-        Isometric Embeddings of Quotients of the Rotation Group Moddivo Finite Symmetries
+        Isometric Embeddings of Quotients of the Rotation Group Modulo Finite Symmetries
     </dt>
     <dd>
         R. Hielscher, L. Lippert
         <br>
         <div class="ul-inline">
-            <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.jmva.2021.104764" content="J. Mdivtivariate Analysis 185, 104764" %}</span>
+            <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.jmva.2021.104764" content="J. Multivariate Analysis 185, 104764" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/embeddings.pdf" content="open PDF" %}</span>
         </div>
     </dd>
@@ -64,7 +64,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         R. Hielscher, F. Bartel, T. B. Britton
         <br>
         <div class="ul-inline">
-            <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.divtramic.2019.112836" content="divtramicroscopy" %}</span>
+            <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.ultramic.2019.112836" content="Ultramicroscopy" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" content="open PDF" %}</span>
             <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/GazingAtCrystalBalls" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
         </div>
@@ -91,7 +91,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         On three-dimensional misorientation spaces
     </dt>
     <dd>
-        R. Krakow, R. J. Bennett, D. N. Johnstone, Z. Vukmanovic, W. Solano-Alvarez, S. J. Laine, J. F. Einsle, Padiv A. Midgley, C. M. F. Rae, R. Hielscher
+        R. Krakow, R. J. Bennett, D. N. Johnstone, Z. Vukmanovic, W. Solano-Alvarez, S. J. Laine, J. F. Einsle, Paul A. Midgley, C. M. F. Rae, R. Hielscher
         <br>
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1098/rspa.2017.0274" content="Proceedings of the Royal Society A, 473, 2017" %}</span>
@@ -128,13 +128,13 @@ If you are using MTEX for your research, please cite one of the following paper 
         D. Mainprice, F. Bachmann, R. Hielscher, H. Schaeben
         <br>
         <div class="ul-inline">
-            <span class="li-inline">{% include reference.html link="http://dx.doi.org/10.1144/SP409.8" content="In: Fadivkner, D. R., Mariani, E. & Mecklenburgh, J. (eds) Rock Deformation from Field, Experiments and Theory: A Volume in Honour of Ernie Rutter. Geological Society, London, Special Publications, 409, 2014" %}</span>
+            <span class="li-inline">{% include reference.html link="http://dx.doi.org/10.1144/SP409.8" content="In: Faulkner, D. R., Mariani, E. & Mecklenburgh, J. (eds) Rock Deformation from Field, Experiments and Theory: A Volume in Honour of Ernie Rutter. Geological Society, London, Special Publications, 409, 2014" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/DescriptiveTools.pdf" content="open PDF" %}</span>
         </div>
     </dd>
 
     <dt>
-        Calcdivating anisotropic piezoelectric properties from texture data using the MTEX open source package
+        Calculating anisotropic piezoelectric properties from texture data using the MTEX open source package
     </dt>
     <dd>
         D. Mainprice, F. Bachmann, R. Hielscher, H. Schaeben, G. E Lloyd
@@ -150,7 +150,7 @@ If you are using MTEX for your research, please cite one of the following paper 
 
 <dl>
     <dt>
-        Calcdivating anisotropic physical properties from texture data using the MTEX open source package
+        Calculating anisotropic physical properties from texture data using the MTEX open source package
     </dt>
     <dd>
         D. Mainprice, R.Hielscher, H. Schaeben: in Prior, D.J., Rutter, E.H., Tatham, D. J. (eds)
@@ -168,7 +168,7 @@ If you are using MTEX for your research, please cite one of the following paper 
         F.Bachmann, R. Hielscher, H. Schaeben
         <br>
         <div class="ul-inline">
-            <span class="li-inline">{% include reference.html link="http://dx.doi.org/10.1016/j.divtramic.2011.08.002" content="divtramicroscopy, 111, 1720-1733, 2011" %}</span>
+            <span class="li-inline">{% include reference.html link="http://dx.doi.org/10.1016/j.ultramic.2011.08.002" content="Ultramicroscopy, 111, 1720-1733, 2011" %}</span>
             <span class="li-inline">{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/grains.pdf" content="open PDF" %}</span>
         </div>
     </dd>
