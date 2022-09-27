@@ -82,8 +82,10 @@ of material scientists, geologists and mathematicians.
                         - Every bug report is welcome.
                     </li>
                     <li>
-                        {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc" content="community scripts" %}
-                        - see how other MTEX users have utilized MTEX.
+                        {% include reference.html
+                    link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
+						content="helper functions" %}
+                        - {% include reference.html link="scripts" content="Learn how to share your own scripts" %}
                     </li>
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex" content="contribute" %}
