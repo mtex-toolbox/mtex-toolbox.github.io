@@ -23,7 +23,7 @@ In case you experience any problems, especiall on Mac OSX, have a look at our
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fix release, [changelog](changelog.html) |||
+[**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fix release, [changelog](changelog.html) ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.0/mtex-5.8.0.zip) ||| January 2022 ||| variant graph based parent grain reconstruction, [changelog](changelog.html) ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.7.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ||| May 2021 ||| improved parent grain reconstruction, [changelog](changelog.html) ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.7.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.6.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.1/mtex-5.6.1.zip) ||| March 2021 |||  bug fix release, [changelog](changelog.html) ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
@@ -51,6 +51,7 @@ A full list of previous releases and downloads can be found
 
 ## Compatibility
 
+<!--
 Since MTEX is a MATLAB toolbox,
 {% include reference.html link="http://www.mathworks.com" content="MATLAB" %}
 has to be installed in order to use MTEX. It works fine with the student version and does not require any additional toolboxes, addons or packages. There are some very few exceptions like GND and Taylor computation that currently require the optimization toolbox to be installed. Check the table below to see whether MTEX will run with your Matlab version.
@@ -64,6 +65,7 @@ has to be installed in order to use MTEX. It works fine with the student version
 |MTEX 4.0|  | | | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) | (<i class="fa fa-check"></i>) |
 |MTEX 3.5|  | | | | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> |
 |MTEX 3.3|  | | | | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> | <i class="fa fa-check"></i> |
+-->
 
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
