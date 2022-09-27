@@ -84,11 +84,11 @@ of material scientists, geologists and mathematicians.
                     <li>
                         {% include reference.html
                     link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
-						content="helper functions" %}
-                        - {% include reference.html link="scripts" content="Learn how to share your own scripts" %}
+						content="Helper functions" %}
+                        - {% include reference.html link="scripts" content="Learn how to share your own scripts." %}
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" content="contribute" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" content="Contribute" %}
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<!--
