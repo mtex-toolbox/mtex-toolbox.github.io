@@ -21,30 +21,31 @@ In case you experience any problems, especiall on Mac OSX, have a look at our
 
 ## All Releases
 
+Have a look at the [changelog](changelog.html) for more details on the
+features and syntax changes.
+
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fix release, [changelog](changelog.html) ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
-[**mtex-5.8.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.0/mtex-5.8.0.zip) ||| January 2022 ||| variant graph based parent grain reconstruction, [changelog](changelog.html) ||| 2006<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
-[**mtex-5.7.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ||| May 2021 ||| improved parent grain reconstruction, [changelog](changelog.html) ||| 7086<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.7.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
-[**mtex-5.6.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.1/mtex-5.6.1.zip) ||| March 2021 |||  bug fix release, [changelog](changelog.html) ||| 1797<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
-[**mtex-5.6.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.0/mtex-5.6.0.zip) ||| January 2021 |||  simplified parent grain reconstruction, [changelog](changelog.html) ||| 2625 <!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
-[**mtex-5.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.2/mtex-5.5.2.zip) ||| December 2020 ||| low angle grain boundary analysis, orientation embeddings, [changelog](changelog.html) ||| 807<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.5.2/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
-[**mtex-5.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ||| July 2020 ||| parent grain reconstruction, [changelog](changelog.html) ||| 3738
-[**mtex-5.3.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.1/mtex-5.3.1.zip) ||| June 2020 ||| bug fixes, boundary curvature, [changelog](changelog.html) ||| 1051
-[**mtex-5.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip) ||| April 2020 ||| performance updates, [changelog](changelog.html) ||| 2550
-[**mtex-5.2.8.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.8/mtex-5.2.8.zip) ||| January 2020 ||| plasticity tensors, [changelog](changelog.html) ||| 3447
-[**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence, [changelog](changelog.html) ||| 9235
-[**MTEXGUI-2.4.zip**](https://www.researchgate.net/profile/Jessica_Hiscocks/publication/327848702_MTEX_GUI_for_EBSD_and_Pole_Figure_Plotting_Rev_24/data/5ba97639299bf13e604a3c43/Annotate2p4.zip) ||| Sep 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
-[**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions, [changelog](changelog.html) ||| 3049
-[**MTEXannotateGUI.zip**](https://groups.google.com/group/mtexmail/attach/e87c480486f4/MTEXannotateGUI.zip?part=0.1&authuser=0) ||| February 2018 ||| graphical user interface for analyzing EBSD data by J. Hiscocks |||
-[**mtex-4.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.5.2/mtex-4.5.2.zip) ||| November 2017 ||| 3d orientation and ODF plots, [changelog](changelog.html) ||| 4498
-[**mtex-4.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.4.0/mtex-4.4.0.zip) ||| January 2017 ||| Slip Systems, Taylor calculation, [changelog](changelog.html) ||| 1376
-[**mtex-4.3.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.3.2/mtex-4.3.2.zip) ||| July 2016 ||| GND calculation, [changelog](changelog.html) ||| 2284
-[**mtex-4.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.2.1/mtex-4.2.1.zip) ||| November 2015 ||| introduces triple points, [changelog](changelog.html) ||| 2177
-[**mtex-4.1.4.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.1.4/mtex-4.1.4.zip) ||| September 2015    ||| major release with many new features and syntax changes, [changelog](changelog.html) ||| 1629
-[__mtex-4.0.23.zip__](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.0.23/mtex-4.0.23.zip) ||| April 2015    ||| major release with many new features and syntax changes, [changelog](changelog.html) ||| 1630
-[**mtex-3.5.0.zip**](http://mtex.googlecode.com/files/mtex-3.5.0.zip) ||| December 2013   ||| minor release, [changelog]()||| 2398
-[**mtex-3.4.2.zip**](http://mtex.googlecode.com/files/mtex-3.4.2.zip) ||| June 2013       ||| minor release, [changelog]()||| 1660
+[**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fix release ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
+[**mtex-5.8.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.0/mtex-5.8.0.zip) ||| January 2022 ||| variant graph based parent grain reconstruction ||| 2006<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
+[**mtex-5.7.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ||| May 2021 ||| improved parent grain reconstruction ||| 7086<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.7.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
+[**mtex-5.6.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.1/mtex-5.6.1.zip) ||| March 2021 |||  bug fix release ||| 1797<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
+[**mtex-5.6.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.0/mtex-5.6.0.zip) ||| January 2021 |||  simplified parent grain reconstruction ||| 2625 <!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
+[**mtex-5.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.2/mtex-5.5.2.zip) ||| December 2020 ||| low angle grain boundary analysis, orientation embeddings ||| 807<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.5.2/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
+[**mtex-5.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ||| July 2020 ||| parent grain reconstruction ||| 3738
+[**mtex-5.3.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3.1/mtex-5.3.1.zip) ||| June 2020 ||| bug fixes, boundary curvature ||| 1051
+[**mtex-5.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.3/mtex-5.3.zip) ||| April 2020 ||| performance updates ||| 2550
+[**mtex-5.2.8.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.2.8/mtex-5.2.8.zip) ||| January 2020 ||| plasticity tensors ||| 3447
+[**mtex-5.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.1.1/mtex-5.1.1.zip) ||| June 2018 ||| GND calculation and birefringence ||| 9235
+[**mtex-5.0.3.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.0.3/mtex-5.0.3.zip) ||| March 2018 ||| Crystal Shapes and spherical functions ||| 3049
+[**mtex-4.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.5.2/mtex-4.5.2.zip) ||| November 2017 ||| 3d orientation and ODF plots ||| 4498
+[**mtex-4.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.4.0/mtex-4.4.0.zip) ||| January 2017 ||| Slip Systems, Taylor calculation ||| 1376
+[**mtex-4.3.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.3.2/mtex-4.3.2.zip) ||| July 2016 ||| GND calculation ||| 2284
+[**mtex-4.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.2.1/mtex-4.2.1.zip) ||| November 2015 ||| triple points ||| 2177
+[**mtex-4.1.4.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.1.4/mtex-4.1.4.zip) ||| September 2015 ||| EBSD denoising, fundamental regions  ||| 1629
+[__mtex-4.0.23.zip__](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.0.23/mtex-4.0.23.zip) ||| April 2015  ||| new class system and new syntax ||| 1630
+[**mtex-3.5.0.zip**](http://mtex.googlecode.com/files/mtex-3.5.0.zip) ||| December 2013   ||| minor release ||| 2398
+[**mtex-3.4.2.zip**](http://mtex.googlecode.com/files/mtex-3.4.2.zip) ||| June 2013       ||| minor release ||| 1660
 
 <!--
 check donwload number:
