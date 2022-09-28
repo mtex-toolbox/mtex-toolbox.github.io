@@ -12,8 +12,7 @@ toc: false
 of material scientists, geologists and mathematicians.
 <br>
 <!--<img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983">-->
-<!-- <img -->
-<!-- src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only"> -->
+<!-- <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only"> -->
 [![](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/mtex-toolbox/mtex)
 [![ResearchGate Badge](https://img.shields.io/badge/Research-Gate-9cf)](https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software)
 ![](https://img.shields.io/github/languages/top/mtex-toolbox/mtex)&nbsp;
