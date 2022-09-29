@@ -1,6 +1,6 @@
 ---
 title: Theory of Misorientations
-last_updated: 10-Sep-2021
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
+      --><title>Theory of Misorientations</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_MisorientationTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MisorientationTheory.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Misorientation describe the relative orientation of two crystal with respect to each other. Those crystal may be of the same phase or of different phases. Misorientation are used to describe</p><h2 id="2">Grain Exchange Symmetry</h2><p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinnings and CSL (coincidence site lattice) misorientations. To illustrate this concept at a practical example let us first import some Magnesium EBSD data.</p>
 {% highlight matlab %}
 mtexdata twins silent
@@ -95,7 +95,7 @@ mori = inv(ori1) * ori2
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (Magnesium -> Magnesium)
+mori = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
@@ -107,8 +107,7 @@ round(mori * Miller(1,1,-2,0,CS))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller  
- mineral: Magnesium (622, X||a*, Y||b, Z||c*)
+ans = Miller (Magnesium)
   h  k  i  l
   2 -1 -1  0
 {% endhighlight %}
@@ -118,8 +117,7 @@ round(inv(mori) * Miller(2,-1,-1,0,CS))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller  
- mineral: Magnesium (622, X||a*, Y||b, Z||c*)
+ans = Miller (Magnesium)
   h  k  i  l
   1  1 -2  0
 {% endhighlight %}
@@ -183,15 +181,13 @@ mori.angle / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (Magnesium -> Magnesium)
+mori = misorientation (Magnesium → Magnesium)
  
-  Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   300    0    0    0
+     planes      directions
+ (01-10)||(10-10)  [0003]||[0001]
  
  
-ans = Miller  
- mineral: Magnesium (622, X||a*, Y||b, Z||c*)
+ans = Miller (Magnesium)
   h  k  i  l
   1  0 -1  0
 ans =
@@ -279,11 +275,10 @@ Mag2Hem = orientation.map(...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Mag2Hem = misorientation (Magnetite -> Hematite)
+Mag2Hem = misorientation (Magnetite → Hematite)
  
-  Bunge Euler angles in degree
-  phi1     Phi    phi2    Inv.
-   120 54.7356      45       0
+     planes      directions
+ (-101)||(10-10)  [111]||[0001]
 {% endhighlight %}
 <p>Assume a Magnetite grain with orientation</p>
 {% highlight matlab %}
@@ -291,7 +286,7 @@ ori_Mag = orientation.byEuler(0,0,0,CS_Mag)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori_Mag = orientation (Magnetite -> xyz)
+ori_Mag = orientation (Magnetite → xyz)
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.
@@ -303,7 +298,7 @@ symmetrise(ori_Mag) * inv(Mag2Hem)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (Hematite -> xyz)
+ans = orientation (Hematite → xyz)
   size: 48 x 1
 {% endhighlight %}
 <p>and the corresponding pole figures by</p>
