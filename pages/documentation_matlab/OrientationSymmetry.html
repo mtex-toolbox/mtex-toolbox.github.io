@@ -1,6 +1,6 @@
 ---
 title: Symmetricaly Equivalent Orientations
-last_updated: 10-Sep-2021
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: OrientationSymmetry.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Symmetricaly Equivalent Orientations</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_OrientationSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationSymmetry.m">
+      --><title>Symmetricaly Equivalent Orientations</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_OrientationSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationSymmetry.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>A crystal orientation always appears as a class of symmetrically equivalent rotations which all transform the crystal reference frame into the specimen reference frame and are physicaly not distinguishable.</p><p>Lets start by defining some random orientation</p>
 {% highlight matlab %}
 % trigonal crystal symmetry
@@ -36,11 +36,11 @@ cs = crystalSymmetry
 ss = monoclinic specimenSymmetry  
  
  
-ori = orientation (6 -> xyz (112))
+ori = orientation (6 → xyz (112))
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  124.091 78.8061 29.9987       0
+  117.389 41.9268 241.316       0
 {% endhighlight %}
 <p>Since orientations transform crystal coordinates into specimen coordinates crystal symmetries will act from the right and specimen symmetries from the left</p>
 {% highlight matlab %}
@@ -49,17 +49,17 @@ ori * cs
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 -> xyz (112))
+ans = orientation (6 → xyz (112))
   size: 1 x 6
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  124.091 78.8061 29.9987       0
-  124.091 78.8061 89.9987       0
-  124.091 78.8061 149.999       0
-  124.091 78.8061 209.999       0
-  124.091 78.8061 269.999       0
-  124.091 78.8061 329.999       0
+  117.389 41.9268 241.316       0
+  117.389 41.9268 301.316       0
+  117.389 41.9268 1.31587       0
+  117.389 41.9268 61.3159       0
+  117.389 41.9268 121.316       0
+  117.389 41.9268 181.316       0
 {% endhighlight %}
 <p>We observe that only the third Euler angle phi2 changes as this Euler angle applies first to the crystal coordinates.</p>
 {% highlight matlab %}
@@ -68,13 +68,13 @@ ss * ori
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 -> xyz (112))
+ans = orientation (6 → xyz (112))
   size: 2 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  124.091 78.8061 29.9987       0
-  304.091 78.8061 29.9987       0
+  117.389 41.9268 241.316       0
+  297.389 41.9268 241.316       0
 {% endhighlight %}
 <p>Combining crystal and specimen symmetry we obtain 6 crystallographically equivalent orientations to <code class="language-plaintext highlighter-rouge">ori</code></p>
 {% highlight matlab %}
@@ -82,23 +82,23 @@ ss * ori * cs
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 -> xyz (112))
+ans = orientation (6 → xyz (112))
   size: 2 x 6
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  124.091 78.8061 29.9987       0
-  304.091 78.8061 29.9987       0
-  124.091 78.8061 89.9987       0
-  304.091 78.8061 89.9987       0
-  124.091 78.8061 149.999       0
-  304.091 78.8061 149.999       0
-  124.091 78.8061 209.999       0
-  304.091 78.8061 209.999       0
-  124.091 78.8061 269.999       0
-  304.091 78.8061 269.999       0
-  124.091 78.8061 329.999       0
-  304.091 78.8061 329.999       0
+  117.389 41.9268 241.316       0
+  297.389 41.9268 241.316       0
+  117.389 41.9268 301.316       0
+  297.389 41.9268 301.316       0
+  117.389 41.9268 1.31587       0
+  297.389 41.9268 1.31587       0
+  117.389 41.9268 61.3159       0
+  297.389 41.9268 61.3159       0
+  117.389 41.9268 121.316       0
+  297.389 41.9268 121.316       0
+  117.389 41.9268 181.316       0
+  297.389 41.9268 181.316       0
 {% endhighlight %}
 <p>A shortcut for this operation is the command <a href="orientation.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -106,23 +106,23 @@ symmetrise(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 -> xyz (112))
+ans = orientation (6 → xyz (112))
   size: 12 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2    Inv.
-  124.091 78.8061 29.9987       0
-  304.091 78.8061 29.9987       0
-  124.091 78.8061 89.9987       0
-  304.091 78.8061 89.9987       0
-  124.091 78.8061 149.999       0
-  304.091 78.8061 149.999       0
-  124.091 78.8061 209.999       0
-  304.091 78.8061 209.999       0
-  124.091 78.8061 269.999       0
-  304.091 78.8061 269.999       0
-  124.091 78.8061 329.999       0
-  304.091 78.8061 329.999       0
+  117.389 41.9268 241.316       0
+  297.389 41.9268 241.316       0
+  117.389 41.9268 301.316       0
+  297.389 41.9268 301.316       0
+  117.389 41.9268 1.31587       0
+  297.389 41.9268 1.31587       0
+  117.389 41.9268 61.3159       0
+  297.389 41.9268 61.3159       0
+  117.389 41.9268 121.316       0
+  297.389 41.9268 121.316       0
+  117.389 41.9268 181.316       0
+  297.389 41.9268 181.316       0
 {% endhighlight %}
 <p>For specific orientations, e.g. for the cube orientations, symmetrisation leads to multiple identical orientations. This can be prevented by passing the option <code class="language-plaintext highlighter-rouge">unique</code> to the command <a href="orientation.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -130,7 +130,7 @@ symmetrise(orientation.id(cs,ss),'unique')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 -> xyz (112))
+ans = orientation (6 → xyz (112))
   size: 6 x 1
  
   Bunge Euler angles in degree
@@ -150,12 +150,12 @@ angle(ori,symmetrise(orientation.goss(cs))) ./ degree
 
 {% highlight plaintext %}
 ans =
-  100.5229
-  100.5229
-  100.5229
-  100.5229
-  100.5229
-  100.5229
+   83.1471
+   83.1471
+   83.1471
+   83.1471
+   83.1471
+   83.1471
 {% endhighlight %}
 <p>The value is the same for all orientations and equal to the smallest angle to one of the symmetrally equivalent orientations. This can be verified by computing the rotational angle ignoring symmetry.</p>
 {% highlight matlab %}
@@ -164,11 +164,11 @@ angle(ori,symmetrise(orientation.goss(cs)),'noSymmetry') ./ degree
 
 {% highlight plaintext %}
 ans =
-  100.5229
-  111.2405
-  140.3971
-  177.4700
-  145.0219
-  114.2785
+  154.7183
+  159.3507
+  116.0883
+   84.9639
+   83.1471
+  112.1282
 {% endhighlight %}
 <p>Functions that respect crystal symmetry but allow to switch it off using the flag <code class="language-plaintext highlighter-rouge">noSymmetry</code> include <a href="orientation.dot.html">dot</a>, <a href="orientation.unique.html">unique</a>, <a href="orientation.calcCluster.html">calcCluster</a>.</p></div></body></html>

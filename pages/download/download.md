@@ -26,10 +26,10 @@ features and syntax changes.
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
-[**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fix release ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
+[**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fixes ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.8.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.0/mtex-5.8.0.zip) ||| January 2022 ||| variant graph based parent grain reconstruction ||| 2006<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
 [**mtex-5.7.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ||| May 2021 ||| improved parent grain reconstruction ||| 7086<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.7.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
-[**mtex-5.6.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.1/mtex-5.6.1.zip) ||| March 2021 |||  bug fix release ||| 1797<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
+[**mtex-5.6.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.1/mtex-5.6.1.zip) ||| March 2021 |||  bug fixes ||| 1797<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
 [**mtex-5.6.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.6.0/mtex-5.6.0.zip) ||| January 2021 |||  simplified parent grain reconstruction ||| 2625 <!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.6.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
 [**mtex-5.5.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.5.2/mtex-5.5.2.zip) ||| December 2020 ||| low angle grain boundary analysis, orientation embeddings ||| 807<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.5.2/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
 [**mtex-5.4.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.4.0/mtex-5.4.0.zip) ||| July 2020 ||| parent grain reconstruction ||| 3738
@@ -44,7 +44,7 @@ File Name  |||  Release Date||| Comments ||| Downloads
 [**mtex-4.2.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.2.1/mtex-4.2.1.zip) ||| November 2015 ||| triple points ||| 2177
 [**mtex-4.1.4.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.1.4/mtex-4.1.4.zip) ||| September 2015 ||| EBSD denoising, fundamental regions  ||| 1629
 [__mtex-4.0.23.zip__](https://github.com/mtex-toolbox/mtex/releases/download/mtex-4.0.23/mtex-4.0.23.zip) ||| April 2015  ||| new class system and new syntax ||| 1630
-[**mtex-3.5.0.zip**](http://mtex.googlecode.com/files/mtex-3.5.0.zip) ||| December 2013   ||| minor release ||| 2398
+[**mtex-3.5.0.zip**](http://mtex.googlecode.com/files/mtex-3.5.0.zip) ||| December 2013   ||| misorientation coloring, fast multiscale grain reconstruction ||| 2398
 [**mtex-3.4.2.zip**](http://mtex.googlecode.com/files/mtex-3.4.2.zip) ||| June 2013       ||| minor release ||| 1660
 
 <!--

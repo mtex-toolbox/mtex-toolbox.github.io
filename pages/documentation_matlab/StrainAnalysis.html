@@ -1,6 +1,6 @@
 ---
 title: Slip Transmition
-last_updated: 10-Sep-2021
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: StrainAnalysis.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Slip Transmition</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_StrainAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/StrainAnalysis.m">
+      --><title>Slip Transmition</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_StrainAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/StrainAnalysis.m">
     edit page</a></font><div><!--introduction--><p>How to analyse slip transmission at grain boundaries</p><!--/introduction--><h2 id="2">Contents</h2><h2 id="3">Import Titanium data</h2><p>From Mercier D. - MTEX 2016 Workshop - TU Chemnitz (Germany) Calculation and plot on GBs of m' parameter Dataset from Mercier D. - cp-Ti (alpha phase - hcp)</p>
 {% highlight matlab %}
 mtexdata csl
@@ -59,9 +59,8 @@ eps = strainTensor(diag([-q 1 -(1-q)]));
 {% endhighlight %}
 
 {% highlight plaintext %}
-sS = slipSystem  
- mineral: iron (m-3m)
- size: 1 x 1
+sS = slipSystem (iron)
+ 
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
 {% endhighlight %}
@@ -89,9 +88,10 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-sSGrain = slipSystem  
+sSGrain = slipSystem (xyz)
  CRSS: 1
  size: 885 x 1
+ 
  
 largeGrains = grain2d  
  
@@ -102,7 +102,7 @@ largeGrains = grain2d
  inner boundary segments: 93
  triple points: 1444
  
- Properties: GOS, meanRotation
+ Properties: meanRotation, GOS
 {% endhighlight %}
 <center>
 {% include inline_image.html file="StrainAnalysis_02.png" %}

@@ -1,6 +1,6 @@
 ---
 title: Misorientation Distribution Function
-last_updated: 10-Sep-2021
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: MDFAnalysis.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_MDFAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MDFAnalysis.m">
+      --><title>Misorientation Distribution Function</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_MDFAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/MDFAnalysis.m">
     edit page</a></font><div><!--introduction--><p>Explains how to compute and analyze misorientation distribution functions.</p><!--/introduction--><h2 id="1">TODO</h2><p>Please help to redo the section</p><p>When speaking about the misorientation distribution function (MDF) one has to differentiate to cases</p><div><ol><li>the boundary (correlated) misorientation distribution function</li><li>the uncorelated misorientation distribution function</li></ol></div><p>While the first one considers only misorientations at grain boundaries the second one considers misorietation between arbitrary crystal orientations. To illustrate the difference lets consider the following EBSD data set</p>
 {% highlight matlab %}
 % Lets import some EBSD data and reconstruct the grains.
@@ -45,7 +45,7 @@ grains = grain2d
  inner boundary segments: 33
  triple points: 11456
  
- Properties: GOS, meanRotation
+ Properties: meanRotation, GOS
 {% endhighlight %}
 <h2 id="3">The boundary misorientation distribution function</h2><p>In order to compute the boundary misorientation distribution function for the phase transition from Forsterite to Enstatite we first extract the misorientations along all Forsterite to Enstatite boundary segements</p>
 {% highlight matlab %}
@@ -53,7 +53,7 @@ mori_boundary = grains.boundary('Fo','En').misorientation
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori_boundary = misorientation (Forsterite -> Enstatite)
+mori_boundary = misorientation (Forsterite → Enstatite)
   size: 3729 x 1
 {% endhighlight %}
 <p>and second compute the corresponding density function using the command <a href="orientation.calcDensity.html">calcDensity</a></p>
@@ -62,9 +62,7 @@ mdf_boundary = calcDensity(mori_boundary,'halfwidth',5*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mdf_boundary = MDF  
-  crystal symmetry : Forsterite (mmm)
-  crystal symmetry : Enstatite (mmm)
+mdf_boundary = MDF (Forsterite → Enstatite)
  
   Harmonic portion:
     degree: 48
@@ -78,8 +76,7 @@ plot(adf_boundary)
 {% endhighlight %}
 
 {% highlight plaintext %}
-adf_boundary = S2FunHarmonicSym  
- symmetry: 222
+adf_boundary = S2FunHarmonicSym (222)
  bandwidth: 64
 {% endhighlight %}
 <center>
@@ -93,7 +90,7 @@ adf_boundary = S2FunHarmonicSym
 v =
   275.8325
  
-mori = misorientation (Forsterite -> Enstatite)
+mori = misorientation (Forsterite → Enstatite)
  
   Bunge Euler angles in degree
      phi1       Phi      phi2      Inv.
@@ -112,12 +109,10 @@ mdf_uncor = calcDensity(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (Forsterite -> Enstatite)
-  size: 98585 x 1
+mori = misorientation (Forsterite → Enstatite)
+  size: 98589 x 1
  
-mdf_uncor = MDF  
-  crystal symmetry : Forsterite (mmm)
-  crystal symmetry : Enstatite (mmm)
+mdf_uncor = MDF (Forsterite → Enstatite)
  
   Harmonic portion:
     degree: 25
@@ -136,16 +131,14 @@ odf_en = calcDensity(ebsd('en').orientations,'halfwidth',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_fo = ODF  
-  crystal symmetry : Forsterite (mmm)
+odf_fo = ODF (Forsterite → xyz)
  
   Harmonic portion:
     degree: 25
     weight: 1
  
  
-odf_en = ODF  
-  crystal symmetry : Enstatite (mmm)
+odf_en = ODF (Enstatite → xyz)
  
   Harmonic portion:
     degree: 25
@@ -157,9 +150,7 @@ mdf = calcMDF(odf_en,odf_fo)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mdf = MDF  
-  crystal symmetry : Forsterite (mmm)
-  crystal symmetry : Enstatite (mmm)
+mdf = MDF (Forsterite → Enstatite)
  
   Harmonic portion:
     degree: 19
@@ -202,8 +193,7 @@ aD = calcDensity(axis(grains.boundary('fo','en').misorientation))
 {% endhighlight %}
 
 {% highlight plaintext %}
-aD = S2FunHarmonicSym  
- symmetry: 222
+aD = S2FunHarmonicSym (222)
  bandwidth: 25
 {% endhighlight %}
 </div></body></html>

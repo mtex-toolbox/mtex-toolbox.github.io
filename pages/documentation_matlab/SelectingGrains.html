@@ -1,6 +1,6 @@
 ---
 title: Selecting Grains
-last_updated: 10-Sep-2021
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: SelectingGrains.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/SelectingGrains.m">
+      --><title>Selecting Grains</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_SelectingGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/SelectingGrains.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select grains by properties. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
@@ -68,8 +68,8 @@ ans = grain2d
  inner boundary segments: 0
  triple points: 10
  
- Id   Phase   Pixels          GOS   phi1   Phi   phi2
- 94       1      323   0.00796443    131    64    250
+ Id   Phase   Pixels   phi1   Phi   phi2          GOS
+ 94       1      323    131    64    250   0.00796443
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_02.png" %}
@@ -106,11 +106,11 @@ grains_selected = grain2d
  inner boundary segments: 0
  triple points: 23
  
-  Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  26       1        1            0    130    68    258
-  62       1      181   0.00699418    131    64    245
-  94       1      323   0.00796443    131    64    250
- 123       1       19    0.0103622    144    74    250
+  Id   Phase   Pixels   phi1   Phi   phi2          GOS
+  26       1        1    130    68    258            0
+  62       1      181    131    64    245   0.00699418
+  94       1      323    131    64    250   0.00796443
+ 123       1       19    144    74    250    0.0103622
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_04.png" %}
@@ -150,8 +150,8 @@ ans = grain2d
  inner boundary segments: 0
  triple points: 31
  
-  Id   Phase   Pixels         GOS   phi1   Phi   phi2
- 208       1     1545   0.0129689    167    81    251
+  Id   Phase   Pixels   phi1   Phi   phi2         GOS
+ 208       1     1545    167    81    251   0.0129689
 {% endhighlight %}
 <p>and so we can plot it</p>
 {% highlight matlab %}
@@ -218,7 +218,7 @@ ans = grain2d
  inner boundary segments: 14
  triple points: 257
  
- Properties: GOS, meanRotation
+ Properties: meanRotation, GOS
 {% endhighlight %}
 <p>Logical indexing allows also for more complex queries, e.g. selecting all grains perimeter larger than 6000 and at least 600 measurements within</p>
 {% highlight matlab %}
@@ -239,11 +239,11 @@ selected_grains = grain2d
  inner boundary segments: 0
  triple points: 79
  
-  Id   Phase   Pixels          GOS   phi1   Phi   phi2
-  99       1     1448    0.0134157    166   127    259
- 119       1     1047   0.00765478     89    99    224
- 122       1     1208   0.00807919    153    68    237
- 208       1     1545    0.0129689    167    81    251
+  Id   Phase   Pixels   phi1   Phi   phi2          GOS
+  99       1     1448    166   127    259    0.0134157
+ 119       1     1047     89    99    224   0.00765478
+ 122       1     1208    153    68    237   0.00807919
+ 208       1     1545    167    81    251    0.0129689
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_10.png" %}

@@ -1,6 +1,6 @@
 ---
 title: Operations Crystal Directions
-last_updated: 10-Sep-2021
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: CrystalOperations.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Operations Crystal Directions</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_CrystalOperations.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalOperations.m">
+      --><title>Operations Crystal Directions</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_CrystalOperations.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalOperations.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic operations with crystal directions. Therefore, lets start by importing the trigonal Quartz crystal symmetry</p>
 {% highlight matlab %}
 cs = loadCIF('quartz')
@@ -38,13 +38,11 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-m1 = Miller  
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
+m1 = Miller (Quartz)
   h  k  i  l
   1 -1  0  0
  
-m2 = Miller  
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
+m2 = Miller (Quartz)
   h  k  i  l
   1  0 -1  0
 {% endhighlight %}
@@ -56,8 +54,7 @@ d = round(cross(m1,m2))
 {% endhighlight %}
 
 {% highlight plaintext %}
-d = Miller  
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
+d = Miller (Quartz)
   U V T W
   0 0 0 1
 {% endhighlight %}
@@ -72,8 +69,7 @@ round(cross(d1,d2))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller  
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
+ans = Miller (Quartz)
   h  k  i  l
   1  0 -1  0
 {% endhighlight %}
@@ -83,9 +79,8 @@ symmetrise(d2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller  
+ans = Miller (Quartz)
  size: 6 x 1
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
    U  V  T  W
    1 -2  1  3
    1  1 -2 -3
@@ -100,21 +95,20 @@ symmetrise(d2,'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller  
+ans = Miller (Quartz)
  size: 12 x 1
- mineral: Quartz (321, X||a*, Y||b, Z||c*)
    U  V  T  W
    1 -2  1  3
-   1  1 -2 -3
-   1  1 -2  3
-   1 -2  1 -3
-  -2  1  1  3
-  -2  1  1 -3
   -1  2 -1 -3
+   1  1 -2 -3
   -1 -1  2  3
+   1  1 -2  3
   -1 -1  2 -3
+   1 -2  1 -3
   -1  2 -1  3
+  -2  1  1  3
    2 -1 -1 -3
+  -2  1  1 -3
    2 -1 -1  3
 {% endhighlight %}
 <p>Using the options <b>symmetrised</b> and <b>labeled</b> all symmetrically equivalent crystal directions are plotted together with their Miller indices. Lets apply this to a list of lattice planes</p>
@@ -183,7 +177,7 @@ ori = orientation.byEuler(10*degree,20*degree,30*degree,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Quartz -> xyz)
+ori = orientation (Quartz → xyz)
  
   Bunge Euler angles in degree
   phi1  Phi phi2 Inv.

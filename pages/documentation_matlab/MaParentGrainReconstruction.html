@@ -1,6 +1,6 @@
 ---
 title: Martensite Parent Grain Reconstruction
-last_updated: 01-Apr-2022
+last_updated: 28-Sep-2022
 sidebar: documentation_sidebar
 permalink: MaParentGrainReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
+      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. The methods are described in more detail in the publications</p><div><ul><li><a href="https://arxiv.org/abs/2201.02103">The variant graph approach to improved parent grain reconstruction</a>, arXiv, 2022,</li><li><a href="https://doi.org/10.1107/S1600576721011560">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a>, J. Appl. Cryst. 55, 2022.</li></ul></div><p>We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
@@ -97,7 +97,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
    closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
 {% endhighlight %}
 <center>
@@ -142,7 +142,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.2°, 3.1° (quintiles)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
    closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
  
  variant graph: 213956 entries
@@ -287,10 +287,6 @@ hold on
 plot(grainSelected.boundary,'linewidth',3,'lineColor','w')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Packet ID calculation assuming {111}_p||{110}_c
-{% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_10.png" %}
 </center><p>We can also directly identify the child grains belonging to the selected parent grains. Remeber that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
@@ -332,10 +328,6 @@ plot(parentOri.symmetrise * Miller(0,0,1,parentOri.CS),'markerSize',10,...
 childVariants = variants(job.p2c, parentOri);
 plotPDF(childVariants, 'markerFaceColor','none','linewidth',1.5,'markerEdgeColor','k')
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Packet ID calculation assuming {111}_p||{110}_c
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_12.png" %}

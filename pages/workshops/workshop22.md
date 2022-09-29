@@ -40,9 +40,9 @@ During the first week we provide on a daily basis two morning lectures covering 
             <div class="panel-body">
 <div markdown="span">
 **Lecture 1 - General Concepts:**
-{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="slides" %}
+{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
 <span class="course_material">, </span>{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy" content="slides" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}
+<!--<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}-->
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
