@@ -1,6 +1,6 @@
 ---
 title: Martensite Parent Grain Reconstruction
-last_updated: 28-Sep-2022
+
 sidebar: documentation_sidebar
 permalink: MaParentGrainReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
+      --><title>Martensite Parent Grain Reconstruction</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. The methods are described in more detail in the publications</p><div><ul><li><a href="https://arxiv.org/abs/2201.02103">The variant graph approach to improved parent grain reconstruction</a>, arXiv, 2022,</li><li><a href="https://doi.org/10.1107/S1600576721011560">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a>, J. Appl. Cryst. 55, 2022.</li></ul></div><p>We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
@@ -66,7 +66,7 @@ job = parentGrainReconstructor
  parent  Iron fcc        432       0       0%    0%           
  child   Iron bcc (old)  432       7002    100%               
  
- OR: (111)||(011)  [10-1]||[11-1]
+ OR: (111) || (011)   [10-1] || [11-1]
    c2c fit: 2.4°, 3.4°, 4.4°, 5.4° (quintiles)
 {% endhighlight %}
 <p>The output of the variable <code class="language-plaintext highlighter-rouge">job</code> tells us the amount of parent and child grains as well as the percentage of already recovered parent grains. Furthermore, it displays how well the current guess of the parent to child orientation relationship fits the child to child misorientations within our data. In our sample data set this fit is described by the 4 quintiles 2.5&deg;, 3.5&deg;, 4.5&deg; and 5.5&deg;.</p><h2 id="5">Optimizing the parent child orientation relationship</h2><p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individualy. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
@@ -79,17 +79,6 @@ job.calcParent2Child
 {% endhighlight %}
 
 {% highlight plaintext %}
-optimizing parent to child orientation relationship
-  (335.8°,10.5°,65.8°)  3.7
-  (345.7°,10.2°,59.9°)  2.6
-  (347.2°,9.8°,58.4°)   2.3
-  (347.1°,9.5°,58.3°)   2.3
-  (347.1°,9.4°,58.2°)   2.3
-  (347.1°,9.4°,58.1°)   2.3
-  (347°,9.4°,58°)       2.2
-  (346.9°,9.3°,57.9°)   2.2
- 
- 
 ans = parentGrainReconstructor  
  
  phase   mineral         symmetry  grains  area  reconstructed
@@ -98,7 +87,7 @@ ans = parentGrainReconstructor
  
  OR: (346.9°,9.3°,57.9°)
    c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
-   closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_02.png" %}
@@ -143,7 +132,7 @@ ans = parentGrainReconstructor
  
  OR: (346.9°,9.3°,57.9°)
    c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
-   closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
  
  variant graph: 213956 entries
 {% endhighlight %}
@@ -167,7 +156,7 @@ ans = parentGrainReconstructor
  
  OR: (346.9°,9.3°,57.9°)
    c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
-   closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
  
  votes: 7002 x 1
    probabilities: 100%, 100%, 99%, 97% (quintiles)
@@ -197,7 +186,7 @@ ans = parentGrainReconstructor
  OR: (346.9°,9.3°,57.9°)
    p2c fit: 3.4°, 5.2°, 10°, 20° (quintiles)
    c2c fit: 1.8°, 2.6°, 3.4°, 3.7° (quintiles)
-   closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
  
  votes: 116 x 1
    probabilities: 0.37%, 0%, 0%, 0% (quintiles)
@@ -230,7 +219,7 @@ ans = parentGrainReconstructor
  OR: (346.9°,9.3°,57.9°)
    p2c fit: 3.4°, 5.2°, 10°, 20° (quintiles)
    c2c fit: 1.8°, 2.6°, 3.4°, 3.7° (quintiles)
-   closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
  
  votes: 6748 x 1
    probabilities: 88%, 75%, 58%, 37% (quintiles)
@@ -245,7 +234,7 @@ ans = parentGrainReconstructor
  OR: (346.9°,9.3°,57.9°)
    p2c fit: 4.7°, 6.8°, 13°, 21° (quintiles)
    c2c fit: 1.8°, 2.6°, 3.6°, 5.8° (quintiles)
-   closest ideal OR: (111)||(011)  [1-10]||[100] fit: 2.2°
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_07.png" %}

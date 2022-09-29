@@ -1,6 +1,6 @@
 ---
 title: Anisotropic Elasticity
-last_updated: 28-Sep-2022
+
 sidebar: documentation_sidebar
 permalink: AnisotropicTheory.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Anisotropic Elasticity</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
+      --><title>Anisotropic Elasticity</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the sitiffness tensor for Olivine</p>
 {% highlight matlab %}
 % file name
@@ -25,10 +25,9 @@ C = stiffnessTensor.load(fname,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = stiffnessTensor  
-  unit   : GPa              
-  rank   : 4 (3 x 3 x 3 x 3)
-  mineral: Olivin (mmm)     
+C = stiffnessTensor (Olivin)
+  unit: GPa              
+  rank: 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
  320.5  68.2  71.6     0     0     0
@@ -44,10 +43,9 @@ eps = strainTensor(diag([1,1.1,0.9]),cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-eps = strainTensor  
-  type   : Lagrange    
-  rank   : 2 (3 x 3)   
-  mineral: Olivin (mmm)
+eps = strainTensor (Olivin)
+  type: Lagrange 
+  rank: 2 (3 x 3)
  
    1   0   0
    0 1.1   0
@@ -59,9 +57,8 @@ sigma = C : eps
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigma = stressTensor  
-  rank   : 2 (3 x 3)   
-  mineral: Olivin (mmm)
+sigma = stressTensor (Olivin)
+  rank: 2 (3 x 3)
  
  459.9     0     0
      0 353.4     0
@@ -73,10 +70,9 @@ inv(C) : sigma
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = strainTensor  
-  type   : Lagrange    
-  rank   : 2 (3 x 3)   
-  mineral: Olivin (mmm)
+ans = strainTensor (Olivin)
+  type: Lagrange 
+  rank: 2 (3 x 3)
  
    1   0   0
    0 1.1   0

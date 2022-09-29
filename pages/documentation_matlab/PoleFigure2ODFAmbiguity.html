@@ -1,6 +1,6 @@
 ---
 title: Ambiguity of the Pole Figure to ODF Reconstruction Problem
-last_updated: 01-Apr-2022
+
 sidebar: documentation_sidebar
 permalink: PoleFigure2ODFAmbiguity.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ambiguity of the Pole Figure to ODF Reconstruction Problem</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_PoleFigure2ODFAmbiguity.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigure2ODFAmbiguity.m">
+      --><title>Ambiguity of the Pole Figure to ODF Reconstruction Problem</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_PoleFigure2ODFAmbiguity.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigure2ODFAmbiguity.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>This page demonstrates different sources of ambiguity when reconstructing an ODF from pole figure diffraction data.</p><h2 id="2">The ambiguity due to too few pole figures</h2><p>Due to experimental limitations, one is usually restricted to a short list of crystal directions (Miller indices) for which diffraction pole figures can be measured. In general, more measured pole figures implies more reliable ODF reconstruction and low-symmetry materials and weak textures usually requires more pole figures then sharp texture with a high crystal symmetry. From a theoretical point of view, the number of pole figures should be at a level with the square root of the number of pole points in each pole figure. This is of course far from experimentally possible.</p><p>Let's demonstrate the ambiguity due to too few pole figures at the example of two orthorhombic ODFs. The first ODF has three modes at the positions</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mmm');
@@ -50,16 +50,14 @@ odf2 = ODF (mmm → xyz)
 figure(1)
 plot(odf1,'sigma')
 mtexColorMap LaboTeX
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFAmbiguity_01.png" %}
-</center>
-{% highlight matlab %}
+
 figure(2)
 plot(odf2,'sigma')
 mtexColorMap LaboTeX
 {% endhighlight %}
 <center>
+{% include inline_image.html file="PoleFigure2ODFAmbiguity_01.png" %}
+</center><center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_02.png" %}
 </center><p>However, when it comes to pole figures 7 of them, namely, (100), (010), (001), (110), (101), (011) and (111), are identical for both ODFs. Of course looking at any other pole figure makes clear that those two ODFs are different.</p>
 {% highlight matlab %}
@@ -67,16 +65,14 @@ figure(1)
 h = Miller({1,0,0},{0,1,0},{0,0,1},{1,1,0},{1,0,1},{0,1,1},{1,1,1},{1,2,0},cs);
 plotPDF(odf1,h,'contourf')
 mtexColorMap LaboTeX
-{% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigure2ODFAmbiguity_03.png" %}
-</center>
-{% highlight matlab %}
+
 figure(2)
 plotPDF(odf2,h,'contourf')
 mtexColorMap LaboTeX
 {% endhighlight %}
 <center>
+{% include inline_image.html file="PoleFigure2ODFAmbiguity_03.png" %}
+</center><center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_04.png" %}
 </center><p>The question is now, how can any pole figure to ODF reconstruction algorithm decide which of the two ODFs was the true one if only the seven identical pole figures  (100), (010), (001), (110), (101), (011), (111) have been measured? The answer is: this is impossible to decide. Next question is: which result will I get from the MTEX reconstruction algorithm? Let's check this</p>
 {% highlight matlab %}
@@ -148,7 +144,7 @@ odf = ODF (mmm → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_08.png" %}
-</center><h2 id="13">The ambiguity due to too Friedel's law</h2><p>Due to Friedel's law pole figure data always impose antipodal symmetry. In order to demonstrate the consequences of this antipodal symmetry we consider crystal symmetry -43m</p>
+</center><h2 id="11">The ambiguity due to too Friedel's law</h2><p>Due to Friedel's law pole figure data always impose antipodal symmetry. In order to demonstrate the consequences of this antipodal symmetry we consider crystal symmetry -43m</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-43m')
 {% endhighlight %}
@@ -211,7 +207,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_11.png" %}
-</center><p>As a consequence of Friedels law, all noncentrosymmetric information about the texture is lost in the diffraction pole figures and we can only aim at recovering the centrosymmetric portion. In particular, any ODF that is reconstructed by MTEX from diffraction pole figures is centrosymmetric, i.e. its point group is a Laue group. If the point group of the crystal was already a Laue group then Fridel's law does not impose any additional ambiguity.</p><h2 id="19">The inherent ambiguity of the pole figure - ODF relationship</h2><p>Unfortunately, knowing all diffraction pole figures of an ODF is even for centrosymmetric symmetries not sufficient to recover the ODF unambiguously. To understand the reason for this ambiguity we consider triclinic symmetry and a week unimodal ODF with prefered orientation (0,0,0).</p>
+</center><p>As a consequence of Friedels law, all noncentrosymmetric information about the texture is lost in the diffraction pole figures and we can only aim at recovering the centrosymmetric portion. In particular, any ODF that is reconstructed by MTEX from diffraction pole figures is centrosymmetric, i.e. its point group is a Laue group. If the point group of the crystal was already a Laue group then Fridel's law does not impose any additional ambiguity.</p><h2 id="17">The inherent ambiguity of the pole figure - ODF relationship</h2><p>Unfortunately, knowing all diffraction pole figures of an ODF is even for centrosymmetric symmetries not sufficient to recover the ODF unambiguously. To understand the reason for this ambiguity we consider triclinic symmetry and a week unimodal ODF with prefered orientation (0,0,0).</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-1');
 

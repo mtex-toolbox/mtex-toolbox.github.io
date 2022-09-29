@@ -30,7 +30,7 @@ Use the XSLT command to perform the conversion.
   <xsl:include href="makelink.xsl"/>
   <xsl:template match="mscript">---
 title: <xsl:value-of select="$title"/>
-last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>
+<!--last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>-->
 sidebar: <xsl:value-of select="$toolbox/folder"/>_sidebar
 permalink: <xsl:value-of select="$toolbox/htmlTarget"/>
 folder: <xsl:value-of select="$toolbox/folder"/>
@@ -46,13 +46,13 @@ To make changes, update the MATLAB code and republish this document.
 
     <title><xsl:value-of select="$title"/></title>
 
-    <meta name="generator">
+    <!--<meta name="generator">
       <xsl:attribute name="content">MATLAB <xsl:value-of select="version"/></xsl:attribute>
-    </meta>
+    </meta>-->
     <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-    <meta name="DC.date">
+    <!--<meta name="DC.date">
       <xsl:attribute name="content"><xsl:value-of select="date"/></xsl:attribute>
-    </meta>
+    </meta>-->
     <meta name="DC.source">
       <xsl:attribute name="content"><xsl:value-of select="m-file"/>.m</xsl:attribute>
     </meta>

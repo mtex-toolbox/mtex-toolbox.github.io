@@ -1,6 +1,6 @@
 ---
 title: Tensor Arithmetics
-last_updated: 28-Sep-2022
+
 sidebar: documentation_sidebar
 permalink: TensorArithmetics.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tensor Arithmetics</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
+      --><title>Tensor Arithmetics</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
     edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2><p>First of all, all basic operations like <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">.^</code> known from linear algebra work also on lists of tensors.</p>
 {% highlight matlab %}
 T1 = tensor.rand('rank',2);
@@ -29,7 +29,7 @@ C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'))
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = stiffnessTensor  
+C = stiffnessTensor (xyz)
   unit: GPa              
   rank: 4 (3 x 3 x 3 x 3)
  
@@ -47,7 +47,7 @@ eps = strainTensor(diag([1 0 -1]))
 {% endhighlight %}
 
 {% highlight plaintext %}
-eps = strainTensor  
+eps = strainTensor (xyz)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -61,7 +61,7 @@ sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigma = tensor  
+sigma = tensor (xyz)
   rank: 2 (3 x 3)
  
   248.9      0      0
@@ -79,7 +79,7 @@ EinsteinSum(a,1,b,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = tensor  
+ans = tensor (xyz)
   rank: 2 (3 x 3)
  
  0 2 1
@@ -103,7 +103,7 @@ c = EinsteinSum(C,[-1 -2 -3 -3],v,-1,v,-2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-S = complianceTensor  
+S = complianceTensor (xyz)
   unit            : 1/GPa            
   rank            : 4 (3 x 3 x 3 x 3)
   doubleConvention: true             
@@ -125,14 +125,14 @@ C : eps
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = stressTensor  
+ans = stressTensor (xyz)
   rank: 2 (3 x 3)
  
   248.9      0      0
       0  -8.65      0
       0      0 -161.9
  
-ans = stressTensor  
+ans = stressTensor (xyz)
   rank: 2 (3 x 3)
  
   248.9      0      0
@@ -148,11 +148,11 @@ trace(T1' * T2)
 
 {% highlight plaintext %}
 ans =
-    1.4608
+    2.5325
 ans =
-    1.4608
+    2.5325
 ans =
-    1.4608
+    2.5325
 {% endhighlight %}
 <h2 id="11">Determinant</h2><p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a></p>
 {% highlight matlab %}
@@ -161,7 +161,7 @@ det(T1)
 
 {% highlight plaintext %}
 ans =
-    0.4070
+   -0.0435
 {% endhighlight %}
 <h2 id="12">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
 {% highlight matlab %}
@@ -187,7 +187,7 @@ T = rotate(T,r)
 {% endhighlight %}
 
 {% highlight plaintext %}
-T = tensor  
+T = tensor (xyz)
   propertyname: piezoelectric modulus
   rank        : 3 (3 x 3 x 3)        
  
@@ -196,7 +196,7 @@ T = tensor
     0    0    0    0  1.7    0
     0    0    0    0    0 51.7
  
-T = tensor  
+T = tensor (xyz)
   propertyname: piezoelectric modulus
   rank        : 3 (3 x 3 x 3)        
  

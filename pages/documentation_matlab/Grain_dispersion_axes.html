@@ -1,6 +1,6 @@
 ---
 title: Using fibres to evaluate grain dispersion axes
-last_updated: 01-Apr-2022
+
 sidebar: documentation_sidebar
 permalink: Grain_dispersion_axes.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Using fibres to evaluate grain dispersion axes</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_Grain_dispersion_axes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/Grain_dispersion_axes.m">
+      --><title>Using fibres to evaluate grain dispersion axes</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_Grain_dispersion_axes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/Grain_dispersion_axes.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>We will prepare some data to evaluate grain dispersion axes.</p>
 {% highlight matlab %}
 mtexdata forsterite
@@ -55,9 +55,9 @@ hold off
 </center><h2 id="3">Visualizing dispersion of orientations via directions</h2>
 {% highlight matlab %}
 % First, we will inspect a selected grain
-sel_id =  1395;
+grain_selected = grains(5095, 7803);
 hold on
-plot(grains('id',sel_id).boundary,'linewidth',3,'linecolor','b')
+plot(grain_selected.boundary,'linewidth',3,'linecolor','b')
 hold off
 
 % and examine the spread of orientations in terms of its pole figure. In
@@ -69,7 +69,7 @@ s2G = equispacedS2Grid('resolution',15*degree);
 s2G = Miller(s2G,ebsd('f').CS)
 
 % use the orientations of points belonging to the grain
-o = ebsd(grains('id',sel_id)).orientations;
+o = ebsd(grain_selected).orientations;
 
 % and compute the corresponding specimen directions
 d = o .* s2G;
@@ -97,7 +97,7 @@ mtexColorbar('title','avergage pole dispersion')
 
 % and we can ask which grid point is the one with the smallest dispersion
 [~,id_min]=min(vd);
-disp_ax_grid = grains('id',sel_id).meanOrientation .* s2G(id_min);
+disp_ax_grid = grain_selected.meanOrientation .* s2G(id_min);
 annotate(disp_ax_grid)
 annotate(disp_ax_grid,'plane','linestyle','--','linewidth',2)
 
@@ -110,7 +110,7 @@ annotate(disp_ax_grid,'plane','linestyle','--','linewidth',2)
 </center><p>If we assume, the orientations are dispersed along one single axis, we can fit an orientation fibre <a href="fibre.fibre.html"><code class="language-plaintext highlighter-rouge">fibre</code></a></p>
 {% highlight matlab %}
 % This can be accomplished by |fibre.fit|
-fib = fibre.fit(o)
+fib = fibre.fit(o,'local')
 
 % the fibre has an axis in specimen coordinates |fib.r| and in crystal
 % coordinates |fib.h|.
@@ -125,7 +125,7 @@ annotate(fib.r,'plane','linestyle','-.','linewidth',2,'lineColor','r')
 {% highlight plaintext %}
 fib = fibre (Forsterite → xyz)
  
- h || r: (1 11 -2) || (12,5,-3)
+  h || r: (1 11 -2) || (12,5,-3)
  
 ans = vector3d  
         x         y         z
@@ -152,7 +152,7 @@ hold off
 nextAxis
 % we can also inspect the distance of each orientation within the grains
 % to the fitted fibre with the grains
-plot(ebsd(grains('id',sel_id)),fd)
+plot(ebsd(grain_selected),fd)
 mtexColorbar('title', 'distance from fibre')
 {% endhighlight %}
 
@@ -161,7 +161,7 @@ plot 2000 random orientations out of 2826 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Grain_dispersion_axes_05.png" %}
-</center><p>TODO: use eigenvalues of fibre.fit  to give measure of "fibryness" [fib, lambda] = fibre.fit(o) lambda(2)/lambda(3)</p><h2 id="8">Bulk evaluation</h2><p>We can fit a fibre for each grain and write out the axes in crystal as well as in specimen coordiantes</p>
+</center><p>TODO: use eigenvalues of fibre.fit  to give measure of "fibryness" [fib, lambda] = fibre.fit(o,'local') lambda(2)/lambda(3)</p><h2 id="8">Bulk evaluation</h2><p>We can fit a fibre for each grain and write out the axes in crystal as well as in specimen coordiantes</p>
 {% highlight matlab %}
 %ids = grains('f').id;
 %clear fib_axSC fib_axCC

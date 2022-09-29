@@ -1,6 +1,6 @@
 ---
 title: Parent Beta Phase Reconstruction in Titanium Alloys
-last_updated: 01-Apr-2022
+
 sidebar: documentation_sidebar
 permalink: TiBetaReconstruction.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><meta name="generator" content="MATLAB 9.12"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-04-01"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
+      --><title>Parent Beta Phase Reconstruction in Titanium Alloys</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TiBetaReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TiBetaReconstruction.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss parent grain reconstruction at the example of a titanium alloy. Lets start by importing a sample data set</p>
 {% highlight matlab %}
 mtexdata alphaBetaTitanium
@@ -35,13 +35,13 @@ ebsd = EBSD
 {% include inline_image.html file="TiBetaReconstruction_01.png" %}
 </center><p>The data set contains 99.8 percent alpha titanium and 0.2 percent beta titanium. Our goal is to reconstuct the original beta phase. The original grain structure appears almost visible for human eyes. Our computations will be based on the Burgers orientation relationship</p>
 {% highlight matlab %}
-beta2alpha = orientation.Burgers(ebsd('Ti (beta)').CS,ebsd('Ti (alpha)').CS);
-round2Miller(beta2alpha)
+beta2alpha = orientation.Burgers(ebsd('Ti (beta)').CS,ebsd('Ti (alpha)').CS)
 {% endhighlight %}
 
 {% highlight plaintext %}
-plane parallel   direction parallel    fit
-(110) || (0001)   [-11-1] || [2-1-10]     0°
+beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
+ 
+ (110) || (0001)   [1-11] || [-2110]
 {% endhighlight %}
 <p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initital child grains from out EBSD data set.</p>
 {% highlight matlab %}
@@ -61,7 +61,7 @@ job = parentGrainReconstructor
  parent  Ti (BETA)   432       432     0.23%  0%           
  child   Ti (alpha)  622       61115   100%                
  
- OR: (110)||(0001)  [-11-1]||[2-1-10]
+ OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
    c2c fit: 0.71°, 0.99°, 1.3°, 1.7° (quintiles)
 {% endhighlight %}
@@ -77,9 +77,9 @@ ans = parentGrainReconstructor
  parent  Ti (BETA)   432       432     0.23%  0%           
  child   Ti (alpha)  622       61115   100%                
  
- OR: (110)||(0001)  [-11-1]||[2-1-10]
+ OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.72°, 1°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 1°, 1.3°, 1.7° (quintiles)
  
  variant graph: 615098 entries
 {% endhighlight %}
@@ -95,9 +95,9 @@ ans = parentGrainReconstructor
  parent  Ti (BETA)   432       432     0.23%  0%           
  child   Ti (alpha)  622       61115   100%                
  
- OR: (110)||(0001)  [-11-1]||[2-1-10]
+ OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.71°, 1°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 0.99°, 1.3°, 1.7° (quintiles)
  
  votes: 61115 x 1
    probabilities: 100%, 99%, 96%, 88% (quintiles)
@@ -114,7 +114,7 @@ ans = parentGrainReconstructor
  parent  Ti (BETA)   432       59721   99%   97%          
  child   Ti (alpha)  622       1826    1.1%               
  
- OR: (110)||(0001)  [-11-1]||[2-1-10]
+ OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 3.1°, 25°, 35°, 42° (quintiles)
    c2c fit: 2.2°, 5°, 12°, 19° (quintiles)
  
@@ -149,7 +149,7 @@ ans = parentGrainReconstructor
  parent  Ti (BETA)   432       122     99%   97%          
  child   Ti (alpha)  622       1786    1.1%               
  
- OR: (110)||(0001)  [-11-1]||[2-1-10]
+ OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 3.2°, 19°, 34°, 41° (quintiles)
    c2c fit: 4.5°, 9.4°, 17°, 23° (quintiles)
  
@@ -171,10 +171,10 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor  
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       42      100%   100%         
- child   Ti (alpha)  622       269     0.22%               
+ parent  Ti (BETA)   432       40      100%   100%         
+ child   Ti (alpha)  622       264     0.21%               
  
- OR: (110)||(0001)  [-11-1]||[2-1-10]
+ OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 3.3°, 6°, 18°, 32° (quintiles)
    c2c fit: 4.8°, 8.3°, 15°, 20° (quintiles)
  
