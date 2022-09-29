@@ -120,7 +120,7 @@ of material scientists, geologists and mathematicians.
                 <i class="fa fa-book"></i>
                 Documentation
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="documentation" content="All&nbsp;Topics" %}
+                {% include reference.html link="Documentation" content="All&nbsp;Topics" %}
                 | {% include reference.html link="function_reference" content="Function&nbsp;References" %}
                 | {% include reference.html link="download#installation" content="Installation" no_icon=true %}
                 | {% include reference.html link="examples" content="Examples" %}
