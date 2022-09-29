@@ -1,6 +1,6 @@
 ---
 title: Twinning Analysis
-last_updated: 10-Sep-2021
+
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><meta name="generator" content="MATLAB 9.11"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-10"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
+      --><title>Twinning Analysis</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 % load some example data
@@ -105,7 +105,7 @@ round2Miller(mori_mean)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori_mean = misorientation (Magnesium -> Magnesium)
+mori_mean = misorientation (Magnesium → Magnesium)
   antipodal:         true
  
   Bunge Euler angles in degree
@@ -113,8 +113,8 @@ mori_mean = misorientation (Magnesium -> Magnesium)
   90.5949 86.0962 269.995       0
  
  
-    plane parallel   direction parallel     fit
-(0-111) || (1-101)   [30-33] || [10-1-1]     0.628°
+      plane parallel   direction parallel      fit
+(01-1-1) || (-110-1)   [10-11] || [10-1-1]     0.628°
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
@@ -123,11 +123,9 @@ twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
 {% endhighlight %}
 
 {% highlight plaintext %}
-twinning = misorientation (Magnesium -> Magnesium)
+twinning = misorientation (Magnesium → Magnesium)
  
-  Bunge Euler angles in degree
-  phi1     Phi    phi2    Inv.
-   150 86.2992     210       0
+ (1-101) || (10-11)   [01-11] || [01-1-1]
 {% endhighlight %}
 <p>and observe that it is actually a rotation about axis (-1210) and angle 86.3 degree</p>
 {% highlight matlab %}
@@ -139,10 +137,9 @@ twinning.angle / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller  
- mineral: Magnesium (622, X||a*, Y||b, Z||c*)
+ans = Miller (Magnesium)
    h  k  i  l
-  -1  2 -1  0
+  -2  1  1  0
 ans =
    86.2992
 {% endhighlight %}

@@ -1,6 +1,6 @@
 ---
 title: Isotropic Theory
-last_updated: 28-Sep-2022
+
 sidebar: documentation_sidebar
 permalink: IsotropicTheory.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Isotropic Theory</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_IsotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/IsotropicTheory.m">
+      --><title>Isotropic Theory</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_IsotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/IsotropicTheory.m">
     edit page</a></font><div><!--introduction--><p>While the linear elastic model for anisotropic materials is based on the fourth order elastic stiffness tensor <code class="language-plaintext highlighter-rouge">C</code> the linear elastic model for isotropic models is most often developed in terms of the elastic moduli shear, bulk, Youngs modulus and the Poisson ratio.</p><!--/introduction--><h2 id="1">The single crystal stiffness tensor</h2><p>Lets start our discussion with a single crystal stiffness tensor of Albite.</p>
 {% highlight matlab %}
 % density (g/cm3)
@@ -33,11 +33,10 @@ C = stiffnessTensor(...
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = stiffnessTensor  
-  density: 2.623                            
-  unit   : GPa                              
-  rank   : 4 (3 x 3 x 3 x 3)                
-  mineral: An0 Albite 2016 (-1, X||a*, Y||b)
+C = stiffnessTensor (An0 Albite 2016)
+  density: 2.623            
+  unit   : GPa              
+  rank   : 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
   68.3  32.2  30.4   4.9  -2.3  -0.9
@@ -53,7 +52,7 @@ C = stiffnessTensor
 {% endhighlight %}
 
 {% highlight plaintext %}
-C_iso_Voigt = stiffnessTensor  
+C_iso_Voigt = stiffnessTensor (xyz)
   density: 2.623            
   unit   : GPa              
   rank   : 4 (3 x 3 x 3 x 3)
@@ -66,7 +65,7 @@ C_iso_Voigt = stiffnessTensor
       0      0      0      0  41.43      0
       0      0      0      0      0  41.43
  
-C_iso_Reuss = stiffnessTensor  
+C_iso_Reuss = stiffnessTensor (xyz)
   density: 2.623            
   unit   : GPa              
   rank   : 4 (3 x 3 x 3 x 3)
@@ -79,7 +78,7 @@ C_iso_Reuss = stiffnessTensor
      0     0     0     0 29.84     0
      0     0     0     0     0 29.84
  
-C_iso_Hill = stiffnessTensor  
+C_iso_Hill = stiffnessTensor (xyz)
   density: 2.623            
   unit   : GPa              
   rank   : 4 (3 x 3 x 3 x 3)
@@ -126,10 +125,9 @@ stiffnessTensor(...
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = stiffnessTensor  
-  unit   : GPa                              
-  rank   : 4 (3 x 3 x 3 x 3)                
-  mineral: An0 Albite 2016 (-1, X||a*, Y||b)
+ans = stiffnessTensor (An0 Albite 2016)
+  unit: GPa              
+  rank: 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
  118.33  35.47  35.47      0      0      0
@@ -153,10 +151,9 @@ inv(complianceTensor(...
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = stiffnessTensor  
-  unit   : GPa                              
-  rank   : 4 (3 x 3 x 3 x 3)                
-  mineral: An0 Albite 2016 (-1, X||a*, Y||b)
+ans = stiffnessTensor (An0 Albite 2016)
+  unit: GPa              
+  rank: 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
  118.33  35.47  35.47      0      0      0
@@ -198,10 +195,9 @@ mu =G;
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = stiffnessTensor  
-  unit   : GPa                              
-  rank   : 4 (3 x 3 x 3 x 3)                
-  mineral: An0 Albite 2016 (-1, X||a*, Y||b)
+ans = stiffnessTensor (An0 Albite 2016)
+  unit: GPa              
+  rank: 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
  118.33  35.47  35.47      0      0      0
@@ -219,12 +215,12 @@ sigma = C_iso_Voigt : eps
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigma = stressTensor  
+sigma = stressTensor (xyz)
   rank: 2 (3 x 3)
  
- 126.76  43.54  43.02
-  43.54 144.06  22.05
-  43.02  22.05  78.05
+ 139.33  23.36  22.83
+  23.36 122.97  19.53
+  22.83  19.53 116.81
 {% endhighlight %}
 <p>in terms of the Lame constants by</p>
 {% highlight matlab %}
@@ -232,14 +228,13 @@ sigma = stressTensor(2 * mu * eps + lambda * trace(eps) * tensor.eye)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigma = stressTensor  
-  type   : Lagrange                         
-  rank   : 2 (3 x 3)                        
-  mineral: An0 Albite 2016 (-1, X||a*, Y||b)
+sigma = stressTensor (An0 Albite 2016)
+  type: Lagrange 
+  rank: 2 (3 x 3)
  
- 126.76  43.54  43.02
-  43.54 144.06  22.05
-  43.02  22.05  78.05
+ 139.33  23.36  22.83
+  23.36 122.97  19.53
+  22.83  19.53 116.81
 {% endhighlight %}
 <h2 id="11">Hashin Shtrikman Bounds</h2><p>While the Voigt and Reuss bounds are tight without additional assumptions, the extreme cases require a very specific layered microstructure. If one additionally assumes that the material is quasihomogeneous, i.e., it is constant elastic properties within each subregion that is significantly larger then the grain size, then the Voigt and Reuss bounds are to wide. More narrow bounds for this settings have been established by Hashin and Shtrikman in 1962.</p><p>The following deviation follows the paper by J.M. Brown (2015) <i>Determination of Hashin-Shtrikman bounds on the isotropic effective elastic moduli of polycrystals of any symmetry</i>, Computers &amp; Geosciences, 80 (2015) 95-99.</p><p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimzation problem. Lets first set up the search domain</p>
 {% highlight matlab %}
@@ -285,7 +280,7 @@ axis equal tight
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 1.328780 seconds.
+Elapsed time is 1.507633 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="IsotropicTheory_01.png" %}

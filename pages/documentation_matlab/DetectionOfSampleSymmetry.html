@@ -1,6 +1,6 @@
 ---
 title: Detection of Sample Symmetry
-last_updated: 28-Sep-2022
+
 sidebar: documentation_sidebar
 permalink: DetectionOfSampleSymmetry.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Detection of Sample Symmetry</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/DetectionOfSampleSymmetry.m">
+      --><title>Detection of Sample Symmetry</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_DetectionOfSampleSymmetry.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/DetectionOfSampleSymmetry.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">A synthetic example</h2><p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic');
@@ -59,7 +59,7 @@ ori = rot * calcOrientations(odf,1000)
 odf_est = calcDensity(ori,'halfwidth',10*degree)
 
 % and visualize it
-figure, plotPDF(odf_est,h,'antipodal',8,'silent');
+plotPDF(odf_est,h,'antipodal',8,'silent');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -74,13 +74,10 @@ odf_est = ODF (m-3m → xyz (222))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
-</center><center>
-{% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
 </center><h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p>
 {% highlight matlab %}
 [odf_corrected,rot_inv] = centerSpecimen(odf_est);
 
-figure
 plotPDF(odf_corrected,h,'antipodal',8,'silent')
 
 % the difference between the applied rotation and the estimate rotation
@@ -92,7 +89,7 @@ ans =
    15.6088
 {% endhighlight %}
 <center>
-{% include inline_image.html file="DetectionOfSampleSymmetry_04.png" %}
+{% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
 </center><h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <code class="language-plaintext highlighter-rouge">centerSpecimen</code> to an ODF estimated from pole figure data. Lets start by importing them</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'PoleFigure','aachen_exp.EXP');
@@ -101,7 +98,7 @@ pf = PoleFigure.load(fname);
 plot(pf,'silent')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}
+{% include inline_image.html file="DetectionOfSampleSymmetry_04.png" %}
 </center><p>In a second step we compute an ODF from the pole figure data</p>
 {% highlight matlab %}
 odf = calcODF(pf,'silent')
@@ -118,10 +115,10 @@ odf = ODF (m-3m → xyz)
     weight: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="DetectionOfSampleSymmetry_06.png" %}
+{% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}
 </center><p>Finally, we detect the orthotropic symmetry axes a1, a2, a3 by</p>
 {% highlight matlab %}
-[~,~,a1,a2] = centerSpecimen(odf,yvector)
+[~,~,a1,a2] = centerSpecimen(odf,yvector,'Fourier')
 a3 = cross(a1,a2)
 
 annotate([a1,a2,a3],'label',{'RD','TD','ND'},'backgroundcolor','w','MarkerSize',8)
@@ -141,5 +138,5 @@ a3 = vector3d
   -0.000162903  -0.00325478     0.999995
 {% endhighlight %}
 <center>
-{% include inline_image.html file="DetectionOfSampleSymmetry_07.png" %}
+{% include inline_image.html file="DetectionOfSampleSymmetry_06.png" %}
 </center></div></body></html>

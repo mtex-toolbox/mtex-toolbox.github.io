@@ -1,6 +1,6 @@
 ---
 title: The Schmid Factor
-last_updated: 28-Sep-2022
+
 sidebar: documentation_sidebar
 permalink: SchmidtFactor.html
 folder: documentation
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Schmid Factor</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-09-28"><meta name="DC.source" content="script_SchmidtFactor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SchmidtFactor.m">
+      --><title>The Schmid Factor</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SchmidtFactor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SchmidtFactor.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>Let us assume a Nickel crystal</p>
 {% highlight matlab %}
 CS = crystalSymmetry('cubic',[3.523,3.523,3.523],'mineral','Nickel')
@@ -118,7 +118,7 @@ sigma = stressTensor.uniaxial(vector3d.Z)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigma = stressTensor  
+sigma = stressTensor (xyz)
   rank: 2 (3 x 3)
  
  0 0 0
@@ -364,7 +364,7 @@ mtexColorbar location southoutside
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigma = stressTensor  
+sigma = stressTensor (xyz)
   rank: 2 (3 x 3)
  
  0 0 0
@@ -395,10 +395,9 @@ sigmaLocal = inv(grains.meanOrientation) * sigma
 {% endhighlight %}
 
 {% highlight plaintext %}
-sigmaLocal = stressTensor  
-  size   : 71 x 1     
-  rank   : 2 (3 x 3)  
-  mineral: iron (m-3m)
+sigmaLocal = stressTensor (iron)
+  size: 71 x 1   
+  rank: 2 (3 x 3)
 {% endhighlight %}
 <p>This becomes a list of stress tensors with respect to crystal coordinates - one for each grain. Now we have both the slip systems as well as the stress tensor in crystal coordiantes and can compute the Schmid factor</p>
 {% highlight matlab %}
@@ -440,7 +439,7 @@ mtexColorbar southoutside
 {% endhighlight %}
 
 {% highlight plaintext %}
-eps = strainTensor  
+eps = strainTensor (xyz)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -448,11 +447,10 @@ eps = strainTensor
   0  0  0
   0  0 -1
  
-epsCrystal = strainTensor  
-  size   : 71 x 1     
-  type   : Lagrange   
-  rank   : 2 (3 x 3)  
-  mineral: iron (m-3m)
+epsCrystal = strainTensor (iron)
+  size: 71 x 1   
+  type: Lagrange 
+  rank: 2 (3 x 3)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SchmidtFactor_10.png" %}
