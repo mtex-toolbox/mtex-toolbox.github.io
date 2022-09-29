@@ -90,6 +90,10 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" content="Contribute" %}
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
+					<li>
+                        {% include reference.html link="workshops" content="Workshops" %}
+                        - lectures and exercises on the usage of MTEX.
+                    </li>
 					<!--
                     <li>
                         {% capture ref_content %}
