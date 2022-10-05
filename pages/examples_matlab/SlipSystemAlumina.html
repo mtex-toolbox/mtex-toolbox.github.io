@@ -1,0 +1,190 @@
+---
+title: Slip System Analysis in \(\alpha\)-Alumina
+last_updated: 05-Oct-2022
+sidebar: examples_sidebar
+permalink: SlipSystemAlumina.html
+folder: examples
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Slip System Analysis in \(\alpha\)-Alumina</title><meta name="generator" content="MATLAB 9.13"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2022-10-05"><meta name="DC.source" content="script_SlipSystemAlumina.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/PlasticityExamples/SlipSystemAlumina.m">
+    edit page</a>
+    author: Ruben Wagner, TU Bergakademie Freiberg, Institute of Materials
+</font><div><!--introduction--><p>Engineering, Germany</p><!--/introduction--><h2 id="1">Data Import</h2><p>The following EBSD maps has been measured by Ruben Wagner TUBAF, Institute of Materials Engineering, 2022 within the project SFB 920. It shows an alumina with multiphase inclusions in 42CrMo4 steel after nanoindentation.</p>
+{% highlight matlab %}
+% set crystal symmetry
+cs = crystalSymmetry.load('Al2O3-Corundum.cif');
+
+% set plotting convention
+setMTEXpref('xAxisDirection','east');
+setMTEXpref('zAxisDirection','intoPlane');
+
+% import data
+ebsd = EBSD.load('K1_C_16_EBSD_original_bc.txt',...
+  {'notIndexed',cs,'notIndexed'},'interface','csv','silent');
+
+% rotate the data in the right reference frame
+rot = rotation.byEuler(90*degree,180*degree,0*degree);
+ebsd = rotate(ebsd('indexed'),rot,'keepXY');
+{% endhighlight %}
+<h2 id="2">initial grain reconstruction and visualization</h2>
+{% highlight matlab %}
+% reconstruct grain structure
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',1*degree);
+
+cKey = ipfColorKey(cs);
+cKey.inversePoleFigureDirection = vector3d(1,0,0);
+
+figure(2)
+plot(ebsd,cKey.orientation2color(ebsd.orientations))
+hold on
+plot(grains.boundary,grains.boundary.misrotation.angle./degree,'linewidth',3)
+hold off
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SlipSystemAlumina_01.png" %}
+</center><h2 id="3">Correct for misindexiation due to pseudosymmetry</h2><p>Looking at the raw data we observe several neighbouring measurements that are exactly 180 degree rotated with respect to each other. This is indicated by color coded grain boundaries. It is suspected that this misorientation occurs as the EBSD system has a hard time to distinguish the Kikuchi pattern of two orientations that differ by a rotation about the c-axis by 180 degree.</p><p>In order to correct for this misindexiation we proceed as follows</p><pre># Identify grain boundaries due to pseudo symmetry
+# Merge grains with common pseudo symmetry grain boundaries and
+compute the dominant orientation of the merged grains
+# Correct the EBSD data according to the pseudo symmetry</pre><p><b>1. Identify boundaries between pseudosymmetric grains</b></p>
+{% highlight matlab %}
+% all Corundum Corundum boundaries
+gB = grains.boundary('indexed');
+
+% define the pseudo symmetry
+pseudoSym = orientation.byAxisAngle(cs.cAxis,180*degree);
+
+% allow for a three 3 degree threshold
+ispseudoBnd = angle(gB.misorientation,pseudoSym)<3*degree;
+{% endhighlight %}
+<p><b>2. Merge grains with common pseudo symmetry grain boundaries</b> This results is two big grains as visualised below</p>
+{% highlight matlab %}
+[grains, parentId] = grains.merge(gB(ispseudoBnd),'calcMeanOrientation',...
+  @(g) updateOri(g,pseudoSym));
+
+plot(grains,cKey.orientation2color(grains.meanOrientation))
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SlipSystemAlumina_02.png" %}
+</center><p>*3. Correct the EBSD data according to the pseudo symmetry</p>
+{% highlight matlab %}
+% find all EBSD data which differ by the computed grain orientation by
+% about 180 degree
+flipPseudo = ~(angle(ebsd.orientations,grains(parentId(ebsd.grainId)).meanOrientation)> 10*degree);
+
+ebsd(flipPseudo).orientations = ebsd(flipPseudo).orientations * pseudoSym;
+
+cKey.inversePoleFigureDirection = zvector;
+plot(ebsd,cKey.orientation2color(ebsd.orientations))
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SlipSystemAlumina_03.png" %}
+</center><h2 id="6">Data cleaning</h2><p>We perform some more data cleaning steps including</p><div><ol><li>removing too small grains</li><li>filling of the not indexed pixels</li></ol></div>
+{% highlight matlab %}
+% redo grain reconstruction
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',1*degree);
+
+% and remove little grains
+ebsd(grains(grains.grainSize<4)) = [];
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',1*degree);
+
+% filling EBSD holes
+F = halfQuadraticFilter;
+F.alpha=0.3;
+ebsdS = smooth(ebsd,F,'fill',grains);
+
+% visualize the result
+cKey.inversePoleFigureDirection = zvector;
+plot(ebsdS,cKey.orientation2color(ebsdS.orientations))
+
+hold on
+plot(ebsd, ebsd.bc,'FaceAlpha',0.3)
+colormap gray % make the image grayscale
+mtexColorbar
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SlipSystemAlumina_04.png" %}
+</center><h2 id="7">Schmid Factor Analysis</h2><p>Next we compute the the active slip system during pressure in z-direction. The dominant slip systems in ... are described in Mao2011 and 2012 as</p>
+{% highlight matlab %}
+n = Miller(1,0,-1,1,cs,'HKIL');
+b = Miller(-1,2,-1,0,cs,'UVTW');
+sS = slipSystem(b,n)
+{% endhighlight %}
+
+{% highlight plaintext %}
+sS = slipSystem (Corundum)
+ 
+   U    V    T    W  | H    K    I    L CRSS
+  -1    2   -1    0    1    0   -1    1    1
+{% endhighlight %}
+<p>Next we determine the Schmid factor for all symmetrically equivalent slip systems.</p>
+{% highlight matlab %}
+% rotate symmetrically equivalent slip systems into specimen coordinates of
+% each grain
+sSLocal = grains.meanOrientation * sS.symmetrise('antipodal');
+
+% compute Schmid factor according Z axis
+sigma = stressTensor.uniaxial(vector3d.Z);
+SF = abs(sSLocal.SchmidFactor(sigma));
+
+% sort the slips system according to their Schmid factor from largest to
+% smallest
+[SF, reorder] = sort(SF,2,"descend");
+reorder = sub2ind(size(reorder),repmat((1:size(reorder,1))',1,size(reorder,2)),reorder);
+sSLocal = sSLocal(reorder);
+{% endhighlight %}
+<p>Finally, we plot the trace of the slip planes together with the slip direction in the EBSD map.</p>
+{% highlight matlab %}
+figure(2)
+cKey.inversePoleFigureDirection = zvector;
+plot(ebsdS,cKey.orientation2color(ebsdS.orientations))
+
+hold on
+plot(ebsd, ebsd.bc,'FaceAlpha',0.3)
+colormap gray % make the image grayscale
+hold off
+
+order = 1;
+
+hold on
+% visualize the trace of the slip plane
+quiver(grains,sSLocal(:,order).trace,'color','blue','linewidth',5)
+
+% and the slip direction
+quiver(grains,sSLocal(:,order).b,'color','gray','linewidth',5)
+
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SlipSystemAlumina_05.png" %}
+</center>
+{% highlight matlab %}
+function ori = updateOri(grains,pseudoSym)
+
+ori = grains.meanOrientation;
+
+cId = 1+calcCluster(ori,'weights',grains.grainSize);
+
+% variant 1
+[~,isTrue] = max(accumarray(cId(:),grains.grainSize));
+
+% variant 2
+%[~,isTrue] = max(accumarray(cId(:),grains.numNeighbors));
+
+ori(cId ~= isTrue) = ori(cId ~= isTrue) * pseudoSym;
+
+ori = mean(ori,'weigths',grains.grainSize,'robust');
+
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+...
+{% endhighlight %}
+<h2 id="11">References</h2><div><ul><li>Ruben Wagner, Robert Lehnert, Enrico Storti, Lisa Ditscherlein, Christina Schr&ouml;der, Steffen Dudczig, Urs A. Peuker, Olena Volkova, Christos G. Aneziris, Horst Biermann, Anja Weidner, <a href="https://doi.org/10.1016/j.actamat.2021.116810"><i>Nanoindentation of alumina and multiphase inclusions in 42CrMo4 steel</i></a>, 2022.</li></ul></div></div></body></html>
