@@ -12,7 +12,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/ralf-hielscher.jpg" alt="Picture of Ralf Hielscher">
+                <img src="images/profiles/ralf-hielscher.png" alt="Picture of Ralf Hielscher">
             </div>
             <div class="panel-body">
                 <p>
@@ -31,7 +31,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/ruediger-kilian.jpg" alt="Picture of Rüdiger Kilian">
+                <img src="images/profiles/ruediger-kilian.png" alt="Picture of Rüdiger Kilian">
             </div>
             <div class="panel-body">
                 <p>
@@ -53,7 +53,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/david-mainprice.jpg" alt="Picture of David Mainprice">
+                <img src="images/profiles/david-mainprice.png" alt="Picture of David Mainprice">
             </div>
             <div class="panel-body">
                 <p>
@@ -71,7 +71,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/florian-bachmann.jpg" alt="Picture of Florian Bachmann">
+                <img src="images/profiles/florian-bachmann.png" alt="Picture of Florian Bachmann">
             </div>
             <div class="panel-body">
                 <p>
@@ -93,7 +93,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/felix-bartel.jpg" alt="Picture of Felix Bartel">
+                <img src="images/profiles/felix-bartel.png" alt="Picture of Felix Bartel">
             </div>
             <div class="panel-body">
                 <p>
@@ -110,7 +110,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/bjorn-eske-soerensen.jpg" alt="Picture of Bjoern Eske Soerensen">
+                <img src="images/profiles/bjorn-eske-soerensen.png" alt="Picture of Bjoern Eske Soerensen">
             </div>
             <div class="panel-body">
                 <p>
@@ -133,7 +133,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/tuomo-nyyssoenen.jpg" alt="Picture of Tuomo Nyyssoenen">
+                <img src="images/profiles/tuomo-nyyssoenen.png" alt="Picture of Tuomo Nyyssoenen">
             </div>
             <div class="panel-body">
                 <p>
@@ -148,7 +148,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/frank-niessen.jpg" alt="Picture of Frank Niessen">
+                <img src="images/profiles/frank-niessen.png" alt="Picture of Frank Niessen">
             </div>
             <div class="panel-body">
                 <p>
@@ -169,7 +169,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/oliver-kent-johnson.jpg" alt="Picture of Oliver kent Johnson">
+                <img src="images/profiles/oliver-kent-johnson.png" alt="Picture of Oliver kent Johnson">
             </div>
             <div class="panel-body">
                 <p>
@@ -182,7 +182,7 @@ toc: false
     <div class="col-md-6">
         <div class="panel panel-profile-card">
             <div class="panel-heading">
-                <img src="images/profiles/fabian-bartl.jpg" alt="Picture of Fabian Bartl">
+                <img src="images/profiles/fabian-bartl.png" alt="Picture of Fabian Bartl">
             </div>
             <div class="panel-body">
                 <p>
