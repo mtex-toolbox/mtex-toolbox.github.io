@@ -8,6 +8,47 @@ folder: people
 toc: false
 ---
 
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/profiles/ralf-hielscher.jpg" alt="Picture of Ralf Hielscher">
+            </div>
+            <div class="panel-body">
+                <p>
+                    <b>Ralf Hielscher</b>
+                    invented MTEX in 2007 by implementing the pole figure to ODF inversion
+                    algorithm and leads since than the development.
+                </p>
+                <p>
+                    {% include reference.html link="mailto:Ralf.Hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
+                    <br>
+                    {% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Institute of Applied Analysis, TU Bergakademie Freiberg" %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/profiles/ruediger-kilian.jpg" alt="Picture of Rüdiger Kilian">
+            </div>
+            <div class="panel-body">
+                <p>
+                    <b>Rüdiger Kilian</b>
+                    joined the MTEX team in 2008 as a PhD student of
+                    Rene Heilbronner, Basel. Since than he answered hundreds of questions in the
+                    MTEX forum. Rüdiger spends much afford in continuously improving the EBSD
+                    and grain analysis functionalities in MTEX.
+                </p>
+                <p>
+                    {% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian" content="Martin-Luther-Universität Halle-Wittenberg" %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 
 <div class='row'>
     <div class="col-md-6">
         <table border='0' cellpadding='10'>
@@ -53,7 +94,7 @@ toc: false
         </table>
     </div>
 </div>
-
+ -->
 <div class='row'>
     <div class="col-md-6">
         <table border='0' cellpadding='10'>
