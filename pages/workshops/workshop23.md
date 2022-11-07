@@ -1,7 +1,6 @@
 ---
 title: Freiberg MTEX Workshop 2023
 keywords: workshop, 2023
-last_updated: 27-Jan-2022
 sidebar: workshops_sidebar
 permalink: workshop23
 folder: workshops
@@ -240,7 +239,7 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 
 ## Week 2: MTEX in Applications
 
-Date: 18.03.2022 - 20.03.2022
+Date: 18.03.2023 - 20.03.2023
 
 The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
 
