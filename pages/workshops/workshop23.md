@@ -8,22 +8,25 @@ folder: workshops
 toc: false
 ---
 
-The workshop extends over two weeks and is part of the master course
-*Introduction into crystallographic texture analysis* and counts for **5
-ECTS** points. While the first week is mainly devoted to beginners in MTEX
-and/or texture analysis, the second week is a meeting of MTEX users with
-different experiences to share specific use cases, tips and tricks and discuss
-recent and upcoming developments in MTEX. A special focus of the second week
-will be the new features of MTEX 6.0 which will be include pseudo 3d
-functionality for EBSD and grains and different spatial reference systems.
+The workshop extends over two weeks and is part of the master course {%
+include reference.html link="" content="Introduction into crystallographic
+texture analysis" %} and counts for **5 ECTS** points. While the first week is
+mainly devoted to beginners in MTEX and/or texture analysis, the second week
+is a meeting of MTEX users with different experiences to share specific use
+cases, tips and tricks and discuss recent and upcoming developments in MTEX. A
+special focus of the second week will be the new features of **MTEX 6.0** which
+will be include pseudo 3d functionality for EBSD and grains and different
+spatial reference systems.
 
 {% include note.html content="The workshop will be held primarily in
-presence. Although we will provide online access to all lectures and
-presentations we encourage everybody to come to Freiberg and to enjoy the
-workshop in presence. To stimulate this we made the fee for online
-participation higher then the fee for participation in pretense. We also
-encourage the participants to send data files to the organiziers prior to the
-workshop which will than be discussed during the exercises." %}
+**presence**. Although we will provide online access to all lectures and
+presentations we encourage everybody to come to Freiberg to have the best
+possible training and discussions. We also encourage the participants to send
+data files to the organiziers prior to the workshop which will than be
+discussed during the exercises." %}
+
+<!--To stimulate this we made the fee for online
+participation higher then the fee for participation in pretense.-->
 
 <!--
 {% capture par_default %}
@@ -321,7 +324,6 @@ The second week will consist of lectures by invited experts that explain in deta
 			</div>
         </div>
     </div>
-    <!-- /.panel -->
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -389,7 +391,6 @@ The second week will consist of lectures by invited experts that explain in deta
 			</div>
         </div>
     </div>
-    <!-- /.panel -->
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
@@ -459,12 +460,19 @@ The second week will consist of lectures by invited experts that explain in deta
     </div>
 </div>
 -->
+
+## Venue:
+
+- TU Freiberg, Germany
+
 ## Registration:
 
 - Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
 - Deadline for registration is 31th of January 2023
-- Registration fee first week: students - 100 Euro, other - 200 Euro
-- Registration for second week is free
+
+## Registration Fee:
+- first + second week:  (PhD) students - 200 Euro, other - 400 Euro
+- second week: (PhD) students - 100 Euro, other - 200 Euro
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
 ## Organizers:
