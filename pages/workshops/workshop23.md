@@ -39,7 +39,7 @@ participation higher then the fee for participation in pretense.-->
 -->
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
-Date: 06.03.2023 - 15.03.2023
+Date: 06.03.2023 - 10.03.2023
 
 During the first week we provide on a daily basis two morning lectures covering the basic theoretical principles of crystallography, diffraction and texture analysis. During the two afternoon exercises the theoretical concepts will be demonstrated via practical examples within MTEX.
 
@@ -239,7 +239,7 @@ wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD a
 
 ## Week 2: MTEX in Applications
 
-Date: 18.03.2023 - 20.03.2023
+Date: 13.03.2023 - 15.03.2023
 
 The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
 
