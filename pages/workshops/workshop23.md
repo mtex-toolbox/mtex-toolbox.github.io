@@ -478,7 +478,8 @@ The second week will consist of lectures by invited experts that explain in deta
 ## Registration Fee:
 - first + second week:  (PhD) students - 300 Euro, other - 500 Euro
 - second week: (PhD) students - 100 Euro, other - 200 Euro
-- the registration fee includes full catering for the days of the workshop
+- the registration fee includes full catering for the days of the workshop and
+  an excursion
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
 
