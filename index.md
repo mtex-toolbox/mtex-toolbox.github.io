@@ -30,6 +30,11 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul class="no_bullet">
+					<li>
+						11/22 &minus;
+						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
+                    </li>                    
                     <li>
                         9/22 &minus; newly designed homepage
                     </li>
@@ -91,7 +96,7 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<li>
-                        {% include reference.html link="workshops" content="Workshops" %}
+                        {% include reference.html link="latest_workshop" content="Workshops" %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--
