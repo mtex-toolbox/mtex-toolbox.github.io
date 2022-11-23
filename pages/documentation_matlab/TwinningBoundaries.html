@@ -35,7 +35,7 @@ CS = grains.CS;
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD  
+ebsd = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
@@ -52,7 +52,7 @@ gB = grains.boundary
 {% endhighlight %}
 
 {% highlight plaintext %}
-gB = grainBoundary  
+gB = grainBoundary
  
  Segments   mineral 1  mineral 2
       600  notIndexed  Magnesium
@@ -64,7 +64,7 @@ gB_MgMg = gB('Magnesium','Magnesium')
 {% endhighlight %}
 
 {% highlight plaintext %}
-gB_MgMg = grainBoundary  
+gB_MgMg = grainBoundary
  
  Segments  mineral 1  mineral 2
      3164  Magnesium  Magnesium
@@ -118,14 +118,14 @@ mori_mean = misorientation (Magnesium → Magnesium)
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
-twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
-  Miller(2,-1,-1,0,CS),Miller(2,-1,-1,0,CS))
+twinning = orientation.map(Miller(0,1,-1,-1,CS),Miller(-1,1,0,-1,CS),...
+  Miller(1,0,-1,1,CS,'uvw'),Miller(1,0,-1,-1,CS,'uvw'))
 {% endhighlight %}
 
 {% highlight plaintext %}
 twinning = misorientation (Magnesium → Magnesium)
  
- (1-101) || (10-11)   [01-11] || [01-1-1]
+ (01-1-1) || (-110-1)   [10-11] || [10-1-1]
 {% endhighlight %}
 <p>and observe that it is actually a rotation about axis (-1210) and angle 86.3 degree</p>
 {% highlight matlab %}
@@ -139,7 +139,7 @@ twinning.angle / degree
 {% highlight plaintext %}
 ans = Miller (Magnesium)
    h  k  i  l
-  -2  1  1  0
+  -1  2 -1  0
 ans =
    86.2992
 {% endhighlight %}
@@ -159,7 +159,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-twinBoundary = grainBoundary  
+twinBoundary = grainBoundary
  
  Segments  mineral 1  mineral 2
      1649  Magnesium  Magnesium

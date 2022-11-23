@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Anisotropic Elasticity</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the sitiffness tensor for Olivine</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the stiffness tensor for Olivine</p>
 {% highlight matlab %}
 % file name
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
@@ -37,7 +37,7 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
-<h2 id="2">Hooks Law</h2><p>The stiffness tensor tensor of a material is defined as the stress the material expreances for a given strain</p>
+<h2 id="2">Hooke's Law</h2><p>The stiffness tensor tensor of a material is defined as the stress the material expreances for a given strain</p>
 {% highlight matlab %}
 eps = strainTensor(diag([1,1.1,0.9]),cs)
 {% endhighlight %}
@@ -51,7 +51,7 @@ eps = strainTensor (Olivin)
    0 1.1   0
    0   0 0.9
 {% endhighlight %}
-<p>Now Hools law states that the resulting stress can be computed by</p>
+<p>Now Hooke's law states that the resulting stress can be computed by</p>
 {% highlight matlab %}
 sigma = C : eps
 {% endhighlight %}
@@ -103,7 +103,7 @@ E =
 {% endhighlight %}
 <p>If the direction <code class="language-plaintext highlighter-rouge">d</code> is ommited Youngs modulus is returned as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>.</p>
 {% highlight matlab %}
-% compute Young's modulus as a directional dependend function
+% compute Young's modulus as a directional dependent function
 E = C.YoungsModulus
 
 % which can be evaluated at any direction
@@ -123,7 +123,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_01.png" %}
-</center><h2 id="8">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similarly as the Youngs modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <code class="language-plaintext highlighter-rouge">d</code> or as a spherical function</p>
+</center><h2 id="8">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similar to the Young's modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <code class="language-plaintext highlighter-rouge">d</code> or as a spherical function</p>
 {% highlight matlab %}
 % compute as a spherical function
 beta = linearCompressibility(C)
@@ -144,7 +144,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_02.png" %}
-</center><h2 id="9">Poisson Ratio</h2><p>The rate of compression / decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ration.</p>
+</center><h2 id="9">Poisson Ratio</h2><p>The rate of compression / decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ratio.</p>
 {% highlight matlab %}
 % the pulling direction
 p = vector3d.Z;
@@ -170,7 +170,7 @@ nu = S2FunHarmonicSym (Olivin)
  bandwidth: 4
  antipodal: true
 {% endhighlight %}
-<p>we again obtain a spherical function. However, this time it is only meaningfull to evaluate this function at directions perpendicular to the pulling direction <code class="language-plaintext highlighter-rouge">p</code>. Hence, a good way to visualize this function is to plot it as a <a href="S2Fun.plotSection.html">section</a> in the x/y plane</p>
+<p>we again obtain a spherical function. However, this time it is only meaningful to evaluate this function at directions perpendicular to the pulling direction <code class="language-plaintext highlighter-rouge">p</code>. Hence, a good way to visualize this function is to plot it as a <a href="S2Fun.plotSection.html">section</a> in the x/y plane</p>
 {% highlight matlab %}
 plotSection(nu,p,'color','interp','linewidth',5)
 axis off
