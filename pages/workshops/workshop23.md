@@ -252,6 +252,9 @@ The second week will consist of lectures by invited experts that explain in deta
 - **{% include reference.html
   link="https://lightform.org.uk/people/dr-adam-plowman" content="Adam
   Plowman" %}** (University of Manchester): ** *to be announced*
+  
+- **{% include reference.html
+  link="https://www.researchgate.net/profile/Manuel-Petersmann" content="Manuel Petersmann" %}** (Infineon Technologies): ** *Use cases of MTEX for semiconductor metalizations*
 
 <!--
 - **{% include reference.html link="https://www.tue.nl/en/research/researchers/tijmen-vermeij/" content="Tijmen Vermeij" %}** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
