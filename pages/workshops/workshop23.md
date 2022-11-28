@@ -279,7 +279,7 @@ dislocation density estimation
 </div>
 <!-- /.panel-group -->
 
-**Times:** Lecture 1: 8:45-10:00, Lecture 2: 10:30 - 11:45, Exercise 1: 13:00-14:30, Exercise 2: 15:00 - 16:00
+**Times:** Lecture 1: 8:00 - 9:30, Exercise 1: 10:00 - 11:30, Lecture 2: 13:00-14:30, Exercise 2: 15:00 - 16:30
 
 ## Week 2: MTEX in Applications
 
