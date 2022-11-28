@@ -57,7 +57,7 @@ During the first week we provide on a daily basis two morning lectures covering 
 <div markdown="span">
 <!--Monday-->
 **Lecture 1 - Crystal Geometry:**
-{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
+<!--{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}-->
 <span class="course_material">, </span>{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/Q5bs5ykaBn2pJLy" content="slides" class="course_material" %}
 <!--<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}-->
 <br>
@@ -257,6 +257,7 @@ content="data" class="course_material" download=true %}
 <br>
 *lunch*
 <br>
+<br>
 **Lecture 9 - Plastic Deformation:**
 {% include reference.html link="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7.m" content="exercises" class="course_material" download=true %}
@@ -265,9 +266,11 @@ content="data" class="course_material" download=true %}
 link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m"
 content="solutions" class="course_material" download=true %}
 <br>
+deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
+dislocation density estimation
 <br>
-deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
 <br>
+**Excercise 9 - Free Discussion of Personal Data Sets:**
 </div>
             </div>
         </div>
