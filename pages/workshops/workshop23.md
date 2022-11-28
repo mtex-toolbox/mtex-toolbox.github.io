@@ -72,8 +72,8 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 <br>
 
-Lunch
-
+*Lunch*
+<br>
 <br>
 **Lecture 2 - Crystal Symmetries and Orientations:**
 {% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN" content="slides" class="course_material" %}
@@ -109,13 +109,14 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 data import, reference frame alignment, color keys, data cleaning
 <br>
-**Exercise 3 - :**
+<br>
+**Exercise 3:**
 {% include reference.html link="https://videocampus.sachsen.de/m/6da6baa2b4ddcacf4a917e7dbf0fa2a4c55f28724d45013e5ffce765e343f2e4763d63b593841287c1155fbb4a5bdadf53dd25e79cd2f80766227fa8244e6572" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/5_DensityEstimation.pdf" content="slides" class="course_material" %}
 <br>
-
 <br>
-Lunch
+*Lunch*
+<br>
 <br>
 **Lecture 4 - Grains:**
 {% include reference.html link="https://videocampus.sachsen.de/m/3e27654ede4be88745fe1dfb40aeee376d1d53bc66af7d0163429e6806777d0828e70f9f05e943ddef1cb5ade6fc23ee1b6ad7ddab30fb15f7a631278274097e" content="video" class="course_material" %}
@@ -149,15 +150,17 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 {% include reference.html link="https://videocampus.sachsen.de/m/dbbed72f78fb34b3f13d9b51f9ea98f0a6ebb2b8f7e91ebd491518a9d812dc1ade9bc92e19d065e2d4c82460fa690ab490db50e4aa86a42def070f9fc6f6783c" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/7_EBSD.pdf" content="slides" class="course_material" %}
 <br>
-grain boundary misorientations, twin boundaries, phase transition, orientation
-gradients, misorientation axis, misorientation angle, KAM, GOS, tilt vs. twist
-boundaries, statistics of boundary networks, habit planes
+grain boundary misorientations, misorientation axis, misorientation angle, KAM, GOS, twin boundaries, tilt vs. twist
+boundaries, phase transition, orientation
+gradients,  statistics of boundary networks, habit planes
 <br>
 <br>
 **Exercise 5:**
 {% include reference.html link="https://videocampus.sachsen.de/m/d214f14e430d85e00322a414d89a7700214214a3460572420f9272b82753d47fe1ffe354cd2a2c1ef95e92d6dd1d97966cbf77b07a288801886d9a7a690fbca7" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/8_grains.pdf" content="slides" class="course_material" %}
 <br>
+<br>
+*Lunch*
 <br>
 <br>
 **Lecture 6 - Density Functions:**
@@ -205,13 +208,15 @@ tensors, piezoelectricity, elasticity, wave velocities
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/10_grainBoundaries.pdf" content="slides" class="course_material" %}
 <br>
 <br>
-Lunch
+*Lunch*
 <br>
-**Excursion:**
+<br>
+**Excursion: Freiberg Silver Mine**
+<!--
 {% include reference.html link="https://videocampus.sachsen.de/m/b5fd43361bdedd4a1c98574b472417246eb938d1fd70d07c942568a82ca264ef1e681aed6a31ca0517bf5502de4f6127e6c20124c7b1f1923e9912cd53e8de18" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5.m" content="exercises" class="course_material" download=true %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exp_qtz_crop.mat" content="data" class="course_material" download=true %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5_solution.m" content="solutions" class="course_material" download=true %}
+<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5_solution.m" content="solutions" class="course_material" download=true %}-->
 <br>
 <!--
 **Exercise 6 - Denoising EBSD Data and Misorientations:**
@@ -244,22 +249,25 @@ content="data" class="course_material" download=true %}
   average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
 <br>
-**Exercise 8 - Tensorial Properties:**
+**Exercise 8:**
 {% include reference.html link="https://videocampus.sachsen.de/m/f1fe97bdb09cf362099b852cfc52b9214d2c3eaaf5d75dcad8179b844e06b65eea6fffb143642514dfb85d88d75ee99edec3c8546f4cfe1f00b200efb42bc8ce" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.pdf" content="slides" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/12_physical_properties.mlx" content="m-file" class="course_material" download=true %}
 <br>
-wave velocities, visualization, average tensors (Voigt, Reuss, Hill) from EBSD
-and ODF
-xx
-stress, strain, deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
 <br>
+*lunch*
 <br>
-**Lecture 9 - Tensorial Properties:**
+**Lecture 9 - Plastic Deformation:**
 {% include reference.html link="https://videocampus.sachsen.de/video/MTEX-Exercise-7/0759a254a946d4048df3c45f13cd64fc" content="video" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7.m" content="exercises" class="course_material" download=true %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/mtex_2021_physical_properties.zip" content="data" class="course_material" download=true %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m" content="solutions" class="course_material" download=true %}
+<span class="course_material">, </span>{% include reference.html
+link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_7_solution.m"
+content="solutions" class="course_material" download=true %}
+<br>
+<br>
+deformation tensors, slip systems, Schmid Factor, dislocation systems, GND
+<br>
 </div>
             </div>
         </div>
