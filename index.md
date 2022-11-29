@@ -33,7 +33,7 @@ of material scientists, geologists and mathematicians.
 					<li>
 						11/22 &minus;
 						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-4260917" content="Announcement" %}
                     </li>
 					<li>
                         11/22 &minus;
