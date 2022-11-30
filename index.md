@@ -56,11 +56,6 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks" content="J. Hiscocks" %}
                     </li>
                     <li>
-                        3/22 &minus;
-                        {% include reference.html link="workshop22?" content="MTEX Online Workshop" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
-                    </li>
-                    <li>
                         7/21 &minus;
                         {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" download=true %}
                         by J. Hiscocks
@@ -96,7 +91,7 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<li>
-                        {% include reference.html link="latest_workshop" content="Workshops" %}
+                        {% include reference.html link="workshop23?" content="Workshops" %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--
