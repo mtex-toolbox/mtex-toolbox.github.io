@@ -30,30 +30,30 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul class="no_bullet">
+					<li>
+						11/22 &minus;
+						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-4260917" content="Announcement" %}
+                    </li>
+					<li>
+                        11/22 &minus;
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.2/mtex-5.8.2.zip" content="MTEX 5.8.2" download=true %}
+                        released:
+                        {% include reference.html link="changelog#1" content="Release Notes" %}
+                    </li>
                     <li>
                         9/22 &minus; newly designed homepage
                     </li>
                     <li>
                         3/22 &minus; addon 
                         {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
-                        for parent grain reconstruction                         
-                    </li>                    
+                        for parent grain reconstruction
+                    </li>
                     <li>
                         3/22 &minus;
                         {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="MTEX GUI 3.5" %}
                         by 
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks" content="J. Hiscocks" %}
-                    </li>
-                    <li>
-                        3/22 &minus;
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip" content="MTEX 5.8.1" download=true %}
-                        released:
-                        {% include reference.html link="changelog#1" content="Release Notes" %}
-                    </li>
-                    <li>
-                        3/22 &minus;
-                        {% include reference.html link="workshop22?" content="MTEX Online Workshop" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1314" content="Announcement" %}
                     </li>
                     <li>
                         7/21 &minus;
@@ -91,7 +91,7 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<li>
-                        {% include reference.html link="workshops" content="Workshops" %}
+                        {% include reference.html link="workshop23?" content="Workshops" %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--

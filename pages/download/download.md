@@ -26,6 +26,7 @@ features and syntax changes.
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
+[**mtex-5.8.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.2/mtex-5.8.2.zip) ||| November 2022 ||| bug fixes ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.2/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.8.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.1/mtex-5.8.1.zip) ||| March 2022 ||| bug fixes ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.8.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.0/mtex-5.8.0.zip) ||| January 2022 ||| variant graph based parent grain reconstruction ||| 2006<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.8.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
 [**mtex-5.7.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.7.0/mtex-5.7.0.zip) ||| May 2021 ||| improved parent grain reconstruction ||| 7086<!--![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.7.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;-->
