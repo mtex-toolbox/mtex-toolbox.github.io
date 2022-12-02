@@ -25,11 +25,12 @@ The following list provides links to videos that explain MTEX.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/2xXYGHT_tc4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 <!-- MTEX Basic Concepts-->
-<iframe src="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" data-src="" class="iframeLoaded" width="720" height="449" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+<iframe src="https://videocampus.sachsen.de/media/embed?key=7173f969e4c079f16bcaaffbd991235f&width=560&height=315&autoplay=false&controls=true&autolightsoff=false&loop=false&chapters=false&playlist=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no" aria-label="media embed code" style=""></iframe>
+
 
 ### ICOTOM 21 Presentation
 
-<iframe src="https://videocampus.sachsen.de/media/embed?key=7abc42d90e76b455dbae4b7f2664ef5e&width=720&height=449&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="449" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+<iframe src="https://videocampus.sachsen.de/media/embed?key=7abc42d90e76b455dbae4b7f2664ef5e&width=560&height=315&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
 
 
