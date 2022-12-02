@@ -311,6 +311,10 @@ The second week will consist of lectures by invited experts that explain in deta
   link="https://lightform.org.uk/people/dr-adam-plowman" content="Adam
   Plowman" %}** (University of Manchester): *to be announced*
 
+- **{% include reference.html
+  link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %}** (National Physical Laboratory UK): *to be announced*
+
+
 <!--
 - **{% include reference.html link="https://www.tue.nl/en/research/researchers/tijmen-vermeij/" content="Tijmen Vermeij" %}** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
 - **{% include reference.html link="https://www.ntnu.edu/employees/bjorn.sorensen" content="Bj&#x00f8;rn Eske S&#x00f8;rensen" %}** (Norwegian University of Science and Technology): *MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research*
