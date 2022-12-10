@@ -309,7 +309,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - **{% include reference.html
   link="https://lightform.org.uk/people/dr-adam-plowman" content="Adam
-  Plowman" %}** (University of Manchester): *to be announced*
+  Plowman" %}** (University of Manchester): *Using MTEX with MatFlow for crystal plasticity and phase field modeling*
 
 - **{% include reference.html
   link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %}** (National Physical Laboratory UK): *to be announced*
