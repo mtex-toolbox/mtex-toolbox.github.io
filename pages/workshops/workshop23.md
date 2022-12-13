@@ -532,6 +532,46 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - TU Freiberg, Germany
 
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseMonday"><b>Accomodation:</b> </a>
+            </h4>
+        </div>
+        <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+<div markdown="span">
+<!--Monday-->
+**Elly Hostel**
+Dresdner Straße 30
+D-09599 Freiberg
++49 3731 6927779
+www.elly-hostel.de
+info@elly-hostel.de
+<br>
+<br>
+**Hotel Kreller**
+Fischerstraße 5
+D-09599 Freiberg
++49 3731 35900
+www.hotel-kreller.de
+kontakt@hotel-kreller.de
+<br>
+<br>
+**Hotel am Obermarkt**
+Waisenhausstraße 2
+D-09599 Freiberg
++49 3731 26370
+www.hotel-am-obermarkt.de
+info@hotel-am-obermarkt.de
+            </div>
+		</div>
+    </div>
+</div>
+
+
+
 ## Registration:
 
 - Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
