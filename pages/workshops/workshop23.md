@@ -543,16 +543,17 @@ The second week will consist of lectures by invited experts that explain in deta
             <div class="panel-body">
 				<div markdown="span">
 *please use the keycode "Professor Hielscher MTEX Workshop"	when booking the rooms*			
-				
-- {% include reference.html link="www.elly-hostel.de" content="**Elly
-  Hostel:**" %} 68 Euro per night, with kitchen
-
-- {% include reference.html link="www.hotel-kreller.de" content="**Hotel
-  Kreller:**" %} 79 Euro per night with breakfast
-  
-- {% include reference.html link="www.hotel-am-obermarkt.de" content="**Hotel am
-  Obermarkt:**" %} 79 Euro per night without breakfast
-
+<br>				
+<br>				
+{% include reference.html link="https://www.hotel-kreller.de" content="**Hotel
+  Kreller:**" %} 79 Euro per night with breakfast, very close
+<br>				
+<br>				
+{% include reference.html link="https://www.hotel-am-obermarkt.de" content="**Hotel am
+  Obermarkt:**" %} 79 Euro per night without breakfast, very close
+<br>				
+<br>				
+{% include reference.html link="https://www.elly-hostel.de" content="**Elly Hostel:**" %} 68 Euro per night, with kitchen
             </div>
 		</div>
     </div>
