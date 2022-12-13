@@ -536,12 +536,12 @@ The second week will consist of lectures by invited experts that explain in deta
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse"
-    data-parent="#accordion" href="#collapseMonday"><b>Accomodation:</b> </a>
+    data-parent="#accordion" href="#collapseAccomodation"><b>Accommodation:</b> </a>
             </h4>
         </div>
-        <div id="collapseMonday" class="panel-collapse collapse noCrossRef">
+        <div id="collapseAccomodation" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
-<div markdown="span">
+				<div markdown="span">
 <!--Monday-->
 **Elly Hostel**
 Dresdner Straße 30
@@ -569,7 +569,7 @@ info@hotel-am-obermarkt.de
 		</div>
     </div>
 </div>
-
+</div>
 
 
 ## Registration:
