@@ -542,29 +542,17 @@ The second week will consist of lectures by invited experts that explain in deta
         <div id="collapseAccomodation" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 				<div markdown="span">
-<!--Monday-->
-**Elly Hostel**
-Dresdner Straße 30
-D-09599 Freiberg
-+49 3731 6927779
-www.elly-hostel.de
-info@elly-hostel.de
-<br>
-<br>
-**Hotel Kreller**
-Fischerstraße 5
-D-09599 Freiberg
-+49 3731 35900
-www.hotel-kreller.de
-kontakt@hotel-kreller.de
-<br>
-<br>
-**Hotel am Obermarkt**
-Waisenhausstraße 2
-D-09599 Freiberg
-+49 3731 26370
-www.hotel-am-obermarkt.de
-info@hotel-am-obermarkt.de
+*please use the keycode "Professor Hielscher MTEX Workshop"	when booking the rooms*			
+				
+- {% include reference.html link="www.elly-hostel.de" content="**Elly
+  Hostel:**" %} 68 Euro per night, with kitchen
+
+- {% include reference.html link="www.hotel-kreller.de" content="**Hotel
+  Kreller:**" %} 79 Euro per night with breakfast
+  
+- {% include reference.html link="www.hotel-am-obermarkt.de" content="**Hotel am
+  Obermarkt:**" %} 79 Euro per night without breakfast
+
             </div>
 		</div>
     </div>
