@@ -530,9 +530,20 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Venue:
 
-- TU Freiberg, Germany
-
 <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseLocation"><b>Location:</b> </a>
+            </h4>
+        </div>
+        <div id="collapseLocation" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+				<div markdown="span">
+TU Freiberg, Germany, Prüferstraße 4
+            </div>
+		</div>
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse"
