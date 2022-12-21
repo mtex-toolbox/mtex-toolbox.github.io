@@ -312,7 +312,7 @@ The second week will consist of lectures by invited experts that explain in deta
   Plowman" %}** (University of Manchester): *Using MTEX with MatFlow for crystal plasticity and phase field modeling*
 
 - **{% include reference.html
-  link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %}** (National Physical Laboratory UK): *to be announced*
+  link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %}** (National Physical Laboratory UK): *Characterising microstructural shapes using EBSD and correlative SEM imaging techniques*
 
 
 <!--
