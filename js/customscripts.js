@@ -48,8 +48,8 @@ $(document).ready(function() {
 });
 
 $('[data-toggle="foldable-tooltip"]').click(function() {
-    if ($(this).attr("unfolded") === "true") {
-        $(this).html("<em>"+$(this).attr("data-title")+"</em><br>"+$(this).attr("data-text"));
+    if ($(this).attr("unfolded") === "false") {
+        $(this).html("<em>"+$(this).attr("data-title")+"</em><br><span style='font-style:normal;font-color:default;'>"+$(this).attr("data-text")+"</span>");
         $(this).attr("unfolded", "true");
     } else {
         $(this).html("<em>"+$(this).attr("data-title")+"</em>");
