@@ -39,7 +39,8 @@ $( document ).ready(function() {
 });
 
 $('[data-toggle="tooltip"]').mouseover(function() {
-    $('[data-toggle="tooltip"]').attr("style", "max-width: 30em !important");
+    $(this).attr("href", "#"+$(this).attr("aria-describedby").toString()); 
+    $('div.tooltip[role="tooltop"]').attr("style", "display:block;left:10%;right:10%;");
 });
 
 
