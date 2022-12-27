@@ -41,15 +41,12 @@ $(document).ready(function() {
 
     $('[data-toggle="foldable-tooltip"]').each(function() {
         $(this).html("<em>"+$(this).attr("data-title")+"</em>");
-        const elementId = "tooltip_"+uniqId().toString();
-        $(this).attr("href", "#"+elementId);
-        $(this).attr("id", elementId);
     });
 });
 
 $('[data-toggle="foldable-tooltip"]').click(function() {
     if ($(this).attr("unfolded") === "false") {
-        $(this).html("<em>"+$(this).attr("data-title")+"</em><br><span style='font-style:normal;font-color:default;'>"+$(this).attr("data-text")+"</span>");
+        $(this).html("<em>"+$(this).attr("data-title")+"</em><div>"+$(this).attr("data-text")+"</div>");
         $(this).attr("unfolded", "true");
     } else {
         $(this).html("<em>"+$(this).attr("data-title")+"</em>");
