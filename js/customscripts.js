@@ -40,7 +40,8 @@ $( document ).ready(function() {
 
 $('[data-toggle="tooltip"]').mouseover(function() {
     $(this).attr("href", "#"+$(this).attr("aria-describedby").toString()); 
-    $('div.tooltip[role="tooltip"]').attr("style", "display:block;top:auto;left:30em;");
+    let oldTopStyle = $('div.tooltip[role="tooltip"]').attr("style").split(";")[0];
+    $('div.tooltip[role="tooltip"]').attr("style", oldTopStyle+";left:30em;display:block;");
 });
 
 
