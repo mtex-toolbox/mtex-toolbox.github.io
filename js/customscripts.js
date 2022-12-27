@@ -38,11 +38,10 @@ $( document ).ready(function() {
 
         if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
     }
-});
 
-
-$('[data-toggle="foldable-tooltip"]').mouseover(function() {
-    $(this).html("<em>"+$(this).attr("data-title")+"</em><br>"+$(this).attr("data-text"));
+    $('[data-toggle="foldable-tooltip"]').each(function() {
+        $(this).html("<em>"+$(this).attr("data-title")+"</em>");
+    });
 });
 
 $('[data-toggle="foldable-tooltip"]').click(function() {
@@ -53,8 +52,7 @@ $('[data-toggle="foldable-tooltip"]').click(function() {
     if ($(this).attr("unfolded") === "true") {
         $(this).html("<em>"+$(this).attr("data-title")+"</em><br><span style='font-style:normal;font-color:default;'>"+$(this).attr("data-text")+"</span>");
         $(this).attr("unfolded", "true");
-    }
-    else {
+    } else {
         $(this).html("<em>"+$(this).attr("data-title")+"</em>");
         $(this).attr("unfolded", "false");
     }
