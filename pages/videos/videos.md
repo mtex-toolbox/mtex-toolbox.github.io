@@ -8,16 +8,37 @@ folder: videos
 toc: false
 ---
 
+<!--
 <div class="alert alert-info" role="alert">
     <i class="fa fa-info-circle"></i>
     This page is not finished yet.
 </div>
 
 The following list provides links to videos that explain MTEX.
+-->
 
-### ICOTOM 21 Presentation
+### Introductory Videos
 
-<iframe src="https://videocampus.sachsen.de/media/embed?key=7abc42d90e76b455dbae4b7f2664ef5e&width=720&height=449&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="720" height="449" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
+<!-- Niesen Import-->
+<iframe title="Test" width="560" height="315" src="https://www.youtube.com/embed/SsiDFqqqZU4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- Niesen Import-->
+
+<!-- Nick Byres Introduction-->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2xXYGHT_tc4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<!-- MTEX Basic Concepts-->
+<iframe src="https://videocampus.sachsen.de/media/embed?key=7173f969e4c079f16bcaaffbd991235f&width=560&height=315&autoplay=false&controls=true&autolightsoff=false&loop=false&chapters=false&playlist=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no" aria-label="media embed code" style=""></iframe>
+
+
+### Specific Topics
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/B0faPjtOdmA" title="Niesen, Parent Grain Reconstruction" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/P-Oc9zw8RE0" title="Niesen, Variant Graph Approach" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe src="https://videocampus.sachsen.de/media/embed?key=7abc42d90e76b455dbae4b7f2664ef5e&width=560&height=315&autoplay=false&autolightsoff=false&loop=false&chapters=false&related=false&responsive=false&t=0" data-src="" class="iframeLoaded" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen" allowtransparency="true" scrolling="no"></iframe>
 
 
 

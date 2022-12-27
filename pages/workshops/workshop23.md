@@ -309,7 +309,11 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - **{% include reference.html
   link="https://lightform.org.uk/people/dr-adam-plowman" content="Adam
-  Plowman" %}** (University of Manchester): *to be announced*
+  Plowman" %}** (University of Manchester): <a href="#" data-toggle="tooltip" data-original-title="MatFlow is an open-source, cross-platform Python package for designing, running, and sharing reproducible hybrid computational workflows in materials science. Through its extension ecosystem, MatFlow can integrate with arbitrary open-source and proprietary materials science codes to form cohesive workflows. We highlight some recent examples of using MatFlow's MTEX extension to generate computational predictions that are calibrated using experimental results. We demonstrate the use of MTEX in MatFlow to generate correctly textured representative volume elements that are then used in crystal plasticity simulations to predict forming limits in aluminium alloys. We also demonstrate a method for encoding orientation data from MTEX into phase-field simulations to investigate abnormal grain growth in titanium alloys. Finally, we discuss our recent development work, which has focussed on enabling MatFlow to execute within a more varied set of computational environments, in support of our aim to allow MatFlow to be run anywhere, by anyone.">*Using MTEX with MatFlow for crystal plasticity and phase field modeling*</a>
+
+- **{% include reference.html
+  link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %}** (National Physical Laboratory UK): *Characterising microstructural shapes using EBSD and correlative SEM imaging techniques*
+
 
 <!--
 - **{% include reference.html link="https://www.tue.nl/en/research/researchers/tijmen-vermeij/" content="Tijmen Vermeij" %}** (TU/e Eindhoven University of Technology): *Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing*
@@ -526,7 +530,48 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Venue:
 
-- TU Freiberg, Germany
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseLocation"><b>Location:</b> TU Freiberg, Germany</a>
+            </h4>
+        </div>
+        <div id="collapseLocation" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+				<div markdown="span">
+{% include reference.html link="https://goo.gl/maps/dFvybo2UhVnQkBjV8" content="Hörsaalgebäude, Prüferstraße 4"%}
+            </div>
+		</div>
+    </div>	
+	</div>	
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseAccomodation"><b>Accommodation:</b> </a>
+            </h4>
+        </div>
+        <div id="collapseAccomodation" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+				<div markdown="span">
+*please use the keycode "Professor Hielscher MTEX Workshop"	when booking the rooms*			
+<br>				
+<br>				
+{% include reference.html link="https://www.hotel-kreller.de" content="**Hotel
+  Kreller:**" %} 79 Euro per night with breakfast, very close
+<br>				
+<br>				
+{% include reference.html link="https://www.hotel-am-obermarkt.de" content="**Hotel am
+  Obermarkt:**" %} 79 Euro per night without breakfast, very close
+<br>				
+<br>				
+{% include reference.html link="https://www.elly-hostel.de" content="**Elly Hostel:**" %} 68 Euro per night, with kitchen
+            </div>
+		</div>
+    </div>
+</div>
+</div>
+
 
 ## Registration:
 
