@@ -3,7 +3,7 @@ const uniqId = (()=>{let i=0;return()=>{return i++;}})();
 
 $('#mysidebar').height($(".nav").height());
 
-$( document ).ready(function() {
+$(document).ready(function() {
 
     //this script says, if the height of the viewport is greater than 800px, then insert affix class, which makes the nav bar float in a fixed
     // position as your scroll. if you have a lot of nav items, this height may not work for you.
@@ -49,7 +49,7 @@ $( document ).ready(function() {
 
 $('[data-toggle="foldable-tooltip"]').click(function() {
     if ($(this).attr("unfolded") === "true") {
-        $(this).html("<em>"+$(this).attr("data-title")+"</em><br><span style='font-style:normal;font-color:default;'>"+$(this).attr("data-text")+"</span>");
+        $(this).html("<em>"+$(this).attr("data-title")+"</em><br>"+$(this).attr("data-text"));
         $(this).attr("unfolded", "true");
     } else {
         $(this).html("<em>"+$(this).attr("data-title")+"</em>");
