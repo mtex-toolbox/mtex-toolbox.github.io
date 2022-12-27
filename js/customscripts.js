@@ -12,7 +12,8 @@ $( document ).ready(function() {
     //}
     // activate tooltips. although this is a bootstrap js function, it must be activated this way in your theme.
     $('[data-toggle="tooltip"]').tooltip({
-        placement : 'top'
+        placement : 'top',
+        template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
     });
 
     /**
