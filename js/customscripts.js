@@ -40,22 +40,20 @@ $(document).ready(function() {
     }
 
     $('[data-toggle="foldable-tooltip"]').each(function() {
-        let folded = "<em onclick='toggleFoldableTooltip();' title='Click to see more'>" + $(this).attr("data-title") + "</em>";
-        $(this).html(folded);
+        $(this).html("<em>"+$(this).attr("data-title")+"</em>");
     });
 });
 
 function toggleFoldableTooltip() {
-    let folded = "<em onclick='toggleFoldableTooltip();' title='Click to see more'>" + $(this).attr("data-title") + "</em>";
-    let unfolded = folded + "<div>"+$(this).attr("data-text")+"</div>";
-
-    if ($(this).attr("unfolded") === "false") {
-        $(this).html(unfolded);
-        $(this).attr("unfolded", "true");
-    } else {
-        $(this).html(folded);
-        $(this).attr("unfolded", "false");
-    }
+    $('[data-toggle="foldable-tooltip"]').click(function() {
+        if ($(this).attr("unfolded") === "false") {
+            $(this).html("<em>"+$(this).attr("data-title")+"</em><div>"+$(this).attr("data-text")+"</div>");
+            $(this).attr("unfolded", "true");
+        } else {
+            $(this).html("<em>"+$(this).attr("data-title")+"</em>");
+            $(this).attr("unfolded", "false");
+        }
+    });
 }
 
 
