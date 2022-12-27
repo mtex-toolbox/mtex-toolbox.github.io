@@ -40,7 +40,7 @@ $( document ).ready(function() {
 
 $('[data-toggle="tooltip"]').mouseover(function() {
     $(this).attr("href", "#"+$(this).attr("aria-describedby").toString()); 
-    $('div.tooltip[role="tooltop"]').attr("style", "display:block;left:10%;right:10%;");
+    $('div.tooltip[role="tooltip"]').attr("style", "display:block;top:auto;left:30em;");
 });
 
 
