@@ -44,15 +44,19 @@ $(document).ready(function() {
     });
 });
 
-$('[data-toggle="foldable-tooltip"]').click(function() {
-    if ($(this).attr("unfolded") === "false") {
-        $(this).html("<em>"+$(this).attr("data-title")+"</em><div>"+$(this).attr("data-text")+"</div>");
-        $(this).attr("unfolded", "true");
-    } else {
-        $(this).html("<em>"+$(this).attr("data-title")+"</em>");
-        $(this).attr("unfolded", "false");
-    }
-});
+function toggleFoldableTooltip() {
+    $('[data-toggle="foldable-tooltip"]').click(function() {
+        if ($(this).attr("unfolded") === "false") {
+            $(this).html("<em>"+$(this).attr("data-title")+"</em><div>"+$(this).attr("data-text")+"</div>");
+            $(this).attr("unfolded", "true");
+        } else {
+            $(this).html("<em>"+$(this).attr("data-title")+"</em>");
+            $(this).attr("unfolded", "false");
+        }
+    });
+}
+
+
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
 // script from http://stackoverflow.com/questions/10523433/how-do-i-keep-the-current-tab-active-with-twitter-bootstrap-after-a-page-reload
