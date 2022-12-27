@@ -38,13 +38,6 @@ $( document ).ready(function() {
     }
 });
 
-$('[data-toggle="tooltip"]').mouseover(function() {
-    $(this).attr("href", "#"+$(this).attr("aria-describedby").toString()); 
-    let oldTopStyle = $('div.tooltip[role="tooltip"]').attr("style").split(";")[0];
-    $('div.tooltip[role="tooltip"]').attr("style", oldTopStyle+";left:30em;display:block;");
-});
-
-
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
 // script from http://stackoverflow.com/questions/10523433/how-do-i-keep-the-current-tab-active-with-twitter-bootstrap-after-a-page-reload
 $(function() {
