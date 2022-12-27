@@ -12,8 +12,7 @@ $( document ).ready(function() {
     //}
     // activate tooltips. although this is a bootstrap js function, it must be activated this way in your theme.
     $('[data-toggle="tooltip"]').tooltip({
-        placement : 'top',
-        template: '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner large"></div></div>'
+        placement : 'top'
     });
 
     /**
@@ -38,6 +37,11 @@ $( document ).ready(function() {
         if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
     }
 });
+
+$('[data-toggle="tooltip"]').mouseover(function() {
+    $('[data-toggle="tooltip"]').attr("style", "max-width: 30em !important");
+});
+
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
 // script from http://stackoverflow.com/questions/10523433/how-do-i-keep-the-current-tab-active-with-twitter-bootstrap-after-a-page-reload
