@@ -40,13 +40,14 @@ $(document).ready(function() {
     }
 
     $('[data-toggle="foldable-tooltip"]').each(function() {
-        $(this).html("<em>" + $(this).attr("data-title") + "</em>");
+        let folded = "<em onclick='toggleFoldableTooltip();' title='Click to see more'>" + $(this).attr("data-title") + "</em>";
+        $(this).html(folded);
     });
 });
 
 function toggleFoldableTooltip() {
-    let folded = "<em>" + $(this).attr("data-title") + "</em>";
-    let unfolded = folded + "<div>"+$(this).attr("data-text") + "</div>";
+    let folded = "<em onclick='toggleFoldableTooltip();' title='Click to see more'>" + $(this).attr("data-title") + "</em>";
+    let unfolded = folded + "<div>"+$(this).attr("data-text")+"</div>";
 
     if ($(this).attr("unfolded") === "false") {
         $(this).html(unfolded);
