@@ -41,7 +41,10 @@ $(document).ready(function() {
 
     // add no_icon class to links with badges
     $('a > img').each(function() {
-        $(this).parent().addClass("no_icon");
+        const imgSources = ["badgen.net", "img.shields.io"];
+        if (imgSources.includes($(this).attr("href"))) {
+            $(this).parent().addClass("no_icon");
+        }
     });
 
     // events for foldable tooltip
