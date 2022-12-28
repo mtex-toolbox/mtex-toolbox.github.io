@@ -1,7 +1,6 @@
 
 // some small functions
 const uniqId = (()=>{let i=0;return()=>{return i++;}})();
-const fuzzyContains = (arr = [], m) => arr.some((txt) => (txt.indexOf(m) !== -1));
 
 $('#mysidebar').height($(".nav").height());
 
@@ -43,8 +42,8 @@ $(document).ready(function() {
 
     // add no_icon class to links with badges
     $('a > img').each(function() {
-        const imgSources = ["badgen.net", "img.shields.io"];
-        if (fuzzyContains(imgSources, $(this).attr("href"))) {
+        const imgSources = /^https?:\/\/(badgen\.net|img\.shields\.io)\/.*$/;
+        if (imgSources.test($(this).attr("href"))) {
             $(this).parent().addClass("no_icon");
         }
     });
