@@ -39,6 +39,11 @@ $(document).ready(function() {
         if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
     }
 
+    // add no_icon class to links with badges
+    $('a > img').each(function() {
+        $(this).parent().addClass("no_icon");
+    });
+
     // events for foldable tooltip
     $('[data-toggle="foldable-tooltip"]').each(function() {
         if ($(this).attr("data-icon") === null) {
