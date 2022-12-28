@@ -1,5 +1,7 @@
 
+// some small functions
 const uniqId = (()=>{let i=0;return()=>{return i++;}})();
+const fuzzyContains = (arr = [], m) => arr.some((txt) => (txt.indexOf(m) !== -1));
 
 $('#mysidebar').height($(".nav").height());
 
@@ -42,7 +44,7 @@ $(document).ready(function() {
     // add no_icon class to links with badges
     $('a > img').each(function() {
         const imgSources = ["badgen.net", "img.shields.io"];
-        if (imgSources.includes($(this).attr("href"))) {
+        if (fuzzyContains(imgSources, $(this).attr("href"))) {
             $(this).parent().addClass("no_icon");
         }
     });
@@ -60,7 +62,7 @@ $(document).ready(function() {
     
     $('[data-toggle="foldable-tooltip"] > span').click(function() {
         let tooltip = $(this).parent();
-        
+
         if (tooltip.attr("unfolded") === "false") {
             tooltip.append("<div>" + tooltip.attr("data-text") + "</div>");
             tooltip.attr("unfolded", "true");
