@@ -47,7 +47,7 @@ $(document).ready(function() {
         }
     });
 
-    // events for foldable tooltip
+    // foldable tooltip
     $('[data-toggle="foldable-tooltip"]').each(function() {
         if ($(this).attr("data-icon") === null) {
             $(this).attr("data-icon", "fa fa-info-circle");
@@ -60,14 +60,12 @@ $(document).ready(function() {
     
     $('[data-toggle="foldable-tooltip"] > span').click(function() {
         let tooltip = $(this).parent();
-        let folded = "<span><i class='" + tooltip.attr("data-icon") + "'></i>&nbsp;<em>" + tooltip.attr("data-title") + "</em></span>";
-        let unfolded = folded + "<div>" + tooltip.attr("data-text") + "</div>";
         
         if (tooltip.attr("unfolded") === "false") {
-            tooltip.html(unfolded);
+            tooltip.append("<div>" + tooltip.attr("data-text") + "</div>");
             tooltip.attr("unfolded", "true");
         } else {
-            tooltip.html(folded);
+            tooltip.find("div").remove();
             tooltip.attr("unfolded", "false");
         }
     });
