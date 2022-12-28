@@ -42,11 +42,7 @@ $(document).ready(function() {
 
     // add no_icon class to links with badges
     $('a > img').each(function() {
-        let a_tag = $(this).parent()
-        const imgSources = /.*(badgen\.net|img\.shields\.io).*/;
-        if (imgSources.test(a_tag.attr("href"))) {
-            a_tag.addClass("no_icon");
-        }
+        $(this).parent().addClass("no_icon");
     });
 
     // foldable tooltip
@@ -54,23 +50,22 @@ $(document).ready(function() {
         if ($(this).attr("data-icon") === null) {
             $(this).attr("data-icon", "fa fa-info-circle");
         }
-    
+
         $(this).attr("title", $(this).attr("data-preview"));
-        $(this).html("<i class='"+$(this).attr("data-icon")+"'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
-        $(this).attr("unfolded-id", "tooltip-text_"+uniqId().toString());
-        $(this).attr("unfolded-state", "false");
+        $(this).html("<i class='" + $(this).attr("data-icon") + "'></i><em>" + $(this).attr("data-title") + "</em>");
+        $(this).attr("unfolded", "false");
     });
-    
+
     $('[data-toggle="foldable-tooltip"]').click(function() {
-        // $(this).html("<i class='"+$(this).attr("data-icon")+"'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
-        const unfoldedHTML = "<div id='"+$(this).attr("unfolded-id")+"'>" + $(this).attr("data-text") + "</div>";
-        
-        if ($(this).attr("unfolded-state") === "false") {
-            $(this).attr("unfolded-state", "true");
-            $(this).insertAfter(unfoldedHTML);
+        let folded = "<i class='" + $(this).attr("data-icon") + "'></i><em>" + $(this).attr("data-title") + "</em>";
+        let unfolded = folded + "<div>" + $(this).attr("data-text") + "</div>";
+
+        if ($(this).attr("unfolded") === "false") {
+            $(this).html(unfolded);
+            $(this).attr("unfolded", "true");
         } else {
-            $(this).attr("unfolded-state", "false");
-            $('div[id*="tooltip-text_"]'+$(this).attr("unfolded-id").toString()).remove();
+            $(this).html(folded);
+            $(this).attr("unfolded", "false");
         }
     });
 });
