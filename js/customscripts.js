@@ -61,8 +61,9 @@ $(document).ready(function() {
     });
     
     $('[data-toggle="foldable-tooltip"]').click(function() {
+        $(this).html("<i class='"+$(this).attr("data-icon")+"'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
         const unfoldedHTML = "<div id='"+$(this).attr("unfolded-id")+"'>" + $(this).attr("data-text") + "</div>";
-
+        
         if ($(this).attr("unfolded-state") === "false") {
             $(this).attr("unfolded-state", "true");
             $(this).insertAfter(unfoldedHTML);
