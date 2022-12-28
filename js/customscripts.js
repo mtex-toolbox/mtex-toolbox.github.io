@@ -42,7 +42,7 @@ $(document).ready(function() {
 
     // add no_icon class to links with badges
     $('a > img').each(function() {
-        const imgSources = /^https?:\/\/(badgen\.net|img\.shields\.io)\/.*$/;
+        const imgSources = /.*(badgen\.net|img\.shields\.io).*/;
         if (imgSources.test($(this).attr("href"))) {
             $(this).parent().addClass("no_icon");
         }
