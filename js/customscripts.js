@@ -40,8 +40,18 @@ $(document).ready(function() {
     }
 
     // events for foldable tooltip
+    $('[data-toggle="foldable-tooltip"]').each(function() {
+        if ($(this).attr("data-icon") === null) {
+            $(this).attr("data-icon", "fa fa-info-circle");
+        }
+
+        $(this).attr("title", $(this).attr("data-preview"));
+        $(this).html("<em>" + $(this).attr("data-title") + "</em><i class='" + $(this).attr("data-icon") + "'></i>");
+        this.click();
+    });
+
     $('[data-toggle="foldable-tooltip"]').click(function() {
-        let folded = "<em>" + $(this).attr("data-title") + "</em>";
+        let folded = "<em>" + $(this).attr("data-title") + "</em><i class='" + $(this).attr("data-icon") + "'></i>";
         let unfolded = folded + "<div>" + $(this).attr("data-text") + "</div>";
 
         if ($(this).attr("unfolded") === "false") {
@@ -52,13 +62,6 @@ $(document).ready(function() {
             $(this).attr("unfolded", "false");
         }
     });
-
-    $('[data-toggle="foldable-tooltip"]').each(function() {
-        $(this).attr("title", $(this).attr("data-preview"));
-        $(this).html("<em>" + $(this).attr("data-title") + "</em>");
-        this.click();
-    });
-
 });
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
