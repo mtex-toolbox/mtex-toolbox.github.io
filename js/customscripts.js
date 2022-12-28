@@ -46,12 +46,12 @@ $(document).ready(function() {
         }
 
         $(this).attr("title", $(this).attr("data-preview"));
-        $(this).html("<i class='" + $(this).attr("data-icon") + "'></i><em>" + $(this).attr("data-title") + "</em>");
+        $(this).html("<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
         this.click();
     });
 
     $('[data-toggle="foldable-tooltip"]').click(function() {
-        let folded = "<i class='" + $(this).attr("data-icon") + "'></i><em>" + $(this).attr("data-title") + "</em>";
+        let folded = "<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>";
         let unfolded = folded + "<div>" + $(this).attr("data-text") + "</div>";
 
         if ($(this).attr("unfolded") === "false") {
