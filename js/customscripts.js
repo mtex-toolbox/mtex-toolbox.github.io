@@ -63,8 +63,10 @@ $(document).ready(function() {
             $(this).html(unfolded);
             $(this).attr("unfolded", "true");
         } else {
-            $(this).html(folded);
-            $(this).attr("unfolded", "false");
+            if (!$('[data-toggle="foldable-tooltip"] > div').is(':hover')) {
+                $(this).html(folded);
+                $(this).attr("unfolded", "false");
+            }
         }
     });
 });
