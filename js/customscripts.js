@@ -40,28 +40,28 @@ $(document).ready(function() {
     }
 
     // events for foldable tooltip
-    $('[data-toggle="foldable-tooltip"]').each(function() { this.click(); });
-    
-    $('[data-toggle="foldable-tooltip"]').click(function() {
-        let folded = "<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>";
-        let unfolded = folded + "<div>" + $(this).attr("data-text") + "</div>";
-        
-        if ($(this).attr("unfolded") === "false") {
-            $(this).html(unfolded);
-            $(this).attr("unfolded", "true");
-        } else {
-            $(this).html(folded);
-            $(this).attr("unfolded", "false");
-        }
-    });
-
     $('[data-toggle="foldable-tooltip"]').each(function() {
         if ($(this).attr("data-icon") === null) {
             $(this).attr("data-icon", "fa fa-info-circle");
         }
     
         $(this).attr("title", $(this).attr("data-preview"));
-        $(this).html("<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
+        $(this).html("<span><i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em></span>");
+        $(this).attr("unfolded", "false");
+    });
+    
+    $('[data-toggle="foldable-tooltip"] > span').click(function() {
+        let tooltip = $(this).parent();
+        let folded = "<span><i class='" + tooltip.attr("data-icon") + "'></i>&nbsp;<em>" + tooltip.attr("data-title") + "</em></span>";
+        let unfolded = folded + "<div>" + tooltip.attr("data-text") + "</div>";
+        
+        if (tooltip.attr("unfolded") === "false") {
+            tooltip.html(unfolded);
+            tooltip.attr("unfolded", "true");
+        } else {
+            tooltip.html(folded);
+            tooltip.attr("unfolded", "false");
+        }
     });
 });
 
