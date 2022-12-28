@@ -63,7 +63,7 @@ $(document).ready(function() {
             $(this).html(unfolded);
             $(this).attr("unfolded", "true");
         } else {
-            if (!$(this).children('div')[0].is(':hover')) {
+            if ($(this).children('span')[0].is(':hover')) {
                 $(this).html(folded);
                 $(this).attr("unfolded", "false");
             }
