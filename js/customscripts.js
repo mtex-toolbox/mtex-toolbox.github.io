@@ -61,7 +61,7 @@ $(document).ready(function() {
     });
     
     $('[data-toggle="foldable-tooltip"]').click(function() {
-        $(this).html("<i class='"+$(this).attr("data-icon")+"'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
+        // $(this).html("<i class='"+$(this).attr("data-icon")+"'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
         const unfoldedHTML = "<div id='"+$(this).attr("unfolded-id")+"'>" + $(this).attr("data-text") + "</div>";
         
         if ($(this).attr("unfolded-state") === "false") {
@@ -69,7 +69,7 @@ $(document).ready(function() {
             $(this).insertAfter(unfoldedHTML);
         } else {
             $(this).attr("unfolded-state", "false");
-            $('#'+$(this).attr("unfolded-id")).remove();
+            $('div[id*="tooltip-text_"]'+$(this).attr("unfolded-id").toString()).remove();
         }
     });
 });
