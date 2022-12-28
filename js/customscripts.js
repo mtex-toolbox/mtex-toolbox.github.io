@@ -40,20 +40,12 @@ $(document).ready(function() {
     }
 
     // events for foldable tooltip
-    $('[data-toggle="foldable-tooltip"]').each(function() {
-        if ($(this).attr("data-icon") === null) {
-            $(this).attr("data-icon", "fa fa-info-circle");
-        }
-
-        $(this).attr("title", $(this).attr("data-preview"));
-        $(this).html("<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
-        this.click();
-    });
-
+    $('[data-toggle="foldable-tooltip"]').each(function() { this.click(); });
+    
     $('[data-toggle="foldable-tooltip"]').click(function() {
         let folded = "<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>";
         let unfolded = folded + "<div>" + $(this).attr("data-text") + "</div>";
-
+        
         if ($(this).attr("unfolded") === "false") {
             $(this).html(unfolded);
             $(this).attr("unfolded", "true");
@@ -61,6 +53,15 @@ $(document).ready(function() {
             $(this).html(folded);
             $(this).attr("unfolded", "false");
         }
+    });
+
+    $('[data-toggle="foldable-tooltip"]').each(function() {
+        if ($(this).attr("data-icon") === null) {
+            $(this).attr("data-icon", "fa fa-info-circle");
+        }
+    
+        $(this).attr("title", $(this).attr("data-preview"));
+        $(this).html("<i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
     });
 });
 
