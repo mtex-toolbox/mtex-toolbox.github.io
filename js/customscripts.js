@@ -56,19 +56,20 @@ $(document).ready(function() {
         }
     
         $(this).attr("title", $(this).attr("data-preview"));
-        $(this).html("<span><i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em></span>");
-        $(this).attr("unfolded", "false");
+        $(this).html("<i class='"+$(this).attr("data-icon")+"'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em>");
+        $(this).attr("unfolded-id", "tooltip-text_"+uniqId().toString());
+        $(this).attr("unfolded-state", "false");
     });
     
-    $('[data-toggle="foldable-tooltip"] > span').click(function() {
-        let tooltip = $(this).parent();
+    $('[data-toggle="foldable-tooltip"]').click(function() {
+        const unfoldedHTML = "<div id='"+$(this).attr("unfolded-id")+"'>" + $(this).attr("data-text") + "</div>";
 
-        if (tooltip.attr("unfolded") === "false") {
-            tooltip.append("<div>" + tooltip.attr("data-text") + "</div>");
-            tooltip.attr("unfolded", "true");
+        if ($(this).attr("unfolded-state") === "false") {
+            $(this).attr("unfolded-state", "true");
+            $(this).insertAfter(unfoldedHTML);
         } else {
-            tooltip.find("div").remove();
-            tooltip.attr("unfolded", "false");
+            $(this).attr("unfolded-state", "false");
+            $('#'+$(this).attr("unfolded-id")).remove();
         }
     });
 });
