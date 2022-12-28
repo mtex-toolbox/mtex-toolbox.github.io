@@ -39,10 +39,7 @@ $(document).ready(function() {
         if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
     }
 
-    $('[data-toggle="foldable-tooltip"]').each(function() {
-        $(this).html("<em>"+$(this).attr("data-title")+"</em>");
-    });
-
+    // events for foldable tooltip
     $('[data-toggle="foldable-tooltip"]').click(function() {
         if ($(this).attr("unfolded") === "false") {
             $(this).html("<em>"+$(this).attr("data-title")+"</em><div>"+$(this).attr("data-text")+"</div>");
@@ -52,6 +49,12 @@ $(document).ready(function() {
             $(this).attr("unfolded", "false");
         }
     });
+
+    $('[data-toggle="foldable-tooltip"]').each(function() {
+        $(this).html("<em>"+$(this).attr("data-title")+"</em>");
+        this.click();
+    });
+
 });
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
