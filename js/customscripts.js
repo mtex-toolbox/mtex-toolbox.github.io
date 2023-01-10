@@ -1,7 +1,10 @@
+
+// some small functions
+const uniqId = (()=>{let i=0;return()=>{return i++;}})();
+
 $('#mysidebar').height($(".nav").height());
 
-
-$( document ).ready(function() {
+$(document).ready(function() {
 
     //this script says, if the height of the viewport is greater than 800px, then insert affix class, which makes the nav bar float in a fixed
     // position as your scroll. if you have a lot of nav items, this height may not work for you.
@@ -36,6 +39,36 @@ $( document ).ready(function() {
 
         if (a_href.includes("://") && a_target === null) { a_tag.setAttribute("target", "_blank"); }
     }
+
+    // add no_icon class to links with badges
+    $('a > img').each(function() {
+        $(this).parent().addClass("no_icon");
+    });
+
+    // foldable tooltip
+    $('[data-toggle="foldable-tooltip"]').each(function() {
+        if ($(this).attr("data-icon") === null) {
+            $(this).attr("data-icon", "fa fa-info-circle");
+        }
+
+        $(this).html("<span title='" + $(this).attr("data-preview") + "'><i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em></span>");
+        $(this).attr("unfolded", "false");
+    });
+
+    $('[data-toggle="foldable-tooltip"]').click(function() {
+        let folded = "<span title='" + $(this).attr("data-preview") + "'><i class='" + $(this).attr("data-icon") + "'></i>&nbsp;<em>" + $(this).attr("data-title") + "</em></span>";
+        let unfolded = folded + "<div>" + $(this).attr("data-text") + "</div>";
+
+        if ($(this).attr("unfolded") === "false") {
+            $(this).html(unfolded);
+            $(this).attr("unfolded", "true");
+        } else {
+            if (!$(this).children('div').is(':hover')) {
+                $(this).html(folded);
+                $(this).attr("unfolded", "false");
+            }
+        }
+    });
 });
 
 // needed for nav tabs on pages. See Formatting > Nav tabs for more details.
