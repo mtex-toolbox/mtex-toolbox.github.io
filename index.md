@@ -7,14 +7,15 @@ permalink: index
 toc: false
 ---
 
-<strong>MTEX</strong> is a free Matlab toolbox for analyzing and modeling crystallographic textures by means of EBSD or pole figure data. It is developed on a free and opensource basis by an interdisciplinary
+<b>MTEX</b> is a free Matlab toolbox for analyzing and modeling crystallographic textures by means of EBSD or pole figure data. It is developed on a free and opensource basis by an interdisciplinary
 {% include reference.html link="people" content='<i class="fa fa-group"></i> team' %}
 of material scientists, geologists and mathematicians.
 <br>
 <!--<img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983">-->
 <!-- <img src="https://visitor-badge.laobi.icu/badge?page_id=MTEXHomePage&right_color=%23149983&query_only"> -->
-[![](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/mtex-toolbox/mtex)
-[![ResearchGate Badge](https://img.shields.io/badge/Research-Gate-9cf)](https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software)
+[![](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/mtex-toolbox/mtex)&nbsp;
+[![](https://img.shields.io/badge/Research-Gate-9cf)](https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software)&nbsp;
+&nbsp;
 ![](https://img.shields.io/github/languages/top/mtex-toolbox/mtex)&nbsp;
 ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/total)&nbsp;
 ![](https://img.shields.io/github/contributors/mtex-toolbox/mtex)&nbsp;
