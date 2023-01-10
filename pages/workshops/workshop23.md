@@ -296,7 +296,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - **{% include reference.html
   link="https://geodynamics.geo.uni-halle.de/rebecca-kuehn/"
-  content="Rebeca Kühn" %}** (Universität Halle): *to be announced*
+  content="Rebeca Kühn" %}** (Universität Halle): *Analyzing X-ray diffraction data of polyphase rocks using MTEX*
 
 - **{% include reference.html
   link="https://marcoalopez.github.io/"
