@@ -66,7 +66,27 @@ toc: false
             </p>
         </div>
     </div>
-    <div class="panel panel-profile-card col-md-6">
+	    <div class="panel panel-profile-card col-md-6">
+        <div class="panel-heading">
+            <img src="images/profiles/Luiz-Morales.webp" alt="Picture of David Mainprice">
+        </div>
+        <div class="panel-body">
+            <p>
+                <b>Luiz Fernando Grafhula Morales</b>
+				is a structural geologist, electron
+				microscopist and long time Mtex user. He helps with the implementation
+				of physical properties, user support and workshops.
+            </p>
+            <p>
+                {% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Scientific Centre of Optical and Electron Microscopy of ETH Zürich, Switzerland" %}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+	    <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/florian-bachmann.png" alt="Picture of Florian Bachmann">
         </div>
@@ -83,26 +103,7 @@ toc: false
             </p>
         </div>
     </div>
-</div>
-
-<div class="row">
-    <div class="panel panel-profile-card col-md-6">
-        <div class="panel-heading">
-            <img src="images/profiles/felix-bartel.png" alt="Picture of Felix Bartel">
-        </div>
-        <div class="panel-body">
-            <p>
-                <b>Felix Bartel</b>
-                worked on MTEX during his master thesis at the TU Chemnitz in 2019. He
-                wrote the code for spherical function classes.
-            </p>
-            <p>
-                {% include reference.html link="https://www.tu-chemnitz.de/~febar" content="Institute of
-                Mathematics, TU Chemnitz" %}
-            </p>
-        </div>
-    </div>
-    <div class="panel panel-profile-card col-md-6">
+	    <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/bjorn-eske-soerensen.png" alt="Picture of Bjoern Eske Soerensen">
         </div>
@@ -164,6 +165,41 @@ toc: false
 </div>
 
 <div class="row">
+	<div class="panel panel-profile-card col-md-6">
+        <div class="panel-heading">
+            <img src="images/profiles/felix-bartel.png" alt="Picture of Felix Bartel">
+        </div>
+        <div class="panel-body">
+            <p>
+                <b>Felix Bartel</b>
+                worked on MTEX during his master thesis at the TU Chemnitz in 2019. He
+                wrote the code for spherical function classes.
+            </p>
+            <p>
+                {% include reference.html link="https://www.tu-chemnitz.de/~febar" content="Institute of
+                Mathematics, TU Chemnitz" %}
+            </p>
+        </div>
+    </div>
+	<div class="panel panel-profile-card col-md-6">
+        <div class="panel-heading">
+            <img src="images/profiles/Erik_Wuensche.png" alt="Picture of Felix Bartel">
+        </div>
+        <div class="panel-body">
+            <p>
+                <b>Erik Wünsche</b>
+                worked on MTEX during his Phd thesis at the TU Freiberg in 2022. He
+                wrote the code for classes of functions on the rotation group.
+            </p>
+            <p>
+                {% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Institute of
+                Applied Mathematics and Informatics, TU Freiberg" %}
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/oliver-kent-johnson.png" alt="Picture of Oliver kent Johnson">
@@ -191,3 +227,5 @@ toc: false
         </div>
     </div>
 </div>
+
+
