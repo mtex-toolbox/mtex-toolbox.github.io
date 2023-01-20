@@ -593,7 +593,9 @@ The second week will consist of lectures by invited experts that explain in deta
  link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration"
  content="registration form" %} to subscribe or write an email to -->
 - please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
- content="mtexworkshop@gmail.com" %} 
+ content="mtexworkshop@gmail.com" %} where you include name, address, whether
+ you are student or not, which week you wish to attend and wether you want to
+ participate in present or online
 - Deadline for registration is 31th of January 2023
 
 ## Registration Fee:
