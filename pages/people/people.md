@@ -68,7 +68,7 @@ toc: false
     </div>
 	    <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
-            <img src="images/profiles/Luiz-Morales.webp" alt="Picture of David Mainprice">
+            <img src="images/profiles/Luiz-Morales.webp" alt="Picture of Luiz Morales">
         </div>
         <div class="panel-body">
             <p>
