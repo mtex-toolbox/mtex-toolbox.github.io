@@ -15,8 +15,7 @@ since 18.01.2023. In order to register to the workshop or to ask any question pl
 {{site.data.alerts.end}}
 -->
 
-<div markdown="span" class="alert alert-info" role="alert"><i class="fa
-fa-info-circle"></i> <b>Note:</b> 
+<div markdown="span" class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle "></i> <b>Important:</b> 
 The IT infrastructure of the TU
 Freiberg and, in particular, the email server has been completely shut down
 since 18.01.2023. In order to register to the workshop or to ask any question please write an email to <a href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a>
