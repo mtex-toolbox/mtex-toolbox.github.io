@@ -10,8 +10,7 @@ toc: false
 {% include warning.html content="The IT infrastructure of the TU
 Freiberg and, in particular, the email server has been completely shut down
 since 18.01.2023. For any registration and any questions regarding the
-workshop please write an email to <a href="mailto:mtexworkshop@gmail.com"> mtexworkshop@gmail.com</a>"
- %}
+workshop please write an email to " %}
 
 The workshop extends over two weeks and is part of the master course {%
 include reference.html link="" content="Introduction into crystallographic
