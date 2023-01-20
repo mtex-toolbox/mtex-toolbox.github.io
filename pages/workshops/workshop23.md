@@ -7,6 +7,14 @@ folder: workshops
 toc: false
 ---
 
+{% include warning.html content="The IT infrastructure of the TU
+Freiberg and, in particular, the email server has been completely shut down
+since 18.01.2023. For any registration and any questions regarding the
+workshop please write an email to {% include
+ reference.html link="mailto:mtexworkshop@gmail.com"
+ content="mtexworkshop@gmail.com" %}
+" %}
+
 The workshop extends over two weeks and is part of the master course {%
 include reference.html link="" content="Introduction into crystallographic
 texture analysis" %} and counts for **5 ECTS** points. While the first week is
@@ -574,7 +582,11 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Registration:
 
-- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to {% include reference.html link="mailto:ralf.hielscher@math.tu-freiberg.de" content="Ralf.Hielscher@math.tu-freiberg.de" %}
+<!-- - Please use our {% include reference.html
+ link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration"
+ content="registration form" %} to subscribe or write an email to -->
+- please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
+ content="mtexworkshop@gmail.com" %} 
 - Deadline for registration is 31th of January 2023
 
 ## Registration Fee:
