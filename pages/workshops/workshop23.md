@@ -7,14 +7,14 @@ folder: workshops
 toc: false
 ---
 
-<!---
 {{site.data.alerts.warning}}
-The IT infrastructure of the TU
-Freiberg and, in particular, the email server has been completely shut down
-since 18.01.2023. In order to register to the workshop or to ask any question please write an email to <a href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a>
+Everybody who registered should have received an email with details on the
+payment. Please contact us via <a
+href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a> if you have
+not yet received such an email or still want to register.
 {{site.data.alerts.end}}
--->
 
+<!---
 <div markdown="span" class="alert alert-warning" role="alert"><i class="fa
 fa-exclamation-circle "></i> <b>Important:</b> 
 Everybody who registered should have received an email with details on the
@@ -22,7 +22,7 @@ payment. Please contact us via <a
 href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a> if you have
 not yet received such an email or still want to register.
 </div>
-
+-->
 
 The workshop extends over two weeks and is part of the master course {%
 include reference.html link="" content="Introduction into crystallographic
