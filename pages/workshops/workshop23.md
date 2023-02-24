@@ -45,13 +45,14 @@ special focus will be the new features of **MTEX 6.0** which will include
 pseudo 3d functionality for EBSD and grains and multiple spatial reference
 systems.
 
+<!--
 {% include note.html content="The workshop will be held primarily in
 **presence**. Although we will provide online access to all lectures and
 presentations we encourage everybody to come to Freiberg to have the best
 possible training and discussions. We also encourage the participants to send
 data files to the organiziers prior to the workshop which will than be
 discussed during the exercises." %}
-
+-->
 <!--To stimulate this we made the fee for online
 participation higher then the fee for participation in pretense.-->
 
@@ -614,7 +615,7 @@ The second week will consist of lectures by invited experts that explain in deta
 ## Registration Fee:
 - first + second week:  (PhD) students - 300 Euro, other - 500 Euro
 - second week: (PhD) students - 100 Euro, other - 200 Euro
-- {% include reference.html link="click here for making the payment" content="https://webshop-tu-freiberg.de/iana_shop_en/registration-mtex-workshop-2023-presence.html"}
+- {% include reference.html link="click here for making the payment" content="https://webshop-tu-freiberg.de/iana_shop_en/registration-mtex-workshop-2023-presence.html"%}
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
 
