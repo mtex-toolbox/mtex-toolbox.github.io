@@ -100,8 +100,10 @@ annotate(pos)
 
 {% highlight plaintext %}
 SF = S2FunHarmonic
- bandwidth: 64
- antipodal: true
+  bandwidth: 64
+  antipodal: true
+  isReal: true
+ 
 SFMax =
     0.5000
  
@@ -144,18 +146,18 @@ sSAll = slipSystem (Nickel)
  size: 12 x 1
  
    u    v    w  | h    k    l CRSS
-   0   -1   -1   -1    1   -1    1
-  -1   -1    0   -1    1   -1    1
-   1    0   -1   -1    1   -1    1
-   0   -1    1   -1   -1   -1    1
-   1   -1    0   -1   -1   -1    1
-   1    0   -1   -1   -1   -1    1
-   0   -1    1    1   -1   -1    1
-  -1    0   -1    1   -1   -1    1
-  -1   -1    0    1   -1   -1    1
-   0   -1   -1    1    1   -1    1
-   1   -1    0    1    1   -1    1
+   0   -1    1    1    1    1    1
+   1    0   -1    1    1    1    1
+  -1    1    0    1    1    1    1
+  -1    1    0    1    1   -1    1
   -1    0   -1    1    1   -1    1
+   0   -1   -1    1    1   -1    1
+   0   -1    1   -1    1    1    1
+  -1    0   -1   -1    1    1    1
+  -1   -1    0   -1    1    1    1
+   1    0   -1    1   -1    1    1
+  -1   -1    0    1   -1    1    1
+   0   -1   -1    1   -1    1    1
 {% endhighlight %}
 <p>The option <code class="language-plaintext highlighter-rouge">antipodal</code> indicates that Burgers vectors in oposite direction should not be distinguished. Now</p>
 {% highlight matlab %}
@@ -165,9 +167,9 @@ tau = sSAll.SchmidFactor(r)
 {% highlight plaintext %}
 tau =
   Columns 1 through 7
-    0.2916    0.1750    0.1166   -0.1750    0.1750    0.3499   -0.1166
+    0.1750   -0.3499    0.1750    0.0000   -0.0000   -0.0000    0.1166
   Columns 8 through 12
-    0.4666    0.3499   -0.0000   -0.0000   -0.0000
+   -0.4666   -0.3499   -0.1166   -0.1750   -0.2916
 {% endhighlight %}
 <p>returns a list of Schmid factors and we can find the slip system with the largest Schmid factor using</p>
 {% highlight matlab %}
@@ -185,7 +187,7 @@ id =
 ans = slipSystem (Nickel)
  
    u    v    w  | h    k    l CRSS
-  -1    0   -1    1   -1   -1    1
+  -1    0   -1   -1    1    1    1
 {% endhighlight %}
 <p>The above computation can be easily extended to a list of tension directions</p>
 {% highlight matlab %}
@@ -245,30 +247,30 @@ sSAll = slipSystem (Nickel)
  size: 24 x 1
  
    u    v    w  | h    k    l CRSS
-  -1    0    1   -1    1   -1    1
-  -1   -1    0   -1    1   -1    1
-   0    1    1   -1    1   -1    1
-   0   -1   -1   -1    1   -1    1
-   1    1    0   -1    1   -1    1
-   1    0   -1   -1    1   -1    1
-  -1    0    1   -1   -1   -1    1
-  -1    1    0   -1   -1   -1    1
-   0   -1    1   -1   -1   -1    1
-   0    1   -1   -1   -1   -1    1
-   1   -1    0   -1   -1   -1    1
-   1    0   -1   -1   -1   -1    1
-  -1   -1    0    1   -1   -1    1
-  -1    0   -1    1   -1   -1    1
-   0   -1    1    1   -1   -1    1
-   0    1   -1    1   -1   -1    1
-   1    0    1    1   -1   -1    1
-   1    1    0    1   -1   -1    1
-  -1    0   -1    1    1   -1    1
+   0   -1    1    1    1    1    1
+   0    1   -1    1    1    1    1
+   1    0   -1    1    1    1    1
+  -1    0    1    1    1    1    1
+  -1    1    0    1    1    1    1
+   1   -1    0    1    1    1    1
   -1    1    0    1    1   -1    1
-   0    1    1    1    1   -1    1
-   0   -1   -1    1    1   -1    1
    1   -1    0    1    1   -1    1
+  -1    0   -1    1    1   -1    1
    1    0    1    1    1   -1    1
+   0   -1   -1    1    1   -1    1
+   0    1    1    1    1   -1    1
+   0   -1    1   -1    1    1    1
+   0    1   -1   -1    1    1    1
+  -1    0   -1   -1    1    1    1
+   1    0    1   -1    1    1    1
+  -1   -1    0   -1    1    1    1
+   1    1    0   -1    1    1    1
+   1    0   -1    1   -1    1    1
+  -1    0    1    1   -1    1    1
+  -1   -1    0    1   -1    1    1
+   1    1    0    1   -1    1    1
+   0   -1   -1    1   -1    1    1
+   0    1    1    1   -1    1    1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SchmidtFactor_04.png" %}
@@ -284,9 +286,10 @@ mtexColorbar
 
 {% highlight plaintext %}
 tau = S2FunHarmonic
- size: 24 x 1
- bandwidth: 64
- antipodal: true
+  size: 24 x 1
+  bandwidth: 64
+  antipodal: true
+  isReal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SchmidtFactor_05.png" %}

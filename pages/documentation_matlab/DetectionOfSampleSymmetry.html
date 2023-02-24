@@ -35,12 +35,18 @@ plotPDF(odf,h,'antipodal','silent','complete')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (m-3m → xyz (222))
+odf = SO3FunRBF (m-3m → xyz (222))
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 12°
-    center: Rotations: 4 x 1
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 12°
+  center: 4 orientations
+ 
+  Bunge Euler angles in degree
+  phi1    Phi   phi2 weight
+   135     45    120    0.4
+    60  54.73     45   0.13
+    70     90     45    0.4
+     0      0      0   0.07
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_01.png" %}
@@ -53,7 +59,7 @@ rot = rotation.byEuler(15*degree,12*degree,-5*degree);
 
 % Simulate individual orientations and rotate them.
 % Note that we loose the sample symmetry by rotating the orientations
-ori = rot * calcOrientations(odf,1000)
+ori = rot * discreteSample(odf,1000)
 
 % estimate an ODF from the individual orientations
 odf_est = calcDensity(ori,'halfwidth',10*degree)
@@ -66,15 +72,14 @@ plotPDF(odf_est,h,'antipodal',8,'silent');
 ori = orientation (m-3m → xyz (222))
   size: 1 x 1000
  
-odf_est = ODF (m-3m → xyz (222))
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
+odf_est = SO3FunHarmonic (m-3m → xyz (222))
+  isReal: true
+  bandwidth: 25
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_02.png" %}
-</center><h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axed different from x, y, z. With the following command we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX locks for a symmetry axis.</p>
+</center><h2 id="3">Detect the sample symmetry axis in the reconstructed ODF</h2><p>We observe that the reconstructed ODF has almost orthotropic symmetry, but with respect to axes different from x, y, z. With the command <a href="SO3Fun.centerSpecimen.html"><code class="language-plaintext highlighter-rouge">centerSpecimen</code></a> we can determine an rotation such that the rotated ODF has almost orthotropic symmetry with respect to x, y, z. The second argument is some starting direction where MTEX looks for a symmetry axis.</p>
 {% highlight matlab %}
 [odf_corrected,rot_inv] = centerSpecimen(odf_est);
 
@@ -90,7 +95,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
-</center><h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <code class="language-plaintext highlighter-rouge">centerSpecimen</code> to an ODF estimated from pole figure data. Lets start by importing them</p>
+</center><h2 id="4">Sample symmetry in an ODF computed from pole figure data</h2><p>In the next example we apply the function <a href="SO3Fun.centerSpecimen.html"><code class="language-plaintext highlighter-rouge">centerSpecimen</code></a> to an ODF estimated from pole figure data. Lets start by importing them</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'PoleFigure','aachen_exp.EXP');
 pf = PoleFigure.load(fname);
@@ -107,12 +112,12 @@ plotPDF(odf,h,'antipodal','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (m-3m → xyz)
+odf = SO3FunRBF (m-3m → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 4919 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 4958 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_05.png" %}

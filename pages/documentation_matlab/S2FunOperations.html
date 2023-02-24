@@ -24,7 +24,8 @@ plot(sF2,'upper')
 
 {% highlight plaintext %}
 sF2 = S2FunHarmonic
- bandwidth: 50
+  bandwidth: 50
+  isReal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_01.png" %}
@@ -37,7 +38,8 @@ plot(15 * sF1 + sF2,'upper')
 
 {% highlight plaintext %}
 ans = S2FunHarmonic
- bandwidth: 128
+  bandwidth: 128
+  isReal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_02.png" %}
@@ -52,7 +54,7 @@ plot(min(15*sF1,sF2),'upper');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_03.png" %}
-</center><h2 id="4">Local Extrema</h2><p>The obove mentioned functions <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> have very different use cases</p><div><ul><li>if two spherical functions are passed as arguments a spherical functions defined as the pointwise min/max between these two functions is computed</li><li>if a spherical function and single number are passed as arguments a spherical functions defined as the pointwise min/max between these the function and the value is computed</li><li>if only a single spherical function is provided the global maximum / minimum of the function is returned</li><li>if additionally the option 'numLocal' is provided the certain number of local minima / maxima is computed</li></ul></div>
+</center><h2 id="4">Local Extrema</h2><p>The above mentioned functions <a href="S2Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> have very different use cases</p><div><ul><li>if two spherical functions are passed as arguments a spherical function defined as the pointwise min/max between these two functions is computed</li><li>if a spherical function and a single number are passed as arguments a spherical function defined as the pointwise min/max between the function and the value is computed</li><li>if only a single spherical function is provided the global maximum / minimum of the function is returned</li><li>if additionally the option 'numLocal' is provided the certain number of local minima / maxima is computed</li></ul></div>
 {% highlight matlab %}
 plot(15 * sF1 + sF2,'upper')
 
@@ -66,7 +68,7 @@ annotate(minnodes)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_04.png" %}
-</center><h2 id="5">Integration</h2><p>The surface integral of a spherical function can be computed by either <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> or <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a>. The difference between both commands is that <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> normalizes the integral of the identical function on the sphere to \(4 \pi\) the command <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> normalizes it to one. Compare</p>
+</center><h2 id="5">Integration</h2><p>The surface integral of a spherical function can be computed by either <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> or <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a>. The difference between both commands is that <a href="S2Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> normalizes the integral of the identical function on the sphere to \(4 \pi\), the command <a href="S2Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> normalizes it to one. Compare</p>
 {% highlight matlab %}
 mean(sF1)
 
@@ -79,7 +81,7 @@ ans =
 ans =
     0.0329
 {% endhighlight %}
-<p>A practical application of integration is the computation of the \(L^2\)-norm which is defined for a spherical function \(f\) as</p><p>\[ \lVert f \rVert_2 = \left(\int_{\mathrm{sphere}} f(x)^2 dx\right)^{1/2} \]</p><p>accordingly we can compute it by</p>
+<p>A practical application of integration is the computation of the \(L^2\)-norm which is defined for a spherical function \(f\) by</p><p>\[ \lVert f \rVert_2 = \left(\int_{\mathrm{sphere}} <code class="language-plaintext highlighter-rouge">f(\xi)</code>^2 \,\mathrm d\xi\right)^{1/2} \]</p><p>accordingly we can compute it by</p>
 {% highlight matlab %}
 sqrt(sum(sF1.^2))
 {% endhighlight %}
@@ -88,7 +90,7 @@ sqrt(sum(sF1.^2))
 ans =
     0.4138
 {% endhighlight %}
-<p>or more efficiently by the command <a href="S2FunHarmonic.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a></p>
+<p>or more efficiently by the command <a href="S2Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a></p>
 {% highlight matlab %}
 norm(sF1)
 {% endhighlight %}
@@ -138,8 +140,8 @@ plot(rotate(15 * sF1 + sF2,rot),'upper')
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   270   30   90    0
+  phi1  Phi phi2
+   270   30   90
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_06.png" %}
@@ -158,7 +160,9 @@ plot(sFs,'upper','complete')
 
 {% highlight plaintext %}
 sFs = S2FunHarmonicSym (112)
- bandwidth: 128
+  symmetry: 112, X||a*, Y||b*, Z||c*
+  bandwidth: 128
+  isReal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunOperations_07.png" %}

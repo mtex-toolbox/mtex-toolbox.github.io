@@ -25,7 +25,7 @@ odf = 0.2*unimodalODF(mod1) ...
 % and lets switch to the LaboTex colormap
 setMTEXpref('defaultColorMap',LaboTeXColorMap);
 {% endhighlight %}
-<p>Plotting some pole figures of an <a href="ODF.ODF.html">ODF</a> is straight forward using the <a href="ODF.plotPDF.html">plotPDF</a> command. The only mandatory arguments are the ODF to be plotted and the <a href="Miller.Miller.html">Miller indice</a> of the crystal directions you want to have pole figures for</p>
+<p>Plotting some pole figures of an <a href="SO3Fun.SO3Fun.html">ODF</a> is straight forward using the <a href="SO3Fun.plotPDF.html">plotPDF</a> command. The only mandatory arguments are the ODF to be plotted and the <a href="Miller.Miller.html">Miller indice</a> of the crystal directions you want to have pole figures for</p>
 {% highlight matlab %}
 plotPDF(odf,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},cs))
 {% endhighlight %}
@@ -43,20 +43,21 @@ plotPDF(odf,Miller(1,1,-2,1,cs),'antipodal','complete')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPoleFigure_03.png" %}
-</center><p>Evaluation of the corresponding pole figure or inverse pole figure is done using the command <a href="ODF.calcPDF.html">calcPDF</a>.</p>
+</center><p>Evaluation of the corresponding pole figure or inverse pole figure is done using the command <a href="SO3Fun.calcPDF.html">calcPDF</a>.</p>
 {% highlight matlab %}
 odf.calcPDF(Miller(1,0,0,cs),xvector)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.1989
+    0.1982
 {% endhighlight %}
-<p>For a more complex example let us define a fibre and plot the ODF there.</p>
+<p>For a more complex example let us define a fibre and plot the ODF along this fibre.</p>
 {% highlight matlab %}
-fibre = orientation(fibre(Miller(1,0,0,odf.CS),yvector));
+f = fibre(Miller(1,0,0,odf.CS),yvector);
 
-plot(odf.eval(fibre))
+close all
+plotFibre(odf,f)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPoleFigure_04.png" %}

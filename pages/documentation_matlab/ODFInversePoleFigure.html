@@ -26,22 +26,21 @@ odf = 0.2*unimodalODF(mod1) ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (321 → xyz)
+odf = SO3FunComposition (321 → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: (180°,40°,20°)
-    weight: 0.2
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 2 orientations
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: (140°,30°,240°)
-    weight: 0.3
+  Bunge Euler angles in degree
+  phi1    Phi   phi2 weight
+   180     40     20    0.2
+   140     30    240    0.3
  
-  Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (0001) - 1,0,0
-    weight: 0.5
+  <strong>fibre component</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  fibre : (0001) || 1,0,0
+  weight: 0.5
 {% endhighlight %}
 <p>and lets switch to the LaboTex colormap</p>
 {% highlight matlab %}
@@ -49,7 +48,7 @@ setMTEXpref('defaultColorMap',LaboTeXColorMap);
 
 % Plotting inverse pole figures is analogously to plotting pole figures
 % with the only difference that you have to use the command
-% <ODF.plotIPDF.html plotIPDF> and you to specify specimen directions and
+% <SO3Fun.plotIPDF.html plotIPDF> and you to specify specimen directions and
 % not crystal directions.
 
 plotIPDF(odf,[xvector,zvector])

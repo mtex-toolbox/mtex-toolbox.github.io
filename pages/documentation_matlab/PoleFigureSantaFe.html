@@ -40,15 +40,15 @@ rec = calcODF(pf)
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec = ODF (m-3m → xyz (222))
+rec = SO3FunRBF (m-3m → xyz (222))
  
-  Uniform portion:
-    weight: 0.55924
+  <strong>uniform component</strong>
+  weight: 0.58
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 1230 orientations, resolution: 5°
-    weight: 0.44076
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 1232 orientations, resolution: 5°
+  weight: 0.42
 {% endhighlight %}
 <h2 id="4">ODF Estimation without Ghost Correction</h2>
 {% highlight matlab %}
@@ -56,12 +56,12 @@ rec2 = calcODF(pf,'NoGhostCorrection')
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec2 = ODF (m-3m → xyz (222))
+rec2 = SO3FunRBF (m-3m → xyz (222))
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 1232 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 1232 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <h2 id="5">Error analysis</h2>
 {% highlight matlab %}
@@ -74,7 +74,7 @@ plotDiff(pf,rec)
 
 {% highlight plaintext %}
 ans =
-    0.0488
+    0.0450
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_02.png" %}
@@ -104,15 +104,15 @@ mtexColorMap white2black
 {% highlight matlab %}
 close all;
 % true ODF
-plotFourier(SantaFe,'bandwidth',32,'linewidth',2)
+plotSpektra(SantaFe,'bandwidth',32,'linewidth',2)
 % keep plot for adding the next plots
 hold all
 
 % With ghost correction:
-plotFourier(rec,'bandwidth',32,'linewidth',2)
+plotSpektra(rec,'bandwidth',32,'linewidth',2)
 
 % Without ghost correction:
-plotFourier(rec2,'bandwidth',32,'linewidth',2)
+plotSpektra(rec2,'bandwidth',32,'linewidth',2)
 
 legend({'true ODF','with ghost correction','without ghost correction'})
 % next plot command overwrites plot

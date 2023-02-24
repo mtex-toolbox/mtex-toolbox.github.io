@@ -1,0 +1,363 @@
+---
+title: SO(3)-Kernel Functions
+
+sidebar: documentation_sidebar
+permalink: SO3Kernels.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>SO(3)-Kernel Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3Kernels.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3Kernels.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Also take a look at the page <a href="ODFShapes.html">ODFShapes</a>.</p><p>We examine some radial symmetric kernel functions \(\tilde \psi \colon SO(3) \to R\) on \(SO(3)\). For rotations \(R \in SO(3)\) we write this \(\mathcal{SO}(3)\)-kernels as functions of \(t = \cos\frac{\omega&reg;}2\) on the real numbers. Hence we write</p><p>\[ \psi(t) = \tilde\psi&reg; \].</p><p>Moreover, we have \(\psi \in L^2([-1,1],\sqrt{1-t^2}\mathrm{d}t)\) and we describe these rotational kernel functions by there Chebyshev expansion</p><p>\[ \psi(t) = \sum\limits_{n=0}^{\infty} \hat\psi_n \, \mathcal U_{2n}(t) \]</p><p>where \(\mathcal U_{n}\) denotes the Chebyshev polynomials of second kind and degree \(n\in\mathbb N\).</p><p>The class <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> is needed in MTEX to define the specific form of unimodal ODFs. It has to be passed as an argument when calling the methods <a href="uniformODF.html">uniformODF</a>. Furthermore \(\mathcal{SO}(3)-Kernels are also used for computing an ODF from EBSD data.</p><p>Within the class <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> kernel functions are represented by their Chebyshev coefficients, that are stored in the field <code class="language-plaintext highlighter-rouge">fun.A</code>. As an example lets define an \)\mathcal{SO}(3)\( kernel function with Chebyshev coefficients \)a_0 = 1\(, \)a_1 = 0\(, \)a_2 = 3\( and \)a_3 = 1\(</p>
+{% highlight matlab %}
+psi = SO3Kernel([1;0;3;1])
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi = SO3Kernel
+  bandwidth: 3
+  halfwidth: 40°
+{% endhighlight %}
+<p>We plot this function by evaluation of its Chebychev series in \)\cos(\frac{\omega}{2})\( for \)\omega\in[-pi,\pi].\(</p>
+{% highlight matlab %}
+plot(psi)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_01.png" %}
+</center><p>We can define an SO3Fun from a kernel function \)\psi\( at a specific orientation \)R\( by using the class <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>, i.e.</p>
+{% highlight matlab %}
+psi =SO3DeLaValleePoussinKernel('halfwidth',20*degree)
+SO3F = SO3FunRBF(orientation.rand,psi)
+plot(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi = SO3DeLaValleePoussinKernel
+  bandwidth: 13
+  halfwidth: 20°
+ 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 20°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+    phi1    Phi   phi2 weight
+  249.94 52.716 282.82      1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_02.png" %}
+</center><p>The following kernel function are predefined in MTEX</p><div><ul><li><a href="SO3Kernels.html#8">de la Vallee Poussin kernel</a> (used for ODF, MODF, Pole figures, etc)</li><li><a href="SO3Kernels.html#10">Dirichlet kernel</a> (used for physical properties)</li><li><a href="SO3Kernels.html#12">Abel Poisson kernel</a></li><li><a href="SO3Kernels.html#14">von Mises Fisher kernel</a></li><li><a href="SO3Kernels.html#16">Gauss Weierstrass kernel</a></li><li><a href="SO3Kernels.html#18">Sobolev kernel</a></li><li><a href="SO3Kernels.html#20">Laplace kernel</a></li><li><a href="SO3Kernels.html#22">Square Singularity kernel</a></li><li><a href="SO3Kernels.html#24">Bump kernel</a></li></ul></div><p>A specific \)\mathcal{SO}(3)\( kernel function like the de la Vallee Poussin kernel is specified by a half-width angle in orientation space (\)\mathcal{SO}(3)\() or bandwidth in Fourier space, which is the maximum development in Fourier coefficients.</p>
+{% highlight matlab %}
+psi = SO3DeLaValleePoussinKernel('halfwidth',30*degree)
+
+close all
+plot(psi)
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi = SO3DeLaValleePoussinKernel
+  bandwidth: 9
+  halfwidth: 30°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_03.png" %}
+</center><p>In the following we want to look at some different types of \)\mathcal{SO}(3)\( kernel functions.</p><h2 id="8">The de La Vallee Poussin Kernel</h2><p>The <a href="SO3Kernels.SO3DeLaValleePoussinKernel.html">de la Vallee Poussin kernel</a> on SO(3) is defined by</p><p>\)$ K(t) = \frac{B(\frac32,\frac12)}{B(\frac32,\kappa+\frac12)}\,t^{2\kappa}\[</p><p>for \(t\in[0,1]\), where \(B\) denotes the Beta function. The de la Vallee Poussin kernel additionaly has the unique property that for a given halfwidth it can be described exactly by a finite number of Fourier coefficients. This kernel is recommended for Texture analysis as it is always positive in orientation space and there is no truncation error in Fourier space. Hence we can define the de la Vallee Poussin kernel \(\psi_{\kappa}\) depending on a parameter \(\kappa \in \mathbb N \setminus \{0\}\) by its finite Chebyshev expansion</p><p>\] \psi_{\kappa}(t) = \frac{(\kappa+1)\,2^{2\kappa-1}}{\binom{2\kappa-1}{\kappa}} \, t^{2\kappa}  = \binom{2\kappa+1}{\kappa}^{-1} \, \sum\limits_{n=0}^{\kappa} (2n+1)\,\binom{2\kappa+1}{\kappa-n} \, \mathcal U_{2n}(t)\[.</p><p>Lets construct two of them.</p>
+{% highlight matlab %}
+psi1 = SO3DeLaValleePoussinKernel('halfwidth',15*degree)
+psi2 = SO3DeLaValleePoussinKernel('halfwidth',20*degree)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3DeLaValleePoussinKernel
+  bandwidth: 17
+  halfwidth: 15°
+ 
+ 
+psi2 = SO3DeLaValleePoussinKernel
+  bandwidth: 13
+  halfwidth: 20°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_04.png" %}
+</center><p>Here the parameter \(\kappa\) is \(40.34\) for function \(\psi_1\) and \(22.64\) in function \(\psi_2\).</p><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_05.png" %}
+</center><h2 id="10">The Dirichlet Kernel</h2><p>The <a href="SO3Kernels.SO3DirichletKernel.html">Dirichlet kernel</a> has the unique property of being a convergent finite series in Fourier coefficients with an integral of one. This kernel is recommended for calculating physical properties as the Fourier coefficients always have a value of one for a given bandwidth.</p><p>On the rotation group \(\mathcal{SO}(3)\) the Dirichlet kernel \(\psi_N \in L^2(\mathcal{SO}(3))\) is defined by its Chebyshev series</p><p>\] \psi_N(t) = \sum\limits_{n=0}^N (2n+1) \, \mathcal U_{2n}(t)\[.</p><p>Lets construct two of them.</p>
+{% highlight matlab %}
+psi1 = SO3DirichletKernel(10)
+psi2 = SO3DirichletKernel(5)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('bandwidth = 5','bandwidth = 10')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3DirichletKernel
+  bandwidth: 10
+  halfwidth: 13°
+ 
+ 
+psi2 = SO3DirichletKernel
+  bandwidth: 5
+  halfwidth: 24°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_06.png" %}
+</center><p>By looking at the fourier coefficients we see, that they are exactly 1.</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('bandwidth = 5','bandwidth = 10')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_07.png" %}
+</center><h2 id="12">The Abel Poisson Kernel</h2><p>The <a href="SO3Kernels.SO3AbelPoissonKernel.html">Abel Poisson kernel</a> \(\psi_{\kappa}\in L^2(\mathcal{SO}(3))\) is a nonnegative function depending on a parameter \(\kappa \in (0,1)\) and is defined by its Chebyshev series</p><p>\] \psi_{\kappa}(t) = \sum\limits_{n=0}^{\infty} (2n+1) \, \kappa^{2n} \, \mathcal U_{2n}(t)\[.</p><p>Lets construct two of them.</p>
+{% highlight matlab %}
+psi1 = SO3AbelPoissonKernel('halfwidth',15*degree)
+psi2 = SO3AbelPoissonKernel('halfwidth',20*degree)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3AbelPoissonKernel
+  bandwidth: 19
+  halfwidth: 15°
+ 
+ 
+psi2 = SO3AbelPoissonKernel
+  bandwidth: 15
+  halfwidth: 20°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_08.png" %}
+</center><p>Here the parameter \(\kappa\) is \(0.82\) for function \(\psi_1\) and \(0.76\) in function \(\psi_2\).</p><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_09.png" %}
+</center><h2 id="14">The von Mises Fisher Kernel</h2><p>The <a href="SO3Kernels.SO3vonMisesFisherKernel.html">von Mises Fisher kernel</a> \(\psi_{\kappa}\in L^2(\mathcal{SO}(3))\) is a nonnegative function depending on a parameter \(\kappa&gt;0\) and is defined by its Chebyshev series</p><p>\] \psi_{\kappa}(t) = \sum\limits_{n=0}^{\infty} \frac{\mathcal{I}_n(\kappa}-\mathcal{I}_{n+1}(\kappa)} {\mathcal{I}_0(\kappa)-\mathcal{I}_1(\kappa)}  \, \mathcal U_{2n}(t)\[</p><p>or directly by</p><p>\] \psi_{\kappa}(\cos\frac{\omega&reg;}2) = \frac1{\mathcal{I}_0(\kappa)-\mathcal{I}_1(\kappa)} \, \mathrm{e}^{\kappa \cos\omega&reg;}\[</p><p>while \(\mathcal I_n,\,n\in\mathbb N_0\) denotes the the modified Bessel functions of first kind</p><p>\] \mathcal I_n (\kappa) = \frac1{\pi} \int_0^{\pi} \mathrm e^{\kappa \, \cos \omega} \, \cos n\omega \, \mathrm d\omega \[.</p><p>Lets construct two of this kernels.</p>
+{% highlight matlab %}
+psi1 = SO3vonMisesFisherKernel('halfwidth',15*degree)
+psi2 = SO3vonMisesFisherKernel('halfwidth',20*degree)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3vonMisesFisherKernel
+  bandwidth: 18
+  halfwidth: 15°
+ 
+ 
+psi2 = SO3vonMisesFisherKernel
+  bandwidth: 14
+  halfwidth: 20°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_10.png" %}
+</center><p>Here the parameter \(\kappa\) is \(20.34\) for function \(\psi_1\) and \(11.49\) in function \(\psi_2\).</p><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_11.png" %}
+</center><h2 id="16">The Gauss Weierstrass Kernel</h2><p>The <a href="SO3Kernels.SO3GaussWeierstrassKernel.html">Gauss Weierstrass kernel</a> \(\psi_{\kappa}\in L^2(\mathcal{SO}(3))\) is a nonnegative function depending on a parameter \(\kappa&gt;0\) and is defined by its Chebyshev series</p><p>\] \psi_{\kappa}(t) = \sum\limits_{n=0}^{\infty} (2n+1) \, \mathrm e^{-n(n+1)\kappa} \, \mathcal U_{2n}(t)\[.</p><p>Lets construct two of them by the parameter \(\kappa\).</p>
+{% highlight matlab %}
+psi1 = SO3GaussWeierstrassKernel(0.025)
+psi2 = SO3GaussWeierstrassKernel(0.045)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3GaussWeierstrassKernel
+  bandwidth: 17
+  halfwidth: 15°
+ 
+ 
+psi2 = SO3GaussWeierstrassKernel
+  bandwidth: 13
+  halfwidth: 20°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_12.png" %}
+</center><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('halfwidth = 15°','halfwidth = 20°')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_13.png" %}
+</center><h2 id="18">The Sobolev Kernel</h2><p>The <a href="SO3Kernels.SO3SobolevKernel.html">Sobolev kernel</a> \(\psi_{s}\in L^2(\mathcal{SO}(3))\) is a radial symmetric kernel function depending on a parameter \(s\) and is defined by its Chebyshev series</p><p>\] \psi_s(t) = \sum\limits_{n=0}^{\infty} (2n+1)\, (n(n+1))^s \, \mathcal U_{2n}(t) \[.</p><p>Lets construct two of them by the parameter \(s\) and banwidth 15.</p>
+{% highlight matlab %}
+psi1 = SO3SobolevKernel(1,'bandwidth',15)
+psi2 = SO3SobolevKernel(1.2,'bandwidth',15)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('s = 1','s = 1.2')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3SobolevKernel
+  bandwidth: 15
+  halfwidth: 8.1°
+ 
+ 
+psi2 = SO3SobolevKernel
+  bandwidth: 15
+  halfwidth: 8°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_14.png" %}
+</center><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('s = 1','s = 1.2')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_15.png" %}
+</center><h2 id="20">The Laplace Kernel</h2><p>The <a href="SO3Kernels.SO3LaplaceKernel.html">Laplace kernel</a> \(\psi\in L^2(\mathcal{SO}(3))\) is a radial symmetric kernel function which is defined by its Chebyshev series</p><p>\] \psi(t) = \sum\limits_{n=0}^{\infty} \frac{(2n+1)}{4\,n^2\,(2n+2)^2} \, \mathcal U_{2n}(t) \[.</p>
+{% highlight matlab %}
+psi = SO3LaplaceKernel
+
+plot(psi)
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi = SO3LaplaceKernel
+  bandwidth: 4
+  halfwidth: 55°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_16.png" %}
+</center><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_17.png" %}
+</center><h2 id="22">The Squared Singularity Kernel</h2><p>The <a href="SO3Kernels.SO3SquareSingularityKernel.html">squared singularity kernel</a> \(\psi_{\kappa}\in L^2(\mathcal{SO}(3))\)  is a nonnegative function depending on a parameter \(\kappa\in(0,1)\) and is defined by its Chebyshev series</p><p>\] \psi_{\kappa}(t) = \sum\limits_{n=0}^{\infty} \hat{f}_n(\kappa) \, \mathcal U_{2n}(t) \[.</p><p>where the chebychev coefficients follows a 3-term recurrsion</p><p>\(\hat{f}_0 = 1\) \(\hat{f}_1 = \frac{1+\kappa^2}{2\kappa}-\frac1{\log\frac{1+\kappa}{1-\kappa}}\) \(\hat{f}_n = \frac{(2n-3)(2n+1)(1+\kappa^2)}{(2n-1)(n-1)2\kappa} \, \hat{f}_{n-1}(\kappa)-\frac{2\kappa(n-2)(2n+1)}{2n-3} \, \hat{f}_{n-2}(\kappa)\).</p><p>Lets construct two of them by the parameter \(\kappa\).</p>
+{% highlight matlab %}
+psi1 = SO3SquareSingularityKernel(0.2)
+psi2 = SO3SquareSingularityKernel(0.3)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('\kappa = 0.2','\kappa = 0.3')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3SquareSingularityKernel
+  bandwidth: 5
+  halfwidth: 78°
+ 
+ 
+psi2 = SO3SquareSingularityKernel
+  bandwidth: 7
+  halfwidth: 55°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_18.png" %}
+</center><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('\kappa = 0.2','\kappa = 0.3')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_19.png" %}
+</center><h2 id="24">The Bump kernel</h2><p>The <a href="SO3Kernels.SO3BumpKernel.html">bump kernel</a> \(\tilde\psi_r\in L^2(\mathcal{SO}(3))\) is a radial symmetric kernel function depending on a parameter \(r\in (0,pi)\). The function value is 0, if the angle is greater then the halfwidth \(r\). Otherwise it is has a contstant value, such that the mean of \(\psi_r\) on \(\mathcal{SO}(3)\) is 1. Hence we use the open set</p><p>\]U_r = \{ R \in \mathcal{SO}(3) \,|~ <code class="language-plaintext highlighter-rouge">\omega&reg;</code>&lt;r \}\[</p><p>and define the bump kernel by</p><p>\] \tilde\psi_r&reg; = \frac1{|U_r|} \mathbf{1}_{R \in U_r} $$</p><p>where \(\mathbf{1}\) is the indicator function.</p><p>The main problem of the bump kernel is that we need a lot of chebychev coefficients to describe it. That possibly can result in high runtimes.</p>
+{% highlight matlab %}
+psi1 = SO3BumpKernel(30*degree)
+psi2 = SO3BumpKernel(40*degree)
+
+plot(psi1)
+hold on
+plot(psi2)
+hold off
+legend('halfwidth = 30°','halwidth = 40°')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi1 = SO3BumpKernel
+  bandwidth: 1000
+  halfwidth: 30°
+ 
+ 
+psi2 = SO3BumpKernel
+  bandwidth: 1000
+  halfwidth: 40°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_20.png" %}
+</center><p>We also take a look at the Fourier coefficients</p>
+{% highlight matlab %}
+plotSpektra(psi1)
+hold on
+plotSpektra(psi2)
+hold off
+legend('\kappa = 0.2','\kappa = 0.3')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Kernels_21.png" %}
+</center></div></body></html>

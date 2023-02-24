@@ -20,30 +20,34 @@ odf1 = unimodalODF(orientation.byEuler(0,0,0,cs)) + ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf1 = ODF (mmm → xyz)
+odf1 = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: (0°,0°,0°)
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 2 orientations
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: (30°,0°,0°)
-    weight: 1
+  Bunge Euler angles in degree
+  phi1    Phi   phi2 weight
+     0      0      0      1
+    30      0      0      1
 {% endhighlight %}
 <p>A fibre ODF:</p>
 {% highlight matlab %}
-odf2 = fibreODF(Miller(0,0,1,cs),xvector)
+f001_x = fibre(Miller(0,0,1,cs),xvector)
+
+odf2 = fibreODF(f001_x)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf2 = ODF (mmm → xyz)
+f001_x = fibre (mmm → xyz)
  
-  Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (001) - 1,0,0
-    weight: 1
+  h || r: (001) || (1,0,0)
+ 
+odf2 = SO3FunCBF (mmm → xyz)
+ 
+  kernel: de la Vallee Poussin, halfwidth 10°
+  fibre : (001) || 1,0,0
+  weight: 1
 {% endhighlight %}
 <p>An ODF estimated from diffraction data</p>
 {% highlight matlab %}
@@ -65,14 +69,14 @@ pf = PoleFigure
   h = (11-21), r = 72 x 19 points
   h = (11-22), r = 72 x 19 points
  
-odf3 = ODF (Quartz → xyz)
+odf3 = SO3FunRBF (Quartz → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 19836 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
-<h2 id="5">Modal Orientations</h2><p>The modal orientation of an ODF is the crystallographic prefered orientation <code class="language-plaintext highlighter-rouge">ori_pref</code> of the texture. It is characterized as the maximum of the ODF. In MTEX it is returned as the second output argument of the command <a href="ODF.max.html"><code class="language-plaintext highlighter-rouge">max</code></a></p>
+<h2 id="5">Modal Orientations</h2><p>The modal orientation of an ODF is the crystallographic prefered orientation <code class="language-plaintext highlighter-rouge">ori_pref</code> of the texture. It is characterized as the maximum of the ODF. In MTEX it is returned as the second output argument of the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a></p>
 {% highlight matlab %}
 [~,ori_pref] = max(odf3)
 {% endhighlight %}
@@ -81,8 +85,8 @@ odf3 = ODF (Quartz → xyz)
 ori_pref = orientation (Quartz → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  132.867 34.7888 207.108       0
+     phi1     Phi    phi2
+  132.867 34.7888 207.108
 {% endhighlight %}
 <p>Lets mark this prefered orientation in the pole figures</p>
 {% highlight matlab %}
@@ -91,65 +95,49 @@ annotate(ori_pref,'marker','s','MarkerFaceColor','black')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFCharacteristics_01.png" %}
-</center><h2 id="7">Texture Characteristics</h2><p>Texture characteristics are used for a rough classification of ODF into sharp and weak ones. The two most common texture characteristics are the <a href="ODF.entropy.html">entropy</a> and the <a href="ODF.textureindex.html">texture index</a>.</p><p>Compute the texture index:</p>
+</center><h2 id="7">Texture Characteristics</h2><p>Texture characteristics are used for a rough classification of ODFs into sharp and weak ones. The two most common texture characteristics are the entropy and the texture index. The texture index of an ODF \(f\) is defined as:</p><p>\[ t = \int_{SO(3)} f&reg;^2 dR\]</p><p>We may either compute this integral using the command <a href="SO3Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> directly by</p>
 {% highlight matlab %}
-textureindex(odf1)
+t = mean(odf1.*odf1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-  288.6802
+t =
+  288.5696
 {% endhighlight %}
-<p>Compute the entropy:</p>
+<p>or, more efficiently, by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a></p>
 {% highlight matlab %}
-entropy(odf2)
+t = norm(odf1)^2
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+t =
+  288.5696
+{% endhighlight %}
+<p>The entropy of an ODF \(f\) is defined as:</p><p>\[ H = - \int_{SO(3)} f&reg; \ln f&reg; dR\]</p>
+{% highlight matlab %}
+H = entropy(odf2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+H =
    -2.8402
 {% endhighlight %}
-<h2 id="10">Volume Portions</h2><p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="ODF.volume.html">volume</a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="ODF.fibreVolume.html">fibreVolume</a></p><p>The relative volume in percent of crystals with missorientation maximum 30 degree from the preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code>:</p>
+<h2 id="10">Volume Portions</h2><p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="SO3Fun.fibreVolume.html"><code class="language-plaintext highlighter-rouge">fibreVolume</code></a></p><p>The relative volume in percent of crystals with missorientation maximum 30 degree from the preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code>:</p>
 {% highlight matlab %}
-volume(odf3, ori_pref, 30*degree) * 100
+V1 = volume(odf3, ori_pref, 30*degree) * 100
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+V1 =
    35.6781
 {% endhighlight %}
-<p>The relative volume of crystals with missorientation maximum 20 degree from the prefered fibre in percent: TODO</p>
+<p>The relative volume of crystals with missorientation maximum 20 degree from the prefered fibre in percent:</p>
 {% highlight matlab %}
-%fibreVolume(odf2,Miller(0,0,1),xvector,20*degree) * 100
-{% endhighlight %}
-<h2 id="13">Extract Internal Representation</h2><p>The internal representation of the ODF can be addressed by the command</p>
-{% highlight matlab %}
-properties(odf3.components{1})
+V2 = volume(odf2,f001_x,20*degree) * 100
 {% endhighlight %}
 
 {% highlight plaintext %}
-Properties for class unimodalComponent:
-    center
-    psi
-    weights
-    CS
-    SS
-    antipodal
-    bandwidth
-{% endhighlight %}
-<p>The properties in this list can be accessed by</p>
-{% highlight matlab %}
-odf3.components{1}.center
-
-odf3.components{1}.psi
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = SO3Grid (Quartz → xyz)
-  grid: 19836 orientations, resolution: 5°
- 
-ans = deLaValleePoussinKernel
-  bandwidth: 48
-  halfwidth: 5°
+V2 =
+   95.2359
 {% endhighlight %}
 </div></body></html>

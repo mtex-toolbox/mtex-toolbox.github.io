@@ -69,16 +69,23 @@ To make changes, update the MATLAB code and republish this document.
 cs = crystalSymmetry('m-3m');
 center = orientation.rand(5,cs);
 odf = unimodalODF(center,'halfwidth',5*degree)
-ori = odf.calcOrientations(3000);
+ori = odf.discreteSample(3000);
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (m-3m → xyz)
+odf = SO3FunRBF (m-3m → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: Rotations: 5 x 1
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 5 orientations
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2  weight
+  30.9059 125.957 10.8436     0.2
+  190.046 92.8091 259.213     0.2
+  306.555 113.587 135.438     0.2
+   75.595 108.063  211.69     0.2
+  297.626 31.1407 118.781     0.2
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -87,7 +94,7 @@ tic; [c,centerRec] = calcCluster(ori,'method','hierarchical','numCluster',5); to
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 3.478295 seconds.
+Elapsed time is 3.135900 seconds.
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -129,6 +136,6 @@ min(angle_outer(center,centerRec)./degree)
 
 {% highlight plaintext %}
 ans =
-    0.3008    0.2581    0.2108    7.1319    4.1835
+    0.2695    0.2383    0.0664    0.3392    0.1750
 {% endhighlight %}
 </div></body></html>

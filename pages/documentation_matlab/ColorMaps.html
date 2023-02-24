@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Color Mapping</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ColorMaps.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/ColorMaps.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>A central issue when interpreting plots is to have a consistent color coding among all plots. In MTEX this can be achieved in two ways. If the the minimum and maximum value are known then one can specify the color range directly using the options <b>colorrange</b> or <b>contourf</b>, or the command <a href="setColorRange.html">setColorRange</a> is used which allows to set the color range afterwards.</p><h2 id="2">A sample ODFs and Simulated Pole Figure Data</h2><p>Let us first define some model <a href="ODF.ODF.html">ODFs</a> to be plotted later on.</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>A central issue when interpreting plots is to have a consistent color coding among all plots. In MTEX this can be achieved in two ways. If the the minimum and maximum value are known then one can specify the color range directly using the options <b>colorrange</b> or <b>contourf</b>, or the command <a href="setColorRange.html">setColorRange</a> is used which allows to set the color range afterwards.</p><h2 id="2">A sample ODFs and Simulated Pole Figure Data</h2><p>Let us first define some model <a href="SO3Fun.SO3Fun.html">ODFs</a> to be plotted later on.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
 odf = fibreODF(Miller(1,1,0,cs),zvector)
@@ -21,12 +21,11 @@ pf = calcPoleFigure(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],...
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (-3m1 → xyz)
+odf = SO3FunCBF (-3m1 → xyz)
  
-  Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (11-20) - 0,0,1
-    weight: 1
+  kernel: de la Vallee Poussin, halfwidth 10°
+  fibre : (11-20) || 0,0,1
+  weight: 1
 {% endhighlight %}
 <h2 id="3">Tight Colorcoding</h2><p>When <a href="PoleFigure.plot.html">plot</a> is called without any colorcoding option, the plots are constructed using the  <b>tight</b> option to the range of the data independently from the other plots. This means that different pole figures may have different color coding and in principle cannot be compared to each other.</p>
 {% highlight matlab %}
@@ -43,7 +42,7 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_02.png" %}
-</center><h2 id="5">Setting an Explicite Colorrange</h2><p>If you want to have a unified colorcoding for several figures you can set the colorrange directly in the <a href="ODF.plotPDF.html">plot command</a></p>
+</center><h2 id="5">Setting an Explicite Colorrange</h2><p>If you want to have a unified colorcoding for several figures you can set the colorrange directly in the <a href="SO3Fun.plotPDF.html">plot command</a></p>
 {% highlight matlab %}
 close all
 plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],...

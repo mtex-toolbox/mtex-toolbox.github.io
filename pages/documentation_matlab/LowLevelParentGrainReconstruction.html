@@ -80,7 +80,7 @@ tPori = grains(tP.grainId).meanOrientation;
 tP = triplePointList
  
  points   mineral 1   mineral 2   mineral 3
-  93895  Ti (alpha)  Ti (alpha)  Ti (alpha)
+  93853  Ti (alpha)  Ti (alpha)  Ti (alpha)
 {% endhighlight %}
 <p>The command <code class="language-plaintext highlighter-rouge">calcParent</code> returns for each child orientation a <code class="language-plaintext highlighter-rouge">parentId</code> which allows us later to compute the parent orientation from the child orientation. Furthermore, the command return for each triple junction the misfit between the adjecent parent orientations in radiant. Finally, the option <code class="language-plaintext highlighter-rouge">'numFit',2</code> causes <code class="language-plaintext highlighter-rouge">calcParent</code> to return not only the best fit but also the second best fit. This will be used later. First we simple colorize the triple junctions according to the best fit.</p>
 {% highlight matlab %}
@@ -216,7 +216,7 @@ sum(hasVote)
 
 {% highlight plaintext %}
 ans =
-       15676
+       15631
 {% endhighlight %}
 <p>alpha grains into the already reconstructed beta grain. This reduces the amount of grains not yet reconstructed to</p>
 {% highlight matlab %}
@@ -225,7 +225,7 @@ sum(parentGrains('Ti (alpha').grainSize) ./ sum(parentGrains.grainSize)*100
 
 {% highlight plaintext %}
 ans =
-    1.2135
+    1.1453
 {% endhighlight %}
 <p>percent. One way to proceed would be to repeat the steps of this section multiple time, maybe with increasing threshold, until the percentage of reconstructed beta grains is sufficiently high. Another approach in to consider the left over alpha grains as noise and use denoising techniques to replace them with beta orientations. This will be done in the last section.</p><h2 id="20">Reconstruct beta orientations in EBSD map</h2><p>Until now we have only recovered the beta orientations as the mean orientations of the beta grains. In this section we want to set up the EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> to contain for each pixel a reconstruction of the parent phase orientation.</p><p>Therefore, we first identify all pixels that previously have been alpha titanium but now belong to a beta grain.</p>
 {% highlight matlab %}

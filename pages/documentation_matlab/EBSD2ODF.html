@@ -40,11 +40,10 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Copper → xyz)
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
+odf = SO3FunHarmonic (Copper → xyz)
+  isReal: true
+  bandwidth: 25
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_02.png" %}
@@ -55,7 +54,7 @@ psi = calcKernel(ebsd.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-psi = deLaValleePoussinKernel
+psi = SO3DeLaValleePoussinKernel
   bandwidth: 84
   halfwidth: 2.7°
 {% endhighlight %}
@@ -75,16 +74,15 @@ odf = calcDensity(ebsd('co').orientations,'kernel',psi)
 {% endhighlight %}
 
 {% highlight plaintext %}
-psi = deLaValleePoussinKernel
+psi = SO3DeLaValleePoussinKernel
   bandwidth: 51
   halfwidth: 4.7°
  
  
-odf = ODF (Copper → xyz)
- 
-  Harmonic portion:
-    degree: 51
-    weight: 1
+odf = SO3FunHarmonic (Copper → xyz)
+  isReal: true
+  bandwidth: 51
+  weight: 1
 {% endhighlight %}
 <p>Once an ODF is estimated all the functionality MTEX offers for <a href="ODFCharacteristics.html">ODF analysis</a> and <a href="ODFPlot.html">ODF visualization</a> is available.</p>
 {% highlight matlab %}
@@ -96,7 +94,7 @@ plotPDF(odf,h,'antipodal','silent')
 </center><h2 id="7">Effect of halfwidth selection</h2><p>As mentioned above a proper halfwidth selection is crucial for ODF estimation. The following simple numerical experiment illustrates the dependency between the kernel halfwidth and the estimated error.</p><p>Let's start with a model ODF and simulate some individual orientation data.</p>
 {% highlight matlab %}
 modelODF = fibreODF(Miller(1,1,1,crystalSymmetry('cubic')),xvector);
-ori = calcOrientations(modelODF,10000)
+ori = discreteSample(modelODF,10000)
 {% endhighlight %}
 
 {% highlight plaintext %}

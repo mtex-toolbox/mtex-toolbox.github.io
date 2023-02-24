@@ -21,8 +21,8 @@ ori2 = orientation.copper(cs);
 f = fibre.beta(cs);
 
 odf = 0.2*unimodalODF(ori1) + ...
-  0.3*unimodalODF(ori2) + ...
-  0.5*fibreODF(f);
+      0.3*unimodalODF(ori2) + ...
+      0.5*fibreODF(f)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -31,9 +31,26 @@ cs = crystalSymmetry
   mineral : Aluminum
   symmetry: m-3m    
   elements: 48      
-  a, b, c : 4, 4, 4
+  a, b, c : 4, 4, 4 
+ 
+ 
+odf = SO3FunComposition (Aluminum → xyz)
+ 
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 2 orientations
+ 
+  Bunge Euler angles in degree
+  phi1     Phi    phi2  weight
+    35      45       0     0.2
+    90 35.2644      45     0.3
+ 
+  <strong>fibre component</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  fibre : (12 6 11) || -1,-1,4
+  weight: 0.5
 {% endhighlight %}
-<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="ODF.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code></p>
+<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code></p>
 {% highlight matlab %}
 plot(odf,'sections',9,'silent','layout',[5 2])
 {% endhighlight %}
@@ -59,7 +76,7 @@ plot(f,'linewidth',2,'add2all')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EulerAngleSections_03.png" %}
-</center><p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>phi2 (default)</li><li>phi1</li><li>alpha (Matthies Euler angles)</li><li>gamma (Matthies Euler angles)</li><li>sigma (alpha+gamma)</li></ul></div>
+</center><p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>phi2 (default)</li><li>phi1</li><li>gamma (Matthies Euler angles)</li><li>sigma (alpha+gamma)</li></ul></div>
 {% highlight matlab %}
 plotSection(odf)
 {% endhighlight %}
@@ -220,7 +237,7 @@ plotSection(odf)
          </td>
       </tr>
    </table>
-</p><p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p><h2 id="7">Specimen Symmetry</h2><p>As we can see from the above table the first Euler angles \(\varphi_1\) ranges for all symmetries from zero to 360 degree. The only way to restrict this angle is to consider specimen symmetry. In the classical case of orthotropic specimen symmetry the range of the first Euler angles reduces to 90 degree and we obtain the common square shaped ODF section plots</p>
+</p><p>Note that for the last two symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p><h2 id="7">Specimen Symmetry</h2><p>As we can see from the above table the first Euler angle \(\varphi_1\) ranges for all symmetries from zero to 360 degree. The only way to restrict this angle is to consider specimen symmetry. In the classical case of orthotropic specimen symmetry the range of the first Euler angle reduces to 90 degree and we obtain the common square shaped ODF section plots</p>
 {% highlight matlab %}
 odf.SS = specimenSymmetry('222');
 
