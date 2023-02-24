@@ -15,10 +15,12 @@ since 18.01.2023. In order to register to the workshop or to ask any question pl
 {{site.data.alerts.end}}
 -->
 
-<div markdown="span" class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle "></i> <b>Important:</b> 
-The IT infrastructure of the TU
-Freiberg and, in particular, the email server has been completely shut down
-since 18.01.2023. In order to register to the workshop or to ask any question please write an email to <a href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a>
+<div markdown="span" class="alert alert-warning" role="alert"><i class="fa
+fa-exclamation-circle "></i> <b>Important:</b> 
+Everybody who registered should have received an email with details on the
+payment. Please contact us via <a
+href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a> if you have
+not yet received such an email or still want to register.
 </div>
 
 
@@ -601,8 +603,7 @@ The second week will consist of lectures by invited experts that explain in deta
 ## Registration Fee:
 - first + second week:  (PhD) students - 300 Euro, other - 500 Euro
 - second week: (PhD) students - 100 Euro, other - 200 Euro
-- the registration fee includes full catering for the days of the workshop and
-  an excursion
+- {% include reference.html link="click here for making the payment" content="https://webshop-tu-freiberg.de/iana_shop_en/registration-mtex-workshop-2023-presence.html"}
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
 
 
