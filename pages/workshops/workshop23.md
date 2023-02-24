@@ -7,12 +7,23 @@ folder: workshops
 toc: false
 ---
 
+<!---
 {{site.data.alerts.warning}}
 Everybody who registered should have received an email with details on the
 payment. Please contact us via <a
 href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a> if you have
 not yet received such an email or still want to register.
 {{site.data.alerts.end}}
+-->
+
+<div markdown="span" class="alert alert-warning" role="alert">
+<i class="fafa-warning"></i> <b>Important:</b> 
+Everybody who registered should have received an email with details on the
+payment. Please contact us via <a
+href="mailto:mtexworkshop@gmail.com">mtexworkshop@gmail.com</a> if you have
+not yet received such an email or still want to register.
+</div>
+
 
 <!---
 <div markdown="span" class="alert alert-warning" role="alert"><i class="fa
