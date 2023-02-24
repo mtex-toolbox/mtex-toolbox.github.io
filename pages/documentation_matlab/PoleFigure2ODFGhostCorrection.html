@@ -21,15 +21,18 @@ odf = 0.9*uniformODF(cs) + ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (222 → xyz)
+odf = SO3FunRBF (222 → xyz)
  
-  Uniform portion:
-    weight: 0.9
+  <strong>uniform component</strong>
+  weight: 0.9
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: (0°,0°,0°)
-    weight: 0.1
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+  phi1    Phi   phi2 weight
+     0      0      0    0.1
 {% endhighlight %}
 <h2 id="3">Simulate pole figures</h2>
 {% highlight matlab %}
@@ -133,25 +136,22 @@ rec_cor = FourierODF(rec_cor,25)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (222 → xyz)
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
- 
- 
-rec = ODF (222 → xyz)
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
+odf = SO3FunHarmonic (222 → xyz)
+  isReal: true
+  bandwidth: 25
+  weight: 1
  
  
-rec_cor = ODF (222 → xyz)
+rec = SO3FunHarmonic (222 → xyz)
+  isReal: true
+  bandwidth: 48
+  weight: 1
  
-  Harmonic portion:
-    degree: 25
-    weight: 1
+ 
+rec_cor = SO3FunHarmonic (222 → xyz)
+  isReal: true
+  bandwidth: 48
+  weight: 1
 {% endhighlight %}
 <h2 id="19">Calculate Reconstruction Errors from Fourier Coefficients</h2><p>without ghost correction:</p>
 {% highlight matlab %}
@@ -169,12 +169,12 @@ calcError(rec_cor,odf,'L2')
 
 {% highlight plaintext %}
 ans =
-    0.0322
+    0.0326
 {% endhighlight %}
 <h2 id="22">Plot Fourier Coefficients</h2><p>Plotting the Fourier coefficients of the recalculated ODFs shows that the Fourier coefficients without ghost correction oscillates much more than the Fourier coefficients with ghost correction</p><p>true ODF</p>
 {% highlight matlab %}
 close all;
-plotFourier(odf,'linewidth',2)
+plotSpektra(odf,'linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_07.png" %}
@@ -184,13 +184,13 @@ hold all
 {% endhighlight %}
 <p>Without ghost correction:</p>
 {% highlight matlab %}
-plotFourier(rec,'linewidth',2)
+plotSpektra(rec,'linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFGhostCorrection_08.png" %}
 </center><p>with ghost correction</p>
 {% highlight matlab %}
-plotFourier(rec_cor,'linewidth',2)
+plotSpektra(rec_cor,'linewidth',2)
 legend({'true ODF','without ghost correction','with ghost correction'})
 % next plot command overwrites plot window
 hold off

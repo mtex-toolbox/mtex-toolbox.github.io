@@ -56,7 +56,7 @@ plot(colorKey,'sections',6,'sigma')
 colorKey = spotColorKey(ebsd('Fo'));
 colorKey.center = mean(ebsd('Forsterite').orientations,'robust');
 colorKey.color = [0,0,1];
-colorKey.psi = deLaValleePoussinKernel('halfwidth',20*degree);
+colorKey.psi = SO3DeLaValleePoussinKernel('halfwidth',20*degree);
 
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 
@@ -84,6 +84,10 @@ odf = calcDensity(ebsd('fo').orientations,'halfwidth',10*degree,'silent');
 plot(odf,'sections',9,'silent','sigma')
 mtexColorbar
 {% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 0.061762 seconds.
+{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDAdvancedMaps_06.png" %}
 </center><h2 id="8">Coloring fibres</h2><p>To color a fibre, one has to specify the crystal direction <code class="language-plaintext highlighter-rouge">h</code> together with its RGB color and the specimen direction <code class="language-plaintext highlighter-rouge">r</code>, which should be marked.</p>
@@ -96,7 +100,7 @@ colorKey = ipfSpotKey(csFo);
 colorKey.inversePoleFigureDirection = f.r;
 colorKey.center = f.h;
 colorKey.color = [0 0 1];
-colorKey.psi = S2DeLaValleePoussin('halfwidth',7.5*degree);
+colorKey.psi = S2DeLaValleePoussinKernel('halfwidth',7.5*degree);
 
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations))
 {% endhighlight %}
@@ -162,7 +166,7 @@ colorKey = ipfSpotKey(csFo);
 colorKey.inversePoleFigureDirection = zvector;
 colorKey.center = Miller(1,1,1,csFo);
 colorKey.color = [0 0 1];
-colorKey.psi = S2DeLaValleePoussin('halfwidth',7.5*degree);
+colorKey.psi = S2DeLaValleePoussinKernel('halfwidth',7.5*degree);
 
 hold on
 plot(ebsd('fo'),colorKey.orientation2color(ebsd('fo').orientations),'FaceAlpha',0.5)

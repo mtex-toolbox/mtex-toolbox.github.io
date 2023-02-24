@@ -27,8 +27,8 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Miller indece are not orthogonal. Maximum deviation is 27
-degree
+Warning: Miller indece are not orthogonal. Maximum
+deviation is 27 degree
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_01.png" %}
@@ -47,7 +47,7 @@ psi  = calcKernel(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-psi = deLaValleePoussinKernel
+psi = SO3DeLaValleePoussinKernel
   bandwidth: 43
   halfwidth: 5.7°
 {% endhighlight %}
@@ -61,11 +61,12 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_rec = ODF (321 → xyz)
+odf_rec = SO3FunHarmonic (321 → xyz)
+  isReal: true
+  bandwidth: 43
+  weight: 1
  
-  Harmonic portion:
-    degree: 43
-    weight: 1
+Elapsed time is 0.136756 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_02.png" %}
@@ -76,7 +77,7 @@ e = [];
 for i = 1:6
 
   % calculate a sample of orientations from the model ODF
-  ori = calcOrientations(odf,10^i,'silent');
+  ori = discreteSample(odf,10^i,'silent');
 
   % calculate the kernel using the function defaults, reconstruct the odf, and calculate error between this and the original ODF
   psi1 = calcKernel(ori,'SamplingSize',10000,'silent');
@@ -103,8 +104,8 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-RuleOfThumb: 41° KLCV: 19° magicRule: 31°
-RuleOfThumb: 34° KLCV: 15° magicRule: 22°
+RuleOfThumb: 50° KLCV: 24° magicRule: 31°
+RuleOfThumb: 37° KLCV: 15° magicRule: 22°
 RuleOfThumb: 17° KLCV: 8° magicRule: 16°
 RuleOfThumb: 10° KLCV: 6° magicRule: 11°
 RuleOfThumb: 8° KLCV: 5° magicRule: 8°

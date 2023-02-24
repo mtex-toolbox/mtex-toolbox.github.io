@@ -51,7 +51,7 @@ ylabel('\(|| \mathtt{R(ori_1)} - \mathtt{R(ori_2)}||_2\)','Interpreter','latex')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_01.png" %}
-</center><p>We observe that orientations with very small misorientation angle \(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\) may be very far from each other in Rodrigues Frank space, i.e. \( \mathtt{R(ori_1)} - \mathtt{R(ori_2)}||_2\) is large. As a consequence, we can not simply compute the average of two orientations by taking the mean of the corresponding Rodrigues vectors.</p><p>Lets have a look at an extremal case of finding the mean orientations of the orientations \((44^{\circ},0^{\circ},0^{\circ})\) and \((46^{\circ},0^{\circ},0^{\circ})\)</p>
+</center><p>We observe that orientations with very small misorientation angle \(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\) may be very far from each other in Rodrigues Frank space, i.e. \(\lVert\mathtt{R(ori_1)} - \mathtt{R(ori_2)}\rVert_2\) is large. As a consequence, we can not simply compute the average of two orientations by taking the mean of the corresponding Rodrigues vectors.</p><p>Lets have a look at an extremal case of finding the mean orientations of the orientations \((44^{\circ},0^{\circ},0^{\circ})\) and \((46^{\circ},0^{\circ},0^{\circ})\)</p>
 {% highlight matlab %}
 % define two orientations
 ori = project2FundamentalRegion(orientation.byEuler([44 46]*degree,0,0,cs));
@@ -64,8 +64,8 @@ mori = orientation.byRodrigues(mean(ori.Rodrigues),cs)
 mori = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0    0    0    0
+  phi1  Phi phi2
+     0    0    0
 {% endhighlight %}
 <p>The  mean orientation \((0^{\circ},0^{\circ},0^{\circ})\) computed from the average of the Rodrigues vectors is far away from the true mean.</p>
 {% highlight matlab %}
@@ -76,8 +76,8 @@ mean(ori)
 ans = orientation (432 → xyz)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    45    0    0    0
+  phi1  Phi phi2
+    45    0    0
 {% endhighlight %}
 <p>This issue does not only apply to the mean but actually to all statistical methods that work well for vectorial data and that one would like to apply to orientation data.</p><h2 id="6">Defining an Embedding</h2><p>The crucial idea of an embedding is to replace the vectorial representation by a higher dimensional tensorial representation that preserves the geometry and the distances of the orientation space as good as possible. In MTEX such an embedding \(\mathcal E(\mathtt{ori})\) of an orientation <code class="language-plaintext highlighter-rouge">ori</code> is defined by calling the function <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code>.</p>
 {% highlight matlab %}
@@ -120,8 +120,8 @@ orientation(me)
 ans = orientation (432 → xyz)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   315    0    0    0
+  phi1  Phi phi2
+   315    0    0
 {% endhighlight %}
 <h2 id="9">Basic Properties</h2><p>By construction the embeddings of all orientations have the same norm.</p>
 {% highlight matlab %}
@@ -138,7 +138,7 @@ ans =
 n = []; sigma = [];
 for hw = logspace(-1,1.75,40)*degree
 
-  psi = deLaValleePoussinKernel('halfwidth',hw);
+  psi = SO3DeLaValleePoussinKernel('halfwidth',hw);
   odf = unimodalODF(orientation.rand(cs),psi);
   ori = discreteSample(odf,round(1000*(hw*6)^3));
 
@@ -155,7 +155,7 @@ ylabel('\(\sqrt{1-n}\)','Interpreter','latex')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationEmbeddings_03.png" %}
-</center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - <a href="UnimodalODFs.html">unimodal de la Vallee Poussin distributed density functions</a>. A broader family of density function are the <a href="BinghamODFs.html">Bingham distributions</a>. Lets repeat the experiment for this family.</p>
+</center><p>It appears as if the norm of the mean embedding is a function of the standaerd deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - <a href="RadialODFs.html#2">unimodal de la Vallee Poussin distributed density functions</a>. A broader family of density function are the <a href="BinghamODFs.html">Bingham distributions</a>. Lets repeat the experiment for this family.</p>
 {% highlight matlab %}
 % genrate ODF of different halfwidth
 n = []; sigma = [];

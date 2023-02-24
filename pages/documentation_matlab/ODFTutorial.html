@@ -42,11 +42,10 @@ odf = calcDensity(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Titanium (Alpha) → xyz)
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
+odf = SO3FunHarmonic (Titanium (Alpha) → xyz)
+  isReal: true
+  bandwidth: 25
+  weight: 1
 {% endhighlight %}
 <p>There many different ways to visualize ODF: <a href="EulerAngleSections.html">Euler</a> or <a href="SigmaSections.html">sigma sections</a>, <a href="ODFPlot.html">thee dimensional plots</a>, <a href="ODFPoleFigure.html">pole figures</a> and <a href="ODFInversePoleFigure.html">inverse pole figures</a>. The most common but not recommended way are sections with respect to the third Euler angle \(\varphi_2\)</p>
 {% highlight matlab %}
@@ -82,12 +81,12 @@ odf = calcODF(pf)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (mmm → xyz)
+odf = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 29728 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 29772 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <p>Once an ODF is reconstructed we can check how well its pole figures fit the measured pole figures</p>
 {% highlight matlab %}
@@ -96,7 +95,7 @@ plotPDF(odf,pf.h)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFTutorial_04.png" %}
-</center><h2 id="8">ODF Modelling</h2><p>Besides from experimental data MTEX allows also the definition of model ODFS of different type. These include <a href="UnimodalODFs.html">unimodal ODFs</a>, <a href="FibreODFs.html">fibre ODF</a>, <a href="BinghamODFs.html">Bingham Distributed ODFs</a> and any <a href="ODFModeling.html">combination of such ODFs</a>.</p>
+</center><h2 id="8">ODF Modelling</h2><p>Besides from experimental data MTEX allows also the definition of model ODFS of different type. These include <a href="RadialODFs.html#2">unimodal ODFs</a>, <a href="FibreODFs.html">fibre ODF</a>, <a href="BinghamODFs.html">Bingham Distributed ODFs</a> and any <a href="ODFModeling.html">combination of such ODFs</a>.</p>
 {% highlight matlab %}
 % define a fibre symmetric ODF
 odf = fibreODF(fibre.gamma(odf.CS))
@@ -106,12 +105,11 @@ plot(odf,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (mmm → xyz)
+odf = SO3FunCBF (mmm → xyz)
  
-  Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (0.6 0.6 0.6) - 0,0,1
-    weight: 1
+  kernel: de la Vallee Poussin, halfwidth 10°
+  fibre : (111) || 0,0,1
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFTutorial_05.png" %}

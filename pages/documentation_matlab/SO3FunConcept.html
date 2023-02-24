@@ -1,0 +1,156 @@
+---
+title: Rotational Functions
+
+sidebar: documentation_sidebar
+permalink: SO3FunConcept.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Rotational Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunConcept.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunConcept.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>By a rotational function we understand a function that assigns to each rotation or orientation a numerical value. An import example of a rotational function is the <a href="ODFTheory.html">orientation density function (ODF)</a> that assignes to each crystal orientation the probability of its occurence within a specimen. Other examples are the Schmidt or the Taylor factor as a function of the crystal orientation.</p><p>Within MTEX a rotational function is represented by a variable of type <a href="SO3Fun.SO3Fun.html"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a>. For the moment we consider the following ODF</p>
+{% highlight matlab %}
+% a predefined ODF
+odf = SantaFe
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf = SO3FunRBF (m-3m → xyz (222))
+ 
+  <strong>uniform component</strong>
+  weight: 0.73
+ 
+  <strong>unimodal component</strong>
+  kernel: van Mises Fisher, halfwidth 10°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2  weight
+  296.565 48.1897 26.5651    0.27
+{% endhighlight %}
+<p>Since, the variable <code class="language-plaintext highlighter-rouge">odf</code> stores all information about this function we may evaluate it for any rotation <code class="language-plaintext highlighter-rouge">r</code></p>
+{% highlight matlab %}
+% take a random rotation
+r = rotation.rand;
+
+% and evaluate the odf at this rotation
+odf.eval(r)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.7628
+{% endhighlight %}
+<p>We may also plot the function</p>
+{% highlight matlab %}
+plot(odf)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunConcept_01.png" %}
+</center><p>or find its local maxima</p>
+{% highlight matlab %}
+[~,pos] = max(odf)
+
+annotate(pos)
+{% endhighlight %}
+
+{% highlight plaintext %}
+pos = orientation (m-3m → xyz (222))
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  116.504 48.1531 206.606
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunConcept_02.png" %}
+</center><p>A complete list of operations that can be performed with rotational functions can be found in section <a href="SO3FunOperations.html">Operations</a>.</p><h2 id="7">Representation of Rotational Functions</h2><p>Internally MTEX represents rotational functions in different ways:</p><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>by a harmonic series expansion</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3FunHarmonicRepresentation.html">SO3FunHarmonic</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>as superposition of radial function</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>as superposition of fibre elements</p>
+         </td>
+         <td>
+               <p>
+                  <a href="FibreODFs.html">SO3FunCBF</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>as Bingham distribution</p>
+         </td>
+         <td>
+               <p>
+                  <a href="BinghamODFs.html">SO3FunBingham</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>as sum of different components</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3FunComposition.SO3FunComposition.html">SO3FunComposition</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>explicitely given by a formula</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a>
+               </p>
+         </td>
+      </tr>
+   </table>
+</p><p>All representations allow the same operations which are specified for the abstact class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>. In particular it is possible to calculate with \(SO(3)\) functions as with ordinary numbers, i.e., you can add, multiply arbitrary functions, take the mean, integrate them or compute gradients, see <a href="SO3FunOperations.html">Operations</a>.</p><h2 id="8">Generalizations of Rotational Functions</h2><p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>rotational vector fields</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>radial rotational functions</p>
+         </td>
+         <td>
+               <p>
+                  <a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a>
+               </p>
+         </td>
+      </tr>
+   </table>
+</p></div></body></html>

@@ -93,7 +93,7 @@ To make changes, update the MATLAB code and republish this document.
          </td>
          <td>
                <p>
-                  <a href="ODF.discreteSample.html">
+                  <a href="SO3Fun.discreteSample.html">
                      <tt>odf.discreteSample</tt>
                   </a>
                </p>
@@ -139,8 +139,8 @@ rot = rotation.byEuler(30*degree,50*degree,10*degree)
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    30   50   10    0
+  phi1  Phi phi2
+    30   50   10
 {% endhighlight %}
 <p>Note that the angles needs to be multiplied with <b>degree</b> since all commands in MTEX expect the input in radiant. Furthermore, the order of the first and the third Euler angle are interchanged in comparison to standard notation for reasons explained <a href="MTEXvsBungeConvention.html">here</a>.</p><p>In order to define a rotation by a Euler angle convention different to the default Euler angle convention you to specify the convention as an additional parameter, e.g.</p>
 {% highlight matlab %}
@@ -151,8 +151,8 @@ rot = rotation.byEuler(30*degree,50*degree,10*degree,'Roe')
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   120   50  280    0
+  phi1  Phi phi2
+   120   50  280
 {% endhighlight %}
 <p>This does not change the way MTEX displays the rotation on the screen. The default Euler angle convention for displaying a rotation can be changed by the command <a href="setMTEXpref.html">setMTEXpref</a>, for a permanent change the <a href="matlab:edit('mtex_settings.m')">mtex_settings</a> should be edited. Compare</p>
 {% highlight matlab %}
@@ -164,8 +164,8 @@ rot
 rot = rotation
  
   Roe Euler angles in degree
-  Psi Theta   Phi  Inv.
-   30    50    10     0
+  Psi Theta   Phi
+   30    50    10
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -177,8 +177,8 @@ rot
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   120   50  280    0
+  phi1  Phi phi2
+   120   50  280
 {% endhighlight %}
 <h2 id="5">Axis angle parametrisation and Rodrigues Frank vector</h2><p>A very simple possibility to specify a rotation is to specify the rotation axis and the rotation angle.</p>
 {% highlight matlab %}
@@ -189,8 +189,8 @@ rot = rotation.byAxisAngle(xvector,30*degree)
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0   30    0    0
+  phi1  Phi phi2
+     0   30    0
 {% endhighlight %}
 <p>Conversely, we can extract the rotational axis and the rotation angle of a rotation by</p>
 {% highlight matlab %}
@@ -228,8 +228,8 @@ rotation.byRodrigues(R)
 ans = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0   30    0    0
+  phi1  Phi phi2
+     0   30    0
 {% endhighlight %}
 <h2 id="9">Rotation Matrix</h2><p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
 {% highlight matlab %}
@@ -251,8 +251,8 @@ rot = rotation.byMatrix(M)
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0   30    0    0
+  phi1  Phi phi2
+     0   30    0
 {% endhighlight %}
 <h2 id="11">Four vectors defining a rotation</h2><p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors u1, v1, u2, v2 there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
 {% highlight matlab %}
@@ -269,8 +269,8 @@ rot = rotation.map(u1,v1,u2,v2)
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    90    0    0    0
+  phi1  Phi phi2
+    90    0    0
 {% endhighlight %}
 <p>The above definition require that the angle between u1 and u2 is the same as between v1 and v2. The function gives an error if this condition is not meet. If only two vectors are specified, then the rotation with the smallest angle is returned that rotates the first vector onto the second one.</p>
 {% highlight matlab %}
@@ -281,8 +281,8 @@ rot = rotation.map(zvector,yvector)
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   180   90  180    0
+  phi1  Phi phi2
+   180   90  180
 {% endhighlight %}
 <p>More generaly, one can fit a rotation <code class="language-plaintext highlighter-rouge">rot</code> to a list of left and right vectors <code class="language-plaintext highlighter-rouge">l</code> and <code class="language-plaintext highlighter-rouge">r</code> such that <code class="language-plaintext highlighter-rouge">rot * l</code> is the best approximation of <code class="language-plaintext highlighter-rouge">r</code>. This is done by the function <a href="rotation.fit.html"><code class="language-plaintext highlighter-rouge">rotation.fit</code></a></p>
 {% highlight matlab %}
@@ -300,8 +300,8 @@ rotation.fit(left,right)
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  178.766 86.9644 180.371       0
+     phi1     Phi    phi2
+  179.825 89.0995 181.616
 {% endhighlight %}
 <h2 id="14">Radom Rotations</h2><p>MTEX offers several ways for generating random rotations. In the most</p><h2 id="15">Logarithm, Exponential Mapping, Spin Tensor</h2><p>TODO</p>
 {% highlight matlab %}
@@ -323,8 +323,8 @@ S = spinTensor (xyz)
 ans = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   180   90  180    0
+  phi1  Phi phi2
+   180   90  180
  
  
 ans = vector3d
@@ -346,8 +346,8 @@ v = vector3d
 ans = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   180   90  180    0
+  phi1  Phi phi2
+   180   90  180
 {% endhighlight %}
 <h2 id="17">Quaternions</h2><p>A last possibility to define a rotation is by <a href="quaternion.quaternion.html">quaternion coordinates</a> a, b, c, d.</p>
 {% highlight matlab %}
@@ -364,7 +364,7 @@ q = quaternion
 rot = rotation
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0    0    0    0
+  phi1  Phi phi2
+     0    0    0
 {% endhighlight %}
 </div></body></html>

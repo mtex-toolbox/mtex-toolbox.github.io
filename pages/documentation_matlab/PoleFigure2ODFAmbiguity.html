@@ -24,12 +24,17 @@ odf1 = unimodalODF([orix,oriy,oriz])
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf1 = ODF (mmm → xyz)
+odf1 = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: Rotations: 1 x 3
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 3 orientations
+ 
+  Bunge Euler angles in degree
+  phi1      Phi     phi2   weight
+     0       90        0 0.333333
+    90       90      270 0.333333
+    90        0        0 0.333333
 {% endhighlight %}
 <p>The second ODF has three modes as well but this times at rotations about the axis (1,1,1) with angles 0, 120, and 240 degrees.</p>
 {% highlight matlab %}
@@ -38,12 +43,17 @@ odf2 = unimodalODF(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf2 = ODF (mmm → xyz)
+odf2 = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: Rotations: 1 x 3
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 3 orientations
+ 
+  Bunge Euler angles in degree
+  phi1      Phi     phi2   weight
+     0        0        0 0.333333
+    90       90        0 0.333333
+   180       90       90 0.333333
 {% endhighlight %}
 <p>These two ODFs are completely disjoint. Let's check this by plotting them as sigma sections</p>
 {% highlight matlab %}
@@ -92,12 +102,12 @@ plot(odf,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (mmm → xyz)
+odf = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 29724 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 29772 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_06.png" %}
@@ -114,12 +124,12 @@ plot(odf,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (mmm → xyz)
+odf = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 29748 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 29772 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_07.png" %}
@@ -135,12 +145,12 @@ plot(odf,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (mmm → xyz)
+odf = SO3FunRBF (mmm → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 29748 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 29772 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_08.png" %}
@@ -173,15 +183,15 @@ hold off
 ori1 = orientation (-43m → xyz)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    30   60   10    0
+  phi1  Phi phi2
+    30   60   10
  
  
 ori2 = orientation (-43m → xyz)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    30   60  100    0
+  phi1  Phi phi2
+    30   60  100
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_09.png" %}
@@ -217,15 +227,18 @@ plotPDF(odf1,Miller({1,0,0},{0,1,0},{0,0,1},cs),'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf1 = ODF (-1 → xyz)
+odf1 = SO3FunRBF (-1 → xyz)
  
-  Uniform portion:
-    weight: 0.66667
+  <strong>uniform component</strong>
+  weight: 0.67
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 30°
-    center: (0°,0°,0°)
-    weight: 0.33333
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 30°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+  phi1      Phi     phi2   weight
+     0        0        0 0.333333
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_12.png" %}
@@ -237,42 +250,40 @@ plotPDF(odf1,Miller({1,0,0},{0,1,0},{0,0,1},cs))
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf1 = ODF (-1 → xyz)
-  antipodal:         true
- 
-  Harmonic portion:
-    degree: 9
-    weight: 1
+odf1 = SO3FunHarmonic (-1 → xyz)
+  antipodal: true
+  isReal: true
+  bandwidth: 9
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_13.png" %}
 </center><p>We may look at the coefficients of this expansion and observe how the decay to zero rapidly. This justifies to cut the harmonic expansion at harmonic degree 10.</p>
 {% highlight matlab %}
 close all
-plotFourier(odf1,'linewidth',2)
+plotSpektra(odf1,'linewidth',2)
 %set(gca,'yScale','log')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_14.png" %}
 </center><p>Next, we define a second ODF which differs by the first one only in the odd order harmonic coefficients. More precisely, we set all odd order harmonic coefficients to zero</p>
 {% highlight matlab %}
-A = mod(1:11,2);
+A = mod(1:11,2)';
 odf2 = conv(odf1,A)
 
 hold on
-plotFourier(odf2,'linewidth',2)
+plotSpektra(odf2,'linewidth',2)
 %set(gca,'yScale','log')
 hold off
 legend('odf1','odf2')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf2 = ODF (-1 → xyz)
-  antipodal:         true
- 
-  Harmonic portion:
-    degree: 9
-    weight: 1
+odf2 = SO3FunHarmonic (-1 → xyz)
+  antipodal: true
+  isReal: true
+  bandwidth: 9
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_15.png" %}
@@ -300,7 +311,7 @@ xlim([-180,180])
 {% highlight matlab %}
 odf1 = 4/5 * uniformODF(cs) + 1/5 * unimodalODF(orientation.id(cs),'halfwidth',30*degree);
 
-A = (-1).^(0:10);
+A = (-1).^(0:10)';
 odf2 = conv(odf1,A);
 
 close all
@@ -328,15 +339,15 @@ odf_rec1 = calcODF(pf,'silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_rec1 = ODF (-1 → xyz)
+odf_rec1 = SO3FunRBF (-1 → xyz)
  
-  Uniform portion:
-    weight: 0.79906
+  <strong>uniform component</strong>
+  weight: 0.8
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 118729 orientations, resolution: 5°
-    weight: 0.20094
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 119088 orientations, resolution: 5°
+  weight: 0.2
 {% endhighlight %}
 <p>This method can be switched off by the following command</p>
 {% highlight matlab %}
@@ -344,12 +355,12 @@ odf_rec2 = calcODF(pf,'noGhostCorrection','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_rec2 = ODF (-1 → xyz)
+odf_rec2 = SO3FunRBF (-1 → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 119087 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 119088 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <p>When comparing the reconstructed ODFs we observe that by using ghost correction we are able to recover odf1 quite nicely, while without ghost correction we obtain a mixture between odf1 and odf2.</p>
 {% highlight matlab %}
@@ -366,17 +377,17 @@ xlim([-180,180])
 </center><p>This become clearer when looking at the harmonic coefficients of the reconstructed ODFs. We observe that without ghost correction the recovered odd order harmonic coefficients are much smaller than the original ones.</p>
 {% highlight matlab %}
 close all
-plotFourier(odf1,'linewidth',2,'bandwidth',10)
+plotSpektra(odf1,'linewidth',2,'bandwidth',10)
 hold on
-plotFourier(odf2,'linewidth',2)
-plotFourier(odf_rec1,'linewidth',2)
-plotFourier(odf_rec2,'linewidth',2)
+plotSpektra(odf2,'linewidth',2)
+plotSpektra(odf_rec1,'linewidth',2)
+plotSpektra(odf_rec2,'linewidth',2)
 hold off
 legend('odf1','odf2','odf rec1','odf rec2')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_21.png" %}
-</center><p>Historically, this effect was is tightly connected with the so-called SantaFe sample ODF.</p>
+</center><p>Historically, this effect is tightly connected with the so-called SantaFe sample ODF.</p>
 {% highlight matlab %}
 odf = SantaFe;
 plot(odf,'contourf')
@@ -408,23 +419,23 @@ rec2 = calcODF(pf,'NoGhostCorrection','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec = ODF (m-3m → xyz (222))
+rec = SO3FunRBF (m-3m → xyz (222))
  
-  Uniform portion:
-    weight: 0.73051
+  <strong>uniform component</strong>
+  weight: 0.73
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 1219 orientations, resolution: 5°
-    weight: 0.26949
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 1232 orientations, resolution: 5°
+  weight: 0.27
  
  
-rec2 = ODF (m-3m → xyz (222))
+rec2 = SO3FunRBF (m-3m → xyz (222))
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 1231 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 1232 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <p>For both reconstruction recalculated pole figures look the same as the initial pole figures</p>
 {% highlight matlab %}
@@ -462,16 +473,16 @@ mtexColorMap white2black
 {% highlight matlab %}
 close all;
 % the harmonic coefficients of the sample ODF
-plotFourier(SantaFe,'bandwidth',32,'linewidth',2,'MarkerSize',10)
+plotSpektra(SantaFe,'bandwidth',32,'linewidth',2,'MarkerSize',10)
 
 % keep plot for adding the next plots
 hold all
 
 % the harmonic coefficients of the reconstruction with ghost correction:
-plotFourier(rec,'bandwidth',32,'linewidth',2,'MarkerSize',10)
+plotSpektra(rec,'bandwidth',32,'linewidth',2,'MarkerSize',10)
 
 % the harmonic coefficients of the reconstruction without ghost correction:
-plotFourier(rec2,'bandwidth',32,'linewidth',2,'MarkerSize',10)
+plotSpektra(rec2,'bandwidth',32,'linewidth',2,'MarkerSize',10)
 
 legend({'true ODF','with ghost correction','without ghost correction'})
 % next plot command overwrites plot

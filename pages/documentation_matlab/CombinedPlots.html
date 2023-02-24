@@ -28,8 +28,8 @@ hold off
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
 odf = unimodalODF(orientation.byEuler(0,0,0,cs));
-ori = calcOrientations(odf,100);
-ori_rotated = calcOrientations(rotate(odf,rotation.byEuler(60*degree,60*degree,0*degree)),100);
+ori = discreteSample(odf,100);
+ori_rotated = discreteSample(rotate(odf,rotation.byEuler(60*degree,60*degree,0*degree)),100);
 {% endhighlight %}
 <p>plot them as a scatter plot in axis / angle parametrized orientation space</p>
 {% highlight matlab %}
@@ -113,12 +113,12 @@ odf = calcODF(pf)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Quartz → xyz)
+odf = SO3FunRBF (Quartz → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 19836 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <p>now we want to plot the original data alongsite with the recalculated pole figures and with a difference plot</p>
 {% highlight matlab %}
@@ -140,7 +140,7 @@ plotPDF(odf,pf{1}.h,'antipodal','parent',axesPos)
 axesPos = subplot(1,3,3);
 
 % plot the difference pole figure at this position
-plotDiff(odf,pf({1}),'parent',axesPos)
+%plotDiff(odf,pf({1}),'parent',axesPos)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_07.png" %}

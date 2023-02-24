@@ -31,7 +31,7 @@ f = fibre(ori1,ori2)
 f = fibre (432 → xyz)
  
   h || r: (100) || (1,0,0)
- o1 → o2: (0°,0°,0°) → (0°,45°,0°)
+ o1 → o2: (2.5e-14°,0°,0°) → (1.3e-14°,45°,0°)
 {% endhighlight %}
 <p>Finally we plot everything into the Euler space</p>
 {% highlight matlab %}
@@ -138,7 +138,7 @@ beta = fibre.beta(cs,ss,'full')
 beta = fibre (432 → xyz (mmm))
  
   h || r: (12 6 11) || (1,1,4)
- o1 → o2: (0°,35.3°,45°) → (0°,35.3°,45°)
+ o1 → o2: (0°,35°,45°) → (0°,35°,45°)
 {% endhighlight %}
 <p>Lets plot an overview of all predefined fibres with respect to orthorhombic specimen symmetry</p>
 {% highlight matlab %}
@@ -169,12 +169,11 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (432 → xyz (mmm))
+odf = SO3FunCBF (432 → xyz (mmm))
  
-  Fibre symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    fibre: (0.7 0.4 0.6) - 0.23141,0.23141,0.94494
-    weight: 1
+  kernel: de la Vallee Poussin, halfwidth 10°
+  fibre : (12 6 11) || 1,1,4
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_10.png" %}
@@ -184,13 +183,13 @@ plot(odf,fibre.eta(cs,ss),'linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFibre_11.png" %}
-</center><h2 id="15">Compute volume of fibre portions</h2><p>or compute the volume of an ODF in a tube around a fibre using the command <a href="ODF.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a></p>
+</center><h2 id="15">Compute volume of fibre portions</h2><p>or compute the volume of an ODF in a tube around a fibre using the command <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a></p>
 {% highlight matlab %}
 100 * volume(odf,beta,10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   25.9490
+   100
 {% endhighlight %}
 </div></body></html>

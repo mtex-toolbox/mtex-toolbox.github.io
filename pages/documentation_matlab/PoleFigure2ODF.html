@@ -43,12 +43,12 @@ odf = calcODF(pf)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Quartz → xyz)
+odf = SO3FunRBF (Quartz → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 19836 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <p>There are a lot of options to the function <a href="PoleFigure.calcODF.html">calcODF</a>. You can specify the discretization, the functional to minimize, the number of iteration or regularization to be applied. Furthermore, you can specify ghost correction or the zero range method to be applied. These options are discussed below.</p><p>You may want to verify that the pole figures are reproduced. Here is a plot of the computed pole figures.</p>
 {% highlight matlab %}
@@ -63,7 +63,7 @@ calcError(pf,odf,'RP',1)
 
 {% highlight plaintext %}
 ans =
-    0.9729    0.9736    0.4661    0.4336    0.7480    0.7215    0.5868
+    0.9729    0.9736    0.3637    0.4336    0.7480    0.7215    0.5868
 {% endhighlight %}
 <p>In order to recognize bad pole figure intensities, it is often useful to plot difference pole figures between the normalized measured intensities and the recalculated ODF. This can be done by the command <a href="PoleFigure.plotDiff.html">PlotDiff</a>.</p>
 {% highlight matlab %}
@@ -71,7 +71,7 @@ plotDiff(pf,odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODF_03.png" %}
-</center><p>Assuming you have driven two ODFs from different pole figure measurements or by ODF modeling. Then one can ask for the difference between both. This difference is computed by the command <a href="ODF.calcError.html">calcError</a>.</p>
+</center><p>Assuming you have driven two ODFs from different pole figure measurements or by ODF modeling. Then one can ask for the difference between both. This difference is computed by the command <a href="SO3Fun.calcError.html">calcError</a>.</p>
 {% highlight matlab %}
 % define a unimodal ODF with the same preferred orientation
 [~,ori_pref] = max(odf);
@@ -85,15 +85,18 @@ calcError(odf_model,odf)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_model = ODF (Quartz → xyz)
+odf_model = SO3FunRBF (Quartz → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 15°
-    center: (132.9°,34.8°,207.1°)
-    weight: 1
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 15°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2  weight
+  132.867 34.7888 207.108       1
  
 ans =
-    0.5934
+    0.5931
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODF_04.png" %}
@@ -104,12 +107,12 @@ plotPDF(odf,pf.allH,'antipodal','silent','superposition',pf.c)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Quartz → xyz)
+odf = SO3FunRBF (Quartz → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 15°
-    center: 711 orientations, resolution: 15°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 15°
+  center: 736 orientations, resolution: 15°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODF_05.png" %}
@@ -120,12 +123,12 @@ plotPDF(odf,pf.allH,'antipodal','silent','superposition',pf.c)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Quartz → xyz)
+odf = SO3FunRBF (Quartz → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 19836 orientations, resolution: 5°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODF_06.png" %}
