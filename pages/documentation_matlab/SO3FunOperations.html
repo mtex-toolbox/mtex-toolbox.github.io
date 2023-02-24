@@ -1,0 +1,250 @@
+---
+title: Operations on Rotational Functions
+
+sidebar: documentation_sidebar
+permalink: SO3FunOperations.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Operations on Rotational Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunOperations.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunOperations.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The idea of variables of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a> is to calculate with rotational functions similarly as Matlab does with vectors and matrices. In order to illustrate this we consider the following two rotational functions</p><p>An ODF determined from XRD data</p>
+{% highlight matlab %}
+SO3F1 = SO3Fun.dubna
+
+plot(SO3F1,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F1 = SO3FunRBF (Quartz → xyz)
+ 
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19836 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_01.png" %}
+</center><p>and an unimodal distributed ODF</p>
+{% highlight matlab %}
+R = orientation.byAxisAngle(vector3d.Y,pi/4,SO3F1.CS);
+SO3F2 = SO3FunRBF(R,SO3DeLaValleePoussinKernel)
+
+plot(SO3F2,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F2 = SO3FunRBF (Quartz → xyz)
+ 
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+  phi1    Phi   phi2 weight
+    90     45    270      1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_02.png" %}
+</center><h2 id="3">Basic arithmetic operations</h2><p>Now the sum of these two rotational functions is again a rotational function, i.e., a function of type <a href="SO3Fun.SO3Fun.html"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a></p>
+{% highlight matlab %}
+1 + 2 * SO3F1 + SO3F2
+
+plot(2 * SO3F1 + SO3F2,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = SO3FunComposition (Quartz → xyz)
+ 
+  <strong>uniform component</strong>
+  weight: 1
+ 
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19836 orientations, resolution: 5°
+  weight: 2
+ 
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+  phi1    Phi   phi2 weight
+    90     45    270      1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_03.png" %}
+</center><p>Accordingly, one can use all basic operations like <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">^</code>, <code class="language-plaintext highlighter-rouge">/</code>, <a href="SO3Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a>, <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>, <a href="SO3Fun.abs.html"><code class="language-plaintext highlighter-rouge">abs</code></a>, <a href="SO3Fun.sqrt.html"><code class="language-plaintext highlighter-rouge">sqrt</code></a> to calculate with variables of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
+{% highlight matlab %}
+% the maximum between two functions
+plot(max(2*SO3F1,SO3F2),'sigma');
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_04.png" %}
+</center>
+{% highlight matlab %}
+% the minimum between two functions
+plot(min(2*SO3F1,SO3F2),'sigma');
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_05.png" %}
+</center><p>We also can work with the pointwise <a href="SO3Fun.conj.html"><code class="language-plaintext highlighter-rouge">conj</code></a>, <a href="SO3Fun.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> or <a href="SO3Fun.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> of an <code class="language-plaintext highlighter-rouge">SO3Fun</code>.</p><p>For a given function \(f\colon SO(3) \to \mathbb C\) we get a second function \(g\colon SO(3) \to \mathbb C\) where \(g&reg; = f(R^{-1})\) by the method <a href="SO3Fun.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a>, i.e.</p>
+{% highlight matlab %}
+g = inv(SO3F1)
+
+SO3F1.eval(R)
+g.eval(inv(R))
+{% endhighlight %}
+
+{% highlight plaintext %}
+g = SO3FunRBF (xyz → Quartz)
+ 
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19836 orientations, resolution: 5°
+  weight: 1
+ 
+ans =
+    0.9040
+ans =
+    2.2873
+{% endhighlight %}
+<h2 id="7">Local Extrema</h2><p>The above mentioned functions <a href="SO3Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> have very different use cases</p><div><ul><li>if a single rotational function is provided the global maximum / minimum of the function is computed</li><li>if two rotational functions are provied, a rotational function defined as the pointwise min/max between these two functions is computed</li><li>if a rotational function and a single number are passed as arguments a rotational function defined as the pointwise min/max between the function and the value is computed</li></ul></div>
+{% highlight matlab %}
+% * if additionally the option 'numLocal' is provided the certain number of
+% local minima / maxima is computed
+
+plot(2 * SO3F1 + SO3F2,'phi2',(0:3)*30*degree)
+
+% compute and mark the global maximum
+[maxvalue, maxnodes] = max(2 * SO3F1 + SO3F2);
+annotate(maxnodes)
+
+% compute and mark the local minimum
+[minvalue, minnodes] = min(2 * SO3F1 + SO3F2,'numLocal',2);
+annotate(minnodes)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_06.png" %}
+</center><h2 id="8">Integration</h2><p>The surface integral of a spherical function can be computed by either <a href="SO3Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> or <a href="SO3Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a>. The difference between both commands is that <a href="SO3Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> normalizes the integral of the identical function on the rotation group to \(8 \pi^2\), the command <a href="SO3Fun.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> normalizes it to one. Compare</p>
+{% highlight matlab %}
+mean(SO3F1)
+
+sum(SO3F1) / ( 8 * pi^2 )
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.0000
+ans =
+    1.0000
+{% endhighlight %}
+<p>A practical application of integration is the computation of the \(L^2\)-norm which is defined for a \(SO(3)\) function \(f\) by</p><p>\[ \lVert f \rVert_2 = \left( \frac1{8\pi^2} \int_{SO(3)} <code class="language-plaintext highlighter-rouge">f&reg;</code>^2 \,\mathrm d R \right)^{1/2} \]</p><p>accordingly we can compute it by</p>
+{% highlight matlab %}
+sqrt(mean(abs(SO3F1).^2))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    3.6542
+{% endhighlight %}
+<p>or more efficiently by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a></p>
+{% highlight matlab %}
+norm(SO3F1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    3.6542
+{% endhighlight %}
+<h2 id="11">Differentiation</h2><p>The gradient of a \(SO(3)\) function in a specific point can be described by a <a href="vector3d.vector3d.html">three-dimensional vector</a> which can be computed by the command <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a></p>
+{% highlight matlab %}
+grad(SO3F1,R)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = vector3d
+        x          y          z
+  2.17624   -8.98149 -0.0497975
+{% endhighlight %}
+<p>The gradients of a \(SO(3)\) function in all points form a \(SO(3)\) vector field and are returned by the function <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> as a variable of type <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a>.</p>
+{% highlight matlab %}
+% compute the gradient as a vector field
+G = grad(SO3F1)
+
+% plot the gradient on top of the function
+plot(SO3F1,'upper','sigma')
+hold on
+plot(G,'color','black','linewidth',2,'resolution',5*degree)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+G = SO3VectorFieldHandle (1 → xyz)
+ 
+  plotting 2000 random orientations out of 5172 given orientations
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_07.png" %}
+</center><p>Now we can use the function <a href="SO3Fun.steepestDescent.html"><code class="language-plaintext highlighter-rouge">steepestDescent</code></a> to compute local maxima and minima of an <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
+{% highlight matlab %}
+plot(2 * SO3F1 + SO3F2,'phi2',(0:3)*30*degree)
+ori = orientation.id;
+
+% compute and mark the global maximum
+[maxnode, maxvalue] = steepestDescent(2 * SO3F1 + SO3F2,ori)
+annotate(maxnodes)
+
+% compute and mark the local minimum
+[minnode, v] = steepestDescent( -(2 * SO3F1 + SO3F2),ori)
+minvalue = -v
+annotate(minnodes)
+{% endhighlight %}
+
+{% highlight plaintext %}
+....... 
+maxnode = orientation (1 → xyz)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  89.9701 44.9132 270.019
+ 
+maxvalue =
+  257.2056
+........... 
+minnode = orientation (1 → xyz)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  339.214 26.3919 6.91056
+ 
+v =
+   -0.0299
+minvalue =
+    0.0299
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_08.png" %}
+</center><p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p><h2 id="15">Rotating rotational functions</h2><p>Rotating a \(SO(3)\) function works with the command <a href="SO3Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a></p>
+{% highlight matlab %}
+% define a rotation
+rot = rotation.byEuler(30*degree,0*degree,90*degree,'Bunge')
+
+% plot the rotated function
+plot(rotate(2 * SO3F1 + SO3F2,rot),'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+rot = rotation
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2
+   120    0    0
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunOperations_09.png" %}
+</center></div></body></html>
