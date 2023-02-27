@@ -16,26 +16,32 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 cs = crystalSymmetry('222', [4.762 10.225 5.994],'mineral', 'olivine');
 {% endhighlight %}
-<p>In the next step the orientations are imported and converted into a list of <a href="ODF.ODF.html">ODFs</a> using the command <a href="ODF.load.html"><code class="language-plaintext highlighter-rouge">ODF.load</code></a>.</p>
+<p>In the next step the orientations are imported and converted into a list of <a href="SO3Fun.SO3Fun.html">ODFs</a> using the command <a href="ODF.load.html"><code class="language-plaintext highlighter-rouge">ODF.load</code></a>.</p>
 {% highlight matlab %}
 % put in here the path to the VPSC output files
 path2file = [mtexDataPath filesep 'VPSC'];
 
-odf = ODF.load([path2file filesep 'TEX_PH1.OUT'],'halfwidth',10*degree,cs)
+odf = ODF.load([path2file filesep 'TEX_PH1.OUT'],'halfwidth',10*degree,'CS',cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
 odf =
   1×9 cell array
-  Columns 1 through 6
-    {1×1 ODF}    {1×1 ODF}    {1×1 ODF}    {1×1 ODF}    {1×1 ODF}    {1×1 ODF}
+  Columns 1 through 3
+    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}
+  Columns 4 through 6
+    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}
   Columns 7 through 9
-    {1×1 ODF}    {1×1 ODF}    {1×1 ODF}
+    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}
 {% endhighlight %}
 <p>The individuel ODFs can be accessed by <code class="language-plaintext highlighter-rouge">odf{id}</code></p>
 {% highlight matlab %}
 % lets plot the second ODF
 plotSection(odf{2},'sigma','figSize','normal')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 0.047840 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VPSCImport_01.png" %}
