@@ -41,7 +41,7 @@ texture analysis" %} and counts for **5 ECTS** points. While the first week is
 mainly devoted to beginners in MTEX and/or texture analysis, the second week
 is a meeting of MTEX users with different experiences to share specific use
 cases, tips and tricks and discuss recent and upcoming developments in MTEX. A
-special focus will be the new features of **MTEX 6.0** which will include
+special focus will be the new features of **MTEX 5.9** which will include
 pseudo 3d functionality for EBSD and grains and multiple spatial reference
 systems.
 
@@ -56,16 +56,14 @@ discussed during the exercises." %}
 <!--To stimulate this we made the fee for online
 participation higher then the fee for participation in pretense.-->
 
-<!--
 {% capture par_default %}
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
 {% endcapture %}
 {% capture par_access %}
 	You are logged in.
-	{% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="Enter Workshop zoom session" %}
+	{% include reference.html link="https://eu01web.zoom.us/j/65513934015?pwd=YjZSR2h2Qk5IajhMbzZGNVR6aGowdz09" content="Enter Workshop zoom session" %}
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
--->
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX 
 Date: 06.03.2023 - 10.03.2023
@@ -350,12 +348,11 @@ The second week will consist of lectures by invited experts that explain in deta
 -->
 
 ## Time Schedule 
-<!--
 <div class="panel-group" id="accordion">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b> Parent Grain Reconstruction and more</a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b> </a>
             </h4>
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
@@ -371,23 +368,23 @@ The second week will consist of lectures by invited experts that explain in deta
 					<tbody>
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
-							<td style="text-align: left">F.&nbsp;Niessen</td>
-							<td style="text-align: left">Parent Grain Reconstruction in MTEX - the new variant graph approach</td>
+							<td style="text-align: left">K.&nbsp;Frydrych</td>
+							<td style="text-align: left">Plasticity Simulation with MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:00&minus;10:30</td>
-							<td style="text-align: left">T.&nbsp;Nyyssönen</td>
-							<td style="text-align: left">Challenges in reconstructing Austenitinic twins  Reconstruction</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">10:30&minus;11:00</td>
-							<td style="text-align: left">M.&nbsp;Witte</td>
-							<td style="text-align: left">Applications of Austenite Reconstruction</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">11:00&minus;11:30</td>
+							<td style="text-align: right">10:15&minus;10:45</td>
+							<td style="text-align: left">T.&nbsp;Vermeij</td>
 							<td style="text-align: left"></td>
+						</tr>
+						<tr>
+							<td style="text-align: right">10:45&minus;11:15</td>
+                            <td style="text-align: left">F.&nbsp;Niessen</td>
 							<td style="text-align: left"></td>
+						</tr>
+						<tr>
+							<td style="text-align: right">11:15&minus;11:45</td>
+							<td style="text-align: left">V.&nbsp;Ocelik</td>							
+							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films</td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -396,23 +393,25 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
-							<td style="text-align: left">T.&nbsp;Vermeij</td>
-							<td style="text-align: left">Exploiting MTEX for alignment, analysis and identification of microstructure-correlated strain fields in micron-scale testing</td>
+							<td style="text-align: left">A.&nbsp;Plowman</td>
+							<td style="text-align: left">Using MTEX with MatFlow for crystal plasticity and phase field modeling</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">14:30&minus;15:00</td>
-							<td style="text-align: left">C.&nbsp;Cayron</td>
-							<td style="text-align: left">Grain reconstruction by using groupoid composition tables</td>
+							<td style="text-align: right">14:45&minus;15:15</td>
+							<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi (online)</td>
+							<td style="text-align: left">3D-XRD and MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:00&minus;15:30</td>
-							<td style="text-align: left">L.&nbsp;Germain</td>
-							<td style="text-align: left">Reconstructions with Merengue 2 and perspectives of development</td>
+							<td style="text-align: right">15:15&minus;15:45</td>
+							<td style="text-align: left">T.&nbsp;Kohne</td>
+							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:30&minus;16:00</td>
-							<td style="text-align: left">B.&nbsp;Britton</td>
-							<td style="text-align: left">Parent grain reconstruction in Zircaloy-4: comparison of methods and post processing</td>
+							<td style="text-align: right">15:45&minus;16:15</td>
+							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films</td>
+							<td style="text-align: left">E.&nbsp;Wünsche</td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -438,23 +437,23 @@ The second week will consist of lectures by invited experts that explain in deta
 					<tbody>
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
-							<td style="text-align: left">B.&nbsp;Soerensen</td>
-							<td style="text-align: left">MTEX a versatile toolbox for the geologist enabling better implementation of crystallography and texture analysis in teaching and research</td>
+							<td style="text-align: left">R.&nbsp;Kühn</td>
+							<td style="text-align: left">Analyzing X-ray diffraction data of polyphase rocks using MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:00&minus;10:30</td>
-							<td style="text-align: left">Lopez&minus;Sanchez</td>
-							<td style="text-align: left">Unravelling dynamic recrystallization by subgrain rotation in olivine using MTEX</td>
+							<td style="text-align: right">10:15&minus;10:45</td>
+							<td style="text-align: left">R.&nbsp;Kilian</td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:30&minus;11:00</td>
-							<td style="text-align: left">Sheng&nbsp;Fan</td>
-							<td style="text-align: left">Weighted Burgers vector method combined with MTEX to quantify the slip system in ice</td>
+							<td style="text-align: right">10:45&minus;11:15</td>
+							<td style="text-align: left">L.&nbsp;Morales</td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:00&minus;11:30</td>
-							<td style="text-align: left">K.&nbsp;Marquardt</td>
-							<td style="text-align: left">Influence of grain boundaries on the rheology of the Earth's upper mantle</td>
+							<td style="text-align: right">11:15&minus;11:45</td>
+							<td style="text-align: left">to be announced</td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -463,23 +462,28 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
-							<td style="text-align: left">O.&nbsp;Orlandini</td>
-							<td style="text-align: left">Deep earthquakes, super-volcanoes, fossil eggs, and historic buildings: MTEX's ability to solve many problems</td>
+							<td style="text-align: left">Lopez&minus;Sanchez</td>
+							<td style="text-align: left">Seismic Modeling Using EBSD</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">14:30&minus;15:00</td>
-							<td style="text-align: left">Z.&nbsp;Michels</td>
+							<td style="text-align: right">14:45&minus;15:15</td>
+							<td style="text-align: left">to be announced</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:00&minus;15:30</td>
-							<td style="text-align: left">M. Allard</td>
-							<td style="text-align: left">Coupled in situ EBSD &amp; EPMA maps unfolding the deformation history in oceanic gabbros</td>
+							<td style="text-align: right">15:15&minus;15:30</td>
+							<td style="text-align: left">A.&nbsp;Dittes</td>
+							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:30&minus;16:30</td>
-							<td style="text-align: left">S.&nbsp;Merkel</td>
-							<td style="text-align: left">Microstructures in Earth mantle minerals: using MTEX to track grains and physical properties of polycrystals in high pressure experiments</td>
+							<td style="text-align: right">15:30&minus;15:45</td>
+							<td style="text-align: left">J.&nbsp;Kozlík</td>
+							<td style="text-align: left">Dictionary indexing of stress induced martensite in Ti-Nb-Zr-O alloy</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">15:45&minus;16:00</td>
+							<td style="text-align: left">E.&nbsp;Knipschildt</td>
+							<td style="text-align: left">Particle stimulated nucleation in three dimensions</td>
 						</tr>
 					</tbody>
 				</table>
@@ -505,23 +509,23 @@ The second week will consist of lectures by invited experts that explain in deta
 					<tbody>
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
-							<td style="text-align: left">W.&nbsp;Pantleon</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">V.&nbsp;Tong</td>
+							<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:00&minus;10:30</td>
-							<td style="text-align: left">P.&nbsp;Lehto</td>
-							<td style="text-align: left">Misorientation gradients in polycrystalline engineering materials – characterization of grains and grain sub-structures</td>
+							<td style="text-align: right">10:15&minus;10:45</td>
+							<td style="text-align: left">B.&nbsp;Schulz</td>
+							<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:30&minus;11:00</td>
-							<td style="text-align: left">D.&nbsp;Depriester</td>
-							<td style="text-align: left">Coupled in situ SEM-DIC/CPFEM analyses of pure copper</td>
+							<td style="text-align: right">10:45&minus;11:15</td>
+							<td style="text-align: left">C.&nbsp;Sakr</td>
+							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:00&minus;11:30</td>
-							<td style="text-align: left">K.&nbsp;Frydrych</td>
-							<td style="text-align: left">Texture-based optimization of crystal plasticity parameters using MTEX</td>
+							<td style="text-align: right">11:15&minus;11:45</td>
+							<td style="text-align: left">M.&nbsp;Kühlbach</td>
+							<td style="text-align: left">Fairmat</td>
 						</tr>
 						<tr>
 							<td style="text-align: left">Lunch</td>
@@ -529,22 +533,12 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">13:30&minus;14:00</td>
-							<td style="text-align: left">D.&nbsp;Savage</td>
-							<td style="text-align: left">Using SIFT and general B-spline elastic deformation to unwarp EBSD in MTEX</td>
+							<td style="text-align: right">13:30&minus;14:30</td>
+							<td style="text-align: left">M.&nbsp;Petersmann</td>
+							<td style="text-align: left">Use cases of MTEX for semiconductor metalizations</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">14:00&minus;14:30</td>
-							<td style="text-align: left"></td>
-							<td style="text-align: left"></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">14:30&minus;15:00</td>
-							<td style="text-align: left">J.&nbsp;Hisccocks</td>
-							<td style="text-align: left">Making a graphical user interface for MTEX: a how-to guide</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">15:00&minus;16:00</td>
+							<td style="text-align: right">14:45&minus;15:45</td>
 							<td style="text-align: left">Round&nbsp;Table Discussion</td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -554,7 +548,6 @@ The second week will consist of lectures by invited experts that explain in deta
         </div>
     </div>
 </div>
--->
 
 ## Venue:
 
