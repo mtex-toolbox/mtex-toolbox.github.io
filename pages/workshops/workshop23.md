@@ -146,25 +146,17 @@ pole figures, inverse pole figures, fundamental sectors
             <div class="panel-body">
 <div markdown="span">
 **Lecture 3 - EBSD:**
-<!--{% include reference.html link="https://videocampus.sachsen.de/m/421bcadc047032bb32346b3fbdf3bf197a0275d9565684740f8063457c5f4e7f60d2261891651cc669dc7f33af6d33b17f63de47f4e364ab6e7bba846d9d374b" content="video" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/4_orientations.pdf" content="slides" class="course_material" %}-->
 <br>
 data import, reference frame alignment, color keys, data cleaning
 <br>
 <br>
 **Exercise 3:**
-<!--
-{% include reference.html link="https://videocampus.sachsen.de/m/6da6baa2b4ddcacf4a917e7dbf0fa2a4c55f28724d45013e5ffce765e343f2e4763d63b593841287c1155fbb4a5bdadf53dd25e79cd2f80766227fa8244e6572" content="video" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/5_DensityEstimation.pdf" content="slides" class="course_material" %}-->
 <br>
 <br>
 *Lunch*
 <br>
 <br>
 **Lecture 4 - Grains:**
-<!--
-{% include reference.html link="https://videocampus.sachsen.de/m/3e27654ede4be88745fe1dfb40aeee376d1d53bc66af7d0163429e6806777d0828e70f9f05e943ddef1cb5ade6fc23ee1b6ad7ddab30fb15f7a631278274097e" content="video" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/6_XRD2ODF.pdf" content="slides" class="course_material" %}-->
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -246,20 +238,9 @@ tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Excursion: Freiberg Silver Mine**
-<!--
-{% include reference.html link="https://videocampus.sachsen.de/m/b5fd43361bdedd4a1c98574b472417246eb938d1fd70d07c942568a82ca264ef1e681aed6a31ca0517bf5502de4f6127e6c20124c7b1f1923e9912cd53e8de18" content="video" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5.m" content="exercises" class="course_material" download=true %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exp_qtz_crop.mat" content="data" class="course_material" download=true %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_5_solution.m" content="solutions" class="course_material" download=true %}-->
+
 <br>
-<!--
-**Exercise 6 - Denoising EBSD Data and Misorientations:**
-{% include reference.html link="https://videocampus.sachsen.de/m/3889ae54285956da464ca17e979058652aea4f73d4eb16024f0c830309f5caff4e7397bc8d149d3a066cbb845338fbc5f2ab814088648ebe9a2015500fac269f" content="video" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/talk.pdf" content="slides" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html
-link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/fast_PTP_2_samll_big_grains.ang"
-content="data" class="course_material" download=true %}
--->
+
 </div>
             </div>
         </div>
