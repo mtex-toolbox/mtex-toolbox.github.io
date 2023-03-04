@@ -393,13 +393,13 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">15:15&minus;15:45</td>
-							<td style="text-align: left">G.&nbsp;Zeng (online)</td>
-							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX</td>
+							<td style="text-align: left">G.&nbsp;Zeng</td>
+							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
-                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi (online)</td>
-							<td style="text-align: left">3D-XRD and MTEX</td>
+                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
+							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:45</td>
@@ -475,8 +475,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">15:15&minus;15:30</td>
-							<td style="text-align: left">S. Gupta (online)</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">S. Gupta</td>
+							<td style="text-align: left"><i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:45&minus;16:00</td>
