@@ -354,12 +354,12 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">T.&nbsp;Vermeij</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Automated identification of slip system activity fields from digital image correlation data</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:45&minus;11:15</td>
                             <td style="text-align: left">F.&nbsp;Niessen</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Habit plane determination from reconstructed parent phase orientation maps</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
