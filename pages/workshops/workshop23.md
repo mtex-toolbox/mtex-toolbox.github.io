@@ -106,6 +106,7 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 <br>
 **Exercise 1:**
+{% include reference.html link="https://tuc.cloud/index.php/s/xBLtpfHig42SdQZ" content="exercises" class="course_material" download=true %}
 <!--{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/GfH27MesxNek5sA" content="slides" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031" content="video 1" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177" content="video 2" class="course_material" %}-->
@@ -125,6 +126,7 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
 **Exercise 2:**
+{% include reference.html link="https://tuc.cloud/index.php/s/JDwafPe8GfbMbGp" content="exercises" class="course_material" download=true %}
 <!--
 {% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="zoom session 13:00-14:00" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m" content="exercises" class="course_material" download=true %}-->
