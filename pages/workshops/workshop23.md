@@ -1,4 +1,4 @@
-	---
+---
 title: Freiberg MTEX Workshop 2023
 keywords: workshop, 2023
 sidebar: workshops_sidebar
