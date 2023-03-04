@@ -476,7 +476,9 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">15:15&minus;15:30</td>
 							<td style="text-align: left">S. Gupta</td>
-							<td style="text-align: left"><i>-online-</i></td>
+							<td style="text-align: left">Characterization of
+    Precambrian felsic magmatism of Kumaun Lesser Himalaya: constraints from
+    zircon morphological and U-Pb-Lu-Hf isotopic studies <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:45&minus;16:00</td>
@@ -626,7 +628,7 @@ The second week will consist of lectures by invited experts that explain in deta
  content="mtexworkshop@gmail.com" %} where you include name, address, whether
  you are student or not, which week you wish to attend and wether you want to
  participate in present or online
-- Deadline for registration is 31th of January 2023
+ - Deadline for registration is 31th of January 2023
 
 ## Registration Fee:
 - first + second week:  (PhD) students - 300 Euro, other - 500 Euro
