@@ -95,7 +95,7 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 
 **Lecture 1 - Crystal Geometry:**
 <!--{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}-->
-<span class="course_material">, </span>{% include reference.html
+<span class="course_material"></span>{% include reference.html
 link="https://tuc.cloud/index.php/s/kYHmCcWrk3AdaXr" content="slides1"
 class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://tuc.cloud/index.php/s/c2xYrxHWeFAr8Dk" content="slides2" class="course_material" %}
@@ -377,19 +377,24 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Using MTEX with MatFlow for crystal plasticity and phase field modeling</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">14:45&minus;15:15</td>
-							<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi (online)</td>
-							<td style="text-align: left">3D-XRD and MTEX</td>
+							<td style="text-align: right">14:30&minus;15:00</td>
+                            <td style="text-align: left">E.&nbsp;Wünsche</td>
+							<td style="text-align: left">Orientation Dependent Functions</td>							
 						</tr>
 						<tr>
 							<td style="text-align: right">15:15&minus;15:45</td>
-							<td style="text-align: left">T.&nbsp;Kohne</td>
-							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
+							<td style="text-align: left">G.&nbsp;Zeng (online)</td>
+							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
-							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films</td>
-							<td style="text-align: left">E.&nbsp;Wünsche</td>
+                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi (online)</td>
+							<td style="text-align: left">3D-XRD and MTEX</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">16:15&minus;16:45</td>
+ 							<td style="text-align: left">T.&nbsp;Kohne</td>
+							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -432,7 +437,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
-							<td style="text-align: left">to be announced</td>
+							<td style="text-align: left">M.&nbsp;Bestmann</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
