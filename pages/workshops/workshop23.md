@@ -352,7 +352,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Plasticity Simulation with MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"><i>Coffee</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -372,7 +372,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Lunch</td>
+							<td style="text-align: left"><i>Lunch</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -387,7 +387,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Orientation Dependent Functions</td>							
 						</tr>
 						<tr>
-							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"><i>Coffee</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -434,8 +434,8 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Analyzing X-ray diffraction data of polyphase rocks using MTEX</td>
 						</tr>
 						<tr>
+							<td style="text-align: left"><i>Coffee</i></td>
 							<td style="text-align: left"></td>
-							<td style="text-align: left">Coffee</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
@@ -454,7 +454,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Lunch</td>
+							<td style="text-align: left"><i>Lunch</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -469,7 +469,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"><i>Coffee</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -521,7 +521,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"><i>Coffee</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -541,7 +541,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Fairmat</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Lunch</td>
+							<td style="text-align: left"><i>Lunch</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
@@ -551,7 +551,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Use cases of MTEX for semiconductor metalizations</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"><i>Coffee</i></td>
 							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
