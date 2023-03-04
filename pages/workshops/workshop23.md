@@ -434,8 +434,8 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Analyzing X-ray diffraction data of polyphase rocks using MTEX</td>
 						</tr>
 						<tr>
-							<td style="text-align: left">Coffee</td>
 							<td style="text-align: left"></td>
+							<td style="text-align: left">Coffee</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
