@@ -1,4 +1,4 @@
----
+	---
 title: Freiberg MTEX Workshop 2023
 keywords: workshop, 2023
 sidebar: workshops_sidebar
@@ -352,6 +352,11 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Plasticity Simulation with MTEX</td>
 						</tr>
 						<tr>
+							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">T.&nbsp;Vermeij</td>
 							<td style="text-align: left">Automated identification of slip system activity fields from digital image correlation data</td>
@@ -382,6 +387,11 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Orientation Dependent Functions</td>							
 						</tr>
 						<tr>
+							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
 							<td style="text-align: right">15:15&minus;15:45</td>
 							<td style="text-align: left">G.&nbsp;Zeng (online)</td>
 							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX</td>
@@ -395,9 +405,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">16:15&minus;16:45</td>
  							<td style="text-align: left">T.&nbsp;Kohne</td>
 							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
-							<td style="text-align: left"></td>
-							<td style="text-align: left"></td>
-						</tr>
+						</tr>						
 					</tbody>
 				</table>
 			</div>
@@ -426,6 +434,11 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Analyzing X-ray diffraction data of polyphase rocks using MTEX</td>
 						</tr>
 						<tr>
+							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">R.&nbsp;Kilian</td>
 							<td style="text-align: left"></td>
@@ -451,22 +464,32 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Seismic Modeling Using EBSD</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">14:45&minus;15:15</td>
-							<td style="text-align: left">S. Gupta</td>
+							<td style="text-align: right">14:30&minus;15:00</td>
+ 							<td style="text-align: left">T.&nbsp;Qu</td>
+							<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX</td>
+						</tr>
+						<tr>
+							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"></td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">15:15&minus;15:30</td>
+							<td style="text-align: left">S. Gupta (online)</td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
+							<td style="text-align: right">15:45&minus;16:00</td>
 							<td style="text-align: left">A.&nbsp;Dittes</td>
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:30&minus;15:45</td>
+							<td style="text-align: right">16:15&minus;16:30</td>
 							<td style="text-align: left">J.&nbsp;Kozlík</td>
 							<td style="text-align: left">Dictionary indexing of stress induced martensite in Ti-Nb-Zr-O alloy</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">15:45&minus;16:00</td>
+							<td style="text-align: right">16:30&minus;16:45</td>
 							<td style="text-align: left">E.&nbsp;Knipschildt</td>
 							<td style="text-align: left">Particle stimulated nucleation in three dimensions</td>
 						</tr>
@@ -498,6 +521,11 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques</td>
 						</tr>
 						<tr>
+							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">B.&nbsp;Schulz</td>
 							<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys</td>
@@ -523,8 +551,18 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Use cases of MTEX for semiconductor metalizations</td>
 						</tr>
 						<tr>
+							<td style="text-align: left">Coffee</td>
+							<td style="text-align: left"></td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
 							<td style="text-align: right">14:45&minus;15:45</td>
 							<td style="text-align: left">Round&nbsp;Table Discussion</td>
+							<td style="text-align: left"></td>
+						</tr>
+						<tr>
+							<td style="text-align: right">16:00&minus;17:00</td>
+							<td style="text-align: left">Consultation</td>
 							<td style="text-align: left"></td>
 						</tr>
 					</tbody>
