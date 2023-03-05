@@ -32,16 +32,16 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul class="no_bullet">
 					<li>
-						11/22 &minus;
-						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-4260917" content="Announcement" %}
-                    </li>
-					<li>
-                        11/22 &minus;
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.8.2/mtex-5.8.2.zip" content="MTEX 5.8.2" download=true %}
+                        03/23 &minus;
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.9.0/mtex-5.9.0.zip" content="MTEX 5.9.0" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
+					<li>
+						3/23 &minus;
+						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-4260917" content="Announcement" %}
+                    </li>					
                     <li>
                         9/22 &minus; newly designed homepage
                     </li>
