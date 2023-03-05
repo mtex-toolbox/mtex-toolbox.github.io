@@ -55,11 +55,16 @@ epsilon = strainTensor (xyz)
 ori = orientation (432 → xyz)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0   30   15    0
+  phi1  Phi phi2
+     0   30   15
 {% endhighlight %}
-<h2 id="3">The orientation dependence of the Taylor factor</h2><p>The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970). Some applications of the Taylor theory of polycrystal plasticity. Kristall Und Technik, 5(1), 145-175. <a href="http://doi.org/10.1002/crat.19700050112">http://doi.org/10.1002/crat.19700050112</a></p>
+<h2 id="3">The orientation dependence of the Taylor factor</h2><p>For a fixed strain tensor <code class="language-plaintext highlighter-rouge">epsilon</code> and slip systems <code class="language-plaintext highlighter-rouge">sS</code> the Taylor factor</p>
 {% highlight matlab %}
+% The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970).
+% Some applications of the Taylor theory of polycrystal plasticity.
+% Kristall Und Technik, 5(1), 145-175.
+% http://doi.org/10.1002/crat.19700050112
+
 % set up an phi1 section plot
 sP = phi1Sections(cs,specimenSymmetry('222'));
 sP.phi1 = (0:10:90)*degree;
@@ -80,28 +85,46 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 21.126672 seconds.
+Elapsed time is 19.445196 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_01.png" %}
-</center><h2 id="4">The orientation dependence of the spin</h2><p>Compare Fig. 8 of the above paper</p>
+</center><p>Lets precompute the Taylor factor as <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> and the spin tensor as <code class="language-plaintext highlighter-rouge"><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></code>. Hence we can evaluate them very fast for several times in mush more orientations.</p>
 {% highlight matlab %}
-sP.plot(W.angle./degree,'smooth')
+% compute the Taylor factor independent from the orientations
+tic
+[TaylorF,~,Spin] = calcTaylor(epsilon,sS.symmetrise,'bandwidth',32);
+toc
+
+% plot the Taylor factor
+plotSection(TaylorF,'phi1',(0:10:90)*degree)
+
 mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 51.489584 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_02.png" %}
-</center><p>Display the crystallographic spin in sigma sections</p>
+</center><h2 id="5">The orientation dependence of the spin</h2><p>Compare Fig. 8 of the above paper</p>
 {% highlight matlab %}
-sP = sigmaSections(cs,specimenSymmetry);
-oriGrid = sP.makeGrid('resolution',2.5*degree);
-[M,~,W] = calcTaylor(inv(oriGrid)*epsilon,sS.symmetrise);
 sP.plot(W.angle./degree,'smooth')
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_03.png" %}
-</center><h2 id="6">Most active slip direction</h2><p>Next we consider a real world data set.</p>
+</center><p>Display the crystallographic spin in sigma sections</p>
+{% highlight matlab %}
+sP = sigmaSections(cs,specimenSymmetry);
+oriGrid = sP.makeGrid('resolution',2.5*degree);
+W = Spin.eval(oriGrid(:));
+sP.plot(spinTensor(W.').angle./degree,'smooth')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TaylorModel_04.png" %}
+</center><h2 id="7">Most active slip direction</h2><p>Next we consider a real world data set.</p>
 {% highlight matlab %}
 mtexdata csl
 
@@ -177,34 +200,39 @@ quiver(grains,sSGrains.trace,'autoScaleFactor',0.5,'displayName','slip plane tra
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TaylorModel_04.png" %}
+{% include inline_image.html file="TaylorModel_05.png" %}
 </center><p>plot the most active slip directions observe that they point all towards the lower hemisphere - why? they do change if q is changed</p>
 {% highlight matlab %}
 figure(2)
 plot(sSGrains.b)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TaylorModel_05.png" %}
-</center><h2 id="10">Texture evolution during rolling</h2>
+{% include inline_image.html file="TaylorModel_06.png" %}
+</center><h2 id="11">Texture evolution during rolling</h2>
 {% highlight matlab %}
 % define some random orientations
-ori = orientation.rand(10000,cs);
+rng(0)
+ori = orientation.rand(1e5,grains.CS);
 
 % 30 percent plane strain
 q = 0;
 epsilon = 0.3 * strainTensor(diag([1 -q -(1-q)]));
 
-%
-numIter = 10;
+numIter = 100;
+
+% compute the Taylor factors and the orientation gradients
+[~,~,Spin] = calcTaylor(epsilon ./ numIter, sS.symmetrise);
+
 progress(0,numIter);
 for sas=1:numIter
 
   % compute the Taylor factors and the orientation gradients
-  [M,~,W] = calcTaylor(inv(ori) * epsilon ./ numIter, sS.symmetrise,'silent');
+  W = spinTensor(Spin.eval(ori).').';
 
   % rotate the individual orientations
   ori = ori .* orientation(-W);
   progress(sas,numIter);
+
 end
 {% endhighlight %}
 
@@ -220,12 +248,12 @@ plotPDF(ori,Miller({0,0,1},{1,1,1},cs),'contourf')
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TaylorModel_06.png" %}
-</center><h2 id="12">restore MTEX preferences</h2>
+{% include inline_image.html file="TaylorModel_07.png" %}
+</center><h2 id="13">restore MTEX preferences</h2>
 {% highlight matlab %}
 setMTEXpref('pfAnnotations',storepfA);
 {% endhighlight %}
-<h2 id="13">Inverse Taylor</h2><p>Use with care!</p>
+<h2 id="14">Inverse Taylor</h2><p>Use with care!</p>
 {% highlight matlab %}
 oS = axisAngleSections(cs,cs,'antipodal');
 oS.angles = 10*degree;
@@ -239,5 +267,5 @@ ori = oS.makeGrid;
 plot(oS,M,'contourf')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TaylorModel_07.png" %}
+{% include inline_image.html file="TaylorModel_08.png" %}
 </center></div></body></html>
