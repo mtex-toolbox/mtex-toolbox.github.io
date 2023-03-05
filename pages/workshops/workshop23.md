@@ -397,16 +397,16 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">15:15&minus;15:45</td>
 							<td style="text-align: left">G.&nbsp;Zeng</td>
 							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX <i>-online-</i></td>
-						</tr>
+						</tr>						
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
-                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
-							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">16:15&minus;16:45</td>
  							<td style="text-align: left">T.&nbsp;Kohne</td>
 							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">16:15&minus;16:30</td>
+ 							<td style="text-align: left">C.&nbsp;Chiu</td>
+							<td style="text-align: left">Crystal plasticity simulations and MTEX</td>
 						</tr>						
 					</tbody>
 				</table>
@@ -541,8 +541,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
-							<td style="text-align: left">M.&nbsp;Kühlbach</td>
-							<td style="text-align: left">Fairmat</td>
+                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
+							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -560,7 +560,12 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left"></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">14:45&minus;15:45</td>
+							<td style="text-align: right">14:45&minus;15:15</td>
+							<td style="text-align: left">M.&nbsp;Kühlbach</td>
+							<td style="text-align: left">Fairmat</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">15:15&minus;16:15</td>
 							<td style="text-align: left">Round&nbsp;Table Discussion</td>
 							<td style="text-align: left"></td>
 						</tr>
