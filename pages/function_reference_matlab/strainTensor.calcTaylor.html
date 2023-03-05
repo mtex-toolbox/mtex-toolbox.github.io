@@ -14,6 +14,7 @@ To make changes, update the MATLAB code and republish this document.
       --><title>calcTaylor</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_strainTensor__calcTaylor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/TensorAnalysis/@strainTensor/calcTaylor.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>compute Taylor factor and strain dependent orientation gradient</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
+[MFun,~,spinFun] = calcTaylor(eps,sS,'SO3Fun','bandwidth',32)
 [M,b,W] = calcTaylor(eps,sS)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
@@ -37,6 +38,22 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p><h2 id="5">Output</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>Mfun</tt>
+         </td>
+         <td>
+            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a> (orientation dependent Taylor factor)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>spinFun</tt>
+         </td>
+         <td>
+            <tt><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></tt>
+         </td>
+      </tr>
       <tr>
          <td width="100px">
             <tt>M</tt>
@@ -96,8 +113,8 @@ cs = crystalSymmetry
 ori = orientation (m-3m → xyz)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0   30   15    0
+  phi1  Phi phi2
+     0   30   15
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -113,7 +130,7 @@ sS = slipSystem (m-3m)
 {% endhighlight %}
 
 {% highlight matlab %}
-% compute the Taylor factor
+% compute the Taylor factor w.r.t. the given orientation
 [M,b,W] = calcTaylor(inv(ori)*eps,sS.symmetrise)
 {% endhighlight %}
 
@@ -122,11 +139,11 @@ M =
     0.2719
 b =
   Columns 1 through 7
-    0.0000    0.0000    0.0000    0.0000    0.0296    0.1110    0.0000
+    0.0000    0.0332    0.0000    0.0000    0.0142    0.0000    0.0198
   Columns 8 through 14
-    0.0000    0.0000    0.0000    0.0345    0.0093    0.0000    0.0142
+    0.0000    0.0000    0.0000    0.0000    0.0204    0.0000    0.0000
   Columns 15 through 21
-    0.0000    0.0332    0.0000    0.0000    0.0000    0.0198    0.0204
+    0.0000    0.0345    0.0000    0.0093    0.0000    0.1110    0.0296
   Columns 22 through 24
     0.0000    0.0000    0.0000
  
@@ -137,5 +154,18 @@ W = spinTensor (m-3m)
       0 -20.77  31.63
   20.77      0 -15.51
  -31.63  15.51      0
+{% endhighlight %}
+
+{% highlight matlab %}
+% update orientation
+oriNew = ori .* orientation(-W)
+{% endhighlight %}
+
+{% highlight plaintext %}
+oriNew = orientation (m-3m → xyz)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  356.003 29.6499 17.2781
 {% endhighlight %}
 </div></body></html>
