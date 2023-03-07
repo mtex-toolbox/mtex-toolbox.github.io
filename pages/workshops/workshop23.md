@@ -198,7 +198,13 @@ class="course_material" %}
 <div markdown="span">
 **Lecture 5 - Misorientations and Grain Boundaries:**
 
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/7_EBSD.pdf" content="slides" class="course_material" %}
+{% include reference.html
+link="https://tuc.cloud/index.php/s/CbNm6Zn5Xx54wQd"
+content="slides 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/aY8DJbfiyP85HJJ"
+content="slides 2" class="course_material" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle, KAM, GOS, twin boundaries, tilt vs. twist
 boundaries, phase transition, orientation
@@ -206,15 +212,34 @@ gradients,  statistics of boundary networks, habit planes
 <br>
 <br>
 **Exercise 5:**
-
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/8_grains.pdf" content="slides" class="course_material" %}
+{% include reference.html
+link="https://tuc.cloud/index.php/s/zxKjQtKxM9GLRSR"
+content="script 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/nJkwEP82gsPteRY"
+content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/2XZozdxBcrrNWCN"
+content="script 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2"
+content="data 2" class="course_material" %}
 <br>
 <br>
 *Lunch*
 <br>
 <br>
 **Lecture 6 - Density Functions:**
-
+{% include reference.html
+link="https://tuc.cloud/index.php/s/dWLYAMt52rNro2G"
+content="slides 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/KNYs2NoQpD5trgL"
+content="slides 2" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -222,7 +247,9 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 6:**
-
+{% include reference.html
+link="https://tuc.cloud/index.php/s/2CSLi5Qr6pH3D4G"
+content="script" class="course_material" %}
 </div>
             </div>
         </div>
