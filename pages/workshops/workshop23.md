@@ -117,9 +117,8 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 <br>
 **Lecture 2 - Crystal Symmetries and Orientations:**
-<!--
-{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN" content="slides" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="zoom seesion" class="course_material" %}-->
+{% include reference.html
+link="https://tuc.cloud/index.php/s/c2xYrxHWeFAr8Dk" content="slides" class="course_material" %}
 <br>
 point groups, Laue groups, symmetrically equivalent orientations, 
 pole figures, inverse pole figures, fundamental sectors
@@ -148,22 +147,38 @@ pole figures, inverse pole figures, fundamental sectors
             <div class="panel-body">
 <div markdown="span">
 **Lecture 3 - EBSD:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/P984MMHtqZ3wcba" content="slides" class="course_material" %}
 <br>
 data import, reference frame alignment, color keys, data cleaning
 <br>
 <br>
 **Exercise 3:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/7inzCxnJej4zg6g" content="script"
+class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/K2RrmDFKdW2qgW3" content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="course_material" %}
 <br>
 <br>
 *Lunch*
 <br>
 <br>
 **Lecture 4 - Grains:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/XMrkJ9LEeMaLPwJ" content="slides" class="course_material" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
 <br>
 **Exercise 4:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/j7JGitAWK5yRfk9" content="script"
+class="course_material" %}
 </div>
             </div>
         </div>
@@ -334,7 +349,9 @@ The second week will consist of lectures by invited experts that explain in deta
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b> </a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseMo"><b>Monday: Crystal Plasticity
+    and more</b> </a>
             </h4>
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
@@ -453,7 +470,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
 							<td style="text-align: left">M.&nbsp;Bestmann</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Seismic induced anisotropy and kinking in quartz</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -532,17 +549,19 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">B.&nbsp;Schulz</td>
-							<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">10:45&minus;11:15</td>
-							<td style="text-align: left">C.&nbsp;Sakr</td>
-							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
+							<td style="text-align: left">Advancing analytical
+    electron microscopy methodologies to characterise microstructural features
+    in superalloys <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
                             <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
 							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
+						</tr>
+						<tr>
+							<td style="text-align: right">10:45&minus;11:15</td>
+							<td style="text-align: left">C.&nbsp;Sakr</td>
+							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
