@@ -424,7 +424,12 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">16:15&minus;16:30</td>
  							<td style="text-align: left">C.&nbsp;Chiu</td>
 							<td style="text-align: left">Crystal plasticity simulations and MTEX</td>
-						</tr>						
+						</tr>
+						<tr>
+							<td style="text-align: right">16:30&minus;16:45</td>
+ 							<td style="text-align: left">S.&nbsp;Prüger</td>
+							<td style="text-align: left">Modeling of austenitic oligo-crystals using Abaqus and MTEX</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
