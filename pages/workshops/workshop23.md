@@ -159,6 +159,10 @@ link="https://tuc.cloud/index.php/s/7inzCxnJej4zg6g" content="script"
 class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
+link="https://tuc.cloud/index.php/s/xsGDcae2SZXpXQo"
+content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
 link="https://tuc.cloud/index.php/s/K2RrmDFKdW2qgW3" content="data 1" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
@@ -179,6 +183,11 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 {% include reference.html
 link="https://tuc.cloud/index.php/s/j7JGitAWK5yRfk9" content="script"
 class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/nykfPH5fXWRK4yo"
+content="solution" class="course_material" %}
+
 </div>
             </div>
         </div>
@@ -217,12 +226,20 @@ link="https://tuc.cloud/index.php/s/zxKjQtKxM9GLRSR"
 content="script 1" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
+link="https://tuc.cloud/index.php/s/WsfxZdWA7qFZ3Ce"
+content="script 1 solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
 link="https://tuc.cloud/index.php/s/nJkwEP82gsPteRY"
 content="data 1" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/2XZozdxBcrrNWCN"
 content="script 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/3Xm6PPQcoMBefAn"
+content="script 2 solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2"
@@ -278,13 +295,26 @@ content="script" class="course_material" %}
 <br>
 
 **Lecture 7 - Tensorial Properties:**
-
+{% include reference.html
+link="https://tuc.cloud/index.php/s/QBg5QkGbF7CKAxg"
+content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/bGa6XWSPtgSw3Td"
+content="Live Script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/3dAYckfbyzd3R98"
+content="EBSD data" class="course_material" %}
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
 tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Exercise 7:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/LWnxz67Ckwcmd9F"
+content="script file" class="course_material" %}
 
 <br>
 
