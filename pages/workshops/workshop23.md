@@ -232,6 +232,26 @@ content="data 2" class="course_material" %}
 *Lunch*
 <br>
 <br>
+**Excursion: Freiberg Silver Mine**
+
+</div>
+            </div>
+        </div>
+    </div>
+    <!-- /.panel -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+				data-parent="#accordion"
+				href="#collapseThursday"><b>Thursday:</b> Tensorial Properties
+				and Excursion</a>
+            </h4>
+        </div>
+        <div id="collapseThursday" class="panel-collapse collapse noCrossRef">
+            <div class="panel-body">
+<div markdown="span">
+
 **Lecture 6 - Density Functions:**
 {% include reference.html
 link="https://tuc.cloud/index.php/s/dWLYAMt52rNro2G"
@@ -250,23 +270,13 @@ random sampling, ODF reconstuction from XRD data
 {% include reference.html
 link="https://tuc.cloud/index.php/s/2CSLi5Qr6pH3D4G"
 content="script" class="course_material" %}
-</div>
-            </div>
-        </div>
-    </div>
-    <!-- /.panel -->
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse"
-				data-parent="#accordion"
-				href="#collapseThursday"><b>Thursday:</b> Tensorial Properties
-				and Excursion</a>
-            </h4>
-        </div>
-        <div id="collapseThursday" class="panel-collapse collapse noCrossRef">
-            <div class="panel-body">
-<div markdown="span">
+
+<br>
+<br>
+*Lunch*
+<br>
+<br>
+
 **Lecture 7 - Tensorial Properties:**
 
 <br>
@@ -275,13 +285,6 @@ tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Exercise 7:**
-
-<br>
-<br>
-*Lunch*
-<br>
-<br>
-**Excursion: Freiberg Silver Mine**
 
 <br>
 
