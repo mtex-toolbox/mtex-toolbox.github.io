@@ -354,7 +354,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - **{% include reference.html
   link="https://marcoalopez.github.io/"
-  content="Marco A. Lopez-Sanchez" %}** (Universidad de Oviedo): *Seismic Modeling Using EBSD*
+  content="Marco A. Lopez-Sanchez" %}** (Universidad de Oviedo): *Seismic modelling using EBSD data: why, how, limitations and good practices*
 
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Manuel-Petersmann"
@@ -515,7 +515,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">Lopez&minus;Sanchez</td>
-							<td style="text-align: left">Seismic Modeling Using EBSD</td>
+							<td style="text-align: left">Seismic modelling using EBSD data: why, how, limitations and good practices</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
