@@ -287,6 +287,14 @@ random sampling, ODF reconstuction from XRD data
 {% include reference.html
 link="https://tuc.cloud/index.php/s/2CSLi5Qr6pH3D4G"
 content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/NWJwW2nBE8GQqxL"
+content="user data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/JmpcteLZ4pbsKSW"
+content="user data 2" class="course_material" %}
 
 <br>
 <br>
