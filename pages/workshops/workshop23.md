@@ -629,12 +629,12 @@ The second week will consist of lectures by invited experts that explain in deta
     in superalloys <i>-online-</i></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:15&minus;11:45</td>
-                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
+							<td style="text-align: right">10:45&minus;11:15</td>
+							<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
 							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
 						</tr>
 						<tr>
-							<td style="text-align: right">10:45&minus;11:15</td>
+							<td style="text-align: right">11:15&minus;11:45</td>
 							<td style="text-align: left">C.&nbsp;Sakr</td>
 							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
 						</tr>
