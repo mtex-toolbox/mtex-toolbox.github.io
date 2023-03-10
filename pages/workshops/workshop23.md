@@ -319,10 +319,10 @@ tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress 
 tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
-**Exercise 7:**
-{% include reference.html
-link="https://tuc.cloud/index.php/s/LWnxz67Ckwcmd9F"
-content="script file" class="course_material" %}
+**Lecture 8 - From Single Grain to Bulk Tensors:**
+
+<br>
+  average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 
 <br>
 
@@ -342,27 +342,29 @@ content="script file" class="course_material" %}
         <div id="collapseFriday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 8 - From Single Grain to Bulk Tensors:**
-
+**Exercise 7:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/LWnxz67Ckwcmd9F"
+content="script file" class="course_material" %}
 <br>
-  average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
+**Lecture 9 - Plastic Deformation:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/aJSPqwLK5nLqZLx"
+content="slides" class="course_material" %}
 <br>
-**Exercise 8:**
+deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
+dislocation density estimation
 
 <br>
 <br>
 *lunch*
 <br>
 <br>
-**Lecture 9 - Plastic Deformation:**
 
 <br>
-deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
-dislocation density estimation
 <br>
-<br>
-**Excercise 9 - Free Discussion of Personal Data Sets:**
+**Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal Data Sets:**
 </div>
             </div>
         </div>
