@@ -320,7 +320,6 @@ tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Lecture 8 - From Single Grain to Bulk Tensors:**
-
 <br>
   average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 
@@ -361,7 +360,8 @@ dislocation density estimation
 *lunch*
 <br>
 <br>
-
+Student presentation 
+**Aditya Shukla: Scanning 3D xray microscopy to image grains in CdTe solar cells**
 <br>
 <br>
 **Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal Data Sets:**
