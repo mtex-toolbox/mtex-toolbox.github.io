@@ -86,7 +86,8 @@ During the first week we provide on a daily basis two morning lectures covering 
 
 **Lecture 0 - General Concepts:**
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
-<span class="course_material">, </span>{% include reference.html link="https://tuc.cloud/index.php/s/R92pfMnkZqHDWTF" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/R92pfMnkZqHDWTF" content="slides" class="course_material" %}
 <!--<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}-->
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
@@ -179,6 +180,8 @@ link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="cou
 **Lecture 4 - Grains:**
 {% include reference.html
 link="https://tuc.cloud/index.php/s/XMrkJ9LEeMaLPwJ" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/xkic28kejUA" content="video" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -191,7 +194,8 @@ class="course_material" %}
 {% include reference.html
 link="https://tuc.cloud/index.php/s/nykfPH5fXWRK4yo"
 content="solution" class="course_material" %}
-
+<span class="course_material">, </span>
+{% include reference.html link="" content="video" %}
 </div>
             </div>
         </div>
@@ -215,9 +219,13 @@ content="solution" class="course_material" %}
 link="https://tuc.cloud/index.php/s/CbNm6Zn5Xx54wQd"
 content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/wLHlZ_F-w5w" content="video" %}
+<span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/aY8DJbfiyP85HJJ"
 content="slides 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle, KAM, GOS, twin boundaries, tilt vs. twist
 boundaries, phase transition, orientation
@@ -278,9 +286,13 @@ content="data 2" class="course_material" %}
 link="https://tuc.cloud/index.php/s/dWLYAMt52rNro2G"
 content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/B6ka2ADCYws" content="video" %}
+<span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/KNYs2NoQpD5trgL"
 content="slides 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/xPNCCura-ao" content="video" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
