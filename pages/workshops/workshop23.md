@@ -311,6 +311,7 @@ content="user data 1" class="course_material" %}
 {% include reference.html
 link="https://tuc.cloud/index.php/s/JmpcteLZ4pbsKSW"
 content="user data 2" class="course_material" %}
+<span class="course_material">, </span>
 
 <br>
 <br>
@@ -330,14 +331,20 @@ content="Live Script" class="course_material" %}
 {% include reference.html
 link="https://tuc.cloud/index.php/s/3dAYckfbyzd3R98"
 content="EBSD data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/geUvdAOHvMM" content="video" %}
+
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
 tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Lecture 8 - From Single Grain to Bulk Tensors:**
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/FwDDIHoLfK8" content="video" %} 
 <br>
   average tensors (Voigt, Reuss, Hill) from EBSD and ODF
+ 
 
 <br>
 
