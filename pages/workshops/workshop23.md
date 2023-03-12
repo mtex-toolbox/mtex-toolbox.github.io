@@ -493,7 +493,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
  							<td style="text-align: left">B.&nbsp;Begley</td>
-							<td style="text-align: left"><i>-online-</i></td>
+							<td style="text-align: left">An MTEX-based API for VPSC <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:30</td>
