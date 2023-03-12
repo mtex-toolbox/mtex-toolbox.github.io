@@ -149,6 +149,8 @@ pole figures, inverse pole figures, fundamental sectors
 **Lecture 3 - EBSD:**
 {% include reference.html
 link="https://tuc.cloud/index.php/s/P984MMHtqZ3wcba" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/e_eGJac6nxo" content="video" %}
 <br>
 data import, reference frame alignment, color keys, data cleaning
 <br>
@@ -167,6 +169,8 @@ link="https://tuc.cloud/index.php/s/K2RrmDFKdW2qgW3" content="data 1" class="cou
 <span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/SGTkoaxcIYU" content="video" %}
 <br>
 <br>
 *Lunch*
