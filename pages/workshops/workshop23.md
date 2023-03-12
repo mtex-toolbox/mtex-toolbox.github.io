@@ -456,9 +456,14 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Habit plane determination from reconstructed parent phase orientation maps</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:15&minus;11:45</td>
-							<td style="text-align: left">V.&nbsp;Ocelik</td>							
-							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films</td>
+							<td style="text-align: right">11:15&minus;11:30</td>
+							<td style="text-align: left">.&nbsp;</td>
+							<td style="text-align: left">Some more about habit planes</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">11:30&minus;12:00</td>
+							<td style="text-align: left">T.&nbsp;Kohne</td>
+							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -487,8 +492,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>						
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
- 							<td style="text-align: left">T.&nbsp;Kohne</td>
-							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
+ 							<td style="text-align: left">B.&nbsp;Begley</td>
+							<td style="text-align: left"><i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:30</td>
@@ -534,8 +539,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
-							<td style="text-align: left">R.&nbsp;Kilian</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">M.&nbsp;Bestmann</td>
+							<td style="text-align: left">Seismic induced anisotropy and kinking in quartz</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:45&minus;11:15</td>
@@ -544,8 +549,9 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
-							<td style="text-align: left">M.&nbsp;Bestmann</td>
-							<td style="text-align: left">Seismic induced anisotropy and kinking in quartz</td>
+							<td style="text-align: left">V.&nbsp;Ocelik</td>							
+							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz
+						thin films</td>							
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
