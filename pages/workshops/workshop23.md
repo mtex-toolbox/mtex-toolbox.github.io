@@ -480,8 +480,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:30</td>
-							<td style="text-align: left">.&nbsp;</td>
-							<td style="text-align: left">Some more about habit planes</td>
+							<td style="text-align: left">L.&nbsp;Richter</td>
+							<td style="text-align: left">Characterization of habit planes in multiphase materials</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:30&minus;12:00</td>
