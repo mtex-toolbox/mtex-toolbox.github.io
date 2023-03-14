@@ -294,7 +294,13 @@ content="slides 1" class="course_material" %}
 link="https://tuc.cloud/index.php/s/KNYs2NoQpD5trgL"
 content="slides 2" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/xPNCCura-ao" content="video" %}
+{% include reference.html link="https://youtu.be/n4CcrdCyT88" content="video"
+%}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/xPNCCura-ao" content="video"
+%}
+
+
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -342,7 +348,6 @@ tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Lecture 8 - From Single Grain to Bulk Tensors:**
-<span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/FwDDIHoLfK8" content="video" %} 
 <br>
   average tensors (Voigt, Reuss, Hill) from EBSD and ODF
@@ -376,6 +381,8 @@ content="script file" class="course_material" %}
 {% include reference.html
 link="https://tuc.cloud/index.php/s/aJSPqwLK5nLqZLx"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" %}
 <br>
 deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
 dislocation density estimation
@@ -389,7 +396,10 @@ Student presentation
 **Aditya Shukla: Scanning 3D xray microscopy to image grains in CdTe solar cells**
 <br>
 <br>
-**Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal Data Sets:**
+**Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal
+Data Sets:**
+{% include reference.html link="https://youtu.be/rRhTMYO_Fyg" content="video" %} 
+
 </div>
             </div>
         </div>
