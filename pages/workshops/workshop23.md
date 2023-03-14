@@ -195,7 +195,7 @@ class="course_material" %}
 link="https://tuc.cloud/index.php/s/nykfPH5fXWRK4yo"
 content="solution" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="" content="video" %}
+{% include reference.html link="https://youtu.be/53MRS5VOoio" content="video" %}
 </div>
             </div>
         </div>
@@ -256,6 +256,8 @@ content="script 2 solution" class="course_material" %}
 {% include reference.html
 link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2"
 content="data 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" %}
 <br>
 <br>
 *Lunch*
