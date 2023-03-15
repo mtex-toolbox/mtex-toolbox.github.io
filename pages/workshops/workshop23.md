@@ -86,7 +86,8 @@ During the first week we provide on a daily basis two morning lectures covering 
 
 **Lecture 0 - General Concepts:**
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
-<span class="course_material">, </span>{% include reference.html link="https://tuc.cloud/index.php/s/R92pfMnkZqHDWTF" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/R92pfMnkZqHDWTF" content="slides" class="course_material" %}
 <!--<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}-->
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
@@ -117,9 +118,8 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 <br>
 **Lecture 2 - Crystal Symmetries and Orientations:**
-<!--
-{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/G9GonnGyx7reBaN" content="slides" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="zoom seesion" class="course_material" %}-->
+{% include reference.html
+link="https://tuc.cloud/index.php/s/c2xYrxHWeFAr8Dk" content="slides" class="course_material" %}
 <br>
 point groups, Laue groups, symmetrically equivalent orientations, 
 pole figures, inverse pole figures, fundamental sectors
@@ -148,22 +148,54 @@ pole figures, inverse pole figures, fundamental sectors
             <div class="panel-body">
 <div markdown="span">
 **Lecture 3 - EBSD:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/P984MMHtqZ3wcba" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/e_eGJac6nxo" content="video" %}
 <br>
 data import, reference frame alignment, color keys, data cleaning
 <br>
 <br>
 **Exercise 3:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/7inzCxnJej4zg6g" content="script"
+class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/xsGDcae2SZXpXQo"
+content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/K2RrmDFKdW2qgW3" content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/SGTkoaxcIYU" content="video" %}
 <br>
 <br>
 *Lunch*
 <br>
 <br>
 **Lecture 4 - Grains:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/XMrkJ9LEeMaLPwJ" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/xkic28kejUA" content="video" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
 <br>
 **Exercise 4:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/j7JGitAWK5yRfk9" content="script"
+class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/nykfPH5fXWRK4yo"
+content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/53MRS5VOoio" content="video" %}
 </div>
             </div>
         </div>
@@ -183,7 +215,17 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <div markdown="span">
 **Lecture 5 - Misorientations and Grain Boundaries:**
 
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/7_EBSD.pdf" content="slides" class="course_material" %}
+{% include reference.html
+link="https://tuc.cloud/index.php/s/CbNm6Zn5Xx54wQd"
+content="slides 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/wLHlZ_F-w5w" content="video" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/aY8DJbfiyP85HJJ"
+content="slides 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle, KAM, GOS, twin boundaries, tilt vs. twist
 boundaries, phase transition, orientation
@@ -191,22 +233,37 @@ gradients,  statistics of boundary networks, habit planes
 <br>
 <br>
 **Exercise 5:**
-
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/8_grains.pdf" content="slides" class="course_material" %}
+{% include reference.html
+link="https://tuc.cloud/index.php/s/zxKjQtKxM9GLRSR"
+content="script 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/WsfxZdWA7qFZ3Ce"
+content="script 1 solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/nJkwEP82gsPteRY"
+content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/2XZozdxBcrrNWCN"
+content="script 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/3Xm6PPQcoMBefAn"
+content="script 2 solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2"
+content="data 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" %}
 <br>
 <br>
 *Lunch*
 <br>
 <br>
-**Lecture 6 - Density Functions:**
-
-<br>
-kernel density estimation, orientation density function, pole density
-function, inverse pole density function, model ODFs, ODF characteristics,
-random sampling, ODF reconstuction from XRD data
-<br>
-<br>
-**Exercise 6:**
+**Excursion: Freiberg Silver Mine**
 
 </div>
             </div>
@@ -225,21 +282,76 @@ random sampling, ODF reconstuction from XRD data
         <div id="collapseThursday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 7 - Tensorial Properties:**
+
+**Lecture 6 - Density Functions:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/dWLYAMt52rNro2G"
+content="slides 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/B6ka2ADCYws" content="video" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/KNYs2NoQpD5trgL"
+content="slides 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/n4CcrdCyT88" content="video"
+%}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/xPNCCura-ao" content="video"
+%}
+
 
 <br>
-tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
-tensors, piezoelectricity, elasticity, wave velocities
+kernel density estimation, orientation density function, pole density
+function, inverse pole density function, model ODFs, ODF characteristics,
+random sampling, ODF reconstuction from XRD data
 <br>
 <br>
-**Exercise 7:**
+**Exercise 6:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/2CSLi5Qr6pH3D4G"
+content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/NWJwW2nBE8GQqxL"
+content="user data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/JmpcteLZ4pbsKSW"
+content="user data 2" class="course_material" %}
+<span class="course_material">, </span>
 
 <br>
 <br>
 *Lunch*
 <br>
 <br>
-**Excursion: Freiberg Silver Mine**
+
+**Lecture 7 - Tensorial Properties:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/QBg5QkGbF7CKAxg"
+content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/bGa6XWSPtgSw3Td"
+content="Live Script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://tuc.cloud/index.php/s/3dAYckfbyzd3R98"
+content="EBSD data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/geUvdAOHvMM" content="video" %}
+
+<br>
+tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
+tensors, piezoelectricity, elasticity, wave velocities
+<br>
+<br>
+**Lecture 8 - From Single Grain to Bulk Tensors:**
+{% include reference.html link="https://youtu.be/FwDDIHoLfK8" content="video" %} 
+<br>
+  average tensors (Voigt, Reuss, Hill) from EBSD and ODF
+ 
 
 <br>
 
@@ -259,27 +371,35 @@ tensors, piezoelectricity, elasticity, wave velocities
         <div id="collapseFriday" class="panel-collapse collapse noCrossRef">
             <div class="panel-body">
 <div markdown="span">
-**Lecture 8 - From Single Grain to Bulk Tensors:**
-
+**Exercise 7:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/LWnxz67Ckwcmd9F"
+content="script file" class="course_material" %}
 <br>
-  average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
+**Lecture 9 - Plastic Deformation:**
+{% include reference.html
+link="https://tuc.cloud/index.php/s/aJSPqwLK5nLqZLx"
+content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" %}
 <br>
-**Exercise 8:**
+deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
+dislocation density estimation
 
 <br>
 <br>
 *lunch*
 <br>
 <br>
-**Lecture 9 - Plastic Deformation:**
+Student presentation 
+**Aditya Shukla: Scanning 3D xray microscopy to image grains in CdTe solar cells**
+<br>
+<br>
+**Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal
+Data Sets:**
+{% include reference.html link="https://youtu.be/rRhTMYO_Fyg" content="video" %} 
 
-<br>
-deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
-dislocation density estimation
-<br>
-<br>
-**Excercise 9 - Free Discussion of Personal Data Sets:**
 </div>
             </div>
         </div>
@@ -309,7 +429,7 @@ The second week will consist of lectures by invited experts that explain in deta
 
 - **{% include reference.html
   link="https://marcoalopez.github.io/"
-  content="Marco A. Lopez-Sanchez" %}** (Universidad de Oviedo): *Seismic Modeling Using EBSD*
+  content="Marco A. Lopez-Sanchez" %}** (Universidad de Oviedo): *Seismic modelling using EBSD data: why, how, limitations and good practices*
 
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Manuel-Petersmann"
@@ -334,7 +454,9 @@ The second week will consist of lectures by invited experts that explain in deta
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="panel-title">
-                <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b> </a>
+                <a class="noCrossRef accordion-toggle" data-toggle="collapse"
+    data-parent="#accordion" href="#collapseMo"><b>Monday: Crystal Plasticity
+    and more</b> </a>
             </h4>
         </div>
         <div id="collapseMo" class="panel-collapse collapse noCrossRef">
@@ -369,9 +491,14 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: left">Habit plane determination from reconstructed parent phase orientation maps</td>
 						</tr>
 						<tr>
-							<td style="text-align: right">11:15&minus;11:45</td>
-							<td style="text-align: left">V.&nbsp;Ocelik</td>							
-							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films</td>
+							<td style="text-align: right">11:15&minus;11:30</td>
+							<td style="text-align: left">L.&nbsp;Richter</td>
+							<td style="text-align: left">Characterization of habit planes in multiphase materials</td>
+						</tr>
+						<tr>
+							<td style="text-align: right">11:30&minus;12:00</td>
+							<td style="text-align: left">T.&nbsp;Kohne</td>
+							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -400,14 +527,19 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>						
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
- 							<td style="text-align: left">T.&nbsp;Kohne</td>
-							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
+ 							<td style="text-align: left">B.&nbsp;Begley</td>
+							<td style="text-align: left">An MTEX-based API for VPSC <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:30</td>
  							<td style="text-align: left">C.&nbsp;Chiu</td>
 							<td style="text-align: left">Crystal plasticity simulations and MTEX</td>
-						</tr>						
+						</tr>
+						<tr>
+							<td style="text-align: right">16:30&minus;16:45</td>
+ 							<td style="text-align: left">S.&nbsp;Prüger</td>
+							<td style="text-align: left">Modeling of austenitic oligo-crystals using Abaqus and MTEX</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -442,8 +574,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
-							<td style="text-align: left">R.&nbsp;Kilian</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">M.&nbsp;Bestmann</td>
+							<td style="text-align: left">Seismic induced anisotropy and kinking in quartz</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:45&minus;11:15</td>
@@ -452,8 +584,9 @@ The second week will consist of lectures by invited experts that explain in deta
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
-							<td style="text-align: left">M.&nbsp;Bestmann</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">V.&nbsp;Ocelik</td>							
+							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz
+						thin films</td>							
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -463,7 +596,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">Lopez&minus;Sanchez</td>
-							<td style="text-align: left">Seismic Modeling Using EBSD</td>
+							<td style="text-align: left">Seismic modelling using EBSD data: why, how, limitations and good practices</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
@@ -485,7 +618,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">15:45&minus;16:00</td>
 							<td style="text-align: left">A.&nbsp;Dittes</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Quantitative model to predict the microstructure-related corrosion rate of cold-rolled SS316L: How to profit from EBSD</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:30</td>
@@ -532,17 +665,19 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">B.&nbsp;Schulz</td>
-							<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys</td>
+							<td style="text-align: left">Advancing analytical
+    electron microscopy methodologies to characterise microstructural features
+    in superalloys <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:45&minus;11:15</td>
-							<td style="text-align: left">C.&nbsp;Sakr</td>
-							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
+							<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
+							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
-                            <td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
-							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
+							<td style="text-align: left">C.&nbsp;Sakr</td>
+							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
