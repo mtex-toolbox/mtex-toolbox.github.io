@@ -618,7 +618,7 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">15:45&minus;16:00</td>
 							<td style="text-align: left">A.&nbsp;Dittes</td>
-							<td style="text-align: left"></td>
+							<td style="text-align: left">Quantitative model to predict the microstructure-related corrosion rate of cold-rolled SS316L: How to profit from EBSD</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:30</td>
