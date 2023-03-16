@@ -1,7 +1,8 @@
 ---
 title: search
-layout: none
+layout: compress
 search: exclude
+permalink: /search.json
 ---
 
 [
@@ -9,7 +10,7 @@ search: exclude
 		{% unless page.search == "exclude" %}
 			{
 				{% if page.title %}
-					{% assign title = page.title | strip | escape %}
+					{% assign title = page.title | strip | escape | remove: '\' %}
 				{% else %}
 					{% assign title = page.keywords | split: ',' | first %}
 				{% endif %}
@@ -23,7 +24,7 @@ search: exclude
 				"title"			: "{{ title }}",
 				"url"			: "{{ url }}",
 				"path"			: "{{ path }}",
-				"date"			: "{{ date }}",
+				"date"			: "{{ date | default: ' ' }}",
 				"keywords"		: "{{ keywords }}",
 				"summary"		: "{{ summary }}"
 			}
@@ -34,7 +35,7 @@ search: exclude
 	{% for post in site.posts %}
 		{% unless post.published == false %}
 			{
-				{% assign title = post.title | strip | escape %}
+				{% assign title = post.title | strip | escape | remove: '\' %}
 				{% assign url = post.url | remove: '/' %}
 				{% assign path = post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' %}
 				{% assign date = post.date | date_to_xmlschema | date: '%b %d, %Y' %}
