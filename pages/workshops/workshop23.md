@@ -312,7 +312,7 @@ The second week will consist of lectures by invited experts that explain in deta
 ## Time Schedule
 
 {% capture table_monday %}
-{::options parse_block_html="true" /}
+<div markdown="1">
 | Time | Speaker | Title |
 |---|---|---|
 | 9:00&minus;10:00 | K.&nbsp;Frydrych | Plasticity Simulation with MTEX {% include reference.html link="https://tuc.cloud/index.php/s/skAbC4yZZPFFsAZ" content="slides" class="course_material" %} |
@@ -329,7 +329,7 @@ The second week will consist of lectures by invited experts that explain in deta
 | 15:45&minus;16:15 | B.&nbsp;Begley | An MTEX-based API for VPSC <i>-online-</i> |
 | 16:15&minus;16:30 | C.&nbsp;Chiu | Crystal plasticity simulations and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/qeTyr2bMLAabFSd" content="slides" class="course_material" %} |
 | 16:30&minus;16:45 | S.&nbsp;Prüger | Modeling of austenitic oligo-crystals using Abaqus and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" %} |
-{::options parse_block_html="false" /}
+</div>
 {% endcapture %}
 
 {% capture table_tuesday %}
