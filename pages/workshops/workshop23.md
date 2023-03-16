@@ -473,7 +473,9 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">K.&nbsp;Frydrych</td>
-							<td style="text-align: left">Plasticity Simulation with MTEX</td>
+							<td style="text-align: left">Plasticity Simulation with MTEX   
+							{% include reference.html link="https://tuc.cloud/index.php/s/skAbC4yZZPFFsAZ" content="slides" class="course_material" %}
+						</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Coffee</i></td>
