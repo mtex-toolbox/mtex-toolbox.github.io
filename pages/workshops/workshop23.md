@@ -327,7 +327,7 @@ The second week will consist of lectures by invited experts that explain in deta
 | 15:15&minus;15:45 | G.&nbsp;Zeng | Explore the Solidification Orientation Relationships Using EBSD and MTEX <i>-online-</i> |
 | 15:45&minus;16:15 | B.&nbsp;Begley | An MTEX-based API for VPSC <i>-online-</i> |
 | 16:15&minus;16:30 | C.&nbsp;Chiu | Crystal plasticity simulations and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/qeTyr2bMLAabFSd" content="slides" class="course_material" %} |
-| 16:30&minus;16:45 | S.&nbsp;Prüger | Modeling of austenitic oligo-crystals using Abaqus and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" % |
+| 16:30&minus;16:45 | S.&nbsp;Prüger | Modeling of austenitic oligo-crystals using Abaqus and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" %} |
 {% endcapture %}
 
 <div class="panel-group" id="accordion">
