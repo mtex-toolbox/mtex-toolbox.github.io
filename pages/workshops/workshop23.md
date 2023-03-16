@@ -40,27 +40,20 @@ During the first week we provide on a daily basis two morning lectures covering 
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/R92pfMnkZqHDWTF" content="slides" class="course_material" %}
-<!--<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}-->
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
 
 **Lecture 1 - Crystal Geometry:**
-<!--{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}-->
 <span class="course_material"></span>{% include reference.html link="https://tuc.cloud/index.php/s/kYHmCcWrk3AdaXr" content="slides1" class="course_material" %}
 <span class="course_material">, </span>{% include reference.html link="https://tuc.cloud/index.php/s/c2xYrxHWeFAr8Dk" content="slides2" class="course_material" %}
-<!--<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/1_basics.pdf" class="course_material" content="slides" %}-->
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
-<!--Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates-->
 <br>
 <br>
 **Exercise 1:**
 {% include reference.html link="https://tuc.cloud/index.php/s/xBLtpfHig42SdQZ" content="exercises" class="course_material" download=true %}
-<!--{% include reference.html link="https://ificloud.xsitepool.tu-freiberg.de/index.php/s/GfH27MesxNek5sA" content="slides" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://videocampus.sachsen.de/m/0a9313e8625de72815e1d0bb4b28e33fb24b0e2643fa22c5340b3004bd1ce4c809cbf0aa0ccf64bc3c76138bdaad195fdd612ce0864d9e50aca50b82d788d031" content="video 1" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://videocampus.sachsen.de/m/ea4c0b7d65042571665ea24fce9b2ad8ea6aa7701abe2a772191e2ccef8e26b65e2659ca4163301a71ba93217e14c0c6df33db04dfe8c0b6b7dfc3040b3b9177" content="video 2" class="course_material" %}-->
 <br>
 <br>
 
@@ -77,9 +70,6 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 **Exercise 2:**
 {% include reference.html link="https://tuc.cloud/index.php/s/JDwafPe8GfbMbGp" content="exercises" class="course_material" download=true %}
-<!--
-{% include reference.html link="https://us02web.zoom.us/j/86507105922?pwd=NndqNkJuVkpYQVVqRzU0QmhDblRyQT09" content="zoom session 13:00-14:00" class="course_material" %}
-<span class="course_material">, </span>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/download/mtexWorkshop2021/course/exercise_1.m" content="exercises" class="course_material" download=true %}-->
 				</div>
 			</div>
 		</div>
@@ -98,7 +88,7 @@ pole figures, inverse pole figures, fundamental sectors
 {% include reference.html
 link="https://tuc.cloud/index.php/s/P984MMHtqZ3wcba" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/e_eGJac6nxo" content="video" %}
+{% include reference.html link="https://youtu.be/e_eGJac6nxo" content="video" class="course_material" %}
 <br>
 data import, reference frame alignment, color keys, data cleaning
 <br>
@@ -118,7 +108,7 @@ link="https://tuc.cloud/index.php/s/K2RrmDFKdW2qgW3" content="data 1" class="cou
 {% include reference.html
 link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/SGTkoaxcIYU" content="video" %}
+{% include reference.html link="https://youtu.be/SGTkoaxcIYU" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
@@ -128,7 +118,7 @@ link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="cou
 {% include reference.html
 link="https://tuc.cloud/index.php/s/XMrkJ9LEeMaLPwJ" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/xkic28kejUA" content="video" %}
+{% include reference.html link="https://youtu.be/xkic28kejUA" content="video" class="course_material" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -142,7 +132,7 @@ class="course_material" %}
 link="https://tuc.cloud/index.php/s/nykfPH5fXWRK4yo"
 content="solution" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/53MRS5VOoio" content="video" %}
+{% include reference.html link="https://youtu.be/53MRS5VOoio" content="video" class="course_material" %}
 				</div>
 			</div>
 		</div>
@@ -163,13 +153,13 @@ content="solution" class="course_material" %}
 link="https://tuc.cloud/index.php/s/CbNm6Zn5Xx54wQd"
 content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/wLHlZ_F-w5w" content="video" %}
+{% include reference.html link="https://youtu.be/wLHlZ_F-w5w" content="video" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/aY8DJbfiyP85HJJ"
 content="slides 2" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" %}
+{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" class="course_material" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle, KAM, GOS, twin boundaries, tilt vs. twist
 boundaries, phase transition, orientation
@@ -201,7 +191,7 @@ content="script 2 solution" class="course_material" %}
 link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2"
 content="data 2" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" %}
+{% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
@@ -227,7 +217,7 @@ content="data 2" class="course_material" %}
 link="https://tuc.cloud/index.php/s/dWLYAMt52rNro2G"
 content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/B6ka2ADCYws" content="video" %}
+{% include reference.html link="https://youtu.be/B6ka2ADCYws" content="video" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html
 link="https://tuc.cloud/index.php/s/KNYs2NoQpD5trgL"
@@ -279,7 +269,7 @@ content="Live Script" class="course_material" %}
 link="https://tuc.cloud/index.php/s/3dAYckfbyzd3R98"
 content="EBSD data" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/geUvdAOHvMM" content="video" %}
+{% include reference.html link="https://youtu.be/geUvdAOHvMM" content="video" class="course_material" %}
 
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
@@ -287,7 +277,7 @@ tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Lecture 8 - From Single Grain to Bulk Tensors:**
-{% include reference.html link="https://youtu.be/FwDDIHoLfK8" content="video" %} 
+{% include reference.html link="https://youtu.be/FwDDIHoLfK8" content="video" class="course_material" %} 
 <br>
 	average tensors (Voigt, Reuss, Hill) from EBSD and ODF
  
@@ -319,7 +309,7 @@ content="script file" class="course_material" %}
 link="https://tuc.cloud/index.php/s/aJSPqwLK5nLqZLx"
 content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" %}
+{% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" class="course_material" %}
 <br>
 deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
 dislocation density estimation
@@ -335,7 +325,7 @@ Student presentation
 <br>
 **Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal
 Data Sets:**
-{% include reference.html link="https://youtu.be/rRhTMYO_Fyg" content="video" %} 
+{% include reference.html link="https://youtu.be/rRhTMYO_Fyg" content="video" class="course_material" %} 
 				</div>
 			</div>
 		</div>
