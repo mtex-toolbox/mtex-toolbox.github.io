@@ -605,7 +605,7 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">11:15&minus;11:45</td>
 							<td style="text-align: left">V.&nbsp;Ocelik</td>							
 							<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films
-							{% include reference.html linkhttps://tuc.cloud/index.php/s/K4HcyD5mfbtNjjB="" content="slides" class="course_material" %}
+							{% include reference.html link="https://tuc.cloud/index.php/s/fHyYYxAYHHesyk9" content="slides" class="course_material" %}
 						</td>							
 						</tr>
 						<tr>
@@ -622,7 +622,9 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
  							<td style="text-align: left">T.&nbsp;Qu</td>
-							<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX</td>
+							<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX
+							{% include reference.html link="https://tuc.cloud/index.php/s/8xq5TS3nE7iENLS" content="slides" class="course_material" %}
+							</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Coffee</i></td>
@@ -682,7 +684,9 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">9:00&minus;10:00</td>
 							<td style="text-align: left">V.&nbsp;Tong</td>
-							<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques</td>
+							<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques
+							{% include reference.html link="https://tuc.cloud/index.php/s/9qTkPxyrG8NSoSG" content="slides" class="course_material" %}
+							</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Coffee</i></td>
@@ -692,19 +696,24 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">B.&nbsp;Schulz</td>
-							<td style="text-align: left">Advancing analytical
-    electron microscopy methodologies to characterise microstructural features
-    in superalloys <i>-online-</i></td>
+							<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features
+							   in superalloys <i>-online-</i>
+							   {% include reference.html link="https://tuc.cloud/index.php/s/GrMQrkCWAbZFeEE" content="slides" class="course_material" %}
+						   </td>
 						</tr>
 						<tr>
 							<td style="text-align: right">10:45&minus;11:15</td>
 							<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
-							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i></td>
+							<td style="text-align: left">3D-XRD and MTEX <i>-online-</i>
+							{% include reference.html link="" content="slides" class="course_material" %}
+							</td>
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:45</td>
 							<td style="text-align: left">C.&nbsp;Sakr</td>
-							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel</td>
+							<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel
+							{% include reference.html link="https://tuc.cloud/index.php/s/CkNSXDF4tmc6fKr" content="slides" class="course_material" %}
+							</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -714,7 +723,8 @@ The second week will consist of lectures by invited experts that explain in deta
 						<tr>
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">M.&nbsp;Petersmann</td>
-							<td style="text-align: left">Use cases of MTEX for semiconductor metalizations</td>
+							<td style="text-align: left">Use cases of MTEX for semiconductor metalizations					
+							</td>
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Coffee</i></td>
