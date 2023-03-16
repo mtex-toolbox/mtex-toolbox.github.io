@@ -486,21 +486,25 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">10:15&minus;10:45</td>
 							<td style="text-align: left">T.&nbsp;Vermeij</td>
 							<td style="text-align: left">Automated identification of slip system activity fields from digital image correlation data</td>
+							{% include reference.html link="https://tuc.cloud/index.php/s/pbNzeKMWm4Jjnnz" content="slides" class="course_material" %}
 						</tr>
 						<tr>
 							<td style="text-align: right">10:45&minus;11:15</td>
                             <td style="text-align: left">F.&nbsp;Niessen</td>
 							<td style="text-align: left">Habit plane determination from reconstructed parent phase orientation maps</td>
+							{% include reference.html link="https://tuc.cloud/index.php/s/tPHG5b3BBFjbgFT" content="slides" class="course_material" %}
 						</tr>
 						<tr>
 							<td style="text-align: right">11:15&minus;11:30</td>
 							<td style="text-align: left">L.&nbsp;Richter</td>
 							<td style="text-align: left">Characterization of habit planes in multiphase materials</td>
+							{% include reference.html link="https://tuc.cloud/index.php/s/CjwokC7xZYMxK9f" content="slides" class="course_material" %}
 						</tr>
 						<tr>
 							<td style="text-align: right">11:30&minus;12:00</td>
 							<td style="text-align: left">T.&nbsp;Kohne</td>
 							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
+							<!--{% include reference.html link="" content="slides" class="course_material" %}-->
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Lunch</i></td>
@@ -511,11 +515,13 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">13:30&minus;14:30</td>
 							<td style="text-align: left">A.&nbsp;Plowman</td>
 							<td style="text-align: left">Using MTEX with MatFlow for crystal plasticity and phase field modeling</td>
+							{% include reference.html link="https://tuc.cloud/index.php/s/xyGYs7yR5EEX3m8" content="slides" class="course_material" %}
 						</tr>
 						<tr>
 							<td style="text-align: right">14:30&minus;15:00</td>
                             <td style="text-align: left">E.&nbsp;Wünsche</td>
-							<td style="text-align: left">Orientation Dependent Functions</td>							
+							<td style="text-align: left">Orientation Dependent Functions</td>
+							<!--{% include reference.html link="" content="slides" class="course_material" %}-->
 						</tr>
 						<tr>
 							<td style="text-align: left"><i>Coffee</i></td>
@@ -526,21 +532,25 @@ The second week will consist of lectures by invited experts that explain in deta
 							<td style="text-align: right">15:15&minus;15:45</td>
 							<td style="text-align: left">G.&nbsp;Zeng</td>
 							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX <i>-online-</i></td>
+							<!--{% include reference.html link="" content="slides" class="course_material" %}-->
 						</tr>						
 						<tr>
 							<td style="text-align: right">15:45&minus;16:15</td>
  							<td style="text-align: left">B.&nbsp;Begley</td>
 							<td style="text-align: left">An MTEX-based API for VPSC <i>-online-</i></td>
+							<!--{% include reference.html link="" content="slides" class="course_material" %}-->
 						</tr>
 						<tr>
 							<td style="text-align: right">16:15&minus;16:30</td>
  							<td style="text-align: left">C.&nbsp;Chiu</td>
 							<td style="text-align: left">Crystal plasticity simulations and MTEX</td>
+							{% include reference.html link="https://tuc.cloud/index.php/s/qeTyr2bMLAabFSd" content="slides" class="course_material" %}
 						</tr>
 						<tr>
 							<td style="text-align: right">16:30&minus;16:45</td>
  							<td style="text-align: left">S.&nbsp;Prüger</td>
 							<td style="text-align: left">Modeling of austenitic oligo-crystals using Abaqus and MTEX</td>
+							{% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" %}
 						</tr>
 					</tbody>
 				</table>
