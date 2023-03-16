@@ -311,6 +311,25 @@ The second week will consist of lectures by invited experts that explain in deta
 
 ## Time Schedule
 
+{% capture table_monday %}
+| Time | Speaker | Title |
+|---|---|---|
+| 9:00&minus;10:00 | K.&nbsp;Frydrych | Plasticity Simulation with MTEX {% include reference.html link="https://tuc.cloud/index.php/s/skAbC4yZZPFFsAZ" content="slides" class="course_material" %} |
+| Coffee |  |  |
+| 10:15&minus;10:45 | T.&nbsp;Vermeij | Automated identification of slip system activity fields from digital image correlation data {% include reference.html link="https://tuc.cloud/index.php/s/pbNzeKMWm4Jjnnz" content="slides" class="course_material" %} |
+| 10:45&minus;11:15 | F.&nbsp;Niessen | Habit plane determination from reconstructed parent phase orientation maps {% include reference.html link="https://tuc.cloud/index.php/s/tPHG5b3BBFjbgFT" content="slides" class="course_material" %} |
+| 11:15&minus;11:30 | L.&nbsp;Richter | Characterization of habit planes in multiphase materials {% include reference.html link="https://tuc.cloud/index.php/s/CjwokC7xZYMxK9f" content="slides" class="course_material" %} |
+| 11:30&minus;12:00 | T.&nbsp;Kohne | Local tetragonality determination of martensite in high carbon steels |
+| Lunch |  |  |
+| 13:30&minus;14:30 | A.&nbsp;Plowman | Using MTEX with MatFlow for crystal plasticity and phase field modeling {% include reference.html link="https://tuc.cloud/index.php/s/xyGYs7yR5EEX3m8" content="slides" class="course_material" %} |
+| 14:30&minus;15:00 | E.&nbsp;Wünsche | Orientation Dependent Functions |
+| Coffee |  |  |
+| 15:15&minus;15:45 | G.&nbsp;Zeng | Explore the Solidification Orientation Relationships Using EBSD and MTEX <i>-online-</i> |
+| 15:45&minus;16:15 | B.&nbsp;Begley | An MTEX-based API for VPSC <i>-online-</i> |
+| 16:15&minus;16:30 | C.&nbsp;Chiu | Crystal plasticity simulations and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/qeTyr2bMLAabFSd" content="slides" class="course_material" %} |
+| 16:30&minus;16:45 | S.&nbsp;Prüger | Modeling of austenitic oligo-crystals using Abaqus and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" % |
+{% endcapture %}
+
 <div class="panel-group" id="accordion">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -320,87 +339,7 @@ The second week will consist of lectures by invited experts that explain in deta
 		</div>
 		<div id="collapseMo" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
-				<table>
-					<thead>
-						<tr>
-							<th style="text-align: left">Time</th>
-							<th style="text-align: left">Speaker</th>
-							<th style="text-align: left">Title</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="text-align: right">9:00&minus;10:00</td>
-							<td style="text-align: left">K.&nbsp;Frydrych</td>
-							<td style="text-align: left">Plasticity Simulation with MTEX {% include reference.html link="https://tuc.cloud/index.php/s/skAbC4yZZPFFsAZ" content="slides" class="course_material" %}</td>
-						</tr>
-						<tr>
-							<td style="text-align: left"><i>Coffee</i></td>
-							<td style="text-align: left"></td>
-							<td style="text-align: left"></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">10:15&minus;10:45</td>
-							<td style="text-align: left">T.&nbsp;Vermeij</td>
-							<td style="text-align: left">Automated identification of slip system activity fields from digital image correlation data {% include reference.html link="https://tuc.cloud/index.php/s/pbNzeKMWm4Jjnnz" content="slides" class="course_material" %} </td>
-						</tr>
-						<tr>
-							<td style="text-align: right">10:45&minus;11:15</td>
-							<td style="text-align: left">F.&nbsp;Niessen</td>
-							<td style="text-align: left">Habit plane determination from reconstructed parent phase orientation maps {% include reference.html link="https://tuc.cloud/index.php/s/tPHG5b3BBFjbgFT" content="slides" class="course_material" %}</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">11:15&minus;11:30</td>
-							<td style="text-align: left">L.&nbsp;Richter</td>
-							<td style="text-align: left">Characterization of habit planes in multiphase materials {% include reference.html link="https://tuc.cloud/index.php/s/CjwokC7xZYMxK9f" content="slides" class="course_material" %}</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">11:30&minus;12:00</td>
-							<td style="text-align: left">T.&nbsp;Kohne</td>
-							<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels</td>
-						</tr>
-						<tr>
-							<td style="text-align: left"><i>Lunch</i></td>
-							<td style="text-align: left"></td>
-							<td style="text-align: left"></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">13:30&minus;14:30</td>
-							<td style="text-align: left">A.&nbsp;Plowman</td>
-							<td style="text-align: left">Using MTEX with MatFlow for crystal plasticity and phase field modeling {% include reference.html link="https://tuc.cloud/index.php/s/xyGYs7yR5EEX3m8" content="slides" class="course_material" %}</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">14:30&minus;15:00</td>
-							<td style="text-align: left">E.&nbsp;Wünsche</td>
-							<td style="text-align: left">Orientation Dependent Functions</td>
-						</tr>
-						<tr>
-							<td style="text-align: left"><i>Coffee</i></td>
-							<td style="text-align: left"></td>
-							<td style="text-align: left"></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">15:15&minus;15:45</td>
-							<td style="text-align: left">G.&nbsp;Zeng</td>
-							<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX <i>-online-</i></td>
-						</tr>						
-						<tr>
-							<td style="text-align: right">15:45&minus;16:15</td>
- 							<td style="text-align: left">B.&nbsp;Begley</td>
-							<td style="text-align: left">An MTEX-based API for VPSC <i>-online-</i></td>
-						</tr>
-						<tr>
-							<td style="text-align: right">16:15&minus;16:30</td>
- 							<td style="text-align: left">C.&nbsp;Chiu</td>
-							<td style="text-align: left">Crystal plasticity simulations and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/qeTyr2bMLAabFSd" content="slides" class="course_material" %}</td>
-						</tr>
-						<tr>
-							<td style="text-align: right">16:30&minus;16:45</td>
- 							<td style="text-align: left">S.&nbsp;Prüger</td>
-							<td style="text-align: left">Modeling of austenitic oligo-crystals using Abaqus and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" %}</td>
-						</tr>
-					</tbody>
-				</table>
+				{{ table_monday }}
 			</div>
 		</div>
 	</div>
