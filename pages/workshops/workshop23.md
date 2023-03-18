@@ -460,6 +460,8 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: right">11:15&minus;11:45</td>
 			<td style="text-align: left">V.&nbsp;Ocelik</td>							
 			<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films {% include reference.html link="https://tuc.cloud/index.php/s/fHyYYxAYHHesyk9" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/GT8RGRh9olE" content="video" class="course_material" %}
 		</td>							
 		</tr>
 		<tr>
@@ -470,12 +472,18 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">Lopez&minus;Sanchez</td>
-			<td style="text-align: left">Seismic modelling using EBSD data: why, how, limitations and good practices</td>
+			<td style="text-align: left">Seismic modelling using EBSD data: why, how, limitations and good practices
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/40b3dkX3t4U" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">T.&nbsp;Qu</td>
-			<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX {% include reference.html link="https://tuc.cloud/index.php/s/8xq5TS3nE7iENLS" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX {% include reference.html link="https://tuc.cloud/index.php/s/8xq5TS3nE7iENLS" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/T9u6FFuycYU" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -485,22 +493,34 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">15:15&minus;15:30</td>
 			<td style="text-align: left">S. Gupta</td>
-			<td style="text-align: left">Characterization of Precambrian felsic magmatism of Kumaun Lesser Himalaya: constraints from zircon morphological and U-Pb-Lu-Hf isotopic studies <i>-online-</i></td>
+			<td style="text-align: left">Characterization of Precambrian felsic magmatism of Kumaun Lesser Himalaya: constraints from zircon morphological and U-Pb-Lu-Hf isotopic studies
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/OwkoHa9nK8E" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:45&minus;16:00</td>
 			<td style="text-align: left">A.&nbsp;Dittes</td>
-			<td style="text-align: left">Quantitative model to predict the microstructure-related corrosion rate of cold-rolled SS316L: How to profit from EBSD {% include reference.html link="https://tuc.cloud/index.php/s/tGm8wPZCfgArMZN" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Quantitative model to predict the microstructure-related corrosion rate of cold-rolled SS316L: How to profit from EBSD {% include reference.html link="https://tuc.cloud/index.php/s/tGm8wPZCfgArMZN" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/DI0k0q77mDI" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:15&minus;16:30</td>
 			<td style="text-align: left">J.&nbsp;Kozlík</td>
-			<td style="text-align: left">Dictionary indexing of stress induced martensite in Ti-Nb-Zr-O alloy {% include reference.html link="https://tuc.cloud/index.php/s/cPLgwJYmwF85erj" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Dictionary indexing of stress induced martensite in Ti-Nb-Zr-O alloy {% include reference.html link="https://tuc.cloud/index.php/s/cPLgwJYmwF85erj" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/rtHoOsQw5wI" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:30&minus;16:45</td>
 			<td style="text-align: left">E.&nbsp;Knipschildt</td>
-			<td style="text-align: left">Particle stimulated nucleation in three dimensions {% include reference.html link="https://tuc.cloud/index.php/s/QkwmqDzicx7bQTr" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Particle stimulated nucleation in three dimensions {% include reference.html link="https://tuc.cloud/index.php/s/QkwmqDzicx7bQTr" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="" content="video" class="course_material" %}
+			</td>
 		</tr>
 	</tbody>
 </table>
@@ -519,7 +539,10 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques {% include reference.html link="https://tuc.cloud/index.php/s/9qTkPxyrG8NSoSG" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques {% include reference.html link="https://tuc.cloud/index.php/s/9qTkPxyrG8NSoSG" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -529,17 +552,26 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">10:15&minus;10:45</td>
 			<td style="text-align: left">B.&nbsp;Schulz</td>
-			<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys <i>-online-</i> {% include reference.html link="https://tuc.cloud/index.php/s/GrMQrkCWAbZFeEE" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys <i>-online-</i> {% include reference.html link="https://tuc.cloud/index.php/s/GrMQrkCWAbZFeEE" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">10:45&minus;11:15</td>
 			<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
-			<td style="text-align: left">3D-XRD and MTEX <i>-online-</i> {% include reference.html link="" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">3D-XRD and MTEX <i>-online-</i> {% include reference.html link="" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:15&minus;11:45</td>
 			<td style="text-align: left">C.&nbsp;Sakr</td>
-			<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel {% include reference.html link="https://tuc.cloud/index.php/s/CkNSXDF4tmc6fKr" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel {% include reference.html link="https://tuc.cloud/index.php/s/CkNSXDF4tmc6fKr" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -559,7 +591,10 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">14:45&minus;15:15</td>
 			<td style="text-align: left">M.&nbsp;Kühlbach</td>
-			<td style="text-align: left">Fairmat</td>
+			<td style="text-align: left">Fairmat
+			<span class="course_material">, </span>
+            {% include reference.html link="" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:15&minus;16:15</td>
