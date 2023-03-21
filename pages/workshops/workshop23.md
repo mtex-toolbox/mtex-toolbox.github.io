@@ -254,12 +254,14 @@ tensors, piezoelectricity, elasticity, wave velocities
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Exercise 7:**
+**Exercise 7 - Wave Velocities:**
 {% include reference.html link="https://tuc.cloud/index.php/s/LWnxz67Ckwcmd9F" content="script file" class="course_material" %}
 <br>
 <br>
 **Lecture 9 - Plastic Deformation:**
 {% include reference.html link="https://tuc.cloud/index.php/s/aJSPqwLK5nLqZLx" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/md2cysgzyTDsoqQ" content="live script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" class="course_material" %}
 <br>
