@@ -472,7 +472,9 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">Lopez&minus;Sanchez</td>
-			<td style="text-align: left">Seismic modelling using EBSD data: why, how, limitations and good practices
+			<td style="text-align: left">Seismic modelling using EBSD data:
+			why, how, limitations and good practices
+			{% include reference.html link="https://tuc.cloud/index.php/s/ppKMydxobEPeMKo" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
             {% include reference.html link="https://youtu.be/40b3dkX3t4U" content="video" class="course_material" %}
 			</td>
@@ -519,7 +521,7 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: left">E.&nbsp;Knipschildt</td>
 			<td style="text-align: left">Particle stimulated nucleation in three dimensions {% include reference.html link="https://tuc.cloud/index.php/s/QkwmqDzicx7bQTr" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
-            {% include reference.html link="" content="video" class="course_material" %}
+            {% include reference.html link="https://youtu.be/SzlYqNc3dBQ" content="video" class="course_material" %}
 			</td>
 		</tr>
 	</tbody>
@@ -541,7 +543,7 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: left">V.&nbsp;Tong</td>
 			<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques {% include reference.html link="https://tuc.cloud/index.php/s/9qTkPxyrG8NSoSG" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
-            {% include reference.html link="" content="video" class="course_material" %}
+            {% include reference.html link="https://youtu.be/BTGB0aHk5uc" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -552,17 +554,17 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">10:15&minus;10:45</td>
 			<td style="text-align: left">B.&nbsp;Schulz</td>
-			<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys <i>-online-</i> {% include reference.html link="https://tuc.cloud/index.php/s/GrMQrkCWAbZFeEE" content="slides" class="course_material" %}
+			<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys {% include reference.html link="https://tuc.cloud/index.php/s/GrMQrkCWAbZFeEE" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
-            {% include reference.html link="" content="video" class="course_material" %}
+            {% include reference.html link="https://youtu.be/8mAeCcO01C8" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">10:45&minus;11:15</td>
 			<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
-			<td style="text-align: left">3D-XRD and MTEX <i>-online-</i> {% include reference.html link="" content="slides" class="course_material" %}
+			<td style="text-align: left">3D-XRD and MTEX {% include reference.html link="" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
-            {% include reference.html link="" content="video" class="course_material" %}
+            {% include reference.html link="https://youtu.be/YZec2zlvXZw" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -570,7 +572,7 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: left">C.&nbsp;Sakr</td>
 			<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel {% include reference.html link="https://tuc.cloud/index.php/s/CkNSXDF4tmc6fKr" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
-            {% include reference.html link="" content="video" class="course_material" %}
+            {% include reference.html link="https://youtu.be/tfSOeAJR_y4" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -581,7 +583,11 @@ The second week will consist of lectures by invited experts that explain in deta
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">M.&nbsp;Petersmann</td>
-			<td style="text-align: left">Use cases of MTEX for semiconductor metalizations</td>
+			<td style="text-align: left">Use cases of MTEX for semiconductor metalizations
+			{% include reference.html link="https://tuc.cloud/index.php/s/oNseZEq9kK3fQZp" content="slides" class="course_material" %}
+			<span class="course_material">, </span>
+            {% include reference.html link="https://youtu.be/Z6GtC2upv-U" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -592,8 +598,10 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: right">14:45&minus;15:15</td>
 			<td style="text-align: left">M.&nbsp;Kühlbach</td>
 			<td style="text-align: left">Fairmat
+			{% include reference.html link="" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
-            {% include reference.html link="" content="video" class="course_material" %}
+            {% include reference.html link="https://youtu.be/U2d82amrbFk" content="video"
+			class="course_material" %}			
 			</td>
 		</tr>
 		<tr>
@@ -649,6 +657,7 @@ The second week will consist of lectures by invited experts that explain in deta
 	</div>
 </div>
 
+<!--
 ## Venue:
 
 <div class="panel-group" id="accordion">
@@ -690,11 +699,12 @@ The second week will consist of lectures by invited experts that explain in deta
 		</div>
 	</div>
 </div>
+-->
 
-
+<!--
 ## Registration:
 
-<!-- - Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to -->
+- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to
 - please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
  content="mtexworkshop@gmail.com" %} where you include name, address, whether
  you are student or not, which week you wish to attend and wether you want to
@@ -706,7 +716,7 @@ The second week will consist of lectures by invited experts that explain in deta
 - second week: (PhD) students - 100 Euro, other - 200 Euro
 - {% include reference.html link="click here for making the payment" content="https://webshop-tu-freiberg.de/iana_shop_en/registration-mtex-workshop-2023-presence.html"%}
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
-
+-->
 
 
 ## Organizers:
