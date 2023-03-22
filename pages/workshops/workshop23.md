@@ -39,22 +39,22 @@ During the first week we provide on a daily basis two morning lectures covering 
 **Lecture 0 - General Concepts:**
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/R92pfMnkZqHDWTF" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/zRDL6j8s3Sgs97H" content="slides" class="course_material" %}
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
 
 **Lecture 1 - Crystal Geometry:**
-{% include reference.html link="https://tuc.cloud/index.php/s/kYHmCcWrk3AdaXr" content="slides1" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/EHcAgw8ezxkFENK" content="slides1" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/c2xYrxHWeFAr8Dk" content="slides2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/bN2DanJ8jBEoLAF" content="slides2" class="course_material" %}
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal axes, crystal shapes
 <br>
 <br>
 **Exercise 1:**
-{% include reference.html link="https://tuc.cloud/index.php/s/xBLtpfHig42SdQZ" content="exercises" class="course_material" download=true %}
+{% include reference.html link="https://tuc.cloud/index.php/s/rwcaPK7ZCSsSL49" content="exercises" class="course_material" download=true %}
 <br>
 <br>
 
@@ -62,14 +62,14 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 <br>
 **Lecture 2 - Crystal Symmetries and Orientations:**
-{% include reference.html link="https://tuc.cloud/index.php/s/c2xYrxHWeFAr8Dk" content="slides" class="course_material" %}
+{% include reference.html link="" content="slides" class="course_material" %}
 <br>
 point groups, Laue groups, symmetrically equivalent orientations, 
 pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
 **Exercise 2:**
-{% include reference.html link="https://tuc.cloud/index.php/s/JDwafPe8GfbMbGp" content="exercises" class="course_material" download=true %}
+{% include reference.html link="https://tuc.cloud/index.php/s/WQrfoYd79bSxr9o" content="exercises" class="course_material" download=true %}
 				</div>
 			</div>
 		</div>
@@ -85,7 +85,7 @@ pole figures, inverse pole figures, fundamental sectors
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 3 - EBSD:**
-{% include reference.html link="https://tuc.cloud/index.php/s/P984MMHtqZ3wcba" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/PjGCKSrTHDRBgxJ" content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/e_eGJac6nxo" content="video" class="course_material" %}
 <br>
@@ -93,13 +93,13 @@ data import, reference frame alignment, color keys, data cleaning
 <br>
 <br>
 **Exercise 3:**
-{% include reference.html link="https://tuc.cloud/index.php/s/7inzCxnJej4zg6g" content="script" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/jrr8bDxz8qL8BEw" content="script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/xsGDcae2SZXpXQo" content="solution" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/7BX7iXzB3t7QBYy" content="solution" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/K2RrmDFKdW2qgW3" content="data 1" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/aqEz3k3E9afRsyw" content="data 1" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/zRFrL42nwjkeoGe" content="data 2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/68wNTygo9ndg35W" content="data 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/SGTkoaxcIYU" content="video" class="course_material" %}
 <br>
@@ -108,7 +108,7 @@ data import, reference frame alignment, color keys, data cleaning
 <br>
 <br>
 **Lecture 4 - Grains:**
-{% include reference.html link="https://tuc.cloud/index.php/s/XMrkJ9LEeMaLPwJ" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/K8AS3s5YT9Lezj9" content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/xkic28kejUA" content="video" class="course_material" %}
 <br>
@@ -116,9 +116,11 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 <br>
 **Exercise 4:**
-{% include reference.html link="https://tuc.cloud/index.php/s/j7JGitAWK5yRfk9" content="script" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/zJaArTsmj8e5Ytr" content="script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/nykfPH5fXWRK4yo" content="solution" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/8g2YY92WgDxNfED" content="script" class="data" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/mp9LQ5jZBRTRZsM" content="solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/53MRS5VOoio" content="video" class="course_material" %}
 				</div>
@@ -137,11 +139,11 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 				<div markdown="span">
 **Lecture 5 - Misorientations and Grain Boundaries:**
 
-{% include reference.html link="https://tuc.cloud/index.php/s/CbNm6Zn5Xx54wQd" content="slides 1" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/TX3wYqGFkeNxRNb" content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/wLHlZ_F-w5w" content="video" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/aY8DJbfiyP85HJJ" content="slides 2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/8fMHPBTeoNwW5tq" content="slides 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" class="course_material" %}
 <br>
@@ -151,15 +153,15 @@ gradients,  statistics of boundary networks, habit planes
 <br>
 <br>
 **Exercise 5:**
-{% include reference.html link="https://tuc.cloud/index.php/s/zxKjQtKxM9GLRSR" content="script 1" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/K4rdM4ny7JXcQ9N" content="script 1" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/WsfxZdWA7qFZ3Ce" content="script 1 solution" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/TM84AErZaNfj6Eb" content="script 1 solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/nJkwEP82gsPteRY" content="data 1" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/2XZozdxBcrrNWCN" content="script 2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/HsgdgELHmyrZc9K" content="script 2" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/3Xm6PPQcoMBefAn" content="script 2 solution" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/ndoSJLjaXqWQDCk" content="script 2 solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2" content="data 2" class="course_material" %}
 <span class="course_material">, </span>
@@ -185,11 +187,11 @@ gradients,  statistics of boundary networks, habit planes
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 6 - Density Functions:**
-{% include reference.html link="https://tuc.cloud/index.php/s/dWLYAMt52rNro2G" content="slides 1" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/oLagcQzotdNkywH" content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/B6ka2ADCYws" content="video" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/KNYs2NoQpD5trgL" content="slides 2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/zoxRZrN7mBdeKJe" content="slides 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/n4CcrdCyT88" content="video"
 %}
@@ -205,7 +207,7 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 6:**
-{% include reference.html link="https://tuc.cloud/index.php/s/2CSLi5Qr6pH3D4G" content="script" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/GiNKDaQBpbTybmt" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/NWJwW2nBE8GQqxL" content="user data 1" class="course_material" %}
 <span class="course_material">, </span>
@@ -219,11 +221,11 @@ random sampling, ODF reconstuction from XRD data
 <br>
 
 **Lecture 7 - Tensorial Properties:**
-{% include reference.html link="https://tuc.cloud/index.php/s/QBg5QkGbF7CKAxg" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/qYetg53m9zPrTSR" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/bGa6XWSPtgSw3Td" content="Live Script" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/LM86Dgcqsn4Axrq" content="Live Script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/3dAYckfbyzd3R98" content="EBSD data" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/HrPDZ9ZDjXyHgrF" content="EBSD data" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/geUvdAOHvMM" content="video" class="course_material" %}
 
@@ -401,6 +403,7 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: right">15:15&minus;15:45</td>
 			<td style="text-align: left">G.&nbsp;Zeng</td>
 			<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX
+			{% include reference.html link="https://tuc.cloud/index.php/s/oD8WkTYbBfaPkFi" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/uGv3YkHUUBc" content="video" class="course_material" %}
 			</td>
