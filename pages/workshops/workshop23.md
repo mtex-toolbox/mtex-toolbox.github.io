@@ -62,7 +62,7 @@ crystal lattice, direct and reciprocal coordinate system, Miller indices, zonal 
 <br>
 <br>
 **Lecture 2 - Crystal Symmetries and Orientations:**
-{% include reference.html link="" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/raLt5LwzAymdwZP" content="slides" class="course_material" %}
 <br>
 point groups, Laue groups, symmetrically equivalent orientations, 
 pole figures, inverse pole figures, fundamental sectors
