@@ -157,13 +157,13 @@ gradients,  statistics of boundary networks, habit planes
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/TM84AErZaNfj6Eb" content="script 1 solution" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/nJkwEP82gsPteRY" content="data 1" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/6FE5NofPRLNmrcr" content="data 1" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/HsgdgELHmyrZc9K" content="script 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/ndoSJLjaXqWQDCk" content="script 2 solution" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/n36sr54T3mmmsK2" content="data 2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/58fgTzs73qZkcqR" content="data 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" class="course_material" %}
 <br>
@@ -257,7 +257,7 @@ tensors, piezoelectricity, elasticity, wave velocities
 			<div class="panel-body">
 				<div markdown="span">
 **Exercise 7 - Wave Velocities:**
-{% include reference.html link="https://tuc.cloud/index.php/s/LWnxz67Ckwcmd9F" content="script file" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/2c5C82NF79tWyRa" content="script file" class="course_material" %}
 <br>
 <br>
 **Lecture 9 - Plastic Deformation:**
