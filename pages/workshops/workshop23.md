@@ -412,6 +412,7 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: right">15:45&minus;16:15</td>
 			<td style="text-align: left">B.&nbsp;Begley</td>
 			<td style="text-align: left">An MTEX-based API for VPSC
+			{% include reference.html link="https://tuc.cloud/index.php/s/kapLXFdDmTABGyF" content="slides" class="course_material" %}			
 			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/tujnbckvr-o" content="video" class="course_material" %}
 			</td>
