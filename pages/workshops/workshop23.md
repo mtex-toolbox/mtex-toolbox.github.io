@@ -85,7 +85,7 @@ pole figures, inverse pole figures, fundamental sectors
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 3 - EBSD:**
-{% include reference.html link="https://tuc.cloud/index.php/s/PjGCKSrTHDRBgxJ" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/2FLziytzdAEqgWa" content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/e_eGJac6nxo" content="video" class="course_material" %}
 <br>
@@ -143,7 +143,7 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/wLHlZ_F-w5w" content="video" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/8fMHPBTeoNwW5tq" content="slides 2" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/Y7dzAQH76XS4sYD" content="slides 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/7n4WjahvgkI" content="video" class="course_material" %}
 <br>
@@ -261,9 +261,9 @@ tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
 **Lecture 9 - Plastic Deformation:**
-{% include reference.html link="https://tuc.cloud/index.php/s/aJSPqwLK5nLqZLx" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/Gs3AFpLSDF2N6Y7" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/md2cysgzyTDsoqQ" content="live script" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/wEaenbaF3DsCaAH" content="live script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" class="course_material" %}
 <br>
@@ -604,7 +604,7 @@ The second week will consist of lectures by invited experts that explain in deta
 			<td style="text-align: right">14:45&minus;15:15</td>
 			<td style="text-align: left">M.&nbsp;Kühlbach</td>
 			<td style="text-align: left">Fairmat
-			{% include reference.html link="" content="slides" class="course_material" %}
+			{% include reference.html link="https://tuc.cloud/index.php/s/SZ4Dbcr8dQiEWYk" content="slides" class="course_material" %}
 			<span class="course_material">, </span>
             {% include reference.html link="https://youtu.be/U2d82amrbFk" content="video"
 			class="course_material" %}			
