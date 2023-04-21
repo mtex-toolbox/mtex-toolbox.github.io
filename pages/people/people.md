@@ -178,10 +178,10 @@ toc: false
                 </b>
 				worked on worked on the orientation relationship analysis and
 				parent grain reconstruction algorithms for arbitrary phase combinations. 
-				He is the co-developer of the {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools"}
-				and {% include reference.html link="https://github.com/frankNiessen/phaseSegmenter"
-				content="phaseSegmenter" %} toolboxes and author of the {% include reference.html
-				link="https://github.com/AzdiarGazder/mtexTools" content="mtexTools"%} toolbox.
+				He is the co-developer of the {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
+				and {% include reference.html link="https://github.com/frankNiessen/phaseSegmenter" content="phaseSegmenter" %} 
+				toolboxes and author of the {% include reference.html link="https://github.com/AzdiarGazder/mtexTools" content="mtexTools" %} 
+				toolbox.
             </p>
         </div>
     </div>
