@@ -171,8 +171,7 @@ toc: false
         </div>
         <div class="panel-body">
             <p>
-                <b>Azdiar Adil Gazder</b>
-					<b>
+				<b>
                     {% include reference.html link="https://www.researchgate.net/profile/Azdiar-Gazder"
                     content="Azdiar Gazder" %}
                 </b>
