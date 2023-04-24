@@ -175,13 +175,20 @@ toc: false
                     {% include reference.html link="https://www.researchgate.net/profile/Azdiar-Gazder"
                     content="Azdiar Gazder" %}
                 </b>
-				worked on worked on the orientation relationship analysis and
+				worked on the orientation relationship analysis and
 				parent grain reconstruction algorithms for arbitrary phase combinations. 
 				He is the co-developer of the {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
 				and {% include reference.html link="https://github.com/frankNiessen/phaseSegmenter" content="phaseSegmenter" %} 
 				toolboxes and author of the {% include reference.html link="https://github.com/AzdiarGazder/mtexTools" content="mtexTools" %} 
 				toolbox.
             </p>
+			
+			<p>
+                {% include reference.html
+                link="https://scholars.uow.edu.au/azdiar-gazder"
+                content="Electron Microscopy Centre, University of Wollongong" %}
+            </p>
+			
         </div>
     </div>
     <div class="panel panel-profile-card col-md-6">
