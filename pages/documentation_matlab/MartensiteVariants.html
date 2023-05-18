@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Martensite Variants</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_MartensiteVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MartensiteVariants.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss the austenite (fcc) to ferrite (bcc) phase transformation on the example of an EBSD data set collected on a plessitic microstructure of the Emsland iron meteorite. Plessite is the greek description for filling iron and occurs as remaining volumes between the already transformed kamacite (bcc in meteorites) rims. Plessite regionons are commonly surrounded by a very thin taenite (fcc) ribbons. The filling iron contains as major phases again bcc and fcc, where the orientation of fcc practically always indicates the orientation of the formerly huge fcc grain in the planetary body which can easily reach the dimension of meters.</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss the austenite (fcc) to ferrite (bcc) phase transformation on the example of an EBSD data set collected on a plessitic microstructure of the Emsland iron meteorite. Plessite is the greek description for filling iron and occurs as remaining volumes between the already transformed kamacite (bcc in meteorites) rims. Plessite regions are commonly surrounded by a very thin taenite (fcc) ribbons. The filling iron contains as major phases again bcc and fcc, where the orientation of fcc practically always indicates the orientation of the formerly huge fcc grain in the planetary body which can easily reach the dimension of meters.</p>
 {% highlight matlab %}
 plotx2east
 
@@ -142,7 +142,7 @@ mean(angle(mori, KS)) ./ degree
 
 {% highlight plaintext %}
 ans =
-    3.9199
+    3.9200
 {% endhighlight %}
 <h2 id="8">Estimating the parent to child orientation relationship</h2><p>We may have asked ourselfs whether there is an orientation relationship that better matches the measured misorientations than proposed by the KS model. A canocial candidate would be the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> of all misorientations.</p>
 {% highlight matlab %}
@@ -163,13 +163,13 @@ p2cMean = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
   phi1     Phi    phi2
-   289 8.11984 27.0131
+   289 8.12002  27.014
  
   I'm plotting 500 random orientations out of 3886 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 ans =
-    2.4802
+    2.4805
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_05.png" %}
@@ -199,15 +199,15 @@ p2cIter = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  178.964 98.3197 47.3142
+  182.742  98.179 43.6421
  
 ans =
-    3.9808
+    3.4917
 {% endhighlight %}
-<p>We observe that the parent to child orientation relationship computed solely from the child to child misorientations fits the actual orientation relationship equaly well.</p><h2 id="11">Classification of child variants</h2><p>Once we have determined parent orientations and a parent to child orientation relationship we may proceed further by classifying the child orientations into different variants. This is computed by the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
+<p>We observe that the parent to child orientation relationship computed solely from the child to child misorientations fits the actual orientation relationship equaly well.</p><h2 id="11">Classification of child variants by variant Ids</h2><p>Once we have determined parent orientations and a parent to child orientation relationship, we may proceed further by classifying the child orientations into different variants.</p><p>A variant refers to a specific orientation or crystallographic arrangement of the child martensite phase within the context of the original parent orientation. Depending on the operative orientation relationship and parent-child crystal symmetries, a single parent phase orientation results in multiple child phase orientations (i.e.- variants). The variant Id is a convinient way to label or identify a specific variant within the child martensitic microstructure.</p><p>Child variant Ids are computed by the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
 {% highlight matlab %}
 % compute for each child orientation a variantId
-[variantId, packetId] = calcVariantId(parenOri,childOri,p2cIter,'morito');
+[variantId, packetId, bainId] = calcVariantId(parenOri,childOri,p2cIter,'morito');
 
 % colorize the orientations according to the variantID
 color = ind2color(variantId,'ordered');
@@ -231,7 +231,7 @@ plot 2000 random orientations out of 3886 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_07.png" %}
-</center><p>A more important classification is the seperation of the variants into packets.</p>
+</center><h2 id="13">Classification of child variants by crystallographic packet Ids</h2><p>A more important classification is the seperation of the variants into their various crystallographic packets.</p><p>A crystallographic packet Id is used to identify a packet of variants with the same habit plane (i.e. - the interfacial plane between the parent and child crystal lattices along which the atomic rearrangements occur during martensitic transformation).</p><p>Within a crystallographic packet, the individual variants are related to each other through specific symmetries. The crystallographic packet Id is a means of identifying and distinguishing a specific packet of variants that share the same habit plane and exhibit related crystallographic orientations.</p>
 {% highlight matlab %}
 color = ind2color(packetId);
 plotPDF(childOri,color,h_bcc,'MarkerSize',5,'points',1000);
@@ -261,10 +261,46 @@ I'm plotting 1000 random orientations out of 3886 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_08.png" %}
-</center><p>As we can see from the above pole figures the red, blue, orange and green orientations are distinguished by which of the symmetrically equivalent (111) austenite axes is aligned to the (110) martensite axis.</p><p>We may also use the packet color to distinguish different Martensite packets in the EBSD map.</p>
+</center><p>As we can see from the above pole figures the red, blue, orange and green orientations are distinguished by which of the symmetrically equivalent (111) austenite axes is aligned to the (110) martensite axis.</p><p>We may also use the packet Id color to distinguish different martensite packets in the EBSD map.</p>
 {% highlight matlab %}
 plot(grains('Fe'),color)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_09.png" %}
+</center><h2 id="16">Classification of child variants by Bain group Ids</h2><p>Another important classification is the seperation of the variants into their various Bain groups.</p><p>The concept of Bain groups is based on the Bain notation.The latter provides a concise system of representing the transformation path and the geometric correspondence between the crystal structures of the parent austenite and child martensite phases. Each Bain group is labeled with a unique Bain group Id, which represents a distinct combination of orientation relationships between parent and child phases. Bain group Ids serve as a convenient identifier to categorize, classify and differentiate the various transformation paths that may occur during martensitic transformation based on their crystallographic characteristics.</p>
+{% highlight matlab %}
+color = ind2color(bainId);
+plotPDF(childOri,color,h_bcc,'MarkerSize',5,'points',1000);
+
+nextAxis(1)
+hold on
+opt = {'MarkerFaceColor','none','MarkerEdgeColor','k','linewidth',3};
+plot(parenOri * h_fcc(1).symmetrise ,opt{:})
+xlabel('\((100)\)','Color','red','Interpreter','latex')
+
+nextAxis(2)
+plot(parenOri * h_fcc(3).symmetrise ,opt{:})
+xlabel('\((111)\)','Color','red','Interpreter','latex')
+
+nextAxis(3)
+plot(parenOri * h_fcc(2).symmetrise ,opt{:})
+xlabel('\((110)\)','Color','red','Interpreter','latex')
+hold off
+
+drawNow(gcm)
+{% endhighlight %}
+
+{% highlight plaintext %}
+I'm plotting 1000 random orientations out of 3886 given orientations
+  You can specify the the number points by the option "points".
+  The option "all" ensures that all data are plotted
+{% endhighlight %}
+<center>
+{% include inline_image.html file="MartensiteVariants_10.png" %}
+</center><p>As we can see from the above pole figures the red, blue, and orange orientations are distinguished by which of the symmetrically equivalent (100) austenite axes is aligned to the (100) martensite axis.</p><p>Similarly, we may also use the Bain group Id color to distinguish different martensite Bain groups in the EBSD map.</p>
+{% highlight matlab %}
+plot(grains('Fe'),color)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="MartensiteVariants_11.png" %}
 </center></div></body></html>
