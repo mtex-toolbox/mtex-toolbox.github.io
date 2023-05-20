@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>The SantaFe example</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_PoleFigureSantaFe.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureSantaFe.m">
-    edit page</a></font><div><!--introduction--><p>Simulate a set of pole figures for the SantaFe standard ODF, estimate an ODF and compare it to the inital SantaFe ODF.</p><!--/introduction--><h2 id="2">Simulate pole figures</h2>
+    edit page</a></font><div><!--introduction--><p>Simulate a set of pole figures for the SantaFe standard ODF, estimate an ODF and compare it to the inital SantaFe ODF.</p><!--/introduction--><h2 id="1">Simulate pole figures</h2>
 {% highlight matlab %}
 CS = crystalSymmetry('m-3m');
 
@@ -34,7 +34,7 @@ mtexColorMap LaboTeX
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_01.png" %}
-</center><h2 id="3">ODF Estimation with Ghost Correction</h2>
+</center><h2 id="2">ODF Estimation with Ghost Correction</h2>
 {% highlight matlab %}
 rec = calcODF(pf)
 {% endhighlight %}
@@ -50,7 +50,7 @@ rec = SO3FunRBF (m-3m → xyz (222))
   center: 1232 orientations, resolution: 5°
   weight: 0.42
 {% endhighlight %}
-<h2 id="4">ODF Estimation without Ghost Correction</h2>
+<h2 id="3">ODF Estimation without Ghost Correction</h2>
 {% highlight matlab %}
 rec2 = calcODF(pf,'NoGhostCorrection')
 {% endhighlight %}
@@ -63,7 +63,7 @@ rec2 = SO3FunRBF (m-3m → xyz (222))
   center: 1232 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
-<h2 id="5">Error analysis</h2>
+<h2 id="4">Error analysis</h2>
 {% highlight matlab %}
 % calculate RP error
 calcError(rec,SantaFe)
@@ -74,17 +74,17 @@ plotDiff(pf,rec)
 
 {% highlight plaintext %}
 ans =
-    0.0450
+    0.0481
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_02.png" %}
-</center><h2 id="6">Plot estimated pole figures</h2>
+</center><h2 id="5">Plot estimated pole figures</h2>
 {% highlight matlab %}
 plotPDF(rec,pf.h,'antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_03.png" %}
-</center><h2 id="7">Plot estimated ODF (Ghost Corrected)</h2>
+</center><h2 id="6">Plot estimated ODF (Ghost Corrected)</h2>
 {% highlight matlab %}
 plot(rec,'sections',18,'resolution',5*degree,...
   'contourf','FontSize',10,'silent','figSize','large','minmax')
@@ -92,7 +92,7 @@ mtexColorMap white2black
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_04.png" %}
-</center><h2 id="8">Plot odf</h2>
+</center><h2 id="7">Plot odf</h2>
 {% highlight matlab %}
 plot(SantaFe,'sections',18,'contourf','FontSize',10,'silent',...
   'figSize','large','minmax')
@@ -100,7 +100,7 @@ mtexColorMap white2black
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureSantaFe_05.png" %}
-</center><h2 id="9">Plot Fourier Coefficients</h2>
+</center><h2 id="8">Plot Fourier Coefficients</h2>
 {% highlight matlab %}
 close all;
 % true ODF

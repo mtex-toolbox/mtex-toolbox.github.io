@@ -16,8 +16,9 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 cs  = crystalSymmetry('432');
 
-% define a radially symmetric ODF with two randomly selected peaks.
-odf = unimodalODF(orientation.rand(2,cs),'halfwidth',5*degree);
+% define an ODF with two radial peaks
+ori = orientation.byEuler([10 40]*degree,[30 50]*degree,[50 70]*degree,cs)
+odf = unimodalODF(ori,'halfwidth',5*degree);
 
 
 % view the odf
@@ -28,6 +29,16 @@ ori = odf.discreteSample(10000);
 
 % convert the orientations to vector3D
 r = ori * Miller(1,0,0,odf.CS);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori = orientation (432 → xyz)
+  size: 1 x 2
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2
+    10   30   50
+    40   50   70
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ClusterDemo_01.png" %}
@@ -44,7 +55,7 @@ annotate(center,'add2all');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ClusterDemo_02.png" %}
-</center><p>Note that the upper and lower hemisphere plots are versions of each other, reflected horizontally plus vertically.  This means that the underlying data has antipodal symmetry, contributing equally to both hemispheres.  Let's include that in the cluster sorting.</p><p>repeat the calculation after changing all the vector3d to be antipodal</p>
+</center><p>Note that the upper and lower hemisphere plots are versions of each other, reflected horizontally plus vertically.  This means that the underlying data has antipodal symmetry, contributing equally to both hemispheres. Let's include that in the cluster sorting.</p><p>repeat the calculation after changing all the vector3d to be antipodal</p>
 {% highlight matlab %}
 r.antipodal = true;
 
@@ -96,10 +107,10 @@ d(d<0.01) = 0;
 % use the statistic toolbox
 try
   d = squareform(d);
-  z = linkage(d,'single');
+  z = linkage(d,'ward');
 
   %cId = cluster(z,'cutoff',30*degree);
-  cId = cluster(z,'maxclust',12);
+  cId = cluster(z,'maxclust',6);
 
   plotCluster(r,cId)
 catch
@@ -108,9 +119,11 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Statistics Toolbox not installed!
+Warning: ward's linkage specified with non-Euclidean dissimilarity matrix.
 {% endhighlight %}
-
+<center>
+{% include inline_image.html file="ClusterDemo_06.png" %}
+</center>
 {% highlight matlab %}
 function plotCluster(r,cId,varargin)
 
@@ -122,4 +135,6 @@ end
 hold off
 end
 {% endhighlight %}
-</div></body></html>
+<center>
+{% include inline_image.html file="ClusterDemo_07.png" %}
+</center></div></body></html>
