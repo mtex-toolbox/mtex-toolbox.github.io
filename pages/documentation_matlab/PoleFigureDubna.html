@@ -68,9 +68,8 @@ plot(pf_modified)
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf_modified = PoleFigure
+pf_modified = PoleFigure (xyz)
   crystal symmetry : -3m1, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
  
   h = (10-10), r = 1 x 1224 points
   h = (01-11)(10-11), r = 1 x 1224 points
@@ -87,9 +86,8 @@ plot(pf_modified)
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf_modified = PoleFigure
+pf_modified = PoleFigure (xyz)
   crystal symmetry : -3m1, X||a*, Y||b, Z||c*
-  specimen symmetry: 1
  
   h = (10-10), r = 72 x 19 points
   h = (01-11)(10-11), r = 72 x 19 points
@@ -106,12 +104,12 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec = ODF (-3m1 → xyz)
+rec = SO3FunRBF (-3m1 → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: 2430 orientations, resolution: 10°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 2472 orientations, resolution: 10°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_04.png" %}
@@ -124,15 +122,18 @@ r = regularS2Grid('antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (m-3m → xyz (222))
+odf = SO3FunRBF (m-3m → xyz (222))
  
-  Uniform portion:
-    weight: 0.73
+  <strong>uniform component</strong>
+  weight: 0.73
  
-  Radially symmetric portion:
-    kernel: van Mises Fisher, halfwidth 10°
-    center: (296.6°,48.2°,26.6°)
-    weight: 0.27
+  <strong>unimodal component</strong>
+  kernel: van Mises Fisher, halfwidth 10°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2  weight
+  296.565 48.1897 26.5651    0.27
  
  
 r = S2Grid
@@ -155,15 +156,15 @@ plot(rec,'sections',6)
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec = ODF (m-3m → xyz (222))
+rec = SO3FunRBF (m-3m → xyz (222))
  
-  Uniform portion:
-    weight: 0.73238
+  <strong>uniform component</strong>
+  weight: 0.9
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: 128 orientations, resolution: 10°
-    weight: 0.26762
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 150 orientations, resolution: 10°
+  weight: 0.096
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_05.png" %}
@@ -175,12 +176,12 @@ plot(rec_ng,'sections',6)
 {% endhighlight %}
 
 {% highlight plaintext %}
-rec_ng = ODF (m-3m → xyz (222))
+rec_ng = SO3FunRBF (m-3m → xyz (222))
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: 150 orientations, resolution: 10°
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 150 orientations, resolution: 10°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_06.png" %}
@@ -192,9 +193,9 @@ calcError(pf_SantaFe,rec_ng)
 
 {% highlight plaintext %}
 ans =
-    0.0202    0.0261    0.0240
+    0.0540    0.0318    0.0503
 ans =
-    0.0358    0.0283    0.0252
+    0.0225    0.0161    0.0157
 {% endhighlight %}
 <p><b>Difference plot</b></p>
 {% highlight matlab %}
@@ -210,8 +211,8 @@ calcError(SantaFe,rec_ng)
 
 {% highlight plaintext %}
 ans =
-    0.0312
+    0.1243
 ans =
-    0.0893
+    0.1356
 {% endhighlight %}
 <h2 id="16">Exercises</h2><p>3)</p><p>a) Load the pole figure data of a quartz specimen from: data/dubna!</p><p>b) Inspect the raw data. Are there noticeable problems?</p><p>c) Compute an ODF from the pole figure data.</p><p>d) Plot some pole figures of that ODF and compare them to the measured pole figures.</p><p>e) Compute the RP errors for each pole figure.</p><p>f) Plot the difference between the raw data and the calculated pole figures. What do you observe?</p><p>g) Remove the erroneous values from the pole figure data and repeat the ODF calculation. How do the RP error change?</p><p>h) Vary the number of pole figures used for the ODF calculation. What is the minimum set of pole figures needed to obtain a meaningful ODF?</p></div></body></html>

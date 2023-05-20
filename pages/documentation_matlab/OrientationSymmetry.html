@@ -39,8 +39,8 @@ ss = monoclinic specimenSymmetry
 ori = orientation (6 → xyz (112))
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  292.504 49.3513 81.2794       0
+     phi1     Phi    phi2
+  176.912 102.148 28.6908
 {% endhighlight %}
 <p>Since orientations transform crystal coordinates into specimen coordinates crystal symmetries will act from the right and specimen symmetries from the left</p>
 {% highlight matlab %}
@@ -53,13 +53,13 @@ ans = orientation (6 → xyz (112))
   size: 1 x 6
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  292.504 49.3513 81.2794       0
-  292.504 49.3513 141.279       0
-  292.504 49.3513 201.279       0
-  292.504 49.3513 261.279       0
-  292.504 49.3513 321.279       0
-  292.504 49.3513 21.2794       0
+     phi1     Phi    phi2
+  176.912 102.148 28.6908
+  176.912 102.148 88.6908
+  176.912 102.148 148.691
+  176.912 102.148 208.691
+  176.912 102.148 268.691
+  176.912 102.148 328.691
 {% endhighlight %}
 <p>We observe that only the third Euler angle phi2 changes as this Euler angle applies first to the crystal coordinates.</p>
 {% highlight matlab %}
@@ -72,9 +72,9 @@ ans = orientation (6 → xyz (112))
   size: 2 x 1
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  292.504 49.3513 81.2794       0
-  112.504 49.3513 81.2794       0
+     phi1     Phi    phi2
+  176.912 102.148 28.6908
+  356.912 102.148 28.6908
 {% endhighlight %}
 <p>Combining crystal and specimen symmetry we obtain 6 crystallographically equivalent orientations to <code class="language-plaintext highlighter-rouge">ori</code></p>
 {% highlight matlab %}
@@ -86,19 +86,19 @@ ans = orientation (6 → xyz (112))
   size: 2 x 6
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  292.504 49.3513 81.2794       0
-  112.504 49.3513 81.2794       0
-  292.504 49.3513 141.279       0
-  112.504 49.3513 141.279       0
-  292.504 49.3513 201.279       0
-  112.504 49.3513 201.279       0
-  292.504 49.3513 261.279       0
-  112.504 49.3513 261.279       0
-  292.504 49.3513 321.279       0
-  112.504 49.3513 321.279       0
-  292.504 49.3513 21.2794       0
-  112.504 49.3513 21.2794       0
+     phi1     Phi    phi2
+  176.912 102.148 28.6908
+  356.912 102.148 28.6908
+  176.912 102.148 88.6908
+  356.912 102.148 88.6908
+  176.912 102.148 148.691
+  356.912 102.148 148.691
+  176.912 102.148 208.691
+  356.912 102.148 208.691
+  176.912 102.148 268.691
+  356.912 102.148 268.691
+  176.912 102.148 328.691
+  356.912 102.148 328.691
 {% endhighlight %}
 <p>A shortcut for this operation is the command <a href="orientation.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -110,19 +110,19 @@ ans = orientation (6 → xyz (112))
   size: 12 x 1
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  292.504 49.3513 81.2794       0
-  112.504 49.3513 81.2794       0
-  292.504 49.3513 141.279       0
-  112.504 49.3513 141.279       0
-  292.504 49.3513 201.279       0
-  112.504 49.3513 201.279       0
-  292.504 49.3513 261.279       0
-  112.504 49.3513 261.279       0
-  292.504 49.3513 321.279       0
-  112.504 49.3513 321.279       0
-  292.504 49.3513 21.2794       0
-  112.504 49.3513 21.2794       0
+     phi1     Phi    phi2
+  176.912 102.148 28.6908
+  356.912 102.148 28.6908
+  176.912 102.148 88.6908
+  356.912 102.148 88.6908
+  176.912 102.148 148.691
+  356.912 102.148 148.691
+  176.912 102.148 208.691
+  356.912 102.148 208.691
+  176.912 102.148 268.691
+  356.912 102.148 268.691
+  176.912 102.148 328.691
+  356.912 102.148 328.691
 {% endhighlight %}
 <p>For specific orientations, e.g. for the cube orientations, symmetrisation leads to multiple identical orientations. This can be prevented by passing the option <code class="language-plaintext highlighter-rouge">unique</code> to the command <a href="orientation.symmetrise.html">symmetrise</a></p>
 {% highlight matlab %}
@@ -134,13 +134,13 @@ ans = orientation (6 → xyz (112))
   size: 6 x 1
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-   180    0    0    0
-   240    0    0    0
-   120    0    0    0
-   300    0    0    0
-    60    0    0    0
-     0    0    0    0
+  phi1  Phi phi2
+   180    0    0
+   240    0    0
+   120    0    0
+   300    0    0
+    60    0    0
+     0    0    0
 {% endhighlight %}
 <h2 id="7">Crystal symmetries in computations</h2><p>Note that all operation on orientations are preformed taking all symmetrically equivalent orientations into account. As an example consider the angle between a random orientation and all orientations symmetricall equivalent to the goss orientation</p>
 {% highlight matlab %}
@@ -150,12 +150,12 @@ angle(ori,symmetrise(orientation.goss(cs))) ./ degree
 
 {% highlight plaintext %}
 ans =
-   68.3741
-   68.3741
-   68.3741
-   68.3741
-   68.3741
-   68.3741
+  130.2438
+  130.2438
+  130.2438
+  130.2438
+  130.2438
+  130.2438
 {% endhighlight %}
 <p>The value is the same for all orientations and equal to the smallest angle to one of the symmetrally equivalent orientations. This can be verified by computing the rotational angle ignoring symmetry.</p>
 {% highlight matlab %}
@@ -164,11 +164,11 @@ angle(ori,symmetrise(orientation.goss(cs)),'noSymmetry') ./ degree
 
 {% highlight plaintext %}
 ans =
-  136.9000
-   92.7941
-   68.3741
-   84.0062
-  125.2394
-  173.8720
+  142.1009
+  130.2438
+  132.3532
+  147.6085
+  170.9167
+  163.6995
 {% endhighlight %}
 <p>Functions that respect crystal symmetry but allow to switch it off using the flag <code class="language-plaintext highlighter-rouge">noSymmetry</code> include <a href="orientation.dot.html">dot</a>, <a href="orientation.unique.html">unique</a>, <a href="orientation.calcCluster.html">calcCluster</a>.</p></div></body></html>

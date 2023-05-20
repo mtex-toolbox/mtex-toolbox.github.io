@@ -75,12 +75,8 @@ vector3d(spinTensor(S_left_L))  *sqrt(14)
 
 {% highlight plaintext %}
 ans = vector3d
-  x y z
-  1 2 3
  
 ans = vector3d
-  x y z
-  1 2 3
 {% endhighlight %}
 <p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code></p>
 {% highlight matlab %}
@@ -91,12 +87,8 @@ inv(rot_ref) * vector3d(spinTensor(S_left_R)) * sqrt(14)
 
 {% highlight plaintext %}
 ans = vector3d
-  x y z
-  1 2 3
  
 ans = vector3d
-  x y z
-  1 2 3
 {% endhighlight %}
 <h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works only well if the pertupation rotation has small rotational angle. For large pertubations the <a href="quaternion.logm.html">matrix logarithm</a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
 {% highlight matlab %}
@@ -129,8 +121,6 @@ vector3d(S) * sqrt(14)
 
 {% highlight plaintext %}
 ans = vector3d
-            x           y           z
-  0.000174533 0.000349066 0.000523599
 {% endhighlight %}
 <p>More directly this disorientation vector may be computed from two rotations by the command <a href="quaternion.log.html">log</a></p>
 {% highlight matlab %}
@@ -144,17 +134,13 @@ log(rot_123 * rot_ref,rot_ref,'left') * sqrt(14)
 rot_123 = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  87.0892 33.2984 320.219       0
+     phi1     Phi    phi2
+  87.0892 33.2984 320.219
  
  
 ans = vector3d
-  x y z
-  1 2 3
  
 ans = vector3d
-  x y z
-  1 2 3
 {% endhighlight %}
 <h2 id="10">The other way round</h2><p>Given a skew symmetric matrix <b>S</b> or a disorientation vector <b>v</b> we may use the command <a href="vector3d.exp.html">exp</a> to apply this rotational pertubation to a reference rotation <b>rot_ref</b></p>
 {% highlight matlab %}
@@ -170,22 +156,22 @@ exp(v,rot_ref)
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  94.0497 29.4341 358.508       0
+     phi1     Phi    phi2
+  94.0497 29.4341 358.508
  
  
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  94.0497 29.4341 358.508       0
+     phi1     Phi    phi2
+  94.0497 29.4341 358.508
  
  
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  94.0497 29.4341 358.508       0
+     phi1     Phi    phi2
+  94.0497 29.4341 358.508
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -201,22 +187,22 @@ exp(v,rot_ref,'left')
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  74.5535 51.5051 9.61062       0
+     phi1     Phi    phi2
+  74.5535 51.5051 9.61062
  
  
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  74.5535 51.5051 9.61062       0
+     phi1     Phi    phi2
+  74.5535 51.5051 9.61062
  
  
 ans = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  74.5535 51.5051 9.61062       0
+     phi1     Phi    phi2
+  74.5535 51.5051 9.61062
 {% endhighlight %}
 <h2 id="12">Disorientations under the presence of crystal symmetry</h2><p>Under the presence of crystal symmetry the order whether a rotational pertupation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
 {% highlight matlab %}
@@ -236,15 +222,15 @@ ori = ori_ref * mori_123
 mori_123 = misorientation (321 → 321)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  61.8386 40.0064 340.052       0
+     phi1     Phi    phi2
+  61.8386 40.0064 340.052
  
  
 ori = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  79.3156 43.3785  9.9013       0
+     phi1     Phi    phi2
+  79.3156 43.3785  9.9013
 {% endhighlight %}
 <p>and compute the scew symmetric pertubation matrices</p>
 {% highlight matlab %}
@@ -284,20 +270,12 @@ lR2 = vector3d(spinTensor(S_left_R)) * sqrt(14)
 
 {% highlight plaintext %}
 vR1 = vector3d
-        x       y       z
-  2.51049  1.6841 2.20482
  
 vR2 = vector3d
-        x       y       z
-  2.51049  1.6841 2.20482
  
 lR1 = vector3d
-          x         y         z
-  -0.317983   1.03184   3.58248
  
 lR2 = vector3d
-          x         y         z
-  -0.317983   1.03184   3.58248
 {% endhighlight %}
 <h2 id="15">logarithm to vector3d</h2>
 {% highlight matlab %}
@@ -312,8 +290,6 @@ ans = Miller (321)
   0.2335  0.4671 -0.7006  0.7006
  
 ans = vector3d
-  x y z
-  1 2 3
 {% endhighlight %}
 <h2 id="16">logarithm to skew symmetric matrix</h2>
 {% highlight matlab %}
@@ -346,8 +322,6 @@ S = spinTensor (xyz)
  -53.45  26.73      0
  
 ans = vector3d
-  x y z
-  1 2 3
 {% endhighlight %}
 <h2 id="17">The other way round</h2>
 {% highlight matlab %}
@@ -363,22 +337,22 @@ exp(v,ori_ref)
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  79.3156 43.3785  9.9013       0
+     phi1     Phi    phi2
+  79.3156 43.3785  9.9013
  
  
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  79.3156 43.3785  9.9013       0
+     phi1     Phi    phi2
+  79.3156 43.3785  9.9013
  
  
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  79.3156 43.3785  9.9013       0
+     phi1     Phi    phi2
+  79.3156 43.3785  9.9013
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -394,21 +368,21 @@ exp(v,ori_ref,'left')
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  74.5535 51.5051 9.61062       0
+     phi1     Phi    phi2
+  74.5535 51.5051 9.61062
  
  
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  74.5535 51.5051 9.61062       0
+     phi1     Phi    phi2
+  74.5535 51.5051 9.61062
  
  
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  74.5535 51.5051 9.61062       0
+     phi1     Phi    phi2
+  74.5535 51.5051 9.61062
 {% endhighlight %}
 </div></body></html>

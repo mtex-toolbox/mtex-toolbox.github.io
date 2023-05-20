@@ -32,8 +32,8 @@ cs = crystalSymmetry
 ori = orientation (m-3m → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  224.968 99.2493 87.5354       0
+    phi1     Phi    phi2
+  144.73 137.904 14.9569
 {% endhighlight %}
 <p>This is now an MTEX orientation and can be used to translate crystal coordinates, i.e., Miller indices into specimen coordinates,</p>
 {% highlight matlab %}
@@ -46,12 +46,8 @@ rotate(Miller({1,0,0},cs),ori)
 
 {% highlight plaintext %}
 r = vector3d
-          x         y         z
-  -0.143909 0.0832224  0.986085
  
 ans = vector3d
-          x         y         z
-  -0.143909 0.0832224  0.986085
 {% endhighlight %}
 <p>A Bunge orientation is exactly the inverse of an MTEX orientation, i.e.,</p>
 {% highlight matlab %}
@@ -62,8 +58,8 @@ ori_Bunge = inv(ori)
 ori_Bunge = orientation (xyz → m-3m)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  92.4646 99.2493 315.032       0
+     phi1     Phi    phi2
+  165.043 137.904 35.2704
 {% endhighlight %}
 <p>and translates specimen coordinates into Miller indices</p>
 {% highlight matlab %}
@@ -84,17 +80,17 @@ ori_Bunge.matrix'
 
 {% highlight plaintext %}
 ans =
-   -0.1439    0.7020   -0.6975
-    0.0832    0.7109    0.6983
-    0.9861    0.0424   -0.1607
+   -0.6782    0.6247    0.3871
+    0.7142    0.4363    0.5473
+    0.1730    0.6477   -0.7420
 ans =
-   -0.1439    0.7020   -0.6975
-    0.0832    0.7109    0.6983
-    0.9861    0.0424   -0.1607
+   -0.6782    0.6247    0.3871
+    0.7142    0.4363    0.5473
+    0.1730    0.6477   -0.7420
 ans =
-   -0.1439    0.7020   -0.6975
-    0.0832    0.7109    0.6983
-    0.9861    0.0424   -0.1607
+   -0.6782    0.6247    0.3871
+    0.7142    0.4363    0.5473
+    0.1730    0.6477   -0.7420
 {% endhighlight %}
 <h2 id="7">Misorientations</h2><p>Since, MTEX orientations translates crystal to specimen coordinates misorientations are defined by the formula</p>
 {% highlight matlab %}
@@ -108,8 +104,8 @@ mori = inv(ori1) * ori2
 mori = misorientation (m-3m → m-3m)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  239.971 88.2688 150.438       0
+     phi1     Phi    phi2
+  226.848 59.9936 236.883
 {% endhighlight %}
 <p>as they are commonly defined coordinate transformations from crystal to crystal coordinates. This formula is different to the misorientation formula for Bunge orientations</p>
 {% highlight matlab %}
@@ -123,7 +119,7 @@ mori = ori1_Bunge * inv(ori2_Bunge)
 mori = misorientation (m-3m → m-3m)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2    Inv.
-  239.971 88.2688 150.438       0
+     phi1     Phi    phi2
+  226.848 59.9936 236.883
 {% endhighlight %}
 <p>However, both formula result in exactly the same misorientation.</p><h2 id="10">Summary</h2><p>This list summarizes the differences between MTEX orientations and Bunge orientations.</p><div><ul><li>formulas involving orientations - invert orientation</li><li>orientation Euler angles - unchanged</li><li>orientation matrix - transpose matrix</li><li>misorientations - unchanged</li><li>misorientation Euler angles - take Euler angles of inverse misorientation</li></ul></div></div></body></html>

@@ -111,7 +111,7 @@ hold off
 
 {% highlight plaintext %}
 t_star =
-    0.0023
+    0.0195
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_06.png" %}
@@ -203,11 +203,10 @@ odf = calcDensity(ebsd('Forsterite').orientations,'halfwidth',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Forsterite → xyz)
- 
-  Harmonic portion:
-    degree: 25
-    weight: 1
+odf = SO3FunHarmonic (Forsterite → xyz)
+  isReal: true
+  bandwidth: 25
+  weight: 1
 {% endhighlight %}
 <p>Lets visualize the ODF in phi2 sections and plot on top of it the individual orientation measurements from the EBSD map</p>
 {% highlight matlab %}
@@ -234,11 +233,10 @@ odf = calcDensity(grains.meanOrientation,'weights',grains.grainSize)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (Titanium (Alpha) → xyz)
+odf = SO3FunRBF (Titanium (Alpha) → xyz)
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 10°
-    center: Rotations: 85 x 1
-    weight: 1
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 85 orientations
 {% endhighlight %}
 </div></body></html>

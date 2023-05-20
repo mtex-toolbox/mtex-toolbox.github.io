@@ -91,15 +91,15 @@ odf = calcODF(pf,'silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = ODF (6/mmm → xyz)
+odf = SO3FunRBF (6/mmm → xyz)
  
-  Uniform portion:
-    weight: 0.53416
+  <strong>uniform component</strong>
+  weight: 0.53
  
-  Radially symmetric portion:
-    kernel: de la Vallee Poussin, halfwidth 5°
-    center: 9922 orientations, resolution: 5°
-    weight: 0.46584
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 9924 orientations, resolution: 5°
+  weight: 0.47
 {% endhighlight %}
 <p>Note that reconstructing an ODF from pole figure data is a severely ill- posed problem, i.e., it does <b>not</b> provide a unique solution. A more through discussion on the ambiguity of ODF reconstruction from pole figure data can be found <a href="PoleFigure2ODFAmbiguity.html">here</a>. As a rule of thumb: the more pole figures you have and the more consistent your pole figure data the better your reconstructed ODF will be.</p><p>To check how well your reconstructed ODF fits the measured pole figure data use</p>
 {% highlight matlab %}
@@ -114,7 +114,7 @@ calcError(odf,pf)
 
 {% highlight plaintext %}
 ans =
-    0.0413    0.0452    0.0584    0.0440
+    0.1210    0.0586    0.0787    0.0596
 {% endhighlight %}
 <p>In the case of a bad fit, you may want to tweak the reconstruction algorithm. See <a href="PoleFigure2ODF.html">here</a> for more information.</p><h2 id="12">Visualize the ODF</h2><p>Finally one can plot the resulting ODF</p>
 {% highlight matlab %}
