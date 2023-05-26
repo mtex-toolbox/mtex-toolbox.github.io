@@ -20,16 +20,11 @@ plot(SO3F1,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Cannot load an object of class 'plottingConvention':
-Its class cannot be found. 
-Warning: Cannot load an object of class 'plottingConvention':
-Its class cannot be found. 
- 
 SO3F1 = SO3FunRBF (Quartz → xyz)
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19836 orientations, resolution: 5°
+  center: 19848 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
 <center>
@@ -70,7 +65,7 @@ ans = SO3FunComposition (Quartz → xyz)
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19836 orientations, resolution: 5°
+  center: 19848 orientations, resolution: 5°
   weight: 2
  
   <strong>unimodal component</strong>
@@ -110,7 +105,7 @@ g = SO3FunRBF (xyz → Quartz)
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19836 orientations, resolution: 5°
+  center: 19848 orientations, resolution: 5°
   weight: 1
  
 ans =
@@ -126,12 +121,8 @@ ans =
 plot(2 * SO3F1 + SO3F2,'phi2',(0:3)*30*degree)
 
 % compute and mark the global maximum
-[maxvalue, maxnodes] = max(2 * SO3F1 + SO3F2);
+[maxvalue, maxnodes] = max(2 * SO3F1 + SO3F2,'numLocal',2);
 annotate(maxnodes)
-
-% compute and mark the local minimum
-[minvalue, minnodes] = min(2 * SO3F1 + SO3F2,'numLocal',2);
-annotate(minnodes)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunOperations_06.png" %}
@@ -173,8 +164,6 @@ grad(SO3F1,R)
 
 {% highlight plaintext %}
 ans = vector3d
-        x          y          z
-  2.17624   -8.98149 -0.0497975
 {% endhighlight %}
 <p>The gradients of a \(SO(3)\) function in all points form a \(SO(3)\) vector field and are returned by the function <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> as a variable of type <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a>.</p>
 {% highlight matlab %}
@@ -195,46 +184,7 @@ G = SO3VectorFieldHandle (1 → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunOperations_07.png" %}
-</center><p>Now we can use the function <a href="SO3Fun.steepestDescent.html"><code class="language-plaintext highlighter-rouge">steepestDescent</code></a> to compute local maxima and minima of an <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
-{% highlight matlab %}
-plot(2 * SO3F1 + SO3F2,'phi2',(0:3)*30*degree)
-ori = orientation.id;
-
-% compute and mark the global maximum
-[maxnode, maxvalue] = steepestDescent(2 * SO3F1 + SO3F2,ori)
-annotate(maxnodes)
-
-% compute and mark the local minimum
-[minnode, v] = steepestDescent( -(2 * SO3F1 + SO3F2),ori)
-minvalue = -v
-annotate(minnodes)
-{% endhighlight %}
-
-{% highlight plaintext %}
-....... 
-maxnode = orientation (1 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  89.9701 44.9132 270.019
- 
-maxvalue =
-  257.2056
-........... 
-minnode = orientation (1 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  339.214 26.3919 6.91056
- 
-v =
-   -0.0299
-minvalue =
-    0.0299
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunOperations_08.png" %}
-</center><p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p><h2 id="15">Rotating rotational functions</h2><p>Rotating a \(SO(3)\) function works with the command <a href="SO3Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a></p>
+</center><p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p><h2 id="14">Rotating rotational functions</h2><p>Rotating a \(SO(3)\) function works with the command <a href="SO3Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a></p>
 {% highlight matlab %}
 % define a rotation
 rot = rotation.byEuler(30*degree,0*degree,90*degree,'Bunge')
@@ -251,5 +201,5 @@ rot = rotation
    120    0    0
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SO3FunOperations_09.png" %}
+{% include inline_image.html file="SO3FunOperations_08.png" %}
 </center></div></body></html>

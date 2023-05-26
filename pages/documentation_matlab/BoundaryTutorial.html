@@ -43,8 +43,8 @@ grains = grain2d
  Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
      1     121   22833  Magnesium     6/mmm       X||a*, Y||b, Z||c*
  
- boundary segments: 3825
- inner boundary segments: 4
+ boundary segments: 3825 (1152 µm)
+ inner boundary segments: 4 (1.2 µm)
  triple points: 114
  
  Properties: meanRotation, GOS
@@ -75,8 +75,8 @@ grains = grain2d
  Phase  Grains  Pixels    Mineral  Symmetry  Crystal reference frame
      1     121   22833  Magnesium     6/mmm       X||a*, Y||b, Z||c*
  
- boundary segments: 3825
- inner boundary segments: 4
+ boundary segments: 3825 (1020 µm)
+ inner boundary segments: 4 (0.99 µm)
  triple points: 114
  
  Properties: meanRotation, GOS
@@ -91,9 +91,9 @@ gB = grains.boundary
 {% highlight plaintext %}
 gB = grainBoundary
  
- Segments   mineral 1  mineral 2
-      606  notIndexed  Magnesium
-     3219   Magnesium  Magnesium
+ Segments  length   mineral 1  mineral 2
+      606  183 µm  notIndexed  Magnesium
+     3219  837 µm   Magnesium  Magnesium
 {% endhighlight %}
 <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
 {% highlight matlab %}
@@ -103,8 +103,8 @@ gB_MgMg = gB('Magnesium','Magnesium')
 {% highlight plaintext %}
 gB_MgMg = grainBoundary
  
- Segments  mineral 1  mineral 2
-     3219  Magnesium  Magnesium
+ Segments  length  mineral 1  mineral 2
+     3219  837 µm  Magnesium  Magnesium
 {% endhighlight %}
 <h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p>
 {% highlight matlab %}
@@ -129,7 +129,7 @@ grains.innerBoundary
 {% highlight plaintext %}
 ans = grainBoundary
  
- Segments  mineral 1  mineral 2
-        4  Magnesium  Magnesium
+ Segments   length  mineral 1  mineral 2
+        4  0.99 µm  Magnesium  Magnesium
 {% endhighlight %}
 </div></body></html>

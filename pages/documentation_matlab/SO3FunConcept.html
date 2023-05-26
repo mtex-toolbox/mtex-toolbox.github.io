@@ -15,15 +15,14 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font><div><!--introduction--><!--/introduction--><p>An orientation dependent function is a function that assigns to each rotation or orientation a numerical value. An import example of a rotational function is the <a href="ODFTheory.html">orientation density function (ODF)</a> that assignes to each crystal orientation the probability of its occurence within a specimen. Other examples are the Schmidt or the Taylor factor as a function of the crystal orientation.</p><h2 id="2">Definition of a orientation dependent function</h2><p>Within MTEX a rotational function is represented by a variable of type <a href="SO3Fun.SO3Fun.html"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a>. Let us consider as an example the function that takes an orientation and returns it rotational angle modulo cubic crystal symmetry. In MTEX the rotational angle is computed by the command <a href="orientation.angle.html"><code class="language-plaintext highlighter-rouge">angle(ori)</code></a>. In order to turn this correspondence into a <code class="language-plaintext highlighter-rouge">SO3Fun</code> we use the command <a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a> and pass the angle command as an <a href="https://de.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html">anonymous function</a>.</p>
 {% highlight matlab %}
 % define the crystal symmetry
-cs = crystalSymmetry('cubic');
+cs = crystalSymmetry('432');
 
 % construct the SO3Fun
 SO3F = SO3FunHandle(@(ori) angle(ori) ./ degree, cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunHandle (m-3m → xyz)
-  weight: 41
+SO3F = SO3FunHandle (432 → xyz)
 {% endhighlight %}
 <p>Many more methods for defining orientation dependent functions are discussed <a href="SO3FunDefinition.html">here</a>.</p><p>The entire information abot the orientation dependent function is now stored in the variable <code class="language-plaintext highlighter-rouge">SO3F</code>. In order to determine its value for a specific orientation <code class="language-plaintext highlighter-rouge">ori</code> the function <a href="SO3Fun.eval.html"><code class="language-plaintext highlighter-rouge">eval(ori)</code></a> is used</p>
 {% highlight matlab %}
@@ -32,14 +31,14 @@ SO3F.eval(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (m-3m → xyz)
+ori = orientation (432 → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  119.349 84.8689 25.4675
+  311.422  95.818  226.42
  
 ans =
-   39.8490
+   60.0885
 {% endhighlight %}
 <h2 id="5">Plotting an orientation Dependent Function</h2><p>Orientation dependent functions are most of visualized by sections according to the third Euler angle \(\varphi_2\)</p>
 {% highlight matlab %}
@@ -53,37 +52,46 @@ plotSection(SO3F,'axisAngle','upper')
 mtexColorbar
 mtexColorMap parula
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Contour not rendered for constant ZData 
+Warning: Contour not rendered for constant ZData 
+Warning: Contour not rendered for constant ZData 
+Warning: Contour not rendered for constant ZData 
+Warning: Contour not rendered for constant ZData
+{% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunConcept_02.png" %}
 </center><p>as obviously, the function value is constant in each section. Many more methods for visualizing orientation dependent functions are discussed <a href="SO3FunVisualization.html">here</a>.</p><h2 id="8">Computing with orientation dependent functions</h2><p>The power of representing an orientation dependent functions as a variables of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a> is that we may apply to it a <a href="SO3FunOperations.html">large number of analysis tools</a>. In particular, one can add, subtract and mutiply orientation dependent functions, plot them in various projections or detect the local minima or maxima. In the case of our example function the local maxima refers to the orientations with maximum rotational angle in cubic symmetry. We may compute them by the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a></p>
 {% highlight matlab %}
-[value,ori] = max(SO3F,'numLocal',10)
+[value,ori] = max(SO3F,'numLocal',10,'accuracy',0.001*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
 value =
-   62.7749
-   62.7683
-   62.7578
-   62.7559
-   62.7540
-   62.7391
+   62.7993
+   62.7993
+   62.7993
+   62.7993
+   62.7993
+   62.7993
  
-ori = orientation (m-3m → xyz)
+ori = orientation (432 → xyz)
   size: 6 x 1
  
   Bunge Euler angles in degree
-       phi1       Phi      phi2
-      179.9     45.03   135.032
-  0.0252059   45.0228   314.967
-    35.3482   60.0087   305.359
-     215.24   60.0523   125.306
-     45.163   44.9895   269.795
-    314.846   44.9861  0.122779
+         phi1         Phi        phi2
+          135          45         180
+      270.001     44.9999     44.9994
+      54.7356          60     324.736
+      44.9997     44.9999         270
+      90.0002     45.0001         225
+  0.000124236          45         315
 {% endhighlight %}
-<p>We observe that there are exactly six symetrically not equivalent orientations that realize an orientation angle of about 62.77 degree and form the vertices of the fundamental region in orienation space</p>
+<p>We observe that there are exactly six symetrically not equivalent orientations that realize an orientation angle of about 62.994 degree and form the vertices of the fundamental region in orienation space</p>
 {% highlight matlab %}
-plot(ori.symmetrise,'axisAngle','filled','markerSize',15,'restrict2FundamentalRegion')
+color = ind2color(repmat(1:length(ori),numSym(cs),1));
+plot(ori.symmetrise,color,'axisAngle','filled','markerSize',20,'restrict2FundamentalRegion')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunConcept_03.png" %}
