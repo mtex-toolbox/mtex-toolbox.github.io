@@ -12,26 +12,38 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>calcVariantId</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_calcVariantId.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/misorientation/calcVariantId.m">
-    edit page</a></font><div><!--introduction--><p>compute variantIds and packetId from parent / child orientation pairs</p><!--/introduction--><h2 id="2">Syntax</h2>
+    edit page</a></font><div><!--introduction--><p>compute variantIds, packetId and bainId from parent / child orientation pairs</p><!--/introduction--><h2 id="2">Syntax</h2>
 {% highlight matlab %}
+% compute variantIds
 variantId = calcVariantId(parentOri,childOri,p2c)
 {% endhighlight %}
 
 {% highlight matlab %}
-% compute packetIds
-[variantId,packetId] = calcVariantId(parentOri,childOri,p2c,...
-  {hklParent,hklChild})
-{% endhighlight %}
-
-{% highlight matlab %}
-% packet determination
-hklParent = Miller({1,1,1},{1,-1,1},{-1,1,1},{1,1,-1},p2c.CS);
-hklChild  = Miller(1,0,1,p2c.SS);
+% compute variantIds & packetIds
+hklParent1 = Miller({1,1,1},{1,-1,1},{-1,1,1},{1,1,-1},p2c.CS);
+hklChild1  = Miller(1,0,1,p2c.SS);
 {% endhighlight %}
 
 {% highlight matlab %}
 [variantId,packetId] = calcVariantId(parentOri,childOri,p2c,...
-  {hklParent,hklChild})
+  'packet', hklParent1,hklChild1)
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute variantIds, packetIds & bainIds
+hklParent1 = Miller({1,1,1},{1,-1,1},{-1,1,1},{1,1,-1},p2c.CS);
+hklChild1  = Miller(1,0,1,p2c.SS);
+{% endhighlight %}
+
+{% highlight matlab %}
+hklParent2 = Miller({0,0,1},{1,0,0},{0,1,0},p2c.CS);
+hklChild2  = Miller(1,0,0,p2c.SS);
+{% endhighlight %}
+
+{% highlight matlab %}
+[variantId,packetId,bainId] = calcVariantId(parentOri,childOri,p2c,...
+  'packet', hklParent1,hklChild1,...
+  'bain', hklParent2,hklChild2)
 {% endhighlight %}
 <h2 id="3">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -84,6 +96,14 @@ hklChild  = Miller(1,0,1,p2c.SS);
          </td>
          <td>
             <tt>packet id</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bainId</tt>
+         </td>
+         <td>
+            <tt>bain id</tt>
          </td>
       </tr>
    </table>

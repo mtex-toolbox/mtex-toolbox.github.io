@@ -165,6 +165,37 @@ toc: false
 </div>
 
 <div class="row">
+    <div class="panel panel-profile-card col-md-6">
+        <div class="panel-heading">
+            <img src="images/profiles/azdiar.jpg" alt="Picture of Azdiar Gazder">
+        </div>
+        <div class="panel-body">
+            <p>
+				<b>
+                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar-Gazder"
+                    content="Azdiar Gazder" %}
+                </b>
+				worked on the orientation relationship analysis and
+				parent grain reconstruction algorithms for arbitrary phase combinations. 
+				He is the co-developer of the {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
+				and {% include reference.html link="https://github.com/frankNiessen/phaseSegmenter" content="phaseSegmenter" %} 
+				toolboxes and author of the {% include reference.html link="https://github.com/AzdiarGazder/mtexTools" content="mtexTools" %} 
+				toolbox.
+            </p>
+			
+			<p>
+                {% include reference.html
+                link="https://scholars.uow.edu.au/azdiar-gazder"
+                content="Electron Microscopy Centre, University of Wollongong" %}
+            </p>
+			
+        </div>
+    </div>
+    <div class="panel panel-profile-card col-md-6">
+    </div>
+</div>
+
+<div class="row">
 	<div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/felix-bartel.png" alt="Picture of Felix Bartel">
@@ -183,7 +214,7 @@ toc: false
     </div>
 	<div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
-            <img src="images/profiles/Erik_Wuensche.png" alt="Picture of Felix Bartel">
+            <img src="images/profiles/erik-wuensche.jpg" alt="Picture of Erik Wünsche">
         </div>
         <div class="panel-body">
             <p>

@@ -68,8 +68,8 @@ hold off
 {% highlight plaintext %}
 gB = grainBoundary
  
- Segments  mineral 1  mineral 2
-    20356       iron       iron
+ Segments    length  mineral 1  mineral 2
+    20356  16364 µm       iron       iron
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_03.png" %}
@@ -147,12 +147,11 @@ mdf = calcDensity(gB.misorientation,'halfwidth',5*degree,'bandwidth',48)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mdf = MDF (iron → iron)
-  antipodal:         true
- 
-  Harmonic portion:
-    degree: 48
-    weight: 1
+mdf = SO3FunHarmonic (iron → iron)
+  antipodal: true
+  isReal: true
+  bandwidth: 48
+  weight: 1
 {% endhighlight %}
 <p>Next we can visualize the misorientation distribution function in axis angle sections.</p>
 {% highlight matlab %}
@@ -174,12 +173,13 @@ drawNow(gcm)
 
 {% highlight plaintext %}
 mori = misorientation (iron → iron)
-  size: 1 x 2
+  size: 2 x 1
+  antipodal:         true
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2    Inv.
-  116.66 48.2481 206.594       0
-  103.44 26.3897 283.536       0
+     phi1     Phi    phi2
+  116.523 48.2466 206.627
+  134.977 37.7233  225.02
 {% endhighlight %}
 <p>and their volumes in percent</p>
 {% highlight matlab %}
@@ -237,8 +237,8 @@ mdf.eval(csl3)
 mori = misorientation (iron → iron)
  
   Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-    15   28   14    0
+  phi1  Phi phi2
+    15   28   14
  
 ans =
     1.5276

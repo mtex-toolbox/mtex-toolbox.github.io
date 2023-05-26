@@ -200,22 +200,23 @@ rot.angle ./degree
 
 {% highlight plaintext %}
 ans = vector3d
-  x y z
-  1 0 0
 ans =
    30.0000
 {% endhighlight %}
-<p>Closely related to the axis angle parameterisation of a rotation is the Rodriguess Frank vector. This is the rotational axis scaled by \(\tan \omega/2\), where \(\omega\) is the rotational angle.</p>
+<p>Closely related to the axis angle parameterisation of a rotation is the Rodriguess Frank vector.</p>
 {% highlight matlab %}
 R = rot.Rodrigues
-
-2 * atan(norm(R))./degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 R = vector3d
-         x        y        z
-  0.267949        0        0
+{% endhighlight %}
+<p>This is the rotational axis scaled by \(\tan \omega/2\), where \(\omega\) is the rotational angle.</p>
+{% highlight matlab %}
+2 * atan(norm(R))./degree
+{% endhighlight %}
+
+{% highlight plaintext %}
 ans =
    30.0000
 {% endhighlight %}
@@ -231,7 +232,7 @@ ans = rotation
   phi1  Phi phi2
      0   30    0
 {% endhighlight %}
-<h2 id="9">Rotation Matrix</h2><p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
+<h2 id="10">Rotation Matrix</h2><p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
 {% highlight matlab %}
 M = rot.matrix
 {% endhighlight %}
@@ -254,7 +255,7 @@ rot = rotation
   phi1  Phi phi2
      0   30    0
 {% endhighlight %}
-<h2 id="11">Four vectors defining a rotation</h2><p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors u1, v1, u2, v2 there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
+<h2 id="12">Four vectors defining a rotation</h2><p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors u1, v1, u2, v2 there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
 {% highlight matlab %}
 u1 = vector3d.X;
 v1 = vector3d.Y;
@@ -301,9 +302,9 @@ ans = rotation
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  179.825 89.0995 181.616
+  179.292 90.1484 178.888
 {% endhighlight %}
-<h2 id="14">Radom Rotations</h2><p>MTEX offers several ways for generating random rotations. In the most</p><h2 id="15">Logarithm, Exponential Mapping, Spin Tensor</h2><p>TODO</p>
+<h2 id="15">Radom Rotations</h2><p>MTEX offers several ways for generating random rotations. In the most</p><h2 id="16">Logarithm, Exponential Mapping, Spin Tensor</h2><p>TODO</p>
 {% highlight matlab %}
 S = spinTensor(rot)
 
@@ -328,8 +329,6 @@ ans = rotation
  
  
 ans = vector3d
-        x       y       z
-  -1.5708       0       0
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -340,8 +339,6 @@ rotation(exp(v))
 
 {% highlight plaintext %}
 v = vector3d
-        x       y       z
-  -1.5708       0       0
  
 ans = rotation
  
@@ -349,7 +346,7 @@ ans = rotation
   phi1  Phi phi2
    180   90  180
 {% endhighlight %}
-<h2 id="17">Quaternions</h2><p>A last possibility to define a rotation is by <a href="quaternion.quaternion.html">quaternion coordinates</a> a, b, c, d.</p>
+<h2 id="18">Quaternions</h2><p>A last possibility to define a rotation is by <a href="quaternion.quaternion.html">quaternion coordinates</a> a, b, c, d.</p>
 {% highlight matlab %}
 q = quaternion(1,0,0,0)
 
