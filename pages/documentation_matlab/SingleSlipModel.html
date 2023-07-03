@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Sigle Slip Model</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SingleSlipModel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SingleSlipModel.m">
-    edit page</a></font><div><!--introduction--><p>Details to this model can be found in</p><div><ul><li><a href="https://doi.org/10.1093/gji/ggy442">An analytical finite-strain parametrization for texture evolution in deforming olivine polycrystals</a>, Geoph. J. Intern. 216, 2019.</li></ul></div><!--/introduction--><h2 id="1">The Continuity Equation</h2><p>The evolution of the orientation distribution function (ODF) \(f(g)\) with respect to a crystallopgraphic spin \(\Omega(g)\) is governed by the continuity equation</p><p>\[\frac{\partial}{\partial t} f + \nabla f \cdot \Omega + f \text{div} \Omega = 0\]</p><p>The solution of this equation depends on the initial texture \(f_0(g)\) at time zero and the crystallographic spin \(\Omega(g)\). In this model we assume the initial texture to be isotrope, i.e., \(f_0 = 1\) and the crystallopgraphic spin be associated with a single slip system. The full ODF will be later modelled as a superposition of the single slip models.</p><p>In this example we consider Olivine with has orthorhombic symmetry</p>
+    edit page</a></font><div><!--introduction--><p>Details to this model can be found in</p><div><ul><li><a href="https://doi.org/10.1093/gji/ggy442">An analytical finite-strain parametrization for texture evolution in deforming olivine polycrystals</a>, Geoph. J. Intern. 216, 2019.</li></ul></div><!--/introduction--><h2 id="1">The Continuity Equation</h2><p>The evolution of the orientation distribution function (ODF) \(f(g)\) with respect to a crystallopgraphic spin \(\Omega(g)\) is governed by the continuity equation</p><p>\[\frac{\partial}{\partial t} f + \nabla f \cdot \Omega + f \text{ div } \Omega = 0\]</p><p>The solution of this equation depends on the initial texture \(f_0(g)\) at time zero and the crystallographic spin \(\Omega(g)\). In this model we assume the initial texture to be isotrope, i.e., \(f_0 = 1\) and the crystallopgraphic spin be associated with a single slip system. The full ODF will be later modelled as a superposition of the single slip models.</p><p>In this example we consider Olivine with has orthorhombic symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('222',[4.779 10.277 5.995],'mineral','olivine');
 {% endhighlight %}
@@ -44,22 +44,20 @@ E = strainRateTensor (xyz)
   0  0  0
   0  0 -1
 {% endhighlight %}
-<p>via minimizing the square difference</p><p>\[\int_{SO(3)} \sum_{i,j} (e_{i,j}(g) - E_{i,j})^2 dg \to \text{min}\]</p><p>the orientation dependent strain rate tensor is identified as</p><p>\[e_{i,j}(g) = 10/3 \left&lt; S(g), E \right&gt; S(g)\]</p><p>and the corresponding crystallographic spin tensor as</p><p>\[\Omega_i(g) = \epsilon_{ijk} e_{jk}(g)\]</p><p>This can be modeled in MTEX via</p>
+<p>via minimizing the square difference</p><p>\[\int_{SO(3)} \sum_{i,j} (e_{i,j}(g) - E_{i,j})^2 dg \to \text{min}\]</p><p>the orientation dependent strain rate tensor is identified as</p><p>\[e(g) = 10/3 \left&lt; S(g), E \right&gt; S(g)\]</p><p>and the corresponding crystallographic spin tensor as</p><p>\[\Omega_i(g) = \epsilon_{ijk} e_{jk}(g)\]</p><p>This can be modeled in MTEX via</p>
 {% highlight matlab %}
-% explicite version
-% Omega = @(ori) 0.5 * EinsteinSum(tensor.leviCivita,[1 -1 -2],(ori * S(1) : E) * (ori * S(1)),[-1 -2])
-
 Omega = @(ori) vector3d(spinTensor(((ori * S(1)) : E) .* (ori * S(1))));
-%Omega = @(ori) vector3d(spinTensor((S(1) : (inv(ori) * E)) .* S(1)));
-
 Omega = SO3VectorFieldHarmonic.quadrature(Omega,cs)
+
+% other versions
+% Omega = @(ori) 0.5 * EinsteinSum(tensor.leviCivita,[1 -1 -2],(ori * S(1) : E) * (ori * S(1)),[-1 -2])
+% Omega = @(ori) vector3d(spinTensor((S(1) : (inv(ori) * E)) .* S(1)));
+% Omega = SO3VectorFieldHarmonic.quadrature(Omega,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
 Omega = SO3VectorFieldHarmonic (olivine → xyz)
-  isReal: true
   bandwidth: 3
-  weights: [-1.9e-18 1.4e-18 2.5e-18]
 {% endhighlight %}
 <p>We may visualize the orientation depedence of the spin tensor via</p>
 {% highlight matlab %}
@@ -69,7 +67,7 @@ plot(Omega)
 {% include inline_image.html file="SingleSlipModel_01.png" %}
 </center><p>or the divergence of this vectorfield</p>
 {% highlight matlab %}
-plot(div(Omega),'sigma')
+plot(div(SO3VectorFieldHarmonic(Omega)))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SingleSlipModel_02.png" %}
@@ -125,18 +123,11 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SingleSlipModel_06.png" %}
-</center><h2 id="15">Checking the Continuity Equation</h2><p>We may now check wether the continuity equation is satisfied. In a stable state the time difference will be zero and hence \(f \text{div} \Omega\)</p>
+</center><h2 id="15">Checking the Continuity Equation</h2><p>We may now check wether the continuity equation is satisfied. In a stable state the time difference will be zero and hence \(\text{div}(f  \Omega) = 0\)</p><p>TODO: this is currently not working and we do not know why!</p>
 {% highlight matlab %}
-figure(1)
-plot(odf1 .* div(Omega),'sigma')
+plot(div(SO3VectorFieldHarmonic(Omega .* odf1)))
+mtexColorbar('location','south')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SingleSlipModel_07.png" %}
-</center><p>should be the negative of the inner product \(\nabla f \cdot \Omega\)</p>
-{% highlight matlab %}
-figure(2)
-plot(dot(grad(odf1),Omega),'sigma')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SingleSlipModel_08.png" %}
 </center></div></body></html>
