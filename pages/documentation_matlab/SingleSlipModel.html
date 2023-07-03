@@ -1,0 +1,149 @@
+---
+title: Sigle Slip Model
+
+sidebar: documentation_sidebar
+permalink: SingleSlipModel.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Sigle Slip Model</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SingleSlipModel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SingleSlipModel.m">
+    edit page</a></font><div><!--introduction--><p>Details to this model can be found in</p><div><ul><li><a href="https://doi.org/10.1093/gji/ggy442">An analytical finite-strain parametrization for texture evolution in deforming olivine polycrystals</a>, Geoph. J. Intern. 216, 2019.</li></ul></div><!--/introduction--><h2 id="1">The Continuity Equation</h2><p>The evolution of the orientation distribution function (ODF) \(f(g)\) with respect to a crystallopgraphic spin \(\Omega(g)\) is governed by the continuity equation</p><p>\[\frac{\partial}{\partial t} f + \nabla f \cdot \Omega + f \div \Omega = 0\]</p><p>The solution of this equation depends on the initial texture \(f_0(g)\) at time zero and the crystallographic spin \(\Omega(g)\). In this model we assume the initial texture to be isotrope, i.e., \(f_0 = 1\) and the crystallopgraphic spin be associated with a single slip system. The full ODF will be later modelled as a superposition of the single slip models.</p><p>In this example we consider Olivine with has orthorhombic symmetry</p>
+{% highlight matlab %}
+cs = crystalSymmetry('222',[4.779 10.277 5.995],'mineral','olivine')
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs = crystalSymmetry
+ 
+  mineral : olivine   
+  symmetry: 222       
+  elements: 4         
+  a, b, c : 4.8, 10, 6
+{% endhighlight %}
+<p>and the three basic slip systems</p>
+{% highlight matlab %}
+sS = slipSystem(Miller({1,0,0},{1,0,0},{0,0,1},cs,'uvw'),...
+  Miller({0,1,0},{0,0,1},{0,1,0},cs,'hkl'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sS = slipSystem (olivine)
+ size: 1 x 3
+ 
+  u    v    w  | h    k    l CRSS
+  1    0    0    0    1    0    1
+  1    0    0    0    0    1    1
+  0    0    1    0    1    0    1
+{% endhighlight %}
+<p>To each of the slip systems we can associate an orientation dependent Schmid or deformation tensor</p>
+{% highlight matlab %}
+S = sS.deformationTensor
+{% endhighlight %}
+
+{% highlight plaintext %}
+S = tensor (olivine)
+  size: 1 x 3    
+  rank: 2 (3 x 3)
+{% endhighlight %}
+<p>and make the for the orientation dependent strain rate tensor \(e\) the ansatz \(e_{ij}(g) = \gamma(g) S_{ij}\). Fitting this ansatz to a given a macroscopic strain tensor</p>
+{% highlight matlab %}
+E = strainRateTensor([1 0 0; 0 0 0; 0 0 -1])
+{% endhighlight %}
+
+{% highlight plaintext %}
+E = strainRateTensor (xyz)
+  rank: 2 (3 x 3)
+ 
+  1  0  0
+  0  0  0
+  0  0 -1
+{% endhighlight %}
+<p>via minimizing the square difference</p><p>\[\int \sum_{i,j} (e_{i,j}(g) - E_{i,j}) dg \to \text{min}\]</p><p>the orientation dependent strain rate tensor is identified as</p><p>\[e_{i,j}(g) = 10/3 \left&lt; S(g), E right&gt; S(g)\]</p><p>and the corresponding crystallographic spin tensor as</p><p>\[\Omega_i(g) = \epsilon_{ijk} e_{jk}(g)\]</p><p>This can be modeled in MTEX via</p>
+{% highlight matlab %}
+% explicite version
+% Omega = @(ori) 0.5 * EinsteinSum(tensor.leviCivita,[1 -1 -2],(ori * S(1) : E) * (ori * S(1)),[-1 -2])
+
+Omega = @(ori) vector3d(spinTensor(((ori * S(1)) : E) .* (ori * S(1))));
+
+% does not yet work
+%Omega = @(ori) vector3d(spinTensor((S(1) : (inv(ori) * E)) .* S(1)));
+
+Omega = SO3VectorFieldHarmonic.quadrature(Omega,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Omega = SO3VectorFieldHarmonic (olivine → xyz)
+  isReal: true
+  bandwidth: 3
+  weights: [-1.9e-18 1.4e-18 2.5e-18]
+{% endhighlight %}
+<p>We may visualize the orientation depedence of the spin tensor via</p>
+{% highlight matlab %}
+plot(Omega)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_01.png" %}
+</center><p>or the total amount of spin by</p>
+{% highlight matlab %}
+plot(sqrt(normSquare(Omega)),'sigma')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_02.png" %}
+</center><h2 id="9">Solutions of the Continuity Equation</h2><p>The solutions of the continuity equation can be analytically computed and are available via the command <a href="SO3FunSBF.SO3FunSBF.html"><code class="language-plaintext highlighter-rouge">SO3FunSBF</code></a>. This command takes as input the specific slips system <code class="language-plaintext highlighter-rouge">sS</code> and the makroscopic strain tensor.</p>
+{% highlight matlab %}
+odf1 = SO3FunSBF(sS(1),E)
+odf2 = SO3FunSBF(sS(2),E)
+odf3 = SO3FunSBF(sS(3),E)
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf1 = SO3FunSBF (olivine → xyz)
+ 
+    slip system: (010)[100]
+    strain:      1 0 -1
+ 
+odf2 = SO3FunSBF (olivine → xyz)
+ 
+    slip system: (001)[100]
+    strain:      1 0 -1
+ 
+odf3 = SO3FunSBF (olivine → xyz)
+ 
+    slip system: (010)[001]
+    strain:      1 0 -1
+{% endhighlight %}
+<p>Lets visualize these solution by their pole figures</p>
+{% highlight matlab %}
+h = Miller({1,0,0},{0,1,0},{0,0,1},cs);
+plotPDF(odf1,h,'resolution',2*degree,'colorRange','equal')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_03.png" %}
+</center>
+{% highlight matlab %}
+plotPDF(odf2,h,'resolution',2*degree,'colorRange','equal')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_04.png" %}
+</center>
+{% highlight matlab %}
+plotPDF(odf3,h,'resolution',2*degree,'colorRange','equal')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_05.png" %}
+</center><p>We observe that the pole figure with respect to \(n \times b\) is always uniform, where \(n\) is the slip normal and \(b\) is the slip direction.</p>
+{% highlight matlab %}
+plotPDF(odf1 + odf2 + odf3,h,'resolution',2*degree,'colorRange','equal')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_06.png" %}
+</center></div></body></html>
