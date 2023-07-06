@@ -649,3 +649,6 @@ their talks as accessible as possible.
 {% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian/" content="Rüdiger Kilian" %} (Universität Halle),
 {% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Luiz Morales" %} (ETH Zürich),
 {% include reference.html link="https://www.researchgate.net/profile/Frank-Niessen-4" content="Frank Niessen" %} (DTU Dänemark)
+
+{% capture ref_content %}{% include inline_image.html file="acaTrain.jpg" %}{% endcapture %}
+{% include reference.html link="https://acatrain.net/" content=ref_content %}
