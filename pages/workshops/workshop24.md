@@ -32,24 +32,16 @@ practical examples during the exercises within MTEX.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMonday"><b>Monday:</b> Crystal Lattices, Crystal Symmetry and Orientations</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
+	data-parent="#accordion" href="#collapseMonday"><b>Monday:</b> EBSD -
+	First Analysis Steps and Crystallographic Background</a>
 			</h4>
 		</div>
 		<div id="collapseMonday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
 <!--Monday-->
-
-**Lecture 0 - General Concepts:**
-
-<!--{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/zRDL6j8s3Sgs97H" content="slides" class="course_material" %}
-<br>
-Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
-<br>
-<br>
--->
+<!--**Lecture 0 - General Concepts:**-->
 
 **Lecture 1 - EBSD:**
 <br>
@@ -61,9 +53,9 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 <br>
 
 *Lunch*
-<br>
-<br>
 
+<br>
+<br>
 **Lecture 2 - Orientations and Symmetries:**
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
@@ -74,33 +66,43 @@ pole figures, inverse pole figures, fundamental sectors
 **Exercise 2:**
 <br>
 <br>
-
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- TUESDAY -->
+	<!------------------------------------- TUESDAY ------------------------------------------------------------->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTuesday"><b>Tuesday:</b> Electron Backscatter Diffraction (EBSD) and Grains</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
+				data-parent="#accordion"
+				href="#collapseTuesday"><b>Tuesday:</b> Grains Reconstruction
+				and Analysis</a>
 			</h4>
 		</div>
 		<div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
 
-**Lecture 4 - Grains:**
-{% include reference.html link="https://tuc.cloud/index.php/s/K8AS3s5YT9Lezj9" content="slides" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/xkic28kejUA" content="video" class="course_material" %}
+**Lecture 3 - Grains:**
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
 <br>
-**Exercise 4:**
-
+**Exercise 3:**
+<br>
+<br>
 *Lunch*
+<br>
+<br>
+**Lecture 4 - Misorientations and Grain Boundaries:**
+<br>
+grain boundary misorientations, misorientation axis, misorientation angle,
+KAM, GOS, IGMA, twin boundaries, tilt vs. twist
+boundaries, orientation, gradients,  statistics of boundary networks
+<br>
+<br>
+**Exercise 4:**
 <br>
 <br>
 				</div>
@@ -108,22 +110,24 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 		</div>
 	</div>
 	<!-- /.panel -->
-	<!-- Wednesday -->
+	<!------------------------------------------------ Wednesday -------------------------------------------------->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWednesday"><b>Wednesday:</b> Misorientations, Grainboundaries and Density Functions</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
+				data-parent="#accordion"
+				href="#collapseWednesday"><b>Wednesday:</b> Orientation
+				Distribution Function and Excursion</a>
 			</h4>
 		</div>
 		<div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 5 - Misorientations and Grain Boundaries:**
-
+**Lecture 5 - Density Functions:**
 <br>
-grain boundary misorientations, misorientation axis, misorientation angle, KAM, GOS, twin boundaries, tilt vs. twist
-boundaries, phase transition, orientation
-gradients,  statistics of boundary networks, habit planes
+kernel density estimation, orientation density function, pole density
+function, inverse pole density function, model ODFs, ODF characteristics,
+random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 5:**
@@ -137,112 +141,73 @@ gradients,  statistics of boundary networks, habit planes
 			</div>
 		</div>
 	</div>
-	<!-- /.panel -->
+    <!------------------------------------- THURSDAY ------------------------------------------------------------->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThursday"><b>Thursday:</b> Tensorial Properties and Excursion</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
+				data-parent="#accordion"
+				href="#collapseThursday"><b>Thursday:</b> Elastic and Plastic Deformations</a>
 			</h4>
 		</div>
 		<div id="collapseThursday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 6 - Density Functions:**
-{% include reference.html link="https://tuc.cloud/index.php/s/oLagcQzotdNkywH" content="slides 1" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/B6ka2ADCYws" content="video" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/zoxRZrN7mBdeKJe" content="slides 2" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/n4CcrdCyT88" content="video"
-%}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/xPNCCura-ao" content="video"
-%}
-
-
-<br>
-kernel density estimation, orientation density function, pole density
-function, inverse pole density function, model ODFs, ODF characteristics,
-random sampling, ODF reconstuction from XRD data
-<br>
-<br>
-**Exercise 6:**
-{% include reference.html link="https://tuc.cloud/index.php/s/GiNKDaQBpbTybmt" content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/NWJwW2nBE8GQqxL" content="user data 1" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/JmpcteLZ4pbsKSW" content="user data 2" class="course_material" %}
-<span class="course_material">, </span>
-
-<br>
-<br>
-*Lunch*
-<br>
-<br>
-
-**Lecture 7 - Tensorial Properties:**
-{% include reference.html link="https://tuc.cloud/index.php/s/qYetg53m9zPrTSR" content="slides" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/LM86Dgcqsn4Axrq" content="Live Script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/HrPDZ9ZDjXyHgrF" content="EBSD data" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/geUvdAOHvMM" content="video" class="course_material" %}
-
+**Lecture 6 - Tensorial Properties:**
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
 tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
-**Lecture 8 - From Single Grain to Bulk Tensors:**
-{% include reference.html link="https://youtu.be/FwDDIHoLfK8" content="video" class="course_material" %} 
+**Exercise 6 - From Single Grain to Bulk Tensors:**
 <br>
-	average tensors (Voigt, Reuss, Hill) from EBSD and ODF
- 
-
+average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
-
-				</div>
+<br>
+*Lunch*
+<br>
+<br>
+**Lecture 7 - Plastic Deformation:**
+<br>
+deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
+combining MTEX with external software like VPSC, Damask
+<br>
+<br>
+**Exercise 7:**
+ 			  </div>
 			</div>
 		</div>
 	</div>
-	<!-- /.panel -->
+	<!------------------------------------------------- Friday -----------------...----------------->
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:</b> Elastic and Plastic Deformations</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:</b>Orientation
+				Relationships and Phase Transition</a>
 			</h4>
 		</div>
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Exercise 7 - Wave Velocities:**
-{% include reference.html link="https://tuc.cloud/index.php/s/2c5C82NF79tWyRa" content="script file" class="course_material" %}
+**Lecture 8 - Orientation Relationships:**
+<br>
+determination of orientation relationships, phase transition, parent grain reconstruction, transformation
+textures, variant selection
 <br>
 <br>
-**Lecture 9 - Plastic Deformation:**
-{% include reference.html link="https://tuc.cloud/index.php/s/Gs3AFpLSDF2N6Y7" content="slides" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/wEaenbaF3DsCaAH" content="live script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/e7LU4SNMDFY" content="video" class="course_material" %}
-<br>
-deformation tensors, slip systems, Schmid Factor, Taylor factor, simulation, dislocation systems,
-dislocation density estimation
-
+**Exercise 8:**
 <br>
 <br>
 *lunch*
 <br>
 <br>
-Student presentation 
-**Aditya Shukla: Scanning 3D xray microscopy to image grains in CdTe solar cells**
+**Lecture 9 - Specific Topics of Interest:**
+<br>
+Participants can vote for their topic of interest, e.g.: denoising of EBSD
+maps, dislocation density estimation, weighted Burgers vector, habit planes determination, 
 <br>
 <br>
-**Excercise 9 - Parent Grain Reconstruction and Free Discussion of Personal
-Data Sets:**
-{% include reference.html link="https://youtu.be/rRhTMYO_Fyg" content="video" class="course_material" %} 
+**Free Discussion of Personal Data Sets:**
 				</div>
 			</div>
 		</div>
@@ -255,27 +220,21 @@ Data Sets:**
 
 ## Week 2: MTEX in Applications
 
-Date: 13.03.2023 - 15.03.2023
+Date: 11.03.2024 - 13.03.2024
 
-The second week will consist of lectures by invited experts that explain in detail the application of MTEX to specific problems as listed below. Furthermore, current or future users of MTEX are invited to share their experiences with MTEX or ask questions about specific use cases. To encourage discussions we plan with slots of 20 minutes talk given by the participants followed by 10 minute discussions. As we expect a very heterogeneous auditorium we kindly ask the participant to keep their talks as simple as possible.
+The second week is a get together of new and experienced MTEX users to share
+their use cases of MTEX, research results and MTEX specific tricks and
+tips. There will be introductory lectures by invited experts that explain
+their workflow in specific applications of MTEX. To encourage discussions we
+plan with slots of 20 minutes talks followed by 10 minute discussions. As we
+expect a very heterogeneous auditorium we kindly ask the participants to keep
+their talks as accessible as possible.
 
 ### Keynote Speakers
 
 
-- **{% include reference.html link="https://www.ippt.pan.pl/en/staff/?osoba=kfryd" content="Karol Frydrych" %}** (Polish Academy of Science): *Crystal Plasticity Simulation with MTEX*
-
-- **{% include reference.html link="https://geodynamics.geo.uni-halle.de/rebecca-kuehn/" content="Rebeca Kühn" %}** (Universität Halle): *Analyzing X-ray diffraction data of polyphase rocks using MTEX*
-
-- **{% include reference.html link="https://marcoalopez.github.io/" content="Marco A. Lopez-Sanchez" %}** (Universidad de Oviedo): *Seismic modelling using EBSD data: why, how, limitations and good practices*
-
-- **{% include reference.html link="https://www.researchgate.net/profile/Manuel-Petersmann" content="Manuel Petersmann" %}** (Infineon Technologies): *Use cases of MTEX for semiconductor metalizations*
-
-- **{% include reference.html link="https://lightform.org.uk/people/dr-adam-plowman" content="Adam Plowman" %}** (University of Manchester): <span data-toggle="foldable-tooltip" data-icon="fa fa-info-circle" data-preview="Click to see the abstract" data-title="Using MTEX with MatFlow for crystal plasticity and phase field modeling" data-text="MatFlow is an open-source, cross-platform Python package for designing, running, and sharing reproducible hybrid computational workflows in materials science. Through its extension ecosystem, MatFlow can integrate with arbitrary open-source and proprietary materials science codes to form cohesive workflows. We highlight some recent examples of using MatFlow's MTEX extension to generate computational predictions that are calibrated using experimental results. We demonstrate the use of MTEX in MatFlow to generate correctly textured representative volume elements that are then used in crystal plasticity simulations to predict forming limits in aluminium alloys. We also demonstrate a method for encoding orientation data from MTEX into phase-field simulations to investigate abnormal grain growth in titanium alloys. Finally, we discuss our recent development work, which has focussed on enabling MatFlow to execute within a more varied set of computational environments, in support of our aim to allow MatFlow to be run anywhere, by anyone."></span>
-
-- **{% include reference.html link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %}** (National Physical Laboratory UK): *Characterising microstructural shapes using EBSD and correlative SEM imaging techniques*
-
 ## Time Schedule
-
+<!---
 {% capture table_monday %}
 <table>
 	<thead>
@@ -623,8 +582,8 @@ The second week will consist of lectures by invited experts that explain in deta
 		</div>
 	</div>
 </div>
+-->
 
-<!--
 ## Venue:
 
 <div class="panel-group" id="accordion">
@@ -666,24 +625,24 @@ The second week will consist of lectures by invited experts that explain in deta
 		</div>
 	</div>
 </div>
--->
 
-<!--
 ## Registration:
 
+- not yet open
+<!--
 - Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to
 - please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
  content="mtexworkshop@gmail.com" %} where you include name, address, whether
  you are student or not, which week you wish to attend and wether you want to
  participate in present or online
  - Deadline for registration is 31th of January 2023
+-->
 
 ## Registration Fee:
 - first + second week:  (PhD) students - 300 Euro, other - 500 Euro
 - second week: (PhD) students - 100 Euro, other - 200 Euro
 - {% include reference.html link="click here for making the payment" content="https://webshop-tu-freiberg.de/iana_shop_en/registration-mtex-workshop-2023-presence.html"%}
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
--->
 
 
 ## Organizers:
