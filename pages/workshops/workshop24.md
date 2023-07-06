@@ -639,11 +639,11 @@ their talks as accessible as possible.
 -->
 
 ## Registration Fee:
-- first + second week:  (PhD) students - 300 Euro, other - 500 Euro
+- first + second week (presence):  (PhD) students - 400 Euro, other - 600 Euro
+- first + second week (online):  (PhD) students - 200 Euro, other - 300 Euro
 - second week: (PhD) students - 100 Euro, other - 200 Euro
-- {% include reference.html link="click here for making the payment" content="https://webshop-tu-freiberg.de/iana_shop_en/registration-mtex-workshop-2023-presence.html"%}
+- Payment includes Lunch for all days and Excursion fee
 - Registration for students of the TU Freiberg, the TU Chemnitz and the University of Halle is free of charge
-
 
 ## Organizers:
 
