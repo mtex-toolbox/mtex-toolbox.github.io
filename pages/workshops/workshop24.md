@@ -43,12 +43,12 @@ practical examples during the exercises within MTEX.
 <!--Monday-->
 <!--**Lecture 0 - General Concepts:**-->
 
-**Lecture 1 - EBSD:**
+**Lecture 1 - EBSD**
 <br>
 data import, reference frame alignment, pole figures, inverse pole figures, color keys
 <br>
 <br>
-**Exercise 1:**
+**Exercise 1**
 <br>
 <br>
 
@@ -56,14 +56,14 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 
 <br>
 <br>
-**Lecture 2 - Orientations and Symmetries:**
+**Lecture 2 - Orientations and Symmetries**
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
 pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
-**Exercise 2:**
+**Exercise 2**
 <br>
 <br>
 				</div>
@@ -76,33 +76,32 @@ pole figures, inverse pole figures, fundamental sectors
 			<h4 class="panel-title">
 				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
 				data-parent="#accordion"
-				href="#collapseTuesday"><b>Tuesday:</b> Grains Reconstruction
-				and Analysis</a>
+				href="#collapseTuesday"><b>Tuesday:</b> Grains - Reconstruction, Analysis and Misorientations</a>
 			</h4>
 		</div>
 		<div id="collapseTuesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
 
-**Lecture 3 - Grains:**
+**Lecture 3 - Grains**
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
 <br>
-**Exercise 3:**
+**Exercise 3**
 <br>
 <br>
 *Lunch*
 <br>
 <br>
-**Lecture 4 - Misorientations and Grain Boundaries:**
+**Lecture 4 - Misorientations and Grain Boundaries**
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
 boundaries, orientation, gradients,  statistics of boundary networks
 <br>
 <br>
-**Exercise 4:**
+**Exercise 4**
 <br>
 <br>
 				</div>
@@ -123,14 +122,14 @@ boundaries, orientation, gradients,  statistics of boundary networks
 		<div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 5 - Density Functions:**
+**Lecture 5 - Density Functions**
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
 random sampling, ODF reconstuction from XRD data
 <br>
 <br>
-**Exercise 5:**
+**Exercise 5**
 <br>
 <br>
 *Lunch*
@@ -153,13 +152,13 @@ random sampling, ODF reconstuction from XRD data
 		<div id="collapseThursday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 6 - Tensorial Properties:**
+**Lecture 6 - Tensorial Properties**
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
 tensors, piezoelectricity, elasticity, wave velocities
 <br>
 <br>
-**Exercise 6 - From Single Grain to Bulk Tensors:**
+**Exercise 6 - From Single Grain to Bulk Tensors**
 <br>
 average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 <br>
@@ -167,13 +166,13 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 *Lunch*
 <br>
 <br>
-**Lecture 7 - Plastic Deformation:**
+**Lecture 7 - Plastic Deformation**
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 combining MTEX with external software like VPSC, Damask
 <br>
 <br>
-**Exercise 7:**
+**Exercise 7**
  			  </div>
 			</div>
 		</div>
@@ -182,32 +181,32 @@ combining MTEX with external software like VPSC, Damask
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:</b>Orientation
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:</b> Orientation
 				Relationships and Phase Transition</a>
 			</h4>
 		</div>
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 8 - Orientation Relationships:**
+**Lecture 8 - Orientation Relationships**
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
 <br>
 <br>
-**Exercise 8:**
+**Exercise 8**
 <br>
 <br>
 *lunch*
 <br>
 <br>
-**Lecture 9 - Specific Topics of Interest:**
+**Lecture 9 - Specific Topics of Interest**
 <br>
 Participants can vote for their topic of interest, e.g.: denoising of EBSD
 maps, dislocation density estimation, weighted Burgers vector, habit planes determination, 
 <br>
 <br>
-**Free Discussion of Personal Data Sets:**
+**Free Discussion of Personal Data Sets**
 				</div>
 			</div>
 		</div>
@@ -628,7 +627,6 @@ their talks as accessible as possible.
 
 ## Registration:
 
-- not yet open
 <!--
 - Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to
 - please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
