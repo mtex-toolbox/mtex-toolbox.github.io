@@ -12,4 +12,161 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Transformation Texture</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TransformationTexture.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TransformationTexture.m">
-    edit page</a></font><div><h1>Transformation Texture</h1></div></body></html>
+    edit page</a></font><div><h1>Transformation Texture</h1><p>During phase transformation or twinning the orientation of a crystal rapidly flips from an initial state <code class="language-plaintext highlighter-rouge">oriA</code> into a transformed state <code class="language-plaintext highlighter-rouge">oriB</code>. This relationship between the initial and transformed state can be described by an orientation relationsship <code class="language-plaintext highlighter-rouge">OR</code>. To make the situation more precise, we consider the phase transformation from austenite to ferrite via the Nishiyama Wassermann orientation relationship</p>
+{% highlight matlab %}
+% parent and child crystal symmetry
+csP = crystalSymmetry('432','mineral','Austenite');
+csC = crystalSymmetry('432','mineral','Ferrite');
+
+% the orientation relationship
+p2c = orientation.NishiyamaWassermann(csP,csC);
+{% endhighlight %}
+<p>Now an arbitrary  Austenite orientation</p>
+{% highlight matlab %}
+oriA = orientation.rand(csP)
+{% endhighlight %}
+
+{% highlight plaintext %}
+oriA = orientation (Austenite → xyz)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  83.9652 97.1255 335.732
+{% endhighlight %}
+<p>is transformed in one of the following Ferrite orientations</p>
+{% highlight matlab %}
+oriB = variants(p2c,oriA)
+{% endhighlight %}
+
+{% highlight plaintext %}
+oriB = orientation (Ferrite → xyz)
+  size: 1 x 12
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  125.584 121.577 346.376
+  1.65843 111.541 86.1251
+  93.6033 52.1971 247.007
+  345.254 20.6687 275.638
+  219.091 92.5686 202.115
+  114.011 61.6397 55.7467
+  226.792 110.533 23.6789
+  71.6138 141.799 63.1861
+  161.068  71.021 281.075
+  48.6247 130.384 226.435
+  32.9264 26.6599 51.5214
+  130.198 102.575 168.135
+{% endhighlight %}
+<p>These 12 Ferrite orientations are called variants of the orientation relationship. Lets visualize them in a pole figure plot</p>
+{% highlight matlab %}
+hC = Miller({1,1,1},{1,1,0},csC);
+hP = Miller({1,1,0},{1,0,0},csP);
+
+% plot the child variants
+plotPDF(oriB,hC,'MarkerSize',5,'markerColor','black','figSize','medium');
+
+% and on top the parent orientation
+opt = {'MarkerFaceColor','none','MarkerEdgeColor','darkred','linewidth',3};
+for k = 1:2
+  nextAxis(k)
+  hold on
+  plot(oriA * hP(k).symmetrise ,opt{:})
+  xlabel(char(hP(k),'latex'),'Color','red','Interpreter','latex')
+  hold off
+end
+drawNow(gcm)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransformationTexture_01.png" %}
+</center><p>In case we have multiple parent orientations following some initial orientation distribution function <code class="language-plaintext highlighter-rouge">odf</code></p>
+{% highlight matlab %}
+% define a model ODF
+odfA = unimodalODF(oriA,'halfwidth',5*degree)
+
+plotPDF(odfA,hP,'figSize','medium')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+odfA = SO3FunRBF (Austenite → xyz)
+ 
+  <strong>unimodal component</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 1 orientations
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2  weight
+  83.9652 97.1255 335.732       1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransformationTexture_02.png" %}
+</center><p>We can draw some random orientations according this model ODF and apply the same commands <code class="language-plaintext highlighter-rouge">variants</code> to compute all transfomed orientations in one step</p>
+{% highlight matlab %}
+% number of discrete orientations
+n = 10000;
+oriASim = odfA.discreteSample(n)
+
+% transform the orientations
+oriBSim = variants(p2c,oriASim)
+
+% show the result
+plotPDF(oriBSim,hC,'contourf','figSize','medium');
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+oriASim = orientation (Austenite → xyz)
+  size: 10000 x 1
+ 
+oriBSim = orientation (Ferrite → xyz)
+  size: 10000 x 12
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransformationTexture_03.png" %}
+</center><p>An alternative and better approach is to directly use <code class="language-plaintext highlighter-rouge">odfA</code> as an input to the function <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a>. In this case the output is the orientation distribution function of the transformed material</p>
+{% highlight matlab %}
+% compute the child ODF
+odfB = variants(p2c,odfA)
+
+% plot
+plotPDF(odfB,hC,'contourf','figSize','medium');
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+odfB = SO3FunHarmonic (Ferrite → xyz)
+  bandwidth: 48
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransformationTexture_04.png" %}
+</center><p>We observe that the transformed ODF computed by the latter approach is sharper and shows more details when compared with the ODF computed from discrete orientations. We may quantify this difference by computing the texture index of both ODFs</p>
+{% highlight matlab %}
+% texture index of the transformed ODF computed from discrete orientations
+odfBSim = calcDensity(oriBSim)
+textureindex(odfBSim)
+{% endhighlight %}
+
+{% highlight plaintext %}
+odfBSim = SO3FunHarmonic (Ferrite → xyz)
+  bandwidth: 25
+  weight: 1
+ 
+Warning: The command textureindex is depreciated! Please use squared norm
+instead. 
+ans =
+    3.4813
+{% endhighlight %}
+
+{% highlight matlab %}
+% texture index of the directly computed transformed ODF
+textureindex(odfB)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: The command textureindex is depreciated! Please use squared norm
+instead. 
+ans =
+   17.4509
+{% endhighlight %}
+</div></body></html>

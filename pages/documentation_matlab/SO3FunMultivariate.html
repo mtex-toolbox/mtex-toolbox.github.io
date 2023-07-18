@@ -28,7 +28,10 @@ SO3F1 = SO3FunHarmonic.approximation(nodes, y)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: calcVoronoiVolume is inexact up to now. 
+ 
 SO3F1 = SO3FunHarmonic (Quartz → xyz)
+  isReal: false
   size: 2 x 1
   bandwidth: 47
   weight: 0.82
@@ -60,10 +63,9 @@ SO3F3 = SO3FunHarmonic.quadrature(f, 'bandwidth', 50,SO3F1.CS)
 
 {% highlight plaintext %}
 SO3F3 = SO3FunHarmonic (Quartz → xyz)
-  isReal: true
   size: 4 x 1
   bandwidth: 50
-  weight: 2.1
+  weight: 1.1
 {% endhighlight %}
 <p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>.</p>
 {% highlight matlab %}
@@ -72,6 +74,7 @@ SO3F4 = SO3FunHarmonic(eye(10))
 
 {% highlight plaintext %}
 SO3F4 = SO3FunHarmonic (xyz → xyz)
+  isReal: false
   size: 10 x 1
   bandwidth: 1
   weight: 1
@@ -84,6 +87,7 @@ SO3F5(2:4)
 
 {% highlight plaintext %}
 ans = SO3FunHarmonic (Quartz → xyz)
+  isReal: false
   size: 3 x 1
   bandwidth: 50
   weight: 0.236+0.098i
@@ -97,6 +101,7 @@ SO3F1'
 
 {% highlight plaintext %}
 ans = SO3FunHarmonic (Quartz → xyz)
+  isReal: false
   size: 1 x 2
   bandwidth: 47
   weight: 0.82
@@ -115,6 +120,7 @@ ans =
      4     1
  
 SO3F4 = SO3FunHarmonic (xyz → xyz)
+  isReal: false
   size: 2 x 5
   bandwidth: 1
   weight: 1
@@ -127,13 +133,13 @@ mean(SO3F4, 2)
 
 {% highlight plaintext %}
 ans = SO3FunHarmonic (Quartz → xyz)
+  isReal: false
   bandwidth: 47
   weight: 1.051+0.098i
  
  
 ans = SO3FunHarmonic (xyz → xyz)
   antipodal: true
-  isReal: true
   size: 2 x 1
   bandwidth: 1
   weight: 0.2
@@ -147,9 +153,9 @@ min(SO3F4)
 {% highlight plaintext %}
 ans =
   Columns 1 through 7
-    1.0000   -1.7320   -1.2247   -1.7320   -1.2247   -1.7321   -1.2247
+    0.5000   -0.9437   -1.2247   -1.7321   -0.6124   -0.8660   -0.6124
   Columns 8 through 10
-   -1.7320   -1.2247   -1.7320
+   -1.7321   -1.2247   -0.9437
 {% endhighlight %}
 <p><b>Remark on the matrix product</b></p><p>At this point the matrix product is implemented pointwise and not as the usual matrix product.</p>
 {% highlight matlab %}
@@ -160,9 +166,10 @@ SO3F1 .* SO3F4
 
 {% highlight plaintext %}
 ans = SO3FunHarmonic (xyz → xyz)
+  isReal: false
   size: 2 x 5
   bandwidth: 48
-  weight: 0.82
+  weight: 0.41
 {% endhighlight %}
 <h2 id="19">Visualization of multivariate SO3FunHarmonic</h2><p>Similary to the univariate case we also can look at the Fourier coefficients of multivariate functions.</p>
 {% highlight matlab %}
@@ -176,9 +183,8 @@ plot(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the
-desired components manually. In the following the first
-component is plotted.
+Warning: You try to plot an multivariate function. Plot the desired
+components manually. In the following the first component is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_02.png" %}
@@ -188,9 +194,8 @@ plot3d(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the
-desired components manually. In the following the first
-component is plotted.
+Warning: You try to plot an multivariate function. Plot the desired
+components manually. In the following the first component is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_03.png" %}

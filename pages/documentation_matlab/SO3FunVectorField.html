@@ -39,9 +39,7 @@ SO3VectorFieldHarmonic(SO3VF)
 
 {% highlight plaintext %}
 ans = SO3VectorFieldHarmonic (xyz → xyz)
-  isReal: true
   bandwidth: 64
-  weights: [3.1 3.1 0]
 {% endhighlight %}
 <p><b>Definition via function values</b></p><p>At first we need some example rotations</p>
 {% highlight matlab %}
@@ -58,10 +56,10 @@ SO3VF1 = SO3VectorFieldHarmonic.approximation(nodes, y)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: calcVoronoiVolume is inexact up to now. 
+ 
 SO3VF1 = SO3VectorFieldHarmonic (xyz → xyz)
-  isReal: true
   bandwidth: 10
-  weights: [3.8e-05 0.0017 0.76]
 {% endhighlight %}
 <p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> as an argument and returns a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p><p>Now we can call the quadrature command to get <code class="language-plaintext highlighter-rouge">SO3VF2</code> of type <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
 {% highlight matlab %}
@@ -70,9 +68,7 @@ SO3VF2 = SO3VectorFieldHarmonic.quadrature(@(v) f(v))
 
 {% highlight plaintext %}
 SO3VF2 = SO3VectorFieldHarmonic (xyz → xyz)
-  isReal: true
   bandwidth: 64
-  weights: [3.1 3.1 0]
 {% endhighlight %}
 <p><b>Definition via <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a></b></p><p>If we directly call the constructor with a multivariate <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> with three entries it will create a <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code> with <code class="language-plaintext highlighter-rouge">SO3F(1)</code>, <code class="language-plaintext highlighter-rouge">SO3F(2)</code>, and <code class="language-plaintext highlighter-rouge">SO3F(3)</code> the \(x\), \(y\), and \(z\) component.</p>
 {% highlight matlab %}
@@ -82,14 +78,15 @@ SO3VF3 = SO3VectorFieldHarmonic(SO3F)
 
 {% highlight plaintext %}
 SO3F = SO3FunHarmonic (xyz → xyz)
+  isReal: false
   size: 3 x 1
   bandwidth: 9
-  weight: 0.86
+  weight: 0.7
  
  
 SO3VF3 = SO3VectorFieldHarmonic (xyz → xyz)
+  isReal: false
   bandwidth: 9
-  weights: [0.86 0.26 0.58]
 {% endhighlight %}
 <h2 id="12">Operations</h2><p><b>Basic arithmetic operations</b></p><p>Again the basic mathematical operations are supported:</p><p>addition/subtraction of a vector field and a vector or addition/subtraction of two vector fields</p>
 {% highlight matlab %}
@@ -137,14 +134,14 @@ quiver3(SO3VF2);
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Setting the "WindowButtonDownFcn" property is not
-permitted while this mode is active. 
-Warning: Setting the "WindowButtonUpFcn" property is not
-permitted while this mode is active. 
-Warning: Setting the "KeyPressFcn" property is not permitted
+Warning: Setting the "WindowButtonDownFcn" property is not permitted
 while this mode is active. 
-Warning: Setting the "WindowScrollWheelFcn" property is not
-permitted while this mode is active.
+Warning: Setting the "WindowButtonUpFcn" property is not permitted while
+this mode is active. 
+Warning: Setting the "KeyPressFcn" property is not permitted while this
+mode is active. 
+Warning: Setting the "WindowScrollWheelFcn" property is not permitted
+while this mode is active.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorField_02.png" %}
