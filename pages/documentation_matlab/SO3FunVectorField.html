@@ -29,8 +29,12 @@ SO3VF.eval(rot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d
+ans = SO3TangentVector
  size: 2 x 1
+ TagentSpace: left
+          x         y         z
+  0.0506004   5.72895         0
+   0.912927   3.87108         0
 {% endhighlight %}
 <h2 id="4">Defining a SO3VectorFieldHarmonic</h2><p><b>Definition via SO3VectorField</b></p><p>We can expand any <code class="language-plaintext highlighter-rouge"><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></code> in an <code class="language-plaintext highlighter-rouge"><a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a></code> directly by the command <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
 {% highlight matlab %}
@@ -56,6 +60,9 @@ SO3VF1 = SO3VectorFieldHarmonic.approximation(nodes, y)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: The given vector3d values v are assumed to describe elements w.r.t.
+the left side tangent space. If you want them to be right sided use
+SO3TangentVector(v,'right') instead. 
 Warning: calcVoronoiVolume is inexact up to now. 
  
 SO3VF1 = SO3VectorFieldHarmonic (xyz → xyz)
@@ -67,6 +74,10 @@ SO3VF2 = SO3VectorFieldHarmonic.quadrature(@(v) f(v))
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: The given function_handle is assumed to describe elements w.r.t. the
+left side tangent space. If you want them to be right sided use
+SO3VectorFieldHandle(fun,SRight,SLeft,'right') instead. 
+ 
 SO3VF2 = SO3VectorFieldHarmonic (xyz → xyz)
   bandwidth: 64
 {% endhighlight %}
@@ -81,7 +92,7 @@ SO3F = SO3FunHarmonic (xyz → xyz)
   isReal: false
   size: 3 x 1
   bandwidth: 9
-  weight: 0.7
+  weight: 0.53
  
  
 SO3VF3 = SO3VectorFieldHarmonic (xyz → xyz)
@@ -93,20 +104,46 @@ SO3VF3 = SO3VectorFieldHarmonic (xyz → xyz)
 SO3VF1 + SO3VF2; SO3VF1+vector3d(1, 0, 0);
 SO3VF1-SO3VF2; SO3VF2-vector3d(sqrt(2)/2, sqrt(2)/2, 0);
 {% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    'left'
+ans =
+    'left'
+ans =
+    'left'
+ans =
+    'left'
+{% endhighlight %}
 <p>multiplication/division by a scalar or a <code class="language-plaintext highlighter-rouge">SO3Fun</code></p>
 {% highlight matlab %}
 2.*SO3VF1; SO3VF1./4;
 SO3F = SO3FunHarmonic.example;
 SO3F.SRight = specimenSymmetry;
+SO3F = SO3F.symmetrise;
 SO3F .* SO3VF1;
 {% endhighlight %}
 <p>dot product with a vector or another vector field</p>
 {% highlight matlab %}
 dot(SO3VF1, SO3VF2); dot(SO3VF1, vector3d(0, 0, 1));
 {% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    'left'
+ans =
+    'left'
+{% endhighlight %}
 <p>cross product with a vector or another vector field</p>
 {% highlight matlab %}
 cross(SO3VF1, SO3VF2); cross(SO3VF1, vector3d(0, 0, 1));
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    'left'
+ans =
+    'left'
 {% endhighlight %}
 <p>mean vector of the vector field</p>
 {% highlight matlab %}
@@ -134,14 +171,14 @@ quiver3(SO3VF2);
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Setting the "WindowButtonDownFcn" property is not permitted
-while this mode is active. 
-Warning: Setting the "WindowButtonUpFcn" property is not permitted while
-this mode is active. 
-Warning: Setting the "KeyPressFcn" property is not permitted while this
+Warning: Setting the "WindowButtonDownFcn" property is not permitted while this
 mode is active. 
-Warning: Setting the "WindowScrollWheelFcn" property is not permitted
-while this mode is active.
+Warning: Setting the "WindowButtonUpFcn" property is not permitted while this
+mode is active. 
+Warning: Setting the "KeyPressFcn" property is not permitted while this mode is
+active. 
+Warning: Setting the "WindowScrollWheelFcn" property is not permitted while
+this mode is active.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorField_02.png" %}
