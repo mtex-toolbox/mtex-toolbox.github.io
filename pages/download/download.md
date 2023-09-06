@@ -26,6 +26,7 @@ features and syntax changes.
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
+[**mtex-6.0.beta1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta1/mtex-6.0.beta1.zip) ||| September 2023 ||| pseudo 3d EBSD ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-6.0.beta1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.10.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.10.1/mtex-5.10.1.zip) ||| September 2023 ||| bug fixes ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.10.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.10.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.10.0/mtex-5.10.0.zip) ||| May 2023 ||| weighted Burgers vector ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.10.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.9.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.9.0/mtex-5.9.0.zip) ||| March 2023 ||| habit plane detection, SO3Fun ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.9.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
