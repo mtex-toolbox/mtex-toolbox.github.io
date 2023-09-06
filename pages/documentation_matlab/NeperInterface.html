@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Neper</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_NeperInterface.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/NeperInterface.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">General</h2><p>Neper is an open source software package for polycrystal generation and meshing developed by Romain Query. It can be obtained from <a href="https://neper.info">https://neper.info</a>, where also the documentation is located.</p><p>This module provides an comfortable interface to neper. It is used to simulate microstructures with certain parameters and load them back into MTEX for analysis and further investigation with the various tools provided by MTEX.</p><p>In order to do this, a slicing of the 3-dimensional tesselation is necessary after the simulation. The obtained 2-dimensional tesselation is processed as an object from the class <code class="language-plaintext highlighter-rouge">grain2d</code>.</p><h2 id="2">Contents</h2><div><ul><li>Setting-up the neper instance and further options</li><li>Simulation/tesselation</li><li>Slicing</li></ul></div><h2 id="3">Setting-up the neper instance</h2><p>If you do not want to make any further adjustments to the default values, this step could be done very easily. In this case please skip to chapter "Simulating a microstructure with Neper"</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">General</h2><p>Neper is an open source software package for polycrystal generation and meshing developed by Romain Query. It can be obtained from <a href="https://neper.info">https://neper.info</a>, where also the documentation is located.</p><p>This module provides an comfortable interface to neper. It is used to simulate microstructures with certain parameters and load them back into MTEX for analysis and further investigation with the various tools provided by MTEX.</p><p>In order to do this, a slicing of the 3-dimensional tesselation is necessary after the simulation. The obtained 2-dimensional tesselation is processed as an object from the class <code class="language-plaintext highlighter-rouge">grain2d</code>.</p><h2 id="2">Setting-up the neper instance</h2><p>If you do not want to make any further adjustments to the default values, this step could be done very easily. In this case please skip to chapter "Simulating a microstructure with Neper"</p>
 {% highlight matlab %}
 job = neperInstance
 {% endhighlight %}
@@ -35,21 +35,7 @@ job =
 % for example
 % job.filePath = 'C:\Users\user\Documents\work\MtexWork\neper';
 % or
- job.filePath = [mtexDataPath filesep 'Neeper']
-{% endhighlight %}
-
-{% highlight plaintext %}
-job = 
-  neperInstance with properties:
-
-            id: 1
-      cubeSize: [1 1 1]
-        morpho: 'graingrowth'
-       iterMax: 1000
-    fileName2d: '2dslice'
-    fileName3d: 'allgrains'
-      filePath: '/home/hielscher/mtex/master/data/Neeper'
-     newfolder: 1
+ job.filePath = [mtexDataPath filesep 'Neeper'];
 {% endhighlight %}
 <p>By default a new folder, named neper will be created for the tesselation data. If you do not want to create a new folder you can switch it of by setting <code class="language-plaintext highlighter-rouge">newfolder</code> to <code class="language-plaintext highlighter-rouge">false</code>.</p>
 {% highlight matlab %}
@@ -60,7 +46,7 @@ job.newfolder = false;
 job.fileName3d = 'my100grains';
 job.fileName2d = 'my100GrSlice';
 {% endhighlight %}
-<h2 id="7">Tesselation options</h2><p>The grains will be generated in cubic domain. By default the domain has the edge length 1 in each direction. To change the size of the domain, store a row vector with 3 entries (x,y,z) in the variable <code class="language-plaintext highlighter-rouge">cubeSize</code>.</p>
+<h2 id="6">Tesselation options</h2><p>The grains will be generated in cubic domain. By default the domain has the edge length 1 in each direction. To change the size of the domain, store a row vector with 3 entries (x,y,z) in the variable <code class="language-plaintext highlighter-rouge">cubeSize</code>.</p>
 {% highlight matlab %}
 job.cubeSize = [4 4 2];
 {% endhighlight %}
@@ -72,327 +58,26 @@ job.id = 529;
 {% highlight matlab %}
 job.morpho = 'diameq:lognormal(1,0.35),1-sphericity:lognormal(0.145,0.03)';
 {% endhighlight %}
-<h2 id="10">Simulating a microstructure with Neper</h2><p>The tesselation is executed by the command <code class="language-plaintext highlighter-rouge">simulateGrains</code>. There are two option to call it. 1. by ODF and number of grains:</p>
+<h2 id="9">Simulating a microstructure with Neper</h2><p>The tesselation is executed by the command <code class="language-plaintext highlighter-rouge">simulateGrains</code>. There are two option to call it.</p><div><ol><li>by an <a href="ODFTheory.html">ODF</a> and the number of grains</li><li>by a list of orientations. In this case the length of the list determines the number of grains.</li></ol></div>
 {% highlight matlab %}
 cs = crystalSymmetry('432');
 ori = orientation.rand(cs);
 odf = unimodalODF(ori);
 numGrains=100;
 
-job.simulateGrains(odf,numGrains)
+job.simulateGrains(odf,numGrains,'silent')
 {% endhighlight %}
-
-{% highlight plaintext %}
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -T loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] -n 100 -id 529 -morpho
-         diameq:lognormal(1,0.35),1-sphericity:lognormal(0.145,0.03)
-         -domain cube(4,4,2) -morphooptistop itermax=1000 -oricrysym m-3m
-         -ori file(ori_in.txt) -statpoly faceeqs -o my100grains
-         -oridescriptor rodrigues -oriformat plain -format tess,ori
-Info   : ---------------------------------------------------------------
-Info   : Reading input data...
-Info   : Creating domain...
-Info   : Creating tessellation...
-Info   :   - Setting seeds... 100%
-Info   :   - Generating crystal orientations...
-Info   :     [i] Parsing file `ori_in.txt'...
-Info   :     [i] Parsed file `ori_in.txt'.
-Info   :   - Running tessellation...
-Info   :     > Initial solution: f   =2.540062400
-Info   :     > Iteration   1000: fmin=0.564013932 f=0.564013932
-Info   :     > Final   solution: f   =0.564013932
-Info   :     > Final solution  : f   =0.564013932 (1001 iterations)
-Info   :     > Reached `itermax' criterion.
-Info   : Writing results...
-Info   :     [o] Writing file `my100grains.tess'...
-Info   :     [o] Wrote file `my100grains.tess'.
-Info   :     [o] Writing file `my100grains.ori'...
-Info   :     [o] Wrote file `my100grains.ori'.
-Info   : Writing statistics...
-Info   :     [o] Writing file `my100grains.stpoly'...
-Info   :     [o] Wrote file `my100grains.stpoly'.
-Info   : Elapsed time: 2.999 secs.
-========================================================================
-
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -V loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] my100grains.tess
-Info   : ---------------------------------------------------------------
-Info   : Elapsed time: 0.001 secs.
-========================================================================
-{% endhighlight %}
-<p>2. by list of orientations: In this case the length of the list determines the number of Grains.</p>
+<h2 id="10">Slicing</h2><p>To get slices of your tesselation, that you can process with MTEX, the command <code class="language-plaintext highlighter-rouge">getSlice</code> is used, wich returns a set of grains (<code class="language-plaintext highlighter-rouge">grain2d</code>). It is called by giving the normal vector [a,b,c] of the plane and either a point that lies in the plane or the "d" of the plane equation. Please consider that the slicing must align with the size of the domain/cube (see Tesselation options - cubeSize)</p>
 {% highlight matlab %}
-oriList=odf.discreteSample(numGrains);
+% the normals of the slices
+N = [vector3d(0,0,1),vector3d(1,-1,0),vector3d(2,2,4)];
 
-job.simulateGrains(oriList)
-{% endhighlight %}
-
-{% highlight plaintext %}
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -T loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] -n 100 -id 529 -morpho
-         diameq:lognormal(1,0.35),1-sphericity:lognormal(0.145,0.03)
-         -domain cube(4,4,2) -morphooptistop itermax=1000 -oricrysym m-3m
-         -ori file(ori_in.txt) -statpoly faceeqs -o my100grains
-         -oridescriptor rodrigues -oriformat plain -format tess,ori
-Info   : ---------------------------------------------------------------
-Info   : Reading input data...
-Info   : Creating domain...
-Info   : Creating tessellation...
-Info   :   - Setting seeds... 100%
-Info   :   - Generating crystal orientations...
-Info   :     [i] Parsing file `ori_in.txt'...
-Info   :     [i] Parsed file `ori_in.txt'.
-Info   :   - Running tessellation...
-Info   :     > Initial solution: f   =2.540062400
-Info   :     > Iteration   1000: fmin=0.564013932 f=0.564013932
-Info   :     > Final   solution: f   =0.564013932
-Info   :     > Final solution  : f   =0.564013932 (1001 iterations)
-Info   :     > Reached `itermax' criterion.
-Info   : Writing results...
-Info   :     [o] Writing file `my100grains.tess'...
-Info   :     [o] Wrote file `my100grains.tess'.
-Info   :     [o] Writing file `my100grains.ori'...
-Info   :     [o] Wrote file `my100grains.ori'.
-Info   : Writing statistics...
-Info   :     [o] Writing file `my100grains.stpoly'...
-Info   :     [o] Wrote file `my100grains.stpoly'.
-Info   : Elapsed time: 2.939 secs.
-========================================================================
-
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -V loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] my100grains.tess
-Info   : ---------------------------------------------------------------
-Info   : Elapsed time: 0.001 secs.
-========================================================================
-{% endhighlight %}
-<h2 id="12">Slicing</h2><p>To get slices of your tesselation, that you can process with MTEX, the command <code class="language-plaintext highlighter-rouge">getSlice</code> is used, wich returns a set of grains (<code class="language-plaintext highlighter-rouge">grain2d</code>). It is called by giving the normal vector [a,b,c] of the plane and either a point that lies in the plane or the "d" of the plane equation. Please consider that the slicing must align with the size of the domain/cube (see Tesselation options - cubeSize)</p>
-{% highlight matlab %}
-N=vector3d(0,0,1);
-d=1;
-grains001 = job.getSlice(N,d);
-
-N=vector3d(1,-1,0);
+% make all slices passing through this point
 A=vector3d(2,2,1);
-grains1_10=job.getSlice(N,A);
 
-N=vector3d(2,2,4);
-A=vector3d(2,2,1);
-grains224=job.getSlice(N,A);
-{% endhighlight %}
-
-{% highlight plaintext %}
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -T loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] -loadtess my100grains.tess -transform slice(1,0,0,1)
-         -ori file(my100grains.ori) -o my100GrSlice -oriformat geof
-         -oridescriptor rodrigues -format tess,ori
-Info   : ---------------------------------------------------------------
-Info   : Reading input data...
-Info   : Importing tessellation...
-Info   :     [i] Parsing file `my100grains.tess'...
-Info   :     [i] Parsed file `my100grains.tess'.
-Info   : Transforming tessellation...
-Info   :   - Slicing...
-Info   : Writing results...
-Info   :     [o] Writing file `my100GrSlice.tess'...
-Info   :     [o] Wrote file `my100GrSlice.tess'.
-Info   :     [o] Writing file `my100GrSlice.ori'...
-Info   :     [o] Wrote file `my100GrSlice.ori'.
-Info   : Elapsed time: 0.022 secs.
-========================================================================
-
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -V loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] my100GrSlice.tess
-Info   : ---------------------------------------------------------------
-Info   : Elapsed time: 0.000 secs.
-========================================================================
-
-reading **format ...
-reading **general ...
-reading **cell ...
-reading  *id ...
-reading  *crysym ...
-reading  *seed ...
-reading  *ori ...
-reading **vertex ...
-reading **edge ...
-reading **face ...
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -T loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] -loadtess my100grains.tess -transform slice(0,1,-1,0)
-         -ori file(my100grains.ori) -o my100GrSlice -oriformat geof
-         -oridescriptor rodrigues -format tess,ori
-Info   : ---------------------------------------------------------------
-Info   : Reading input data...
-Info   : Importing tessellation...
-Info   :     [i] Parsing file `my100grains.tess'...
-Info   :     [i] Parsed file `my100grains.tess'.
-Info   : Transforming tessellation...
-Info   :   - Slicing...
-Info   : Writing results...
-Info   :     [o] Writing file `my100GrSlice.tess'...
-Info   :     [o] Wrote file `my100GrSlice.tess'.
-Info   :     [o] Writing file `my100GrSlice.ori'...
-Info   :     [o] Wrote file `my100GrSlice.ori'.
-Info   : Elapsed time: 0.017 secs.
-========================================================================
-
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -V loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] my100GrSlice.tess
-Info   : ---------------------------------------------------------------
-Info   : Elapsed time: 0.003 secs.
-========================================================================
-
-reading **format ...
-reading **general ...
-reading **cell ...
-reading  *id ...
-reading  *crysym ...
-reading  *seed ...
-reading  *ori ...
-reading **vertex ...
-reading **edge ...
-reading **face ...
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -T loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] -loadtess my100grains.tess -transform slice(12,2,2,4)
-         -ori file(my100grains.ori) -o my100GrSlice -oriformat geof
-         -oridescriptor rodrigues -format tess,ori
-Info   : ---------------------------------------------------------------
-Info   : Reading input data...
-Info   : Importing tessellation...
-Info   :     [i] Parsing file `my100grains.tess'...
-Info   :     [i] Parsed file `my100grains.tess'.
-Info   : Transforming tessellation...
-Info   :   - Slicing...
-Info   : Writing results...
-Info   :     [o] Writing file `my100GrSlice.tess'...
-Info   :     [o] Wrote file `my100GrSlice.tess'.
-Info   :     [o] Writing file `my100GrSlice.ori'...
-Info   :     [o] Wrote file `my100GrSlice.ori'.
-Info   : Elapsed time: 0.024 secs.
-========================================================================
-
-
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.5.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 8 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-Info   : No initialization file found (`/home/hielscher/.neperrc').
-Info   : ---------------------------------------------------------------
-Info   : MODULE  -V loaded with arguments:
-Info   : [ini file] (none)
-Info   : [com line] my100GrSlice.tess
-Info   : ---------------------------------------------------------------
-Info   : Elapsed time: 0.009 secs.
-========================================================================
-
-reading **format ...
-reading **general ...
-reading **cell ...
-reading  *id ...
-reading  *crysym ...
-reading  *seed ...
-reading  *ori ...
-reading **vertex ...
-reading **edge ...
-reading **face ...
+grains001 = job.getSlice(N(1),A,'silent');
+grains1_10= job.getSlice(N(2),A,'silent');
+grains224 = job.getSlice(N(3),A,'silent');
 {% endhighlight %}
 
 {% highlight matlab %}
