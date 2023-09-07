@@ -33,13 +33,13 @@ of material scientists, geologists and mathematicians.
                 <ul class="no_bullet">
 				   					<li>
                         09/23 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta1/mtex-6.0.beta1.zip" content="MTEX 6.0.beta1" download=true %}
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta2/mtex-6.0.beta2.zip" content="MTEX 6.0.beta2" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
    					<li>
                         09/23 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.10.1/mtex-5.10.1.zip" content="MTEX 5.10.1" download=true %}
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.10.2/mtex-5.10.2.zip" content="MTEX 5.10.1" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
