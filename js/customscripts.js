@@ -1,4 +1,38 @@
 
+function auto_scroll_x(scrollElement, scrollStep=1, scrollDelayMilSec=1000) {
+    const scrollWidth = scrollElement.scrollWidth - scrollElement.clientWidth;
+    const scrollDelay = scrollDelayMilSec;
+
+    // auto-scrolling
+    const scrollAnimation = setInterval(()=>{
+        if (scrollElement.scrollLeft >= scrollWidth) {
+            scrollStep *= -1;
+        } else if (scrollElement.scrollLeft <= 0) {
+            scrollStep *= -1;
+        }
+        scrollElement.scrollBy(scrollStep, 0);
+    }, scrollDelay);
+
+    // stop auto-scrolling while mouse over element
+    scrollElement.addEventListener("mouseenter", (evt)=>{
+        clearInterval(scrollAnimation);
+    });
+    // continue auto-scrolling when mouse leave element
+    scrollElement.addEventListener("mouseleave", (evt)=>{
+        auto_scroll_x(scrollElement, scrollStep, scrollDelayMilSec);
+    });
+
+    // stop auto-scrolling on mobile after short time
+    const scrollDuration = scrollWidth / scrollStep * scrollDelay;
+    if (scrollWidth < 200) {
+        setTimeout(()=>{
+            clearInterval(scrollAnimation);
+        }, scrollDuration);
+    }
+}
+
+
+
 // some small functions
 const uniqId = (()=>{let i=0;return()=>{return i++;}})();
 
@@ -68,6 +102,11 @@ $(document).ready(function() {
                 $(this).attr("unfolded", "false");
             }
         }
+    });
+
+    // auto scroll along x-axis
+    $(".auto-scroll-x").each(function() {
+        auto_scroll_x(this, 1, 3000)
     });
 });
 
