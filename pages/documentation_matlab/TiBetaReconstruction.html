@@ -43,7 +43,7 @@ beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
  
  (110) || (0001)   [1-11] || [-2110]
 {% endhighlight %}
-<p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initital child grains from out EBSD data set.</p>
+<p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [-2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initital child grains from out EBSD data set.</p>
 {% highlight matlab %}
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree);
@@ -63,7 +63,7 @@ job = parentGrainReconstructor
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.71°, 0.99°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 1°, 1.3°, 1.7° (quintiles)
 {% endhighlight %}
 <p>The output of the <code class="language-plaintext highlighter-rouge">job</code> variable allows you to keep track of the amount of already recovered parent grains. Using the variable <code class="language-plaintext highlighter-rouge">job</code> you have access to the following properties</p><div><ul><li><code class="language-plaintext highlighter-rouge">job.grainsIn</code> - the input grains</li><li><code class="language-plaintext highlighter-rouge">job.grains</code> - the grains at the current stage of reconstruction</li><li><code class="language-plaintext highlighter-rouge">job.ebsdIn</code> - the input EBDS data</li><li><code class="language-plaintext highlighter-rouge">job.ebsd</code> - the ebsd data at the current stage of reconstruction</li><li><code class="language-plaintext highlighter-rouge">job.mergeId</code> - the relationship between the input grains <code class="language-plaintext highlighter-rouge">job.grainsIn</code> and the current grains <code class="language-plaintext highlighter-rouge">job.grains</code>, i.e., <code class="language-plaintext highlighter-rouge">job.grainsIn(ind)</code> goes into the merged grain <code class="language-plaintext highlighter-rouge">job.grains(job.mergeId(ind))</code></li><li><code class="language-plaintext highlighter-rouge">job.numChilds</code> - number of childs of each current parent grain</li><li><code class="language-plaintext highlighter-rouge">job.parenGrains</code> - the current parent grains</li><li><code class="language-plaintext highlighter-rouge">job.childGrains</code> - the current child grains</li><li><code class="language-plaintext highlighter-rouge">job.isTransformed</code> - which of the <code class="language-plaintext highlighter-rouge">grainsMeasured</code> have a computed parent</li><li><code class="language-plaintext highlighter-rouge">job.isMerged</code> - which of the <code class="language-plaintext highlighter-rouge">grainsMeasured</code> have been merged into a parent grain</li><li><code class="language-plaintext highlighter-rouge">job.transformedGrains</code> - child grains in <code class="language-plaintext highlighter-rouge">grainsMeasured</code> with computed parent grain</li></ul></div><p>Additionaly, the <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a> class provides the following operations for parent grain reconstruction. These operators can be applied multiple times and in any order to archieve the best possible reconstruction.</p><div><ul><li><code class="language-plaintext highlighter-rouge">job.calcVariantGraph</code> - compute the variant graph</li><li><code class="language-plaintext highlighter-rouge">job.clusterVariantGraph</code> - compute votes from the variant graph</li><li><code class="language-plaintext highlighter-rouge">job.calcGBVotes</code> - detect child/child and parent/child grain boundaries</li><li><code class="language-plaintext highlighter-rouge">job.calcTPVotes</code> - detect child/child/child triple points</li><li><code class="language-plaintext highlighter-rouge">job.calcParentFromVote</code> - recover parent grains from votes</li><li><code class="language-plaintext highlighter-rouge">job.calcParentFromGraph</code> - recover parent grains from graph clustering</li><li><code class="language-plaintext highlighter-rouge">job.mergeSimilar</code> - merge similar parent grains</li><li><code class="language-plaintext highlighter-rouge">job.mergeInclusions</code> - merge inclusions</li></ul></div><p>The main line of the variant graph based reconstruction algorithm is as follows. First we compute the variant graph using the command <a href="parentGrainReconstructor.calcVariantGraph"><code class="language-plaintext highlighter-rouge">job.calcVariantGraph</code></a></p>
 {% highlight matlab %}
@@ -79,7 +79,7 @@ ans = parentGrainReconstructor
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.7°, 0.98°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 1°, 1.3°, 1.7° (quintiles)
  
  variant graph: 615100 entries
 {% endhighlight %}
@@ -190,6 +190,10 @@ parentEBSD = job.ebsd;
 % plot the result
 color = ipfKey.orientation2color(parentEBSD('Ti (Beta)').orientations);
 plot(parentEBSD('Ti (Beta)'),color,'figSize','large')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Packet ID calculation assuming {111}_p||{110}_c
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_05.png" %}

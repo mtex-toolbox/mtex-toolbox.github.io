@@ -44,6 +44,10 @@ ans =
 SO3F2 = SO3FunHarmonic.approximation(nodes, S.values);
 plot(SO3F2)
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: calcVoronoiVolume is inexact up to now.
+{% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationInterpolation_03.png" %}
 </center><p>Plotting this function, we can immidiately see, that we have a much smoother function. But one has to keep in mind that the error in the data nodes is not zero as in the case of interpolation.</p>
@@ -55,4 +59,110 @@ norm(eval(SO3F, nodes) - S.values)
 ans =
     2.5025
 {% endhighlight %}
-<p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p><p>The strategy underlying the <code class="language-plaintext highlighter-rouge">approximation</code>-command to obtain such an approximation works via Wigner-D functions (<a href="SO3FunHarmonicSeries">Basics of rotational harmonics</a>). For that, we seek for so-called Fourier-coefficients \({\bf \hat f} = (\hat f^{0,0}_0,\dots,\hat f^{N,N}_N)^T\) such that</p><p>\[ g(x) = \sum_{n=0}^N\sum_{k,l = -n}^n \hat f_n^{k,l} D_n^{k,l}(x) \]</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional</p><p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \]</p><p>for the data nodes \(x_m\), \(m=1,\dots,M\), \(f(x_m)\) the target function values and \(g(x_m)\) our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p><p>\[ F = [D_n^{k,l}(x_m)]_{m = 1,\dots,M;~n = 0,\dots,N,\,k,l = -n,\dots,n}. \]</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced SO(3) Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsoft.php">NSOFT</a> or faster by the combination of an Wigner-transform together with a <a href="https://www-user.tu-chemnitz.de/~potts/nfft/index.php">NFFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation \(g\), which describe our approximation.</p></div></body></html>
+<p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p><p>The strategy underlying the <code class="language-plaintext highlighter-rouge">approximation</code>-command to obtain such an approximation works via Wigner-D functions (<a href="SO3FunHarmonicSeries">Basics of rotational harmonics</a>). For that, we seek for so-called Fourier-coefficients \({\bf \hat f} = (\hat f^{0,0}_0,\dots,\hat f^{N,N}_N)^T\) such that</p><p>\[ g(x) = \sum_{n=0}^N\sum_{k,l = -n}^n \hat f_n^{k,l} D_n^{k,l}(x) \]</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional</p><p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \]</p><p>for the data nodes \(x_m\), \(m=1,\dots,M\), \(f(x_m)\) the target function values and \(g(x_m)\) our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p><p>\[ F = [D_n^{k,l}(x_m)]_{m = 1,\dots,M;~n = 0,\dots,N,\,k,l = -n,\dots,n}. \]</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced SO(3) Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsoft.php">NSOFT</a> or faster by the combination of an Wigner-transform together with a <a href="https://www-user.tu-chemnitz.de/~potts/nfft/index.php">NFFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation \(g\), which describe our approximation.</p><h2 id="14">Quadrature</h2><p>Assume we have some experiment which yields an ODF or some general <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, i.e. some evaluation routine.</p>
+{% highlight matlab %}
+mtexdata dubna
+odf = calcODF(pf,'resolution',5*degree,'zero_Range')
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (xyz)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+ 
+  h = (02-21), r = 72 x 19 points
+  h = (10-10), r = 72 x 19 points
+  h = (10-11)(01-11), r = 72 x 19 points
+  h = (10-12), r = 72 x 19 points
+  h = (11-20), r = 72 x 19 points
+  h = (11-21), r = 72 x 19 points
+  h = (11-22), r = 72 x 19 points
+ 
+odf = SO3FunRBF (Quartz → xyz)
+ 
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<p>Now we want to compute the corresponding <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>. If our odf is an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> we can directly use the command <a href="SO3FunHarmonic.html">SO3FunHarmonic</a>.</p>
+{% highlight matlab %}
+F = SO3FunHarmonic(odf)
+{% endhighlight %}
+
+{% highlight plaintext %}
+F = SO3FunHarmonic (Quartz → xyz)
+  bandwidth: 48
+  weight: 1
+{% endhighlight %}
+<p>If there is an physical experiment which yields the function values for given orientations, we can also do the quadrature manually.</p><p>Therefore we have to evaluate on an specific grid and afterwards we compute the Fourier coefficients by the command <a href="SO3FunHarmonic.quadrature.html">SO3FunHarmonic.quadrature</a>.</p>
+{% highlight matlab %}
+% Specify the bandwidth and symmetries of the desired harmonic odf
+N = 50;
+SRight = odf.CS;
+SLeft = specimenSymmetry;
+
+% Compute the quadrature grid and weights
+SO3G = quadratureSO3Grid(N,'ClenshawCurtis',SRight,SLeft);
+% Because of symmetries there are symmetric equivalent nodes on the quadrature grid.
+% Hence we evaluate the routine on a smaller unique grid and reconstruct afterwards.
+% For SO3Fun's this is done internaly by evaluation.
+tic
+v = odf.eval(SO3G);
+toc
+% Analogously we can do exactly the same by directly evaluating on the
+% unique nodes of the quadratureSO3Grid
+%v = odf.eval(SO3G.uniqueNodes);
+% and reconstruct the full grid (of symmetric values) afterwards
+%v = v(SO3G.uniqueIndexes);
+
+% At the end we do quadrature
+F1 = SO3FunHarmonic.quadrature(SO3G,v)
+% or analogously
+% F = SO3FunHarmonic.quadrature(SO3G.nodes,v,'weights',SO3G.weights,'bandwidth',N,'ClenshawCurtis')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 10.462793 seconds.
+ 
+F1 = SO3FunHarmonic (Quartz → xyz)
+  bandwidth: 50
+  weight: 1
+{% endhighlight %}
+<p>Lets take a look on the result</p>
+{% highlight matlab %}
+norm(F-F1)
+
+plot(F1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0015
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationInterpolation_04.png" %}
+</center><p>Furthermore, if the evaluation step is very expansive it might be a good idea to use the smaller Gauss-Legendre quadrature grid. The Gauss-Legendre quadrature lattice has half as many points as the default Clenshaw-Curtis quadrature lattice. But the quadrature method is much more time consuming.</p>
+{% highlight matlab %}
+% Compute the quadrature grid and weights
+SO3G = quadratureSO3Grid(N,'GaussLegendre',SRight,SLeft);
+% Evaluate your routine on that quadrature grid
+tic
+  v = odf.eval(SO3G);
+toc
+% and do quadrature
+F2 = SO3FunHarmonic.quadrature(SO3G,v)
+
+norm(F-F2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 6.008804 seconds.
+ 
+F2 = SO3FunHarmonic (Quartz → xyz)
+  bandwidth: 50
+  weight: 1
+ 
+ans =
+    0.0015
+{% endhighlight %}
+</div></body></html>
