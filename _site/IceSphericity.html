@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+
+<title>Grain Boundary Statistics in Deformed Ice | MTEX</title>
+
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/theme-mtex.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" type="image/png" sizes="100x100" href="images/favicons/favicon.png">
+<link rel="icon" type="image/png" sizes="100x100" href="images/favicons/favicon.png">
+<link rel="manifest" href="images/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#149983">
+<meta name="msapplication-TileImage" size="100x100" type="image/png" content="images/favicons/favicon.png">
+<meta name="theme-color" content="#149983">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4000/feed.xml">
+
+<!-- enable MathJax
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+          inlineMath: [['$','$']]
+      }
+  });
+</script>-->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-lg navbar-brand" href="index"><img src="images/icons/MTEX_100x67px.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <br><br>
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- topnav -->
+                
+                
+                    
+                        
+                        
+                            <li><a href="index">Home</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="download">Download</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="Documentation">Documentation</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="function_reference">Function Reference</a></li>
+                        
+                    
+                        
+                        
+                            <li class="active"><a href="examples">Examples</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="workshop24">Workshops</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="people">People</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="search"><i class="fa fa-search"></i></a></li>
+                        
+                    
+                
+
+                
+            </ul>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">Examples </li>
+  
+  
+  
+  <li>
+      <a class="no_icon" href="#">Grain Analysis</a>
+      <ul>
+          
+          
+          
+          <li class="active"><a class="no_icon" href="IceSphericity.html">Deformed Ice</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Seismics</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="SeismicVelocitySingleCrystalDemo2d.html">Velocity Plots 1d</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SeismicPlots.html">Velocity Plots 2d</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Neutron Data</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="TOF2PoleFigure.html">Quartz TOF Data</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Plasticity</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="SlipSystemAlumina.html">Nanoidentation</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a class="no_icon" href="#" id="collapseAll">Collapse All</a> | <a class="no_icon" href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            
+    <div class="post-header">
+        <h1 class="post-title-main">Grain Boundary Statistics in Deformed Ice</h1>
+    </div>
+
+
+<div class="post-content">
+
+    
+
+    
+
+
+    
+
+        <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Grain Boundary Statistics in Deformed Ice</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-03-20"><meta name="DC.source" content="script_IceSphericity.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/GrainExamples/IceSphericity.m">
+    edit page</a>
+    author: Sheng Fan, Department of Geology, University of Otago, Dunedin, New Zealand
+</font><div><!--introduction--><!--/introduction--><h2 id="1">The sphericity as measure for grain boundary irregularity</h2><p>Deformed polycrystalline materials such as ice often contain large grains interlocking with smaller grains, with many irregular grain boundaries. Boundary irregularity is hard to judge by visual inspection and it is better to use quantitative measures of boundary irregularity to infer processes across different deformation conditions. Here, we quantify the irregularity of each grain&yuml;s boundary by introducing a sphericity parameter \(\Psi\) which is calculated in 2-D from grain area <code class="language-plaintext highlighter-rouge">A</code>, grain boundary perimeter <code class="language-plaintext highlighter-rouge">P</code>, and area equivalent grain radius <code class="language-plaintext highlighter-rouge">R</code> by the formula</p><p>\[\Psi = \frac{A}{P \cdot R}\]</p><p>The grain sphericity \(\Psi\) is a useful indicator for grain boundary irregularity because it measures how closely a grain&yuml;s boundary resembles the circumference of a perfect circle. It decreases from \(\Psi = 0.5\), where the grain has a perfect circular shape, to \(\Psi = 0\) where the grain boundary is infinitely irregular. The statistics of grain boundary sphericity can be used to segregate recrystallised grains from remnant original grains (please refer to the paper for more details).</p><h2 id="3">Data</h2><p>The EBSD data set used in this demonstration (PIL185.ctf) is available from <a href="https://doi.org/10.6084/m9.figshare.13456550">https://doi.org/10.6084/m9.figshare.13456550</a>. The EBSD data were collected with a step size of 5 &micro;m and representeds an ice sample deformed at -20&deg;C to 12 percent axial strain. Let's import the data and reconstruct some grains.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% plotting convention</span>
+<span class="n">plotx2east</span>
+<span class="n">plotzIntoPlane</span>
+
+<span class="c1">% import the data</span>
+<span class="nb">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">mtexExamplePath</span> <span class="nb">filesep</span> <span class="s1">'GrainExamples'</span> <span class="nb">filesep</span> <span class="p">];</span>
+<span class="n">ebsd</span> <span class="o">=</span> <span class="n">EBSD</span><span class="o">.</span><span class="nb">load</span><span class="p">([</span><span class="nb">path</span> <span class="s1">'PIL185.ctf'</span><span class="p">],</span><span class="s1">'convertSpatial2EulerReferenceFrame'</span><span class="p">);</span>
+
+<span class="c1">% critical misorientation for grain reconstruction</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span><span class="nb">degree</span><span class="p">;</span>
+
+<span class="c1">% first pass at reconstructing grains</span>
+<span class="p">[</span><span class="n">grains</span><span class="p">,</span> <span class="n">ebsd</span><span class="o">.</span><span class="n">grainId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'ice'</span><span class="p">),</span><span class="s1">'angle'</span><span class="p">,</span><span class="n">threshold</span><span class="p">);</span>
+
+<span class="c1">% remove ebsd data that correspond to up to 4 pixel grains</span>
+<span class="n">ebsd</span><span class="p">(</span><span class="n">grains</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="n">grainSize</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">))</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">% redo grain reconstruction - interpolate non-indexed space</span>
+<span class="p">[</span><span class="n">grains</span><span class="p">,</span> <span class="n">ebsd</span><span class="o">.</span><span class="n">grainId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'ice'</span><span class="p">),</span><span class="s1">'angle'</span><span class="p">,</span><span class="n">threshold</span><span class="p">);</span>
+
+<span class="c1">% remove all boundary grains</span>
+<span class="n">grains</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="n">isBoundary</span><span class="p">)</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">% remove too small irregular grains</span>
+<span class="n">grains</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="n">grainSize</span> <span class="o">&lt;</span> <span class="n">grains</span><span class="o">.</span><span class="n">boundarySize</span> <span class="p">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">% plot the result</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">ebsd</span><span class="p">,</span><span class="n">ebsd</span><span class="o">.</span><span class="n">orientations</span><span class="p">)</span>
+
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="nb">boundary</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/IceSphericity_01.png" alt="" />
+
+</center><h2 id="4">Computation of the Sphericity</h2><p>Next, let's calculate and plot the sphericity parameter of each ice grain by making use of the functions <code class="language-plaintext highlighter-rouge"><a href="grain2d.area.html">grains.area</a></code>, <code class="language-plaintext highlighter-rouge"><a href="grain2d.perimeter.html">grains.perimeter</a></code> and <code class="language-plaintext highlighter-rouge"><a href="grain2d.equivalentRadius.html">grains.equivalentRadius</a></code></p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% directly use the formula from the first paragraph</span>
+<span class="n">Psi</span> <span class="o">=</span> <span class="n">grains</span><span class="o">.</span><span class="nb">area</span> <span class="o">.</span><span class="p">/</span> <span class="n">grains</span><span class="o">.</span><span class="nb">perimeter</span><span class="p">(</span><span class="s1">'withInclusion'</span><span class="p">)</span> <span class="o">.</span><span class="p">/</span> <span class="n">grains</span><span class="o">.</span><span class="n">equivalentRadius</span><span class="p">;</span>
+
+<span class="c1">% plot the result</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">grains</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="s1">'colorrange'</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span> <span class="mf">0.5</span><span class="p">])</span>
+
+<span class="n">mtexColorbar</span> <span class="p">(</span><span class="s1">'title'</span><span class="p">,</span><span class="s1">'Sphericity Parameter'</span><span class="p">)</span>
+<span class="n">mtexColorMap</span> <span class="nb">jet</span>
+<span class="nb">clear</span> <span class="n">Psi</span></code></pre></figure>
+<center>
+<img class="inline" src="images/IceSphericity_02.png" alt="" />
+
+</center><h2 id="5">Influence of EBSD step size on sphericity parameter</h2><p>Next we investigate how step size influences grain boundary irregularity measurements. To do this, we can artificially increase the step size of the EBSD data to from 10 up to 100 &yuml;m. Then, we choose one representative grain (one with a large number of pixels) and see how the sphericity parameter changes as the EBSD step size increases.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">20</span>
+
+  <span class="c1">% now, we increase the step size of EBSD data artifically</span>
+  <span class="n">ebsd_reduced</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">ebsd</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+
+  <span class="c1">% reconstruct grains using function calcGrains</span>
+  <span class="n">grains_reduced</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">ebsd_reduced</span><span class="p">(</span><span class="s1">'ice'</span><span class="p">));</span>
+
+  <span class="c1">% choose a grain with a large pixel number within the EBSD map with 5</span>
+  <span class="c1">% micron step size, from each reduced EBSD map by location</span>
+  <span class="n">grain</span> <span class="o">=</span> <span class="n">grains_reduced</span><span class="p">(</span><span class="n">findByLocation</span><span class="p">(</span><span class="n">grains_reduced</span><span class="p">(</span><span class="s1">'ice'</span><span class="p">),</span> <span class="p">[</span><span class="mi">1357</span> <span class="mi">1952</span><span class="p">]));</span>
+
+  <span class="c1">% calculate the sphericity parameter</span>
+  <span class="n">Psi</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">grain</span><span class="o">.</span><span class="nb">area</span> <span class="o">.</span><span class="p">/</span> <span class="p">(</span><span class="n">grain</span><span class="o">.</span><span class="nb">perimeter</span><span class="p">(</span><span class="s1">'withInclusion'</span><span class="p">)</span> <span class="o">.*</span> <span class="n">grain</span><span class="o">.</span><span class="n">equivalentRadius</span><span class="p">);</span>
+
+  <span class="c1">% calculate the number of pixels</span>
+  <span class="n">gS</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="n">grain</span><span class="o">.</span><span class="n">grainSize</span><span class="p">;</span>
+
+  <span class="c1">% plot evolution of grain geometry as step size increases</span>
+  <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="n">nextAxis</span><span class="p">;</span> <span class="k">end</span>
+  <span class="nb">plot</span><span class="p">(</span><span class="n">grain</span><span class="p">,</span> <span class="n">Psi</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="s1">'doNotDraw'</span><span class="p">,</span><span class="s1">'micronbar'</span><span class="p">,</span><span class="s1">'off'</span><span class="p">)</span>
+  <span class="n">mtexTitle</span><span class="p">([</span><span class="nb">int2str</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="n">i</span><span class="p">)</span> <span class="s1">'\(\mu\)m'</span><span class="p">],</span><span class="s1">'doNotDraw'</span><span class="p">);</span>
+
+<span class="k">end</span>
+
+<span class="n">setColorRange</span><span class="p">([</span><span class="mi">0</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">mtexColorMap</span> <span class="nb">jet</span>
+<span class="n">mtexColorbar</span> <span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'sphericity parameter'</span><span class="p">)</span></code></pre></figure>
+<center>
+<img class="inline" src="images/IceSphericity_03.png" alt="" />
+
+</center><p>Now we are able to plot the sphericity parameter as a function of the step size.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">clf</span>
+<span class="nb">scatter</span> <span class="p">(</span><span class="n">gS</span><span class="p">,</span> <span class="n">Psi</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="s1">'filled'</span><span class="p">,</span><span class="s1">'MarkerEdgeColor'</span><span class="p">,</span><span class="s1">'k'</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="nb">colormap</span> <span class="nb">gray</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="nb">colorbar</span><span class="p">;</span>
+<span class="n">C</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="n">String</span> <span class="o">=</span> <span class="s1">'EBSD step size, \mum'</span><span class="p">;</span>
+<span class="n">C</span><span class="o">.</span><span class="n">Ticks</span> <span class="o">=</span> <span class="mi">5</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">100</span><span class="p">;</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s1">'LOG (number of pixels)'</span><span class="p">)</span>
+<span class="nb">ylabel</span><span class="p">(</span><span class="s1">'Sphericity parameter'</span><span class="p">)</span>
+<span class="nb">set</span> <span class="p">(</span><span class="nb">gca</span><span class="p">,</span> <span class="s1">'xscale'</span><span class="p">,</span> <span class="s1">'log'</span><span class="p">)</span></code></pre></figure>
+<center>
+<img class="inline" src="images/IceSphericity_04.png" alt="" />
+
+</center><h2 id="7">Influence of grain boundary smoothness on sphericity parameter</h2><p>Due to the square shape of pixels (prescribed by Oxford Instruments software), boundary elements lie either vertically or horizontally within the plane of analysis. Grains containing fewer pixels (i.e., smaller grains in maps with a fixed step size) appear more pixelated than grains containing numerous pixels. MTEX allows us to reduce artificial pixelation of grain boundary elements by applying the function <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, which enhances the overall grain boundary smoothness by interpolating the coordinates of grain boundary elements while triple junction points remain locked or unlocked. In this study, we choose to lock the triple junction during grain boundary smoothening.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">newMtexFigure</span><span class="p">(</span><span class="s1">'layout'</span><span class="p">,[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'normal'</span><span class="p">);</span>
+
+<span class="c1">% find all grains with more than 2000 pixels</span>
+<span class="n">grains</span> <span class="o">=</span> <span class="n">grains</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="n">grainSize</span> <span class="o">&gt;</span> <span class="mi">2000</span><span class="p">);</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">36</span>
+
+  <span class="c1">% Smooth grain boundary to reduce pixelation, a larger m (smoothening</span>
+  <span class="c1">% parameter corresponds to a greater grain boundary smoothening</span>
+  <span class="n">smoothGrains</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">grains</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+
+  <span class="c1">% calculate the sphericity parameter for smoothed grains</span>
+  <span class="n">Psi</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">=</span> <span class="nb">median</span><span class="p">(</span><span class="n">smoothGrains</span><span class="o">.</span><span class="nb">area</span> <span class="o">.</span><span class="p">/</span> <span class="n">smoothGrains</span><span class="o">.</span><span class="n">equivalentRadius</span> <span class="o">.</span><span class="p">/</span> <span class="n">smoothGrains</span><span class="o">.</span><span class="nb">perimeter</span><span class="p">(</span><span class="s1">'withInclusion'</span><span class="p">)</span> <span class="p">);</span>
+
+  <span class="k">if</span> <span class="nb">mod</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span><span class="o">~=</span><span class="mi">1</span><span class="p">,</span> <span class="k">continue</span><span class="p">;</span> <span class="k">end</span>
+
+  <span class="c1">% Visualise the evolution of grain boundary geometry as the smoothening</span>
+  <span class="c1">% parameter increases, using a grain as an example</span>
+
+  <span class="c1">% select grain</span>
+  <span class="n">grain</span> <span class="o">=</span> <span class="n">smoothGrains</span><span class="p">(</span><span class="n">findByLocation</span><span class="p">(</span><span class="n">smoothGrains</span><span class="p">,</span> <span class="p">[</span><span class="mi">1357</span> <span class="mi">1952</span><span class="p">]));</span>
+
+  <span class="c1">% plot it</span>
+  <span class="k">if</span> <span class="n">m</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="n">nextAxis</span><span class="p">;</span> <span class="k">end</span>
+  <span class="nb">plot</span><span class="p">(</span><span class="n">grain</span><span class="p">,</span> <span class="n">grain</span><span class="o">.</span><span class="nb">area</span> <span class="o">.</span><span class="p">/</span> <span class="n">grain</span><span class="o">.</span><span class="n">equivalentRadius</span> <span class="o">.</span><span class="p">/</span> <span class="n">grain</span><span class="o">.</span><span class="nb">perimeter</span><span class="p">(</span><span class="s1">'withInclusion'</span><span class="p">),</span><span class="k">...</span>
+    <span class="s1">'micronbar'</span><span class="p">,</span><span class="s1">'off'</span><span class="p">,</span><span class="s1">'doNotDraw'</span><span class="p">);</span>
+  <span class="n">mtexTitle</span><span class="p">([</span><span class="s1">'m='</span><span class="p">,</span><span class="nb">int2str</span><span class="p">(</span><span class="n">m</span><span class="p">)],</span><span class="s1">'doNotDraw'</span><span class="p">);</span>
+
+<span class="k">end</span>
+
+<span class="n">setColorRange</span><span class="p">([</span><span class="mi">0</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">mtexColorbar</span> <span class="nb">jet</span></code></pre></figure>
+<center>
+<img class="inline" src="images/IceSphericity_05.png" alt="" />
+
+</center><p>Finally we plot the sphericity as a function of the smoothening parameter</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">clf</span>
+<span class="nb">plot</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="nb">length</span><span class="p">(</span><span class="n">Psi</span><span class="p">),</span> <span class="n">Psi</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">)</span>
+<span class="nb">xlabel</span> <span class="p">(</span><span class="s1">'Smooth parameter'</span><span class="p">)</span>
+<span class="nb">ylabel</span> <span class="p">(</span><span class="s1">'Sphericity parameter'</span><span class="p">)</span></code></pre></figure>
+<center>
+<img class="inline" src="images/IceSphericity_06.png" alt="" />
+
+</center><h2 id="9">References</h2><div><ul><li>Sheng Fan, David J. Prior, Andrew J. Cross, David L. Goldsby, Travis F. Hager, Marianne Negrini, Chao Qi, <a href="https://doi.org/10.1016/j.actamat.2021.116810"><i>Using grain boundary irregularity to quantify dynamic recrystallization in ice</i></a>, Acta Materialia, 2021.</li></ul></div></div></body></html>
+
+    <div class="tags">
+        
+    </div>
+
+    
+
+
+</div>
+
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            <p>
+                <img src="images/icons/MTEX_100x67px.png" alt="MTEX logo">
+            </p>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-83346204-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>
