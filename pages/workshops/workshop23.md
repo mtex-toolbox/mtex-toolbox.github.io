@@ -18,8 +18,6 @@ The workshop extends over two weeks and is part of the master course {% include 
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
 
-{% include gallery.html images=site.data.galleries.workshop23 height="30vh" scroll_direction="x" auto_scroll="true" %}
-
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX
 
 Date: 06.03.2023 - 10.03.2023
