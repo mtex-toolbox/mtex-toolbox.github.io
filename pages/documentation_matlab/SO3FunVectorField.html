@@ -29,19 +29,21 @@ SO3VF.eval(rot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d
+ans = SO3TangentVector
  size: 2 x 1
+ TagentSpace: left
+        x       y       z
+  3.45169 2.85055       0
+  5.15112 5.66982       0
 {% endhighlight %}
 <h2 id="4">Defining a SO3VectorFieldHarmonic</h2><p><b>Definition via SO3VectorField</b></p><p>We can expand any <code class="language-plaintext highlighter-rouge"><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></code> in an <code class="language-plaintext highlighter-rouge"><a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a></code> directly by the command <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
 {% highlight matlab %}
-SO3VectorFieldHarmonic(SO3VF)
+SO3VectorFieldHarmonic(SO3VF,'bandwidth',16)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = SO3VectorFieldHarmonic (xyz → xyz)
-  isReal: true
-  bandwidth: 64
-  weights: [3.1 3.1 0]
+  bandwidth: 16
 {% endhighlight %}
 <p><b>Definition via function values</b></p><p>At first we need some example rotations</p>
 {% highlight matlab %}
@@ -54,25 +56,30 @@ y = vector3d.byPolar(sin(3*nodes.angle), nodes.phi2+pi/2);
 {% endhighlight %}
 <p>Now the actual command to get <code class="language-plaintext highlighter-rouge">SO3VF1</code> of type <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
 {% highlight matlab %}
-SO3VF1 = SO3VectorFieldHarmonic.approximation(nodes, y)
+SO3VF1 = SO3VectorFieldHarmonic.approximation(nodes, y,'bandwidth',16)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: The given vector3d values v are assumed to describe elements w.r.t.
+the left side tangent space. If you want them to be right sided use
+SO3TangentVector(v,'right') instead. 
+Warning: calcVoronoiVolume is inexact up to now. 
+ 
 SO3VF1 = SO3VectorFieldHarmonic (xyz → xyz)
-  isReal: true
-  bandwidth: 10
-  weights: [3.8e-05 0.0017 0.76]
+  bandwidth: 16
 {% endhighlight %}
 <p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> as an argument and returns a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p><p>Now we can call the quadrature command to get <code class="language-plaintext highlighter-rouge">SO3VF2</code> of type <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
 {% highlight matlab %}
-SO3VF2 = SO3VectorFieldHarmonic.quadrature(@(v) f(v))
+SO3VF2 = SO3VectorFieldHarmonic.quadrature(@(v) f(v),'bandwidth',16)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: The given function_handle is assumed to describe elements w.r.t. the
+left side tangent space. If you want them to be right sided use
+SO3VectorFieldHandle(fun,SRight,SLeft,'right') instead. 
+ 
 SO3VF2 = SO3VectorFieldHarmonic (xyz → xyz)
-  isReal: true
-  bandwidth: 64
-  weights: [3.1 3.1 0]
+  bandwidth: 16
 {% endhighlight %}
 <p><b>Definition via <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a></b></p><p>If we directly call the constructor with a multivariate <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> with three entries it will create a <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code> with <code class="language-plaintext highlighter-rouge">SO3F(1)</code>, <code class="language-plaintext highlighter-rouge">SO3F(2)</code>, and <code class="language-plaintext highlighter-rouge">SO3F(3)</code> the \(x\), \(y\), and \(z\) component.</p>
 {% highlight matlab %}
@@ -82,34 +89,59 @@ SO3VF3 = SO3VectorFieldHarmonic(SO3F)
 
 {% highlight plaintext %}
 SO3F = SO3FunHarmonic (xyz → xyz)
+  isReal: false
   size: 3 x 1
   bandwidth: 9
-  weight: 0.86
+  weight: 0.89
  
  
 SO3VF3 = SO3VectorFieldHarmonic (xyz → xyz)
+  isReal: false
   bandwidth: 9
-  weights: [0.86 0.26 0.58]
 {% endhighlight %}
 <h2 id="12">Operations</h2><p><b>Basic arithmetic operations</b></p><p>Again the basic mathematical operations are supported:</p><p>addition/subtraction of a vector field and a vector or addition/subtraction of two vector fields</p>
 {% highlight matlab %}
-SO3VF1 + SO3VF2; SO3VF1+vector3d(1, 0, 0);
-SO3VF1-SO3VF2; SO3VF2-vector3d(sqrt(2)/2, sqrt(2)/2, 0);
+SO3VF1 + SO3VF2
+SO3VF1 + vector3d.X
+SO3VF1 - SO3VF2
+SO3VF2 - vector3d(sqrt(2)/2, sqrt(2)/2, 0);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = SO3VectorFieldHarmonic (xyz → xyz)
+  bandwidth: 16
+ 
+ 
+ans = SO3VectorFieldHarmonic (xyz → xyz)
+  bandwidth: 16
+ 
+ 
+ans = SO3VectorFieldHarmonic (xyz → xyz)
+  bandwidth: 16
 {% endhighlight %}
 <p>multiplication/division by a scalar or a <code class="language-plaintext highlighter-rouge">SO3Fun</code></p>
 {% highlight matlab %}
 2.*SO3VF1; SO3VF1./4;
 SO3F = SO3FunHarmonic.example;
 SO3F.SRight = specimenSymmetry;
+SO3F = SO3F.symmetrise;
 SO3F .* SO3VF1;
 {% endhighlight %}
 <p>dot product with a vector or another vector field</p>
 {% highlight matlab %}
-dot(SO3VF1, SO3VF2); dot(SO3VF1, vector3d(0, 0, 1));
+dot(SO3VF1, SO3VF2)
+dot(SO3VF1, vector3d(0, 0, 1));
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = SO3FunHarmonic (xyz → xyz)
+  bandwidth: 32
+  weight: 0.026
 {% endhighlight %}
 <p>cross product with a vector or another vector field</p>
 {% highlight matlab %}
-cross(SO3VF1, SO3VF2); cross(SO3VF1, vector3d(0, 0, 1));
+cross(SO3VF1, SO3VF2);
+cross(SO3VF1, vector3d(0, 0, 1));
 {% endhighlight %}
 <p>mean vector of the vector field</p>
 {% highlight matlab %}
@@ -128,6 +160,21 @@ norm(SO3VF1);
 {% highlight matlab %}
 plot(SO3VF1);
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Can not change plotting convention in sphercical projections after
+plotting! 
+Warning: Can not change plotting convention in sphercical projections after
+plotting! 
+Warning: Can not change plotting convention in sphercical projections after
+plotting! 
+Warning: Can not change plotting convention in sphercical projections after
+plotting! 
+Warning: Can not change plotting convention in sphercical projections after
+plotting! 
+Warning: Can not change plotting convention in sphercical projections after
+plotting!
+{% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorField_01.png" %}
 </center><div><ul><li>same as quiver(sVF1)</li></ul></div><p>or the 3D plot of the rotation group with the vectors on itself</p>
@@ -137,14 +184,14 @@ quiver3(SO3VF2);
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Setting the "WindowButtonDownFcn" property is not
-permitted while this mode is active. 
-Warning: Setting the "WindowButtonUpFcn" property is not
-permitted while this mode is active. 
-Warning: Setting the "KeyPressFcn" property is not permitted
-while this mode is active. 
-Warning: Setting the "WindowScrollWheelFcn" property is not
-permitted while this mode is active.
+Warning: Setting the "WindowButtonDownFcn" property is not permitted while this
+mode is active. 
+Warning: Setting the "WindowButtonUpFcn" property is not permitted while this
+mode is active. 
+Warning: Setting the "KeyPressFcn" property is not permitted while this mode is
+active. 
+Warning: Setting the "WindowScrollWheelFcn" property is not permitted while
+this mode is active.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorField_02.png" %}

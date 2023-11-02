@@ -29,9 +29,9 @@ d =
     0.3390    0.8776    0.3390
    -0.0612   -0.3390    0.9388
 D =
-   1.5634 - 0.2928i  -0.4723 + 0.4764i  -0.0248 + 0.1393i
-   0.5520 + 0.3813i   1.4491 + 0.0000i   0.5520 - 0.3813i
-  -0.0248 - 0.1393i  -0.4723 - 0.4764i   1.5634 + 0.2928i
+  -0.7268 + 0.0871i   0.9546 + 0.7435i   0.1277 + 0.9919i
+   0.8593 - 0.8519i  -0.2681 + 0.0000i   0.8593 + 0.8519i
+   0.1277 - 0.9919i   0.9546 - 0.7435i  -0.7268 - 0.0871i
 {% endhighlight %}
 <p>Here the orders \(k\), \(l\) work as row and column indices.</p><h2 id="4">Series Expansion</h2><p>The Wigner-D functions form an orthonormal basis in \(L_2(SO(3))\). Hence, we can describe functions on the rotation group \(SO(3)\) by there harmonic representation using the class <a href="SO3FunHarmonicRepresentation.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p><p>Hence we define the Wigner-D function \(D_1^{1,-1}\) by</p>
 {% highlight matlab %}
@@ -42,13 +42,14 @@ D.eval(R)
 {% highlight plaintext %}
 D = SO3FunHarmonic (xyz → xyz)
   antipodal: true
+  isReal: false
   bandwidth: 1
   weight: 0
  
 ans =
-  -0.0248 - 0.1393i
+   0.1277 - 0.9919i
 {% endhighlight %}
-<p>Various normalizations for the Wigner-D functions are common in the literature.</p><p>Here we define the \(L_2\)-norm by</p><p>\[ \| f \|_2 = \left(\frac1{8\pi^2}\,\int_{SO(3)} \lvert f(\bf R) \rvert^2 \,\mathrm d \bf R \right)^{1/2} \]</p><p>such that the norm of the constant function \(f=1\) is \(1\). Take a look on the section <a href="SO3FunOperations.html#6">Integration of SO3Fun's</a>.</p><p>Using that definition the Wigner-D functions in MTEX are normalized, i.e. \(\| D_n^{k,l} \|_2 = 1\) for all \(n,k,l\).</p>
+<p>Various normalizations for the Wigner-D functions are common in the literature.</p><p>Here we define the \(L_2\)-norm by</p><p>\[ \| f \|_2 = \left(\frac1{8\pi^2}\,\int_{SO(3)} \lvert f( {\bf R}) \rvert^2 \,\mathrm d {\bf R} \right)^{1/2} \]</p><p>such that the norm of the constant function \(f=1\) is \(1\). Take a look on the section <a href="SO3FunOperations.html#6">Integration of SO3Fun's</a>.</p><p>Using that definition the Wigner-D functions in MTEX are normalized, i.e. \(\| D_n^{k,l} \|_2 = 1\) for all \(n,k,l\).</p>
 {% highlight matlab %}
 norm(D)
 {% endhighlight %}
@@ -57,4 +58,4 @@ norm(D)
 ans =
      1
 {% endhighlight %}
-<h2 id="6">Some important formulas for Wigner-D functions</h2><p>The Wigner-D functions are the matrix elements of the representations \(D_n \colon SO(3) \to \mathbb C^{(2n+1)\times(2n+1)}\) on \(SO(3)\). Since representations are group homomorphisms, we have \(D_n(\bf{R} \, \bf{Q}) = \frac1{\sqrt{2n+1}} \, D_n(\bf{Q}) \, D_n(\bf{R}).\) Hence we get</p><p>\[ D_n^{k,l}(\bf{R}\,\bf{Q}) = \frac1{2n+1} \sum_{j=-n}^n D_n^{k,j}(\bf{Q})\,D_n^{j,l}(\bf{R}). \]</p><p>Some symmetry properties of Wigner-D functions yields</p><p>\[ D_n^{k,l}(\bf{R}) = \overline{D_n^{l,k}(\bf{R}^{-1})}. \]</p><h2 id="8">Symmetry properties of Wigner-d functions</h2><p>The Wigner-d functions by construction fulfill a lot of symmetry properties. Some importants are</p><p>\[ d_n^{k,l}(x) = d_n^{-k,-l}(x) = (-1)^{k+l}\, d_n^{l,k}(x) = (-1)^{k+l}\, d_n^{-l,-k}(x)\]</p><p>\[ d_n^{k,l}(x) = (-1)^{n+k+l}\,d_n^{-k,l}(-x) = (-1)^{n+k+l}\,d_n^{k,-l}(-x) \]</p><p>\[d_n^{k,l}(\cos\beta) = (-1)^{k+l}\,d_n^{k,l}(\cos(-\beta))\]</p></div></body></html>
+<h2 id="6">Some important formulas for Wigner-D functions</h2><p>The Wigner-D functions are the matrix elements of the representations \(D_n \colon SO(3) \to \mathbb C^{(2n+1)\times(2n+1)}\) on \(SO(3)\). Since representations are group homomorphisms, we have \(D_n( {\bf R} \, {\bf Q} ) = \frac1{\sqrt{2n+1}} \, D_n( {\bf Q} ) \, D_n( {\bf R} ).\) Hence we get</p><p>\[ D_n^{k,l}( {\bf R} \, {\bf Q} ) = \frac1{2n+1} \sum_{j=-n}^n D_n^{k,j}( {\bf Q} )\,D_n^{j,l}( {\bf R} ). \]</p><p>Some symmetry properties of Wigner-D functions yields</p><p>\[ D_n^{k,l}( {\bf R} ) = \overline{D_n^{l,k}( {\bf R}^{-1} )}. \]</p><h2 id="8">Symmetry properties of Wigner-d functions</h2><p>The Wigner-d functions by construction fulfill a lot of symmetry properties. Some importants are</p><p>\[ d_n^{k,l}(x) = d_n^{-k,-l}(x) = (-1)^{k+l}\, d_n^{l,k}(x) = (-1)^{k+l}\, d_n^{-l,-k}(x)\]</p><p>\[ d_n^{k,l}(x) = (-1)^{n+k+l}\,d_n^{-k,l}(-x) = (-1)^{n+k+l}\,d_n^{k,-l}(-x) \]</p><p>\[d_n^{k,l}(\cos\beta) = (-1)^{k+l}\,d_n^{k,l}(\cos(-\beta))\]</p></div></body></html>
