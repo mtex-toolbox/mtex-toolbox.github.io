@@ -5,22 +5,24 @@ function auto_scroll_x(scrollElement, scrollStep=1, scrollDelayMilSec=1000) {
 
     // auto-scrolling
     const scrollAnimation = setInterval(()=>{
-        if (scrollElement.scrollLeft >= scrollWidth) {
-            scrollStep *= -1;
-        } else if (scrollElement.scrollLeft <= 0) {
-            scrollStep *= -1;
+        if (!scrollElement.matches(":hover")) {
+            if (scrollElement.scrollLeft >= scrollWidth) {
+                scrollStep *= -1;
+            } else if (scrollElement.scrollLeft == 0) {
+                scrollStep *= -1;
+            }
+            scrollElement.scrollBy(scrollStep, 0);
         }
-        scrollElement.scrollBy(scrollStep, 0);
     }, scrollDelay);
 
     // stop auto-scrolling while mouse over element
-    scrollElement.addEventListener("mouseenter", (evt)=>{
-        clearInterval(scrollAnimation);
-    });
+    // scrollElement.addEventListener("mouseenter", (evt)=>{
+        // clearInterval(scrollAnimation);
+    // });
     // continue auto-scrolling when mouse leave element
-    scrollElement.addEventListener("mouseleave", (evt)=>{
-        auto_scroll_x(scrollElement, scrollStep, scrollDelayMilSec);
-    });
+    // scrollElement.addEventListener("mouseleave", (evt)=>{
+        // auto_scroll_x(scrollElement, scrollStep, scrollDelayMilSec);
+    // });
 
     // stop auto-scrolling on mobile after short time
     const scrollDuration = scrollWidth / scrollStep * scrollDelay;
@@ -106,7 +108,8 @@ $(document).ready(function() {
 
     // auto scroll along x-axis
     $(".auto-scroll-x").each(function() {
-        auto_scroll_x(this, 1, 3000)
+        auto_scroll_x(this, 1, 25)
+        // auto_scroll_x(this, 1, 3000)
     });
 });
 
