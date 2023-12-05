@@ -627,14 +627,8 @@ their talks as accessible as possible.
 
 ## Registration:
 
-<!--
-- Please use our {% include reference.html link="https://tu-freiberg.de/fakult1/ana/professuren/prof-dr-ralf-hielscher/mtex/registration" content="registration form" %} to subscribe or write an email to
-- please write an email to {% include reference.html link="mailto:mtexworkshop@gmail.com"
- content="mtexworkshop@gmail.com" %} where you include name, address, whether
- you are student or not, which week you wish to attend and wether you want to
- participate in present or online
- - Deadline for registration is 31th of January 2023
--->
+- Please register at {% include reference.html link="https://acatrain.net/events/freiberg-mtex-workshop-2024/" content="https://acatrain.net/events/freiberg-mtex-workshop-2024" %}
+ - Deadline for registration is 28th of February 2024
 
 ## Registration Fee:
 - first + second week (presence):  (PhD) students - 400 Euro, other - 600 Euro
