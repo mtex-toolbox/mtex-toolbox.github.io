@@ -239,8 +239,9 @@ their talks as accessible as possible.
   link="https://ufind.univie.ac.at/de/person.html?id=46817" content="Thomas
   Griffiths" %}** (Universität Wien): 
   
-
-
+- **{% include reference.html
+  link="https://www.researchgate.net/profile/Marco-Witte" content="Marco Witte" %}** (Salzgitter Mannesmann): 
+    
 ## Time Schedule
 <!---
 {% capture table_monday %}
