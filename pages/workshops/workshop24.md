@@ -231,6 +231,15 @@ their talks as accessible as possible.
 
 ### Keynote Speakers
 
+- **{% include reference.html
+  link="https://www.researchgate.net/profile/Dorian-Depriester" content="Dorian
+  Depriester" %}** (Ecole Nationale Supérieure d'Arts et Métiers Paris): 
+  
+- **{% include reference.html
+  link="https://ufind.univie.ac.at/de/person.html?id=46817" content="Thomas
+  Griffiths" %}** (Universität Wien): 
+  
+
 
 ## Time Schedule
 <!---
@@ -246,7 +255,7 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">K.&nbsp;Frydrych</td>
+			<td style="text-align: left">T.&nbsp;Griffiths</td>
 			<td style="text-align: left">Plasticity Simulation with MTEX 
 			{% include reference.html link="https://tuc.cloud/index.php/s/skAbC4yZZPFFsAZ"
 			content="slides" class="course_material" %}
