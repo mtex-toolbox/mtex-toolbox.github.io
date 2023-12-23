@@ -240,6 +240,12 @@ their talks as accessible as possible.
   Griffiths" %}** (Universität Wien): 
   
 - **{% include reference.html
+  link="https://mavt.ethz.ch/de/personen/person-detail.MzMyNDQz.TGlzdC81NTksLTE3MDY5NzgwMTc=.html"
+  content="Claire Griesbach" %}** (Universität Wien): Rate-dependent
+  ferroelectric switching mechanisms in lead zirconium titanate elucidated by
+  spherically indexed EBSD patterns
+    
+- **{% include reference.html
   link="https://www.researchgate.net/profile/Marco-Witte" content="Marco Witte" %}** (Salzgitter Mannesmann): 
     
 ## Time Schedule
