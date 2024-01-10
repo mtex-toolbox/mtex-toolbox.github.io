@@ -31,6 +31,11 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul class="no_bullet">
+									<li>
+						3/24 &minus;
+						{% include reference.html link="workshop24?" content="MTEX Workshop 24" %}:
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1948" content="Announcement" %}
+                    </li>
 				   					<li>
                         09/23 &minus;
 							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta2/mtex-6.0.beta2.zip" content="MTEX 6.0.beta2" download=true %}
@@ -43,11 +48,6 @@ of material scientists, geologists and mathematicians.
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
-					<li>
-						3/23 &minus;
-						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-4260917" content="Announcement" %}
-                    </li>					
                     <li>
                         9/22 &minus; newly designed homepage
                     </li>
