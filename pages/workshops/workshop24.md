@@ -7,7 +7,7 @@ folder: workshops
 toc: false
 ---
 
-The workshop extends over two weeks and is part of the master course {% include reference.html link="" content="Introduction into crystallographic texture analysis" %} and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX. A special focus will be the new features of **MTEX 5.11** which includes pseudo 3d functionality for EBSD and grains and multiple spatial reference systems.
+The workshop extends over two weeks and is part of the master course {% include reference.html link="" content="Introduction into crystallographic texture analysis" %} and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX. A special focus will be the new features of **MTEX 6.0** which includes pseudo 3d functionality for EBSD and grains and multiple spatial reference systems.
 
 <!--{% capture par_default %}
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
