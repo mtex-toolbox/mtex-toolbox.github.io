@@ -233,7 +233,8 @@ their talks as accessible as possible.
 
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Dorian-Depriester" content="Dorian
-  Depriester" %}** (Ecole Nationale Supérieure d'Arts et Métiers Paris): 
+  Depriester" %}** (Ecole Nationale Supérieure d'Arts et Métiers, Aix-en-Provence): 
+  *Mechanical behaviour of polycrystals: from EBSD to numerical simulations*
   
 - **{% include reference.html
   link="https://ufind.univie.ac.at/de/person.html?id=46817" content="Thomas
@@ -244,6 +245,10 @@ their talks as accessible as possible.
   content="Claire Griesbach" %}** (ETH Zürich): Rate-dependent
   ferroelectric switching mechanisms in lead zirconium titanate elucidated by
   spherically indexed EBSD patterns
+  
+- **{% include reference.html
+  link="https://www.materials.ox.ac.uk/peoplepages/marquardt.html"
+  content="Katharina Marquardt" %}** (University of Oxford): Grain boundary complexion transition in Forsterite, an EBSD study
     
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Marco-Witte" content="Marco Witte" %}** (Salzgitter Mannesmann): 
@@ -628,13 +633,13 @@ their talks as accessible as possible.
 *please use the keycode "Professor Hielscher MTEX Workshop"	when booking the rooms*			
 <br>
 <br>
-{% include reference.html link="https://www.hotel-kreller.de" content="**Hotel Kreller:**" %} 79 Euro per night with breakfast, very close
+{% include reference.html link="https://www.hotel-kreller.de" content="**Hotel Kreller:**" %} 80 Euro per night with breakfast, very close
 <br>
 <br>
 {% include reference.html link="https://www.hotel-am-obermarkt.de" content="**Hotel am Obermarkt:**" %} 79 Euro per night without breakfast, very close
 <br>
 <br>				
-{% include reference.html link="https://www.elly-hostel.de" content="**Elly Hostel:**" %} 68 Euro per night, with kitchen
+{% include reference.html link="https://www.elly-hostel.de" content="**Elly Hostel:**" %} 77 Euro per night, with kitchen
 				</div>
 			</div>
 		</div>
