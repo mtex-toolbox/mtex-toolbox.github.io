@@ -66,7 +66,7 @@ toc: false
             </p>
         </div>
     </div>
-	    <div class="panel panel-profile-card col-md-6">
+    <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/Luiz-Morales.webp" alt="Picture of Luiz Morales">
         </div>
@@ -85,8 +85,7 @@ toc: false
 </div>
 
 <div class="row">
-
-	    <div class="panel panel-profile-card col-md-6">
+    <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/florian-bachmann.png" alt="Picture of Florian Bachmann">
         </div>
@@ -103,7 +102,7 @@ toc: false
             </p>
         </div>
     </div>
-	    <div class="panel panel-profile-card col-md-6">
+    <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
             <img src="images/profiles/bjorn-eske-soerensen.png" alt="Picture of Bjoern Eske Soerensen">
         </div>
@@ -182,16 +181,12 @@ toc: false
 				toolboxes and author of the {% include reference.html link="https://github.com/AzdiarGazder/mtexTools" content="mtexTools" %} 
 				toolbox.
             </p>
-			
 			<p>
                 {% include reference.html
                 link="https://scholars.uow.edu.au/azdiar-gazder"
                 content="Electron Microscopy Centre, University of Wollongong" %}
             </p>
-			
         </div>
-    </div>
-    <div class="panel panel-profile-card col-md-6">
     </div>
 </div>
 
@@ -214,7 +209,7 @@ toc: false
     </div>
 	<div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
-            <img src="images/profiles/erik-wuensche.jpg" alt="Picture of Erik Wünsche">
+            <img src="images/profiles/erik-wuensche.png" alt="Picture of Erik Wünsche">
         </div>
         <div class="panel-body">
             <p>
