@@ -238,7 +238,8 @@ their talks as accessible as possible.
   
 - **{% include reference.html
   link="https://ufind.univie.ac.at/de/person.html?id=46817" content="Thomas
-  Griffiths" %}** (Universität Wien): 
+  Griffiths" %}** (Universität Wien): Unravelling the evolution of partially molten silicate systems using
+EBSD and MTEX
   
 - **{% include reference.html
   link="https://mavt.ethz.ch/de/personen/person-detail.MzMyNDQz.TGlzdC81NTksLTE3MDY5NzgwMTc=.html"
