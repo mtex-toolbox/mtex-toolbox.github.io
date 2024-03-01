@@ -96,7 +96,7 @@ mtexExFiles = exclude(mtexExFiles,'JAC-Creuziger');
 makeHelpToc(mtexExFiles,'Examples','examples.xml');
 xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
 
-% publsih files
+% publish files
 exOut = fullfile(pwd,'..','pages','examples_matlab');
 options.outDir = exOut;
 options.xml.toolbox.folder.Text = 'examples';
