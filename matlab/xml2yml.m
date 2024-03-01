@@ -10,9 +10,9 @@ names = urls;
 level = urls;
 
 for idx = 1:length(starts)
-    link_start = strfind(s(starts(idx):end),'target="')+7+starts(idx);
-    link_end = strfind(s(link_start:end),'"')-2+link_start(1);
-    url = s(link_start(1):link_end(1));
+    link_start = min(strfind(s(starts(idx):end),'target="')+7+starts(idx));
+    link_end = strfind(s(link_start:end),'"')-2+link_start;
+    url = s(link_start:link_end(1));
     if ~contains(url,'#')
       urls = [ urls {url} ];
 
