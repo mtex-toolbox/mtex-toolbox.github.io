@@ -9,15 +9,14 @@ toc: false
 
 The workshop extends over two weeks and is part of the master course {% include reference.html link="" content="Introduction into crystallographic texture analysis" %} and counts for **5 ECTS** points. While the first week is mainly devoted to beginners in MTEX and/or texture analysis, the second week is a meeting of MTEX users with different experiences to share specific use cases, tips and tricks and discuss recent and upcoming developments in MTEX. A special focus will be the new features of **MTEX 6.0** which includes pseudo 3d functionality for EBSD and grains and multiple spatial reference systems.
 
-<!--{% capture par_default %}
+{% capture par_default %}
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
 {% endcapture %}
 {% capture par_access %}
 	You are logged in.
-	{% include reference.html link="https://eu01web.zoom.us/j/65513934015?pwd=YjZSR2h2Qk5IajhMbzZGNVR6aGowdz09" content="Enter Workshop zoom session" %}
+	{% include reference.html link="https://eu02web.zoom-x.de/j/69081108241?pwd=OEh6S0k1OUVxMWFnMHZ5dFNDTVJoQT09" content="Enter Workshop zoom session" %}
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
--->
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX
 
@@ -41,8 +40,14 @@ practical examples during the exercises within MTEX.
 			<div class="panel-body">
 				<div markdown="span">
 <!--Monday-->
-<!--**Lecture 0 - General Concepts:**-->
-
+**Lecture 0 - General Concepts:**
+{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/zRDL6j8s3Sgs97H" content="slides" class="course_material" %}
+<br>
+Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
+<br>
+<br>
 **Lecture 1 - EBSD**
 <br>
 data import, reference frame alignment, pole figures, inverse pole figures, color keys
@@ -122,6 +127,12 @@ boundaries, orientation, gradients,  statistics of boundary networks
 		<div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
+**Excursion: Freiberg Silver Mine**
+<br>
+<br>
+*Lunch*
+<br>
+<br>
 **Lecture 5 - Density Functions**
 <br>
 kernel density estimation, orientation density function, pole density
@@ -130,12 +141,6 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 5**
-<br>
-<br>
-*Lunch*
-<br>
-<br>
-**Excursion: Freiberg Silver Mine**
 				</div>
 			</div>
 		</div>
@@ -169,7 +174,7 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 **Lecture 7 - Plastic Deformation**
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
-combining MTEX with external software like VPSC, Damask
+combining MTEX with external software like VPSC
 <br>
 <br>
 **Exercise 7**
