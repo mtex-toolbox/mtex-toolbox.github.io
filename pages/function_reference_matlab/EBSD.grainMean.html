@@ -15,28 +15,25 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font><div><!--introduction--><!--/introduction--><p>grain average property from ebsd properties</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 % recover grains and store grainId
-[grains,ebsd.grainId]=calcGrains(ebsd)
+[grains,ebsd.grainId] = calcGrains(ebsd)
 {% endhighlight %}
 
 {% highlight matlab %}
 % compute average grain property
-meanProp = grainMean(ebsd, ebsd.ci);
-plot(grains,meanProp(grains.id))
+meanPropG = grainMean(ebsd, ebsd.ci, grains);
+plot(grains,meanPropG)
 {% endhighlight %}
 
 {% highlight matlab %}
-% ensures meanProp has the same ordering as grains
-meanProp = grainMean(ebsd, ebsd.ci, grains);
+% compute average grain property for each EBSD pixel
+meanPropE = grainMean(ebsd, ebsd.ci, grains);
+plot(ebsd,meanPropE)
 {% endhighlight %}
 
 {% highlight matlab %}
 % take not the mean but the maximum per grain
-meanProp = grainMean(ebsd, ebsd.ci, @max);
-{% endhighlight %}
-
-{% highlight matlab %}
-% full syntax
-meanProp = grainMean(ebsd, prop, grains, method)
+meanPropG = grainMean(ebsd, ebsd.ci, grains, @max);
+plot(grains,meanPropG)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -77,18 +74,18 @@ meanProp = grainMean(ebsd, prop, grains, method)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>meanProp</tt>
+            <tt>meanPropG</tt>
          </td>
          <td>
-            <tt>average property, sorted by grainId</tt>
+            <tt>average property, sorted as grains</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>meanProp</tt>
+            <tt>meanPropE</tt>
          </td>
          <td>
-            <tt>average property, same size as grains (if specified)</tt>
+            <tt>average property, sorted as EBSD</tt>
          </td>
       </tr>
    </table>

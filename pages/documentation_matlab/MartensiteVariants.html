@@ -28,12 +28,14 @@ ebsd = ebsd('indexed');
 
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',5*degree);
 ebsd(grains(grains.grainSize<=2)) = [];
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',5*degree);
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',5*degree,'qhull');
 
 grains = smooth(grains,4);
 {% endhighlight %}
 
 {% highlight plaintext %}
+saving data to /home/hielscher/mtex/master/data/emsland.mat
+ 
 ebsd = EBSD
  
  Phase  Orientations       Mineral         Color  Symmetry  Crystal reference frame
@@ -54,7 +56,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_01.png" %}
-</center><p>As expected, we recognize very small remaining fcc grains. This high-temperatur phase is stabilized by the increasing nickel content during transformation. The low-temperature bcc phase can solve in maximum only 6\% nickel so that fcc has to assimilate the excess nickel. Size and amount of fcc is therefore and indication of the overall nickel content. Considering only the parent fcc phase, we display the orientations in an axis-angle plot.</p>
+</center><p>As expected, we recognize very small remaining fcc grains. This high-temperature phase is stabilized by the increasing nickel content during transformation. The low-temperature bcc phase can solve in maximum only 6\% nickel so that fcc has to assimilate the excess nickel. Size and amount of fcc is therefore and indication of the overall nickel content. Considering only the parent fcc phase, we display the orientations in an axis-angle plot.</p>
 {% highlight matlab %}
 plot(ebsd('Aus').orientations,'axisAngle')
 {% endhighlight %}
@@ -199,11 +201,11 @@ NW = misorientation (Austenite → Ferrite, bcc)
 p2cIter = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2
-  182.91 98.2853 44.2426
+     phi1     Phi    phi2
+  179.384 98.2597  47.273
  
 ans =
-    3.1645
+    3.8638
 {% endhighlight %}
 <p>We observe that the parent-to-child orientation relationship computed solely from child-to-child misorientations fits the actual orientation relationship equally well.</p><h2 id="11">Classification of child variants by variant Ids</h2><p>Once we have determined parent orientations and a parent-to-child orientation relationship, we may proceed further by classifying the child orientations into different variants.</p><p>A variant refers to a specific orientation or crystallographic arrangement of the child phase within the context of the original parent orientation. Depending on the operative orientation relationship and parent-child crystal symmetries, a single parent phase orientation results in multiple child phase orientations (i.e.- variants). The variant Id is a convinient way to label or identify a specific variant within the child microstructure.</p><p>Child variant Ids are computed by the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
 {% highlight matlab %}
@@ -216,9 +218,7 @@ plotPDF(childOri,color,h_bcc,'MarkerSize',5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Packet ID calculation assuming {111}_p||{110}_c 
-Warning: Bain ID calculation assuming {001}_p||{100}_c 
-  I'm plotting 208 random orientations out of 3886 given orientations
+I'm plotting 208 random orientations out of 3886 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}

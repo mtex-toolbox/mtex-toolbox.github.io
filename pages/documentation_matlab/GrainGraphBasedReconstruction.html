@@ -36,6 +36,8 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
+saving data to /home/hielscher/mtex/master/data/martensite.mat
+ 
 ebsd = EBSD
  
  Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
@@ -131,7 +133,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
  
  graph: 7001 grains in 3 clusters + 1 single grain clusters
@@ -158,7 +160,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
  
  graph: 6943 grains in 273 clusters + 59 single grain clusters
@@ -316,11 +318,6 @@ hold on
 plot(grainSelected.boundary,'linewidth',3,'lineColor','w')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Packet ID calculation assuming {111}_p||{110}_c 
-Warning: Bain ID calculation assuming {001}_p||{100}_c
-{% endhighlight %}
 <center>
 {% include inline_image.html file="GrainGraphBasedReconstruction_12.png" %}
 </center><p>We can also directly identify the child grains belonging to the selected parent grains. Remeber that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
@@ -363,10 +360,6 @@ childVariants = variants(job.p2c, parentOri);
 plotPDF(childVariants, 'markerFaceColor','none','linewidth',1.5,'markerEdgeColor','k')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Packet ID calculation assuming {111}_p||{110}_c
-{% endhighlight %}
 <center>
 {% include inline_image.html file="GrainGraphBasedReconstruction_14.png" %}
 </center><h2 id="20">Parent EBSD reconstruction</h2><p>So far our analysis was at the grain level. However, once parent grain orientations have been computed we may also use them to compute parent orientations of each pixel in our original EBSD map. This is done by the command <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a></p>
@@ -375,10 +368,6 @@ parentEBSD = job.calcParentEBSD;
 
 % plot the result
 plot(parentEBSD('Iron fcc'),parentEBSD('Iron fcc').orientations,'figSize','large')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Packet ID calculation assuming {111}_p||{110}_c
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainGraphBasedReconstruction_15.png" %}

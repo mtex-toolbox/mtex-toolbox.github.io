@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Grain Reconstruction</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstruction.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the perpendicular bisector between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The default grain reconstruction method in MTEX is based on the definition of high angle grain boundaries which are assumed at the perpendicular bisector between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
 {% highlight matlab %}
 close all; plotx2east
 
@@ -43,39 +43,27 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_01.png" %}
-</center><h2 id="2">Basic grain reconstruction</h2><p>We see that there are a lot of not indexed measurements. For grain reconstruction, we have  three different choices how to deal with these unindexed regions:</p><div><ol><li>leave them unindexed</li><li>assign them to the surrounding grains</li><li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li></ol></div><p>The extent to which unindexed pixels are assigned is controlled by the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code>. Roughly speaking this parameter is the radius of the smallest unindexed region that will not be entirely assigned to surrounding grains. The default of this value is 2.2.</p><p>The second parameter that is involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p><p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html">calcGrains</a> which takes as input an EBSD data set and returns a list of grain.</p>
+</center><h2 id="2">Basic grain reconstruction</h2><p>We see that there are a lot of not indexed measurements. For grain reconstruction, we have  three different choices how to deal with these unindexed regions:</p><div><ol><li>leave them unindexed</li><li>assign them to the surrounding grains</li><li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li></ol></div><p>The extent to which unindexed pixels are assigned is controlled by the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code>. Roughly speaking this parameter is the radius of the smallest unindexed region that will not be entirely assigned to surrounding grains. The default of this value is 2.2.</p><p>The second parameter involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p><p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html">calcGrains</a> which takes as input an EBSD data set and returns a list of grain.</p>
 {% highlight matlab %}
-[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',2.2,'angle',10*degree)
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',1.2,'angle',10*degree);
+grains
 {% endhighlight %}
 
 {% highlight plaintext %}
 grains = grain2d
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1     109   14093  Forsterite       mmm                         
-     2      34    1397   Enstatite       mmm                         
-     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+     1     112   14088  Forsterite       mmm                         
+     2      40    1393   Enstatite       mmm                         
+     3      73     758    Diopside     12/m1       X||a*, Y||b*, Z||c
  
- boundary segments: 4198 (194614 µm)
+ boundary segments: 4772 (218456 µm)
  inner boundary segments: 1 (19 µm)
- triple points: 225
+ triple points: 192
  
  Properties: meanRotation, GOS
- 
- 
-ebsd = EBSDsquare
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    4052 (20%)  notIndexed                                                 
-     1   14093 (69%)  Forsterite  LightSkyBlue       mmm                         
-     2   1397 (6.9%)   Enstatite  DarkSeaGreen       mmm                         
-     3    759 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, oldId, grainId
- Scan unit : um
- Grid size (square): 101 x 201
 {% endhighlight %}
-<p>The reconstructed grains are stored in the variable <code class="language-plaintext highlighter-rouge">grains</code>. Note that also the notIndexed measurements are grouped into grains. This allows later to analyze the shape of these unindexed regions.</p><p>To visualize the grains we can plot its boundaries by the command <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a>.</p>
+<p>The reconstructed grains are stored in the variable <code class="language-plaintext highlighter-rouge">grains</code>. To visualize the grains we can plot its boundaries by the command <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a>.</p>
 {% highlight matlab %}
 % start overide mode
 hold on
@@ -90,44 +78,12 @@ hold off
 {% include inline_image.html file="GrainReconstruction_02.png" %}
 </center><p>Increasing the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code> larger unindexed regions are associated to grains.</p>
 {% highlight matlab %}
-[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',3.2,'angle',10*degree)
-
-plot(ebsd)
-hold on
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',3.2,'angle',10*degree);
 
 % plot the boundary of all grains
-plot(grains.boundary,'linewidth',1.5)
-
-% stop overide mode
+hold on
+plot(grains.boundary,'linewidth',1.5,'lineColor','red')
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1     108   14093  Forsterite       mmm                         
-     2      32    1397   Enstatite       mmm                         
-     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 4087 (189942 µm)
- inner boundary segments: 1 (19 µm)
- triple points: 241
- 
- Properties: meanRotation, GOS
- 
- 
-ebsd = EBSDsquare
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    4052 (20%)  notIndexed                                                 
-     1   14093 (69%)  Forsterite  LightSkyBlue       mmm                         
-     2   1397 (6.9%)   Enstatite  DarkSeaGreen       mmm                         
-     3    759 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad, x, y, oldId, grainId
- Scan unit : um
- Grid size (square): 101 x 201
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_03.png" %}

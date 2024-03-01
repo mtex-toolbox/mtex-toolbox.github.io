@@ -19,7 +19,7 @@ close all; plotx2east
 % import the data
 mtexdata forsterite
 
-% restrict it to a subregion of interest.
+% restrict it to a sub-region of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
@@ -95,7 +95,7 @@ ans = grainBoundary
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_02.png" %}
-</center><p>For a multi-phase system, the location of specific phase transistions may be of interest. The following plot highlights all Forsterite to Enstatite phase transitions</p>
+</center><p>For a multi-phase system, the location of specific phase transitions may be of interest. The following plot highlights all Forsterite to Enstatite phase transitions</p>
 {% highlight matlab %}
 hold on
 plot(grains.boundary('Fo','En'),'linecolor','DarkGreen','linewidth',4)
@@ -124,9 +124,9 @@ mtexColorbar('title','misorientation angle')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_05.png" %}
-</center><h2 id="8">The misorientation axes in crystal coordinates</h2><p>Similarly as the rotational angle we may colorize the grain boundaries also according the misorientation axes. First of all we have to decide wheter we want to visualize the rotational axis in crystal or coordinate system. Second we have to define a color key that translates rotational axes into colors.</p><p>Lets start with the rotational axes in crystal coordinates</p>
+</center><h2 id="8">The misorientation axes in crystal coordinates</h2><p>Similarly as the rotational angle we may colorize the grain boundaries also according the misorientation axes. First of all we have to decide whether we want to visualize the rotational axis in crystal or coordinate system. Second we have to define a color key that translates rotational axes into colors.</p><p>Lets start with the rotational axes in crystal coordinates</p>
 {% highlight matlab %}
-% computed the axes in specien coordinates
+% computed the axes in specimen coordinates
 axes = gB_Fo.misorientation.axis
 
 % define a color key
@@ -158,7 +158,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_07.png" %}
-</center><h2 id="10">The misorientation axes in specimen coordinates</h2><p>Analyzing the misorientation axis in specimen coordinates is a bit more involved as it requires to extract the two neighbouring orientations to each boundary segment. To do this we use the <b>ebsdId</b> stored in the boundary segments.</p>
+</center><h2 id="10">The misorientation axes in specimen coordinates</h2><p>Analyzing the misorientation axis in specimen coordinates is a bit more involved as it requires to extract the two neighboring orientations to each boundary segment. To do this we use the <code class="language-plaintext highlighter-rouge">ebsdId</code> stored in the boundary segments.</p>
 {% highlight matlab %}
 figure(1)
 
@@ -194,7 +194,7 @@ axes = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_08.png" %}
-</center><h2 id="11">Full Misorientation Colorization</h2><p>In order to visuale the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <code class="language-plaintext highlighter-rouge">Improved representations of misorientation information for grain boundary</code>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
+</center><h2 id="11">Full Misorientation Colorization</h2><p>In order to visualize the full misorientation, i.e., axis and angle, one has to define a corresponding color key. One option is the color key described in the paper by S. Patala, J. K. Mason, and C. A. Schuh, <code class="language-plaintext highlighter-rouge">Improved representations of misorientation information for grain boundary</code>, Prog. Mater. Sci., vol. 57, no. 8, pp. 1383-1425, 2012.</p>
 {% highlight matlab %}
 % plot the grains
 close all
@@ -228,7 +228,7 @@ plot(gB_Fo.misorientation,...
 % import the data
 mtexdata csl
 
-% grain segementation and smoothing
+% grain segmentation and smoothing
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 grains = smooth(grains,2);
 gB = grains.boundary('iron','iron');
@@ -237,7 +237,7 @@ gB = grains.boundary('iron','iron');
 close all
 plot(ebsd,log(ebsd.prop.iq),'figSize','large')
 mtexColorMap black2white
-CLim(gcm,[.5,5])
+setColorRange([.5,5])
 hold on
 plot(grains,grains.meanOrientation,'FaceAlpha',0.4)
 
