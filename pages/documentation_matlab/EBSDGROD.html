@@ -44,7 +44,7 @@ grod = ebsd.calcGROD(grains);
 {% highlight matlab %}
 % plot the misorientation angle of the GROD
 plot(ebsd,grod.angle./degree,'micronbar','off')
-mtexColorbar('title','misorientation angle to meanorientation in degree')
+mtexColorbar('title',{'misorientation angle in degree'})
 mtexColorMap LaboTeX
 
 % overlay grain and subgrain boundaries
@@ -57,7 +57,7 @@ hold off
 {% include inline_image.html file="EBSDGROD_02.png" %}
 </center><h2 id="4">Grain Orientation Spread (GOS)</h2><p>The grain orientation spread (GOS) is the averaged misorientation angle of the grain reference orientation deviations of each grain. We may compute this average by using the command <a href="ebsd.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a>.</p>
 {% highlight matlab %}
-GOS = grainMean(ebsd, grod.angle);
+GOS = grainMean(ebsd, grod.angle, grains);
 
 plot(grains, GOS ./ degree)
 mtexColorbar('title','GOS in degree')
@@ -69,7 +69,7 @@ mtexColorbar('title','GOS in degree')
 axCrystal = grod.axis;
 
 plot(axCrystal,'contourf','fundamentalRegion','antipodal','figSize','small')
-mtexColorbar('title','distribution of misorientation axes in mrd')
+mtexColorbar('title','mrd')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGROD_04.png" %}
