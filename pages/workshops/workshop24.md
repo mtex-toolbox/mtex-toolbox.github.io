@@ -43,17 +43,24 @@ practical examples during the exercises within MTEX.
 **Lecture 0 - General Concepts:**
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/zRDL6j8s3Sgs97H" content="slides" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/6Crd5PszNDw27qt" content="slides" class="course_material" %}
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
 **Lecture 1 - EBSD**
+{% include reference.html link="https://tuc.cloud/index.php/s/iPjkbYm6NPJ3PMw" content="slides" class="course_material" %}
 <br>
 data import, reference frame alignment, pole figures, inverse pole figures, color keys
 <br>
 <br>
 **Exercise 1**
+{% include reference.html link="https://tuc.cloud/index.php/s/n5M9Zo4znsmkqc4" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/EaeoJmKmKpEYW2k" content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/SDmcYG9WKt2cfgk" content="data" class="course_material" %}
+
 <br>
 <br>
 
@@ -62,6 +69,7 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 <br>
 <br>
 **Lecture 2 - Orientations and Symmetries**
+{% include reference.html link="https://tuc.cloud/index.php/s/fD9eeGfkbexq7dF" content="slides" class="course_material" %}
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
@@ -69,6 +77,9 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
 **Exercise 2**
+{% include reference.html link="https://tuc.cloud/index.php/s/eReketmMitkonEk" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/gMqZ5WaP6goJbwE" content="solution" class="course_material" %}
 <br>
 <br>
 				</div>
