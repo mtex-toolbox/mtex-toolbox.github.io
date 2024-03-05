@@ -100,6 +100,7 @@ pole figures, inverse pole figures, fundamental sectors
 				<div markdown="span">
 
 **Lecture 3 - Grains**
+{% include reference.html link="https://tuc.cloud/index.php/s/aa2mYtoJJgWmp4T" content="slides" class="course_material" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -111,6 +112,7 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 <br>
 **Lecture 4 - Misorientations and Grain Boundaries**
+{% include reference.html link="https://tuc.cloud/index.php/s/5b6BzdeKWxpxMtz" content="slides" class="course_material" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
