@@ -106,6 +106,11 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 <br>
 **Exercise 3**
+{% include reference.html link="https://tuc.cloud/index.php/s/kf843BAHMmesxNR" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/yBBRi424yNeJyTo" content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/sEmxMoNwgkHFm6x" content="data" class="course_material" %}
 <br>
 <br>
 *Lunch*
@@ -120,6 +125,17 @@ boundaries, orientation, gradients,  statistics of boundary networks
 <br>
 <br>
 **Exercise 4**
+{% include reference.html link="https://tuc.cloud/index.php/s/ZP2sgbbwazfNbt2" content="script 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/q4aZg9DMbszfQfw" content="solution 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/oDzZkKX5gpnNkp2" content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/mmjtowWaJaXm954" content="script 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/snsB34bzcfST4jT" content="solution 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/WnMrd2j8Q7eit8Y" content="data 2" class="course_material" %}
 <br>
 <br>
 				</div>
