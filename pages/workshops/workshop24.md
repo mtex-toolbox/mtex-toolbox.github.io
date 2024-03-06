@@ -163,6 +163,9 @@ boundaries, orientation, gradients,  statistics of boundary networks
 <br>
 <br>
 **Lecture 5 - Density Functions**
+{% include reference.html link="https://tuc.cloud/index.php/s/swK8XdBLJz6PRTj" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/dJe8mk3s4mEA7qY" content="slides" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -170,6 +173,9 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 5**
+{% include reference.html link="https://tuc.cloud/index.php/s/ppcHoH5My2w7oaN" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/kKtbw8dYAX5o3GW" content="solution" class="course_material" %}
 				</div>
 			</div>
 		</div>
