@@ -314,8 +314,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">T.&nbsp;Griffiths</td>
-			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX
-			</td>
+			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -325,21 +324,18 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">TrueEBSD distortion correction and	grain boundary smoothing
-			</td>
+			<td style="text-align: left">TrueEBSD distortion correction and	grain boundary smoothing</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">T.&nbsp;Nuysönen</td>
+			<td style="text-align: left">T.&nbsp;Nuys&ouml;nen</td>
 			<td style="text-align: left">Three-dimensional shape metrics of transformation products from
-			two-dimensional orientation maps: ongoing work
-			</td>
+			two-dimensional orientation maps: ongoing work</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">F.&nbsp;Niessen</td>
-			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters
-			</td>
+			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -349,14 +345,12 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">K.&nbsp;Marquardt</td>
-			<td style="text-align: left">Grain boundary complexion transition in Forsterite, an EBSD study
-			</td>
+			<td style="text-align: left">Grain boundary complexion transition in Forsterite, an EBSD study</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">R.&nbsp;Kühn</td>
-			<td style="text-align: left">Clay mineral textures from the hikurandi margin 
-			</td>
+			<td style="text-align: left">Clay mineral textures from the hikurandi margin</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -366,20 +360,17 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">15:30&minus;15:50</td>
 			<td style="text-align: left">D.&nbsp;Souza</td>
-			<td style="text-align: left">High Pressure - hight temperature deformation experiments to understand deep earthquakes
-			</td>
+			<td style="text-align: left">High Pressure - hight temperature deformation experiments to understand deep earthquakes</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:50&minus;16:10</td>
 			<td style="text-align: left">G.&nbsp;Lopez</td>
-			<td style="text-align: left">Mechanical Implications of Mica Bearing rocks
-			</td>
+			<td style="text-align: left">Mechanical Implications of Mica Bearing rocks</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:10&minus;16:30</td>
 			<td style="text-align: left">G.&nbsp;Mc Gill</td>
-			<td style="text-align: left">Micro Porosity in plastically deformed Quartz
-			</td>
+			<td style="text-align: left">Micro Porosity in plastically deformed Quartz</td>
 		</tr>
 	</tbody>
 </table>
@@ -399,8 +390,7 @@ their talks as accessible as possible.
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">C.&nbsp;Griesbach</td>
 			<td style="text-align: left">Rate-dependent ferroelectric
-			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns
-			</td>
+			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -415,14 +405,12 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">T.&nbsp;Vermeij</td>							
-			<td style="text-align: left">Local Identification of Deformation Twinning from Deformation Fields
-			</td>							
+			<td style="text-align: left">Local Identification of Deformation Twinning from Deformation Fields</td>							
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">C.&nbsp;Mornout</td>							
-			<td style="text-align: left">Methodology for Local Identification of Grain Boundary Sliding on the Nanoscale
-			</td>							
+			<td style="text-align: left">Methodology for Local Identification of Grain Boundary Sliding on the Nanoscale</td>							
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -432,14 +420,12 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">A.&minus;Saville</td>
-			<td style="text-align: left">Connecting Microstructure, Processing, and Phase Transformations in Metals Via MTEX
-			</td>
+			<td style="text-align: left">Connecting Microstructure, Processing, and Phase Transformations in Metals Via MTEX</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">P.&nbsp;Prathik</td>
-			<td style="text-align: left">A synergistic approach to characterize anisotropic materials using ultrasound and microstructural analysis
-			</td>
+			<td style="text-align: left">A synergistic approach to characterize anisotropic materials using ultrasound and microstructural analysis</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -449,27 +435,23 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">15:30&minus;15:50</td>
 			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
-			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains
-			</td>
+			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:50&minus;16:10</td>
 			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>
 			<td style="text-align: left">Relation between microstructure and
-			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique
-			</td>
+			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:10&minus;16:30</td>
 			<td style="text-align: left">M.&nbsp;Bolan</td>
-			<td style="text-align: left">Lattice curvature in 316l steel
-			</td>
+			<td style="text-align: left">Lattice curvature in 316l steel</td>
 		</tr>	
 		<tr>
 			<td style="text-align: right">16:30&minus;16:50</td>
 			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
-			<td style="text-align: left">
-			</td>
+			<td style="text-align: left"></td>
 		</tr>	
 	</tbody>
 </table>
@@ -488,8 +470,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">M.&nbsp;Witte</td>
-			<td style="text-align: left">Steel: Production, Processing and MTEX
-			</td>
+			<td style="text-align: left">Steel: Production, Processing and MTEX</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -499,20 +480,17 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">V.&nbsp;Babic</td>
-			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!
-			</td>
+			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">K.&nbsp;.&nbsp;Molodov</td>
-			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels
-			</td>
+			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">J.&nbsp;Dietich</td>
-			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys
-			</td>
+			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -522,14 +500,12 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">D.&nbsp;Depriester</td>
-			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations
-			</td>
+			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">B.&nbsp;Jacobsen</td>
-			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state
-			</td>
+			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
