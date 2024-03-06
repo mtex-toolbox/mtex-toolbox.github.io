@@ -297,10 +297,10 @@ their talks as accessible as possible.
   USA):	Connecting Microstructure, Processing, and Phase Transformations in Metals Via MTEX.
 	
 - **{% include reference.html
-  link="https://www.researchgate.net/profile/Marco-Witte" content="Marco Witte" %}** (Salzgitter Mannesmann): 
+  link="https://www.researchgate.net/profile/Marco-Witte" content="Marco
+  Witte" %}** (Salzgitter Mannesmann): Steel: Production, Processing and MTEX
     
 ## Time Schedule
-<!---
 {% capture table_monday %}
 <table>
 	<thead>
@@ -314,11 +314,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">T.&nbsp;Griffiths</td>
-			<td style="text-align: left">Plasticity Simulation with MTEX 
-			{% include reference.html link="https://tuc.cloud/index.php/s/skAbC4yZZPFFsAZ"
-			content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/u37NqVtahWE" content="video" class="course_material" %}
+			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX
 			</td>
 		</tr>
 		<tr>
@@ -327,36 +323,22 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">10:15&minus;10:45</td>
-			<td style="text-align: left">T.&nbsp;Vermeij</td>
-			<td style="text-align: left">Automated identification of slip system activity fields from digital image correlation data {% include reference.html
-			link="https://tuc.cloud/index.php/s/pbNzeKMWm4Jjnnz" content="slides" class="course_material" %} 
-            <span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/xjNWsHeHnlA" content="video" class="course_material" %}
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">V.&nbsp;Tong</td>
+			<td style="text-align: left">TrueEBSD distortion correction and	grain boundary smoothing
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">10:45&minus;11:15</td>
-			<td style="text-align: left">F.&nbsp;Niessen</td>
-			<td style="text-align: left">Habit plane determination from reconstructed parent phase orientation maps {% include reference.html link="https://tuc.cloud/index.php/s/tPHG5b3BBFjbgFT" content="slides" class="course_material" %}
-		     	<span class="course_material">, </span>
-			    {% include reference.html link="https://youtu.be/mg6AIeM-PxU" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">11:15&minus;11:30</td>
-			<td style="text-align: left">L.&nbsp;Richter</td>
-			<td style="text-align: left">Characterization of habit planes in multiphase materials {% include reference.html link="https://tuc.cloud/index.php/s/CjwokC7xZYMxK9f" content="slides" class="course_material" %}
-				<span class="course_material">, </span>
-     			{% include reference.html link="https://youtu.be/deZQ-SmMYP4" content="video" class="course_material" %}
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">T.&nbsp;Nuysönen</td>
+			<td style="text-align: left">Three-dimensional shape metrics of transformation products from
+			two-dimensional orientation maps: ongoing work
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">T.&nbsp;Kohne</td>
-			<td style="text-align: left">Local tetragonality determination of martensite in high carbon steels
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/tQ6CqUrnu-w" content="video" class="course_material" %}
+			<td style="text-align: left">F.&nbsp;Niessen</td>
+			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters
 			</td>
 		</tr>
 		<tr>
@@ -366,57 +348,37 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">A.&nbsp;Plowman</td>
-			<td style="text-align: left">Using MTEX with MatFlow for crystal plasticity and phase field modeling {% include reference.html link="https://tuc.cloud/index.php/s/xyGYs7yR5EEX3m8" content="slides" class="course_material" %}
-				<span class="course_material">, </span>
-     			{% include reference.html link="https://youtu.be/YWMj2W0Say8" content="video" class="course_material" %}
+			<td style="text-align: left">K.&nbsp;Marquardt</td>
+			<td style="text-align: left">Grain boundary complexion transition in Forsterite, an EBSD study
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">E.&nbsp;Wünsche</td>
-			<td style="text-align: left">Orientation Dependent Functions
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/h91KdrOaRPY" content="video" class="course_material" %}
+			<td style="text-align: left">R.&nbsp;Kühn</td>
+			<td style="text-align: left">Clay mineral textures from the hikurandi margin 
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
-		</tr>
+		</tr>				
 		<tr>
-			<td style="text-align: right">15:15&minus;15:45</td>
-			<td style="text-align: left">G.&nbsp;Zeng</td>
-			<td style="text-align: left">Explore the Solidification Orientation Relationships Using EBSD and MTEX
-			{% include reference.html link="https://tuc.cloud/index.php/s/oD8WkTYbBfaPkFi" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/uGv3YkHUUBc" content="video" class="course_material" %}
-			</td>
-		</tr>						
-		<tr>
-			<td style="text-align: right">15:45&minus;16:15</td>
-			<td style="text-align: left">B.&nbsp;Begley</td>
-			<td style="text-align: left">An MTEX-based API for VPSC
-			{% include reference.html link="https://tuc.cloud/index.php/s/kapLXFdDmTABGyF" content="slides" class="course_material" %}			
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/tujnbckvr-o" content="video" class="course_material" %}
+			<td style="text-align: right">15:30&minus;15:50</td>
+			<td style="text-align: left">D.&nbsp;Souza</td>
+			<td style="text-align: left">High Pressure - hight temperature deformation experiments to understand deep earthquakes
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">16:15&minus;16:30</td>
-			<td style="text-align: left">C.&nbsp;Chiu</td>
-			<td style="text-align: left">Crystal plasticity simulations and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/qeTyr2bMLAabFSd" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/UDhbXqN4YmI" content="video" class="course_material" %}
+			<td style="text-align: right">15:50&minus;16:10</td>
+			<td style="text-align: left">G.&nbsp;Lopez</td>
+			<td style="text-align: left">Mechanical Implications of Mica Bearing rocks
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">16:30&minus;16:45</td>
-			<td style="text-align: left">S.&nbsp;Prüger</td>
-			<td style="text-align: left">Modeling of austenitic oligo-crystals using Abaqus and MTEX {% include reference.html link="https://tuc.cloud/index.php/s/Z4E5La8FnSxGZTf" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-			{% include reference.html link="https://youtu.be/kwZBNFRyEm4" content="video" class="course_material" %}
+			<td style="text-align: right">16:10&minus;16:30</td>
+			<td style="text-align: left">G.&nbsp;Mc Gill</td>
+			<td style="text-align: left">Micro Porosity in plastically deformed Quartz
 			</td>
 		</tr>
 	</tbody>
@@ -435,8 +397,10 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">R.&nbsp;Kühn</td>
-			<td style="text-align: left">Analyzing X-ray diffraction data of polyphase rocks using MTEX {% include reference.html link="https://tuc.cloud/index.php/s/K4HcyD5mfbtNjjB" content="slides" class="course_material" %}</td>
+			<td style="text-align: left">C.&nbsp;Griesbach</td>
+			<td style="text-align: left">Rate-dependent ferroelectric
+			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -444,17 +408,21 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">10:15&minus;10:45</td>
-			<td style="text-align: left">M.&nbsp;Bestmann</td>
-			<td style="text-align: left">Seismic induced anisotropy and kinking in quartz</td>
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">L.&nbsp;Richter</td>
+			<td style="text-align: left">Spherical indexing of pseudo symmetries</td>
 		</tr>						
 		<tr>
-			<td style="text-align: right">11:15&minus;11:45</td>
-			<td style="text-align: left">V.&nbsp;Ocelik</td>							
-			<td style="text-align: left">Analysis of spherulitic and rotational crystal growth of Quartz thin films {% include reference.html link="https://tuc.cloud/index.php/s/fHyYYxAYHHesyk9" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/GT8RGRh9olE" content="video" class="course_material" %}
-		</td>							
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">T.&nbsp;Vermeij</td>							
+			<td style="text-align: left">Local Identification of Deformation Twinning from Deformation Fields
+			</td>							
+		</tr>
+		<tr>
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">C.&nbsp;Mornout</td>							
+			<td style="text-align: left">Methodology for Local Identification of Grain Boundary Sliding on the Nanoscale
+			</td>							
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -463,20 +431,14 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">Lopez&minus;Sanchez</td>
-			<td style="text-align: left">Seismic modelling using EBSD data:
-			why, how, limitations and good practices
-			{% include reference.html link="https://tuc.cloud/index.php/s/ppKMydxobEPeMKo" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/40b3dkX3t4U" content="video" class="course_material" %}
+			<td style="text-align: left">A.&minus;Saville</td>
+			<td style="text-align: left">Connecting Microstructure, Processing, and Phase Transformations in Metals Via MTEX
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">T.&nbsp;Qu</td>
-			<td style="text-align: left">Collecting crystallographic information of etwin in calcite rocks with MTEX {% include reference.html link="https://tuc.cloud/index.php/s/8xq5TS3nE7iENLS" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/T9u6FFuycYU" content="video" class="course_material" %}
+			<td style="text-align: left">P.&nbsp;Prathik</td>
+			<td style="text-align: left">A synergistic approach to characterize anisotropic materials using ultrasound and microstructural analysis
 			</td>
 		</tr>
 		<tr>
@@ -485,37 +447,30 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:15&minus;15:30</td>
-			<td style="text-align: left">S. Gupta</td>
-			<td style="text-align: left">Characterization of Precambrian felsic magmatism of Kumaun Lesser Himalaya: constraints from zircon morphological and U-Pb-Lu-Hf isotopic studies
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/OwkoHa9nK8E" content="video" class="course_material" %}
+			<td style="text-align: right">15:30&minus;15:50</td>
+			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
+			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:45&minus;16:00</td>
-			<td style="text-align: left">A.&nbsp;Dittes</td>
-			<td style="text-align: left">Quantitative model to predict the microstructure-related corrosion rate of cold-rolled SS316L: How to profit from EBSD {% include reference.html link="https://tuc.cloud/index.php/s/tGm8wPZCfgArMZN" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/DI0k0q77mDI" content="video" class="course_material" %}
+			<td style="text-align: right">15:50&minus;16:10</td>
+			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>
+			<td style="text-align: left">Relation between microstructure and
+			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">16:15&minus;16:30</td>
-			<td style="text-align: left">J.&nbsp;Kozlík</td>
-			<td style="text-align: left">Dictionary indexing of stress induced martensite in Ti-Nb-Zr-O alloy {% include reference.html link="https://tuc.cloud/index.php/s/cPLgwJYmwF85erj" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/rtHoOsQw5wI" content="video" class="course_material" %}
+			<td style="text-align: right">16:10&minus;16:30</td>
+			<td style="text-align: left">M.&nbsp;Bolan</td>
+			<td style="text-align: left">Lattice curvature in 316l steel
 			</td>
-		</tr>
+		</tr>	
 		<tr>
-			<td style="text-align: right">16:30&minus;16:45</td>
-			<td style="text-align: left">E.&nbsp;Knipschildt</td>
-			<td style="text-align: left">Particle stimulated nucleation in three dimensions {% include reference.html link="https://tuc.cloud/index.php/s/QkwmqDzicx7bQTr" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/SzlYqNc3dBQ" content="video" class="course_material" %}
+			<td style="text-align: right">16:30&minus;16:50</td>
+			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
+			<td style="text-align: left">
 			</td>
-		</tr>
+		</tr>	
 	</tbody>
 </table>
 {% endcapture %}
@@ -532,10 +487,8 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">Characterising microstructural shapes using EBSD and correlative SEM imaging techniques {% include reference.html link="https://tuc.cloud/index.php/s/9qTkPxyrG8NSoSG" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/BTGB0aHk5uc" content="video" class="course_material" %}
+			<td style="text-align: left">M.&nbsp;Witte</td>
+			<td style="text-align: left">Steel: Production, Processing and MTEX
 			</td>
 		</tr>
 		<tr>
@@ -544,27 +497,21 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">10:15&minus;10:45</td>
-			<td style="text-align: left">B.&nbsp;Schulz</td>
-			<td style="text-align: left">Advancing analytical electron microscopy methodologies to characterise microstructural features in superalloys {% include reference.html link="https://tuc.cloud/index.php/s/GrMQrkCWAbZFeEE" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/8mAeCcO01C8" content="video" class="course_material" %}
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">V.&nbsp;Babic</td>
+			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">10:45&minus;11:15</td>
-			<td style="text-align: left">N.&nbsp;S.&nbsp;Tapaswi</td>
-			<td style="text-align: left">3D-XRD and MTEX {% include reference.html link="" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/YZec2zlvXZw" content="video" class="course_material" %}
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">K.&nbsp;.&nbsp;Molodov</td>
+			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">11:15&minus;11:45</td>
-			<td style="text-align: left">C.&nbsp;Sakr</td>
-			<td style="text-align: left">Energy Dispersive Laue Diffraction (EDLD) on tooth enamel {% include reference.html link="https://tuc.cloud/index.php/s/CkNSXDF4tmc6fKr" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/tfSOeAJR_y4" content="video" class="course_material" %}
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">J.&nbsp;Dietich</td>
+			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys
 			</td>
 		</tr>
 		<tr>
@@ -574,36 +521,24 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">M.&nbsp;Petersmann</td>
-			<td style="text-align: left">Use cases of MTEX for semiconductor metalizations
-			{% include reference.html link="https://tuc.cloud/index.php/s/oNseZEq9kK3fQZp" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/Z6GtC2upv-U" content="video" class="course_material" %}
+			<td style="text-align: left">D.&nbsp;Depriester</td>
+			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">14:30&minus;15:00</td>
+			<td style="text-align: left">B.&nbsp;Jacobsen</td>
+			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
-		</tr>
+		</tr>	
 		<tr>
-			<td style="text-align: right">14:45&minus;15:15</td>
-			<td style="text-align: left">M.&nbsp;Kühlbach</td>
-			<td style="text-align: left">Fairmat
-			{% include reference.html link="https://tuc.cloud/index.php/s/SZ4Dbcr8dQiEWYk" content="slides" class="course_material" %}
-			<span class="course_material">, </span>
-            {% include reference.html link="https://youtu.be/U2d82amrbFk" content="video"
-			class="course_material" %}			
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">15:15&minus;16:15</td>
+			<td style="text-align: right">15:30&minus;16:30</td>
 			<td style="text-align: left">Round&nbsp;Table Discussion</td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:00&minus;17:00</td>
-			<td style="text-align: left">Consultation</td>
 			<td style="text-align: left"></td>
 		</tr>
 	</tbody>
@@ -614,7 +549,7 @@ their talks as accessible as possible.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b> Crystal Plasticity and more </a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
 			</h4>
 		</div>
 		<div id="collapseMo" class="panel-collapse collapse noCrossRef">
@@ -626,7 +561,7 @@ their talks as accessible as possible.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b> MTEX in Geology</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
 			</h4>
 		</div>
 		<div id="collapseTue" class="panel-collapse collapse noCrossRef">
@@ -638,7 +573,8 @@ their talks as accessible as possible.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b> MTEX in Material Science</a>
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
+				data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
 			</h4>
 		</div>
 		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
@@ -648,7 +584,6 @@ their talks as accessible as possible.
 		</div>
 	</div>
 </div>
--->
 
 ## Venue:
 
