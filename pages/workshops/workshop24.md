@@ -380,7 +380,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">15:30&minus;15:50</td>
 			<td style="text-align: left">D.&nbsp;Souza</td>
-			<td style="text-align: left">High Pressure - hight temperature deformation experiments to understand deep earthquakes</td>
+			<td style="text-align: left">High Pressure - high temperature deformation experiments to understand deep earthquakes</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:50&minus;16:10</td>
@@ -453,24 +453,24 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:30&minus;15:50</td>
+			<td style="text-align: right">15:00&minus;16:00</td>
+			<td style="text-align: left">D.&nbsp;Depriester</td>
+			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:00&minus;16:20</td>
+			<td style="text-align: left">B.&nbsp;Jacobsen</td>
+			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:20&minus;40:50</td>
 			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
 			<td style="text-align: left">Use of OR tool for variant pairing
 			analysis and secondary carbide precipitation of tempered tool steel: 
 			Impact of multiple austenitization cycles on mechanical properties</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:50&minus;16:10</td>
-			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
-			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>			
-		</tr>
-		<tr>
-			<td style="text-align: right">16:10&minus;16:30</td>
-			<td style="text-align: left">M.&nbsp;Bolan</td>
-			<td style="text-align: left">Lattice curvature in 316l steel</td>
-		</tr>	
-		<tr>
-			<td style="text-align: right">16:30&minus;16:50</td>
+			<td style="text-align: right">16:40&minus;17:00</td>
 			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>	
 			<td style="text-align: left">Relation between microstructure and
 			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique</td>
@@ -490,30 +490,40 @@ their talks as accessible as possible.
 	</thead>
 	<tbody>
 		<tr>
-			<td style="text-align: right">9:00&minus;10:00</td>
+			<td style="text-align: right">8:30&minus;9:30</td>
 			<td style="text-align: left">M.&nbsp;Witte</td>
 			<td style="text-align: left">Steel: Production, Processing and MTEX</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">9:30&minus;10:00</td>
+			<td style="text-align: left">V.&nbsp;Babic</td>
+			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
-		</tr>
+		</tr>		
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">V.&nbsp;Babic</td>
-			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">K.&nbsp;Molodov</td>
 			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">J.&nbsp;Dietich</td>
+			<td style="text-align: right">11:00&minus;11:20</td>
+			<td style="text-align: left">J.&nbsp;Dietrich</td>
 			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys</td>
 		</tr>
+				<tr>
+			<td style="text-align: right">11:20&minus;11:40</td>
+			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
+			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>			
+		</tr>
+		<tr>
+			<td style="text-align: right">11:40&minus;12:00</td>
+			<td style="text-align: left">M.&nbsp;Bolan</td>
+			<td style="text-align: left">Lattice curvature in 316l steel</td>
+		</tr>	
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
 			<td style="text-align: left"></td>
@@ -521,24 +531,15 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">D.&nbsp;Depriester</td>
-			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">B.&nbsp;Jacobsen</td>
-			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state</td>
+			<td style="text-align: left">Round&nbsp;Table Discussion</td>
+			<td style="text-align: left"></td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
 		</tr>	
-		<tr>
-			<td style="text-align: right">15:30&minus;16:30</td>
-			<td style="text-align: left">Round&nbsp;Table Discussion</td>
-			<td style="text-align: left"></td>
-		</tr>
+		
 	</tbody>
 </table>
 {% endcapture %}
