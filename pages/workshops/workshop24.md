@@ -220,6 +220,7 @@ content="data 2" class="course_material" %}
 <br>
 <br>
 **Lecture 7 - Tensorial Properties**
+{% include reference.html link="https://tuc.cloud/index.php/s/ZzpaxQkBRobxrEQ" content="slides" class="course_material" %}
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
 tensors, piezoelectricity, elasticity, wave velocities
@@ -229,6 +230,7 @@ combining MTEX with external software like VPSC-->
 <br>
 <br>
 **Exercise 7 - From Single Grain to Bulk Tensors**
+{% include reference.html link="https://tuc.cloud/index.php/s/gsz2bQ8EeGtgEsz" content="script" class="course_material" %}
 <br>
 average tensors (Voigt, Reuss, Hill) from EBSD and ODF
  			  </div>
