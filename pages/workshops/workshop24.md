@@ -484,7 +484,7 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">K.&nbsp;.&nbsp;Molodov</td>
+			<td style="text-align: left">K.&nbsp;Molodov</td>
 			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels</td>
 		</tr>
 		<tr>
