@@ -62,6 +62,8 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 {% include reference.html link="https://tuc.cloud/index.php/s/EaeoJmKmKpEYW2k" content="solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/SDmcYG9WKt2cfgk" content="data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/5YicKTTnMb8" content="video" class="course_material" %}
 
 <br>
 <br>
@@ -72,6 +74,8 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 <br>
 **Lecture 2 - Orientations and Symmetries**
 {% include reference.html link="https://tuc.cloud/index.php/s/fD9eeGfkbexq7dF" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/IWUmCYyPwjw" content="video" class="course_material" %}
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
@@ -82,6 +86,8 @@ pole figures, inverse pole figures, fundamental sectors
 {% include reference.html link="https://tuc.cloud/index.php/s/eReketmMitkonEk" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/gMqZ5WaP6goJbwE" content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/OOioaXczRB8" content="video" class="course_material" %}
 <br>
 <br>
 				</div>
@@ -103,6 +109,8 @@ pole figures, inverse pole figures, fundamental sectors
 
 **Lecture 3 - Grains**
 {% include reference.html link="https://tuc.cloud/index.php/s/aa2mYtoJJgWmp4T" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/dGDIvgtNVLs" content="video" class="course_material" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -113,6 +121,8 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 {% include reference.html link="https://tuc.cloud/index.php/s/yBBRi424yNeJyTo" content="solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/sEmxMoNwgkHFm6x" content="data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/IFZvJRXShfs" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
@@ -120,6 +130,8 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 **Lecture 4 - Misorientations and Grain Boundaries**
 {% include reference.html link="https://tuc.cloud/index.php/s/5b6BzdeKWxpxMtz" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/EzHhguqBEEY" content="video" class="course_material" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
@@ -138,6 +150,8 @@ boundaries, orientation, gradients,  statistics of boundary networks
 {% include reference.html link="https://tuc.cloud/index.php/s/snsB34bzcfST4jT" content="solution 2" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/WnMrd2j8Q7eit8Y" content="data 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/kkS_lyxaHnY" content="video" class="course_material" %}
 <br>
 <br>
 				</div>
