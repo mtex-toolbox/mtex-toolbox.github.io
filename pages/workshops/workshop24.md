@@ -434,14 +434,15 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">15:30&minus;15:50</td>
-			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
-			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>
+			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
+			<td style="text-align: left">Use of OR tool for variant pairing
+			analysis and secondary carbide precipitation of tempered tool steel: 
+			Impact of multiple austenitization cycles on mechanical properties</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:50&minus;16:10</td>
-			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>
-			<td style="text-align: left">Relation between microstructure and
-			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique</td>
+			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
+			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>			
 		</tr>
 		<tr>
 			<td style="text-align: right">16:10&minus;16:30</td>
@@ -450,8 +451,9 @@ their talks as accessible as possible.
 		</tr>	
 		<tr>
 			<td style="text-align: right">16:30&minus;16:50</td>
-			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
-			<td style="text-align: left"></td>
+			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>	
+			<td style="text-align: left">Relation between microstructure and
+			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique</td>
 		</tr>	
 	</tbody>
 </table>
