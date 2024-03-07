@@ -463,7 +463,7 @@ their talks as accessible as possible.
 			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">16:20&minus;40:50</td>
+			<td style="text-align: right">16:20&minus;16:40</td>
 			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
 			<td style="text-align: left">Use of OR tool for variant pairing
 			analysis and secondary carbide precipitation of tempered tool steel: 
