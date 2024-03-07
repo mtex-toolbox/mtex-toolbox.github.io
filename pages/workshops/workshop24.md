@@ -50,6 +50,8 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 <br>
 **Lecture 1 - EBSD**
 {% include reference.html link="https://tuc.cloud/index.php/s/iPjkbYm6NPJ3PMw" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/z0-rB87H0hU" content="video" class="course_material" %}
 <br>
 data import, reference frame alignment, pole figures, inverse pole figures, color keys
 <br>
