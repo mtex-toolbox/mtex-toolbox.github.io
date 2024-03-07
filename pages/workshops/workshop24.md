@@ -192,27 +192,45 @@ random sampling, ODF reconstuction from XRD data
 		<div id="collapseThursday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 6 - Tensorial Properties**
+**Lecture 6 - EBSD Denoising and Alignment of the Reference Frame**
+{% include reference.html link="https://tuc.cloud/index.php/s/7EBQnHnHoFpaPsz" content="slides" class="course_material" %}
 <br>
-tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
-tensors, piezoelectricity, elasticity, wave velocities
+
 <br>
 <br>
-**Exercise 6 - From Single Grain to Bulk Tensors**
+**Exercise 6 - Grain Boundaries and Misorientations**
+{% include reference.html link="https://tuc.cloud/index.php/s/ZP2sgbbwazfNbt2" content="script 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/q4aZg9DMbszfQfw" content="solution 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/SCrbAcjfifPsMw8" content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/mmjtowWaJaXm954" content="script 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/snsB34bzcfST4jT" content="solution 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/S8sRxTHkoPane3r"
+content="data 2" class="course_material" %}
+
 <br>
-average tensors (Voigt, Reuss, Hill) from EBSD and ODF
+
 <br>
 <br>
 *Lunch*
 <br>
 <br>
-**Lecture 7 - Plastic Deformation**
+**Lecture 7 - Tensorial Properties**
 <br>
-deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
-combining MTEX with external software like VPSC
+tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
+tensors, piezoelectricity, elasticity, wave velocities
+<br>
+<!--deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
+combining MTEX with external software like VPSC-->
 <br>
 <br>
-**Exercise 7**
+**Exercise 7 - From Single Grain to Bulk Tensors**
+<br>
+average tensors (Voigt, Reuss, Hill) from EBSD and ODF
  			  </div>
 			</div>
 		</div>
