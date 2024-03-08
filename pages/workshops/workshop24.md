@@ -304,7 +304,7 @@ combining MTEX with external software like VPSC
 <br>
 <br>
 **Lecture 10 - Parent Grain Reconstuction**
-{% include reference.html link="https://tuc.cloud/index.php/s/s6A3n3L5iP6gAttC" content="script" class="course_material" %}
+{% include reference.html link="https://tuc.cloud/index.php/s/s6A3n3L5iP6gAtt" content="script" class="course_material" %}
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
