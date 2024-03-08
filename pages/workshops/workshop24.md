@@ -186,6 +186,8 @@ boundaries, orientation, gradients,  statistics of boundary networks
 {% include reference.html link="https://tuc.cloud/index.php/s/swK8XdBLJz6PRTj" content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/dJe8mk3s4mEA7qY" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/jcfql9v3Hg4" content="video" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -196,6 +198,8 @@ random sampling, ODF reconstuction from XRD data
 {% include reference.html link="https://tuc.cloud/index.php/s/ppcHoH5My2w7oaN" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/kKtbw8dYAX5o3GW" content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/XX9SOSSoRZE" content="video" class="course_material" %}
 				</div>
 			</div>
 		</div>
@@ -214,6 +218,11 @@ random sampling, ODF reconstuction from XRD data
 				<div markdown="span">
 **Lecture 6 - EBSD Denoising and Alignment of the Reference Frame**
 {% include reference.html link="https://tuc.cloud/index.php/s/7EBQnHnHoFpaPsz" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/bj4usH9odro" content="video" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/hJX61Kso4oU" content="video" class="course_material" %}
+
 <br>
 
 <br>
@@ -231,6 +240,8 @@ random sampling, ODF reconstuction from XRD data
 <span class="course_material">, </span>
 {% include reference.html link="https://tuc.cloud/index.php/s/S8sRxTHkoPane3r"
 content="data 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/pivZ99mTfdU" content="video" class="course_material" %}
 
 <br>
 
@@ -241,6 +252,8 @@ content="data 2" class="course_material" %}
 <br>
 **Lecture 7 - Tensorial Properties**
 {% include reference.html link="https://tuc.cloud/index.php/s/ZzpaxQkBRobxrEQ" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/GlfF06iBkK4" content="video" class="course_material" %}
 <br>
 tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
 tensors, piezoelectricity, elasticity, wave velocities
@@ -251,6 +264,8 @@ combining MTEX with external software like VPSC-->
 <br>
 **Exercise 7 - From Single Grain to Bulk Tensors**
 {% include reference.html link="https://tuc.cloud/index.php/s/gsz2bQ8EeGtgEsz" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/Hrki-s_BWkI" content="video" class="course_material" %}
 <br>
 average tensors (Voigt, Reuss, Hill) from EBSD and ODF
  			  </div>
