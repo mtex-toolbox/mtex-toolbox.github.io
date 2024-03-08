@@ -287,8 +287,6 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 {% include reference.html link="https://tuc.cloud/index.php/s/WcTogYqnGxTZLZa" content="script" class="course_material" %}
 <br>
 how to set up your EBSD system for MTEX
-<!--determination of orientation relationships, phase transition, parent grain reconstruction, transformation
-textures, variant selection-->
 <br>
 <br>
 **Lecture 9 - Plasticity**
@@ -301,10 +299,13 @@ combining MTEX with external software like VPSC
 *lunch*
 <br>
 <br>
-**Lecture 9 - Specific Topics of Interest**
+**Lecture 10 - Parent Grain Reconstuction**
+{% include reference.html link="https://tuc.cloud/index.php/s/s6A3n3L5iP6gAttC" content="script" class="course_material" %}
 <br>
-Participants can vote for their topic of interest, e.g.: denoising of EBSD
-maps, dislocation density estimation, weighted Burgers vector, habit planes determination, 
+determination of orientation relationships, phase transition, parent grain reconstruction, transformation
+textures, variant selection
+<!--Participants can vote for their topic of interest, e.g.: denoising of EBSD
+maps, dislocation density estimation, weighted Burgers vector, habit planes determination, -->
 <br>
 <br>
 **Free Discussion of Personal Data Sets**
