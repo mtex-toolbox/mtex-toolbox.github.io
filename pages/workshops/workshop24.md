@@ -64,7 +64,6 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 {% include reference.html link="https://tuc.cloud/index.php/s/SDmcYG9WKt2cfgk" content="data" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/5YicKTTnMb8" content="video" class="course_material" %}
-
 <br>
 <br>
 
@@ -131,7 +130,12 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 **Lecture 4 - Misorientations and Grain Boundaries**
 {% include reference.html link="https://tuc.cloud/index.php/s/5b6BzdeKWxpxMtz" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/EzHhguqBEEY" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/EzHhguqBEEY" content="video"
+class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://tuc.cloud/index.php/s/W6NfHa47AdgrZbo" content="slides" class="course_material" %}
+
+
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
@@ -264,13 +268,16 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 8 - Orientation Relationships**
+**Lecture 8 - Plasticity**
+{% include reference.html link="https://tuc.cloud/index.php/s/HaYGieXjWZJ9Q2C" content="script" class="course_material" %}
 <br>
-determination of orientation relationships, phase transition, parent grain reconstruction, transformation
-textures, variant selection
+deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
+combining MTEX with external software like VPSC
+<!--determination of orientation relationships, phase transition, parent grain reconstruction, transformation
+textures, variant selection-->
 <br>
 <br>
-**Exercise 8**
+**Lecture 9 - Orientation Relationships**
 <br>
 <br>
 *lunch*
