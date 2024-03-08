@@ -285,12 +285,16 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 				<div markdown="span">
 **Lecture 8 - EBSD reference systems**
 {% include reference.html link="https://tuc.cloud/index.php/s/WcTogYqnGxTZLZa" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/KsEWxLy_NIw" content="video" class="course_material" %}
 <br>
 how to set up your EBSD system for MTEX
 <br>
 <br>
 **Lecture 9 - Plasticity**
 {% include reference.html link="https://tuc.cloud/index.php/s/HaYGieXjWZJ9Q2C" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/W4T6c_mbM2A" content="video" class="course_material" %}
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 combining MTEX with external software like VPSC
