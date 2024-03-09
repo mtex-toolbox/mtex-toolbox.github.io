@@ -396,7 +396,7 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">T.&nbsp;Nuys&ouml;nen</td>
+			<td style="text-align: left">T.&nbsp;Nyyss&ouml;nen</td>
 			<td style="text-align: left">Three-dimensional shape metrics of transformation products from
 			two-dimensional orientation maps: ongoing work</td>
 		</tr>
