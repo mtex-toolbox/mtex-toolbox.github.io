@@ -455,10 +455,15 @@ their talks as accessible as possible.
 	</thead>
 	<tbody>
 		<tr>
-			<td style="text-align: right">9:00&minus;10:00</td>
+			<td style="text-align: right">8:30&minus;9:30</td>
 			<td style="text-align: left">C.&nbsp;Griesbach</td>
 			<td style="text-align: left">Rate-dependent ferroelectric
 			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">9:30&minus;10:00</td>
+			<td style="text-align: left">L.&nbsp;Richter</td>
+			<td style="text-align: left">Spherical indexing of pseudo symmetries</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -467,8 +472,9 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">L.&nbsp;Richter</td>
-			<td style="text-align: left">Spherical indexing of pseudo symmetries</td>
+			<td style="text-align: left">P.&nbsp;Prathik</td>
+			<td style="text-align: left">A synergistic approach to
+			characterize anisotropic materials using ultrasound and microstructural analysis (<i>online</i>)</td>
 		</tr>						
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
@@ -487,13 +493,15 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">A.&minus;Saville</td>
-			<td style="text-align: left">Connecting Microstructure, Processing, and Phase Transformations in Metals Via MTEX</td>
+			<td style="text-align: left">A.&nbsp;Saville</td>
+			<td style="text-align: left">Connecting Microstructure,
+			Processing, and Phase Transformations in Metals Via MTEX (<i>online</i>)</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">P.&nbsp;Prathik</td>
-			<td style="text-align: left">A synergistic approach to characterize anisotropic materials using ultrasound and microstructural analysis</td>
+			<td style="text-align: left">D.&nbsp;Guan</td>
+			<td style="text-align: left">Tracking orientation changes using
+			the Track-rex  toolbox (<i>online</i>)</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
