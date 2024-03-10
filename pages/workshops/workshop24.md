@@ -440,16 +440,12 @@ their talks as accessible as possible.
 			<td style="text-align: left">G.&nbsp;Mc Gill</td>
 			<td style="text-align: left">Micro Porosity in plastically deformed Quartz</td>
 		</tr>
+		<tr><i>Small tour through Freiberg<i></tr>
 		<tr>
-			<td style="text-align: right">17:00&minus;18:00</td>
+			<td style="text-align: right">18:00</td>
 			<td style="text-align: left"></td>
-			<td style="text-align: left">Small tour through Freiberg</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">18:00&minus;20:00</td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left">Dinner at <a
-			href="https://maps.app.goo.gl/ZKPebmYn2dRiG7p57">Stadtwirtschaft Freiberg</a></td>
+			<td style="text-align: left"></i>Dinner at <a
+			href="https://maps.app.goo.gl/ZKPebmYn2dRiG7p57">Stadtwirtschaft Freiberg</a></i></td>
 		</tr>
 	</tbody>
 </table>
