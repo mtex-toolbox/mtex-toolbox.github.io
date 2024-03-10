@@ -500,8 +500,9 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">D.&nbsp;Guan</td>
-			<td style="text-align: left">Tracking orientation changes using
-			the Track-rex  toolbox (<i>online</i>)</td>
+			<td style="text-align: left">Track-Rex: a universal toolbox for
+			tracking recrystallization and 
+			grain growth behaviors in polycrystalline materials. (<i>online</i>)</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
