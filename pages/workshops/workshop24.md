@@ -385,9 +385,9 @@ their talks as accessible as possible.
 			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX</td>
 		</tr>
 		<tr>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
 			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
 		</tr>
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
@@ -406,9 +406,9 @@ their talks as accessible as possible.
 			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters</td>
 		</tr>
 		<tr>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
 			<td style="text-align: left"><i>Lunch</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
@@ -421,9 +421,9 @@ their talks as accessible as possible.
 			<td style="text-align: left">Clay mineral textures from the hikurandi margin</td>
 		</tr>
 		<tr>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
 			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
 		</tr>				
 		<tr>
 			<td style="text-align: right">15:30&minus;15:50</td>
@@ -441,7 +441,12 @@ their talks as accessible as possible.
 			<td style="text-align: left">Micro Porosity in plastically deformed Quartz</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">18:00</td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"><i>Short walk through Freiberg</i></td>
+		</tr>
+		<tr>
+			<td style="text-align: left">18:00</td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"><i>Dinner at <a
 			href="https://maps.app.goo.gl/ZKPebmYn2dRiG7p57">Stadtwirtschaft Freiberg</a></i></td>
