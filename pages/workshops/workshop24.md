@@ -440,7 +440,7 @@ their talks as accessible as possible.
 			<td style="text-align: left">G.&nbsp;Mc Gill</td>
 			<td style="text-align: left">Micro Porosity in plastically deformed Quartz</td>
 		</tr>
-		<tr><i>Small tour through Freiberg<i></tr>
+		<tr><td style="text-align: left"><i>Small tour through Freiberg<i></td></tr>
 		<tr>
 			<td style="text-align: right">18:00</td>
 			<td style="text-align: left"></td>
