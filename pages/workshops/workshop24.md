@@ -413,7 +413,8 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">K.&nbsp;Marquardt</td>
-			<td style="text-align: left">Grain boundary complexion transition in Forsterite, an EBSD study</td>
+			<td style="text-align: left"><i>canceled</i> Grain boundary complexion transition
+			in Forsterite, an EBSD study</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
