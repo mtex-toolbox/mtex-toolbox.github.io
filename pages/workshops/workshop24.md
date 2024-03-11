@@ -533,13 +533,6 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">16:20&minus;16:40</td>
-			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
-			<td style="text-align: left">Use of OR tool for variant pairing
-			analysis and secondary carbide precipitation of tempered tool steel: 
-			Impact of multiple austenitization cycles on mechanical properties</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:40&minus;17:00</td>
 			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>	
 			<td style="text-align: left">Relation between microstructure and
 			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique</td>
@@ -589,10 +582,17 @@ their talks as accessible as possible.
 			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>			
 		</tr>
 		<tr>
+			<td style="text-align: right">16:20&minus;16:40</td>
+			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
+			<td style="text-align: left">Use of OR tool for variant pairing
+			analysis and secondary carbide precipitation of tempered tool steel: 
+			Impact of multiple austenitization cycles on mechanical properties</td>
+		</tr>
+		<!--<tr>
 			<td style="text-align: right">11:40&minus;12:00</td>
 			<td style="text-align: left">M.&nbsp;Bolan</td>
 			<td style="text-align: left">Lattice curvature in 316l steel</td>
-		</tr>	
+		</tr>-->	
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
 			<td style="text-align: left"></td>
