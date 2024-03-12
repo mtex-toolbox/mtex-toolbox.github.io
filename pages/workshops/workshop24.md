@@ -382,7 +382,9 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">T.&nbsp;Griffiths</td>
-			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX</td>
+			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX
+			{% include reference.html link="https://youtu.be/_anaaIunvJY" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -392,18 +394,24 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">TrueEBSD distortion correction and	grain boundary smoothing</td>
+			<td style="text-align: left">TrueEBSD distortion correction and	grain boundary smoothing
+			{% include reference.html link="https://youtu.be/ltawCgbgekE" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">T.&nbsp;Nyyss&ouml;nen</td>
 			<td style="text-align: left">Three-dimensional shape metrics of transformation products from
-			two-dimensional orientation maps: ongoing work</td>
+			two-dimensional orientation maps: ongoing work
+			{% include reference.html link="https://youtu.be/q2l-_PDSQBU" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">F.&nbsp;Niessen</td>
-			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters</td>
+			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters
+			{% include reference.html link="https://youtu.be/OYKFtw2hvE0" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -429,17 +437,23 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">15:30&minus;15:50</td>
 			<td style="text-align: left">D.&nbsp;Souza</td>
-			<td style="text-align: left">High Pressure - high temperature deformation experiments to understand deep earthquakes</td>
+			<td style="text-align: left">High Pressure - high temperature deformation experiments to understand deep earthquakes
+			{% include reference.html link="https://youtu.be/Mj8vbes4Eis" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:50&minus;16:10</td>
 			<td style="text-align: left">G.&nbsp;Lopez</td>
-			<td style="text-align: left">Mechanical Implications of Mica Bearing rocks</td>
+			<td style="text-align: left">Mechanical Implications of Mica Bearing rocks
+			{% include reference.html link="https://youtu.be/ZZ883Wj8gTI" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:10&minus;16:30</td>
-			<td style="text-align: left">G.&nbsp;Mc Gill</td>
-			<td style="text-align: left">Micro Porosity in plastically deformed Quartz</td>
+			<td style="text-align: left">G.&nbsp;McGill</td>
+			<td style="text-align: left">Micro Porosity in plastically deformed Quartz
+			{% include reference.html link="https://youtu.be/fiQougisaGM" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"></td>
