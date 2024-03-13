@@ -484,12 +484,16 @@ their talks as accessible as possible.
 			<td style="text-align: right">8:30&minus;9:30</td>
 			<td style="text-align: left">C.&nbsp;Griesbach</td>
 			<td style="text-align: left">Rate-dependent ferroelectric
-			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns</td>
+			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns
+			{% include reference.html link="https://youtu.be/uk34p5WL-7k" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">9:30&minus;10:00</td>
 			<td style="text-align: left">L.&nbsp;Richter</td>
-			<td style="text-align: left">Spherical indexing of pseudo symmetries</td>
+			<td style="text-align: left">Spherical indexing of pseudo symmetries
+			{% include reference.html link="https://youtu.be/Cv-C6wJpbNc" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -500,17 +504,23 @@ their talks as accessible as possible.
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">P.&nbsp;Prathik</td>
 			<td style="text-align: left">A synergistic approach to
-			characterize anisotropic materials using ultrasound and microstructural analysis (<i>online</i>)</td>
+			characterize anisotropic materials using ultrasound and microstructural analysis (<i>online</i>)
+			{% include reference.html link="https://youtu.be/y7_Hq7kg9_8" content="video" class="course_material" %}
+			</td>
 		</tr>						
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">T.&nbsp;Vermeij</td>							
-			<td style="text-align: left">Local Identification of Deformation Twinning from Deformation Fields</td>							
+			<td style="text-align: left">Local Identification of Deformation Twinning from Deformation Fields
+			{% include reference.html link="https://youtu.be/jTBfc0SFBSE" content="video" class="course_material" %}
+			</td>							
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">C.&nbsp;Mornout</td>							
-			<td style="text-align: left">Methodology for Local Identification of Grain Boundary Sliding on the Nanoscale</td>							
+			<td style="text-align: left">Methodology for Local Identification of Grain Boundary Sliding on the Nanoscale
+			{% include reference.html link="https://youtu.be/aCXGDT3YAv4" content="video" class="course_material" %}
+			</td>							
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -521,14 +531,18 @@ their talks as accessible as possible.
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">A.&nbsp;Saville</td>
 			<td style="text-align: left">Connecting Microstructure,
-			Processing, and Phase Transformations in Metals Via MTEX (<i>online</i>)</td>
+			Processing, and Phase Transformations in Metals Via MTEX (<i>online</i>)
+			{% include reference.html link="https://youtu.be/dPS-_FxwjJY" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">D.&nbsp;Guan</td>
 			<td style="text-align: left">Track-Rex: a universal toolbox for
 			tracking recrystallization and 
-			grain growth behaviors in polycrystalline materials. (<i>online</i>)</td>
+			grain growth behaviors in polycrystalline materials. (<i>online</i>)
+			{% include reference.html link="https://youtu.be/lmde9hbFJCU" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -538,18 +552,24 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">15:00&minus;16:00</td>
 			<td style="text-align: left">D.&nbsp;Depriester</td>
-			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations</td>
+			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations
+			{% include reference.html link="https://youtu.be/tYzaKANC_YA" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:00&minus;16:20</td>
 			<td style="text-align: left">B.&nbsp;Jacobsen</td>
-			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state</td>
+			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state
+			{% include reference.html link="https://youtu.be/gosT2bJI0RU" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:20&minus;16:40</td>
 			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>	
 			<td style="text-align: left">Relation between microstructure and
-			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique</td>
+			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique
+			{% include reference.html link="https://youtu.be/bkUEeTMjReQ" content="video" class="course_material" %}
+			</td>
 		</tr>	
 	</tbody>
 </table>
