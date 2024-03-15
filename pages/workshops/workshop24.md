@@ -588,12 +588,16 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">8:30&minus;9:30</td>
 			<td style="text-align: left">M.&nbsp;Witte</td>
-			<td style="text-align: left">Steel: Production, Processing and MTEX</td>
+			<td style="text-align: left">Steel: Production, Processing and MTEX
+			{% include reference.html link="https://youtu.be/yq-Gklv0JTs" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">9:30&minus;10:00</td>
 			<td style="text-align: left">V.&nbsp;Babic</td>
-			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!</td>
+			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!
+			{% include reference.html link="https://youtu.be/uS0LlRjoykM" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -603,24 +607,32 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">K.&nbsp;Molodov</td>
-			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels</td>
+			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels
+			{% include reference.html link="https://youtu.be/Ce-NnxALC1o" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:20</td>
 			<td style="text-align: left">J.&nbsp;Dietrich</td>
-			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys</td>
+			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys
+			{% include reference.html link="https://youtu.be/StKRpC1DMDM" content="video" class="course_material" %}
+			</td>
 		</tr>
 				<tr>
 			<td style="text-align: right">11:20&minus;11:40</td>
 			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
-			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains</td>			
+			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains
+			{% include reference.html link="https://youtu.be/m5CHJxdZ05s" content="video" class="course_material" %}
+			</td>			
 		</tr>
 		<tr>
-			<td style="text-align: right">16:20&minus;16:40</td>
-			<td style="text-align: left">H.&nbsp;Sofian Meddas</td>
+			<td style="text-align: right">11:40&minus;12:00</td>
+			<td style="text-align: left">H.&nbsp;Sofiane Meddas</td>
 			<td style="text-align: left">Use of OR tool for variant pairing
 			analysis and secondary carbide precipitation of tempered tool steel: 
-			Impact of multiple austenitization cycles on mechanical properties</td>
+			Impact of multiple austenitization cycles on mechanical properties
+			{% include reference.html link="https://youtu.be/Egi5XiyZLXM" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<!--<tr>
 			<td style="text-align: right">11:40&minus;12:00</td>
