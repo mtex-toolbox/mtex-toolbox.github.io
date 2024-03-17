@@ -41,12 +41,14 @@ ori = orientation (Quartz → xyz)
      phi1     Phi    phi2
   133.236 34.8193 207.184
 {% endhighlight %}
-<p>Note that, similarly as the Matlab <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is atained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>.  To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
+<center>
+{% include inline_image.html file="ODFComponents_02.png" %}
+</center><p>Note that, similarly as the Matlab <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is atained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>.  To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
 {% highlight matlab %}
 annotate(ori)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFComponents_02.png" %}
+{% include inline_image.html file="ODFComponents_03.png" %}
 </center><p>We may not only use the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> to find the global maximum of an ODF but also to find a certain amount of local maxima. The number of local maxima MTEX should search for, is specified as by the option <code class="language-plaintext highlighter-rouge">'numLocal'</code>, i.e., to find the three largest local maxima do</p>
 {% highlight matlab %}
 [value,ori] = max(odf,'numLocal',3)
@@ -70,7 +72,7 @@ ori = orientation (Quartz → xyz)
    86.017 22.9142  269.46
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFComponents_03.png" %}
+{% include inline_image.html file="ODFComponents_04.png" %}
 </center><p>Note, that orientations are returned sorted according to their ODF value.</p><h2 id="6">Volume Portions</h2><p>It is important to understand, that the value of the ODF at a preferred orientation is in general not sufficient to judge the importance of a component. Very sharp components may result in extremely large ODF values that represent only very little volume. A more robust and physically more relevant quantity is the relative volume of crystal that have an orientation close to the preferred orientation. This volume portion can be computed by the command <a href="SO3Fun.volume.html,"><code class="language-plaintext highlighter-rouge">volume(odf,ori,delta)</code></a> where <code class="language-plaintext highlighter-rouge">ori</code> is a list of preferred orientations and <code class="language-plaintext highlighter-rouge">delta</code> is the maximum disorientation angle. Multiplying with \(100\) the output will be in percent</p>
 {% highlight matlab %}
 delta = 10*degree;
@@ -154,5 +156,5 @@ ans =
 annotate(ori,'MarkerFaceColor','red')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFComponents_04.png" %}
+{% include inline_image.html file="ODFComponents_05.png" %}
 </center></div></body></html>
