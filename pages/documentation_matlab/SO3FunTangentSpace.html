@@ -17,7 +17,7 @@ To make changes, update the MATLAB code and republish this document.
 R = rotation.byAxisAngle(xvector,20*degree)
 S1 = spinTensor(vector3d(0,0,1))
 % left tangent vector
-matrix(S1)*matrix(R)
+matrix(S1) * matrix(R)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -80,12 +80,12 @@ S = spinTensor (xyz)
 {% endhighlight %}
 <p>Note that the default tangent space representation is left. We can construct an right tangent vector by</p>
 {% highlight matlab %}
-vR = SO3TangentVector(vector3d(1,2,3),'right')
+vR = SO3TangentVector(vector3d(1,2,3),SO3TangentSpace.rightVector)
 {% endhighlight %}
 
 {% highlight plaintext %}
 vR = SO3TangentVector
- TagentSpace: leftVector
+ TagentSpace: rightVector
   x y z
   1 2 3
 {% endhighlight %}
@@ -140,25 +140,25 @@ F.grad(rot,'right')
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: leftVector
-           x          y          z
-  -0.0274697  0.0487514   0.263866
-    -2.11156   0.564733    1.51537
-    0.194907 -0.0650339   0.290341
+          x          y          z
+  0.0510993 0.00875779  -0.424341
+   -1.09891    1.93943  -0.241698
+   0.124219   0.302883  -0.670828
  
 ans = vector3d
  size: 3 x 1
           x         y         z
-  0.0510482   -0.2421 -0.107418
-    1.10646   2.41661 0.0985403
-   0.148732  0.295154  0.131451
+   0.188281  0.382768 0.0281446
+   -1.03382   1.74942   0.94771
+  -0.155848   0.21103  0.698826
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: rightVector
           x         y         z
-  0.0510119 -0.242122 -0.107422
-    1.10649   2.41664 0.0985438
-   0.148719  0.295154  0.131442
+   0.188285  0.382783 0.0281407
+   -1.03374   1.74941  0.947724
+  -0.155842  0.211019  0.698842
 {% endhighlight %}
 <p>The gradient can also computed as function, i.e. as <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>, which internal is an 3 dimensional <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
 {% highlight matlab %}
@@ -181,18 +181,18 @@ GR = SO3VectorFieldHandle (Quartz → xyz)
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: leftVector
-           x          y          z
-  -0.0287807  0.0507489   0.264716
-    -2.11459   0.565498    1.51536
-    0.192224 -0.0637149   0.290612
+          x          y          z
+  0.0518012 0.00766261  -0.425819
+   -1.09989     1.9388  -0.239629
+   0.124865   0.304558  -0.671126
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: rightVector
           x         y         z
-  0.0510119 -0.242122 -0.107422
-    1.10649   2.41664 0.0985438
-   0.148719  0.295154  0.131442
+   0.188285  0.382783 0.0281407
+   -1.03374   1.74941  0.947724
+  -0.155842  0.211019  0.698842
 {% endhighlight %}
 <p>Again we are able to change the tangent space</p>
 {% highlight matlab %}
@@ -220,29 +220,29 @@ ori = orientation (Quartz → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  185.332 143.227  164.61
+  201.209 134.924 129.684
  
  
 ans = SO3TangentVector
  size: 6 x 1
  TagentSpace: rightVector
-          x         y         z
-   0.990828 -0.727547   3.80689
-    1.12548 -0.494312  -3.80689
-   -1.12548 -0.494312   3.80689
-  -0.990828 -0.727547  -3.80689
-   0.134663   1.22185   3.80689
-  -0.134663   1.22185  -3.80689
+         x         y         z
+   3.16237 -0.651558  -3.83598
+   2.14545  -2.41292   3.83598
+  -2.14545  -2.41292  -3.83598
+  -3.16237 -0.651558   3.83598
+  -1.01692   3.06446  -3.83598
+   1.01692   3.06446   3.83598
  
 ans = SO3TangentVector
  size: 6 x 1
  TagentSpace: leftVector
-         x        y        z
-  0.474593  3.10767 -2.47287
-  0.474593  3.10767 -2.47287
-  0.474593  3.10767 -2.47287
-  0.474593  3.10767 -2.47287
-  0.474593  3.10767 -2.47287
-  0.474593  3.10767 -2.47287
+        x         y         z
+  1.66595 -0.107649   4.72716
+  1.66595 -0.107649   4.72716
+  1.66595 -0.107649   4.72716
+  1.66595 -0.107649   4.72716
+  1.66595 -0.107649   4.72716
+  1.66595 -0.107649   4.72716
 {% endhighlight %}
 </div></body></html>

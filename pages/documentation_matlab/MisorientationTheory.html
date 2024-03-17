@@ -47,7 +47,7 @@ angle(ori1, ori2) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.6996
+   85.7299
 {% endhighlight %}
 <p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
 {% highlight matlab %}
@@ -56,18 +56,18 @@ angle(ori1, ori2.symmetrise) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
-   85.6996
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
 {% endhighlight %}
 <p>The misorientation angle neglecting crystal symmetry can be computed by</p>
 {% highlight matlab %}
@@ -76,18 +76,18 @@ angle(ori1, ori2.symmetrise,'noSymmetry')./ degree
 
 {% highlight plaintext %}
 ans =
-  107.9490
-  100.9100
-   94.3022
-  136.6144
-  107.7191
-  179.5950
-  140.0710
-  137.3683
-  179.8142
-  101.4342
-  140.4132
-   85.6996
+  107.9164
+  100.9195
+   94.2719
+  136.6059
+  107.7043
+  179.5740
+  140.0724
+  137.3989
+  179.8286
+  101.4708
+  140.3882
+   85.7299
 {% endhighlight %}
 <p>We see that the smallest angle indeed coincides with the angle computed before.</p><h2 id="10">Misorientations</h2><p>Remember that both orientations ori1 and ori2 map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
 {% highlight matlab %}
@@ -99,7 +99,7 @@ mori = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  149.587 94.3019  150.14
+  149.583 94.2717 150.165
 {% endhighlight %}
 <p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 85 into the reference frame of crystal 74. Take as an example the plane {11-20} with respect to the grain 85. Then the plane in grain 74 which alignes parallel to this plane can be computed by</p>
 {% highlight matlab %}
@@ -157,15 +157,15 @@ angle(mori * Miller(1,0,-1,0,CS),Miller(1,1,-2,2,CS)) / degree
 
 {% highlight plaintext %}
 ans =
-    0.4456
+    0.4592
 ans =
-    0.2015
+    0.1766
 ans =
-   59.6819
+   59.6768
 ans =
-    2.6310
+    2.6341
 ans =
-    2.5651
+    2.5686
 {% endhighlight %}
 <h2 id="15">Twinning misorientations</h2><p>Lets define a misorientation that makes a perfect fit between the {11-20} lattice planes and between the {10-11} lattice planes</p>
 {% highlight matlab %}
