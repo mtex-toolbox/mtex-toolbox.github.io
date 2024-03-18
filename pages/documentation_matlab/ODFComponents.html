@@ -12,21 +12,21 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>ODF Component Analysis</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ODFComponents.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFComponents.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>A common way to interprete ODFs is to think of them as superposition of different components that originate from different deformation processes and describe the texture of the material. In this section we describe how these components can be identified from a given ODF.</p><p>We start by reconstruction a Quarz ODF from Neutron pole figure data.</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>A common way to interpret ODFs is to think of them as superposition of different components that originate from different deformation processes and describe the texture of the material. In this section we describe how these components can be identified from a given ODF.</p><p>We start by reconstruction a Quartz ODF from Neutron pole figure data.</p>
 {% highlight matlab %}
-% import Neutron pole figure data from a Quarz specimen
+% import Neutron pole figure data from a Quartz specimen
 mtexdata dubna silent
 
 % reconstruct the ODF
 odf = calcODF(pf,'zeroRange');
 
 % visualize the ODF in sigma sections
-plotSection(odf,'sigma','sections',9,'layout',[3,3])
+plotSection(odf,'sigma','sections',12,'layout',[3,4])
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_01.png" %}
-</center><h2 id="2">The prefered orientation</h2><p>First of all we observe that the ODF posses a strong maximum. To find this orientation that correspondes to the maximum ODF intensity we use the <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command.</p>
+</center><h2 id="2">The preferred orientation</h2><p>First of all we observe that the ODF posses a strong maximum. To find this orientation that corresponds to the maximum ODF intensity we use the <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command.</p>
 {% highlight matlab %}
 [value,ori] = max(odf)
 {% endhighlight %}
@@ -41,19 +41,17 @@ ori = orientation (Quartz → xyz)
      phi1     Phi    phi2
   133.236 34.8193 207.184
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ODFComponents_02.png" %}
-</center><p>Note that, similarly as the Matlab <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is atained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>.  To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
+<p>Note that, similarly as the MATLAB <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is atained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>.  To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
 {% highlight matlab %}
 annotate(ori)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFComponents_03.png" %}
+{% include inline_image.html file="ODFComponents_02.png" %}
 </center><p>We may not only use the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> to find the global maximum of an ODF but also to find a certain amount of local maxima. The number of local maxima MTEX should search for, is specified as by the option <code class="language-plaintext highlighter-rouge">'numLocal'</code>, i.e., to find the three largest local maxima do</p>
 {% highlight matlab %}
 [value,ori] = max(odf,'numLocal',3)
 
-annotate(ori)
+annotate(ori(2:end),'MarkerFaceColor','red')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -72,7 +70,7 @@ ori = orientation (Quartz → xyz)
    86.017 22.9142  269.46
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFComponents_04.png" %}
+{% include inline_image.html file="ODFComponents_03.png" %}
 </center><p>Note, that orientations are returned sorted according to their ODF value.</p><h2 id="6">Volume Portions</h2><p>It is important to understand, that the value of the ODF at a preferred orientation is in general not sufficient to judge the importance of a component. Very sharp components may result in extremely large ODF values that represent only very little volume. A more robust and physically more relevant quantity is the relative volume of crystal that have an orientation close to the preferred orientation. This volume portion can be computed by the command <a href="SO3Fun.volume.html,"><code class="language-plaintext highlighter-rouge">volume(odf,ori,delta)</code></a> where <code class="language-plaintext highlighter-rouge">ori</code> is a list of preferred orientations and <code class="language-plaintext highlighter-rouge">delta</code> is the maximum disorientation angle. Multiplying with \(100\) the output will be in percent</p>
 {% highlight matlab %}
 delta = 10*degree;
@@ -94,7 +92,7 @@ volume(uniformODF(odf.CS),ori(1),delta) * 100
 ans =
     0.1690
 {% endhighlight %}
-<p>percent of the entiere orientations space. Putting these values in relation it becomes clear, that all the components are multiple times stronger than the uniform distribution. We may compute these factors by</p>
+<p>percent of the entire orientations space. Putting these values in relation it becomes clear, that all the components are multiple times stronger than the uniform distribution. We may compute these factors by</p>
 {% highlight matlab %}
 volume(odf,ori,delta) ./ volume(uniformODF(odf.CS),ori,delta)
 {% endhighlight %}
@@ -119,7 +117,7 @@ ans =
    38.7490
    53.1369
 {% endhighlight %}
-<p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p><h2 id="11">Non circular components</h2><p>A disadvantage of the approach above is that one is restricted to circular components with a fixed disorientation angle which makes it hard to analyze components that are close together. In such settings one may want to use the command <a href="SO3Fun.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents</code></a>. This command starts with evenly distributed orientations and lets the crawl towards the closest prefered orientation. At the end of this process the command returns these prefered orientation and the percentage of orientations that crawled to each of them.</p>
+<p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p><h2 id="11">Non circular components</h2><p>A disadvantage of the approach above is that one is restricted to circular components with a fixed disorientation angle which makes it hard to analyze components that are close together. In such settings one may want to use the command <a href="SO3Fun.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents</code></a>. This command starts with evenly distributed orientations and lets the crawl towards the closest preferred orientation. At the end of this process the command returns these preferred orientation and the percentage of orientations that crawled to each of them.</p>
 {% highlight matlab %}
 [ori, vol] = calcComponents(odf);
 ori
@@ -128,33 +126,28 @@ vol * 100
 
 {% highlight plaintext %}
 ori = orientation (Quartz → xyz)
-  size: 8 x 1
+  size: 5 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.195 34.7588  207.18
+  133.312 34.8711 206.946
   140.237 36.4105 257.542
-  85.7179 22.9427 269.892
-  78.4817 34.3989 215.027
-   84.475 23.4234 271.429
-   86.595 22.2852 268.747
-   87.194 23.8579  268.18
-  88.5989  23.035 266.953
+  85.6217 22.7987 269.598
+  79.0658 34.6428 215.331
+  148.062 47.1683 152.633
  
 ans =
-   42.6736
-   24.9396
-   11.8260
-    2.6058
-    1.5750
-    1.4833
-    1.2851
-    1.0563
+   45.1145
+   27.4373
+   19.6022
+    6.0787
+    1.0655
 {% endhighlight %}
-<p>These volumes allways sums up to apprximately 100 percent. While the prefered orientations should be the same as those computed by the <code class="language-plaintext highlighter-rouge">max</code> command.</p>
+<p>These volumes always sums up to approximately 100 percent. While the preferred orientations should be the same as those computed by the <code class="language-plaintext highlighter-rouge">max</code> command.</p>
 {% highlight matlab %}
-annotate(ori,'MarkerFaceColor','red')
+annotate(ori,'MarkerFaceColor','none','MarkerEdgeColor','white',...
+  'linewidth',2,'MarkerSize',15,'marker','o')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ODFComponents_05.png" %}
+{% include inline_image.html file="ODFComponents_04.png" %}
 </center></div></body></html>
