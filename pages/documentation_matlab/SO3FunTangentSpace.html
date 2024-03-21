@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>The Tangent Space on the Rotation Group</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunTangentSpace.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunTangentSpace.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The tangent space of the rotation group at some rotation \(R\) has 2 different representations. There is a left and a right representation.</p><p>The left tangent space is defined by</p><p>\[ T_R SO(3) = \{ S \cdot R | S=-S^T  \} = \mathfrac{so}(3) \cdot R, \]</p><p>where \(\mathfrac{so}(3)\) describes the set of all skew symmetric matices, i.e. <a href="spinTensor.spinTensor.html">spinTensor</a>'s.</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The tangent space of the rotation group at some rotation \(R\) has 2 different representations. There is a left and a right representation.</p><p>The left tangent space is defined by</p><p>\[ T_R SO(3) = \{ S \cdot R | S=-S^T  \} = \mathfrak{so}(3) \cdot R, \]</p><p>where \(\mathfrak{so}(3)\) describes the set of all skew symmetric matices, i.e. <a href="spinTensor.spinTensor.html">spinTensor</a>'s.</p>
 {% highlight matlab %}
 R = rotation.byAxisAngle(xvector,20*degree)
 S1 = spinTensor(vector3d(0,0,1))
@@ -39,7 +39,7 @@ ans =
     1.0000         0         0
          0         0         0
 {% endhighlight %}
-<p>Analogously the right tangent space is defined by</p><p>\[ T_R SO(3) = \{ R \cdot S | S=-S^T  \} = R \cdot \mathfrac{so}(3). \]</p>
+<p>Analogously the right tangent space is defined by</p><p>\[ T_R SO(3) = \{ R \cdot S | S=-S^T  \} = R \cdot \mathfrak{so}(3). \]</p>
 {% highlight matlab %}
 % right tangent vector
 S2 = spinTensor(vector3d(0,sin(20*degree),cos(20*degree)))
@@ -59,7 +59,7 @@ ans =
     1.0000         0         0
     0.0000         0         0
 {% endhighlight %}
-<p>Note that this spaces are the same.</p><p>In MTEX a tangent vectors is defined by its <a href="spinTensor.spinTensor.html">spinTensor</a> and an attribute which describes whether it is right or left. Moreover the <a href="spinTensor.spinTensor.html">spinTensor</a> is saved as <a href="vector3d.vector3d.html">vector3d</a>, in the following way:</p>
+<p>Note that the left and right tangent spaces describes the same in different notations.</p><p>In MTEX a tangent vectors is defined by its <a href="spinTensor.spinTensor.html">spinTensor</a> and an attribute which describes whether it is right or left. Moreover the <a href="spinTensor.spinTensor.html">spinTensor</a> is saved as <a href="vector3d.vector3d.html">vector3d</a>, in the following way:</p>
 {% highlight matlab %}
 vL = SO3TangentVector(vector3d(1,2,3))
 S = spinTensor(vL)
@@ -89,10 +89,10 @@ vR = SO3TangentVector
   x y z
   1 2 3
 {% endhighlight %}
-<p>Here <code class="language-plaintext highlighter-rouge">vL</code> and <code class="language-plaintext highlighter-rouge">vR</code> have the same coordinates in different spaces (bases). Hence they describe different tangent vectors.</p><p>We can also transform left tangent vectors to right tangent vectors and otherwise. Therefore the rotation in which the tangent space is located is necessary.</p>
+<p>Here <code class="language-plaintext highlighter-rouge">vL</code> and <code class="language-plaintext highlighter-rouge">vR</code> have the same coordinates in different spaces (bases). Hence they describe different tangent vectors.</p><p>We can also transform left tangent vectors to right tangent vectors and vice versa. Therefore the rotation in which the tangent space is located is necessary.</p>
 {% highlight matlab %}
 vR = right(vL,R)
-vL = left(vL,R)
+vL = left(vR,R)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -103,8 +103,8 @@ vR = SO3TangentVector
  
 vL = SO3TangentVector
  TagentSpace: leftVector
-  x y z
-  1 2 3
+  x       y       z
+  1 2.90545 2.13504
 {% endhighlight %}
 <p>We can do the same manually by</p>
 {% highlight matlab %}
@@ -115,11 +115,11 @@ vL = R*vR
 {% highlight plaintext %}
 vR = vector3d
   x       y       z
-  1 2.90545 2.13504
+  1 3.46045 1.01256
  
 vL = vector3d
-  x y z
-  1 2 3
+  x       y       z
+  1 2.90545 2.13504
 {% endhighlight %}
 <h2 id="7">Vector Fields</h2><p>Vector fields on the rotation group are functions that maps any rotation to an tangent vector. An important example is the gradient of an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>.</p><p>Hence any vector field has again a left and a right representation.</p>
 {% highlight matlab %}
@@ -160,7 +160,7 @@ ans = SO3TangentVector
   -0.860371    1.43619    2.01616
   -0.199147  -0.145656 -0.0613163
 {% endhighlight %}
-<p>The gradient can also computed as function, i.e. as <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>, which internal is an 3 dimensional <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
+<p>The gradient can also be computed as function, i.e. as <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>, which internal is an 3 dimensional <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
 {% highlight matlab %}
 GL = F.grad
 GR = F.grad('right')
@@ -198,21 +198,21 @@ ans = SO3TangentVector
 {% endhighlight %}
 <p>Again we are able to change the tangent space</p>
 {% highlight matlab %}
-left(GL)
-right(GR)
+left(GR)
+right(GL)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3VectorFieldHarmonic (Quartz → xyz)
+ans = SO3VectorFieldHarmonic (1 → xyz)
   bandwidth: 48
   tangent space: leftVector
  
  
-ans = SO3VectorFieldHarmonic (1 → xyz)
+ans = SO3VectorFieldHarmonic (Quartz → xyz)
   bandwidth: 48
-  tangent space: rightVector
+  tangent space: leftVector
 {% endhighlight %}
-<p>Note that the symmetries do not work in the same way as for <a href="SO3Fun.SO3Fun.html">SO3Fun</a>'s. Dependent from the choosed tangent space representation (left/right) one of the symmetries has other properties.</p><p>In case of right tangent space the evaluation in symmetric orientations only make sense w.r.t. the left symmetry. In case of left tangent space otherwise.</p>
+<p>Note that the symmetries do not work in the same way as for <a href="SO3Fun.SO3Fun.html">SO3Fun</a>'s. Dependent from the choosed tangent space representation (left/right) one of the symmetries has other properties.</p><p>In case of right tangent space the evaluation in symmetric orientations only make sense w.r.t. the left symmetry. In case of left tangent space vice versa.</p>
 {% highlight matlab %}
 ori = orientation.rand(GL.CS,GL.SS)
 GR.eval(ori.symmetrise)
