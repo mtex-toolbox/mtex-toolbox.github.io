@@ -14,30 +14,14 @@ To make changes, update the MATLAB code and republish this document.
       --><title>Parameter optimization for Parent Grain Reconstruction (PGR)</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-03-21"><meta name="DC.source" content="script_ParameterOptimization.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ParentGrainReconstruction/ParameterOptimization.m">
     edit page</a>
     author: Frank Nie&szlig;en, Technical University of Denmark, Department of
-</font><div><!--introduction--><p>Civil and Mechanical Engineering, Germany</p><p>This script demonstrates a systematic approach on how to get the most out of challenging PGR tasks by systematic tuning of the most critical parameters. The microstructure explored in this example is lath martensite, for which especially the reconstruction of annealing twins in the parent austenite phase is a challenging task. This is the same dataset that is explored in the general documentation for martensite Parent Grain Reconstruction (<a href="https://mtex-toolbox.github.io/MaParentGrainReconstruction.html">https://mtex-toolbox.github.io/MaParentGrainReconstruction.html</a>).</p><p>As the script is quite long and some sections take some time to execute, I highly recommend running this script section-by-section. You ideally want to follow my talk of the MTEX User Meeting 2024 before or alongside exploring this script: <a href="https://www.youtube.com/watch?v=Ib1qtJAWgd8&amp;t=83s">https://www.youtube.com/watch?v=Ib1qtJAWgd8&amp;t=83s</a></p><!--/introduction--><h2 id="1">Data Import</h2><p>Let us begin by loading the MTEX documentation dataset on martensite from Ref. \textit{[T. Nyyss&ouml;nen, P. Peura, V.-T. Kuokkala, Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel, Metall Mater Trans A 49 (2018) 6426&#8211;6441. <a href="https://doi.org/10.1007/s11661-018-4904-9">https://doi.org/10.1007/s11661-018-4904-9</a>.]}</p>
+</font><div><!--introduction--><p>Civil and Mechanical Engineering, Germany</p><p>This script demonstrates a systematic approach on how to get the most out of challenging PGR tasks by systematic tuning of the most critical parameters. The microstructure explored in this example is lath martensite, for which especially the reconstruction of annealing twins in the parent austenite phase is a challenging task. This is the same dataset that is explored in <a href="the">general documentation for martensite Parent Grain Reconstruction &lt;https://mtex-toolbox.github.io/MaParentGrainReconstruction.html</a>&gt;.</p><p>As the script is quite long and some sections take some time to execute, I highly recommend running this script section-by-section. You ideally want to follow my talk of the MTEX User Meeting 2024 before or alongside exploring this script: <a href="https://www.youtube.com/watch?v=Ib1qtJAWgd8&amp;t=83s">https://www.youtube.com/watch?v=Ib1qtJAWgd8&amp;t=83s</a></p><!--/introduction--><h2 id="1">Data Import</h2><p>Let us begin by loading the MTEX documentation dataset on martensite from Ref. <a href="https://doi.org/10.1007/s11661-018-4904-9">T. Nyyss&ouml;nen, P. Peura, V.-T. Kuokkala, Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel, Metall Mater Trans A 49 (2018) 6426&#8211;6441</a>.</p>
 {% highlight matlab %}
-% clean up
-home
-close all
-clearvars
-
 % get MTEX data
-mtexdata martensite
+mtexdata martensite silent
 
 % set plotting convention
 setMTEXpref('xAxisDirection','east');
 setMTEXpref('zAxisDirection','outofPlane');
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
 {% endhighlight %}
 <h2 id="2">Plot the EBSD data of the child phase</h2><p>Let us first take a look at the example EBSD data.</p>
 {% highlight matlab %}
@@ -49,9 +33,8 @@ ipfKey.inversePoleFigureDirection = vector3d.Z;
 colors = ipfKey.orientation2color(ebsd.orientations);
 
 % Plot the microstructure data
-figure;
+figure('Name','Martensitic microstructure')
 plot(ebsd,colors);
-set(gcf,'Name','Martensitic microstructure');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_01.png" %}
@@ -62,13 +45,13 @@ thrsh_angles = [6,3,2,1.5,1];
 
 %Prepare plotting
 figure;
-f(1) = newMtexFigure('layout',[2,3]);
+f(1) = newMtexFigure('layout',[2,3],'Name','Child grain reconstruction at different threshold angles');
 
 % Loop over different child grain reconstructions
 for ii = 1:length(thrsh_angles)
 
   % Load data
-  mtexdata martensite
+  mtexdata martensite silent
 
   % Calculate grains with defined angular threshold
   [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle',thrsh_angles(ii)*degree);
@@ -85,64 +68,8 @@ for ii = 1:length(thrsh_angles)
   hold off
 
   % Enable multiplot
-  if ii < length(thrsh_angles)
-    f(1); nextAxis;
-  end
+  if ii < length(thrsh_angles), nextAxis; end
 end
-
-% Let us rename the figure
-set(f(1).parent,'Name','Child grain reconstruction at different threshold angles');
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_02.png" %}
@@ -153,13 +80,13 @@ thrsh_angles = thrsh_angles(1:3);
 
 %Prepare plotting
 figure;
-f(2) = newMtexFigure('layout',[1,length(thrsh_angles)]);
+f(2) = newMtexFigure('layout',[1,length(thrsh_angles)],'Name','PGR at different Child grain threshold values');
 
 %Child grain reconstruction
 for ii = 1:length(thrsh_angles)
 
   % Load data
-  mtexdata martensite
+  mtexdata martensite silent
 
   % Calculate grains with defined angular threshold
   [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle',thrsh_angles(ii)*degree);
@@ -177,13 +104,13 @@ for ii = 1:length(thrsh_angles)
   job.calcParent2Child;
 
   % setup the variant graph
-  job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
+  job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree);
 
   % cluster the variant graph
   job.clusterVariantGraph;
 
   % calculate the parent grain orientations
-  job.calcParentFromVote('minProb',0.5)
+  job.calcParentFromVote('minProb',0.5);
 
   % plot the parent grains (before any further processing)
   plot(job.parentGrains,job.parentGrains.meanOrientation)
@@ -191,135 +118,15 @@ for ii = 1:length(thrsh_angles)
     'interpreter','tex');
 
   % Enable multiplot
-  if ii < length(thrsh_angles)
-    f(2); nextAxis
-  end
+  if ii < length(thrsh_angles), nextAxis; end
 end
-
-% Let us rename the figure
-set(f(2).parent,'Name','PGR at different Child grain threshold values');
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       5567    100%               
- 
- OR: (348.6°,9.4°,57.4°)
-   c2c fit: 1.5°, 2°, 2.5°, 4.2° (quintiles)
-   closest ideal OR: (11-1) || (02-1)   [1-10] || [100] fit: 2.2°
- 
- variant graph: 97424 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       5186    92%   93%          
- child   Iron bcc (old)  432       381     8%                 
- 
- OR: (348.6°,9.4°,57.4°)
-   p2c fit: 2.5°, 4°, 7.7°, 19° (quintiles)
-   c2c fit: 1.7°, 2.2°, 3.2°, 4.7° (quintiles)
-   closest ideal OR: (11-1) || (02-1)   [1-10] || [100] fit: 2.2°
- 
- votes: 381 x 1
-   probabilities: 15%, 0%, 0%, 0% (quintiles)
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       7002    100%               
- 
- OR: (346.9°,9.3°,57.9°)
-   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
- 
- variant graph: 214046 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       6849    96%   98%          
- child   Iron bcc (old)  432       153     4.3%               
- 
- OR: (346.9°,9.3°,57.9°)
-   p2c fit: 2°, 2.7°, 5°, 16° (quintiles)
-   c2c fit: 1.8°, 2.5°, 3.3°, 3.8° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
- 
- votes: 153 x 1
-   probabilities: 41%, 0%, 0%, 0% (quintiles)
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
- 
- OR: (347.3°,9°,56.7°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- variant graph: 442995 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       9180    98%   98%          
- child   Iron bcc (old)  432       158     1.8%               
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 2.1°, 3°, 4.9°, 14° (quintiles)
-   c2c fit: 1.3°, 1.9°, 2.5°, 3.1° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 158 x 1
-   probabilities: 38%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_03.png" %}
 </center><p>The effect of child grain reconstruction appears to be quite prominent - the smaller the reconstruction threshold angle the more of the parent grain microstructure is confidently reconstructed. In martensitic steels the misorientation between the different variants is oftentimes quite low which means that grain reconstruction with too large threshold values merges grains that belong to different variants and thereby complicate the PGR. For this example, 2\textdegree seems to be the optimum, so we will move forward with that parameter.</p><h2 id="8">Optimizing the orientation relationship (OR)</h2><p>Next we will check the effect of fitting the OR using the <code class="language-plaintext highlighter-rouge">calcParent2Child</code> function vs. assuming several rational ORs on PGR.</p>
 {% highlight matlab %}
 % Load data
-mtexdata martensite
+mtexdata martensite silent
 
 % Calculate grains with defined angular threshold
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle',2*degree);
@@ -350,8 +157,8 @@ ORnames = ["KS","NW","GT","Fitted"];
 
 %Prepare plotting
 figure;
-f(3) = newMtexFigure('layout',[2,2]);
-fh = figure;
+f(3) = newMtexFigure('layout',[2,2],'Name','OR-Fit grain boundary plot');
+fh = figure('Name','OR-Fit histogram');
 
 % loop over different ORs
 for ii = 1:length(ORs)
@@ -384,28 +191,13 @@ for ii = 1:length(ORs)
   title(ORnames(ii));
 
   % Enable multiplot
-  if ii < length(ORs)
-    figure(f(3).parent); nextAxis;
-  end
+  if ii < length(ORs), figure(f(3).parent); nextAxis; end
 end
 
 % Adding labels and titles
-set(f(3).parent,'Name','OR-Fit grain boundary plot');
-set(fh,'Name','OR-Fit histogram');
 figure(fh);
 grid on
 legend(ORnames);
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed                                                 
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
- Scan unit : um
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_04.png" %}
@@ -420,8 +212,8 @@ quantile = [0.9,0.8,0.9,0.8];
 
 % Prepare plotting
 figure;
-f(4) = newMtexFigure('layout',[2,2]);
-fh2 = figure;
+f(4) = newMtexFigure('layout',[2,2],'Name','OR-Fit grain boundary plot');
+fh2 = figure('Name','OR-Fit histogram');
 
 % loop over different parameter sets
 for ii = 1:length(threshold)
@@ -463,9 +255,7 @@ for ii = 1:length(threshold)
   end
 end
 
-% Adding labels and titles
-set(f(4).parent,'Name','OR-Fit grain boundary plot');
-set(fh2,'Name','OR-Fit histogram');
+% Adding labels
 figure(fh2);
 grid on
 xlim([0,10])
@@ -484,7 +274,7 @@ job.calcParent2Child;
 % Plot the misfit histogram
 % (|pdf| normalization was chosen to plot the misfit distribution and
 % probability function with reference to the same y-axis)
-figure;
+figure('Name','OR-probability functions')
 hold on
 h = histogram(fit./degree,'BinMethod','sqrt','normalization','pdf',...
   'FaceAlpha',0.3,'DisplayName',"OR misfit distribution");
@@ -515,7 +305,6 @@ end
 grid on;
 legend("Interpreter","tex");
 xlim([0,maxX])
-set(gcf,'Name','OR-probability functions');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_08.png" %}
@@ -529,7 +318,7 @@ set(gcf,'Name','OR-probability functions');
 
 %Prepare plotting
 figure;
-f(5) = newMtexFigure('layout',[2,2]);
+f(5) = newMtexFigure('layout',[2,2],'Name','OR-probability grain boundary plot');
 
 %Loop over probability function parameters
 for ii = 1:length(tol)
@@ -549,9 +338,6 @@ for ii = 1:length(tol)
     figure(f(5).parent); nextAxis;
   end
 end
-
-% Let us rename the figure
-set(f(5).parent,'Name','OR-probability grain boundary plot');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_09.png" %}
@@ -559,7 +345,7 @@ set(f(5).parent,'Name','OR-probability grain boundary plot');
 {% highlight matlab %}
 %Prepare plotting
 figure;
-f(6) = newMtexFigure('layout',[2,2]);
+f(6) = newMtexFigure('layout',[2,2],'Name','PGR results for different OR-probability functions');
 
 %Loop over probability function parameters
 for ii = 1:length(tol)
@@ -586,13 +372,10 @@ for ii = 1:length(tol)
   % Revert PGR results to allow new PGR with different parameters
   job.revert;
 end
-
-% Let us rename the figure
-set(f(6).parent,'Name','PGR results for different OR-probability functions');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_10.png" %}
-</center><p>We can observe that in the case where the probability function did not lead to a good separation between prior-parent and OR-related boundaries fewer grains have been confidently reconstructed. The first two explored parameter sets give decent PGR result, with the first dataset (subjectively) looking slightly more complete. The difference here is however marginal. It is important to make this evaluation before any post-processing is applied to the reconstructed parent microstructure.</p><h2 id="17">The effect of clustering parameters on the PGR</h2><p>Having identified an optimal probability function to translate the OR misfit into OR probabilities, the parameters during clustering can be explored. The variant graph relies on a Markovian clustering algorithm, which is originally reported in</p><p>\textit{[van Dongen, Stijn, Graph clustering via a discrete uncoupling process, Siam Journal on Matrix Analysis and Applications 30-1, p121-141, 2008. ( <a href="https://doi.org/10.1137/040608635">https://doi.org/10.1137/040608635</a> )]}</p><p>and defined in the present application in</p><p>\textit{[R. Hielscher, T. Nyyss&ouml;nen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia 22 (2022) 101399. <a href="https://doi.org/10.1016/j.mtla.2022.101399">https://doi.org/10.1016/j.mtla.2022.101399</a>.]}</p><p>When iteratively applying the Markovian clustering algorithm to the variant graph, edges with high probability are further strengthened and edges with low probability are further weakened, leading to eventual cluster formation. With each iteration the probabilities are extended to an additional order of neighbors, leading to a gradual delocalization of the optimal parent grain orientation solution.</p><p>We will explore the two most critical parameters controlling the behavior of the Markovian Clustering algorithm, <code class="language-plaintext highlighter-rouge">numIter</code> and <code class="language-plaintext highlighter-rouge">inflationPower</code>. The parameter <code class="language-plaintext highlighter-rouge">numIter</code> controls the number of iterations for which the clustering algorithm is run, which affects the order of neighbors taken into account and to which degree convergence is approached. The parameter <code class="language-plaintext highlighter-rouge">inflationPower</code>, controls the degree of clustering in each iteration. In other words, it decides how rapidly clusters are formed.</p>
+</center><p>We can observe that in the case where the probability function did not lead to a good separation between prior-parent and OR-related boundaries fewer grains have been confidently reconstructed. The first two explored parameter sets give decent PGR result, with the first dataset (subjectively) looking slightly more complete. The difference here is however marginal. It is important to make this evaluation before any post-processing is applied to the reconstructed parent microstructure.</p><h2 id="17">The effect of clustering parameters on the PGR</h2><p>Having identified an optimal probability function to translate the OR misfit into OR probabilities, the parameters during clustering can be explored. The variant graph relies on a Markovian clustering algorithm, which is originally reported in</p><p><a href="https://doi.org/10.1137/040608635">van Dongen, Stijn, Graph clustering via a discrete uncoupling process, Siam Journal on Matrix Analysis and Applications 30-1, p121-141, 2008</a>.</p><p>and defined in the present application in</p><p><a href="https://doi.org/10.1016/j.mtla.2022.101399">R. Hielscher, T. Nyyss&ouml;nen, F. Niessen, A.A. Gazder, The variant graph approach to improved parent grain reconstruction, Materialia 22 (2022) 101399</a>.</p><p>When iteratively applying the Markovian clustering algorithm to the variant graph, edges with high probability are further strengthened and edges with low probability are further weakened, leading to eventual cluster formation. With each iteration the probabilities are extended to an additional order of neighbors, leading to a gradual delocalization of the optimal parent grain orientation solution.</p><p>We will explore the two most critical parameters controlling the behavior of the Markovian Clustering algorithm, <code class="language-plaintext highlighter-rouge">numIter</code> and <code class="language-plaintext highlighter-rouge">inflationPower</code>. The parameter <code class="language-plaintext highlighter-rouge">numIter</code> controls the number of iterations for which the clustering algorithm is run, which affects the order of neighbors taken into account and to which degree convergence is approached. The parameter <code class="language-plaintext highlighter-rouge">inflationPower</code>, controls the degree of clustering in each iteration. In other words, it decides how rapidly clusters are formed.</p>
 {% highlight matlab %}
 % Different settings for inflationPower (alpha) and numIter for
 % MCL clustering
@@ -601,7 +384,7 @@ numIter = [5,5,5,10,10,10];
 
 %Prepare plotting
 figure;
-f(7) = newMtexFigure('layout',[2,3]);
+f(7) = newMtexFigure('layout',[2,3],'Name','PGR results for different clustering parameters');
 
 % setup the variant graph
 job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
@@ -612,7 +395,7 @@ for ii = 1:length(alpha)
   job.clusterVariantGraph('inflationPower',alpha(ii),'numIter',numIter(ii));
 
   % calculate the parent grain orientations
-  job.calcParentFromVote('minProb',0.5)
+  job.calcParentFromVote('minProb',0.5);
 
   % Plot the PGR result (before any cleaning is applied)
   plot(job.parentGrains,job.parentGrains.meanOrientation);
@@ -626,9 +409,6 @@ for ii = 1:length(alpha)
   % Revert PGR results to allow new PGR with different parameters
   job.revert;
 end
-
-% Let us rename the figure
-set(f(7).parent,'Name','PGR results for different clustering parameters');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -643,100 +423,10 @@ ans = parentGrainReconstructor
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
  
  variant graph: 442995 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8958    92%   96%          
- child   Iron bcc (old)  432       380     7.8%               
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 1.8°, 2.3°, 3.5°, 9.5° (quintiles)
-   c2c fit: 1.3°, 1.8°, 2.4°, 3.5° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 380 x 1
-   probabilities: 48%, 44%, 37%, 0% (quintiles)
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8794    96%   94%          
- child   Iron bcc (old)  432       544     3.5%               
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 2.5°, 3.4°, 4.6°, 11° (quintiles)
-   c2c fit: 1.3°, 1.6°, 2.1°, 3.4° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 544 x 1
-   probabilities: 22%, 0%, 0%, 0% (quintiles)
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8431    94%   90%          
- child   Iron bcc (old)  432       907     5.8%               
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 2.5°, 3.3°, 4.5°, 12° (quintiles)
-   c2c fit: 1.3°, 1.6°, 2°, 2.9° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 907 x 1
-   probabilities: 5.5%, 0%, 0%, 0% (quintiles)
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8810    96%   94%          
- child   Iron bcc (old)  432       528     4.5%               
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 2.5°, 3.5°, 4.6°, 9.6° (quintiles)
-   c2c fit: 1.3°, 1.7°, 2.2°, 3.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 528 x 1
-   probabilities: 30%, 0%, 0%, 0% (quintiles)
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8836    97%   95%          
- child   Iron bcc (old)  432       502     3.4%               
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 2.7°, 3.7°, 4.8°, 12° (quintiles)
-   c2c fit: 1.3°, 1.6°, 2°, 3° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 502 x 1
-   probabilities: 0%, 0%, 0%, 0% (quintiles)
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8170    91%   87%          
- child   Iron bcc (old)  432       1168    9%                 
- 
- OR: (347.3°,9°,56.7°)
-   p2c fit: 2.4°, 3.2°, 4.4°, 13° (quintiles)
-   c2c fit: 1.3°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.3°
- 
- votes: 1168 x 1
-   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_11.png" %}
-</center><p>It may not be entirely possible to judge the quality of the PGR with having access to a validation dataset (i.e. without knowing the actual parent microstructure), nevertheless some observations can be made: An inflation parameter of 1.2 seems to be too high, leading to large patches of material that have not been reconstructed. A good inidicator for the present microstructure is to check in how far likely annealing twins have been resolved with a realistic morphology and how very small parent grains may become present that are unlikely to be associated with real parent grains. Based on this the choice of an inflation parameter of 1 and numIter of 10 seems to be a good choice, although it is quite objective in this case. Note that an inflation parameter of 1 means that no clustering is enforced - with this setting the algorithm simply explores the local neighborhood up to the degree of neighbor defined by <code class="language-plaintext highlighter-rouge">numIter</code> and bases the most likely parent orientation on the overall probabilities within this region.</p><h2 id="19">Final reconstruction</h2><p>We can now do the final reconstruction using the optimized parameters and subsequently apply a growth-based PGR algorithm to reconstruct the remaining grains, as well as some post-processing steps to clean up the microstructure. You may also want to play with the parameter <code class="language-plaintext highlighter-rouge">minProb</code> of the <code class="language-plaintext highlighter-rouge">calcParentFromVote</code> method, which defines the minimum probability for a specific parent orientation required to conduct the PGR of a specific child grain. Lowering this parameter will lead to a more complete, but less confident PGR.</p>
+</center><p>It may not be entirely possible to judge the quality of the PGR with having access to a validation dataset (i.e. without knowing the actual parent microstructure), nevertheless some observations can be made: An inflation parameter of 1.2 seems to be too high, leading to large patches of material that have not been reconstructed. A good indicator for the present microstructure is to check in how far likely annealing twins have been resolved with a realistic morphology and how very small parent grains may become present that are unlikely to be associated with real parent grains. Based on this the choice of an inflation parameter of 1 and numIter of 10 seems to be a good choice, although it is quite objective in this case. Note that an inflation parameter of 1 means that no clustering is enforced - with this setting the algorithm simply explores the local neighborhood up to the degree of neighbor defined by <code class="language-plaintext highlighter-rouge">numIter</code> and bases the most likely parent orientation on the overall probabilities within this region.</p><h2 id="19">Final reconstruction</h2><p>We can now do the final reconstruction using the optimized parameters and subsequently apply a growth-based PGR algorithm to reconstruct the remaining grains, as well as some post-processing steps to clean up the microstructure. You may also want to play with the parameter <code class="language-plaintext highlighter-rouge">minProb</code> of the <code class="language-plaintext highlighter-rouge">calcParentFromVote</code> method, which defines the minimum probability for a specific parent orientation required to conduct the PGR of a specific child grain. Lowering this parameter will lead to a more complete, but less confident PGR.</p>
 {% highlight matlab %}
 % *** PGR using the Variant Graph Approach
 
@@ -748,7 +438,7 @@ job.calcParentFromVote('minProb',0.5);
 
 % Plot the PGR result (before any cleaning is applied)
 figure;
-f(8) = newMtexFigure('layout',[2,2]);
+f(8) = newMtexFigure('layout',[2,2],'Name','Final PGR with cleaning procedure');
 plot(job.parentGrains,job.parentGrains.meanOrientation);
 title("Initial Variant Graph PGR")
 nextAxis;
@@ -787,9 +477,6 @@ job.mergeInclusions('maxSize',100);
 % Plot the PGR result after merging inclusions
 plot(job.parentGrains,job.parentGrains.meanOrientation);
 title("+ removing small inclusions")
-
-% Let us rename the figure
-set(gcf,'Name','Final PGR with cleaning procedure');
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -891,8 +578,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Packet ID calculation assuming
-{111}_p||{110}_c
+Warning: Packet ID calculation assuming {111}_p||{110}_c
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_13.png" %}
