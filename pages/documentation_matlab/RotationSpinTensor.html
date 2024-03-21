@@ -1,5 +1,5 @@
 ---
-title: Spin Tensors as Ininitesimal Changes of Rotations
+title: Spin Tensors as Infinitesimal Changes of Rotations
 
 sidebar: documentation_sidebar
 permalink: RotationSpinTensor.html
@@ -11,19 +11,19 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spin Tensors as Ininitesimal Changes of Rotations</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_RotationSpinTensor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationSpinTensor.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Spin tensors are skew symmetric tensors that can be used to describe small rotational changes. Lets consider an arbitrary reference rotation</p>
+      --><title>Spin Tensors as Infinitesimal Changes of Rotations</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_RotationSpinTensor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationSpinTensor.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Spin tensors are skew symmetric tensors that can be used to describe small rotational changes. Let us consider an arbitrary reference rotation</p>
 {% highlight matlab %}
 rot_ref = rotation.byEuler(10*degree,20*degree,30*degree);
 {% endhighlight %}
-<p>and pertube it by a rotation about the axis (123) and angle delta. Since multiplication of rotations is not communatativ we have to distinguish between left and right pertubations</p>
+<p>and perturb it by a rotation about the axis (123) and angle delta=0.01 degree. Since multiplication of rotations is not commutative we have to distinguish between left and right perturbations</p>
 {% highlight matlab %}
 delta = 0.01*degree;
 rot_123 = rotation.byAxisAngle(vector3d(1,2,3),delta);
 rot_right = rot_123 * rot_ref;
 rot_left = rot_ref * rot_123;
 {% endhighlight %}
-<p>We may now ask for the first order Taylor coefficients of the pertubation as delta goes to zero which we find by the formula</p><p>\[ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta} \]</p>
+<p>We may now ask for the first order Taylor coefficients of the perturbation as delta goes to zero which we find by the formula</p><p>\[ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta} \]</p>
 {% highlight matlab %}
 T_right = (rot_right.matrix - rot_ref.matrix)./delta
 T_left = (rot_left.matrix - rot_ref.matrix)./delta
@@ -39,7 +39,7 @@ T_left =
     0.7530   -0.5816    0.1368
    -0.2648    0.1140    0.0122
 {% endhighlight %}
-<p>Both matrices <code class="language-plaintext highlighter-rouge">T_right</code> and <code class="language-plaintext highlighter-rouge">T_left</code> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes scew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
+<p>Both matrices <code class="language-plaintext highlighter-rouge">T_right</code> and <code class="language-plaintext highlighter-rouge">T_left</code> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes skew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
 {% highlight matlab %}
 S_right_L =  matrix(inv(rot_ref)) * T_right
 S_right_R = T_right * matrix(inv(rot_ref))
@@ -66,7 +66,7 @@ S_left_R =
     0.9575   -0.0001    0.0850
    -0.2758   -0.0850   -0.0000
 {% endhighlight %}
-<p>A scew symmetric 3x3 matrix <code class="language-plaintext highlighter-rouge">S</code> is essentially determined by its entries \(S_{21}\), \(S_{31}\) and \(S_{32}\). Writing these values as a vector \((S_32,-S_{31},S_{21})\) we obtain for the matrices <code class="language-plaintext highlighter-rouge">S_right_R</code> and <code class="language-plaintext highlighter-rouge">S_left_L</code> exactly the rotational axis of our pertubation</p>
+<p>A skew symmetric 3x3 matrix <code class="language-plaintext highlighter-rouge">S</code> is essentially determined by its entries \(S_{21}\), \(S_{31}\) and \(S_{32}\). Writing these values as a vector \((S_32,-S_{31},S_{21})\) we obtain for the matrices <code class="language-plaintext highlighter-rouge">S_right_R</code> and <code class="language-plaintext highlighter-rouge">S_left_L</code> exactly the rotational axis of our perturbation</p>
 {% highlight matlab %}
 vector3d(spinTensor(S_right_R)) * sqrt(14)
 
@@ -75,8 +75,12 @@ vector3d(spinTensor(S_left_L))  *sqrt(14)
 
 {% highlight plaintext %}
 ans = vector3d
+  x y z
+  1 2 3
  
 ans = vector3d
+  x y z
+  1 2 3
 {% endhighlight %}
 <p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code></p>
 {% highlight matlab %}
@@ -87,69 +91,66 @@ inv(rot_ref) * vector3d(spinTensor(S_left_R)) * sqrt(14)
 
 {% highlight plaintext %}
 ans = vector3d
+  x y z
+  1 2 3
  
 ans = vector3d
+  x y z
+  1 2 3
 {% endhighlight %}
-<h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works only well if the pertupation rotation has small rotational angle. For large pertubations the <a href="quaternion.logm.html">matrix logarithm</a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
+<h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works well only if the perturbation has small rotational angle. For large perturbations the matrix logarithm <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
 {% highlight matlab %}
-S = logm(rot_ref * rot_123,rot_ref)
+% define a large pertubation with rotational angle 1 radiant
+delta = 1;
+rot_123 = rotation.byAxisAngle(vector3d(1,2,3),1);
 
-S = logm(rot_123 * rot_ref,rot_ref,'left')
+S = log(rot_ref * rot_123,rot_ref, SO3TangentSpace.rightSpinTensor); S  * sqrt(14)
+
+
+S = log(rot_123 * rot_ref,rot_ref, SO3TangentSpace.leftSpinTensor); S  * sqrt(14)
 {% endhighlight %}
 
 {% highlight plaintext %}
-S = spinTensor (xyz)
+ans = spinTensor (xyz)
   rank: 2 (3 x 3)
  
- *10^-5
-       0 -13.994   9.329
-  13.994       0  -4.665
-  -9.329   4.665       0
+  0 -3  2
+  3  0 -1
+ -2  1  0
  
-S = spinTensor (xyz)
+ans = spinTensor (xyz)
   rank: 2 (3 x 3)
  
- *10^-5
-       0 -13.994   9.329
-  13.994       0  -4.665
-  -9.329   4.665       0
+  0 -3  2
+  3  0 -1
+ -2  1  0
 {% endhighlight %}
-<p>Again the entries \(S_{21}\), \(S_{31}\) and \(S_{32}\) exactly coincide with the rotional axis multiplied with the rotational angle</p>
+<p>Again the entries \(S_{21}\), \(S_{31}\) and \(S_{32}\) exactly coincide with the rotational axis multiplied with the rotational angle.</p><p>More directly this disorientation vector may be computed from two rotations using the options <code class="language-plaintext highlighter-rouge">SO3TangentSpace.rightVector</code> and <code class="language-plaintext highlighter-rouge">SO3TangentSpace.leftVector</code></p>
 {% highlight matlab %}
-vector3d(S) * sqrt(14)
+v = log(rot_ref * rot_123,rot_ref,SO3TangentSpace.rightVector); v * sqrt(14)
+
+v = log(rot_123 * rot_ref,rot_ref,SO3TangentSpace.leftVector); v * sqrt(14)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = vector3d
-{% endhighlight %}
-<p>More directly this disorientation vector may be computed from two rotations by the command <a href="quaternion.log.html">log</a></p>
-{% highlight matlab %}
-rot_123 = rotation.byAxisAngle(vector3d(1,2,3),1)
-log(rot_ref * rot_123,rot_ref) * sqrt(14)
-
-log(rot_123 * rot_ref,rot_ref,'left') * sqrt(14)
-{% endhighlight %}
-
-{% highlight plaintext %}
-rot_123 = rotation
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  87.0892 33.2984 320.219
- 
+  x y z
+  1 2 3
  
 ans = vector3d
- 
-ans = vector3d
+  x y z
+  1 2 3
 {% endhighlight %}
-<h2 id="10">The other way round</h2><p>Given a skew symmetric matrix <b>S</b> or a disorientation vector <b>v</b> we may use the command <a href="vector3d.exp.html">exp</a> to apply this rotational pertubation to a reference rotation <b>rot_ref</b></p>
+<h2 id="9">The other way round</h2><p>Given a skew symmetric matrix <code class="language-plaintext highlighter-rouge">S</code> or a disorientation vector <code class="language-plaintext highlighter-rouge">v</code> we may use the command <a href="vector3d.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> to apply this rotational perturbation to a reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code></p>
 {% highlight matlab %}
-S = logm(rot_ref * rot_123,rot_ref);
+% the truth
 rot_ref * rot_123
-exp(S,rot_ref)
 
-v = log(rot_ref * rot_123,rot_ref);
-exp(v,rot_ref)
+% using a disorientation vector
+exp(v,rot_ref,SO3TangentSpace.rightVector)
+
+% using a spin tensor
+exp(S,rot_ref,SO3TangentSpace.rightSpinTensor)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -175,12 +176,14 @@ ans = rotation
 {% endhighlight %}
 
 {% highlight matlab %}
-S = logm(rot_123 * rot_ref,rot_ref,'left');
+% the other truth
 rot_123 * rot_ref
-exp(S,rot_ref,'left')
 
-v = log(rot_123 * rot_ref,rot_ref,'left');
-exp(v,rot_ref,'left')
+% using a disorientation vector
+exp(v,rot_ref,SO3TangentSpace.leftVector)
+
+% using a spin tensor
+exp(S,rot_ref,SO3TangentSpace.leftSpinTensor)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -204,7 +207,7 @@ ans = rotation
      phi1     Phi    phi2
   74.5535 51.5051 9.61062
 {% endhighlight %}
-<h2 id="12">Disorientations under the presence of crystal symmetry</h2><p>Under the presence of crystal symmetry the order whether a rotational pertupation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
+<h2 id="11">Disorientations under the presence of crystal symmetry</h2><p>Under the presence of crystal symmetry the order whether a rotational perturbation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321');
 
@@ -212,177 +215,52 @@ cs = crystalSymmetry('321');
 ori_ref = orientation.byEuler(10*degree,20*degree,30*degree,cs);
 
 % next we disturb rot_ref by a rotation about the axis (123)
-mori_123 = orientation.byAxisAngle(Miller(1,2,-3,3,cs),1)
+mori_123 = orientation.byAxisAngle(Miller(1,2,-3,3,cs),1);
 
 % first we multiply from the right
 ori = ori_ref * mori_123
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori_123 = misorientation (321 → 321)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  61.8386 40.0064 340.052
- 
- 
 ori = orientation (321 → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   79.3156 43.3785  9.9013
 {% endhighlight %}
-<p>and compute the scew symmetric pertubation matrices</p>
+<p>Computing the right tangential vector gives us the disorientation vector in crystal coordinates</p>
 {% highlight matlab %}
-S_right_L =  matrix(inv(rot_ref)) * T_right
-S_right_R = T_right * matrix(inv(rot_ref))
+v = log(ori,ori_ref,SO3TangentSpace.rightVector); round(v)
 
-S_left_L =  matrix(inv(rot_ref)) * T_left
-S_left_R = T_left * matrix(inv(rot_ref))
+exp(v,ori_ref,SO3TangentSpace.rightVector)
 {% endhighlight %}
 
 {% highlight plaintext %}
-S_right_L =
-   -0.0000   -0.5892    0.4501
-    0.5893   -0.0001   -0.6709
-   -0.4501    0.6710   -0.0001
-S_right_R =
-   -0.0001   -0.8018    0.5345
-    0.8018   -0.0001   -0.2672
-   -0.5345    0.2673   -0.0000
-S_left_L =
-   -0.0001   -0.8018    0.5345
-    0.8018   -0.0001   -0.2672
-   -0.5345    0.2673   -0.0000
-S_left_R =
-   -0.0001   -0.9575    0.2758
-    0.9575   -0.0001    0.0850
-   -0.2758   -0.0850   -0.0000
-{% endhighlight %}
-<h2 id="14">make it a vector</h2>
-{% highlight matlab %}
-vR1 = vector3d(spinTensor(S_right_L))  *sqrt(14)
-vR2 = inv(rot_ref) * vector3d(spinTensor(S_right_R)) * sqrt(14)
-
-lR1 = rot_ref * vector3d(spinTensor(S_left_L))  *sqrt(14)
-lR2 = vector3d(spinTensor(S_left_R)) * sqrt(14)
-{% endhighlight %}
-
-{% highlight plaintext %}
-vR1 = vector3d
- 
-vR2 = vector3d
- 
-lR1 = vector3d
- 
-lR2 = vector3d
-{% endhighlight %}
-<h2 id="15">logarithm to vector3d</h2>
-{% highlight matlab %}
-log(ori_ref * mori_123,ori_ref)
-
-log(rot_123 * ori_ref,ori_ref,'left') * sqrt(14)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = Miller (321)
-       h       k       i       l
-  0.2335  0.4671 -0.7006  0.7006
- 
-ans = vector3d
-{% endhighlight %}
-<h2 id="16">logarithm to skew symmetric matrix</h2>
-{% highlight matlab %}
-S = logm(ori_ref * mori_123,ori_ref)
-round(vector3d(S))
-
-S = logm(rot_123 * ori_ref,ori_ref,'left')
-vector3d(S) * sqrt(14)
-{% endhighlight %}
-
-{% highlight plaintext %}
-S = spinTensor (321)
-  rank: 2 (3 x 3)
- 
- *10^-2
-      0 -70.06  46.71
-  70.06      0 -53.94
- -46.71  53.94      0
- 
 ans = Miller (321)
   h  k  i  l
   1  2 -3  3
  
-S = spinTensor (xyz)
-  rank: 2 (3 x 3)
+ans = orientation (321 → xyz)
  
- *10^-2
-      0 -80.18  53.45
-  80.18      0 -26.73
- -53.45  26.73      0
- 
-ans = vector3d
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  79.3156 43.3785  9.9013
 {% endhighlight %}
-<h2 id="17">The other way round</h2>
+<p>computing the left tangential vector gives us the disorientation vector in specimen coordinates</p>
 {% highlight matlab %}
-S = logm(ori_ref * mori_123,ori_ref);
-ori_ref * mori_123
-exp(S,ori_ref)
-
-v = log(ori_ref * mori_123,ori_ref);
-exp(v,ori_ref)
+v = log(ori,ori_ref,SO3TangentSpace.leftVector)
+exp(v,ori_ref,SO3TangentSpace.leftVector)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (321 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  79.3156 43.3785  9.9013
- 
+v = vector3d
+         x        y        z
+  0.161601 0.428476 0.888985
  
 ans = orientation (321 → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   79.3156 43.3785  9.9013
- 
- 
-ans = orientation (321 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  79.3156 43.3785  9.9013
-{% endhighlight %}
-
-{% highlight matlab %}
-S = logm(rot_123 * ori_ref,ori_ref,'left');
-rot_123 * ori_ref
-exp(S,ori_ref,'left')
-
-v = log(rot_123 * ori_ref,ori_ref,'left');
-exp(v,ori_ref,'left')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = orientation (321 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  74.5535 51.5051 9.61062
- 
- 
-ans = orientation (321 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  74.5535 51.5051 9.61062
- 
- 
-ans = orientation (321 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  74.5535 51.5051 9.61062
 {% endhighlight %}
 </div></body></html>

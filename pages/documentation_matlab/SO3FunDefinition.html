@@ -107,9 +107,11 @@ f =
     @(ori)angle(ori)./degree
  
 SO3F1 = SO3FunHandle (xyz → xyz)
+  eval: @(ori)angle(ori)./degree
  
  
 SO3F2 = SO3FunHandle (m-3m → xyz)
+  eval: @(ori)angle(ori)./degree
 {% endhighlight %}
 <p>Now we are able to evaluate this <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code></p>
 {% highlight matlab %}
@@ -119,8 +121,8 @@ SO3F2.eval(rot)
 
 {% highlight plaintext %}
 ans =
-  162.8218
-  132.6895
+  151.9484
+  161.1621
 {% endhighlight %}
 <p>And following that, it is easy to describe every <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code>.</p>
 {% highlight matlab %}
@@ -129,6 +131,7 @@ SO3FunHandle(@(rot) SO3F1.eval(rot))
 
 {% highlight plaintext %}
 ans = SO3FunHandle (xyz → xyz)
+  eval: @(rot)SO3F1.eval(rot)
 {% endhighlight %}
 <p><b>Definition of Harmonic Series on SO(3)</b></p><p>The class <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> described rotational functions by there harmonic series. MTEX is very fast by computing with this <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Hence sometimes it might be a good idea to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> in its harmonic series. Therefore only the command <a href="SO3FunHarmonic.SO3FunHarmonic">SO3FunHarmonic</a> is needed. But note that this approximation may lead to inaccuracies.</p>
 {% highlight matlab %}
@@ -150,7 +153,7 @@ SO3F4 = SO3FunHarmonic(fhat,cs)
 SO3F4 = SO3FunHarmonic (m-3m → xyz)
   isReal: false
   bandwidth: 19
-  weight: 0.45
+  weight: 0.17
 {% endhighlight %}
 <p>The <code class="language-plaintext highlighter-rouge">bandwith</code> decribes the maximal harmonic degree of the harmonic series expansion.</p><p>By the property <code class="language-plaintext highlighter-rouge">isReal</code> we are able to change between real and complex valued <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Note that creation of an real vealued SO3FunHarmonic changes the Fourier coefficient vector. So it is not possible to reconstruct the previous function. But computing with real valued functions is much faster.</p>
 {% highlight matlab %}
@@ -162,16 +165,16 @@ SO3F4.eval(rot)
 
 {% highlight plaintext %}
 ans =
-  -7.5156 + 3.0263i
-   8.8402 + 1.1880i
+   6.2687 + 1.7800i
+   9.3129 + 0.5503i
  
 SO3F4 = SO3FunHarmonic (m-3m → xyz)
   bandwidth: 19
-  weight: 0.45
+  weight: 0.17
  
 ans =
-   -7.5156
-    8.8402
+    6.2687
+    9.3129
 {% endhighlight %}
 <p>For further information on the Fourier coefficients, the bandwidth and other properties , see <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation of Rotational Functions</a>.</p><p><b>Definition of Radial Basis Functions</b></p><p>Radial Basis functions are of class <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. They are defined by a kernel function <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> which is cenetered on <code class="language-plaintext highlighter-rouge">orientations</code> with some weights.</p>
 {% highlight matlab %}
@@ -240,9 +243,10 @@ ans = SO3FunComposition (m-3m → xyz)
  
   <strong>harmonic component</strong>
   bandwidth: 19
-  weight: 0.45
+  weight: 0.17
  
   <strong>function handle component</strong>
+  eval: @(ori)angle(ori)./degree
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 10°
