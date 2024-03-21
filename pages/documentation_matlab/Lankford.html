@@ -24,7 +24,8 @@ sS = slipSystem.fcc(CS)
 ori = orientation.brass(CS);
 
 % compute the Lankford parameter
-[R, M, minM] = calcLankford(ori,sS,'verbose');
+rho = linspace(0,1,11);
+[R, M, minM] = calcLankford(ori,sS,'verbose','rho',rho);
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -46,16 +47,16 @@ Rbar = NaN
 {% endhighlight %}
 <p>The summary results show that for the Brass orientation, it is not always possible to predict the R-value as Inf values are predicted at 45&deg; and 90&deg; to the nominal rolling direction (or in this case, x).</p><p>The computed Taylor factor allows us to recreates Fig. 3.10 on page 74 of: [William F. Hosford, The mechanics of crystals and textured polycrystals] (<a href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/crat.2170290414">https://onlinelibrary.wiley.com/doi/epdf/10.1002/crat.2170290414</a>) It shows the dependence of \(M\) on \(\rho = -d_{\epsilon}_Y / d_{\epsilon}_X = \frac{R}{1+R}\) for rolling and transverse direction tension tests for an ideal Brass orientation. In the rolling direction test, x = [1 -1 2], and in the transverse test x = [-1 1 1].</p>
 {% highlight matlab %}
-plot(linspace(0,1,11), M(:,[1,10,19]).','s-','lineWidth',1.5);
+plot(rho, M(:,[1,10,19]).','-s','lineWidth',2);
 xlabel('{\rho} = -d{\epsilon}_Y / d{\epsilon}_X');
 ylabel('Relative strength, M = {\sigma}_x / {\tau}');
 legend('\theta=0^\circ','\theta=45^\circ','\theta=90^\circ','Location','northeast');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Lankford_01.png" %}
-</center><h2 id="3">Example 2: The Lankford parameters from an ODF</h2><p>In the previous chapter we have assumed a perfectly Brass oriented texture. Lets next assume a slight deviation around the preferred orienttion of about 10 degree modeled by the ODF</p>
+</center><h2 id="3">Example 2: The Lankford parameters from an ODF</h2><p>In the previous chapter we have assumed a perfectly Brass oriented texture. Lets next assume a slight deviation around the preferred orientation of about 10 degree modeled by the ODF</p>
 {% highlight matlab %}
-odf = unimodalODF(ori,'halfwidth')
+odf = unimodalODF(ori,'halfwidth',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -69,11 +70,11 @@ odf = SO3FunRBF (fcc → xyz)
   phi1    Phi   phi2 weight
     35     45      0      1
 {% endhighlight %}
-<p>Performing, the Lakford factor analysis on the ODF results in</p>
+<p>Performing, the Lankford factor analysis on the ODF results in</p>
 {% highlight matlab %}
-[R, M, minM] = calcLankford(odf,sS,'silent');
+[R, M, minM] = calcLankford(odf,sS,'silent','rho',rho);
 
-plot(linspace(0,1,11), M(:,[1,10,19]).','s-','lineWidth',1.5);
+plot(rho, M(:,[1,10,19]).','-s','lineWidth',2);
 xlabel('{\rho} = -d{\epsilon}_Y / d{\epsilon}_X');
 ylabel('Relative strength, M = {\sigma}_x / {\tau}');
 legend('\theta=0^\circ','\theta=45^\circ','\theta=90^\circ','Location','northeast');

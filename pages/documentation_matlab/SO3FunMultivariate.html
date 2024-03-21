@@ -1,5 +1,5 @@
 ---
-title: Multivariate SO3Fun
+title: Multivariate Orientation Dependent Functions
 
 sidebar: documentation_sidebar
 permalink: SO3FunMultivariate.html
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Multivariate SO3Fun</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunMultivariate.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunMultivariate.m">
+      --><title>Multivariate Orientation Dependent Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunMultivariate.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunMultivariate.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Structural conventions of the input and output of multivariate SO3FunHarmonics</h2><p>In this part we deal with multivariate functions of the form</p><p>\[ f\colon \mathcal{SO}(3) \to \mathbb R^n. \]</p><div><ul><li>the structure of the nodes <code class="language-plaintext highlighter-rouge">@rotations</code> is always interpreted as a column vector</li><li>the node index is the first dimension</li><li>the dimensions of the <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code> itself is counted from the second dimension</li></ul></div><p>For example we got four nodes \(R_1, R_2, R_3\) and \(R_4\) and six functions \(f_1, f_2, f_3, f_4, f_5\) and \(f_6\), which we want to store in a 3x2 array, then the following scheme applies to function evaluations:</p><p>\[ F(:, :, 1) = \pmatrix{f_1(v_1) &amp; f_2(v_1) &amp; f_3(v_1) \cr f_1(v_2) &amp; f_2(v_2) &amp; f_3(v_2) \cr f_1(v_3) &amp; f_2(v_3) &amp; f_3(v_3) \cr f_1(v_4) &amp; f_2(v_4) &amp; f_3(v_4)} \quad\mathrm{and}\quad F(:, :, 2) = \pmatrix{f_4(v_1) &amp; f_5(v_1) &amp; f_6(v_1) \cr f_4(v_2) &amp; f_5(v_2) &amp; f_6(v_2) \cr f_4(v_3) &amp; f_5(v_3) &amp; f_6(v_3) \cr f_4(v_4) &amp; f_5(v_4) &amp; f_6(v_4)}. \]</p><p>For the intern Fourier-coefficient matrix the first dimension is reserved for the Fourier-coefficients of a single function; the dimensions of the functions itself begins again with the second dimension.</p><p>If \(\bf{\hat f}_1, \bf{\hat f}_2, \bf{\hat f}_3, \bf{\hat f}_4, \bf{\hat f}_5\) and \(\bf{\hat f}_6\) would be the column vectors of the Fourier-coefficients of the functions above, internally they would be stored in \(\hat F\) as follows. \[ \hat F(:, :, 1) = \pmatrix{\bf{\hat f}_1 &amp; \bf{\hat f}_2 &amp; \bf{\hat f}_3} \quad\mathrm{and}\quad \hat F(:, :, 2) = \pmatrix{\bf{\hat f}_4 &amp; \bf{\hat f}_5 &amp; \bf{\hat f}_6}. \]</p><h2 id="2">Defining a multivariate SO3FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
 {% highlight matlab %}
 nodes = equispacedSO3Grid(crystalSymmetry,specimenSymmetry,'points',1e5);
@@ -19,17 +19,17 @@ nodes = nodes(:);
 {% endhighlight %}
 <p>Next we define function values for the vertices</p>
 {% highlight matlab %}
-y = [SO3Fun.dubna(nodes), (nodes.a.*nodes.b).^(1/4)];
+y = [SO3Fun.dubna(nodes), (nodes.a .* nodes.b).^(1/4)];
 nodes.CS = SO3Fun.dubna.CS;
 {% endhighlight %}
 <p>Now the actual command to get a (2x1) <code class="language-plaintext highlighter-rouge">SO3F1</code> of type \(~\) <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> is</p>
 {% highlight matlab %}
-SO3F1 = SO3FunHarmonic.approximation(nodes, y)
+SO3F1 = SO3FunHarmonic.approximation(nodes, y,'maxit',10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: The Voronoi decomposition is calculated. This may
-take some time. 
+Warning: The Voronoi decomposition is calculated. This
+may take some time. 
  
 SO3F1 = SO3FunHarmonic (Quartz → xyz)
   isReal: false
@@ -81,7 +81,7 @@ SO3F4 = SO3FunHarmonic (xyz → xyz)
   bandwidth: 1
   weight: 1
 {% endhighlight %}
-<div><ul><li>This command stores the ten first <a href="WignerFunctions.html">Wigner-D functions</a> in <code class="language-plaintext highlighter-rouge">SO3F4</code></li></ul></div><h2 id="12">Operations which differ from an univariate SO3FunHarmonic</h2><p><b>Some default matrix and vector operations</b></p><p>You can concatenate and refer to functions as Matlab does with vectors and matrices</p>
+<div><ul><li>This command stores the ten first <a href="WignerFunctions.html">Wigner-D functions</a> in <code class="language-plaintext highlighter-rouge">SO3F4</code></li></ul></div><h2 id="12">Operations which differ from an univariate SO3FunHarmonic</h2><p><b>Some default matrix and vector operations</b></p><p>You can concatenate and refer to functions as MATLAB does with vectors and matrices</p>
 {% highlight matlab %}
 SO3F5 = [SO3F1; SO3F3];
 SO3F5(2:4)
@@ -173,7 +173,7 @@ ans = SO3FunHarmonic (xyz → xyz)
   bandwidth: 48
   weight: 1
 {% endhighlight %}
-<h2 id="19">Visualization of multivariate SO3FunHarmonic</h2><p>Similary to the univariate case we also can look at the Fourier coefficients of multivariate functions.</p>
+<h2 id="19">Visualization of multivariate SO3FunHarmonic</h2><p>Similarly to the univariate case we also can look at the Fourier coefficients of multivariate functions.</p>
 {% highlight matlab %}
 plotSpektra(SO3F3)
 {% endhighlight %}
@@ -185,11 +185,12 @@ plot(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the
-desired components manually. In the following the first
-component is plotted. 
-Warning: Imaginary part of complex valued SO3FunHarmonic is
-ignored. In the following only the real part is plotted.
+Warning: You try to plot an multivariate function. Plot
+the desired components manually. In the following the
+first component is plotted. 
+Warning: Imaginary part of complex valued
+SO3FunHarmonic is ignored. In the following only the
+real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_02.png" %}
@@ -199,11 +200,12 @@ plot3d(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the
-desired components manually. In the following the first
-component is plotted. 
-Warning: Imaginary part of complex valued SO3FunHarmonic is
-ignored. In the following only the real part is plotted.
+Warning: You try to plot an multivariate function. Plot
+the desired components manually. In the following the
+first component is plotted. 
+Warning: Imaginary part of complex valued
+SO3FunHarmonic is ignored. In the following only the
+real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_03.png" %}
@@ -213,8 +215,9 @@ plotFibre(SO3F3,fibre.beta)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is
-ignored. In the following only the real part is plotted.
+Warning: Imaginary part of complex valued
+SO3FunHarmonic is ignored. In the following only the
+real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_04.png" %}
