@@ -103,8 +103,8 @@ vR = SO3TangentVector
  
 vL = SO3TangentVector
  TagentSpace: leftVector
-  x        y        z
-  1 0.853325  3.50312
+  x y z
+  1 2 3
 {% endhighlight %}
 <p>We can do the same manually by</p>
 {% highlight matlab %}
@@ -114,12 +114,12 @@ vL = R*vR
 
 {% highlight plaintext %}
 vR = vector3d
-  x y z
-  1 2 3
+  x       y       z
+  1 2.90545 2.13504
  
 vL = vector3d
-  x        y        z
-  1 0.853325  3.50312
+  x y z
+  1 2 3
 {% endhighlight %}
 <h2 id="7">Vector Fields</h2><p>Vector fields on the rotation group are functions that maps any rotation to an tangent vector. An important example is the gradient of an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>.</p><p>Hence any vector field has again a left and a right representation.</p>
 {% highlight matlab %}
@@ -132,7 +132,7 @@ rot = rotation.rand(3);
 F.grad(rot)
 
 % right gradient in rot
-inv(rot).*F.grad(rot)
+inv(rot) .* F.grad(rot)
 F.grad(rot,'right')
 {% endhighlight %}
 
@@ -141,24 +141,24 @@ ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: leftVector
           x          y          z
-  0.0510993 0.00875779  -0.424341
-   -1.09891    1.93943  -0.241698
-   0.124219   0.302883  -0.670828
+  -0.122717   0.011721   0.111484
+   -2.57598   -0.41549  -0.243849
+  -0.109357 -0.0874681   0.212191
  
 ans = vector3d
  size: 3 x 1
-          x         y         z
-   0.188281  0.382768 0.0281446
-   -1.03382   1.74942   0.94771
-  -0.155848   0.21103  0.698826
+          x          y          z
+  -0.161898 -0.0305792  0.0218942
+  -0.860371    1.43619    2.01616
+  -0.199147  -0.145656 -0.0613163
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: rightVector
-          x         y         z
-   0.188285  0.382783 0.0281407
-   -1.03374   1.74941  0.947724
-  -0.155842  0.211019  0.698842
+          x          y          z
+  -0.161898 -0.0305792  0.0218942
+  -0.860371    1.43619    2.01616
+  -0.199147  -0.145656 -0.0613163
 {% endhighlight %}
 <p>The gradient can also computed as function, i.e. as <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>, which internal is an 3 dimensional <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
 {% highlight matlab %}
@@ -175,24 +175,26 @@ GL = SO3VectorFieldHarmonic (Quartz → xyz)
   tangent space: leftVector
  
  
-GR = SO3VectorFieldHandle (Quartz → xyz)
+GR = SO3VectorFieldHarmonic (1 → xyz)
+  bandwidth: 48
+  tangent space: rightVector
  
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: leftVector
           x          y          z
-  0.0518012 0.00766261  -0.425819
-   -1.09989     1.9388  -0.239629
-   0.124865   0.304558  -0.671126
+  -0.122624   0.010589   0.112153
+    -2.5713   -0.41956  -0.242447
+  -0.108816 -0.0871087   0.216483
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: rightVector
-          x         y         z
-   0.188285  0.382783 0.0281407
-   -1.03374   1.74941  0.947724
-  -0.155842  0.211019  0.698842
+          x          y          z
+   -0.16215 -0.0300373  0.0230693
+  -0.857658    1.43043     2.0161
+  -0.200306  -0.149829  -0.061015
 {% endhighlight %}
 <p>Again we are able to change the tangent space</p>
 {% highlight matlab %}
@@ -206,7 +208,9 @@ ans = SO3VectorFieldHarmonic (Quartz → xyz)
   tangent space: leftVector
  
  
-ans = SO3VectorFieldHandle (Quartz → xyz)
+ans = SO3VectorFieldHarmonic (1 → xyz)
+  bandwidth: 48
+  tangent space: rightVector
 {% endhighlight %}
 <p>Note that the symmetries do not work in the same way as for <a href="SO3Fun.SO3Fun.html">SO3Fun</a>'s. Dependent from the choosed tangent space representation (left/right) one of the symmetries has other properties.</p><p>In case of right tangent space the evaluation in symmetric orientations only make sense w.r.t. the left symmetry. In case of left tangent space otherwise.</p>
 {% highlight matlab %}
@@ -219,30 +223,30 @@ GL.eval(ori.symmetrise)
 ori = orientation (Quartz → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2
-  201.209 134.924 129.684
+    phi1     Phi    phi2
+  94.498 38.2404 301.373
  
  
 ans = SO3TangentVector
  size: 6 x 1
  TagentSpace: rightVector
-         x         y         z
-   3.16237 -0.651558  -3.83598
-   2.14545  -2.41292   3.83598
-  -2.14545  -2.41292  -3.83598
-  -3.16237 -0.651558   3.83598
-  -1.01692   3.06446  -3.83598
-   1.01692   3.06446   3.83598
+         x        y        z
+  -24.0013  2.35314  8.58653
+  -14.0385  19.6091 -8.58653
+   14.0385  19.6091  8.58653
+   24.0013  2.35314 -8.58653
+   9.96274 -21.9623  8.58653
+  -9.96274 -21.9623 -8.58653
  
 ans = SO3TangentVector
  size: 6 x 1
  TagentSpace: leftVector
-        x         y         z
-  1.66595 -0.107649   4.72716
-  1.66595 -0.107649   4.72716
-  1.66595 -0.107649   4.72716
-  1.66595 -0.107649   4.72716
-  1.66595 -0.107649   4.72716
-  1.66595 -0.107649   4.72716
+        x        y        z
+  -10.884 -11.3746  20.1863
+  -10.884 -11.3746  20.1863
+  -10.884 -11.3746  20.1863
+  -10.884 -11.3746  20.1863
+  -10.884 -11.3746  20.1863
+  -10.884 -11.3746  20.1863
 {% endhighlight %}
 </div></body></html>

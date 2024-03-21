@@ -43,9 +43,7 @@ beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
  
  (110) || (0001)   [1-11] || [-2110]
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TriplePointBasedReconstruction_02.png" %}
-</center><p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initital child grains from out EBSD data set.</p>
+<p>that alligns (110) plane of the beta phase with the (0001) plane of the alpha phase and the [1-11] direction of the beta phase with the [2110] direction of the alpha phase.</p><p>Note that all MTEX functions for parent grain reconstruction expect the orientation relationship as parent to child and not as child to parent.</p><h2 id="4">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initital child grains from out EBSD data set.</p>
 {% highlight matlab %}
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
@@ -84,7 +82,7 @@ ans = parentGrainReconstructor
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.83°, 1.2°, 1.7°, 3.2° (quintiles)
-   c2c fit: 0.7°, 0.99°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.7°, 0.98°, 1.3°, 1.7° (quintiles)
  
  votes: 41427 x 1
    probabilities: 93%, 88%, 82%, 69% (quintiles)
@@ -95,7 +93,7 @@ plot(job.grains, job.votes.prob(:,1))
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_03.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_02.png" %}
 </center><p>We observe that for most of the grains the probability is above 70 percent. We may use this percentage as threshold to decide which child grains we turn into parent grains. This can be done by the command command <a href="parentGrainReconstructor.calcParentFromVote.html"><code class="language-plaintext highlighter-rouge">calcParentFromVote</code></a></p>
 {% highlight matlab %}
 job.calcParentFromVote('minProb',0.7)
@@ -109,8 +107,8 @@ ans = parentGrainReconstructor
  child   Ti (alpha)  622       16243   16%                
  
  OR: (110) || (0001)   [1-11] || [-2110]
-   p2c fit: 0.93°, 1.4°, 1.7°, 2.2° (quintiles)
-   c2c fit: 1°, 1.5°, 2°, 2.7° (quintiles)
+   p2c fit: 0.94°, 1.4°, 1.8°, 2.3° (quintiles)
+   c2c fit: 1°, 1.5°, 1.9°, 2.8° (quintiles)
  
  votes: 8550 x 1
    probabilities: 66%, 61%, 54%, 43% (quintiles)
@@ -126,7 +124,7 @@ color = ipfKey.orientation2color(job.parentGrains.meanOrientation);
 plot(job.parentGrains, color, 'figSize', 'large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_04.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_03.png" %}
 </center><h2 id="11">Grow parent grains at grain boundaries</h2><p>Next we may grow the reconstructed parent grains into the regions of the remaining child grains. To this end we use the command <a href="parentGrainReconstructor.calcGBVotes.html"><code class="language-plaintext highlighter-rouge">calcGBVotes</code></a> with the option <code class="language-plaintext highlighter-rouge">'p2c'</code> to compute votes from parent to child grain boundaries. Next we use the exact same command <a href="parentGrainReconstructor.calcParentFromVote.html"><code class="language-plaintext highlighter-rouge">calcParentFromVote</code></a> to recover parent orientations from the votes. As threshold for the growing the parent grains into the child grains we use 2.5 degree, 5 degree and 7.5 degree. This can be easily accomblished by the following small loop.</p>
 {% highlight matlab %}
 for k = 1:3
@@ -182,7 +180,7 @@ ans = parentGrainReconstructor
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_05.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_04.png" %}
 </center><h2 id="12">Merge parent grains</h2><p>After the previous steps we are left with many very similar parent grains. In order to merge all similarly oriented grains into large parent grains one can use the command <a href="parentGrainReconstructor.mergeSimilar.html"><code class="language-plaintext highlighter-rouge">mergeSimilar</code></a>. It takes as an option the threshold below which two parent grains should be considered a a single grain.</p>
 {% highlight matlab %}
 job.mergeSimilar('threshold',5*degree)
@@ -207,7 +205,7 @@ ans = parentGrainReconstructor
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_06.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_05.png" %}
 </center><h2 id="13">Merge inclusions</h2><p>We may be still a bit unsatisfied with the result as the large parent grains contain a lot of poorly indexed inclusions where we failed to assign a parent orientation. We use the command <a href="parentGrainReconstructor.mergeInclusions.html"><code class="language-plaintext highlighter-rouge">mergeInclusions</code></a> to merge all inclusions that have fever pixels then a certain threshold into the surrounding parent grains.</p>
 {% highlight matlab %}
 job.mergeInclusions('maxSize',5)
@@ -232,7 +230,7 @@ ans = parentGrainReconstructor
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_07.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_06.png" %}
 </center><h2 id="14">Reconstruct beta orientations in EBSD map</h2><p>Until now we have only recovered the beta orientations as the mean orientations of the beta grains. In this section we want to set up the EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> to contain for each pixel a reconstruction of the parent phase orientation. This is done by the command <code class="language-plaintext highlighter-rouge"><a href="parentGrainReconstructor.calcParentEBSD.html">calcParentEBSD</a></code></p>
 {% highlight matlab %}
 parentEBSD = job.ebsd;
@@ -242,7 +240,7 @@ color = ipfKey.orientation2color(parentEBSD('Ti (Beta)').orientations);
 plot(parentEBSD('Ti (Beta)'),color,'figSize','large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_08.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_07.png" %}
 </center><p>The recovered EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> contains a measure <code class="language-plaintext highlighter-rouge">parentEBSD.fit</code> for the corespondence between the beta orientation reconstructed for a single pixel and the beta orientation of the grain. Lets visualize this</p>
 {% highlight matlab %}
 % the beta phase
@@ -256,7 +254,7 @@ plot(job.grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_09.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_08.png" %}
 </center><p>For comparison the map with original alpha phase and on top the recovered beta grain boundaries</p>
 {% highlight matlab %}
 plot(ebsd('Ti (Alpha)'),ebsd('Ti (Alpha)').orientations,'figSize','large')
@@ -267,5 +265,5 @@ plot(parentGrains.boundary,'lineWidth',3)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_10.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_09.png" %}
 </center></div></body></html>
