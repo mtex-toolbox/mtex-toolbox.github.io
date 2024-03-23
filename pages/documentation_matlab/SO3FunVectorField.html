@@ -1,5 +1,5 @@
 ---
-title: SO3VectorField
+title: Vector Fields in Orientation Space
 
 sidebar: documentation_sidebar
 permalink: SO3FunVectorField.html
@@ -11,39 +11,242 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>SO3VectorField</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunVectorField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunVectorField.m">
-    edit page</a></font><div><!--introduction--><p><a href="SO3VectorField.SO3VectorField">SO3VectorField</a> handles three-dimensional functions on the rotation group. For instance the gradient of an univariate <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> can return a <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic">SO3VectorFieldHarmonic</a>.</p><!--/introduction--><h2 id="1">Defining a SO3VectorFieldHandle</h2><p>Analogous to <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code> we are able to define <code class="language-plaintext highlighter-rouge">SO3VectorFields</code> by an <a href="https://de.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html">anonymous function</a>.</p>
+      --><title>Vector Fields in Orientation Space</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunVectorField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunVectorField.m">
+    edit page</a></font><div><!--introduction--><p>Vector fields in orientation space model orientation dependent spin as it occurs for instance in the Taylor or Sachs model. Another typical example are gradients of orientation distribution functions.</p><!--/introduction--><h2 id="1">Orientation Dependent Spin Tensors as Vector Fields</h2><p>According to Taylor theory the strain acting on a crystal with orientation <code class="language-plaintext highlighter-rouge">ori</code> is compensated by the action of different slip systems. The antisymmetric portion of deformation tensors of these active slip systems gives a spin tensors that describes the local misorientation the crystal undergoes under deformation. In MTEX the spin tensor <code class="language-plaintext highlighter-rouge">W</code> as a function of the orientation <code class="language-plaintext highlighter-rouge">ori</code> is computed as a variable of type <code class="language-plaintext highlighter-rouge">SO3VectorField</code> by the command <a href="strainTensor.calcTaylor.html"><code class="language-plaintext highlighter-rouge">calcTaylor</code></a>.</p>
 {% highlight matlab %}
-f = @(rot) vector3d(rot.phi1, rot.phi2, 0*rot.phi1);
+% consider bcc symmetry and slip systems
+cs = crystalSymmetry('432');
+sS = slipSystem.bcc(cs)
 
-SO3VF = SO3VectorFieldHandle(f)
+% consider plane stain
+q = 0;
+epsilon = strainTensor(diag([1 -q -(1-q)]))
+
+% compute the orientation depended spin tensor
+[~,~,W] = calcTaylor(epsilon,sS.symmetrise)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3VF = SO3VectorFieldHandle (xyz → xyz)
+sS = slipSystem (432)
+ size: 1 x 3
+ 
+   u    v    w  | h    k    l CRSS
+   1   -1    1    0    1    1    1
+  -1    1    1    2    1    1    1
+  -1    1    1    3    2    1    1
+ 
+epsilon = strainTensor (xyz)
+  type: Lagrange 
+  rank: 2 (3 x 3)
+ 
+  1  0  0
+  0  0  0
+  0  0 -1
+ 
+W = SO3VectorFieldHarmonic (432 → xyz)
+  bandwidth: 32
+  tangent space: rightSpinTensor
+{% endhighlight %}
+<p>Lets visualize the spin tensor in Euler angle sections</p>
+{% highlight matlab %}
+sP = phi1Sections(cs,specimenSymmetry('222'));
+sP.phi1 = (10:20:70)*degree;
+
+% plot the Taylor factor
+plot(W,sP,'resolution',7.5*degree,'layout',[2 2])
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_01.png" %}
+</center><p>We observe how according to the orientation the Taylor model predicts a misorientation of the corresponding crystal. For a specific (set of) orientation <code class="language-plaintext highlighter-rouge">ori</code> we can retrieve the spin tensor by <a href="SO3VectorField.eval">evaluating</a> the vector field <code class="language-plaintext highlighter-rouge">W</code> at this position</p>
+{% highlight matlab %}
+% the spin tensor for the copper orientation
+WCopper = W.eval(orientation.copper(cs))
+{% endhighlight %}
+
+{% highlight plaintext %}
+WCopper = spinTensor (432)
+  rank: 2 (3 x 3)
+ 
+ *10^-2
+      0      0  32.15
+      0      0  32.15
+ -32.15 -32.15      0
+{% endhighlight %}
+<p><b>The Norm of a Vector Field</b></p><p>The norm of the spin tensor directly relates to the amount of misorientation. We may compute the amount of misorientations as a function of orientation by the command <a href="SO3VectorField.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> and determine the orientation of maximum misorientation by</p>
+{% highlight matlab %}
+% determine the orientation of maximum misorientation
+[~,oriMax] = max(norm(W))
+
+% visualize the amount of misorientation
+plot(norm(W),sP,'resolution',0.5*degree,'layout',[2 2])
+mtexColorMap LaboTeX
+
+% plot the vector field on top
+hold on
+plot(W,sP,'resolution',7.5*degree,'color','black')
+hold off
+
+annotate(oriMax)
+{% endhighlight %}
+
+{% highlight plaintext %}
+oriMax = misorientation (432 → 1)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  271.318 45.3713 116.559
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_02.png" %}
+</center><p>As the vector field <code class="language-plaintext highlighter-rouge">W</code> corresponds to the rotational axis of the local misorientation we may check how much this axis corresponds with a predefined axis, e.g. [100], by computing the inner product <a href="SO3Fun.dot.html"><code class="language-plaintext highlighter-rouge">dot(W,d)</code></a> between the vector field <code class="language-plaintext highlighter-rouge">W</code> and the predefined axis <code class="language-plaintext highlighter-rouge">d</code>.</p>
+{% highlight matlab %}
+plot(dot(W,Miller(1,0,0,cs)),sP,'layout',[2 2])
+mtexColorMap blue2red
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_03.png" %}
+</center><p><b>The Flux of a Vector Field</b></p><p>If we interpret the vector field <code class="language-plaintext highlighter-rouge">W</code> as a velocity field for the different crystal orientations. Then its divergence is a scalar field that indicates where orientations condense. In this interpretation a sink corresponds to negative flux / divergence and a source to positive flux / divergence.</p>
+{% highlight matlab %}
+flux = W.div
+
+plot(flux,sP,'resolution',0.5*degree,'layout',[2 2],'faceAlpha',0.5)
+mtexColorMap blue2red
+mtexColorbar
+
+hold on
+plot(W,sP,'resolution',7.5*degree,'color','black')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+flux = SO3FunHarmonic (432 → xyz)
+  bandwidth: 32
+  weight: 0
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_04.png" %}
+</center><p><b>The Curl of a Vector Field</b></p><p>The counterpart of the flux is the curl of a vector field which describes the axis of local rotation within the crystal orientations</p>
+{% highlight matlab %}
+c = W.curl
+
+plot(c,sP,'resolution',7.5*degree,'layout',[2 2],'color','black')
+{% endhighlight %}
+
+{% highlight plaintext %}
+c = SO3VectorFieldHarmonic (432 → xyz)
+  bandwidth: 32
   tangent space: leftVector
 {% endhighlight %}
-<p>Note that the evaluations are of class <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code></p>
+<center>
+{% include inline_image.html file="SO3FunVectorField_05.png" %}
+</center><h2 id="8">The Gradient of Orientation distribution Functions</h2><p>A second natural usage of vector fields is as gradients of orientation dependent functions, e.g. ODF. Lets consider the following ODF of a quartz specimen</p>
 {% highlight matlab %}
-rot = rotation.rand(2);
-SO3VF.eval(rot)
+odf = SO3Fun.dubna
 {% endhighlight %}
 
 {% highlight plaintext %}
+odf = SO3FunRBF (Quartz → xyz)
+ 
+  <strong>multimodal components</strong>
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<p>Then its gradient is computed by the command <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">odf.grad</code></a></p>
+{% highlight matlab %}
+g = odf.grad
+{% endhighlight %}
+
+{% highlight plaintext %}
+g = SO3VectorFieldHarmonic (Quartz → xyz)
+  bandwidth: 48
+  tangent space: leftVector
+{% endhighlight %}
+<p>Lets visualize the ODF together with its gradient in a sigma section plot</p>
+{% highlight matlab %}
+plot(odf,'sigma')
+hold on
+plot(g,'linewidth',1.5,'color','black','resolution',7.5*degree)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_06.png" %}
+</center><p>We observe how the gradients all points towards the closest local maximum. This is actually the foundation of the <a href="SO3Fun.steepestDescent.html">steepest descent algorithm</a> used by MTEX in the commands <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max(odf)</code></a> and <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">calcComponents(odf)</code></a></p><p>As the gradient of a function is a vector field we may compute its curl and divergence. From mathematics we know that the curl must be zero</p>
+{% highlight matlab %}
+plot(g.curl,'sigma')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_07.png" %}
+</center><p>and the divergence coincides with the Laplacian of the</p>
+{% highlight matlab %}
+plot(g.div,'sigma',60*degree)
+nextAxis
+plot(laplace(SO3FunHarmonic(odf)),'sigma',60*degree)
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_08.png" %}
+</center><p>The fact that the curl of a vector field is zero is actually equivalent to the fact that the vector field is the gradient of some potential field, which can be computed by the command <a href="SO3VectorField.antiderivate.html"><code class="language-plaintext highlighter-rouge">antiderivative(g)</code></a> and coincides exactly with the original ODF <code class="language-plaintext highlighter-rouge">odf</code>.</p>
+{% highlight matlab %}
+odf2 = g.antiderivative
+
+plot(odf2,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf2 = SO3FunHarmonic (Quartz → xyz)
+  bandwidth: 48
+  weight: 0
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_09.png" %}
+</center><h2 id="15">Overview of Operations for Orientational Vector Fields</h2><p>The following operations are defined for vector fields <code class="language-plaintext highlighter-rouge">VF</code>, <code class="language-plaintext highlighter-rouge">VF1</code>, <code class="language-plaintext highlighter-rouge">VF2</code></p><div><ul><li>basic arithmetic operations: sum, difference, scaling, quotient</li><li>inner product <a href="SO3VectorFied.dot.html"><code class="language-plaintext highlighter-rouge">dot(VF1,VF2)</code></a></li><li>cross product <a href="SO3VectorFied.cross.html"><code class="language-plaintext highlighter-rouge">dot(VF1,VF2)</code></a></li><li>norm <a href="SO3VectorFied.norm.html"><code class="language-plaintext highlighter-rouge">norm(VF)</code></a></li><li>rotate <a href="SO3VectorFied.rotate.html"><code class="language-plaintext highlighter-rouge">rotate(VF,rot)</code></a></li><li>average <a href="SO3VectorFied.mean.html"><code class="language-plaintext highlighter-rouge">mean(VF)</code></a></li></ul></div><h2 id="16">Definition of Orientational Vector Fields</h2><h2 id="17"><b>Explicitly by an Anonymous Function</b></h2><p>Analogous to <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code> we are able to define <code class="language-plaintext highlighter-rouge">SO3VectorFields</code> by an <a href="https://de.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html">anonymous function</a>.</p>
+{% highlight matlab %}
+% cubic symmetry
+cs = crystalSymmetry('432')
+
+% product of rotational axis and rotational angle
+f = @(mori) axis(mori) .* angle(mori);
+
+% define the vector field
+VF = SO3VectorFieldHandle(f,cs,cs)
+
+% evaluating the vector field gives what we expect
+round(VF.eval(orientation.byAxisAngle(vector3d(1,2,3),10*degree)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs = crystalSymmetry
+ 
+  symmetry: 432    
+  elements: 24     
+  a, b, c : 1, 1, 1
+ 
+ 
+VF = SO3VectorFieldHandle (432 → 432)
+  tangent space: leftVector
+ 
+ 
 ans = SO3TangentVector
- size: 2 x 1
  TagentSpace: leftVector
-        x       y       z
-  4.21821 1.88116       0
-  4.35566 3.13737       0
+  x y z
+  1 2 3
 {% endhighlight %}
-<h2 id="4">Defining a SO3VectorFieldHarmonic</h2><p><b>Definition via SO3VectorField</b></p><p>We can expand any <code class="language-plaintext highlighter-rouge"><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></code> in an <code class="language-plaintext highlighter-rouge"><a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a></code> directly by the command <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
+<p>But plotting does not -- TODO!!!</p>
 {% highlight matlab %}
-SO3VectorFieldHarmonic(SO3VF)
+% plot it
+quiver3(VF,'axisAngle','resolution',7.5*degree,'color','black','linewidth',2)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunVectorField_10.png" %}
+</center><p><b>Definition via SO3VectorField</b></p><p>We can expand any <code class="language-plaintext highlighter-rouge"><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></code> in an <code class="language-plaintext highlighter-rouge"><a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a></code> directly by the command <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
+{% highlight matlab %}
+SO3VectorFieldHarmonic(VF)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3VectorFieldHarmonic (xyz → xyz)
+ans = SO3VectorFieldHarmonic (432 → 432)
   bandwidth: 64
   tangent space: leftVector
 {% endhighlight %}
@@ -93,188 +296,12 @@ SO3F = SO3FunHarmonic (xyz → xyz)
   isReal: false
   size: 3 x 1
   bandwidth: 9
-  weight: 0.31
+  weight: 0.93
  
  
 SO3VF3 = SO3VectorFieldHarmonic (xyz → xyz)
   isReal: false
   bandwidth: 9
   tangent space: leftVector
-{% endhighlight %}
-<h2 id="12">Operations</h2><p><b>Basic arithmetic operations</b></p><p>Again the basic mathematical operations are supported:</p><p>addition/subtraction of a vector field and a vector or addition/subtraction of two vector fields</p>
-{% highlight matlab %}
-SO3VF1 + SO3VF2; SO3VF1 + vector3d(1, 0, 0);
-SO3VF1-SO3VF2; SO3VF2 - vector3d(sqrt(2)/2, sqrt(2)/2, 0);
-{% endhighlight %}
-<p>multiplication/division by a scalar or a <code class="language-plaintext highlighter-rouge">SO3Fun</code></p>
-{% highlight matlab %}
-2.*SO3VF1; SO3VF1./4;
-SO3F = SO3FunHarmonic.example;
-SO3F.SRight = specimenSymmetry;
-SO3F = SO3F.symmetrise;
-SO3F .* SO3VF1;
-{% endhighlight %}
-<p>dot product with a vector or another vector field</p>
-{% highlight matlab %}
-dot(SO3VF1, SO3VF2);
-
-
-dot(SO3VF1, vector3d(0, 0, 1));
-{% endhighlight %}
-<p>cross product with a vector or another vector field</p>
-{% highlight matlab %}
-cross(SO3VF1, SO3VF2);
-
-cross(SO3VF1, vector3d(0, 0, 1));
-{% endhighlight %}
-<p>mean vector of the vector field</p>
-{% highlight matlab %}
-mean(SO3VF1);
-{% endhighlight %}
-<p>rotation of the vector field</p>
-{% highlight matlab %}
-r = rotation.byEuler( [pi/4 0 0]);
-rotate(SO3VF1, r);
-{% endhighlight %}
-<p>pointwise norm of the vectors</p>
-{% highlight matlab %}
-norm(SO3VF1);
-{% endhighlight %}
-<h2 id="21">Visualization</h2><p>One can use the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
-{% highlight matlab %}
-plot(SO3VF1);
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunVectorField_01.png" %}
-</center><p>or the 3D plot of the rotation group with the vectors on itself</p>
-{% highlight matlab %}
-clf;
-quiver3(SO3VF2);
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Setting the "WindowButtonDownFcn" property is
-not permitted while this mode is active. 
-Warning: Setting the "WindowButtonUpFcn" property is
-not permitted while this mode is active. 
-Warning: Setting the "KeyPressFcn" property is not
-permitted while this mode is active. 
-Warning: Setting the "WindowScrollWheelFcn" property is
-not permitted while this mode is active.
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunVectorField_02.png" %}
-</center><h2 id="23">Differential operators (Gradient, Antiderivative, Curl, Divergence)</h2><p>The gradient of an <a href="SO3Fun.SO3Fun.html">SO3Fun</a> in some specific rotation is an element of the tangent space, i.e. an <a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a>. We are also able to compute the gradient as rotational function, i.e. as <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>.</p>
-{% highlight matlab %}
-G = SO3F.grad
-{% endhighlight %}
-
-{% highlight plaintext %}
-G = SO3VectorFieldHarmonic (xyz → xyz)
-  bandwidth: 48
-  tangent space: leftVector
-{% endhighlight %}
-<p>We can evaluate this to get the gradient of <code class="language-plaintext highlighter-rouge">SO3F</code> at some specifiv rotations or we can directly compute this <a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a></p>
-{% highlight matlab %}
-G.eval(rot)
-SO3F.grad(rot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = SO3TangentVector
- size: 2 x 1
- TagentSpace: leftVector
-           x          y          z
-  0.00446372   0.098504 -0.0727317
-   -0.220331   0.117993  -0.703911
- 
-ans = SO3TangentVector
- size: 2 x 1
- TagentSpace: leftVector
-           x          y          z
-  0.00446372   0.098504 -0.0727317
-   -0.220331   0.117993  -0.703911
-{% endhighlight %}
-<p>Now one can perform an minimization by gradient descent method which internally uses the gradient.</p>
-{% highlight matlab %}
-plot(SO3F,'phi2',(0:3)*30*degree)
-rot = orientation.byEuler(300*degree,125*degree,30*degree);
-
-% Do steepest descent
-m = steepestDescent(SO3F,rot)
-
-% For Visualisation lets do single gradient steps and plot them
-for i=1:10
-  rot(i+1) = steepestDescent(SO3F,rot(i),'maxIter',1);
-end
-annotate(rot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-....... 
-m = orientation (1 → xyz)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  312.941 145.237 32.9525
- 
-.......
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SO3FunVectorField_03.png" %}
-</center><p>An <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> is conservativ, i.e. it is the gradient of some <a href="SO3Fun.SO3Fun.html">SO3Fun</a> if its curl (rotor) is 0.</p>
-{% highlight matlab %}
-% curl of SO3VF1
-c1 = curl(SO3VF1)
-sqrt(sum(norm(c1.SO3F).^2))
-
-% curl of G
-c2 = curl(G)
-sqrt(sum(norm(c2.SO3F).^2))
-{% endhighlight %}
-
-{% highlight plaintext %}
-c1 = SO3VectorFieldHarmonic (xyz → xyz)
-  bandwidth: 10
-  tangent space: leftVector
- 
-ans =
-    2.2508
- 
-c2 = SO3VectorFieldHarmonic (xyz → xyz)
-  bandwidth: 0
-  tangent space: leftVector
- 
-ans =
-     0
-{% endhighlight %}
-<p>Hence <code class="language-plaintext highlighter-rouge">SO3VF1</code> is not conservativ, but <code class="language-plaintext highlighter-rouge">G</code> is conservativ. So we are able to compute the antiderivative of <code class="language-plaintext highlighter-rouge">G</code>.</p>
-{% highlight matlab %}
-A = G.antiderivative
-{% endhighlight %}
-
-{% highlight plaintext %}
-A = SO3FunHarmonic (xyz → xyz)
-  bandwidth: 48
-  weight: 0
-{% endhighlight %}
-<p>Now <code class="language-plaintext highlighter-rouge">A</code> is again the same as <code class="language-plaintext highlighter-rouge">SO3F</code> with respect to some constant:</p>
-{% highlight matlab %}
-norm(SO3F-A-1)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-   8.4994e-07
-{% endhighlight %}
-<p>Similarly we can compute the divergence of an <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>.</p>
-{% highlight matlab %}
-G.div
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = SO3FunHarmonic (xyz → xyz)
-  bandwidth: 48
-  weight: 0
 {% endhighlight %}
 </div></body></html>
