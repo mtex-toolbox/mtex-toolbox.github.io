@@ -10,6 +10,25 @@ toc: false
 
 If you are using MTEX for your research, please cite one of the following paper that best fits your application.
 
+#### 2023
+
+<dl>
+    <dt>
+        {% include reference.html link="https://www.sciencedirect.com/science/article/pii/S135964542300366X/pdfft?md5=cd5b4d579996e89cf4ba96bdee90fad4&pid=1-s2.0-S135964542300366X-main.pdf"
+    content="Habit plane determination from reconstructed parent phase
+    orientation maps" %}
+    </dt>
+    <dd>
+		R. Hielscher, T. Nyyssönen, F. Niessen, A. A. Gazder
+        <br>
+        <div class="ul-inline">
+            <span class="li-inline">{% include reference.html link="https://doi.org/10.1016/j.actamat.2023.119035" content="Acta Materialia 23" %}</span>
+			<span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/habitPlane" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
+        </div>
+    </dd>
+</dl>
+
+
 ### 2022
 
 <dl>
@@ -33,7 +52,10 @@ If you are using MTEX for your research, please cite one of the following paper 
         <br>
         <div class="ul-inline">
             <span class="li-inline">{% include reference.html link="https://doi.org/10.1107/S1600576721011560" content="J. Appl. Cryst. 55" %}</span>
-            <span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/ParentGrainReconstruction" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>			
+            <span class="li-inline">{% include reference.html
+    link="https://github.com/mtex-toolbox/mtex-paper/tree/master/ParentGrainReconstruction"
+    content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true
+    %}</span>
         </div>
     </dd>
 </dl>
