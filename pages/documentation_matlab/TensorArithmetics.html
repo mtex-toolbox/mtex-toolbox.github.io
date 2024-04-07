@@ -55,7 +55,7 @@ eps = strainTensor (xyz)
   0  0  0
   0  0 -1
 {% endhighlight %}
-<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
+<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html"><code class="language-plaintext highlighter-rouge">EinsteinSum</code></a>.</p>
 {% highlight matlab %}
 sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
@@ -118,7 +118,7 @@ S = complianceTensor (xyz)
 c =
   460.2500
 {% endhighlight %}
-<p>Here we used the <a href="tensor.inv.html">inv</a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">double dot product</a></p>
+<p>Here we used the command <a href="tensor.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">double dot product</a></p>
 {% highlight matlab %}
 C * eps
 C : eps
@@ -139,7 +139,7 @@ ans = stressTensor (xyz)
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <code class="language-plaintext highlighter-rouge"><a href="tensor.trace.html">trace</a></code> of their matrix product</p>
+<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <code class="language-plaintext highlighter-rouge"><a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a></code> of their matrix product</p>
 {% highlight matlab %}
 T1 : T2
 trace(T1 * T2')
@@ -148,11 +148,11 @@ trace(T1' * T2)
 
 {% highlight plaintext %}
 ans =
-    2.3849
+    1.8183
 ans =
-    2.3849
+    1.8183
 ans =
-    2.3849
+    1.8183
 {% endhighlight %}
 <h2 id="11">Determinant</h2><p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a></p>
 {% highlight matlab %}
@@ -161,7 +161,7 @@ det(T1)
 
 {% highlight plaintext %}
 ans =
-   -0.2900
+   -0.0224
 {% endhighlight %}
 <h2 id="12">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
 {% highlight matlab %}
@@ -184,26 +184,6 @@ T = tensor(P,'rank',3,'propertyname','piezoelectric modulus')
 
 r = rotation.byAxisAngle(zvector,-45*degree);
 T = rotate(T,r)
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*NASGU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*ASGLU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 
 {% highlight plaintext %}
