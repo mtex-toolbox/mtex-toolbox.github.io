@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Grain Neighbors</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainNeighbours.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to analyze the neighbouring relationships between grains. While most of this can be done also on the level of grain boundaries an local misorientations it is for large data sets sometimes useful to consider misorientations between the meanorienations of grains. We shall use the following Magnesium data set of our explainations.</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to analyze the neighboring relationships between grains. While most of this can be done also on the level of grain boundaries an local misorientations it is for large data sets sometimes useful to consider misorientations between the mean-orientations of grains. We shall use the following Magnesium data set of our explanations.</p>
 {% highlight matlab %}
 % load sample EBSD data set
 mtexdata twins silent
@@ -28,7 +28,7 @@ plot(grains,grains.meanOrientation)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_01.png" %}
-</center><p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighbouring grain ids. Each row of the list containes the ids of two neighbouring grains. In the following lines choose the row number 170 and outline the corresponding grains</p>
+</center><p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighboring grain ids. Each row of the list contains the ids of two neighboring grains. In the following lines choose the row number 170 and outline the corresponding grains</p>
 {% highlight matlab %}
 pairs = grains.neighbors;
 
@@ -76,7 +76,7 @@ twinning = misorientation (Magnesium → Magnesium)
  
  (1-101) || (10-11)   [01-11] || [01-1-1]
 {% endhighlight %}
-<p>In order to determine the percentage of twinnig pairs we do</p>
+<p>In order to determine the percentage of twining pairs we do</p>
 {% highlight matlab %}
 % which of the pairs are twinning
 isTwinning = angle(mori,twinning) < 3*degree;
@@ -89,7 +89,7 @@ isTwinning = angle(mori,twinning) < 3*degree;
 ans =
    37.0518
 {% endhighlight %}
-<p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> containes only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbour relation ships within one phase.</p><p>In some case, e.g. if we ask for all neighbouring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
+<p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> contains only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbor relation ships within one phase.</p><p>In some case, e.g. if we ask for all neighboring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
 {% highlight matlab %}
 % get all pairs containing grain 83
 pairs = grains(83).neighbors('full');
@@ -103,6 +103,17 @@ plot(grains(pairs).boundary,'lineColor','blue','lineWidth',3)
 hold on
 plot(grains(83).boundary,'lineColor','red','lineWidth',3)
 hold off
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_04.png" %}

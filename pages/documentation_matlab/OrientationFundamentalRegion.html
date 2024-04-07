@@ -206,7 +206,7 @@ plot 2000 random orientations out of 11814 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_08.png" %}
-</center><h2 id="11">Fundamental regions of misorientations with antipodal symmetry</h2><p>Note that for boundary misorientations between the same phase we can <b>not</b> distinguish between a misorientation and its inverse. This is not the case for misorientations between different phases or the misorientation between the mean orientation of a grain and all other orientations. The inverse of a misorientation is axis - angle representation is simply the one with the same angle but antipodal axis. Accordingly this additional symmetry is handled in MTEX by the keyword <b>antipodal</b>.</p>
+</center><h2 id="11">Fundamental regions of misorientations with antipodal symmetry</h2><p>Note that for boundary misorientations between the same phase we can <b>not</b> distinguish between a misorientation and its inverse. This is not the case for misorientations between different phases or the misorientation between the mean orientation of a grain and all other orientations. The inverse of a misorientation is axis - angle representation is simply the one with the same angle but antipodal axis. Accordingly this additional symmetry is handled in MTEX by the keyword <code class="language-plaintext highlighter-rouge">'antipodal'</code>.</p>
 {% highlight matlab %}
 oR = fundamentalRegion(ebsd('Fo').CS,ebsd('Fo').CS,'antipodal');
 
@@ -214,7 +214,7 @@ plot(oR)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_09.png" %}
-</center><p>We see that the fundamental region with antipodal symmetry has only half the size as without. In the case of misorientations between the same phase MTEX automatically sets the antipodal flag to the misorientations and plots them accordingly.</p>
+</center><p>We see that the fundamental region with antipodal symmetry has only half the size as without. In the case of misorientations between the same phase MTEX automatically sets the flag <code class="language-plaintext highlighter-rouge">'antipodal'</code> to the misorientations and plots them accordingly.</p>
 {% highlight matlab %}
 mori = grains.boundary('Fo','Fo').misorientation
 plot(mori)
@@ -228,7 +228,7 @@ plot 2000 random orientations out of 15974 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_10.png" %}
-</center><p>If you want to avoid this you can remove the anitpodal flag by</p>
+</center><p>If you want to avoid this you can remove the flag <code class="language-plaintext highlighter-rouge">'antipodal'</code> by</p>
 {% highlight matlab %}
 mori.antipodal = false;
 
@@ -253,6 +253,17 @@ plotting 2000 random orientations out of 15974 given orientations
 </center><p>Note that in the previous plot we distinguish between <code class="language-plaintext highlighter-rouge">mori</code> and <code class="language-plaintext highlighter-rouge">inv(mori)</code>. Adding antipodal symmetry those are considered as equivalent</p>
 {% highlight matlab %}
 plotSection(mori,'axisAngle','antipodal')
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 
 {% highlight plaintext %}

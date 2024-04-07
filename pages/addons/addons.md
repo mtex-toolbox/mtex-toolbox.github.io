@@ -144,3 +144,48 @@ toc: false
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div id="addons-mtex2gmsh" class="col-md-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="">
+            </div>
+            <div class="panel-body">
+                <h4>CVA </h4>
+                <p>... Crystallographic Vorticity Axis Analysis
+                </p>
+                <p>
+                    <i class="fa fa-user"></i>
+                    {% include reference.html link="https://www.researchgate.net/profile/Zachary-Michels" content="Zachary Michels" %}
+                </p>
+                <p>
+                    <i class="fa fa-home"></i>
+                    {% include reference.html link="https://github.com/zmichels/CVA" content="GitHub: zmichels/CVA" %}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="addons-phase-segmenter" class="col-md-6">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/thumbnails/phaseSegmenter_screenshot.png">
+            </div>
+            <div class="panel-body">
+                <h4>phaseSegmenter</h4>
+                <p>...
+                    enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.
+                </p>
+                <p>
+                    <i class="fa fa-user"></i>
+                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="Azdiar A. Gazder" %}
+                    , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="Frank Niessen" %}
+                </p>
+                <p>
+                    <i class="fa fa-home"></i>
+                    {% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="GitHub: frankNiessen/phaseSegmenter" %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

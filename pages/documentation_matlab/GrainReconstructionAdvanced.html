@@ -196,11 +196,11 @@ grains = grain2d
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1      23    1952  Forsterite       mmm                         
      2       7     290   Enstatite       mmm                         
-     3      35     282    Diopside     12/m1       X||a*, Y||b*, Z||c
+     3      38     282    Diopside     12/m1       X||a*, Y||b*, Z||c
  
- boundary segments: 986 (53140 µm)
+ boundary segments: 999 (53837 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 57
+ triple points: 60
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -248,7 +248,7 @@ hold off
 {% include inline_image.html file="GrainReconstructionAdvanced_08.png" %}
 </center><center>
 {% include inline_image.html file="GrainReconstructionAdvanced_09.png" %}
-</center><p>As an alternative MTEX includes the fast multiscale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  subgrain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p>
+</center><p>As an alternative MTEX includes the fast multi-scale clustering method (FMC method) which  constructs clusters in a hierarchical manner from single pixels using fuzzy logic to account for local, as well as global information.</p><p>Analogous with the threshold angle, a  single parameter, C_Maha controls the sensitivity of the segmentation. A C_Maha value of 3.5 properly identifies the  sub-grain features. A C_Maha value of 3 captures more general features, while a value of 4 identifies finer features but is slightly oversegmented.</p>
 {% highlight matlab %}
 grains_FMC = calcGrains(ebsd('indexed'),'FMC',3.8)
 grains = calcGrains(ebsd('indexed'))
@@ -270,21 +270,21 @@ grains_FMC = grain2d
  Id   Phase   Pixels   phi1   Phi   phi2          GOS
   1       1        7    317   128    159    0.0084358
   2       1     1120    239    74    319    0.0251134
-  3       1      517    238    75    320    0.0100241
-  4       1     1783     56   103     40    0.0220667
+  3       1      517    238    75    320    0.0100267
+  4       1     1783     56   103     40    0.0220658
   5       1       11     57   104    220   0.00744635
   6       1        2    237    79    322   0.00276888
   7       1        7    343    43    249   0.00797851
   8       1      989    236    79    322    0.0126827
   9       1     1060    239    75    320    0.0197615
  10       1       76    238    75    320   0.00793592
- 11       1     1556    238    77    320    0.0219543
+ 11       1     1556    238    77    320    0.0219626
  12       1      349    237    77    320     0.011464
- 13       1      401    342    41    251    0.0103623
- 14       1      402    238    77    320    0.0121092
+ 13       1      401    342    41    251    0.0103684
+ 14       1      402    238    77    320    0.0121174
  15       1      184    237    77    319    0.0128468
- 16       1      957    316   129     74    0.0176087
- 17       1      780    238    78    321    0.0123841
+ 16       1      957    316   129     74    0.0176069
+ 17       1      780    238    78    321    0.0123911
  
  
 grains = grain2d
@@ -304,11 +304,11 @@ grains = grain2d
 %plot(ebsd,oM.orientation2color(ebsd.orientations))
 plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 
-% start overide mode
+% start override mode
 hold on
 plot(grains_FMC.boundary,'linewidth',1.5)
 
-% stop overide mode
+% stop override mode
 hold off
 {% endhighlight %}
 <center>
@@ -361,6 +361,26 @@ grains = smooth(grains,5)
 plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 
 hold on;plot(grains.boundary,'linewidth',2); hold off
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*ASGLU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 
 {% highlight plaintext %}
