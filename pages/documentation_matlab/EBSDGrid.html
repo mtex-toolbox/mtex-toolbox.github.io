@@ -104,7 +104,7 @@ ebsdMg = EBSDsquare
  Scan unit : um
  Grid size (square): 137 x 167
 {% endhighlight %}
-<p>The difference between both matrix shapes EBSD variables <b>ebsd</b> and <b>ebsdMg</b> is that not indexed pixels in <code class="language-plaintext highlighter-rouge">ebsd</code> are stored as the separate phase <b>notIndexed</b> while in <b>ebsdMg</b> all pixels have phase Magnesium but the Euler angles of the not indexed pixels are set to nan. This allows to select and plot subregions of the EBSD in a very intuitive way by</p>
+<p>The difference between both matrix shapes EBSD variables <code class="language-plaintext highlighter-rouge">ebsd</code> and <code class="language-plaintext highlighter-rouge">ebsdMg</code> is that not indexed pixels in <code class="language-plaintext highlighter-rouge">ebsd</code> are stored as the separate phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> while in <code class="language-plaintext highlighter-rouge">ebsdMg</code> all pixels have phase Magnesium but the Euler angles of the not indexed pixels are set to <code class="language-plaintext highlighter-rouge">nan</code>. This allows to select and plot subregions of the EBSD map in a very intuitive way by</p>
 {% highlight matlab %}
 plot(ebsdMg(50:100,5:100),ebsdMg(50:100,5:100).orientations)
 {% endhighlight %}
@@ -115,7 +115,7 @@ plot(ebsdMg(50:100,5:100),ebsdMg(50:100,5:100).orientations)
 gradX = ebsdMg.gradientX;
 
 plot(ebsdMg,norm(gradX))
-caxis([0,4*degree])
+setColorRange([0,4*degree])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_03.png" %}
@@ -323,6 +323,17 @@ ebsdG = EBSDhex
 ebsdGF = fill(ebsdG)
 
 plot(ebsdGF,ebsdGF.orientations)
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 
 {% highlight plaintext %}

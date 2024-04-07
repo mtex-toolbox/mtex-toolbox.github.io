@@ -12,12 +12,12 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Anisotropic Elasticity</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of ellasticity in anisotropic materials is essentialy based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the stiffness tensor for Olivine</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of elasticity in anisotropic materials is essentially based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the stiffness tensor for Olivine</p>
 {% highlight matlab %}
 % file name
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
 
-% crytsal symmetry
+% crystal symmetry
 cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivin');
 
 % define the tensor
@@ -37,7 +37,7 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
-<h2 id="2">Hooke's Law</h2><p>The stiffness tensor tensor of a material is defined as the stress the material expreances for a given strain</p>
+<h2 id="2">Hooke's Law</h2><p>The stiffness tensor tensor of a material is defined as the stress the material experiences for a given strain</p>
 {% highlight matlab %}
 eps = strainTensor(diag([1,1.1,0.9]),cs)
 {% endhighlight %}
@@ -78,7 +78,7 @@ ans = strainTensor (Olivin)
    0 1.1   0
    0   0 0.9
 {% endhighlight %}
-<p>The ellastic energy of the strain <code class="language-plaintext highlighter-rouge">eps</code> can be computed equivalently by the following equations</p>
+<p>The elastic energy of the strain <code class="language-plaintext highlighter-rouge">eps</code> can be computed equivalently by the following equations</p>
 {% highlight matlab %}
 % the elastic energy
 U = sigma : eps
@@ -101,7 +101,7 @@ E = C.YoungsModulus(d)
 E =
   286.9284
 {% endhighlight %}
-<p>If the direction <code class="language-plaintext highlighter-rouge">d</code> is ommited Youngs modulus is returned as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>.</p>
+<p>If the direction <code class="language-plaintext highlighter-rouge">d</code> is omitted Youngs modulus is returned as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>.</p>
 {% highlight matlab %}
 % compute Young's modulus as a directional dependent function
 E = C.YoungsModulus
@@ -164,7 +164,7 @@ nu = C.PoissonRatio(p,n)
 nu =
     0.1515    0.3383
 {% endhighlight %}
-<p>If we ommit in the call to <a href="stiffnessTensor.PoissonRatio.html"><code class="language-plaintext highlighter-rouge">PoissonRatio</code></a> the last argument</p>
+<p>If we omit in the call to <a href="stiffnessTensor.PoissonRatio.html"><code class="language-plaintext highlighter-rouge">PoissonRatio</code></a> the last argument</p>
 {% highlight matlab %}
 nu = C.PoissonRatio(p)
 {% endhighlight %}
@@ -230,4 +230,33 @@ n = Miller (Olivin)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_04.png" %}
-</center><h2 id="14">Wave Velocities</h2><p>Since elastic compression and decompression is mechanics of waves traveling through a medium anisotropic compressibility causes also anisotropic waves speeds. The analysis of this anisotropy is explained in the section <a href="WaveVelocities.html">wave velocities</a>.</p></div></body></html>
+</center><h2 id="14">Wave Velocities</h2><p>Since elastic compression and decompression is mechanics of waves traveling through a medium anisotropic compressibility causes also anisotropic waves speeds. The analysis of this anisotropy is explained in the section <a href="WaveVelocities.html">wave velocities</a>.</p>
+{% highlight matlab %}
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*BDSCI&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*BDSCA&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
+{% endhighlight %}
+</div></body></html>

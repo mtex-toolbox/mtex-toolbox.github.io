@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>The Tangent Space on the Rotation Group</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunTangentSpace.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunTangentSpace.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The tangent space of the rotation group at some rotation \(R\) has 2 different representations. There is a left and a right representation.</p><p>The left tangent space is defined by</p><p>\[ T_R SO(3) = \{ S \cdot R | S=-S^T  \} = \mathfrak{so}(3) \cdot R, \]</p><p>where \(\mathfrak{so}(3)\) describes the set of all skew symmetric matices, i.e. <a href="spinTensor.spinTensor.html">spinTensor</a>'s.</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The tangent space of the rotation group at some rotation \(R\) has 2 different representations. There is a left and a right representation.</p><p>The left tangent space is defined by</p><p>\[ T_R SO(3) = \{ S \cdot R | S=-S^T  \} = \mathfrak{so}(3) \cdot R, \]</p><p>where \(\mathfrak{so}(3)\) describes the set of all skew symmetric matrices, i.e. <a href="spinTensor.spinTensor.html">spinTensor</a>'s.</p>
 {% highlight matlab %}
 R = rotation.byAxisAngle(xvector,20*degree)
 S1 = spinTensor(vector3d(0,0,1))
@@ -97,14 +97,14 @@ vL = left(vR,R)
 
 {% highlight plaintext %}
 vR = SO3TangentVector
- TagentSpace: leftVector
+ TagentSpace: rightVector
   x       y       z
   1 2.90545 2.13504
  
 vL = SO3TangentVector
  TagentSpace: leftVector
-  x       y       z
-  1 2.90545 2.13504
+  x y z
+  1 2 3
 {% endhighlight %}
 <p>We can do the same manually by</p>
 {% highlight matlab %}
@@ -115,11 +115,11 @@ vL = R*vR
 {% highlight plaintext %}
 vR = vector3d
   x       y       z
-  1 3.46045 1.01256
+  1 2.90545 2.13504
  
 vL = vector3d
-  x       y       z
-  1 2.90545 2.13504
+  x y z
+  1 2 3
 {% endhighlight %}
 <h2 id="7">Vector Fields</h2><p>Vector fields on the rotation group are functions that maps any rotation to an tangent vector. An important example is the gradient of an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>.</p><p>Hence any vector field has again a left and a right representation.</p>
 {% highlight matlab %}
@@ -140,25 +140,25 @@ F.grad(rot,'right')
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: leftVector
-          x          y          z
-  -0.122717   0.011721   0.111484
-   -2.57598   -0.41549  -0.243849
-  -0.109357 -0.0874681   0.212191
+          x         y         z
+    1.00585   0.37514  0.636968
+  -0.497833  0.450432   0.76233
+   -1.42856  -1.04571  0.975959
  
 ans = vector3d
  size: 3 x 1
-          x          y          z
-  -0.161898 -0.0305792  0.0218942
-  -0.860371    1.43619    2.01616
-  -0.199147  -0.145656 -0.0613163
+          x         y         z
+   -1.00361  -0.66682  0.326066
+  -0.476121 -0.207738  0.872942
+   0.749084   1.08557   1.53206
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: rightVector
-          x          y          z
-  -0.161898 -0.0305792  0.0218942
-  -0.860371    1.43619    2.01616
-  -0.199147  -0.145656 -0.0613163
+          x         y         z
+   -1.00361  -0.66682  0.326066
+  -0.476121 -0.207738  0.872942
+   0.749084   1.08557   1.53206
 {% endhighlight %}
 <p>The gradient can also be computed as function, i.e. as <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a>, which internal is an 3 dimensional <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
 {% highlight matlab %}
@@ -183,18 +183,18 @@ GR = SO3VectorFieldHarmonic (1 → xyz)
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: leftVector
-          x          y          z
-  -0.122624   0.010589   0.112153
-    -2.5713   -0.41956  -0.242447
-  -0.108816 -0.0871087   0.216483
+          x         y         z
+    1.00844  0.370942  0.637215
+  -0.502043  0.453057  0.760681
+   -1.42649  -1.04067  0.975877
  
 ans = SO3TangentVector
  size: 3 x 1
  TagentSpace: rightVector
-          x          y          z
-   -0.16215 -0.0300373  0.0230693
-  -0.857658    1.43043     2.0161
-  -0.200306  -0.149829  -0.061015
+          x         y         z
+   -1.00725 -0.663954  0.324358
+  -0.474384 -0.212146  0.875155
+   0.744835   1.08231   1.53102
 {% endhighlight %}
 <p>Again we are able to change the tangent space</p>
 {% highlight matlab %}
@@ -208,45 +208,56 @@ ans = SO3VectorFieldHarmonic (1 → xyz)
   tangent space: leftVector
  
  
-ans = SO3VectorFieldHarmonic (Quartz → xyz)
+ans = SO3VectorFieldHarmonic (1 → xyz)
   bandwidth: 48
-  tangent space: leftVector
+  tangent space: rightVector
 {% endhighlight %}
-<p>Note that the symmetries do not work in the same way as for <a href="SO3Fun.SO3Fun.html">SO3Fun</a>'s. Dependent from the choosed tangent space representation (left/right) one of the symmetries has other properties.</p><p>In case of right tangent space the evaluation in symmetric orientations only make sense w.r.t. the left symmetry. In case of left tangent space vice versa.</p>
+<p>Note that the symmetries do not work in the same way as for <a href="SO3Fun.SO3Fun.html">SO3Fun</a>'s. Dependent from the chosen tangent space representation (left/right) one of the symmetries has other properties.</p><p>In case of right tangent space the evaluation in symmetric orientations only make sense w.r.t. the left symmetry. In case of left tangent space vice versa.</p>
 {% highlight matlab %}
 ori = orientation.rand(GL.CS,GL.SS)
 GR.eval(ori.symmetrise)
 GL.eval(ori.symmetrise)
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 
 {% highlight plaintext %}
 ori = orientation (Quartz → xyz)
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2
-  94.498 38.2404 301.373
+     phi1     Phi    phi2
+  215.332 119.003 270.806
  
  
 ans = SO3TangentVector
  size: 6 x 1
  TagentSpace: rightVector
-         x        y        z
-  -24.0013  2.35314  8.58653
-  -14.0385  19.6091 -8.58653
-   14.0385  19.6091  8.58653
-   24.0013  2.35314 -8.58653
-   9.96274 -21.9623  8.58653
-  -9.96274 -21.9623 -8.58653
+          x         y         z
+  -0.384057  -1.03362 -0.302917
+   0.703115  0.849415  0.302917
+  -0.703115  0.849415 -0.302917
+   0.384057  -1.03362  0.302917
+    1.08717  0.184208 -0.302917
+   -1.08717  0.184208  0.302917
  
 ans = SO3TangentVector
  size: 6 x 1
  TagentSpace: leftVector
-        x        y        z
-  -10.884 -11.3746  20.1863
-  -10.884 -11.3746  20.1863
-  -10.884 -11.3746  20.1863
-  -10.884 -11.3746  20.1863
-  -10.884 -11.3746  20.1863
-  -10.884 -11.3746  20.1863
+         x        y        z
+  0.897173 0.530842 0.470023
+  0.897173 0.530842 0.470023
+  0.897173 0.530842 0.470023
+  0.897173 0.530842 0.470023
+  0.897173 0.530842 0.470023
+  0.897173 0.530842 0.470023
 {% endhighlight %}
 </div></body></html>

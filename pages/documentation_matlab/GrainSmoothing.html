@@ -19,7 +19,7 @@ mtexdata csl
 ebsd(grains(grains.grainSize<2))=[];
 grains = ebsd.calcGrains;
 
-% the data was accquired on a regular grid;
+% the data was acquired on a regular grid;
 plot(ebsd,ebsd.orientations,'micronbar','off')
 hold on
 plot(grains.boundary('indexed'),'linewidth',5,'linecolor','YellowGreen')
@@ -40,7 +40,7 @@ ebsd = EBSD
 {% include inline_image.html file="GrainSmoothing_01.png" %}
 </center><p>With the default parameters we have the following result</p>
 {% highlight matlab %}
-% smooth the grains with default paramters
+% smooth the grains with default parameters
 grains_smooth = smooth(grains);
 
 hold on
@@ -61,7 +61,7 @@ ans =
 ans =
    1.7416e+04
 {% endhighlight %}
-<p>However, if we look at the frequnecy distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> performs just a single iteration</p>
+<p>However, if we look at the frequency distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> performs just a single iteration</p>
 {% highlight matlab %}
 histogram(grains_smooth.boundary('indexed').direction, ...
   'weights',grains_smooth.boundary('indexed').segLength,180)
@@ -119,4 +119,8 @@ end
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_07.png" %}
-</center><p>Be careful since this allows small grains to shrink with increasing number of smoothing iterations</p><p>Todo: different smoothing algorithms and 2nd order</p></div></body></html>
+</center><p>Be careful since this allows small grains to shrink with increasing number of smoothing iterations</p><p>Todo: different smoothing algorithms and 2nd order</p>
+{% highlight matlab %}
+ %#ok<*SAGROW>
+{% endhighlight %}
+</div></body></html>
