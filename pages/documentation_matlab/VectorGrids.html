@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Spherical Grids</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_VectorGrids.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Vectors/VectorGrids.m">
-    edit page</a></font><div><!--introduction--><!--/introduction-->
+    edit page</a></font><div><!--introduction--><!--/introduction--><p><b>The regular grid</b></p>
 {% highlight matlab %}
 grid1 = regularS2Grid('resolution',7*degree)
 
@@ -25,7 +25,7 @@ grid1 = S2Grid
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorGrids_01.png" %}
-</center>
+</center><p><b>The MTEX equispaced grid</b></p>
 {% highlight matlab %}
 grid2 = equispacedS2Grid('resolution',7*degree)
 
@@ -39,7 +39,7 @@ grid2 = S2Grid
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorGrids_02.png" %}
-</center>
+</center><p><b>The HealPix grid</b></p>
 {% highlight matlab %}
 grid3 = HEALPixS2Grid('resolution',7*degree)
 
@@ -52,11 +52,60 @@ grid3 = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorGrids_03.png" %}
-</center><h2 id="4">Comparison of Uniformity</h2>
+</center><p><b>The Fibonaci Grid</b></p>
 {% highlight matlab %}
-plot([grid1.calcDensity,grid2.calcDensity,grid3.calcDensity],'upper')
-mtexColorbar
+grid4 = fibonacciS2Grid('resolution',7*degree)
+
+plot(grid4,'upper')
+{% endhighlight %}
+
+{% highlight plaintext %}
+grid4 = fibonacciS2Grid
+ size: 827 x 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorGrids_04.png" %}
-</center></div></body></html>
+</center><h2 id="5">Comparison of Uniformity</h2><p>In order to compare the uniformity between the different grids we first perform a density estimation.</p>
+{% highlight matlab %}
+d(1) = grid1.calcDensity('halfwidth',5*degree);
+d(2) = grid2.calcDensity('halfwidth',5*degree);
+d(3) = grid3.calcDensity('halfwidth',5*degree);
+d(4) = grid4.calcDensity('halfwidth',5*degree)
+
+plot(d,'upper')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+d = S2FunHarmonic
+  size: 4 x 1
+  bandwidth: 48
+  isReal: true
+{% endhighlight %}
+<center>
+{% include inline_image.html file="VectorGrids_05.png" %}
+</center><p>We visually observe that there are quite some differences between the grids. We may also quantify the different to the uniform distribution by computing</p>
+{% highlight matlab %}
+norm(d-1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    4.0141
+    0.0317
+    0.0426
+    0.0201
+{% endhighlight %}
+<p>or</p>
+{% highlight matlab %}
+sum(abs(d-1))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    5.7668
+    0.0600
+    0.0674
+    0.0320
+{% endhighlight %}
+</div></body></html>
