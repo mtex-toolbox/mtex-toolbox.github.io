@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Transformation Texture</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TransformationTexture.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TransformationTexture.m">
-    edit page</a></font><div><h1>Transformation Texture</h1><p>During phase transformation or twinning the orientation of a crystal rapidly flips from an initial state <code class="language-plaintext highlighter-rouge">oriA</code> into a transformed state <code class="language-plaintext highlighter-rouge">oriB</code>. This relationship between the initial and transformed state can be described by an orientation relationsship <code class="language-plaintext highlighter-rouge">OR</code>. To make the situation more precise, we consider the phase transformation from austenite to ferrite via the Nishiyama Wassermann orientation relationship</p>
+    edit page</a></font><div><h1>Transformation Texture</h1><p>During phase transformation or twinning the orientation of a crystal rapidly flips from an initial state <code class="language-plaintext highlighter-rouge">oriA</code> into a transformed state <code class="language-plaintext highlighter-rouge">oriB</code>. This relationship between the initial and transformed state can be described by an orientation relationship <code class="language-plaintext highlighter-rouge">OR</code>. To make the situation more precise, we consider the phase transformation from austenite to ferrite via the Nishiyama Wassermann orientation relationship</p>
 {% highlight matlab %}
 % parent and child crystal symmetry
 csP = crystalSymmetry('432','mineral','Austenite');
@@ -31,7 +31,7 @@ oriA = orientation (Austenite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  265.859 67.5885  74.076
+  48.4641 88.1693 158.931
 {% endhighlight %}
 <p>is transformed in one of the following Ferrite orientations</p>
 {% highlight matlab %}
@@ -44,18 +44,18 @@ oriB = orientation (Ferrite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.421 103.843 27.5401
-  336.097 149.406 61.9742
-  64.0023 71.8827 289.081
-  357.606 59.5182 249.643
-  215.094 53.6437 186.433
-  84.0733 66.6251   101.9
-  217.332 73.0137 5.41418
-  126.898 147.392 138.223
-  130.516 42.9577 318.756
-  90.2652  158.15 285.282
-  17.3372 67.7702 60.7902
-  124.538 86.4803  206.73
+  88.1838 112.697  342.55
+  329.873 113.216 96.2497
+  56.3001 42.8593 249.448
+  292.141 26.4907 294.641
+   182.75  96.601 193.475
+   79.533 52.3014 53.6058
+  187.686 115.492 14.8591
+  41.1175 133.511 70.1362
+  128.625  66.109 272.324
+  18.7476  124.54 235.899
+  337.793 25.0672 73.1235
+   93.935 94.0384 163.898
 {% endhighlight %}
 <p>These 12 Ferrite orientations are called variants of the orientation relationship. Lets visualize them in a pole figure plot</p>
 {% highlight matlab %}
@@ -96,11 +96,11 @@ odfA = SO3FunRBF (Austenite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2  weight
-  265.859 67.5885  74.076       1
+  48.4641 88.1693 158.931       1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TransformationTexture_02.png" %}
-</center><p>We can draw some random orientations according this model ODF and apply the same commands <code class="language-plaintext highlighter-rouge">variants</code> to compute all transfomed orientations in one step</p>
+</center><p>We can draw some random orientations according this model ODF and apply the same commands <code class="language-plaintext highlighter-rouge">variants</code> to compute all transformed orientations in one step</p>
 {% highlight matlab %}
 % number of discrete orientations
 n = 10000;
@@ -144,7 +144,7 @@ odfB = SO3FunHarmonic (Ferrite → xyz)
 {% highlight matlab %}
 % texture index of the transformed ODF computed from discrete orientations
 odfBSim = calcDensity(oriBSim)
-textureindex(odfBSim)
+norm(odfBSim)^2
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -152,20 +152,16 @@ odfBSim = SO3FunHarmonic (Ferrite → xyz)
   bandwidth: 25
   weight: 1
  
-Warning: The command textureindex is depreciated! Please use squared norm
-instead. 
 ans =
-    3.4863
+    3.4889
 {% endhighlight %}
 
 {% highlight matlab %}
 % texture index of the directly computed transformed ODF
-textureindex(odfB)
+norm(odfB)^2
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: The command textureindex is depreciated! Please use squared norm
-instead. 
 ans =
    17.4509
 {% endhighlight %}

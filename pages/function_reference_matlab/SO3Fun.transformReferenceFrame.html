@@ -1,0 +1,49 @@
+---
+title: transformReferenceFrame
+
+sidebar: function_reference_sidebar
+permalink: SO3Fun.transformReferenceFrame.html
+folder: function_reference
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>transformReferenceFrame</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3Fun__transformReferenceFrame.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3Fun/transformReferenceFrame.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>change reference frame of an ODF</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+SO3F = transformReferenceFrame(SO3F,cs)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt>new <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2><p>cs1 = crystalSymmetry('121',[1 3 2]); cs2 = crystalSymmetry('112',[2 1 3]);</p><p>ori = orientation.rand(cs1) odf1 = SO3FunHarmonic(unimodalODF(ori)) %odf1 = BinghamODF([1 0 0 0],ori) %odf1 = SO3FunHandle(@(ori) odf1.eval(ori),odf1.CS) odf2 = transformReferenceFrame(odf1,cs2)</p><p>plotPDF(odf1,Miller({1,0,0},{0,0,1},{0,1,0},cs1)) nextAxis(2,1) plotPDF(odf2,Miller({0,1,0},{1,0,0},{0,0,1},cs2))</p></div></body></html>

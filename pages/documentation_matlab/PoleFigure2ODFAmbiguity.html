@@ -252,7 +252,6 @@ plotPDF(odf1,Miller({1,0,0},{0,1,0},{0,0,1},cs))
 {% highlight plaintext %}
 odf1 = SO3FunHarmonic (-1 → xyz)
   antipodal: true
-  isReal: true
   bandwidth: 9
   weight: 1
 {% endhighlight %}
@@ -281,7 +280,6 @@ legend('odf1','odf2')
 {% highlight plaintext %}
 odf2 = SO3FunHarmonic (-1 → xyz)
   antipodal: true
-  isReal: true
   bandwidth: 9
   weight: 1
 {% endhighlight %}
@@ -342,12 +340,12 @@ odf_rec1 = calcODF(pf,'silent')
 odf_rec1 = SO3FunRBF (-1 → xyz)
  
   <strong>uniform component</strong>
-  weight: 0.93
+  weight: 0.8
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 5°
   center: 119088 orientations, resolution: 5°
-  weight: 0.066
+  weight: 0.2
 {% endhighlight %}
 <p>This method can be switched off by the following command</p>
 {% highlight matlab %}
@@ -405,7 +403,6 @@ pf = calcPoleFigure(SantaFe,h,'antipodal');
 
 % plot them
 plot(pf,'MarkerSize',5)
-mtexColorMap LaboTeX
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_23.png" %}
@@ -422,12 +419,12 @@ rec2 = calcODF(pf,'NoGhostCorrection','silent')
 rec = SO3FunRBF (m-3m → xyz (222))
  
   <strong>uniform component</strong>
-  weight: 0.91
+  weight: 0.73
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 5°
   center: 1232 orientations, resolution: 5°
-  weight: 0.094
+  weight: 0.27
  
  
 rec2 = SO3FunRBF (m-3m → xyz (222))
@@ -440,21 +437,22 @@ rec2 = SO3FunRBF (m-3m → xyz (222))
 <p>For both reconstruction recalculated pole figures look the same as the initial pole figures</p>
 {% highlight matlab %}
 figure(1)
-plotPDF(rec,pf.h,'antipodal')
-mtexColorMap LaboTeX
+plotPDF(rec,pf.h,'antipodal','complete','upper')
+mtexColorMap parula
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_24.png" %}
 </center>
 {% highlight matlab %}
 figure(2)
-plotPDF(rec2,pf.h,'antipodal')
-mtexColorMap LaboTeX
+plotPDF(rec2,pf.h,'antipodal','complete','upper')
+mtexColorMap parula
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigure2ODFAmbiguity_25.png" %}
 </center><p>However if we look at the ODF we see big differences. The so-called ghosts.</p>
 {% highlight matlab %}
+close all
 figure(1)
 plot(rec,'gray','contourf')
 mtexColorMap white2black

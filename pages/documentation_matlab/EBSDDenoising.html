@@ -92,7 +92,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_03.png" %}
-</center><p>We clearly see how the noise has been reduces. In order to further reduce the noise we may increase the number of neighbours that are taken into account.</p>
+</center><p>We clearly see how the noise has been reduces. In order to further reduce the noise we may increase the number of neighbors that are taken into account.</p>
 {% highlight matlab %}
 F.numNeighbours = 3;
 
@@ -150,7 +150,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_06.png" %}
-</center><h2 id="9">The Smoothing Spline Filter</h2><p>All the above filters are so called sliding windows filters which consider for the denoising operation only neighboring orientations within a certain window. The next filters belong to the class of variational filters which determine the denoised orientation map as the solution of an minimization problem that is simultanously close to the original map and "smooth". The resulting orientation map heavily depends on the specific definition of "smooth" and on the regularization parameter which controls the trade of between fitting the original data and forcing the resulting map to be smooth.</p><p>The @splineFilter uses as definition of smoothnes the curvature of the orientation map. As a cosequence, the denoised images are very "round" and similarly as for the @meanFilter subgrain boundaries will be smoothed away. On the positive side the @meanFilter is up to now the only filter that automatically calibrates the regularization parameter.</p>
+</center><h2 id="9">The Smoothing Spline Filter</h2><p>All the above filters are so called sliding windows filters which consider for the denoising operation only neighboring orientations within a certain window. The next filters belong to the class of variational filters which determine the denoised orientation map as the solution of an minimization problem that is simultaneously close to the original map and "smooth". The resulting orientation map heavily depends on the specific definition of "smooth" and on the regularization parameter which controls the trade of between fitting the original data and forcing the resulting map to be smooth.</p><p>The @splineFilter uses as definition of smoothness the curvature of the orientation map. As a consequence, the denoised images are very "round" and similarly as for the @meanFilter subgrain boundaries will be smoothed away. On the positive side the @meanFilter is up to now the only filter that automatically calibrates the regularization parameter.</p>
 {% highlight matlab %}
 F = splineFilter;
 
@@ -176,7 +176,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_07.png" %}
-</center><h2 id="10">The Halfquadratic Filter</h2><p>In the default setting the @halfQuadraticFilter uses definition of smoothnes the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the @medianFilter it tends to carton like images and staircasing.</p>
+</center><h2 id="10">The Halfquadratic Filter</h2><p>In the default setting the @halfQuadraticFilter uses definition of smoothness the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the @medianFilter it tends to carton like images and staircasing.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 
@@ -194,7 +194,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_08.png" %}
-</center><h2 id="11">The Infimal Convolution Filter</h2><p>The infimal convolution filter was designed as a compromise between the @splineFilter and the @halfQuadraticFilter. It is still under deveopment and its use is not recommendet.</p>
+</center><h2 id="11">The Infimal Convolution Filter</h2><p>The infimal convolution filter was designed as a compromise between the @splineFilter and the @halfQuadraticFilter. It is still under development and its use is not recommended.</p>
 {% highlight matlab %}
 F = infimalConvolutionFilter;
 F.lambda = 0.01; % smoothing parameter for the gradient

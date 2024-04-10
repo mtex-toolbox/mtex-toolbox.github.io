@@ -32,23 +32,23 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul class="no_bullet">
-				   	<li>
-                        09/23 &minus;
-						{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta2/mtex-6.0.beta2.zip" content="MTEX 6.0.beta2" download=true %}
-                        released:
-                        {% include reference.html link="changelog#1" content="Release Notes" %}
-                    </li>
    					<li>
-                        09/23 &minus;
-						{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.10.2/mtex-5.10.2.zip" content="MTEX 5.10.2" download=true %}
+                        03/24 &minus;
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.11.1/mtex-5.11.1.zip" content="MTEX 5.11.1" download=true %}
+                        released:
+                        {% include reference.html link="changelog#2" content="Release Notes" %}
+                    </li>
+				    <li>
+                        03/24 &minus;
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta3/mtex-6.0.beta3.zip" content="MTEX 6.0.beta3" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
 					<li>
-						3/23 &minus;
-						{% include reference.html link="workshop23?" content="MTEX Workshop 23" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/519#discussioncomment-4260917" content="Announcement" %}
-                    </li>					
+						3/24 &minus;
+						{% include reference.html link="workshop24?" content="MTEX Workshop 24" %}:
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1948" content="Announcement" %}
+                    </li>				   	
                     <li>
                         9/22 &minus; newly designed homepage
                     </li>
@@ -329,6 +329,8 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul>
+					<li>{% include reference.html link="https://www.sciencedirect.com/science/article/pii/S135964542300366X/pdfft?md5=cd5b4d579996e89cf4ba96bdee90fad4&pid=1-s2.0-S135964542300366X-main.pdf" content="Habit plane determination from reconstructed parent phase
+    orientation maps" %}</li>
                     <li>{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="The variant graph approach to improved parent grain reconstruction" %}</li>
                     <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" content="Parent grain reconstruction from partially or fully transformed microstructures in MTEX" %}</li>
                     <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" content="Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere" %}</li>
