@@ -12,11 +12,13 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>approximation</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunHarmonic__approximation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunHarmonic/approximation.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>computes a least square problem to get an approximation</p><h2 id="3">Syntax</h2>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>approximate an SO3FunHarmonic by given function values at given nodes w.r.t. some noise.</p><p>For \(M\) given orientations \(R_i\) and corresponding function values \(y_i\) we compute the SO3FunHarmonic \(f\) of an specific bandwidth which minimizes the least squares problem</p><p>\[\min_f \sum_{i=1}^M <code class="language-plaintext highlighter-rouge">f(R_i) - y_i</code>^2.\]</p><p>If the oversampling factor is small (high bandwidth) it may be necessary to assure decay of the harmonic coefficents. Therefore we regularize the least squares problem by the Sobolev norm of f, i.e</p><p>\[\min_f \sum_{i=1}^M <code class="language-plaintext highlighter-rouge">f(R_i) - y_i</code>^2 + \lambda \|f\|^2_{H^s}\]</p><p>where \(\lambda\) is the regularization parameter and \(s\) the Sobolev index. The Sobolev norm of an SO3FunHarmonic with harmonic coefficients \(\hat{f}\) reads as</p><p>\[\|f\|^2_{H^s} = \sum_{n=0}^N (2n+1)^{2s} \, \sum_{k,l=-n}^n \abs{\hat{f}_n^{k,l}}^2.\]</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f)
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f,'constantWeights')
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'bandwidth', bandwidth, 'tol', TOL, 'maxit', MAXIT, 'weights', W)
+SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'regularization')
+SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'regularization',0.1,'SobolevIndex',1)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -92,7 +94,7 @@ SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'bandwidth', bandwidth, 'tol', T
             <tt>SobolevIndex</tt>
          </td>
          <td>
-            <tt>for regularization (default = 1)</tt>
+            <tt>for regularization (default = 2)</tt>
          </td>
       </tr>
    </table>
