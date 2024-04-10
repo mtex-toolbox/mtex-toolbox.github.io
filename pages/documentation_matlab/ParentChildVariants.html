@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Parent Child Variants</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ParentChildVariants.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/ParentChildVariants.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The crystallographic structure of most materials is dependend on external conditions as temperature and pressure. When the external conditions change the crystals may undergo a phase transition from the inital phase, often called parent phase, into the child phase. While both phases still have the same chemical composition their crystallographic structure might be quite different. A typical example are the alpha and beta phase of titanium. While the parent beta phase is cubic</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>The crystallographic structure of most materials is depended on external conditions as temperature and pressure. When the external conditions change the crystals may undergo a phase transition from the initial phase, often called parent phase, into the child phase. While both phases still have the same chemical composition their crystallographic structure might be quite different. A typical example are the alpha and beta phase of titanium. While the parent beta phase is cubic</p>
 {% highlight matlab %}
 csBeta = crystalSymmetry('432',[3.3 3.3 3.3],'mineral','Ti (beta)');
 {% endhighlight %}
@@ -24,7 +24,7 @@ csAlpha = crystalSymmetry('622',[3 3 4.7],'mineral','Ti (alpha)');
 {% highlight matlab %}
 oriParent = orientation.rand(csBeta);
 {% endhighlight %}
-<p>be the orientation of the atomic lattice befor phase transition and <code class="language-plaintext highlighter-rouge">oriChild</code> the orientation of the atomic lattice after the phase transition. Since during a phase transition the atoms reorder with respect to a minimal energy constraint, both orientations <code class="language-plaintext highlighter-rouge">oriParent</code> and <code class="language-plaintext highlighter-rouge">oriChild</code> are in a specific orientation relationship with respect to each other. In the case of alpha and beta Titanium the dominant orientation relationship is described by the Burger orientation relationship</p>
+<p>be the orientation of the atomic lattice before phase transition and <code class="language-plaintext highlighter-rouge">oriChild</code> the orientation of the atomic lattice after the phase transition. Since during a phase transition the atoms reorder with respect to a minimal energy constraint, both orientations <code class="language-plaintext highlighter-rouge">oriParent</code> and <code class="language-plaintext highlighter-rouge">oriChild</code> are in a specific orientation relationship with respect to each other. In the case of alpha and beta Titanium the dominant orientation relationship is described by the Burger orientation relationship</p>
 {% highlight matlab %}
 beta2alpha = orientation.Burgers(csBeta,csAlpha)
 {% endhighlight %}
@@ -44,9 +44,9 @@ oriChild = orientation (Ti (alpha) → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  238.376 2.34782 37.1386
+  261.104 66.2529 236.292
 {% endhighlight %}
-<p>This orientation relationship is characterised by alignment of hexagonal (0001) plane with the cubic (110) plane and alignment of the hexagonal [2-1-10] direction with the cubic [-11-1] direction.</p>
+<p>This orientation relationship is characterized by alignment of hexagonal (0001) plane with the cubic (110) plane and alignment of the hexagonal [2-1-10] direction with the cubic [-11-1] direction.</p>
 {% highlight matlab %}
 % (110) / (0001) pole figure
 plotPDF(oriParent,Miller(1,1,0,csBeta),...
@@ -84,7 +84,7 @@ oriParentSym = oriParent.symmetrise
 oriParentSym = orientation (Ti (beta) → xyz)
   size: 24 x 1
 {% endhighlight %}
-<p>Applying the <code class="language-plaintext highlighter-rouge">beta2alpha</code> phase relationship to these 24 different represenations we obtain 24 child orientations.</p>
+<p>Applying the <code class="language-plaintext highlighter-rouge">beta2alpha</code> phase relationship to these 24 different representations we obtain 24 child orientations.</p>
 {% highlight matlab %}
 oriChild = oriParentSym * inv(beta2alpha)
 {% endhighlight %}
@@ -122,8 +122,8 @@ oriChild = orientation (Ti (alpha) → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  58.3761 177.652 132.333
-  65.6933 57.6708 319.126
+  11.8095 155.789 128.635
+  27.7322 36.4051 312.007
 {% endhighlight %}
 <p>It is important to understand that the reduction to 12 variants from 24 symmetrically equivalent parent orientations comes from the specific Burger orientation relationship. For a general orientation relationship, e.g., if we disturb the OR a little bit</p>
 {% highlight matlab %}
@@ -135,7 +135,7 @@ beta2alpha = misorientation (Ti (beta) → Ti (alpha))
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  184.253 89.8576  44.172
+  185.268 88.0499 45.4066
 {% endhighlight %}
 <p>we will always have exactly 24 variants. For the above example we observe how the 12 pairs of orientations which diverge slightly.</p>
 {% highlight matlab %}

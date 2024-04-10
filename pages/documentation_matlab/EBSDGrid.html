@@ -75,7 +75,7 @@ ans = EBSD
  13613       1    156   101    239      10   149   133       0   0.7   29.7   14.7    8283
  Scan unit : um
 {% endhighlight %}
-<p>It is important to understand that the property of beeing shaped as a matrix is lost as soon as we <a href="EBSDSelect.html">select</a> a subset of data</p>
+<p>It is important to understand that the property of being shaped as a matrix is lost as soon as we <a href="EBSDSelect.html">select</a> a subset of data</p>
 {% highlight matlab %}
 ebsdMg = ebsd('Magnesium')
 {% endhighlight %}
@@ -104,18 +104,18 @@ ebsdMg = EBSDsquare
  Scan unit : um
  Grid size (square): 137 x 167
 {% endhighlight %}
-<p>The difference between both matrix shapes EBSD variables <b>ebsd</b> and <b>ebsdMg</b> is that not indexed pixels in <b>ebsd</b> are stored as the seperate phase <b>notIndexed</b> while in <b>ebsdMg</b> all pixels have phase Magnesium but the Euler angles of the not indexed pixels are set to nan. This allows to select and plot subregions of the EBSD in a very intuitive way by</p>
+<p>The difference between both matrix shapes EBSD variables <code class="language-plaintext highlighter-rouge">ebsd</code> and <code class="language-plaintext highlighter-rouge">ebsdMg</code> is that not indexed pixels in <code class="language-plaintext highlighter-rouge">ebsd</code> are stored as the separate phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> while in <code class="language-plaintext highlighter-rouge">ebsdMg</code> all pixels have phase Magnesium but the Euler angles of the not indexed pixels are set to <code class="language-plaintext highlighter-rouge">nan</code>. This allows to select and plot subregions of the EBSD map in a very intuitive way by</p>
 {% highlight matlab %}
 plot(ebsdMg(50:100,5:100),ebsdMg(50:100,5:100).orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_02.png" %}
-</center><h2 id="8">The Gradient</h2>
+</center><h2 id="8">The Gradient</h2><p>Data on a square or hexagonal grid has the additional advantage to allow the computation of the orientations gradient, the incomplete Nye tensor, as well the weighted Burgers vector.</p>
 {% highlight matlab %}
 gradX = ebsdMg.gradientX;
 
 plot(ebsdMg,norm(gradX))
-caxis([0,4*degree])
+setColorRange([0,4*degree])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_03.png" %}
@@ -144,7 +144,7 @@ grains = grain2d
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      0     751   16116   Copper       432                         
  
- boundary segments: 12326 (37010 µm)
+ boundary segments: 12326 (37017 µm)
  inner boundary segments: 4 (12 µm)
  triple points: 1266
  
@@ -192,6 +192,8 @@ unitCell = [-2.5 -2.5; -2.5 2.5; 2.5 2.5; 2.5 -2.5];
 ebsdS = ebsd.gridify('unitCell',unitCell)
 
 % visualize the result
+plot(ebsd,ebsd.orientations)
+nextAxis
 plot(ebsdS, ebsdS.orientations)
 {% endhighlight %}
 
@@ -208,7 +210,7 @@ ebsdS = EBSDsquare
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_07.png" %}
-</center><p>In the above example we have chosen the square unit cell to have approximately the same size as the hexgonal unit cell. This leads to quite some distortions as squares can not reproduces all the shapes of the hexagones. We can reduce this issue by chosing the quare unit cell significantly smaller then the hexagonal unit cell.</p>
+</center><p>In the above example we have chosen the square unit cell to have approximately the same size as the hexagonal unit cell. This leads to quite some distortions as squares can not reproduces all the shapes of the hexagons. We can reduce this issue by choosing the square unit cell significantly smaller then the hexagonal unit cell.</p>
 {% highlight matlab %}
 % a smaller unit cell
 unitCell = [-1 -1; -1 1; 1 1; 1 -1];
@@ -235,9 +237,9 @@ ebsdS = EBSDsquare
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_08.png" %}
-</center><p>It is important to understand that the command <a href="EBSD.gridify.html">gridify</a> does not increase the number of data points. As a consquence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html">fill</a> which performs nearest neighbour interpolation or the command <a href="EBSD.smooth">smooth</a> which allows for more suffisticated interpolation methods.</p>
+</center><p>It is important to understand that the command <a href="EBSD.gridify.html">gridify</a> does not increase the number of data points. As a consequence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html">fill</a> which performs nearest neighbor interpolation or the command <a href="EBSD.smooth">smooth</a> which allows for more sophisticated interpolation methods.</p>
 {% highlight matlab %}
-% nearest neigbour interpolation
+% nearest neighbor interpolation
 ebsdS1 = fill(ebsdS,grains)
 
 plot(ebsdS1('indexed'),ebsdS1('indexed').orientations)
@@ -261,11 +263,12 @@ ebsdS1 = EBSDsquare
 {% include inline_image.html file="EBSDGrid_09.png" %}
 </center>
 {% highlight matlab %}
-% interpolation using a TV regularisation term
+% interpolation using a TV regularization term
 F = halfQuadraticFilter;
 F.alpha = 0.5;
 ebsdS2 = smooth(ebsdS,F,'fill',grains)
 
+nextAxis
 plot(ebsdS2('indexed'),ebsdS2('indexed').orientations)
 hold on
 plot(grains.boundary,'lineWidth',2)
@@ -307,7 +310,7 @@ ebsd = EBSDhex
 ebsdG = EBSDhex
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0   15300 (58%)   Copper  LightSkyBlue       432                         
+     0   15302 (58%)   Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, oldId
  Scan unit : um
@@ -320,13 +323,24 @@ ebsdG = EBSDhex
 ebsdGF = fill(ebsdG)
 
 plot(ebsdGF,ebsdGF.orientations)
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 
 {% highlight plaintext %}
 ebsdGF = EBSDhex
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0   16205 (61%)   Copper  LightSkyBlue       432                         
+     0   16210 (61%)   Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, oldId
  Scan unit : um

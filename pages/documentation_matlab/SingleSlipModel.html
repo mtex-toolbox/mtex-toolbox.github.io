@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Sigle Slip Model</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SingleSlipModel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SingleSlipModel.m">
-    edit page</a></font><div><!--introduction--><p>Details to this model can be found in</p><div><ul><li><a href="https://doi.org/10.1093/gji/ggy442">An analytical finite-strain parametrization for texture evolution in deforming olivine polycrystals</a>, Geoph. J. Intern. 216, 2019.</li></ul></div><!--/introduction--><h2 id="1">The Continuity Equation</h2><p>The evolution of the orientation distribution function (ODF) \(f(g)\) with respect to a crystallopgraphic spin \(\Omega(g)\) is governed by the continuity equation</p><p>\[\frac{\partial}{\partial t} f + \nabla f \cdot \Omega + f \text{ div } \Omega = 0\]</p><p>The solution of this equation depends on the initial texture \(f_0(g)\) at time zero and the crystallographic spin \(\Omega(g)\). In this model we assume the initial texture to be isotrope, i.e., \(f_0 = 1\) and the crystallopgraphic spin be associated with a single slip system. The full ODF will be later modelled as a superposition of the single slip models.</p><p>In this example we consider Olivine with has orthorhombic symmetry</p>
+    edit page</a></font><div><!--introduction--><p>Details to this model can be found in</p><div><ul><li><a href="https://doi.org/10.1093/gji/ggy442">An analytical finite-strain parametrization for texture evolution in deforming olivine polycrystals</a>, Geoph. J. Intern. 216, 2019.</li></ul></div><!--/introduction--><h2 id="1">The Continuity Equation</h2><p>The evolution of the orientation distribution function (ODF) \(f(g)\) with respect to a crystallographic spin \(\Omega(g)\) is governed by the continuity equation</p><p>\[\frac{\partial}{\partial t} f + \nabla f \cdot \Omega + f \text{ div } \Omega = 0\]</p><p>The solution of this equation depends on the initial texture \(f_0(g)\) at time zero and the crystallographic spin \(\Omega(g)\). In this model we assume the initial texture to be isotropic, i.e., \(f_0 = 1\) and the crystallographic spin be associated with a single slip system. The full ODF will be later modeled as a superposition of the single slip models.</p><p>In this example we consider Olivine with has orthorhombic symmetry</p>
 {% highlight matlab %}
 csOli = crystalSymmetry('222',[4.779 10.277 5.995],'mineral','olivine');
 csOrtho = crystalSymmetry('222',[18.384, 8.878, 5.226],'mineral','orthopyroxene');
@@ -52,16 +52,17 @@ S = tensor (olivine)
 {% endhighlight %}
 <p>and make for the orientation dependent strain rate tensor \(e(g)\) the ansatz \(e_{ij}(g) = \gamma(g) S_{ij}(g)\). Fitting this ansatz to a given a macroscopic strain tensor</p>
 {% highlight matlab %}
-E = strainRateTensor([1 0 0; 0 0 0; 0 0 -1])
+E = 0.3 * strainRateTensor([1 0 0; 0 0 0; 0 0 -1])
 {% endhighlight %}
 
 {% highlight plaintext %}
 E = strainRateTensor (xyz)
   rank: 2 (3 x 3)
  
-  1  0  0
-  0  0  0
-  0  0 -1
+ *10^-2
+  30   0   0
+   0   0   0
+   0   0 -30
 {% endhighlight %}
 <p>via minimizing the square difference</p><p>\[\int_{SO(3)} \sum_{i,j} (e_{i,j}(g) - E_{i,j})^2 dg \to \text{min}\]</p><p>the orientation dependent strain rate tensor is identified as</p><p>\[e(g) = 2 \left&lt; S(g), E \right&gt; S(g)\]</p><p>and the corresponding crystallographic spin tensor as</p><p>\[\Omega_i(g) = \epsilon_{ijk} e_{jk}(g)\]</p><p>This can be modeled in MTEX via</p>
 {% highlight matlab %}
@@ -72,16 +73,18 @@ E = strainRateTensor (xyz)
 % this is in specimen coordinates
 Omega = @(ori) -SO3TangentVector(spinTensor(((ori * S(2)) : E) .* (ori * S(2))));
 
+% turn in into a harmonic function
 Omega = SO3VectorFieldHarmonic.quadrature(Omega,csOli)
 {% endhighlight %}
 
 {% highlight plaintext %}
 Omega = SO3VectorFieldHarmonic (olivine → xyz)
   bandwidth: 3
+  tangent space: leftVector
 {% endhighlight %}
 
 {% highlight matlab %}
-% We may visualize the orientation depedence of the spin tensor by plotting
+% We may visualize the orientation dependence of the spin tensor by plotting
 % its divergence in sigma sections and on top of it the spin tensors as a
 % quiver plot
 
@@ -95,7 +98,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SingleSlipModel_01.png" %}
-</center><p>The divergence plots can be read as follows. Negative (blue) regions indicate orientations that increase in volume, whereas positive regions indicate orientations that decrease in volume. Accordingly, we expect the texture to become more and more concentrated within the blue regions. In the example example illustrated above with only the second slip system beeing active, we would expect the c-axis to align more and more with the the z-direction.</p><h2 id="9">Solutions of the Continuity Equation</h2><p>The solutions of the continuity equation can be analytically computed and are available via the command <a href="SO3FunSBF.SO3FunSBF.html"><code class="language-plaintext highlighter-rouge">SO3FunSBF</code></a>. This command takes as input the specific slips system <code class="language-plaintext highlighter-rouge">sS</code> and the makroscopic strain tensor <code class="language-plaintext highlighter-rouge">E</code></p>
+</center><p>The divergence plots can be read as follows. Negative (blue) regions indicate orientations that increase in volume, whereas positive regions indicate orientations that decrease in volume. Accordingly, we expect the texture to become more and more concentrated within the blue regions. In the example example illustrated above with only the second slip system being active, we would expect the c-axis to align more and more with the the z-direction.</p><h2 id="9">Solutions of the Continuity Equation</h2><p>The solutions of the continuity equation can be analytically computed and are available via the command <a href="SO3FunSBF.SO3FunSBF.html"><code class="language-plaintext highlighter-rouge">SO3FunSBF</code></a>. This command takes as input the specific slips system <code class="language-plaintext highlighter-rouge">sS</code> and the macroscopic strain tensor <code class="language-plaintext highlighter-rouge">E</code></p>
 {% highlight matlab %}
 odf1 = SO3FunSBF(sSOli(1),E)
 odf2 = SO3FunSBF(sSOli(2),E)
@@ -107,26 +110,28 @@ odf4 = SO3FunSBF(sSOrtho,E)
 odf1 = SO3FunSBF (olivine → xyz)
  
     slip system: (010)[100]
-    strain:      1 0 -1
+    strain:      0.3 0 -0.3
  
 odf2 = SO3FunSBF (olivine → xyz)
  
     slip system: (001)[100]
-    strain:      1 0 -1
+    strain:      0.3 0 -0.3
  
 odf3 = SO3FunSBF (olivine → xyz)
  
     slip system: (010)[001]
-    strain:      1 0 -1
+    strain:      0.3 0 -0.3
  
 odf4 = SO3FunSBF (orthopyroxene → xyz)
  
     slip system: (100)[001]
-    strain:      1 0 -1
+    strain:      0.3 0 -0.3
 {% endhighlight %}
 <p>Lets check our expectation from the last paragraph by visualizing the odf corresponding to the second slip system in sigma sections</p>
 {% highlight matlab %}
+figure(1)
 plotSection(odf2,'sigma')
+mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SingleSlipModel_02.png" %}
@@ -139,28 +144,57 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SingleSlipModel_03.png" %}
-</center><p>For completeness the pole figures of the other two basis functions.</p>
+</center><p>We could also have computed the solution of the continuity equation numerically. To this end we utilize the command <a href="doEulerStep.html"><code class="language-plaintext highlighter-rouge">doEulerStep</code></a> which takes as input the crystallographic spin tensor <code class="language-plaintext highlighter-rouge">Omega</code>, the initial odf <code class="language-plaintext highlighter-rouge">odf0</code> and the number of iterations to be performed.</p>
+{% highlight matlab %}
+% the starting ODF
+odf0 = uniformODF(csOli);
+
+% the transformed ODF
+odf = doEulerStep(2*Omega,odf0,40)
+
+figure(2)
+plot(odf,'sigma')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+odf = SO3FunHarmonic (olivine → xyz)
+  bandwidth: 28
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SingleSlipModel_04.png" %}
+</center><p>Indeed the error between the numerical solution and the theoretical solution is neglectable small. We may quantify the difference by</p>
+{% highlight matlab %}
+mean(abs(odf - odf2))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.0011
+{% endhighlight %}
+<p>For completeness the pole figures of the other two basis functions.</p>
 {% highlight matlab %}
 plotPDF(odf1,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SingleSlipModel_04.png" %}
+{% include inline_image.html file="SingleSlipModel_05.png" %}
 </center>
 {% highlight matlab %}
 plotPDF(odf3,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SingleSlipModel_05.png" %}
+{% include inline_image.html file="SingleSlipModel_06.png" %}
 </center><p>We observe that the pole figure with respect to \(n \times b\) is always uniform, where \(n\) is the slip normal and \(b\) is the slip direction.</p><p>Since in practice all three slip systems are active we can model the resulting ODF as a linear combination of the different basis functions</p>
 {% highlight matlab %}
 plotPDF(odf1 + odf2 + odf3,h,'resolution',2*degree,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SingleSlipModel_06.png" %}
-</center><h2 id="16">Checking the for steady state</h2><p>We may also check for which orientations an ODF is already in a steady state of the continous equation, i.e., the time derivative \(\text{div}(f \Omega) = 0\) is zero.</p>
+{% include inline_image.html file="SingleSlipModel_07.png" %}
+</center><h2 id="18">Checking the for steady state</h2><p>We may also check for which orientations an ODF is already in a steady state of the continuity equation, i.e., the time derivative \(\text{div}(f \Omega) = 0\) is zero.</p>
 {% highlight matlab %}
 plotSection(div(odf2 .* Omega),'sigma')
 mtexColorMap blue2red
@@ -168,5 +202,5 @@ mtexColorbar
 setColorRange(max(abs(clim))*[-1,1])
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SingleSlipModel_07.png" %}
+{% include inline_image.html file="SingleSlipModel_08.png" %}
 </center></div></body></html>

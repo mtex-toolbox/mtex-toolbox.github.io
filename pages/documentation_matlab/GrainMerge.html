@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Merging Grains</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be usefull when reconstructing parent grain structures, i.e., before phase transistion or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magenesium data and reconstructing the grain structure:</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be useful when reconstructing parent grain structures, i.e., before phase transition or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magnesium data and reconstructing the grain structure:</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins silent
@@ -60,7 +60,7 @@ twinBoundary = grainBoundary
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_02.png" %}
-</center><h2 id="3">Merge grains along boundaries</h2><p>The command <a href="grain2d.merge.html">merge</a> will merge grains together that have a commong boundary which is specified as the second argument. In our example we want to merge all grains that have a common twinning boundary so we do</p>
+</center><h2 id="3">Merge grains along boundaries</h2><p>The command <a href="grain2d.merge.html">merge</a> will merge grains together that have a common boundary which is specified as the second argument. In our example we want to merge all grains that have a common twinning boundary so we do</p>
 {% highlight matlab %}
 [mergedGrains,parentId] = merge(grains,twinBoundary);
 
@@ -104,9 +104,9 @@ childs = grain2d
  24       1      774    178    90    235    0.0102946
  28       1       45     80    25    188    0.0108147
  29       1      293     94   145    185   0.00913161
- 33       1      250    179    89    235    0.0107513
+ 33       1      250    179    89    235    0.0107569
 {% endhighlight %}
-<h2 id="6">Estimate twin area fraction</h2><p>Determining which of the measured grains are orginal grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
+<h2 id="6">Estimate twin area fraction</h2><p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
 {% highlight matlab %}
 % extract grain area for faster access
 gArea = grains.area;
@@ -150,10 +150,10 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_04.png" %}
-</center><p>The <code class="language-plaintext highlighter-rouge">parentId</code> may also be used to compute properties of the parent grains by averaging over the corresponding child grain properties. This can be done with the Matlab command <a href="mathworks.com/help/matlab/ref/accumarray.html">accumarray</a></p>
+</center><p>The <code class="language-plaintext highlighter-rouge">parentId</code> may also be used to compute properties of the parent grains by averaging over the corresponding child grain properties. This can be done with the MATLAB command <a href="mathworks.com/help/matlab/ref/accumarray.html">accumarray</a></p>
 {% highlight matlab %}
 % this averages the GOS of the child grains into the parent grains
-mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@nanmean);
+mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@mean);
 
 % visualize the result
 close all
@@ -161,13 +161,12 @@ plot(grains,grains.GOS ./ degree)
 hold on
 plot(mergedGrains.boundary,'lineColor','white','lineWidth',2)
 mtexTitle('original GOS')
-mtexColorbar
 
-nextAxis
+nextAxis(1,2)
 plot(mergedGrains,mergedGrains.GOS  ./ degree)
 mtexTitle('merged GOS')
 mtexColorbar
-caxis([0,1.5])
+setColorRange([0,1.5])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_05.png" %}
@@ -181,11 +180,8 @@ childArea = grains.area;
 mergedGrains.prop.GOS = accumarray(parentId,1:length(grains),size(mergedGrains),...
   @(id) nanmeanWeights(childGOS(id),childArea(id)));
 
-nextAxis(2), hold on
+nextAxis(1,3), hold on
 plot(mergedGrains,mergedGrains.GOS  ./ degree)
-setColorRange equal
-mtexColorbar
-caxis([0,1.5])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_06.png" %}
