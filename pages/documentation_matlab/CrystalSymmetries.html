@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Crystal Symmetries</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_CrystalSymmetries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalSymmetries.m">
-    edit page</a></font><div><!--introduction--><p>Crystal symmetries are a sets of rotations and mirroring operations that leave the lattice of a crystal invariant. They form so called groups since the concatenation of two symmetry operations is again a symmetry operation.</p><p>Depending which symmetry operations are coonsidered the symmetry groups are categorized either into 230 space groups, 32 point groups or 11 Laue groups.</p><!--/introduction--><h2 id="1">Purely enatiomorphic (rotational) symmetry groups</h2><p>There exist exactly 11 symmetry groups consisting of proper rotations only, namely, 1, 2, 222, 3, 23, 4, 422, 6, 622, 32, 432. These are the so called enatiomorphic groups. All the groups can be defined in MTEX either by its international notation</p>
+    edit page</a></font><div><!--introduction--><p>Crystal symmetries are sets of rotations and mirroring operations that leave the lattice of a crystal invariant. They form the so called "groups" since the concatenation of two symmetry operations is again a symmetry operation.</p><p>Depending which symmetry operations are considered, the symmetry groups are categorized either into 230 space groups, 32 point groups or 11 Laue groups.</p><!--/introduction--><h2 id="1">Purely enantiomorphic (rotational) symmetry groups</h2><p>There exist exactly 11 symmetry groups consisting of proper rotations only, namely, 1, 2, 222, 3, 23, 4, 422, 6, 622, 32, 432. These are the so called enantiomorphic groups. All the groups can be defined in MTEX either by its international notation</p>
 {% highlight matlab %}
 cs = crystalSymmetry('432')
 {% endhighlight %}
@@ -68,7 +68,7 @@ ans = crystalSymmetry
   elements: 48     
   a, b, c : 1, 1, 1
 {% endhighlight %}
-<p>Since all Laue groups can be derived from the 11 enantiomorphic groups there are also 11 Laue groups, namely -1, 2/m, mmm, -3, -3m, -4/m, 4/mmm, 6/m, 6/mmm, m-3, m-3m.</p><p>The Laue groups have always exactly twice as many symmetry elements as the corresponding enantiomorphic group. As the following example illustrates each symmetry element from the enantiomorphic group occurs two times - with and without inversion - in the corresponding Laue group.</p>
+<p>Since all Laue groups can be derived from the 11 enantiomorphic groups there are also 11 Laue groups, namely -1, 2/m, mmm, -3, -3m, -4/m, 4/mmm, 6/m, 6/mmm, m-3, m-3m.</p><p>The Laue groups have always exactly twice as many symmetry elements as the corresponding enantiomorphic group. As the following example illustrates, each symmetry element from the enantiomorphic group occurs twice - with and without inversion - in the corresponding Laue group.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('222');
 rotation(cs)
@@ -101,7 +101,7 @@ ans = rotation
    180    0    0    1
     45  180  225    1
 {% endhighlight %}
-<h2 id="6">Point groups</h2><p>While the enantiomorphic groups contain exclusivly proper rotations and Laue groups contain a proper and an improper version of each rotation, there are also symmetry groups with improper rotations that do not contain the inversion, e.g. the point group mm2</p>
+<h2 id="6">Point groups</h2><p>While the enantiomorphic groups contain exclusively proper rotations and Laue groups contain a proper and an improper version of each rotation, there are also symmetry groups with improper rotations that do not contain the inversion, e.g. the point group mm2</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mm2')
 rotation(cs)
@@ -159,7 +159,7 @@ mtexTitle(char(cs.properSubGroup,'LaTex'))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalSymmetries_05.png" %}
-</center><h2 id="9">Alignment of the symmetry operations</h2><p>Although in general only 32 point groups are distingished, some of them allow for different alignments of the symmetry operations with respect to the crystal axes. The following plots show three different alignments of the point group 2mm. Note that the a-axis points in all three case towards south.</p>
+</center><h2 id="9">Alignment of the symmetry operations</h2><p>Although in general only 32 point groups are distinguished, some of them allow for different alignments of the symmetry operations with respect to the crystal axes. The following plots show three different alignments of the point group 2mm. Note that the a-axis points in all three case towards south.</p>
 {% highlight matlab %}
 mtexFigure('layout',[1 3]);
 cs = crystalSymmetry('2mm');
@@ -181,7 +181,7 @@ annotate(cs.aAxis,'labeled')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalSymmetries_06.png" %}
-</center><p>Similarly as with mm2, there are different alignements for the point groups 112, 121, 211, 11m, 1m1, m11, 321, 312, 3m1, 31m, etc.</p><h2 id="11">Space groups</h2><p>If additionally to the proper and improper rotations also translations are considered as symmetry operations the number of different symmetry groups increases to 320. Those are exhaustivly described in the international table of crystallography.</p><p>MTEX currently does not support space groups. If the name of a space group os passed to the command crystalSymmetry, MTEX automatically determines the corresponding point group and assigns it to the variable.</p>
+</center><p>Similarly as with mm2, there are different alignments for the point groups 112, 121, 211, 11m, 1m1, m11, 321, 312, 3m1, 31m, etc.</p><h2 id="11">Space groups</h2><p>If additionally to the proper and improper rotations also translations are considered as symmetry operations the number of different symmetry groups increases to 320. Those are exhaustively described in the international table of crystallography.</p><p>MTEX currently does not support space groups. If the name of a space group os passed to the command crystalSymmetry, MTEX automatically determines the corresponding point group and assigns it to the variable.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('Td');
 plot(cs)
@@ -223,13 +223,24 @@ cs = crystalSymmetry
   a, b, c        : 4.9, 4.9, 5.4     
   reference frame: X||a*, Y||b, Z||c*
 {% endhighlight %}
-<p>or a Bruker phl file. As a phl file contains usually many phases the output is a list of crystal symmetries</p>
+<p>or a Bruker <code class="language-plaintext highlighter-rouge">.phl</code> file. As a <code class="language-plaintext highlighter-rouge">.phl</code> file contains usually many phases the output is a list of crystal symmetries</p>
 {% highlight matlab %}
 % import a list of crystal symmetries
 cs_list = crystalSymmetry.load('crystal.phl');
 
 % access the first symmetry in list
 cs_list{1}
+
+%
+%
+%<html>
+%   <div class="note">
+%      <b>ok&lt;*NASGU&gt;
+%</b>
+%      <text/>
+%   </div>
+%</html>
+%
 {% endhighlight %}
 
 {% highlight plaintext %}

@@ -1,5 +1,5 @@
 ---
-title: Using fibres to evaluate grain dispersion axes
+title: Using fibers to evaluate grain dispersion axes
 
 sidebar: documentation_sidebar
 permalink: Grain_dispersion_axes.html
@@ -11,7 +11,7 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Using fibres to evaluate grain dispersion axes</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_Grain_dispersion_axes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/Grain_dispersion_axes.m">
+      --><title>Using fibers to evaluate grain dispersion axes</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_Grain_dispersion_axes.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/Grain_dispersion_axes.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>We will prepare some data to evaluate grain dispersion axes.</p>
 {% highlight matlab %}
 mtexdata forsterite
@@ -38,7 +38,7 @@ ebsd = EBSD
  Properties: bands, bc, bs, error, mad, x, y
  Scan unit : um
 {% endhighlight %}
-<p>We colorize axes of the misorientation to the grain mean orientation in speciemn coordinates</p>
+<p>We colorize axes of the misorientation to the grain mean orientation in specimen coordinates</p>
 {% highlight matlab %}
 ck = axisAngleColorKey(ebsd('f').CS);
 ck.oriRef=grains('id',ebsd('f').grainId).meanOrientation;
@@ -102,7 +102,7 @@ annotate(disp_ax_grid)
 annotate(disp_ax_grid,'plane','linestyle','--','linewidth',2)
 
 % While we might have guessed the result by eye, it is not too satisfying since
-% the direction of the estiamted dispersion axis will always be located
+% the direction of the estimated dispersion axis will always be located
 % on a grid point
 {% endhighlight %}
 <center>
@@ -125,15 +125,16 @@ annotate(fib.r,'plane','linestyle','-.','linewidth',2,'lineColor','r')
 {% highlight plaintext %}
 fib = fibre (Forsterite → xyz)
  
-  h || r: (1 11 -2) || (12,5,-3)
+  h || r: (-1-112) || (-12,-5,3)
+ o1 → o2: (12.8°,44.7°,280.8°) → (12.8°,44.7°,280.8°)
  
 ans = vector3d
-        x         y         z
-  0.89864  0.376589 -0.225003
+         x         y         z
+  -0.89864 -0.376589  0.225003
  
 ans = Miller (Forsterite)
-       h       k       l
-  1.0362  9.5489 -1.6628
+        h       k       l
+  -1.0362 -9.5489  1.6628
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Grain_dispersion_axes_05.png" %}
@@ -143,10 +144,10 @@ ans = Miller (Forsterite)
 % it is fitted by the fibre
 fd = angle(fib,o)/degree;
 plot(o,fd)
-xlim([0 30]); ylim([60 90]); zlim([60 90])
+xlim([0 30]); ylim([20 70]); zlim([80 120])
 grid minor
 hold on
-plot(fib)
+plot(fib,'linewidth',2)
 hold off
 
 nextAxis
@@ -161,7 +162,7 @@ plot 2000 random orientations out of 2826 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Grain_dispersion_axes_06.png" %}
-</center><p>TODO: use eigenvalues of fibre.fit  to give measure of "fibryness" [fib, lambda] = fibre.fit(o,'local') lambda(2)/lambda(3)</p><h2 id="9">Bulk evaluation</h2><p>We can fit a fibre for each grain and write out the axes in crystal as well as in specimen coordiantes</p>
+</center><p>TODO: use eigenvalues of fibre.fit  to give measure of "fibryness" [fib, lambda] = fibre.fit(o,'local') lambda(2)/lambda(3)</p><h2 id="9">Bulk evaluation</h2><p>We can fit a fibre for each grain and write out the axes in crystal as well as in specimen coordinates</p>
 {% highlight matlab %}
 %ids = grains('f').id;
 %clear fib_axSC fib_axCC

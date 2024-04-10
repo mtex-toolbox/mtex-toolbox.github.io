@@ -286,9 +286,9 @@ grains(9).area
 ans =
      1
 ans =
-   1.9540e+03
+   1.9613e+03
 {% endhighlight %}
-<p>Hereby <code class="language-plaintext highlighter-rouge">grainSize</code> referes to the number of pixels that belong to a certain grain while <code class="language-plaintext highlighter-rouge">area</code> represents the actual area measured in <code class="language-plaintext highlighter-rouge">(&micro;m)^2</code>. We may analyze the distribution of grains by grain area using a histogram.</p>
+<p>Hereby <code class="language-plaintext highlighter-rouge">grainSize</code> refers to the number of pixels that belong to a certain grain while <code class="language-plaintext highlighter-rouge">area</code> represents the actual area measured in <code class="language-plaintext highlighter-rouge">(&micro;m)^2</code>. We may analyze the distribution of grains by grain area using a histogram.</p>
 {% highlight matlab %}
 close all
 histogram(grains.area)
@@ -299,7 +299,16 @@ ylabel('number of grains')
 {% include inline_image.html file="ShapeParameters_02.png" %}
 </center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a> or <a href="grain2d.hist.html"><code class="language-plaintext highlighter-rouge">hist(grains)</code></a></p>
 {% highlight matlab %}
-hist(grains)
+hist(grains) %#ok<HIST>
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.5294    0.8078    0.9804
+ans =
+    0.5608    0.7373    0.5608
+ans =
+    0.8549    0.6471    0.1255
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_03.png" %}
@@ -309,7 +318,7 @@ histogram(grains)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_04.png" %}
-</center><p>Simarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional meassures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
+</center><p>Similarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional measures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
 {% highlight matlab %}
 grains(9).boundarySize
 grains(9).perimeter
@@ -319,9 +328,9 @@ grains(9).perimeter
 ans =
      4
 ans =
-  233.1561
+  233.2508
 {% endhighlight %}
-<p>We may compute these quantities also explicitely from the grain boundary segents. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
+<p>We may compute these quantities also explicitly from the grain boundary segments. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
 {% highlight matlab %}
 length(grains(9).boundary)
 sum(grains(9).boundary.segLength)
@@ -331,7 +340,7 @@ sum(grains(9).boundary.segLength)
 ans =
      4
 ans =
-  233.1561
+  233.2508
 {% endhighlight %}
 <h2 id="9">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
 {% highlight matlab %}
@@ -340,7 +349,7 @@ grains(9).diameter
 
 {% highlight plaintext %}
 ans =
-  106.0660
+  106.0000
 {% endhighlight %}
 <p>The diameter is a special case of the caliper or Feret diameter of a grain that is explained in detail in the section <a href="ProjectionBasedParameters.html">Projection based parameters</a>.</p><p>In contrast the <a href="grain2d.equivalentRadius.html">equivalent radius</a> is the radius of a circle with the same area as the grain. Naturally, the equivalent radius is always smaller than the actual radius of the grains. Similarly, the <a href="grain2d.equivalentPerimeter">equivalent perimeter</a> is defined as the perimeter of the circle the same area and is always smaller then the actual perimeter.</p>
 {% highlight matlab %}
@@ -351,11 +360,11 @@ grains(9).equivalentPerimeter
 
 {% highlight plaintext %}
 ans =
-   49.8787
+   49.9725
 ans =
-  156.6986
+  156.9931
 {% endhighlight %}
-<p>As a consequence, the ratio between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> amd measures how different a certain shape is from a circle.</p>
+<p>As a consequence, the ratio between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> and measures how different a certain shape is from a circle.</p>
 {% highlight matlab %}
 plot(grains,grains.shapeFactor)
 mtexColorbar('title','shape factor')
@@ -413,6 +422,6 @@ fractalDimension = ab(1)
 
 {% highlight plaintext %}
 fractalDimension =
-    1.0338
+    1.0339
 {% endhighlight %}
 <p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p></div></body></html>

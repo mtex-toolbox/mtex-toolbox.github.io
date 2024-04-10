@@ -26,7 +26,7 @@ cs = crystalSymmetry
   a, b, c        : 4.9, 4.9, 5.4     
   reference frame: X||a*, Y||b, Z||c*
 {% endhighlight %}
-<p>and consider two hexgonal prism normal</p>
+<p>and consider two hexagonal prism normal</p>
 {% highlight matlab %}
 m1 = Miller(1,-1,0,0,cs)
 m2 = Miller(1,0,-1,0,cs)
@@ -58,7 +58,7 @@ d = Miller (Quartz)
   U V T W
   0 0 0 1
 {% endhighlight %}
-<p>Note that MTEX automatically switches from reciprocal to direct coordinates for displaying the zone axis.</p><p>The other way round two, not paralllel, zone axes</p>
+<p>Note that MTEX automatically switches from reciprocal to direct coordinates for displaying the zone axis.</p><p>The other way round two, not parallel, zone axes</p>
 {% highlight matlab %}
 d1 = Miller(0,0,0,1,cs,'UVTW');
 d2 = Miller(1,-2,1,3,cs,'UVTW');
@@ -73,7 +73,7 @@ ans = Miller (Quartz)
   h  k  i  l
   1  0 -1  0
 {% endhighlight %}
-<h2 id="6">Symmetrically Equivalent Crystal Directions</h2><p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indeces (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html">symmetrise</a></p>
+<h2 id="6">Symmetrically Equivalent Crystal Directions</h2><p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indices (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a></p>
 {% highlight matlab %}
 symmetrise(d2)
 {% endhighlight %}
@@ -89,7 +89,7 @@ ans = Miller (Quartz)
   -2  1  1  3
   -2  1  1 -3
 {% endhighlight %}
-<p>As always the keyword <a href="VectorsAxes.html">antipodal</a> adds antipodal symmetry to this computation</p>
+<p>As always the keyword <a href="VectorsAxes.html"><code class="language-plaintext highlighter-rouge">'antipodal'</code></a> adds antipodal symmetry to this computation</p>
 {% highlight matlab %}
 symmetrise(d2,'antipodal')
 {% endhighlight %}
@@ -111,7 +111,7 @@ ans = Miller (Quartz)
   -2  1  1 -3
    2 -1 -1  3
 {% endhighlight %}
-<p>Using the options <b>symmetrised</b> and <b>labeled</b> all symmetrically equivalent crystal directions are plotted together with their Miller indices. Lets apply this to a list of lattice planes</p>
+<p>Using the options <code class="language-plaintext highlighter-rouge">'symmetrised'</code> and <code class="language-plaintext highlighter-rouge">'labeled'</code> all symmetrically equivalent crystal directions are plotted together with their Miller indices. Lets apply this to a list of lattice planes</p>
 {% highlight matlab %}
 h = Miller({1,0,-1,0},{1,1,-2,0},{1,0,-1,1},{1,1,-2,1},{0,0,0,1},cs);
 
@@ -124,7 +124,7 @@ drawNow(gcm,'figSize','normal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalOperations_02.png" %}
-</center><p>The command &lt;vector3d.eq.html eq or == &gt; can be used to check whether two crystal directions are symmetrically equivalent. Compare</p>
+</center><p>The command <a href="vector3d.eq.html"><code class="language-plaintext highlighter-rouge">eq</code> or <code class="language-plaintext highlighter-rouge">==</code></a> can be used to check whether two crystal directions are symmetrically equivalent. Compare</p>
 {% highlight matlab %}
 Miller(1,1,-2,0,cs) == Miller(-1,-1,2,0,cs)
 {% endhighlight %}
@@ -144,7 +144,7 @@ ans =
   logical
    1
 {% endhighlight %}
-<h2 id="11">Angles</h2><p>The angle between two crystal directions m1 and m2 is defined as the smallest angle between m1 and all symmetrically equivalent directions to m2. This angle is in radians and it is calculated by the function <a href="vector3d.angle.html">angle</a></p>
+<h2 id="11">Angles</h2><p>The angle between two crystal directions <code class="language-plaintext highlighter-rouge">m1</code> and <code class="language-plaintext highlighter-rouge">m2</code> is defined as the smallest angle between <code class="language-plaintext highlighter-rouge">m1</code> and all symmetrically equivalent directions to <code class="language-plaintext highlighter-rouge">m2</code>. This angle is in radiant and it is calculated by the function <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle(m1,m2)</code></a></p>
 {% highlight matlab %}
 angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs)) / degree
 {% endhighlight %}
@@ -153,7 +153,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs)) / degree
 ans =
    60.0000
 {% endhighlight %}
-<p>As always the keyword <a href="VectorsAxes.html">antipodal</a> adds antipodal symmetry to this computation</p>
+<p>As always the keyword <a href="VectorsAxes.html"><code class="language-plaintext highlighter-rouge">'antipodal'</code></a> adds antipodal symmetry to this computation</p>
 {% highlight matlab %}
 angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'antipodal') / degree
 {% endhighlight %}
@@ -162,7 +162,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'antipodal') / degree
 ans =
      0
 {% endhighlight %}
-<p>In order to ignore the crystal symmetry, i.e., to compute the actual angle between two directions use the option <b>noSymmetry</b></p>
+<p>In order to ignore the crystal symmetry, i.e., to compute the actual angle between two directions use the option <code class="language-plaintext highlighter-rouge">'noSymmetry'</code></p>
 {% highlight matlab %}
 angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'noSymmetry') / degree
 {% endhighlight %}
@@ -171,7 +171,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'noSymmetry') / degree
 ans =
    180
 {% endhighlight %}
-<p>This option is available for many other functions involving crystal directions and crystal orientations.</p><h2 id="15">Calculations</h2><p>Essentially all the operations defined for general directions, i.e. for variables of type <a href="vector3d.vector3d.html">vector3d</a> are also available for Miller indices. In addition Miller indices interact with crystal orientations. Consider the crystal orientation</p>
+<p>This option is available for many other functions involving crystal directions and crystal orientations.</p><h2 id="15">Calculations</h2><p>Essentially all the operations defined for general directions, i.e. for variables of type <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> are also available for Miller indices. In addition Miller indices interact with crystal orientations. Consider the crystal orientation</p>
 {% highlight matlab %}
 ori = orientation.byEuler(10*degree,20*degree,30*degree,cs)
 {% endhighlight %}
@@ -190,6 +190,8 @@ ori * m1
 
 {% highlight plaintext %}
 ans = vector3d
+         x          y          z
+  0.219491 -0.0733607 -0.0401679
 {% endhighlight %}
 <p>By applying a <a href="crystalSymmetry.crystalSymmetry.html">crystal symmetry</a> one obtains the coordinates with respect to the specimen coordinate system of all crystallographically equivalent specimen directions.</p>
 {% highlight matlab %}
@@ -197,21 +199,23 @@ p = ori * symmetrise(m1);
 plot(p,'grid')
 
 %
-% The above plot is essentialy the pole figure representation of the
-% orientation *ori*.
+% The above plot is essentially the pole figure representation of the
+% orientation |ori|.
 %
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalOperations_03.png" %}
-</center><h2 id="18">Conversions</h2><p>Converting a crystal direction which is represented by its coordinates with respect to the crystal coordinate system a, b, c into a representation with respect to the associated Euclidean coordinate system is done by the command <a href="Miller.vector3d.html">vectord3d</a>.</p>
+</center><h2 id="18">Conversions</h2><p>Converting a crystal direction which is represented by its coordinates with respect to the crystal coordinate system \(a\), \(b\), \(c\) into a representation with respect to the associated Euclidean coordinate system is done by the command <a href="Miller.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>.</p>
 {% highlight matlab %}
 vector3d(m1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = vector3d
+         x         y         z
+  0.117443 -0.203417         0
 {% endhighlight %}
-<p>Conversion into spherical coordinates requires the function <a href="vector3d.polar.html">polar</a></p>
+<p>Conversion into spherical coordinates requires the function <a href="vector3d.polar.html"><code class="language-plaintext highlighter-rouge">polar</code></a></p>
 {% highlight matlab %}
 [theta,rho] = polar(m1)
 {% endhighlight %}

@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Grain Reconstruction</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstruction.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The grain reconstruction method that is default in MTEX is based on the definition of high angle grain boundaries which are assumed at the Mittelsenkrechten between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The default grain reconstruction method in MTEX is based on the definition of high angle grain boundaries which are assumed at the perpendicular bisector between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p><p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
 {% highlight matlab %}
 close all; plotx2east
 
@@ -21,6 +21,9 @@ mtexdata forsterite
 
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+
+% gridify the data
+ebsd = ebsd.gridify;
 
 % make a phase plot
 plot(ebsd)
@@ -40,27 +43,27 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_01.png" %}
-</center><h2 id="2">Basic grain reconstruction</h2><p>We see that there are a lot of not indexed measurements. For grain reconstruction, we have  three different choices how to deal with these unindexed regions:</p><div><ol><li>leave them unindexed</li><li>assign them to the surrounding grains</li><li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li></ol></div><p>By default, MTEX uses the first method.</p><p>The second parameter that is involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p><p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html">calcGrains</a> which takes as input an EBSD data set and returns a list of grain.</p>
+</center><h2 id="2">Basic grain reconstruction</h2><p>We see that there are a lot of not indexed measurements. For grain reconstruction, we have  three different choices how to deal with these unindexed regions:</p><div><ol><li>leave them unindexed</li><li>assign them to the surrounding grains</li><li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li></ol></div><p>The extent to which unindexed pixels are assigned is controlled by the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code>. Roughly speaking this parameter is the radius of the smallest unindexed region that will not be entirely assigned to surrounding grains. The default of this value is 2.2.</p><p>The second parameter involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p><p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html">calcGrains</a> which takes as input an EBSD data set and returns a list of grain.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd,'angle',10*degree)
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',2.2,'angle',10*degree);
+grains
 {% endhighlight %}
 
 {% highlight plaintext %}
 grains = grain2d
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     0    1139    4052  notIndexed                                   
-     1     244   14093  Forsterite       mmm                         
-     2     177    1397   Enstatite       mmm                         
-     3     104     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+     1     109   14093  Forsterite       mmm                         
+     2      34    1397   Enstatite       mmm                         
+     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
  
- boundary segments: 10422 (523078 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 905
+ boundary segments: 4198 (194612 µm)
+ inner boundary segments: 1 (19 µm)
+ triple points: 225
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<p>The reconstructed grains are stored in the variable <code class="language-plaintext highlighter-rouge">grains</code>. Note that also the notIndexed measurements are grouped into grains. This allows later to analyze the shape of these unindexed regions.</p><p>To visualize the grains we can plot its boundaries by the command <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a>.</p>
+<p>The reconstructed grains are stored in the variable <code class="language-plaintext highlighter-rouge">grains</code>. To visualize the grains we can plot its boundaries by the command <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a>.</p>
 {% highlight matlab %}
 % start overide mode
 hold on
@@ -73,155 +76,49 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_02.png" %}
-</center><h2 id="4">Filling notindexed holes</h2><p>It is important to understand that MTEX distinguishes the following two situations</p><div><ol><li>a location is marked as notindexed</li><li>a location does not occur in the data set</li></ol></div><p>A location marked as <b>notindexed</b> is interpreted by MTEX as at this position, there is <b>no crystal</b>, whereas for a location that does not occur in the data set is interpreted by MTEX as: it is not known whether there is a crystal or not. Just to remind you, the later assumption is nothing special as it applies at all locations but the measurement points.</p><p>A location that does not occur in the data is assigned in MTEX to the same grain and phase as the closest measurement point - this may also be a notindexed point. Hence, filling holes in MTEX means to erase them from the list of measurements, i.e., instead of telling MTEX there is no crystal we are telling MTEX: we do not know what there is.</p><p>The extremal case is to say whenever there is a not indexed measurement we actually do not know anything and allow MTEX to freely guess what happens there. This is realized by removing all not indexed measurements or, equivalently, computing the grains only from the indexed measurements</p>
+</center><h2 id="4">Grainboundary Smoothing</h2><p>Due to the gridded nature of the EBSD measurement the reconstructed grain boundaries often suffer from the staircase effect. This can be reduced by smoothing the grain boundaries using the command <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a></p>
 {% highlight matlab %}
-% compute the grains from the indexed measurements only
-grains = calcGrains(ebsd('indexed'))
+grains = smooth(grains,5);
 
+% display the result
 plot(ebsd)
-
-% start overide mode
 hold on
-
-% plot the boundary of all grains
 plot(grains.boundary,'linewidth',1.5)
-
-% mark two grains by location
-plot(grains(11300,6100).boundary,'linecolor','DarkGreen','linewidth',5,...
-  'DisplayName','grain A')
-plot(grains(12000,4000).boundary,'linecolor','DarkBlue','linewidth',5,...
-  'DisplayName','grain B')
-
-% stop overide mode
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1     103   14093  Forsterite       mmm                         
-     2      32    1397   Enstatite       mmm                         
-     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 3784 (185218 µm)
- inner boundary segments: 12 (605 µm)
- triple points: 240
- 
- Properties: meanRotation, GOS
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_03.png" %}
-</center><p>We observe, especially in the marked grains, how MTEX fills notindexed regions and connects otherwise separate measurements to grains. As all information about not indexed regions were removed the reconstructed grains fill the map completely</p>
+</center><h2 id="5">Adapting the Alpha Paramter</h2><p>Increasing the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code> larger unindexed regions are associated to grains.</p>
 {% highlight matlab %}
-plot(grains,'linewidth',2)
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',10,'angle',10*degree);
+grains = smooth(grains,5);
+
+% plot the boundary of all grains
+plot(ebsd)
+hold on
+plot(grains.boundary,'linewidth',1.5)
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_04.png" %}
-</center><p>Inside of grain B, there is a large not indexed region and we might argue that is not very meaningful to assign such a large region to some grain but should have kept it not indexed. In order to decide which not indexed region is large enough to be kept not indexed and which not indexed regions can be filled it is helpful to know that the command calcGrains also separates the not indexed regions into "grains" and we can standard grain functions like area or perimeter to analyze these regions.</p>
+</center><h2 id="6">Clearing Single Pixel Grains</h2><p>There are quite a few single pixel grains we might want to consider as misindexations and perform the grain reconstruction on the cleaned up data set. This is done as follows</p>
 {% highlight matlab %}
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
-notIndexed = grains('notIndexed')
-{% endhighlight %}
+% detect single pixel grains
+isMisindexed = grains.grainSize==1;
 
-{% highlight plaintext %}
-notIndexed = grain2d
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     0    1139    4052  notIndexed                                   
- 
- boundary segments: 8694 (436378 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 868
- 
- Properties: meanRotation, GOS
-{% endhighlight %}
-<p>We see that we have 1139 not indexed regions. A good measure for compact regions vs. cluttered regions is the quotient between the area and the boundary length. Lets, therefore, plot the "not indexed grains" colorized by this quotient</p>
-{% highlight matlab %}
-% plot the not indexed regions colorcoded according the the quotient between
-% number of measurements and number of boundary segments
-plot(notIndexed,log(notIndexed.grainSize ./ notIndexed.boundarySize))
-mtexColorbar
+% set the corresponding EBSD data to notIndexed
+ebsd(grains(isMisindexed)) = 'notIndexed';
+
+% redo grain reconstruction
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',3.2,'angle',10*degree);
+
+% display the result
+grains = smooth(grains,5);
+plot(ebsd)
+hold on
+plot(grains.boundary,'linewidth',1.5)
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_05.png" %}
-</center><p>Regions with a high quotient are blocks which can be hardly correctly assigned to a grain. Hence, we should keep these regions as not indexed and only remove the not indexed information from locations with a low quotient.</p>
-{% highlight matlab %}
-% the "not indexed grains" we want to remove
-toRemove = notIndexed(notIndexed.grainSize ./ notIndexed.boundarySize<0.8);
-
-% now we remove the corresponding EBSD measurements
-ebsd(toRemove) = [];
-
-% and perform grain reconstruction with the reduces EBSD data set
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
-
-plot(grains,'lineWidth',2)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainReconstruction_06.png" %}
-</center><p>We see that that all the narrow not indexed regions have been assigned to the surounding grains while the large regions have been left unindexed. Finally, the image with the raw EBSD data and on top the grain boundaries.</p>
-{% highlight matlab %}
-% plot the raw data
-plot(ebsd)
-
-% start overide mode
-hold on
-
-% plot the boundary of all grains
-plot(grains.boundary,'linewidth',1.5)
-
-% mark two grains by location
-plot(grains(11300,6100).boundary,'linecolor','DarkGreen','linewidth',4,...
-  'DisplayName','grain A')
-plot(grains(12000,4000).boundary,'linecolor','DarkBlue','linewidth',4,...
-  'DisplayName','grain B')
-
-% stop overide mode
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainReconstruction_07.png" %}
-</center><h2 id="11">Non convex data sets</h2><p>By default MTEX uses the convex hull when computing the outer boundary for an EBSD data set. This leads to poor results in the case of non convex EBSD data sets.</p>
-{% highlight matlab %}
-% cut of a non convex region from our previous data set
-poly = 1.0e+04 *[...
-  0.6853    0.2848
-  0.7102    0.6245
-  0.8847    0.3908
-  1.1963    0.6650
-  1.1371    0.2880
-  0.6853    0.2833
-  0.6853    0.2848];
-
-ebsdP = ebsd(ebsd.inpolygon(poly));
-
-plot(ebsdP,'micronBar','off')
-legend off
-
-% compute the grains
-grains = calcGrains(ebsdP('indexed'));
-
-% plot the grain boundary
-hold on
-plot(grains.boundary,'linewidth',1.5)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainReconstruction_08.png" %}
-</center><p>We see that the grains badly fill up the entire convex hull of the data points. This can be avoided by specifying the option <code class="language-plaintext highlighter-rouge">tight</code> for the determination of the outer boundary.</p>
-{% highlight matlab %}
-plot(ebsdP,'micronBar','off')
-legend off
-
-% compute the grains
-grains = calcGrains(ebsdP('indexed'),'boundary','tight');
-
-% plot the grain boundary
-hold on
-plot(grains.boundary,'linewidth',1.5)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainReconstruction_09.png" %}
 </center></div></body></html>

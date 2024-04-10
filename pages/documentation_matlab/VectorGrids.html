@@ -12,51 +12,68 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Spherical Grids</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_VectorGrids.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Vectors/VectorGrids.m">
-    edit page</a></font><div><!--introduction--><!--/introduction-->
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>MTEX supports a wide varity of spherical grids. Those include the <a href="regularS2Grid.html"><code class="language-plaintext highlighter-rouge">regularS2Grid</code></a>, the <a href="equispacedS2Grid.html">MTEX equispaced grid</a>, the <a href="HEALPixS2Grid.html">HealPix grid</a> and the <a href="fibonacciS2Grid.html">Fibonacci grid</a>. Lets define them with an resulution of 7 degrees</p>
 {% highlight matlab %}
-grid1 = regularS2Grid('resolution',7*degree)
+% the regular grid
+grid{1} = regularS2Grid('resolution',7*degree);
 
-plot(grid1,'upper')
+% the MTEX equispaced grid
+grid{2} = equispacedS2Grid('resolution',7*degree);
+
+% the HealPix grid
+grid{3} = HEALPixS2Grid('resolution',7*degree);
+
+% and the Fibonaci Grid
+grid{4} = fibonacciS2Grid('resolution',7*degree);
+
+% store the names of the grids
+names = {'regular','equispaced','HealPix','Fibonaci'};
 {% endhighlight %}
+<p>Plotting them indicates that there are quite some differences, especially close to the poles.</p>
+{% highlight matlab %}
+plot(grid{1},'upper','layout',[2,2])
+mtexTitle(names{1})
 
-{% highlight plaintext %}
-grid1 = S2Grid
- size: 52 x 27
+for k = 2:4
+  nextAxis
+  plot(grid{k},'upper')
+  mtexTitle(names{k})
+end
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorGrids_01.png" %}
-</center>
+</center><h2 id="3">Comparison of Uniformity</h2><p>In order to compare the uniformity of the different grids we first perform a density estimation.</p>
 {% highlight matlab %}
-grid2 = equispacedS2Grid('resolution',7*degree)
+for k = 1:4
+  d(k) = calcDensity(grid{k},'halfwidth',5*degree);
+end
 
-plot(grid2,'upper')
-{% endhighlight %}
-
-{% highlight plaintext %}
-grid2 = S2Grid
- size: 1 x 812
- resolution: 7.1°
-{% endhighlight %}
-<center>
-{% include inline_image.html file="VectorGrids_02.png" %}
-</center>
-{% highlight matlab %}
-grid3 = HEALPixS2Grid('resolution',7*degree)
-
-plot(grid3,'upper')
-{% endhighlight %}
-
-{% highlight plaintext %}
-grid3 = vector3d
- size: 768 x 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="VectorGrids_03.png" %}
-</center><h2 id="4">Comparison of Uniformity</h2>
-{% highlight matlab %}
-plot([grid1.calcDensity,grid2.calcDensity,grid3.calcDensity],'upper')
+clf
+for k = 1:4
+  plot(d(k),'upper','layout',[2,2]);
+  mtexTitle(names{k})
+  if k<4, nextAxis, end
+end
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="VectorGrids_04.png" %}
-</center></div></body></html>
+{% include inline_image.html file="VectorGrids_02.png" %}
+</center><p>We visually observe that there are quite some differences between the grids. We may also quantify the different to the uniform distribution by computing</p>
+{% highlight matlab %}
+norm(d-1).'
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    4.0141    0.0317    0.0426    0.0201
+{% endhighlight %}
+<p>or</p>
+{% highlight matlab %}
+sum(abs(d-1)).'
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    5.7668    0.0600    0.0674    0.0320
+{% endhighlight %}
+</div></body></html>

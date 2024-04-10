@@ -1,5 +1,5 @@
 ---
-title: Birefrigence
+title: Birefringence
 
 sidebar: documentation_sidebar
 permalink: BirefringenceDemo.html
@@ -11,8 +11,8 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Birefrigence</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/BirefringenceDemo.m">
-    edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustarte the effect of birefringence lets consider a olivine data set.</p>
+      --><title>Birefringence</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_BirefringenceDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/BirefringenceDemo.m">
+    edit page</a></font><div><!--introduction--><p>Birefringence is the optical property of a material having a refractive index that depends on the polarization and propagation direction of light. It is one of the oldest methods to determine orientations of crystals in thin sections of rocks.</p><!--/introduction--><h2 id="1">Import Olivine Data</h2><p>In order to illustrate the effect of birefringence lets consider a olivine data set.</p>
 {% highlight matlab %}
 mtexdata olivine
 
@@ -62,7 +62,7 @@ gg = grain2d
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      1     109   30800  olivine       222                         
  
- boundary segments: 6815 (24153 µm)
+ boundary segments: 6806 (24154 µm)
  inner boundary segments: 9 (16 µm)
  triple points: 561
  
@@ -70,11 +70,11 @@ gg = grain2d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_01.png" %}
-</center><h2 id="3">The refractive index tensor</h2><p>The refractive index of a material describes the dependence of the speed of light with respect to the propagation direction and the polarization direction. In a linear world this relation ship is modeled by a symmetric rank 2 tensor - the so called refractive index tensor, which is usually given by it principle values: n_alpha, n_beta and n_gamma. In orthorhombic minerals such as olivine the principal values are parallel to the crystallographic axes. Care has to be applied when associating the principle values with the correct axes.</p><p>For Forsterite the priniple refractive values are</p>
+</center><h2 id="3">The refractive index tensor</h2><p>The refractive index of a material describes the dependence of the speed of light with respect to the propagation direction and the polarization direction. In a linear world this relation ship is modeled by a symmetric rank 2 tensor - the so called refractive index tensor, which is usually given by it principle values: n_alpha, n_beta and n_gamma. In orthorhombic minerals such as olivine the principal values are parallel to the crystallographic axes. Care has to be applied when associating the principle values with the correct axes.</p><p>For Forsterite the principle refractive values are</p>
 {% highlight matlab %}
 n_alpha = 1.635; n_beta = 1.651; n_gamma = 1.670;
 {% endhighlight %}
-<p>with the largest refractive index n_gamma beeing alligned with the a-axis, the intermediate index n_beta with the c-axis and the smallest refractive index n_alpha with the b-axis. Hence, the refractive index tensor for Forsterite takes the form</p>
+<p>with the largest refractive index n_gamma being aligned with the a-axis, the intermediate index n_beta with the c-axis and the smallest refractive index n_alpha with the b-axis. Hence, the refractive index tensor for Forsterite takes the form</p>
 {% highlight matlab %}
 cs = ebsd('olivine').CS;
 rI_Fo = refractiveIndexTensor(diag([ n_gamma  n_alpha  n_beta]),cs)
@@ -88,11 +88,11 @@ rI_Fo = refractiveIndexTensor (olivine)
      0 1.635     0
      0     0 1.651
 {% endhighlight %}
-<p>For Fayalite the priniple refractive values</p>
+<p>For Fayalite the principle refractive values</p>
 {% highlight matlab %}
 n_alpha = 1.82; n_beta = 1.869; n_gamma = 1.879;
 {% endhighlight %}
-<p>are aligned to the crystallograhic axes in an analogous way. Which leads to the refractive index tensor</p>
+<p>are aligned to the crystallographic axes in an analogous way. Which leads to the refractive index tensor</p>
 {% highlight matlab %}
 rI_Fa = refractiveIndexTensor(diag([ n_gamma  n_alpha  n_beta]),cs)
 {% endhighlight %}
@@ -105,7 +105,7 @@ rI_Fa = refractiveIndexTensor (olivine)
      0  1.82     0
      0     0 1.869
 {% endhighlight %}
-<p>The refractive index of composite materials like Olivine can now be modelled as the weighted sum of the of the refractive index tensors of Forsterite and Fayalite. Lets assume that the relative Forsterite content (atomic percentage) is sgiven my</p>
+<p>The refractive index of composite materials like Olivine can now be modeled as the weighted sum of the of the refractive index tensors of Forsterite and Fayalite. Lets assume that the relative Forsterite content (atomic percentage) is given my</p>
 {% highlight matlab %}
 XFo = 0.86; % 86 percent Forsterite
 {% endhighlight %}
@@ -136,10 +136,14 @@ dn =
     0.0245
  
 pMin = vector3d
+        x         y         z
+  0.19057 -0.932509  0.306774
  
 pMax = vector3d
+          x         y         z
+  -0.650059  0.114293  0.751239
 {% endhighlight %}
-<p>If the polarization direction is ommited the results are spherical functions which can be easily visualized.</p>
+<p>If the polarization direction is omitted the results are spherical functions which can be easily visualized.</p>
 {% highlight matlab %}
 % compute the birefringence as a spherical function
 [dn,pMin,pMax] = rI.birefringence
@@ -157,7 +161,6 @@ hold off
 
 {% highlight plaintext %}
 dn = S2FunHarmonicSym (olivine)
-  mineral: olivine (222)
   bandwidth: 48
   isReal: true
  
@@ -170,7 +173,7 @@ pMax = S2AxisFieldHarmonic
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_02.png" %}
-</center><h2 id="12">The Optical Axis</h2><p>The optial axes are all directions where the birefringence is zero</p>
+</center><h2 id="12">The Optical Axis</h2><p>The optical axes are all directions where the birefringence is zero</p>
 {% highlight matlab %}
 % compute the optical axes
 vOptical = rI.opticalAxis
@@ -188,6 +191,9 @@ hold off
 vOptical = vector3d
  size: 1 x 2
  antipodal: true
+          x         y         z
+  -0.680045  0.733171         0
+   0.680045  0.733171         0
 ans =
    1.0e-15 *
     0.4441
@@ -195,7 +201,7 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_03.png" %}
-</center><h2 id="13">Spectral Transmission</h2><p>If white light with a certain polarization is transmited though a crystal with isotropic refrative index the light changes wavelength and hence appears collored. The resulting color depending on the propagation direction, the polarization direction and the thickness can be computed by</p>
+</center><h2 id="13">Spectral Transmission</h2><p>If white light with a certain polarization is transmitted though a crystal with isotropic refractive index the light changes wavelength and hence appears colored. The resulting color depending on the propagation direction, the polarization direction and the thickness can be computed by</p>
 {% highlight matlab %}
 vprop = Miller(1,1,1,cs);
 thickness = 30000;
@@ -207,7 +213,7 @@ rgb = rI.spectralTransmission(vprop,thickness,'polarizationDirection',p)
 rgb =
     0.3635    0.7380    0.6967
 {% endhighlight %}
-<p>Effectively, the rgb value depend only on the angle tau between the polariztzion direction and the slowest polarization direction <code class="language-plaintext highlighter-rouge">pMin</code>. Instead of the polarization direction this angle may be specified directly</p>
+<p>Effectively, the rgb value depend only on the angle tau between the polarization direction and the slowest polarization direction <code class="language-plaintext highlighter-rouge">pMin</code>. Instead of the polarization direction this angle may be specified directly</p>
 {% highlight matlab %}
 rgb = rI.spectralTransmission(vprop,thickness,'tau',30*degree)
 {% endhighlight %}
@@ -216,7 +222,7 @@ rgb = rI.spectralTransmission(vprop,thickness,'tau',30*degree)
 rgb =
     0.3128    0.6350    0.5994
 {% endhighlight %}
-<p>If the angle tau is fixed and the propagation direction is ommited as input MTEX returns the rgb values as a spherical function. Lets plot these functions for different values of tau.</p>
+<p>If the angle tau is fixed and the propagation direction is omitted as input MTEX returns the rgb values as a spherical function. Lets plot these functions for different values of tau.</p>
 {% highlight matlab %}
 newMtexFigure('layout',[1,3]);
 
@@ -265,7 +271,7 @@ polarizer = vector3d.X;
 % the thickness of the thin section
 thickness = 22800;
 {% endhighlight %}
-<p>As usal we have two options: Either we transform the refractive index tensor into specimen coordinates or we transform the polarization direction and the propagation directions into crystal coordinates. Lets start with the first option:</p>
+<p>As usual we have two options: Either we transform the refractive index tensor into specimen coordinates or we transform the polarization direction and the propagation directions into crystal coordinates. Lets start with the first option:</p>
 {% highlight matlab %}
 % extract the olivine orientations
 ori = ebsd('olivine').orientations;
@@ -284,7 +290,7 @@ plot(ebsd('olivine'),rgb)
 {% include inline_image.html file="BirefringenceDemo_06.png" %}
 </center><p>and compare it with option two:</p>
 {% highlight matlab %}
-% transfom the propation direction and the polarizer direction into a list
+% transform the propagation direction and the polarizer direction into a list
 % of directions with respect to crystal coordinates
 vprop_crystal = ori \ vprop;
 polarizer_crystal = ori \ polarizer;
@@ -297,12 +303,12 @@ plot(ebsd('olivine'),rgb)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_07.png" %}
-</center><h2 id="20">Spectral Transmission as a color key</h2><p>The above computations can be automized by defining a spectral transmission color key.</p>
+</center><h2 id="20">Spectral Transmission as a color key</h2><p>The above computations can be automated by defining a spectral transmission color key.</p>
 {% highlight matlab %}
 % define the colorKey
 colorKey  = spectralTransmissionColorKey(rI,thickness);
 
-% the following are the defaults and can be ommited
+% the following are the defaults and can be omitted
 colorKey.propagationDirection = vector3d.Z;
 colorKey.polarizer = vector3d.X;
 colorKey.phi = 90 * degree;
@@ -331,7 +337,7 @@ plot(ebsd('olivine'), rgb)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_10.png" %}
-</center><h2 id="23">Illustrating the effect of rotating polarizer and analyser simultanously</h2>
+</center><h2 id="23">Illustrating the effect of rotating polarizer and analyzer simultaneously</h2>
 {% highlight matlab %}
 colorKey.polarizer = vector3d.X;
 figure
@@ -347,7 +353,7 @@ stepSize = 2.5;
 
 for omega = 0:stepSize:90-stepSize
 
-  % update polarsation direction
+  % update polarization direction
   colorKey.polarizer = rotate(vector3d.X, omega * degree);
 
   % update rgb values

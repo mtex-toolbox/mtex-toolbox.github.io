@@ -20,7 +20,7 @@ T2 = tensor.rand('rank',2);
 % addition and multiplication
 T = T1 + 2 * T2;
 
-% pointwise product
+% point-wise product
 T = T1 .* T2;
 {% endhighlight %}
 <h2 id="2">Tensor Products</h2><p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
@@ -55,7 +55,7 @@ eps = strainTensor (xyz)
   0  0  0
   0  0 -1
 {% endhighlight %}
-<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html">EinsteinSum</a>.</p>
+<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html"><code class="language-plaintext highlighter-rouge">EinsteinSum</code></a>.</p>
 {% highlight matlab %}
 sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
@@ -68,7 +68,7 @@ sigma = tensor (xyz)
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>\[ (a \otimes b)_{ij} = a_i b_j \]</p><p>beween two rank one tensors</p>
+<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>\[ (a \otimes b)_{ij} = a_i b_j \]</p><p>between two rank one tensors</p>
 {% highlight matlab %}
 a = tensor([1;2;3],'rank',1);
 b = tensor([0;2;1],'rank',1);
@@ -95,7 +95,7 @@ EinsteinSum(a,-1,b,-1)
 ans =
      7
 {% endhighlight %}
-<p>As a final example we consider the linear compressibility in a certain direction <code class="language-plaintext highlighter-rouge">v</code> which can be computed by the formula</p><p>\[ c = \sum_{i,j,k} S_{ijkk} v_i v_j \]</p><p>where \(C = S^{-1}\) is the inverse of the comcompliance thensor, i.e. the stiffness tensor</p>
+<p>As a final example we consider the linear compressibility in a certain direction <code class="language-plaintext highlighter-rouge">v</code> which can be computed by the formula</p><p>\[ c = \sum_{i,j,k} S_{ijkk} v_i v_j \]</p><p>where \(C = S^{-1}\) is the inverse of the compliance tensor, i.e. the stiffness tensor</p>
 {% highlight matlab %}
 v = xvector;
 S = inv(C)
@@ -118,7 +118,7 @@ S = complianceTensor (xyz)
 c =
   460.2500
 {% endhighlight %}
-<p>Here we used the <a href="tensor.inv.html">inv</a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">edouble dot product</a></p>
+<p>Here we used the command <a href="tensor.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">double dot product</a></p>
 {% highlight matlab %}
 C * eps
 C : eps
@@ -139,7 +139,7 @@ ans = stressTensor (xyz)
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <code class="language-plaintext highlighter-rouge"><a href="tensor.trace.html">trace</a></code> of their matrix product</p>
+<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <code class="language-plaintext highlighter-rouge"><a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a></code> of their matrix product</p>
 {% highlight matlab %}
 T1 : T2
 trace(T1 * T2')
@@ -148,11 +148,11 @@ trace(T1' * T2)
 
 {% highlight plaintext %}
 ans =
-    2.0068
+    1.8183
 ans =
-    2.0068
+    1.8183
 ans =
-    2.0068
+    1.8183
 {% endhighlight %}
 <h2 id="11">Determinant</h2><p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a></p>
 {% highlight matlab %}
@@ -161,7 +161,7 @@ det(T1)
 
 {% highlight plaintext %}
 ans =
-   -0.0759
+   -0.0224
 {% endhighlight %}
 <h2 id="12">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
 {% highlight matlab %}

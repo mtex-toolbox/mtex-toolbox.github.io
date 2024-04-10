@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>loadEBSD_h5oina</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_loadEBSD_h5oina.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/interfaces/loadEBSD_h5oina.m">
-    edit page</a></font><div><!--introduction--><p>read HKL, oxford *.h5oina hdf5 file documented here: <a href="https://github.com/oinanoanalysis/h5oina/blob/master/H5OINAFile.md">https://github.com/oinanoanalysis/h5oina/blob/master/H5OINAFile.md</a> note that Matlab &lt; R2021b does not handle hdf5 v1.10 and one needs to use hdf5format_convert (<a href="https://github.com/HDFGroup/hdf5">https://github.com/HDFGroup/hdf5</a>) on the input file to prevent Matlab from fatally crashing</p><!--/introduction--><h2 id="2">Syntax</h2>
+    edit page</a></font><div><!--introduction--><p>read HKL *.h5oina hdf5 file documented here: <a href="https://github.com/oinanoanalysis/h5oina/blob/master/H5OINAFile.md">https://github.com/oinanoanalysis/h5oina/blob/master/H5OINAFile.md</a> note that Matlab &lt; R2021b does not handle hdf5 v1.10 and one needs to use hdf5format_convert (<a href="https://github.com/HDFGroup/hdf5">https://github.com/HDFGroup/hdf5</a>) on the input file to prevent Matlab from fatally crashing</p><!--/introduction--><h2 id="2">Syntax</h2>
 {% highlight matlab %}
 % import EBSD data in acquisition surface coordinates (CS1)
 ebsd = loadEBSD_h5oina('ebsdData.h5oina');
@@ -29,64 +29,48 @@ ebsd = loadEBSD_h5oina('ebsdData.h5oina','CS0');
             <tt>CS0</tt>
          </td>
          <td>
-            <tt>use sample primary coordinates (default - use acquisition</tt>
+            <tt>use sample primary coordinates (default ~ use acquisition coordinates CS1)</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>coordinates CS1)</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>TODO</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>1) Test if EBSDheader.Specimen_Orientation_Euler does what it's supposed</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>to do</tt>
+            <tt>skipAllButEBSD</tt>
          </td>
          <td>
-            <tt>&gt; see below. &lt;-- looks like this is in some datasets stored in</tt>
+            <tt>only read EBSD data, but NOT electron images, EDS</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>the 'Data Processing' header, radians, Bunge convention</tt>
+            <tt>skipEDS</tt>
          </td>
-         <td/>
+         <td>
+            <tt>do not read EDS data</tt>
+         </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>2) find a solution if multiple ebsd datasets are contained, export to a</tt>
+            <tt>skipEimage</tt>
          </td>
-         <td/>
+         <td>
+            <tt>do not read electron images</tt>
+         </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>cell?</tt>
+            <tt>useProcessedData</tt>
          </td>
-         <td/>
+         <td>
+            <tt>use processed EBSD data instead of original, replaces Bands, Error, Euler, MAD, Phase</tt>
+         </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>3) decide what header data to use and how to display it? Fix display for</tt>
+            <tt>fullDataset</tt>
          </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>the header to be shown correctly (bc. ebsd.opt.Header sort of works)</tt>
+         <td>
+            <tt>also read additional EBSD related data: Beam_Position, Pattern Center etc.</tt>
          </td>
-         <td/>
       </tr>
    </table>
 </p></div></body></html>
