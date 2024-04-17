@@ -1,6 +1,6 @@
 ---
 title: Convert Time of Flight Neutron Data into Pole Figures
-last_updated: 29-Feb-2024
+last_updated: 17-Apr-2024
 sidebar: examples_sidebar
 permalink: TOF2PoleFigure.html
 folder: examples
@@ -11,12 +11,12 @@ toc: false
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Convert Time of Flight Neutron Data into Pole Figures</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-03-01"><meta name="DC.source" content="script_TOF2PoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/NeutronData/TOF2PoleFigure.m">
+      --><title>Convert Time of Flight Neutron Data into Pole Figures</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-04-17"><meta name="DC.source" content="script_TOF2PoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExODFReconstruction/TOF2PoleFigure.m">
     edit page</a>
     author: </font><div><!--introduction--><p>This example demonstrates how to convert SKAT time of flight neutron intensities into pole figure intensities</p><!--/introduction--><h2 id="1">Step 1: Import and Analyze the Spectra</h2>
 {% highlight matlab %}
 % import all spectra
-spec = loadallspectra(fullfile(mtexExamplePath,'NeutronData','Knie_10','Knie_10'));
+spec = loadallspectra(fullfile(mtexExamplePath,'ExODFReconstruction','Knie_10','Knie_10'));
 
 % compute background
 bg = calc_background(spec);
@@ -28,7 +28,6 @@ plot_spectra(spec,bg)
 {% highlight plaintext %}
 load detector: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, .
 calculate background: .
-   27
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TOF2PoleFigure_01.png" %}
@@ -46,7 +45,7 @@ peakrange = [[2509      2550];...
 	[1103      1117];...
   [1015      1030]];
 
-% specify scrystal and specimen symmetry
+% specify crystal and specimen symmetry
 CS = crystalSymmetry('-3m',[4.9,4.9,5.4]);
 
 % file with structure factors for quartz
@@ -76,7 +75,9 @@ end
 * 0 string replacement(s)
 ************
 {% endhighlight %}
-<h2 id="3">Step 3: Set up the Pole Figures</h2>
+<center>
+{% include inline_image.html file="TOF2PoleFigure_02.png" %}
+</center><h2 id="3">Step 3: Set up the Pole Figures</h2>
 {% highlight matlab %}
 r = DubnaGrid(19);
 
@@ -94,5 +95,5 @@ pf.c = c;
 plot(pf)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TOF2PoleFigure_02.png" %}
+{% include inline_image.html file="TOF2PoleFigure_03.png" %}
 </center></div></body></html>
