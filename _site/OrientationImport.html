@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+
+<title>Importing Crystal Orientations | MTEX</title>
+
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/theme-mtex.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" type="image/png" sizes="100x100" href="images/favicons/favicon.png">
+<link rel="icon" type="image/png" sizes="100x100" href="images/favicons/favicon.png">
+<link rel="manifest" href="images/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#149983">
+<meta name="msapplication-TileImage" size="100x100" type="image/png" content="images/favicons/favicon.png">
+<meta name="theme-color" content="#149983">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4000/feed.xml">
+
+<!-- enable MathJax
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+          inlineMath: [['$','$']]
+      }
+  });
+</script>-->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-lg navbar-brand" href="index"><img src="images/icons/MTEX_100x67px.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <br><br>
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- topnav -->
+                
+                
+                    
+                        
+                        
+                            <li><a href="index">Home</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="download">Download</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="Documentation">Documentation</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="function_reference">Function Reference</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="examples">Examples</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="workshop24">Workshops</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="people">People</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="search"><i class="fa fa-search"></i></a></li>
+                        
+                    
+                
+
+                
+            </ul>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">Topics </li>
+  
+  
+  
+  <li>
+      <a class="no_icon" href="#">Tutorials</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="EBSDTutorial.html">EBSD</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainTutorial.html">Grains</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureTutorial.html">Pole Figure Data</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFTutorial.html">ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ImportFromVPSC.html">Import from VPSC</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">General Concepts</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="MTEXScripts.html">MTEX Scripts</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ListsAndIndexing.html">Lists and Indexing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GeneralConceptsConfiguration.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GeneralConceptsOptions.html">Options</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Properties.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OptimalKernel.html">Optimal Kernel Selection</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ClusterDemo.html">Cluster demo</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Vectors</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="VectorsDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsDensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsAxes.html">Axes</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorGrids.html">Spherical Grids</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Rotations</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="RotationDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationImproper.html">Improper Rotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationPlotting.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationFibre.html">Fibres</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationSpinTensor.html">Spin Tensor</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Crystal Geometry</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="CrystalSymmetries.html">Crystal Symmetries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalDirections.html">Miller Indicies</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalReferenceSystem.html">Reference System</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SymmetryAlignment.html">Crystal Axes Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalShapes.html">Crystal Shapes</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalShapeSmorf.html">Advanced Crystal Shapes</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="FundamentalSector.html">Fundamental Sector</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="QuasiCrystals.html">Quasi Symmetries</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Orientations</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="OrientationDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DefinitionAsCoordinateTransform.html">Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationSymmetry.html">Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationStandard.html">Standard Orientations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationPoleFigure.html">Pole Figures</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationInversePoleFigure.html">Inverse Pole Figure</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationVisualization3d.html">3D Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationVisualizationSections.html">Section Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationFundamentalRegion.html">Fundamenal Region</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SpecimenSymmetry.html">Specimen Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationGrid.html">Grids</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationFibre.html">Fibres</a></li>
+          
+          
+          
+          
+          
+          
+          <li class="active"><a class="no_icon" href="OrientationImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationEmbeddings.html">Embeddings</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Misorientations</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="MisorientationTheory.html">Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Twinning.html">Twinning</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AxisDistributionFunction.html">Axis Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AngleDistributionFunction.html">Angle Distribution Function</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">ODF</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="ODFTheory.html">Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFModeling.html">Calculations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFPlot.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFPoleFigure.html">Pole Figures</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFInversePoleFigure.html">Inverse Pole Figures</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EulerAngleSections.html">Euler Angle Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SigmaSections.html">Sigma Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFComponents.html">Components</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFCharacteristics.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RadialODFs.html">Radial ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="FibreODFs.html">Fibre ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BinghamODFs.html">Bingham ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunHarmonicRepresentation.html">Series Expansion</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RandomSampling.html">Random Sampling</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DetectionOfSampleSymmetry.html">Sample Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFShapes.html">Shapes</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Pole Figures</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigurePlot.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureCorrection.html">Modify</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigure2ODF.html">ODF Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureSimulation.html">Simulation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigure2ODFAmbiguity.html">The Gost Effect</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureSantaFe.html">Santa Fe Example</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureDubna.html">Dubna Example</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureExport.html">Export</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">EBSD</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="EBSDImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDReferenceFrame.html">Reference Frame</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDPlotting.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDIPFMap.html">IPF Maps</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDOrientationPlots.html">Orientation Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDSelect.html">Select</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDIndex.html">Select by Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDOrientationAnalysis.html">Orientation Analysis</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainReconstruction.html">Grain Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDGrid.html">Square and Hex Grids</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDDenoising.html">Denoising</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDFilling.html">Filling Missing Data</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDInter.html">Regridding and Interpolation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSD2ODF.html">ODF Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDOrientationPlots.html">Orientation Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDSharpPlot.html">Sharp Color Keys</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDAdvancedMaps.html">Advanced Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDKAM.html">KAM</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDGROD.html">Mis2Mean / GROD</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDProfile.html">Profiles</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDSimulation.html">Simulation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDExport.html">Export</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Grains</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="GrainReconstruction.html">Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainSpatialPlots.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SelectingGrains.html">Select</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ShapeParameters.html">Shape Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EllipseBasedParameters.html">Ellipse Fitting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="HullBasedParameters.html">Convex Hull Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ProjectionBasedParameters.html">Projection Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainOrientationParameters.html">Orientation Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainNeighbours.html">Neighbours</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainMerge.html">Merge</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainReconstructionAdvanced.html">Advanced Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="NeperInterface.html">Neper Interface</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Grain Boundaries</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="BoundarySelect.html">Select</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryPlots.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryProperties.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SubGrainBoundaries.html">Subgrain Boundaries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TiltAndTwistBoundaries.html">Twist and Tilt</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CSLBoundaries.html">CSL</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryCurvature.html">Curvature</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainSmoothing.html">Smoothing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TwinningBoundaries.html">Twinning</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TriplePoints.html">Triple Points</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryIntersections.html">Intersections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryNormalDistribution.html">Distribution</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Tensors</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="TensorDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorArithmetics.html">Arithmethics</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorVisualisation.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorAverage.html">Averages</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PiezoElectricity.html">Piezo Electricity</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BirefringenceDemo.html">Birefringence</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MagneticAnisotropy.html">Magnetic Anisotropy</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Elasticity</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="IsotropicTheory.html">Isotropic Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AnisotropicTheory.html">Anisotropic Elasticity</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="WaveVelocities.html">Wave Velocities</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CPOSeismicProperties.html">Plot seismic wave velocities and polarization directions for aggregates</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Plasticity</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="SlipSystems.html">Slip Systems</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SchmidtFactor.html">The Schmid Factor</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TaylorModel.html">Taylor Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SachsModel.html">Sachs Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SingleSlipModel.html">Sigle Slip Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SlipTransmission.html">Slip Transmission</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GND.html">Geometrically Necessary Dislocations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VPSCImport.html">Import from VPSC</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TextureEvolution.html">Texture Evolution</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Phase Transitions</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="ParentChildVariants.html">Parent Child Variants</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MartensiteVariants.html">Martensite Variants</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TiBetaReconstruction.html">Parent Beta Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MaParentGrainReconstruction.html">Parent Austenite Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TransformationTexture.html">Transformation Texture</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainGraphBasedReconstruction.html">Grain Graph Based Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TriplePointBasedReconstruction.html">Triple Point Based Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="LowLevelParentGrainReconstruction.html">Low Level Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MaParentGrainReconstructionAdvanced.html">Low Level Reconstruction 2</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Spherical Functions</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="S2FunConcept.html">Concept</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunPlotting.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunApproximationInterpolation.html">Approximation and Interpolation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunHarmonicRepresentation.html">Harmonic Representation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunBingham.html">Bingham Distribution</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunRadon.html">Radon Transform</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunVectorField.html">Vector Field</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunAxisField.html">Axis Field</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunSym.html">Symmetric Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunMultivariate.html">Multivariate Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2Kernels.html">Spherical Kernel Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SphericalHarmonics.html">Spherical Harmonics</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Orientation Functions</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunConcept.html">Concept</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFPlot.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EulerAngleSections.html">Euler Angle Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SigmaSections.html">Sigma Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunApproximationInterpolation.html">Approximation and Interpolation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunHarmonicRepresentation.html">Harmonic Representation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RadialODFs.html">Radial Basis Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="FibreODFs.html">Fibre Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BinghamODFs.html">Bingham ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunVectorField.html">Vector Field</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunSymmetricFunctions.html">Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunMultivariate.html">Multivariate Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3Kernels.html">Rotational Kernel Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="WignerFunctions.html">Wigner-D Functions</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Plotting</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="PlotTypes.html">Plot Types</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AxesAlignment.html">Axes Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CombinedPlots.html">Combined Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Multiplot.html">Multiplot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Annotations.html">Annotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PlottingExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SphericalProjections.html">Spherical Projections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Legends.html">Legends</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ColorMaps.html">Color Mapping</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ContourPlots.html">Contour Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TransparencyDemo.html">Transparencys</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a class="no_icon" href="#" id="collapseAll">Collapse All</a> | <a class="no_icon" href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            
+    <div class="post-header">
+        <h1 class="post-title-main">Importing Crystal Orientations</h1>
+    </div>
+
+
+<div class="post-content">
+
+    
+
+    
+
+
+    
+
+        <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Importing Crystal Orientations</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_OrientationImport.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationImport.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>In order to import orientation data from a text file we first need to defined the corresponding <a href="CrystalSymmetries.html">crystal symmetry</a>, e.g. by a cif file</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">cs</span> <span class="o">=</span> <span class="n">crystalSymmetry</span><span class="o">.</span><span class="nb">load</span><span class="p">(</span><span class="s1">'quartz.cif'</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">cs = crystalSymmetry
+ 
+  mineral        : Quartz            
+  symmetry       : 321               
+  elements       : 6                 
+  a, b, c        : 4.9, 4.9, 5.4     
+  reference frame: X||a*, Y||b, Z||c*</code></pre></figure>
+<p>In the second step we may use the command <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a> to load the data. This function requires that one specifies the meaning of the column of the import file by the option <code class="language-plaintext highlighter-rouge">columnNames</code>.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">fname</span> <span class="o">=</span> <span class="nb">fullfile</span><span class="p">(</span><span class="n">mtexDataPath</span><span class="p">,</span><span class="s1">'orientation'</span><span class="p">,</span><span class="s1">'Tongue_Quartzite_Bunge_Euler'</span><span class="p">);</span>
+<span class="n">ori</span> <span class="o">=</span> <span class="n">orientation</span><span class="o">.</span><span class="nb">load</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span><span class="s1">'columnNames'</span><span class="p">,{</span><span class="s1">'phi1'</span><span class="p">,</span><span class="s1">'Phi'</span><span class="p">,</span><span class="s1">'phi2'</span><span class="p">},</span><span class="n">cs</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ori = orientation (Quartz → xyz)
+  size: 382 x 1</code></pre></figure>
+<p>This creates a variable of type <a href="orientation.orientation.html">orientation</a> which can be used for further analysis, e.g. to plot pole figures</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">plotPDF</span><span class="p">(</span><span class="n">ori</span><span class="p">,</span><span class="n">Miller</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">},{</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">},</span><span class="n">cs</span><span class="p">))</span></code></pre></figure>
+<center>
+<img class="inline" src="images/OrientationImport_01.png" alt="" />
+
+</center></div></body></html>
+
+    <div class="tags">
+        
+    </div>
+
+    
+
+
+</div>
+
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            <p>
+                <img src="images/icons/MTEX_100x67px.png" alt="MTEX logo">
+            </p>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-83346204-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>

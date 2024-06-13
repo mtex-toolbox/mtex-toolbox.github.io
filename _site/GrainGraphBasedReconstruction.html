@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="description" content="">
+<meta name="keywords" content="">
+
+
+<title>Grain Graph Based Parent Grain Reconstrution | MTEX</title>
+
+<link rel="stylesheet" href="css/syntax.css">
+
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!--<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">-->
+<link rel="stylesheet" href="css/modern-business.css">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="css/customstyles.css">
+<link rel="stylesheet" href="css/boxshadowproperties.css">
+
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="css/theme.css">
+<link rel="stylesheet" href="css/theme-mtex.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/jquery.navgoco.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js"></script>
+<script src="js/toc.js"></script>
+<script src="js/customscripts.js"></script>
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" type="image/png" sizes="100x100" href="images/favicons/favicon.png">
+<link rel="icon" type="image/png" sizes="100x100" href="images/favicons/favicon.png">
+<link rel="manifest" href="images/favicons/manifest.json">
+<meta name="msapplication-TileColor" content="#149983">
+<meta name="msapplication-TileImage" size="100x100" type="image/png" content="images/favicons/favicon.png">
+<meta name="theme-color" content="#149983">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4000/feed.xml">
+
+<!-- enable MathJax
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+          inlineMath: [['$','$']]
+      }
+  });
+</script>-->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+
+        });
+
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-lg navbar-brand" href="index"><img src="images/icons/MTEX_100x67px.png"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <br><br>
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- topnav -->
+                
+                
+                    
+                        
+                        
+                            <li><a href="index">Home</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="download">Download</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="Documentation">Documentation</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="function_reference">Function Reference</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="examples">Examples</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="workshop24">Workshops</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="people">People</a></li>
+                        
+                    
+                        
+                        
+                            <li><a href="search"><i class="fa fa-search"></i></a></li>
+                        
+                    
+                
+
+                
+            </ul>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+  <div id="main">
+    <!-- Content Row -->
+    <div class="row">
+        
+        
+            <!-- Sidebar Column -->
+            <div class="col-md-3" id="tg-sb-sidebar">
+                
+
+<ul id="mysidebar" class="nav">
+  <li class="sidebarTitle">Topics </li>
+  
+  
+  
+  <li>
+      <a class="no_icon" href="#">Tutorials</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="EBSDTutorial.html">EBSD</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainTutorial.html">Grains</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureTutorial.html">Pole Figure Data</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFTutorial.html">ODFs</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ImportFromVPSC.html">Import from VPSC</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">General Concepts</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="MTEXScripts.html">MTEX Scripts</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ListsAndIndexing.html">Lists and Indexing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GeneralConceptsConfiguration.html">Configuration</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GeneralConceptsOptions.html">Options</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Properties.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OptimalKernel.html">Optimal Kernel Selection</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ClusterDemo.html">Cluster demo</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Vectors</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="VectorsDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsDensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorsAxes.html">Axes</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VectorGrids.html">Spherical Grids</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Rotations</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="RotationDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationImproper.html">Improper Rotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationPlotting.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationFibre.html">Fibres</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RotationSpinTensor.html">Spin Tensor</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Crystal Geometry</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="CrystalSymmetries.html">Crystal Symmetries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalDirections.html">Miller Indicies</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalReferenceSystem.html">Reference System</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SymmetryAlignment.html">Crystal Axes Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalShapes.html">Crystal Shapes</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CrystalShapeSmorf.html">Advanced Crystal Shapes</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="FundamentalSector.html">Fundamental Sector</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="QuasiCrystals.html">Quasi Symmetries</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Orientations</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="OrientationDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DefinitionAsCoordinateTransform.html">Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationSymmetry.html">Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationStandard.html">Standard Orientations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationPoleFigure.html">Pole Figures</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationInversePoleFigure.html">Inverse Pole Figure</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationVisualization3d.html">3D Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationVisualizationSections.html">Section Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationFundamentalRegion.html">Fundamenal Region</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SpecimenSymmetry.html">Specimen Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationGrid.html">Grids</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationFibre.html">Fibres</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="OrientationEmbeddings.html">Embeddings</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Misorientations</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="MisorientationTheory.html">Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Twinning.html">Twinning</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AxisDistributionFunction.html">Axis Distribution Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AngleDistributionFunction.html">Angle Distribution Function</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">ODF</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="ODFTheory.html">Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFModeling.html">Calculations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFPlot.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFPoleFigure.html">Pole Figures</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFInversePoleFigure.html">Inverse Pole Figures</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EulerAngleSections.html">Euler Angle Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SigmaSections.html">Sigma Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFComponents.html">Components</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFCharacteristics.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RadialODFs.html">Radial ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="FibreODFs.html">Fibre ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BinghamODFs.html">Bingham ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunHarmonicRepresentation.html">Series Expansion</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RandomSampling.html">Random Sampling</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DensityEstimation.html">Density Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="DetectionOfSampleSymmetry.html">Sample Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFShapes.html">Shapes</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Pole Figures</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigurePlot.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureCorrection.html">Modify</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigure2ODF.html">ODF Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureSimulation.html">Simulation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigure2ODFAmbiguity.html">The Gost Effect</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureSantaFe.html">Santa Fe Example</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureDubna.html">Dubna Example</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PoleFigureExport.html">Export</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">EBSD</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="EBSDImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDReferenceFrame.html">Reference Frame</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDPlotting.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDIPFMap.html">IPF Maps</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDOrientationPlots.html">Orientation Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDSelect.html">Select</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDIndex.html">Select by Index</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDOrientationAnalysis.html">Orientation Analysis</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainReconstruction.html">Grain Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDGrid.html">Square and Hex Grids</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDDenoising.html">Denoising</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDFilling.html">Filling Missing Data</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDInter.html">Regridding and Interpolation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSD2ODF.html">ODF Estimation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDOrientationPlots.html">Orientation Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDSharpPlot.html">Sharp Color Keys</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDAdvancedMaps.html">Advanced Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDKAM.html">KAM</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDGROD.html">Mis2Mean / GROD</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDProfile.html">Profiles</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDSimulation.html">Simulation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EBSDExport.html">Export</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Grains</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="GrainReconstruction.html">Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainSpatialPlots.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SelectingGrains.html">Select</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ShapeParameters.html">Shape Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EllipseBasedParameters.html">Ellipse Fitting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="HullBasedParameters.html">Convex Hull Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ProjectionBasedParameters.html">Projection Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainOrientationParameters.html">Orientation Parameters</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainNeighbours.html">Neighbours</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainMerge.html">Merge</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainReconstructionAdvanced.html">Advanced Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="NeperInterface.html">Neper Interface</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Grain Boundaries</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="BoundarySelect.html">Select</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryPlots.html">Plot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryProperties.html">Properties</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SubGrainBoundaries.html">Subgrain Boundaries</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TiltAndTwistBoundaries.html">Twist and Tilt</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CSLBoundaries.html">CSL</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryCurvature.html">Curvature</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GrainSmoothing.html">Smoothing</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TwinningBoundaries.html">Twinning</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TriplePoints.html">Triple Points</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryIntersections.html">Intersections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BoundaryNormalDistribution.html">Distribution</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Tensors</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="TensorDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorArithmetics.html">Arithmethics</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorVisualisation.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TensorAverage.html">Averages</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PiezoElectricity.html">Piezo Electricity</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BirefringenceDemo.html">Birefringence</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MagneticAnisotropy.html">Magnetic Anisotropy</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Elasticity</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="IsotropicTheory.html">Isotropic Theory</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AnisotropicTheory.html">Anisotropic Elasticity</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="WaveVelocities.html">Wave Velocities</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CPOSeismicProperties.html">Plot seismic wave velocities and polarization directions for aggregates</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Plasticity</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="SlipSystems.html">Slip Systems</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SchmidtFactor.html">The Schmid Factor</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TaylorModel.html">Taylor Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SachsModel.html">Sachs Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SingleSlipModel.html">Sigle Slip Model</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SlipTransmission.html">Slip Transmission</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="GND.html">Geometrically Necessary Dislocations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="VPSCImport.html">Import from VPSC</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TextureEvolution.html">Texture Evolution</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TaylorHex.html">Texture evolution in rolled magnesium during uniaxial tension</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Phase Transitions</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="ParentChildVariants.html">Parent Child Variants</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MartensiteVariants.html">Martensite Variants</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TiBetaReconstruction.html">Parent Beta Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MaParentGrainReconstruction.html">Parent Austenite Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TransformationTexture.html">Transformation Texture</a></li>
+          
+          
+          
+          
+          
+          
+          <li class="active"><a class="no_icon" href="GrainGraphBasedReconstruction.html">Grain Graph Based Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TriplePointBasedReconstruction.html">Triple Point Based Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="LowLevelParentGrainReconstruction.html">Low Level Reconstruction</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="MaParentGrainReconstructionAdvanced.html">Low Level Reconstruction 2</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Spherical Functions</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="S2FunConcept.html">Concept</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunPlotting.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunApproximationInterpolation.html">Approximation and Interpolation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunHarmonicRepresentation.html">Harmonic Representation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunBingham.html">Bingham Distribution</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunRadon.html">Radon Transform</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunVectorField.html">Vector Field</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunAxisField.html">Axis Field</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunSym.html">Symmetric Function</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2FunMultivariate.html">Multivariate Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="S2Kernels.html">Spherical Kernel Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SphericalHarmonics.html">Spherical Harmonics</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Orientation Functions</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunConcept.html">Concept</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunDefinition.html">Definition</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunOperations.html">Operations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFPlot.html">Plotting</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="EulerAngleSections.html">Euler Angle Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SigmaSections.html">Sigma Sections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunApproximationInterpolation.html">Approximation and Interpolation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunHarmonicRepresentation.html">Harmonic Representation</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="RadialODFs.html">Radial Basis Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="FibreODFs.html">Fibre Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="BinghamODFs.html">Bingham ODF</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFImport.html">Import</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ODFExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunVectorField.html">Vector Field</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunSymmetricFunctions.html">Symmetry</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3FunMultivariate.html">Multivariate Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SO3Kernels.html">Rotational Kernel Functions</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="WignerFunctions.html">Wigner-D Functions</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+  
+  <li>
+      <a class="no_icon" href="#">Plotting</a>
+      <ul>
+          
+          
+          
+          <li><a class="no_icon" href="PlotTypes.html">Plot Types</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="AxesAlignment.html">Axes Alignment</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="CombinedPlots.html">Combined Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Multiplot.html">Multiplot</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Annotations.html">Annotations</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="PlottingExport.html">Export</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="SphericalProjections.html">Spherical Projections</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="Legends.html">Legends</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ColorMaps.html">Color Mapping</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="ContourPlots.html">Contour Plots</a></li>
+          
+          
+          
+          
+          
+          
+          <li><a class="no_icon" href="TransparencyDemo.html">Transparencys</a></li>
+          
+          
+          
+          
+      </ul>
+   </li>
+     
+      
+      
+      <!-- if you aren't using the accordion, uncomment this block:
+         <p class="external">
+             <a class="no_icon" href="#" id="collapseAll">Collapse All</a> | <a class="no_icon" href="#" id="expandAll">Expand All</a>
+         </p>
+         -->
+</ul>
+
+<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+            </div>
+            
+        
+
+        <!-- Content Column -->
+        <div class="col-md-9" id="tg-sb-content">
+            
+    <div class="post-header">
+        <h1 class="post-title-main">Grain Graph Based Parent Grain Reconstrution</h1>
+    </div>
+
+
+<div class="post-content">
+
+    
+
+    
+
+
+    
+
+        <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Grain Graph Based Parent Grain Reconstrution</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainGraphBasedReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/GrainGraphBasedReconstruction.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the grain graph approach to parent phase reconstrution in a martensitic material. The methods are described in more detail in the publications</p><div><ul><li><a href="https://doi.org/10.1107/S1600576721011560">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a>, J. Appl. Cryst. 55, 2022.</li><li><a href="https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1007%2Fs11661-018-4904-9?_sg%5B0%5D=gRJGzFvY4PyFk-FFoOIj2jDqqumCsy3e8TU6qDnJoVtZaeUoXjzpsGmpe3TDKsNukQYQX9AtKGniFzbdpymYvzYwhg.5jfOl5Ohgg7pW_6yACRXN3QiR-oTn8UsxZjTbJoS_XqwSaaB7r8NgifJyjSES2iXP6iOVx57sy8HC4q2XyZZaA">Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel</a></li></ul></div><p>We shall use the following sample data set.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% load the data</span>
+<span class="n">mtexdata</span> <span class="n">martensite</span>
+<span class="n">plotx2east</span>
+
+<span class="c1">% grain reconstruction</span>
+<span class="p">[</span><span class="n">grains</span><span class="p">,</span><span class="n">ebsd</span><span class="o">.</span><span class="n">grainId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">),</span> <span class="s1">'angle'</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="nb">degree</span><span class="p">);</span>
+
+<span class="c1">% remove small grains</span>
+<span class="n">ebsd</span><span class="p">(</span><span class="n">grains</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="n">grainSize</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">))</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">% reidentify grains with small grains removed:</span>
+<span class="p">[</span><span class="n">grains</span><span class="p">,</span><span class="n">ebsd</span><span class="o">.</span><span class="n">grainId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">),</span><span class="s1">'angle'</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="nb">degree</span><span class="p">);</span>
+<span class="n">grains</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">grains</span><span class="p">,</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">% plot the data and the grain boundaries</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'Iron bcc'</span><span class="p">),</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'Iron bcc'</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">grains</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ebsd = EBSD
+ 
+ Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
+     0   92415 (27%)      notIndexed                                                 
+     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
+ 
+ Properties: bands, bc, bs, error, mad, reliabilityindex, x, y
+ Scan unit : um</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_01.png" alt="" />
+
+</center><h2 id="2">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% set up the job</span>
+<span class="n">job</span> <span class="o">=</span> <span class="n">parentGrainReconstructor</span><span class="p">(</span><span class="n">ebsd</span><span class="p">,</span><span class="n">grains</span><span class="p">);</span></code></pre></figure>
+<p>The <code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code> guesses from the EBSD data what is the parent and what is the child phase. If this guess is not correct it might be specified explicitely by defining an initial guess for the parent to child orientation relationship first and passing it as a third argument to <code class="language-plaintext highlighter-rouge"><a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a></code>. Here we define this initial guess seperately as the Kurdjumov Sachs orientation relationship</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% initial guess for the parent to child orientation relationship</span>
+<span class="n">job</span><span class="o">.</span><span class="n">p2c</span> <span class="o">=</span> <span class="n">orientation</span><span class="o">.</span><span class="n">KurdjumovSachs</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">csParent</span><span class="p">,</span> <span class="n">job</span><span class="o">.</span><span class="n">csChild</span><span class="p">)</span>
+<span class="c1">%job.p2c = orientation.NishiyamaWassermann(job.csParent, job.csChild)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">job = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       7002    100%               
+ 
+ OR: (111) || (011)   [10-1] || [11-1]
+   c2c fit: 2.4°, 3.4°, 4.4°, 5.4° (quintiles)</code></pre></figure>
+<p>The output of the variable <code class="language-plaintext highlighter-rouge">job</code> tells us the amount of parent and child grains as well as the percentage of already recovered parent grains. Furthermore, it displays how well the current guess of the parent to child orientation relationship fits the child to child misorientations within our data. In our sample data set this fit is described by the 4 quintiles 2.5&deg;, 3.5&deg;, 4.5&deg; and 5.5&deg;.</p><h2 id="5">Optimizing the parent child orientation relationship</h2><p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individualy. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">close</span> <span class="nb">all</span>
+<span class="nb">histogram</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">calcGBFit</span><span class="o">.</span><span class="p">/</span><span class="nb">degree</span><span class="p">,</span><span class="s1">'BinMethod'</span><span class="p">,</span><span class="s1">'sqrt'</span><span class="p">)</span>
+<span class="nb">xlabel</span><span class="p">(</span><span class="s1">'disorientation angle'</span><span class="p">)</span>
+
+<span class="n">job</span><span class="o">.</span><span class="n">calcParent2Child</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       7002    100%               
+ 
+ OR: (346.9°,9.3°,57.9°)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.2° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_02.png" alt="" />
+
+</center><p>We observe that the optimized parent to child orientation relationship is 2.3&deg; off the initial Kurdjumov Sachs orientation relationship and reduced the first quintil of the misfit with the child to child misorientations to 1.5&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">histogram</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">calcGBFit</span><span class="o">.</span><span class="p">/</span><span class="nb">degree</span><span class="p">,</span><span class="s1">'BinMethod'</span><span class="p">,</span><span class="s1">'sqrt'</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_03.png" alt="" />
+
+</center><p>We may explicitely compute the misfit for all child to child boundaries using the command <a href="parentGrainReconstructor.calcGBFit.html"><code class="language-plaintext highlighter-rouge">calcGBFit</code></a>. Beside the list <code class="language-plaintext highlighter-rouge">fit</code> it returns also the list of grain pairs for which these fits have been computed. Using th command <a href="grainBoundary.selectByGrainId.html"><code class="language-plaintext highlighter-rouge">selectByGrainId</code></a> we can find the corresponding boundary segments and colorize them according to this misfit. In the code below we go one step further and adjust the transparency as a function of the misfit.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% compute the misfit for all child to child grain neighbours</span>
+<span class="p">[</span><span class="n">fit</span><span class="p">,</span><span class="n">c2cPairs</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">calcGBFit</span><span class="p">;</span>
+
+<span class="c1">% select grain boundary segments by grain ids</span>
+<span class="p">[</span><span class="n">gB</span><span class="p">,</span><span class="n">pairId</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="nb">boundary</span><span class="o">.</span><span class="n">selectByGrainId</span><span class="p">(</span><span class="n">c2cPairs</span><span class="p">);</span>
+
+<span class="c1">% plot the child phase</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'Iron bcc'</span><span class="p">),</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'Iron bcc'</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">,</span><span class="s1">'faceAlpha'</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1">% and on top of it the boundaries colorized by the misfit</span>
+<span class="nb">hold</span> <span class="n">on</span><span class="p">;</span>
+<span class="c1">% scale fit between 0 and 1 - required for edgeAlpha</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">gB</span><span class="p">,</span> <span class="s1">'edgeAlpha'</span><span class="p">,</span> <span class="p">(</span><span class="n">fit</span><span class="p">(</span><span class="n">pairId</span><span class="p">)</span> <span class="o">.</span><span class="p">/</span> <span class="nb">degree</span> <span class="o">-</span> <span class="mf">2.5</span><span class="p">)</span><span class="o">.</span><span class="p">/</span><span class="mi">2</span> <span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_04.png" alt="" />
+
+</center><h2 id="8">Graph based parent grain reconstruction</h2><p>Next we set up a graph where each edge describes two neighbouring grains and the value of this edge is the probability that these two grains belong to the same parent grain. This graph is computed by the function <a href="parentGrainReconstructor.calcGraph.html"><code class="language-plaintext highlighter-rouge">calcGraph</code></a>. The probability is computed from the misfit of the misorientation between the two child grains to the theoretical child to child misorientation. More precisely, we model the probability by a cumulative Gaussian distribution with the mean value <code class="language-plaintext highlighter-rouge">'threshold'</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">'tolerance'</code>.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">job</span><span class="o">.</span><span class="n">calcGraph</span><span class="p">(</span><span class="s1">'threshold'</span><span class="p">,</span><span class="mf">2.5</span><span class="o">*</span><span class="nb">degree</span><span class="p">,</span><span class="s1">'tolerance'</span><span class="p">,</span><span class="mf">2.5</span><span class="o">*</span><span class="nb">degree</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       7002    100%               
+ 
+ OR: (346.9°,9.3°,57.9°)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
+ 
+ graph: 7001 grains in 3 clusters + 1 single grain clusters</code></pre></figure>
+<p>We may visualize th graph adjusting the edgeAlpha of the boundaries between grains according to the edge value of the graph. This can be accomplished by the command <a href="parentGrainReconstructor.plotGraph.html"><code class="language-plaintext highlighter-rouge">plotGraph</code></a></p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">plot</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'Iron bcc'</span><span class="p">),</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'Iron bcc'</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">,</span><span class="s1">'faceAlpha'</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">on</span><span class="p">;</span>
+<span class="n">job</span><span class="o">.</span><span class="n">plotGraph</span><span class="p">(</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_05.png" alt="" />
+
+</center><p>The next step is to cluster the graph into components. This is done by the command <a href="parentGrainReconstructor.clusterGraph.html"><code class="language-plaintext highlighter-rouge">clusterGraph</code></a> which uses by default the Markovian clustering algorithm. The number of clusters can be controlled by the option <code class="language-plaintext highlighter-rouge">'inflationPower'</code>. A smaller inflation power results in fewer but larger clusters.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">job</span><span class="o">.</span><span class="n">clusterGraph</span><span class="p">(</span><span class="s1">'inflationPower'</span><span class="p">,</span><span class="mf">1.6</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       7002    100%               
+ 
+ OR: (346.9°,9.3°,57.9°)
+   c2c fit: 1.4°, 1.9°, 2.2°, 3.3° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
+ 
+ graph: 6943 grains in 273 clusters + 59 single grain clusters</code></pre></figure>
+<p>Finaly, we assume a single parent orientation for each cluster and use it to compute a parent orientation for each child grain beeing part of a cluster. This is done by the command <a href="parentGrainReconstructor.calcParentFromGraph.html"><code class="language-plaintext highlighter-rouge">calcParentFromGraph</code></a>.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% compute parent orientations</span>
+<span class="n">job</span><span class="o">.</span><span class="n">calcParentFromGraph</span>
+
+<span class="c1">% plot them</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area   reconstructed
+ parent  Iron fcc        432       6943    100%   99%          
+ child   Iron bcc (old)  432       59      0.16%               
+ 
+ OR: (346.9°,9.3°,57.9°)
+   p2c fit: 4.5°, 6.5°, 13°, 21° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_06.png" alt="" />
+
+</center><p>We observe that almost all child grains have been fliped into parent grains. The command <a href="parentGrainReconstructor.calcParentFromGraph.html"><code class="language-plaintext highlighter-rouge">calcParentFromGraph</code></a> has two additional outputs. The misorientation angle between the reconstructed parent orientation of each child grain and the mean parent orientation of the corresponding parent grain is stored in <code class="language-plaintext highlighter-rouge">job.grains.fit</code> while <code class="language-plaintext highlighter-rouge">job.grains.clusterSize</code> containes the size of each cluster.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="nb">figure</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">grains</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">fit</span><span class="o">.</span><span class="p">/</span><span class="nb">degree</span><span class="p">)</span>
+<span class="c1">%plot(job.grains, job.grains.clusterSize &lt; 15)</span>
+<span class="n">setColorRange</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">mtexColorbar</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_07.png" alt="" />
+
+</center><p>We may use these quantities to undo the parent orientation reconstruction for child grains with a misfit exeeding a certain threshold or belonging to a too small cluster. This can be done by the command <a href="parentGrainReconstructor.revert.html"><code class="language-plaintext highlighter-rouge">job.revert</code></a></p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">job</span><span class="o">.</span><span class="n">revert</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">fit</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">*</span><span class="nb">degree</span> <span class="o">|</span> <span class="n">job</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="n">clusterSize</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       5582    88%   80%          
+ child   Iron bcc (old)  432       1420    12%                
+ 
+ OR: (346.9°,9.3°,57.9°)
+   p2c fit: 4.1°, 10°, 14°, 21° (quintiles)
+   c2c fit: 1.3°, 1.8°, 2.2°, 3° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_08.png" alt="" />
+
+</center><p>When used without any input argument <a href="parentGrainReconstructor.revert.html"><code class="language-plaintext highlighter-rouge">job.revert</code></a> will undo all reconstructed parent grain. This is helpfull when experimenting with different parameters.</p><p>In order to fill the holes corresponding to the remaining child grains we inspect their misorientations to neighbouring already reconstructed parent grains. Each of these misorientations votes for a certain parent orientation. We choose the parent orientation that gets the most votes. The corresponding commands <a href="parentGrainReconstructor.calcGBVotes.html"><code class="language-plaintext highlighter-rouge">job.calcGBVotes</code></a> and <a href="parentGrainReconstructor.calcParentFromVote.html"><code class="language-plaintext highlighter-rouge">job.calcParentFromVote</code></a> can be adjusted by many options.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="k">for</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span> <span class="c1">% do this three times</span>
+
+  <span class="c1">% compute votes</span>
+  <span class="n">job</span><span class="o">.</span><span class="n">calcGBVotes</span><span class="p">(</span><span class="s1">'p2c'</span><span class="p">,</span><span class="s1">'threshold'</span><span class="p">,</span> <span class="n">k</span> <span class="o">*</span> <span class="mf">2.5</span><span class="o">*</span><span class="nb">degree</span><span class="p">);</span>
+
+  <span class="c1">% compute parent orientations from votes</span>
+  <span class="n">job</span><span class="o">.</span><span class="n">calcParentFromVote</span>
+<span class="k">end</span>
+
+<span class="c1">% plot the result</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       5909    92%   84%          
+ child   Iron bcc (old)  432       1093    8%                 
+ 
+ OR: (346.9°,9.3°,57.9°)
+   p2c fit: 5.7°, 11°, 15°, 22° (quintiles)
+   c2c fit: 1.3°, 1.8°, 2.2°, 3.1° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       6295    95%   90%          
+ child   Iron bcc (old)  432       707     5.2%               
+ 
+ OR: (346.9°,9.3°,57.9°)
+   p2c fit: 11°, 13°, 17°, 23° (quintiles)
+   c2c fit: 1.3°, 1.8°, 2.2°, 2.9° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
+ 
+ votes: 3 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       6652    98%   95%          
+ child   Iron bcc (old)  432       350     2.4%               
+ 
+ OR: (346.9°,9.3°,57.9°)
+   p2c fit: 14°, 18°, 22°, 26° (quintiles)
+   c2c fit: 1.4°, 1.8°, 2.2°, 3° (quintiles)
+   closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.2°
+ 
+ votes: 1 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_09.png" alt="" />
+
+</center><h2 id="15">Merge similar grains and inclusions</h2><p>We observe that we have many neighbouring parent grains with similar orientations. These can be merged into big parent grains using the command <a href="parentGrainReconstructor.mergeSimilar.html"><code class="language-plaintext highlighter-rouge">mergeSimilar</code></a></p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% merge grains with similar orientation</span>
+<span class="n">job</span><span class="o">.</span><span class="n">mergeSimilar</span><span class="p">(</span><span class="s1">'threshold'</span><span class="p">,</span><span class="mf">7.5</span><span class="o">*</span><span class="nb">degree</span><span class="p">);</span>
+
+<span class="c1">% plot the result</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">)</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_10.png" alt="" />
+
+</center><p>We may be still a bit unsatisfied with the result as the large parent grains contain many poorly indexed inclusions where we failed to assign to a parent orientation. We may use the command <a href="parentGrainReconstructor.mergeInclusions.html"><code class="language-plaintext highlighter-rouge">mergeInclusions</code></a> to merge all inclusions with fever pixels then a certain threshold into the surrounding parent grains.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">job</span><span class="o">.</span><span class="n">mergeInclusions</span><span class="p">(</span><span class="s1">'maxSize'</span><span class="p">,</span><span class="mi">50</span><span class="p">);</span>
+
+<span class="c1">% plot the result</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">)</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_11.png" alt="" />
+
+</center><h2 id="17">Compute Child Variants</h2><p>Knowing the parent grain orientations we may compute the variants and packets of each child grain using the command <a href="parentGrainReconstructor.calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a>. The values are stored with the properties <code class="language-plaintext highlighter-rouge">job.transformedGrains.variantId</code> and <code class="language-plaintext highlighter-rouge">job.transformedGrains.packetId</code>. The <code class="language-plaintext highlighter-rouge">packetId</code> is defined as the closest {111} plane in austenite to the (011) plane in martensite.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">job</span><span class="o">.</span><span class="n">calcVariants</span>
+
+<span class="c1">% associate to each packet id a color and plot</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">ind2color</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">transformedGrains</span><span class="o">.</span><span class="n">packetId</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">transformedGrains</span><span class="p">,</span><span class="n">color</span><span class="p">,</span><span class="s1">'faceAlpha'</span><span class="p">,</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="n">parentGrains</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">parentGrains</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentGrains</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1">% outline a specific parent grain</span>
+<span class="n">grainSelected</span> <span class="o">=</span> <span class="n">parentGrains</span><span class="p">(</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">findByLocation</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span><span class="mi">80</span><span class="p">]));</span>
+
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">grainSelected</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s1">'lineColor'</span><span class="p">,</span><span class="s1">'w'</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">Warning: Packet ID calculation assuming {111}_p||{110}_c 
+Warning: Bain ID calculation assuming {001}_p||{100}_c</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_12.png" alt="" />
+
+</center><p>We can also directly identify the child grains belonging to the selected parent grains. Remeber that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% identify childs of the selected parent grain</span>
+<span class="n">childGrains</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">grainsPrior</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">mergeId</span> <span class="o">==</span> <span class="n">grainSelected</span><span class="o">.</span><span class="n">id</span><span class="p">);</span>
+
+<span class="c1">% plot these childs</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">childGrains</span><span class="p">,</span><span class="n">childGrains</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">)</span>
+
+<span class="c1">% and top the parent grain boundary</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">grainSelected</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_13.png" alt="" />
+
+</center><p>In order to check our parent grain reconstruction we chose the single parent grain outlined in the above map and plot all child variants of its reconstructed parent orientation together with the actually measured child orientations inside the parent grain. In order to compute the <code class="language-plaintext highlighter-rouge">variantId</code> and <code class="language-plaintext highlighter-rouge">packetId</code> we use the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% the measured child orientations that belong to parent grain 279</span>
+<span class="n">childOri</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">ebsdPrior</span><span class="p">(</span><span class="n">childGrains</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">;</span>
+
+<span class="c1">% the orientation of parent grain 279</span>
+<span class="n">parentOri</span> <span class="o">=</span> <span class="n">grainSelected</span><span class="o">.</span><span class="n">meanOrientation</span><span class="p">;</span>
+
+<span class="c1">% lets compute the variant and packeIds</span>
+<span class="p">[</span><span class="n">variantId</span><span class="p">,</span> <span class="n">packetId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcVariantId</span><span class="p">(</span><span class="n">parentOri</span><span class="p">,</span><span class="n">childOri</span><span class="p">,</span><span class="n">job</span><span class="o">.</span><span class="n">p2c</span><span class="p">);</span>
+
+<span class="c1">% colorize child orientations by packetId</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">ind2color</span><span class="p">(</span><span class="n">packetId</span><span class="p">);</span>
+<span class="n">plotPDF</span><span class="p">(</span><span class="n">childOri</span><span class="p">,</span><span class="n">color</span><span class="p">,</span> <span class="n">Miller</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">childOri</span><span class="o">.</span><span class="n">CS</span><span class="p">),</span><span class="s1">'MarkerSize'</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'all'</span><span class="p">)</span>
+
+<span class="c1">% the positions of the parent (001) directions</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentOri</span><span class="o">.</span><span class="n">symmetrise</span> <span class="o">*</span> <span class="n">Miller</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">parentOri</span><span class="o">.</span><span class="n">CS</span><span class="p">),</span><span class="s1">'markerSize'</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="k">...</span>
+  <span class="s1">'marker'</span><span class="p">,</span><span class="s1">'s'</span><span class="p">,</span><span class="s1">'markerFaceColor'</span><span class="p">,</span><span class="s1">'w'</span><span class="p">,</span><span class="s1">'MarkerEdgeColor'</span><span class="p">,</span><span class="s1">'k'</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">% the theoretical child variants</span>
+<span class="n">childVariants</span> <span class="o">=</span> <span class="n">variants</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">p2c</span><span class="p">,</span> <span class="n">parentOri</span><span class="p">);</span>
+<span class="n">plotPDF</span><span class="p">(</span><span class="n">childVariants</span><span class="p">,</span> <span class="s1">'markerFaceColor'</span><span class="p">,</span><span class="s1">'none'</span><span class="p">,</span><span class="s1">'linewidth'</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">'markerEdgeColor'</span><span class="p">,</span><span class="s1">'k'</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">Warning: Packet ID calculation assuming {111}_p||{110}_c</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_14.png" alt="" />
+
+</center><h2 id="20">Parent EBSD reconstruction</h2><p>So far our analysis was at the grain level. However, once parent grain orientations have been computed we may also use them to compute parent orientations of each pixel in our original EBSD map. This is done by the command <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a></p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="n">parentEBSD</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">calcParentEBSD</span><span class="p">;</span>
+
+<span class="c1">% plot the result</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'Iron fcc'</span><span class="p">),</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'Iron fcc'</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">Warning: Packet ID calculation assuming {111}_p||{110}_c</code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_15.png" alt="" />
+
+</center><p>We obtain even a measure <code class="language-plaintext highlighter-rouge">parentEBSD.fit</code> for the corespondence between the parent orientation reconstructed from the single pixel and the parent orientation of the grain. Lets visualize this fit</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% the fit between ebsd child orientation and the reconstructed parent grain</span>
+<span class="c1">% orientation</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentEBSD</span><span class="p">,</span> <span class="n">parentEBSD</span><span class="o">.</span><span class="n">fit</span> <span class="o">.</span><span class="p">/</span> <span class="nb">degree</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">)</span>
+<span class="n">mtexColorbar</span>
+<span class="n">setColorRange</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+<span class="n">mtexColorMap</span><span class="p">(</span><span class="s1">'LaboTeX'</span><span class="p">)</span>
+
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">grains</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'lineWidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_16.png" alt="" />
+
+</center><h2 id="22">Denoise the parent map</h2><p>Finaly we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="p">[</span><span class="n">parentGrains</span><span class="p">,</span> <span class="n">parentEBSD</span><span class="o">.</span><span class="n">grainId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">),</span><span class="s1">'angle'</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="nb">degree</span><span class="p">);</span>
+
+<span class="c1">% remove very small grains</span>
+<span class="n">parentEBSD</span><span class="p">(</span><span class="n">parentGrains</span><span class="p">(</span><span class="n">parentGrains</span><span class="o">.</span><span class="n">grainSize</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">))</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">% redo grain reconstrucion</span>
+<span class="p">[</span><span class="n">parentGrains</span><span class="p">,</span> <span class="n">parentEBSD</span><span class="o">.</span><span class="n">grainId</span><span class="p">]</span> <span class="o">=</span> <span class="n">calcGrains</span><span class="p">(</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">),</span><span class="s1">'angle'</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="nb">degree</span><span class="p">);</span>
+<span class="n">parentGrains</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">parentGrains</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+
+<span class="nb">plot</span><span class="p">(</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">),</span><span class="n">ebsd</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">)</span>
+
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentGrains</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'lineWidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_17.png" alt="" />
+
+</center><p>and then use the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> to fill the holes in the reconstructed parent map</p>
+<figure class="highlight"><pre><code class="language-matlab" data-lang="matlab"><span class="c1">% fill the holes</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">halfQuadraticFilter</span><span class="p">;</span>
+<span class="n">parentEBSD</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'indexed'</span><span class="p">),</span><span class="n">F</span><span class="p">,</span><span class="s1">'fill'</span><span class="p">,</span><span class="n">parentGrains</span><span class="p">);</span>
+
+<span class="c1">% plot the parent map</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'Iron fcc'</span><span class="p">),</span><span class="n">parentEBSD</span><span class="p">(</span><span class="s1">'Iron fcc'</span><span class="p">)</span><span class="o">.</span><span class="n">orientations</span><span class="p">,</span><span class="s1">'figSize'</span><span class="p">,</span><span class="s1">'large'</span><span class="p">)</span>
+
+<span class="c1">% with grain boundaries</span>
+<span class="nb">hold</span> <span class="n">on</span>
+<span class="nb">plot</span><span class="p">(</span><span class="n">parentGrains</span><span class="o">.</span><span class="nb">boundary</span><span class="p">,</span><span class="s1">'lineWidth'</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">hold</span> <span class="n">off</span></code></pre></figure>
+<center>
+<img class="inline" src="images/GrainGraphBasedReconstruction_18.png" alt="" />
+
+</center></div></body></html>
+
+    <div class="tags">
+        
+    </div>
+
+    
+
+
+</div>
+
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            <p>
+                <img src="images/icons/MTEX_100x67px.png" alt="MTEX logo">
+            </p>
+        </div>
+    </div>
+</footer>
+
+        </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- /#main -->
+    </div>
+
+</body>
+
+<!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-83346204-1','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+</html>
