@@ -181,6 +181,18 @@ of material scientists, geologists and mathematicians.
             </div>
         </div>
     </div>
+	<div class="col-md-4">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
+            </div>
+            <div class="panel-body">
+                <h4>Martensite Parent Grain Reconstruction</h4>
+                <p>Here we demonstrate the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase.</p>
+                {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- addons with image and description -->
