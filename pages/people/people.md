@@ -166,6 +166,22 @@ toc: false
 <div class="row">
     <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
+            <img src="images/profiles/vivian.jpg" alt="Picture of Vivian Tong">
+        </div>
+        <div class="panel-body">
+            <p>
+				<b>
+                    {% include reference.html link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate"
+                    content="Vivian Tong" %}
+                </b>
+	            </p>
+			<p>
+				National Physical Laboratory UK
+            </p>
+        </div>
+    </div>
+    <div class="panel panel-profile-card col-md-6">
+        <div class="panel-heading">
             <img src="images/profiles/azdiar.jpg" alt="Picture of Azdiar Gazder">
         </div>
         <div class="panel-body">
