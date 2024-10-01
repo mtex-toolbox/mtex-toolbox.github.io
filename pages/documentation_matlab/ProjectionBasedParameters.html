@@ -67,13 +67,14 @@ grains(ind).diameter
 
 {% highlight plaintext %}
 ans =
-   6.9277e+03
+   6.9276e+03
 {% endhighlight %}
 <p>The diameter is a special case of the <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. We may trace the caliper with respect to projection direction</p>
 {% highlight matlab %}
 close all
 omega = linspace(0,180);
-plot(omega,grains(ind).caliper(omega*degree),'LineWidth',2)
+dir = vector3d.byPolar(90*degree,omega*degree);
+plot(omega,grains(ind).caliper(dir),'LineWidth',2)
 ylabel('length in \(\mu\)m','Interpreter','latex')
 xlabel('angle of the projection line in degree')
 xlim([0,180])
@@ -96,7 +97,7 @@ hold off
 
 {% highlight plaintext %}
 ans =
-   6.9277e+03
+   6.9276e+03
 ans =
    1.6308e+03
 {% endhighlight %}
@@ -108,7 +109,7 @@ cMin = grains.caliper('shortest');
 cMax = grains.caliper('longest');
 
 plot(grains,(norm(cMax) - norm(cMin))./norm(cMax),'micronbar','off')
-mtexColorbar('title','TODO')
+mtexColorbar('title','c_{max} - c_{min}')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ProjectionBasedParameters_04.png" %}
@@ -137,7 +138,8 @@ legend('Location','east')
 {% highlight matlab %}
 % projection angle
 omega = linspace(0,360*degree,361);
-c = grains('Fo').caliper(omega);
+dir = vector3d.byPolar(90*degree,omega);
+c = grains('Fo').caliper(dir);
 
 subplot(1,2,1)
 polarplot(omega,c,'LineWidth',2,'color',[0 0.25 0.5 0.25])
@@ -149,7 +151,7 @@ polarplot(omega,5*mean(c),'LineWidth',3,'color','k');
 hold off
 
 subplot(1,2,2)
-c = grains('Enstatite').caliper(omega);
+c = grains('Enstatite').caliper(dir);
 
 polarplot(omega,c,'LineWidth',2,'color',[0 0.25 0.5 0.25])
 title('Enstatite')
@@ -184,7 +186,7 @@ min(cumplF), min(cumplE)
 ans =
     0.7102
 ans =
-    0.7204
+    0.7203
 {% endhighlight %}
 <p>The position of the maxima and minima of the projection function derived from <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">paror</code></a> can be interpreted in the following way: the maximum position represents the preferred axis parallel to the longest projection and the normal the minimum position represents the preferred axis related to the normal to the shortest projection function.</p>
 {% highlight matlab %}
@@ -211,7 +213,7 @@ ans =
 ans =
     87
 ans =
-    88
+   88.0000
 {% endhighlight %}
 <p>The smaller the difference between these values, the closer the fabric is to an orthorhombic symmetry.</p><p>Similarly to using the entire particle (the convex hull in case of the projection functions), we can use a distribution of lines <a href="grainBoundary.surfor.html"><code class="language-plaintext highlighter-rouge">grainBoudnary.surfor</code></a>. This can be useful for the quantification of the grain boundary anisotropy or in general might be needed if we look at boundaries which do not form closed outlines, e.g. a list of subgrain or twin boundaries or the contact between certain phases.</p><p>Let's compare the boundaries between the different unlike phases and between forsterite-forsterite in our sample:</p>
 {% highlight matlab %}
@@ -259,17 +261,17 @@ shapeF = shape2d
 {% include inline_image.html file="ProjectionBasedParameters_09.png" %}
 </center><p>The output of the command <a href="grainBoundary.characteristicShape.html"><code class="language-plaintext highlighter-rouge">characteristicShape</code></a> is a <a href="shape2d.shape2d.html"><code class="language-plaintext highlighter-rouge">shape2d</code></a> object which behaves very similar to a <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a> object. Hence it is easy to derive things such as a long axis or e.g. the angle between the longest and the shortest caliper which can be regarded as a measure of asymmetry.</p>
 {% highlight matlab %}
-angle(shapeF.caliper('longest'),shapeF.caliper('shortest'))/degree
-angle(shapeE.caliper('longest'),shapeE.caliper('shortest'))/degree
-angle(shapeEF.caliper('longest'),shapeF.caliper('shortest'))/degree
+angle(shapeF.caliper('longest'),shapeF.caliper('shortest')) / degree
+angle(shapeE.caliper('longest'),shapeE.caliper('shortest')) / degree
+angle(shapeEF.caliper('longest'),shapeF.caliper('shortest')) / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   78.7433
+   78.7774
 ans =
-   86.9609
+   86.8317
 ans =
-   79.6255
+   79.7408
 {% endhighlight %}
 </div></body></html>

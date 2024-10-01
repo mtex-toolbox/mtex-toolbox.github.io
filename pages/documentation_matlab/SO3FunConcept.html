@@ -25,7 +25,7 @@ SO3F = SO3FunHandle(@(ori) angle(ori) ./ degree, cs)
 SO3F = SO3FunHandle (432 → xyz)
   eval: @(ori)angle(ori)./degree
 {% endhighlight %}
-<p>Many more methods for defining orientation dependent functions are discussed <a href="SO3FunDefinition.html">here</a>.</p><p>The entire information about the orientation dependent function is now stored in the variable <code class="language-plaintext highlighter-rouge">SO3F</code>. In order to determine its value for a specific orientation <code class="language-plaintext highlighter-rouge">ori</code> the function <a href="SO3Fun.eval.html"><code class="language-plaintext highlighter-rouge">eval(ori)</code></a> is used</p>
+<p>Many more methods for defining orientation dependent functions are discussed <a href="SO3FunDefinition.html">here</a>.</p><p>The entire information about the orientation dependent function is now stored in the variable <code class="language-plaintext highlighter-rouge">SO3F</code>. In order to determine its value for a specific orientation <code class="language-plaintext highlighter-rouge">ori</code> the function <a href="SO3Fun.eval.html"><code class="language-plaintext highlighter-rouge">eval(ori)</code></a> is used.</p>
 {% highlight matlab %}
 ori = orientation.rand(cs)
 SO3F.eval(ori)
@@ -36,18 +36,18 @@ ori = orientation (432 → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  261.066 133.335 273.128
+  172.213 20.9924 52.3057
  
 ans =
-   44.5458
+   48.9912
 {% endhighlight %}
-<h2 id="5">Plotting an orientation Dependent Function</h2><p>Orientation dependent functions are most of visualized by sections according to the third Euler angle \(\varphi_2\)</p>
+<h2 id="5">Plotting an orientation Dependent Function</h2><p>Orientation dependent functions are most often visualized by sections according to the third Euler angle \(\varphi_2\).</p>
 {% highlight matlab %}
 plotSection(SO3F)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunConcept_01.png" %}
-</center><p>The plot tells us for which Euler angles the the resulting rotational angle is large and for which Euler angles it is low. The plot of this "angle function" <code class="language-plaintext highlighter-rouge">SO3F</code> becomes trivial if represented in an axis angle sections</p>
+</center><p>The plot tells us for which Euler angles the resulting rotational angle is large and for which Euler angles it is low. The plot of this "angle function" <code class="language-plaintext highlighter-rouge">SO3F</code> becomes trivial if represented in an axis angle sections</p>
 {% highlight matlab %}
 plotSection(SO3F,'axisAngle','upper')
 mtexColorbar
@@ -63,7 +63,7 @@ Warning: Contour not rendered for constant ZData
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunConcept_02.png" %}
-</center><p>as obviously, the function value is constant in each section. Many more methods for visualizing orientation dependent functions are discussed <a href="SO3FunVisualization.html">here</a>.</p><h2 id="8">Computing with orientation dependent functions</h2><p>The power of representing an orientation dependent functions as a variables of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a> is that we may apply to it a <a href="SO3FunOperations.html">large number of analysis tools</a>. In particular, one can add, subtract and multiply orientation dependent functions, plot them in various projections or detect the local minima or maxima. In the case of our example function the local maxima refers to the orientations with maximum rotational angle in cubic symmetry. We may compute them by the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a></p>
+</center><p>as obviously, the function value is constant in each section. Many more methods for visualizing orientation dependent functions are discussed <a href="SO3FunVisualization.html">here</a>.</p><h2 id="8">Computing with orientation dependent functions</h2><p>The power of representing an orientation dependent functions as a variables of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a> is that we may apply to it a <a href="SO3FunOperations.html">large number of analysis tools</a>. In particular, one can add, subtract and multiply orientation dependent functions, plot them in various projections or detect the local minima or maxima. In the case of our example function the local maxima refers to the orientations with maximum rotational angle in cubic symmetry. We may compute them by the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>.</p>
 {% highlight matlab %}
 [value,ori] = max(SO3F,'numLocal',10,'accuracy',0.001*degree)
 {% endhighlight %}
@@ -110,7 +110,7 @@ plot(ori.symmetrise,color,'axisAngle','filled','markerSize',20,'restrict2Fundame
       </tr>
       <tr>
          <td>
-               <p>as superposition of radial function</p>
+               <p>as superposition of radial functions</p>
          </td>
          <td>
                <p>
@@ -130,7 +130,7 @@ plot(ori.symmetrise,color,'axisAngle','filled','markerSize',20,'restrict2Fundame
       </tr>
       <tr>
          <td>
-               <p>as Bingham distribution</p>
+               <p>as a Bingham distribution</p>
          </td>
          <td>
                <p>
@@ -140,7 +140,7 @@ plot(ori.symmetrise,color,'axisAngle','filled','markerSize',20,'restrict2Fundame
       </tr>
       <tr>
          <td>
-               <p>as sum of different components</p>
+               <p>as a sum of different components</p>
          </td>
          <td>
                <p>

@@ -68,9 +68,9 @@ WCopper = spinTensor (432)
   rank: 2 (3 x 3)
  
  *10^-2
-      0      0  32.15
-      0      0  32.15
- -32.15 -32.15      0
+       0  -4.211  20.763
+   4.211       0  -16.83
+ -20.763   16.83       0
 {% endhighlight %}
 <p><b>The Norm of a Vector Field</b></p><p>The norm of the spin tensor directly relates to the amount of misorientation. We may compute the amount of misorientations as a function of orientation by the command <a href="SO3VectorField.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> and determine the orientation of maximum misorientation by</p>
 {% highlight matlab %}
@@ -90,11 +90,11 @@ annotate(oriMax)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriMax = misorientation (432 → 1)
+oriMax = orientation (432 → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2
-  271.318 45.3713 116.559
+    phi1     Phi    phi2
+  342.24 40.3371 43.6907
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorField_02.png" %}
@@ -172,7 +172,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorField_06.png" %}
-</center><p>We observe how the gradients all points towards the closest local maximum. This is actually the foundation of the <a href="SO3Fun.steepestDescent.html">steepest descent algorithm</a> used by MTEX in the commands <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max(odf)</code></a> and <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">calcComponents(odf)</code></a></p><p>As the gradient of a function is a vector field we may compute its curl and divergence. From mathematics we know that the curl must be zero</p>
+</center><p>We observe how the gradients all points towards the closest local maximum. This is actually the foundation of the <a href="SO3Fun.steepestDescent.html">steepest descent algorithm</a> used by MTEX in the commands <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max(odf)</code></a> and <a href="SO3Fun.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents(odf)</code></a></p><p>As the gradient of a function is a vector field we may compute its curl and divergence. From mathematics we know that the curl must be zero</p>
 {% highlight matlab %}
 plot(g.curl,'sigma')
 {% endhighlight %}
@@ -261,17 +261,19 @@ y = vector3d.byPolar(sin(3*nodes.angle), nodes.phi2+pi/2);
 {% endhighlight %}
 <p>Now the actual command to get <code class="language-plaintext highlighter-rouge">SO3VF1</code> of type <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
 {% highlight matlab %}
-SO3VF1 = SO3VectorFieldHarmonic.approximation(nodes, y)
+SO3VF1 = SO3VectorFieldHarmonic.approximation(nodes, y,'bandwidth',16)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: The given vector3d values v are assumed to
-describe elements w.r.t. the left side tangent space. If
-you want them to be right sided use
+Warning: The given vector3d values v are assumed to describe elements w.r.t.
+the left side tangent space. If you want them to be right sided use
 SO3TangentVector(v,SO3TangentSpace.rightVector) instead. 
+Warning: The oversampling factor in the approximation process is 0.3071. This
+could lead to a bad approximation. You may should use the option
+'regularization' in the option list of the approximation method. 
  
 SO3VF1 = SO3VectorFieldHarmonic (xyz → xyz)
-  bandwidth: 8
+  bandwidth: 16
   tangent space: leftVector
 {% endhighlight %}
 <p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> as an argument and returns a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p><p>Now we can call the quadrature command to get <code class="language-plaintext highlighter-rouge">SO3VF2</code> of type <code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic</code></p>
@@ -295,7 +297,7 @@ SO3F = SO3FunHarmonic (xyz → xyz)
   isReal: false
   size: 3 x 1
   bandwidth: 9
-  weight: 0.88
+  weight: 0.77
  
  
 SO3VF3 = SO3VectorFieldHarmonic (xyz → xyz)

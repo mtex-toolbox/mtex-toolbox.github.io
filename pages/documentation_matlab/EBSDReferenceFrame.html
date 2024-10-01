@@ -31,8 +31,10 @@ ebsd = EBSD
      3   2311 (4.6%)     Enstatite     Goldenrod       222                         
      4   1095 (2.2%)  Chalcopyrite    LightCoral       422                         
  
- Properties: ci, fit, iq, sem_signal, unknown1, unknown2, unknown3, unknown4, x, y, oldId
- Scan unit : um
+ <strong>Properties</strong>: ci, fit, iq, sem_signal, unknown1, unknown2, unknown3, unknown4, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 888] x [0 888] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_01.png" %}
@@ -68,19 +70,19 @@ largeGrains = grain2d
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      1       8    9556  olivine       222                         
  
- boundary segments: 1980 (7934 µm)
+ boundary segments: 2043 (7935 µm)
  inner boundary segments: 2 (8 µm)
  triple points: 582
  
-   Id   Phase   Pixels   phi1   Phi   phi2          GOS
- 1058       1      508    191    63    138     0.004541
- 1473       1      502    108   120    182   0.00283531
- 2203       1      708     48    66    193    0.0464213
- 3177       1      510     21    69    143    0.0058438
- 3507       1     1463     26    53     23    0.0877496
- 4216       1     1475     26    53    199    0.0906572
- 5239       1     1191     25    58     11    0.0558434
- 9773       1     3199    133     6    322    0.0501792
+   Id   Phase   Pixels       meanRotation      GOS
+ 1058       1      508    (191°,63°,138°)   0.0045
+ 1473       1      502   (108°,120°,182°)   0.0028
+ 2203       1      708     (48°,66°,193°)    0.046
+ 3177       1      510     (21°,69°,143°)   0.0058
+ 3507       1     1463      (26°,53°,23°)    0.088
+ 4216       1     1475     (26°,53°,199°)    0.091
+ 5239       1     1191      (25°,58°,11°)    0.056
+ 9773       1     3199     (133°,6°,322°)     0.05
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_03.png" %}
@@ -101,7 +103,6 @@ grains = calcGrains(ebsd_rot('indexed'));
 
 % select only large grains
 largeGrains = grains(grains.grainSize>500);
-
 
 plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
 

@@ -109,9 +109,9 @@ g = SO3FunRBF (xyz → Quartz)
   weight: 1
  
 ans =
-    0.9040
+    2.3745
 ans =
-    2.2873
+    4.2858
 {% endhighlight %}
 <h2 id="7">Local Extrema</h2><p>The above mentioned functions <a href="SO3Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> have very different use cases</p><div><ul><li>if a single rotational function is provided the global maximum / minimum of the function is computed</li><li>if two rotational functions are provided, a rotational function defined as the pointwise min/max between these two functions is computed</li><li>if a rotational function and a single number are passed as arguments a rotational function defined as the pointwise min/max between the function and the value is computed</li></ul></div>
 {% highlight matlab %}
@@ -135,9 +135,9 @@ sum(SO3F1) / ( 8 * pi^2 )
 
 {% highlight plaintext %}
 ans =
-    1.0000
+     1
 ans =
-    1.0000
+     1
 {% endhighlight %}
 <p>A practical application of integration is the computation of the \(L^2\)-norm which is defined for a \(SO(3)\) function \(f\) by</p><p>\[ \| f\|_2 = \left( \frac{1}{8\pi^2} \int_{SO(3)} \lvert f({\bf R}) \rvert^2 \,\mathrm d {\bf R} \right)^{1/2} \]</p><p>accordingly we can compute it by</p>
 {% highlight matlab %}
@@ -146,7 +146,7 @@ sqrt(mean(abs(SO3F1).^2))
 
 {% highlight plaintext %}
 ans =
-    3.6542
+    3.7736
 {% endhighlight %}
 <p>or more efficiently by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a></p>
 {% highlight matlab %}
@@ -155,7 +155,7 @@ norm(SO3F1)
 
 {% highlight plaintext %}
 ans =
-    3.6540
+    3.7730
 {% endhighlight %}
 <h2 id="11">Differentiation</h2><p>The gradient of a \(SO(3)\) function in a specific point can be described by a <a href="vector3d.vector3d.html">three-dimensional vector</a> which can be computed by the command <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a></p>
 {% highlight matlab %}
@@ -166,7 +166,7 @@ grad(SO3F1,R)
 ans = SO3TangentVector
  TagentSpace: leftVector
         x        y        z
-  1.50362 -8.98149 -1.57404
+  10.1343 -26.5867 -3.26427
 {% endhighlight %}
 <p>The gradients of a \(SO(3)\) function in all points form a \(SO(3)\) vector field and are returned by the function <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> as a variable of type <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a>.</p>
 {% highlight matlab %}
@@ -190,18 +190,19 @@ G = SO3VectorFieldHarmonic (Quartz → xyz)
 </center><p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p><h2 id="14">Rotating rotational functions</h2><p>Rotating a \(SO(3)\) function works with the command <a href="SO3Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a></p>
 {% highlight matlab %}
 % define a rotation
-rot = rotation.byEuler(30*degree,0*degree,90*degree,'Bunge')
+rot = rotation.byEuler(30*degree,0*degree,90*degree,'Bunge');
 
-% plot the rotated function
-plot(rotate(2 * SO3F1 + SO3F2,rot),'sigma')
+% rotate the ODF
+SO3F = rotate(SO3FunHarmonic(2 * SO3F1 + SO3F2),rot)
+
+% and plot it
+plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-   120    0    0
+SO3F = SO3FunHarmonic (Quartz → xyz)
+  bandwidth: 48
+  weight: 3
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunOperations_08.png" %}

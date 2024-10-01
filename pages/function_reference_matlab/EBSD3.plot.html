@@ -1,0 +1,149 @@
+---
+title: plot
+
+sidebar: function_reference_sidebar
+permalink: EBSD3.plot.html
+folder: function_reference
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>plot</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSD3__plot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD3/plot.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>spatial EBSD plot</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+% colorize according to phase
+plot(ebsd)
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize according to arbitrary value - here MAD
+plot(ebsd,ebsd.mad)
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize according to orientation
+plot(ebsd('phaseName'),ebsd('phaseName').orientation)
+{% endhighlight %}
+
+{% highlight matlab %}
+% colorize according to custom color
+oM = ipfColorKey(ebsd('phaseName'))
+color = oM.orientation2color(ebsd('phaseName').orientations);
+plot(ebsd('phaseName'),color)
+{% endhighlight %}
+
+{% highlight matlab %}
+% specify the color directly and show in Legend
+badMAD = ebsd.mad > 1;
+plot(ebsd(badMAD),'faceColor','black,'DisplayName','bad values')
+{% endhighlight %}
+
+{% highlight matlab %}
+% plot a subregion
+plot(ebsd,ebsd.orientation,'region',[xmin, xmax, ymin, ymax])
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>color</tt>
+         </td>
+         <td>
+            <tt>length(ebsd) x 3 vector of RGB values</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>micronbar</tt>
+         </td>
+         <td>
+            <tt>'on'/'off'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>DisplayName</tt>
+         </td>
+         <td>
+            <tt>add a legend entry</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>region</tt>
+         </td>
+         <td>
+            <tt>[xmin, xmax, ymin, ymax] plotting region</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Flags</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>points</tt>
+         </td>
+         <td>
+            <tt>plot dots instead of unitcells</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>exact</tt>
+         </td>
+         <td>
+            <tt>plot exact unitcells, even for large maps</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata forsterite
+plot(ebsd)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 36550] x [0 16750] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3.plot_01.png" %}
+</center>
+{% highlight matlab %}
+% colorize accoding to orientations
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3.plot_02.png" %}
+</center>
+{% highlight matlab %}
+% colorize according to MAD
+plot(ebsd,ebsd.mad,'micronbar','off')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3.plot_03.png" %}
+</center><h2 id="12">See also</h2><p><a href="EBSDSpatialPlots.html">EBSDSpatialPlots</a></p></div></body></html>

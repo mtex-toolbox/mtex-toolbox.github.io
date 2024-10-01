@@ -14,7 +14,7 @@ To make changes, update the MATLAB code and republish this document.
       --><title>Gridded EBSD Data</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDGrid.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDGrid.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss specific operations that are available for EBSD data which are measured on a square or hexagonal grid.</p><p>By default MTEX ignores any gridding in the data. The reason for this is that when restricting to some subset, e.g. to a certain phase, the data will not form a regular grid anyway. For that reason, almost all functions in MTEX are implemented to work for arbitrarily aligned data.</p><p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a>, <a href="EBSDGradient.html">gradient computation</a> and <a href="EBSDDenoising.html">denoising</a>. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html">gridify</a>.</p><p>In order to explain the corresponding concept in more detail lets import some sample data.</p>
 {% highlight matlab %}
-plotx2east
+plottingConvention.setDefault
 mtexdata twins
 
 plot(ebsd('Magnesium'),ebsd('Magnesium').orientations)
@@ -27,8 +27,10 @@ ebsd = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_01.png" %}
@@ -38,11 +40,13 @@ ebsd.unitCell
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.1500    0.1500
-   -0.1500    0.1500
-   -0.1500   -0.1500
-    0.1500   -0.1500
+ans = vector3d
+ size: 4 x 1
+      x     y     z
+   0.15  0.15     0
+  -0.15  0.15     0
+  -0.15 -0.15     0
+   0.15 -0.15     0
 {% endhighlight %}
 <p>If we apply the command <a href="EBSD.gridify.html">gridify</a> to the data set</p>
 {% highlight matlab %}
@@ -56,8 +60,10 @@ ebsd = EBSDsquare
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y, oldId
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (square): 137 x 167
 {% endhighlight %}
 <p>we data get aligned in a 137 x 167 matrix. In particular we may now apply standard matrix indexing to our EBSD data, e.g., to access the EBSD data at position 50,100 we can simply do</p>
@@ -71,9 +77,11 @@ ans = EBSD
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
-    Id   Phase   phi1   Phi   phi2   bands    bc    bs   error   mad      x      y   oldId
- 13613       1    156   101    239      10   149   133       0   0.7   29.7   14.7    8283
- Scan unit : um
+    Id   Phase              orientation   bands    bc    bs   error   mad   oldId
+ 13613       1   (155.8°,100.6°,239.3°)      10   149   133       0   0.7    8283
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [30 30] x [15 15] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <p>It is important to understand that the property of being shaped as a matrix is lost as soon as we <a href="EBSDSelect.html">select</a> a subset of data</p>
 {% highlight matlab %}
@@ -86,8 +94,10 @@ ebsdMg = EBSD
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y, oldId
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <p>However, we may always force it into matrix form by reapplying the command <a href="EBSD.gridify.html">gridify</a></p>
 {% highlight matlab %}
@@ -100,8 +110,10 @@ ebsdMg = EBSDsquare
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y, oldId
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (square): 137 x 167
 {% endhighlight %}
 <p>The difference between both matrix shapes EBSD variables <code class="language-plaintext highlighter-rouge">ebsd</code> and <code class="language-plaintext highlighter-rouge">ebsdMg</code> is that not indexed pixels in <code class="language-plaintext highlighter-rouge">ebsd</code> are stored as the separate phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> while in <code class="language-plaintext highlighter-rouge">ebsdMg</code> all pixels have phase Magnesium but the Euler angles of the not indexed pixels are set to <code class="language-plaintext highlighter-rouge">nan</code>. This allows to select and plot subregions of the EBSD map in a very intuitive way by</p>
@@ -135,8 +147,10 @@ ebsd = EBSD
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 590] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  
  
 grains = grain2d
@@ -144,11 +158,11 @@ grains = grain2d
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      0     751   16116   Copper       432                         
  
- boundary segments: 12326 (37017 µm)
+ boundary segments: 12561 (37019 µm)
  inner boundary segments: 4 (12 µm)
  triple points: 1266
  
- Properties: meanRotation, GOS
+ <strong>Properties</strong>: meanRotation, GOS
  
  
 ebsd = EBSD
@@ -156,8 +170,10 @@ ebsd = EBSD
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 590] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  
  
 ebsd = EBSDhex
@@ -165,8 +181,10 @@ ebsd = EBSDhex
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 593] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (hex): 136 x 119
 {% endhighlight %}
 <center>
@@ -186,7 +204,7 @@ plot(ebsd(:,1:10),ebsd(:,1:10).orientations,'micronbar','off')
 </center><h2 id="12">Switching from Hexagonal to Square Grid</h2><p>Sometimes it is required to resample EBSD data on a hex grid on a square grid. This can be accomplished by passing to the command <a href="EBSD.gridify.html">gridify</a> a square unit cell by the option <code class="language-plaintext highlighter-rouge">unitCell</code>.</p>
 {% highlight matlab %}
 % define a square unit cell
-unitCell = [-2.5 -2.5; -2.5 2.5; 2.5 2.5; 2.5 -2.5];
+unitCell = 2.5 * vector3d([-1 -1 1 1].',[-1 1 1 -1].',0);
 
 % use the square unit cell for gridify
 ebsdS = ebsd.gridify('unitCell',unitCell)
@@ -204,8 +222,10 @@ ebsdS = EBSDsquare
     -1   135 (0.95%)  notIndexed                                                 
      0   14025 (99%)      Copper  LightSkyBlue       432                         
  
- Properties: x, y, confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 593] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (square): 118 x 120
 {% endhighlight %}
 <center>
@@ -213,7 +233,7 @@ ebsdS = EBSDsquare
 </center><p>In the above example we have chosen the square unit cell to have approximately the same size as the hexagonal unit cell. This leads to quite some distortions as squares can not reproduces all the shapes of the hexagons. We can reduce this issue by choosing the square unit cell significantly smaller then the hexagonal unit cell.</p>
 {% highlight matlab %}
 % a smaller unit cell
-unitCell = [-1 -1; -1 1; 1 1; 1 -1];
+unitCell = vector3d([-1 -1 1 1].',[-1 1 1 -1].',0);
 
 % use the small square unit cell for gridify
 ebsdS = ebsd.gridify('unitCell',unitCell)
@@ -231,8 +251,10 @@ ebsdS = EBSDsquare
     -1   442 (0.51%)  notIndexed                                                 
      0   86579 (99%)      Copper  LightSkyBlue       432                         
  
- Properties: x, y, confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 593] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (square): 293 x 297
 {% endhighlight %}
 <center>
@@ -255,8 +277,10 @@ ebsdS1 = EBSDsquare
     -1   442 (0.51%)  notIndexed                                                 
      0   86579 (99%)      Copper  LightSkyBlue       432                         
  
- Properties: x, y, confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 593] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (square): 293 x 297
 {% endhighlight %}
 <center>
@@ -282,8 +306,10 @@ ebsdS2 = EBSD
     -1   442 (0.51%)  notIndexed                                                 
      0   86579 (99%)      Copper  LightSkyBlue       432                         
  
- Properties: x, y, confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId, quality
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId, quality
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 593] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_10.png" %}
@@ -297,14 +323,15 @@ plot(ebsdG,ebsdG.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDhex
+ebsd = EBSD
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, oldId
- Scan unit : um
- Grid size (hex): 136 x 119
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [-198 554] x [0 750] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  
  
 ebsdG = EBSDhex
@@ -312,8 +339,10 @@ ebsdG = EBSDhex
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0   15302 (58%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [-198 555] x [0 753] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (hex): 151 x 175
 {% endhighlight %}
 <center>
@@ -323,17 +352,6 @@ ebsdG = EBSDhex
 ebsdGF = fill(ebsdG)
 
 plot(ebsdGF,ebsdGF.orientations)
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*NASGU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -342,8 +360,10 @@ ebsdGF = EBSDhex
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0   16210 (61%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [-198 555] x [0 753] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (hex): 151 x 175
 {% endhighlight %}
 <center>

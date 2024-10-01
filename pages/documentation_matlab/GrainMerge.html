@@ -96,15 +96,15 @@ childs = grain2d
  inner boundary segments: 0 (0 µm)
  triple points: 25
  
- Id   Phase   Pixels   phi1   Phi   phi2          GOS
-  6       1       40    178    90    236   0.00755032
- 14       1      254     81    25    187    0.0113603
- 17       1        4     80    26    189    0.0135724
- 19       1       38     95   145    186   0.00600972
- 24       1      774    178    90    235    0.0102946
- 28       1       45     80    25    188    0.0108147
- 29       1      293     94   145    185   0.00913161
- 33       1      250    179    89    235    0.0107569
+ Id   Phase   Pixels      meanRotation      GOS
+  6       1       40   (178°,90°,236°)   0.0076
+ 14       1      254    (81°,25°,187°)    0.011
+ 17       1        4    (80°,26°,189°)    0.014
+ 19       1       38   (95°,145°,186°)    0.006
+ 24       1      774   (178°,90°,235°)     0.01
+ 28       1       45    (80°,25°,188°)    0.011
+ 29       1      293   (94°,145°,185°)   0.0091
+ 33       1      250   (179°,89°,235°)    0.011
 {% endhighlight %}
 <h2 id="6">Estimate twin area fraction</h2><p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
 {% highlight matlab %}
@@ -146,7 +146,7 @@ mtexTitle('twin id')
 
 {% highlight plaintext %}
 ans =
-   16.6212
+   16.6199
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_04.png" %}
@@ -211,8 +211,10 @@ ebsd_merged = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22794 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y, grainId, mis2mean
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad, grainId, mis2mean
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <p>Now the variable <code class="language-plaintext highlighter-rouge">ebsd_merged</code> can be indexed by the merged grains, i.e.</p>
 {% highlight matlab %}

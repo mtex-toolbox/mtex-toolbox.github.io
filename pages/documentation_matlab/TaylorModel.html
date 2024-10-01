@@ -76,15 +76,15 @@ ori = orientation (432 → xyz)
      0   30   15
  
 M =
-    2.1208
+    2.2350
  
 W = spinTensor (432)
   rank: 2 (3 x 3)
  
  *10^-2
-      0     51  65.65
-    -51      0 -23.04
- -65.65  23.04      0
+       0  18.312   3.248
+ -18.312       0  15.578
+  -3.248 -15.578       0
 {% endhighlight %}
 <p>When called without specifying an orientation the command <code class="language-plaintext highlighter-rouge">calcTaylor</code> computes the Taylor factor <code class="language-plaintext highlighter-rouge">M</code> as well as the spin tensors <code class="language-plaintext highlighter-rouge">W</code> as <a href="SO3FunConcept.html">orientation dependent functions</a>, which can be easily visualized and analyzed.</p>
 {% highlight matlab %}
@@ -94,7 +94,7 @@ W = spinTensor (432)
 {% highlight plaintext %}
 M = SO3FunHarmonic (432 → xyz)
   bandwidth: 32
-  weight: 3.1
+  weight: 2
  
  
 W = SO3VectorFieldHarmonic (432 → xyz)
@@ -150,8 +150,10 @@ ebsd = EBSD
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
     -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
  
- Properties: ci, error, iq, x, y
- Scan unit : um
+ <strong>Properties</strong>: ci, error, iq
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 511] x [0 300] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  
  
 grains = grain2d
@@ -159,11 +161,11 @@ grains = grain2d
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
     -1     527  153693     iron      m-3m                         
  
- boundary segments: 21937 (17946 µm)
+ boundary segments: 23536 (17955 µm)
  inner boundary segments: 93 (71 µm)
  triple points: 1451
  
- Properties: meanRotation, GOS
+ <strong>Properties</strong>: meanRotation, GOS
 {% endhighlight %}
 <p>and apply the Taylor model to each grain of our data set</p>
 {% highlight matlab %}
@@ -260,16 +262,5 @@ mtexColorbar
 </center><h2 id="15">restore MTEX preferences</h2>
 {% highlight matlab %}
 setMTEXpref('pfAnnotations',storepfA);
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*ASGLU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 </div></body></html>

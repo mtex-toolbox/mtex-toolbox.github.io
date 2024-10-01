@@ -28,13 +28,12 @@ SO3F1 = SO3FunHarmonic.approximation(nodes, y,'maxit',10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: The Voronoi decomposition is calculated. This may
-take some time. 
+Warning: The Voronoi decomposition is calculated. This may take some time. 
  
 SO3F1 = SO3FunHarmonic (Quartz → xyz)
   isReal: false
   size: 2 x 1
-  bandwidth: 42
+  bandwidth: 54
   weight: 1
 {% endhighlight %}
 <p>It is also possible to interpolate one component by an <a href="SO3FunHarmonic.SO3FunRBF"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>, that means</p>
@@ -46,11 +45,11 @@ SO3F2 = SO3FunHarmonic.interpolate(nodes,y(:,1))
 SO3F2 = SO3FunRBF (Quartz → xyz)
  
   <strong>uniform component</strong>
-  weight: 0.00012
+  weight: 0.00065
  
   <strong>multimodal components</strong>
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 18327 orientations, resolution: 5°
+  center: 17292 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
 <p>This is only possible for univariate functions.</p><p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code> via quadrature. At first let us define a function handle which takes \(~\) <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> as an argument and returns double:</p>
@@ -91,7 +90,7 @@ SO3F5(2:4)
 ans = SO3FunHarmonic (Quartz → xyz)
   isReal: false
   size: 3 x 1
-  bandwidth: 50
+  bandwidth: 54
   weight: 0.49+0.2i
 {% endhighlight %}
 <p>You can conjugate the Fourier-coefficients and transpose/ctranspose the multivariate <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p>
@@ -105,7 +104,7 @@ SO3F1'
 ans = SO3FunHarmonic (Quartz → xyz)
   isReal: false
   size: 1 x 2
-  bandwidth: 42
+  bandwidth: 54
   weight: 1
 {% endhighlight %}
 <p>Some other operations</p>
@@ -136,7 +135,7 @@ mean(SO3F4, 2)
 {% highlight plaintext %}
 ans = SO3FunHarmonic (Quartz → xyz)
   isReal: false
-  bandwidth: 42
+  bandwidth: 54
   weight: 1.49+0.2i
  
  
@@ -170,7 +169,7 @@ SO3F1 .* SO3F4
 ans = SO3FunHarmonic (xyz → xyz)
   isReal: false
   size: 2 x 5
-  bandwidth: 43
+  bandwidth: 55
   weight: 1
 {% endhighlight %}
 <h2 id="19">Visualization of multivariate SO3FunHarmonic</h2><p>Similarly to the univariate case we also can look at the Fourier coefficients of multivariate functions.</p>
@@ -185,11 +184,10 @@ plot(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the
-desired components manually. In the following the first
-component is plotted. 
-Warning: Imaginary part of complex valued SO3FunHarmonic is
-ignored. In the following only the real part is plotted.
+Warning: You try to plot an multivariate function. Plot the desired components
+manually. In the following the first component is plotted. 
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
+following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_02.png" %}
@@ -199,33 +197,21 @@ plot3d(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the
-desired components manually. In the following the first
-component is plotted. 
-Warning: Imaginary part of complex valued SO3FunHarmonic is
-ignored. In the following only the real part is plotted.
+Warning: You try to plot an multivariate function. Plot the desired components
+manually. In the following the first component is plotted. 
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
+following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_03.png" %}
 </center><p>while the plot along a specific fibre includes all components.</p>
 {% highlight matlab %}
 plotFibre(SO3F3,fibre.beta)
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*VUNUS&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is
-ignored. In the following only the real part is plotted.
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
+following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_04.png" %}

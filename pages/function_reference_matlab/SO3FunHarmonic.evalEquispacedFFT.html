@@ -54,4 +54,37 @@ f = evalEquispacedFFT(SO3F,rot)
          </td>
       </tr>
    </table>
-</p><h2 id="6">See also</h2><p><a href="SO3FunHarmonic.eval.html">SO3FunHarmonic.eval</a> <a href="SO3FunHarmonic.evalNFSOFT.html">SO3FunHarmonic.evalNFSOFT</a> <a href="SO3FunHarmonic.evalSectionsEquispacedFFT.html">SO3FunHarmonic.evalSectionsEquispacedFFT</a></p></div></body></html>
+</p><h2 id="6">Example</h2>
+{% highlight matlab %}
+% construct quadrature grid and evaluate there. Output will be a unique
+% part of this grid
+SO3F = SO3FunHarmonic.example;
+rot = quadratureSO3Grid(62,SO3F.CS)
+v = evalEquispacedFFT(SO3F,rot);
+{% endhighlight %}
+
+{% highlight plaintext %}
+rot = quadratureSO3Grid (Quartz → xyz)
+  scheme: ClenshawCurtis
+  bandwidth: 62
+  grid: 333396 orientations
+  full grid size: 42 x 125 x 126
+{% endhighlight %}
+
+{% highlight matlab %}
+% for big grid sizes the construction of the quadrature grid is memory
+% expansive. Hence construct struct, but the output is full sized
+rot = struct('scheme','ClenshawCurtis','bandwidth',350,'CS',SO3F.CS,'SS',specimenSymmetry)
+v = evalEquispacedFFT(SO3F,rot);
+{% endhighlight %}
+
+{% highlight plaintext %}
+rot = 
+  struct with fields:
+
+       scheme: 'ClenshawCurtis'
+    bandwidth: 350
+           CS: [1×1 crystalSymmetry]
+           SS: [1×1 specimenSymmetry]
+{% endhighlight %}
+<h2 id="9">See also</h2><p><a href="SO3FunHarmonic.eval.html">SO3FunHarmonic.eval</a> <a href="SO3FunHarmonic.evalNFSOFT.html">SO3FunHarmonic.evalNFSOFT</a> <a href="SO3FunHarmonic.evalSectionsEquispacedFFT.html">SO3FunHarmonic.evalSectionsEquispacedFFT</a></p></div></body></html>

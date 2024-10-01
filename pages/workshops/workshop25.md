@@ -29,7 +29,7 @@ in presence as well as remotely.
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX
 
-Date: 03.03.2025 - 7.03.2025
+Date: 03.03.2025 - 07.03.2025
 
 During the first week we provide on a daily basis lectures covering the
 principles of EBSD, texture and crystallography and their relation to plastic
@@ -171,15 +171,16 @@ random sampling, ODF reconstuction from XRD data
 			<h4 class="panel-title">
 				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
 				data-parent="#accordion"
-				href="#collapseThursday"><b>Thursday:</b> Elastic and Plastic Deformations</a>
+				href="#collapseThursday"><b>Thursday:</b> Data Polishing,
+				Tensorial Properties and Elastic Deformations</a>
 			</h4>
 		</div>
 		<div id="collapseThursday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 6 - EBSD Denoising and Alignment of the Reference Frame**
+**Lecture 6 - Polishing of EBSD Data**
 <br>
-
+Correction of spatial coordinates, reference frame alignment, denoising 
 <br>
 <br>
 **Exercise 6 - Grain Boundaries and Misorientations**
@@ -211,7 +212,9 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFriday"><b>Friday:</b> Orientation
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse"
+				data-parent="#accordion" href="#collapseFriday"><b>Friday:</b>
+				Plastic Deformations, Orientation
 				Relationships and Phase Transition</a>
 			</h4>
 		</div>
@@ -265,370 +268,7 @@ their talks as accessible as possible.
 
 ### Keynote Speakers
 
-<!--
-- **{% include reference.html
-  link="https://www.researchgate.net/profile/Dorian-Depriester" content="Dorian
-  Depriester" %}** (Ecole Nationale Supérieure d'Arts et Métiers, Aix-en-Provence): 
-  *Mechanical behaviour of polycrystals: from EBSD to numerical simulations*
-  
-- **{% include reference.html
-  link="https://ufind.univie.ac.at/de/person.html?id=46817" content="Thomas
-  Griffiths" %}** (Universität Wien): Unravelling the evolution of partially molten silicate systems using
-  EBSD and MTEX
-  
-- **{% include reference.html
-  link="https://mavt.ethz.ch/de/personen/person-detail.MzMyNDQz.TGlzdC81NTksLTE3MDY5NzgwMTc=.html"
-  content="Claire Griesbach" %}** (ETH Zürich): Rate-dependent
-  ferroelectric switching mechanisms in lead zirconium titanate elucidated by
-  spherically indexed EBSD patterns
-  
-- **{% include reference.html
-  link="https://www.materials.ox.ac.uk/peoplepages/marquardt.html"
-  content="Katharina Marquardt" %}** (University of Oxford): Grain boundary complexion transition in Forsterite, an EBSD study
-    
-- **{% include reference.html
-  link="https://www.nist.gov/people/alec-saville"
-  content="Alec Saville" %}** (National Institute of Standards and Technology,
-  USA):	Connecting Microstructure, Processing, and Phase Transformations in Metals Via MTEX.
-	
-- **{% include reference.html
-  link="https://www.researchgate.net/profile/Marco-Witte" content="Marco
-  Witte" %}** (Salzgitter Mannesmann): Steel: Production, Processing and MTEX
--->
 
-<!--
-## Time Schedule
-{% capture table_monday %}
-<table>
-	<thead>
-		<tr>
-			<th style="text-align: left">Time</th>
-			<th style="text-align: left">Speaker</th>
-			<th style="text-align: left">Title</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">T.&nbsp;Griffiths</td>
-			<td style="text-align: left">Unraveling the evolution of partially molten silicate systems using EBSD and MTEX
-			{% include reference.html link="https://youtu.be/_anaaIunvJY" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">TrueEBSD distortion correction and	grain boundary smoothing
-			{% include reference.html link="https://youtu.be/ltawCgbgekE" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">T.&nbsp;Nyyss&ouml;nen</td>
-			<td style="text-align: left">Three-dimensional shape metrics of transformation products from
-			two-dimensional orientation maps: ongoing work
-			{% include reference.html link="https://youtu.be/q2l-_PDSQBU" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">F.&nbsp;Niessen</td>
-			<td style="text-align: left">Parent Grain Reconstruction in MTEX - a journey beyond default parameters
-			{% include reference.html link="https://youtu.be/OYKFtw2hvE0" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Lunch</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>			
-		</tr>
-		<tr>
-			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">K.&nbsp;Marquardt</td>
-			<td style="text-align: left"><i>canceled</i> Grain boundary complexion transition
-			in Forsterite, an EBSD study</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">R.&nbsp;Kühn</td>
-			<td style="text-align: left">Clay mineral textures from the hikurandi margin</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>			
-		</tr>				
-		<tr>
-			<td style="text-align: right">15:30&minus;15:50</td>
-			<td style="text-align: left">D.&nbsp;Souza</td>
-			<td style="text-align: left">High Pressure - high temperature deformation experiments to understand deep earthquakes
-			{% include reference.html link="https://youtu.be/Mj8vbes4Eis" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">15:50&minus;16:10</td>
-			<td style="text-align: left">G.&nbsp;Lopez</td>
-			<td style="text-align: left">Mechanical Implications of Mica Bearing rocks
-			{% include reference.html link="https://youtu.be/ZZ883Wj8gTI" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:10&minus;16:30</td>
-			<td style="text-align: left">G.&nbsp;McGill</td>
-			<td style="text-align: left">Micro Porosity in plastically deformed Quartz
-			{% include reference.html link="https://youtu.be/fiQougisaGM" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"><i>Short walk through Freiberg</i></td>
-		</tr>
-		<tr>
-			<td style="text-align: left">18:00</td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"><i>Dinner at <a
-			href="https://maps.app.goo.gl/ZKPebmYn2dRiG7p57">Stadtwirtschaft Freiberg</a></i></td>
-		</tr>
-	</tbody>
-</table>
-{% endcapture %}
-
-{% capture table_tuesday %}
-<table>
-	<thead>
-		<tr>
-			<th style="text-align: left">Time</th>
-			<th style="text-align: left">Speaker</th>
-			<th style="text-align: left">Title</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style="text-align: right">8:30&minus;9:30</td>
-			<td style="text-align: left">C.&nbsp;Griesbach</td>
-			<td style="text-align: left">Rate-dependent ferroelectric
-			switching mechanisms in lead zirconium titanate elucidated by spherically indexed EBSD patterns
-			{% include reference.html link="https://youtu.be/uk34p5WL-7k" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">9:30&minus;10:00</td>
-			<td style="text-align: left">L.&nbsp;Richter</td>
-			<td style="text-align: left">Spherical indexing of pseudo symmetries
-			{% include reference.html link="https://youtu.be/Cv-C6wJpbNc" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">P.&nbsp;Prathik</td>
-			<td style="text-align: left">A synergistic approach to
-			characterize anisotropic materials using ultrasound and microstructural analysis (<i>online</i>)
-			{% include reference.html link="https://youtu.be/y7_Hq7kg9_8" content="video" class="course_material" %}
-			</td>
-		</tr>						
-		<tr>
-			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">T.&nbsp;Vermeij</td>							
-			<td style="text-align: left">Local Identification of Deformation Twinning from Deformation Fields
-			{% include reference.html link="https://youtu.be/jTBfc0SFBSE" content="video" class="course_material" %}
-			</td>							
-		</tr>
-		<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">C.&nbsp;Mornout</td>							
-			<td style="text-align: left">Methodology for Local Identification of Grain Boundary Sliding on the Nanoscale
-			{% include reference.html link="https://youtu.be/aCXGDT3YAv4" content="video" class="course_material" %}
-			</td>							
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Lunch</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">A.&nbsp;Saville</td>
-			<td style="text-align: left">Connecting Microstructure,
-			Processing, and Phase Transformations in Metals Via MTEX (<i>online</i>)
-			{% include reference.html link="https://youtu.be/dPS-_FxwjJY" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">D.&nbsp;Guan</td>
-			<td style="text-align: left">Track-Rex: a universal toolbox for
-			tracking recrystallization and 
-			grain growth behaviors in polycrystalline materials. (<i>online</i>)
-			{% include reference.html link="https://youtu.be/lmde9hbFJCU" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">15:00&minus;16:00</td>
-			<td style="text-align: left">D.&nbsp;Depriester</td>
-			<td style="text-align: left">Mechanical behaviour of polycrystals: from EBSD to numerical simulations
-			{% include reference.html link="https://youtu.be/tYzaKANC_YA" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:00&minus;16:20</td>
-			<td style="text-align: left">B.&nbsp;Jacobsen</td>
-			<td style="text-align: left">MTEX 6.0 and Grain3d - the current state
-			{% include reference.html link="https://youtu.be/gosT2bJI0RU" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:20&minus;16:40</td>
-			<td style="text-align: left">R.&nbsp;de Oliveira Melo</td>	
-			<td style="text-align: left">Relation between microstructure and
-			mechanical properties of a 17-4PH grade steel manufactured by additive manufacturing Powder Bed Fusion Laser Based technique
-			{% include reference.html link="https://youtu.be/bkUEeTMjReQ" content="video" class="course_material" %}
-			</td>
-		</tr>	
-	</tbody>
-</table>
-{% endcapture %}
-
-{% capture table_wednesday %}
-<table>
-	<thead>
-		<tr>
-			<th style="text-align: left">Time</th>
-			<th style="text-align: left">Speaker</th>
-			<th style="text-align: left">Title</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td style="text-align: right">8:30&minus;9:30</td>
-			<td style="text-align: left">M.&nbsp;Witte</td>
-			<td style="text-align: left">Steel: Production, Processing and MTEX
-			{% include reference.html link="https://youtu.be/yq-Gklv0JTs" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">9:30&minus;10:00</td>
-			<td style="text-align: left">V.&nbsp;Babic</td>
-			<td style="text-align: left">EBSD analysis workflows – Efficient, automatic, easy!
-			{% include reference.html link="https://youtu.be/uS0LlRjoykM" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>		
-		<tr>
-			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">K.&nbsp;Molodov</td>
-			<td style="text-align: left">On the effect of microalloying on retained austenite in hot-dip galvanized multiphase steels
-			{% include reference.html link="https://youtu.be/Ce-NnxALC1o" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">11:00&minus;11:20</td>
-			<td style="text-align: left">J.&nbsp;Dietrich</td>
-			<td style="text-align: left">Slip trace and texture analysis in wrought magnesium alloys
-			{% include reference.html link="https://youtu.be/StKRpC1DMDM" content="video" class="course_material" %}
-			</td>
-		</tr>
-				<tr>
-			<td style="text-align: right">11:20&minus;11:40</td>
-			<td style="text-align: left">S.&nbsp;Mohagheghi</td>
-			<td style="text-align: left">Determination of orientation relationships in three-phase eutectic grains
-			{% include reference.html link="https://youtu.be/m5CHJxdZ05s" content="video" class="course_material" %}
-			</td>			
-		</tr>
-		<tr>
-			<td style="text-align: right">11:40&minus;12:00</td>
-			<td style="text-align: left">H.&nbsp;Sofiane Meddas</td>
-			<td style="text-align: left">Use of OR tool for variant pairing
-			analysis and secondary carbide precipitation of tempered tool steel: 
-			Impact of multiple austenitization cycles on mechanical properties
-			{% include reference.html link="https://youtu.be/Egi5XiyZLXM" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<!--<tr>
-			<td style="text-align: right">11:40&minus;12:00</td>
-			<td style="text-align: left">M.&nbsp;Bolan</td>
-			<td style="text-align: left">Lattice curvature in 316l steel</td>
-		</tr>-->	
-		<tr>
-			<td style="text-align: left"><i>Lunch</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">Round&nbsp;Table Discussion</td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>	
-		
-	</tbody>
-</table>
-{% endcapture %}
-
-<div class="panel-group" id="accordion">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
-			</h4>
-		</div>
-		<div id="collapseMo" class="panel-collapse collapse noCrossRef">
-			<div class="panel-body">
-				{{ table_monday }}
-			</div>
-		</div>
-	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
-			</h4>
-		</div>
-		<div id="collapseTue" class="panel-collapse collapse noCrossRef">
-			<div class="panel-body">
-				{{ table_tuesday }}
-			</div>
-		</div>
-	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
-				data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
-			</h4>
-		</div>
-		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
-			<div class="panel-body">
-				{{ table_wednesday }}
-			</div>
-		</div>
-	</div>
-</div>
-
--->
 ## Venue:
 
 <div class="panel-group" id="accordion">

@@ -121,8 +121,8 @@ SO3F2.eval(rot)
 
 {% highlight plaintext %}
 ans =
-  161.1531
-  171.3382
+  131.8630
+  107.3716
 {% endhighlight %}
 <p>And following that, it is easy to describe every <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code>.</p>
 {% highlight matlab %}
@@ -153,7 +153,7 @@ SO3F4 = SO3FunHarmonic(fhat,cs)
 SO3F4 = SO3FunHarmonic (m-3m → xyz)
   isReal: false
   bandwidth: 19
-  weight: 0.77
+  weight: 0.83
 {% endhighlight %}
 <p>The <code class="language-plaintext highlighter-rouge">bandwith</code> decribes the maximal harmonic degree of the harmonic series expansion.</p><p>By the property <code class="language-plaintext highlighter-rouge">isReal</code> we are able to change between real and complex valued <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Note that creation of an real vealued SO3FunHarmonic changes the Fourier coefficient vector. So it is not possible to reconstruct the previous function. But computing with real valued functions is much faster.</p>
 {% highlight matlab %}
@@ -165,16 +165,16 @@ SO3F4.eval(rot)
 
 {% highlight plaintext %}
 ans =
-  21.5138 + 0.8503i
-   6.8277 - 1.6646i
+  -3.7911 + 0.5158i
+   5.6468 + 1.4131i
  
 SO3F4 = SO3FunHarmonic (m-3m → xyz)
   bandwidth: 19
-  weight: 0.77
+  weight: 0.83
  
 ans =
-   21.5138
-    6.8277
+   -3.7911
+    5.6468
 {% endhighlight %}
 <p>For further information on the Fourier coefficients, the bandwidth and other properties , see <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation of Rotational Functions</a>.</p><p><b>Definition of Radial Basis Functions</b></p><p>Radial Basis functions are of class <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. They are defined by a kernel function <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> which is cenetered on <code class="language-plaintext highlighter-rouge">orientations</code> with some weights.</p>
 {% highlight matlab %}
@@ -208,13 +208,13 @@ SO3F6 = SO3FunCBF(f,'halfwidth',10*degree)
 {% highlight plaintext %}
 f = fibre (m-3m → xyz)
  
-  h || r: (-6-12-11) || (1,-1,-4)
- o1 → o2: (0°,35.3°,45°) → (270°,62.8°,45°)
+  h || r: (12 6 11) || (1,1,4)
+ o1 → o2: (0°,35.3°,45°) → (90°,62.8°,45°)
  
 SO3F6 = SO3FunCBF (m-3m → xyz)
  
   kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (-6-12-11) || 1,-1,-4
+  fibre : (12 6 11) || 1,1,4
   weight: 1
 {% endhighlight %}
 <p>For further information, see <a href="FibreODFs.html">SO3FunCBF</a>.</p><p><b>Definition of Bingham distributions</b></p><p>Bingham distribution functions are described by the class <code class="language-plaintext highlighter-rouge"><a href="SO3FunBingham.SO3FunBingham.html">SO3FunBingham</a></code>. One can construct them by</p>
@@ -243,7 +243,7 @@ ans = SO3FunComposition (m-3m → xyz)
  
   <strong>harmonic component</strong>
   bandwidth: 19
-  weight: 0.77
+  weight: 0.83
  
   <strong>function handle component</strong>
   eval: @(ori)angle(ori)./degree
@@ -253,7 +253,7 @@ ans = SO3FunComposition (m-3m → xyz)
   center: 1000 orientations
   <strong>fibre component</strong>
   kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (-6-12-11) || 1,-1,-4
+  fibre : (12 6 11) || 1,1,4
   weight: 1
  
   <strong>bingham component</strong>

@@ -1,0 +1,116 @@
+---
+title: smooth
+
+sidebar: function_reference_sidebar
+permalink: EBSD3.smooth.html
+folder: function_reference
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>smooth</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSD3__smooth.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD3/smooth.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>smooth spatial EBSD</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+ebsd = smooth(ebsd)
+{% endhighlight %}
+
+{% highlight matlab %}
+F = halfQuadraticFilter
+F.alpha = 2;
+ebsd = smooth(ebsd, F, 'fill', grains)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt>@EBSDFilters</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a> if provided pixels at the boundary between grains are not filled</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Options</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fill</tt>
+         </td>
+         <td>
+            <tt>fill missing values (this is different then not indexed values!)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>extrapolate</tt>
+         </td>
+         <td>
+            <tt>extrapolate up the the outer boundaries</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2>
+{% highlight matlab %}
+mtexdata forsterite;
+ebsd = ebsd('indexed');
+% segment grains
+[grains,ebsd.grainId] = calcGrains(ebsd);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed                                                 
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 36550] x [0 16750] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
+{% endhighlight %}
+
+{% highlight matlab %}
+% find largest grains
+largeGrains = grains(grains.grainSize>800);
+ebsd = ebsd(largeGrains(1));
+{% endhighlight %}
+
+{% highlight matlab %}
+figure
+plot(largeGrains(1).boundary,'linewidth',2)
+hold on
+oM = ipfHSVKey(ebsd);
+oM.inversePoleFigureDirection = mean(ebsd.orientations) * oM.whiteCenter;
+oM.colorStretching = 50;
+plot(ebsd,oM.orientation2color(ebsd.orientations))
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Possibly applying an orientation to an object in specimen coordinates!
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3.smooth_01.png" %}
+</center></div></body></html>

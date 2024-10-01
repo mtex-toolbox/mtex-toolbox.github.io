@@ -92,8 +92,8 @@ grainSel = grain2d
  inner boundary segments: 0 (0 µm)
  triple points: 15
  
-  Id   Phase   Pixels   phi1   Phi   phi2         GOS
- 235       0     1949    144    41    301   0.0434024
+  Id   Phase   Pixels      meanRotation         GOS
+ 235       0     1949   (144°,41°,301°)   0.0434024
  
  
 ori = orientation (Ferrite → xyz)
@@ -211,6 +211,7 @@ ans =
 <p>Lets perform the above analysis for all large grains</p>
 {% highlight matlab %}
 grainsLarge = grains(grains.grainSize > 50);
+lambda = nan(length(grainsLarge),4);
 
 % loop through all grains
 for k = 1:length(grainsLarge)
@@ -219,7 +220,7 @@ for k = 1:length(grainsLarge)
   [f,lambda(k,:),fit(k)] = fibre.fit(ebsd(grainsLarge(k)).orientations,'local');
 
   % store the misorientation axes in crystal and specimen symmetry
-  GAX_C(k) = f.h; %#ok<*SAGROW>
+  GAX_C(k) = f.h;
   GAX_S(k) = f.r;
 
 end
@@ -304,16 +305,5 @@ hold off
 %T_oblate    = bingham_test(ori,'oblate',   'approximated');
 
 %[T_spherical T_prolate T_oblate]
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*NASGU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 </div></body></html>

@@ -12,7 +12,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       --><title>Denoising Orientation Maps</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDDenoising.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDDenoising.m">
-    edit page</a></font><div><!--introduction--><p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indecing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p><p>Simultanously while denoising orientation maps one can also fill not indexed pixels. This is explained in the section <a href="EBSDFilling.html">Fill Missing Data</a>.</p><!--/introduction--><p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium.</p>
+    edit page</a></font><div><!--introduction--><p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indexing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p><p>Denoising orientation maps may also include filling not indexed pixels. This is explained in the section <a href="EBSDFilling.html">Fill Missing Data</a>.</p><!--/introduction--><p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium.</p>
 {% highlight matlab %}
 % import the data
 mtexdata twins
@@ -26,7 +26,7 @@ ebsd = ebsd('indexed');
 % remove some very small grains
 ebsd(grains(grains.grainSize<5)) = [];
 
-% redo grain segementation
+% redo grain segmentation
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',10*degree);
 
 % smooth grain boundaries
@@ -49,14 +49,16 @@ ebsd = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_01.png" %}
 </center><p>At the first glance, the orientation data look not noisy at all. However, if we look at orientation changes within the grains the noise we become clearly visible. To do so we colorize the orientation data with respect to their misorientation to the grain mean orientation</p>
 {% highlight matlab %}
-% the axisAngleColorKey colorizes misorientation according to their axis
+% the @axisAngleColorKey colorizes misorientation according to their axis
 % and angle
 colorKey = axisAngleColorKey;
 

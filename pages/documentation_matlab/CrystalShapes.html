@@ -23,6 +23,7 @@ cS = crystalShape.hex(ebsd.CS)
 % and plot it
 close all
 plot(cS,'faceAlpha',0.2)
+drawNow(gcm,'final')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -33,8 +34,10 @@ ebsd = EBSD
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
      0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622       X||a, Y||b*, Z||c*
  
- Properties: ci, grainid, iq, sem_signal, x, y
- Scan unit : um
+ <strong>Properties</strong>: ci, grainid, iq, sem_signal
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 996] x [0 998] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  
  
 cS = crystalShape
@@ -75,8 +78,8 @@ plot(cS,'faceAlpha',0.2)
 hold on
 plot(cS,sS(2),'faceColor','blue')
 plot(cS,sS(1),'faceColor','red')
-
 hold off
+drawNow(gcm,'final')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -99,8 +102,9 @@ hold on
 scaling = 100; % scale the crystal shape to have a nice size
 
 % plot at position (500,500) the orientation of the corresponding crystal
-plot(500,500,50, ebsd(500,500).orientations * cS * scaling)
+plot(500,500,50, ebsd(500,500).orientations * cS * scaling,'faceAlpha',0.5,'linewidth',2)
 hold off
+drawNow(gcm,'final')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_03.png" %}
@@ -111,7 +115,9 @@ grains = calcGrains(ebsd);
 grains = smooth(grains,5);
 
 % and plot them
-plot(grains,grains.meanOrientation)
+cKey = ipfColorKey(grains);
+color = cKey.orientation2color(grains.meanOrientation);
+plot(grains,color,'FaceAlpha',0.5,'linewidth',2)
 
 % find the big ones
 isBig = grains.grainSize>50;
@@ -122,20 +128,26 @@ cSGrains = grains(isBig).meanOrientation * cS * 0.7 * sqrt(grains(isBig).area);
 
 % now we can plot these crystal shapes at the grain centers
 hold on
-plot(grains(isBig).centroid + cSGrains)
+plot(grains(isBig).centroid + cSGrains,'FaceColor',color(isBig,:),'FaceAlpha',0.7)
 hold off
+drawNow(gcm,'final')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_04.png" %}
 </center><h2 id="7">Plotting crystal shapes</h2><p>The above can be accomplished a bit more directly and a bit more nice with</p>
 {% highlight matlab %}
 % plot a grain map
-plot(grains,grains.meanOrientation)
+%plot(grains,grains.meanOrientation,'figSize','large')
+plot(grains.boundary,'figSize','large','linewidth',4)
 
-% and on top for each large grain a crystal shape
+% and on top for each large grain a crystal shape colored according to the
+% grain orientation
+
 hold on
-plot(grains(isBig),0.7*cS,'FaceColor','none','linewidth',2)
+plot(grains(isBig), 0.7*cS, 'FaceColor', color(isBig,:), ...
+  'linewidth',2,'FaceAlpha',0.7 )
 hold off
+drawNow(gcm,'final')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_05.png" %}
@@ -173,6 +185,7 @@ hold on
 plot(mori * cS *0.9,'FaceColor','orange')
 hold off
 view(45,20)
+drawNow(gcm,'final')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -224,7 +237,7 @@ cS = crystalShape
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_09.png" %}
-</center><p>i.e. we see only  the possitive and negative rhomboedrons, but the hexagonal prism are to far away from the origin to cut the shape. We may decrease the distance, by multiplying the coresponding normal with a factor larger then 1.</p>
+</center><p>i.e. we see only  the positive and negative rhomboedrons, but the hexagonal prism are to far away from the origin to cut the shape. We may decrease the distance, by multiplying the corresponding normal with a factor larger then 1.</p>
 {% highlight matlab %}
 N = [2*m,r,z];
 
@@ -233,9 +246,9 @@ plot(cS)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_10.png" %}
-</center><p>Next in a typical Quartz crystal the negativ rhomboedron is a bit smaller then the positiv rhomboedron. Lets correct for this.</p>
+</center><p>Next in a typical Quartz crystal the negative rhomboedron is a bit smaller then the positive rhomboedron. Lets correct for this.</p>
 {% highlight matlab %}
-% collect the face normal with the right scalling
+% collect the face normal with the right scaling
 N = [2*m,r,0.9*z];
 
 cS = crystalShape(N);
@@ -243,9 +256,9 @@ plot(cS)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_11.png" %}
-</center><p>Finaly, we add the tridiagonal bipyramid and the positive Trapezohedron</p>
+</center><p>Finally, we add the tridiagonal bipyramid and the positive Trapezohedron</p>
 {% highlight matlab %}
-% collect the face normal with the right scalling
+% collect the face normal with the right scaling
 N = [2*m,r,0.9*z,0.7*s1,0.3*x1];
 
 cS = crystalShape(N);
@@ -271,7 +284,7 @@ end
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_14.png" %}
-</center><h2 id="20">Defining complicated crystals more simple</h2><p>We see that defining a complicated crystal shape is a tedious work. To this end MTEX allows to model the shape with a habitus and a extension parameter. This approach has been developed by J. Enderlein in <a href="https://library.wolfram.com/infocenter/Articles/3279">A package for displaying crystal morphology. Mathematica Journal, 7(1), 1997</a>. The two parameters are used to model the distance of a face from the origin. Setting all parameters to one we obtain</p>
+</center><h2 id="20">Defining complicated crystals more simple</h2><p>We see that defining a complicated crystal shape is a tedious work. To this end MTEX allows to model the shape with a habitus and a extension parameter. This approach has been developed by J. Enderlein in <a href="https://library.wolfram.com/infocenter/Articles/3279">A package for displaying crystal morphology. Mathematical Journal, 7(1), 1997</a>. The two parameters are used to model the distance of a face from the origin. Setting all parameters to one we obtain</p>
 {% highlight matlab %}
 % take the face normals unscaled
 N = [m,r,z,s2,x2];
