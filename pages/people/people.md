@@ -166,7 +166,7 @@ toc: false
 <div class="row">
     <div class="panel panel-profile-card col-md-6">
         <div class="panel-heading">
-            <img src="images/profiles/vivian.jpg" alt="Picture of Vivian Tong">
+            <img src="images/profiles/vivian-tong.jpg" alt="Picture of Vivian Tong">
         </div>
         <div class="panel-body">
             <p>
@@ -174,6 +174,11 @@ toc: false
                     {% include reference.html link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate"
                     content="Vivian Tong" %}
                 </b>
+				uses MTEX for EBSD analysis of grains and misorientations to
+				characterise plastic deformation in engineering materials. 
+				She developed TrueEBSD, an EBSD map image registration tool 
+				for correlative microscopy, and contributed many small
+				features and bug fixes to MTEX.
 	            </p>
 			<p>
 				National Physical Laboratory UK
