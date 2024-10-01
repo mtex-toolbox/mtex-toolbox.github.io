@@ -215,12 +215,14 @@ sigma = C_iso_Voigt : eps
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Tensor is not symmetric! 
+ 
 sigma = stressTensor (xyz)
   rank: 2 (3 x 3)
  
- 116.62  40.76  38.23
-  40.76  89.63  32.94
-  38.23  32.94 123.72
+ 150.86  47.52  42.44
+  47.52 149.18  28.71
+  42.44  28.71 124.72
 {% endhighlight %}
 <p>in terms of the Lame constants by</p>
 {% highlight matlab %}
@@ -228,13 +230,15 @@ sigma = stressTensor(2 * mu * eps + lambda * trace(eps) * tensor.eye)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Tensor is not symmetric! 
+ 
 sigma = stressTensor (An0 Albite 2016)
   type: Lagrange 
   rank: 2 (3 x 3)
  
- 116.62  40.76  38.23
-  40.76  89.63  32.94
-  38.23  32.94 123.72
+ 150.86  44.25  43.26
+  50.79 149.18   28.2
+  41.62  29.21 124.72
 {% endhighlight %}
 <h2 id="11">Hashin Shtrikman Bounds</h2><p>While the Voigt and Reuss bounds are tight without additional assumptions, the extreme cases require a very specific layered microstructure. If one additionally assumes that the material is quasihomogeneous, i.e., it is constant elastic properties within each subregion that is significantly larger then the grain size, then the Voigt and Reuss bounds are to wide. More narrow bounds for this settings have been established by Hashin and Shtrikman in 1962.</p><p>The following deviation follows the paper by J.M. Brown (2015) <i>Determination of Hashin-Shtrikman bounds on the isotropic effective elastic moduli of polycrystals of any symmetry</i>, Computers &amp; Geosciences, 80 (2015) 95-99.</p><p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimzation problem. Lets first set up the search domain</p>
 {% highlight matlab %}
@@ -282,7 +286,7 @@ axis equal tight
 {% highlight plaintext %}
 Warning: Tensor is not positive definite 
 Warning: Tensor is not positive definite 
-Elapsed time is 2.290910 seconds.
+Elapsed time is 2.008574 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="IsotropicTheory_01.png" %}
@@ -342,17 +346,4 @@ shear modulus
   Voigt     +HS    Hill     -HS    Reus
 41.4335 36.7537 35.6344 32.8495 29.8353
 {% endhighlight %}
-<p>Note, that upper and lower bounds for all other elastic moduli can be computed from these upper and lower bounds of the bulk and shear modulus.</p>
-{% highlight matlab %}
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*NASGU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
-{% endhighlight %}
-</div></body></html>
+<p>Note, that upper and lower bounds for all other elastic moduli can be computed from these upper and lower bounds of the bulk and shear modulus.</p></div></body></html>

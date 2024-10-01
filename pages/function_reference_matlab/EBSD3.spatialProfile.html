@@ -1,0 +1,129 @@
+---
+title: spatialProfile
+
+sidebar: function_reference_sidebar
+permalink: EBSD3.spatialProfile.html
+folder: function_reference
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>spatialProfile</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSD3__spatialProfile.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD3/spatialProfile.m">
+    edit page</a></font><div><!--introduction--><!--/introduction--><p>select EBSD data along line segments</p><h2 id="3">Syntax</h2>
+{% highlight matlab %}
+ebsdLine = spatialProfile(ebsd,[xStart,xEnd],[yStart yEnd])
+{% endhighlight %}
+
+{% highlight matlab %}
+[ebsdLine,dist] = spatialProfile(ebsd,x,y)
+{% endhighlight %}
+
+{% highlight matlab %}
+xy = ginput(2)
+[ebsdLine,dist] = spatialProfile(ebsd,xy)
+{% endhighlight %}
+<h2 id="4">Input</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>xStart, xEnd, yStart, yEnd</tt>
+         </td>
+         <td>
+            <tt>double</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>x, y</tt>
+         </td>
+         <td>
+            <tt>coordinates of the line segments</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>xy</tt>
+         </td>
+         <td>
+            <tt>list of spatial coordinates |[x(:) y(:)]|</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="5">Output</h2><p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsdLine</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> restrcited to the line of interest</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dist</tt>
+         </td>
+         <td>
+            <tt>double distance along the line to the initial point</tt>
+         </td>
+      </tr>
+   </table>
+</p><h2 id="6">Example</h2>
+{% highlight matlab %}
+% import data
+mtexdata twins
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
+{% endhighlight %}
+
+{% highlight matlab %}
+% plot data
+plot(ebsd('indexed'),ebsd('indexed').orientations)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3.spatialProfile_01.png" %}
+</center>
+{% highlight matlab %}
+% select line coordinates
+x = [15.5 27]; y = [20.5 11];
+{% endhighlight %}
+
+{% highlight matlab %}
+% draw line with some transluency
+line(x,y,'color',[0.5 0.5 0.5 0.5],'linewidth',10)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3.spatialProfile_02.png" %}
+</center>
+{% highlight matlab %}
+% restrict ebsd data to this line
+[ebsdLine,dist] = spatialProfile(ebsd,x,y);
+{% endhighlight %}
+
+{% highlight matlab %}
+% extract orientations
+ori = ebsdLine.orientations;
+{% endhighlight %}
+</div></body></html>

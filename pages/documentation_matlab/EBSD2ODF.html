@@ -20,13 +20,28 @@ plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: more column data was passed in than expected. Check your column names make sense!
+Warning: You have choosen to correct your EBSD data for differently aligned
+reference frames for the Euler angles and the map coordinates. However, you
+have not specified which reference system setting has been used on your Edax
+system . I'm going to assume "setting 1". Be careful, the default setting of
+EDAX is "setting 2". Click <a
+href="matlab:MTEXdoc('EBSDReferenceFrame')">here</a> for more
+information.Please make sure you have chosen the correct setting and specify it
+explicitely using the syntax
+
+ ebsd = EBSD.load(fileName,'convertEuler2SpatialReferenceFrame','setting 2') 
+ saving data to /home/hielscher/mtex/master/data/copper.mat
+ 
 ebsd = EBSD
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
  
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, x, y
- Scan unit : um
+ <strong>Properties</strong>: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 590] x [0 585] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_01.png" %}
@@ -119,17 +134,6 @@ close all
 plot(hw/degree,e)
 xlabel('halfwidth in degree')
 ylabel('esimation error')
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*NASGU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_04.png" %}

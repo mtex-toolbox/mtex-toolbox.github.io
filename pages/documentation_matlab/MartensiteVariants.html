@@ -43,8 +43,10 @@ ebsd = EBSD
      1  215769 (80%)  Ferrite, bcc  LightSkyBlue      m-3m                         
      2   35838 (13%)     Austenite  DarkSeaGreen      m-3m                         
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 604] x [0 453] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <p>The following lines plot bcc according to the crystallographic description of the selected reference direction (IPF coloring), whereas austenite is displayed as a phase in blue.</p>
 {% highlight matlab %}
@@ -62,7 +64,7 @@ plot(ebsd('Aus').orientations,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 30064 given orientations
+plot 2000 random orientations out of 30105 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_02.png" %}
@@ -81,7 +83,7 @@ parenOri = orientation (Austenite → xyz)
   266.298 163.622 245.518
  
 fit =
-    1.2735
+    1.2739
 {% endhighlight %}
 <p>Next, we display the bcc orientations (blue dots) in pole figures, and overlay the parent Taenite orientation (red dots) on top of them.</p>
 {% highlight matlab %}
@@ -110,7 +112,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 500 random orientations out of 3881 given orientations
+I'm plotting 500 random orientations out of 3883 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -145,7 +147,7 @@ mean(angle(mori, KS)) ./ degree
 
 {% highlight plaintext %}
 ans =
-    3.9256
+    3.9265
 {% endhighlight %}
 <h2 id="8">Estimating the parent-to-child orientation relationship</h2><p>We could ask ourselves if there is another orientation relationship that better matches the measured misorientations than the KS orientation relationship. In this case, a canocial candidate would be the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> of all misorientations.</p>
 {% highlight matlab %}
@@ -166,13 +168,13 @@ p2cMean = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  288.991 8.11053 27.0189
+  288.995 8.11011 27.0137
  
-  I'm plotting 500 random orientations out of 3881 given orientations
+  I'm plotting 500 random orientations out of 3883 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 ans =
-    2.4717
+    2.4719
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_05.png" %}
@@ -201,11 +203,11 @@ NW = misorientation (Austenite → Ferrite, bcc)
 p2cIter = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2
-  182.72 98.1704 43.9775
+     phi1     Phi    phi2
+  177.588 97.7522 45.9635
  
 ans =
-    3.2644
+    3.1466
 {% endhighlight %}
 <p>We observe that the parent-to-child orientation relationship computed solely from child-to-child misorientations fits the actual orientation relationship equally well.</p><h2 id="11">Classification of child variants by variant Ids</h2><p>Once we have determined parent orientations and a parent-to-child orientation relationship, we may proceed further by classifying the child orientations into different variants.</p><p>A variant refers to a specific orientation or crystallographic arrangement of the child phase within the context of the original parent orientation. Depending on the operative orientation relationship and parent-child crystal symmetries, a single parent phase orientation results in multiple child phase orientations (i.e.- variants). The variant Id is a convinient way to label or identify a specific variant within the child microstructure.</p><p>Child variant Ids are computed by the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
 {% highlight matlab %}
@@ -218,7 +220,7 @@ plotPDF(childOri,color,h_bcc,'MarkerSize',5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 208 random orientations out of 3881 given orientations
+I'm plotting 208 random orientations out of 3883 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -230,7 +232,7 @@ plot(childOri,color,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 3881 given orientations
+plot 2000 random orientations out of 3883 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_07.png" %}
@@ -258,7 +260,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 3881 given orientations
+I'm plotting 1000 random orientations out of 3883 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -294,7 +296,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 3881 given orientations
+I'm plotting 1000 random orientations out of 3883 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}

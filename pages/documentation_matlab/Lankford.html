@@ -34,15 +34,15 @@ sS = slipSystem (fcc)
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
 ---
-M at 0°  to tA = 3.0617
-M at 45° to tA = 2.3357
-M at 90° to tA = 3.6741
+M at 0°  to tA = 1.841
+M at 45° to tA = 1.7817
+M at 90° to tA = 1.7509
 ---
 R at 0°  to tA = 1
-R at 45° to tA = Inf
-R at 90° to tA = Inf
+R at 45° to tA = 1
+R at 90° to tA = 2.3333
 ---
-Rbar = NaN
+Rbar = 0.66667
 ---
 {% endhighlight %}
 <p>The summary results show that for the Brass orientation, it is not always possible to predict the R-value as Inf values are predicted at 45&deg; and 90&deg; to the nominal rolling direction (or in this case, x).</p><p>The computed Taylor factor allows us to recreates Fig. 3.10 on page 74 of: [William F. Hosford, The mechanics of crystals and textured polycrystals] (<a href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/crat.2170290414">https://onlinelibrary.wiley.com/doi/epdf/10.1002/crat.2170290414</a>) It shows the dependence of \(M\) on \(\rho = -d_{\epsilon}_Y / d_{\epsilon}_X = \frac{R}{1+R}\) for rolling and transverse direction tension tests for an ideal Brass orientation. In the rolling direction test, x = [1 -1 2], and in the transverse test x = [-1 1 1].</p>
@@ -111,8 +111,10 @@ ebsd = EBSD
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
      0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622       X||a, Y||b*, Z||c*
  
- Properties: ci, grainid, iq, sem_signal, x, y
- Scan unit : um
+ <strong>Properties</strong>: ci, grainid, iq, sem_signal
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 996] x [0 998] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Lankford_03.png" %}
@@ -142,15 +144,15 @@ theta = linspace(0,90*degree,19);
 
 {% highlight plaintext %}
 ---
-M at 0°  to tA = 2.4575
-M at 45° to tA = 2.4835
-M at 90° to tA = 2.4139
+M at 0°  to tA = 1.7682
+M at 45° to tA = 1.7585
+M at 90° to tA = 1.9676
 ---
-R at 0°  to tA = 0.66667
+R at 0°  to tA = 0.25
 R at 45° to tA = 1
-R at 90° to tA = 0.66667
+R at 90° to tA = 1
 ---
-Rbar = -0.33333
+Rbar = -0.375
 ---
 {% endhighlight %}
 <p>The following plot shows the Lankford parameter, as a function of the angle \(\theta\) between the tensile direction and the notional rolling direction (in this case - x).</p>
@@ -177,26 +179,15 @@ Rbar = 0.5 * (R(1) + R(19) + 2*R(10))
 
 {% highlight plaintext %}
 Rbar =
-    1.6667
+    1.6250
 {% endhighlight %}
 <div><ul><li>A related parameter is the planar anisotropy parameter (deltaR) which   is an indicator of the ability of a material to demonstrate non-earing   behavior. A deltaR value = 0 is ideal for can-making or deep drawing of   cylinders, as this indicates equal metal flow in all directions; thus   eliminating the need to trim ears during subsequent processing.</li></ul></div>
 {% highlight matlab %}
 deltaR = 0.5 * (R(1) + R(19) - 2*R(10))
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*ASGLU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 
 {% highlight plaintext %}
 deltaR =
-   -0.3333
+   -0.3750
 {% endhighlight %}
 </div></body></html>

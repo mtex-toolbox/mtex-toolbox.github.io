@@ -31,12 +31,32 @@ ebsd = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_01.png" %}
-</center><p>Now we can use the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> to interpolate the orientation at arbitrary coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</p>
+</center><p>In most cases it is useful to gridify the data before doing interpolation.</p>
+{% highlight matlab %}
+ebsd = ebsd.gridify
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSDsquare
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed                                                 
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+ 
+ <strong>Properties</strong>: bands, bc, bs, error, mad, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
+ Grid size (square): 137 x 167
+{% endhighlight %}
+<p>Now we can use the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> to interpolate the orientation at arbitrary coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</p>
 {% highlight matlab %}
 x = 30.5; y = 5.5;
 e1 = interp(ebsd,x,y)
@@ -48,11 +68,13 @@ e1 = EBSD
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Id   Phase   phi1   Phi   phi2      x     y   bands    bc    bs   error   mad   grainId   oldId
-  1       1    163   112    186   30.5   5.5      10   160   255       0   0.4        36    3109
- Scan unit : um
+ Id   Phase              orientation   bands    bc    bs   error   mad   grainId_   oldId
+  1       1   (162.9°,111.9°,186.1°)      10   160   255       0   0.4         36    3109
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [30 30] x [5.5 5.5] x [0 0]
+ <strong>Normal vector</strong>: (1,0,0)
 {% endhighlight %}
-<p>By default the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
+<p>By default the command <a href="EBSDSquare.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
 {% highlight matlab %}
 e2 = ebsd('xy',x,y)
 {% endhighlight %}
@@ -63,9 +85,11 @@ e2 = EBSD
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
-   Id   Phase   phi1   Phi   phi2   bands    bc    bs   error   mad      x     y   grainId
- 3109       1    163   112    186      10   160   255       0   0.4   30.6   5.4        36
- Scan unit : um
+    Id   Phase            orientation   bands    bc    bs   error   mad   grainId_   oldId
+ 13994       1   (163°,111.9°,186.1°)      10   156   216       0   0.4         36    3276
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [31 31] x [5.7 5.7] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <p>which returns the nearest neighbour EBSD measurement. Lets have a look at the difference</p>
 {% highlight matlab %}
@@ -74,9 +98,9 @@ angle(e1.orientations,e2.orientations)./degree
 
 {% highlight plaintext %}
 ans =
-    0.1508
+    0.1027
 {% endhighlight %}
-<h2 id="5">Change of the measurement grid</h2><p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> can be used to evaluate the EBSD map on a different grid, which might have higher or lower resolution or might even be rotated. Lets demonstrate this</p>
+<h2 id="6">Change of the measurement grid</h2><p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> can be used to evaluate the EBSD map on a different grid, which might have higher or lower resolution or might even be rotated. Lets demonstrate this</p>
 {% highlight matlab %}
 % define a rotated coarse grid
 omega = 5*degree;
@@ -101,8 +125,10 @@ ebsdNewGrid = EBSD
      0    2624 (52%)  notIndexed                                                 
      1    2376 (48%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: x, y, bands, bc, bs, error, mad, grainId, oldId
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad, grainId_, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [-44 50] x [-7.9 45] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_02.png" %}
@@ -117,9 +143,7 @@ plot(ebsd,ebsd.orientations)
 </center><p>and resample the data on a square grid. To do so we first define a smaller square unit cell corresponding to the hexagonal unit cell</p>
 {% highlight matlab %}
 % define a square unit cell
-hexUnitCell = abs(round(ebsd.unitCell,4));
-minUnit = min(hexUnitCell(hexUnitCell>0));
-squnitCell = minUnit * [-1 -1;-1 1; 1 1; 1 -1];
+squnitCell = ebsd.dPos / 4 * vector3d([1 1 -1 -1],[1 -1 -1 1],0).';
 
 % use the square unit cell for gridify
 ebsd = ebsd.gridify('unitCell',squnitCell);

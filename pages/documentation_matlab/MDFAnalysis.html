@@ -29,8 +29,10 @@ ebsd = EBSD
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 36550] x [0 16750] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  
  
 grains = grain2d
@@ -41,11 +43,11 @@ grains = grain2d
      2    1864   26058   Enstatite       mmm                         
      3    1991    9064    Diopside     12/m1       X||a*, Y||b*, Z||c
  
- boundary segments: 147957 (7.4e+06 µm)
- inner boundary segments: 33 (1652 µm)
+ boundary segments: 150087 (7.4e+06 µm)
+ inner boundary segments: 33 (1650 µm)
  triple points: 11456
  
- Properties: meanRotation, GOS
+ <strong>Properties</strong>: meanRotation, GOS
 {% endhighlight %}
 <h2 id="3">The boundary misorientation distribution function</h2><p>In order to compute the boundary misorientation distribution function for the phase transition from Forsterite to Enstatite we first extract the misorientations along all Forsterite to Enstatite boundary segments</p>
 {% highlight matlab %}
@@ -86,20 +88,14 @@ adf_boundary = S2FunHarmonicSym (222)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Symmetry missmatch! The following crystal frames
-seem to be different
-
-  1, X||a, Y||b, Z||c
-  Enstatite (mmm)
- 
 v =
-  275.8319
+  240.5934
  
-mori = misorientation (Forsterite → 1)
+mori = misorientation (Forsterite → Enstatite)
  
   Bunge Euler angles in degree
-     phi1       Phi      phi2
-  134.616 0.0669012   135.402
+     phi1     Phi    phi2
+  84.7743 2.21634  185.96
 {% endhighlight %}
 <p>or plot the pole figure corresponding to the crystal axis (1,0,0)</p>
 {% highlight matlab %}
@@ -115,7 +111,7 @@ mdf_uncor = calcDensity(mori)
 
 {% highlight plaintext %}
 mori = misorientation (Forsterite → Enstatite)
-  size: 98602 x 1
+  size: 99970 x 1
  
 mdf_uncor = SO3FunHarmonic (Forsterite → Enstatite)
   bandwidth: 25
@@ -187,8 +183,6 @@ plotAxisDistribution(mdf)
 </center><p>For computing the exact values see the commands <a href="SO3Fun.calcAxisDistribution.html">calcAxisDistribution(mdf)</a> and <a href="orientation.calcAxisDistribution.html">calcAxisDistribution(grains)</a>.</p>
 {% highlight matlab %}
 aD = calcDensity(axis(grains.boundary('fo','en').misorientation))
-
- %#ok<*ASGLU>
 {% endhighlight %}
 
 {% highlight plaintext %}

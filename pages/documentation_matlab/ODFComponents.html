@@ -33,13 +33,13 @@ mtexColorbar
 
 {% highlight plaintext %}
 value =
-  114.1435
+  107.4378
  
 ori = orientation (Quartz → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.236 34.8193 207.184
+  133.216 34.0595 207.735
 {% endhighlight %}
 <p>Note that, similarly as the MATLAB <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is attained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>. To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
 {% highlight matlab %}
@@ -56,18 +56,18 @@ annotate(ori(2:end),'MarkerFaceColor','red')
 
 {% highlight plaintext %}
 value =
-  114.1435
-   48.7649
-   38.2181
+  107.4378
+   48.7483
+   33.3106
  
 ori = orientation (Quartz → xyz)
   size: 3 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.236 34.8193 207.184
-  140.249 36.5231 257.419
-   86.017 22.9142  269.46
+  133.216 34.0595 207.735
+  139.269 37.9594 257.881
+  83.1396 32.8648 329.847
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_03.png" %}
@@ -79,9 +79,9 @@ volume(odf,ori,delta) * 100
 
 {% highlight plaintext %}
 ans =
-   11.2417
-    4.8778
-    4.1377
+   10.0306
+    5.2569
+    3.2151
 {% endhighlight %}
 <p>We observe that the sum of all volume portions is far from \(100\) percent. This is very typical. The reason is that the portion of the full orientations space that is within the \(10\) degree disorientation distance from the preferred orientations is very small. More precisely, it represents only</p>
 {% highlight matlab %}
@@ -99,9 +99,9 @@ volume(odf,ori,delta) ./ volume(uniformODF(odf.CS),ori,delta)
 
 {% highlight plaintext %}
 ans =
-   66.5289
-   28.8672
-   24.4873
+   59.3618
+   31.1107
+   19.0272
 {% endhighlight %}
 <p>It is important to understand, that all these values above depend significantly from the chosen disorientation angle <code class="language-plaintext highlighter-rouge">delta</code>. If <code class="language-plaintext highlighter-rouge">delta</code> is chosen too large</p>
 {% highlight matlab %}
@@ -113,9 +113,9 @@ volume(odf,ori,delta)*100
 delta =
     0.6981
 ans =
-   56.3022
-   38.7490
-   53.1369
+   54.2401
+   39.6253
+   37.9830
 {% endhighlight %}
 <p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p><h2 id="11">Non circular components</h2><p>A disadvantage of the approach above is that one is restricted to circular components with a fixed disorientation angle which makes it hard to analyze components that are close together. In such settings one may want to use the command <a href="SO3Fun.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents</code></a>. This command starts with evenly distributed orientations and lets the crawl towards the closest preferred orientation. At the end of this process the command returns these preferred orientation and the percentage of orientations that crawled to each of them.</p>
 {% highlight matlab %}
@@ -126,47 +126,33 @@ vol * 100
 
 {% highlight plaintext %}
 ori = orientation (Quartz → xyz)
-  size: 5 x 1
+  size: 8 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.312 34.8711 206.946
-  140.237 36.4105 257.542
-  85.6217 22.7987 269.598
-  79.0658 34.6428 215.331
-  148.062 47.1683 152.633
+  133.186 34.1505  207.61
+  139.383 37.9096  257.72
+  70.1751 27.4727 285.099
+  83.1683 32.9499 329.641
+  107.239 33.4953 205.758
+  156.696 34.8618 208.613
+  75.0198  25.698 280.516
+   108.85 33.6596 206.307
  
 ans =
-   45.1145
-   27.4373
-   19.6022
-    6.0787
-    1.0655
+   36.3641
+   25.7390
+   19.4891
+    7.5145
+    3.2018
+    2.3516
+    2.2017
+    1.6386
 {% endhighlight %}
 <p>These volumes always sums up to approximately 100 percent. While the preferred orientations should be the same as those computed by the <code class="language-plaintext highlighter-rouge">max</code> command.</p>
 {% highlight matlab %}
 annotate(ori,'MarkerFaceColor','none','MarkerEdgeColor','white',...
   'linewidth',2,'MarkerSize',15,'marker','o')
-
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*ASGLU&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
-%
-%<html>
-%   <div class="note">
-%      <b>ok&lt;*NOPTS&gt;
-%</b>
-%      <text/>
-%   </div>
-%</html>
-%
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_04.png" %}

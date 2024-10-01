@@ -14,7 +14,7 @@ To make changes, update the MATLAB code and republish this document.
       --><title>EBSD</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSD__EBSD.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/EBSD.m">
     edit page</a></font><div><!--introduction--><!--/introduction--><p>class representing EBSD measurements</p><p>In MTEX a variable of type <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a> is used to store EBSD measurements as a table with rows containing the orientation, the spatial coordinates and the phase of each individual measurement.</p><h2 id="3">Syntax</h2>
 {% highlight matlab %}
-prop.xy = xy;
+pos = vector3d(x,y,z);
 prop.mad = mad;
 CSList = {'notIndexed',CS1,CS2,CS3};
 rot = rotation.byEuler(phi1,Phi,phi2);
@@ -26,6 +26,14 @@ ebsd = EBSD(rot,phaseId,CSList,prop,'unitCell',unitCell)
 {% endhighlight %}
 <h2 id="4">Input</h2><p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
       <tr>
          <td width="100px">
             <tt>rot</tt>
@@ -55,15 +63,7 @@ ebsd = EBSD(rot,phaseId,CSList,prop,'unitCell',unitCell)
             <tt>prop</tt>
          </td>
          <td>
-            <tt>struct with properties, xy is mandatory</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>unitCell</tt>
-         </td>
-         <td>
-            <tt>vertices a single pixel</tt>
+            <tt>struct with properties (optional)</tt>
          </td>
       </tr>
    </table>
@@ -71,34 +71,10 @@ ebsd = EBSD(rot,phaseId,CSList,prop,'unitCell',unitCell)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>phase</tt>
-         </td>
-         <td>
-            <tt>specifying the phase of the EBSD object</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>options</tt>
-         </td>
-         <td>
-            <tt>struct with fields holding properties for each orientation</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>xy</tt>
-         </td>
-         <td>
-            <tt>spatial coordinates n x 2, where n is the number of input orientations</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
             <tt>unitCell</tt>
          </td>
          <td>
-            <tt>for internal use</tt>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
          </td>
       </tr>
    </table>
@@ -154,10 +130,10 @@ ebsd = EBSD(rot,phaseId,CSList,prop,'unitCell',unitCell)
       </tr>
       <tr>
          <td width="100px">
-            <tt>x, y</tt>
+            <tt>pos</tt>
          </td>
          <td>
-            <tt>coordinates of the center of each pixel</tt>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, coordinates of the center of each pixel</tt>
          </td>
       </tr>
       <tr>

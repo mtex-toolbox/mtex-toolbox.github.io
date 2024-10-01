@@ -67,14 +67,14 @@ SO3F2 = SO3FunHarmonic (1 → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationInterpolation_04.png" %}
-</center><p>Plotting this function, we can immediately see, that we have a much smoother function. But one has to keep in mind that the error in the data nodes is not zero as in the case of interpolation.</p>
+</center><p>Plotting this function, we can immediately see, that we have a much smoother function. But one has to keep in mind that we can not expect the error in the data nodes to be zero, as this would mean overfitting to the noisy input data.</p>
 {% highlight matlab %}
 norm(eval(SO3F2, ori) - S.values) / norm(S.values)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.0656
+    0.0660
 {% endhighlight %}
 <p>But this may not be of great importance like in the case of function approximation from noisy function values, where we don't know the exact function values anyways.</p><p>The strategy underlying the <a href="SO3FunHarmonic.approximation"><code class="language-plaintext highlighter-rouge">approximation</code></a>-command to obtain such an approximation works via Wigner-D functions (<a href="SO3FunHarmonicRepresentation.html">SO3FunHarmonicSeries Basics of rotational harmonics</a>). For that, we seek for so-called Fourier-coefficients \({\bf \hat f} = (\hat f^{0,0}_0,\dots,\hat f^{N,N}_N)^T\) such that</p><p>\[ g(x) = \sum_{n=0}^N\sum_{k,l = -n}^n \hat f_n^{k,l} D_n^{k,l}(x) \]</p><p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional</p><p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \]</p><p>for the data nodes \(x_m\), \(m=1,\dots,M\). Here \(f(x_m)\) are the target function values and \(g(x_m)\) our approximation evaluated in the given data nodes.</p><p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> method of MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multiple times, where the Fourier-matrix is given by</p><p>\[ F = [D_n^{k,l}(x_m)]_{m = 1,\dots,M;~n = 0,\dots,N,\,k,l = -n,\dots,n}. \]</p><p>This matrix-vector product can be computed efficiently with the use of the nonequispaced SO(3) Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsoft.php">NSOFT</a> or faster by the combination of an Wigner-transform together with a <a href="https://www-user.tu-chemnitz.de/~potts/nfft/index.php">NFFT</a>.</p><p>We end up with the Fourier-coefficients of our approximation \(g\), which describe our approximation.</p><p>If we have a low number of nodes but our function is relatively sharp (we try to compute an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> with high bandwidth) we are in the underdetermined case. Here we want the approximation \(g\) to be smooth just to avoid overfitting.</p><p>Therefore we penalize oscillations by adding the norm of \(g\) to the energy functional which is minimized  by <code class="language-plaintext highlighter-rouge">lsqr</code>. This is called regularization and means we now minimize the functional</p><p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 + \lambda \|g\|^2_{H^s}\]</p><p>where \(\lambda\) is the regularization parameter. The Sobolev norm \(\|.\|_{H^s}\) of an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> \(g\) with harmonic coefficients \(\hat{f}\) reads as</p><p>\[\|g\|^2_{H^s} = \sum_{n=0}^N (2n+1)^{2s} \, \sum_{k,l=-n}^n|\hat{f}_n^{k,l}|^2.\]</p><p>The Sobolev index \(s\) describes how smooth our approximation \(g\) should be, i.e. the larger \(s\) is, the faster the harmonic coefficients \(\hat{f}_n^{k,l}\) converge towards 0 and the smoother the approximation \(g\) is.</p><p>We can use regularization by adding the option <code class="language-plaintext highlighter-rouge">'regularization'</code> to the command <a href="SO3FunHarmonic.approximation"><code class="language-plaintext highlighter-rouge">approximation</code></a> of the class <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p>
 {% highlight matlab %}
@@ -102,9 +102,9 @@ norm(SO3F3)
 
 {% highlight plaintext %}
 ans =
-    8.6656
+    8.6782
 ans =
-    7.7606
+    7.7689
 {% endhighlight %}
 <p>This smoothing results in a larger error in the data points, which may not be much important since we had noisy function values given, where we don't know the exact values anyways.</p>
 {% highlight matlab %}
@@ -113,7 +113,7 @@ norm(eval(SO3F3, ori) - S.values) / norm(S.values)
 
 {% highlight plaintext %}
 ans =
-    0.1596
+    0.1587
 {% endhighlight %}
 <h2 id="19">Quadrature</h2><p>Assume we have some experiment which yields an ODF or some general <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, i.e. some evaluation routine.</p>
 {% highlight matlab %}
@@ -178,7 +178,7 @@ F1 = SO3FunHarmonic.quadrature(SO3G,v)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 4.941583 seconds.
+Elapsed time is 5.423784 seconds.
  
 F1 = SO3FunHarmonic (Quartz → xyz)
   bandwidth: 50
@@ -212,7 +212,7 @@ norm(F-F2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 2.387497 seconds.
+Elapsed time is 2.739787 seconds.
  
 F2 = SO3FunHarmonic (Quartz → xyz)
   bandwidth: 50

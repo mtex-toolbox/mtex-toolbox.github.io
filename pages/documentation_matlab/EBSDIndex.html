@@ -24,8 +24,10 @@ ebsd = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- Properties: bands, bc, bs, error, mad, x, y
- Scan unit : um
+ <strong>Properties</strong>: bands, bc, bs, error, mad
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
 <p>and restricting it to very small rectangular subset</p>
 {% highlight matlab %}
@@ -49,6 +51,14 @@ plot(ebsd(16:18),'edgeColor','red','facecolor','none','linewidth',4)
 legend off
 hold off
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: You asked me to make a phase plot of single phase map. This might not
+what you are looking for. In order to colorize the map according to the
+orientations you should do
+
+plot(ebsd,ebsd.orientations)
+{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_03.png" %}
 </center><p>Whether lines or columns run first is not related to MTEX but inherits from the ordering of the imported EBSD data. Since, we have restricted our large EBSD map to the small subset the indece of restricted data does not coincide with the indece of the imported data anymore. However, the original indeces are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize them</p>
@@ -64,6 +74,14 @@ hold on
 plot(ebsd('id',316:318),'edgeColor','red','facecolor','none','linewidth',4)
 legend off
 hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: You asked me to make a phase plot of single phase map. This might not
+what you are looking for. In order to colorize the map according to the
+orientations you should do
+
+plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_05.png" %}
@@ -85,6 +103,14 @@ hold on
 plot(ebsd(2,2:4),'edgeColor','red','facecolor','none','linewidth',4)
 legend off
 hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: You asked me to make a phase plot of single phase map. This might not
+what you are looking for. In order to colorize the map according to the
+orientations you should do
+
+plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_07.png" %}
@@ -108,8 +134,10 @@ ebsd = EBSDhex
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
      0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622       X||a, Y||b*, Z||c*
  
- Properties: ci, grainid, iq, sem_signal, x, y, oldId
- Scan unit : um
+ <strong>Properties</strong>: ci, grainid, iq, sem_signal, oldId
+ <strong>Scan unit</strong> : um
+ <strong>X x Y x Z</strong> : [0 1002] x [0 998] x [0 0]
+ <strong>Normal vector</strong>: (0,0,1)
  Grid size (hex): 97 x 84
 {% endhighlight %}
 <p>This rearranges the measurements in a matrix form which can be indexed similarly as in the square case.</p>

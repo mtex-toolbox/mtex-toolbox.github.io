@@ -1,0 +1,51 @@
+---
+title: script_Dream3dGrains
+
+sidebar: documentation_sidebar
+permalink: Dream3dGrains.html
+folder: documentation
+toc: false
+---
+    <html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>script_Dream3dGrains</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_Dream3dGrains.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/Dream3dGrains.m">
+    edit page</a></font><div><!--introduction--><!--/introduction-->
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
+
+grains = grain3d.load(fname)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain3d
+ 
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     2     794  -15625  unknown       622       X||a*, Y||b, Z||c*
+ 
+ boundary faces: 757564
+ 
+ <strong>Properties</strong>: meanRotation
+{% endhighlight %}
+
+{% highlight matlab %}
+clf
+
+id = 2;
+plot(grains(id))
+
+c = grains(id).boundary.centroid;
+
+%hold on
+%scatter3(c.x,c.y,c.z,'.')
+%hold off
+
+hold on
+quiver3(c,grains(id).boundary.N,'arrowSize',0.15)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Dream3dGrains_01.png" %}
+</center></div></body></html>
