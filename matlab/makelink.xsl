@@ -180,5 +180,52 @@
   
 </xsl:template>
 
+<!-- Template für das Entfernen von führenden und nachfolgenden Leerzeilen -->
+<xsl:template name="trim">
+  <xsl:param name="text"/>
+  
+  <!-- Erst führende Leerzeichen und Leerzeilen entfernen -->
+  <xsl:variable name="textWithoutLeading">
+    <xsl:call-template name="trim-leading">
+      <xsl:with-param name="text" select="$text"/>
+    </xsl:call-template>
+  </xsl:variable>
+
+  <!-- Dann nachfolgende Leerzeichen und Leerzeilen entfernen -->
+  <xsl:call-template name="trim-trailing">
+    <xsl:with-param name="text" select="$textWithoutLeading"/>
+  </xsl:call-template>
+</xsl:template>
+
+<!-- Template, um führende Leerzeilen zu entfernen -->
+<xsl:template name="trim-leading">
+  <xsl:param name="text"/>
+  <xsl:choose>
+    <xsl:when test="starts-with($text, '&#10;') or starts-with($text, ' ')">
+      <xsl:call-template name="trim-leading">
+        <xsl:with-param name="text" select="substring($text, 2)"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="$text"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+<!-- Template, um nachfolgende Leerzeilen zu entfernen -->
+<xsl:template name="trim-trailing">
+  <xsl:param name="text"/>
+  <xsl:choose>
+    <xsl:when test="substring($text, string-length($text)) = '&#10;' or substring($text, string-length($text)) = ' '">
+      <xsl:call-template name="trim-trailing">
+        <xsl:with-param name="text" select="substring($text, 1, string-length($text) - 1)"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="$text"/>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
 
 </xsl:stylesheet>
