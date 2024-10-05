@@ -28,13 +28,14 @@ To make changes, update the MATLAB code and republish this document.
 % the smiley
 sF1 = S2Fun.smiley;
 
-% some osilatory function
+% some oscillatory function
 f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
 sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 150);
 {% endhighlight %}
 <h2 id="2">Smooth Plot</h2>
 <p>The default <a href="S2Fun.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command generates a colored plot without contours</p>
 {% highlight matlab %}
+plotx2north
 plot(sF1)
 {% endhighlight %}
 <center>
@@ -67,8 +68,11 @@ contourf(sF1, 'LineWidth', 2);
 <p>3D plot of a sphere colored accordingly to the function values.</p>
 {% highlight matlab %}
 plot3d(sF1);
-set(gca,'CameraUpVector',[0 10 0])
-set(gca,'CameraPosition',[-9 0 10])
+mtexColorMap parula
+how2plot = plottingConvention;
+how2plot.north = xvector;
+how2plot.outOfScreen = vector3d(0,1,2);
+setCamera(how2plot)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_04.png" %}
@@ -78,8 +82,7 @@ set(gca,'CameraPosition',[-9 0 10])
 {% highlight matlab %}
 surf(sF1)
 axis off
-set(gca,'CameraUpVector',[0 1 0])
-set(gca,'CameraPosition',[-9 0 10])
+setCamera(how2plot)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunPlotting_05.png" %}
