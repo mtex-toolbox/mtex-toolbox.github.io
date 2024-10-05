@@ -6,13 +6,28 @@ permalink: ODFInversePoleFigure.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Inverse Pole Figures</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ODFInversePoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFInversePoleFigure.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Theory</h2><p>For an orientation distribution function (ODF) \(f \colon \mathrm{SO}(3) \to R\) the inverse pole density function \(P_{\vec r}\) with respect to a fixed specimen direction \(\vec r\) is spherical function defined as the integral</p><p>\[ P_{\vec r}(\vec h) = \int_{g \vec h = \vec r} f(g) dg \]</p><p>The pole density function \(P_{\vec r}(\vec h)\) evaluated at a crystal direction \(\vec h\) can be interpreted as the volume percentage of crystals with the crystal lattice planes \(\vec h\) beeing normal to the specimen direction \(\vec r\).</p><p>In order to illustrate the concept of inverse pole figures at an example lets us first define a model ODF to be plotted later on.</p>
+    -->
+<title>Inverse Pole Figures</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ODFInversePoleFigure.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFInversePoleFigure.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">Theory</h2>
+<p>For an orientation distribution function (ODF) \(f \colon \mathrm{SO}(3) \to R\) the inverse pole density function \(P_{\vec r}\) with respect to a fixed specimen direction \(\vec r\) is spherical function defined as the integral</p>
+<p>\[ P_{\vec r}(\vec h) = \int_{g \vec h = \vec r} f(g) dg \]</p>
+<p>The pole density function \(P_{\vec r}(\vec h)\) evaluated at a crystal direction \(\vec h\) can be interpreted as the volume percentage of crystals with the crystal lattice planes \(\vec h\) beeing normal to the specimen direction \(\vec r\).</p>
+<p>In order to illustrate the concept of inverse pole figures at an example lets us first define a model ODF to be plotted later on.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
 mod1 = orientation.byEuler(90*degree,40*degree,110*degree,'ZYZ',cs);
@@ -55,26 +70,32 @@ plotIPDF(odf,[xvector,zvector])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFInversePoleFigure_01.png" %}
-</center><p>Imposing antipodal symmetry to the inverse pole figures halfes the fundamental region</p>
+</center>
+<p>Imposing antipodal symmetry to the inverse pole figures halfes the fundamental region</p>
 {% highlight matlab %}
 plotIPDF(odf,[xvector,zvector],'antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFInversePoleFigure_02.png" %}
-</center><p>By default MTEX always plots only the fundamental region with respect to the crystal symmetry. In order to plot the complete inverse pole figure you have to use the option <b>complete</b>.</p>
+</center>
+<p>By default MTEX always plots only the fundamental region with respect to the crystal symmetry. In order to plot the complete inverse pole figure you have to use the option <b>complete</b>.</p>
 {% highlight matlab %}
 plotIPDF(odf,[xvector,zvector],'complete','upper')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFInversePoleFigure_03.png" %}
-</center><p>This illustrates also more clearly the effect of the antipodal symmetry</p>
+</center>
+<p>This illustrates also more clearly the effect of the antipodal symmetry</p>
 {% highlight matlab %}
 plotIPDF(odf,[xvector,zvector],'complete','antipodal','upper')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFInversePoleFigure_04.png" %}
-</center><p>Finally, lets set back the default colormap.</p>
+</center>
+<p>Finally, lets set back the default colormap.</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap);
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

@@ -6,13 +6,26 @@ permalink: CombinedPlots.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Combined Plots</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_CombinedPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/CombinedPlots.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Explains how to combine several plots, e.g. plotting on the top of an inverse pole figure some important crystal directions.</p><h2 id="2">General Principle</h2><p>In order to tell MATLAB to plot one plot right on the top of an older plot one has to use the commands <a href="matlab:doc('hold')">hold all</a> and <a href="matlab:doc('hold')">hold off</a>. Let's demonstrate this using a simple example.</p>
+    -->
+<title>Combined Plots</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_CombinedPlots.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/CombinedPlots.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Explains how to combine several plots, e.g. plotting on the top of an inverse pole figure some important crystal directions.</p>
+<h2 id="2">General Principle</h2>
+<p>In order to tell MATLAB to plot one plot right on the top of an older plot one has to use the commands <a href="matlab:doc('hold')">hold all</a> and <a href="matlab:doc('hold')">hold off</a>. Let's demonstrate this using a simple example.</p>
 {% highlight matlab %}
 plot([2 2],'LineWidth',2)
 
@@ -24,7 +37,10 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_01.png" %}
-</center><h2 id="3">Combine Different EBSD Data</h2><p>First, we want to show up two different EBSD data sets in one plot</p><p>let's simulate some EBSD data</p>
+</center>
+<h2 id="3">Combine Different EBSD Data</h2>
+<p>First, we want to show up two different EBSD data sets in one plot</p>
+<p>let's simulate some EBSD data</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
 odf = unimodalODF(orientation.byEuler(0,0,0,cs));
@@ -40,7 +56,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_02.png" %}
-</center><p>a second way would be to superpose the pole figures of both EBSD data sets.</p>
+</center>
+<p>a second way would be to superpose the pole figures of both EBSD data sets.</p>
 {% highlight matlab %}
 h = [Miller(0,0,0,1,cs),Miller(1,0,-1,0,cs)];
 plotPDF(ori,h,'antipodal','MarkerSize',4)
@@ -50,7 +67,9 @@ hold off % next plot command deletes all plots
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_03.png" %}
-</center><h2 id="7">Combine countoured pole figures (smooth ODF plots) with EBSD Data Scatter Plots</h2><p>You can also combine a contour plot of a model ODF with a scatter plot of single orientations.</p>
+</center>
+<h2 id="7">Combine countoured pole figures (smooth ODF plots) with EBSD Data Scatter Plots</h2>
+<p>You can also combine a contour plot of a model ODF with a scatter plot of single orientations.</p>
 {% highlight matlab %}
 plotPDF(odf,h,'antipodal','contourf','grid')
 mtexColorMap white2black
@@ -65,7 +84,8 @@ legend('show','location','northeast')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_04.png" %}
-</center><p>and, of course, you can do the same with ODF plots:</p>
+</center>
+<p>and, of course, you can do the same with ODF plots:</p>
 {% highlight matlab %}
 plot(odf,'sections',8,'contourf','sigma')
 mtexColorMap white2black
@@ -74,7 +94,9 @@ plot(ori_rotated,'MarkerSize',6,'MarkerColor','r','MarkerEdgeColor','k','add2all
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_05.png" %}
-</center><h2 id="9">Add Miller Indices to an Inverse Pole Figure Plot</h2><p>Next, we are going to add some Miller indices to an inverse pole figure plot.</p>
+</center>
+<h2 id="9">Add Miller Indices to an Inverse Pole Figure Plot</h2>
+<p>Next, we are going to add some Miller indices to an inverse pole figure plot.</p>
 {% highlight matlab %}
 plotIPDF(odf,xvector,'noLabel');
 mtexColorMap white2black
@@ -88,7 +110,9 @@ hold off % next plot command deletes all plots
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_06.png" %}
-</center><h2 id="10">Combining different plots in one figure</h2><p>The next example demonstrates how to arrange arbitrary plots into one figure</p>
+</center>
+<h2 id="10">Combining different plots in one figure</h2>
+<p>The next example demonstrates how to arrange arbitrary plots into one figure</p>
 {% highlight matlab %}
 % let us import some pole figure data
 mtexdata dubna
@@ -143,4 +167,7 @@ axesPos = subplot(1,3,3);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CombinedPlots_07.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

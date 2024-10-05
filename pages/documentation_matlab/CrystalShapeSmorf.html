@@ -6,17 +6,39 @@ permalink: CrystalShapeSmorf.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Defining crystal shapes using Smorf</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_CrystalShapeSmorf.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalShapeSmorf.m">
-    edit page</a></font><div><!--introduction--><p>This guide demonstrates how to construct own crystal models and implement them in MTEX on the example of replicating the maolivine crystal shape published in Welsch et al. (2013, J. Pet.).</p><p><center>
+    -->
+<title>Defining crystal shapes using Smorf</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_CrystalShapeSmorf.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalShapeSmorf.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>This guide demonstrates how to construct own crystal models and implement them in MTEX on the example of replicating the maolivine crystal shape published in Welsch et al. (2013, J. Pet.).</p>
+<p>
+<center>
 {% include inline_image.html file="smorf_1.png" %}
-</center></p><!--/introduction--><h2 id="1">Open the smorf website</h2><p>The crystal drawing tool of the <a href="https://smorf.nl/draw.php">Smorf website</a> is an alternative to commercial software packages for defining custom crystal shapes. This free tool is made available by Mark Holtkamp.</p><h2 id="2">Select crystal parameters</h2><p>Select the point group for crystal symmetry and update the cell parameters in celldata. (Hint: use cell parameters from your own EBSD file). For the interpretation of face distance, choose <code class="language-plaintext highlighter-rouge">Crystallographic (Kristall2000)</code>, because MTEX follows this convention.</p><p><center>
+</center>
+</p>
+<!--/introduction-->
+<h2 id="1">Open the smorf website</h2>
+<p>The crystal drawing tool of the <a href="https://smorf.nl/draw.php">Smorf website</a> is an alternative to commercial software packages for defining custom crystal shapes. This free tool is made available by Mark Holtkamp.</p>
+<h2 id="2">Select crystal parameters</h2>
+<p>Select the point group for crystal symmetry and update the cell parameters in celldata. (Hint: use cell parameters from your own EBSD file). For the interpretation of face distance, choose <code class="language-plaintext highlighter-rouge">Crystallographic (Kristall2000)</code>, because MTEX follows this convention.</p>
+<p>
+<center>
 {% include inline_image.html file="smorf_2.png" %}
-</center></p><p>In MTEX define the crystal symmetry accordingly</p>
+</center>
+</p>
+<p>In MTEX define the crystal symmetry accordingly</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mmm', [4.756 10.207 5.98], 'mineral', 'Forsterite')
 {% endhighlight %}
@@ -29,9 +51,15 @@ cs = crystalSymmetry
   elements: 8         
   a, b, c : 4.8, 10, 6
 {% endhighlight %}
-<h2 id="3">Select the face normals</h2><p>Depending on the complexity of the crystal shape, the drawing of crystal can be tedious. Start constructing the crystal shape as seen along the main crystallographic axes \(\vec a\), \(\vec b\) and \(\vec c\) and add all visible crystal faces from the Welsch et al. (2013) model with distance of 1.</p><p><center>
+<h2 id="3">Select the face normals</h2>
+<p>Depending on the complexity of the crystal shape, the drawing of crystal can be tedious. Start constructing the crystal shape as seen along the main crystallographic axes \(\vec a\), \(\vec b\) and \(\vec c\) and add all visible crystal faces from the Welsch et al. (2013) model with distance of 1.</p>
+<p>
+<center>
 {% include inline_image.html file="smorf_3.png" %}
-</center></p><p>Accordingly we define the face normals in MTEX as a variable of type <a href="Miller.Miller.html">Miller</a></p>
+</center>
+</p>
+<p>Accordingly we define the face normals in MTEX as a variable of type <a href="Miller.Miller.html">Miller</a>
+</p>
 {% highlight matlab %}
 N = Miller({0,1,0},{0,0,1},{0,2,1},{1,1,0},{1,0,1},{1,2,0},cs)
 {% endhighlight %}
@@ -47,9 +75,14 @@ N = Miller (Forsterite)
   1 0 1
   1 2 0
 {% endhighlight %}
-<h2 id="4">Adapt the distances of the faces</h2><p>Start modifying the morphology by changing distance values of a given crystal face. (Hint: d-step of 0.05 works quite well and is fast).</p><p><center>
+<h2 id="4">Adapt the distances of the faces</h2>
+<p>Start modifying the morphology by changing distance values of a given crystal face. (Hint: d-step of 0.05 works quite well and is fast).</p>
+<p>
+<center>
 {% include inline_image.html file="smorf_4.png" %}
-</center></p><p>A higher distance value moves the crystal face farther from the origin, and vice versa. Fix first the largest crystal faces and maintain aspect ratio of the overall crystal shape by moving faces away or closer to origin. Note that the model in the crystal-drawing tool is not updated automatically, so you may need to click on <i>Draw crystal</i> button to apply changes. When ready, compare the original and replicate olivine and take a note on the hkl Miller indices and the corresponding distances in Smorf.</p>
+</center>
+</p>
+<p>A higher distance value moves the crystal face farther from the origin, and vice versa. Fix first the largest crystal faces and maintain aspect ratio of the overall crystal shape by moving faces away or closer to origin. Note that the model in the crystal-drawing tool is not updated automatically, so you may need to click on <i>Draw crystal</i> button to apply changes. When ready, compare the original and replicate olivine and take a note on the hkl Miller indices and the corresponding distances in Smorf.</p>
 {% highlight matlab %}
 dist = [0.4, 1.3, 1.4, 1.05, 1.85, 1.35];
 {% endhighlight %}
@@ -70,4 +103,8 @@ cS = crystalShape
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapeSmorf_01.png" %}
-</center><p>Get inspired by the Smorf mineral database for more crystal morphologies!</p></div></body></html>
+</center>
+<p>Get inspired by the Smorf mineral database for more crystal morphologies!</p>
+</div>
+</body>
+</html>

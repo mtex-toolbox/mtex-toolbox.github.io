@@ -6,13 +6,25 @@ permalink: ClusterDemo.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Cluster demo</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ClusterDemo.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/ClusterDemo.m">
-    edit page</a></font><div><!--introduction--><p>This code demonstrates how the clustering algorithm can be used to assign vector3d and crystal directions to groups by proximity.</p><!--/introduction--><p>define an octohedral crystal symmetry</p>
+    -->
+<title>Cluster demo</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ClusterDemo.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/ClusterDemo.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>This code demonstrates how the clustering algorithm can be used to assign vector3d and crystal directions to groups by proximity.</p>
+<!--/introduction-->
+<p>define an octohedral crystal symmetry</p>
 {% highlight matlab %}
 cs  = crystalSymmetry('432');
 
@@ -42,7 +54,8 @@ ori = orientation (432 → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ClusterDemo_01.png" %}
-</center><p>assign each vector3d to one of twelve clusters, and calculate the vector3D located at the center of each cluster</p>
+</center>
+<p>assign each vector3d to one of twelve clusters, and calculate the vector3D located at the center of each cluster</p>
 {% highlight matlab %}
 [cId,center] = calcCluster(r,'numCluster',12);
 
@@ -55,7 +68,12 @@ annotate(center,'add2all');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ClusterDemo_02.png" %}
-</center><p>Note that the upper and lower hemisphere plots are versions of each other, reflected horizontally plus vertically.  This means that the underlying data has antipodal symmetry, contributing equally to both hemispheres. Let's include that in the cluster sorting.</p><p>repeat the calculation after changing all the vector3d to be antipodal</p>
+</center>
+<center>
+{% include inline_image.html file="ClusterDemo_03.png" %}
+</center>
+<p>Note that the upper and lower hemisphere plots are versions of each other, reflected horizontally plus vertically. This means that the underlying data has antipodal symmetry, contributing equally to both hemispheres. Let's include that in the cluster sorting.</p>
+<p>repeat the calculation after changing all the vector3d to be antipodal</p>
 {% highlight matlab %}
 r.antipodal = true;
 
@@ -70,8 +88,9 @@ figure;plot(r,ind2color(cId))
 annotate(center,'add2all')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ClusterDemo_03.png" %}
-</center><p>pick a vector3d, and use that to convert the 10k random orientations previously generated into crystal directions.</p>
+{% include inline_image.html file="ClusterDemo_04.png" %}
+</center>
+<p>pick a vector3d, and use that to convert the 10k random orientations previously generated into crystal directions.</p>
 {% highlight matlab %}
 h = ori \ vector3d(1,1,0);
 
@@ -85,8 +104,9 @@ plot(h.project2FundamentalRegion,ind2color(cId),'fundamentalSector')
 annotate(center,'add2all')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ClusterDemo_04.png" %}
-</center><p>just as we calculated clusters for vector3D and crystal directions, we're now going to do so for orientations</p>
+{% include inline_image.html file="ClusterDemo_05.png" %}
+</center>
+<p>just as we calculated clusters for vector3D and crystal directions, we're now going to do so for orientations</p>
 {% highlight matlab %}
 [cId,center] = calcCluster(ori,'numCluster',2,'method','hierarchical');
 
@@ -95,8 +115,9 @@ annotate(center,'add2all')
 plotPDF(ori,ind2color(cId),Miller(1,0,0,cs),'all')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ClusterDemo_05.png" %}
-</center><p>If you have the statistics toolbox, you can make some calculations about the spread of points assigned to each cluster.</p>
+{% include inline_image.html file="ClusterDemo_06.png" %}
+</center>
+<p>If you have the statistics toolbox, you can make some calculations about the spread of points assigned to each cluster.</p>
 {% highlight matlab %}
 % compute the full distance matrix between all combinations of vector3D
 d = angle_outer(r,r);
@@ -133,4 +154,6 @@ end
 hold off
 end
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

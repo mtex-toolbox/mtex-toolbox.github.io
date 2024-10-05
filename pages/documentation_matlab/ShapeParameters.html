@@ -6,13 +6,25 @@ permalink: ShapeParameters.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shape Parameters - Basic Properties</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ShapeParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedProperties.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasesParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p><p>
+    -->
+<title>Shape Parameters - Basic Properties</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ShapeParameters.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/ShapeParameters.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedProperties.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasesParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p>
+<p>
    <table class="usertable">
       <tr>
          <td>
@@ -203,7 +215,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>list of  triple points</p>
+               <p>list of triple points</p>
          </td>
       </tr>
       <tr>
@@ -215,7 +227,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>list of  boundary segments</p>
+               <p>list of boundary segments</p>
          </td>
          <td>
                <p>
@@ -249,7 +261,8 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
-</p><p>We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+</p>
+<p>We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
 mtexdata forsterite silent
@@ -276,7 +289,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_01.png" %}
-</center><h2 id="3">Grain size vs. grain area and boundary size vs. perimeter</h2><p>The most basic properties are grainSize and grain area. Those can be computed by</p>
+</center>
+<h2 id="3">Grain size vs. grain area and boundary size vs. perimeter</h2>
+<p>The most basic properties are grainSize and grain area. Those can be computed by</p>
 {% highlight matlab %}
 grains(9).grainSize
 grains(9).area
@@ -297,7 +312,9 @@ ylabel('number of grains')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_02.png" %}
-</center><p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a> or <a href="grain2d.hist.html"><code class="language-plaintext highlighter-rouge">hist(grains)</code></a></p>
+</center>
+<p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a> or <a href="grain2d.hist.html"><code class="language-plaintext highlighter-rouge">hist(grains)</code></a>
+</p>
 {% highlight matlab %}
 hist(grains)
 {% endhighlight %}
@@ -318,7 +335,8 @@ histogram(grains)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_04.png" %}
-</center><p>Similarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional measures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
+</center>
+<p>Similarly as <code class="language-plaintext highlighter-rouge">grainSize</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional measures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
 {% highlight matlab %}
 grains(9).boundarySize
 grains(9).perimeter
@@ -342,7 +360,8 @@ ans =
 ans =
   233.1556
 {% endhighlight %}
-<h2 id="9">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2><p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
+<h2 id="9">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2>
+<p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
 {% highlight matlab %}
 grains(9).diameter
 {% endhighlight %}
@@ -351,7 +370,8 @@ grains(9).diameter
 ans =
   106.0650
 {% endhighlight %}
-<p>The diameter is a special case of the caliper or Feret diameter of a grain that is explained in detail in the section <a href="ProjectionBasedParameters.html">Projection based parameters</a>.</p><p>In contrast the <a href="grain2d.equivalentRadius.html">equivalent radius</a> is the radius of a circle with the same area as the grain. Naturally, the equivalent radius is always smaller than the actual radius of the grains. Similarly, the <a href="grain2d.equivalentPerimeter">equivalent perimeter</a> is defined as the perimeter of the circle the same area and is always smaller then the actual perimeter.</p>
+<p>The diameter is a special case of the caliper or Feret diameter of a grain that is explained in detail in the section <a href="ProjectionBasedParameters.html">Projection based parameters</a>.</p>
+<p>In contrast the <a href="grain2d.equivalentRadius.html">equivalent radius</a> is the radius of a circle with the same area as the grain. Naturally, the equivalent radius is always smaller than the actual radius of the grains. Similarly, the <a href="grain2d.equivalentPerimeter">equivalent perimeter</a> is defined as the perimeter of the circle the same area and is always smaller then the actual perimeter.</p>
 {% highlight matlab %}
 2*grains(9).equivalentRadius
 
@@ -371,7 +391,9 @@ mtexColorbar('title','shape factor')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_05.png" %}
-</center><p>A second measure for the discrepancy between the actual shape and a circle is the relative difference between the <a href="grain2d.perimeter.html"><code class="language-plaintext highlighter-rouge">perimeter</code></a> and the <a href="grain2d.equivalentPerimeter.html"><code class="language-plaintext highlighter-rouge">equivalentPerimeter</code></a></p>
+</center>
+<p>A second measure for the discrepancy between the actual shape and a circle is the relative difference between the <a href="grain2d.perimeter.html"><code class="language-plaintext highlighter-rouge">perimeter</code></a> and the <a href="grain2d.equivalentPerimeter.html"><code class="language-plaintext highlighter-rouge">equivalentPerimeter</code></a>
+</p>
 {% highlight matlab %}
 plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
 setColorRange([0,0.5])
@@ -379,14 +401,19 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_06.png" %}
-</center><p>In this plot round shapes will have values close to zero while concave shapes will get values up to \(0.5\).</p><p>A third measure is the <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull. It is explained in more detail in the section <a href="HullBasedParameters.html">convex hull parameters.</a></p>
+</center>
+<p>In this plot round shapes will have values close to zero while concave shapes will get values up to \(0.5\).</p>
+<p>A third measure is the <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull. It is explained in more detail in the section <a href="HullBasedParameters.html">convex hull parameters.</a>
+</p>
 {% highlight matlab %}
 plot(grains,grains.paris)
 mtexColorbar('title','paris')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_07.png" %}
-</center><h2 id="14">Fractal Dimension</h2><p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+</center>
+<h2 id="14">Fractal Dimension</h2>
+<p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
 {% highlight matlab %}
 % consider the entire data set
 mtexdata forsterite silent
@@ -415,7 +442,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ShapeParameters_08.png" %}
-</center><p>The slope of the linear function is the fractal dimension.</p>
+</center>
+<p>The slope of the linear function is the fractal dimension.</p>
 {% highlight matlab %}
 fractalDimension = ab(1)
 {% endhighlight %}
@@ -424,4 +452,7 @@ fractalDimension = ab(1)
 fractalDimension =
     1.0330
 {% endhighlight %}
-<p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p></div></body></html>
+<p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p>
+</div>
+</body>
+</html>

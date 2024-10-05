@@ -6,13 +6,30 @@ permalink: S2FunBingham.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Spherical Bingham Distribution</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_S2FunBingham.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunBingham.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probability density function given by</p><p>\[p_{b}(\hat{x}\vert AKA^T) = \frac{1}{F(\kappa_{1},\kappa_{2},\kappa_{3})}\exp (\hat{x}^T AZA^T \hat{x})\]</p><p>where \(A\) is an orthogonal covariance matrix, and \(Z\) a concentration matrix with \(\mathrm{diag}(\kappa_{1},\kappa_{2},\kappa_{3})\) with \(\kappa_{1} &lt; \kappa_{2} &lt; \kappa_{3}\).</p><p>In MTEX \(Z\) is given by <code class="language-plaintext highlighter-rouge">Z = [k1,k2,k3]</code> with <code class="language-plaintext highlighter-rouge">k3 = 0</code> and \(A\) is given by three orthogonal vectors.</p><p><a href="https://www.jstor.org/stable/2958339">Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225</a></p>
+    -->
+<title>The Spherical Bingham Distribution</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2FunBingham.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunBingham.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probability density function given by</p>
+<p>\[p_{b}(\hat{x}\vert AKA^T) = \frac{1}{F(\kappa_{1},\kappa_{2},\kappa_{3})}\exp (\hat{x}^T AZA^T \hat{x})\]</p>
+<p>where \(A\) is an orthogonal covariance matrix, and \(Z\) a concentration matrix with \(\mathrm{diag}(\kappa_{1},\kappa_{2},\kappa_{3})\) with \(\kappa_{1} &lt; \kappa_{2} &lt; \kappa_{3}\).</p>
+<p>In MTEX \(Z\) is given by <code class="language-plaintext highlighter-rouge">Z = [k1,k2,k3]</code> with <code class="language-plaintext highlighter-rouge">k3 = 0</code> and \(A\) is given by three orthogonal vectors.</p>
+<p>
+<a href="https://www.jstor.org/stable/2958339">Bingham, C., An Antipodally Symmetric Distribution on the Sphere, The Annals of Statistics Vol. 2, No. 6 (Nov., 1974), pp. 1201-1225</a>
+</p>
 {% highlight matlab %}
 % A simple example:
 Z = [-10 -4 0];
@@ -22,7 +39,9 @@ plot(bs2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_01.png" %}
-</center><h2 id="2">Meaning of \(Z\)</h2><p>\(k1 = k2\) defines a rotational symmetric point maximum and \(k2 = 0\) defines a girdle distribution.</p>
+</center>
+<h2 id="2">Meaning of \(Z\)</h2>
+<p>\(k1 = k2\) defines a rotational symmetric point maximum and \(k2 = 0\) defines a girdle distribution.</p>
 {% highlight matlab %}
 close
 kappa = [0 4 8 12 24];
@@ -44,7 +63,8 @@ mtexFig.drawNow;
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_02.png" %}
-</center><h2 id="3">Drawing a random sample of the Bingham distribution</h2>
+</center>
+<h2 id="3">Drawing a random sample of the Bingham distribution</h2>
 {% highlight matlab %}
 close
 v = bs2.discreteSample(500)
@@ -61,7 +81,9 @@ v = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_03.png" %}
-</center><h2 id="4">Estimating a spherical Bingham distribution from discrete data</h2><p>Given arbitrarily scattered data <code class="language-plaintext highlighter-rouge">v</code> on the sphere we can estimate the best fitting Bingham distribution by</p>
+</center>
+<h2 id="4">Estimating a spherical Bingham distribution from discrete data</h2>
+<p>Given arbitrarily scattered data <code class="language-plaintext highlighter-rouge">v</code> on the sphere we can estimate the best fitting Bingham distribution by</p>
 {% highlight matlab %}
 % estimate a Bingham distribution
 bs = BinghamS2.fit(v,'confElli',0.9)
@@ -79,13 +101,17 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_04.png" %}
-</center><p>Under the assumption of sufficiently many and sufficently concetrated data we may also estimate a confidence ellipse for the mean direction (default p = 0.95). The center of the ellipse is given by the largest principle vector stored in <code class="language-plaintext highlighter-rouge">bs.a(3)</code></p>
+</center>
+<p>Under the assumption of sufficiently many and sufficently concetrated data we may also estimate a confidence ellipse for the mean direction (default p = 0.95). The center of the ellipse is given by the largest principle vector stored in <code class="language-plaintext highlighter-rouge">bs.a(3)</code>
+</p>
 {% highlight matlab %}
 annotate(bs.a(3),'MarkerFaceColor','red','MarkerSize',10)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_05.png" %}
-</center><p>The orientation of the ellipse is specified by all the principle vectors <code class="language-plaintext highlighter-rouge">bs.a</code> and the a and b axes are computed by the command <code class="language-plaintext highlighter-rouge">cEllipse</code></p>
+</center>
+<p>The orientation of the ellipse is specified by all the principle vectors <code class="language-plaintext highlighter-rouge">bs.a</code> and the a and b axes are computed by the command <code class="language-plaintext highlighter-rouge">cEllipse</code>
+</p>
 {% highlight matlab %}
 mtexColorMap white2black
 
@@ -95,4 +121,7 @@ ellipse(rotation('matrix',bs.a.xyz'),bs.cEllipse(1),bs.cEllipse(2), ...
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunBingham_06.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

@@ -6,13 +6,24 @@ permalink: OrientationPoleFigure.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Pole Figures</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_OrientationPoleFigure.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationPoleFigure.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
+    -->
+<title>Pole Figures</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_OrientationPoleFigure.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationPoleFigure.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321')
 ori = orientation.rand(cs)
@@ -31,7 +42,7 @@ ori = orientation (321 → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  348.998 50.0785 69.8036
+  10.5074 54.1577 44.1314
 {% endhighlight %}
 <p>Starting point is a fixed crystal direction <code class="language-plaintext highlighter-rouge">h</code>, e.g.,</p>
 {% highlight matlab %}
@@ -46,13 +57,13 @@ r = ori * h.symmetrise
 {% highlight plaintext %}
 r = vector3d
  size: 1 x 6
-          x         y         z
-   0.524047  0.606589  0.831119
-      1.141 -0.093302  0.150787
-     -1.141  0.093302 -0.150787
-  -0.524047 -0.606589 -0.831119
-   0.616957  -0.69989 -0.680331
-  -0.616957   0.69989  0.680331
+          x          y          z
+   0.729026   0.614046   0.651768
+    1.12579  0.0207706  -0.255942
+   -1.12579 -0.0207706   0.255942
+  -0.729026  -0.614046  -0.651768
+   0.396761  -0.593276   -0.90771
+  -0.396761   0.593276    0.90771
 {% endhighlight %}
 <p>and ploted in a spherical projection</p>
 {% highlight matlab %}
@@ -60,18 +71,25 @@ plot(r)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationPoleFigure_01.png" %}
-</center><p>Since the trigonal symmetry group has six symmetry elements the orientation appears at six possitions.</p><p>A shortcut for the above computations is the command</p>
+</center>
+<p>Since the trigonal symmetry group has six symmetry elements the orientation appears at six possitions.</p>
+<p>A shortcut for the above computations is the command</p>
 {% highlight matlab %}
 % a pole figure plot
 plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationPoleFigure_02.png" %}
-</center><p>We observe, that for some crystal directions only the upper hemisphere is plotted while for other upper and lower hemisphere are plotted. The reason is that if <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">-h</code> are symmetrically equivalent the upper and lower hemisphere of the pole figure are symmetric as well.</p><h2 id="7">Contour plots</h2>
+</center>
+<p>We observe, that for some crystal directions only the upper hemisphere is plotted while for other upper and lower hemisphere are plotted. The reason is that if <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">-h</code> are symmetrically equivalent the upper and lower hemisphere of the pole figure are symmetric as well.</p>
+<h2 id="7">Contour plots</h2>
 {% highlight matlab %}
 plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS),'contourf')
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationPoleFigure_03.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

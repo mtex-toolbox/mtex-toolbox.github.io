@@ -6,13 +6,24 @@ permalink: EBSDOrientationAnalysis.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>EBSD Orientation Anaylsis</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDOrientationAnalysis.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDOrientationAnalysis.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Here we discuss tools for the analysis of EBSD data which are independent of its spatial coordinates. For spatial analysis, we refer to <a href="xxx.html">this page</a>. Let us first import some EBSD data:</p>
+    -->
+<title>EBSD Orientation Anaylsis</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDOrientationAnalysis.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDOrientationAnalysis.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Here we discuss tools for the analysis of EBSD data which are independent of its spatial coordinates. For spatial analysis, we refer to <a href="xxx.html">this page</a>. Let us first import some EBSD data:</p>
 {% highlight matlab %}
 plotx2east
 ebsd = EBSD.load(fullfile(mtexDataPath,'EBSD','Forsterite.ctf'),...
@@ -22,7 +33,9 @@ plot(ebsd)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_01.png" %}
-</center><h2 id="2">Orientation plot</h2><p>We start our investigations of the Forsterite phase by plotting some pole figures</p>
+</center>
+<h2 id="2">Orientation plot</h2>
+<p>We start our investigations of the Forsterite phase by plotting some pole figures</p>
 {% highlight matlab %}
 cs = ebsd('Forsterite').CS % the crystal symmetry of the forsterite phase
 h = [Miller(1,0,0,cs),Miller(0,1,0,cs),Miller(0,0,1,cs)];
@@ -44,7 +57,8 @@ cs = crystalSymmetry
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_02.png" %}
-</center><p>From the {100} pole figure, we might suspect a fibre texture present in our data. Let's check this. First, we determine the vector orthogonal to fibre in the {100} pole figure</p>
+</center>
+<p>From the {100} pole figure, we might suspect a fibre texture present in our data. Let's check this. First, we determine the vector orthogonal to fibre in the {100} pole figure</p>
 {% highlight matlab %}
 % the orientations of the Forsterite phase
 ori = ebsd('Forsterite').orientations
@@ -74,7 +88,8 @@ rOrth = vector3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_03.png" %}
-</center><p>we can check how large is the number of orientations that are in the (100) polegigure within a 10-degree fibre around the great circle with center <code class="language-plaintext highlighter-rouge">rOrth</code>. The following line gives the result in percent</p>
+</center>
+<p>we can check how large is the number of orientations that are in the (100) polegigure within a 10-degree fibre around the great circle with center <code class="language-plaintext highlighter-rouge">rOrth</code>. The following line gives the result in percent</p>
 {% highlight matlab %}
 100 * sum(angle(r,rOrth)>80*degree) / length(ori)
 {% endhighlight %}
@@ -105,7 +120,8 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_04.png" %}
-</center><p>Surprisingly this value is significantly lower than the value we obtained we looking only at the 100 pole figure. Finally, let's plot the ODF along this fibre</p>
+</center>
+<p>Surprisingly this value is significantly lower than the value we obtained we looking only at the 100 pole figure. Finally, let's plot the ODF along this fibre</p>
 {% highlight matlab %}
 odf = calcDensity(ebsd('Forsterite').orientations)
 
@@ -121,10 +137,16 @@ odf = SO3FunHarmonic (Forsterite → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_05.png" %}
-</center><p>We see that to ODF is far from beeing constant along the fibre. Thus, together with an observation about the small fibre volume, we would reject the hypothesis of a fibre texture.</p><p>Let's finally plot the ODF in orientation space to verify our decision</p>
+</center>
+<p>We see that to ODF is far from beeing constant along the fibre. Thus, together with an observation about the small fibre volume, we would reject the hypothesis of a fibre texture.</p>
+<p>Let's finally plot the ODF in orientation space to verify our decision</p>
 {% highlight matlab %}
 plot(odf,'sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_06.png" %}
-</center><p>Here we see the typical large individual spots that are typical for large grains. Thus the ODF estimated from the EBSD data and all our previous analysis suffer from the fact that too few grains have been measured. For texture analysis, it would have been favorable to measure at a lower resolution but a larger region.</p></div></body></html>
+</center>
+<p>Here we see the typical large individual spots that are typical for large grains. Thus the ODF estimated from the EBSD data and all our previous analysis suffer from the fact that too few grains have been measured. For texture analysis, it would have been favorable to measure at a lower resolution but a larger region.</p>
+</div>
+</body>
+</html>

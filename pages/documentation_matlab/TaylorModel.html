@@ -6,13 +6,25 @@ permalink: TaylorModel.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Taylor Model</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TaylorModel.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorModel.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Basic Settings</h2><p>display pole figure plots with RD on top and ND west</p>
+    -->
+<title>Taylor Model</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_TaylorModel.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TaylorModel.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">Basic Settings</h2>
+<p>display pole figure plots with RD on top and ND west</p>
 {% highlight matlab %}
 plotx2north
 
@@ -25,7 +37,8 @@ pfAnnotations = @(varargin) text(-[vector3d.X,vector3d.Y],{'RD','ND'},...
 
 setMTEXpref('pfAnnotations',pfAnnotations);
 {% endhighlight %}
-<h2 id="2">Slip in Body Centered Cubic Materials</h2><p>In the following we consider crystallographic slip in bcc materials</p>
+<h2 id="2">Slip in Body Centered Cubic Materials</h2>
+<p>In the following we consider crystallographic slip in bcc materials</p>
 {% highlight matlab %}
 % define the slip systems in bcc
 cs = crystalSymmetry('432');
@@ -56,7 +69,8 @@ epsilon = strainTensor (xyz)
   0  0  0
   0  0 -1
 {% endhighlight %}
-<h2 id="4">The orientation dependence of the Taylor factor</h2><p>For a family of slip systems <code class="language-plaintext highlighter-rouge">sS</code> the Taylor factor <code class="language-plaintext highlighter-rouge">M</code> describes the total amount of slip activity that is required to deform a crystal in orientation <code class="language-plaintext highlighter-rouge">ori</code> according to strain <code class="language-plaintext highlighter-rouge">epsilon</code>. In MTEX this can be computed by the command <a href="strainTensor.calcTaylor.html"><code class="language-plaintext highlighter-rouge">calcTaylor</code></a>.</p>
+<h2 id="4">The orientation dependence of the Taylor factor</h2>
+<p>For a family of slip systems <code class="language-plaintext highlighter-rouge">sS</code> the Taylor factor <code class="language-plaintext highlighter-rouge">M</code> describes the total amount of slip activity that is required to deform a crystal in orientation <code class="language-plaintext highlighter-rouge">ori</code> according to strain <code class="language-plaintext highlighter-rouge">epsilon</code>. In MTEX this can be computed by the command <a href="strainTensor.calcTaylor.html"><code class="language-plaintext highlighter-rouge">calcTaylor</code></a>.</p>
 {% highlight matlab %}
 % define a crystal orientation
 ori = orientation.byEuler(0,30*degree,15*degree,cs)
@@ -101,7 +115,8 @@ W = SO3VectorFieldHarmonic (432 → xyz)
   bandwidth: 32
   tangent space: rightSpinTensor
 {% endhighlight %}
-<p>The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970). Some applications of the Taylor theory of polycrystal plasticity. Kristall Und Technik, 5(1), 145-175. <a href="http://doi.org/10.1002/crat.19700050112">http://doi.org/10.1002/crat.19700050112</a></p>
+<p>The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970). Some applications of the Taylor theory of polycrystal plasticity. Kristall Und Technik, 5(1), 145-175. <a href="http://doi.org/10.1002/crat.19700050112">http://doi.org/10.1002/crat.19700050112</a>
+</p>
 {% highlight matlab %}
 % set up an phi1 section plot
 sP = phi1Sections(cs,specimenSymmetry('222'));
@@ -117,14 +132,17 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_01.png" %}
-</center><h2 id="7">The orientation dependence of the spin</h2><p>The norm of the spin tensor is exactly the angle of misorientation a crystal with the corresponding orientation experiences according to Taylor theory. Compare Fig. 8 of the above paper</p>
+</center>
+<h2 id="7">The orientation dependence of the spin</h2>
+<p>The norm of the spin tensor is exactly the angle of misorientation a crystal with the corresponding orientation experiences according to Taylor theory. Compare Fig. 8 of the above paper</p>
 {% highlight matlab %}
 plot(norm(W)/degree,'smooth',sP,'resolution',0.5*degree)
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_02.png" %}
-</center><p>Display the crystallographic spin in sigma sections</p>
+</center>
+<p>Display the crystallographic spin in sigma sections</p>
 {% highlight matlab %}
 sP = sigmaSections(cs,specimenSymmetry);
 plot(norm(W)./degree,'smooth',sP)
@@ -132,7 +150,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_03.png" %}
-</center><h2 id="9">Identification of the most active slip directions</h2><p>Next we consider a real world data set</p>
+</center>
+<h2 id="9">Identification of the most active slip directions</h2>
+<p>Next we consider a real world data set</p>
 {% highlight matlab %}
 mtexdata csl
 
@@ -211,14 +231,16 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_04.png" %}
-</center><p>plot the most active slip directions observe that they point all towards the lower hemisphere - why? they do change if q is changed</p>
+</center>
+<p>plot the most active slip directions observe that they point all towards the lower hemisphere - why? they do change if q is changed</p>
 {% highlight matlab %}
 figure(2)
 plot(sSGrains.b)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_05.png" %}
-</center><h2 id="13">Texture evolution during rolling</h2>
+</center>
+<h2 id="13">Texture evolution during rolling</h2>
 {% highlight matlab %}
 % define some random orientations
 rng(0)
@@ -259,8 +281,11 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_06.png" %}
-</center><h2 id="15">restore MTEX preferences</h2>
+</center>
+<h2 id="15">restore MTEX preferences</h2>
 {% highlight matlab %}
 setMTEXpref('pfAnnotations',storepfA);
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

@@ -6,13 +6,24 @@ permalink: SO3FunSymmetricFunctions.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Symmetry Properties of Orientation Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunSymmetricFunctions.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunSymmetricFunctions.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Every <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> has a left and a right symmetry. For further information on symmetries look at <a href="CrystalSymmetries.html">crystal symmetries</a>, <a href="SpecimenSymmetry.html">specimen symmetries</a> and, <a href="QuasiCrystals.html">Quasi symmetries</a>.</p>
+    -->
+<title>Symmetry Properties of Orientation Functions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3FunSymmetricFunctions.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunSymmetricFunctions.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Every <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> has a left and a right symmetry. For further information on symmetries look at <a href="CrystalSymmetries.html">crystal symmetries</a>, <a href="SpecimenSymmetry.html">specimen symmetries</a> and, <a href="QuasiCrystals.html">Quasi symmetries</a>.</p>
 {% highlight matlab %}
 SO3F = SO3Fun.dubna
 
@@ -59,7 +70,15 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_01.png" %}
-</center><div><ul><li>Note that only the important part with respect to the symmetry is plotted</li><li>you can plot the full rotation group using the argument <code class="language-plaintext highlighter-rouge">'complete'</code></li></ul></div><p>In most subclasses of <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> the symmetries are independent from the rest of variables of the function. So one can change them very easy and only effects the function values.</p>
+</center>
+<div>
+<ul>
+<li>Note that only the important part with respect to the symmetry is plotted</li>
+<li>you can plot the full rotation group using the argument <code class="language-plaintext highlighter-rouge">'complete'</code>
+</li>
+</ul>
+</div>
+<p>In most subclasses of <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> the symmetries are independent from the rest of variables of the function. So one can change them very easy and only effects the function values.</p>
 {% highlight matlab %}
 SO3F.SLeft = specimenSymmetry('432')
 {% endhighlight %}
@@ -71,7 +90,8 @@ SO3F = SO3FunRBF (Quartz → xyz (432))
   kernel: de la Vallee Poussin, halfwidth 5°
   center: 19848 orientations
 {% endhighlight %}
-<p>The class <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> describes an rotational function by the Fourier coefficients of its harmonic series. Here it is possible to get the symmetries directly from the fourier coefficients.</p><p>Similary if we want to change the symmetry of a function it is not enough to change it. We also have to symmetries this function.</p>
+<p>The class <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> describes an rotational function by the Fourier coefficients of its harmonic series. Here it is possible to get the symmetries directly from the fourier coefficients.</p>
+<p>Similary if we want to change the symmetry of a function it is not enough to change it. We also have to symmetries this function.</p>
 {% highlight matlab %}
 SO3F2 = SO3FunHarmonic(rand(1e3,1))
 SO3F2.fhat(1:10)
@@ -101,12 +121,13 @@ plot(SO3F2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
-following only the real part is plotted.
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
+In the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_02.png" %}
-</center><p>Changing the symmetry has no effect on the Fourier coefficients. No we are only plotting the given function on some fundamental region.</p>
+</center>
+<p>Changing the symmetry has no effect on the Fourier coefficients. No we are only plotting the given function on some fundamental region.</p>
 {% highlight matlab %}
 SO3F2.SRight = crystalSymmetry('2')
 SO3F2.fhat(1:10)
@@ -136,12 +157,13 @@ plot(SO3F2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
-following only the real part is plotted.
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
+In the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_03.png" %}
-</center><p>Symmetrizing the Fourier coefficients transforms the coefficients. So we symmetrize the function and it is no longer possible to go back to the non symmetrized function from before.</p>
+</center>
+<p>Symmetrizing the Fourier coefficients transforms the coefficients. So we symmetrize the function and it is no longer possible to go back to the non symmetrized function from before.</p>
 {% highlight matlab %}
 SO3F2 = SO3F2.symmetrise
 SO3F2.fhat(1:10)
@@ -171,23 +193,26 @@ plot(SO3F2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
-following only the real part is plotted.
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
+In the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_04.png" %}
-</center><p>Now the function is symmetrised on the full rotation group.</p>
+</center>
+<p>Now the function is symmetrised on the full rotation group.</p>
 {% highlight matlab %}
 plot(SO3F2,'complete')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored. In the
-following only the real part is plotted.
+Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
+In the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_05.png" %}
-</center><p>Note that you can expand every <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> to an <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a></p>
+</center>
+<p>Note that you can expand every <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> to an <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>
+</p>
 {% highlight matlab %}
 SO3F3 = SO3FunHarmonic(SO3F)
 {% endhighlight %}
@@ -197,4 +222,7 @@ SO3F3 = SO3FunHarmonic (Quartz → xyz (432))
   bandwidth: 48
   weight: 1
 {% endhighlight %}
-<p>and do the same as before.</p></div></body></html>
+<p>and do the same as before.</p>
+</div>
+</body>
+</html>

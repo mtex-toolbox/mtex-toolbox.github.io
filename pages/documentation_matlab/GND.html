@@ -6,13 +6,28 @@ permalink: GND.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Geometrically Necessary Dislocations</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GND.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/GND.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>This example sheet describes how to estimate dislocation densities following the reference paper</p><p><a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a></p><p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
+    -->
+<title>Geometrically Necessary Dislocations</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_GND.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/GND.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>This example sheet describes how to estimate dislocation densities following the reference paper</p>
+<p>
+<a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction, Scripta Materialia, 2008</a>
+</p>
+<p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
 {% highlight matlab %}
 % set up the plotting convention
 plotx2north
@@ -30,7 +45,8 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_01.png" %}
-</center><p>In the next step we reconstruct grains, remove all grains with less then 5 pixels and smooth the grain boundaries.</p>
+</center>
+<p>In the next step we reconstruct grains, remove all grains with less then 5 pixels and smooth the grain boundaries.</p>
 {% highlight matlab %}
 % reconstruct grains
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
@@ -50,7 +66,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_02.png" %}
-</center><h2 id="3">Data cleaning</h2><p>The computation of geometrically neccesary dislocations from EBSD maps depends on local orientation changes in the map. In order to make those visible we switch to a different color key that colorises the misorientation of an pixel with respect to the grain meanorientation.</p>
+</center>
+<h2 id="3">Data cleaning</h2>
+<p>The computation of geometrically neccesary dislocations from EBSD maps depends on local orientation changes in the map. In order to make those visible we switch to a different color key that colorises the misorientation of an pixel with respect to the grain meanorientation.</p>
 {% highlight matlab %}
 % a key the colorizes according to misorientation angle and axis
 ipfKey = axisAngleColorKey(ebsd);
@@ -67,7 +85,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_03.png" %}
-</center><p>We observe that the data are quite noisy. As noisy orientation data lead to overestimate the GND density we apply sime denoising techniques to the data.</p>
+</center>
+<p>We observe that the data are quite noisy. As noisy orientation data lead to overestimate the GND density we apply sime denoising techniques to the data.</p>
 {% highlight matlab %}
 % denoise orientation data
 F = halfQuadraticFilter;
@@ -84,7 +103,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_04.png" %}
-</center><h2 id="5">The incomplete curvature tensor</h2><p>Starting point of any GND computation is the curvature tensor, which is a rank two tensor that is defined for every pixel in the EBSD map by the directional derivatives in x, y and z direction.</p>
+</center>
+<h2 id="5">The incomplete curvature tensor</h2>
+<p>Starting point of any GND computation is the curvature tensor, which is a rank two tensor that is defined for every pixel in the EBSD map by the directional derivatives in x, y and z direction.</p>
 {% highlight matlab %}
 % consider only the Fe(alpha) phase
 ebsd = ebsd('indexed').gridify;
@@ -112,7 +133,9 @@ ans = curvatureTensor (xyz)
   -4.591   2.269     NaN
  -11.952  17.293     NaN
 {% endhighlight %}
-<h2 id="6">The components of the curvature tensor</h2><p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d EBSD maps.</p><p>We can access the different components of the curvature tensor with</p>
+<h2 id="6">The components of the curvature tensor</h2>
+<p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d EBSD maps.</p>
+<p>We can access the different components of the curvature tensor with</p>
 {% highlight matlab %}
 kappa12 = kappa{1,2};
 
@@ -144,7 +167,9 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_05.png" %}
-</center><h2 id="8">The incomplete dislocation density tensor</h2><p>According to Kroener the curvature tensor is directly related to the dislocation density tensor.</p>
+</center>
+<h2 id="8">The incomplete dislocation density tensor</h2>
+<p>According to Kroener the curvature tensor is directly related to the dislocation density tensor.</p>
 {% highlight matlab %}
 alpha = kappa.dislocationDensity
 {% endhighlight %}
@@ -170,7 +195,8 @@ ans = dislocationDensityTensor (xyz)
   15.305     NaN  17.293
      NaN     NaN  -2.649
 {% endhighlight %}
-<h2 id="10">Crystallographic Dislocations</h2><p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the attomic lattice different dislocattion systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
+<h2 id="10">Crystallographic Dislocations</h2>
+<p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the attomic lattice different dislocattion systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
 {% highlight matlab %}
 dS = dislocationSystem.bcc(ebsd.CS)
 {% endhighlight %}
@@ -249,7 +275,29 @@ a = norm(ebsd.CS.aAxis);
 ans =
     2.4855    2.4855    2.4855
 {% endhighlight %}
-<h2 id="12">The Energy of Dislocations</h2><p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p><p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p><p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p><p>\[ U_{\mathrm{edge}} = \frac{1}{(1-\nu)} U_{\mathrm{screw}} \]</p><p>where</p><div><ul><li><code class="language-plaintext highlighter-rouge">G</code> is the shear modulus</li><li><code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li><li><code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li><li><code class="language-plaintext highlighter-rouge">R</code></li><li><code class="language-plaintext highlighter-rouge">r</code></li></ul></div><p>In this example we assume \[ U_{\mathrm{edge}} = 1 \] \[ U_{\mathrm{screw}} = 1-\nu \]</p>
+<h2 id="12">The Energy of Dislocations</h2>
+<p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p>
+<p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p>
+<p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p>
+<p>\[ U_{\mathrm{edge}} = \frac{1}{(1-\nu)} U_{\mathrm{screw}} \]</p>
+<p>where</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">G</code> is the shear modulus</li>
+<li>
+<code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li>
+<li>
+<code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li>
+<li>
+<code class="language-plaintext highlighter-rouge">R</code>
+</li>
+<li>
+<code class="language-plaintext highlighter-rouge">r</code>
+</li>
+</ul>
+</div>
+<p>In this example we assume \[ U_{\mathrm{edge}} = 1 \] \[ U_{\mathrm{screw}} = 1-\nu \]</p>
 {% highlight matlab %}
 nu = 0.3;
 
@@ -289,7 +337,8 @@ dSRot = dislocationSystem
  edge dislocations : 5144 x 48
  screw dislocations: 5144 x 4
 {% endhighlight %}
-<h2 id="15">Fitting Dislocations to the incomplete dislocation density tensor</h2><p>Now we are ready for fitting the dislocation tensors to the dislocation densitiy tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
+<h2 id="15">Fitting Dislocations to the incomplete dislocation density tensor</h2>
+<p>Now we are ready for fitting the dislocation tensors to the dislocation densitiy tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
 {% highlight matlab %}
 [rho,factor] = fitDislocationSystems(kappa,dSRot);
 {% endhighlight %}
@@ -362,7 +411,9 @@ drawNow(gcm,'figSize','large');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GND_06.png" %}
-</center><h2 id="19">The total dislocation energy</h2><p>The unit of the densities <code class="language-plaintext highlighter-rouge">h</code> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <code class="language-plaintext highlighter-rouge">h</code> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <code class="language-plaintext highlighter-rouge">factor</code> by the function <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
+</center>
+<h2 id="19">The total dislocation energy</h2>
+<p>The unit of the densities <code class="language-plaintext highlighter-rouge">h</code> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <code class="language-plaintext highlighter-rouge">h</code> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <code class="language-plaintext highlighter-rouge">factor</code> by the function <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
 {% highlight matlab %}
 factor
 {% endhighlight %}
@@ -391,4 +442,6 @@ hold off
 {% highlight matlab %}
 plotx2east
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

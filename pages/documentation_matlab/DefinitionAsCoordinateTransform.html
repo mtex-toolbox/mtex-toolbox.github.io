@@ -6,13 +6,26 @@ permalink: DefinitionAsCoordinateTransform.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Crystal Orientation as Coordinate Transformation</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_DefinitionAsCoordinateTransform.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/DefinitionAsCoordinateTransform.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In MTEX a crystal orientation is defined as the rotation that transforms <a href="CrystalDirections.html">crystal coordinates</a>, i.e., a description of a vector or a tensor with respect to the <a href="CrystalReferenceSystem.html">crystal reference frame</a>, into specimen coordinates, i.e., a description of the same object with respect to a specimen fixed reference frame.</p><p>In MTEX any orientation consists of two ingredients. A <a href="rotation.rotation.html">rotation</a></p>
+    -->
+<title>Crystal Orientation as Coordinate Transformation</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_DefinitionAsCoordinateTransform.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/DefinitionAsCoordinateTransform.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In MTEX a crystal orientation is defined as the rotation that transforms <a href="CrystalDirections.html">crystal coordinates</a>, i.e., a description of a vector or a tensor with respect to the <a href="CrystalReferenceSystem.html">crystal reference frame</a>, into specimen coordinates, i.e., a description of the same object with respect to a specimen fixed reference frame.</p>
+<p>In MTEX any orientation consists of two ingredients. A <a href="rotation.rotation.html">rotation</a>
+</p>
 {% highlight matlab %}
 % lets take a random one
 rot = rotation.rand
@@ -22,10 +35,11 @@ rot = rotation.rand
 rot = rotation
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2
-  303.281 102.358 206.218
+   phi1     Phi    phi2
+  150.8 142.876 28.9786
 {% endhighlight %}
-<p>and a description of the crystal lattice, which are represented in MTEX by variables of type <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a></p>
+<p>and a description of the crystal lattice, which are represented in MTEX by variables of type <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a>
+</p>
 {% highlight matlab %}
 % lets take cubic crystal symmetry
 cs = crystalSymmetry.load("Al-Aluminum.cif")
@@ -48,10 +62,12 @@ ori = orientation(rot,cs)
 ori = orientation (Aluminum → xyz)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2
-  303.281 102.358 206.218
+   phi1     Phi    phi2
+  150.8 142.876 28.9786
 {% endhighlight %}
-<p>As a consequence a variable of type orientation is at the same time of type <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> and hence allows for all <a href="RotationOperations.html">operations</a> that are available for rotations.</p><h2 id="5">Crystal coordinates to specimen coordinates</h2><p>Let us consider the following crystal direction</p>
+<p>As a consequence a variable of type orientation is at the same time of type <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> and hence allows for all <a href="RotationOperations.html">operations</a> that are available for rotations.</p>
+<h2 id="5">Crystal coordinates to specimen coordinates</h2>
+<p>Let us consider the following crystal direction</p>
 {% highlight matlab %}
 h = Miller(1,0,0,cs,'uvw')
 {% endhighlight %}
@@ -69,7 +85,7 @@ r = ori * h
 {% highlight plaintext %}
 r = vector3d
          x        y        z
-  -1.67345  3.24723 -1.74762
+  -2.32921  3.09383  1.18411
 {% endhighlight %}
 <p>Similarly, orientations transform tensors given with respect to the crystal reference frame, e.g., the following single crystal stiffness tensor</p>
 {% highlight matlab %}
@@ -106,14 +122,38 @@ ans = stiffnessTensor (xyz)
   rank: 4 (3 x 3 x 3 x 3)
  
   tensor in Voigt matrix representation:
-  2.4998  0.6873   0.813  -0.055 -0.0897 -0.2181
-  0.6873  2.4991  0.8136  0.1734 -0.1403  0.0947
-   0.813  0.8136  2.3735 -0.1185    0.23  0.1233
-  -0.055  0.1734 -0.1185  0.8136  0.1233 -0.1403
- -0.0897 -0.1403    0.23  0.1233   0.813  -0.055
- -0.2181  0.0947  0.1233 -0.1403  -0.055  0.6873
+  2.5438   0.702  0.7542  -0.152 -0.1587 -0.0337
+   0.702   2.563   0.735 -0.0411  0.1074   0.174
+  0.7542   0.735  2.5108  0.1931  0.0513 -0.1403
+  -0.152 -0.0411  0.1931   0.735 -0.1403  0.1074
+ -0.1587  0.1074  0.0513 -0.1403  0.7542  -0.152
+ -0.0337   0.174 -0.1403  0.1074  -0.152   0.702
 {% endhighlight %}
-<p>Objects that can be translated by orientations from crystal into specimen coordinates and vice versa include</p><div><ul><li><a href="Miller.Miller.html">crystal directions</a></li><li><a href="tensor.tensor.html">tensors</a></li><li><a href="slipSystem.slipSystem.html">slip systems</a></li><li><a href="twinningSystem.twinningSystem.html">twinning systems</a></li><li><a href="dislocationSystem.dislocationSystem.html">dislocation systems</a></li><li><a href="crystalShape.crystalShape.html">crystal shapes</a></li></ul></div><h2 id="10">Specimen coordinates into crystal coordinates</h2><p>Conversely, we can go back from specimen coordinates to crystal coordinates by multiplying with the inverse orientation</p>
+<p>Objects that can be translated by orientations from crystal into specimen coordinates and vice versa include</p>
+<div>
+<ul>
+<li>
+<a href="Miller.Miller.html">crystal directions</a>
+</li>
+<li>
+<a href="tensor.tensor.html">tensors</a>
+</li>
+<li>
+<a href="slipSystem.slipSystem.html">slip systems</a>
+</li>
+<li>
+<a href="twinningSystem.twinningSystem.html">twinning systems</a>
+</li>
+<li>
+<a href="dislocationSystem.dislocationSystem.html">dislocation systems</a>
+</li>
+<li>
+<a href="crystalShape.crystalShape.html">crystal shapes</a>
+</li>
+</ul>
+</div>
+<h2 id="10">Specimen coordinates into crystal coordinates</h2>
+<p>Conversely, we can go back from specimen coordinates to crystal coordinates by multiplying with the inverse orientation</p>
 {% highlight matlab %}
 inv(ori) * r
 {% endhighlight %}
@@ -123,7 +163,9 @@ ans = Miller (Aluminum)
         h       k       l
   16.3991       0       0
 {% endhighlight %}
-<p>Note, that in literature orientations are often defined to transform specimen coordinates into crystal coordinates, i.e., to coincide with the inverse orientations in MTEX. The consequences of this differences are exhaustively discussed in the topic <a href="MTEXvsBungeConvention.html">orientation conventions</a>.</p><h2 id="12">Specimen Rotation</h2><p>Rotations of the specimen ,i.e., changing the specimen reference frame, do also change the orientation. Assume the specimen is rotated about the X-axis about 60 degree. We may define this rotation by</p>
+<p>Note, that in literature orientations are often defined to transform specimen coordinates into crystal coordinates, i.e., to coincide with the inverse orientations in MTEX. The consequences of this differences are exhaustively discussed in the topic <a href="MTEXvsBungeConvention.html">orientation conventions</a>.</p>
+<h2 id="12">Specimen Rotation</h2>
+<p>Rotations of the specimen ,i.e., changing the specimen reference frame, do also change the orientation. Assume the specimen is rotated about the X-axis about 60 degree. We may define this rotation by</p>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(vector3d.X,60*degree);
 {% endhighlight %}
@@ -136,7 +178,10 @@ ori_new = rot * ori
 ori_new = orientation (Aluminum → xyz)
  
   Bunge Euler angles in degree
-    phi1     Phi    phi2
-  275.78 124.836 144.326
+     phi1     Phi    phi2
+  162.846 86.6985 54.0156
 {% endhighlight %}
-<p>It should also be noted, that orientations are sensitive with respect to the alignment of the Euclidean reference frame \(\vec X\), \(\vec Y\), \(\vec Z\) with respect to the crystal axes \(\vec a\), \(\vec b\) and \(\vec c\). This issue is discussed in more detail in the topic <a href="CrystalReferenceSystem.html">Crystal Reference Frames</a>.</p></div></body></html>
+<p>It should also be noted, that orientations are sensitive with respect to the alignment of the Euclidean reference frame \(\vec X\), \(\vec Y\), \(\vec Z\) with respect to the crystal axes \(\vec a\), \(\vec b\) and \(\vec c\). This issue is discussed in more detail in the topic <a href="CrystalReferenceSystem.html">Crystal Reference Frames</a>.</p>
+</div>
+</body>
+</html>

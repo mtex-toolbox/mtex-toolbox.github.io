@@ -6,13 +6,24 @@ permalink: S2Kernels.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spherical Kernel Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_S2Kernels.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2Kernels.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>A spherical kernel \(\psi\) is a spherical function that depends only on the angle towards the north pole \(e_3\),</p>
+    -->
+<title>Spherical Kernel Functions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2Kernels.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2Kernels.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>A spherical kernel \(\psi\) is a spherical function that depends only on the angle towards the north pole \(e_3\),</p>
 {% highlight matlab %}
 psi = S2DeLaValleePoussinKernel('halfwidth',10*degree)
 
@@ -30,20 +41,60 @@ psi = S2DeLaValleePoussinKernel
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_01.png" %}
-</center><p>The dependency of the angle becomes more when plot along meridian</p>
+</center>
+<p>The dependency of the angle becomes more when plot along meridian</p>
 {% highlight matlab %}
 close all
 plot(psi,'linewidth',2,'symmetric')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_02.png" %}
-</center><p>Examples of spherical kernel functions are</p><div><ul><li>the de la Vallee Poussin kernel @S2DeLaValleePoussinKernel</li><li>the Schulz defocusing kernel @SchulzDefocusingKernel</li><li>the Dirichlet kernel @S2DirichletKernel</li><li>the Bump kernel @S2BumpKernel</li><li>the Abel Poussin kernel @S2AbelPoussinKernel.html de &gt;</li><li>the <a href="S2AbelPoussinKernel.html">vom Mises kernel</a></li></ul></div><h2 id="4">Legendre coefficients</h2><p>Using mathematical notation we define this spherical kernel functions in the following way:</p><p>Every spherical kernel function \(\Psi\colon \mathcal{S}_2 \to \mathbb{R}\) can be associated with a function \(\psi \colon [-1,1] \to \mathbb R\) defined on the interval \([-1,1]\) by \(\Psi(\vec v) = \psi(t)\) with \(t=\cos(\sphericalangle(\vec v,\vec e_3)) = \vec v \cdot \vec e_3\). It turns out to be useful to approximate \(\psi\) by a expansion into Legendre polynomials \(P_n\) of degree \(n\), i.e.,</p><p>\[ \psi(t) = \sum\limits_{n=0}^{\infty} \hat\psi_n \, \mathcal P_{n}(t) \]</p><p>These Legendre coefficients are stored as the field <code class="language-plaintext highlighter-rouge">psi.A</code> and can be easily visualized using the command <a href="S2Kernel.plotSpectra.html"><code class="language-plaintext highlighter-rouge">plotSpectra</code></a>.</p>
+</center>
+<p>Examples of spherical kernel functions are</p>
+<div>
+<ul>
+<li>the de la Vallee Poussin kernel @S2DeLaValleePoussinKernel</li>
+<li>the Schulz defocusing kernel @SchulzDefocusingKernel</li>
+<li>the Dirichlet kernel @S2DirichletKernel</li>
+<li>the Bump kernel @S2BumpKernel</li>
+<li>the Abel Poussin kernel @S2AbelPoussinKernel.html de &gt;</li>
+<li>the <a href="S2AbelPoussinKernel.html">vom Mises kernel</a>
+</li>
+</ul>
+</div>
+<h2 id="4">Legendre coefficients</h2>
+<p>Using mathematical notation we define this spherical kernel functions in the following way:</p>
+<p>Every spherical kernel function \(\Psi\colon \mathcal{S}_2 \to \mathbb{R}\) can be associated with a function \(\psi \colon [-1,1] \to \mathbb R\) defined on the interval \([-1,1]\) by \(\Psi(\vec v) = \psi(t)\) with \(t=\cos(\sphericalangle(\vec v,\vec e_3)) = \vec v \cdot \vec e_3\). It turns out to be useful to approximate \(\psi\) by a expansion into Legendre polynomials \(P_n\) of degree \(n\), i.e.,</p>
+<p>\[ \psi(t) = \sum\limits_{n=0}^{\infty} \hat\psi_n \, \mathcal P_{n}(t) \]</p>
+<p>These Legendre coefficients are stored as the field <code class="language-plaintext highlighter-rouge">psi.A</code> and can be easily visualized using the command <a href="S2Kernel.plotSpectra.html"><code class="language-plaintext highlighter-rouge">plotSpectra</code></a>.</p>
 {% highlight matlab %}
 plotSpektra(psi,'linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_03.png" %}
-</center><h2 id="5">Applications</h2><p>Spherical kernel functions have different applications in MTEX. Those include</p><div><ul><li>kernel density estimation of directional data using the command <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a></li><li>defocusing correction of XRD data</li><li>estimation of the habit plane normal distribution using the command <a href="calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a></li><li>definition of fibe ODFs using the command <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a></li></ul></div><h2 id="6">The de la Vallee Poussin Kernel</h2><p>The <a href="S2Kernels.S2DeLaValleePoussinKernel.html">spherical de la Vallee Poussin kernel</a> is defined by</p><p>\[ K(t) = (1+\kappa)\,(\frac{1+t}{2})^{\kappa}\]</p><p>for \(t\in[0,1]\). The de la Vallee Poussin kernel additionally has the unique property that for a given halfwidth it can be described exactly by a finite number of Fourier coefficients. This kernel is recommended for Texture analysis as it is always positive and there is no truncation error in Fourier space.</p><p>Hence we can define the de la Vallee Poussin kernel \(\psi_{\kappa}\) depending on a parameter \(\kappa \in \mathbb N \setminus \{0\}\) by its finite Legendre polynomial expansion</p><p>\[ \psi_{\kappa}(t) = \sum\limits_{n=0}^{L} a_n(\kappa) \mathcal P_{n}(t).\]</p><p>We obtain the Legendre coefficients \(a_n(\kappa)\) by \(a_0=1\), \(a_1=\frac{\kappa}{2+\kappa}\) and the three term recurrence relation</p><p>\[ (\kappa+l+2) a_{l+1} = -(2l+1)\,a_l + (\kappa-l+1)\,a_{l-1}.\]</p><p>Lets construct two of them.</p>
+</center>
+<h2 id="5">Applications</h2>
+<p>Spherical kernel functions have different applications in MTEX. Those include</p>
+<div>
+<ul>
+<li>kernel density estimation of directional data using the command <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>
+</li>
+<li>defocusing correction of XRD data</li>
+<li>estimation of the habit plane normal distribution using the command <a href="calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a>
+</li>
+<li>definition of fibe ODFs using the command <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a>
+</li>
+</ul>
+</div>
+<h2 id="6">The de la Vallee Poussin Kernel</h2>
+<p>The <a href="S2Kernels.S2DeLaValleePoussinKernel.html">spherical de la Vallee Poussin kernel</a> is defined by</p>
+<p>\[ K(t) = (1+\kappa)\,(\frac{1+t}{2})^{\kappa}\]</p>
+<p>for \(t\in[0,1]\). The de la Vallee Poussin kernel additionally has the unique property that for a given halfwidth it can be described exactly by a finite number of Fourier coefficients. This kernel is recommended for Texture analysis as it is always positive and there is no truncation error in Fourier space.</p>
+<p>Hence we can define the de la Vallee Poussin kernel \(\psi_{\kappa}\) depending on a parameter \(\kappa \in \mathbb N \setminus \{0\}\) by its finite Legendre polynomial expansion</p>
+<p>\[ \psi_{\kappa}(t) = \sum\limits_{n=0}^{L} a_n(\kappa) \mathcal P_{n}(t).\]</p>
+<p>We obtain the Legendre coefficients \(a_n(\kappa)\) by \(a_0=1\), \(a_1=\frac{\kappa}{2+\kappa}\) and the three term recurrence relation</p>
+<p>\[ (\kappa+l+2) a_{l+1} = -(2l+1)\,a_l + (\kappa-l+1)\,a_{l-1}.\]</p>
+<p>Lets construct two of them.</p>
 {% highlight matlab %}
 psi1 = S2DeLaValleePoussinKernel('halfwidth',15*degree)
 psi2 = S2DeLaValleePoussinKernel('halfwidth',20*degree)
@@ -67,7 +118,9 @@ psi2 = S2DeLaValleePoussinKernel
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_04.png" %}
-</center><p>Here the parameter \(\kappa\) is \(40.34\) for function \(\psi_1\) and \(22.64\) in function \(\psi_2\).</p><p>We also take a look at the Legendre coefficients</p>
+</center>
+<p>Here the parameter \(\kappa\) is \(40.34\) for function \(\psi_1\) and \(22.64\) in function \(\psi_2\).</p>
+<p>We also take a look at the Legendre coefficients</p>
 {% highlight matlab %}
 plotSpektra(psi1,'linewidth',2)
 hold on
@@ -77,7 +130,11 @@ legend('halfwidth = 15°','halfwidth = 20°')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_05.png" %}
-</center><h2 id="8">The Dirichlet Kernel</h2><p>The <a href="S2Kernels.S2DirichletKernel.html">spherical Dirichlet or Christoffel-Darboux kernel</a> is recommended for calculating physical properties as the Legendre coefficients always have a value of one up to the specified bandwidth:</p><p>\[ \psi_N(t) = \sum\limits_{n=0}^N (2n+1) \, \mathcal P_{n}(t).\]</p><p>Lets construct two of them.</p>
+</center>
+<h2 id="8">The Dirichlet Kernel</h2>
+<p>The <a href="S2Kernels.S2DirichletKernel.html">spherical Dirichlet or Christoffel-Darboux kernel</a> is recommended for calculating physical properties as the Legendre coefficients always have a value of one up to the specified bandwidth:</p>
+<p>\[ \psi_N(t) = \sum\limits_{n=0}^N (2n+1) \, \mathcal P_{n}(t).\]</p>
+<p>Lets construct two of them.</p>
 {% highlight matlab %}
 psi1 = S2DirichletKernel(10)
 psi2 = S2DirichletKernel(5)
@@ -101,7 +158,8 @@ psi2 = S2DirichletKernel
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_06.png" %}
-</center><p>By looking at the Legendre coefficients we see, that they are exactly 1.</p>
+</center>
+<p>By looking at the Legendre coefficients we see, that they are exactly 1.</p>
 {% highlight matlab %}
 plotSpektra(psi1,'linewidth',2)
 hold on
@@ -111,7 +169,10 @@ legend('bandwidth = 5','bandwidth = 10')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_07.png" %}
-</center><h2 id="10">The Bump kernel</h2><p>The <a href="S2Kernels.S2BumpKernel.html">spherical bump kernel</a> is a radial symmetric kernel function depending on the halfwidth \(r\in (0,pi)\). The function value is 0, if the angle is greater then the halfwidth \(r\). Otherwise it is 1.</p><p>The main problem of the bump kernel is that we need lots of Legendre coefficients to describe it. That possibly can result in high runtimes.</p>
+</center>
+<h2 id="10">The Bump kernel</h2>
+<p>The <a href="S2Kernels.S2BumpKernel.html">spherical bump kernel</a> is a radial symmetric kernel function depending on the halfwidth \(r\in (0,pi)\). The function value is 0, if the angle is greater then the halfwidth \(r\). Otherwise it is 1.</p>
+<p>The main problem of the bump kernel is that we need lots of Legendre coefficients to describe it. That possibly can result in high runtimes.</p>
 {% highlight matlab %}
 psi1 = S2BumpKernel(30*degree)
 psi2 = S2BumpKernel(50*degree)
@@ -135,7 +196,8 @@ psi2 = S2BumpKernel
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_08.png" %}
-</center><p>We also take a look at the Fourier coefficients</p>
+</center>
+<p>We also take a look at the Fourier coefficients</p>
 {% highlight matlab %}
 plotSpektra(psi1,'linewidth',2)
 hold on
@@ -145,4 +207,7 @@ legend('\kappa = 0.2','\kappa = 0.3')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Kernels_09.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

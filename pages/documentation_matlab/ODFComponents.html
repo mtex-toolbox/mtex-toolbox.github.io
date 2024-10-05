@@ -6,13 +6,25 @@ permalink: ODFComponents.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Component Analysis</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ODFComponents.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFComponents.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>A common way to interpret ODFs is to think of them as superposition of different components that originate from different deformation processes and describe the texture of the material. In this section we describe how these components can be identified from a given ODF.</p><p>We start by reconstruction a Quartz ODF from Neutron pole figure data.</p>
+    -->
+<title>ODF Component Analysis</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ODFComponents.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFComponents.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>A common way to interpret ODFs is to think of them as superposition of different components that originate from different deformation processes and describe the texture of the material. In this section we describe how these components can be identified from a given ODF.</p>
+<p>We start by reconstruction a Quartz ODF from Neutron pole figure data.</p>
 {% highlight matlab %}
 % import Neutron pole figure data from a Quartz specimen
 mtexdata dubna silent
@@ -26,7 +38,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_01.png" %}
-</center><h2 id="2">The preferred orientation</h2><p>First of all we observe that the ODF posses a strong maximum. To find this orientation that corresponds to the maximum ODF intensity we use the <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command.</p>
+</center>
+<h2 id="2">The preferred orientation</h2>
+<p>First of all we observe that the ODF posses a strong maximum. To find this orientation that corresponds to the maximum ODF intensity we use the <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command.</p>
 {% highlight matlab %}
 [value,ori] = max(odf)
 {% endhighlight %}
@@ -47,7 +61,8 @@ annotate(ori)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_02.png" %}
-</center><p>We may not only use the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> to find the global maximum of an ODF but also to find a certain amount of local maxima. The number of local maxima MTEX should search for, is specified as by the option <code class="language-plaintext highlighter-rouge">'numLocal'</code>, i.e., to find the three largest local maxima do</p>
+</center>
+<p>We may not only use the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> to find the global maximum of an ODF but also to find a certain amount of local maxima. The number of local maxima MTEX should search for, is specified as by the option <code class="language-plaintext highlighter-rouge">'numLocal'</code>, i.e., to find the three largest local maxima do</p>
 {% highlight matlab %}
 [value,ori] = max(odf,'numLocal',3)
 
@@ -71,7 +86,10 @@ ori = orientation (Quartz → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_03.png" %}
-</center><p>Note, that orientations are returned sorted according to their ODF value.</p><h2 id="6">Volume Portions</h2><p>It is important to understand, that the value of the ODF at a preferred orientation is in general not sufficient to judge the importance of a component. Very sharp components may result in extremely large ODF values that represent only very little volume. A more robust and physically more relevant quantity is the relative volume of crystal that have an orientation close to the preferred orientation. This volume portion can be computed by the command <a href="SO3Fun.volume.html,"><code class="language-plaintext highlighter-rouge">volume(odf,ori,delta)</code></a> where <code class="language-plaintext highlighter-rouge">ori</code> is a list of preferred orientations and <code class="language-plaintext highlighter-rouge">delta</code> is the maximum disorientation angle. Multiplying with \(100\) the output will be in percent</p>
+</center>
+<p>Note, that orientations are returned sorted according to their ODF value.</p>
+<h2 id="6">Volume Portions</h2>
+<p>It is important to understand, that the value of the ODF at a preferred orientation is in general not sufficient to judge the importance of a component. Very sharp components may result in extremely large ODF values that represent only very little volume. A more robust and physically more relevant quantity is the relative volume of crystal that have an orientation close to the preferred orientation. This volume portion can be computed by the command <a href="SO3Fun.volume.html,"><code class="language-plaintext highlighter-rouge">volume(odf,ori,delta)</code></a> where <code class="language-plaintext highlighter-rouge">ori</code> is a list of preferred orientations and <code class="language-plaintext highlighter-rouge">delta</code> is the maximum disorientation angle. Multiplying with \(100\) the output will be in percent</p>
 {% highlight matlab %}
 delta = 10*degree;
 volume(odf,ori,delta) * 100
@@ -117,7 +135,9 @@ ans =
    39.6253
    37.9830
 {% endhighlight %}
-<p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p><h2 id="11">Non circular components</h2><p>A disadvantage of the approach above is that one is restricted to circular components with a fixed disorientation angle which makes it hard to analyze components that are close together. In such settings one may want to use the command <a href="SO3Fun.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents</code></a>. This command starts with evenly distributed orientations and lets the crawl towards the closest preferred orientation. At the end of this process the command returns these preferred orientation and the percentage of orientations that crawled to each of them.</p>
+<p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p>
+<h2 id="11">Non circular components</h2>
+<p>A disadvantage of the approach above is that one is restricted to circular components with a fixed disorientation angle which makes it hard to analyze components that are close together. In such settings one may want to use the command <a href="SO3Fun.calcComponents.html"><code class="language-plaintext highlighter-rouge">calcComponents</code></a>. This command starts with evenly distributed orientations and lets the crawl towards the closest preferred orientation. At the end of this process the command returns these preferred orientation and the percentage of orientations that crawled to each of them.</p>
 {% highlight matlab %}
 [ori, vol] = calcComponents(odf);
 ori
@@ -156,4 +176,7 @@ annotate(ori,'MarkerFaceColor','none','MarkerEdgeColor','white',...
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_04.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

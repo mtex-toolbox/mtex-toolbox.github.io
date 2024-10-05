@@ -6,13 +6,25 @@ permalink: SubGrainBoundaries.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Subgrain Boundaries</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SubGrainBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/SubGrainBoundaries.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Low-angle grain boundaries (LAGB) or subgrain boundaries are those with a misorientation less than about 15 degrees. Generally speaking they are composed of an array of dislocations and their properties and structure are a function of the misorientation. In contrast the properties of high-angle grain boundaries, whose misorientation is greater than about 15 degrees, are normally found to be independent of the misorientation. However, there are special boundaries at particular orientations whose interfacial energies are markedly lower than those of general high-angle grain boundaries.</p><p>In order to demonstrate the analysis of subgrain boundaries in MTEX we start by importing an sample EBSD data set and preforming some polishing by removing all 5 pixel grains.</p>
+    -->
+<title>Subgrain Boundaries</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SubGrainBoundaries.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/SubGrainBoundaries.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Low-angle grain boundaries (LAGB) or subgrain boundaries are those with a misorientation less than about 15 degrees. Generally speaking they are composed of an array of dislocations and their properties and structure are a function of the misorientation. In contrast the properties of high-angle grain boundaries, whose misorientation is greater than about 15 degrees, are normally found to be independent of the misorientation. However, there are special boundaries at particular orientations whose interfacial energies are markedly lower than those of general high-angle grain boundaries.</p>
+<p>In order to demonstrate the analysis of subgrain boundaries in MTEX we start by importing an sample EBSD data set and preforming some polishing by removing all 5 pixel grains.</p>
 {% highlight matlab %}
 % load some test data
 mtexdata ferrite silent
@@ -63,21 +75,27 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_01.png" %}
-</center><h2 id="4">Subgrain Boundary Density</h2><p>The number of low-angle  boundary segments inside each grain can be computed by the command <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a>. In the following figure we use it to visualize the density of subgrain boundaries per grain pixel.</p>
+</center>
+<h2 id="4">Subgrain Boundary Density</h2>
+<p>The number of low-angle boundary segments inside each grain can be computed by the command <a href="grain2d.subBoundarySize.html"><code class="language-plaintext highlighter-rouge">subBoundarySize</code></a>. In the following figure we use it to visualize the density of subgrain boundaries per grain pixel.</p>
 {% highlight matlab %}
 plot(grains, grains.subBoundarySize ./ grains.grainSize)
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_02.png" %}
-</center><p>We may compute also the density of low-angle boundaries per grain as the length of the subgrain boundaries divided by the grain area. This can be done using the commands <a href="grain2d.subBoundaryLength.html"><code class="language-plaintext highlighter-rouge">subBoundaryLength</code></a> and <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a></p>
+</center>
+<p>We may compute also the density of low-angle boundaries per grain as the length of the subgrain boundaries divided by the grain area. This can be done using the commands <a href="grain2d.subBoundaryLength.html"><code class="language-plaintext highlighter-rouge">subBoundaryLength</code></a> and <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a>
+</p>
 {% highlight matlab %}
 plot(grains, grains.subBoundaryLength ./ grains.area)
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_03.png" %}
-</center><h2 id="6">Misorientation at Subgrain Boundaries</h2><p>Appart from the spatial distribution of the subgrain boundaries we may also analyse the distribution of their misorientations.</p>
+</center>
+<h2 id="6">Misorientation at Subgrain Boundaries</h2>
+<p>Appart from the spatial distribution of the subgrain boundaries we may also analyse the distribution of their misorientations.</p>
 {% highlight matlab %}
 % extract all subgrain boundary misorientation
 mori = grains.innerBoundary.misorientation;
@@ -89,7 +107,10 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_04.png" %}
-</center><p>A more detailed analysis of the misorientation axes at subgrain boundaries can be found in the chapter <a href="TiltAndTwistBoundaries.html">Tild and Twist Boundaries</a>.</p><h2 id="8">Connected Components</h2><p>Sometimes one would like to distinguish between large connected networks of low-angle boundaries and singular disconected segments. This can be done using the command <a href="grainBoundary.componentSize.html"><code class="language-plaintext highlighter-rouge">componentSize</code></a>. This command return for each segment the total number of segments it is connected with. In the following figure we use this to plot all low-angle grain boundary networks with more then 50 segments in blue and all remaining segments in red.</p>
+</center>
+<p>A more detailed analysis of the misorientation axes at subgrain boundaries can be found in the chapter <a href="TiltAndTwistBoundaries.html">Tild and Twist Boundaries</a>.</p>
+<h2 id="8">Connected Components</h2>
+<p>Sometimes one would like to distinguish between large connected networks of low-angle boundaries and singular disconected segments. This can be done using the command <a href="grainBoundary.componentSize.html"><code class="language-plaintext highlighter-rouge">componentSize</code></a>. This command return for each segment the total number of segments it is connected with. In the following figure we use this to plot all low-angle grain boundary networks with more then 50 segments in blue and all remaining segments in red.</p>
 {% highlight matlab %}
 % plot the ebsd data
 plot(ebsd('indexed'),ebsd('indexed').orientations,'faceAlpha',0.5,'figSize','large')
@@ -106,4 +127,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SubGrainBoundaries_05.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

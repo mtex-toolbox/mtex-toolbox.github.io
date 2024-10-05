@@ -6,13 +6,29 @@ permalink: S2FunSym.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2FunHarmonicSym</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_S2FunSym.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunSym.m">
-    edit page</a></font><div><!--introduction--><p><a href="S2FunHarmonicSym.S2FunHarmonicSym"><code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code></a> is an extension of the <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> class which stores the symmetry with the function.</p><!--/introduction--><h2 id="1">Defining a S2FunHarmonic</h2><p><b>Definition via symmetrisation</b></p><p>The simplest way to define a <a href="S2FunHarmonicSym.S2FunHarmonicSym"><code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code></a> is through the symmetrisation of an ordinary <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>.</p>
+    -->
+<title>S2FunHarmonicSym</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2FunSym.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunSym.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p> <a href="S2FunHarmonicSym.S2FunHarmonicSym"><code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code></a> is an extension of the <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> class which stores the symmetry with the function.</p>
+<!--/introduction-->
+<h2 id="1">Defining a S2FunHarmonic</h2>
+<p>
+<b>Definition via symmetrisation</b>
+</p>
+<p>The simplest way to define a <a href="S2FunHarmonicSym.S2FunHarmonicSym"><code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code></a> is through the symmetrisation of an ordinary <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>.</p>
 {% highlight matlab %}
 sF = S2Fun.smiley
 cs = crystalSymmetry('432');
@@ -25,18 +41,34 @@ sF = S2FunHarmonic
   bandwidth: 128
   isReal: true
 {% endhighlight %}
-<div><ul><li>this symmetrises the function and gives back the result with the symmetry attached</li></ul></div>
+<div>
+<ul>
+<li>this symmetrises the function and gives back the result with the symmetry attached</li>
+</ul>
+</div>
 {% highlight matlab %}
 plot(sFs1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunSym_01.png" %}
-</center><div><ul><li>Note that only the important part with respect to the symmetry is plotted</li><li>you can plot the full sphere using the argument <code class="language-plaintext highlighter-rouge">'complete'</code></li></ul></div><p><b>Definition via function handle</b></p><p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> via quadrature. At first lets define a symmetry and a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns double:</p>
+</center>
+<div>
+<ul>
+<li>Note that only the important part with respect to the symmetry is plotted</li>
+<li>you can plot the full sphere using the argument <code class="language-plaintext highlighter-rouge">'complete'</code>
+</li>
+</ul>
+</div>
+<p>
+<b>Definition via function handle</b>
+</p>
+<p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> via quadrature. At first lets define a symmetry and a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns double:</p>
 {% highlight matlab %}
 f = @(v) 0.1*(v.theta+sin(8*v.x).*sin(8*v.y));
 cs = crystalSymmetry('6/m');
 {% endhighlight %}
-<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sFs2</code> of type <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code></p>
+<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sFs2</code> of type <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code>
+</p>
 {% highlight matlab %}
 sFs2 = S2FunHarmonicSym.quadrature(f, cs)
 {% endhighlight %}
@@ -47,16 +79,21 @@ sFs2 = S2FunHarmonicSym (6/m)
   antipodal: true
   isReal: true
 {% endhighlight %}
-<h2 id="7">Visualization</h2><p>The plot commands for a <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> by default plot the function only on the fundamenta Sector of the symmetry. E.g. the default <code class="language-plaintext highlighter-rouge">plot</code>-command look as follows</p>
+<h2 id="7">Visualization</h2>
+<p>The plot commands for a <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> by default plot the function only on the fundamenta Sector of the symmetry. E.g. the default <code class="language-plaintext highlighter-rouge">plot</code>-command look as follows</p>
 {% highlight matlab %}
 plot(sFs1);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunSym_02.png" %}
-</center><p>Another Example is the contour plot</p>
+</center>
+<p>Another Example is the contour plot</p>
 {% highlight matlab %}
 contour(sFs2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunSym_03.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

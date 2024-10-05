@@ -6,13 +6,30 @@ permalink: SO3FunHarmonicRepresentation.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Harmonic Representation of Rotational Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SO3FunHarmonicRepresentation.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/SO3FunHarmonicRepresentation.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Similarly as periodic functions may be represented as weighted sums of sines and cosines a rotational function \(f\colon \mathcal{SO}(3) \to \mathbb C\) can be written as a series of the form</p><p>\[ f({\bf R}) = \sum_{n=0}^N \sum_{k,l = -n}^n \hat f_n^{k,l} \, \mathrm{D}_n^{k,l}({\bf R}) \]</p><p>with respect to Fourier coefficients \(\hat f_n^{k,l}\) and the so called <a href="WignerFunctions.html">Wigner-D functions</a> \(D_n^{k,l}\).</p><p>There exists various normalizations for the <a href="WignerFunctions.html">Wigner-D functions</a>. In MTEX they are \(L_2\) normalized, which means</p><p>\[\| D_n^{k,l} \|_2 = 1\]</p><p>for all \(n,k,l\). For more information take a look on <a href="WignerFunctions.html">Wigner-D functions</a> and <a href="SO3FunOperations.html#6">Integration of SO3Fun's</a>.</p><p>We construct an arbitrary ODF which generally is an SO3Fun:</p>
+    -->
+<title>Harmonic Representation of Rotational Functions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3FunHarmonicRepresentation.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/SO3FunHarmonicRepresentation.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Similarly as periodic functions may be represented as weighted sums of sines and cosines a rotational function \(f\colon \mathcal{SO}(3) \to \mathbb C\) can be written as a series of the form</p>
+<p>\[ f({\bf R}) = \sum_{n=0}^N \sum_{k,l = -n}^n \hat f_n^{k,l} \, \mathrm{D}_n^{k,l}({\bf R}) \]</p>
+<p>with respect to Fourier coefficients \(\hat f_n^{k,l}\) and the so called <a href="WignerFunctions.html">Wigner-D functions</a> \(D_n^{k,l}\).</p>
+<p>There exists various normalizations for the <a href="WignerFunctions.html">Wigner-D functions</a>. In MTEX they are \(L_2\) normalized, which means</p>
+<p>\[\| D_n^{k,l} \|_2 = 1\]</p>
+<p>for all \(n,k,l\). For more information take a look on <a href="WignerFunctions.html">Wigner-D functions</a> and <a href="SO3FunOperations.html#6">Integration of SO3Fun's</a>.</p>
+<p>We construct an arbitrary ODF which generally is an SO3Fun:</p>
 {% highlight matlab %}
 mtexdata dubna
 odf = calcODF(pf,'resolution',5*degree,'zero_Range')
@@ -37,7 +54,8 @@ odf = SO3FunRBF (Quartz → xyz)
   center: 19848 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
-<p>Now we may transform an arbitrary SO3Fun into its Fourier representation using the command <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></p>
+<p>Now we may transform an arbitrary SO3Fun into its Fourier representation using the command <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a>
+</p>
 {% highlight matlab %}
 f = SO3FunHarmonic(odf,'bandwidth',32)
 {% endhighlight %}
@@ -47,7 +65,8 @@ f = SO3FunHarmonic (Quartz → xyz)
   bandwidth: 32
   weight: 1
 {% endhighlight %}
-<h2 id="4">Fourier Coefficients</h2><p>Within the class <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> rotational functions are represented by their complex valued Fourier coefficients which are stored in the field <code class="language-plaintext highlighter-rouge">fun.fhat</code>. They are stored in a linear order, which means <code class="language-plaintext highlighter-rouge">f.fhat(1)</code> is the zero order Fourier coefficient, <code class="language-plaintext highlighter-rouge">f.fhat(2:10)</code> are the first order Fourier coefficients that form a 3x3 matrix and so on. Accordingly, we can extract the second order Fourier coefficients by</p>
+<h2 id="4">Fourier Coefficients</h2>
+<p>Within the class <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> rotational functions are represented by their complex valued Fourier coefficients which are stored in the field <code class="language-plaintext highlighter-rouge">fun.fhat</code>. They are stored in a linear order, which means <code class="language-plaintext highlighter-rouge">f.fhat(1)</code> is the zero order Fourier coefficient, <code class="language-plaintext highlighter-rouge">f.fhat(2:10)</code> are the first order Fourier coefficients that form a 3x3 matrix and so on. Accordingly, we can extract the second order Fourier coefficients by</p>
 {% highlight matlab %}
 reshape(f.fhat(11:35),5,5)
 {% endhighlight %}
@@ -82,14 +101,21 @@ f2 = SO3FunHarmonic (xyz → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunHarmonicRepresentation_01.png" %}
-</center><p>The Fourier coefficients \(\hat f_n^{k,l}\) allow us a complete characterization of the rotational function. They are of particular importance for the calculation of mean macroscopic properties e.g. the second order Fourier coefficients characterize thermal expansion, optical refraction index, and electrical conductivity whereas the fourth order Fourier coefficients characterize the elastic properties of the specimen.</p><p>Moreover, the decay of the Fourier coefficients is directly related to the smoothness of the SO3Fun. The decay of the Fourier coefficients might also hint for the presents of a ghost effect. See <a href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a>.</p><p>The decay of the Fourier coefficients is shown in the plot</p>
+</center>
+<p>The Fourier coefficients \(\hat f_n^{k,l}\) allow us a complete characterization of the rotational function. They are of particular importance for the calculation of mean macroscopic properties e.g. the second order Fourier coefficients characterize thermal expansion, optical refraction index, and electrical conductivity whereas the fourth order Fourier coefficients characterize the elastic properties of the specimen.</p>
+<p>Moreover, the decay of the Fourier coefficients is directly related to the smoothness of the SO3Fun. The decay of the Fourier coefficients might also hint for the presents of a ghost effect. See <a href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a>.</p>
+<p>The decay of the Fourier coefficients is shown in the plot</p>
 {% highlight matlab %}
 close all;
 plotSpektra(f)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunHarmonicRepresentation_02.png" %}
-</center><h2 id="8">ODFs given by Fourier coefficients</h2><p>In order to define an ODF by it <b>Fourier coefficients</b> \({\bf \hat{f}}\), they has to be given as a literally ordered, complex valued vector of the form</p><p>\[ {\bf \hat{f}} = [\hat{f}_0^{0,0},\hat{f}_1^{-1,-1},\ldots,\hat{f}_1^{1,1},\hat{f}_2^{-2,-2},\ldots,\hat{f}_N^{N,N}] \]</p><p>where \(n=0,\ldots,N\) denotes the order of the Fourier coefficients.</p>
+</center>
+<h2 id="8">ODFs given by Fourier coefficients</h2>
+<p>In order to define an ODF by it <b>Fourier coefficients</b> \({\bf \hat{f}}\), they has to be given as a literally ordered, complex valued vector of the form</p>
+<p>\[ {\bf \hat{f}} = [\hat{f}_0^{0,0},\hat{f}_1^{-1,-1},\ldots,\hat{f}_1^{1,1},\hat{f}_2^{-2,-2},\ldots,\hat{f}_N^{N,N}] \]</p>
+<p>where \(n=0,\ldots,N\) denotes the order of the Fourier coefficients.</p>
 {% highlight matlab %}
 cs   = crystalSymmetry('1');    % crystal symmetry
 fhat = [1;reshape(eye(3),[],1);reshape(eye(5),[],1)]; % Fourier coefficients
@@ -112,4 +138,8 @@ plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,0,cs)],'antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunHarmonicRepresentation_04.png" %}
-</center><h2 id="10">TODO: Add some non ODF example for an SO3Fun</h2></div></body></html>
+</center>
+<h2 id="10">TODO: Add some non ODF example for an SO3Fun</h2>
+</div>
+</body>
+</html>

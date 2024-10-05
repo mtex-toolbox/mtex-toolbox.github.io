@@ -6,25 +6,31 @@ permalink: EBSDIPFMap.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Inverse Pole Figure Color Coding of Orientation Maps</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDIPFMap.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDIPFMap.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>This sections explains how to colorize orientation maps. The mathematics behind the default MTEX color key is explained in detail in the paper <a href="http://dx.doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>.</p><p>Let us first import some sample EBSD data. We shall do this at the example of olivine data.</p>
+    -->
+<title>Inverse Pole Figure Color Coding of Orientation Maps</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDIPFMap.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDIPFMap.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>This sections explains how to colorize orientation maps. The mathematics behind the default MTEX color key is explained in detail in the paper <a href="http://dx.doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>.</p>
+<p>Let us first import some sample EBSD data. We shall do this at the example of olivine data.</p>
 {% highlight matlab %}
 mtexdata olivine
 ebsd('olivine').CS = ebsd('olivine').CS.Laue;
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: .ang files have usualy inconsistent conventions for spatial
-coordinates and Euler angles. You may want to use one of the options
-'convertSpatial2EulerReferenceFrame' or 'convertEuler2SpatialReferenceFrame' to
-correct for this 
- saving data to /home/hielscher/mtex/master/data/olivine.mat
- 
 ebsd = EBSD
  
  Phase  Orientations       Mineral         Color  Symmetry  Crystal reference frame
@@ -46,7 +52,8 @@ plot(cS,'colored')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_01.png" %}
-</center><p>Next we represent the orientation of each grain by an appropriately rotated crystal. This is done by the following commands</p>
+</center>
+<p>Next we represent the orientation of each grain by an appropriately rotated crystal. This is done by the following commands</p>
 {% highlight matlab %}
 % 1. reconstruct the grains
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
@@ -71,7 +78,8 @@ legend off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_02.png" %}
-</center><p>The idea of inverse pole figure color coding of orientation maps is to visualize the orientation of a grain by the color of the crystal face pointing towards you. In the case Olivine habitus this would lead to six different colors. We can overcome this restriction by replacing the colored crystal shape by a colored ball.</p>
+</center>
+<p>The idea of inverse pole figure color coding of orientation maps is to visualize the orientation of a grain by the color of the crystal face pointing towards you. In the case Olivine habitus this would lead to six different colors. We can overcome this restriction by replacing the colored crystal shape by a colored ball.</p>
 {% highlight matlab %}
 close all
 ipfKey = ipfHSVKey(ebsd('olivine'));
@@ -79,7 +87,8 @@ plot(ipfKey,'3d')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_03.png" %}
-</center><p>Next we proceed as with the crystal habitus and place a colored ball at each position of the big grains and rotate it according to the meanorientation of the grain.</p>
+</center>
+<p>Next we proceed as with the crystal habitus and place a colored ball at each position of the big grains and rotate it according to the meanorientation of the grain.</p>
 {% highlight matlab %}
 plot(grains.boundary,'lineWidth',1.5,'micronbar','off')
 
@@ -90,7 +99,8 @@ legend off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_04.png" %}
-</center><p>Finally, we take the color in the center of the ball as the color representing the orientation of the grain. This transformation from a list of orientations into a list colors given as RGB values  is the central purpose of the color key <code class="language-plaintext highlighter-rouge">ipfKey</code> we have defined above and is done by the command <code class="language-plaintext highlighter-rouge">ipfKey.orientation2color</code>.</p>
+</center>
+<p>Finally, we take the color in the center of the ball as the color representing the orientation of the grain. This transformation from a list of orientations into a list colors given as RGB values is the central purpose of the color key <code class="language-plaintext highlighter-rouge">ipfKey</code> we have defined above and is done by the command <code class="language-plaintext highlighter-rouge">ipfKey.orientation2color</code>.</p>
 {% highlight matlab %}
 % this computes the colors for each orientation specified as input
 colors = ipfKey.orientation2color(big_grains('olivine').meanOrientation);
@@ -100,7 +110,9 @@ plot(big_grains('o'),colors)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_05.png" %}
-</center><h2 id="7">Basic Properties</h2><p>The interpretation of the colors becomes more simple if we plot the colored ball in stereographic projection and mark the crystallographic axes.</p>
+</center>
+<h2 id="7">Basic Properties</h2>
+<p>The interpretation of the colors becomes more simple if we plot the colored ball in stereographic projection and mark the crystallographic axes.</p>
 {% highlight matlab %}
 plot(ipfKey,'complete','upper')
 
@@ -110,7 +122,8 @@ annotate(h.symmetrise,'labeled','backgroundColor','w')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_06.png" %}
-</center><p>From the colors of the grains in the map we may now deduce for each grain which crystal axis is pointing out of the plane of the specimen. Accordingly, we can associate to each grain a specific point in the color key. Let plot a colored dot for each grain orientation in the inverse pole figure that scales according to the grain area.</p>
+</center>
+<p>From the colors of the grains in the map we may now deduce for each grain which crystal axis is pointing out of the plane of the specimen. Accordingly, we can associate to each grain a specific point in the color key. Let plot a colored dot for each grain orientation in the inverse pole figure that scales according to the grain area.</p>
 {% highlight matlab %}
 plotIPDF(big_grains('olivine').meanOrientation,colors,vector3d.Z,...
   'MarkerSize',0.05*big_grains('olivine').area,'markerEdgeColor','k')
@@ -122,7 +135,8 @@ Current plot released
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_07.png" %}
-</center><p>Instead of colorizing which crystal axis is pointing out of the specimen surface we may also colorizing which crystal axis is pointing towards the rolling or folliation direction or any other specimen fixed direction. This reference direction is stored as the property <code class="language-plaintext highlighter-rouge">inversePoleFigureDirection</code> in the color key.</p>
+</center>
+<p>Instead of colorizing which crystal axis is pointing out of the specimen surface we may also colorizing which crystal axis is pointing towards the rolling or folliation direction or any other specimen fixed direction. This reference direction is stored as the property <code class="language-plaintext highlighter-rouge">inversePoleFigureDirection</code> in the color key.</p>
 {% highlight matlab %}
 % set the reference direction to X
 ipfKey.inversePoleFigureDirection = vector3d.X;
@@ -135,7 +149,10 @@ plot(ebsd('o'),colors)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_08.png" %}
-</center><p>Note, that <code class="language-plaintext highlighter-rouge">ipfKey.inversePoleFigureDirection</code> may even be a vector of directions. Which is helpful for round specimen where one wants to consider the direction normal to the surface.</p><h2 id="11">Customizing the Color Key</h2><p>Orientation color keys usually provide several options to alter the alignment of colors. Let's give some examples</p>
+</center>
+<p>Note, that <code class="language-plaintext highlighter-rouge">ipfKey.inversePoleFigureDirection</code> may even be a vector of directions. Which is helpful for round specimen where one wants to consider the direction normal to the surface.</p>
+<h2 id="11">Customizing the Color Key</h2>
+<p>Orientation color keys usually provide several options to alter the alignment of colors. Let's give some examples</p>
 {% highlight matlab %}
 % we may interchange green and blue by setting
 ipfKey.colorPostRotation = reflection(yvector);
@@ -144,7 +161,8 @@ plot(ipfKey)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_09.png" %}
-</center><p>or cycle of colors red, green, blue by</p>
+</center>
+<p>or cycle of colors red, green, blue by</p>
 {% highlight matlab %}
 ipfKey.colorPostRotation = rotation.byAxisAngle(zvector,120*degree);
 
@@ -152,7 +170,9 @@ plot(ipfKey)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_10.png" %}
-</center><h2 id="13">Laue or Enantiomorphic symmetry groups</h2><p>As the Euler angles provided by the EBSD measurement devices describe proper rotations only they do not include any improper symmetry operation. For this reason it is entirely justified to consider for the ipf map proper symmetries only. Lets define the corresponding color key</p>
+</center>
+<h2 id="13">Laue or Enantiomorphic symmetry groups</h2>
+<p>As the Euler angles provided by the EBSD measurement devices describe proper rotations only they do not include any improper symmetry operation. For this reason it is entirely justified to consider for the ipf map proper symmetries only. Lets define the corresponding color key</p>
 {% highlight matlab %}
 % the color key corresponding to the purely enantiomorphic symmetry group
 ipfKey = ipfHSVKey(ebsd('olivine').CS.properGroup);
@@ -160,7 +180,8 @@ plot(ipfKey)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_11.png" %}
-</center><p>We obverse that the key is twice as large and hence allows for a better distinction between different orientations.</p>
+</center>
+<p>We obverse that the key is twice as large and hence allows for a better distinction between different orientations.</p>
 {% highlight matlab %}
 close all
 color = ipfKey.orientation2color(ebsd('olivine').orientations);
@@ -168,7 +189,9 @@ plot(ebsd('olivine'),color)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_12.png" %}
-</center><h2 id="15">Other inverse pole figure keys</h2><p>Beside the default ipf color key MTEX provides the default color keys are they are used by other popular EBSD systems.</p>
+</center>
+<h2 id="15">Other inverse pole figure keys</h2>
+<p>Beside the default ipf color key MTEX provides the default color keys are they are used by other popular EBSD systems.</p>
 {% highlight matlab %}
 plot(ipfTSLKey(ebsd('olivine').CS))
 {% endhighlight %}
@@ -180,4 +203,8 @@ plot(ipfHKLKey(ebsd('olivine').CS))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_14.png" %}
-</center><p>The user should be aware that for certain symmetry groups these color keys lead to color jumps.</p></div></body></html>
+</center>
+<p>The user should be aware that for certain symmetry groups these color keys lead to color jumps.</p>
+</div>
+</body>
+</html>

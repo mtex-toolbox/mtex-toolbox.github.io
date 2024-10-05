@@ -6,13 +6,24 @@ permalink: EBSD2ODF.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Estimation from EBSD data</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSD2ODF.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSD2ODF.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In order to discuss ODF estimation from individual orientation data we start by loading an EBSD data set</p>
+    -->
+<title>ODF Estimation from EBSD data</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSD2ODF.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSD2ODF.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In order to discuss ODF estimation from individual orientation data we start by loading an EBSD data set</p>
 {% highlight matlab %}
 mtexdata copper
 
@@ -21,16 +32,16 @@ plot(ebsd,ebsd.orientations)
 
 {% highlight plaintext %}
 Warning: more column data was passed in than expected. Check your column names make sense!
-Warning: You have choosen to correct your EBSD data for differently aligned
-reference frames for the Euler angles and the map coordinates. However, you
-have not specified which reference system setting has been used on your Edax
-system . I'm going to assume "setting 1". Be careful, the default setting of
-EDAX is "setting 2". Click <a
-href="matlab:MTEXdoc('EBSDReferenceFrame')">here</a> for more
-information.Please make sure you have chosen the correct setting and specify it
-explicitely using the syntax
+Warning: You have choosen to correct your EBSD data for differently
+aligned reference frames for the Euler angles and the map
+coordinates. However, you have not specified which reference system
+setting has been used on your Edax system . I'm going to assume
+"setting 1". Be careful, the default setting of EDAX is "setting 2".
+Click <a href="matlab:MTEXdoc('EBSDReferenceFrame')">here</a> for more information.Please make sure you have chosen the
+correct setting and specify it explicitely using the syntax
 
- ebsd = EBSD.load(fileName,'convertEuler2SpatialReferenceFrame','setting 2') 
+ ebsd =
+ EBSD.load(fileName,'convertEuler2SpatialReferenceFrame','setting 2') 
  saving data to /home/hielscher/mtex/master/data/copper.mat
  
 ebsd = EBSD
@@ -45,7 +56,8 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_01.png" %}
-</center><p>of copper. The orientation distribution function can now be computed by</p>
+</center>
+<p>of copper. The orientation distribution function can now be computed by</p>
 {% highlight matlab %}
 odf = calcDensity(ebsd('copper').orientations)
 
@@ -61,7 +73,12 @@ odf = SO3FunHarmonic (Copper → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_02.png" %}
-</center><p>The function <a href="rotation.calcDensity.html">calcDensity</a> implements the ODF estimation from EBSD data in MTEX. The underlying statistical method is called kernel density estimation, which can be seen as a generalized histogram. To be more precise, let's \(\psi : SO(3) \to R\) be a radially symmetric, unimodal model ODF. Then the kernel density estimator for the individual orientation data \(o_1,o_2,\ldots,o_M\) is defined as</p><p>\[f(o) = \frac{1}{M} \sum_{i=1}^{M} \psi(o o_i^{-1})\]</p><p>The choice of the model ODF \(\psi\) and in particular its halfwidth has a great impact in the resulting ODF. If no halfwidth is specified the default halfwidth of 10 degrees is selected.</p><h2 id="4">Automatic halfwidth selection</h2><p>MTEX includes an automatic halfwidth selection algorithm which is called by the command <a href="orientation.calcKernel.html">calcKernel</a>. To work properly, this algorithm needs spatially independent EBSD data as in the case of this dataset of very rough EBSD measurements (only one measurement per grain).</p>
+</center>
+<p>The function <a href="rotation.calcDensity.html">calcDensity</a> implements the ODF estimation from EBSD data in MTEX. The underlying statistical method is called kernel density estimation, which can be seen as a generalized histogram. To be more precise, let's \(\psi : SO(3) \to R\) be a radially symmetric, unimodal model ODF. Then the kernel density estimator for the individual orientation data \(o_1,o_2,\ldots,o_M\) is defined as</p>
+<p>\[f(o) = \frac{1}{M} \sum_{i=1}^{M} \psi(o o_i^{-1})\]</p>
+<p>The choice of the model ODF \(\psi\) and in particular its halfwidth has a great impact in the resulting ODF. If no halfwidth is specified the default halfwidth of 10 degrees is selected.</p>
+<h2 id="4">Automatic halfwidth selection</h2>
+<p>MTEX includes an automatic halfwidth selection algorithm which is called by the command <a href="orientation.calcKernel.html">calcKernel</a>. To work properly, this algorithm needs spatially independent EBSD data as in the case of this dataset of very rough EBSD measurements (only one measurement per grain).</p>
 {% highlight matlab %}
 % try to compute an optimal kernel
 psi = calcKernel(ebsd.orientations)
@@ -104,7 +121,10 @@ plotPDF(odf,h,'antipodal','silent')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_03.png" %}
-</center><h2 id="7">Effect of halfwidth selection</h2><p>As mentioned above a proper halfwidth selection is crucial for ODF estimation. The following simple numerical experiment illustrates the dependency between the kernel halfwidth and the estimated error.</p><p>Let's start with a model ODF and simulate some individual orientation data.</p>
+</center>
+<h2 id="7">Effect of halfwidth selection</h2>
+<p>As mentioned above a proper halfwidth selection is crucial for ODF estimation. The following simple numerical experiment illustrates the dependency between the kernel halfwidth and the estimated error.</p>
+<p>Let's start with a model ODF and simulate some individual orientation data.</p>
 {% highlight matlab %}
 modelODF = fibreODF(Miller(1,1,1,crystalSymmetry('cubic')),xvector);
 ori = discreteSample(modelODF,10000)
@@ -137,4 +157,7 @@ ylabel('esimation error')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD2ODF_04.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

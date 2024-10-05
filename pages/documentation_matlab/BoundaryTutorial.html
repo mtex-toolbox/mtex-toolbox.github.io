@@ -6,13 +6,26 @@ permalink: BoundaryTutorial.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Tutorial</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_BoundaryTutorial.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/BoundaryTutorial.m">
-    edit page</a></font><div><!--introduction--><p>A quick guide to grain boundary analysis</p><!--/introduction--><h2 id="1">Grain boundaries generation</h2><p>To work with grain boundaries we need some ebsd data and have to detect grains within the data set.</p>
+    -->
+<title>Grain Boundary Tutorial</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_BoundaryTutorial.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tutorials/BoundaryTutorial.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>A quick guide to grain boundary analysis</p>
+<!--/introduction-->
+<h2 id="1">Grain boundaries generation</h2>
+<p>To work with grain boundaries we need some ebsd data and have to detect grains within the data set.</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins
@@ -58,7 +71,7 @@ ebsd = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- <strong>Properties</strong>: bands, bc, bs, error, mad, grainId_, mis2mean
+ <strong>Properties</strong>: bands, bc, bs, error, mad, grainId, mis2mean
  <strong>Scan unit</strong> : um
  <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
  <strong>Normal vector</strong>: (0,0,1)
@@ -70,7 +83,7 @@ ebsd = EBSD
      0     46 (0.2%)  notIndexed                                                 
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
- <strong>Properties</strong>: bands, bc, bs, error, mad, grainId_, mis2mean
+ <strong>Properties</strong>: bands, bc, bs, error, mad, grainId, mis2mean
  <strong>Scan unit</strong> : um
  <strong>X x Y x Z</strong> : [0 50] x [0 41] x [0 0]
  <strong>Normal vector</strong>: (0,0,1)
@@ -89,7 +102,8 @@ grains = grain2d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryTutorial_01.png" %}
-</center><p>Now we can extract from the grains its boundary and save it to a seperate variable</p>
+</center>
+<p>Now we can extract from the grains its boundary and save it to a separate variable</p>
 {% highlight matlab %}
 gB = grains.boundary
 {% endhighlight %}
@@ -101,7 +115,7 @@ gB = grainBoundary
      1207  184 µm  notIndexed  Magnesium
      3219  837 µm   Magnesium  Magnesium
 {% endhighlight %}
-<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
+<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
 gB_MgMg = gB('Magnesium','Magnesium')
 {% endhighlight %}
@@ -112,7 +126,16 @@ gB_MgMg = grainBoundary
  Segments  length  mineral 1  mineral 2
      3219  837 µm  Magnesium  Magnesium
 {% endhighlight %}
-<h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p>
+<h2 id="4">Properties of grain boundaries</h2>
+<p>A variable of type grain boundary contains the following properties</p>
+<div>
+<ul>
+<li>misorientation</li>
+<li>direction</li>
+<li>segLength</li>
+</ul>
+</div>
+<p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p>
 {% highlight matlab %}
 plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,'linewidth',2)
 mtexColorbar
@@ -120,22 +143,6 @@ mtexColorbar
 <center>
 {% include inline_image.html file="BoundaryTutorial_02.png" %}
 </center>
-{% highlight matlab %}
-hold on
-plot(gB('notIndexed'),'lineColor','blue','linewith',5)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="BoundaryTutorial_03.png" %}
-</center>
-{% highlight matlab %}
-grains.innerBoundary
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = grainBoundary
- 
- Segments   length  mineral 1  mineral 2
-        4  0.99 µm  Magnesium  Magnesium
-{% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

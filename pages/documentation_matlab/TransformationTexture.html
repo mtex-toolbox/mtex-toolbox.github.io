@@ -6,13 +6,23 @@ permalink: TransformationTexture.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Transformation Texture</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TransformationTexture.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TransformationTexture.m">
-    edit page</a></font><div><h1>Transformation Texture</h1><p>During phase transformation or twinning the orientation of a crystal rapidly flips from an initial state <code class="language-plaintext highlighter-rouge">oriA</code> into a transformed state <code class="language-plaintext highlighter-rouge">oriB</code>. This relationship between the initial and transformed state can be described by an orientation relationship <code class="language-plaintext highlighter-rouge">OR</code>. To make the situation more precise, we consider the phase transformation from austenite to ferrite via the Nishiyama Wassermann orientation relationship</p>
+    -->
+<title>Transformation Texture</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_TransformationTexture.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/TransformationTexture.m">
+    edit page</a></font>
+<div>
+<h1>Transformation Texture</h1>
+<p>During phase transformation or twinning the orientation of a crystal rapidly flips from an initial state <code class="language-plaintext highlighter-rouge">oriA</code> into a transformed state <code class="language-plaintext highlighter-rouge">oriB</code>. This relationship between the initial and transformed state can be described by an orientation relationship <code class="language-plaintext highlighter-rouge">OR</code>. To make the situation more precise, we consider the phase transformation from austenite to ferrite via the Nishiyama Wassermann orientation relationship</p>
 {% highlight matlab %}
 % parent and child crystal symmetry
 csP = crystalSymmetry('432','mineral','Austenite');
@@ -21,7 +31,7 @@ csC = crystalSymmetry('432','mineral','Ferrite');
 % the orientation relationship
 p2c = orientation.NishiyamaWassermann(csP,csC);
 {% endhighlight %}
-<p>Now an arbitrary  Austenite orientation</p>
+<p>Now an arbitrary Austenite orientation</p>
 {% highlight matlab %}
 oriA = orientation.rand(csP)
 {% endhighlight %}
@@ -31,7 +41,7 @@ oriA = orientation (Austenite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  214.535 143.259 180.375
+  125.943 19.4725 353.169
 {% endhighlight %}
 <p>is transformed in one of the following Ferrite orientations</p>
 {% highlight matlab %}
@@ -44,18 +54,18 @@ oriB = orientation (Ferrite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  167.614 73.8203 26.3154
-  83.6488  167.43 138.694
-  85.9038 62.9613 320.262
-  24.4299  81.822 271.183
-  270.879 56.2803 149.655
-  102.321  48.936 130.957
-  260.763 73.4942 334.006
-  162.707 117.391 140.575
-  163.544 12.9142 320.001
-  146.295  131.48  311.18
-  44.1011 81.8987 88.3704
-  157.426 56.6556 210.641
+  168.039 114.692 13.1051
+    23.88 133.267 72.5607
+  109.788 64.3361 272.167
+   35.591 42.2119 251.899
+  249.699 68.7481 196.332
+  131.317 65.1855  82.897
+  255.083 87.5005 15.2084
+  136.901 153.436 104.667
+  181.039 55.0084 302.007
+   93.927 151.767 246.135
+  59.6351  51.044 55.2096
+  163.683 95.6746 191.948
 {% endhighlight %}
 <p>These 12 Ferrite orientations are called variants of the orientation relationship. Lets visualize them in a pole figure plot</p>
 {% highlight matlab %}
@@ -78,7 +88,9 @@ drawNow(gcm)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TransformationTexture_01.png" %}
-</center><p>In case we have multiple parent orientations following some initial orientation distribution function <code class="language-plaintext highlighter-rouge">odf</code></p>
+</center>
+<p>In case we have multiple parent orientations following some initial orientation distribution function <code class="language-plaintext highlighter-rouge">odf</code>
+</p>
 {% highlight matlab %}
 % define a model ODF
 odfA = unimodalODF(oriA,'halfwidth',5*degree)
@@ -96,11 +108,12 @@ odfA = SO3FunRBF (Austenite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2  weight
-  214.535 143.259 180.375       1
+  125.943 19.4725 353.169       1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TransformationTexture_02.png" %}
-</center><p>We can draw some random orientations according this model ODF and apply the same commands <code class="language-plaintext highlighter-rouge">variants</code> to compute all transformed orientations in one step</p>
+</center>
+<p>We can draw some random orientations according this model ODF and apply the same commands <code class="language-plaintext highlighter-rouge">variants</code> to compute all transformed orientations in one step</p>
 {% highlight matlab %}
 % number of discrete orientations
 n = 10000;
@@ -123,7 +136,8 @@ oriBSim = orientation (Ferrite → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TransformationTexture_03.png" %}
-</center><p>An alternative and better approach is to directly use <code class="language-plaintext highlighter-rouge">odfA</code> as an input to the function <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a>. In this case the output is the orientation distribution function of the transformed material</p>
+</center>
+<p>An alternative and better approach is to directly use <code class="language-plaintext highlighter-rouge">odfA</code> as an input to the function <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a>. In this case the output is the orientation distribution function of the transformed material</p>
 {% highlight matlab %}
 % compute the child ODF
 odfB = variants(p2c,odfA)
@@ -140,7 +154,8 @@ odfB = SO3FunHarmonic (Ferrite → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TransformationTexture_04.png" %}
-</center><p>We observe that the transformed ODF computed by the latter approach is sharper and shows more details when compared with the ODF computed from discrete orientations. We may quantify this difference by computing the texture index of both ODFs</p>
+</center>
+<p>We observe that the transformed ODF computed by the latter approach is sharper and shows more details when compared with the ODF computed from discrete orientations. We may quantify this difference by computing the texture index of both ODFs</p>
 {% highlight matlab %}
 % texture index of the transformed ODF computed from discrete orientations
 odfBSim = calcDensity(oriBSim)
@@ -153,7 +168,7 @@ odfBSim = SO3FunHarmonic (Ferrite → xyz)
   weight: 1
  
 ans =
-    3.4918
+    3.4946
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -165,4 +180,6 @@ norm(odfB)^2
 ans =
    17.4509
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

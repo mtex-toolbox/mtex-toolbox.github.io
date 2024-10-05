@@ -6,13 +6,24 @@ permalink: GrainMerge.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Merging Grains</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainMerge.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Merging grains may be useful when reconstructing parent grain structures, i.e., before phase transition or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magnesium data and reconstructing the grain structure:</p>
+    -->
+<title>Merging Grains</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_GrainMerge.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainMerge.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Merging grains may be useful when reconstructing parent grain structures, i.e., before phase transition or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magnesium data and reconstructing the grain structure:</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins silent
@@ -32,7 +43,8 @@ plot(grains,grains.meanOrientation)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_01.png" %}
-</center><p>Next we identify all twinning boundaries</p>
+</center>
+<p>Next we identify all twinning boundaries</p>
 {% highlight matlab %}
 % define twinning misorientation
 CS = grains.CS;
@@ -60,7 +72,9 @@ twinBoundary = grainBoundary
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_02.png" %}
-</center><h2 id="3">Merge grains along boundaries</h2><p>The command <a href="grain2d.merge.html">merge</a> will merge grains together that have a common boundary which is specified as the second argument. In our example we want to merge all grains that have a common twinning boundary so we do</p>
+</center>
+<h2 id="3">Merge grains along boundaries</h2>
+<p>The command <a href="grain2d.merge.html">merge</a> will merge grains together that have a common boundary which is specified as the second argument. In our example we want to merge all grains that have a common twinning boundary so we do</p>
 {% highlight matlab %}
 [mergedGrains,parentId] = merge(grains,twinBoundary);
 
@@ -72,7 +86,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_03.png" %}
-</center><h2 id="4">Grain relationships</h2><p>The second output argument <code class="language-plaintext highlighter-rouge">paraentId</code> of <a href="grain2d.merge.html">merge</a> is a list with the same size as the child grains which indicates for each child grain into which parent grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p>
+</center>
+<h2 id="4">Grain relationships</h2>
+<p>The second output argument <code class="language-plaintext highlighter-rouge">paraentId</code> of <a href="grain2d.merge.html">merge</a> is a list with the same size as the child grains which indicates for each child grain into which parent grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p>
 {% highlight matlab %}
 mergedGrains(16).id
 {% endhighlight %}
@@ -106,7 +122,8 @@ childs = grain2d
  29       1      293   (94°,145°,185°)   0.0091
  33       1      250   (179°,89°,235°)    0.011
 {% endhighlight %}
-<h2 id="6">Estimate twin area fraction</h2><p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
+<h2 id="6">Estimate twin area fraction</h2>
+<p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
 {% highlight matlab %}
 % extract grain area for faster access
 gArea = grains.area;
@@ -150,7 +167,9 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_04.png" %}
-</center><p>The <code class="language-plaintext highlighter-rouge">parentId</code> may also be used to compute properties of the parent grains by averaging over the corresponding child grain properties. This can be done with the MATLAB command <a href="mathworks.com/help/matlab/ref/accumarray.html">accumarray</a></p>
+</center>
+<p>The <code class="language-plaintext highlighter-rouge">parentId</code> may also be used to compute properties of the parent grains by averaging over the corresponding child grain properties. This can be done with the MATLAB command <a href="mathworks.com/help/matlab/ref/accumarray.html">accumarray</a>
+</p>
 {% highlight matlab %}
 % this averages the GOS of the child grains into the parent grains
 mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@mean);
@@ -170,7 +189,8 @@ setColorRange([0,1.5])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_05.png" %}
-</center><p>The above result is a bit unrealistic since the averages are computed between the childs ignoring their relative areas. A better approach is to compute a weighted average by the following lines.</p>
+</center>
+<p>The above result is a bit unrealistic since the averages are computed between the childs ignoring their relative areas. A better approach is to compute a weighted average by the following lines.</p>
 {% highlight matlab %}
 % extract GOS and area
 childGOS = grains.GOS;
@@ -185,7 +205,9 @@ plot(mergedGrains,mergedGrains.GOS  ./ degree)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_06.png" %}
-</center><h2 id="9">Setting Up the EBSD Data for the Merged Grains</h2><p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p>
+</center>
+<h2 id="9">Setting Up the EBSD Data for the Merged Grains</h2>
+<p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p>
 {% highlight matlab %}
 close all
 plot(mergedGrains(16).boundary,'linewidth',2)
@@ -195,7 +217,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_07.png" %}
-</center><p>In order to update the grainId in the ebsd variable to the merged grains, we proceed as follows.</p>
+</center>
+<p>In order to update the grainId in the ebsd variable to the merged grains, we proceed as follows.</p>
 {% highlight matlab %}
 % copy ebsd data into a new variable to not change the old data
 ebsd_merged = ebsd;
@@ -225,4 +248,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_08.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

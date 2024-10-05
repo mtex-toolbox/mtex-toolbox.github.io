@@ -6,13 +6,24 @@ permalink: EulerAngleSections.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Euler Angle Sections</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EulerAngleSections.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/EulerAngleSections.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">TODO: Please help extending this section</h2>
+    -->
+<title>Euler Angle Sections</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EulerAngleSections.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/EulerAngleSections.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">TODO: Please help extending this section</h2>
 {% highlight matlab %}
 cs = crystalSymmetry.load('Al-Aluminum.cif')
 
@@ -50,7 +61,8 @@ odf = SO3FunComposition (Aluminum → xyz)
   fibre : (12 6 11) || -1,-1,4
   weight: 0.5
 {% endhighlight %}
-<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code></p>
+<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code>
+</p>
 {% highlight matlab %}
 plot(odf,'sections',9,'silent','layout',[5 2])
 {% endhighlight %}
@@ -65,7 +77,8 @@ plot(f,'linewidth',2,'add2all')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EulerAngleSections_02.png" %}
-</center><p>One can also specify the \(\varphi_2\) angles of the sections explicitly</p>
+</center>
+<p>One can also specify the \(\varphi_2\) angles of the sections explicitly</p>
 {% highlight matlab %}
 plot(odf,'phi2',[25 30 35 40]*degree,'silent')
 
@@ -76,13 +89,24 @@ plot(f,'linewidth',2,'add2all')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EulerAngleSections_03.png" %}
-</center><p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>phi2 (default)</li><li>phi1</li><li>gamma (Matthies Euler angles)</li><li>sigma (alpha+gamma)</li></ul></div>
+</center>
+<p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p>
+<div>
+<ul>
+<li>phi2 (default)</li>
+<li>phi1</li>
+<li>gamma (Matthies Euler angles)</li>
+<li>sigma (alpha+gamma)</li>
+</ul>
+</div>
 {% highlight matlab %}
 plotSection(odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EulerAngleSections_04.png" %}
-</center><p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p><p>
+</center>
+<p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p>
+<p>
    <table class="usertable">
       <tr>
          <td>
@@ -237,7 +261,11 @@ plotSection(odf)
          </td>
       </tr>
    </table>
-</p><p>Note that for the last two symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p><h2 id="7">Specimen Symmetry</h2><p>As we can see from the above table the first Euler angle \(\varphi_1\) ranges for all symmetries from zero to 360 degree. The only way to restrict this angle is to consider specimen symmetry. In the classical case of orthotropic specimen symmetry the range of the first Euler angle reduces to 90 degree and we obtain the common square shaped ODF section plots</p>
+</p>
+<p>Note that for the last two symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a>
+</p>
+<h2 id="7">Specimen Symmetry</h2>
+<p>As we can see from the above table the first Euler angle \(\varphi_1\) ranges for all symmetries from zero to 360 degree. The only way to restrict this angle is to consider specimen symmetry. In the classical case of orthotropic specimen symmetry the range of the first Euler angle reduces to 90 degree and we obtain the common square shaped ODF section plots</p>
 {% highlight matlab %}
 odf.SS = specimenSymmetry('222');
 
@@ -246,4 +274,7 @@ plot(odf,'sections',18,'layout',[5 4],...
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EulerAngleSections_05.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

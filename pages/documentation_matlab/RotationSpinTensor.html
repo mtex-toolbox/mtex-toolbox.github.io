@@ -6,13 +6,24 @@ permalink: RotationSpinTensor.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Spin Tensors as Infinitesimal Changes of Rotations</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_RotationSpinTensor.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationSpinTensor.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Spin tensors are skew symmetric tensors that can be used to describe small rotational changes. Let us consider an arbitrary reference rotation</p>
+    -->
+<title>Spin Tensors as Infinitesimal Changes of Rotations</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_RotationSpinTensor.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationSpinTensor.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Spin tensors are skew symmetric tensors that can be used to describe small rotational changes. Let us consider an arbitrary reference rotation</p>
 {% highlight matlab %}
 rot_ref = rotation.byEuler(10*degree,20*degree,30*degree);
 {% endhighlight %}
@@ -23,7 +34,8 @@ rot_123 = rotation.byAxisAngle(vector3d(1,2,3),delta);
 rot_right = rot_123 * rot_ref;
 rot_left = rot_ref * rot_123;
 {% endhighlight %}
-<p>We may now ask for the first order Taylor coefficients of the perturbation as delta goes to zero which we find by the formula</p><p>\[ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta} \]</p>
+<p>We may now ask for the first order Taylor coefficients of the perturbation as delta goes to zero which we find by the formula</p>
+<p>\[ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta} \]</p>
 {% highlight matlab %}
 T_right = (rot_right.matrix - rot_ref.matrix) ./ delta
 T_left = (rot_left.matrix - rot_ref.matrix) ./ delta
@@ -82,7 +94,8 @@ ans = vector3d
   x y z
   1 2 3
 {% endhighlight %}
-<p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code></p>
+<p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code>
+</p>
 {% highlight matlab %}
 rot_ref * vector3d(spinTensor(S_right_L)) * sqrt(14)
 
@@ -98,7 +111,8 @@ ans = vector3d
   x y z
   1 2 3
 {% endhighlight %}
-<h2 id="7">The Functions Exp and Log</h2><p>The above definition of the spin tensor works well only if the perturbation has small rotational angle. For large perturbations the matrix logarithm <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
+<h2 id="7">The Functions Exp and Log</h2>
+<p>The above definition of the spin tensor works well only if the perturbation has small rotational angle. For large perturbations the matrix logarithm <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
 {% highlight matlab %}
 % define a large pertubation with rotational angle 1 radiant
 delta = 1;
@@ -125,7 +139,9 @@ ans = spinTensor (xyz)
   3  0 -1
  -2  1  0
 {% endhighlight %}
-<p>Again the entries \(S_{21}\), \(S_{31}\) and \(S_{32}\) exactly coincide with the rotational axis multiplied with the rotational angle.</p><p>More directly this disorientation vector may be computed from two rotations using the options <code class="language-plaintext highlighter-rouge">SO3TangentSpace.rightVector</code> and <code class="language-plaintext highlighter-rouge">SO3TangentSpace.leftVector</code></p>
+<p>Again the entries \(S_{21}\), \(S_{31}\) and \(S_{32}\) exactly coincide with the rotational axis multiplied with the rotational angle.</p>
+<p>More directly this disorientation vector may be computed from two rotations using the options <code class="language-plaintext highlighter-rouge">SO3TangentSpace.rightVector</code> and <code class="language-plaintext highlighter-rouge">SO3TangentSpace.leftVector</code>
+</p>
 {% highlight matlab %}
 v = log(rot_ref * rot_123,rot_ref,SO3TangentSpace.rightVector); v * sqrt(14)
 
@@ -141,7 +157,9 @@ ans = vector3d
   x y z
   1 2 3
 {% endhighlight %}
-<h2 id="9">The other way round</h2><p>Given a skew symmetric matrix <code class="language-plaintext highlighter-rouge">S</code> or a disorientation vector <code class="language-plaintext highlighter-rouge">v</code> we may use the command <a href="vector3d.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> to apply this rotational perturbation to a reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code></p>
+<h2 id="9">The other way round</h2>
+<p>Given a skew symmetric matrix <code class="language-plaintext highlighter-rouge">S</code> or a disorientation vector <code class="language-plaintext highlighter-rouge">v</code> we may use the command <a href="vector3d.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> to apply this rotational perturbation to a reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code>
+</p>
 {% highlight matlab %}
 % the truth
 rot_ref * rot_123
@@ -207,7 +225,8 @@ ans = rotation
      phi1     Phi    phi2
   74.5535 51.5051 9.61062
 {% endhighlight %}
-<h2 id="11">Disorientations under the presence of crystal symmetry</h2><p>Under the presence of crystal symmetry the order whether a rotational perturbation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
+<h2 id="11">Disorientations under the presence of crystal symmetry</h2>
+<p>Under the presence of crystal symmetry the order whether a rotational perturbation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321');
 
@@ -268,4 +287,6 @@ ans = orientation (321 → xyz)
      phi1     Phi    phi2
   79.3156 43.3785  9.9013
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>
