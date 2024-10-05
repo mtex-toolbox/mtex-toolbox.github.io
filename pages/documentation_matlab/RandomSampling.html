@@ -6,13 +6,24 @@ permalink: RandomSampling.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Random Sampling</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_RandomSampling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Assume an arbitrary <a href="ODFTheorie.html">ODF</a> either from texture modelling or recovered from XRD pole figure measurements a common problem is the simulation of random individual orientations that are distributed according the given ODF. This is helpful crucial in many application, e.g., for running plastic deformation models like VPSC or verifying the accuracy <a href="DensityEstimation.html">density estimation methods</a>. Here we start with a trigonal alpha-fibre ODF which we define by</p>
+    -->
+<title>Random Sampling</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_RandomSampling.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/RandomSampling.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Assume an arbitrary <a href="ODFTheorie.html">ODF</a> either from texture modelling or recovered from XRD pole figure measurements a common problem is the simulation of random individual orientations that are distributed according the given ODF. This is helpful crucial in many application, e.g., for running plastic deformation models like VPSC or verifying the accuracy <a href="DensityEstimation.html">density estimation methods</a>. Here we start with a trigonal alpha-fibre ODF which we define by</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
 fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(fibre.rand(cs),'halfwidth',20*degree);
@@ -22,7 +33,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_01.png" %}
-</center><h2 id="2">Computing Random Orientations</h2><p>In order to compute \(50000\) random orientation from the ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> we use the command <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.discreteSample.html">discreteSample</a></code>.</p>
+</center>
+<h2 id="2">Computing Random Orientations</h2>
+<p>In order to compute \(50000\) random orientation from the ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> we use the command <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.discreteSample.html">discreteSample</a></code>.</p>
 {% highlight matlab %}
 ori = fibre_odf.discreteSample(50000)
 
@@ -38,7 +51,9 @@ ori = orientation (321 → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_02.png" %}
-</center><p>From the above plot it is very hard to judge whether the orientations are indeed distributed according to the given ODF. The reason for this is the not volume preserving projection of the Bunge sections. A better ODF representation for this purpose are <a href="SigmaSections.html">sigma sections</a></p>
+</center>
+<p>From the above plot it is very hard to judge whether the orientations are indeed distributed according to the given ODF. The reason for this is the not volume preserving projection of the Bunge sections. A better ODF representation for this purpose are <a href="SigmaSections.html">sigma sections</a>
+</p>
 {% highlight matlab %}
 % plot the ODF in sigma sections
 plot(fibre_odf,'sections',6,'silent','sigma','contour','linewidth',2)
@@ -50,7 +65,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_03.png" %}
-</center><h2 id="4">ODF Estimation from Random Orientations</h2><p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative meaure for how well do the orientations approximate the ODF we may use the orientations to <a href="DensityEstimation.html">estimate a new ODF</a> and compare the fit of this estimate ODF with the initial ODF.</p>
+</center>
+<h2 id="4">ODF Estimation from Random Orientations</h2>
+<p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative meaure for how well do the orientations approximate the ODF we may use the orientations to <a href="DensityEstimation.html">estimate a new ODF</a> and compare the fit of this estimate ODF with the initial ODF.</p>
 {% highlight matlab %}
 % estimate an ODF from the random orientations
 odf_rec = calcDensity(ori)
@@ -66,13 +83,18 @@ odf_rec = SO3FunHarmonic (321 → xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_04.png" %}
-</center><p>We may now compare the original model ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> with the reconstructed ODF <code class="language-plaintext highlighter-rouge">odf_rec</code>.</p>
+</center>
+<p>We may now compare the original model ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> with the reconstructed ODF <code class="language-plaintext highlighter-rouge">odf_rec</code>.</p>
 {% highlight matlab %}
 calcError(odf_rec,fibre_odf)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.0571
+    0.0575
 {% endhighlight %}
-<h2 id="6">Exporting Random Orientations</h2><p>In order to make use of the sampled orientations you probably want to <a href="OrientationExport.html">export</a> them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <code class="language-plaintext highlighter-rouge"><a href="quaternion.export.html">export</a></code> and <code class="language-plaintext highlighter-rouge"><a href="orientation.export_VPSC.html">export_VPSC</a></code>.</p></div></body></html>
+<h2 id="6">Exporting Random Orientations</h2>
+<p>In order to make use of the sampled orientations you probably want to <a href="OrientationExport.html">export</a> them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <code class="language-plaintext highlighter-rouge"><a href="quaternion.export.html">export</a></code> and <code class="language-plaintext highlighter-rouge"><a href="orientation.export_VPSC.html">export_VPSC</a></code>.</p>
+</div>
+</body>
+</html>

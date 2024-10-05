@@ -6,13 +6,26 @@ permalink: TensorArithmetics.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Tensor Arithmetics</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TensorArithmetics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
-    edit page</a></font><div><!--introduction--><p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p><!--/introduction--><h2 id="1">Basic algebra</h2><p>First of all, all basic operations like <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">.^</code> known from linear algebra work also on lists of tensors.</p>
+    -->
+<title>Tensor Arithmetics</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_TensorArithmetics.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/TensorArithmetics.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>MTEX offers powerful functionalities to calculate with tensors and lists of tensors without the need of many nested loops.</p>
+<!--/introduction-->
+<h2 id="1">Basic algebra</h2>
+<p>First of all, all basic operations like <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">.*</code>, <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, <code class="language-plaintext highlighter-rouge">.^</code> known from linear algebra work also on lists of tensors.</p>
 {% highlight matlab %}
 T1 = tensor.rand('rank',2);
 T2 = tensor.rand('rank',2);
@@ -23,7 +36,8 @@ T = T1 + 2 * T2;
 % point-wise product
 T = T1 .* T2;
 {% endhighlight %}
-<h2 id="2">Tensor Products</h2><p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
+<h2 id="2">Tensor Products</h2>
+<p>Tensor product are the canonical way how tensors interact with each other. As an example consider a rank 4 stiffness tensor</p>
 {% highlight matlab %}
 C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'))
 {% endhighlight %}
@@ -55,7 +69,9 @@ eps = strainTensor (xyz)
   0  0  0
   0  0 -1
 {% endhighlight %}
-<p>according to the formula</p><p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p><p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html"><code class="language-plaintext highlighter-rouge">EinsteinSum</code></a>.</p>
+<p>according to the formula</p>
+<p>\[\sigma_{ij} =\sum_{k,l} C_{ijkl} \epsilon_{kl}\]</p>
+<p>and turns it into the stress tensor \(\sigma\). In MTEX such tensor products can be computed in its most general form by the command <a href="EinsteinSum.html"><code class="language-plaintext highlighter-rouge">EinsteinSum</code></a>.</p>
 {% highlight matlab %}
 sigma = EinsteinSum(C,[1 2 -1 -2],eps,[-1 -2])
 {% endhighlight %}
@@ -68,7 +84,9 @@ sigma = tensor (xyz)
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p><p>\[ (a \otimes b)_{ij} = a_i b_j \]</p><p>between two rank one tensors</p>
+<p>here the negative numbers indicate the indices which are summed up. Each pair of equal negative numbers corresponds to one sum. The positive numbers indicate the order of the dimensions of the resulting tensor. Accordingly we can compute the outer product</p>
+<p>\[ (a \otimes b)_{ij} = a_i b_j \]</p>
+<p>between two rank one tensors</p>
 {% highlight matlab %}
 a = tensor([1;2;3],'rank',1);
 b = tensor([0;2;1],'rank',1);
@@ -86,7 +104,9 @@ ans = tensor (xyz)
  0 4 2
  0 6 3
 {% endhighlight %}
-<p>and the inner product</p><p>\[ a \cdot b = \sum_i a_i b_i \]</p><p>by</p>
+<p>and the inner product</p>
+<p>\[ a \cdot b = \sum_i a_i b_i \]</p>
+<p>by</p>
 {% highlight matlab %}
 EinsteinSum(a,-1,b,-1)
 {% endhighlight %}
@@ -95,7 +115,9 @@ EinsteinSum(a,-1,b,-1)
 ans =
      7
 {% endhighlight %}
-<p>As a final example we consider the linear compressibility in a certain direction <code class="language-plaintext highlighter-rouge">v</code> which can be computed by the formula</p><p>\[ c = \sum_{i,j,k} S_{ijkk} v_i v_j \]</p><p>where \(C = S^{-1}\) is the inverse of the compliance tensor, i.e. the stiffness tensor</p>
+<p>As a final example we consider the linear compressibility in a certain direction <code class="language-plaintext highlighter-rouge">v</code> which can be computed by the formula</p>
+<p>\[ c = \sum_{i,j,k} S_{ijkk} v_i v_j \]</p>
+<p>where \(C = S^{-1}\) is the inverse of the compliance tensor, i.e. the stiffness tensor</p>
 {% highlight matlab %}
 v = xvector;
 S = inv(C)
@@ -118,7 +140,8 @@ S = complianceTensor (xyz)
 c =
   460.2500
 {% endhighlight %}
-<p>Here we used the command <a href="tensor.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">double dot product</a></p>
+<p>Here we used the command <a href="tensor.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a> to compute the inverse of any rank 2 or rank 4 tensor. There are shortcuts in MTEX for specific tensor products. E.g. the relation between stress and strain can be more compactly written as a <a href="tensor.colon.html">double dot product</a>
+</p>
 {% highlight matlab %}
 C * eps
 C : eps
@@ -139,7 +162,7 @@ ans = stressTensor (xyz)
       0  -8.65      0
       0      0 -161.9
 {% endhighlight %}
-<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <code class="language-plaintext highlighter-rouge"><a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a></code> of their matrix product</p>
+<p>The double dot product between two rank two tensors is essentially their inner product and can be equivalently computed from the <a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a> of their matrix product</p>
 {% highlight matlab %}
 T1 : T2
 trace(T1 * T2')
@@ -154,7 +177,9 @@ ans =
 ans =
     1.7334
 {% endhighlight %}
-<h2 id="11">Determinant</h2><p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a></p>
+<h2 id="11">Determinant</h2>
+<p>For rank two tensors we can compute the determinant of the tensor by the command <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a>
+</p>
 {% highlight matlab %}
 det(T1)
 {% endhighlight %}
@@ -163,7 +188,8 @@ det(T1)
 ans =
     0.4989
 {% endhighlight %}
-<h2 id="12">Rotating a tensor</h2><p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
+<h2 id="12">Rotating a tensor</h2>
+<p>Rotation a tensor is done by the command <a href="tensor.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>. Let's define a rotation</p>
 {% highlight matlab %}
 r = rotation.byEuler(45*degree,0*degree,0*degree);
 {% endhighlight %}
@@ -174,7 +200,8 @@ plot(Trot)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TensorArithmetics_01.png" %}
-</center><p>Here is another example from Nye (Physical Properties of Crystals, p.120-121) for a third-rank tensor</p>
+</center>
+<p>Here is another example from Nye (Physical Properties of Crystals, p.120-121) for a third-rank tensor</p>
 {% highlight matlab %}
 P = [ 0 0 0 .17 0   0;
       0 0 0 0   .17 0;
@@ -205,4 +232,6 @@ T = tensor (xyz)
      0     0     0  -1.7     0     0
   51.7 -51.7     0     0     0     0
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

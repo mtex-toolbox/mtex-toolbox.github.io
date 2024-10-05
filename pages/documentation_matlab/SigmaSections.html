@@ -6,13 +6,24 @@ permalink: SigmaSections.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Sigma Sections</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SigmaSections.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/SigmaSections.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Although \(\varphi_2\) sections are most common to represent orientation distribution functions they heavily suffer from geometrical distortions of the orientation space. Lets illustrate this at a simple example. The following \(\varphi_2\) sections represent a hexagonal ODF composod from several unimodal components</p>
+    -->
+<title>Sigma Sections</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SigmaSections.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/SigmaSections.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Although \(\varphi_2\) sections are most common to represent orientation distribution functions they heavily suffer from geometrical distortions of the orientation space. Lets illustrate this at a simple example. The following \(\varphi_2\) sections represent a hexagonal ODF composod from several unimodal components</p>
 {% highlight matlab %}
 % the ODF is defined at the bottom of this script to be secret during the first read :)
 cs = crystalSymmetry.load('Ti-Titanium-alpha.cif');
@@ -22,7 +33,18 @@ plotSection(odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_01.png" %}
-</center><p>Try to answer the following questions:</p><div><ol><li>What is the number of components the ODF is composed of?</li><li>What would the c-axis pole figure look like?</li><li>What would the a-axis pole figure look like?</li></ol></div><p>Most people find it difficult to find the correct answer by looking at \(\varphi_2\) sections, while it is much more easy by looking at \(\sigma\)-sections.</p><p>Lets consider an arbitrary orientation given by its Euler angles \((\varphi_1, \Phi, \varphi_2)\). Then its position in the c-axis pole figure is given by the polar coordinates \((\Phi,\varphi_1)\), i.e. it depends only on the first two Euler angles. The third Euler angle \(\varphi_2\) controls the rotation of the crystal around this new c-axis. This rotation around the new c-axis can be described by the angle between the a-axis with respect to some fixed reference direction. In the case of hexagonal symmetry this angle may vary between \(0\) and \(60\) degree.</p><p>The idea of sigma sections is to make a reasonable choice of this reference direction.</p>
+</center>
+<p>Try to answer the following questions:</p>
+<div>
+<ol>
+<li>What is the number of components the ODF is composed of?</li>
+<li>What would the c-axis pole figure look like?</li>
+<li>What would the a-axis pole figure look like?</li>
+</ol>
+</div>
+<p>Most people find it difficult to find the correct answer by looking at \(\varphi_2\) sections, while it is much more easy by looking at \(\sigma\)-sections.</p>
+<p>Lets consider an arbitrary orientation given by its Euler angles \((\varphi_1, \Phi, \varphi_2)\). Then its position in the c-axis pole figure is given by the polar coordinates \((\Phi,\varphi_1)\), i.e. it depends only on the first two Euler angles. The third Euler angle \(\varphi_2\) controls the rotation of the crystal around this new c-axis. This rotation around the new c-axis can be described by the angle between the a-axis with respect to some fixed reference direction. In the case of hexagonal symmetry this angle may vary between \(0\) and \(60\) degree.</p>
+<p>The idea of sigma sections is to make a reasonable choice of this reference direction.</p>
 {% highlight matlab %}
 % define a sigma section
 oS = sigmaSections(odf.CS,odf.SS,'sigma',0);
@@ -32,7 +54,8 @@ plot(oS)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_02.png" %}
-</center><p>In the above plot each pixel corresponds to a unique orientation. Which is specified by the position of the c-axis being in the position of the pixel and the a-axis being aligned with the small arrow at this position. As an example lets consider the orientation</p>
+</center>
+<p>In the above plot each pixel corresponds to a unique orientation. Which is specified by the position of the c-axis being in the position of the pixel and the a-axis being aligned with the small arrow at this position. As an example lets consider the orientation</p>
 {% highlight matlab %}
 ori1 = orientation.map(cs.cAxis,vector3d.Z,cs.aAxis,vector3d.X)
 {% endhighlight %}
@@ -68,7 +91,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_03.png" %}
-</center><p>Accordingly, the first orientations appears right in the center while the second one appears at the position of the x-axis. The red and green arrows indicate the directions of the a-axes and align perfectly with the small background arrows.</p><p>In order to visualize orientations with different a-axis alignments we need to additional sections with rotated small arrows.</p>
+</center>
+<p>Accordingly, the first orientations appears right in the center while the second one appears at the position of the x-axis. The red and green arrows indicate the directions of the a-axes and align perfectly with the small background arrows.</p>
+<p>In order to visualize orientations with different a-axis alignments we need to additional sections with rotated small arrows.</p>
 {% highlight matlab %}
 % a full sigma section plot
 oS = sigmaSections(odf.CS,odf.SS);
@@ -89,7 +114,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_04.png" %}
-</center><p>Note how the a-axes of the three orientations align with the small background arrows. Instead of the a-axes we may also visualize the crystal orientations directly within these sigma sections</p>
+</center>
+<p>Note how the a-axes of the three orientations align with the small background arrows. Instead of the a-axes we may also visualize the crystal orientations directly within these sigma sections</p>
 {% highlight matlab %}
 % define hexagonal crystal shape
 cS = crystalShape.hex(cs);
@@ -100,13 +126,15 @@ plotSection(ori,0.5.*(ori*cS),oS)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_05.png" %}
-</center><p>Lets come back to our initial secret ODF and visualize it in sigma sections</p>
+</center>
+<p>Lets come back to our initial secret ODF and visualize it in sigma sections</p>
 {% highlight matlab %}
 plotSection(odf,oS)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_06.png" %}
-</center><p>First of all we observe clearly 4 distinct components with the first one having its maximum for the c-axis parallel to the z-axis and the a-axis parallel to the y-axis. With the other three components the c-axis rotates toward the x-axis while the a-axis rotates towards the z-axis. Hence, we would expect in the c-axis a girdle from \(z\) to \(x\) and in the a-axis pole figure ...</p>
+</center>
+<p>First of all we observe clearly 4 distinct components with the first one having its maximum for the c-axis parallel to the z-axis and the a-axis parallel to the y-axis. With the other three components the c-axis rotates toward the x-axis while the a-axis rotates towards the z-axis. Hence, we would expect in the c-axis a girdle from \(z\) to \(x\) and in the a-axis pole figure ...</p>
 {% highlight matlab %}
 plotPDF(odf,[cs.cAxis,cs.aAxis])
 {% endhighlight %}
@@ -121,13 +149,16 @@ plotPDF(odf,Miller(0,0,0,1,cs))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_08.png" %}
-</center><p>We observe three spots. Two in the center and one at 100. When splitting the pole figure, i.e. plotting the odf as sigma sections</p>
+</center>
+<p>We observe three spots. Two in the center and one at 100. When splitting the pole figure, i.e. plotting the odf as sigma sections</p>
 {% highlight matlab %}
 plot(odf,'sections',6,'silent','sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_09.png" %}
-</center><p>we can clearly distinguish the two spots in the middle indicating two radial symmetric portions. On the other hand the spots at 001 appear in every section indicating a fibre at position [001](100). Knowing that sigma sections are nothing else then the splitted 001 pole figure they are much more simple to interpret then usual phi2 sections.</p><h2 id="13">Customizations</h2>
+</center>
+<p>we can clearly distinguish the two spots in the middle indicating two radial symmetric portions. On the other hand the spots at 001 appear in every section indicating a fibre at position [001](100). Knowing that sigma sections are nothing else then the splitted 001 pole figure they are much more simple to interpret then usual phi2 sections.</p>
+<h2 id="13">Customizations</h2>
 {% highlight matlab %}
 oS = sigmaSections(odf.CS,odf.SS);
 
@@ -141,7 +172,8 @@ plotSection(odf,oS)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SigmaSections_10.png" %}
-</center><p>We may also change the pole figure we would like to split into sections.</p>
+</center>
+<p>We may also change the pole figure we would like to split into sections.</p>
 {% highlight matlab %}
 % the pole figure we are going to split
 oS.h1 =  Miller(1,0,-1,1,'hkil',odf.CS);
@@ -170,4 +202,6 @@ odf = unimodalODF(ori);
 
 end
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

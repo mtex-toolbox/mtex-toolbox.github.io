@@ -6,13 +6,26 @@ permalink: GrainSmoothing.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Smoothing</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainSmoothing.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/GrainSmoothing.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>EBSD data is usually acquired on a regular grid. Hence, even over a finite number of grid points, all possible grain boundary directions can not be uniquely represented.  One way of overcoming this problem - and also allowing to compute grid-independent curvatures and grain boundary directions - is the interpolation of grain boundary coordinates using <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a>.</p><p>Proper smoothing has an influence on measures such as total grain boundary length, grain boundary curvature, triple point angles or grain boundary directions among others.</p><p>While we used <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> before, here we will illustrate the different options.</p>
+    -->
+<title>Grain Boundary Smoothing</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_GrainSmoothing.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/GrainSmoothing.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>EBSD data is usually acquired on a regular grid. Hence, even over a finite number of grid points, all possible grain boundary directions can not be uniquely represented. One way of overcoming this problem - and also allowing to compute grid-independent curvatures and grain boundary directions - is the interpolation of grain boundary coordinates using <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a>.</p>
+<p>Proper smoothing has an influence on measures such as total grain boundary length, grain boundary curvature, triple point angles or grain boundary directions among others.</p>
+<p>While we used <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> before, here we will illustrate the different options.</p>
 {% highlight matlab %}
 mtexdata csl
 [grains, ebsd.grainId] = ebsd.calcGrains;
@@ -40,7 +53,8 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_01.png" %}
-</center><p>With the default parameters we have the following result</p>
+</center>
+<p>With the default parameters we have the following result</p>
 {% highlight matlab %}
 % smooth the grains with default parameters
 grains_smooth = smooth(grains);
@@ -51,7 +65,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_02.png" %}
-</center><p>The grain boundary boundaries look now a little bit more smooth and the total grain boundary length is reasonable reduced.</p>
+</center>
+<p>The grain boundary boundaries look now a little bit more smooth and the total grain boundary length is reasonable reduced.</p>
 {% highlight matlab %}
 sum(grains.boundary('indexed').segLength)
 sum(grains_smooth.boundary('indexed').segLength)
@@ -70,7 +85,9 @@ histogram(grains_smooth.boundary('indexed').direction, ...
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_03.png" %}
-</center><h2 id="5">Effect of smoothing iterations</h2><p>If we specify a larger number of iterations, we can see that the scatting around 0 and 90 degree decreases.</p>
+</center>
+<h2 id="5">Effect of smoothing iterations</h2>
+<p>If we specify a larger number of iterations, we can see that the scatting around 0 and 90 degree decreases.</p>
 {% highlight matlab %}
 iter = [1 5 10 25];
 color = copper(length(iter)+1);
@@ -87,7 +104,8 @@ axis([313 353 140 156])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_04.png" %}
-</center><p>We can compare the histogram of the grain boundary directions of the entire map.</p>
+</center>
+<p>We can compare the histogram of the grain boundary directions of the entire map.</p>
 {% highlight matlab %}
 figure
 for i=1:length(d)
@@ -97,7 +115,9 @@ end
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_05.png" %}
-</center><p>Note that we are still stuck with many segments at 0 and 90 degree positions which is due to the boundaries in question being too short for the sample size to deviate from the grid.</p><p><a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> usually keeps the triple junction positions locked. However, sometimes it is necessary (todo) to allow triple junctions to move.</p>
+</center>
+<p>Note that we are still stuck with many segments at 0 and 90 degree positions which is due to the boundaries in question being too short for the sample size to deviate from the grid.</p>
+<p> <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> usually keeps the triple junction positions locked. However, sometimes it is necessary (todo) to allow triple junctions to move.</p>
 {% highlight matlab %}
 plot(grains.boundary,'linewidth',1,'linecolor','Fuchsia')
 for i = 1:length(iter)
@@ -111,7 +131,8 @@ axis([313 353 140 156])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_06.png" %}
-</center><p>Comparing the grain boundary direction histograms shows that we suppressed the gridding effect even a little more.</p>
+</center>
+<p>Comparing the grain boundary direction histograms shows that we suppressed the gridding effect even a little more.</p>
 {% highlight matlab %}
 figure
 for i=1:length(d)
@@ -121,4 +142,9 @@ end
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_07.png" %}
-</center><p>Be careful since this allows small grains to shrink with increasing number of smoothing iterations</p><p>Todo: different smoothing algorithms and 2nd order</p></div></body></html>
+</center>
+<p>Be careful since this allows small grains to shrink with increasing number of smoothing iterations</p>
+<p>Todo: different smoothing algorithms and 2nd order</p>
+</div>
+</body>
+</html>

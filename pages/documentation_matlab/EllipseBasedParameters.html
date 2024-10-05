@@ -6,13 +6,25 @@ permalink: EllipseBasedParameters.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Ellipse Based Shape Parameters</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EllipseBasedParameters.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a>  the following properties based on the fitted ellipses are avaiable.</p><p>
+    -->
+<title>Ellipse Based Shape Parameters</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EllipseBasedParameters.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/EllipseBasedParameters.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a> the following properties based on the fitted ellipses are avaiable.</p>
+<p>
    <table class="usertable">
       <tr>
          <td>
@@ -61,7 +73,8 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
-</p><p>In order to demonstrate these properties we start by reconstructing the grain structure from a sample EBSD data set.</p>
+</p>
+<p>In order to demonstrate these properties we start by reconstructing the grain structure from a sample EBSD data set.</p>
 {% highlight matlab %}
 % load sample EBSD data set
 mtexdata forsterite silent
@@ -79,7 +92,10 @@ plot(grains,'micronbar','off','lineWidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_01.png" %}
-</center><h2 id="2">Fit Ellipses</h2><p>The basic command for fitting ellipses is <a href="grain2d.fitEllipse"><code class="language-plaintext highlighter-rouge">fitEllipse</code></a></p>
+</center>
+<h2 id="2">Fit Ellipses</h2>
+<p>The basic command for fitting ellipses is <a href="grain2d.fitEllipse"><code class="language-plaintext highlighter-rouge">fitEllipse</code></a>
+</p>
 {% highlight matlab %}
 [omega,a,b] = grains.fitEllipse;
 
@@ -87,7 +103,11 @@ plotEllipse(grains.centroid,a,b,omega,'lineColor','w','linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_02.png" %}
-</center><p>The returned variable <code class="language-plaintext highlighter-rouge">omega</code> is the angle describing the rotation of the ellipses and <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are the length of the longest and shortest half axis. The midpoints of the ellipses can be computed by the command <a href="grain2d.centroid.html"><code class="language-plaintext highlighter-rouge">grains.centroid</code></a>.  Note, that the ellipses are scaled such that the area of the ellipse coincides with the actual grain area. Alternatively, one can also scale the ellipse to fit the boundary length by using the option <code class="language-plaintext highlighter-rouge">boundary</code>.</p><h2 id="4">Long and Short Axes</h2><p>The direction of the long and the short axis of the fitted ellipse can be obtained by the comands <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a>. These directions are only well defined if the fitted ellipse is not to close to a perfect circle. A measure for how distinct the ellipse is from a perfect circle is the <a href="grain2d.aspectRatio.html">aspect ratio</a> which is defined as the quotient \(a/b\) between the longest and the shortest axis. For a perfect circle the apect ratio is \(1\) and increases to infinity when the ellipse becomes more and more elongated.</p><p>Lets colorize the grains by their apect ratio and plot on top the long axis directions:</p>
+</center>
+<p>The returned variable <code class="language-plaintext highlighter-rouge">omega</code> is the angle describing the rotation of the ellipses and <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are the length of the longest and shortest half axis. The midpoints of the ellipses can be computed by the command <a href="grain2d.centroid.html"><code class="language-plaintext highlighter-rouge">grains.centroid</code></a>. Note, that the ellipses are scaled such that the area of the ellipse coincides with the actual grain area. Alternatively, one can also scale the ellipse to fit the boundary length by using the option <code class="language-plaintext highlighter-rouge">boundary</code>.</p>
+<h2 id="4">Long and Short Axes</h2>
+<p>The direction of the long and the short axis of the fitted ellipse can be obtained by the comands <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a>. These directions are only well defined if the fitted ellipse is not to close to a perfect circle. A measure for how distinct the ellipse is from a perfect circle is the <a href="grain2d.aspectRatio.html">aspect ratio</a> which is defined as the quotient \(a/b\) between the longest and the shortest axis. For a perfect circle the apect ratio is \(1\) and increases to infinity when the ellipse becomes more and more elongated.</p>
+<p>Lets colorize the grains by their apect ratio and plot on top the long axis directions:</p>
 {% highlight matlab %}
 % visualize the aspect ratio
 plot(grains,grains.aspectRatio,'linewidth',2,'micronbar','off')
@@ -101,7 +121,13 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_03.png" %}
-</center><h2 id="5">Shape perfered orientation</h2><p>If we look at grains, we might wonder if there is a characteristic difference in the grain shape fabric between e.g. Forsterite and Enstatite. In contrast to crystal prefered orientations which which describe on the alignment of the atome lattices the shape prefered orientation (SPO) describes the algnment of the grains by shape in the bulk fabric.</p><p><b>Long Axis Distribution</b></p><p>The most direct way to analyse shape prefered orientations are rose diagrams of the distribution of the grain long axes. For those diagrams it is useful to weight the long axis by the grain area such that larger grains have a bigger impact on the distribution and by the aspect ratio as for grains with a small aspect ratio the long axis is not so well defined.</p>
+</center>
+<h2 id="5">Shape perfered orientation</h2>
+<p>If we look at grains, we might wonder if there is a characteristic difference in the grain shape fabric between e.g. Forsterite and Enstatite. In contrast to crystal prefered orientations which which describe on the alignment of the atome lattices the shape prefered orientation (SPO) describes the algnment of the grains by shape in the bulk fabric.</p>
+<p>
+<b>Long Axis Distribution</b>
+</p>
+<p>The most direct way to analyse shape prefered orientations are rose diagrams of the distribution of the grain long axes. For those diagrams it is useful to weight the long axis by the grain area such that larger grains have a bigger impact on the distribution and by the aspect ratio as for grains with a small aspect ratio the long axis is not so well defined.</p>
 {% highlight matlab %}
 numBin = 50;
 
@@ -117,7 +143,8 @@ title('Enstatite')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_04.png" %}
-</center><p>Instead of the histogram we may also fit a circular density distribution to the to the long axes using the command <a href="calcDensity.thml"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
+</center>
+<p>Instead of the histogram we may also fit a circular density distribution to the to the long axes using the command <a href="calcDensity.thml"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
 {% highlight matlab %}
 tdfForsterite = calcDensity(grains('forsterite').longAxis,...
   'weights',norm(grains('forsterite').longAxis),'halfwidth');
@@ -148,7 +175,11 @@ mtexTitle('long axes')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_06.png" %}
-</center><h2 id="8"><b>Shortest Caliper Distribution</b></h2><p>Alternatively, we may wonder if the common long axis of grains is does suitably represented by the direction normal to the shortest caliper of the grains. This can particularly be the case for aligned rectangular particles. The command <a href="calcTDF.html"><code class="language-plaintext highlighter-rouge">calcTDF</code></a> also takes a list of angles and a list of weights or lengths as input</p>
+</center>
+<h2 id="8">
+<b>Shortest Caliper Distribution</b>
+</h2>
+<p>Alternatively, we may wonder if the common long axis of grains is does suitably represented by the direction normal to the shortest caliper of the grains. This can particularly be the case for aligned rectangular particles. The command <a href="calcTDF.html"><code class="language-plaintext highlighter-rouge">calcTDF</code></a> also takes a list of angles and a list of weights or lengths as input</p>
 {% highlight matlab %}
 cPerpF = caliper(grains('fo'),'shortestPerp');
 cPerpE = caliper(grains('en'),'shortestPerp');
@@ -164,7 +195,8 @@ legend('Forsterite','Enstatite','Location','eastoutside')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_07.png" %}
-</center><p>We can also smooth the functions with a wrapped Gaussian</p>
+</center>
+<p>We can also smooth the functions with a wrapped Gaussian</p>
 {% highlight matlab %}
 pdfF = circdensity(bcF, freqF, 5*degree,'sum');
 pdfE = circdensity(bcE, freqE, 5*degree,'sum');
@@ -178,7 +210,8 @@ legend('Forsterite','Enstatite','Location','eastoutside')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_08.png" %}
-</center><p>Because best fit ellipses are always symmetric and the projection function of an entire grain always only consider the convex hull, grain shape fabrics can also be characterized by the the length weighted rose diagram of the directions of grain boundary segments.</p>
+</center>
+<p>Because best fit ellipses are always symmetric and the projection function of an entire grain always only consider the convex hull, grain shape fabrics can also be characterized by the the length weighted rose diagram of the directions of grain boundary segments.</p>
 {% highlight matlab %}
 [freqF,bcF] = calcTDF(grains('fo').boundary);
 plotTDF(bcF,freqF/sum(freqF));
@@ -198,7 +231,10 @@ mtexTitle('Enstatite grain boundaries')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_09.png" %}
-</center><h2 id="11">Characteristic Shape</h2><p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. The little peaks at 0 and 90 degree are very likely still related to this sampling artifact.</p><p>If we just add up all the individual elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape.</p>
+</center>
+<h2 id="11">Characteristic Shape</h2>
+<p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. The little peaks at 0 and 90 degree are very likely still related to this sampling artifact.</p>
+<p>If we just add up all the individual elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape.</p>
 {% highlight matlab %}
 [csAngleF, csRadiusF] = characteristicShape(bcF,freqF);
 [csAngleE, csRadiusE] = characteristicShape(bcE,freqE);
@@ -212,4 +248,8 @@ legend('Forsterite','Enstatite','Location','eastoutside')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_10.png" %}
-</center><p>We may wonder if these results are significantly different or not TODO: get deviation from an ellipse etc</p></div></body></html>
+</center>
+<p>We may wonder if these results are significantly different or not TODO: get deviation from an ellipse etc</p>
+</div>
+</body>
+</html>

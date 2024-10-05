@@ -6,13 +6,25 @@ permalink: EBSDFilling.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Fill Missing Data in Orientation Maps</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDFilling.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDFilling.m">
-    edit page</a></font><div><!--introduction--><p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indexing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p><!--/introduction--><p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium</p>
+    -->
+<title>Fill Missing Data in Orientation Maps</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDFilling.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDFilling.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>Orientation maps determined by EBSD or any other technique are, as all experimental data, effected by measurement errors. Those measurement errors can be divided into systematic errors and random errors. Systematic errors mostly occur due to a bad calibration of the EBSD system and require additional knowledge to be corrected. Deviations from the true orientation due to noisy Kikuchi pattern or tolerances of the indexing algorithm can be modeled as random errors. In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p>
+<!--/introduction-->
+<p>We shall demonstrate the denoising capabilities of MTEX at the hand of an orientation map of deformed Magnesium</p>
 {% highlight matlab %}
 % import the data
 mtexdata ferrite
@@ -56,7 +68,9 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_01.png" %}
-</center><h2 id="2">A Very Sparse Measured Data Set</h2><p>Although the data set has already some not indexed pixels we artificially make the situation more worse by throwing away 75 percent of all data.</p>
+</center>
+<h2 id="2">A Very Sparse Measured Data Set</h2>
+<p>Although the data set has already some not indexed pixels we artificially make the situation more worse by throwing away 75 percent of all data.</p>
 {% highlight matlab %}
 ebsdSub = ebsd(discretesample(length(ebsd),round(length(ebsd)*25/100)));
 
@@ -65,7 +79,8 @@ plot(ebsdSub,ebsdSub.orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_02.png" %}
-</center><p>Our aim is now to recover the orginal orientation map. In a first step we reconstruct the grain structure from the remaining 25 percent of pixels.</p>
+</center>
+<p>Our aim is now to recover the orginal orientation map. In a first step we reconstruct the grain structure from the remaining 25 percent of pixels.</p>
 {% highlight matlab %}
 % reconstruct the grain structure
 [grainsSub,ebsdSub.grainId] = calcGrains(ebsdSub,'angle',10*degree);
@@ -78,7 +93,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_03.png" %}
-</center><p>The easiest way to reconstruct missing data is to use the command <a href="EBSD.fill.html">fill</a> which interpolates missing data using the method of nearest neighbor. It is very recommended to pass the grain structure <code class="language-plaintext highlighter-rouge">grainsSub</code> as an additional argument to the <code class="language-plaintext highlighter-rouge">fill</code> function. In this case the nearest neighbors are choosen within the grains.</p>
+</center>
+<p>The easiest way to reconstruct missing data is to use the command <a href="EBSD.fill.html">fill</a> which interpolates missing data using the method of nearest neighbor. It is very recommended to pass the grain structure <code class="language-plaintext highlighter-rouge">grainsSub</code> as an additional argument to the <code class="language-plaintext highlighter-rouge">fill</code> function. In this case the nearest neighbors are choosen within the grains.</p>
 {% highlight matlab %}
 ebsdSub_filled = fill(ebsdSub,grainsSub);
 
@@ -90,7 +106,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_04.png" %}
-</center><p>A much more powerful method is to use any denoising method and set the option <code class="language-plaintext highlighter-rouge">fill</code>.</p>
+</center>
+<p>A much more powerful method is to use any denoising method and set the option <code class="language-plaintext highlighter-rouge">fill</code>.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 F.alpha = 0.25;
@@ -107,7 +124,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_05.png" %}
-</center><h2 id="6">An Example from Geoscience</h2><p>Data sets with many missing pixels most often appear when measuring geological samples. The following data set of forsterite contains about 25 percent missing pixels. Lets start by importing the data and reconstructing the grain structure.</p>
+</center>
+<h2 id="6">An Example from Geoscience</h2>
+<p>Data sets with many missing pixels most often appear when measuring geological samples. The following data set of forsterite contains about 25 percent missing pixels. Lets start by importing the data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
 mtexdata forsterite
@@ -151,7 +170,8 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_06.png" %}
-</center><p>Using the option <code class="language-plaintext highlighter-rouge">fill</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries are kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
+</center>
+<p>Using the option <code class="language-plaintext highlighter-rouge">fill</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries are kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 F.alpha = 10;
@@ -171,7 +191,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_07.png" %}
-</center><p>In order to visualize the orientation gradient within the grains, we plot the misorientation to the meanorientation. We observe that the mis2mean varies smoothly also within the regions of not indexed orientations.</p>
+</center>
+<p>In order to visualize the orientation gradient within the grains, we plot the misorientation to the meanorientation. We observe that the mis2mean varies smoothly also within the regions of not indexed orientations.</p>
 {% highlight matlab %}
 % plot mis2mean for all phases
 ipfKey = axisAngleColorKey(ebsdS('Fo'));
@@ -194,7 +215,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_08.png" %}
-</center><p>For comparison</p>
+</center>
+<p>For comparison</p>
 {% highlight matlab %}
 ipfKey.oriRef = grains(ebsd('fo').grainId).meanOrientation;
 ipfKey.maxAngle = 2.5*degree;
@@ -215,4 +237,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_09.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

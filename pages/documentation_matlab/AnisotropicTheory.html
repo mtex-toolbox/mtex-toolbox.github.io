@@ -6,13 +6,24 @@ permalink: AnisotropicTheory.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Anisotropic Elasticity</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_AnisotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>The linear theory of elasticity in anisotropic materials is essentially based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the stiffness tensor for Olivine</p>
+    -->
+<title>Anisotropic Elasticity</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_AnisotropicTheory.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/AnisotropicTheory.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>The linear theory of elasticity in anisotropic materials is essentially based on the fourth order stiffness tensor <code class="language-plaintext highlighter-rouge">C</code>. Such a tensor is represented in MTEX by a variable of type <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">stiffnessTensor</code></a>. Such a variable can either by set up using a symmetric 6x6 matrix or by importing it from an external file. The following examples does so for the stiffness tensor for Olivine</p>
 {% highlight matlab %}
 % file name
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
@@ -37,7 +48,8 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
-<h2 id="2">Hooke's Law</h2><p>The stiffness tensor tensor of a material is defined as the stress the material experiences for a given strain</p>
+<h2 id="2">Hooke's Law</h2>
+<p>The stiffness tensor tensor of a material is defined as the stress the material experiences for a given strain</p>
 {% highlight matlab %}
 eps = strainTensor(diag([1,1.1,0.9]),cs)
 {% endhighlight %}
@@ -91,7 +103,8 @@ U = (C : eps) : eps;
 U =
    1.1783e+03
 {% endhighlight %}
-<h2 id="6">Young's Modulus</h2><p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction <code class="language-plaintext highlighter-rouge">d</code> by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
+<h2 id="6">Young's Modulus</h2>
+<p>Young's modulus is also known as the tensile modulus and measures the stiffness of elastic materials. It is computed for a specific direction <code class="language-plaintext highlighter-rouge">d</code> by the command <a href="stiffnessTensor.YoungsModulus.html">YoungsModulus</a>.</p>
 {% highlight matlab %}
 d = vector3d.X;
 E = C.YoungsModulus(d)
@@ -125,7 +138,9 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_01.png" %}
-</center><h2 id="8">Linear Compressibility</h2><p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similar to the Young's modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <code class="language-plaintext highlighter-rouge">d</code> or as a spherical function</p>
+</center>
+<h2 id="8">Linear Compressibility</h2>
+<p>The linear compressibility is the deformation of an arbitrarily shaped specimen caused by an increase in hydrostatic pressure and can be described by a second rank tensor. Similar to the Young's modulus it can be computed by the command <a href="stiffnessTensor.linearCompressibility.html">linearCompressibility</a> for specific directions <code class="language-plaintext highlighter-rouge">d</code> or as a spherical function</p>
 {% highlight matlab %}
 % compute as a spherical function
 beta = linearCompressibility(C)
@@ -148,7 +163,9 @@ ans =
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_02.png" %}
-</center><h2 id="9">Poisson Ratio</h2><p>The rate of compression / decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ratio.</p>
+</center>
+<h2 id="9">Poisson Ratio</h2>
+<p>The rate of compression / decompression in a direction <code class="language-plaintext highlighter-rouge">n</code> normal to the pulling direction <code class="language-plaintext highlighter-rouge">p</code> is called Poisson ratio.</p>
 {% highlight matlab %}
 % the pulling direction
 p = vector3d.Z;
@@ -183,7 +200,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_03.png" %}
-</center><h2 id="12">Shear Modulus</h2><p>The shear modulus is TODO</p>
+</center>
+<h2 id="12">Shear Modulus</h2>
+<p>The shear modulus is TODO</p>
 {% highlight matlab %}
 % shear plane
 n = Miller(0,0,1,cs);
@@ -230,4 +249,9 @@ n = Miller (Olivin)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AnisotropicTheory_04.png" %}
-</center><h2 id="14">Wave Velocities</h2><p>Since elastic compression and decompression is mechanics of waves traveling through a medium anisotropic compressibility causes also anisotropic waves speeds. The analysis of this anisotropy is explained in the section <a href="WaveVelocities.html">wave velocities</a>.</p></div></body></html>
+</center>
+<h2 id="14">Wave Velocities</h2>
+<p>Since elastic compression and decompression is mechanics of waves traveling through a medium anisotropic compressibility causes also anisotropic waves speeds. The analysis of this anisotropy is explained in the section <a href="WaveVelocities.html">wave velocities</a>.</p>
+</div>
+</body>
+</html>

@@ -6,13 +6,24 @@ permalink: EBSDIndex.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Index of EBSD data</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDIndex.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDIndex.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In previous chapters we have discussed how to select EBSD data by properties. In this chapter we are intested in the order the EBSD are stored within MTEX. Lets start by importing some sample data</p>
+    -->
+<title>The Index of EBSD data</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDIndex.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDIndex.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In previous chapters we have discussed how to select EBSD data by properties. In this chapter we are intested in the order the EBSD are stored within MTEX. Lets start by importing some sample data</p>
 {% highlight matlab %}
 mtexdata twins
 {% endhighlight %}
@@ -38,13 +49,15 @@ plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_01.png" %}
-</center><p>In the above plot each square corresponds to one entry in the variable <code class="language-plaintext highlighter-rouge">ebsd</code>. Lets visualize the order</p>
+</center>
+<p>In the above plot each square corresponds to one entry in the variable <code class="language-plaintext highlighter-rouge">ebsd</code>. Lets visualize the order</p>
 {% highlight matlab %}
 text(ebsd,1:length(ebsd))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_02.png" %}
-</center><p>We may easily select specific measurement pixels by specifying their indeces</p>
+</center>
+<p>We may easily select specific measurement pixels by specifying their indeces</p>
 {% highlight matlab %}
 hold on
 plot(ebsd(16:18),'edgeColor','red','facecolor','none','linewidth',4)
@@ -53,22 +66,24 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You asked me to make a phase plot of single phase map. This might not
-what you are looking for. In order to colorize the map according to the
-orientations you should do
+Warning: You asked me to make a phase plot of single phase map. This
+might not what you are looking for. In order to colorize the map
+according to the orientations you should do
 
-plot(ebsd,ebsd.orientations)
+<strong>plot(ebsd,ebsd.orientations)</strong>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_03.png" %}
-</center><p>Whether lines or columns run first is not related to MTEX but inherits from the ordering of the imported EBSD data. Since, we have restricted our large EBSD map to the small subset the indece of restricted data does not coincide with the indece of the imported data anymore. However, the original indeces are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize them</p>
+</center>
+<p>Whether lines or columns run first is not related to MTEX but inherits from the ordering of the imported EBSD data. Since, we have restricted our large EBSD map to the small subset the indece of restricted data does not coincide with the indece of the imported data anymore. However, the original indeces are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize them</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k')
 text(ebsd,ebsd.id)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_04.png" %}
-</center><p>In order to select EBSD data according to their original id use the option <code class="language-plaintext highlighter-rouge">'id'</code>, i.e.,</p>
+</center>
+<p>In order to select EBSD data according to their original id use the option <code class="language-plaintext highlighter-rouge">'id'</code>, i.e.,</p>
 {% highlight matlab %}
 hold on
 plot(ebsd('id',316:318),'edgeColor','red','facecolor','none','linewidth',4)
@@ -77,15 +92,17 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You asked me to make a phase plot of single phase map. This might not
-what you are looking for. In order to colorize the map according to the
-orientations you should do
+Warning: You asked me to make a phase plot of single phase map. This
+might not what you are looking for. In order to colorize the map
+according to the orientations you should do
 
-plot(ebsd,ebsd.orientations)
+<strong>plot(ebsd,ebsd.orientations)</strong>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_05.png" %}
-</center><h2 id="7">Square Grids</h2><p>In the cases of gridded data it is often useful to convert them into a matrix form.</p>
+</center>
+<h2 id="7">Square Grids</h2>
+<p>In the cases of gridded data it is often useful to convert them into a matrix form.</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify;
 
@@ -97,7 +114,8 @@ text(ebsd,str)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_06.png" %}
-</center><p>This allows to select EBSD data simply by their coordinates within the grid, e.g., by</p>
+</center>
+<p>This allows to select EBSD data simply by their coordinates within the grid, e.g., by</p>
 {% highlight matlab %}
 hold on
 plot(ebsd(2,2:4),'edgeColor','red','facecolor','none','linewidth',4)
@@ -106,22 +124,25 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You asked me to make a phase plot of single phase map. This might not
-what you are looking for. In order to colorize the map according to the
-orientations you should do
+Warning: You asked me to make a phase plot of single phase map. This
+might not what you are looking for. In order to colorize the map
+according to the orientations you should do
 
-plot(ebsd,ebsd.orientations)
+<strong>plot(ebsd,ebsd.orientations)</strong>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_07.png" %}
-</center><p>Note that the <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> command changes the order of measurements. They are now sort such that rows runs first and columns second, as this is the default convention how Matlab indexes matrices.</p>
+</center>
+<p>Note that the <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> command changes the order of measurements. They are now sort such that rows runs first and columns second, as this is the default convention how Matlab indexes matrices.</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'micronbar','off')
 text(ebsd,1:length(ebsd))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_08.png" %}
-</center><h2 id="10">Hexagonal Grid</h2><p>The command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> may also be applied to EBSD data measured on a hexagonal grid.</p>
+</center>
+<h2 id="10">Hexagonal Grid</h2>
+<p>The command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> may also be applied to EBSD data measured on a hexagonal grid.</p>
 {% highlight matlab %}
 mtexdata titanium silent
 
@@ -155,7 +176,9 @@ text(ebsd,str)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_09.png" %}
-</center><h2 id="13">Cube Coordinates</h2><p>In hexognal grids it is sometimes advantageous to use three digit cube coordinates to index the cell. This can be done using the commands <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a>. Much more details on indexing hex grids can be found at <a href="https://www.redblobgames.com/grids/hexagons/">here</a>.</p>
+</center>
+<h2 id="13">Cube Coordinates</h2>
+<p>In hexognal grids it is sometimes advantageous to use three digit cube coordinates to index the cell. This can be done using the commands <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a>. Much more details on indexing hex grids can be found at <a href="https://www.redblobgames.com/grids/hexagons/">here</a>.</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off')
 axis off
@@ -167,4 +190,7 @@ text(ebsd,str)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_10.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

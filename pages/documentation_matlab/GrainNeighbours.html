@@ -6,13 +6,24 @@ permalink: GrainNeighbours.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Neighbors</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_GrainNeighbours.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainNeighbours.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to analyze the neighboring relationships between grains. While most of this can be done also on the level of grain boundaries an local misorientations it is for large data sets sometimes useful to consider misorientations between the mean-orientations of grains. We shall use the following Magnesium data set of our explanations.</p>
+    -->
+<title>Grain Neighbors</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_GrainNeighbours.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainNeighbours.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this section we discuss how to analyze the neighboring relationships between grains. While most of this can be done also on the level of grain boundaries an local misorientations it is for large data sets sometimes useful to consider misorientations between the mean-orientations of grains. We shall use the following Magnesium data set of our explanations.</p>
 {% highlight matlab %}
 % load sample EBSD data set
 mtexdata twins silent
@@ -28,7 +39,8 @@ plot(grains,grains.meanOrientation)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_01.png" %}
-</center><p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighboring grain ids. Each row of the list contains the ids of two neighboring grains. In the following lines choose the row number 170 and outline the corresponding grains</p>
+</center>
+<p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighboring grain ids. Each row of the list contains the ids of two neighboring grains. In the following lines choose the row number 170 and outline the corresponding grains</p>
 {% highlight matlab %}
 pairs = grains.neighbors;
 
@@ -38,7 +50,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_02.png" %}
-</center><p>In order to compute the misorentation between these two grains we can do</p>
+</center>
+<p>In order to compute the misorentation between these two grains we can do</p>
 {% highlight matlab %}
 mori = inv(grains(pairs(170,1)).meanOrientation) * grains(pairs(170,2)).meanOrientation
 {% endhighlight %}
@@ -50,7 +63,7 @@ mori = misorientation (Magnesium → Magnesium)
      phi1     Phi    phi2
   107.132 58.9845 309.493
 {% endhighlight %}
-<p>This can be generalized to compute the misorientations between neighbouring grains using</p>
+<p>This can be generalized to compute the misorientations between neighboring grains using</p>
 {% highlight matlab %}
 mori = inv(grains(pairs(:,1)).meanOrientation) .* grains(pairs(:,2)).meanOrientation
 
@@ -65,7 +78,8 @@ mori = misorientation (Magnesium → Magnesium)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_03.png" %}
-</center><p>We observe a high peak at about 85 degree. This angle corresponds to twinning. In Magnesium the twinning orientation relationship is given by</p>
+</center>
+<p>We observe a high peak at about 85 degree. This angle corresponds to twinning. In Magnesium the twinning orientation relationship is given by</p>
 {% highlight matlab %}
 twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
   Miller(2,-1,-1,0,CS),Miller(2,-1,-1,0,CS))
@@ -89,7 +103,8 @@ isTwinning = angle(mori,twinning) < 3*degree;
 ans =
    37.0518
 {% endhighlight %}
-<p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> contains only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbor relation ships within one phase.</p><p>In some case, e.g. if we ask for all neighboring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
+<p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> contains only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbor relation ships within one phase.</p>
+<p>In some case, e.g. if we ask for all neighboring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
 {% highlight matlab %}
 % get all pairs containing grain 83
 pairs = grains(83).neighbors('full');
@@ -106,4 +121,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainNeighbours_04.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

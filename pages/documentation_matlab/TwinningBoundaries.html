@@ -6,13 +6,24 @@ permalink: TwinningBoundaries.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Twinning Analysis</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TwinningBoundaries.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
+    -->
+<title>Twinning Analysis</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_TwinningBoundaries.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TwinningBoundaries.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 % load some example data
 mtexdata twins
@@ -48,7 +59,8 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_01.png" %}
-</center><p>Next we extract the grainboundaries and save them to a separate variable</p>
+</center>
+<p>Next we extract the grainboundaries and save them to a separate variable</p>
 {% highlight matlab %}
 gB = grains.boundary
 {% endhighlight %}
@@ -71,14 +83,24 @@ gB_MgMg = grainBoundary
  Segments  length  mineral 1  mineral 2
      3164  724 µm  Magnesium  Magnesium
 {% endhighlight %}
-<h2 id="4">Properties of grain boundaries</h2><p>A variable of type grain boundary contains the following properties</p><div><ul><li>misorientation</li><li>direction</li><li>segLength</li></ul></div><p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p>
+<h2 id="4">Properties of grain boundaries</h2>
+<p>A variable of type grain boundary contains the following properties</p>
+<div>
+<ul>
+<li>misorientation</li>
+<li>direction</li>
+<li>segLength</li>
+</ul>
+</div>
+<p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p>
 {% highlight matlab %}
 plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,'linewidth',2)
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_02.png" %}
-</center><p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogramm.</p>
+</center>
+<p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogramm.</p>
 {% highlight matlab %}
 close all
 histogram(gB_MgMg.misorientation.angle./degree,40)
@@ -86,7 +108,8 @@ xlabel('misorientation angle (degree)')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_03.png" %}
-</center><p>Lets analyze the misorientations corresponding to the peak around 86 degree in more detail. Therefore, we consider only those misorientations with misorientation angle between 85 and 87 degree</p>
+</center>
+<p>Lets analyze the misorientations corresponding to the peak around 86 degree in more detail. Therefore, we consider only those misorientations with misorientation angle between 85 and 87 degree</p>
 {% highlight matlab %}
 ind = gB_MgMg.misorientation.angle>85*degree & gB_MgMg.misorientation.angle<87*degree;
 mori = gB_MgMg.misorientation(ind);
@@ -97,7 +120,8 @@ scatter(mori)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_04.png" %}
-</center><p>We may determin the center of the cluster and check whether it is close to some special orientation relation ship</p>
+</center>
+<p>We may determin the center of the cluster and check whether it is close to some special orientation relation ship</p>
 {% highlight matlab %}
 % determine the mean of the cluster
 mori_mean = mean(mori,'robust')
@@ -168,4 +192,8 @@ twinBoundary = grainBoundary
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_05.png" %}
-</center><p>A common next step is to reconstruct the grain structure parent to twinning by merging the twinned grains. This is explained in detail in the section <a href="GrainMerge.html">Merging Grains</a>.</p></div></body></html>
+</center>
+<p>A common next step is to reconstruct the grain structure parent to twinning by merging the twinned grains. This is explained in detail in the section <a href="GrainMerge.html">Merging Grains</a>.</p>
+</div>
+</body>
+</html>

@@ -6,13 +6,24 @@ permalink: PoleFigureCorrection.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Data Correction</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_PoleFigureCorrection.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureCorrection.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to manipulate pole figure data, e.g., to correct for measurement errors. To illustrate lets start by importing some sample XRD data.</p>
+    -->
+<title>Data Correction</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_PoleFigureCorrection.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureCorrection.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this section we discuss how to manipulate pole figure data, e.g., to correct for measurement errors. To illustrate lets start by importing some sample XRD data.</p>
 {% highlight matlab %}
 mtexdata geesthacht
 
@@ -33,7 +44,9 @@ pf = PoleFigure (xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_01.png" %}
-</center><h2 id="2">Splitting and Reordering of Pole Figures</h2><p>As we can see the first and the third pole figure complete pole figures and the second and the fourth pole figures contain some values for background correction. Let us, therefore, split the pole figures into these two groups.</p>
+</center>
+<h2 id="2">Splitting and Reordering of Pole Figures</h2>
+<p>As we can see the first and the third pole figure complete pole figures and the second and the fourth pole figures contain some values for background correction. Let us, therefore, split the pole figures into these two groups.</p>
 {% highlight matlab %}
 pf_complete = pf({1,3})
 pf_background= pf({2,4})
@@ -63,21 +76,26 @@ ans = PoleFigure (xyz)
  
   h = (104)(110), r = 679 x 1 points
 {% endhighlight %}
-<h2 id="4">Correct pole figure data</h2><p>In order to correct pole figures for background radiation and defocusing one can use the command <a href="PoleFigure.correct.html">correct</a>. In our case the syntax is</p>
+<h2 id="4">Correct pole figure data</h2>
+<p>In order to correct pole figures for background radiation and defocusing one can use the command <a href="PoleFigure.correct.html">correct</a>. In our case the syntax is</p>
 {% highlight matlab %}
 pf = correct(pf_complete,'background',pf_background);
 plot(pf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_02.png" %}
-</center><h2 id="5">Normalize pole figures</h2><p>Sometimes people want to have normalized pole figures. In the case of complete pole figures, this can be simply archived using the command <a href="PoleFigure.normalize.html">normalize</a></p>
+</center>
+<h2 id="5">Normalize pole figures</h2>
+<p>Sometimes people want to have normalized pole figures. In the case of complete pole figures, this can be simply archived using the command <a href="PoleFigure.normalize.html">normalize</a>
+</p>
 {% highlight matlab %}
 pf_normalized = normalize(pf);
 plot(pf_normalized)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_03.png" %}
-</center><p>However, in the case of incomplete pole figures, it is well known, that the normalization can only by computed from an ODF. Therefore, one has to proceed as follows:</p>
+</center>
+<p>However, in the case of incomplete pole figures, it is well known, that the normalization can only by computed from an ODF. Therefore, one has to proceed as follows:</p>
 {% highlight matlab %}
 % compute an ODF from the pole figure data
 odf = calcODF(pf);
@@ -89,7 +107,9 @@ plot(pf_normalized)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_04.png" %}
-</center><h2 id="7">Modify certain pole figure values</h2><p>As pole figures are usually experimental data they may contain outliers. In order to remove outliers from pole figure data one can use the function <a href="PoleFigure.isOutlier.html">isOutlier</a>. Here a simple example:</p>
+</center>
+<h2 id="7">Modify certain pole figure values</h2>
+<p>As pole figures are usually experimental data they may contain outliers. In order to remove outliers from pole figure data one can use the function <a href="PoleFigure.isOutlier.html">isOutlier</a>. Here a simple example:</p>
 {% highlight matlab %}
 % Let us add 100 random outliers to the pole figure data
 % First we select 100 random positions within the pole figures
@@ -105,7 +125,8 @@ plot(pf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_05.png" %}
-</center><p>check for outliers</p>
+</center>
+<p>check for outliers</p>
 {% highlight matlab %}
 condition = pf.isOutlier;
 
@@ -117,14 +138,17 @@ plot(pf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_06.png" %}
-</center><p>Sometimes applying the above correction is not suffcient. Then it can help to repeat the outlier detection ones again</p>
+</center>
+<p>Sometimes applying the above correction is not suffcient. Then it can help to repeat the outlier detection ones again</p>
 {% highlight matlab %}
 pf(pf.isOutlier) = [];
 plot(pf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_07.png" %}
-</center><h2 id="10">Remove certain measurements from the data</h2><p>In the same way, as we removed the outlier one can manipulate and delete pole figure data by any criteria. Lets, e.g. cap all values that are larger than 500.</p>
+</center>
+<h2 id="10">Remove certain measurements from the data</h2>
+<p>In the same way, as we removed the outlier one can manipulate and delete pole figure data by any criteria. Lets, e.g. cap all values that are larger than 500.</p>
 {% highlight matlab %}
 % find those values
 condition = pf.intensities > 500;
@@ -136,7 +160,9 @@ plot(pf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_08.png" %}
-</center><h2 id="11">Rotate pole figures</h2><p>Sometimes it is necessary to rotate the pole figures. In order to do this with MTEX one has first to define a rotation, e.e. by</p>
+</center>
+<h2 id="11">Rotate pole figures</h2>
+<p>Sometimes it is necessary to rotate the pole figures. In order to do this with MTEX one has first to define a rotation, e.e. by</p>
 {% highlight matlab %}
 % This defines a rotation around the x-axis about 100 degree
 rot = rotation.byAxisAngle(xvector,100*degree);
@@ -148,4 +174,7 @@ plot(pf_rotated,'antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureCorrection_09.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

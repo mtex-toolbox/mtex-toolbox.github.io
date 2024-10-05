@@ -6,13 +6,24 @@ permalink: RotationDefinition.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Defining Rotations</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_RotationDefinition.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationDefinition.m">
-    edit page</a></font><div><!--introduction--><p>MTEX offers the following functions to define rotations</p><p>
+    -->
+<title>Defining Rotations</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_RotationDefinition.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationDefinition.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>MTEX offers the following functions to define rotations</p>
+<p>
    <table class="usertable">
       <tr>
          <td>
@@ -130,7 +141,21 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
-</p><p>At the end all functions return a variable of type <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> which represents a list of rotations that are internally stored as <a href="quaternion.quaternion.html">quaternions</a>. An overview of different rotation representations by three dimensional vectors and their properties can be found in the section <a href="RotationRepresentations.html">Representations</a>.</p><!--/introduction--><h2 id="1">Euler Angles</h2><p>One of the most common ways to describe a rotation is as three subsequent rotations about fixed axes, e.g., first around the z axis, second around the x axis and third again around the z. The corresponding rotational angles are commonly called Euler angles. Beside the most common <code class="language-plaintext highlighter-rouge">ZXZ</code> convention other choices of the axes are sometimes used. Sorted by popularity in the texture analysis community these are</p><div><ul><li>Bunge (phi1,Phi,phi2)       - ZXZ</li><li>Matthies (alpha,beta,gamma) - ZYZ</li><li>Roe (Psi,Theta,Phi)</li><li>Kocks (Psi,Theta,phi)</li><li>Canova (omega,Theta,phi)</li></ul></div><p>The default Euler angle convention in MTEX are the Bunge Euler angles, with axes Z, X, and Z. The following command defines a rotation by its three Bunge Euler angles</p>
+</p>
+<p>At the end all functions return a variable of type <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> which represents a list of rotations that are internally stored as <a href="quaternion.quaternion.html">quaternions</a>. An overview of different rotation representations by three dimensional vectors and their properties can be found in the section <a href="RotationRepresentations.html">Representations</a>.</p>
+<!--/introduction-->
+<h2 id="1">Euler Angles</h2>
+<p>One of the most common ways to describe a rotation is as three subsequent rotations about fixed axes, e.g., first around the z axis, second around the x axis and third again around the z. The corresponding rotational angles are commonly called Euler angles. Beside the most common <code class="language-plaintext highlighter-rouge">ZXZ</code> convention other choices of the axes are sometimes used. Sorted by popularity in the texture analysis community these are</p>
+<div>
+<ul>
+<li>Bunge (phi1,Phi,phi2) - ZXZ</li>
+<li>Matthies (alpha,beta,gamma) - ZYZ</li>
+<li>Roe (Psi,Theta,Phi)</li>
+<li>Kocks (Psi,Theta,phi)</li>
+<li>Canova (omega,Theta,phi)</li>
+</ul>
+</div>
+<p>The default Euler angle convention in MTEX are the Bunge Euler angles, with axes Z, X, and Z. The following command defines a rotation by its three Bunge Euler angles</p>
 {% highlight matlab %}
 rot = rotation.byEuler(30*degree,50*degree,10*degree)
 {% endhighlight %}
@@ -142,7 +167,8 @@ rot = rotation
   phi1  Phi phi2
     30   50   10
 {% endhighlight %}
-<p>Note that the angles needs to be multiplied with <b>degree</b> since all commands in MTEX expect the input in radiant. Furthermore, the order of the first and the third Euler angle are interchanged in comparison to standard notation for reasons explained <a href="MTEXvsBungeConvention.html">here</a>.</p><p>In order to define a rotation by a Euler angle convention different to the default Euler angle convention you to specify the convention as an additional parameter, e.g.</p>
+<p>Note that the angles needs to be multiplied with <b>degree</b> since all commands in MTEX expect the input in radiant. Furthermore, the order of the first and the third Euler angle are interchanged in comparison to standard notation for reasons explained <a href="MTEXvsBungeConvention.html">here</a>.</p>
+<p>In order to define a rotation by a Euler angle convention different to the default Euler angle convention you to specify the convention as an additional parameter, e.g.</p>
 {% highlight matlab %}
 rot = rotation.byEuler(30*degree,50*degree,10*degree,'Roe')
 {% endhighlight %}
@@ -180,7 +206,8 @@ rot = rotation
   phi1  Phi phi2
    120   50  280
 {% endhighlight %}
-<h2 id="5">Axis angle parametrization and Rodrigues Frank vector</h2><p>A very simple possibility to specify a rotation is to specify the rotation axis and the rotation angle.</p>
+<h2 id="5">Axis angle parametrization and Rodrigues Frank vector</h2>
+<p>A very simple possibility to specify a rotation is to specify the rotation axis and the rotation angle.</p>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(xvector,30*degree)
 {% endhighlight %}
@@ -236,7 +263,8 @@ ans = rotation
   phi1  Phi phi2
      0   30    0
 {% endhighlight %}
-<h2 id="10">Rotation Matrix</h2><p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
+<h2 id="10">Rotation Matrix</h2>
+<p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
 {% highlight matlab %}
 M = rot.matrix
 {% endhighlight %}
@@ -259,7 +287,8 @@ rot = rotation
   phi1  Phi phi2
      0   30    0
 {% endhighlight %}
-<h2 id="12">Four vectors defining a rotation</h2><p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors <code class="language-plaintext highlighter-rouge">u1</code>, <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">u2</code>, <code class="language-plaintext highlighter-rouge">v2</code> there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
+<h2 id="12">Four vectors defining a rotation</h2>
+<p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors <code class="language-plaintext highlighter-rouge">u1</code>, <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">u2</code>, <code class="language-plaintext highlighter-rouge">v2</code> there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
 {% highlight matlab %}
 u1 = vector3d.X;
 v1 = vector3d.Y;
@@ -289,7 +318,8 @@ rot = rotation
   phi1  Phi phi2
    180   90  180
 {% endhighlight %}
-<p>More generally, one can fit a rotation <code class="language-plaintext highlighter-rouge">rot</code> to a list of left and right vectors <code class="language-plaintext highlighter-rouge">l</code> and <code class="language-plaintext highlighter-rouge">r</code> such that <code class="language-plaintext highlighter-rouge">rot * l</code> is the best approximation of <code class="language-plaintext highlighter-rouge">r</code>. This is done by the function <a href="rotation.fit.html"><code class="language-plaintext highlighter-rouge">rotation.fit</code></a></p>
+<p>More generally, one can fit a rotation <code class="language-plaintext highlighter-rouge">rot</code> to a list of left and right vectors <code class="language-plaintext highlighter-rouge">l</code> and <code class="language-plaintext highlighter-rouge">r</code> such that <code class="language-plaintext highlighter-rouge">rot * l</code> is the best approximation of <code class="language-plaintext highlighter-rouge">r</code>. This is done by the function <a href="rotation.fit.html"><code class="language-plaintext highlighter-rouge">rotation.fit</code></a>
+</p>
 {% highlight matlab %}
 % take five random left vectors
 left = vector3d.rand(5);
@@ -308,7 +338,8 @@ ans = rotation
     phi1     Phi    phi2
   179.69  92.134 178.059
 {% endhighlight %}
-<h2 id="15">Random Rotations</h2><p>MTEX offers several ways for generating random rotations. The most easiest way is to use the command <a href="rotation.rand.html"><code class="language-plaintext highlighter-rouge">rotation.rand</code></a> which generates an arbitrary number of random rotations</p>
+<h2 id="15">Random Rotations</h2>
+<p>MTEX offers several ways for generating random rotations. The most easiest way is to use the command <a href="rotation.rand.html"><code class="language-plaintext highlighter-rouge">rotation.rand</code></a> which generates an arbitrary number of random rotations</p>
 {% highlight matlab %}
 rotation.rand(100)
 {% endhighlight %}
@@ -317,7 +348,9 @@ rotation.rand(100)
 ans = rotation
   size: 100 x 1
 {% endhighlight %}
-<p>If you are interested in random rotations that follow a certain distribution have a look at <a href="RandomSampling.html">random sampling</a>.</p><h2 id="17">Quaternions</h2><p>A last possibility to define a rotation is by <a href="quaternion.quaternion.html">quaternion coordinates</a> a, b, c, d.</p>
+<p>If you are interested in random rotations that follow a certain distribution have a look at <a href="RandomSampling.html">random sampling</a>.</p>
+<h2 id="17">Quaternions</h2>
+<p>A last possibility to define a rotation is by <a href="quaternion.quaternion.html">quaternion coordinates</a> a, b, c, d.</p>
 {% highlight matlab %}
 q = quaternion(1,0,0,0)
 
@@ -335,4 +368,6 @@ rot = rotation
   phi1  Phi phi2
      0    0    0
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

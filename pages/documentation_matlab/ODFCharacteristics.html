@@ -6,13 +6,25 @@ permalink: ODFCharacteristics.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Characteristics</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ODFCharacteristics.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFCharacteristics.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Let us first begin with some constructed ODFs to be analyzed below</p><p>A bimodal ODF:</p>
+    -->
+<title>ODF Characteristics</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ODFCharacteristics.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFCharacteristics.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Let us first begin with some constructed ODFs to be analyzed below</p>
+<p>A bimodal ODF:</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mmm');
 odf1 = unimodalODF(orientation.byEuler(0,0,0,cs)) + ...
@@ -75,7 +87,9 @@ odf3 = SO3FunRBF (Quartz → xyz)
   center: 19848 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
-<h2 id="5">Modal Orientations</h2><p>The modal orientation of an ODF is the crystallographic preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code> of the texture. It is characterized as the maximum of the ODF. In MTEX it is returned as the second output argument of the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a></p>
+<h2 id="5">Modal Orientations</h2>
+<p>The modal orientation of an ODF is the crystallographic preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code> of the texture. It is characterized as the maximum of the ODF. In MTEX it is returned as the second output argument of the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>
+</p>
 {% highlight matlab %}
 [~,ori_pref] = max(odf3)
 {% endhighlight %}
@@ -94,7 +108,11 @@ annotate(ori_pref,'marker','s','MarkerFaceColor','black')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFCharacteristics_01.png" %}
-</center><h2 id="7">Texture Characteristics</h2><p>Texture characteristics are used for a rough classification of ODFs into sharp and weak ones. The two most common texture characteristics are the entropy and the texture index. The texture index of an ODF \(f\) is defined as:</p><p>\[ t = \int_{SO(3)} f({R})^2 dR\]</p><p>We may either compute this integral using the command <a href="SO3Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> directly by</p>
+</center>
+<h2 id="7">Texture Characteristics</h2>
+<p>Texture characteristics are used for a rough classification of ODFs into sharp and weak ones. The two most common texture characteristics are the entropy and the texture index. The texture index of an ODF \(f\) is defined as:</p>
+<p>\[ t = \int_{SO(3)} f({R})^2 dR\]</p>
+<p>We may either compute this integral using the command <a href="SO3Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> directly by</p>
 {% highlight matlab %}
 t = mean(odf1.*odf1)
 {% endhighlight %}
@@ -103,7 +121,8 @@ t = mean(odf1.*odf1)
 t =
   288.5696
 {% endhighlight %}
-<p>or, more efficiently, by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a></p>
+<p>or, more efficiently, by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>
+</p>
 {% highlight matlab %}
 t = norm(odf1)^2
 {% endhighlight %}
@@ -112,7 +131,8 @@ t = norm(odf1)^2
 t =
   288.6802
 {% endhighlight %}
-<p>The entropy of an ODF \(f\) is defined as:</p><p>\[ H = - \int_{SO(3)} f({R}) \ln f({R}) dR\]</p>
+<p>The entropy of an ODF \(f\) is defined as:</p>
+<p>\[ H = - \int_{SO(3)} f({R}) \ln f({R}) dR\]</p>
 {% highlight matlab %}
 H = entropy(odf2)
 {% endhighlight %}
@@ -121,7 +141,10 @@ H = entropy(odf2)
 H =
    -2.8402
 {% endhighlight %}
-<h2 id="10">Volume Portions</h2><p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="SO3Fun.fibreVolume.html"><code class="language-plaintext highlighter-rouge">fibreVolume</code></a></p><p>The relative volume in percent of crystals with misorientation maximum 30 degree from the preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code>:</p>
+<h2 id="10">Volume Portions</h2>
+<p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="SO3Fun.fibreVolume.html"><code class="language-plaintext highlighter-rouge">fibreVolume</code></a>
+</p>
+<p>The relative volume in percent of crystals with misorientation maximum 30 degree from the preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code>:</p>
 {% highlight matlab %}
 V1 = volume(odf3, ori_pref, 30*degree) * 100
 {% endhighlight %}
@@ -139,4 +162,6 @@ V2 = volume(odf2,f001_x,20*degree) * 100
 V2 =
    95.1633
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

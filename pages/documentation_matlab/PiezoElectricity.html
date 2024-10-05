@@ -6,13 +6,24 @@ permalink: PiezoElectricity.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The Piezoelectricity Tensor</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_PiezoElectricity.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/PiezoElectricity.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this chapter we discuss how to compute and visualize piezoellectirc properties. At first, let us import some piezoelectric contents for a quartz specimen.</p>
+    -->
+<title>The Piezoelectricity Tensor</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_PiezoElectricity.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/PiezoElectricity.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this chapter we discuss how to compute and visualize piezoellectirc properties. At first, let us import some piezoelectric contents for a quartz specimen.</p>
 {% highlight matlab %}
 CS = crystalSymmetry('32', [4.916 4.916 5.4054], 'X||a*', 'Z||c', 'mineral', 'Quartz');
 
@@ -33,7 +44,8 @@ P = tensor (Quartz)
    2.3  -2.3     0     0  0.67     0
      0     0     0     0     0     0
 {% endhighlight %}
-<h2 id="2">Plotting the magnitude surface</h2><p>The default plot of the magnitude, which indicates, in which direction we have the most polarization. By default, we restrict ourselves to the unique region implied by crystal symmetry</p>
+<h2 id="2">Plotting the magnitude surface</h2>
+<p>The default plot of the magnitude, which indicates, in which direction we have the most polarization. By default, we restrict ourselves to the unique region implied by crystal symmetry</p>
 {% highlight matlab %}
 % set some colormap well suited for tensor visualisation
 setMTEXpref('defaultColorMap',blue2redColorMap);
@@ -43,7 +55,8 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PiezoElectricity_01.png" %}
-</center><p>but also, we can plot the whole crystal behavior</p>
+</center>
+<p>but also, we can plot the whole crystal behavior</p>
 {% highlight matlab %}
 close all
 plot(P,'complete','smooth','upper')
@@ -51,14 +64,17 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PiezoElectricity_02.png" %}
-</center><p>Most often, the polarization is illustrated as surface magnitude</p>
+</center>
+<p>Most often, the polarization is illustrated as surface magnitude</p>
 {% highlight matlab %}
 close all
 surf(P.directionalMagnitude)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PiezoElectricity_03.png" %}
-</center><p>Note, that for directions of negative polarization the surface is mapped onto the axis of positive, which then let the surface appear as a double coverage</p><p>Quite a famous example in various standard literature is a section through the surface because it can easily be described as an analytical solution. We just specify the plane normal vector</p>
+</center>
+<p>Note, that for directions of negative polarization the surface is mapped onto the axis of positive, which then let the surface appear as a double coverage</p>
+<p>Quite a famous example in various standard literature is a section through the surface because it can easily be described as an analytical solution. We just specify the plane normal vector</p>
 {% highlight matlab %}
 plotSection(P.directionalMagnitude,vector3d.Z)
 xlabel('x')
@@ -67,7 +83,8 @@ drawNow(gcm)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PiezoElectricity_04.png" %}
-</center><p>so we are plotting the polarization in the xy-plane, or the yz-plane with</p>
+</center>
+<p>so we are plotting the polarization in the xy-plane, or the yz-plane with</p>
 {% highlight matlab %}
 plotSection(P.directionalMagnitude,vector3d.X)
 ylabel('y')
@@ -76,7 +93,9 @@ drawNow(gcm)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PiezoElectricity_05.png" %}
-</center><h2 id="8">Mean Tensor Calculation</h2><p>Let us import some data, which was originally published by Mainprice, D., Lloyd, G.E. and Casey , M. (1993) Individual orientation measurements in quartz polycrystals: advantages and limitations for texture and petrophysical property determinations. J. of Structural Geology, 15, pp.1169-1187</p>
+</center>
+<h2 id="8">Mean Tensor Calculation</h2>
+<p>Let us import some data, which was originally published by Mainprice, D., Lloyd, G.E. and Casey , M. (1993) Individual orientation measurements in quartz polycrystals: advantages and limitations for texture and petrophysical property determinations. J. of Structural Geology, 15, pp.1169-1187</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'orientation', 'Tongue_Quartzite_Bunge_Euler');
 
@@ -119,4 +138,7 @@ setMTEXpref('defaultColorMap',WhiteJetColorMap)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PiezoElectricity_07.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

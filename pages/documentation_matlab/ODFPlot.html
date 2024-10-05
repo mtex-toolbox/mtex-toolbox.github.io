@@ -6,13 +6,31 @@ permalink: ODFPlot.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Visualizing ODFs</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ODFPlot.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Since an orientation density function (ODF) is a function on the three dimensional, non Euclidean orientation space its proper visualization is a challenging task. In general one distinguishes two approaches</p><div><ol><li>Choose a parametrization of the orientation space by three variables, e.g., by the Euler angles \(\varphi_1\), \(\Phi\), \(\varphi_2\) and make a three dimensional half translucent contour plot of the function</li><li>Choose a series of two dimensional sections through the orientation space and plot the ODF only at the sections.</li></ol></div><p>In order to demonstrate the different visualization techniques let us first define a model ODF.</p>
+    -->
+<title>Visualizing ODFs</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ODFPlot.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/ODFAnalysis/ODFPlot.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Since an orientation density function (ODF) is a function on the three dimensional, non Euclidean orientation space its proper visualization is a challenging task. In general one distinguishes two approaches</p>
+<div>
+<ol>
+<li>Choose a parametrization of the orientation space by three variables, e.g., by the Euler angles \(\varphi_1\), \(\Phi\), \(\varphi_2\) and make a three dimensional half translucent contour plot of the function</li>
+<li>Choose a series of two dimensional sections through the orientation space and plot the ODF only at the sections.</li>
+</ol>
+</div>
+<p>In order to demonstrate the different visualization techniques let us first define a model ODF.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
 mod1 = orientation.byEuler(90*degree,40*degree,110*degree,'ZYZ',cs);
@@ -26,13 +44,16 @@ odf = 0.1*unimodalODF(mod1) ...
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',LaboTeXColorMap);
 {% endhighlight %}
-<h2 id="4">Three Dimensional Plots</h2><p>Visualizing an ODF in three dimensions is done by the command <a href="SO3Fun.plot3d.html"><code class="language-plaintext highlighter-rouge">plot3d</code></a>.</p>
+<h2 id="4">Three Dimensional Plots</h2>
+<p>Visualizing an ODF in three dimensions is done by the command <a href="SO3Fun.plot3d.html"><code class="language-plaintext highlighter-rouge">plot3d</code></a>.</p>
 {% highlight matlab %}
 plot3d(odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_01.png" %}
-</center><p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p><p>
+</center>
+<p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p>
+<p>
    <table class="usertable">
       <tr>
          <td>
@@ -187,7 +208,9 @@ plot3d(odf)
          </td>
       </tr>
    </table>
-</p><p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a></p>
+</p>
+<p>Note that for the last to symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a>
+</p>
 {% highlight matlab %}
 [maxphi1,maxPhi,maxphi2] = fundamentalRegionEuler(crystalSymmetry('432'),specimenSymmetry('222'))
 {% endhighlight %}
@@ -210,9 +233,10 @@ ori = orientation (432 → xyz (222))
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  205.232 123.945 317.664
+  79.8412 70.9377 295.647
 {% endhighlight %}
-<p>the symmetrically equivalent orientation within the fundamental region can be computed using the command <a href="orientation.project2EulerFR.html">project2EulerFR</a></p>
+<p>the symmetrically equivalent orientation within the fundamental region can be computed using the command <a href="orientation.project2EulerFR.html">project2EulerFR</a>
+</p>
 {% highlight matlab %}
 [phi1,Phi,phi2] = ori.project2EulerFR;
 [phi1,Phi,phi2] ./degree
@@ -220,27 +244,44 @@ ori = orientation (432 → xyz (222))
 
 {% highlight plaintext %}
 ans =
-   37.8038   56.0341   42.3204
+   79.8412   70.9377   25.6469
 {% endhighlight %}
-<p>A big disadvantage of the Euler angle representation of the orientation space is that it very badly follows the curved geometry of the space.</p><p>Especially for misorientation distribution functions a better alternative is the three dimensional axis angle space. To visualize an ODF with respect to this parametrization simply add the option <code class="language-plaintext highlighter-rouge">'axisAngle'</code></p>
+<p>A big disadvantage of the Euler angle representation of the orientation space is that it very badly follows the curved geometry of the space.</p>
+<p>Especially for misorientation distribution functions a better alternative is the three dimensional axis angle space. To visualize an ODF with respect to this parametrization simply add the option <code class="language-plaintext highlighter-rouge">'axisAngle'</code>
+</p>
 {% highlight matlab %}
 plot3d(odf,'axisAngle','figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_02.png" %}
-</center><h2 id="9">ODF Sections</h2><p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plotSection</a>. By default the sections are at constant angles of \(\varphi_2\).</p>
+</center>
+<h2 id="9">ODF Sections</h2>
+<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plotSection</a>. By default the sections are at constant angles of \(\varphi_2\).</p>
 {% highlight matlab %}
 plotSection(odf)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_03.png" %}
-</center><p>More information how to customize such plots can be found in the chapter <a href="EulerAngleSections.html">Euler angle sections</a>. Beside the standard \(\varphi_2\) sections MTEX supports also sections according to all other Euler angles.</p><div><ul><li>\(\varphi_2\) (default)</li><li>\(\varphi_1\)</li><li>\(\alpha\) (Matthies Euler angles)</li><li>\(\gamma\) (Matthies Euler angles)</li><li>\(\sigma = \alpha + \gamma\) (recommended)</li></ul></div><p>In fact MTEX highly recommends the so called sigma sections as they provide a much less distorted representation of the orientation space. A detailed description of the sigma sections can be found in the chapter <a href="SigmaSections.html">sigma sections</a>.</p>
+</center>
+<p>More information how to customize such plots can be found in the chapter <a href="EulerAngleSections.html">Euler angle sections</a>. Beside the standard \(\varphi_2\) sections MTEX supports also sections according to all other Euler angles.</p>
+<div>
+<ul>
+<li>\(\varphi_2\) (default)</li>
+<li>\(\varphi_1\)</li>
+<li>\(\alpha\) (Matthies Euler angles)</li>
+<li>\(\gamma\) (Matthies Euler angles)</li>
+<li>\(\sigma = \alpha + \gamma\) (recommended)</li>
+</ul>
+</div>
+<p>In fact MTEX highly recommends the so called sigma sections as they provide a much less distorted representation of the orientation space. A detailed description of the sigma sections can be found in the chapter <a href="SigmaSections.html">sigma sections</a>.</p>
 {% highlight matlab %}
 plotSection(odf,'sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_04.png" %}
-</center><h2 id="11">Plotting the ODF along a fibre</h2><p>For plotting the ODF along a certain fibre we have the command</p>
+</center>
+<h2 id="11">Plotting the ODF along a fibre</h2>
+<p>For plotting the ODF along a certain fibre we have the command</p>
 {% highlight matlab %}
 close all
 
@@ -251,8 +292,11 @@ plot(odf,f,'LineWidth',2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFPlot_05.png" %}
-</center><p>Finally, lets set back the default colormap.</p>
+</center>
+<p>Finally, lets set back the default colormap.</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap);
 {% endhighlight %}
-</div></body></html>
+</div>
+</body>
+</html>

@@ -6,13 +6,26 @@ permalink: ColorMaps.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Color Mapping</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_ColorMaps.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/ColorMaps.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>A central issue when interpreting plots is to have a consistent color coding among all plots. In MTEX this can be achieved in two ways. If the the minimum and maximum value are known then one can specify the color range directly using the options <code class="language-plaintext highlighter-rouge">'colorrange'</code> or <code class="language-plaintext highlighter-rouge">'contourf'</code>, or the command <a href="setColorRange.html">setColorRange</a> is used which allows to set the color range afterwards.</p><h2 id="2">A sample ODFs and Simulated Pole Figure Data</h2><p>Let us first define some model <a href="SO3Fun.SO3Fun.html">ODFs</a> to be plotted later on.</p>
+    -->
+<title>Color Mapping</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ColorMaps.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plotting/ColorMaps.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>A central issue when interpreting plots is to have a consistent color coding among all plots. In MTEX this can be achieved in two ways. If the the minimum and maximum value are known then one can specify the color range directly using the options <code class="language-plaintext highlighter-rouge">'colorrange'</code> or <code class="language-plaintext highlighter-rouge">'contourf'</code>, or the command <a href="setColorRange.html">setColorRange</a> is used which allows to set the color range afterwards.</p>
+<h2 id="2">A sample ODFs and Simulated Pole Figure Data</h2>
+<p>Let us first define some model <a href="SO3Fun.SO3Fun.html">ODFs</a> to be plotted later on.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
 odf = fibreODF(Miller(1,1,0,cs),zvector)
@@ -27,7 +40,8 @@ odf = SO3FunCBF (-3m1 → xyz)
   fibre : (11-20) || 0,0,1
   weight: 1
 {% endhighlight %}
-<h2 id="3">Tight Colorcoding</h2><p>When <a href="PoleFigure.plot.html">plot</a> is called without any colorcoding option, the plots are constructed using the option <code class="language-plaintext highlighter-rouge">'tight'</code> to the range of the data independently from the other plots. This means that different pole figures may have different color coding and in principle cannot be compared to each other.</p>
+<h2 id="3">Tight Colorcoding</h2>
+<p>When <a href="PoleFigure.plot.html">plot</a> is called without any colorcoding option, the plots are constructed using the option <code class="language-plaintext highlighter-rouge">'tight'</code> to the range of the data independently from the other plots. This means that different pole figures may have different color coding and in principle cannot be compared to each other.</p>
 {% highlight matlab %}
 close all
 plot(pf)
@@ -35,14 +49,19 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_01.png" %}
-</center><h2 id="4">Equal Colorcoding</h2><p>The <code class="language-plaintext highlighter-rouge">'tight'</code> colorcoding can make the reading and comparison of two pole figures a bit hard. If you want to have one colorcoding for all plots within one figure set the option <code class="language-plaintext highlighter-rouge">'colorrange'</code> to <code class="language-plaintext highlighter-rouge">'equal'</code>.</p>
+</center>
+<h2 id="4">Equal Colorcoding</h2>
+<p>The <code class="language-plaintext highlighter-rouge">'tight'</code> colorcoding can make the reading and comparison of two pole figures a bit hard. If you want to have one colorcoding for all plots within one figure set the option <code class="language-plaintext highlighter-rouge">'colorrange'</code> to <code class="language-plaintext highlighter-rouge">'equal'</code>.</p>
 {% highlight matlab %}
 plot(pf,'colorRange','equal')
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_02.png" %}
-</center><h2 id="5">Setting an Explicite Colorrange</h2><p>If you want to have a unified colorcoding for several figures you can set the colorrange directly in the <a href="SO3Fun.plotPDF.html">plot command</a></p>
+</center>
+<h2 id="5">Setting an Explicite Colorrange</h2>
+<p>If you want to have a unified colorcoding for several figures you can set the colorrange directly in the <a href="SO3Fun.plotPDF.html">plot command</a>
+</p>
 {% highlight matlab %}
 close all
 plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],...
@@ -56,9 +75,12 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_03.png" %}
-</center><center>
+</center>
+<center>
 {% include inline_image.html file="ColorMaps_04.png" %}
-</center><h2 id="6">Setting the Contour Levels</h2><p>In the case of contour plots you can also specify the <b>contour levels</b> directly</p>
+</center>
+<h2 id="6">Setting the Contour Levels</h2>
+<p>In the case of contour plots you can also specify the <b>contour levels</b> directly</p>
 {% highlight matlab %}
 close all
 plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],...
@@ -67,13 +89,18 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_05.png" %}
-</center><h2 id="7">Modifying the Colorrange After Plotting</h2><p>The color range of the figures can also be adjusted afterwards using the command <a href="setColorRange.html"><code class="language-plaintext highlighter-rouge">setColorRange</code></a></p>
+</center>
+<h2 id="7">Modifying the Colorrange After Plotting</h2>
+<p>The color range of the figures can also be adjusted afterwards using the command <a href="setColorRange.html"><code class="language-plaintext highlighter-rouge">setColorRange</code></a>
+</p>
 {% highlight matlab %}
 setColorRange([0.38,3.9])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_06.png" %}
-</center><h2 id="8">Logarithmic Plots</h2><p>Sometimes logarithmic scaled plots are of interest. For this case all plots commands in MTEX understand the option <code class="language-plaintext highlighter-rouge">'logarithmic'</code>, e.g.</p>
+</center>
+<h2 id="8">Logarithmic Plots</h2>
+<p>Sometimes logarithmic scaled plots are of interest. For this case all plots commands in MTEX understand the option <code class="language-plaintext highlighter-rouge">'logarithmic'</code>, e.g.</p>
 {% highlight matlab %}
 close all;
 plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],'antipodal','logarithmic')
@@ -82,7 +109,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_07.png" %}
-</center><h2 id="9">Changing the Colormap</h2><p>The colormap can be changed by the command mtexColorMap, e.g., in order to set a white to black colormap one has the commands</p>
+</center>
+<h2 id="9">Changing the Colormap</h2>
+<p>The colormap can be changed by the command mtexColorMap, e.g., in order to set a white to black colormap one has the commands</p>
 {% highlight matlab %}
 plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,1,cs)],'antipodal')
 mtexColorMap white2black
@@ -90,7 +119,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_08.png" %}
-</center><h2 id="10">Multiple Colormaps</h2><p>One can even use different colormaps within one figure</p>
+</center>
+<h2 id="10">Multiple Colormaps</h2>
+<p>One can even use different colormaps within one figure</p>
 {% highlight matlab %}
 % initialize an MTEX-figure
 mtexFig = newMtexFigure;
@@ -116,4 +147,7 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ColorMaps_09.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

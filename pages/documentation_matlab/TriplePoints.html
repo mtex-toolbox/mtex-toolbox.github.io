@@ -6,13 +6,24 @@ permalink: TriplePoints.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Triple points</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_TriplePoints.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TriplePoints.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>Triple points are automatically computed during grain reconstruction. They are accessible similarly to <a href="GrainBoundaries.html">grain boundaries</a> as the property <a href="triplePointList.triplePointList.html">triplePoints</a> of the grain list. When analyzing triple points it is a good idea to use the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> in <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> to convert all quadruple points into triple points.</p>
+    -->
+<title>Triple points</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_TriplePoints.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/TriplePoints.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Triple points are automatically computed during grain reconstruction. They are accessible similarly to <a href="GrainBoundaries.html">grain boundaries</a> as the property <a href="triplePointList.triplePointList.html">triplePoints</a> of the grain list. When analyzing triple points it is a good idea to use the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> in <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> to convert all quadruple points into triple points.</p>
 {% highlight matlab %}
 % import some EBSD data set
 mtexdata small silent
@@ -37,7 +48,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_01.png" %}
-</center><h2 id="2">Index triple points by phase</h2><p>You may index triple points by the adjacent phases. The following command gives you all triple points with at least one phase being Forsterite</p>
+</center>
+<h2 id="2">Index triple points by phase</h2>
+<p>You may index triple points by the adjacent phases. The following command gives you all triple points with at least one phase being Forsterite</p>
 {% highlight matlab %}
 tP('Forsterite')
 {% endhighlight %}
@@ -74,7 +87,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_02.png" %}
-</center><h2 id="5">Index triple points by grains</h2><p>Since, triple points are associated to grains we may single out triple points that belong to a specific grain or some subset of grains.</p>
+</center>
+<h2 id="5">Index triple points by grains</h2>
+<p>Since, triple points are associated to grains we may single out triple points that belong to a specific grain or some subset of grains.</p>
 {% highlight matlab %}
 % find the index of the largest grain
 [~,id] = max(grains.area);
@@ -91,7 +106,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_03.png" %}
-</center><h2 id="6">Index triple points by grain boundary</h2><p>Triple points are not only a property of grains but also of grain boundaries. Thus we may ask for all triple points that belong to Fosterite - Forsterite boundaries with misorientation angle larger then 60 degree</p>
+</center>
+<h2 id="6">Index triple points by grain boundary</h2>
+<p>Triple points are not only a property of grains but also of grain boundaries. Thus we may ask for all triple points that belong to Fosterite - Forsterite boundaries with misorientation angle larger then 60 degree</p>
 {% highlight matlab %}
 % all Fosterite - Forsterite boundary segments
 gB_Fo = grains.boundary('Forsterite','Forsterite')
@@ -120,7 +137,9 @@ gB_large = grainBoundary
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_04.png" %}
-</center><h2 id="7">Boundary segments from triple points</h2><p>On the other hand we may also ask for the boundary segments that build up a triple point. These are stored as the property boundaryId for each triple points.</p>
+</center>
+<h2 id="7">Boundary segments from triple points</h2>
+<p>On the other hand we may also ask for the boundary segments that build up a triple point. These are stored as the property boundaryId for each triple points.</p>
 {% highlight matlab %}
 % lets take Forsterite triple points
 tP = grains.triplePoints('Fo','Fo','Fo');
@@ -136,7 +155,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_05.png" %}
-</center><p>Once we have extracted the boundary segments adjacent to a triple point we may also extract the corresponding misorientations. The following command gives a n x 3 list of misorientations where n is the number of triple points</p>
+</center>
+<p>Once we have extracted the boundary segments adjacent to a triple point we may also extract the corresponding misorientations. The following command gives a n x 3 list of misorientations where n is the number of triple points</p>
 {% highlight matlab %}
 mori = gB.misorientation
 {% endhighlight %}
@@ -162,7 +182,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_06.png" %}
-</center><h2 id="11">Angles at triple points</h2><p>The angles at the triplepoints can be accessed by <code class="language-plaintext highlighter-rouge">tP.angles</code>. This is a 3 column matrix with one column for each of the three angles enclosed by the boundary segments of a triple point. Obviously, the sum of each row is always <code class="language-plaintext highlighter-rouge">2*pi</code>. More interestingly is the difference between the largest and the smallest angle. Lets plot this for our test data set.</p>
+</center>
+<h2 id="11">Angles at triple points</h2>
+<p>The angles at the triplepoints can be accessed by <code class="language-plaintext highlighter-rouge">tP.angles</code>. This is a 3 column matrix with one column for each of the three angles enclosed by the boundary segments of a triple point. Obviously, the sum of each row is always <code class="language-plaintext highlighter-rouge">2*pi</code>. More interestingly is the difference between the largest and the smallest angle. Lets plot this for our test data set.</p>
 {% highlight matlab %}
 plot(grains,'figSize','large')
 hold on
@@ -175,4 +197,7 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePoints_07.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

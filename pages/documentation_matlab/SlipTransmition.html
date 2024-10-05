@@ -6,13 +6,26 @@ permalink: SlipTransmition.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Slip Transmission</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_SlipTransmition.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SlipTransmition.m">
-    edit page</a></font><div><!--introduction--><p>How to analyze slip transmission at grain boundaries</p><!--/introduction--><h2 id="1">Import Titanium data</h2><p>From Mercier D. - MTEX 2016 Workshop - TU Chemnitz (Germany) Calculation and plot on GBs of m' parameter Dataset from Mercier D. - cp-Ti (alpha phase - hcp)</p>
+    -->
+<title>Slip Transmission</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SlipTransmition.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/SlipTransmition.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>How to analyze slip transmission at grain boundaries</p>
+<!--/introduction-->
+<h2 id="1">Import Titanium data</h2>
+<p>From Mercier D. - MTEX 2016 Workshop - TU Chemnitz (Germany) Calculation and plot on GBs of m' parameter Dataset from Mercier D. - cp-Ti (alpha phase - hcp)</p>
 {% highlight matlab %}
 mtexdata titanium
 
@@ -44,7 +57,8 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_01.png" %}
-</center><h2 id="2">Schmid Factor</h2>
+</center>
+<h2 id="2">Schmid Factor</h2>
 {% highlight matlab %}
 % consider Basal slip
 sSBasal = slipSystem.basal(ebsd.CS)
@@ -71,7 +85,8 @@ sSBasal = slipSystem (Titanium (Alpha))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_02.png" %}
-</center><p>The variable <code class="language-plaintext highlighter-rouge">id</code> contains now for each grain the id of the slip system with the largest Schmidt factor. In order to visualize it, we first rotate for each grain the slip system with largest Schmid factor in specimen coordinates</p>
+</center>
+<p>The variable <code class="language-plaintext highlighter-rouge">id</code> contains now for each grain the id of the slip system with the largest Schmidt factor. In order to visualize it, we first rotate for each grain the slip system with largest Schmid factor in specimen coordinates</p>
 {% highlight matlab %}
 sSGrain = grains.meanOrientation .* sSBasal(id)
 
@@ -92,19 +107,23 @@ sSGrain = slipSystem (xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_03.png" %}
-</center><p>We may also analyse the distribution of the slip directions in a pole figure plot</p>
+</center>
+<p>We may also analyse the distribution of the slip directions in a pole figure plot</p>
 {% highlight matlab %}
 plot(sSGrain.b)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_04.png" %}
-</center><p>The same as a contour plot. We see a clear trend towards the east.</p>
+</center>
+<p>The same as a contour plot. We see a clear trend towards the east.</p>
 {% highlight matlab %}
 plot(sSGrain.b,'contourf')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_05.png" %}
-</center><h2 id="6">Resolved shear stress</h2><p>We could do the same as above with a more general stress tensor. However, the result is a bit different. TODO: why the directions do not point towards east???</p>
+</center>
+<h2 id="6">Resolved shear stress</h2>
+<p>We could do the same as above with a more general stress tensor. However, the result is a bit different. TODO: why the directions do not point towards east???</p>
 {% highlight matlab %}
 % more general syntax for the same stress tensor
 sigma = stressTensor.uniaxial(xvector);
@@ -138,7 +157,9 @@ sSGrain = slipSystem (xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_06.png" %}
-</center><h2 id="7">Compatibility of slip systems</h2><p>Next, we want to analyze, how much geometrically compatible the slip systems with highest Schmid factor are at the grain boundaries</p>
+</center>
+<h2 id="7">Compatibility of slip systems</h2>
+<p>Next, we want to analyze, how much geometrically compatible the slip systems with highest Schmid factor are at the grain boundaries</p>
 {% highlight matlab %}
 % some background
 plot(grains,'FaceColor',0.8*[1 1 1],'figSize','large')
@@ -162,7 +183,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_07.png" %}
-</center><h2 id="8">Plot m' in misorientation space</h2><p>Since m' depends on the misorientation only why may plot it directly in misorientation space</p>
+</center>
+<h2 id="8">Plot m' in misorientation space</h2>
+<p>Since m' depends on the misorientation only why may plot it directly in misorientation space</p>
 {% highlight matlab %}
 % set up an axis angle plot
 sP = axisAngleSections(sSBasal.CS,sSBasal.CS);
@@ -180,4 +203,7 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SlipTransmition_08.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

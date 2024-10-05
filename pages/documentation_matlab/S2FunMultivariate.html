@@ -6,13 +6,42 @@ permalink: S2FunMultivariate.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Multivariate S2Fun</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_S2FunMultivariate.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunMultivariate.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><h2 id="1">Structural conventions of the input and output of multivariate S2FunHarmonic</h2><p>In this part we deal with multivariate functions of the form</p><p>\[ f\colon \bf{S}^2\to \bf{R}^n \].</p><div><ul><li>the structure of the nodes is always interpreted as a column vector</li><li>the node index is the first dimension</li><li>the dimensions of the <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> itself is counted from the second dimension</li></ul></div><p>For example we got four nodes \(v_1, v_2, v_3\) and \(v_4\) and six functions \(f_1, f_2, f_3, f_4, f_5\) and \(f_6\), which we want to store in a 3x2 array, then the following scheme applies to function evaluations:</p><p>\[ F(:, :, 1) = \pmatrix{f_1(v_1) &amp; f_2(v_1) &amp; f_3(v_1) \cr f_1(v_2) &amp; f_2(v_2) &amp; f_3(v_2) \cr f_1(v_3) &amp; f_2(v_3) &amp; f_3(v_3) \cr f_1(v_4) &amp; f_2(v_4) &amp; f_3(v_4)} \quad\mathrm{and}\quad F(:, :, 2) = \pmatrix{f_4(v_1) &amp; f_5(v_1) &amp; f_6(v_1) \cr f_4(v_2) &amp; f_5(v_2) &amp; f_6(v_2) \cr f_4(v_3) &amp; f_5(v_3) &amp; f_6(v_3) \cr f_4(v_4) &amp; f_5(v_4) &amp; f_6(v_4)}. \]</p><p>For the intern Fourier-coefficient matrix the first dimension is reserved for the Fourier-coefficients of a single function; the dimension of the functions itself begins again with the second dimension.</p><p>If \(\bf{\hat f}_1, \bf{\hat f}_2, \bf{\hat f}_3, \bf{\hat f}_4, \bf{\hat f}_5\) and \(\bf{\hat f}_6\) would be the column vectors of the Fourier-coefficients of the functions above, internally they would be stored in \(\hat F\) as follows. \[ \hat F(:, :, 1) = \pmatrix{\bf{\hat f}_1 &amp; \bf{\hat f}_2 &amp; \bf{\hat f}_3} \quad\mathrm{and}\quad \hat F(:, :, 2) = \pmatrix{\bf{\hat f}_4 &amp; \bf{\hat f}_5 &amp; \bf{\hat f}_6}. \]</p><h2 id="2">Defining a multivariate S2FunHarmonic</h2><p><b>Definition via function values</b></p><p>At first we need some vertices</p>
+    -->
+<title>Multivariate S2Fun</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2FunMultivariate.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunMultivariate.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">Structural conventions of the input and output of multivariate S2FunHarmonic</h2>
+<p>In this part we deal with multivariate functions of the form</p>
+<p>\[ f\colon \bf{S}^2\to \bf{R}^n \].</p>
+<div>
+<ul>
+<li>the structure of the nodes is always interpreted as a column vector</li>
+<li>the node index is the first dimension</li>
+<li>the dimensions of the <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> itself is counted from the second dimension</li>
+</ul>
+</div>
+<p>For example we got four nodes \(v_1, v_2, v_3\) and \(v_4\) and six functions \(f_1, f_2, f_3, f_4, f_5\) and \(f_6\), which we want to store in a 3x2 array, then the following scheme applies to function evaluations:</p>
+<p>\[ F(:, :, 1) = \pmatrix{f_1(v_1) &amp; f_2(v_1) &amp; f_3(v_1) \cr f_1(v_2) &amp; f_2(v_2) &amp; f_3(v_2) \cr f_1(v_3) &amp; f_2(v_3) &amp; f_3(v_3) \cr f_1(v_4) &amp; f_2(v_4) &amp; f_3(v_4)} \quad\mathrm{and}\quad F(:, :, 2) = \pmatrix{f_4(v_1) &amp; f_5(v_1) &amp; f_6(v_1) \cr f_4(v_2) &amp; f_5(v_2) &amp; f_6(v_2) \cr f_4(v_3) &amp; f_5(v_3) &amp; f_6(v_3) \cr f_4(v_4) &amp; f_5(v_4) &amp; f_6(v_4)}. \]</p>
+<p>For the intern Fourier-coefficient matrix the first dimension is reserved for the Fourier-coefficients of a single function; the dimension of the functions itself begins again with the second dimension.</p>
+<p>If \(\bf{\hat f}_1, \bf{\hat f}_2, \bf{\hat f}_3, \bf{\hat f}_4, \bf{\hat f}_5\) and \(\bf{\hat f}_6\) would be the column vectors of the Fourier-coefficients of the functions above, internally they would be stored in \(\hat F\) as follows. \[ \hat F(:, :, 1) = \pmatrix{\bf{\hat f}_1 &amp; \bf{\hat f}_2 &amp; \bf{\hat f}_3} \quad\mathrm{and}\quad \hat F(:, :, 2) = \pmatrix{\bf{\hat f}_4 &amp; \bf{\hat f}_5 &amp; \bf{\hat f}_6}. \]</p>
+<h2 id="2">Defining a multivariate S2FunHarmonic</h2>
+<p>
+<b>Definition via function values</b>
+</p>
+<p>At first we need some vertices</p>
 {% highlight matlab %}
 nodes = equispacedS2Grid('points', 1e5);
 nodes = nodes(:);
@@ -21,7 +50,8 @@ nodes = nodes(:);
 {% highlight matlab %}
 y = [S2Fun.smiley(nodes), (nodes.x.*nodes.y).^(1/4)];
 {% endhighlight %}
-<p>Now the actual command to get a 2x1 <code class="language-plaintext highlighter-rouge">sF1</code> of type <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></p>
+<p>Now the actual command to get a 2x1 <code class="language-plaintext highlighter-rouge">sF1</code> of type <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>
+</p>
 {% highlight matlab %}
 sF1 = S2FunHarmonic.approximation(nodes, y)
 {% endhighlight %}
@@ -31,11 +61,15 @@ sF1 = S2FunHarmonic
   size: 2 x 1
   bandwidth: 224
 {% endhighlight %}
-<p><b>Definition via function handle</b></p><p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> via quadrature. At first let us define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns double:</p>
+<p>
+<b>Definition via function handle</b>
+</p>
+<p>If we have a function handle for the function we could create a <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> via quadrature. At first let us define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns double:</p>
 {% highlight matlab %}
 f = @(v) [exp(v.x+v.y+v.z)+50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3) > 0), v.x, v.y, v.z];
 {% endhighlight %}
-<p>Now we call the quadrature command to get 4x1 <code class="language-plaintext highlighter-rouge">sF2</code> of type <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></p>
+<p>Now we call the quadrature command to get 4x1 <code class="language-plaintext highlighter-rouge">sF2</code> of type <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>
+</p>
 {% highlight matlab %}
 sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 50)
 {% endhighlight %}
@@ -46,7 +80,10 @@ sF2 = S2FunHarmonic
   bandwidth: 50
   isReal: true
 {% endhighlight %}
-<p><b>Definition via Fourier-coefficients</b></p><p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code>.</p>
+<p>
+<b>Definition via Fourier-coefficients</b>
+</p>
+<p>If we already know the Fourier-coefficients, we can simply hand them in the format above to the constructor of <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code>.</p>
 {% highlight matlab %}
 sF3 = S2FunHarmonic(eye(9))
 {% endhighlight %}
@@ -56,7 +93,17 @@ sF3 = S2FunHarmonic
   size: 9 x 1
   bandwidth: 2
 {% endhighlight %}
-<div><ul><li>This command stores the nine first spherical harmonics in <code class="language-plaintext highlighter-rouge">sF3</code></li></ul></div><h2 id="10">Operations which differ from an univariate S2FunHarmonic</h2><p><b>Some default matrix and vector operations</b></p><p>You can concatenate and refer to functions as MATLAB does with vectors and matrices</p>
+<div>
+<ul>
+<li>This command stores the nine first spherical harmonics in <code class="language-plaintext highlighter-rouge">sF3</code>
+</li>
+</ul>
+</div>
+<h2 id="10">Operations which differ from an univariate S2FunHarmonic</h2>
+<p>
+<b>Some default matrix and vector operations</b>
+</p>
+<p>You can concatenate and refer to functions as MATLAB does with vectors and matrices</p>
 {% highlight matlab %}
 sF4 = [sF1; sF2];
 sF4(2:3);
@@ -73,14 +120,28 @@ length(sF1);
 size(sF2);
 sF3 = reshape(sF3, 3, []);
 {% endhighlight %}
-<p><b><code class="language-plaintext highlighter-rouge">sum</code> and <code class="language-plaintext highlighter-rouge">mean</code></b></p><p>If we do not specify further options to <code class="language-plaintext highlighter-rouge">sum</code> or <code class="language-plaintext highlighter-rouge">mean</code> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the mean value over a dimension of a multivariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code>.</p>
+<p>
+<b><code class="language-plaintext highlighter-rouge">sum</code> and <code class="language-plaintext highlighter-rouge">mean</code></b>
+</p>
+<p>If we do not specify further options to <code class="language-plaintext highlighter-rouge">sum</code> or <code class="language-plaintext highlighter-rouge">mean</code> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the mean value over a dimension of a multivariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code>.</p>
 {% highlight matlab %}
 sum(sF1, 1);
 sum(sF3, 2);
 {% endhighlight %}
-<p><b>min/max</b></p><p>If the <code class="language-plaintext highlighter-rouge">min</code> or <code class="language-plaintext highlighter-rouge">max</code> command gets a multivariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> the pointwise minimum or maximum can calculated along the dimension specified as third argument.</p>
+<p>
+<b>min/max</b>
+</p>
+<p>If the <code class="language-plaintext highlighter-rouge">min</code> or <code class="language-plaintext highlighter-rouge">max</code> command gets a multivariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> the pointwise minimum or maximum can calculated along the dimension specified as third argument.</p>
 {% highlight matlab %}
 % this computes the minimum along the first dimension
 min(sF3,[],1);
 {% endhighlight %}
-<p><b>Remark on the matrix product</b></p><p>At this point the matrix product is implemented per element and not as the usual matrix product.</p><h2 id="17">Visualization of multivariate S2FunHarmonic</h2><p>The same plot commands as for univariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> work on multivariate as well. The difference is that, now, each component is plotted next to one another.</p></div></body></html>
+<p>
+<b>Remark on the matrix product</b>
+</p>
+<p>At this point the matrix product is implemented per element and not as the usual matrix product.</p>
+<h2 id="17">Visualization of multivariate S2FunHarmonic</h2>
+<p>The same plot commands as for univariate <code class="language-plaintext highlighter-rouge">S2FunHarmonic</code> work on multivariate as well. The difference is that, now, each component is plotted next to one another.</p>
+</div>
+</body>
+</html>

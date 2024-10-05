@@ -6,13 +6,24 @@ permalink: EBSDSelect.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Select EBSD data</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDSelect.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDSelect.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example EBSD data using the command <a href="mtexdata.html"><code class="language-plaintext highlighter-rouge">mtexdata</code></a>.</p>
+    -->
+<title>Select EBSD data</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDSelect.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDSelect.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example EBSD data using the command <a href="mtexdata.html"><code class="language-plaintext highlighter-rouge">mtexdata</code></a>.</p>
 {% highlight matlab %}
 mtexdata forsterite
 {% endhighlight %}
@@ -38,7 +49,9 @@ plot(ebsd)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_01.png" %}
-</center><h2 id="3">Selecting a certain phase</h2><p>After import the EBSD data are stored in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p>
+</center>
+<h2 id="3">Selecting a certain phase</h2>
+<p>After import the EBSD data are stored in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p>
 {% highlight matlab %}
 ebsd('Forsterite')
 {% endhighlight %}
@@ -78,14 +91,19 @@ plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_02.png" %}
-</center><p>The data is colorized according to its orientation. By default color of an orientation is determined by its position in the 001 inverse pole figure which itself is colored as</p>
+</center>
+<p>The data is colorized according to its orientation. By default color of an orientation is determined by its position in the 001 inverse pole figure which itself is colored as</p>
 {% highlight matlab %}
 ipfKey = ipfColorKey(ebsd('Forsterite'));
 plot(ipfKey)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_03.png" %}
-</center><h2 id="7">Restricting to a region of interest</h2><p>If one is not interested in the whole data set but only in those measurements inside a certain polygon, the restriction can be constructed as follows:</p><p>First define a region by <code class="language-plaintext highlighter-rouge">[xmin ymin xmax-xmin ymax-ymin]</code></p>
+</center>
+<h2 id="7">Restricting to a region of interest</h2>
+<p>If one is not interested in the whole data set but only in those measurements inside a certain polygon, the restriction can be constructed as follows:</p>
+<p>First define a region by <code class="language-plaintext highlighter-rouge">[xmin ymin xmax-xmin ymax-ymin]</code>
+</p>
 {% highlight matlab %}
 region = [5 2 10 5]*10^3;
 {% endhighlight %}
@@ -97,7 +115,8 @@ rectangle('position',region,'edgecolor','r','linewidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_04.png" %}
-</center><p>The command <a href="EBSD.inpolygon.html"><code class="language-plaintext highlighter-rouge">inpolygon</code></a> checks for each EBSD data point whether it is inside a polygon or not, i.e.</p>
+</center>
+<p>The command <a href="EBSD.inpolygon.html"><code class="language-plaintext highlighter-rouge">inpolygon</code></a> checks for each EBSD data point whether it is inside a polygon or not, i.e.</p>
 {% highlight matlab %}
 condition = inpolygon(ebsd,region);
 {% endhighlight %}
@@ -127,11 +146,15 @@ plot(ebsd)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_05.png" %}
-</center><p>Note, that you can also select a polygon by mouse using the command</p>
+</center>
+<p>Note, that you can also select a polygon by mouse using the command</p>
 {% highlight matlab %}
 poly = selectPolygon
 {% endhighlight %}
-<h2 id="14">Remove Inaccurate Orientation Measurements</h2><p><b>By MAD (mean angular deviation)</b> in the case of Oxford Channel programs, or <b>by CI (Confidence Index)</b> in the case of OIM-TSL programs</p><p>Most EBSD measurements contain quantities indicating inaccurate measurements.</p>
+<h2 id="14">Remove Inaccurate Orientation Measurements</h2>
+<p>
+<b>By MAD (mean angular deviation)</b> in the case of Oxford Channel programs, or <b>by CI (Confidence Index)</b> in the case of OIM-TSL programs</p>
+<p>Most EBSD measurements contain quantities indicating inaccurate measurements.</p>
 {% highlight matlab %}
 close all
 plot(ebsd,ebsd.mad)
@@ -139,7 +162,8 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_06.png" %}
-</center><p>or</p>
+</center>
+<p>or</p>
 {% highlight matlab %}
 close all
 plot(ebsd,ebsd.bc)
@@ -147,7 +171,8 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_07.png" %}
-</center><p>Here we will use the MAD to identify and eliminate inaccurate measurements.</p>
+</center>
+<p>Here we will use the MAD to identify and eliminate inaccurate measurements.</p>
 {% highlight matlab %}
 % plot a histogram
 close all
@@ -182,4 +207,7 @@ plot(ebsd_corrected)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSelect_09.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

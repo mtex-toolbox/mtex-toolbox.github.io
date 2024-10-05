@@ -6,13 +6,24 @@ permalink: EBSDPlotting.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Plotting</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_EBSDPlotting.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDPlotting.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>This section gives you an overview of the functionality MTEX offers to visualize spatial orientation data. Let us first import some sample EBSD data.</p>
+    -->
+<title>Plotting</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDPlotting.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDPlotting.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>This section gives you an overview of the functionality MTEX offers to visualize spatial orientation data. Let us first import some sample EBSD data.</p>
 {% highlight matlab %}
 close all; plotx2east
 mtexdata forsterite
@@ -33,13 +44,15 @@ ebsd = EBSD
  <strong>X x Y x Z</strong> : [0 36550] x [0 16750] x [0 0]
  <strong>Normal vector</strong>: (0,0,1)
 {% endhighlight %}
-<h2 id="2">Phase Plots</h2><p>By default, MTEX plots a phase map for EBSD data.</p>
+<h2 id="2">Phase Plots</h2>
+<p>By default, MTEX plots a phase map for EBSD data.</p>
 {% highlight matlab %}
 plot(ebsd)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_01.png" %}
-</center><p>You can access the color of each phase by</p>
+</center>
+<p>You can access the color of each phase by</p>
 {% highlight matlab %}
 ebsd('Diopside').color
 {% endhighlight %}
@@ -56,7 +69,8 @@ plot(ebsd('indexed'))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_02.png" %}
-</center><p>By default, not indexed phases are plotted as white and it is impossible to assign a different color as we did it for real phases. Instead we need to use option <code class="language-plaintext highlighter-rouge">FaceColor</code> to specify the color directly in the plotting command.</p>
+</center>
+<p>By default, not indexed phases are plotted as white and it is impossible to assign a different color as we did it for real phases. Instead we need to use option <code class="language-plaintext highlighter-rouge">FaceColor</code> to specify the color directly in the plotting command.</p>
 {% highlight matlab %}
 hold on
 plot(ebsd('notIndexed'),'FaceColor','Gray')
@@ -64,15 +78,17 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You asked me to make a phase plot of single phase map. This might not
-what you are looking for. In order to colorize the map according to the
-orientations you should do
+Warning: You asked me to make a phase plot of single phase map. This
+might not what you are looking for. In order to colorize the map
+according to the orientations you should do
 
-plot(ebsd,ebsd.orientations)
+<strong>plot(ebsd,ebsd.orientations)</strong>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_03.png" %}
-</center><h2 id="6">Visualizing arbitrary properties</h2><p>Apart from the phase information, we can use any other property to colorize the EBSD data. As an example, we may plot the band contrast</p>
+</center>
+<h2 id="6">Visualizing arbitrary properties</h2>
+<p>Apart from the phase information, we can use any other property to colorize the EBSD data. As an example, we may plot the band contrast</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.bc)
 
@@ -81,14 +97,17 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_04.png" %}
-</center><h2 id="7">Visualizing orientations</h2><p>Actually, we can pass any list of numbers or colors as a second input argument to be visualized together with the ebsd data. In order to visualize orientations in an EBSD map, we have first to compute a color for each orientation. The most simple way is to assign to each orientation its rotational angle. This is done by the command</p>
+</center>
+<h2 id="7">Visualizing orientations</h2>
+<p>Actually, we can pass any list of numbers or colors as a second input argument to be visualized together with the ebsd data. In order to visualize orientations in an EBSD map, we have first to compute a color for each orientation. The most simple way is to assign to each orientation its rotational angle. This is done by the command</p>
 {% highlight matlab %}
 plot(ebsd('Forsterite'),ebsd('Forsterite').orientations.angle./degree)
 mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_05.png" %}
-</center><p>Obviously, the rotational angle is not a very distintive representative for orientations. A more common approach is to define a colorization of the fundamental secor of the inverse pole figure, a so called ipf color key, and to colorize orientations according to their position in a fixed inverse pole figure. Let's consider the following standard key.</p>
+</center>
+<p>Obviously, the rotational angle is not a very distintive representative for orientations. A more common approach is to define a colorization of the fundamental secor of the inverse pole figure, a so called ipf color key, and to colorize orientations according to their position in a fixed inverse pole figure. Let's consider the following standard key.</p>
 {% highlight matlab %}
 % this defines an ipf color key for the Forsterite phase
 ipfKey = ipfColorKey(ebsd('Forsterite'));
@@ -99,14 +118,18 @@ plot(ipfKey)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_06.png" %}
-</center><p>Next we may utilize this key to turn the orientations into colors, which are than passed to the <a href="EBSD.plot.html">plot</a> command.</p>
+</center>
+<p>Next we may utilize this key to turn the orientations into colors, which are than passed to the <a href="EBSD.plot.html">plot</a> command.</p>
 {% highlight matlab %}
 colors = ipfKey.orientation2color(ebsd('Forsterite').orientations);
 plot(ebsd('Forsterite'),colors)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_07.png" %}
-</center><p>The above ipf color key can be largely customizied. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p><h2 id="11">Superposing different plots</h2><p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>.</p>
+</center>
+<p>The above ipf color key can be largely customizied. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p>
+<h2 id="11">Superposing different plots</h2>
+<p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>.</p>
 {% highlight matlab %}
 close all;
 plot(ebsd,ebsd.bc)
@@ -118,12 +141,15 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You asked me to make a phase plot of single phase map. This might not
-what you are looking for. In order to colorize the map according to the
-orientations you should do
+Warning: You asked me to make a phase plot of single phase map. This
+might not what you are looking for. In order to colorize the map
+according to the orientations you should do
 
-plot(ebsd,ebsd.orientations)
+<strong>plot(ebsd,ebsd.orientations)</strong>
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDPlotting_08.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

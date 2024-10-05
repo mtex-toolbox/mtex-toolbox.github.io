@@ -6,13 +6,24 @@ permalink: PoleFigureDubna.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Orientation Density Functions</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_PoleFigureDubna.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureDubna.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>This example demonstrates the most important MTEX tools for analysing Pole Figure Data.</p>
+    -->
+<title>Orientation Density Functions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_PoleFigureDubna.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureDubna.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>This example demonstrates the most important MTEX tools for analysing Pole Figure Data.</p>
 {% highlight matlab %}
 % specify crystal and specimen symmetry
 CS = crystalSymmetry('-3m',[4.9 4.9 5.4]);
@@ -40,13 +51,21 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_01.png" %}
-</center><h2 id="2">Extract information from imported pole figure data</h2><p><b>Get raw data</b></p><p>Data stored in a <a href="PoleFigure.PoleFigure.html">PoleFigure</a> variable can be extracted by</p>
+</center>
+<h2 id="2">Extract information from imported pole figure data</h2>
+<p>
+<b>Get raw data</b>
+</p>
+<p>Data stored in a <a href="PoleFigure.PoleFigure.html">PoleFigure</a> variable can be extracted by</p>
 {% highlight matlab %}
 I = pf.intensities; % intensities
 h = pf.h;            % Miller indice
 r = pf.r;            % specimen directions
 {% endhighlight %}
-<p><b>Basic Statistics</b></p><p>There are also some basic statics on pole figure intensities</p>
+<p>
+<b>Basic Statistics</b>
+</p>
+<p>There are also some basic statics on pole figure intensities</p>
 {% highlight matlab %}
 min(pf)
 max(pf)
@@ -95,7 +114,8 @@ pf_modified = PoleFigure (xyz)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_03.png" %}
-</center><h2 id="7">PDF - to - ODF Reconstruction</h2>
+</center>
+<h2 id="7">PDF - to - ODF Reconstruction</h2>
 {% highlight matlab %}
 rec = calcODF(pf,'RESOLUTION',10*degree,'iter_max',6)
 
@@ -168,7 +188,8 @@ rec = SO3FunRBF (m-3m → xyz (222))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_05.png" %}
-</center><p>without ghost correction</p>
+</center>
+<p>without ghost correction</p>
 {% highlight matlab %}
 rec_ng = calcODF(pf_SantaFe,'RESOLUTION',10*degree,'background',10,'NoGhostCorrection')
 
@@ -185,7 +206,8 @@ rec_ng = SO3FunRBF (m-3m → xyz (222))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_06.png" %}
-</center><h2 id="13">Error Analysis</h2>
+</center>
+<h2 id="13">Error Analysis</h2>
 {% highlight matlab %}
 calcError(pf_SantaFe,rec)
 calcError(pf_SantaFe,rec_ng)
@@ -197,13 +219,18 @@ ans =
 ans =
     0.0358    0.0283    0.0252
 {% endhighlight %}
-<p><b>Difference plot</b></p>
+<p>
+<b>Difference plot</b>
+</p>
 {% highlight matlab %}
 plotDiff(pf_SantaFe,rec)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_07.png" %}
-</center><p><b>ODF error</b></p>
+</center>
+<p>
+<b>ODF error</b>
+</p>
 {% highlight matlab %}
 calcError(SantaFe,rec)
 calcError(SantaFe,rec_ng)
@@ -215,4 +242,16 @@ ans =
 ans =
     0.0893
 {% endhighlight %}
-<h2 id="16">Exercises</h2><p>3)</p><p>a) Load the pole figure data of a quartz specimen from: data/dubna!</p><p>b) Inspect the raw data. Are there noticeable problems?</p><p>c) Compute an ODF from the pole figure data.</p><p>d) Plot some pole figures of that ODF and compare them to the measured pole figures.</p><p>e) Compute the RP errors for each pole figure.</p><p>f) Plot the difference between the raw data and the calculated pole figures. What do you observe?</p><p>g) Remove the erroneous values from the pole figure data and repeat the ODF calculation. How do the RP error change?</p><p>h) Vary the number of pole figures used for the ODF calculation. What is the minimum set of pole figures needed to obtain a meaningful ODF?</p></div></body></html>
+<h2 id="16">Exercises</h2>
+<p>3)</p>
+<p>a) Load the pole figure data of a quartz specimen from: data/dubna!</p>
+<p>b) Inspect the raw data. Are there noticeable problems?</p>
+<p>c) Compute an ODF from the pole figure data.</p>
+<p>d) Plot some pole figures of that ODF and compare them to the measured pole figures.</p>
+<p>e) Compute the RP errors for each pole figure.</p>
+<p>f) Plot the difference between the raw data and the calculated pole figures. What do you observe?</p>
+<p>g) Remove the erroneous values from the pole figure data and repeat the ODF calculation. How do the RP error change?</p>
+<p>h) Vary the number of pole figures used for the ODF calculation. What is the minimum set of pole figures needed to obtain a meaningful ODF?</p>
+</div>
+</body>
+</html>

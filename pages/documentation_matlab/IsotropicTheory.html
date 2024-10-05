@@ -6,13 +6,26 @@ permalink: IsotropicTheory.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Isotropic Theory</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_IsotropicTheory.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/IsotropicTheory.m">
-    edit page</a></font><div><!--introduction--><p>While the linear elastic model for anisotropic materials is based on the fourth order elastic stiffness tensor <code class="language-plaintext highlighter-rouge">C</code> the linear elastic model for isotropic models is most often developed in terms of the elastic moduli shear, bulk, Youngs modulus and the Poisson ratio.</p><!--/introduction--><h2 id="1">The single crystal stiffness tensor</h2><p>Lets start our discussion with a single crystal stiffness tensor of Albite.</p>
+    -->
+<title>Isotropic Theory</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_IsotropicTheory.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Elasticity/IsotropicTheory.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>While the linear elastic model for anisotropic materials is based on the fourth order elastic stiffness tensor <code class="language-plaintext highlighter-rouge">C</code> the linear elastic model for isotropic models is most often developed in terms of the elastic moduli shear, bulk, Youngs modulus and the Poisson ratio.</p>
+<!--/introduction-->
+<h2 id="1">The single crystal stiffness tensor</h2>
+<p>Lets start our discussion with a single crystal stiffness tensor of Albite.</p>
 {% highlight matlab %}
 % density (g/cm3)
  rho= 2.6230;
@@ -46,7 +59,8 @@ C = stiffnessTensor (An0 Albite 2016)
   -2.3  -7.7   7.5  -2.4  26.9   0.6
   -0.9  -6.4  -9.4  -7.2   0.6  33.6
 {% endhighlight %}
-<h2 id="2">The effective isotropic stiffness tensor</h2><p>An isotropic Albite material we assume here to consist of randomly oriented grains forming an uniform (isotropic) texture. In this case the Voigt and Reuss avarages provide upper and lower bounds for the elastic properties of the material.</p>
+<h2 id="2">The effective isotropic stiffness tensor</h2>
+<p>An isotropic Albite material we assume here to consist of randomly oriented grains forming an uniform (isotropic) texture. In this case the Voigt and Reuss avarages provide upper and lower bounds for the elastic properties of the material.</p>
 {% highlight matlab %}
 [C_iso_Voigt,C_iso_Reuss,C_iso_Hill] = mean(C,uniformODF(C.CS))
 {% endhighlight %}
@@ -91,7 +105,9 @@ C_iso_Hill = stiffnessTensor (xyz)
       0      0      0      0  35.63      0
       0      0      0      0      0  35.63
 {% endhighlight %}
-<h2 id="3">The elastic moduli</h2><p>The actual elastic properties of the material depend on the geometric microstructure and can not be computed without additional knowledge.</p><p>Based on the Voigt effective stiffness tensor we may now compute upper, directional independent bounds for all elastic moduli:</p>
+<h2 id="3">The elastic moduli</h2>
+<p>The actual elastic properties of the material depend on the geometric microstructure and can not be computed without additional knowledge.</p>
+<p>Based on the Voigt effective stiffness tensor we may now compute upper, directional independent bounds for all elastic moduli:</p>
 {% highlight matlab %}
 G = C_iso_Voigt.shearModulus
 K = C_iso_Voigt.bulkModulus
@@ -109,7 +125,8 @@ E =
 nu =
     0.2306
 {% endhighlight %}
-<h2 id="4">From the elastic moduli to the elastic tensors</h2><p>Furthermore, any two of them entirely describe the linear elastic behaviour of the material. In particular, we may recover the isotropic stiffness tensor from the bulk and shear moduli alone:</p>
+<h2 id="4">From the elastic moduli to the elastic tensors</h2>
+<p>Furthermore, any two of them entirely describe the linear elastic behaviour of the material. In particular, we may recover the isotropic stiffness tensor from the bulk and shear moduli alone:</p>
 {% highlight matlab %}
 % the matrix entries
 C11 = K+(4/3)*G ; C12=C11-2*G; C44=(C11-C12)/2;
@@ -163,7 +180,8 @@ ans = stiffnessTensor (An0 Albite 2016)
       0      0      0      0  41.43      0
       0      0      0      0      0  41.43
 {% endhighlight %}
-<h2 id="6">Formulas between the elastic moduli</h2><p>As a consequence, Youngs modulus and the Poisson ratio can be computed directly from the bulk and shear modulus (and vice versa)</p>
+<h2 id="6">Formulas between the elastic moduli</h2>
+<p>As a consequence, Youngs modulus and the Poisson ratio can be computed directly from the bulk and shear modulus (and vice versa)</p>
 {% highlight matlab %}
 % formulae for the Poisson ratio
 (E/G-2)/2
@@ -184,7 +202,8 @@ ans =
 ans =
   101.9764
 {% endhighlight %}
-<h2 id="7">Lame constants</h2><p>The second way to represent the elastic behaviour of an isotropic medium is by means of the Lame constants</p>
+<h2 id="7">Lame constants</h2>
+<p>The second way to represent the elastic behaviour of an isotropic medium is by means of the Lame constants</p>
 {% highlight matlab %}
 lambda = nu/(1-2*nu) /(1+nu) * E;
 mu =G;
@@ -220,9 +239,9 @@ Warning: Tensor is not symmetric!
 sigma = stressTensor (xyz)
   rank: 2 (3 x 3)
  
- 150.86  47.52  42.44
-  47.52 149.18  28.71
-  42.44  28.71 124.72
+ 141.68  39.13  35.01
+  39.13 125.77   38.1
+  35.01   38.1  70.87
 {% endhighlight %}
 <p>in terms of the Lame constants by</p>
 {% highlight matlab %}
@@ -236,11 +255,14 @@ sigma = stressTensor (An0 Albite 2016)
   type: Lagrange 
   rank: 2 (3 x 3)
  
- 150.86  44.25  43.26
-  50.79 149.18   28.2
-  41.62  29.21 124.72
+ 141.68  13.85   1.71
+   64.4 125.77  62.79
+  68.31  13.41  70.87
 {% endhighlight %}
-<h2 id="11">Hashin Shtrikman Bounds</h2><p>While the Voigt and Reuss bounds are tight without additional assumptions, the extreme cases require a very specific layered microstructure. If one additionally assumes that the material is quasihomogeneous, i.e., it is constant elastic properties within each subregion that is significantly larger then the grain size, then the Voigt and Reuss bounds are to wide. More narrow bounds for this settings have been established by Hashin and Shtrikman in 1962.</p><p>The following deviation follows the paper by J.M. Brown (2015) <i>Determination of Hashin-Shtrikman bounds on the isotropic effective elastic moduli of polycrystals of any symmetry</i>, Computers &amp; Geosciences, 80 (2015) 95-99.</p><p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimzation problem. Lets first set up the search domain</p>
+<h2 id="11">Hashin Shtrikman Bounds</h2>
+<p>While the Voigt and Reuss bounds are tight without additional assumptions, the extreme cases require a very specific layered microstructure. If one additionally assumes that the material is quasihomogeneous, i.e., it is constant elastic properties within each subregion that is significantly larger then the grain size, then the Voigt and Reuss bounds are to wide. More narrow bounds for this settings have been established by Hashin and Shtrikman in 1962.</p>
+<p>The following deviation follows the paper by J.M. Brown (2015) <i>Determination of Hashin-Shtrikman bounds on the isotropic effective elastic moduli of polycrystals of any symmetry</i>, Computers &amp; Geosciences, 80 (2015) 95-99.</p>
+<p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimzation problem. Lets first set up the search domain</p>
 {% highlight matlab %}
 % define a 2 dimensional domain of bulk and shear moduli
 KMin = 1; KMax = 150; % minimum and maximum bulk moduli
@@ -286,11 +308,13 @@ axis equal tight
 {% highlight plaintext %}
 Warning: Tensor is not positive definite 
 Warning: Tensor is not positive definite 
-Elapsed time is 2.008574 seconds.
+Elapsed time is 2.256056 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="IsotropicTheory_01.png" %}
-</center><h2 id="14">lower and upper Hashin Shtrikman bulk and shear modulus bounds</h2><p>We find the lower Hashin Shtrikman bound of the bulk modulus by minimizing the effective Hashin Shtrikman bulk modulus over the positive definite domains of the residual stiffness tensor <code class="language-plaintext highlighter-rouge">R</code>. Accordingly we find the upper bound as the maximum over the negative definite domain.</p>
+</center>
+<h2 id="14">lower and upper Hashin Shtrikman bulk and shear modulus bounds</h2>
+<p>We find the lower Hashin Shtrikman bound of the bulk modulus by minimizing the effective Hashin Shtrikman bulk modulus over the positive definite domains of the residual stiffness tensor <code class="language-plaintext highlighter-rouge">R</code>. Accordingly we find the upper bound as the maximum over the negative definite domain.</p>
 {% highlight matlab %}
 khsLower = max(khs(def==1));
 khsUpper = min(khs(def==-1));
@@ -318,7 +342,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="IsotropicTheory_02.png" %}
-</center><h2 id="16">Comparison of the bounds</h2><p>Finally we compare the upper and lower Hashin Shtrikman bounds with the Voigt and Reuss bounds.</p>
+</center>
+<h2 id="16">Comparison of the bounds</h2>
+<p>Finally we compare the upper and lower Hashin Shtrikman bounds with the Voigt and Reuss bounds.</p>
 {% highlight matlab %}
 KReuss = C_iso_Reuss.bulkModulus;
 KHill = C_iso_Hill.bulkModulus;
@@ -346,4 +372,7 @@ shear modulus
   Voigt     +HS    Hill     -HS    Reus
 41.4335 36.7537 35.6344 32.8495 29.8353
 {% endhighlight %}
-<p>Note, that upper and lower bounds for all other elastic moduli can be computed from these upper and lower bounds of the bulk and shear modulus.</p></div></body></html>
+<p>Note, that upper and lower bounds for all other elastic moduli can be computed from these upper and lower bounds of the bulk and shear modulus.</p>
+</div>
+</body>
+</html>

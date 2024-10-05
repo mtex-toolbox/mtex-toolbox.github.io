@@ -6,13 +6,31 @@ permalink: S2FunAxisField.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>S2AxisFieldHarmonic</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_S2FunAxisField.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunAxisField.m">
-    edit page</a></font><div><!--introduction--><p>S2AxisFieldharmonic handles axis fields on the sphere. Axis can be understood as three-dimensional vectors without direction or length.</p><!--/introduction--><p>S2AxisFieldHarmonic handles functions of the form</p><p>\[ f\colon {\bf S}^2\to{\bf R}^3_{/&lt;\pm \mathrm{Id}&gt;}. \]</p><h2 id="2">Defining a S2AxisFieldHarmonic</h2><p><b>Definition via function values</b></p><p>At first you need some vertices</p>
+    -->
+<title>S2AxisFieldHarmonic</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2FunAxisField.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SphericalFunctions/S2FunAxisField.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>S2AxisFieldharmonic handles axis fields on the sphere. Axis can be understood as three-dimensional vectors without direction or length.</p>
+<!--/introduction-->
+<p>S2AxisFieldHarmonic handles functions of the form</p>
+<p>\[ f\colon {\bf S}^2\to{\bf R}^3_{/&lt;\pm \mathrm{Id}&gt;}. \]</p>
+<h2 id="2">Defining a S2AxisFieldHarmonic</h2>
+<p>
+<b>Definition via function values</b>
+</p>
+<p>At first you need some vertices</p>
 {% highlight matlab %}
 nodes = equispacedS2Grid('points', 1e5);
 nodes = nodes(:);
@@ -21,7 +39,8 @@ nodes = nodes(:);
 {% highlight matlab %}
 y = vector3d(sin(5*nodes.x), 1, nodes.y, 'antipodal');
 {% endhighlight %}
-<p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sAF1</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a></p>
+<p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sAF1</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
+</p>
 {% highlight matlab %}
 sAF1 = S2AxisFieldHarmonic.approximation(nodes, y)
 {% endhighlight %}
@@ -30,11 +49,15 @@ sAF1 = S2AxisFieldHarmonic.approximation(nodes, y)
 sAF1 = S2AxisFieldHarmonic
  bandwidth: 224
 {% endhighlight %}
-<p><b>Definition via function handle</b></p><p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns antipodal <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
+<p>
+<b>Definition via function handle</b>
+</p>
+<p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns antipodal <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
 {% highlight matlab %}
 f = @(v) vector3d(v.x, v.y, 0*v.x, 'antipodal');
 {% endhighlight %}
-<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sAF2</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a></p>
+<p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sAF2</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
+</p>
 {% highlight matlab %}
 sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
 {% endhighlight %}
@@ -43,17 +66,27 @@ sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
 sAF2 = S2AxisFieldHarmonic
  bandwidth: 128
 {% endhighlight %}
-<h2 id="8">Visualization</h2><p>One can use the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
+<h2 id="8">Visualization</h2>
+<p>One can use the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
 {% highlight matlab %}
 plot(sAF1);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunAxisField_01.png" %}
-</center><div><ul><li>same as quiver(sAF1)</li></ul></div><p>or use the 3D plot of a sphere with the axis on itself</p>
+</center>
+<div>
+<ul>
+<li>same as quiver(sAF1)</li>
+</ul>
+</div>
+<p>or use the 3D plot of a sphere with the axis on itself</p>
 {% highlight matlab %}
 clf;
 quiver3(sAF2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunAxisField_02.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

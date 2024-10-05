@@ -6,13 +6,33 @@ permalink: MaParentGrainReconstruction.html
 folder: documentation
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Martensite Parent Grain Reconstruction</title><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.source" content="script_MaParentGrainReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
-    edit page</a></font><div><!--introduction--><!--/introduction--><p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. The methods are described in more detail in the publications</p><div><ul><li><a href="https://arxiv.org/abs/2201.02103">The variant graph approach to improved parent grain reconstruction</a>, arXiv, 2022,</li><li><a href="https://doi.org/10.1107/S1600576721011560">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a>, J. Appl. Cryst. 55, 2022.</li></ul></div><p>We shall use the following sample data set.</p>
+    -->
+<title>Martensite Parent Grain Reconstruction</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_MaParentGrainReconstruction.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/MaParentGrainReconstruction.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>This script demonstrates the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase. The methods are described in more detail in the publications</p>
+<div>
+<ul>
+<li>
+<a href="https://arxiv.org/abs/2201.02103">The variant graph approach to improved parent grain reconstruction</a>, arXiv, 2022,</li>
+<li>
+<a href="https://doi.org/10.1107/S1600576721011560">Parent grain reconstruction from partially or fully transformed microstructures in MTEX</a>, J. Appl. Cryst. 55, 2022.</li>
+</ul>
+</div>
+<p>We shall use the following sample data set.</p>
 {% highlight matlab %}
 % load the data
 mtexdata martensite
@@ -49,7 +69,9 @@ ebsd = EBSD
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_01.png" %}
-</center><h2 id="2">Setting up the parent grain reconstructor</h2><p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains.</p>
+</center>
+<h2 id="2">Setting up the parent grain reconstructor</h2>
+<p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains.</p>
 {% highlight matlab %}
 % set up the job
 job = parentGrainReconstructor(ebsd,grains);
@@ -71,7 +93,9 @@ job = parentGrainReconstructor
  OR: (111) || (011)   [10-1] || [11-1]
    c2c fit: 2.4°, 3.4°, 4.4°, 5.4° (quintiles)
 {% endhighlight %}
-<p>The output of the variable <code class="language-plaintext highlighter-rouge">job</code> tells us the amount of parent and child grains as well as the percentage of already recovered parent grains. Furthermore, it displays how well the current guess of the parent to child orientation relationship fits the child to child misorientations within our data. In our sample data set this fit is described by the 4 quintiles 2.5&deg;, 3.5&deg;, 4.5&deg; and 5.5&deg;.</p><h2 id="5">Optimizing the parent child orientation relationship</h2><p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individually. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
+<p>The output of the variable <code class="language-plaintext highlighter-rouge">job</code> tells us the amount of parent and child grains as well as the percentage of already recovered parent grains. Furthermore, it displays how well the current guess of the parent to child orientation relationship fits the child to child misorientations within our data. In our sample data set this fit is described by the 4 quintiles 2.5&deg;, 3.5&deg;, 4.5&deg; and 5.5&deg;.</p>
+<h2 id="5">Optimizing the parent child orientation relationship</h2>
+<p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individually. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
 {% highlight matlab %}
 close all
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')
@@ -93,7 +117,8 @@ ans = parentGrainReconstructor
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_02.png" %}
-</center><p>We observe that the optimized parent to child orientation relationship is 2.3&deg; off the initial Kurdjumov Sachs orientation relationship and reduced the first quintil of the misfit with the child to child misorientations to 1.5&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
+</center>
+<p>We observe that the optimized parent to child orientation relationship is 2.3&deg; off the initial Kurdjumov Sachs orientation relationship and reduced the first quintil of the misfit with the child to child misorientations to 1.5&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
 {% highlight matlab %}
 hold on
 histogram(job.calcGBFit./degree,'BinMethod','sqrt')
@@ -101,7 +126,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_03.png" %}
-</center><p>We may explicitely compute the misfit for all child to child boundaries using the command <a href="parentGrainReconstructor.calcGBFit.html"><code class="language-plaintext highlighter-rouge">calcGBFit</code></a>. Beside the list <code class="language-plaintext highlighter-rouge">fit</code> it returns also the list of grain pairs for which these fits have been computed. Using th command <a href="grainBoundary.selectByGrainId.html"><code class="language-plaintext highlighter-rouge">selectByGrainId</code></a> we can find the corresponding boundary segments and colorize them according to this misfit. In the code below we go one step further and adjust the transparency as a function of the misfit.</p>
+</center>
+<p>We may explicitely compute the misfit for all child to child boundaries using the command <a href="parentGrainReconstructor.calcGBFit.html"><code class="language-plaintext highlighter-rouge">calcGBFit</code></a>. Beside the list <code class="language-plaintext highlighter-rouge">fit</code> it returns also the list of grain pairs for which these fits have been computed. Using th command <a href="grainBoundary.selectByGrainId.html"><code class="language-plaintext highlighter-rouge">selectByGrainId</code></a> we can find the corresponding boundary segments and colorize them according to this misfit. In the code below we go one step further and adjust the transparency as a function of the misfit.</p>
 {% highlight matlab %}
 % compute the misfit for all child to child grain neighbours
 [fit,c2cPairs] = job.calcGBFit;
@@ -120,7 +146,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_04.png" %}
-</center><h2 id="8">Variant Graph based parent grain reconstruction</h2><p>Next we set up the variant graph where the nodes are the potential parent orientations of each child grain and the edges describe neighbouring grains that have compatible potential parent orientations. This graph is computed by the function <a href="parentGrainReconstructor.calcVariantGraph.html"><code class="language-plaintext highlighter-rouge">calcVariantGraph</code></a>. The edge weights are computed from the misfit between the potential parent orientations using a cumulative Gaussian distribution with the mean value <code class="language-plaintext highlighter-rouge">'threshold'</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">'tolerance'</code>.</p>
+</center>
+<h2 id="8">Variant Graph based parent grain reconstruction</h2>
+<p>Next we set up the variant graph where the nodes are the potential parent orientations of each child grain and the edges describe neighbouring grains that have compatible potential parent orientations. This graph is computed by the function <a href="parentGrainReconstructor.calcVariantGraph.html"><code class="language-plaintext highlighter-rouge">calcVariantGraph</code></a>. The edge weights are computed from the misfit between the potential parent orientations using a cumulative Gaussian distribution with the mean value <code class="language-plaintext highlighter-rouge">'threshold'</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">'tolerance'</code>.</p>
 {% highlight matlab %}
 job.calcVariantGraph('threshold',2.5*degree,'tolerance',2.5*degree)
 {% endhighlight %}
@@ -133,7 +161,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (350.6°,9.9°,53.6°)
-   c2c fit: 1.4°, 1.8°, 2.4°, 3.8° (quintiles)
+   c2c fit: 1.3°, 1.8°, 2.4°, 3.7° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 1.7°
  
  variant graph: 239748 entries
@@ -157,7 +185,7 @@ ans = parentGrainReconstructor
  child   Iron bcc (old)  432       7002    100%               
  
  OR: (350.6°,9.9°,53.6°)
-   c2c fit: 1.3°, 1.8°, 2.4°, 3.8° (quintiles)
+   c2c fit: 1.3°, 1.8°, 2.4°, 3.9° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 1.7°
  
  votes: 7002 x 1
@@ -170,7 +198,9 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_05.png" %}
-</center><p>We observe many child grains where the algorithm is sure about the parent orientation and some child grains where the probability is close to 50 percent. This is an indication that there are a least two potential parent orientations which are similarly likely. In many cases these potential parent orientations are in a twinning relationship.</p><p>Lets reconstruct all parent orientations where the probability is above 50 percent.</p>
+</center>
+<p>We observe many child grains where the algorithm is sure about the parent orientation and some child grains where the probability is close to 50 percent. This is an indication that there are a least two potential parent orientations which are similarly likely. In many cases these potential parent orientations are in a twinning relationship.</p>
+<p>Lets reconstruct all parent orientations where the probability is above 50 percent.</p>
 {% highlight matlab %}
 job.calcParentFromVote('minProb',0.5)
 
@@ -195,7 +225,8 @@ ans = parentGrainReconstructor
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_06.png" %}
-</center><p>From here we have different possibilities to continue. One possibility is to reconstruct the remaining parent orientations manually. To this end one can use the the command <a href="parentGrainReconstructor.selectInteractive.html"><code class="language-plaintext highlighter-rouge">job.selectInteractive</code></a>. This allow to click any grain and to change its parent orientation into one of the potential parent orientations.</p>
+</center>
+<p>From here we have different possibilities to continue. One possibility is to reconstruct the remaining parent orientations manually. To this end one can use the the command <a href="parentGrainReconstructor.selectInteractive.html"><code class="language-plaintext highlighter-rouge">job.selectInteractive</code></a>. This allow to click any grain and to change its parent orientation into one of the potential parent orientations.</p>
 {% highlight matlab %}
 job.selectInteractive
 {% endhighlight %}
@@ -240,7 +271,10 @@ ans = parentGrainReconstructor
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_07.png" %}
-</center><h2 id="15">Merge similar grains and inclusions</h2><p>After the above reconstruction steps most of the child grains have been reverted into parent grains. However, instead of a few big parent grains we still have many small, but similarly oriented parent grains. These can be merged into big parent grains using the command <a href="parentGrainReconstructor.mergeSimilar.html"><code class="language-plaintext highlighter-rouge">mergeSimilar</code></a></p>
+</center>
+<h2 id="15">Merge similar grains and inclusions</h2>
+<p>After the above reconstruction steps most of the child grains have been reverted into parent grains. However, instead of a few big parent grains we still have many small, but similarly oriented parent grains. These can be merged into big parent grains using the command <a href="parentGrainReconstructor.mergeSimilar.html"><code class="language-plaintext highlighter-rouge">mergeSimilar</code></a>
+</p>
 {% highlight matlab %}
 % merge grains with similar orientation
 job.mergeSimilar('threshold',7.5*degree);
@@ -250,7 +284,8 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_08.png" %}
-</center><p>We may be still a bit unsatisfied with the result as the large parent grains contain many poorly indexed inclusions where we failed to assign to a parent orientation. We may use the command <a href="parentGrainReconstructor.mergeInclusions.html"><code class="language-plaintext highlighter-rouge">mergeInclusions</code></a> to merge all inclusions with fever pixels then a certain threshold into the surrounding parent grains.</p>
+</center>
+<p>We may be still a bit unsatisfied with the result as the large parent grains contain many poorly indexed inclusions where we failed to assign to a parent orientation. We may use the command <a href="parentGrainReconstructor.mergeInclusions.html"><code class="language-plaintext highlighter-rouge">mergeInclusions</code></a> to merge all inclusions with fever pixels then a certain threshold into the surrounding parent grains.</p>
 {% highlight matlab %}
 job.mergeInclusions('maxSize',50);
 
@@ -259,7 +294,9 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_09.png" %}
-</center><h2 id="17">Compute Child Variants</h2><p>Knowing the parent grain orientations we may compute the variants and packets of each child grain using the command <a href="parentGrainReconstructor.calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a>. The values are stored with the properties <code class="language-plaintext highlighter-rouge">job.transformedGrains.variantId</code> and <code class="language-plaintext highlighter-rouge">job.transformedGrains.packetId</code>. The <code class="language-plaintext highlighter-rouge">packetId</code> is defined as the closest {111} plane in austenite to the (011) plane in martensite.</p>
+</center>
+<h2 id="17">Compute Child Variants</h2>
+<p>Knowing the parent grain orientations we may compute the variants and packets of each child grain using the command <a href="parentGrainReconstructor.calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a>. The values are stored with the properties <code class="language-plaintext highlighter-rouge">job.transformedGrains.variantId</code> and <code class="language-plaintext highlighter-rouge">job.transformedGrains.packetId</code>. The <code class="language-plaintext highlighter-rouge">packetId</code> is defined as the closest {111} plane in austenite to the (011) plane in martensite.</p>
 {% highlight matlab %}
 job.calcVariants
 
@@ -280,7 +317,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_10.png" %}
-</center><p>We can also directly identify the child grains belonging to the selected parent grains. Remeber that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
+</center>
+<p>We can also directly identify the child grains belonging to the selected parent grains. Remeber that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
 {% highlight matlab %}
 % identify childs of the selected parent grain
 childGrains = job.grainsPrior(job.mergeId == grainSelected.id);
@@ -295,7 +333,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_11.png" %}
-</center><p>In order to check our parent grain reconstruction we chose the single parent grain outlined in the above map and plot all child variants of its reconstructed parent orientation together with the actually measured child orientations inside the parent grain. In order to compute the <code class="language-plaintext highlighter-rouge">variantId</code> and <code class="language-plaintext highlighter-rouge">packetId</code> we use the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
+</center>
+<p>In order to check our parent grain reconstruction we chose the single parent grain outlined in the above map and plot all child variants of its reconstructed parent orientation together with the actually measured child orientations inside the parent grain. In order to compute the <code class="language-plaintext highlighter-rouge">variantId</code> and <code class="language-plaintext highlighter-rouge">packetId</code> we use the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
 {% highlight matlab %}
 % the measured child orientations that belong to parent grain 279
 childOri = job.ebsdPrior(childGrains).orientations;
@@ -322,7 +361,10 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_12.png" %}
-</center><h2 id="20">Parent EBSD reconstruction</h2><p>So far our analysis was at the grain level. However, once parent grain orientations have been computed we may also use them to compute parent orientations of each pixel in our original EBSD map. This is done by the command <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a></p>
+</center>
+<h2 id="20">Parent EBSD reconstruction</h2>
+<p>So far our analysis was at the grain level. However, once parent grain orientations have been computed we may also use them to compute parent orientations of each pixel in our original EBSD map. This is done by the command <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a>
+</p>
 {% highlight matlab %}
 parentEBSD = job.calcParentEBSD;
 
@@ -331,7 +373,8 @@ plot(parentEBSD('Iron fcc'),parentEBSD('Iron fcc').orientations,'figSize','large
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_13.png" %}
-</center><p>We obtain even a measure <code class="language-plaintext highlighter-rouge">parentEBSD.fit</code> for the corespondence between the parent orientation reconstructed from the single pixel and the parent orientation of the grain. Lets visualize this fit</p>
+</center>
+<p>We obtain even a measure <code class="language-plaintext highlighter-rouge">parentEBSD.fit</code> for the corespondence between the parent orientation reconstructed from the single pixel and the parent orientation of the grain. Lets visualize this fit</p>
 {% highlight matlab %}
 % the fit between ebsd child orientation and the reconstructed parent grain
 % orientation
@@ -346,7 +389,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_14.png" %}
-</center><h2 id="22">Denoise the parent map</h2><p>Finaly we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
+</center>
+<h2 id="22">Denoise the parent map</h2>
+<p>Finaly we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
 {% highlight matlab %}
 [parentGrains, parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',3*degree);
 
@@ -365,7 +410,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_15.png" %}
-</center><p>and then use the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> to fill the holes in the reconstructed parent map</p>
+</center>
+<p>and then use the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> to fill the holes in the reconstructed parent map</p>
 {% highlight matlab %}
 % fill the holes
 F = halfQuadraticFilter;
@@ -381,4 +427,7 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_16.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>
