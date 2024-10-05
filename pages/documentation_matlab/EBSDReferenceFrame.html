@@ -25,7 +25,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>The most important difference between MTEX and many other EBSD software is that in MTEX the Euler angle reference is always the map reference frame. This mean the \(x\) and \(z\) axes of the map are exactly the rotation axes of the Euler angles.</p>
 <p>In case the map coordinates and the Euler angles in your data are with respect to different reference frames it is highly recommended to correct for this while importing the data into MTEX. This section explains in detail how to do this.</p>
-<h2 id="2">On Sreen Orientation of the EBSD Map</h2>
+<h2 id="2">On Screen Orientation of the EBSD Map</h2>
 <p>Many people are concerned when the images produced by MTEX are not aligned exactly as they are in their commercial software. It is indeed very important to understand exactly the alignment of your data. However, the important point is not whether a map is upside down on your screen or not. The important point is how your map aligns with the specimen, as we want to use the map to describe properties of the specimen.</p>
 <p>There are basically two components in an EBSD data set that refer to the specimen reference frame: the spatial coordinates \(x\), \(y\) and the Euler angles \(\phi_1\), \(\Phi\), \(\phi_2\). To explain the difference have a look at the EDAX export dialog</p>
 <p>
@@ -61,9 +61,9 @@ ebsd = EBSD
      4   1095 (2.2%)  Chalcopyrite    LightCoral       422                         
  
  <strong>Properties</strong>: ci, fit, iq, sem_signal, unknown1, unknown2, unknown3, unknown4, oldId
- <strong>Scan unit</strong> : um
- <strong>X x Y x Z</strong> : [0 888] x [0 888] x [0 0]
- <strong>Normal vector</strong>: (0,0,1)
+ Scan unit : um
+ X x Y x Z : [0 888] x [0 888] x [0 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_01.png" %}
@@ -93,8 +93,9 @@ largeGrains = grains(grains.grainSize>500)
 
 % and plot the crystal shapes
 hold on
-plot(largeGrains,cS)
+plot(largeGrains,cS,'colored')
 hold off
+legend off
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -145,7 +146,8 @@ plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
 
 % and plot the crystal shapes
 hold on
-plot(largeGrains,cS)
+plot(largeGrains,cS,'colored')
+legend off
 hold off
 {% endhighlight %}
 <center>
@@ -167,7 +169,8 @@ plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
 
 % and plot the crystal shapes
 hold on
-plot(largeGrains,cS)
+plot(largeGrains,cS,'colored')
+legend off
 hold off
 {% endhighlight %}
 <center>
@@ -193,7 +196,8 @@ plot(ebsd_rot('olivine'),ebsd_rot('olivine').orientations,'coordinates','on')
 
 % and plot the crystal shapes
 hold on
-plot(largeGrains,cS)
+plot(largeGrains,cS,'colored')
+legend off
 hold off
 {% endhighlight %}
 <center>
