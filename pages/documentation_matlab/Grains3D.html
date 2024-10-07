@@ -60,7 +60,7 @@ id =
 <a href="https://neper.info">Neper</a> is a software package for the simulation of three dimensional microstructures. After installation it can be directly called by MTEX. The general workflow is explained <a href="NeperInterface.html">here</a>. Here we use it to quickly generate a copper microstructure with specific texture and specific distribution of boundary normals.</p>
 {% highlight matlab %}
 % set up the communication with Neper
-job = neperInstance
+job = neperInstance;
 
 % define a texture
 cs = crystalSymmetry.load('quartz.cif','color','lightblue');
@@ -68,9 +68,8 @@ odf = fibreODF(cs.cAxis,vector3d(1,1,1));
 
 numGrains=100;
 grains = job.simulateGrains(odf,numGrains,'silent')
-
 % or you can load an existing tessellation file
-%grains3 = grain3d.load('allgrains.tess','CS',cs)
+%grains = grain3d.load('allgrains.tess','CS',cs)
 
 % colorize by mean orientation
 plot(grains,grains.meanOrientation,'micronbar','off')
@@ -78,18 +77,6 @@ setCamera(how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-job = 
-  neperInstance with properties:
-
-              id: 1
-        cubeSize: [1 1 1]
-          morpho: 'graingrowth'
-         iterMax: 1000
-    varNeperopts: []
-      fileName2d: '2dslice'
-      fileName3d: 'allgrains'
-        filePath: '/tmp/neper/'
- 
 grains = grain3d
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame

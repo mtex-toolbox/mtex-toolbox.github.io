@@ -337,9 +337,9 @@ ebsd = EBSD
     -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
  
  <strong>Properties</strong>: ci, error, iq
- <strong>Scan unit</strong> : um
- <strong>X x Y x Z</strong> : [0 511] x [0 300] x [0 0]
- <strong>Normal vector</strong>: (0,0,1)
+ Scan unit : um
+ X x Y x Z : [0 511] x [0 300] x [0 0]
+ Normal vector: (0,0,1)
  
  
 ebsd = EBSD
@@ -348,9 +348,9 @@ ebsd = EBSD
     -1  10251 (100%)     iron  LightSkyBlue      m-3m                         
  
  <strong>Properties</strong>: ci, error, iq
- <strong>Scan unit</strong> : um
- <strong>X x Y x Z</strong> : [0 200] x [0 50] x [0 0]
- <strong>Normal vector</strong>: (0,0,1)
+ Scan unit : um
+ X x Y x Z : [0 200] x [0 50] x [0 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlasticDeformation_06.png" %}
@@ -409,6 +409,14 @@ sigma = stressTensor (xyz)
 sSactive = grains.meanOrientation .* sS(active);
 
 hold on
+plot(grains,sS(active))
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PlasticDeformation_08.png" %}
+</center>
+{% highlight matlab %}
+hold on
 % visualize the trace of the slip plane
 quiver(grains,sSactive.trace,'color','b')
 
@@ -417,7 +425,7 @@ quiver(grains,sSactive.b,'color','r')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PlasticDeformation_08.png" %}
+{% include inline_image.html file="PlasticDeformation_09.png" %}
 </center>
 <p>We observe that the Burgers vector is in most case aligned with the trace. In those cases where trace and Burgers vector are not aligned the slip plane is not perpendicular to the surface and the Burgers vector sticks out of the surface.</p>
 <p>Next we want to demonstrate the alternative route</p>
@@ -457,9 +465,9 @@ quiver(grains,sSactive.b,'color','r')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PlasticDeformation_09.png" %}
+{% include inline_image.html file="PlasticDeformation_10.png" %}
 </center>
-<h2 id="26">Strain based analysis on the same data set</h2>
+<h2 id="27">Strain based analysis on the same data set</h2>
 {% highlight matlab %}
 eps = strainTensor(diag([1,0,-1]))
 
@@ -486,7 +494,7 @@ epsCrystal = strainTensor (iron)
   rank: 2 (3 x 3)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PlasticDeformation_10.png" %}
+{% include inline_image.html file="PlasticDeformation_11.png" %}
 </center>
 {% highlight matlab %}
 [ bMax , bMaxId ] = max( b , [ ] , 2 ) ;
@@ -497,7 +505,7 @@ quiver ( grains , sSGrains.trace)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PlasticDeformation_11.png" %}
+{% include inline_image.html file="PlasticDeformation_12.png" %}
 </center>
 </div>
 </body>

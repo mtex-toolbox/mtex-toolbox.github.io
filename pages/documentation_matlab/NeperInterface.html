@@ -80,25 +80,32 @@ job.morpho = 'diameq:lognormal(1,0.35),1-sphericity:lognormal(0.145,0.03)';
 </ol>
 </div>
 {% highlight matlab %}
-cs = crystalSymmetry('432');
-ori = orientation.rand(cs);
-odf = unimodalODF(ori);
+odf = SO3Fun.dubna
 numGrains = 1000;
 
 grains = job.simulateGrains(odf,numGrains,'silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
+odf = SO3FunRBF (Quartz → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
+ 
+ 
 grains = grain3d
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
-     2    1000      32                432                         
+     2    1000      32   Quartz       321       X||a*, Y||b, Z||c*
  
  boundary faces: 7085
  
  <strong>Properties</strong>: meanRotation
 {% endhighlight %}
 <h2 id="9">plot the grains</h2>
+<p>Lets visualize the grains and adjust a nice view point.</p>
 {% highlight matlab %}
 clf
 plot(grains,grains.meanOrientation)
@@ -122,11 +129,24 @@ A = vector3d(2,2,1);
 
 grains001 = grains.slice(N(1),A);
 grains1_10= grains.slice(N(2),A);
-grains224 = grains.slice(N(3),A);
+grains224 = grains.slice(N(3),A)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains224 = grain2d
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     2     223     223   Quartz       321       X||a*, Y||b, Z||c*
+ 
+ boundary segments: 672 (117 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 396
+ 
+ <strong>Properties</strong>: meanRotation
 {% endhighlight %}
 <p>the resulting slices are grain maps which we can visualize in 3d</p>
 {% highlight matlab %}
-plot(grains001,grains001.meanOrientation);
+plot(grains001,grains001.meanOrientation,'micronbar','off');
 hold on
 plot(grains1_10,grains1_10.meanOrientation);
 hold on
@@ -148,7 +168,7 @@ Warning: still can not concatenate grains on different slices
 {% highlight matlab %}
 inPlane = grains.intersected(N(1),A);
 
-plot(grains001,grains001.meanOrientation);
+plot(grains001,grains001.meanOrientation,'micronbar','off');
 hold on
 plot(grains(inPlane),grains(inPlane).meanOrientation)
 hold off
