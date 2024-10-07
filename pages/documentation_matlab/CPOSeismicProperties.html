@@ -27,6 +27,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>Let's first import an example dataset from the MTEX toolbox</p>
 {% highlight matlab %}
 mtexdata forsterite
+plotx2north
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -39,9 +40,9 @@ ebsd = EBSD
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
  <strong>Properties</strong>: bands, bc, bs, error, mad
- <strong>Scan unit</strong> : um
- <strong>X x Y x Z</strong> : [0 36550] x [0 16750] x [0 0]
- <strong>Normal vector</strong>: (0,0,1)
+ Scan unit : um
+ X x Y x Z : [0 36550] x [0 16750] x [0 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
 <p>This dataset consists of the three main phases, forsterite, enstatite and diopside. As we want to plot the seismic properties of this aggregate, we need (i) the modal proportions of each phase in this sample, (ii) their orientations, which is given by their ODFs, (iii) the elastic constants of the minerals and (iv) their densities. One can use the modal proportions that appear in the command window (ol=62 %, en=11%, dio=4%), but there is a lot of non-indexed data. You can recalculate the data only for the indexed data</p>
 <h2 id="3">Correct EBSD spatial coordinates</h2>
@@ -49,7 +50,7 @@ ebsd = EBSD
 {% highlight matlab %}
 ebsd = rotate(ebsd,rotation('axis',-zvector,'angle',90*degree));
 
-plot(ebsd)
+plot(ebsd,'micronbar','off')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CPOSeismicProperties_01.png" %}
