@@ -12,7 +12,16 @@ if check_option(varargin,'clear') && ...
   !rm -r ../pages/function_reference_matlab/*
   !rm -r ../pages/documentation_matlab/*
   !rm -r ./tmp/*
+
+  % clear all data
   mtexdata clear
+
+  % and reload them again
+  allData = mtexdata;
+  for str = allData.'
+    disp("loading " + char(str))
+    mtexdata(char(str),'silent')
+  end
 end
 
 %% settings
