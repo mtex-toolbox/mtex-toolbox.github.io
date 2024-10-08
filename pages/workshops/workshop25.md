@@ -268,6 +268,10 @@ their talks as accessible as possible.
 
 ### Keynote Speakers
 
+- **{% include reference.html
+  link="https://www.materials.ox.ac.uk/peoplepages/marquardt.html"
+  content="Katharina Marquardt" %}** (University of Oxford)
+- more to come
 
 ## Venue:
 
@@ -275,7 +279,7 @@ their talks as accessible as possible.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseLocation">
-				<b>Location:</b> TU Freiberg, Germany</a>
+				<b>Location:</b> TU Freiberg, Germany (click for details)</a>
 			</h4>
 		</div>
 		<div id="collapseLocation" class="panel-collapse collapse noCrossRef">
@@ -289,7 +293,7 @@ their talks as accessible as possible.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseAccomodation">
-				<b>Accommodation:</b> </a>
+				<b>Accommodation:</b> (click for details)</a>
 			</h4>
 		</div>
 		<div id="collapseAccomodation" class="panel-collapse collapse noCrossRef">
@@ -320,7 +324,7 @@ their talks as accessible as possible.
 - first + second week (presence):  (PhD) students - 400 Euro, other - 600 Euro
 - first + second week (online):  (PhD) students - 200 Euro, other - 300 Euro
 - second week: (PhD) students - 100 Euro, other - 200 Euro
-- Payment includes Lunch for all days and Excursion fee
+- Payment includes: Lunch for all days and Excursion fee
 - Registration for students of the TU Freiberg and the University of Halle is free of charge
 
 ## Organizers:
@@ -328,7 +332,7 @@ their talks as accessible as possible.
 {% include reference.html link="https://tu-freiberg.de/fakult1/ana/hielscher" content="Ralf Hielscher" %} (TU Bergakademie Freiberg),
 {% include reference.html link="https://geodynamics.geo.uni-halle.de/ruediger-kilian/" content="Rüdiger Kilian" %} (Universität Halle),
 {% include reference.html link="https://structuretectonics.org/people/luiz-morales/" content="Luiz Morales" %} (ETH Zürich),
-<!--{% include reference.html link="https://www.researchgate.net/profile/Frank-Niessen-4" content="Frank Niessen" %} ()-->
+{% include reference.html link="https://scholar.google.co.uk/citations?hl=en&user=GvwErjEAAAAJ&view_op=list_works&sortby=pubdate" content="Vivian Tong" %} (National Physical Laboratory UK)
 
 {% capture ref_content %}{% include inline_image.html file="icons/acaTrain.jpg" %}{% endcapture %}
 {% include reference.html link="https://acatrain.net/" content=ref_content %}
