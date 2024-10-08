@@ -90,36 +90,51 @@ ori = orientation (432 → xyz)
      0   30   15
  
 M =
-    2.2350
+    2.1208
  
 W = spinTensor (432)
   rank: 2 (3 x 3)
  
  *10^-2
-       0  18.312   3.248
- -18.312       0  15.578
-  -3.248 -15.578       0
+      0     51  65.65
+    -51      0 -23.04
+ -65.65  23.04      0
 {% endhighlight %}
 <p>When called without specifying an orientation the command <code class="language-plaintext highlighter-rouge">calcTaylor</code> computes the Taylor factor <code class="language-plaintext highlighter-rouge">M</code> as well as the spin tensors <code class="language-plaintext highlighter-rouge">W</code> as <a href="SO3FunConcept.html">orientation dependent functions</a>, which can be easily visualized and analyzed.</p>
 {% highlight matlab %}
 [M,~,W] = calcTaylor(epsilon,sS.symmetrise)
+
+% evaluate the Taylor factor at an arbitrary orientation
+M.eval(ori)
+W.eval(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
 M = SO3FunHarmonic (432 → xyz)
   bandwidth: 32
-  weight: 2
+  weight: 3.1
  
  
 W = SO3VectorFieldHarmonic (432 → xyz)
   bandwidth: 32
   tangent space: rightSpinTensor
+ 
+ans =
+    2.1009
+ 
+ans = spinTensor (432)
+  rank: 2 (3 x 3)
+ 
+ *10^-2
+      0  38.89  49.68
+ -38.89      0 -14.97
+ -49.68  14.97      0
 {% endhighlight %}
 <p>The following code reproduces Fig. 5 of the paper of Bunge, H. J. (1970). Some applications of the Taylor theory of polycrystal plasticity. Kristall Und Technik, 5(1), 145-175. <a href="http://doi.org/10.1002/crat.19700050112">http://doi.org/10.1002/crat.19700050112</a>
 </p>
 {% highlight matlab %}
 % set up an phi1 section plot
-sP = phi1Sections(cs,specimenSymmetry('222'));
+sP = phi1Sections(cs);
 sP.phi1 = (0:10:90)*degree;
 
 % plot the Taylor factor
@@ -212,6 +227,7 @@ epsilon = strainTensor (xyz)
 
 {% highlight matlab %}
 % colorize grains according to Taylor factor
+plotzOutOfPlane, plotx2east
 plot(grains,M)
 mtexColorMap white2black
 mtexColorbar
@@ -224,9 +240,9 @@ sSGrains = grains.meanOrientation .* sS(bMaxId);
 
 % visualize slip direction and slip plane for each grain
 hold on
-quiver(grains,sSGrains.b,'autoScaleFactor',0.5,'displayName','Burgers vector')
+quiver(grains,sSGrains.b,'autoScaleFactor',0.7,'displayName','Burgers vector','project2plane')
 hold on
-quiver(grains,sSGrains.trace,'autoScaleFactor',0.5,'displayName','slip plane trace')
+quiver(grains,sSGrains.trace,'autoScaleFactor',0.7,'displayName','slip plane trace')
 hold off
 {% endhighlight %}
 <center>
@@ -236,6 +252,7 @@ hold off
 {% highlight matlab %}
 figure(2)
 plot(sSGrains.b)
+text([xvector,yvector,zvector],'labeled','BackGroundcolor','w')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TaylorModel_05.png" %}
