@@ -86,7 +86,7 @@ sS = slipSystem (Nickel)
   u    v    w  | h    k    l CRSS
   0   -1    1    1    1    1    1
 {% endhighlight %}
-<p>and using the command <a href="slipSystem.SchmidFactor.html">SchmidFactor</a>
+<p>and using the command <a href="slipSystem.SchmidFactor.html"><code class="language-plaintext highlighter-rouge">SchmidFactor</code></a>
 </p>
 {% highlight matlab %}
 sS.SchmidFactor(r)
@@ -96,12 +96,12 @@ sS.SchmidFactor(r)
 ans =
     0.1750
 {% endhighlight %}
-<p>Omitting the tension direction r the command <a href="slipSystem.SchmidFactor.html">SchmidFactor</a> returns the Schmid factor as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>
+<p>Omitting the tension direction <code class="language-plaintext highlighter-rouge">r</code> the command <a href="slipSystem.SchmidFactor.html"><code class="language-plaintext highlighter-rouge">SchmidFactor</code></a> returns the Schmid factor as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>
 </p>
 {% highlight matlab %}
 SF = sS.SchmidFactor
 
-% plot the Schmid factor in dependency of the tension direction
+% plot the Schmid factor as a function of the tension direction
 plot(SF)
 
 % find the tension directions with the maximum Schmid factor
@@ -129,7 +129,8 @@ pos = vector3d
 {% include inline_image.html file="PlasticDeformation_01.png" %}
 </center>
 <h2 id="9">Stress Tensor</h2>
-<p>Instead by the tension direction the stress might be specified by a stress tensor</p>
+<p>Instead by the tension direction the stress might be specified by a <a href="stressTensor.stressTensor.html">stress tensor</a>
+</p>
 {% highlight matlab %}
 sigma = stressTensor.uniaxial(vector3d.Z)
 {% endhighlight %}
@@ -452,7 +453,7 @@ hold on
 quiver(grains,sSactive.trace,'color','b')
 
 % and the slip direction
-quiver(grains,sSactive.b,'color','r')
+quiver(grains,sSactive.b,'color','r','project2plane')
 
 hold off
 {% endhighlight %}
@@ -492,8 +493,8 @@ epsCrystal = strainTensor (iron)
 [ bMax , bMaxId ] = max( b , [ ] , 2 ) ;
 sSGrains = grains.meanOrientation .* sS(bMaxId) ;
 hold on
-quiver ( grains , sSGrains.b)
-quiver ( grains , sSGrains.trace)
+quiver ( grains , sSGrains.b,'project2plane','color','r')
+quiver ( grains , sSGrains.trace,'color','b')
 hold off
 {% endhighlight %}
 <center>

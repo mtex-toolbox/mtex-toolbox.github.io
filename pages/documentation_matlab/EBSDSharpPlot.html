@@ -114,11 +114,6 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations,'robust') * ipfKey.wh
 close all;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Possibly applying an orientation to an object in specimen
-coordinates!
-{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSharpPlot_05.png" %}
 </center>
@@ -149,6 +144,7 @@ I'm plotting 10 random orientations out of 20119 given orientations
 </center>
 <p>observe how in the inverse pole figure the orientations are scattered closely around the white center. Together with the fact that the transition from white to color is quite rapidly, this gives a high contrast.</p>
 <h2 id="9">The axis angle color key</h2>
+<p>A second option to visualize small orientation deviation, e.g. within a grains is the <a href="axisAngleColorKey.axisAngleColorKey.html">axis-angle color key</a>. In order to demonstrate this color key let us first separate the EBSD into grains.</p>
 {% highlight matlab %}
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',1.5*degree);
 ebsd(grains(grains.grainSize<=3)) = [];
@@ -156,7 +152,7 @@ ebsd(grains(grains.grainSize<=3)) = [];
 
 grains = smooth(grains,5);
 {% endhighlight %}
-
+<p>In order to apply the @axisAngleColorKey we need to specify the crystal symmetry and a reference orientation <code class="language-plaintext highlighter-rouge">oriRef</code>. Often the meanorientation of the grains is a good choice.</p>
 {% highlight matlab %}
 ipfKey = axisAngleColorKey(ebsd('indexed'));
 
@@ -172,6 +168,7 @@ hold off
 <center>
 {% include inline_image.html file="EBSDSharpPlot_08.png" %}
 </center>
+<p>Being able to visualize very small orientation changes gives us better way to observe how <a href="EBSDDenoising.html">EBSD denoising methods</a> work</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 
@@ -263,11 +260,6 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations) * ipfKey.whiteCenter
 ipfKey.maxAngle = 2*degree;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Possibly applying an orientation to an object in specimen
-coordinates!
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSharpPlot_11.png" %}
