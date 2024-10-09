@@ -284,7 +284,7 @@ ebsdS = EBSDsquare
 <center>
 {% include inline_image.html file="EBSDGrid_08.png" %}
 </center>
-<p>It is important to understand that the command <a href="EBSD.gridify.html">gridify</a> does not increase the number of data points. As a consequence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html">fill</a> which performs nearest neighbor interpolation or the command <a href="EBSD.smooth">smooth</a> which allows for more sophisticated interpolation methods.</p>
+<p>It is important to understand that the command <a href="EBSD.gridify.html">gridify</a> does not increase the number of data points. As a consequence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a> which performs nearest neighbor interpolation or the command <a href="EBSD.smooth">smooth</a> which allows for more sophisticated interpolation methods.</p>
 {% highlight matlab %}
 % nearest neighbor interpolation
 ebsdS1 = fill(ebsdS,grains)
@@ -317,7 +317,7 @@ F = halfQuadraticFilter;
 F.alpha = 0.5;
 ebsdS2 = smooth(ebsdS,F,'fill',grains)
 
-nextAxis
+nextAxis(1,2)
 plot(ebsdS2('indexed'),ebsdS2('indexed').orientations)
 hold on
 plot(grains.boundary,'lineWidth',2)
@@ -340,7 +340,7 @@ ebsdS2 = EBSD
 {% include inline_image.html file="EBSDGrid_10.png" %}
 </center>
 <h2 id="17">Gridify on Rotated Maps</h2>
-<p>A similar situation occurs if <a href="EBSD.gridify.html">gridify</a> is applied to rotated data.</p>
+<p>A similar situation occurs if <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> is applied to rotated data.</p>
 {% highlight matlab %}
 ebsd = rotate(ebsd,20*degree)
 
@@ -375,7 +375,7 @@ ebsdG = EBSDhex
 <center>
 {% include inline_image.html file="EBSDGrid_11.png" %}
 </center>
-<p>Again we may observe white spots within the map which we can easily fill with the <a href="EBSD.fill.html">fill</a> command.</p>
+<p>Again we may observe white spots within the map which we can easily fill with the <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a> command.</p>
 {% highlight matlab %}
 ebsdGF = fill(ebsdG)
 
