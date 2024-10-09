@@ -1,0 +1,151 @@
+---
+title: script_Grains3DOperations
+
+sidebar: documentation_sidebar
+permalink: Grains3DOperations.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>script_Grains3DOperations</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_Grains3DOperations.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSD3Analysis/Grains3DOperations.m">
+    edit page</a></font>
+<div>
+<h2 id="1">Operations with Three-Dimensional Grains</h2>
+<p>In this section we explain some basic operations with three dimensional grains. Lets start by importing some example data set and plot it from a nice perspective</p>
+{% highlight matlab %}
+mtexdata NeperGrain3d
+
+% colorize by mean orientation
+plot(grains,grains.meanOrientation)
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain3d
+ 
+ Phase  Grains   Volume  Mineral  Symmetry  Crystal reference frame
+     2    1000  1000000   Quartz       321       X||a*, Y||b, Z||c*
+ 
+ boundary faces: 7203
+ 
+ Properties: meanRotation
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DOperations_01.png" %}
+</center>
+<h2 id="2">Slicing</h2>
+<p>We can extract from 3d grain data 2d grain data by slicing them along one or multiple planes. This is done using the command <a href="grain3d.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a>. This command requires two inputs to characterize a plane - the plane normal <code class="language-plaintext highlighter-rouge">N</code> and an arbitrary point <code class="language-plaintext highlighter-rouge">P0</code> within the plane.</p>
+{% highlight matlab %}
+% a point where the slice should pass through
+P0 = vector3d(50,50,50);
+
+% the normal direction of the slice
+N = vector3d(1,-1,0);
+
+% compute the slice
+grains1_10 = grains.slice(N,P0)
+
+% visualize the slice
+plot(grains1_10,grains1_10.meanOrientation,'micronbar','off')
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains1_10 = grain2d
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     2     191     191   Quartz       321       X||a*, Y||b, Z||c*
+ 
+ boundary segments: 574 (3408 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 334
+ 
+ Properties: meanRotation
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DOperations_02.png" %}
+</center>
+<p>We may adjust the @plottingConvention such that the normal direction is perpendicular to the screen.</p>
+{% highlight matlab %}
+how2plot = plottingConvention;
+how2plot.outOfScreen = N;
+how2plot.north = zvector
+setCamera(how2plot)
+{% endhighlight %}
+
+{% highlight plaintext %}
+how2plot = plottingConvention
+ 
+  outOfScreen: (1,-1,0)
+  north      : (0,0,1) 
+  east       : (1,1,0)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DOperations_03.png" %}
+</center>
+<p>We may use the exact same syntax to generate multiple slices.</p>
+{% highlight matlab %}
+N = vector3d.Z;
+for k = 1:19:99
+
+  grainSlice = grains.slice(N, vector3d(0,0,k));
+
+  plot(grainSlice,grainSlice.meanOrientation)
+  hold on
+
+end
+hold off
+
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DOperations_04.png" %}
+</center>
+<h2 id="5">Triangulation</h2>
+<p>Some functions are much faster on triangulated meshes. Therefore you can triangulate your grains with the command <a href="grain3d.triangulate.html"><code class="language-plaintext highlighter-rouge">triangulate</code></a>.</p>
+{% highlight matlab %}
+grainsTri = grains(20).triangulate
+
+plot(grainsTri,grainsTri.meanOrientation)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grainsTri = grain3d
+ 
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     2       1     702   Quartz       321       X||a*, Y||b, Z||c*
+ 
+ boundary faces: 63
+ 
+ Id   Phase   Pixels            meanRotation
+ 20       2        1   (124.9°,50.2°,269.2°)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DOperations_05.png" %}
+</center>
+<h2 id="6">Rotation</h2>
+<p>Not surprisingly we can use the command <a href="grain3d.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> to apply any rotation to three dimensional grains. Note that a rotation changes the spatial coordinates as well as the orientations of the grains.</p>
+{% highlight matlab %}
+rot = rotation.byAxisAngle(vector3d(1,1,1),30*degree);
+grains_rot = rot * grains;   % or rotate(grains3,rot)
+
+% plotting
+plot(grains_rot,grains_rot.meanOrientation)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DOperations_06.png" %}
+</center>
+</div>
+</body>
+</html>

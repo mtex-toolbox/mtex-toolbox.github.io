@@ -25,7 +25,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>In this section we discuss specific operations that are available for EBSD data which are measured on a square or hexagonal grid.</p>
 <p>By default MTEX ignores any gridding in the data. The reason for this is that when restricting to some subset, e.g. to a certain phase, the data will not form a regular grid anyway. For that reason, almost all functions in MTEX are implemented to work for arbitrarily aligned data.</p>
-<p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a>, <a href="EBSDGradient.html">gradient computation</a> and <a href="EBSDDenoising.html">denoising</a>. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html">gridify</a>.</p>
+<p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a>, <a href="EBSDGradient.html">gradient computation</a> and <a href="EBSDDenoising.html">denoising</a>. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>.</p>
 <p>In order to explain the corresponding concept in more detail lets import some sample data.</p>
 {% highlight matlab %}
 plottingConvention.setDefault
@@ -63,7 +63,7 @@ ans = vector3d
   -0.15 -0.15     0
    0.15 -0.15     0
 {% endhighlight %}
-<p>If we apply the command <a href="EBSD.gridify.html">gridify</a> to the data set</p>
+<p>If we apply the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> to the data set</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify
 {% endhighlight %}
@@ -114,7 +114,7 @@ ebsdMg = EBSD
  X x Y x Z : [0 50] x [0 41] x [0 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>However, we may always force it into matrix form by reapplying the command <a href="EBSD.gridify.html">gridify</a>
+<p>However, we may always force it into matrix form by reapplying the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>
 </p>
 {% highlight matlab %}
 ebsdMg = ebsd('Magnesium').gridify
@@ -224,7 +224,7 @@ plot(ebsd(:,1:10),ebsd(:,1:10).orientations,'micronbar','off')
 {% include inline_image.html file="EBSDGrid_06.png" %}
 </center>
 <h2 id="12">Switching from Hexagonal to Square Grid</h2>
-<p>Sometimes it is required to resample EBSD data on a hex grid on a square grid. This can be accomplished by passing to the command <a href="EBSD.gridify.html">gridify</a> a square unit cell by the option <code class="language-plaintext highlighter-rouge">unitCell</code>.</p>
+<p>Sometimes it is required to resample EBSD data on a hex grid on a square grid. This can be accomplished by passing to the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> a square unit cell by the option <code class="language-plaintext highlighter-rouge">unitCell</code>.</p>
 {% highlight matlab %}
 % define a square unit cell
 unitCell = 2.5 * vector3d([-1 -1 1 1].',[-1 1 1 -1].',0);
@@ -284,7 +284,7 @@ ebsdS = EBSDsquare
 <center>
 {% include inline_image.html file="EBSDGrid_08.png" %}
 </center>
-<p>It is important to understand that the command <a href="EBSD.gridify.html">gridify</a> does not increase the number of data points. As a consequence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a> which performs nearest neighbor interpolation or the command <a href="EBSD.smooth">smooth</a> which allows for more sophisticated interpolation methods.</p>
+<p>It is important to understand that the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> does not increase the number of data points. As a consequence, we end up with many white spots in the map which corresponds to orientations that have been set to NaN. In order to fill these white spots, we may either use the command <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a> which performs nearest neighbor interpolation or the command <a href="EBSD.smooth"><code class="language-plaintext highlighter-rouge">smooth</code></a> which allows for more sophisticated interpolation methods.</p>
 {% highlight matlab %}
 % nearest neighbor interpolation
 ebsdS1 = fill(ebsdS,grains)
