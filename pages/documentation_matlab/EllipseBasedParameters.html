@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a> the following properties based on the fitted ellipses are avaiable.</p>
+<p>In this section we discuss geometric properties of grains that are related to ellipses fitted to the grains. Additionally to the orientation <code class="language-plaintext highlighter-rouge">omega</code>, and the lengths <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> of the long axis and short axes that are computed by the command <a href="grain2d.fitEllipse.html"><code class="language-plaintext highlighter-rouge">[omega,a,b] = grains.fitEllipse</code></a> the following properties based on the fitted ellipses are available.</p>
 <p>
    <table class="usertable">
       <tr>
@@ -85,7 +85,7 @@ ebsd(grains(grains.grainSize<10)) = [];
 [grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
 grains(grains.isBoundary) = [];
 
-grains=smooth(grains('indexed'),10,'moveTriplePoints');
+grains = smooth(grains('indexed'),10,'moveTriplePoints');
 
 % plot the grains
 plot(grains,'micronbar','off','lineWidth',2)
@@ -106,8 +106,8 @@ plotEllipse(grains.centroid,a,b,omega,'lineColor','w','linewidth',2)
 </center>
 <p>The returned variable <code class="language-plaintext highlighter-rouge">omega</code> is the angle describing the rotation of the ellipses and <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are the length of the longest and shortest half axis. The midpoints of the ellipses can be computed by the command <a href="grain2d.centroid.html"><code class="language-plaintext highlighter-rouge">grains.centroid</code></a>. Note, that the ellipses are scaled such that the area of the ellipse coincides with the actual grain area. Alternatively, one can also scale the ellipse to fit the boundary length by using the option <code class="language-plaintext highlighter-rouge">boundary</code>.</p>
 <h2 id="4">Long and Short Axes</h2>
-<p>The direction of the long and the short axis of the fitted ellipse can be obtained by the comands <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a>. These directions are only well defined if the fitted ellipse is not to close to a perfect circle. A measure for how distinct the ellipse is from a perfect circle is the <a href="grain2d.aspectRatio.html">aspect ratio</a> which is defined as the quotient \(a/b\) between the longest and the shortest axis. For a perfect circle the apect ratio is \(1\) and increases to infinity when the ellipse becomes more and more elongated.</p>
-<p>Lets colorize the grains by their apect ratio and plot on top the long axis directions:</p>
+<p>The direction of the long and the short axis of the fitted ellipse can be obtained by the commands <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a>. These directions are only well defined if the fitted ellipse is not to close to a perfect circle. A measure for how distinct the ellipse is from a perfect circle is the <a href="grain2d.aspectRatio.html">aspect ratio</a> which is defined as the quotient \(a/b\) between the longest and the shortest axis. For a perfect circle the aspect ratio is \(1\) and increases to infinity when the ellipse becomes more and more elongated.</p>
+<p>Lets colorize the grains by their aspect ratio and plot on top the long axis directions:</p>
 {% highlight matlab %}
 % visualize the aspect ratio
 plot(grains,grains.aspectRatio,'linewidth',2,'micronbar','off')
@@ -122,12 +122,12 @@ hold off
 <center>
 {% include inline_image.html file="EllipseBasedParameters_03.png" %}
 </center>
-<h2 id="5">Shape perfered orientation</h2>
-<p>If we look at grains, we might wonder if there is a characteristic difference in the grain shape fabric between e.g. Forsterite and Enstatite. In contrast to crystal prefered orientations which which describe on the alignment of the atome lattices the shape prefered orientation (SPO) describes the algnment of the grains by shape in the bulk fabric.</p>
+<h2 id="5">Shape preferred orientation</h2>
+<p>If we look at grains, we might wonder if there is a characteristic difference in the grain shape fabric between e.g. Forsterite and Enstatite. In contrast to crystal preferred orientations which which describe on the alignment of the atom lattices the shape preferred orientation (SPO) describes the alignment of the grains by shape in the bulk fabric.</p>
 <p>
 <b>Long Axis Distribution</b>
 </p>
-<p>The most direct way to analyse shape prefered orientations are rose diagrams of the distribution of the grain long axes. For those diagrams it is useful to weight the long axis by the grain area such that larger grains have a bigger impact on the distribution and by the aspect ratio as for grains with a small aspect ratio the long axis is not so well defined.</p>
+<p>The most direct way to analyze shape preferred orientations are rose diagrams of the distribution of the grain long axes. For those diagrams it is useful to weight the long axis by the grain area such that larger grains have a bigger impact on the distribution and by the aspect ratio as for grains with a small aspect ratio the long axis is not so well defined.</p>
 {% highlight matlab %}
 numBin = 50;
 
@@ -172,6 +172,9 @@ plotTDF(bc,freq/sum(freq));
 hold off
 legend('Forsterite','Enstatite','Location','eastoutside')
 mtexTitle('long axes')
+
+% we have to set the plotting convention manually
+setView(ebsd.plottingConvention)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EllipseBasedParameters_06.png" %}
