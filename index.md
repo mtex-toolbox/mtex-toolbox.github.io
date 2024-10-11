@@ -85,12 +85,11 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul>
                     <li>
-                        <i class="fa fa-user-group"></i>{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="Forum" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="Forum" %}
                         - Questions, Discussions, Announcements.
                     </li>
                     <li>
-						{% include reference.html
-                    link="https://github.com/mtex-toolbox/mtex/issues" content="<i class="fa fa-bug"></i> Bugs" %}
+						<i class="fa fa-bug"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
                         - Every bug report is welcome.
                     </li>
 					<li>
@@ -184,7 +183,7 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <h4>Parent Grain Reconstruction</h4>
-                <p>A basic workflow for the reconstruction of parent austenite
+                <p>A workflow for the reconstruction of parent austenite
 				grains.</p>
                 {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
             </div>
