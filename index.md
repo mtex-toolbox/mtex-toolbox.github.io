@@ -25,7 +25,8 @@ of material scientists, geologists and mathematicians.
     <div id="home-news" class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-newspaper-o"></i>
+				<i class="fa-solid fa-rss"></i>
+                <!--<i class="fa fa-newspaper-o"></i>-->
                 News
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="changelog" content="Complete&nbsp;changelog" %}
@@ -48,11 +49,11 @@ of material scientists, geologists and mathematicians.
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
-					<li>
+					<!--<li>
 						03/24 &minus;
 						{% include reference.html link="workshop24?" content="MTEX Workshop 24" %}:
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1948" content="Announcement" %}
-                    </li>
+                    </li>-->
                     <li>
                         09/22 &minus; newly designed homepage
                     </li>
