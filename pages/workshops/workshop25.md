@@ -271,6 +271,11 @@ their talks as accessible as possible.
 - **{% include reference.html
   link="https://www.materials.ox.ac.uk/peoplepages/marquardt.html"
   content="Katharina Marquardt" %}** (University of Oxford)
+  
+- **{% include reference.html
+  link="https://www.ntnu.edu/employees/bjorn.sorensen"
+  content="Bjørn Eske Sørensen" %}** (NTNU)
+
 - more to come
 
 ## Venue:
