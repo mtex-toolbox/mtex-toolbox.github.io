@@ -85,7 +85,7 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul>
                     <li>
-                        <i class="fa fa-user-group"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
+                        <i class="fa-solid fa-users"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
 						content="Forum" %} - Questions, Discussions,
 						Announcements.
 						<!--  -->
