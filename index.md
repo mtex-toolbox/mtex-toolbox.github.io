@@ -100,7 +100,7 @@ of material scientists, geologists and mathematicians.
 						<!--<i class="fa fa-toolbox"></i>-->
                     </li>
                     <li>
-                        {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
+                       <i class="fas fa-home"></i> {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
 						content="Helper functions" %}
                         - {% include reference.html link="scripts" content="Learn how to share your own scripts." %}
                     </li>
