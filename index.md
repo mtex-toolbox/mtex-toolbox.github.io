@@ -89,7 +89,8 @@ of material scientists, geologists and mathematicians.
                         - Questions, Discussions, Announcements.
                     </li>
                     <li>
-						<i class="fa fa-bug"></i>{% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
+						{% include reference.html
+                    link="https://github.com/mtex-toolbox/mtex/issues" content="<i class="fa fa-bug"></i> Bugs" %}
                         - Every bug report is welcome.
                     </li>
 					<li>
