@@ -91,11 +91,11 @@ of material scientists, geologists and mathematicians.
 						<!--  -->
                     </li>
                     <li>
-						<i class="fa fa-bug"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
+						<i class="fa fa-bug" style="color:red" ></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
 						content="Bugs" %} - Every bug report is welcome.
                     </li>
 					<li>
-                        <i class="fa fa-toolbox"></i> {% include reference.html link="https://mtex-toolbox.github.io/addons" 
+                        <i class="fas fa-toolbox"></i> {% include reference.html link="https://mtex-toolbox.github.io/addons" 
 						content="Add-ons and MTEX based toolboxes" %}
 						<!--<i class="fa fa-toolbox"></i>-->
                     </li>
