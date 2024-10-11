@@ -168,7 +168,7 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <h4>Denoising Orientation Maps</h4>
-                <p>In this section we demonstrate how random errors can be significantly reduced using denoising techniques.</p>
+                <p>A quick comparison of different denoising methods for EBSD data.</p>
                 {% include reference.html link="EBSDDenoising.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
@@ -180,7 +180,8 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <h4>Martensite Parent Grain Reconstruction</h4>
-                <p>Here we demonstrate the tools MTEX offers to reconstruct a parent austenite phase from a measured martensite phase.</p>
+                <p>The basic workflow for the reconstruction of parent austenite
+				grains from a measured martensite phase.</p>
                 {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
