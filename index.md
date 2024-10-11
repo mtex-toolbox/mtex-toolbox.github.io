@@ -86,7 +86,9 @@ of material scientists, geologists and mathematicians.
                 <ul>
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
-						content="<i class="fa fa-user-group"></i> Forum" %} - Questions, Discussions, Announcements.
+						content="Forum" %} - Questions, Discussions,
+						Announcements.
+						<!-- <i class="fa fa-user-group"></i> -->
                     </li>
                     <li>
 						{% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
@@ -94,11 +96,11 @@ of material scientists, geologists and mathematicians.
                     </li>
 					<li>
                         {% include reference.html link="https://mtex-toolbox.github.io/addons" 
-						content="<i class="fa fa-toolbox"></i> Add-ons and MTEX based toolboxes" %}
+						content="Add-ons and MTEX based toolboxes" %}
+						<!--<i class="fa fa-toolbox"></i>-->
                     </li>
                     <li>
-                        {% include reference.html
-                    link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
+                        {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
 						content="Helper functions" %}
                         - {% include reference.html link="scripts" content="Learn how to share your own scripts." %}
                     </li>
@@ -107,7 +109,7 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<li>
-						<i class="fa fa-users-line"></i>{% include reference.html link="workshop23?" content="Workshops" %}
+						{% include reference.html link="workshop25?" content="Workshops" %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--
