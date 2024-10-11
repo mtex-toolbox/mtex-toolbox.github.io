@@ -159,7 +159,7 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <h4>Grain Tutorial</h4>
-                <p>A quick guide through the grain reconstruction capabilities of MTEX.</p>
+                <p>A quick guide through the grain reconstruction capabilities.</p>
                 {% include reference.html link="GrainTutorial.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
@@ -182,9 +182,9 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
             </div>
             <div class="panel-body">
-                <h4>Martensite Parent Grain Reconstruction</h4>
-                <p>The basic workflow for the reconstruction of parent austenite
-				grains from a measured martensite phase.</p>
+                <h4>Parent Grain Reconstruction</h4>
+                <p>A basic workflow for the reconstruction of parent austenite
+				grains.</p>
                 {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
             </div>
         </div>
@@ -202,6 +202,25 @@ of material scientists, geologists and mathematicians.
         </div>
     </div>
 </div>
+
+<!-- a bunch of links as documentation overview  -->
+<div class="row">
+    <div id="home-toolboxes" class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-book"></i>
+                Add-ons
+                <i class="fa fa-angle-double-right"></i>
+                {% include reference.html link="addons" content="All&nbsp;Add-ons" %}
+                | {% include reference.html
+				link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
+				content="User Scripts" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- addons with image and description -->
 <div class="row no-wrap-scrollable-x auto-scroll-x scrollbar-at-top">
