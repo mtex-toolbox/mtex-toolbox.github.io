@@ -33,7 +33,7 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul class="no_bullet">
 					<li>
-						3/25 &minus;
+						03/25 &minus;
 						{% include reference.html link="workshop25?" content="MTEX Workshop 25" %}:
                     </li>
    					<li>
@@ -49,26 +49,26 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
 					<li>
-						3/24 &minus;
+						03/24 &minus;
 						{% include reference.html link="workshop24?" content="MTEX Workshop 24" %}:
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1948" content="Announcement" %}
                     </li>
                     <li>
-                        9/22 &minus; newly designed homepage
+                        09/22 &minus; newly designed homepage
                     </li>
                     <li>
-                        3/22 &minus; addon 
+                        03/22 &minus; addon 
                         {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
                         for parent grain reconstruction
                     </li>
                     <li>
-                        3/22 &minus;
+                        03/22 &minus;
                         {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="MTEX GUI 3.5" %}
                         by 
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks" content="J. Hiscocks" %}
                     </li>
                     <li>
-                        7/21 &minus;
+                        07/21 &minus;
                         {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" download=true %}
                         by J. Hiscocks
                     </li>
