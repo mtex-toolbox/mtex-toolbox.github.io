@@ -92,6 +92,9 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
                         - Every bug report is welcome.
                     </li>
+					<li>
+                        {% include reference.html link="https://mtex-toolbox.github.io/addons" content="Add-ons and MTEX based toolboxes" %}
+                    </li>
                     <li>
                         {% include reference.html
                     link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
