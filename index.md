@@ -85,11 +85,11 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="Forum" %}
+                        <i class="fa fa-user-group"></i>{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions" content="Forum" %}
                         - Questions, Discussions, Announcements.
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
+						<i class="fa fa-bug"></i>{% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" content="Bugs" %}
                         - Every bug report is welcome.
                     </li>
 					<li>
@@ -106,7 +106,7 @@ of material scientists, geologists and mathematicians.
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<li>
-                        {% include reference.html link="workshop23?" content="Workshops" %}
+						<i class="fa fa-users-line"></i>{% include reference.html link="workshop23?" content="Workshops" %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--
