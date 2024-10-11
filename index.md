@@ -208,10 +208,10 @@ of material scientists, geologists and mathematicians.
     <div id="home-toolboxes" class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-book"></i>
+                <i class="fa fa-screwdriver-wrench"></i>
                 Add-ons
                 <i class="fa fa-angle-double-right"></i>
-                {% include reference.html link="addons" content="All&nbsp;Add-ons" %}
+                {% include reference.html link="addons" content="Table of All&nbsp;Add-ons" %}
                 | {% include reference.html
 				link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
 				content="User Scripts" %}
