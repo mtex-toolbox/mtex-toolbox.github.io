@@ -85,17 +85,17 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
+                        <i class="fa fa-user-group"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
 						content="Forum" %} - Questions, Discussions,
 						Announcements.
-						<!-- <i class="fa fa-user-group"></i> -->
+						<!--  -->
                     </li>
                     <li>
 						<i class="fa fa-bug"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
 						content="Bugs" %} - Every bug report is welcome.
                     </li>
 					<li>
-                        {% include reference.html link="https://mtex-toolbox.github.io/addons" 
+                        <i class="fa fa-toolbox"></i> {% include reference.html link="https://mtex-toolbox.github.io/addons" 
 						content="Add-ons and MTEX based toolboxes" %}
 						<!--<i class="fa fa-toolbox"></i>-->
                     </li>
