@@ -91,25 +91,27 @@ of material scientists, geologists and mathematicians.
 						<!--  -->
                     </li>
                     <li>
-						<i class="fa fa-bug" style="color:red" ></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
+						<i class="fa fa-bug"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
 						content="Bugs" %} - Every bug report is welcome.
                     </li>
 					<li>
-                        <i class="fas fa-toolbox"></i> {% include reference.html link="https://mtex-toolbox.github.io/addons" 
+                        <i class="fas fa-toolbox"></i> {% include reference.html link="addons" 
 						content="Add-ons and MTEX based toolboxes" %}
 						<!--<i class="fa fa-toolbox"></i>-->
                     </li>
                     <li>
-                       <i class="fas fa-home"></i> {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
+                       <i class="fa fa-screwdriver-wrench"></i> {% include reference.html
+					   link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
 						content="Helper functions" %}
                         - {% include reference.html link="scripts" content="Learn how to share your own scripts." %}
                     </li>
                     <li>
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" content="Contribute" %}
+                        <i class="fa-brands fa-github"></i> {% include reference.html 
+						link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" content="Contribute" %}
                         - MTEX is open source and adding new features is more simple then you might think.
                     </li>
 					<li>
-						{% include reference.html link="workshop25?" content="Workshops" %}
+						<i class="fa-solid fa-chalkboard-user"></i> {% include reference.html link="workshop25?" content="Workshops" %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--
