@@ -88,7 +88,7 @@ of material scientists, geologists and mathematicians.
                 <ul>
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
-						content="<i class="fas fa-comments"></i> Forum" %} - Questions, Discussions,
+						content='<i class="fas fa-comments"></i> Forum' %} - Questions, Discussions,
 						Announcements.
 						<!--  -->
                     </li>
@@ -353,7 +353,7 @@ of material scientists, geologists and mathematicians.
     <div id="home-latest-publications" class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-file-pdf-o"></i>
+                <i class="fas fa-file-pdf"></i>
                 Latest&nbsp;Publications
                 <i class="fa fa-angle-double-right"></i>
                 {% include reference.html link="publications" content="All&nbsp;publications" %}
