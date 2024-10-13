@@ -93,27 +93,27 @@ of material scientists, geologists and mathematicians.
 						<!--  -->
                     </li>
                     <li>
-						<i class="fa fa-bug"></i> {% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
-						content="Bugs" %} - Every bug report is welcome.
+						{% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
+						content='<i class="fa fa-bug"></i> Bugs' %} - Every bug report is welcome.
                     </li>
 					<li>
-                        <i class="fas fa-toolbox"></i> {% include reference.html link="addons" 
-						content="Add-ons and MTEX based toolboxes" %}
+                        {% include reference.html link="addons" 
+						content='<i class="fas fa-toolbox"></i> Add-ons and MTEX based toolboxes' %}
 						<!--<i class="fa fa-toolbox"></i>-->
                     </li>
                     <li>
-                       <i class="fa fa-screwdriver-wrench"></i> {% include reference.html
-					   link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
-						content="Helper functions" %}
+					   {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
+						content='<i class="fa fa-screwdriver-wrench"></i> Helper functions' %}
                         - {% include reference.html link="scripts" content="Learn how to share your own scripts." %}
                     </li>
                     <li>
-                        <i class="fa-brands fa-github"></i> {% include reference.html 
-						link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" content="Contribute" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" 
+						content='<i class="fa-brands fa-github"></i> Contribute' %}
                         - adding documentation or new features is more simple then you might think
                     </li>
 					<li>
-						<i class="fa-solid fa-chalkboard-user"></i> {% include reference.html link="workshop25?" content="Workshops" %}
+						{% include reference.html link="workshop25?" 
+						content='<i class="fa-solid fa-chalkboard-user"></i> Workshops' %}
                         - lectures and exercises on the usage of MTEX.
                     </li>
 					<!--
