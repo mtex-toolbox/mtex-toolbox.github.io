@@ -288,7 +288,24 @@ scatter(grains.volume.^(1/3), grains.diameter)
 <center>
 {% include inline_image.html file="Grains3DProperties_06.png" %}
 </center>
-<h2 id="9">Vertices, grain and surface centroids</h2>
+<h2 id="9">Ellipsoid Based Properties</h2>
+<p>Similarly as for two dimensional grains the command <a href="grain3d.principalComponents.html"><code class="language-plaintext highlighter-rouge">principalComponents</code></a> computes the principle axes <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> and <code class="language-plaintext highlighter-rouge">c</code> of each grain. These can be interpreted as the half-axes of an ellipsoid fitted to the grain.</p>
+{% highlight matlab %}
+[a,b,c] = principalComponents(grains.triangulate);
+{% endhighlight %}
+<p>Lets use these half-axes to visualize the 3d-grains as ellipsoids colorized by the grain orientation. This is done using the command <a href="plotEllipsoid.html"><code class="language-plaintext highlighter-rouge">plotEllipsoid</code></a>
+</p>
+{% highlight matlab %}
+% compute the color for each ellipsoid
+cKey = ipfColorKey(grains.CS);
+color = cKey.orientation2color(grains.meanOrientation);
+
+h = plotEllipsoid(grains.centroid,a,b,c,'faceColor',color);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3DProperties_07.png" %}
+</center>
+<h2 id="11">Vertices, grain and surface centroids</h2>
 <p>Each grain has a set of vertices <code class="language-plaintext highlighter-rouge">grains.V</code> and a centroid <code class="language-plaintext highlighter-rouge">grains.centroid</code>. Furthermore, each grain boundary element has a centroid. Lets visualize those quantities.</p>
 {% highlight matlab %}
 close all
@@ -301,9 +318,9 @@ plot(grains(5).boundary.centroid)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3DProperties_07.png" %}
+{% include inline_image.html file="Grains3DProperties_08.png" %}
 </center>
-<h2 id="10">Grain boundary properties</h2>
+<h2 id="12">Grain boundary properties</h2>
 <p>The grain boundary elements the have the following geometric properties</p>
 <p>
    <table class="usertable">
@@ -380,7 +397,7 @@ quiver(grains(5).boundary,grains(5).boundary.N,'antipodal','linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3DProperties_08.png" %}
+{% include inline_image.html file="Grains3DProperties_09.png" %}
 </center>
 {% highlight matlab %}
 close all
@@ -391,7 +408,7 @@ setCamera(how2plot)
 colorbar('location','southoutside')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3DProperties_09.png" %}
+{% include inline_image.html file="Grains3DProperties_10.png" %}
 </center>
 </div>
 </body>
