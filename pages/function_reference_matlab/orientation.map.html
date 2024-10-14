@@ -25,8 +25,26 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>define orientations by pairs of vectors</p>
 <h2 id="3">Description</h2>
-<p>Define an orientation that maps <code class="language-plaintext highlighter-rouge">u1</code> onto <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">u2</code> onto <code class="language-plaintext highlighter-rouge">v2</code>
-</p>
+{% highlight matlab %}
+h = Miller({1,0,0},{0,0,1},cs) % two crystal directions
+r = [xvector, yvector]         % two specimen directions
+ori = orientation.map(h(1),r(1),h(2),r(2))
+{% endhighlight %}
+<p>defines an orientation <code class="language-plaintext highlighter-rouge">ori</code> that appears * in the <code class="language-plaintext highlighter-rouge">(100)</code> pole figure at position <code class="language-plaintext highlighter-rouge">z</code> and in the <code class="language-plaintext highlighter-rouge">(001)</code> pole figure at position <code class="language-plaintext highlighter-rouge">y</code>. * in the <code class="language-plaintext highlighter-rouge">z</code> inverse pole figure at position <code class="language-plaintext highlighter-rouge">(100)</code> and in the <code class="language-plaintext highlighter-rouge">y</code> inverse pole figure at position <code class="language-plaintext highlighter-rouge">(001)</code>.</p>
+{% highlight matlab %}
+nAlpha = Miller({1,0,0},csAlpha,'hkl')
+nBeta  = Miller({0,1,1},csBeta, 'hkl')
+dAlpha = Miller({1,1,1},csAlpha,'uvw')
+dBeta  = Miller({0,1,-1},csBeta, 'uvw')
+{% endhighlight %}
+
+{% highlight matlab %}
+mori = orientation.map(nAlpha,nBeta,dAlpha,dBeta)
+{% endhighlight %}
+<pre>defines an misorientation that aligns the lattice plane |(1,0,0)| of
+the alpha phase with the lattice plane |(011)| of the beta phase and the
+lattice direction |[111]| of the alpha phase with the lattice direction
+|[01-1]| of the beta phase.</pre>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 ori = orientation.map(u1,v1)
