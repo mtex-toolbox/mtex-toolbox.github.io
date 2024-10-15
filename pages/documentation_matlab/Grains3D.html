@@ -24,16 +24,18 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Variables of type <a href="grain3d.grain3d.html">grain3d</a> store 3D grain data. At the moment 3d grains can be imported from &lt;NeperInterface.html Neper% &gt; or from Dream3d.</p>
-<h2 id="2">Grain sets from Dream3d</h2>
+<h2 id="2">Importing 3D-Grains from Dream3d</h2>
+<p>As with any data we can import</p>
 {% highlight matlab %}
-grains = grain3d.load(fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d'));
+% specify the file name
+fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
+grains = grain3d.load(fname);
 
 % for triangulated data sets it may be useful to plot them without lines
 plot(grains,grains.meanOrientation,'LineStyle','none')
 
-how2plot = plottingConvention;
-how2plot.outOfScreen = vector3d(-10,-5,2);
-how2plot.east = vector3d(1,-2,0);
+% use a nice plotting convention
+how2plot = plottingConvention.default3D;
 setCamera(how2plot)
 {% endhighlight %}
 <center>
@@ -55,7 +57,7 @@ id =
 <center>
 {% include inline_image.html file="Grains3D_02.png" %}
 </center>
-<h2 id="4">Grain sets from Neper</h2>
+<h2 id="4">%% Importing 3D-Grains from Neper</h2>
 <p>
 <a href="https://neper.info">Neper</a> is a software package for the simulation of three dimensional microstructures. After installation it can be directly called by MTEX. The general workflow is explained <a href="NeperInterface.html">here</a>. Here we use it to quickly generate a copper microstructure with specific texture and specific distribution of boundary normals.</p>
 {% highlight matlab %}
