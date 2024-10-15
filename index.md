@@ -17,7 +17,7 @@ of material scientists, geologists and mathematicians.
 [![](https://badgen.net/badge/icon/github?icon=github&label)](https://github.com/mtex-toolbox/mtex)&nbsp;
 <!--[![](https://img.shields.io/badge/Research-Gate-9cf)](https://www.researchgate.net/project/MTEX-free-crystallographic-texture-analysis-software)&nbsp;
 &nbsp;-->
-![](https://img.shields.io/github/languages/top/mtex-toolbox/mtex)&nbsp;
+<!--![](https://img.shields.io/github/languages/top/mtex-toolbox/mtex)&nbsp;-->
 ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/total)&nbsp;
 ![](https://img.shields.io/github/contributors/mtex-toolbox/mtex)&nbsp;
 
@@ -86,12 +86,11 @@ of material scientists, geologists and mathematicians.
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
 						content='<i class="fas fa-comments"></i> Forum' %} - Questions, Discussions,
-						Announcements.
-						<!--  -->
+						Announcements
                     </li>
                     <li>
 						{% include reference.html link="https://github.com/mtex-toolbox/mtex/issues" 
-						content='<i class="fa fa-bug"></i> Bugs' %} - Every bug report is welcome.
+						content='<i class="fa fa-bug"></i> Bugs' %} - Every bug report is welcome
                     </li>
 					<li>
                         {% include reference.html link="addons" 
@@ -101,7 +100,7 @@ of material scientists, geologists and mathematicians.
                     <li>
 					   {% include reference.html link="https://gist.github.com/search?q=%23mtexScript&s=updated&o=desc"
 						content='<i class="fa fa-screwdriver-wrench"></i> Helper functions' %}
-                        - {% include reference.html link="scripts" content="Learn how to share your own scripts." %}
+                        - {% include reference.html link="scripts" content="Learn how to share your own scripts" %}
                     </li>
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" 
@@ -111,7 +110,7 @@ of material scientists, geologists and mathematicians.
 					<li>
 						{% include reference.html link="workshop25?" 
 						content='<i class="fa-solid fa-chalkboard-user"></i> Workshops' %}
-                        - lectures and exercises on the usage of MTEX.
+                        - lectures and exercises on the usage of MTEX
                     </li>
 					<!--
                     <li>
