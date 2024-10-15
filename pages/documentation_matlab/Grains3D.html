@@ -24,7 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Variables of type <a href="grain3d.grain3d.html">grain3d</a> store 3D grain data. At the moment 3d grains can be imported from &lt;NeperInterface.html Neper% &gt; or from Dream3d.</p>
-<h2 id="2">Importing 3D-Grains from Dream3d</h2>
+<h2 id="2">Import Grains from Dream3d</h2>
 <p>As with any data we can import</p>
 {% highlight matlab %}
 % specify the file name
@@ -46,7 +46,7 @@ setCamera(how2plot)
 % index of the grain with the largest volume
 [~,id] = max(grains.volume)
 
-plot(grains(id),grains(id).meanOrientation)
+plot(grains(id),'edgeAlpha',0.15)
 setCamera(how2plot)
 {% endhighlight %}
 
@@ -57,7 +57,7 @@ id =
 <center>
 {% include inline_image.html file="Grains3D_02.png" %}
 </center>
-<h2 id="4">%% Importing 3D-Grains from Neper</h2>
+<h2 id="4">Import Grains from Neper</h2>
 <p>
 <a href="https://neper.info">Neper</a> is a software package for the simulation of three dimensional microstructures. After installation it can be directly called by MTEX. The general workflow is explained <a href="NeperInterface.html">here</a>. Here we use it to quickly generate a copper microstructure with specific texture and specific distribution of boundary normals.</p>
 {% highlight matlab %}
@@ -101,11 +101,7 @@ N = vector3d(1,-1,1);
 
 grains_2d = grains.slice(N,P0)
 
-% plot the slice and adjust the plotting convention such that N points out
-% of screen
-plot(grains_2d,grains_2d.meanOrientation,'micronbar','off')
-how2plot = plottingConvention;
-how2plot.outOfScreen = N;
+plot(grains_2d,grains_2d.meanOrientation,'micronbar','off','linewidth',2)
 setCamera(how2plot)
 {% endhighlight %}
 
@@ -124,12 +120,34 @@ grains_2d = grain2d
 <center>
 {% include inline_image.html file="Grains3D_04.png" %}
 </center>
-<h2 id="6">Grains intersecting a slice</h2>
-<p>Lets plot the grains intersecting the plane in 3d</p>
+<p>It might be reasonable to adjust the plotting convention such that the normal direction <code class="language-plaintext highlighter-rouge">N</code> points out of screen.</p>
+{% highlight matlab %}
+how2plot = plottingConvention;
+how2plot.outOfScreen = N; how2plot.east = vector3d(1,1,0)
+
+setCamera(how2plot), axis off, xlabel('') , ylabel('')
+{% endhighlight %}
+
+{% highlight plaintext %}
+how2plot = plottingConvention
+ 
+  outOfScreen: (1,-1,1)
+  north      : (-1,1,2)
+  east       : (1,1,0)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3D_05.png" %}
+</center>
+<h2 id="7">Grains intersecting a slice</h2>
+<p>Using the function <a href="grain3d.intersected"><code class="language-plaintext highlighter-rouge">intersected</code></a> we can identify all grains that intersect a given plane. Lets simply add 3d the shapes of all grains intersecting the plane.</p>
 {% highlight matlab %}
 isInter = grains.intersected(N,P0);
+
+[a,b,c] = grains(isInter).principalComponents;
+
 hold on
-plot(grains(isInter),grains(isInter).meanOrientation)
+plot(grains(isInter),grains(isInter).meanOrientation,'faceAlpha',0.5)
+%plotEllipsoid(grains(isInter).centroid,a,b,c,'faceAlpha',0.5)
 hold off
 
 how2plot.north = N;
@@ -141,13 +159,13 @@ setCamera(how2plot)
 how2plot = plottingConvention
  
   outOfScreen: (1,-1,-1)
-  north      : (5,-3,8) 
-  east       : (6,7,-1)
+  north      : (1,-1,2) 
+  east       : (1,1,0)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3D_05.png" %}
+{% include inline_image.html file="Grains3D_06.png" %}
 </center>
-<h2 id="7">Plot the normal directions of one grain</h2>
+<h2 id="8">Plot the normal directions of one grain</h2>
 {% highlight matlab %}
 %grains = grains(1)
 %dir = grains.I_GF(1,:)' .* grains.boundary.N % flip according to I_GF
