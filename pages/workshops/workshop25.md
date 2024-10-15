@@ -275,6 +275,10 @@ their talks as accessible as possible.
 - **{% include reference.html
   link="https://www.ntnu.edu/employees/bjorn.sorensen"
   content="Bjørn Eske Sørensen" %}** (NTNU)
+  
+- **{% include reference.html
+  link="https://www.researchgate.net/profile/Daniel-Savage-4"
+  content="Daniel Savage" %}** (Los Alamos National Laboratory)
 
 - more to come
 
