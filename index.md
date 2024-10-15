@@ -56,9 +56,6 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1948" content="Announcement" %}
                     </li>-->
                     <li>
-                        09/22 &minus; newly designed homepage
-                    </li>
-                    <li>
                         03/22 &minus; addon 
                         {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
                         for parent grain reconstruction
@@ -109,7 +106,7 @@ of material scientists, geologists and mathematicians.
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/blob/develop/CONTRIBUTING.md" 
 						content='<i class="fa-brands fa-github"></i> Contribute' %}
-                        - adding documentation or new features is more simple then you might think
+                        - it's easy to add documentation or new features
                     </li>
 					<li>
 						{% include reference.html link="workshop25?" 
