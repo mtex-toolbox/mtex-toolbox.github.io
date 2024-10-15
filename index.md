@@ -82,7 +82,7 @@ of material scientists, geologists and mathematicians.
                 Community
             </div>
             <div class="panel-body">
-                <ul>
+                <ul class="no_bullet">
                     <li>
                         {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions"
 						content='<i class="fas fa-comments"></i> Forum' %} - Questions, Discussions,
