@@ -279,6 +279,10 @@ their talks as accessible as possible.
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Daniel-Savage-4"
   content="Daniel Savage" %}** (Los Alamos National Laboratory)
+  
+- **{% include reference.html
+  link="https://www.researchgate.net/profile/Gert-Nolze"
+  content="Gert Nolze" %}** (Bundesanstalt für Materialforschung)
 
 - more to come
 
