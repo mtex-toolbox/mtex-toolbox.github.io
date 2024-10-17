@@ -28,9 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>While we used <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> before, here we will illustrate the different options.</p>
 {% highlight matlab %}
 mtexdata csl
-[grains, ebsd.grainId] = ebsd.calcGrains;
-ebsd(grains(grains.grainSize<2))=[];
-grains = ebsd.calcGrains;
+[grains, ebsd.grainId] = ebsd.calcGrains('minPixel',3);
 
 % the data was acquired on a regular grid;
 plot(ebsd,ebsd.orientations,'micronbar','off')
@@ -74,9 +72,9 @@ sum(grains_smooth.boundary('indexed').segLength)
 
 {% highlight plaintext %}
 ans =
-   1.9637e+04
+   1.9437e+04
 ans =
-   1.7414e+04
+   1.7230e+04
 {% endhighlight %}
 <p>However, if we look at the frequency distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> performs just a single iteration</p>
 {% highlight matlab %}

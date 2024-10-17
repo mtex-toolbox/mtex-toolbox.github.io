@@ -33,13 +33,8 @@ mtexdata forsterite silent
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
-
-% remove very small grains
-ebsd(grains(grains.grainSize <= 5)) = [];
-
 % and recompute grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'minPixel',5);
 
 % smooth the grains a bit
 grains = smooth(grains,4);
@@ -62,14 +57,14 @@ grains.boundary
 ans = grainBoundary
  
  Segments    length   mineral 1   mineral 2
-      875  27592 µm  notIndexed  Forsterite
-       36   1562 µm  notIndexed   Enstatite
+      883  27479 µm  notIndexed  Forsterite
+       35   1563 µm  notIndexed   Enstatite
        43   1361 µm  notIndexed    Diopside
-     1386  55715 µm  Forsterite  Forsterite
-      656  26508 µm  Forsterite   Enstatite
-      519  20561 µm  Forsterite    Diopside
-       35   1296 µm   Enstatite   Enstatite
-      112   4826 µm   Enstatite    Diopside
+     1403  58204 µm  Forsterite  Forsterite
+      566  25123 µm  Forsterite   Enstatite
+      476  19543 µm  Forsterite    Diopside
+       23   1157 µm   Enstatite   Enstatite
+       89   3594 µm   Enstatite    Diopside
        28   1250 µm    Diopside    Diopside
 {% endhighlight %}
 <p>tells us the number of boundary segments between the different phsaes. Those segments with notIndexed phase include also those boundary segments where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>

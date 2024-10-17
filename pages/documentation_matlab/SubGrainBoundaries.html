@@ -24,18 +24,15 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Low-angle grain boundaries (LAGB) or subgrain boundaries are those with a misorientation less than about 15 degrees. Generally speaking they are composed of an array of dislocations and their properties and structure are a function of the misorientation. In contrast the properties of high-angle grain boundaries, whose misorientation is greater than about 15 degrees, are normally found to be independent of the misorientation. However, there are special boundaries at particular orientations whose interfacial energies are markedly lower than those of general high-angle grain boundaries.</p>
-<p>In order to demonstrate the analysis of subgrain boundaries in MTEX we start by importing an sample EBSD data set and preforming some polishing by removing all 5 pixel grains.</p>
+<p>In order to demonstrate the analysis of subgrain boundaries in MTEX we start by importing an sample EBSD data set</p>
 {% highlight matlab %}
 % load some test data
 mtexdata ferrite silent
-
-% remove one pixel grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize<5)) = [];
 {% endhighlight %}
 <p>For the computation of low-angle boundaries we specify two thresholds during grain reconstruction: the first value controls the low-angle grain boundaries whereas the second is used for the high-angle grain boundaries.</p>
 {% highlight matlab %}
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',[1*degree, 10*degree]);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),...
+  'threshold',[1*degree, 10*degree],'minPixel',5);
 
 % lets smooth the grain boundaries a bit
 grains = smooth(grains,5)
@@ -45,11 +42,11 @@ grains = smooth(grains,5)
 grains = grain2d
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     0     289   58967  Ferrite       432                         
+     0     251   58925  Ferrite       432                         
  
- boundary segments: 12806 (2560 µm)
- inner boundary segments: 28501 (3609 µm)
- triple points: 473
+ boundary segments: 12657 (2526 µm)
+ inner boundary segments: 28525 (3621 µm)
+ triple points: 423
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -95,7 +92,7 @@ mtexColorbar
 {% include inline_image.html file="SubGrainBoundaries_03.png" %}
 </center>
 <h2 id="6">Misorientation at Subgrain Boundaries</h2>
-<p>Appart from the spatial distribution of the subgrain boundaries we may also analyse the distribution of their misorientations.</p>
+<p>Apart from the spatial distribution of the subgrain boundaries we may also analyze the distribution of their misorientations.</p>
 {% highlight matlab %}
 % extract all subgrain boundary misorientation
 mori = grains.innerBoundary.misorientation;
@@ -108,9 +105,9 @@ mtexColorbar
 <center>
 {% include inline_image.html file="SubGrainBoundaries_04.png" %}
 </center>
-<p>A more detailed analysis of the misorientation axes at subgrain boundaries can be found in the chapter <a href="TiltAndTwistBoundaries.html">Tild and Twist Boundaries</a>.</p>
+<p>A more detailed analysis of the misorientation axes at subgrain boundaries can be found in the chapter <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a>.</p>
 <h2 id="8">Connected Components</h2>
-<p>Sometimes one would like to distinguish between large connected networks of low-angle boundaries and singular disconected segments. This can be done using the command <a href="grainBoundary.componentSize.html"><code class="language-plaintext highlighter-rouge">componentSize</code></a>. This command return for each segment the total number of segments it is connected with. In the following figure we use this to plot all low-angle grain boundary networks with more then 50 segments in blue and all remaining segments in red.</p>
+<p>Sometimes one would like to distinguish between large connected networks of low-angle boundaries and singular disconnected segments. This can be done using the command <a href="grainBoundary.componentSize.html"><code class="language-plaintext highlighter-rouge">componentSize</code></a>. This command return for each segment the total number of segments it is connected with. In the following figure we use this to plot all low-angle grain boundary networks with more then 50 segments in blue and all remaining segments in red.</p>
 {% highlight matlab %}
 % plot the ebsd data
 plot(ebsd('indexed'),ebsd('indexed').orientations,'faceAlpha',0.5,'figSize','large')

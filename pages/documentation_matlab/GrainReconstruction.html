@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The default grain reconstruction method in MTEX is based on the definition of high angle grain boundaries which are assumed at the perpendicular bisector between neighbouring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p>
+<p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The default grain reconstruction method in MTEX is based on the definition of high angle grain boundaries which are assumed at the perpendicular bisector between neighboring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p>
 <p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
 {% highlight matlab %}
 close all; plotx2east
@@ -69,9 +69,10 @@ ebsd = EBSD
 </div>
 <p>The extent to which unindexed pixels are assigned is controlled by the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code>. Roughly speaking this parameter is the radius of the smallest unindexed region that will not be entirely assigned to surrounding grains. The default of this value is 2.2.</p>
 <p>The second parameter involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to 10 degrees.</p>
+<p>Finally, the option <code class="language-plaintext highlighter-rouge">'minPixel'</code> controls the minimum size of a reconstructed grain. Grains with less pixels are considered as not indexed.</p>
 <p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> which takes as input an EBSD data set and returns a list of grain.</p>
 {% highlight matlab %}
-[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',2.2,'angle',10*degree);
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',2.2,'angle',10*degree,'minPixel',5);
 grains
 {% endhighlight %}
 
@@ -79,13 +80,13 @@ grains
 grains = grain2d
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1     109   14093  Forsterite       mmm                         
-     2      34    1397   Enstatite       mmm                         
-     3      71     759    Diopside     12/m1       X||a*, Y||b*, Z||c
+     1      57   13850  Forsterite       mmm                         
+     2      16    1172   Enstatite       mmm                         
+     3      20     657    Diopside     12/m1       X||a*, Y||b*, Z||c
  
- boundary segments: 4198 (194612 µm)
- inner boundary segments: 1 (19 µm)
- triple points: 225
+ boundary segments: 3907 (177959 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 80
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -103,7 +104,7 @@ hold off
 <center>
 {% include inline_image.html file="GrainReconstruction_02.png" %}
 </center>
-<h2 id="4">Grainboundary Smoothing</h2>
+<h2 id="4">Grain Boundary Smoothing</h2>
 <p>Due to the gridded nature of the EBSD measurement the reconstructed grain boundaries often suffer from the staircase effect. This can be reduced by smoothing the grain boundaries using the command <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>
 </p>
 {% highlight matlab %}
@@ -121,7 +122,7 @@ hold off
 <h2 id="5">Adapting the Alpha Parameter</h2>
 <p>Increasing the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code> larger unindexed regions are associated to grains.</p>
 {% highlight matlab %}
-[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',10,'angle',10*degree);
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',10,'angle',10*degree,'minPixel',5);
 grains = smooth(grains,5);
 
 % plot the boundary of all grains
@@ -132,28 +133,6 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstruction_04.png" %}
-</center>
-<h2 id="6">Clearing Single Pixel Grains</h2>
-<p>There are quite a few single pixel grains we might want to consider as misindexations and perform the grain reconstruction on the cleaned up data set. This is done as follows</p>
-{% highlight matlab %}
-% detect single pixel grains
-isMisindexed = grains.grainSize==1;
-
-% set the corresponding EBSD data to notIndexed
-ebsd(grains(isMisindexed)) = 'notIndexed';
-
-% redo grain reconstruction
-[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',3.2,'angle',10*degree);
-
-% display the result
-grains = smooth(grains,5);
-plot(ebsd)
-hold on
-plot(grains.boundary,'linewidth',1.5)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainReconstruction_05.png" %}
 </center>
 </div>
 </body>
