@@ -153,49 +153,15 @@ setColorRange([0,4*degree])
 <h2 id="9">Hexagonal Grids</h2>
 <p>Next lets import some data on a hexagonal grid</p>
 {% highlight matlab %}
-mtexdata copper
+mtexdata copper silent
 
-[grains, ebsd.grainId] = calcGrains(ebsd)
+[grains, ebsd.grainId] = calcGrains(ebsd);
 ebsd = ebsd.gridify
 
 plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0  16116 (100%)   Copper  LightSkyBlue       432                         
- 
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14
- Scan unit : um
- X x Y x Z : [0 590] x [0 585] x [0 0]
- Normal vector: (0,0,1)
- 
- 
-grains = grain2d
- 
- Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     0     751   16116   Copper       432                         
- 
- boundary segments: 12561 (37019 µm)
- inner boundary segments: 4 (12 µm)
- triple points: 1266
- 
- Properties: meanRotation, GOS
- 
- 
-ebsd = EBSD
- 
- Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0  16116 (100%)   Copper  LightSkyBlue       432                         
- 
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId
- Scan unit : um
- X x Y x Z : [0 590] x [0 585] x [0 0]
- Normal vector: (0,0,1)
- 
- 
 ebsd = EBSDhex
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
@@ -342,7 +308,7 @@ ebsdS2 = EBSD
 <h2 id="17">Gridify on Rotated Maps</h2>
 <p>A similar situation occurs if <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> is applied to rotated data.</p>
 {% highlight matlab %}
-ebsd = rotate(ebsd,20*degree)
+ebsd = rotate(ebsd,20*degree);
 
 ebsdG = ebsd.gridify
 
@@ -350,17 +316,6 @@ plot(ebsdG,ebsdG.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0  16116 (100%)   Copper  LightSkyBlue       432                         
- 
- Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
- Scan unit : um
- X x Y x Z : [-198 554] x [0 750] x [0 0]
- Normal vector: (0,0,1)
- 
- 
 ebsdG = EBSDhex
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
