@@ -29,11 +29,8 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata twins
 
 % segment grains
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
-
-% remove two pixel grains
-ebsd(grains(grains.grainSize<=2)) = [];
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),...
+  'angle',5*degree,'minPixel',3);
 
 % smooth them
 grains = grains.smooth(5);
@@ -60,7 +57,7 @@ ebsd = EBSD
 <center>
 {% include inline_image.html file="TwinningBoundaries_01.png" %}
 </center>
-<p>Next we extract the grainboundaries and save them to a separate variable</p>
+<p>Next we extract the grain boundaries and save them to a separate variable</p>
 {% highlight matlab %}
 gB = grains.boundary
 {% endhighlight %}
@@ -69,10 +66,10 @@ gB = grains.boundary
 gB = grainBoundary
  
  Segments  length   mineral 1  mineral 2
-     1193  184 µm  notIndexed  Magnesium
+     1192  184 µm  notIndexed  Magnesium
      3164  724 µm   Magnesium  Magnesium
 {% endhighlight %}
-<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segements where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
+<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
 gB_MgMg = gB('Magnesium','Magnesium')
 {% endhighlight %}
@@ -100,7 +97,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="TwinningBoundaries_02.png" %}
 </center>
-<p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogramm.</p>
+<p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogram.</p>
 {% highlight matlab %}
 close all
 histogram(gB_MgMg.misorientation.angle./degree,40)
@@ -121,7 +118,7 @@ scatter(mori)
 <center>
 {% include inline_image.html file="TwinningBoundaries_04.png" %}
 </center>
-<p>We may determin the center of the cluster and check whether it is close to some special orientation relation ship</p>
+<p>We may determine the center of the cluster and check whether it is close to some special orientation relation ship</p>
 {% highlight matlab %}
 % determine the mean of the cluster
 mori_mean = mean(mori,'robust')

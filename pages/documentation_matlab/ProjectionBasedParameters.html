@@ -56,11 +56,8 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata forsterite silent
 
 % reconstruct grains, discard boundary grains and smooth them
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
-ebsd(grains(grains.grainSize<5)) = [];
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree);
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree,'minPixel',5);
 grains(grains.isBoundary) = [];
-
 grains = smooth(grains('indexed'),10,'moveTriplePoints');
 
 % plot all grains and highlight a specific one
@@ -81,7 +78,7 @@ grains(ind).diameter
 
 {% highlight plaintext %}
 ans =
-   6.9276e+03
+   1.1454e+03
 {% endhighlight %}
 <p>The diameter is a special case of the <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. We may trace the caliper with respect to projection direction</p>
 {% highlight matlab %}
@@ -112,9 +109,9 @@ hold off
 
 {% highlight plaintext %}
 ans =
-   6.9276e+03
+   1.1454e+03
 ans =
-   1.6308e+03
+  752.2884
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ProjectionBasedParameters_03.png" %}
@@ -207,9 +204,9 @@ min(cumplF), min(cumplE)
 
 {% highlight plaintext %}
 ans =
-    0.7102
+    0.7172
 ans =
-    0.7203
+    0.7361
 {% endhighlight %}
 <p>The position of the maxima and minima of the projection function derived from <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">paror</code></a> can be interpreted in the following way: the maximum position represents the preferred axis parallel to the longest projection and the normal the minimum position represents the preferred axis related to the normal to the shortest projection function.</p>
 {% highlight matlab %}
@@ -230,13 +227,13 @@ mod(omega(id_min)./degree-90,180)
 
 {% highlight plaintext %}
 ans =
-    71
+    70
 ans =
-   74.0000
+    75
 ans =
-    87
+   89.0000
 ans =
-   88.0000
+    90
 {% endhighlight %}
 <p>The smaller the difference between these values, the closer the fabric is to an orthorhombic symmetry.</p>
 <p>Similarly to using the entire particle (the convex hull in case of the projection functions), we can use a distribution of lines <a href="grainBoundary.surfor.html"><code class="language-plaintext highlighter-rouge">grainBoudnary.surfor</code></a>. This can be useful for the quantification of the grain boundary anisotropy or in general might be needed if we look at boundaries which do not form closed outlines, e.g. a list of subgrain or twin boundaries or the contact between certain phases.</p>
@@ -298,11 +295,11 @@ angle(shapeEF.caliper('longest'),shapeF.caliper('shortest')) / degree
 
 {% highlight plaintext %}
 ans =
-   78.7774
+   79.4281
 ans =
-   86.8317
+   88.1989
 ans =
-   79.7408
+   77.6589
 {% endhighlight %}
 </div>
 </body>
