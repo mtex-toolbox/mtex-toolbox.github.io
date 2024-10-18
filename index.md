@@ -229,7 +229,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MTEX-GUI_screenshotFix.png">
+                <img src="images/thumbnails/MTEX-GUI_screenshot_centered.png">
             </div>
             <div class="panel-body">
                 <h4>MTEX GUI</h4>
@@ -247,7 +247,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MTEX2Gmsh_logoFix.png">
+                <img src="images/thumbnails/MTEX2Gmsh_logo_centered.png">
             </div>
             <div class="panel-body">
                 <h4>MTEX2Gmsh</h4>
@@ -265,7 +265,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/phaseSegmenter_screenshotFix.png">
+                <img src="images/thumbnails/phaseSegmenter_screenshot_centered.png">
             </div>
             <div class="panel-body">
                 <h4>phaseSegmenter</h4>
@@ -285,7 +285,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/stabix_screenshotFix.gif">
+                <img src="images/thumbnails/stabix_screenshot_centered.gif">
             </div>
             <div class="panel-body">
                 <h4>Stabix</h4>
@@ -303,10 +303,10 @@ of material scientists, geologists and mathematicians.
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/ORTools_logoFix.png">
+                <img src="images/thumbnails/ORTools_logo_centered.png">
             </div>
             <div class="panel-body">
                 <h4 title="orientation relationship tools">ORTools</h4>
@@ -321,11 +321,11 @@ of material scientists, geologists and mathematicians.
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--<div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/crystalAligner_logoFix.png">
+                <img src="images/thumbnails/crystalAligner_logo_centered.png">
             </div>
             <div class="panel-body">
                 <h4>crystalAligner</h4>
