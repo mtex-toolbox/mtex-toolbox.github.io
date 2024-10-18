@@ -271,8 +271,8 @@ of material scientists, geologists and mathematicians.
                 <h4>phaseSegmenter</h4>
                 <p>
                     <i class="fa fa-user"></i>
-                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="Azdiar A. Gazder" %}
-                    , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="Frank Niessen" %}
+                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="A. Gazder" %}
+                    , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="F. Niessen" %}
                 </p>
                 <p>
                     <i class="fa fa-home"></i>
