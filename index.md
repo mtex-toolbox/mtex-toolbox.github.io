@@ -303,7 +303,7 @@ of material scientists, geologists and mathematicians.
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/ORTools_logo_centered.png">
@@ -321,7 +321,7 @@ of material scientists, geologists and mathematicians.
                 </p>
             </div>
         </div>
-    </div>
+    </div> -->
     <!--<div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
