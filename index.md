@@ -161,9 +161,9 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/GrainTutorial.jpg">
             </div>
             <div class="panel-body">
-                <h4>Grain Tutorial</h4>
+                {% include reference.html link="GrainTutorial.html" content='<h4>Grain Tutorial</h4>'%}
                 <p>A quick guide through the grain reconstruction capabilities.</p>
-                {% include reference.html link="GrainTutorial.html" content="Learn More" class="btn btn-primary" %}
+                <!--{% include reference.html link="GrainTutorial.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
         </div>
     </div>
@@ -173,9 +173,9 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/EBSDDenoising.jpg">
             </div>
             <div class="panel-body">
-                <h4>Denoising Orientation Maps</h4>
+                {% include reference.html link="EBSDDenoising.html" content='<h4>Denoising Orientation Maps</h4>'%}
                 <p>A quick comparison of different denoising methods for EBSD data.</p>
-                {% include reference.html link="EBSDDenoising.html" content="Learn More" class="btn btn-primary" %}
+                <!--{% include reference.html link="EBSDDenoising.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
         </div>
     </div>
@@ -185,7 +185,7 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
             </div>
             <div class="panel-body">
-                <h4>Parent Grain Reconstruction</h4>
+                {% include reference.html link="MaParentGrainReconstruction.html" content='<h4>Parent Grain Reconstruction</h4>'%}
                 <p>A workflow for the reconstruction of parent austenite grains.</p>
                 {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
             </div>
@@ -197,9 +197,9 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/Grains3D.png">
             </div>
             <div class="panel-body">
-                <h4>3D Grain Analysis</h4>
+                {% include reference.html link="Grains3D.html" content='<h4>3D Grain Analysis</h4>'%}
                 <p>A quick guide how to import and analyze 3d grain data.</p>
-                {% include reference.html link="Grains3D.html" content="Learn More" class="btn btn-primary" %}
+                <!--{% include reference.html link="Grains3D.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
         </div>
     </div>
