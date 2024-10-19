@@ -277,7 +277,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-				<a href="https://www.github.com/frankNiessen/phaseSegmenter"
+				<a href="https://www.github.com/frankNiessen/phaseSegmenter">
                 <img src="images/thumbnails/phaseSegmenter_screenshot_centered.png">
 				</a>
             </div>
@@ -299,13 +299,16 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/stabix_screenshot_centered.gif">
+				<a href="https://stabix.readthedocs.io/en/latest/index.html">
+					<img src="images/thumbnails/stabix_screenshot_centered.gif">
+				</a>					
             </div>
             <div class="panel-body">
                 <h4>Stabix</h4>
                 <p>
                     Slip transfer analysis toolbox
                 </p>
+				<!--
                 <p>
                     <i class="fa fa-user"></i>
                     {% include reference.html link="https://www.researchgate.net/profile/David_Mercier3" content="David Mercier" %}
@@ -314,6 +317,7 @@ of material scientists, geologists and mathematicians.
                     <i class="fa fa-home"></i>
                     {% include reference.html link="https://stabix.readthedocs.io/en/latest/index.html" content="Read the Docs: Stabix" %}
                 </p>
+				-->
             </div>
         </div>
     </div>
