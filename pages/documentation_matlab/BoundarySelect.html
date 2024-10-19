@@ -30,7 +30,7 @@ close all; plotx2east
 % import the data
 mtexdata forsterite silent
 
-% restrict it to a subregion of interest.
+% restrict it to a sub-region of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
 % and recompute grains
@@ -57,35 +57,35 @@ grains.boundary
 ans = grainBoundary
  
  Segments    length   mineral 1   mineral 2
-      883  27479 µm  notIndexed  Forsterite
-       35   1563 µm  notIndexed   Enstatite
+      875  27592 µm  notIndexed  Forsterite
+       37   1562 µm  notIndexed   Enstatite
        43   1361 µm  notIndexed    Diopside
-     1403  58204 µm  Forsterite  Forsterite
-      566  25123 µm  Forsterite   Enstatite
-      476  19543 µm  Forsterite    Diopside
-       23   1157 µm   Enstatite   Enstatite
-       89   3594 µm   Enstatite    Diopside
-       28   1250 µm    Diopside    Diopside
+     1398  56197 µm  Forsterite  Forsterite
+      654  26372 µm  Forsterite   Enstatite
+      522  20750 µm  Forsterite    Diopside
+       35   1296 µm   Enstatite   Enstatite
+      134   5802 µm   Enstatite    Diopside
+       23    951 µm    Diopside    Diopside
 {% endhighlight %}
-<p>tells us the number of boundary segments between the different phsaes. Those segments with notIndexed phase include also those boundary segments where the grains are cutted by the scanning boundary. To restrict the grain boundaries to a specific phase transistion you shall do</p>
+<p>tells us the number of boundary segments between the different phases. Those segments with phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> include also those boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
 hold on
-plot(grains.boundary('Fo','Fo'),'lineColor','blue','micronbar','off','lineWidth',2)
+plot(grains.boundary('Fo','Fo'),'lineColor','blue','micronbar','off','lineWidth',4)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundarySelect_02.png" %}
 </center>
-<p>Similarly we may select all Forsterite to enstatite boundary segements.</p>
+<p>Similarly, we may select all Forsterite to Enstatite boundary segments.</p>
 {% highlight matlab %}
 hold on
-plot(grains.boundary('Fo','En'),'lineColor','darkgreen','micronbar','off','lineWidth',2)
+plot(grains.boundary('Fo','En'),'lineColor','darkgreen','micronbar','off','lineWidth',4)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundarySelect_03.png" %}
 </center>
-<p>Note, that the order of the phase names matter when considering the corresponding misorintations</p>
+<p>Note, that the order of the phase names matter when considering the corresponding misorientations</p>
 {% highlight matlab %}
 grains.boundary('Fo','En').misorientation(1)
 grains.boundary('En','Fo').misorientation(1)
@@ -106,7 +106,7 @@ ans = misorientation (Enstatite → Forsterite)
   55.3267 50.6875 300.014
 {% endhighlight %}
 <p>In the fist case the misorientation returned is from Forsterite to Enstatite and in the second case its exactly the inverse</p>
-<p>The selection of grain boundaries according to specific misorientationsm according to twist / tild character or twinning is explained in linked sections.</p>
+<p>The selection of grain boundaries according to specific misorientations according to twist / tilt character or twinning is explained in linked sections.</p>
 </div>
 </body>
 </html>
