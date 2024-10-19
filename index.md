@@ -241,10 +241,12 @@ of material scientists, geologists and mathematicians.
                   <img src="images/thumbnails/MTEX-GUI_screenshot_centered.png">
 				</a>
             </div>
-            <div class="panel-body">
-				<a href="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB">
-					<h4>MTEX GUI</h4>
-				</a>	
+            <div class="panel-body">			
+				<h4>
+					{% include reference.html
+					link="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB" 
+					content="MTEX GUI" %}					
+				</h4>
 				<!--
                 <p>
                     <i class="fa fa-user"></i>
@@ -288,9 +290,9 @@ of material scientists, geologists and mathematicians.
 				</a>
             </div>
             <div class="panel-body">
-				<a href="https://www.github.com/frankNiessen/phaseSegmenter">
-					<h4>phaseSegmenter</h4>
-				</a>
+				<h4>
+				{% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="phaseSegmenter" %}
+				</h4>
 				<p>
 				toolbox for segmenting of phases
 				</p>
@@ -315,10 +317,10 @@ of material scientists, geologists and mathematicians.
 				</a>					
             </div>
             <div class="panel-body">
-				<a href="https://stabix.readthedocs.io/en/latest/index.html">
-					<h4>Stabix</h4>
-				</a>					
-                <p>
+				<h4>
+				{% include reference.html link="https://stabix.readthedocs.io/en/latest/index.html" content="Stabix" %}
+				</h4>
+				<p>
                     slip transfer analysis toolbox
                 </p>
 				<!--
