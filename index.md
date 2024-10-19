@@ -255,11 +255,14 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MTEX2Gmsh_logo_centered.png">
+				<a href="https://github.com/DorianDepriester/MTEX2Gmsh"
+					<img src="images/thumbnails/MTEX2Gmsh_logo_centered.png">
+				</a>
             </div>
             <div class="panel-body">
-                <h4>MTEX2Gmsh</h4>
-                <p>
+                <h4>{% include reference.html link="https://github.com/DorianDepriester/MTEX2Gmsh" content="MTEX2Gmsh" %}</h4>
+				<p>EBSD Meshing Toolbox</p>
+<!--                <p>
                     <i class="fa fa-user"></i>
                     {% include reference.html link="https://www.researchgate.net/profile/Dorian_Depriester" content="Dorian Depriester" %}
                 </p>
@@ -267,13 +270,16 @@ of material scientists, geologists and mathematicians.
                     <i class="fa fa-home"></i>
                     {% include reference.html link="https://github.com/DorianDepriester/MTEX2Gmsh" content="GitHub: DorianDepriester/MTEX2Gmsh" %}
                 </p>
+				-->
             </div>
         </div>
     </div>
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
+				<a href="https://www.github.com/frankNiessen/phaseSegmenter"
                 <img src="images/thumbnails/phaseSegmenter_screenshot_centered.png">
+				</a>
             </div>
             <div class="panel-body">
                 <h4>phaseSegmenter</h4>
