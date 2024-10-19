@@ -30,15 +30,13 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata olivine
 
 % reconstruct grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize < 5)) = [];
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'minPixel',5);
 
 % some data denoising
 grains = smooth(grains,5);
 
-F = splineFilter;
-ebsd = smooth(ebsd,F,'fill',grains);
+F = halfQuadraticFilter;
+ebsd = smooth(ebsd('indexed'),F,'fill',grains);
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -58,30 +56,19 @@ ebsd = EBSD
 
 {% highlight matlab %}
 % plot the olivine phase
-plot(ebsd('olivine'),ebsd('olivine').orientations);
+plot(ebsd('olivine'),ebsd('olivine').orientations,'FaceAlpha',0.5);
 hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
 
-gg = grains(grains.grainSize > 100);
-gg = gg('o')
-cS = crystalShape.olivine;
+% and on top the crystal shapes
+bigGrains = grains(grains.grainSize > 100,'olivine');
+cKey = ipfColorKey(bigGrains);
+color = cKey.orientation2color(bigGrains.meanOrientation);
 hold on
-plot(gg,0.8*cS,'FaceColor','none')
+plot(bigGrains,0.8*crystalShape.olivine,'FaceColor',color,'faceAlpha',0.7)
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-gg = grain2d
- 
- Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     1     109   30800  olivine       222                         
- 
- boundary segments: 7142 (24164 µm)
- inner boundary segments: 9 (16 µm)
- triple points: 561
- 
- Properties: meanRotation, GOS
+drawNow(gcm,'final')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BirefringenceDemo_01.png" %}
@@ -169,6 +156,7 @@ pMax = vector3d
 
 % plot it
 plot3d(dn,'complete')
+mtexColorMap parula
 mtexColorbar
 
 % and on top of it the polarization directions
@@ -200,11 +188,12 @@ pMax = S2AxisFieldHarmonic
 vOptical = rI.opticalAxis
 
 % and check the birefringence is zero
-rI.birefringence(rI.opticalAxis)
+rI.birefringence(vOptical)
 
 % annotate them to the birefringence plot
 hold on
-arrow3d(vOptical,'antipodal','facecolor','red')
+vOptical.antipodal = false;
+arrow3d([vOptical,-vOptical] ,'facecolor','red')
 hold off
 {% endhighlight %}
 
