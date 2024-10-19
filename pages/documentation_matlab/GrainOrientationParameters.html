@@ -72,9 +72,7 @@ close all; plotx2east
 mtexdata ferrite silent
 
 % compute grains
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize < 5)) = [];
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',7.5*degree);
+[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',7.5*degree,'minPixel',5);
 ebsd = ebsd.project2FundamentalRegion;
 grains = smooth(grains,5);
 
@@ -103,12 +101,12 @@ grainSel = grain2d
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      0       1    1949  Ferrite       432                         
  
- boundary segments: 363 (64 µm)
+ boundary segments: 360 (64 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 15
+ triple points: 12
  
   Id   Phase   Pixels      meanRotation         GOS
- 235       0     1949   (144°,41°,301°)   0.0434024
+ 177       0     1949   (144°,41°,301°)   0.0434024
  
  
 ori = orientation (Ferrite → xyz)
@@ -138,7 +136,7 @@ mis2mean = calcGROD(ebsd, grains)
 
 {% highlight plaintext %}
 mis2mean = misorientation (Ferrite → Ferrite)
-  size: 58967 x 1
+  size: 63044 x 1
 {% endhighlight %}
 <h2 id="6">Grain orientation spread (GOS)</h2>
 <p>The full misorientation to the mean orientation is often not so simple to understand. A good starting point is to just look at the misorientation angles to the grain mean orientation. The average of the misorientation angles to the grain mean orientation is called <i>grain orientation spread</i> (GOS) and can be computed by the command <a href="EBSD.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a> which averages arbitrary EBSD properties over grains. Here, we use it to average the misorientation angle for each grain separately.</p>

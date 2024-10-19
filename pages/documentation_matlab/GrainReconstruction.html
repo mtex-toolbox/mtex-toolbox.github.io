@@ -80,13 +80,13 @@ grains
 grains = grain2d
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      57   13850  Forsterite       mmm                         
-     2      16    1172   Enstatite       mmm                         
-     3      20     657    Diopside     12/m1       X||a*, Y||b*, Z||c
+     1      58   14017  Forsterite       mmm                         
+     2      15    1375   Enstatite       mmm                         
+     3      21     693    Diopside     12/m1       X||a*, Y||b*, Z||c
  
- boundary segments: 3907 (177959 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 80
+ boundary segments: 3738 (171022 µm)
+ inner boundary segments: 1 (19 µm)
+ triple points: 112
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -120,9 +120,14 @@ hold off
 {% include inline_image.html file="GrainReconstruction_03.png" %}
 </center>
 <h2 id="5">Adapting the Alpha Parameter</h2>
-<p>Increasing the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code> larger unindexed regions are associated to grains.</p>
+<p>Increasing the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code> larger not indexed regions are associated to grains.</p>
 {% highlight matlab %}
-[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',10,'angle',10*degree,'minPixel',5);
+% reload the data
+mtexdata forsterite silent
+ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+ebsd = ebsd.gridify;
+
+[grains, ebsd.grainId] = calcGrains(ebsd,'alpha',10,'angle',10*degree,'minPixel',3);
 grains = smooth(grains,5);
 
 % plot the boundary of all grains

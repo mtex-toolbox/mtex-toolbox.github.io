@@ -29,11 +29,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata twins silent
 
 % segment grains
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree);
-
-% remove two pixel grains
-ebsd(grains(grains.grainSize<=2)) = [];
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree,'removeQuadruplePoints');
+[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'angle',5*degree,'minPixel',3);
 
 % smooth them
 grains = grains.smooth(5);
@@ -163,7 +159,7 @@ mtexTitle('twin id')
 
 {% highlight plaintext %}
 ans =
-   16.6199
+   16.6282
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_04.png" %}
@@ -231,7 +227,7 @@ ebsd_merged('indexed').grainId = parentId(grains.id2ind(ebsd('indexed').grainId)
 ebsd_merged = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
+     0    85 (0.37%)  notIndexed                                                 
      1  22794 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, grainId, mis2mean
