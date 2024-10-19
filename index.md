@@ -161,7 +161,7 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/GrainTutorial.jpg">
             </div>
             <div class="panel-body">
-                {% include reference.html link="GrainTutorial.html" content='<h4>Grain Tutorial</h4>'%}
+                <h4>{% include reference.html link="GrainTutorial.html" content='Grain Tutorial'%}</h4>
                 <p>A quick guide through the grain reconstruction capabilities.</p>
                 <!--{% include reference.html link="GrainTutorial.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
@@ -173,7 +173,7 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/EBSDDenoising.jpg">
             </div>
             <div class="panel-body">
-                {% include reference.html link="EBSDDenoising.html" content='<h4>Denoising Orientation Maps</h4>'%}
+                <h4>{% include reference.html link="EBSDDenoising.html" content='Denoising Orientation Maps'%}</h4>
                 <p>A quick comparison of different denoising methods for EBSD data.</p>
                 <!--{% include reference.html link="EBSDDenoising.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
@@ -182,7 +182,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
+                <img src="images/thumbnails/MaParentGrainReconstruction.jpg" alt="https://mtex-toolbox.github.io/MaParentGrainReconstruction.html">
             </div>
             <div class="panel-body">
                 <h4>{% include reference.html link="MaParentGrainReconstruction.html" content='Parent Grain Reconstruction'%}</h4>
@@ -197,7 +197,7 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/Grains3D.png">
             </div>
             <div class="panel-body">
-                {% include reference.html link="Grains3D.html" content='<h4>3D Grain Analysis</h4>'%}
+                <h4>{% include reference.html link="Grains3D.html" content='3D Grain Analysis'%}</h4>
                 <p>A quick guide how to import and analyze 3d grain data.</p>
                 <!--{% include reference.html link="Grains3D.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
