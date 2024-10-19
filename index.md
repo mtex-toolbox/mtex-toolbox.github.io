@@ -168,6 +168,7 @@ of material scientists, geologists and mathematicians.
         </div>
     </div>
     <div class="col-md-4">
+		<a href="https://mtex-toolbox.github.io/EBSDDenoising.html">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
                 <img src="images/thumbnails/EBSDDenoising.jpg">
@@ -182,7 +183,8 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MaParentGrainReconstruction.jpg" alt="https://mtex-toolbox.github.io/MaParentGrainReconstruction.html">
+				<a href="https://mtex-toolbox.github.io/MaParentGrainReconstruction.html">
+                <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
             </div>
             <div class="panel-body">
                 <h4>{% include reference.html link="MaParentGrainReconstruction.html" content='Parent Grain Reconstruction'%}</h4>
