@@ -185,9 +185,9 @@ of material scientists, geologists and mathematicians.
                 <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
             </div>
             <div class="panel-body">
-                {% include reference.html link="MaParentGrainReconstruction.html" content='<h4>Parent Grain Reconstruction</h4>'%}
+                <h4>{% include reference.html link="MaParentGrainReconstruction.html" content='Parent Grain Reconstruction'%}</h4>
                 <p>A workflow for the reconstruction of parent austenite grains.</p>
-                {% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}
+                <!--{% include reference.html link="MaParentGrainReconstruction.html" content="Learn More" class="btn btn-primary" %}-->
             </div>
         </div>
     </div>
