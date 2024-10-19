@@ -247,7 +247,7 @@ of material scientists, geologists and mathematicians.
 					link="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB" 
 					content="MTEX GUI" %}					
 				</h4>
-				<p>a graphical user interface for MTEX</p>
+				<p>a graphical user interface</p>
 				<!--
                 <p>
                     <i class="fa fa-user"></i>
