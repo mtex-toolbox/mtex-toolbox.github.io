@@ -158,7 +158,9 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/GrainTutorial.jpg">
+				<a href="https://mtex-toolbox.github.io/GrainTutorial.html">
+					<img src="images/thumbnails/GrainTutorial.jpg">
+				</a>	
             </div>
             <div class="panel-body">
                 <h4>{% include reference.html link="GrainTutorial.html" content='Grain Tutorial'%}</h4>
@@ -168,10 +170,11 @@ of material scientists, geologists and mathematicians.
         </div>
     </div>
     <div class="col-md-4">
-		<a href="https://mtex-toolbox.github.io/EBSDDenoising.html">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/EBSDDenoising.jpg">
+				<a href="https://mtex-toolbox.github.io/EBSDDenoising.html">
+					<img src="images/thumbnails/EBSDDenoising.jpg">
+				</a>
             </div>
             <div class="panel-body">
                 <h4>{% include reference.html link="EBSDDenoising.html" content='Denoising Orientation Maps'%}</h4>
@@ -184,7 +187,8 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default text-center">
             <div class="panel-heading">
 				<a href="https://mtex-toolbox.github.io/MaParentGrainReconstruction.html">
-                <img src="images/thumbnails/MaParentGrainReconstruction.jpg">
+					<img src="images/thumbnails/MaParentGrainReconstruction.jpg">
+				</a>
             </div>
             <div class="panel-body">
                 <h4>{% include reference.html link="MaParentGrainReconstruction.html" content='Parent Grain Reconstruction'%}</h4>
@@ -196,7 +200,9 @@ of material scientists, geologists and mathematicians.
 	<div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/Grains3D.png">
+				<a href="https://mtex-toolbox.github.io/Grains3D.html">
+					<img src="images/thumbnails/Grains3D.png">
+				</a>
             </div>
             <div class="panel-body">
                 <h4>{% include reference.html link="Grains3D.html" content='3D Grain Analysis'%}</h4>
