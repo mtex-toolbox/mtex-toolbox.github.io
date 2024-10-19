@@ -237,10 +237,15 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MTEX-GUI_screenshot_centered.png">
+				<a href="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB">
+                  <img src="images/thumbnails/MTEX-GUI_screenshot_centered.png">
+				</a>
             </div>
             <div class="panel-body">
-                <h4>MTEX GUI</h4>
+				<a href="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB">
+					<h4>MTEX GUI</h4>
+				</a>	
+				<!--
                 <p>
                     <i class="fa fa-user"></i>
                     {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks" content="Jessica Hiscocks" %}
@@ -249,6 +254,7 @@ of material scientists, geologists and mathematicians.
                     <i class="fa fa-home"></i>
                     {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="ResearchGate: An updated graphical interface for MTEX" %}
                 </p>
+				-->
             </div>
         </div>
     </div>
@@ -278,12 +284,17 @@ of material scientists, geologists and mathematicians.
         <div class="panel panel-default text-center">
             <div class="panel-heading">
 				<a href="https://www.github.com/frankNiessen/phaseSegmenter">
-                <img src="images/thumbnails/phaseSegmenter_screenshot_centered.png">
+					<img src="images/thumbnails/phaseSegmenter_screenshot_centered.png">
 				</a>
             </div>
             <div class="panel-body">
-                <h4>phaseSegmenter</h4>
-                <p>
+				<a href="https://www.github.com/frankNiessen/phaseSegmenter">
+					<h4>phaseSegmenter</h4>
+				</a>
+				<p>
+				toolbox for segmenting of phases
+				</p>
+                <!--<p>
                     <i class="fa fa-user"></i>
                     {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="A. Gazder" %}
                     , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="F. Niessen" %}
@@ -291,7 +302,7 @@ of material scientists, geologists and mathematicians.
                 <p>
                     <i class="fa fa-home"></i>
                     {% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="GitHub: frankNiessen/phaseSegmenter" %}
-                </p>
+                </p>-->
             </div>
         </div>
     </div>
@@ -304,9 +315,11 @@ of material scientists, geologists and mathematicians.
 				</a>					
             </div>
             <div class="panel-body">
-                <h4>Stabix</h4>
+				<a href="https://stabix.readthedocs.io/en/latest/index.html">
+					<h4>Stabix</h4>
+				</a>					
                 <p>
-                    Slip transfer analysis toolbox
+                    slip transfer analysis toolbox
                 </p>
 				<!--
                 <p>
