@@ -255,7 +255,7 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-				<a href="https://github.com/DorianDepriester/MTEX2Gmsh"
+				<a href="https://github.com/DorianDepriester/MTEX2Gmsh">
 					<img src="images/thumbnails/MTEX2Gmsh_logo_centered.png">
 				</a>
             </div>
