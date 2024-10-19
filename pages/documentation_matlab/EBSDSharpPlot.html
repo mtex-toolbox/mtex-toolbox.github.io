@@ -26,7 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>In this section we discuss color keys that are particular useful when analyzing data with very small deviation in orientation. Let us consider the following calcite data set</p>
 {% highlight matlab %}
 % plotting conventions
-plotx2east, plotb2east
+plotx2east
 mtexdata sharp
 
 ebsd = ebsd('calcite');
@@ -146,10 +146,7 @@ I'm plotting 10 random orientations out of 20119 given orientations
 <h2 id="9">The axis angle color key</h2>
 <p>A second option to visualize small orientation deviation, e.g. within a grains is the <a href="axisAngleColorKey.axisAngleColorKey.html">axis-angle color key</a>. In order to demonstrate this color key let us first separate the EBSD into grains.</p>
 {% highlight matlab %}
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',1.5*degree);
-ebsd(grains(grains.grainSize<=3)) = [];
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',1.5*degree);
-
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',1.5*degree,'minPixel',3);
 grains = smooth(grains,5);
 {% endhighlight %}
 <p>In order to apply the @axisAngleColorKey we need to specify the crystal symmetry and a reference orientation <code class="language-plaintext highlighter-rouge">oriRef</code>. Often the meanorientation of the grains is a good choice.</p>
@@ -157,9 +154,9 @@ grains = smooth(grains,5);
 ipfKey = axisAngleColorKey(ebsd('indexed'));
 
 % use for the reference orientation the grain mean orientation
-ipfKey.oriRef = grains.meanOrientation(ebsd.grainId);
+ipfKey.oriRef = grains.meanOrientation(ebsd('indexed').grainId);
 
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations))
 
 hold on
 plot(grains.boundary,'lineWidth',4)
@@ -186,48 +183,20 @@ hold off
 <center>
 {% include inline_image.html file="EBSDSharpPlot_09.png" %}
 </center>
-<p>Another example is when analyzing the orientation distribution within grains</p>
+<p>Another application for sharp color keys is the analysis of orientation gradients within grains</p>
 {% highlight matlab %}
-mtexdata forsterite
-ebsd = ebsd('indexed');
+mtexdata forsterite silent
 
 % segment grains
-[grains,ebsd.grainId] = calcGrains(ebsd);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
 % find largest grains
-largeGrains = grains(grains.grainSize > 800)
+largeGrains = grains(grains.grainSize > 800);
 
 ebsd = ebsd(largeGrains(1))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad
- Scan unit : um
- X x Y x Z : [0 36550] x [0 16750] x [0 0]
- Normal vector: (0,0,1)
- 
- 
-largeGrains = grain2d
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      56   85514  Forsterite       mmm                         
-     2       2    1969   Enstatite       mmm                         
- 
- boundary segments: 17904 (812029 µm)
- inner boundary segments: 222 (10022 µm)
- triple points: 1247
- 
- Properties: meanRotation, GOS
- 
- 
 ebsd = EBSD
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
