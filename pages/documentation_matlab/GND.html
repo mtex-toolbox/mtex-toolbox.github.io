@@ -49,13 +49,7 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize
 <p>In the next step we reconstruct grains, remove all grains with less then 5 pixels and smooth the grain boundaries.</p>
 {% highlight matlab %}
 % reconstruct grains
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
-
-% remove small grains
-ebsd(grains(grains.grainSize<=5)) = [];
-
-% redo grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',2.5*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
 
 % smooth grain boundaries
 grains = smooth(grains,5);
@@ -86,9 +80,9 @@ hold off
 <center>
 {% include inline_image.html file="GND_03.png" %}
 </center>
-<p>We observe that the data are quite noisy. As noisy orientation data lead to overestimate the GND density we apply sime denoising techniques to the data.</p>
+<p>We observe that the data are quite noisy. As noisy orientation data lead to overestimating the GND density we first have to denoise the orientation data.</p>
 {% highlight matlab %}
-% denoise orientation data
+% define the denoising filter
 F = halfQuadraticFilter;
 
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
@@ -134,7 +128,7 @@ ans = curvatureTensor (xyz)
  -11.952  17.293     NaN
 {% endhighlight %}
 <h2 id="6">The components of the curvature tensor</h2>
-<p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d EBSD maps.</p>
+<p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d-EBSD maps.</p>
 <p>We can access the different components of the curvature tensor with</p>
 {% highlight matlab %}
 kappa12 = kappa{1,2};
@@ -196,7 +190,7 @@ ans = dislocationDensityTensor (xyz)
      NaN     NaN  -2.649
 {% endhighlight %}
 <h2 id="10">Crystallographic Dislocations</h2>
-<p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the attomic lattice different dislocattion systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
+<p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the atomic lattice different dislocattion systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
 {% highlight matlab %}
 dS = dislocationSystem.bcc(ebsd.CS)
 {% endhighlight %}
@@ -327,7 +321,7 @@ ans = dislocationDensityTensor (Iron (Alpha))
   1.1717  0.5858 -0.5858
  -1.1717 -0.5858  0.5858
 {% endhighlight %}
-<p>Note that the unit of this tensors is the same as the unit used for describing the length of the unit cell, which is in most cases Angstrom (au). Furthremore, we observe that the tensor is given with respect to the crystal reference frame while the dislocation densitiy tensors are given with respect to the specimen reference frame. Hence, to make them compatible we have to rotate the dislocation tensors into the specimen reference frame as well. This is done by</p>
+<p>Note that the unit of this tensors is the same as the unit used for describing the length of the unit cell, which is in most cases Angstrom (au). Furthermore, we observe that the tensor is given with respect to the crystal reference frame while the dislocation density tensors are given with respect to the specimen reference frame. Hence, to make them compatible we have to rotate the dislocation tensors into the specimen reference frame as well. This is done by</p>
 {% highlight matlab %}
 dSRot = ebsd.orientations * dS
 {% endhighlight %}
@@ -338,7 +332,7 @@ dSRot = dislocationSystem
  screw dislocations: 5144 x 4
 {% endhighlight %}
 <h2 id="15">Fitting Dislocations to the incomplete dislocation density tensor</h2>
-<p>Now we are ready for fitting the dislocation tensors to the dislocation densitiy tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
+<p>Now we are ready for fitting the dislocation tensors to the dislocation density tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a>.</p>
 {% highlight matlab %}
 [rho,factor] = fitDislocationSystems(kappa,dSRot);
 {% endhighlight %}
@@ -351,13 +345,13 @@ Optimal solution found.
 % the restored dislocation density tensors
 alpha = sum(dSRot.tensor .* rho,2);
 
-% we have to set the unit manualy since it is not stored in rho
+% we have to set the unit manually since it is not stored in rho
 alpha.opt.unit = '1/um';
 
 % the restored dislocation density tensor for pixel 2
 alpha(2)
 
-% the dislocation density dervied from the curvature in pixel 2
+% the dislocation density derived from the curvature in pixel 2
 kappa(2).dislocationDensity
 {% endhighlight %}
 
@@ -413,7 +407,7 @@ drawNow(gcm,'figSize','large');
 {% include inline_image.html file="GND_06.png" %}
 </center>
 <h2 id="19">The total dislocation energy</h2>
-<p>The unit of the densities <code class="language-plaintext highlighter-rouge">h</code> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <code class="language-plaintext highlighter-rouge">h</code> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <code class="language-plaintext highlighter-rouge">factor</code> by the function <a href="curvatureTensor.fitDislocationSystems.html">fitDislocationSystems</a>.</p>
+<p>The unit of the densities <code class="language-plaintext highlighter-rouge">h</code> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <code class="language-plaintext highlighter-rouge">h</code> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <code class="language-plaintext highlighter-rouge">factor</code> by the function <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a>.</p>
 {% highlight matlab %}
 factor
 {% endhighlight %}
@@ -439,9 +433,6 @@ hold off
 <center>
 {% include inline_image.html file="GND_07.png" %}
 </center>
-{% highlight matlab %}
-plotx2east
-{% endhighlight %}
 </div>
 </body>
 </html>

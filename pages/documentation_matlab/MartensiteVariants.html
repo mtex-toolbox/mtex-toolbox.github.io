@@ -35,12 +35,7 @@ cs_bcc = ebsd('Fe').CS;
 cs_aus = ebsd('Aus').CS;
 
 % recover grains
-ebsd = ebsd('indexed');
-
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',5*degree);
-ebsd(grains(grains.grainSize<=2)) = [];
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'angle',5*degree,'qhull');
-
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree,'minPixel',2);
 grains = smooth(grains,4);
 {% endhighlight %}
 
@@ -62,7 +57,7 @@ ebsd = EBSD
 plot(ebsd('Fe'),ebsd('Fe').orientations)
 hold on
 plot(grains.boundary,'lineWidth',2,'lineColor','gray')
-plot(grains('Aus'),'FaceColor','blue','edgeColor','b','lineWidth',1,'DisplayName','Austenite')
+plot(grains('Aus'),'FaceColor','blue','DisplayName','Austenite')
 hold off
 {% endhighlight %}
 <center>
@@ -74,7 +69,7 @@ plot(ebsd('Aus').orientations,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 30105 given orientations
+plot 2000 random orientations out of 31512 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_02.png" %}
@@ -92,10 +87,10 @@ parenOri = orientation (Austenite → xyz)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  266.298 163.622 245.518
+  266.297  163.62  245.51
  
 fit =
-    1.2739
+    1.4894
 {% endhighlight %}
 <p>Next, we display the bcc orientations (blue dots) in pole figures, and overlay the parent Taenite orientation (red dots) on top of them.</p>
 {% highlight matlab %}
@@ -124,7 +119,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 500 random orientations out of 3883 given orientations
+I'm plotting 500 random orientations out of 4941 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -162,10 +157,10 @@ mean(angle(mori, KS)) ./ degree
 
 {% highlight plaintext %}
 ans =
-    3.9265
+    3.9392
 {% endhighlight %}
 <h2 id="8">Estimating the parent-to-child orientation relationship</h2>
-<p>We could ask ourselves if there is another orientation relationship that better matches the measured misorientations than the KS orientation relationship. In this case, a canocial candidate would be the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> of all misorientations.</p>
+<p>We could ask ourselves if there is another orientation relationship that better matches the measured misorientations than the KS orientation relationship. In this case, a canonical candidate would be the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> of all misorientations.</p>
 {% highlight matlab %}
 % The mean of all measured parent-to-child misorientations:
 p2cMean = mean(mori,'robust')
@@ -184,13 +179,13 @@ p2cMean = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  288.995 8.11011 27.0137
+  199.188 8.17979 116.693
  
-  I'm plotting 500 random orientations out of 3883 given orientations
+  I'm plotting 500 random orientations out of 4941 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 ans =
-    2.4719
+    2.5036
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_05.png" %}
@@ -221,15 +216,15 @@ p2cIter = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  177.588 97.7522 45.9635
+  183.507 97.5997 43.3454
  
 ans =
-    3.1466
+    3.8378
 {% endhighlight %}
 <p>We observe that the parent-to-child orientation relationship computed solely from child-to-child misorientations fits the actual orientation relationship equally well.</p>
 <h2 id="11">Classification of child variants by variant Ids</h2>
 <p>Once we have determined parent orientations and a parent-to-child orientation relationship, we may proceed further by classifying the child orientations into different variants.</p>
-<p>A variant refers to a specific orientation or crystallographic arrangement of the child phase within the context of the original parent orientation. Depending on the operative orientation relationship and parent-child crystal symmetries, a single parent phase orientation results in multiple child phase orientations (i.e.- variants). The variant Id is a convinient way to label or identify a specific variant within the child microstructure.</p>
+<p>A variant refers to a specific orientation or crystallographic arrangement of the child phase within the context of the original parent orientation. Depending on the operative orientation relationship and parent-child crystal symmetries, a single parent phase orientation results in multiple child phase orientations (i.e.- variants). The variant Id is a convenient way to label or identify a specific variant within the child microstructure.</p>
 <p>Child variant Ids are computed by the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
 {% highlight matlab %}
 % Compute for each child orientation a variantId
@@ -241,7 +236,11 @@ plotPDF(childOri,color,h_bcc,'MarkerSize',5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 208 random orientations out of 3883 given orientations
+Warning: Packet ID calculation assuming
+{111}_p||{110}_c 
+Warning: Bain ID calculation assuming
+{001}_p||{100}_c 
+  I'm plotting 208 random orientations out of 4941 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -254,13 +253,13 @@ plot(childOri,color,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 3883 given orientations
+plot 2000 random orientations out of 4941 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_07.png" %}
 </center>
 <h2 id="13">Classification of child variants by crystallographic packet Ids</h2>
-<p>An important classification is seperating the variants into their various crystallographic packets.</p>
+<p>An important classification is separating the variants into their various crystallographic packets.</p>
 <p>A crystallographic packet Id is used to identify a packet of variants with the same habit plane (i.e. - the interfacial plane between the parent and child crystal lattices along which the atomic rearrangements occur during phase transformation).</p>
 <p>Within a crystallographic packet, the individual variants are related to each other through specific symmetries. The crystallographic packet Id is a means of identifying and distinguishing a specific packet of variants that share the same habit plane and exhibit related crystallographic</p>
 <p>A crystallographic packet Id is used to identify a packet of variants with the same habit plane (i.e. - the interfacial plane between the parent and child crystal lattices along which the atomic rearrangements occur during martensitic transformation).</p>
@@ -288,7 +287,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 3883 given orientations
+I'm plotting 1000 random orientations out of 4941 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -303,8 +302,8 @@ plot(grains('Fe'),color)
 <center>
 {% include inline_image.html file="MartensiteVariants_09.png" %}
 </center>
-<h2 id="16">Classification of child variants by Bain group Ids</h2>
-<p>Another important classification is seperating the variants into their various Bain groups.</p>
+<h2 id="15">Classification of child variants by Bain group Ids</h2>
+<p>Another important classification is separating the variants into their various Bain groups.</p>
 <p>The concept of Bain groups is based on the Bain notation.The latter provides a concise system of representing the transformation path and the geometric correspondence between the crystal structures of the parent and child phases. Each Bain group is labeled with a unique Bain group Id, which represents a distinct combination of orientation relationships between parent and child phases. Bain group Ids serve as a convenient identifier to categorize, classify and differentiate the various transformation paths that may occur during phase transformation based on their crystallographic characteristics.</p>
 <p>The concept of Bain groups is based on the Bain notation.The latter provides a concise system of representing the transformation path and the geometric correspondence between the crystal structures of the parent austenite and child martensite phases. Each Bain group is labeled with a unique Bain group Id, which represents a distinct combination of orientation relationships between parent and child phases. Bain group Ids serve as a convenient identifier to categorize, classify and differentiate the various transformation paths that may occur during martensitic transformation based on their crystallographic characteristics.</p>
 {% highlight matlab %}
@@ -330,7 +329,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 3883 given orientations
+I'm plotting 1000 random orientations out of 4941 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}

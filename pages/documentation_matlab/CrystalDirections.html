@@ -69,7 +69,18 @@ annotate([a,b,c],'label',{'a','b','c'},'backgroundcolor','w','textAboveMarker')
 <center>
 {% include inline_image.html file="CrystalDirections_01.png" %}
 </center>
-<p>Note that MTEX by default aligns spherical projections of crystal directions such that the b-axis points towards east and the z-axis points out of the plane. This behaviour can be changed by the commands <code class="language-plaintext highlighter-rouge">plota2east</code>, <code class="language-plaintext highlighter-rouge">plota2north</code>, <code class="language-plaintext highlighter-rouge">plota2west</code>, <code class="language-plaintext highlighter-rouge">plota2south</code>, <code class="language-plaintext highlighter-rouge">plotb2east</code>, <code class="language-plaintext highlighter-rouge">plotb2north</code>, <code class="language-plaintext highlighter-rouge">plotb2west</code>, <code class="language-plaintext highlighter-rouge">plotb2south</code>, or <code class="language-plaintext highlighter-rouge">plotaStar2East</code>.</p>
+<p>Note that for triclinic and monoclinic symmetries MTEX aligns spherical projections of crystal directions such that the b-axis points towards east and c* points out of the plane. This behavior can be changed by altering the <a href="plottingConvention.plottingConvention.html">plotting convention</a> stored in <code class="language-plaintext highlighter-rouge">cs.how2plot</code>. E.g. we might want to have the a-axis to point to east</p>
+{% highlight matlab %}
+% change the plotting convention
+cs.how2plot.east = cs.aAxis;
+
+plot(m,'labeled','grid')
+
+annotate([a,b,c],'label',{'a','b','c'},'backgroundcolor','w','textAboveMarker')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalDirections_02.png" %}
+</center>
 <h2 id="6">Crystal Lattice Planes</h2>
 <p>A crystal lattice plane \((hkl)\) is commonly described by its normal vector \(\vec n = h \cdot \vec a^* + k \cdot \vec b^* + \ell \cdot \vec c^*\) where \(\vec a^*\), \(\vec b^*\) and \(\vec c^*\) describe the reciprocal crystal coordinate system. In MTEX a lattice plane is defined by</p>
 {% highlight matlab %}
@@ -92,7 +103,7 @@ plot(m,'plane','linecolor','r','linewidth',2,'add2all')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalDirections_02.png" %}
+{% include inline_image.html file="CrystalDirections_03.png" %}
 </center>
 <p>Note that for non Euclidean crystal frames uvw and hkl notations usually lead to different directions.</p>
 <h2 id="9">Trigonal and Hexagonal Convention</h2>
@@ -123,7 +134,7 @@ n = Miller (Quartz)
   1  1 -2  3
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalDirections_03.png" %}
+{% include inline_image.html file="CrystalDirections_04.png" %}
 </center>
 <p>In order to switch the output format, e.g. from UVTW to uvw do</p>
 {% highlight matlab %}
