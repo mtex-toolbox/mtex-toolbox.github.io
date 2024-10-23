@@ -1,5 +1,5 @@
 ---
-title: Fibres
+title: Fibers
 
 sidebar: documentation_sidebar
 permalink: RotationFibre.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Fibres</title>
+<title>Fibers</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_RotationFibre.m">
 </head>
@@ -23,20 +23,44 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>The set of all rotations that rotate a certain vector u onto a certain vector v define a fibre in the rotation space. A discretisation of such a fibre is defined by</p>
+<p>The set of all rotations that rotate a certain vector <code class="language-plaintext highlighter-rouge">u</code> onto a certain vector <code class="language-plaintext highlighter-rouge">v</code> defines a fibre in the rotation space.</p>
 {% highlight matlab %}
 u = xvector;
 v = yvector;
-rot = rotation(fibre(u,v))
+
+% define the fibre
+f = fibre(u,v)
+
+plot(f,'axisAngle','lineWidth',3,'lineColor','red')
+axis off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Possibly applying an orientation to an object in specimen
-coordinates! 
+f = fibre (1 → xyz)
  
+  h || r: 1,0,0 || (0,1,0)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RotationFibre_01.png" %}
+</center>
+<p>A discretization of such a fibre can be found using the command <a href="fibre.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a>
+</p>
+{% highlight matlab %}
+rot = rotation(f)
+
+% plot the rotations along the fibre
+hold on
+plot(rot)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
 rot = rotation
   size: 1000 x 1
 {% endhighlight %}
+<center>
+{% include inline_image.html file="RotationFibre_02.png" %}
+</center>
 </div>
 </body>
 </html>
