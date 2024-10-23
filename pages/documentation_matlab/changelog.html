@@ -23,11 +23,16 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">MTEX 6.0.beta.4 4/2024</h2>
+<h2 id="1">MTEX 6.0 10/2024</h2>
+<p>MTEX 6.0 is major release that includes numerous new features and internal changes. Although we tried hard to make</p>
+<p>
+<b>Full 3d-Grains</b>
+</p>
+<p>With MTEX 6.0 three dimensional grain networks can be imported from <a href="https://neper.info/index.html">Neper</a> or <a href="https://dream3d.bluequartz.net">Dream 3d</a> and analyzed in a similar powerful way as you are used to do it with 2d grains. Have a look at <a href="Grains3DOperations.html">3d-grain operations</a> and <a href="Grains3DProperties.html">3d-grain properties</a> for more information.</p>
 <p>
 <b>Pseudo 3d EBSD and Grain maps</b>
 </p>
-<p>With version 6.0, MTEX starts to support pseudo 3d EBSD data. This means that EBSD maps are no longer restricted to the xy-plane. For example it is now possible to consider EBSD maps that represent the three faces of a cube. To make this possible, multiple changes at the core of MTEX had to be introduced:</p>
+<p>Additionally, all previous 2d-classes like <a href="EBSD.EBSD.html">EBSD</a>, <a href="grain2d.grain2d.html">grain2d</a>, <a href="grainBoundary.grainBoundary.html">grainBoundary</a> are not longer restricted to the xy-plane. For example it is now possible to consider EBSD maps that represent the three faces of a cube. To make this possible, multiple changes at the core of MTEX had to be introduced:</p>
 <div>
 <ul>
 <li>
@@ -70,6 +75,29 @@ ebsd.plottingConvention = how2plot
 </div>
 <p>
 <b>Interface to Neper</b> Neper is an open source software package for 3d polycrystal generation and meshing. It is now possible to call Neper from within MTEX, simulate micro-structures, generated slices through a 3d volume and import those slices into MTEX. Have a look at <a href="NeperInterface.html">NeperInterface</a> for more information.</p>
+<p>
+<b>Misc Changes</b>
+</p>
+<div>
+<ul>
+<li>new option <code class="language-plaintext highlighter-rouge">'minPixel'</code> for the command <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> which allows to set a minimum grain size</li>
+<li>
+<a href="xxx">ipf-sections</a> are a novel way of representing the orientation space</li>
+<li>
+<code class="language-plaintext highlighter-rouge">grains(id).V</code> now returns only the vertices of the respective grain</li>
+<li>
+<code class="language-plaintext highlighter-rouge">dot(vF1,vF2)</code> computes the inner product between two spherical vector fields.</li>
+<li>the option <code class="language-plaintext highlighter-rouge">'FaceColor'</code> now allows to <a href="CrystalShapes.html">colorize crystal shapes according to their orientation</a>
+</li>
+<li> <a href="mtexFigure.drawNow.html"><code class="language-plaintext highlighter-rouge">drawNow(gcm,'antiAliased')</code></a> generates anti-aliased images</li>
+<li> <a href="EBSD.transform2PolarReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transform2PolarReferenceFrame</code></a> transforms ebsd data into a polar reference frame</li>
+<li>support for area detectors in ODF reconstruction from pole figure data</li>
+<li>when computing parent EBSD data using <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a> the parent orientation will now be constant within the parent grains. In order to enforce the old behavior of a fixed OR but varying parent orientation use the new option <code class="language-plaintext highlighter-rouge">'exactOR'</code>.</li>
+<li>new interface to <a href="sht">files</a>
+</li>
+<li>new function <a href="stripStar.html"><code class="language-plaintext highlighter-rouge">stripStar</code></a> *</li>
+</ul>
+</div>
 <h2 id="2">MTEX 5.11.0 3/2024</h2>
 <p>MTEX 5.11 will be the last release before MTEX 6.0. It significantly improves grain reconstruction from 2d EBSD data.</p>
 <p>

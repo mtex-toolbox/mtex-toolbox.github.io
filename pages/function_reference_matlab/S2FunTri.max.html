@@ -23,116 +23,52 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>global, local and pointwise maxima of spherical functions</p>
 <h2 id="3">Syntax</h2>
-<pre>   M = max(A)
-   M = max(A,[],"all")
-   M = max(A,[],dim)
-   M = max(A,[],vecdim)
-   M = max(A,[],___,missingflag)</pre>
+{% highlight matlab %}
+[v,pos] = max(sF) % the position where the maximum is atained
+{% endhighlight %}
+
+{% highlight matlab %}
+[v,pos] = max(sF,'numLocal',5) % the 5 largest local maxima
+{% endhighlight %}
+
+{% highlight matlab %}
+sF = max(sF, c) % maximum of a spherical functions and a constant
+sF = max(sF1, sF2) % maximum of two spherical functions
+sF = max(sF1, sF2, 'bandwidth', bw) % specify the new bandwidth
+{% endhighlight %}
+
+{% highlight matlab %}
+% compute the maximum of a multivariate function along dim
+sF = max(sFmulti,[],dim)
+{% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>A</tt>
+            <tt>sF, sF1, sF2</tt>
          </td>
          <td>
-            <tt>Input array</tt>
+            <tt><a href="S2FunTri.S2FunTri.html">S2FunTri</a></tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>scalar | vector | matrix | multidimensional array | table |</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>timetable</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>dim</tt>
+            <tt>sFmulti</tt>
          </td>
          <td>
-            <tt>Dimension to operate along</tt>
+            <tt>a multivariate <a href="S2FunTri.S2FunTri.html">S2FunTri</a></tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>positive integer scalar</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>vecdim</tt>
+            <tt>c</tt>
          </td>
          <td>
-            <tt>Vector of dimensions</tt>
+            <tt>double</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>vector of positive integers</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>B</tt>
-         </td>
-         <td>
-            <tt>Additional input array</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>scalar | vector | matrix | multidimensional array | table |</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>timetable</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>missingflag</tt>
-         </td>
-         <td>
-            <tt>Missing value condition</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>"omitmissing" (default) | "omitnan" | "omitnat" | "omitundefined" |</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>"includemissing" | "includenan" | "includenat" | "includeundefined"</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>method</tt>
-         </td>
-         <td>
-            <tt>Comparison method</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>"auto" (default) | "real" | "abs"</tt>
-         </td>
-         <td/>
       </tr>
    </table>
 </p>
@@ -141,56 +77,35 @@ To make changes, update the MATLAB code and republish this document.
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>M</tt>
+            <tt>v</tt>
          </td>
          <td>
-            <tt>Maximum values</tt>
+            <tt>double</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>scalar | vector | matrix | multidimensional array | table</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>I</tt>
+            <tt>pos</tt>
          </td>
          <td>
-            <tt>Index</tt>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>scalar | vector | matrix | multidimensional array | table</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>C</tt>
-         </td>
-         <td>
-            <tt>Maximum elements from A or B</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>scalar | vector | matrix | multidimensional array | table |</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>timetable</tt>
-         </td>
-         <td/>
       </tr>
    </table>
 </p>
-<h2 id="6">Example</h2>
-<h2 id="8">See also</h2>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>numLocal</tt>
+         </td>
+         <td>
+            <tt>number of peaks to return</tt>
+         </td>
+      </tr>
+   </table>
+</p>
 </div>
 </body>
 </html>

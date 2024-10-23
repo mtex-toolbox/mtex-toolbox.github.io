@@ -72,10 +72,6 @@ numGrains=100;
 grains = job.simulateGrains(odf,numGrains,'silent')
 % or you can load an existing tessellation file
 %grains = grain3d.load('allgrains.tess','CS',cs)
-
-% colorize by mean orientation
-plot(grains,grains.meanOrientation,'micronbar','off')
-setCamera(how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -88,10 +84,16 @@ grains = grain3d
  
  Properties: meanRotation
 {% endhighlight %}
+
+{% highlight matlab %}
+% colorize by mean orientation
+plot(grains,grains.meanOrientation,'micronbar','off','faceAlpha',0.5)
+setCamera(how2plot)
+{% endhighlight %}
 <center>
 {% include inline_image.html file="Grains3D_03.png" %}
 </center>
-<h2 id="5">Slicing</h2>
+<h2 id="7">Slicing</h2>
 <p>To get the usually used 2d grain data, it is possible to slice 3d grains by different methods.</p>
 {% highlight matlab %}
 % make all slices passing through the center point of the cube
@@ -130,7 +132,7 @@ setCamera(how2plot), axis off, xlabel('') , ylabel('')
 <center>
 {% include inline_image.html file="Grains3D_05.png" %}
 </center>
-<h2 id="7">Grains intersecting a slice</h2>
+<h2 id="9">Grains intersecting a slice</h2>
 <p>Using the function <a href="grain3d.intersected"><code class="language-plaintext highlighter-rouge">intersected</code></a> we can identify all grains that intersect a given plane. Lets simply add 3d the shapes of all grains intersecting the plane.</p>
 {% highlight matlab %}
 isInter = grains.intersected(N,P0);
@@ -149,7 +151,7 @@ setCamera(how2plot)
 <center>
 {% include inline_image.html file="Grains3D_06.png" %}
 </center>
-<h2 id="8">Plot the normal directions of one grain</h2>
+<h2 id="10">Plot the normal directions of one grain</h2>
 {% highlight matlab %}
 %grains = grains(1)
 %dir = grains.I_GF(1,:)' .* grains.boundary.N % flip according to I_GF

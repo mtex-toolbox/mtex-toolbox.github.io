@@ -63,9 +63,9 @@ gB = grains.boundary
 gB = grainBoundary
  
  Segments    length   mineral 1   mineral 2
-      875  27592 µm  notIndexed  Forsterite
-       37   1562 µm  notIndexed   Enstatite
-       43   1361 µm  notIndexed    Diopside
+      869  27592 µm  notIndexed  Forsterite
+       36   1562 µm  notIndexed   Enstatite
+       42   1361 µm  notIndexed    Diopside
      1398  56197 µm  Forsterite  Forsterite
       654  26372 µm  Forsterite   Enstatite
       522  20750 µm  Forsterite    Diopside
@@ -229,7 +229,8 @@ colorKey = PatalaColorKey(gB_Fo);
 hold on
 plot(gB_Fo,'linewidth',7)
 hold on
-plot(gB_Fo,colorKey.orientation2color(gB_Fo.misorientation),'linewidth',4)
+color = colorKey.orientation2color(gB_Fo.misorientation);
+plot(gB_Fo,squeeze(color),'linewidth',4)
 hold off
 {% endhighlight %}
 <center>
@@ -267,8 +268,9 @@ plot(grains,grains.meanOrientation,'FaceAlpha',0.4)
 
 % define the color key and colorize the grain boundaries
 colorKey = PatalaColorKey(gB)
+color = colorKey.orientation2color(gB.misorientation);
 hold on
-plot(gB,colorKey.orientation2color(gB.misorientation),'linewidth',4,'smooth')
+plot(gB,squeeze(color),'linewidth',4,'smooth')
 hold off
 {% endhighlight %}
 

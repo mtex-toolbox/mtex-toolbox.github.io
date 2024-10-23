@@ -75,7 +75,7 @@ plot(ebsdSub,ebsdSub.orientations)
 <p>Our aim is now to recover the original orientation map. In a first step we reconstruct the grain structure from the remaining 25 percent of pixels.</p>
 {% highlight matlab %}
 % reconstruct the grain structure
-[grainsSub,ebsdSub.grainId] = calcGrains(ebsdSub,'angle',10*degree);
+[grainsSub,ebsdSub.grainId] = calcGrains(ebsdSub('indexed'),'angle',10*degree,'minPixel',2);
 
 grainsSub = smooth(grainsSub,5);
 
@@ -86,9 +86,9 @@ hold off
 <center>
 {% include inline_image.html file="EBSDFilling_03.png" %}
 </center>
-<p>The easiest way to reconstruct missing data is to use the command <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a> which interpolates missing data using the method of nearest neighbor. It is very recommended to pass the grain structure <code class="language-plaintext highlighter-rouge">grainsSub</code> as an additional argument to the <code class="language-plaintext highlighter-rouge">fill</code> function. In this case the nearest neighbors are chosen within the grains.</p>
+<p>The easiest way to reconstruct missing data is to use the command <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a> which interpolates missing data using the method of nearest neighbor. It is recommended to pass the grain structure <code class="language-plaintext highlighter-rouge">grainsSub</code> as an additional argument to the <code class="language-plaintext highlighter-rouge">fill</code> function. In this case the nearest neighbors are chosen within the grains.</p>
 {% highlight matlab %}
-ebsdSub_filled = fill(ebsdSub,grainsSub);
+ebsdSub_filled = fill(ebsdSub('indexed'),grainsSub);
 
 plot(ebsdSub_filled('indexed'),ebsdSub_filled('indexed').orientations);
 
@@ -105,8 +105,7 @@ F = halfQuadraticFilter;
 F.alpha = 0.25;
 
 % interpolate the missing data
-ebsdSub_filled = smooth(ebsdSub,F,'fill',grainsSub);
-ebsdSub_filled = ebsdSub_filled('indexed');
+ebsdSub_filled = smooth(ebsdSub('indexed'),F,'fill',grainsSub);
 
 plot(ebsdSub_filled('indexed'),ebsdSub_filled('indexed').orientations);
 
