@@ -13,8 +13,8 @@ texture analysis" %} and counts for **5 ECTS** points. While the first week is
 mainly devoted to beginners in MTEX and/or texture analysis, the second week
 is a meeting of MTEX users with different experiences to share specific use
 cases, tips and tricks and discuss recent and upcoming developments in MTEX. A
-special focus will be on grain boundary statistics. Participation is possible
-in presence as well as remotely.
+special focus will be on grain boundary statistics and new functionalities in
+MTEX 6.0. Participation is possible in presence as well as remotely.
 
 <!---
 {% capture par_default %}
@@ -330,7 +330,7 @@ their talks as accessible as possible.
 
 ## Registration:
 
-- Please register at {% include reference.html link="https://acatrain.net/events/freiberg-mtex-workshop-2024/" content="https://acatrain.net/events/freiberg-mtex-workshop-2025" %}
+- Please register at {% include reference.html link="https://acatrain.net/events/freiberg-mtex-workshop-2025/" content="https://acatrain.net/events/freiberg-mtex-workshop-2025" %}
  - Deadline for registration is 31st of January 2025
 
 ## Registration Fee:
