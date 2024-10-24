@@ -45,7 +45,7 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 
 % and on top the grain boundaries
 hold on
-plot(grains.boundary,'linewidth',2)
+plot(grains.boundary,'linewidth',2,'linecolor','white')
 hold off
 {% endhighlight %}
 
@@ -143,6 +143,9 @@ hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDDenoising_05.png" %}
+</center>
 <p>The disadvantage of the median filter is that it leads to cartoon like images which suffer from the staircase effect.</p>
 <h2 id="8">The Kuwahara Filter</h2>
 <p>Another filter that was designed to be robust against outliers and does not smooth away subgrain boundaries is the Kuwahara filter. However, in practical applications the results are often not satisfactory.</p>
@@ -163,7 +166,7 @@ plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_05.png" %}
+{% include inline_image.html file="EBSDDenoising_06.png" %}
 </center>
 <h2 id="9">The Smoothing Spline Filter</h2>
 <p>All the above filters are so called sliding windows filters which consider for the denoising operation only neighboring orientations within a certain window. The next filters belong to the class of variational filters which determine the denoised orientation map as the solution of an minimization problem that is simultaneously close to the original map and "smooth". The resulting orientation map heavily depends on the specific definition of "smooth" and on the regularization parameter which controls the trade of between fitting the original data and forcing the resulting map to be smooth.</p>
@@ -192,7 +195,7 @@ ans =
     4.6123
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_06.png" %}
+{% include inline_image.html file="EBSDDenoising_07.png" %}
 </center>
 <h2 id="10">The Halfquadratic Filter</h2>
 <p>In the default setting the @halfQuadraticFilter uses definition of smoothness the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the @medianFilter it tends to carton like images and staircasing.</p>
@@ -212,7 +215,7 @@ plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_07.png" %}
+{% include inline_image.html file="EBSDDenoising_08.png" %}
 </center>
 <h2 id="11">The Infimal Convolution Filter</h2>
 <p>The infimal convolution filter was designed as a compromise between the @splineFilter and the @halfQuadraticFilter. It is still under development and its use is not recommended.</p>
@@ -234,7 +237,7 @@ plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDDenoising_08.png" %}
+{% include inline_image.html file="EBSDDenoising_09.png" %}
 </center>
 </div>
 </body>
