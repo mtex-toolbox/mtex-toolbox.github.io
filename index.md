@@ -37,6 +37,7 @@ of material scientists, geologists and mathematicians.
 					<li>
 						03/25 &minus;
 						{% include reference.html link="workshop25?" content="MTEX Workshop 25" %}:
+						{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}
                     </li>
    					<li>
                         04/24 &minus;
@@ -53,7 +54,7 @@ of material scientists, geologists and mathematicians.
 					<!--<li>
 						03/24 &minus;
 						{% include reference.html link="workshop24?" content="MTEX Workshop 24" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/1948" content="Announcement" %}
+                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}
                     </li>-->
                     <li>
                         03/22 &minus; addon 
