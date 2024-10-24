@@ -34,13 +34,7 @@ csBCC = ebsd.CSList{2}; % austenite bcc:
 csFCC = ebsd.CSList{3}; % martensite fcc:
 
 % grain reconstruction
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
-
-% remove small grains
-ebsd(grains(grains.grainSize < 4)) = [];
-
-% reidentify grains with small grains removed:
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',3*degree,'minPixel',5);
 
 % plot the data and the grain boundaries
 plot(ebsd('Iron bcc'),ebsd('Iron bcc').orientations,'figSize','large')
@@ -65,16 +59,16 @@ ebsd = EBSD
 {% include inline_image.html file="MaParentGrainReconstructionAdvanced_01.png" %}
 </center>
 <h2 id="2">Determine the parent child orientation relationship</h2>
-<p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individualy. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at an initial guess of the orientation relation ship and iterates towards the true orientation relationship.</p>
+<p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individually. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at an initial guess of the orientation relation ship and iterates towards the true orientation relationship.</p>
 <p>Here we use as the initial guess the Kurdjumov Sachs orientation relationship</p>
 {% highlight matlab %}
 % initial gues is Kurdjumov Sachs
 KS = orientation.KurdjumovSachs(csFCC,csBCC);
 {% endhighlight %}
-<p>The function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> requires as input a list of child to child misorientations or, equivalently, a two column matrix of child orientations. Here we go with the second option and setup this two column orientation matrix from the mean orientations of neighbouring grains which can be found using the command <a href="grain2d.neighbours.html"><code class="language-plaintext highlighter-rouge">neighbours</code></a>
+<p>The function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> requires as input a list of child to child misorientations or, equivalently, a two column matrix of child orientations. Here we go with the second option and setup this two column orientation matrix from the mean orientations of neighboring grains which can be found using the command <a href="grain2d.neighbours.html"><code class="language-plaintext highlighter-rouge">neighbours</code></a>
 </p>
 {% highlight matlab %}
-% get neighbouring grain pairs
+% get neighboring grain pairs
 grainPairs = grains.neighbors;
 
 % ignore pairs with misorientation angle smaller then 5 degree
@@ -98,7 +92,7 @@ xlabel('disorientation angle')
 {% highlight matlab %}
 [gB,pairId] = grains.boundary.selectByGrainId(grainPairs);
 {% endhighlight %}
-<p>abd then pass the variable <code class="language-plaintext highlighter-rouge">fit</code> as second input argument to the <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command</p>
+<p>and then pass the variable <code class="language-plaintext highlighter-rouge">fit</code> as second input argument to the <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command</p>
 {% highlight matlab %}
 plot(ebsd('Iron bcc'),ebsd('Iron bcc').orientations,'figSize','large')
 hold on;
@@ -115,7 +109,7 @@ setColorRange([0,5])
 </center>
 <p>We observe that the boundary segments with a large misfit form large grain shapes which we want to identify in the next steps as the parent grains.</p>
 <h2 id="8">Create a similarity matrix</h2>
-<p>Next we set up a adjacency matrix <code class="language-plaintext highlighter-rouge">A</code> that describes the probability that two neighbouring grains belong to the same parent grains. This probability is computed from the misfit of the misorientation between two child grains to the theoretical child to child misorientation. More precisely, we model the probability by a cumulative Gaussian distribution with the mean value <code class="language-plaintext highlighter-rouge">threshold</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">tol</code>
+<p>Next we set up a adjacency matrix <code class="language-plaintext highlighter-rouge">A</code> that describes the probability that two neighboring grains belong to the same parent grains. This probability is computed from the misfit of the misorientation between two child grains to the theoretical child to child misorientation. More precisely, we model the probability by a cumulative Gaussian distribution with the mean value <code class="language-plaintext highlighter-rouge">threshold</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">tol</code>
 </p>
 {% highlight matlab %}
 omega = linspace(0,5)*degree;
@@ -156,7 +150,8 @@ parentEBSD('indexed').grainId = parentId(ebsd('indexed').grainId);
 {% highlight matlab %}
 plot(ebsd('Iron bcc'),ebsd('Iron bcc').orientations,'figSize','large')
 hold on;
-plot(parentGrains.boundary,'linewidth',4)
+plot(parentGrains.boundary,'linewidth',4,'lineColor','w')
+plot(parentGrains.boundary,'linewidth',2,'lineColor','k')
 hold off
 {% endhighlight %}
 <center>
@@ -187,7 +182,7 @@ parentGrains(fit<5*degree).meanOrientation = parentOri(fit<5*degree);
 parentGrains = parentGrains.update;
 
 % merge grains with similar orientation
-[parentGrains, mergeId] = merge(parentGrains,'threshold',3*degree);
+[parentGrains, mergeId] = merge(parentGrains,'threshold',4*degree);
 parentEBSD('indexed').grainId = mergeId(parentEBSD('indexed').grainId);
 {% endhighlight %}
 <p>Let's plot the resulting parent orientations</p>
@@ -234,6 +229,12 @@ plot(parentOri.symmetrise * Miller(0,0,1,csFCC))
 childVariants = variants(fcc2bcc, parentOri);
 plotPDF(childVariants, 'markerFaceColor','none','linewidth',2,'markerEdgeColor','orange')
 hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+I'm plotting 416 random orientations out of 6841 given orientations
+  You can specify the the number points by the option "points".
+  The option "all" ensures that all data are plotted
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstructionAdvanced_08.png" %}
