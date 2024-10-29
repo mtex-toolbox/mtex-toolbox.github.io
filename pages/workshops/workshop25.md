@@ -268,23 +268,26 @@ their talks as accessible as possible.
 
 ### Keynote Speakers
 
+
 - **{% include reference.html
   link="https://www.materials.ox.ac.uk/peoplepages/marquardt.html"
   content="Katharina Marquardt" %}** (University of Oxford)
-  
-- **{% include reference.html
-  link="https://www.ntnu.edu/employees/bjorn.sorensen"
-  content="Bjørn Eske Sørensen" %}** (NTNU)
-  
-- **{% include reference.html
-  link="https://www.researchgate.net/profile/Daniel-Savage-4"
-  content="Daniel Savage" %}** (Los Alamos National Laboratory)
-  
+   
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Gert-Nolze"
   content="Gert Nolze" %}** (Bundesanstalt für Materialforschung)
+  
+- **{% include reference.html
+  link="https://research.manchester.ac.uk/en/persons/joao.fonseca"
+  content="João Quinta da Fonseca" %}** (University of Manchester)
 
-- more to come
+- **{% include reference.html
+  link="https://www.researchgate.net/profile/Daniel-Savage-4"
+  content="Daniel Savage" %}** (Los Alamos National Laboratory)
+
+- **{% include reference.html
+  link="https://www.ntnu.edu/employees/bjorn.sorensen"
+  content="Bjørn Eske Sørensen" %}** (NTNU)
 
 ## Venue:
 
