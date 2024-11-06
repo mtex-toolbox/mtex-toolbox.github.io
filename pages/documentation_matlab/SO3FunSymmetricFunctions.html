@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Every <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> has a left and a right symmetry. For further information on symmetries look at <a href="CrystalSymmetries.html">crystal symmetries</a>, <a href="SpecimenSymmetry.html">specimen symmetries</a> and, <a href="QuasiCrystals.html">Quasi symmetries</a>.</p>
+<p>Every <a href="SO3Fun.SO3Fun"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a> has a left and a right symmetry. In case of ODFs the right symmetry is the <a href="CrystalSymmetries.html">crystal symmetry</a> and the left symmetry is the <a href="SpecimenSymmetry.html">specimen symmetry</a>.</p>
 {% highlight matlab %}
 SO3F = SO3Fun.dubna
 
@@ -61,9 +61,9 @@ SO3F.eval(ss*ori*cs)
 
 {% highlight plaintext %}
 ans =
-    0.1106    0.1106    0.1106    0.1106    0.1106    0.1106
+    0.0792    0.0792    0.0792    0.0792    0.0792    0.0792
 ans =
-    0.1106    0.1106    0.1106    0.1106    0.1106    0.1106
+    0.0792    0.0792    0.0792    0.0792    0.0792    0.0792
 {% endhighlight %}
 <p>The symmetries have, for example, an influence on the plot domain.</p>
 {% highlight matlab %}
@@ -92,9 +92,10 @@ SO3F = SO3FunRBF (Quartz → xyz (432))
   center: 19848 orientations
 {% endhighlight %}
 <p>The class <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> describes an rotational function by the Fourier coefficients of its harmonic series. Here it is possible to get the symmetries directly from the fourier coefficients.</p>
-<p>Similary if we want to change the symmetry of a function it is not enough to change it. We also have to symmetries this function.</p>
+<p>Similarly, if we want to change the symmetry of a function it is not enough to change it. We also have to symmetries this function.</p>
 {% highlight matlab %}
 SO3F2 = SO3FunHarmonic(rand(1e3,1))
+SO3F2.isReal = true
 SO3F2.fhat(1:10)
 {% endhighlight %}
 
@@ -102,33 +103,33 @@ SO3F2.fhat(1:10)
 SO3F2 = SO3FunHarmonic (xyz → xyz)
   isReal: false
   bandwidth: 9
-  weight: 0.65
+  weight: 0.44
+ 
+ 
+SO3F2 = SO3FunHarmonic (xyz → xyz)
+  bandwidth: 9
+  weight: 0.44
  
 ans =
-    0.6538
-    0.1482
-    0.8623
-    0.2782
-    0.6607
-    0.6610
-    0.9911
-    0.4788
-    0.5404
-    0.7100
+    0.4353
+    0.2775
+    0.4297
+    0.4129
+    0.4430
+    0.2997
+    0.4430
+    0.4129
+    0.4297
+    0.2775
 {% endhighlight %}
 
 {% highlight matlab %}
 plot(SO3F2)
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
-{% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_02.png" %}
 </center>
-<p>Changing the symmetry has no effect on the Fourier coefficients. No we are only plotting the given function on some fundamental region.</p>
+<p>Changing the symmetry has no effect on the Fourier coefficients. Now we are only plotting the given function on some fundamental region.</p>
 {% highlight matlab %}
 SO3F2.SRight = crystalSymmetry('2')
 SO3F2.fhat(1:10)
@@ -136,35 +137,29 @@ SO3F2.fhat(1:10)
 
 {% highlight plaintext %}
 SO3F2 = SO3FunHarmonic (121 → xyz)
-  isReal: false
   bandwidth: 9
-  weight: 0.65
+  weight: 0.44
  
 ans =
-    0.6538
-    0.1482
-    0.8623
-    0.2782
-    0.6607
-    0.6610
-    0.9911
-    0.4788
-    0.5404
-    0.7100
+    0.4353
+    0.2775
+    0.4297
+    0.4129
+    0.4430
+    0.2997
+    0.4430
+    0.4129
+    0.4297
+    0.2775
 {% endhighlight %}
 
 {% highlight matlab %}
 plot(SO3F2)
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
-{% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_03.png" %}
 </center>
-<p>Symmetrizing the Fourier coefficients transforms the coefficients. So we symmetrize the function and it is no longer possible to go back to the non symmetrized function from before.</p>
+<p>Symmetrising the Fourier coefficients transforms the coefficients. So we symmetrise the function and it is no longer possible to go back to the non symmetrized function from before.</p>
 {% highlight matlab %}
 SO3F2 = SO3F2.symmetrise
 SO3F2.fhat(1:10)
@@ -172,30 +167,24 @@ SO3F2.fhat(1:10)
 
 {% highlight plaintext %}
 SO3F2 = SO3FunHarmonic (121 → xyz)
-  isReal: false
   bandwidth: 9
-  weight: 0.65
+  weight: 0.44
  
 ans =
-   0.6538 - 0.0000i
-  -0.0650 + 0.0000i
+   0.4353 - 0.0000i
+  -0.0677 + 0.0000i
    0.0000 + 0.0000i
-   0.0650 - 0.0000i
-  -0.1652 + 0.0000i
+   0.0677 - 0.0000i
    0.0000 + 0.0000i
-   0.1652 - 0.0000i
-  -0.1156 + 0.0000i
    0.0000 + 0.0000i
-   0.1156 - 0.0000i
+   0.0000 - 0.0000i
+   0.0677 + 0.0000i
+   0.0000 + 0.0000i
+  -0.0677 - 0.0000i
 {% endhighlight %}
 
 {% highlight matlab %}
 plot(SO3F2)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_04.png" %}
@@ -203,11 +192,6 @@ In the following only the real part is plotted.
 <p>Now the function is symmetrised on the full rotation group.</p>
 {% highlight matlab %}
 plot(SO3F2,'complete')
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunSymmetricFunctions_05.png" %}
