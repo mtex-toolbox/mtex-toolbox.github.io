@@ -109,9 +109,9 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<p>All representations allow the same operations which are specified for the abstact class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>. In particular it is possible to calculate with \(\mathcal{SO}(3)\) functions as with ordinary numbers, i.e., you can add, multiply arbitrary functions, take the mean, integrate them or compute gradients, see <a href="SO3FunOperations.html">Operations</a>.</p>
+<p>All representations allow the same operations which are specified for the abstract class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>. In particular it is possible to calculate with \(\mathcal{SO}(3)\) functions as with ordinary numbers, i.e., you can add, multiply arbitrary functions, take the mean, integrate them or compute gradients, see <a href="SO3FunOperations.html">Operations</a>.</p>
 <h2 id="5">Definition of SO3Fun's</h2>
-<p>Every rotational function has a left and a right symmetry, see <a href="SO3FunSymmetricFunctions.html">symmetric Functions</a>. If we do not specify symmetries by construction then the symmetry group '1' is used as default, i.e. there are no symmetric rotations.</p>
+<p>Every rotational function has a left and a right symmetry, see <a href="SO3FunSymmetricFunctions.html">symmetric Functions</a>. If we do not specify symmetries by construction triclinic symmetry is used as default, i.e. there are no symmetric rotations.</p>
 <p>Moreover <code class="language-plaintext highlighter-rouge">SO3Fun's</code> have the property <code class="language-plaintext highlighter-rouge">antipodal</code> which could be used to set the function as antipodal.</p>
 <p>
 <b>Definition of anonymous functions on SO(3)</b>
@@ -146,8 +146,8 @@ SO3F2.eval(rot)
 
 {% highlight plaintext %}
 ans =
-  131.8630
-  107.3716
+   96.3003
+  146.5333
 {% endhighlight %}
 <p>And following that, it is easy to describe every <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code>.</p>
 {% highlight matlab %}
@@ -182,10 +182,10 @@ SO3F4 = SO3FunHarmonic(fhat,cs)
 SO3F4 = SO3FunHarmonic (m-3m → xyz)
   isReal: false
   bandwidth: 19
-  weight: 0.83
+  weight: 0.2
 {% endhighlight %}
-<p>The <code class="language-plaintext highlighter-rouge">bandwith</code> decribes the maximal harmonic degree of the harmonic series expansion.</p>
-<p>By the property <code class="language-plaintext highlighter-rouge">isReal</code> we are able to change between real and complex valued <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Note that creation of an real vealued SO3FunHarmonic changes the Fourier coefficient vector. So it is not possible to reconstruct the previous function. But computing with real valued functions is much faster.</p>
+<p>The <code class="language-plaintext highlighter-rouge">bandwidth</code> describes the maximal harmonic degree of the harmonic series expansion.</p>
+<p>By the property <code class="language-plaintext highlighter-rouge">isReal</code> we are able to change between real and complex valued <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Note that creation of an real valued SO3FunHarmonic changes the Fourier coefficient vector. So it is not possible to reconstruct the previous function. But computing with real valued functions is faster.</p>
 {% highlight matlab %}
 SO3F4.eval(rot)
 
@@ -195,22 +195,23 @@ SO3F4.eval(rot)
 
 {% highlight plaintext %}
 ans =
-  -3.7911 + 0.5158i
-   5.6468 + 1.4131i
+ -15.2920 - 3.2375i
+  25.9026 - 0.5691i
  
 SO3F4 = SO3FunHarmonic (m-3m → xyz)
   bandwidth: 19
-  weight: 0.83
+  weight: 0.2
  
 ans =
-   -3.7911
-    5.6468
+  -15.2920
+   25.9026
 {% endhighlight %}
-<p>For further information on the Fourier coefficients, the bandwidth and other properties , see <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation of Rotational Functions</a>.</p>
+<p>For further information on the Fourier coefficients, the bandwidth and other properties, see <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation of Rotational Functions</a>.</p>
 <p>
 <b>Definition of Radial Basis Functions</b>
 </p>
-<p>Radial Basis functions are of class <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. They are defined by a kernel function <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> which is cenetered on <code class="language-plaintext highlighter-rouge">orientations</code> with some weights.</p>
+<p>Radial Basis functions are of class <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. They are defined as superposition of weighted kernel functions <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> centered on a set of orientations <code class="language-plaintext highlighter-rouge">ori</code>
+</p>
 {% highlight matlab %}
 ori = orientation.rand(1e3,cs);
 w = ones(1e3,1);
@@ -233,7 +234,7 @@ SO3F5 = SO3FunRBF (m-3m → xyz)
   kernel: de la Vallee Poussin, halfwidth 10°
   center: 1000 orientations
 {% endhighlight %}
-<p>For further information on them, see <a href="RadialODFs.html">SO3FunRBF</a>.</p>
+<p>For further information on them, see <a href="RadialODFs.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>.</p>
 <p>
 <b>Definition of fibre elements</b>
 </p>
@@ -289,7 +290,7 @@ ans = SO3FunComposition (m-3m → xyz)
  
   harmonic component
   bandwidth: 19
-  weight: 0.83
+  weight: 0.2
  
   function handle component
   eval: @(ori)angle(ori)./degree

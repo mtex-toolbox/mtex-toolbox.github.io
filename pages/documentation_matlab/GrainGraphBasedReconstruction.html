@@ -83,7 +83,7 @@ job = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10640   100%               
+ child   Iron bcc (old)  432       10641   100%               
  
  OR: (111) || (011)   [10-1] || [11-1]
    c2c fit: 2.5°, 3.5°, 4.4°, 5.3° (quintiles)
@@ -104,7 +104,7 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10640   100%               
+ child   Iron bcc (old)  432       10641   100%               
  
  OR: (346.1°,9°,58°)
    c2c fit: 1.3°, 1.8°, 2.2°, 2.9° (quintiles)
@@ -153,13 +153,13 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10640   100%               
+ child   Iron bcc (old)  432       10641   100%               
  
  OR: (346.1°,9°,58°)
-   c2c fit: 1.3°, 1.8°, 2.2°, 2.9° (quintiles)
+   c2c fit: 1.3°, 1.7°, 2.2°, 3° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
  
- graph: 10638 grains in 2 clusters + 2 single grain clusters
+ graph: 10639 grains in 2 clusters + 2 single grain clusters
 {% endhighlight %}
 <p>We may visualize the graph adjusting the edgeAlpha of the boundaries between grains according to the edge value of the graph. This can be accomplished by the command <a href="parentGrainReconstructor.plotGraph.html"><code class="language-plaintext highlighter-rouge">plotGraph</code></a>
 </p>
@@ -182,13 +182,13 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10640   100%               
+ child   Iron bcc (old)  432       10641   100%               
  
  OR: (346.1°,9°,58°)
    c2c fit: 1.3°, 1.8°, 2.2°, 2.9° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
  
- graph: 10532 grains in 331 clusters + 108 single grain clusters
+ graph: 10533 grains in 331 clusters + 108 single grain clusters
 {% endhighlight %}
 <p>Finally, we assume a single parent orientation for each cluster and use it to compute a parent orientation for each child grain being part of a cluster. This is done by the command <a href="parentGrainReconstructor.calcParentFromGraph.html"><code class="language-plaintext highlighter-rouge">calcParentFromGraph</code></a>.</p>
 {% highlight matlab %}
@@ -203,7 +203,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area   reconstructed
- parent  Iron fcc        432       10532   100%   99%          
+ parent  Iron fcc        432       10533   100%   99%          
  child   Iron bcc (old)  432       108     0.14%               
  
  OR: (346.1°,9°,58°)
@@ -237,7 +237,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       8989    92%   84%          
+ parent  Iron fcc        432       8990    92%   84%          
  child   Iron bcc (old)  432       1651    8%                 
  
  OR: (346.1°,9°,58°)
@@ -268,7 +268,7 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       9437    95%   89%          
+ parent  Iron fcc        432       9438    95%   89%          
  child   Iron bcc (old)  432       1203    4.8%               
  
  OR: (346.1°,9°,58°)
@@ -283,7 +283,7 @@ ans = parentGrainReconstructor
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       9974    97%   94%          
+ parent  Iron fcc        432       9975    97%   94%          
  child   Iron bcc (old)  432       666     2.7%               
  
  OR: (346.1°,9°,58°)
@@ -298,7 +298,7 @@ ans = parentGrainReconstructor
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       10304   99%   97%          
+ parent  Iron fcc        432       10305   99%   97%          
  child   Iron bcc (old)  432       336     1.2%               
  
  OR: (346.1°,9°,58°)
@@ -322,9 +322,6 @@ job.mergeSimilar('threshold',7.5*degree);
 % plot the result
 plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_10.png" %}
-</center>
 <p>We may be still a bit unsatisfied with the result as the large parent grains contain many poorly indexed inclusions where we failed to assign to a parent orientation. We may use the command <a href="parentGrainReconstructor.mergeInclusions.html"><code class="language-plaintext highlighter-rouge">mergeInclusions</code></a> to merge all inclusions with fever pixels then a certain threshold into the surrounding parent grains.</p>
 {% highlight matlab %}
 job.mergeInclusions('maxSize',50);
@@ -333,7 +330,7 @@ job.mergeInclusions('maxSize',50);
 plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_11.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_10.png" %}
 </center>
 <h2 id="17">Compute Child Variants</h2>
 <p>Knowing the parent grain orientations we may compute the variants and packets of each child grain using the command <a href="parentGrainReconstructor.calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a>. The values are stored with the properties <code class="language-plaintext highlighter-rouge">job.transformedGrains.variantId</code> and <code class="language-plaintext highlighter-rouge">job.transformedGrains.packetId</code>. The <code class="language-plaintext highlighter-rouge">packetId</code> is defined as the closest {111} plane in austenite to the (011) plane in martensite.</p>
@@ -356,7 +353,7 @@ plot(grainSelected.boundary,'linewidth',3,'lineColor','w')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_12.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_11.png" %}
 </center>
 <p>We can also directly identify the child grains belonging to the selected parent grains. Remember that the initial grains are stored in <code class="language-plaintext highlighter-rouge">job.grainsPrior</code> and that the vector <code class="language-plaintext highlighter-rouge">job.mergeId</code> stores for every initial grain the <code class="language-plaintext highlighter-rouge">id</code> of the corresponding parent grain. Combining these two information we do</p>
 {% highlight matlab %}
@@ -372,7 +369,7 @@ plot(grainSelected.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_13.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_12.png" %}
 </center>
 <p>In order to check our parent grain reconstruction we chose the single parent grain outlined in the above map and plot all child variants of its reconstructed parent orientation together with the actually measured child orientations inside the parent grain. In order to compute the <code class="language-plaintext highlighter-rouge">variantId</code> and <code class="language-plaintext highlighter-rouge">packetId</code> we use the command <a href="calcVariantId.html"><code class="language-plaintext highlighter-rouge">calcVariantId</code></a>.</p>
 {% highlight matlab %}
@@ -400,7 +397,7 @@ plotPDF(childVariants, 'markerFaceColor','none','linewidth',1.5,'markerEdgeColor
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_14.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_13.png" %}
 </center>
 <h2 id="20">Parent EBSD reconstruction</h2>
 <p>So far our analysis was at the grain level. However, once parent grain orientations have been computed we may also use them to compute parent orientations of each pixel in our original EBSD map. This is done by the command <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a>
@@ -412,7 +409,7 @@ parentEBSD = job.calcParentEBSD;
 plot(parentEBSD('Iron fcc'),parentEBSD('Iron fcc').orientations,'figSize','large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_15.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_14.png" %}
 </center>
 <p>We obtain even a measure <code class="language-plaintext highlighter-rouge">parentEBSD.fit</code> for the correspondence between the parent orientation reconstructed from the single pixel and the parent orientation of the grain. Lets visualize this fit</p>
 {% highlight matlab %}
@@ -428,7 +425,7 @@ plot(job.grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_16.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_15.png" %}
 </center>
 <h2 id="22">Denoise the parent map</h2>
 <p>Finally, we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
@@ -449,7 +446,7 @@ plot(parentGrains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_17.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_16.png" %}
 </center>
 <p>and then use the command <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> to fill the holes in the reconstructed parent map</p>
 {% highlight matlab %}
@@ -466,7 +463,7 @@ plot(parentGrains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GrainGraphBasedReconstruction_18.png" %}
+{% include inline_image.html file="GrainGraphBasedReconstruction_17.png" %}
 </center>
 </div>
 </body>
