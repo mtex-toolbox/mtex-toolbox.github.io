@@ -274,23 +274,23 @@ cS = crystalShape
 <center>
 {% include inline_image.html file="CrystalShapes_09.png" %}
 </center>
-<p>i.e. we see only the positive and negative rhomboedrons, but the hexagonal prism are to far away from the origin to cut the shape. We may decrease the distance, by multiplying the corresponding normal with a factor larger then 1.</p>
+<p>i.e. we see only the positive and negative rhododendrons, but the hexagonal prism are to far away from the origin to cut the shape. We may decrease the distance, by multiplying the corresponding normal with a factor larger then 1.</p>
 {% highlight matlab %}
 N = [2*m,r,z];
 
 cS = crystalShape(N);
-plot(cS)
+plot(cS,'colored')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_10.png" %}
 </center>
-<p>Next in a typical Quartz crystal the negative rhomboedron is a bit smaller then the positive rhomboedron. Lets correct for this.</p>
+<p>Next in a typical Quartz crystal the negative rhododendron is a bit smaller then the positive rhododendron. Lets correct for this.</p>
 {% highlight matlab %}
 % collect the face normal with the right scaling
 N = [2*m,r,0.9*z];
 
 cS = crystalShape(N);
-plot(cS)
+plot(cS,'colored')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_11.png" %}
@@ -301,33 +301,12 @@ plot(cS)
 N = [2*m,r,0.9*z,0.7*s1,0.3*x1];
 
 cS = crystalShape(N);
-plot(cS)
+plot(cS,'colored')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapes_12.png" %}
 </center>
-<h2 id="18">Marking crystal faces</h2>
-<p>We may colorize the faces according to their lattice planes using the command</p>
-{% highlight matlab %}
-plot(cS,'colored')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_13.png" %}
-</center>
-<p>or even label the faces directly</p>
-{% highlight matlab %}
-plot(cS)
-N = unique(cS.N.symmetrise,'noSymmetry','stable');
-fC = cS.faceCenter;
-
-for i = 1:length(N)
-  text3(fC(i),char(round(N(i)),'latex'),'scaling',1.1,'interpreter','latex')
-end
-{% endhighlight %}
-<center>
-{% include inline_image.html file="CrystalShapes_14.png" %}
-</center>
-<h2 id="20">Defining complicated crystals more simple</h2>
+<h2 id="18">Defining complicated crystals more simple</h2>
 <p>We see that defining a complicated crystal shape is a tedious work. To this end MTEX allows to model the shape with a habitus and a extension parameter. This approach has been developed by J. Enderlein in <a href="https://library.wolfram.com/infocenter/Articles/3279">A package for displaying crystal morphology. Mathematical Journal, 7(1), 1997</a>. The two parameters are used to model the distance of a face from the origin. Setting all parameters to one we obtain</p>
 {% highlight matlab %}
 % take the face normals unscaled
@@ -339,16 +318,16 @@ cS = crystalShape(N,habitus,extension);
 plot(cS,'colored')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_15.png" %}
+{% include inline_image.html file="CrystalShapes_13.png" %}
 </center>
-<p>The scale parameter models the inverse extension of the crystal in each dimension. In order to make the crystal a bit longer and the negative rhomboedrons smaller we could do</p>
+<p>The scale parameter models the inverse extension of the crystal in each dimension. In order to make the crystal a bit longer and the negative rhododendrons smaller we could do</p>
 {% highlight matlab %}
-extension = [0.9 1.1 1];
+extension = [1 1.2 1.1];
 cS = crystalShape(N,habitus,extension);
 plot(cS,'colored')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_16.png" %}
+{% include inline_image.html file="CrystalShapes_14.png" %}
 </center>
 <p>Next the habitus parameter describes how close faces with mixed hkl are to the origin. If we increase the habitus parameter the trapezohedron and the bipyramid become more and more dominant</p>
 {% highlight matlab %}
@@ -365,49 +344,52 @@ cS = crystalShape(N,habitus,extension);
 plot(cS,'colored')
 {% endhighlight %}
 <center>
+{% include inline_image.html file="CrystalShapes_15.png" %}
+</center>
+<center>
+{% include inline_image.html file="CrystalShapes_16.png" %}
+</center>
+<center>
 {% include inline_image.html file="CrystalShapes_17.png" %}
 </center>
-<center>
-{% include inline_image.html file="CrystalShapes_18.png" %}
-</center>
-<center>
-{% include inline_image.html file="CrystalShapes_19.png" %}
-</center>
-<h2 id="23">Select faces</h2>
+<h2 id="21">Select faces</h2>
 <p>A specific face of the crystal shape may be selected by its normal vector</p>
 {% highlight matlab %}
 plot(cS)
 hold on
 plot(cS(Miller(0,-1,1,0,cs)),'FaceColor','DarkRed')
 hold off
+
+% zoom a bit out to fit the screen
+camzoom(0.7)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_20.png" %}
+{% include inline_image.html file="CrystalShapes_18.png" %}
 </center>
-<h2 id="24">Gallery of hardcoded crystal shapes</h2>
+<h2 id="22">Gallery of hardcoded crystal shapes</h2>
 {% highlight matlab %}
 plot(crystalShape.olivine,'colored')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_21.png" %}
+{% include inline_image.html file="CrystalShapes_19.png" %}
 </center>
 {% highlight matlab %}
 plot(crystalShape.garnet,'colored')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_22.png" %}
+{% include inline_image.html file="CrystalShapes_20.png" %}
 </center>
 {% highlight matlab %}
 plot(crystalShape.topaz,'colored')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_23.png" %}
+{% include inline_image.html file="CrystalShapes_21.png" %}
 </center>
 {% highlight matlab %}
 plot(crystalShape.plagioclase,'colored')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalShapes_24.png" %}
+{% include inline_image.html file="CrystalShapes_22.png" %}
 </center>
 </div>
 </body>

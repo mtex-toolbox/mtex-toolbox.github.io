@@ -41,7 +41,7 @@ ebsd = EBSD
  
  Properties: bands, bc, bs, error, mad, reliabilityindex
  Scan unit : um
- X x Y x Z : [0 1568] x [-1175 0] x [0 1.4e-13]
+ X x Y x Z : [0 1568] x [-1175 0] x [0 0]
  Normal vector: (0,0,-1)
 {% endhighlight %}
 <center>
@@ -66,9 +66,6 @@ beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
   'removeQuadruplePoints');
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TriplePointBasedReconstruction_02.png" %}
-</center>
 <p>As our reconstruction will be based on triple junctions we compute the child grains using the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> which turns all quadruple junctions into 2 triple junctions. Furthermore, we choose a very small threshold of 1.5 degree for the identification of grain boundaries to avoid alpha orientations that belong to different beta grains get merged into the same alpha grain.</p>
 <p>Now we are ready to set up the parent grain reconstruction job.</p>
 {% highlight matlab %}
@@ -83,11 +80,11 @@ job = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
  parent  Ti (BETA)   432       430     0.23%  0%           
- child   Ti (alpha)  622       50317   100%                
+ child   Ti (alpha)  622       49120   100%                
  
  OR: (110) || (0001)   [1-11] || [-2110]
-   p2c fit: 0.84°, 1.2°, 1.6°, 3° (quintiles)
-   c2c fit: 0.7°, 0.97°, 1.3°, 1.7° (quintiles)
+   p2c fit: 0.83°, 1.2°, 1.7°, 3.2° (quintiles)
+   c2c fit: 0.7°, 0.99°, 1.3°, 1.7° (quintiles)
 {% endhighlight %}
 <h2 id="6">Compute parent orientations from triple junctions</h2>
 <p>In present datas set we have very little and unreliable parent measurements. Therefore, we use triple junctions as germ cells for the parent parent grains. In a first step we identify triple junctions that have misorientations that are compatible with a common parent orientation using the command <a href="parentGrainReconstructor.calcTPVotes.html"><code class="language-plaintext highlighter-rouge">calcTPVotes</code></a>. The option <code class="language-plaintext highlighter-rouge">'minFit'</code> tells the MTEX that the only those triple junctions are considered where the fit to the common parent orientation does not exceed 2.5 degree.</p>
@@ -100,13 +97,13 @@ ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
  parent  Ti (BETA)   432       430     0.23%  0%           
- child   Ti (alpha)  622       50317   100%                
+ child   Ti (alpha)  622       49120   100%                
  
  OR: (110) || (0001)   [1-11] || [-2110]
-   p2c fit: 0.84°, 1.2°, 1.6°, 3° (quintiles)
-   c2c fit: 0.71°, 1°, 1.3°, 1.7° (quintiles)
+   p2c fit: 0.83°, 1.2°, 1.7°, 3.2° (quintiles)
+   c2c fit: 0.7°, 0.98°, 1.3°, 1.7° (quintiles)
  
- votes: 42320 x 1
+ votes: 41427 x 1
    probabilities: 93%, 88%, 82%, 69% (quintiles)
 {% endhighlight %}
 <p>The above command does not only compute the best fitting but also the second best fitting parent orientation. This allows us to ignore ambigues triple points which may vote equally well for different parent orientations. In the above command we did this by the option <code class="language-plaintext highlighter-rouge">'maxFit'</code> which tells MTEX to ignore all triple points where the fit to the second best parent orientation is below 5 degree.</p>
@@ -116,7 +113,7 @@ plot(job.grains, job.votes.prob(:,1))
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_03.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_02.png" %}
 </center>
 <p>We observe that for most of the grains the probability is above 70 percent. We may use this percentage as threshold to decide which child grains we turn into parent grains. This can be done by the command command <a href="parentGrainReconstructor.calcParentFromVote.html"><code class="language-plaintext highlighter-rouge">calcParentFromVote</code></a>
 </p>
@@ -128,15 +125,15 @@ job.calcParentFromVote('minProb',0.7)
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       34009   84%   67%          
- child   Ti (alpha)  622       16738   16%                
+ parent  Ti (BETA)   432       33307   84%   67%          
+ child   Ti (alpha)  622       16243   16%                
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 0.95°, 1.4°, 1.8°, 2.3° (quintiles)
-   c2c fit: 0.99°, 1.5°, 1.9°, 2.7° (quintiles)
+   c2c fit: 1°, 1.6°, 2°, 2.8° (quintiles)
  
- votes: 8741 x 1
-   probabilities: 66%, 61%, 54%, 44% (quintiles)
+ votes: 8550 x 1
+   probabilities: 66%, 61%, 54%, 43% (quintiles)
 {% endhighlight %}
 <p>We observe that after this step more then 66 percent of the grains became parent grains. Lets visualize these reconstructed beta grains</p>
 {% highlight matlab %}
@@ -149,7 +146,7 @@ color = ipfKey.orientation2color(job.parentGrains.meanOrientation);
 plot(job.parentGrains, color, 'figSize', 'large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_04.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_03.png" %}
 </center>
 <h2 id="11">Grow parent grains at grain boundaries</h2>
 <p>Next we may grow the reconstructed parent grains into the regions of the remaining child grains. To this end we use the command <a href="parentGrainReconstructor.calcGBVotes.html"><code class="language-plaintext highlighter-rouge">calcGBVotes</code></a> with the option <code class="language-plaintext highlighter-rouge">'p2c'</code> to compute votes from parent to child grain boundaries. Next we use the exact same command <a href="parentGrainReconstructor.calcParentFromVote.html"><code class="language-plaintext highlighter-rouge">calcParentFromVote</code></a> to recover parent orientations from the votes. As threshold for the growing the parent grains into the child grains we use 2.5 degree, 5 degree and 7.5 degree. This can be easily accomblished by the following small loop.</p>
@@ -168,12 +165,12 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       49108   99%   97%          
- child   Ti (alpha)  622       1639    1.1%               
+ parent  Ti (BETA)   432       47995   99%   97%          
+ child   Ti (alpha)  622       1555    1%                 
  
  OR: (110) || (0001)   [1-11] || [-2110]
-   p2c fit: 6.7°, 34°, 36°, 42° (quintiles)
-   c2c fit: 1.1°, 2°, 9.2°, 25° (quintiles)
+   p2c fit: 16°, 34°, 39°, 42° (quintiles)
+   c2c fit: 1.5°, 2.8°, 11°, 25° (quintiles)
  
  votes: 2 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
@@ -182,29 +179,32 @@ ans = parentGrainReconstructor
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       49626   99%    98%          
- child   Ti (alpha)  622       1121    0.64%               
+ parent  Ti (BETA)   432       48440   99%    98%          
+ child   Ti (alpha)  622       1110    0.66%               
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 33°, 35°, 41°, 42° (quintiles)
-   c2c fit: 2.8°, 11°, 18°, 24° (quintiles)
+   c2c fit: 2.1°, 9.9°, 19°, 25° (quintiles)
  
- votes: 1 x 1
+ votes: 2 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
  
  
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       49646   99%    98%          
- child   Ti (alpha)  622       1101    0.62%               
+ parent  Ti (BETA)   432       48458   99%    98%          
+ child   Ti (alpha)  622       1092    0.65%               
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 34°, 35°, 41°, 42° (quintiles)
-   c2c fit: 1.6°, 9.8°, 18°, 20° (quintiles)
+   c2c fit: 1.6°, 9.2°, 19°, 29° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_05.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_04.png" %}
 </center>
 <h2 id="12">Merge parent grains</h2>
 <p>After the previous steps we are left with many very similar parent grains. In order to merge all similarly oriented grains into large parent grains one can use the command <a href="parentGrainReconstructor.mergeSimilar.html"><code class="language-plaintext highlighter-rouge">mergeSimilar</code></a>. It takes as an option the threshold below which two parent grains should be considered a a single grain.</p>
@@ -220,15 +220,18 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       144     99%    98%          
- child   Ti (alpha)  622       1090    0.62%               
+ parent  Ti (BETA)   432       155     99%    98%          
+ child   Ti (alpha)  622       1074    0.65%               
  
  OR: (110) || (0001)   [1-11] || [-2110]
    p2c fit: 33°, 35°, 41°, 42° (quintiles)
-   c2c fit: 9.7°, 17°, 19°, 24° (quintiles)
+   c2c fit: 9.2°, 18°, 19°, 25° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_06.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_05.png" %}
 </center>
 <h2 id="13">Merge inclusions</h2>
 <p>We may be still a bit unsatisfied with the result as the large parent grains contain a lot of poorly indexed inclusions where we failed to assign a parent orientation. We use the command <a href="parentGrainReconstructor.mergeInclusions.html"><code class="language-plaintext highlighter-rouge">mergeInclusions</code></a> to merge all inclusions that have fever pixels then a certain threshold into the surrounding parent grains.</p>
@@ -243,16 +246,19 @@ plot(job.parentGrains, color, 'figSize', 'large')
 {% highlight plaintext %}
 ans = parentGrainReconstructor
  
- phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       56      100%   100%         
- child   Ti (alpha)  622       62      0.05%               
+ phase   mineral     symmetry  grains  area    reconstructed
+ parent  Ti (BETA)   432       66      100%    100%         
+ child   Ti (alpha)  622       70      0.093%               
  
  OR: (110) || (0001)   [1-11] || [-2110]
-   p2c fit: 24°, 30°, 33°, 35° (quintiles)
-   c2c fit: 9.8°, 13°, 19°, 24° (quintiles)
+   p2c fit: 23°, 29°, 33°, 35° (quintiles)
+   c2c fit: 4.1°, 9.8°, 19°, 32° (quintiles)
+ 
+ votes: 2 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_07.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_06.png" %}
 </center>
 <h2 id="14">Reconstruct beta orientations in EBSD map</h2>
 <p>Until now we have only recovered the beta orientations as the mean orientations of the beta grains. In this section we want to set up the EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> to contain for each pixel a reconstruction of the parent phase orientation. This is done by the command <code class="language-plaintext highlighter-rouge"><a href="parentGrainReconstructor.calcParentEBSD.html">calcParentEBSD</a></code>
@@ -265,7 +271,7 @@ color = ipfKey.orientation2color(parentEBSD('Ti (Beta)').orientations);
 plot(parentEBSD('Ti (Beta)'),color,'figSize','large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_08.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_07.png" %}
 </center>
 <p>The recovered EBSD variable <code class="language-plaintext highlighter-rouge">parentEBSD</code> contains a measure <code class="language-plaintext highlighter-rouge">parentEBSD.fit</code> for the corespondence between the beta orientation reconstructed for a single pixel and the beta orientation of the grain. Lets visualize this</p>
 {% highlight matlab %}
@@ -280,7 +286,7 @@ plot(job.grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_09.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_08.png" %}
 </center>
 <p>For comparison the map with original alpha phase and on top the recovered beta grain boundaries</p>
 {% highlight matlab %}
@@ -292,7 +298,7 @@ plot(parentGrains.boundary,'lineWidth',3)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="TriplePointBasedReconstruction_10.png" %}
+{% include inline_image.html file="TriplePointBasedReconstruction_09.png" %}
 </center>
 </div>
 </body>
