@@ -61,7 +61,7 @@ ebsd('Diopside').color
 ans =
     0.8549    0.6471    0.1255
 {% endhighlight %}
-<p>These values are RGB values which can be altered to any other RGB triple. A more convinient way for changing the color is the function <a href="str2rgb.html">str2rgb</a> which converts color names into RGB triplets</p>
+<p>These values are RGB values which can be altered to any other RGB triple. A more convenient way for changing the color is the function <a href="str2rgb.html">str2rgb</a> which converts color names into RGB triplets</p>
 {% highlight matlab %}
 ebsd('Diopside').color = str2rgb('salmon');
 
@@ -84,7 +84,7 @@ hold off
 {% highlight matlab %}
 plot(ebsd,ebsd.bc)
 
-colormap gray % make the image grayscale
+colormap gray % make the image gray-scale
 mtexColorbar
 {% endhighlight %}
 <center>
@@ -99,7 +99,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="EBSDPlotting_05.png" %}
 </center>
-<p>Obviously, the rotational angle is not a very distintive representative for orientations. A more common approach is to define a colorization of the fundamental secor of the inverse pole figure, a so called ipf color key, and to colorize orientations according to their position in a fixed inverse pole figure. Let's consider the following standard key.</p>
+<p>Obviously, the rotational angle is not a very distinctive representative for orientations. A more common approach is to define a colorization of the fundamental sector of the inverse pole figure, a so called ipf color key, and to colorize orientations according to their position in a fixed inverse pole figure. Let's consider the following standard key.</p>
 {% highlight matlab %}
 % this defines an ipf color key for the Forsterite phase
 ipfKey = ipfColorKey(ebsd('Forsterite'));
@@ -111,7 +111,7 @@ plot(ipfKey)
 <center>
 {% include inline_image.html file="EBSDPlotting_06.png" %}
 </center>
-<p>Next we may utilize this key to turn the orientations into colors, which are than passed to the <a href="EBSD.plot.html">plot</a> command.</p>
+<p>Next we may utilize this key to turn the orientations into colors, which are than passed to the <a href="EBSD.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command.</p>
 {% highlight matlab %}
 colors = ipfKey.orientation2color(ebsd('Forsterite').orientations);
 plot(ebsd('Forsterite'),colors)
@@ -119,16 +119,16 @@ plot(ebsd('Forsterite'),colors)
 <center>
 {% include inline_image.html file="EBSDPlotting_07.png" %}
 </center>
-<p>The above ipf color key can be largely customizied. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p>
+<p>The above ipf color key can be largely customized. This is explained in more detail in <a href="EBSDIPFMap">IPF Maps</a>. Beside IPF maps there are also more specific ways to colorize orientations as they are discussed in <a href="EBSDAdvancedMaps.html">Advanced Plotting</a>.</p>
 <h2 id="11">Superposing different plots</h2>
-<p>Combining different plots can be done either by plotting only subsets of the EBSD data or via the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>.</p>
+<p>Combining different plots can be done either by plotting only subsets of the EBSD data or using the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> to control transparency.</p>
 {% highlight matlab %}
 close all;
 plot(ebsd,ebsd.bc)
 mtexColorMap black2white
 
 hold on
-plot(ebsd('fo'),'FaceAlpha',0.5)
+plot(ebsd('Forsterite'),colors,'FaceAlpha',0.5)
 hold off
 {% endhighlight %}
 <center>
