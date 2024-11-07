@@ -40,14 +40,8 @@ of material scientists, geologists and mathematicians.
 						{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}
                     </li>
    					<li>
-                        04/24 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.11.2/mtex-5.11.2.zip" content="MTEX 5.11.2" download=true %}
-                        released:
-                        {% include reference.html link="changelog#2" content="Release Notes" %}
-                    </li>
-				    <li>
-                        03/24 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.beta3/mtex-6.0.beta3.zip" content="MTEX 6.0.beta3" download=true %}
+                        11/24 &minus;
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.0/mtex-6.0.0.zip" content="MTEX 6.0.0" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
