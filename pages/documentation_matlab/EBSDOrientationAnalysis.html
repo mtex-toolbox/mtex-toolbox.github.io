@@ -23,12 +23,11 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Here we discuss tools for the analysis of EBSD data which are independent of its spatial coordinates. For spatial analysis, we refer to <a href="xxx.html">this page</a>. Let us first import some EBSD data:</p>
+<p>Here we discuss tools for the analysis of EBSD data which are independent of its spatial coordinates. For spatial analysis, we refer to <a href="EBSDProfile.html">this page</a>. Let us first import some EBSD data:</p>
 {% highlight matlab %}
-plotx2east
-ebsd = EBSD.load(fullfile(mtexDataPath,'EBSD','Forsterite.ctf'),...
-  'convertEuler2SpatialReferenceFrame');
+mtexdata forsterite silent
 
+plotx2east
 plot(ebsd)
 {% endhighlight %}
 <center>
@@ -69,9 +68,7 @@ r = ori * Miller(1,0,0,ori.CS)
 rOrth = perp(r)
 
 % output
-hold on
-plot(rOrth)
-hold off
+plot(rOrth,'add2all','Marker','square','markerColor','DarkRed')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -89,7 +86,15 @@ rOrth = vector3d
 <center>
 {% include inline_image.html file="EBSDOrientationAnalysis_03.png" %}
 </center>
-<p>we can check how large is the number of orientations that are in the (100) pole figure within a 10-degree fibre around the great circle with center <code class="language-plaintext highlighter-rouge">rOrth</code>. The following line gives the result in percent</p>
+<p>we can check how large is the number of orientations that are in the (100) pole figure within a 10-degree fibre around the great circle with center <code class="language-plaintext highlighter-rouge">rOrth</code>, i.e., in the region bounded by the two small circles</p>
+{% highlight matlab %}
+nextAxis(1)
+circle(rOrth,80 * degree,'lineColor','darkred','linewidth',5,'EdgeAlpha',0.5)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDOrientationAnalysis_04.png" %}
+</center>
+<p>The following line gives the result in percent</p>
 {% highlight matlab %}
 100 * sum(angle(r,rOrth)>80*degree) / length(ori)
 {% endhighlight %}
@@ -104,13 +109,10 @@ plotIPDF(ebsd('Forsterite').orientations,rOrth,'smooth')
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDOrientationAnalysis_04.png" %}
+{% include inline_image.html file="EBSDOrientationAnalysis_05.png" %}
 </center>
+<p>From the inverse pole figure, it becomes clear that the orientations are close to the fibre <code class="language-plaintext highlighter-rouge">Miller(0,1,0)</code>, <code class="language-plaintext highlighter-rouge">rOrth</code>. Let's check this by computing the fibre volume in percent</p>
 {% highlight matlab %}
-%From the inverse pole figure, it becomes clear that the orientations are
-% close to the fibre |Miller(0,1,0)|, |rOrth|. Let's check this by computing
-% the fibre volume in percent
-
 % define the fibre
 f = fibre(Miller(0,1,0,cs),rOrth);
 
@@ -127,7 +129,7 @@ ans =
 odf = calcDensity(ebsd('Forsterite').orientations)
 
 % plot the odf along the fibre
-plot(odf,f)
+plot(odf,f,'linewidth',2)
 ylim([0,26])
 {% endhighlight %}
 
@@ -137,7 +139,7 @@ odf = SO3FunHarmonic (Forsterite → xyz)
   weight: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDOrientationAnalysis_05.png" %}
+{% include inline_image.html file="EBSDOrientationAnalysis_06.png" %}
 </center>
 <p>We see that to ODF is far from being constant along the fibre. Thus, together with an observation about the small fibre volume, we would reject the hypothesis of a fibre texture.</p>
 <p>Let's finally plot the ODF in orientation space to verify our decision</p>
@@ -145,7 +147,7 @@ odf = SO3FunHarmonic (Forsterite → xyz)
 plot(odf,'sigma')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDOrientationAnalysis_06.png" %}
+{% include inline_image.html file="EBSDOrientationAnalysis_07.png" %}
 </center>
 <p>Here we see the typical large individual spots that are typical for large grains. Thus the ODF estimated from the EBSD data and all our previous analysis suffer from the fact that too few grains have been measured. For texture analysis, it would have been favorable to measure at a lower resolution but a larger region.</p>
 </div>

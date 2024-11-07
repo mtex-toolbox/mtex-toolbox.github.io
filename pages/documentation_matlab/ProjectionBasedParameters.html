@@ -68,6 +68,9 @@ hold on
 plot(grains(ind).boundary,'lineWidth',5,'linecolor','blue')
 hold off
 {% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_01.png" %}
+</center>
 <p>The most well known projection based parameter is the <a href="grain2d.diamter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> which refers to the longest distance between any two boundary points and is given in &micro;m.</p>
 {% highlight matlab %}
 grains(ind).diameter
@@ -88,7 +91,7 @@ xlabel('angle of the projection line in degree')
 xlim([0,180])
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_01.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_02.png" %}
 </center>
 <p>We observe that that maximum caliper is about 7000 while the minimum caliper is about 2000. We may compute the exact direction and length of the maximum or minimum by passing the options <code class="language-plaintext highlighter-rouge">'longest'</code> or <code class="language-plaintext highlighter-rouge">'shortest'</code> to the function <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a>. In this case the the output is of type <a href="vector3d.vector3d.html">vector3d</a> indicating the direction. The <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> of the vector coincides with the caliper for this projection direction. Hence, the <code class="language-plaintext highlighter-rouge">norm(grains.caliper('longest'))</code> coincides with the diameter.</p>
 {% highlight matlab %}
@@ -111,7 +114,7 @@ ans =
    1.6308e+03
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_02.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_03.png" %}
 </center>
 <p>The difference between the longest and the shortest caliper can be taken as a measure how round a grain is.</p>
 {% highlight matlab %}
@@ -122,7 +125,7 @@ plot(grains,(norm(cMax) - norm(cMin))./norm(cMax),'micronbar','off')
 mtexColorbar('title','c_{max} - c_{min}')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_03.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_04.png" %}
 </center>
 <p>This longest and shortest caliper are comparable to <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a> computed from an ellipse fitted to the grain. In the case of rectangular particles, one might not primarily be interested in the longest caliper of a grain but rather in the direction normal to the shortest caliper. This is computed when specifying the option <code class="language-plaintext highlighter-rouge">'shortestPerp'</code>. If we imagine a very strong alignment of the long axes of orthorhombic particles, the maximum diameter may show a bimodal distribution (the two, roughly equally distributed diagonals of the particle).</p>
 {% highlight matlab %}
@@ -144,7 +147,7 @@ hold off
 legend('Location','east')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_04.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_05.png" %}
 </center>
 <h2 id="7">PAROR and SURFOR</h2>
 <p>Another way of quantifying shape fabrics is by making use of the cumulative projection function of the grains or the grain boundary segments. These methods are heavily inspired by <a href="https://en.wikipedia.org/wiki/Flatland">Edwin A. Abbotts 'Flatland - A romance of many dimensions' (1884)</a> and based on Panozzo, R., 1983, "Two-dimensional analysis of shape fabric using projections of digitized lines in a plane". Tectonophysics 95, 279-294. and Panozzo, R., 1984, "Two-dimensional strain from the orientation of lines in a plane." J. Struct. Geol. 6, 215-221. implemented in MTEX as <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">grains.paror</code></a> and <a href="grainBoundary.surfor.html"><code class="language-plaintext highlighter-rouge">grainBoudnary.surfor</code></a>
@@ -177,7 +180,7 @@ polarplot(omega,5*mean(c),'LineWidth',3,'color','k');
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_05.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_06.png" %}
 </center>
 <p>The above averaged caliper can be computed more directly by the function <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">grains.paror</code></a> which returns the cumulative particle projection function normalized to 1. The projection angles can be regarded as the rotation angle of the particle (counterclockwise) while projecting from the y-axis onto the x-axis.</p>
 {% highlight matlab %}
@@ -192,7 +195,7 @@ subplot(1,2,2)
 polarplot(omega,cumplE,'LineWidth',3,'color','k')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_06.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_07.png" %}
 </center>
 <p>We can interpret the results in the following way. The minimum of the curve is a measure of the amplitude of the projection function and can be compared to an averaged axial ratio \(b/a\) of the entire fabric; isotropic fabrics would have a \(b/a\) close to 1 while highly anisotropic fabrics can be identified by small \(b/a\) values.</p>
 {% highlight matlab %}
@@ -251,7 +254,7 @@ hold off
 legend('Location','southoutside','Orientation','horizontal')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_07.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_08.png" %}
 </center>
 <p>We can see that Forsterite-Forsterite boundaries form a fabric slightly more inclined with respect to the other phase boundaries and that the phase boundaries between the two pyroxenes (Enstatite and Diopside) show the lowest anisotropy.</p>
 <h2 id="13">Characteristic Shape</h2>
@@ -281,7 +284,7 @@ shapeF = shape2d
  vertices: 1024
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ProjectionBasedParameters_08.png" %}
+{% include inline_image.html file="ProjectionBasedParameters_09.png" %}
 </center>
 <p>The output of the command <a href="grainBoundary.characteristicShape.html"><code class="language-plaintext highlighter-rouge">characteristicShape</code></a> is a <a href="shape2d.shape2d.html"><code class="language-plaintext highlighter-rouge">shape2d</code></a> object which behaves very similar to a <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a> object. Hence it is easy to derive things such as a long axis or e.g. the angle between the longest and the shortest caliper which can be regarded as a measure of asymmetry.</p>
 {% highlight matlab %}
@@ -292,11 +295,11 @@ angle(shapeEF.caliper('longest'),shapeF.caliper('shortest')) / degree
 
 {% highlight plaintext %}
 ans =
-   78.7774
+   78.7824
 ans =
-   86.8311
+   86.9587
 ans =
-   79.7408
+   79.7618
 {% endhighlight %}
 </div>
 </body>
