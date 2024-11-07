@@ -60,7 +60,7 @@ C = stiffnessTensor (An0 Albite 2016)
   -0.9  -6.4  -9.4  -7.2   0.6  33.6
 {% endhighlight %}
 <h2 id="2">The effective isotropic stiffness tensor</h2>
-<p>An isotropic Albite material we assume here to consist of randomly oriented grains forming an uniform (isotropic) texture. In this case the Voigt and Reuss avarages provide upper and lower bounds for the elastic properties of the material.</p>
+<p>An isotropic Albite material we assume here to consist of randomly oriented grains forming an uniform (isotropic) texture. In this case the Voigt and Reuss averages provide upper and lower bounds for the elastic properties of the material.</p>
 {% highlight matlab %}
 [C_iso_Voigt,C_iso_Reuss,C_iso_Hill] = mean(C,uniformODF(C.CS))
 {% endhighlight %}
@@ -203,7 +203,7 @@ ans =
   101.9764
 {% endhighlight %}
 <h2 id="7">Lame constants</h2>
-<p>The second way to represent the elastic behaviour of an isotropic medium is by means of the Lame constants</p>
+<p>The second way to represent the elastic behavior of an isotropic medium is by means of the Lame constants</p>
 {% highlight matlab %}
 lambda = nu/(1-2*nu) /(1+nu) * E;
 mu =G;
@@ -258,7 +258,7 @@ sigma = stressTensor (An0 Albite 2016)
 <h2 id="11">Hashin Shtrikman Bounds</h2>
 <p>While the Voigt and Reuss bounds are tight without additional assumptions, the extreme cases require a very specific layered microstructure. If one additionally assumes that the material is quasihomogeneous, i.e., it is constant elastic properties within each subregion that is significantly larger then the grain size, then the Voigt and Reuss bounds are to wide. More narrow bounds for this settings have been established by Hashin and Shtrikman in 1962.</p>
 <p>The following deviation follows the paper by J.M. Brown (2015) <i>Determination of Hashin-Shtrikman bounds on the isotropic effective elastic moduli of polycrystals of any symmetry</i>, Computers &amp; Geosciences, 80 (2015) 95-99.</p>
-<p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimzation problem. Lets first set up the search domain</p>
+<p>The upper and lower Hashin-Shtrikman bounds for the bulk and shear moduli are found as a solution of an optimization problem. Lets first set up the search domain</p>
 {% highlight matlab %}
 % define a 2 dimensional domain of bulk and shear moduli
 KMin = 1; KMax = 150; % minimum and maximum bulk moduli
@@ -267,7 +267,7 @@ Ko = linspace(KMin,KMax,300);
 Go = linspace(GMin,GMax,300);
 [G0Mesh,K0Mesh] = meshgrid(Go,Ko);
 {% endhighlight %}
-<p>Next the initial stiffness tensor is updated such that the residual stiffness tensor <code class="language-plaintext highlighter-rouge">R</code> remains either possitve or negative definite.</p>
+<p>Next the initial stiffness tensor is updated such that the residual stiffness tensor <code class="language-plaintext highlighter-rouge">R</code> remains either positive or negative definite.</p>
 {% highlight matlab %}
 tic
 [khs, ghs, def] = HashinShtrikmanModulus(C,K0Mesh,G0Mesh);
@@ -302,7 +302,9 @@ axis equal tight
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 1.776948 seconds.
+Warning: Tensor is not positive definite 
+Warning: Tensor is not positive definite 
+Elapsed time is 2.440417 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="IsotropicTheory_01.png" %}
