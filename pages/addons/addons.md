@@ -166,24 +166,23 @@ toc: false
             </div>
         </div>
     </div>
-    <div id="addons-phase-segmenter" class="col-md-6">
+    <div id="addons-SSLIP" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/phaseSegmenter_screenshot.png">
+                <img src="images/thumbnails/SSLIP.gif">
             </div>
             <div class="panel-body">
-                <h4>phaseSegmenter</h4>
+                <h4>SSLIP</h4>
                 <p>...
-                    enables the discrimination and segmentation of crystallographically identical/similar phases with grains of distinct orientation and slight compositional differences. The program uses reindexed EBSD datasets and EDS elemental data to compute grain-median compositional differences between grains of the phases in question and segments these by determination of an optimal threshold value.
+                    is short for "Slip System based Identification of Local Plasticity” and provides the automatic, point-by-point, identification of crystallographic slip system activity fields, performed by matching of Digital Image Correlation (DIC) displacement gradient fields to combinations of theoretical slip systems, derived from EBSD data.
                 </p>
                 <p>
                     <i class="fa fa-user"></i>
-                    {% include reference.html link="https://www.researchgate.net/profile/Azdiar_Gazder" content="Azdiar A. Gazder" %}
-                    , {% include reference.html link="https://wwws.researchgate.net/profile/Frank_Niessen4" content="Frank Niessen" %}
+                    {% include reference.html link="https://www.tue.nl/en/research/researchers/tijmen-vermeij/" content="Tijmen Vermeij" %}
                 </p>
                 <p>
                     <i class="fa fa-home"></i>
-                    {% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="GitHub: frankNiessen/phaseSegmenter" %}
+                    {% include reference.html link="https://github.com/Tijmenvermeij/SSLIP?tab=readme-ov-file" content="GitHub: Tijmenvermeij/SSLIP" %}
                 </p>
             </div>
         </div>
