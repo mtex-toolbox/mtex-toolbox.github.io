@@ -232,15 +232,20 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-				<a href="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB">
-                  <img src="images/thumbnails/MTEX-GUI_screenshot_centered.png">
+				<a href="https://github.com/Tijmenvermeij/SSLIP?tab=readme-ov-file">
+                  <img src="images/thumbnails/SSLIP.gif">
 				</a>
             </div>
             <div class="panel-body">			
-				<h4>
+				<!--<h4>
 					{% include reference.html
 					link="https://www.researchgate.net/publication/359504978_MTEX_GUI_3pt5_a_graphical_interface_for_MTEX_texture_analysis_on_MATLAB" 
 					content="MTEX GUI" %}					
+				</h4>-->
+				<h4>
+					{% include reference.html
+					link="https://github.com/Tijmenvermeij/SSLIP?tab=readme-ov-file" 
+					content="SSLIP" %}					
 				</h4>
 				<p>a graphical user interface</p>
 				<!--
