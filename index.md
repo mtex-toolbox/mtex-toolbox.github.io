@@ -247,7 +247,7 @@ of material scientists, geologists and mathematicians.
 					link="https://github.com/Tijmenvermeij/SSLIP?tab=readme-ov-file" 
 					content="SSLIP" %}					
 				</h4>
-				<p>a graphical user interface</p>
+				<p>Slip System based Identification of Local Plasticity</p>
 				<!--
                 <p>
                     <i class="fa fa-user"></i>
