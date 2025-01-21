@@ -30,6 +30,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>\[\sum_{i=1}^M|f(R_i)-y_i|^2 + \lambda \|f\|^2_{H^s}\]</p>
 <p>where \(\lambda\) is the regularization parameter and \(s\) the Sobolev index. The Sobolev norm of an SO3FunHarmonic with harmonic coefficients \(\hat{f}\) reads as</p>
 <p>\[\|f\|^2_{H^s} = \sum_{n=0}^N (2n+1)^{2s} \, \sum_{k,l=-n}^n|\hat{f}_n^{k,l}|^2.\]</p>
+<p>We can also use the approximation command to approximate an SO3FunHarmonic from some given SO3Fun by evaluating on some specific grid and doing quadrature.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f)
@@ -37,6 +38,7 @@ SO3F = SO3FunHarmonic.approximation(SO3Grid, f,'constantWeights')
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'bandwidth', bandwidth, 'tol', TOL, 'maxit', MAXIT, 'weights', W)
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'regularization')
 SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'regularization',0.1,'SobolevIndex',1)
+SO3F = SO3FunHarmonic.approximation(F1)  % do quadrature
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -55,6 +57,14 @@ SO3F = SO3FunHarmonic.approximation(SO3Grid, f, 'regularization',0.1,'SobolevInd
          </td>
          <td>
             <tt>function values on the grid (maybe multidimensional)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F1</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
          </td>
       </tr>
    </table>

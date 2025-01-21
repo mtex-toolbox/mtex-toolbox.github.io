@@ -32,23 +32,17 @@ To make changes, update the MATLAB code and republish this document.
 <a href="SO3FunConvolution.html#3">Convolution of two SO3Fun's</a>
 </li>
 <li>
-<a href="SO3FunConvolution.html#8">Convolution of two S2Fun's</a>
+<a href="SO3FunConvolution.html#7">Convolution of two S2Fun's</a>
 </li>
 <li>
-<a href="SO3FunConvolution.html#10">Convolution of a SO3Fun and a S2Fun</a>
+<a href="SO3FunConvolution.html#9">Convolution of a SO3Fun and a S2Fun</a>
 </li>
 <li>
-<a href="SO3FunConvolution.html#13">Convolution with SO3Kernel's and SO2Kernel's</a>
+<a href="SO3FunConvolution.html#12">Convolution with SO3Kernel's and SO2Kernel's</a>
 </li>
 </ul>
 </div>
 <h2 id="3">Convolution of two rotational functions</h2>
-<p>Here we distinguish two definitions. They are named the left \(*_L\) and right \(*_R\) sided convolution.</p>
-<div>
-<ul>
-<li>The left sided convolution (default)*</li>
-</ul>
-</div>
 <p>Let two <code class="language-plaintext highlighter-rouge">SO3Fun's</code> \(f \colon {}_{S_L } \backslash SO(3) /_{S_x} \to \mathbb{C}\) where \(S_L\) is the left symmetry and \(S_x\) is the right symmetry and \(g: {}_{S_x} \backslash SO(3) /_{S_R} \to \mathbb C\) where \(S_x\) is the left symmetry and \(S_R\) is the right symmetry be given.</p>
 {% highlight matlab %}
 g = SO3FunHarmonic.example
@@ -74,8 +68,8 @@ f = SO3FunRBF (xyz → xyz (222))
      phi1     Phi    phi2  weight
   156.958 161.468 197.878       1
 {% endhighlight %}
-<p>Then the convolution \(f {*}_L g \colon {}_{S_L} \backslash SO(3) /_{S_R} \to \mathbb C\) is defined by</p>
-<p>\[ (f {*}_L g)(R) = \frac{1}{8\pi^2} \int_{SO(3)} f(q) \cdot g(q^{-1}\,R) \, dq \]</p>
+<p>Then the convolution \(f {*} g \colon {}_{S_L} \backslash SO(3) /_{S_R} \to \mathbb C\) is defined by</p>
+<p>\[ (f {*} g)(R) = \frac{1}{8\pi^2} \int_{SO(3)} f(q) \cdot g(q^{-1}\,R) \, dq \]</p>
 <p>where the right symmetry of \(f\) have to coincide with the left symmetry of \(g\). The normalization factor of the integral reads as \(vol(SO(3)) = \int_{SO(3)} 1 \, dR = 8\pi^2\).</p>
 {% highlight matlab %}
 c = conv(f,g)
@@ -96,14 +90,19 @@ ans =
 ans =
     0.2766
 {% endhighlight %}
-<p>Note that the left sided convolution \(*_L\) is used as default in MTEX.</p>
-<p>
-<b>The right sided convolution</b>
-</p>
-<p>As contrast we have the second definition:</p>
-<p>Let two <code class="language-plaintext highlighter-rouge">SO3Fun's</code> \(f \colon {}_{S_x } \backslash SO(3) /_{S_R} \to \mathbb{C}\) where \(S_x\) is the left symmetry and \(S_R\) is the right symmetry and \(g: {}_{S_L} \backslash SO(3) /_{S_x} \to \mathbb C\) where \(S_L\) is the left symmetry and \(S_x\) is the right symmetry be given.</p>
+<p>Note that the left sided convolution from the above definition is used as default in MTEX.</p>
+<p>The right sided convolution coincides with the commutation</p>
+<p>\[ (g {*} f)(R) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot g(R\,q^{-1}) \, dq \]</p>
+<p>where the left symmetry of \(f\) have to coincide with the right symmetry of \(g\).</p>
 {% highlight matlab %}
 f = SO3FunRBF(orientation.rand(g.CS,g.CS))
+
+c = conv(g,f)
+
+% Test
+r = orientation.rand(c.CS,c.SS);
+c.eval(r)
+mean(SO3FunHandle(@(q) f.eval(q).*g.eval(r.*inv(q)),c.CS))
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -116,20 +115,8 @@ f = SO3FunRBF (Quartz → Quartz)
   Bunge Euler angles in degree
      phi1     Phi    phi2  weight
   73.6735 76.1995 107.876       1
-{% endhighlight %}
-<p>The convolution \(f {*}_R g \colon {}_{S_L}\backslash SO(3) /_{S_R} \to \mathbb{C}\) is defined by</p>
-<p>\[ (f {*}_R g)(R) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot g(R\,q^{-1}) \, dq \]</p>
-<p>where the left symmetry of \(f\) have to coincide with the right symmetry of \(g\).</p>
-{% highlight matlab %}
-c = conv(f,g,'right')
-
-% Test
-r = orientation.rand(c.CS,c.SS);
-c.eval(r)
-mean(SO3FunHandle(@(q) f.eval(q).*g.eval(r.*inv(q)),c.CS))
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 c = SO3FunHarmonic (Quartz → xyz)
   bandwidth: 25
   weight: 1
@@ -140,7 +127,7 @@ ans =
     0.5926
 {% endhighlight %}
 <p>The convolution of matrices of SO3FunHarmonic's with matrices of SO3 Functions works elementwise, see at <a href="SO3FunMultivariate.html">multivariate SO3Fun's</a> for there definition.</p>
-<h2 id="8">Convolution of two spherical functions</h2>
+<h2 id="7">Convolution of two spherical functions</h2>
 <p>Consider there are two <code class="language-plaintext highlighter-rouge">S2Fun's</code> \(f: \mathbb S^2 /_{S_R} \to \mathbb{C}\) \(g: \mathbb S^2 /_{S_L} \to \mathbb{C}\) given, where \(S_R\) and \(S_L\) denotes the symmetries.</p>
 {% highlight matlab %}
 cs = crystalSymmetry;
@@ -154,7 +141,7 @@ f = S2FunHarmonicSym (1)
   isReal: true
  
  
-g = S2FunHarmonic
+g = S2FunHarmonic (xyz)
   bandwidth: 25
   isReal: true
 {% endhighlight %}
@@ -182,7 +169,7 @@ ans =
 ans =
     0.2349
 {% endhighlight %}
-<h2 id="10">Convolution of a rotational function with a spherical function</h2>
+<h2 id="9">Convolution of a rotational function with a spherical function</h2>
 <p>We consider a <code class="language-plaintext highlighter-rouge">SO3Fun</code> \(f: {}_{S_h} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with left symmetry \(S_h\) and right symmetry \(S_R\) and a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(h \colon \mathbb S^2 /_{S_h} \to \mathbb C\) with symmetry group \(S_h\).</p>
 {% highlight matlab %}
 f = SO3FunHarmonic.example
@@ -256,14 +243,12 @@ ans =
 ans =
     0.0374
 {% endhighlight %}
-<h2 id="13">Convolution with kernel function</h2>
-<div>
-<ul>
-<li>rotational kernel functions *</li>
-</ul>
-</div>
+<h2 id="12">Convolution with kernel function</h2>
+<p>
+<b>Rotational kernel functions</b>
+</p>
 <p>Since <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> are special orientation dependent functions we can easily describe them as <code class="language-plaintext highlighter-rouge">SO3Fun's</code>. Hence the convolution with <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> is exactly the same as above.</p>
-<p>Note that <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> are radial basis functions which only depends on the rotation angle \(\omega\). Since the rotation angle of two matrices satisfies \(\omega(q^{-1}\,R)=\omega(R\,q^{-1})\), the left and right sided convolution are equivalent by convolution with <code class="language-plaintext highlighter-rouge">SO3Kernels</code>. Moreover the convolution is commutative in this case.</p>
+<p>Note that <a href="SO3Kernels.html"><code class="language-plaintext highlighter-rouge">SO3Kernel's</code></a> are radial basis functions which only depends on the rotation angle \(\omega\). Since the rotation angle of two matrices satisfies \(\omega(q^{-1}\,R)=\omega(R\,q^{-1})\), the convolution with <code class="language-plaintext highlighter-rouge">SO3Kernels</code> is commutative.</p>
 {% highlight matlab %}
 f = SO3FunHarmonic.example
 psi = SO3DeLaValleePoussinKernel
@@ -286,12 +271,10 @@ c = SO3FunHarmonic (Quartz → xyz)
   bandwidth: 25
   weight: 1
 {% endhighlight %}
-<div>
-<ul>
-<li>spherical kernel functions *</li>
-</ul>
-</div>
-<p>Let a spherical kernel function \(\psi(\vec v \cdot \vec e_3)\) be defined as in <a href="S2Kernels.html"><code class="language-plaintext highlighter-rouge">S2Kernel's</code></a>. Then the convolution with a <a href="S2Fun.S2Fun.html">S2Fun</a> reads as</p>
+<p>
+<b>Spherical kernel functions</b>
+</p>
+<p>Let a spherical kernel function \(\psi(\vec v \cdot \vec e_3)\) be defined as in <a href="S2Kernels.html"><code class="language-plaintext highlighter-rouge">S2Kernel's</code></a>. Then the convolution with a <a href="S2Fun.S2Fun.html">S2Fun</a> \(f\) reads as</p>
 <p>\[ (f * \psi) (\vec v) = \frac1{4\pi} \int_{S^2} f(\xi) \, \psi(\xi \cdot \vec v) \, d\xi. \]</p>
 <p>Note that <a href="S2Kernels.html"><code class="language-plaintext highlighter-rouge">S2Kernel's</code></a> are special spherical functions. Hence we can easily describe them as <code class="language-plaintext highlighter-rouge">S2Fun's</code> and convoluted them as described above for convolution of two spherical functions</p>
 <p>\[ (f * \psi) (R) = \frac1{4\pi} \int_{S^2} f(R^{-1}\,\xi) \, \psi(\xi \cdot \vec e_3) \, d\xi. \]</p>
@@ -318,7 +301,7 @@ mean(f.eval(inv(r)*xi).*h.eval(xi))
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = S2FunHarmonic
+f = S2FunHarmonic (xyz)
   bandwidth: 128
   isReal: true
  
@@ -328,7 +311,7 @@ psi = S2DeLaValleePoussinKernel
   halfwidth: 10°
  
  
-c1 = S2FunHarmonic
+c1 = S2FunHarmonic (xyz)
   bandwidth: 25
   isReal: true
  
