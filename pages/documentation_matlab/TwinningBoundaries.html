@@ -133,24 +133,24 @@ mori_mean = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  209.735  93.903 149.669
+  29.9378  93.904 30.4111
  
  
-    plane parallel   direction parallel     fit
-(11-20) || (11-20)   [1-101] || [-1101]     0.457°
+     plane parallel   direction parallel      fit
+(1-101) || (10-1-1)   [01-11] || [1-101]      0.466°
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
-twinning = orientation.map(Miller(0,1,-1,-1,CS),Miller(-1,1,0,-1,CS),...
-  Miller(1,0,-1,1,CS,'uvw'),Miller(1,0,-1,-1,CS,'uvw'))
+twinning = orientation.map(Miller(1,-1,0,1,CS),Miller(1,0,-1,-1,CS),...
+  Miller(0,1,-1,1,CS,'uvw'),Miller(1,-1,0,1,CS,'uvw'))
 {% endhighlight %}
 
 {% highlight plaintext %}
 twinning = misorientation (Magnesium → Magnesium)
  
- (01-1-1) || (-110-1)   [10-11] || [10-1-1]
+ (10-1-1) || (01-11)   [01-11] || [1-101]
 {% endhighlight %}
-<p>and observe that it is actually a rotation about axis (-1210) and angle 86.3 degree</p>
+<p>Considering the disorientation angle we observe that it is 86.3 degree with respect to the axis (-1210)</p>
 {% highlight matlab %}
 % the rotational axis
 round(twinning.axis)
@@ -165,6 +165,26 @@ ans = Miller (Magnesium)
   1  1 -2  0
 ans =
    86.2992
+{% endhighlight %}
+<p>However, remembering that twinning refers to rotations about 180 degrees we may ask for the symmetrically equivalent misorientation with the maximum misorientation angle. This can be computed using the option <code class="language-plaintext highlighter-rouge">'max'</code>
+</p>
+{% highlight matlab %}
+angle(twinning,'max')/degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   180
+{% endhighlight %}
+<p>The corresponding rotational axis is</p>
+{% highlight matlab %}
+v = round(Miller(axis(twinning,'max'),'UVTW'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+v = Miller (Magnesium)
+  U  V  T  W
+  1 -1  0  1
 {% endhighlight %}
 <p>Next, we check for each boundary segment whether it is a twinning boundary, i.e., whether boundary misorientation is close to the twinning.</p>
 {% highlight matlab %}

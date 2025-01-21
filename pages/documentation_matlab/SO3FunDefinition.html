@@ -1,5 +1,5 @@
 ---
-title: Definition of an SO3Fun
+title: Definition of Orientation Dependent Functions
 
 sidebar: documentation_sidebar
 permalink: SO3FunDefinition.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Definition of an SO3Fun</title>
+<title>Definition of Orientation Dependent Functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SO3FunDefinition.m">
 </head>
@@ -23,22 +23,23 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In MTEX rotational functions \(F\colon\mathcal{SO}(3)\to \mathbb C\) are described by subclasses of the super class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>. Hence we talk about them as <code class="language-plaintext highlighter-rouge">SO3Funs</code>.</p>
-<h2 id="2">Overview on the subclasses of SO3Fun</h2>
-<p>Internally MTEX represents rotational functions in different ways:</p>
+<h2 id="1">Types of Orientation Dependent Functions</h2>
+<p>In MTEX any rotation / orientation dependent function is a variable of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a>. Internally, MTEX supports different types of representing such functions, e.g. by harmonic expansion or as superposition of kernel functions which are implemented as subclasses of the super class <a href="SO3Fun.SO3Fun.html">SO3Fun</a>:</p>
 <p>
    <table class="usertable">
       <tr>
          <td>
-               <p>by a harmonic series expansion</p>
+               <p>harmonic series expansion</p>
          </td>
          <td>
                <p>
-                  <a href="SO3FunHarmonicRepresentation.html">SO3FunHarmonic</a>
+                  <a href="SO3FunHarmonicRepresentation.html">
+                     <tt>SO3FunHarmonic</tt>
+                  </a>
                </p>
          </td>
          <td>
-               <p>as Bingham distribution</p>
+               <p>Bingham distribution</p>
          </td>
          <td>
                <p>
@@ -48,7 +49,7 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
       <tr>
          <td>
-               <p>as superposition of radial function</p>
+               <p>superposition of radial functions</p>
          </td>
          <td>
                <p>
@@ -56,17 +57,16 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>as sum of different components</p>
+               <p>arbitrary superposition</p>
          </td>
          <td>
                <p>
-                  <a href="SO3FunComposition.SO3FunComposition.html">SO3FunComposition</a>
-               </p>
+                  <a href="SO3FunComposition.SO3FunComposition.html">SO3FunComposition</a>|</p>
          </td>
       </tr>
       <tr>
          <td>
-               <p>as superposition of fibre elements</p>
+               <p>superposition of fibre elements</p>
          </td>
          <td>
                <p>
@@ -74,7 +74,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>explicitely given by a formula</p>
+               <p>explicit formula</p>
          </td>
          <td>
                <p>
@@ -84,164 +84,120 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="3">Generalizations of Rotational Functions</h2>
+<p>All representations allow for nearly the same operations. Furthermore, you can freely combine different representations within one expression. The most general representation is <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>, i.e. every orientation dependent function <code class="language-plaintext highlighter-rouge">S3F</code> can be transformed into a harmonic series expansion using the syntax <code class="language-plaintext highlighter-rouge">SO3FunHarmonic(S3F)</code>. That transformation is known as <a href="Quadrature.html">quadrature</a>. Furthermore, many operations are only possible or significantly faster in the harmonic representation.</p>
+<p>Additionally, MTEX supports orientation dependent vector fields by the class <a href="SO3FunVectorField.html">SO3VectorField</a>.</p>
+<p>In the following, we quickly show to set up the different types of orientation dependent functions.</p>
+<h2 id="2">By an explicit formula</h2>
+<p>Assume we have an explicit formula or algorithm to compute for an orientation a value. This could be the Taylor factor or any other physical property. Here we simply use the rotational angle. In order to a variable of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a> representing the rotational angle in degree we to do two steps.</p>
 <p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>rotational vector fields</p>
-         </td>
-         <td>
-               <p>
-                  <a href="SO3FunVectorField.html">SO3VectorField</a>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>radial rotational functions</p>
-         </td>
-         <td>
-               <p>
-                  <a href="SO3Kernels.html">SO3Kernel</a>
-               </p>
-         </td>
-      </tr>
-   </table>
+<b>Step 1: Define the relationship as an anonymous functions on SO(3)</b>
 </p>
-<p>All representations allow the same operations which are specified for the abstract class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>. In particular it is possible to calculate with \(\mathcal{SO}(3)\) functions as with ordinary numbers, i.e., you can add, multiply arbitrary functions, take the mean, integrate them or compute gradients, see <a href="SO3FunOperations.html">Operations</a>.</p>
-<h2 id="5">Definition of SO3Fun's</h2>
-<p>Every rotational function has a left and a right symmetry, see <a href="SO3FunSymmetricFunctions.html">symmetric Functions</a>. If we do not specify symmetries by construction triclinic symmetry is used as default, i.e. there are no symmetric rotations.</p>
-<p>Moreover <code class="language-plaintext highlighter-rouge">SO3Fun's</code> have the property <code class="language-plaintext highlighter-rouge">antipodal</code> which could be used to set the function as antipodal.</p>
-<p>
-<b>Definition of anonymous functions on SO(3)</b>
-</p>
-<p>Functions of class <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code> are defined by an <a href="https://de.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html">anonymous function</a>.</p>
+<p>The concept of anonymous functions in Matlab is explained <a href="https://de.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html">here</a>. In shorts it assigns a command / formula to a variable.</p>
 {% highlight matlab %}
 f = @(ori) angle(ori)./degree
-SO3F1 = SO3FunHandle(f)
-
-cs = crystalSymmetry('cubic');
-SO3F2 = SO3FunHandle(f,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
 f =
   function_handle with value:
     @(ori)angle(ori)./degree
- 
-SO3F1 = SO3FunHandle (xyz → xyz)
-  eval: @(ori)angle(ori)./degree
- 
- 
-SO3F2 = SO3FunHandle (m-3m → xyz)
-  eval: @(ori)angle(ori)./degree
-{% endhighlight %}
-<p>Now we are able to evaluate this <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code>
-</p>
-{% highlight matlab %}
-rot = rotation.rand(2);
-SO3F2.eval(rot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-   96.3003
-  146.5333
-{% endhighlight %}
-<p>And following that, it is easy to describe every <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code>.</p>
-{% highlight matlab %}
-SO3FunHandle(@(rot) SO3F1.eval(rot))
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = SO3FunHandle (xyz → xyz)
-  eval: @(rot)SO3F1.eval(rot)
 {% endhighlight %}
 <p>
-<b>Definition of Harmonic Series on SO(3)</b>
+<b>Step 2: Define a variable of type <code class="language-plaintext highlighter-rouge">SO3FunHandle</code></b>
 </p>
-<p>The class <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> described rotational functions by there harmonic series. MTEX is very fast by computing with this <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Hence sometimes it might be a good idea to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> in its harmonic series. Therefore only the command <a href="SO3FunHarmonic.SO3FunHarmonic">SO3FunHarmonic</a> is needed. But note that this approximation may lead to inaccuracies.</p>
+<p>Next, we use the anonymous function to define a variable of type <a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a>.</p>
 {% highlight matlab %}
-SO3F3 = SO3FunHarmonic(SO3F2)
+% define a crystal symmetry
+cs = crystalSymmetry('cubic');
+
+% define the SO3Fun
+SO3F = SO3FunHandle(f,cs)
+
+% visualize the function
+plot(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F3 = SO3FunHarmonic (m-3m → xyz)
-  bandwidth: 64
+SO3F = SO3FunHandle (m-3m → xyz)
+  eval: @(ori)angle(ori)./degree
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunDefinition_01.png" %}
+</center>
+<p>The plot shows the variation of the rotational angle with respect to the Euler angles under consideration of the crystal symmetry.</p>
+<h2 id="5">As Harmonic Expansion</h2>
+<p>As mentioned above we can translate any orientation dependent function into its harmonic series expansion. This is done by the command <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a>.</p>
+{% highlight matlab %}
+% transform SO3F into a harmonic series expansion
+SO3F = SO3FunHarmonic(SO3F,'bandwidth',16)
+
+% visualize the function
+plot(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunHarmonic (m-3m → xyz)
+  bandwidth: 16
   weight: 41
 {% endhighlight %}
-<p>Moreover if MTEX computes with an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> and any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> it is also expanded to an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>. You can prevent that by transformation to a <code class="language-plaintext highlighter-rouge"><a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a></code> like before.</p>
-<p>Generally <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code> are defined by there Fourier coefficient vector.</p>
+<center>
+{% include inline_image.html file="SO3FunDefinition_02.png" %}
+</center>
+<p>The difference to the previous plot is the cut off error due to the fixed bandwidth. Choosing a larger bandwidth would reduce the cut off error. Currently, a bandwidth of up to 128 works reasonably fast in MTEX. We may visualize the decay of the harmonic coefficients as follows</p>
 {% highlight matlab %}
-fhat = rand(1e4,1);
-SO3F4 = SO3FunHarmonic(fhat,cs)
+close all
+plotSpektra(SO3F,'linewidth',2)
 {% endhighlight %}
-
-{% highlight plaintext %}
-SO3F4 = SO3FunHarmonic (m-3m → xyz)
-  isReal: false
-  bandwidth: 19
-  weight: 0.2
-{% endhighlight %}
-<p>The <code class="language-plaintext highlighter-rouge">bandwidth</code> describes the maximal harmonic degree of the harmonic series expansion.</p>
-<p>By the property <code class="language-plaintext highlighter-rouge">isReal</code> we are able to change between real and complex valued <code class="language-plaintext highlighter-rouge">SO3FunHarmonic's</code>. Note that creation of an real valued SO3FunHarmonic changes the Fourier coefficient vector. So it is not possible to reconstruct the previous function. But computing with real valued functions is faster.</p>
-{% highlight matlab %}
-SO3F4.eval(rot)
-
-SO3F4.isReal = 1
-SO3F4.eval(rot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
- -15.2920 - 3.2375i
-  25.9026 - 0.5691i
- 
-SO3F4 = SO3FunHarmonic (m-3m → xyz)
-  bandwidth: 19
-  weight: 0.2
- 
-ans =
-  -15.2920
-   25.9026
-{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunDefinition_03.png" %}
+</center>
 <p>For further information on the Fourier coefficients, the bandwidth and other properties, see <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation of Rotational Functions</a>.</p>
-<p>
-<b>Definition of Radial Basis Functions</b>
-</p>
-<p>Radial Basis functions are of class <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. They are defined as superposition of weighted kernel functions <code class="language-plaintext highlighter-rouge"><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></code> centered on a set of orientations <code class="language-plaintext highlighter-rouge">ori</code>
-</p>
+<h2 id="8">Superposition of Radial Functions</h2>
+<p>Radial functions are functions that depend only on the distance to some reference orientation. Typical examples are the de la Vallee Poussin kernel, the Abel Poisson kernel, the Gauss Weierstrass kernel or the von Mises Fisher kernel. The characterizing parameter of all these kernel functions is their halfwidth, i.e., the angular distance at which the function values is only half the function value at the center.</p>
 {% highlight matlab %}
-ori = orientation.rand(1e3,cs);
-w = ones(1e3,1);
-psi = SO3DeLaValleePoussinKernel
-SO3F5 = SO3FunRBF(ori,psi,w,1.2)
+% define the kernel de la Vallee Poussin kernel with halfwidth 15 degree
+psi = SO3DeLaValleePoussinKernel('halfwidth',15*degree)
+
+close all
+plot(psi)
 {% endhighlight %}
 
 {% highlight plaintext %}
 psi = SO3DeLaValleePoussinKernel
-  bandwidth: 25
-  halfwidth: 10°
- 
- 
-SO3F5 = SO3FunRBF (m-3m → xyz)
- 
-  uniform component
-  weight: 1.2
+  bandwidth: 17
+  halfwidth: 15°
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunDefinition_04.png" %}
+</center>
+<p>Using a large number of such kernel functions centered at different orientations allows to approximate arbitrary orientation dependent function. In MTEX superposition of radial functions naturally occur when performing ODF reconstruction from pole figure data or kernel density estimation from a small number of orientations, e.g.</p>
+{% highlight matlab %}
+% some random orientations
+ori = orientation.rand(200,cs);
+
+% perform kernel density estimation
+SO3F = calcDensity(ori,'kernel',psi)
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunRBF (m-3m → xyz)
  
   multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1000 orientations
+  kernel: de la Vallee Poussin, halfwidth 15°
+  center: 200 orientations
 {% endhighlight %}
-<p>For further information on them, see <a href="RadialODFs.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>.</p>
-<p>
-<b>Definition of fibre elements</b>
-</p>
-<p>They are described by the class <code class="language-plaintext highlighter-rouge"><a href="SO3FunCBF.SO3FunCBF.html">SO3FunCBF</a></code>. We construct them by a fibre on SO(3) together with some halfwidth.</p>
+<p>For further information see <a href="RadialODFs.html"><code class="language-plaintext highlighter-rouge">superposition of radial function</code></a>.</p>
+<h2 id="11">Superposition of Fiber Elements</h2>
+<p>Similarly as with radial functions, we may also represent an orientation dependent function also as a superposition of fibre components. The typical case is that we want to model an fiber ODF. This can be done as follows</p>
 {% highlight matlab %}
+% define a fibre
 f = fibre.beta(cs)
-SO3F6 = SO3FunCBF(f,'halfwidth',10*degree)
+
+% define a density function along this fiber
+SO3F = SO3FunCBF(f,'halfwidth',10*degree)
+
+% plot it
+plot(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -250,64 +206,49 @@ f = fibre (m-3m → xyz)
   h || r: (12 6 11) || (1,1,4)
  o1 → o2: (0°,35.3°,45°) → (90°,62.8°,45°)
  
-SO3F6 = SO3FunCBF (m-3m → xyz)
+SO3F = SO3FunCBF (m-3m → xyz)
  
   kernel: de la Vallee Poussin, halfwidth 10°
   fibre : (12 6 11) || 1,1,4
   weight: 1
 {% endhighlight %}
-<p>For further information, see <a href="FibreODFs.html">SO3FunCBF</a>.</p>
-<p>
-<b>Definition of Bingham distributions</b>
-</p>
-<p>Bingham distribution functions are described by the class <code class="language-plaintext highlighter-rouge"><a href="SO3FunBingham.SO3FunBingham.html">SO3FunBingham</a></code>. One can construct them by</p>
+<center>
+{% include inline_image.html file="SO3FunDefinition_05.png" %}
+</center>
+<p>For further information, see <a href="FibreODFs.html">fiber ODFs</a>.</p>
+<h2 id="13">The Bingham Distribution</h2>
+<p>A last family of orientation dependent functions are <a href="SO3FunBingham.SO3FunBingham.html">Bingham distributions</a>. Those are parameterized by a vector <code class="language-plaintext highlighter-rouge">U</code> of four orientations and a vector <code class="language-plaintext highlighter-rouge">kappa</code> of four values specifying the length and direction the half axes of a four dimensional ellipsoid.</p>
 {% highlight matlab %}
 kappa = [100 90 80 0];
-U = eye(4);
-SO3F7 = BinghamODF(kappa,U,cs)
+U = [orientation.byAxisAngle(xvector,[0,180]*degree,cs),...
+  orientation.byAxisAngle([yvector,zvector],180*degree,cs)]
+
+SO3F = BinghamODF(kappa,U)
+
+plot(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F7 = SO3FunBingham (m-3m → xyz)
+U = orientation (m-3m → xyz)
+  size: 1 x 4
+ 
+  Bunge Euler angles in degree
+  phi1  Phi phi2
+     0    0    0
+     0  180    0
+    90  180  270
+   180    0    0
+ 
+ 
+SO3F = SO3FunBingham (m-3m → xyz)
  
   kappa: 100 90 80 0
   weight: 1
 {% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunDefinition_06.png" %}
+</center>
 <p>For further information, see <a href="BinghamODFs.html">SO3FunBingham</a>.</p>
-<p>
-<b>Sum of different subclasses of SO3Fun</b>
-</p>
-<p>By adding some subclasses of <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> we can save the sum by storing the single components itself.</p>
-{% highlight matlab %}
-SO3F2 + SO3FunComposition(SO3F4) + SO3F5 + SO3F6 + SO3F7
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = SO3FunComposition (m-3m → xyz)
- 
-  uniform component
-  weight: 1.2
- 
-  harmonic component
-  bandwidth: 19
-  weight: 0.2
- 
-  function handle component
-  eval: @(ori)angle(ori)./degree
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1000 orientations
-  fibre component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (12 6 11) || 1,1,4
-  weight: 1
- 
-  bingham component
-  kappa: 100 90 80 0
-  weight: 1
-{% endhighlight %}
-<p>Note that the sum of any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> with an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> yields an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>. Hence you need to add an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> in exactly that way. Otherwise the sum is expanded to an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> in every summation step.</p>
 </div>
 </body>
 </html>

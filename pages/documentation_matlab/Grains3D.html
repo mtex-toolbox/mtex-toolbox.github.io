@@ -32,7 +32,7 @@ fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
 grains = grain3d.load(fname);
 
 % for triangulated data sets it may be useful to plot them without lines
-plot(grains,grains.meanOrientation,'LineStyle','none')
+plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
 
 % use a nice plotting convention
 how2plot = plottingConvention.default3D;
@@ -46,7 +46,7 @@ setCamera(how2plot)
 % index of the grain with the largest volume
 [~,id] = max(grains.volume)
 
-plot(grains(id),'edgeAlpha',0.15)
+plot(grains(id),'edgeAlpha',0.15,'micronBar','off')
 setCamera(how2plot)
 {% endhighlight %}
 
@@ -57,7 +57,34 @@ id =
 <center>
 {% include inline_image.html file="Grains3D_02.png" %}
 </center>
-<h2 id="4">Import Grains from Neper</h2>
+<p>Lets finally plot a slice through this 3d data set</p>
+{% highlight matlab %}
+% define the plane by a normal direction and a point
+plane = plane3d(vector3d(1,1,1),vector3d(-20,20,-15));
+
+% compute the sliced grains
+grains2 = slice(grains,plane)
+
+% plot them
+plot(grains2,grains2.meanOrientation)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains2 = grain2d
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
+     2     188     188  unknown       622       X||a*, Y||b, Z||c*
+ 
+ boundary segments: 7189 (655 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 271
+ 
+ Properties: meanRotation, Id3d
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains3D_03.png" %}
+</center>
+<h2 id="5">Import Grains from Neper</h2>
 <p>
 <a href="https://neper.info">Neper</a> is a software package for the simulation of three dimensional microstructures. After installation it can be directly called by MTEX. The general workflow is explained <a href="NeperInterface.html">here</a>. Here we use it to quickly generate a copper microstructure with specific texture and specific distribution of boundary normals.</p>
 {% highlight matlab %}
@@ -80,7 +107,7 @@ grains = grain3d
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
      2     100       1   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary faces: 650
+ boundary faces: 629
  
  Properties: meanRotation
 {% endhighlight %}
@@ -91,7 +118,7 @@ plot(grains,grains.meanOrientation,'micronbar','off','faceAlpha',0.5)
 setCamera(how2plot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3D_03.png" %}
+{% include inline_image.html file="Grains3D_04.png" %}
 </center>
 <h2 id="7">Slicing</h2>
 <p>To get the usually used 2d grain data, it is possible to slice 3d grains by different methods.</p>
@@ -111,16 +138,16 @@ setCamera(how2plot)
 grains_2d = grain2d
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     2      41      41   Quartz       321       X||a*, Y||b, Z||c*
+     2      40      40   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary segments: 126 (16 µm)
+ boundary segments: 123 (16 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 64
+ triple points: 62
  
- Properties: meanRotation
+ Properties: meanRotation, Id3d
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3D_04.png" %}
+{% include inline_image.html file="Grains3D_05.png" %}
 </center>
 <p>It might be reasonable to adjust the plotting convention such that the normal direction <code class="language-plaintext highlighter-rouge">N</code> points out of screen.</p>
 {% highlight matlab %}
@@ -130,7 +157,7 @@ how2plot.outOfScreen = N; how2plot.east = vector3d(1,1,0);
 setCamera(how2plot), axis off, xlabel('') , ylabel('')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3D_05.png" %}
+{% include inline_image.html file="Grains3D_06.png" %}
 </center>
 <h2 id="9">Grains intersecting a slice</h2>
 <p>Using the function <a href="grain3d.intersected"><code class="language-plaintext highlighter-rouge">intersected</code></a> we can identify all grains that intersect a given plane. Lets simply add 3d the shapes of all grains intersecting the plane.</p>
@@ -149,7 +176,7 @@ how2plot.outOfScreen = vector3d(1,-1,-1);
 setCamera(how2plot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="Grains3D_06.png" %}
+{% include inline_image.html file="Grains3D_07.png" %}
 </center>
 <h2 id="10">Plot the normal directions of one grain</h2>
 {% highlight matlab %}
