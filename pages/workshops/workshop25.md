@@ -14,7 +14,7 @@ mainly devoted to beginners in MTEX and/or texture analysis, the second week
 is a meeting of MTEX users with different experiences to share specific use
 cases, tips and tricks and discuss recent and upcoming developments in MTEX. A
 special focus will be on grain boundary statistics and new functionalities in
-MTEX 6.0. Participation is possible in presence as well as remotely.
+MTEX 6.1. Participation is possible in presence as well as remotely.
 
 <!---
 {% capture par_default %}
@@ -60,7 +60,7 @@ practical examples during the exercises within MTEX.
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
-**Lecture 1 - EBSD**
+**Lecture 1 - EBSD (Rüdiger Kilian)**
 <!--
 {% include reference.html link="https://tuc.cloud/index.php/s/iPjkbYm6NPJ3PMw" content="slides" class="course_material" %}
 <span class="course_material">, </span>
@@ -68,7 +68,7 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 	class="course_material" %}
 -->	
 <br>
-data import, reference frame alignment, pole figures, inverse pole figures, color keys
+principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 <br>
 **Exercise 1**
@@ -80,7 +80,7 @@ data import, reference frame alignment, pole figures, inverse pole figures, colo
 
 <br>
 <br>
-**Lecture 2 - Orientations and Symmetries**
+**Lecture 2 - Orientations and Symmetries (Ralf Hielscher)**
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
@@ -108,7 +108,7 @@ pole figures, inverse pole figures, fundamental sectors
 			<div class="panel-body">
 				<div markdown="span">
 
-**Lecture 3 - Grains**
+**Lecture 3 - Grains (Luiz Morales)**
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -119,7 +119,7 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 *Lunch*
 <br>
 <br>
-**Lecture 4 - Misorientations and Grain Boundaries**
+**Lecture 4 - Misorientations and Grain Boundaries (Vivian Tong)**
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
@@ -153,7 +153,7 @@ boundaries, orientation, gradients,  statistics of boundary networks
 *Lunch*
 <br>
 <br>
-**Lecture 5 - Density Functions**
+**Lecture 5 - Density Functions (Ralf Hielscher)**
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -178,7 +178,7 @@ random sampling, ODF reconstuction from XRD data
 		<div id="collapseThursday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 6 - Polishing of EBSD Data**
+**Lecture 6 - How to set up your EBSD map correctly (Vivian Tong)**
 <br>
 Correction of spatial coordinates, reference frame alignment, denoising 
 <br>
@@ -192,18 +192,16 @@ Correction of spatial coordinates, reference frame alignment, denoising
 *Lunch*
 <br>
 <br>
-**Lecture 7 - Tensorial Properties**
+**Lecture 7 - Quantitative Microstructure Analysis (Rüdiger Kilian)**
 <br>
-tensor arithmetic, visualization, effect of symmetry, thermal expansion, stress and strain
-tensors, piezoelectricity, elasticity, wave velocities
+grain shape statistics, grain boundary statistics
 <br>
 <!--deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 combining MTEX with external software like VPSC-->
 <br>
 <br>
-**Exercise 7 - From Single Grain to Bulk Tensors**
+**Exercise 7 - **
 <br>
-average tensors (Voigt, Reuss, Hill) from EBSD and ODF
  			  </div>
 			</div>
 		</div>
@@ -221,21 +219,19 @@ average tensors (Voigt, Reuss, Hill) from EBSD and ODF
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 8 - EBSD reference systems**
-<br>
-how to set up your EBSD system for MTEX
+**Lecture 8 - to be announced (Luiz Morales)**
 <br>
 <br>
-**Lecture 9 - Plasticity**
+<br>
+**Lecture 9 - Plasticity (Ralf Hielscher)**
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
-combining MTEX with external software like VPSC
 <br>
 <br>
 *lunch*
 <br>
 <br>
-**Lecture 10 - Parent Grain Reconstruction**
+**Lecture 10 - Parent Grain Reconstruction (Ralf Hielscher)**
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
