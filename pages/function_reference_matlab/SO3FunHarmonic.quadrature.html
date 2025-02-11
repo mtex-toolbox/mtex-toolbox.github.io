@@ -27,9 +27,10 @@ To make changes, update the MATLAB code and republish this document.
 <p>This method evaluates the given SO3Fun on an with respect to symmetries fundamental Region. Afterwards it uses a inverse trivariate nfft/fft and an adjoint coefficient transform which is based on a representation property of Wigner-D functions. Hence it do not use the NFSOFT (which includes a fast polynom transform) as in the older method <code class="language-plaintext highlighter-rouge">SO3FunHarmonic.quadratureNFSOFT</code>.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-SO3F = SO3FunHarmonic.quadrature(nodes,values,'weights',w)
+SO3F = SO3FunHarmonic.quadrature(nodes,values)
+SO3F = SO3FunHarmonic.quadrature(nodes,values,'bandwidth',48,'weights',w)
 SO3F = SO3FunHarmonic.quadrature(f)
-SO3F = SO3FunHarmonic.quadrature(f, 'bandwidth', bandwidth)
+SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth,quadratureScheme)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -55,7 +56,7 @@ SO3F = SO3FunHarmonic.quadrature(f, 'bandwidth', bandwidth)
             <tt>f</tt>
          </td>
          <td>
-            <tt>function handle in <a href="orientation.orientation.html">orientation</a> (first dimension has to be the evaluations)</tt>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a>, function handle in <a href="orientation.orientation.html">orientation</a> (first dimension has to be the evaluations)</tt>
          </td>
       </tr>
    </table>
@@ -81,14 +82,35 @@ SO3F = SO3FunHarmonic.quadrature(f, 'bandwidth', bandwidth)
             <tt>bandwidth</tt>
          </td>
          <td>
-            <tt>minimal harmonic degree (default: 64)</tt>
+            <tt>maximal harmonic degree (default: 64)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt/>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="7">See also</h2>
+<h2 id="7">Flags</h2>
 <p>
-<a href="SO3FunHarmonic.adjoint.html">SO3FunHarmonic.adjoint</a>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>quadratureScheme</tt>
+         </td>
+         <td>
+            <tt>('ClenshawCurtis'|'GaussLegendre') --&gt; default: CC</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="SO3FunHarmonic.adjoint.html">SO3FunHarmonic.adjoint</a> <a href="SO3FunHarmonic.approximate.html">SO3FunHarmonic.approximate</a> <a href="SO3FunHarmonic.html">SO3FunHarmonic</a>
 </p>
 </div>
 </body>

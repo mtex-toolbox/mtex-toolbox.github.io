@@ -1,8 +1,8 @@
 ---
-title: steepestDescent
+title: mlrl
 
 sidebar: function_reference_sidebar
-permalink: steepestDescent.html
+permalink: mlrl.html
 folder: function_reference
 toc: false
 ---
@@ -13,38 +13,64 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>steepestDescent</title>
+<title>mlrl</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.source" content="script_steepestDescent.m">
+<meta name="DC.source" content="script_mlrl.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/optimization_tools/steepestDescent.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/optimization_tools/mlrl.m">
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>find minimum with steepest descent</p>
+<p>maximum likelihood estimate for Psi*c = I, sum(c) = 1, I&gt;0, c&gt;0 with richard-lucy iteration</p>
 <!--/introduction-->
 <h2 id="2">Syntax</h2>
 {% highlight matlab %}
-[x,value] = steepestDescent(fun,x,varargin)
+c = mlrl(Psi,I)
+c = mlrl(Psi,I,c0)
+[c,k] = mlrl(Psi,I,c0,itermax,tol)
 {% endhighlight %}
 <h2 id="3">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>fun</tt>
+            <tt>Psi</tt>
          </td>
          <td>
-            <tt><a href="S2Fun.S2Fun.html">S2Fun</a>, <a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+            <tt>system matrix (N x M)</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>x</tt>
+            <tt>I</tt>
          </td>
          <td>
-            <tt>initial seed <a href="vector3d.vector3d.html">vector3d</a>, <a href="rotation.rotation.html">rotation</a></tt>
+            <tt>intensities (N x 1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>c0</tt>
+         </td>
+         <td>
+            <tt>initial coefficients (M x 1), real valued</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>itermax</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>abort if change smaller than tolerance</tt>
          </td>
       </tr>
    </table>
@@ -54,39 +80,18 @@ To make changes, update the MATLAB code and republish this document.
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>x</tt>
+            <tt>c</tt>
          </td>
          <td>
-            <tt>local maxima</tt>
+            <tt>coefficients (Mx1), real valued</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>value</tt>
+            <tt>k</tt>
          </td>
          <td>
-            <tt>function values</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="5">Options</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>maxIter</tt>
-         </td>
-         <td>
-            <tt/>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>resolution</tt>
-         </td>
-         <td>
-            <tt/>
+            <tt>number of iterations</tt>
          </td>
       </tr>
    </table>

@@ -1,0 +1,163 @@
+---
+title: approximate
+
+sidebar: function_reference_sidebar
+permalink: SO3FunHarmonic.approximate.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>approximate</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3FunHarmonic__approximate.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunHarmonic/approximate.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Approximate an SO3FunHarmonic by given function values at given nodes w.r.t. some noise.</p>
+<p>For \(M\) given orientations \(R_i\) and corresponding function values \(y_i\) we compute the SO3FunHarmonic \(f\) of an specific bandwidth which minimizes the least squares problem</p>
+<p>\[\sum_{i=1}^M|f(R_i)-y_i|^2.\]</p>
+<p>If the oversampling factor is small (high bandwidth) it may be necessary to assure decay of the harmonic coefficients. Therefore we regularize the least squares problem by the Sobolev norm of f, i.e we minimize</p>
+<p>\[\sum_{i=1}^M|f(R_i)-y_i|^2 + \lambda \|f\|^2_{H^s}\]</p>
+<p>where \(\lambda\) is the regularization parameter and \(s\) the Sobolev index. The Sobolev norm of an SO3FunHarmonic with harmonic coefficients \(\hat{f}\) reads as</p>
+<p>\[\|f\|^2_{H^s} = \sum_{n=0}^N (2n+1)^{2s} \, \sum_{k,l=-n}^n|\hat{f}_n^{k,l}|^2.\]</p>
+<p>We can also use the approximation command to approximate an SO3FunHarmonic from some given SO3Fun by evaluating on some specific grid and doing quadrature.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+SO3F = SO3FunHarmonic.approximate(odf)                 % exact computation by quadrature
+SO3F = SO3FunHarmonic.approximate(odf,'bandwidth',48)  % exact computation by quadrature
+SO3F = SO3FunHarmonic.approximate(nodes,y)
+SO3F = SO3FunHarmonic.approximate(nodes,y,'bandwidth',48)
+SO3F = SO3FunHarmonic.approximate(nodes,y,'weights','Voronoi')
+SO3F = SO3FunHarmonic.approximate(nodes,y,'bandwidth',48,'weights',W,'tol',1e-6,'maxit',200)
+SO3F = SO3FunHarmonic.approximate(nodes,y,'regularization',0) % no regularization
+SO3F = SO3FunHarmonic.approximate(nodes,y,'regularization',1e-4,'SobolevIndex',2)
+[SO3F,lsqrParameters] = SO3FunHarmonic.approximate(___)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>nodes</tt>
+         </td>
+         <td>
+            <tt>grid of <a href="rotation.rotation.html">rotation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>y</tt>
+         </td>
+         <td>
+            <tt>function values on the grid (maybe multidimensional)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>SO3F</tt>
+         </td>
+         <td>
+            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqrParameters</tt>
+         </td>
+         <td>
+            <tt>double</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>maximal harmonic degree (Be careful by setting the bandwidth by yourself, since it may yields undersampling)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt>corresponding to the nodes (default is 'equal': all nodes are weighted similar; 'Voronoi': Voronoi volumes; numeric array W: specific weights for every node)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>tolerance as termination condition for lsqr</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxit</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations as termination condition for lsqr</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>regularization</tt>
+         </td>
+         <td>
+            <tt>the energy functional of the lsqr solver is regularized by the Sobolev norm of SO3F with regularization parameter lambda (default: 1e-4)(0: no regularization)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SobolevIndex</tt>
+         </td>
+         <td>
+            <tt>for regularization (default = 2)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cutOffParameter</tt>
+         </td>
+         <td>
+            <tt>cut off parameter m of the window functions in NFFT</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="rotation.interp.html">rotation.interp</a> <a href="SO3FunHarmonic.quadrature.html">SO3FunHarmonic.quadrature</a> <a href="SO3VectorFieldHarmonic.approximate.html">SO3VectorFieldHarmonic.approximate</a>
+</p>
+</div>
+</body>
+</html>

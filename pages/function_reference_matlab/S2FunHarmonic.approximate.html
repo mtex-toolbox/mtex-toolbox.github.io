@@ -1,8 +1,8 @@
 ---
-title: steepestDescent
+title: approximate
 
 sidebar: function_reference_sidebar
-permalink: steepestDescent.html
+permalink: S2FunHarmonic.approximate.html
 folder: function_reference
 toc: false
 ---
@@ -13,59 +13,39 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>steepestDescent</title>
+<title>approximate</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.source" content="script_steepestDescent.m">
+<meta name="DC.source" content="script_S2FunHarmonic__approximate.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/optimization_tools/steepestDescent.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/S2Fun/@S2FunHarmonic/approximate.m">
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>find minimum with steepest descent</p>
 <!--/introduction-->
-<h2 id="2">Syntax</h2>
+<p>computes a least square problem to get an approximation</p>
+<h2 id="3">Syntax</h2>
 {% highlight matlab %}
-[x,value] = steepestDescent(fun,x,varargin)
+sF = S2FunHarmonic.approximate(S2Grid, f)
+sF = S2FunHarmonic.approximate(S2Grid, f, 'bandwidth', bandwidth, 'tol', TOL, 'maxit', MAXIT, 'weights', W)
 {% endhighlight %}
-<h2 id="3">Input</h2>
+<h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>fun</tt>
+            <tt>S2Grid</tt>
          </td>
          <td>
-            <tt><a href="S2Fun.S2Fun.html">S2Fun</a>, <a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+            <tt>grid on the sphere</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>x</tt>
+            <tt>f</tt>
          </td>
          <td>
-            <tt>initial seed <a href="vector3d.vector3d.html">vector3d</a>, <a href="rotation.rotation.html">rotation</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="4">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>x</tt>
-         </td>
-         <td>
-            <tt>local maxima</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>value</tt>
-         </td>
-         <td>
-            <tt>function values</tt>
+            <tt>function values on the grid (may be multidimensional)</tt>
          </td>
       </tr>
    </table>
@@ -75,18 +55,34 @@ To make changes, update the MATLAB code and republish this document.
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>maxIter</tt>
+            <tt>bandwidth</tt>
          </td>
          <td>
-            <tt/>
+            <tt>maximum degree of the spherical harmonics used to approximate the function</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>resolution</tt>
+            <tt>to</tt>
          </td>
          <td>
-            <tt/>
+            <tt>tolerance for lsqm</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxIt</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations for lsqm</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt>weight w_n for the node nodes (default: Voronoi weights)</tt>
          </td>
       </tr>
    </table>
