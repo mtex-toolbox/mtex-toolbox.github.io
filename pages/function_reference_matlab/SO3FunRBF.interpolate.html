@@ -1,0 +1,262 @@
+---
+title: interpolate
+
+sidebar: function_reference_sidebar
+permalink: SO3FunRBF.interpolate.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>interpolate</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3FunRBF__interpolate.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunRBF/interpolate.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Approximate an SO3FunRBF by given function values at given nodes w.r.t. some noise as described by [1].</p>
+<p>For \(M\) given orientations \(R_i\) and corresponding function values \(y_i\) we compute the SO3FunRBF \(f\) which minimizes the least squares problem</p>
+<p>\[\sum_{i=1}^M|f(R_i)-y_i|^2.\]</p>
+<p>where \(f\) is</p>
+<p>\[ f&reg;=\sum_{j=1}^{N}w_j\psi(\omega(R_j,R)) \]</p>
+<p>with specific kernel \(\psi\) centered at \(N\) nodes weighted by \(w_j,\sum_{j}^{N}w_{j}=1\) as described by [1].</p>
+<p>Therefore we set up a (sparse) system matrix \(\Psi\in\mathbb{R}^{M\times N}\) with entries</p>
+<p>\[ \Psi_{i,j}=\psi(\omega(R_i,R_j)) \]</p>
+<p>of the kernel values of the angle between the evaluation nodes \(R_i,i=1,...,M\) and grid nodes \(R_j,j=1,...,N\). This system is solved by least squares gradient descent.</p>
+<p>Instead of modified least squares (mlsq) also the maximum-likelihood estimate (mlrl) can be computed. Note that both of this methods have the condition that we approximate a odf (the mean of the SO3Fun is 1). We can also use some standard least squares methods (for example lsqr).</p>
+<p>Reference: [1] Schaeben, H., Bachmann, F. &amp; Fundenberger, JJ. Construction of weighted crystallographic orientations capturing a given orientation density function. J Mater Sci 52, 2077&ndash;2090 (2017). <a href="https://doi.org/10.1007/s10853-016-0496-1">https://doi.org/10.1007/s10853-016-0496-1</a>
+</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+SO3F = SO3FunRBF.interpolate(nodes,y)
+SO3F = SO3FunRBF.interpolate(nodes,y,'halfwidth',1*degree)
+SO3F = SO3FunRBF.interpolate(nodes,y,'kernel',psi)
+SO3F = SO3FunRBF.interpolate(nodes,y,'kernel',psi,'exact')
+SO3F = SO3FunRBF.interpolate(nodes,y,'kernel',psi,'resolution',5*degree)
+SO3F = SO3FunRBF.interpolate(nodes,y,'kernel',psi,'SO3Grid',S3G)
+SO3F = SO3FunRBF.interpolate(nodes,y,'mlsq','tol',1e-3,'maxit',100,'density')
+{% endhighlight %}
+
+{% highlight matlab %}
+[SO3F,lsqrIter] = SO3FunRBF.interpolate(___)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>nodes</tt>
+         </td>
+         <td>
+            <tt>rotational grid <a href="SO3Grid.SO3Grid.html">SO3Grid</a>, <a href="orientation.orientation.html">orientation</a>, <a href="rotation.rotation.html">rotation</a> or harmonic coefficents</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>y</tt>
+         </td>
+         <td>
+            <tt>function values on the grid (maybe multidimensional) or empty</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>psi</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a> of the approximated SO3FunRBF (default: SO3DeLaValleePoussinKernel('halfwidth',5*degree))</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>S3G</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>SO3F</tt>
+         </td>
+         <td>
+            <tt><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqrIter</tt>
+         </td>
+         <td>
+            <tt>number of iterations of the LSQR-Solver</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>halfwidth</tt>
+         </td>
+         <td>
+            <tt>halfwidth of the SO3Kernel of the result SO3FunRBF</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>kernel</tt>
+         </td>
+         <td>
+            <tt>SO3Kernel of the result SO3FunRBF</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SO3Grid</tt>
+         </td>
+         <td>
+            <tt>center of the result SO3FunRBF</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>resolution</tt>
+         </td>
+         <td>
+            <tt>resolution of the <a href="SO3Grid.SO3Grid.html">SO3Grid</a> which is the center of the result SO3FunRBF</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>approxresolution</tt>
+         </td>
+         <td>
+            <tt>resolution of the approximation grid, which is used to evaluate the input odf, if we use the spatial method (not the harmonic method)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>tolerance as termination condition for lsqr/mlsq/...</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxit</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations as termination condition for lsqr/mlsq/...</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>'exact'</tt>
+         </td>
+         <td>
+            <tt>if rotations are given, then use nodes as center of result SO3FunRBF and try to do exact computations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'density'</tt>
+         </td>
+         <td>
+            <tt>ensure that result SO3FunRBF is a density function (i.e. positiv and mean is 1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>LSQRsolver</tt>
+         </td>
+         <td>
+            <tt>('lsqr'|'lsqnonneg'|'lsqlin'|'nnls'|'mlsq'|'mlrl') specify least square solver for spatial method --&gt; default: lsqr</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>LSQR</tt>
+         </td>
+         <td>
+            <tt>Solvers</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqr</tt>
+         </td>
+         <td>
+            <tt>least squares (MATLAB)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqnonneg</tt>
+         </td>
+         <td>
+            <tt>non negative least squares (MATLAB, fast)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lsqlin</tt>
+         </td>
+         <td>
+            <tt>interior point non negative least squares (optimization toolbox, slow)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>nnls</tt>
+         </td>
+         <td>
+            <tt>non negative least squares (W.Whiten)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mlsq</tt>
+         </td>
+         <td>
+            <tt>modified least squares (with positivity condition and normalization to mean 1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mlrl</tt>
+         </td>
+         <td>
+            <tt>maximum likelihood estimate (with positivity condition and normalization to mean 1)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="rotation.interp.html">rotation.interp</a> <a href="SO3FunHarmonic.interpolate.html">SO3FunHarmonic.interpolate</a>
+</p>
+</div>
+</body>
+</html>

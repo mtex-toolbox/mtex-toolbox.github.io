@@ -126,24 +126,13 @@ To make changes, update the MATLAB code and republish this document.
 </p>
 <h2 id="7">Example</h2>
 {% highlight matlab %}
-%Starting with an synthetic odf with orthorhombic symmetry
-CS = crystalSymmetry('cubic')
-SS = specimenSymmetry('orthorhombic')
+% starting with an synthetic odf with orthorhombic symmetry
+CS = crystalSymmetry('cubic');
+SS = specimenSymmetry('orthorhombic');
 ori = [orientation.byEuler(135*degree,45*degree,120*degree,CS,SS) ...
 orientation.byEuler( 60*degree, 54.73*degree, 45*degree,CS,SS) ...
 orientation.byEuler(70*degree,90*degree,45*degree,CS,SS)...
 orientation.byEuler(0*degree,0*degree,0*degree,CS,SS)];
-{% endhighlight %}
-
-{% highlight plaintext %}
-CS = crystalSymmetry
- 
-  symmetry: m-3m   
-  elements: 48     
-  a, b, c : 1, 1, 1
- 
- 
-SS = orthorhombic specimenSymmetry
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -151,23 +140,29 @@ odf = unimodalODF(SS*ori);
 {% endhighlight %}
 
 {% highlight matlab %}
-%we define a rotational displacement
-r2 = rotation.byEuler( 6*degree,4*degree,0*degree)
+% we define a rotational displacement
+r2 = rotation.byEuler( 6*degree,4*degree,0*degree);
 odf = rotate(odf,r2);
 h = [Miller(0,0,1,CS),Miller(0,1,1,CS),Miller(1,1,1,CS)];
-plotPDF(odf,h,'antipodal','complete');
+plotPDF(odf,h,'antipodal','complete','upper');
 {% endhighlight %}
 
 {% highlight plaintext %}
-r2 = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     6    4    0
+Warning: Rotating an ODF with specimen symmetry will
+remove the specimen symmetry
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3Fun.centerSpecimen_01.png" %}
 </center>
+{% highlight matlab %}
+% lets try to retrieve the original orthorhombic odf back
+[odr,r,v1,v2] = centerSpecimen(odf);
+plotPDF(odr,h,'antipodal')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3Fun.centerSpecimen_02.png" %}
+</center>
+<h2 id="13">See also</h2>
 </div>
 </body>
 </html>
