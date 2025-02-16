@@ -1,0 +1,130 @@
+---
+title: interpolate
+
+sidebar: function_reference_sidebar
+permalink: SO3VectorFieldHarmonic.interpolate.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>interpolate</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3VectorFieldHarmonic__interpolate.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3VectorFieldHarmonic/interpolate.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Approximate a vector field on the rotation group (SO(3)) in its harmonic representation from some given orientations with corresponding tangent vectors and maybe some noise.</p>
+<p>We compute this vector field componentwise, i.e. we compute three SO3FunHarmonics individually by interpolation. So, see <a href="SO3FunHarmonic.interpolate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code></a> for further information.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+SO3VF = SO3VectorFieldHarmonic.interpolate(nodes,y)
+SO3VF = SO3VectorFieldHarmonic.interpolate(nodes,y,'bandwidth',48)
+SO3VF = SO3VectorFieldHarmonic.interpolate(nodes,y,'weights','equal')
+SO3VF = SO3VectorFieldHarmonic.interpolate(nodes,y,'bandwidth',48,'weights',W,'tol',1e-6,'maxit',200)
+SO3VF = SO3VectorFieldHarmonic.interpolate(nodes,y,'regularization',0) % no regularization
+SO3VF = SO3VectorFieldHarmonic.interpolate(nodes,y,'regularization',1e-4,'SobolevIndex',2)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>nodes</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>y</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>SO3VF</tt>
+         </td>
+         <td>
+            <tt><a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>maximal harmonic degree (Be careful by setting the bandwidth by yourself, since it may yields undersampling)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt>corresponding to the nodes (default: Voronoi weights, 'equal': all nodes are weighted similar, numeric array W: specific weights for every node)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>tolerance as termination condition for lsqr</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxit</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations as termination condition for lsqr</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>regularization</tt>
+         </td>
+         <td>
+            <tt>the energy functional of the lsqr solver is regularized by the Sobolev norm of SO3F with regularization parameter lambda (default: 1e-4)(0: no regularization)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SobolevIndex</tt>
+         </td>
+         <td>
+            <tt>for regularization (default = 2)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="rotation.interp.html">rotation.interp</a> <a href="SO3FunHarmonic.interpolate.html">SO3FunHarmonic.interpolate</a>
+</p>
+</div>
+</body>
+</html>
