@@ -23,44 +23,22 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Approximate a vector field on the rotation group (SO(3)) in its harmonic representation from a given vector field, or some given orientations with corresponding tangent vectors w.r.t. some given noise.</p>
-<p>We compute this vector field componentwise, i.e. we compute three SO3FunHarmonics individually by approximation. So, see <a href="SO3FunHarmonic.approximate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.approximate</code></a> for further information.</p>
+<p>Approximate a vector field on the rotation group (SO(3)) in its harmonic representation from a given vector field.</p>
+<p>We compute this vector field componentwise, i.e. we compute three SO3FunHarmonics individually by quadrature. So, see <a href="SO3VectorFieldHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">SO3VectorFieldHarmonic.quadrature</code></a> for further information.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-SO3VF = SO3VectorFieldHarmonic.approximate(odf)                 % exact computation by quadrature
-SO3VF = SO3VectorFieldHarmonic.approximate(odf,'bandwidth',48)  % exact computation by quadrature
-SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y)
-SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y,'bandwidth',48)
-SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y,'weights','equal')
-SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y,'bandwidth',48,'weights',W,'tol',1e-6,'maxit',200)
-SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y,'regularization',0) % no regularization
-SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y,'regularization',1e-4,'SobolevIndex',2)
+SO3VF = SO3VectorFieldHarmonic.approximate(f)                 % exact computation by quadrature
+SO3VF = SO3VectorFieldHarmonic.approximate(f,'bandwidth',48)  % exact computation by quadrature
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>odf</tt>
+            <tt>f</tt>
          </td>
          <td>
             <tt><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>nodes</tt>
-         </td>
-         <td>
-            <tt><a href="rotation.rotation.html">rotation</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>y</tt>
-         </td>
-         <td>
-            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
          </td>
       </tr>
    </table>
@@ -95,38 +73,6 @@ SO3VF = SO3VectorFieldHarmonic.approximate(nodes,y,'regularization',1e-4,'Sobole
          </td>
          <td>
             <tt>corresponding to the nodes (default: Voronoi weights, 'equal': all nodes are weighted similar, numeric array W: specific weights for every node)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>tol</tt>
-         </td>
-         <td>
-            <tt>tolerance as termination condition for lsqr</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>maxit</tt>
-         </td>
-         <td>
-            <tt>maximum number of iterations as termination condition for lsqr</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>regularization</tt>
-         </td>
-         <td>
-            <tt>the energy functional of the lsqr solver is regularized by the Sobolev norm of SO3F with regularization parameter lambda (default: 1e-4)(0: no regularization)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>SobolevIndex</tt>
-         </td>
-         <td>
-            <tt>for regularization (default = 2)</tt>
          </td>
       </tr>
    </table>

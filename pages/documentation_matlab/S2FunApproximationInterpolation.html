@@ -38,7 +38,7 @@ scatter(nodes, S.values, 'upper');
 </center>
 <p>Now, we want to find a function which coincides with the given function values in the nodes reasonably well.</p>
 <h2 id="4">Interpolation</h2>
-<p>The idea of the first approach is fairly simple. We create a function which has <b>exactly</b> the value of the given data in the nodes. But we still have to decide what happens inbetween these nodes. For that, we linearly interpolate between them, similarly as Matlat plots a one-dimensional function</p>
+<p>The idea of the first approach is fairly simple. We create a function which has <b>exactly</b> the value of the given data in the nodes. But we still have to decide what happens inbetween these nodes. For that, we linearly interpolate between them, similarly as Matlab plots a one-dimensional function</p>
 {% highlight matlab %}
 close all
 plot(rand(10,1), '.-','linewidth',2)
@@ -50,7 +50,7 @@ plot(rand(10,1), '.-','linewidth',2)
 {% highlight matlab %}
 sFTri = interp(nodes, S.values, 'linear');
 {% endhighlight %}
-<p>To see that we realy have the exact function values, we can evaluate <code class="language-plaintext highlighter-rouge">sFTri</code> of type <a href="S2FunTri.S2FunTri"><code class="language-plaintext highlighter-rouge">S2FunTri</code></a> and compare it with the original data values.</p>
+<p>To see that we really have the exact function values, we can evaluate <code class="language-plaintext highlighter-rouge">sFTri</code> of type <a href="S2FunTri.S2FunTri"><code class="language-plaintext highlighter-rouge">S2FunTri</code></a> and compare it with the original data values.</p>
 {% highlight matlab %}
 norm(eval(sFTri, nodes) - S.values)
 {% endhighlight %}
@@ -77,7 +77,7 @@ contourf(sF, 'upper');
 <center>
 {% include inline_image.html file="S2FunApproximationInterpolation_04.png" %}
 </center>
-<p>Plotting this function, we can immidiately see, that we have a much smoother function. But one has to keep in mind that the error in the data nodes is not zero as in the case of interpolation.</p>
+<p>Plotting this function, we can immediately see, that we have a much smoother function. But one has to keep in mind that the error in the data nodes is not zero as in the case of interpolation.</p>
 {% highlight matlab %}
 norm(eval(sF, nodes) - S.values)
 {% endhighlight %}
@@ -92,7 +92,7 @@ ans =
 <p>approximates our function. A basic strategy to achieve this is through least squares, where we minimize the functional</p>
 <p>\[ \sum_{n=1}^N|f(x_n)-g(x_n)|^2 \]</p>
 <p>for the data nodes \(x_n\), \(n=1,\dots,N\), \(f(x_n)\) the target function values and \(g(x_n)\) our approximation evaluated in the given data nodes.</p>
-<p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multible times, where the Fourier-matrix is given by</p>
+<p>This can be done by the <code class="language-plaintext highlighter-rouge">lsqr</code> function of Matlab, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation). In the process we compute the matrix-vector product with the Fourier-matrix multiple times, where the Fourier-matrix is given by</p>
 <p>\[ F = [Y_m^l(x_n)]_{n = 1,\dots,N;m = 0,\dots,M,l = -m,\dots,m}. \]</p>
 <p>This matrix-vector product can be computed efficiently with the use of the nonequispaced spherical Fourier transform <a href="https://www-user.tu-chemnitz.de/~potts/nfft/nfsft.php">NFSFT</a>.</p>
 <p>We end up with the Fourier-coefficients of our approximation \(g\), which describe our approximation.</p>

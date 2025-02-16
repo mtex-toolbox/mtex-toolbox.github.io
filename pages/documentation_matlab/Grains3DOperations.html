@@ -35,10 +35,10 @@ setCamera(plottingConvention.default3D)
 {% highlight plaintext %}
 grains = grain3d
  
- Phase  Grains   Volume  Mineral  Symmetry  Crystal reference frame
-     2    1000  1000000   Quartz       321       X||a*, Y||b, Z||c*
+ Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
+     2    1000   1e+06   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary faces: 7203
+ boundary faces: 7163
  
  Properties: meanRotation
 {% endhighlight %}
@@ -52,7 +52,7 @@ grains = grain3d
 P0 = vector3d(50,50,50);
 
 % the normal direction of the slice
-N = vector3d(1,-1,0);
+N = vector3d(1,-1,1);
 
 % compute the slice
 grains1_10 = grains.slice(N,P0)
@@ -66,13 +66,13 @@ setCamera(plottingConvention.default3D)
 grains1_10 = grain2d
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     2     191     191   Quartz       321       X||a*, Y||b, Z||c*
+     2     179     179   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary segments: 574 (3408 µm)
+ boundary segments: 540 (3153 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 334
+ triple points: 310
  
- Properties: meanRotation
+ Properties: meanRotation, Id3d
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Grains3DOperations_02.png" %}
@@ -88,9 +88,9 @@ setCamera(how2plot)
 {% highlight plaintext %}
 how2plot = plottingConvention
  
-  outOfScreen: (1,-1,0)
+  outOfScreen: (4,-7,0)
   north      : (0,0,1) 
-  east       : (1,1,0)
+  east       : (7,4,0)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Grains3DOperations_03.png" %}
@@ -110,13 +110,19 @@ hold off
 
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: still can not concatenate grains on different slices 
+Warning: still can not concatenate grains on different slices 
+Warning: still can not concatenate grains on different slices
+{% endhighlight %}
 <center>
 {% include inline_image.html file="Grains3DOperations_04.png" %}
 </center>
 <h2 id="5">Triangulation</h2>
 <p>Some functions are much faster on triangulated meshes. Therefore you can triangulate your grains with the command <a href="grain3d.triangulate.html"><code class="language-plaintext highlighter-rouge">triangulate</code></a>.</p>
 {% highlight matlab %}
-grainsTri = grains(20).triangulate
+grainsTri = grains(20:21).triangulate
 
 plot(grainsTri,grainsTri.meanOrientation)
 {% endhighlight %}
@@ -125,18 +131,19 @@ plot(grainsTri,grainsTri.meanOrientation)
 grainsTri = grain3d
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
-     2       1     702   Quartz       321       X||a*, Y||b, Z||c*
+     2       2    1742   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary faces: 63
+ boundary faces: 100
  
  Id   Phase   Pixels            meanRotation
- 20       2        1   (116.3°,30.4°,213.8°)
+ 20       2        1    (94.3°,43.1°,221.4°)
+ 21       2        1   (136.3°,35.1°,264.8°)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Grains3DOperations_05.png" %}
 </center>
 <h2 id="6">Rotation</h2>
-<p>Not surprisingly we can use the command <a href="grain3d.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> to apply any rotation to three dimensional grains. Note that a rotation changes the spatial coordinates as well as the orientations of the grains.</p>
+<p>Not surprisingly we can use the command <a href="grain3d.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> to apply any rotation to three dimensional grains. Note that a rotation changes the spatial coordinates as well as the orientation of the grains.</p>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(vector3d(1,1,1),30*degree);
 grains_rot = rot * grains;   % or rotate(grains3,rot)

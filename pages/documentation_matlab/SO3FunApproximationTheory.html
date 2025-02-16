@@ -1,0 +1,294 @@
+---
+title: Approximating Orientation Dependent Functions from Discrete Data
+
+sidebar: documentation_sidebar
+permalink: SO3FunApproximationTheory.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Approximating Orientation Dependent Functions from Discrete Data</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3FunApproximationTheory.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunApproximationTheory.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>On this page we consider the problem of determining a smooth orientation dependent function \(f(\mathtt{ori})\) given a list of orientations \(\mathtt{ori}_m\) and a list of corresponding values \(v_m\). These values may be the volume of crystals with a specific orientation, as in the case of an ODF, or any other orientation dependent physical property.</p>
+<p>Orientation dependent data may be stored in ASCII files with lines of Euler angles, representing the orientations, and values. Such data files can be imported by the command <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a>, where we have to specify the position of the columns of the Euler angles as well as of the additional properties.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath, 'orientation', 'dubna.csv');
+[ori, S] = orientation.load(fname,'columnNames',{'phi1','Phi','phi2','values'});
+{% endhighlight %}
+<p>As a result the command returns a list of orientations <code class="language-plaintext highlighter-rouge">ori</code> and a struct <code class="language-plaintext highlighter-rouge">S</code>. The struct contains one field for each additional column in our data file. In our toy example it is the field <code class="language-plaintext highlighter-rouge">S.values</code>. Lets generate a discrete plot of the given orientations <code class="language-plaintext highlighter-rouge">ori</code> together with the values <code class="language-plaintext highlighter-rouge">S.values</code>.</p>
+{% highlight matlab %}
+plotSection(ori, S.values,'all','sigma');
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_01.png" %}
+</center>
+<p>The process of finding a function which coincides with the given function values in the nodes reasonably well is called approximation (or interpolation). MTEX support different approximation schemes: approximation by harmonic expansion, approximation by radial functions and approximation by a Bingham distribution.</p>
+<p>In MTEX we have the general command <a href="rotation.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> for any of this methods.</p>
+<p>The Approximation by radial functions should be preferred, if:</p>
+<div>
+<ul>
+<li>The underlying function is a density function, i.e. it is positive and has mean value 1 (use the flag 'density')</li>
+<li>Low/Medium number of nodes</li>
+</ul>
+</div>
+<p>The Approximation by harmonic expansion should be preferred, if:</p>
+<div>
+<ul>
+<li>The underlying function describes some other orientation dependent relationship</li>
+<li>Lots of nodes, outliers and noise</li>
+</ul>
+</div>
+<p>But this are only hints. In practical applications we should try both methods and decide on the basis of computational costs and the results.</p>
+<h2 id="5">Approximation by Harmonic Expansion</h2>
+<p>An approximation by harmonic expansion is computed by the command <a href="rotation.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> with the flag <code class="language-plaintext highlighter-rouge">'harmonic'</code>. Internally MTEX uses the <a href="SO3FunHarmonic.interpolate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code></a> method here.</p>
+{% highlight matlab %}
+SO3F = interp(ori,S.values,'harmonic')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunHarmonic (1 → xyz)
+  bandwidth: 18
+  weight: 0.98
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_02.png" %}
+</center>
+<p>Note that <code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code> does not aim at replicating the values exactly. In fact the relative error between given data and the function approximation is</p>
+{% highlight matlab %}
+norm(SO3F.eval(ori) - S.values) / norm(S.values)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.1102
+{% endhighlight %}
+<p>The reason for this difference is that MTEX by default applies regularization. The default regularization parameter is \(\lambda = 5\cdot 10^{-7}\). We can switch off regularization by setting this value to \(0\).</p>
+{% highlight matlab %}
+SO3F = interp(ori,S.values,'harmonic','regularization',0)
+
+% the relative error
+norm(SO3F.eval(ori) - S.values) / norm(S.values)
+
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunHarmonic (1 → xyz)
+  bandwidth: 18
+  weight: 0.98
+ 
+ans =
+    0.0515
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_03.png" %}
+</center>
+<p>We observe that the relative error is much smaller, however the oscillatory behavior of the approximated function indicates overfitting. A more detailed discussion about choosing a good regularization parameter can be found in the section <a href="HarmonicApproximationTheory.html">harmonic approximation theory</a>.</p>
+<p>An alternative way of regularization is to reduce the harmonic bandwidth</p>
+{% highlight matlab %}
+SO3F = interp(ori,S.values,'harmonic','bandwidth',16)
+
+% the relative error
+norm(SO3F.eval(ori) - S.values) / norm(S.values)
+
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunHarmonic (1 → xyz)
+  bandwidth: 16
+  weight: 0.99
+ 
+ans =
+    0.1379
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_04.png" %}
+</center>
+<p>One big disadvantage of harmonic approximation is that the resulting function is not guarantied to be non negative, even if all given function values have been non negative.</p>
+{% highlight matlab %}
+min(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   -7.5512
+{% endhighlight %}
+<p>The possibility to guaranty non negativity is the central advantage of kernel based approximation.</p>
+<h2 id="11">Approximation by Radial Functions</h2>
+<p>The internal command for approximating orientation dependent data by a superposition of radial functions is <a href="SO3FunRBF.interpolate.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF.interpolate</code></a>. Generally we can use the <a href="rotation.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> command.</p>
+{% highlight matlab %}
+SO3F = interp(ori,S.values,'density');
+
+% the relative error
+norm(SO3F.eval(ori) - S.values) / norm(S.values)
+
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ans =
+    0.0125
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_05.png" %}
+</center>
+<p>The option <code class="language-plaintext highlighter-rouge">'density'</code> ensures that the resulting function is nonnegative and is normalized to \(1\).</p>
+{% highlight matlab %}
+minValue = min(SO3F)
+
+meanValue = mean(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+minValue =
+   3.3899e-05
+meanValue =
+    1.0000
+{% endhighlight %}
+<p>The key parameter when approximation by radial functions is the halfwidth of the kernel function. This can be set by the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code>. A large halfwidth results in a very smooth approximating function whereas a very small halfwidth may result in overfitting</p>
+{% highlight matlab %}
+psi = SO3DeLaValleePoussinKernel('halfwidth',2.5*degree);
+SO3F = interp(ori,S.values,'kernel',psi,'density');
+
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet.
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_06.png" %}
+</center>
+<p>A more detailed discussion about the correct choice of the halfwidth and other options can be found in the section <a href="RBFApproximationTheory.html">theory of RBF approximation</a>.</p>
+<p>If we omit the option <code class="language-plaintext highlighter-rouge">'density'</code> the resulting function may have negative values similar to the harmonic setting</p>
+{% highlight matlab %}
+SO3F = interp(ori,S.values);
+
+% the relative error
+norm(SO3F.eval(ori) - S.values) / norm(S.values)
+
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   6.1048e-04
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_07.png" %}
+</center>
+<h2 id="16">Approximation using the Bingham distribution</h2>
+<p>Approximation with the Bingham distribution currently works only with no symmetry. TODO! TODO: Dont work</p>
+{% highlight matlab %}
+% simulate nodes and values from an odf
+rng(0)
+cs = crystalSymmetry("1");
+odf = fibreODF(fibre.rand(cs));
+S3G = equispacedSO3Grid(cs);
+v = odf.eval(S3G);
+
+% plot the underlying odf
+figure(1)
+plot(odf)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_08.png" %}
+</center>
+<p>Now we try to approximate the Bingham distribution from the given orientations and there corresponding function values.</p>
+<p>This is computed by the <a href="rotation.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a>-command with the flag <code class="language-plaintext highlighter-rouge">'bingham'</code>. Internally MTEX uses the <a href="SO3FunBingham.interpolate.html"><code class="language-plaintext highlighter-rouge">SO3FunBingham.interpolate</code></a>-method here.</p>
+{% highlight matlab %}
+SO3F = interp(S3G,v,'bingham')
+% SO3F = SO3FunBingham.interpolate(S3G,v)
+
+figure(2)
+plot(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunBingham (1 → xyz)
+ 
+  kappa: 0 0.051 92 93
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_09.png" %}
+</center>
+<h2 id="18">Alternative Non-ODF example</h2>
+<p>Lets consider an academic example which do not describe an underlying odf. Hence we have given noisy evaluations of the function \[ f(\mat R) = \cos(\omega&reg;) \cdot \sin(3\cdot \varphi_1&reg;)+\frac12 \] in some random orientations, where \(\omega&reg;\) is the angle of the rotation \(R\) and \(\varphi_1&reg;\) is the \(varphi_1\)-Euler angle of \(R\).</p>
+{% highlight matlab %}
+f = SO3FunHandle(@(r) cos(r.angle).*sin(3*r.phi1) + 0.5);
+plot(f,'sigma')
+
+% random orientations and noisy evaluations
+rng(0)
+ori2 = orientation.rand(1e5);
+val2 = f.eval(ori2);
+val2 = val2 + randn(size(val2)) * 0.05 * std(val2);
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_10.png" %}
+</center>
+<p>Lets compare the harmonic approximation and the RBF-Kernel approximation with respect to this example.</p>
+<p>
+<b>Harmonic Approximation</b>
+</p>
+{% highlight matlab %}
+FH = interp(ori2, val2,'harmonic')
+plot(FH,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+FH = SO3FunHarmonic (1 → xyz)
+  bandwidth: 40
+  weight: 0.5
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_11.png" %}
+</center>
+<p>
+<b>RBF-Kernel Approximation</b>
+</p>
+{% highlight matlab %}
+FK = interp(ori2, val2)
+plot(FK,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+FK = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 119088 orientations, resolution: 5°
+  weight: 0.5
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunApproximationTheory_12.png" %}
+</center>
+</div>
+</body>
+</html>

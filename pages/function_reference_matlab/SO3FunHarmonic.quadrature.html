@@ -24,17 +24,30 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Compute the SO(3)-Fourier/Wigner coefficients of an given <a href="SO3Fun.SO3Fun.html">SO3Fun</a> or given evaluations on a specific quadrature grid.</p>
-<p>This method evaluates the given SO3Fun on an with respect to symmetries fundamental Region. Afterwards it uses a inverse trivariate nfft/fft and an adjoint coefficient transform which is based on a representation property of Wigner-D functions. Hence it do not use the NFSOFT (which includes a fast polynom transform) as in the older method <code class="language-plaintext highlighter-rouge">SO3FunHarmonic.quadratureNFSOFT</code>.</p>
+<p>Therefore we obtain the Fourier coefficients with numerical integration (quadrature), i.e. we choose a quadrature scheme of meaningful quadrature nodes \(R_m\) and quadrature weights \(\omega_m\)</p>
+<p>\[ \hat f_n^{k,l} = \int_{SO(3)} f&reg;\, \overline{D_n^{k,l}(R)} \mathrm{d}\my&reg; \approx \sum_{m=1}^M \omega_m \, f(R_m) \, \overline{D_n^{k,l}(R_m)}. \]</p>
+<p>Therefore this method evaluates the given SO3Fun on a with respect to symmetries fundamental Region. Afterwards it uses a inverse trivariate nfft/fft and an adjoint coefficient (Wigner) transform which is based on a representation property of Wigner-D functions.</p>
+<p>Hence it do not use the NFSOFT (which includes a fast polynom transform) as in the older method <code class="language-plaintext highlighter-rouge">SO3FunHarmonic.quadratureNFSOFT</code>.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
+SO3F = SO3FunHarmonic.quadrature(f)
+SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth)
+SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth,quadratureScheme)
+SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth,'SO3Grid',S3G,'weights',w)
 SO3F = SO3FunHarmonic.quadrature(nodes,values)
 SO3F = SO3FunHarmonic.quadrature(nodes,values,'bandwidth',48,'weights',w)
-SO3F = SO3FunHarmonic.quadrature(f)
-SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth,quadratureScheme)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>f</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a>, function_handle in <a href="orientation.orientation.html">orientation</a> (first dimension has to be the evaluations)</tt>
+         </td>
+      </tr>
       <tr>
          <td width="100px">
             <tt>nodes</tt>
@@ -49,14 +62,6 @@ SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth,quadratureScheme)
          </td>
          <td>
             <tt>double (first dimension has to be the evaluations)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>f</tt>
-         </td>
-         <td>
-            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a>, function handle in <a href="orientation.orientation.html">orientation</a> (first dimension has to be the evaluations)</tt>
          </td>
       </tr>
    </table>
@@ -90,7 +95,15 @@ SO3F = SO3FunHarmonic.quadrature(f,'bandwidth',bandwidth,quadratureScheme)
             <tt>weights</tt>
          </td>
          <td>
-            <tt/>
+            <tt>quadrature weights</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SO3Grid</tt>
+         </td>
+         <td>
+            <tt>quadrature nodes</tt>
          </td>
       </tr>
    </table>

@@ -1,0 +1,320 @@
+---
+title: RBF-Kernel Approximation from Discrete Data
+
+sidebar: documentation_sidebar
+permalink: RBFApproximationTheory.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>RBF-Kernel Approximation from Discrete Data</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_RBFApproximationTheory.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/RBFApproximationTheory.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>On this page we consider the problem of determining the Radial Basis Function (<code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>) of a smooth orientation dependent function \(f(\mathtt{ori})\) given a list of orientations \(\mathtt{ori}_m\) and a list of corresponding values \(v_m\). These values may be the volume of crystals with a specific orientation, as in the case of an ODF, or any other orientation dependent physical property.</p>
+<p>A more general documentation about approximation of discrete data in MTEX can be found in the section <a href="SO3FunApproximationTheory.html">Approximating Orientation Dependent Functions from Discrete Data</a>.</p>
+<p>In general we should favor RBF-kernel approximation, if the data coincide to an underlying density function (odf,mdf,...) or if the number of data points (given rotations and function values) and the noise ratio are not too large.</p>
+<p>In the following we take a look on the approximation problem from <a href="SO3FunApproximationTheory.html">general approximation theory</a>, where we compared the harmonic approximation with kernel approximation.</p>
+<p>Here we additionally assume that our function values are noisy.</p>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath, 'orientation', 'dubna.csv');
+[ori, S] = orientation.load(fname,'columnNames',{'phi1','Phi','phi2','values'});
+
+val = S.values + randn(size(S.values)) * 0.2 * std(S.values);
+
+plotSection(ori,val,'all','sigma')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_01.png" %}
+</center>
+<p>The basic strategy is to approximate the data by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, see <a href="RadialODFs.html">Radial Basis Functions on SO(3)</a>.</p>
+<p>Hence we determine rotations \(R_1,\dots,R_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
+<p>\[ f(x) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega(x,R_n)}{2}) \]</p>
+<p>approximates our data reasonable well. In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \(R_1,\dots,R_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
+<p>A basic strategy is to apply least squares approximation, where we compute the coefficients \(c_n\) by minimizing the functional</p>
+<p>\[ \sum_{m=1}^M|f(x_m)-v_m|^2 \]</p>
+<p>for the given data points \((x_m,v_m)\), \(m=1,\dots,M\). Here \(x_m\) denotes the given orientations and \(v_m\) the corresponding function values.</p>
+<p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(c=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,R_n)}{2})]_{m,n}\).</p>
+<p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
+<p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1.</p>
+<p>In MTEX the command <a href="rotation.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> computes by default computes an approximation by a superposition of radial functions.</p>
+{% highlight matlab %}
+SO3F = interp(ori,val,'density')
+plot(SO3F,'sigma')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 72018 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_02.png" %}
+</center>
+<p>The flag <code class="language-plaintext highlighter-rouge">'density'</code> tells MTEX to use the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which ensures that the resulting function is nonnegative and normalized to mean \(1\). This yields also a denoising effect.</p>
+{% highlight matlab %}
+minValue = min(SO3F)
+meanValue = mean(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+minValue =
+   1.1635e-06
+meanValue =
+    1.0000
+{% endhighlight %}
+<p>One has to keep in mind that we can not expect the error in the data nodes to be zero, because we compute a smooth function from the noisy input data.</p>
+{% highlight matlab %}
+norm(SO3F.eval(ori) - val) / norm(val)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.1639
+{% endhighlight %}
+<p>In contrast, if we do not tell MTEX, that we try to approximate a density function, the solver has less information and the result is not denoised.</p>
+{% highlight matlab %}
+SO3F = interp(ori,val)
+plot(SO3F,'sigma')
+mtexColorbar
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 119088 orientations, resolution: 5°
+  weight: 0.95
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_03.png" %}
+</center>
+<h2 id="9">Adjustment of the Kernel Function</h2>
+<p>The key parameter when approximating by radial basis functions is the halfwidth of the kernel function \(\Psi\). This can be set by the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code>. A large halfwidth results in a very smooth approximated function whereas a very small halfwidth - in relation to the grid of the input data - may result in overfitting.</p>
+{% highlight matlab %}
+SO3F = interp(ori,val,'halfwidth',2*degree,'density')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 2°
+  center: 1852941 orientations, resolution: 2°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_04.png" %}
+</center>
+<p>A a rule of thumb the halfwidth of the kernel function should be at least the resolution of the data points. Note that the option 'halfwidth' also adjusts the resolution of the center orientation grid of the rotational kernel functions of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, i.e. the resolution of the grid of \(R_1,\dots,R_N\) in the above formulas.</p>
+<p>We can preserve the resolution of this grid by adding the option 'resolution'. Therefore we obtain a smoothed function of <code class="language-plaintext highlighter-rouge">SO3F1</code>.</p>
+{% highlight matlab %}
+SO3F = interp(ori,val,'halfwidth',10*degree,'resolution',5*degree,'density')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 70038 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_05.png" %}
+</center>
+<p>We can also input centers \(R_1,\dots,R_N\) for the rotational kernel functions by the option 'SO3Grid'.</p>
+{% highlight matlab %}
+S3G = equispacedSO3Grid(crystalSymmetry,'resolution',5*degree)
+SO3F = interp(ori,val,'SO3Grid',S3G,'density')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+S3G = SO3Grid (1 → xyz)
+  grid: 119088 orientations, resolution: 5°
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 72018 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_06.png" %}
+</center>
+<p>Lets study the effect of adjusting the kernel halfwidth to the error.</p>
+{% highlight matlab %}
+hw = [20,15,12.5,10,7.5,5,2.5];
+err = zeros(size(hw));
+for k = 1:numel(hw)
+    SO3Fhw = interp(ori,val,'halfwidth',hw(k)*degree,'density');
+    err(k) = norm(SO3Fhw.eval(ori) - S.values) / norm(S.values);
+end
+
+close all
+plot(hw,err,'o--')
+set(gca,'xdir','reverse')
+xlabel('halfwidth [deg]')
+ylabel('relative error')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet.
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_07.png" %}
+</center>
+<p>We may find the best fit with a halfwidth of 7.5&deg;. If the system is underdetermined using a too small halfwidth, we may not be able to fit kernel weights without additional assumptions about the smoothness of the data.</p>
+{% highlight matlab %}
+SO3F = interp(ori,val,'halfwidth',7.5*degree,'density')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 7.5°
+  center: 24649 orientations, resolution: 7.5°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_08.png" %}
+</center>
+<p>Note that the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code> tells MTEX to use the <code class="language-plaintext highlighter-rouge">@SO3DeLaValleePoussinKernel</code> of this specific halfwidth. But we can also choose a different <a href="SO3Kernels.html">rotational kernel function</a> by the option <code class="language-plaintext highlighter-rouge">'kernel'</code>.</p>
+{% highlight matlab %}
+psi = SO3AbelPoissonKernel('halfwidth',5*degree)
+SO3F = interp(ori,val,'kernel',psi,'density')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+psi = SO3AbelPoissonKernel
+  bandwidth: 48
+  halfwidth: 5°
+ 
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: Abel Poisson, halfwidth 5°
+  center: 3989 orientations, resolution: 5°
+  weight: 1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_09.png" %}
+</center>
+<h2 id="15">Exact Interpolation</h2>
+<p>Assume, that our function values are not noisy. Then we may want to do exact interpolation, i.e. we want the error to be almost 0.</p>
+<p>Up to now we used a special rotational grid for the centers of rotational kernel function the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. Now we can add the flag <code class="language-plaintext highlighter-rouge">'exact'</code> to use the input nodes as centers for the rotational kernel functions. Therefore the kernel matrix \(K\) becomes symmetric, positive definite and the above linear system \(K\cdot c=v\) has a solution, i.e the error in lsqr may becomes 0. The disadvantage is that the kernel matrix is no longer sparse. Hence the computational costs may explode.</p>
+{% highlight matlab %}
+tic
+SO3F = SO3FunRBF.interpolate(ori, S.values,'exact','halfwidth',7.5*degree);
+toc
+plot(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 31.250540 seconds.
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RBFApproximationTheory_10.png" %}
+</center>
+<p>Note that future computations with this <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> are also very time consuming, since most methods are faster if the center orientations build a specific grid, which is not the case here.</p>
+<p>The interpolation is done by <code class="language-plaintext highlighter-rouge">lsqr</code>. Hence the error is dependent from the termination conditions and not in machine precision.</p>
+{% highlight matlab %}
+norm(SO3F.eval(ori) - S.values) / norm(S.values)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   9.0528e-04
+{% endhighlight %}
+<p>Also, interpolation might not guarantee non-negativity of the function</p>
+{% highlight matlab %}
+minValue = min(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+minValue =
+   -7.6067
+{% endhighlight %}
+<h2 id="18">LSQR-Parameters</h2>
+<p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
+<p>Thus we are able to control the precision of the result and computational time of the least squares methods in the approximation process.</p>
+{% highlight matlab %}
+% default Parameters
+tic
+[f1,iter1] = SO3FunRBF.interpolate(ori, val);
+toc
+fprintf(['Number of iterations = ',num2str(iter1),'\n', ...
+         'Value of energy functional = ',num2str(norm(f1.eval(ori)-val)),'\n\n'])
+
+% new termination conditions
+tic
+[f2,iter2] = SO3FunRBF.interpolate(ori, val,'tol',1e-15,'maxit',100);
+toc
+fprintf(['Number of iterations = ',num2str(iter2),'\n', ...
+         'Value of energy functional = ',num2str(norm(f2.eval(ori)-val)+5e-7*norm(f2,2)),'\n'])
+{% endhighlight %}
+
+{% highlight plaintext %}
+Elapsed time is 0.479665 seconds.
+Number of iterations = 8
+Value of energy functional = 0.43171
+
+Elapsed time is 0.722597 seconds.
+Number of iterations = 41
+Value of energy functional = 0.0015935
+{% endhighlight %}
+</div>
+</body>
+</html>
