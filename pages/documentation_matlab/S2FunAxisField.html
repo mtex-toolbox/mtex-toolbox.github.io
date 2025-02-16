@@ -22,11 +22,11 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>S2AxisFieldharmonic handles axis fields on the sphere. Axis can be understood as three-dimensional vectors without direction or length.</p>
-<!--/introduction-->
-<p>S2AxisFieldHarmonic handles functions of the form</p>
+<p>The class @S2AxisFieldharmonic handles axis fields on the sphere, i.e. spherical functions</p>
 <p>\[ f\colon {\bf S}^2\to{\bf R}^3_{/&lt;\pm \mathrm{Id}&gt;}. \]</p>
-<h2 id="2">Defining a S2AxisFieldHarmonic</h2>
+<p>that associates to each point \(\xi\) on the sphere a three dimensional vector \(\vec v = f(\xi)\) where we do not distinguish between \(-\vec v\) and \(\vec v\). A typical example would be the polarization direction.</p>
+<!--/introduction-->
+<h2 id="1">Defining a S2AxisFieldHarmonic</h2>
 <p>
 <b>Definition via function values</b>
 </p>
@@ -42,13 +42,18 @@ y = vector3d(sin(5*nodes.x), 1, nodes.y, 'antipodal');
 <p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sAF1</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
 </p>
 {% highlight matlab %}
-sAF1 = S2AxisFieldHarmonic.approximation(nodes, y)
+sAF1 = S2AxisFieldHarmonic.approximate(nodes, y)
+
+plot(sAF1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 sAF1 = S2AxisFieldHarmonic
  bandwidth: 224
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunAxisField_01.png" %}
+</center>
 <p>
 <b>Definition via function handle</b>
 </p>
@@ -60,29 +65,14 @@ f = @(v) vector3d(v.x, v.y, 0*v.x, 'antipodal');
 </p>
 {% highlight matlab %}
 sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
+
+clf;
+quiver3(sAF2);
 {% endhighlight %}
 
 {% highlight plaintext %}
 sAF2 = S2AxisFieldHarmonic
  bandwidth: 128
-{% endhighlight %}
-<h2 id="8">Visualization</h2>
-<p>One can use the default <code class="language-plaintext highlighter-rouge">plot</code>-command</p>
-{% highlight matlab %}
-plot(sAF1);
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2FunAxisField_01.png" %}
-</center>
-<div>
-<ul>
-<li>same as quiver(sAF1)</li>
-</ul>
-</div>
-<p>or use the 3D plot of a sphere with the axis on itself</p>
-{% highlight matlab %}
-clf;
-quiver3(sAF2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunAxisField_02.png" %}

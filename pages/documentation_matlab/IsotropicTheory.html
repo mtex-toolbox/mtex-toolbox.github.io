@@ -126,7 +126,7 @@ nu =
     0.2306
 {% endhighlight %}
 <h2 id="4">From the elastic moduli to the elastic tensors</h2>
-<p>Furthermore, any two of them entirely describe the linear elastic behaviour of the material. In particular, we may recover the isotropic stiffness tensor from the bulk and shear moduli alone:</p>
+<p>Furthermore, any two of them entirely describe the linear elastic behavior of the material. In particular, we may recover the isotropic stiffness tensor from the bulk and shear moduli alone:</p>
 {% highlight matlab %}
 % the matrix entries
 C11 = K+(4/3)*G ; C12=C11-2*G; C44=(C11-C12)/2;
@@ -181,13 +181,13 @@ ans = stiffnessTensor (An0 Albite 2016)
       0      0      0      0      0  41.43
 {% endhighlight %}
 <h2 id="6">Formulas between the elastic moduli</h2>
-<p>As a consequence, Youngs modulus and the Poisson ratio can be computed directly from the bulk and shear modulus (and vice versa)</p>
+<p>As a consequence, Young's modulus and the Poisson ratio can be computed directly from the bulk and shear modulus (and vice versa)</p>
 {% highlight matlab %}
 % formulae for the Poisson ratio
 (E/G-2)/2
 (3*K-E)/(6*K)
 
-% formulae for the Youngs modulus
+% formulae for the Young's modulus
 2*G*(1+nu)
 3*K*(1-2*nu)
 {% endhighlight %}
@@ -206,7 +206,7 @@ ans =
 <p>The second way to represent the elastic behavior of an isotropic medium is by means of the Lame constants</p>
 {% highlight matlab %}
 lambda = nu/(1-2*nu) /(1+nu) * E;
-mu =G;
+mu = G;
 {% endhighlight %}
 <p>In terms of the Lame constants the stiffness tensor is given by</p>
 {% highlight matlab %}
@@ -269,9 +269,7 @@ Go = linspace(GMin,GMax,300);
 {% endhighlight %}
 <p>Next the initial stiffness tensor is updated such that the residual stiffness tensor <code class="language-plaintext highlighter-rouge">R</code> remains either positive or negative definite.</p>
 {% highlight matlab %}
-tic
 [khs, ghs, def] = HashinShtrikmanModulus(C,K0Mesh,G0Mesh);
-toc
 
 subplot(1,2,1)
 imagesc(Go,Ko,khs)
@@ -303,8 +301,7 @@ axis equal tight
 
 {% highlight plaintext %}
 Warning: Tensor is not positive definite 
-Warning: Tensor is not positive definite 
-Elapsed time is 2.205320 seconds.
+Warning: Tensor is not positive definite
 {% endhighlight %}
 <center>
 {% include inline_image.html file="IsotropicTheory_01.png" %}

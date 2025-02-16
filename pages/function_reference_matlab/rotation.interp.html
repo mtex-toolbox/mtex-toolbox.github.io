@@ -23,11 +23,15 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>compute an ODF by approximating orientations at some function values (interpolating the orientations with weights) Maybe we compute a vector field.</p>
+<p>compute an ODF by approximating orientations at some function values (interpolating the orientations with weights) It is also possible to interpolate a vector field.</p>
+<p>For more information on the interpolation method and possible flags, see in the documention: <a href="SO3FunApproximationTheory.html">Approximation of discrete data</a>.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = interp(ori,values)
+SO3F = interp(ori,values,'halfwidth',1*degree,'resolution',7*degree,'tol',1e-3,'maxit',100,'density')
 SO3F = interp(ori,values,'harmonic')
+SO3F = interp(ori,values,'harmonic','bandwidth',48,'weights',W,'regularization',1e-4,'SobolevIndex',2,'tol',1e-6,'maxit',200)
+SO3F = interp(ori,values,'bingham')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -71,14 +75,14 @@ SO3F = interp(ori,values,'harmonic')
             <tt>('harmonic'|'bingham'|'RBF')</tt>
          </td>
          <td>
-            <tt>approximation method (default: 'RBF')</tt>
+            <tt>interpolation method (default: 'RBF')</tt>
          </td>
       </tr>
    </table>
 </p>
 <h2 id="7">See also</h2>
 <p>
-<a href="SO3FunRBF.approximate.html">SO3FunRBF.approximate</a> <a href="SO3FunHarmonic.approximate.html">SO3FunHarmonic.approximate</a> <a href="SO3FunBingham.approximate.html">SO3FunBingham.approximate</a> <a href="SO3VectorFieldHarmonic.approximate.html">SO3VectorFieldHarmonic.approximate</a>
+<a href="SO3FunRBF.interpolate.html">SO3FunRBF.interpolate</a> <a href="SO3FunHarmonic.interpolate.html">SO3FunHarmonic.interpolate</a> <a href="SO3FunBingham.interpolate.html">SO3FunBingham.interpolate</a> <a href="SO3VectorFieldHarmonic.interpolate.html">SO3VectorFieldHarmonic.interpolate</a>
 </p>
 </div>
 </body>

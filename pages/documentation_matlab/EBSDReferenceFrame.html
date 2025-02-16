@@ -70,15 +70,15 @@ ebsd = EBSD
 </center>
 <p>The plot does not yet fit the alignment of the map in the EDAX software as it plots the x-axis be default to east and the z-axis into the plane. This is only a plotting convention and can be set in MTEX by</p>
 {% highlight matlab %}
-plotx2east
-plotzIntoPlane
+ebsd.how2plot.east = xvector;
+ebsd.how2plot.outOfScreen = -zvector;
 
 plot(ebsd('olivine'),ebsd('olivine').orientations,'coordinates','on')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_02.png" %}
 </center>
-<p>Other plotting conventions are <code class="language-plaintext highlighter-rouge">plotx2north</code>, <code class="language-plaintext highlighter-rouge">plotx2west</code>, <code class="language-plaintext highlighter-rouge">plotx2south</code> and <code class="language-plaintext highlighter-rouge">plotzOutOfPlane</code>. Note that these options only alter the orientation of the EBSD map and the pole figures on the screen but does not change any data.</p>
+<p>Note that these options only alter the orientation of the EBSD map and the pole figures on the screen but does not change any data.</p>
 <h2 id="5">Verify the reference system</h2>
 <p>One way of verifying the reference systems is to visualize crystal shapes on top of the orientation map. To do this we proceed as follows</p>
 {% highlight matlab %}
@@ -177,7 +177,7 @@ hold off
 {% include inline_image.html file="EBSDReferenceFrame_06.png" %}
 </center>
 <h2 id="10">Changing both reference system simultaneously</h2>
-<p>Sometimes it is necessary to relate the EBSD data to a different external reference frame, or to change the external reference frame from one to the other, e.g. if one wants to concatenate several ebsd data sets where the mounting was not done in perfect coincidence. In these cases the data has to be rotated or shifted by the commands <a href="EBSD.rotate.html">rotate</a> and <a href="EBSD.shift.html">shift</a>. The following commands rotate both reference frames of the entire data set by 5 degree about the z-axis.</p>
+<p>Sometimes it is necessary to relate the EBSD data to a different external reference frame, or to change the external reference frame from one to the other, e.g. if one wants to concatenate several ebsd data sets where the mounting was not done in perfect coincidence. In these cases the data has to be rotated or shifted by the commands <a href="EBSD.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> and <a href="EBSD.shift.html"><code class="language-plaintext highlighter-rouge">shift</code></a>. The following commands rotate both reference frames of the entire data set by 5 degree about the z-axis.</p>
 {% highlight matlab %}
 % define a rotation
 rot = rotation.byAxisAngle(zvector,5*degree);

@@ -108,9 +108,6 @@ e2 = embedding
  dim: 9
  size: 100000 x 1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="OrientationEmbeddings_02.png" %}
-</center>
 <p>This creates variables <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code> of type <code class="language-plaintext highlighter-rouge"><a href="embedding.embedding.html">embedding</a></code> that behaves like lists of vectors, i.e., they can be <a href="embedding.sum.html">summed</a>, <a href="embedding.rotate.html">rotated</a>, <a href="embedding.mtimes.html">scaled</a> and one can compute their <a href="embedding.dot.html">inner product</a>. Lets have a look at the Euclidean distances \(\lVert\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_2}) \rVert_2\) between the embeddings <code class="language-plaintext highlighter-rouge">e1</code> and <code class="language-plaintext highlighter-rouge">e2</code>
 </p>
 {% highlight matlab %}
@@ -123,7 +120,7 @@ xlabel('\(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\)','Interpreter','latex')
 ylabel('\(||\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_2}) ||_2\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_03.png" %}
+{% include inline_image.html file="OrientationEmbeddings_02.png" %}
 </center>
 <p>We observe that the distance in the embedding differs slightly from the misorientation angle. However, especially for small misorientation angles the approximation is very good.</p>
 <p>Lets go back to our second example of averaging the orientations \((44^{\circ},0^{\circ},0^{\circ})\) and \((46^{\circ},0^{\circ},0^{\circ})\). If we compute the embedding of both orientations, average the resulting tensors and <a href="embedding.orientation.html">project the mean tensor back to an orientation</a> we end up with the correct result \((45^{\circ},0^{\circ},0^{\circ})\).</p>
@@ -153,7 +150,7 @@ norm(embedding(orientation.rand(5,cs))).'
 
 {% highlight plaintext %}
 ans =
-    0.5745    0.5745    0.5745    0.5745    0.5745
+    0.3873    0.3873    0.3873    0.3873    0.3873
 {% endhighlight %}
 <p>In other words the embeddings are located on the surface of a ball with a radius \(1\). When computing the mean from a list of embeddings the resulting tensor has in general a smaller norm, i.e., is inside this ball. Similarly as in spherical statistics the norm of the mean of the embeddings can be interpreted as a measure of the dispersion of the orientations. If the norm is close to 1 the orientations are tightly concentrated around a preferred orientation, whereas if the norm is close to zero some of the orientations are at maximum distance to each other.</p>
 <p>Lets compare the norm</p>
@@ -182,7 +179,7 @@ xlabel('standard deviation \(\sigma\)','Interpreter','latex')
 ylabel('\(\sqrt{1-n}\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_04.png" %}
+{% include inline_image.html file="OrientationEmbeddings_03.png" %}
 </center>
 <p>It appears as if the norm of the mean embedding is a function of the standard deviation. However, the reason for this false relationship is that we have generated the orientations out of a single family of random variables - <a href="RadialODFs.html#2">unimodal de la Vallee Poussin distributed density functions</a>. A broader family of density function are the <a href="BinghamODFs.html">Bingham distributions</a>. Lets repeat the experiment for this family.</p>
 {% highlight matlab %}
@@ -205,7 +202,7 @@ scatter(sigma,sqrt(1-n),'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_05.png" %}
+{% include inline_image.html file="OrientationEmbeddings_04.png" %}
 </center>
 <p>We observe that there is no one-to-one relationship between the discrete standard deviation.</p>
 <h2 id="15">Operations</h2>
@@ -236,7 +233,7 @@ xlabel('\(\omega(\mathtt{ori}_1,\mathtt{ori}_2)\)','Interpreter','latex')
 ylabel('\(||\mathcal E(\mathtt{ori_1}) - \mathcal E(\mathtt{ori_2}) ||_2\)','Interpreter','latex')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="OrientationEmbeddings_06.png" %}
+{% include inline_image.html file="OrientationEmbeddings_05.png" %}
 </center>
 <h2 id="17">Reference</h2>
 <p>The theory behind these embeddings is explained in the paper</p>

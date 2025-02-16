@@ -1,5 +1,5 @@
 ---
-title: Axes Alignment
+title: On Screen Coordinate System Alignment
 
 sidebar: documentation_sidebar
 permalink: AxesAlignment.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Axes Alignment</title>
+<title>On Screen Coordinate System Alignment</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_AxesAlignment.m">
 </head>
@@ -23,38 +23,41 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In MTEX each plottable variable has a property <code class="language-plaintext highlighter-rouge">how2plot</code> which tells MTEX how to align the corresponding coordinate system on screen.</p>
+<p>In this section we discuss how MTEX aligns coordinate systems on the screen and how to change it. In MTEX it is possible to mix different alignment. At the same time MTEX tries to be as consistent as possible, e.g. by aligning EBSD maps and pole figures with respect to the same reference directions.</p>
+<p>Different alignments are typically used when</p>
+<div>
+<ul>
+<li>displaying directions in crystal vs. specimen reference frame</li>
+<li>displaying orthogonal 2d EBSD sections</li>
+</ul>
+</div>
+<p>In MTEX each plottable variable has a property <code class="language-plaintext highlighter-rouge">how2plot</code>
+</p>
 {% highlight matlab %}
-v1 = vector3d(1,1,1)
-v2 = vector3d(-1,1,1)
+v1 = vector3d(1,1,1);
+v2 = vector3d(-1,1,1);
 v1.how2plot
-
-plot(v1,'upper','label','v_1')
-annotate([xvector,yvector,zvector],'labeled','backgroundcolor','w')
 {% endhighlight %}
 
 {% highlight plaintext %}
-v1 = vector3d
-  x y z
-  1 1 1
- 
-v2 = vector3d
-   x  y  z
-  -1  1  1
- 
 ans = plottingConvention
  
   outOfScreen: (0,0,1)
   north      : (0,1,0)
   east       : (1,0,0)
 {% endhighlight %}
+<p>The property <code class="language-plaintext highlighter-rouge">how2plot</code> is a handle class of type @plottingConvention and tells MTEX how to align the corresponding coordinate system on screen.</p>
+{% highlight matlab %}
+plot(v1,'label','v_1','figSize','small')
+annotate([xvector,yvector,zvector],'labeled','backgroundcolor','w')
+{% endhighlight %}
 <center>
 {% include inline_image.html file="AxesAlignment_01.png" %}
 </center>
-<p>The property <code class="language-plaintext highlighter-rouge">how2plot</code> is a handle class of type @plottingConvention. We can change it by setting <code class="language-plaintext highlighter-rouge">north</code>, <code class="language-plaintext highlighter-rouge">east</code> or <code class="language-plaintext highlighter-rouge">outOfScreen</code> to other directions.</p>
+<p>We can change it by setting <code class="language-plaintext highlighter-rouge">north</code>, <code class="language-plaintext highlighter-rouge">east</code> or <code class="language-plaintext highlighter-rouge">outOfScreen</code> to other directions.</p>
 {% highlight matlab %}
 v1.how2plot.outOfScreen = yvector
-plot(v1,'upper','label','v_1')
+plot(v1,'label','v_1','figSize','small')
 annotate([xvector,yvector,zvector],'labeled','backgroundcolor','w')
 {% endhighlight %}
 
@@ -66,13 +69,12 @@ v1 = vector3d
 <center>
 {% include inline_image.html file="AxesAlignment_02.png" %}
 </center>
-<p>Note that because @plottingConvention is a handle class, i.e. changing <code class="language-plaintext highlighter-rouge">v1.how2plot</code> changes also <code class="language-plaintext highlighter-rouge">v2.how2plot</code>
+<p>Note that @plottingConvention is a handle class, i.e. changing <code class="language-plaintext highlighter-rouge">v1.how2plot</code> changes also <code class="language-plaintext highlighter-rouge">v2.how2plot</code>
 </p>
 {% highlight matlab %}
 v2.how2plot
 
-nextAxis
-plot(v2,'upper','label','v_2')
+plot(v2,'label','v_2','figSize','small')
 annotate([xvector,yvector,zvector],'labeled','backgroundcolor','w')
 {% endhighlight %}
 
@@ -166,13 +168,6 @@ plottingConvention.default
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = plottingConvention
- 
-  outOfScreen: (0,0,1)
-  north      : (0,1,0)
-  east       : (1,0,0)
- 
- 
 ans = plottingConvention
  
   outOfScreen: (0,0,1)
