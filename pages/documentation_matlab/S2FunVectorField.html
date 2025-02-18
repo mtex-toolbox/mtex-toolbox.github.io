@@ -10,8 +10,8 @@ toc: false
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
     -->
 <title>S2VectorField</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -41,12 +41,11 @@ y = vector3d.byPolar(sin(3*nodes.theta), nodes.rho+pi/2);
 <p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sVF1</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code>
 </p>
 {% highlight matlab %}
-sVF1 = S2VectorFieldHarmonic.approximate(nodes, y)
+sVF1 = S2VectorFieldHarmonic.interpolate(nodes, y)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sVF1 = S2VectorFieldHarmonic
- bandwidth: 128
+
 {% endhighlight %}
 <p>
 <b>Definition via function handle</b>
@@ -58,12 +57,12 @@ f = @(v) vector3d(v.x, v.y, 0*v.x);
 <p>Now we can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sVF2</code> of type <code class="language-plaintext highlighter-rouge">S2VectorFieldHarmonic</code>
 </p>
 {% highlight matlab %}
-sVF2 = S2VectorFieldHarmonic.quadrature(@(v) f(v))
+sVF2 = S2VectorFieldHarmonic(@(v) f(v))
+% sVF2 = S2VectorFieldHarmonic.quadrature(@(v) f(v))
 {% endhighlight %}
 
 {% highlight plaintext %}
-sVF2 = S2VectorFieldHarmonic
- bandwidth: 128
+
 {% endhighlight %}
 <p>
 <b>Definition via <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a></b>
@@ -78,11 +77,7 @@ sVF4 = S2VectorFieldHarmonic(sF)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sVF3 = S2VectorFieldHarmonic
- bandwidth: 3
- 
-sVF4 = S2VectorFieldHarmonic
- bandwidth: 3
+
 {% endhighlight %}
 <h2 id="8">Operations</h2>
 <p>
@@ -99,6 +94,10 @@ sVF1-sVF2; sVF2-vector3d(sqrt(2)/2, sqrt(2)/2, 0);
 {% highlight matlab %}
 2.*sVF1; sVF1./4;
 S2Fun.smiley .* sVF1;
+{% endhighlight %}
+
+{% highlight plaintext %}
+
 {% endhighlight %}
 <p>dot product with a vector or another vector field</p>
 {% highlight matlab %}

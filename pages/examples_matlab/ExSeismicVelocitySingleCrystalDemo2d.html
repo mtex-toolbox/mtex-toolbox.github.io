@@ -1,19 +1,33 @@
 ---
 title: Seismic velocities and anisotropy - single crystal plots
-last_updated: 25-Mar-2024
+
 sidebar: examples_sidebar
 permalink: ExSeismicVelocitySingleCrystalDemo2d.html
 folder: examples
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      --><title>Seismic velocities and anisotropy - single crystal plots</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-03-25"><meta name="DC.source" content="script_ExSeismicVelocitySingleCrystalDemo2d.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExSeismics/ExSeismicVelocitySingleCrystalDemo2d.m">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Seismic velocities and anisotropy - single crystal plots</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ExSeismicVelocitySingleCrystalDemo2d.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExSeismics/ExSeismicVelocitySingleCrystalDemo2d.m">
     edit page</a>
-    author: </font><div><!--introduction--><p>Plot 2D velocity surfaces - phase, slowness &amp; wavefront For given plane normal direction, for example xvector, yvector or zvector Stishovite (SiO2) at high pressure</p><p>David Mainprice 1/05/2018</p><!--/introduction--><h2 id="1">The Elastic Stiffness Tensor of Stishovite</h2><pre>Reference: Elastic constants Stishovite, Weidner et al 1982 JGR
+    author: </font>
+<div>
+<!--introduction-->
+<p>Plot 2D velocity surfaces - phase, slowness &amp; wavefront For given plane normal direction, for example xvector, yvector or zvector Stishovite (SiO2) at high pressure</p>
+<p>David Mainprice 1/05/2018</p>
+<!--/introduction-->
+<h2 id="1">The Elastic Stiffness Tensor of Stishovite</h2>
+<pre>Reference: Elastic constants Stishovite, Weidner et al 1982 JGR
 Reference: Crystal Structure Sinclair and Ringwood 78 Nature P422
 d=4.2901</pre>
 {% highlight matlab %}
@@ -106,7 +120,8 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicVelocitySingleCrystalDemo2d_01.png" %}
-</center><h2 id="5">2: Slowness surface (s/km)</h2>
+</center>
+<h2 id="5">2: Slowness surface (s/km)</h2>
 {% highlight matlab %}
 figure(2)
 
@@ -141,7 +156,10 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicVelocitySingleCrystalDemo2d_02.png" %}
-</center><h2 id="6">Select the two S-waves (Vs1 and Vs2 where Vs1&gt;Vs2 in velocity)</h2><p>by the orientation of the polarization vectors ps1 and ps2 with respect to the specimen Z direction. So that sv (v=vertical) is S-wave with polarization closest to Z sh (h=horizontal) has the polarization closest to the plane normal to Z Both polarizations pairs (sv and sh) and (ps1 and ps2) are orthogonal</p><p>which values to switch this defines a function which is either one or zero</p>
+</center>
+<h2 id="6">Select the two S-waves (Vs1 and Vs2 where Vs1&gt;Vs2 in velocity)</h2>
+<p>by the orientation of the polarization vectors ps1 and ps2 with respect to the specimen Z direction. So that sv (v=vertical) is S-wave with polarization closest to Z sh (h=horizontal) has the polarization closest to the plane normal to Z Both polarizations pairs (sv and sh) and (ps1 and ps2) are orthogonal</p>
+<p>which values to switch this defines a function which is either one or zero</p>
 {% highlight matlab %}
 id = angle(ps1,vector3d.Z) <= 89.9*degree;
 vsv = id .* vs1 + (1-id) .* vs2;
@@ -182,7 +200,8 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicVelocitySingleCrystalDemo2d_03.png" %}
-</center><h2 id="8">2: Phase velocity surface (km/s) with svs &amp; vsh</h2>
+</center>
+<h2 id="8">2: Phase velocity surface (km/s) with svs &amp; vsh</h2>
 {% highlight matlab %}
 figure(2)
 % phase velocities
@@ -215,7 +234,8 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicVelocitySingleCrystalDemo2d_04.png" %}
-</center><h2 id="9">3: plot slowness in plane normal Z</h2>
+</center>
+<h2 id="9">3: plot slowness in plane normal Z</h2>
 {% highlight matlab %}
 figure(3)
 plotSection(1./vp,planeNormal,optSec{:})
@@ -245,7 +265,8 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicVelocitySingleCrystalDemo2d_05.png" %}
-</center><h2 id="10">Compute WaveFront as spherical functions: EnergyVectors Evp, Evs1 &amp; Evs2</h2>
+</center>
+<h2 id="10">Compute WaveFront as spherical functions: EnergyVectors Evp, Evs1 &amp; Evs2</h2>
 {% highlight matlab %}
 Evp = energyVector(C,[],vp,pp);
 Evs1 = energyVector(C,[],vs1,ps1);
@@ -286,4 +307,7 @@ drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicVelocitySingleCrystalDemo2d_06.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

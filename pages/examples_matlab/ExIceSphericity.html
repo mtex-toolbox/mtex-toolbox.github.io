@@ -1,20 +1,36 @@
 ---
 title: Grain Boundary Statistics in Deformed Ice
-last_updated: 25-Mar-2024
+
 sidebar: examples_sidebar
 permalink: ExIceSphericity.html
 folder: examples
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      --><title>Grain Boundary Statistics in Deformed Ice</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-03-25"><meta name="DC.source" content="script_ExIceSphericity.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExGrains/ExIceSphericity.m">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Grain Boundary Statistics in Deformed Ice</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ExIceSphericity.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExGrains/ExIceSphericity.m">
     edit page</a>
     author: Sheng Fan, Department of Geology, University of Otago, Dunedin, New Zealand
-</font><div><!--introduction--><!--/introduction--><h2 id="1">The sphericity as measure for grain boundary irregularity</h2><p>Deformed polycrystalline materials such as ice often contain large grains interlocking with smaller grains, with many irregular grain boundaries. Boundary irregularity is hard to judge by visual inspection and it is better to use quantitative measures of boundary irregularity to infer processes across different deformation conditions. Here, we quantify the irregularity of each grain&#8217;s boundary by introducing a sphericity parameter \(\Psi\) which is calculated in 2-D from grain area <code class="language-plaintext highlighter-rouge">A</code>, grain boundary perimeter <code class="language-plaintext highlighter-rouge">P</code>, and area equivalent grain radius <code class="language-plaintext highlighter-rouge">R</code> by the formula</p><p>\[\Psi = \frac{A}{P \cdot R}\]</p><p>The grain sphericity \(\Psi\) is a useful indicator for grain boundary irregularity because it measures how closely a grain&#8217;s boundary resembles the circumference of a perfect circle. It decreases from \(\Psi = 0.5\), where the grain has a perfect circular shape, to \(\Psi = 0\) where the grain boundary is infinitely irregular. The statistics of grain boundary sphericity can be used to segregate recrystallised grains from remnant original grains (please refer to the paper for more details).</p><h2 id="3">Data</h2><p>The EBSD data set used in this demonstration (PIL185.ctf) is available from <a href="https://doi.org/10.6084/m9.figshare.13456550">https://doi.org/10.6084/m9.figshare.13456550</a>. The EBSD data were collected with a step size of 5 &micro;m and representeds an ice sample deformed at -20&deg;C to 12 percent axial strain. Let's import the data and reconstruct some grains.</p>
+</font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">The sphericity as measure for grain boundary irregularity</h2>
+<p>Deformed polycrystalline materials such as ice often contain large grains interlocking with smaller grains, with many irregular grain boundaries. Boundary irregularity is hard to judge by visual inspection and it is better to use quantitative measures of boundary irregularity to infer processes across different deformation conditions. Here, we quantify the irregularity of each grain&rsquo;s boundary by introducing a sphericity parameter \(\Psi\) which is calculated in 2-D from grain area <code class="language-plaintext highlighter-rouge">A</code>, grain boundary perimeter <code class="language-plaintext highlighter-rouge">P</code>, and area equivalent grain radius <code class="language-plaintext highlighter-rouge">R</code> by the formula</p>
+<p>\[\Psi = \frac{A}{P \cdot R}\]</p>
+<p>The grain sphericity \(\Psi\) is a useful indicator for grain boundary irregularity because it measures how closely a grain&rsquo;s boundary resembles the circumference of a perfect circle. It decreases from \(\Psi = 0.5\), where the grain has a perfect circular shape, to \(\Psi = 0\) where the grain boundary is infinitely irregular. The statistics of grain boundary sphericity can be used to segregate recrystallised grains from remnant original grains (please refer to the paper for more details).</p>
+<h2 id="3">Data</h2>
+<p>The EBSD data set used in this demonstration (PIL185.ctf) is available from <a href="https://doi.org/10.6084/m9.figshare.13456550">https://doi.org/10.6084/m9.figshare.13456550</a>. The EBSD data were collected with a step size of 5 &micro;m and representeds an ice sample deformed at -20&deg;C to 12 percent axial strain. Let's import the data and reconstruct some grains.</p>
 {% highlight matlab %}
 % plotting convention
 plotx2east
@@ -51,7 +67,10 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_01.png" %}
-</center><h2 id="4">Computation of the Sphericity</h2><p>Next, let's calculate and plot the sphericity parameter of each ice grain by making use of the functions <code class="language-plaintext highlighter-rouge"><a href="grain2d.area.html">grains.area</a></code>, <code class="language-plaintext highlighter-rouge"><a href="grain2d.perimeter.html">grains.perimeter</a></code> and <code class="language-plaintext highlighter-rouge"><a href="grain2d.equivalentRadius.html">grains.equivalentRadius</a></code></p>
+</center>
+<h2 id="4">Computation of the Sphericity</h2>
+<p>Next, let's calculate and plot the sphericity parameter of each ice grain by making use of the functions <code class="language-plaintext highlighter-rouge"><a href="grain2d.area.html">grains.area</a></code>, <code class="language-plaintext highlighter-rouge"><a href="grain2d.perimeter.html">grains.perimeter</a></code> and <code class="language-plaintext highlighter-rouge"><a href="grain2d.equivalentRadius.html">grains.equivalentRadius</a></code>
+</p>
 {% highlight matlab %}
 % directly use the formula from the first paragraph
 Psi = grains.area ./ grains.perimeter('withInclusion') ./ grains.equivalentRadius;
@@ -65,7 +84,9 @@ clear Psi
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_02.png" %}
-</center><h2 id="5">Influence of EBSD step size on sphericity parameter</h2><p>Next we investigate how step size influences grain boundary irregularity measurements. To do this, we can artificially increase the step size of the EBSD data to from 10 up to 100 &#956;m. Then, we choose one representative grain (one with a large number of pixels) and see how the sphericity parameter changes as the EBSD step size increases.</p>
+</center>
+<h2 id="5">Influence of EBSD step size on sphericity parameter</h2>
+<p>Next we investigate how step size influences grain boundary irregularity measurements. To do this, we can artificially increase the step size of the EBSD data to from 10 up to 100 μm. Then, we choose one representative grain (one with a large number of pixels) and see how the sphericity parameter changes as the EBSD step size increases.</p>
 {% highlight matlab %}
 newMtexFigure('layout',[4,5])
 for i = 1:20
@@ -99,7 +120,8 @@ mtexColorbar ('title', 'sphericity parameter')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_03.png" %}
-</center><p>Now we are able to plot the sphericity parameter as a function of the step size.</p>
+</center>
+<p>Now we are able to plot the sphericity parameter as a function of the step size.</p>
 {% highlight matlab %}
 clf
 scatter (gS, Psi, 150,5:5:100,'filled','MarkerEdgeColor','k','linewidth', 1.5)
@@ -114,7 +136,9 @@ set (gca, 'xscale', 'log')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_04.png" %}
-</center><h2 id="7">Influence of grain boundary smoothness on sphericity parameter</h2><p>Due to the square shape of pixels (prescribed by Oxford Instruments software), boundary elements lie either vertically or horizontally within the plane of analysis. Grains containing fewer pixels (i.e., smaller grains in maps with a fixed step size) appear more pixelated than grains containing numerous pixels. MTEX allows us to reduce artificial pixelation of grain boundary elements by applying the function <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, which enhances the overall grain boundary smoothness by interpolating the coordinates of grain boundary elements while triple junction points remain locked or unlocked. In this study, we choose to lock the triple junction during grain boundary smoothening.</p>
+</center>
+<h2 id="7">Influence of grain boundary smoothness on sphericity parameter</h2>
+<p>Due to the square shape of pixels (prescribed by Oxford Instruments software), boundary elements lie either vertically or horizontally within the plane of analysis. Grains containing fewer pixels (i.e., smaller grains in maps with a fixed step size) appear more pixelated than grains containing numerous pixels. MTEX allows us to reduce artificial pixelation of grain boundary elements by applying the function <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, which enhances the overall grain boundary smoothness by interpolating the coordinates of grain boundary elements while triple junction points remain locked or unlocked. In this study, we choose to lock the triple junction during grain boundary smoothening.</p>
 {% highlight matlab %}
 newMtexFigure('layout',[3,3],'figSize','normal');
 
@@ -151,7 +175,8 @@ mtexColorbar jet
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_05.png" %}
-</center><p>Finally we plot the sphericity as a function of the smoothening parameter</p>
+</center>
+<p>Finally we plot the sphericity as a function of the smoothening parameter</p>
 {% highlight matlab %}
 clf
 plot(1:length(Psi), Psi, 'o')
@@ -160,4 +185,13 @@ ylabel ('Sphericity parameter')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_06.png" %}
-</center><h2 id="9">References</h2><div><ul><li>Sheng Fan, David J. Prior, Andrew J. Cross, David L. Goldsby, Travis F. Hager, Marianne Negrini, Chao Qi, <a href="https://doi.org/10.1016/j.actamat.2021.116810"><i>Using grain boundary irregularity to quantify dynamic recrystallization in ice</i></a>, Acta Materialia, 2021.</li></ul></div></div></body></html>
+</center>
+<h2 id="9">References</h2>
+<div>
+<ul>
+<li>Sheng Fan, David J. Prior, Andrew J. Cross, David L. Goldsby, Travis F. Hager, Marianne Negrini, Chao Qi, <a href="https://doi.org/10.1016/j.actamat.2021.116810"><i>Using grain boundary irregularity to quantify dynamic recrystallization in ice</i></a>, Acta Materialia, 2021.</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

@@ -1,20 +1,33 @@
 ---
 title: Slip System Analysis in \(\alpha\)-Alumina
-last_updated: 25-Mar-2024
+
 sidebar: examples_sidebar
 permalink: ExSlipSystemAlumina.html
 folder: examples
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      --><title>Slip System Analysis in \(\alpha\)-Alumina</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-03-25"><meta name="DC.source" content="script_ExSlipSystemAlumina.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExPlasticity/ExSlipSystemAlumina.m">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Slip System Analysis in \(\alpha\)-Alumina</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ExSlipSystemAlumina.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExPlasticity/ExSlipSystemAlumina.m">
     edit page</a>
     author: Ruben Wagner, Robert Lehnert, TU Bergakademie Freiberg, Institute
-</font><div><!--introduction--><p>of Materials Engineering, Germany</p><!--/introduction--><h2 id="1">Data Import</h2><p>The following EBSD maps has been measured by Ruben Wagner TUBAF, Institute of Materials Engineering, 2022 within the project SFB 920. It shows an alumina inclusions in 42CrMo4 steel after nanoindentation.</p>
+</font>
+<div>
+<!--introduction-->
+<p>of Materials Engineering, Germany</p>
+<!--/introduction-->
+<h2 id="1">Data Import</h2>
+<p>The following EBSD maps has been measured by Ruben Wagner TUBAF, Institute of Materials Engineering, 2022 within the project SFB 920. It shows an alumina inclusions in 42CrMo4 steel after nanoindentation.</p>
 {% highlight matlab %}
 % set crystal symmetry
 cs = crystalSymmetry.load('Al2O3-Corundum.cif');
@@ -49,10 +62,17 @@ mtexColorbar
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSlipSystemAlumina_01.png" %}
-</center><h2 id="3">Correct for misindexiation due to pseudosymmetry</h2><p>Looking at the raw data we observe several neighbouring measurements that are exactly 180 degree rotated with respect to each other. This is indicated by color coded grain boundaries. It is suspected that this misorientation occurs as the EBSD system has a hard time to distinguish the Kikuchi pattern of two orientations that differ by a rotation about the c-axis by 180 degree.</p><p>In order to correct for this misindexiation we proceed as follows</p><pre># Identify grain boundaries due to pseudo symmetry
+</center>
+<h2 id="3">Correct for misindexiation due to pseudosymmetry</h2>
+<p>Looking at the raw data we observe several neighbouring measurements that are exactly 180 degree rotated with respect to each other. This is indicated by color coded grain boundaries. It is suspected that this misorientation occurs as the EBSD system has a hard time to distinguish the Kikuchi pattern of two orientations that differ by a rotation about the c-axis by 180 degree.</p>
+<p>In order to correct for this misindexiation we proceed as follows</p>
+<pre># Identify grain boundaries due to pseudo symmetry
 # Merge grains with common pseudo symmetry grain boundaries and
 compute the dominant orientation of the merged grains
-# Correct the EBSD data according to the pseudo symmetry</pre><p><b>1. Identify boundaries between pseudosymmetric grains</b></p>
+# Correct the EBSD data according to the pseudo symmetry</pre>
+<p>
+<b>1. Identify boundaries between pseudosymmetric grains</b>
+</p>
 {% highlight matlab %}
 % all Corundum Corundum boundaries
 gB = grains.boundary('indexed');
@@ -63,7 +83,8 @@ pseudoSym = orientation.byAxisAngle(cs.cAxis,180*degree);
 % allow for a three 3 degree threshold
 ispseudoBnd = angle(gB.misorientation,pseudoSym)<3*degree;
 {% endhighlight %}
-<p><b>2. Merge grains with common pseudo symmetry grain boundaries</b> This results is two big grains as visualised below</p>
+<p>
+<b>2. Merge grains with common pseudo symmetry grain boundaries</b> This results is two big grains as visualised below</p>
 {% highlight matlab %}
 [grains, parentId] = grains.merge(gB(ispseudoBnd),'calcMeanOrientation',...
   @(g) updateOri(g,pseudoSym));
@@ -72,7 +93,10 @@ plot(grains,cKey.orientation2color(grains.meanOrientation))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSlipSystemAlumina_02.png" %}
-</center><p><b>3. Correct the EBSD data according to the pseudo symmetry</b></p>
+</center>
+<p>
+<b>3. Correct the EBSD data according to the pseudo symmetry</b>
+</p>
 {% highlight matlab %}
 % find all EBSD data which differ by the computed grain orientation by
 % about 180 degree
@@ -85,7 +109,15 @@ plot(ebsd,cKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSlipSystemAlumina_03.png" %}
-</center><h2 id="6">Data cleaning</h2><p>We perform some more data cleaning steps including</p><div><ol><li>removing too small grains</li><li>filling of the not indexed pixels</li></ol></div>
+</center>
+<h2 id="6">Data cleaning</h2>
+<p>We perform some more data cleaning steps including</p>
+<div>
+<ol>
+<li>removing too small grains</li>
+<li>filling of the not indexed pixels</li>
+</ol>
+</div>
 {% highlight matlab %}
 % redo grain reconstruction
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',1*degree);
@@ -111,7 +143,9 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSlipSystemAlumina_04.png" %}
-</center><h2 id="7">Schmid Factor Analysis</h2><p>Next we compute the the active slip system during pressure in z-direction. The possible dominant slip systems in alumina are described in Mao2011 and 2012 as</p>
+</center>
+<h2 id="7">Schmid Factor Analysis</h2>
+<p>Next we compute the the active slip system during pressure in z-direction. The possible dominant slip systems in alumina are described in Mao2011 and 2012 as</p>
 {% highlight matlab %}
 n = Miller(1,0,-1,1,cs,'HKIL');
 b = Miller(-1,2,-1,0,cs,'UVTW');
@@ -119,10 +153,7 @@ sS = slipSystem(b,n)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sS = slipSystem (Corundum)
- 
-   U    V    T    W  | H    K    I    L CRSS
-  -1    2   -1    0    1    0   -1    1    1
+
 {% endhighlight %}
 <p>Next we determine the Schmid factor for all symmetrically equivalent slip systems.</p>
 {% highlight matlab %}
@@ -184,8 +215,12 @@ ori = mean(ori,'weigths',grains.grainSize,'robust');
 
 end
 {% endhighlight %}
-
-{% highlight plaintext %}
-...
-{% endhighlight %}
-<h2 id="11">References</h2><div><ul><li>Ruben Wagner, Robert Lehnert, Enrico Storti, Lisa Ditscherlein, Christina Schr&ouml;der, Steffen Dudczig, Urs A. Peuker, Olena Volkova, Christos G. Aneziris, Horst Biermann, Anja Weidner, <a href="https://www.sciencedirect.com/science/article/abs/pii/S1044580322005393"><i>Nanoindentation of alumina and multiphase inclusions in 42CrMo4 steel</i></a>, 2022.</li></ul></div></div></body></html>
+<h2 id="11">References</h2>
+<div>
+<ul>
+<li>Ruben Wagner, Robert Lehnert, Enrico Storti, Lisa Ditscherlein, Christina Schr&ouml;der, Steffen Dudczig, Urs A. Peuker, Olena Volkova, Christos G. Aneziris, Horst Biermann, Anja Weidner, <a href="https://www.sciencedirect.com/science/article/abs/pii/S1044580322005393"><i>Nanoindentation of alumina and multiphase inclusions in 42CrMo4 steel</i></a>, 2022.</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

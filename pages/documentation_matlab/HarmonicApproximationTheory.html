@@ -10,8 +10,8 @@ toc: false
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
     -->
 <title>Harmonic Approximation from Discrete Data</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -62,9 +62,7 @@ plot(SO3F1,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F1 = SO3FunHarmonic (1 → xyz)
-  bandwidth: 17
-  weight: 0.99
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HarmonicApproximationTheory_02.png" %}
@@ -75,8 +73,7 @@ norm(eval(SO3F1, ori) - val) / norm(val)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.0779
+
 {% endhighlight %}
 <p>If we choose the bandwidth to high and try to compute more Fourier coefficients as there are data points given, then we are in the overdetermined case and obtain oversampling.</p>
 {% highlight matlab %}
@@ -85,15 +82,7 @@ plot(SO3F2,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: The oversampling factor in the
-approximation process is 0.43553. This could lead to
-a bad approximation. You may should not set the
-regularization parameter to 0 in the approximation
-method. 
- 
-SO3F2 = SO3FunHarmonic (1 → xyz)
-  bandwidth: 32
-  weight: 0.25
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HarmonicApproximationTheory_03.png" %}
@@ -104,8 +93,7 @@ norm(eval(SO3F2, ori) - val) / norm(val)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.0123
+
 {% endhighlight %}
 <p>Lets take a look on the Fourier coefficients of this approximations.</p>
 {% highlight matlab %}
@@ -132,9 +120,7 @@ plot(SO3F3,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F3 = SO3FunHarmonic (1 → xyz)
-  bandwidth: 32
-  weight: 0.99
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HarmonicApproximationTheory_05.png" %}
@@ -146,8 +132,7 @@ norm(eval(SO3F3, ori) - val) / norm(val)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.0824
+
 {% endhighlight %}
 <p>Note that this Error is not the value of the above energy functional which is minimized by lsqr.</p>
 <p>It is not easy to specify the parameter \(\lambda\), which describes the intensity of regularization. If we choose a value that is too large, we smooth the function too much. If \(\lambda\) is chosen too small, there is almost no regularization and we get oscillations.</p>
@@ -173,6 +158,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="HarmonicApproximationTheory_06.png" %}
 </center>
+<p>For large regularization parameters the function is almost 0. The regularization term has to much impact on the energy functional, compared to the error term. As the regularization parameter is gradually reduced, the influence of the error term increases. Higher frequencies and stronger changes in the function values are no longer penalized as much. However, as soon as the regularisation parameter becomes too small, the noise increases, which leads to overfitting. Ultimately, we see oversampling again when \(lambda\) approaches 0.</p>
 <p>Lets take a look on the spectra.</p>
 {% highlight matlab %}
 ind = [3,5,9,13];
@@ -190,9 +176,7 @@ plot(SO3F5,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F5 = SO3FunHarmonic (1 → xyz)
-  bandwidth: 32
-  weight: 0.98
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="HarmonicApproximationTheory_08.png" %}
@@ -219,13 +203,7 @@ fprintf(['Number of iterations = ',num2str(p2{3}),'\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 0.512161 seconds.
-Number of iterations = 6
-Value of energy functional = 100.132
 
-Elapsed time is 2.357649 seconds.
-Number of iterations = 36
-Value of energy functional = 100.0924
 {% endhighlight %}
 </div>
 </body>
