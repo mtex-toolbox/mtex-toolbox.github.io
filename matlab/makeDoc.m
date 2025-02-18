@@ -30,10 +30,9 @@ mtex_settings
 close all
 setMTEXpref('FontSize',13)
 setMTEXpref('figSize',0.5)
-plotx2east
 
 setMTEXpref('generatingHelpMode',true);
-global mtex_progress; mtex_progress = 0; %#ok<NASGU>
+global mtex_progress; mtex_progress = 0; %#ok<GVMIS>
 set(0,'FormatSpacing','compact')
 set(0,'DefaultFigureColor','white');
 
