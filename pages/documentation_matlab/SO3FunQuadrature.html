@@ -1,0 +1,253 @@
+---
+title: Approximation of Orientation Dependent Functions
+
+sidebar: documentation_sidebar
+permalink: SO3FunQuadrature.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Approximation of Orientation Dependent Functions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3FunQuadrature.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunQuadrature.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Assume we have given some evaluation routine \(f\) that maps orientations to numbers. This could be an rotational function of class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, a <code class="language-plaintext highlighter-rouge">@function_handle</code>, a more complex Matlab function or a physical experiment.</p>
+<p>On this page we will explain how to compute the corresponding <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> and <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> that approximates \(f\) reasonable well.</p>
+<p>This approximation process is similarly to <a href="SO3FunApproximation.html">Approximating Orientation Dependent Functions from Discrete Data</a>. where the given data are a set of orientations with function values.</p>
+<p>Lets load an orientation dependent function as <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
+{% highlight matlab %}
+mtexdata dubna
+odf = calcODF(pf,'resolution',5*degree,'zero_Range')
+plot(odf,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_01.png" %}
+</center>
+<p>In the following we will differentiate whether we approximate \(f\) by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> or by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
+<h2 id="5">Harmonic Approximation</h2>
+<p>The basic strategy is to approximate the data by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> (Harmonic series), i.e. a series of <a href="WignerFunctions.html">Wigner-D functions</a>, see <a href="SO3FunHarmonicRepresentation.html">SO3FunHarmonicSeries Basics of rotational harmonics</a>.</p>
+<p>For that, we compute the so-called Fourier coefficients \({\bf \hat f} = (\hat f^{0,0}_0,\dots,\hat f^{N,N}_N)^T\) of</p>
+<p>\[ f({\bf R}) = \sum_{n=0}^N\sum_{k,l=-n}^n \hat{f}^{k,l}_n \, D_n^{k,l}({\bf R}). \]</p>
+<p>The Fourier coefficients are defined by</p>
+<p>\[ \hat f^{k,l}_n = \int_{SO(3)} f({\bf R}) \cdot \overline{D_n^{k,l}({\bf R})} \mathrm{d}\my({\bf R}) \]</p>
+<p>and we compute this integral by numerical integration, which is also called quadrature, i.e.</p>
+<p>\[ \hat f^{k,l}_n \approx \sum_{m=1}^M \omega_m \, f({\bf R}_m) \, \overline{D_n^{k,l}({\bf R}_m)} \]</p>
+<p>with suitable quadrature weights \(\omega_m\) and quadrature nodes \(\bf{R}_m\), \(m=1,\dots,M\).</p>
+<p>In MTEX there are two quadrature schemes predefined:</p>
+<div>
+<ul>
+<li>Clenshaw-Curtis quadrature scheme (default)</li>
+<li>Gauss-Legendre quadrature scheme</li>
+</ul>
+</div>
+<p>Both of them are defined with respect to some bandwidth \(N\) and they are exact for all band-limited functions of this specific bandwidth. That means, if we perform quadrature on any <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> of bandwidth N with one of this schemes, then we will get exactly this function back.</p>
+<p>In MTEX we use the command <a href="SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> into an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
+{% highlight matlab %}
+SO3F = SO3FunHarmonic(odf)
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_02.png" %}
+</center>
+<p>Internally MTEX calls <a href="SO3FunHarmonic.approximate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.approximate</code></a>. We can specify the bandwidth of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> with the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code> and we can tell MTEX to use the other quadrature scheme.</p>
+{% highlight matlab %}
+SO3F = SO3FunHarmonic(odf,'bandwidth',10,'GaussLegendre')
+plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_03.png" %}
+</center>
+<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we proceed as follows.</p>
+<p>One idea could be to perform the experiment for random orientations and <a href="SO3FunApproximationTheory">interpolate this discrete data</a> in a second step.</p>
+<p>But, if we can choose the orientations by our own, we should better choose an optimal/minimal orientation grid, perform the experiment on this grid and compute the Fourier coefficients of the harmonic expansion by quadrature.</p>
+<p>This is exactly what happens internally when we call the <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>-command. In fact this is a special case of approximation of discrete data for a very specific grid.</p>
+{% highlight matlab %}
+% Specify the bandwidth and symmetries of the desired harmonic odf
+bw = 50;
+cs = crystalSymmetry('321');
+ss = specimenSymmetry;
+
+% Compute the quadrature grid and weights
+CC_grid = quadratureSO3Grid(bw,'ClenshawCurtis',cs,ss);
+
+% Because of symmetries there are symmetric equivalent nodes in the
+% quadrature grid. Hence we perform our experiment on a smaller unique
+% grid.
+ori = CC_grid(:)
+v = EXPERIMENT(ori);
+
+% At the end we do quadrature
+E1 = SO3FunHarmonic.quadrature(CC_grid,v)
+% E1 = SO3FunHarmonic.interpolate(CC_grid,v) % does the same
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<p>Furthermore, if the experimental step is very expansive it might be a good idea to use the smaller Gauss-Legendre quadrature grid. The Gauss-Legendre quadrature lattice has half as many points as the default Clenshaw-Curtis quadrature lattice. But the quadrature method is slightly more time consuming.</p>
+{% highlight matlab %}
+% Compute the Gauss-Legendre quadrature grid and weights
+GL_grid = quadratureSO3Grid(bw,'GaussLegendre',cs,ss);
+
+% Perform the experiment on that quadrature grid
+ori = GL_grid(:)
+v = EXPERIMENT(ori);
+
+% Do quadrature
+E2 = SO3FunHarmonic.quadrature(GL_grid,v)
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<p>Both of this quadrature schemes yield exactly the same <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
+{% highlight matlab %}
+calcError(E1,E2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<h2 id="11">RBF-Kernel Approximation</h2>
+<p>The basic strategy is to approximate the given function \(f\) by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, see <a href="RadialODFs.html">Radial Basis Functions on SO(3)</a>.</p>
+<p>Hence we determine rotations \(R_1,\dots,R_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
+<p>\[ g(x) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega(x,R_n)}{2}) \]</p>
+<p>approximates \(f\) reasonable well, i.e. \(f\approx g\). In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \(R_1,\dots,R_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
+<p>A basic strategy is to apply least squares approximation, where we compute the coefficients \(c_n\) by minimizing the functional</p>
+<p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \]</p>
+<p>for some specific orientations \(x_1,\dots,x_M\).</p>
+<p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,R_n)}{2})]_{m,n}\).</p>
+<p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
+<p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1, which can be applied if we try to approximate a density function.</p>
+<p>In MTEX we use the command <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
+{% highlight matlab %}
+SO3F3 = SO3FunRBF(odf,'density')
+% SO3F3 = SO3FunRBF.approximate(odf,'density')
+plot(SO3F3,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_04.png" %}
+</center>
+<p>Here MTEX internally calls the <a href="SO3FunRBF.approximate.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF.approximate</code></a> method.</p>
+<p>The flag <code class="language-plaintext highlighter-rouge">'density'</code> tells MTEX to use the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which ensures that the resulting function is nonnegative and normalized to mean \(1\).</p>
+{% highlight matlab %}
+minValue = min(SO3F3)
+
+meanValue = mean(SO3F3)
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<p>We can specify the kernel of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> with the option <code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> and we can use the options <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> and <code class="language-plaintext highlighter-rouge">'resolution'</code> to choose some specific set of rotations as centers \(R_1,\dots,R_N\) of the approximation \(g\).</p>
+{% highlight matlab %}
+SO3F4 = SO3FunRBF(odf,'halfwidth',5*degree,'resolution',10*degree)
+plot(SO3F4,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_05.png" %}
+</center>
+{% highlight matlab %}
+S3G = orientation.rand(1000,odf.CS);
+psi = SO3AbelPoissonKernel('halfwidth',5*degree);
+SO3F5 = SO3FunRBF(odf,'kernel',psi,'SO3Grid',S3G)
+plot(SO3F5,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_06.png" %}
+</center>
+{% highlight matlab %}
+SO3F6 = SO3FunRBF(odf,'halfwidth',5*degree,'approxresolution',5*degree)
+plot(SO3F6,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_07.png" %}
+</center>
+<p>The errors are</p>
+{% highlight matlab %}
+calcError(odf,SO3F3)
+calcError(odf,SO3F4)
+calcError(odf,SO3F5)
+calcError(odf,SO3F6)
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we should perform the experiment for all orientations of an <code class="language-plaintext highlighter-rouge">@equispacedSO3Grid</code> and <a href="SO3Fun.Approximation">approximate this discrete data</a> in a second step.</p>
+<h2 id="20">RBF-Kernel Approximation by minimizing the harmonic Error</h2>
+<p>The basic idea is the same as in the previous section. We determine rotations \(R_1,\dots,R_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
+<p>\[ g(x) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega(x,R_m)}{2}), \]</p>
+<p>such that \(g\) approximates \(f\) in a certain sense. But in what sense exactly?</p>
+<p>In the previous section, we minimized the pointwise error (in spatial domain) between \(f\) and \(g\) on some grid, i.e. we minimized \( \ds \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \) in \(M\) points.</p>
+<p>Now we will minimize the error in frequency domain. Hence, the Fourier coefficients of \(f\) are supposed to be nearly the same as the Fourier coefficients of \(g\).</p>
+<p>So, we will try to determine the coefficients \(c_1,\dots,c_M\) such that</p>
+<p>\[ \sum_n=0^N \sum_{k,l=-n}^n (\hat f_n^{k,l} - \hat g_n^{k,l})^2 \]</p>
+<p>is minimized.</p>
+<p>In MTEX we call this by adding the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> to the <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>-command.</p>
+{% highlight matlab %}
+SO3F7 = SO3FunRBF(odf,'harmonic')
+plot(SO3F7,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunQuadrature_08.png" %}
+</center>
+<h2 id="22">LSQR-Parameters</h2>
+<p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
+<p>Thus we are able to control the precision of the result and computational time of the least squares methods in the approximation process.</p>
+{% highlight matlab %}
+function v = EXPERIMENT(ori)
+  v = SO3Fun.dubna.eval(ori);
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+
+{% endhighlight %}
+</div>
+</body>
+</html>

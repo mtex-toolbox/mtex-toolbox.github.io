@@ -1,20 +1,34 @@
 ---
-title: ODF Reconstruction from XRD Data of an Al Alloy Rolled Sheet
-last_updated: 17-Apr-2024
+title: ODF Reconstruction from X-Ray Diffraction Data of an Al Alloy Rolled Sheet
+
 sidebar: examples_sidebar
 permalink: ExAlODFReconstruction.html
 folder: examples
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      --><title>ODF Reconstruction from XRD Data of an Al Alloy Rolled Sheet</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-04-17"><meta name="DC.source" content="script_ExAlODFReconstruction.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExODFReconstruction/ExAlODFReconstruction.m">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>ODF Reconstruction from X-Ray Diffraction Data of an Al Alloy Rolled Sheet</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ExAlODFReconstruction.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExODFReconstruction/ExAlODFReconstruction.m">
     edit page</a>
-    author: </font><div><!--introduction--><!--/introduction--><h2 id="1">Import the Data</h2><p>The following pole figure intensities have been measured by a Philips X'Pert diffractometer. Lets import the raw data</p>
+    author: </font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">Import the Data</h2>
+<p>The following pole figure intensities have been measured by a Philips X'Pert diffractometer using Cu-Kalpha radiation. The sample comes from a commercial aluminum alloy (AA6061-T4) sheet of 0.9 mm thickness. Scans were done over the RD-TD plane of the sheet (RD//X; TD//Y; ND//Z). The tree main FCC poles for XRD were scanned, i.e., {1 1 1}, {2 0 0}, {2 2 0}.</p>
 {% highlight matlab %}
+% Lets import the raw data
+
 % crystal symmetry
 CS = crystalSymmetry('m-3m', [1 1 1],'mineral','Al');
 
@@ -27,7 +41,9 @@ mtexColorMap WhiteJet
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExAlODFReconstruction_01.png" %}
-</center><h2 id="2">Background and Defocusing Correction</h2><p>When working with X-ray diffraction the intensities are usually corrupted by background radiation as well as a decay of the intensities towards the equator. This effect can somehow be estimated by measuring an untextured powder sample. In the present case the following powder intensities were determined.</p>
+</center>
+<h2 id="2">Background and Defocusing Correction</h2>
+<p>When working with X-ray diffraction the intensities are usually corrupted by background radiation as well as a decay of the intensities towards the equator. This effect can somehow be estimated by measuring an untextured powder sample. In the present case the following powder intensities were determined.</p>
 {% highlight matlab %}
 % the powder intensities for {1 1 1}, {2 0 0}, {2 2 0}
 h = Miller({1 1 1}, {2 0 0}, {2 2 0},CS);
@@ -42,8 +58,8 @@ S2G = regularS2Grid('points', [1,18], 'antipodal');
 {% endhighlight %}
 <p>Lets store these intensities in variables of type <a href="PoleFigure.PoleFigure.html"><code class="language-plaintext highlighter-rouge">PoleFigure</code></a>.</p>
 {% highlight matlab %}
-mtt = 2;    % time per measurement point
-mtb = 30;   % time for a full circle
+mtt = 2;    % time per measurement point of each PF scan
+mtb = 30;   % time for the full circle (azimutal angle) of defocusing scan
 
 % create background and defocusing pole figures
 pf_bg = PoleFigure(h, S2G, y, CS);
@@ -54,7 +70,8 @@ plot(pf_def)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExAlODFReconstruction_02.png" %}
-</center><p>For background and defocusing correction we subtract the background and divide by the defocusing factor.</p>
+</center>
+<p>For background and defocusing correction we subtract the background and divide by the defocusing factor.</p>
 {% highlight matlab %}
 % perform background and defocusing correction
 pf = (pf - pf_bg) ./ pf_def;
@@ -68,7 +85,9 @@ mtexColorMap WhiteJet
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExAlODFReconstruction_03.png" %}
-</center><h2 id="6">ODF computation</h2><p>Using the corrected XRD data we may now compute an <code class="language-plaintext highlighter-rouge">ODF</code> using the command <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a>.</p>
+</center>
+<h2 id="6">ODF computation</h2>
+<p>Using the corrected XRD data we may now compute an <code class="language-plaintext highlighter-rouge">ODF</code> using the command <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a>.</p>
 {% highlight matlab %}
 solver = MLSSolver(pf,'halfwidth',5*degree,'resolution',2.5*degree,...
   'intensityWeights');
@@ -76,7 +95,16 @@ solver = MLSSolver(pf,'halfwidth',5*degree,'resolution',2.5*degree,...
 odf = solver.calcODF;
 
 plotPDF(odf, h, 'minmax')
+
+% This texture shows the typically dominant 'cube' orientation due to
+% recrystallization after rolling of Al alloy plates and sheets.
+% There's a slight misalignment of the sample's orthotropy axes wrt the
+% X-Y directions. This is due to a small deviation of the sample when
+% positioned on the goniometer of the X-ray diffractometer.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExAlODFReconstruction_04.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>

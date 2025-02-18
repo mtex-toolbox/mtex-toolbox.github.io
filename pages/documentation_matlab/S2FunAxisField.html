@@ -10,8 +10,8 @@ toc: false
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
     -->
 <title>S2AxisFieldHarmonic</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -42,14 +42,13 @@ y = vector3d(sin(5*nodes.x), 1, nodes.y, 'antipodal');
 <p>Now the actual command to get <code class="language-plaintext highlighter-rouge">sAF1</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
 </p>
 {% highlight matlab %}
-sAF1 = S2AxisFieldHarmonic.approximate(nodes, y)
+sAF1 = S2AxisFieldHarmonic.interpolate(nodes, y)
 
 plot(sAF1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sAF1 = S2AxisFieldHarmonic
- bandwidth: 224
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunAxisField_01.png" %}
@@ -64,15 +63,15 @@ f = @(v) vector3d(v.x, v.y, 0*v.x, 'antipodal');
 <p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sAF2</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
 </p>
 {% highlight matlab %}
-sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
+sAF2 = S2AxisFieldHarmonic(@(v) f(v))
+% sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
 
 clf;
 quiver3(sAF2);
 {% endhighlight %}
 
 {% highlight plaintext %}
-sAF2 = S2AxisFieldHarmonic
- bandwidth: 128
+
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunAxisField_02.png" %}

@@ -1,24 +1,41 @@
 ---
 title: Seismic velocities and anisotropy
-last_updated: 25-Mar-2024
+
 sidebar: examples_sidebar
 permalink: ExSeismicPlots.html
 folder: examples
 toc: false
 ---
-    <html><head>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <!--
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      --><title>Seismic velocities and anisotropy</title><meta name="generator" content="MATLAB 9.14"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2024-03-25"><meta name="DC.source" content="script_ExSeismicPlots.m"></head><body><font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExSeismics/ExSeismicPlots.m">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Seismic velocities and anisotropy</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_ExSeismicPlots.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExSeismics/ExSeismicPlots.m">
     edit page</a>
-    author: </font><div><!--introduction--><p>Calculalating and plotting elastic velocities from elastic stiffness Cijkl tensor and density (by David Mainprice).</p><!--/introduction--><h2 id="1">Crystal Symmetry and definition of the elastic stiffness tensor</h2><p>crystal symmetry - Orthorhombic mmm Olivine structure (4.7646 10.2296 5.9942 90.00 90.00 90.00)</p>
+    author: </font>
+<div>
+<!--introduction-->
+<p>Calculating and plotting elastic velocities from elastic stiffness tensor \(C_{ijkl}\) and density (by David Mainprice).</p>
+<!--/introduction-->
+<h2 id="1">Crystal Symmetry and definition of the elastic stiffness tensor</h2>
+<p>crystal symmetry - Orthorhombic mmm Olivine structure (4.7646 10.2296 5.9942 90.00 90.00 90.00)</p>
 {% highlight matlab %}
 cs_tensor = crystalSymmetry('mmm',[4.7646,10.2296,5.9942],...
   'x||a','z||c','mineral','Olivine');
 {% endhighlight %}
-<p><b>Import 4th rank tensor as 6 by 6 matrix</b></p><p>Olivine elastic stiffness (Cij) tensor in GPa Abramson E.H., Brown J.M., Slutsky L.J., and Zaug J.(1997) The elastic constants of San Carlos olivine to 17 GPa. Journal of Geophysical Research 102: 12253-12263.</p><p>Enter tensor as 6 by 6 matrix,M line by line.</p>
+<p>
+<b>Import 4th rank tensor as 6 by 6 matrix</b>
+</p>
+<p>Olivine elastic stiffness (Cij) tensor in GPa Abramson E.H., Brown J.M., Slutsky L.J., and Zaug J.(1997) The elastic constants of San Carlos olivine to 17 GPa. Journal of Geophysical Research 102: 12253-12263.</p>
+<p>Enter tensor as 6 by 6 matrix,M line by line.</p>
 {% highlight matlab %}
 M = [[320.5  68.15  71.6     0     0     0];...
     [ 68.15  196.5  76.8     0     0     0];...
@@ -36,29 +53,16 @@ C = stiffnessTensor(M,cs_tensor,'density',rho)
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = stiffnessTensor (Olivine)
-  density: 3.355            
-  unit   : GPa              
-  rank   : 4 (3 x 3 x 3 x 3)
- 
-  tensor in Voigt matrix representation:
- 320.5  68.2  71.6     0     0     0
-  68.2 196.5  76.8     0     0     0
-  71.6  76.8 233.5     0     0     0
-     0     0     0    64     0     0
-     0     0     0     0    77     0
-     0     0     0     0     0  78.7
+
 {% endhighlight %}
 <p>Compute seismic velocities as functions on the sphere</p>
 {% highlight matlab %}
 [vp,vs1,vs2,pp,ps1,ps2] = C.velocity('harmonic');
 {% endhighlight %}
-<h2 id="4">Plotting section</h2><p>Here we set preference for a nice plot.</p>
+<h2 id="4">Plotting section</h2>
+<p>Here we set preference for a nice plot.</p>
 {% highlight matlab %}
-% plotting convention - plot a-axis to east
-plota2east;
-
-% set colour map to seismic color map : blue2redColorMap
+% set color map to seismic color map: blue2redColorMap
 setMTEXpref('defaultColorMap',blue2redColorMap)
 
 % some options
@@ -81,7 +85,7 @@ mtexFig = mtexFigure('position',[0 0 1000 1000]);
 % Standard Seismic plot with 8 subplots in 3 by 3 matrix
 %
 % Plot matrix layout
-%        1 Vp        2 AVs      3 S1 polarizations
+%        1 Vp        2 AVs      3 S1 polarization
 %        4 Vs1       5 Vs2      6 dVs
 %        7 Vp/Vs1    8 Vp/Vs2
 %
@@ -116,7 +120,9 @@ xlabel(['Vp Anisotropy = ',num2str(AVp,'%6.1f')],titleOpt{:})
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_02.png" %}
-</center><h2 id="6">AVS : Plot S-wave anisotropy percentage for each proppagation direction</h2><p>defined as AVs = 200*(Vs1-Vs2)/(Vs1+Vs2)</p>
+</center>
+<h2 id="6">AVS : Plot S-wave anisotropy percentage for each propagation direction</h2>
+<p>defined as AVs = 200*(Vs1-Vs2)/(Vs1+Vs2)</p>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -144,7 +150,8 @@ text([xvector,yvector,zvector],{'[100] ','[010] ','[001]'},...
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_03.png" %}
-</center><h2 id="7">S1 Polarization: Plot fastest S-wave (Vs1) polarization directions</h2>
+</center>
+<h2 id="7">S1 Polarization: Plot fastest S-wave (Vs1) polarization directions</h2>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -158,7 +165,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_04.png" %}
-</center><h2 id="8">Vs1 : Plot Vs1 velocities (km/s)</h2>
+</center>
+<h2 id="8">Vs1 : Plot Vs1 velocities (km/s)</h2>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -184,7 +192,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_05.png" %}
-</center><h2 id="9">Vs2 : Plot Vs2 velocities (km/s)</h2>
+</center>
+<h2 id="9">Vs2 : Plot Vs2 velocities (km/s)</h2>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -209,7 +218,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_06.png" %}
-</center><h2 id="10">dVs : Plot Velocity difference Vs1-Vs2 (km/s) plus Vs1 polarizations</h2>
+</center>
+<h2 id="10">dVs : Plot Velocity difference Vs1-Vs2 (km/s) plus Vs1 polarization</h2>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -232,7 +242,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_07.png" %}
-</center><h2 id="11">Vp/Vs1 : Plot Vp/Vs1 ratio (no units)</h2>
+</center>
+<h2 id="11">Vp/Vs1 : Plot Vp/Vs1 ratio (no units)</h2>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -256,7 +267,8 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_08.png" %}
-</center><h2 id="12">Vp/Vs2 : Plot Vp/Vs2 ratio (no units)</h2>
+</center>
+<h2 id="12">Vp/Vs2 : Plot Vp/Vs2 ratio (no units)</h2>
 {% highlight matlab %}
 % create a new axis
 nextAxis
@@ -291,4 +303,7 @@ setMTEXpref('defaultColorMap',WhiteJetColorMap)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExSeismicPlots_10.png" %}
-</center></div></body></html>
+</center>
+</div>
+</body>
+</html>
