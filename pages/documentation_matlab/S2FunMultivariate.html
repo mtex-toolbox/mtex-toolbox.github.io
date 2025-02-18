@@ -10,8 +10,8 @@ toc: false
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--
-      This HTML was auto-generated from MATLAB code.
-      To make changes, update the MATLAB code and republish this document.
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
     -->
 <title>Multivariate S2Fun</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -57,7 +57,9 @@ sF1 = S2FunHarmonic.interpolate(nodes, y)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+sF1 = S2FunHarmonic (xyz)
+  size: 2 x 1
+  bandwidth: 224
 {% endhighlight %}
 <p>
 <b>Definition via function handle</b>
@@ -66,15 +68,16 @@ sF1 = S2FunHarmonic.interpolate(nodes, y)
 {% highlight matlab %}
 f = @(v) [exp(v.x+v.y+v.z)+50*(v.y-cos(pi/3)).^3.*(v.y-cos(pi/3) > 0), v.x, v.y, v.z];
 {% endhighlight %}
-<p>Now we call the quadrature command to get 4x1 <code class="language-plaintext highlighter-rouge">sF2</code> of type <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a>
-</p>
+<p>Next we convert this function handle into a <a href="S2FunHarmonic.S2FunHarmonic"><code class="language-plaintext highlighter-rouge">S2FunHarmonic</code></a> of size \(4 \times 1\)</p>
 {% highlight matlab %}
 sF2 = S2FunHarmonic(f, 'bandwidth', 50)
-% sF2 = S2FunHarmonic.quadrature(f, 'bandwidth', 50)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+sF2 = S2FunHarmonic (xyz)
+  size: 4 x 1
+  bandwidth: 50
+  isReal: true
 {% endhighlight %}
 <p>
 <b>Definition via Fourier-coefficients</b>
@@ -85,7 +88,9 @@ sF3 = S2FunHarmonic(eye(9))
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+sF3 = S2FunHarmonic (xyz)
+  size: 9 x 1
+  bandwidth: 2
 {% endhighlight %}
 <div>
 <ul>

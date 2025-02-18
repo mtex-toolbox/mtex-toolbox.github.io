@@ -10,8 +10,8 @@ toc: false
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--
-      This HTML was auto-generated from MATLAB code.
-      To make changes, update the MATLAB code and republish this document.
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
     -->
 <title>RBF-Kernel Approximation from Discrete Data</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -57,7 +57,12 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 72018 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_02.png" %}
@@ -69,7 +74,10 @@ meanValue = mean(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+minValue =
+   1.1635e-06
+meanValue =
+    1.0000
 {% endhighlight %}
 <p>One has to keep in mind that we can not expect the error in the data nodes to be zero, because we compute a smooth function from the noisy input data.</p>
 {% highlight matlab %}
@@ -77,7 +85,8 @@ norm(SO3F.eval(ori) - val) / norm(val)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+ans =
+    0.1639
 {% endhighlight %}
 <p>In contrast, if we do not tell MTEX, that we try to approximate a density function, the solver has less information and the result is not denoised.</p>
 {% highlight matlab %}
@@ -87,7 +96,12 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 119088 orientations, resolution: 5°
+  weight: 0.95
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_03.png" %}
@@ -100,7 +114,12 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 2°
+  center: 1852941 orientations, resolution: 2°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_04.png" %}
@@ -113,7 +132,12 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 10°
+  center: 70038 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_05.png" %}
@@ -126,7 +150,17 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+S3G = SO3Grid (1 → xyz)
+  grid: 119088 orientations, resolution: 5°
+Warning: Maximum number of iterations reached,
+result may not have converged to the optimum yet. 
+ 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 72018 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_06.png" %}
@@ -147,9 +181,6 @@ xlabel('halfwidth [deg]')
 ylabel('relative error')
 {% endhighlight %}
 
-{% highlight plaintext %}
-
-{% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_07.png" %}
 </center>
@@ -160,7 +191,12 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 7.5°
+  center: 24649 orientations, resolution: 7.5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_08.png" %}
@@ -173,7 +209,16 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+psi = SO3AbelPoissonKernel
+  bandwidth: 48
+  halfwidth: 5°
 
+SO3F = SO3FunRBF (1 → xyz)
+ 
+  multimodal components
+  kernel: Abel Poisson, halfwidth 5°
+  center: 3989 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_09.png" %}
@@ -189,7 +234,7 @@ plot(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+Elapsed time is 65.813998 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_10.png" %}
@@ -201,7 +246,8 @@ norm(SO3F.eval(ori) - S.values) / norm(S.values)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+ans =
+   9.0528e-04
 {% endhighlight %}
 <p>Also, interpolation might not guarantee non-negativity of the function</p>
 {% highlight matlab %}
@@ -209,7 +255,8 @@ minValue = min(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+minValue =
+   -7.6067
 {% endhighlight %}
 <h2 id="18">LSQR-Parameters</h2>
 <p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
@@ -231,7 +278,13 @@ fprintf(['Number of iterations = ',num2str(iter2),'\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
+Elapsed time is 1.065290 seconds.
+Number of iterations = 8
+Value of energy functional = 0.43171
 
+Elapsed time is 1.607980 seconds.
+Number of iterations = 41
+Value of energy functional = 0.0015935
 {% endhighlight %}
 </div>
 </body>

@@ -10,8 +10,8 @@ toc: false
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--
-      This HTML was auto-generated from MATLAB code.
-      To make changes, update the MATLAB code and republish this document.
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
     -->
 <title>Optimal Kernel Selection</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
@@ -32,16 +32,13 @@ cs = crystalSymmetry('321');
 
 % build a density function by combining a uniform texture with two
 % predefined texture components
-odf = 0.25*uniformODF(cs) + 0.25*unimodalODF(orientation.brass(cs)) + ...
-  0.5*fibreODF(fibre.alpha(cs),'halfwidth',10*degree);
+odf = 0.25*uniformODF(cs) + ...
+  0.25 * unimodalODF(orientation.byEuler([35,45,0]*degree,cs)) + ...
+  0.5 * fibreODF(Miller(7,-1,10,cs),vector3d(7,-5,11),'halfwidth',10*degree);
 
 % plot the density function as six sigma sections
 plot(odf,'sections',6,'silent','sigma')
 mtexColorbar
-{% endhighlight %}
-
-{% highlight plaintext %}
-
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_01.png" %}
@@ -53,7 +50,8 @@ ori = odf.discreteSample(10000)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+ori = orientation (321 → xyz)
+  size: 10000 x 1
 {% endhighlight %}
 <p>Next we estimate the optimal <a href="ODFShapes.html">kernel function</a> using the command <code class="language-plaintext highlighter-rouge"><a href="orientation.calcKernel.html">calcKernel</a></code> with the default settings.</p>
 {% highlight matlab %}
@@ -61,7 +59,9 @@ psi  = calcKernel(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+psi = SO3DeLaValleePoussinKernel
+  bandwidth: 43
+  halfwidth: 5.7°
 {% endhighlight %}
 <p>This kernel can now be used to reconstruct the original ODF from the sampled points using the command <a href="DensityEsimation.html">density estimation</a>
 </p>
@@ -74,7 +74,9 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-
+odf_rec = SO3FunHarmonic (321 → xyz)
+  bandwidth: 43
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_02.png" %}
@@ -111,19 +113,23 @@ for i = 1:6
     ]);
 
 end
-{% endhighlight %}
 
-{% highlight plaintext %}
-
-{% endhighlight %}
-<p>Plot the error to the number of single orientations sampled from the original ODF.</p>
-{% highlight matlab %}
+% Plot the error to the number of single orientations sampled from the original ODF.
 close all;
 loglog(10.^(1:length(e)),e,'LineWidth',2)
 legend('Default','RuleOfThumb','magicRule')
 xlabel('Number of orientations (log scale)')
 ylabel('Estimation Error in degrees')
 title('Error between original ODF model and the reconstructed ODF','FontWeight','bold')
+{% endhighlight %}
+
+{% highlight plaintext %}
+RuleOfThumb: 75° KLCV: 24° magicRule: 31°
+RuleOfThumb: 30° KLCV: 12° magicRule: 22°
+RuleOfThumb: 18° KLCV: 8° magicRule: 16°
+RuleOfThumb: 10° KLCV: 6° magicRule: 11°
+RuleOfThumb: 9° KLCV: 5° magicRule: 8°
+RuleOfThumb: 7° KLCV: 4° magicRule: 6°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OptimalKernel_03.png" %}
