@@ -288,8 +288,9 @@ their talks as accessible as possible.
   content="Daniel Savage" %}** (Los Alamos National Laboratory)
 
 - **{% include reference.html
-  link="https://www.ntnu.edu/employees/bjorn.sorensen"
-  content="Bjørn Eske Sørensen" %}** (NTNU)
+  link="https://www.ntnu.edu/employees/bjorn.sorensen" content="Bjørn Eske
+  Sørensen" %}** (NTNU): Customizing EBSD analysis and interpretation using
+  MTEX and MATLAB – advantages of the scripting approach
 
 ## Venue:
 
