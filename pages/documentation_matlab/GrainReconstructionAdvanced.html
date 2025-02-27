@@ -27,7 +27,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
-ebsd(grains(grains.grainSize<=3)) = [];
+ebsd(grains(grains.numPixel<=3)) = [];
 [grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
 F = splineFilter;
 ebsd = smooth(ebsd,F);
@@ -39,7 +39,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed                                                 
@@ -59,7 +59,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize<=3)) = [];
+ebsd(grains(grains.numPixel<=3)) = [];
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
 ebsd = smooth(ebsd('indexed'),F);
@@ -73,7 +73,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed                                                 
@@ -93,7 +93,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd.grainId] = calcGrains(ebsd);
-ebsd(grains(grains.grainSize<=3)) = [];
+ebsd(grains(grains.numPixel<=3)) = [];
 [grains,ebsd.grainId] = calcGrains(ebsd);
 F = splineFilter;
 ebsd = smooth(ebsd,F,'fill');
@@ -107,7 +107,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed                                                 
@@ -127,7 +127,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize<=3)) = [];
+ebsd(grains(grains.numPixel<=3)) = [];
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill');
@@ -141,7 +141,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed                                                 
@@ -161,7 +161,7 @@ ebsd = EBSD
 {% highlight matlab %}
 mtexdata small
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
-ebsd(grains(grains.grainSize<=3)) = [];
+ebsd(grains(grains.numPixel<=3)) = [];
 [grains,ebsd('indexed').grainId] = calcGrains(ebsd('indexed'));
 F = splineFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
@@ -176,7 +176,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed                                                 
@@ -205,7 +205,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed                                                 
@@ -219,7 +219,7 @@ ebsd = EBSD
  Normal vector: (0,0,1)
  
  
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1      23    1952  Forsterite       mmm                         
@@ -248,7 +248,7 @@ plot(ebsd,colorKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      1  10201 (100%)       Al  LightSkyBlue      m-3m                         
@@ -294,7 +294,7 @@ grains_FMC = smooth(grains_FMC);
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains_FMC = grain2d
+grains_FMC = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      1      17   10201       Al      m-3m                         
@@ -323,7 +323,7 @@ grains_FMC = grain2d
  17       1      780    (238°,78°,321°)    0.012
  
  
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      1       1   10201       Al      m-3m                         
@@ -381,7 +381,7 @@ F =
     threshold: 0.2618
         isHex: 0
  
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      1  10201 (100%)       Al  LightSkyBlue      m-3m                         
@@ -403,7 +403,7 @@ hold on;plot(grains.boundary,'linewidth',2); hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      1     285   10201       Al      m-3m                         
@@ -415,7 +415,7 @@ grains = grain2d
  Properties: meanRotation, GOS
  
  
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      1     285   10201       Al      m-3m                         

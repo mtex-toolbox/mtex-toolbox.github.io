@@ -25,20 +25,15 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>In this section we discuss color keys that are particular useful when analyzing data with very small deviation in orientation. Let us consider the following calcite data set</p>
 {% highlight matlab %}
-% plotting conventions
-plotx2east
 mtexdata sharp
-
-ebsd = ebsd('calcite');
 
 ipfKey = ipfColorKey(ebsd);
 
-close all;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    32 (0.16%)  notIndexed                                                 
@@ -67,7 +62,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 8333 random orientations out of 20119 given orientations
+I'm plotting 8333 random orientations out of 20151 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSharpPlot_02.png" %}
@@ -117,7 +112,7 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 <center>
 {% include inline_image.html file="EBSDSharpPlot_05.png" %}
 </center>
-<p>We observe that the orientation map is almost completely gray, except for the outliers which appears black. Next, we use the option <code class="language-plaintext highlighter-rouge">maxAngle</code> to increase contrast in the grayish part</p>
+<p>We observe that the orientation map is almost completely gray, except for the outliers which appears black. Next, we use the option <code class="language-plaintext highlighter-rouge">'maxAngle'</code> to increase contrast in the grayish part</p>
 {% highlight matlab %}
 ipfKey.maxAngle = 7.5*degree;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
@@ -125,7 +120,7 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 <center>
 {% include inline_image.html file="EBSDSharpPlot_06.png" %}
 </center>
-<p>You may play around with the option <code class="language-plaintext highlighter-rouge">maxAngle</code> to obtain better results. As for interpretation keep in mind that white color represents the mean orientation and the color becomes more saturated and later dark as the orientation to color diverges from the mean orientation.</p>
+<p>You may play around with the option <code class="language-plaintext highlighter-rouge">'maxAngle'</code> to obtain better results. As for interpretation keep in mind that white color represents the mean orientation and the color becomes more saturated and later dark as the orientation to color diverges from the mean orientation.</p>
 <p>Let's have a look at the corresponding color map.</p>
 {% highlight matlab %}
 plot(ipfKey,'resolution',0.25*degree)
@@ -137,21 +132,21 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 10 random orientations out of 20119 given orientations
+I'm plotting 10 random orientations out of 20151 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSharpPlot_07.png" %}
 </center>
 <p>observe how in the inverse pole figure the orientations are scattered closely around the white center. Together with the fact that the transition from white to color is quite rapidly, this gives a high contrast.</p>
 <h2 id="9">The axis angle color key</h2>
-<p>A second option to visualize small orientation deviation, e.g. within a grains is the <a href="axisAngleColorKey.axisAngleColorKey.html">axis-angle color key</a>. In order to demonstrate this color key let us first separate the EBSD into grains.</p>
+<p>A second option to visualize small orientation deviation, e.g. within a grains is the <code class="language-plaintext highlighter-rouge"><a href="axisAngleColorKey.html">axisAngleColorKey</a></code>. In order to demonstrate this color key let us first separate the EBSD into grains.</p>
 {% highlight matlab %}
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',1.5*degree,'minPixel',3);
 grains = smooth(grains,5);
 {% endhighlight %}
-<p>In order to apply the @axisAngleColorKey we need to specify the crystal symmetry and a reference orientation <code class="language-plaintext highlighter-rouge">oriRef</code>. Often the meanorientation of the grains is a good choice.</p>
+<p>In order to apply the <a href="axisAngleColorKey.html">axisAngleColorKey</a> we need to specify the crystal symmetry and a reference orientation <code class="language-plaintext highlighter-rouge">oriRef</code>. Often the meanorientation of the grains is a good choice.</p>
 {% highlight matlab %}
-ipfKey = axisAngleColorKey(ebsd('indexed'));
+ipfKey = axisAngleColorKey(ebsd);
 
 % use for the reference orientation the grain mean orientation
 ipfKey.oriRef = grains.meanOrientation(ebsd('indexed').grainId);
@@ -191,13 +186,13 @@ mtexdata forsterite silent
 [grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
 
 % find largest grains
-largeGrains = grains(grains.grainSize > 800);
+largeGrains = grains(grains.numPixel > 800);
 
 ebsd = ebsd(largeGrains(1))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1   1453 (100%)  Forsterite  LightSkyBlue       mmm                         

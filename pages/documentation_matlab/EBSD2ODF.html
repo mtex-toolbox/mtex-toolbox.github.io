@@ -31,7 +31,7 @@ plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      0  16116 (100%)   Copper  LightSkyBlue       432                         
@@ -54,7 +54,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunHarmonic (Copper → xyz)
+odf = SO3FunHarmonic (Copper → y↑→x)
   bandwidth: 25
   weight: 1
 {% endhighlight %}
@@ -79,12 +79,9 @@ psi = SO3DeLaValleePoussinKernel
 <p>In the above example, the EBSD measurements are spatial dependent and the resulting halfwidth is too small. To avoid this problem we have to perform grain reconstruction first and then estimate the halfwidth from the grains.</p>
 {% highlight matlab %}
 % grains reconstruction
-grains = calcGrains(ebsd);
+grains = calcGrains(ebsd,'minPixel',5);
 
-% correct for to small grains
-grains = grains(grains.grainSize>5);
-
-% compute optimal halfwidth from the meanorientations of grains
+% compute optimal halfwidth from the meanorientation of grains
 psi = calcKernel(grains('co').meanOrientation)
 
 % compute the ODF with the kernel psi
@@ -97,7 +94,7 @@ psi = SO3DeLaValleePoussinKernel
   halfwidth: 4.7°
  
  
-odf = SO3FunHarmonic (Copper → xyz)
+odf = SO3FunHarmonic (Copper → y↑→x)
   bandwidth: 51
   weight: 1
 {% endhighlight %}
@@ -118,7 +115,7 @@ ori = discreteSample(modelODF,10000)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (m-3m → xyz)
+ori = orientation (m-3m → y↑→x)
   size: 10000 x 1
 {% endhighlight %}
 <p>Next we define a list of kernel halfwidth ,</p>

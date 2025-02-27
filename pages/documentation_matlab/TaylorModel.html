@@ -61,7 +61,7 @@ epsilon = strainTensor(diag([1 -q -(1-q)]))
 {% endhighlight %}
 
 {% highlight plaintext %}
-epsilon = strainTensor (xyz)
+epsilon = strainTensor (y↑→x)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -83,7 +83,7 @@ W
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (432 → xyz)
+ori = orientation (432 → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
@@ -110,12 +110,12 @@ W.eval(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-M = SO3FunHarmonic (432 → xyz)
+M = SO3FunHarmonic (432 → y↑→x)
   bandwidth: 32
   weight: 3.1
  
  
-W = SO3VectorFieldHarmonic (432 → xyz)
+W = SO3VectorFieldHarmonic (432 → y←↑x)
   bandwidth: 32
   tangent space: rightSpinTensor
  
@@ -172,15 +172,12 @@ mtexColorbar
 mtexdata csl
 
 % compute grains
-grains = calcGrains(ebsd('indexed'));
+grains = calcGrains(ebsd('indexed'),'minPixel',3);
 grains = smooth(grains,5);
-
-% remove small grains
-grains(grains.grainSize <= 2) = []
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase   Orientations  Mineral         Color  Symmetry  Crystal reference frame
     -1  154107 (100%)     iron  LightSkyBlue      m-3m                         
@@ -189,18 +186,6 @@ ebsd = EBSD
  Scan unit : um
  X x Y x Z : [0 511] x [0 300] x [0 0]
  Normal vector: (0,0,1)
- 
- 
-grains = grain2d
- 
- Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-    -1     527  153693     iron      m-3m                         
- 
- boundary segments: 23514 (17955 µm)
- inner boundary segments: 93 (71 µm)
- triple points: 1451
- 
- Properties: meanRotation, GOS
 {% endhighlight %}
 <p>and apply the Taylor model to each grain of our data set</p>
 {% highlight matlab %}
@@ -216,7 +201,7 @@ sS = symmetrise(slipSystem.fcc(grains.CS));
 {% endhighlight %}
 
 {% highlight plaintext %}
-epsilon = strainTensor (xyz)
+epsilon = strainTensor (y↑→x)
   type: Lagrange 
   rank: 2 (3 x 3)
  

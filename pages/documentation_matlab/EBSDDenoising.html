@@ -50,7 +50,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed                                                 
@@ -83,7 +83,7 @@ hold off
 </center>
 <p>We clearly observe some deformation gradients withing the grains which are superposed by random noise.</p>
 <h2 id="4">The Mean Filter</h2>
-<p>The simplest filter to apply to orientation data is the @meanFilter which replaces all orientations by the mean of all neighboring orientations.</p>
+<p>The simplest filter to apply to orientation data is the <a href="meanFilter.html">meanFilter</a> which replaces all orientations by the mean of all neighboring orientations.</p>
 {% highlight matlab %}
 % define the meanFilter
 F = meanFilter;
@@ -170,7 +170,7 @@ hold off
 </center>
 <h2 id="9">The Smoothing Spline Filter</h2>
 <p>All the above filters are so called sliding windows filters which consider for the denoising operation only neighboring orientations within a certain window. The next filters belong to the class of variational filters which determine the denoised orientation map as the solution of an minimization problem that is simultaneously close to the original map and "smooth". The resulting orientation map heavily depends on the specific definition of "smooth" and on the regularization parameter which controls the trade of between fitting the original data and forcing the resulting map to be smooth.</p>
-<p>The @splineFilter uses as definition of smoothness the curvature of the orientation map. As a consequence, the denoised images are very "round" and similarly as for the @meanFilter subgrain boundaries will be smoothed away. On the positive side the @meanFilter is up to now the only filter that automatically calibrates the regularization parameter.</p>
+<p>The <a href="splineFilter.html">splineFilter</a> uses as definition of smoothness the curvature of the orientation map. As a consequence, the denoised images are very "round" and similarly as for the <a href="meanFilter.html">meanFilter</a> subgrain boundaries will be smoothed away. On the positive side the <a href="meanFilter.html">meanFilter</a> is up to now the only filter that automatically calibrates the regularization parameter.</p>
 {% highlight matlab %}
 F = splineFilter;
 
@@ -198,7 +198,7 @@ ans =
 {% include inline_image.html file="EBSDDenoising_07.png" %}
 </center>
 <h2 id="10">The Halfquadratic Filter</h2>
-<p>In the default setting the @halfQuadraticFilter uses definition of smoothness the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the @medianFilter it tends to carton like images and staircasing.</p>
+<p>In the default setting the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> uses definition of smoothness the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the <a href="medianFilter.html">medianFilter</a> it tends to carton like images and staircasing.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 
@@ -218,7 +218,7 @@ hold off
 {% include inline_image.html file="EBSDDenoising_08.png" %}
 </center>
 <h2 id="11">The Infimal Convolution Filter</h2>
-<p>The infimal convolution filter was designed as a compromise between the @splineFilter and the @halfQuadraticFilter. It is still under development and its use is not recommended.</p>
+<p>The infimal convolution filter was designed as a compromise between the <a href="splineFilter.html">splineFilter</a> and the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a>. It is still under development and its use is not recommended.</p>
 {% highlight matlab %}
 F = infimalConvolutionFilter;
 F.lambda = 0.01; % smoothing parameter for the gradient

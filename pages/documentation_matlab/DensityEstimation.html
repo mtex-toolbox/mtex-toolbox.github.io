@@ -238,7 +238,7 @@ odf = calcDensity(ebsd('Forsterite').orientations,'halfwidth',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunHarmonic (Forsterite → xyz)
+odf = SO3FunHarmonic (Forsterite → y↑→x)
   bandwidth: 25
   weight: 1
 {% endhighlight %}
@@ -262,17 +262,17 @@ plotting 2000 random orientations out of 152345 given orientations
 <p>A more detailed describtion of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p>
 <h2 id="19">Parametric Density Estimation</h2>
 <p>In contrast to kernel density estimation, parametric density estimation makes the assumption that the true distribution function belongs to a parametric distribution family, e.g. the Gaussian. In this case it estimates the parameters of this distribution from the random sample. In the case of the Gaussian distribution these parameters are the mean value and the standard deviation. On spheres and in orientation space, the analogous functions to the Gaussian are the Bingham distributions. The estimation of Bingham parameters from directional and rotational data is explained in the sections <a href="S2FunBingham.html">The Spherical Bingham Distribution</a> and <a href="BinghamODFs.html">The Rotational Bingham Distribution</a>.</p>
-<h2 id="20">Density Estimtation with Weights</h2>
+<h2 id="20">Density Estimation with Weights</h2>
 <p>In many use cases one has a weighted random sample. A typical example is if one wants to estimate a orientation distribution function from grain orientations. In this cases big grains should contribute more to the ODF than small grains. For that reason the functions <code class="language-plaintext highlighter-rouge">calcDensity</code> allow for an additional option <code class="language-plaintext highlighter-rouge">'weights'</code> which will pass weights to the density estimation.</p>
 {% highlight matlab %}
 mtexdata titanium silent
 grains = calcGrains(ebsd);
 
-odf = calcDensity(grains.meanOrientation,'weights',grains.grainSize)
+odf = calcDensity(grains.meanOrientation,'weights',grains.numPixel)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (Titanium (Alpha) → xyz)
+odf = SO3FunRBF (Titanium (Alpha) → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 10°

@@ -1,8 +1,8 @@
 ---
-title: quadrature
+title: regularize
 
 sidebar: function_reference_sidebar
-permalink: S2FunHarmonicSym.quadrature.html
+permalink: SO3FunHarmonic.regularize.html
 folder: function_reference
 toc: false
 ---
@@ -13,48 +13,32 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>quadrature</title>
+<title>regularize</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.source" content="script_S2FunHarmonicSym__quadrature.m">
+<meta name="DC.source" content="script_SO3FunHarmonic__regularize.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/S2Fun/@S2FunHarmonicSym/quadrature.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunHarmonic/regularize.m">
     edit page</a></font>
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Compute the S2-Fourier/harmonic coefficients of an given <a href="S2Fun.S2Fun.html">S2Fun</a> or given evaluations on a specific quadrature grid.</p>
+<p>computes a regularization</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-sF = S2FunHarmonicSym.quadrature(nodes,values,'weights',w,CS)
-sF = S2FunHarmonicSym.quadrature(f,CS)
-sF = S2FunHarmonicSym.quadrature(f, 'bandwidth', bandwidth,CS)
+SO3F = SO3FunHarmonic.regularize(SO3Grid,f,lambda)
+SO3F = SO3FunHarmonic.regularize(SO3Grid,f,lambda,'bandwidth',
+     bandwidth,'weights',W,'fourier_weights',What)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>values</tt>
+            <tt>SO3Grid</tt>
          </td>
          <td>
-            <tt>double (first dimension has to be the evaluations)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>nodes</tt>
-         </td>
-         <td>
-            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>w</tt>
-         </td>
-         <td>
-            <tt>double quadrature weights</tt>
+            <tt>grid on the rotation group</tt>
          </td>
       </tr>
       <tr>
@@ -62,7 +46,15 @@ sF = S2FunHarmonicSym.quadrature(f, 'bandwidth', bandwidth,CS)
             <tt>f</tt>
          </td>
          <td>
-            <tt>function handle in vector3d (first dimension has to be the evaluations)</tt>
+            <tt>function values on the grid (may be multidimensional)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda</tt>
+         </td>
+         <td>
+            <tt>parameter for regularization</tt>
          </td>
       </tr>
    </table>
@@ -72,10 +64,10 @@ sF = S2FunHarmonicSym.quadrature(f, 'bandwidth', bandwidth,CS)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>sF</tt>
+            <tt>SO3F</tt>
          </td>
          <td>
-            <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
+            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></tt>
          </td>
       </tr>
    </table>
@@ -85,25 +77,33 @@ sF = S2FunHarmonicSym.quadrature(f, 'bandwidth', bandwidth,CS)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>symmetrise</tt>
+            <tt>bandwidth</tt>
          </td>
          <td>
-            <tt>apply symmetrisation, only required if the function is not yet symmetric</tt>
+            <tt>maximum harmonic degree</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>bandwidth</tt>
+            <tt>W</tt>
          </td>
          <td>
-            <tt>harmonic cut off degree</tt>
+            <tt>weight w_n for the node nodes (default: equal/Voronoi weights)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>What</tt>
+         </td>
+         <td>
+            <tt>weight what_{n}^{k,l} for the Fourier space (default Sobolev weights for s = 2)</tt>
          </td>
       </tr>
    </table>
 </p>
 <h2 id="7">See also</h2>
 <p>
-<a href="S2FunHarmonic.quadrature.html">S2FunHarmonic.quadrature</a>
+<a href="SO3FunHarmonic.interpolate.html">SO3FunHarmonic.interpolate</a>
 </p>
 </div>
 </body>

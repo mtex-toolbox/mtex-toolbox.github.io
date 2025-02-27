@@ -44,7 +44,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
      0   92415 (27%)      notIndexed                                                 
@@ -166,7 +166,7 @@ childOri = grains('Iron bcc').meanOrientation;
 % the parent orientation we are going to compute
 parentOri = orientation.nan(max(parentId),1,fcc2bcc.CS);
 fit = inf(size(parentOri));
-weights = grains('Iron bcc').grainSize;
+weights = grains('Iron bcc').numPixel;
 
 % loop through all parent grains
 for k = 1:max(parentId)
@@ -266,11 +266,9 @@ mtexColorbar
 <h2 id="19">Denoise the parent map</h2>
 <p>Finaly we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
 {% highlight matlab %}
-[parentGrains, parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',3*degree);
+[parentGrains, parentEBSD.grainId] = ...
+  calcGrains(parentEBSD('indexed'),'angle',3*degree,'minPixel',10);
 
-parentEBSD(parentGrains(parentGrains.grainSize<10)) = [];
-
-[parentGrains, parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',3*degree);
 parentGrains = smooth(parentGrains,5);
 
 plot(ebsd('indexed'),ebsd('indexed').orientations,'figSize','large')
