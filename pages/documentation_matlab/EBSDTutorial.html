@@ -41,7 +41,7 @@ ebsd = EBSD.load(fileName)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0   58485 (24%)  notIndexed                                                 
@@ -72,7 +72,7 @@ ebsd('Forsterite')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = EBSD
+ans = EBSD (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1  152345 (100%)  Forsterite  LightSkyBlue       mmm                         
@@ -88,7 +88,7 @@ ebsd('Forsterite').orientations
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (Forsterite → xyz)
+ans = orientation (Forsterite → y↑→x)
   size: 152345 x 1
 {% endhighlight %}
 <p>and may use this syntax to plot an ipf map of all Forsterite orientations</p>
@@ -110,7 +110,7 @@ grains = smooth(grains,5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1     438  151531  Forsterite       mmm                         
@@ -140,7 +140,7 @@ hold off
 cS = crystalShape.olivine(ebsd('Forsterite').CS)
 
 % select only Forsterite grains with more then 100 pixels
-grains = grains('Forsterite',grains.grainSize > 100);
+grains = grains('Forsterite',grains.numPixel > 100);
 
 % plot crystal shapes at the positions of the Forsterite grains
 hold on

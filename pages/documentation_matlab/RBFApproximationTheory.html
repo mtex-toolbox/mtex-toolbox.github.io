@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>On this page we consider the problem of determining the Radial Basis Function (<code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>) of a smooth orientation dependent function \(f(\mathtt{ori})\) given a list of orientations \(\mathtt{ori}_m\) and a list of corresponding values \(v_m\). These values may be the volume of crystals with a specific orientation, as in the case of an ODF, or any other orientation dependent physical property.</p>
+<p>On this page we consider the problem of determining the Radial Basis Function (<a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a>) of a smooth orientation dependent function \(f(\mathtt{ori})\) given a list of orientations \(\mathtt{ori}_m\) and a list of corresponding values \(v_m\). These values may be the volume of crystals with a specific orientation, as in the case of an ODF, or any other orientation dependent physical property.</p>
 <p>A more general documentation about approximation of discrete data in MTEX can be found in the section <a href="SO3FunApproximationTheory.html">Approximating Orientation Dependent Functions from Discrete Data</a>.</p>
 <p>In general we should favor RBF-kernel approximation, if the data coincide to an underlying density function (odf,mdf,...) or if the number of data points (given rotations and function values) and the noise ratio are not too large.</p>
 <p>In the following we take a look on the approximation problem from <a href="SO3FunApproximationTheory.html">general approximation theory</a>, where we compared the harmonic approximation with kernel approximation.</p>
@@ -57,7 +57,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunRBF (1 → xyz)
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
@@ -96,7 +96,7 @@ mtexColorbar
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunRBF (1 → xyz)
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
@@ -114,7 +114,7 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunRBF (1 → xyz)
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 2°
@@ -125,14 +125,14 @@ SO3F = SO3FunRBF (1 → xyz)
 {% include inline_image.html file="RBFApproximationTheory_04.png" %}
 </center>
 <p>A a rule of thumb the halfwidth of the kernel function should be at least the resolution of the data points. Note that the option 'halfwidth' also adjusts the resolution of the center orientation grid of the rotational kernel functions of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, i.e. the resolution of the grid of \(R_1,\dots,R_N\) in the above formulas.</p>
-<p>We can preserve the resolution of this grid by adding the option 'resolution'. Therefore we obtain a smoothed function of <code class="language-plaintext highlighter-rouge">SO3F1</code>.</p>
+<p>We can preserve the resolution of this grid by adding the option <code class="language-plaintext highlighter-rouge">'resolution'</code>. Therefore we obtain a smoothed function of <code class="language-plaintext highlighter-rouge">SO3F1</code>.</p>
 {% highlight matlab %}
 SO3F = interp(ori,val,'halfwidth',10*degree,'resolution',5*degree,'density')
 plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunRBF (1 → xyz)
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 10°
@@ -142,7 +142,7 @@ SO3F = SO3FunRBF (1 → xyz)
 <center>
 {% include inline_image.html file="RBFApproximationTheory_05.png" %}
 </center>
-<p>We can also input centers \(R_1,\dots,R_N\) for the rotational kernel functions by the option 'SO3Grid'.</p>
+<p>We can also input centers \(R_1,\dots,R_N\) for the rotational kernel functions by the option <code class="language-plaintext highlighter-rouge">'SO3Grid'</code>.</p>
 {% highlight matlab %}
 S3G = equispacedSO3Grid(crystalSymmetry,'resolution',5*degree)
 SO3F = interp(ori,val,'SO3Grid',S3G,'density')
@@ -150,12 +150,10 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-S3G = SO3Grid (1 → xyz)
+S3G = SO3Grid (1 → y↑→x)
   grid: 119088 orientations, resolution: 5°
-Warning: Maximum number of iterations reached,
-result may not have converged to the optimum yet. 
  
-SO3F = SO3FunRBF (1 → xyz)
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
@@ -180,7 +178,6 @@ set(gca,'xdir','reverse')
 xlabel('halfwidth [deg]')
 ylabel('relative error')
 {% endhighlight %}
-
 <center>
 {% include inline_image.html file="RBFApproximationTheory_07.png" %}
 </center>
@@ -191,7 +188,7 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunRBF (1 → xyz)
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 7.5°
@@ -201,7 +198,7 @@ SO3F = SO3FunRBF (1 → xyz)
 <center>
 {% include inline_image.html file="RBFApproximationTheory_08.png" %}
 </center>
-<p>Note that the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code> tells MTEX to use the <code class="language-plaintext highlighter-rouge">@SO3DeLaValleePoussinKernel</code> of this specific halfwidth. But we can also choose a different <a href="SO3Kernels.html">rotational kernel function</a> by the option <code class="language-plaintext highlighter-rouge">'kernel'</code>.</p>
+<p>Note that the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code> tells MTEX to use the <code class="language-plaintext highlighter-rouge"><a href="SO3DeLaValleePoussinKernel.SO3DeLaValleePoussinKernel.html">SO3DeLaValleePoussinKernel</a></code> of this specific halfwidth. But we can also choose a different <a href="SO3Kernels.html">rotational kernel function</a> by the option <code class="language-plaintext highlighter-rouge">'kernel'</code>.</p>
 {% highlight matlab %}
 psi = SO3AbelPoissonKernel('halfwidth',5*degree)
 SO3F = interp(ori,val,'kernel',psi,'density')
@@ -212,8 +209,9 @@ plot(SO3F,'sigma')
 psi = SO3AbelPoissonKernel
   bandwidth: 48
   halfwidth: 5°
-
-SO3F = SO3FunRBF (1 → xyz)
+ 
+ 
+SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: Abel Poisson, halfwidth 5°
@@ -230,11 +228,11 @@ SO3F = SO3FunRBF (1 → xyz)
 tic
 SO3F = SO3FunRBF.interpolate(ori, S.values,'exact','halfwidth',7.5*degree);
 toc
-plot(SO3F)
+plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 65.813998 seconds.
+Elapsed time is 29.766727 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_10.png" %}
@@ -278,11 +276,11 @@ fprintf(['Number of iterations = ',num2str(iter2),'\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 1.065290 seconds.
+Elapsed time is 0.546910 seconds.
 Number of iterations = 8
 Value of energy functional = 0.43171
 
-Elapsed time is 1.607980 seconds.
+Elapsed time is 0.736871 seconds.
 Number of iterations = 41
 Value of energy functional = 0.0015935
 {% endhighlight %}

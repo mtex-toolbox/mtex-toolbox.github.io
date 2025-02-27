@@ -96,7 +96,7 @@ ori = ebsd(grainSel).orientations
 {% endhighlight %}
 
 {% highlight plaintext %}
-grainSel = grain2d
+grainSel = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
      0       1    1949  Ferrite       432                         
@@ -109,7 +109,7 @@ grainSel = grain2d
  94       0     1949   (258°,70°,217°)   0.0434024
  
  
-ori = orientation (Ferrite → xyz)
+ori = orientation (Ferrite → y↑→x)
   size: 1949 x 1
 {% endhighlight %}
 <p>We could now use the command <a href="orientation.mean"><code class="language-plaintext highlighter-rouge">mean</code></a> to compute the grain average orientation from these individual orientations. A more direct approach, however, is to access the property <code class="language-plaintext highlighter-rouge">grain.meanOrientation</code> which has been filled with the mean orientations during grain reconstruction.</p>
@@ -209,7 +209,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d
+ans = vector3d (y↑→x)
           x         y         z
   -0.281993 0.0471325 -0.958258
  
@@ -235,7 +235,7 @@ ans =
 {% endhighlight %}
 <p>Lets perform the above analysis for all large grains</p>
 {% highlight matlab %}
-grainsLarge = grains(grains.grainSize > 50);
+grainsLarge = grains(grains.numPixel > 50);
 lambda = nan(length(grainsLarge),4);
 
 % loop through all grains

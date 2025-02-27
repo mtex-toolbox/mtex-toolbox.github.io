@@ -200,7 +200,7 @@ Correction of spatial coordinates, reference frame alignment, denoising
 <br>
 **Lecture 7 - Quantitative Microstructure Analysis (Rüdiger Kilian)**
 <br>
-grain shape statistics, grain boundary statistics
+grain shape, grain boundary and grain size statistics
 <br>
 <!--deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 combining MTEX with external software like VPSC-->

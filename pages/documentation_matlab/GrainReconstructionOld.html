@@ -39,7 +39,7 @@ plot(ebsd)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0   58485 (24%)  notIndexed                                                 
@@ -72,7 +72,7 @@ grains = calcGrains(ebsd,'angle',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      0    1139    4052  notIndexed                                   
@@ -135,7 +135,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d
+grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1     103   14093  Forsterite       mmm                         
@@ -165,7 +165,7 @@ notIndexed = grains('notIndexed')
 {% endhighlight %}
 
 {% highlight plaintext %}
-notIndexed = grain2d
+notIndexed = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      0    1139    4052  notIndexed                                   
@@ -180,7 +180,7 @@ notIndexed = grain2d
 {% highlight matlab %}
 % plot the not indexed regions colorcoded according the the quotient between
 % number of measurements and number of boundary segments
-plot(notIndexed,log(notIndexed.grainSize ./ notIndexed.boundarySize))
+plot(notIndexed,log(notIndexed.numPixel ./ notIndexed.boundarySize))
 mtexColorbar
 {% endhighlight %}
 <center>
@@ -189,7 +189,7 @@ mtexColorbar
 <p>Regions with a high quotient are blocks which can be hardly correctly assigned to a grain. Hence, we should keep these regions as not indexed and only remove the not indexed information from locations with a low quotient.</p>
 {% highlight matlab %}
 % the "not indexed grains" we want to remove
-toRemove = notIndexed(notIndexed.grainSize ./ notIndexed.boundarySize<0.8);
+toRemove = notIndexed(notIndexed.numPixel ./ notIndexed.boundarySize<0.8);
 
 % now we remove the corresponding EBSD measurements
 ebsd(toRemove) = [];

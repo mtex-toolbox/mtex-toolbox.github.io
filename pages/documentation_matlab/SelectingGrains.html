@@ -70,19 +70,19 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Grain selected: 34
+Grain selected: 74
  
-ans = grain2d
+ans = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1       1     323  Forsterite       mmm                         
+     1       1     451  Forsterite       mmm                         
  
- boundary segments: 107 (4092 µm)
+ boundary segments: 136 (5856 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 6
+ triple points: 8
  
- Id   Phase   Pixels      meanRotation          GOS
- 34       1      323   (131°,64°,250°)   0.00795279
+ Id   Phase   Pixels      meanRotation         GOS
+ 74       1      451   (50°,162°,328°)   0.0129712
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_02.png" %}
@@ -113,19 +113,19 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains_selected = grain2d
+grains_selected = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1       3     523  Forsterite       mmm                         
+     1       3     534  Forsterite       mmm                         
  
- boundary segments: 188 (7797 µm)
- inner boundary segments: 0 (0 µm)
+ boundary segments: 191 (8474 µm)
+ inner boundary segments: 9 (267 µm)
  triple points: 13
  
- Id   Phase   Pixels      meanRotation     GOS
- 21       1      181   (131°,64°,245°)   0.007
- 34       1      323   (131°,64°,250°)   0.008
- 51       1       19   (144°,74°,250°)    0.01
+ Id   Phase   Pixels      meanRotation      GOS
+ 42       1       75   (63°,165°,339°)    0.029
+ 74       1      451   (50°,162°,328°)    0.013
+ 94       1        8   (68°,151°,338°)   0.0072
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_04.png" %}
@@ -160,7 +160,7 @@ grains(max_id)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = grain2d
+ans = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1       1    1448  Forsterite       mmm                         
@@ -233,7 +233,7 @@ grains('forsterite')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = grain2d
+ans = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1      61   14010  Forsterite       mmm                         
@@ -246,7 +246,7 @@ ans = grain2d
 {% endhighlight %}
 <p>Logical indexing allows also for more complex queries, e.g. selecting all grains perimeter larger than 6000 and at least 600 measurements within</p>
 {% highlight matlab %}
-condition = grains.perimeter>6000 & grains.grainSize >= 600;
+condition = grains.perimeter>6000 & grains.numPixel >= 600;
 
 selected_grains = grains(condition)
 
@@ -254,7 +254,7 @@ plot(selected_grains)
 {% endhighlight %}
 
 {% highlight plaintext %}
-selected_grains = grain2d
+selected_grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
      1       4    5248  Forsterite       mmm                         
@@ -276,7 +276,7 @@ selected_grains = grain2d
 <p>Besides, the list of grains the command <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> returns also two other output arguments.</p>
 {% highlight matlab %}
 plot(grains)
-largeGrains = grains(grains.grainSize > 50);
+largeGrains = grains(grains.numPixel > 50);
 
 text(largeGrains,largeGrains.id)
 {% endhighlight %}
@@ -289,7 +289,7 @@ ebsd(grains(33))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = EBSD
+ans = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1     42 (100%)  Forsterite  LightSkyBlue       mmm                         
@@ -305,7 +305,7 @@ ebsd(ebsd.grainId == 33)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = EBSD
+ans = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1     42 (100%)  Forsterite  LightSkyBlue       mmm                         

@@ -29,7 +29,7 @@ mtexdata forsterite
 [grains,ebsd.grainId] = ebsd.calcGrains;
 
 % just use the larger grains of forsterite
-ebsd(grains(grains.grainSize< 100))='notIndexed';
+ebsd(grains(grains.numPixel< 100))='notIndexed';
 ebsd({'e' 'd'})='notIndexed';
 
 % lets also ignore inclusions for a nicer plotting experience
@@ -38,7 +38,7 @@ ebsd(grains(grains.isInclusion))=[];
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0   58485 (24%)  notIndexed                                                 
@@ -140,12 +140,12 @@ annotate(fib.r,'plane','linestyle','-.','linewidth',2,'lineColor','r')
 {% endhighlight %}
 
 {% highlight plaintext %}
-fib = fibre (Forsterite → xyz)
+fib = fibre (Forsterite → y↑→x)
  
   h || r: (-1-112) || (-12,-5,3)
  o1 → o2: (12.8°,44.7°,280.8°) → (12.8°,44.7°,280.8°)
  
-ans = vector3d
+ans = vector3d (y↑→x)
          x         y         z
   -0.89864 -0.376589  0.225003
  
