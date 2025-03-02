@@ -1,8 +1,8 @@
 ---
-title: eval
+title: sum
 
 sidebar: function_reference_sidebar
-permalink: SO3FunRBF.eval.html
+permalink: SO3FunRBF.sum.html
 folder: function_reference
 toc: false
 ---
@@ -13,23 +13,26 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>eval</title>
+<title>sum</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.source" content="script_SO3FunRBF__eval.m">
+<meta name="DC.source" content="script_SO3FunRBF__sum.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunRBF/eval.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3FunRBF/sum.m">
     edit page</a></font>
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>evaluate sum of unimodal components at orientation g</p>
+<p>Calculates the integral of a SO3RBF based on</p>
+<p>\[ v = \int f( R ) dR \]</p>
+<p>with \(vol(SO(3)) = \int_{SO(3)} 1 dR = 8\pi^2\).</p>
+<p>If there is a second argument it sums up along a specified dimension of a vector-valued SO3FunHarmonic.</p>
 <h2 id="3">Description</h2>
-<p>general formula:</p>
-<p>\[ f(r) = sum_j w_j \psi(r,c_j) \]</p>
+<p>SO3F is a 3x3 SO3Fun sum(SO3F) returns a 3x3 matrix with the integrals of each function sum(SO3F, 1) returns a 1x3 SO3Fun which contains the pointwise sums along the first dimension</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
-f = eval(SO3F,rot)
+value = sum(SO3F)
+SO3F = sum(SO3F, d)
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -39,15 +42,15 @@ f = eval(SO3F,rot)
             <tt>SO3F</tt>
          </td>
          <td>
-            <tt>@SO3FunUnimodal</tt>
+            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>rot</tt>
+            <tt>d</tt>
          </td>
          <td>
-            <tt><a href="rotation.rotation.html">rotation</a></tt>
+            <tt>dimension to take the sum value over</tt>
          </td>
       </tr>
    </table>
@@ -57,31 +60,18 @@ f = eval(SO3F,rot)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>f</tt>
+            <tt>SO3F</tt>
          </td>
          <td>
-            <tt>double [numrot x size(SO3F)]</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="7">Options</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>exact</tt>
-         </td>
-         <td>
-            <tt/>
+            <tt><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>epsilon</tt>
+            <tt>value</tt>
          </td>
          <td>
-            <tt/>
+            <tt>double</tt>
          </td>
       </tr>
    </table>
