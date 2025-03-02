@@ -26,6 +26,7 @@ features and syntax changes.
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
+[**mtex-6.1.beta1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.beta.1/mtex-6.1.beta.1.zip) ||| March 2025 ||| ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-6.1.beta.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-6.0.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.0/mtex-6.0.0.zip) ||| November 2024 ||| 3d Grains ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-6.0.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.11.2.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.11.2/mtex-5.11.2.zip) ||| April 2024 ||| better grain reconstruction ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.11.2/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-5.11.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-5.11.1/mtex-5.11.1.zip) ||| March 2024 ||| better grain reconstruction ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-5.11.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
