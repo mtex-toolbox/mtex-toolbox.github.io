@@ -21,17 +21,14 @@ MTEX 6.1. Participation is possible in presence as well as remotely.
 	<b>Important:</b> Deadline has been extended until 21.02.2025
 </div>
 
-
-<!---
 {% capture par_default %}
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
 {% endcapture %}
 {% capture par_access %}
 	You are logged in.
-	{% include reference.html link="https://eu02web.zoom-x.de/j/69081108241?pwd=OEh6S0k1OUVxMWFnMHZ5dFNDTVJoQT09" content="Enter Workshop zoom session" %}
+	{% include reference.html link="https://eu02web.zoom-x.de/j/64956858966" content="Enter Workshop zoom session" %}
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
--->
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX
 
@@ -56,29 +53,31 @@ practical examples during the exercises within MTEX.
 				<div markdown="span">
 <!--Monday-->
 **Lecture 0 - General Concepts:**
-<!--
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://tuc.cloud/index.php/s/6Crd5PszNDw27qt"
+{% include reference.html link=""
 	content="slides" class="course_material" %}
--->
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
 <br>
 <br>
 **Lecture 1 - EBSD (Rüdiger Kilian)**
-<!--
-{% include reference.html link="https://tuc.cloud/index.php/s/iPjkbYm6NPJ3PMw" content="slides" class="course_material" %}
+{% include reference.html link="https://drive.google.com/file/d/1PreAu1jdBvwDnKhFks9N-ohs4g2PxRz4/view?usp=sharing" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/z0-rB87H0hU" content="video"
-	class="course_material" %}
--->	
+<!---{% include reference.html link="https://youtu.be/z0-rB87H0hU" content="video"
+	class="course_material" %}--->
 <br>
 principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 <br>
 **Exercise 1**
-
+{% include reference.html link="https://drive.google.com/file/d/1a0CGSfltrMGcA9KDFjexgyOtAo2iYrXc/view?usp=sharing" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/13_FdIRMJSgew6xS8oLJo2zmqY8cC34wc/view?usp=sharing" content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1ZI0pS2GOsgK-hJnjCCo2D8PztLzs9xFp/view?usp=sharing" content="data" class="course_material" %}
+<span class="course_material">, </span>
+<!--{% include reference.html link="https://youtu.be/5YicKTTnMb8" content="video" class="course_material" %}-->
 <br>
 <br>
 
