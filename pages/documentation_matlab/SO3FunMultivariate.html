@@ -57,14 +57,14 @@ SO3F1 = SO3FunHarmonic.interpolate(nodes, y,'maxit',10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result
+may not have converged to the optimum yet. 
  
 SO3F1 = SO3FunHarmonic (Quartz → y↑→x)
   isReal: false
   size: 2 x 1
   bandwidth: 54
-  weight: 0.96
+  weights: [0.96 0.47]
 {% endhighlight %}
 <p>It is also possible to interpolate one component by an <a href="SO3FunHarmonic.SO3FunRBF"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>, that means</p>
 {% highlight matlab %}
@@ -72,8 +72,8 @@ SO3F2 = interp(nodes,y(:,1))
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result
+may not have converged to the optimum yet. 
  
 SO3F2 = SO3FunRBF (Quartz → y↑→x)
  
@@ -90,7 +90,7 @@ SO3F2 = SO3FunRBF (Quartz → y↑→x)
 {% highlight matlab %}
 f = @(rot) [exp(rot.a+rot.b+rot.c)+50*(rot.b-cos(pi/3)).^3.*(rot.b-cos(pi/3) > 0), rot.a, rot.b, rot.c];
 {% endhighlight %}
-<p>Now we call the quadrature command to get (4x1) <code class="language-plaintext highlighter-rouge">SO3F3</code> of type \(~\) <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>
+<p>Now we call the quadrature command to get (4x1) <code class="language-plaintext highlighter-rouge">SO3F3</code> of type <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>
 </p>
 {% highlight matlab %}
 SO3F3 = SO3FunHarmonic.quadrature(f, 'bandwidth', 50,SO3F1.CS)
@@ -101,7 +101,6 @@ SO3F3 = SO3FunHarmonic (Quartz → y↑→x)
   isReal: false
   size: 4 x 1
   bandwidth: 50
-  weight: 1.1
 {% endhighlight %}
 <p>
 <b>Definition via Fourier-coefficients</b>
@@ -116,7 +115,6 @@ SO3F4 = SO3FunHarmonic (y↑→x → y↑→x)
   isReal: false
   size: 10 x 1
   bandwidth: 1
-  weight: 1
 {% endhighlight %}
 <div>
 <ul>
@@ -139,7 +137,7 @@ ans = SO3FunHarmonic (Quartz → y↑→x)
   isReal: false
   size: 3 x 1
   bandwidth: 54
-  weight: 0.47+0.2i
+  weights: [0.47 1.1 -0.25]
 {% endhighlight %}
 <p>You can conjugate the Fourier-coefficients and transpose/ctranspose the multivariate <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p>
 {% highlight matlab %}
@@ -153,7 +151,7 @@ ans = SO3FunHarmonic (Quartz → y↑→x)
   isReal: false
   size: 1 x 2
   bandwidth: 54
-  weight: 0.96
+  weights: [0.96 0.47]
 {% endhighlight %}
 <p>Some other operations</p>
 {% highlight matlab %}
@@ -172,7 +170,6 @@ SO3F4 = SO3FunHarmonic (y↑→x → y↑→x)
   isReal: false
   size: 2 x 5
   bandwidth: 1
-  weight: 1
 {% endhighlight %}
 <p>
 <b><code class="language-plaintext highlighter-rouge">sum</code> and <code class="language-plaintext highlighter-rouge">mean</code></b>
@@ -194,7 +191,7 @@ ans = SO3FunHarmonic (y↑→x → y↑→x)
   antipodal: true
   size: 2 x 1
   bandwidth: 1
-  weight: 0.2
+  weights: [0.2 0]
 {% endhighlight %}
 <p>
 <b>min/max</b>
@@ -228,7 +225,6 @@ ans = SO3FunHarmonic (y↑→x → y↑→x)
   isReal: false
   size: 2 x 5
   bandwidth: 55
-  weight: 0.96
 {% endhighlight %}
 <h2 id="19">Visualization of multivariate SO3FunHarmonic</h2>
 <p>Similarly to the univariate case we also can look at the Fourier coefficients of multivariate functions.</p>
@@ -244,11 +240,12 @@ plot(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the desired
-components manually. In the following the first component is
-plotted. 
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
+Warning: You try to plot an multivariate function. Plot
+the desired components manually. In the following the
+first component is plotted. 
+Warning: Imaginary part of complex valued SO3FunHarmonic
+is ignored. In the following only the real part is
+plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_02.png" %}
@@ -258,11 +255,12 @@ plot3d(SO3F3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: You try to plot an multivariate function. Plot the desired
-components manually. In the following the first component is
-plotted. 
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
+Warning: You try to plot an multivariate function. Plot
+the desired components manually. In the following the
+first component is plotted. 
+Warning: Imaginary part of complex valued SO3FunHarmonic
+is ignored. In the following only the real part is
+plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_03.png" %}
@@ -273,8 +271,9 @@ plotFibre(SO3F3,fibre.beta)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3FunHarmonic is ignored.
-In the following only the real part is plotted.
+Warning: Imaginary part of complex valued SO3FunHarmonic
+is ignored. In the following only the real part is
+plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunMultivariate_04.png" %}
