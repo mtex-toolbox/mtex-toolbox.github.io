@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Assume we have given some evaluation routine \(f\) that maps orientations to numbers. This could be an rotational function of class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, a <code class="language-plaintext highlighter-rouge"><a href="function_handle.function_handle.html">function_handle</a></code>, a more complex Matlab function or a physical experiment.</p>
+<p>Assume we have given some evaluation routine \(f\) that maps orientations to numbers. This could be an rotational function of class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, a <code class="language-plaintext highlighter-rouge">@function_handle</code>, a more complex Matlab function or a physical experiment.</p>
 <p>On this page we will explain how to compute the corresponding <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> and <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> that approximates \(f\) reasonable well.</p>
 <p>This approximation process is similarly to <a href="SO3FunApproximation.html">Approximating Orientation Dependent Functions from Discrete Data</a>. where the given data are a set of orientations with function values.</p>
 <p>Lets load an orientation dependent function as <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
@@ -73,7 +73,7 @@ odf = SO3FunRBF (Quartz → y↑→x)
 </ul>
 </div>
 <p>Both of them are defined with respect to some bandwidth \(N\) and they are exact for all band-limited functions of this specific bandwidth. That means, if we perform quadrature on any <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> of bandwidth N with one of this schemes, then we will get exactly this function back.</p>
-<p>In MTEX we use the command <a href="SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge"><a href="function_handle.function_handle.html">function_handle</a></code> into an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
+<p>In MTEX we use the command <a href="SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> into an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
 {% highlight matlab %}
 SO3F = SO3FunHarmonic(odf)
 plot(SO3F,'sigma')
@@ -101,7 +101,7 @@ SO3F = SO3FunHarmonic (Quartz → y↑→x)
 <center>
 {% include inline_image.html file="SO3FunQuadrature_03.png" %}
 </center>
-<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge"><a href="function_handle.function_handle.html">function_handle</a></code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we proceed as follows.</p>
+<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we proceed as follows.</p>
 <p>One idea could be to perform the experiment for random orientations and <a href="SO3FunApproximationTheory">interpolate this discrete data</a> in a second step.</p>
 <p>But, if we can choose the orientations by our own, we should better choose an optimal/minimal orientation grid, perform the experiment on this grid and compute the Fourier coefficients of the harmonic expansion by quadrature.</p>
 <p>This is exactly what happens internally when we call the <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>-command. In fact this is a special case of approximation of discrete data for a very specific grid.</p>
@@ -170,7 +170,7 @@ ans =
 <p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,R_n)}{2})]_{m,n}\).</p>
 <p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
 <p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1, which can be applied if we try to approximate a density function.</p>
-<p>In MTEX we use the command <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge"><a href="function_handle.function_handle.html">function_handle</a></code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
+<p>In MTEX we use the command <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
 {% highlight matlab %}
 SO3F3 = SO3FunRBF(odf,'density')
 % SO3F3 = SO3FunRBF.approximate(odf,'density')
@@ -198,7 +198,7 @@ meanValue = mean(SO3F3)
 
 {% highlight plaintext %}
 minValue =
-    0.0025
+   6.2090e-04
 meanValue =
      1
 {% endhighlight %}
@@ -213,7 +213,7 @@ SO3F4 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 2472 orientations, resolution: 10°
+  center: 19848 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
 <center>
@@ -230,8 +230,9 @@ plot(SO3F5,'sigma')
 SO3F5 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
-  kernel: Abel Poisson, halfwidth 5°
-  center: 1000 orientations
+  kernel: de la Vallee Poussin, halfwidth 5°
+  center: 19848 orientations, resolution: 5°
+  weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunQuadrature_06.png" %}
@@ -262,15 +263,15 @@ calcError(odf,SO3F6)
 
 {% highlight plaintext %}
 ans =
-    0.0094
+     0
 ans =
-    0.0731
+     0
 ans =
-    0.2650
+     0
 ans =
-    0.0094
+     0
 {% endhighlight %}
-<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge"><a href="function_handle.function_handle.html">function_handle</a></code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we should perform the experiment for all orientations of an <code class="language-plaintext highlighter-rouge"><a href="equispacedSO3Grid.equispacedSO3Grid.html">equispacedSO3Grid</a></code> and <a href="SO3Fun.Approximation">approximate this discrete data</a> in a second step.</p>
+<p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we should perform the experiment for all orientations of an <code class="language-plaintext highlighter-rouge"><a href="equispacedSO3Grid.html">equispacedSO3Grid</a></code> and <a href="SO3Fun.Approximation">approximate this discrete data</a> in a second step.</p>
 <h2 id="20">RBF-Kernel Approximation by minimizing the harmonic Error</h2>
 <p>The basic idea is the same as in the previous section. We determine rotations \(R_1,\dots,R_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
 <p>\[ g(x) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega(x,R_m)}{2}), \]</p>
