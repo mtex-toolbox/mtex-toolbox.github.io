@@ -55,7 +55,7 @@ practical examples during the exercises within MTEX.
 **Lecture 0 - General Concepts:**
 {% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
 <span class="course_material">, </span>
-{% include reference.html link=""
+{% include reference.html link="https://drive.google.com/file/d/1y0ewXfouvFl1pJnrscxQ6FCO89x2OzD_/view?usp=sharing"
 	content="slides" class="course_material" %}
 <br>
 Matlab basics and general concepts of MTEX, the class vector3d, spherical coordinates
