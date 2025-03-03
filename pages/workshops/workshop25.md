@@ -86,14 +86,18 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 <br>
 **Lecture 2 - Orientations and Symmetries (Ralf Hielscher)**
+{% include reference.html link="https://drive.google.com/file/d/1LgYLfPbBmcoJXy7cTpQeCrIB5IQGG2Ic/view?usp=sharing" content="slides" class="course_material" %}
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
 pole figures, inverse pole figures, fundamental sectors
+
 <br>
 <br>
 **Exercise 2**
-
+{% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="data" class="course_material" %}
 <br>
 <br>
 				</div>
