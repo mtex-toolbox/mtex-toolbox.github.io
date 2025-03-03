@@ -16,10 +16,10 @@ cases, tips and tricks and discuss recent and upcoming developments in MTEX. A
 special focus will be on grain boundary statistics and new functionalities in
 MTEX 6.1. Participation is possible in presence as well as remotely.
 
-<div markdown="span" class="alert alert-info" role="alert">
+<!--<div markdown="span" class="alert alert-info" role="alert">
 	<i class="fa fa-info-circle"></i> 
 	<b>Important:</b> Deadline has been extended until 21.02.2025
-</div>
+</div>-->
 
 {% capture par_default %}
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
@@ -95,7 +95,7 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
 **Exercise 2**
-{% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="script" class="course_material" %}
+{% include reference.html link="https://drive.google.com/file/d/1TdchUXZwoRLw_FWujkp3qTxRerBYg_Gx/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="data" class="course_material" %}
 <br>
