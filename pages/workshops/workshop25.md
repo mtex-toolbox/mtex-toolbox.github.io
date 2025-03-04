@@ -134,6 +134,13 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 <br>
 **Lecture 4 - Misorientations and Grain Boundaries (Vivian Tong)**
+{% include reference.html
+link="https://drive.google.com/file/d/1rudtwJ8ExuvgSShdEXJvB-1A4itiH4A9/view?usp=sharing"
+content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1MpCHvNO8NnRTLmzu8ad_QFu2rYO24GjB/view?usp=sharing"
+content="mlx-script" class="course_material" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
@@ -141,9 +148,20 @@ boundaries, orientation, gradients,  statistics of boundary networks
 <br>
 <br>
 **Exercise 4**
-{% include reference.html link="https://drive.google.com/file/d/1dJjI58COp9t1ch1IwDQQac_xWUaZnfky/view?usp=sharing" content="script" class="course_material" %}
+{% include reference.html
+link="https://drive.google.com/file/d/1dJjI58COp9t1ch1IwDQQac_xWUaZnfky/view?usp=sharing"
+content="script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://drive.google.com/file/d/1teNm_JDZ_ZCpo3W_IDzcdIzPD6MWKzu4/view?usp=sharing" content="mlx-script" class="course_material" %}
+{% include reference.html
+link="https://nplanywhere.npl.co.uk/u/raMqVDojKki_oypU/6ffa5d0a-8ece-4265-8f0c-a57afae0d4ee?l"
+content="data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1teNm_JDZ_ZCpo3W_IDzcdIzPD6MWKzu4/view?usp=sharing"
+content="mlx-script" class="course_material" %}
+
+
+
 <br>
 <br>
 				</div>
