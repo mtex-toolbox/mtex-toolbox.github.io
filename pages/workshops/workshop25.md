@@ -138,6 +138,9 @@ boundaries, orientation, gradients,  statistics of boundary networks
 <br>
 <br>
 **Exercise 4**
+{% include reference.html link="https://drive.google.com/file/d/1dJjI58COp9t1ch1IwDQQac_xWUaZnfky/view?usp=sharing" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1teNm_JDZ_ZCpo3W_IDzcdIzPD6MWKzu4/view?usp=sharing" content="mlx-script" class="course_material" %}
 <br>
 <br>
 				</div>
