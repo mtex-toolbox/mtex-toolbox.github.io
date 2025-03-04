@@ -117,12 +117,14 @@ pole figures, inverse pole figures, fundamental sectors
 			<div class="panel-body">
 				<div markdown="span">
 
-**Lecture 3 - Grains (Luiz Morales)**
+**Lecture 3 - Grains (Rüdiger Kilian)**
+{% include reference.html link="https://drive.google.com/file/d/17HZscVF9GNmF4Eq3fIke0jjZBqxpyM0N/view?usp=sharing" content="slides" class="course_material" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
 <br>
 **Exercise 3**
+{% include reference.html link="https://drive.google.com/file/d/1d91FOtsBOqNVXyYm8hsYTlJEY4Q_awdU/view?usp=sharing" content="script" class="course_material" %}
 <br>
 <br>
 *Lunch*
