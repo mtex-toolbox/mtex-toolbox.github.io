@@ -64,8 +64,7 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 **Lecture 1 - EBSD (Rüdiger Kilian)**
 {% include reference.html link="https://drive.google.com/file/d/1PreAu1jdBvwDnKhFks9N-ohs4g2PxRz4/view?usp=sharing" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-<!---{% include reference.html link="https://youtu.be/z0-rB87H0hU" content="video"
-	class="course_material" %}--->
+{% include reference.html link="https://youtu.be/36Fgq7ek9h0" content="video" class="course_material" %}
 <br>
 principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
@@ -77,7 +76,7 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1ZI0pS2GOsgK-hJnjCCo2D8PztLzs9xFp/view?usp=sharing" content="data" class="course_material" %}
 <span class="course_material">, </span>
-<!--{% include reference.html link="https://youtu.be/5YicKTTnMb8" content="video" class="course_material" %}-->
+{% include reference.html link="https://youtu.be/r8h7WpNlWdA" content="video" class="course_material" %}
 <br>
 <br>
 
@@ -87,6 +86,8 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 **Lecture 2 - Orientations and Symmetries (Ralf Hielscher)**
 {% include reference.html link="https://drive.google.com/file/d/1LgYLfPbBmcoJXy7cTpQeCrIB5IQGG2Ic/view?usp=sharing" content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/uzeO9mPit5Q" content="video" class="course_material" %}
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
@@ -98,6 +99,8 @@ pole figures, inverse pole figures, fundamental sectors
 {% include reference.html link="https://drive.google.com/file/d/1TdchUXZwoRLw_FWujkp3qTxRerBYg_Gx/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/lIPZlFBINxM" content="video" class="course_material" %}
 <br>
 <br>
 				</div>
