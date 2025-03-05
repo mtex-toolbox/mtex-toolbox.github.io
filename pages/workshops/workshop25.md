@@ -188,7 +188,9 @@ content="mlx-script" class="course_material" %}
 		<div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 5 - Density Functions (Ralf Hielscher)**{% include reference.html
+					
+**Lecture 5 - Density Functions (Ralf Hielscher)**
+{% include reference.html
 link="https://drive.google.com/file/d/1Pwo9CGL_aO1ncYvF3A31J8dgcy4V6ueh/view?usp=sharing"
 content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
