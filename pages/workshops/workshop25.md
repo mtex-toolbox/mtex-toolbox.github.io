@@ -553,20 +553,17 @@ austenite
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">P.&nbsp;Kroeker</td>
-			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium
-			</td>
+			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">B. Beichert</td>
-			<td style="text-align: left">Microstructural Evolution under Tribological Load
-			</td>
+			<td style="text-align: left">Microstructural Evolution under Tribological Load</td>
 		</tr>
 				<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">R.&nbsp;Kilian</td>
-			<td style="text-align: left">Recrystalized grains and the weighted burgers vector
-			</td>			
+			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
@@ -582,8 +579,7 @@ austenite
 			<td style="text-align: left">18:30-21:00</td>
 			<td style="text-align: left">Dinner at Stadtwirtschaft Freiberg</td>
 			<td style="text-align: left"></td>
-		</tr>	
-		
+		</tr>			
 	</tbody>
 </table>
 {% endcapture %}
