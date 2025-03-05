@@ -343,6 +343,365 @@ their talks as accessible as possible.
   Sørensen" %}** (NTNU): Customizing EBSD analysis and interpretation using
   MTEX and MATLAB – advantages of the scripting approach
 
+
+## Time Schedule
+{% capture table_monday %}
+<table>
+	<thead>
+		<tr>
+			<th style="text-align: left">Time</th>
+			<th style="text-align: left">Speaker</th>
+			<th style="text-align: left">Title</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align: right">9:00&minus;10:00</td>
+			<td style="text-align: left">J. Q. da Fonseca</td>
+			<td style="text-align: left">Experimental and computational studies in light alloys exploiting MTEX
+			<!--{% include reference.html link="https://youtu.be/_anaaIunvJY" content="video" class="course_material" %}-->
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">T.&nbsp;Mineau</td>
+			<td style="text-align: left">In situ experimentation on a magnesium alloy to constrain
+				feedbacks between strain localization and microstructure evolution</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">H. W. Ånes</td>
+			<td style="text-align: left">: 2D correlation of second-phase particles and grains in an Al-Mn alloy
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">V.&nbsp;Tong</td>
+			<td style="text-align: left">Grain boundary reconstruction
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Lunch</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>			
+		</tr>
+		<tr>
+			<td style="text-align: right">13:30&minus;14:30</td>
+			<td style="text-align: left">R.&nbsp;Hielscher</td>
+			<td style="text-align: left">Grain boundary normal distributions</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">14:30&minus;15:00</td>
+			<td style="text-align: left">F. Bachmann</td>
+			<td style="text-align: left">Approximation of the ODF and its application to pole figure
+			Inversion</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>			
+		</tr>				
+		<tr>
+			<td style="text-align: right">15:30&minus;15:50</td>
+			<td style="text-align: left">H. Bilan</td>
+			<td style="text-align: left">In-Situ SEM Tensile Testing as a Method of Microstructural
+				Analysis: Comparative Observations for Additively Manufactured and Cold Rolled
+				316L Stainless Steel
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">15:50&minus;16:10</td>
+			<td style="text-align: left">P.&nbsp;Hegele</td>
+			<td style="text-align: left">Influence of the PBF-LB/M Process Parameters on the Retained
+			Austenite Fraction in the Solidification Microstructure of
+			Hot-Work Tool Steels
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:10&minus;16:30</td>
+			<td style="text-align: left">M.&nbsp;Bolan</td>
+			<td style="text-align: left">Characterization of plastic deformation in 316L expanded
+austenite
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"><i>Short walk through Freiberg</i></td>
+		</tr>
+		<tr>
+			<td style="text-align: left">18:00</td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"><i>Dinner at <a
+			href="https://maps.app.goo.gl/YpktzhdGqvXtEvbeA">Tre Viet Freiberg</a></i></td>
+		</tr>
+	</tbody>
+</table>
+{% endcapture %}
+
+{% capture table_tuesday %}
+<table>
+	<thead>
+		<tr>
+			<th style="text-align: left">Time</th>
+			<th style="text-align: left">Speaker</th>
+			<th style="text-align: left">Title</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align: right">9:00&minus;10:00</td>
+			<td style="text-align: left">K.&nbsp;Marquardt</td>
+			<td style="text-align: left">Grain boundaries in Olivine: Using EBSD for the study
+			of complexion transitions and why they matter 
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">U.&nbsp;Faul</td>
+			<td style="text-align: left">Dislocation Structures in Experimentally Deformed Olivine
+			</td>
+		</tr>				
+		<tr>
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">N. M. Cohen</td>							
+			<td style="text-align: left">A New Tool to Quantify Crystallographic Preferred Orientation (CPO) of Olivine
+			</td>							
+		</tr>
+		<tr>
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">T.&nbsp;Griffith</td>							
+			<td style="text-align: left"> Quantifying microstructures in partially amorphous
+			samples: easy testing of many processing parameters using MTEX
+			</td>							
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Lunch</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">13:30&minus;14:30</td>
+			<td style="text-align: left">B. E. Sörrensen</td>
+			<td style="text-align: left">Customizing EBSD analysis and interpretation using MTEX
+			and MATLAB – advantages of the scripting approach
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">14:30&minus;15:00</td>
+			<td style="text-align: left">R. Kühn</td>
+			<td style="text-align: left">CPO and microstructure in oceanic serpentinites
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">15:00&minus;16:00</td>
+			<td style="text-align: left">V. Akker</td>
+			<td style="text-align: left">Fluid-assisted replacement in calcite veins
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:00&minus;16:30</td>
+			<td style="text-align: left">N. M. Cohen <i>(online)</i></td>
+			<td style="text-align: left">A New Tool to Quantify Crystallographic Preferred Orientation (CPO) of Olivine
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:30&minus;17:00</td>
+			<td style="text-align: left">H. Saikia <i>(online)</i></td>	
+			<td style="text-align: left">Metamorphic and Deformational Studies
+			of the Himalayan Metamorphic Core along Siyom Valley
+			</td>
+		</tr>	
+	</tbody>
+</table>
+{% endcapture %}
+{% capture table_wednesday %}
+<table>
+	<thead>
+		<tr>
+			<th style="text-align: left">Time</th>
+			<th style="text-align: left">Speaker</th>
+			<th style="text-align: left">Title</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align: right">9:00&minus;10:00</td>
+			<td style="text-align: left">T.&nbsp;Vermeij</td>
+			<td style="text-align: left">In situ TKD tensile Testing: unveiling nanoscale crystal plasticity, twinning and phase transformation
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>		
+		<tr>
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">P.&nbsp;Kroeker</td>
+			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">B. Beichert</td>
+			<td style="text-align: left">Microstructural Evolution under Tribological Load
+			</td>
+		</tr>
+				<tr>
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">R.&nbsp;Kilian</td>
+			<td style="text-align: left">Recrystalized grains and the weighted burgers vector
+			</td>			
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Lunch</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">13:30&minus;17:00</td>
+			<td style="text-align: left"><i>Excursion</i></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: left">18:30-21:00</td>
+			<td style="text-align: left">Dinner at Stadtwirtschaft Freiberg</td>
+			<td style="text-align: left"></td>
+		</tr>	
+		
+	</tbody>
+</table>
+{% endcapture %}
+
+{% capture table_thursday %}
+<table>
+	<thead>
+		<tr>
+			<th style="text-align: left">Time</th>
+			<th style="text-align: left">Speaker</th>
+			<th style="text-align: left">Title</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="text-align: right">9:00&minus;10:00</td>
+			<td style="text-align: left">G.&nbsp;Nolze</td>
+			<td style="text-align: left">
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>		
+		<tr>
+			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">R. Purushottam</td>
+			<td style="text-align: left">LaueNN: Neural network based hkl recognition of Laue spots and its application to polycrystalline materials
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: left">L. Richter</td>
+			<td style="text-align: left">Resolving pseudosymmetric domains - an MTEX usecase
+			</td>
+		</tr>
+				<tr>
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">M. Sepideh</td>
+			<td style="text-align: left">Anisotropy in diffraction stress analysis
+			</td>			
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Lunch</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">13:30&minus;14:30</td>
+			<td style="text-align: left">Round&nbsp;Table Discussion</td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>	
+		
+	</tbody>
+</table>
+{% endcapture %}
+
+
+<div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseMo"><b>Monday:</b></a>
+			</h4>
+		</div>
+		<div id="collapseMo" class="panel-collapse collapse noCrossRef">
+			<div class="panel-body">
+				{{ table_monday }}
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTue"><b>Tuesday:</b></a>
+			</h4>
+		</div>
+		<div id="collapseTue" class="panel-collapse collapse noCrossRef">
+			<div class="panel-body">
+				{{ table_tuesday }}
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
+				data-parent="#accordion" href="#collapseWe"><b>Wednesday:</b></a>
+			</h4>
+		</div>
+		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
+			<div class="panel-body">
+				{{ table_wednesday }}
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
+				data-parent="#accordion" href="#collapseWe"><b>Thursday:</b></a>
+			</h4>
+		</div>
+		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
+			<div class="panel-body">
+				{{ table_thursday }}
+			</div>
+		</div>
+	</div>
+</div>
+
+
 ## Venue:
 
 <div class="panel-group" id="accordion">
