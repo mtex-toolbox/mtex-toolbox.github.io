@@ -145,6 +145,8 @@ content="slides" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1MpCHvNO8NnRTLmzu8ad_QFu2rYO24GjB/view?usp=sharing"
 content="mlx-script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/5a0iUUmVuis" content="video" class="course_material" %}
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
@@ -163,8 +165,8 @@ content="data" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1teNm_JDZ_ZCpo3W_IDzcdIzPD6MWKzu4/view?usp=sharing"
 content="mlx-script" class="course_material" %}
-
-
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/tvPOQttwTsQ" content="video" class="course_material" %}
 
 <br>
 <br>
@@ -208,7 +210,7 @@ content="script" class="course_material" %}
 *Lunch*
 <br>
 <br>
-**Excursion: Freiberg Silver Mine**
+**Excursion: Terra Mineralia (Mineral exhibition)**
 
 				</div>
 			</div>
