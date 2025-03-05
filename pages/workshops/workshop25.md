@@ -197,6 +197,8 @@ content="slides 1" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1Hx1AMgQ1rnZsoCZfiV0AZ-4vTqM2uIzt/view?usp=sharing"
 content="slides 2" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/vm6mxAqG9i0" content="video" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -207,6 +209,8 @@ random sampling, ODF reconstuction from XRD data
 {% include reference.html
 link="https://drive.google.com/file/d/1RmzHMBJxijueky9HyLFnVDIYLRdFwcAY/view?usp=sharing"
 content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/-YH-Oi_F_aY" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
