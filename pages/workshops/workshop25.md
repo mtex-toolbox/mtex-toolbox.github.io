@@ -186,13 +186,13 @@ content="mlx-script" class="course_material" %}
 		<div id="collapseWednesday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Excursion: Freiberg Silver Mine**
-<br>
-<br>
-*Lunch*
-<br>
-<br>
-**Lecture 5 - Density Functions (Ralf Hielscher)**
+**Lecture 5 - Density Functions (Ralf Hielscher)**{% include reference.html
+link="https://drive.google.com/file/d/1Pwo9CGL_aO1ncYvF3A31J8dgcy4V6ueh/view?usp=sharing"
+content="slides 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1Hx1AMgQ1rnZsoCZfiV0AZ-4vTqM2uIzt/view?usp=sharing"
+content="slides 2" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -200,6 +200,16 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 5**
+{% include reference.html
+link="https://drive.google.com/file/d/1RmzHMBJxijueky9HyLFnVDIYLRdFwcAY/view?usp=sharing"
+content="script" class="course_material" %}
+<br>
+<br>
+*Lunch*
+<br>
+<br>
+**Excursion: Freiberg Silver Mine**
+
 				</div>
 			</div>
 		</div>
