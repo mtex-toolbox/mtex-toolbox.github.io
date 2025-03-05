@@ -376,7 +376,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">H. W. Ånes</td>
-			<td style="text-align: left">: 2D correlation of second-phase particles and grains in an Al-Mn alloy
+			<td style="text-align: left">2D correlation of second-phase particles and grains in an Al-Mn alloy
 			</td>
 		</tr>
 		<tr>
@@ -587,7 +587,6 @@ austenite
 	</tbody>
 </table>
 {% endcapture %}
-
 {% capture table_thursday %}
 <table>
 	<thead>
@@ -685,20 +684,7 @@ austenite
 				{{ table_wednesday }}
 			</div>
 		</div>
-	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
-				data-parent="#accordion" href="#collapseWe"><b>Thursday:</b></a>
-			</h4>
-		</div>
-		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
-			<div class="panel-body">
-				{{ table_thursday }}
-			</div>
-		</div>
-	</div>
+	</div>	
 </div>
 
 
