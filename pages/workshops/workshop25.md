@@ -636,8 +636,7 @@ austenite
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
-		</tr>	
-		
+		</tr>			
 	</tbody>
 </table>
 {% endcapture %}
@@ -680,7 +679,20 @@ austenite
 				{{ table_wednesday }}
 			</div>
 		</div>
-	</div>	
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
+				data-parent="#accordion" href="#collapseWe"><b>Thursday:</b></a>
+			</h4>
+		</div>
+		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
+			<div class="panel-body">
+				{{ table_thursday }}
+			</div>
+		</div>
+	</div>
 </div>
 
 
