@@ -236,11 +236,12 @@ content="script" class="course_material" %}
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 6 - How to set up your EBSD map correctly (Vivian Tong)**
+{% include reference.html link="https://youtu.be/IAR41HANlIk" content="video" class="course_material" %}
 <br>
-Correction of spatial coordinates, reference frame alignment, denoising 
+Correction of spatial coordinates, reference frame alignment, denoising
 <br>
 <br>
-**Exercise 6 - Grain Boundaries and Misorientations**
+**Exercise 6 - TrueEBSD for intragranular misorientation analysis**
 {% include reference.html
 link="https://drive.google.com/file/d/1vun0c1ym568uiZBmwafF7PplvN1Jym9p/view?usp=sharing"
 content="script" class="course_material" %}
@@ -248,6 +249,8 @@ content="script" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1gUPiui-ZZWZKstFi3ZHm9h30OlKw-_VU/view?usp=sharing"
 content="mlx-script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/2-5ge1adsmU" content="video" class="course_material" %}
 <br>
 
 <br>
