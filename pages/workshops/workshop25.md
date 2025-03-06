@@ -266,7 +266,10 @@ grain shape, grain boundary and grain size statistics
 combining MTEX with external software like VPSC-->
 <br>
 <br>
-**Exercise 7 - **
+**Exercise 7 - Fabric Analysis**
+{% include reference.html
+link="https://drive.google.com/file/d/1XX2VRt3Khz1eL1QqkHAofXNfNmqNJ4e-/view?usp=sharing"
+content="script" class="course_material" %}
 <br>
  			  </div>
 			</div>
