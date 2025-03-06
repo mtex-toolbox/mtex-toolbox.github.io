@@ -487,13 +487,13 @@ their talks as accessible as possible.
 		</tr>				
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">N. M. Cohen</td>							
+			<td style="text-align: left">N. M. Cohen <i>(online)</i></td>							
 			<td style="text-align: left">A New Tool to Quantify Crystallographic Preferred Orientation (CPO) of Olivine
 			</td>							
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">T.&nbsp;Griffith</td>							
+			<td style="text-align: left">T.&nbsp;Griffiths</td>							
 			<td style="text-align: left"> Quantifying microstructures in partially amorphous
 			samples: easy testing of many processing parameters using MTEX
 			</td>							
@@ -529,12 +529,6 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
-			<td style="text-align: left">N. M. Cohen <i>(online)</i></td>
-			<td style="text-align: left">A New Tool to Quantify Crystallographic Preferred Orientation (CPO) of Olivine
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">H. Saikia <i>(online)</i></td>	
 			<td style="text-align: left">Metamorphic and Deformational Studies
 			of the Himalayan Metamorphic Core along Siyom Valley
