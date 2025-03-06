@@ -550,7 +550,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">T.&nbsp;Vermeij</td>
-			<td style="text-align: left">In situ TKD tensile Testing: unveiling nanoscale crystal plasticity, twinning and phase transformation
+			<td style="text-align: left">In situ TKD tensile Testing: unveiling nanoscale crystal plasticity, twinning and phase transformation</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
