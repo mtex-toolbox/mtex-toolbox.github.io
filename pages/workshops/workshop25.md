@@ -262,6 +262,8 @@ content="mlx-script" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1AQRAxuk3PC7ivHV7RRW-edCPhfmjkmC_/view?usp=sharing"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/mVsxlnV9dpE" content="video" class="course_material" %}
 <br>
 grain shape, grain boundary and grain size statistics
 <br>
