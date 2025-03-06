@@ -351,6 +351,7 @@ their talks as accessible as possible.
 
 
 ## Time Schedule
+
 {% capture table_monday %}
 <table>
 	<thead>
@@ -431,8 +432,8 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">16:10&minus;16:30</td>
 			<td style="text-align: left">M.&nbsp;Bolan</td>
-			<td style="text-align: left">Characterization of plastic deformation in 316L expanded
-austenite
+			<td style="text-align: left">Characterization of plastic
+			deformation in 316L expanded austenite
 			</td>
 		</tr>
 		<tr>
