@@ -684,10 +684,10 @@ austenite
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a class="noCrossRef accordion-toggle" data-toggle="collapse" 
-				data-parent="#accordion" href="#collapseWe"><b>Thursday:</b></a>
+				data-parent="#accordion" href="#collapseTh"><b>Thursday:</b></a>
 			</h4>
 		</div>
-		<div id="collapseWe" class="panel-collapse collapse noCrossRef">
+		<div id="collapseTh" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				{{ table_thursday }}
 			</div>
