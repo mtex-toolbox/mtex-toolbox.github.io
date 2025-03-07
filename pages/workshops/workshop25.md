@@ -443,7 +443,7 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>			
 		</tr>				
 		<tr>
-			<td style="text-align: right">15:30&minus;15:50</td>
+			<td style="text-align: right">15:30&minus;16:00</td>
 			<td style="text-align: left">H. Bilan</td>
 			<td style="text-align: left">In-Situ SEM Tensile Testing as a Method of Microstructural
 				Analysis: Comparative Observations for Additively Manufactured and Cold Rolled
@@ -451,7 +451,7 @@ their talks as accessible as possible.
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:50&minus;16:10</td>
+			<td style="text-align: right">16:00&minus;16:30</td>
 			<td style="text-align: left">P.&nbsp;Hegele</td>
 			<td style="text-align: left">Influence of the PBF-LB/M Process Parameters on the Retained
 			Austenite Fraction in the Solidification Microstructure of
@@ -459,11 +459,10 @@ their talks as accessible as possible.
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">16:10&minus;16:30</td>
+			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">M.&nbsp;Bolan</td>
 			<td style="text-align: left">Characterization of plastic
-			deformation in 316L expanded austenite
-			</td>
+			deformation in 316L expanded austenite</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"></td>
@@ -545,18 +544,23 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:00&minus;16:00</td>
+			<td style="text-align: right">15:00&minus;15:30</td>
 			<td style="text-align: left">V. Akker</td>
 			<td style="text-align: left">Fluid-assisted replacement in calcite veins
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">16:00&minus;16:30</td>
+			<td style="text-align: right">15:30&minus;16:00</td>
 			<td style="text-align: left">H. Saikia <i>(online)</i></td>	
 			<td style="text-align: left">Metamorphic and Deformational Studies
 			of the Himalayan Metamorphic Core along Siyom Valley
 			</td>
 		</tr>	
+		<tr>
+			<td style="text-align: right">16:00&minus;16:30</td>
+			<td style="text-align: left">R.&nbsp;Kilian</td>
+			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
+		</tr>
 	</tbody>
 </table>
 {% endcapture %}
@@ -572,29 +576,29 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">T.&nbsp;Vermeij</td>
-			<td style="text-align: left">In situ EBSD and TKD micromechanical testing</td>
+			<td style="text-align: left">D.&nbsp;Savage</td>
+			<td style="text-align: left">Quantitative texture analysis in x-ray and neutron diffraction</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
-		</tr>		
+		</tr>
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
+			<td style="text-align: left">T.&nbsp;Vermeij</td>
+			<td style="text-align: left">In situ EBSD and TKD micromechanical testing</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">P.&nbsp;Kroeker</td>
 			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">11:00&minus;11:30</td>
+			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">B. Beichert</td>
 			<td style="text-align: left">Microstructural Evolution under Tribological Load</td>
-		</tr>
-				<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">R.&nbsp;Kilian</td>
-			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
-		</tr>
+		</tr>		
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
 			<td style="text-align: left"></td>
