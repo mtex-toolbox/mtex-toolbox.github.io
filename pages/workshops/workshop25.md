@@ -299,6 +299,8 @@ content="script" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1eAUjMh8sG7ggzNHsEf9x2Lmg4g52R_Rk/view?usp=sharing"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/7pftx1iq-HY" content="video" class="course_material" %}
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 <br>
@@ -307,6 +309,8 @@ deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor fa
 {% include reference.html
 link="https://drive.google.com/file/d/1Jt-07bOPJg3Hbj7ji0vDM2jN01eeUBNE/view?usp=sharing"
 content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/pOVaIV_exjs" content="video" class="course_material" %}
 <br>
 <br>
 *lunch*
