@@ -325,6 +325,13 @@ maps, dislocation density estimation, weighted Burgers vector, habit planes dete
 <br>
 <br>
 **Free Discussion of Personal Data Sets**
+{% include reference.html
+link="https://drive.google.com/file/d/1WTBzzE0U2LllmrG775QeEXVlbF0pN8i7/view?usp=sharing"
+content="data 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1vYVFljdnyYxWI0FqIIDgDja4gziNpH8f/view?usp=sharing"
+content="data 2" class="course_material" %}
 				</div>
 			</div>
 		</div>
