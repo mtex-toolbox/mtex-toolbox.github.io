@@ -295,19 +295,19 @@ content="script" class="course_material" %}
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 8 - to be announced (Luiz Morales)**
-<br>
-<br>
-<br>
-**Lecture 9 - Plasticity (Ralf Hielscher)**
+**Lecture 8 - Plasticity (Ralf Hielscher)**
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
+<br>
+<br>
+**Exercise 8 - Plasticity (Ralf Hielscher, Vivian Tong)**
+<br>
 <br>
 <br>
 *lunch*
 <br>
 <br>
-**Lecture 10 - Parent Grain Reconstruction (Ralf Hielscher)**
+**Lecture 9 - Parent Grain Reconstruction (Ralf Hielscher)**
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
