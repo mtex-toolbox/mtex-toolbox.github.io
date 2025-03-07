@@ -296,12 +296,17 @@ content="script" class="course_material" %}
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 8 - Plasticity (Ralf Hielscher)**
+{% include reference.html
+link="https://drive.google.com/file/d/1eAUjMh8sG7ggzNHsEf9x2Lmg4g52R_Rk/view?usp=sharing"
+content="slides" class="course_material" %}
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 <br>
 <br>
-**Exercise 8 - Plasticity (Ralf Hielscher, Vivian Tong)**
-<br>
+**Exercise 8 - Plasticity (Ralf Hielscher)**
+{% include reference.html
+link="https://drive.google.com/file/d/1Jt-07bOPJg3Hbj7ji0vDM2jN01eeUBNE/view?usp=sharing"
+content="script" class="course_material" %}
 <br>
 <br>
 *lunch*
@@ -557,7 +562,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">T.&nbsp;Vermeij</td>
-			<td style="text-align: left">In situ TKD tensile Testing: unveiling nanoscale crystal plasticity, twinning and phase transformation</td>
+			<td style="text-align: left">In situ EBSD and TKD micromechanical testing</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
