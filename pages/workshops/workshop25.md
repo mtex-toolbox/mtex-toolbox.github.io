@@ -275,6 +275,8 @@ combining MTEX with external software like VPSC-->
 {% include reference.html
 link="https://drive.google.com/file/d/1XX2VRt3Khz1eL1QqkHAofXNfNmqNJ4e-/view?usp=sharing"
 content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/Ucb-PzagA9c" content="video" class="course_material" %}
 <br>
  			  </div>
 			</div>
