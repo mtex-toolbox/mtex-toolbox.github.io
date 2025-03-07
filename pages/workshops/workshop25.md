@@ -305,7 +305,7 @@ content="slides" class="course_material" %}
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
 <br>
 <br>
-**Exercise 8 - Plasticity (Ralf Hielscher)**
+**Exercise 8 - Plasticity**
 {% include reference.html
 link="https://drive.google.com/file/d/1Jt-07bOPJg3Hbj7ji0vDM2jN01eeUBNE/view?usp=sharing"
 content="script" class="course_material" %}
