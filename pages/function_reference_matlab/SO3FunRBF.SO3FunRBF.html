@@ -27,7 +27,12 @@ To make changes, update the MATLAB code and republish this document.
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = SO3FunRBF(center,psi,weights,c0)
+{% endhighlight %}
+
+{% highlight matlab %}
 SO3F = SO3FunRBF(F)
+SO3F = SO3FunRBF(F,'kernel',psi,__) % See SO3FunRBF.approximate for options list
+SO3F = SO3FunRBF(F,'harmonic',__) % See SO3FunRBF.approximate for option list
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -88,6 +93,37 @@ SO3F = SO3FunRBF(F)
    </table>
 </p>
 <h2 id="6">Example</h2>
+{% highlight matlab %}
+ori = orientation.rand(10);
+w = rand(10,1); w=w./sum(w);
+psi = SO3DeLaValleePoussinKernel(10);
+SO3F = SO3FunRBF(ori,psi,w)
+{% endhighlight %}
+
+{% highlight plaintext %}
+SO3F = SO3FunRBF (1 → y↑→x)
+ 
+  multimodal components
+  kernel: de la Vallee Poussin, halfwidth 30°
+  center: 10 orientations
+ 
+  Bunge Euler angles in degree
+     phi1       Phi      phi2    weight
+  156.958   75.9796   181.889 0.0950434
+  9.33344   86.6587   23.5031 0.0409895
+  197.878   136.957   154.124  0.130116
+  156.716   88.4439   34.7511 0.0981484
+  151.332   129.133   45.7776  0.102652
+  118.921    55.203   214.828 0.0786075
+  73.6735   44.9316   81.3643  0.161248
+  222.938   90.6604   38.5004  0.117843
+  107.876   46.1222   79.3102 0.0329753
+  96.0578   147.215   125.937  0.142376
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="SO3FunRBF.approximate.html">SO3FunRBF.approximate</a>
+</p>
 </div>
 </body>
 </html>

@@ -61,7 +61,7 @@ odf = SO3FunRBF (Quartz → y↑→x)
 <p>For that, we compute the so-called Fourier coefficients \({\bf \hat f} = (\hat f^{0,0}_0,\dots,\hat f^{N,N}_N)^T\) of</p>
 <p>\[ f({\bf R}) = \sum_{n=0}^N\sum_{k,l=-n}^n \hat{f}^{k,l}_n \, D_n^{k,l}({\bf R}). \]</p>
 <p>The Fourier coefficients are defined by</p>
-<p>\[ \hat f^{k,l}_n = \int_{SO(3)} f({\bf R}) \cdot \overline{D_n^{k,l}({\bf R})} \mathrm{d}\my({\bf R}) \]</p>
+<p>\[ \hat f^{k,l}_n = \int_{SO(3)} f({\bf R}) \cdot \overline{D_n^{k,l}({\bf R})} \,\mathrm{d}\mu({\bf R}) \]</p>
 <p>and we compute this integral by numerical integration, which is also called quadrature, i.e.</p>
 <p>\[ \hat f^{k,l}_n \approx \sum_{m=1}^M \omega_m \, f({\bf R}_m) \, \overline{D_n^{k,l}({\bf R}_m)} \]</p>
 <p>with suitable quadrature weights \(\omega_m\) and quadrature nodes \(\bf{R}_m\), \(m=1,\dots,M\).</p>
@@ -89,12 +89,12 @@ SO3F = SO3FunHarmonic (Quartz → y↑→x)
 </center>
 <p>Internally MTEX calls <a href="SO3FunHarmonic.approximate.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.approximate</code></a>. We can specify the bandwidth of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> with the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code> and we can tell MTEX to use the other quadrature scheme.</p>
 {% highlight matlab %}
-SO3F = SO3FunHarmonic(odf,'bandwidth',10,'GaussLegendre')
-plot(SO3F,'sigma')
+SO3F2 = SO3FunHarmonic(odf,'bandwidth',10,'GaussLegendre')
+plot(SO3F2,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunHarmonic (Quartz → y↑→x)
+SO3F2 = SO3FunHarmonic (Quartz → y↑→x)
   bandwidth: 10
   weight: 1
 {% endhighlight %}
@@ -105,6 +105,7 @@ SO3F = SO3FunHarmonic (Quartz → y↑→x)
 <p>One idea could be to perform the experiment for random orientations and <a href="SO3FunApproximationTheory">interpolate this discrete data</a> in a second step.</p>
 <p>But, if we can choose the orientations by our own, we should better choose an optimal/minimal orientation grid, perform the experiment on this grid and compute the Fourier coefficients of the harmonic expansion by quadrature.</p>
 <p>This is exactly what happens internally when we call the <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>-command. In fact this is a special case of approximation of discrete data for a very specific grid.</p>
+<p>In the following, the <code class="language-plaintext highlighter-rouge">EXPERIMENT</code>-method is something, where we put in orientations and obtain corresponding values. That could be a physical experiment or maybe also some computational routine.</p>
 {% highlight matlab %}
 % Specify the bandwidth and symmetries of the desired harmonic odf
 bw = 50;
@@ -161,19 +162,20 @@ ans =
 {% endhighlight %}
 <h2 id="11">RBF-Kernel Approximation</h2>
 <p>The basic strategy is to approximate the given function \(f\) by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, see <a href="RadialODFs.html">Radial Basis Functions on SO(3)</a>.</p>
-<p>Hence we determine rotations \(R_1,\dots,R_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
-<p>\[ g(x) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega(x,R_n)}{2}) \]</p>
-<p>approximates \(f\) reasonable well, i.e. \(f\approx g\). In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \(R_1,\dots,R_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
+<p>Hence we determine rotations \(\bf{R}_1,\dots,\bf{R}_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
+<p>\[ g(x) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega(x,{\bf{R}}_n)}{2}) \]</p>
+<p>approximates \(f\) reasonable well, i.e. \(f\approx g\). In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \(\bf{R}_1,\dots,\bf{R}_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
 <p>A basic strategy is to apply least squares approximation, where we compute the coefficients \(c_n\) by minimizing the functional</p>
 <p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \]</p>
 <p>for some specific orientations \(x_1,\dots,x_M\).</p>
-<p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,R_n)}{2})]_{m,n}\).</p>
+<p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,{\bf{R}}_n)}{2})]_{m,n}\).</p>
 <p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
 <p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1, which can be applied if we try to approximate a density function.</p>
 <p>In MTEX we use the command <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
+<p>In the following we want to use this to transform a given <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> back into a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
 {% highlight matlab %}
-SO3F3 = SO3FunRBF(odf,'density')
-% SO3F3 = SO3FunRBF.approximate(odf,'density')
+SO3F3 = SO3FunRBF(SO3F,'density')
+% SO3F2 = SO3FunRBF.approximate(SO3F,'density')
 plot(SO3F3,'sigma')
 {% endhighlight %}
 
@@ -198,13 +200,13 @@ meanValue = mean(SO3F3)
 
 {% highlight plaintext %}
 minValue =
-   6.2090e-04
+    0.0025
 meanValue =
-     1
+    1.0000
 {% endhighlight %}
-<p>We can specify the kernel of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> with the option <code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> and we can use the options <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> and <code class="language-plaintext highlighter-rouge">'resolution'</code> to choose some specific set of rotations as centers \(R_1,\dots,R_N\) of the approximation \(g\).</p>
+<p>We can specify the kernel of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> with the option <code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> and we can use the options <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> and <code class="language-plaintext highlighter-rouge">'resolution'</code> to choose some specific set of rotations as centers \(\bf{R}_1,\dots,\bf{R}_N\) of the approximation \(g\).</p>
 {% highlight matlab %}
-SO3F4 = SO3FunRBF(odf,'halfwidth',5*degree,'resolution',10*degree)
+SO3F4 = SO3FunRBF(SO3F,'halfwidth',5*degree,'resolution',10*degree)
 plot(SO3F4,'sigma')
 {% endhighlight %}
 
@@ -213,16 +215,16 @@ SO3F4 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
+  center: 2472 orientations, resolution: 10°
   weight: 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunQuadrature_05.png" %}
 </center>
 {% highlight matlab %}
-S3G = orientation.rand(1000,odf.CS);
+S3G = orientation.rand(1000,SO3F.CS);
 psi = SO3AbelPoissonKernel('halfwidth',5*degree);
-SO3F5 = SO3FunRBF(odf,'kernel',psi,'SO3Grid',S3G)
+SO3F5 = SO3FunRBF(SO3F,'kernel',psi,'SO3Grid',S3G)
 plot(SO3F5,'sigma')
 {% endhighlight %}
 
@@ -230,15 +232,14 @@ plot(SO3F5,'sigma')
 SO3F5 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
+  kernel: Abel Poisson, halfwidth 5°
+  center: 1000 orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunQuadrature_06.png" %}
 </center>
 {% highlight matlab %}
-SO3F6 = SO3FunRBF(odf,'halfwidth',5*degree,'approxresolution',5*degree)
+SO3F6 = SO3FunRBF(SO3F,'halfwidth',5*degree,'approxresolution',5*degree)
 plot(SO3F6,'sigma')
 {% endhighlight %}
 
@@ -255,35 +256,35 @@ SO3F6 = SO3FunRBF (Quartz → y↑→x)
 </center>
 <p>The errors are</p>
 {% highlight matlab %}
-calcError(odf,SO3F3)
-calcError(odf,SO3F4)
-calcError(odf,SO3F5)
-calcError(odf,SO3F6)
+calcError(SO3F,SO3F3)
+calcError(SO3F,SO3F4)
+calcError(SO3F,SO3F5)
+calcError(SO3F,SO3F6)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-     0
+    0.0094
 ans =
-     0
+    0.0731
 ans =
-     0
+    0.2649
 ans =
-     0
+    0.0095
 {% endhighlight %}
 <p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we should perform the experiment for all orientations of an <code class="language-plaintext highlighter-rouge"><a href="equispacedSO3Grid.html">equispacedSO3Grid</a></code> and <a href="SO3Fun.Approximation">approximate this discrete data</a> in a second step.</p>
 <h2 id="20">RBF-Kernel Approximation by minimizing the harmonic Error</h2>
-<p>The basic idea is the same as in the previous section. We determine rotations \(R_1,\dots,R_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
-<p>\[ g(x) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega(x,R_m)}{2}), \]</p>
+<p>The basic idea is the same as in the previous section. We determine rotations \(\bf{R}_1,\dots,\bf{R}_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
+<p>\[ g(x) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega(x,{\bf{R}}_m)}{2}), \]</p>
 <p>such that \(g\) approximates \(f\) in a certain sense. But in what sense exactly?</p>
-<p>In the previous section, we minimized the pointwise error (in spatial domain) between \(f\) and \(g\) on some grid, i.e. we minimized \( \ds \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \) in \(M\) points.</p>
+<p>In the previous section, we minimized the pointwise error (in spatial domain) between \(f\) and \(g\) on some grid, i.e. we minimized \( \sum\limits_{m=1}^M|f(x_m)-g(x_m)|^2 \) in \(M\) points.</p>
 <p>Now we will minimize the error in frequency domain. Hence, the Fourier coefficients of \(f\) are supposed to be nearly the same as the Fourier coefficients of \(g\).</p>
 <p>So, we will try to determine the coefficients \(c_1,\dots,c_M\) such that</p>
-<p>\[ \sum_n=0^N \sum_{k,l=-n}^n (\hat f_n^{k,l} - \hat g_n^{k,l})^2 \]</p>
+<p>\[ \sum_{n=0}^N \sum_{k,l=-n}^n <code class="language-plaintext highlighter-rouge">\hat f_n^{k,l} - \hat g_n^{k,l}</code>^2 \]</p>
 <p>is minimized.</p>
 <p>In MTEX we call this by adding the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> to the <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>-command.</p>
 {% highlight matlab %}
-SO3F7 = SO3FunRBF(odf,'harmonic')
+SO3F7 = SO3FunRBF(SO3F,'harmonic')
 plot(SO3F7,'sigma')
 {% endhighlight %}
 
@@ -301,6 +302,7 @@ SO3F7 = SO3FunRBF (Quartz → y↑→x)
 <h2 id="22">LSQR-Parameters</h2>
 <p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
 <p>Thus we are able to control the precision of the result and computational time of the least squares methods in the approximation process.</p>
+<p>This is a black box function which is used above. Just ignore it.</p>
 {% highlight matlab %}
 function v = EXPERIMENT(ori)
   v = SO3Fun.dubna.eval(ori);
