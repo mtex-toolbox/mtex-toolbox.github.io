@@ -394,7 +394,7 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">J. Q. da Fonseca <i>-online-</i></td>
+			<td style="text-align: left">J. Q. da Fonseca</td>
 			<td style="text-align: left">Experimental and computational studies in light alloys exploiting MTEX
 			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/tAfi6Hk5xx8" content="video" class="course_material" %}
@@ -498,11 +498,11 @@ their talks as accessible as possible.
 		</tr>
 	</thead>
 	<tbody>
-		<tr>
-			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">K.&nbsp;Marquardt</td>
-			<td style="text-align: left">Grain boundaries in Olivine: Using EBSD for the study
-			of complexion transitions and why they matter 
+			<tr>
+			<td style="text-align: right">9:000&minus;10:00</td>
+			<td style="text-align: left">B. E. Sörrensen</td>
+			<td style="text-align: left">Customizing EBSD analysis and interpretation using MTEX
+			and MATLAB – advantages of the scripting approach
 			</td>
 		</tr>
 		<tr>
@@ -535,38 +535,9 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">B. E. Sörrensen</td>
-			<td style="text-align: left">Customizing EBSD analysis and interpretation using MTEX
-			and MATLAB – advantages of the scripting approach
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">R. Kühn</td>
-			<td style="text-align: left">CPO and microstructure in oceanic serpentinites
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: right">13:30&minus;17:00</td>
+			<td style="text-align: left"><i>Excursion</i></td>
 			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">15:30&minus;16:00</td>
-			<td style="text-align: left">V. Akker</td>
-			<td style="text-align: left">Fluid-assisted replacement in calcite veins
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:00&minus;16:30</td>
-			<td style="text-align: left">R.&nbsp;Kilian</td>
-			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
-		</tr>
-		<tr>
-			<td style="text-align: right">16:30&minus;17:00</td>
-			<td style="text-align: left">E. Avrahami</td>
-			<td style="text-align: left">Coccoliths: Complex Nano-scale Crystals Constructed With Simple Principles</td>			
 		</tr>
 	</tbody>
 </table>
@@ -611,10 +582,39 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
 		</tr>
+				<tr>
+			<td style="text-align: right">13:30&minus;14:30</td>
+			<td style="text-align: left">K.&nbsp;Marquardt</td>
+			<td style="text-align: left">Grain boundaries in Olivine: Using EBSD for the study
+			of complexion transitions and why they matter 
+			</td>
+		</tr>
 		<tr>
-			<td style="text-align: right">13:30&minus;17:00</td>
-			<td style="text-align: left"><i>Excursion</i></td>
+			<td style="text-align: right">14:30&minus;15:00</td>
+			<td style="text-align: left">R. Kühn</td>
+			<td style="text-align: left">CPO and microstructure in oceanic serpentinites
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">15:30&minus;16:00</td>
+			<td style="text-align: left">V. Akker</td>
+			<td style="text-align: left">Fluid-assisted replacement in calcite veins
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:00&minus;16:30</td>
+			<td style="text-align: left">R.&nbsp;Kilian</td>
+			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
+		</tr>
+		<tr>
+			<td style="text-align: right">16:30&minus;17:00</td>
+			<td style="text-align: left">E. Avrahami</td>
+			<td style="text-align: left">Coccoliths: Complex Nano-scale Crystals Constructed With Simple Principles</td>			
 		</tr>
 		<tr>
 			<td style="text-align: left">18:30-21:00</td>
