@@ -396,8 +396,10 @@ their talks as accessible as possible.
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">J. Q. da Fonseca <i>-online-</i></td>
 			<td style="text-align: left">Experimental and computational studies in light alloys exploiting MTEX
-			<!--{% include reference.html link="https://youtu.be/_anaaIunvJY" content="video" class="course_material" %}-->
 			</td>
+			<span class="course_material">, </span>
+			{% include reference.html link="https://youtu.be/tAfi6Hk5xx8" content="video" class="course_material" %}
+
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -409,17 +411,24 @@ their talks as accessible as possible.
 			<td style="text-align: left">T.&nbsp;Mineau</td>
 			<td style="text-align: left">In situ experimentation on a magnesium alloy to constrain
 				feedbacks between strain localization and microstructure evolution</td>
+			<span class="course_material">, </span>
+			{% include reference.html link="https://youtu.be/zjWmSpft0cU" content="video" class="course_material" %}
+
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">H. W. Ånes</td>
 			<td style="text-align: left">2D correlation of second-phase particles and grains in an Al-Mn alloy
 			</td>
+			<span class="course_material">, </span>
+			{% include reference.html link="https://youtu.be/oDXZrnBb0Uc" content="video" class="course_material" %}
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
 			<td style="text-align: left">Grain boundary reconstruction
+			<span class="course_material">, </span>
+			{% include reference.html link="https://youtu.be/hJH2KpdWIYA" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
