@@ -394,7 +394,7 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">J. Q. da Fonseca</td>
+			<td style="text-align: left">J. Q. da Fonseca <i>-online-</i></td>
 			<td style="text-align: left">Experimental and computational studies in light alloys exploiting MTEX
 			<!--{% include reference.html link="https://youtu.be/_anaaIunvJY" content="video" class="course_material" %}-->
 			</td>
@@ -545,22 +545,20 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:00&minus;15:30</td>
+			<td style="text-align: right">15:30&minus;16:00</td>
 			<td style="text-align: left">V. Akker</td>
 			<td style="text-align: left">Fluid-assisted replacement in calcite veins
 			</td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:30&minus;16:00</td>
-			<td style="text-align: left">H. Saikia <i>(online)</i></td>	
-			<td style="text-align: left">Metamorphic and Deformational Studies
-			of the Himalayan Metamorphic Core along Siyom Valley
-			</td>
-		</tr>	
-		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
 			<td style="text-align: left">R.&nbsp;Kilian</td>
 			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
+		</tr>
+		<tr>
+			<td style="text-align: right">16:30&minus;17:00</td>
+			<td style="text-align: left">E. Avrahami</td>
+			<td style="text-align: left">Coccoliths: Complex Nano-scale Crystals Constructed With Simple Principles</td>			
 		</tr>
 	</tbody>
 </table>
