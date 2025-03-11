@@ -396,7 +396,6 @@ their talks as accessible as possible.
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">J. Q. da Fonseca</td>
 			<td style="text-align: left">Experimental and computational studies in light alloys exploiting MTEX
-			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/tAfi6Hk5xx8" content="video" class="course_material" %}
 			</td>
 		</tr>
@@ -410,7 +409,6 @@ their talks as accessible as possible.
 			<td style="text-align: left">T.&nbsp;Mineau</td>
 			<td style="text-align: left">In situ experimentation on a magnesium alloy to constrain
 				feedbacks between strain localization and microstructure evolution
-			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/zjWmSpft0cU" content="video" class="course_material" %}
 			</td>
 		</tr>
@@ -418,7 +416,6 @@ their talks as accessible as possible.
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">H. W. Ånes</td>
 			<td style="text-align: left">2D correlation of second-phase particles and grains in an Al-Mn alloy
-			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/oDXZrnBb0Uc" content="video" class="course_material" %}
 			</td>
 		</tr>
@@ -426,7 +423,6 @@ their talks as accessible as possible.
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
 			<td style="text-align: left">Grain boundary reconstruction
-			<span class="course_material">, </span>
 			{% include reference.html link="https://youtu.be/hJH2KpdWIYA" content="video" class="course_material" %}
 			</td>
 		</tr>
@@ -438,13 +434,17 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">R.&nbsp;Hielscher</td>
-			<td style="text-align: left">Grain boundary normal distributions</td>
+			<td style="text-align: left">Grain boundary normal distributions
+			{% include reference.html link="https://youtu.be/NabSSN3BPNY" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">F. Bachmann</td>
 			<td style="text-align: left">Approximation of the ODF and its application to pole figure
-			Inversion</td>
+			Inversion
+			{% include reference.html link="https://youtu.be/e2MWVyvurDI" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -457,6 +457,7 @@ their talks as accessible as possible.
 			<td style="text-align: left">In-Situ SEM Tensile Testing as a Method of Microstructural
 				Analysis: Comparative Observations for Additively Manufactured and Cold Rolled
 				316L Stainless Steel
+			{% include reference.html link="https://youtu.be/dCYOqTeEsKY" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -465,13 +466,16 @@ their talks as accessible as possible.
 			<td style="text-align: left">Influence of the PBF-LB/M Process Parameters on the Retained
 			Austenite Fraction in the Solidification Microstructure of
 			Hot-Work Tool Steels
+			{% include reference.html link="https://youtu.be/mG0yocEDI-I" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">M.&nbsp;Bolan</td>
 			<td style="text-align: left">Characterization of plastic
-			deformation in 316L expanded austenite</td>
+			deformation in 316L expanded austenite
+			{% include reference.html link="https://youtu.be/veeU6Fx0q-E" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"></td>
