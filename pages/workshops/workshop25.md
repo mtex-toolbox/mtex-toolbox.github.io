@@ -507,6 +507,7 @@ their talks as accessible as possible.
 			<td style="text-align: left">B. E. Sörrensen</td>
 			<td style="text-align: left">Customizing EBSD analysis and interpretation using MTEX
 			and MATLAB – advantages of the scripting approach
+			{% include reference.html link="https://youtu.be/qbRIIfytVYk" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
