@@ -519,12 +519,14 @@ their talks as accessible as possible.
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">U.&nbsp;Faul</td>
 			<td style="text-align: left">Dislocation Structures in Experimentally Deformed Olivine
+			{% include reference.html link="https://youtu.be/AmF1f3SYXPg" content="video" class="course_material" %}
 			</td>
 		</tr>				
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">N. M. Cohen <i>(online)</i></td>							
 			<td style="text-align: left">A New Tool to Quantify Crystallographic Preferred Orientation (CPO) of Olivine
+			{% include reference.html link="https://youtu.be/a4QlGizNkhc" content="video" class="course_material" %}
 			</td>							
 		</tr>
 		<tr>
@@ -532,6 +534,7 @@ their talks as accessible as possible.
 			<td style="text-align: left">T.&nbsp;Griffiths</td>							
 			<td style="text-align: left"> Quantifying microstructures in partially amorphous
 			samples: easy testing of many processing parameters using MTEX
+			{% include reference.html link="https://youtu.be/v5hg7AWZ9Po" content="video" class="course_material" %}
 			</td>							
 		</tr>
 		<tr>
