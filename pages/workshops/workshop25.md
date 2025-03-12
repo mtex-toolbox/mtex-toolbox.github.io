@@ -563,8 +563,9 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">D.&nbsp;Savage</td>
-			<td style="text-align: left">Quantitative texture analysis in x-ray and neutron diffraction</td>
+			<td style="text-align: left">Quantitative texture analysis in x-ray and neutron diffraction
 			{% include reference.html link="https://youtu.be/dGrExN43LLs" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -574,20 +575,23 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">T.&nbsp;Vermeij</td>
-			<td style="text-align: left">In situ EBSD and TKD micromechanical testing</td>
+			<td style="text-align: left">In situ EBSD and TKD micromechanical testing
 			{% include reference.html link="https://youtu.be/XJ2kUpcK8DE" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">P.&nbsp;Kroeker</td>
-			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium</td>
+			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium
 			{% include reference.html link="https://youtu.be/567RxlIFTKY" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">B. Beichert</td>
-			<td style="text-align: left">Microstructural Evolution under Tribological Load</td>
+			<td style="text-align: left">Microstructural Evolution under Tribological Load
 			{% include reference.html link="https://youtu.be/FUi6sXpuyfo" content="video" class="course_material" %}
+			</td>
 		</tr>		
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
