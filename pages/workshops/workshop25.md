@@ -625,12 +625,16 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
 			<td style="text-align: left">R.&nbsp;Kilian</td>
-			<td style="text-align: left">Recrystalized grains and the weighted burgers vector</td>			
+			<td style="text-align: left">Recrystalized grains and the weighted burgers vector
+			{% include reference.html link="https://youtu.be/6uVzvMpcYvs" content="video" class="course_material" %}
+			</td>			
 		</tr>
 		<tr>
 			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">E. Avrahami</td>
-			<td style="text-align: left">Coccoliths: Complex Nano-scale Crystals Constructed With Simple Principles</td>			
+			<td style="text-align: left">Coccoliths: Complex Nano-scale Crystals Constructed With Simple Principles
+			{% include reference.html link="https://youtu.be/QquSMTihQ2M" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left">18:30-21:00</td>
@@ -653,7 +657,8 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">G.&nbsp;Nolze</td>
-			<td style="text-align: left">
+			<td style="text-align: left">The importance of a proper indexing in centred lattices
+			{% include reference.html link="https://youtu.be/A-oCzsqkVpU" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -665,19 +670,15 @@ their talks as accessible as possible.
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">R. Purushottam</td>
 			<td style="text-align: left">LaueNN: Neural network based hkl recognition of Laue spots and its application to polycrystalline materials
+			{% include reference.html link="https://youtu.be/NuBFj_L1gis" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">L. Richter</td>
 			<td style="text-align: left">Resolving pseudosymmetric domains - an MTEX usecase
+			{% include reference.html link="https://youtu.be/xmFEQy_rP8Y" content="video" class="course_material" %}
 			</td>
-		</tr>
-				<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">M. Sepideh</td>
-			<td style="text-align: left">Anisotropy in diffraction stress analysis
-			</td>			
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
