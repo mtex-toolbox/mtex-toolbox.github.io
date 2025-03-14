@@ -36,7 +36,7 @@ of material scientists, geologists and mathematicians.
                 <ul class="no_bullet">
 				<li>
                         03/25 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.beta.2/mtex-6.1.beta.2.zip" content="MTEX 6.1.beta2" download=true %}
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.beta.3/mtex-6.1.beta.3.zip" content="MTEX 6.1.beta3" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
