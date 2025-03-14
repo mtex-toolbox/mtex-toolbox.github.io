@@ -760,13 +760,15 @@ their talks as accessible as possible.
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h4 class="panel-title"> <a class="noCrossRef accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseLocation">
-				<b>Location:</b> TU Freiberg, Germany (click for details)</a>
+				<b>Location:</b> TU Freiberg (Saxony), Germany (click for details)</a>
 			</h4>
 		</div>
 		<div id="collapseLocation" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-					{% include reference.html link="https://goo.gl/maps/dFvybo2UhVnQkBjV8" content="Hörsaalgebäude, Prüferstraße 4"%}
+					Please make sure that you are planning to travel to Freiberg (Saxony). There are other cities in Germany with a similar name.
+					<br>
+					Location of the Workshop: {% include reference.html link="https://goo.gl/maps/dFvybo2UhVnQkBjV8" content="Hörsaalgebäude, Prüferstraße 4"%}
 				</div>
 			</div>
 		</div>	
