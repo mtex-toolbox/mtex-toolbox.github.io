@@ -236,6 +236,10 @@ content="script" class="course_material" %}
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 6 - How to set up your EBSD map correctly (Vivian Tong)**
+{% include reference.html
+link="https://drive.google.com/file/d/1nDdx5UFoGMdjyaAuzwRXfLT8gSj84Py9/view?usp=sharing"
+content="script" class="course_material" %}
+<span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/IAR41HANlIk" content="video" class="course_material" %}
 <br>
 Correction of spatial coordinates, reference frame alignment, denoising
@@ -317,6 +321,10 @@ content="script" class="course_material" %}
 <br>
 <br>
 **Lecture 9 - Parent Grain Reconstruction (Ralf Hielscher)**
+{% include reference.html
+link="https://drive.google.com/file/d/16hMEm7-59sGMpIJ2unSEsjynvpEbhAEK/view?usp=sharing"
+content="script" class="course_material" %}
+<span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/yY359NPY7oA" content="video" class="course_material" %}
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
@@ -326,6 +334,10 @@ maps, dislocation density estimation, weighted Burgers vector, habit planes dete
 <br>
 <br>
 **Free Discussion of Personal Data Sets**
+{% include reference.html
+link="https://drive.google.com/file/d/1xOrOdT3FtWyhqmBHfDfAUAKg1ZOXZsoG/view?usp=sharing"
+content="script" class="course_material" %}
+<span class="course_material">, </span>
 {% include reference.html
 link="https://drive.google.com/file/d/1WTBzzE0U2LllmrG775QeEXVlbF0pN8i7/view?usp=sharing"
 content="data 1" class="course_material" %}
