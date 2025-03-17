@@ -1,5 +1,5 @@
 ---
-title: script_OrientationInversePoleFigure
+title: Inverse Pole Figure
 
 sidebar: documentation_sidebar
 permalink: OrientationInversePoleFigure.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>script_OrientationInversePoleFigure</title>
+<title>Inverse Pole Figure</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_OrientationInversePoleFigure.m">
 </head>
@@ -21,23 +21,16 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalOrientations/OrientationInversePoleFigure.m">
     edit page</a></font>
 <div>
-<h2 id="1">Inverse Pole Figure</h2>
+<!--introduction-->
+<!--/introduction-->
 <p>Inverse pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
 {% highlight matlab %}
-cs = crystalSymmetry('321')
+cs = crystalSymmetry('321');
 ori = orientation.rand(cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs = crystalSymmetry
- 
-  symmetry       : 321               
-  elements       : 6                 
-  a, b, c        : 1, 1, 1           
-  reference frame: X||a*, Y||b, Z||c*
- 
- 
-ori = orientation (321 → y↑→x)
+ori = orientation (321 → y←↑x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -45,18 +38,13 @@ ori = orientation (321 → y↑→x)
 {% endhighlight %}
 <p>Starting point is a fixed specimen direction <code class="language-plaintext highlighter-rouge">r</code>, e.g.,</p>
 {% highlight matlab %}
-% the fixed crystal directions z
-r = vector3d.Z
+r = vector3d.Z;
 {% endhighlight %}
-
-{% highlight plaintext %}
-r = vector3d (y↑→x)
-  x y z
-  0 0 1
-{% endhighlight %}
-<p>Next the crystal direction corresponding to the specimen direction <code class="language-plaintext highlighter-rouge">r</code> according to the orientation <code class="language-plaintext highlighter-rouge">ori</code> are computed</p>
+<p>Next the crystal direction that aligns with specimen direction <code class="language-plaintext highlighter-rouge">r</code> according to the orientation <code class="language-plaintext highlighter-rouge">ori</code> is computed and plotted in a spherical projection</p>
 {% highlight matlab %}
 h = inv(ori) * r
+
+plot(h.symmetrise,'fundamentalRegion')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -64,14 +52,11 @@ h = Miller (321)
        h       k       i       l
   0.0667 -0.3025  0.2357 -0.9481
 {% endhighlight %}
-<p>and ploted in a spherical projection</p>
-{% highlight matlab %}
-plot(h.symmetrise,'fundamentalRegion')
-{% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_01.png" %}
 </center>
-<p>A shortcut for the above computations is the command</p>
+<p>A shortcut for the above computations is the command <a href="orientation.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a> which takes as second argument an arbitrary list of specimen directions <code class="language-plaintext highlighter-rouge">r</code>
+</p>
 {% highlight matlab %}
 % a pole figure plot
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z])
@@ -79,7 +64,8 @@ plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z])
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_02.png" %}
 </center>
-<h2 id="6">Contour plots</h2>
+<h2 id="5">Contour plots</h2>
+<p>Using the option <code class="language-plaintext highlighter-rouge">'contourf'</code> we may turn those scatter plots into contour plots.</p>
 {% highlight matlab %}
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],'contourf')
 mtexColorbar
@@ -87,6 +73,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_03.png" %}
 </center>
+<p>Note that by default only the fundamental sector with respect to the crystal symmetry is plotted. In order to plot the entire sphere use the option <code class="language-plaintext highlighter-rouge">'complete'</code>.</p>
 {% highlight matlab %}
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],'contourf','complete','upper')
 mtexColorbar
