@@ -27,7 +27,6 @@ To make changes, update the MATLAB code and republish this document.
 <p>Let's first import an example dataset from the MTEX toolbox</p>
 {% highlight matlab %}
 mtexdata forsterite
-plotx2north
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -48,9 +47,10 @@ ebsd = EBSD (y↑→x)
 <h2 id="3">Correct EBSD spatial coordinates</h2>
 <p>This EBSD dataset has the foliation N-S, but standard CPO plots and physical properties in geoscience use an external reference frame where the foliation is vertical E-W and the lineation is also E-W but horizontal. We can correct the data by rotating the whole dataset by 90 degree around the z-axis</p>
 {% highlight matlab %}
-rot = rotation.byAxisAngle(zvector,-90*degree);
-ebsd = rot * ebsd;
+ebsd = rotation.byAxisAngle(zvector,-90*degree) * ebsd;
 
+% we shall plot x to the north for a better screen fit
+ebsd.how2plot.north = xvector;
 plot(ebsd,'micronbar','off')
 {% endhighlight %}
 <center>
