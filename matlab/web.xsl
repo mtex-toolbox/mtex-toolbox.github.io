@@ -188,18 +188,13 @@ To make changes, update the MATLAB code and republish this document.
 <xsl:template match="latex"/>
 
 <!-- Detecting M-Code in Comments-->
-<!--<xsl:template match="text/mcode-xmlized">
-  <pre class="language-matlab"><xsl:apply-templates/><xsl:text>
-</xsl:text></pre>
-</xsl:template>-->
-
 <xsl:template match="mcode-xmlized">
-{% highlight matlab1 %}
+{% highlight matlab %}
 <xsl:value-of select="." disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
 
-<!-- Code input and output -->
+<!-- Code input -->
 <xsl:template match="mcode-xmlized">
   <xsl:variable name="trimmedText">
      <xsl:call-template name="trim">
@@ -211,6 +206,7 @@ To make changes, update the MATLAB code and republish this document.
 {% endhighlight %}
 </xsl:template>
 
+<!-- Code output -->
 <xsl:template match="mcodeoutput">
    <xsl:variable name="trimmedText">
      <xsl:call-template name="trim">
