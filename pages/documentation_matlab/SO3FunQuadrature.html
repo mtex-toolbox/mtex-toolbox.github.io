@@ -162,13 +162,13 @@ ans =
 {% endhighlight %}
 <h2 id="11">RBF-Kernel Approximation</h2>
 <p>The basic strategy is to approximate the given function \(f\) by a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>, see <a href="RadialODFs.html">Radial Basis Functions on SO(3)</a>.</p>
-<p>Hence we determine rotations \(\bf{R}_1,\dots,\bf{R}_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
-<p>\[ g(x) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega(x,{\bf{R}}_n)}{2}) \]</p>
-<p>approximates \(f\) reasonable well, i.e. \(f\approx g\). In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \(\bf{R}_1,\dots,\bf{R}_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
+<p>Hence we determine rotations \({\bf{R}}_1,\dots,{\bf{R}}_N\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) such that</p>
+<p>\[ g({\bf{x}}) = \sum_{n=1}^N c_n \, \Psi(\cos\frac{\omega({\bf{x}},{\bf{R}}_n)}{2}) \]</p>
+<p>approximates \(f\) reasonable well, i.e. \(f\approx g\). In this formula, \(\Psi\) describes a <a href="SO3Kernels.html">SO(3)-Kernel Function</a>. Hence, \(f\) is a superposition of one rotational kernel function centered on the orientations \({\bf{R}}_1,\dots,{\bf{R}}_N\) and weighted by the coefficients \(c_1,\dots,c_N\).</p>
 <p>A basic strategy is to apply least squares approximation, where we compute the coefficients \(c_n\) by minimizing the functional</p>
-<p>\[ \sum_{m=1}^M|f(x_m)-g(x_m)|^2 \]</p>
-<p>for some specific orientations \(x_1,\dots,x_M\).</p>
-<p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,{\bf{R}}_n)}{2})]_{m,n}\).</p>
+<p>\[ \sum_{m=1}^M|f({\bf{x}}_m)-g({\bf{x}}_m)|^2 \]</p>
+<p>for some specific orientations \({\bf{x}}_1,\dots,{\bf{x}}_M\).</p>
+<p>This least squares problem can also be written in matrix vector notation \( \mathrm{argmin}_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega({\bf{x}}_m,{\bf{R}}_n)}{2})]_{m,n}\).</p>
 <p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
 <p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1, which can be applied if we try to approximate a density function.</p>
 <p>In MTEX we use the command <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
@@ -204,7 +204,7 @@ minValue =
 meanValue =
     1.0000
 {% endhighlight %}
-<p>We can specify the kernel of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> with the option <code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> and we can use the options <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> and <code class="language-plaintext highlighter-rouge">'resolution'</code> to choose some specific set of rotations as centers \(\bf{R}_1,\dots,\bf{R}_N\) of the approximation \(g\).</p>
+<p>We can specify the kernel of the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> with the option <code class="language-plaintext highlighter-rouge">'kernel'</code> or <code class="language-plaintext highlighter-rouge">'halfwidth'</code> and we can use the options <code class="language-plaintext highlighter-rouge">'SO3Grid'</code> and <code class="language-plaintext highlighter-rouge">'resolution'</code> to choose some specific set of rotations as centers \({\bf{R}}_1,\dots,{\bf{R}}_N\) of the approximation \(g\).</p>
 {% highlight matlab %}
 SO3F4 = SO3FunRBF(SO3F,'halfwidth',5*degree,'resolution',10*degree)
 plot(SO3F4,'sigma')
@@ -274,13 +274,13 @@ ans =
 {% endhighlight %}
 <p>If we do not have an <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code>, but we try to approximate a function from some physical experiment or more complex Matlab function (where we can put in specific orientations and get out numbers), then we should perform the experiment for all orientations of an <code class="language-plaintext highlighter-rouge"><a href="equispacedSO3Grid.html">equispacedSO3Grid</a></code> and <a href="SO3Fun.Approximation">approximate this discrete data</a> in a second step.</p>
 <h2 id="20">RBF-Kernel Approximation by minimizing the harmonic Error</h2>
-<p>The basic idea is the same as in the previous section. We determine rotations \(\bf{R}_1,\dots,\bf{R}_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
-<p>\[ g(x) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega(x,{\bf{R}}_m)}{2}), \]</p>
+<p>The basic idea is the same as in the previous section. We determine rotations \({\bf{R}}_1,\dots,{\bf{R}}_M\) and seek the corresponding coefficients \(\vec c=(c_1,\dots,c_N)\) of</p>
+<p>\[ g({\bf{x}}) = \sum_{m=1}^M c_m \, \Psi(\cos\frac{\omega({\bf{x}},{\bf{R}}_m)}{2}), \]</p>
 <p>such that \(g\) approximates \(f\) in a certain sense. But in what sense exactly?</p>
-<p>In the previous section, we minimized the pointwise error (in spatial domain) between \(f\) and \(g\) on some grid, i.e. we minimized \( \sum\limits_{m=1}^M|f(x_m)-g(x_m)|^2 \) in \(M\) points.</p>
+<p>In the previous section, we minimized the pointwise error (in spatial domain) between \(f\) and \(g\) on some grid, i.e. we minimized \( \sum\limits_{m=1}^M|f({\bf{x}}_m)-g({\bf{x}}_m)|^2 \) in \(M\) points.</p>
 <p>Now we will minimize the error in frequency domain. Hence, the Fourier coefficients of \(f\) are supposed to be nearly the same as the Fourier coefficients of \(g\).</p>
 <p>So, we will try to determine the coefficients \(c_1,\dots,c_M\) such that</p>
-<p>\[ \sum_{n=0}^N \sum_{k,l=-n}^n <code class="language-plaintext highlighter-rouge">\hat f_n^{k,l} - \hat g_n^{k,l}</code>^2 \]</p>
+<p>\[ \sum\limits_{n=0}^N \sum\limits_{k,l=-n}^n | \hat{f}_n^{k,l} - \hat{g}_n^{k,l} |^2 \]</p>
 <p>is minimized.</p>
 <p>In MTEX we call this by adding the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> to the <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>-command.</p>
 {% highlight matlab %}

@@ -46,9 +46,9 @@ plotSection(ori,val,'all','sigma')
 <p>A basic strategy is to apply least squares approximation, where we compute the coefficients \(c_n\) by minimizing the functional</p>
 <p>\[ \sum_{m=1}^M|f(x_m)-v_m|^2 \]</p>
 <p>for the given data points \((x_m,v_m)\), \(m=1,\dots,M\). Here \(x_m\) denotes the given orientations and \(v_m\) the corresponding function values.</p>
-<p>This least squares problem can also be written in matrix vector notation \( \argmin_{c} \| K \cdot c - v \|, \) where \(c=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,R_n)}{2})]_{m,n}\).</p>
+<p>This least squares problem can also be written in matrix vector notation \( \mathrm{argmin}\limits_{c} \| K \cdot c - v \|, \) where \(c=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega(x_m,R_n)}{2})]_{m,n}\).</p>
 <p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
-<p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1.</p>
+<p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum\limits_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1.</p>
 <p>In MTEX the command <a href="rotation.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> computes by default computes an approximation by a superposition of radial functions.</p>
 {% highlight matlab %}
 SO3F = interp(ori,val,'density')
@@ -106,7 +106,28 @@ SO3F = SO3FunRBF (1 → y↑→x)
 <center>
 {% include inline_image.html file="RBFApproximationTheory_03.png" %}
 </center>
-<h2 id="9">Adjustment of the Kernel Function</h2>
+<p>Hence the result is not automatically a density function (nonnegative and mean 1).</p>
+{% highlight matlab %}
+minValue = min(SO3F)
+meanValue = mean(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+minValue =
+   -6.7665
+meanValue =
+    0.9518
+{% endhighlight %}
+<p>But since it is not denoised, it is overfitted and the error becomes small.</p>
+{% highlight matlab %}
+norm(SO3F.eval(ori) - val) / norm(val)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   4.7854e-04
+{% endhighlight %}
+<h2 id="11">Adjustment of the Kernel Function</h2>
 <p>The key parameter when approximating by radial basis functions is the halfwidth of the kernel function \(\Psi\). This can be set by the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code>. A large halfwidth results in a very smooth approximated function whereas a very small halfwidth - in relation to the grid of the input data - may result in overfitting.</p>
 {% highlight matlab %}
 SO3F = interp(ori,val,'halfwidth',2*degree,'density')
@@ -221,7 +242,7 @@ SO3F = SO3FunRBF (1 → y↑→x)
 <center>
 {% include inline_image.html file="RBFApproximationTheory_09.png" %}
 </center>
-<h2 id="15">Exact Interpolation</h2>
+<h2 id="17">Exact Interpolation</h2>
 <p>Assume, that our function values are not noisy. Then we may want to do exact interpolation, i.e. we want the error to be almost 0.</p>
 <p>Up to now we used a special rotational grid for the centers of rotational kernel function the approximated <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>. Now we can add the flag <code class="language-plaintext highlighter-rouge">'exact'</code> to use the input nodes as centers for the rotational kernel functions. Therefore the kernel matrix \(K\) becomes symmetric, positive definite and the above linear system \(K\cdot c=v\) has a solution, i.e the error in lsqr may becomes 0. The disadvantage is that the kernel matrix is no longer sparse. Hence the computational costs may explode.</p>
 {% highlight matlab %}
@@ -232,7 +253,7 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 19.303124 seconds.
+Elapsed time is 13.200347 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_10.png" %}
@@ -256,7 +277,7 @@ minValue = min(SO3F)
 minValue =
    -7.6067
 {% endhighlight %}
-<h2 id="18">LSQR-Parameters</h2>
+<h2 id="20">LSQR-Parameters</h2>
 <p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
 <p>Thus we are able to control the precision of the result and computational time of the least squares methods in the approximation process.</p>
 {% highlight matlab %}
@@ -276,11 +297,11 @@ fprintf(['Number of iterations = ',num2str(iter2),'\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 0.392645 seconds.
+Elapsed time is 0.304296 seconds.
 Number of iterations = 8
 Value of energy functional = 0.43171
 
-Elapsed time is 0.489023 seconds.
+Elapsed time is 0.397478 seconds.
 Number of iterations = 41
 Value of energy functional = 0.0015935
 {% endhighlight %}

@@ -84,48 +84,6 @@ ebsd = smooth(ebsd, F, 'fill', grains)
       </tr>
    </table>
 </p>
-<h2 id="6">Example</h2>
-{% highlight matlab %}
-mtexdata forsterite;
-ebsd = ebsd('indexed');
-% segment grains
-[grains,ebsd.grainId] = calcGrains(ebsd);
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD (y↑→x)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad
- Scan unit : um
- X x Y x Z : [0 36550] x [0 16750] x [0 0]
- Normal vector: (0,0,1)
-{% endhighlight %}
-
-{% highlight matlab %}
-% find largest grains
-largeGrains = grains(grains.numPixel>800);
-ebsd = ebsd(largeGrains(1));
-{% endhighlight %}
-
-{% highlight matlab %}
-figure
-plot(largeGrains(1).boundary,'linewidth',2)
-hold on
-oM = ipfHSVKey(ebsd);
-oM.inversePoleFigureDirection = mean(ebsd.orientations) * oM.whiteCenter;
-oM.colorStretching = 50;
-plot(ebsd,oM.orientation2color(ebsd.orientations))
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSD3.smooth_01.png" %}
-</center>
 </div>
 </body>
 </html>
