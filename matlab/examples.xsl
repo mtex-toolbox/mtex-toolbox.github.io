@@ -6,19 +6,17 @@ Use the XSLT command to perform the conversion.
 -->
 
 <!DOCTYPE xsl:stylesheet [ <!ENTITY nbsp "&#160;"> <!ENTITY reg "&#174;"> ]>
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet
+  version="1.0"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd"
-  xmlns:f="http://fxsl.sf.net/"
-  exclude-result-prefixes="f mwsh">
-  <xsl:import href="../../fxsl-xslt2/f/trim.xsl"/>
-
+  exclude-result-prefixes="mwsh">
+  
   <xsl:output method="html" indent="no"/>
-  <xsl:strip-space elements="mwsh:code"/>
-
+  <!--doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"-->
   <xsl:variable name="toolbox" select="document('toolbox.xml')/toolbox"/>
   <xsl:variable name="filename"><xsl:value-of select="substring(mscript/m-file,8)"/></xsl:variable>
-
+ 
   <xsl:variable name="title">
     <xsl:variable name="dTitle" select="//steptitle[@style='document']"/>
     <xsl:choose>
@@ -26,33 +24,30 @@ Use the XSLT command to perform the conversion.
       <xsl:otherwise><xsl:value-of select="mscript/m-file"/></xsl:otherwise>
     </xsl:choose>
   </xsl:variable>
-
   <xsl:include href="makelink.xsl"/>
+
+  <!-- here everything starts -->
+  <!--last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>-->
   <xsl:template match="mscript">---
 title: <xsl:value-of select="$title"/>
-last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>
+
 sidebar: <xsl:value-of select="$toolbox/folder"/>_sidebar
 permalink: <xsl:value-of select="$toolbox/htmlTarget"/>
 folder: <xsl:value-of select="$toolbox/folder"/>
 toc: false
 ---
-    <html>
+<html>
   <!-- head -->
   <head>
-<xsl:comment>
-This HTML was auto-generated from MATLAB code.
-To make changes, update the MATLAB code and republish this document.
-      </xsl:comment>
+    <xsl:comment>
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    </xsl:comment>
 
     <title><xsl:value-of select="$title"/></title>
 
-    <meta name="generator">
-      <xsl:attribute name="content">MATLAB <xsl:value-of select="version"/></xsl:attribute>
-    </meta>
     <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
-    <meta name="DC.date">
-      <xsl:attribute name="content"><xsl:value-of select="date"/></xsl:attribute>
-    </meta>
+
     <meta name="DC.source">
       <xsl:attribute name="content"><xsl:value-of select="m-file"/>.m</xsl:attribute>
     </meta>
@@ -82,7 +77,6 @@ To make changes, update the MATLAB code and republish this document.
 
     <xsl:variable name="body-cells" select="cell[not(@style = 'overview')]"/>
 
-
     <!-- Loop over each cell -->
     <xsl:for-each select="$body-cells">
         <!-- Title of cell -->
@@ -94,14 +88,14 @@ To make changes, update the MATLAB code and republish this document.
                 <xsl:otherwise>h2</xsl:otherwise>
               </xsl:choose>
             </xsl:variable>
-              <xsl:element name="{$headinglevel}">
-                <xsl:if test="not(steptitle[@style = 'document'])">
-                  <xsl:attribute name="id">
-                    <xsl:value-of select="position()"/>
-                  </xsl:attribute>
-                </xsl:if>
-                <xsl:apply-templates select="steptitle"/>
-              </xsl:element>
+            <xsl:element name="{$headinglevel}">
+              <xsl:if test="not(steptitle[@style = 'document'])">
+                <xsl:attribute name="id">
+                  <xsl:value-of select="position()"/>
+                </xsl:attribute>
+              </xsl:if>
+              <xsl:apply-templates select="steptitle"/>
+            </xsl:element>
           </xsl:if>
         </xsl:if>
 
@@ -153,7 +147,6 @@ To make changes, update the MATLAB code and republish this document.
 
 
 <!-- HTML Tags in text sections -->
-<!-- <code class="language-plaintext highlighter-rouge">fileName.ctf</code> -->
 <xsl:template match="p">
   <p><xsl:apply-templates/></p>
 </xsl:template>
@@ -209,33 +202,33 @@ To make changes, update the MATLAB code and republish this document.
 {% endhighlight %}
 </xsl:template>
 
+
 <!-- Code input -->
 <xsl:template match="mcode-xmlized">
+  <xsl:variable name="trimmedText">
+     <xsl:call-template name="trim">
+       <xsl:with-param name="text" select="."/>
+     </xsl:call-template>
+   </xsl:variable>
 {% highlight matlab %}
-<xsl:value-of select="." disable-output-escaping="yes"/>
+<xsl:value-of select="$trimmedText" disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
 
 <!-- Code output -->
 <xsl:template match="mcodeoutput">
-  <xsl:variable name="replaced">
-    <xsl:call-template name="trim">
-      <xsl:with-param name="pStr">
-	<xsl:value-of select="."/>
-      </xsl:with-param>
-    </xsl:call-template>
-  </xsl:variable>
+   <xsl:variable name="trimmedText">
+     <xsl:call-template name="trim">
+       <xsl:with-param name="text" select="."/>
+     </xsl:call-template>
+   </xsl:variable>
 {% highlight plaintext %}
-<xsl:value-of select="$replaced" disable-output-escaping="yes"/>
+<xsl:value-of select="$trimmedText" disable-output-escaping="yes"/>
 {% endhighlight %}
 </xsl:template>
-<!--<xsl:value-of select="." disable-output-escaping="yes"/>-->
-<!--<xsl:value-of select="mwsh:trim(.)" disable-output-escaping="yes"/>-->
-<!--<xsl:value-of select="replace(replace($arg,'\s+$',''),'^\s+','')"
-    disable-output-escaping="yes"/>-->
-<!--<xsl:value-of select="f:trim(.)" disable-output-escaping="yes"/>-->
-<!--<xsl:value-of select="." disable-output-escaping="yes"/>-->
-<!-- Figure and model snapshots and equations -->
+
+<!-- Images -->
+
 <xsl:template match="img[@class='equation']">
   {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
 </xsl:template>
@@ -247,7 +240,6 @@ To make changes, update the MATLAB code and republish this document.
 </xsl:template>
 
 <!-- Stash original code in HTML for easy slurping later. -->
-
 <xsl:template match="originalCode">
 </xsl:template>
 
@@ -306,9 +298,5 @@ To make changes, update the MATLAB code and republish this document.
     </xsl:otherwise>
   </xsl:choose>
 </xsl:template>
-<!--  <func:function name="mwsh:trim" as="xs:string">
-    <xsl:param name="arg" as="xs:string?"/>
-    <xsl:sequence select="replace(replace($arg,'\s+$',''),'^\s+','')"/>
-  </func:function>
--->
+
 </xsl:stylesheet>
