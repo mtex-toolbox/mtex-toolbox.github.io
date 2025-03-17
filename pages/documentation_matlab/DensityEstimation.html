@@ -29,6 +29,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 % Define the true density function, in this case made by combining two
 % Gaussians
+
 f = @(x) (Gaussian(0.2,0.05,x) + Gaussian(0.5,0.2,x))/2;
 
 % generate 1000 points linearly spaced between 0 and 1
@@ -64,7 +65,7 @@ hold off
 </center>
 <p>However, since the histogram always leads to a piecewise constant function (step function) the fit to the true density function \(f\) is usually not so good. A better alternative is kernel density estimation.</p>
 <h2 id="5">Kernel Density Estimation</h2>
-<p>The idea of kernel density estimation is to pick some kernel function \(\psi\), e.g. a Gaussian with mean \(0\) and stadard deviation \(0.05\),</p>
+<p>The idea of kernel density estimation is to pick some kernel function \(\psi\), e.g. a Gaussian with mean \(0\) and standard deviation \(0.05\),</p>
 {% highlight matlab %}
 psi = Gaussian(0,0.05);
 {% endhighlight %}
@@ -120,30 +121,30 @@ legend('\(f\)','\(f_{0.01}\)','\(f_{0.05}\)','\(f_{0.25}\)','interpreter','Latex
 <center>
 {% include inline_image.html file="DensityEstimation_05.png" %}
 </center>
-<p>In general a too small halfwidth leads to heavily oscillating functions, while a too large halfwdith will result in excessively smooth functions. In the case of one dimensional data kernel density estimation MTEX includes automatic optomization of the halfwidth when using the command <a href="calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
+<p>In general a too small halfwidth leads to heavily oscillating functions, while a too large halfwidth will result in excessively smooth functions. In the case of one dimensional data kernel density estimation MTEX includes automatic optimization of the halfwidth when using the command <a href="calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
 {% highlight matlab %}
 fN = calcDensity(xN,'range',[0;1]);
-
-% Optionally, we may control the halfwidth by the option 'bandwidth'
-%fN = calcDensity(xN,'range',[0;1],'bandwidth',0.004);
-
-plot(x,f(x),'linewidth',2)
-hold on
-plot(x,fN(x),'linewidth',2)
-hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 t_star =
     0.0023
 {% endhighlight %}
+<p>Optionally, we may control the halfwidth by the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code>, i.e., <code class="language-plaintext highlighter-rouge">fN = calcDensity(xN,'range',[0;1],'bandwidth',0.004)</code>
+</p>
+{% highlight matlab %}
+plot(x,f(x),'linewidth',2)
+hold on
+plot(x,fN(x),'linewidth',2)
+hold off
+{% endhighlight %}
 <center>
 {% include inline_image.html file="DensityEstimation_06.png" %}
 </center>
-<h2 id="10">Optimal Halfwidth Selection</h2>
+<h2 id="11">Optimal Halfwidth Selection</h2>
 <p>Selecting an optimal kernel halfwidth is a tough problem. MTEX provides a couple of methods for this purpose which are explained in detail in the section <a href="OptimalKernel.html">Optimal Kernel Selection</a>.</p>
-<h2 id="11">Kernel Density Estimation in d-Dimensions</h2>
-<p>The command <a href="calcDensity.html">calcDensity</a> may also be applied to \(d\)-dimenional data. For simplicity lets consider a two-dimensional example where both \(x\) and \(y\) coordinates are distributed according to the distribution \(f\) defined at the very beginning of this section.</p>
+<h2 id="12">Kernel Density Estimation in d-Dimensions</h2>
+<p>The command <a href="calcDensity.html">calcDensity</a> may also be applied to \(d\)-dimensional data. For simplicity lets consider a two-dimensional example where both \(x\) and \(y\) coordinates are distributed according to the distribution \(f\) defined at the very beginning of this section.</p>
 {% highlight matlab %}
 % Get a number of random sample points from the function.
 N = 100;
@@ -178,7 +179,7 @@ hold off
 <center>
 {% include inline_image.html file="DensityEstimation_08.png" %}
 </center>
-<h2 id="13">Density Estimation for Directional Data</h2>
+<h2 id="14">Density Estimation for Directional Data</h2>
 <p>Kernel density for directional (misorientation/ crystallographic axis) data works analogously as for real valued data. Again we have to choose a kernel function \(\psi\) with a certain halfwidth \(\delta\). Than the kernel functions are centered at each direction of our random sampling and summed up. Lets us demonstrate this procedure for misorientation axes between two phases in an EBSD map</p>
 {% highlight matlab %}
 % import ebsd data
@@ -231,8 +232,8 @@ hold off
 <center>
 {% include inline_image.html file="DensityEstimation_11.png" %}
 </center>
-<h2 id="16">Density Estimation for Orientation Data</h2>
-<p>Density estimation from orientations sets the connection between individal crystal orientations, as e.g. measured by EBSD, and the orientation distribution function of a specimen. Considering the Forsterite orientations from the above EBSD map the corresponding ODF computes to</p>
+<h2 id="17">Density Estimation for Orientation Data</h2>
+<p>Density estimation from orientations sets the connection between individual crystal orientations, as e.g. measured by EBSD, and the orientation distribution function of a specimen. Considering the Forsterite orientations from the above EBSD map the corresponding ODF computes to</p>
 {% highlight matlab %}
 odf = calcDensity(ebsd('Forsterite').orientations,'halfwidth',10*degree)
 {% endhighlight %}
@@ -242,7 +243,7 @@ odf = SO3FunHarmonic (Forsterite → y↑→x)
   bandwidth: 25
   weight: 1
 {% endhighlight %}
-<p>Lets visualize the ODF in phi2 sections and plot on top of it the individual orientation measurements from the EBSD map</p>
+<p>Lets visualize the ODF in <code class="language-plaintext highlighter-rouge">phi2</code> sections and plot on top of it the individual orientation measurements from the EBSD map</p>
 {% highlight matlab %}
 plotSection(odf,'contourf')
 mtexColorMap LaboTeX
@@ -259,10 +260,10 @@ plotting 2000 random orientations out of 152345 given orientations
 <center>
 {% include inline_image.html file="DensityEstimation_12.png" %}
 </center>
-<p>A more detailed describtion of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p>
-<h2 id="19">Parametric Density Estimation</h2>
+<p>A more detailed description of ODF estimation from individual orientation measurements can be found in the section <a href="EBSD2ODF.html">ODF Estimation from EBSD data</a>.</p>
+<h2 id="20">Parametric Density Estimation</h2>
 <p>In contrast to kernel density estimation, parametric density estimation makes the assumption that the true distribution function belongs to a parametric distribution family, e.g. the Gaussian. In this case it estimates the parameters of this distribution from the random sample. In the case of the Gaussian distribution these parameters are the mean value and the standard deviation. On spheres and in orientation space, the analogous functions to the Gaussian are the Bingham distributions. The estimation of Bingham parameters from directional and rotational data is explained in the sections <a href="S2FunBingham.html">The Spherical Bingham Distribution</a> and <a href="BinghamODFs.html">The Rotational Bingham Distribution</a>.</p>
-<h2 id="20">Density Estimation with Weights</h2>
+<h2 id="21">Density Estimation with Weights</h2>
 <p>In many use cases one has a weighted random sample. A typical example is if one wants to estimate a orientation distribution function from grain orientations. In this cases big grains should contribute more to the ODF than small grains. For that reason the functions <code class="language-plaintext highlighter-rouge">calcDensity</code> allow for an additional option <code class="language-plaintext highlighter-rouge">'weights'</code> which will pass weights to the density estimation.</p>
 {% highlight matlab %}
 mtexdata titanium silent

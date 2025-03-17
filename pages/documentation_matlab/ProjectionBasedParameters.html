@@ -217,24 +217,19 @@ ans =
 {% endhighlight %}
 <p>The position of the maxima and minima of the projection function derived from <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">paror</code></a> can be interpreted in the following way: the maximum position represents the preferred axis parallel to the longest projection and the normal the minimum position represents the preferred axis related to the normal to the shortest projection function.</p>
 {% highlight matlab %}
-% for the Forsterite
-
-% using S1Fun
-% for the Forsterite
+% using S1Fun for the Forsterite
 sF_Fo = S1FunHarmonic.interpolate(omega,cumplF);
 [~, maxposfo] = max(sF_Fo);
 [~, minposfo] = min(sF_Fo);
 
-mod(maxposfo,pi)/degree
-mod(minposfo-pi/2,pi)/degree
+[mod(maxposfo,pi) mod(minposfo-pi/2,pi)] /degree
 
 % for the Enstatite
 sF_Fo = S1FunHarmonic.interpolate(omega,cumplE);
 [~, maxposfo] = max(sF_Fo);
 [~, minposfo] = min(sF_Fo);
 
-mod(maxposfo,pi)/degree
-mod(minposfo-pi/2,pi)/degree
+[mod(maxposfo,pi) mod(minposfo-pi/2,pi)]/degree
 
 
 % or finding maxima and minima
@@ -242,34 +237,24 @@ mod(minposfo-pi/2,pi)/degree
 [~, id_max] = max(cumplF);
 [~, id_min] = min(cumplF);
 
-mod(omega(id_max)./degree,180)
-mod(omega(id_min)./degree-90,180)
+[mod(omega(id_max)./degree,180) mod(omega(id_min)./degree-90,180)]
 
 % for the Enstatite
 [~, id_max] = max(cumplE);
 [~, id_min] = min(cumplE);
 
-mod(omega(id_max)./degree,180)
-mod(omega(id_min)./degree-90,180)
+[mod(omega(id_max)./degree,180) mod(omega(id_min)./degree-90,180)]
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   71.1000
+   71.1000   74.4250
 ans =
-   74.4250
+   87.8250   88.5250
 ans =
-   87.8250
+   71.0000   74.0000
 ans =
-   88.5250
-ans =
-    71
-ans =
-   74.0000
-ans =
-    87
-ans =
-   88.0000
+   87.0000   88.0000
 {% endhighlight %}
 <p>The smaller the difference between these values, the closer the fabric is to an orthorhombic symmetry.</p>
 <p>Similarly to using the entire particle (the convex hull in case of the projection functions), we can use a distribution of lines <a href="grainBoundary.surfor.html"><code class="language-plaintext highlighter-rouge">grainBoudnary.surfor</code></a>. This can be useful for the quantification of the grain boundary anisotropy or in general might be needed if we look at boundaries which do not form closed outlines, e.g. a list of subgrain or twin boundaries or the contact between certain phases.</p>
@@ -309,24 +294,25 @@ shapeEF = characteristicShape(grains.boundary('En','Fo'));
 plot(shapeEF,plotopts{:},'DisplayName','En-Fo')
 hold off
 
-legend('Fo-Fo','En-En','En-Fo','Location','northeastoutside', ...
-       'FontSize', 24)
-
-% The output of `characteristicShape` is a `shape2d` object which behaves
-% very similar to a `grain2d` object, hence it is easy to derive things
-% such as a long axis or e.g. the angle between the longest and the shortest
-% caliper which can be regarded as a measure of asymmetry.
-
-angle(shapeF.caliper('longest'),shapeF.caliper('shortest')) / degree
-angle(shapeE.caliper('longest'),shapeE.caliper('shortest')) / degree
-angle(shapeEF.caliper('longest'),shapeF.caliper('shortest')) / degree
+legend('Location','southoutside','Orientation','horizontal')
 {% endhighlight %}
 
 {% highlight plaintext %}
 shapeF = shape2d
  
  vertices: 1024
- 
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ProjectionBasedParameters_09.png" %}
+</center>
+<p>The output of <code class="language-plaintext highlighter-rouge">characteristicShape</code> is a <a href="shape2d.shape2d.html">shape2d</a> object which behaves very similar to a `grain2d` object, hence it is easy to derive things such as a long axis or e.g. the angle between the longest and the shortest caliper which can be regarded as a measure of asymmetry.</p>
+{% highlight matlab %}
+angle(shapeF.caliper('longest'),shapeF.caliper('shortest')) / degree
+angle(shapeE.caliper('longest'),shapeE.caliper('shortest')) / degree
+angle(shapeEF.caliper('longest'),shapeF.caliper('shortest')) / degree
+{% endhighlight %}
+
+{% highlight plaintext %}
 ans =
    78.7774
 ans =
@@ -334,9 +320,6 @@ ans =
 ans =
    79.7408
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ProjectionBasedParameters_09.png" %}
-</center>
 </div>
 </body>
 </html>
