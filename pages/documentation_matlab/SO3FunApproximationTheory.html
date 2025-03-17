@@ -88,8 +88,8 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
  
 SO3F = SO3FunHarmonic (1 → y↑→x)
   bandwidth: 18
@@ -104,7 +104,7 @@ ans =
 <p>We observe that the relative error is much smaller, however the oscillatory behavior of the approximated function indicates overfitting. A more detailed discussion about choosing a good regularization parameter can be found in the section <a href="HarmonicApproximationTheory.html">harmonic approximation theory</a>.</p>
 <p>An alternative way of regularization is to reduce the harmonic bandwidth</p>
 {% highlight matlab %}
-SO3F = interp(ori,S.values,'harmonic','bandwidth',16)
+SO3F = interp(ori,S.values,'harmonic','regularization',0,'bandwidth',16)
 
 % the relative error
 norm(SO3F.eval(ori) - S.values) / norm(S.values)
@@ -118,7 +118,7 @@ SO3F = SO3FunHarmonic (1 → y↑→x)
   weight: 0.99
  
 ans =
-    0.1379
+    0.1064
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_04.png" %}
@@ -130,7 +130,7 @@ min(SO3F)
 
 {% highlight plaintext %}
 ans =
-   -7.5512
+  -12.4262
 {% endhighlight %}
 <p>The possibility to guaranty non negativity is the central advantage of kernel based approximation.</p>
 <h2 id="11">Approximation by Radial Functions</h2>
@@ -192,8 +192,22 @@ ans =
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_07.png" %}
 </center>
-<h2 id="16">Approximation using the Bingham distribution</h2>
-<p>Approximation with the Bingham distribution currently works only with no symmetry. TODO! TODO: Dont work</p>
+<p>In general, omitting the option <code class="language-plaintext highlighter-rouge">'density'</code> does not yield to a density function (nonnegative and mean 1).</p>
+{% highlight matlab %}
+minValue = min(SO3F)
+
+meanValue = mean(SO3F)
+{% endhighlight %}
+
+{% highlight plaintext %}
+minValue =
+   -6.0528
+meanValue =
+    0.9806
+{% endhighlight %}
+<h2 id="17">Approximation using the Bingham distribution</h2>
+<p>Approximation with the Bingham distribution currently works only with no symmetry.</p>
+<p>TODO: Dont work</p>
 {% highlight matlab %}
 % simulate nodes and values from an odf
 rng(0)
@@ -228,8 +242,10 @@ SO3F = SO3FunBingham (1 → y↑→x)
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_09.png" %}
 </center>
-<h2 id="18">Alternative Non-ODF example</h2>
-<p>Lets consider an academic example which do not describe an underlying odf. Hence we have given noisy evaluations of the function \[ f(\mat R) = \cos(\omega&reg;) \cdot \sin(3\cdot \varphi_1&reg;)+\frac12 \] in some random orientations, where \(\omega&reg;\) is the angle of the rotation \(R\) and \(\varphi_1&reg;\) is the \(varphi_1\)-Euler angle of \(R\).</p>
+<h2 id="19">Alternative Non-ODF example</h2>
+<p>Lets consider an academic example which do not describe an underlying odf. Hence we have given noisy evaluations of the function</p>
+<p>\[ f({\bf{R}}) = \cos(\omega({\bf{R}})) \cdot \sin(3\cdot \varphi_1({\bf{R}}))+\frac12 \]</p>
+<p>in some random orientations, where \(\omega({\bf{R}})\) is the angle of the rotation \(\bf{R}\) and \(\varphi_1({\bf{R}})\) is the \(varphi_1\)-Euler angle of \(\bf{R}\).</p>
 {% highlight matlab %}
 f = SO3FunHandle(@(r) cos(r.angle).*sin(3*r.phi1) + 0.5);
 plot(f,'sigma')
@@ -269,8 +285,8 @@ plot(FK,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not have
-converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
  
 FK = SO3FunRBF (1 → y↑→x)
  

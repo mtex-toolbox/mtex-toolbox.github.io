@@ -56,7 +56,7 @@ ebsd = EBSD (y↑→x)
  
  Properties: ci, fit, iq, sem_signal
  Scan unit : um
- X x Y x Z : [0 70] x [0 70] x [0 0]
+ X x Y x Z : [0, 70] x [0, 70] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
@@ -121,7 +121,7 @@ hold off
 <p>Data sets with many missing pixels most often appear when measuring geological samples. The following data set of forsterite contains about 25 percent missing pixels. Lets start by importing the data and reconstructing the grain structure.</p>
 {% highlight matlab %}
 close all; plotx2east
-mtexdata forsterite
+mtexdata forsterite silent
 ebsd = ebsd(inpolygon(ebsd,[10 4 5 3]*10^3));
 plot(ebsd('Fo'),ebsd('Fo').orientations)
 hold on
@@ -136,25 +136,10 @@ grains = smooth(grains,5);
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD (y↑→x)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad
- Scan unit : um
- X x Y x Z : [0 36550] x [0 16750] x [0 0]
- Normal vector: (0,0,1)
-{% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_06.png" %}
 </center>
-<p>Using the option <code class="language-plaintext highlighter-rouge">'fill'</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries are kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grain</code> variable has to be passed as an additional argument.</p>
+<p>Using the option <code class="language-plaintext highlighter-rouge">'fill'</code> the command <code class="language-plaintext highlighter-rouge">smooth</code> fills the holes inside the grains. Note that the nonindexed pixels at the grain boundaries are kept untouched. In order to allow MTEX to decide whether a pixel is inside a grain or not, the <code class="language-plaintext highlighter-rouge">grains</code> variable has to be passed as an additional argument.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;
 F.alpha = 10;
@@ -190,8 +175,7 @@ ipfKey.oriRef = grains(ebsdS('En').grainId).meanOrientation;
 
 plot(ebsdS('En'),ipfKey.orientation2color(ebsdS('En').orientations))
 
-
-% plot boundary
+% plot boundaries
 plot(grains.boundary,'linewidth',4)
 plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
 hold off
@@ -212,8 +196,7 @@ ipfKey.oriRef = grains(ebsd('En').grainId).meanOrientation;
 
 plot(ebsd('En'),ipfKey.orientation2color(ebsd('En').orientations))
 
-
-% plot boundary
+% plot boundaries
 plot(grains.boundary,'linewidth',4)
 plot(grains('En').boundary,'lineWidth',4,'lineColor','r')
 hold off

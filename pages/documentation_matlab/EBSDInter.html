@@ -33,7 +33,7 @@ mtexdata twins;
 % this command here is important :)
 ebsd = ebsd.project2FundamentalRegion(grains);
 
-plot(ebsd('indexed'),ebsd('indexed').orientations)
+plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -45,7 +45,7 @@ ebsd = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
- X x Y x Z : [0 50] x [0 41] x [0 0]
+ X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
@@ -65,7 +65,7 @@ ebsd = EBSDsquare (y↑→x)
  
  Properties: bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
- X x Y x Z : [0 50] x [0 41] x [0 0]
+ X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
  Square grid  :137 x 167
 {% endhighlight %}
@@ -82,9 +82,9 @@ e1 = EBSD (y↑→x)
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Id   Phase              orientation   bands    bc    bs   error   mad   grainId   oldId
-  1       1   (162.9°,111.9°,186.1°)      10   160   255       0   0.4        36    3109
+  1       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4        36    3109
  Scan unit : um
- X x Y x Z : [30 30] x [5.5 5.5] x [0 0]
+ X x Y x Z : [30, 30] x [5.5, 5.5] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>By default the command <a href="EBSDSquare.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
@@ -101,7 +101,7 @@ e2 = EBSD (y↑→x)
     Id   Phase            orientation   bands    bc    bs   error   mad   grainId   oldId
  13994       1   (163°,111.9°,186.1°)      10   156   216       0   0.4        36    3276
  Scan unit : um
- X x Y x Z : [31 31] x [5.7 5.7] x [0 0]
+ X x Y x Z : [31, 31] x [5.7, 5.7] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>which returns the nearest neighbour EBSD measurement. Lets have a look at the difference</p>
@@ -111,7 +111,7 @@ angle(e1.orientations,e2.orientations)./degree
 
 {% highlight plaintext %}
 ans =
-    0.1027
+    0.2272
 {% endhighlight %}
 <h2 id="6">Change of the measurement grid</h2>
 <p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> can be used to evaluate the EBSD map on a different grid, which might have higher or lower resolution or might even be rotated. Lets demonstrate this</p>
@@ -136,12 +136,12 @@ plot(ebsdNewGrid('indexed'),ebsdNewGrid('indexed').orientations)
 ebsdNewGrid = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    2624 (52%)  notIndexed                                                 
-     1    2376 (48%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0    2650 (53%)  notIndexed                                                 
+     1    2350 (47%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
- X x Y x Z : [-44 50] x [-7.9 45] x [0 0]
+ X x Y x Z : [-44, 50] x [-7.9, 45] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <center>

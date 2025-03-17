@@ -41,14 +41,15 @@ ebsd = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
- X x Y x Z : [0 36550] x [0 16750] x [0 0]
+ X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>This dataset consists of the three main phases, forsterite, enstatite and diopside. As we want to plot the seismic properties of this aggregate, we need (i) the modal proportions of each phase in this sample, (ii) their orientations, which is given by their ODFs, (iii) the elastic constants of the minerals and (iv) their densities. One can use the modal proportions that appear in the command window (ol=62 %, en=11%, dio=4%), but there is a lot of non-indexed data. You can recalculate the data only for the indexed data</p>
+<p>This dataset consists of the three main phases, forsterite, Enstatite and Diopside. As we want to plot the seismic properties of this aggregate, we need (i) the modal proportions of each phase in this sample, (ii) their orientations, which is given by their ODFs, (iii) the elastic constants of the minerals and (iv) their densities. One can use the modal proportions that appear in the command window (ol=62%, en=11%, dio=4%), but there is a lot of non-indexed data. You can recalculate the data only for the indexed data</p>
 <h2 id="3">Correct EBSD spatial coordinates</h2>
-<p>This EBSD dataset has the foliation N-S, but standard CPO plots and physical properties in geosciences use an external reference frame where the foliation is vertical E-W and the lineation is also E-W but horizontal. We can correct the data by rotating the whole dataset by 90 degree around the z-axis</p>
+<p>This EBSD dataset has the foliation N-S, but standard CPO plots and physical properties in geoscience use an external reference frame where the foliation is vertical E-W and the lineation is also E-W but horizontal. We can correct the data by rotating the whole dataset by 90 degree around the z-axis</p>
 {% highlight matlab %}
-ebsd = rotate(ebsd,rotation('axis',-zvector,'angle',90*degree));
+rot = rotation.byAxisAngle(zvector,-90*degree);
+ebsd = rot * ebsd;
 
 plot(ebsd,'micronbar','off')
 {% endhighlight %}
@@ -79,7 +80,7 @@ Cij = [[320.5  68.15  71.6     0     0     0];...
 C_Fo = stiffnessTensor(Cij,CS_Tensor_Fo,'density',rho_Fo);
 {% endhighlight %}
 <p>Note that when defining a single crystal tensor we shall always specify the crystal reference system which has been used to represent the tensor by its coordinates \(c_{ijkl}\).</p>
-<p>Now we define the stiffness tensor of enstatite, reported by Chai et al. 1997 (Journal of Geophysical Research)</p>
+<p>Now we define the stiffness tensor of Enstatite, reported by Chai et al. 1997 (Journal of Geophysical Research)</p>
 {% highlight matlab %}
 % the crystal reference system
 cs_Tensor_opx = crystalSymmetry('mmm',[ 18.2457  8.7984  5.1959],...

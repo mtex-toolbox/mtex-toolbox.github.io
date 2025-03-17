@@ -1,8 +1,8 @@
 ---
-title: interpolate
+title: uniqueQuadratureSO3Grid
 
 sidebar: function_reference_sidebar
-permalink: SO3Fun.interpolate.html
+permalink: quadratureSO3Grid.uniqueQuadratureSO3Grid.html
 folder: function_reference
 toc: false
 ---
@@ -13,27 +13,28 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>interpolate</title>
+<title>uniqueQuadratureSO3Grid</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.source" content="script_SO3Fun__interpolate.m">
+<meta name="DC.source" content="script_quadratureSO3Grid__uniqueQuadratureSO3Grid.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/@SO3Fun/interpolate.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@quadratureSO3Grid/uniqueQuadratureSO3Grid.m">
     edit page</a></font>
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>compute an ODF by interpolating orientations and weights</p>
+<p>Nearly disjoint list of orientations of an quadratureSO3Grid.</p>
+<p>We use 2-fold rotational symmetries along Y-axis of left and right symmetries to manually 'unique' the fundamental region.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-odf = SO3Fun.interpolate(ori,values)
+[u,~,iu] = uniqueQuadratureSO3Grid(N,scheme,SRight,SLeft)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>ori</tt>
+            <tt>nodes</tt>
          </td>
          <td>
             <tt><a href="orientation.orientation.html">orientation</a></tt>
@@ -41,10 +42,18 @@ odf = SO3Fun.interpolate(ori,values)
       </tr>
       <tr>
          <td width="100px">
-            <tt>values</tt>
+            <tt>N</tt>
          </td>
          <td>
-            <tt>double</tt>
+            <tt>bandwidth</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scheme</tt>
+         </td>
+         <td>
+            <tt>'ClenshawCurtis' or 'GaussLegendre'</tt>
          </td>
       </tr>
    </table>
@@ -54,54 +63,33 @@ odf = SO3Fun.interpolate(ori,values)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>SO3F</tt>
+            <tt>u</tt>
          </td>
          <td>
-            <tt><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></tt>
+            <tt><a href="orientation.orientation.html">orientation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iu</tt>
+         </td>
+         <td>
+            <tt>index tensor such that    nodes = u(iu)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>inodes</tt>
+         </td>
+         <td>
+            <tt>index vector such that    u = nodes(inodes)</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="6">Flags</h2>
+<h2 id="6">See also</h2>
 <p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>lsqr</tt>
-         </td>
-         <td>
-            <tt>least squares (MATLAB)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>lsqnonneg</tt>
-         </td>
-         <td>
-            <tt>non negative least squares (MATLAB, fast)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>lsqlin</tt>
-         </td>
-         <td>
-            <tt>interior point non negative least squares (optimization toolbox, slow)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>nnls</tt>
-         </td>
-         <td>
-            <tt>non negative least squares (W.Whiten)</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="7">See also</h2>
-<p>
-<a href="SO3FunRBF.approximation.html">SO3FunRBF.approximation</a>
+<a href="orientation.unique.html">orientation.unique</a> <a href="SO3FunHarmonic.quadrature.html">SO3FunHarmonic.quadrature</a> <a href="SO3FunHarmonic.quadratureNFSOFT.html">SO3FunHarmonic.quadratureNFSOFT</a>
 </p>
 </div>
 </body>
