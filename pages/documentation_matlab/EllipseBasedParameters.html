@@ -53,7 +53,7 @@ plotEllipse(c,a,b,'lineColor','w','linewidth',2)
 <center>
 {% include inline_image.html file="EllipseBasedParameters_02.png" %}
 </center>
-<p>The returned variable <code class="language-plaintext highlighter-rouge">c</code> is the centroid of the grains, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are of type <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> and are longest and shortest half axes. Note, that the ellipses are scaled such that the area of the ellipse coincides with the actual grain area. Alternatively, one can also scale the ellipse to fit the boundary length by using the option <code class="language-plaintext highlighter-rouge">boundary</code>.</p>
+<p>The returned variable <code class="language-plaintext highlighter-rouge">c</code> is the centroid of the grains, <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">b</code> are of type <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code> and are longest and shortest half axes. Note, that the ellipses are scaled such that the area of the ellipse coincides with the actual grain area. Alternatively, one can also scale the ellipse to fit the boundary length by using the option <code class="language-plaintext highlighter-rouge">boundary</code>.</p>
 <h2 id="4">Long and Short Axes</h2>
 <p>The direction of the long and the short axis of the fitted ellipse can also be obtained by the commands <a href="grain2d.longAxis.html"><code class="language-plaintext highlighter-rouge">grains.longAxis</code></a> and <a href="grain2d.shortAxis.html"><code class="language-plaintext highlighter-rouge">grains.shortAxis</code></a>. These directions are only well defined if the fitted ellipse is not to close to a perfect circle. A measure for how distinct the ellipse is from a perfect circle is the <a href="grain2d.aspectRatio.html">aspect ratio</a> which is defined as the quotient \(a/b\) between the longest and the shortest axis. For a perfect circle the aspect ratio is \(1\) and increases to infinity when the ellipse becomes more and more elongated.</p>
 <p>Lets colorize the grains by their aspect ratio and plot on top the long axis directions:</p>
@@ -100,20 +100,20 @@ tdfForsterite = calcDensity(grains('forsterite').longAxis,...
 
 tdfEnstatite = calcDensity(grains('enstatite').longAxis,...
   'weights',norm(grains('enstatite').longAxis));
-
-% Since the inpout was of type |<vector3d.vector3d.html vector3d>|, the result is a spherical
-% function |<S2FunHarmonic.S2FunHarmonic.html S2FunHarmonic>|. We can visualize a section using
-% <S2Fun.plotSection.html| plotSection|>.
-
+{% endhighlight %}
+<p>Since the input was of type <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code>, the result is a spherical function <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></code>. We can visualize a section using <a href="S2Fun.plotSection.html|">plotSection|</a>.</p>
+{% highlight matlab %}
+close all
 plotSection(tdfForsterite, vector3d.Z, 'linewidth', 3)
 hold on
 plotSection(tdfEnstatite, vector3d.Z, 'linewidth', 3)
 hold off
-
-% Alternatively, since all vectors are within the plane, only one angle is
-% revelevant, one can also compute a S1Fun using |vector3d.rho| and
-% <calcDensity.html|calcDensity|> with the option |'periodic'|.
-
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EllipseBasedParameters_05.png" %}
+</center>
+<p>Alternatively, since all vectors are within the plane, only one angle is relevant, one can also compute an <code class="language-plaintext highlighter-rouge"><a href="S1Fun.S1Fun.html">S1Fun</a></code> using <code class="language-plaintext highlighter-rouge">vector3d.rho</code> and <a href="calcDensity.html|calcDensity|">calcDensity.html|calcDensity|</a> with the option <code class="language-plaintext highlighter-rouge">'periodic'</code>.</p>
+{% highlight matlab %}
 tdfForsterite = calcDensity(grains('forsterite').longAxis.rho,...
   'weights',norm(grains('forsterite').longAxis), ...
   'periodic','antipodal','sigma',5*degree);
@@ -122,17 +122,21 @@ tdfEnstatite = calcDensity(grains('enstatite').longAxis.rho,...
   'weights',norm(grains('enstatite').longAxis), ...
   'periodic','antipodal','sigma',5*degree);
 
+close all
 plot(tdfForsterite, 'linewidth', 2)
 hold on
 plot(tdfEnstatite, 'linewidth', 2)
 hold off
+mtexTitle('long axes')
+legend('Forsterite','Enstatite','Location','southoutside','numColumns',2)
+
 % we have to set the plotting convention manually
 setView(ebsd.how2plot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EllipseBasedParameters_05.png" %}
+{% include inline_image.html file="EllipseBasedParameters_06.png" %}
 </center>
-<h2 id="7">
+<h2 id="9">
 <b>Shortest Caliper Distribution</b>
 </h2>
 <p>Alternatively, we may wonder if the common long axis of grains is suitably represented by the direction normal to the shortest caliper of the grains. This can particularly be the case for aligned rectangular particles where the long axes often switch between the diagonals of the particle. The <a href="caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret of grains represents the projection lengths of grains in relation to a projection direction. With the option <code class="language-plaintext highlighter-rouge">'shortestPerp'</code>, the function returns the normal to the projection direction with the shortest projection length of a grain. In order to plot the result we could use a <a href="vector3d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram</code></a>, compute a density function or use <a href="calcTDF.html"><code class="language-plaintext highlighter-rouge">calcTDF</code></a> with a list of angles and a list of weights or lengths as input.</p>
@@ -141,56 +145,58 @@ cPerpF = caliper(grains('fo'),'shortestPerp');
 cPerpE = caliper(grains('en'),'shortestPerp');
 
 S1F_fo = calcDensity(cPerpF.rho, 'weights',cPerpF.norm, ...
-  'periodic','antipodal','sigma',1*degree);
+  'periodic','antipodal','sigma',5*degree);
 S1F_en = calcDensity(cPerpE.rho, 'weights',cPerpE.norm,...
-  'periodic','antipodal','sigma',1*degree);
+  'periodic','antipodal','sigma',5*degree);
 
-plot(S1F_fo);
+plot(S1F_fo,'linewidth',2);
 hold on
-plot(S1F_en);
+plot(S1F_en,'linewidth',2);
 hold off
-legend('Forsterite','Enstatite','Location','eastoutside')
+mtexTitle('perpendicular to short axes')
+legend('Forsterite','Enstatite','Location','southoutside','numColumns',2)
 setView(ebsd.how2plot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EllipseBasedParameters_06.png" %}
+{% include inline_image.html file="EllipseBasedParameters_07.png" %}
 </center>
 <p>If we consider the function a little to rough, we can smooth the function using a kernel.</p>
 {% highlight matlab %}
-psi = S1DeLaValleePoussinKernel('halfwidth',5*degree)
+psi = S1DeLaValleePoussinKernel('halfwidth',10*degree)
 
 S1_fo_smooth = conv(S1F_fo,psi)
 S1_en_smooth = conv(S1F_en,psi)
 
-plot(S1_fo_smooth);
+plot(S1_fo_smooth,'linewidth',2);
 hold on
-plot(S1_en_smooth);
+plot(S1_en_smooth,'linewidth',2);
 hold off
-legend('Forsterite','Enstatite','Location','eastoutside')
+mtexTitle('perpendicular to short axes')
+legend('Forsterite','Enstatite','Location','southoutside','numColumns',2)
 setView(ebsd.how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
 psi = S1DeLaValleePoussinKernel
-  bandwidth: 28
-  halfwidth: 4.9°
+  bandwidth: 14
+  halfwidth: 9.9°
  
  
 S1_fo_smooth = S1FunHarmonic
-  bandwidth: 28
+  bandwidth: 14
   antipodal: true
   isReal: true
  
  
 S1_en_smooth = S1FunHarmonic
-  bandwidth: 28
+  bandwidth: 14
   antipodal: true
   isReal: true
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EllipseBasedParameters_07.png" %}
+{% include inline_image.html file="EllipseBasedParameters_08.png" %}
 </center>
-<h2 id="9">
+<h2 id="11">
 <b>SPO defined by grain boundary segments</b>
 </h2>
 <p>Best fit ellipses are always symmetric and the projection function of an entire grain always only consider the convex hull. Grain shape fabrics can also be characterized by a rose diagram of the directions of grain boundary segments which can consider the entire shape of the grain defined by the grain boundary segments but also works for non fully enclosed shapes i.e. just a special selection of grains. Here, we can weight each <a href="grainBoundary.grainBoundary.html|">direction <code class="language-plaintext highlighter-rouge">&gt; of a grain boundary by its &lt;grainBoundary.segLength.html</code> segment length|</a>.</p>
@@ -203,7 +209,6 @@ gbfun_foen = calcDensity(grains.boundary('fo','en').direction.rho, ...
 gbfun_enen = calcDensity(grains.boundary('en','en').direction.rho, ...
     'weights',grains.boundary('en','en').segLength,'periodic','antipodal');
 
-
 plot(gbfun_fofo,'displayName','Forsterite-Forsterite','linewidth',2);
 hold on
 plot(gbfun_foen,'displayName','Forsterite-Enstatite','linewidth',2);
@@ -211,14 +216,14 @@ hold on
 plot(gbfun_enen,'displayName','Enstatite-Enstatite','linewidth',2);
 hold off
 
-legend
+legend('Location','eastoutside','numColumns',1)
 
 setView(ebsd.how2plot)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EllipseBasedParameters_08.png" %}
+{% include inline_image.html file="EllipseBasedParameters_09.png" %}
 </center>
-<h2 id="10">Characteristic Shape</h2>
+<h2 id="12">Characteristic Shape</h2>
 <p>Note that this distribution is very prone to inherit artifacts based on the fact that most EBSD maps are sampled on a regular grid. We tried to overcome this problem by heavily smoothing the grain boundary. However, if you recognize little peaks at 0 and 90 degree, they are most likely related to this sampling artifact.</p>
 <p>If we just add up all the individual boundary elements of the rose diagram in order of increasing angles, we derive the characteristic shape. It can be regarded as to represent the average grain shape. The &lt; grainBoundary.characteristicShape.html <code class="language-plaintext highlighter-rouge">characteristicShape</code>&gt;does not require entire grains as input but works with a list of <a href="BoundarySelect.html">grain boundaries</a>. Many operations such as <code class="language-plaintext highlighter-rouge">aspectRatio</code> or <code class="language-plaintext highlighter-rouge">longAxis</code> also work on the characteristic shape.</p>
 {% highlight matlab %}
@@ -226,14 +231,14 @@ cshapeF = characteristicShape(grains('F').boundary);
 cshapeE = characteristicShape(grains('E').boundary);
 
 close all
-plot(cshapeF,'linewidth',2);
+plot(cshapeF, 'linewidth',2);
 hold on
-plot(cshapeE,'linewidth',2);
+plot(cshapeE, 'linewidth',2);
 hold off
 legend('Forsterite','Enstatite','Location','eastoutside')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EllipseBasedParameters_09.png" %}
+{% include inline_image.html file="EllipseBasedParameters_10.png" %}
 </center>
 <p>We may wonder if these results are significantly different or not TODO: get deviation from an ellipse etc</p>
 </div>
