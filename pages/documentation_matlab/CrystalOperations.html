@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss basic operations with crystal directions. Therefore, lets start by importing and plotting a simulated quartz Kikuchi pattern</p>
+<p>In this section we discuss basic operations with lattice directions and lattice planes. Lets start by importing and plotting a simulated Quartz Kikuchi pattern</p>
 {% highlight matlab %}
 data = load([mtexDataPath filesep 'quartzPattern.mat']);
 pattern = data.pattern;
@@ -37,24 +37,14 @@ mtexColorMap black2white
 <center>
 {% include inline_image.html file="CrystalOperations_01.png" %}
 </center>
-<p>Next we consider the most reflective lattice planes in Quartz which are positive and negative rhomboedron planes as well as the hexagonal prism planes</p>
+<p>Next we consider the most reflective lattice planes in Quartz which are the positive and negative rhomboedron planes as well as the hexagonal prism planes</p>
 {% highlight matlab %}
 % extract the crystal symmetry
-cs = pattern.CS
+cs = pattern.CS;
 
 m = Miller(-1,0,1,0,cs,'hkil'); % hexagonal prism
 r = Miller(0,-1,1,1,cs,'hkil'); % positive rhomboedron
 z = Miller(0,1,-1,1,cs,'hkil'); % negative rhomboedron
-{% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry
- 
-  mineral        : alpha-quartz low  
-  symmetry       : 321               
-  elements       : 6                 
-  a, b, c        : 0.49, 0.49, 0.54  
-  reference frame: X||a, Y||b*, Z||c*
 {% endhighlight %}
 <p>and visualize them as planes in the Kikuchi pattern and as points in the dual pattern</p>
 {% highlight matlab %}
@@ -72,8 +62,8 @@ plot(z,opt{:},'markerEdgeColor','yellow')
 <center>
 {% include inline_image.html file="CrystalOperations_02.png" %}
 </center>
-<h2 id="4">Symmetrically Equivalent Crystal Directions</h2>
-<p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indices (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>
+<h2 id="4">Symmetrically Equivalent Planes and Directions</h2>
+<p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indices (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by \(<a href="uvw">uvw</a>\), while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>
 </p>
 {% highlight matlab %}
 symmetrise(r)
@@ -226,8 +216,8 @@ ans =
   180.0000
 {% endhighlight %}
 <p>This option is available for many other functions involving crystal directions and crystal orientations.</p>
-<h2 id="16">Calculations</h2>
-<p>Essentially all the operations defined for general directions, i.e. for variables of type <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> are also available for Miller indices. In addition Miller indices interact with crystal orientations. Consider the crystal orientation</p>
+<h2 id="16">Crystal Orientations</h2>
+<p>Crystal orientations describe how the crystal lattice is aligned with respect to a specimen fixed reference frame. Consider the crystal orientation</p>
 {% highlight matlab %}
 ori = orientation.byEuler(10*degree,20*degree,30*degree,cs)
 
@@ -237,7 +227,7 @@ mtexColorMap black2white
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (alpha-quartz low → y←↑x)
+ori = orientation (alpha-quartz low → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
