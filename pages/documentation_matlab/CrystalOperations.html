@@ -23,114 +23,109 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss basic operations with crystal directions. Therefore, lets start by importing the trigonal Quartz crystal symmetry</p>
+<p>In this section we discuss basic operations with crystal directions. Therefore, lets start by importing and plotting a simulated quartz Kikuchi pattern</p>
 {% highlight matlab %}
-cs = loadCIF('quartz');
-{% endhighlight %}
-<p>and consider two hexagonal prism normals</p>
-{% highlight matlab %}
-m1 = Miller(1,-1,0,0,cs)
-m2 = Miller(1,0,-1,0,cs)
+data = load([mtexDataPath filesep 'quartzPattern.mat']);
+pattern = data.pattern;
 
-plot(m1,'upper','labeled','backgroundColor','w')
-hold on
-plot(m2,'labeled','backgroundColor','w')
-hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-m1 = Miller (Quartz)
-  h  k  i  l
-  1 -1  0  0
- 
-m2 = Miller (Quartz)
-  h  k  i  l
-  1  0 -1  0
+[~,ax1] = plot(pattern,'resolution',0.25*degree,'complete','upper',"uvw");
+mtexColorMap black2white
+nextAxis
+[~,ax2] = plot(pattern.radon,'resolution',0.25*degree,'complete','upper','hkl');
+mtexColorMap black2white
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalOperations_01.png" %}
 </center>
-<h2 id="3">Zone Axes</h2>
-<p>Both prism planes intersects in a common zone axis which is orthogonal to both plane normals can is computed by</p>
+<p>Next we consider the most reflective lattice planes in Quartz which are positive and negative rhomboedron planes as well as the hexagonal prism planes</p>
 {% highlight matlab %}
-d = round(cross(m1,m2))
+% extract the crystal symmetry
+cs = pattern.CS
+
+m = Miller(-1,0,1,0,cs,'hkil'); % hexagonal prism
+r = Miller(0,-1,1,1,cs,'hkil'); % positive rhomboedron
+z = Miller(0,1,-1,1,cs,'hkil'); % negative rhomboedron
 {% endhighlight %}
 
 {% highlight plaintext %}
-d = Miller (Quartz)
-  U V T W
-  0 0 0 1
+cs = crystalSymmetry
+ 
+  mineral        : alpha-quartz low  
+  symmetry       : 321               
+  elements       : 6                 
+  a, b, c        : 0.49, 0.49, 0.54  
+  reference frame: X||a, Y||b*, Z||c*
 {% endhighlight %}
-<p>Note that MTEX automatically switches from reciprocal to direct coordinates for displaying the zone axis.</p>
-<p>The other way round two, not parallel, zone axes</p>
+<p>and visualize them as planes in the Kikuchi pattern and as points in the dual pattern</p>
 {% highlight matlab %}
-d1 = Miller(0,0,0,1,cs,'UVTW');
-d2 = Miller(1,-2,1,3,cs,'UVTW');
-{% endhighlight %}
-<p>span a lattice plane with normal vector</p>
-{% highlight matlab %}
-round(cross(d1,d2))
-{% endhighlight %}
+hold on
+circle(m,'parent',ax1,'color','lightBlue')
+circle(r,'parent',ax1,'color','red')
+circle(z,'parent',ax1,'color','yellow')
 
-{% highlight plaintext %}
-ans = Miller (Quartz)
-  h  k  i  l
-  1  0 -1  0
-{% endhighlight %}
-<h2 id="6">Symmetrically Equivalent Crystal Directions</h2>
-<p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indices (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>
-</p>
-{% highlight matlab %}
-symmetrise(d2)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = Miller (Quartz)
- size: 6 x 1
-   U  V  T  W
-   1 -2  1  3
-   1  1 -2 -3
-   1  1 -2  3
-   1 -2  1 -3
-  -2  1  1  3
-  -2  1  1 -3
-{% endhighlight %}
-<p>As always the keyword <a href="VectorsAxes.html"><code class="language-plaintext highlighter-rouge">'antipodal'</code></a> adds antipodal symmetry to this computation</p>
-{% highlight matlab %}
-symmetrise(d2,'antipodal')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = Miller (Quartz)
- size: 12 x 1
-   U  V  T  W
-   1 -2  1  3
-  -1  2 -1 -3
-   1  1 -2 -3
-  -1 -1  2  3
-   1  1 -2  3
-  -1 -1  2 -3
-   1 -2  1 -3
-  -1  2 -1  3
-  -2  1  1  3
-   2 -1 -1 -3
-  -2  1  1 -3
-   2 -1 -1  3
-{% endhighlight %}
-<p>Using the options <code class="language-plaintext highlighter-rouge">'symmetrised'</code> and <code class="language-plaintext highlighter-rouge">'labeled'</code> all symmetrically equivalent crystal directions are plotted together with their Miller indices. Lets apply this to a list of lattice planes</p>
-{% highlight matlab %}
-h = Miller({1,0,-1,0},{1,1,-2,0},{1,0,-1,1},{1,1,-2,1},{0,0,0,1},cs);
-
-for i = 1:length(h)
-  plot(h(i),'symmetrised','labeled','backgroundColor','w','grid','upper','doNotDraw')
-  hold all
-end
-hold off
-drawNow(gcm,'figSize','normal')
+opt = {'marker','s','MarkerFaceColor','none','parent',ax2,...
+  'labeled','backgroundColor','w','linewidth',2};
+plot(m,opt{:},'markerEdgeColor','lightBlue')
+plot(r,opt{:},'markerEdgeColor','red')
+plot(z,opt{:},'markerEdgeColor','yellow')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalOperations_02.png" %}
 </center>
+<h2 id="4">Symmetrically Equivalent Crystal Directions</h2>
+<p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indices (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by <a href="uvw">uvw</a>, while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>
+</p>
+{% highlight matlab %}
+symmetrise(r)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = Miller (alpha-quartz low)
+ size: 6 x 1
+   h  k  i  l
+   0 -1  1  1
+   0  1 -1 -1
+   1  0 -1  1
+   1 -1  0 -1
+  -1  1  0  1
+  -1  0  1 -1
+{% endhighlight %}
+<p>Lets add all symmetrically equivalent planes and directions on top of the Kikuchi pattern. Note that you may also use the options <code class="language-plaintext highlighter-rouge">'symmetrise'</code> together with the <code class="language-plaintext highlighter-rouge">plot</code> command.</p>
+{% highlight matlab %}
+hold on
+circle(m.symmetrise,'parent',ax1,'color','lightBlue')
+circle(r.symmetrise,'parent',ax1,'color','red')
+circle(z.symmetrise,'parent',ax1,'color','yellow')
+
+plot(m,opt{:},'markerEdgeColor','lightBlue','symmetrised')
+plot(r,opt{:},'markerEdgeColor','red','symmetrised')
+plot(z,opt{:},'markerEdgeColor','yellow','symmetrised')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalOperations_03.png" %}
+</center>
+<p>As always the keyword <a href="VectorsAxes.html"><code class="language-plaintext highlighter-rouge">'antipodal'</code></a> adds antipodal symmetry</p>
+{% highlight matlab %}
+symmetrise(r,'antipodal')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = Miller (alpha-quartz low)
+ size: 12 x 1
+   h  k  i  l
+   0 -1  1  1
+   0  1 -1 -1
+   0  1 -1 -1
+   0 -1  1  1
+   1  0 -1  1
+  -1  0  1 -1
+   1 -1  0 -1
+  -1  1  0  1
+  -1  1  0  1
+   1 -1  0 -1
+  -1  0  1 -1
+   1  0 -1  1
+{% endhighlight %}
 <p>The command <a href="vector3d.eq.html"><code class="language-plaintext highlighter-rouge">eq</code> or <code class="language-plaintext highlighter-rouge">==</code></a> can be used to check whether two crystal directions are symmetrically equivalent. Compare</p>
 {% highlight matlab %}
 Miller(1,1,-2,0,cs) == Miller(-1,-1,2,0,cs)
@@ -151,8 +146,57 @@ ans =
   logical
    1
 {% endhighlight %}
-<h2 id="11">Angles</h2>
-<p>The angle between two crystal directions <code class="language-plaintext highlighter-rouge">m1</code> and <code class="language-plaintext highlighter-rouge">m2</code> is defined as the smallest angle between <code class="language-plaintext highlighter-rouge">m1</code> and all symmetrically equivalent directions to <code class="language-plaintext highlighter-rouge">m2</code>. This angle is in radiant and it is calculated by the function <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle(m1,m2)</code></a>
+<h2 id="9">Zone Axes</h2>
+<p>The intersection of two lattice planes is called zone axis. Mathematically it is computed by the cross product between the corresponding norm vectors.</p>
+{% highlight matlab %}
+d1 = round(cross(m,r))
+
+plot(d1,'marker','s','parent',ax1,'MarkerFaceColor','lightgreen','labeled','backgroundColor','w')
+circle(d1,'parent',ax2,'linecolor','lightgreen')
+{% endhighlight %}
+
+{% highlight plaintext %}
+d1 = Miller (alpha-quartz low)
+   U  V  T  W
+  -1  2 -1  3
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalOperations_04.png" %}
+</center>
+<p>Note that MTEX automatically switches from reciprocal to direct coordinates for displaying the zone axis. The command <code class="language-plaintext highlighter-rouge"><a href="Miller.round.html">round</a></code> is required in order have the direction be scaled to integer Miller indices. Let us now consider a second crystal direction</p>
+{% highlight matlab %}
+d2 = Miller(-2,0,1,cs,'uvw')
+
+plot(d2,'marker','s','parent',ax1,'MarkerFaceColor','Orange','labeled','backgroundColor','w')
+circle(d2,'parent',ax2,'linecolor','orange')
+{% endhighlight %}
+
+{% highlight plaintext %}
+d2 = Miller (alpha-quartz low)
+   u  v  w
+  -2  0  1
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalOperations_05.png" %}
+</center>
+<p>The two crystal directions <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code> span a lattice plane which once again can be computed by the cross product of <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code>. In the Kikuchi pattern the lattice plane corresponds to the band connecting <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code> where as in the dual Kikuchi pattern it coincides with the intersection of the two great circles representing <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code>.</p>
+{% highlight matlab %}
+n = round(cross(d1,d2))
+
+circle(n,'parent',ax1,'linecolor','white')
+plot(n,opt{:},'MarkerEdgeColor','white')
+{% endhighlight %}
+
+{% highlight plaintext %}
+n = Miller (alpha-quartz low)
+  h  k  i  l
+  1 -2  1  2
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalOperations_06.png" %}
+</center>
+<h2 id="12">Angles</h2>
+<p>The angle between two crystal directions <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code> is defined as the smallest angle between <code class="language-plaintext highlighter-rouge">d1</code> and all symmetrically equivalent directions to <code class="language-plaintext highlighter-rouge">d2</code>. This angle is in radiant and it is calculated by the function <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle(d1,d2)</code></a>
 </p>
 {% highlight matlab %}
 angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs)) / degree
@@ -169,7 +213,7 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'antipodal') / degree
 
 {% highlight plaintext %}
 ans =
-     0
+   1.2074e-06
 {% endhighlight %}
 <p>In order to ignore the crystal symmetry, i.e., to compute the actual angle between two directions use the option <code class="language-plaintext highlighter-rouge">'noSymmetry'</code>
 </p>
@@ -179,67 +223,78 @@ angle(Miller(1,1,-2,0,cs),Miller(-1,-1,2,0,cs),'noSymmetry') / degree
 
 {% highlight plaintext %}
 ans =
-   180
+  180.0000
 {% endhighlight %}
 <p>This option is available for many other functions involving crystal directions and crystal orientations.</p>
-<h2 id="15">Calculations</h2>
+<h2 id="16">Calculations</h2>
 <p>Essentially all the operations defined for general directions, i.e. for variables of type <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> are also available for Miller indices. In addition Miller indices interact with crystal orientations. Consider the crystal orientation</p>
 {% highlight matlab %}
 ori = orientation.byEuler(10*degree,20*degree,30*degree,cs)
+
+close all
+plot(ori * pattern,'resolution',0.25*degree,'complete','upper')
+mtexColorMap black2white
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Quartz → y←↑x)
+ori = orientation (alpha-quartz low → y←↑x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
     10   20   30
 {% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalOperations_07.png" %}
+</center>
 <p>Then one can apply it to a crystal direction to find its coordinates with respect to the specimen coordinate system</p>
 {% highlight matlab %}
-ori * m1
+ori * d1
+
+hold on
+plot(ori*d1,'marker','s','MarkerFaceColor','lightgreen','label',char(d1,'latex'),'backgroundColor','w')
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = vector3d (y↑→x)
-         x          y          z
-  0.219491 -0.0733607 -0.0401679
-{% endhighlight %}
-<p>By applying a <a href="crystalSymmetry.crystalSymmetry.html">crystal symmetry</a> one obtains the coordinates with respect to the specimen coordinate system of all crystallographically equivalent specimen directions.</p>
-{% highlight matlab %}
-p = ori * symmetrise(m1);
-plot(p,'grid')
-
-%
-% The above plot is essentially the pole figure representation of the
-% orientation |ori|.
-%
+          x          y          z
+  -0.427085 -0.0286108   0.592032
 {% endhighlight %}
 <center>
-{% include inline_image.html file="CrystalOperations_03.png" %}
+{% include inline_image.html file="CrystalOperations_08.png" %}
 </center>
-<h2 id="18">Conversions</h2>
+<p>By applying a <a href="crystalSymmetry.crystalSymmetry.html">crystal symmetry</a> one obtains the coordinates with respect to the specimen coordinate system of all crystallographically equivalent specimen directions.</p>
+{% highlight matlab %}
+hold on
+plot(ori*d1.symmetrise ,'marker','s','MarkerFaceColor','lightgreen','label',char(d1,'latex'),'backgroundColor','w')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalOperations_09.png" %}
+</center>
+<p>The above plot is essentially the pole figure representation of the orientation <code class="language-plaintext highlighter-rouge">ori</code>.</p>
+<h2 id="20">Conversions</h2>
 <p>Converting a crystal direction which is represented by its coordinates with respect to the crystal coordinate system \(a\), \(b\), \(c\) into a representation with respect to the associated Euclidean coordinate system is done by the command <a href="Miller.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>.</p>
 {% highlight matlab %}
-vector3d(m1)
+vector3d(d1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = vector3d (y↑→x)
-         x         y         z
-  0.117443 -0.203417         0
+        x        y        z
+  -0.2457 0.425565   0.5406
 {% endhighlight %}
 <p>Conversion into spherical coordinates requires the function <a href="vector3d.polar.html"><code class="language-plaintext highlighter-rouge">polar</code></a>
 </p>
 {% highlight matlab %}
-[theta,rho] = polar(m1)
+[theta,rho] = polar(d1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 theta =
-    1.5708
+    0.7378
 rho =
-    5.2360
+    2.0944
 {% endhighlight %}
 </div>
 </body>

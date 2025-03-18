@@ -24,17 +24,16 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Class guiding through the simple simulation of an EBSD object</p>
-<p>It allows to simulate a single/multigradient EBSD map with a free choice of the starting orientation, size, misorientation axis, direction of misorientation increase, type and range of noise Multiple gradients can be superposed and you can use an existing map and add noise or deform it.</p>
+<p>It allows to simulate a single/multigradient EBSD map with a free choice of the starting orientation, size, misorientation axis, direction of misorientaiton increase, type and range of noise Multiple gradients can be superposed and you can use an existing map and add noise or deform it.</p>
 <p>TODO: - add the singleJump, multiKnob, polyGrain - make noise distribution more flexible - allow to start from a different pos - fix first column of pixels</p>
 <h2 id="3">Syntax</h2>
 <p>%% initialize the object ebsdSIM = simulateEBSD</p>
 <p>%% set the dimension (optional) ebsdSIM.xdim = 50 ebsdSIM.ydim = 50</p>
 <p>%% change the initial orientation (optional) ebsdSIM.ori0 = orientation.byEuler([0, pi, 30]*degree,ebsdSIM.CS)</p>
 <p>%% make a planar map ebsdSIM.makeMap plot(ebsdSIM.EBSDsim)</p>
-<p>%% set the misorientation axis and gradient direction (optional) ebsdSIM.axS = vector3d(1,1,0) % set the direction towards which the misorientation increases ebsdSIM.gradDir = vector3d(1,0,0);</p>
-<p>%% create a simple gradient ebsdSIM.simpleGradient</p>
-<p>%% add noise 'uniform' or 'logn' (optional) ebsdSIM.noiseFun = 'logn' ebsdSIM.noiseMax = 0.1*degree;</p>
-<p>ebsdSIM.addnoise</p>
+<p>%% 1) create a simple gradient % 1a) set the misorientation axis ebsdSIM.axS = vector3d(1,1,0) % 1b) set the direction towards which the misorientation increases ebsdSIM.gradDir = vector3d(1,0,0); % 1c) create the gradient ebsdSIM.addFeature_simpleGradient</p>
+<p>%% 2) add noise % 2a) specify noise type: 'uniform' or 'logn' ebsdSIM.noiseFun = 'logn' % 2b) specify maximum noise ebsdSIM.noiseMax = 0.1*degree; % 2c) create noise ebsdSIM.addnoise</p>
+<p>%% 3) add a circular "subgrain" % 3a) set the misorientation axis ebsdSIM.axS = vector3d(1,1,1) % 3b) add "subgrain" ebsdSIM.addFeature_circularSubgrain</p>
 <p>%% inspect the result ebsd = ebsdSIM.EBSDsim; plot(ebsd,angle(ebsd.orientations,ebsd.orientations(1))/degree) nextAxis ebsd = ebsd.gridify plot(ebsd,ebsd.gradientX.norm) nextAxis plot(ebsd,ebsd.gradientY.norm) nextAxis sax = axis(ebsd(1).orientations,ebsd.orientations) ck= HSVDirectionKey(specimenSymmetry('1')) plot(ebsd,ck.direction2color(sax)) nextAxis plot(ck)</p>
 <h2 id="4">Input</h2>
 <p>
