@@ -64,22 +64,65 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p>
 <h2 id="6">Example</h2>
-<pre>mtexdata small
-grains = calcGrains(ebsd('indexed'))
+{% highlight matlab %}
+mtexdata small
+grains = calcGrains(ebsd('indexed'),'minPixel',3)
 grains = smooth(grains,4)
 plot(grains.boundary,'micronbar','off')
 % define some line
-xy1 = [33500,4500];  % staring point
+xy1 = [33500,4500]; % starting point
 xy2 = [36000,7500]; % end point
 line([xy1(1);xy2(1)],[xy1(2);xy2(2)],'linewidth',1.5,'color','g')
 [x,y] = grains.boundary.intersect(xy1,xy2);
 hold on
-scatter(x,y,'red')</pre>
-<pre>% find the number of intersection points
-sum(~isnan(x))
-% mark the intersected boundary segments
-plot(grains.boundary(~isnan(x)),'lineColor','b','linewidth',2)
-hold off</pre>
+scatter(x,y,'red','linewidth',2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0    1197 (32%)  notIndexed                                                 
+     1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
+     2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad
+ Scan unit : um
+ X x Y x Z : [33000, 36000] x [4500, 7500] x [0, 0]
+ Normal vector: (0,0,1)
+ 
+ 
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      15    1943  Forsterite       mmm                         
+     2       3     284   Enstatite       mmm                         
+     3       6     240    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 910 (39230 µm)
+ inner boundary segments: 22 (1101 µm)
+ triple points: 22
+ 
+ Properties: meanRotation, GOS
+ 
+ 
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      15    1943  Forsterite       mmm                         
+     2       3     284   Enstatite       mmm                         
+     3       6     240    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 910 (35820 µm)
+ inner boundary segments: 22 (901 µm)
+ triple points: 22
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<center>
+{% include inline_image.html file="grainBoundary.intersect_01.png" %}
+</center>
 </div>
 </body>
 </html>
