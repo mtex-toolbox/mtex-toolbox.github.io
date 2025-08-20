@@ -36,7 +36,7 @@ of material scientists, geologists and mathematicians.
                 <ul class="no_bullet">
 				<li>
 					08/25 &minus;
-					{% include reference.html link="workshop26?" content="MTEX Workshop 26" %}:
+					{% include reference.html link="workshop26?" content="MTEX Workshop 2026" %}:
 					<!--{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}-->
                 </li>
 				<li>
