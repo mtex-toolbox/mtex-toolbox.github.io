@@ -7,23 +7,27 @@ folder: workshops
 toc: false
 ---
 
-You work with EBSD or XRD to analyze microstructures?
+Do you work with EBSD or XRD to analyze microstructures and textures?
 Then this workshop will take your skills to the next level. You will
 
-* gain a deeper crystallographic understanding,
-* import, clean, and segment EBSD data with confidence
+* gain a deeper crystallographic understanding
+* import, clean, and segment EBSD data with ease
 * explore misorientations and grain boundary networks
-* compute and interpret tensorial properties like stress, strain, elasticity, thermal expansion
-* understand and employ parent-grain reconstruction and phase transformation tools
+* compute and interpret tensorial properties such as stress, strain, elasticity, and thermal expansion
+* understand and apply parent-grain reconstruction and phase-transformation tools
 * master advanced statistical methods for EBSD analysis
-* and become confident with spectacular visualization techniques
+* become confident with powerful visualization techniques
+* discover that MTEX enables you to do (almost) everything you can imagine with your data
 
-The workshop extends over two weeks and counts for **5 ECTS** points. While
-the first week is mainly devoted to beginners in MTEX and/or texture analysis,
-the second week is a meeting of MTEX users with different experiences to share
-specific use cases, tips and tricks and discuss recent and upcoming
-developments in MTEX. Participation is possible in presence as well
-as remotely.
+This two-week workshop is accredited as the module {% include reference.html
+link="" content="Introduction into Crystallographic Texture Analysis" %} and
+earns you 5 ECTS points.  The first week is primarily devoted to beginners in
+MTEX and/or texture analysis. The second week brings together MTEX users of
+varying experience levels to share use cases, tips and tricks, and to discuss
+recent and upcoming developments in MTEX.
+
+Participation is possible both in person and remotely. You may also join for a
+single week, or combine on-site and remote participation.
 
 <!--<div markdown="span" class="alert alert-info" role="alert">
 	<i class="fa fa-info-circle"></i> 
