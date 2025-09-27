@@ -23,12 +23,16 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>estimate grain boundary plane distribution from 2d sections</p>
+<p>estimate GBND and GBCD from 2d boundary segments</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-% compute gbnd in crystal coordinates
 gbnd = calcGBND(gB,ebsd)
 gbnd = calcGBND(gB,grains)
+{% endhighlight %}
+
+{% highlight matlab %}
+% the gbcd for a specific misorientation
+gbcd = calcGBND(gB,grains,mori)
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -62,6 +66,22 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
             <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>mori</tt>
+         </td>
+         <td>
+            <tt>mis<a href="orientation.orientation.html">orientation</a> or orientation relationship</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a> used for texture correction</tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="5">Output</h2>
@@ -69,7 +89,7 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>gpnd</tt>
+            <tt>gbnd</tt>
          </td>
          <td>
             <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
@@ -86,6 +106,14 @@ gbnd = calcGBND(gB,ebsd,'halfwidth',10*degree)
          </td>
          <td>
             <tt>used for kernel density estimation</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>nonneg</tt>
+         </td>
+         <td>
+            <tt>use a nonnegative kernel</tt>
          </td>
       </tr>
    </table>

@@ -73,7 +73,7 @@ tau = dot(d,r,'noSymmetry') * dot(n,r,'noSymmetry')
 
 {% highlight plaintext %}
 tau =
-    0.4286
+      0.42857
 {% endhighlight %}
 <p>The same computation can be performed by defining the slip system as an MTEX variable</p>
 {% highlight matlab %}
@@ -94,7 +94,7 @@ sS.SchmidFactor(r)
 
 {% highlight plaintext %}
 ans =
-    0.1750
+      0.17496
 {% endhighlight %}
 <p>Omitting the tension direction <code class="language-plaintext highlighter-rouge">r</code> the command <a href="slipSystem.SchmidFactor.html"><code class="language-plaintext highlighter-rouge">SchmidFactor</code></a> returns the Schmid factor as a <a href="S2FunHarmonic.S2FunHarmonic.html">spherical function</a>
 </p>
@@ -115,10 +115,9 @@ annotate(pos)
 SF = S2FunHarmonic (y↑→x)
   bandwidth: 4
   antipodal: true
-  isReal: true
  
 SFMax =
-    0.5000
+          0.5
  
 pos = vector3d (y↑→x)
  antipodal: true
@@ -149,8 +148,10 @@ sS.SchmidFactor(sigma)
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: The reference system of the stress tensor and the
+slip systems do not match! 
 ans =
-    0.4082
+      0.40825
 {% endhighlight %}
 <h2 id="11">Active Slip System</h2>
 <p>In general a crystal contains not only one slip system but at least all symmetrically equivalent ones. Those can be computed with</p>
@@ -183,10 +184,10 @@ tau = sSAll.SchmidFactor(r)
 
 {% highlight plaintext %}
 tau =
-  Columns 1 through 7
-    0.1750   -0.3499    0.1750    0.0000   -0.0000   -0.0000    0.1166
-  Columns 8 through 12
-   -0.4666   -0.3499   -0.1166   -0.1750   -0.2916
+  Columns 1 through 6
+      0.17496     -0.34993      0.17496   1.0491e-17  -4.1962e-17  -5.2453e-17
+  Columns 7 through 12
+      0.11664     -0.46657     -0.34993     -0.11664     -0.17496     -0.29161
 {% endhighlight %}
 <p>returns a list of Schmid factors and we can find the slip system with the largest Schmid factor using</p>
 {% highlight matlab %}
@@ -197,7 +198,7 @@ sSAll(id)
 
 {% highlight plaintext %}
 tauMax =
-    0.4666
+      0.46657
 id =
      8
  
@@ -309,7 +310,6 @@ tau = S2FunHarmonic (y↑→x)
   size: 24 x 1
   bandwidth: 4
   antipodal: true
-  isReal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PlasticDeformation_05.png" %}

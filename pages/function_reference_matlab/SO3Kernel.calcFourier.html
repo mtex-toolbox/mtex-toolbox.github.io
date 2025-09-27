@@ -1,0 +1,113 @@
+---
+title: calcFourier
+
+sidebar: function_reference_sidebar
+permalink: SO3Kernel.calcFourier.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>calcFourier</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_SO3Kernel__calcFourier.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/SO3Fun/SO3KernelFunctions/@SO3Kernel/calcFourier.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Compute the Chebychev coefficients by gaussian quadrature rule.</p>
+<h2 id="3">Description</h2>
+<p>
+<b>Extended explanation of the FFT-Based Quadrature Method:</b>
+</p>
+<p>Note that an SO3Kernel is a series of Chebychev polynomials of 2nd kind with even degree, i.e.</p>
+<p>\[ \psi(x) = \sum_{m=0}^M a_{m} \cdot U_{2m}(x) \]</p>
+<p>for \(x\in [-1,1]\). Moreover we have \(\psi \in L^2([-1,1],\,\sqrt{1-t^2})\). Often we substitute \(x=\cos\frac{\theta}{2}\) to obtain a kernel function that depends on the rotational angle \(\theta\).</p>
+<p>In the following, we will deal not only with even degrees, but also with Chebyshev polynomials with odd degrees. Ultimately, however, the coefficients for the odd degrees will vanish. Therefore, for the moment, we will consider series of the form</p>
+<p>\[ \psi(x) = \sum_{m=0}^{M-1} a_{m} \cdot U_{m}(x). \]</p>
+<p>Since the Chebychev polynomials build an orthogonal basis w.r.t. the above scalar product, we obtain the coefficients \(a_m\) for \(m=0,\dots,M-1\) using</p>
+<p>\[ a_m = \int_{-1}^1 \psi(x) \cdot U_{m}(x) \mathrm{d}x. \]</p>
+<p>Substituting \(x=\cos\frac{\theta}{2}\) yields</p>
+<p>\[ a_m = \int_0^{2\pi} \psi(\cos\frac{\theta}{2}) \cdot \sin\frac{\theta}{2} \cdot \sin\frac{(m+1)\theta}{2} \]</p>
+<p>since \(U_{m}(\cos\frac{\theta}{2}) \, \sin\frac{\theta}{2} = \sin\frac{(m+1)\theta}{2}\).</p>
+<p>Note that the gaussian quadrature rule with quadrature weights \(\omega_j = \frac{2}{M}\) and quadrature notes \(\theta_j = \frac{(2j+1)\pi}{M}\) allows us to exactly integrate</p>
+<p>\[ \int_0^{2\pi} \sin\frac{(m+1)\theta}{2} \cdot \sin\frac{(n+1)\theta}{2} \mathrm{d}\theta = \delta_{m,n} \]</p>
+<p>for \(0 \leq n,m \leq M-1\).</p>
+<p>Hence, if \(\psi(x)\) is bandlimited with bandwidth \(M-1\), then we can compute the coefficients \(a_m\) by gaussian quadrature formula, i.e.</p>
+<p>\[ a_m = \sum_{j=0}^{M-1} \left( \frac{2}{M} \cdot \psi(\cos\frac{\theta_j}{2}) \cdot \sin\frac{\theta_j}{2} \right) \cdot \sin\frac{(m+1)\theta_j}{2}. \]</p>
+<p>We precompute the coefficients \(c_j = \sqrt{\frac{2}{M}} \cdot \psi(\cos\frac{\theta_j}{2}) \cdot \sin\frac{\theta_j}{2}\). Then the above linear system reads as</p>
+<p>\[ a_m = \sqrt{\frac{2}{M}} \sum_{j=0}^{M-1} c_j \cdot \sin\frac{(m+1)(2j+1)\pi}{2M},\]</p>
+<p>which is the discrete sine transform DST-II. This can be computed efficiently by an FFT-based algorithm, see [1].</p>
+<p>[1] - G.Plonka, D.Potts, G.Steidl, M.Tasche: Numerical Fourier Analysis, Birkh&auml;user (Cham), 2018</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+A = calcFourier(psi,L)
+A = calcFourier(psi,L,'GaussKronrod')
+A = calcFourier(psi,L,maxAngle,'GaussKronrod')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>psi</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>L</tt>
+         </td>
+         <td>
+            <tt>bandwidth</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxAngle</tt>
+         </td>
+         <td>
+            <tt>double</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>A</tt>
+         </td>
+         <td>
+            <tt>double (Chebychev coefficient vector)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>'GaussKronrod'</tt>
+         </td>
+         <td>
+            <tt>Use Gauss-Kronrod quadrature</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+</div>
+</body>
+</html>

@@ -86,9 +86,9 @@ c = SO3FunHarmonic (Quartz → y↑→x (222))
   weight: 1
  
 ans =
-    0.2769
+      0.27688
 ans =
-    0.2766
+      0.27663
 {% endhighlight %}
 <p>Note that the left sided convolution from the above definition is used as default in MTEX.</p>
 <p>The right sided convolution coincides with the commutation</p>
@@ -122,9 +122,9 @@ c = SO3FunHarmonic (Quartz → y↑→x)
   weight: 1
  
 ans =
-    0.5927
+      0.59269
 ans =
-    0.5926
+      0.59259
 {% endhighlight %}
 <p>The convolution of matrices of SO3FunHarmonic's with matrices of SO3 Functions works elementwise, see at <a href="SO3FunMultivariate.html">multivariate SO3Fun's</a> for there definition.</p>
 <h2 id="7">Convolution of two spherical functions</h2>
@@ -138,12 +138,10 @@ g = S2FunHarmonic(S2DeLaValleePoussinKernel)
 {% highlight plaintext %}
 f = S2FunHarmonicSym (1)
   bandwidth: 128
-  isReal: true
  
  
 g = S2FunHarmonic (y↑→x)
   bandwidth: 25
-  isReal: true
 {% endhighlight %}
 <p>Then the spherical convolution yields a orientation dependent function \(f*g: {}_{S_L} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with right symmetry \(S_R\) and left symmetry \(S_L\). The convolution is defined by</p>
 <p>\[ (f * g)(R) = \frac1{4\pi} \int_{S^2} f(R^{-1}\xi) \cdot g(\xi) \, d\xi. \]</p>
@@ -165,9 +163,9 @@ c = SO3FunHarmonic (1 → y↑→x)
   weight: 0.0064
  
 ans =
-    0.2349
+      0.23493
 ans =
-    0.2349
+      0.23495
 {% endhighlight %}
 <h2 id="9">Convolution of a rotational function with a spherical function</h2>
 <p>We consider a <code class="language-plaintext highlighter-rouge">SO3Fun</code> \(f: {}_{S_h} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with left symmetry \(S_h\) and right symmetry \(S_R\) and a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(h \colon \mathbb S^2 /_{S_h} \to \mathbb C\) with symmetry group \(S_h\).</p>
@@ -184,7 +182,6 @@ f = SO3FunHarmonic (Quartz → y↑→x)
  
 h = S2FunHarmonicSym (y↑→x)
   bandwidth: 128
-  isReal: true
 {% endhighlight %}
 <p>The convolution yields a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(f*h \colon \mathbb S^2/_{S_R} \to \mathbb C\). In MTEX it is defined by</p>
 <p>\[ (f * h)(\xi) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot h(q\,\xi) \, dq. \]</p>
@@ -200,14 +197,13 @@ mean(SO3FunHandle(@(q) f.eval(q).*h.eval(q*v),c.CS))
 {% highlight plaintext %}
 c = S2FunHarmonicSym (Quartz)
   bandwidth: 48
-  isReal: true
  
 ans =
-    0.0014
+    0.0014392
 ans =
-    0.0655
+     0.065475
 {% endhighlight %}
-<p>If you want to compute the convolution of \(f: {}_{'1'} \backslash SO(3) /_{S_R} \to \mathbb{C}\) and \(h \colon \mathbb S^2 /_{S_R} \to \mathbb C\) which yields \(f*h \colon \mathbb S^2/_{S_R} \to \mathbb C\) and is defined as</p>
+<p>If you want to compute the convolution of \(f: {}_{'1'} \backslash SO(3) /_{S_R} \to \mathbb{C}\) and \(h \colon \mathbb S^2 /_{S_R} \to \mathbb C\) which yields \(f*h \colon \mathbb S^2/_{'1'} \to \mathbb C\) and is defined as</p>
 <p>\[ (f * h)(\xi) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot h(q^{-1}\,\xi) \, dq. \]</p>
 {% highlight matlab %}
 f = SO3FunHarmonic.example
@@ -229,19 +225,16 @@ f = SO3FunHarmonic (Quartz → y↑→x)
  
 h = S2FunHarmonicSym (Quartz)
   bandwidth: 128
-  antipodal: true
-  isReal: true
  
  
 c = S2FunHarmonicSym (y↑→x)
   bandwidth: 48
   antipodal: true
-  isReal: true
  
 ans =
-    0.0374
+     0.037413
 ans =
-    0.0374
+     0.037439
 {% endhighlight %}
 <h2 id="12">Convolution with kernel function</h2>
 <p>
@@ -303,7 +296,6 @@ mean(f.eval(inv(r)*xi).*h.eval(xi))
 {% highlight plaintext %}
 f = S2FunHarmonic (y←↑x)
   bandwidth: 128
-  isReal: true
  
  
 psi = S2DeLaValleePoussinKernel
@@ -313,12 +305,11 @@ psi = S2DeLaValleePoussinKernel
  
 c1 = S2FunHarmonic (y←↑x)
   bandwidth: 25
-  isReal: true
  
 ans =
    2.7557e-08
 ans =
-  -4.5941e-13
+  -4.5939e-13
 ans =
    2.7557e-08
 ans =
