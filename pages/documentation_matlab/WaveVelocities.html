@@ -99,41 +99,28 @@ C = stiffnessTensor (Olivin)
 {% endhighlight %}
 
 {% highlight plaintext %}
-vp = S2FunTri
+vp = S2FunTri (y↑→x)
+  vertices: 1 x 18338
  
- vertices: 1 x 18338
- values:   1 x 18338
  
-vs1 = S2FunTri
+vs1 = S2FunTri (y↑→x)
+  vertices: 1 x 18338
  
- vertices: 1 x 18338
- values:   1 x 18338
  
-vs2 = S2FunTri
+vs2 = S2FunTri (y↑→x)
+  vertices: 1 x 18338
  
- vertices: 1 x 18338
- values:   1 x 18338
-pp = 
-  S2AxisFieldTri with properties:
-
-          tri: [1×1 S2Triangulation]
-       values: [1×18338 vector3d]
-     vertices: [1×18338 S2Grid]
-    antipodal: 0
-ps1 = 
-  S2AxisFieldTri with properties:
-
-          tri: [1×1 S2Triangulation]
-       values: [1×18338 vector3d]
-     vertices: [1×18338 S2Grid]
-    antipodal: 0
-ps2 = 
-  S2AxisFieldTri with properties:
-
-          tri: [1×1 S2Triangulation]
-       values: [1×18338 vector3d]
-     vertices: [1×18338 S2Grid]
-    antipodal: 0
+ 
+pp = S2AxisFieldTri
+  vertices: 1 x 18338
+ 
+ 
+ps1 = S2AxisFieldTri
+  vertices: 1 x 18338
+ 
+ 
+ps2 = S2AxisFieldTri
+  vertices: 1 x 18338
 {% endhighlight %}
 <p>As output we obtain three <a href="S2FunConcept.html">spherical functions</a> <code class="language-plaintext highlighter-rouge">vp</code>, <code class="language-plaintext highlighter-rouge">vs1</code> and <code class="language-plaintext highlighter-rouge">vs2</code> representing the velocities of P, and fast and slow S-waves respectively in dependency of the propagation direction. The remaining three output variables <code class="language-plaintext highlighter-rouge">pp</code>, <code class="language-plaintext highlighter-rouge">ps1</code>, <code class="language-plaintext highlighter-rouge">ps2</code> are <a href="S2FunAxisField.html">spherical vector fields</a> representing the polarization directions of these wave as functions of the propagation direction.</p>
 <p>In order to visualize these quantities, there are several possibilities. Let us first plot the direction dependent wave speed of the p-wave</p>
@@ -211,7 +198,7 @@ hold on
 plotSection(1./vs1,planeNormal,optSec{:},'DisplayName','Vs1')
 plotSection(1./vs2,planeNormal,optSec{:},'DisplayName','Vs2')
 
-% polarisation directions
+% polarization directions
 quiverSection(1./vp,pp,planeNormal,'color','c',optQuiver{:},'DisplayName','pp')
 quiverSection(1./vs1,ps1,planeNormal,'color','g',optQuiver{:},'DisplayName','ps1')
 quiverSection(1./vs2,ps2,planeNormal,'color','m',optQuiver{:},'DisplayName','ps2')
