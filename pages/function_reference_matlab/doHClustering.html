@@ -106,44 +106,19 @@ odf = SO3FunRBF (m-3m → y↑→x)
 
 {% highlight matlab %}
 % find the clusters and its centers
-tic; [c,centerRec] = calcCluster(ori,'method','hierarchical','numCluster',5); toc
-{% endhighlight %}
-
-{% highlight plaintext %}
-Elapsed time is 7.263779 seconds.
+[c,centerRec] = calcCluster(ori,'method','hierarchical','numCluster',5);
 {% endhighlight %}
 
 {% highlight matlab %}
 % visualize result
-oR = fundamentalRegion(cs)
-plot(oR)
-{% endhighlight %}
-
-{% highlight plaintext %}
-oR = orientationRegion
- 
- crystal symmetry:  432
- max angle: 62.7994°
- face normales: 14
- vertices: 24
-{% endhighlight %}
-<center>
-{% include inline_image.html file="doHClustering_01.png" %}
-</center>
-{% highlight matlab %}
-hold on
-plot(ori,ind2color(c))
-caxis([1,5])
-plot(center,'MarkerSize',10,'MarkerFaceColor','k','MarkerEdgeColor','k')
-plot(centerRec,'MarkerSize',10,'MarkerFaceColor','r','MarkerEdgeColor','k')
-hold off
+plot(ori,ind2color(c),'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
 plot 2000 random orientations out of 3000 given orientations
 {% endhighlight %}
 <center>
-{% include inline_image.html file="doHClustering_02.png" %}
+{% include inline_image.html file="doHClustering_01.png" %}
 </center>
 {% highlight matlab %}
 %check the accuracy of the recomputed centers
@@ -152,7 +127,7 @@ min(angle_outer(center,centerRec)./degree)
 
 {% highlight plaintext %}
 ans =
-    0.6614   13.1669    0.3515   16.6213    0.1755
+      0.30315      0.32977      0.23661      0.54501      0.15798
 {% endhighlight %}
 </div>
 </body>
