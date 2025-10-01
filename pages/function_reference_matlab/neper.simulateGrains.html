@@ -1,8 +1,8 @@
 ---
-title: isBoundary
+title: simulateGrains
 
 sidebar: function_reference_sidebar
-permalink: grain2d.isBoundary.html
+permalink: neper.simulateGrains.html
 folder: function_reference
 toc: false
 ---
@@ -13,52 +13,63 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>isBoundary</title>
+<title>simulateGrains</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.source" content="script_grain2d__isBoundary.m">
+<meta name="DC.source" content="script_neper__simulateGrains.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain2d/isBoundary.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@neper/simulateGrains.m">
     edit page</a></font>
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>check whether a grain is a boundary grain</p>
+<p>generating 3d neper tessellations</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-% decide by missing outside data points
-out = isBoundary(grains)
+neper.init
+neper.filepath='C:\Users\user\Work\Mtex\NeperExamples' %select working folder, default: @tempdir
+numGrains = 100;
+odf = unimodalODF(orientation.rand);
+grains = neper.simulateGrains(numGrains, odf)
 {% endhighlight %}
 
 {% highlight matlab %}
-% decide by extent of the ebsd map
-out = isBoundary(grains,ebsd)
+ori = discreteSample(odf,numGrains)
+grains = neper.simulateGrains(ori,'silent')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>grains</tt>
+            <tt>numGrains</tt>
          </td>
          <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+            <tt>number of grains</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>ebsd</tt>
+            <tt>odf</tt>
          </td>
          <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>poly</tt>
+            <tt>ori</tt>
          </td>
          <td>
-            <tt/>
+            <tt><a href="orientation.orientation.html">orientation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'silent'</tt>
+         </td>
+         <td>
+            <tt>print log file, no console output</tt>
          </td>
       </tr>
    </table>
@@ -68,10 +79,10 @@ out = isBoundary(grains,ebsd)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>out</tt>
+            <tt>grains</tt>
          </td>
          <td>
-            <tt>logical</tt>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
          </td>
       </tr>
    </table>

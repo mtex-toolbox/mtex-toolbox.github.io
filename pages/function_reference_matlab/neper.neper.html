@@ -1,0 +1,146 @@
+---
+title: neper
+
+sidebar: function_reference_sidebar
+permalink: neper.neper.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>neper</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_neper__neper.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@neper/neper.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>class that provides an interface to the crystal simulation software neper (see <a href="https://neper.info">https://neper.info</a>)</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+neper.init
+{% endhighlight %}
+
+{% highlight matlab %}
+%select working folder, default: |tempdir|
+neper.filePath='C:\\Users\user\Work\Mtex\NeperExamples';
+{% endhighlight %}
+
+{% highlight matlab %}
+% specifying filenames
+neper.fileName3d='my100Grains';    %default: 'allgrains'
+{% endhighlight %}
+
+{% highlight matlab %}
+%specifying size of tessellation domain
+neper.cubeSize = [4 4 1];
+%defining tessellation id
+neper.id = 512;
+{% endhighlight %}
+
+{% highlight matlab %}
+%eventually set a list of additional options to be found here
+%to be found here: https://neper.info/doc/neper_t.html
+neper.varNeperopts = '-regularization 1'
+{% endhighlight %}
+
+{% highlight matlab %}
+cs = crystalSymmetry('mmm');
+odf = unimodalODF(orientation.rand(cs))
+numGrains = 100;
+myNeper.simulateGrains(numGrains,odf)
+{% endhighlight %}
+
+{% highlight matlab %}
+N = vector3d(1,1,1);    % normal vector (a,b,c) of a plane
+d = 1;                  % d of a plane equation(a,b,c,d)
+grains = neper.getSlice(N,d)
+{% endhighlight %}
+
+{% highlight matlab %}
+N = vector3d(0,0,1);    % normal vector of a plane
+A = vector3d(0,0,0.5);  % point from the plane
+grains2 = neper.getSlice(N,A)
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(grains,grains.meanOrientation)
+hold
+plot(grains2,grains2.meanOrientation)
+{% endhighlight %}
+<h2 id="4">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>id</tt>
+         </td>
+         <td>
+            <tt>integer, "used [...] to compute the (initial) seed positions"</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cubeSize</tt>
+         </td>
+         <td>
+            <tt>1x3 rowvector, size of the tesselation domain box, default: [1 1 1]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>morpho</tt>
+         </td>
+         <td>
+            <tt>cell morphology, see neper.info/doc/neper_t.html#morphology-options -default: graingrowth</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMax</tt>
+         </td>
+         <td>
+            <tt>max Iterations for morpho optimization process</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fileName2d</tt>
+         </td>
+         <td>
+            <tt>name for 2d outputs (fileendings .tess/.ori), default: '2dslice'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fileName3d</tt>
+         </td>
+         <td>
+            <tt>name for 3d outputs (fileendings .tess/.ori/.stpoly), default: 'allgrains'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>filePath</tt>
+         </td>
+         <td>
+            <tt>filepath working directory, default: tempdir/neper</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">See also</h2>
+<p>
+<a href="grain2d.load.html">grain2d.load</a> <a href="grain3d.load.html">grain3d.load</a>
+</p>
+</div>
+</body>
+</html>
