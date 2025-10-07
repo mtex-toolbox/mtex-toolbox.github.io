@@ -149,11 +149,11 @@ toc: false
     <div id="addons-mtex2gmsh" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="">
+                <img src="CVA.png">
             </div>
             <div class="panel-body">
                 <h4>CVA </h4>
-                <p>... Crystallographic Vorticity Axis Analysis
+                <p>...  is a function library for conducting orientation dispersion analyses with MTEX using principal geodesic analysis (PGA) — a generalization of principal component analysis for nonlinear Riemannian manifolds. PGA can be used to identify specimen and crystal axes associated with rotational dispersion of intragranular orientations, providing a proxy for a local slip/kinematic reference frame. The inaugural application by Michels et al. (2015) was to used identify sample-scale orientation dispersion axes that the authors demonstrated tracked vorticity axes of tectonic shear zones from which the samples were collected. The authors termed this method of PGA application “crystallographic vorticity axis (CVA) analysis”. The functions in this library allow users to implement the CVA analysis and also to explore new/custom applications of PGA of their own design.
                 </p>
                 <p>
                     <i class="fa fa-user"></i>
