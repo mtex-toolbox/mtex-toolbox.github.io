@@ -1,5 +1,6 @@
 ---
-title: Freiberg Workshop on Microstructure Analysis (FWMA 2026)
+title: Freiberg Workshop on Microstructure Analysis
+subtitle: MTEX Workshop 2026
 keywords: workshop, 2026
 sidebar: workshops_sidebar
 permalink: workshop26
