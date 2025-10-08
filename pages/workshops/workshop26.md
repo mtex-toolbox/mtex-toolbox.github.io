@@ -7,9 +7,9 @@ folder: workshops
 toc: false
 ---
 
-This two-week workshop is accredited as the module {% include reference.html
+*This two-week workshop is accredited as the module {% include reference.html
 link="" content="Introduction into Crystallographic Texture Analysis" %} and
-earns you 5 ECTS points.
+earns you 5 ECTS points.*
 
 **Week 1:** Do you work with EBSD or XRD to analyze microstructures and textures?
 Then this workshop will take your skills to the next level. You will
@@ -23,11 +23,23 @@ Then this workshop will take your skills to the next level. You will
 * become confident with powerful visualization techniques
 * discover that MTEX enables you to do (almost) everything you can imagine with your data
 
- The first week is primarily devoted to beginners in
-MTEX and/or texture analysis. 
+<!-- The first week is primarily devoted to beginners in
+MTEX and/or texture analysis. -->
 
-**Week 2:** The second week brings together people interested in quantitative methods for
-the analysis of crystalline microstructures. 
+**Week 2:** The second week brings together researchers, PhD students, and
+industry practitioners who apply quantitative methods to study crystalline
+microstructures. Participants will present case studies, share workflows, and
+engage in hands-on discussions of real-world data. Invited experts will
+deliver introductory lectures on novel analysis methods — followed by open Q&A
+and breakout sessions. Whether your focus is in metallurgy, geology,
+semiconductors, or beyond, this week is designed to foster cross-disciplinary
+interaction, help you tackle your own data challenges, and spark collaboration
+across academia and practice.
+
+<!--
+The second week brings together researches, PhD students and
+people from industry that are interested in quantitative methods for
+the analysis of crystalline microstructures. -->
 
 <!--The second week brings together MTEX users of varying experience levels to
 share use cases, tips and tricks, and to discuss recent and upcoming
