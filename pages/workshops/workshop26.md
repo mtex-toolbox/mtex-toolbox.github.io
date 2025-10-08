@@ -1,5 +1,5 @@
 ---
-title: Freiberg MTEX Workshop 2026
+title: Freiberg Workshop on Microstructure Analysis (FWMA 2026)
 keywords: workshop, 2026
 sidebar: workshops_sidebar
 permalink: workshop26
@@ -846,7 +846,7 @@ their talks as accessible as possible.
 
 ## Registration:
 
-- Please register at {% include reference.html link="https://acatrain.net/events/freiberg-mtex-workshop-2026/" content="https://acatrain.net/events/freiberg-mtex-workshop-2026" %}
+- Please register at {% include reference.html link="https://tickets.acatrain.net/mtex-2026/" content="https://tickets.acatrain.net/mtex-2026/" %}
  - Deadline for registration is 31st of January 2026
 
 ## Registration Fee:
