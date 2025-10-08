@@ -7,7 +7,11 @@ folder: workshops
 toc: false
 ---
 
-Do you work with EBSD or XRD to analyze microstructures and textures?
+This two-week workshop is accredited as the module {% include reference.html
+link="" content="Introduction into Crystallographic Texture Analysis" %} and
+earns you 5 ECTS points.
+
+**Week 1:** Do you work with EBSD or XRD to analyze microstructures and textures?
 Then this workshop will take your skills to the next level. You will
 
 * gain a deeper crystallographic understanding
@@ -19,12 +23,15 @@ Then this workshop will take your skills to the next level. You will
 * become confident with powerful visualization techniques
 * discover that MTEX enables you to do (almost) everything you can imagine with your data
 
-This two-week workshop is accredited as the module {% include reference.html
-link="" content="Introduction into Crystallographic Texture Analysis" %} and
-earns you 5 ECTS points.  The first week is primarily devoted to beginners in
-MTEX and/or texture analysis. The second week brings together MTEX users of
-varying experience levels to share use cases, tips and tricks, and to discuss
-recent and upcoming developments in MTEX.
+ The first week is primarily devoted to beginners in
+MTEX and/or texture analysis. 
+
+**Week 2:** The second week brings together people interested in quantitative methods for
+the analysis of crystalline microstructures. 
+
+<!--The second week brings together MTEX users of varying experience levels to
+share use cases, tips and tricks, and to discuss recent and upcoming
+developments in MTEX.-->
 
 Participation is possible both in person and remotely. You may also join for a
 single week, or combine on-site and remote participation.
@@ -373,15 +380,16 @@ their talks as accessible as possible.
 
 ### Keynote Speakers
 
-<!--
+
 - **{% include reference.html
-  link="https://www.materials.ox.ac.uk/peoplepages/marquardt.html"
-  content="Katharina Marquardt" %}** (University of Oxford)
+  link="https://www.mpie.de/person/43193/3079071"
+  content="Stefan Zaefferer" %}** (MPI for sustainable materials Düsseldorf)
    
 - **{% include reference.html
-  link="https://www.researchgate.net/profile/Gert-Nolze"
-  content="Gert Nolze" %}** (Bundesanstalt für Materialforschung)
+  link="https://www.researchgate.net/profile/Zachary-Michels"
+  content="Zachary D. Michels" %}** (University of Minnesota)
   
+<!--  
 - **{% include reference.html
   link="https://research.manchester.ac.uk/en/persons/joao.fonseca"
   content="João Quinta da Fonseca" %}** (University of Manchester)
