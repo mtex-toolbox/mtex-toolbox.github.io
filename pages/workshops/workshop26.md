@@ -401,7 +401,9 @@ their talks as accessible as possible.
   link="https://www.researchgate.net/profile/Zachary-Michels"
   content="Zachary D. Michels" %}** (University of Minnesota)
   
-- to be announced
+- **{% include reference.html
+  link="https://tu-freiberg.de/hochdruck/mitarbeiter/ag-angewandte-werkstoffwissenschaft-leineweber"
+  content="Andreas Leineweber" %}** (TU Bergakademie Freiberg)
 
 - to be announced
 
