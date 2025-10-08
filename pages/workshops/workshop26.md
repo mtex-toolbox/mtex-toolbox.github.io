@@ -9,9 +9,11 @@ toc: false
 
 *This two-week workshop is accredited as the module {% include reference.html
 link="" content="Introduction into Crystallographic Texture Analysis" %} and
-earns you 5 ECTS points.*
+earns you 5 ECTS points. Participation is possible both in person and
+remotely. You may also join for a single week, or combine on-site and remote
+participation.*
 
-**Week 1:** Do you work with EBSD or XRD to analyze microstructures and textures?
+**Week 1 (02.03 - 06.03):** Do you work with EBSD or XRD to analyze microstructures and textures?
 Then this workshop will take your skills to the next level. You will
 
 * gain a deeper crystallographic understanding
@@ -26,7 +28,7 @@ Then this workshop will take your skills to the next level. You will
 <!-- The first week is primarily devoted to beginners in
 MTEX and/or texture analysis. -->
 
-**Week 2:** The second week brings together researchers, PhD students, and
+**Week 2 (9.03. - 12.03.):** The second week brings together researchers, PhD students, and
 industry practitioners who apply quantitative methods to study crystalline
 microstructures. Participants will present case studies, share workflows, and
 engage in hands-on discussions of real-world data. Invited experts will
@@ -45,8 +47,6 @@ the analysis of crystalline microstructures. -->
 share use cases, tips and tricks, and to discuss recent and upcoming
 developments in MTEX.-->
 
-Participation is possible both in person and remotely. You may also join for a
-single week, or combine on-site and remote participation.
 
 <!--<div markdown="span" class="alert alert-info" role="alert">
 	<i class="fa fa-info-circle"></i> 
@@ -400,6 +400,13 @@ their talks as accessible as possible.
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Zachary-Michels"
   content="Zachary D. Michels" %}** (University of Minnesota)
+  
+- to be announced
+
+- to be announced
+
+- to be announced
+
   
 <!--  
 - **{% include reference.html
