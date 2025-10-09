@@ -1,5 +1,5 @@
 ---
-title: calcCluster
+title: orientation.calcCluster
 
 sidebar: function_reference_sidebar
 permalink: orientation.calcCluster.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>calcCluster</title>
+<title>orientation.calcCluster</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_orientation__calcCluster.m">
 </head>
@@ -81,8 +81,8 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p>
 <h2 id="6">Example</h2>
+<p>generate orientation clustered around 5 centers</p>
 {% highlight matlab %}
-% generate orientation clustered around 5 centers
 cs = crystalSymmetry('432');
 center = orientation.rand(5,cs);
 odf = unimodalODF(center,'halfwidth',5*degree)
@@ -104,14 +104,12 @@ odf = SO3FunRBF (432 → y↑→x)
   156.716 113.621 184.888     0.2
   151.332 117.797 66.3984     0.2
 {% endhighlight %}
-
+<p>find the clusters and its centers</p>
 {% highlight matlab %}
-% find the clusters and its centers
 [cId,centerRec] = calcCluster(ori,'silent');
 {% endhighlight %}
-
+<p>visualize result</p>
 {% highlight matlab %}
-% visualize result
 for i = 1:length(centerRec)
 plot(ori(cId==i),'axisAngle')
 hold on
@@ -122,6 +120,15 @@ hold off
 <center>
 {% include inline_image.html file="orientation.calcCluster_01.png" %}
 </center>
+{% highlight matlab %}
+%check the accuracy of the recomputed centers
+min(angle_outer(center,centerRec)./degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.6137    2.0637    1.0360    2.1478    1.4003
+{% endhighlight %}
 </div>
 </body>
 </html>

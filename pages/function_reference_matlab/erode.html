@@ -22,9 +22,9 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>do morphological erosion of pixels based on neighbor counts</p>
 <!--/introduction-->
-<h2 id="2">Syntax</h2>
+<p>do morphological erosion of pixels based on neighbor counts</p>
+<h2 id="3">Syntax</h2>
 {% highlight matlab %}
 ebsd = erode(ebsd,0)
 {% endhighlight %}
@@ -36,7 +36,7 @@ ebsd = erode(ebsd,2,'titanium')
 {% highlight matlab %}
 ebsd = erode(ebsd,1,{'a' 'b' 'notIndexed'})
 {% endhighlight %}
-<h2 id="3">Input</h2>
+<h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -65,7 +65,7 @@ ebsd = erode(ebsd,1,{'a' 'b' 'notIndexed'})
       </tr>
    </table>
 </p>
-<h2 id="4">Output</h2>
+<h2 id="5">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -78,14 +78,72 @@ ebsd = erode(ebsd,1,{'a' 'b' 'notIndexed'})
       </tr>
    </table>
 </p>
-<h2 id="5">Example</h2>
-<p>mtexdata small plot(ebsd); hold on plot(ebsd('n'),'FaceColor','k'); hold off; mtexTitle('original'); nextAxis</p>
-<p>% erode isolated, nonIndexed points ebsd = erode(ebsd,0); plot(ebsd); hold on plot(ebsd('n'),'FaceColor','k'); hold off; mtexTitle('no single nonIndexed pixels'); nextAxis</p>
-<p>% erode isolated, nonIndexed points for i=1:10 ebsd = erode(ebsd,1,{'n' 'D' 'E'}); end</p>
-<p>plot(ebsd); hold on plot(ebsd('n'),'FaceColor','k'); hold off; mtexTitle('no n,D,E \(\le\) 1 neighbors, 10 iter'); nextAxis</p>
-<p>% erode isolated, nonIndexed points</p>
-<p>for i=1:10 ebsd = erode(ebsd,2,{'n' 'D' 'E','F'}); ebsd = ebsd.fill; end</p>
-<p>plot(ebsd); hold on plot(ebsd('n'),'FaceColor','k'); hold off; mtexTitle('no n,D,E \(\le\) 2 neighbors, filled,10 iter');</p>
+<h2 id="6">Example</h2>
+{% highlight matlab %}
+mtexdata small
+plot(ebsd); hold on
+plot(ebsd('n'),'FaceColor','k'); hold off;
+mtexTitle('original');  nextAxis
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0    1197 (32%)  notIndexed                                                 
+     1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
+     2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad
+ Scan unit : um
+ X x Y x Z : [33000, 36000] x [4500, 7500] x [0, 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="erode_01.png" %}
+</center>
+<p>erode isolated, nonIndexed points</p>
+{% highlight matlab %}
+ebsd = erode(ebsd,0);
+plot(ebsd); hold on
+plot(ebsd('n'),'FaceColor','k'); hold off;
+mtexTitle('no single nonIndexed pixels');  nextAxis
+{% endhighlight %}
+<center>
+{% include inline_image.html file="erode_02.png" %}
+</center>
+<p>erode isolated, nonIndexed points</p>
+{% highlight matlab %}
+for i=1:10
+ebsd = erode(ebsd,1,{'n' 'D' 'E'});
+end
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(ebsd); hold on
+plot(ebsd('n'),'FaceColor','k'); hold off;
+mtexTitle('no n,D,E \(\le\) 1 neighbors, 10 iter'); nextAxis
+{% endhighlight %}
+<center>
+{% include inline_image.html file="erode_03.png" %}
+</center>
+<p>erode isolated, nonIndexed points</p>
+{% highlight matlab %}
+for i=1:10
+ebsd = erode(ebsd,2,{'n' 'D' 'E','F'});
+ebsd = ebsd.fill;
+end
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(ebsd); hold on
+plot(ebsd('n'),'FaceColor','k'); hold off;
+mtexTitle('no n,D,E \(\le\) 2 neighbors, filled,10 iter');
+{% endhighlight %}
+<center>
+{% include inline_image.html file="erode_04.png" %}
+</center>
 </div>
 </body>
 </html>

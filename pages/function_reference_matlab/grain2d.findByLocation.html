@@ -1,5 +1,5 @@
 ---
-title: findByLocation
+title: grain2d.findByLocation
 
 sidebar: function_reference_sidebar
 permalink: grain2d.findByLocation.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>findByLocation</title>
+<title>grain2d.findByLocation</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_grain2d__findByLocation.m">
 </head>
@@ -63,10 +63,42 @@ id = findByLocation( grains, pos )
    </table>
 </p>
 <h2 id="6">Example</h2>
-<pre>plot(grains)
-p = ginput(1)
+{% highlight matlab %}
+mtexdata small silent
+grains = calcGrains(ebsd('indexed'))
+plot(grains)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
+     1      24    1952  Forsterite       mmm                         
+     2       8     290   Enstatite       mmm                         
+     3      44     282    Diopside     12/m1       X||a*, Y||b*, Z||c
+ 
+ boundary segments: 1139 (52148 µm)
+ inner boundary segments: 22 (1101 µm)
+ triple points: 68
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<center>
+{% include inline_image.html file="grain2d.findByLocation_01.png" %}
+</center>
+{% highlight matlab %}
+p = [35000 5000] % for mouse selection use  p = ginput(1)
 id = findByLocation(grains,p);
-hold on, plot(grains(id).boundary,'linecolor','r','lineWidth',2), hold off</pre>
+hold on, plot(grains(id).boundary,'linecolor','r','lineWidth',2), hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+p =
+       35000        5000
+{% endhighlight %}
+<center>
+{% include inline_image.html file="grain2d.findByLocation_02.png" %}
+</center>
 <h2 id="8">See also</h2>
 <p>
 <a href="EBSD.findByLocation.html">EBSD.findByLocation</a> <a href="grain2d.findByOrientation.html">grain2d.findByOrientation</a>

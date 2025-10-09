@@ -1,5 +1,5 @@
 ---
-title: calcTaylor
+title: strainTensor.calcTaylor
 
 sidebar: function_reference_sidebar
 permalink: strainTensor.calcTaylor.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>calcTaylor</title>
+<title>strainTensor.calcTaylor</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_strainTensor__calcTaylor.m">
 </head>
@@ -96,8 +96,8 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p>
 <h2 id="6">Example</h2>
+<p>define 10 percent strain</p>
 {% highlight matlab %}
-% define 10 percent strain
 eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
 {% endhighlight %}
 
@@ -111,9 +111,8 @@ eps = strainTensor (y↑→x)
     0 -7.5    0
     0    0 -2.5
 {% endhighlight %}
-
+<p>define a crystal orientation</p>
 {% highlight matlab %}
-% define a crystal orientation
 cs = crystalSymmetry('cubic')
 ori = orientation.byEuler(0,30*degree,15*degree,cs)
 {% endhighlight %}
@@ -132,9 +131,8 @@ ori = orientation (m-3m → y↑→x)
   phi1  Phi phi2
      0   30   15
 {% endhighlight %}
-
+<p>define a slip system</p>
 {% highlight matlab %}
-% define a slip system
 sS = slipSystem.fcc(cs)
 {% endhighlight %}
 
@@ -144,24 +142,23 @@ sS = slipSystem (m-3m)
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
 {% endhighlight %}
-
+<p>compute the Taylor factor w.r.t. the given orientation</p>
 {% highlight matlab %}
-% compute the Taylor factor w.r.t. the given orientation
 [M,b,W] = calcTaylor(inv(ori)*eps,sS.symmetrise)
 {% endhighlight %}
 
 {% highlight plaintext %}
 M =
-       2.7187
+    2.7187
 b =
-  Columns 1 through 6
-   2.1058e-17   1.0668e-16     0.014162     0.033158   9.8911e-17   2.7042e-17
-  Columns 7 through 12
-     0.019786   1.2948e-16   2.3761e-17    3.156e-17   7.4774e-17     0.020425
-  Columns 13 through 18
-   4.8778e-17    2.007e-17   4.2509e-17   1.2248e-16     0.034477    0.0092782
-  Columns 19 through 24
-   2.0953e-17     0.029621   7.1262e-17      0.11096    2.332e-17   7.1768e-17
+  Columns 1 through 7
+    0.0000    0.0000    0.0142    0.0332    0.0000    0.0000    0.0198
+  Columns 8 through 14
+    0.0000    0.0000    0.0000    0.0000    0.0204    0.0000    0.0000
+  Columns 15 through 21
+    0.0000    0.0000    0.0345    0.0093    0.0000    0.0296    0.0000
+  Columns 22 through 24
+    0.1110    0.0000    0.0000
  
 W = spinTensor (m-3m)
   rank: 2 (3 x 3)
@@ -171,9 +168,8 @@ W = spinTensor (m-3m)
   20.77      0 -15.51
  -31.63  15.51      0
 {% endhighlight %}
-
+<p>update orientation</p>
 {% highlight matlab %}
-% update orientation
 oriNew = ori .* orientation(-W)
 {% endhighlight %}
 
@@ -183,6 +179,21 @@ oriNew = orientation (m-3m → y↑→x)
   Bunge Euler angles in degree
      phi1     Phi    phi2
   356.003 29.6499 17.2781
+{% endhighlight %}
+<p>compute the Taylor factor and spin Tensor w.r.t. any orientation</p>
+{% highlight matlab %}
+[M,~,W] = calcTaylor(eps,sS.symmetrise)
+{% endhighlight %}
+
+{% highlight plaintext %}
+M = SO3FunHarmonic (m-3m → y↑→x)
+  bandwidth: 32
+  weight: 3.1
+ 
+ 
+W = SO3VectorFieldHarmonic (m-3m → y↑→x)
+  bandwidth: 32
+  tangent space: rightSpinTensor
 {% endhighlight %}
 </div>
 </body>

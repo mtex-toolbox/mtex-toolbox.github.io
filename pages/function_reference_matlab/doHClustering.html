@@ -22,14 +22,14 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>hierarchical clustering of rotations and vectors</p>
 <!--/introduction-->
-<h2 id="2">Syntax</h2>
+<p>hierarchical clustering of rotations and vectors</p>
+<h2 id="3">Syntax</h2>
 {% highlight matlab %}
 [c,center] = doHCluster(ori,'numCluster',n)
 [c,center] = doHCluster(ori,'maxAngle',omega)
 {% endhighlight %}
-<h2 id="3">Input</h2>
+<h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -58,7 +58,7 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="4">Output</h2>
+<h2 id="5">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -79,9 +79,9 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="5">Example</h2>
+<h2 id="6">Example</h2>
+<p>generate orientation clustered around 5 centers</p>
 {% highlight matlab %}
-% generate orientation clustered around 5 centers
 cs = crystalSymmetry('m-3m');
 center = orientation.rand(5,cs);
 odf = unimodalODF(center,'halfwidth',5*degree)
@@ -103,14 +103,12 @@ odf = SO3FunRBF (m-3m → y↑→x)
   156.716 113.621 184.888     0.2
   151.332 117.797 66.3984     0.2
 {% endhighlight %}
-
+<p>find the clusters and its centers</p>
 {% highlight matlab %}
-% find the clusters and its centers
 [c,centerRec] = calcCluster(ori,'method','hierarchical','numCluster',5);
 {% endhighlight %}
-
+<p>visualize result</p>
 {% highlight matlab %}
-% visualize result
 plot(ori,ind2color(c),'axisAngle')
 {% endhighlight %}
 
@@ -128,6 +126,21 @@ min(angle_outer(center,centerRec)./degree)
 {% highlight plaintext %}
 ans =
     0.3032    0.3298    0.2366    0.5450    0.1580
+{% endhighlight %}
+<p>alternative approach to compute the cluster centers</p>
+{% highlight matlab %}
+odfRec = calcDensity(ori)
+[~,centerRec2] = max(odfRec,'numLocal',5);
+min(angle_outer(center,centerRec2)./degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+odfRec = SO3FunHarmonic (m-3m → y↑→x)
+  bandwidth: 25
+  weight: 1
+ 
+ans =
+    0.4582    0.6089    0.1909    0.8792    0.6571
 {% endhighlight %}
 </div>
 </body>
