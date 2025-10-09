@@ -80,9 +80,14 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p>
 <h2 id="7">Example</h2>
+<p>revert sigma3 misorientation relationship</p>
 {% highlight matlab %}
-% revert sigma3 misorientation relationship
 [n1,n2,d1,d2] = round2Miller(CSL(3,crystalSymmetry('432')))
+% revert back Bain misorientation ship
+cs_alpha = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Ferrite');
+cs_gamma = crystalSymmetry('m-3m', [3.66 3.66 3.66], 'mineral', 'Austenite');
+mori = orientation.Bain(cs_alpha,cs_gamma)
+[n_gamma,n_alpha,d_gamma,d_alpha] = round2Miller(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -101,17 +106,7 @@ d1 = Miller (432)
 d2 = Miller (432)
    u  v  w
   -1  1  0
-{% endhighlight %}
-
-{% highlight matlab %}
-% revert back Bain misorientation ship
-cs_alpha = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Ferrite');
-cs_gamma = crystalSymmetry('m-3m', [3.66 3.66 3.66], 'mineral', 'Austenite');
-mori = orientation.Bain(cs_alpha,cs_gamma)
-[n_gamma,n_alpha,d_gamma,d_alpha] = round2Miller(mori)
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
 mori = misorientation (Ferrite → Austenite)
  
  (011) || (001)   [100] || [100]
@@ -133,7 +128,7 @@ d_alpha = Miller (Austenite)
   u v w
   1 0 0
 {% endhighlight %}
-<h2 id="10">See also</h2>
+<h2 id="8">See also</h2>
 <p>
 <a href="CSL.html">CSL</a>
 </p>

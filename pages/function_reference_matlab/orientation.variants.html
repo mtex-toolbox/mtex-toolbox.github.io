@@ -190,14 +190,23 @@ oriParent = variants(p2c, oriChild, variantId)
    </table>
 </p>
 <h2 id="7">Example</h2>
+<p>parent symmetry</p>
 {% highlight matlab %}
-% parent symmetry
 cs_fcc = crystalSymmetry('432', [3.6599 3.6599 3.6599], 'mineral', 'Iron fcc');
-{% endhighlight %}
-
-{% highlight matlab %}
 % child symmetry
 cs_bcc = crystalSymmetry('432', [2.866 2.866 2.866], 'mineral', 'Iron bcc')
+% define a fcc parent orientation
+ori_fcc = orientation.brass(cs_fcc)
+% define Nishiyama Wassermann fcc to bcc orientation relation ship
+NW = orientation.NishiyamaWassermann(cs_fcc,cs_bcc)
+% compute a bcc child orientation related to the fcc orientation
+ori_bcc = ori_fcc * inv(NW)
+% compute all symmetrically possible child orientations
+ori_bcc = unique(ori_fcc.symmetrise * inv(NW))
+% same using the function variants
+ori_bcc2 = variants(NW,ori_fcc)
+% we may also compute all possible child to child misorientations
+bcc2bcc = unique(variants(NW,'child') * inv(NW))
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -207,51 +216,27 @@ cs_bcc = crystalSymmetry
   symmetry: 432          
   elements: 24           
   a, b, c : 2.9, 2.9, 2.9
-{% endhighlight %}
-
-{% highlight matlab %}
-% define a fcc parent orientation
-ori_fcc = orientation.brass(cs_fcc)
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 ori_fcc = orientation (Iron fcc → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
     35   45    0
-{% endhighlight %}
-
-{% highlight matlab %}
-% define Nishiyama Wassermann fcc to bcc orientation relation ship
-NW = orientation.NishiyamaWassermann(cs_fcc,cs_bcc)
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 NW = misorientation (Iron fcc → Iron bcc)
  
  (111) || (011)   [1-10] || [-100]
-{% endhighlight %}
-
-{% highlight matlab %}
-% compute a bcc child orientation related to the fcc orientation
-ori_bcc = ori_fcc * inv(NW)
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 ori_bcc = orientation (Iron bcc → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   166.305 68.0853 32.6118
-{% endhighlight %}
-
-{% highlight matlab %}
-% compute all symmetrically possible child orientations
-ori_bcc = unique(ori_fcc.symmetrise * inv(NW))
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 ori_bcc = orientation (Iron bcc → y↑→x)
   size: 12 x 1
  
@@ -269,14 +254,8 @@ ori_bcc = orientation (Iron bcc → y↑→x)
   263.695 68.0853 327.388
   153.171 127.761 320.768
   153.171 52.2388 219.232
-{% endhighlight %}
-
-{% highlight matlab %}
-% same using the function variants
-ori_bcc2 = variants(NW,ori_fcc)
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 ori_bcc2 = orientation (Iron bcc → y↑→x)
   size: 1 x 12
  
@@ -294,14 +273,8 @@ ori_bcc2 = orientation (Iron bcc → y↑→x)
   83.6949 111.915 212.612
       125 9.73561       0
   166.305 111.915 147.388
-{% endhighlight %}
-
-{% highlight matlab %}
-% we may also compute all possible child to child misorientations
-bcc2bcc = unique(variants(NW,'child') * inv(NW))
-{% endhighlight %}
-
-{% highlight plaintext %}
+ 
+ 
 bcc2bcc = misorientation (Iron bcc → Iron bcc)
   size: 7 x 1
  
@@ -315,7 +288,7 @@ bcc2bcc = misorientation (Iron bcc → Iron bcc)
   315.528 60.9415 334.724
   205.276 60.9415 224.472
 {% endhighlight %}
-<h2 id="16">See also</h2>
+<h2 id="8">See also</h2>
 <p>
 <a href="calcParents.html">calcParents</a>
 </p>

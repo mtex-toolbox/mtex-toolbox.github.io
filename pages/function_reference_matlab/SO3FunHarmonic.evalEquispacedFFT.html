@@ -1,5 +1,5 @@
 ---
-title: evalEquispacedFFT
+title: SO3FunHarmonic.evalEquispacedFFT
 
 sidebar: function_reference_sidebar
 permalink: SO3FunHarmonic.evalEquispacedFFT.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>evalEquispacedFFT</title>
+<title>SO3FunHarmonic.evalEquispacedFFT</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SO3FunHarmonic__evalEquispacedFFT.m">
 </head>
@@ -72,9 +72,8 @@ f = evalEquispacedFFT(SO3F,rot)
    </table>
 </p>
 <h2 id="6">Example</h2>
+<p>construct quadrature grid and evaluate there. Output will be a unique part of this grid</p>
 {% highlight matlab %}
-% construct quadrature grid and evaluate there. Output will be a unique
-% part of this grid
 SO3F = SO3FunHarmonic.example;
 rot = quadratureSO3Grid(62,SO3F.CS)
 v = evalEquispacedFFT(SO3F,rot);
@@ -87,10 +86,8 @@ rot = quadratureSO3Grid (Quartz → y↑→x)
   grid: 333396 orientations
   full grid size: 42 x 125 x 126
 {% endhighlight %}
-
+<p>for big grid sizes the construction of the quadrature grid is memory expansive. Hence construct struct, but the output is full sized</p>
 {% highlight matlab %}
-% for big grid sizes the construction of the quadrature grid is memory
-% expansive. Hence construct struct, but the output is full sized
 rot = struct('scheme','ClenshawCurtis','bandwidth',350,'CS',SO3F.CS,'SS',specimenSymmetry)
 v = evalEquispacedFFT(SO3F,rot);
 {% endhighlight %}
@@ -104,7 +101,7 @@ rot =
            CS: [1×1 crystalSymmetry]
            SS: [1×1 specimenSymmetry]
 {% endhighlight %}
-<h2 id="9">See also</h2>
+<h2 id="8">See also</h2>
 <p>
 <a href="SO3FunHarmonic.eval.html">SO3FunHarmonic.eval</a> <a href="SO3FunHarmonic.evalNFSOFT.html">SO3FunHarmonic.evalNFSOFT</a> <a href="SO3FunHarmonic.evalSectionsEquispacedFFT.html">SO3FunHarmonic.evalSectionsEquispacedFFT</a>
 </p>

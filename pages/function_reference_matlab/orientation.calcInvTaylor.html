@@ -1,5 +1,5 @@
 ---
-title: calcInvTaylor
+title: orientation.calcInvTaylor
 
 sidebar: function_reference_sidebar
 permalink: orientation.calcInvTaylor.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>calcInvTaylor</title>
+<title>orientation.calcInvTaylor</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_orientation__calcInvTaylor.m">
 </head>
@@ -79,8 +79,8 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p>
 <h2 id="6">Example</h2>
+<p>define 10 percent strain</p>
 {% highlight matlab %}
-% define 10 percent strain
 eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
 {% endhighlight %}
 
@@ -94,9 +94,8 @@ eps = strainTensor (y↑→x)
     0 -7.5    0
     0    0 -2.5
 {% endhighlight %}
-
+<p>define a crystal orientation</p>
 {% highlight matlab %}
-% define a crystal orientation
 cs = crystalSymmetry('cubic')
 ori = orientation.byEuler(0,30*degree,15*degree,cs)
 {% endhighlight %}
@@ -115,9 +114,8 @@ ori = orientation (m-3m → y↑→x)
   phi1  Phi phi2
      0   30   15
 {% endhighlight %}
-
+<p>define a slip system</p>
 {% highlight matlab %}
-% define a slip system
 sS = slipSystem.fcc(cs)
 {% endhighlight %}
 
@@ -126,6 +124,32 @@ sS = slipSystem (m-3m)
  
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
+{% endhighlight %}
+<p>compute the Taylor factor</p>
+{% highlight matlab %}
+[M,b,mori] = calcTaylor(inv(ori)*eps,sS.symmetrise)
+{% endhighlight %}
+
+{% highlight plaintext %}
+M =
+    2.7187
+b =
+  Columns 1 through 7
+    0.0000    0.0000    0.0142    0.0332    0.0000    0.0000    0.0198
+  Columns 8 through 14
+    0.0000    0.0000    0.0000    0.0000    0.0204    0.0000    0.0000
+  Columns 15 through 21
+    0.0000    0.0000    0.0345    0.0093    0.0000    0.0296    0.0000
+  Columns 22 through 24
+    0.1110    0.0000    0.0000
+ 
+mori = spinTensor (m-3m)
+  rank: 2 (3 x 3)
+ 
+ *10^-3
+      0 -20.77  31.63
+  20.77      0 -15.51
+ -31.63  15.51      0
 {% endhighlight %}
 </div>
 </body>

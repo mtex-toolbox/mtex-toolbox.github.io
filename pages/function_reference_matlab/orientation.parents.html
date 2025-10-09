@@ -1,5 +1,5 @@
 ---
-title: parents
+title: orientation.parents
 
 sidebar: function_reference_sidebar
 permalink: orientation.parents.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>parents</title>
+<title>orientation.parents</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_orientation__parents.m">
 </head>
@@ -63,13 +63,12 @@ ori_parents = ori_child * inv(mori.parents)
    </table>
 </p>
 <h2 id="6">Example</h2>
+<p>parent symmetry</p>
 {% highlight matlab %}
-% parent symmetry
 cs_fcc = crystalSymmetry('m-3m', [3.6599 3.6599 3.6599], 'mineral', 'Iron fcc');
 {% endhighlight %}
-
+<p>child symmetry</p>
 {% highlight matlab %}
-% child symmetry
 cs_bcc = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Iron bcc')
 {% endhighlight %}
 
@@ -81,9 +80,8 @@ cs_bcc = crystalSymmetry
   elements: 48           
   a, b, c : 2.9, 2.9, 2.9
 {% endhighlight %}
-
+<p>define a bcc child orientation</p>
 {% highlight matlab %}
-% define a bcc child orientation
 ori_bcc = orientation.goss(cs_bcc)
 {% endhighlight %}
 
@@ -94,9 +92,8 @@ ori_bcc = orientation (Iron bcc → y↑→x)
   phi1  Phi phi2
      0   45    0
 {% endhighlight %}
-
+<p>define Nishiyama Wassermann fcc to bcc orientation relation ship</p>
 {% highlight matlab %}
-% define Nishiyama Wassermann fcc to bcc orientation relation ship
 NW = orientation.NishiyamaWassermann (cs_fcc,cs_bcc)
 {% endhighlight %}
 
@@ -105,9 +102,8 @@ NW = misorientation (Iron fcc → Iron bcc)
  
  (111) || (011)   [1-10] || [-100]
 {% endhighlight %}
-
+<p>compute a fcc parent orientation related to the bcc child orientation</p>
 {% highlight matlab %}
-% compute a fcc parent orientation related to the bcc child orientation
 ori_fcc = ori_bcc * NW
 {% endhighlight %}
 
@@ -118,9 +114,8 @@ ori_fcc = orientation (Iron fcc → y↑→x)
   phi1     Phi    phi2
    180 54.7356      45
 {% endhighlight %}
-
+<p>compute all symmetrically possible parent orientations</p>
 {% highlight matlab %}
-% compute all symmetrically possible parent orientations
 ori_fcc = unique(ori_bcc.symmetrise * NW)
 {% endhighlight %}
 
@@ -143,9 +138,8 @@ ori_fcc = orientation (Iron fcc → y↑→x)
         0 144.736      45
         0 35.2644     225
 {% endhighlight %}
-
+<p>same using the function parents</p>
 {% highlight matlab %}
-% same using the function parents
 ori_fcc2 = ori_bcc * NW.parents
 {% endhighlight %}
 
@@ -168,7 +162,7 @@ ori_fcc2 = orientation (Iron fcc → y↑→x)
       360 35.2644     225
   346.361 45.8193 324.598
 {% endhighlight %}
-<h2 id="14">See also</h2>
+<h2 id="13">See also</h2>
 <p>
 <a href="orientation.variants.html">orientation.variants</a>
 </p>

@@ -1,5 +1,5 @@
 ---
-title: centerSpecimen
+title: SO3Fun.centerSpecimen
 
 sidebar: function_reference_sidebar
 permalink: SO3Fun.centerSpecimen.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>centerSpecimen</title>
+<title>SO3Fun.centerSpecimen</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SO3Fun__centerSpecimen.m">
 </head>
@@ -125,8 +125,8 @@ To make changes, update the MATLAB code and republish this document.
    </table>
 </p>
 <h2 id="7">Example</h2>
+<p>starting with an synthetic odf with orthorhombic symmetry</p>
 {% highlight matlab %}
-% starting with an synthetic odf with orthorhombic symmetry
 CS = crystalSymmetry('cubic');
 SS = specimenSymmetry('orthorhombic');
 ori = [orientation.byEuler(135*degree,45*degree,120*degree,CS,SS) ...
@@ -138,9 +138,8 @@ orientation.byEuler(0*degree,0*degree,0*degree,CS,SS)];
 {% highlight matlab %}
 odf = unimodalODF(SS*ori);
 {% endhighlight %}
-
+<p>we define a rotational displacement</p>
 {% highlight matlab %}
-% we define a rotational displacement
 r2 = rotation.byEuler( 6*degree,4*degree,0*degree);
 odf = rotate(odf,r2);
 h = [Miller(0,0,1,CS),Miller(0,1,1,CS),Miller(1,1,1,CS)];
@@ -148,21 +147,21 @@ plotPDF(odf,h,'antipodal','complete','upper');
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Rotating an ODF with specimen symmetry will remove
-the specimen symmetry
+Warning: Rotating an ODF with specimen symmetry will remove the
+specimen symmetry
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3Fun.centerSpecimen_01.png" %}
 </center>
+<p>lets try to retrieve the original orthorhombic odf back</p>
 {% highlight matlab %}
-% lets try to retrieve the original orthorhombic odf back
 [odr,r,v1,v2] = centerSpecimen(odf);
 plotPDF(odr,h,'antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3Fun.centerSpecimen_02.png" %}
 </center>
-<h2 id="13">See also</h2>
+<h2 id="11">See also</h2>
 </div>
 </body>
 </html>

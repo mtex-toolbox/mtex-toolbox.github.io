@@ -1,5 +1,5 @@
 ---
-title: spatialProfile
+title: EBSDsquare.spatialProfile
 
 sidebar: function_reference_sidebar
 permalink: EBSDsquare.spatialProfile.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>spatialProfile</title>
+<title>EBSDsquare.spatialProfile</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_EBSDsquare__spatialProfile.m">
 </head>
@@ -96,8 +96,8 @@ xy = ginput(2)
    </table>
 </p>
 <h2 id="6">Example</h2>
+<p>import data</p>
 {% highlight matlab %}
-% import data
 mtexdata twins
 {% endhighlight %}
 
@@ -113,35 +113,42 @@ ebsd = EBSD (y↑→x)
  X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-
+<p>plot data</p>
 {% highlight matlab %}
-% plot data
 plot(ebsd('indexed'),ebsd('indexed').orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDsquare.spatialProfile_01.png" %}
 </center>
+<p>select line coordinates</p>
 {% highlight matlab %}
-% select line coordinates
 x = [15.5 27]; y = [20.5 11];
 {% endhighlight %}
-
+<p>draw line with some translucency</p>
 {% highlight matlab %}
-% draw line with some translucency
 line(x,y,'color',[0.5 0.5 0.5 0.5],'linewidth',10)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDsquare.spatialProfile_02.png" %}
 </center>
+<p>restrict ebsd data to this line</p>
 {% highlight matlab %}
-% restrict ebsd data to this line
 [ebsdLine,dist] = spatialProfile(ebsd,x,y);
+{% endhighlight %}
+<p>extract orientations</p>
+{% highlight matlab %}
+ori = ebsdLine.orientations;
 {% endhighlight %}
 
 {% highlight matlab %}
-% extract orientations
-ori = ebsdLine.orientations;
+figure
+% plot misorientation angle along the profile
+plot(dist,angle(ori,ori(1))./degree,'linewidth',2)
+xlabel('line'), ylabel('misorientation angle')
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDsquare.spatialProfile_03.png" %}
+</center>
 </div>
 </body>
 </html>

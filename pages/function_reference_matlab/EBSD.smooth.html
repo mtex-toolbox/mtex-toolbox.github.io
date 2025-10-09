@@ -1,5 +1,5 @@
 ---
-title: smooth
+title: EBSD.smooth
 
 sidebar: function_reference_sidebar
 permalink: EBSD.smooth.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>smooth</title>
+<title>EBSD.smooth</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_EBSD__smooth.m">
 </head>
@@ -106,9 +106,8 @@ ebsd = EBSD (y↑→x)
  X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-
+<p>find largest grains</p>
 {% highlight matlab %}
-% find largest grains
 largeGrains = grains(grains.numPixel>800);
 ebsd = ebsd(largeGrains(1));
 {% endhighlight %}
@@ -125,6 +124,16 @@ hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD.smooth_01.png" %}
+</center>
+{% highlight matlab %}
+ebsd_smoothed = smooth(ebsd);
+plot(ebsd_smoothed('indexed'),oM.orientation2color(ebsd_smoothed('indexed').orientations))
+hold on
+plot(largeGrains(1).boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD.smooth_02.png" %}
 </center>
 </div>
 </body>

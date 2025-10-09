@@ -1,5 +1,5 @@
 ---
-title: calcCluster
+title: vector3d.calcCluster
 
 sidebar: function_reference_sidebar
 permalink: vector3d.calcCluster.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>calcCluster</title>
+<title>vector3d.calcCluster</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_vector3d__calcCluster.m">
 </head>
@@ -87,14 +87,12 @@ vin = vector3d.rand(5);
 sF2 = calcDensity(vin,'halfwidth',10*degree);
 v   = sF2.discreteSample(800);
 {% endhighlight %}
-
+<p>find clusters and their centers</p>
 {% highlight matlab %}
-% find clusters and their centers
 [cId,center] = calcCluster(v,'numCluster',5,'method','hierarchical');
 {% endhighlight %}
-
+<p>visualize the result</p>
 {% highlight matlab %}
-% visualize the result
 plot(v,cId)
 hold on
 plot(center,'add2all','MarkerSize',10,'MarkerFaceColor','k')
@@ -103,6 +101,15 @@ hold off
 <center>
 {% include inline_image.html file="vector3d.calcCluster_01.png" %}
 </center>
+{% highlight matlab %}
+%check the accuracy of the recomputed centers
+min(angle_outer(center,vin)./degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   10.4473    0.7218    0.3485    0.6109   12.2760
+{% endhighlight %}
 </div>
 </body>
 </html>
