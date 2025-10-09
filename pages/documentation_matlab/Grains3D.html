@@ -38,6 +38,11 @@ plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
 how2plot = plottingConvention.default3D;
 setCamera(how2plot)
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Grains imported from Dream3d may not have set there
+normals consistently. Please run <a href="matlab:grains=grains.orientFaces">grains=grains.orientFaces</a>
+{% endhighlight %}
 <center>
 {% include inline_image.html file="Grains3D_01.png" %}
 </center>
@@ -89,25 +94,35 @@ grains2 = grain2d (y↑→x)
 <a href="https://neper.info">Neper</a> is a software package for the simulation of three dimensional microstructures. After installation it can be directly called by MTEX. The general workflow is explained <a href="NeperInterface.html">here</a>. Here we use it to quickly generate a copper microstructure with specific texture and specific distribution of boundary normals.</p>
 {% highlight matlab %}
 % set up the communication with Neper
-job = neperInstance;
+neper.init;
 
 % define a texture
 cs = crystalSymmetry.load('quartz.cif','color','lightblue');
 odf = fibreODF(cs.cAxis,vector3d(1,1,1));
 
-numGrains=100;
-grains = job.simulateGrains(odf,numGrains,'silent')
+numGrains = 100;
+grains = neper.simulateGrains(numGrains,odf,'silent')
 % or you can load an existing tessellation file
 %grains = grain3d.load('allgrains.tess','CS',cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
+========================    N   e   p   e   r    =======================
+Info   : A software package for polycrystal generation and meshing.
+Info   : Version 4.9.1-4
+Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
+Info   : Running on 12 threads.
+Info   : <https://neper.info>
+Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
+========================================================================
+
+ 
 grains = grain3d
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
      2     100       1   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary faces: 629
+ boundary faces: 650
  
  Properties: meanRotation
 {% endhighlight %}
@@ -138,11 +153,11 @@ setCamera(how2plot)
 grains_2d = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     2      40      40   Quartz       321       X||a*, Y||b, Z||c*
+     2      41      41   Quartz       321       X||a*, Y||b, Z||c*
  
- boundary segments: 123 (16 µm)
+ boundary segments: 126 (16 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 62
+ triple points: 64
  
  Properties: meanRotation, Id3d
 {% endhighlight %}

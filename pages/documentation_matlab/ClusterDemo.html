@@ -32,7 +32,6 @@ cs  = crystalSymmetry('432');
 ori = orientation.byEuler([10 40]*degree,[30 50]*degree,[50 70]*degree,cs)
 odf = unimodalODF(ori,'halfwidth',5*degree);
 
-
 % view the odf
 plotPDF(odf,Miller(1,0,0,odf.CS),'contour','linewidth',2);
 
@@ -44,7 +43,7 @@ r = ori * Miller(1,0,0,odf.CS);
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (432 → y←↑x)
+ori = orientation (432 → y↑→x)
   size: 1 x 2
  
   Bunge Euler angles in degree
@@ -80,6 +79,7 @@ r.antipodal = true;
 % plot the vectors.  Note that we no longer get an upper and lower
 % hemisphere plot; the antipodal symmetry tells MTEX they are equivalent
 % and so one sufficient to represent the data.
+
 plot(r,ind2color(cId))
 
 % annotate the cluster centers.
@@ -117,6 +117,8 @@ plotPDF(ori,ind2color(cId),Miller(1,0,0,cs),'all')
 </center>
 <p>If you have the statistics toolbox, you can make some calculations about the spread of points assigned to each cluster.</p>
 {% highlight matlab %}
+r = discreteSample(r,2000)
+
 % compute the full distance matrix between all combinations of vectors
 d = angle_outer(r,r);
 % convert all small values to zero to simplify later calculations
@@ -138,8 +140,11 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: ward's linkage specified with non-Euclidean
-dissimilarity matrix.
+r = vector3d (y↑→x)
+ size: 2000 x 1
+ antipodal: true
+Warning: ward's linkage specified with non-Euclidean dissimilarity
+matrix.
 {% endhighlight %}
 
 {% highlight matlab %}
