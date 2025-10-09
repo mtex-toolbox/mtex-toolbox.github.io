@@ -80,6 +80,11 @@ SO3F1 = SO3Fun.dubna
 SO3F2 = SO3FunHandle(@(rot) SO3F1.eval(rot))
 A = ones(2,3);
 SO3F3 = SO3F2.*A
+%calculate mean values of SO3Funs
+mean(SO3F2)
+mean(SO3F3)
+mean(SO3F3,2)
+mean(SO3F3,1)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -98,6 +103,21 @@ SO3F2 = SO3FunHandle (y↑→x → y↑→x)
 SO3F3 = SO3FunHandle (y↑→x → y↑→x)
   size: 2 x 3
   eval: @(rot)permute(SO3F1,[dim+1,1:dim]).*SO3F2.eval(rot)
+ 
+ans =
+    0.9999
+ans =
+    0.9999    0.9999    0.9999
+    0.9999    0.9999    0.9999
+ 
+ans = SO3FunHandle (y↑→x → y↑→x)
+  size: 2 x 1
+  eval: @(rot)mean(SO3F.eval(rot),varargin{1}+1)
+ 
+ 
+ans = SO3FunHandle (y↑→x → y↑→x)
+  size: 1 x 3
+  eval: @(rot)mean(SO3F.eval(rot),varargin{1}+1)
 {% endhighlight %}
 </div>
 </body>
