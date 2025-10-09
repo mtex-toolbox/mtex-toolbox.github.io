@@ -70,14 +70,39 @@ plotInnerFace(cS,N,'faceColor','blue','faceAlpha',0.5,'edgeColor','k')
             <tt>PatchProperty</tt>
          </td>
          <td>
-            <tt>see documentation of patch objects for manipulating the apperance, e.g. 'EdgeColor'</tt>
+            <tt><a href="mathworks.com/help/matlab/ref/matlab.graphics.primitive.patch-properties.html">all matlab patch properties</a></tt>
          </td>
       </tr>
    </table>
 </p>
 <h2 id="7">Example</h2>
-<p>cS = crystalShape.olivine; N = Miller(1,0,1,'hkl',cS.CS);</p>
-<p>plot(cS,'faceAlpha',0.2,'colored') hold on plotInnerFace(cS,N,'faceColor','blue','DisplayName','(101)') plotInnerFace(cS,Miller(0,1,1,cS.CS),'faceColor','red','DisplayName','(011)') hold off</p>
+{% highlight matlab %}
+cs = crystalSymmetry.load('Mg-Magnesium.cif');
+cS = crystalShape.hex(cs)
+sS = [slipSystem.pyramidal2CA(cs), ...
+      slipSystem.pyramidalA(cs)];
+%
+plot(cS,'faceAlpha',0.2)
+hold on
+plot(cS,sS(2),'faceColor','blue')
+plot(cS,sS(1),'faceColor','red')
+hold off
+%
+{% endhighlight %}
+
+{% highlight plaintext %}
+cS = crystalShape
+ mineral: Mg (6/mmm, X||a*, Y||b, Z||c*)
+ vertices: 12
+ faces: 8
+{% endhighlight %}
+<center>
+{% include inline_image.html file="crystalShape.plotSlipSystem_01.png" %}
+</center>
+<h2 id="8">See also</h2>
+<p>
+<a href="CrystalShapes.html">CrystalShapes</a>
+</p>
 </div>
 </body>
 </html>
