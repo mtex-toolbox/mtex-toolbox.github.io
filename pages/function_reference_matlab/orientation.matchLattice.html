@@ -25,7 +25,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>find lattice alignments for arbitrary misorientations</p>
 <h2 id="3">Description</h2>
-<p>Given a misorientation mori find all face normals n1, n2 and crystal directions d1, d2, such that mori * n1 = n2 and mori * d1 = d2.</p>
+<p>Given a misorientation mori find <b>all</b> face normals n1, n2 and crystal directions d1, d2, such that mori * n1 = n2 and mori * d1 = d2.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 matchLattice(mori)
@@ -73,32 +73,28 @@ matchLattice(mori)
 <h2 id="7">Example</h2>
 <p>revert sigma3 misorientation relationship</p>
 {% highlight matlab %}
-[n1,n2,d1,d2] = round2Miller(CSL(3,crystalSymmetry('432')))
+[n1,n2,d1,d2] = matchLattice(CSL(3,crystalSymmetry('432')))
 {% endhighlight %}
 
 {% highlight plaintext %}
 n1 = Miller (432)
-  h k l
-  1 1 1
+ size: 37 x 1
  
 n2 = Miller (432)
-  h k l
-  1 1 1
+ size: 37 x 1
  
 d1 = Miller (432)
-  u  v  w
-  0  1 -1
+ size: 37 x 1
  
 d2 = Miller (432)
-   u  v  w
-  -1  1  0
+ size: 37 x 1
 {% endhighlight %}
 <p>revert back Bain misorientation ship</p>
 {% highlight matlab %}
 cs_alpha = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Ferrite');
 cs_gamma = crystalSymmetry('m-3m', [3.66 3.66 3.66], 'mineral', 'Austenite');
 mori = orientation.Bain(cs_alpha,cs_gamma)
-[n_gamma,n_alpha,d_gamma,d_alpha] = round2Miller(mori)
+[n_gamma,n_alpha,d_gamma,d_alpha] = matchLattice(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -108,20 +104,72 @@ mori = misorientation (Ferrite → Austenite)
  
  
 n_gamma = Miller (Ferrite)
-  h k l
-  0 1 1
+ size: 13 x 1
+  h  k  l
+  0  1 -3
+  0  1 -2
+  0  1 -1
+  0  2 -1
+  0  3 -1
+  0  1  0
+  1  0  0
+  0  0  1
+  0  1  1
+  0  2  1
+  0  3  1
+  0  1  2
+  0  1  3
  
 n_alpha = Miller (Austenite)
-  h k l
-  0 0 1
+ size: 13 x 1
+  h  k  l
+  0  2 -1
+  0  3 -1
+  0  1  0
+  0  3  1
+  0  2  1
+  0  1  1
+  1  0  0
+  0 -1  1
+  0  0  1
+  0  1  3
+  0  1  2
+  0 -1  3
+  0 -1  2
  
 d_gamma = Miller (Ferrite)
-  u v w
-  1 0 0
+ size: 13 x 1
+  u  v  w
+  0  1 -3
+  0  1 -1
+  0  2 -1
+  0  3 -1
+  0  1  0
+  1  0  0
+  0  0  1
+  0  1  1
+  0  2  1
+  0  3  1
+  0  1  2
+  0  1  3
+  0  1 -2
  
 d_alpha = Miller (Austenite)
-  u v w
-  1 0 0
+ size: 13 x 1
+  u  v  w
+  0  2 -1
+  0  1  0
+  0  3  1
+  0  2  1
+  0  1  1
+  1  0  0
+  0 -1  1
+  0  0  1
+  0  1  3
+  0  1  2
+  0 -1  3
+  0 -1  2
+  0  3 -1
 {% endhighlight %}
 <h2 id="9">See also</h2>
 <p>
