@@ -1,5 +1,5 @@
 ---
-title: round2Miller
+title: orientation.round2Miller
 
 sidebar: function_reference_sidebar
 permalink: orientation.round2Miller.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>round2Miller</title>
+<title>orientation.round2Miller</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_orientation__round2Miller.m">
 </head>
@@ -23,9 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>find lattice alignements for arbitrary orientations and misorientations</p>
+<p>find lattice alignments for arbitrary orientations and misorientations</p>
 <h2 id="3">Description</h2>
-<p>Given an orienation ori find [hkl](uvw) such that ori * [hkl] = Z and ori * (uvw) = X.</p>
+<p>Given an orientation ori find [hkl](uvw) such that ori * [hkl] = Z and ori * (uvw) = X.</p>
 <p>Given a misorientation mori find corresponding face normals n1, n2 and crystal directions d1, d2, i.e., such that mori * n1 = n2 and mori * d1 = d2.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
@@ -83,11 +83,6 @@ To make changes, update the MATLAB code and republish this document.
 <p>revert sigma3 misorientation relationship</p>
 {% highlight matlab %}
 [n1,n2,d1,d2] = round2Miller(CSL(3,crystalSymmetry('432')))
-% revert back Bain misorientation ship
-cs_alpha = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Ferrite');
-cs_gamma = crystalSymmetry('m-3m', [3.66 3.66 3.66], 'mineral', 'Austenite');
-mori = orientation.Bain(cs_alpha,cs_gamma)
-[n_gamma,n_alpha,d_gamma,d_alpha] = round2Miller(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -106,7 +101,16 @@ d1 = Miller (432)
 d2 = Miller (432)
    u  v  w
   -1  1  0
- 
+{% endhighlight %}
+<p>revert back Bain misorientation ship</p>
+{% highlight matlab %}
+cs_alpha = crystalSymmetry('m-3m', [2.866 2.866 2.866], 'mineral', 'Ferrite');
+cs_gamma = crystalSymmetry('m-3m', [3.66 3.66 3.66], 'mineral', 'Austenite');
+mori = orientation.Bain(cs_alpha,cs_gamma)
+[n_gamma,n_alpha,d_gamma,d_alpha] = round2Miller(mori)
+{% endhighlight %}
+
+{% highlight plaintext %}
 mori = misorientation (Ferrite → Austenite)
  
  (011) || (001)   [100] || [100]
@@ -128,7 +132,7 @@ d_alpha = Miller (Austenite)
   u v w
   1 0 0
 {% endhighlight %}
-<h2 id="8">See also</h2>
+<h2 id="9">See also</h2>
 <p>
 <a href="CSL.html">CSL</a>
 </p>
