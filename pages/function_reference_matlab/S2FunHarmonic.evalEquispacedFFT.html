@@ -1,0 +1,92 @@
+---
+title: S2FunHarmonic.evalEquispacedFFT
+
+sidebar: function_reference_sidebar
+permalink: S2FunHarmonic.evalEquispacedFFT.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>S2FunHarmonic.evalEquispacedFFT</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2FunHarmonic__evalEquispacedFFT.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/S2Fun/@S2FunHarmonic/evalEquispacedFFT.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Evaluate an <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a> on an equispaced grid in spherical coordinates \[(\theta_a,\rho_b) = (\frac{\pi a}{Htheta-1},\frac{2\pi b}{Hrho})\] where \(a=0,...,Htheta-1\) and \(b=0,...,Hrho-1\).</p>
+<p>Therefore we transform the Harmonic series to an ordinary Fourier series equivalent as in the function <a href="S2FunHarmonic.eval.html"><code class="language-plaintext highlighter-rouge">eval</code></a>. Afterwards, we use an equispaced FFT instead of the NFFT.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+f = evalEquispacedFFT(sF,v)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>v</tt>
+         </td>
+         <td>
+            <tt><a href="quadratureS2Grid.quadratureS2Grid.html">quadratureS2Grid</a> - 'ClenshawCurtis'</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>f</tt>
+         </td>
+         <td>
+            <tt>values at this grid points</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Example</h2>
+<p>construct quadrature grid and evaluate there. Output will be a unique part of this grid</p>
+{% highlight matlab %}
+sF = S2FunHarmonic.smiley;
+v = quadratureS2Grid(100,'ClenshawCurtis');
+f = evalEquispacedFFT(sF,v);
+{% endhighlight %}
+<p>for big grid sizes the construction of the quadrature grid is memory expansive. Hence construct a struct, but the output is full sized</p>
+{% highlight matlab %}
+v = struct('scheme','ClenshawCurtis','bandwidth',1500)
+f = evalEquispacedFFT(sF,v);
+{% endhighlight %}
+
+{% highlight plaintext %}
+v = 
+  struct with fields:
+
+       scheme: 'ClenshawCurtis'
+    bandwidth: 1500
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="S2FunHarmonic.eval.html">S2FunHarmonic.eval</a> <a href="S2FunHarmonic.evalNFSFT.html">S2FunHarmonic.evalNFSFT</a>
+</p>
+</div>
+</body>
+</html>

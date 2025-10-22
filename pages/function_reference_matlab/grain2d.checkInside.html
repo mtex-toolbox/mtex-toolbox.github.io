@@ -113,41 +113,12 @@ isInside = checkInside(hostGrains, ebsd)
 </p>
 <h2 id="8">Example</h2>
 {% highlight matlab %}
-ebsd = mtexdata('small')
-grains = calcGrains(ebsd('indexed'))
+mtexdata small silent
+grains = calcGrains(ebsd('indexed'));
 plot(grains(75))
 hold on
 plot(grains(grains(75).checkInside(grains)),'facecolor','red')
 hold off
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSD (y↑→x)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    1197 (32%)  notIndexed                                                 
-     1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
-     2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
- 
- Properties: bands, bc, bs, error, mad
- Scan unit : um
- X x Y x Z : [33000, 36000] x [4500, 7500] x [0, 0]
- Normal vector: (0,0,1)
- 
- 
-grains = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry  Crystal reference frame
-     1      24    1952  Forsterite       mmm                         
-     2       8     290   Enstatite       mmm                         
-     3      44     282    Diopside     12/m1       X||a*, Y||b*, Z||c
- 
- boundary segments: 1139 (52148 µm)
- inner boundary segments: 22 (1101 µm)
- triple points: 68
- 
- Properties: meanRotation, GOS
 {% endhighlight %}
 <center>
 {% include inline_image.html file="grain2d.checkInside_01.png" %}

@@ -1,0 +1,80 @@
+---
+title: S2FunHarmonic.sphericalHarmonicTrafo
+
+sidebar: function_reference_sidebar
+permalink: S2FunHarmonic.sphericalHarmonicTrafo.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>S2FunHarmonic.sphericalHarmonicTrafo</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2FunHarmonic__sphericalHarmonicTrafo.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/S2Fun/@S2FunHarmonic/sphericalHarmonicTrafo.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>The spherical harmonic transform transfers a given harmonic series \[ \sum_{n=0}^N\sum_{k=-n}^n \hat{f}_n^{k} Y_n^{k}(\theta,\phi)\] into a bivariate Fourier series \[ \sum_{k,j=-N}^N \hat{g}_{k,j} e^{-i \, (k\alpha+j\beta+l\gamma)}.\] Therefore we just transform the harmonic coefficients \(\hat{f}_n^{k}\) into Fourier coefficients \(\hat{g}_{k,j}\) by the linear operator \[\hat{g}_{k,j} = i^{k} \, \sum_{n = \max \{|k|,|j|\} }^N \sqrt{2n+1}\, \hat{f}_n^{k} \, d_n^{j,k}(0) \, d_n^{j,0}(0).\]</p>
+<p>Normally the indices of the output Fourier array ghat(k,j) runs over k,j=-N,...,N.</p>
+<p>If SO3F is real valued the Fourier array ghat(k,j) is of size k = 0,...,N j = -N,...,N.</p>
+<p>If we want to use the NFFT on this Fourier array, we have to make the size even, as the index set of the NFFT is -(N+1),...,N. Hence the flag 2^1 (make output even) yields ghat(k,j) of size k = 0,...,N+mod(N+1,2) j = -(N+1),...,N</p>
+<p>flags: 2^0 -&gt; use L_2-normalized Wigner-D functions 2^1 -&gt; make size of output Fourier array (ghat) even in every dimension 2^2 -&gt; fhat are the Fourier coefficients of a real valued function 2^3 -&gt; fhat are the Fourier coefficients of a antipodal function 2^4 -&gt; use symmetry property in case of S2FunHarmonicSym (not implemented yet)</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+ghat = sphericalHarmonicTrafo(sF)
+ghat = sphericalHarmonicTrafo(sF,flags,'bandwidth',N)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>N</tt>
+         </td>
+         <td>
+            <tt>double (bandwidth)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>flags</tt>
+         </td>
+         <td>
+            <tt>value (2^0+2^1+...)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ghat</tt>
+         </td>
+         <td>
+            <tt>double array (Fourier array with indices kxj --&gt; theta x rho \in [0,pi]x[0,2pi))</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+</div>
+</body>
+</html>

@@ -23,25 +23,35 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>evaluates the spherical harmonic on a given set of points</p>
-<h2 id="3">Syntax</h2>
+<p>point-wise evaluation</p>
+<h2 id="3">Description</h2>
+<p>Evaluates the spherical function \(f\) on a given set of points using a representation based coefficient transform, that transforms a series of spherical harmonics into a bivariate Fourier series and using NFFT at the end.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
-f = eval(sF,v)
+f = eval(SO3F,rot)
 {% endhighlight %}
-<h2 id="4">Input</h2>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>v</tt>
+            <tt>SO3F</tt>
          </td>
          <td>
-            <tt><a href="vector3d.vector3d.html">vector3d</a> interpolation nodes</tt>
+            <tt><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rot</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a> (evaluation nodes)</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -49,10 +59,48 @@ f = eval(sF,v)
             <tt>f</tt>
          </td>
          <td>
-            <tt>double</tt>
+            <tt>double [numrot x size(S2F)]</tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>cut bandwidth of the harmonic series in evaluation process</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>nfsft</tt>
+         </td>
+         <td>
+            <tt>use Nonequispace Fast Fourier Transform of the NFFT3 Toolbox (expensive precomputations)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noNFFT</tt>
+         </td>
+         <td>
+            <tt>do direct evaluation of the harmonic series for every vector3d (Works for very high bandwidth if the nfft runs out of memory, but gets expensive for many vector3ds. Hence number of vector3ds should be less than 100)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="S2FunHarmonic.evalNFSFT.html">S2FunHarmonic.evalNFSFT</a>
 </p>
 </div>
 </body>
