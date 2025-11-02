@@ -24,7 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <h2 id="1">Directions vs. Axes</h2>
-<p>In MTEX it is possible to consider three dimensional vectors either as directions or as axes. The key option to distinguish between both interpretations is <b>antipodal</b>.</p>
+<p>In MTEX it is possible to consider three dimensional vectors either as directions or as axes. The key option to distinguish between both interpretations is <code class="language-plaintext highlighter-rouge">'antipodal'</code>.</p>
 <p>Consider a pair of vectors</p>
 {% highlight matlab %}
 v1 = vector3d(1,1,2);
@@ -37,23 +37,23 @@ plot([v1,v2],'label',{'v_1','v_2'})
 <center>
 {% include inline_image.html file="VectorsAxes_01.png" %}
 </center>
-<p>These vectors will appear either on the upper or on the lower hemisphere. In order to treat these vectors as axes, i.e. in order to assume antipodal symmetry - one has to use the keyword <b>antipodal</b>.</p>
+<p>These vectors will appear either on the upper or on the lower hemisphere. In order to treat these vectors as axes, i.e. in order to assume antipodal symmetry - one has to use the keyword <code class="language-plaintext highlighter-rouge">'antipodal'</code>.</p>
 {% highlight matlab %}
 plot([v1,v2],'label',{'v_1','v_2'},'antipodal')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsAxes_02.png" %}
 </center>
-<p>Now the direction <b>v_2</b> is identified with the direction <b>-v_2</b> which plots at the upper hemisphere.</p>
+<p>Now the direction <code class="language-plaintext highlighter-rouge">v2</code> is identified with the direction <code class="language-plaintext highlighter-rouge">-v2</code> which plots at the upper hemisphere.</p>
 <h2 id="5">The Angle between Directions and Axes</h2>
-<p>As a consequence the angle between two axes <b>v1</b>, <b>v2</b> will always be the smallest angle between the directions <b>v1</b>, <b>v2</b> and <b>v1</b>, <b>-v2</b>, i.e. it will always be smaller than 90 degree. In the absence of antipodal symmetry we obtain</p>
+<p>As a consequence the angle between two axes <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">v2</code> will always be the smallest angle between the directions <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">v2</code> and <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">-v2</code>, i.e. it will always be smaller than 90 degree. In the absence of antipodal symmetry we obtain</p>
 {% highlight matlab %}
 angle(v1,v2) / degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-       109.47
+  109.4712
 {% endhighlight %}
 <p>whereas, if antipodal symmetry is assumed we obtain</p>
 {% highlight matlab %}
@@ -62,7 +62,7 @@ angle(v1,v2,'antipodal') / degree
 
 {% highlight plaintext %}
 ans =
-       70.529
+   70.5288
 {% endhighlight %}
 <h2 id="7">Antipodal Symmetry in Density Estimation</h2>
 <p>Another example, where antipodal symmetry matters is <a href="VectorsDensityEstimation.html">density estimation</a>. For ordinary directions we obtain an arbitrary spherical function</p>
@@ -102,7 +102,7 @@ CS = pf.CS;
 % plot the first pole figure
 plot(pf({1}))
 
-% annotate a axis on the souther hemisphere
+% annotate a axis on the southern hemisphere
 annotate(vector3d(1,0,-1),'labeled','backgroundColor','w')
 {% endhighlight %}
 

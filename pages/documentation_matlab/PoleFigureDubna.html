@@ -27,7 +27,6 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 % specify crystal and specimen symmetry
 CS = crystalSymmetry('-3m',[4.9 4.9 5.4]);
-SS = specimenSymmetry;
 
 % specify file names
 fname = {...
@@ -44,7 +43,7 @@ h = {Miller(1,0,-1,0,CS),...
 c = {1,[0.52 ,1.23],1};
 
 % import data
-pf = PoleFigure.load(fname,h,CS,SS,'interface','dubna','superposition',c);
+pf = PoleFigure.load(fname,h,CS,'interface','dubna','superposition',c);
 
 plot(pf)
 mtexColorbar
@@ -76,7 +75,8 @@ isOutlier(pf);
 ans =
      0     0     0
 ans =
-         89.8         1360          962
+   1.0e+03 *
+    0.0898    1.3600    0.9620
 {% endhighlight %}
 <h2 id="4">Manipulate pole figure data</h2>
 {% highlight matlab %}
@@ -178,12 +178,12 @@ plot(rec,'sections',6)
 rec = SO3FunRBF (m-3m → y↑→x (222))
  
   uniform component
-  weight: 0.73
+  weight: 0.74
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 10°
   center: 150 orientations, resolution: 10°
-  weight: 0.27
+  weight: 0.26
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureDubna_05.png" %}
@@ -214,9 +214,9 @@ calcError(pf_SantaFe,rec_ng)
 
 {% highlight plaintext %}
 ans =
-     0.020213     0.026088      0.02401
+    0.0245    0.0286    0.0270
 ans =
-     0.035819     0.028307     0.025212
+    0.0358    0.0283    0.0252
 {% endhighlight %}
 <p>
 <b>Difference plot</b>
@@ -237,9 +237,9 @@ calcError(SantaFe,rec_ng)
 
 {% highlight plaintext %}
 ans =
-      0.03115
+    0.0359
 ans =
-      0.08928
+    0.0893
 {% endhighlight %}
 <h2 id="16">Exercises</h2>
 <p>3)</p>
