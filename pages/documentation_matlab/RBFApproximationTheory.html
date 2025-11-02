@@ -77,7 +77,7 @@ meanValue = mean(SO3F)
 minValue =
    1.1635e-06
 meanValue =
-            1
+    1.0000
 {% endhighlight %}
 <p>One has to keep in mind that we can not expect the error in the data nodes to be zero, because we compute a smooth function from the noisy input data.</p>
 {% highlight matlab %}
@@ -86,7 +86,7 @@ norm(SO3F.eval(ori) - val) / norm(val)
 
 {% highlight plaintext %}
 ans =
-      0.16394
+    0.1639
 {% endhighlight %}
 <p>In contrast, if we do not tell MTEX, that we try to approximate a density function, the solver has less information and the result is not denoised.</p>
 {% highlight matlab %}
@@ -114,9 +114,9 @@ meanValue = mean(SO3F)
 
 {% highlight plaintext %}
 minValue =
-      -6.7665
+   -6.7665
 meanValue =
-      0.95183
+    0.9518
 {% endhighlight %}
 <p>But since it is not denoised, it is overfitted and the error becomes small.</p>
 {% highlight matlab %}
@@ -125,7 +125,7 @@ norm(SO3F.eval(ori) - val) / norm(val)
 
 {% highlight plaintext %}
 ans =
-   0.00047854
+   4.7854e-04
 {% endhighlight %}
 <h2 id="11">Adjustment of the Kernel Function</h2>
 <p>The key parameter when approximating by radial basis functions is the halfwidth of the kernel function \(\Psi\). This can be set by the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code>. A large halfwidth results in a very smooth approximated function whereas a very small halfwidth - in relation to the grid of the input data - may result in overfitting.</p>
@@ -153,6 +153,9 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+ 
 SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
@@ -173,6 +176,8 @@ plot(SO3F,'sigma')
 {% highlight plaintext %}
 S3G = SO3Grid (1 → y↑→x)
   grid: 119088 orientations, resolution: 5°
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
  
 SO3F = SO3FunRBF (1 → y↑→x)
  
@@ -199,6 +204,21 @@ set(gca,'xdir','reverse')
 xlabel('halfwidth [deg]')
 ylabel('relative error')
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet.
+{% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_07.png" %}
 </center>
@@ -209,6 +229,9 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
+ 
 SO3F = SO3FunRBF (1 → y↑→x)
  
   multimodal components
@@ -231,6 +254,8 @@ psi = SO3AbelPoissonKernel
   bandwidth: 48
   halfwidth: 5°
  
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
  
 SO3F = SO3FunRBF (1 → y↑→x)
  
@@ -253,7 +278,7 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 12.981919 seconds.
+Elapsed time is 44.258961 seconds.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RBFApproximationTheory_10.png" %}
@@ -266,7 +291,7 @@ norm(SO3F.eval(ori) - S.values) / norm(S.values)
 
 {% highlight plaintext %}
 ans =
-   0.00090528
+   9.0528e-04
 {% endhighlight %}
 <p>Also, interpolation might not guarantee non-negativity of the function</p>
 {% highlight matlab %}
@@ -275,7 +300,7 @@ minValue = min(SO3F)
 
 {% highlight plaintext %}
 minValue =
-      -7.6067
+   -7.6067
 {% endhighlight %}
 <h2 id="20">LSQR-Parameters</h2>
 <p>The <code class="language-plaintext highlighter-rouge">lsqr</code> solver and the <code class="language-plaintext highlighter-rouge">mlsq</code> solver, which are used to minimize the least squares problem from above has some predefined termination conditions. We can specify the method tolerance with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 30/100).</p>
@@ -297,11 +322,11 @@ fprintf(['Number of iterations = ',num2str(iter2),'\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 0.231642 seconds.
+Elapsed time is 0.526832 seconds.
 Number of iterations = 8
 Value of energy functional = 0.43171
 
-Elapsed time is 0.335624 seconds.
+Elapsed time is 0.902962 seconds.
 Number of iterations = 41
 Value of energy functional = 0.0015935
 {% endhighlight %}
