@@ -75,7 +75,7 @@ norm(SO3F.eval(ori) - S.values) / norm(S.values)
 
 {% highlight plaintext %}
 ans =
-      0.11017
+    0.1102
 {% endhighlight %}
 <p>The reason for this difference is that MTEX by default applies regularization. The default regularization parameter is \(\lambda = 5\cdot 10^{-7}\). We can switch off regularization by setting this value to \(0\).</p>
 {% highlight matlab %}
@@ -96,7 +96,7 @@ SO3F = SO3FunHarmonic (1 → y↑→x)
   weight: 0.98
  
 ans =
-     0.051458
+    0.0515
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_03.png" %}
@@ -118,7 +118,7 @@ SO3F = SO3FunHarmonic (1 → y↑→x)
   weight: 0.99
  
 ans =
-      0.10637
+    0.1064
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_04.png" %}
@@ -130,7 +130,7 @@ min(SO3F)
 
 {% highlight plaintext %}
 ans =
-      -12.426
+  -12.4262
 {% endhighlight %}
 <p>The possibility to guaranty non negativity is the central advantage of kernel based approximation.</p>
 <h2 id="11">Approximation by Radial Functions</h2>
@@ -145,8 +145,10 @@ plot(SO3F,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet. 
 ans =
-     0.012466
+    0.0125
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_05.png" %}
@@ -162,7 +164,7 @@ meanValue = mean(SO3F)
 minValue =
    3.3899e-05
 meanValue =
-            1
+    1.0000
 {% endhighlight %}
 <p>The key parameter when approximation by radial functions is the halfwidth of the kernel function. This can be set by the option <code class="language-plaintext highlighter-rouge">'halfwidth'</code>. A large halfwidth results in a very smooth approximating function whereas a very small halfwidth may result in overfitting</p>
 {% highlight matlab %}
@@ -170,6 +172,11 @@ psi = SO3DeLaValleePoussinKernel('halfwidth',2.5*degree);
 SO3F = interp(ori,S.values,'kernel',psi,'density');
 
 plot(SO3F,'sigma')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may not
+have converged to the optimum yet.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_06.png" %}
@@ -187,7 +194,7 @@ plot(SO3F,'sigma')
 
 {% highlight plaintext %}
 ans =
-   0.00061048
+   6.1048e-04
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunApproximationTheory_07.png" %}
@@ -201,9 +208,9 @@ meanValue = mean(SO3F)
 
 {% highlight plaintext %}
 minValue =
-      -6.0528
+   -6.0528
 meanValue =
-      0.98063
+    0.9806
 {% endhighlight %}
 <h2 id="17">Approximation using the Bingham distribution</h2>
 <p>Approximation with the Bingham distribution currently works only with no symmetry.</p>
