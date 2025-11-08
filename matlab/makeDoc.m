@@ -1,5 +1,7 @@
 function makeDoc(varargin)
 
+obj = onCleanup(@delete);
+
 addpath ../../makeDoc; DocHelpInstall;
 
 dispPerm('start building documentation ...')
@@ -131,9 +133,13 @@ end
 
 %% set back mtex options
 
+end
+
+function delete
+
+global mtex_progress;
 setMTEXpref('generatingHelpMode',false);
 mtex_progress = 1;
 
 end
-
 
