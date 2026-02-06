@@ -8,6 +8,12 @@ folder: workshops
 toc: false
 ---
 
+<div markdown="span" class="alert alert-info" role="alert">
+	<i class="fa fa-info-circle"></i> 
+	<b>Important:</b> Deadline has been extended until 20.02.2026
+</div>
+
+
 *This two-week workshop is accredited as the module {% include reference.html
 link="" content="Introduction into Crystallographic Texture Analysis" %} and
 earns you 5 ECTS points. Participation is possible both in person and
@@ -400,7 +406,7 @@ their talks as accessible as possible.
    
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Zachary-Michels"
-  content="Zachary D. Michels" %}** (University of Minnesota)
+  content="Zachary D. Michels" %}** (University of Minnesota): Grains With Benefits — EBSD maps as a platform for correlative analysis
   
 - **{% include reference.html
   link="https://tu-freiberg.de/hochdruck/mitarbeiter/ag-angewandte-werkstoffwissenschaft-leineweber"
@@ -848,7 +854,7 @@ their talks as accessible as possible.
 ## Registration:
 
 - Please register at {% include reference.html link="https://tickets.acatrain.net/mtex-2026/" content="https://tickets.acatrain.net/mtex-2026/" %}
- - Deadline for registration is 31st of January 2026
+<!--- Deadline for registration is 31st of January 2026-->
 
 ## Registration Fee:
 - first + second week (presence):  (PhD) students - 400 Euro, other - 600 Euro
