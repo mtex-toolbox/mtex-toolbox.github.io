@@ -150,7 +150,7 @@ pole figures, inverse pole figures, fundamental sectors
 			<div class="panel-body">
 				<div markdown="span">
 
-**Lecture 3 - Grains (Rüdiger Kilian)**
+**Lecture 3 - Grains (Morales)**
 {% include reference.html link="https://drive.google.com/file/d/17HZscVF9GNmF4Eq3fIke0jjZBqxpyM0N/view?usp=sharing" content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/Sx94YkaXq5o" content="video" class="course_material" %}
@@ -329,14 +329,14 @@ content="script" class="course_material" %}
 		<div id="collapseFriday" class="panel-collapse collapse noCrossRef">
 			<div class="panel-body">
 				<div markdown="span">
-**Lecture 8 - Plasticity (Ralf Hielscher)**
+**Lecture 8 - Tensorial Properties (Louis Morales)**
 {% include reference.html
 link="https://drive.google.com/file/d/1eAUjMh8sG7ggzNHsEf9x2Lmg4g52R_Rk/view?usp=sharing"
 content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/7pftx1iq-HY" content="video" class="course_material" %}
 <br>
-deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
+elasticity, piezoelectratricity
 <br>
 <br>
 **Exercise 8 - Plasticity**
@@ -402,7 +402,8 @@ their talks as accessible as possible.
 
 - **{% include reference.html
   link="https://www.mpie.de/person/43193/3079071"
-  content="Stefan Zaefferer" %}** (MPI for sustainable materials Düsseldorf)
+  content="Stefan Zaefferer" %}** (MPI for sustainable materials Düsseldorf):
+  Investigating defect crystallography using diffraction techniques in the SEM
    
 - **{% include reference.html
   link="https://www.researchgate.net/profile/Zachary-Michels"
