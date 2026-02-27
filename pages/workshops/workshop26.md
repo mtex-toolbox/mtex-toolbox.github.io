@@ -8,17 +8,25 @@ folder: workshops
 toc: false
 ---
 
-<div markdown="span" class="alert alert-info" role="alert">
+<!--<div markdown="span" class="alert alert-info" role="alert">
 	<i class="fa fa-info-circle"></i> 
 	<b>Important:</b> Deadline has been extended until 20.02.2026
-</div>
+</div>-->
 
+{% capture par_default %}
+	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
+{% endcapture %}
+{% capture par_access %}
+	You are logged in.
+	{% include reference.html link="https://eu02web.zoom-x.de/j/67477302754?pwd=XLmMUqc4aKJG274GxbeWaUwVeuorQh.1" content="Enter Workshop zoom session" %}
+{% endcapture %}
+{% include password_access_restriction.html content_default=par_default content_access=par_access %}
 
-*This two-week workshop is accredited as the module {% include reference.html
+<!--*This two-week workshop is accredited as the module {% include reference.html
 link="" content="Introduction into Crystallographic Texture Analysis" %} and
 earns you 5 ECTS points. Participation is possible both in person and
 remotely. You may also join for a single week, or combine on-site and remote
-participation.*
+participation.-->
 
 **Week 1 (02.03 - 06.03):** Do you work with EBSD or XRD to analyze microstructures and textures?
 Then this workshop will take your skills to the next level. You will
@@ -32,9 +40,6 @@ Then this workshop will take your skills to the next level. You will
 * become confident with powerful visualization techniques
 * discover that MTEX enables you to do (almost) everything you can imagine with your data
 
-<!-- The first week is primarily devoted to beginners in
-MTEX and/or texture analysis. -->
-
 **Week 2 (9.03. - 12.03.):** The second week brings together researchers, PhD students, and
 industry practitioners who apply quantitative methods to study crystalline
 microstructures. Participants will present case studies, share workflows, and
@@ -44,21 +49,6 @@ and breakout sessions. Whether your focus is in metallurgy, geology,
 semiconductors, or beyond, this week is designed to foster cross-disciplinary
 interaction, help you tackle your own data challenges, and spark collaboration
 across academia and practice.
-
-<!--
-The second week brings together researches, PhD students and
-people from industry that are interested in quantitative methods for
-the analysis of crystalline microstructures. -->
-
-<!--The second week brings together MTEX users of varying experience levels to
-share use cases, tips and tricks, and to discuss recent and upcoming
-developments in MTEX.-->
-
-
-<!--<div markdown="span" class="alert alert-info" role="alert">
-	<i class="fa fa-info-circle"></i> 
-	<b>Important:</b> Deadline has been extended until 21.02.2026
-</div>-->
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX
 
@@ -411,11 +401,9 @@ their talks as accessible as possible.
   
 - **{% include reference.html
   link="https://tu-freiberg.de/hochdruck/mitarbeiter/ag-angewandte-werkstoffwissenschaft-leineweber"
-  content="Andreas Leineweber" %}** (TU Bergakademie Freiberg)
+  content="Andreas Leineweber" %}** (TU Bergakademie Freiberg): Dealing with complicated crystal structures
 
-- to be announced
 
-- to be announced
 
   
 <!--  
