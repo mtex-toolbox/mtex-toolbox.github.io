@@ -82,14 +82,15 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 <br>
 <br>
 **Lecture 1 - EBSD (Rüdiger Kilian)**
-{% include reference.html link="https://drive.google.com/file/d/1PreAu1jdBvwDnKhFks9N-ohs4g2PxRz4/view?usp=sharing" content="slides" class="course_material" %}
+<!--{% include reference.html link="https://drive.google.com/file/d/1PreAu1jdBvwDnKhFks9N-ohs4g2PxRz4/view?usp=sharing" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/36Fgq7ek9h0" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/36Fgq7ek9h0" content="video" class="course_material" %}-->
 <br>
 principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 <br>
 **Exercise 1**
+<!--
 {% include reference.html link="https://drive.google.com/file/d/1a0CGSfltrMGcA9KDFjexgyOtAo2iYrXc/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/13_FdIRMJSgew6xS8oLJo2zmqY8cC34wc/view?usp=sharing" content="solution" class="course_material" %}
@@ -98,16 +99,16 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/r8h7WpNlWdA" content="video" class="course_material" %}
 <br>
-<br>
+<br>-->
 
 *Lunch*
 
 <br>
 <br>
 **Lecture 2 - Orientations and Symmetries (Ralf Hielscher)**
-{% include reference.html link="https://drive.google.com/file/d/1LgYLfPbBmcoJXy7cTpQeCrIB5IQGG2Ic/view?usp=sharing" content="slides" class="course_material" %}
+<!--{% include reference.html link="https://drive.google.com/file/d/1LgYLfPbBmcoJXy7cTpQeCrIB5IQGG2Ic/view?usp=sharing" content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/uzeO9mPit5Q" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/uzeO9mPit5Q" content="video" class="course_material" %}-->
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
@@ -116,11 +117,12 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
 **Exercise 2**
+<!--
 {% include reference.html link="https://drive.google.com/file/d/1TdchUXZwoRLw_FWujkp3qTxRerBYg_Gx/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="data" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/lIPZlFBINxM" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/lIPZlFBINxM" content="video" class="course_material" %}-->
 <br>
 <br>
 				</div>
@@ -142,23 +144,24 @@ pole figures, inverse pole figures, fundamental sectors
 
 **Lecture 3 - Grains (Morales)**
 {% include reference.html link="https://drive.google.com/file/d/17HZscVF9GNmF4Eq3fIke0jjZBqxpyM0N/view?usp=sharing" content="slides" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/Sx94YkaXq5o" content="video" class="course_material" %}
+<!--<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/Sx94YkaXq5o" content="video" class="course_material" %}-->
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
 <br>
 **Exercise 3**
+<!--
 {% include reference.html link="https://drive.google.com/file/d/1d91FOtsBOqNVXyYm8hsYTlJEY4Q_awdU/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/NdN1DEptEKs" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/NdN1DEptEKs" content="video" class="course_material" %}-->
 <br>
 <br>
 *Lunch*
 <br>
 <br>
 **Lecture 4 - Misorientations and Grain Boundaries (Vivian Tong)**
-{% include reference.html
+<!--{% include reference.html
 link="https://drive.google.com/file/d/1rudtwJ8ExuvgSShdEXJvB-1A4itiH4A9/view?usp=sharing"
 content="slides" class="course_material" %}
 <span class="course_material">, </span>
@@ -166,7 +169,7 @@ content="slides" class="course_material" %}
 link="https://drive.google.com/file/d/1MpCHvNO8NnRTLmzu8ad_QFu2rYO24GjB/view?usp=sharing"
 content="mlx-script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/5a0iUUmVuis" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/5a0iUUmVuis" content="video" class="course_material" %}-->
 <br>
 grain boundary misorientations, misorientation axis, misorientation angle,
 KAM, GOS, IGMA, twin boundaries, tilt vs. twist
@@ -174,6 +177,7 @@ boundaries, orientation, gradients,  statistics of boundary networks
 <br>
 <br>
 **Exercise 4**
+<!--
 {% include reference.html
 link="https://drive.google.com/file/d/1dJjI58COp9t1ch1IwDQQac_xWUaZnfky/view?usp=sharing"
 content="script" class="course_material" %}
@@ -187,7 +191,7 @@ link="https://drive.google.com/file/d/1teNm_JDZ_ZCpo3W_IDzcdIzPD6MWKzu4/view?usp
 content="mlx-script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/tvPOQttwTsQ" content="video" class="course_material" %}
-
+-->
 <br>
 <br>
 				</div>
@@ -210,15 +214,6 @@ content="mlx-script" class="course_material" %}
 				<div markdown="span">
 					
 **Lecture 5 - Density Functions (Ralf Hielscher)**
-{% include reference.html
-link="https://drive.google.com/file/d/1Pwo9CGL_aO1ncYvF3A31J8dgcy4V6ueh/view?usp=sharing"
-content="slides 1" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html
-link="https://drive.google.com/file/d/1Hx1AMgQ1rnZsoCZfiV0AZ-4vTqM2uIzt/view?usp=sharing"
-content="slides 2" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/vm6mxAqG9i0" content="video" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -226,11 +221,6 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 5**
-{% include reference.html
-link="https://drive.google.com/file/d/1RmzHMBJxijueky9HyLFnVDIYLRdFwcAY/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/-YH-Oi_F_aY" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
@@ -256,25 +246,11 @@ content="script" class="course_material" %}
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 6 - How to set up your EBSD map correctly (Vivian Tong)**
-{% include reference.html
-link="https://drive.google.com/file/d/1nDdx5UFoGMdjyaAuzwRXfLT8gSj84Py9/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/IAR41HANlIk" content="video" class="course_material" %}
 <br>
 Correction of spatial coordinates, reference frame alignment, denoising
 <br>
 <br>
 **Exercise 6 - TrueEBSD for intragranular misorientation analysis**
-{% include reference.html
-link="https://drive.google.com/file/d/1vun0c1ym568uiZBmwafF7PplvN1Jym9p/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html
-link="https://drive.google.com/file/d/1gUPiui-ZZWZKstFi3ZHm9h30OlKw-_VU/view?usp=sharing"
-content="mlx-script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/2-5ge1adsmU" content="video" class="course_material" %}
 <br>
 
 <br>
@@ -283,11 +259,6 @@ content="mlx-script" class="course_material" %}
 <br>
 <br>
 **Lecture 7 - Quantitative Microstructure Analysis (Rüdiger Kilian)**
-{% include reference.html
-link="https://drive.google.com/file/d/1AQRAxuk3PC7ivHV7RRW-edCPhfmjkmC_/view?usp=sharing"
-content="slides" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/mVsxlnV9dpE" content="video" class="course_material" %}
 <br>
 grain shape, grain boundary and grain size statistics
 <br>
@@ -296,11 +267,6 @@ combining MTEX with external software like VPSC-->
 <br>
 <br>
 **Exercise 7 - Fabric Analysis**
-{% include reference.html
-link="https://drive.google.com/file/d/1XX2VRt3Khz1eL1QqkHAofXNfNmqNJ4e-/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/Ucb-PzagA9c" content="video" class="course_material" %}
 <br>
  			  </div>
 			</div>
@@ -320,32 +286,17 @@ content="script" class="course_material" %}
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 8 - Tensorial Properties (Louis Morales)**
-{% include reference.html
-link="https://drive.google.com/file/d/1eAUjMh8sG7ggzNHsEf9x2Lmg4g52R_Rk/view?usp=sharing"
-content="slides" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/7pftx1iq-HY" content="video" class="course_material" %}
 <br>
 elasticity, piezoelectratricity
 <br>
 <br>
 **Exercise 8 - Plasticity**
-{% include reference.html
-link="https://drive.google.com/file/d/1Jt-07bOPJg3Hbj7ji0vDM2jN01eeUBNE/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/pOVaIV_exjs" content="video" class="course_material" %}
 <br>
 <br>
 *lunch*
 <br>
 <br>
 **Lecture 9 - Parent Grain Reconstruction (Ralf Hielscher)**
-{% include reference.html
-link="https://drive.google.com/file/d/16hMEm7-59sGMpIJ2unSEsjynvpEbhAEK/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/yY359NPY7oA" content="video" class="course_material" %}
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
@@ -354,17 +305,7 @@ maps, dislocation density estimation, weighted Burgers vector, habit planes dete
 <br>
 <br>
 **Free Discussion of Personal Data Sets**
-{% include reference.html
-link="https://drive.google.com/file/d/1xOrOdT3FtWyhqmBHfDfAUAKg1ZOXZsoG/view?usp=sharing"
-content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html
-link="https://drive.google.com/file/d/1WTBzzE0U2LllmrG775QeEXVlbF0pN8i7/view?usp=sharing"
-content="data 1" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html
-link="https://drive.google.com/file/d/1vYVFljdnyYxWI0FqIIDgDja4gziNpH8f/view?usp=sharing"
-content="data 2" class="course_material" %}
+
 				</div>
 			</div>
 		</div>
