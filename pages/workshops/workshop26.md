@@ -73,8 +73,8 @@ practical examples during the exercises within MTEX.
 				<div markdown="span">
 <!--Monday-->
 **Lecture 0 - General Concepts:**
-{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
-<span class="course_material">, </span>
+<!--{% include reference.html link="https://videocampus.sachsen.de/m/24eab5953e110fa2eae768bd31eb70d0877d914d403d14f25f5aec82d082bf2186b107e2797207d5f29883543711d151840d694f65eb99b7b2ea687318f2b212" content="video" %}
+<span class="course_material">, </span>-->
 {% include reference.html link="https://drive.google.com/file/d/1y0ewXfouvFl1pJnrscxQ6FCO89x2OzD_/view?usp=sharing"
 	content="slides" class="course_material" %}
 <br>
@@ -82,7 +82,8 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 <br>
 <br>
 **Lecture 1 - EBSD (Rüdiger Kilian)**
-<!--{% include reference.html link="https://drive.google.com/file/d/1PreAu1jdBvwDnKhFks9N-ohs4g2PxRz4/view?usp=sharing" content="slides" class="course_material" %}
+{% include reference.html link="https://drive.google.com/file/d/1jCut1nthKIP54mvXzHGVTAG0VC1P-PYp/view?usp=drive_link"	content="slides" class="course_material" %}
+<!--
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/36Fgq7ek9h0" content="video" class="course_material" %}-->
 <br>
@@ -90,12 +91,13 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 <br>
 **Exercise 1**
+
+{% include reference.html link="https://drive.google.com/file/d/1mzHNT9OqBRUsYrCnN6HwC8hqMYA_sYlU/view?usp=sharing" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/16mqSRTSzgUYNkuTh8OhggptTU_3AQS47/view?usp=sharing" content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/10sNKqMhLJ73Avya2OenyCFh-YjzhYj8z/view?usp=sharing" content="data" class="course_material" %}
 <!--
-{% include reference.html link="https://drive.google.com/file/d/1a0CGSfltrMGcA9KDFjexgyOtAo2iYrXc/view?usp=sharing" content="script" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://drive.google.com/file/d/13_FdIRMJSgew6xS8oLJo2zmqY8cC34wc/view?usp=sharing" content="solution" class="course_material" %}
-<span class="course_material">, </span>
-{% include reference.html link="https://drive.google.com/file/d/1ZI0pS2GOsgK-hJnjCCo2D8PztLzs9xFp/view?usp=sharing" content="data" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/r8h7WpNlWdA" content="video" class="course_material" %}
 <br>
@@ -106,7 +108,10 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 <br>
 **Lecture 2 - Orientations and Symmetries (Ralf Hielscher)**
-<!--{% include reference.html link="https://drive.google.com/file/d/1LgYLfPbBmcoJXy7cTpQeCrIB5IQGG2Ic/view?usp=sharing" content="slides" class="course_material" %}
+{% include reference.html
+link="https://drive.google.com/file/d/123kVIC7y2E0972m35rIJcgoEmzJJRaS0/view?usp=sharing"
+content="slides" class="course_material" %}
+<!--
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/uzeO9mPit5Q" content="video" class="course_material" %}-->
 <br>
@@ -117,10 +122,10 @@ pole figures, inverse pole figures, fundamental sectors
 <br>
 <br>
 **Exercise 2**
-<!--
 {% include reference.html link="https://drive.google.com/file/d/1TdchUXZwoRLw_FWujkp3qTxRerBYg_Gx/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="data" class="course_material" %}
+<!--
 <span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/lIPZlFBINxM" content="video" class="course_material" %}-->
 <br>
@@ -751,7 +756,7 @@ their talks as accessible as possible.
 				<div markdown="span">
 					Please make sure that you are planning to travel to Freiberg (Saxony). There are other cities in Germany with a similar name.
 					<br>
-					Location of the Workshop: {% include reference.html link="https://goo.gl/maps/dFvybo2UhVnQkBjV8" content="Hörsaalgebäude, Prüferstraße 4"%}
+					Location of the Workshop: {% include reference.html link="https://maps.app.goo.gl/vipRHyUxNvw5uxPK8" content="Hörsaalgebäude, Prüferstraße 9"%}
 				</div>
 			</div>
 		</div>	
