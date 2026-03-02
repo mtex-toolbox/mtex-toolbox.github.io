@@ -109,7 +109,7 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
 **Lecture 2 - Orientations and Symmetries (Ralf Hielscher)**
 {% include reference.html
-link="https://drive.google.com/file/d/1yxJM0SZkyOJ9KL4vXwYuibBGH8aq9ZCX/view?usp=drive_link"
+link="https://drive.google.com/file/d/123kVIC7y2E0972m35rIJcgoEmzJJRaS0/view?usp=drive_link"
 content="slides" class="course_material" %}
 <!--
 <span class="course_material">, </span>
