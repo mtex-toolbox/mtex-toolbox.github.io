@@ -83,9 +83,8 @@ Matlab basics and general concepts of MTEX, the class vector3d, spherical coordi
 <br>
 **Lecture 1 - EBSD (Rüdiger Kilian)**
 {% include reference.html link="https://drive.google.com/file/d/1jCut1nthKIP54mvXzHGVTAG0VC1P-PYp/view?usp=drive_link"	content="slides" class="course_material" %}
-<!--
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/36Fgq7ek9h0" content="video" class="course_material" %}-->
+{% include reference.html link="https://youtu.be/B2fZyZVQubA" content="video" class="course_material" %}
 <br>
 principle concept, data import, basic data cleanup, orientation maps, color keys
 <br>
@@ -97,11 +96,10 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 {% include reference.html link="https://drive.google.com/file/d/16mqSRTSzgUYNkuTh8OhggptTU_3AQS47/view?usp=sharing" content="solution" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/10sNKqMhLJ73Avya2OenyCFh-YjzhYj8z/view?usp=sharing" content="data" class="course_material" %}
-<!--
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/r8h7WpNlWdA" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/sc35Vg_ZsSQ" content="video" class="course_material" %}
 <br>
-<br>-->
+<br>
 
 *Lunch*
 
@@ -111,9 +109,8 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 {% include reference.html
 link="https://drive.google.com/file/d/123kVIC7y2E0972m35rIJcgoEmzJJRaS0/view?usp=drive_link"
 content="slides" class="course_material" %}
-<!--
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/uzeO9mPit5Q" content="video" class="course_material" %}-->
+{% include reference.html link="https://youtu.be/WHZyju3lehQ" content="video" class="course_material" %}
 <br>
 crystal lattice, direct and reciprocal coordinate system, Miller indices,
 zonal axes, crystal shapes, point groups, Laue groups, symmetrically equivalent orientations, 
@@ -125,9 +122,8 @@ pole figures, inverse pole figures, fundamental sectors
 {% include reference.html link="https://drive.google.com/file/d/1yxJM0SZkyOJ9KL4vXwYuibBGH8aq9ZCX/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1MU1nuEjncs4yXi3w5SgTxQabCDMaU77M/view?usp=sharing" content="data" class="course_material" %}
-<!--
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/lIPZlFBINxM" content="video" class="course_material" %}-->
+{% include reference.html link="https://youtu.be/mgaG0L63yF8" content="video" class="course_material" %}
 <br>
 <br>
 				</div>
