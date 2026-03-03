@@ -147,8 +147,8 @@ pole figures, inverse pole figures, fundamental sectors
 {% include reference.html
 link="https://drive.google.com/file/d/1nQslyzoC5PyF5aokm76uAtAH2mwL5HgZ/view?usp=drive_link"
 content="interactive script" class="course_material" %}
-<!--<span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/Sx94YkaXq5o" content="video" class="course_material" %}-->
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/XvMfuSdZzb0" content="video" class="course_material" %}
 <br>
 segmentation, shape properties, orientation properties, grain selection, grain statistics
 <br>
@@ -158,9 +158,9 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1LUKY15WQ4H9mN7I13KU2zh6w-IrFpxuD/view?usp=drive_link" content="solution" class="course_material" %}
 <!--
-{% include reference.html link="https://drive.google.com/file/d/1d91FOtsBOqNVXyYm8hsYTlJEY4Q_awdU/view?usp=sharing" content="script" class="course_material" %}
+{% include reference.html link="https://drive.google.com/file/d/1d91FOtsBOqNVXyYm8hsYTlJEY4Q_awdU/view?usp=sharing" content="script" class="course_material" %}-->
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/NdN1DEptEKs" content="video" class="course_material" %}-->
+{% include reference.html link="https://youtu.be/nuND39TU-DE" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
