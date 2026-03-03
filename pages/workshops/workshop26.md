@@ -97,7 +97,12 @@ principle concept, data import, basic data cleanup, orientation maps, color keys
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/10sNKqMhLJ73Avya2OenyCFh-YjzhYj8z/view?usp=sharing" content="data" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/sc35Vg_ZsSQ" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/sc35Vg_ZsSQ" content="video"
+class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1h1Z2wWUrwUHzNc0v0EzcrH_YpMywlk5W/view?usp=sharing"
+content="filled script" class="course_material" %}
 <br>
 <br>
 
@@ -156,7 +161,13 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 **Exercise 3**
 {% include reference.html link="https://drive.google.com/file/d/1milibBuyaYKJxH2uHMj22-QJNPS6ThUU/view?usp=drive_link" content="script" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://drive.google.com/file/d/1LUKY15WQ4H9mN7I13KU2zh6w-IrFpxuD/view?usp=drive_link" content="solution" class="course_material" %}
+{% include reference.html
+link="https://drive.google.com/file/d/1LUKY15WQ4H9mN7I13KU2zh6w-IrFpxuD/view?usp=drive_link"
+content="solution" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1A6hT418PxhfETOC13nvCnSY5opkGHB2R/view?usp=sharing"
+content="filled script" class="course_material" %}
 <!--
 {% include reference.html link="https://drive.google.com/file/d/1d91FOtsBOqNVXyYm8hsYTlJEY4Q_awdU/view?usp=sharing" content="script" class="course_material" %}-->
 <span class="course_material">, </span>
