@@ -167,7 +167,7 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 <br>
 **Lecture 4 - Misorientations and Grain Boundaries (Vivian Tong)**
-% include reference.html
+{% include reference.html
 link="https://drive.google.com/file/d/1ccOJEWGTODi5oWXqYLHdyYDah-Ph-EnU/view?usp=sharing"
 content="slides" class="course_material" %}
 <!--{
