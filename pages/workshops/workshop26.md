@@ -144,7 +144,9 @@ pole figures, inverse pole figures, fundamental sectors
 				<div markdown="span">
 
 **Lecture 3 - Grains (Morales)**
-{% include reference.html link="https://drive.google.com/file/d/17HZscVF9GNmF4Eq3fIke0jjZBqxpyM0N/view?usp=sharing" content="slides" class="course_material" %}
+{% include reference.html
+link="https://drive.google.com/file/d/1nQslyzoC5PyF5aokm76uAtAH2mwL5HgZ/view?usp=drive_link"
+content="interactive script" class="course_material" %}
 <!--<span class="course_material">, </span>
 {% include reference.html link="https://youtu.be/Sx94YkaXq5o" content="video" class="course_material" %}-->
 <br>
@@ -152,6 +154,9 @@ segmentation, shape properties, orientation properties, grain selection, grain s
 <br>
 <br>
 **Exercise 3**
+{% include reference.html link="https://drive.google.com/file/d/1milibBuyaYKJxH2uHMj22-QJNPS6ThUU/view?usp=drive_link" content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1LUKY15WQ4H9mN7I13KU2zh6w-IrFpxuD/view?usp=drive_link" content="solution" class="course_material" %}
 <!--
 {% include reference.html link="https://drive.google.com/file/d/1d91FOtsBOqNVXyYm8hsYTlJEY4Q_awdU/view?usp=sharing" content="script" class="course_material" %}
 <span class="course_material">, </span>
