@@ -232,6 +232,13 @@ content="mlx-script" class="course_material" %}-->
 				<div markdown="span">
 					
 **Lecture 5 - Density Functions (Ralf Hielscher)**
+{% include reference.html
+link="https://drive.google.com/file/d/183NYIyeDqGfBvq0lawLlwZJbpxouGeUn/view?usp=sharing"
+content="slides 1" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1sUdK-MK4P-tMWoIUiC7Z56An0Vdl0Ui7/view?usp=sharing"
+content="slides 2" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
@@ -239,6 +246,7 @@ random sampling, ODF reconstuction from XRD data
 <br>
 <br>
 **Exercise 5**
+{% include reference.html link="https://drive.google.com/file/d/1fDqI0iqiK-3uAnkdvvNvnkGROgU7UHYv/view?usp=sharing" content="script" class="course_material" %}
 <br>
 <br>
 *Lunch*
