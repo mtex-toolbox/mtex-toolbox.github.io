@@ -232,19 +232,18 @@ content="mlx-script" class="course_material" %}-->
 				<div markdown="span">
 				
 
-**Lecture  - Orientations and Symmetries (Part 2) (Ralf Hielscher)**
-{% include reference.html link="https://youtu.be/HR0XcCQj9Jc" content="video" class="course_material" %}
-<br>	
 **Lecture 5 - Density Functions (Ralf Hielscher)**
 {% include reference.html
 link="https://drive.google.com/file/d/183NYIyeDqGfBvq0lawLlwZJbpxouGeUn/view?usp=sharing"
 content="slides 1" class="course_material" %}
 <span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/HR0XcCQj9Jc" content="video 1" class="course_material" %}
+<span class="course_material">, </span>
 {% include reference.html
 link="https://drive.google.com/file/d/1sUdK-MK4P-tMWoIUiC7Z56An0Vdl0Ui7/view?usp=sharing"
 content="slides 2" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://youtu.be/Q_6jSo-fF4Q" content="video" class="course_material" %}
+{% include reference.html link="https://youtu.be/Q_6jSo-fF4Q" content="video 2" class="course_material" %}
 <br>
 kernel density estimation, orientation density function, pole density
 function, inverse pole density function, model ODFs, ODF characteristics,
