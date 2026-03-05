@@ -279,6 +279,9 @@ random sampling, ODF reconstuction from XRD data
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 6 - How to set up your EBSD map correctly (Vivian Tong)**
+{% include reference.html
+link="https://drive.google.com/file/d/1FJw8uQugJv5fY953CQ2kOfQuMjLL9ccb/view?usp=sharing"
+content="slides" class="course_material" %}
 <br>
 Correction of spatial coordinates, reference frame alignment, denoising
 <br>
@@ -292,6 +295,9 @@ Correction of spatial coordinates, reference frame alignment, denoising
 <br>
 <br>
 **Lecture 7 - Quantitative Microstructure Analysis (Rüdiger Kilian)**
+{% include reference.html
+link="https://drive.google.com/file/d/1ewqhwsAFUht1kzGX6gjI5vg40Q7DTnSi/view?usp=sharing"
+content="slides" class="course_material" %}
 <br>
 grain shape, grain boundary and grain size statistics
 <br>
