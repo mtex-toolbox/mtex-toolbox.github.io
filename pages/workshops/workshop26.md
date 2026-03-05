@@ -650,7 +650,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">T. Pöschl</td>
-			<td style="text-align: left">
+			<td style="text-align: left"> Robust Approximation of Directional Data
 			</td>
 		</tr>
 		<tr>
