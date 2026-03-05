@@ -465,9 +465,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">15:00&minus;15:30</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">Grain boundary reconstruction
-			{% include reference.html link="https://youtu.be/hJH2KpdWIYA" content="video" class="course_material" %}
-			</td>
+			<td style="text-align: left">TrueEBSD for dummies: a GUI for EBSD map distortion corrections</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:30&minus;16:00</td>
@@ -518,7 +516,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">M. Theising <i>(online)</i></td>
-			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys (online)
+			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys
 			</td>
 		</tr>				
 		<tr>
@@ -540,7 +538,7 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">T. Nyyssönen - <i>(online)</i></td>
+			<td style="text-align: left">T. Nyyssönen <i>(online)</i></td>
 			<td style="text-align: left">
 			</td>
 		</tr>
