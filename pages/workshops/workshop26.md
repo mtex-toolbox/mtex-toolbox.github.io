@@ -287,8 +287,23 @@ Correction of spatial coordinates, reference frame alignment, denoising
 <br>
 <br>
 **Exercise 6 - TrueEBSD for intragranular misorientation analysis**
-<br>
-
+{% include reference.html
+link="https://drive.google.com/file/d/1Sg_WSuA-8FNw8EscT9uFKbp5to6KOW6B/view?usp=sharing"
+content="script" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1O3ueXg_JG8t9oDebZ83-6a5-DYNxQ_IE/view?usp=sharing"
+content="data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1tT1Dvr_QDtsVqa2PBq8bk7msD_rAxIk6/view?usp=sharing" content="metadata" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1uaknaVy05Zi6q0Vc-WCxMKOh5fJZxT8j/view?usp=sharing" content="questions" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html
+link="https://drive.google.com/file/d/1X7ODIm5TKLCMvQCZpACYM1Seglp-IUs2/view?usp=sharing"
+content="answers" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1B33NM-W4VfLgWTOlOmS-3qV3ZxK1bKJD/view?usp=sharing" content="paper" class="course_material" %}
 <br>
 <br>
 *Lunch*
