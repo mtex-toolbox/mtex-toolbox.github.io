@@ -358,7 +358,7 @@ elasticity, piezoelectratricity
 **Exercise 8 - Plasticity**
 <br>
 <br>
-*lunch*
+*Lunch*
 <br>
 <br>
 **Lecture 9 - Parent Grain Reconstruction (Ralf Hielscher)**
