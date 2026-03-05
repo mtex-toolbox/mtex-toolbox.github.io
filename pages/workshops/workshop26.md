@@ -321,6 +321,11 @@ combining MTEX with external software like VPSC-->
 <br>
 <br>
 **Exercise 7 - Fabric Analysis**
+{% include reference.html
+link="https://drive.google.com/file/d/1UfStXxaidw5nXE2QnsrUbJ1rmNLYQuwi/view?usp=sharing"
+content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://drive.google.com/file/d/1AH-9wdllSkaLS9q6bSSwgBwDFjEqwVWl/view?usp=sharing" content="data" class="course_material" %}
 <br>
  			  </div>
 			</div>
@@ -400,25 +405,8 @@ their talks as accessible as possible.
 
 
 
-  
-<!--  
-- **{% include reference.html
-  link="https://research.manchester.ac.uk/en/persons/joao.fonseca"
-  content="João Quinta da Fonseca" %}** (University of Manchester)
-
-- **{% include reference.html
-  link="https://www.researchgate.net/profile/Daniel-Savage-4"
-  content="Daniel Savage" %}** (Los Alamos National Laboratory)
-
-- **{% include reference.html
-  link="https://www.ntnu.edu/employees/bjorn.sorensen" content="Bjørn Eske
-  Sørensen" %}** (NTNU): Customizing EBSD analysis and interpretation using
-  MTEX and MATLAB – advantages of the scripting approach
--->
-
 ## Time Schedule
 
-<!--
 {% capture table_monday %}
 <table>
 	<thead>
@@ -431,10 +419,8 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">J. Q. da Fonseca</td>
-			<td style="text-align: left">Experimental and computational studies in light alloys exploiting MTEX
-			{% include reference.html link="https://youtu.be/tAfi6Hk5xx8" content="video" class="course_material" %}
-			</td>
+			<td style="text-align: left">Z. Michels</td>
+			<td style="text-align: left">Grains With Benefits — EBSD maps as a platform for correlative analysis</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -443,24 +429,20 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">T.&nbsp;Mineau</td>
-			<td style="text-align: left">In situ experimentation on a magnesium alloy to constrain
-				feedbacks between strain localization and microstructure evolution
-			{% include reference.html link="https://youtu.be/zjWmSpft0cU" content="video" class="course_material" %}
+			<td style="text-align: left">G. Trullenque</td>
+			<td style="text-align: left">Multidisciplinary Integration and Networking for Increased sustainability and multi-resources valorization of Geothermal Brines
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">H. W. Ånes</td>
-			<td style="text-align: left">2D correlation of second-phase particles and grains in an Al-Mn alloy
-			{% include reference.html link="https://youtu.be/oDXZrnBb0Uc" content="video" class="course_material" %}
+			<td style="text-align: left">K.	Matsuyama</td>
+			<td style="text-align: left">Applying MTEX to microstructural and intracrystalline analyses of peridotites: Insights into uppermost mantle dynamics
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">Grain boundary reconstruction
-			{% include reference.html link="https://youtu.be/hJH2KpdWIYA" content="video" class="course_material" %}
+			<td style="text-align: left">L. Morales</td>
+			<td style="text-align: left">
 			</td>
 		</tr>
 		<tr>
@@ -470,48 +452,32 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">R.&nbsp;Hielscher</td>
-			<td style="text-align: left">Grain boundary normal distributions
-			{% include reference.html link="https://youtu.be/NabSSN3BPNY" content="video" class="course_material" %}
-			</td>
+			<td style="text-align: left">U. Faul</td>
+			<td style="text-align: left">Dislocation Density from Conventional EBSD Maps of Silicates</td>
 		</tr>
-		<tr>
-			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">F. Bachmann</td>
-			<td style="text-align: left">Approximation of the ODF and its application to pole figure
-			Inversion
-			{% include reference.html link="https://youtu.be/e2MWVyvurDI" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
+		
+    	<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>			
 		</tr>				
+
+		<tr>
+			<td style="text-align: right">15:00&minus;15:30</td>
+			<td style="text-align: left">V.&nbsp;Tong</td>
+			<td style="text-align: left">Grain boundary reconstruction
+			{% include reference.html link="https://youtu.be/hJH2KpdWIYA" content="video" class="course_material" %}
+			</td>
+		</tr>
 		<tr>
 			<td style="text-align: right">15:30&minus;16:00</td>
-			<td style="text-align: left">H. Bilan</td>
-			<td style="text-align: left">In-Situ SEM Tensile Testing as a Method of Microstructural
-				Analysis: Comparative Observations for Additively Manufactured and Cold Rolled
-				316L Stainless Steel
-			{% include reference.html link="https://youtu.be/dCYOqTeEsKY" content="video" class="course_material" %}
-			</td>
+			<td style="text-align: left">R. Kilian</td>
+			<td style="text-align: left">Analysing anisotropic phase distributions</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
-			<td style="text-align: left">P.&nbsp;Hegele</td>
-			<td style="text-align: left">Influence of the PBF-LB/M Process Parameters on the Retained
-			Austenite Fraction in the Solidification Microstructure of
-			Hot-Work Tool Steels
-			{% include reference.html link="https://youtu.be/mG0yocEDI-I" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:30&minus;17:00</td>
-			<td style="text-align: left">M.&nbsp;Bolan</td>
-			<td style="text-align: left">Characterization of plastic
-			deformation in 316L expanded austenite
-			{% include reference.html link="https://youtu.be/veeU6Fx0q-E" content="video" class="course_material" %}
+			<td style="text-align: left">M. Ortmanns</td>
+			<td style="text-align: left">Influence of initial grain size on quartz deformation and static recovery
 			</td>
 		</tr>
 		<tr>
@@ -522,8 +488,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: left">18:00</td>
 			<td style="text-align: left"></td>
-			<td style="text-align: left"><i>Dinner at <a
-			href="https://maps.app.goo.gl/YpktzhdGqvXtEvbeA">Tre Viet Freiberg</a></i></td>
+			<td style="text-align: left"><i>Dinner at Stadtwirtschaft</i></td>
 		</tr>
 	</tbody>
 </table>
@@ -539,12 +504,10 @@ their talks as accessible as possible.
 		</tr>
 	</thead>
 	<tbody>
-			<tr>
+		<tr>
 			<td style="text-align: right">9:000&minus;10:00</td>
-			<td style="text-align: left">B. E. Sörrensen</td>
-			<td style="text-align: left">Customizing EBSD analysis and interpretation using MTEX
-			and MATLAB – advantages of the scripting approach
-			{% include reference.html link="https://youtu.be/qbRIIfytVYk" content="video" class="course_material" %}
+			<td style="text-align: left">S. Zaeferer</td>
+			<td style="text-align: left">Investigating defect crystallography using diffraction techniques in the SEM
 			</td>
 		</tr>
 		<tr>
@@ -554,24 +517,14 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">U.&nbsp;Faul</td>
-			<td style="text-align: left">Dislocation Structures in Experimentally Deformed Olivine
-			{% include reference.html link="https://youtu.be/AmF1f3SYXPg" content="video" class="course_material" %}
+			<td style="text-align: left">M. Theising <i>(online)</i></td>
+			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys (online)
 			</td>
 		</tr>				
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">N. M. Cohen <i>(online)</i></td>							
-			<td style="text-align: left">A New Tool to Quantify Crystallographic Preferred Orientation (CPO) of Olivine
-			{% include reference.html link="https://youtu.be/a4QlGizNkhc" content="video" class="course_material" %}
-			</td>							
-		</tr>
-		<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">T.&nbsp;Griffiths</td>							
-			<td style="text-align: left"> Quantifying microstructures in partially amorphous
-			samples: easy testing of many processing parameters using MTEX
-			{% include reference.html link="https://youtu.be/v5hg7AWZ9Po" content="video" class="course_material" %}
+			<td style="text-align: left">A. Erlacher</td>							
+			<td style="text-align: left">Complexion transitions in La-doped alumina: microstructural evolution and grain boundary distributions
 			</td>							
 		</tr>
 		<tr>
@@ -580,9 +533,39 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">13:30&minus;17:00</td>
-			<td style="text-align: left"><i>Excursion</i></td>
+			<td style="text-align: right">13:30&minus;14:30</td>
+			<td style="text-align: left">T.	Vermeij</td>
+			<td style="text-align: left">Identification of crystallographic slip systems using MTEX
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">14:30&minus;15:00</td>
+			<td style="text-align: left">T. Nyyssönen - <i>(online)</i></td>
+			<td style="text-align: left">
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">15:30&minus;16:00</td>
+			<td style="text-align: left">F. Safari</td>
+			<td style="text-align: left">Martensitic Parent Grain Reconstruction
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:00&minus;16:30</td>
+			<td style="text-align: left">P.	Kroeker</td>
+			<td style="text-align: left">Characterization of Complex HCP Twinning Mechanisms and Variant Selection Using MTEX
+			</td>			
+		</tr>
+		<tr>
+			<td style="text-align: right">16:30&minus;17:00</td>
+			<td style="text-align: left">M.	Bolan</td>
+			<td style="text-align: left">Recent developments assessing composition gradient-induced plasticity in expanded austenite
+			</td>
 		</tr>
 	</tbody>
 </table>
@@ -599,9 +582,8 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">D.&nbsp;Savage</td>
-			<td style="text-align: left">Quantitative texture analysis in x-ray and neutron diffraction
-			{% include reference.html link="https://youtu.be/dGrExN43LLs" content="video" class="course_material" %}
+			<td style="text-align: left">A. Leineweber</td>
+			<td style="text-align: left">Dealing with complicated crystal structures
 			</td>
 		</tr>
 		<tr>
@@ -611,71 +593,24 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">T.&nbsp;Vermeij</td>
-			<td style="text-align: left">In situ EBSD and TKD micromechanical testing
-			{% include reference.html link="https://youtu.be/XJ2kUpcK8DE" content="video" class="course_material" %}
+			<td style="text-align: left">M. Witte <i>(online)</i> </td>
+			<td style="text-align: left">Two new methods for the quantification of steel microstructures with EBSD: Determination of c/a-ratios and misorientation pattern matching
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">P.&nbsp;Kroeker</td>
-			<td style="text-align: left">Implementation of deformation twin analysis in MTEX: A case study on Rhenium
-			{% include reference.html link="https://youtu.be/567RxlIFTKY" content="video" class="course_material" %}
+			<td style="text-align: left">T. Philipp <i>(online)</i></td>
+			<td style="text-align: left">Investigation of static recovery and recrystallisation in cold-rolled dual-phase steels
 			</td>
 		</tr>
-		<tr>
-			<td style="text-align: right">11:30&minus;12:00</td>
-			<td style="text-align: left">B. Beichert</td>
-			<td style="text-align: left">Microstructural Evolution under Tribological Load
-			{% include reference.html link="https://youtu.be/FUi6sXpuyfo" content="video" class="course_material" %}
-			</td>
-		</tr>		
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
 		</tr>
 				<tr>
-			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">K.&nbsp;Marquardt</td>
-			<td style="text-align: left">Grain boundaries in Olivine: Using EBSD for the study
-			of complexion transitions and why they matter 
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">14:30&minus;15:00</td>
-			<td style="text-align: left">R. Kühn</td>
-			<td style="text-align: left">CPO and microstructure in oceanic serpentinites
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
-			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">15:30&minus;16:00</td>
-			<td style="text-align: left">V. Akker</td>
-			<td style="text-align: left">Fluid-assisted replacement in calcite veins
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: right">16:00&minus;16:30</td>
-			<td style="text-align: left">R.&nbsp;Kilian</td>
-			<td style="text-align: left">Recrystalized grains and the weighted burgers vector
-			{% include reference.html link="https://youtu.be/6uVzvMpcYvs" content="video" class="course_material" %}
-			</td>			
-		</tr>
-		<tr>
-			<td style="text-align: right">16:30&minus;17:00</td>
-			<td style="text-align: left">E. Avrahami</td>
-			<td style="text-align: left">Coccoliths: Complex Nano-scale Crystals Constructed With Simple Principles
-			{% include reference.html link="https://youtu.be/QquSMTihQ2M" content="video" class="course_material" %}
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left">18:30-21:00</td>
-			<td style="text-align: left">Dinner at Stadtwirtschaft Freiberg</td>
+			<td style="text-align: right">13:30&minus;17:00</td>
+			<td style="text-align: left"><i>Excursion</i></td>
 			<td style="text-align: left"></td>
 		</tr>			
 	</tbody>
@@ -693,9 +628,8 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">G.&nbsp;Nolze</td>
-			<td style="text-align: left">The importance of a proper indexing in centred lattices
-			{% include reference.html link="https://youtu.be/A-oCzsqkVpU" content="video" class="course_material" %}
+			<td style="text-align: left">R.&nbsp;Hielscher</td>
+			<td style="text-align: left">Modeling and Reconstructing Grain Boundary Normal distributions
 			</td>
 		</tr>
 		<tr>
@@ -705,16 +639,20 @@ their talks as accessible as possible.
 		</tr>		
 		<tr>
 			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">R. Purushottam</td>
-			<td style="text-align: left">LaueNN: Neural network based hkl recognition of Laue spots and its application to polycrystalline materials
-			{% include reference.html link="https://youtu.be/NuBFj_L1gis" content="video" class="course_material" %}
+			<td style="text-align: left">A. Ott</td>
+			<td style="text-align: left">Application of a clustering algorithm for efficient texture-informed simulations
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">L. Richter</td>
-			<td style="text-align: left">Resolving pseudosymmetric domains - an MTEX usecase
-			{% include reference.html link="https://youtu.be/xmFEQy_rP8Y" content="video" class="course_material" %}
+			<td style="text-align: left">Correlative Microscopy - A usecase of EBSD trace analysis with MTEX
+			</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">11:30&minus;12:00</td>
+			<td style="text-align: left">T. Pöschl</td>
+			<td style="text-align: left">
 			</td>
 		</tr>
 		<tr>
@@ -789,7 +727,6 @@ their talks as accessible as possible.
 		</div>
 	</div>
 </div>
--->
 
 ## Venue:
 
