@@ -539,7 +539,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">T. Nyyssönen <i>(online)</i></td>
-			<td style="text-align: left">
+			<td style="text-align: left">Three-dimensional shape metrics for martensite and bainite from two-dimensional orientation maps
 			</td>
 		</tr>
 		<tr>
