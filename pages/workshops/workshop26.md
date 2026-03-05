@@ -580,8 +580,8 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">A. Leineweber</td>
-			<td style="text-align: left">Dealing with complicated crystal structures
+			<td style="text-align: left">R. Hielscher</td>
+			<td style="text-align: left">Modeling and Reconstructing Grain Boundary Normal distributions
 			</td>
 		</tr>
 		<tr>
@@ -626,8 +626,8 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">R.&nbsp;Hielscher</td>
-			<td style="text-align: left">Modeling and Reconstructing Grain Boundary Normal distributions
+			<td style="text-align: left">A. Leineweber</td>
+			<td style="text-align: left">Dealing with complicated crystal structures
 			</td>
 		</tr>
 		<tr>
