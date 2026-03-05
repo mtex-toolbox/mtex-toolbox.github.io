@@ -282,6 +282,8 @@ random sampling, ODF reconstuction from XRD data
 {% include reference.html
 link="https://drive.google.com/file/d/1FJw8uQugJv5fY953CQ2kOfQuMjLL9ccb/view?usp=sharing"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/_amq_AgjtlM" content="video" class="course_material" %}
 <br>
 Correction of spatial coordinates, reference frame alignment, denoising
 <br>
@@ -304,6 +306,8 @@ link="https://drive.google.com/file/d/1X7ODIm5TKLCMvQCZpACYM1Seglp-IUs2/view?usp
 content="answers" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1B33NM-W4VfLgWTOlOmS-3qV3ZxK1bKJD/view?usp=sharing" content="paper" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/kJPjDmF0J9A" content="video" class="course_material" %}
 <br>
 <br>
 *Lunch*
@@ -313,11 +317,10 @@ content="answers" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1ewqhwsAFUht1kzGX6gjI5vg40Q7DTnSi/view?usp=sharing"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/Myj8h8gTBzg" content="video" class="course_material" %}
 <br>
 grain shape, grain boundary and grain size statistics
-<br>
-<!--deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, 
-combining MTEX with external software like VPSC-->
 <br>
 <br>
 **Exercise 7 - Fabric Analysis**
@@ -326,6 +329,8 @@ link="https://drive.google.com/file/d/1UfStXxaidw5nXE2QnsrUbJ1rmNLYQuwi/view?usp
 content="slides" class="course_material" %}
 <span class="course_material">, </span>
 {% include reference.html link="https://drive.google.com/file/d/1AH-9wdllSkaLS9q6bSSwgBwDFjEqwVWl/view?usp=sharing" content="data" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/RwH8tG-nOBQ" content="video" class="course_material" %}
 <br>
  			  </div>
 			</div>
@@ -347,6 +352,7 @@ content="slides" class="course_material" %}
 **Lecture 8 - Tensorial Properties (Louis Morales)**
 <br>
 elasticity, piezoelectratricity
+<!-- deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, combining MTEX with external software like VPSC -->
 <br>
 <br>
 **Exercise 8 - Plasticity**
