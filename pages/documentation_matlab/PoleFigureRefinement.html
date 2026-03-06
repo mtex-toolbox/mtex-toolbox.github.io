@@ -1,0 +1,238 @@
+---
+title: Successive Refinement Demo
+
+sidebar: documentation_sidebar
+permalink: PoleFigureRefinement.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Successive Refinement Demo</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_PoleFigureRefinement.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureRefinement.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">Regular ODF estimation</h2>
+<p>Please refer to <code class="language-plaintext highlighter-rouge">PoleFigure2ODF</code> tutorial first. The regular way of estimating an ODF:</p>
+{% highlight matlab %}
+mtexdata dubna
+odf_naive = calcODF(pf);
+
+calcError(pf,odf_naive)
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (y↑→x)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+ 
+  h = (02-21), r = 72 x 19 points
+  h = (10-10), r = 72 x 19 points
+  h = (10-11)(01-11), r = 72 x 19 points
+  h = (10-12), r = 72 x 19 points
+  h = (11-20), r = 72 x 19 points
+  h = (11-21), r = 72 x 19 points
+  h = (11-22), r = 72 x 19 points
+ans =
+    0.4439    0.3836    0.2585    0.3508    0.3407    0.4099    0.3669
+{% endhighlight %}
+<p>visual inspection</p>
+{% highlight matlab %}
+odf_naive.plot(pf.allH)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_01.png" %}
+</center>
+<p>another form to regularize the inversion problem is to iteratively adjust the kernel width during ODF estimation.</p>
+{% highlight matlab %}
+odf_iter = calcODFIterative(pf,'nothinning');
+
+calcError(pf,odf_iter)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.3207    0.1989    0.2120    0.2095    0.1741    0.2811    0.2902
+{% endhighlight %}
+<p>visual inspection</p>
+{% highlight matlab %}
+odf_iter.plot(pf.allH)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_02.png" %}
+</center>
+<p>volume portion that is differently distributed between the two methods</p>
+{% highlight matlab %}
+calcError(odf_iter,odf_naive,'l1')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.2428
+{% endhighlight %}
+<p>visual inspection indicates that the uniform portion is distributed differently</p>
+{% highlight matlab %}
+plot(calcPoleFigure(pf,odf_naive-odf_iter))
+%plotDiff(odf_naive,odf_iter)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_03.png" %}
+</center>
+<h2 id="7">Some arbitrary modelODF of a somewhat sharp texture</h2>
+<p>demonstrated the iterative ODF estimation with a synthetic data set.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('cubic');
+ss = specimenSymmetry;
+
+q = rotation.byEuler(10*degree,10*degree,10*degree,'ABG');
+q2 = rotation.byEuler(10*degree,30*degree,10*degree,'ABG');
+
+odf_true = .6*unimodalODF(q,cs,ss,'halfwidth',5*degree) + ...
+            .4*unimodalODF(q2,cs,ss,'halfwidth',4*degree);
+{% endhighlight %}
+<h2 id="8">Pole Figures to measure</h2>
+{% highlight matlab %}
+h = [ ...
+  Miller(1,1,1,cs), ...
+  Miller(1,0,0,cs), ...
+  Miller(1,1,0,cs), ...
+  ];
+
+figure, odf_true.plotPDF(h)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_04.png" %}
+</center>
+<h2 id="9">Initial measure grid</h2>
+{% highlight matlab %}
+r = equispacedS2Grid('resolution',15*degree,'maxtheta',80*degree);
+
+figure
+plot(r,'markersize',12)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_05.png" %}
+</center>
+<h2 id="10">Refinement</h2>
+<p>for selected directions r we perform a 'point' like measurement.</p>
+{% highlight matlab %}
+r = equispacedS2Grid('resolution',15*degree,'maxtheta',80*degree);
+r = repcell(r,size(h));
+pf_measured = [];
+pf_simulated = [];
+pf_sim_h = {};
+% number of refinement steps
+nsteps = 5;
+
+for k=1:nsteps
+
+  % perform for every Pole Figure a measurement
+  pf_simulated = calcPoleFigure(odf_true,h,r,'silent');
+
+  % merge the new measurements with old ones
+  pf_measured = union(pf_simulated,pf_measured);
+  plot(pf_measured,'silent')
+  drawnow
+
+  fprintf('- at resolution : %f\n', mean(cellfun(@(r) r.resolution, pf_measured.allR))/degree);
+
+  if k < nsteps
+    % odf modeling
+    odf_recalc = calcODF(pf_measured,'zeroRange','silent');
+
+    % in order to minimize the modeling error
+    pf_recalcerror  = calcErrorPF(pf_measured,odf_recalc,'l1','silent');
+
+    % we could initialized initial weights with previous estimation
+    odf_recalcerror = calcODF(pf_recalcerror,'silent');
+
+    % the error we don't know actually
+    fprintf('  error true -- estimated odf   : %f\n', calcError(odf_true,odf_recalc,'silent'))
+
+    % refine the grid for every polefigure
+    for l=1:length(h)
+      r_old = pf_measured{l}.r;
+      [newS2G, r_new] = refine( r_old(:) );
+
+      % selection of points of interest, naive criterion
+      pf_sim_h = calcPoleFigure(odf_recalc, h(l),  r_new,'silent');
+      th = quantile(pf_sim_h.intensities,0.75);
+      r{l} = pf_sim_h.r(pf_sim_h.intensities > th);
+    end
+  end
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+- at resolution : 14.545455
+  error true -- estimated odf   : 0.941439
+- at resolution : 13.009430
+  error true -- estimated odf   : 0.405335
+- at resolution : 9.506983
+  error true -- estimated odf   : 0.236237
+- at resolution : 6.738829
+  error true -- estimated odf   : 0.303526
+- at resolution : 3.753827
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_06.png" %}
+</center>
+<h2 id="11">Measured Pole Figure</h2>
+{% highlight matlab %}
+pf_measured
+plot(pf_measured,'silent');
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf_measured = PoleFigure (y↑→x)
+  crystal symmetry : m-3m
+ 
+  h = (111), r = 367 x 1 points
+  h = (100), r = 367 x 1 points
+  h = (110), r = 367 x 1 points
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureRefinement_07.png" %}
+</center>
+<h2 id="12">Final model</h2>
+<p>the default odf estimation will distribute volume on nodes that do not have corresponding data.</p>
+{% highlight matlab %}
+odf_recalc = calcODF(pf_measured,'zeroRange','resolution',2.5*degree);
+fprintf('  error true -- estimated odf   : %f\n', calcError(odf_true,odf_recalc))
+{% endhighlight %}
+
+{% highlight plaintext %}
+error true -- estimated odf   : 0.400117
+{% endhighlight %}
+<h2 id="13">Compare with iterative odf estimation</h2>
+<p>the iterative odf estimation will model the volume portions of nodes that do not have corresponding data by assuming volume portions coming from a broader halfwidth, thus the error to the true odf will be significantly smaller.</p>
+{% highlight matlab %}
+odf_recalc_iterative = calcODFIterative(pf_measured,'halfwidth',2.5*degree);
+fprintf('  error true -- iter. est. odf  : %f\n', calcError(odf_true,odf_recalc_iterative))
+{% endhighlight %}
+
+{% highlight plaintext %}
+error true -- iter. est. odf  : 0.114767
+{% endhighlight %}
+<p>volume portion that is differently distributed</p>
+{% highlight matlab %}
+calcError(odf_recalc,odf_recalc_iterative,'l1')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.3167
+{% endhighlight %}
+</div>
+</body>
+</html>

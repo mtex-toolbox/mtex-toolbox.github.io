@@ -1,0 +1,136 @@
+---
+title: PoleFigure.calcODFIterative
+
+sidebar: function_reference_sidebar
+permalink: PoleFigure.calcODFIterative.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>PoleFigure.calcODFIterative</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_PoleFigure__calcODFIterative.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/PoleFigureAnalysis/@PoleFigure/calcODFIterative.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>iterative PDF to ODF inversion</p>
+<p>
+<b>calcODFiterative</b> solves the PF to ODF inversion problem by iteratively adjusting the kernel width, starting with a uniform ODF.</p>
+<p>Iteratively adjusting the kernel width allows to model ODFs from highly irregularly sampled data, as missing information is modelled by assuming volume portions along tori (fibres) justified by a coarser model. This method basically provides an elaborated guess for starting values for <code class="language-plaintext highlighter-rouge">PoleFigure.calcODF</code> and may be seen as some form of regularization.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+odf = calcODFIterative(pf)
+odf = calcODFIterative(pf,'halfwidth',5*degree)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>pf</tt>
+         </td>
+         <td>
+            <tt><a href="PoleFigure.PoleFigure.html">PoleFigure</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt>reconstructed <a href="SO3Fun.SO3Fun.html">SO3Fun</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>scaling factors, calculated during reconstruction</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>kernel</tt>
+         </td>
+         <td>
+            <tt>the ansatz functions (default = de la Vallee Poussin)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>halfwidth</tt>
+         </td>
+         <td>
+            <tt>halfwidth of the ansatz functions (default = resolution)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>resolution</tt>
+         </td>
+         <td>
+            <tt>localization grid for the ansatz functions (default = resolution(pf))</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>thinning</tt>
+         </td>
+         <td>
+            <tt>corresponds to zero range, will remove nodes with low volume portion (default = 0.025, i.e. 2.5 of uniform)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>nothinning</tt>
+         </td>
+         <td>
+            <tt>omit reduction of nodes</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>silent</tt>
+         </td>
+         <td>
+            <tt>no output</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">References</h2>
+<p>
+<a href="https://doi.org/10.1007/978-3-658-14941-3_4">https://doi.org/10.1007/978-3-658-14941-3_4</a> Bachmann, F. (2016). Texturbestimmung aus Beugungsbildern. In: Optimierung der Goniometrie zur Texturbestimmung aus R&ouml;ntgenbeugungsbildern. Springer Spektrum, Wiesbaden.</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="PoleFigure.calcODF.html">PoleFigure.calcODF</a> <a href="PoleFigureRefinement.html">PoleFigureRefinement</a>
+</p>
+</div>
+</body>
+</html>

@@ -23,7 +23,102 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>There is an implementation by R&uuml;diger Kilian ...</p>
+<p>Sometimes it is useful to simulate EBSD data with a given noise, e.g. when testing denoising or a given low angle boundary or orientation gradient for testing methods such as GND or WBV for example. <a href="simulateEBSD.simulateEBSD.html|simulateEBSD|">simulateEBSD.simulateEBSD.html|simulateEBSD|</a> can introduce various boundary geometries and an arbitrary misorientation. Current limitations: simulating multi grain arrangement which can be done more reasonably using the <a href="NeperInterface.html|neper">interface|</a>.</p>
+{% highlight matlab %}
+% In order to simulate a single "grain", we initialize the object, which
+% has several properties
+
+eS = simulateEBSD
+
+% Let's change the default size
+
+eS.xdim = 200;
+
+% and assign an orientation
+eS.CS = crystalSymmetry('mmm','Mineral','Kryptonite');
+eS.ori0 = orientation.byEuler([0,pi/4,0]*degree,eS.CS);
+
+% next we want to create map from the inital input which can be accessed
+% from '.EBSDSim
+
+eS.makeMap;
+
+plot(eS.EBSDsim, eS.EBSDsim.orientations)
+
+% which is indeed not too impressive for now.
+{% endhighlight %}
+
+{% highlight plaintext %}
+eS = 
+  simulateEBSD with properties:
+
+          xdim: 100
+          ydim: 100
+      stepSize: 1
+      domainID: []
+      noiseFun: []
+      noiseMax: 8.7266e-04
+       EBSDsim: []
+           axS: [1×1 vector3d]
+       gradDir: [1×1 vector3d]
+    mori_angle: 0.0017
+          ori0: [1×1 orientation]
+            CS: [1×1 crystalSymmetry]
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDSimulation_01.png" %}
+</center>
+<h2 id="2">Adding noise</h2>
+{% highlight matlab %}
+% Currently noise can be chosen as either with a lognormal or uniform
+% misorientation angle distribution
+
+% Let's use lognally distributed noise with a maximum of 2 degree.
+eS.noiseFun = 'logn';
+eS.noiseMax = 2*degree;
+
+% update the orientiation
+eS.addnoise
+
+plot(eS.EBSDsim,angle(eS.ori0,eS.EBSDsim.orientations)/degree)
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDSimulation_02.png" %}
+</center>
+<h2 id="3">Creating a simple low angle boundary</h2>
+{% highlight matlab %}
+% now let's create a single boundary with a misorientation defined by
+% an axis in specimen coordinates and an misorientation angle
+
+eS.axS = yvector;
+eS.mori_angle = 3*degree;
+
+eS.addFeature_singleStep;
+% Note that every time we run 'addFeature_' it is applied on the previous
+% orientations!
+
+newMtexFigure('layout',[2,1])
+
+% Now we can plot it
+plot(eS.EBSDsim,angle(eS.ori0,eS.EBSDsim.orientations)/degree)
+
+% and compute grains so we can inspect the boundary
+grain = eS.EBSDsim.calcGrains('angle',[1 10]*degree);
+nextAxis
+plot(grain); hold on
+plot(grain.innerBoundary,grain.innerBoundary.misorientation.angle/degree,'linewidth',3)
+hold off
+setColorRange([2.75 3.25])
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDSimulation_03.png" %}
+</center>
+<p>If we want to reset the map and simulate something else</p>
+{% highlight matlab %}
+eS.makeMap
+{% endhighlight %}
 </div>
 </body>
 </html>
