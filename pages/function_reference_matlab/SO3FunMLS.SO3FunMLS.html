@@ -27,9 +27,10 @@ To make changes, update the MATLAB code and republish this document.
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = SO3FunMLS(nodes,values)
-SO3F = SO3FunMLS(nodes,values,N,__)
-SO3F = SO3FunMLS(nodes,values,eps,__)
-SO3F = SO3FunMLS(nodes,values,eps,w,__)
+SO3F = SO3FunMLS(nodes,values, nn, __)
+SO3F = SO3FunMLS(nodes,values, delta, __)
+SO3F = SO3FunMLS(nodes,values, delta, w, @(t)(__))
+SO3F = SO3FunMLS(nodes,values, 'centered', 'detectOutliers', 'subsample', 'tangent')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -39,7 +40,7 @@ SO3F = SO3FunMLS(nodes,values,eps,w,__)
             <tt>nodes</tt>
          </td>
          <td>
-            <tt><a href="orientation.orientation.html">orientation</a>,<a href="rotation.rotation.html">rotation</a> (interpolation points)</tt>
+            <tt><a href="orientation.orientation.html">orientation</a>, <a href="rotation.rotation.html">rotation</a> (data points)</tt>
          </td>
       </tr>
       <tr>
@@ -48,30 +49,6 @@ SO3F = SO3FunMLS(nodes,values,eps,w,__)
          </td>
          <td>
             <tt>array of function values</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>N</tt>
-         </td>
-         <td>
-            <tt>specified number of neighbors used for local interpolation</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>eps</tt>
-         </td>
-         <td>
-            <tt>support radius of the weight function</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>w</tt>
-         </td>
-         <td>
-            <tt>@function_handle (weight function)</tt>
          </td>
       </tr>
    </table>
@@ -100,6 +77,64 @@ SO3F = SO3FunMLS(nodes,values,eps,w,__)
             <tt>the polynomial degree used for approximation</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>delta</tt>
+         </td>
+         <td>
+            <tt>support radius of the weight function</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>nn</tt>
+         </td>
+         <td>
+            <tt>specified number of neighbors used for local approximation</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>outlierDetectionRange</tt>
+         </td>
+         <td>
+            <tt>specify how many neighbors are taken into account</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>when searching for outliers</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>w</tt>
+         </td>
+         <td>
+            <tt>@function_handle (weight function)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'C1hat', 'const', 'cos', 'hat', 'indicator', 'squared hat',</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'wendland' (default)</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>distance</tt>
+         </td>
+         <td>
+            <tt>specify which metric to use (default: 'euclidean')</tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="7">Flags</h2>
@@ -110,8 +145,36 @@ SO3F = SO3FunMLS(nodes,values,eps,w,__)
             <tt>centered</tt>
          </td>
          <td>
-            <tt>only evaluate the basis near the pole if true</tt>
+            <tt>only evaluate the basis near the north pole (1,0,0,0) if true</tt>
          </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>detectOutliers</tt>
+         </td>
+         <td>
+            <tt>find outliers in the data and reduce their weight in the local least squares problems</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>depending on how bad they are</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>subsample</tt>
+         </td>
+         <td>
+            <tt>use a subset of the local nodes that minimizes the Lebesgue</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>constant</tt>
+         </td>
+         <td/>
       </tr>
       <tr>
          <td width="100px">
@@ -119,30 +182,6 @@ SO3F = SO3FunMLS(nodes,values,eps,w,__)
          </td>
          <td>
             <tt>use polynomials on the tangent space</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>hat</tt>
-         </td>
-         <td>
-            <tt>use hat function as weight function</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>squared_hat</tt>
-         </td>
-         <td>
-            <tt>use squared-hat function as weight function</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>indicator</tt>
-         </td>
-         <td>
-            <tt>use indicator function as weight function</tt>
          </td>
       </tr>
    </table>

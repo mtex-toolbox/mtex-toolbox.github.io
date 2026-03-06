@@ -23,11 +23,16 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>computes the weighted Burgers vector</p>
+<p>computes the weighted Burgers vector using the integral(default) or gradient method</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 % weighted Burgers vector in specimen coordinates
 W = weightedBurgersVec(ebsd)
+{% endhighlight %}
+
+{% highlight matlab %}
+% weighted Burgers vector in specimen coordinates in a 5-by-5 loop
+W = weightedBurgersVec(ebsd, 'windowSize', 2)
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -36,8 +41,9 @@ W = inv(ebsd.orientations) .* weightedBurgersVec(ebsd)
 {% endhighlight %}
 
 {% highlight matlab %}
-% weighted Burgers vector using the integral methods
-W = weightedBurgersVec(ebsd,'integral')
+% weighted Burgers vector using the gradient method, just considering
+% nearest neighbor pixels
+W = weightedBurgersVec(ebsd,'gradient')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -70,10 +76,10 @@ W = weightedBurgersVec(ebsd,'integral')
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>integral</tt>
+            <tt>gradient</tt>
          </td>
          <td>
-            <tt>use integral method</tt>
+            <tt>use the gradient (Note, windowSize is always 1!)</tt>
          </td>
       </tr>
       <tr>
@@ -81,7 +87,7 @@ W = weightedBurgersVec(ebsd,'integral')
             <tt>windowSize</tt>
          </td>
          <td>
-            <tt>size of the integral window (default = 1)</tt>
+            <tt>radius of the integral window (default = 1), only used with integral method</tt>
          </td>
       </tr>
    </table>
@@ -90,7 +96,7 @@ W = weightedBurgersVec(ebsd,'integral')
 <div>
 <ul>
 <li>
-<a href="https://doi.org/10.1111/j.1365-2818.2009.03136.x">The weighted Burgers vector: a new quantity for constraining dislocation densities and types using electron backscatter diffraction on 2D sections through crystalline materials</a>, J. Microscopy, 2009.</li>
+<a href="https://doi.org/10.1111/j.1365-2818.2009.03136.x">Wheeler J.et al., The weighted Burgers vector: a new quantity for constraining dislocation densities and types using electron backscatter diffraction on 2D sections through crystalline materials</a>, J. Microscopy, 2009.</li>
 </ul>
 </div>
 </div>
