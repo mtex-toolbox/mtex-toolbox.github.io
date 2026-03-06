@@ -350,6 +350,9 @@ content="slides" class="course_material" %}
 			<div class="panel-body">
 				<div markdown="span">
 **Lecture 8 - Tensorial Properties (Louis Morales)**
+{% include reference.html
+link="https://drive.google.com/file/d/1QL2kNpT42ulm73VwRq97EoFBlCrUW_Xk/view?usp=sharing"
+content="slides" class="course_material" %}
 <br>
 elasticity, piezoelectratricity
 <!-- deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, combining MTEX with external software like VPSC -->
