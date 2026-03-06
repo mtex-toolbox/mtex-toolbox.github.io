@@ -358,13 +358,18 @@ elasticity, piezoelectratricity
 <!-- deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, combining MTEX with external software like VPSC -->
 <br>
 <br>
-**Exercise 8 - Plasticity**
+**Lecture 9 - Plasticity (Ralf Hielscher)**
+{% include reference.html
+link="https://drive.google.com/file/d/10F6Fajps5NLBkpF4bfJsIUg6BMjeeI-W/view?usp=sharing"
+content="slides" class="course_material" %}
+<br>
+deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, combining MTEX with external software like VPSC
 <br>
 <br>
 *Lunch*
 <br>
 <br>
-**Lecture 9 - Parent Grain Reconstruction (Ralf Hielscher)**
+**Lecture 10 - Parent Grain Reconstruction (Ralf Hielscher)**
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
