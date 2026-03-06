@@ -353,15 +353,18 @@ content="slides" class="course_material" %}
 {% include reference.html
 link="https://drive.google.com/file/d/1QL2kNpT42ulm73VwRq97EoFBlCrUW_Xk/view?usp=sharing"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/w7rrQUfnnUI" content="video" class="course_material" %}
 <br>
 elasticity, piezoelectratricity
-<!-- deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, combining MTEX with external software like VPSC -->
 <br>
 <br>
 **Lecture 9 - Plasticity (Ralf Hielscher)**
 {% include reference.html
 link="https://drive.google.com/file/d/10F6Fajps5NLBkpF4bfJsIUg6BMjeeI-W/view?usp=sharing"
 content="slides" class="course_material" %}
+<span class="course_material">, </span>
+{% include reference.html link="https://youtu.be/L9it-z3Br9E" content="video" class="course_material" %}
 <br>
 deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor factor, combining MTEX with external software like VPSC
 <br>
