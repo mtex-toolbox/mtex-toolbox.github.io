@@ -22,36 +22,21 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>The "Weighted Burgers Vector" is a method to analyze geometrically necessary dislocations from EBSD maps, complementary (or alternatively) to <a href="GND.html">GND analysis</a>.</p>
-<p>The reference description can be found here: <a href="https://doi.org/10.1111/j.1365-2818.2009.03136.x">Wheeler et. al., The weighted Burgers vector: a new quantity for constraining dislocation densities and types using electron backscatter diffraction on 2D sections through crystalline materials</a>
+<p>The "Weighted Burgers Vector" is a method to analyze geometrically necessary dislocations from EBSD maps, complementary (or alternatively) to <a href="GND.html">GND analysis</a>. The reference description is in <a href="https://doi.org/10.1111/j.1365-2818.2009.03136.x">Wheeler et. al., The weighted Burgers vector: a new quantity for constraining dislocation densities and types using electron backscatter diffraction on 2D sections through crystalline materials</a>
 </p>
-<p>It is a moving window technique interpreting the orientation gradient in a given neighborhood and at a given distance to be caused by dislocation lines which crosscut the observation surface. It is weighted/biased by the cosine of the angle between the map-normal the dislocation line direction.</p>
-<p>The implementation in MTEX allows for two different methods. The default method is derived from the orientation gradient in x- and y- directions, obtained using a convolution kernel similar to a Prewitt operator, except that the corners are weighted by 0.5. This is comparable to what is termed the "integral method" by other implementations. Here the size of kernel can be adjusted in order to cope with noisy data. Alternatively, there is the "gradient" method, where the WBV is simply derived from the last column of the <a href="curvatureTensor.dislocationDensity.html|dislocation">density tensor|</a> (see <a href="GND.html">GND.html</a>), hereby the gradient is derived from the nearest neighbor pixels. Hence, using high angular resolution EBSD data or denoising of conventional EBSD prior to the analysis is required.</p>
+<p>The "Weighted Burgers Vector" is a moving window technique interpreting the orientation gradient in a given neighborhood and at a given distance to be caused by dislocation lines which crosscut the observation surface. It is weighted/biased by the cosine of the angle between the map-normal the dislocation line direction.</p>
+<p>In MTEX the weighted Burgers vector is computed by the function <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">ebsd.weightedBurgersVec</code></a> using one of the following two methods. The default method is derived from the orientation gradient in x- and y- directions, obtained using a convolution kernel similar to a Prewitt operator, except that the corners are weighted by 0.5. This is comparable to what is termed the "integral method" by other implementations. Here the size of kernel can be adjusted in order to cope with noisy data. Alternatively, there is the "gradient" method, where the WBV is derived from the last column of the <a href="curvatureTensor.dislocationDensity.html">dislocation density tensor</a>. Hence, using high angular resolution EBSD data or denoising of conventional EBSD prior to the analysis is required.</p>
 <!--/introduction-->
-<p>In this section we want to see how we can generally use the <a href="EBSD.weightedBurgersVec.html|WBV|">EBSD.weightedBurgersVec.html|WBV|</a> function. We will use the same data as in the <a href="GND.html">GND.html</a> demonstration.</p>
+<p>We start by importing the same data as for the <a href="GND.html">GND example</a>.</p>
 {% highlight matlab %}
-% set up the plotting convention and preference
-plotx2east
-setMTEXpref('showMicronBar',0)
-
 % import the EBSD data
 % mtexdata single
 CS = crystalSymmetry('Fm3m',[4.04958 4.04958 4.04958],'mineral','Al');
 ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'single_grain_aluminum.txt'],...
     'CS', CS,'RADIANS','ColumnNames', { 'Euler 1' 'Euler 2' 'Euler 3' 'x' 'y'},...
     'Columns', [1 2 3 4 5]);
-
-% define the color key
-ipfKey = ipfHSVKey(ebsd);
-ipfKey.inversePoleFigureDirection = yvector;
-
-% and plot the orientation data
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'micronBar','off','figSize','medium')
 {% endhighlight %}
-<center>
-{% include inline_image.html file="WBV_01.png" %}
-</center>
-<p>We reconstruct grains because later on, we do not want to compute the WBV across grain boundaries (if present)</p>
+<p>We reconstruct grains because later on, we do not want to compute the WBV across grain boundaries</p>
 {% highlight matlab %}
 [grains,ebsd.grainId] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
 
@@ -62,80 +47,61 @@ F = halfQuadraticFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
 {% endhighlight %}
 <h2 id="3">Computing the WBV</h2>
-<p>The function expects the input to a gridified <a href="EBSD.gridify.html|EBSD|">EBSD.gridify.html|EBSD|</a>.</p>
+<p>The function expects the input to a  <a href="EBSD.gridify.html">gridified</a>.</p>
 {% highlight matlab %}
-ebsd = ebsd.gridify
+ebsd = ebsd.gridify;
 wbv = weightedBurgersVec(ebsd)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   1 (0.0098%)  notIndexed                                                 
-     1  10200 (100%)          Al  LightSkyBlue      m-3m                         
- 
- Properties: grainId, oldId, quality
- Scan unit : um
- X x Y x Z : [6, 16] x [4, 14] x [0, 0]
- Normal vector: (0,0,1)
- Square grid  :101 x 101
- 
- 
 wbv = vector3d (y↑→x)
  size: 101 x 101
 {% endhighlight %}
-<p>The WBV is returned as a <a href="vector3d.vector3d.html|vector3d|">vector3d.vector3d.html|vector3d|</a> and we can inspect its magnitude (in 1/scanunit) and direction.</p>
+<p>The WBV is returned in specimen coordinates as a list of <a href="vector3d.vector3d.html">vector3d</a>. We can inspect its magnitude (in 1/scanunit) and direction.</p>
 {% highlight matlab %}
-plot(ebsd,wbv.norm); hold on
+plot(ebsd,wbv.norm)
 mtexColorbar
 mtexTitle('norm of the WBV')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_02.png" %}
+{% include inline_image.html file="WBV_01.png" %}
 </center>
-<h2 id="5">Visualize the WBV</h2>
-<p>In order to visualize the direction of the WBV in specimen coordinates, we can use a color key.</p>
+<h2 id="5">Visualizing the WBV</h2>
+<p>In order to visualize the direction of the WBV in specimen coordinates, we can use a directional color key.</p>
 {% highlight matlab %}
-cK = HSVDirectionKey(specimenSymmetry('1'));
+cK = HSVDirectionKey;
 plot(ebsd,cK.direction2color(wbv),'FaceAlpha',wbv.norm/0.22)
 mtexTitle('direction of the WBV in specimen coordinates')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_03.png" %}
+{% include inline_image.html file="WBV_02.png" %}
 </center>
 {% highlight matlab %}
 figure(2)
-plot(cK)
+plot(cK,'figSize','tiny')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_04.png" %}
+{% include inline_image.html file="WBV_03.png" %}
 </center>
-<p>We could also display the WBV by small arrows. If we allow for any magnitude, the plot would become quite cluttered. Hence, we will only display those vectors which have a reasonably large magnitude.</p>
+<p>We could also display the WBV as small arrows. If we allow for any magnitude, the plot would become quite cluttered. Hence, we will only display those vectors which have a reasonably large magnitude.</p>
 {% highlight matlab %}
 cond = wbv.norm > quantile(wbv.norm,0.85);
 
 figure(1), hold on
-%plot(ebsd,wbv.norm); hold on
-quiver(ebsd(cond),wbv(cond),'color','k','autoScaleFactor', 2, 'antipodal'); hold off
+quiver(ebsd(cond),wbv(cond),'color','k','autoScaleFactor', 2, 'antipodal');
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_05.png" %}
+{% include inline_image.html file="WBV_04.png" %}
 </center>
 <p>If we are simply interested in the distributions of WBV, we can plot them in a spherical projection. Since the WBV is assigned <code class="language-plaintext highlighter-rouge">nan</code> at points where it cannot be defined, we need to filter those values</p>
 {% highlight matlab %}
-wbv.antipodal = 0
+wbv.antipodal = 0;
 notNan = ~isnan(wbv);
 plot(wbv(notNan),'weights',wbv(notNan).norm,'contourf')
 {% endhighlight %}
-
-{% highlight plaintext %}
-wbv = vector3d (y↑→x)
- size: 101 x 101
-{% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_06.png" %}
+{% include inline_image.html file="WBV_05.png" %}
 </center>
 <h2 id="9">The WBV in crystal coordinates</h2>
 <p>In order to inspect the WBV in crystal coordinates we transform them using the orientations and choose a fitting directional color key</p>
@@ -144,14 +110,14 @@ wbv = vector3d (y↑→x)
 wbvC = inv(ebsd.orientations) .* wbv;
 
 % define a directional color key respecting crystal symmetry
-cKC = HSVDirectionKey(wbvC.CS);
+cKC = HSVDirectionKey(wbvC);
 
 % plot the data
 plot(ebsd,cKC.direction2color(wbvC),'FaceAlpha',wbv.norm/0.22)
 mtexTitle('direction of the WBV in crystal coordinates')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_07.png" %}
+{% include inline_image.html file="WBV_06.png" %}
 </center>
 {% highlight matlab %}
 % plot the color key
@@ -165,21 +131,21 @@ plot(wbvC(notNan),'weights',wbvC(notNan).norm,'contour', ...
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_08.png" %}
+{% include inline_image.html file="WBV_07.png" %}
 </center>
 <h2 id="11">Effect of windowSize</h2>
 <p>In case there are reasons why the EBSD data cannot be denoised, the WBV can also be computed with respect to a larger neighborhood. The integer specified with with <code class="language-plaintext highlighter-rouge">'windowSize'</code> gives a 2*n+1 square across which the WBV is computed. The default is a 3-by-3 box.</p>
 {% highlight matlab %}
 close all
-newMtexFigure('layout',[4,2])
+newMtexFigure('layout',[2,4])
 
 % first we plot again the WBV form the denoised dataset
 wbv = weightedBurgersVec(ebsd);
-nextAxis
+nextAxis(1,1)
 plot(ebsd,wbv.norm); hold on
 mtexTitle('norm (denoised) / box = 3')
 
-nextAxis
+nextAxis(2,1)
 notNan = ~isnan(wbv);
 plot(wbv(notNan),'weights',wbv(notNan).norm,'contourf','antipodal')
 
@@ -188,20 +154,19 @@ plot(wbv(notNan),'weights',wbv(notNan).norm,'contourf','antipodal')
 for ws = [1 2 3]
 
   wbv = weightedBurgersVec(ebsdN,'windowSize',ws);
-  nextAxis
+  nextAxis(1,ws+1)
   plot(ebsdN,wbv.norm); hold on
   mtexTitle(['WBV norm / box =' num2str(2*ws+1)])
 
-  nextAxis
+  nextAxis(2,ws+1)
   notNan = ~isnan(wbv);
   plot(wbv(notNan),'weights',wbv(notNan).norm,'contourf','antipodal')
-  mtexTitle(['WBV direction / box =' num2str(2*ws+1)])
 
 end
 mtexColorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_09.png" %}
+{% include inline_image.html file="WBV_08.png" %}
 </center>
 <p>Here we see that there is some difference between the noisy and the denoised data in a 3-by-3 and larger neighborhoods. For larger window sizes, we see that there is of course a loss of detail (and empty spaces appear around unfilled points) and a decrease in the norm of WBV, since high orientation gradients are spread by the larger window size. At the other hand, the distribution of the WBV in the pole figures becomes sharper, because there is less scatter in the WBV over larger areas.</p>
 <p>Finally, we look at the weighted Burgers vector computed using the gradient method and the denoised data.</p>
@@ -210,15 +175,16 @@ wbv = weightedBurgersVec(ebsd,'gradient');
 
 cK = HSVDirectionKey(specimenSymmetry('1'));
 plot(ebsd,cK.direction2color(wbv),'FaceAlpha',wbv.norm/0.2)
+mtexTitle('WBV direction / gradient' )
 
-nextAxis
+nextAxis(1,2)
 notNan = ~isnan(wbv);
 plot(wbv(notNan),'weights',wbv(notNan).norm,'antipodal','contourf')
-mtexTitle('WBV direction / gradient' )
+
 colorbar
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WBV_10.png" %}
+{% include inline_image.html file="WBV_09.png" %}
 </center>
 <p>We observe that for denoised data the gradient based method results in a more detailed map.</p>
 </div>
