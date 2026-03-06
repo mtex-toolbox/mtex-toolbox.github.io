@@ -377,7 +377,7 @@ deformation tensors, slip systems, dislocation systems, Schmid Factor, Taylor fa
 link="https://drive.google.com/file/d/16EGqKp18Ko_z_5T58Y68BCKRjMtgyGQ9/view?usp=sharing"
 content="slides" class="course_material" %}
 <span class="course_material">, </span>
-{% include reference.html link="https://drive.google.com/file/d/1bwpYc843D-qP_Rj0jwLiBXgd3maBSlFI/view?usp=sharing" content="data" class="script" %}
+{% include reference.html link="https://drive.google.com/file/d/1bwpYc843D-qP_Rj0jwLiBXgd3maBSlFI/view?usp=sharing" content="data" class="course_material" %}
 <br>
 determination of orientation relationships, phase transition, parent grain reconstruction, transformation
 textures, variant selection
