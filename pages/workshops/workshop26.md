@@ -556,7 +556,7 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:30&minus;16:30</td>
+			<td style="text-align: right">15:30&minus;16:00</td>
 			<td style="text-align: left">A. Erlacher</td>							
 			<td style="text-align: left">Complexion transitions in La-doped alumina: microstructural evolution and grain boundary distributions
 			</td>							
