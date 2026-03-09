@@ -481,17 +481,21 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">U. Faul</td>
-			<td style="text-align: left">Dislocation Density from Conventional EBSD Maps of Silicates</td>
+			<td style="text-align: left">Dislocation Density from Conventional EBSD Maps of Silicates
+			{% include reference.html link="https://youtu.be/3Ado0RLRZSM" content="video" class="course_material" %}
+			</td>
 		</tr>		
     	<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>			
+			<td style="text-align: left"></td>
 		</tr>				
 		<tr>
 			<td style="text-align: right">15:00&minus;15:30</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
-			<td style="text-align: left">TrueEBSD for dummies: a GUI for EBSD map distortion corrections</td>
+			<td style="text-align: left">TrueEBSD for dummies: a GUI for EBSD map distortion corrections
+			{% include reference.html link="https://youtu.be/akmZH1UenMo" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">15:30&minus;16:00</td>
@@ -502,6 +506,7 @@ their talks as accessible as possible.
 			<td style="text-align: right">16:00&minus;16:30</td>
 			<td style="text-align: left">M. Ortmanns</td>
 			<td style="text-align: left">Influence of initial grain size on quartz deformation and static recovery
+			{% include reference.html link="https://youtu.be/U-4kDEP2Qls" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
