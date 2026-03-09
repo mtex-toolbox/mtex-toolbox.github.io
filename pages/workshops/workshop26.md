@@ -444,7 +444,9 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">Z. Michels</td>
-			<td style="text-align: left">Grains With Benefits — EBSD maps as a platform for correlative analysis</td>
+			<td style="text-align: left">Grains With Benefits — EBSD maps as a platform for correlative analysis
+			{% include reference.html link="https://youtu.be/Zv1gLdoy_2A" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
@@ -455,12 +457,14 @@ their talks as accessible as possible.
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">G. Trullenque</td>
 			<td style="text-align: left">Multidisciplinary Integration and Networking for Increased sustainability and multi-resources valorization of Geothermal Brines
+			{% include reference.html link="https://youtu.be/uAj3pY_TkIY" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">K.	Matsuyama</td>
 			<td style="text-align: left">Applying MTEX to microstructural and intracrystalline analyses of peridotites: Insights into uppermost mantle dynamics
+			{% include reference.html link="https://youtu.be/2tjnukbZvL0" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -528,7 +532,7 @@ their talks as accessible as possible.
 	<tbody>
 		<tr>
 			<td style="text-align: right">9:000&minus;10:00</td>
-			<td style="text-align: left">S. Zaeferer</td>
+			<td style="text-align: left">S. Zaefferer</td>
 			<td style="text-align: left">Investigating defect crystallography using diffraction techniques in the SEM
 			</td>
 		</tr>
