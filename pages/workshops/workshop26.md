@@ -482,14 +482,12 @@ their talks as accessible as possible.
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">U. Faul</td>
 			<td style="text-align: left">Dislocation Density from Conventional EBSD Maps of Silicates</td>
-		</tr>
-		
+		</tr>		
     	<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>			
 		</tr>				
-
 		<tr>
 			<td style="text-align: right">15:00&minus;15:30</td>
 			<td style="text-align: left">V.&nbsp;Tong</td>
@@ -512,7 +510,7 @@ their talks as accessible as possible.
 			<td style="text-align: left"><i>Short walk through Freiberg</i></td>
 		</tr>
 		<tr>
-			<td style="text-align: left">18:00</td>
+			<td style="text-align: left">19:00</td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"><i>Dinner at Stadtwirtschaft</i></td>
 		</tr>
@@ -531,37 +529,19 @@ their talks as accessible as possible.
 	</thead>
 	<tbody>
 		<tr>
-			<td style="text-align: right">9:00&minus;10:00</td>
-			<td style="text-align: left">S. Zaefferer</td>
-			<td style="text-align: left">Investigating defect crystallography using diffraction techniques in the SEM
-			</td>
-		</tr>
-		<tr>
-			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: right">09:00&minus;11:30</td>
+			<td style="text-align: left"><i>Excursion - Silver Mine Freiberg</i></td>
 			<td style="text-align: left"></td>
-			<td style="text-align: left"></td>
-		</tr>
-		<tr>
-			<td style="text-align: right">10:30&minus;11:00</td>
-			<td style="text-align: left">M. Theising <i>(online)</i></td>
-			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys
-			</td>
 		</tr>				
-		<tr>
-			<td style="text-align: right">11:00&minus;11:30</td>
-			<td style="text-align: left">A. Erlacher</td>							
-			<td style="text-align: left">Complexion transitions in La-doped alumina: microstructural evolution and grain boundary distributions
-			</td>							
-		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
 		</tr>
-		<tr>
+				<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">T.	Vermeij</td>
-			<td style="text-align: left">Identification of crystallographic slip systems using MTEX
+			<td style="text-align: left">S. Zaeferer</td>
+			<td style="text-align: left">Investigating defect crystallography using diffraction techniques in the SEM
 			</td>
 		</tr>
 		<tr>
@@ -576,10 +556,10 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 		</tr>
 		<tr>
-			<td style="text-align: right">15:30&minus;16:00</td>
-			<td style="text-align: left">F. Safari</td>
-			<td style="text-align: left">Martensitic Parent Grain Reconstruction
-			</td>
+			<td style="text-align: right">15:30&minus;16:30</td>
+			<td style="text-align: left">A. Erlacher</td>							
+			<td style="text-align: left">Complexion transitions in La-doped alumina: microstructural evolution and grain boundary distributions
+			</td>							
 		</tr>
 		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
@@ -634,11 +614,33 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
 		</tr>
-				<tr>
-			<td style="text-align: right">13:30&minus;17:00</td>
-			<td style="text-align: left"><i>Excursion</i></td>
-			<td style="text-align: left"></td>
+		<tr>
+			<td style="text-align: right">13:30&minus;14:30</td>
+			<td style="text-align: left">T.	Vermeij</td>
+			<td style="text-align: left">Identification of crystallographic slip systems using MTEX</td>
+		</tr>
+		<tr>
+			<td style="text-align: right">14:30&minus;15:00</td>
+			<td style="text-align: left">M. Theising <i>(online)</i></td>
+			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys (online)</td>
 		</tr>			
+			<tr>
+			<td style="text-align: left"><i>Coffee</i></td>
+			<td style="text-align: left"></td>
+			<td style="text-align: left"></td>
+		</tr>
+		<tr>
+			<td style="text-align: right">16:00&minus;16:30</td>
+			<td style="text-align: left">S. Lathouwers</td>
+			<td style="text-align: left">In-situ Probing the Thermo-Mechanical
+			Response of L-DED printed Metallic Multi-materials</td>
+		</tr>		
+		<tr>
+			<td style="text-align: right">16:30&minus;17:00</td>
+			<td style="text-align: left">F. Safari</td>
+			<td style="text-align: left">Martensitic Parent Grain Reconstruction
+			</td>
+		</tr>				
 	</tbody>
 </table>
 {% endcapture %}
