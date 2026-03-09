@@ -531,7 +531,7 @@ their talks as accessible as possible.
 	</thead>
 	<tbody>
 		<tr>
-			<td style="text-align: right">9:000&minus;10:00</td>
+			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">S. Zaefferer</td>
 			<td style="text-align: left">Investigating defect crystallography using diffraction techniques in the SEM
 			</td>
