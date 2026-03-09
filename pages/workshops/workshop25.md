@@ -21,6 +21,7 @@ MTEX 6.1. Participation is possible in presence as well as remotely.
 	<b>Important:</b> Deadline has been extended until 21.02.2025
 </div>-->
 
+<!--
 {% capture par_default %}
 	Every registered participant should now have received an email with a password in order to see the course materials. If you have not yet received this email please contact one of the organizers.
 {% endcapture %}
@@ -29,6 +30,7 @@ MTEX 6.1. Participation is possible in presence as well as remotely.
 	{% include reference.html link="https://eu02web.zoom-x.de/j/64956858966" content="Enter Workshop zoom session" %}
 {% endcapture %}
 {% include password_access_restriction.html content_default=par_default content_access=par_access %}
+-->
 
 ## Week 1: Learning Crystallographic Texture Analysis with MTEX
 
