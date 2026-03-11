@@ -633,7 +633,13 @@ their talks as accessible as possible.
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">M. Theising <i>(online)</i></td>
 			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys (online)</td>
-		</tr>			
+		</tr>
+				<tr>
+			<td style="text-align: right">15:00&minus;15:30</td>
+			<td style="text-align: left">S. Lathouwers</td>
+			<td style="text-align: left">In-situ Probing the Thermo-Mechanical
+			Response of L-DED printed Metallic Multi-materials</td>
+		</tr>		
 			<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
 			<td style="text-align: left"></td>
@@ -641,15 +647,8 @@ their talks as accessible as possible.
 		</tr>
 		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
-			<td style="text-align: left">S. Lathouwers</td>
-			<td style="text-align: left">In-situ Probing the Thermo-Mechanical
-			Response of L-DED printed Metallic Multi-materials</td>
-		</tr>		
-		<tr>
-			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">F. Safari</td>
-			<td style="text-align: left">Martensitic Parent Grain Reconstruction
-			</td>
+			<td style="text-align: left">canceled</td>
 		</tr>				
 	</tbody>
 </table>
