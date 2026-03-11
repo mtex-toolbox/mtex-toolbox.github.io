@@ -580,7 +580,7 @@ their talks as accessible as possible.
 			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">M.	Bolan</td>
 			<td style="text-align: left">Recent developments assessing composition gradient-induced plasticity in expanded austenite
-			{% include reference.html link="" content="video" class="course_material" %}
+			{% include reference.html link="https://youtu.be/SA0MXPCBMec" content="video" class="course_material" %}
 			</td>
 		</tr>
 	</tbody>
