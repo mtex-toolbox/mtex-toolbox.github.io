@@ -611,12 +611,14 @@ their talks as accessible as possible.
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">M. Witte <i>(online)</i> </td>
 			<td style="text-align: left">Two new methods for the quantification of steel microstructures with EBSD: Determination of c/a-ratios and misorientation pattern matching
+			{% include reference.html link="https://youtu.be/zAtQObWwzjk" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">T. Philipp <i>(online)</i></td>
 			<td style="text-align: left">Investigation of static recovery and recrystallisation in cold-rolled dual-phase steels
+			{% include reference.html link="https://youtu.be/WbhIKYoXs4o" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
