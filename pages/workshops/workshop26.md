@@ -543,16 +543,18 @@ their talks as accessible as possible.
 			<td style="text-align: left"></td>
 			<td style="text-align: left"></td>
 		</tr>
-				<tr>
+		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
-			<td style="text-align: left">S. Zaeferer</td>
+			<td style="text-align: left">S. Zaefferer</td>
 			<td style="text-align: left">Investigating defect crystallography using diffraction techniques in the SEM
+			{% include reference.html link="https://youtu.be/IJH8jgNwgDA" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">T. Nyyssönen <i>(online)</i></td>
 			<td style="text-align: left">Three-dimensional shape metrics for martensite and bainite from two-dimensional orientation maps
+			{% include reference.html link="https://youtu.be/cdhdAKZBKbA" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -564,18 +566,21 @@ their talks as accessible as possible.
 			<td style="text-align: right">15:30&minus;16:00</td>
 			<td style="text-align: left">A. Erlacher</td>							
 			<td style="text-align: left">Complexion transitions in La-doped alumina: microstructural evolution and grain boundary distributions
+			{% include reference.html link="https://youtu.be/rQHZEJJf3w4" content="video" class="course_material" %}
 			</td>							
 		</tr>
 		<tr>
 			<td style="text-align: right">16:00&minus;16:30</td>
 			<td style="text-align: left">P.	Kroeker</td>
 			<td style="text-align: left">Characterization of Complex HCP Twinning Mechanisms and Variant Selection Using MTEX
+			{% include reference.html link="https://youtu.be/WNjbFw9ofBw" content="video" class="course_material" %}
 			</td>			
 		</tr>
 		<tr>
 			<td style="text-align: right">16:30&minus;17:00</td>
 			<td style="text-align: left">M.	Bolan</td>
 			<td style="text-align: left">Recent developments assessing composition gradient-induced plasticity in expanded austenite
+			{% include reference.html link="" content="video" class="course_material" %}
 			</td>
 		</tr>
 	</tbody>
