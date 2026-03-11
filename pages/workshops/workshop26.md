@@ -629,18 +629,23 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">13:30&minus;14:30</td>
 			<td style="text-align: left">T.	Vermeij</td>
-			<td style="text-align: left">Identification of crystallographic slip systems using MTEX</td>
+			<td style="text-align: left">Identification of crystallographic slip systems using MTEX
+			{% include reference.html link="https://youtu.be/W2kRGZdfLj0" content="video" class="course_material" %}
+			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">14:30&minus;15:00</td>
 			<td style="text-align: left">M. Theising <i>(online)</i></td>
-			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys (online)</td>
+			<td style="text-align: left">Using MTEX for the Investigation of Recrystallization in Aluminim Alloys (online)
+			{% include reference.html link="https://youtu.be/isQggnlrSFk" content="video" class="course_material" %}
+			</td>
 		</tr>
 				<tr>
 			<td style="text-align: right">15:00&minus;15:30</td>
 			<td style="text-align: left">S. Lathouwers</td>
-			<td style="text-align: left">In-situ Probing the Thermo-Mechanical
-			Response of L-DED printed Metallic Multi-materials</td>
+			<td style="text-align: left">In-situ Probing the Thermo-Mechanical Response of L-DED printed Metallic Multi-materials
+			{% include reference.html link="https://youtu.be/vhnHh7mr-8M" content="video" class="course_material" %}
+			</td>
 		</tr>		
 			<tr>
 			<td style="text-align: left"><i>Coffee</i></td>
