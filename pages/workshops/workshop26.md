@@ -673,7 +673,8 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">9:00&minus;10:00</td>
 			<td style="text-align: left">A. Leineweber</td>
-			<td style="text-align: left">Dealing with complicated crystal structures
+			<td style="text-align: left">Dealing with complicated crystal structures 
+			{% include reference.html link="https://youtu.be/FnwHsmbDha0" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
@@ -685,18 +686,21 @@ their talks as accessible as possible.
 			<td style="text-align: right">10:30&minus;11:00</td>
 			<td style="text-align: left">A. Ott</td>
 			<td style="text-align: left">Application of a clustering algorithm for efficient texture-informed simulations
+			{% include reference.html link="https://youtu.be/4XfjhEpkAM4" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">L. Richter</td>
 			<td style="text-align: left">Correlative Microscopy - A usecase of EBSD trace analysis with MTEX
+			{% include reference.html link="https://youtu.be/NGJjbLXFCoY" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
 			<td style="text-align: right">11:30&minus;12:00</td>
 			<td style="text-align: left">T. Pöschl</td>
 			<td style="text-align: left"> Robust Approximation of Directional Data
+			{% include reference.html link="https://youtu.be/Gf3Xr7sWUgo" content="video" class="course_material" %}
 			</td>
 		</tr>
 		<tr>
