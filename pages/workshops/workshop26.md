@@ -617,9 +617,7 @@ their talks as accessible as possible.
 		<tr>
 			<td style="text-align: right">11:00&minus;11:30</td>
 			<td style="text-align: left">T. Philipp <i>(online)</i></td>
-			<td style="text-align: left">Investigation of static recovery and recrystallisation in cold-rolled dual-phase steels
-			{% include reference.html link="https://youtu.be/WbhIKYoXs4o" content="video" class="course_material" %}
-			</td>
+			<td style="text-align: left">Investigation of static recovery and recrystallisation in cold-rolled dual-phase steels</td>
 		</tr>
 		<tr>
 			<td style="text-align: left"><i>Lunch</i></td>
