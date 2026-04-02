@@ -47,7 +47,7 @@ F = halfQuadraticFilter;
 ebsd = smooth(ebsd('indexed'),F,'fill',grains);
 {% endhighlight %}
 <h2 id="3">Computing the WBV</h2>
-<p>The function expects the input to a  <a href="EBSD.gridify.html">gridified</a>.</p>
+<p>The function expects the EBSD data set to be <a href="EBSD.gridify.html">gridified</a>.</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify;
 wbv = weightedBurgersVec(ebsd)
@@ -77,7 +77,6 @@ mtexTitle('direction of the WBV in specimen coordinates')
 {% include inline_image.html file="WBV_02.png" %}
 </center>
 {% highlight matlab %}
-figure(2)
 plot(cK,'figSize','tiny')
 {% endhighlight %}
 <center>
@@ -87,7 +86,8 @@ plot(cK,'figSize','tiny')
 {% highlight matlab %}
 cond = wbv.norm > quantile(wbv.norm,0.85);
 
-figure(1), hold on
+plot(ebsd,cK.direction2color(wbv),'FaceAlpha',wbv.norm/0.22)
+hold on
 quiver(ebsd(cond),wbv(cond),'color','k','autoScaleFactor', 2, 'antipodal');
 hold off
 {% endhighlight %}
