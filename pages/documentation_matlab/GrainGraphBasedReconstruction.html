@@ -92,7 +92,7 @@ job = parentGrainReconstructor
 <p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individually. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
 {% highlight matlab %}
 close all
-histogram(job.calcGBFit./degree,'BinMethod','sqrt')
+histogram(job.calcGBFit./degree,'BinMethod','sqrt','EdgeColor','auto')
 xlabel('disorientation angle')
 
 job.calcParent2Child
@@ -115,7 +115,7 @@ ans = parentGrainReconstructor
 <p>We observe that the optimized parent to child orientation relationship is 2.3&deg; off the initial Kurdjumov Sachs orientation relationship and reduced the first quintil of the misfit with the child to child misorientations to 1.5&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
 {% highlight matlab %}
 hold on
-histogram(job.calcGBFit./degree,'BinMethod','sqrt')
+histogram(job.calcGBFit./degree,'BinMethod','sqrt','EdgeColor','auto')
 hold off
 {% endhighlight %}
 <center>

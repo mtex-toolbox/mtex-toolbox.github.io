@@ -90,7 +90,7 @@ job = parentGrainReconstructor
 <p>It is well known that the phase transformation from austenite to martensite is not described by a fixed orientation relationship. In fact, the actual orientation relationship needs to be determined for each sample individually. Here, we used the iterative method proposed by Tuomo Nyyss&ouml;nen and implemented in the function <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> that starts at our initial guess of the orientation relation ship and iterates towards a more optimal orientation relationship.</p>
 {% highlight matlab %}
 close all
-histogram(job.calcGBFit./degree,'BinMethod','sqrt')
+histogram(job.calcGBFit./degree,'BinMethod','sqrt','EdgeColor','auto')
 xlabel('disorientation angle')
 
 job.calcParent2Child
@@ -113,7 +113,7 @@ ans = parentGrainReconstructor
 <p>We observe that the optimized parent to child orientation relationship is 2.3&deg; off the initial Kurdjumov Sachs orientation relationship and reduced the first quintil of the misfit with the child to child misorientations to 1.5&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
 {% highlight matlab %}
 hold on
-histogram(job.calcGBFit./degree,'BinMethod','sqrt')
+histogram(job.calcGBFit./degree,'BinMethod','sqrt','EdgeColor','auto')
 hold off
 {% endhighlight %}
 <center>
@@ -142,7 +142,7 @@ hold off
 <h2 id="8">Variant Graph based parent grain reconstruction</h2>
 <p>Next we set up the variant graph where the nodes are the potential parent orientations of each child grain and the edges describe neighboring grains that have compatible potential parent orientations. This graph is computed by the function <a href="parentGrainReconstructor.calcVariantGraph.html"><code class="language-plaintext highlighter-rouge">calcVariantGraph</code></a>. The edge weights are computed from the misfit between the potential parent orientations using a cumulative Gaussian distribution with the mean value <code class="language-plaintext highlighter-rouge">'threshold'</code> which describes the misfit at which the probability is exactly 50 percent and the standard deviation <code class="language-plaintext highlighter-rouge">'tolerance'</code>.</p>
 {% highlight matlab %}
-job.calcVariantGraph('threshold',3.5*degree,'tolerance',2.5*degree)
+job.calcVariantGraph('threshold',3.5*degree,'tolerance',3.5*degree,'tortuosity')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -156,7 +156,7 @@ ans = parentGrainReconstructor
    c2c fit: 1.3°, 1.7°, 2.2°, 3° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
  
- variant graph: 474481 entries
+ variant graph: 554684 entries
 {% endhighlight %}
 <p>For large maps it can be useful to perform the segmentation in a two step process, where in the in the first step similarly oriented variants are reconstructed as one variants and only separated in a second step. This can be accomplished by the commands</p>
 {% highlight matlab %}
@@ -181,7 +181,7 @@ ans = parentGrainReconstructor
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
  
  votes: 10641 x 1
-   probabilities: 100%, 100%, 99%, 97% (quintiles)
+   probabilities: 100%, 99%, 98%, 97% (quintiles)
 {% endhighlight %}
 <p>As a result a table of votes <code class="language-plaintext highlighter-rouge">job.votes</code> is generated. More specifically, <code class="language-plaintext highlighter-rouge">job.votes.prob</code> is a matrix that contains in row <code class="language-plaintext highlighter-rouge">job.votes.prob(i,:)</code> the probabilities of the i-th child grain to have a specific parent orientation. Accordingly, we can plot the probability of the best fit for each grain by</p>
 {% highlight matlab %}
@@ -194,7 +194,8 @@ mtexColorbar
 <p>We observe many child grains where the algorithm is sure about the parent orientation and some child grains where the probability is close to 50 percent. This is an indication that there are a least two potential parent orientations which are similarly likely. In many cases these potential parent orientations are in a twinning relationship.</p>
 <p>Lets reconstruct all parent orientations where the probability is above 50 percent.</p>
 {% highlight matlab %}
-job.calcParentFromVote('minProb',0.5)
+%job.calcParentFromVote('minProb',0.5)
+job.calcParentFromVote
 
 % plot the result
 plot(job.parentGrains,job.parentGrains.meanOrientation)
@@ -203,16 +204,16 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% highlight plaintext %}
 ans = parentGrainReconstructor
  
- phase   mineral         symmetry  grains  area   reconstructed
- parent  Iron fcc        432       10558   99%    99%          
- child   Iron bcc (old)  432       83      0.58%               
+ phase   mineral         symmetry  grains  area    reconstructed
+ parent  Iron fcc        432       10605   100%    100%         
+ child   Iron bcc (old)  432       36      0.073%               
  
  OR: (346.1°,9°,58°)
-   p2c fit: 2.4°, 5°, 9.5°, 19° (quintiles)
-   c2c fit: 1.8°, 2.1°, 2.8°, 4° (quintiles)
+   p2c fit: 9.2°, 14°, 19°, 23° (quintiles)
+   c2c fit: 1.5°, 2.4°, 2.5°, 2.9° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
  
- votes: 83 x 1
+ votes: 36 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
@@ -225,7 +226,7 @@ job.selectInteractive
 <p>A second way would be to rerun the variant graph approach above a second time but with relaxed settings, i.e., with a lower probability. A third way is to use the command <a href="parentGrainReconstructor.calcGBVotes.html"><code class="language-plaintext highlighter-rouge">job.calcGBVotes</code></a> to compute votes for potential parent orientations from the surrounding already reconstructed parent grains.</p>
 {% highlight matlab %}
 % compute the votes
-job.calcGBVotes('p2c','reconsiderAll','threshold',3*degree,'tolerance',1.5*degree)
+job.calcGBVotes('p2c','reconsiderAll','threshold',4*degree,'tolerance',1.5*degree,'tortuosity')
 
 % assign parent orientations according to the votes
 job.calcParentFromVote
@@ -237,28 +238,28 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% highlight plaintext %}
 ans = parentGrainReconstructor
  
- phase   mineral         symmetry  grains  area   reconstructed
- parent  Iron fcc        432       10558   99%    99%          
- child   Iron bcc (old)  432       83      0.58%               
+ phase   mineral         symmetry  grains  area    reconstructed
+ parent  Iron fcc        432       10605   100%    100%         
+ child   Iron bcc (old)  432       36      0.073%               
  
  OR: (346.1°,9°,58°)
-   p2c fit: 2.4°, 5°, 9.5°, 19° (quintiles)
-   c2c fit: 1.8°, 2.1°, 2.8°, 4° (quintiles)
+   p2c fit: 9.2°, 14°, 19°, 23° (quintiles)
+   c2c fit: 1.5°, 2.4°, 2.5°, 2.9° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
  
- votes: 10347 x 1
-   probabilities: 99%, 93%, 79%, 61% (quintiles)
+ votes: 10513 x 1
+   probabilities: 95%, 80%, 67%, 56% (quintiles)
  
  
 ans = parentGrainReconstructor
  
- phase   mineral         symmetry  grains  area   reconstructed
- parent  Iron fcc        432       10575   100%   99%          
- child   Iron bcc (old)  432       66      0.11%               
+ phase   mineral         symmetry  grains  area    reconstructed
+ parent  Iron fcc        432       10605   100%    100%         
+ child   Iron bcc (old)  432       36      0.073%               
  
  OR: (346.1°,9°,58°)
-   p2c fit: 6°, 10°, 17°, 22° (quintiles)
-   c2c fit: 2.1°, 2.4°, 2.6°, 2.9° (quintiles)
+   p2c fit: 9.3°, 14°, 19°, 23° (quintiles)
+   c2c fit: 1.5°, 2.4°, 2.5°, 2.9° (quintiles)
    closest ideal OR: (111) || (011)   [1-10] || [100] fit: 2.5°
 {% endhighlight %}
 <center>
