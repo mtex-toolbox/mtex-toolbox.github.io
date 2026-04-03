@@ -168,7 +168,7 @@ ans =
     0.2349
 {% endhighlight %}
 <h2 id="9">Convolution of a rotational function with a spherical function</h2>
-<p>We consider a <code class="language-plaintext highlighter-rouge">SO3Fun</code> \(f: {}_{S_h} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with left symmetry \(S_h\) and right symmetry \(S_R\) and a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(h \colon \mathbb S^2 /_{S_h} \to \mathbb C\) with symmetry group \(S_h\).</p>
+<p>We consider a <code class="language-plaintext highlighter-rouge">SO3Fun</code> \(f: {}_{S_h} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with left symmetry \(S_h\) and right symmetry \(S_R\), and a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(h \colon \mathbb S^2 /_{S_h} \to \mathbb C\) with symmetry group \(S_h\).</p>
 {% highlight matlab %}
 f = SO3FunHarmonic.example
 h = S2FunHarmonicSym(S2Fun.smiley,ss1)
@@ -203,13 +203,14 @@ ans =
 ans =
     0.0655
 {% endhighlight %}
-<p>If you want to compute the convolution of \(f: {}_{'1'} \backslash SO(3) /_{S_R} \to \mathbb{C}\) and \(h \colon \mathbb S^2 /_{S_R} \to \mathbb C\) which yields \(f*h \colon \mathbb S^2/_{'1'} \to \mathbb C\) and is defined as</p>
-<p>\[ (f * h)(\xi) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot h(q^{-1}\,\xi) \, dq. \]</p>
+<p>Alternatively, we may consider the convolution of \(f: {}_{'1'} \backslash SO(3) /_{S_R} \to \mathbb{C}\)and \(h \colon \mathbb S^2 /_{S_R} \to \mathbb C\), which yields the spherical function \(f*h \colon \mathbb S^2/_{'1'} \to \mathbb C\) defined by</p>
+<p>\[ (f * h)(\xi) = \frac1{8\pi^2} \int_{SO(3)} f(q) \cdot h(q^{-1}\,\xi) \, dq, \]</p>
+<p>In MTEX this variant can be computed by adding the flag <code class="language-plaintext highlighter-rouge">'inv'</code>, or equivalently by evaluating <code class="language-plaintext highlighter-rouge">conv(inv(f),h)</code>.</p>
 {% highlight matlab %}
 f = SO3FunHarmonic.example
 h = S2FunHarmonicSym(S2Fun.smiley,f.CS)
 
-c = conv(inv(f),h)
+c = conv(f,h,'inv')
 
 % Test
 v = vector3d.rand;
