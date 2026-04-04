@@ -121,9 +121,9 @@ legend('Bandwidth 17','Bandwidth 32')
 <p>Therefore we do so-called Tikhonov regularization, which means that we penalize oscillations by adding the norm of \(f\) to the energy functional, which is minimized by the <code class="language-plaintext highlighter-rouge">lsqr</code> solver. Hence we now minimize the functional</p>
 <p>\[ \sum_{m=1}^M|f(x_m)-v_m|^2 + \lambda \|f\|^2_{H^s}\]</p>
 <p>where \(\lambda\) is the regularization parameter. The Sobolev norm \(\|.\|_{H^s}\) of an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> \(f\) with Fourier coefficients \(\hat{f}\) reads as</p>
-<p>\[\|f\|^2_{H^s} = \sum_{n=0}^N (2n+1)^{2s} \, \sum_{k,l=-n}^n|\hat{f}_n^{k,l}|^2.\]</p>
+<p>\[\|f\|^2_{H^s} = \sum_{n=0}^N (1+n(n+1))^{s} \, \sum_{k,l=-n}^n|\hat{f}_n^{k,l}|^2.\]</p>
 <p>The Sobolev index \(s\) describes how smooth our approximation \(f\) should be, because the larger \(s\) is, the faster the Fourier coefficients \(\hat{f}_n^{k,l}\) converge towards 0 and the smoother is the approximation \(f\).</p>
-<p>The command <a href="SO3FunHarmonic.interpolate"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code></a> of the class <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> applies regularization by default. The default regularization parameter is \(\lambda = 5\cdot 10^{-7}\) and the default Sobolev index \(s=2\);</p>
+<p>The command <a href="SO3FunHarmonic.interpolate"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code></a> of the class <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> applies regularization by default. The default regularization parameter is \(\lambda = 5\cdot 10^{-7}\) and the default Sobolev index \(s=2\). Note that you have to decide for a regularization parameter dependent on your data. There is no predefined one. You may have to try different parameters and look on the result.</p>
 {% highlight matlab %}
 SO3F3 = interp(ori, val,'harmonic','bandwidth',32)
 % SO3F3 = SO3FunHarmonic.interpolate(ori,val,'bandwidth',32)
@@ -201,6 +201,7 @@ SO3F5 = SO3FunHarmonic (1 → y↑→x)
 <h2 id="21">LSQR-Parameters</h2>
 <p>Note that the <code class="language-plaintext highlighter-rouge">lsqr</code> solver from Matlab, which is used to minimize the least squares problem from above has some termination conditions. We can specify the method tolerance of <code class="language-plaintext highlighter-rouge">lsqr</code> with the option <code class="language-plaintext highlighter-rouge">'tol'</code> (default 1e-3) and the maximum number of iterations by the option <code class="language-plaintext highlighter-rouge">'maxit'</code> (default 100).</p>
 <p>Thus we are able to control the precision of the result and computational time of the lsqr-method in the approximation process.</p>
+<p>Note, that the usage of a to small maximum number of iterations could also yields to a regularization effect.</p>
 <p>Moreover we obtain the <code class="language-plaintext highlighter-rouge">lsqr</code> parameters in a second output argument in the <a href="SO3FunHarmonic.interpolate"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic.interpolate</code></a>-command.</p>
 {% highlight matlab %}
 % default Parameters
