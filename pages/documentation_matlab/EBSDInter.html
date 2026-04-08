@@ -98,10 +98,10 @@ e2 = EBSD (y↑→x)
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
-    Id   Phase            orientation   bands    bc    bs   error   mad   grainId   oldId
- 13994       1   (163°,111.9°,186.1°)      10   156   216       0   0.4        36    3276
+    Id   Phase              orientation   bands    bc    bs   error   mad   grainId   oldId
+ 13993       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4        36    3109
  Scan unit : um
- X x Y x Z : [31, 31] x [5.7, 5.7] x [0, 0]
+ X x Y x Z : [31, 31] x [5.4, 5.4] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>which returns the nearest neighbor EBSD measurement. Lets have a look at the difference</p>
@@ -111,38 +111,34 @@ angle(e1.orientations,e2.orientations)./degree
 
 {% highlight plaintext %}
 ans =
-    0.2272
+     0
 {% endhighlight %}
 <h2 id="6">Change of the measurement grid</h2>
 <p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> can be used to evaluate the EBSD map on a different grid, which might have higher or lower resolution or might even be rotated. Lets demonstrate this</p>
 {% highlight matlab %}
-% define a rotated coarse grid
-omega = 5*degree;
-[xmin, xmax, ymin, ymax] = ebsd.extent;
-x = linspace(xmin-cos(omega)*ymax,xmax,100);
-y = linspace(ymin-sin(omega)*xmax,ymax,50);
-[x,y] = meshgrid(x,y);
-
-xy = [cos(omega) -sin(omega); sin(omega) cos(omega) ] * [x(:),y(:)].';
+% unit cell of twice the size, rotated by 45 degree
+uC = rotate(2*ebsd.unitCell,45*degree);
 
 % define the EBSD data set on this new grid
-ebsdNewGrid = interp(ebsd,xy(1,:),xy(2,:))
+ebsdNewGrid = gridify(ebsd,'unitCell',uC)
 
 % plot the regridded EBSD data set
 plot(ebsdNewGrid('indexed'),ebsdNewGrid('indexed').orientations)
+xlim([0,50]); ylim([0,40])
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdNewGrid = EBSD (y↑→x)
+ebsdNewGrid = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    2650 (53%)  notIndexed                                                 
-     1    2350 (47%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0    5974 (51%)  notIndexed                                                 
+     1    5690 (49%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
  Properties: bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
- X x Y x Z : [-44, 50] x [-7.9, 45] x [0, 0]
+ X x Y x Z : [-20, 70] x [-25, 66] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :108 x 108
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_02.png" %}
@@ -151,8 +147,8 @@ ebsdNewGrid = EBSD (y↑→x)
 <p>Another example is the change from a square to an hexagonal grid or vice versa. In this case the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> is implicitly called by the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>. In order to demonstrate this functionality we start by EBSD data on a hex grid</p>
 {% highlight matlab %}
 mtexdata ferrite silent
-
-plot(ebsd,ebsd.orientations)
+ebsd = ebsd.gridify;
+plot(ebsd(1:50,1:100),ebsd(1:50,1:100).orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_03.png" %}
@@ -160,12 +156,13 @@ plot(ebsd,ebsd.orientations)
 <p>and resample the data on a square grid. To do so we first define a smaller square unit cell corresponding to the hexagonal unit cell</p>
 {% highlight matlab %}
 % define a square unit cell
-squnitCell = ebsd.dPos / 4 * vector3d([1 1 -1 -1],[1 -1 -1 1],0).';
+squnitCell = ebsd.dPos / 4 * vector3d([-1 -1 1 1],[-1 1 1 -1],0).';
 
 % use the square unit cell for gridify
-ebsd = ebsd.gridify('unitCell',squnitCell);
 
-plot(ebsd,ebsd.orientations)
+ebsdS = ebsd.gridify('unitCell',squnitCell);
+
+plot(ebsdS(1:150,1:350),ebsdS(1:150,1:350).orientations)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_04.png" %}

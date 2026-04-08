@@ -1,0 +1,199 @@
+---
+title: The Tangent Space on the Rotation Group
+
+sidebar: documentation_sidebar
+permalink: RotationTangentSpace.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>The Tangent Space on the Rotation Group</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_RotationTangentSpace.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationTangentSpace.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>Tangent vectors on the rotation group can be thought of as directions in which a rotation can be varied. Since these directions depend on the specific rotation you start from, they are not global but local objects. The set of all tangent vectors at a given rotation forms the tangent space, which describes the local geometry of the rotation group in the neighborhood of that point.</p>
+<!--/introduction-->
+<h2 id="1">Definition of Tangent Spaces and Tangent Vectors on the Rotation Group</h2>
+<p>First we start with a (slightly technical) mathematical description of the tangent space by <code class="language-plaintext highlighter-rouge"><a href="spinTensor.spinTensor.html">spinTensor</a>'s</code>, which are used to describe small rotational changes. For more information take a look <a href="RotationSpinTensor.html">here</a> in the documentation.</p>
+<p>The tangent space of the rotation group at some rotation \(R\) has two different representations. There is a left and a right tangent space representation.</p>
+<p>The left tangent space is defined by</p>
+<p>\[ T_R SO(3) = \{ S \cdot R | S=-S^T \} = \mathfrak{so}(3) \cdot R, \]</p>
+<p>where \(\mathfrak{so}(3)\) describes the set of all skew symmetric matrices, i.e. <a href="spinTensor.spinTensor.html">spinTensor</a>'s.</p>
+{% highlight matlab %}
+R = rotation.byAxisAngle(xvector,20*degree);
+S1 = spinTensor(vector3d(0,0,1))
+% left tangent vector at some Rotation R
+TV = matrix(S1) * matrix(R)
+{% endhighlight %}
+
+{% highlight plaintext %}
+S1 = spinTensor (y↑→x)
+  rank: 2 (3 x 3)
+ 
+  0 -1  0
+  1  0  0
+  0  0  0
+TV =
+            0     -0.93969      0.34202
+            1            0            0
+            0            0            0
+{% endhighlight %}
+<p>The right tangent space is defined analogously:</p>
+<p>\[ T_R SO(3) = \{ R \cdot S | S=-S^T \} = R \cdot \mathfrak{so}(3). \]</p>
+<p>Again, skew-symmetric matrices describe all possible infinitesimal rotations, but now applied on the right side of R.</p>
+{% highlight matlab %}
+S2 = spinTensor(vector3d(0,sin(20*degree),cos(20*degree)))
+% right tangent vector at some rotation R
+TV = matrix(R)*matrix(S2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+S2 = spinTensor (y↑→x)
+  rank: 2 (3 x 3)
+ 
+ *10^-2
+      0 -93.97   34.2
+  93.97      0      0
+  -34.2      0      0
+TV =
+            0     -0.93969      0.34202
+            1            0            0
+   5.5511e-17            0            0
+{% endhighlight %}
+<p>Note that the left and right tangent spaces describe the same tangent vectors, just in different notations.</p>
+<p>In the above example <code class="language-plaintext highlighter-rouge">S1</code> and <code class="language-plaintext highlighter-rouge">S2</code> describe the same tangent vector <code class="language-plaintext highlighter-rouge">TV</code> in different representations.</p>
+<h2 id="4">Description of Rotational Tangent Vectors in MTEX</h2>
+<p>In MTEX, tangent vectors are represented as objects of the class <code class="language-plaintext highlighter-rouge"><a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a></code>. Therefore the three distinguish entries of the <code class="language-plaintext highlighter-rouge"><a href="spinTensor.spinTensor.html">spinTensor</a></code> \(S\) are stored as <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code>, in the following way:</p>
+{% highlight matlab %}
+S = spinTensor(0.2*vector3d(1,2,3))
+v1 = SO3TangentVector(S,R)
+{% endhighlight %}
+
+{% highlight plaintext %}
+S = spinTensor (y↑→x)
+  rank: 2 (3 x 3)
+ 
+ *10^-2
+   0 -60  40
+  60   0 -20
+ -40  20   0
+ 
+v1 = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: leftVector
+    x   y   z
+  0.2 0.4 0.6
+{% endhighlight %}
+<p>A <code class="language-plaintext highlighter-rouge"><a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a></code> in MTEX has three important properties:</p>
+<div>
+<ul>
+<li>the rotation \(R\) (which defines the tangent space)</li>
+<li>the tangent space representation (left or right)</li>
+<li>underling symmetries (relevant for orientations)</li>
+</ul>
+</div>
+<p>By default, the tangent space representation is left. A right tangent vector can be constructed as follows:</p>
+{% highlight matlab %}
+v2 = SO3TangentVector(vector3d(1,2,3),R,SO3TangentSpace.rightVector)
+{% endhighlight %}
+
+{% highlight plaintext %}
+v2 = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: rightVector
+  x y z
+  1 2 3
+{% endhighlight %}
+<p>Here <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code> have the same coordinates in different bases (tangent space representations). Hence they describe different tangent vectors.</p>
+<p>Left and right tangent vectors can be easily transformed into each other:</p>
+{% highlight matlab %}
+v1_right = right(v1)
+v1_left = left(v1_right)
+{% endhighlight %}
+
+{% highlight plaintext %}
+v1_right = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: rightVector
+    x        y        z
+  0.2 0.581089 0.427008
+ 
+v1_left = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: leftVector
+    x   y   z
+  0.2 0.4 0.6
+{% endhighlight %}
+<p>Note that MTEX cares about the tangent space representation. Hence if we try to compute with <code class="language-plaintext highlighter-rouge">@SO3TangentVectors</code> MTEX automatically transform them into the same representation and applies the operation afterwards.</p>
+{% highlight matlab %}
+v1 + v1_right
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: leftVector
+    x   y   z
+  0.4 0.8 1.2
+{% endhighlight %}
+<h2 id="10">Operations of Rotational Tangent Vectors</h2>
+<p>The following operations are defined for rotational tangent vectors <code class="language-plaintext highlighter-rouge">TV</code>, <code class="language-plaintext highlighter-rouge">TV1</code>, <code class="language-plaintext highlighter-rouge">TV2</code>
+</p>
+<div>
+<ul>
+<li>basic arithmetic operations: sum, difference, scaling, quotient</li>
+<li>inner product <a href="SO3TangentVector.dot.html"><code class="language-plaintext highlighter-rouge">dot(TV1,TV2)</code></a>
+</li>
+<li>cross product <a href="SO3TangentVector.cross.html"><code class="language-plaintext highlighter-rouge">cross(TV1,TV2)</code></a>
+</li>
+<li>norm <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm(TV)</code></a>
+</li>
+<li>normalize <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize(TV)</code></a>
+</li>
+<li>average <a href="SO3TangentVector.mean.html"><code class="language-plaintext highlighter-rouge">mean(TV)</code></a>
+</li>
+</ul>
+</div>
+<p>
+<b>Exponential and Logarithm Map of Tangent Vectors</b>
+</p>
+<p>In the context of the rotation group SO(3), the exponential and logarithm maps provide the link between tangent vectors and rotations.</p>
+<p>The exponential map takes a tangent vector (an infinitesimal rotation) and returns the corresponding finite rotation in SO(3). It is performed onto the tangent vector <code class="language-plaintext highlighter-rouge">v1</code> with the command <a href="SO3TangentVector.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a>.</p>
+{% highlight matlab %}
+rot = exp(v1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+rot = orientation (1 → y↑→x)
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  59.1419 41.5248 332.468
+{% endhighlight %}
+<p>The logarithm map does the reverse: It takes two rotations and computes the tangent vector in the tangent space of one rotation that points towards the other rotation. % It is performed onto the rotations with the command <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a>.</p>
+{% highlight matlab %}
+log(rot,R)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: leftVector
+    x   y   z
+  0.2 0.4 0.6
+{% endhighlight %}
+<p>Together, these maps allow switching between the curved geometry of SO(3) and the linear structure of its tangent spaces, which is essential for interpolation, averaging, and optimization on rotations.</p>
+</div>
+</body>
+</html>
