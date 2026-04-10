@@ -128,9 +128,9 @@ g = SO3FunRBF (y↑→x → Quartz)
   weight: 1
  
 ans =
-    2.3745
+       2.3745
 ans =
-    4.2858
+       4.2858
 {% endhighlight %}
 <h2 id="7">Local Extrema</h2>
 <p>The above mentioned functions <a href="SO3Fun.min.html"><code class="language-plaintext highlighter-rouge">min</code></a> and <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> have very different use cases</p>
@@ -152,8 +152,8 @@ annotate(maxNodes)
 
 {% highlight plaintext %}
 maxValue =
-  260.2697
-  212.3075
+       260.27
+       212.31
  
 maxNodes = orientation (Quartz → y↑→x)
   size: 2 x 1
@@ -189,7 +189,7 @@ sqrt(mean(abs(SO3F1).^2))
 
 {% highlight plaintext %}
 ans =
-    3.7736
+       3.7736
 {% endhighlight %}
 <p>or more efficiently by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>
 </p>
@@ -199,21 +199,25 @@ norm(SO3F1)
 
 {% highlight plaintext %}
 ans =
-    3.7730
+        3.773
 {% endhighlight %}
 <h2 id="11">Differentiation</h2>
-<p>The gradient of a \(SO(3)\) function in a specific point can be described by a <a href="vector3d.vector3d.html">three-dimensional vector</a> which can be computed by the command <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a>
+<p>The gradient of an \(SO(3)\) function in a specific point is described by a <a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a>-object, which can be computed by the command <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a>
 </p>
 {% highlight matlab %}
 grad(SO3F1,R)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3TangentVector
+ans = SO3TangentVector (y↑→x)
+ intern symmetries: Quartz → y↑→x
  TagentSpace: leftVector
         x        y        z
   10.1343 -26.5867 -3.26427
 {% endhighlight %}
+<p>This <code class="language-plaintext highlighter-rouge">SO3TangentVector</code> describes an element of a tangent space on the rotation group \(SO(3)\) at some specific rotation.</p>
+<p>For detailed information on this tangent space representation, see <a href="RotationTangentSpace.html">Tangent Space Representation on SO(3)</a>
+</p>
 <p>The gradients of a \(SO(3)\) function in all points form a \(SO(3)\) vector field and are returned by the function <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">grad</code></a> as a variable of type <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a>.</p>
 {% highlight matlab %}
 % compute the gradient as a vector field
@@ -235,7 +239,8 @@ G = SO3VectorFieldHarmonic (Quartz → y↑→x)
 {% include inline_image.html file="SO3FunOperations_07.png" %}
 </center>
 <p>We observe long arrows at the positions of big changes in intensity and almost invisible arrows in regions of constant intensity.</p>
-<h2 id="14">Rotating orientation dependent functions</h2>
+<p>Note that, roughly speaking, the gradient at a given rotation indicates the direction of steepest ascent of <code class="language-plaintext highlighter-rouge">SO3F1</code>. In the above plot, this gradient is represented by an arrow pointing along that direction. By following this arrow via the exponential map, one obtains a new rotation.</p>
+<h2 id="15">Rotating orientation dependent functions</h2>
 <p>Rotating an orientation dependent function works with the command <a href="SO3Fun.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>
 </p>
 {% highlight matlab %}
