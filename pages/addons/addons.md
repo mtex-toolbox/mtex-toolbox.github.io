@@ -12,20 +12,20 @@ toc: false
     <div id="addons-mtex-gui" class="col-md-6">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-                <img src="images/thumbnails/MTEX-GUI_screenshot.png">
+                <img src="images/thumbnails/TrueEBSD_webpage_pic.gif">
             </div>
             <div class="panel-body">
-                <h4>MTEX GUI</h4>
-                <p>...
-                    is a graphical user interface to MTEX that allows to perform many analysis step in a non programming way.
+                <h4>TrueEBSD</h4>
+                <p>... performs spatial distortion corrections and alignments between images and electron backscatter diffraction maps. 
                 </p>
                 <p>
                     <i class="fa fa-user"></i>
-                    {% include reference.html link="https://www.researchgate.net/profile/Jessica_Hiscocks" content="Jessica Hiscocks" %}
+                    {% include reference.html link="https://github.com/vtvivian" content="Vivian Tong" %}
                 </p>
                 <p>
                     <i class="fa fa-home"></i>
-                    {% include reference.html link="https://www.researchgate.net/publication/341722714_MTEX_GUI_3pt4-_An_updated_graphical_interface_for_MTEX" content="ResearchGate: An updated graphical interface for MTEX" %}
+                    {% include reference.html
+    link="https://github.com/vtvivian/mtex-trueEbsd" content="Github: vtvivian/mtex-trueEbsd" %}
                 </p>
             </div>
         </div>
