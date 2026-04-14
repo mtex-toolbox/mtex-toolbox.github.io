@@ -292,16 +292,20 @@ of material scientists, geologists and mathematicians.
     <div class="col-md-4">
         <div class="panel panel-default text-center">
             <div class="panel-heading">
-				<a href="https://www.github.com/frankNiessen/phaseSegmenter">
-					<img src="images/thumbnails/phaseSegmenter_screenshot_centered.png">
+				<a href="https://www.github.com/vtvivian/mtex-trueEbsd">
+					<img src="images/thumbnails/TrueEBSD_webpage_pic.gif">
 				</a>
             </div>
             <div class="panel-body">
 				<h4>
-				{% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="phaseSegmenter" %}
-				</h4>
+                <!--{% include reference.html link="https://www.github.com/frankNiessen/phaseSegmenter" content="phaseSegmenter" %}-->
+                {% include reference.html link="https://www.github.com/vtvivian/mtex-trueEbsd" content="TrueEBSD" %}
+                </h4>
 				<p>
+				<!--
 				toolbox for segmenting of phases
+				-->
+				toolbox for aligning EBSD and SEM images
 				</p>
                 <!--<p>
                     <i class="fa fa-user"></i>
