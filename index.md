@@ -37,9 +37,7 @@ of material scientists, geologists and mathematicians.
 					<li>
                         04/26 &minus; new preprint:
 							{% include reference.html link="https://arxiv.org/abs/2604.17997" content="A unified framework for grain boundary
-							distributions in textured materials" %}
-                        released:
-                        {% include reference.html link="https://arxiv.org/pdf/2604.17997" content="Release Notes" download=true%}
+							distributions in textured materials" pdf=true%}
                     </li>
 					<li>
                         10/25 &minus;
