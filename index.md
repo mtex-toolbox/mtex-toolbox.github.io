@@ -35,6 +35,13 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul class="no_bullet">
 					<li>
+                        04/26 &minus; new preprint:
+							{% include reference.html link="https://arxiv.org/abs/2604.17997" content="A unified framework for grain boundary
+							distributions in textured materials" %}
+                        released:
+                        {% include reference.html link="https://arxiv.org/pdf/2604.17997" content="Release Notes" download=true%}
+                    </li>
+					<li>
                         10/25 &minus;
 							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.0/mtex-6.1.0.zip" content="MTEX 6.1.0" download=true %}
                         released:
@@ -51,11 +58,6 @@ of material scientists, geologists and mathematicians.
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
-					<!--<li>
-						03/24 &minus;
-						{% include reference.html link="workshop24?" content="MTEX Workshop 24" %}:
-                        {% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}
-                    </li>-->
                     <li>
                         03/22 &minus; addon 
                         {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
@@ -66,11 +68,6 @@ of material scientists, geologists and mathematicians.
                         {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="MTEX GUI 3.5" %}
                         by 
                         {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks" content="J. Hiscocks" %}
-                    </li>
-                    <li>
-                        07/21 &minus;
-                        {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="Getting Started with MTEX for EBSD Analysis" download=true %}
-                        by J. Hiscocks
                     </li>
                  </ul>
             </div>
@@ -399,12 +396,14 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul>
+					<li>{% include reference.html
+					link="https://arxiv.org/pdf/2604.17997" 
+					content="A unified framework for grain boundary distributions in textured materials" %}</li>
 					<li>{% include reference.html link="https://www.sciencedirect.com/science/article/pii/S135964542300366X/pdfft?md5=cd5b4d579996e89cf4ba96bdee90fad4&pid=1-s2.0-S135964542300366X-main.pdf" content="Habit plane determination from reconstructed parent phase
     orientation maps" %}</li>
                     <li>{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="The variant graph approach to improved parent grain reconstruction" %}</li>
                     <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/parentGrain.pdf" content="Parent grain reconstruction from partially or fully transformed microstructures in MTEX" %}</li>
                     <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/gazingAtCrystalBalls.pdf" content="Gazing at crystal balls - electron backscatter diffraction indexing and cross correlation on the sphere" %}</li>
-                    <li>{% include reference.html link="https://www-user.tu-chemnitz.de/~rahi/paper/denoising.pdf" content="Denoising of Crystal Orientation Maps" %}</li>
                 </ul>
             </div>
         </div>
