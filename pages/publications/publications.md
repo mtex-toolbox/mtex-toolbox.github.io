@@ -10,6 +10,25 @@ toc: false
 
 If you are using MTEX for your research, please cite one of the following paper that best fits your application.
 
+
+#### 2026
+
+<dl>
+    <dt>
+        {% include reference.html link="https://arxiv.org/pdf/2604.17997"
+    content="A unified framework for grain boundary distributions in textured materials" %}
+    </dt>
+    <dd>
+		R. Hielscher, Rüdiger Kilian, Erik Wünsche, Katharina Marquardt
+        <br>
+        <div class="ul-inline">
+            <span class="li-inline">{% include reference.html link="https://arxiv.org/abs/2604.17997" content="arXiv:2604.17997" %}</span>
+			<span class="li-inline">{% include reference.html link="https://github.com/mtex-toolbox/mtex-paper/tree/master/GBDistributions" content='mtex scripts <i class="fa fa-file-code-o"></i>' no_icon=true %}</span>
+        </div>
+    </dd>
+</dl>
+
+
 #### 2023
 
 <dl>
