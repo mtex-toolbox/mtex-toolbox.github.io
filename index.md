@@ -40,33 +40,21 @@ of material scientists, geologists and mathematicians.
 							distributions in textured materials" pdf=true%}
                     </li>
 					<li>
-                        10/25 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.0/mtex-6.1.0.zip" content="MTEX 6.1.0" download=true %}
+                        03/26 &minus; addon 
+						{% include reference.html link="https://www.github.com/vtvivian/mtex-trueEbsd" content="TrueEBSD" %}
+						for aligning EBSD and SEM images
+                    </li> 
+					<li>
+                        03/26 &minus;
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.1/mtex-6.1.1.zip" content="MTEX 6.1.0" download=true %}
                         released:
                         {% include reference.html link="changelog#1" content="Release Notes" %}
                     </li>
-				<li>
-					08/25 &minus;
-					{% include reference.html link="workshop26?" content="MTEX Workshop 2026" %}:
-					<!--{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}-->
-                </li>
-   					<li>
-                        11/24 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.0/mtex-6.0.0.zip" content="MTEX 6.0.0" download=true %}
-                        released:
-                        {% include reference.html link="changelog#1" content="Release Notes" %}
-                    </li>
-                    <li>
-                        03/22 &minus; addon 
-                        {% include reference.html link="https://github.com/ORTools4MTEX/ORTools" content="ORTools" %}
-                        for parent grain reconstruction
-                    </li>
-                    <li>
-                        03/22 &minus;
-                        {% include reference.html link="https://www.researchgate.net/publication/353330126_Getting_Started_with_MTEX_for_EBSD_analysis_Rev6" content="MTEX GUI 3.5" %}
-                        by 
-                        {% include reference.html link="https://www.researchgate.net/profile/Jessica-Hiscocks" content="J. Hiscocks" %}
-                    </li>
+					<li>
+						03/26 &minus;
+						{% include reference.html link="workshop26?" content="MTEX Workshop 2026" %}:
+						<!--{% include reference.html link="https://github.com/mtex-toolbox/mtex/discussions/2249" content="Announcement" %}-->
+					</li>                    
                  </ul>
             </div>
         </div>
