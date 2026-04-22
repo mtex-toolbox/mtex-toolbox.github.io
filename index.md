@@ -40,6 +40,13 @@ of material scientists, geologists and mathematicians.
 							distributions in textured materials" pdf=true%}
                     </li>
 					<li>
+                        03/26 &minus; new preprint:
+							{% include reference.html
+							link="https://doi.org/10.2139/ssrn.6208342"
+							content="Three-Dimensional Shape Metrics for Martensite and
+							Bainite From Two-Dimensional Orientation Maps" pdf=true%}
+                    </li>
+					<li>
                         03/26 &minus; addon 
 						{% include reference.html link="https://www.github.com/vtvivian/mtex-trueEbsd" content="TrueEBSD" %}
 						for aligning EBSD and SEM images
@@ -369,7 +376,6 @@ of material scientists, geologists and mathematicians.
     </div>-->
 </div>
 
-
 <!-- latest publications cards and requirements and licensing card-->
 <div class="row">
     <div id="home-latest-publications" class="col-md-6">
@@ -382,9 +388,12 @@ of material scientists, geologists and mathematicians.
             </div>
             <div class="panel-body">
                 <ul>
-					<li>{% include reference.html
-					link="https://arxiv.org/pdf/2604.17997" 
-					content="A unified framework for grain boundary distributions in textured materials" %}</li>
+					<li>{% include reference.html link="https://arxiv.org/pdf/2604.17997" 
+					content="A unified framework for grain boundary distributions in textured materials" %}
+					</li>
+					<li> {% include reference.html link="https://doi.org/10.2139/ssrn.6208342"
+						content="Three-Dimensional Shape Metrics for Martensite and	Bainite From Two-Dimensional Orientation Maps" pdf=true%}
+                    </li>
 					<li>{% include reference.html link="https://www.sciencedirect.com/science/article/pii/S135964542300366X/pdfft?md5=cd5b4d579996e89cf4ba96bdee90fad4&pid=1-s2.0-S135964542300366X-main.pdf" content="Habit plane determination from reconstructed parent phase
     orientation maps" %}</li>
                     <li>{% include reference.html link="https://arxiv.org/pdf/2201.02103.pdf" content="The variant graph approach to improved parent grain reconstruction" %}</li>
