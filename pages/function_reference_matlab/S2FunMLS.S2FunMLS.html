@@ -24,15 +24,15 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>a class representing a function on the rotation group</p>
+<p>TODO: - also regulrize when nodes are almost on zero set of ansatz function - locally adapt delta via density estimation and integration on balls or via shepard on the distance of the k-th nearest neighbor</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-S2F = S2FunMLS(nodes,values);
-S2F = S2FunMLS(nodes,values, oF, 2);
-S2F = S2FunMLS(nodes,values, delta, __);
-S2F = S2FunMLS(nodes,values, delta, w, @(t)(__));
-S2F = S2FunMLS(nodes,values, 'centered', 'monomials', 'subsample', 'tangent');
-S2F = S2FunMLS(nodes, values, 'degree', 3);
-S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
+S2F = S2FunMLS(nodes, values);
+S2F = S2FunMLS(nodes, values, 'degree', 3, 'oF', 2);
+S2F = S2FunMLS(nodes, values, 'delta', 5*degree);
+S2F = S2FunMLS(nodes, values, 'delta', 5*degree, w, @(t)(__));
+S2F = S2FunMLS(nodes, values, 'centered', true, 'monomials', true, 'subsample', 'tangent', true);
+S2F = S2FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOutliers');
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -50,7 +50,7 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
             <tt>values</tt>
          </td>
          <td>
-            <tt>array of function values</tt>
+            <tt>array of function values assigned to the nodes</tt>
          </td>
       </tr>
    </table>
@@ -81,14 +81,6 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
       </tr>
       <tr>
          <td width="100px">
-            <tt>delta</tt>
-         </td>
-         <td>
-            <tt>support radius of the weight function</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
             <tt>oF</tt>
          </td>
          <td>
@@ -103,10 +95,24 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
       </tr>
       <tr>
          <td width="100px">
-            <tt>outlierDetectionRange</tt>
+            <tt>oF_max</tt>
          </td>
          <td>
-            <tt>specify how many neighbors are taken into account</tt>
+            <tt>maximum oversampling factor in case of range search. At most the</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>closest S2F.dim * S2F.oF_max neighbors will be used.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>delta</tt>
+         </td>
+         <td>
+            <tt>support radius of the weight function</tt>
          </td>
       </tr>
       <tr>
@@ -114,6 +120,46 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
             <tt>when searching for outliers</tt>
          </td>
          <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>monomials</tt>
+         </td>
+         <td>
+            <tt>use monomial basis if true, otherwise use spherical harmonics</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>centered</tt>
+         </td>
+         <td>
+            <tt>evaluate the basis functions only around the north pole, if true</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tangent</tt>
+         </td>
+         <td>
+            <tt>use monomials on the tangent space (only if centered == true)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(in this case the z</tt>
+         </td>
+         <td>
+            <tt>coordinate of the neighbors is ignored)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(NOTE: 'centered' and 'tangent' trigger the monomial</tt>
+         </td>
+         <td>
+            <tt>option to be true)</tt>
+         </td>
       </tr>
       <tr>
          <td width="100px">
@@ -145,59 +191,65 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
       </tr>
       <tr>
          <td width="100px">
-            <tt>regularizationOptions</tt>
+            <tt>s</tt>
          </td>
          <td>
-            <tt>parameters for regularization of the lsq-systems</tt>
+            <tt>symmetry of the nodes</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>(see /tools/math_tools/solve_lsq_book_constsize.m</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>for more details)</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>stableFindOptions</tt>
+            <tt>regularize</tt>
          </td>
          <td>
-            <tt>parameters for a more stable version of find, that can</tt>
+            <tt>use regularization for solving the lsq-systems</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>deal better with highly non</tt>
+            <tt>maxcond</tt>
          </td>
          <td>
-            <tt>uniform data</tt>
+            <tt>max regularization threshold of condition of the gram matrix</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>(see private/find_stable.m for more details)</tt>
+            <tt>mincond</tt>
          </td>
-         <td/>
+         <td>
+            <tt>start regularizing threshold of condition of the gram matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>basis_weights</tt>
+         </td>
+         <td>
+            <tt>regularization weights of basis coefficients,</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>should punish higher degrees (Sobolev</tt>
+         </td>
+         <td>
+            <tt>like)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>outlierDetectionRange</tt>
+         </td>
+         <td>
+            <tt>specify how many neighbors are taken into account</tt>
+         </td>
       </tr>
    </table>
 </p>
 <h2 id="7">Flags</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>centered</tt>
-         </td>
-         <td>
-            <tt>only evaluate the basis near the pole if true</tt>
-         </td>
-      </tr>
       <tr>
          <td width="100px">
             <tt>detectOutliers</tt>
@@ -214,26 +266,10 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
       </tr>
       <tr>
          <td width="100px">
-            <tt>monomials</tt>
-         </td>
-         <td>
-            <tt>use monomial basis isntead of spherical harmonics</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>regularize</tt>
-         </td>
-         <td>
-            <tt>use regularization for solving the lsq-systems</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
             <tt>stableFind</tt>
          </td>
          <td>
-            <tt>perform stable variant of find (good for non-uniform data)</tt>
+            <tt>perform stable variant of find (can help with non-uniform data)</tt>
          </td>
       </tr>
       <tr>
@@ -241,21 +277,7 @@ S2F = S2FunMLS(nodes, values, 'regularize', 'stablefind', 'detectOutliers');
             <tt>subsample</tt>
          </td>
          <td>
-            <tt>use a subset of the local nodes that minimizes the lebesgue</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>constant</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>tangent</tt>
-         </td>
-         <td>
-            <tt>use polynomials on the tangent space</tt>
+            <tt>use subset of neighbors that minimizes the lebesgue constant</tt>
          </td>
       </tr>
    </table>
