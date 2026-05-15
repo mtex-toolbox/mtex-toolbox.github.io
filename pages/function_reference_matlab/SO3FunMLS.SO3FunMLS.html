@@ -26,11 +26,12 @@ To make changes, update the MATLAB code and republish this document.
 <p>a class representing a function on the rotation group</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-SO3F = SO3FunMLS(nodes,values)
-SO3F = SO3FunMLS(nodes,values, nn, __)
-SO3F = SO3FunMLS(nodes,values, delta, __)
-SO3F = SO3FunMLS(nodes,values, delta, w, @(t)(__))
-SO3F = SO3FunMLS(nodes,values, 'centered', 'detectOutliers', 'subsample', 'tangent')
+SO3F = SO3FunMLS(nodes, values);
+SO3F = SO3FunMLS(nodes, values, 'degree', 3, 'oF', 2);
+SO3F = SO3FunMLS(nodes, values, 'delta', 5*degree);
+SO3F = SO3FunMLS(nodes, values, 'delta', 5*degree, 'w', @(t)(__));
+SO3F = SO3FunMLS(nodes, values, 'centered', true, 'monomials', true, 'subsample', 'tangent', true);
+SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOutliers');
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -48,7 +49,7 @@ SO3F = SO3FunMLS(nodes,values, 'centered', 'detectOutliers', 'subsample', 'tange
             <tt>values</tt>
          </td>
          <td>
-            <tt>array of function values</tt>
+            <tt>array of function values assigned to the nodes</tt>
          </td>
       </tr>
    </table>

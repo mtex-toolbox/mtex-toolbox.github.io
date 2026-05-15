@@ -23,14 +23,90 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="2">Syntax</h2>
-<h2 id="3">Input</h2>
+<p>cleanUpPseudoSym Corrects pseudo-symmetry artifacts in a single phase using tortuosity.</p>
+<p>To clean up pseudo-symmetries in multiple phases, run this function for each phase individually.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori, varargin)
+{% endhighlight %}
+<h2 id="4">Input</h2>
 <p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%"/>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> object</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a> object</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mori</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a> or <a href="orientation.orientation.html">orientation</a> (array of pseudo-symmetries, same CS and SS)</tt>
+         </td>
+      </tr>
+   </table>
 </p>
-<h2 id="4">Output</h2>
+<h2 id="5">Output</h2>
 <p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%"/>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt>updated <a href="EBSD.EBSD.html">EBSD</a> object</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grainsM</tt>
+         </td>
+         <td>
+            <tt>merged <a href="grain2d.grain2d.html">grain2d</a> object</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>numChanged</tt>
+         </td>
+         <td>
+            <tt>number of pixels that changed orientation</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>'delta'</tt>
+         </td>
+         <td>
+            <tt>Tolerance for boundary misorientation angle to match pseudo-symmetry (default: 2*degree)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'threshold'</tt>
+         </td>
+         <td>
+            <tt>Minimum tortuosity (boundary length / straight distance) to trigger merge (default: 1.5)</tt>
+         </td>
+      </tr>
+   </table>
 </p>
 </div>
 </body>
