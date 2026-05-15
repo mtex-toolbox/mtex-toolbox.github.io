@@ -1,5 +1,5 @@
 ---
-title: script_SO3FunVectorValued
+title: Vector Valued Orientation Dependent Functions
 
 sidebar: documentation_sidebar
 permalink: SO3FunVectorValued.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>script_SO3FunVectorValued</title>
+<title>Vector Valued Orientation Dependent Functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_SO3FunVectorValued.m">
 </head>
@@ -21,11 +21,9 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/SO3Functions/SO3FunVectorValued.m">
     edit page</a></font>
 <div>
-<h2 id="1">Vector Valued Orientation Dependent Functions</h2>
-{% highlight matlab %}
-%G
-{% endhighlight %}
-<h2 id="2">Structural conventions of the input and output of vector valued SO3FunHarmonics</h2>
+<!--introduction-->
+<!--/introduction-->
+<h2 id="1">Structural conventions of the input and output of vector valued SO3FunHarmonics</h2>
 <p>In this part we deal with vector valued functions of the form</p>
 <p>\[ f\colon \mathcal{SO}(3) \to \mathbb R^n. \]</p>
 <div>
@@ -39,7 +37,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>\[ F(:, :, 1) = \pmatrix{f_1(v_1) &amp; f_2(v_1) &amp; f_3(v_1) \cr f_1(v_2) &amp; f_2(v_2) &amp; f_3(v_2) \cr f_1(v_3) &amp; f_2(v_3) &amp; f_3(v_3) \cr f_1(v_4) &amp; f_2(v_4) &amp; f_3(v_4)} \quad\mathrm{and}\quad F(:, :, 2) = \pmatrix{f_4(v_1) &amp; f_5(v_1) &amp; f_6(v_1) \cr f_4(v_2) &amp; f_5(v_2) &amp; f_6(v_2) \cr f_4(v_3) &amp; f_5(v_3) &amp; f_6(v_3) \cr f_4(v_4) &amp; f_5(v_4) &amp; f_6(v_4)}. \]</p>
 <p>For the intern Fourier-coefficient matrix the first dimension is reserved for the Fourier-coefficients of a single function; the dimensions of the functions itself begins again with the second dimension.</p>
 <p>If \(\bf{\hat f}_1, \bf{\hat f}_2, \bf{\hat f}_3, \bf{\hat f}_4, \bf{\hat f}_5\) and \(\bf{\hat f}_6\) would be the column vectors of the Fourier-coefficients of the functions above, internally they would be stored in \(\hat F\) as follows. \[ \hat F(:, :, 1) = \pmatrix{\bf{\hat f}_1 &amp; \bf{\hat f}_2 &amp; \bf{\hat f}_3} \quad\mathrm{and}\quad \hat F(:, :, 2) = \pmatrix{\bf{\hat f}_4 &amp; \bf{\hat f}_5 &amp; \bf{\hat f}_6}. \]</p>
-<h2 id="3">Defining a vector valued SO3FunHarmonic</h2>
+<h2 id="2">Defining a vector valued SO3FunHarmonic</h2>
 <p>
 <b>Definition via function values</b>
 </p>
@@ -55,21 +53,18 @@ nodes.CS = SO3Fun.dubna.CS;
 {% endhighlight %}
 <p>Now the actual command to get a (2x1) <code class="language-plaintext highlighter-rouge">SO3F1</code> of type \(~\) <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> is</p>
 {% highlight matlab %}
-SO3F1 = SO3FunHarmonic.interpolate(nodes, y,'maxit',10)
+SO3F1 = SO3FunHarmonic.interpolate(nodes, y,'maxit',10,'bandwidth',48)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: The regularization parameter is set to 1e-8 by default.
-You should try different parameters and choose one, that yields a
-good result. 
-Warning: Maximum number of iterations reached, result may not
-have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may
+not have converged to the optimum yet. 
  
-SO3F1 = SO3FunHarmonic (Quartz → y↑→x)
+SO3F1 = SO3FunHarmonic (1 → y↑→x)
   isReal: false
   size: 2 x 1
-  bandwidth: 54
-  weights: [0.99 0.49]
+  bandwidth: 48
+  weights: [6 0.5]
 {% endhighlight %}
 <p>It is also possible to interpolate one component by an <a href="SO3FunHarmonic.SO3FunRBF"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>, that means</p>
 {% highlight matlab %}
@@ -77,15 +72,15 @@ SO3F2 = interp(nodes,y(:,1))
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Maximum number of iterations reached, result may not
-have converged to the optimum yet. 
+Warning: Maximum number of iterations reached, result may
+not have converged to the optimum yet. 
  
-SO3F2 = SO3FunRBF (Quartz → y↑→x)
+SO3F2 = SO3FunRBF (1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
+  center: 119088 orientations, resolution: 5°
+  weight: 6
 {% endhighlight %}
 <p>This is only possible for univariate functions.</p>
 <p>
@@ -102,8 +97,7 @@ SO3F3 = SO3FunHarmonic.quadrature(f, 'bandwidth', 50,SO3F1.CS)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F3 = SO3FunHarmonic (Quartz → y↑→x)
-  isReal: false
+SO3F3 = SO3FunHarmonic (1 → y↑→x)
   size: 4 x 1
   bandwidth: 50
 {% endhighlight %}
@@ -121,13 +115,9 @@ SO3F4 = SO3FunHarmonic (y↑→x → y↑→x)
   size: 10 x 1
   bandwidth: 1
 {% endhighlight %}
-<div>
-<ul>
-<li>This command stores the ten first <a href="WignerFunctions.html">Wigner-D functions</a> in <code class="language-plaintext highlighter-rouge">SO3F4</code>
-</li>
-</ul>
-</div>
-<h2 id="13">Operations which differ from an univariate SO3FunHarmonic</h2>
+<p>This command stores the ten first <a href="WignerFunctions.html">Wigner-D functions</a> in <code class="language-plaintext highlighter-rouge">SO3F4</code>
+</p>
+<h2 id="12">Operations which differ from an univariate SO3FunHarmonic</h2>
 <p>
 <b>Some default matrix and vector operations</b>
 </p>
@@ -138,11 +128,11 @@ SO3F5(2:4)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3FunHarmonic (Quartz → y↑→x)
+ans = SO3FunHarmonic (1 → y↑→x)
   isReal: false
   size: 3 x 1
-  bandwidth: 54
-  weights: [0.49 1.1 -0.25]
+  bandwidth: 50
+  weights: [0.5 1.6 -0.3]
 {% endhighlight %}
 <p>You can conjugate the Fourier-coefficients and transpose/ctranspose the vector valued <a href="SO3FunHarmonic.SO3FunHarmonic"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p>
 {% highlight matlab %}
@@ -152,11 +142,11 @@ SO3F1'
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3FunHarmonic (Quartz → y↑→x)
+ans = SO3FunHarmonic (1 → y↑→x)
   isReal: false
   size: 1 x 2
-  bandwidth: 54
-  weights: [0.99 0.49]
+  bandwidth: 48
+  weights: [6 0.5]
 {% endhighlight %}
 <p>Some other operations</p>
 {% highlight matlab %}
@@ -177,7 +167,7 @@ SO3F4 = SO3FunHarmonic (y↑→x → y↑→x)
   bandwidth: 1
 {% endhighlight %}
 <p>
-<b><code class="language-plaintext highlighter-rouge">sum</code> and <code class="language-plaintext highlighter-rouge">mean</code></b>
+<b>sum and mean</b>
 </p>
 <p>If we do not specify further options to <code class="language-plaintext highlighter-rouge">sum</code> or <code class="language-plaintext highlighter-rouge">mean</code> they give we the integral or the mean value back for each function. You could also calculate the conventional sum or the meanvalue over a dimension of a vector valued <code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code>.</p>
 {% highlight matlab %}
@@ -186,10 +176,10 @@ mean(SO3F4, 2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3FunHarmonic (Quartz → y↑→x)
+ans = SO3FunHarmonic (1 → y↑→x)
   isReal: false
-  bandwidth: 54
-  weight: 1.48+0.2i
+  bandwidth: 48
+  weight: 6.46+0.2i
  
  
 ans = SO3FunHarmonic (y↑→x → y↑→x)
@@ -229,9 +219,9 @@ SO3F1 .* SO3F4
 ans = SO3FunHarmonic (y↑→x → y↑→x)
   isReal: false
   size: 2 x 5
-  bandwidth: 55
+  bandwidth: 49
 {% endhighlight %}
-<h2 id="20">Visualization of vector valued SO3FunHarmonic</h2>
+<h2 id="19">Visualization of vector valued SO3FunHarmonic</h2>
 <p>Similarly to the univariate case we also can look at the Fourier coefficients of vector valued functions.</p>
 {% highlight matlab %}
 plotSpektra(SO3F3)
@@ -243,27 +233,11 @@ plotSpektra(SO3F3)
 {% highlight matlab %}
 plot(SO3F3)
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: You try to plot a vector valued function. Plot the
-desired components manually. In the following the first component
-is plotted. 
-Warning: Imaginary part of complex valued SO3Fun's is ignored. In
-the following only the real part is plotted.
-{% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorValued_02.png" %}
 </center>
 {% highlight matlab %}
 plot3d(SO3F3)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: You try to plot a vector valued function. Plot the
-desired components manually. In the following the first component
-is plotted. 
-Warning: Imaginary part of complex valued SO3Fun's is ignored. In
-the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorValued_03.png" %}
@@ -271,11 +245,6 @@ the following only the real part is plotted.
 <p>while the plot along a specific fibre includes all components.</p>
 {% highlight matlab %}
 plotFibre(SO3F3,fibre.beta)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Imaginary part of complex valued SO3Fun's is ignored. In
-the following only the real part is plotted.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunVectorValued_04.png" %}
