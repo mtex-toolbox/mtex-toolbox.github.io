@@ -16,7 +16,7 @@ If you are using MTEX for your research, please cite one of the following paper 
 <dl>
     <dt>
         {% include reference.html link="https://arxiv.org/pdf/2604.17997"
-    content="A unified framework for grain boundary distributions in textured materials" %}
+		content="A unified framework for grain boundary distributions in textured materials" %}
     </dt>
     <dd>
 		R. Hielscher, Rüdiger Kilian, Erik Wünsche, Katharina Marquardt
@@ -48,7 +48,7 @@ If you are using MTEX for your research, please cite one of the following paper 
 </dl>
 
 
-### 2022
+#### 2022
 
 <dl>
     <dt>
