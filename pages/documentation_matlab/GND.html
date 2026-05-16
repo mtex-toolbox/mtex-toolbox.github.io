@@ -33,7 +33,7 @@ To make changes, update the MATLAB code and republish this document.
 plotx2north
 
 % import the EBSD data
-ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'DC06_2uniax.ang']);
+ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'DC06_2uniax.ang'],'setting',2);
 %ebsd = EBSD.load('DC06_2biax.ang');
 
 % define the color key
@@ -123,9 +123,9 @@ ans = curvatureTensor (y↑→x)
   rank: 2 (3 x 3)
  
  *10^-4
-   0.379  15.305     NaN
-  -4.591   2.269     NaN
- -11.952  17.293     NaN
+   4.591  -2.269     NaN
+  -0.379 -15.305     NaN
+  11.952 -17.293     NaN
 {% endhighlight %}
 <h2 id="6">The components of the curvature tensor</h2>
 <p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d-EBSD maps.</p>
@@ -185,9 +185,9 @@ ans = dislocationDensityTensor (y↑→x)
   rank: 2 (3 x 3)
  
  *10^-4
-     NaN  -4.591 -11.952
-  15.305     NaN  17.293
-     NaN     NaN  -2.649
+     NaN  -0.379  11.952
+  -2.269     NaN -17.293
+     NaN     NaN  10.715
 {% endhighlight %}
 <h2 id="10">Crystallographic Dislocations</h2>
 <p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the atomic lattice different dislocation systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
@@ -200,61 +200,61 @@ dS = dislocationSystem
  mineral: Iron (Alpha) (432)
  edge dislocations : 48 x 1
  Burgers vector  line vector  energy  length
-      [1 -1  1]   [-2 -1  1]       2    2.49
-      [1  1 -1]    [2 -1  1]       2    2.49
-      [1  1 -1]    [1 -2 -1]       2    2.49
-     [-1  1  1]    [1  2 -1]       2    2.49
-      [1 -1  1]   [-1  1  2]       2    2.49
-     [-1  1  1]   [-1  1 -2]       2    2.49
-      [1 -1  1]    [1  2  1]       2    2.49
-      [1  1  1]   [-1  2 -1]       2    2.49
-      [1  1 -1]    [1  1  2]       2    2.49
-      [1  1  1]   [-1 -1  2]       2    2.49
-     [-1  1  1]    [2  1  1]       2    2.49
-      [1  1  1]    [2 -1 -1]       2    2.49
-     [-1  1  1]    [0  1 -1]       2    2.49
-      [1 -1  1]   [-1  0  1]       2    2.49
-      [1  1 -1]    [1 -1  0]       2    2.49
-     [-1  1  1]   [-1  0 -1]       2    2.49
-      [1 -1  1]   [-1 -1  0]       2    2.49
-      [1  1 -1]    [0 -1 -1]       2    2.49
-      [1  1 -1]    [1  0  1]       2    2.49
-     [-1  1  1]    [1  1  0]       2    2.49
-      [1 -1  1]    [0  1  1]       2    2.49
-     [-1 -1 -1]    [0 -1  1]       2    2.49
-     [-1 -1 -1]    [1  0 -1]       2    2.49
-     [-1 -1 -1]   [-1  1  0]       2    2.49
-     [-1  1  1]   [-1  4 -5]       2    2.49
-      [1 -1  1]   [-5 -1  4]       2    2.49
-      [1  1 -1]    [4 -5 -1]       2    2.49
-     [-1  1  1]   [-4  1 -5]       2    2.49
-      [1 -1  1]   [-5 -4  1]       2    2.49
-      [1  1 -1]    [1 -5 -4]       2    2.49
-      [1  1 -1]    [4  1  5]       2    2.49
-     [-1  1  1]    [5  4  1]       2    2.49
-      [1 -1  1]    [1  5  4]       2    2.49
-     [-1 -1 -1]   [-1 -4  5]       2    2.49
-     [-1 -1 -1]    [5 -1 -4]       2    2.49
-     [-1 -1 -1]   [-4  5 -1]       2    2.49
-      [1 -1  1]    [1 -4 -5]       2    2.49
-      [1  1 -1]   [-5  1 -4]       2    2.49
-     [-1  1  1]   [-4 -5  1]       2    2.49
-      [1 -1  1]    [4 -1 -5]       2    2.49
-      [1  1 -1]   [-5  4 -1]       2    2.49
-     [-1  1  1]   [-1 -5  4]       2    2.49
-     [-1 -1 -1]   [-4 -1  5]       2    2.49
-     [-1 -1 -1]    [5 -4 -1]       2    2.49
-     [-1 -1 -1]   [-1  5 -4]       2    2.49
-      [1  1 -1]    [1  4  5]       2    2.49
-     [-1  1  1]    [5  1  4]       2    2.49
-      [1 -1  1]    [4  5  1]       2    2.49
+      [1 1̅  1]   [2̅ 1̅  1]       2    2.49
+      [1  1 1̅]    [2 1̅  1]       2    2.49
+      [1  1 1̅]    [1 2̅ 1̅]       2    2.49
+     [1̅  1  1]    [1  2 1̅]       2    2.49
+      [1 1̅  1]   [1̅  1  2]       2    2.49
+     [1̅  1  1]   [1̅  1 2̅]       2    2.49
+      [1 1̅  1]    [1  2  1]       2    2.49
+      [1  1  1]   [1̅  2 1̅]       2    2.49
+      [1  1 1̅]    [1  1  2]       2    2.49
+      [1  1  1]   [1̅ 1̅  2]       2    2.49
+     [1̅  1  1]    [2  1  1]       2    2.49
+      [1  1  1]    [2 1̅ 1̅]       2    2.49
+     [1̅  1  1]    [0  1 1̅]       2    2.49
+      [1 1̅  1]   [1̅  0  1]       2    2.49
+      [1  1 1̅]    [1 1̅  0]       2    2.49
+     [1̅  1  1]   [1̅  0 1̅]       2    2.49
+      [1 1̅  1]   [1̅ 1̅  0]       2    2.49
+      [1  1 1̅]    [0 1̅ 1̅]       2    2.49
+      [1  1 1̅]    [1  0  1]       2    2.49
+     [1̅  1  1]    [1  1  0]       2    2.49
+      [1 1̅  1]    [0  1  1]       2    2.49
+     [1̅ 1̅ 1̅]    [0 1̅  1]       2    2.49
+     [1̅ 1̅ 1̅]    [1  0 1̅]       2    2.49
+     [1̅ 1̅ 1̅]   [1̅  1  0]       2    2.49
+     [1̅  1  1]   [1̅  4 5̅]       2    2.49
+      [1 1̅  1]   [5̅ 1̅  4]       2    2.49
+      [1  1 1̅]    [4 5̅ 1̅]       2    2.49
+     [1̅  1  1]   [4̅  1 5̅]       2    2.49
+      [1 1̅  1]   [5̅ 4̅  1]       2    2.49
+      [1  1 1̅]    [1 5̅ 4̅]       2    2.49
+      [1  1 1̅]    [4  1  5]       2    2.49
+     [1̅  1  1]    [5  4  1]       2    2.49
+      [1 1̅  1]    [1  5  4]       2    2.49
+     [1̅ 1̅ 1̅]   [1̅ 4̅  5]       2    2.49
+     [1̅ 1̅ 1̅]    [5 1̅ 4̅]       2    2.49
+     [1̅ 1̅ 1̅]   [4̅  5 1̅]       2    2.49
+      [1 1̅  1]    [1 4̅ 5̅]       2    2.49
+      [1  1 1̅]   [5̅  1 4̅]       2    2.49
+     [1̅  1  1]   [4̅ 5̅  1]       2    2.49
+      [1 1̅  1]    [4 1̅ 5̅]       2    2.49
+      [1  1 1̅]   [5̅  4 1̅]       2    2.49
+     [1̅  1  1]   [1̅ 5̅  4]       2    2.49
+     [1̅ 1̅ 1̅]   [4̅ 1̅  5]       2    2.49
+     [1̅ 1̅ 1̅]    [5 4̅ 1̅]       2    2.49
+     [1̅ 1̅ 1̅]   [1̅  5 4̅]       2    2.49
+      [1  1 1̅]    [1  4  5]       2    2.49
+     [1̅  1  1]    [5  1  4]       2    2.49
+      [1 1̅  1]    [4  5  1]       2    2.49
  
  screw dislocations: 4 x 1
  Burgers vector  energy  length
-     [-1 -1 -1]       1    2.49
-      [1 -1  1]       1    2.49
-     [-1  1  1]       1    2.49
-      [1  1 -1]       1    2.49
+     [1̅ 1̅ 1̅]       1    2.49
+      [1 1̅  1]       1    2.49
+     [1̅  1  1]       1    2.49
+      [1  1 1̅]       1    2.49
 {% endhighlight %}
 <p>Here the norm of the Burgers vectors is important</p>
 {% highlight matlab %}
@@ -267,7 +267,7 @@ a = norm(ebsd.CS.aAxis);
 
 {% highlight plaintext %}
 ans =
-    2.4855    2.4855    2.4855
+       2.4855       2.4855       2.4855
 {% endhighlight %}
 <h2 id="12">The Energy of Dislocations</h2>
 <p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p>
@@ -353,18 +353,18 @@ ans = dislocationDensityTensor (y↑→x)
   rank: 2 (3 x 3)
  
  *10^-5
-  -32.8  -2.35 -33.18
-  41.89    2.1  32.27
-  -7.56   6.68   8.92
+   9.34   21.9  33.18
+ -12.99 -34.91 -32.27
+   5.49 -20.93  39.54
  
 ans = dislocationDensityTensor (y↑→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
  *10^-5
-    NaN  -2.35 -33.18
-  41.89    NaN  32.27
-    NaN    NaN   8.92
+    NaN   21.9  33.18
+ -12.99    NaN -32.27
+    NaN    NaN  39.54
 {% endhighlight %}
 <p>we may also restore the complete curvature tensor with</p>
 {% highlight matlab %}
@@ -406,7 +406,7 @@ factor
 
 {% highlight plaintext %}
 factor =
-   1.0000e+16
+        1e+16
 {% endhighlight %}
 <p>Multiplying the densities <code class="language-plaintext highlighter-rouge">rho</code> with this factor and the individual energies of the the dislocation systems we end up with the total dislocation energy. Lets plot this at a logarithmic scale</p>
 {% highlight matlab %}

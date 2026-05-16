@@ -64,7 +64,7 @@ ebsd = EBSD (y↑→x)
 <center>
 {% include inline_image.html file="EBSDDenoising_01.png" %}
 </center>
-<p>At the first glance, the orientation data look not noisy at all. However, if we look at orientation changes within the grains the noise we become clearly visible. To do so we colorize the orientation data with respect to their misorientation to the grain mean orientation</p>
+<p>At the first glance, the orientation data look not noisy at all. However, if we look at orientation changes within the grains the noise becomes clearly visible. To do so we colorize the orientation data with respect to their misorientation to the grain mean orientation</p>
 {% highlight matlab %}
 % the axisAngleColorKey colorizes misorientation according to their axis and angle
 colorKey = axisAngleColorKey;
@@ -81,7 +81,7 @@ hold off
 <center>
 {% include inline_image.html file="EBSDDenoising_02.png" %}
 </center>
-<p>We clearly observe some deformation gradients withing the grains which are superposed by random noise.</p>
+<p>We clearly observe some deformation gradients withing the grains which are superposed by random noise. In the following we discuss several methods for noise removal. The by far best method is the total variation filter discussed further down the list.</p>
 <h2 id="4">The Mean Filter</h2>
 <p>The simplest filter to apply to orientation data is the <a href="meanFilter.html">meanFilter</a> which replaces all orientations by the mean of all neighboring orientations.</p>
 {% highlight matlab %}
@@ -192,12 +192,12 @@ F.alpha
 
 {% highlight plaintext %}
 ans =
-    4.6123
+       4.6123
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDDenoising_07.png" %}
 </center>
-<h2 id="10">The Halfquadratic Filter</h2>
+<h2 id="10">The Total Variation Filter</h2>
 <p>In the default setting the <a href="halfQuadraticFilter.html">halfQuadraticFilter</a> uses definition of smoothness the <a href="https://en.wikipedia.org/wiki/Total_variation_denoising">total variation</a> functional. This functional was developed to preserve subgrain boundaries. Similarly as the <a href="medianFilter.html">medianFilter</a> it tends to carton like images and staircasing.</p>
 {% highlight matlab %}
 F = halfQuadraticFilter;

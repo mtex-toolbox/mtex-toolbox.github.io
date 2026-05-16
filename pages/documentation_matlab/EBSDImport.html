@@ -26,7 +26,8 @@ To make changes, update the MATLAB code and republish this document.
 <p>MTEX allows you to import EBSD data from a wide variety of file formats. In the most simplest case import can be done by the command <a href="EBSD.load.html"><code class="language-plaintext highlighter-rouge">EBSD.load</code></a>
 </p>
 {% highlight matlab %}
-ebsd = EBSD.load([mtexEBSDPath filesep 'twins.ctf'],'convertEuler2SpatialReferenceFrame')
+ebsd = EBSD.load([mtexEBSDPath filesep 'twins.ctf'],...
+  'EulerCorrection',rotation.byAxisAngle(xvector,180*degree))
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -90,7 +91,7 @@ fname = [pname filesep 'twins.ctf'];
 
 % create an EBSD variable containing the data
 ebsd = EBSD.load(fname,CS,'interface','ctf',...
-  'convertEuler2SpatialReferenceFrame');
+  'EulerCorrection',rotation.byAxisAngle(zvector,180*degree));
 {% endhighlight %}
 <p>Running this script imports the data into a variable named <code class="language-plaintext highlighter-rouge">ebsd</code>. From this point, the script can be extended to your needs, e.g:</p>
 {% highlight matlab %}

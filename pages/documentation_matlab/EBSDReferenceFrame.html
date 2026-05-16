@@ -35,18 +35,10 @@ To make changes, update the MATLAB code and republish this document.
 </p>
 <p>Here we have the axes \(x\) and \(y\) which describe how the map coordinates needs to be interpreted and the axes \(A_1\), \(A_2\), \(A_3\) which describe how the Euler angles, and in consequence, the pole figures needs to be interpreted. We see that in none of these settings the map reference system coincides with the Euler angle reference frame.</p>
 <p>This situation is not specific to EDAX but occurs as well with EBSD data from Oxford or Bruker, all of them using different reference system alignments. For that reason MTEX strongly recommends to transform the data such that both map coordinates and Euler angles refer to the same coordinate system.</p>
-<p>Doing this we have two choices:</p>
-<div>
-<ol>
-<li>transform everything to the reference system \(x\), \(y\) using the option <code class="language-plaintext highlighter-rouge">'convertEuler2SpatialReferenceFrame'</code>. This will keep the map coordinates while changing the Euler angles</li>
-<li>transform everything to the reference system \(A_1\), \(A_2\), \(A_3\) using the option <code class="language-plaintext highlighter-rouge">'convertSpatial2EulerReferenceFrame'</code>. This will keep the Euler angles while changing the map coordinates.</li>
-</ol>
-</div>
-<p>In the case of EDAX data imported from an <code class="language-plaintext highlighter-rouge">*.ang</code> file we still need to specify the export option used by the EDAX software. This is done by the options <code class="language-plaintext highlighter-rouge">'setting 1'</code>, <code class="language-plaintext highlighter-rouge">'setting 2'</code>, <code class="language-plaintext highlighter-rouge">'setting 3'</code> or <code class="language-plaintext highlighter-rouge">'setting 4'</code>.</p>
-<p>Since setting 2 is default for most EDAX exports a typical command for importing data from an ang file would look like this</p>
+<p>The best way to do this is to rotate the Euler angles such that the Euler angle reference frame and the map reference frame coincide. For general formats this is done by the options <code class="language-plaintext highlighter-rouge">'EulerCorrection'</code> followed by the rotation that aligns the Euler reference frame with the map reference frame.</p>
+<p>In EDAX software one can choose between several alignments between those coordinate system. They are numbered 1 to 4, with setting 2 being the most used. This setting can be specified directly when importing data from EDAX software. Hence a typical command for importing data from an .ang file would look like</p>
 {% highlight matlab %}
-ebsd = EBSD.load([mtexEBSDPath filesep 'olivineopticalmap.ang'],...
-  'convertEuler2SpatialReferenceFrame','setting 2')
+ebsd = EBSD.load([mtexEBSDPath filesep 'olivineopticalmap.ang'],'setting',2)
 
 plot(ebsd('olivine'),ebsd('olivine').orientations,'coordinates','on')
 {% endhighlight %}
@@ -101,8 +93,8 @@ legend off
 {% highlight plaintext %}
 largeGrains = grain2d (y↓→x)
  
- Phase  Grains  Pixels  Mineral  Symmetry  Crystal reference frame
-     1       8    9556  olivine       222                         
+ Phase  Grains  Pixels  Mineral  Symmetry         Color
+     1       8    9556  olivine       222  LightSkyBlue
  
  boundary segments: 2041 (7935 µm)
  inner boundary segments: 2 (8 µm)
