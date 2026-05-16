@@ -37,17 +37,17 @@ mtexColorbar
 <h2 id="2">Computing Random Orientations</h2>
 <p>In order to compute \(50000\) random orientation from the ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> we use the command <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.discreteSample.html">discreteSample</a></code>.</p>
 {% highlight matlab %}
-ori = fibre_odf.discreteSample(50000)
+ori = fibre_odf.discreteSample(4000)
 
 % plot the orientations into the Bunge sections
 hold on
-plot(ori,'MarkerFaceColor','none','MarkerEdgeAlpha',0.5,'all','MarkerEdgeColor','k','MarkerSize',4)
+plot(ori,'MarkerFaceColor','none','all','MarkerEdgeColor','k','MarkerSize',4)
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 ori = orientation (321 → y↑→x)
-  size: 50000 x 1
+  size: 4000 x 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_02.png" %}
@@ -60,40 +60,58 @@ plot(fibre_odf,'sections',6,'silent','sigma','contour','linewidth',2)
 
 % plot the orientations into the sigma sections
 hold on
-plot(ori,'MarkerFaceColor','none','MarkerEdgeAlpha',0.25,'all','MarkerEdgeColor','k','MarkerSize',4)
+plot(ori,'MarkerFaceColor','none','all','MarkerEdgeColor','k','MarkerSize',4)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_03.png" %}
 </center>
-<h2 id="4">ODF Estimation from Random Orientations</h2>
-<p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative measure for how well do the orientations approximate the ODF we may use the orientations to <a href="DensityEstimation.html">estimate a new ODF</a> and compare the fit of this estimate ODF with the initial ODF.</p>
+<p>Note that in the above example</p>
 {% highlight matlab %}
-% estimate an ODF from the random orientations
-odf_rec = calcDensity(ori)
+oriCompact = fibre_odf.discreteSample(4000,'compact')
 
-% plot the estimated ODF
-plot(odf_rec,'sections',6,'silent')
+% plot the orientations into the Bunge sections
+plot(fibre_odf,'sections',6,'silent','sigma','contour','linewidth',2)
+hold on
+plot(oriCompact,'MarkerFaceColor','none','all','MarkerEdgeColor','k','MarkerSize',4)
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_rec = SO3FunHarmonic (321 → y↑→x)
-  bandwidth: 25
-  weight: 1
+oriCompact = orientation (321 → y↑→x)
+  size: 4000 x 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RandomSampling_04.png" %}
 </center>
+<h2 id="5">ODF Estimation from Random Orientations</h2>
+<p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative measure for how well do the orientations approximate the ODF we may use the orientations to <a href="DensityEstimation.html">estimate a new ODF</a> and compare the fit of this estimate ODF with the initial ODF.</p>
+{% highlight matlab %}
+% estimate an ODF from the random orientations
+odf_rec = calcDensity(ori,'halfwidth',15*degree);
+odf_recC = calcDensity(oriCompact,'halfwidth',15*degree);
+
+% plot the estimated ODF
+plot(odf_recC,'sections',6,'silent')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RandomSampling_05.png" %}
+</center>
 <p>We may now compare the original model ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> with the reconstructed ODF <code class="language-plaintext highlighter-rouge">odf_rec</code>.</p>
 {% highlight matlab %}
 calcError(odf_rec,fibre_odf)
+calcError(odf_recC,fibre_odf)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    0.0501
+     0.032586
+ans =
+     0.023747
 {% endhighlight %}
-<h2 id="6">Exporting Random Orientations</h2>
+<p>We observe</p>
+<h2 id="8">Exporting Random Orientations</h2>
 <p>In order to make use of the sampled orientations you probably want to <a href="OrientationExport.html">export</a> them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <code class="language-plaintext highlighter-rouge"><a href="quaternion.export.html">export</a></code> and <code class="language-plaintext highlighter-rouge"><a href="orientation.export_VPSC.html">export_VPSC</a></code>.</p>
 </div>
 </body>

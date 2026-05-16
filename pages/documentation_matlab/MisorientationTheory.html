@@ -62,7 +62,7 @@ angle(ori1, ori2) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.7299
+        85.73
 {% endhighlight %}
 <p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
 {% highlight matlab %}
@@ -71,18 +71,18 @@ angle(ori1, ori2.symmetrise) ./ degree
 
 {% highlight plaintext %}
 ans =
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
+        85.73
 {% endhighlight %}
 <p>The misorientation angle neglecting crystal symmetry can be computed by</p>
 {% highlight matlab %}
@@ -91,18 +91,18 @@ angle(ori1, ori2.symmetrise,'noSymmetry')./ degree
 
 {% highlight plaintext %}
 ans =
-  107.9164
-  100.9195
-   94.2719
-  136.6059
-  107.7043
-  179.5740
-  140.0724
-  137.3989
-  179.8286
-  101.4708
-  140.3882
-   85.7299
+       107.92
+       100.92
+       94.272
+       136.61
+        107.7
+       179.57
+       140.07
+        137.4
+       179.83
+       101.47
+       140.39
+        85.73
 {% endhighlight %}
 <p>We see that the smallest angle indeed coincides with the angle computed before.</p>
 <h2 id="9">Misorientations</h2>
@@ -176,15 +176,15 @@ angle(mori * Miller(1,0,-1,0,CS),Miller(1,1,-2,2,CS)) / degree
 
 {% highlight plaintext %}
 ans =
-    0.4592
+      0.45917
 ans =
-    0.1766
+      0.17661
 ans =
-   59.6768
+       59.677
 ans =
-    2.6341
+       2.6341
 ans =
-    2.5686
+       2.5686
 {% endhighlight %}
 <h2 id="14">Twinning misorientations</h2>
 <p>Lets define a misorientation that makes a perfect fit between the \(\{11\bar20\}\), \(\{2\bar1\bar10\}\) lattice planes and the \([0001]\), \([01\bar10]\) lattice directions.</p>
@@ -202,7 +202,7 @@ mori.angle / degree
 {% highlight plaintext %}
 mori = misorientation (Magnesium → Magnesium)
  
- (0001) || (01-10)   [1-100] || [0001]
+ (0001) || (011̅0)   [11̅00] || [0001]
  
  
 ans = Miller (Magnesium)
@@ -279,7 +279,7 @@ CS_Hem = loadCIF('Hematite')
 CS_Mag = crystalSymmetry
  
   mineral : Magnetite    
-  symmetry: m-3m         
+  symmetry: m3̅m         
   elements: 48           
   a, b, c : 8.4, 8.4, 8.4
  
@@ -287,7 +287,7 @@ CS_Mag = crystalSymmetry
 CS_Hem = crystalSymmetry
  
   mineral        : Hematite          
-  symmetry       : -3m1              
+  symmetry       : 3̅m1              
   elements       : 12                
   a, b, c        : 5, 5, 14          
   reference frame: X||a*, Y||b, Z||c*
@@ -302,7 +302,7 @@ Mag2Hem = orientation.map(...
 {% highlight plaintext %}
 Mag2Hem = misorientation (Magnetite → Hematite)
  
- (01-1) || (0-110)   [111] || [0001]
+ (011̅) || (01̅10)   [111] || [0001]
 {% endhighlight %}
 <p>Assume a Magnetite grain with orientation</p>
 {% highlight matlab %}
