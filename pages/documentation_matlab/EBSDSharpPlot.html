@@ -30,10 +30,11 @@ mtexdata sharp
 ipfKey = ipfColorKey(ebsd);
 
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+xlim(ebsd.extent(1:2)),ylim(ebsd.extent(3:4))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↓→x)
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    32 (0.16%)  notIndexed                                                 
@@ -84,6 +85,7 @@ colormap(cmap)
 {% highlight matlab %}
 % plot the data with the customized color
 plot(ebsd,color)
+xlim(ebsd.extent(1:2)),ylim(ebsd.extent(3:4))
 
 % set scaling of the angles to 110 - 120 degree
 setColorRange([-25 -15]);
@@ -108,6 +110,7 @@ ipfKey.inversePoleFigureDirection = mean(ebsd.orientations,'robust') * ipfKey.wh
 
 close all;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+xlim(ebsd.extent(1:2)),ylim(ebsd.extent(3:4))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSharpPlot_05.png" %}
@@ -116,6 +119,7 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 {% highlight matlab %}
 ipfKey.maxAngle = 7.5*degree;
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
+xlim(ebsd.extent(1:2)),ylim(ebsd.extent(3:4))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDSharpPlot_06.png" %}
@@ -152,6 +156,7 @@ ipfKey = axisAngleColorKey(ebsd);
 ipfKey.oriRef = grains.meanOrientation(ebsd('indexed').grainId);
 
 plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations))
+xlim(ebsd.extent(1:2)),ylim(ebsd.extent(3:4))
 
 hold on
 plot(grains.boundary,'lineWidth',4)

@@ -33,6 +33,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 R = rotation.byAxisAngle(xvector,20*degree);
 S1 = spinTensor(vector3d(0,0,1))
+
 % left tangent vector at some Rotation R
 TV = matrix(S1) * matrix(R)
 {% endhighlight %}
@@ -95,6 +96,37 @@ v1 = SO3TangentVector (y↑→x)
     x   y   z
   0.2 0.4 0.6
 {% endhighlight %}
+<p>We may visualize such a <a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a> by</p>
+{% highlight matlab %}
+% plot the base point
+plot(R,'axisAngle','MarkerColor','red')
+axis off
+
+% plot the tangent vector
+hold on
+h = quiver3(v1,'LineWidth',3,'maxHeadSize',4)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+h = 
+  Quiver with properties:
+
+        Color: [0 0.447 0.741]
+    LineStyle: '-'
+    LineWidth: 3
+        XData: 20
+        YData: 0
+        ZData: 0
+        UData: 13.718
+        VData: 38.625
+        WData: 40.433
+
+  Use GET to show all properties
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RotationTangentSpace_01.png" %}
+</center>
 <p>A <code class="language-plaintext highlighter-rouge"><a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a></code> in MTEX has three important properties:</p>
 <div>
 <ul>
@@ -147,7 +179,7 @@ ans = SO3TangentVector (y↑→x)
     x   y   z
   0.4 0.8 1.2
 {% endhighlight %}
-<h2 id="10">Operations of Rotational Tangent Vectors</h2>
+<h2 id="11">Operations of Rotational Tangent Vectors</h2>
 <p>The following operations are defined for rotational tangent vectors <code class="language-plaintext highlighter-rouge">TV</code>, <code class="language-plaintext highlighter-rouge">TV1</code>, <code class="language-plaintext highlighter-rouge">TV2</code>
 </p>
 <div>
@@ -181,7 +213,7 @@ rot = orientation (1 → y↑→x)
      phi1     Phi    phi2
   59.1419 41.5248 332.468
 {% endhighlight %}
-<p>The logarithm map does the reverse: It takes two rotations and computes the tangent vector in the tangent space of one rotation that points towards the other rotation. % It is performed onto the rotations with the command <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a>.</p>
+<p>The logarithm map does the reverse: It takes two rotations and computes the tangent vector in the tangent space of one rotation that points towards the other rotation. It is performed onto the rotations with the command <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a>.</p>
 {% highlight matlab %}
 log(rot,R)
 {% endhighlight %}
