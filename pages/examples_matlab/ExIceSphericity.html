@@ -28,9 +28,9 @@ toc: false
 <h2 id="1">The sphericity as measure for grain boundary irregularity</h2>
 <p>Deformed polycrystalline materials such as ice often contain large grains interlocking with smaller grains, with many irregular grain boundaries. Boundary irregularity is hard to judge by visual inspection and it is better to use quantitative measures of boundary irregularity to infer processes across different deformation conditions. Here, we quantify the irregularity of each grain&rsquo;s boundary by introducing a sphericity parameter \(\Psi\) which is calculated in 2-D from grain area <code class="language-plaintext highlighter-rouge">A</code>, grain boundary perimeter <code class="language-plaintext highlighter-rouge">P</code>, and area equivalent grain radius <code class="language-plaintext highlighter-rouge">R</code> by the formula</p>
 <p>\[\Psi = \frac{A}{P \cdot R}\]</p>
-<p>The grain sphericity \(\Psi\) is a useful indicator for grain boundary irregularity because it measures how closely a grain&rsquo;s boundary resembles the circumference of a perfect circle. It decreases from \(\Psi = 0.5\), where the grain has a perfect circular shape, to \(\Psi = 0\) where the grain boundary is infinitely irregular. The statistics of grain boundary sphericity can be used to segregate recrystallised grains from remnant original grains (please refer to the paper for more details).</p>
+<p>The grain sphericity \(\Psi\) is a useful indicator for grain boundary irregularity because it measures how closely a grain&rsquo;s boundary resembles the circumference of a perfect circle. It decreases from \(\Psi = 0.5\), where the grain has a perfect circular shape, to \(\Psi = 0\) where the grain boundary is infinitely irregular. The statistics of grain boundary sphericity can be used to segregate recrystallized grains from remnant original grains (please refer to the paper for more details).</p>
 <h2 id="3">Data</h2>
-<p>The EBSD data set used in this demonstration (PIL185.ctf) is available from <a href="https://doi.org/10.6084/m9.figshare.13456550">https://doi.org/10.6084/m9.figshare.13456550</a>. The EBSD data were collected with a step size of 5 &micro;m and representeds an ice sample deformed at -20&deg;C to 12 percent axial strain. Let's import the data and reconstruct some grains.</p>
+<p>The EBSD data set used in this demonstration (PIL185.ctf) is available from <a href="https://doi.org/10.6084/m9.figshare.13456550">https://doi.org/10.6084/m9.figshare.13456550</a>. The EBSD data were collected with a step size of 5 &micro;m and represents an ice sample deformed at -20&deg;C to 12 percent axial strain. Let's import the data and reconstruct some grains.</p>
 {% highlight matlab %}
 % plotting convention
 plotx2east
@@ -38,25 +38,20 @@ plotzIntoPlane
 
 % import the data
 path = [mtexExamplePath filesep 'ExGrains' filesep ];
-ebsd = EBSD.load([path 'PIL185.ctf'],'convertSpatial2EulerReferenceFrame');
+ebsd = EBSD.load([path 'PIL185.ctf'],'EulerCorrection',rotation.id);
+ebsd = rotate(ebsd,rotation.byAxisAngle(xvector,180*degree),'keepEuler');
 
 % critical misorientation for grain reconstruction
 threshold = 10 *degree;
 
-% first pass at reconstructing grains
-[grains, ebsd.grainId] = calcGrains(ebsd('ice'),'angle',threshold);
-
-% remove ebsd data that correspond to up to 4 pixel grains
-ebsd(grains(grains.grainSize < 5)) = [];
-
-% redo grain reconstruction - interpolate non-indexed space
-[grains, ebsd.grainId] = calcGrains(ebsd('ice'),'angle',threshold);
+% reconstructing grains
+[grains, ebsd.grainId] = calcGrains(ebsd('ice'),'angle',threshold,'minPixel',5);
 
 % remove all boundary grains
 grains(grains.isBoundary) = [];
 
 % remove too small irregular grains
-grains(grains.grainSize < grains.boundarySize / 2) = [];
+grains(grains.numPixel < grains.boundarySize / 2) = [];
 
 % plot the result
 plot(ebsd,ebsd.orientations)
@@ -91,7 +86,7 @@ clear Psi
 newMtexFigure('layout',[4,5])
 for i = 1:20
 
-  % now, we increase the step size of EBSD data artifically
+  % now, we increase the step size of EBSD data artificially
   ebsd_reduced = reduce(ebsd,i);
 
   % reconstruct grains using function calcGrains
@@ -105,7 +100,7 @@ for i = 1:20
   Psi(i) = grain.area ./ (grain.perimeter('withInclusion') .* grain.equivalentRadius);
 
   % calculate the number of pixels
-  gS(i) = grain.grainSize;
+  gS(i) = grain.numPixel;
 
   % plot evolution of grain geometry as step size increases
   if i>1, nextAxis; end
@@ -143,7 +138,7 @@ set (gca, 'xscale', 'log')
 newMtexFigure('layout',[3,3],'figSize','normal');
 
 % find all grains with more than 2000 pixels
-grains = grains(grains.grainSize > 2000);
+grains = grains(grains.numPixel > 2000);
 
 for m = 1:36
 

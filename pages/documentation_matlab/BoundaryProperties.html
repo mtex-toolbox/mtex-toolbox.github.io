@@ -30,8 +30,7 @@ mtexdata twins silent
 ebsd.prop = rmfield(ebsd.prop,{'error','bands'});
 
 % detect grains
-[grains,ebsd.grainId,ebsd.mis2mean] = ...
-  calcGrains(ebsd('indexed'),'angle',10*degree,'minPixel',3);
+[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',10*degree,'minPixel',3);
 
 % smooth them
 grains = grains.smooth(5);
@@ -206,23 +205,23 @@ ans = EBSD (y↑→x)
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1     16 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
  
-   Id   Phase             orientation    bc    bs   mad   grainId               mis2mean
- 1010       1   (113.7°,15.5°,219.3°)   164   158   0.5         4   (217.3°,0.2°,142.9°)
- 1010       1   (113.7°,15.5°,219.3°)   164   158   0.5         4   (217.3°,0.2°,142.9°)
-  843       1   (115.3°,15.6°,218.2°)   170   176   0.7         4    (55.9°,0.2°,303.8°)
-  843       1   (115.3°,15.6°,218.2°)   170   176   0.7         4    (55.9°,0.2°,303.8°)
-  843       1   (115.3°,15.6°,218.2°)   170   176   0.7         4    (55.9°,0.2°,303.8°)
- 1011       1   (114.7°,15.7°,218.5°)   182   174   0.5         4    (339.9°,0.1°,20.2°)
- 1011       1   (114.7°,15.7°,218.5°)   182   174   0.5         4    (339.9°,0.1°,20.2°)
- 1011       1   (114.7°,15.7°,218.5°)   182   174   0.5         4    (339.9°,0.1°,20.2°)
- 1177       1     (4.5°,80.7°,195.2°)   168   171   0.3        15     (4.8°,0.3°,355.2°)
- 1009       1     (4.6°,80.7°,195.4°)   156   160   0.4        15    (24.6°,0.3°,335.2°)
-  842       1     (4.9°,80.4°,195.2°)   167   170   0.5        15        (83°,0.5°,277°)
-  676       1     (4.9°,80.4°,195.2°)   176   196   0.5        15        (83°,0.5°,277°)
-  844       1     (4.4°,80.5°,195.1°)   174   197   0.3        15     (359.6°,0.1°,0.5°)
-  844       1     (4.4°,80.5°,195.1°)   174   197   0.3        15     (359.6°,0.1°,0.5°)
- 1012       1     (4.4°,80.5°,195.2°)   176   168   0.4        15    (14.3°,0.1°,345.8°)
- 1178       1     (4.7°,80.8°,195.4°)   174   181   0.5        15      (21.9°,0.4°,338°)
+   Id   Phase             orientation    bc    bs   mad   grainId
+ 1010       1   (113.7°,15.5°,219.3°)   164   158   0.5         4
+ 1010       1   (113.7°,15.5°,219.3°)   164   158   0.5         4
+  843       1   (115.3°,15.6°,218.2°)   170   176   0.7         4
+  843       1   (115.3°,15.6°,218.2°)   170   176   0.7         4
+  843       1   (115.3°,15.6°,218.2°)   170   176   0.7         4
+ 1011       1   (114.7°,15.7°,218.5°)   182   174   0.5         4
+ 1011       1   (114.7°,15.7°,218.5°)   182   174   0.5         4
+ 1011       1   (114.7°,15.7°,218.5°)   182   174   0.5         4
+ 1177       1     (4.5°,80.7°,195.2°)   168   171   0.3        15
+ 1009       1     (4.6°,80.7°,195.4°)   156   160   0.4        15
+  842       1     (4.9°,80.4°,195.2°)   167   170   0.5        15
+  676       1     (4.9°,80.4°,195.2°)   176   196   0.5        15
+  844       1     (4.4°,80.5°,195.1°)   174   197   0.3        15
+  844       1     (4.4°,80.5°,195.1°)   174   197   0.3        15
+ 1012       1     (4.4°,80.5°,195.2°)   176   168   0.4        15
+ 1178       1     (4.7°,80.8°,195.4°)   174   181   0.5        15
  Scan unit : um
  X x Y x Z : [1.8, 2.7] x [1.2, 2.1] x [0, 0]
  Normal vector: (0,0,1)
@@ -333,7 +332,7 @@ sum(gB_Mg.segLength)
 
 {% highlight plaintext %}
 ans =
-  723.9185
+       723.92
 {% endhighlight %}
 <h2 id="14">Connected components</h2>
 <p>When analyzing the topology of boundary networks connected components of certain subsets of boundaries are of interest. Using the commands|gB.componentId| and <code class="language-plaintext highlighter-rouge">gB.componentSize</code> we are able to separate the boundary network into groups of connected components and analyze them separately. We do so below at the example of twin boundaries which we first colorize according to length.</p>
@@ -355,7 +354,7 @@ mtexColorbar
 {% highlight plaintext %}
 twinning = misorientation (Magnesium → Magnesium)
  
- (10-1-1) || (01-11)   [01-11] || [1-101]
+ (101̅1̅) || (011̅1)   [011̅1] || [11̅01]
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryProperties_06.png" %}
