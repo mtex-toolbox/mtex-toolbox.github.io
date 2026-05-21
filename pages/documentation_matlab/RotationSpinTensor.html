@@ -149,11 +149,15 @@ v = log(rot_123 * rot_ref,rot_ref,SO3TangentSpace.leftVector); v * sqrt(14)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↑→x)
+ans = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: rightVector
   x y z
   1 2 3
  
-ans = vector3d (y↑→x)
+ans = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
+ TagentSpace: leftVector
   x y z
   1 2 3
 {% endhighlight %}
@@ -165,7 +169,7 @@ ans = vector3d (y↑→x)
 rot_ref * rot_123
 
 % using a disorientation vector
-exp(v,rot_ref,SO3TangentSpace.rightVector)
+exp(vector3d(v),rot_ref,SO3TangentSpace.rightVector)
 
 % using a spin tensor
 exp(S,rot_ref,SO3TangentSpace.rightSpinTensor)
@@ -198,7 +202,7 @@ ans = rotation
 rot_123 * rot_ref
 
 % using a disorientation vector
-exp(v,rot_ref,SO3TangentSpace.leftVector)
+exp(vector3d(v),rot_ref,SO3TangentSpace.leftVector)
 
 % using a spin tensor
 exp(S,rot_ref,SO3TangentSpace.leftSpinTensor)
@@ -249,7 +253,7 @@ ori = orientation (321 → y↑→x)
 {% endhighlight %}
 <p>Computing the right tangential vector gives us the disorientation vector in crystal coordinates</p>
 {% highlight matlab %}
-v = log(ori,ori_ref,SO3TangentSpace.rightVector); round(v)
+v = Miller(log(ori,ori_ref,SO3TangentSpace.rightVector),ori.CS); round(v)
 
 exp(v,ori_ref,SO3TangentSpace.rightVector)
 {% endhighlight %}
@@ -273,13 +277,19 @@ exp(v,ori_ref,SO3TangentSpace.leftVector)
 {% endhighlight %}
 
 {% highlight plaintext %}
-v = vector3d (y↑→x)
-         x        y        z
-  0.161601 0.428476 0.888985
+v = SO3TangentVector (y↑→x)
+ intern symmetries: 321 → y↑→x
+ TagentSpace: leftVector
+      x     y     z
+  0.162 0.428 0.889
  
-S = vector3d (y↑→x)
-         x        y        z
-  0.161601 0.428476 0.888985
+S = spinTensor (y↑→x)
+  rank: 2 (3 x 3)
+ 
+ *10^-2
+      0  -88.9  42.85
+   88.9      0 -16.16
+ -42.85  16.16      0
  
 ans = orientation (321 → y↑→x)
  
