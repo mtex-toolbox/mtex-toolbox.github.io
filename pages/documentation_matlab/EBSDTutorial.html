@@ -37,7 +37,7 @@ import_wizard
 {% highlight matlab %}
 % load some test data packaged with your MTEX installation
 fileName = [mtexDataPath filesep 'EBSD' filesep 'Forsterite.ctf'];
-ebsd = EBSD.load(fileName,'EulerCorrection',rotation.byAxisAngle(xvector,180*degree))
+ebsd = EBSD.load(fileName,'EulerCorrection',rotation.id)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -63,9 +63,9 @@ plot(ebsd,'coordinates','on')
 <center>
 {% include inline_image.html file="EBSDTutorial_02.png" %}
 </center>
-<p>When importing EBSD data it is critically important to align it correctly to a fixed reference frame. This issue is exhaustively discussed in the topic <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>.</p>
+<p>When importing EBSD data it is important to check the alignment of the map coordinate system and the Euler angle coordinate system. This issue is exhaustively discussed in the topic <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>.</p>
 <h2 id="6">Orientation Plots</h2>
-<p>Analyzing orientations of an EBSD map can be done only for each phase separately. The key syntax to restrict the data to a single phase is</p>
+<p>Analyzing orientations of an EBSD map has to be done for each phase separately. The key syntax to restrict the data to a single phase is</p>
 {% highlight matlab %}
 ebsd('Forsterite')
 {% endhighlight %}
@@ -81,7 +81,7 @@ ans = EBSD (y↑→x)
  X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>Now we may restrict the variable to Forsterite orientations by</p>
+<p>which allows us the access orientations of all Forsterite pixels with</p>
 {% highlight matlab %}
 ebsd('Forsterite').orientations
 {% endhighlight %}
@@ -90,16 +90,16 @@ ebsd('Forsterite').orientations
 ans = orientation (Forsterite → y↑→x)
   size: 152345 x 1
 {% endhighlight %}
-<p>and may use this syntax to plot an ipf map of all Forsterite orientations</p>
+<p>This syntax can be used to plot an ipf map of all Forsterite orientations</p>
 {% highlight matlab %}
 plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDTutorial_03.png" %}
 </center>
-<p>In this standard form a default color coding of the orientations is chosen. A more complete discussion about how to colorize orientations can be found in the topic <a href="EBSDIPFMap.html">IPF Maps</a>.</p>
+<p>Here the all Forsterite orientations a colored according to their alignment in a z inverse pole figure. A more complete discussion about how to colorize orientations can be found in the topic <a href="EBSDIPFMap.html">IPF Maps</a>.</p>
 <h2 id="10">Grain reconstruction</h2>
-<p>MTEX contains a sophisticated algorithm for reconstructing the grain structure from EBSD data as described in the paper <a href="https://www.researchgate.net/publication/51806709_Grain_detection_from_2d_and_3d_EBSD_data-Specification_of_the_MTEX_algorithm">Grain detection from 2d and 3d EBSD data</a> and the topic <a href="GrainReconstruction.html">Grain Reconstruction</a>. The syntax is</p>
+<p>MTEX contains sophisticated algorithms for reconstructing grains from EBSD data as described in the paper <a href="https://www.researchgate.net/publication/51806709_Grain_detection_from_2d_and_3d_EBSD_data-Specification_of_the_MTEX_algorithm">Grain detection from 2d and 3d EBSD data</a> and the topic <a href="GrainReconstruction.html">Grain Reconstruction</a>. The syntax is</p>
 {% highlight matlab %}
 % reconstruct grains with a threshold angle of 10 degrees
 grains = calcGrains(ebsd('indexed'),'theshold',10*degree,'minPixel',5)

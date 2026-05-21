@@ -1,5 +1,5 @@
 ---
-title: S2FunHarmonicSym
+title: Symmetric Spherical Functions
 
 sidebar: documentation_sidebar
 permalink: S2FunSym.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>S2FunHarmonicSym</title>
+<title>Symmetric Spherical Functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_S2FunSym.m">
 </head>
@@ -22,7 +22,7 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>The class <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> is an extension of the class <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></code> representing symmetric spherical functions.</p>
+<p>In several applications spherical functions are symmetric with respect to some symmetry group. Typically examples are inverse pole figures or properties of single crystals. In MTEX one can ensure symmetry properties of spherical functions by defining them as variables of type <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a></code>.</p>
 <!--/introduction-->
 <h2 id="1">Defining a S2FunHarmonic</h2>
 <p>
@@ -30,35 +30,36 @@ To make changes, update the MATLAB code and republish this document.
 </p>
 <p>The simplest way to define a symmetric spherical function is through the symmetrisation of an ordinary <code class="language-plaintext highlighter-rouge"><a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></code>.</p>
 {% highlight matlab %}
-sF = S2Fun.smiley
-ss = specimenSymmetry('222');
+% the original function
+sF = S2Fun.smiley;
 
-sFs1 = symmetrise(sF, ss);
+% the symmetry
+ss = specimenSymmetry('222',sF.how2plot);
+
+% attach the symmetry to the function
+sFs1 = S2FunHarmonicSym(sF, ss);
+
+% and enforce it
+sFs1 = sFs1.symmetrise
+
+plot(sFs1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sF = S2FunHarmonic (y←↑x)
+sFs1 = S2FunHarmonicSym (y←↑x (222))
   bandwidth: 128
-{% endhighlight %}
-<div>
-<ul>
-<li>this symmetrises the function and gives back the result with the symmetry attached</li>
-</ul>
-</div>
-{% highlight matlab %}
-plotx2north
-plot(sFs1,'complete','upper')
+  antipodal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunSym_01.png" %}
 </center>
-<div>
-<ul>
-<li>Note that only the important part with respect to the symmetry is plotted</li>
-<li>you can plot the full sphere using the argument <code class="language-plaintext highlighter-rouge">'complete'</code>
-</li>
-</ul>
-</div>
+<p>Note that symmetry function are by default only plotted within their representative sector, as it is typical for inverse pole figures. In order to visualize the full sphere we have to use the option <code class="language-plaintext highlighter-rouge">'complete'</code>.</p>
+{% highlight matlab %}
+plot(sFs1,'complete','upper')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunSym_02.png" %}
+</center>
 <p>
 <b>Definition via function handle</b>
 </p>
@@ -71,24 +72,15 @@ cs = crystalSymmetry('6/m');
 </p>
 {% highlight matlab %}
 sFs2 = S2FunHarmonicSym.quadrature(f, cs)
+
+contour(sFs2,'linewidth',2);
+mtexColorMap parula
 {% endhighlight %}
 
 {% highlight plaintext %}
 sFs2 = S2FunHarmonicSym (6/m)
   bandwidth: 128
   antipodal: true
-{% endhighlight %}
-<h2 id="7">Visualization</h2>
-<p>The plot commands for a <code class="language-plaintext highlighter-rouge">S2FunHarmonicSym</code> by default plot the function only on the fundamental Sector of the symmetry. E.g. the default <code class="language-plaintext highlighter-rouge">plot</code>-command look as follows</p>
-{% highlight matlab %}
-plot(sFs1);
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2FunSym_02.png" %}
-</center>
-<p>Another Example is the contour plot</p>
-{% highlight matlab %}
-contour(sFs2);
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2FunSym_03.png" %}

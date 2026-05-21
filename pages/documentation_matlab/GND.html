@@ -29,12 +29,9 @@ To make changes, update the MATLAB code and republish this document.
 </p>
 <p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and visualize those data in an ipf map.</p>
 {% highlight matlab %}
-% set up the plotting convention
-plotx2north
-
 % import the EBSD data
 ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'DC06_2uniax.ang'],'setting',2);
-%ebsd = EBSD.load('DC06_2biax.ang');
+ebsd.how2plot = plottingConvention(zvector,-yvector);
 
 % define the color key
 ipfKey = ipfHSVKey(ebsd);
@@ -200,61 +197,61 @@ dS = dislocationSystem
  mineral: Iron (Alpha) (432)
  edge dislocations : 48 x 1
  Burgers vector  line vector  energy  length
-      [1 1̅  1]   [2̅ 1̅  1]       2    2.49
-      [1  1 1̅]    [2 1̅  1]       2    2.49
-      [1  1 1̅]    [1 2̅ 1̅]       2    2.49
-     [1̅  1  1]    [1  2 1̅]       2    2.49
-      [1 1̅  1]   [1̅  1  2]       2    2.49
-     [1̅  1  1]   [1̅  1 2̅]       2    2.49
-      [1 1̅  1]    [1  2  1]       2    2.49
-      [1  1  1]   [1̅  2 1̅]       2    2.49
-      [1  1 1̅]    [1  1  2]       2    2.49
-      [1  1  1]   [1̅ 1̅  2]       2    2.49
-     [1̅  1  1]    [2  1  1]       2    2.49
-      [1  1  1]    [2 1̅ 1̅]       2    2.49
-     [1̅  1  1]    [0  1 1̅]       2    2.49
-      [1 1̅  1]   [1̅  0  1]       2    2.49
-      [1  1 1̅]    [1 1̅  0]       2    2.49
-     [1̅  1  1]   [1̅  0 1̅]       2    2.49
-      [1 1̅  1]   [1̅ 1̅  0]       2    2.49
-      [1  1 1̅]    [0 1̅ 1̅]       2    2.49
-      [1  1 1̅]    [1  0  1]       2    2.49
-     [1̅  1  1]    [1  1  0]       2    2.49
-      [1 1̅  1]    [0  1  1]       2    2.49
-     [1̅ 1̅ 1̅]    [0 1̅  1]       2    2.49
-     [1̅ 1̅ 1̅]    [1  0 1̅]       2    2.49
-     [1̅ 1̅ 1̅]   [1̅  1  0]       2    2.49
-     [1̅  1  1]   [1̅  4 5̅]       2    2.49
-      [1 1̅  1]   [5̅ 1̅  4]       2    2.49
-      [1  1 1̅]    [4 5̅ 1̅]       2    2.49
-     [1̅  1  1]   [4̅  1 5̅]       2    2.49
-      [1 1̅  1]   [5̅ 4̅  1]       2    2.49
-      [1  1 1̅]    [1 5̅ 4̅]       2    2.49
-      [1  1 1̅]    [4  1  5]       2    2.49
-     [1̅  1  1]    [5  4  1]       2    2.49
-      [1 1̅  1]    [1  5  4]       2    2.49
-     [1̅ 1̅ 1̅]   [1̅ 4̅  5]       2    2.49
-     [1̅ 1̅ 1̅]    [5 1̅ 4̅]       2    2.49
-     [1̅ 1̅ 1̅]   [4̅  5 1̅]       2    2.49
-      [1 1̅  1]    [1 4̅ 5̅]       2    2.49
-      [1  1 1̅]   [5̅  1 4̅]       2    2.49
-     [1̅  1  1]   [4̅ 5̅  1]       2    2.49
-      [1 1̅  1]    [4 1̅ 5̅]       2    2.49
-      [1  1 1̅]   [5̅  4 1̅]       2    2.49
-     [1̅  1  1]   [1̅ 5̅  4]       2    2.49
-     [1̅ 1̅ 1̅]   [4̅ 1̅  5]       2    2.49
-     [1̅ 1̅ 1̅]    [5 4̅ 1̅]       2    2.49
-     [1̅ 1̅ 1̅]   [1̅  5 4̅]       2    2.49
-      [1  1 1̅]    [1  4  5]       2    2.49
-     [1̅  1  1]    [5  1  4]       2    2.49
-      [1 1̅  1]    [4  5  1]       2    2.49
+      [1 -1  1]   [-2 -1  1]       2    2.49
+      [1  1 -1]    [2 -1  1]       2    2.49
+      [1  1 -1]    [1 -2 -1]       2    2.49
+     [-1  1  1]    [1  2 -1]       2    2.49
+      [1 -1  1]   [-1  1  2]       2    2.49
+     [-1  1  1]   [-1  1 -2]       2    2.49
+      [1 -1  1]    [1  2  1]       2    2.49
+      [1  1  1]   [-1  2 -1]       2    2.49
+      [1  1 -1]    [1  1  2]       2    2.49
+      [1  1  1]   [-1 -1  2]       2    2.49
+     [-1  1  1]    [2  1  1]       2    2.49
+      [1  1  1]    [2 -1 -1]       2    2.49
+     [-1  1  1]    [0  1 -1]       2    2.49
+      [1 -1  1]   [-1  0  1]       2    2.49
+      [1  1 -1]    [1 -1  0]       2    2.49
+     [-1  1  1]   [-1  0 -1]       2    2.49
+      [1 -1  1]   [-1 -1  0]       2    2.49
+      [1  1 -1]    [0 -1 -1]       2    2.49
+      [1  1 -1]    [1  0  1]       2    2.49
+     [-1  1  1]    [1  1  0]       2    2.49
+      [1 -1  1]    [0  1  1]       2    2.49
+     [-1 -1 -1]    [0 -1  1]       2    2.49
+     [-1 -1 -1]    [1  0 -1]       2    2.49
+     [-1 -1 -1]   [-1  1  0]       2    2.49
+     [-1  1  1]   [-1  4 -5]       2    2.49
+      [1 -1  1]   [-5 -1  4]       2    2.49
+      [1  1 -1]    [4 -5 -1]       2    2.49
+     [-1  1  1]   [-4  1 -5]       2    2.49
+      [1 -1  1]   [-5 -4  1]       2    2.49
+      [1  1 -1]    [1 -5 -4]       2    2.49
+      [1  1 -1]    [4  1  5]       2    2.49
+     [-1  1  1]    [5  4  1]       2    2.49
+      [1 -1  1]    [1  5  4]       2    2.49
+     [-1 -1 -1]   [-1 -4  5]       2    2.49
+     [-1 -1 -1]    [5 -1 -4]       2    2.49
+     [-1 -1 -1]   [-4  5 -1]       2    2.49
+      [1 -1  1]    [1 -4 -5]       2    2.49
+      [1  1 -1]   [-5  1 -4]       2    2.49
+     [-1  1  1]   [-4 -5  1]       2    2.49
+      [1 -1  1]    [4 -1 -5]       2    2.49
+      [1  1 -1]   [-5  4 -1]       2    2.49
+     [-1  1  1]   [-1 -5  4]       2    2.49
+     [-1 -1 -1]   [-4 -1  5]       2    2.49
+     [-1 -1 -1]    [5 -4 -1]       2    2.49
+     [-1 -1 -1]   [-1  5 -4]       2    2.49
+      [1  1 -1]    [1  4  5]       2    2.49
+     [-1  1  1]    [5  1  4]       2    2.49
+      [1 -1  1]    [4  5  1]       2    2.49
  
  screw dislocations: 4 x 1
  Burgers vector  energy  length
-     [1̅ 1̅ 1̅]       1    2.49
-      [1 1̅  1]       1    2.49
-     [1̅  1  1]       1    2.49
-      [1  1 1̅]       1    2.49
+     [-1 -1 -1]       1    2.49
+      [1 -1  1]       1    2.49
+     [-1  1  1]       1    2.49
+      [1  1 -1]       1    2.49
 {% endhighlight %}
 <p>Here the norm of the Burgers vectors is important</p>
 {% highlight matlab %}
@@ -267,7 +264,7 @@ a = norm(ebsd.CS.aAxis);
 
 {% highlight plaintext %}
 ans =
-       2.4855       2.4855       2.4855
+    2.4855    2.4855    2.4855
 {% endhighlight %}
 <h2 id="12">The Energy of Dislocations</h2>
 <p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed accoring to the specific model and the specific material.</p>
@@ -406,7 +403,7 @@ factor
 
 {% highlight plaintext %}
 factor =
-        1e+16
+   1.0000e+16
 {% endhighlight %}
 <p>Multiplying the densities <code class="language-plaintext highlighter-rouge">rho</code> with this factor and the individual energies of the the dislocation systems we end up with the total dislocation energy. Lets plot this at a logarithmic scale</p>
 {% highlight matlab %}
