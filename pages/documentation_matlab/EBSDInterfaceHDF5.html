@@ -1,0 +1,143 @@
+---
+title: Developer Guide: HDF5 EBSD JSON Configurations
+
+sidebar: documentation_sidebar
+permalink: EBSDInterfaceHDF5.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Developer Guide: HDF5 EBSD JSON Configurations</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDInterfaceHDF5.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDInterfaceHDF5.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<p>This interface dynamically translates manufacturer-specific HDF5 structures (Bruker, EDAX, Oxford, ThermoFisher) into a unified MTEX <code class="language-plaintext highlighter-rouge">EBSD</code> object. The <code class="language-plaintext highlighter-rouge">.json</code> configuration file acts as a precise roadmap, instructing the script where to look for metadata and how to format the extracted arrays.</p>
+<!--/introduction-->
+<h2 id="1">1. The Core Concept: Dynamic Tree Searching</h2>
+<p>The script processes the configuration file completely <b>recursively</b> % via the <code class="language-plaintext highlighter-rouge">readConf</code> function. It traverses the JSON layout while simultaneously navigating the metadata tree of the opened HDF5 file:</p>
+<div>
+<ul>
+<li>Every major category (<code class="language-plaintext highlighter-rouge">position</code>, <code class="language-plaintext highlighter-rouge">rotation</code>, <code class="language-plaintext highlighter-rouge">cs</code>, etc.) is evaluated relative to a <b><code class="language-plaintext highlighter-rouge">root</code></b> path (defaulting to the discovered main EBSD group).</li>
+<li>When the script encounters the <code class="language-plaintext highlighter-rouge">"value"</code> keyword, it invokes <code class="language-plaintext highlighter-rouge">get_hdf5_path</code> to resolve the actual target dataset or group path inside the file.</li>
+<li>When it finds the <code class="language-plaintext highlighter-rouge">"type"</code> keyword, it dynamically looks for a matching MATLAB formatting function named <code class="language-plaintext highlighter-rouge">[category]_[type]</code> (e.g., <code class="language-plaintext highlighter-rouge">position_direct</code> or <code class="language-plaintext highlighter-rouge">rotation_euler</code>) to convert the raw data into MTEX-compatible objects.</li>
+</ul>
+</div>
+<h2 id="2">2. The Three Search Modes (mode)</h2>
+<p>Any field responsible for fetching or defining data must explicitly state its operational mode using one of the following options:</p>
+<div>
+<ul>
+<li>
+<b><code class="language-plaintext highlighter-rouge">absolute</code></b> : Bypasses any search architecture and utilizes the exact string path provided. Highly recommended for rigid, unchanging standard file structures. <i>Example:</i> <code class="language-plaintext highlighter-rouge">"value": "/Site/Acquisition/StepSize"</code>
+</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">regex</code></b> : Executes a case-insensitive regular expression search within the current HDF5 subtree. Protects against minor naming variations across software versions. <i>Example:</i> <code class="language-plaintext highlighter-rouge">"value": "^X Position\("</code>
+</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">data</code></b> : Bypasses HDF5 file reading entirely and injects the hardcoded value straight from the JSON layout. Perfect for fixed units, formatting definitions, or static matrices. <i>Example:</i> <code class="language-plaintext highlighter-rouge">"value": "degree"</code>
+</li>
+</ul>
+</div>
+<h2 id="3">3. Main Category Specifications</h2>
+<p>The JSON configuration file must directly mirror the structure expected by the core MTEX <code class="language-plaintext highlighter-rouge">EBSD</code> constructor. The following formatters are natively supported:</p>
+<div>
+<ul>
+<li>Spatial Coordinates (position)*</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<b><code class="language-plaintext highlighter-rouge">type: "direct"</code></b> : Used when the HDF5 file stores explicit coordinate arrays for each individual measurement pixel. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">type: "indirect"</code></b> : Used when explicit coordinates are omitted, requiring a grid generation (<code class="language-plaintext highlighter-rouge">meshgrid</code>) calculated from header metrics (step sizes and map dimensions). <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">step_size_x</code>, <code class="language-plaintext highlighter-rouge">step_size_y</code>, <code class="language-plaintext highlighter-rouge">grid_size_x</code>, <code class="language-plaintext highlighter-rouge">grid_size_y</code>.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>Spatial Orientations (rotation)*</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<b><code class="language-plaintext highlighter-rouge">type: "euler"</code></b> : Handles classic three-angle orientation inputs. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">formate</code> (must resolve to <code class="language-plaintext highlighter-rouge">"degree"</code> or <code class="language-plaintext highlighter-rouge">"radiante"</code>) alongside either individualized axis entries (<code class="language-plaintext highlighter-rouge">phi1</code>, <code class="language-plaintext highlighter-rouge">Phi</code>, <code class="language-plaintext highlighter-rouge">phi2</code>) or a single bundled orientation matrix (<code class="language-plaintext highlighter-rouge">phi</code>).</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">type: "euler_stack"</code></b> : Handles single 3D data arrays where orientation angles are stacked sequentially along the first matrix dimension. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">formate</code> and <code class="language-plaintext highlighter-rouge">phi</code>.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">type: "correctById"</code> / <code class="language-plaintext highlighter-rouge">type: "correctByAngle"</code></b> : Applies custom mathematical transformations or rotations to align the physical detector coordinate frame with the mapping system.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>Crystal Symmetry (cs)*</li>
+</ul>
+</div>
+<p>The parser dynamically accommodates multi-phase materials by tracking and creating independent cell array entries for each validated mineral phase group.</p>
+<div>
+<ul>
+<li>
+<b><code class="language-plaintext highlighter-rouge">type: "default"</code></b> : Feeds extracted properties directly into the MTEX <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> constructor. <i>Crucial flag:</i> Always include <code class="language-plaintext highlighter-rouge">"multiple": "true"</code> to instruct the script to collect all available phases sequentially. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">group</code> (space group or point group matching <code class="language-plaintext highlighter-rouge">type: "space"</code>), and <code class="language-plaintext highlighter-rouge">lattice</code> parameters. Lattice properties can be parsed collectively as a compact 6-element array (<code class="language-plaintext highlighter-rouge">type: "all_together"</code>) or completely decoupled using <code class="language-plaintext highlighter-rouge">type: "seperate"</code>.</li>
+</ul>
+</div>
+<h2 id="7">4. Advanced Navigation: "key" &amp; "multiple"</h2>
+<p>Two structural JSON properties drive the core automation behaviors of the parser:</p>
+<div>
+<ul>
+<li>
+<b><code class="language-plaintext highlighter-rouge">"key"</code> (Contextual Root Shift)</b> : When an object container (such as <code class="language-plaintext highlighter-rouge">cs</code>) defines a <code class="language-plaintext highlighter-rouge">"key"</code> field, the script locates this group in the HDF5 tree and enforces it as the new localized <b><code class="language-plaintext highlighter-rouge">root</code></b> for all nested subfields. This keeps inner definitions like <code class="language-plaintext highlighter-rouge">name</code> or <code class="language-plaintext highlighter-rouge">lattice</code> modular, eliminating the need to provide absolute parent pathways.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">"multiple": "true"</code></b> : Instructs the <code class="language-plaintext highlighter-rouge">readConf</code> loop not to abort after the first regex match, but to accumulate all matching nodes into a cell array. This forms the operational backbone for seamlessly indexing an arbitrary number of mineral phases.</li>
+</ul>
+</div>
+<h2 id="8">5. Minimal Integration Template</h2>
+<p>When extending support to a new vendor format, use this clean layout as your baseline and adjust the regex target patterns to match your manufacturer's specific naming conventions:</p>
+<pre>{
+  "settings": {
+    "ebsd_key": {"mode": "regex", "value": "Main_EBSD_Group_Name"}
+  },
+  "position": {
+    "type": "direct",
+    "direct": {
+      "x": { "mode": "regex", "value": "^X_Axis_Label\)" },
+      "y": { "mode": "regex", "value": "^Y_Axis_Label$" }
+    }
+  },
+  "phase": {"mode": "regex", "value": "Phase_Map_Dataset", "type": "default"},
+  "rotation": {
+    "type": "euler",
+    "euler": {
+      "formate": {"data": "degree"},
+      "phi1": { "mode": "regex", "value": "Euler_1" },
+      "Phi":  { "mode": "regex", "value": "Euler_2" },
+      "phi2": { "mode": "regex", "value": "Euler_3" }
+    }
+  },
+  "cs": {
+    "type": "default",
+    "multiple": "true",
+    "key": { "mode": "regex", "value": "Phases_Metadata_Folder" },
+    "default": {
+      "group": { "mode": "regex", "value": "SpaceGroup_Field", "type": "space" },
+      "name": { "mode": "regex", "value": "MineralName_Field"},
+      "lattice": { "mode": "regex", "value": "Lattice_Array_Field", "type": "all_together"}
+    }
+  },
+  "additions": {
+    "type": "auto",
+    "key": { "mode": "regex", "value": "Additional_Metadata_Folder"}
+  }
+}</pre>
+</div>
+</body>
+</html>
