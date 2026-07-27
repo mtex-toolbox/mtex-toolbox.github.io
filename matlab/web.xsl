@@ -26,10 +26,15 @@ Use the XSLT command to perform the conversion.
   </xsl:variable>
   <xsl:include href="makelink.xsl"/>
 
+  <!-- quote the yaml title, otherwise headings containing a colon
+       (e.g. "Developer Guide: HDF5 ...") break the front matter -->
+  <xsl:variable name="dQuote">"</xsl:variable>
+  <xsl:variable name="sQuote">'</xsl:variable>
+
   <!-- here everything starts -->
   <!--last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>-->
   <xsl:template match="mscript">---
-title: <xsl:value-of select="$title"/>
+title: "<xsl:value-of select="translate($title,$dQuote,$sQuote)"/>"
 
 sidebar: <xsl:value-of select="$toolbox/folder"/>_sidebar
 permalink: <xsl:value-of select="$toolbox/htmlTarget"/>
