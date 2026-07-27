@@ -3,10 +3,9 @@
 from PIL import Image
 import sys
 import re
-import os
 
 # open input image path from 1st cli arg
-inimg = Image.open(sys.argv[4]).convert("RGBA")
+inimg = Image.open(sys.argv[1]).convert("RGBA")
 
 # read input image size and calculate aspect ratio
 insize = inwidth, inheight = inimg.size
@@ -21,9 +20,7 @@ clst = re.findall(r"(\d+),(\d+),(\d+),(\d+)", sys.argv[3])[0]
 insetcolor = tuple([int(c) for c in clst])
 
 # get output image path from 4th cli arg
-# outpath = sys.argv[1]
-basename = os.path.basename(sys.argv[4]).rsplit(".", 1)[0]
-outpath = os.path.join(r"C:\Users\fabia\Downloads", f"{basename}_centered.png")
+outpath = sys.argv[4]
 
 # create output image with inset color as background
 outimg = Image.new("RGBA", outsize, insetcolor)
@@ -48,4 +45,3 @@ outimg.paste(resimg, (x_offset, y_offset), resimg)
 
 # Save composited output image
 outimg.save(outpath)
-outimg.show()
