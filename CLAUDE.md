@@ -71,7 +71,17 @@ makeDoc('examples')           % only pages/examples_matlab
 makeDoc('force')              % republish even when the source is not newer
 makeDoc('checkLinks')         % dead-link scan over the generated HTML
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
+makeDoc('keepImages')         % skip the image revert pass at the end (see below)
+makeDoc('file','EBSDTutorial')          % just this page
+makeDoc('doc','file','Plotting')        % just this folder
+makeDoc('file',{'Multiplot','Legends'}) % several
 ```
+
+`'file'` matches its pattern as a substring of the full source path, so a page
+name, a folder or a full path all work. It implies `'force'` — naming a page
+means you want it rebuilt — and it leaves the sidebars alone, since those can
+only be regenerated from the complete file list. Selection is
+`@DocFile/select.m` in `../makeDoc`, the counterpart of `exclude`.
 
 `makeDoc.m` sets `options.outDir` per section, writes figures to `../images`,
 uses `matlab/web.xsl` (`examples.xsl` for examples) as the `publish`
@@ -79,6 +89,40 @@ stylesheet, and emits Liquid-aware HTML: code blocks become
 `{% highlight matlab %}` and figures `{% include inline_image.html %}`.
 `makeHelpToc` writes `funcRef.xml` / `doc.xml` / `examples.xml`, which
 `xml2yml.m` converts into the sidebar YAML.
+
+### Keeping the image diff meaningful
+
+`makeDoc` overwrites every figure it re-renders, and most re-renders are the
+same figure drawn slightly differently — anti-aliasing lands on other pixels,
+and `mogrify -trim` crops to content so the canvas jitters. Two things keep
+that noise out of `git status`, so that what remains modified is the real
+change set — which is how the image diff doubles as a unit test for the
+toolbox.
+
+**Fixed figure sizes.** MTEX derives figure sizes from the screen, so the same
+figure comes out at a different pixel size on a different monitor and the whole
+of `images/` changes as soon as the docs are rebuilt elsewhere. `makeDoc.m` pins
+this with `setMTEXpref('screenSize',[1920 1200])` — the size the stored images
+were rendered at. Changing that number rewrites every image.
+
+**The revert pass.** `makeDoc` finishes by running
+
+```bash
+python3 tools/revert-unchanged-images.py            # --dry-run to only score
+```
+
+which restores the committed version of every image that changed only
+cosmetically. It is a normal script, so it can also be re-run by hand at any
+time; `makeDoc('keepImages')` skips it.
+
+The score is scale-invariant (both images are cropped to their content box and
+resized to a common grid) and ignores differences a nearby pixel of the other
+image can account for, so it is blind to rescaling and anti-aliasing but still
+catches a moved marker or a relabelled axis. It errs towards keeping: on the
+Jul 2026 rebuild it reverted 272 of 573 modified images, and every pair
+inspected below the 0.20 threshold was visually identical. `--threshold` retunes
+it; `--dry-run` prints every score, sorted, so the band around the cut can be
+eyeballed first.
 
 ## Editing documentation content (in `../master/doc/`)
 
