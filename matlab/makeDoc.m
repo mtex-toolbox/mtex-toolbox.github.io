@@ -33,13 +33,24 @@ close all
 setMTEXpref('FontSize',13)
 setMTEXpref('figSize',0.5)
 
+% figure sizes are a fraction of the screen, so without this every figure
+% would come out at whatever size the monitor of the machine running the
+% build happens to imply - and the whole of ../images would change as soon
+% as the documentation is rebuilt elsewhere. 1920x1200 is what the images
+% currently in the repository were rendered at.
+setMTEXpref('screenSize',[1920 1200])
+
 setMTEXpref('generatingHelpMode',true);
 global mtex_progress; mtex_progress = 0; %#ok<GVMIS>
 set(0,'FormatSpacing','compact')
 set(0,'DefaultFigureColor','white');
 
+% resolved here because publishing runs from tmpDir
+revertScript = fullfile(pwd,'..','tools','revert-unchanged-images.py');
+
 options.tmpDir = fullfile(pwd,'tmp');
 options.imageDir = fullfile(pwd,'..','images');
+options.logFile = fullfile(pwd,'publish_log.txt');
 options.LaTex = 'mathJax';
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
 options.force = check_option(varargin,'force');
@@ -50,6 +61,20 @@ options.xml.toolbox.fullname.Text = '<b>MTEX</b> - A MATLAB Toolbox for Quantita
 options.xml.toolbox.lastUpdated.Text = date;
 
 doAll = ~check_option(varargin,{'ref','doc','examples'});
+
+% restrict the build to single pages or folders, e.g.
+%
+%   makeDoc('file','EBSDTutorial')
+%   makeDoc('doc','file','Plotting')
+%
+% the pattern is matched against the full source path, so a page name, a
+% folder or a full path all work. This implies 'force' - the point of naming
+% a page is to rebuild it, and it would otherwise be skipped whenever it is
+% not newer than its html. The sidebars are left untouched, since they can
+% only be regenerated from the complete file list.
+restrictTo = ensurecell(get_option(varargin,'file',{}));
+doSidebars = isempty(restrictTo);
+options.force = options.force || ~doSidebars;
 
 %% Publish Function Reference
 
@@ -70,16 +95,17 @@ if doAll || check_option(varargin,'ref')
     DocFile( fullfile(mtex_path,'doc','FunctionReference'));];
 
   % make sidebar
-  makeHelpToc(mtexFunctionFiles,'FunctionReference','funcRef.xml');
-  xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
+  if doSidebars
+    makeHelpToc(mtexFunctionFiles,'FunctionReference','funcRef.xml');
+    xml2yml('funcRef.xml','../_data/sidebars/function_reference_sidebar.yml','Functions')
+  end
 
   % publish files
   funOut = fullfile(pwd,'..','pages','function_reference_matlab');
   options.outDir = funOut;
   options.xml.toolbox.folder.Text = 'function_reference';
 
-  options.force = check_option(varargin,'force');
-  publish(mtexFunctionFiles,options);
+  publish(select(mtexFunctionFiles,restrictTo{:}),options);
 
 end
 
@@ -92,15 +118,17 @@ if doAll || check_option(varargin,'doc')
   mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html','FunctionReference');
 
   % make sidebar
-  makeHelpToc(mtexDocFiles,'Documentation','doc.xml');
-  xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
+  if doSidebars
+    makeHelpToc(mtexDocFiles,'Documentation','doc.xml');
+    xml2yml('doc.xml','../_data/sidebars/documentation_sidebar.yml','Topics')
+  end
 
   % publish files
   docOut = fullfile(pwd,'..','pages','documentation_matlab');
   options.outDir = docOut;
   options.xml.toolbox.folder.Text = 'documentation';
 
-  publish(mtexDocFiles,options);
+  publish(select(mtexDocFiles,restrictTo{:}),options);
 end
 
 %% make examples
@@ -113,8 +141,10 @@ if doAll || check_option(varargin,'examples')
 
 
   % make sidebar
-  makeHelpToc(mtexExFiles,'Examples','examples.xml');
-  xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
+  if doSidebars
+    makeHelpToc(mtexExFiles,'Examples','examples.xml');
+    xml2yml('examples.xml','../_data/sidebars/examples_sidebar.yml','Examples')
+  end
 
   % publish files
   exOut = fullfile(pwd,'..','pages','examples_matlab');
@@ -122,13 +152,30 @@ if doAll || check_option(varargin,'examples')
   options.xml.toolbox.folder.Text = 'examples';
   options.publishSettings.stylesheet = fullfile(pwd,'examples.xsl');
 
-  publish(mtexExFiles,options);
+  publish(select(mtexExFiles,restrictTo{:}),options);
+end
+
+%% revert images that were only re-rendered, not really changed
+
+% publishing overwrites every figure it draws, but most re-renders show the
+% very same picture - see ../CLAUDE.md. Restoring those from git keeps the
+% change set of ../images meaningful as a test of what the toolbox does.
+if ~check_option(varargin,'keepImages')
+
+  dispPerm('reverting images that did not really change ...')
+
+  [status,out] = system(['python3 "' revertScript '"']);
+
+  disp(out);
+  if status ~= 0
+    warning('MTEX:makeDoc','could not revert unchanged images');
+  end
 end
 
 %% check links
 
 if check_option(varargin,'checkLinks')
-  deadlink([mtexFunctionFiles,mtexDocFiles,mtexExFiles], {funOut,docOut,exOut}); 
+  deadlink([mtexFunctionFiles,mtexDocFiles,mtexExFiles], {funOut,docOut,exOut});
 end
 
 %% set back mtex options
@@ -139,6 +186,7 @@ function delete
 
 global mtex_progress;
 setMTEXpref('generatingHelpMode',false);
+setMTEXpref('screenSize',[]);
 mtex_progress = 1;
 
 end
