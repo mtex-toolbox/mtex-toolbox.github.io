@@ -72,6 +72,7 @@ makeDoc('force')              % republish even when the source is not newer
 makeDoc('checkLinks')         % dead-link scan over the generated HTML
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
 makeDoc('keepImages')         % skip the image revert pass at the end (see below)
+makeDoc('hideFigures')        % publish without the figures appearing on screen
 makeDoc('file','EBSDTutorial')          % just this page
 makeDoc('doc','file','Plotting')        % just this folder
 makeDoc('file',{'Multiplot','Legends'}) % several
