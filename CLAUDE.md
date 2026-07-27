@@ -25,9 +25,10 @@ There is no test suite, no linter and no CI build step — GitHub Pages runs
 Jekyll on push. `update.sh` is the maintainer's one-shot
 `git add . && git commit -m "content update" && git push`.
 
-`_site/` is **tracked in git** but is a stale build artifact (last committed
-Oct 2024, while `pages/` is current). Running `jekyll serve`/`build` rewrites
-it and produces thousands of spurious diffs — keep those out of commits.
+`_site/` is the local build output and is gitignored (it was tracked until
+Jul 2026, as a stale Oct-2024 build). GitHub Pages builds from source and
+Jekyll never publishes its own destination directory, so nothing there needs
+committing.
 
 ## Generated vs. hand-written content
 
@@ -124,6 +125,12 @@ toc: false
   folder/item needs `output: web`. Nesting is `folders → folderitems →
   subfolders → subfolderitems` — deeper levels are not supported.
 - `hide_sidebar: true` for full-width pages (e.g. `index.md`).
+- The front matter must be valid YAML, and Jekyll fails *soft* when it isn't:
+  it drops the whole block, so the page loses its `permalink` and gets
+  published under its source path (`/pages/documentation_matlab/Foo.html`)
+  instead of `/Foo.html`, with no sidebar entry — the build still reports
+  success. A `%%` heading containing a colon used to trigger exactly this;
+  `web.xsl`/`examples.xsl` now emit the title quoted.
 - Internal links: `{% include reference.html link="people" content="Team" %}`
   (auto-targets `_blank` for `://` links). Images: `{% include inline_image.html file="Foo_01.png" %}`
   — the path is resolved relative to `images/`.
