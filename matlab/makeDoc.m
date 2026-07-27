@@ -55,6 +55,9 @@ options.LaTex = 'mathJax';
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
 options.force = check_option(varargin,'force');
 
+% by default the figures show up on screen while they are being published
+options.showFigures = ~check_option(varargin,'hideFigures');
+
 options.xml.toolbox.versionName.Text = getMTEXpref('version');
 options.xml.toolbox.name.Text = 'MTEX';
 options.xml.toolbox.fullname.Text = '<b>MTEX</b> - A MATLAB Toolbox for Quantitative Texture Analysis';
