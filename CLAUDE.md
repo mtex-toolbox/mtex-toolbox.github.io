@@ -48,6 +48,27 @@ Hand-written: `index.md`, `pages/{addons,download,people,publications,support,vi
 `_data/topnav.yml`, `_data/sidebars/workshops_sidebar.yml`, `_posts/`,
 `css/theme-mtex.css`, `_includes/custom/`.
 
+## Running MATLAB
+
+Use `/opt/matlab-2024b/bin/matlab`, not the `matlab` on `$PATH` (that resolves
+to a newer MATLAB R2025b install which segfaults in headless/`-batch` mode on
+this machine — a licensing-library crash unrelated to MTEX):
+
+```bash
+/opt/matlab-2024b/bin/matlab -batch "your_command_here"
+```
+
+`-batch` runs headlessly and exits when the command finishes; startup (path
+setup + MTEX init) costs ~10-20 s, and much more if an interactive MATLAB
+desktop session is already contending for the license. Run it from
+`../master/` so MATLAB picks up that folder's `startup.m` (which calls
+`startup_mtex`), or `addpath` and call `startup_mtex` yourself.
+
+For several calls back-to-back, `../master/docs/agents/matlab-bridge/` keeps a
+warm headless session (Python MATLAB Engine API) that pays startup once —
+`setup.sh` once, then `start_session.sh`, `matlab_run.py "cmd"`,
+`stop_session.sh`. See `../master/CLAUDE.md` for its caveats.
+
 ## Rebuilding the documentation (MATLAB)
 
 Run from `matlab/` **inside MATLAB**, with MTEX on the path. The three pieces
