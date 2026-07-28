@@ -58,6 +58,22 @@ options.force = check_option(varargin,'force');
 % by default the figures show up on screen while they are being published
 options.showFigures = ~check_option(varargin,'hideFigures');
 
+% pages whose figures differ from the committed ones are republished even when
+% their source has not changed - such an image is normally the trace of an MTEX
+% bug that was found and fixed in between, and re-rendering re-tests it against
+% the current toolbox. The list is taken once, here, because publishing dirties
+% ../images itself and a later query would see this run's own output.
+% See ../CLAUDE.md.
+if check_option(varargin,'skipDirtyImages')
+  options.forceDoc = {};
+else
+  options.forceDoc = dirtyImagePages;
+  if ~isempty(options.forceDoc)
+    dispPerm(sprintf('%d page(s) have uncommitted images and will be republished', ...
+      numel(options.forceDoc)));
+  end
+end
+
 options.xml.toolbox.versionName.Text = getMTEXpref('version');
 options.xml.toolbox.name.Text = 'MTEX';
 options.xml.toolbox.fullname.Text = '<b>MTEX</b> - A MATLAB Toolbox for Quantitative Texture Analysis';
@@ -191,6 +207,37 @@ global mtex_progress;
 setMTEXpref('generatingHelpMode',false);
 setMTEXpref('screenSize',[]);
 mtex_progress = 1;
+
+end
+
+function pages = dirtyImagePages
+% doc names whose images differ from the committed version
+%
+% The same predicate as tools/revert-unchanged-images.py, so that what that
+% script leaves modified is exactly what gets republished next time. git runs
+% against the parent directory because makeDoc runs from matlab/.
+%
+% --no-pager is essential, not tidiness: MATLAB's system() leaves a terminal
+% attached to the child, so `git diff` starts `less` and then waits for it
+% forever - the build hangs with no output at all. The python script does not
+% need this because subprocess gives git a pipe instead.
+
+pages = {};
+[status,out] = system('git --no-pager -C .. diff --name-only --diff-filter=M -- "images/*.png"');
+if status ~= 0
+  warning('MTEX:makeDoc','could not determine which images are modified');
+  return
+end
+
+files = strsplit(strtrim(out),newline);
+files = files(~cellfun('isempty',files));
+if isempty(files), return; end
+
+% publish names every figure <docName>_NN.png, so the prefix is the doc name:
+% images/GND_04.png -> GND, images/EBSD.plot_02.png -> EBSD.plot. Anything the
+% pattern leaves unchanged is not a published figure and is dropped.
+pages = regexprep(files,'^images/(.*)_\d+\.png$','$1');
+pages = unique(pages(~strcmp(pages,files)));
 
 end
 

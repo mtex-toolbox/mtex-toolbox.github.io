@@ -93,6 +93,7 @@ makeDoc('force')              % republish even when the source is not newer
 makeDoc('checkLinks')         % dead-link scan over the generated HTML
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
 makeDoc('keepImages')         % skip the image revert pass at the end (see below)
+makeDoc('skipDirtyImages')    % do not republish pages with uncommitted images (see below)
 makeDoc('hideFigures')        % publish without the figures appearing on screen
 makeDoc('file','EBSDTutorial')          % just this page
 makeDoc('doc','file','Plotting')        % just this folder
@@ -145,6 +146,28 @@ Jul 2026 rebuild it reverted 272 of 573 modified images, and every pair
 inspected below the 0.20 threshold was visually identical. `--threshold` retunes
 it; `--dry-run` prints every score, sorted, so the band around the cut can be
 eyeballed first.
+
+### Uncommitted images as a rebuild criterion
+
+An image left modified after the revert pass is normally the trace of an MTEX
+bug that was found and fixed in `../master` — the doc source itself never
+changed. `publish.m` would therefore skip that page forever, and its figure
+would keep whatever the earlier render produced instead of being re-tested
+against the toolbox of today.
+
+So `makeDoc` republishes a page when *either* its source is newer than its HTML
+*or* one of its images differs from the committed one — a union, which is why
+this cannot go through `select`/`'file'` (those narrow the file list rather than
+widen the rebuild set). `makeDoc.m` asks git for the modified images once,
+before any publishing, maps `<docName>_NN.png` back to the doc name, and hands
+the list to `publish.m` as `options.forceDoc`; the toolbox itself stays
+git-agnostic. The query is the same predicate the revert script uses, so the two
+cannot disagree about what changed.
+
+This closes a loop: the revert pass decides what stays dirty, and what stays
+dirty is what gets rebuilt next run. It does not converge on its own — a page
+whose figure genuinely changed is rebuilt on every run until the image is
+committed. `makeDoc('skipDirtyImages')` opts out for a plain incremental build.
 
 ## Editing documentation content (in `../master/doc/`)
 
