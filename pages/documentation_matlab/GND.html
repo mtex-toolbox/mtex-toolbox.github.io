@@ -110,19 +110,19 @@ kappa(2,3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-kappa = curvatureTensor (y←↑x)
-  size: 51 x 101 
+kappa = curvatureTensor (y↓→x)
+  size: 101 x 51 
   unit: 1/um     
   rank: 2 (3 x 3)
  
-ans = curvatureTensor (y←↑x)
+ans = curvatureTensor (y↓→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
  *10^-4
-   7.23   0.47    NaN
- -40.05   3.42    NaN
-   5.01    4.2    NaN
+   4.591  -2.269     NaN
+  -0.379 -15.305     NaN
+  11.952 -17.293     NaN
 {% endhighlight %}
 <h2 id="6">The components of the curvature tensor</h2>
 <p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d-EBSD maps.</p>
@@ -135,7 +135,7 @@ size(kappa12)
 
 {% highlight plaintext %}
 ans =
-    51   101
+   101    51
 {% endhighlight %}
 <p>which results in a variable of the same size as our EBSD map. This allows us to visualize the different components of the curvature tensor</p>
 {% highlight matlab %}
@@ -166,8 +166,8 @@ alpha = kappa.dislocationDensity
 {% endhighlight %}
 
 {% highlight plaintext %}
-alpha = dislocationDensityTensor (y←↑x)
-  size: 51 x 101 
+alpha = dislocationDensityTensor (y↓→x)
+  size: 101 x 51 
   unit: 1/um     
   rank: 2 (3 x 3)
 {% endhighlight %}
@@ -177,14 +177,14 @@ alpha(2,3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = dislocationDensityTensor (y←↑x)
+ans = dislocationDensityTensor (y↓→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
  *10^-4
-    NaN -40.05   5.01
-   0.47    NaN    4.2
-    NaN    NaN -10.65
+     NaN  -0.379  11.952
+  -2.269     NaN -17.293
+     NaN     NaN  10.715
 {% endhighlight %}
 <h2 id="10">Crystallographic Dislocations</h2>
 <p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the atomic lattice different dislocation systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
@@ -194,7 +194,7 @@ dS = dislocationSystem.bcc(ebsd.CS)
 
 {% highlight plaintext %}
 dS = dislocationSystem
- mineral: Iron (Alpha) (432)
+ mineral: Iron (Alpha) (m-3m)
  edge dislocations : 48 x 1
  Burgers vector  line vector  energy  length
       [1 -1  1]   [-2 -1  1]       2    2.49
@@ -345,23 +345,23 @@ kappa(2).dislocationDensity
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = dislocationDensityTensor (y←↑x)
+ans = dislocationDensityTensor (y↓→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
- *10^-4
- -0.45 -5.25 -3.02
- 60.99 -19.2 19.16
-  0.73 -7.74 26.53
+ *10^-5
+   9.34   21.9  33.18
+ -12.99 -34.91 -32.27
+   5.49 -20.93  39.54
  
-ans = dislocationDensityTensor (y←↑x)
+ans = dislocationDensityTensor (y↓→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
- *10^-4
-   NaN -5.25 -3.02
- 60.99   NaN 19.16
-   NaN   NaN 26.53
+ *10^-5
+    NaN   21.9  33.18
+ -12.99    NaN -32.27
+    NaN    NaN  39.54
 {% endhighlight %}
 <p>we may also restore the complete curvature tensor with</p>
 {% highlight matlab %}
@@ -369,7 +369,7 @@ kappa = alpha.curvature
 {% endhighlight %}
 
 {% highlight plaintext %}
-kappa = curvatureTensor (y←↑x)
+kappa = curvatureTensor (y↓→x)
   size: 5151 x 1 
   unit: 1/um     
   rank: 2 (3 x 3)

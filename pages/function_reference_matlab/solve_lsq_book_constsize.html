@@ -23,14 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Each page of the input arrays defines one local least-squares problem. Those are solved in parallel using Matlabs pagefuns.</p>
+<p>Each page defines one weighted local least-squares problem. The columns of the weighted design matrix are normalized before diagnostics and regularization.</p>
 <p>input: W_book : nn x 1 x N local weights G_book : nn x dim x N local basis values f_book : nn x numf x N local function values</p>
-<p>output: c_book : dim x numf x N local coefficient vectors conds : N x 1 condition numbers of the solved systems info : struct additional data for regularization setup</p>
-<p>options: regularize given be varargin basis_weights given be varargin mincond given be varargin maxcond given be varargin basis_weights_scale given be varargin lambda_geom_rel given be varargin geometryScore given be varargin</p>
-<pre>  targetcond               default: mincond</pre>
-<p>flags: condition_geometry geometry may only activate a fraction of the condition regularization that is actually needed</p>
-<p>IMPORTANT ASSUMPTION: The first basis function is assumed to be the constant function. 1 - For MLS on S^2 we have: - even degree -&gt; 1 - odd degree -&gt; z (~const near north pole) 2 - For MLS on SO(3) this is similar.</p>
-<p>=============================================================================</p>
+<p>output: c_book : dim x numf x N local coefficient vectors conds : N x 1 conditions of the solved normalized Gram systems info : struct additional regularization diagnostics</p>
+<p>options: regularize mincond normalized center amplification where activation starts maxcond normalized center amplification for full correction targetcond amplification approached at full correction eval_vector basis values at the evaluation point (dim x 1 x N) numerical_cond_max condition cap for the nuisance block (default 1e10)</p>
+<p>flags: centered_evaluation the evaluation vector is the first basis direction</p>
+<p>The regularizer protects the evaluation direction and penalizes only its orthogonal complement in normalized coefficient coordinates. In a centered basis this is the constant-preserving block form</p>
+<pre>     H = [a b'; b C]  -&gt;  H_reg = [a b'; b (1+eta)(C+lambda_num I)].</pre>
+<p>Activation and correction strength are separate: mincond/maxcond determine where the smooth transition acts, while targetcond determines the final directional amplification. No pointwise parameter search is used.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 [c_book, conds, info] = ...

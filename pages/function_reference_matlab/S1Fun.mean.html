@@ -91,11 +91,11 @@ SO3F1 = SO3FunRBF (Quartz → y↑→x)
   weight: 1
  
  
-SO3F2 = SO3FunHandle (y↑→x → y↑→x)
+SO3F2 = SO3FunHandle (y↓→x → y↓→x)
   eval: @(rot)SO3F1.eval(rot)
  
  
-SO3F3 = SO3FunHandle (y↑→x → y↑→x)
+SO3F3 = SO3FunHandle (y↓→x → y↓→x)
   size: 2 x 3
   eval: @(rot)reshape(SO3F1,[1,size(SO3F1)]).*reshape(SO3F2.eval(rot),[numel(rot),size(SO3F2)])
 {% endhighlight %}
@@ -115,12 +115,12 @@ ans =
     0.9999    0.9999    0.9999
     0.9999    0.9999    0.9999
  
-ans = SO3FunHandle (y↑→x → y↑→x)
+ans = SO3FunHandle (y↓→x → y↓→x)
   size: 2 x 1
   eval: @(rot)mean(SO3F.eval(rot),varargin{1}+1)
  
  
-ans = SO3FunHandle (y↑→x → y↑→x)
+ans = SO3FunHandle (y↓→x → y↓→x)
   size: 1 x 3
   eval: @(rot)mean(SO3F.eval(rot),varargin{1}+1)
 {% endhighlight %}

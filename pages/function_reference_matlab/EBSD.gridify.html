@@ -25,18 +25,12 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>extend EBSD data to an grid</p>
 <h2 id="3">Description</h2>
-<p>matrix shaped regular grid. No interpolation is done hereby. Grid points in the regular grid that do not have a correspondence in the regular grid are set to NaN. Having the EBSD data in matrix form has several advantages:</p>
-<div>
-<ul>
-<li>required for <a href="OrientationGradient.html">gradient</a>, <a href="EBSDsquare.curvature.html">curvature</a> and <a href="GND">GND</a> computation</li>
-<li>much faster visualization of big maps</li>
-<li>much faster computation of the kernel average misorientation</li>
-</ul>
-</div>
+<p>In the default column major layout the first dimension of the resulting matrix is the grid direction closest to y and the second one the grid direction closest to x, both oriented such that the coordinates increase. Accordingly <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> is the j-th pixel of the i-th scan row and <code class="language-plaintext highlighter-rouge">ebsd(1,1)</code> is the corner with the smallest coordinates. Hexagonal grids are always stored this way, the flags apply to square grids only.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 [ebsdGrid,newId] = gridify(ebsd)
 [ebsdGrid,newId] = gridify(ebsd,'unitCell',unitCell)
+[ebsdGrid,newId] = gridify(ebsd,'rowMajor')
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -93,7 +87,28 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="8">Example</h2>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>columnMajor</tt>
+         </td>
+         <td>
+            <tt>one scan row per matrix row, i.e. size(ebsd) = [numRows numCols] (default)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rowMajor</tt>
+         </td>
+         <td>
+            <tt>the transposed layout, i.e. size(ebsd) = [numCols numRows]</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">Example</h2>
 {% highlight matlab %}
 mtexdata twins
 ebsdMg = ebsd('Magnesium').gridify
@@ -122,7 +137,7 @@ ebsdMg = EBSDsquare (y↑→x)
  Scan unit : um
  X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
- Square grid  :167 x 137
+ Square grid  :137 x 167
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSD.gridify_01.png" %}
