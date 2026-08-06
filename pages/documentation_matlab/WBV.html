@@ -30,21 +30,29 @@ To make changes, update the MATLAB code and republish this document.
 <p>We start by importing the same data as for the <a href="GND.html">GND example</a>.</p>
 {% highlight matlab %}
 % import the EBSD data
-% mtexdata single
-CS = crystalSymmetry('Fm3m',[4.04958 4.04958 4.04958],'mineral','Al');
-ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'single_grain_aluminum.txt'],...
-    'CS', CS,'RADIANS','ColumnNames', { 'Euler 1' 'Euler 2' 'Euler 3' 'x' 'y'},...
-    'Columns', [1 2 3 4 5]);
+mtexdata single
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     1  10201 (100%)       Al  LightSkyBlue      m-3m                         
+ 
+ Scan unit : um
+ X x Y x Z : [6, 16] x [4, 14] x [0, 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
 <p>We reconstruct grains because later on, we do not want to compute the WBV across grain boundaries</p>
 {% highlight matlab %}
 [grains,ebsd] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
 
-% denoise the data
 % we will use the noisy data later on
 ebsdN = ebsd.gridify;
+
+% denoise the data
 F = halfQuadraticFilter;
-ebsd = smooth(ebsd('indexed'),F,'fill',grains);
+ebsd = smooth(ebsd,F,'fill',grains);
 {% endhighlight %}
 <h2 id="3">Computing the WBV</h2>
 <p>The function expects the EBSD data set to be <a href="EBSD.gridify.html">gridified</a>.</p>
@@ -54,7 +62,7 @@ wbv = weightedBurgersVec(ebsd)
 {% endhighlight %}
 
 {% highlight plaintext %}
-wbv = vector3d (y↓→x)
+wbv = vector3d (y↑→x)
  size: 101 x 101
 {% endhighlight %}
 <p>The WBV is returned in specimen coordinates as a list of <a href="vector3d.vector3d.html">vector3d</a>. We can inspect its magnitude (in 1/scanunit) and direction.</p>
@@ -90,6 +98,7 @@ plot(ebsd,cK.direction2color(wbv),'FaceAlpha',wbv.norm/0.22)
 hold on
 quiver(ebsd(cond),wbv(cond),'color','k','autoScaleFactor', 2, 'antipodal');
 hold off
+mtexTitle('direction of the WBV in specimen coordinates')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="WBV_04.png" %}
