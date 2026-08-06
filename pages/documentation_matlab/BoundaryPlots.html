@@ -34,7 +34,7 @@ mtexdata forsterite
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
 % reconstruct grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5,'alpha',10);
 
 % smooth the grains a bit
 grains = smooth(grains,4);
@@ -44,7 +44,7 @@ grains = smooth(grains,4);
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
+     0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
@@ -63,14 +63,14 @@ gB = grains.boundary
 gB = grainBoundary
  
  Segments    length   mineral 1   mineral 2
-      869  27592 µm  notIndexed  Forsterite
-       36   1562 µm  notIndexed   Enstatite
-       42   1361 µm  notIndexed    Diopside
-     1398  56197 µm  Forsterite  Forsterite
-      654  26372 µm  Forsterite   Enstatite
-      522  20750 µm  Forsterite    Diopside
+      489  27814 µm  notIndexed  Forsterite
+       25   1615 µm  notIndexed   Enstatite
+       24   1396 µm  notIndexed    Diopside
+     1387  55503 µm  Forsterite  Forsterite
+      644  25950 µm  Forsterite   Enstatite
+      535  21248 µm  Forsterite    Diopside
        35   1296 µm   Enstatite   Enstatite
-      134   5802 µm   Enstatite    Diopside
+      139   6117 µm   Enstatite    Diopside
        23    951 µm    Diopside    Diopside
 {% endhighlight %}
 <p>We may use the <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command to visualize the grain boundaries in the map</p>
@@ -98,10 +98,9 @@ hold off
 {% highlight plaintext %}
 ans = grainBoundary
  
- Segments   length   mineral 1   mineral 2
-       81  3365 µm  Forsterite  Forsterite
-       16   720 µm  Forsterite   Enstatite
-        9   386 µm  Forsterite    Diopside
+ Segments  length   mineral 1   mineral 2
+       15  596 µm  Forsterite  Forsterite
+       19  837 µm  Forsterite    Diopside
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_02.png" %}
@@ -161,7 +160,7 @@ mtexColorbar('visible','off')
 
 {% highlight plaintext %}
 axes = Miller (Forsterite)
- size: 1398 x 1
+ size: 1387 x 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_06.png" %}
@@ -204,13 +203,13 @@ hold off
 gB_red = grainBoundary
  
  Segments    length   mineral 1   mineral 2
-      280  11373 µm  Forsterite  Forsterite
+      343  53659 µm  Forsterite  Forsterite
  
 ori = orientation (Forsterite → y↑→x)
-  size: 280 x 2
+  size: 343 x 2
  
 axes = vector3d (y↑→x)
- size: 280 x 1
+ size: 343 x 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_08.png" %}
@@ -241,7 +240,7 @@ hold off
 figure(2)
 plot(colorKey,'layout',[3,4])
 
-% and plot the misorienations on top
+% and plot the misorientations on top
 plot(gB_Fo.misorientation,...
   'MarkerFacecolor','none','add2all','MarkerSize',4)
 {% endhighlight %}
@@ -254,7 +253,7 @@ plot(gB_Fo.misorientation,...
 mtexdata csl
 
 % grain segmentation and smoothing
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+[grains,ebsd] = calcGrains(ebsd);
 grains = smooth(grains,2);
 gB = grains.boundary('iron','iron');
 
@@ -278,7 +277,7 @@ hold off
 ebsd = EBSD (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    5 (0.0032%)  notIndexed                                                 
+     0    5 (0.0032%)  notIndexed          none                                   
     -1  154107 (100%)        iron  LightSkyBlue      m-3m                         
  
  Properties: ci, error, iq

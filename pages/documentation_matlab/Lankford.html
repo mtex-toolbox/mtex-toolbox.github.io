@@ -1,5 +1,5 @@
 ---
-title: Lankford parameter
+title: "Lankford parameter"
 
 sidebar: documentation_sidebar
 permalink: Lankford.html
@@ -51,7 +51,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>On the other hand, materials with lower R-values may be more suitable for applications where uniformity of deformation is critical. An example is the production of deep drawn parts, such as cylindrical containers or cans. In deep drawing, a flat sheet of metal is formed into a three-dimensional shape by being drawn into a die cavity. This process requires uniform deformation of the material to avoid wrinkles, or uneven thickness distribution (thinning) in areas around the drawn part. Consequently, materials with lower r-values, which exhibit more isotropic deformation behavior, are better suited for deep drawing applications since they are less likely to show preferential deformation in one direction. Instead, they are more likely to deform uniformly in all directions, ensuring a consistent shape is produced.</p>
 <p>To experimentally calculate the Lankford parameter, uniaxial tensile tests at different angles to the rolling direction are required. The R-value is then calculated as the ratio of the transverse strain (i.e. - perpendicular to the loading direction) to the axial strain (i.e. - along the loading direction).</p>
 <p>In the context of crystallography and electron backscattering diffraction (EBSD) analysis, understanding the Lankford parameter is crucial for predicting how a material will deform under different loading conditions.</p>
-<p>In terms of MATLAB and the MTEX toolbox, the the Lankford parameter or R-value is modelled or estimated on the basis of crystallographic orientations and the Taylor theory as demonstrated below.</p>
+<p>In terms of MATLAB and the MTEX toolbox, the the Lankford parameter or R-value is modeled or estimated on the basis of crystallographic orientations and the Taylor theory as demonstrated below.</p>
 <!--/introduction-->
 <h2 id="1">Example 1: The Lankford parameter (or R-value) of a single orientation</h2>
 <p>In this example, a single (1 1 0)[1 -1 2] Brass orientation is used.</p>
@@ -76,15 +76,15 @@ sS = slipSystem (fcc)
   u    v    w  | h    k    l CRSS
   0    1   -1    1    1    1    1
 ---
-M at 0°  to tA = 1.841
-M at 45° to tA = 1.7817
-M at 90° to tA = 1.7509
+M at 0°  to tA = 3.0617
+M at 45° to tA = 2.3357
+M at 90° to tA = 3.6741
 ---
 R at 0°  to tA = 1
-R at 45° to tA = 1
-R at 90° to tA = 2.3333
+R at 45° to tA = Inf
+R at 90° to tA = Inf
 ---
-Rbar = 0.66667
+Rbar = NaN
 ---
 {% endhighlight %}
 <p>The summary results show that for the Brass orientation, it is not always possible to predict the R-value as Inf values are predicted at 45&deg; and 90&deg; to the nominal rolling direction (or in this case, x).</p>
@@ -105,7 +105,7 @@ odf = unimodalODF(ori,'halfwidth',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (fcc → xyz)
+odf = SO3FunRBF (fcc → y←↑x)
  
   unimodal component
   kernel: de la Vallee Poussin, halfwidth 10°
@@ -130,44 +130,38 @@ legend('\theta=0^\circ','\theta=45^\circ','\theta=90^\circ','Location','northeas
 <h2 id="5">Example 3: The Lankford parameter of an EBSD map</h2>
 <p>In this demonstration an hcp titanium dataset is used</p>
 {% highlight matlab %}
-% load an mtex ebsd map
+% load an MTEX ebsd map
 mtexdata titanium
 
 % define the crystal system
 CS = ebsd.CS;
 
 % reconstruct the grains
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
-
-% remove small grains
-ebsd(grains(grains.grainSize <= 5)) = [];
-
-% recalculate the grains
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',5*degree);
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',6);
 
 % plot the orientations
 plot(ebsd,ebsd.orientations);
-hold all
+hold on
 plot(grains.boundary,'lineWidth',2);
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD
+ebsd = EBSD (y↑→x)
  
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622       X||a, Y||b*, Z||c*
+     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
  
  Properties: ci, grainid, iq, sem_signal
  Scan unit : um
- X x Y x Z : [0 996] x [0 998] x [0 0]
+ X x Y x Z : [0, 996] x [0, 998] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="Lankford_03.png" %}
 </center>
 <h2 id="6">define the hcp slip systems</h2>
-<p>Since Taylor theory is used to compute the Lankford parameter, multiple slip systems and their corresponding critical resolved shear stresses <a href="slipSystem.index.html">slip systems</a> can be employed.</p>
+<p>Since Taylor theory is used to compute the Lankford parameter, multiple slip systems and their corresponding critical resolved shear stresses <a href="slipSystem.slipSystem.html">slip systems</a> can be employed.</p>
 {% highlight matlab %}
 sS = [slipSystem.basal(CS,1),...
   slipSystem.prismatic2A(CS,66),...
@@ -189,20 +183,20 @@ sS = slipSystem (Titanium (Alpha))
 <p>The Lankford parameter is computed using the command <a href="calcLankford.html"><code class="language-plaintext highlighter-rouge">calcLankford</code></a>. It solely depends on the texture provided by the mean orientations of the grains, weighted by the area of the grains and the angle \(\theta\) between the tensile direction and the rolling direction. In the case of the latter, the default reference direction is \(x\).</p>
 {% highlight matlab %}
 theta = linspace(0,90*degree,19);
-[R, M, minM] = calcLankford(grains.meanOrientation,sS,theta,'weights',grains.grainSize,'verbose');
+[R, M, minM] = calcLankford(grains.meanOrientation,sS,theta,'weights',grains.numPixel,'verbose');
 {% endhighlight %}
 
 {% highlight plaintext %}
 ---
-M at 0°  to tA = 1.7682
-M at 45° to tA = 1.7585
-M at 90° to tA = 1.9676
+M at 0°  to tA = 2.4575
+M at 45° to tA = 2.4835
+M at 90° to tA = 2.4139
 ---
-R at 0°  to tA = 0.25
+R at 0°  to tA = 0.66667
 R at 45° to tA = 1
-R at 90° to tA = 1
+R at 90° to tA = 0.66667
 ---
-Rbar = -0.375
+Rbar = -0.33333
 ---
 {% endhighlight %}
 <p>The following plot shows the Lankford parameter, as a function of the angle \(\theta\) between the tensile direction and the notional rolling direction (in this case - x).</p>
@@ -236,7 +230,7 @@ Rbar = 0.5 * (R(1) + R(19) + 2*R(10))
 
 {% highlight plaintext %}
 Rbar =
-    1.6250
+    1.6667
 {% endhighlight %}
 <div>
 <ul>
@@ -249,7 +243,7 @@ deltaR = 0.5 * (R(1) + R(19) - 2*R(10))
 
 {% highlight plaintext %}
 deltaR =
-   -0.3750
+   -0.3333
 {% endhighlight %}
 </div>
 </body>

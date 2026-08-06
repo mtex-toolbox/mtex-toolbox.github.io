@@ -1,5 +1,5 @@
 ---
-title: Exporting Crystal Orientations
+title: "Exporting Crystal Orientations"
 
 sidebar: documentation_sidebar
 permalink: OrientationExport.html
@@ -23,7 +23,111 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">TODO</h2>
+<p>Orientations are exported as plain ASCII files, which keeps them readable by any other software. This page is the counterpart of <a href="OrientationImport.html">Importing Crystal Orientations</a>.</p>
+<p>As an example we take a random sample from a model ODF.</p>
+{% highlight matlab %}
+cs = crystalSymmetry.load('quartz.cif');
+
+odf = unimodalODF(orientation.byEuler(30*degree,50*degree,10*degree,cs), ...
+  'halfwidth',10*degree);
+
+ori = odf.discreteSample(100)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori = orientation (Quartz → y↑→x)
+  size: 100 x 1
+{% endhighlight %}
+<h2 id="2">Exporting Euler Angles</h2>
+<p>The command <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes the orientations into an ASCII file. By default the three Bunge Euler angles are written in degree, preceded by a header line naming the columns.</p>
+{% highlight matlab %}
+fname = fullfile(tempdir,'orientations.txt');
+export(ori,fname)
+{% endhighlight %}
+<p>Let us look at the beginning of the resulting file</p>
+{% highlight matlab %}
+fid = fopen(fname);
+for k = 1:4, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+phi1      Phi     phi2
+216.671  113.178  233.492
+220.818  139.367  237.496
+217.929  121.963  241.686
+{% endhighlight %}
+<h2 id="4">Other Conventions and Units</h2>
+<p>Any of the Euler angle conventions described in <a href="RotationDefinition.html">Defining Rotations</a> may be used instead, and the angles may be written in radians rather than in degree.</p>
+{% highlight matlab %}
+export(ori,fname,'Matthies','radians')
+
+fid = fopen(fname);
+for k = 1:4, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+alpha      beta     gamma
+2.21083   1.97532     5.646
+2.28321   2.43241   5.71589
+2.23279   2.12866   5.78901
+{% endhighlight %}
+<p>Passing the option <code class="language-plaintext highlighter-rouge">quaternion</code> writes the four quaternion components instead of Euler angles. This is the only one of the formats on this page that involves no angle conversion at all.</p>
+{% highlight matlab %}
+export(ori,fname,'quaternion')
+
+fid = fopen(fname);
+for k = 1:3, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+a          b          c          d
+  0.388809  -0.825764    0.12209   0.389917
+  0.227067  -0.927874   0.136008   0.262664
+{% endhighlight %}
+<h2 id="6">Exporting Additional Properties</h2>
+<p>Often one wants to store more than the orientations alone - weights, grain sizes, or any other per orientation quantity. A struct passed to <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> is appended as additional columns, one per field, using the field names as column headers.</p>
+{% highlight matlab %}
+S.angle = ori.angle ./ degree;
+S.weight = ones(size(ori)) ./ length(ori);
+
+export(ori,fname,S)
+
+fid = fopen(fname);
+for k = 1:3, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+phi1      Phi     phi2    angle   weight
+216.671  113.178  233.492  78.1761     0.01
+220.818  139.367  237.496  58.7177     0.01
+{% endhighlight %}
+<h2 id="7">The VPSC Format</h2>
+<p>Individual orientations are exported to the format expected by the VPSC code with <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a>. It always writes Euler angles together with a weight column, normalised to sum up to one.</p>
+{% highlight matlab %}
+fnameVPSC = fullfile(tempdir,'orientations_vpsc.txt');
+export_VPSC(ori,fnameVPSC)
+
+fid = fopen(fnameVPSC);
+for k = 1:4, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+B 100
+{% endhighlight %}
+<p>Weights differing from orientation to orientation are passed with the option <code class="language-plaintext highlighter-rouge">weights</code>.</p>
+{% highlight matlab %}
+export_VPSC(ori,fnameVPSC,'weights',rand(size(ori)))
+{% endhighlight %}
+<p>Note that a whole ODF, rather than a list of individual orientations, is exported by the commands discussed in <a href="ODFExport.html">ODF Export</a>.</p>
+{% highlight matlab %}
+% clean up the temporary files
+delete(fname); delete(fnameVPSC);
+{% endhighlight %}
 </div>
 </body>
 </html>

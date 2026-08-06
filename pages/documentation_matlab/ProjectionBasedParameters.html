@@ -1,5 +1,5 @@
 ---
-title: Projection Based Shape Parameters
+title: "Projection Based Shape Parameters"
 
 sidebar: documentation_sidebar
 permalink: ProjectionBasedParameters.html
@@ -56,14 +56,14 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata forsterite silent
 
 % reconstruct grains, discard boundary grains and smooth them
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree,'minPixel',5);
+[grains, ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5);
 grains(grains.isBoundary) = [];
 grains = smooth(grains('indexed'),10,'moveTriplePoints');
 
 % plot all grains and highlight a specific one
 plot(grains)
 
-ind = 654;
+ind = 765;
 hold on
 plot(grains(ind).boundary,'lineWidth',5,'linecolor','blue')
 hold off
@@ -71,14 +71,14 @@ hold off
 <center>
 {% include inline_image.html file="ProjectionBasedParameters_01.png" %}
 </center>
-<p>The most well known projection based parameter is the <a href="grain2d.diamter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> which refers to the longest distance between any two boundary points and is given in &micro;m.</p>
+<p>The most well known projection based parameter is the <a href="grain2d.diameter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> which refers to the longest distance between any two boundary points and is given in &micro;m.</p>
 {% highlight matlab %}
 grains(ind).diameter
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-   6.9276e+03
+   1.0876e+03
 {% endhighlight %}
 <p>The diameter is a special case of the <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Ferret diameter of a grain. By definition the caliper is the length of a grain when projected onto a line. We may trace the caliper with respect to projection direction</p>
 {% highlight matlab %}
@@ -109,9 +109,9 @@ hold off
 
 {% highlight plaintext %}
 ans =
-   6.9276e+03
+   1.0876e+03
 ans =
-   1.6308e+03
+  706.8317
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ProjectionBasedParameters_03.png" %}
@@ -211,9 +211,9 @@ min(cumplF), min(cumplE)
 
 {% highlight plaintext %}
 ans =
-    0.7102
+    0.7124
 ans =
-    0.7203
+    0.7213
 {% endhighlight %}
 <p>The position of the maxima and minima of the projection function derived from <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">paror</code></a> can be interpreted in the following way: the maximum position represents the preferred axis parallel to the longest projection and the normal the minimum position represents the preferred axis related to the normal to the shortest projection function.</p>
 {% highlight matlab %}
@@ -248,9 +248,9 @@ sF_Fo = S1FunHarmonic.interpolate(omega,cumplE);
 
 {% highlight plaintext %}
 ans =
-   71.1000   74.4250
+   71.2250   74.5000
 ans =
-   87.8250   88.5250
+   87.9250   88.7000
 ans =
    71.0000   74.0000
 ans =
@@ -314,11 +314,11 @@ angle(shapeEF.caliper('longest'),shapeF.caliper('shortest')) / degree
 
 {% highlight plaintext %}
 ans =
-   78.7774
+   78.4206
 ans =
-   86.8311
+   86.4532
 ans =
-   79.7408
+   80.1686
 {% endhighlight %}
 </div>
 </body>

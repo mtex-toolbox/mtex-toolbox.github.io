@@ -1,5 +1,5 @@
 ---
-title: Grain Reference Orientation Deviation (GROD)
+title: "Grain Reference Orientation Deviation (GROD)"
 
 sidebar: documentation_sidebar
 permalink: EBSDGROD.html
@@ -30,8 +30,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 mtexdata ferrite silent
 
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),...
-  'threshold',[1*degree, 10*degree],'minPixel',3);
+[grains,ebsd] = calcGrains(ebsd,'threshold',[1*degree, 10*degree],'minPixel',3);
 
 % smooth grain boundaries
 grains = smooth(grains,5);
@@ -40,7 +39,7 @@ grains = smooth(grains,5);
 F = halfQuadraticFilter;
 ebsd = smooth(ebsd,F,grains,'fill');
 
-plot(ebsd('indexed'),ebsd('indexed').orientations)
+plot(ebsd,ebsd.orientations)
 hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
@@ -70,7 +69,7 @@ hold off
 {% include inline_image.html file="EBSDGROD_02.png" %}
 </center>
 <h2 id="4">Grain Orientation Spread (GOS)</h2>
-<p>The grain orientation spread (GOS) is the averaged misorientation angle of the grain reference orientation deviations of each grain. We may compute this average by using the command <a href="ebsd.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a>.</p>
+<p>The grain orientation spread (GOS) is the averaged misorientation angle of the grain reference orientation deviations of each grain. We may compute this average by using the command <a href="EBSD.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a>.</p>
 {% highlight matlab %}
 GOS = grainMean(ebsd, grod.angle, grains);
 

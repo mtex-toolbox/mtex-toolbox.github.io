@@ -1,5 +1,5 @@
 ---
-title: Fundamental Regions
+title: "Fundamental Regions"
 
 sidebar: documentation_sidebar
 permalink: OrientationFundamentalRegion.html
@@ -114,7 +114,7 @@ mtexdata forsterite
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
+     0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
@@ -148,7 +148,7 @@ ori = orientation (Forsterite → y↑→x)
 <p>There is no necessity that the fundamental region has to be centered in the origin - it can be centered at any orientation, e.g. at the mean orientation of a grain.</p>
 {% highlight matlab %}
 % segment data into grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+[grains,ebsd] = calcGrains(ebsd);
 
 % take the orientations of the largest on
 [~,id] = max(grains.area);
@@ -179,15 +179,15 @@ largeGrain = grain2d (y↑→x)
  triple points: 44
  
   Id   Phase   Pixels      meanRotation         GOS
- 931       1     2683   (171°,55°,261°)   0.0441053
+ 940       1     2683   (171°,55°,261°)   0.0441053
  
  
 ori = orientation (Forsterite → y↑→x)
-  size: 2683 x 1
+  size: 3089 x 1
  
 ori = orientation (Forsterite → y↑→x)
-  size: 2683 x 1
-plot 2000 random orientations out of 2683 given orientations
+  size: 3089 x 1
+plot 2000 random orientations out of 3089 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_06.png" %}
@@ -208,7 +208,7 @@ plot(grains.boundary('fo','En').misorientation)
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 11814 given orientations
+plot 2000 random orientations out of 11751 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_08.png" %}
@@ -231,9 +231,9 @@ plot(mori)
 
 {% highlight plaintext %}
 mori = misorientation (Forsterite → Forsterite)
-  size: 15974 x 1
+  size: 15872 x 1
   antipodal: true
-plot 2000 random orientations out of 15974 given orientations
+plot 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_10.png" %}
@@ -246,7 +246,7 @@ plot(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 15974 given orientations
+plot 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_11.png" %}
@@ -258,7 +258,7 @@ plotSection(mori,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plotting 2000 random orientations out of 15974 given orientations
+plotting 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_12.png" %}
@@ -269,7 +269,7 @@ plotSection(mori,'axisAngle','antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plotting 2000 random orientations out of 15974 given orientations
+plotting 2000 random orientations out of 15872 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationFundamentalRegion_13.png" %}

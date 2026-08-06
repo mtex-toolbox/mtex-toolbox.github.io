@@ -1,5 +1,5 @@
 ---
-title: Weighted Burgers Vector Analysis
+title: "Weighted Burgers Vector Analysis"
 
 sidebar: documentation_sidebar
 permalink: WBV.html
@@ -38,7 +38,7 @@ ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'single_grain_aluminum.txt
 {% endhighlight %}
 <p>We reconstruct grains because later on, we do not want to compute the WBV across grain boundaries</p>
 {% highlight matlab %}
-[grains,ebsd.grainId] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
+[grains,ebsd] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
 
 % denoise the data
 % we will use the noisy data later on
@@ -54,7 +54,7 @@ wbv = weightedBurgersVec(ebsd)
 {% endhighlight %}
 
 {% highlight plaintext %}
-wbv = vector3d (y↑→x)
+wbv = vector3d (y↓→x)
  size: 101 x 101
 {% endhighlight %}
 <p>The WBV is returned in specimen coordinates as a list of <a href="vector3d.vector3d.html">vector3d</a>. We can inspect its magnitude (in 1/scanunit) and direction.</p>
@@ -123,7 +123,7 @@ mtexTitle('direction of the WBV in crystal coordinates')
 % plot the color key
 plot(cKC)
 
-% overlayed with the
+% overlaid with the
 hold on
 plot(wbvC(notNan),'weights',wbvC(notNan).norm,'contour', ...
     'contours',0.5:0.25:2,'linecolor','k','ShowText','on', ...

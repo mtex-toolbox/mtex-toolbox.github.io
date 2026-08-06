@@ -34,7 +34,7 @@ mtexdata forsterite silent
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
 % and recompute grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5,'alpha',10);
 
 % smooth the grains a bit
 grains = smooth(grains,4);
@@ -57,14 +57,14 @@ grains.boundary
 ans = grainBoundary
  
  Segments    length   mineral 1   mineral 2
-      869  27592 µm  notIndexed  Forsterite
-       36   1562 µm  notIndexed   Enstatite
-       42   1361 µm  notIndexed    Diopside
-     1398  56197 µm  Forsterite  Forsterite
-      654  26372 µm  Forsterite   Enstatite
-      522  20750 µm  Forsterite    Diopside
+      489  27814 µm  notIndexed  Forsterite
+       25   1615 µm  notIndexed   Enstatite
+       24   1396 µm  notIndexed    Diopside
+     1387  55503 µm  Forsterite  Forsterite
+      644  25950 µm  Forsterite   Enstatite
+      535  21248 µm  Forsterite    Diopside
        35   1296 µm   Enstatite   Enstatite
-      134   5802 µm   Enstatite    Diopside
+      139   6117 µm   Enstatite    Diopside
        23    951 µm    Diopside    Diopside
 {% endhighlight %}
 <p>tells us the number of boundary segments between the different phases. Those segments with phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> include also those boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
@@ -103,7 +103,7 @@ ans = misorientation (Enstatite → Forsterite)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  55.3267 50.6875 300.014
+  104.132 101.992  163.38
 {% endhighlight %}
 <p>In the fist case the misorientation returned is from Forsterite to Enstatite and in the second case its exactly the inverse</p>
 <p>The selection of grain boundaries according to specific misorientations according to twist / tilt character or twinning is explained in linked sections.</p>

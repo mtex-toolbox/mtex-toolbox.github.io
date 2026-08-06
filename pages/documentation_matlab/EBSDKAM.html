@@ -1,5 +1,5 @@
 ---
-title: Kernel Average Misorientation (KAM)
+title: "Kernel Average Misorientation (KAM)"
 
 sidebar: documentation_sidebar
 permalink: EBSDKAM.html
@@ -45,7 +45,7 @@ plotSquareNeighbours; nextAxis(1,2); plotHexNeighbours
 {% highlight matlab %}
 mtexdata ferrite
 
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'minPixel',3);
+[grains,ebsd] = calcGrains(ebsd,'minPixel',3);
 grains = smooth(grains,5);
 
 plot(ebsd('indexed'),ebsd('indexed').orientations)
@@ -58,7 +58,7 @@ hold off
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1 (0.0016%)  notIndexed                                                 
+    -1   1 (0.0016%)  notIndexed          none                                   
      0  63044 (100%)     Ferrite  LightSkyBlue       432                         
  
  Properties: ci, fit, iq, sem_signal
@@ -69,10 +69,6 @@ ebsd = EBSD (y↑→x)
 <center>
 {% include inline_image.html file="EBSDKAM_02.png" %}
 </center>
-<p>Although MTEX allows the computation of the KAM from arbitrarily sampled EBSD maps the algorithms are much faster an memory efficient if the maps are measured on regular hexagonal or rectangular grid - as it is standard in most applications. The command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> makes MTEX aware of such an underlying regular measurement grid.</p>
-{% highlight matlab %}
-ebsd = ebsd.gridify;
-{% endhighlight %}
 <p>The kernel average misorientation is computed by the command <a href="EBSD.KAM.html"><code class="language-plaintext highlighter-rouge">ebsd.KAM</code></a>. As all MTEX commands it return the mean disorientation angle in radiant. Hence, dividing by the constant <code class="language-plaintext highlighter-rouge">degree</code> gives the result in degree.</p>
 {% highlight matlab %}
 kam = ebsd.KAM / degree;
@@ -80,8 +76,8 @@ kam = ebsd.KAM / degree;
 % lets plot it
 plot(ebsd,kam,'micronbar','off')
 setColorRange([0,15])
-mtexColorbar
 mtexColorMap LaboTeX
+mtexColorbar
 hold on
 plot(grains.boundary,'lineWidth',1.5)
 hold off
@@ -105,7 +101,7 @@ hold off
 </center>
 <p>Unfortunately, the remaining KAM becomes very sensitive to measurement errors and is often very noisy. The noise can be reduced by considering higher order neighbors</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.KAM('threshold',2.5*degree,'order',5) ./ degree,'micronbar','off')
+plot(ebsd,ebsd.KAM('threshold',2.5*degree,'order',3) ./ degree,'micronbar','off')
 setColorRange([0,2])
 mtexColorbar
 mtexColorMap LaboTeX
@@ -138,7 +134,7 @@ hold off
 {% include inline_image.html file="EBSDKAM_06.png" %}
 </center>
 <p>We observe that the KAM is not longer related to sub-grain boundaries and nicely reveals local dislocation structures of the deformed material.</p>
-<h2 id="9">Some helper functions</h2>
+<h2 id="8">Some helper functions</h2>
 <p>The functions below where only used to generate the neighborhood pictures of the first paragraph</p>
 {% highlight matlab %}
 function plotSquareNeighbours
@@ -149,9 +145,13 @@ N = [4 3 2 3 4;...
   3 2 1 2 3;...
   4 3 2 3 4];
 
-cs = crystalSymmetry;
-ebsd = EBSDsquare([],rotation.nan(5,5),N,0:4,{cs,cs,cs,cs,cs},'dxy',[10 10]);
-plot(ebsd,'EdgeColor','black','micronbar','off','figSize','small')
+colors = getMTEXpref('PhaseColorOrder');
+for k = 1:5
+  csList(k) = crystalSymmetry;
+  csList(k).color = colors{k};
+end
+ebsd = EBSDsquare([],rotation.nan(5,5),N,0:4,csList,'dxy',[10 10]);
+plot(ebsd,'EdgeColor','black','micronbar','off','figSize','small','unitCell')
 legend off
 
 text(ebsd,N)
@@ -167,9 +167,13 @@ N = [3 2 2 2 3;...
   3 2 2 2 3;...
   3 3 3 3 4];
 
-cs = crystalSymmetry;
-ebsd = EBSDhex([],rotation.nan(6,5),N,0:4,{cs,cs,cs,cs,cs},10,1,1);
-plot(ebsd,'edgecolor','k','micronbar','off','figSize','small')
+colors = getMTEXpref('PhaseColorOrder');
+for k = 1:5
+  csList(k) = crystalSymmetry;
+  csList(k).color = colors{k};
+end
+ebsd = EBSDhex([],rotation.nan(6,5),N,0:4,csList,10,1,1);
+plot(ebsd,'edgecolor','k','micronbar','off','figSize','small','unitCell')
 legend off
 text(ebsd,N)
 axis off

@@ -1,5 +1,5 @@
 ---
-title: Interpolating EBSD Data
+title: "Interpolating EBSD Data"
 
 sidebar: documentation_sidebar
 permalink: EBSDInter.html
@@ -28,7 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 mtexdata twins;
 
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'));
+[grains, ebsd] = calcGrains(ebsd);
 
 % this command here is important :)
 ebsd = ebsd.project2FundamentalRegion(grains);
@@ -40,8 +40,8 @@ plot(ebsd,ebsd.orientations)
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
@@ -60,8 +60,8 @@ ebsd = ebsd.gridify
 ebsd = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0   14 (0.061%)  notIndexed          none                                   
+     1  22865 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
@@ -76,10 +76,10 @@ e1 = interp(ebsd,x,y)
 {% endhighlight %}
 
 {% highlight plaintext %}
-e1 = EBSD (y↑→x)
+e1 = EBSD (y↓→x)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Id   Phase              orientation   bands    bc    bs   error   mad   grainId   oldId
   1       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4        36    3109
@@ -87,7 +87,7 @@ e1 = EBSD (y↑→x)
  X x Y x Z : [30, 30] x [5.5, 5.5] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>By default the command <a href="EBSDSquare.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
+<p>By default the command <a href="EBSDsquare.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
 {% highlight matlab %}
 e2 = ebsd('xy',x,y)
 {% endhighlight %}
@@ -96,7 +96,7 @@ e2 = ebsd('xy',x,y)
 e2 = EBSD (y↑→x)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
     Id   Phase              orientation   bands    bc    bs   error   mad   grainId   oldId
  13993       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4        36    3109
@@ -128,17 +128,25 @@ xlim([0,50]); ylim([0,40])
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Query data is in MESHGRID format, NDGRID format will yield
+better performance.
+Convert your query data (Xq, Yq) as follows:
+   F = griddedInterpolant(. . .);
+   Xq = Xq'; Yq = Yq';
+   Vq = F(Xq,Yq);
+ 
+ 
 ebsdNewGrid = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    5974 (51%)  notIndexed                                                 
-     1    5690 (49%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0    2 (0.068%)  notIndexed          none                                   
+     1   2938 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
- X x Y x Z : [-20, 70] x [-25, 66] x [0, 0]
+ X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
- Square grid  :108 x 108
+ Square grid  :49 x 60
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_02.png" %}

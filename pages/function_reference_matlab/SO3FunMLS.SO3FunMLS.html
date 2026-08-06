@@ -1,5 +1,5 @@
 ---
-title: SO3FunMLS.SO3FunMLS
+title: "SO3FunMLS.SO3FunMLS"
 
 sidebar: function_reference_sidebar
 permalink: SO3FunMLS.SO3FunMLS.html
@@ -23,15 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>a class representing a function on the rotation group</p>
+<p>A class representing a function on the rotation group SO(3).</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = SO3FunMLS(nodes, values);
-SO3F = SO3FunMLS(nodes, values, 'degree', 3, 'oF', 2);
-SO3F = SO3FunMLS(nodes, values, 'delta', 5*degree);
-SO3F = SO3FunMLS(nodes, values, 'delta', 5*degree, 'w', @(t)(__));
+SO3F = SO3FunMLS(nodes, values, 'degree', 3, 'oF', 4);
+SO3F = SO3FunMLS(nodes, values, 'delta', 5*degree, 'weight', @(t)(...));
 SO3F = SO3FunMLS(nodes, values, 'centered', true, 'monomials', true, 'subsample', 'tangent', true);
-SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOutliers');
+SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_delta');
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -80,6 +79,34 @@ SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detect
       </tr>
       <tr>
          <td width="100px">
+            <tt>oF</tt>
+         </td>
+         <td>
+            <tt>oversampling Factor. the number of neighbors nn (dependent) is the</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dimension of the ansatz space, times this factor</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>oF_max</tt>
+         </td>
+         <td>
+            <tt>maximum oversampling factor in case of range search. At most the</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>closest SO3F.dim * SO3F.oF_max neighbors will be used.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>delta</tt>
          </td>
          <td>
@@ -88,25 +115,49 @@ SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detect
       </tr>
       <tr>
          <td width="100px">
-            <tt>nn</tt>
-         </td>
-         <td>
-            <tt>specified number of neighbors used for local approximation</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>outlierDetectionRange</tt>
-         </td>
-         <td>
-            <tt>specify how many neighbors are taken into account</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
             <tt>when searching for outliers</tt>
          </td>
          <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>monomials</tt>
+         </td>
+         <td>
+            <tt>use monomial basis if true, otherwise use spherical harmonics</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>centered</tt>
+         </td>
+         <td>
+            <tt>evaluate the basis functions only around the identity, if true</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tangent</tt>
+         </td>
+         <td>
+            <tt>use monomials on the tangent space (only if centered == true)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(in this case the a</tt>
+         </td>
+         <td>
+            <tt>coordinate of the neighbors is ignored)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(NOTE: 'centered' and 'tangent' trigger the monomial</tt>
+         </td>
+         <td>
+            <tt>option to be true)</tt>
+         </td>
       </tr>
       <tr>
          <td width="100px">
@@ -130,10 +181,122 @@ SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detect
       </tr>
       <tr>
          <td width="100px">
+            <tt>use_smooth_delta</tt>
+         </td>
+         <td>
+            <tt>make the support radius delta(x) a smooth function with</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>close to SO3F.nn neighbors at each center</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>use_vor_weights</tt>
+         </td>
+         <td>
+            <tt>additionally multiply w(x,x_i) by the Voronoi Volumne of</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>x_i, as in 'Stable Moving Least Squares Approximation'</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>distance</tt>
          </td>
          <td>
             <tt>specify which metric to use (default: 'euclidean')</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>s</tt>
+         </td>
+         <td>
+            <tt>symmetry of the nodes</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>regularize</tt>
+         </td>
+         <td>
+            <tt>use regularization for solving the lsq-systems</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxcond</tt>
+         </td>
+         <td>
+            <tt>max regularization threshold of condition of the gram matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mincond</tt>
+         </td>
+         <td>
+            <tt>start regularizing threshold of condition of the gram matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>basis_weights</tt>
+         </td>
+         <td>
+            <tt>regularization weights of basis coefficients,</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>should punish higher degrees (Sobolev</tt>
+         </td>
+         <td>
+            <tt>like)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>basis_weights_scale</tt>
+         </td>
+         <td>
+            <tt>degree-selectivity of the regularization weights;</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>values around 1 give a moderate preference for lower degrees</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda_geom_rel</tt>
+         </td>
+         <td>
+            <tt>relative strength of geometric regularization;</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>for a value of 1, geometryScore is used without additional scaling</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>outlierDetectionRange</tt>
+         </td>
+         <td>
+            <tt>specify how many neighbors are taken into account</tt>
          </td>
       </tr>
    </table>
@@ -141,14 +304,6 @@ SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detect
 <h2 id="7">Flags</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>centered</tt>
-         </td>
-         <td>
-            <tt>only evaluate the basis near the north pole (1,0,0,0) if true</tt>
-         </td>
-      </tr>
       <tr>
          <td width="100px">
             <tt>detectOutliers</tt>
@@ -168,21 +323,7 @@ SO3F = SO3FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detect
             <tt>subsample</tt>
          </td>
          <td>
-            <tt>use a subset of the local nodes that minimizes the Lebesgue</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>constant</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>tangent</tt>
-         </td>
-         <td>
-            <tt>use polynomials on the tangent space</tt>
+            <tt>use subset of neighbors that minimizes the lebesgue constant</tt>
          </td>
       </tr>
    </table>

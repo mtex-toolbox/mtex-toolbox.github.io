@@ -1,0 +1,102 @@
+---
+title: script_hexGridDemo
+
+sidebar: function_reference_sidebar
+permalink: hexGridDemo.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>script_hexGridDemo</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_hexGridDemo.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/hexGrids/hexGridDemo.m">
+    edit page</a></font>
+<div>
+{% highlight matlab %}
+% hexGridDemo - end-to-end example for the hex grid helpers.
+%
+% Builds a synthetic row-offset hex grid, removes a chunk of points to make
+% it "incomplete", then estimates the geometry, completes the mesh, and
+% draws the measured tiles colored by an RGB field.
+{% endhighlight %}
+<h2 id="2">1) synthesize a row-offset hex grid and punch holes in it</h2>
+{% highlight matlab %}
+dx = 1;                      % in-row spacing
+dy = dx * sqrt(3)/2;         % regular row spacing
+nC = 60; nR = 50;
+
+[c, r] = meshgrid(0:nC-1, 0:nR-1);
+c = c(:); r = r(:);
+X = c*dx + mod(r,2)*dx/2;    % odd rows shifted by +dx/2
+Y = r*dy;
+
+% color field just for illustration (a smooth RGB gradient)
+RGB = [rescale(X), rescale(Y), rescale(X+Y)];
+
+% make it incomplete: drop a disc of points and some random ones
+keep = hypot(X-30, Y-22) > 8;                 % a hole
+keep = keep & (rand(size(X)) > 0.05);          % scattered dropouts
+x = X(keep); y = Y(keep); pointRGB = RGB(keep,:);
+
+fprintf('measured points: %d of %d full grid nodes\n', numel(x), nC*nR);
+{% endhighlight %}
+
+{% highlight plaintext %}
+measured points: 2639 of 3000 full grid nodes
+{% endhighlight %}
+<h2 id="3">2) estimate geometry and complete the mesh</h2>
+<p>pass an approximate unit cell (here a regular hexagon); in MTEX you would pass ebsd.unitCell instead</p>
+{% highlight matlab %}
+uc = [0 dy*2/3; -dx/2 dy/3; -dx/2 -dy/3; 0 -dy*2/3; dx/2 -dy/3; dx/2 dy/3];
+
+hex = hexGridEstimate(x, y, uc);
+disp(hex)
+
+[Xc, Yc, idx, isData] = hexGridComplete(hex, x, y);
+fprintf('complete grid: %d x %d = %d tiles, %d carry data\n', ...
+  hex.nRows, hex.nCols, numel(Xc), nnz(isData));
+{% endhighlight %}
+
+{% highlight plaintext %}
+dx: 1
+           dy: 0.8660
+           x0: 0
+           y0: 0
+        nRows: 50
+        nCols: 60
+    offsetOdd: 1
+     unitCell: [6×2 double]
+complete grid: 50 x 60 = 3000 tiles, 2639 carry data
+{% endhighlight %}
+<h2 id="4">3) scatter the per-point colors onto the full grid and draw</h2>
+{% highlight matlab %}
+rgbFull = nan(numel(Xc), 3);
+rgbFull(idx,:) = pointRGB;        % only measured tiles get a color
+
+figure('Color','w');
+ax = axes;
+hexPatch(hex, Xc, Yc, rgbFull, 'parent', ax);
+title(ax, 'measured hex tiles on the completed lattice')
+
+% optional: show the gaps explicitly by drawing missing tiles in light gray
+rgbGaps = nan(numel(Xc), 3);
+rgbGaps(~isData,:) = repmat([0.9 0.9 0.9], nnz(~isData), 1);
+hold(ax,'on')
+hexPatch(hex, Xc, Yc, rgbGaps, 'parent', ax, 'EdgeColor','none');
+hold(ax,'off')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="hexGridDemo_01.png" %}
+</center>
+</div>
+</body>
+</html>

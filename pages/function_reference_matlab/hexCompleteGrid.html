@@ -1,0 +1,297 @@
+---
+title: hexCompleteGrid
+
+sidebar: function_reference_sidebar
+permalink: hexCompleteGrid.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>hexCompleteGrid</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_hexCompleteGrid.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/hexGrids/hexgrid_toolbox/hexCompleteGrid.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>HEXCOMPLETEGRID Complete an incomplete hexagonal grid of tile centers.</p>
+{% highlight matlab %}
+G = HEXCOMPLETEGRID(x, y, unitCell)
+G = HEXCOMPLETEGRID(..., Name, Value)
+{% endhighlight %}
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+G = hexCompleteGrid(x, y, unitCell, varargin)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>x,y       Original tile</tt>
+         </td>
+         <td>
+            <tt>center coordinates. Missing tiles are allowed.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>unitCell  Approximate lattice/unit</tt>
+         </td>
+         <td>
+            <tt>cell description. Supported forms:</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>2</tt>
+         </td>
+         <td>
+            <tt>by-2 numeric matrix:</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>[a1x a1y; a2x a2y]</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Row vectors a1 and a2 are the two integer lattice steps.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scalar numeric:</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>nearest</tt>
+         </td>
+         <td>
+            <tt>neighbor center spacing d. Uses basis</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>d*[1 0; 1/2 sqrt(3)/2].</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>struct with fields:</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>.basis             2</tt>
+         </td>
+         <td>
+            <tt>by-2 row-vector basis</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>OR .a1 and .a2     two 1</tt>
+         </td>
+         <td>
+            <tt>by-2 basis vectors</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>OR .spacing        nearest</tt>
+         </td>
+         <td>
+            <tt>neighbor center spacing</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>OR .radius         hexagon center</tt>
+         </td>
+         <td>
+            <tt>to-corner radius</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Optional struct fields:</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>.angle             rotation angle in radians for scalar spacing/radius</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>.angleDeg          rotation angle in degrees</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>.hexRadius         plotting radius, center to corner</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>.hexAngle          plotting angle in radians for first vertex</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>.hexAngleDeg       plotting angle in degrees for first vertex</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Name</tt>
+         </td>
+         <td>
+            <tt>Value options</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'Origin'       1</tt>
+         </td>
+         <td>
+            <tt>by-2 origin. Default: first finite input point.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'RefineBasis'  true/false. Least</tt>
+         </td>
+         <td>
+            <tt>squares refine origin and basis. Default true.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'Iterations'   Number of refinement iterations. Default 3.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'Tolerance'    Warning threshold in lattice</tt>
+         </td>
+         <td>
+            <tt>coordinate units. Default 0.35.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'Padding'      Extra integer q/r layers around the completed grid. Default 0.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'Domain'       'qrbox', 'xybox', or 'convexhull'. Default 'qrbox'.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'KeepDuplicate' 'closest' or 'first' when several input points map to the</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>same grid position. Default 'closest'.</tt>
+         </td>
+         <td/>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>G.x, G.y             Complete grid center coordinates.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.qr                 Nfull</tt>
+         </td>
+         <td>
+            <tt>by-2 integer lattice coordinates [q r].</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.fullToOriginal     Nfull</tt>
+         </td>
+         <td>
+            <tt>by-1 index into original x/y, NaN for missing tiles.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.originalToFull     Noriginal</tt>
+         </td>
+         <td>
+            <tt>by-1 index into complete grid, NaN for invalid input.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.isObserved         True for complete</tt>
+         </td>
+         <td>
+            <tt>grid positions with original data.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.basis, G.origin    Refined basis/origin, with xy = origin + [q r]*basis.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.hexRadius          Default patch radius inferred from the lattice.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>G.hexAngle           Default first</tt>
+         </td>
+         <td>
+            <tt>vertex angle for hex plotting.</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+</div>
+</body>
+</html>

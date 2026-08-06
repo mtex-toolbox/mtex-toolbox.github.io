@@ -1,0 +1,106 @@
+---
+title: doGridSegmentation
+
+sidebar: function_reference_sidebar
+permalink: doGridSegmentation.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>doGridSegmentation</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_doGridSegmentation.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/test/doGridSegmentation.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>segment the grid decomposition into grains</p>
+<p>Build the site-adjacency graph (sites sharing a Voronoi face), decide per shared face whether it is a grain boundary, and label grains by connected components. gbc(ebsd,i,j) is TRUE where cells i,j belong to the same grain. It is evaluated only on residual indexed pairs (faces between two indexed sites that are NOT grid neighbours); grid-neighbour indexed pairs reuse the dry-run result passed in out.gridSame; notIndexed pairs merge by phase; dummy faces are always boundaries.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+[grainId,isBoundaryFace] = doGridSegmentation(out,ebsd,gbc)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>out</tt>
+         </td>
+         <td>
+            <tt>struct from spatialDecompositionGrid (needs extra fields below)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt>the same gridified ebsd</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gbc</tt>
+         </td>
+         <td>
+            <tt>gbc(ebsd,i,j) -&gt; TRUE where same grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>out must additionally carry, from the dry run:</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>out.gridPairs</tt>
+         </td>
+         <td>
+            <tt>2 x m linear ebsd ids of indexed grid-neighbour pairs</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>out.gridSame</tt>
+         </td>
+         <td>
+            <tt>m x 1 logical, gbc result for those pairs (reused here)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grainId</tt>
+         </td>
+         <td>
+            <tt>nSites x 1 grain label per site</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isBoundaryFace</tt>
+         </td>
+         <td>
+            <tt>nF x 1 logical, faces that are grain boundaries</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+</div>
+</body>
+</html>

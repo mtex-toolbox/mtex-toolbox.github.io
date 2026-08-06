@@ -1,5 +1,5 @@
 ---
-title: S2FunMLS.S2FunMLS
+title: "S2FunMLS.S2FunMLS"
 
 sidebar: function_reference_sidebar
 permalink: S2FunMLS.S2FunMLS.html
@@ -23,16 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>a class representing a function on the rotation group</p>
-<p>TODO: - also regulrize when nodes are almost on zero set of ansatz function - locally adapt delta via density estimation and integration on balls or via shepard on the distance of the k-th nearest neighbor</p>
+<p>A class representing a function on the 2-sphere S^2.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 S2F = S2FunMLS(nodes, values);
-S2F = S2FunMLS(nodes, values, 'degree', 3, 'oF', 2);
-S2F = S2FunMLS(nodes, values, 'delta', 5*degree);
-S2F = S2FunMLS(nodes, values, 'delta', 5*degree, w, @(t)(__));
+S2F = S2FunMLS(nodes, values, 'degree', 3, 'oF', 4);
+S2F = S2FunMLS(nodes, values, 'delta', 5*degree, 'weight', @(t)(...));
 S2F = S2FunMLS(nodes, values, 'centered', true, 'monomials', true, 'subsample', 'tangent', true);
-S2F = S2FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOutliers');
+S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_delta');
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -183,6 +181,34 @@ S2F = S2FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOu
       </tr>
       <tr>
          <td width="100px">
+            <tt>use_smooth_delta</tt>
+         </td>
+         <td>
+            <tt>make the support radius delta(x) a smooth function with</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>close to S2F.nn neighbors at each center</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>use_vor_weights</tt>
+         </td>
+         <td>
+            <tt>additionally multiply w(x,x_i) by the Voronoi Volumne of</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>x_i, as in 'Stable Moving Least Squares Approximation'</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>distance</tt>
          </td>
          <td>
@@ -239,6 +265,22 @@ S2F = S2FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOu
       </tr>
       <tr>
          <td width="100px">
+            <tt>basis_weights_scale</tt>
+         </td>
+         <td>
+            <tt>application strength of basis_weights</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda_geom_rel</tt>
+         </td>
+         <td>
+            <tt>relative application strength of geometrical regularization</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>outlierDetectionRange</tt>
          </td>
          <td>
@@ -263,14 +305,6 @@ S2F = S2FunMLS(nodes, values, 'regularize', false, 'stablefind', true, 'detectOu
             <tt>depending on how bad they are</tt>
          </td>
          <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>stableFind</tt>
-         </td>
-         <td>
-            <tt>perform stable variant of find (can help with non-uniform data)</tt>
-         </td>
       </tr>
       <tr>
          <td width="100px">

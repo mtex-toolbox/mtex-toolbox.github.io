@@ -1,0 +1,215 @@
+---
+title: "Rotation Representations"
+
+sidebar: documentation_sidebar
+permalink: RotationRepresentations.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Rotation Representations</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_RotationRepresentations.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Rotations/RotationRepresentations.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Internally MTEX stores every <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> as a <a href="quaternion.quaternion.html"><code class="language-plaintext highlighter-rouge">quaternion</code></a>, i.e., by four numbers. For many purposes it is more convenient to describe a rotation by a single three dimensional vector. All representations discussed here follow the same recipe: take the rotational axis \(\vec n\) and scale it by some function \(f(\omega)\) of the rotational angle \(\omega\),</p>
+<p>\[ \vec v = f(\omega) \, \vec n. \]</p>
+<p>What distinguishes them is the choice of \(f\) - and that choice decides which region of \(\mathbb R^3\) the rotations fill, and whether the mapping preserves volume. Let us start with a large set of uniformly distributed random rotations.</p>
+{% highlight matlab %}
+rot = rotation.rand(100000)
+{% endhighlight %}
+
+{% highlight plaintext %}
+rot = rotation
+  size: 100000 x 1
+{% endhighlight %}
+<h2 id="2">The Rodrigues Vector</h2>
+<p>The Rodrigues vector uses \(f(\omega) = \tan(\omega/2)\), so that</p>
+<p>\[ \vec v = \tan\frac{\omega}{2} \, \vec n. \]</p>
+<p>It is computed by <a href="quaternion.Rodrigues.html"><code class="language-plaintext highlighter-rouge">Rodrigues</code></a> and inverted by <a href="rotation.byRodrigues.html"><code class="language-plaintext highlighter-rouge">rotation.byRodrigues</code></a>.</p>
+{% highlight matlab %}
+vRodrigues = rot.Rodrigues;
+{% endhighlight %}
+<p>Its defining property is that rotations sharing a common axis lie on a straight line through the origin. The price is that the representation is <b>unbounded</b>: as \(\omega\) approaches \(180^\circ\) the tangent diverges, so a half turn has no finite Rodrigues vector at all.</p>
+{% highlight matlab %}
+max(norm(vRodrigues))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   4.1684e+04
+{% endhighlight %}
+<p>This is why plots in Rodrigues space are usually restricted to a fundamental region - see <a href="RotationPlotting.html">Plotting Rotations</a>.</p>
+<h2 id="5">The Homochoric Vector</h2>
+<p>The homochoric vector uses</p>
+<p>\[ f(\omega) = \left(\frac{3}{4}\left(\omega - \sin\omega\right)\right)^{1/3} \]</p>
+<p>and is computed by <a href="quaternion.homochoric.html"><code class="language-plaintext highlighter-rouge">homochoric</code></a>, with <a href="rotation.byHomochoric.html"><code class="language-plaintext highlighter-rouge">rotation.byHomochoric</code></a> as its inverse.</p>
+{% highlight matlab %}
+vHomochoric = rot.homochoric;
+{% endhighlight %}
+<p>This choice makes the mapping <b>equal volume</b>: it takes the rotation group onto a ball and does not distort densities. The ball has radius \((3\pi/4)^{1/3}\), reached exactly by the half turns.</p>
+{% highlight matlab %}
+max(norm(vHomochoric))
+(0.75*pi)^(1/3)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.3307
+ans =
+    1.3307
+{% endhighlight %}
+<p>Equal volume means that uniformly distributed rotations become uniformly distributed points in that ball. For a uniform ball the distribution of the radius \(r\) has the density \(3r^2/R^3\), which is exactly what we observe.</p>
+{% highlight matlab %}
+R = (0.75*pi)^(1/3);
+histogram(norm(vHomochoric),50,'Normalization','pdf')
+hold on
+r = linspace(0,R,100);
+plot(r,3*r.^2/R^3,'linewidth',2)
+hold off
+legend('homochoric radii','3r^2/R^3')
+xlabel('r')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RotationRepresentations_01.png" %}
+</center>
+<p>The same check applied to the Rodrigues vectors shows the contrast - the density there is strongly concentrated near the origin and has an infinite tail.</p>
+{% highlight matlab %}
+histogram(min(norm(vRodrigues),10),50,'Normalization','pdf')
+xlabel('|v|, clipped at 10')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RotationRepresentations_02.png" %}
+</center>
+<h2 id="9">The Cubochoric Vector</h2>
+<p>The cubochoric vector, introduced by <a href="http://dx.doi.org/10.1088/0965-0393/22/7/075013">Rosca, Morawiec and De Graef (2014)</a>, composes the homochoric map with an equal volume map from the ball onto a cube. It is computed by <a href="quaternion.cubochoric.html"><code class="language-plaintext highlighter-rouge">cubochoric</code></a>.</p>
+{% highlight matlab %}
+vCubochoric = rot.cubochoric;
+{% endhighlight %}
+<p>The resulting cube has edge length \(\pi^{2/3}\).</p>
+{% highlight matlab %}
+max(abs(vCubochoric.x))
+pi^(2/3)/2
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.0725
+ans =
+    1.0725
+{% endhighlight %}
+<p>Being equal volume as well, it shares the density preserving property of the homochoric vector, but on a cube rather than a ball. That makes it the natural choice for building uniform grids in orientation space, which is what <a href="homochoricSO3Grid.homochoricSO3Grid.html"><code class="language-plaintext highlighter-rouge">homochoricSO3Grid</code></a> does.</p>
+<p>There is no <code class="language-plaintext highlighter-rouge">rotation.byCubochoric</code>. The inverse is obtained by first mapping the cube back onto the ball with <a href="cubo2homo.html"><code class="language-plaintext highlighter-rouge">cubo2homo</code></a>.</p>
+{% highlight matlab %}
+xyz = cubo2homo([vCubochoric.x(:), vCubochoric.y(:), vCubochoric.z(:)]);
+rot2 = rotation.byHomochoric(xyz);
+
+% the reconstruction error, measured as quaternion distance
+max(min(norm(rot(:)-rot2),norm(rot(:)+rot2)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   3.2957e-15
+{% endhighlight %}
+<h2 id="12">Summary</h2>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <b>representation</b>
+               </p>
+         </td>
+         <td>
+               <p>\(f(\omega)\)</p>
+         </td>
+         <td>
+               <p>
+                  <b>region</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>equal volume</b>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="quaternion.Rodrigues.html">Rodrigues</a>
+               </p>
+         </td>
+         <td>
+               <p>\(\tan(\omega/2)\)</p>
+         </td>
+         <td>
+               <p>all of \(\mathbb R^3\), unbounded</p>
+         </td>
+         <td>
+               <p>no</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="quaternion.homochoric.html">homochoric</a>
+               </p>
+         </td>
+         <td>
+               <p>\(\left(\frac34(\omega-\sin\omega)\right)^{1/3}\)</p>
+         </td>
+         <td>
+               <p>ball of radius \((3\pi/4)^{1/3}\)</p>
+         </td>
+         <td>
+               <p>yes</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="quaternion.cubochoric.html">cubochoric</a>
+               </p>
+         </td>
+         <td>
+               <p>-</p>
+         </td>
+         <td>
+               <p>cube of edge \(\pi^{2/3}\)</p>
+         </td>
+         <td>
+               <p>yes</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>Note that none of these is what MTEX uses to <b>store</b> a rotation. They are derived on demand, and the axis angle parametrisation they all build on is available directly as <a href="quaternion.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> and <a href="quaternion.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a>.</p>
+{% highlight matlab %}
+angle(rot(1))./degree
+axis(rot(1))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   77.3811
+ 
+ans = vector3d (y↑→x)
+       x      y      z
+  -0.116 -0.032 -0.993
+{% endhighlight %}
+</div>
+</body>
+</html>

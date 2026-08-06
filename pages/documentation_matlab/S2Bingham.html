@@ -1,5 +1,5 @@
 ---
-title: The Spherical Bingham Distribution
+title: "The Spherical Bingham Distribution"
 
 sidebar: documentation_sidebar
 permalink: S2Bingham.html
@@ -34,8 +34,8 @@ To make changes, update the MATLAB code and republish this document.
 % A simple example:
 Z = [-10 -4 0];
 a = rotation.rand(1) .* vector3d([xvector yvector zvector]);
-bs2 = S2FunBingham(Z,a);
-plot(bs2)
+bingFun = S2FunBingham(Z,a);
+plot(bingFun)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Bingham_01.png" %}
@@ -49,8 +49,8 @@ mtexFig = newMtexFigure('layout',[length(kappa) length(kappa)]);
 for k2 = kappa
   for k1 = kappa
     if k1 >= k2
-      bs = S2FunBingham([-k1 -k2 0]);
-      plot(bs,'colorRange',[0,25],'TR',[{'\(\kappa_1 :\)'} ; num2str(k1)],'BR',[{'\(\kappa_2 :\)'} ; num2str(k2)])
+      bFun = S2FunBingham([-k1 -k2 0]);
+      plot(bFun,'colorRange',[0,25],'TR',[{'\(\kappa_1 :\)'} ; num2str(k1)],'BR',[{'\(\kappa_2 :\)'} ; num2str(k2)])
 %       mtexTitle(['\(\kappa_1 :\)' num2str(k1)  '  ' '\(\kappa_2 :\)' num2str(k2)],'FontSize',14)
       nextAxis
     else
@@ -67,16 +67,16 @@ mtexFig.drawNow;
 <h2 id="3">Drawing a random sample of the Bingham distribution</h2>
 {% highlight matlab %}
 close
-v = bs2.discreteSample(500)
-plot(bs2)
+v = bingFun.discreteSample(50)
+plot(bingFun)
 hold on
-plot(v,'MarkerFaceColor','k')
+plot(v,'MarkerEdgeColor','k','MarkerFaceColor','gray','MarkerFaceAlpha',0.5)
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 v = vector3d (y↑→x)
- size: 500 x 1
+ size: 50 x 1
  antipodal: true
 {% endhighlight %}
 <center>
@@ -86,41 +86,40 @@ v = vector3d (y↑→x)
 <p>Given arbitrarily scattered data <code class="language-plaintext highlighter-rouge">v</code> on the sphere we can estimate the best fitting Bingham distribution by</p>
 {% highlight matlab %}
 % estimate a Bingham distribution
-bs = S2FunBingham.fit(v,'confElli',0.9)
+[bingFunEst,ab,rot] = S2FunBingham.fit(v)
 {% endhighlight %}
 
 {% highlight plaintext %}
-bs = S2FunBingham (y↑→x)
+bingFunEst = S2FunBingham (y↑→x)
+ab =
+    0.1541    0.1716
+ 
+rot = rotation
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2    Inv.
+  149.397 154.782 48.1841       1
 {% endhighlight %}
 <p>Lets plot the fitted distribution with the data</p>
 {% highlight matlab %}
-plot(bs)
+plot(bingFunEst)
 hold on
-plot(v,'MarkerFaceColor','Black')
+plot(v,'MarkerEdgeColor','k','MarkerFaceColor','gray','MarkerFaceAlpha',0.5)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Bingham_04.png" %}
 </center>
-<p>Under the assumption of sufficiently many and sufficently concetrated data we may also estimate a confidence ellipse for the mean direction (default p = 0.95). The center of the ellipse is given by the largest principle vector stored in <code class="language-plaintext highlighter-rouge">bs.a(3)</code>
-</p>
+<p>The function <a href="|S2FunBingham.fit,">S2FunBingham.fit.html</a> provides two additional output arguments <code class="language-plaintext highlighter-rouge">ab</code> and <code class="language-plaintext highlighter-rouge">rot</code>. Those describe the half axes \(a\) and \(b\) and the orientation <code class="language-plaintext highlighter-rouge">rot</code> of the confidence ellipse of the mean mean direction <code class="language-plaintext highlighter-rouge">bingFunEst.a(3)</code> of the estimated Bingham distribution at the confidence level \(p=0.95\). We may visualize this confidence ellipse by the commands</p>
 {% highlight matlab %}
-annotate(bs.a(3),'MarkerFaceColor','red','MarkerSize',10)
+% mark the mean direction
+annotate(bingFunEst.a(3),'MarkerFaceColor','red','MarkerSize',10)
+
+% annotate the p=0.95 confidence ellipse
+ellipse(rot,ab(1),ab(2), 'linewidth',3,'lineColor','k')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Bingham_05.png" %}
-</center>
-<p>The orientation of the ellipse is specified by all the principle vectors <code class="language-plaintext highlighter-rouge">bs.a</code> and the a and b axes are computed by the command <code class="language-plaintext highlighter-rouge">cEllipse</code>
-</p>
-{% highlight matlab %}
-mtexColorMap white2black
-
-% annotate the ellipse
-ellipse(rotation.byMatrix(bs.a.xyz'),bs.cEllipse(1),bs.cEllipse(2), ...
-    'linewidth',2,'lineColor','r','linestyle','-.')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="S2Bingham_06.png" %}
 </center>
 </div>
 </body>

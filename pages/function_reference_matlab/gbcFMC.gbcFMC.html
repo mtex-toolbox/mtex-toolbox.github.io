@@ -1,0 +1,634 @@
+---
+title: "gbcFMC.gbcFMC"
+
+sidebar: function_reference_sidebar
+permalink: gbcFMC.gbcFMC.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>gbcFMC.gbcFMC</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_gbcFMC__gbcFMC.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/grainBoundaryCriteria/@gbcFMC/gbcFMC.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>gbcFMC fast multiscale clustering (FMC) grain boundary criterion</p>
+<p>Wraps the FMC algorithm (McMahon et al.). Unlike the local criteria this one clusters the whole neighbourhood graph at once; doEvaluate therefore builds the adjacency from (i,j), runs FMC, and reports for each pair whether both endpoints ended up in the same (non-zero) cluster.</p>
+<p>Each indexed phase is clustered separately, on its own pixels and with its own symmetry, so a pair straddling a phase boundary is always a boundary.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+criterion = gbcFMC(cmaha);
+criterion = gbcFMC('cmaha',3,'quatmax',5);
+grains = calcGrains(ebsd,'fmc',3.8);
+grains = calcGrains(ebsd,'fmc',3.8,'verbose');   % report the hierarchy
+out = criterion.eval(ebsd,i,j);
+{% endhighlight %}
+<h2 id="4">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>out = 1   same cluster (same grain)</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>out = 0   grain boundary</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>How it works</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>FMC is an algebraic multigrid (AMG) coarsening of the pixel neighbourhood</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>graph, in the tradition of segmentation by weighted aggregation (Sharon,</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Galun, Brandt, Basri), adapted to EBSD by McMahon et al. Instead of asking</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pixel by pixel "is this pair a boundary", it builds a HIERARCHY of nested</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>aggregates and only decides at the end which level of the hierarchy each</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pixel should be read off at.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>One coarsening step (FMC_Coarsen) is:</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>1 edge dilution     drop edges far weaker than a node's average coupling</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>2 seed selection    pick coarse nodes C so every node is strongly</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>coupled to C (the classic AMG C/F splitting)</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>3 interpolation P   each fine node gets FRACTIONAL membership in the</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>seeds it couples to, row normalised</tt>
+         </td>
+         <td>
+            <tt>so the</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>assignment is soft, not a hard partition</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>4 coarse graph      W &lt;</tt>
+         </td>
+         <td>
+            <tt>P'*W*P, the Galerkin coarse grid operator</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>5 aggregate stats   each aggregate accumulates a mean orientation, a</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>centroid, an orientation variance Qvar and, where</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>it earns its parameters, a lattice gradient</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>6 rebias            coarse couplings are rescaled by a Mahalanobis</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>factor, see cmaha below</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>7 saliency          Sal = external coupling / internal coupling, low</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>for a well separated, coherent aggregate</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>The theoretically interesting part is step 6. The coupling between two</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>aggregates is measured against THEIR OWN internal orientation spread</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sqrt(Qvar), not against a fixed misorientation threshold. FMC therefore</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>has no threshold angle at all: a 1 degree misorientation is a boundary</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>between two very uniform aggregates and is not a boundary inside a</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>deformed one.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>What gets compared there is the RESIDUAL misorientation. Each aggregate</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>predicts, from its own fitted lattice gradient, what its offset to a</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>neighbour ought to be, and only what neither of them can explain counts</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>against the coupling. Without that, removing the curvature from Qvar</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>would make the criterion stricter inside a deformed grain rather than</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>more forgiving, since the raw misorientation between two aggregates of</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>one deformed grain grows with the distance between them while a</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>curvature</tt>
+         </td>
+         <td>
+            <tt>free Qvar does not.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>The second structurally interesting part is that no merge is ever</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>committed during coarsening. FMC_interpret reads every pixel off at the</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scale where its aggregate is most salient relative to that scale, so a</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>region that is complete early is not dragged along by a hierarchy that</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>keeps coarsening around it.</tt>
+         </td>
+         <td/>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cmaha</tt>
+         </td>
+         <td>
+            <tt>Mahalanobis sharpness of the coarse rebias (3)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cmaha0</tt>
+         </td>
+         <td>
+            <tt>decay of the initial edge weight, per degree (0.05)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>quatmax</tt>
+         </td>
+         <td>
+            <tt>ceiling on the outlier radius, degree (5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>seed selection aggressiveness (0.2)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gammaW</tt>
+         </td>
+         <td>
+            <tt>inverse edge dilution strength (10)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxDelta</tt>
+         </td>
+         <td>
+            <tt>misorientation above which an edge is CUT, degree (Inf)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minPixel</tt>
+         </td>
+         <td>
+            <tt>regions below this size are absorbed into a neighbour (1)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>verbose</tt>
+         </td>
+         <td>
+            <tt>report the coarsening hierarchy, see FMC_report. Off by</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>default; the run itself says nothing.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Measured on tests/EBSDGrainBenchmark, five map realisations per level,</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>against the same benchmark run on the pre</tt>
+         </td>
+         <td>
+            <tt>2026-07-25 implementation:</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>level                    before                    after</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>1 clean       0.9712 +</tt>
+         </td>
+         <td>
+            <tt>0.0168, 33 grains   0.9875 +-0.0013, 34 grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>2 noisy       0.9696 +</tt>
+         </td>
+         <td>
+            <tt>0.0145, 115 grains  0.9720 +-0.0140, 33 grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>3 deformed    0.8403 +</tt>
+         </td>
+         <td>
+            <tt>0.0372, 115 grains  0.9466 +-0.0239, 31 grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(adjusted Rand index; 32 grains is the truth). Runtime for 80000 pixels</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fell from about 4.1 s to about 1.5 s.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Notes and remaining limitations</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>* cmaha is the one parameter that still behaves like a threshold. On</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>the benchmark 3 to 5 is a plateau</tt>
+         </td>
+         <td>
+            <tt>below 2 grains merge and the low</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>angle boundaries are lost, above 5 the map over</tt>
+         </td>
+         <td>
+            <tt>segments - but the</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>optimum inside that plateau still drifts with the deformation level</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(3 is best on level 1, 5 on levels 2 and 3). The default is 3.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>* cmaha0, by contrast, is measurably irrelevant: sweeping it over</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>0.01 to 0.2 moves the level 1 score by less than 0.008.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>* Qvar is a SCALAR, i.e. an isotropic spread, and deliberately so. A</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>3x3 tangent covariance was implemented and measured, and it is worse</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>on every level (0.958 / 0.964 / 0.931 against 0.9875 / 0.972 /</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>0.9466), not by tuning but for a reason: it makes the rebias</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>forgiving along whichever tangent direction the aggregate is already</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>spread in, and a boundary whose misorientation axis happens to line</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>up with a grain's own curvature is then read as expected and merged</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>across. Do not re</tt>
+         </td>
+         <td>
+            <tt>try this without a way to tell those two apart.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>* the outlier radius is kappa = 4 standard deviations of the aggregate's</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>own spread, held inside [0.4 quatmax, quatmax]. kappa and the 0.4 are</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>constants fixed in FMC_Coarsen rather than user options; quatmax is</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>what to turn if the band is in the wrong place. On very clean data</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>the floor is what does the work</tt>
+         </td>
+         <td>
+            <tt>see the measurements there.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>* on mtexdata EMSphinx, the austenite phase alone (478k px, noise</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>0.075 degree), FMC at cmaha 0.5 returns 1705 grains, or 1293 with</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minPixel 5</tt>
+         </td>
+         <td>
+            <tt>which is what minPixel is for, since it takes the grains</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>below 5 pixels from 393 to 1. Lowering cmaha below about 0.5 does</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>little on this data (1204 grains at 0.25), because what limits merging</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>there is the outlier radius, not the rebias.</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>* boundary localisation degrades at low angle: at 1 degree only about</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>38  of the boundary lands on exactly the right pixel (mean offset</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>1.0 px), while at 5 degree and above it is essentially exact.</tt>
+         </td>
+         <td/>
+      </tr>
+   </table>
+</p>
+</div>
+</body>
+</html>

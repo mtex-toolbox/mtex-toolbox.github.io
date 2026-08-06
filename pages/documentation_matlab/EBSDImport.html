@@ -1,5 +1,5 @@
 ---
-title: Importing EBSD Data
+title: "Importing EBSD Data"
 
 sidebar: documentation_sidebar
 permalink: EBSDImport.html
@@ -31,11 +31,11 @@ ebsd = EBSD.load([mtexEBSDPath filesep 'twins.ctf'],...
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
@@ -52,9 +52,9 @@ plot(ebsd('Magnesium'),ebsd('Magnesium').orientations)
 <p>The variable of type EBSD is the starting point for all further analysis, e.g., <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="EBSD2ODF.html">ODF reconstruction</a>, <a href="EBSDMisorientation">misorientation analysis</a>, etc.</p>
 <h2 id="4">Importing EBSD data using the import wizard</h2>
 <p>In many cases however, importing EBSD data is not that straightforward as suggested above. The reason is that during the measuring process different reference systems are involved and resulting coordinates, i.e., the spatial coordinates and the Euler angles, are often not stored in a consistent way by commercial software. Please read <a href="EBSDReferenceFrame.html">EBSD Reference Systems</a> for more information about how to set up reference frames correctly.</p>
-<p>In order to help the user to import EBSD data consistently to a fixed specimen reference frame (which the user should know), MTEX provide the <a href="matlab:import_wizard('EBSD')">import wizard</a> as a graphical user interface. The <code class="language-plaintext highlighter-rouge">import_wizard</code> can be started either by typing into the command line</p>
+<p>In order to help the user to import EBSD data consistently to a fixed specimen reference frame (which the user should know), MTEX provide the <a href="matlab:import_wizard">import wizard</a> as a graphical user interface. The <code class="language-plaintext highlighter-rouge">import_wizard</code> can be started either by typing into the command line</p>
 {% highlight matlab %}
-import_wizard('EBSD')
+import_wizard
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDImport_02.png" %}
@@ -125,24 +125,6 @@ plot(ebsd,ebsd.orientations)
       <tr>
          <td>
                <p>
-                  <a href="loadEBSD_brukertxt.html">.txt</a>
-               </p>
-         </td>
-         <td>
-               <p>Bruker ascii files.</p>
-         </td>
-         <td>
-               <p>
-                  <a href="loadEBSD_h5.html">.h5, .hdf5</a>
-               </p>
-         </td>
-         <td>
-               <p>Bruker, EDAX, Dream 3d binary files.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
                   <a href="loadEBSD_crc.html">.crc</a>
                </p>
          </td>
@@ -156,24 +138,6 @@ plot(ebsd,ebsd.orientations)
          </td>
          <td>
                <p>EDAX binary files.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadEBSD_csv.html">.csv</a>
-               </p>
-         </td>
-         <td>
-               <p>Oxford single orientation files.</p>
-         </td>
-         <td>
-               <p>
-                  <a href="loadEBSD_Oxfordcsv.html">.csv</a>
-               </p>
-         </td>
-         <td>
-               <p>Oxford ascii files.</p>
          </td>
       </tr>
       <tr>
@@ -197,11 +161,11 @@ plot(ebsd,ebsd.orientations)
       <tr>
          <td>
                <p>
-                  <a href="loadEBSD_dream3d.html">.txt</a>
+                  <a href="loadEBSD_h5.html">.h5, .hdf5, .oh5, .h5oina</a>
                </p>
          </td>
          <td>
-               <p>Dream 3d single orientation files.</p>
+               <p>Bruker, EDAX, Oxford, ThermoFisher, EMsoft/EMsphinx binary files.</p>
          </td>
       </tr>
    </table>
@@ -215,7 +179,34 @@ alpha_3 beta_3 gamma_3 phase_3 x_3 y_3
 .      .       .       .       .   .
 alpha_M beta_M gamma_M phase_m x_m y_m</pre>
 <p>an additional tool supports you to associated the columns with the corresponding properties.</p>
-<h2 id="9">Writing your own interface</h2>
+<h2 id="9">HDF5 Files With Several Data Sets</h2>
+<p>HDF5 files are often project files holding more than one map - an EDAX project stores its maps as <code class="language-plaintext highlighter-rouge">Area N/OIM Map N</code>, an Oxford project its slices as <code class="language-plaintext highlighter-rouge">/1</code>, <code class="language-plaintext highlighter-rouge">/2</code>, ..., an EMSphInx file its scans as <code class="language-plaintext highlighter-rouge">Scan N</code>. Whenever a file contains more than one, the import lists them and states which one it took</p>
+<pre>├── Data sets    : 2
+│   ▸ [1] Area 1/OIM Map 1/EBSD
+│     [2] Area 2/OIM Map 7/EBSD</pre>
+<p>Pick another one by its number or by (part of) its name</p>
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'dataSet',2)
+ebsd = EBSD.load(fname,'dataSet','OIM Map 7')
+{% endhighlight %}
+<p>The data set that has been imported is recorded as its full HDF5 path in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSet</code>, the short names of all of them in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSets</code>. In order to see what a file contains without importing any data use</p>
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'headerOnly')
+{% endhighlight %}
+<p>The <a href="import_wizard.html">import wizard</a> lists everything a file offers below its file browser - selecting a row imports it.</p>
+<h2 id="10">Raw and Post Processed Data</h2>
+<p>Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> files store the map twice - as recorded by the detector and as cleaned up by the vendor software. MTEX imports the cleaned up version, which is usually the one you want. Add <code class="language-plaintext highlighter-rouge">'raw'</code> for the other one</p>
+{% highlight matlab %}
+ebsd = EBSD.load(fname)          % post processed
+ebsd = EBSD.load(fname,'raw')    % as recorded
+{% endhighlight %}
+<p>The raw version comes with the full set of per pixel properties - band contrast, band slope, pattern quality, the pattern centre, ... - while the post processed one keeps only a few of them, but has its bad pixels cleaned up and may carry a different specimen orientation. Both can be combined with <code class="language-plaintext highlighter-rouge">'dataSet'</code>
+</p>
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'raw','dataSet',2)
+{% endhighlight %}
+<p>Files of all other vendors hold the recorded data only, so <code class="language-plaintext highlighter-rouge">'raw'</code> has no effect on them. The <a href="import_wizard.html">import wizard</a> lists both versions of every data set below its file browser, tagged <code class="language-plaintext highlighter-rouge">(raw)</code> and <code class="language-plaintext highlighter-rouge">(post processed)</code>, and files that store one version only simply get one row per data set.</p>
+<h2 id="11">Writing your own interface</h2>
 <p>In the rare case of an EBSD format that is not supported, the user can write its own interface to import the data. Once you have successfully written that, you can integrate this method into MTEX by copying it into the folder <code class="language-plaintext highlighter-rouge">mtex/interfaces</code> and rename your function <code class="language-plaintext highlighter-rouge">loadEBSD_xxx</code>. Then it will be automatically recognized by the import wizard. Examples how to write such an interface can be found in the directory <code class="language-plaintext highlighter-rouge">mtex/interfaces</code>.</p>
 </div>
 </body>

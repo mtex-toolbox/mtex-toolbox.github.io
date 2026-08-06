@@ -1,5 +1,5 @@
 ---
-title: solve_lsq_book_constsize
+title: "solve_lsq_book_constsize"
 
 sidebar: function_reference_sidebar
 permalink: solve_lsq_book_constsize.html
@@ -23,10 +23,17 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>each page of the inputs defines a least squares problem this function returns the solution vectors and the condition numbers one can also set flags and parameters for regularization and similiar things</p>
+<p>Each page of the input arrays defines one local least-squares problem. Those are solved in parallel using Matlabs pagefuns.</p>
+<p>input: W_book : nn x 1 x N local weights G_book : nn x dim x N local basis values f_book : nn x numf x N local function values</p>
+<p>output: c_book : dim x numf x N local coefficient vectors conds : N x 1 condition numbers of the solved systems info : struct additional data for regularization setup</p>
+<p>options: regularize given be varargin basis_weights given be varargin mincond given be varargin maxcond given be varargin basis_weights_scale given be varargin lambda_geom_rel given be varargin geometryScore given be varargin</p>
+<pre>  targetcond               default: mincond</pre>
+<p>flags: condition_geometry geometry may only activate a fraction of the condition regularization that is actually needed</p>
+<p>IMPORTANT ASSUMPTION: The first basis function is assumed to be the constant function. 1 - For MLS on S^2 we have: - even degree -&gt; 1 - odd degree -&gt; z (~const near north pole) 2 - For MLS on SO(3) this is similar.</p>
+<p>=============================================================================</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-[c_book, conds] = solve_lsq_book_constsize(W_book, G_book, f_book, varargin)
+[c_book, conds, info] = ...
 {% endhighlight %}
 </div>
 </body>

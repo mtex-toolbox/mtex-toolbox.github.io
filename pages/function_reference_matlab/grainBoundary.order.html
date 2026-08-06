@@ -1,0 +1,84 @@
+---
+title: "grainBoundary.order"
+
+sidebar: function_reference_sidebar
+permalink: grainBoundary.order.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>grainBoundary.order</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_grainBoundary__order.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grainBoundary/order.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>bring the boundary segments into walk order</p>
+<h2 id="3">Description</h2>
+<p>Reorders the boundary segments such that consecutive segments of the same chain share a vertex, i.e. gB.F(k,2) == gB.F(k+1,1). A chain is a maximal run of segments joined at vertices where exactly two segments meet; a vertex where any other number of segments meet is a junction and always terminates a chain. Chains occupy contiguous blocks of rows.</p>
+<p>Each chain is additionally oriented such that the grain in gB.grainId(:,1) lies to the left of the walk direction. Which side that is cannot be derived from gB alone, so it has to be supplied via the leftPos option - one point per segment lying strictly on the grainId(:,1) side of it. For segments along the outer border, where grainId(:,1) is 0 and no such pixel exists, mirror the pixel of the other side through the segment midpoint. Without leftPos the walk order is still established, but the sense of each chain is arbitrary (deterministic, but not tied to grainId).</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+gB = order(gB)
+gB = order(gB,'leftPos',pos)
+[gB,p] = order(gB)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>gB</tt>
+         </td>
+         <td>
+            <tt><a href="grainBoundary.grainBoundary.html">grainBoundary</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, one per segment, on the gB.grainId(:,1) side of it</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>gB</tt>
+         </td>
+         <td>
+            <tt><a href="grainBoundary.grainBoundary.html">grainBoundary</a>, in walk order</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>p</tt>
+         </td>
+         <td>
+            <tt>the applied permutation, gB_ordered = gB_old.subSet(p)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="chainOrder.html">chainOrder</a> <a href="grainBoundary.chainId.html">grainBoundary.chainId</a> <a href="grainBoundary.chainV.html">grainBoundary.chainV</a> <a href="grainBoundary.junctionId.html">grainBoundary.junctionId</a>
+</p>
+</div>
+</body>
+</html>

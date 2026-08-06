@@ -1,5 +1,5 @@
 ---
-title: Gridded EBSD Data
+title: "Gridded EBSD Data"
 
 sidebar: documentation_sidebar
 permalink: EBSDGrid.html
@@ -37,8 +37,8 @@ plot(ebsd('Magnesium'),ebsd('Magnesium').orientations)
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
@@ -55,12 +55,12 @@ ebsd.unitCell
 
 {% highlight plaintext %}
 ans = vector3d (y↑→x)
- size: 4 x 1
+ size: 1 x 4
       x     y     z
+   0.15 -0.15     0
    0.15  0.15     0
   -0.15  0.15     0
   -0.15 -0.15     0
-   0.15 -0.15     0
 {% endhighlight %}
 <p>If we apply the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> to the data set</p>
 {% highlight matlab %}
@@ -71,8 +71,8 @@ ebsd = ebsd.gridify
 ebsd = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
@@ -89,7 +89,7 @@ ebsd(50,100)
 ans = EBSD (y↑→x)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
     Id   Phase              orientation   bands    bc    bs   error   mad   oldId
  13613       1   (155.8°,100.6°,239.3°)      10   149   133       0   0.7    8283
@@ -106,7 +106,7 @@ ebsdMg = ebsd('Magnesium')
 ebsdMg = EBSD (y↑→x)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
@@ -123,7 +123,7 @@ ebsdMg = ebsd('Magnesium').gridify
 ebsdMg = EBSDsquare (y↑→x)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
-     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
@@ -154,7 +154,7 @@ setColorRange([0,4*degree])
 {% highlight matlab %}
 mtexdata copper silent
 
-[grains, ebsd.grainId] = calcGrains(ebsd);
+[grains, ebsd] = calcGrains(ebsd);
 ebsd = ebsd.gridify
 
 plot(ebsd,ebsd.orientations)
@@ -201,12 +201,12 @@ plot(ebsdS, ebsdS.orientations)
 ebsdS = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   139 (0.98%)  notIndexed                                                 
-     0   14021 (99%)      Copper  LightSkyBlue       432                         
+    -1   135 (0.95%)  notIndexed          none                                   
+     0   14025 (99%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
- X x Y x Z : [0, 595] x [0, 585] x [0, 0]
+ X x Y x Z : [0, 593] x [0, 585] x [0, 0]
  Normal vector: (0,0,1)
  Square grid  :118 x 120
 {% endhighlight %}
@@ -231,8 +231,8 @@ hold off
 ebsdS = EBSDsquare (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1310 (0.38%)  notIndexed                                                 
-     0  346774 (100%)      Copper  LightSkyBlue       432                         
+    -1   1190 (0.34%)  notIndexed          none                                   
+     0  346894 (100%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
@@ -258,8 +258,8 @@ hold off
 ebsdS1 = EBSDsquare (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1310 (0.38%)  notIndexed                                                 
-     0  346774 (100%)      Copper  LightSkyBlue       432                         
+    -1   1190 (0.34%)  notIndexed          none                                   
+     0  346894 (100%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
@@ -287,8 +287,8 @@ hold off
 ebsdS2 = EBSD (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1310 (0.38%)  notIndexed                                                 
-     0  346774 (100%)      Copper  LightSkyBlue       432                         
+    -1   1190 (0.34%)  notIndexed          none                                   
+     0  346894 (100%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId, quality
  Scan unit : um
@@ -344,6 +344,104 @@ ebsdGF = EBSDhex (y↑→x)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_11.png" %}
+</center>
+<h2 id="18">Robustness to Distorted (e.g. Trapezoidal) Grids</h2>
+<p>Real EBSD stages sometimes drift smoothly during a scan rather than rotating rigidly. A common signature is a trapezoidal distortion: each scan row is stretched or compressed about the map centre by an amount that grows with the row's y position, so the same nominally rectangular map ends up narrower at one edge than at the other. MTEX reconstructs the underlying grid indices of an <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a> object robustly under this kind of smooth, non-rigid distortion - which matters for <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> above, but also for any operation that needs the map's grid structure internally, such as <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> or the <code class="language-plaintext highlighter-rouge">surf</code> plotting backend.</p>
+<p>We demonstrate this on a real map, rather than a small synthetic one, since the failure mode this guards against only becomes visible once the map is realistically wide - a small toy grid stays safe at distortion levels that already break a real, wide map.</p>
+{% highlight matlab %}
+mtexdata small
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0    1197 (32%)  notIndexed          none                                   
+     1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
+     2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad
+ Scan unit : um
+ X x Y x Z : [33000, 36000] x [4500, 7500] x [0, 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<p>The command <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform</code></a> applies an arbitrary function to the position of every pixel, leaving orientations and all other properties untouched. Here we scale the x-position of every pixel about the map's centre by an amount that grows linearly with y - a trapezoidal stage drift of up to <code class="language-plaintext highlighter-rouge">trapFrac</code> at the top and bottom edges. Note that the distortion is defined through the physical y position, not through a column of <a href="EBSD.lattice.html"><code class="language-plaintext highlighter-rouge">ebsd.lattice.ij</code></a> - which of its two columns happens to correspond to rows vs columns depends on an internal, unspecified choice of the lattice basis and is not something to rely on.</p>
+{% highlight matlab %}
+x = ebsd.pos.x; xCenter = (min(x)+max(x))/2;
+y = ebsd.pos.y; yCenter = (min(y)+max(y))/2; yHalf = (max(y)-min(y))/2;
+trapFrac = 0.05;
+
+distort = @(pos) vector3d( ...
+  xCenter + (pos.x-xCenter) .* (1 + trapFrac*(pos.y-yCenter)/yHalf), ...
+  pos.y, pos.z);
+
+ebsdDistorted = transform(ebsd, distort);
+
+plot(ebsdDistorted('Fo'),ebsdDistorted('Fo').orientations)
+hold on
+plot(ebsdDistorted('En'),ebsdDistorted('En').orientations)
+hold on
+plot(ebsdDistorted('Di'),ebsdDistorted('Di').orientations)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_12.png" %}
+</center>
+<p>Even though every row has now shifted by a different amount, MTEX recovers exactly the same grid indices as for the undistorted map</p>
+{% highlight matlab %}
+isequal(ebsdDistorted('Fo').lattice.ij, ebsd('Fo').lattice.ij)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+  logical
+   1
+{% endhighlight %}
+
+{% highlight matlab %}
+grains = calcGrains(ebsdDistorted,'minPixel',5)
+
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     1      12    1936  Forsterite       mmm  LightSkyBlue
+     2       4     284   Enstatite       mmm  DarkSeaGreen
+     3       3     230    Diopside     12/m1     Goldenrod
+ 
+ boundary segments: 952 (37582 µm)
+ inner boundary segments: 28 (1092 µm)
+ triple points: 15
+ 
+ Id   Phase   Pixels       meanRotation      GOS
+  1       2        9     (73°,36°,353°)    0.013
+  2       1       14   (128°,146°,231°)   0.0071
+  3       1      149   (177°,111°,285°)    0.011
+  4       1        8   (168°,101°,264°)   0.0062
+  5       1      123   (179°,128°,261°)    0.024
+  6       2       36    (125°,62°,331°)   0.0084
+  7       1      526     (19°,85°,256°)    0.038
+  8       1       38    (167°,97°,261°)     0.01
+  9       1       38    (155°,53°,302°)    0.059
+ 10       2        1    (164°,35°,295°)        0
+ 11       3       53    (142°,81°,317°)     0.02
+ 12       3      148    (32°,148°,241°)    0.023
+ 13       1      874   (162°,102°,268°)     0.13
+ 14       3       29    (155°,47°,299°)   0.0072
+ 15       1       93    (176°,93°,246°)    0.042
+ 16       1       15     (56°,68°,280°)    0.033
+ 17       1       22    (174°,82°,282°)   0.0098
+ 18       2      238    (164°,35°,295°)   0.0075
+ 19       1       36    (167°,98°,260°)   0.0083
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_13.png" %}
 </center>
 </div>
 </body>

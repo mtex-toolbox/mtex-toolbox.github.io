@@ -1,5 +1,5 @@
 ---
-title: Grain Orientation Parameters
+title: "Grain Orientation Parameters"
 
 sidebar: documentation_sidebar
 permalink: GrainOrientationParameters.html
@@ -66,13 +66,11 @@ To make changes, update the MATLAB code and republish this document.
 </p>
 <p>As usual, we start by importing some EBSD data and computing grains</p>
 {% highlight matlab %}
-close all
-
 % import the data
 mtexdata ferrite silent
 
 % compute grains
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',7.5*degree,'minPixel',5);
+[grains, ebsd] = calcGrains(ebsd,'threshold',7.5*degree,'minPixel',5);
 ebsd = ebsd.project2FundamentalRegion;
 grains = smooth(grains,5);
 
@@ -105,12 +103,12 @@ grainSel = grain2d (y↑→x)
  inner boundary segments: 0 (0 µm)
  triple points: 12
  
- Id   Phase   Pixels      meanRotation         GOS
- 94       0     1949   (258°,70°,217°)   0.0434024
+ Id   Phase   Pixels     meanRotation         GOS
+ 94       0     1949   (78°,70°,217°)   0.0434024
  
  
 ori = orientation (Ferrite → y↑→x)
-  size: 1949 x 1
+  size: 1965 x 1
 {% endhighlight %}
 <p>We could now use the command <a href="orientation.mean"><code class="language-plaintext highlighter-rouge">mean</code></a> to compute the grain average orientation from these individual orientations. A more direct approach, however, is to access the property <code class="language-plaintext highlighter-rouge">grain.meanOrientation</code> which has been filled with the mean orientations during grain reconstruction.</p>
 {% highlight matlab %}
@@ -127,7 +125,7 @@ mis2mean = inv(grainSel.meanOrientation) .* ori
 
 {% highlight plaintext %}
 mis2mean = misorientation (Ferrite → Ferrite)
-  size: 1949 x 1
+  size: 1965 x 1
 {% endhighlight %}
 <p>While the above command computes the misorientations to the grain mean orientation just for one grain the command <a href="EBSD.calcGROD.html"><code class="language-plaintext highlighter-rouge">calcGrod</code></a> computes it for all grains simultaneously</p>
 {% highlight matlab %}
@@ -210,8 +208,8 @@ hold off
 
 {% highlight plaintext %}
 ans = vector3d (y↑→x)
-       x      y      z
-  -0.282 0.0471 -0.958
+      x       y       z
+  0.282 -0.0471  -0.958
  
 ans = Miller (Ferrite)
        h       k       l
@@ -235,7 +233,7 @@ ans =
 {% endhighlight %}
 <p>Lets perform the above analysis for all large grains</p>
 {% highlight matlab %}
-grainsLarge = grains(grains.numPixel > 50);
+grainsLarge = grains(grains.isIndexed & grains.numPixel > 50);
 lambda = nan(length(grainsLarge),4);
 
 % loop through all grains

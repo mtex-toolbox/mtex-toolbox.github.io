@@ -1,0 +1,104 @@
+---
+title: "chainOrder"
+
+sidebar: function_reference_sidebar
+permalink: chainOrder.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>chainOrder</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_chainOrder.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/graph_tools/chainOrder.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>decompose an undirected edge list into maximal chains and walk each of them</p>
+<h2 id="3">Description</h2>
+<p>A chain is a maximal run of edges joined at vertices where exactly two edges meet; a vertex of any other degree is a junction and terminates a chain. Every chain is walked from one end to the other, which assigns each edge a position within its chain and tells at which of its two vertices the walk enters it.</p>
+<p>Chains are numbered by increasing highest member edge index, and each is walked from its lower terminal half edge; a closed chain has no terminal and is cut at its lowest vertex. These tie breaks make the result unique, which is what lets the compiled and the MATLAB path be interchangeable.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+[cid,pos,firstEnd] = chainOrder(F,nV)
+[cid,pos,firstEnd] = chainOrder(F,nV,'noMex')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt>nF x 2 list of edges, one based vertex indices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>nV</tt>
+         </td>
+         <td>
+            <tt>number of vertices</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cid</tt>
+         </td>
+         <td>
+            <tt>nF x 1 chain id, 1..nCh</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt>nF x 1 zero based position of the edge within its chain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>firstEnd</tt>
+         </td>
+         <td>
+            <tt>nF x 1, 1 or 2 - the column of F holding the entry vertex</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>noMex</tt>
+         </td>
+         <td>
+            <tt>use the MATLAB implementation even if chainOrderC is available</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="grainBoundary.order.html">grainBoundary.order</a> <a href="connectedComponents.html">connectedComponents</a>
+</p>
+</div>
+</body>
+</html>

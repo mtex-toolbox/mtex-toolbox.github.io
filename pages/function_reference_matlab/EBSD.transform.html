@@ -1,0 +1,79 @@
+---
+title: "EBSD.transform"
+
+sidebar: function_reference_sidebar
+permalink: EBSD.transform.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>EBSD.transform</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSD__transform.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/transform.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>apply an arbitrary spatial transformation to an EBSD map</p>
+<p>Applies fun to the position of every pixel, leaving orientations, phase and all other properties untouched. Unlike <a href="EBSD.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a>, fun need not be a rigid transformation - it may be any map from position to position, e.g. to simulate an instrument distortion such as a trapezoidal stage drift, or to reproject onto a different coordinate system.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+% scale x about the map centre by an amount that grows with y - a
+% trapezoidal stage drift of trapFrac at the outermost rows
+x = ebsd.pos.x; xCenter = (min(x)+max(x))/2;
+y = ebsd.pos.y; yCenter = (min(y)+max(y))/2; yHalf = (max(y)-min(y))/2;
+trapFrac = 0.02;
+ebsd = transform(ebsd, @(pos) vector3d( ...
+  xCenter + (pos.x-xCenter) .* (1 + trapFrac*(pos.y-yCenter)/yHalf), ...
+  pos.y, pos.z));
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fun</tt>
+         </td>
+         <td>
+            <tt>function handle, <a href="vector3d.vector3d.html">vector3d</a> -&gt; <a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> with transformed ebsd.pos</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="EBSD.rotate.html">EBSD.rotate</a>
+</p>
+</div>
+</body>
+</html>

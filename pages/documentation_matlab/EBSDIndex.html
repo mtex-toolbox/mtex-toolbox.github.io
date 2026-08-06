@@ -32,8 +32,8 @@ mtexdata twins
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
@@ -45,7 +45,7 @@ ebsd = EBSD (y↑→x)
 poly = [44 0 4 2];
 ebsd = ebsd(inpolygon(ebsd,poly));
 
-plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k')
+plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k','backend','patch')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_01.png" %}
@@ -60,7 +60,7 @@ text(ebsd,1:length(ebsd))
 <p>We may easily select specific pixels by specifying their indices</p>
 {% highlight matlab %}
 hold on
-plot(ebsd(16:18),'edgeColor','red','facecolor','none','linewidth',4)
+plot(ebsd(16:18),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
@@ -69,7 +69,7 @@ hold off
 </center>
 <p>Whether lines or columns run first is not related to MTEX but inherits from the ordering of the imported EBSD data. Since, we have restricted our large EBSD map to the small subset the indices of restricted data does not coincide with the indices of the imported data anymore. However, the original indices are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize those</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k')
+plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k','backend','patch')
 text(ebsd,ebsd.id)
 {% endhighlight %}
 <center>
@@ -78,7 +78,7 @@ text(ebsd,ebsd.id)
 <p>In order to select EBSD data according to their original <code class="language-plaintext highlighter-rouge">id</code> use the option <code class="language-plaintext highlighter-rouge">'id'</code>, i.e.,</p>
 {% highlight matlab %}
 hold on
-plot(ebsd('id',316:318),'edgeColor','red','facecolor','none','linewidth',4)
+plot(ebsd('id',316:318),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
@@ -90,7 +90,7 @@ hold off
 {% highlight matlab %}
 ebsd = ebsd.gridify;
 
-plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black')
+plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black','backend','patch')
 
 [i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));
 str = arrayfun(@(a,b) ['(' int2str(a) ',' int2str(b) ')'],i,j,'UniformOutput',false);
@@ -102,7 +102,7 @@ text(ebsd,str)
 <p>This allows to select EBSD data simply by their coordinates within the grid, e.g., by</p>
 {% highlight matlab %}
 hold on
-plot(ebsd(2,2:4),'edgeColor','red','facecolor','none','linewidth',4)
+plot(ebsd(2,2:4),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
@@ -111,7 +111,7 @@ hold off
 </center>
 <p>Note that the <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> command changes the order of measurements. They are now sorted such that rows runs first and columns second, as this is the default convention how Matlab indexes matrices.</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black')
+plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black','backend','patch')
 text(ebsd,1:length(ebsd))
 {% endhighlight %}
 <center>
@@ -129,7 +129,7 @@ ebsd = ebsd.gridify
 ebsd = EBSDhex (y↑→x)
  
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622       X||a, Y||b*, Z||c*
+     0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
  
  Properties: ci, grainid, iq, sem_signal, oldId
  Scan unit : um
@@ -143,7 +143,7 @@ ebsd = ebsd(10:16,68:79);
 {% endhighlight %}
 <p>Lets visualize the matrix coordinates for the hexagonal grid</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off')
+plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off','unitcell')
 axis off
 
 [i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));
@@ -156,7 +156,7 @@ text(ebsd,str)
 <h2 id="13">Cube Coordinates</h2>
 <p>In hexagonal grids it is sometimes advantageous to use three digit cube coordinates to index the cell. This can be done using the commands <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a>. Much more details on indexing hex grids can be found at <a href="https://www.redblobgames.com/grids/hexagons/">here</a>.</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off')
+plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off','unitcell')
 axis off
 
 [i,j] = ndgrid(1:size(ebsd,1),1:size(ebsd,2));

@@ -1,5 +1,5 @@
 ---
-title: Twinning Analysis
+title: "Twinning Analysis"
 
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
@@ -29,8 +29,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata twins
 
 % segment grains
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),...
-  'angle',5*degree,'minPixel',3);
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',3);
 
 % smooth them
 grains = grains.smooth(5);
@@ -46,8 +45,8 @@ CS = grains.CS;
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
@@ -66,8 +65,8 @@ gB = grains.boundary
 gB = grainBoundary
  
  Segments  length   mineral 1  mineral 2
-     1181  184 µm  notIndexed  Magnesium
-     3164  724 µm   Magnesium  Magnesium
+      600  182 µm  notIndexed  Magnesium
+     3197  730 µm   Magnesium  Magnesium
 {% endhighlight %}
 <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
@@ -78,7 +77,7 @@ gB_MgMg = gB('Magnesium','Magnesium')
 gB_MgMg = grainBoundary
  
  Segments  length  mineral 1  mineral 2
-     3164  724 µm  Magnesium  Magnesium
+     3197  730 µm  Magnesium  Magnesium
 {% endhighlight %}
 <h2 id="4">Properties of grain boundaries</h2>
 <p>A variable of type grain boundary contains the following properties</p>
@@ -133,11 +132,11 @@ mori_mean = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  29.9378  93.904 30.4111
+  29.9416 93.8986 30.4122
  
  
      plane parallel   direction parallel      fit
-(11̅01) || (101̅1̅)   [011̅1] || [11̅01]      0.466°
+(11̅01) || (101̅1̅)   [011̅1] || [11̅01]      0.464°
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
@@ -205,7 +204,7 @@ hold off
 twinBoundary = grainBoundary
  
  Segments  length  mineral 1  mineral 2
-     1649  361 µm  Magnesium  Magnesium
+     1681  367 µm  Magnesium  Magnesium
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_05.png" %}

@@ -1,5 +1,5 @@
 ---
-title: grainBoundary.curvature
+title: "grainBoundary.curvature"
 
 sidebar: function_reference_sidebar
 permalink: grainBoundary.curvature.html
@@ -23,8 +23,11 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>curvature of a boundary segment</p>
+<p>signed curvature of a boundary segment</p>
 <h2 id="3">Description</h2>
+<p>The Menger curvature through the midpoints of a segment and its two neighbours within the same chain, smoothed along the chain afterwards.</p>
+<p>The sign is meaningful: segments are stored in walk order with the grain gB.grainId(:,1) on the left, so a positive curvature means the boundary bulges into gB.grainId(:,2) and a negative one that it bulges into gB.grainId(:,1).</p>
+<p>Segments at the end of an open chain have no neighbour on one side and therefore no curvature - those are returned as NaN. A chain consisting of a single segment is NaN throughout. Closed chains wrap around and are defined everywhere.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 kappa = curvature(gB)
@@ -46,7 +49,7 @@ kappa = curvature(gB,2)
             <tt>n</tt>
          </td>
          <td>
-            <tt>number of neighbors that are considered</tt>
+            <tt>number of smoothing iterations along the chain (default 50)</tt>
          </td>
       </tr>
    </table>
@@ -59,10 +62,14 @@ kappa = curvature(gB,2)
             <tt>kappa</tt>
          </td>
          <td>
-            <tt>1/fitting Radius in EBSD units</tt>
+            <tt>1/fitting radius in EBSD units</tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="grainBoundary.chainId.html">grainBoundary.chainId</a> <a href="grainBoundary.arcLength.html">grainBoundary.arcLength</a>
 </p>
 </div>
 </body>
