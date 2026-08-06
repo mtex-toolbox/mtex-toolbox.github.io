@@ -44,7 +44,7 @@ ebsd = EBSD.load(fileName,'EulerCorrection',rotation.byAxisAngle(xvector,180*deg
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
+     0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
@@ -64,20 +64,21 @@ plot(ebsd)
 </center>
 <p>The grain structure is reconstructed by the command</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd('indexed'),'minPixel',3)
+grains = calcGrains(ebsd,'minPixel',3)
 {% endhighlight %}
 
 {% highlight plaintext %}
 grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1     484  151683  Forsterite       mmm  LightSkyBlue
-     2     223   25747   Enstatite       mmm  DarkSeaGreen
-     3     229    7674    Diopside     12/m1     Goldenrod
+     0       7     810  notIndexed                    none
+     1     502  151693  Forsterite       mmm  LightSkyBlue
+     2     234   25778   Enstatite       mmm  DarkSeaGreen
+     3     268    7751    Diopside     12/m1     Goldenrod
  
- boundary segments: 36800 (1.7e+06 µm)
- inner boundary segments: 287 (13197 µm)
- triple points: 1549
+ boundary segments: 36167 (1.7e+06 µm)
+ inner boundary segments: 284 (13015 µm)
+ triple points: 1587
  
  Properties: meanRotation, GOS
 {% endhighlight %}

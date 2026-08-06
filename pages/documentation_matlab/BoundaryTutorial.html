@@ -1,5 +1,5 @@
 ---
-title: Grain Boundary Tutorial
+title: "Grain Boundary Tutorial"
 
 sidebar: documentation_sidebar
 permalink: BoundaryTutorial.html
@@ -31,7 +31,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata twins
 
 % detect grains
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'))
+[grains,ebsd] = calcGrains(ebsd)
 
 % smooth them
 grains = grains.smooth
@@ -44,8 +44,8 @@ plot(grains,grains.meanOrientation)
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
@@ -58,7 +58,7 @@ grains = grain2d (y↑→x)
  Phase  Grains  Pixels    Mineral  Symmetry         Color
      1     121   22833  Magnesium     6/mmm  LightSkyBlue
  
- boundary segments: 4416 (1154 µm)
+ boundary segments: 3825 (1149 µm)
  inner boundary segments: 4 (1.2 µm)
  triple points: 114
  
@@ -68,22 +68,10 @@ grains = grain2d (y↑→x)
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
+     0   14 (0.061%)  notIndexed          none                                   
+     1  22865 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, grainId, mis2mean
- Scan unit : um
- X x Y x Z : [0, 50] x [0, 41] x [0, 0]
- Normal vector: (0,0,1)
- 
- 
-ebsd = EBSD (y↑→x)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed                                                 
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm       X||a*, Y||b, Z||c*
- 
- Properties: bands, bc, bs, error, mad, grainId, mis2mean
+ Properties: bands, bc, bs, error, mad, grainId
  Scan unit : um
  X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
@@ -94,8 +82,8 @@ grains = grain2d (y↑→x)
  Phase  Grains  Pixels    Mineral  Symmetry         Color
      1     121   22833  Magnesium     6/mmm  LightSkyBlue
  
- boundary segments: 4416 (1022 µm)
- inner boundary segments: 4 (0.99 µm)
+ boundary segments: 3825 (1018 µm)
+ inner boundary segments: 4 (1.1 µm)
  triple points: 114
  
  Properties: meanRotation, GOS
@@ -112,8 +100,8 @@ gB = grains.boundary
 gB = grainBoundary
  
  Segments  length   mineral 1  mineral 2
-     1197  184 µm  notIndexed  Magnesium
-     3219  837 µm   Magnesium  Magnesium
+      606  182 µm  notIndexed  Magnesium
+     3219  835 µm   Magnesium  Magnesium
 {% endhighlight %}
 <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
@@ -124,7 +112,7 @@ gB_MgMg = gB('Magnesium','Magnesium')
 gB_MgMg = grainBoundary
  
  Segments  length  mineral 1  mineral 2
-     3219  837 µm  Magnesium  Magnesium
+     3219  835 µm  Magnesium  Magnesium
 {% endhighlight %}
 <h2 id="4">Properties of grain boundaries</h2>
 <p>A variable of type grain boundary contains the following properties</p>

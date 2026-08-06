@@ -1,5 +1,5 @@
 ---
-title: Line Profiles
+title: "Line Profiles"
 
 sidebar: documentation_sidebar
 permalink: EBSDProfile.html
@@ -29,7 +29,7 @@ close all
 mtexdata forsterite silent
 
 % reconstruct grains
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'));
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5,'angle',15*degree);
 
 % find the grain with maximum grain orientation spread
 [~,id] = max(grains.GOS);
@@ -49,12 +49,12 @@ grain_selected = grain2d (y↑→x)
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       1    2614  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 458 (20261 µm)
- inner boundary segments: 48 (2152 µm)
- triple points: 28
+ boundary segments: 418 (18506 µm)
+ inner boundary segments: 54 (2328 µm)
+ triple points: 17
  
-   Id   Phase   Pixels       meanRotation       GOS
- 1856       1     2614   (153°,109°,246°)   0.17005
+  Id   Phase   Pixels       meanRotation       GOS
+ 488       1     2614   (153°,109°,246°)   0.17005
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDProfile_01.png" %}
@@ -79,9 +79,9 @@ ebsd_line = spatialProfile(ebsd(grain_selected),lineSec)
 ebsd_line = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1     83 (100%)  Forsterite  LightSkyBlue       mmm                         
+     1     86 (100%)  Forsterite  LightSkyBlue       mmm                         
  
- Properties: bands, bc, bs, error, mad, grainId, mis2mean
+ Properties: bands, bc, bs, error, mad, grainId
  Scan unit : um
  X x Y x Z : [18100, 18800] x [6450, 10600] x [0, 0]
  Normal vector: (0,0,1)
@@ -95,7 +95,7 @@ plot(ebsd_line.y,...
   angle(ebsd_line(1).orientations,ebsd_line.orientations)/degree)
 
 % misorientation gradient
-hold all
+hold on
 plot(0.5*(ebsd_line.y(1:end-1)+ebsd_line.y(2:end)),...
   angle(ebsd_line(1:end-1).orientations,ebsd_line(2:end).orientations)/degree)
 hold off

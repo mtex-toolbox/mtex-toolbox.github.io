@@ -1,0 +1,71 @@
+---
+title: script_demo_hexgrid_patch
+
+sidebar: function_reference_sidebar
+permalink: demo_hexgrid_patch.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>script_demo_hexgrid_patch</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_demo_hexgrid_patch.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/hexGrids/hexgrid_toolbox/demo_hexgrid_patch.m">
+    edit page</a></font>
+<div>
+{% highlight matlab %}
+%DEMO_HEXGRID_PATCH Example for completing and plotting an incomplete hex grid.
+
+clear
+close all
+
+% Make a synthetic complete lattice.
+d = 1;                             % nearest-neighbor center spacing
+unitCell = struct('spacing', d);    % equivalent basis: d*[1 0; 1/2 sqrt(3)/2]
+B = d * [1 0; 0.5 sqrt(3)/2];
+origin = [0 0];
+
+[q, r] = ndgrid(-30:30, -20:20);
+qr = [q(:), r(:)];
+xy = bsxfun(@plus, qr * B, origin);
+
+% Keep an irregular subset to simulate missing tiles and an incomplete grid.
+inside = hypot(xy(:,1), xy(:,2)) < 24;
+rng default
+observed = inside & rand(size(inside)) > 0.15;
+
+x = xy(observed,1);
+y = xy(observed,2);
+
+% One color value per original tile.
+c = sin(0.20*x) + cos(0.25*y);
+
+% Complete the grid and build one patch object.
+G = hexCompleteGrid(x, y, unitCell, 'Domain', 'convexhull');
+mesh = hexBuildPatchMesh(G);
+
+figure
+h = hexPlotPatch(mesh, c, 'HideMissing', true);
+colormap(parula)
+colorbar
+title('Completed hex grid from incomplete original data')
+
+% Fast color update: do not recreate the patch.
+c2 = cos(0.25*x) - sin(0.15*y);
+h.FaceVertexCData = hexColorData(mesh, c2);
+drawnow limitrate
+{% endhighlight %}
+<center>
+{% include inline_image.html file="demo_hexgrid_patch_01.png" %}
+</center>
+</div>
+</body>
+</html>

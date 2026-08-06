@@ -1,5 +1,5 @@
 ---
-title: grain2d.merge
+title: "grain2d.merge"
 
 sidebar: function_reference_sidebar
 permalink: grain2d.merge.html
@@ -170,7 +170,7 @@ grains = smooth(calcGrains(ebsd,'minPixel',5))
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    1197 (32%)  notIndexed                                                 
+     0    1197 (32%)  notIndexed          none                                   
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
      3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
@@ -184,16 +184,34 @@ ebsd = EBSD (y↑→x)
 grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0      25     840  notIndexed                        
-     1      14    1907  Forsterite       mmm  LightSkyBlue
-     2       5     226   Enstatite       mmm  DarkSeaGreen
-     3       5     222    Diopside     12/m1     Goldenrod
+     1      12    1936  Forsterite       mmm  LightSkyBlue
+     2       4     284   Enstatite       mmm  DarkSeaGreen
+     3       3     230    Diopside     12/m1     Goldenrod
  
- boundary segments: 1472 (58440 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 47
+ boundary segments: 731 (35913 µm)
+ inner boundary segments: 22 (1029 µm)
+ triple points: 15
  
- Properties: meanRotation, GOS
+ Id   Phase   Pixels       meanRotation      GOS
+  1       2        9     (73°,36°,353°)    0.013
+  2       1       14   (128°,146°,231°)   0.0071
+  3       1      149   (177°,111°,285°)    0.011
+  4       1        8   (168°,101°,264°)   0.0062
+  5       1      123   (179°,128°,261°)    0.024
+  6       2       36    (125°,62°,331°)   0.0084
+  7       1      526     (19°,85°,256°)    0.038
+  8       1       38    (167°,97°,261°)     0.01
+  9       1       38    (155°,53°,302°)    0.059
+ 10       2        1    (164°,35°,295°)        0
+ 11       3       53    (142°,81°,317°)     0.02
+ 12       3      148    (32°,148°,241°)    0.023
+ 13       1      874   (162°,102°,268°)     0.13
+ 14       3       29    (155°,47°,299°)   0.0072
+ 15       1       93    (176°,93°,246°)    0.042
+ 16       1       15     (56°,68°,280°)    0.033
+ 17       1       22    (174°,82°,282°)   0.0098
+ 18       2      238    (164°,35°,295°)   0.0075
+ 19       1       36    (167°,98°,260°)   0.0083
 {% endhighlight %}
 <p>merge all neighboring Diopside grains</p>
 {% highlight matlab %}
@@ -205,21 +223,38 @@ gB = grains.boundary('Diopside','Diopside')
 gB = grainBoundary
  
  Segments  length  mineral 1  mineral 2
-        4  122 µm   Diopside   Diopside
+        7  283 µm   Diopside   Diopside
  
 grains_m = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0      25     840  notIndexed                        
-     1      14    1907  Forsterite       mmm  LightSkyBlue
-     2       5     226   Enstatite       mmm  DarkSeaGreen
-     3       4     222    Diopside     12/m1     Goldenrod
+     1      12    1936  Forsterite       mmm  LightSkyBlue
+     2       4     284   Enstatite       mmm  DarkSeaGreen
+     3       2     230    Diopside     12/m1     Goldenrod
  
- boundary segments: 1468 (58318 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 46
+ boundary segments: 724 (35630 µm)
+ inner boundary segments: 22 (1029 µm)
+ triple points: 14
  
- Properties: meanRotation, GOS
+ Id   Phase   Pixels       meanRotation      GOS
+  1       2        9     (73°,36°,353°)    0.013
+  2       1       14   (128°,146°,231°)   0.0071
+  3       1      149   (177°,111°,285°)    0.011
+  4       1        8   (168°,101°,264°)   0.0062
+  5       1      123   (179°,128°,261°)    0.024
+  6       2       36    (125°,62°,331°)   0.0084
+  7       1      526     (19°,85°,256°)    0.038
+  8       1       38    (167°,97°,261°)     0.01
+  9       1       38    (155°,53°,302°)    0.059
+ 10       2        1    (164°,35°,295°)        0
+ 11       3       53    (142°,81°,317°)     0.02
+ 12       1      874   (162°,102°,268°)     0.13
+ 13       1       93    (176°,93°,246°)    0.042
+ 14       1       15     (56°,68°,280°)    0.033
+ 15       1       22    (174°,82°,282°)   0.0098
+ 16       2      238    (164°,35°,295°)   0.0075
+ 17       1       36    (167°,98°,260°)   0.0083
+ 18       3      177   (NaN°,NaN°,NaN°)      NaN
  
 parentId =
      1
@@ -233,44 +268,14 @@ parentId =
      9
     10
     11
+    18
     12
+    18
     13
     14
     15
     16
     17
-    18
-    19
-    20
-    21
-    22
-    23
-    24
-    25
-    26
-    27
-    28
-    29
-    30
-    31
-    48
-    32
-    33
-    34
-    35
-    48
-    36
-    37
-    38
-    39
-    40
-    41
-    42
-    43
-    44
-    45
-    46
-    47
 {% endhighlight %}
 </div>
 </body>

@@ -1,0 +1,75 @@
+---
+title: "grain2d.simplifyBoundary"
+
+sidebar: function_reference_sidebar
+permalink: grain2d.simplifyBoundary.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>grain2d.simplifyBoundary</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_grain2d__simplifyBoundary.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain2d/simplifyBoundary.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>remove boundary vertices that carry no shape information</p>
+<h2 id="3">Description</h2>
+<p>Douglas-Peucker simplification of the grain boundaries. A vertex is dropped if removing it moves the boundary by less than epsilon, so a straight run collapses into a single segment while a corner is kept. On a pixel grid this is what turns the staircase into the straight line it approximates.</p>
+<p>Junctions stay exactly where they are, so which grains touch, and where, is unchanged. The grain polygons are retraced along with the boundary, so the grain areas do move - by at most about epsilon times the perimeter. A grain too small to survive the tolerance is left uncoarsened rather than collapsed, so no grain is ever simplified away.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = simplifyBoundary(grains)
+grains = simplifyBoundary(grains,epsilon)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>epsilon</tt>
+         </td>
+         <td>
+            <tt>tolerance in EBSD units (default: half the median segment length)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="grainBoundary.simplify.html">grainBoundary.simplify</a> <a href="grain2d.reduceBoundary.html">grain2d.reduceBoundary</a> <a href="grain2d.refineBoundary.html">grain2d.refineBoundary</a> <a href="grain2d.smooth.html">grain2d.smooth</a>
+</p>
+</div>
+</body>
+</html>

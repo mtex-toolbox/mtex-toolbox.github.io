@@ -1,5 +1,5 @@
 ---
-title: Successive Refinement Demo
+title: "Successive Refinement Demo"
 
 sidebar: documentation_sidebar
 permalink: PoleFigureRefinement.html
@@ -34,21 +34,21 @@ calcError(pf,odf_naive)
 
 {% highlight plaintext %}
 pf = PoleFigure (y↑→x)
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
  
-  h = (02-21), r = 72 x 19 points
-  h = (10-10), r = 72 x 19 points
-  h = (10-11)(01-11), r = 72 x 19 points
-  h = (10-12), r = 72 x 19 points
-  h = (11-20), r = 72 x 19 points
-  h = (11-21), r = 72 x 19 points
-  h = (11-22), r = 72 x 19 points
+  h = (022̅1), r = 72 x 19 points
+  h = (101̅0), r = 72 x 19 points
+  h = (101̅1)(011̅1), r = 72 x 19 points
+  h = (101̅2), r = 72 x 19 points
+  h = (112̅0), r = 72 x 19 points
+  h = (112̅1), r = 72 x 19 points
+  h = (112̅2), r = 72 x 19 points
 ans =
     0.4439    0.3836    0.2585    0.3508    0.3407    0.4099    0.3669
 {% endhighlight %}
 <p>visual inspection</p>
 {% highlight matlab %}
-odf_naive.plot(pf.allH)
+odf_naive.plot(pf.allH,'sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="PoleFigureRefinement_01.png" %}
@@ -123,6 +123,9 @@ plot(r,'markersize',12)
 <center>
 {% include inline_image.html file="PoleFigureRefinement_05.png" %}
 </center>
+<center>
+{% include inline_image.html file="PoleFigureRefinement_06.png" %}
+</center>
 <h2 id="10">Refinement</h2>
 <p>for selected directions r we perform a 'point' like measurement.</p>
 {% highlight matlab %}
@@ -175,17 +178,17 @@ end
 
 {% highlight plaintext %}
 - at resolution : 14.545455
-  error true -- estimated odf   : 0.941439
-- at resolution : 13.009430
-  error true -- estimated odf   : 0.405335
-- at resolution : 9.506983
-  error true -- estimated odf   : 0.236237
-- at resolution : 6.738829
-  error true -- estimated odf   : 0.303526
-- at resolution : 3.753827
+  error true -- estimated odf   : 0.948044
+- at resolution : 13.087864
+  error true -- estimated odf   : 0.408412
+- at resolution : 9.449497
+  error true -- estimated odf   : 0.236763
+- at resolution : 6.737637
+  error true -- estimated odf   : 0.306671
+- at resolution : 3.717936
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigureRefinement_06.png" %}
+{% include inline_image.html file="PoleFigureRefinement_07.png" %}
 </center>
 <h2 id="11">Measured Pole Figure</h2>
 {% highlight matlab %}
@@ -194,7 +197,7 @@ plot(pf_measured,'silent');
 {% endhighlight %}
 
 {% highlight plaintext %}
-pf_measured = PoleFigure (y↑→x)
+pf_measured = PoleFigure (y↓→x)
   crystal symmetry : m-3m
  
   h = (111), r = 367 x 1 points
@@ -202,7 +205,7 @@ pf_measured = PoleFigure (y↑→x)
   h = (110), r = 367 x 1 points
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigureRefinement_07.png" %}
+{% include inline_image.html file="PoleFigureRefinement_08.png" %}
 </center>
 <h2 id="12">Final model</h2>
 <p>the default odf estimation will distribute volume on nodes that do not have corresponding data.</p>
@@ -212,7 +215,7 @@ fprintf('  error true -- estimated odf   : %f\n', calcError(odf_true,odf_recalc)
 {% endhighlight %}
 
 {% highlight plaintext %}
-error true -- estimated odf   : 0.400117
+error true -- estimated odf   : 0.412129
 {% endhighlight %}
 <h2 id="13">Compare with iterative odf estimation</h2>
 <p>the iterative odf estimation will model the volume portions of nodes that do not have corresponding data by assuming volume portions coming from a broader halfwidth, thus the error to the true odf will be significantly smaller.</p>
@@ -222,7 +225,7 @@ fprintf('  error true -- iter. est. odf  : %f\n', calcError(odf_true,odf_recalc_
 {% endhighlight %}
 
 {% highlight plaintext %}
-error true -- iter. est. odf  : 0.114767
+error true -- iter. est. odf  : 0.109858
 {% endhighlight %}
 <p>volume portion that is differently distributed</p>
 {% highlight matlab %}
@@ -231,7 +234,7 @@ calcError(odf_recalc,odf_recalc_iterative,'l1')
 
 {% highlight plaintext %}
 ans =
-    0.3167
+    0.3305
 {% endhighlight %}
 </div>
 </body>

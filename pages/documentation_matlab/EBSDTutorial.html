@@ -1,5 +1,5 @@
 ---
-title: EBSD Tutorial
+title: "EBSD Tutorial"
 
 sidebar: documentation_sidebar
 permalink: EBSDTutorial.html
@@ -25,13 +25,10 @@ To make changes, update the MATLAB code and republish this document.
 <p>A quick guide on how to import and make basic plots with EBSD data in MTEX.</p>
 <!--/introduction-->
 <h2 id="1">Data import</h2>
-<p>MTEX allows you to import EBSD from all big vendors of EBSD systems. Prefered data formats are text based data files like <code class="language-plaintext highlighter-rouge">.ang</code>, <code class="language-plaintext highlighter-rouge">.ctf</code> or open binary formats like <code class="language-plaintext highlighter-rouge">.osc</code> or <code class="language-plaintext highlighter-rouge">.h5</code>. Most conveniently, EBSD data may be imported using the import wizard, by typing</p>
+<p>MTEX allows you to import EBSD from all big vendors of EBSD systems. Preferred data formats are text based data files like <code class="language-plaintext highlighter-rouge">.ang</code>, <code class="language-plaintext highlighter-rouge">.ctf</code> or open binary formats like <code class="language-plaintext highlighter-rouge">.osc</code> or <code class="language-plaintext highlighter-rouge">.h5</code>. Most conveniently, EBSD data may be imported using the import wizard, by typing</p>
 {% highlight matlab %}
 import_wizard
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDTutorial_01.png" %}
-</center>
 <p>or by the command <a href="EBSD.load.html">EBSD.load</a>
 </p>
 {% highlight matlab %}
@@ -41,10 +38,10 @@ ebsd = EBSD.load(fileName,'EulerCorrection',rotation.id)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
+     0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
@@ -61,7 +58,7 @@ ebsd = EBSD (y↑→x)
 plot(ebsd,'coordinates','on')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_02.png" %}
+{% include inline_image.html file="EBSDTutorial_01.png" %}
 </center>
 <p>When importing EBSD data it is important to check the alignment of the map coordinate system and the Euler angle coordinate system. This issue is exhaustively discussed in the topic <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>.</p>
 <h2 id="6">Orientation Plots</h2>
@@ -71,7 +68,7 @@ ebsd('Forsterite')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = EBSD (y↑→x)
+ans = EBSD (y↓→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1  152345 (100%)  Forsterite  LightSkyBlue       mmm                         
@@ -87,7 +84,7 @@ ebsd('Forsterite').orientations
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (Forsterite → y↑→x)
+ans = orientation (Forsterite → y↓→x)
   size: 152345 x 1
 {% endhighlight %}
 <p>This syntax can be used to plot an ipf map of all Forsterite orientations</p>
@@ -95,30 +92,31 @@ ans = orientation (Forsterite → y↑→x)
 plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_03.png" %}
+{% include inline_image.html file="EBSDTutorial_02.png" %}
 </center>
 <p>Here the all Forsterite orientations a colored according to their alignment in a z inverse pole figure. A more complete discussion about how to colorize orientations can be found in the topic <a href="EBSDIPFMap.html">IPF Maps</a>.</p>
 <h2 id="10">Grain reconstruction</h2>
 <p>MTEX contains sophisticated algorithms for reconstructing grains from EBSD data as described in the paper <a href="https://www.researchgate.net/publication/51806709_Grain_detection_from_2d_and_3d_EBSD_data-Specification_of_the_MTEX_algorithm">Grain detection from 2d and 3d EBSD data</a> and the topic <a href="GrainReconstruction.html">Grain Reconstruction</a>. The syntax is</p>
 {% highlight matlab %}
 % reconstruct grains with a threshold angle of 10 degrees
-grains = calcGrains(ebsd('indexed'),'theshold',10*degree,'minPixel',5)
+grains = calcGrains(ebsd,'theshold',10*degree,'minPixel',5)
 
 % smooth the grains to avoid the staircase effect
 grains = smooth(grains,5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↑→x)
+grains = grain2d (y↓→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1     438  151531  Forsterite       mmm  LightSkyBlue
-     2     207   25670   Enstatite       mmm  DarkSeaGreen
-     3     166    7421    Diopside     12/m1     Goldenrod
+     0       7     820  notIndexed                    none
+     1     451  151539  Forsterite       mmm  LightSkyBlue
+     2     218   25720   Enstatite       mmm  DarkSeaGreen
+     3     181    7494    Diopside     12/m1     Goldenrod
  
- boundary segments: 35640 (1.6e+06 µm)
- inner boundary segments: 285 (13093 µm)
- triple points: 1399
+ boundary segments: 34970 (1.6e+06 µm)
+ inner boundary segments: 282 (12911 µm)
+ triple points: 1430
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -130,7 +128,7 @@ plot(grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_04.png" %}
+{% include inline_image.html file="EBSDTutorial_03.png" %}
 </center>
 <h2 id="12">Crystal Shapes</h2>
 <p>In order to make the visualization of crystal orientations more intuitive MTEX supports <a href="CrystalShapes.html">crystal shapes</a>. Those are polyhedrons computed to match the typical shape of ideal crystals. In order to overlay the EBSD map with crystal shapes oriented accordingly to the orientations of the grains we proceed as follows.</p>
@@ -154,7 +152,7 @@ cS = crystalShape
  faces: 20
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_05.png" %}
+{% include inline_image.html file="EBSDTutorial_04.png" %}
 </center>
 <h2 id="13">Pole Figures</h2>
 <p>One of the most important tools for analyzing the orientations in an EBSD map are <a href="OrientationPoleFigure.html">pole figure plots</a>. Those answer the question of how selected crystal directions, here <code class="language-plaintext highlighter-rouge">h</code>, are aligned with respect to specimen directions</p>
@@ -172,7 +170,7 @@ I'm plotting 1250 random orientations out of 152345 given orientations
   The option "all" ensures that all data are plotted
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_06.png" %}
+{% include inline_image.html file="EBSDTutorial_05.png" %}
 </center>
 <h2 id="14">Inverse Pole Figures</h2>
 <p>Analogously one can ask for the crystal directions pointing in a selected specimen direction. The resulting plots are called <a href="OrientationInversePoleFigure.html">inverse pole figures</a>.</p>
@@ -189,7 +187,7 @@ plotIPDF(ebsd('Forsterite').orientations,r,'MarkerSize',5,...
 I'm plotting 12500 random orientations out of 152345 given orientations
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_07.png" %}
+{% include inline_image.html file="EBSDTutorial_06.png" %}
 </center>
 </div>
 </body>

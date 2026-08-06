@@ -1,0 +1,116 @@
+---
+title: "EBSD.lattice"
+
+sidebar: function_reference_sidebar
+permalink: EBSD.lattice.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>EBSD.lattice</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSD__lattice.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/lattice.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>the virtual lattice this EBSD's measurements sit on</p>
+<p>Computed on every access (like ebsd.orientations) rather than cached on the object - simplest to keep correct since pos/unitCell can change underneath it, at the cost of recomputing latticeBasis + the per-pixel index on each call. A caching option could be added later if this ever shows up as a bottleneck.</p>
+<p>This is the single canonical place that turns ebsd.unitCell + ebsd.pos into a lattice basis and a per-pixel integer index - previously reimplemented independently (and not always robustly) in gridIndex, gridComponents, spatialDecompositionGrid, generateUnitCells and calcMesh.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+g = ebsd.lattice
+{% endhighlight %}
+<h2 id="4">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>g</tt>
+         </td>
+         <td>
+            <tt>struct with fields</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>A</tt>
+         </td>
+         <td>
+            <tt>2 x 2 lattice basis, columns are the grid step vectors</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>stencil</tt>
+         </td>
+         <td>
+            <tt>k x 2 integer neighbour offsets (k = 4 square, 6 hex)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dxy</tt>
+         </td>
+         <td>
+            <tt>representative spacing = mean column norm of A</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>origin</tt>
+         </td>
+         <td>
+            <tt>1 x 2 physical position corresponding to ij = [0 0]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ij</tt>
+         </td>
+         <td>
+            <tt>nEbsd x 2 integer lattice index of every pixel, robust</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>to smooth (e.g. trapezoidal) grid distortion</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Note: ij is RELATIVE to this data's own extent. A phase subset therefore</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gets its own origin; do not compare indices across different subsets</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>expecting a common frame.</tt>
+         </td>
+         <td/>
+      </tr>
+   </table>
+</p>
+<h2 id="5">See also</h2>
+<p>
+<a href="EBSD.latticeBasis.html">EBSD.latticeBasis</a> <a href="EBSD.gridIndex.html">EBSD.gridIndex</a>
+</p>
+</div>
+</body>
+</html>

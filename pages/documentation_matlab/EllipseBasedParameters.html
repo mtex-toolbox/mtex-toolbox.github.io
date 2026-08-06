@@ -1,5 +1,5 @@
 ---
-title: Ellipse Based Shape Parameters
+title: "Ellipse Based Shape Parameters"
 
 sidebar: documentation_sidebar
 permalink: EllipseBasedParameters.html
@@ -30,7 +30,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata forsterite silent
 
 % reconstruct grains and smooth them
-[grains, ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',5*degree,'minPixel',10);
+[grains, ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',10);
 
 grains(grains.isBoundary) = [];
 
@@ -46,7 +46,7 @@ plot(grains,'micronbar','off','lineWidth',2)
 <p>The basic command for fitting ellipses is <a href="grain2d.fitEllipse"><code class="language-plaintext highlighter-rouge">fitEllipse</code></a>
 </p>
 {% highlight matlab %}
-[c,a,b] = grains.fitEllipse;
+[c,a,b] = grains(grains.numPixel>200).fitEllipse;
 
 plotEllipse(c,a,b,'lineColor','w','linewidth',2)
 {% endhighlight %}
@@ -139,7 +139,7 @@ setView(ebsd.how2plot)
 <h2 id="9">
 <b>Shortest Caliper Distribution</b>
 </h2>
-<p>Alternatively, we may wonder if the common long axis of grains is suitably represented by the direction normal to the shortest caliper of the grains. This can particularly be the case for aligned rectangular particles where the long axes often switch between the diagonals of the particle. The <a href="caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret of grains represents the projection lengths of grains in relation to a projection direction. With the option <code class="language-plaintext highlighter-rouge">'shortestPerp'</code>, the function returns the normal to the projection direction with the shortest projection length of a grain. In order to plot the result we could use a <a href="vector3d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram</code></a>, compute a density function or use <a href="calcTDF.html"><code class="language-plaintext highlighter-rouge">calcTDF</code></a> with a list of angles and a list of weights or lengths as input.</p>
+<p>Alternatively, we may wonder if the common long axis of grains is suitably represented by the direction normal to the shortest caliper of the grains. This can particularly be the case for aligned rectangular particles where the long axes often switch between the diagonals of the particle. The <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a> or Feret of grains represents the projection lengths of grains in relation to a projection direction. With the option <code class="language-plaintext highlighter-rouge">'shortestPerp'</code>, the function returns the normal to the projection direction with the shortest projection length of a grain. In order to plot the result we could use a <a href="vector3d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram</code></a>, compute a density function or use <a href="calcTDF.html"><code class="language-plaintext highlighter-rouge">calcTDF</code></a> with a list of angles and a list of weights or lengths as input.</p>
 {% highlight matlab %}
 cPerpF = caliper(grains('fo'),'shortestPerp');
 cPerpE = caliper(grains('en'),'shortestPerp');

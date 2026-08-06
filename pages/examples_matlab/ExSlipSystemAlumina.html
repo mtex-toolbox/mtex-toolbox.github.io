@@ -39,7 +39,7 @@ setMTEXpref('zAxisDirection','intoPlane');
 % import data
 path = [mtexExamplePath filesep 'ExPlasticity' filesep ];
 ebsd = EBSD.load([path 'K1_C_16_EBSD_original_bc.txt'],...
-  {'notIndexed',cs,'notIndexed'},'interface','csv','silent');
+  'CS',{'notIndexed',cs,'notIndexed'},'radiant');
 
 % rotate the data in the right reference frame
 rot = rotation.byEuler(90*degree,180*degree,0*degree);
@@ -141,6 +141,11 @@ colormap gray % make the image grayscale
 mtexColorbar
 hold off
 {% endhighlight %}
+
+{% highlight plaintext %}
+Warning: grains.grainSize is depreciated. Please use
+grains.numPixel instead
+{% endhighlight %}
 <center>
 {% include inline_image.html file="ExSlipSystemAlumina_04.png" %}
 </center>
@@ -204,17 +209,17 @@ function ori = updateOri(grains,pseudoSym)
 
 ori = grains.meanOrientation;
 
-cId = 1+calcCluster(ori,'weights',grains.grainSize);
+cId = 1+calcCluster(ori,'weights',grains.numPixel);
 
 % variant 1
-[~,isTrue] = max(accumarray(cId(:),grains.grainSize));
+[~,isTrue] = max(accumarray(cId(:),grains.numPixel));
 
 % variant 2
 %[~,isTrue] = max(accumarray(cId(:),grains.numNeighbors));
 
 ori(cId ~= isTrue) = ori(cId ~= isTrue) * pseudoSym;
 
-ori = mean(ori,'weigths',grains.grainSize,'robust');
+ori = mean(ori,'weigths',grains.numPixel,'robust');
 
 end
 {% endhighlight %}

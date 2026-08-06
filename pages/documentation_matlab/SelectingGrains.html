@@ -1,5 +1,5 @@
 ---
-title: Selecting Grains
+title: "Selecting Grains"
 
 sidebar: documentation_sidebar
 permalink: SelectingGrains.html
@@ -31,11 +31,8 @@ mtexdata forsterite silent
 % restrict it to a subregion of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-% remove all not indexed pixels
-ebsd = ebsd('indexed');
-
 % reconstruct grains
-[grains, ebsd.grainId] = calcGrains(ebsd,'angle',5*degree,'minPixel',5);
+[grains, ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5,'alpha',6);
 
 % smooth them
 grains = smooth(grains,5);
@@ -45,6 +42,8 @@ plot(ebsd('fo'),ebsd('fo').orientations)
 
 % plot the grain boundary on top of it
 hold on
+plot(ebsd('En'),'FaceColor','lightgray')
+plot(ebsd('Di'),'FaceColor','darkgray')
 plot(grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
@@ -56,12 +55,24 @@ hold off
 {% highlight matlab %}
 selectInteractive(grains,'lineColor','gold')
 
-% this simulates a mouse click
-pause(1)
-simulateClick(9000,3500)
-pause(1)
+clear global indSelected
+global indSelected
 
-global indSelected;
+% this simulates a mouse click - it goes through java.awt.Robot, which needs
+% permission to inject input events and is refused on some systems, so fall
+% back to selecting the grain at the same position directly
+pause(1)
+try
+  simulateClick(9000,3500)
+  pause(1)
+catch
+  % permission to inject input events was refused
+end
+
+if isempty(indSelected)
+  indSelected = grains.id2ind(grains.findByLocation([9000 3500]));
+end
+
 grains(indSelected)
 
 hold on
@@ -70,19 +81,19 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Grain selected: 92
+Grain selected: 65
  
 ans = grain2d (y↑→x)
  
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1       1     235  Forsterite       mmm  LightSkyBlue
+ Phase  Grains  Pixels    Mineral  Symmetry         Color
+     2       1     239  Enstatite       mmm  DarkSeaGreen
  
- boundary segments: 135 (5521 µm)
- inner boundary segments: 1 (12 µm)
- triple points: 5
+ boundary segments: 113 (5115 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 6
  
- Id   Phase   Pixels       meanRotation         GOS
- 92       1      235   (181°,152°,258°)   0.0137728
+ Id   Phase   Pixels      meanRotation         GOS
+ 65       2      239   (160°,73°,327°)   0.0074195
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_02.png" %}
@@ -96,7 +107,7 @@ hold on
 plot(grains(x,y).boundary,'linewidth',4,'linecolor','blue')
 
 plot(x,y,'marker','s','markerfacecolor','k',...
-  'markersize',10,'markeredgecolor','w')
+  'markersize',10,'markeredgecolor','w','DisplayName','A')
 hold off
 {% endhighlight %}
 <center>
@@ -115,21 +126,17 @@ hold off
 {% highlight plaintext %}
 grains_selected = grain2d (y↑→x)
  
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1       7    1140  Forsterite       mmm  LightSkyBlue
+ Phase  Grains  Pixels    Mineral  Symmetry         Color
+     2       3     504  Enstatite       mmm  DarkSeaGreen
  
- boundary segments: 599 (23014 µm)
- inner boundary segments: 1 (12 µm)
- triple points: 24
+ boundary segments: 256 (10710 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 19
  
- Id   Phase   Pixels       meanRotation      GOS
- 11       1       63   (177°,140°,249°)    0.013
- 52       1      321   (177°,146°,251°)    0.014
- 60       1        7     (13°,13°,266°)   0.0084
- 68       1      258   (166°,147°,259°)    0.018
- 79       1      123     (14°,42°,279°)    0.041
- 92       1      235   (181°,152°,258°)    0.014
- 96       1      133      (1°,47°,279°)   0.0083
+ Id   Phase   Pixels      meanRotation      GOS
+ 28       2      205   (168°,83°,316°)   0.0056
+ 65       2      239   (160°,73°,327°)   0.0074
+ 79       2       60   (170°,84°,315°)   0.0059
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_04.png" %}
@@ -154,9 +161,9 @@ plot(grains,grain_area)
 
 {% highlight plaintext %}
 max_area =
-   4.1272e+06
+   4.1050e+06
 max_id =
-    38
+    39
 {% endhighlight %}
 <p>The number <code class="language-plaintext highlighter-rouge">max_id</code> is the position of the grain with a maximum area within the variable <code class="language-plaintext highlighter-rouge">grains</code>. We can access this specific grain by direct indexing</p>
 {% highlight matlab %}
@@ -169,12 +176,12 @@ ans = grain2d (y↑→x)
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       1    1448  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 222 (8622 µm)
+ boundary segments: 193 (8602 µm)
  inner boundary segments: 0 (0 µm)
  triple points: 5
  
  Id   Phase   Pixels       meanRotation         GOS
- 38       1     1448   (166°,127°,259°)   0.0135419
+ 39       1     1448   (166°,127°,259°)   0.0135419
 {% endhighlight %}
 <p>and so we can plot it</p>
 {% highlight matlab %}
@@ -218,8 +225,8 @@ grains(1:5).phase
 {% highlight plaintext %}
 ans =
      1
-     3
      1
+     3
      3
      3
 {% endhighlight %}
@@ -240,11 +247,11 @@ grains('forsterite')
 ans = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1      61   14010  Forsterite       mmm  LightSkyBlue
+     1      62   14010  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 3543 (134904 µm)
- inner boundary segments: 15 (317 µm)
- triple points: 136
+ boundary segments: 3159 (134485 µm)
+ inner boundary segments: 14 (572 µm)
+ triple points: 135
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -263,15 +270,15 @@ selected_grains = grain2d (y↑→x)
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       4    5248  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 886 (34740 µm)
+ boundary segments: 829 (34661 µm)
  inner boundary segments: 0 (0 µm)
  triple points: 43
  
  Id   Phase   Pixels       meanRotation      GOS
- 38       1     1448   (166°,127°,259°)    0.014
- 47       1     1047     (89°,99°,224°)   0.0077
- 50       1     1208    (153°,68°,237°)   0.0081
- 82       1     1545    (167°,81°,251°)    0.013
+ 39       1     1448   (166°,127°,259°)    0.014
+ 48       1     1047     (89°,99°,224°)   0.0077
+ 51       1     1208    (153°,68°,237°)   0.0081
+ 84       1     1545    (167°,81°,251°)    0.013
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_10.png" %}
@@ -295,12 +302,18 @@ ebsd(grains(33))
 {% highlight plaintext %}
 ans = EBSD (y↑→x)
  
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1     42 (100%)  Forsterite  LightSkyBlue       mmm                         
+ Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
+     3      6 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
- Properties: bands, bc, bs, error, mad, grainId
+    Id   Phase            orientation   bands    bc    bs   error   mad   grainId
+ 59426       3   (165.2°,77.3°,18.2°)       7   135   208       0   0.5        33
+ 60156       3   (165.4°,77.6°,18.5°)       7   111   185       0   0.6        33
+ 60157       3   (164.9°,77.4°,18.2°)       7   131   220       0   0.9        33
+ 60158       3     (165°,77.5°,18.5°)       7   120   193       0   0.5        33
+ 60888       3   (165.3°,77.5°,18.1°)       7   110   189       0   0.6        33
+ 60889       3   (165.5°,77.3°,18.2°)       7   140   242       0   0.6        33
  Scan unit : um
- X x Y x Z : [6750, 7300] x [3550, 4150] x [0, 0]
+ X x Y x Z : [6550, 6650] x [4050, 4150] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>and is equivalent to the command</p>
@@ -311,12 +324,18 @@ ebsd(ebsd.grainId == 33)
 {% highlight plaintext %}
 ans = EBSD (y↑→x)
  
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     1     42 (100%)  Forsterite  LightSkyBlue       mmm                         
+ Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
+     3      6 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
- Properties: bands, bc, bs, error, mad, grainId
+    Id   Phase            orientation   bands    bc    bs   error   mad   grainId
+ 59426       3   (165.2°,77.3°,18.2°)       7   135   208       0   0.5        33
+ 60156       3   (165.4°,77.6°,18.5°)       7   111   185       0   0.6        33
+ 60157       3   (164.9°,77.4°,18.2°)       7   131   220       0   0.9        33
+ 60158       3     (165°,77.5°,18.5°)       7   120   193       0   0.5        33
+ 60888       3   (165.3°,77.5°,18.1°)       7   110   189       0   0.6        33
+ 60889       3   (165.5°,77.3°,18.2°)       7   140   242       0   0.6        33
  Scan unit : um
- X x Y x Z : [6750, 7300] x [3550, 4150] x [0, 0]
+ X x Y x Z : [6550, 6650] x [4050, 4150] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>The following picture plots the largest grains together with its individual orientation measurements.</p>

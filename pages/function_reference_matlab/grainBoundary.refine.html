@@ -1,0 +1,76 @@
+---
+title: "grainBoundary.refine"
+
+sidebar: function_reference_sidebar
+permalink: grainBoundary.refine.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>grainBoundary.refine</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_grainBoundary__refine.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grainBoundary/refine.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>resample each chain at a constant spacing along its length</p>
+<h2 id="3">Description</h2>
+<p>Places new vertices at equal arc length along each chain, between its two junctions, which stay exactly where they are. The new vertices lie on the old boundary, so this changes nothing about its shape - it only changes how it is sampled.</p>
+<p>This is what makes a subsequent grain2d/smooth work properly. Subdividing each segment, as grain2d/refineBoundary used to do on its own, preserves the staircase of the pixel grid and only makes it finer. Resampling at equal arc length instead gives the smoothing evenly spaced degrees of freedom that are not tied to the grid.</p>
+<p>grainId and phaseId are constant along a chain and carry over exactly. ebsdId and misrotation belong to a specific pair of pixels, which a resampled segment no longer corresponds to - those are inherited from whichever original segment covers the new segment's midpoint.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+gB_r = refine(gB)
+gB_r = refine(gB,delta)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>gB</tt>
+         </td>
+         <td>
+            <tt><a href="grainBoundary.grainBoundary.html">grainBoundary</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>delta</tt>
+         </td>
+         <td>
+            <tt>target segment length (default: the median segment length)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>gB_r</tt>
+         </td>
+         <td>
+            <tt><a href="grainBoundary.grainBoundary.html">grainBoundary</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="grainBoundary.simplify.html">grainBoundary.simplify</a> <a href="grain2d.refineBoundary.html">grain2d.refineBoundary</a> <a href="grain2d.smooth.html">grain2d.smooth</a>
+</p>
+</div>
+</body>
+</html>

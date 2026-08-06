@@ -1,5 +1,5 @@
 ---
-title: Orientation Dependent Functions
+title: "Orientation Dependent Functions"
 
 sidebar: documentation_sidebar
 permalink: SO3FunConcept.html
@@ -39,7 +39,7 @@ SO3F = SO3FunHandle (432 → y↑→x)
   eval: @(ori)angle(ori)./degree
 {% endhighlight %}
 <p>Many more methods for defining orientation dependent functions are discussed <a href="SO3FunDefinition.html">here</a>.</p>
-<p>The entire information about the orientation dependent function is now stored in the variable <code class="language-plaintext highlighter-rouge">SO3F</code>. In order to determine its value for a specific orientation <code class="language-plaintext highlighter-rouge">ori</code> the function <a href="SO3Fun.eval.html"><code class="language-plaintext highlighter-rouge">eval(ori)</code></a> is used.</p>
+<p>The entire information about the orientation dependent function is now stored in the variable <code class="language-plaintext highlighter-rouge">SO3F</code>. In order to determine its value for a specific orientation <code class="language-plaintext highlighter-rouge">ori</code> the function <a href="SO3FunHandle.eval.html"><code class="language-plaintext highlighter-rouge">eval(ori)</code></a> is used.</p>
 {% highlight matlab %}
 ori = orientation.rand(cs)
 SO3F.eval(ori)
@@ -80,7 +80,7 @@ Warning: Contour not rendered for constant ZData
 <center>
 {% include inline_image.html file="SO3FunConcept_02.png" %}
 </center>
-<p>as obviously, the function value is constant in each section. Many more methods for visualizing orientation dependent functions are discussed <a href="SO3FunVisualization.html">here</a>.</p>
+<p>as obviously, the function value is constant in each section. Many more methods for visualizing orientation dependent functions are discussed <a href="ODFPlot.html">here</a>.</p>
 <h2 id="8">Computing with Orientation Dependent Functions</h2>
 <p>The power of representing an orientation dependent functions as a variables of type <a href="SO3Fun.SO3Fun.html">SO3Fun</a> is that we may apply to it a <a href="SO3FunOperations.html">large number of analysis tools</a>. In particular, one can add, subtract and multiply orientation dependent functions, plot them in various projections or detect the local minima or maxima. In the case of our example function the local maxima refers to the orientations with maximum rotational angle in cubic symmetry. We may compute them by the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>.</p>
 {% highlight matlab %}
@@ -89,7 +89,7 @@ Warning: Contour not rendered for constant ZData
 
 {% highlight plaintext %}
 value =
-   62.7993
+   62.7994
    62.7993
    62.7993
    62.7993
@@ -100,18 +100,29 @@ ori = orientation (432 → y↑→x)
   size: 6 x 1
  
   Bunge Euler angles in degree
-         phi1         Phi        phi2
-          135          45         180
-      270.001     44.9999     44.9994
-      54.7356          60     324.736
-      44.9997     44.9999         270
-      90.0002     45.0001         225
-  0.000124236          45         315
+     phi1     Phi    phi2
+  90.0002 45.0001     225
+      180      45     225
+  270.001 44.9999 44.9994
+  225.001 44.9998 89.9993
+  125.264 59.9998 215.265
+  134.999 44.9999     180
 {% endhighlight %}
 <p>We observe that there are exactly six symmetrically not equivalent orientations that realize an orientation angle of about 62.994 degree and form the vertices of the fundamental region in orientation space</p>
 {% highlight matlab %}
 color = ind2color(repmat(1:length(ori),numSym(cs),1));
 plot(ori.symmetrise,color,'axisAngle','filled','markerSize',20,'restrict2FundamentalRegion')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Setting the "WindowButtonDownFcn" property is not
+permitted while this mode is active. 
+Warning: Setting the "WindowButtonUpFcn" property is not
+permitted while this mode is active. 
+Warning: Setting the "KeyPressFcn" property is not permitted
+while this mode is active. 
+Warning: Setting the "WindowScrollWheelFcn" property is not
+permitted while this mode is active.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SO3FunConcept_03.png" %}

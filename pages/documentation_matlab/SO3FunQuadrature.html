@@ -1,5 +1,5 @@
 ---
-title: Approximation of Orientation Dependent Functions
+title: "Approximation of Orientation Dependent Functions"
 
 sidebar: documentation_sidebar
 permalink: SO3FunQuadrature.html
@@ -25,7 +25,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>Assume we have given some evaluation routine \(f\) that maps orientations to numbers. This could be an rotational function of class <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code>, a <code class="language-plaintext highlighter-rouge">@function_handle</code>, a more complex Matlab function or a physical experiment.</p>
 <p>On this page we will explain how to compute the corresponding <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> and <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code> that approximates \(f\) reasonable well.</p>
-<p>This approximation process is similarly to <a href="SO3FunApproximation.html">Approximating Orientation Dependent Functions from Discrete Data</a>. where the given data are a set of orientations with function values.</p>
+<p>This approximation process is similarly to <a href="SO3FunApproximationTheory.html">Approximating Orientation Dependent Functions from Discrete Data</a>. where the given data are a set of orientations with function values.</p>
 <p>Lets load an orientation dependent function as <a href="SO3Fun.SO3Fun.html">SO3Fun</a>.</p>
 {% highlight matlab %}
 mtexdata dubna
@@ -35,7 +35,7 @@ plot(odf,'sigma')
 
 {% highlight plaintext %}
 pf = PoleFigure (y↑→x)
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c*)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
  
   h = (022̅1), r = 72 x 19 points
   h = (101̅0), r = 72 x 19 points
@@ -73,7 +73,7 @@ odf = SO3FunRBF (Quartz → y↑→x)
 </ul>
 </div>
 <p>Both of them are defined with respect to some bandwidth \(N\) and they are exact for all band-limited functions of this specific bandwidth. That means, if we perform quadrature on any <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> of bandwidth N with one of this schemes, then we will get exactly this function back.</p>
-<p>In MTEX we use the command <a href="SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> into an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
+<p>In MTEX we use the command <a href="SO3FunHarmonic.SO3FunHarmonic.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> to expand any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> into an <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code>.</p>
 {% highlight matlab %}
 SO3F = SO3FunHarmonic(odf)
 plot(SO3F,'sigma')
@@ -171,7 +171,7 @@ ans =
 <p>This least squares problem can also be written in matrix vector notation \( \mathrm{argmin}_{c} \| K \cdot c - v \|, \) where \(x=(c_1,\dots,c_N)^T\), \(v=(v_1,\dots,v_M)^T\) and \(K\) is the kernel matrix \([\Psi(\cos\frac{\omega({\bf{x}}_m,{\bf{R}}_n)}{2})]_{m,n}\).</p>
 <p>This least squares problem can be solved by the <code class="language-plaintext highlighter-rouge">lsqr</code> method from MATLAB, which efficiently seeks for roots of the derivative of the given functional (also known as normal equation).</p>
 <p>Alternatively there is also a modified least square method <code class="language-plaintext highlighter-rouge">mlsq</code>, which search for a solution \(c_1,\dots,c_N\) that satisfies \(c&gt;0\) and \(\sum_{n=1}^N c_n = 1\). This method can be used if the underlying function is a density, i.e. it is nonnegative and has mean 1, which can be applied if we try to approximate a density function.</p>
-<p>In MTEX we use the command <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
+<p>In MTEX we use the command <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> to represent any <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.SO3Fun.html">SO3Fun</a></code> or <code class="language-plaintext highlighter-rouge">@function_handle</code> by an <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
 <p>In the following we want to use this to transform a given <code class="language-plaintext highlighter-rouge"><a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a></code> back into a <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
 {% highlight matlab %}
 SO3F3 = SO3FunRBF(SO3F,'density')
@@ -180,6 +180,9 @@ plot(SO3F3,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may
+not have converged to the optimum yet. 
+ 
 SO3F3 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
@@ -211,6 +214,9 @@ plot(SO3F4,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may
+not have converged to the optimum yet. 
+ 
 SO3F4 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
@@ -229,6 +235,9 @@ plot(SO3F5,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may
+not have converged to the optimum yet. 
+ 
 SO3F5 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
@@ -244,6 +253,9 @@ plot(SO3F6,'sigma')
 {% endhighlight %}
 
 {% highlight plaintext %}
+Warning: Maximum number of iterations reached, result may
+not have converged to the optimum yet. 
+ 
 SO3F6 = SO3FunRBF (Quartz → y↑→x)
  
   multimodal components
@@ -282,7 +294,7 @@ ans =
 <p>So, we will try to determine the coefficients \(c_1,\dots,c_M\) such that</p>
 <p>\[ \sum\limits_{n=0}^N \sum\limits_{k,l=-n}^n | \hat{f}_n^{k,l} - \hat{g}_n^{k,l} |^2 \]</p>
 <p>is minimized.</p>
-<p>In MTEX we call this by adding the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> to the <a href="SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>-command.</p>
+<p>In MTEX we call this by adding the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> to the <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a>-command.</p>
 {% highlight matlab %}
 SO3F7 = SO3FunRBF(SO3F,'harmonic')
 plot(SO3F7,'sigma')

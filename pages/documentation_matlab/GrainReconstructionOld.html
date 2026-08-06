@@ -1,5 +1,5 @@
 ---
-title: Grain Reconstruction
+title: "Grain Reconstruction"
 
 sidebar: documentation_sidebar
 permalink: GrainReconstructionOld.html
@@ -42,7 +42,7 @@ plot(ebsd)
 ebsd = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed                                                 
+     0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
      3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
@@ -75,27 +75,27 @@ grains = calcGrains(ebsd,'angle',10*degree)
 grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0    1139    4052  notIndexed                        
-     1     244   14093  Forsterite       mmm  LightSkyBlue
-     2     177    1397   Enstatite       mmm  DarkSeaGreen
-     3     104     759    Diopside     12/m1     Goldenrod
+     0       1     258  notIndexed                    none
+     1     107   14093  Forsterite       mmm  LightSkyBlue
+     2      32    1397   Enstatite       mmm  DarkSeaGreen
+     3      71     759    Diopside     12/m1     Goldenrod
  
- boundary segments: 11007 (523141 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 905
+ boundary segments: 3921 (188891 µm)
+ inner boundary segments: 1 (19 µm)
+ triple points: 250
  
  Properties: meanRotation, GOS
 {% endhighlight %}
 <p>The reconstructed grains are stored in the variable <code class="language-plaintext highlighter-rouge">grains</code>. Note that also the notIndexed measurements are grouped into grains. This allows later to analyze the shape of these unindexed regions.</p>
 <p>To visualize the grains we can plot its boundaries by the command <a href="grainBoundary.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a>.</p>
 {% highlight matlab %}
-% start overide mode
+% start override mode
 hold on
 
 % plot the boundary of all grains
 plot(grains.boundary,'linewidth',1.5)
 
-% stop overide mode
+% stop override mode
 hold off
 {% endhighlight %}
 <center>
@@ -114,11 +114,11 @@ hold off
 <p>The extremal case is to say whenever there is a not indexed measurement we actually do not know anything and allow MTEX to freely guess what happens there. This is realized by removing all not indexed measurements or, equivalently, computing the grains only from the indexed measurements</p>
 {% highlight matlab %}
 % compute the grains from the indexed measurements only
-grains = calcGrains(ebsd('indexed'))
+grains = calcGrains(ebsd)
 
 plot(ebsd)
 
-% start overide mode
+% start override mode
 hold on
 
 % plot the boundary of all grains
@@ -130,7 +130,7 @@ plot(grains(11300,6100).boundary,'linecolor','DarkGreen','linewidth',5,...
 plot(grains(12000,4000).boundary,'linecolor','DarkBlue','linewidth',5,...
   'DisplayName','grain B')
 
-% stop overide mode
+% stop override mode
 hold off
 {% endhighlight %}
 
@@ -138,13 +138,14 @@ hold off
 grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1     103   14093  Forsterite       mmm  LightSkyBlue
+     0       1     258  notIndexed                    none
+     1     105   14093  Forsterite       mmm  LightSkyBlue
      2      32    1397   Enstatite       mmm  DarkSeaGreen
      3      71     759    Diopside     12/m1     Goldenrod
  
- boundary segments: 4258 (185398 µm)
+ boundary segments: 3902 (187911 µm)
  inner boundary segments: 12 (605 µm)
- triple points: 240
+ triple points: 244
  
  Properties: meanRotation, GOS
 {% endhighlight %}
@@ -160,7 +161,7 @@ plot(grains,'linewidth',2)
 </center>
 <p>Inside of grain B, there is a large not indexed region and we might argue that is not very meaningful to assign such a large region to some grain but should have kept it not indexed. In order to decide which not indexed region is large enough to be kept not indexed and which not indexed regions can be filled it is helpful to know that the command calcGrains also separates the not indexed regions into "grains" and we can standard grain functions like area or perimeter to analyze these regions.</p>
 {% highlight matlab %}
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
+[grains,ebsd] = calcGrains(ebsd);
 notIndexed = grains('notIndexed')
 {% endhighlight %}
 
@@ -168,13 +169,14 @@ notIndexed = grains('notIndexed')
 notIndexed = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Color
-     0    1139    4052  notIndexed                 
+     0       1     258  notIndexed             none
  
- boundary segments: 8818 (436298 µm)
+ boundary segments: 93 (4443 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 868
+ triple points: 6
  
- Properties: meanRotation, GOS
+  Id   Phase   Pixels       meanRotation   GOS
+ 103       0      258   (NaN°,NaN°,NaN°)   NaN
 {% endhighlight %}
 <p>We see that we have 1139 not indexed regions. A good measure for compact regions vs. cluttered regions is the quotient between the area and the boundary length. Lets, therefore, plot the "not indexed grains" colorized by this quotient</p>
 {% highlight matlab %}
@@ -195,19 +197,19 @@ toRemove = notIndexed(notIndexed.numPixel ./ notIndexed.boundarySize<0.8);
 ebsd(toRemove) = [];
 
 % and perform grain reconstruction with the reduces EBSD data set
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd);
+[grains,ebsd] = calcGrains(ebsd);
 
 plot(grains,'lineWidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainReconstructionOld_06.png" %}
 </center>
-<p>We see that that all the narrow not indexed regions have been assigned to the surounding grains while the large regions have been left unindexed. Finally, the image with the raw EBSD data and on top the grain boundaries.</p>
+<p>We see that that all the narrow not indexed regions have been assigned to the surrounding grains while the large regions have been left unindexed. Finally, the image with the raw EBSD data and on top the grain boundaries.</p>
 {% highlight matlab %}
 % plot the raw data
 plot(ebsd)
 
-% start overide mode
+% start override mode
 hold on
 
 % plot the boundary of all grains
@@ -219,7 +221,7 @@ plot(grains(11300,6100).boundary,'linecolor','DarkGreen','linewidth',4,...
 plot(grains(12000,4000).boundary,'linecolor','DarkBlue','linewidth',4,...
   'DisplayName','grain B')
 
-% stop overide mode
+% stop override mode
 hold off
 {% endhighlight %}
 <center>
@@ -244,7 +246,7 @@ plot(ebsdP,'micronBar','off')
 legend off
 
 % compute the grains
-grains = calcGrains(ebsdP('indexed'));
+grains = calcGrains(ebsdP,'minPixel',2,'alpha',2.1);
 
 % plot the grain boundary
 hold on

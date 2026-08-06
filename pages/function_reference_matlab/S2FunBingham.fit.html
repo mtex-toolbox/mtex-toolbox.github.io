@@ -1,5 +1,5 @@
 ---
-title: S2FunBingham.fit
+title: "S2FunBingham.fit"
 
 sidebar: function_reference_sidebar
 permalink: S2FunBingham.fit.html
@@ -25,11 +25,12 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>function to fit Bingham parameters</p>
 <h2 id="3">Description</h2>
-<p>confidence ellipse for the mean direction based on Tanaka (1999) <a href="https://doi.org/10.1186/BF03351601">https://doi.org/10.1186/BF03351601</a>
+<p>confidence ellipse for the mean direction based on Tanaka / asymptotic covariance of the maximum eigenvector (1999) <a href="https://doi.org/10.1186/BF03351601">https://doi.org/10.1186/BF03351601</a>
 </p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 BS2 = S2FunBingham.fit(v)
+[BS2, ab, rot] = S2FunBingham.fit(v,'p',0.95)
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -55,6 +56,22 @@ BS2 = S2FunBingham.fit(v)
             <tt><a href="S2FunBingham.S2FunBingham.html">S2FunBingham</a></tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>ab</tt>
+         </td>
+         <td>
+            <tt>semi axes length of the confidence ellipse (in radian)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rot</tt>
+         </td>
+         <td>
+            <tt>orientation of the confidence ellipse, to be used with |ellipse|</tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="7">Options</h2>
@@ -62,10 +79,10 @@ BS2 = S2FunBingham.fit(v)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>ConfElli</tt>
+            <tt>p</tt>
          </td>
          <td>
-            <tt>confidence level p (default at 0.95)</tt>
+            <tt>confidence level p of the ellipse computed (default at 0.95)</tt>
          </td>
       </tr>
    </table>
@@ -80,11 +97,19 @@ rotation.byAxisAngle(vector3d.X,rand(N,1)*2*pi) * vector3d.Y;
 {% endhighlight %}
 <p>fit a Bingham distribution</p>
 {% highlight matlab %}
-S2F = S2FunBingham.fit(v)
+[S2F, ab, rot] = S2FunBingham.fit(v)
 {% endhighlight %}
 
 {% highlight plaintext %}
 S2F = S2FunBingham (y↑→x)
+ab =
+    0.0507    2.1552
+ 
+rot = rotation
+ 
+  Bunge Euler angles in degree
+     phi1     Phi    phi2
+  165.975 11.1085 195.629
 {% endhighlight %}
 <p>visualization</p>
 {% highlight matlab %}
@@ -92,6 +117,7 @@ plot(S2F)
 mtexColorMap LaboTeX
 hold on
 plot(v,'Markercolor','k','MarkerSize',3)
+ellipse(rot,ab(1),ab(2))
 hold off
 {% endhighlight %}
 <center>

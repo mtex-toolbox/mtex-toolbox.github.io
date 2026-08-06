@@ -1,5 +1,5 @@
 ---
-title: EBSD.calcGrains
+title: "EBSD.calcGrains"
 
 sidebar: function_reference_sidebar
 permalink: EBSD.calcGrains.html
@@ -26,7 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>grains reconstruction from 2d EBSD data</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-[grains, ebsd.grainId] = calcGrains(ebsd,'angle',10*degree)
+[grains, ebsd] = calcGrains(ebsd, 'angle', 10*degree, 'minPixel', 2, 'alpha', 3.7)
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -34,21 +34,6 @@ To make changes, update the MATLAB code and republish this document.
 lagb = 2*degree;
 hagb = 10*degree;
 grains = calcGrains(ebsd,'angle',[hagb lagb])
-{% endhighlight %}
-
-{% highlight matlab %}
-% allow grains to grow into not indexed regions
-grains = calcGrains(ebsd('indexed'),'angle',10*degree)
-{% endhighlight %}
-
-{% highlight matlab %}
-% do not allow grains to grow into not indexed regions
-grains = calcGrains(ebsd,'unitCell')
-{% endhighlight %}
-
-{% highlight matlab %}
-% follow non convex outer boundary
-grains = calcGrains(ebsd,'boundary','tight')
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -90,10 +75,10 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
       </tr>
       <tr>
          <td width="100px">
-            <tt>ebsd.grainId</tt>
+            <tt>ebsd</tt>
          </td>
          <td>
-            <tt>grainId of each pixel</tt>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> with additional property grainId</tt>
          </td>
       </tr>
    </table>
@@ -103,10 +88,10 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>threshold, angle</tt>
+            <tt>angle</tt>
          </td>
          <td>
-            <tt>array of threshold angles per phase of mis/disorientation in radians</tt>
+            <tt>misorientation angle that indicates a grain boundary</tt>
          </td>
       </tr>
       <tr>
@@ -119,18 +104,10 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
       </tr>
       <tr>
          <td width="100px">
-            <tt>boundary</tt>
+            <tt>alpha</tt>
          </td>
          <td>
-            <tt>bounds the spatial domain ('convexhull', 'tight')</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>maxDist</tt>
-         </td>
-         <td>
-            <tt>maximum distance to for two pixels to be in one grain (default inf)</tt>
+            <tt>fill distances into not indexed regions</tt>
          </td>
       </tr>
       <tr>
@@ -177,6 +154,54 @@ grains = calcGrains(ebsd,'method','mcl',[p maxIt],'soft',[angle delta])
          <td>
             <tt>use qHull for the Voronoi decomposition</tt>
          </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>verbose</tt>
+         </td>
+         <td>
+            <tt>report what the criterion did, if it has anything to say -</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>currently only |'fmc'|, which prints its cluster hierarchy</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>delaunay</tt>
+         </td>
+         <td>
+            <tt>use a true circumradius-based alpha-complex (exact, not a</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>raster approximation) instead of the default morphological</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>closing to partition the spatial domain</tt>
+         </td>
+         <td>
+            <tt>see</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>spatialDecompositionAlpha.m. Useful for large alpha, where</tt>
+         </td>
+         <td/>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>the default's disk structuring element gets slow.</tt>
+         </td>
+         <td/>
       </tr>
    </table>
 </p>

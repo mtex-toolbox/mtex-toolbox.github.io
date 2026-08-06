@@ -1,5 +1,5 @@
 ---
-title: grain2d.refineBoundary
+title: "grain2d.refineBoundary"
 
 sidebar: function_reference_sidebar
 permalink: grain2d.refineBoundary.html
@@ -24,11 +24,15 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>refine grain boundary</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>Resamples the grain boundaries at a constant spacing, so that the vertices are spread evenly along each boundary instead of sitting on the corners of the pixel grid. Junctions stay exactly where they are. This is the step that lets grain2d/smooth produce a genuinely smooth boundary rather than a finer staircase.</p>
+<p>Only grains.boundary is resampled. Since refine keeps just the junctions at both ends of a chain and mints fresh vertices in between, a vertex where the inner boundary ends on the outer one does not survive - grains.innerBoundary is left as it was and may hang off a vertex the outer boundary no longer visits. Unlike simplifyBoundary and reduceBoundary, which protect it.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
+grains = refineBoundary(grains)
 grains = refineBoundary(grains,segLength)
 {% endhighlight %}
-<h2 id="4">Input</h2>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -44,12 +48,12 @@ grains = refineBoundary(grains,segLength)
             <tt>delta</tt>
          </td>
          <td>
-            <tt>new segment length</tt>
+            <tt>new segment length (default: half the median segment length)</tt>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -61,6 +65,10 @@ grains = refineBoundary(grains,segLength)
          </td>
       </tr>
    </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="grainBoundary.refine.html">grainBoundary.refine</a> <a href="grain2d.simplifyBoundary.html">grain2d.simplifyBoundary</a> <a href="grain2d.reduceBoundary.html">grain2d.reduceBoundary</a> <a href="grain2d.smooth.html">grain2d.smooth</a>
 </p>
 </div>
 </body>

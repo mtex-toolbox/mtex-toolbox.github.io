@@ -28,7 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata csl
 
 % grain segmentation
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'));
+[grains,ebsd] = calcGrains(ebsd);
 
 % grain smoothing
 grains = smooth(grains,5);
@@ -41,7 +41,7 @@ plot(grains,grains.meanOrientation)
 ebsd = EBSD (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    5 (0.0032%)  notIndexed                                                 
+     0    5 (0.0032%)  notIndexed          none                                   
     -1  154107 (100%)        iron  LightSkyBlue      m-3m                         
  
  Properties: ci, error, iq
@@ -85,7 +85,7 @@ hold off
 gB = grainBoundary
  
  Segments    length  mineral 1  mineral 2
-    20356  16362 µm       iron       iron
+    20356  16342 µm       iron       iron
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CSLBoundaries_03.png" %}
@@ -121,7 +121,7 @@ hold off
 <center>
 {% include inline_image.html file="CSLBoundaries_05.png" %}
 </center>
-<p>Finaly, we check for all other types of CSL boundaries and overlay them with our plot.</p>
+<p>Finally, we check for all other types of CSL boundaries and overlay them with our plot.</p>
 {% highlight matlab %}
 delta = 5*degree;
 gB5 = gB(gB.isTwinning(CSL(5,ebsd.CS),delta));

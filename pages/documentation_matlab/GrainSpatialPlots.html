@@ -1,5 +1,5 @@
 ---
-title: Plotting
+title: "Plotting"
 
 sidebar: documentation_sidebar
 permalink: GrainSpatialPlots.html
@@ -29,7 +29,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata forsterite silent
 
 % perform grain segmentation
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd('indexed'),'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5);
 {% endhighlight %}
 <h2 id="2">Phase maps</h2>
 <p>When using the <a href="grain2d.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command without additional argument the associated color is defined by color stored in the crystal symmetry for each phase</p>
@@ -176,7 +176,7 @@ ebsd_maxGrain = ebsd(grains(id));
 
 {% highlight plaintext %}
 id =
-   279
+   294
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -201,7 +201,7 @@ hold off
 mtexdata csl
 
 % compute and plot grains
-[grains,ebsd.grainId] = calcGrains(ebsd,'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5);
 grains = smooth(grains,5);
 plot(grains,grains.meanOrientation,'micronbar','off','figSize','large','region',[50 300 100 250])
 
@@ -222,7 +222,7 @@ hold off
 ebsd = EBSD (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    5 (0.0032%)  notIndexed                                                 
+     0    5 (0.0032%)  notIndexed          none                                   
     -1  154107 (100%)        iron  LightSkyBlue      m-3m                         
  
  Properties: ci, error, iq

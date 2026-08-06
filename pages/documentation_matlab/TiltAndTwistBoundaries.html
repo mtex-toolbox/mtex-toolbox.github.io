@@ -1,5 +1,5 @@
 ---
-title: Tilt and Twist Boundaries
+title: "Tilt and Twist Boundaries"
 
 sidebar: documentation_sidebar
 permalink: TiltAndTwistBoundaries.html
@@ -30,8 +30,7 @@ To make changes, update the MATLAB code and republish this document.
 mtexdata forsterite silent
 
 % compute subgrain boundaries with 1 degree threshold angle
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),...
-  'threshold',[1*degree, 15*degree],'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'threshold',[1*degree, 15*degree],'minPixel',5);
 
 % lets smooth the grain boundaries a bit
 grains = smooth(grains,5);
@@ -108,7 +107,7 @@ oriGB = ebsd('id',subGB.ebsdId).orientations
 
 {% highlight plaintext %}
 oriGB = orientation (Forsterite → y↑→x)
-  size: 31909 x 2
+  size: 31800 x 2
 {% endhighlight %}
 <p>results in a \(N \times 2\) matrix of orientations with rows corresponding to the boundary segments and two columns for both sides of the boundary. The misorientation axis in specimen coordinates is again computed by the command <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a>
 </p>
@@ -120,8 +119,8 @@ plot(axS,'MarkerAlpha',0.2,'MarkerSize',2,'figSize','small')
 {% endhighlight %}
 
 {% highlight plaintext %}
-axS = vector3d (y↑→x)
- size: 31909 x 1
+axS = vector3d (y↓→x)
+ size: 31800 x 1
  antipodal: true
 {% endhighlight %}
 <center>
@@ -138,10 +137,10 @@ annotate(pos)
 {% endhighlight %}
 
 {% highlight plaintext %}
-pos = vector3d (y↑→x)
+pos = vector3d (y↓→x)
  antipodal: true
       x     y     z
-  0.194 0.706 0.681
+  0.197 0.707 0.679
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiltAndTwistBoundaries_05.png" %}

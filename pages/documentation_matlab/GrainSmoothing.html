@@ -1,5 +1,5 @@
 ---
-title: Grain Boundary Smoothing
+title: "Grain Boundary Smoothing"
 
 sidebar: documentation_sidebar
 permalink: GrainSmoothing.html
@@ -28,7 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>While we used <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> before, here we will illustrate the different options.</p>
 {% highlight matlab %}
 mtexdata csl
-[grains, ebsd.grainId] = ebsd.calcGrains('minPixel',3);
+[grains, ebsd] = ebsd.calcGrains('minPixel',3);
 
 % the data was acquired on a regular grid;
 plot(ebsd,ebsd.orientations,'micronbar','off')
@@ -42,7 +42,7 @@ axis([313 353 140 156])
 ebsd = EBSD (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    5 (0.0032%)  notIndexed                                                 
+     0    5 (0.0032%)  notIndexed          none                                   
     -1  154107 (100%)        iron  LightSkyBlue      m-3m                         
  
  Properties: ci, error, iq
@@ -73,9 +73,9 @@ sum(grains_smooth.boundary('indexed').segLength)
 
 {% highlight plaintext %}
 ans =
-   1.9437e+04
+   1.9448e+04
 ans =
-   1.7230e+04
+   1.7238e+04
 {% endhighlight %}
 <p>However, if we look at the frequency distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> performs just a single iteration</p>
 {% highlight matlab %}
@@ -90,7 +90,7 @@ histogram(grains_smooth.boundary('indexed').direction, ...
 {% highlight matlab %}
 iter = [1 5 10 25];
 color = copper(length(iter)+1);
-plot(grains.boundary,'linewidth',1,'linecolor','Fuchsia')
+plot(grains.boundary,'linewidth',1,'linecolor','Fuchsia','micronbar','off')
 d={};
 for i = 1:length(iter)
   grains_smooth = smooth(grains,iter(i));

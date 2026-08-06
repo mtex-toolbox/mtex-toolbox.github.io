@@ -1,5 +1,5 @@
 ---
-title: Low Level Parent Phase Reconstruction
+title: "Low Level Parent Phase Reconstruction"
 
 sidebar: documentation_sidebar
 permalink: LowLevelParentGrainReconstruction.html
@@ -18,7 +18,7 @@ To make changes, update the MATLAB code and republish this document.
 <meta name="DC.source" content="script_LowLevelParentGrainReconstruction.m">
 </head>
 <body>
-<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransistions/LowLevelParentGrainReconstruction.m">
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransitions/LowLevelParentGrainReconstruction.m">
     edit page</a></font>
 <div>
 <!--introduction-->
@@ -36,17 +36,17 @@ plot(ebsd(alphaName),ebsd(alphaName).orientations,'figSize','large')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0  10449 (5.3%)  notIndexed                                                 
+     0  10449 (5.3%)  notIndexed          none                                   
      1   437 (0.22%)   Ti (BETA)  LightSkyBlue       432                         
-     2  185722 (94%)  Ti (alpha)  DarkSeaGreen       622       X||a*, Y||b, Z||c*
+     2  185722 (94%)  Ti (alpha)  DarkSeaGreen       622        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, reliabilityindex
  Scan unit : um
- X x Y x Z : [0, 1568] x [-1175, 0] x [0, 0]
- Normal vector: (0,0,-1)
+ X x Y x Z : [0, 1568] x [0, 1175] x [0, 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="LowLevelParentGrainReconstruction_01.png" %}
@@ -67,12 +67,11 @@ beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
 <p>In a first step we want to identify triple junctions that have misorientations that are compatible with a common parent orientations. To this end we first compute alpha grains using the option <a href="QuadruplePoints.html"><code class="language-plaintext highlighter-rouge">removeQuadruplePoints</code></a> which turn all quadruple junctions into 2 triple junctions. Furthermore, we choose a very small threshold of 1.5 degree for the identification of grain boundaries to avoid alpha orientations that belong to different beta grains get merged into the same alpha grain.</p>
 {% highlight matlab %}
 % reconstruct grains
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'threshold',1.5*degree,...
-  'removeQuadruplePoints');
+[grains,ebsd] = calcGrains(ebsd,'threshold',1.5*degree,'removeQuadruplePoints');
 grains = smooth(grains,1,'moveTriplePoints');
 
 % plot all alpha pixels
-region = [299 401 -500 -440];
+region = [299 401 440 500];
 plot(ebsd(alphaName),ebsd(alphaName).orientations,...
   'region',region,'micronbar','off','figSize','large');
 
@@ -96,10 +95,10 @@ tPori = grains(tP.grainId).meanOrientation;
 {% endhighlight %}
 
 {% highlight plaintext %}
-tP = triplePointList
+tP = triplePointList (y↓→x)
  
  points   mineral 1   mineral 2   mineral 3
-  93759  Ti (alpha)  Ti (alpha)  Ti (alpha)
+  99276  Ti (alpha)  Ti (alpha)  Ti (alpha)
 {% endhighlight %}
 <p>The command <code class="language-plaintext highlighter-rouge">calcParent</code> returns for each child orientation a <code class="language-plaintext highlighter-rouge">parentId</code> which allows us later to compute the parent orientation from the child orientation. Furthermore, the command return for each triple junction the misfit between the adjacent parent orientations in radiant. Finally, the option <code class="language-plaintext highlighter-rouge">'numFit',2</code> causes <code class="language-plaintext highlighter-rouge">calcParent</code> to return not only the best fit but also the second best fit. This will be used later. First we simple colorize the triple junctions according to the best fit.</p>
 {% highlight matlab %}
@@ -134,7 +133,7 @@ hold off
   parentId(consistenTP,:,1), max(grains.id),'strict');
 {% endhighlight %}
 <p>The command <code class="language-plaintext highlighter-rouge">majorityVote</code> returns for each grain with consistent parentId votes this unique parentId and for all other grains <code class="language-plaintext highlighter-rouge">NaN</code>. The second output argument gives the number of these votes</p>
-<p>For all grains with at least 3 unique vote we now use the command <a href="variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> to compute the parent orientation corresponding to the <code class="language-plaintext highlighter-rouge">parentId</code>. This parent orientations we assign as new <code class="language-plaintext highlighter-rouge">meanOrientation</code> to our grains.</p>
+<p>For all grains with at least 3 unique vote we now use the command <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> to compute the parent orientation corresponding to the <code class="language-plaintext highlighter-rouge">parentId</code>. This parent orientations we assign as new <code class="language-plaintext highlighter-rouge">meanOrientation</code> to our grains.</p>
 {% highlight matlab %}
 % lets store the parent grains into a new variable
 parentGrains = grains;
@@ -160,7 +159,7 @@ plot(parentGrains(betaName), ...
 {% include inline_image.html file="LowLevelParentGrainReconstruction_05.png" %}
 </center>
 <p>We observe that this first step already results in many Beta grains. However, the grain boundaries are still the boundaries of the original alpha grains. To overcome this, we merge all Beta grains that have a misorientation angle smaller then 2.5 degree.</p>
-<p>As an additional consistency check we verify that each parent grain has been reconstructed from at least 2 child grains. To this end we first make a test run the merge operation and then revert all parent grains that that have less then two childs. This step may not necessary in many case.</p>
+<p>As an additional consistency check we verify that each parent grain has been reconstructed from at least 2 child grains. To this end we first make a test run the merge operation and then revert all parent grains that that have less then two children. This step may not necessary in many case.</p>
 {% highlight matlab %}
 % test run of the merge operation
 [~,parentId] = merge(parentGrains,'threshold',2.5*degree,'testRun');
@@ -182,8 +181,11 @@ parentGrains = parentGrains.update;
 % set up a EBSD map for the parent phase
 parentEBSD = ebsd;
 
-% and store there the grainIds of the parent grains
-parentEBSD('indexed').grainId = parentId(ebsd('indexed').grainId);
+% and store there the grainIds of the parent grains - all pixels have to be
+% remapped, not only the indexed ones, since the not indexed pixels belong
+% to grains as well. The leading zero keeps pixels without a grain at 0.
+old2new = [0; parentId];
+parentEBSD.grainId = old2new(1 + ebsd.grainId);
 
 plot(parentGrains(betaName), ...
   ipfKey.orientation2color(parentGrains(betaName).meanOrientation),'figSize','large')
@@ -207,7 +209,7 @@ oriBeta = parentGrains( grainPairs(:,2) ).meanOrientation;
 % compute for each alpha / beta pair of grains the best fitting parentId
 [parentId, fit] = calcParent(oriAlpha,oriBeta,beta2alpha,'numFit',2,'id');
 {% endhighlight %}
-<p>Similarly, as in the first step the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> returns a list of <code class="language-plaintext highlighter-rouge">parentId</code> that allows the convert the child orientations into parent orientations using the command <a href="variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> and the fitting to the given parent orientation. Similarly, as for the triple point we select only those alpha beta pairs such that the fit is below the threshold of 2.5 degree and at the same time the second best fit is above 2.5 degree.</p>
+<p>Similarly, as in the first step the command <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> returns a list of <code class="language-plaintext highlighter-rouge">parentId</code> that allows the convert the child orientations into parent orientations using the command <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> and the fitting to the given parent orientation. Similarly, as for the triple point we select only those alpha beta pairs such that the fit is below the threshold of 2.5 degree and at the same time the second best fit is above 2.5 degree.</p>
 {% highlight matlab %}
 % consistent pairs are those with a very small misfit
 consistenPairs = fit(:,1) < 5*degree & fit(:,2) > 5*degree;
@@ -229,7 +231,8 @@ parentGrains = parentGrains.update;
 [parentGrains,parentId] = merge(parentGrains,'threshold',5*degree);
 
 % update grainId in the ebsd map
-parentEBSD('indexed').grainId = parentId(parentEBSD('indexed').grainId);
+old2new = [0; parentId];
+parentEBSD.grainId = old2new(1 + parentEBSD.grainId);
 
 % plot the result
 color = ipfKey.orientation2color(parentGrains(betaName).meanOrientation);
@@ -245,16 +248,16 @@ sum(hasVote)
 
 {% highlight plaintext %}
 ans =
-       15535
+       16717
 {% endhighlight %}
 <p>alpha grains into the already reconstructed beta grain. This reduces the amount of grains not yet reconstructed to</p>
 {% highlight matlab %}
-sum(parentGrains('Ti (alpha').numPixel) ./ sum(parentGrains.numPixel)*100
+sum(parentGrains(alphaName).numPixel) ./ sum(parentGrains.numPixel)*100
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-    1.2253
+    1.2685
 {% endhighlight %}
 <p>percent. One way to proceed would be to repeat the steps of this section multiple time, maybe with increasing threshold, until the percentage of reconstructed beta grains is sufficiently high. Another approach in to consider the left over alpha grains as noise and use denoising techniques to replace them with beta orientations. This will be done in the last section.</p>
 <h2 id="20">Reconstruct beta orientations in EBSD map</h2>
@@ -297,7 +300,7 @@ plot(parentEBSD(betaName),ipfKey.orientation2color(parentEBSD(betaName).orientat
 <h2 id="24">Denoising of the reconstructed beta phase</h2>
 <p>As promised we end our discussion by applying denoising techniques to fill the remaining holes of alpha grains. To this end we first reconstruct grains from the parent orientations and throw away all small grains</p>
 {% highlight matlab %}
-[parentGrains,parentEBSD.grainId] = calcGrains(parentEBSD('indexed'),'angle',5*degree,'minPixel',15);
+[parentGrains,parentEBSD] = calcGrains(parentEBSD,'angle',5*degree,'minPixel',15);
 
 % smooth the grains a bit
 parentGrains = smooth(parentGrains,5);
@@ -306,7 +309,7 @@ parentGrains = smooth(parentGrains,5);
 {% highlight matlab %}
 F= halfQuadraticFilter;
 F.alpha = 0.1;
-parentEBSD = smooth(parentEBSD('indexed'),F,'fill',parentGrains);
+parentEBSD = smooth(parentEBSD,F,'fill',parentGrains);
 
 % plot the resulting beta phase
 plot(parentEBSD(betaName),ipfKey.orientation2color(parentEBSD(betaName).orientations),'figSize','large')
