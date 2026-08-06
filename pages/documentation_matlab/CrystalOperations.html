@@ -23,6 +23,10 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+% set default specimen plotting convention to y↑→x
+pC = plottingConvention; pC.makeDefault
+{% endhighlight %}
 <p>In this section we discuss basic operations with lattice directions and lattice planes. Lets start by importing and plotting a simulated Quartz Kikuchi pattern</p>
 {% highlight matlab %}
 data = load([mtexDataPath filesep 'quartzPattern.mat']);
@@ -62,7 +66,7 @@ plot(z,opt{:},'markerEdgeColor','yellow')
 <center>
 {% include inline_image.html file="CrystalOperations_02.png" %}
 </center>
-<h2 id="4">Symmetrically Equivalent Planes and Directions</h2>
+<h2 id="5">Symmetrically Equivalent Planes and Directions</h2>
 <p>Since crystal lattices are symmetric lattice directions can be grouped into classes of symmetrically equivalent directions. Those groups can be derived by permuting the Miller indices (uvw). The class of all directions symmetrically equivalent to (uvw) is commonly denoted by \(<a href="uvw">uvw</a>\), while the class of all lattice planes symmetrically equivalent to the plane (hkl) is denoted by {hkl}. Given a lattice direction or a lattice plane all symmetrically equivalent directions and planes are computed by the command <a href="Miller.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a>
 </p>
 {% highlight matlab %}
@@ -136,7 +140,7 @@ ans =
   logical
    1
 {% endhighlight %}
-<h2 id="9">Zone Axes</h2>
+<h2 id="10">Zone Axes</h2>
 <p>The intersection of two lattice planes is called zone axis. Mathematically it is computed by the cross product between the corresponding norm vectors.</p>
 {% highlight matlab %}
 d1 = round(cross(m,r))
@@ -185,7 +189,7 @@ n = Miller (alpha-quartz low)
 <center>
 {% include inline_image.html file="CrystalOperations_06.png" %}
 </center>
-<h2 id="12">Angles</h2>
+<h2 id="13">Angles</h2>
 <p>The angle between two crystal directions <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code> is defined as the smallest angle between <code class="language-plaintext highlighter-rouge">d1</code> and all symmetrically equivalent directions to <code class="language-plaintext highlighter-rouge">d2</code>. This angle is in radiant and it is calculated by the function <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle(d1,d2)</code></a>
 </p>
 {% highlight matlab %}
@@ -216,7 +220,7 @@ ans =
   180.0000
 {% endhighlight %}
 <p>This option is available for many other functions involving crystal directions and crystal orientations.</p>
-<h2 id="16">Crystal Orientations</h2>
+<h2 id="17">Crystal Orientations</h2>
 <p>Crystal orientations describe how the crystal lattice is aligned with respect to a specimen fixed reference frame. Consider the crystal orientation</p>
 {% highlight matlab %}
 ori = orientation.byEuler(10*degree,20*degree,30*degree,cs)
@@ -227,7 +231,7 @@ mtexColorMap black2white
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (alpha-quartz low → y↓→x)
+ori = orientation (alpha-quartz low → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
@@ -246,7 +250,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↓→x)
+ans = vector3d (y↑→x)
        x       y       z
   -0.427 -0.0286   0.592
 {% endhighlight %}
@@ -263,14 +267,14 @@ hold off
 {% include inline_image.html file="CrystalOperations_09.png" %}
 </center>
 <p>The above plot is essentially the pole figure representation of the orientation <code class="language-plaintext highlighter-rouge">ori</code>.</p>
-<h2 id="20">Conversions</h2>
+<h2 id="21">Conversions</h2>
 <p>Converting a crystal direction which is represented by its coordinates with respect to the crystal coordinate system \(a\), \(b\), \(c\) into a representation with respect to the associated Euclidean coordinate system is done by the command <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>.</p>
 {% highlight matlab %}
 vector3d(d1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↓→x)
+ans = vector3d (y↑→x)
        x      y      z
   -0.246  0.426  0.541
 {% endhighlight %}

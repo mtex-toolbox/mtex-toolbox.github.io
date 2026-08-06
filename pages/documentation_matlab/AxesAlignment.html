@@ -114,7 +114,30 @@ pC2 = plottingConvention (y↑→x)
 <center>
 {% include inline_image.html file="AxesAlignment_04.png" %}
 </center>
-<p>When initiating a new <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code> MTEX uses <code class="language-plaintext highlighter-rouge">plottingConvention.default</code> as default plotting convention. This default plotting convention can be changed by</p>
+<p>A shortcut for defining a plotting convention is a string that tells for each axis where it points to on screen</p>
+{% highlight matlab %}
+pC3 = plottingConvention('y↑→x')
+{% endhighlight %}
+
+{% highlight plaintext %}
+pC3 = plottingConvention (y↑→x)
+ 
+  outOfScreen: (0,0,1)
+  north      : (0,1,0)
+  east       : (1,0,0)
+{% endhighlight %}
+<p>This shortcut may be used whenever a plotting convention is expected</p>
+{% highlight matlab %}
+v3 = vector3d(1,1,1);
+v3.how2plot = 'x←↓y'
+{% endhighlight %}
+
+{% highlight plaintext %}
+v3 = vector3d (x←↓y)
+  x y z
+  1 1 1
+{% endhighlight %}
+<p>When initiating a new <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code> MTEX uses <code class="language-plaintext highlighter-rouge">plottingConvention.default</code> as default plotting convention. This default plotting convention can be changed by <code class="language-plaintext highlighter-rouge">plottingConvention.default('y&uarr;&rarr;x')</code> or by</p>
 {% highlight matlab %}
 plotx2north
 plotzOutOfPlane
