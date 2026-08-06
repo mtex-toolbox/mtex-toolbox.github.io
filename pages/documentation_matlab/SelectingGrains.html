@@ -57,48 +57,37 @@ selectInteractive(grains,'lineColor','gold')
 
 clear global indSelected
 global indSelected
-
-% this simulates a mouse click - it goes through java.awt.Robot, which needs
-% permission to inject input events and is refused on some systems, so fall
-% back to selecting the grain at the same position directly
-pause(1)
-try
-  simulateClick(9000,3500)
-  pause(1)
-catch
-  % permission to inject input events was refused
-end
-
-if isempty(indSelected)
-  indSelected = grains.id2ind(grains.findByLocation([9000 3500]));
-end
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SelectingGrains_02.png" %}
+</center>
+<p>As soon as you clicked a grain the global variable indSelected contains the index of the selected grain. Since we can not click when creating this help we set indSelected explicitly.</p>
+{% highlight matlab %}
+indSelected = grains(9000,3500).id;
 
 grains(indSelected)
-
 hold on
 plot(grains(indSelected).boundary,'lineWidth',4,'lineColor','gold')
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-Grain selected: 65
- 
 ans = grain2d (y↑→x)
  
- Phase  Grains  Pixels    Mineral  Symmetry         Color
-     2       1     239  Enstatite       mmm  DarkSeaGreen
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     1       1     323  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 113 (5115 µm)
+ boundary segments: 107 (4092 µm)
  inner boundary segments: 0 (0 µm)
  triple points: 6
  
- Id   Phase   Pixels      meanRotation         GOS
- 65       2      239   (160°,73°,327°)   0.0074195
+ Id   Phase   Pixels      meanRotation          GOS
+ 35       1      323   (131°,64°,250°)   0.00795279
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_02.png" %}
+{% include inline_image.html file="SelectingGrains_03.png" %}
 </center>
-<h2 id="3">Indexing by orientation or position</h2>
+<h2 id="4">Indexing by orientation or position</h2>
 <p>One can also to select a grain by spatial coordinates without user interaction. This is done using the syntax <code class="language-plaintext highlighter-rouge">grains(x,y)</code>, i.e.,</p>
 {% highlight matlab %}
 x = 12000; y = 4000;
@@ -111,7 +100,7 @@ plot(x,y,'marker','s','markerfacecolor','k',...
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_03.png" %}
+{% include inline_image.html file="SelectingGrains_04.png" %}
 </center>
 <p>Alternatively one can also select all grains with a certain orientation. Lets find all grains with a similar orientation as the one marked in gold. As threshold we shall use 20 degree</p>
 {% highlight matlab %}
@@ -126,22 +115,22 @@ hold off
 {% highlight plaintext %}
 grains_selected = grain2d (y↑→x)
  
- Phase  Grains  Pixels    Mineral  Symmetry         Color
-     2       3     504  Enstatite       mmm  DarkSeaGreen
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     1       3     523  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 256 (10710 µm)
+ boundary segments: 188 (7797 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 19
+ triple points: 13
  
- Id   Phase   Pixels      meanRotation      GOS
- 28       2      205   (168°,83°,316°)   0.0056
- 65       2      239   (160°,73°,327°)   0.0074
- 79       2       60   (170°,84°,315°)   0.0059
+ Id   Phase   Pixels      meanRotation     GOS
+ 22       1      181   (131°,64°,245°)   0.007
+ 35       1      323   (131°,64°,250°)   0.008
+ 52       1       19   (144°,74°,250°)    0.01
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_04.png" %}
+{% include inline_image.html file="SelectingGrains_05.png" %}
 </center>
-<h2 id="5">Indexing by a Property</h2>
+<h2 id="6">Indexing by a Property</h2>
 <p>In order the generalize the above concept lets remember that the variable <code class="language-plaintext highlighter-rouge">grains</code> is essentially a large vector of grains. Thus when applying a function like <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a> to this variable we obtain a vector of the same length with numbers representing the area of each grain</p>
 {% highlight matlab %}
 grain_area = grains.area;
@@ -152,7 +141,7 @@ grain_area = grains.area;
 plot(grains,grain_area)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_05.png" %}
+{% include inline_image.html file="SelectingGrains_06.png" %}
 </center>
 <p>As a second application, we can ask for the largest grain within our data set. The maximum value and its position within a vector are found by the MATLAB command <code class="language-plaintext highlighter-rouge">max</code>.</p>
 {% highlight matlab %}
@@ -190,7 +179,7 @@ plot(grains(max_id).boundary,'linecolor','red','linewidth',4)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_06.png" %}
+{% include inline_image.html file="SelectingGrains_07.png" %}
 </center>
 <p>Note that this way of addressing individual grains can be generalized to many grains. E.g. assume we are interested in the largest 5 grains. Then we can sort the vector <code class="language-plaintext highlighter-rouge">grain_area</code> and take the indices of the 5 largest grains.</p>
 {% highlight matlab %}
@@ -203,9 +192,9 @@ plot(grains(large_grain_id).boundary,'linecolor','Orange','linewidth',4)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_07.png" %}
+{% include inline_image.html file="SelectingGrains_08.png" %}
 </center>
-<h2 id="11">Indexing by a Condition</h2>
+<h2 id="12">Indexing by a Condition</h2>
 <p>By the same syntax as above we can also single out grains that satisfy a certain condition. I.e., to access are grains that are at least one quarter as large as the largest grain we can do</p>
 {% highlight matlab %}
 condition = grain_area > max_area/4;
@@ -215,7 +204,7 @@ plot(grains(condition).boundary,'linecolor','Yellow','linewidth',4)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_08.png" %}
+{% include inline_image.html file="SelectingGrains_09.png" %}
 </center>
 <p>This is a very powerful way of accessing grains as the condition can be build up using any grain property. As an example let us consider the phase. The phase of the first five grains we get by</p>
 {% highlight matlab %}
@@ -236,7 +225,7 @@ condition = grains.phase == 1;
 plot(grains(condition))
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_09.png" %}
+{% include inline_image.html file="SelectingGrains_10.png" %}
 </center>
 <p>To make the above more directly you can use the mineral name for indexing</p>
 {% highlight matlab %}
@@ -281,9 +270,9 @@ selected_grains = grain2d (y↑→x)
  84       1     1545    (167°,81°,251°)    0.013
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_10.png" %}
+{% include inline_image.html file="SelectingGrains_11.png" %}
 </center>
-<h2 id="16">The grainId and how to select EBSD inside specific grains</h2>
+<h2 id="17">The grainId and how to select EBSD inside specific grains</h2>
 <p>Besides, the list of grains the command <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> returns also two other output arguments.</p>
 {% highlight matlab %}
 plot(grains)
@@ -292,7 +281,7 @@ largeGrains = grains(grains.numPixel > 50);
 text(largeGrains,largeGrains.id)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_11.png" %}
+{% include inline_image.html file="SelectingGrains_12.png" %}
 </center>
 <p>The second output argument grainId is a list with the same size as the EBSD measurements that stores for each measurement the corresponding grainId. The above syntax stores this list directly inside the ebsd variable. This enables MTEX to select EBSD data by grains. The following command returns all the EBSD data that belong to grain number 33.</p>
 {% highlight matlab %}
@@ -346,9 +335,9 @@ plot(grains(max_id).boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_12.png" %}
+{% include inline_image.html file="SelectingGrains_13.png" %}
 </center>
-<h2 id="20">Boundary grains</h2>
+<h2 id="21">Boundary grains</h2>
 <p>Sometimes it is desirable to remove all boundary grains as they might distort grain statistics. To do so one should remember that each grain boundary has a property <code class="language-plaintext highlighter-rouge">grainId</code> which stores the ids of the neighboring grains. In the case of an outer grain boundary, one of the neighboring grains has the id zero. We can filter out all these boundary segments by</p>
 {% highlight matlab %}
 % ids of the outer boundary segment
@@ -361,7 +350,7 @@ plot(grains.boundary(outerBoundary_id),'linecolor','red','linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_13.png" %}
+{% include inline_image.html file="SelectingGrains_14.png" %}
 </center>
 <p>Now <code class="language-plaintext highlighter-rouge">grains.boundary(outerBoundary_id).grainId</code> is a list of grain ids where the first column is zero, indicating the outer boundary, and the second column contains the id of the boundary grain. Hence, it remains to remove all grains with these ids.</p>
 {% highlight matlab %}
@@ -375,7 +364,7 @@ grain_id(grain_id==0) = [];
 plot(grains(grain_id))
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_14.png" %}
+{% include inline_image.html file="SelectingGrains_15.png" %}
 </center>
 <p>finally, we could remove the boundary grains by</p>
 {% highlight matlab %}
@@ -386,7 +375,7 @@ grains(grain_id) = []
 plot(grains(~grains.isBoundary))
 {% endhighlight %}
 <center>
-{% include inline_image.html file="SelectingGrains_15.png" %}
+{% include inline_image.html file="SelectingGrains_16.png" %}
 </center>
 </div>
 </body>

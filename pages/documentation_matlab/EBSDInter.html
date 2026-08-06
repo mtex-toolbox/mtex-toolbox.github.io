@@ -124,34 +124,28 @@ ebsdNewGrid = gridify(ebsd,'unitCell',uC)
 
 % plot the regridded EBSD data set
 plot(ebsdNewGrid('indexed'),ebsdNewGrid('indexed').orientations)
-xlim([0,50]); ylim([0,40])
+
+xlim(ebsd.extent(1:2)), ylim(ebsd.extent(3:4))
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: Query data is in MESHGRID format, NDGRID format will yield
-better performance.
-Convert your query data (Xq, Yq) as follows:
-   F = griddedInterpolant(. . .);
-   Xq = Xq'; Yq = Yq';
-   Vq = F(Xq,Yq);
- 
- 
 ebsdNewGrid = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    2 (0.068%)  notIndexed          none                                   
-     1   2938 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     0    6101 (52%)  notIndexed          none                                   
+     1    5671 (48%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, grainId, oldId
  Scan unit : um
- X x Y x Z : [0, 50] x [0, 41] x [0, 0]
+ X x Y x Z : [-21, 70] x [-25, 66] x [0, 0]
  Normal vector: (0,0,1)
- Square grid  :49 x 60
+ Square grid  :109 x 108
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDInter_02.png" %}
 </center>
 <p>Note, that we have not rotated the EBSD data but only the grid. All orientations as well as the position of all grains remains unchanged.</p>
+<p>The new grid is generated from the cell to cell translations of the given unit cell, i.e. it is rotated by 45 degree as well. Since such a rotated grid can not fill a rectangular matrix, the corners of <code class="language-plaintext highlighter-rouge">ebsdNewGrid</code> stick out of the map and contain no data - this is why we have restricted the plot above to the indexed measurements.</p>
 <p>Another example is the change from a square to an hexagonal grid or vice versa. In this case the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> is implicitly called by the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>. In order to demonstrate this functionality we start by EBSD data on a hex grid</p>
 {% highlight matlab %}
 mtexdata ferrite silent
