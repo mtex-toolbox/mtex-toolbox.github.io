@@ -60,10 +60,13 @@ ebsd = EBSD (y↓→x)
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_01.png" %}
 </center>
-<p>The plot does not yet fit the alignment of the map in the EDAX software as it plots the x-axis be default to east and the z-axis into the plane. This is only a plotting convention and can be set in MTEX by</p>
+<p>The plot should already fit the alignment of the map in the EDAX software as MTEX by default plots the x-axis to east and the y-axis to the south. However, if the interpretation of the map a different alignment with respect to the screen is more useful we can easily change this by changing the <a href="plottingConvention.html">plottingConvention</a> stored in <code class="language-plaintext highlighter-rouge">ebsd.how2plot</code>.</p>
 {% highlight matlab %}
-ebsd.how2plot.east = xvector;
-ebsd.how2plot.outOfScreen = -zvector;
+% lets assume we want y pointing towards east
+ebsd.how2plot.east = yvector;
+
+% and z out of the plane
+ebsd.how2plot.outOfScreen = zvector;
 
 plot(ebsd('olivine'),ebsd('olivine').orientations,'coordinates','on')
 {% endhighlight %}
@@ -91,7 +94,7 @@ legend off
 {% endhighlight %}
 
 {% highlight plaintext %}
-largeGrains = grain2d (y↓→x)
+largeGrains = grain2d (x↓→y)
  
  Phase  Grains  Pixels  Mineral  Symmetry         Color
      1       8    9556  olivine       mmm  LightSkyBlue
@@ -121,9 +124,9 @@ plotPDF(ebsd('O').orientations,h,'contourf')
 <center>
 {% include inline_image.html file="EBSDReferenceFrame_04.png" %}
 </center>
-<p>As pole figures display data relative to the specimen reference frame MTEX automatically aligns them on the screen exactly as the spatial map above, i.e., according to our last definition with x pointing towards east and y to the south.</p>
+<p>As pole figures display data relative to the specimen reference frame MTEX automatically aligns them on the screen exactly as the spatial map above, i.e., according to our last definition with x pointing towards south and y to the east.</p>
 <h2 id="8">Change the map reference system</h2>
-<p>In order to manually change the map reference frame one may apply a rotation to the map coordinates only. E.g. to flip the map left to right while preserving the Euler angles one can do</p>
+<p>In order to change the map coordinates one may apply a rotation to the map coordinates only. E.g. to flip the map left to right while preserving the Euler angles one can do</p>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(yvector,180*degree);
 ebsd_rot = rotate(ebsd,rot,'keepEuler');

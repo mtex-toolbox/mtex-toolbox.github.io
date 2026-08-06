@@ -42,18 +42,18 @@ CS = grains.CS; % extract crystal symmetry
 plot(grains,grains.meanOrientation,'micronbar','off')
 
 hold on
-plot(grains([43,52]).boundary,'edgecolor','w','linewidth',2)
+plot(grains([50,59]).boundary,'edgecolor','w','linewidth',2)
 hold off
 
-text(grains([43,52]),{'1','2'})
+text(grains([50,59]),{'1','2'})
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MisorientationTheory_01.png" %}
 </center>
 <p>After extracting the mean orientation of grain 43 and 52</p>
 {% highlight matlab %}
-ori1 = grains(43).meanOrientation;
-ori2 = grains(52).meanOrientation;
+ori1 = grains(50).meanOrientation;
+ori2 = grains(59).meanOrientation;
 {% endhighlight %}
 <p>we may compute the misorientation angle between both orientations by</p>
 {% highlight matlab %}
@@ -62,7 +62,7 @@ angle(ori1, ori2) ./ degree
 
 {% highlight plaintext %}
 ans =
-   80.8822
+   85.7299
 {% endhighlight %}
 <p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
 {% highlight matlab %}
@@ -71,18 +71,18 @@ angle(ori1, ori2.symmetrise) ./ degree
 
 {% highlight plaintext %}
 ans =
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
-   80.8822
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
+   85.7299
 {% endhighlight %}
 <p>The misorientation angle neglecting crystal symmetry can be computed by</p>
 {% highlight matlab %}
@@ -91,18 +91,18 @@ angle(ori1, ori2.symmetrise,'noSymmetry')./ degree
 
 {% highlight plaintext %}
 ans =
-  102.9836
-  116.9896
-  109.2971
-  161.1202
-  135.3920
-  152.4043
-  170.9655
-  109.5060
-  151.8601
-   80.8822
-  120.0224
-   84.3470
+  107.9164
+  100.9195
+   94.2719
+  136.6059
+  107.7043
+  179.5740
+  140.0724
+  137.3989
+  179.8286
+  101.4708
+  140.3882
+   85.7299
 {% endhighlight %}
 <p>We see that the smallest angle indeed coincides with the angle computed before.</p>
 <h2 id="9">Misorientations</h2>
@@ -116,7 +116,7 @@ mori = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  190.629 102.255 154.952
+  149.583 94.2717 150.165
 {% endhighlight %}
 <p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 52 into the reference frame of crystal 43. Take as an example the plane \(\{11\bar{2}0\}\) with respect to the grain 85. Then the plane in grain 43 which aligns parallel to this plane can be computed by</p>
 {% highlight matlab %}
@@ -126,7 +126,7 @@ round(mori * Miller(1,1,-2,0,CS))
 {% highlight plaintext %}
 ans = Miller (Magnesium)
   h  k  i  l
-  5  1 -6 -1
+  2 -1 -1  0
 {% endhighlight %}
 <p>Conversely, the inverse of <code class="language-plaintext highlighter-rouge">mori</code> is the coordinate transform from crystal 43 to grain 52.</p>
 {% highlight matlab %}
@@ -136,7 +136,7 @@ round(inv(mori) * Miller(2,-1,-1,0,CS))
 {% highlight plaintext %}
 ans = Miller (Magnesium)
   h  k  i  l
-  3  4 -7 -9
+  1  1 -2  0
 {% endhighlight %}
 <h2 id="12">Coincident lattice planes</h2>
 <p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyze whether there are some more alignments between major lattice planes.</p>
@@ -160,7 +160,7 @@ mm = round(unique(mori*m.symmetrise,'noSymmetry'),'maxHKL',6);
 annotate(mm,'labeled','MarkerSize',5,'figSize','large','textBelowMarker')
 
 % show legend
-legend({},'location','SouthEast','FontSize',13,'Interpreter','latex');
+legend({},'location','NorthEast','FontSize',13,'Interpreter','latex');
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MisorientationTheory_02.png" %}
@@ -176,15 +176,15 @@ angle(mori * Miller(1,0,-1,0,CS),Miller(1,1,-2,2,CS)) / degree
 
 {% highlight plaintext %}
 ans =
-   20.9659
+    0.4592
 ans =
-   13.1060
+    0.1766
 ans =
-  100.3843
+   59.6768
 ans =
-   21.6493
+    2.6341
 ans =
-   14.0546
+    2.5686
 {% endhighlight %}
 <h2 id="14">Twinning misorientations</h2>
 <p>Lets define a misorientation that makes a perfect fit between the \(\{11\bar20\}\), \(\{2\bar1\bar10\}\) lattice planes and the \([0001]\), \([01\bar10]\) lattice directions.</p>
@@ -310,7 +310,7 @@ ori_Mag = orientation.byEuler(0,0,0,CS_Mag)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori_Mag = orientation (Magnetite → y↑→x)
+ori_Mag = orientation (Magnetite → xyz)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
@@ -322,7 +322,7 @@ symmetrise(ori_Mag) * inv(Mag2Hem)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (Hematite → y↑→x)
+ans = orientation (Hematite → xyz)
   size: 48 x 1
 {% endhighlight %}
 <p>and the corresponding pole figures by</p>
