@@ -1,5 +1,5 @@
 ---
-title: grain3d.orientFaces
+title: "grain3d.orientFaces"
 
 sidebar: function_reference_sidebar
 permalink: grain3d.orientFaces.html
@@ -23,13 +23,44 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>that up grain.I_GF such that +/- 1 indicates outgoing/ingoing normals</p>
+<p>set up grain.I_GF such that +/- 1 indicates outgoing/ingoing normals</p>
 <h2 id="3">Description</h2>
-<p>This functions requires the free and open source GPTToolbox <a href="https://de.mathworks.com/matlabcentral/fileexchange/49692-gptoolbox">https://de.mathworks.com/matlabcentral/fileexchange/49692-gptoolbox</a>&gt; to be installed.</p>
+<p>Some file formats, e.g. Dream3d, do not store the boundary faces of a grain with a consistent winding, i.e., the normals computed from the vertex order point randomly into or out of the grain. This function determines for every face and every adjacent grain whether the stored normal points out of that grain (+1) or into it (-1) and stores the result in <a href="grain3d.I_GF"><code class="language-plaintext highlighter-rouge">grains.I_GF</code></a>. It also updates <code class="language-plaintext highlighter-rouge">grains.boundary.grainId</code> such that the face normal always points from the first to the second grain.</p>
+<p>The faces themselves are not modified. Non manifold edges, i.e. edges where the surface of a grain pinches itself, are ignored - the resulting surface patches are oriented independently of each other.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 grains = grains.orientFaces
 {% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="grain3d.volume.html">grain3d.volume</a> <a href="grain3Boundary.N.html">grain3Boundary.N</a>
+</p>
 </div>
 </body>
 </html>

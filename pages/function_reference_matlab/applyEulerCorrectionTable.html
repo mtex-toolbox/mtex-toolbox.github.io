@@ -24,7 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>apply a 4-setting Euler / map reference frame correction</p>
-<p>Shared by EDAX-style formats (.ang, .osc) that expose the Euler <a href="-">-</a> map alignment as a "setting" 1 to 4, plus a fixed default under 'wizard'.</p>
+<p>Shared by EDAX-style formats (.ang, .osc, .edaxh5) that expose the Euler <a href="-">-</a> map alignment as a "setting" 1 to 4. Since the setting is not stored in the file, setting 2 is assumed and a note is printed - unless the user states the alignment or the import wizard did it already.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 ebsd = applyEulerCorrectionTable(ebsd,ext,varargin{:})
@@ -45,7 +45,7 @@ ebsd = applyEulerCorrectionTable(ebsd,ext,varargin{:})
             <tt>ext</tt>
          </td>
          <td>
-            <tt>file extension used in the warning text, e.g. '.ang'</tt>
+            <tt>file extension used in the note, e.g. '.ang'</tt>
          </td>
       </tr>
    </table>
@@ -58,7 +58,7 @@ ebsd = applyEulerCorrectionTable(ebsd,ext,varargin{:})
             <tt>setting</tt>
          </td>
          <td>
-            <tt>0 (no correction, default) to 4</tt>
+            <tt>0 (no correction) to 4, default is 2</tt>
          </td>
       </tr>
       <tr>
@@ -74,7 +74,7 @@ ebsd = applyEulerCorrectionTable(ebsd,ext,varargin{:})
             <tt>wizard</tt>
          </td>
          <td>
-            <tt>defaults setting to 2 instead of 0</tt>
+            <tt>suppress the note about the assumed setting</tt>
          </td>
       </tr>
    </table>

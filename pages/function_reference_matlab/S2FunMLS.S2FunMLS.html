@@ -29,8 +29,10 @@ To make changes, update the MATLAB code and republish this document.
 S2F = S2FunMLS(nodes, values);
 S2F = S2FunMLS(nodes, values, 'degree', 3, 'oF', 4);
 S2F = S2FunMLS(nodes, values, 'delta', 5*degree, 'weight', @(t)(...));
-S2F = S2FunMLS(nodes, values, 'centered', true, 'monomials', true, 'subsample', 'tangent', true);
-S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_delta');
+S2F = S2FunMLS(nodes, values, 'centered', true, 'monomials', true, ...
+  'subsample', 'tangent', true);
+S2F = S2FunMLS(nodes, values, 'detectOutliers', ...
+  'use_vor_weights', 'use_smooth_delta');
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -74,7 +76,7 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>degree</tt>
          </td>
          <td>
-            <tt>the polynomial degree used for approximation</tt>
+            <tt>polynomial degree used for approximation</tt>
          </td>
       </tr>
       <tr>
@@ -82,49 +84,31 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>oF</tt>
          </td>
          <td>
-            <tt>oversampling Factor. the number of neighbors nn (dependent) is the</tt>
+            <tt>oversampling factor; nn is S2F.dim times this factor</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>dimension of the ansatz space, times this factor</tt>
-         </td>
-         <td/>
       </tr>
       <tr>
          <td width="100px">
             <tt>oF_max</tt>
          </td>
          <td>
-            <tt>maximum oversampling factor in case of range search. At most the</tt>
+            <tt>maximal oversampling factor for range search</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>closest S2F.dim * S2F.oF_max neighbors will be used.</tt>
-         </td>
-         <td/>
       </tr>
       <tr>
          <td width="100px">
             <tt>delta</tt>
          </td>
          <td>
-            <tt>support radius of the weight function</tt>
+            <tt>support radius of the weight function; delta = 0 uses KNN</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>when searching for outliers</tt>
-         </td>
-         <td/>
       </tr>
       <tr>
          <td width="100px">
             <tt>monomials</tt>
          </td>
          <td>
-            <tt>use monomial basis if true, otherwise use spherical harmonics</tt>
+            <tt>use a monomial basis, otherwise spherical harmonics</tt>
          </td>
       </tr>
       <tr>
@@ -132,7 +116,7 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>centered</tt>
          </td>
          <td>
-            <tt>evaluate the basis functions only around the north pole, if true</tt>
+            <tt>evaluate the basis in local coordinates around the north pole</tt>
          </td>
       </tr>
       <tr>
@@ -140,24 +124,14 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>tangent</tt>
          </td>
          <td>
-            <tt>use monomials on the tangent space (only if centered == true)</tt>
+            <tt>use monomials on the tangent plane (requires centered = true)</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>(in this case the z</tt>
+            <tt>(NOTE: centered and tangent automatically enable the monomial basis)</tt>
          </td>
-         <td>
-            <tt>coordinate of the neighbors is ignored)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>(NOTE: 'centered' and 'tangent' trigger the monomial</tt>
-         </td>
-         <td>
-            <tt>option to be true)</tt>
-         </td>
+         <td/>
       </tr>
       <tr>
          <td width="100px">
@@ -169,13 +143,7 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
       </tr>
       <tr>
          <td width="100px">
-            <tt>'C1hat', 'const', 'cos', 'hat', 'indicator', 'squared hat',</tt>
-         </td>
-         <td/>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>'wendland' (default)</tt>
+            <tt>'hat', 'indicator', 'squared hat', 'wendland', and 'wendlandC6'</tt>
          </td>
          <td/>
       </tr>
@@ -184,12 +152,12 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>use_smooth_delta</tt>
          </td>
          <td>
-            <tt>make the support radius delta(x) a smooth function with</tt>
+            <tt>use a smooth local support radius with about S2F.nn</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>close to S2F.nn neighbors at each center</tt>
+            <tt>neighbors at each center</tt>
          </td>
          <td/>
       </tr>
@@ -198,21 +166,15 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>use_vor_weights</tt>
          </td>
          <td>
-            <tt>additionally multiply w(x,x_i) by the Voronoi Volumne of</tt>
+            <tt>multiply the local weights by Voronoi areas</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>x_i, as in 'Stable Moving Least Squares Approximation'</tt>
-         </td>
-         <td/>
       </tr>
       <tr>
          <td width="100px">
             <tt>distance</tt>
          </td>
          <td>
-            <tt>specify which metric to use (default: 'euclidean')</tt>
+            <tt>metric for neighbor search (default: 'euclidean')</tt>
          </td>
       </tr>
       <tr>
@@ -228,15 +190,7 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>regularize</tt>
          </td>
          <td>
-            <tt>use regularization for solving the lsq-systems</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>maxcond</tt>
-         </td>
-         <td>
-            <tt>max regularization threshold of condition of the gram matrix</tt>
+            <tt>use goal-oriented regularization of the local systems</tt>
          </td>
       </tr>
       <tr>
@@ -244,47 +198,43 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>mincond</tt>
          </td>
          <td>
-            <tt>start regularizing threshold of condition of the gram matrix</tt>
+            <tt>center-amplification threshold where regularization starts</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>basis_weights</tt>
+            <tt>maxcond</tt>
          </td>
          <td>
-            <tt>regularization weights of basis coefficients,</tt>
+            <tt>center-amplification threshold where full correction is used</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>should punish higher degrees (Sobolev</tt>
+            <tt>targetcond</tt>
          </td>
          <td>
-            <tt>like)</tt>
+            <tt>center amplification approached at full correction</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>basis_weights_scale</tt>
+            <tt>(The property names are retained for compatibility. They no longer refer</tt>
          </td>
-         <td>
-            <tt>application strength of basis_weights</tt>
-         </td>
+         <td/>
       </tr>
       <tr>
          <td width="100px">
-            <tt>lambda_geom_rel</tt>
+            <tt>to the ordinary condition number of the Gram matrix.)</tt>
          </td>
-         <td>
-            <tt>relative application strength of geometrical regularization</tt>
-         </td>
+         <td/>
       </tr>
       <tr>
          <td width="100px">
             <tt>outlierDetectionRange</tt>
          </td>
          <td>
-            <tt>specify how many neighbors are taken into account</tt>
+            <tt>number of neighbors used for outlier detection</tt>
          </td>
       </tr>
    </table>
@@ -297,21 +247,15 @@ S2F = S2FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_d
             <tt>detectOutliers</tt>
          </td>
          <td>
-            <tt>find outliers in the data and reduce their weight in the local least squares problems</tt>
+            <tt>detect local outliers and reduce their MLS weights</tt>
          </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>depending on how bad they are</tt>
-         </td>
-         <td/>
       </tr>
       <tr>
          <td width="100px">
             <tt>subsample</tt>
          </td>
          <td>
-            <tt>use subset of neighbors that minimizes the lebesgue constant</tt>
+            <tt>select a subset that minimizes the Lebesgue constant</tt>
          </td>
       </tr>
    </table>

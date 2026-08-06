@@ -22,13 +22,20 @@ docker-compose up             # same thing containerised (jekyll/jekyll image)
 ```
 
 There is no test suite, no linter and no CI build step — GitHub Pages runs
-Jekyll on push. `update.sh` is the maintainer's one-shot
-`git add . && git commit -m "content update" && git push`.
+Jekyll on push. The nearest thing to a test is the image diff of a doc rebuild
+(see below).
 
 `_site/` is the local build output and is gitignored (it was tracked until
 Jul 2026, as a stale Oct-2024 build). GitHub Pages builds from source and
 Jekyll never publishes its own destination directory, so nothing there needs
-committing.
+committing. `_config.yml` also excludes `matlab/` from the build, so the doc
+toolchain sits in the repo without being published; `matlab/publish_log.txt`
+(the build log) is gitignored too.
+
+`./update.sh` is the deploy: `git add . && git commit -m "content update" &&
+git push` to `master`, which is what GitHub Pages serves. It commits
+*everything* in the tree, so review `git status` first — especially after a doc
+rebuild.
 
 ## Generated vs. hand-written content
 
@@ -36,17 +43,32 @@ Generated — never hand-edit, changes belong in the MTEX `.m` sources:
 
 - `pages/documentation_matlab/` — from `../master/doc/`
 - `pages/function_reference_matlab/` — from the help comments of MTEX's own
-  classes/functions (`S2Fun`, `SO3Fun`, `EBSDAnalysis`, `ODFAnalysis`,
+  classes/functions (`S1Fun`, `S2Fun`, `SO3Fun`, `EBSDAnalysis`, `ODFAnalysis`,
   `PoleFigureAnalysis`, `TensorAnalysis`, `plotting`, `geometry`, `interfaces`,
-  `tools`) plus `../master/doc/FunctionReference/`
+  `tools`) plus `../master/doc/FunctionReference/`; the list is the
+  `mtexFunctionFiles` array in `makeDoc.m`, so a new top-level MTEX folder has
+  to be added there before it shows up. Methods without a help comment of
+  their own are dropped (`dropUndocumentedMethods`): MATLAB would otherwise
+  substitute the documentation of the built-in of the same name, and
+  `S1FunHandle.numel` would get a page describing MATLAB's `numel`
 - `pages/examples_matlab/` — from `../examples/`
-- `images/` — figures rendered by MATLAB `publish` during the doc build
+- `images/*_NN.png` — figures rendered by MATLAB `publish` during the doc build,
+  one numbered file per figure per page (`GND_04.png`, `EBSD.plot_02.png`)
 - `_data/sidebars/documentation_sidebar.yml`, `function_reference_sidebar.yml`,
   `examples_sidebar.yml` — written by `matlab/xml2yml.m` from the `.xml` TOCs
 
 Hand-written: `index.md`, `pages/{addons,download,people,publications,support,videos,workshops,scripts,search,examples,function_reference}/`,
 `_data/topnav.yml`, `_data/sidebars/workshops_sidebar.yml`, `_posts/`,
 `css/theme-mtex.css`, `_includes/custom/`.
+
+`images/` is **not** generated wholesale — only the numbered `<Page>_NN.png`
+figures are. Its subdirectories (`icons/`, `profiles/`, `thumbnails/`,
+`favicons/`, `workshop24/`, `workshop26/`) and any loose asset without the
+`_NN` suffix (sponsor logos, `nfft_logo.png`, the theme's `arrow_*.gif` used by
+the generated `docscripts.js`, …) are hand-maintained site assets that nothing
+regenerates. `revert-unchanged-images.py` only restores *modified* PNGs, so a
+deletion in `images/` is never undone by a rebuild — check `git status` for
+`D images/…` lines before committing after a doc build.
 
 ## Running MATLAB
 
@@ -168,6 +190,19 @@ This closes a loop: the revert pass decides what stays dirty, and what stays
 dirty is what gets rebuilt next run. It does not converge on its own — a page
 whose figure genuinely changed is rebuilt on every run until the image is
 committed. `makeDoc('skipDirtyImages')` opts out for a plain incremental build.
+
+### Fitting hand-made images to a common size
+
+`tools/center-pngs.py` and `tools/center-gifs.py` (Pillow, no MTEX involved)
+rescale a hand-maintained asset — a person's photo, a workshop thumbnail — into
+a fixed canvas, preserving the aspect ratio and padding the rest:
+
+```bash
+python3 tools/center-pngs.py in.png "400,300" "255,255,255,0" images/profiles/out.png
+```
+
+Args are positional: input, `"width,height"`, RGBA padding colour, output. The
+GIF variant does the same frame by frame.
 
 ## Editing documentation content (in `../master/doc/`)
 

@@ -32,17 +32,6 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 neper.init;
 {% endhighlight %}
-
-{% highlight plaintext %}
-========================    N   e   p   e   r    =======================
-Info   : A software package for polycrystal generation and meshing.
-Info   : Version 4.9.1-4
-Info   : Built with: gsl|muparser|opengjk|openmp|nlopt|libscotch (full)
-Info   : Running on 12 threads.
-Info   : <https://neper.info>
-Info   : Copyright (C) 2003-2022, and GNU GPL'd, by Romain Quey.
-========================================================================
-{% endhighlight %}
 <p>File options: By default your Neper will work under the temporary folder of your MATLAB (MATLAB command <code class="language-plaintext highlighter-rouge">tempdir</code>). If you want to do your tessellations elsewhere or your tessellations are already located under another path, you can change it:</p>
 {% highlight matlab %}
 % for example
@@ -91,7 +80,7 @@ odf = SO3FunRBF (Quartz → y↑→x)
   weight: 1
  
  
-grains = grain3d
+grains = grain3d (y↓→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
      2    1000      32   Quartz       321        X||a*, Y||b, Z||c
@@ -108,55 +97,6 @@ plot(grains,grains.meanOrientation)
 
 how2plot = plottingConvention.default3D;
 setCamera(how2plot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Error executing listener callback for PostSet event
-on CameraPosition dynamic property in object of
-matlab.graphics.axis.Axes class:
-Error using assert
-Inconsitent pairs of vectors! The angle between u1, u2 and
-v1, v2 needs to be the same, but differs by 10.1421°
-Error in rotation.map (line 35)
-  assert(all(delta(:) < 1E-3),...
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in plottingConvention.getView (line 368)
-      pC.rot =
-      rotation.map(vector3d.Z,outOfScreen,vector3d.Y,north);
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in scaleBar/update (line 188)
-    pC = plottingConvention.getView(ax);
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in scaleBar>@(~,~)sB.update (line 99)
-    hListener(2) =
-    addlistener(hax,'CameraPosition','PostSet', @(~,~)
-    sB.update);
-                                                                      ^^^^^^^^^
-Error in plottingConvention/setView (line 147)
-        ax.CameraPosition = target + d * pC.outOfScreen.xyz;
-        ^^^^^^^^^^^^^^^^^
-Error in setCamera (line 21)
-how2plot.setView(ax);
-^^^^^^^^^^^^^^^^^^^^
-Error in script_NeperInterface (line 89)
-setCamera(how2plot)
-^^^^^^^^^^^^^^^^^^^
-Error in evalmxdom>instrumentAndRun (line 116)
-text = evalc(evalstr);
-       ^^^^^^^^^^^^^^
-Error in evalmxdom (line 21)
-[data,text,laste] =
-instrumentAndRun(file,cellBoundaries,imageDir,imagePrefix,options);
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in publish
-
-Error in DocFile/publish (line 171)
-    html_out = publish(docFile.targetTemporary,
-    pubSettings);
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in makeDoc (line 150)
-  publish(select(mtexDocFiles,restrictTo{:}),options);
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 {% endhighlight %}
 <center>
 {% include inline_image.html file="NeperInterface_01.png" %}
@@ -176,7 +116,7 @@ grains224 = grains.slice(N(3),A)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains224 = grain2d (y↑→x)
+grains224 = grain2d (y↓→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry      Color
      2     222     222   Quartz       321  LightBlue
@@ -201,56 +141,10 @@ setCamera(how2plot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: still can not concatenate grains on different
-slices 
-Warning: still can not concatenate grains on different
-slices 
-Warning: Error executing listener callback for PostSet event
-on CameraUpVector dynamic property in object of
-matlab.graphics.axis.Axes class:
-Error using assert
-Inconsitent pairs of vectors! The angle between u1, u2 and
-v1, v2 needs to be the same, but differs by 79.8579°
-Error in rotation.map (line 35)
-  assert(all(delta(:) < 1E-3),...
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in plottingConvention.getView (line 368)
-      pC.rot =
-      rotation.map(vector3d.Z,outOfScreen,vector3d.Y,north);
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in scaleBar/update (line 188)
-    pC = plottingConvention.getView(ax);
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in scaleBar>@(~,~)sB.update (line 100)
-    hListener(3) =
-    addlistener(hax,'CameraUpVector','PostSet', @(~,~)
-    sB.update);
-                                                                      ^^^^^^^^^
-Error in plottingConvention/setView (line 171)
-        ax.CameraUpVector = pC.north.xyz;
-        ^^^^^^^^^^^^^^^^^
-Error in setCamera (line 21)
-how2plot.setView(ax);
-^^^^^^^^^^^^^^^^^^^^
-Error in script_NeperInterface (line 119)
-setCamera(how2plot)
-^^^^^^^^^^^^^^^^^^^
-Error in evalmxdom>instrumentAndRun (line 116)
-text = evalc(evalstr);
-       ^^^^^^^^^^^^^^
-Error in evalmxdom (line 21)
-[data,text,laste] =
-instrumentAndRun(file,cellBoundaries,imageDir,imagePrefix,options);
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in publish
-
-Error in DocFile/publish (line 171)
-    html_out = publish(docFile.targetTemporary,
-    pubSettings);
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in makeDoc (line 150)
-  publish(select(mtexDocFiles,restrictTo{:}),options);
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Warning: still can not concatenate grains on
+different slices 
+Warning: still can not concatenate grains on
+different slices
 {% endhighlight %}
 <center>
 {% include inline_image.html file="NeperInterface_02.png" %}
@@ -266,55 +160,6 @@ hold off
 
 % set camera
 setCamera(how2plot)
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: Error executing listener callback for PostSet event
-on CameraPosition dynamic property in object of
-matlab.graphics.axis.Axes class:
-Error using assert
-Inconsitent pairs of vectors! The angle between u1, u2 and
-v1, v2 needs to be the same, but differs by 10.1421°
-Error in rotation.map (line 35)
-  assert(all(delta(:) < 1E-3),...
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in plottingConvention.getView (line 368)
-      pC.rot =
-      rotation.map(vector3d.Z,outOfScreen,vector3d.Y,north);
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in scaleBar/update (line 188)
-    pC = plottingConvention.getView(ax);
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in scaleBar>@(~,~)sB.update (line 99)
-    hListener(2) =
-    addlistener(hax,'CameraPosition','PostSet', @(~,~)
-    sB.update);
-                                                                      ^^^^^^^^^
-Error in plottingConvention/setView (line 147)
-        ax.CameraPosition = target + d * pC.outOfScreen.xyz;
-        ^^^^^^^^^^^^^^^^^
-Error in setCamera (line 21)
-how2plot.setView(ax);
-^^^^^^^^^^^^^^^^^^^^
-Error in script_NeperInterface (line 132)
-setCamera(how2plot)
-^^^^^^^^^^^^^^^^^^^
-Error in evalmxdom>instrumentAndRun (line 116)
-text = evalc(evalstr);
-       ^^^^^^^^^^^^^^
-Error in evalmxdom (line 21)
-[data,text,laste] =
-instrumentAndRun(file,cellBoundaries,imageDir,imagePrefix,options);
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in publish
-
-Error in DocFile/publish (line 171)
-    html_out = publish(docFile.targetTemporary,
-    pubSettings);
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Error in makeDoc (line 150)
-  publish(select(mtexDocFiles,restrictTo{:}),options);
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 {% endhighlight %}
 <center>
 {% include inline_image.html file="NeperInterface_03.png" %}
