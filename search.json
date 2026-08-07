@@ -1,55 +1,62 @@
 ---
-title: search
-layout: compress
+layout: none
 search: exclude
 permalink: /search.json
 ---
+{%- comment -%}
+Search index for js/mtex-search.js.
 
+One row per page: [title, url, folderIndex, description]. Arrays rather than
+objects because the key names would otherwise repeat ~2700 times (~34 KB).
+
+The description is the first paragraph after the <!--introduction--> marker that
+MATLAB's publish emits. For function reference pages that is the purpose line of
+the docstring ("smooth spatial EBSD"); for documentation pages it is the page
+abstract. Do NOT key this on <!--/introduction--> instead: the two page families
+use mixed layouts (some put the text inside the markers, most after), so that
+rule silently misses most documentation pages.
+
+page.content is rendered HTML on a clean build but raw source under
+--incremental. This extraction is invariant to the difference: the generated
+.html pages go through no converter, so Liquid is the only transform, and the
+{% raw %}{% highlight %}{% endraw %} fences all sit after the first paragraph.
+{%- endcomment -%}
+{%- assign folders = "function_reference,documentation,examples,workshops,other" | split: "," -%}
+{%- assign sep = "" -%}
 [
-	{% for page in site.pages %}
-		{% unless page.search == "exclude" %}
-			{
-				{% if page.title %}
-					{% assign title = page.title | strip | escape | remove: '\' %}
-				{% else %}
-					{% assign title = page.keywords | split: ',' | first %}
-				{% endif %}
-
-				{% assign url = page.url | remove: '/' %}
-				{% assign path = page.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' %}
-				{% assign date = page.last_updated | date_to_xmlschema | date: '%b %d, %Y' %}
-				{% assign keywords = page.keywords %}
-				{% assign summary = page.summary | strip | escape | truncate: 200 %}
-
-				"title"			: "{{ title }}",
-				"url"			: "{{ url }}",
-				"path"			: "{{ path }}",
-				"date"			: "{{ date | default: ' ' }}",
-				"keywords"		: "{{ keywords }}",
-				"summary"		: "{{ summary }}"
-			}
-			{% unless forloop.last and site.posts.size < 1 %},{% endunless %}
-		{% endunless %}
-	{% endfor %}
-	
-	{% for post in site.posts %}
-		{% unless post.published == false %}
-			{
-				{% assign title = post.title | strip | escape | remove: '\' %}
-				{% assign url = post.url | remove: '/' %}
-				{% assign path = post.url | remove: '.html' | replace: '/', '.' | split: '.' | join: ' > ' | replace_first: ' > ' %}
-				{% assign date = post.date | date_to_xmlschema | date: '%b %d, %Y' %}
-				{% assign tags = post.tags %}
-				{% assign categories = post.categories %}
-
-				"title"			: "{{ title }}",
-				"url"			: "{{ url }}",
-				"path"			: "{{ path }}",
-				"date"			: "{{ date }}",
-				"tags"			: "{{ tags }}",
-				"categories"	: "{{ categories }}"
-			}
-			{% unless forloop.last %},{% endunless %}
-		{% endunless %}
-	{% endfor %}
+{%- for p in site.pages -%}
+{%- if p.search == "exclude" or p.title == nil or p.title == "" -%}{%- continue -%}{%- endif -%}
+{%- assign desc = "" -%}
+{%- assign head = p.content | truncate: 4000, "" -%}
+{%- if head contains "<!--introduction-->" -%}
+{%- assign paras = head | split: "<!--introduction-->" | last | split: "<p>" -%}
+{%- if paras.size > 1 -%}
+{%- assign desc = paras[1] | split: "</p>" | first | strip_html | normalize_whitespace | strip | truncate: 200, "" -%}
+{%- endif -%}
+{%- endif -%}
+{%- comment -%}
+Four *Overview.html pages have a bare {% raw %}{% include inline_image.html %}{% endraw %} as their
+first paragraph. Rendered it becomes an <img> and strips to nothing; unrendered
+(--incremental) the Liquid source would survive as text. Dropping any candidate
+that still holds a tag makes the index byte-identical either way.
+{%- endcomment -%}
+{%- assign tag_open = "{" | append: "%" -%}
+{%- assign var_open = "{" | append: "{" -%}
+{%- if desc contains tag_open or desc contains var_open -%}
+{%- assign desc = "" -%}
+{%- endif -%}
+{%- if desc == "" and p.summary -%}
+{%- assign desc = p.summary | strip_html | normalize_whitespace | strip | truncate: 200, "" -%}
+{%- endif -%}
+{%- assign fi = 4 -%}
+{%- for f in folders -%}{%- if f == p.folder -%}{%- assign fi = forloop.index0 -%}{%- break -%}{%- endif -%}{%- endfor -%}
+{{ sep }}[{{ p.title | strip | jsonify }},{{ p.url | jsonify }},{{ fi }},{{ desc | jsonify }}]
+{%- assign sep = "," -%}
+{%- endfor -%}
+{%- for post in site.posts -%}
+{%- if post.published == false -%}{%- continue -%}{%- endif -%}
+{%- assign desc = post.excerpt | strip_html | normalize_whitespace | strip | truncate: 200, "" -%}
+{{ sep }}[{{ post.title | strip | jsonify }},{{ post.url | jsonify }},4,{{ desc | jsonify }}]
+{%- assign sep = "," -%}
+{%- endfor -%}
 ]

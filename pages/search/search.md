@@ -7,19 +7,43 @@ folder: search
 toc: false
 ---
 
-<!--start search-->
-<input type="text" id="_search-input" placeholder="{{ site.data.strings.search_placeholder_text }}">
-<ol id="onpage_results-container"></ol>
+<div class="ms-page">
+	<form class="ms-form ms-form-page" method="get" action="search.html" role="search">
+		<input type="text" name="q" id="ms-page-input" class="ms-page-input"
+		       placeholder="{{ site.data.strings.search_placeholder_text }}"
+		       aria-label="Search MTEX documentation">
+	</form>
+	<p id="ms-page-count" class="ms-count"></p>
+	<ol id="ms-page-results" class="ms-results" role="listbox" aria-label="Search results"></ol>
+</div>
 
-<script src="{{ 'js/jekyll-search.js' }}" type="text/javascript"></script>
-<script type="text/javascript">
-	SimpleJekyllSearch.init({
-		searchInput: document.getElementById('_search-input'),
-		resultsContainer: document.getElementById('onpage_results-container'),
-		dataSource: '{{ "search.json" }}',
-		searchResultTemplate: '<li><a href="{url}" style="font-size: 110%;">{title}</a><br><span style="font-size: 80%;">{date}&nbsp;&minus;&nbsp;{path}</span></li>',
+<script>
+// js/mtex-search.js is loaded with `defer` from head.html, so it has run by
+// DOMContentLoaded but not while this script is being parsed.
+document.addEventListener('DOMContentLoaded', function () {
+	var input = document.getElementById('ms-page-input');
+	if (!input || !window.MtexSearch) { return; }
+
+	var api = MtexSearch.attach(input, {
+		container: document.getElementById('ms-page-results'),
+		countEl: document.getElementById('ms-page-count'),
+		mode: 'page',
+		group: true,
+		limit: 0,
 		noResultsText: '{{ site.data.strings.search_no_results_text }}',
-		fuzzy: true
-	})
+		onQuery: function (q) {
+			// keep the URL shareable without adding a history entry per keystroke
+			var url = q ? 'search.html?q=' + encodeURIComponent(q) : 'search.html';
+			window.history.replaceState(null, '', url);
+		}
+	});
+
+	// ?q= lets the nav box hand off to this page, and makes searches linkable
+	var match = /[?&]q=([^&]*)/.exec(window.location.search);
+	if (match) {
+		input.value = decodeURIComponent(match[1].replace(/\+/g, ' '));
+		api.run();
+	}
+	input.focus();
+});
 </script>
-<!--end search-->
