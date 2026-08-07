@@ -1,5 +1,5 @@
 ---
-title: scaleBar
+title: "scaleBar"
 
 sidebar: function_reference_sidebar
 permalink: scaleBar.html
@@ -24,24 +24,28 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Inserts a scale bar on the current ebsd or grain map.</p>
+<p>Above the bar and its label the same box also indicates how the specimen reference frame is aligned on screen: an arrow for every axis that has a component within the screen plane, and a circled dot / circled cross for the axis pointing out of / into the screen. This can be switched off by the option <code class="language-plaintext highlighter-rouge">'refFrame','off'</code> or globally by <code class="language-plaintext highlighter-rouge">setMTEXpref('showRefFrame','off')</code>.</p>
+<p>The scale bar reads the plotting convention back from the axes camera via <a href="plottingConvention.getView.html">plottingConvention.getView</a> and realigns itself whenever the map is reoriented, e.g. via <a href="plottingConvention.setView.html">plottingConvention.setView</a> or one of <a href="plotx2north.html">plotx2north</a>, <a href="plotzOutOfPlane.html">plotzOutOfPlane</a>, etc. - this works no matter which <a href="plottingConvention.html">plottingConvention</a> object was used to apply the view, since it never relies on a cached reference to it. The reference frame indicator is derived from that same convention, so it always shows the alignment actually in effect.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-hg = scaleBar(ebsd, scanunits)
+sB = scaleBar(mP, scanUnit)
+sB = scaleBar(mP, scanUnit, 'SBBackgroundColor', 'k', 'SBLineColor', 'w', ...
+  'SBBackgroundAlpha', 0.6, 'Location', 'nw')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>ebsd</tt>
+            <tt>mP</tt>
          </td>
          <td>
-            <tt>an mtex ebsd or grain object</tt>
+            <tt>the <a href="mapPlot.html">mapPlot</a> the scale bar is attached to</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>scanunits</tt>
+            <tt>scanUnit</tt>
          </td>
          <td>
             <tt>units of the xy coordinates of the ebsd scan (e.g., 'um')</tt>
@@ -49,33 +53,12 @@ hg = scaleBar(ebsd, scanunits)
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="5">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>oval</tt>
-         </td>
-         <td>
-            <tt>output value</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>ounit</tt>
-         </td>
-         <td>
-            <tt>output unit</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Options</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>BACKGROUNDCOLOR</tt>
+            <tt>SBBackgroundColor</tt>
          </td>
          <td>
             <tt>background color (ColorSpec)</tt>
@@ -83,14 +66,83 @@ hg = scaleBar(ebsd, scanunits)
       </tr>
       <tr>
          <td width="100px">
-            <tt>BACKGROUNDALPHA</tt>
+            <tt>SBBackgroundAlpha</tt>
          </td>
          <td>
             <tt>background transparency (scalar 0&lt;=a&lt;=1)</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>SBLineColor</tt>
+         </td>
+         <td>
+            <tt>border and text color (ColorSpec)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Length</tt>
+         </td>
+         <td>
+            <tt>fixed scale bar length (in scanUnit units); if not given (default) a nice round length close to 10% of the map width is chosen automatically and kept up to date as the map is zoomed or resized</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Location</tt>
+         </td>
+         <td>
+            <tt>corner of the map the bar is drawn in: 'sw' (default), 'se', 'nw', 'ne'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SBRefFrame</tt>
+         </td>
+         <td>
+            <tt>'on' (default) / 'off' - show the reference frame</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SBRefFrameDirs</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the directions to indicate (default xvector, yvector, zvector)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>SBRefFrameLabels</tt>
+         </td>
+         <td>
+            <tt>cell of char, their labels (default {'x','y','z'})</tt>
+         </td>
+      </tr>
    </table>
 </p>
+<h2 id="6">Example</h2>
+<p>use a scale bar on the aachen mtexdata</p>
+{% highlight matlab %}
+mtexdata aachen
+plot(ebsd,'SBBackgroundColor','k','SBLineColor','w', ...
+'SBBackgroundAlpha',0.6,'Location','nw')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↓→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   11411 (19%)  notIndexed          none                                   
+     1   48184 (79%)          Fe  LightSkyBlue      m-3m                         
+     2   1180 (1.9%)          Mg  DarkSeaGreen      m-3m                         
+ 
+ Properties: bands, bc, bs, error, index, mad, reliabilityindex
+ Scan unit : um
+ X x Y x Z : [0, 254] x [90, 175] x [0, 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
 </div>
 </body>
 </html>
