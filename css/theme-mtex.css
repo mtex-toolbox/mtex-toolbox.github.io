@@ -131,7 +131,7 @@ li.sidebarTitle {
    Markup comes from _includes/search_box.html (nav dropdown) and
    pages/search/search.md (full page); behaviour from js/mtex-search.js. */
 
-.ms-nav { position: relative; }
+.ms-nav { position: relative; float: right; }
 
 .ms-form { margin: 0; }
 
@@ -157,7 +157,7 @@ li.sidebarTitle {
     position: absolute;
     right: 0;
     z-index: 1000;
-    width: 420px;
+    width: 460px;
     max-width: 90vw;
     max-height: 70vh;
     overflow-y: auto;
@@ -188,8 +188,15 @@ li.sidebarTitle {
 
 .ms-results { margin: 0; padding: 0; list-style: none; }
 
+/* customstyles.css:95 `.post-content ol li` sets margin:10px 0, which pushes
+   each row away from its own separator and makes the list look loose. That
+   selector is (0,1,2), so this one has to out-specify it -- hence the extra
+   class. Margin only: the padding of .ms-group below must survive. */
+.ms-page ol.ms-results > li,
+.ms-form ul.ms-dropdown > li { margin: 0; list-style: none; }
+
 .ms-group {
-    padding: 10px 12px 4px;
+    padding: 14px 12px 4px;
     font-size: 85%;
     font-weight: bold;
     text-transform: uppercase;
@@ -207,13 +214,34 @@ li.sidebarTitle {
     color: var(--text-darker);
 }
 
+/* Title, stem and badge on one non-wrapping line, with the badge pushed right
+   so it forms a straight column instead of trailing each title at a ragged
+   offset. nowrap matters: under flex-wrap the badge drops to a second line
+   before the title ever shrinks, leaving rows at uneven heights. */
+.ms-head {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    column-gap: 10px;
+}
+
 .ms-result > a:hover,
 .ms-result.ms-active > a {
     background-color: #f2faf8;
     text-decoration: none;
 }
 
-.ms-title { color: var(--primary); font-weight: 600; }
+/* Shrink and ellipsis rather than push the badge onto a second line, which
+   would leave the rows at uneven heights. */
+.ms-title {
+    color: var(--primary);
+    font-weight: 600;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 .ms-result > a:hover .ms-title { color: var(--highlight); }
 
@@ -228,13 +256,14 @@ li.sidebarTitle {
 }
 
 .ms-badge {
-    margin-left: 8px;
+    flex: 0 0 auto;
+    margin-left: auto;      /* pushed to the right edge; .ms-head's gap keeps
+                               a minimum separation when the title fills the row */
     padding: 1px 6px;
     font-size: 74%;
     border-radius: 8px;
     background-color: #eee;
     color: #666;
-    vertical-align: middle;
     white-space: nowrap;
 }
 
@@ -260,8 +289,12 @@ li.sidebarTitle {
 }
 
 .ms-path {
-    margin-left: 8px;
     font-size: 78%;
     color: #aaa;
     font-family: monospace;
+    flex: 0 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
