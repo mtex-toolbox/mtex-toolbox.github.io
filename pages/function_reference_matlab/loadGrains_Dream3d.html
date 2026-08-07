@@ -24,12 +24,19 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>loadGrains_Dream3d is a method to load 3d grain data from dream3d</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>Dream3d does not store the boundary faces of a grain with a consistent winding, i.e., the normals computed from the vertex order point randomly into or out of the grain. The faces are therefore oriented on import with <a href="grain3d.orientFaces.html"><code class="language-plaintext highlighter-rouge">orientFaces</code></a>, so that face normals, grain volumes and <code class="language-plaintext highlighter-rouge">boundary.grainId</code> are meaningful right away. Pass the option <code class="language-plaintext highlighter-rouge">'noOrientFaces'</code> to get the raw winding as stored in the file.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
-grains = grain3d.load('filepath/filename.dream3d','interface','dream3d)
+grains = grain3d.load('filepath/filename.dream3d','interface','dream3d')
 grains = loadGrains_Dream3d('filepath/filename.dream3d')
 {% endhighlight %}
-<h2 id="4">Input</h2>
+
+{% highlight matlab %}
+% keep the face winding exactly as stored in the file
+grains = grain3d.load('filepath/filename.dream3d','noOrientFaces')
+{% endhighlight %}
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -42,7 +49,7 @@ grains = loadGrains_Dream3d('filepath/filename.dream3d')
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -55,9 +62,22 @@ grains = loadGrains_Dream3d('filepath/filename.dream3d')
       </tr>
    </table>
 </p>
-<h2 id="6">See also</h2>
+<h2 id="7">Options</h2>
 <p>
-<a href="grain3d.load.html">grain3d.load</a> <a href="loadNeperTess.html">loadNeperTess</a>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>noOrientFaces</tt>
+         </td>
+         <td>
+            <tt>do not orient the boundary faces after import</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="grain3d.load.html">grain3d.load</a> <a href="grain3d.orientFaces.html">grain3d.orientFaces</a> <a href="loadNeperTess.html">loadNeperTess</a>
 </p>
 </div>
 </body>
