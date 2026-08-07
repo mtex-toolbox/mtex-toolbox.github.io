@@ -1,0 +1,119 @@
+---
+title: "legendre0"
+
+sidebar: function_reference_sidebar
+permalink: legendre0.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>legendre0</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_legendre0.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/math_tools/legendre0.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Evaluate all Legendre polynomials up to degree N in x and returns a matrix of the function values 1st dimension -&gt; degree 2nd dimension -&gt; x Use the recurrence formula (n+1)*P_{n+1} = (2n+1)*x*P_n - n*P_{n-1}</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+l = legendre0(N,x)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>N</tt>
+         </td>
+         <td>
+            <tt>degree</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>x</tt>
+         </td>
+         <td>
+            <tt>input nodes</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>l</tt>
+         </td>
+         <td>
+            <tt>function evaluations</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Example</h2>
+{% highlight matlab %}
+x = -1:0.2:1
+l = legendre0(10,x)
+{% endhighlight %}
+
+{% highlight plaintext %}
+x =
+  Columns 1 through 7
+   -1.0000   -0.8000   -0.6000   -0.4000   -0.2000         0    0.2000
+  Columns 8 through 11
+    0.4000    0.6000    0.8000    1.0000
+l =
+  Columns 1 through 7
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+   -1.0000   -0.8000   -0.6000   -0.4000   -0.2000         0    0.2000
+    1.0000    0.4600    0.0400   -0.2600   -0.4400   -0.5000   -0.4400
+   -1.0000   -0.0800    0.3600    0.4400    0.2800         0   -0.2800
+    1.0000   -0.2330   -0.4080   -0.1130    0.2320    0.3750    0.2320
+   -1.0000    0.3995    0.1526   -0.2706   -0.3075         0    0.3075
+    1.0000   -0.3918    0.1721    0.2926   -0.0806   -0.3125   -0.0806
+   -1.0000    0.2397   -0.3226    0.0146    0.2935         0   -0.2935
+    1.0000   -0.0167    0.2123   -0.2670   -0.0396    0.2734   -0.0396
+   -1.0000   -0.1879    0.0461    0.1888   -0.2460         0    0.2460
+    1.0000    0.3005   -0.2437    0.0968    0.1291   -0.2461    0.1291
+  Columns 8 through 11
+    1.0000    1.0000    1.0000    1.0000
+    0.4000    0.6000    0.8000    1.0000
+   -0.2600    0.0400    0.4600    1.0000
+   -0.4400   -0.3600    0.0800    1.0000
+   -0.1130   -0.4080   -0.2330    1.0000
+    0.2706   -0.1526   -0.3995    1.0000
+    0.2926    0.1721   -0.3918    1.0000
+   -0.0146    0.3226   -0.2397    1.0000
+   -0.2670    0.2123   -0.0167    1.0000
+   -0.1888   -0.0461    0.1879    1.0000
+    0.0968   -0.2437    0.3005    1.0000
+{% endhighlight %}
+<p>compare with MATLABs legendre, whose first row is the Legendre polynomial of degree k</p>
+{% highlight matlab %}
+err = 0;
+for k = 0:10
+P = legendre(k,x);
+err = max(err,max(abs(P(1,:) - l(k+1,:))));
+end
+err
+{% endhighlight %}
+
+{% highlight plaintext %}
+err =
+   3.8858e-16
+{% endhighlight %}
+</div>
+</body>
+</html>
