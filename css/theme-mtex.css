@@ -126,3 +126,142 @@ li.sidebarTitle {
 .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover { background-color: var(--highlight); }
 
 .navbar-inverse .navbar-toggle { border-color: var(--primary); }
+
+/* ---------------------------------------------------------------- site search
+   Markup comes from _includes/search_box.html (nav dropdown) and
+   pages/search/search.md (full page); behaviour from js/mtex-search.js. */
+
+.ms-nav { position: relative; }
+
+.ms-form { margin: 0; }
+
+.ms-nav-input {
+    width: 150px;
+    margin: 10px 0 10px 10px;
+    padding: 5px 10px;
+    border: 1px solid var(--primary);
+    border-radius: 3px;
+    background-color: #fff;
+    color: var(--text-darker);
+    transition: width .2s ease-in-out;
+}
+
+.ms-nav-input:focus {
+    width: 260px;
+    outline: none;
+    border-color: var(--highlight);
+}
+
+.ms-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    width: 420px;
+    max-width: 90vw;
+    max-height: 70vh;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    text-align: left;
+}
+
+/* full-page results */
+.ms-page { max-width: 900px; }
+
+.ms-page-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 130%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.ms-page-input:focus { outline: none; border-color: var(--primary); }
+
+.ms-count { margin: 12px 2px; color: #777; font-size: 90%; }
+
+.ms-results { margin: 0; padding: 0; list-style: none; }
+
+.ms-group {
+    padding: 10px 12px 4px;
+    font-size: 85%;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #999;
+    border-bottom: 1px solid #eee;
+}
+
+.ms-result { border-bottom: 1px solid #f0f0f0; }
+
+.ms-result > a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--text-darker);
+}
+
+.ms-result > a:hover,
+.ms-result.ms-active > a {
+    background-color: #f2faf8;
+    text-decoration: none;
+}
+
+.ms-title { color: var(--primary); font-weight: 600; }
+
+.ms-result > a:hover .ms-title { color: var(--highlight); }
+
+.ms-desc {
+    display: block;
+    margin-top: 2px;
+    font-size: 88%;
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ms-badge {
+    margin-left: 8px;
+    padding: 1px 6px;
+    font-size: 74%;
+    border-radius: 8px;
+    background-color: #eee;
+    color: #666;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.ms-badge-documentation { background-color: #e2f1ee; color: #15776a; }
+.ms-badge-examples      { background-color: #fdf0dd; color: #97671a; }
+
+.ms-results mark,
+.ms-dropdown mark {
+    padding: 0;
+    background-color: #ffee9e;
+    color: inherit;
+}
+
+.ms-empty,
+.ms-more { padding: 10px 12px; color: #777; }
+
+.ms-more { border-top: 1px solid #eee; text-align: center; }
+
+@media (max-width: 767px) {
+    .ms-nav-input,
+    .ms-nav-input:focus { width: 100%; margin-left: 0; }
+    .ms-dropdown { position: static; width: 100%; box-shadow: none; }
+}
+
+.ms-path {
+    margin-left: 8px;
+    font-size: 78%;
+    color: #aaa;
+    font-family: monospace;
+}

@@ -261,7 +261,15 @@ toc: false
 - Callouts: `_includes/{note,tip,warning,important,callout}.html`.
 - `search.json` is a Liquid template iterating `site.pages`; add
   `search: exclude` to keep a page out of the client-side search index
-  (`js/jekyll-search.js`).
+  (`js/mtex-search.js`). Rows are `[title, url, folderIndex, description]`, the
+  description being the first paragraph after the `<!--introduction-->` marker
+  that MATLAB's `publish` emits — the docstring purpose line for function
+  reference pages, the abstract for documentation pages. The extraction is
+  deliberately invariant to whether `page.content` is rendered or raw, since
+  `--incremental` leaves unchanged pages unrendered; see the comment in
+  `search.json` before altering it. The search box itself is
+  `_includes/search_box.html`, included from `_includes/topnav.html`, with the
+  full-page version at `pages/search/search.md`.
 - Top navigation comes from `_data/topnav.yml` and points at permalinks
   (`/Documentation`, `/function_reference`, `/workshop26`, …).
 - Markdown is kramdown with GFM input; syntax highlighting is Rouge.

@@ -1,0 +1,25 @@
+{% comment %}
+Search box for the top navigation. A real GET form, so pressing Enter without
+JavaScript lands on search.html?q=... , which the search page reads. With JS,
+attach() intercepts and shows an inline dropdown instead.
+{% endcomment %}
+<li class="ms-nav">
+	<form class="ms-form" method="get" action="search.html" role="search">
+		<input type="text" name="q" id="ms-nav-input" class="ms-nav-input"
+		       placeholder="{{ site.data.strings.search_placeholder_text }}"
+		       aria-label="Search MTEX documentation">
+		<ul id="ms-nav-results" class="ms-dropdown" role="listbox" aria-label="Search results"></ul>
+	</form>
+</li>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	var input = document.getElementById('ms-nav-input');
+	if (!input || !window.MtexSearch) { return; }
+	MtexSearch.attach(input, {
+		container: document.getElementById('ms-nav-results'),
+		mode: 'dropdown',
+		limit: 8,
+		noResultsText: '{{ site.data.strings.search_no_results_text }}'
+	});
+});
+</script>
