@@ -2,15 +2,22 @@
 Search box for the top navigation. A real GET form, so pressing Enter without
 JavaScript lands on search.html?q=... , which the search page reads. With JS,
 attach() intercepts and shows an inline dropdown instead.
+
+Deliberately NOT an <li> inside ul.nav: the sidebar accordion styling in
+customstyles.css reaches any span under `.nav li > a` and would give every
+result span float:right, font-size:19px and a '\25be' caret via :after. Sitting
+outside the list keeps those rules from ever matching. It is placed before the
+nav <ul> in topnav.html because right-floated siblings stack right-to-left, so
+first means rightmost.
 {% endcomment %}
-<li class="ms-nav">
+<div class="ms-nav">
 	<form class="ms-form" method="get" action="search.html" role="search">
 		<input type="text" name="q" id="ms-nav-input" class="ms-nav-input"
 		       placeholder="{{ site.data.strings.search_placeholder_text }}"
 		       aria-label="Search MTEX documentation">
 		<ul id="ms-nav-results" class="ms-dropdown" role="listbox" aria-label="Search results"></ul>
 	</form>
-</li>
+</div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 	var input = document.getElementById('ms-nav-input');

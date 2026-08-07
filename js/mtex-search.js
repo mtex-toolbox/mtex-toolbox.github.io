@@ -203,25 +203,31 @@
         return frag;
     }
 
-    function renderResult(hit, terms, id) {
+    // showBadge is false for grouped results, where the section heading already
+    // says "Function reference" and repeating it on every row is just noise.
+    function renderResult(hit, terms, id, showBadge) {
         var rec = hit.rec;
         var li = document.createElement('li');
         var a = document.createElement('a');
         var title = document.createElement('span');
-        var badge = document.createElement('span');
+        var badge;
 
         li.className = 'ms-result';
         li.setAttribute('role', 'option');
         if (id) { li.id = id; }
 
         a.href = rec.u;
+
+        // Title, stem and badge share a nowrap flex line of their own: with
+        // flex-wrap the badge would drop to a second line before the title
+        // ever shrank, leaving rows at uneven heights.
+        var head = document.createElement('span');
+        head.className = 'ms-head';
+        a.appendChild(head);
+
         title.className = 'ms-title';
         title.appendChild(highlight(rec.t, terms));
-        a.appendChild(title);
-
-        badge.className = 'ms-badge ms-badge-' + FOLDERS[rec.f];
-        badge.appendChild(document.createTextNode(FOLDER_LABEL[rec.f]));
-        a.appendChild(badge);
+        head.appendChild(title);
 
         // Eight different pages are titled "Statistics". Where the title does
         // not already say which page this is, the url stem does.
@@ -229,7 +235,14 @@
             var stem = document.createElement('span');
             stem.className = 'ms-path';
             stem.appendChild(document.createTextNode(rec.stem));
-            a.appendChild(stem);
+            head.appendChild(stem);
+        }
+
+        if (showBadge) {
+            badge = document.createElement('span');
+            badge.className = 'ms-badge ms-badge-' + FOLDERS[rec.f];
+            badge.appendChild(document.createTextNode(FOLDER_LABEL[rec.f]));
+            head.appendChild(badge);
         }
 
         if (rec.d) {
@@ -321,14 +334,14 @@
                     head.textContent = FOLDER_LABEL[f] + ' (' + inFolder.length + ')';
                     frag.appendChild(head);
                     inFolder.forEach(function (h) {
-                        var li = renderResult(h, terms, 'ms-r' + (n++));
+                        var li = renderResult(h, terms, 'ms-r' + (n++), false);
                         items.push(li);
                         frag.appendChild(li);
                     });
                 });
             } else {
                 hits.forEach(function (h) {
-                    var li = renderResult(h, terms, 'ms-r' + (n++));
+                    var li = renderResult(h, terms, 'ms-r' + (n++), true);
                     items.push(li);
                     frag.appendChild(li);
                 });
