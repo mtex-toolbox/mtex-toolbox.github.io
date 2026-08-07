@@ -40,6 +40,11 @@ setMTEXpref('figSize',0.5)
 % currently in the repository were rendered at.
 setMTEXpref('screenSize',[1920 1200])
 
+% the maps in the documentation do not carry the reference frame indicator
+% in their scale bar - the pages that are about the axes alignment ask for
+% it explicitly with 'refFrame','on'
+setMTEXpref('showRefFrame','off')
+
 setMTEXpref('generatingHelpMode',true);
 global mtex_progress; mtex_progress = 0; %#ok<GVMIS>
 set(0,'FormatSpacing','compact')
@@ -206,6 +211,7 @@ function delete
 global mtex_progress;
 setMTEXpref('generatingHelpMode',false);
 setMTEXpref('screenSize',[]);
+setMTEXpref('showRefFrame','on');
 mtex_progress = 1;
 
 end
