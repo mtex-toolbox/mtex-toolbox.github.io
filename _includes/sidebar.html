@@ -1,58 +1,42 @@
-{% assign sidebar = site.data.sidebars[page.sidebar].entries %}
+{% comment %}
+The sidebar tree is no longer rendered into the page. It is published once per
+sidebar as /sidebars/<name>.html (see sidebar_tree.html and the sidebars/
+folder) and pulled in here at runtime, so the browser fetches it once instead of
+carrying a copy in all ~2700 pages. Every page still links to every other page
+via sitemap.xml, so this costs nothing in crawlability.
+{% endcomment %}
+{% assign sidebar_data = site.data.sidebars[page.sidebar] %}
 
-<ul id="mysidebar" class="nav">
-  <li class="sidebarTitle">{{sidebar[0].product}} {{sidebar[0].version}}</li>
-  {% for entry in sidebar %}
-  {% for folder in entry.folders %}
-  {% if folder.output contains "web" %}
-  <li>
-      <a class="no_icon" href="#">{{ folder.title }}</a>
-      <ul>
-          {% for folderitem in folder.folderitems %}
-          {% if folderitem.output contains "web" %}
-          {% if folderitem.external_url %}
-          <li><a href="{{folderitem.external_url}}" target="_blank">{{folderitem.title}}</a></li>
-          {% elsif page.url == folderitem.url %}
-          <li class="active"><a class="no_icon" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-          {% elsif folderitem.type == "empty" %}
-          <li><a class="no_icon" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+<ul id="mysidebar" class="nav"{% if sidebar_data %} data-sidebar-url="{{ "/sidebars/" | append: page.sidebar | append: ".html" | relative_url }}"{% endif %}></ul>
 
-          {% else %}
-          <li><a class="no_icon" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
-          {% endif %}
-          {% for subfolders in folderitem.subfolders %}
-          {% if subfolders.output contains "web" %}
-          <li class="subfolders">
-              <a class="no_icon" href="#">{{ subfolders.title }}</a>
-              <ul>
-                  {% for subfolderitem in subfolders.subfolderitems %}
-                  {% if subfolderitem.output contains "web" %}
-                  {% if subfolderitem.external_url %}
-                  <li><a href="{{subfolderitem.external_url}}" target="_blank">{{subfolderitem.title}}</a></li>
-                  {% elsif page.url == subfolderitem.url %}
-                  <li class="active"><a class="no_icon" href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
-                  {% else %}
-                  <li><a class="no_icon" href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
-                  {% endif %}
-                  {% endif %}
-                  {% endfor %}
-              </ul>
-          </li>
-          {% endif %}
-          {% endfor %}
-          {% endif %}
-          {% endfor %}
-      </ul>
-   </li>
-     {% endif %}
-      {% endfor %}
-      {% endfor %}
-      <!-- if you aren't using the accordion, uncomment this block:
-         <p class="external">
-             <a class="no_icon" href="#" id="collapseAll">Collapse All</a> | <a class="no_icon" href="#" id="expandAll">Expand All</a>
-         </p>
-         -->
-</ul>
+{% if sidebar_data %}
+<script>
+$(function () {
+    var $sidebar = $("#mysidebar");
+    var url = $sidebar.attr("data-sidebar-url");
+    if (!url) { return; }
 
-<!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
-<script>$("li.active").parents('li').toggleClass("active");</script>
+    $.get(url, function (tree) {
+        $sidebar.html(tree);
+
+        // The fragment is shared by every page, so the entry for the page we
+        // are on is marked here rather than baked in. Its ancestors have to be
+        // opened too, and both have to happen before navgoco initialises --
+        // otherwise the tree does not unfold to the current page.
+        // Some sidebars link to extensionless permalinks (/workshop24) while
+        // the page can equally be reached as /workshop24.html, so compare
+        // without the suffix.
+        var strip = function (path) { return path.replace(/\.html$/, ""); };
+        var here = strip(location.pathname.split("/").pop());
+        if (here) {
+            $sidebar.find("a").filter(function () {
+                return strip($(this).attr("href") || "") === here;
+            }).parent("li").addClass("active");
+        }
+        $sidebar.find("li.active").parents("li").addClass("active");
+
+        initSidebarAccordion();
+    }, "html");
+});
+</script>
+{% endif %}
