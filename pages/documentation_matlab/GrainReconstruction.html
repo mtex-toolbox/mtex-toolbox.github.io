@@ -26,8 +26,6 @@ To make changes, update the MATLAB code and republish this document.
 <p>By grain reconstruction we mean the subdivision of the specimen, or more precisely the measured surface of the specimen, into regions of similar orientation which we then call grains. Note that there is no canonical definition of what is a grain. The default grain reconstruction method in MTEX is based on the definition of high angle grain boundaries which are assumed at the perpendicular bisector between neighboring measurements whenever their misorientation angle exceeds a certain threshold. According to this point of view grains are regions surrounded by grain boundaries.</p>
 <p>In order to illustrate the grain reconstruction process we consider the following sample data set</p>
 {% highlight matlab %}
-close all
-
 % import the data
 mtexdata forsterite
 
@@ -35,7 +33,7 @@ mtexdata forsterite
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
 % make a phase plot
-plot(ebsd)
+plot(ebsd,'micronbar','off')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -94,7 +92,7 @@ grains = grain2d (y↑→x)
 hold on
 
 % plot the boundary of all grains
-plot(grains.boundary,'linewidth',1.5)
+plot(grains.boundary,'linewidth',1.5,'micronbar','off')
 
 % stop override mode
 hold off
@@ -109,7 +107,7 @@ hold off
 grains = smooth(grains,5);
 
 % display the result
-plot(ebsd)
+plot(ebsd,'micronbar','off')
 hold on
 plot(grains.boundary,'linewidth',1.5)
 hold off
@@ -128,7 +126,7 @@ ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 grains = smooth(grains,3);
 
 % plot the boundary of all grains
-plot(ebsd)
+plot(ebsd,'micronbar','off')
 hold on
 plot(grains.boundary,'linewidth',1.5)
 hold off
@@ -145,7 +143,7 @@ ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 [grains, ebsd] = calcGrains(ebsd,'alpha',0,'angle',10*degree);
 
 % plot the boundary of all grains
-plot(ebsd)
+plot(ebsd,'micronbar','off')
 hold on
 plot(grains.boundary,'linewidth',1.5)
 hold off
