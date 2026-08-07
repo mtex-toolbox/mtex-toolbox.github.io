@@ -3,7 +3,11 @@
 <head>
     {% include head.html %}
     <script>
-        $(document).ready(function() {
+        // Called by sidebar.html once the sidebar tree has been fetched and
+        // injected. It cannot run on document.ready any more: the tree is no
+        // longer part of the page, so at that point #mysidebar is still empty
+        // and navgoco would have nothing to attach to.
+        function initSidebarAccordion() {
             // Initialize navgoco with default options
             $("#mysidebar").navgoco({
                 caretHtml: '',
@@ -30,9 +34,7 @@
                 e.preventDefault();
                 $("#mysidebar").navgoco('toggle', true);
             });
-
-        });
-
+        }
     </script>
     <script>
         $(function () {

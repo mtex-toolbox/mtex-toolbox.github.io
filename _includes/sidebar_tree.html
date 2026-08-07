@@ -1,0 +1,53 @@
+{% comment %}
+The sidebar tree itself, as the *inner* HTML of ul#mysidebar.
+
+This used to live in sidebar.html and was rendered into every single page. The
+function reference sidebar alone is ~2000 <li>, which turned a 10 KB generated
+page into a 450 KB one and the whole site into 1.2 GB. It is now published once
+per sidebar under /sidebars/<name>.html and fetched by sidebar.html at runtime,
+so the browser downloads it once and reuses it across pages.
+
+Takes the sidebar name as `sbname` -- site.data.sidebars[sbname]. No "active"
+class is emitted here: the fragment is shared by every page, so the current
+page is marked client side in sidebar.html instead.
+{% endcomment %}
+{% assign sidebar = site.data.sidebars[include.sbname].entries %}
+<li class="sidebarTitle">{{sidebar[0].product}} {{sidebar[0].version}}</li>
+{% for entry in sidebar %}
+{% for folder in entry.folders %}
+{% if folder.output contains "web" %}
+<li>
+    <a class="no_icon" href="#">{{ folder.title }}</a>
+    <ul>
+        {% for folderitem in folder.folderitems %}
+        {% if folderitem.output contains "web" %}
+        {% if folderitem.external_url %}
+        <li><a href="{{folderitem.external_url}}" target="_blank">{{folderitem.title}}</a></li>
+        {% else %}
+        <li><a class="no_icon" href="{{folderitem.url | remove: "/"}}">{{folderitem.title}}</a></li>
+        {% endif %}
+        {% for subfolders in folderitem.subfolders %}
+        {% if subfolders.output contains "web" %}
+        <li class="subfolders">
+            <a class="no_icon" href="#">{{ subfolders.title }}</a>
+            <ul>
+                {% for subfolderitem in subfolders.subfolderitems %}
+                {% if subfolderitem.output contains "web" %}
+                {% if subfolderitem.external_url %}
+                <li><a href="{{subfolderitem.external_url}}" target="_blank">{{subfolderitem.title}}</a></li>
+                {% else %}
+                <li><a class="no_icon" href="{{subfolderitem.url | remove: "/"}}">{{subfolderitem.title}}</a></li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+    </ul>
+ </li>
+{% endif %}
+{% endfor %}
+{% endfor %}
