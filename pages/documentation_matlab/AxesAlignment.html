@@ -197,6 +197,46 @@ ans = plottingConvention (y↑→x)
   north      : (0,1,0)
   east       : (1,0,0)
 {% endhighlight %}
+<h2 id="13">The Reference Frame on EBSD Maps</h2>
+<p>On an EBSD or grain map the alignment in use is indicated within the scale bar. Every axis with a component within the screen plane becomes an arrow, the axis along the viewing direction becomes a circled dot if it points out of the screen and a circled cross if it points into it.</p>
+{% highlight matlab %}
+mtexdata titanium
+
+ebsd.how2plot = 'y↑→x';
+plot(ebsd,ebsd.orientations,'figSize','small')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
+     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
+ 
+ Properties: ci, grainid, iq, sem_signal
+ Scan unit : um
+ X x Y x Z : [0, 996] x [0, 998] x [0, 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxesAlignment_08.png" %}
+</center>
+<p>Changing the plotting convention turns the indicator along with the map</p>
+{% highlight matlab %}
+ebsd.how2plot = 'x←↑y';
+plot(ebsd,ebsd.orientations,'figSize','small')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxesAlignment_09.png" %}
+</center>
+<p>The indicator may be switched off for a single plot by the option <code class="language-plaintext highlighter-rouge">'refFrame','off'</code> or for the entire session by <code class="language-plaintext highlighter-rouge">setMTEXpref('showRefFrame','off')</code>
+</p>
+{% highlight matlab %}
+ebsd.how2plot = 'y↑→x';
+plot(ebsd,ebsd.orientations,'refFrame','off','figSize','small')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxesAlignment_10.png" %}
+</center>
 </div>
 </body>
 </html>

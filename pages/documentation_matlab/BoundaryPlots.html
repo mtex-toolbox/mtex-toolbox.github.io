@@ -28,7 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 close all;
 
 % import the data
-mtexdata forsterite
+mtexdata forsterite silent
 
 % restrict it to a sub-region of interest.
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
@@ -37,22 +37,22 @@ ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 [grains,ebsd] = calcGrains(ebsd,'minPixel',5,'alpha',10);
 
 % smooth the grains a bit
-grains = smooth(grains,4);
+grains = smooth(grains,4)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+grains = grain2d (y↑→x)
  
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed          none                                   
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     1      53   14017  Forsterite       mmm  LightSkyBlue
+     2      13    1375   Enstatite       mmm  DarkSeaGreen
+     3      22     700    Diopside     12/m1     Goldenrod
  
- Properties: bands, bc, bs, error, mad
- Scan unit : um
- X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
- Normal vector: (0,0,1)
+ boundary segments: 3301 (141890 µm)
+ inner boundary segments: 12 (464 µm)
+ triple points: 122
+ 
+ Properties: meanRotation, GOS
 {% endhighlight %}
 <p>The grain boundary segments of a list of grains are stored within the field</p>
 {% highlight matlab %}
@@ -87,20 +87,21 @@ hold off
 <h2 id="4">Specific boundaries</h2>
 <p>Accordingly, we can access the grain boundary of a specific grain by</p>
 {% highlight matlab %}
-grains(45).boundary
+grains(47).boundary
 
 % lets highlight this specific grain by its boundary
 hold on
-plot(grains(45).boundary,'lineWidth',4,'lineColor','DarkBlue')
+plot(grains(47).boundary,'lineWidth',4,'lineColor','DarkBlue')
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = grainBoundary (y↑→x)
  
- Segments  length   mineral 1   mineral 2
-       15  596 µm  Forsterite  Forsterite
-       19  837 µm  Forsterite    Diopside
+ Segments   length   mineral 1   mineral 2
+       81  3365 µm  Forsterite  Forsterite
+       16   720 µm  Forsterite   Enstatite
+        9   386 µm  Forsterite    Diopside
 {% endhighlight %}
 <center>
 {% include inline_image.html file="BoundaryPlots_02.png" %}

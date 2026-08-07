@@ -22,10 +22,13 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>In MTEX we describe radial basis functions on the rotation group \(SO(3)\) by the class <code class="language-plaintext highlighter-rouge"><a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a></code>.</p>
 <p>This includes the following three types of ODFs.</p>
-<!--/introduction-->
-<h2 id="1">The Uniform ODF</h2>
+<h2 id="3">The Uniform ODF</h2>
 <p>The uniform ODF</p>
 <p>\[f(g) = 1,\quad g \in SO(3),\]</p>
 <p>is everywhere identical to one. In order to define a uniform ODF one needs only to specify its crystal and specimen symmetry and to use the command <a href="uniformODF.html">uniformODF</a>.</p>
@@ -36,12 +39,12 @@ odf = uniformODF(cs,ss)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (m3̅m → y↓→x (mmm))
+odf = SO3FunRBF (m3̅m → y↑→x (mmm))
  
   uniform component
   weight: 1
 {% endhighlight %}
-<h2 id="2">Unimodal ODFs</h2>
+<h2 id="4">Unimodal ODFs</h2>
 <p>An unimodal ODF</p>
 <p>\[f(g; x) = \psi (\angle(g,x)),\quad g \in SO(3),\]</p>
 <p>is specified by a <a href="SO3Kernels.html">radial symmetrical function</a> \(\psi\) centered at a modal <a href="orientation.orientation.html">orientation</a>, \(x\in SO(3)\). In order to define a unimodal ODF one needs</p>
@@ -63,7 +66,7 @@ plotPDF(odf1,[Miller(1,0,0,cs),Miller(1,1,0,cs)],'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf1 = SO3FunRBF (432 → y↓→x)
+odf1 = SO3FunRBF (432 → y↑→x)
  
   unimodal component
   kernel: van Mises Fisher, halfwidth 10°
@@ -77,7 +80,7 @@ odf1 = SO3FunRBF (432 → y↓→x)
 {% include inline_image.html file="RadialODFs_01.png" %}
 </center>
 <p>For simplicity one can also omit the kernel function. In this case the default SO(3) de la Vallee Poussin kernel is chosen with half width of 10 degree.</p>
-<h2 id="4">Multimodal ODFs</h2>
+<h2 id="6">Multimodal ODFs</h2>
 <p>We define a second unimodal ODF with same <a href="SO3Kernels.html">kernel function</a> and same <a href="crystalSymmetry.crystalSymmetry.html">crystal symmetry</a> at an other <a href="orientation.orientation.html">orientation</a>.</p>
 {% highlight matlab %}
 ori2 = orientation.byMiller([1,1,2],[0,2,1],cs)
@@ -87,14 +90,14 @@ plotPDF(odf2,[Miller(1,0,0,cs),Miller(1,1,0,cs)],'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori2 = orientation (432 → y↓→x)
+ori2 = orientation (432 → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   309.232 35.2644      45
  
  
-odf2 = SO3FunRBF (432 → y↓→x)
+odf2 = SO3FunRBF (432 → y↑→x)
  
   unimodal component
   kernel: van Mises Fisher, halfwidth 10°
@@ -115,7 +118,7 @@ plotPDF(odf3,[Miller(1,0,0,cs),Miller(1,1,0,cs)],'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf3 = SO3FunRBF (432 → y↓→x)
+odf3 = SO3FunRBF (432 → y↑→x)
  
   multimodal components
   kernel: van Mises Fisher, halfwidth 10°
@@ -137,7 +140,7 @@ plotPDF(odf4,[Miller(1,0,0,odf4.CS),Miller(1,1,0,odf4.CS)],'antipodal')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf4 = SO3FunRBF (3̅m1 → y↓→x)
+odf4 = SO3FunRBF (3̅m1 → y↑→x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°

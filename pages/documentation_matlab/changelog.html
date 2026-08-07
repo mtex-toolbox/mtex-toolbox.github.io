@@ -100,7 +100,15 @@ ebsd = EBSD.load('data.edaxh5','setting',3)  % not the assumed setting 2
 {% highlight matlab %}
 plot(ebsd,ebsd.orientation)                      % fast, default
 plot(ebsd,ebsd.orientation,'exact')              % exact unit cells
-plot(ebsd,'Location','nw','BackgroundColor','k','LineColor','w','Length',50)
+plot(ebsd,'Location','nw','SBBackgroundColor','k','SBLineColor','w','Length',50)
+{% endhighlight %}
+<p>
+<b>The Reference Frame is Shown on the Map</b>
+</p>
+<p>On top of the bar the same box now indicates how the specimen reference frame is aligned on screen - an arrow for every axis with a component within the screen plane, a circled dot or a circled cross for the axis pointing out of or into the screen, exactly as in the string form of <a href="plottingConvention.html">plottingConvention</a>. Reorienting the map, e.g. by <a href="plottingConvention.setView.html"><code class="language-plaintext highlighter-rouge">setView</code></a>, turns the indicator along with the data. Switch it off per plot or for the whole session by</p>
+{% highlight matlab %}
+plot(ebsd,ebsd.orientations,'refFrame','off')
+setMTEXpref('showRefFrame','off')
 {% endhighlight %}
 <p>
 <b>x to the East and y to the South by Default</b>

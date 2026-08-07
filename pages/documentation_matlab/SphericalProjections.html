@@ -23,6 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>MTEX supports four types of spherical projection which are available for all spherical plot, e.g. <a href="SO3Fun.plotPDF.html">polefigure plots</a>, <a href="SO3Fun.plotIPDF.html">inverse polefigure plots</a> or <a href="SO3Fun.plotSection.html">ODF plots</a>. These are the equal area projection (Schmidt projection), the equal distance projection, the stereographic projection (equal angle projection), the three-dimensional projection and the flat projection.</p>
 <p>In order to demonstrate the different projections we start by defining a model ODF.</p>
 {% highlight matlab %}
@@ -31,13 +34,13 @@ odf = fibreODF(Miller(1,1,0,cs),zvector)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunCBF (321 → y↓→x)
+odf = SO3FunCBF (321 → y↑→x)
  
   kernel: de la Vallee Poussin, halfwidth 10°
   fibre : (112̅0) || 0,0,1
   weight: 1
 {% endhighlight %}
-<h2 id="2">Alignment of the Hemispheres</h2>
+<h2 id="3">Alignment of the Hemispheres</h2>
 <p>
 <b>Partial Spherical Plots</b>
 </p>
@@ -64,7 +67,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="SphericalProjections_03.png" %}
 </center>
-<h2 id="5">Alignment of the Coordinate Axes</h2>
+<h2 id="6">Alignment of the Coordinate Axes</h2>
 <p>The alignment of the plot on the screen is controlled by the <a href="plottingConvention.html">plottingConvention</a>. One can specify any vector to point out of the screen or east, north, west or south.</p>
 {% highlight matlab %}
 how2plot = plottingConvention;
@@ -76,7 +79,7 @@ plotPDF(odf,Miller(1,0,0,cs),'antipodal',how2plot)
 <center>
 {% include inline_image.html file="SphericalProjections_04.png" %}
 </center>
-<h2 id="6">Equal Area Projection (Schmidt Projection)</h2>
+<h2 id="7">Equal Area Projection (Schmidt Projection)</h2>
 <p>Equal area projection is defined by the characteristic that it preserves the spherical area. Since pole figures are defined as relative frequency by area, equal area projection is the default projection in MTEX. It can be set explicitly by the options <code class="language-plaintext highlighter-rouge">'earea'</code> or <code class="language-plaintext highlighter-rouge">'schmidt'</code>.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'antipodal','projection','earea')
@@ -84,7 +87,7 @@ plotPDF(odf,Miller(1,0,0,cs),'antipodal','projection','earea')
 <center>
 {% include inline_image.html file="SphericalProjections_05.png" %}
 </center>
-<h2 id="7">Equal Distance Projection and Equal Angle (Stereographic) Projection</h2>
+<h2 id="8">Equal Distance Projection and Equal Angle (Stereographic) Projection</h2>
 <p>The equal distance projection differs from the equal area projection by the characteristic that it preserves the distances of points to the origin. Hence it might be a more intuitive projection if you look at crystal directions. Another famous spherical projection is the stereographic projection which preserves the angle between arbitrary great circles. It can be chosen by setting the option <code class="language-plaintext highlighter-rouge">'stereo'</code> or <code class="language-plaintext highlighter-rouge">'eangle'</code>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('m-3m');
@@ -100,7 +103,7 @@ mtexTitle('equal angle')
 <center>
 {% include inline_image.html file="SphericalProjections_06.png" %}
 </center>
-<h2 id="8">Plain Projection</h2>
+<h2 id="9">Plain Projection</h2>
 <p>
 <b>Plain</b> means that the polar angles theta / rho are plotted in a simple rectangular plot. This projection is often chosen for ODF plots, e.g.</p>
 {% highlight matlab %}
@@ -111,7 +114,7 @@ mtexColorMap white2black
 <center>
 {% include inline_image.html file="SphericalProjections_07.png" %}
 </center>
-<h2 id="9">Three-dimensional Plots</h2>
+<h2 id="10">Three-dimensional Plots</h2>
 <p>MTEX also offers a three-dimensional plot of pole figures which even might be rotated freely in space</p>
 {% highlight matlab %}
 howt2plot = plottingConvention;

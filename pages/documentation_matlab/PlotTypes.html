@@ -23,7 +23,10 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">A Sample ODFs</h2>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">A Sample ODFs</h2>
 <p>Let us first define a model ODF to be plotted later on.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
@@ -32,7 +35,7 @@ pf = calcPoleFigure(odf,Miller(1,0,0,cs),equispacedS2Grid('antipodal'));
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunCBF (3̅m1 → y↓→x)
+odf = SO3FunCBF (3̅m1 → y↑→x)
  
   kernel: de la Vallee Poussin, halfwidth 10°
   fibre : (112̅0) || 0,0,1
@@ -44,10 +47,10 @@ ori = discreteSample(odf,100)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (3̅m1 → y↓→x)
+ori = orientation (3̅m1 → y↑→x)
   size: 100 x 1
 {% endhighlight %}
-<h2 id="3">Scatter Plots</h2>
+<h2 id="4">Scatter Plots</h2>
 <p>In a scatter plots individual points are plotted. This plot is usually applied when individual orientations or pole figure measurements are visualized.</p>
 {% highlight matlab %}
 close all
@@ -85,7 +88,7 @@ plot(pf)
 <center>
 {% include inline_image.html file="PlotTypes_04.png" %}
 </center>
-<h2 id="8">Contour Plots</h2>
+<h2 id="9">Contour Plots</h2>
 <p>Contour plots are plots consisting only of contour lines and are mainly used for pole figure and ODF plots. The number or exact location of the contour levels can be specified as an option. See <a href="https://de.mathworks.com/help/matlab/ref/matlab.graphics.chart.primitive.contour-properties.html">contourgroup properties</a> for more options!</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'contour',0:0.5:4,'antipodal')
@@ -93,7 +96,7 @@ plotPDF(odf,Miller(1,0,0,cs),'contour',0:0.5:4,'antipodal')
 <center>
 {% include inline_image.html file="PlotTypes_05.png" %}
 </center>
-<h2 id="9">Filled Contour Plots</h2>
+<h2 id="10">Filled Contour Plots</h2>
 <p>Filled contour plots are obtained by the option <b>contourf</b>. Again you may pass as an option the number of contour lines or its exact location.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'contourf','antipodal')
@@ -101,7 +104,7 @@ plotPDF(odf,Miller(1,0,0,cs),'contourf','antipodal')
 <center>
 {% include inline_image.html file="PlotTypes_06.png" %}
 </center>
-<h2 id="10">Smooth Interpolated Plots</h2>
+<h2 id="11">Smooth Interpolated Plots</h2>
 <p>The default plotting style for pole figures and ODFs is <b>smooth</b>. Which results in a colored plot without contour lines. Here one can specify the resolution of the plot using the option <code class="language-plaintext highlighter-rouge">resolution</code>.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'antipodal','resolution',10*degree)
@@ -109,7 +112,7 @@ plotPDF(odf,Miller(1,0,0,cs),'antipodal','resolution',10*degree)
 <center>
 {% include inline_image.html file="PlotTypes_07.png" %}
 </center>
-<h2 id="11">Line Plots</h2>
+<h2 id="12">Line Plots</h2>
 <p>Line plots are used by MTEX for one-dimensional ODF plots, plots of Fourier coefficients and plots of kernel functions. They can be customized by the standard MATLAB linespec options. See <a href="matlab:doc('linespec')">linespec</a>!</p>
 {% highlight matlab %}
 f = fibre(Miller(1,0,0,cs),xvector);
