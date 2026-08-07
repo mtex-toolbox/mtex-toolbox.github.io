@@ -88,10 +88,8 @@ ebsd = EBSD.load('data.ctf','EulerCorrection',rotation.byEuler(pi,0,0))
 </div>
 {% highlight matlab %}
 ebsd = EBSD.load('data.edaxh5','setting',3)  % not the assumed setting 2
+cs = crystalSymmetry('321',[4.9 4.9 5.4],'EDAX')   % x // a
 {% endhighlight %}
-<pre>                                                        &lt;html&gt;
-                                                           &lt;table class="usertable"/&gt;
-                                                        &lt;/html&gt;</pre>
 <p>Phases of Bruker files keep their International Tables number and atomic basis in <code class="language-plaintext highlighter-rouge">cs.opt.spaceId</code> and <code class="language-plaintext highlighter-rouge">cs.opt.atoms</code>. Fixed along the way: <code class="language-plaintext highlighter-rouge">ang</code> files whose header contains a stray carriage return - as written by some EDAX exports - silently lost their first data point.</p>
 <p>
 <b>Much Faster Plotting of EBSD Maps</b>
@@ -103,12 +101,19 @@ plot(ebsd,ebsd.orientation,'exact')              % exact unit cells
 plot(ebsd,'Location','nw','SBBackgroundColor','k','SBLineColor','w','Length',50)
 {% endhighlight %}
 <p>
-<b>The Reference Frame is Shown on the Map</b>
+<b>The Reference Frame is Shown on Maps and Sections</b>
 </p>
 <p>On top of the bar the same box now indicates how the specimen reference frame is aligned on screen - an arrow for every axis with a component within the screen plane, a circled dot or a circled cross for the axis pointing out of or into the screen, exactly as in the string form of <a href="plottingConvention.html">plottingConvention</a>. Reorienting the map, e.g. by <a href="plottingConvention.setView.html"><code class="language-plaintext highlighter-rouge">setView</code></a>, turns the indicator along with the data. Switch it off per plot or for the whole session by</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'refFrame','off')
 setMTEXpref('showRefFrame','off')
+{% endhighlight %}
+<p>
+<a href="sigmaSections.html">sigmaSections</a> and <a href="pfSections.html">pfSections</a> are annotated with the specimen directions the way pole figures are - a section is a pole figure split up by the omega angle, so it lives in the same reference frame. Both are customized by the same <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference, misorientation sections stay unannotated as their directions are crystal directions</p>
+{% highlight matlab %}
+pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y],{'RD','ND'},...
+  'BackgroundColor','w','tag','axesLabels',varargin{:});
+setMTEXpref('pfAnnotations',pfAnnotations);
 {% endhighlight %}
 <p>
 <b>x to the East and y to the South by Default</b>
@@ -352,7 +357,7 @@ ebsd.plottingConvention = how2plot
 <div>
 <ul>
 <li>new function <a href="grain2d.calcTraces.html"><code class="language-plaintext highlighter-rouge">calcTraces(grains)</code></a> and <a href="EBSD.calcTraces.html"><code class="language-plaintext highlighter-rouge">calcTraces(ebsd)</code></a> to compute habit plane traces from families of grains or EBSD data.</li>
-<li>new function <a href="calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND(traces,ori)</code></a> to compute the grain boundary normal distribution from a list of habit plane traces and the corresponding grain orientations.</li>
+<li>new function <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND(traces,ori)</code></a> to compute the grain boundary normal distribution from a list of habit plane traces and the corresponding grain orientations.</li>
 <li>new function <a href="grainBoundary.characteristicShape.html"><code class="language-plaintext highlighter-rouge">characteristicShape(gB)</code></a> to compute the characteristic shape from lists of grain boundaries</li>
 </ul>
 </div>
