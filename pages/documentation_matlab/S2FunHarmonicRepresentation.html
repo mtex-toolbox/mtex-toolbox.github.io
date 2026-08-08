@@ -43,6 +43,9 @@ plot(fun)
 fun = S2FunHarmonic (y↑→x)
   bandwidth: 1
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_01.png" %}
+</center>
 <p>This function has the cut off degree \(M=1\). As a rule of thumb: smooth functions require only a small cut off degree whereas functions with jumps or sharp edges requires a high cut off degree. If the cut off degree is chosen to small truncation error in the form of high order oscillations are observable like in the following demonstration for the cut off degrees \(M=64\) and \(M=32\).</p>
 {% highlight matlab %}
 sF = sqrt(abs(S2Fun.smiley('bandwidth',256)));
@@ -55,6 +58,9 @@ for bw = [256 128 64 32 16 8]
   mtexTitle(['M = ' num2str(bw)]);
 end
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_02.png" %}
+</center>
 <p>The computation of the Fourier coefficients can be done in several ways. Lets first assume that the function \(f\) is known explicitly, e.g., \(f({\bf v})=({\bf v} \cdot {\bf x})^3\). In MTEX we can express this as</p>
 {% highlight matlab %}
 fun = @(v) dot(v,vector3d.X).^9;
@@ -71,11 +77,17 @@ plot(S2F,'upper')
 S2F = S2FunHarmonic (y↑→x)
   bandwidth: 128
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_03.png" %}
+</center>
 <p>We observe that by default Fourier coefficients up the harmonic cut off degree \(M=128\) are computed. This default value can changed using the option <code class="language-plaintext highlighter-rouge">'bandwidth'</code>. The decay of the Fourier coefficients can be visualized using the command <a href="S2FunHarmonic.plotSpektra.html">plotSpektra</a> which plot for each harmonic degree \(m\) the sum of the squared moduli of the corresponding Fourier coefficients, i.e. \(\sum_{k=-m}^m \lvert \hat f_m^k\rvert^2\)</p>
 {% highlight matlab %}
 close all
 plotSpektra(S2F)
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_04.png" %}
+</center>
 <p>In the present example we observe that almost all Fourier coefficients are zero except for very first one. Hence, it might be reasonable to restrict the cut of degree to the non zero Fourier coefficients</p>
 {% highlight matlab %}
 % restrict to non zero Fourier coefficients
@@ -89,6 +101,9 @@ plotSpektra(S2F,'linewidth',2)
 S2F = S2FunHarmonic (y↑→x)
   bandwidth: 9
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_05.png" %}
+</center>
 <p>In The robust estimation of these Fourier coefficients from discrete data is discussed in the section <a href="S2FunApproximationInterpolation.html">Spherical Approximation</a>
 </p>
 <p>In particular all operations on those functions are implemented as operations on the Fourier coefficients.</p>
@@ -97,6 +112,9 @@ S2F = S2FunHarmonic (y↑→x)
 {% highlight matlab %}
 surf(S2FunHarmonic(eye(10)))
 {% endhighlight %}
+<center>
+{% include inline_image.html file="S2FunHarmonicRepresentation_06.png" %}
+</center>
 </div>
 </body>
 </html>
