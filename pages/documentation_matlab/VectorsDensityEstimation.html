@@ -51,6 +51,9 @@ cAxes.antipodal = true;
 plot(cAxes,'upper','MarkerFaceColor','none',...
   'MarkerEdgeAlpha',0.01,'MarkerSize',4)
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_01.png" %}
+</center>
 <p>With more than hundred thousand data points such a plot is not very conclusive - most of the sphere is covered with markers and it is hard to tell where the data are actually concentrated. This is exactly the situation where density estimation helps.</p>
 <h2 id="6">Kernel Density Estimation</h2>
 <p>The idea of kernel density estimation is to place a bell shaped function \(\psi\), the so called <a href="S2Kernels.html">kernel function</a>, at each data point \(\vec v_n\) and to sum up all these shifted kernels</p>
@@ -69,12 +72,15 @@ pdf = S2FunHarmonic (y↑→x)
 <p>The result is a spherical function of type <a href="S2FunHarmonic.S2FunHarmonic.html"><code class="language-plaintext highlighter-rouge">&lt;S2FunHarmonic.S2FunHarmonic.html S2FunHarmonic&gt;</code></a> which we may plot as any other spherical function, see <a href="S2FunPlotting.html">Plotting Spherical Functions</a>
 </p>
 {% highlight matlab %}
-plot(pdf,'upper')
+plot(pdf,'complete')
 mtexColorbar
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_02.png" %}
+</center>
 <p>Note that the antipodal symmetry of the input data has been passed on to the density function. Lets plot the density function and the raw data on top of each other</p>
 {% highlight matlab %}
-contourf(pdf,'upper')
+contourf(pdf)
 mtexColorMap LaboTeX
 
 hold on
@@ -82,6 +88,9 @@ plot(cAxes,'upper','MarkerFaceColor','none','MarkerEdgeColor','k',...
   'MarkerEdgeAlpha',0.01,'MarkerSize',4)
 hold off
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_03.png" %}
+</center>
 <p>The density function is normalized such that its mean value over the sphere is one</p>
 {% highlight matlab %}
 mean(pdf)
@@ -108,6 +117,9 @@ for k = 1:length(hw)
 end
 mtexFig.drawNow
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_04.png" %}
+</center>
 <p>A too small halfwidth results in a spiky function that mainly reproduces the noise of the individual measurements, while a too large halfwidth oversmooths the data and may hide relevant details. As a rule of thumb, the more data points we have, the smaller the halfwidth may be chosen.</p>
 <p>In contrast to the estimation of an orientation density function, cf. <a href="OptimalKernel.html">Optimal Kernel Selection</a>, MTEX does not perform an automatic halfwidth selection for directional data. It is up to the user to choose a reasonable value.</p>
 <p>Note how the maximum density decreases with increasing halfwidth. The halfwidth also determines the harmonic bandwidth of the resulting function - the smaller the halfwidth, the more spherical harmonic coefficients are required to represent the density function</p>
@@ -150,6 +162,9 @@ psi2 = S2DirichletKernel
   bandwidth: 12
   halfwidth: 180°
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_05.png" %}
+</center>
 <p>In contrast to the de la Vallee Poussin kernel the Dirichlet kernel oscillates and takes negative values. These oscillations are inherited by the estimated density function</p>
 {% highlight matlab %}
 pdf2 = calcDensity(cAxes,'kernel',psi2);
@@ -157,6 +172,9 @@ pdf2 = calcDensity(cAxes,'kernel',psi2);
 plot(pdf2,'upper')
 mtexColorbar
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_06.png" %}
+</center>
 <p>which, in particular, becomes negative in some regions</p>
 {% highlight matlab %}
 min(pdf2)
@@ -193,6 +211,9 @@ setColorRange('equal')
 mtexColorbar
 mtexFig.drawNow
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_07.png" %}
+</center>
 <p>Giving every grain the same vote, the result is dominated by the large number of tiny grains and is much flatter than the pixel based density function we computed at the beginning of this page. Weighting by grain area gives a result that is very close to it - which is not surprising, as the number of pixels of a grain is essentially its area.</p>
 <h2 id="20">Antipodal Symmetry</h2>
 <p>Whether the input data are interpreted as directions or as axes has a direct impact on the resulting density function. Without antipodal symmetry we obtain an arbitrary spherical function</p>
@@ -200,10 +221,16 @@ mtexFig.drawNow
 v = vector3d.rand(1000);
 plot(calcDensity(v),'complete')
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_08.png" %}
+</center>
 <p>Assuming antipodal symmetry, either by setting the flag on the data or by passing the option <code class="language-plaintext highlighter-rouge">'antipodal'</code> to <code class="language-plaintext highlighter-rouge">calcDensity</code>, the resulting density function is antipodally symmetric as well, i.e., the upper and the lower hemisphere carry the same information</p>
 {% highlight matlab %}
 plot(calcDensity(v,'antipodal'),'complete')
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_09.png" %}
+</center>
 <p>A more detailed discussion can be found in the section <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
 <h2 id="23">Working with the Density Function</h2>
 <p>Once the density function is computed we may analyze it with all the tools available for spherical functions, cf. <a href="S2FunOperations.html">Operations on Spherical Functions</a>. The most obvious question is where the c-axes are concentrated, i.e., where the density function attains its maximum</p>
@@ -289,6 +316,9 @@ vRand = vector3d (y↑→x)
  size: 500 x 1
  antipodal: true
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_10.png" %}
+</center>
 <h2 id="29">Density Estimation for Crystal Directions</h2>
 <p>If the input data are of type <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">&lt;Miller.Miller.html Miller&gt;</code></a>, i.e., if they are directions with respect to a crystal reference frame, the command <a href="Miller.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a> automatically symmetrizes the resulting density function according to the crystal symmetry. A typical application is the computation of an inverse pole figure, i.e., the distribution of a specimen direction with respect to the crystal coordinate system</p>
 {% highlight matlab %}
@@ -316,6 +346,9 @@ ipdf = S2FunHarmonicSym (Forsterite)
 plot(ipdf,'contourf')
 mtexColorbar
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_11.png" %}
+</center>
 <p>The symmetrization may be switched off by the option <code class="language-plaintext highlighter-rouge">'noSymmetry'</code>.</p>
 <h2 id="33">Density Estimation on the Fly</h2>
 <p>Whenever a large set of directions is plotted with one of the smooth plotting options, e.g. <code class="language-plaintext highlighter-rouge">'contourf'</code>, <code class="language-plaintext highlighter-rouge">'smooth'</code> or <code class="language-plaintext highlighter-rouge">'pcolor'</code>, MTEX silently performs a kernel density estimation with a halfwidth of \(5^{\circ}\) and displays the result. Hence,</p>
@@ -324,6 +357,9 @@ plot(cAxes,'contourf','upper')
 mtexColorMap LaboTeX
 mtexColorbar
 {% endhighlight %}
+<center>
+{% include inline_image.html file="VectorsDensityEstimation_12.png" %}
+</center>
 <p>is a shortcut for computing the density function first and plotting it afterwards. As soon as one wants to control the halfwidth, use weights, or do any computation with the density function, the explicit call to <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a> is the way to go.</p>
 </div>
 </body>
