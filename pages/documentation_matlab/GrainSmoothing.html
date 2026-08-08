@@ -23,19 +23,15 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>EBSD data is usually acquired on a regular grid. Hence, even over a finite number of grid points, all possible grain boundary directions can not be uniquely represented. One way of overcoming this problem - and also allowing to compute grid-independent curvatures and grain boundary directions - is the interpolation of grain boundary coordinates using <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a>.</p>
-<p>Proper smoothing has an influence on measures such as total grain boundary length, grain boundary curvature, triple point angles or grain boundary directions among others.</p>
-<p>While we used <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> before, here we will illustrate the different options.</p>
+<p>EBSD data is measured on a regular grid, so a grain boundary comes out of <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> as a staircase of pixel edges. Every segment runs along one of the grid axes, whatever direction the boundary actually has - which means the boundary is too long, its direction is quantized to a few values, and its curvature is meaningless.</p>
+<p> <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> repairs this.</p>
 {% highlight matlab %}
 mtexdata csl
 [grains, ebsd] = ebsd.calcGrains('minPixel',3);
 
-% the data was acquired on a regular grid;
-plot(ebsd,ebsd.orientations,'micronbar','off')
-hold on
-plot(grains.boundary('indexed'),'linewidth',5,'linecolor','YellowGreen')
-hold off
-axis([313 353 140 156])
+grainsSmooth = smoothBoundary(grains,5);
+
+plot(grainsSmooth,grainsSmooth.meanOrientation,'micronbar','off')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -53,50 +49,57 @@ ebsd = EBSD (y↑→x)
 <center>
 {% include inline_image.html file="GrainSmoothing_01.png" %}
 </center>
-<p>With the default parameters we have the following result</p>
+<p>This page is about using it. How it works, and the full list of algorithms it can use, is in <a href="GrainSmoothingAdvanced.html">Smoothing Algorithms</a>.</p>
+<h2 id="3">What it does</h2>
+<p>Three things, in this order: the staircase is removed, the boundary is resampled at even spacing, and only then is it smoothed. The first two are not cosmetic - smoothing a staircase directly just makes a finer staircase.</p>
+<p>Seen on a few grains, against the measured boundary in grey:</p>
 {% highlight matlab %}
-% smooth the grains with default parameters
-grains_smooth = smooth(grains);
-
+plot(grains.boundary,'linewidth',4,'linecolor','LightGray','micronbar','off')
 hold on
-plot(grains_smooth.boundary('indexed'),'linewidth',2)
+plot(grainsSmooth.boundary,'linewidth',2,'linecolor','Fuchsia')
 hold off
+axis([313 353 140 156])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_02.png" %}
 </center>
-<p>The grain boundary boundaries look now a little bit more smooth and the total grain boundary length is reasonable reduced.</p>
+<p>The staircase overestimates the length of a boundary running at 45 degree by <code class="language-plaintext highlighter-rouge">sqrt(2)</code>, so the total boundary length drops by something of that order</p>
 {% highlight matlab %}
-sum(grains.boundary('indexed').segLength)
-sum(grains_smooth.boundary('indexed').segLength)
+lenRaw    = sum(grains.boundary('indexed').segLength);
+lenSmooth = sum(grainsSmooth.boundary('indexed').segLength);
+
+fprintf(['total boundary length: %.0f %s measured, %.0f %s smoothed' ...
+  ' - %.0f%% shorter\n'], lenRaw, grains.scanUnit, lenSmooth, ...
+  grains.scanUnit, 100*(1-lenSmooth/lenRaw))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-   1.9448e+04
-ans =
-   1.7238e+04
+total boundary length: 19448 um measured, 15668 um smoothed - 19% shorter
 {% endhighlight %}
-<p>However, if we look at the frequency distribution of grain boundary segments, we find that some angle are over-represented which is due to the fact that without any additional input argument, <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> performs just a single iteration</p>
+<p>and the distribution of boundary directions stops being a pair of spikes at 0 and 90 degree</p>
 {% highlight matlab %}
-histogram(grains_smooth.boundary('indexed').direction, ...
-  'weights',grains_smooth.boundary('indexed').segLength,180)
+figure
+subplot(1,2,1)
+histogram(grains.boundary('indexed').direction, ...
+  'weights',grains.boundary('indexed').segLength,180)
+subplot(1,2,2)
+histogram(grainsSmooth.boundary('indexed').direction, ...
+  'weights',grainsSmooth.boundary('indexed').segLength,180)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_03.png" %}
 </center>
-<h2 id="5">Effect of smoothing iterations</h2>
-<p>If we specify a larger number of iterations, we can see that the scatting around 0 and 90 degree decreases.</p>
+<h2 id="6">How much to smooth</h2>
+<p>The second argument is the number of smoothing iterations. More of it means a smoother boundary, and the scatter around the grid directions keeps falling - but see the warning about shrinkage below before turning it up.</p>
 {% highlight matlab %}
 iter = [1 5 10 25];
 color = copper(length(iter)+1);
-plot(grains.boundary,'linewidth',1,'linecolor','Fuchsia','micronbar','off')
-d={};
+
+plot(grains.boundary,'linewidth',1,'linecolor','LightGray','micronbar','off')
 for i = 1:length(iter)
-  grains_smooth = smooth(grains,iter(i));
   hold on
-  plot(grains_smooth.boundary('i','i'),'linewidth',2,'linecolor',color(i,:))
-  d{i} = grains_smooth.boundary('i','i').direction;
+  plot(smoothBoundary(grains,iter(i)).boundary('i','i'), ...
+    'linewidth',2,'linecolor',color(i,:))
 end
 hold off
 axis([313 353 140 156])
@@ -104,46 +107,83 @@ axis([313 353 140 156])
 <center>
 {% include inline_image.html file="GrainSmoothing_04.png" %}
 </center>
-<p>We can compare the histogram of the grain boundary directions of the entire map.</p>
+<h2 id="7">Which algorithm - the short version</h2>
+<p>The smoothing step itself can be done in several ways, and the choice is made by passing a <a href="boundaryFilter.boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>. For practical work there are two that matter.</p>
+<p>
+<b>Use the default</b> if the smoothed boundary is for plotting, or for measuring directions and lengths. It is a Laplacian, it is fast, and it is what <code class="language-plaintext highlighter-rouge">smoothBoundary(grains,5)</code> selects without being asked.</p>
+<p>
+<b>Use <a href="taubinFilter.taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> if grain areas or shape parameters matter.</b> A Laplacian shrinks - every iteration pulls a convex region inwards and nothing bounds how far. Taubin follows each smoothing pass by a slightly larger unshrinking one, which stops the drift.</p>
 {% highlight matlab %}
-figure
-for i=1:length(d)
-  subplot(2,2,i)
-  histogram(d{i}, 'weights',norm(d{i}),180)
-end
+ref = smoothBoundary(grains,0);      % simplified and resampled, not smoothed
+A0 = ref.area;
+big = A0 > 10*median(grains.boundary.segLength)^2;
+A0 = A0(big);
+
+aL = smoothBoundary(grains,25).area;               aL = aL(big);
+aT = smoothBoundary(grains,taubinFilter(25)).area; aT = aT(big);
+
+fprintf('grain area after 25 iterations\n')
+fprintf(['  laplaceFilter (default) %+6.2f%% on average,' ...
+  ' %+6.1f%% for the worst grain\n'], ...
+  100*mean((aL-A0)./A0), 100*min((aL-A0)./A0))
+fprintf(['  taubinFilter            %+6.2f%% on average,' ...
+  ' %+6.1f%% for the worst grain\n'], ...
+  100*mean((aT-A0)./A0), 100*min((aT-A0)./A0))
+{% endhighlight %}
+
+{% highlight plaintext %}
+grain area after 25 iterations
+  laplaceFilter (default)  -2.42% on average,  -59.0% for the worst grain
+  taubinFilter             -0.09% on average,   -6.9% for the worst grain
+{% endhighlight %}
+<p>On a small grain the difference is visible - the Laplacian in magenta cuts inside the measured staircase, Taubin in blue follows it.</p>
+{% highlight matlab %}
+A = grains.area;
+[~,id] = min(abs(A - 30));
+c = grains(id).centroid;
+
+plot(grains.boundary,'linewidth',4,'linecolor','LightGray','micronbar','off')
+hold on
+plot(smoothBoundary(grains,25).boundary,'linewidth',2.5,'linecolor','Fuchsia')
+plot(smoothBoundary(grains,taubinFilter(25)).boundary, ...
+  'linewidth',2.5,'linecolor','DodgerBlue')
+hold off
+axis([c.x-12 c.x+12 c.y-12 c.y+12])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_05.png" %}
 </center>
-<p>Note that we are still stuck with many segments at 0 and 90 degree positions which is due to the boundaries in question being too short for the sample size to deviate from the grid.</p>
-<p> <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">grains.smooth</code></a> usually keeps the triple junction positions locked. However, sometimes it is necessary (todo) to allow triple junctions to move.</p>
+<p>There is a third option worth knowing about. <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> replaces the iteration count by a <b>length</b> - the wavelength that gets damped to half amplitude. Detail finer than it is removed, detail coarser survives. Since it is a length it means the same thing whatever step size the map was measured at, so results stay comparable between scans.</p>
 {% highlight matlab %}
-plot(grains.boundary,'linewidth',1,'linecolor','Fuchsia')
-for i = 1:length(iter)
-  grains_smooth = smooth(grains,iter(i),'moveTriplePoints');
-  hold on
-  plot(grains_smooth.boundary('i','i'),'linewidth',2,'linecolor',color(i,:))
-  d{i} = grains_smooth.boundary('i','i').direction;
-end
+F = curvatureFilter;
+F.smoothingLength = 4;      % in the units of the map, here um
+
+plot(grains.boundary,'linewidth',4,'linecolor','LightGray','micronbar','off')
+hold on
+plot(smoothBoundary(grains,F).boundary,'linewidth',2.5,'linecolor','Orange')
 hold off
 axis([313 353 140 156])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainSmoothing_06.png" %}
 </center>
-<p>Comparing the grain boundary direction histograms shows that we suppressed the gridding effect even a little more.</p>
+<p> <a href="huberFilter.huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> exists for faceted materials - it keeps genuine corners sharp instead of rounding them off. It is not a good default, see <a href="GrainSmoothingAdvanced.html">Smoothing Algorithms</a>.</p>
+<h2 id="11">When to switch the first two steps off</h2>
+<p>Removing the staircase and resampling change the number of boundary segments, and a resampled segment no longer runs between one specific pair of pixels. So wherever <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment - to look up the orientations on either side of a boundary, for instance - both steps have to be off</p>
 {% highlight matlab %}
-figure
-for i=1:length(d)
-   subplot(2,2,i)
-   histogram(d{i}, 'weights',norm(d{i}),180)
-end
+grainsPlain = smoothBoundary(grains,5,'noSimplify','noRefine');
+
+fprintf(['boundary segments: %d measured, %d after smoothing, ' ...
+  '%d with both steps off\n'], length(grains.boundary), ...
+  length(grainsSmooth.boundary), length(grainsPlain.boundary))
 {% endhighlight %}
-<center>
-{% include inline_image.html file="GrainSmoothing_07.png" %}
-</center>
-<p>Be careful since this allows small grains to shrink with increasing number of smoothing iterations</p>
-<p>Todo: different smoothing algorithms and 2nd order</p>
+
+{% highlight plaintext %}
+boundary segments: 21289 measured, 18484 after smoothing, 21289 with both steps off
+{% endhighlight %}
+<p>Only the last keeps one segment per pixel edge, and therefore one valid <code class="language-plaintext highlighter-rouge">ebsdId</code> pair per segment.</p>
+<h2 id="13">Triple points</h2>
+<p>Triple and quadruple points are held fixed, so which grains touch, and where, never changes. Pass <code class="language-plaintext highlighter-rouge">'moveTriplePoints'</code> to let them move as well. Be careful with it: it is what allows a small grain to shrink away.</p>
 </div>
 </body>
 </html>

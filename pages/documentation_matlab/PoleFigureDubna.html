@@ -50,9 +50,6 @@ pf = PoleFigure.load(fname,h,CS,'interface','dubna','superposition',c);
 plot(pf)
 mtexColorbar
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_01.png" %}
-</center>
 <h2 id="2">Extract information from imported pole figure data</h2>
 <p>
 <b>Get raw data</b>
@@ -95,9 +92,7 @@ pf_modified = PoleFigure (y↑→x)
   h = (011̅1)(101̅1), r = 1 x 1224 points
   h = (112̅2), r = 1 x 1224 points
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_02.png" %}
-</center>
+
 {% highlight matlab %}
 rot = rotation.byAxisAngle(xvector-yvector,25*degree);
 pf_modified = rotate(pf,rot)
@@ -113,9 +108,6 @@ pf_modified = PoleFigure (y↑→x)
   h = (011̅1)(101̅1), r = 72 x 19 points
   h = (112̅2), r = 72 x 19 points
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_03.png" %}
-</center>
 <h2 id="7">PDF - to - ODF Reconstruction</h2>
 {% highlight matlab %}
 rec = calcODF(pf,'RESOLUTION',10*degree,'iter_max',6)
@@ -132,9 +124,7 @@ rec = SO3FunRBF (3̅m1 → y↑→x)
   center: 2472 orientations, resolution: 10°
   weight: 1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_04.png" %}
-</center>
+
 {% highlight matlab %}
 odf = SantaFe
 
@@ -187,9 +177,6 @@ rec = SO3FunRBF (m3̅m → y↑→x (222))
   center: 150 orientations, resolution: 10°
   weight: 0.27
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_05.png" %}
-</center>
 <p>without ghost correction</p>
 {% highlight matlab %}
 rec_ng = calcODF(pf_SantaFe,'RESOLUTION',10*degree,'background',10,'NoGhostCorrection')
@@ -205,9 +192,6 @@ rec_ng = SO3FunRBF (m3̅m → y↑→x (222))
   center: 150 orientations, resolution: 10°
   weight: 1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_06.png" %}
-</center>
 <h2 id="13">Error Analysis</h2>
 {% highlight matlab %}
 calcError(pf_SantaFe,rec)
@@ -226,9 +210,6 @@ ans =
 {% highlight matlab %}
 plotDiff(pf_SantaFe,rec)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="PoleFigureDubna_07.png" %}
-</center>
 <p>
 <b>ODF error</b>
 </p>

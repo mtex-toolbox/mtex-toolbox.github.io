@@ -29,6 +29,9 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 import_wizard
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDTutorial_01.png" %}
+</center>
 <p>or by the command <a href="EBSD.load.html">EBSD.load</a>
 </p>
 {% highlight matlab %}
@@ -58,7 +61,7 @@ ebsd = EBSD (y↓→x)
 plot(ebsd,'coordinates','on')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_01.png" %}
+{% include inline_image.html file="EBSDTutorial_02.png" %}
 </center>
 <p>When importing EBSD data it is important to check the alignment of the map coordinate system and the Euler angle coordinate system. This issue is exhaustively discussed in the topic <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>.</p>
 <h2 id="6">Orientation Plots</h2>
@@ -92,7 +95,7 @@ ans = orientation (Forsterite → y↑→x)
 plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_02.png" %}
+{% include inline_image.html file="EBSDTutorial_03.png" %}
 </center>
 <p>Here the all Forsterite orientations a colored according to their alignment in a z inverse pole figure. A more complete discussion about how to colorize orientations can be found in the topic <a href="EBSDIPFMap.html">IPF Maps</a>.</p>
 <h2 id="10">Grain reconstruction</h2>
@@ -102,7 +105,7 @@ plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
 grains = calcGrains(ebsd,'theshold',10*degree,'minPixel',5)
 
 % smooth the grains to avoid the staircase effect
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -128,7 +131,7 @@ plot(grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_03.png" %}
+{% include inline_image.html file="EBSDTutorial_04.png" %}
 </center>
 <h2 id="12">Crystal Shapes</h2>
 <p>In order to make the visualization of crystal orientations more intuitive MTEX supports <a href="CrystalShapes.html">crystal shapes</a>. Those are polyhedrons computed to match the typical shape of ideal crystals. In order to overlay the EBSD map with crystal shapes oriented accordingly to the orientations of the grains we proceed as follows.</p>
@@ -152,7 +155,7 @@ cS = crystalShape
  faces: 20
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_04.png" %}
+{% include inline_image.html file="EBSDTutorial_05.png" %}
 </center>
 <h2 id="13">Pole Figures</h2>
 <p>One of the most important tools for analyzing the orientations in an EBSD map are <a href="OrientationPoleFigure.html">pole figure plots</a>. Those answer the question of how selected crystal directions, here <code class="language-plaintext highlighter-rouge">h</code>, are aligned with respect to specimen directions</p>
@@ -170,7 +173,7 @@ I'm plotting 1250 random orientations out of 152345 given orientations
   The option "all" ensures that all data are plotted
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_05.png" %}
+{% include inline_image.html file="EBSDTutorial_06.png" %}
 </center>
 <h2 id="14">Inverse Pole Figures</h2>
 <p>Analogously one can ask for the crystal directions pointing in a selected specimen direction. The resulting plots are called <a href="OrientationInversePoleFigure.html">inverse pole figures</a>.</p>
@@ -187,7 +190,7 @@ plotIPDF(ebsd('Forsterite').orientations,r,'MarkerSize',5,...
 I'm plotting 12500 random orientations out of 152345 given orientations
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDTutorial_06.png" %}
+{% include inline_image.html file="EBSDTutorial_07.png" %}
 </center>
 </div>
 </body>

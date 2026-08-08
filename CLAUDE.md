@@ -133,7 +133,8 @@ anything and prints a plan first: pages selected and pages actually going to be
 rebuilt per part (`@DocFile/needsPublish.m`, the same predicate `publish` then
 applies per file), followed by the options in effect. A full run takes hours,
 so a mistyped `'file'` or a forgotten `'force'` is worth catching in that block
-rather than at the end.
+rather than at the end — more than 10 pages to publish asks back before
+starting, so a full rebuild has to be confirmed with `Y`.
 
 `makeDoc.m` sets `options.outDir` per section, writes figures to `../images`,
 uses `matlab/web.xsl` (`examples.xsl` for examples) as the `publish`

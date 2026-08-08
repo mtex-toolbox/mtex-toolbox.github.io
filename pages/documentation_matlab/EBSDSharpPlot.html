@@ -146,7 +146,7 @@ I'm plotting 10 random orientations out of 20151 given orientations
 <p>A second option to visualize small orientation deviation, e.g. within a grains is the <code class="language-plaintext highlighter-rouge"><a href="axisAngleColorKey.html">axisAngleColorKey</a></code>. In order to demonstrate this color key let us first separate the EBSD into grains.</p>
 {% highlight matlab %}
 [grains,ebsd] = calcGrains(ebsd,'angle',1.5*degree,'minPixel',3);
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 {% endhighlight %}
 <p>In order to apply the <a href="axisAngleColorKey.html">axisAngleColorKey</a> we need to specify the crystal symmetry and a reference orientation <code class="language-plaintext highlighter-rouge">oriRef</code>. Often the meanorientation of the grains is a good choice.</p>
 {% highlight matlab %}
@@ -208,9 +208,6 @@ ebsd = EBSD (y↑→x)
  X x Y x Z : [14800, 17900] x [0, 1600] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSharpPlot_10.png" %}
-</center>
 <p>When plotting one specific grain with its orientations we see that they all are very similar and, hence, get the same color</p>
 {% highlight matlab %}
 % plot a grain
@@ -221,7 +218,7 @@ plot(ebsd,ebsd.orientations)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDSharpPlot_11.png" %}
+{% include inline_image.html file="EBSDSharpPlot_10.png" %}
 </center>
 <p>when applying the option sharp MTEX colors the mean orientation as white and scales the maximum saturation to fit the maximum misorientation angle. This way deviations of the orientation within one grain can be visualized.</p>
 {% highlight matlab %}
@@ -235,7 +232,7 @@ plot(ebsd,ipfKey.orientation2color(ebsd.orientations))
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDSharpPlot_12.png" %}
+{% include inline_image.html file="EBSDSharpPlot_11.png" %}
 </center>
 </div>
 </body>

@@ -25,13 +25,15 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>resample each chain at a constant spacing along its length</p>
 <h2 id="3">Description</h2>
-<p>Places new vertices at equal arc length along each chain, between its two junctions, which stay exactly where they are. The new vertices lie on the old boundary, so this changes nothing about its shape - it only changes how it is sampled.</p>
-<p>This is what makes a subsequent grain2d/smooth work properly. Subdividing each segment, as grain2d/refineBoundary used to do on its own, preserves the staircase of the pixel grid and only makes it finer. Resampling at equal arc length instead gives the smoothing evenly spaced degrees of freedom that are not tied to the grid.</p>
-<p>grainId and phaseId are constant along a chain and carry over exactly. ebsdId and misrotation belong to a specific pair of pixels, which a resampled segment no longer corresponds to - those are inherited from whichever original segment covers the new segment's midpoint.</p>
+<p>Places new vertices at equal arc length along each chain, between the vertices that have to survive, which stay exactly where they are. The new vertices lie on the old boundary, so this changes nothing about its shape - it only changes how it is sampled.</p>
+<p>A chain is cut into pieces that are resampled independently at every vertex that may not move: its two junctions, a vertex where the neighbouring grains change, and anything passed in as 'protect'. A chain resampled in one piece visits none of the ones in between, which leaves the inner boundary hanging off a vertex the outer walk no longer reaches, and lets a segment carry the grainId pair of its neighbour.</p>
+<p>This is what makes a subsequent grain2d/smoothBoundary work properly. Subdividing each segment, as grain2d/refineBoundary used to do on its own, preserves the staircase of the pixel grid and only makes it finer. Resampling at equal arc length instead gives the smoothing evenly spaced degrees of freedom that are not tied to the grid.</p>
+<p>grainId and phaseId are constant along a chain and carry over exactly. ebsdId and misrotation belong to a specific pair of pixels, which a resampled segment no longer corresponds to - those are inherited from whichever original segment covers the new segment's midpoint. A midpoint landing on the seam between two of them is covered by both, and which one it takes is then decided by the last bits of the arc length.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 gB_r = refine(gB)
 gB_r = refine(gB,delta)
+gB_r = refine(gB,delta,'protect',vertexIds)
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -49,7 +51,7 @@ gB_r = refine(gB,delta)
             <tt>delta</tt>
          </td>
          <td>
-            <tt>target segment length (default: the median segment length)</tt>
+            <tt>target segment length (default: half the median segment length - a sample every median length may cut a corner per sample where the segments are not all of the same length, half of it follows the original polyline closely)</tt>
          </td>
       </tr>
    </table>
@@ -67,9 +69,22 @@ gB_r = refine(gB,delta)
       </tr>
    </table>
 </p>
-<h2 id="7">See also</h2>
+<h2 id="7">Options</h2>
 <p>
-<a href="grainBoundary.simplify.html">grainBoundary.simplify</a> <a href="grain2d.refineBoundary.html">grain2d.refineBoundary</a> <a href="grain2d.smooth.html">grain2d.smooth</a>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>protect</tt>
+         </td>
+         <td>
+            <tt>ids of vertices that must survive, on top of the junctions</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="grainBoundary.simplify.html">grainBoundary.simplify</a> <a href="grainBoundary.reduce.html">grainBoundary.reduce</a> <a href="grain2d.refineBoundary.html">grain2d.refineBoundary</a> <a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a>
 </p>
 </div>
 </body>

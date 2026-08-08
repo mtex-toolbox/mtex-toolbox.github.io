@@ -277,7 +277,7 @@ ebsd = ebsd('indexed');
 [grains, ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5);
 
 % smooth them
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 % plot the orientation data of the Forsterite phase
 plot(ebsd('fo'),ebsd('fo').orientations)
@@ -301,7 +301,7 @@ grains(9).area
 ans =
      6
 ans =
-   2.9453e+04
+   2.6419e+04
 {% endhighlight %}
 <p>Hereby <code class="language-plaintext highlighter-rouge">numPixel</code> refers to the number of pixels that belong to a certain grain while <code class="language-plaintext highlighter-rouge">area</code> represents the actual area measured in <code class="language-plaintext highlighter-rouge">(&micro;m)^2</code>. We may analyze the distribution of grains by grain area using a histogram.</p>
 {% highlight matlab %}
@@ -344,9 +344,9 @@ grains(9).perimeter
 
 {% highlight plaintext %}
 ans =
-    20
+    19
 ans =
-  876.2182
+  863.3831
 {% endhighlight %}
 <p>We may compute these quantities also explicitly from the grain boundary segments. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
 {% highlight matlab %}
@@ -356,9 +356,9 @@ sum(grains(9).boundary.segLength)
 
 {% highlight plaintext %}
 ans =
-    20
+    19
 ans =
-  876.2182
+  863.3831
 {% endhighlight %}
 <h2 id="9">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2>
 <p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
@@ -380,9 +380,9 @@ grains(9).equivalentPerimeter
 
 {% highlight plaintext %}
 ans =
-  193.6504
+  183.4057
 ans =
-  608.3708
+  576.1859
 {% endhighlight %}
 <p>As a consequence, the ratio between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> and measures how different a certain shape is from a circle.</p>
 {% highlight matlab %}
@@ -422,7 +422,7 @@ mtexdata forsterite silent
 grains = calcGrains(ebsd);
 
 % smooth them
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 close all
 scatter(grains.equivalentRadius,grains.perimeter)
@@ -450,7 +450,7 @@ fractalDimension = ab(1)
 
 {% highlight plaintext %}
 fractalDimension =
-    1.0335
+    1.0100
 {% endhighlight %}
 <p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p>
 </div>

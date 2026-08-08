@@ -1,0 +1,177 @@
+---
+title: "Grain Reconstruction by Markovian Clustering"
+
+sidebar: documentation_sidebar
+permalink: GrainReconstructionMCL.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Grain Reconstruction by Markovian Clustering</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_GrainReconstructionMCL.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/GrainReconstructionMCL.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Once the <a href="GrainReconstructionAdvanced.html">grain boundary criterion</a> has judged every pair of neighbouring pixels, the grains still have to be read off. By default they are the connected components of the pairs that were not separated - two pixels end up in the same grain whenever any chain of unseparated pairs leads from one to the other, however long and however thin.</p>
+<p>The Markovian clustering algorithm (MCL) reads them off differently. It simulates a random walk on the graph of pixels and alternates two steps: spreading, which lets the walk take one more step, and inflation, which raises every transition probability to a power <code class="language-plaintext highlighter-rouge">p</code> and renormalises, suppressing the unlikely steps in favour of the likely ones. Repeated, this drains the flow out of the weak connections and leaves it circulating within regions the walk rarely leaves - and those are the grains.</p>
+<p>It is selected by the option <code class="language-plaintext highlighter-rouge">'mcl'</code> with the inflation power and the number of iterations.</p>
+<h2 id="2">A criterion with something to say</h2>
+<p>MCL works on the <b>weights</b> of the graph, so it needs a criterion that produces more than yes and no. With the default threshold criterion every weight is 0 or 1, the walk cannot distinguish a weak connection from a strong one, and MCL returns exactly the connected components it would have returned anyway - only much slower.</p>
+<p>We demonstrate this on the deformed austenite of the <code class="language-plaintext highlighter-rouge">EMSphinx</code> data set, the same one the <a href="GrainReconstruction.html">basic page</a> uses.</p>
+{% highlight matlab %}
+mtexdata EMSphinx silent
+
+ebsd = ebsd('Iron fcc');
+ebsd = ebsd(inpolygon(ebsd,[40 30 80 60]));
+
+grains = calcGrains(ebsd,'angle',10*degree,'minPixel',10)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels   Mineral  Symmetry         Color
+     1      20   29990  Iron fcc      m-3m  DarkSeaGreen
+ 
+ boundary segments: 2139 (854 µm)
+ inner boundary segments: 126 (50 µm)
+ triple points: 20
+ 
+ Id   Phase   Pixels       meanRotation      GOS
+  1       1       71   (126°,151°,288°)    0.016
+  2       1      120   (357°,115°,178°)     0.02
+  3       1       75    (351°,26°,187°)   0.0067
+  4       1       34   (275°,126°,229°)   0.0083
+  5       1        1   (324°,144°,317°)        0
+  6       1     1574     (212°,17°,25°)    0.057
+  7       1      623    (288°,128°,87°)    0.019
+  8       1     6046    (68°,149°,298°)     0.11
+  9       1       37    (210°,73°,322°)   0.0081
+ 10       1     1334    (87°,159°,223°)     0.11
+ 11       1     5199    (329°,118°,30°)    0.061
+ 12       1     6218   (341°,115°,129°)    0.059
+ 13       1      196   (132°,147°,125°)    0.019
+ 14       1     1489    (165°,74°,239°)    0.087
+ 15       1       58    (93°,141°,142°)    0.012
+ 16       1     1261    (136°,35°,320°)     0.09
+ 17       1      250    (266°,27°,249°)    0.047
+ 18       1       18     (96°,25°,183°)   0.0089
+ 19       1     2530    (15°,123°,167°)    0.071
+ 20       1     2856   (124°,156°,355°)    0.052
+{% endhighlight %}
+
+{% highlight matlab %}
+grains = calcGrains(ebsd,'mcl',[1.2 4],'angle',10*degree,'minPixel',10)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels   Mineral  Symmetry         Color
+     1      20   29990  Iron fcc      m-3m  DarkSeaGreen
+ 
+ boundary segments: 2139 (854 µm)
+ inner boundary segments: 96 (38 µm)
+ triple points: 20
+ 
+ Id   Phase   Pixels       meanRotation      GOS
+  1       1       71   (126°,151°,288°)    0.016
+  2       1      120   (357°,115°,178°)     0.02
+  3       1       75    (351°,26°,187°)   0.0067
+  4       1       34   (275°,126°,229°)   0.0083
+  5       1        1   (324°,144°,317°)        0
+  6       1     1574     (212°,17°,25°)    0.057
+  7       1      623    (288°,128°,87°)    0.019
+  8       1     6046    (68°,149°,298°)     0.11
+  9       1       37    (210°,73°,322°)   0.0081
+ 10       1     1334    (87°,159°,223°)     0.11
+ 11       1     5199    (329°,118°,30°)    0.061
+ 12       1     6218   (341°,115°,129°)    0.059
+ 13       1      196   (132°,147°,125°)    0.019
+ 14       1     1489    (165°,74°,239°)    0.087
+ 15       1       58    (93°,141°,142°)    0.012
+ 16       1     1261    (136°,35°,320°)     0.09
+ 17       1      250    (266°,27°,249°)    0.047
+ 18       1       18     (96°,25°,183°)   0.0089
+ 19       1     2530    (15°,123°,167°)    0.071
+ 20       1     2856   (124°,156°,355°)    0.052
+{% endhighlight %}
+<p>The same 20 grains. What MCL needs is the soft threshold <a href="gbcSoft.html"><code class="language-plaintext highlighter-rouge">gbcSoft</code></a>, whose connectivity falls off gradually around the threshold instead of jumping, and which is passed by the option <code class="language-plaintext highlighter-rouge">'soft'</code> as a pair <code class="language-plaintext highlighter-rouge">[angle width]</code>
+</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd,'soft',[1 0.5]*degree,'minPixel',10)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels   Mineral  Symmetry         Color
+     1      43   29970  Iron fcc      m-3m  DarkSeaGreen
+ 
+ boundary segments: 2703 (1080 µm)
+ inner boundary segments: 3100 (1239 µm)
+ triple points: 57
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<p>On its own the soft criterion is still evaluated by connected components, and only shifts the threshold. Handing its weights to MCL changes the answer</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd,'mcl',[1.2 4],'soft',[1 0.5]*degree,'minPixel',10)
+grains = smoothBoundary(grains,5);
+
+plot(ebsd,ebsd.orientations)
+hold on
+plot(grains.boundary,'linewidth',1.5)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels   Mineral  Symmetry         Color
+     1      49   29957  Iron fcc      m-3m  DarkSeaGreen
+ 
+ boundary segments: 2837 (1131 µm)
+ inner boundary segments: 919 (366 µm)
+ triple points: 70
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<center>
+{% include inline_image.html file="GrainReconstructionMCL_01.png" %}
+</center>
+<p>The low angle boundaries of the deformed grains are found, and the bent lattice inside them is not cut up - which is what a threshold of one degree would have done to it.</p>
+<h2 id="7">The inflation power</h2>
+<p>Of the two parameters the inflation power is the one to turn. It sets how sharply the walk is forced onto its likely steps, so a larger value breaks the map into more and smaller clusters</p>
+{% highlight matlab %}
+for p = [1.1 1.4 1.8]
+
+  grains = calcGrains(ebsd,'mcl',[p 4],'soft',[1 0.5]*degree,'minPixel',10);
+  fprintf('inflation %.1f: %d grains\n',p,length(grains));
+
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+inflation 1.1: 49 grains
+inflation 1.4: 51 grains
+inflation 1.8: 63 grains
+{% endhighlight %}
+<p>The second parameter, the number of iterations, is best left at its default of 4. Raising it changes the result very little and costs a great deal - the transition matrix fills in as the walk spreads, so on this map eight iterations take roughly ten times as long as four and return two grains more.</p>
+<h2 id="9">When to use it</h2>
+<p>MCL is a global criterion: it does not ask about a pair of pixels in isolation but about how the whole map hangs together. On deformed material, where no single threshold angle works, that is exactly what is needed - but it is not the only way to get it, and <a href="gbcFMC.gbcFMC.html"><code class="language-plaintext highlighter-rouge">gbcFMC</code></a> reaches a comparable segmentation of this same map in a fraction of the time and without a threshold angle at all. See <a href="GrainReconstruction.html">Grain Reconstruction</a> for that route.</p>
+<p>MCL remains the more flexible of the two: it takes the weights of <b>whatever</b> criterion produced them, including <a href="gbcCustom.html"><code class="language-plaintext highlighter-rouge">gbcCustom</code></a> and criteria of your own, and clusters them without knowing what they mean.</p>
+</div>
+</body>
+</html>

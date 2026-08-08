@@ -1,0 +1,216 @@
+---
+title: "grain2d.smoothBoundary"
+
+sidebar: function_reference_sidebar
+permalink: grain2d.smoothBoundary.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>grain2d.smoothBoundary</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_grain2d__smoothBoundary.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@grain2d/smoothBoundary.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>turn the pixel staircase of a grain boundary into a smooth curve</p>
+<h2 id="3">Description</h2>
+<p>EBSD data is measured on a regular grid, so a grain boundary comes out of calcGrains as a staircase of pixel edges - every segment runs along one of the grid axes, whatever direction the boundary actually has. This is repaired in three steps</p>
+<div>
+<ol>
+<li> <a href="grain2d.simplifyBoundary.html"><code class="language-plaintext highlighter-rouge">simplifyBoundary</code></a> drops every vertex whose removal moves the boundary by less than <code class="language-plaintext highlighter-rouge">epsilon</code>. A staircase is never further than <code class="language-plaintext highlighter-rouge">d/sqrt(2)</code> from the straight line it approximates, <code class="language-plaintext highlighter-rouge">d</code> being the pixel spacing, so that is the tolerance which removes the grid and nothing else</li>
+<li> <a href="grain2d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary</code></a> resamples what is left at equal arc length <code class="language-plaintext highlighter-rouge">delta</code>, which gives the smoothing evenly spaced degrees of freedom that are no longer tied to the grid</li>
+<li>the smoothing itself, by default a constrained Laplacian applied <code class="language-plaintext highlighter-rouge">iter</code> times</li>
+</ol>
+</div>
+<p>Which algorithm performs the last step is decided by a <a href="boundaryFilter.boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>
+</p>
+<div>
+<ul>
+<li> <a href="laplaceFilter.laplaceFilter.html"><code class="language-plaintext highlighter-rouge">laplaceFilter</code></a> - the default, repeated local averaging. Shrinks, and its knob is an iteration count rather than a length</li>
+<li> <a href="taubinFilter.taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> - follows every smoothing pass by a slightly larger unshrinking pass, so the area is given back</li>
+<li> <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> - one sparse solve instead of an iteration, stated as a smoothing <b>length</b> and therefore independent both of the iteration count and of the step size of the map</li>
+<li> <a href="huberFilter.huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> - the same, but with an l^1/l^2 penalty that keeps a genuinely faceted boundary faceted</li>
+</ul>
+</div>
+<p>Both tolerances are derived from the median segment length <b>before</b> the first step - afterwards the median is the length of the straightened runs, not the pixel spacing.</p>
+<p>Neither of the first two steps is cosmetic. Simplifying alone leaves a curve as a handful of long chords, and smoothing those cuts the corners off the polygon they form - a circle of 15 pixel radius loses 14% of its area over 25 iterations, against 0.4% for the full three steps. Smoothing alone leaves the boundary directions of a straight boundary scattered around the grid axes.</p>
+<p>Junctions - triple points, quadruple points, and the vertices where the inner boundary ends on the outer one - stay exactly where they are throughout, unless <code class="language-plaintext highlighter-rouge">moveTriplePoints</code> is given. When grains were segmented using alphaShapes, all grains next to holes have outer boundary.</p>
+<p>Note that the first two steps change the number of boundary segments, and a resampled segment no longer runs between a specific pair of pixels. Where <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is analysed per segment, switch them off with <code class="language-plaintext highlighter-rouge">'noSimplify'</code> and <code class="language-plaintext highlighter-rouge">'noRefine'</code>.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains)
+grains = smoothBoundary(grains,iter)
+grains = smoothBoundary(grains,iter,'noSimplify','noRefine')
+grains = smoothBoundary(grains,iter,'simplify',epsilon,'refine',delta)
+{% endhighlight %}
+
+{% highlight matlab %}
+grains = smoothBoundary(grains,taubinFilter)
+grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iter</tt>
+         </td>
+         <td>
+            <tt>number of smoothing iterations (default: 1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt><a href="boundaryFilter.html">boundaryFilter</a>, the smoothing algorithm to use</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt><a href="boundaryFilter.html">boundaryFilter</a> that was used</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>simplify</tt>
+         </td>
+         <td>
+            <tt>Douglas-Peucker tolerance (default: d/sqrt(2))</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>refine</tt>
+         </td>
+         <td>
+            <tt>resampling length (default: d)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noSimplify</tt>
+         </td>
+         <td>
+            <tt>do not simplify the boundary first</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noRefine</tt>
+         </td>
+         <td>
+            <tt>do not resample the boundary</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>moveTriplePoints</tt>
+         </td>
+         <td>
+            <tt>do not exclude triple/quadruple points from smoothing</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>moveOuterBoundary</tt>
+         </td>
+         <td>
+            <tt>do not exclude outer boundary from smoothing</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>The remaining options configure the default laplaceFilter and have no meaning for the other filters</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>second_order, S2</tt>
+         </td>
+         <td>
+            <tt>second order smoothing</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rate</tt>
+         </td>
+         <td>
+            <tt>default smoothing kernel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gauss</tt>
+         </td>
+         <td>
+            <tt>Gaussian smoothing kernel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>exp</tt>
+         </td>
+         <td>
+            <tt>exponential smoothing kernel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>umbrella</tt>
+         </td>
+         <td>
+            <tt>umbrella smoothing kernel</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="grain2d.simplifyBoundary.html">grain2d.simplifyBoundary</a> <a href="grain2d.refineBoundary.html">grain2d.refineBoundary</a> <a href="grain2d.reduceBoundary.html">grain2d.reduceBoundary</a> <a href="boundaryFilter.html">boundaryFilter</a> <a href="laplaceFilter.html">laplaceFilter</a> <a href="taubinFilter.html">taubinFilter</a> <a href="curvatureFilter.html">curvatureFilter</a> <a href="huberFilter.html">huberFilter</a>
+</p>
+</div>
+</body>
+</html>

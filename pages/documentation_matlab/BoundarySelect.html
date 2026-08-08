@@ -37,7 +37,7 @@ ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 [grains,ebsd] = calcGrains(ebsd,'minPixel',5,'alpha',10);
 
 % smooth the grains a bit
-grains = smooth(grains,4);
+grains = smoothBoundary(grains,4);
 
 % visualize as a phase map
 plot(ebsd)
@@ -57,15 +57,15 @@ grains.boundary
 ans = grainBoundary (y↑→x)
  
  Segments    length   mineral 1   mineral 2
-      489  27814 µm  notIndexed  Forsterite
-       25   1615 µm  notIndexed   Enstatite
-       24   1396 µm  notIndexed    Diopside
-     1387  55503 µm  Forsterite  Forsterite
-      644  25950 µm  Forsterite   Enstatite
-      535  21248 µm  Forsterite    Diopside
-       35   1296 µm   Enstatite   Enstatite
-      139   6117 µm   Enstatite    Diopside
-       23    951 µm    Diopside    Diopside
+      559  27532 µm  notIndexed  Forsterite
+       32   1586 µm  notIndexed   Enstatite
+       29   1386 µm  notIndexed    Diopside
+     1178  54942 µm  Forsterite  Forsterite
+      546  25699 µm  Forsterite   Enstatite
+      453  20893 µm  Forsterite    Diopside
+       27   1278 µm   Enstatite   Enstatite
+      130   6041 µm   Enstatite    Diopside
+       22    930 µm    Diopside    Diopside
 {% endhighlight %}
 <p>tells us the number of boundary segments between the different phases. Those segments with phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> include also those boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
@@ -96,7 +96,7 @@ ans = misorientation (Forsterite → Enstatite)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  239.986 50.6875 124.673
+  239.134 51.5067 125.138
  
  
 ans = misorientation (Enstatite → Forsterite)

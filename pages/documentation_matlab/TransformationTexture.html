@@ -90,9 +90,6 @@ for k = 1:2
 end
 drawNow(gcm)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TransformationTexture_01.png" %}
-</center>
 <p>In case we have multiple parent orientations following some initial orientation distribution function <code class="language-plaintext highlighter-rouge">odf</code>
 </p>
 {% highlight matlab %}
@@ -114,9 +111,6 @@ odfA = SO3FunRBF (Austenite → y↑→x)
      phi1     Phi    phi2  weight
   156.958 161.468 197.878       1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TransformationTexture_02.png" %}
-</center>
 <p>We can draw some random orientations according this model ODF and apply the same commands <code class="language-plaintext highlighter-rouge">variants</code> to compute all transformed orientations in one step</p>
 {% highlight matlab %}
 % number of discrete orientations
@@ -138,9 +132,6 @@ oriASim = orientation (Austenite → y↑→x)
 oriBSim = orientation (Ferrite → y↑→x)
   size: 10000 x 12
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TransformationTexture_03.png" %}
-</center>
 <p>An alternative and better approach is to directly use <code class="language-plaintext highlighter-rouge">odfA</code> as an input to the function <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a>. In this case the output is the orientation distribution function of the transformed material</p>
 {% highlight matlab %}
 % compute the child ODF
@@ -156,9 +147,6 @@ odfB = SO3FunHarmonic (Ferrite → y↑→x)
   bandwidth: 48
   weight: 1
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TransformationTexture_04.png" %}
-</center>
 <p>We observe that the transformed ODF computed by the latter approach is sharper and shows more details when compared with the ODF computed from discrete orientations. We may quantify this difference by computing the texture index of both ODFs</p>
 {% highlight matlab %}
 % texture index of the transformed ODF computed from discrete orientations
