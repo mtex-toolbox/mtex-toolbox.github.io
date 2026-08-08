@@ -116,7 +116,6 @@ makeDoc('checkLinks')         % dead-link scan over the generated HTML
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
 makeDoc('keepImages')         % skip the image revert pass at the end (see below)
 makeDoc('skipDirtyImages')    % do not republish pages with uncommitted images (see below)
-makeDoc('showFigures')        % let the figures appear on screen (off by default)
 makeDoc('file','EBSDTutorial')          % just this page
 makeDoc('doc','file','Plotting')        % just this folder
 makeDoc('file',{'Multiplot','Legends'}) % several
@@ -135,6 +134,11 @@ applies per file), followed by the options in effect. A full run takes hours,
 so a mistyped `'file'` or a forgotten `'force'` is worth catching in that block
 rather than at the end — more than 10 pages to publish asks back before
 starting, so a full rebuild has to be confirmed with `Y`.
+
+The figures pop up on screen for the whole run and cannot be suppressed:
+`publish` only snapshots figures whose `Visible` is `'on'`, so hiding them
+yields pages without images (see `../makeDoc/@DocFile/publish.m`). Build on a
+display-less MATLAB if the screen is needed for something else.
 
 `makeDoc.m` sets `options.outDir` per section, writes figures to `../images`,
 uses `matlab/web.xsl` (`examples.xsl` for examples) as the `publish`
