@@ -116,7 +116,7 @@ makeDoc('checkLinks')         % dead-link scan over the generated HTML
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
 makeDoc('keepImages')         % skip the image revert pass at the end (see below)
 makeDoc('skipDirtyImages')    % do not republish pages with uncommitted images (see below)
-makeDoc('hideFigures')        % publish without the figures appearing on screen
+makeDoc('showFigures')        % let the figures appear on screen (off by default)
 makeDoc('file','EBSDTutorial')          % just this page
 makeDoc('doc','file','Plotting')        % just this folder
 makeDoc('file',{'Multiplot','Legends'}) % several
@@ -127,6 +127,13 @@ name, a folder or a full path all work. It implies `'force'` — naming a page
 means you want it rebuilt — and it leaves the sidebars alone, since those can
 only be regenerated from the complete file list. Selection is
 `@DocFile/select.m` in `../makeDoc`, the counterpart of `exclude`.
+
+`makeDoc.m` collects the file lists of all three parts before it publishes
+anything and prints a plan first: pages selected and pages actually going to be
+rebuilt per part (`@DocFile/needsPublish.m`, the same predicate `publish` then
+applies per file), followed by the options in effect. A full run takes hours,
+so a mistyped `'file'` or a forgotten `'force'` is worth catching in that block
+rather than at the end.
 
 `makeDoc.m` sets `options.outDir` per section, writes figures to `../images`,
 uses `matlab/web.xsl` (`examples.xsl` for examples) as the `publish`
