@@ -32,7 +32,8 @@ function makeDoc(varargin)
 %
 % Before anything is published the run is announced: how many pages each part
 % has selected, how many of them are actually going to be rebuilt, and a
-% summary of the options in effect.
+% summary of the options in effect. More than 10 pages to publish asks back
+% before starting.
 %
 % After publishing, images that were re-rendered but did not really change
 % are restored from git, see ../CLAUDE.md.
@@ -193,7 +194,16 @@ end
 
 %% announce what is going to happen
 
-dispPlan(parts,options,restrictTo,doSidebars,varargin{:});
+nPages = dispPlan(parts,options,restrictTo,doSidebars,varargin{:});
+
+% anything beyond a handful of pages is a run of hours - long enough that a
+% mistyped 'file' or a forgotten 'force' should be caught here and not when
+% the rebuilt pages show up in git status
+if nPages > 10 && ...
+    ~strcmpi(input(sprintf('Really publish %d pages? Y/N [N]:',nPages),'s'),'Y')
+  dispPerm('nothing published')
+  return
+end
 
 %% Publish Function Reference
 
@@ -285,12 +295,13 @@ parts(end+1) = struct('name',name,'files',{files}, ...
 
 end
 
-function dispPlan(parts,options,restrictTo,doSidebars,varargin)
+function total = dispPlan(parts,options,restrictTo,doSidebars,varargin)
 % announce what the run is going to do before it starts
 %
 % A full build takes hours, so it is worth seeing up front how many pages are
 % about to be rebuilt and under which settings - a typo in 'file' or a
-% forgotten 'force' shows up in these numbers and nowhere else.
+% forgotten 'force' shows up in these numbers and nowhere else. Returns the
+% number of pages that are going to be published.
 
 dispPerm(' ');
 dispPerm(repmat('-',1,64));
