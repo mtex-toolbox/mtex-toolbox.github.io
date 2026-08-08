@@ -68,7 +68,7 @@ beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
 {% highlight matlab %}
 % reconstruct grains
 [grains,ebsd] = calcGrains(ebsd,'threshold',1.5*degree,'removeQuadruplePoints');
-grains = smooth(grains,1,'moveTriplePoints');
+grains = smoothBoundary(grains,1,'moveTriplePoints');
 
 % plot all alpha pixels
 region = [299 401 440 500];
@@ -303,7 +303,7 @@ plot(parentEBSD(betaName),ipfKey.orientation2color(parentEBSD(betaName).orientat
 [parentGrains,parentEBSD] = calcGrains(parentEBSD,'angle',5*degree,'minPixel',15);
 
 % smooth the grains a bit
-parentGrains = smooth(parentGrains,5);
+parentGrains = smoothBoundary(parentGrains,5);
 {% endhighlight %}
 <p>Finally, we denoise the remaining beta orientations and at the same time fill the empty holes. We choose a very small smoothing parameter <code class="language-plaintext highlighter-rouge">alpha</code> to keep as many details as possible.</p>
 {% highlight matlab %}

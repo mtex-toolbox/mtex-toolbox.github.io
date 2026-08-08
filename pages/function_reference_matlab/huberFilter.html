@@ -1,0 +1,102 @@
+---
+title: "huberFilter"
+
+sidebar: function_reference_sidebar
+permalink: huberFilter.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>huberFilter</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_huberFilter.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/BoundarySmoothing/huberFilter.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>smooth grain boundaries but keep genuine corners sharp</p>
+<h2 id="3">Description</h2>
+<p>Same variational idea as <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a>, but the curvature is penalized by a Huber function instead of a square</p>
+{% highlight matlab %}
+|V - V0|^2 + alpha * sum rho(|L V|)
+{% endhighlight %}
+<p>with <code class="language-plaintext highlighter-rouge">rho</code> quadratic below a threshold and linear above it. Quadratic means least squares, which spreads a large deviation over many vertices and so rounds a corner off. Linear - an l^1 penalty - is minimized by concentrating the deviation in as few vertices as possible, which leaves a corner standing.</p>
+<p>So the filter smooths gentle undulations exactly like curvatureFilter, while a boundary that is genuinely faceted keeps its facets and its corners. The threshold says how sharp a turn has to be to count as a corner rather than as noise.</p>
+<p>The Huber problem is solved by iteratively reweighted least squares: the l^1 part is replaced by a quadratic with weight <code class="language-plaintext highlighter-rouge">threshold/|L V</code><code class="language-plaintext highlighter-rouge">, the resulting linear system is solved, and the weights are recomputed. This is an iteration, but it runs until it stops moving - |iterMax</code> is a safety limit, not a tuning knob.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">threshold</code> is the turning angle <b>at a single vertex of the result</b>, not the total angle of the corner. The smoothing spreads a corner over roughly <code class="language-plaintext highlighter-rouge">smoothingLength/h</code> vertices, and the reweighting then sharpens it back, so the total angle that survives comes out several times larger than the threshold. On a hexagon smoothed with <code class="language-plaintext highlighter-rouge">smoothingLength = 8*h</code> the 60 degree corners come back as</p>
+<pre>threshold    30    15     8     4     2   degree
+corner       22    28    49    68    80   degree</pre>
+<p>A boundary with no corner at all is unaffected: a circle of radius <code class="language-plaintext highlighter-rouge">R</code> turns by <code class="language-plaintext highlighter-rouge">h/R</code> per vertex, far below any sensible threshold, so the filter returns exactly what curvatureFilter would.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains,huberFilter)
+{% endhighlight %}
+
+{% highlight matlab %}
+F = huberFilter;
+F.smoothingLength = 3;
+F.threshold = 3*degree;
+grains = smoothBoundary(grains,F)
+{% endhighlight %}
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>smoothingLength</tt>
+         </td>
+         <td>
+            <tt>wavelength damped to half amplitude, in map units (default: 4 times the vertex spacing)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>threshold</tt>
+         </td>
+         <td>
+            <tt>per vertex turning angle above which a vertex counts as a corner and is preserved (default: 5 degree)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>the regularization weight itself; overrides smoothingLength</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMax</tt>
+         </td>
+         <td>
+            <tt>safety limit on the reweighting (default: 50)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>stop once no vertex moves further than this, relative to the vertex spacing (default: 1e-4)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="boundaryFilter.html">boundaryFilter</a> <a href="curvatureFilter.html">curvatureFilter</a> <a href="taubinFilter.html">taubinFilter</a>
+</p>
+</div>
+</body>
+</html>

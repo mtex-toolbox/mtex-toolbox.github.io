@@ -24,106 +24,16 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>constraint laplacian smoothing of grain boundaries</p>
-<h2 id="3">Description</h2>
-<p>Note: when grains were segmented using alphaShapes, all grains next to holes have outer boundary!</p>
-<h2 id="4">Syntax</h2>
+<p>Deprecated. Renamed to grain2d/smoothBoundary. Note that EBSD/smooth means something else entirely - it denoises orientations, not geometry.</p>
+<p>smoothBoundary does more than smooth ever did: it removes the pixel staircase with simplifyBoundary and resamples with refineBoundary before smoothing at all. Those two steps change the number of boundary segments and move the grain areas, so a script written against smooth would silently get different numbers out. It is therefore forwarded with both of them switched off, which is exactly what smooth used to compute.</p>
+<p>Call <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> directly to get the full three steps, and to choose the smoothing algorithm.</p>
+<h2 id="3">Syntax</h2>
 {% highlight matlab %}
-grains = smooth(grains,iter,varargin)
+grains = smooth(grains,varargin)
 {% endhighlight %}
-<h2 id="5">Input</h2>
+<h2 id="4">See also</h2>
 <p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>iter</tt>
-         </td>
-         <td>
-            <tt>number of iterations (default: 1)</tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="6">Output</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>grains</tt>
-         </td>
-         <td>
-            <tt><a href="grain2d.grain2d.html">grain2d</a></tt>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="7">Options</h2>
-<p>
-   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
-      <tr>
-         <td width="100px">
-            <tt>moveTriplePoints</tt>
-         </td>
-         <td>
-            <tt>do not exclude triple/quadruple points from smoothing</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>moveOuterBoundary</tt>
-         </td>
-         <td>
-            <tt>do not exclude outer boundary from smoothing</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>second_order, S2</tt>
-         </td>
-         <td>
-            <tt>second order smoothing</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>rate</tt>
-         </td>
-         <td>
-            <tt>default smoothing kernel</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>gauss</tt>
-         </td>
-         <td>
-            <tt>Gaussian smoothing kernel</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>exp</tt>
-         </td>
-         <td>
-            <tt>exponential smoothing kernel</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>umbrella</tt>
-         </td>
-         <td>
-            <tt>umbrella smoothing kernel</tt>
-         </td>
-      </tr>
-   </table>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="grain2d.simplifyBoundary.html">grain2d.simplifyBoundary</a> <a href="grain2d.refineBoundary.html">grain2d.refineBoundary</a>
 </p>
 </div>
 </body>

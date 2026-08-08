@@ -67,7 +67,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 mtexdata small
 grains = calcGrains(ebsd,'minPixel',3)
-grains = smooth(grains,4)
+grains = smoothBoundary(grains,4)
 plot(grains.boundary,'micronbar','off')
 % define some line
 xy1 = [33500,4500]; % starting point
@@ -114,12 +114,15 @@ grains = grain2d (y↑→x)
      2       4     284   Enstatite       mmm  DarkSeaGreen
      3       6     240    Diopside     12/m1     Goldenrod
  
- boundary segments: 767 (36235 µm)
- inner boundary segments: 22 (968 µm)
+ boundary segments: 755 (35597 µm)
+ inner boundary segments: 20 (955 µm)
  triple points: 20
  
  Properties: meanRotation, GOS
 {% endhighlight %}
+<center>
+{% include inline_image.html file="grainBoundary.intersect_01.png" %}
+</center>
 <p>find the number of intersection points</p>
 {% highlight matlab %}
 sum(~isnan(x))
@@ -132,6 +135,9 @@ hold off
 ans =
      4
 {% endhighlight %}
+<center>
+{% include inline_image.html file="grainBoundary.intersect_02.png" %}
+</center>
 </div>
 </body>
 </html>

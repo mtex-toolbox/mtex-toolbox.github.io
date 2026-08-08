@@ -1,0 +1,77 @@
+---
+title: "curvatureFilter"
+
+sidebar: function_reference_sidebar
+permalink: curvatureFilter.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>curvatureFilter</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_curvatureFilter.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/BoundarySmoothing/curvatureFilter.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>smooth grain boundaries by a single variational solve</p>
+<h2 id="3">Description</h2>
+<p>Defines the smooth boundary as the minimizer of</p>
+{% highlight matlab %}
+|V - V0|^2 + alpha * |L V|^2
+{% endhighlight %}
+<p>where <code class="language-plaintext highlighter-rouge">L</code> is the normalized Laplacian of the boundary network, i.e. <code class="language-plaintext highlighter-rouge">L V</code> measures how far a vertex sits off the line through its neighbours. The first term keeps the result close to the measured boundary, the second one penalizes curvature, and <code class="language-plaintext highlighter-rouge">alpha</code> decides between them.</p>
+<p>There is no iteration count. The minimizer is the solution of one sparse linear system, so the result depends on <code class="language-plaintext highlighter-rouge">alpha</code> alone and not on how long the algorithm was run. Junctions are eliminated from that system rather than penalized, so they stay exactly where they are.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">alpha</code> is not stated directly but through <code class="language-plaintext highlighter-rouge">smoothingLength</code>, a length in the units of the map. On a boundary sampled at spacing <code class="language-plaintext highlighter-rouge">h</code> the filter has gain <code class="language-plaintext highlighter-rouge">1/(1+4*alpha*sin(w/2)^4)</code> at the spatial frequency <code class="language-plaintext highlighter-rouge">w</code>, so it damps the wavelength</p>
+{% highlight matlab %}
+Lambda = pi*h / asin((4*alpha)^(-1/4))
+{% endhighlight %}
+<p>to half amplitude. <code class="language-plaintext highlighter-rouge">smoothingLength</code> is that wavelength - detail finer than it is removed, detail coarser than it survives. Being a length, it means the same thing whatever step size the map was measured at. It cannot be shorter than <code class="language-plaintext highlighter-rouge">2*h</code>, which is all the sampling can represent.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains,curvatureFilter)
+{% endhighlight %}
+
+{% highlight matlab %}
+F = curvatureFilter;
+F.smoothingLength = 3;   % in the units of the map
+grains = smoothBoundary(grains,F)
+{% endhighlight %}
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>smoothingLength</tt>
+         </td>
+         <td>
+            <tt>wavelength damped to half amplitude, in map units (default: 4 times the vertex spacing)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>the regularization weight itself; set it to override smoothingLength</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="boundaryFilter.html">boundaryFilter</a> <a href="laplaceFilter.html">laplaceFilter</a> <a href="taubinFilter.html">taubinFilter</a> <a href="huberFilter.html">huberFilter</a>
+</p>
+</div>
+</body>
+</html>

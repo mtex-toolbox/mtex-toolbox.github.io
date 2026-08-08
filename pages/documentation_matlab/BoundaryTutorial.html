@@ -34,7 +34,7 @@ mtexdata twins
 [grains,ebsd] = calcGrains(ebsd)
 
 % smooth them
-grains = grains.smooth
+grains = grains.smoothBoundary
 
 % visualize the grains
 plot(grains,grains.meanOrientation)
@@ -82,8 +82,8 @@ grains = grain2d (y↑→x)
  Phase  Grains  Pixels    Mineral  Symmetry         Color
      1     121   22833  Magnesium     6/mmm  LightSkyBlue
  
- boundary segments: 3825 (1018 µm)
- inner boundary segments: 4 (1.1 µm)
+ boundary segments: 3389 (959 µm)
+ inner boundary segments: 3 (0.95 µm)
  triple points: 114
  
  Properties: meanRotation, GOS
@@ -100,8 +100,8 @@ gB = grains.boundary
 gB = grainBoundary (y↑→x)
  
  Segments  length   mineral 1  mineral 2
-      606  182 µm  notIndexed  Magnesium
-     3219  835 µm   Magnesium  Magnesium
+      608  182 µm  notIndexed  Magnesium
+     2781  777 µm   Magnesium  Magnesium
 {% endhighlight %}
 <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
@@ -112,7 +112,7 @@ gB_MgMg = gB('Magnesium','Magnesium')
 gB_MgMg = grainBoundary (y↑→x)
  
  Segments  length  mineral 1  mineral 2
-     3219  835 µm  Magnesium  Magnesium
+     2781  777 µm  Magnesium  Magnesium
 {% endhighlight %}
 <h2 id="4">Properties of grain boundaries</h2>
 <p>A variable of type grain boundary contains the following properties</p>

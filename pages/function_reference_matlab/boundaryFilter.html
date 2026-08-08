@@ -1,0 +1,46 @@
+---
+title: "boundaryFilter"
+
+sidebar: function_reference_sidebar
+permalink: boundaryFilter.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>boundaryFilter</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_boundaryFilter.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/BoundarySmoothing/boundaryFilter.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>abstract class for smoothing grain boundaries</p>
+<h2 id="3">Description</h2>
+<p>A boundary filter decides <b>how</b> <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> turns a polygonal grain boundary into a smooth one. It is handed the vertex coordinates together with the adjacency of the boundary network and returns the moved coordinates. Everything else - removing the pixel staircase, resampling, deciding which vertices are allowed to move - happens in smoothBoundary and is the same for every filter.</p>
+<p>The filters fall into two groups. <a href="laplaceFilter.laplaceFilter.html"><code class="language-plaintext highlighter-rouge">laplaceFilter</code></a> and <a href="taubinFilter.taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> apply a local averaging step a fixed number of times, so how much they smooth depends on the vertex spacing. <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> and <a href="huberFilter.huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> instead define the smooth boundary as the solution of a minimization problem, which is stated in terms of a length and therefore does not change when the same sample is measured on a finer grid.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains,taubinFilter)
+{% endhighlight %}
+
+{% highlight matlab %}
+F = curvatureFilter;
+F.smoothingLength = 3;
+grains = smoothBoundary(grains,F)
+{% endhighlight %}
+<h2 id="5">See also</h2>
+<p>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="laplaceFilter.html">laplaceFilter</a> <a href="taubinFilter.html">taubinFilter</a> <a href="curvatureFilter.html">curvatureFilter</a> <a href="huberFilter.html">huberFilter</a>
+</p>
+</div>
+</body>
+</html>

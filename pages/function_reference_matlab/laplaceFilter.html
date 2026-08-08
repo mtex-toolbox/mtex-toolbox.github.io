@@ -1,0 +1,85 @@
+---
+title: "laplaceFilter"
+
+sidebar: function_reference_sidebar
+permalink: laplaceFilter.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>laplaceFilter</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_laplaceFilter.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/BoundarySmoothing/laplaceFilter.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>constrained Laplacian smoothing of grain boundaries</p>
+<h2 id="3">Description</h2>
+<p>Replaces every vertex by a weighted mean of itself and its neighbours, a fixed number of times. This is what grain2d/smoothBoundary has always done and it stays the default.</p>
+<p>Note that a Laplacian is a low pass filter with gain <code class="language-plaintext highlighter-rouge">1-lambda*k</code>, so it shrinks: every iteration pulls a convex region inwards, without bound. Use <a href="taubinFilter.taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> when that matters. Note also that <code class="language-plaintext highlighter-rouge">iter</code> is not a physical quantity - how far a boundary is smoothed depends on how densely it is sampled, so the same call on the same sample measured at a finer step size does something different. Use <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> when that matters.</p>
+<p>The averaging includes the vertex itself with the weight of its own degree, which is how the adjacency comes out of the vertex - segment incidence matrix. For a vertex with two neighbours the mean is therefore <code class="language-plaintext highlighter-rouge">(2*V + Vl + Vr)/4</code>, so <code class="language-plaintext highlighter-rouge">lambda</code> is applied to half the normalized Laplacian - the default <code class="language-plaintext highlighter-rouge">lambda = 0.5</code> is in truth a rate of 0.25. The variational filters use the normalized Laplacian itself, so their parameters are not comparable to this one.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains,5)          % the default, iter = 5
+{% endhighlight %}
+
+{% highlight matlab %}
+F = laplaceFilter;
+F.iter = 10;
+F.weight = 'gauss';
+grains = smoothBoundary(grains,F)
+{% endhighlight %}
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>iter</tt>
+         </td>
+         <td>
+            <tt>number of iterations (default: 1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda</tt>
+         </td>
+         <td>
+            <tt>step size (default: 0.5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>weight</tt>
+         </td>
+         <td>
+            <tt>'rate', 'gauss', 'exp' or 'umbrella'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>secondOrder</tt>
+         </td>
+         <td>
+            <tt>average over the neighbours of the neighbours as well</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="boundaryFilter.html">boundaryFilter</a> <a href="taubinFilter.html">taubinFilter</a> <a href="curvatureFilter.html">curvatureFilter</a>
+</p>
+</div>
+</body>
+</html>

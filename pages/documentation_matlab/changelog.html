@@ -51,6 +51,46 @@ gbnd = calcGBND(grains3.boundary)          % 3d, specimen coordinates
 [ebsd,grains] = cleanUpPseudoSym(ebsd,grains,mori,'threshold',1.5)
 {% endhighlight %}
 <p>
+<b>Grain Boundaries in Walk Order</b>
+</p>
+<p>The segments of a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> are not an unordered list anymore. They are sorted into chains - maximal runs of segments joined at vertices where exactly two segments meet - so that consecutive segments share a vertex. Any other vertex is a junction and terminates a chain. Each chain occupies a contiguous block of rows and is oriented such that the grain in <code class="language-plaintext highlighter-rouge">gB.grainId(:,1)</code> lies to the left of the walk direction</p>
+{% highlight matlab %}
+gB = grains.boundary
+gB.chainId, gB.chainSize, gB.isChainStart, gB.isChainEnd, gB.isClosed
+gB.arcLength, gB.chainLength   % length along and of the chain
+gB.chainV                      % vertex ids, chains separated by NaN
+{% endhighlight %}
+<p>This is what allows to coarsen or to refine a boundary as a curve instead of as a bag of segments</p>
+<div>
+<ul>
+<li> <a href="grain2d.simplifyBoundary.html"><code class="language-plaintext highlighter-rouge">simplifyBoundary(grains,epsilon)</code></a> drops every vertex whose removal moves the boundary by less than <code class="language-plaintext highlighter-rouge">epsilon</code> - Douglas Peucker applied to each chain - so a straight run collapses into a single segment while a corner is kept. On a pixel grid this is what turns the staircase into the straight line it approximates</li>
+<li> <a href="grain2d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary(grains,n)</code></a> is the blunt alternative, keeping every n-th vertex regardless of shape</li>
+<li> <a href="grain2d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary(grains,delta)</code></a> resamples each chain at equal arc length. Subdividing the segments, as it used to do, preserved the staircase of the pixel grid and only made it finer - resampling is what gives the smoothing degrees of freedom that are not tied to the grid</li>
+<li> <a href="grain2d.isOuterBoundary.html"><code class="language-plaintext highlighter-rouge">isOuterBoundary(grains)</code></a> tells which grains border the map, which is no longer obvious once an alpha shape has traced the outline</li>
+</ul>
+</div>
+<p>All of them keep the junctions exactly where they are, so which grains touch, and where, is unchanged, and a grain too small for the tolerance is left uncoarsened rather than collapsed onto a line.</p>
+<p>What used to be <code class="language-plaintext highlighter-rouge">smooth(grains)</code> is called <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary(grains)</code></a> now - <code class="language-plaintext highlighter-rouge">smooth</code> on an <a href="EBSD.EBSD.html">EBSD</a> means something entirely different, it denoises orientations - and it performs all three steps by default: simplify, refine, and only then the Laplacian smoothing that it used to do on its own</p>
+{% highlight matlab %}
+grains = smoothBoundary(grains,5)
+grains = smoothBoundary(grains,5,'noSimplify','noRefine')   % as before
+{% endhighlight %}
+<p>The old name still works and still does the old thing - <code class="language-plaintext highlighter-rouge">smooth</code> forwards with both of the new steps switched off, so a script written against it keeps the numbers it had rather than silently getting different grain areas and a different number of boundary segments. It warns, and points here.</p>
+<p>Neither of the first two steps is cosmetic. A pixel staircase is never further than <code class="language-plaintext highlighter-rouge">d/sqrt(2)</code> from the straight line it approximates, <code class="language-plaintext highlighter-rouge">d</code> being the pixel spacing, so that is the tolerance which removes the grid and nothing else. And simplifying without resampling afterwards leaves a curve as a handful of long chords, which the smoothing then cuts the corners off - a circle of 15 pixel radius loses 14% of its area over 25 iterations, against 0.4% for all three steps together. Note that the first two steps change the number of segments, so where <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment they have to be switched off.</p>
+<p>Which algorithm performs the smoothing is now a choice, made by passing a <a href="boundaryFilter.html">boundaryFilter</a> - the same pattern as the <a href="EBSDFilter.html">EBSDFilter</a> that <code class="language-plaintext highlighter-rouge">smooth(ebsd,F)</code> takes</p>
+{% highlight matlab %}
+grains = smoothBoundary(grains,taubinFilter)
+grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
+{% endhighlight %}
+<div>
+<ul>
+<li> <a href="laplaceFilter.laplaceFilter.html"><code class="language-plaintext highlighter-rouge">laplaceFilter</code></a> is the default and what <code class="language-plaintext highlighter-rouge">smoothBoundary(grains,5)</code> still selects, unchanged</li>
+<li> <a href="taubinFilter.taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> follows every smoothing pass by a slightly larger unshrinking one. A Laplacian shrinks without bound - on forsterite 25 iterations cost the average grain 2.8% of its area and the worst affected one 72% - where Taubin gives it back</li>
+<li> <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> replaces the iteration by a single sparse solve, so there is no iteration count at all. Its knob is a <b>length</b>, the wavelength damped to half amplitude, and so means the same thing whatever step size the map was measured at</li>
+<li> <a href="huberFilter.huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> penalizes curvature by an l^1/l^2 Huber function rather than a square, which keeps a genuinely faceted boundary faceted instead of rounding its corners off</li>
+</ul>
+</div>
+<p>
 <b>Much Better EBSD Import</b>
 </p>
 <div>
@@ -146,6 +186,15 @@ cK   = planarColorKey(winter,'colorModel','white');
 rgb  = cK.property2color(grains.longAxis,grains.aspectRatio);
 {% endhighlight %}
 <p>
+<b>Rotations, Tangent Spaces and Vector Valued Functions</b>
+</p>
+<p>Two new pages describe the geometry MTEX is built upon. <a href="RotationRepresentations.html">Rotation Representations</a> compares the ways of writing a rotation as a single three dimensional vector - Rodrigues, homochoric and cubochoric - and which of them fills which region of space and preserves volume. <a href="RotationTangentSpace.html">The Tangent Space</a> explains the left and the right representation of a tangent vector, i.e. of a direction in which a rotation may be varied. A <a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a> now stores the rotation it is attached to along with the symmetries, so switching between both representations does not require passing the orientation along anymore. For <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a> the switch is performed directly on the harmonic coefficients</p>
+{% highlight matlab %}
+rot = rotation.byHomochoric(v)
+t = odf.grad(ori); right(t)   % t knows ori, no second argument needed
+{% endhighlight %}
+<p>What used to be called a multivariate function is now called a <a href="SO3FunVectorValued.html">vector valued</a> function. Arrays of them are handled like any other MATLAB array - <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">reshape</code>, <code class="language-plaintext highlighter-rouge">permute</code>, <code class="language-plaintext highlighter-rouge">squeeze</code>, <code class="language-plaintext highlighter-rouge">transpose</code>, indexing and assignment - which worked for <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a> only and now works for <a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a> and <a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a> as well. <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> comes with the arithmetic <code class="language-plaintext highlighter-rouge">+,-,.*,./</code> together with <code class="language-plaintext highlighter-rouge">dot</code> and <code class="language-plaintext highlighter-rouge">normSquare</code>, and a <a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a> draws its pole figures, inverse pole figures and sections directly instead of through a harmonic approximation.</p>
+<p>
 <b>Syntax Changes</b>
 </p>
 <div>
@@ -159,8 +208,29 @@ ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
 {% endhighlight %}
 <div>
 <ul>
-<li>the constructors <code class="language-plaintext highlighter-rouge">quaternion</code>, <code class="language-plaintext highlighter-rouge">rotation</code> and <code class="language-plaintext highlighter-rouge">orientation</code> only accept the syntax <code class="language-plaintext highlighter-rouge">quaternion(a,b,c,d)</code>, <code class="language-plaintext highlighter-rouge">orientation(a,b,c,d,CS,SS)</code>. Use the named constructors <code class="language-plaintext highlighter-rouge">vector3d.byPolar(theta,rho)</code>, <code class="language-plaintext highlighter-rouge">orientation.byMatrix(M,cs)</code>, ... instead</li>
+<li>the constructors <code class="language-plaintext highlighter-rouge">quaternion</code>, <code class="language-plaintext highlighter-rouge">rotation</code> and <code class="language-plaintext highlighter-rouge">orientation</code> only accept the syntax <code class="language-plaintext highlighter-rouge">quaternion(a,b,c,d)</code>, <code class="language-plaintext highlighter-rouge">orientation(a,b,c,d,CS,SS)</code>. Use the named constructors <code class="language-plaintext highlighter-rouge">vector3d.byPolar(theta,rho)</code>, <code class="language-plaintext highlighter-rouge">orientation.byMatrix(M,cs)</code>, ... instead. Newly available are <code class="language-plaintext highlighter-rouge">rotation.byHomochoric</code>, <code class="language-plaintext highlighter-rouge">rotation.id</code>, <code class="language-plaintext highlighter-rouge">rotation.nan</code>, <code class="language-plaintext highlighter-rouge">rotation.rand</code> and <code class="language-plaintext highlighter-rouge">rotation.inversion</code>
+</li>
 <li>symmetries are compared on three levels - <code class="language-plaintext highlighter-rouge">cs1 == cs2</code> checks for the same object, <code class="language-plaintext highlighter-rouge">eqTol(cs1,cs2)</code> for the same Laue group and axes, and <code class="language-plaintext highlighter-rouge">sim(cs1,cs2)</code> for the same lattice with possibly different alignment of x, y, z</li>
+<li>the spherical Bingham distribution <code class="language-plaintext highlighter-rouge">BinghamS2</code> has been renamed <a href="S2FunBingham.S2FunBingham.html">S2FunBingham</a> and is fitted by <code class="language-plaintext highlighter-rouge">S2FunBingham.fit(v)</code>
+</li>
+<li>
+<code class="language-plaintext highlighter-rouge">gB.V</code> returns the two end points of every boundary segment, the plain list of all vertices is <code class="language-plaintext highlighter-rouge">gB.allV</code>
+</li>
+<li>
+<code class="language-plaintext highlighter-rouge">calcGBPD</code> has been superseded by <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a>
+</li>
+<li>a <a href="plottingConvention.html">plottingConvention</a> may be stated as a string, each axis followed or preceded by the direction it points to on screen</li>
+</ul>
+</div>
+{% highlight matlab %}
+pC = plottingConvention('y↑→x')   % also 'x←↑y', 'z⊙→x', ASCII 'y^->x'
+{% endhighlight %}
+<div>
+<ul>
+<li>six EBSD interfaces have been retired to <code class="language-plaintext highlighter-rouge">obsolete/</code> - <code class="language-plaintext highlighter-rouge">loadEBSD_ACOM</code>, <code class="language-plaintext highlighter-rouge">loadEBSD_sor</code>, <code class="language-plaintext highlighter-rouge">loadEBSD_csv</code> and <code class="language-plaintext highlighter-rouge">loadEBSD_Oxfordcsv</code> as they were unused, <code class="language-plaintext highlighter-rouge">loadEBSD_hdf5</code> and <code class="language-plaintext highlighter-rouge">loadEBSD_h5oina</code> as they are covered by <a href="loadEBSD_h5.html"><code class="language-plaintext highlighter-rouge">loadEBSD_h5</code></a>
+</li>
+<li>
+<code class="language-plaintext highlighter-rouge">extern/kde</code> is called <code class="language-plaintext highlighter-rouge">kde1d</code> now as it used to shadow the <code class="language-plaintext highlighter-rouge">kde</code> of recent MATLAB versions</li>
 </ul>
 </div>
 <p>
@@ -168,7 +238,16 @@ ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
 </p>
 <div>
 <ul>
-<li> <a href="grain2d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary(grains,delta)</code></a> subdivides boundary segments to a given segment length</li>
+<li> <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform(ebsd,fun)</code></a> and <code class="language-plaintext highlighter-rouge">transform(grains,fun)</code> apply an arbitrary, not necessarily rigid, map to every position - to simulate an instrument distortion or to reproject a map</li>
+<li>
+<code class="language-plaintext highlighter-rouge">ebsd.lattice</code> is the one place that turns <code class="language-plaintext highlighter-rouge">ebsd.unitCell</code> and <code class="language-plaintext highlighter-rouge">ebsd.pos</code> into a lattice basis and a per pixel integer index, <code class="language-plaintext highlighter-rouge">ebsd.fixPos</code> repairs coordinates suffering from rounding, <code class="language-plaintext highlighter-rouge">gridify</code> takes <code class="language-plaintext highlighter-rouge">'rowMajor'</code> and <code class="language-plaintext highlighter-rouge">'columnMajor'</code>, and a hexagonal grid is addressed in cube coordinates by <code class="language-plaintext highlighter-rouge">hex2cube</code> and <code class="language-plaintext highlighter-rouge">cube2hex</code>
+</li>
+<li> <a href="orientation.find.html"><code class="language-plaintext highlighter-rouge">find</code></a> on <a href="orientation.orientation.html">orientation</a>, <a href="quaternion.quaternion.html">quaternion</a> and <a href="vector3d.vector3d.html">vector3d</a> returns the closest point, the k closest points or all points within an epsilon neighborhood, together with their distances</li>
+<li>
+<code class="language-plaintext highlighter-rouge">sqrt</code>, <code class="language-plaintext highlighter-rouge">smooth</code> and <code class="language-plaintext highlighter-rouge">invRadon</code> on <a href="S2Fun.S2Fun.html">S2Fun</a>, the new class <a href="S2FunGrid.html">S2FunGrid</a>, and every <a href="S2Fun.S2Fun.html">S2Fun</a> carries a symmetry, hence a <code class="language-plaintext highlighter-rouge">CS</code>, a <code class="language-plaintext highlighter-rouge">SS</code> and a <code class="language-plaintext highlighter-rouge">how2plot</code>
+</li>
+<li>screw dislocations of a <a href="dislocationSystem.dislocationSystem.html">dislocationSystem</a> have proper Burgers vector lengths for hexagonal lattices</li>
+<li>the mex files are compiled for every platform on our continuous integration and attached to the release, <code class="language-plaintext highlighter-rouge">check_mex</code> downloads them from there and grain reconstruction falls back to a MATLAB Voronoi wherever a mex file is missing</li>
 <li> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge(grains,...,'maxPixel')</code></a> takes the mean orientation of the largest grain involved instead of averaging</li>
 <li> <a href="doEulerStep.html"><code class="language-plaintext highlighter-rouge">doEulerStep(odf,vF,dt,'implicit')</code></a> provides an implicit Euler scheme for texture evolution</li>
 <li>new spherical Fourier transform based on the double Fourier sphere method, <code class="language-plaintext highlighter-rouge">NFSFT</code> is the default, bandwidths beyond 1023 are supported</li>
@@ -545,7 +624,7 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 <ul>
 <li>new function <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">ebsd.interp</code></a> to interpolate EBSD maps at arbitrary x,y coordinates, <a href="EBSDInter.html">example</a>
 </li>
-<li> <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth(grains)</code></a> keeps now triple points and outer boundary fixed by default</li>
+<li> <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary(grains)</code></a> keeps now triple points and outer boundary fixed by default</li>
 <li>the field <code class="language-plaintext highlighter-rouge">grains.triplePoints.angles</code> returns the angles between the boundaries at the triple points</li>
 <li>new option <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> to <code class="language-plaintext highlighter-rouge"><a href="EBSD.calcGrains.html">calcGrains</a></code>
 </li>

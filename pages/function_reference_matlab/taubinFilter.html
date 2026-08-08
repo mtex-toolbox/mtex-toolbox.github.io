@@ -1,0 +1,77 @@
+---
+title: "taubinFilter"
+
+sidebar: function_reference_sidebar
+permalink: taubinFilter.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>taubinFilter</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_taubinFilter.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/BoundarySmoothing/taubinFilter.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>shrinkage free smoothing of grain boundaries</p>
+<h2 id="3">Description</h2>
+<p>A Laplacian is a low pass filter with gain <code class="language-plaintext highlighter-rouge">1-lambda*k</code>, which is smaller than one everywhere except at <code class="language-plaintext highlighter-rouge">k = 0</code>. Iterating it therefore shrinks every convex region, without bound - a grain smoothed long enough disappears.</p>
+<p>Taubin's fix is to follow each smoothing pass by a slightly larger <b>unshrinking</b> pass with a negative step <code class="language-plaintext highlighter-rouge">mu</code>, so that the gain over the pair is <code class="language-plaintext highlighter-rouge">(1-lambda*k)(1-mu*k)</code>. With <code class="language-plaintext highlighter-rouge">mu</code> chosen a little below <code class="language-plaintext highlighter-rouge">-lambda</code> this product is approximately one over the low frequencies, i.e. the shape is smoothed while the area is given back.</p>
+<p>This is approximate, not exact - the areas do move, just not systematically in one direction.</p>
+<p>Reference: G. Taubin, A signal processing approach to fair surface design, SIGGRAPH 1995.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+grains = smoothBoundary(grains,taubinFilter)
+{% endhighlight %}
+
+{% highlight matlab %}
+F = taubinFilter;
+F.iter = 10;
+grains = smoothBoundary(grains,F)
+{% endhighlight %}
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>iter</tt>
+         </td>
+         <td>
+            <tt>number of shrink/unshrink pairs (default: 5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda</tt>
+         </td>
+         <td>
+            <tt>the smoothing step (default: 0.5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mu</tt>
+         </td>
+         <td>
+            <tt>the unshrinking step, negative and slightly larger in modulus than lambda (default: -0.53)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="grain2d.smoothBoundary.html">grain2d.smoothBoundary</a> <a href="boundaryFilter.html">boundaryFilter</a> <a href="laplaceFilter.html">laplaceFilter</a> <a href="curvatureFilter.html">curvatureFilter</a>
+</p>
+</div>
+</body>
+</html>

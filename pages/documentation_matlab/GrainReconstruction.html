@@ -62,7 +62,7 @@ ebsd = EBSD (y↑→x)
 <li>a mixture of both, e.g., assign small notindexed regions to the surrounding grains but keep large notindexed regions</li>
 </ol>
 </div>
-<p>The extent to which unindexed pixels are assigned is controlled by the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code>. Roughly speaking this parameter is the radius of the smallest unindexed region that will not be entirely assigned to surrounding grains. The default of this value is <code class="language-plaintext highlighter-rouge">alpha = 2.2</code>.</p>
+<p>The extent to which unindexed pixels are assigned is controlled by the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code>. Roughly speaking this parameter is the radius, in pixels, of the smallest unindexed region that will not be entirely assigned to surrounding grains. The default of this value is <code class="language-plaintext highlighter-rouge">alpha = 3.1</code>.</p>
 <p>The second parameter <code class="language-plaintext highlighter-rouge">'angle'</code> involved in grain reconstruction is the threshold misorientation angle indicating a grain boundary. By default, this value is set to <code class="language-plaintext highlighter-rouge">angle = 10*degree</code>.</p>
 <p>Finally, the option <code class="language-plaintext highlighter-rouge">'minPixel'</code> controls the minimum size of a reconstructed grain. Grains with less pixels are considered as not indexed.</p>
 <p>All grain reconstruction methods in MTEX are accessible via the command <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> which takes as input an EBSD data set and returns a list of grain.</p>
@@ -101,10 +101,10 @@ hold off
 {% include inline_image.html file="GrainReconstruction_02.png" %}
 </center>
 <h2 id="4">Grain Boundary Smoothing</h2>
-<p>Due to the gridded nature of the EBSD measurement the reconstructed grain boundaries often suffer from the staircase effect. This can be reduced by smoothing the grain boundaries using the command <a href="grain2d.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>
+<p>Due to the gridded nature of the EBSD measurement the reconstructed grain boundaries often suffer from the staircase effect. This can be reduced by smoothing the grain boundaries using the command <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>
 </p>
 {% highlight matlab %}
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 % display the result
 plot(ebsd,'micronbar','off')
@@ -122,8 +122,8 @@ hold off
 mtexdata forsterite silent
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-[grains, ebsd] = calcGrains(ebsd,'alpha',3.1,'angle',10*degree,'minPixel',3);
-grains = smooth(grains,3);
+[grains, ebsd] = calcGrains(ebsd,'alpha',6,'angle',10*degree,'minPixel',3);
+grains = smoothBoundary(grains,3);
 
 % plot the boundary of all grains
 plot(ebsd,'micronbar','off')
@@ -191,7 +191,7 @@ plot(ebsd,ebsd.orientations)
 </center>
 <p>At the usual 10 degree the reconstruction returns the grains, but every boundary below the threshold is missed - and there are many, since deformation creates them.</p>
 {% highlight matlab %}
-grains = smooth(calcGrains(ebsd,'angle',10*degree,'minPixel',10),5);
+grains = smoothBoundary(calcGrains(ebsd,'angle',10*degree,'minPixel',10),5);
 
 plot(ebsd,ebsd.orientations)
 hold on
@@ -203,7 +203,7 @@ hold off
 </center>
 <p>Lowering the threshold does not recover them. Well before it reaches the angles those boundaries actually have, it starts cutting the bent lattice inside the grains, and the boundaries it draws there are contour lines of a smooth orientation field rather than anything physical.</p>
 {% highlight matlab %}
-grains = smooth(calcGrains(ebsd,'angle',0.5*degree,'minPixel',10),5);
+grains = smoothBoundary(calcGrains(ebsd,'angle',0.5*degree,'minPixel',10),5);
 
 plot(ebsd,ebsd.orientations)
 hold on
@@ -218,7 +218,7 @@ hold off
 <p>It is selected by the option <code class="language-plaintext highlighter-rouge">'fmc'</code>, whose value <code class="language-plaintext highlighter-rouge">cmaha</code> controls how sharply a surprising misorientation suppresses the coupling between two aggregates - larger values separate more strictly and return more grains.</p>
 {% highlight matlab %}
 grains = calcGrains(ebsd,'fmc',0.5,'minPixel',10);
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 plot(ebsd,ebsd.orientations)
 hold on
@@ -232,7 +232,7 @@ hold off
 <p>Raising <code class="language-plaintext highlighter-rouge">cmaha</code> resolves the substructure within those grains - the dislocation cells that carry the deformation.</p>
 {% highlight matlab %}
 grains = calcGrains(ebsd,'fmc',1.5,'minPixel',10);
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 plot(ebsd,ebsd.orientations)
 hold on
@@ -248,7 +248,7 @@ mtexdata EMSphinx silent
 ebsd = ebsd('Iron fcc');
 
 grains = calcGrains(ebsd,'fmc',1.5,'minPixel',10)
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 plot(ebsd,ebsd.orientations)
 hold on
@@ -271,6 +271,8 @@ grains = grain2d (y↑→x)
 <center>
 {% include inline_image.html file="GrainReconstruction_12.png" %}
 </center>
+<h2 id="14">More ways to reconstruct grains</h2>
+<p>The threshold angle and fast multiscale clustering are two of several criteria by which <code class="language-plaintext highlighter-rouge">calcGrains</code> may separate neighbouring pixels, and all of them are interchangeable objects. How to choose between them, how to segment by a property other than the orientation, and how to write a criterion of your own is the subject of <a href="GrainReconstructionAdvanced.html">Advanced Grain Reconstruction</a>. A second way of turning a criterion into grains, by clustering the map instead of taking connected components, is described in <a href="GrainReconstructionMCL.html">Markovian Clustering</a>.</p>
 </div>
 </body>
 </html>

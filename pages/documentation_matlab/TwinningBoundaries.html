@@ -32,7 +32,7 @@ mtexdata twins
 [grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',3);
 
 % smooth them
-grains = grains.smooth(5);
+grains = grains.smoothBoundary(5);
 
 % visualize the grains
 plot(grains,grains.meanOrientation)
@@ -65,8 +65,8 @@ gB = grains.boundary
 gB = grainBoundary (y↑→x)
  
  Segments  length   mineral 1  mineral 2
-      600  182 µm  notIndexed  Magnesium
-     3197  730 µm   Magnesium  Magnesium
+      607  182 µm  notIndexed  Magnesium
+     2740  724 µm   Magnesium  Magnesium
 {% endhighlight %}
 <p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
 {% highlight matlab %}
@@ -77,7 +77,7 @@ gB_MgMg = gB('Magnesium','Magnesium')
 gB_MgMg = grainBoundary (y↑→x)
  
  Segments  length  mineral 1  mineral 2
-     3197  730 µm  Magnesium  Magnesium
+     2740  724 µm  Magnesium  Magnesium
 {% endhighlight %}
 <h2 id="4">Properties of grain boundaries</h2>
 <p>A variable of type grain boundary contains the following properties</p>
@@ -132,11 +132,11 @@ mori_mean = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  150.365 93.8976 150.225
+  149.837 93.8838  149.61
  
  
      plane parallel   direction parallel      fit
-(011̅1) || (101̅1̅)   [11̅01] || [011̅1]      0.46°
+(011̅1) || (101̅1̅)   [11̅01] || [011̅1]      0.451°
 {% endhighlight %}
 <p>Bases on the output above we may now define the special orientation relationship as</p>
 {% highlight matlab %}
@@ -204,7 +204,7 @@ hold off
 twinBoundary = grainBoundary (y↑→x)
  
  Segments  length  mineral 1  mineral 2
-     1681  367 µm  Magnesium  Magnesium
+     1446  362 µm  Magnesium  Magnesium
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TwinningBoundaries_05.png" %}
