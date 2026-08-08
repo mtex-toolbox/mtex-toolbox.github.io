@@ -17,7 +17,6 @@ function makeDoc(varargin)
 %  examples        - publish the examples
 %  force           - republish also pages that are not newer than their html
 %  clear           - remove all published pages and cached data first (asks back)
-%  showFigures     - show the figures on screen while publishing
 %  skipDirtyImages - do not republish pages with uncommitted images
 %  keepImages      - do not revert images that were only re-rendered
 %  checkLinks      - report dead links in the published html
@@ -99,12 +98,11 @@ options.LaTex = 'mathJax';
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
 options.force = check_option(varargin,'force');
 
-% the figures are published off screen - publish snapshots them with print,
-% which does not need them visible, and a build that pops up a window per
-% figure for hours takes the focus away from whatever else is going on.
-% 'showFigures' brings them back, which is what one wants when watching a
-% single page being rebuilt.
-options.showFigures = check_option(varargin,'showFigures');
+% the figures pop up on screen while they are being published and there is no
+% way around it: MATLAB's publish snapshots only figures whose Visible is 'on'
+% (see the comment in ../../makeDoc/@DocFile/publish.m), so a build with hidden
+% figures produces pages without images. Publishing on a machine or in a
+% MATLAB session that has no display is the only way to keep them away.
 
 % pages whose figures differ from the committed ones are republished even when
 % their source has not changed - such an image is normally the trace of an MTEX
@@ -345,12 +343,6 @@ elseif isempty(options.forceDoc)
 else
   info(end+1,:) = {'dirty images', ...
     sprintf('%d page(s) republished for them',numel(options.forceDoc))};
-end
-
-if options.showFigures
-  info(end+1,:) = {'figures','shown on screen (showFigures)'};
-else
-  info(end+1,:) = {'figures','hidden'};
 end
 
 if doSidebars
