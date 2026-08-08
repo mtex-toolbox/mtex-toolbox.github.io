@@ -1,4 +1,42 @@
 function makeDoc(varargin)
+% build the MTEX homepage documentation with the DocHelp toolbox
+%
+% Syntax
+%
+%   makeDoc                        % everything: function reference, doc, examples
+%   makeDoc('doc')                 % only the documentation pages
+%   makeDoc('ref','force')         % only the function reference, rebuild all pages
+%   makeDoc('doc','file','Plotting')  % only pages matching 'Plotting'
+%
+% Options
+%  file - restrict the build to the pages matching this pattern
+%
+% Flags
+%  ref             - publish the function reference
+%  doc             - publish the documentation pages
+%  examples        - publish the examples
+%  force           - republish also pages that are not newer than their html
+%  clear           - remove all published pages and cached data first (asks back)
+%  showFigures     - show the figures on screen while publishing
+%  skipDirtyImages - do not republish pages with uncommitted images
+%  keepImages      - do not revert images that were only re-rendered
+%  checkLinks      - report dead links in the published html
+%
+% Description
+%
+% Without any of the flags |ref|, |doc|, |examples| all three parts are
+% published. Naming a page with |file| implies |force| and leaves the
+% sidebars untouched, as those can only be generated from the complete file
+% list. The pattern is matched against the full source path, so a page name,
+% a folder or a full path all work.
+%
+% Before anything is published the run is announced: how many pages each part
+% has selected, how many of them are actually going to be rebuilt, and a
+% summary of the options in effect.
+%
+% After publishing, images that were re-rendered but did not really change
+% are restored from git, see ../CLAUDE.md.
+%
 
 obj = onCleanup(@delete);
 
@@ -60,8 +98,12 @@ options.LaTex = 'mathJax';
 options.publishSettings.stylesheet = fullfile(pwd,'web.xsl');
 options.force = check_option(varargin,'force');
 
-% by default the figures show up on screen while they are being published
-options.showFigures = ~check_option(varargin,'hideFigures');
+% the figures are published off screen - publish snapshots them with print,
+% which does not need them visible, and a build that pops up a window per
+% figure for hours takes the focus away from whatever else is going on.
+% 'showFigures' brings them back, which is what one wants when watching a
+% single page being rebuilt.
+options.showFigures = check_option(varargin,'showFigures');
 
 % pages whose figures differ from the committed ones are republished even when
 % their source has not changed - such an image is normally the trace of an MTEX
@@ -73,10 +115,6 @@ if check_option(varargin,'skipDirtyImages')
   options.forceDoc = {};
 else
   options.forceDoc = dirtyImagePages;
-  if ~isempty(options.forceDoc)
-    dispPerm(sprintf('%d page(s) have uncommitted images and will be republished', ...
-      numel(options.forceDoc)));
-  end
 end
 
 options.xml.toolbox.versionName.Text = getMTEXpref('version');
@@ -85,14 +123,11 @@ options.xml.toolbox.fullname.Text = '<b>MTEX</b> - A MATLAB Toolbox for Quantita
 options.xml.toolbox.lastUpdated.Text = date;
 
 doAll = ~check_option(varargin,{'ref','doc','examples'});
+doRef = doAll || check_option(varargin,'ref');
+doDoc = doAll || check_option(varargin,'doc');
+doExamples = doAll || check_option(varargin,'examples');
 
-% restrict the build to single pages or folders, e.g.
-%
-%   makeDoc('file','EBSDTutorial')
-%   makeDoc('doc','file','Plotting')
-%
-% the pattern is matched against the full source path, so a page name, a
-% folder or a full path all work. This implies 'force' - the point of naming
+% restricting the build to single pages implies 'force' - the point of naming
 % a page is to rebuild it, and it would otherwise be skipped whenever it is
 % not newer than its html. The sidebars are left untouched, since they can
 % only be regenerated from the complete file list.
@@ -100,11 +135,18 @@ restrictTo = ensurecell(get_option(varargin,'file',{}));
 doSidebars = isempty(restrictTo);
 options.force = options.force || ~doSidebars;
 
-%% Publish Function Reference
+%% collect the files to be published
 
-if doAll || check_option(varargin,'ref')
+% the file lists are put together before anything is published, so that the
+% run can be announced up front - collecting them is only a directory scan,
+% all the time goes into publish further down. Every part keeps both lists:
+% the complete one, from which the sidebar has to be built, and the one the
+% 'file' option restricts the publishing to.
 
-  % define source files
+parts = struct('name',{},'files',{},'toPublish',{},'outDir',{});
+
+if doRef
+
   mtexFunctionFiles = [...
     DocFile( fullfile(mtex_path,'S2Fun')) ...
     DocFile( fullfile(mtex_path,'SO3Fun')) ...
@@ -118,6 +160,45 @@ if doAll || check_option(varargin,'ref')
     DocFile( fullfile(mtex_path,'tools')) ...
     DocFile( fullfile(mtex_path,'doc','FunctionReference'));];
 
+  funOut = fullfile(pwd,'..','pages','function_reference_matlab');
+  refFiles = select(mtexFunctionFiles,restrictTo{:});
+
+  parts = addPart(parts,'function reference',mtexFunctionFiles,refFiles,funOut);
+
+end
+
+if doDoc
+
+  mtexDocFiles = DocFile( fullfile(mtex_path,'doc'));
+  mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html','FunctionReference');
+
+  docOut = fullfile(pwd,'..','pages','documentation_matlab');
+  docFiles = select(mtexDocFiles,restrictTo{:});
+
+  parts = addPart(parts,'documentation',mtexDocFiles,docFiles,docOut);
+
+end
+
+if doExamples
+
+  mtexExFiles = DocFile( fullfile(mtex_path,'..','examples'));
+  mtexExFiles = exclude(mtexExFiles,'JAC-Creuziger');
+
+  exOut = fullfile(pwd,'..','pages','examples_matlab');
+  exFiles = select(mtexExFiles,restrictTo{:});
+
+  parts = addPart(parts,'examples',mtexExFiles,exFiles,exOut);
+
+end
+
+%% announce what is going to happen
+
+dispPlan(parts,options,restrictTo,doSidebars,varargin{:});
+
+%% Publish Function Reference
+
+if doRef
+
   % make sidebar
   if doSidebars
     makeHelpToc(mtexFunctionFiles,'FunctionReference','funcRef.xml');
@@ -125,21 +206,16 @@ if doAll || check_option(varargin,'ref')
   end
 
   % publish files
-  funOut = fullfile(pwd,'..','pages','function_reference_matlab');
   options.outDir = funOut;
   options.xml.toolbox.folder.Text = 'function_reference';
 
-  publish(select(mtexFunctionFiles,restrictTo{:}),options);
+  publish(refFiles,options);
 
 end
 
 %% Publish Doc
 
-if doAll || check_option(varargin,'doc')
-
-  % define source files
-  mtexDocFiles = DocFile( fullfile(mtex_path,'doc'));
-  mtexDocFiles = exclude(mtexDocFiles,'makeDoc','html','FunctionReference');
+if doDoc
 
   % make sidebar
   if doSidebars
@@ -148,21 +224,15 @@ if doAll || check_option(varargin,'doc')
   end
 
   % publish files
-  docOut = fullfile(pwd,'..','pages','documentation_matlab');
   options.outDir = docOut;
   options.xml.toolbox.folder.Text = 'documentation';
 
-  publish(select(mtexDocFiles,restrictTo{:}),options);
+  publish(docFiles,options);
 end
 
 %% make examples
 
-if doAll || check_option(varargin,'examples')
-
-  % define source files
-  mtexExFiles = DocFile( fullfile(mtex_path,'..','examples'));
-  mtexExFiles = exclude(mtexExFiles,'JAC-Creuziger');
-
+if doExamples
 
   % make sidebar
   if doSidebars
@@ -171,12 +241,11 @@ if doAll || check_option(varargin,'examples')
   end
 
   % publish files
-  exOut = fullfile(pwd,'..','pages','examples_matlab');
   options.outDir = exOut;
   options.xml.toolbox.folder.Text = 'examples';
   options.publishSettings.stylesheet = fullfile(pwd,'examples.xsl');
 
-  publish(select(mtexExFiles,restrictTo{:}),options);
+  publish(exFiles,options);
 end
 
 %% revert images that were only re-rendered, not really changed
@@ -198,11 +267,106 @@ end
 
 %% check links
 
+% only over the parts that were actually built - naming just 'doc' used to run
+% into an undefined mtexFunctionFiles here
 if check_option(varargin,'checkLinks')
-  deadlink([mtexFunctionFiles,mtexDocFiles,mtexExFiles], {funOut,docOut,exOut});
+  deadlink([parts.files], {parts.outDir});
 end
 
 %% set back mtex options
+
+end
+
+function parts = addPart(parts,name,files,toPublish,outDir)
+% one part of the build: all its files, those selected for publishing, target
+
+parts(end+1) = struct('name',name,'files',{files}, ...
+  'toPublish',{toPublish},'outDir',outDir);
+
+end
+
+function dispPlan(parts,options,restrictTo,doSidebars,varargin)
+% announce what the run is going to do before it starts
+%
+% A full build takes hours, so it is worth seeing up front how many pages are
+% about to be rebuilt and under which settings - a typo in 'file' or a
+% forgotten 'force' shows up in these numbers and nowhere else.
+
+dispPerm(' ');
+dispPerm(repmat('-',1,64));
+
+total = 0;
+for k = 1:numel(parts)
+
+  % the same question publish asks per file, asked here for all of them
+  opt = options; opt.outDir = parts(k).outDir;
+  n = nnz(needsPublish(parts(k).toPublish,opt));
+  total = total + n;
+
+  dispPerm(sprintf('  %-20s %5d page(s) selected, %5d to publish', ...
+    parts(k).name,numel(parts(k).toPublish),n));
+
+end
+
+if numel(parts) > 1
+  dispPerm(sprintf('%47s%5d in total','',total));
+end
+
+if total == 0
+  dispPerm('  nothing to publish - everything is up to date');
+end
+
+info = cell(0,2);
+if options.force
+  info(end+1,:) = {'pages','all selected ones (force)'};
+else
+  info(end+1,:) = {'pages','only those newer than their html'};
+end
+
+if ~isempty(restrictTo)
+  info(end+1,:) = {'restricted to',strjoin(restrictTo,', ')};
+end
+
+if check_option(varargin,'skipDirtyImages')
+  info(end+1,:) = {'dirty images','left alone (skipDirtyImages)'};
+elseif isempty(options.forceDoc)
+  info(end+1,:) = {'dirty images','none'};
+else
+  info(end+1,:) = {'dirty images', ...
+    sprintf('%d page(s) republished for them',numel(options.forceDoc))};
+end
+
+if options.showFigures
+  info(end+1,:) = {'figures','shown on screen (showFigures)'};
+else
+  info(end+1,:) = {'figures','hidden'};
+end
+
+if doSidebars
+  info(end+1,:) = {'sidebars','rebuilt'};
+else
+  info(end+1,:) = {'sidebars','left untouched'};
+end
+
+if check_option(varargin,'keepImages')
+  info(end+1,:) = {'images','all kept as rendered (keepImages)'};
+else
+  info(end+1,:) = {'images','unchanged ones reverted afterwards'};
+end
+
+if check_option(varargin,'checkLinks')
+  info(end+1,:) = {'dead links','checked afterwards'};
+end
+
+info(end+1,:) = {'log file',options.logFile};
+
+dispPerm(' ');
+for k = 1:size(info,1)
+  dispPerm(sprintf('  %-16s %s',info{k,1},info{k,2}));
+end
+
+dispPerm(repmat('-',1,64));
+dispPerm(' ');
 
 end
 
