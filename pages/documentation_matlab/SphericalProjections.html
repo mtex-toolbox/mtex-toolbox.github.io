@@ -70,11 +70,17 @@ mtexColorbar
 <h2 id="6">Alignment of the Coordinate Axes</h2>
 <p>The alignment of the plot on the screen is controlled by the <a href="plottingConvention.html">plottingConvention</a>. One can specify any vector to point out of the screen or east, north, west or south.</p>
 {% highlight matlab %}
-how2plot = plottingConvention;
-how2plot.north = zvector;
-how2plot.outOfScreen = xvector;
+how2plot = plottingConvention('z↑→y')
 
 plotPDF(odf,Miller(1,0,0,cs),'antipodal',how2plot)
+{% endhighlight %}
+
+{% highlight plaintext %}
+how2plot = plottingConvention (z↑→y)
+ 
+  outOfScreen: (1,0,0)
+  north      : (0,0,1)
+  east       : (0,1,0)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SphericalProjections_04.png" %}
@@ -117,13 +123,13 @@ mtexColorMap white2black
 <h2 id="10">Three-dimensional Plots</h2>
 <p>MTEX also offers a three-dimensional plot of pole figures which even might be rotated freely in space</p>
 {% highlight matlab %}
-howt2plot = plottingConvention;
-howt2plot.north = zvector;
-howt2plot.outOfScreen = vector3d(-2,-1,0);
+how2plot = plottingConvention;
+how2plot.north = zvector;
+how2plot.outOfScreen = vector3d(-2,-1,0);
 
 close all
-plotPDF(odf,Miller(1,1,0,odf.CS),'3d',howt2plot)
-setCamera(howt2plot)
+plotPDF(odf,Miller(1,1,0,odf.CS),'3d',how2plot)
+how2plot.setView
 mtexColorMap parula
 {% endhighlight %}
 <center>
