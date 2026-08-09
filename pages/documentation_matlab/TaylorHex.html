@@ -51,6 +51,9 @@ odf = fibreODF(cs.cAxis, vector3d.Z);
 {% highlight matlab %}
 h = Miller({0,0,0,1},{1,0,-1,0},{1,0,-1,1},cs);
 
+% the pfAnnotations preference is a global setting - store it such that we
+% can restore it at the end of this page
+storepfA = getMTEXpref('pfAnnotations');
 pfAnnotations = @(varargin) text([-vector3d.X,vector3d.Y],{'Tension','TD'},...
   'BackgroundColor','w','tag','axesLabels',varargin{:});
 setMTEXpref('pfAnnotations',pfAnnotations);
@@ -92,7 +95,7 @@ epsWarm = 0.7 * strainTensor(diag([1 -0.5 -0.5]))
 {% endhighlight %}
 
 {% highlight plaintext %}
-epsCold = strainTensor (y↓→x)
+epsCold = strainTensor (xyz)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -101,7 +104,7 @@ epsCold = strainTensor (y↓→x)
    0 -18   0
    0   0 -12
  
-epsWarm = strainTensor (y↓→x)
+epsWarm = strainTensor (xyz)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -166,6 +169,10 @@ legend('boxoff')
 <center>
 {% include inline_image.html file="TaylorHex_03.png" %}
 </center>
+<p>finally we restore the pole figure annotations we changed above</p>
+{% highlight matlab %}
+setMTEXpref('pfAnnotations',storepfA);
+{% endhighlight %}
 </div>
 </body>
 </html>
