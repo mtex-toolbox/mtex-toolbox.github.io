@@ -149,11 +149,19 @@ plot(ebsd,ebsd.orientations,'refFrame','off')
 setMTEXpref('showRefFrame','off')
 {% endhighlight %}
 <p>
-<a href="sigmaSections.html">sigmaSections</a> and <a href="pfSections.html">pfSections</a> are annotated with the specimen directions the way pole figures are - a section is a pole figure split up by the omega angle, so it lives in the same reference frame. Both are customized by the same <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference, misorientation sections stay unannotated as their directions are crystal directions</p>
+<b>Every Spherical Plot Shows its Reference Frame</b>
+</p>
+<p>What used to be reserved to pole figures now happens on every spherical plot that is not given in crystal coordinates - the axes of the reference frame are annotated with X, Y, Z. This includes <a href="vector3d.vector3d.html">vector3d</a> and <a href="S2Fun.S2Fun.html">S2Fun</a> plots, <a href="sigmaSections.html">sigmaSections</a> and <a href="pfSections.html">pfSections</a>, spherical densities as returned by <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> or <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>, and <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a>. Plots in crystal coordinates - <a href="Miller.Miller.html">Miller</a>, inverse pole figures, <a href="ipfSections.html">ipfSections</a>, color keys, single crystal tensors - keep their Miller indices at the vertices of the fundamental sector instead.</p>
+<p>All of them are customized by the same <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference that pole figures always used</p>
 {% highlight matlab %}
 pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y],{'RD','ND'},...
   'BackgroundColor','w','tag','axesLabels',varargin{:});
 setMTEXpref('pfAnnotations',pfAnnotations);
+{% endhighlight %}
+<p>and suppressed for a single plot by the flag <code class="language-plaintext highlighter-rouge">noLabel</code>
+</p>
+{% highlight matlab %}
+plot(vector3d.rand(100),'noLabel')
 {% endhighlight %}
 <p>
 <b>x to the East and y to the South by Default</b>

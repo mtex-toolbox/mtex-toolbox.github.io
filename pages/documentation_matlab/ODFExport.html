@@ -52,8 +52,10 @@ plot(model_odf,'sections',6,'silent')
 <h2 id="3">Save as .mat file</h2>
 <p>The most simplest way to store an ODF is to store the corresponding variable <code class="language-plaintext highlighter-rouge">model_odf</code> as any other MATLAB variable using the command <code class="language-plaintext highlighter-rouge">save</code>. Note that you have to specify the variable name as a string.</p>
 {% highlight matlab %}
-% the filename
-fname = fullfile(mtexDataPath, 'ODF', 'odf.mat');
+% the filename - all files on this page are written into the temporary
+% directory, so that running it does not overwrite the ODF files shipped
+% with MTEX
+fname = fullfile(tempdir, 'odf.mat');
 save(fname,'model_odf')
 {% endhighlight %}
 <p>Importing a .mat file is done simply by</p>
@@ -64,7 +66,7 @@ load(fname)
 <p>By default and ODF is exported in an ASCII file which consists of a large table with four columns, where the first three column describe the Euler angles of a regular 5&deg; grid in the orientation space and the fourth column contains the value of the ODF at this specific position.</p>
 {% highlight matlab %}
 % the filename
-fname = fullfile(mtexDataPath, 'ODF', 'odf.txt');
+fname = fullfile(tempdir, 'odf.txt');
 
 % export the ODF
 export(model_odf,fname,'Bunge')
@@ -81,7 +83,7 @@ export(model_odf,fname,S3G,'Bunge','generic')
 <p>Using the options <b>MTEX</b> the ODF is exported to an ASCII file which contains descriptions of all components of the ODF in a human readable fashion. This format can be imported by MTEX without loss.</p>
 {% highlight matlab %}
 % the filename
-fname = [mtexDataPath '/ODF/odf.mtex'];
+fname = fullfile(tempdir, 'odf.mtex');
 
 % export the ODF
 export(model_odf,fname,'Bunge','interface','mtex')
@@ -89,7 +91,7 @@ export(model_odf,fname,'Bunge','interface','mtex')
 <h2 id="8">Export to VPSC format</h2>
 <p>TODO!!!</p>
 {% highlight matlab %}
-fname = [mtexDataPath '/ODF/odfvpsc.txt'];
+fname = fullfile(tempdir, 'odfvpsc.txt');
 
 export(model_odf,fname,'VPSC')
 {% endhighlight %}
