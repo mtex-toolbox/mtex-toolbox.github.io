@@ -22,9 +22,9 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Elastic waves traveling through an anisotropic medium do not propagate with the same speed in every direction. In this section we explain how MTEX derives from an elastic stiffness tensor the direction dependent velocities of the P-wave and of the two S-waves, together with their polarization directions, how these quantities are visualized and which anisotropy measures are commonly derived from them.</p>
 <!--/introduction-->
-<h2 id="1">TODO</h2>
-<h2 id="2">Import an Elasticity Tensor</h2>
+<h2 id="1">Import an Elasticity Tensor</h2>
 <p>Let us start by importing the elastic stiffness tensor of an Olivine crystal in reference orientation from a file.</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
@@ -47,35 +47,11 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
-<h2 id="3">Christoffel Tensor</h2>
-<p>The Christoffel Tensor is symmetric because of the symmetry of the elastic constants. The eigenvalues of the 3x3 Christoffel tensor are three positive values of the wave moduli which corresponds to \rho Vp^2 , \rho Vs1^2 and \rho Vs2^2 of the plane waves propagating in the direction n. The three eigenvectors of this tensor are then the polarization directions of the three waves. Because the Christoffel tensor is symmetric, the polarization vectors are perpendicular to each other.</p>
+<h2 id="2">The Density</h2>
+<p>Wave velocities do not only depend on the stiffness tensor but also on the density \(\rho\) of the material. For Olivine it is about 3.355 g/cm\(^3\). Since the density is required by almost every command in this section it is most convenient to store it directly within the stiffness tensor</p>
 {% highlight matlab %}
-% It is computed for a specific direction x by the
-% command <stiffnessTensor.ChristoffelTensor.html ChristoffelTensor>.
+rho = 3.355;
 
-T = ChristoffelTensor(C,vector3d.X)
-{% endhighlight %}
-
-{% highlight plaintext %}
-T = ChristoffelTensor (Olivin)
-  rank: 2 (3 x 3)
- 
- 320.5     0     0
-     0  78.7     0
-     0     0    77
-{% endhighlight %}
-<h2 id="4">Elastic Wave Velocity</h2>
-<p>The Christoffel tensor is the basis for computing the direction dependent wave velocities of the p, s1, and s2 wave, as well as of the polarization directions. Therefore, we need also the density of the material, e.g.,</p>
-{% highlight matlab %}
-rho = 3.355
-{% endhighlight %}
-
-{% highlight plaintext %}
-rho =
-    3.3550
-{% endhighlight %}
-<p>which we can write directly into the elastic stiffness tensor</p>
-{% highlight matlab %}
 C = addOption(C,'density',rho)
 {% endhighlight %}
 
@@ -93,7 +69,111 @@ C = stiffnessTensor (Olivin)
      0     0     0     0    77     0
      0     0     0     0     0  78.7
 {% endhighlight %}
-<p>the single crystal wave velocities are now computed by the command stiffnessTensor.velocity.html <code class="language-plaintext highlighter-rouge">velocity</code>&gt;</p>
+<p>Alternatively, the density may be passed as the option <code class="language-plaintext highlighter-rouge">'density'</code> when the tensor is defined, e.g. <code class="language-plaintext highlighter-rouge">stiffnessTensor(M,cs,'density',rho)</code>, or as a trailing argument to the individual commands.</p>
+<h2 id="4">The Christoffel Equation</h2>
+<p>Consider a plane wave with propagation direction \(\vec n\), phase velocity \(v\) and polarization direction \(\vec p\), i.e., a displacement field of the form</p>
+<p>\[ \vec u(\vec x,t) = \vec p \, f(\vec n \cdot \vec x - v t). \]</p>
+<p>Substituting this ansatz into the equation of motion \(\rho \, \partial_t^2 u_i = \partial_j \sigma_{ij}\) together with Hooke's law \(\sigma_{ij} = C_{ijkl}\varepsilon_{kl}\) results in the <b>Christoffel equation</b>
+</p>
+<p>\[ C_{ijkl} n_j n_l \, p_k = \rho v^2 p_i. \]</p>
+<p>In other words, the admissible polarization directions \(\vec p\) are the eigenvectors of the symmetric rank two tensor</p>
+<p>\[ E_{ik}(\vec n) = C_{ijkl} n_j n_l \]</p>
+<p>and the corresponding eigenvalues are the wave moduli \(\rho v^2\).</p>
+<h2 id="5">The Christoffel Tensor</h2>
+<p>The tensor \(E(\vec n)\) is called the Christoffel tensor and is computed for a specific propagation direction \(\vec n\) by the command <a href="stiffnessTensor.ChristoffelTensor.html">ChristoffelTensor</a>
+</p>
+{% highlight matlab %}
+T = ChristoffelTensor(C,vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+T = ChristoffelTensor (Olivin)
+  rank: 2 (3 x 3)
+ 
+ 320.5     0     0
+     0  78.7     0
+     0     0    77
+{% endhighlight %}
+<p>The Christoffel tensor is symmetric as a consequence of the symmetry \(C_{ijkl} = C_{klij}\) of the elastic constants. Hence, its three eigenvalues are real and the three eigenvectors are perpendicular to each other. Since the stiffness tensor is positive definite the eigenvalues are, moreover, positive and therefore correspond to three real wave speeds. Let us compute this eigenvalue decomposition</p>
+{% highlight matlab %}
+[p,lambda] = eig(T)
+{% endhighlight %}
+
+{% highlight plaintext %}
+p = vector3d (y↓→x)
+ size: 3 x 1
+ antipodal: true
+  x y z
+  0 0 1
+  0 1 0
+  1 0 0
+lambda =
+   77.0000
+   78.7000
+  320.5000
+{% endhighlight %}
+<p>MTEX returns the eigenvalues in ascending order. Dividing them by the density and taking the square root gives the three wave velocities in km/s</p>
+{% highlight matlab %}
+v = sqrt(lambda ./ rho)
+{% endhighlight %}
+
+{% highlight plaintext %}
+v =
+    4.7907
+    4.8433
+    9.7739
+{% endhighlight %}
+<p>The largest of them belongs to the P-wave, i.e., the wave whose polarization direction is closest to the propagation direction, while the two smaller ones belong to the fast and the slow S-wave. Note that for the direction <code class="language-plaintext highlighter-rouge">vector3d.X</code>, which is a symmetry axis of our Olivine crystal, the polarization directions coincide with the coordinate axes and the P-wave is polarized exactly parallel to the propagation direction.</p>
+<h2 id="9">Elastic Wave Velocities</h2>
+<p>Instead of decomposing the Christoffel tensor by hand the command <a href="stiffnessTensor.velocity.html"><code class="language-plaintext highlighter-rouge">velocity</code></a> performs all these steps at once and directly sorts the result into P-wave, fast S-wave and slow S-wave</p>
+{% highlight matlab %}
+[vp,vs1,vs2,pp,ps1,ps2] = velocity(C,vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+vp =
+    9.7739
+vs1 =
+    4.8433
+vs2 =
+    4.7907
+ 
+pp = vector3d (y↓→x)
+ antipodal: true
+  x y z
+  1 0 0
+ 
+ps1 = vector3d (y↓→x)
+ antipodal: true
+  x y z
+  0 1 0
+ 
+ps2 = vector3d (y↓→x)
+ antipodal: true
+  x y z
+  0 0 1
+{% endhighlight %}
+<p>Here <code class="language-plaintext highlighter-rouge">vp</code>, <code class="language-plaintext highlighter-rouge">vs1</code>, <code class="language-plaintext highlighter-rouge">vs2</code> are the velocities of the P-wave, the fast S-wave and the slow S-wave, while <code class="language-plaintext highlighter-rouge">pp</code>, <code class="language-plaintext highlighter-rouge">ps1</code>, <code class="language-plaintext highlighter-rouge">ps2</code> are the corresponding polarization directions, i.e., the directions the particles vibrate in. Since a polarization direction is only defined up to sign it is returned as an <a href="VectorsAxes.html">axis</a>.</p>
+<p>The command accepts arbitrary lists of propagation directions</p>
+{% highlight matlab %}
+x = [vector3d.X,vector3d.Y,vector3d.Z]
+
+vp = velocity(C,x)
+{% endhighlight %}
+
+{% highlight plaintext %}
+x = vector3d (y↓→x)
+ size: 1 x 3
+  x y z
+  1 0 0
+  0 1 0
+  0 0 1
+vp =
+    9.7739    7.6531    8.3425
+{% endhighlight %}
+<h2 id="11">Velocities as Spherical Functions</h2>
+<p>If the propagation direction is omitted altogether the wave velocities are computed for the entire sphere and returned as <a href="S2FunConcept.html">spherical functions</a>
+</p>
 {% highlight matlab %}
 [vp,vs1,vs2,pp,ps1,ps2] = velocity(C)
 {% endhighlight %}
@@ -123,8 +203,30 @@ ps2 = S2AxisFieldTri
   vertices: 18338 x 1
 {% endhighlight %}
 <p>As output we obtain three <a href="S2FunConcept.html">spherical functions</a> <code class="language-plaintext highlighter-rouge">vp</code>, <code class="language-plaintext highlighter-rouge">vs1</code> and <code class="language-plaintext highlighter-rouge">vs2</code> representing the velocities of P, and fast and slow S-waves respectively in dependency of the propagation direction. The remaining three output variables <code class="language-plaintext highlighter-rouge">pp</code>, <code class="language-plaintext highlighter-rouge">ps1</code>, <code class="language-plaintext highlighter-rouge">ps2</code> are <a href="S2FunAxisField.html">spherical vector fields</a> representing the polarization directions of these wave as functions of the propagation direction.</p>
+<p>Being ordinary spherical functions they may be evaluated at any direction</p>
+{% highlight matlab %}
+vp.eval(vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    9.7735
+{% endhighlight %}
+<p>By default the velocities are sampled on a triangulated grid and interpolated in between, which explains the small deviation from the exact value computed above. Passing the option <code class="language-plaintext highlighter-rouge">'harmonic'</code> returns <a href="S2FunHarmonicRepresentation.html">harmonic expansions</a> instead. These are smooth, respect the crystal symmetry exactly and are the better choice for three dimensional plots</p>
+{% highlight matlab %}
+vpHarm = velocity(C,'harmonic')
+{% endhighlight %}
+
+{% highlight plaintext %}
+vpHarm = S2FunHarmonicSym (Olivin)
+  bandwidth: 48
+  antipodal: true
+{% endhighlight %}
+<h2 id="14">Visualizing the Wave Velocities</h2>
 <p>In order to visualize these quantities, there are several possibilities. Let us first plot the direction dependent wave speed of the p-wave</p>
 {% highlight matlab %}
+setMTEXpref('defaultColorMap',blue2redColorMap);
+
 plot(vp,'complete','upper')
 {% endhighlight %}
 <center>
@@ -139,7 +241,9 @@ hold off
 <center>
 {% include inline_image.html file="WaveVelocities_02.png" %}
 </center>
-<p>We may even compute with these spherical functions as width ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
+<p>Note how the polarization of the P-wave stays close to the propagation direction it is plotted at - the P-wave is almost, but not exactly, a longitudinal wave.</p>
+<h2 id="17">Shear Wave Splitting</h2>
+<p>We may even compute with these spherical functions as with ordinary values. E.g. to visualize the speed difference between the s1 and s2 waves we do.</p>
 {% highlight matlab %}
 plot(vs1-vs2,'complete','upper')
 
@@ -150,9 +254,152 @@ hold off
 <center>
 {% include inline_image.html file="WaveVelocities_03.png" %}
 </center>
+<p>This difference is the reason for shear wave splitting: an S-wave entering an anisotropic medium is split into a fast and a slow component which are polarized perpendicular to each other and arrive with a delay. The line segments above show the polarization <code class="language-plaintext highlighter-rouge">ps1</code> of the fast S-wave, which is the quantity a seismologist measures. Directions where the difference vanishes are the acoustic axes of the crystal - there both S-waves travel with the same speed and no splitting occurs.</p>
+<h2 id="19">Anisotropy Measures</h2>
+<p>The relative velocity variation of a wave is usually reported as a percentage of its mean velocity. For the P-wave this gives</p>
+{% highlight matlab %}
+[maxVp,maxPos] = max(vp);
+[minVp,minPos] = min(vp);
+
+AVp = 200*(maxVp-minVp)./(maxVp+minVp)
+{% endhighlight %}
+
+{% highlight plaintext %}
+AVp =
+   24.3329
+{% endhighlight %}
+<p>Let us mark the corresponding fastest and slowest propagation directions in the plot</p>
+{% highlight matlab %}
+plot(vp,'complete','upper')
+
+hold on
+plot(maxPos(1),'Marker','s','MarkerSize',10,'MarkerFaceColor','k','MarkerEdgeColor','w')
+plot(minPos(1),'Marker','o','MarkerSize',10,'MarkerFaceColor','w','MarkerEdgeColor','k')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_04.png" %}
+</center>
+<p>The S-wave anisotropy, in contrast, is a function of the propagation direction as it compares the two S-waves traveling in the same direction</p>
+{% highlight matlab %}
+AVs = 200*(vs1-vs2)./(vs1+vs2);
+
+plot(AVs,'complete','upper')
+mtexTitle('S-wave anisotropy (%)')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_05.png" %}
+</center>
+<p>A third quantity of interest in seismology is the ratio between P- and S-wave velocity</p>
+{% highlight matlab %}
+plot(vp./vs1,'complete','upper')
+mtexTitle('Vp/Vs1')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_06.png" %}
+</center>
+<h2 id="23">Comparison with an Isotropic Medium</h2>
+<p>It is instructive to compare these velocities with those of an aggregate of randomly oriented Olivine crystals, which we obtain by averaging the stiffness tensor with respect to a <a href="uniformODF.html">uniform ODF</a>. The first output of <a href="tensor.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> is the Voigt average, see <a href="IsotropicTheory.html">isotropic theory</a> for the Reuss and Hill averages.</p>
+{% highlight matlab %}
+C_iso = mean(C,uniformODF(cs))
+{% endhighlight %}
+
+{% highlight plaintext %}
+C_iso = stiffnessTensor (y↓→x)
+  unit   : GPa              
+  density: 3.355            
+  rank   : 4 (3 x 3 x 3 x 3)
+ 
+  tensor in Voigt matrix representation:
+ 237.56  78.49  78.49      0      0      0
+  78.49 237.56  78.49      0      0      0
+  78.49  78.49 237.56      0      0      0
+      0      0      0  79.54      0      0
+      0      0      0      0  79.54      0
+      0      0      0      0      0  79.54
+{% endhighlight %}
+<p>The resulting tensor is elastically isotropic. Hence its wave velocities are independent of the propagation direction and are entirely determined by the bulk modulus \(K\), the shear modulus \(G\) and the density</p>
+{% highlight matlab %}
+K = C_iso.bulkModulus;
+G = C_iso.shearModulus;
+
+vpIso = sqrt((K + 4/3*G)./rho)
+vsIso = sqrt(G./rho)
+{% endhighlight %}
+
+{% highlight plaintext %}
+vpIso =
+    8.4147
+vsIso =
+    4.8690
+{% endhighlight %}
+<p>which is exactly what the command <code class="language-plaintext highlighter-rouge">velocity</code> returns for this tensor</p>
+{% highlight matlab %}
+[vp_iso,vs1_iso,vs2_iso] = velocity(C_iso,vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+vp_iso =
+    8.4147
+vs1_iso =
+    4.8690
+vs2_iso =
+    4.8690
+{% endhighlight %}
+<p>Note that both S-waves now travel with the same speed - there is no shear wave splitting in an isotropic medium. Comparing the isotropic P-wave velocity with the extremes of the single crystal</p>
+{% highlight matlab %}
+cprintf([minVp,vpIso,maxVp],'-Lc',{'min Vp' 'isotropic' 'max Vp'})
+{% endhighlight %}
+
+{% highlight plaintext %}
+min Vp isotropic    max Vp
+7.65328   8.41473    9.7735
+{% endhighlight %}
+<h2 id="27">Group Velocity</h2>
+<p>The velocities computed so far are phase velocities, i.e., they describe how fast a wave front moves along its normal \(\vec n\). Energy, however, travels along the energy velocity vector \(\vec V_e\), which for a lossless medium is a good proxy for the group velocity and is computed by the command <a href="stiffnessTensor.energyVector.html"><code class="language-plaintext highlighter-rouge">energyVector</code></a>
+</p>
+{% highlight matlab %}
+% an arbitrary, non symmetric propagation direction
+x = vector3d.byPolar(45*degree,20*degree);
+
+[vp,vs1,vs2,pp,ps1,ps2] = velocity(C,x);
+
+Ve = energyVector(C,x,vp,pp)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Ve = vector3d (y↓→x)
+     x    y    z
+  6.92 1.57 5.11
+{% endhighlight %}
+<p>In an anisotropic medium this vector is in general <b>not</b> parallel to the propagation direction - the energy of the wave is deflected sideways. The angle between both directions is</p>
+{% highlight matlab %}
+angle(Ve,x) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   10.7498
+{% endhighlight %}
+<p>Its magnitude is at least as large as the phase velocity, while its projection onto the propagation direction reproduces the phase velocity exactly</p>
+{% highlight matlab %}
+cprintf([norm(Ve),dot(Ve,x),vp],'-Lc',{'|Ve|' 'Ve.n' 'Vp'})
+{% endhighlight %}
+
+{% highlight plaintext %}
+|Ve|    Ve.n      Vp
+8.74413 8.59068 8.59068
+{% endhighlight %}
+<p>As for <code class="language-plaintext highlighter-rouge">velocity</code>, passing an empty propagation direction together with the spherical velocity and polarization functions returns the energy velocity as a <a href="S2FunVectorField.html">spherical vector field</a>.</p>
+<h2 id="31">Phase Velocity Surfaces</h2>
 <p>When projected to a plane the different wave speeds</p>
 {% highlight matlab %}
 planeNormal = vector3d.X;
+
+% recompute the velocities as spherical functions
+[vp,vs1,vs2,pp,ps1,ps2] = velocity(C);
 
 % options for sections
 optSec = {'color','interp','linewidth',6,'doNotDraw'};
@@ -163,7 +410,6 @@ optQuiverProp = {'color','k','linewidth',2,'autoScaleFactor',0.25,'doNotDraw'};
 prop = S2VectorFieldHarmonic.normal; % the propagation direction
 
 % wave velocities
-%close all
 plotSection(vp,planeNormal,optSec{:},'DisplayName','Vp')
 hold on
 plotSection(vs1,planeNormal,optSec{:},'DisplayName','Vs1')
@@ -188,8 +434,10 @@ mtexColorMap blue2red
 mtexColorbar('Title','(km/s)','location','southOutSide')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WaveVelocities_04.png" %}
+{% include inline_image.html file="WaveVelocities_07.png" %}
 </center>
+<p>The distance of each curve from the origin is the phase velocity in the corresponding direction, the black arrows mark the propagation direction and the colored arrows the polarization directions.</p>
+<h2 id="33">Slowness Surfaces</h2>
 <p>Similarly, we can visualize the slowness surfaces (s/km)</p>
 {% highlight matlab %}
 % plot slowness surfaces
@@ -210,14 +458,24 @@ quiverSection(1./vs2,prop,planeNormal,optQuiverProp{:})
 hold off
 axis off tight
 legend('Vp','Vs1','Vs2','pp','ps1','ps2','x','Location','eastOutSide')
-mtexTitle('Slowness surface (km/s)')
+mtexTitle('Slowness surface (s/km)')
 
 mtexColorMap blue2red
 mtexColorbar('Title','(s/km)','location','southOutSide')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="WaveVelocities_05.png" %}
+{% include inline_image.html file="WaveVelocities_08.png" %}
 </center>
+<h2 id="34">An Overview Plot</h2>
+<p>All the above quantities are summarized in a single figure by the command <a href="stiffnessTensor.plotSeismicVelocities.html"><code class="language-plaintext highlighter-rouge">plotSeismicVelocities</code></a>
+</p>
+{% highlight matlab %}
+plotSeismicVelocities(C)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WaveVelocities_09.png" %}
+</center>
+<p>How to apply this to a polycrystalline aggregate with a crystallographic preferred orientation is explained in the section <a href="CPOSeismicProperties.html">seismic properties of aggregates</a>.</p>
 <p>set back default colormap</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap)
