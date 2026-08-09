@@ -1,5 +1,5 @@
 ---
-title: "Transparencies"
+title: "Transparency"
 
 sidebar: documentation_sidebar
 permalink: TransparencyDemo.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Transparencies</title>
+<title>Transparency</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_TransparencyDemo.m">
 </head>
@@ -22,41 +22,155 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>How to superpose plots and how to visualize point densities by translucent markers</p>
 <!--/introduction-->
+<p>Transparency is a simple but powerful tool whenever a plot contains more information than can be displayed by opaque colors, e.g., when markers cover each other, or when two maps should be displayed on top of each other. In MTEX transparency is controlled by the options</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">'MarkerAlpha'</code>, <code class="language-plaintext highlighter-rouge">'MarkerFaceAlpha'</code>, <code class="language-plaintext highlighter-rouge">'MarkerEdgeAlpha'</code> - for scatter plots, i.e., pole figures, inverse pole figures and ODF sections</li>
+<li>
+<code class="language-plaintext highlighter-rouge">'faceAlpha'</code> - for EBSD maps, grain maps, crystal shapes and other surfaces</li>
+<li>
+<code class="language-plaintext highlighter-rouge">'edgeAlpha'</code> - for grain boundaries and other line plots</li>
+</ul>
+</div>
+<p>All of them take values between 0 (completely transparent) and 1 (completely opaque). Transparency requires the renderer of the figure to be set to <code class="language-plaintext highlighter-rouge">'opengl'</code>, which is the Matlab default.</p>
+<h2 id="2">Transparent Markers</h2>
+<p>Let us start with a set of orientations that is strongly concentrated around the identical orientation</p>
 {% highlight matlab %}
-cs = crystalSymmetry('m-3m')
-odf = unimodalODF(orientation.id(cs))
-ori = odf.discreteSample(500)
+cs = crystalSymmetry('m-3m');
+odf = unimodalODF(orientation.id(cs),'halfwidth',10*degree);
+ori = odf.discreteSample(2000);
 
 h = Miller({1,0,0},{1,1,0},{1,1,1},cs);
-plotPDF(ori,h,'MarkerFaceAlpha',0.01,'MarkerEdgeAlpha',0.05,'MarkerSize',10,'all')
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry
- 
-  symmetry: m3̅m   
-  elements: 48     
-  a, b, c : 1, 1, 1
- 
- 
-odf = SO3FunRBF (m3̅m → y↓→x)
- 
-  unimodal component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1 orientations
- 
-  Bunge Euler angles in degree
-  phi1    Phi   phi2 weight
-     0      0      0      1
- 
- 
-ori = orientation (m3̅m → y↓→x)
-  size: 500 x 1
+<p>Plotting these orientations in a pole figure the markers cover each other and the preferred orientations show up as solid, uniformly colored blobs. Neither the number of orientations nor the shape of the maxima is visible</p>
+{% highlight matlab %}
+plotPDF(ori,h,'MarkerSize',5,'all')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TransparencyDemo_01.png" %}
 </center>
+<p>Making the markers almost transparent by the option <code class="language-plaintext highlighter-rouge">'MarkerAlpha'</code> the scatter plot becomes a density like plot. Positions where many markers overlap remain dark, while isolated orientations are barely visible</p>
+{% highlight matlab %}
+plotPDF(ori,h,'MarkerAlpha',0.05,'MarkerSize',5,'all')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_02.png" %}
+</center>
+<p>Face and edge of the markers may be made transparent independently by the options <code class="language-plaintext highlighter-rouge">'MarkerFaceAlpha'</code> and <code class="language-plaintext highlighter-rouge">'MarkerEdgeAlpha'</code>. Since the edges of overlapping markers accumulate much faster than their faces it is often useful to keep the edges slightly more opaque than the faces</p>
+{% highlight matlab %}
+plotPDF(ori,h,'MarkerFaceAlpha',0.01,'MarkerEdgeAlpha',0.05,...
+  'MarkerSize',10,'all')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_03.png" %}
+</center>
+<p>It should be stressed that transparency is only a visual approximation to the point density. Whenever the density itself is of interest it should be computed by kernel density estimation as explained in <a href="DensityEstimation.html">Density Estimation</a>
+</p>
+{% highlight matlab %}
+plotPDF(ori,h,'contourf')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_04.png" %}
+</center>
+<h2 id="7">Superposing EBSD Maps</h2>
+<p>The most common application of transparency are superposed EBSD maps. Here the band contrast is plotted as a gray scale background and the orientation map is plotted half transparent on top of it. This way the texture and the image quality of the measurement are visible at the same time</p>
+{% highlight matlab %}
+mtexdata forsterite silent
+
+plot(ebsd,ebsd.bc)
+mtexColorMap black2white
+
+hold on
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'faceAlpha',0.5)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_05.png" %}
+</center>
+<h2 id="8">Transparency Depending on a Property</h2>
+<p>Instead of a single value the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> also accepts a list of values - one for each pixel. This allows to fade out unreliable measurements, e.g., all pixels with a low band contrast. Since the transparency values have to be within the interval \([0,1]\) we normalize the band contrast by its mean value and cut off everything above 1</p>
+{% highlight matlab %}
+ebsdF = ebsd('Forsterite');
+
+alpha = min(ebsdF.bc ./ mean(ebsdF.bc), 1);
+
+plot(ebsdF,ebsdF.orientations,'faceAlpha',alpha,'figSize','large')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_06.png" %}
+</center>
+<p>In the resulting map the pixels along the grain boundaries, where the Kikuchi patterns of two grains overlap and the band contrast is low, fade into the background. A second common choice for the transparency value is the local misorientation, see <a href="EBSDGROD.html">Grain Reference Orientation Deviation</a>.</p>
+<h2 id="10">Transparent Grains</h2>
+<p>Grain maps are made transparent by the very same option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>. Note that for grains the transparency value is additionally weighted by the color of the grain, i.e., light colored grains become more transparent than dark colored ones. The option <code class="language-plaintext highlighter-rouge">'translucent'</code> is a synonym for <code class="language-plaintext highlighter-rouge">'faceAlpha'</code>.</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd('indexed'),'angle',10*degree);
+grains = smoothBoundary(grains,5);
+
+plot(ebsd,ebsd.bc)
+mtexColorMap black2white
+
+hold on
+plot(grains('Forsterite'),grains('Forsterite').meanOrientation,'faceAlpha',0.5)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_07.png" %}
+</center>
+<h2 id="11">Transparent Grain Boundaries</h2>
+<p>Line plots as they are used for grain boundaries are made transparent by the option <code class="language-plaintext highlighter-rouge">'edgeAlpha'</code>. Similarly as <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> it takes either a single value or one value for each boundary segment. In the following example the transparency is used to fade out low angle boundaries</p>
+{% highlight matlab %}
+gB = grains.boundary('Forsterite','Forsterite');
+
+plot(grains,'translucent',0.5,'micronbar','off')
+legend off
+
+hold on
+plot(gB,'edgeAlpha',gB.misorientation.angle ./ (30*degree),'lineWidth',3)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_08.png" %}
+</center>
+<h2 id="12">Transparent Surfaces</h2>
+<p>Transparency is also the method of choice to look inside of three dimensional objects. Plotting a crystal shape with the option <code class="language-plaintext highlighter-rouge">'faceAlpha'</code> makes the back faces of the crystal visible</p>
+{% highlight matlab %}
+cS = crystalShape.olivine;
+
+plot(cS,'faceAlpha',0.2)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_09.png" %}
+</center>
+<p>This becomes even more important when additional objects are plotted inside the crystal, e.g., the slip systems</p>
+{% highlight matlab %}
+sS = slipSystem.fcc(crystalSymmetry('432'));
+cSfcc = crystalShape.cube(crystalSymmetry('432'));
+
+plot(cSfcc,'faceAlpha',0.2)
+hold on
+plot(cSfcc,sS(1),'faceColor','blue','faceAlpha',0.5)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_10.png" %}
+</center>
+<p>Finally, three dimensional plots of orientation distribution functions make automatic use of transparency - the transparency of a contour level is proportional to its value such that the maxima of the ODF remain visible from outside. See <a href="ODFPlot.html">Visualizing ODFs</a> for more details.</p>
+{% highlight matlab %}
+plot3d(SantaFe)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TransparencyDemo_11.png" %}
+</center>
+<h2 id="15">Transparency and Export</h2>
+<p>Transparency is a feature of the <code class="language-plaintext highlighter-rouge">'opengl'</code> renderer. Accordingly, figures containing transparent objects can not be exported as true vector graphics - when exporting to <code class="language-plaintext highlighter-rouge">pdf</code> or <code class="language-plaintext highlighter-rouge">eps</code> Matlab either rasterizes the figure or drops the transparency. It is therefore recommended to export such figures as bitmaps, e.g., by</p>
+{% highlight matlab %}
+saveFigure('transparency.png')
+{% endhighlight %}
+<p>See <a href="PlottingExport.html">Exporting Figures</a> for more details on exporting.</p>
 </div>
 </body>
 </html>
