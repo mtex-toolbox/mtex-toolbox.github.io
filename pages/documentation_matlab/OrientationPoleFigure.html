@@ -23,6 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>Pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321')
@@ -38,7 +41,7 @@ cs = crystalSymmetry
   reference frame: X||a*, Y||b, Z||c
  
  
-ori = orientation (321 → y↓→x)
+ori = orientation (321 → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -55,7 +58,7 @@ r = ori * h.symmetrise
 {% endhighlight %}
 
 {% highlight plaintext %}
-r = vector3d (y↓→x)
+r = vector3d (y↑→x)
  size: 1 x 6
        x      y      z
     0.88 -0.739 -0.113
@@ -82,7 +85,7 @@ plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS))
 {% include inline_image.html file="OrientationPoleFigure_02.png" %}
 </center>
 <p>We observe, that for some crystal directions only the upper hemisphere is plotted while for other upper and lower hemisphere are plotted. The reason is that if <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">-h</code> are symmetrically equivalent the upper and lower hemisphere of the pole figure are symmetric as well.</p>
-<h2 id="7">Contour plots</h2>
+<h2 id="8">Contour plots</h2>
 {% highlight matlab %}
 plotPDF(ori,Miller({1,0,-1,0},{0,0,0,1},{1,1,-2,1},ori.CS),'contourf')
 mtexColorbar

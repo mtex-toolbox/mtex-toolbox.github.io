@@ -23,6 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>The crystallographic structure of most materials is depended on external conditions as temperature and pressure. When the external conditions change the crystals may undergo a phase transition from the initial phase, often called parent phase, into the child phase. While both phases still have the same chemical composition their crystallographic structure might be quite different. A typical example are the alpha and beta phase of titanium. While the parent beta phase is cubic</p>
 {% highlight matlab %}
 csBeta = crystalSymmetry('432',[3.3 3.3 3.3],'mineral','Ti (beta)');
@@ -52,7 +55,7 @@ oriChild = oriParent * inv(beta2alpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriChild = orientation (Ti (alpha) → y↓→x)
+oriChild = orientation (Ti (alpha) → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -89,14 +92,14 @@ beta2alpha = orientation.map(Miller(1,1,0,csBeta),Miller(0,0,0,1,csAlpha),...
       Miller(-1,1,-1,csBeta),Miller(2,-1,-1,0,csAlpha));
 {% endhighlight %}
 <p>The advantage of the above definition by the alignment of different crystal directions is that it is independent of the <a href="CrystalReferenceSystem.html">convention used for the hexagonal crystal coordinate system</a>.</p>
-<h2 id="9">Child Variants</h2>
+<h2 id="10">Child Variants</h2>
 <p>Due to crystal symmetry each orientation of a parent beta grain has 24 different may transform into up to 24 child orientations.</p>
 {% highlight matlab %}
 oriParentSym = oriParent.symmetrise
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriParentSym = orientation (Ti (beta) → y↓→x)
+oriParentSym = orientation (Ti (beta) → y↑→x)
   size: 24 x 1
 {% endhighlight %}
 <p>Applying the <code class="language-plaintext highlighter-rouge">beta2alpha</code> phase relationship to these 24 different representations we obtain 24 child orientations.</p>
@@ -105,7 +108,7 @@ oriChild = oriParentSym * inv(beta2alpha)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriChild = orientation (Ti (alpha) → y↓→x)
+oriChild = orientation (Ti (alpha) → y↑→x)
   size: 24 x 1
 {% endhighlight %}
 <p>Some of these child orientations are symmetrically equivalent with respect to the hexagonal child symmetry. In fact there are 12 pairs of symmetrically equivalent child orientations as depicted in the following inverse pole figure.</p>
@@ -134,7 +137,7 @@ oriChild = variants(beta2alpha,oriParent,2:3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriChild = orientation (Ti (alpha) → y↓→x)
+oriChild = orientation (Ti (alpha) → y↑→x)
   size: 1 x 2
  
   Bunge Euler angles in degree
@@ -162,7 +165,7 @@ plotIPDF(variants(beta2alpha,oriParent),vector3d.Z)
 {% include inline_image.html file="ParentChildVariants_04.png" %}
 </center>
 <p>Sometimes one faces the inverse question, i.e., determine the <code class="language-plaintext highlighter-rouge">variantId</code> from a parent and a child orientation or a pair of child orientations. This can be done using the command <a href="parentGrainReconstructor.calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a> which is discussed in detail in the section <a href="MaParentGrainReconstruction.html">parent grain reconstruction</a>.</p>
-<h2 id="17">Parent Variants</h2>
+<h2 id="18">Parent Variants</h2>
 <p>TODO</p>
 </div>
 </body>

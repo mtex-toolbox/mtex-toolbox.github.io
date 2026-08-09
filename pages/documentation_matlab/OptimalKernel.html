@@ -23,6 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>In the section <a href="DensityEstimation.html">density estimation</a> we have seen that the correct choice of the kernel halfwidth is essential for creating a good match between the true density function and the reconstructed density function. If the halfwidth is set too small the reconstructed density function is usually oscillating and the individual sampling points are visible as sharp peaks. If the halfwidth is too large the resulting density function is usually too smooth and does not reproduce the features of the original density function.</p>
 <p>Finding an optimal kernel halfwidth is a hard problem as the optimal kernel halfwidth depends not only on the number of sampling points but also on the smoothness of the true but unknown density function. MTEX offers several options set by flags during the kernel calculation operation. A very conservative choice for the kernel halfwidth that takes into account only the number of sampling points is implemented in MTEX with the flag <code class="language-plaintext highlighter-rouge">'magicRule'</code>. The flag <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> considers both the number of sampling points and the variance of the sampling points as an estimate of the smoothness of the true density function. The most advanced (and default) method for estimating the optimal kernel halfwidth is <a href="orientation.KLCV.html">Kullback Leibler cross validation</a>. This method tests different kernel half-widths on a subset of the random sample and selects the halfwidth which best reproduces the omitted points of the random sample.</p>
 <p>In order to demonstrate this functionality let's start with the following orientation density function</p>
@@ -81,7 +84,7 @@ odf_rec = SO3FunHarmonic (321 → y↑→x)
 <center>
 {% include inline_image.html file="OptimalKernel_02.png" %}
 </center>
-<h2 id="5">Exploration of the relationship between estimation error and number of single orientations</h2>
+<h2 id="6">Exploration of the relationship between estimation error and number of single orientations</h2>
 <p>In this section we want to compare the different methods for estimating the optimal kernel halfwidth. To this end we simulate 10, 100, ..., 1000000 single orientations from the model ODF <code class="language-plaintext highlighter-rouge">odf</code>, compute optimal kernels according to the <code class="language-plaintext highlighter-rouge">'magicRule'</code>, the <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> and <a href="orientation.KLCV.html">Kullback Leibler cross validation</a> and then compute the fit between the reconstructed <code class="language-plaintext highlighter-rouge">odf_rec</code> and the original <code class="language-plaintext highlighter-rouge">odf</code>.</p>
 {% highlight matlab %}
 % define a variable to hold the calculated error values

@@ -23,6 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>The Bingham distribution on the sphere is an antipodal symmetric distribution (Bingham, 1974) with a probability density function given by</p>
 <p>\[p_{b}(\hat{x}\vert AKA^T) = \frac{1}{F(\kappa_{1},\kappa_{2},\kappa_{3})}\exp (\hat{x}^T AZA^T \hat{x})\]</p>
 <p>where \(A\) is an orthogonal covariance matrix, and \(Z\) a concentration matrix with \(\mathrm{diag}(\kappa_{1},\kappa_{2},\kappa_{3})\) with \(\kappa_{1} &lt; \kappa_{2} &lt; \kappa_{3}\).</p>
@@ -40,7 +43,7 @@ plot(bingFun)
 <center>
 {% include inline_image.html file="S2Bingham_01.png" %}
 </center>
-<h2 id="2">Meaning of \(Z\)</h2>
+<h2 id="3">Meaning of \(Z\)</h2>
 <p>\(k1 = k2\) defines a rotational symmetric point maximum and \(k2 = 0\) defines a girdle distribution.</p>
 {% highlight matlab %}
 close
@@ -50,8 +53,8 @@ for k2 = kappa
   for k1 = kappa
     if k1 >= k2
       bFun = S2FunBingham([-k1 -k2 0]);
-      plot(bFun,'colorRange',[0,25],'TR',[{'\(\kappa_1 :\)'} ; num2str(k1)],'BR',[{'\(\kappa_2 :\)'} ; num2str(k2)])
-%       mtexTitle(['\(\kappa_1 :\)' num2str(k1)  '  ' '\(\kappa_2 :\)' num2str(k2)],'FontSize',14)
+      plot(bFun,'colorRange',[0,25],'noLabel')
+       mtexTitle(['\(\kappa_1=\)' num2str(k1)  '  ' '\(\kappa_2=\)' num2str(k2)],'FontSize',12)
       nextAxis
     else
       nextAxis
@@ -64,7 +67,7 @@ mtexFig.drawNow;
 <center>
 {% include inline_image.html file="S2Bingham_02.png" %}
 </center>
-<h2 id="3">Drawing a random sample of the Bingham distribution</h2>
+<h2 id="4">Drawing a random sample of the Bingham distribution</h2>
 {% highlight matlab %}
 close
 v = bingFun.discreteSample(50)
@@ -75,14 +78,14 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-v = vector3d (y↓→x)
+v = vector3d (y↑→x)
  size: 50 x 1
  antipodal: true
 {% endhighlight %}
 <center>
 {% include inline_image.html file="S2Bingham_03.png" %}
 </center>
-<h2 id="4">Estimating a spherical Bingham distribution from discrete data</h2>
+<h2 id="5">Estimating a spherical Bingham distribution from discrete data</h2>
 <p>Given arbitrarily scattered data <code class="language-plaintext highlighter-rouge">v</code> on the sphere we can estimate the best fitting Bingham distribution by</p>
 {% highlight matlab %}
 % estimate a Bingham distribution
@@ -90,7 +93,7 @@ v = vector3d (y↓→x)
 {% endhighlight %}
 
 {% highlight plaintext %}
-bingFunEst = S2FunBingham (y↓→x)
+bingFunEst = S2FunBingham (y↑→x)
 ab =
     0.1541    0.1716
  

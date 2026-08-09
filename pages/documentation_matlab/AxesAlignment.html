@@ -23,6 +23,9 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>In this section we discuss how MTEX aligns coordinate systems on the screen and how to change it. In MTEX it is possible to mix different alignment. At the same time MTEX tries to be as consistent as possible, e.g. by aligning EBSD maps and pole figures with respect to the same reference directions.</p>
 <p>Different alignments are typically used when</p>
 <div>
@@ -40,10 +43,10 @@ v1.how2plot
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = plottingConvention (y↓→x)
+ans = plottingConvention (y↑→x)
  
-  outOfScreen: (0,0,-1)
-  north      : (0,-1,0)
+  outOfScreen: (0,0,1)
+  north      : (0,1,0)
   east       : (1,0,0)
 {% endhighlight %}
 <p>The property <code class="language-plaintext highlighter-rouge">how2plot</code> is a handle class of type <code class="language-plaintext highlighter-rouge"><a href="plottingConvention.html">plottingConvention</a></code> and tells MTEX how to align the corresponding coordinate system on screen. Every spherical plot that is not in crystal coordinates is annotated with the axes of the reference frame, such that the alignment can be read off the plot directly.</p>
@@ -87,8 +90,8 @@ ans = plottingConvention (z↓→x)
 </center>
 <p>In order to have different plotting axes alignments within one MTEX session we have to define a new <code class="language-plaintext highlighter-rouge"><a href="plottingConvention.html">plottingConvention</a></code> by</p>
 {% highlight matlab %}
-% instantiate a new plotting convention and sets it up
-pC2 = plottingConvention; pC2.north = yvector
+% instantiate a new plotting convention
+pC2 = plottingConvention('y↑→x')
 
 % assign this plottingConvention to v2
 v2.how2plot = pC2;
@@ -109,34 +112,18 @@ pC2 = plottingConvention (y↑→x)
 <center>
 {% include inline_image.html file="AxesAlignment_04.png" %}
 </center>
-<p>A shortcut for defining a plotting convention is a string that tells for each axis where it points to on screen</p>
-{% highlight matlab %}
-pC3 = plottingConvention('y↑→x')
-{% endhighlight %}
-
-{% highlight plaintext %}
-pC3 = plottingConvention (y↑→x)
- 
-  outOfScreen: (0,0,1)
-  north      : (0,1,0)
-  east       : (1,0,0)
-{% endhighlight %}
-<p>This shortcut may be used whenever a plotting convention is expected</p>
-{% highlight matlab %}
-v3 = vector3d(1,1,1);
-v3.how2plot = 'x←↓y'
-{% endhighlight %}
-
-{% highlight plaintext %}
-v3 = vector3d (x←↓y)
-  x y z
-  1 1 1
-{% endhighlight %}
 <p>When initiating a new <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code> MTEX uses <code class="language-plaintext highlighter-rouge">plottingConvention.default</code> as default plotting convention. This default plotting convention can be changed by <code class="language-plaintext highlighter-rouge">plottingConvention.default('y&uarr;&rarr;x')</code> or by</p>
 {% highlight matlab %}
-plotx2north
-plotzOutOfPlane
+plottingConvention.default('y←↑x')
 plot(v1,'upper','label','v_1')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = plottingConvention (y←↑x)
+ 
+  outOfScreen: (0,0,1) 
+  north      : (1,0,0) 
+  east       : (0,-1,0)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AxesAlignment_05.png" %}
@@ -187,6 +174,15 @@ ans = plottingConvention (y↑→x)
   outOfScreen: (0,0,1)
   north      : (0,1,0)
   east       : (1,0,0)
+ 
+Current plot held
+Current plot released
+Current plot held
+Current plot released
+Current plot held
+Current plot released
+Current plot held
+Current plot released
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AxesAlignment_08.png" %}
@@ -213,7 +209,7 @@ ans = plottingConvention (y↑→x)
   north      : (0,1,0)
   east       : (1,0,0)
 {% endhighlight %}
-<h2 id="15">The Reference Frame on EBSD Maps</h2>
+<h2 id="14">The Reference Frame on EBSD Maps</h2>
 <p>On an EBSD or grain map the alignment in use is indicated within the scale bar. Every axis with a component within the screen plane becomes an arrow, the axis along the viewing direction becomes a circled dot if it points out of the screen and a circled cross if it points into it.</p>
 {% highlight matlab %}
 mtexdata titanium
