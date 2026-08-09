@@ -23,16 +23,19 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>While <a href="CrystalSymmetries.html">crystal symmetry</a> is a property of the crystal lattice, specimen symmetry is a property of the <b>process</b> that formed the specimen. Rolling, for instance, leaves the texture unchanged under \(180^\circ\) rotations about the rolling, the transverse and the normal direction, which is an orthorhombic specimen symmetry.</p>
 <p>Since orientations map crystal coordinates into specimen coordinates, specimen symmetry acts from the <b>left</b> and crystal symmetry from the <b>right</b> - this is discussed in detail in <a href="OrientationSymmetry.html">Symmetrically Equivalent Orientations</a>.</p>
-<h2 id="2">Defining a Specimen Symmetry</h2>
+<h2 id="3">Defining a Specimen Symmetry</h2>
 <p>Variables of type <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> are defined by their point group. In practice only a handful of point groups occur. The default, used whenever no specimen symmetry is given, is the trivial one.</p>
 {% highlight matlab %}
 ss = specimenSymmetry('1')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ss = triclinic specimenSymmetry (y↓→x)
+ss = triclinic specimenSymmetry (y↑→x)
 {% endhighlight %}
 <p>Orthorhombic specimen symmetry is the common choice for rolled material. It may be given either by its point group or by its name.</p>
 {% highlight matlab %}
@@ -40,7 +43,7 @@ ss = specimenSymmetry('mmm')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ss = orthorhombic specimenSymmetry (y↓→x)
+ss = orthorhombic specimenSymmetry (y↑→x)
 {% endhighlight %}
 <p>Note the difference between <code class="language-plaintext highlighter-rouge">'1'</code> and <code class="language-plaintext highlighter-rouge">'triclinic'</code>: the latter is the point group \(\bar 1\), which includes the inversion and therefore consists of two elements rather than one.</p>
 {% highlight matlab %}
@@ -54,7 +57,7 @@ ans =
 ans =
      2
 {% endhighlight %}
-<h2 id="5">The Effect on an ODF</h2>
+<h2 id="6">The Effect on an ODF</h2>
 <p>Let us illustrate what imposing a specimen symmetry does. We start from a unimodal ODF with trivial specimen symmetry.</p>
 {% highlight matlab %}
 cs = crystalSymmetry.load('quartz.cif');
@@ -63,7 +66,7 @@ odf = unimodalODF(orientation.byEuler(30*degree,50*degree,10*degree,cs), ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (Quartz → y↓→x)
+odf = SO3FunRBF (Quartz → y↑→x)
  
   unimodal component
   kernel: de la Vallee Poussin, halfwidth 15°
@@ -96,7 +99,7 @@ odf.SS = specimenSymmetry('mmm')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (Quartz → y↓→x (mmm))
+odf = SO3FunRBF (Quartz → y↑→x (mmm))
  
   unimodal component
   kernel: de la Vallee Poussin, halfwidth 15°
@@ -123,14 +126,14 @@ norm(odf)^2
 ans =
     7.2683
 {% endhighlight %}
-<h2 id="11">Specimen Symmetry and the Specimen Reference Frame</h2>
+<h2 id="12">Specimen Symmetry and the Specimen Reference Frame</h2>
 <p>Which rotations are symmetries depends on how the specimen reference frame is aligned, so a monoclinic specimen symmetry has to state its mirror axis explicitly. The point group <code class="language-plaintext highlighter-rouge">'112'</code>, for example, is the two fold rotation about the z axis.</p>
 {% highlight matlab %}
 specimenSymmetry('112')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = monoclinic specimenSymmetry (y↓→x)
+ans = monoclinic specimenSymmetry (y↑→x)
 {% endhighlight %}
 <p>Aligning the axes with the rolling geometry is done by naming them, which only affects how the symmetry is annotated in plots.</p>
 {% highlight matlab %}
