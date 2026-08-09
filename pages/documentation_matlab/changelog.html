@@ -24,66 +24,33 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <h2 id="1">MTEX 7.0 xx/2026 - New Features</h2>
+<p>This is the first release that uses AI. This allowed us to implement many long lasting ideas.</p>
 <p>
 <b>Grain Reconstruction</b>
 </p>
-<p> <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> covers small grain removal, alpha shapes and gridded as well as arbitrarily placed data in a single call. Its second output replaces the previous <code class="language-plaintext highlighter-rouge">ebsd.grainId = ...</code> assignment and marks pixels belonging to no grain - not indexed or removed by <code class="language-plaintext highlighter-rouge">'minPixel'</code> - by <code class="language-plaintext highlighter-rouge">grainId == 0</code>. All boundary criteria are objects of type <a href="grainBoundaryCriterion.html">grainBoundaryCriterion</a> (<code class="language-plaintext highlighter-rouge">gbcAngle</code>, <code class="language-plaintext highlighter-rouge">gbcSoft</code>, <code class="language-plaintext highlighter-rouge">gbcFMC</code>, <code class="language-plaintext highlighter-rouge">gbcVariants</code>, <code class="language-plaintext highlighter-rouge">gbcCustom</code>), so any per pixel property may be segmented and every phase may get a threshold of its own</p>
+<p>Grain reconstruction has been entirely rewritten to give better results, be more fast and more easy to control. Then general syntax is now</p>
 {% highlight matlab %}
-[grains, ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5,'alpha',3)
-grains = calcGrains(ebsd,'angle',{10*degree,15*degree}) % one per phase
-grains = calcGrains(ebsd,gbcCustom(ebsd.bc,10))  % segment by band contrast
-grains = calcGrains(ebsd,'soft')                 % a soft threshold
+[grains, ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5,'alpha',3.1)
 {% endhighlight %}
-<p>Fast multiscale clustering <a href="gbcFMC.gbcFMC.html">gbcFMC</a> - the criterion for deformed material where no single threshold angle works - has been rewritten. It judges two clusters by their misorientation against their own internal spread, fits a lattice curvature so that a bent grain is not mistaken for a scattered one, and clusters each phase separately, which lifts the adjusted Rand index on a benchmark of deformed maps from 0.84 to 0.96 at a third of the runtime. Note that <code class="language-plaintext highlighter-rouge">calcGrains(ebsd,'fmc',cmaha)</code> used to fall back to angle thresholding without saying so</p>
-{% highlight matlab %}
-grains = calcGrains(ebsd,'fmc',0.5,'minPixel',10,'verbose')
-{% endhighlight %}
-<p>The new data set <code class="language-plaintext highlighter-rouge">mtexdata EMSphinx</code> illustrates this in <a href="GrainReconstruction.html">Grain Reconstruction</a>. <a href="GrainReconstructionAdvanced.html">Advanced Grain Reconstruction</a> shows how to write a criterion of your own, <a href="GrainReconstructionMCL.html">Markovian Clustering</a> the second way of turning one into grains. Two new commands complete the picture</p>
+<p>and allows for three simple parameters to tune the reconstruction</p>
 <div>
 <ul>
-<li> <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> estimates the distribution of grain boundary normals, in specimen or in crystal coordinates, 2d and 3d</li>
-<li> <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> detects grains split by pseudo symmetric indexing - by the tortuosity of the separating boundary - and reassigns the affected pixels</li>
+<li>the misorientation threshold - <code class="language-plaintext highlighter-rouge">'angle'</code>
+</li>
+<li>the minimum number of pixels a grain must contain - <code class="language-plaintext highlighter-rouge">'minPixel</code>
+</li>
+<li>the amount non / misindexed regions are reassigned to surrounding grains - <code class="language-plaintext highlighter-rouge">'alpha'</code>
+</li>
 </ul>
 </div>
+<p>This is explained in detail in <a href="GrainReconstruction.html">here</a> and <a href="GrainReconstructionAdvanced">here</a>. For highly deformed materials we greatly improved the <a href="GrainReconstructionMCL.html">Fast Multiscale Clustering method</a>.</p>
+<p>We have now also a method to <a href="TODO.html">clean up pseudo symmetries in EBSD maps</a> using the command</p>
+<p>[ebsd,grains] = cleanUpPseudoSym(ebsd,grains,mori,'threshold',1.5)</p>
+<p>Along with grain reconstruction we als greatly improved grain boundary smoothing which is now done with the command</p>
 {% highlight matlab %}
-gbnd = calcGBND(grains.boundary('Fo','Fo'),ebsd('Fo'),'halfwidth',10*degree)
-gbcd = calcGBND(gB,grains('Fo'),moriRef)   % for a fixed misorientation
-gbnd = calcGBND(grains3.boundary)          % 3d, specimen coordinates
-[ebsd,grains] = cleanUpPseudoSym(ebsd,grains,mori,'threshold',1.5)
+grains = smoothBoundary(grains)
 {% endhighlight %}
-<p>
-<b>Grain Boundaries in Walk Order</b>
-</p>
-<p>The segments of a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> are not an unordered list anymore. They are sorted into chains - maximal runs of segments joined at vertices where exactly two segments meet - so that consecutive segments share a vertex. Any other vertex is a junction and terminates a chain. Each chain occupies a contiguous block of rows and is oriented such that the grain in <code class="language-plaintext highlighter-rouge">gB.grainId(:,1)</code> lies to the left of the walk direction</p>
-{% highlight matlab %}
-gB = grains.boundary
-gB.chainId, gB.chainSize, gB.isChainStart, gB.isChainEnd, gB.isClosed
-gB.arcLength, gB.chainLength   % length along and of the chain
-gB.chainV                      % vertex ids, chains separated by NaN
-{% endhighlight %}
-<p>This is what allows to coarsen or to refine a boundary as a curve instead of as a bag of segments. All of the following keep the junctions exactly where they are, so which grains touch, and where, is unchanged</p>
-<div>
-<ul>
-<li> <a href="grain2d.simplifyBoundary.html"><code class="language-plaintext highlighter-rouge">simplifyBoundary(grains,epsilon)</code></a> drops every vertex whose removal moves the boundary by less than <code class="language-plaintext highlighter-rouge">epsilon</code> - Douglas Peucker on each chain - which turns the pixel staircase into the straight line it approximates</li>
-<li> <a href="grain2d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary(grains,n)</code></a> is the blunt alternative, keeping every n-th vertex regardless of shape</li>
-<li> <a href="grain2d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary(grains,delta)</code></a> resamples each chain at equal arc length instead of subdividing its segments, which only made the staircase finer</li>
-<li> <a href="grain2d.isOuterBoundary.html"><code class="language-plaintext highlighter-rouge">isOuterBoundary(grains)</code></a> tells which grains border the map, no longer obvious once an alpha shape has traced it</li>
-</ul>
-</div>
-<p>What used to be <code class="language-plaintext highlighter-rouge">smooth(grains)</code> is called <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary(grains)</code></a> now - <code class="language-plaintext highlighter-rouge">smooth</code> on an <a href="EBSD.EBSD.html">EBSD</a> denoises orientations, something entirely different - and it performs all three steps by default: simplify at <code class="language-plaintext highlighter-rouge">d/sqrt(2)</code>, <code class="language-plaintext highlighter-rouge">d</code> the pixel spacing, which removes the grid and nothing else, refine, and only then the Laplacian smoothing it used to do on its own, which without the first two cuts the corners off a curve</p>
-{% highlight matlab %}
-grains = smoothBoundary(grains,5)
-grains = smoothBoundary(grains,5,'noSimplify','noRefine')   % as before
-{% endhighlight %}
-<p>The old name still works and still does the old thing, so a script written against it keeps its grain areas and its segment count. Since the first two steps change the number of segments, switch them off wherever <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment.</p>
-<p>Which algorithm smooths is a choice now, made by passing a <a href="boundaryFilter.html">boundaryFilter</a> - the same pattern as the <a href="EBSDFilter.html">EBSDFilter</a> of <code class="language-plaintext highlighter-rouge">smooth(ebsd,F)</code>
-</p>
-{% highlight matlab %}
-grains = smoothBoundary(grains,taubinFilter)
-grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
-{% endhighlight %}
-<p>
-<code class="language-plaintext highlighter-rouge">laplaceFilter</code> is the default and unchanged, <code class="language-plaintext highlighter-rouge">taubinFilter</code> unshrinks after every pass where a Laplacian shrinks without bound, <code class="language-plaintext highlighter-rouge">curvatureFilter</code> replaces the iteration by a single sparse solve whose knob is a <b>length</b> rather than an iteration count, and <code class="language-plaintext highlighter-rouge">huberFilter</code> keeps a genuinely faceted boundary faceted. <a href="GrainSmoothingAdvanced.html">Advanced Grain Smoothing</a> compares them.</p>
+<p>The command <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> allows for several backends which are explained in detail <a href="TODO.html">here</a>.</p>
 <p>
 <b>Much Better EBSD Import</b>
 </p>
@@ -258,6 +225,90 @@ pC = plottingConvention('y↑→x')   % also 'x←↑y', 'z⊙→x', ASCII 'y^->
 <code class="language-plaintext highlighter-rouge">ebsd('phaseName').orientations</code> carries the plotting convention of the map, and a <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> displays the convention it holds - <code class="language-plaintext highlighter-rouge">specimenSymmetry.default</code> is where the session wide default lives</li>
 </ul>
 </div>
+<p>--- TODO: to be added to the technical section if needed ------ <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> covers small grain removal, alpha shapes and gridded as well as arbitrarily placed data in a single call. Its second output replaces the previous <code class="language-plaintext highlighter-rouge">ebsd.grainId = ...</code> assignment and marks pixels belonging to no grain - not indexed or removed by <code class="language-plaintext highlighter-rouge">'minPixel'</code> - by <code class="language-plaintext highlighter-rouge">grainId == 0</code>. All boundary criteria are objects of type <a href="grainBoundaryCriterion.html">grainBoundaryCriterion</a> (<code class="language-plaintext highlighter-rouge">gbcAngle</code>, <code class="language-plaintext highlighter-rouge">gbcSoft</code>, <code class="language-plaintext highlighter-rouge">gbcFMC</code>, <code class="language-plaintext highlighter-rouge">gbcVariants</code>, <code class="language-plaintext highlighter-rouge">gbcCustom</code>), so any per pixel property may be segmented and every phase may get a threshold of its own</p>
+{% highlight matlab %}
+[grains, ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5,'alpha',3)
+grains = calcGrains(ebsd,'angle',{10*degree,15*degree}) % one per phase
+grains = calcGrains(ebsd,gbcCustom(ebsd.bc,10))  % segment by band contrast
+grains = calcGrains(ebsd,'soft')                 % a soft threshold
+{% endhighlight %}
+<p>Fast multiscale clustering <a href="gbcFMC.gbcFMC.html">gbcFMC</a> - the criterion for deformed material where no single threshold angle works - has been rewritten. It judges two clusters by their misorientation against their own internal spread, fits a lattice curvature so that a bent grain is not mistaken for a scattered one, and clusters each phase separately, which lifts the adjusted Rand index on a benchmark of deformed maps from 0.84 to 0.96 at a third of the runtime. Note that <code class="language-plaintext highlighter-rouge">calcGrains(ebsd,'fmc',cmaha)</code> used to fall back to angle thresholding without saying so</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd,'fmc',0.5,'minPixel',10,'verbose')
+{% endhighlight %}
+<p>The new data set <code class="language-plaintext highlighter-rouge">mtexdata EMSphinx</code> illustrates this in <a href="GrainReconstruction.html">Grain Reconstruction</a>. <a href="GrainReconstructionAdvanced.html">Advanced Grain Reconstruction</a> shows how to write a criterion of your own, <a href="GrainReconstructionMCL.html">Markovian Clustering</a> the second way of turning one into grains. Two new commands complete the picture</p>
+{% highlight matlab %}
+% * <grainBoundary.calcGBND.html |calcGBND|> estimates the distribution of
+% grain boundary normals, in specimen or in crystal coordinates, 2d and 3d
+% * <cleanUpPseudoSym.html |cleanUpPseudoSym|> detects grains split by pseudo
+% symmetric indexing - by the tortuosity of the separating boundary - and
+% reassigns the affected pixels
+%
+%   gbnd = calcGBND(grains.boundary('Fo','Fo'),ebsd('Fo'),'halfwidth',10*degree)
+%   gbcd = calcGBND(gB,grains('Fo'),moriRef)   % for a fixed misorientation
+%   gbnd = calcGBND(grains3.boundary)          % 3d, specimen coordinates
+%   [ebsd,grains] = cleanUpPseudoSym(ebsd,grains,mori,'threshold',1.5)
+%
+% *Grain Boundaries in Walk Order*
+%
+% The segments of a <grainBoundary.grainBoundary.html grainBoundary> are not an unordered list anymore. They are
+% sorted into chains - maximal runs of segments joined at vertices where
+% exactly two segments meet - so that consecutive segments share a vertex. Any
+% other vertex is a junction and terminates a chain. Each chain occupies a
+% contiguous block of rows and is oriented such that the grain in
+% |gB.grainId(:,1)| lies to the left of the walk direction
+%
+%   gB = grains.boundary
+%   gB.chainId, gB.chainSize, gB.isChainStart, gB.isChainEnd, gB.isClosed
+%   gB.arcLength, gB.chainLength   % length along and of the chain
+%   gB.chainV                      % vertex ids, chains separated by NaN
+%
+% This is what allows to coarsen or to refine a boundary as a curve instead of
+% as a bag of segments. All of the following keep the junctions exactly where
+% they are, so which grains touch, and where, is unchanged
+%
+% * <grain2d.simplifyBoundary.html |simplifyBoundary(grains,epsilon)|> drops
+% every vertex whose removal moves the boundary by less than |epsilon| -
+% Douglas Peucker on each chain - which turns the pixel staircase into the
+% straight line it approximates
+% * <grain2d.reduceBoundary.html |reduceBoundary(grains,n)|> is the blunt
+% alternative, keeping every n-th vertex regardless of shape
+% * <grain2d.refineBoundary.html |refineBoundary(grains,delta)|> resamples
+% each chain at equal arc length instead of subdividing its segments, which
+% only made the staircase finer
+% * <grain2d.isOuterBoundary.html |isOuterBoundary(grains)|> tells which
+% grains border the map, no longer obvious once an alpha shape has traced it
+%
+% What used to be |smooth(grains)| is called
+% <grain2d.smoothBoundary.html |smoothBoundary(grains)|> now - |smooth| on an
+% <EBSD.EBSD.html EBSD> denoises orientations, something entirely different - and it performs
+% all three steps by default: simplify at |d/sqrt(2)|, |d| the pixel spacing,
+% which removes the grid and nothing else, refine, and only then the Laplacian
+% smoothing it used to do on its own, which without the first two cuts the
+% corners off a curve
+%
+%   grains = smoothBoundary(grains,5)
+%   grains = smoothBoundary(grains,5,'noSimplify','noRefine')   % as before
+%
+% The old name still works and still does the old thing, so a script written
+% against it keeps its grain areas and its segment count. Since the first two
+% steps change the number of segments, switch them off wherever |gB.ebsdId| is
+% read per segment.
+%
+% Which algorithm smooths is a choice now, made by passing a <boundaryFilter.html boundaryFilter> -
+% the same pattern as the <EBSDFilter.html EBSDFilter> of |smooth(ebsd,F)|
+%
+%   grains = smoothBoundary(grains,taubinFilter)
+%   grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
+%
+% |laplaceFilter| is the default and unchanged, |taubinFilter| unshrinks after
+% every pass where a Laplacian shrinks without bound, |curvatureFilter|
+% replaces the iteration by a single sparse solve whose knob is a *length*
+% rather than an iteration count, and |huberFilter| keeps a genuinely faceted
+% boundary faceted. <GrainSmoothingAdvanced.html Advanced Grain Smoothing>
+% compares them.
+%
+{% endhighlight %}
 <h2 id="3">MTEX 6.1 10/2025</h2>
 <p>MTEX 6.1 does not come with major new features but with tons of speed ups and bug fixes. A lot of effort has been put into increasing the stability of the provided mex files. On startup MTEX automatically checks whether all mex files are installed. If not it attempts to download them from Github. If this fails as well, i.e. because your antivirus program intervenes, it tries to compile those mex files from source. The relevant commands are</p>
 <div>
