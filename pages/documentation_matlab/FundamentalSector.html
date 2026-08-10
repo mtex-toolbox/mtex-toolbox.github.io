@@ -116,11 +116,15 @@ hold off
 <h2 id="8">Other symmetries</h2>
 <p>The shape of the sector depends on the point group, and it becomes larger the fewer symmetry elements there are. The triclinic group leaves the whole sphere.</p>
 {% highlight matlab %}
-newMtexFigure('layout',[1,3]);
-for pg = {'321','4/mmm','1'}
-  plot(crystalSymmetry(pg{1}).fundamentalSector,'color','red','doNotDraw')
-  mtexTitle(pg{1})
-  if ~strcmp(pg{1},'1'), nextAxis; end
+newMtexFigure('layout',[2 5],'figSize','medium');
+for lId = 2:11
+  nextAxis(lId-1);
+  cs = crystalSymmetry('LaueId',lId);
+  plot(cs,'doNotDraw')
+  hold on
+  plot(cs.fundamentalSector,'color','red','doNotDraw','LineWidth',3)
+  hold off
+  mtexTitle(cs.LaueName)
 end
 {% endhighlight %}
 <center>
