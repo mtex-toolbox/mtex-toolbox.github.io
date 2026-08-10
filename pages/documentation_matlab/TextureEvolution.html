@@ -22,10 +22,10 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<!--/introduction-->
 <p>Plastic deformation does not only change the shape of a polycrystal, it also rotates its crystals. The <a href="TaylorModel.html">Taylor model</a> tells us, for a given strain and a given family of <a href="SlipSystems.html">slip systems</a>, by how much a crystal in a given orientation has to rotate. Applying that rotation to every orientation of a sample and iterating over small strain increments is the simplest possible simulation of texture evolution, and that is what this page does.</p>
 <p>Two related pages take different routes to the same question - the <a href="SingleSlipModel.html">single slip model</a> solves the continuity equation for the ODF analytically, and <a href="VPSCImport.html">VPSC</a> results computed outside of MTEX can be imported and analyzed here.</p>
-<!--/introduction-->
-<h2 id="1">The crystallographic spin</h2>
+<h2 id="2">The crystallographic spin</h2>
 <p>We consider fcc slip and plane strain, i.e. rolling.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('432');
@@ -105,7 +105,7 @@ ans =
     0.4975
 {% endhighlight %}
 <p>One percent of strain rotates this crystal by about half a degree. Since the spin depends on the orientation, the crystals of a polycrystal drift apart at different rates and the texture sharpens.</p>
-<h2 id="6">Iterating over a polycrystal</h2>
+<h2 id="7">Iterating over a polycrystal</h2>
 <p>Evaluating <code class="language-plaintext highlighter-rouge">calcTaylor</code> separately for every orientation would be far too slow. Called without an orientation it instead returns the Taylor factor and the spin as <a href="SO3FunConcept.html">orientation dependent functions</a>, which are then cheap to evaluate on a whole list of orientations. We compute this spin field once, for a single strain increment.</p>
 {% highlight matlab %}
 numIter = 60;
@@ -149,12 +149,13 @@ for k = 1:numIter
   pC.show(k);
 end
 {% endhighlight %}
-<h2 id="9">The resulting rolling texture</h2>
+<h2 id="10">The resulting rolling texture</h2>
 {% highlight matlab %}
 pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y,vector3d.Z],...
   {'RD','TD','ND'},'BackgroundColor','w','tag','axesLabels',varargin{:});
 storepfA = getMTEXpref('pfAnnotations');
 setMTEXpref('pfAnnotations',pfAnnotations);
+plottingConvention.default("y←↑x");
 
 plotPDF(ori,Miller({0,0,1},{1,1,1},cs),'contourf')
 mtexColorbar
@@ -181,7 +182,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="TextureEvolution_02.png" %}
 </center>
-<h2 id="13">Things worth knowing</h2>
+<h2 id="14">Things worth knowing</h2>
 <div>
 <ul>
 <li>The step size matters. The spin field is computed for one strain increment and then applied <code class="language-plaintext highlighter-rouge">numIter</code> times, which is an explicit Euler scheme - too few steps and the trajectories are wrong, too many and the computation is needlessly slow.</li>

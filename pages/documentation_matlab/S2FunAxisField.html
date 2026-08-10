@@ -22,11 +22,14 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<!--/introduction-->
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
 <p>The class @S2AxisFieldharmonic handles axis fields on the sphere, i.e. spherical functions</p>
 <p>\[ f\colon {\bf S}^2\to{\bf R}^3_{/&lt;\pm \mathrm{Id}&gt;}. \]</p>
 <p>that associates to each point \(\xi\) on the sphere a three dimensional vector \(\vec v = f(\xi)\) where we do not distinguish between \(-\vec v\) and \(\vec v\). A typical example would be the polarization direction.</p>
-<!--/introduction-->
-<h2 id="1">Defining a S2AxisFieldHarmonic</h2>
+<h2 id="3">Defining a S2AxisFieldHarmonic</h2>
 <p>
 <b>Definition via function values</b>
 </p>
@@ -59,7 +62,7 @@ sAF1 = S2AxisFieldHarmonic
 </p>
 <p>If you have a function handle for the function you could create a <code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code> via quadrature. At first lets define a function handle which takes <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> as an argument and returns antipodal <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>:</p>
 {% highlight matlab %}
-f = @(v) vector3d(v.x, v.y, 0*v.x, 'antipodal');
+f = @(v) vector3d(-v.y, v.x, 0*v.x, 'antipodal');
 {% endhighlight %}
 <p>Now you can call the quadrature command to get <code class="language-plaintext highlighter-rouge">sAF2</code> of type <a href="S2AxisFieldHarmonic.S2AxisFieldHarmonic"><code class="language-plaintext highlighter-rouge">S2AxisFieldHarmonic</code></a>
 </p>
@@ -67,8 +70,7 @@ f = @(v) vector3d(v.x, v.y, 0*v.x, 'antipodal');
 sAF2 = S2AxisFieldHarmonic(@(v) f(v))
 % sAF2 = S2AxisFieldHarmonic.quadrature(@(v) f(v))
 
-clf;
-quiver3(sAF2);
+quiver(sAF2);
 {% endhighlight %}
 
 {% highlight plaintext %}

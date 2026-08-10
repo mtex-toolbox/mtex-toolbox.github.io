@@ -44,7 +44,7 @@ To make changes, update the MATLAB code and republish this document.
 </ul>
 </div>
 <p>This is explained in detail in <a href="GrainReconstruction.html">here</a> and <a href="GrainReconstructionAdvanced.html">here</a>. For highly deformed materials we greatly improved the <a href="GrainReconstructionMCL.html">Fast Multiscale Clustering method</a>.</p>
-<p>We have now also a method to <a href="TODO.html">clean up pseudo symmetries in EBSD maps</a> using the command</p>
+<p>We have now also a method to <a href="EBSDPseudoSymmetry.html">clean up pseudo symmetries in EBSD maps</a> using the command</p>
 {% highlight matlab %}
 [ebsd,grains] = cleanUpPseudoSym(ebsd,grains,mori,'threshold',1.5)
 {% endhighlight %}
@@ -303,6 +303,13 @@ ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
 <p>
 <b>Under the Hood</b>
 </p>
+<div>
+<ul>
+<li>a legend placed outside the axes is laid out by <a href="mtexFigure.mtexFigure.html">mtexFigure</a>, not by MATLAB, which used to leave its distance to the plot depending on how many times the figure had been resized. The distance is <code class="language-plaintext highlighter-rouge">'legendSpacing'</code>, e.g. <code class="language-plaintext highlighter-rouge">plot(cS,'colored','legendSpacing',30)</code>, or <code class="language-plaintext highlighter-rouge">setMTEXpref('legendSpacing',30)</code>
+</li>
+<li>an axes is shaped like the shadow its plot box casts on the screen, so that a <a href="crystalShape.crystalShape.html">crystalShape</a> no longer sits in a much too wide axes</li>
+</ul>
+</div>
 <div>
 <ul>
 <li>markers are drawn as scatter objects throughout, which is faster than the patches used before and keeps marker transparency on <code class="language-plaintext highlighter-rouge">print</code> and <code class="language-plaintext highlighter-rouge">exportgraphics</code>, where it used to be lost in every file format. Lines, i.e. the option <code class="language-plaintext highlighter-rouge">'edgecolor'</code>, remain patches</li>

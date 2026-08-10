@@ -204,7 +204,9 @@ mtexColorbar
 {% include inline_image.html file="AnisotropicTheory_03.png" %}
 </center>
 <h2 id="13">Shear Modulus</h2>
-<p>The shear modulus is TODO</p>
+<p>The shear modulus \(G\) relates a shear stress to the resulting shear strain. It depends on two directions - the normal \(\vec h\) of the shear plane and the shear direction \(\vec u\) within that plane - and is given in terms of the compliance tensor \(S = C^{-1}\) by</p>
+<p>\[ G = \frac{1}{4\, S_{ijkl}\, h_i u_j h_k u_l}. \]</p>
+<p>Passing both directions to <a href="stiffnessTensor.shearModulus.html"><code class="language-plaintext highlighter-rouge">shearModulus</code></a> gives a number</p>
 {% highlight matlab %}
 % shear plane
 n = Miller(0,0,1,cs);
@@ -219,7 +221,7 @@ G = C.shearModulus(n,d)
 G =
    6.2807e+04
 {% endhighlight %}
-
+<p>Omitting the shear direction leaves a spherical function which, like the Poisson ratio above, is only meaningful within the shear plane. Hence it is again plotted as a section - here for three different shear planes.</p>
 {% highlight matlab %}
 newMtexFigure('layout',[1,3])
 

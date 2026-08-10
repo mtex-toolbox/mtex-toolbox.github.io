@@ -21,7 +21,131 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Misorientations/AxisDistributionFunction.m">
     edit page</a></font>
 <div>
-<h1>Axis Distribution Function</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>The misorientation axis distribution is the counterpart of the <a href="AngleDistributionFunction.html">angle distribution</a> - it is what remains of a <a href="MisorientationDistributionFunction.html">misorientation distribution function</a> after integrating out the misorientation angle. It is a function on the sphere and is represented in MTEX by an <a href="S2FunConcept.html">S2Fun</a>.</p>
+<h2 id="2">The axis distribution of a uniform texture</h2>
+<p>As for the angle, the reference case of completely random orientations does <b>not</b> give a uniform distribution. The reason is that the maximum possible misorientation angle depends on the direction of the axis - an axis for which the <a href="MisorientationTheory.html">fundamental region</a> extends further contributes more misorientations. The command <a href="symmetry.calcAxisDistribution.html"><code class="language-plaintext highlighter-rouge">calcAxisDistribution</code></a> computes this reference distribution</p>
+{% highlight matlab %}
+cs = crystalSymmetry('432');
+
+adf = calcAxisDistribution(cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+adf = S2FunHarmonicSym (432)
+  bandwidth: 256
+  antipodal: true
+{% endhighlight %}
+<p>Being an <code class="language-plaintext highlighter-rouge">S2Fun</code> it can be plotted, evaluated and integrated like any other spherical function. Restricted to the <a href="CrystalSymmetries.html">fundamental sector</a> of the crystal symmetry it looks as follows</p>
+{% highlight matlab %}
+plot(adf,'upper')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxisDistributionFunction_01.png" %}
+</center>
+<p>The same plot is produced directly by <a href="plotAxisDistribution.html"><code class="language-plaintext highlighter-rouge">plotAxisDistribution</code></a>
+</p>
+{% highlight matlab %}
+plotAxisDistribution(cs)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxisDistributionFunction_02.png" %}
+</center>
+<p>The variation is substantial - over the fundamental sector the density ranges between</p>
+{% highlight matlab %}
+[min(adf) max(adf)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.5974    1.5652
+{% endhighlight %}
+<p>i.e. by a factor of more than two. Any interpretation of a measured axis distribution has to be made against this reference, not against a constant.</p>
+<h2 id="7">The axis distribution of measured misorientations</h2>
+<p>Let us again consider the Magnesium data set</p>
+{% highlight matlab %}
+mtexdata twins silent
+
+grains = calcGrains(ebsd('indexed'),'threshold',5*degree);
+grains = smoothBoundary(grains,5);
+
+mori = grains.boundary('Magnesium','Magnesium').misorientation
+{% endhighlight %}
+
+{% highlight plaintext %}
+mori = misorientation (Magnesium → Magnesium)
+  size: 2837 x 1
+  antipodal: true
+{% endhighlight %}
+<p>The misorientation axes in crystal coordinates are returned by <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a>
+</p>
+{% highlight matlab %}
+mori.axis
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = Miller (Magnesium)
+ size: 2837 x 1
+{% endhighlight %}
+<p>and their distribution is displayed by <a href="plotAxisDistribution.html"><code class="language-plaintext highlighter-rouge">plotAxisDistribution</code></a>
+</p>
+{% highlight matlab %}
+plotAxisDistribution(mori,'contourf','halfwidth',5*degree)
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxisDistributionFunction_03.png" %}
+</center>
+<p>The single sharp maximum is the twinning axis. Compare this against the uniform reference, which is essentially flat over the same sector</p>
+{% highlight matlab %}
+plotAxisDistribution(mori.CS,mori.SS)
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxisDistributionFunction_04.png" %}
+</center>
+<h2 id="11">Crystal versus specimen coordinates</h2>
+<p>All of the above lives in <b>crystal</b> coordinates - the axis is expressed relative to the crystal lattice and is therefore subject to crystal symmetry. A misorientation axis can equally well be given in <b>specimen</b> coordinates, and this is a different question with a different answer. Passing the two orientations separately rather than the misorientation gives the specimen version</p>
+{% highlight matlab %}
+ori1 = ebsd(grains.boundary('Magnesium','Magnesium').ebsdId(:,1)).orientations;
+ori2 = ebsd(grains.boundary('Magnesium','Magnesium').ebsdId(:,2)).orientations;
+
+plotAxisDistribution(ori1,ori2,'contourf','halfwidth',5*degree)
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxisDistributionFunction_05.png" %}
+</center>
+<p>This is now a plot over the full sphere in specimen coordinates, with only the specimen symmetry imposed. The chapter <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a> uses exactly this distinction to classify boundaries.</p>
+<h2 id="13">The axis distribution of an ODF</h2>
+<p>Finally, the axis distribution can also be computed for a misorientation distribution function rather than for a list of misorientations. This gives the uncorrelated reference for the given texture</p>
+{% highlight matlab %}
+odf = calcDensity(grains('Magnesium').meanOrientation,'halfwidth',10*degree);
+mdf = calcMDF(odf);
+
+adfMDF = calcAxisDistribution(mdf)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: The convolution of two SO3FunRBFs could be done fast by pure
+RBF method. For big center sizes this yields an SO3FunRBF with lots of
+centers, which is not manageable anymore. If you still want to generate
+an SO3FunRBF use 'noFourier'. 
+ 
+adfMDF = S2FunHarmonicSym (Magnesium)
+  bandwidth: 64
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(adfMDF,'upper')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxisDistributionFunction_06.png" %}
+</center>
+<p>It differs markedly from the boundary distribution above, which is precisely the statement that the twin boundaries are not a consequence of the texture.</p>
 </div>
 </body>
 </html>

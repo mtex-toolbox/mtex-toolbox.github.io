@@ -23,26 +23,32 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">TODO</h2>
-<p>Please extend this chapter</p>
-<h2 id="2">Visualization</h2>
-<p>The default plot for each tensor is its directional magnitude, i.e. for each direction \(x\) we plot the quantity \(Q(x) = T_ijkl x_i x_j x_k x_l\)</p>
+<p>A tensor of rank two or higher has too many components to be read off a list. What can be looked at instead is its <b>directional magnitude</b> - the scalar that the tensor produces when it is contracted with one and the same direction in all of its slots. For a tensor \(T\) of rank \(r\) this is</p>
+<p>\[ Q(\vec x) = T_{i_1 \ldots i_r}\, x_{i_1} \cdots x_{i_r}, \qquad <code class="language-plaintext highlighter-rouge">\vec x</code> = 1, \]</p>
+<p>a function on the sphere, i.e. an <a href="S2FunConcept.html">S2Fun</a>, and plotting it is what the <code class="language-plaintext highlighter-rouge">plot</code> command of a tensor does by default.</p>
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',blue2redColorMap);
 
-C = stiffnessTensor.rand
-
-plot(C,'complete','upper')
+cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivine');
+C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'),cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-C = tensor (y↑→x)
-  rank: 2 (3 x 3)
+C = stiffnessTensor (Olivine)
+  unit: GPa              
+  rank: 4 (3 x 3 x 3 x 3)
  
- *10^-2
-  43.6 43.53 20.46
-  2.59 42.04 61.93
- 54.97 33.03 29.97
+  tensor in Voigt matrix representation:
+ 320.5  68.2  71.6     0     0     0
+  68.2 196.5  76.8     0     0     0
+  71.6  76.8 233.5     0     0     0
+     0     0     0    64     0     0
+     0     0     0     0    77     0
+     0     0     0     0     0  78.7
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(C,'complete','upper')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TensorVisualisation_01.png" %}
@@ -51,7 +57,91 @@ C = tensor (y↑→x)
 {% highlight matlab %}
 setMTEXpref('defaultColorMap',WhiteJetColorMap)
 {% endhighlight %}
-<p>There are more specialized visualization possibilities for specific tensors, e.g., for the elasticity tensor. See section <a href="Elasticity.html">Elasticity</a>.</p>
+<h2 id="4">The directional magnitude is a spherical function</h2>
+<p>Since the directional magnitude is an ordinary spherical function, all of the <a href="S2FunPlotting.html">spherical plotting options</a> apply - filled contours, contour lines, 3d plots, and any <a href="SphericalProjections.html">spherical projection</a>.</p>
+{% highlight matlab %}
+plot(C,'contourf','upper')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TensorVisualisation_02.png" %}
+</center>
+{% highlight matlab %}
+plot(C,'3d')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TensorVisualisation_03.png" %}
+</center>
+<p>It can also be obtained as an object in its own right, which is useful whenever one wants to compute with it rather than only look at it - find its extrema, integrate it, or compare two tensors.</p>
+{% highlight matlab %}
+sF = C.directionalMagnitude
+{% endhighlight %}
+
+{% highlight plaintext %}
+sF = S2FunHarmonicSym (Olivine)
+  bandwidth: 4
+  antipodal: true
+{% endhighlight %}
+
+{% highlight matlab %}
+[v,pos] = max(sF)
+{% endhighlight %}
+
+{% highlight plaintext %}
+v =
+  320.5000
+ 
+pos = Miller (Olivine)
+ antipodal: true
+       h      k      l
+  4.7646 0.0013 0.0011
+{% endhighlight %}
+<h2 id="8">Rank two tensors and their principal axes</h2>
+<p>For a symmetric rank two tensor the directional magnitude is the quadratic form \(\vec x^T T \vec x\), and its extrema are attained along the eigenvectors. Hence the plot shows the principal axes directly.</p>
+{% highlight matlab %}
+T = tensor(diag([3 1 -1]),'rank',2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+T = tensor (y↑→x)
+  rank: 2 (3 x 3)
+ 
+  3  0  0
+  0  1  0
+  0  0 -1
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(T,'complete','upper')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TensorVisualisation_04.png" %}
+</center>
+{% highlight matlab %}
+[e,lambda] = eig(T);
+
+hold on
+plot(e,'plane','linewidth',2,'antipodal')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TensorVisualisation_05.png" %}
+</center>
+<h2 id="11">Sections</h2>
+<p>Some derived quantities are not functions of a single direction. The Poisson ratio and the shear modulus, for instance, depend on two directions, and it is only meaningful to evaluate them for directions perpendicular to the first one. Such functions are best drawn as a <a href="S2Fun.plotSection.html">section</a> along the corresponding great circle - see <a href="AnisotropicTheory.html">the elasticity chapter</a>.</p>
+{% highlight matlab %}
+p = vector3d.Z;
+
+plotSection(C.PoissonRatio(p),p,'color','interp','linewidth',5)
+axis off
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TensorVisualisation_06.png" %}
+</center>
+<h2 id="12">Specialized plots</h2>
+<p>Beyond the directional magnitude there are visualizations that only make sense for one particular kind of tensor - wave velocities and their polarizations for the <a href="WaveVelocities.html">elasticity tensor</a>, the <a href="BirefringenceDemo.html">birefringence</a> of the refractive index tensor, or the <a href="PiezoElectricity.html">piezoelectric</a> modulus. Each is described in its own chapter.</p>
 </div>
 </body>
 </html>

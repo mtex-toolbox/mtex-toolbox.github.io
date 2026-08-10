@@ -138,7 +138,58 @@ plotPDF(odf,[Miller(1,0,0,cs),Miller(1,1,0,cs)],'antipodal')
 <center>
 {% include inline_image.html file="SO3FunHarmonicRepresentation_04.png" %}
 </center>
-<h2 id="10">TODO: Add some non ODF example for an SO3Fun</h2>
+<h2 id="10">Harmonic representation of a general SO3Fun</h2>
+<p>Nothing in the harmonic representation requires the function to be an ODF. Any function on the rotation group can be expanded, and the expansion is computed by <a href="SO3FunHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">quadrature</code></a>. As an example we take the misorientation angle to a fixed orientation, which is a perfectly ordinary function on SO(3) but is neither non negative nor normalized.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('432');
+oriRef = orientation.byEuler(30*degree,50*degree,10*degree,cs);
+
+f = SO3FunHandle(@(ori) angle(ori,oriRef)./degree,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+f = SO3FunHandle (432 → y↓→x)
+  eval: @(ori)angle(ori,oriRef)./degree
+{% endhighlight %}
+<p>Its harmonic approximation of bandwidth 32 is</p>
+{% highlight matlab %}
+fHarm = SO3FunHarmonic.quadrature(f,'bandwidth',32)
+{% endhighlight %}
+
+{% highlight plaintext %}
+fHarm = SO3FunHarmonic (432 → y↓→x)
+  bandwidth: 32
+  weight: 41
+{% endhighlight %}
+<p>and it reproduces the original function reasonably well away from the cusp at <code class="language-plaintext highlighter-rouge">oriRef</code>
+</p>
+{% highlight matlab %}
+rng(0)
+ori = orientation.rand(1000,cs);
+
+max(abs(f.eval(ori) - fHarm.eval(ori)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.0108
+{% endhighlight %}
+<p>The reason for the sizeable error is visible in the decay of the Fourier coefficients - the function is continuous but not differentiable at <code class="language-plaintext highlighter-rouge">oriRef</code> and at the boundary of the fundamental region, so its coefficients decay only slowly and truncation is felt everywhere.</p>
+{% highlight matlab %}
+close all
+plotSpektra(fHarm)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunHarmonicRepresentation_05.png" %}
+</center>
+<p>This is the general rule stated above, seen from the other side: the smoother the function, the faster its Fourier coefficients decay and the lower the bandwidth needed to represent it.</p>
+{% highlight matlab %}
+plotSection(fHarm,'sigma')
+mtexColorbar('title','misorientation angle in degree')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="SO3FunHarmonicRepresentation_06.png" %}
+</center>
 </div>
 </body>
 </html>
