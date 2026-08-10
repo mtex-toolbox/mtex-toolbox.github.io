@@ -1,0 +1,76 @@
+---
+title: "holdOn"
+
+sidebar: function_reference_sidebar
+permalink: holdOn.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>holdOn</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_holdOn.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/plotting_tools/holdOn.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>incremental, nesting aware hold on</p>
+<h2 id="3">Description</h2>
+<p>Switches hold on for the axes <code class="language-plaintext highlighter-rouge">ax</code> and returns a guard object. As soon as the guard is deleted - usually when the calling function returns, also in case of an error - the previous hold state is restored. Calls may be nested: only the outermost holdOn actually changes the axes.</p>
+<p>Note that the output has to be assigned to a variable. Calling holdOn as a bare statement leaves the guard in <code class="language-plaintext highlighter-rouge">ans</code>, where it is released at an unpredictable point - as soon as anything else overwrites <code class="language-plaintext highlighter-rouge">ans</code>.</p>
+<p>A function that hands out handles to its <b>nested</b> functions - typically as figure callbacks - keeps its whole workspace alive for as long as those handles exist, and with it the guard. Release it explicitly with <code class="language-plaintext highlighter-rouge">clear hG</code> in that case.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+hG = holdOn(ax);            % hold ax until hG is cleared
+[hG,washeld] = holdOn(ax);  % also report the previous hold state
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ax</tt>
+         </td>
+         <td>
+            <tt>axes handle(s)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>guard</tt>
+         </td>
+         <td>
+            <tt>@onCleanup object, keep it alive as long as hold is required</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>washeld</tt>
+         </td>
+         <td>
+            <tt>logical, was ax held before this call</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="holdRelease.html">holdRelease</a> <a href="getHoldState.html">getHoldState</a> <a href="copyHoldState.html">copyHoldState</a>
+</p>
+</div>
+</body>
+</html>

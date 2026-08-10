@@ -166,7 +166,59 @@ plotIPDF(variants(beta2alpha,oriParent),vector3d.Z)
 </center>
 <p>Sometimes one faces the inverse question, i.e., determine the <code class="language-plaintext highlighter-rouge">variantId</code> from a parent and a child orientation or a pair of child orientations. This can be done using the command <a href="parentGrainReconstructor.calcVariants.html"><code class="language-plaintext highlighter-rouge">calcVariants</code></a> which is discussed in detail in the section <a href="MaParentGrainReconstruction.html">parent grain reconstruction</a>.</p>
 <h2 id="18">Parent Variants</h2>
-<p>TODO</p>
+<p>Everything so far went from the parent to the child. The opposite direction works the same way - given a child orientation, which parent orientations could it have come from? This is answered by <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> with the flag <code class="language-plaintext highlighter-rouge">'parent'</code>.</p>
+{% highlight matlab %}
+% we go back to the exact Burgers orientation relationship
+b2a = orientation.Burgers(csBeta,csAlpha);
+
+% and pick one single child orientation
+oriChildSingle = variants(b2a,oriParent,1);
+
+oriParents = variants(b2a,oriChildSingle,'parent')
+{% endhighlight %}
+
+{% highlight plaintext %}
+oriParents = orientation (Ti (beta) → y↑→x)
+  size: 1 x 6
+ 
+  Bunge Euler angles in degree
+      phi1      Phi     phi2
+   336.958  18.5318  342.122
+   8.88906  125.644  145.271
+  0.886234  76.7565   323.56
+   359.185  66.3517  144.101
+   11.5761  135.977  327.034
+     309.2  10.3033  189.105
+{% endhighlight %}
+<p>Note that there are fewer parent variants than child variants - six against the twelve we found above. The two counts need not agree; they are governed by the orders of the two point groups involved.</p>
+<p>One of the six is of course the orientation we started from</p>
+{% highlight matlab %}
+min(angle(oriParents,oriParent)) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<p>The same set is obtained through <a href="orientation.parents.html"><code class="language-plaintext highlighter-rouge">parents</code></a>, which returns the orientation relationship variants rather than the orientations themselves</p>
+{% highlight matlab %}
+unique(oriChildSingle * b2a.parents)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = orientation (Ti (beta) → y↑→x)
+  size: 1 x 6
+ 
+  Bunge Euler angles in degree
+      phi1      Phi     phi2
+   336.958  18.5318  342.122
+   11.5761  135.977  327.034
+     309.2  10.3033  189.105
+   8.88906  125.644  145.271
+  0.886234  76.7565   323.56
+   359.185  66.3517  144.101
+{% endhighlight %}
+<p>Which of the possible parents is the correct one cannot be decided from a single child orientation - it needs the neighbouring child grains, which is exactly what <a href="MaParentGrainReconstruction.html">parent grain reconstruction</a> does.</p>
 </div>
 </body>
 </html>

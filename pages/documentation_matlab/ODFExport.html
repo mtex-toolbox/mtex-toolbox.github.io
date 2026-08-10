@@ -89,11 +89,29 @@ fname = fullfile(tempdir, 'odf.mtex');
 export(model_odf,fname,'Bunge','interface','mtex')
 {% endhighlight %}
 <h2 id="8">Export to VPSC format</h2>
-<p>TODO!!!</p>
+<p>
+<a href="https://public.lanl.gov/lebenso/">VPSC</a> and other crystal plasticity codes do not read an ODF but a list of weighted orientations. The VPSC interface therefore draws a discrete sample from the ODF and writes it in the VPSC texture format - a three line header, the number of points, and then one row of Bunge Euler angles plus a weight per orientation.</p>
+<p>Note that the interface has to be selected explicitly. Writing <code class="language-plaintext highlighter-rouge">export(odf,fname,'VPSC')</code> is <b>not</b> enough - <code class="language-plaintext highlighter-rouge">'VPSC'</code> would be read as an unknown flag and the generic interface used instead.</p>
 {% highlight matlab %}
 fname = fullfile(tempdir, 'odfvpsc.txt');
 
-export(model_odf,fname,'VPSC')
+export(model_odf,fname,'interface','VPSC','points',5000)
+{% endhighlight %}
+<p>Let us look at the beginning of the resulting file</p>
+{% highlight matlab %}
+fid = fopen(fname);
+for k = 1:6, disp(fgetl(fid)); end
+fclose(fid);
+{% endhighlight %}
+
+{% highlight plaintext %}
+B 5000
+ 107.10  150.76  172.21   0.0002000
+ 259.28   82.73   11.32   0.0002000
+{% endhighlight %}
+<p>The number of orientations is controlled by the option <code class="language-plaintext highlighter-rouge">'points'</code>, which defaults to 10000. The counterpart, reading such a file back, is described in <a href="VPSCImport.html">Import from VPSC</a>.</p>
+{% highlight matlab %}
+delete(fname)
 {% endhighlight %}
 </div>
 </body>

@@ -24,10 +24,12 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>cleanUpPseudoSym Corrects pseudo-symmetry artifacts in a single phase using tortuosity.</p>
-<p>To clean up pseudo-symmetries in multiple phases, run this function for each phase individually.</p>
+<p>A pseudo symmetry is a rotation which is not a symmetry of the crystal but maps the diffraction pattern almost onto itself, such that the indexing picks between the two solutions at random. The resulting boundaries follow the indexing noise and are therefore much more tortuous, i.e. much longer relative to the distance between their end points, than real grain boundaries. This command merges all grains separated by such a boundary and rotates the affected pixels by the pseudo symmetry.</p>
+<p>Since the phase to be corrected is determined by the symmetry of <code class="language-plaintext highlighter-rouge">mori</code>, only one phase is treated per call. To clean up pseudo-symmetries in multiple phases, run this function for each phase individually. Grain boundaries should not have been smoothed before, as this destroys exactly the tortuosity the detection is based on.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-[ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori, varargin)
+[ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori)
+[ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori, 'threshold', 1.5)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -37,7 +39,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>ebsd</tt>
          </td>
          <td>
-            <tt><a href="EBSD.EBSD.html">EBSD</a> object</tt>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> object, with grainId set by <a href="EBSD.EBSD.html">EBSD</a>.calcGrains</tt>
          </td>
       </tr>
       <tr>
@@ -107,6 +109,69 @@ To make changes, update the MATLAB code and republish this document.
          </td>
       </tr>
    </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata forsterite
+ebsd = ebsd('indexed');
+[grains,ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5);
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed          none                                   
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad
+ Scan unit : um
+ X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<p>the pseudo hexagonal oxygen sublattice of olivine</p>
+{% highlight matlab %}
+psSym = orientation.byAxisAngle(Miller(1,0,0,ebsd('Fo').CS,'uvw'),[60 120]*degree);
+{% endhighlight %}
+
+{% highlight matlab %}
+[ebsd,grains] = cleanUpPseudoSym(ebsd,grains,psSym)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   876 (0.47%)  notIndexed          none                                   
+     1  152478 (81%)  Forsterite  LightSkyBlue       mmm                         
+     2   26336 (14%)   Enstatite  DarkSeaGreen       mmm                         
+     3   7777 (4.1%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, grainId
+ Scan unit : um
+ X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
+ Normal vector: (0,0,1)
+ 
+ 
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     0      14      19  notIndexed                    none
+     1     489  151516  Forsterite       mmm  LightSkyBlue
+     2     218   25725   Enstatite       mmm  DarkSeaGreen
+     3     187    7509    Diopside     12/m1     Goldenrod
+ 
+ boundary segments: 35640 (1.7e+06 µm)
+ inner boundary segments: 190 (8818 µm)
+ triple points: 1485
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<h2 id="10">See also</h2>
+<p>
+<a href="EBSDPseudoSymmetry.html">EBSDPseudoSymmetry</a> <a href="grain2d.merge.html">grain2d.merge</a>
 </p>
 </div>
 </body>

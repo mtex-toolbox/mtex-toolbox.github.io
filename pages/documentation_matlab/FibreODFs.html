@@ -22,20 +22,12 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>TODO: extend this</p>
+<p>A fibre ODF is an ODF that is constant along a <a href="RotationFibre.html">fibre</a> in orientation space and decays away from it. It is the natural model whenever one crystal direction is fixed in the specimen while the crystal is free to rotate about it - the classical example being wire drawing, where a \(\left&lt;111\right&gt;\) direction aligns with the drawing axis.</p>
 <!--/introduction-->
-<p>A fibre is represented in MTEX by a variable of type <a href="fibre.fibre.html">fibre</a>.</p>
+<h2 id="1">Defining a fibre ODF</h2>
+<p>A fibre is represented in MTEX by a variable of type <a href="fibre.fibre.html">fibre</a>. Many of the named fibres of rolling textures are built in.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('cubic')
-
-% define the fibre to be the beta fibre
-f = fibre.beta(cs)
-
-% define a fibre ODF
-odf = fibreODF(f,'halfwidth',10*degree)
-
-% plot the odf in 3d
-plot3d(odf)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -44,22 +36,96 @@ cs = crystalSymmetry
   symmetry: m3̅m   
   elements: 48     
   a, b, c : 1, 1, 1
- 
- 
+{% endhighlight %}
+<p>define the fibre to be the beta fibre</p>
+{% highlight matlab %}
+f = fibre.beta(cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
 f = fibre (m3̅m → y↓→x)
  
   h || r: (12 6 11) || (-1,-1,4)
  o1 → o2: (180°,35.3°,45°) → (270°,62.8°,45°)
- 
+{% endhighlight %}
+<p>The fibre ODF is then created by <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a>, with a halfwidth that controls how quickly the density decays away from the fibre.</p>
+{% highlight matlab %}
+odf = fibreODF(f,'halfwidth',10*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
 odf = SO3FunCBF (m3̅m → y↓→x)
  
   kernel: de la Vallee Poussin, halfwidth 10°
   fibre : (12 6 11) || -1,-1,4
   weight: 1
 {% endhighlight %}
+<p>plot the odf in 3d</p>
+{% highlight matlab %}
+plot3d(odf)
+{% endhighlight %}
 <center>
 {% include inline_image.html file="FibreODFs_01.png" %}
 </center>
+<h2 id="5">Plotting a fibre ODF</h2>
+<p>Along the fibre itself the ODF is constant, which is easiest to see in a <a href="SigmaSections.html">sigma section</a> plot - the fibre shows up as a curve of constant intensity</p>
+{% highlight matlab %}
+plotSection(odf,'sigma')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="FibreODFs_02.png" %}
+</center>
+<p>and in the pole figures of the directions defining the fibre it collapses to a point, while all other pole figures show a ring</p>
+{% highlight matlab %}
+plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs),'contourf')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="FibreODFs_03.png" %}
+</center>
+<h2 id="7">The effect of the halfwidth</h2>
+<p>The halfwidth is the only shape parameter. Sharper fibres are stronger, which is directly visible in the texture index</p>
+{% highlight matlab %}
+for hw = [5 10 20]*degree
+  odfHw = fibreODF(f,'halfwidth',hw);
+  fprintf('halfwidth %4.1f degree : texture index %6.2f, maximum %6.2f\n',...
+    hw./degree, norm(odfHw)^2, max(odfHw));
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+halfwidth  5.0 degree : texture index   6.98, maximum  13.86
+halfwidth 10.0 degree : texture index   2.34, maximum   3.86
+halfwidth 20.0 degree : texture index   1.26, maximum   2.06
+{% endhighlight %}
+<h2 id="8">Fitting a fibre to data</h2>
+<p>The inverse problem - given an ODF or a set of orientations, which fibre describes it best - is solved by <a href="fibre.fit.html"><code class="language-plaintext highlighter-rouge">fibre.fit</code></a>
+</p>
+{% highlight matlab %}
+rng(0)
+ori = discreteSample(odf,1000);
+
+fFit = fibre.fit(ori)
+{% endhighlight %}
+
+{% highlight plaintext %}
+fFit = fibre (m3̅m → y↓→x)
+ 
+  h || r: (41̅2̅) || (0,4,9)
+ o1 → o2: (332.5°,95.7°,114.8°) → (332.5°,95.7°,114.8°)
+{% endhighlight %}
+<p>Two warnings are in order here. The first is that the fit always returns a fibre, whether the data follow one or not - on a unimodal ODF it will happily report the fibre through the mode. Section <a href="Grain_dispersion_axes.html">dispersion axes</a> shows how the eigenvalues returned by <code class="language-plaintext highlighter-rouge">fibre.fit</code> can be used to judge how fibre like the data really are.</p>
+<p>The second is that for highly symmetric groups the global search behind <code class="language-plaintext highlighter-rouge">fibre.fit</code> is not reliable. Comparing the mean angular distance of the sample to the true and to the fitted fibre shows that on this cubic example the fit is clearly worse than the fibre we started from</p>
+{% highlight matlab %}
+[mean(angle(ori,f)), mean(angle(ori,fFit))] ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    6.6436   11.9363
+{% endhighlight %}
+<p>For low symmetry, or when a good starting guess is available, the result is much better. Treat a cubic fibre fit as a starting point for a manual inspection rather than as an answer.</p>
 </div>
 </body>
 </html>
