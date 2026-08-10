@@ -21,7 +21,163 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/Properties.m">
     edit page</a></font>
 <div>
-<h1>Properties</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>Most list like MTEX classes - <a href="EBSD.EBSD.html">EBSD</a>, <a href="grain2d.grain2d.html">grain2d</a>, <a href="grainBoundary.grainBoundary.html">grainBoundary</a>, <a href="PoleFigure.PoleFigure.html">PoleFigure</a> - carry, besides their orientations and their geometry, an open ended list of <b>properties</b>. A property is nothing but a numeric array that has one entry for every element of the list, and that is carried along whenever the list is indexed, subsetted, concatenated or sorted. This is what makes it possible to write <code class="language-plaintext highlighter-rouge">ebsd(condition).mad</code> and get exactly the MAD values of the selected pixels.</p>
+<h2 id="2">Which properties are there</h2>
+<p>Which properties an object has depends on where its data came from. An EBSD file usually contributes at least the confidence index and the error of the fit. All properties are collected in the struct <code class="language-plaintext highlighter-rouge">prop</code>
+</p>
+{% highlight matlab %}
+mtexdata forsterite silent
+
+ebsd.prop
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = 
+  struct with fields:
+
+    bands: [245952×1 double]
+       bc: [245952×1 double]
+       bs: [245952×1 double]
+    error: [245952×1 double]
+      mad: [245952×1 double]
+{% endhighlight %}
+<p>and each of them is at the same time accessible as if it was a regular field of the object</p>
+{% highlight matlab %}
+ebsd.mad(1:5)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.1000
+    0.1000
+    0.1000
+    0.3000
+    0.2000
+{% endhighlight %}
+<p>The single most important thing about a property is that it is in lockstep with the list. Selecting a subset selects the corresponding property values</p>
+{% highlight matlab %}
+ebsdSub = ebsd(ebsd.mad < 1);
+
+length(ebsdSub)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+      242352
+{% endhighlight %}
+
+{% highlight matlab %}
+length(ebsdSub.mad)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+      242352
+{% endhighlight %}
+<h2 id="6">Adding your own properties</h2>
+<p>A new property is created by assigning to a field of <code class="language-plaintext highlighter-rouge">prop</code>. Note that the <code class="language-plaintext highlighter-rouge">prop</code> is required here - writing <code class="language-plaintext highlighter-rouge">ebsd.myQuality = ...</code> directly would try to set a class property of <code class="language-plaintext highlighter-rouge">EBSD</code> and fail, since MTEX has no way of telling a typo from a new property.</p>
+{% highlight matlab %}
+ebsd.prop.myQuality = 1 ./ (1 + ebsd.mad);
+
+ebsd.prop
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = 
+  struct with fields:
+
+        bands: [245952×1 double]
+           bc: [245952×1 double]
+           bs: [245952×1 double]
+        error: [245952×1 double]
+          mad: [245952×1 double]
+    myQuality: [245952×1 double]
+{% endhighlight %}
+<p>From now on <code class="language-plaintext highlighter-rouge">myQuality</code> behaves exactly like any built in property - it can be read and overwritten as <code class="language-plaintext highlighter-rouge">ebsd.myQuality</code> without the <code class="language-plaintext highlighter-rouge">prop</code>, and it survives indexing</p>
+{% highlight matlab %}
+ebsd('Forsterite').myQuality(1:5)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.9091
+    0.9091
+    0.9091
+    0.7692
+    0.8333
+{% endhighlight %}
+<p>and it can be used for plotting</p>
+{% highlight matlab %}
+plot(ebsd('Forsterite'),ebsd('Forsterite').myQuality)
+mtexColorbar('title','my quality')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Properties_01.png" %}
+</center>
+<p>A property does not have to be numeric. Anything that supports indexing works, for instance a <a href="vector3d.vector3d.html">vector3d</a> per pixel - here the specimen direction of the crystallographic \(c\) axis.</p>
+{% highlight matlab %}
+ebsdFo = ebsd('Forsterite');
+ebsdFo.prop.myAxis = ebsdFo.orientations .* Miller(0,0,1,ebsdFo.CS);
+
+ebsdFo.prop
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = 
+  struct with fields:
+
+        bands: [152345×1 double]
+           bc: [152345×1 double]
+           bs: [152345×1 double]
+        error: [152345×1 double]
+          mad: [152345×1 double]
+    myQuality: [152345×1 double]
+       myAxis: [152345×1 vector3d]
+{% endhighlight %}
+<h2 id="10">Properties of grains</h2>
+<p>Grains work the same way. In addition to the properties MTEX computes itself, such as <code class="language-plaintext highlighter-rouge">GOS</code> or <code class="language-plaintext highlighter-rouge">meanRotation</code>, one can attach anything that has one value per grain.</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd('indexed'),'angle',10*degree);
+
+grains.prop
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = 
+  struct with fields:
+
+    meanRotation: [3165×1 quaternion]
+             GOS: [3165×1 double]
+{% endhighlight %}
+<p>A typical use is to store a derived quantity so that it can be plotted and selected on later without recomputing it</p>
+{% highlight matlab %}
+grains.prop.myRatio = grains.longAxis.norm ./ grains.shortAxis.norm;
+
+plot(grains('Forsterite'),grains('Forsterite').myRatio)
+setColorRange([1 5])
+mtexColorbar('title','aspect ratio')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Properties_02.png" %}
+</center>
+<p>One caveat: MTEX does not verify that the value you assign has the right length. A property that is too short is accepted silently and only fails later, when the object is indexed</p>
+{% highlight matlab %}
+grains.prop.nonsense = [1 2 3];
+
+try
+  grains(1:5).nonsense
+catch e
+  disp(e.message)
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+Index exceeds the number of array elements. Index must not exceed 3.
+{% endhighlight %}
+<h2 id="13">Where properties come from</h2>
+<p>Technically all of this is implemented by the class <code class="language-plaintext highlighter-rouge">dynProp</code> (<code class="language-plaintext highlighter-rouge">tools/dynProp.m</code>), from which <code class="language-plaintext highlighter-rouge">EBSD</code>, <code class="language-plaintext highlighter-rouge">grain2d</code> and the other list classes inherit. It provides the <code class="language-plaintext highlighter-rouge">prop</code> struct together with overloaded indexing, concatenation and subsetting, so that a new property automatically takes part in all of them. The <a href="EBSDImport.html">import interfaces</a> use exactly the same mechanism - every column of a <code class="language-plaintext highlighter-rouge">.ang</code> or <code class="language-plaintext highlighter-rouge">.ctf</code> file that MTEX does not recognize as position, phase or orientation ends up as a property.</p>
 </div>
 </body>
 </html>

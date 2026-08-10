@@ -108,11 +108,11 @@ axis([313 353 140 156])
 {% include inline_image.html file="GrainSmoothing_04.png" %}
 </center>
 <h2 id="7">Which algorithm - the short version</h2>
-<p>The smoothing step itself can be done in several ways, and the choice is made by passing a <a href="boundaryFilter.boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>. For practical work there are two that matter.</p>
+<p>The smoothing step itself can be done in several ways, and the choice is made by passing a <a href="boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>. For practical work there are two that matter.</p>
 <p>
 <b>Use the default</b> if the smoothed boundary is for plotting, or for measuring directions and lengths. It is a Laplacian, it is fast, and it is what <code class="language-plaintext highlighter-rouge">smoothBoundary(grains,5)</code> selects without being asked.</p>
 <p>
-<b>Use <a href="taubinFilter.taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> if grain areas or shape parameters matter.</b> A Laplacian shrinks - every iteration pulls a convex region inwards and nothing bounds how far. Taubin follows each smoothing pass by a slightly larger unshrinking one, which stops the drift.</p>
+<b>Use <a href="taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> if grain areas or shape parameters matter.</b> A Laplacian shrinks - every iteration pulls a convex region inwards and nothing bounds how far. Taubin follows each smoothing pass by a slightly larger unshrinking one, which stops the drift.</p>
 {% highlight matlab %}
 ref = smoothBoundary(grains,0);      % simplified and resampled, not smoothed
 A0 = ref.area;
@@ -153,7 +153,7 @@ axis([c.x-12 c.x+12 c.y-12 c.y+12])
 <center>
 {% include inline_image.html file="GrainSmoothing_05.png" %}
 </center>
-<p>There is a third option worth knowing about. <a href="curvatureFilter.curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> replaces the iteration count by a <b>length</b> - the wavelength that gets damped to half amplitude. Detail finer than it is removed, detail coarser survives. Since it is a length it means the same thing whatever step size the map was measured at, so results stay comparable between scans.</p>
+<p>There is a third option worth knowing about. <a href="curvatureFilter.html"><code class="language-plaintext highlighter-rouge">curvatureFilter</code></a> replaces the iteration count by a <b>length</b> - the wavelength that gets damped to half amplitude. Detail finer than it is removed, detail coarser survives. Since it is a length it means the same thing whatever step size the map was measured at, so results stay comparable between scans.</p>
 {% highlight matlab %}
 F = curvatureFilter;
 F.smoothingLength = 4;      % in the units of the map, here um
@@ -167,7 +167,7 @@ axis([313 353 140 156])
 <center>
 {% include inline_image.html file="GrainSmoothing_06.png" %}
 </center>
-<p> <a href="huberFilter.huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> exists for faceted materials - it keeps genuine corners sharp instead of rounding them off. It is not a good default, see <a href="GrainSmoothingAdvanced.html">Smoothing Algorithms</a>.</p>
+<p> <a href="huberFilter.html"><code class="language-plaintext highlighter-rouge">huberFilter</code></a> exists for faceted materials - it keeps genuine corners sharp instead of rounding them off. It is not a good default, see <a href="GrainSmoothingAdvanced.html">Smoothing Algorithms</a>.</p>
 <h2 id="11">When to switch the first two steps off</h2>
 <p>Removing the staircase and resampling change the number of boundary segments, and a resampled segment no longer runs between one specific pair of pixels. So wherever <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment - to look up the orientations on either side of a boundary, for instance - both steps have to be off</p>
 {% highlight matlab %}
