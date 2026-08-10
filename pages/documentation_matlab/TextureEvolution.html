@@ -21,7 +21,179 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Plasticity/TextureEvolution.m">
     edit page</a></font>
 <div>
-<h1>Texture Evolution</h1>
+<!--introduction-->
+<p>Plastic deformation does not only change the shape of a polycrystal, it also rotates its crystals. The <a href="TaylorModel.html">Taylor model</a> tells us, for a given strain and a given family of <a href="SlipSystems.html">slip systems</a>, by how much a crystal in a given orientation has to rotate. Applying that rotation to every orientation of a sample and iterating over small strain increments is the simplest possible simulation of texture evolution, and that is what this page does.</p>
+<p>Two related pages take different routes to the same question - the <a href="SingleSlipModel.html">single slip model</a> solves the continuity equation for the ODF analytically, and <a href="VPSCImport.html">VPSC</a> results computed outside of MTEX can be imported and analyzed here.</p>
+<!--/introduction-->
+<h2 id="1">The crystallographic spin</h2>
+<p>We consider fcc slip and plane strain, i.e. rolling.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('432');
+sS = symmetrise(slipSystem.fcc(cs))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sS = slipSystem (432)
+ size: 24 x 1
+ 
+   u    v    w  | h    k    l CRSS
+   0    1   -1    1    1    1    1
+  -1    0    1    1    1    1    1
+   1   -1    0    1    1    1    1
+   0   -1    1    1    1    1    1
+   1    0   -1    1    1    1    1
+  -1    1    0    1    1    1    1
+   1   -1    0    1    1   -1    1
+   1    0    1    1    1   -1    1
+   0    1    1    1    1   -1    1
+  -1    1    0    1    1   -1    1
+  -1    0   -1    1    1   -1    1
+   0   -1   -1    1    1   -1    1
+   0    1   -1   -1    1    1    1
+   1    0    1   -1    1    1    1
+   1    1    0   -1    1    1    1
+   0   -1    1   -1    1    1    1
+  -1    0   -1   -1    1    1    1
+  -1   -1    0   -1    1    1    1
+  -1    0    1    1   -1    1    1
+   1    1    0    1   -1    1    1
+   0    1    1    1   -1    1    1
+   1    0   -1    1   -1    1    1
+  -1   -1    0    1   -1    1    1
+   0   -1   -1    1   -1    1    1
+{% endhighlight %}
+
+{% highlight matlab %}
+q = 0;
+epsTotal = 0.6 * strainTensor(diag([1 -q -(1-q)]))
+{% endhighlight %}
+
+{% highlight plaintext %}
+epsTotal = strainTensor (y↑→x)
+  type: Lagrange 
+  rank: 2 (3 x 3)
+ 
+ *10^-2
+  60   0   0
+   0   0   0
+   0   0 -60
+{% endhighlight %}
+<p>For a single crystal <a href="strainTensor.calcTaylor.html"><code class="language-plaintext highlighter-rouge">calcTaylor</code></a> returns, besides the Taylor factor, the spin tensor <code class="language-plaintext highlighter-rouge">W</code> that the crystal experiences</p>
+{% highlight matlab %}
+ori = orientation.byEuler(0,30*degree,15*degree,cs);
+
+eps1 = 0.01 * strainTensor(diag([1 -q -(1-q)]));
+
+[M,~,W] = calcTaylor(inv(ori) * eps1, sS);
+
+M
+{% endhighlight %}
+
+{% highlight plaintext %}
+M =
+    2.3153
+{% endhighlight %}
+<p>and the updated orientation is obtained by applying it</p>
+{% highlight matlab %}
+oriNew = ori .* orientation(-W);
+
+angle(ori,oriNew) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.4975
+{% endhighlight %}
+<p>One percent of strain rotates this crystal by about half a degree. Since the spin depends on the orientation, the crystals of a polycrystal drift apart at different rates and the texture sharpens.</p>
+<h2 id="6">Iterating over a polycrystal</h2>
+<p>Evaluating <code class="language-plaintext highlighter-rouge">calcTaylor</code> separately for every orientation would be far too slow. Called without an orientation it instead returns the Taylor factor and the spin as <a href="SO3FunConcept.html">orientation dependent functions</a>, which are then cheap to evaluate on a whole list of orientations. We compute this spin field once, for a single strain increment.</p>
+{% highlight matlab %}
+numIter = 60;
+
+[~,~,spin] = calcTaylor(epsTotal ./ numIter, sS)
+{% endhighlight %}
+
+{% highlight plaintext %}
+spin = SO3VectorFieldHarmonic (1 → y↑→x)
+  bandwidth: 32
+  tangent space: rightSpinTensor
+  intern symmetries: 432 → y↑→x
+  intern tangent space: leftVector
+{% endhighlight %}
+<p>Note that this step takes the bulk of the computing time, and its cost depends only on the bandwidth of the harmonic representation, not on the number of orientations. Passing <code class="language-plaintext highlighter-rouge">'bandwidth',16</code> makes it noticeably faster at the price of a relative error of a few percent in the spin.</p>
+<p>We start from a uniform texture</p>
+{% highlight matlab %}
+rng(0)
+ori = orientation.rand(2e4,cs);
+
+odf0 = calcDensity(ori,'halfwidth',10*degree);
+
+norm(odf0)^2
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.0010
+{% endhighlight %}
+<p>and step through the deformation</p>
+{% highlight matlab %}
+pC = progressCounter(numIter);
+for k = 1:numIter
+
+  % the spin experienced by each individual orientation
+  W = spinTensor(spin.eval(ori).').';
+
+  % rotate the orientations
+  ori = ori .* orientation(-W);
+
+  pC.show(k);
+end
+{% endhighlight %}
+<h2 id="9">The resulting rolling texture</h2>
+{% highlight matlab %}
+pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y,vector3d.Z],...
+  {'RD','TD','ND'},'BackgroundColor','w','tag','axesLabels',varargin{:});
+storepfA = getMTEXpref('pfAnnotations');
+setMTEXpref('pfAnnotations',pfAnnotations);
+
+plotPDF(ori,Miller({0,0,1},{1,1,1},cs),'contourf')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TextureEvolution_01.png" %}
+</center>
+<p>The initially uniform texture has developed the familiar fcc rolling components. How strong the texture has become is best measured by the texture index \(\lVert f \rVert^2\)</p>
+{% highlight matlab %}
+odf = calcDensity(ori,'halfwidth',10*degree);
+
+norm(odf)^2
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    1.9160
+{% endhighlight %}
+<p>For reference, the same computation stopped at 20 and at 40 percent strain gives 1.15 and 1.50 - the texture index grows steadily but the texture is still far from being sharp at 60 percent.</p>
+{% highlight matlab %}
+plotSection(odf,'phi2',[0 45 65]*degree,'contourf')
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TextureEvolution_02.png" %}
+</center>
+<h2 id="13">Things worth knowing</h2>
+<div>
+<ul>
+<li>The step size matters. The spin field is computed for one strain increment and then applied <code class="language-plaintext highlighter-rouge">numIter</code> times, which is an explicit Euler scheme - too few steps and the trajectories are wrong, too many and the computation is needlessly slow.</li>
+<li>The model deforms every crystal by exactly the same strain, which is the defining Taylor assumption. It over predicts the sharpness of real textures, because in a real material grains accommodate each other.</li>
+<li>Nothing here depends on the strain being plane strain. Changing <code class="language-plaintext highlighter-rouge">epsTotal</code> to <code class="language-plaintext highlighter-rouge">strainTensor(diag([-0.5 -0.5 1]))</code> gives axisymmetric tension, and the same loop produces the corresponding fibre texture.</li>
+<li>The slip systems enter only through <code class="language-plaintext highlighter-rouge">sS</code>. Replacing <code class="language-plaintext highlighter-rouge">slipSystem.fcc</code> by <code class="language-plaintext highlighter-rouge">slipSystem.bcc</code> or by a hexagonal family, see <a href="TaylorHex.html">Taylor Model for Hexagonal Materials</a>, changes the predicted texture completely.</li>
+</ul>
+</div>
+{% highlight matlab %}
+% restore MTEX preferences
+setMTEXpref('pfAnnotations',storepfA);
+{% endhighlight %}
 </div>
 </body>
 </html>

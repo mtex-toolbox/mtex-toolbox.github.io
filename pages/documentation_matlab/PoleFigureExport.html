@@ -22,7 +22,119 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Pole figure data are exported by the command <a href="PoleFigure.export.html"><code class="language-plaintext highlighter-rouge">export</code></a>. It writes plain ASCII files that can be read back by MTEX and by most other texture software, and it is the counterpart of <a href="PoleFigureImport.html">importing pole figure data</a>.</p>
 <!--/introduction-->
+<h2 id="1">Exporting measured pole figures</h2>
+<p>Let us consider the Dubna quartz data set, which consists of seven pole figures</p>
+{% highlight matlab %}
+mtexdata dubna silent
+
+pf
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (y↑→x)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
+ 
+  h = (022̅1), r = 72 x 19 points
+  h = (101̅0), r = 72 x 19 points
+  h = (101̅1)(011̅1), r = 72 x 19 points
+  h = (101̅2), r = 72 x 19 points
+  h = (112̅0), r = 72 x 19 points
+  h = (112̅1), r = 72 x 19 points
+  h = (112̅2), r = 72 x 19 points
+{% endhighlight %}
+<p>Each of these pole figures is written into its own file, because in general they are measured on different specimen grids and hence do not share a common list of directions. The file name is composed from the name passed to <code class="language-plaintext highlighter-rouge">export</code> and the Miller indices of the pole figure.</p>
+{% highlight matlab %}
+% we write into the temporary folder to not pollute the MTEX folder
+fname = fullfile(tempdir,'dubna');
+
+export(pf,fname,'degree')
+{% endhighlight %}
+<p>and indeed we get one file per pole figure</p>
+{% highlight matlab %}
+d = dir([fname,'_*.txt']);
+disp({d.name}')
+{% endhighlight %}
+
+{% highlight plaintext %}
+{'dubna_(022̅1).txt'      }
+    {'dubna_(101̅0).txt'      }
+    {'dubna_(101̅1)(011̅1).txt'}
+    {'dubna_(101̅2).txt'      }
+    {'dubna_(112̅0).txt'      }
+    {'dubna_(112̅1).txt'      }
+    {'dubna_(112̅2).txt'      }
+{% endhighlight %}
+<p>Every file is a table with three columns - the polar angle <code class="language-plaintext highlighter-rouge">theta</code> of the specimen direction, its azimuth angle <code class="language-plaintext highlighter-rouge">rho</code>, and the measured diffraction intensity. Without the option <code class="language-plaintext highlighter-rouge">'degree'</code> the two angles are written in radians.</p>
+<h2 id="5">Reading the data back</h2>
+<p>Since the format is exactly the one understood by <a href="loadPoleFigure_generic.html"><code class="language-plaintext highlighter-rouge">loadPoleFigure_generic</code></a>, the files can be imported again by <a href="PoleFigure.load.html"><code class="language-plaintext highlighter-rouge">PoleFigure.load</code></a>. We only have to say which crystal direction belongs to which file and which crystal symmetry to use, as the ASCII files carry no such information.</p>
+{% highlight matlab %}
+% reconstruct the file names from the Miller indices
+fnames = cellfun(@(h) [fname,'_',char(h),'.txt'], pf.allH,'UniformOutput',false);
+
+pf2 = PoleFigure.load(fnames,pf.allH,pf.CS,pf.SS,...
+  'ColumnNames',{'polar angle','azimuth angle','intensity'},'degree')
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf2 = PoleFigure (y↑→x)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
+ 
+  h = (022̅1), r = 1368 x 1 points
+  h = (101̅0), r = 1368 x 1 points
+  h = (101̅1)(011̅1), r = 1368 x 1 points
+  h = (101̅2), r = 1368 x 1 points
+  h = (112̅0), r = 1368 x 1 points
+  h = (112̅1), r = 1368 x 1 points
+  h = (112̅2), r = 1368 x 1 points
+{% endhighlight %}
+<p>The intensities survive the round trip up to the precision of the ASCII representation</p>
+{% highlight matlab %}
+max(abs(pf.intensities(:) - pf2.intensities(:)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<p>What is lost is the grid structure - the specimen directions come back as a plain list of <code class="language-plaintext highlighter-rouge">72 x 19 = 1368</code> points rather than as a regular \(\theta\)/\(\rho\) grid. For all computations in MTEX this makes no difference.</p>
+{% highlight matlab %}
+plot(pf2)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureExport_01.png" %}
+</center>
+<h2 id="9">Exporting recalculated pole figures</h2>
+<p>The same command applies to pole figures that were not measured but computed from an ODF by <a href="SO3Fun.calcPoleFigure.html"><code class="language-plaintext highlighter-rouge">calcPoleFigure</code></a>. This is the usual way to hand MTEX results over to other programs.</p>
+{% highlight matlab %}
+odf = calcODF(pf,'silent');
+
+pfSim = calcPoleFigure(odf,pf.allH,pf.allR,'superposition',pf.c)
+{% endhighlight %}
+
+{% highlight plaintext %}
+pfSim = PoleFigure (y↑→x)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
+ 
+  h = (022̅1), r = 72 x 19 points
+  h = (101̅0), r = 72 x 19 points
+  h = (101̅1)(011̅1), r = 72 x 19 points
+  h = (101̅2), r = 72 x 19 points
+  h = (112̅0), r = 72 x 19 points
+  h = (112̅1), r = 72 x 19 points
+  h = (112̅2), r = 72 x 19 points
+{% endhighlight %}
+<p>Note that the superposition weights have to be passed on explicitly here. The third Dubna pole figure superposes \((10\bar11)\) and \((01\bar11)\) with the weights <code class="language-plaintext highlighter-rouge">pf.c{3}</code>, and without them <code class="language-plaintext highlighter-rouge">calcPoleFigure</code> would not know how many intensities to compute per specimen direction.</p>
+{% highlight matlab %}
+export(pfSim,fullfile(tempdir,'dubnaRecalculated'),'degree')
+{% endhighlight %}
+<p>Note that an ODF itself is better exported as an ODF, see <a href="ODFExport.html">Exporting ODFs</a>, since a set of pole figures does not determine it uniquely.</p>
+{% highlight matlab %}
+% clean up
+delete([fname,'_*.txt'])
+delete(fullfile(tempdir,'dubnaRecalculated_*.txt'))
+{% endhighlight %}
 </div>
 </body>
 </html>

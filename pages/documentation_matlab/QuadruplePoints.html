@@ -1,5 +1,5 @@
 ---
-title: "script_QuadruplePoints"
+title: "Quadruple Points"
 
 sidebar: documentation_sidebar
 permalink: QuadruplePoints.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>script_QuadruplePoints</title>
+<title>Quadruple Points</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_QuadruplePoints.m">
 </head>
@@ -21,9 +21,13 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GrainBoundaries/QuadruplePoints.m">
     edit page</a></font>
 <div>
+<!--introduction-->
+<p>On a square grid four pixels meet in every interior vertex. If the two pixels on one diagonal belong to one grain and the two pixels on the other diagonal belong to a different grain, that vertex is a <b>quadruple point</b>: four boundary segments emanate from it and the boundary network is ambiguous there. Depending on which of the two grains is considered connected across the vertex one obtains a different number of grains. Since real grain boundary networks practically never contain quadruple points, MTEX offers the option <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> to <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a>, which splits every such vertex into two triple points.</p>
+<!--/introduction-->
+<h2 id="1">A minimal example</h2>
+<p>Let us construct a small artificial map. The pixels marked by <code class="language-plaintext highlighter-rouge">1</code> form a ring which touches itself diagonally in its lower left corner.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('1','mineral','test');
-
 
 id = [...
   0 0 0 0 0 0; ...
@@ -33,12 +37,25 @@ id = [...
   0 1 0 0 1 0; ...
   0 1 1 1 0 0; ...
   0 0 0 0 0 0]==1;
-
+{% endhighlight %}
+<p>All pixels of the ring get one common orientation, all remaining pixels get the identity</p>
+{% highlight matlab %}
 rot = rotation.id(size(id));
+rot(id) = rotation.byEuler(30*degree,20*degree,10*degree);
 
-rot(id) = rotation.rand;
+ebsd = EBSDsquare([],rot,2*ones(size(rot)),1:2,{'not indexed',cs},'dxy',[1 1])
+{% endhighlight %}
 
-ebsd = EBSDsquare([],rot,2*ones(size(rot)),1:2,{'not indexed',cs},'dxy',[1 1]);
+{% highlight plaintext %}
+ebsd = EBSDsquare (y↓→x)
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     2     42 (100%)     test  LightSkyBlue         1      X||a*, Y||b*, Z||c*
+ 
+ Scan unit : um
+ X x Y x Z : [0, 5] x [0, 6] x [0, 0]
+ Normal vector: (0,0,1)
+ Square grid  :7 x 6
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -47,6 +64,39 @@ plot(ebsd,ebsd.orientations)
 <center>
 {% include inline_image.html file="QuadruplePoints_01.png" %}
 </center>
+<h2 id="4">Grain reconstruction with quadruple points</h2>
+<p>Reconstructing grains in the usual way the interior of the ring is cut off from the exterior at the diagonal contact, and we end up with three grains instead of two</p>
+{% highlight matlab %}
+grains = calcGrains(ebsd)
+{% endhighlight %}
+
+{% highlight plaintext %}
+grains = grain2d (y↓→x)
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry         Color
+     2       3      42     test         1  LightSkyBlue
+ 
+ boundary segments: 52 (52 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 0
+ 
+ Id   Phase   Pixels    meanRotation   GOS
+  1       2        4      (0°,0°,0°)     0
+  2       2       15   (30°,20°,10°)     0
+  3       2       23      (0°,0°,0°)     0
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(grains,grains.meanOrientation)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="QuadruplePoints_02.png" %}
+</center>
+<h2 id="6">Removing the quadruple points</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> splits the ambiguous vertex into two triple points and keeps the two like oriented pixels connected. Now we obtain the expected two grains</p>
 {% highlight matlab %}
 grains = calcGrains(ebsd,'removeQuadruplePoints')
 {% endhighlight %}
@@ -61,73 +111,42 @@ grains = grain2d (y↓→x)
  inner boundary segments: 0 (0 µm)
  triple points: 0
  
- Id   Phase   Pixels       meanRotation   GOS
-  1       2       15   (157°,161°,198°)     0
-  2       2       27         (0°,0°,0°)     0
+ Id   Phase   Pixels    meanRotation   GOS
+  1       2       15   (30°,20°,10°)     0
+  2       2       27      (0°,0°,0°)     0
 {% endhighlight %}
 
 {% highlight matlab %}
-gB = grains.boundary
-grains = merge(grains,gB(end),'calcMeanOrientation')
-{% endhighlight %}
-
-{% highlight plaintext %}
-gB = grainBoundary (y↓→x)
- 
- Segments  length   mineral 1  mineral 2
-       26   26 µm  notIndexed       test
-       26   26 µm        test       test
- 
-grains = grain2d (y↓→x)
- 
- Phase  Grains  Pixels  Mineral  Symmetry         Color
-     2       2      42     test         1  LightSkyBlue
- 
- boundary segments: 52 (52 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 0
- 
- Id   Phase   Pixels       meanRotation   GOS
-  1       2       15   (157°,161°,198°)     0
-  2       2       27         (0°,0°,0°)     0
-{% endhighlight %}
-
-{% highlight matlab %}
-grains = smoothBoundary(grains,1,'moveTriplePoints')
-{% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d (y↓→x)
- 
- Phase  Grains  Pixels  Mineral  Symmetry         Color
-     2       2      42     test         1  LightSkyBlue
- 
- boundary segments: 52 (50 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 0
- 
- Id   Phase   Pixels       meanRotation   GOS
-  1       2       15   (157°,161°,198°)     0
-  2       2       27         (0°,0°,0°)     0
-{% endhighlight %}
-
-{% highlight matlab %}
-plot(grains.boundary)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="QuadruplePoints_02.png" %}
-</center>
-{% highlight matlab %}
-id = 2;
-gB = grains(id).boundary;
-
-plot(gB,gB.curvature(10),'linewidth',6)
-
-mtexColorMap blue2red
-setColorRange(0.5*[-1,1])
+plot(grains,grains.meanOrientation)
+hold on
+plot(grains.boundary,'lineWidth',2)
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="QuadruplePoints_03.png" %}
+</center>
+<p>Note that the total boundary length is unchanged - only the connectivity at the critical vertex is different.</p>
+<h2 id="9">Smoothing at the critical vertex</h2>
+<p>The two triple points that replace the quadruple point sit on top of each other. Smoothing the boundary with the option <code class="language-plaintext highlighter-rouge">'moveTriplePoints'</code> pulls them apart</p>
+{% highlight matlab %}
+grains = smoothBoundary(grains,1,'moveTriplePoints');
+
+plot(grains.boundary,'lineWidth',2)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="QuadruplePoints_04.png" %}
+</center>
+<p>and the <a href="grainBoundary.curvature.html">curvature</a> of the smoothed boundary shows the pinch as a pair of opposite extrema</p>
+{% highlight matlab %}
+gB = grains(1).boundary;
+
+plot(gB,gB.curvature(10),'linewidth',6)
+mtexColorMap blue2red
+setColorRange(0.5*[-1,1])
+mtexColorbar
+{% endhighlight %}
+<center>
+{% include inline_image.html file="QuadruplePoints_05.png" %}
 </center>
 </div>
 </body>
