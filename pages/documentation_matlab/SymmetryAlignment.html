@@ -22,10 +22,60 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Default is \(\vec c\) axis of highest symmetry.</p>
-<p>TODO: Explain the default setting in more detail.</p>
 <!--/introduction-->
-<h2 id="1">Switching between different Alignment Options</h2>
+{% highlight matlab %}
+plottingConvention.default("y↑→x");
+{% endhighlight %}
+<p>A crystal lattice is described by its lattice parameters \(a\), \(b\), \(c\) and the angles \(\alpha\), \(\beta\), \(\gamma\) between the axes. These fix the lattice, but they do not say how it is placed inside the Cartesian coordinate system that MTEX computes in - and for anything but the cubic case there is more than one common choice.</p>
+<p>Unless told otherwise, MTEX uses</p>
+<div>
+<ul>
+<li>\(\vec z \parallel \vec c\) - the \(\vec c\) axis, i.e. the axis of highest symmetry, points along \(\vec z\)</li>
+<li>\(\vec x \parallel \vec a^*\) - the \(\vec x\) direction is aligned with the reciprocal axis \(\vec a^*\)</li>
+</ul>
+</div>
+<p>The reference frame is printed with every crystal symmetry</p>
+{% highlight matlab %}
+cs = crystalSymmetry('12/m1',[4 5 6],[90 100 90]*degree,'mineral','test')
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs = crystalSymmetry
+ 
+  mineral           : test              
+  symmetry          : 12/m1             
+  elements          : 4                 
+  a, b, c           : 4, 5, 6           
+  alpha, beta, gamma: 90°, 100°, 90°    
+  reference frame   : X||a*, Y||b*, Z||c
+{% endhighlight %}
+<p>Note that \(\vec a^*\), not \(\vec a\), is the direction placed along \(\vec x\). For a monoclinic lattice with \(\beta = 100^\circ\) the two differ by exactly the deviation of \(\beta\) from a right angle</p>
+{% highlight matlab %}
+[angle(cs.aAxis,vector3d.X), angle(cs.aAxisRec,vector3d.X)] ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   10.0000         0
+{% endhighlight %}
+<p>For orthogonal lattices - orthorhombic, tetragonal and cubic - the direct and the reciprocal axes coincide and the distinction is immaterial. It matters for triclinic, monoclinic, trigonal and hexagonal symmetries, which is exactly where the competing conventions live.</p>
+<p>A different alignment is requested by naming it in the constructor, e.g.</p>
+{% highlight matlab %}
+cs2 = crystalSymmetry('12/m1',[4 5 6],[90 100 90]*degree,'X||a','mineral','test')
+{% endhighlight %}
+
+{% highlight plaintext %}
+cs2 = crystalSymmetry
+ 
+  mineral           : test              
+  symmetry          : 12/m1             
+  elements          : 4                 
+  a, b, c           : 4, 5, 6           
+  alpha, beta, gamma: 90°, 100°, 90°    
+  reference frame   : X||a, Y||b*, Z||c*
+{% endhighlight %}
+<p>The two describe the same crystal, but Miller indices, Euler angles and tensor components refer to different Cartesian frames and are therefore <b>not</b> interchangeable between them.</p>
+<h2 id="6">Switching between different Alignment Options</h2>
 <p>Since, especially for lower symmetry groups, different conventions for aligning the crystal axes are used it might be necessary to transform data, e.g, orientations or tensors, from one convention into another. This can be done using the command <a href="tensor.transformReferenceFrame.html">transformReferenceFrame</a> as it illustrated below.</p>
 <p>First we import the stiffness tensor Forsterite with respect to the axes alignment</p>
 {% highlight matlab %}

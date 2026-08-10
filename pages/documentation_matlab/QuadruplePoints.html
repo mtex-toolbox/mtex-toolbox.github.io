@@ -41,7 +41,7 @@ id = [...
 <p>All pixels of the ring get one common orientation, all remaining pixels get the identity</p>
 {% highlight matlab %}
 rot = rotation.id(size(id));
-rot(id) = rotation.byEuler(30*degree,20*degree,10*degree);
+rot(id) = rotation.byEuler(130*degree,120*degree,110*degree);
 
 ebsd = EBSDsquare([],rot,2*ones(size(rot)),1:2,{'not indexed',cs},'dxy',[1 1])
 {% endhighlight %}
@@ -80,10 +80,10 @@ grains = grain2d (y↓→x)
  inner boundary segments: 0 (0 µm)
  triple points: 0
  
- Id   Phase   Pixels    meanRotation   GOS
-  1       2        4      (0°,0°,0°)     0
-  2       2       15   (30°,20°,10°)     0
-  3       2       23      (0°,0°,0°)     0
+ Id   Phase   Pixels       meanRotation     GOS
+  1       2        4         (0°,0°,0°)       0
+  2       2       15   (130°,120°,110°)   3e-08
+  3       2       23         (0°,0°,0°)       0
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -111,9 +111,9 @@ grains = grain2d (y↓→x)
  inner boundary segments: 0 (0 µm)
  triple points: 0
  
- Id   Phase   Pixels    meanRotation   GOS
-  1       2       15   (30°,20°,10°)     0
-  2       2       27      (0°,0°,0°)     0
+ Id   Phase   Pixels       meanRotation     GOS
+  1       2       15   (130°,120°,110°)   3e-08
+  2       2       27         (0°,0°,0°)       0
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -129,9 +129,9 @@ hold off
 <h2 id="10">Smoothing at the critical vertex</h2>
 <p>The two triple points that replace the quadruple point sit on top of each other. Smoothing the boundary with the option <code class="language-plaintext highlighter-rouge">'moveTriplePoints'</code> pulls them apart</p>
 {% highlight matlab %}
-grains = smoothBoundary(grains,1,'moveTriplePoints');
+grains = smoothBoundary(grains,taubinFilter,'moveTriplePoints');
 
-plot(grains.boundary,'lineWidth',2)
+plot(grains,grains.meanOrientation, 'lineWidth',2)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="QuadruplePoints_04.png" %}
