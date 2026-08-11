@@ -88,6 +88,9 @@ grains = grain2d (y↑→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
+<center>
+{% include inline_image.html file="BoundaryNormalDistribution_01.png" %}
+</center>
 <h2 id="3">Misorientation angle at grain boundaries</h2>
 <p>Next we separate the grain boundaries according to the misorientation angle. The tension twins of Magnesium show up as a sharp peak at 86.3 degree, so we distinguish those grain boundaries with a misorientation angle larger then 80 degree and those with a smaller misorientation angle.</p>
 {% highlight matlab %}
@@ -101,7 +104,7 @@ plot(gB(cond),'lineWidth',2,'lineColor','w')
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryNormalDistribution_01.png" %}
+{% include inline_image.html file="BoundaryNormalDistribution_02.png" %}
 </center>
 <p>Passing the grain boundaries together with the EBSD data to <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> gives the crystal GBND, i.e. the distribution of the boundary normals in crystal coordinates.</p>
 <p>Recovering a three dimensional distribution from planar sections is a deconvolution, and without any constraint the result rings, i.e. it oscillates around the true distribution and may even become negative. The option <code class="language-plaintext highlighter-rouge">nonneg</code> enforces a nonnegative result, which is what we want for a density.</p>
@@ -138,7 +141,7 @@ gbnd2 = S2FunHarmonic (Magnesium)
   antipodal: true
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryNormalDistribution_02.png" %}
+{% include inline_image.html file="BoundaryNormalDistribution_03.png" %}
 </center>
 <p>We observe that for the twinning grain boundaries the boundary plane is mostly parallel to the \(\{10\bar{1}2\}\) twinning plane, while for all other grain boundaries no preferred boundary plane exists. Indeed, the maximum of the left hand side distribution is only a few degrees away from \(\{10\bar{1}2\}\)</p>
 {% highlight matlab %}
@@ -180,7 +183,7 @@ gbcd = S2FunHarmonic (Magnesium)
   antipodal: true
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryNormalDistribution_03.png" %}
+{% include inline_image.html file="BoundaryNormalDistribution_04.png" %}
 </center>
 <p>Two of the six \(\{10\bar{1}2\}\) variants carry the maxima - the specimen was deformed, so not every twin variant is equally active. Accordingly the maximum sits right on a twinning plane</p>
 {% highlight matlab %}
@@ -226,7 +229,7 @@ gbndSpecimen = S2FunHarmonic (y↓→x)
   antipodal: true
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryNormalDistribution_04.png" %}
+{% include inline_image.html file="BoundaryNormalDistribution_05.png" %}
 </center>
 <h2 id="12">The crystal GBND</h2>
 <p>Passing the grains in addition rotates every normal into the coordinate system of its grain, which gives the crystal GBND.</p>
@@ -245,7 +248,7 @@ gbndCrystal = S2FunHarmonicSym (unknown)
   antipodal: true
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryNormalDistribution_05.png" %}
+{% include inline_image.html file="BoundaryNormalDistribution_06.png" %}
 </center>
 <p>For this data set the crystal GBND is almost uniform, i.e. taken over all grain boundaries there is no preferred habit plane</p>
 {% highlight matlab %}
@@ -277,7 +280,7 @@ gbcd3 = S2FunHarmonic (unknown)
   antipodal: true
 {% endhighlight %}
 <center>
-{% include inline_image.html file="BoundaryNormalDistribution_06.png" %}
+{% include inline_image.html file="BoundaryNormalDistribution_07.png" %}
 </center>
 <p>Of the four \(\{111\}\) variants only one is populated, namely the one that is the rotational axis of the \(\Sigma 3\) misorientation. These twins are coherent, and the maximum coincides with that plane</p>
 {% highlight matlab %}

@@ -56,6 +56,9 @@ plot(ebsd('Magnesium'),ebsd('Magnesium').orientations)
 {% highlight matlab %}
 import_wizard
 {% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDImport_02.png" %}
+</center>
 <p>EBSD Data files can be also imported via the <a href="matlab:filebrowser">file browser</a> by choosing <i>Import Data</i> from the context menu of the selected file if its file extension was registered with <a href="matlab:opentoline(fullfile(mtex_path,'mtex_settings.m'),25,1)"><code class="language-plaintext highlighter-rouge">mtex_settings.m</code></a>
 </p>
 <p>The import wizard guides through the correct setup of:</p>
@@ -95,7 +98,7 @@ ebsd = EBSD.load(fname,CS,'interface','ctf',...
 plot(ebsd,ebsd.orientations)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDImport_02.png" %}
+{% include inline_image.html file="EBSDImport_03.png" %}
 </center>
 <h2 id="8">Supported Data Formats</h2>
 <p>MTEX supports the following EBSD data formats:</p>
@@ -192,17 +195,13 @@ ebsd = EBSD.load(fname,'headerOnly')
 {% endhighlight %}
 <p>The <a href="import_wizard.html">import wizard</a> lists everything a file offers below its file browser - selecting a row imports it.</p>
 <h2 id="10">Raw and Post Processed Data</h2>
-<p>Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> files store the map twice - as recorded by the detector and as cleaned up by the vendor software. MTEX imports the cleaned up version, which is usually the one you want. Add <code class="language-plaintext highlighter-rouge">'raw'</code> for the other one</p>
+<p>An Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> file may store the map twice - as recorded by the detector under <code class="language-plaintext highlighter-rouge">EBSD</code> and as cleaned up by the vendor software under <code class="language-plaintext highlighter-rouge">Data Processing</code>. Both are simply data sets of that file, so they are listed and picked exactly like the maps above, the cleaned up one first</p>
 {% highlight matlab %}
-ebsd = EBSD.load(fname)          % post processed
-ebsd = EBSD.load(fname,'raw')    % as recorded
+ebsd = EBSD.load(fname)                        % post processed
+ebsd = EBSD.load(fname,'dataSet','EBSD')       % as recorded
 {% endhighlight %}
-<p>The raw version comes with the full set of per pixel properties - band contrast, band slope, pattern quality, the pattern centre, ... - while the post processed one keeps only a few of them, but has its bad pixels cleaned up and may carry a different specimen orientation. Both can be combined with <code class="language-plaintext highlighter-rouge">'dataSet'</code>
-</p>
-{% highlight matlab %}
-ebsd = EBSD.load(fname,'raw','dataSet',2)
-{% endhighlight %}
-<p>Files of all other vendors hold the recorded data only, so <code class="language-plaintext highlighter-rouge">'raw'</code> has no effect on them. The <a href="import_wizard.html">import wizard</a> lists both versions of every data set below its file browser, tagged <code class="language-plaintext highlighter-rouge">(raw)</code> and <code class="language-plaintext highlighter-rouge">(post processed)</code>, and files that store one version only simply get one row per data set.</p>
+<p>The recorded version comes with the full set of per pixel properties - band contrast, band slope, pattern quality, the pattern centre, ... - while the cleaned up one keeps only a few of them, but has its bad pixels cleaned up. Both refer to the same reference frame, so orientations may be compared between them directly.</p>
+<p>A file that was never processed holds the recorded version alone and simply lists one data set per map.</p>
 <h2 id="11">Writing your own interface</h2>
 <p>In the rare case of an EBSD format that is not supported, the user can write its own interface to import the data. Once you have successfully written that, you can integrate this method into MTEX by copying it into the folder <code class="language-plaintext highlighter-rouge">mtex/interfaces</code> and rename your function <code class="language-plaintext highlighter-rouge">loadEBSD_xxx</code>. Then it will be automatically recognized by the import wizard. Examples how to write such an interface can be found in the directory <code class="language-plaintext highlighter-rouge">mtex/interfaces</code>.</p>
 </div>

@@ -62,6 +62,34 @@ ebsd.how2plot = 'y↑→x';
 {% endhighlight %}
 <p>Additionally, we now support multiple data sets per file and allow to import all additional scans that might be present in your file.</p>
 <p>
+<b>EBSD Analysis No Longer Needs a Grid</b>
+</p>
+<p>Computations that used to require <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> now work on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, or a gridded map alike. This concerns the <a href="OrientationGradient.html">orientation gradient</a> and everything built on it: <a href="EBSD.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>, <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> and the gradient method of <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">weightedBurgersVec</code></a>.</p>
+{% highlight matlab %}
+kappa = curvature(ebsd)      % no ebsd.gridify needed
+gnd   = calcGND(ebsd,dS)
+{% endhighlight %}
+<p>They are computed on the virtual lattice MTEX derives from the unit cell, so they also work for grids that are rotated or sheared with respect to the x/y axes, which the previous matrix based implementation could not do at all - <code class="language-plaintext highlighter-rouge">ebsd.gradientX</code> raised an error unless a grid direction happened to lie along an axis. <code class="language-plaintext highlighter-rouge">calcGND</code> additionally exists for hexagonal grids now; there simply was no hexagonal implementation before.</p>
+<p> <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a>, <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> keep the class and shape they were given. Previously <code class="language-plaintext highlighter-rouge">fill</code> and <code class="language-plaintext highlighter-rouge">smooth</code> turned a plain <a href="EBSD.EBSD.html">EBSD</a> into an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> returned a result shaped like the grid rather than like the input.</p>
+<p>Both grid classes now also accept a <b>rotated</b> grid. <a href="EBSDhex.EBSDhex.html">EBSDhex</a> in particular no longer stores <code class="language-plaintext highlighter-rouge">dHex</code> and <code class="language-plaintext highlighter-rouge">isRowAlignment</code> - those could express only two orientations - but derives them, together with <code class="language-plaintext highlighter-rouge">offset</code>, <code class="language-plaintext highlighter-rouge">dx</code> and <code class="language-plaintext highlighter-rouge">dy</code>, from the unit cell and the pixel positions.</p>
+<p>
+<b>Corrections worth knowing</b>
+</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">gradientX</code> on a row aligned hexagonal grid divided by <code class="language-plaintext highlighter-rouge">dHex</code> where the neighbour distance is <code class="language-plaintext highlighter-rouge">sqrt(3)*dHex</code>, so hexagonal <code class="language-plaintext highlighter-rouge">curvature</code>, <code class="language-plaintext highlighter-rouge">calcGND</code> and the gradient based <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> were wrong by a factor 1.732 in one column of the tensor. Values on hexagonal maps change accordingly; square grids are unaffected.</li>
+<li>
+<code class="language-plaintext highlighter-rouge">gridify</code> of a rotated hexagonal map silently placed several measurements on the same cell and kept only the last - 5.2% of a titanium map rotated by 20 degree. It now places cells by their lattice index and keeps the measured positions exactly.</li>
+<li>
+<code class="language-plaintext highlighter-rouge">calcGrains(...,'removeQuadruplePoints')</code> merged the wrong boundary segments and destroyed real grain boundary - 0.21% of a forsterite map.</li>
+<li>
+<code class="language-plaintext highlighter-rouge">export_ang</code> of a square grid failed in the header with an unrecognized <code class="language-plaintext highlighter-rouge">dx</code>. It works again, and refuses a rotated grid, whose spacings the ang format cannot express.</li>
+<li>
+<code class="language-plaintext highlighter-rouge">interp(ebsd,x,y)</code> with row vectors returned an object whose <code class="language-plaintext highlighter-rouge">length</code> reported 1, and dropped query points when the source was a gridded map.</li>
+</ul>
+</div>
+<p>
 <b>Much Faster Plotting of EBSD Maps</b>
 </p>
 <p>Plotting EBSD and grain maps is now orders of magnitude faster. It supports multiple backends that allow for fast plotting of hexagonal or strongly deformed pixel layouts. The micronbar has been largely improved to include also a small pictogram of the reference system.</p>
@@ -159,16 +187,18 @@ grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
 {% highlight matlab %}
 ebsd = EBSD.load('data.h5')                  % no format guessing needed
 ebsd = EBSD.load('data.h5','dataSet',2)      % or 'dataSet','Area 2'
-ebsd = EBSD.load('data.h5oina','raw')        % not the post processed data
+ebsd = EBSD.load('data.h5oina','dataSet','EBSD') % not the post processed data
 ebsd = EBSD.load('data.h5','headerOnly')     % phases, header and data sets
 ebsd = EBSD.load('data.ctf','EulerCorrection',rotation.byEuler(pi,0,0))
 {% endhighlight %}
 <div>
 <ul>
 <li>a file holding several maps - EDAX areas, Oxford slices, EMSphInx scans - lists them on import and lets you pick one by <code class="language-plaintext highlighter-rouge">'dataSet'</code>, whose path is kept in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSet</code>. Previously only the first one was imported, without a word</li>
-<li>Oxford files store the map as recorded and as cleaned up by the vendor software - the cleaned up one is imported as before, the recorded one by the new option <code class="language-plaintext highlighter-rouge">'raw'</code>
+<li>Oxford files may store the map as recorded and as cleaned up by the vendor software - both are offered as data sets of that file, the cleaned up one is imported by default and the recorded one by <code class="language-plaintext highlighter-rouge">'dataSet','EBSD'</code>
 </li>
 <li>reference frame corrections are unified across <code class="language-plaintext highlighter-rouge">ang</code>, <code class="language-plaintext highlighter-rouge">ctf</code>, <code class="language-plaintext highlighter-rouge">crc</code> and <code class="language-plaintext highlighter-rouge">h5</code> files and stored in <code class="language-plaintext highlighter-rouge">ebsd.EulerCorrection</code>
+</li>
+<li>Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> files state the misalignment between the map and the Euler angle reference frame - AZtec shows the map in beam view but the orientations in camera view - as <code class="language-plaintext highlighter-rouge">Scanning Rotation Angle</code>. MTEX now reads it instead of assuming it, as it still has to for <code class="language-plaintext highlighter-rouge">ctf</code> and <code class="language-plaintext highlighter-rouge">crc</code>. Orientations imported from <code class="language-plaintext highlighter-rouge">h5oina</code> change by that angle, usually 180 degree, and now agree with the same map imported from a <code class="language-plaintext highlighter-rouge">ctf</code>
 </li>
 <li>the file header is kept in <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code> and readable by <code class="language-plaintext highlighter-rouge">'headerOnly'</code> without importing the data at all, the SEM / PRIAS images an EDAX map comes with in <code class="language-plaintext highlighter-rouge">ebsd.opt.electron_image</code>, as the Oxford electron images already were</li>
 <li>faster import, automatic column and degree/radiant detection</li>

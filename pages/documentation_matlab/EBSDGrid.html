@@ -25,7 +25,9 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>In this section we discuss specific operations that are available for EBSD data which are measured on a square or hexagonal grid.</p>
 <p>By default MTEX ignores any gridding in the data. The reason for this is that when restricting to some subset, e.g. to a certain phase, the data will not form a regular grid anyway. For that reason, almost all functions in MTEX are implemented to work for arbitrarily aligned data.</p>
-<p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a>, <a href="EBSDGradient.html">gradient computation</a> and <a href="EBSDDenoising.html">denoising</a>. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>.</p>
+<p>On the other hand, there are certain functions that are only available or much faster for gridded data. Those functions include <a href="EBSDPlotting.html">plotting</a> and <a href="EBSDDenoising.html">denoising</a>, and gridded data can be handed to image processing and registration tools directly, as a matrix. The key command to make MTEX aware of EBSD data on a hexagonal or square grid is <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>.</p>
+<p>
+<a href="EBSDGradient.html">Gradient computation</a> used to be on that list and is not any more: it, and everything built on it, is computed on the virtual lattice that <a href="EBSD.lattice.html"><code class="language-plaintext highlighter-rouge">lattice</code></a> derives from the unit cell, so it works on arbitrarily aligned data like almost everything else.</p>
 <p>In order to explain the corresponding concept in more detail lets import some sample data.</p>
 {% highlight matlab %}
 mtexdata twins
@@ -139,7 +141,7 @@ plot(ebsdMg(50:100,5:100),ebsdMg(50:100,5:100).orientations)
 {% include inline_image.html file="EBSDGrid_02.png" %}
 </center>
 <h2 id="8">The Gradient</h2>
-<p>Data on a square or hexagonal grid has the additional advantage to allow the computation of the orientations gradient, the incomplete Nye tensor, as well the weighted Burgers vector.</p>
+<p>The orientation gradient, the incomplete Nye tensor and the weighted Burgers vector are computed on the virtual lattice and therefore do not require a grid - <code class="language-plaintext highlighter-rouge">EBSD(ebsdMg).gradientX</code> gives the same answer as the gridded form below. A grid does not hurt either, so we simply continue with the map we already have.</p>
 {% highlight matlab %}
 gradX = ebsdMg.gradientX;
 
@@ -168,7 +170,7 @@ ebsd = EBSDhex (y↑→x)
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
- X x Y x Z : [0, 593] x [0, 585] x [0, 0]
+ X x Y x Z : [0, 592] x [0, 585] x [0, 0]
  Normal vector: (0,0,1)
  Hex grid     :136 x 119
 {% endhighlight %}
@@ -201,8 +203,8 @@ plot(ebsdS, ebsdS.orientations)
 ebsdS = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   139 (0.98%)  notIndexed          none                                   
-     0   14021 (99%)      Copper  LightSkyBlue       432                         
+    -1   137 (0.97%)  notIndexed          none                                   
+     0   14023 (99%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
@@ -231,8 +233,8 @@ hold off
 ebsdS = EBSDsquare (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1310 (0.38%)  notIndexed          none                                   
-     0  346774 (100%)      Copper  LightSkyBlue       432                         
+    -1   1311 (0.38%)  notIndexed          none                                   
+     0  346773 (100%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
@@ -258,8 +260,8 @@ hold off
 ebsdS1 = EBSDsquare (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1310 (0.38%)  notIndexed          none                                   
-     0  346774 (100%)      Copper  LightSkyBlue       432                         
+    -1   1311 (0.38%)  notIndexed          none                                   
+     0  346773 (100%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
@@ -284,16 +286,17 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdS2 = EBSD (y↑→x)
+ebsdS2 = EBSDsquare (y↑→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1   1310 (0.38%)  notIndexed          none                                   
-     0  346774 (100%)      Copper  LightSkyBlue       432                         
+    -1   1311 (0.38%)  notIndexed          none                                   
+     0  346773 (100%)      Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId, quality
  Scan unit : um
  X x Y x Z : [0, 593] x [0, 585] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :586 x 594
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_09.png" %}
@@ -312,13 +315,13 @@ plot(ebsdG,ebsdG.orientations)
 ebsdG = EBSDhex (y↓→x)
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0   15302 (58%)   Copper  LightSkyBlue       432                         
+     0  16116 (100%)   Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
- X x Y x Z : [-198, 555] x [0, 753] x [0, 0]
+ X x Y x Z : [-198, 555] x [0, 752] x [0, 0]
  Normal vector: (0,0,1)
- Hex grid     :151 x 175
+ Hex grid     :136 x 119
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_10.png" %}
@@ -334,13 +337,13 @@ plot(ebsdGF,ebsdGF.orientations)
 ebsdGF = EBSDhex (y↓→x)
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     0   16210 (61%)   Copper  LightSkyBlue       432                         
+     0  16116 (100%)   Copper  LightSkyBlue       432                         
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, grainId, oldId
  Scan unit : um
- X x Y x Z : [-198, 555] x [0, 753] x [0, 0]
+ X x Y x Z : [-198, 555] x [0, 752] x [0, 0]
  Normal vector: (0,0,1)
- Hex grid     :151 x 175
+ Hex grid     :136 x 119
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_11.png" %}
