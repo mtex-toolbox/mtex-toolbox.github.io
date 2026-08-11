@@ -1,0 +1,406 @@
+---
+title: "TrueEBSD distortion correction on a WC-Co composite"
+
+sidebar: examples_sidebar
+permalink: example_WCCo.html
+folder: examples
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+      This HTML was auto-generated from MATLAB code.
+      To make changes, update the MATLAB code and republish this document.
+    -->
+<title>TrueEBSD distortion correction on a WC-Co composite</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_example_WCCo.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/trueEbsd/example_WCCo.m">
+    edit page</a>
+    author: Ulrich Faul, MIT
+</font>
+<div>
+<!--introduction-->
+<p>Authors: Vivian Tong; Stefan Olovsj&ouml;, Seco Tools AB, R&amp;D Materials and Technology, 737 82 Fagersta, Sweden. Contact: <a href="mailto:vivian.tong@extern.tu-freiberg.de">vivian.tong@extern.tu-freiberg.de</a>
+</p>
+<p>TrueEBSD spatially aligns an EBSD map and SEM images of the same sample area, correcting the distortions between them so that every pixel overlays. The method is described in Tong et al., <a href="http://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>.</p>
+<p>This script needs the TrueEBSD toolbox, which is <b>not</b> part of MTEX and is distributed separately under Apache-2.0:</p>
+{% highlight matlab %}
+<https://github.com/vtvivian/mtex-trueebsd>
+{% endhighlight %}
+
+{% highlight matlab %}
+addpath(genpath('<path to mtex-trueEbsd>'))
+{% endhighlight %}
+<p>Use the <code class="language-plaintext highlighter-rouge">mtex7-compat</code> branch with MTEX 7. Beyond MTEX it requires MATLAB R2024a or newer and the Image Processing, Curve Fitting, and Statistics and Machine Learning toolboxes. Runtime is minutes, not seconds.</p>
+<!--/introduction-->
+<h2 id="1">Data Import</h2>
+<p>Begin by loading an EBSD map together with the list of images we want to use alongside it. This dataset is an EBSD map of a WC-Co composite acquired at 20 kV accelerating voltage, plus four SEM images of the same sample area stored in <code class="language-plaintext highlighter-rouge">ebsd.opt.trueEbsdImgs</code>:</p>
+<div>
+<ol>
+<li>Band contrast (<code class="language-plaintext highlighter-rouge">ebsd.bc</code>) is used as the image for the EBSD map.</li>
+</ol>
+</div>
+<div>
+<ol>
+<li>
+<code class="language-plaintext highlighter-rouge">fsdB3</code> is a colour image from the three FSD detectors mounted at the bottom of the EBSD camera, with the camera retracted by 20 mm relative to the EBSD map acquisition position;</li>
+</ol>
+</div>
+<div>
+<ol>
+<li>
+<code class="language-plaintext highlighter-rouge">fsdT3</code> is a greyscale image from the same beam scan as <code class="language-plaintext highlighter-rouge">fsdB3</code>, from the FSD detectors at the top of the EBSD camera;</li>
+</ol>
+</div>
+<div>
+<ol>
+<li>
+<code class="language-plaintext highlighter-rouge">fsdT1</code> is a greyscale image from the FSD detectors at the top of the EBSD camera, at the EBSD map acquisition position;</li>
+</ol>
+</div>
+<div>
+<ol>
+<li>
+<code class="language-plaintext highlighter-rouge">fsdT10</code> is a greyscale image from the FSD detectors at the top of the EBSD camera, in EBSD map acquisition position, with the electron beam accelerating voltage lowered to 10 kV.</li>
+</ol>
+</div>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">ebsd.opt.trueEbsdImgs.pixSzImg</code> is the image pixel size in microns, the same for all four images.</li>
+</ul>
+</div>
+{% highlight matlab %}
+mtexdata trueEbsdWCCo
+
+display(ebsd)
+display(ebsd.opt.trueEbsdImgs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSDsquare (x←↓y)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0  6657 (0.85%)  notIndexed          none                                   
+     1  714592 (91%)         W C  LightSkyBlue      -6m2        X||a*, Y||b, Z||c
+     2    62791 (8%)      Co-fcc  DarkSeaGreen      m-3m                         
+     3   2392 (0.3%)      Co-hcp     Goldenrod     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: bc, bs, bands, MAD, quality, oldId
+ Scan unit : um
+ X x Y x Z : [0, 41] x [0, 30] x [0, 0]
+ Normal vector: (0,0,1)
+ Square grid  :768 x 1024
+ 
+ 
+ebsd = EBSDsquare (x←↓y)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0  6657 (0.85%)  notIndexed          none                                   
+     1  714592 (91%)         W C  LightSkyBlue      -6m2        X||a*, Y||b, Z||c
+     2    62791 (8%)      Co-fcc  DarkSeaGreen      m-3m                         
+     3   2392 (0.3%)      Co-hcp     Goldenrod     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: bc, bs, bands, MAD, quality, oldId
+ Scan unit : um
+ X x Y x Z : [0, 41] x [0, 30] x [0, 0]
+ Normal vector: (0,0,1)
+ Square grid  :768 x 1024
+ 
+  struct with fields:
+
+       fsdB3: [1536×2048×3 double]
+       fsdT3: [1536×2048 double]
+       fsdT1: [1536×2048 double]
+      fsdT10: [1536×2048 double]
+    pixSzImg: 0.0199
+{% endhighlight %}
+<h2 id="2">Set up the TrueEBSD job</h2>
+<p>A <a href="distortedImg.distortedImg.html">distortedImg</a> holds one image or EBSD map, its pixel size, its plotting convention, and the name of the distortion separating it from the <b>next</b> entry in the sequence. The sequence runs from most distorted to ground truth, and the reference image carries <code class="language-plaintext highlighter-rouge">'true'</code>.</p>
+{% highlight matlab %}
+% some simple image denoising first
+img = ebsd.opt.trueEbsdImgs;
+img.fsdB3  = rescale(imboxfilt(img.fsdB3,3));
+img.fsdT3  = rescale(imboxfilt(img.fsdT3,3));
+img.fsdT1  = rescale(imboxfilt(img.fsdT1,3));
+img.fsdT10 = rescale(imboxfilt(img.fsdT10,3));
+
+imgList = createArray(5,1,'distortedImg');
+imgList(1) = distortedImg('bc','shift-drift', ebsd, 'how2plot', ebsd.how2plot, ...
+  'highContrast',1, 'edgePadWidth',3);
+imgList(2) = distortedImg(img.fsdB3, 'true',  'dxy', img.pixSzImg, 'highContrast',1, 'edgePadWidth',5);
+imgList(3) = distortedImg(img.fsdT3, 'shift', 'dxy', img.pixSzImg, 'highContrast',1, 'edgePadWidth',5);
+imgList(4) = distortedImg(img.fsdT1, 'tilt',  'dxy', img.pixSzImg, 'highContrast',1, 'edgePadWidth',5);
+imgList(5) = distortedImg(img.fsdT10,'true',  'dxy', img.pixSzImg, 'highContrast',1, 'edgePadWidth',3);
+{% endhighlight %}
+<p>The job is a <a href="trueEbsd.trueEbsd.html">trueEbsd</a> object built from that one sequence. It is a <b>value</b> class, so every workflow method returns the job and must be reassigned.</p>
+{% highlight matlab %}
+job = trueEbsd(imgList)
+{% endhighlight %}
+
+{% highlight plaintext %}
+job = 
+  trueEbsd with properties:
+
+            imgList: [5×1 distortedImg]
+        resizedList: [0×0 distortedImg]
+    undistortedList: [0×0 distortedImg]
+             shifts: [0×0 pairShifts]
+           fitError: [0×0 pairShifts]
+{% endhighlight %}
+<p>Plot the as-imported sequence to check that the maps cover similar regions of the sample. Note how different the image contrasts look &mdash; this is why registration is done on edge transforms rather than raw values.</p>
+{% highlight matlab %}
+plotImgList(imgList,'TrueEBSD starting image sequence')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="example_WCCo_01.png" %}
+</center>
+<h2 id="5">Resize images to match pixel size and field of view</h2>
+<p>The EBSD map and the images cover the same sample area but have different pixel sizes. <code class="language-plaintext highlighter-rouge">pixelSizeMatch</code> resamples everything onto one common grid, so that pixel (i,j) means roughly the same place in each. Images are resampled by linear interpolation; EBSD data by nearest neighbour, because orientations and phase labels have no meaningful in-between.</p>
+<p>This is bookkeeping only &mdash; no distortion has been corrected yet.</p>
+{% highlight matlab %}
+pixSzIn = 0; % target pixel length in microns, or 0 for the smallest present
+job = pixelSizeMatch(job,pixSzIn);
+{% endhighlight %}
+
+{% highlight plaintext %}
+using default pixel size of 0.019875 um, minimum from imgList
+{% endhighlight %}
+<p>The job now has a new property <code class="language-plaintext highlighter-rouge">job.resizedList</code> holding the output.</p>
+{% highlight matlab %}
+display(job)
+{% endhighlight %}
+
+{% highlight plaintext %}
+job = 
+  trueEbsd with properties:
+
+            imgList: [5×1 distortedImg]
+        resizedList: [5×1 distortedImg]
+    undistortedList: [0×0 distortedImg]
+             shifts: [0×0 pairShifts]
+           fitError: [0×0 pairShifts]
+{% endhighlight %}
+<h2 id="7">[Optional] Change the cross-correlation ROI settings</h2>
+<p>TrueEBSD registration cross-correlates pairs of regions of interest (ROI) between sequential images. ROI size and spacing are the tunable parameters, held in <code class="language-plaintext highlighter-rouge">job.resizedList(n).setXCF(m)</code> &mdash; one entry per distortion-model stage of that hop.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">pixelSizeMatch</code> guesses values that are usually sensible for a polycrystal EBSD map, so most users never touch this. If you do, note the settings are in <b>pixels</b>, so they must be written after <code class="language-plaintext highlighter-rouge">pixelSizeMatch</code> (which creates the grid) and before <code class="language-plaintext highlighter-rouge">calcShifts</code>. A good rule of thumb is an ROI at least four times wider than the local shifts you expect, and it must be a power of two for the cross-correlation to work properly.</p>
+<p>Here we deliberately misjudge and choose an ROI box that is far too small for the EBSD map drift correction, to demonstrate the automatic retry below.</p>
+{% highlight matlab %}
+customSetXCF1.ROISize = 2^round(log2(32));   % deliberately too small
+customSetXCF1.NumROI = struct;
+customSetXCF1.NumROI.x = 40;                 % rule of thumb: as many ROI as grains across
+customSetXCF1.NumROI.y = round(customSetXCF1.NumROI.x * ...
+  size(job.resizedList(1).img,1)/size(job.resizedList(1).img,2)); % follow the aspect ratio
+customSetXCF1.xcfImg = 'edge';               % correlate edge transforms, or 'img' for raw values
+
+customSetXCF2 = customSetXCF1;
+customSetXCF2.ROISize = 2^round(log2(128));
+
+% assign a whole settings struct
+job.resizedList(1).setXCF(2) = customSetXCF1;
+job.resizedList(3).setXCF(1) = customSetXCF2;
+
+% or overwrite individual properties
+job.resizedList(1).setXCF(1).ROISize = 2^round(log2(64));
+job.resizedList(3).setXCF(1).xcfImg = 'img';
+job.resizedList(4).setXCF(1).xcfImg = 'img';
+job.resizedList(5).setXCF(1).xcfImg = 'img';
+{% endhighlight %}
+<h2 id="8">Calculate local image shifts and fit a distortion model</h2>
+<p>These are the images that will actually be cross-correlated &mdash; the edge transform where <code class="language-plaintext highlighter-rouge">xcfImg</code> is <code class="language-plaintext highlighter-rouge">'edge'</code>, the raw values where it is <code class="language-plaintext highlighter-rouge">'img'</code>. Edge transforms are what make an EBSD band contrast map comparable to a backscatter image at all.</p>
+{% highlight matlab %}
+plotImgList(job.resizedList,'TrueEBSD image sequence for cross-correlation','xcf')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="example_WCCo_02.png" %}
+</center>
+<p>Now compute the local ROI shifts and fit them to the distortion model named on each hop. After each correction step the average ROI shifts (X, Y and length components) are printed to the command window.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'fitErr'</code> flag means residual local shifts are re-measured after correction, but not included in the result. If that residual is small &mdash; around one pixel or less &mdash; the registration most likely succeeded.</p>
+<p>We just set the ROI box too small for the EBSD map drift correction, so its average residual shift comes out greater than 2 pixels. <code class="language-plaintext highlighter-rouge">calcShifts</code> responds by doubling the ROI size and retrying, and keeps doing so until either the residual drops below 2 pixels or the ROI outgrows the image.</p>
+<p>The exception is a hop named <code class="language-plaintext highlighter-rouge">'true'</code>, such as images 2 and 3 here, where nothing separates the pair. TrueEBSD takes those shifts to be identically zero and ignores the residual even when it is large.</p>
+{% highlight matlab %}
+job = calcShifts(job,'fitErr');
+{% endhighlight %}
+
+{% highlight plaintext %}
+Calculating shifts between images 2 and 1 (shift-drift):
+Mean X-shift length 6.374 pixels
+Mean Y-shift length 8.5246 pixels
+Mean shift length 11.5278 pixels
+Mean X-shift length 3.1467 pixels
+Mean Y-shift length 3.7191 pixels
+Mean shift length 5.4596 pixels
+Residual shifts / pixels between images 2 and 1 (shift-drift)
+Mean X-shift length 2.944 pixels
+Mean Y-shift length 3.41 pixels
+Mean shift length 5.0435 pixels
+Residual shifts length was greater than 2 pixels between images 2 and 1 (shift-drift)
+Retrying calculation with double ROI size of 128 pixels for distortionModel 1...
+Retrying calculation with double ROI size of 64 pixels for distortionModel 2...
+
+Calculating shifts between images 2 and 1 (shift-drift):
+Mean X-shift length 6.1185 pixels
+Mean Y-shift length 11.8495 pixels
+Mean shift length 14.0925 pixels
+Mean X-shift length 2.0455 pixels
+Mean Y-shift length 4.9828 pixels
+Mean shift length 5.8093 pixels
+Residual shifts / pixels between images 2 and 1 (shift-drift)
+Mean X-shift length 1.9471 pixels
+Mean Y-shift length 3.0307 pixels
+Mean shift length 3.9766 pixels
+Residual shifts length was greater than 2 pixels between images 2 and 1 (shift-drift)
+Retrying calculation with double ROI size of 256 pixels for distortionModel 1...
+Retrying calculation with double ROI size of 128 pixels for distortionModel 2...
+
+Calculating shifts between images 2 and 1 (shift-drift):
+Mean X-shift length 5.9026 pixels
+Mean Y-shift length 11.5699 pixels
+Mean shift length 13.6439 pixels
+Mean X-shift length 0.93262 pixels
+Mean Y-shift length 5.1253 pixels
+Mean shift length 5.3361 pixels
+Residual shifts / pixels between images 2 and 1 (shift-drift)
+Mean X-shift length 0.74579 pixels
+Mean Y-shift length 1.61 pixels
+Mean shift length 1.927 pixels
+
+Calculating shifts between images 3 and 2 (true):
+Mean X-shift length 0 pixels
+Mean Y-shift length 0 pixels
+Mean shift length 0 pixels
+Residual shifts / pixels between images 3 and 2 (true)
+Mean X-shift length 0.38823 pixels
+Mean Y-shift length 1.9905 pixels
+Mean shift length 2.0487 pixels
+
+Calculating shifts between images 4 and 3 (shift):
+Mean X-shift length 10.6057 pixels
+Mean Y-shift length 6.7925 pixels
+Mean shift length 12.6342 pixels
+Residual shifts / pixels between images 4 and 3 (shift)
+Mean X-shift length 0.54457 pixels
+Mean Y-shift length 0.63192 pixels
+Mean shift length 0.94546 pixels
+
+Calculating shifts between images 5 and 4 (tilt):
+Mean X-shift length 11.4223 pixels
+Mean Y-shift length 8.7061 pixels
+Mean shift length 14.4863 pixels
+Mean X-shift length 0.29411 pixels
+Mean Y-shift length 0.22396 pixels
+Mean shift length 0.40039 pixels
+Mean X-shift length 0.20574 pixels
+Mean Y-shift length 0.22123 pixels
+Mean shift length 0.32591 pixels
+Residual shifts / pixels between images 5 and 4 (tilt)
+Mean X-shift length 0.20068 pixels
+Mean Y-shift length 0.16554 pixels
+Mean shift length 0.28427 pixels
+{% endhighlight %}
+<center>
+{% include inline_image.html file="example_WCCo_03.png" %}
+</center>
+<p>The job now has <code class="language-plaintext highlighter-rouge">job.shifts</code> &mdash; a cell array, one entry per hop, each holding one <a href="pairShifts.pairShifts.html">pairShifts</a> per distortion-model stage &mdash; and <code class="language-plaintext highlighter-rouge">job.fitError</code>, the residuals measured after correction.</p>
+{% highlight matlab %}
+display(job)
+{% endhighlight %}
+
+{% highlight plaintext %}
+job = 
+  trueEbsd with properties:
+
+            imgList: [5×1 distortedImg]
+        resizedList: [5×1 distortedImg]
+    undistortedList: [0×0 distortedImg]
+             shifts: {1×4 cell}
+           fitError: [4×1 pairShifts]
+{% endhighlight %}
+<h2 id="11">Undistort</h2>
+<p>This accumulates the shifts in reverse &mdash; the first map receives every hop's shift, the reference none &mdash; and resamples with nearest-neighbour interpolation, so no orientation or phase label is ever invented by averaging two real ones. The result is <code class="language-plaintext highlighter-rouge">job.undistortedList</code>, in which every pixel of every map can be directly overlaid.</p>
+{% highlight matlab %}
+job = undistort(job);
+
+display(job)
+
+plotImgList(job.undistortedList,'TrueEBSD image sequence after alignment')
+{% endhighlight %}
+
+{% highlight plaintext %}
+job = 
+  trueEbsd with properties:
+
+            imgList: [5×1 distortedImg]
+        resizedList: [5×1 distortedImg]
+    undistortedList: [5×1 distortedImg]
+             shifts: {1×4 cell}
+           fitError: [4×1 pairShifts]
+{% endhighlight %}
+<center>
+{% include inline_image.html file="example_WCCo_04.png" %}
+</center>
+<h2 id="12">Plot the aligned data as MTEX EBSD maps</h2>
+<p>Plotting the images back onto the EBSD map is a good check that nothing is indexed upside down relative to the map. Images are stored and read by MATLAB in the <code class="language-plaintext highlighter-rouge">axis ij</code> convention, whereas an EBSD map carries whatever convention <code class="language-plaintext highlighter-rouge">ebsd.how2plot</code> says, so <code class="language-plaintext highlighter-rouge">ij2EbsdSquare</code> is needed to rotate the image data into the map's plotting convention.</p>
+<p>Note <code class="language-plaintext highlighter-rouge">fsdB3</code> is a three-channel colour image, and TrueEBSD carries all its channels through the workflow. Plotting values onto an EBSD map needs one value per pixel, so multi-channel images are averaged down to one channel here.</p>
+{% highlight matlab %}
+ebsdOut = job.undistortedList(1).ebsd;
+
+figure
+nextAxis
+plot(ebsdOut('W C'), ebsdOut('W C').orientations, ebsdOut.how2plot, 'coordinates','on')
+title('Undistorted MTEX EBSD map (WC IPF out of screen)','Color','k')
+
+for n = 1:numel(job.undistortedList)
+
+  im = job.undistortedList(n).img;
+  if size(im,3) > 1, im = mean(im,3); end
+
+  nextAxis
+  plot(ebsdOut, ij2EbsdSquare(ebsdOut,im), ebsdOut.how2plot, 'coordinates','on')
+  mtexColorMap gray
+  title(['Undistorted MTEX image ' num2str(n)],'Color','k')
+end
+{% endhighlight %}
+<center>
+{% include inline_image.html file="example_WCCo_05.png" %}
+</center>
+<h2 id="13">Finish</h2>
+<p>That is the end of the distortion correction workflow. Every image and the EBSD map now overlay pixel for pixel, and <code class="language-plaintext highlighter-rouge">ebsdOut</code> is an ordinary MTEX EBSD map &mdash; anything you would normally do with one works from here, including using an aligned image as a per-pixel property or as a phase.</p>
+<p>For this dataset the intended follow-on is measuring the contiguity of the WC grains.</p>
+<h2 id="14">Helper</h2>
+<p>Tile a distortedImg sequence, plotted in microns on a shared axis.</p>
+{% highlight matlab %}
+function plotImgList(list,ttl,which)
+
+if nargin < 3, which = 'img'; end
+
+figure('WindowState','maximized');
+t = tiledlayout('flow','TileSpacing','tight','Padding','tight');
+title(t,ttl);
+
+for n = 1:numel(list)
+
+  if strcmp(which,'xcf')
+    cData = list(n).(list(n).setXCF(1).xcfImg);
+  else
+    cData = list(n).img;
+  end
+
+  nexttile
+  imagesc('XData',list(n).dx .* (1:size(list(n).img,2)),...
+    'YData',list(n).dy .* (1:size(list(n).img,1)),...
+    'CData',cData);
+  colormap gray; axis image on ij
+end
+linkaxes
+
+end
+{% endhighlight %}
+</div>
+</body>
+</html>

@@ -57,7 +57,7 @@ grains(grains.numPixel < grains.boundarySize / 2) = [];
 plot(ebsd,ebsd.orientations)
 
 hold on
-plot(grains.boundary)
+plot(grains.boundary,'LineWidth',1.5)
 hold off
 {% endhighlight %}
 <center>
@@ -81,7 +81,7 @@ clear Psi
 {% include inline_image.html file="ExIceSphericity_02.png" %}
 </center>
 <h2 id="5">Influence of EBSD step size on sphericity parameter</h2>
-<p>Next we investigate how step size influences grain boundary irregularity measurements. To do this, we can artificially increase the step size of the EBSD data to from 10 up to 100 μm. Then, we choose one representative grain (one with a large number of pixels) and see how the sphericity parameter changes as the EBSD step size increases.</p>
+<p>Next we investigate how step size influences grain boundary irregularity measurements. To do this, we can artificially increase the step size of the EBSD data from 5 up to 100 μm. Then, we choose one representative grain (one with a large number of pixels) and see how the sphericity parameter changes as the EBSD step size increases.</p>
 {% highlight matlab %}
 newMtexFigure('layout',[4,5])
 for i = 1:20
@@ -90,11 +90,11 @@ for i = 1:20
   ebsd_reduced = reduce(ebsd,i);
 
   % reconstruct grains using function calcGrains
-  grains_reduced = calcGrains(ebsd_reduced('ice'));
+  grains_reduced = calcGrains(ebsd_reduced,'minPixel',5);
 
   % choose a grain with a large pixel number within the EBSD map with 5
   % micron step size, from each reduced EBSD map by location
-  grain = grains_reduced(findByLocation(grains_reduced('ice'), [1357 1952]));
+  grain = grains_reduced(findByLocation(grains_reduced, [1357 1952]));
 
   % calculate the sphericity parameter
   Psi(i) = grain.area ./ (grain.perimeter('withInclusion') .* grain.equivalentRadius);
@@ -172,185 +172,149 @@ mtexColorMap jet
 
 {% highlight plaintext %}
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth. 
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
 Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally
-removes the pixel staircase before smoothing it.
-You are getting the old behaviour - see the help
-of grain2d/smooth.
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ExIceSphericity_05.png" %}

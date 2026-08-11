@@ -1,5 +1,5 @@
 ---
-title: Generate synthetic EBSD data and calculate dislocation density for olivine
+title: "Generate synthetic EBSD data and calculate dislocation density for olivine"
 
 sidebar: examples_sidebar
 permalink: SynEBSD.html
@@ -60,7 +60,7 @@ ebsd = EBSD(pos,rot,ones(numel(rot),1),CSa,struct);
 segang = 10*degree; % define angle to identify grains
 subang = 1*degree; % angle for sub boundaries (V5.5)
 
-[grains,ebsd.grainId,ebsd.mis2mean] = calcGrains(ebsd,'threshold',[subang segang],'unitCell');
+[grains,ebsd] = calcGrains(ebsd,'threshold',[subang segang],'unitCell');
 
 % Plot orientation gradient and show crystal axes
 % Color mean orientation as white and scale maximum saturation to fit the maximum misorientation angle
@@ -92,7 +92,7 @@ hold off
 {% include inline_image.html file="SynEBSD_01.png" %}
 </center>
 <h2 id="2">Define dislocation types for olivine with 3 orthogonal Burgers vectors</h2>
-<p>Lengths of Burgers vectors are set in mtexversion/geometry/&lt;dislocationSystem.dislocationSystem.html dislocationSystem&gt;/dislocationSystem.m For (primitive) orthorhombic lattices length of Burgers vectors = unit cell dimension. Originally the length of screw dislocations is set to 0.5* unit cell dimension on line 59 (v. 5.11) in dislocationSystem.m. This needs to be changed to 1 * unit cell.</p>
+<p>For lattices other than cubic and hexagonal MTEX takes the Burgers vector length of a screw dislocation to be the full unit cell dimension, and warns that it could not determine it automatically. For the primitive orthorhombic cell of olivine that default is the value we want - the lengths come out as a, b and c - so the warning can be ignored here.</p>
 {% highlight matlab %}
 % Define edge dislocations
 sSo1 = slipSystem(Miller(1,0,0,CS,'uvw'),Miller(0,1,0,CS,'hkl'));
@@ -121,10 +121,10 @@ dSo
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: I could not determine the correct length of the
-Burgers vector. Please adjust it manually. 
-Warning: I could not determine the correct length of the
-Burgers vector. Please adjust it manually. 
+Warning: I could not determine the correct length of
+the Burgers vector. Please adjust it manually. 
+Warning: I could not determine the correct length of
+the Burgers vector. Please adjust it manually. 
  
 dSo = dislocationSystem
  mineral: Forsterite (mmm)
@@ -182,10 +182,11 @@ rhoSlip = round([dSlip(1:4), dSlip(9), dSlip(7), dSlip(5:6), dSlip(8)],3,'signif
 rhoAll =
    3.9366e+12
 rhoSlip =
-  Columns 1 through 6
-     3.79e+12     0.000332            0            0     4.78e-05     6.83e-05
-  Columns 7 through 9
-     1.49e+11     1.45e-05     2.48e-05
+   1.0e+12 *
+  Columns 1 through 7
+    3.7900    0.0000         0         0    0.0000    0.0000    0.1490
+  Columns 8 through 9
+    0.0000    0.0000
 {% endhighlight %}
 <h2 id="4">Plot map of dislocation density</h2>
 <p>supersizeme is an optional function that scales the font sizes of all text elements in a figure. It can be downloaded from <a href="https://www.mathworks.com/matlabcentral/fileexchange/67644-supersizeme-varargin-">https://www.mathworks.com/matlabcentral/fileexchange/67644-supersizeme-varargin-</a> increasing the fontsize is useful for presentations and publications</p>
