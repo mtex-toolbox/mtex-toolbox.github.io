@@ -1,5 +1,5 @@
 ---
-title: Convert Time of Flight Neutron Data into Pole Figures
+title: "Convert Time of Flight Neutron Data into Pole Figures"
 
 sidebar: examples_sidebar
 permalink: TOF2PoleFigure.html
@@ -20,12 +20,15 @@ toc: false
 <body>
 <font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/ExODFReconstruction/TOF2PoleFigure.m">
     edit page</a>
-    author: </font>
+    author: Sheng Fan, Department of Geology, University of Otago, Dunedin, New Zealand
+</font>
 <div>
 <!--introduction-->
-<p>This example demonstrates how to convert SKAT time of flight neutron intensities into pole figure intensities</p>
+<p>This example demonstrates how to convert SKAT time of flight neutron intensities into pole figure intensities.</p>
+<p>In a time of flight experiment every detector records a full diffraction spectrum at once, with each Bragg reflection appearing as a peak at its own flight time. A pole figure is obtained by integrating one peak over all specimen directions, so the work is: read the spectra, subtract the background, integrate each peak, and hand the resulting intensities to <a href="PoleFigure.PoleFigure.html"><code class="language-plaintext highlighter-rouge">PoleFigure</code></a> together with the specimen directions they were measured in.</p>
 <!--/introduction-->
 <h2 id="1">Step 1: Import and Analyze the Spectra</h2>
+<p>The SKAT goniometer carries 19 detectors spread over polar angles from 0 to 90 degrees, and turns the specimen into 72 azimuthal positions, giving 19 x 72 spectra per measurement cycle. <code class="language-plaintext highlighter-rouge">loadallspectra</code> reads all of them from one directory, and <code class="language-plaintext highlighter-rouge">calc_background</code> estimates the background that sits underneath the peaks.</p>
 {% highlight matlab %}
 % import all spectra
 spec = loadallspectra(fullfile(mtexExamplePath,'ExODFReconstruction','Knie_10','Knie_10'));
@@ -33,31 +36,35 @@ spec = loadallspectra(fullfile(mtexExamplePath,'ExODFReconstruction','Knie_10','
 % compute background
 bg = calc_background(spec);
 
-% plot
-plot_spectra(spec,bg)
+% plot the first spectrum together with its background. Drop the
+% |noInteraction| flag to browse through all detectors and phi positions
+% with the arrow keys - that waits for key presses, so it cannot be used
+% while publishing this page.
+plot_spectra(spec,bg,'noInteraction')
 {% endhighlight %}
 
 {% highlight plaintext %}
 load detector: a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, .
 calculate background: .
-   27
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TOF2PoleFigure_01.png" %}
 </center>
 <h2 id="2">Step 2: Peak Detection and Integration</h2>
+<p>Each peak that is to become a pole figure needs an integration window, given below as a pair of time of flight channels. There are nine of them here, so nine pole figures come out at the end.</p>
+<p>Which reflection sits in which window is read from <code class="language-plaintext highlighter-rouge">quartz.txt</code>, a table of Miller indices and structure factors shipped with MTEX in <code class="language-plaintext highlighter-rouge">tools/dubna_tools</code>. <code class="language-plaintext highlighter-rouge">sfpos</code> maps rows of that table onto the nine windows. Several rows for one window mean several reflections overlap there and cannot be separated - the resulting pole figure is then a superposition, and the structure factors collected in <code class="language-plaintext highlighter-rouge">c</code> are the weights with which the individual reflections contribute to it.</p>
 {% highlight matlab %}
-%Range fits measure period in '2005'
-peakpos = [2520 1995 1480 1376 1354 1280 1206 1110];
-peakrange = [[2509      2550];...
-	[1981      2009];...
-	[1470      1500];...
-	[1366      1390];...
-	[1344      1366];...
-	[1280      1295];...
-	[1196      1211];...
-	[1103      1117];...
-  [1015      1030]];
+% Range fits measure period in '2005'. One row per peak, giving the
+% integration window in time of flight channels.
+peakrange = [2509 2550;...
+  1981 2009;...
+  1470 1500;...
+  1366 1390;...
+  1344 1366;...
+  1280 1295;...
+  1196 1211;...
+  1103 1117;...
+  1015 1030];
 
 % specify crystal and specimen symmetry
 CS = crystalSymmetry('-3m',[4.9,4.9,5.4]);
@@ -65,7 +72,8 @@ CS = crystalSymmetry('-3m',[4.9,4.9,5.4]);
 % file with structure factors for quartz
 sf = txt2mat('quartz.txt');
 
-%
+% which rows of the structure factor file belong to which peak - a cell
+% entry with several rows is a superposed reflection
 sfpos  = {1,[2 3],4,[5 6],7,8,[9,10],11,[13,14]};
 
 for k = 1:length(sfpos)
@@ -90,6 +98,7 @@ end
 ************
 {% endhighlight %}
 <h2 id="3">Step 3: Set up the Pole Figures</h2>
+<p>All nine pole figures were measured in the same specimen directions - the 19 detector rings times 72 rotations of the goniometer - so one grid is built once and shared by all of them. Then one <a href="PoleFigure.PoleFigure.html"><code class="language-plaintext highlighter-rouge">PoleFigure</code></a> per peak is assembled from that grid and the integrated intensities, and <code class="language-plaintext highlighter-rouge">pf.c</code> attaches the superposition weights collected above.</p>
 {% highlight matlab %}
 r = DubnaGrid(19);
 
@@ -103,7 +112,7 @@ end
 
 pf.c = c;
 
-%plot(rotate(pf,rotation('axis',xvector,'angle',90*degree)))
+%plot(rotate(pf,rotation.byAxisAngle(xvector,90*degree)))
 plot(pf)
 {% endhighlight %}
 <center>

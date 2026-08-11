@@ -1,5 +1,5 @@
 ---
-title: Parameter optimization for Parent Grain Reconstruction (PGR)
+title: "Parameter optimization for Parent Grain Reconstruction (PGR)"
 
 sidebar: examples_sidebar
 permalink: ParameterOptimization.html
@@ -72,10 +72,8 @@ for ii = 1:length(thrsh_angles)
   mtexdata martensite silent
 
   % Calculate grains with defined angular threshold
-  [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle',thrsh_angles(ii)*degree);
-  ebsd(grains(grains.grainSize < 3)) = [];
-  [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',thrsh_angles(ii)*degree);
-  grains = smooth(grains,5);
+  [grains,ebsd] = calcGrains(ebsd, 'angle',thrsh_angles(ii)*degree,'minPixel',3);
+    grains = smooth(grains,5);
 
   % Plot the orientation data and overlay the grain boundaries
   plot(ebsd,ebsd.orientations);
@@ -91,16 +89,26 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead 
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead 
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead 
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead 
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_02.png" %}
@@ -123,10 +131,8 @@ for ii = 1:length(thrsh_angles)
   mtexdata martensite silent
 
   % Calculate grains with defined angular threshold
-  [grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle',thrsh_angles(ii)*degree);
-  ebsd(grains(grains.grainSize < 3)) = [];
-  [grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',thrsh_angles(ii)*degree);
-  grains = smooth(grains,5);
+  [grains,ebsd] = calcGrains(ebsd, 'angle',thrsh_angles(ii)*degree,'minPixel',3);
+    grains = smooth(grains,5);
 
   % set up the PGR job
   job = parentGrainReconstructor(ebsd,grains);
@@ -157,18 +163,21 @@ end
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead 
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead 
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_03.png" %}
-</center>
-<center>
-{% include inline_image.html file="ParameterOptimization_04.png" %}
 </center>
 <p>The effect of child grain reconstruction appears to be quite prominent - the smaller the reconstruction threshold angle the more of the parent grain microstructure is confidently reconstructed. In martensitic steels the misorientation between the different variants is oftentimes quite low which means that grain reconstruction with too large threshold values merges grains that belong to different variants and thereby complicate the PGR. For this example, 2&deg; seems to be the optimum, so we will move forward with that parameter.</p>
 <h2 id="8">Optimizing the orientation relationship (OR)</h2>
@@ -178,9 +187,7 @@ grains.numPixel instead
 mtexdata martensite silent
 
 % Calculate grains with defined angular threshold
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'), 'angle',2*degree);
-ebsd(grains(grains.grainSize < 3)) = [];
-[grains,ebsd.grainId] = calcGrains(ebsd('indexed'),'angle',2*degree);
+[grains,ebsd] = calcGrains(ebsd('indexed'), 'angle',2*degree,'minPixel',3);
 grains = smooth(grains,5);
 
 % Initialize the parent grain reconstructor class
@@ -250,14 +257,16 @@ legend(ORnames);
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: grains.grainSize is depreciated. Please use
-grains.numPixel instead
+Warning: grains.smooth has been renamed to
+grains.smoothBoundary, which additionally removes the
+pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth.
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_05.png" %}
+{% include inline_image.html file="ParameterOptimization_04.png" %}
 </center>
 <center>
-{% include inline_image.html file="ParameterOptimization_06.png" %}
+{% include inline_image.html file="ParameterOptimization_05.png" %}
 </center>
 <p>The histogram plot shows that OR refinement yields an OR that is far more representative of the actual OR present in the microstructure. The Greninger-Trojano (GT) OR is closest to the fitted OR. Plotting the fit of the OR onto the grain boundaries showed that the fitted OR nicely outlines the grain boundaries of the parent grains, which is an important prerequisite for successful PGR.</p>
 <h2 id="10">Tune parameters for OR refinement</h2>
@@ -320,18 +329,18 @@ xlim([0,10])
 legend(append("Thresh.: ",string(threshold),", Quantile: ",string(quantile)));
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_07.png" %}
+{% include inline_image.html file="ParameterOptimization_06.png" %}
 </center>
 <center>
-{% include inline_image.html file="ParameterOptimization_08.png" %}
+{% include inline_image.html file="ParameterOptimization_07.png" %}
 </center>
 <p>We only look at the 0&deg; - 10&deg; misfit range to better discern the effect of the different parameter sets. The parameter choice of the <code class="language-plaintext highlighter-rouge">calcParent2Child</code> command did not cause drastic changes in the fit of the optimal OR. Threshold values of 10&deg; gave a better fit than 5&deg;, and a quantile value of 0.9 may be slightly better than 0.8. The threshold angle of 10&deg; and the <code class="language-plaintext highlighter-rouge">quantile</code> of 0.9 are the default values of the <code class="language-plaintext highlighter-rouge">calcParent2Child</code> command. For your dataset, the quantile value should reflect the ratio between prior parent boundaries and OR-related boundaries. In the present case, prior austenite grains are large and filled with a very fine OR-related boundary structure within, meaning that the quantile value does not play a big role. If you have small prior parent grains with little internal OR-related boundary structure you should explore smaller quantile values.</p>
 <h2 id="12">Translating the OR misfit into a probability function</h2>
 <p>Next, we need to translate the misfit between the OR and the grain misorientations \(\omega\) into an OR probability function \(\Psi\):</p>
 <p>\begin{equation} \Psi(\omega) = 1 - \tfrac{1}{2}\left(1 + \mathrm{erf}(2 \tfrac{\omega - \delta}{\sigma})\right). \end{equation}</p>
-<p>where \(\delta\) is a threshold value and \(\sigma\) is a tolerance value. The function tends to 1 for grain misorientations that agree well with the OR and to 0 for child grain misorientations that disagree strongly with the OR. The function therefore describes the probability with which two grains belong to the same parent grain. Let us plot this probability function on top of the OR misift distribution from before for few different combinations of the parameters <code class="language-plaintext highlighter-rouge">tolerance</code> and <code class="language-plaintext highlighter-rouge">threshold</code>.</p>
+<p>where \(\delta\) is a threshold value and \(\sigma\) is a tolerance value. The function tends to 1 for grain misorientations that agree well with the OR and to 0 for child grain misorientations that disagree strongly with the OR. The function therefore describes the probability with which two grains belong to the same parent grain. Let us plot this probability function on top of the OR misfit distribution from before for a few different combinations of the parameters <code class="language-plaintext highlighter-rouge">tolerance</code> and <code class="language-plaintext highlighter-rouge">threshold</code>.</p>
 {% highlight matlab %}
-% Let u assume an OR and iteratively refine it.
+% Let us assume an OR and iteratively refine it.
 job.p2c = KS;
 job.calcParent2Child;
 
@@ -371,7 +380,7 @@ legend("Interpreter","tex");
 xlim([0,maxX])
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_09.png" %}
+{% include inline_image.html file="ParameterOptimization_08.png" %}
 </center>
 <p>It can be observed that the different parameter choices for <code class="language-plaintext highlighter-rouge">threshold</code> and <code class="language-plaintext highlighter-rouge">tolerance</code> give a different weighting to the misfit values. Let us now plot the function values directly onto the grain boundaries to decide which parameter set leads to the best separation of prior parent and OR-related boundaries.</p>
 {% highlight matlab %}
@@ -405,7 +414,7 @@ for ii = 1:length(tol)
 end
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_10.png" %}
+{% include inline_image.html file="ParameterOptimization_09.png" %}
 </center>
 <p>We can see that a sharp tolerance of 1.5&deg; and threshold value of 1.5&deg; mark several boundaries as prior austenite boundaries, even though they are in the interior of what appears to be the prior austenite grains. Conversely, a very relaxed value pair of tolerance 2&deg; and threshold 5&deg; does not highlight boundaries that appear to be prior austenite boundaries. The value pair tolerance 2.5&deg; and threshold 2.5&deg; seems to deliver the best result. In the misfit distribution histogram, this parameter set nicely separates the mode of the distribution from the tail to the right. You will have to experiment with these parameters for your own microstructure to get the best possible PGR result.</p>
 <h2 id="15">Evaluating effect of probability functions on PGR</h2>
@@ -442,7 +451,7 @@ for ii = 1:length(tol)
 end
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_11.png" %}
+{% include inline_image.html file="ParameterOptimization_10.png" %}
 </center>
 <p>We can observe that in the case where the probability function did not lead to a good separation between prior-parent and OR-related boundaries fewer grains have been confidently reconstructed. The first two explored parameter sets give decent PGR result, with the first dataset (subjectively) looking slightly more complete. The difference here is however marginal. It is important to make this evaluation before any post-processing is applied to the reconstructed parent microstructure.</p>
 <h2 id="17">The effect of clustering parameters on the PGR</h2>
@@ -494,83 +503,86 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
+ child   Iron bcc (old)  432       10932   100%               
  
- OR: (347°,9°,56.9°)
+ OR: (347.4°,8.9°,56.5°)
+   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
+ 
+ variant graph: 577177 entries
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       10932   100%               
+ 
+ OR: (347.4°,8.9°,56.5°)
    c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
  
- variant graph: 437026 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
- 
- OR: (347°,9°,56.9°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.8° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
- 
- variant graph: 437026 entries
+ variant graph: 577177 entries
  
  
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
+ child   Iron bcc (old)  432       10932   100%               
  
- OR: (347°,9°,56.9°)
+ OR: (347.4°,8.9°,56.5°)
    c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
  
- variant graph: 437026 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
- 
- OR: (347°,9°,56.9°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.8° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
- 
- variant graph: 437026 entries
+ variant graph: 577177 entries
  
  
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
+ child   Iron bcc (old)  432       10932   100%               
  
- OR: (347°,9°,56.9°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
+ OR: (347.4°,8.9°,56.5°)
+   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
  
- variant graph: 437026 entries
+ variant graph: 577177 entries
  
  
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
+ child   Iron bcc (old)  432       10932   100%               
  
- OR: (347°,9°,56.9°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.8° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
+ OR: (347.4°,8.9°,56.5°)
+   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
  
- variant graph: 437026 entries
+ variant graph: 577177 entries
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       10932   100%               
+ 
+ OR: (347.4°,8.9°,56.5°)
+   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
+ 
+ variant graph: 577177 entries
 {% endhighlight %}
+<center>
+{% include inline_image.html file="ParameterOptimization_11.png" %}
+</center>
 <center>
 {% include inline_image.html file="ParameterOptimization_12.png" %}
 </center>
-<p>It may not be entirely possible to judge the quality of the PGR with having access to a validation dataset (i.e. without knowing the actual parent microstructure), nevertheless some observations can be made: An inflation power of 1.2 seems to be too high, leading to large patches of material that have not been reconstructed. A good indicator for the present microstructure is to check in how far likely annealing twins have been resolved with a realistic morphology and how very small parent grains may become present that are unlikely to be associated with real parent grains. Based on this the choice of an inflation power of 1.05 and numIter of 10 seems to be a good choice, although it is hard to make an objective assessment. Note that an inflation power of 1 means that no clustering is enforced - with this setting the algorithm simply explores the local neighborhood up to the degree of neighbor defined by <code class="language-plaintext highlighter-rouge">numIter</code> and bases the most likely parent orientation on the overall probabilities within this region.</p>
+<p>It may not be entirely possible to judge the quality of the PGR without having access to a validation dataset (i.e. without knowing the actual parent microstructure), nevertheless some observations can be made: An inflation power of 1.2 seems to be too high, leading to large patches of material that have not been reconstructed. A good indicator for the present microstructure is to check in how far likely annealing twins have been resolved with a realistic morphology and how very small parent grains may become present that are unlikely to be associated with real parent grains. Based on this the choice of an inflation power of 1.05 and numIter of 10 seems to be a good choice, although it is hard to make an objective assessment. Note that an inflation power of 1 means that no clustering is enforced - with this setting the algorithm simply explores the local neighborhood up to the degree of neighbor defined by <code class="language-plaintext highlighter-rouge">numIter</code> and bases the most likely parent orientation on the overall probabilities within this region.</p>
 <h2 id="19">Final reconstruction</h2>
 <p>We can now do the final reconstruction using the optimized parameters and subsequently apply a growth-based PGR algorithm to reconstruct the remaining grains, as well as some post-processing steps to clean up the microstructure. You may also want to play with the parameter <code class="language-plaintext highlighter-rouge">minProb</code> of the <code class="language-plaintext highlighter-rouge">calcParentFromVote</code> method, which defines the minimum probability for a specific parent orientation required to conduct the PGR of a specific child grain. Lowering this parameter will lead to a more complete, but less confident PGR.</p>
 {% highlight matlab %}
@@ -633,13 +645,13 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       9338    100%               
+ child   Iron bcc (old)  432       10932   100%               
  
- OR: (347°,9°,56.9°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [1̅10] || [100] fit: 2.4°
+ OR: (347.4°,8.9°,56.5°)
+   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
+   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
  
- variant graph: 437026 entries
+ variant graph: 577177 entries
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_13.png" %}
@@ -648,7 +660,7 @@ ans = parentGrainReconstructor
 {% highlight matlab %}
 % Prepare plotting
 figure;
-f(8) = newMtexFigure('layout',[1,2]);
+f(9) = newMtexFigure('layout',[1,2]);
 
 % Plot the initial orientation data with the prior parent grain outlines
 plot(job.ebsdPrior,job.ebsdPrior.orientations);
