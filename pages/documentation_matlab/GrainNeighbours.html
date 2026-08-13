@@ -40,12 +40,12 @@ plot(grains,grains.meanOrientation)
 <center>
 {% include inline_image.html file="GrainNeighbours_01.png" %}
 </center>
-<p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighboring grain ids. Each row of the list contains the ids of two neighboring grains. In the following lines choose the row number 170 and outline the corresponding grains</p>
+<p>Central for the analysis of grain to grain relationships is the function <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">grains.neighbours</code></a>. It return a list of pairs of neighboring grain ids. Each row of the list contains the ids of two neighboring grains. In the following lines choose the row number 188 and outline the corresponding grains</p>
 {% highlight matlab %}
 pairs = grains('indexed').neighbors;
 
 hold on
-plot(grains(pairs(170,:)).boundary,'LineWidth',4,'linecolor','b')
+plot(grains(pairs(188,:)).boundary,'LineWidth',4,'linecolor','b')
 hold off
 {% endhighlight %}
 <center>
@@ -53,15 +53,15 @@ hold off
 </center>
 <p>In order to compute the misorientation between these two grains we can do</p>
 {% highlight matlab %}
-mori = inv(grains(pairs(170,1)).meanOrientation) * grains(pairs(170,2)).meanOrientation
+mori = inv(grains(pairs(188,1)).meanOrientation) * grains(pairs(188,2)).meanOrientation
 {% endhighlight %}
 
 {% highlight plaintext %}
 mori = misorientation (Magnesium → Magnesium)
  
   Bunge Euler angles in degree
-   phi1     Phi    phi2
-  280.9 137.517 192.538
+     phi1     Phi    phi2
+  149.583 94.2717 150.165
 {% endhighlight %}
 <p>This can be generalized to compute the misorientations between neighboring grains using</p>
 {% highlight matlab %}
@@ -106,17 +106,17 @@ ans =
 <p>It is important to understand that the list returned by <code class="language-plaintext highlighter-rouge">grains.neighbours</code> contains only pairs such that both grains are contained in <code class="language-plaintext highlighter-rouge">grains</code>. This allows the syntax <code class="language-plaintext highlighter-rouge">grains('phaseName')</code> to extract only neighbor relation ships within one phase.</p>
 <p>In some case, e.g. if we ask for all neighboring grains to a given grains, it is useful to replace this constraint by the condition that at least one grain should by part of <code class="language-plaintext highlighter-rouge">grains</code>. This can be accomplished by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
 {% highlight matlab %}
-% get all pairs containing grain 83
-pairs = grains(83).neighbors('full');
+% get all pairs containing grain 92
+pairs = grains(92).neighbors('full');
 
 % remove center grain 83 from this list
-pairs(pairs == 83) = [];
+pairs(pairs == 92) = [];
 
 plot(grains,grains.meanOrientation,'micronbar','off')
 hold on
-plot(grains(pairs).boundary,'lineColor','blue','lineWidth',3)
+plot(grains(pairs),'FaceColor','black','FaceAlpha',0.5)
 hold on
-plot(grains(83).boundary,'lineColor','red','lineWidth',3)
+plot(grains(92).boundary,'lineColor','white','lineWidth',3)
 hold off
 {% endhighlight %}
 <center>
