@@ -29,23 +29,36 @@ mtexdata twins
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed          none                                   
      1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad
+ Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
  X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :137 x 167
 {% endhighlight %}
-<p>and restricting it to very small rectangular subset</p>
+<p>The imported map is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, i.e. it is already stored as a matrix - see <a href="EBSDGrid.html">Square and Hex Grids</a>. Restricting it to a very small rectangular subset gives back a plain list of pixels, since the selection is in general not a rectangle</p>
 {% highlight matlab %}
 poly = [44 0 4 2];
-ebsd = ebsd(inpolygon(ebsd,poly));
+ebsd = ebsd(inpolygon(ebsd,poly))
 
 plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k','backend','patch')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSD (y↑→x)
+ 
+ Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
+     1     98 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X x Y x Z : [44, 48] x [0, 1.8] x [0, 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIndex_01.png" %}
@@ -67,7 +80,8 @@ hold off
 <center>
 {% include inline_image.html file="EBSDIndex_03.png" %}
 </center>
-<p>Whether lines or columns run first is not related to MTEX but inherits from the ordering of the imported EBSD data. Since, we have restricted our large EBSD map to the small subset the indices of restricted data does not coincide with the indices of the imported data anymore. However, the original indices are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize those</p>
+<p>Whether lines or columns run first is inherited from the order of the data the subset was taken from. Here that is the gridded map, whose linear index runs down a matrix column, i.e. along y - which is why the numbers above count downwards rather than across. Had the map been imported as a plain list, they would follow the order of the lines in the file instead.</p>
+<p>Since we have restricted our large EBSD map to the small subset, the indices of the restricted data do not coincide with the indices of the imported data anymore. However, the original indices are still stored in <code class="language-plaintext highlighter-rouge">ebsd.id</code>. Lets visualize those</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'micronbar','off','edgecolor','k','backend','patch')
 text(ebsd,ebsd.id)
@@ -75,10 +89,10 @@ text(ebsd,ebsd.id)
 <center>
 {% include inline_image.html file="EBSDIndex_04.png" %}
 </center>
-<p>In order to select EBSD data according to their original <code class="language-plaintext highlighter-rouge">id</code> use the option <code class="language-plaintext highlighter-rouge">'id'</code>, i.e.,</p>
+<p>In order to select EBSD data according to their original <code class="language-plaintext highlighter-rouge">id</code> use the option <code class="language-plaintext highlighter-rouge">'id'</code>, i.e., the three pixels highlighted above are</p>
 {% highlight matlab %}
 hold on
-plot(ebsd('id',316:318),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
+plot(ebsd('id',ebsd.id(16:18)),'edgeColor','red','facecolor','none','linewidth',4,'backend','patch')
 legend off
 hold off
 {% endhighlight %}
@@ -86,7 +100,7 @@ hold off
 {% include inline_image.html file="EBSDIndex_05.png" %}
 </center>
 <h2 id="7">Square Grids</h2>
-<p>In the cases of gridded data it is often useful to convert them into a matrix form.</p>
+<p>Our subset is a list, but the pixels in it do sit on a grid, so we may put it back into matrix form with <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>.</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify;
 
@@ -109,7 +123,7 @@ hold off
 <center>
 {% include inline_image.html file="EBSDIndex_07.png" %}
 </center>
-<p>Note that the <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> command changes the order of measurements. They are now sorted such that rows runs first and columns second, as this is the default convention how Matlab indexes matrices.</p>
+<p>Note that the <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> command changes the order of measurements. They are now sorted such that rows run first and columns second, as this is the default convention how Matlab indexes matrices. This is unavoidable and the reason why an imported map is put on its grid right away - see <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'micronbar','off','edgeColor','black','backend','patch')
 text(ebsd,1:length(ebsd))
@@ -118,15 +132,15 @@ text(ebsd,1:length(ebsd))
 {% include inline_image.html file="EBSDIndex_08.png" %}
 </center>
 <h2 id="10">Hexagonal Grid</h2>
-<p>The command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> may also be applied to EBSD data measured on a hexagonal grid.</p>
+<p>Everything above applies to EBSD data measured on a hexagonal grid as well. Such data is imported as an <a href="EBSDhex.EBSDhex.html">EBSDhex</a>, i.e. it already is in matrix form</p>
 {% highlight matlab %}
 mtexdata titanium silent
 
-ebsd = ebsd.gridify
+ebsd
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDhex (y↑→x)
+ebsd = EBSDhex (y↓→x)
  
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
      0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
@@ -137,7 +151,7 @@ ebsd = EBSDhex (y↑→x)
  Normal vector: (0,0,1)
  Hex grid     :97 x 84
 {% endhighlight %}
-<p>This rearranges the measurements in a matrix form which can be indexed similarly as in the square case.</p>
+<p>and can be indexed similarly as in the square case.</p>
 {% highlight matlab %}
 ebsd = ebsd(10:16,68:79);
 {% endhighlight %}

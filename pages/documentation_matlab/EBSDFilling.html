@@ -53,16 +53,17 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDhex (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
     -1   1 (0.0016%)  notIndexed          none                                   
-     0  63044 (100%)     Ferrite  LightSkyBlue       432                         
+     0  63044 (100%)     Ferrite  LightSkyBlue      m-3m                         
  
- Properties: ci, fit, iq, sem_signal
+ Properties: ci, fit, iq, sem_signal, oldId
  Scan unit : um
  X x Y x Z : [0, 70] x [0, 70] x [0, 0]
  Normal vector: (0,0,1)
+ Hex grid     :270 x 234
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDFilling_01.png" %}
@@ -78,13 +79,13 @@ plot(ebsdSub,ebsdSub.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdSub = EBSD (y↑→x)
+ebsdSub = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-    -1      626 (4%)  notIndexed          none                                   
-     0   15077 (96%)     Ferrite  LightSkyBlue       432                         
+    -1    600 (3.8%)  notIndexed          none                                   
+     0   15138 (96%)     Ferrite  LightSkyBlue      m-3m                         
  
- Properties: ci, fit, iq, sem_signal, grainId
+ Properties: ci, fit, iq, sem_signal, oldId, grainId
  Scan unit : um
  X x Y x Z : [0, 70] x [0, 70] x [0, 0]
  Normal vector: (0,0,1)
@@ -147,11 +148,12 @@ fieldnames(ebsdSub_filled.prop)
 
 {% highlight plaintext %}
 ans =
-  5×1 cell array
+  6×1 cell array
     {'ci'        }
     {'fit'       }
     {'iq'        }
     {'sem_signal'}
+    {'oldId'     }
     {'grainId'   }
 {% endhighlight %}
 <p>The properties <code class="language-plaintext highlighter-rouge">ci</code>, <code class="language-plaintext highlighter-rouge">fit</code>, <code class="language-plaintext highlighter-rouge">iq</code> and <code class="language-plaintext highlighter-rouge">sem_signal</code> describe how well a Kikuchi pattern could be indexed. At an interpolated pixel there is no pattern - accordingly these properties are left as NaN and the corresponding map keeps its holes.</p>
@@ -170,7 +172,7 @@ fprintf('%d of %d pixels have been interpolated\n',...
 {% endhighlight %}
 
 {% highlight plaintext %}
-47336 of 63039 pixels have been interpolated
+47464 of 63166 pixels have been interpolated
 {% endhighlight %}
 <p>The command <code class="language-plaintext highlighter-rouge">smooth</code> offers a second marker: it stores a property <code class="language-plaintext highlighter-rouge">quality</code> which is set to zero for every pixel that did not carry an orientation before the filter was applied.</p>
 {% highlight matlab %}
@@ -179,7 +181,7 @@ nnz(ebsdSub_smoothed.quality == 0)
 
 {% highlight plaintext %}
 ans =
-       48100
+       48096
 {% endhighlight %}
 <p>If the additional properties are needed at arbitrary positions as well one has to resample the map with the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a>, which carries all properties along. This is discussed in the section <a href="EBSDInter.html">Interpolating EBSD Data</a>. Note that <code class="language-plaintext highlighter-rouge">interp</code> only transfers data to positions that are covered by an existing measurement and hence can not be used to fill holes.</p>
 <h2 id="12">An Example from Geoscience</h2>

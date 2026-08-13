@@ -32,17 +32,18 @@ plot(ebsd('Ti (alpha)'),ebsd('Ti (alpha)').orientations,'figSize','large')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↓→x)
+ebsd = EBSDsquare (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0  10449 (5.3%)  notIndexed          none                                   
      1   437 (0.22%)   Ti (BETA)  LightSkyBlue       432                         
      2  185722 (94%)  Ti (alpha)  DarkSeaGreen       622        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, reliabilityindex
+ Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
  Scan unit : um
  X x Y x Z : [0, 1568] x [0, 1175] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :384 x 512
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePointBasedReconstruction_01.png" %}
@@ -78,12 +79,12 @@ job.p2c = beta2alpha
 job = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       431     0.23%  0%           
- child   Ti (alpha)  622       51999   100%                
+ parent  Ti (BETA)   432       428     0.23%  0%           
+ child   Ti (alpha)  622       45802   100%                
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 0.83°, 1.2°, 1.6°, 3° (quintiles)
-   c2c fit: 0.71°, 1°, 1.3°, 1.8° (quintiles)
+   p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
+   c2c fit: 0.71°, 0.99°, 1.3°, 1.8° (quintiles)
 {% endhighlight %}
 <h2 id="6">Compute parent orientations from triple junctions</h2>
 <p>In present data set we have very little and unreliable parent measurements. Therefore, we use triple junctions as germ cells for the parent parent grains. In a first step we identify triple junctions that have misorientations that are compatible with a common parent orientation using the command <a href="parentGrainReconstructor.calcTPVotes.html"><code class="language-plaintext highlighter-rouge">calcTPVotes</code></a>. The option <code class="language-plaintext highlighter-rouge">'minFit'</code> tells the MTEX that the only those triple junctions are considered where the fit to the common parent orientation does not exceed 2.5 degree.</p>
@@ -95,14 +96,14 @@ job.calcTPVotes('minFit',2.5*degree,'maxFit',5*degree)
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       431     0.23%  0%           
- child   Ti (alpha)  622       51999   100%                
+ parent  Ti (BETA)   432       428     0.23%  0%           
+ child   Ti (alpha)  622       45802   100%                
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 0.83°, 1.2°, 1.6°, 3° (quintiles)
-   c2c fit: 0.72°, 1°, 1.3°, 1.7° (quintiles)
+   p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
+   c2c fit: 0.71°, 1°, 1.3°, 1.8° (quintiles)
  
- votes: 43479 x 1
+ votes: 37089 x 1
    probabilities: 93%, 88%, 81%, 68% (quintiles)
 {% endhighlight %}
 <p>The above command does not only compute the best fitting but also the second best fitting parent orientation. This allows us to ignore ambiguous triple points which may vote equally well for different parent orientations. In the above command we did this by the option <code class="language-plaintext highlighter-rouge">'maxFit'</code> which tells MTEX to ignore all triple points where the fit to the second best parent orientation is below 5 degree.</p>
@@ -124,15 +125,15 @@ job.calcParentFromVote('minProb',0.7)
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       34385   83%   65%          
- child   Ti (alpha)  622       18045   17%                
+ parent  Ti (BETA)   432       29259   83%   63%          
+ child   Ti (alpha)  622       16971   17%                
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 0.97°, 1.4°, 1.8°, 2.3° (quintiles)
-   c2c fit: 1°, 1.5°, 1.9°, 2.7° (quintiles)
+   p2c fit: 0.95°, 1.4°, 1.8°, 2.3° (quintiles)
+   c2c fit: 1.1°, 1.6°, 2°, 2.7° (quintiles)
  
- votes: 9525 x 1
-   probabilities: 66%, 61%, 54%, 44% (quintiles)
+ votes: 8258 x 1
+   probabilities: 66%, 60%, 53%, 43% (quintiles)
 {% endhighlight %}
 <p>We observe that after this step more then 66 percent of the grains became parent grains. Lets visualize these reconstructed beta grains</p>
 {% highlight matlab %}
@@ -164,12 +165,12 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       50727   99%   97%          
- child   Ti (alpha)  622       1703    1.2%               
+ parent  Ti (BETA)   432       44621   99%   96%          
+ child   Ti (alpha)  622       1609    1.2%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 4.6°, 33°, 35°, 42° (quintiles)
-   c2c fit: 1.1°, 2°, 5.1°, 24° (quintiles)
+   p2c fit: 5.8°, 33°, 36°, 42° (quintiles)
+   c2c fit: 1.3°, 2°, 4.9°, 20° (quintiles)
  
  votes: 2 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
@@ -178,23 +179,26 @@ ans = parentGrainReconstructor
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       51294   99%    98%          
- child   Ti (alpha)  622       1136    0.65%               
+ parent  Ti (BETA)   432       45103   99%    98%          
+ child   Ti (alpha)  622       1127    0.67%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
    p2c fit: 33°, 35°, 41°, 42° (quintiles)
-   c2c fit: 2.1°, 9.8°, 18°, 24° (quintiles)
+   c2c fit: 1.6°, 7.3°, 18°, 25° (quintiles)
+ 
+ votes: 1 x 1
+   probabilities: 0%, 0%, 0%, 0% (quintiles)
  
  
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       51325   99%    98%          
- child   Ti (alpha)  622       1105    0.62%               
+ parent  Ti (BETA)   432       45133   99%    98%          
+ child   Ti (alpha)  622       1097    0.64%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 34°, 35°, 41°, 42° (quintiles)
-   c2c fit: 1.6°, 8.8°, 17°, 19° (quintiles)
+   p2c fit: 33°, 35°, 41°, 42° (quintiles)
+   c2c fit: 1.5°, 5.1°, 18°, 26° (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePointBasedReconstruction_04.png" %}
@@ -213,12 +217,12 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       150     99%    98%          
- child   Ti (alpha)  622       1092    0.62%               
+ parent  Ti (BETA)   432       144     99%    98%          
+ child   Ti (alpha)  622       1077    0.64%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
    p2c fit: 33°, 35°, 41°, 42° (quintiles)
-   c2c fit: 8.8°, 17°, 19°, 24° (quintiles)
+   c2c fit: 6.7°, 17°, 19°, 25° (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePointBasedReconstruction_05.png" %}
@@ -236,13 +240,13 @@ plot(job.parentGrains, color, 'figSize', 'large')
 {% highlight plaintext %}
 ans = parentGrainReconstructor
  
- phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       57      100%   100%         
- child   Ti (alpha)  622       62      0.05%               
+ phase   mineral     symmetry  grains  area    reconstructed
+ parent  Ti (BETA)   432       55      100%    100%         
+ child   Ti (alpha)  622       60      0.078%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 23°, 30°, 33°, 35° (quintiles)
-   c2c fit: 4.5°, 13°, 17°, 24° (quintiles)
+   p2c fit: 23°, 29°, 33°, 35° (quintiles)
+   c2c fit: 4.5°, 17°, 20°, 31° (quintiles)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TriplePointBasedReconstruction_06.png" %}

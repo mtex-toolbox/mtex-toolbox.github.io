@@ -65,7 +65,7 @@ hold off
 twinBoundary = grainBoundary (y↑→x)
  
  Segments  length  mineral 1  mineral 2
-     1446  362 µm  Magnesium  Magnesium
+     1406  356 µm  Magnesium  Magnesium
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_02.png" %}
@@ -103,18 +103,22 @@ childs = grains(parentId == mergedGrains(16).id)
 childs = grain2d (y↑→x)
  
  Phase  Grains  Pixels    Mineral  Symmetry         Color
-     1       5    1634  Magnesium     6/mmm  LightSkyBlue
+     1       9     456  Magnesium     6/mmm  LightSkyBlue
  
- boundary segments: 288 (80 µm)
+ boundary segments: 200 (56 µm)
  inner boundary segments: 0 (0 µm)
- triple points: 13
+ triple points: 15
  
- Id   Phase   Pixels       meanRotation      GOS
- 26       1      180   (157°,101°,180°)    0.013
- 27       1        3   (158°,101°,180°)   0.0045
- 30       1       15   (159°,101°,180°)   0.0058
- 31       1      967    (58°,150°,226°)    0.011
- 35       1      469   (159°,100°,240°)    0.011
+ Id   Phase   Pixels      meanRotation      GOS
+ 11       1       18   (132°,46°,215°)   0.0093
+ 15       1        7   (66°,157°,185°)   0.0081
+ 22       1       94    (29°,68°,224°)    0.016
+ 24       1        6    (31°,69°,225°)     0.02
+ 26       1       56   (63°,154°,181°)    0.011
+ 33       1       26    (30°,70°,224°)    0.013
+ 35       1        4   (58°,152°,237°)    0.012
+ 36       1      125    (30°,67°,224°)    0.015
+ 37       1      120   (67°,158°,185°)    0.018
 {% endhighlight %}
 <h2 id="6">Estimate twin area fraction</h2>
 <p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
@@ -157,7 +161,7 @@ mtexTitle('twin id')
 
 {% highlight plaintext %}
 ans =
-   16.6510
+   16.6397
 {% endhighlight %}
 <center>
 {% include inline_image.html file="GrainMerge_04.png" %}
@@ -222,16 +226,17 @@ ebsd_merged('indexed').grainId = parentId(grains.id2ind(ebsd('indexed').grainId)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd_merged = EBSD (y↑→x)
+ebsd_merged = EBSDsquare (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   17 (0.074%)  notIndexed          none                                   
-     1  22862 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+     0   21 (0.092%)  notIndexed          none                                   
+     1  22858 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, grainId
+ Properties: bands, bc, bs, error, mad, oldId, grainId
  Scan unit : um
  X x Y x Z : [0, 50] x [0, 41] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :137 x 167
 {% endhighlight %}
 <p>Now the variable <code class="language-plaintext highlighter-rouge">ebsd_merged</code> can be indexed by the merged grains, i.e.</p>
 {% highlight matlab %}

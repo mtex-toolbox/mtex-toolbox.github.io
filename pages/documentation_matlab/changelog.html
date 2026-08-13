@@ -62,9 +62,19 @@ ebsd.how2plot = 'y↑→x';
 {% endhighlight %}
 <p>Additionally, we now support multiple data sets per file and allow to import all additional scans that might be present in your file.</p>
 <p>
+<b>Imported Data Comes on Its Grid</b>
+</p>
+<p> <a href="EBSD.load.html"><code class="language-plaintext highlighter-rouge">EBSD.load</code></a> now returns an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> or an <a href="EBSDhex.EBSDhex.html">EBSDhex</a> whenever the measurements sit on one lattice, instead of a plain list that had to be <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>ed by hand. Almost every scan is a complete raster, so this is what you get for almost every file: the map is stored as a matrix, <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> addresses a scan position, and plotting and denoising no longer rebuild the raster on every call.</p>
+<p>Data that would lose measurements by being gridded - two of them falling into the same lattice cell, or positions too irregular to span a raster - is never gridded and comes back as a list with a warning saying why. A plain list can also be asked for explicitly</p>
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'noGrid')     % this import
+setMTEXpref('gridifyOnImport',false) % every import
+{% endhighlight %}
+<p>Both representations are accepted everywhere, and <code class="language-plaintext highlighter-rouge">EBSD(ebsd)</code> and <code class="language-plaintext highlighter-rouge">gridify</code> convert between them at any time. Note that putting data on a grid <b>reorders</b> it - the matrix layout fixes the first dimension to y while a <code class="language-plaintext highlighter-rouge">.ctf</code> or <code class="language-plaintext highlighter-rouge">.ang</code> runs x fastest - so <code class="language-plaintext highlighter-rouge">ebsd(k)</code> is in general no longer line k of the file. The original ids are kept in <code class="language-plaintext highlighter-rouge">ebsd.oldId</code>. See <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
+<p>
 <b>EBSD Analysis No Longer Needs a Grid</b>
 </p>
-<p>Computations that used to require <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> now work on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, or a gridded map alike. This concerns the <a href="OrientationGradient.html">orientation gradient</a> and everything built on it: <a href="EBSD.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>, <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> and the gradient method of <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">weightedBurgersVec</code></a>.</p>
+<p>Computations that used to require <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> now work on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, or a gridded map alike. This concerns the <a href="EBSD.gradientX.html">orientation gradient</a> and everything built on it: <a href="EBSD.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>, <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> and the gradient method of <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">weightedBurgersVec</code></a>.</p>
 {% highlight matlab %}
 kappa = curvature(ebsd)      % no ebsd.gridify needed
 gnd   = calcGND(ebsd,dS)
@@ -99,7 +109,7 @@ gnd   = calcGND(ebsd,dS)
 <div>
 <ul>
 <li>the new classes <a href="S2FunMLS.S2FunMLS.html">S2FunMLS</a> and <a href="SO3FunMLS.SO3FunMLS.html">SO3FunMLS</a> approximate scattered data on the sphere and in orientation space by moving least squares</li>
-<li> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> (formerly <code class="language-plaintext highlighter-rouge">compactify</code>) replaces random sampling by an almost perfectly equally distributed set of orientations or directions representing a given function</li>
+<li> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> (formerly <code class="language-plaintext highlighter-rouge">compactify</code>) replaces random sampling by an almost perfectly equally distributed set of orientations or directions representing a given function. Asking for a second output optimizes the weights of the sampling points as well, which needs considerably fewer points for the same accuracy</li>
 <li> <a href="orientation.calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> uses by default the <a href="https://github.com/nla-group/classix">CLASSIX</a> algorithm, which is much faster than hierarchical clustering and needs no number of clusters</li>
 <li> <a href="PoleFigure.calcODFIterative.html"><code class="language-plaintext highlighter-rouge">calcODFIterative</code></a> inverts pole figure data by iteratively adjusting the kernel width, which is much more robust for irregularly sampled data</li>
 <li>
@@ -109,6 +119,7 @@ gnd   = calcGND(ebsd,dS)
 {% highlight matlab %}
 sF   = S2FunMLS(nodes,values,'degree',3)
 ori  = optimalSample(odf,10000)
+[ori,c] = optimalSample(odf,500)   % optimize the weights, too
 [c,center] = calcCluster(ori)
 odf  = calcODFIterative(pf,'halfwidth',5*degree)
 {% endhighlight %}

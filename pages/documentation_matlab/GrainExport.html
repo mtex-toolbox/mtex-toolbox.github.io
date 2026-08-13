@@ -43,8 +43,8 @@ grains = grain2d (y↑→x)
      2     184   25465   Enstatite       mmm  DarkSeaGreen
      3     107    6962    Diopside     12/m1     Goldenrod
  
- boundary segments: 38648 (1.6e+06 µm)
- inner boundary segments: 156 (7027 µm)
+ boundary segments: 38616 (1.6e+06 µm)
+ inner boundary segments: 156 (7018 µm)
  triple points: 3370
  
  Properties: meanRotation, GOS
@@ -63,14 +63,14 @@ head(T)
 {% highlight plaintext %}
 id    phase    numPixel       area       perimeter    equivalentRadius      GOS  
     __    _____    ________    __________    _________    ________________    _______
-     9      1         12            36848     954.39            108.3         0.21636
-    22      1         28            83194     1403.5           162.73         0.24466
-    29      2         15            42579     994.75           116.42         0.24992
-    34      1         68        1.762e+05       2080           236.82         0.22248
-    35      2         27        1.146e+05     1437.7              191         0.38341
-    37      1         14            35484     750.99           106.28         0.44652
-    38      1         27            80563       1119           160.14          2.2651
-    40      1         87       2.2841e+05     2164.3           269.64         0.87692
+    19      1         34            91250     1462.3           170.43         0.24256
+    21      2         16            51473     1099.2              128         0.62956
+    22      1         15            50640     996.04           126.96         0.42433
+    27      1         19            55714       1056           133.17         0.17977
+    30      1         26            72940     1156.8           152.37         0.28391
+    44      1         51       2.0553e+05     2204.5           255.78         0.19108
+    53      1         49       1.4694e+05     1605.6           216.27         0.48932
+    54      1         23            66472     1081.2           145.46          0.4652
 {% endhighlight %}
 <p>Adding the mean orientation as three Euler angle columns makes the table self contained. Since Euler angles only make sense within one crystal symmetry we restrict ourselves to the Forsterite grains from here on.</p>
 {% highlight matlab %}
@@ -95,14 +95,14 @@ head(readtable(fname))
 {% highlight plaintext %}
 id    phase    numPixel       area       perimeter    equivalentRadius      GOS       phi1      Phi       phi2 
     __    _____    ________    __________    _________    ________________    _______    ______    ______    ______
-     9      1         12            36848     954.39            108.3         0.21636     137.2    161.48    224.95
-    22      1         28            83194     1403.5           162.73         0.24466      39.9    131.83    337.86
-    34      1         68        1.762e+05       2080           236.82         0.22248    23.702    62.887    272.38
-    37      1         14            35484     750.99           106.28         0.44652    140.67    93.527    217.02
-    38      1         27            80563       1119           160.14          2.2651    154.73    119.01    240.02
-    40      1         87       2.2841e+05     2164.3           269.64         0.87692    170.36    153.19    279.13
-    42      1         26       1.1666e+05     1326.3            192.7         0.40374    163.55    84.069    251.85
-    46      1        121       3.4983e+05     2738.2            333.7          1.9631    158.97    110.06    265.58
+    19      1         34            91250     1462.3           170.43         0.24256    2.5813    161.36    269.26
+    22      1         15            50640     996.04           126.96         0.42433    133.37    168.62    247.12
+    27      1         19            55714       1056           133.17         0.17977    138.49    91.149    267.06
+    30      1         26            72940     1156.8           152.37         0.28391    33.863    82.646    349.95
+    44      1         51       2.0553e+05     2204.5           255.78         0.19108    123.16    80.504    260.91
+    53      1         49       1.4694e+05     1605.6           216.27         0.48932    165.83    107.25    260.95
+    54      1         23            66472     1081.2           145.46          0.4652    166.09    111.76    264.03
+    55      1         44       1.3889e+05     1615.5           210.26         0.62373    139.92    82.051    260.12
 {% endhighlight %}
 <h2 id="5">Mean orientations</h2>
 <p>If only the orientations are of interest, the command <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> is more convenient, since it knows about the Euler angle conventions. It is described in detail in <a href="OrientationExport.html">Exporting Crystal Orientations</a>.</p>
@@ -124,8 +124,8 @@ fclose(fid);
 
 {% highlight plaintext %}
 phi1         Phi        phi2        area         GOS
- 137.204     161.481     224.954     36847.8    0.216363
- 39.9003     131.831     337.855     83193.5    0.244656
+ 2.58129      161.36     269.258       91250    0.242557
+ 133.373     168.617     247.116     50640.4    0.424334
 {% endhighlight %}
 <p>For crystal plasticity codes the command <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> writes the VPSC texture format, with the grain areas as weights</p>
 {% highlight matlab %}
@@ -144,7 +144,7 @@ size(poly)
 
 {% highlight plaintext %}
 ans =
-     1    20
+     1    31
 {% endhighlight %}
 <p>Hence the coordinates of the first grain are</p>
 {% highlight matlab %}
@@ -155,12 +155,12 @@ xy(1:5,:)
 
 {% highlight plaintext %}
 ans =
-   1.0e+03 *
-    7.5250    0.0750
-    7.4812    0.0813
-    7.4375    0.0875
-    7.3937    0.0938
-    7.3500    0.1000
+   1.0e+04 *
+    0.0100    1.1800
+    0.0058    1.1808
+    0.0017    1.1817
+   -0.0025    1.1825
+   -0.0025    1.1775
 {% endhighlight %}
 <p>Writing all of them into one text file, one grain after the other, is a short loop. We use the grain id as a separator so that the file can be split up again.</p>
 {% highlight matlab %}
@@ -181,9 +181,9 @@ fclose(fid);
 
 {% highlight plaintext %}
 % grainId x y
-9 7525.000000 75.000000
-9 7481.250000 81.250000
-9 7437.500000 87.500000
+19 100.000000 11800.000000
+19 58.333333 11808.333333
+19 16.666667 11816.666667
 {% endhighlight %}
 <p>The individual boundary segments, together with the ids of the two grains they separate and their misorientation, are reached through <a href="grainBoundary.grainBoundary.html"><code class="language-plaintext highlighter-rouge">grains.boundary</code></a>
 </p>
@@ -200,14 +200,14 @@ head(TB)
 {% highlight plaintext %}
 grainA    grainB    segLength    misAngle
     ______    ______    _________    ________
-     3159      3160          50       60.549 
-     3142      3143          50       70.835 
-     3149      3151      55.902       59.444 
-     3149      3150      36.337       90.587 
-     3149      3150      36.337       90.243 
-     3134      3135      53.033       59.367 
-     3134      3135      53.033       59.367 
-     3130      3131      39.278       60.336
+     2675      2691          50       60.549 
+     2159      2170          50       70.835 
+     2450      2507      70.711       90.587 
+     2453      2507      55.902       59.531 
+     1768      1810      53.033       60.026 
+     1768      1810      53.033       60.026 
+     1599      1670      39.278       60.336 
+     1599      1670      32.044       60.336
 {% endhighlight %}
 <h2 id="12">Saving in MTEX' own format</h2>
 <p>Finally, if the data is only meant to be read back by MTEX, the ordinary MATLAB <code class="language-plaintext highlighter-rouge">save</code> is both lossless and by far the simplest option</p>

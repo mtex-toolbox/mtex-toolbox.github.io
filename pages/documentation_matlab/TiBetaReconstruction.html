@@ -32,17 +32,18 @@ plot(ebsd('Ti (alpha)'),ebsd('Ti (alpha)').orientations,'figSize','large')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↓→x)
+ebsd = EBSDsquare (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0  10449 (5.3%)  notIndexed          none                                   
      1   437 (0.22%)   Ti (BETA)  LightSkyBlue       432                         
      2  185722 (94%)  Ti (alpha)  DarkSeaGreen       622        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, reliabilityindex
+ Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
  Scan unit : um
  X x Y x Z : [0, 1568] x [0, 1175] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :384 x 512
 {% endhighlight %}
 <center>
 {% include inline_image.html file="TiBetaReconstruction_01.png" %}
@@ -63,7 +64,7 @@ beta2alpha = misorientation (Ti (BETA) → Ti (alpha))
 <p>Grain reconstruction is guided in MTEX by a variable of type <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction process this class keeps track about the relationship between the measured child grains and the recovered parent grains. In order to set this variable up we first need to compute the initial child grains from out EBSD data set.</p>
 {% highlight matlab %}
 % reconstruct grains
-[grains,ebsd] = calcGrains(ebsd,'threshold',1.5*degree);
+[grains,ebsd] = calcGrains(ebsd,'threshold',1.5*degree,'removeQuadruplePoints');
 {% endhighlight %}
 <p>We choose a very small threshold of 1.5 degree for the identification of grain boundaries to avoid alpha orientations that belong to different beta grains get merged into the same alpha grain.</p>
 <p>Now we are ready to set up the parent grain reconstruction job.</p>
@@ -76,12 +77,12 @@ job.p2c = beta2alpha
 job = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       432     0.23%  0%           
- child   Ti (alpha)  622       61115   100%                
+ parent  Ti (BETA)   432       428     0.23%  0%           
+ child   Ti (alpha)  622       45802   100%                
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.72°, 1°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 0.99°, 1.3°, 1.8° (quintiles)
 {% endhighlight %}
 <p>The output of the <code class="language-plaintext highlighter-rouge">job</code> variable allows you to keep track of the amount of already recovered parent grains. Using the variable <code class="language-plaintext highlighter-rouge">job</code> you have access to the following properties</p>
 <div>
@@ -142,14 +143,14 @@ job.calcVariantGraph('threshold',1.5*degree)
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       432     0.23%  0%           
- child   Ti (alpha)  622       61115   100%                
+ parent  Ti (BETA)   432       428     0.23%  0%           
+ child   Ti (alpha)  622       45802   100%                
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.71°, 0.99°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 1°, 1.3°, 1.8° (quintiles)
  
- variant graph: 615051 entries
+ variant graph: 546622 entries
 {% endhighlight %}
 <p>In a second step we cluster the variant graph and at the same time compute probabilities for potential parent orientations using the command <a href="parentGrainReconstructor.clusterVariantGraph"><code class="language-plaintext highlighter-rouge">job.clusterVariantGraph</code></a>
 </p>
@@ -161,15 +162,15 @@ job.clusterVariantGraph('numIter',3)
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       432     0.23%  0%           
- child   Ti (alpha)  622       61115   100%                
+ parent  Ti (BETA)   432       428     0.23%  0%           
+ child   Ti (alpha)  622       45802   100%                
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
    p2c fit: 0.82°, 1.2°, 1.6°, 3.1° (quintiles)
-   c2c fit: 0.72°, 1°, 1.3°, 1.7° (quintiles)
+   c2c fit: 0.71°, 1°, 1.3°, 1.8° (quintiles)
  
- votes: 61115 x 1
-   probabilities: 100%, 99%, 96%, 88% (quintiles)
+ votes: 45802 x 1
+   probabilities: 100%, 99%, 98%, 93% (quintiles)
 {% endhighlight %}
 <p>The probabilities are stored in <code class="language-plaintext highlighter-rouge">job.votes.prob</code> and the corresponding variant ids in <code class="language-plaintext highlighter-rouge">job.votes.parentId</code>. In order to use the parent orientation with the highest probability for the reconstruction we use the command <a href="parentGrainReconstructor.calcParentFromVote"><code class="language-plaintext highlighter-rouge">job.calcParentFromVote</code></a>
 </p>
@@ -181,14 +182,14 @@ job.calcParentFromVote
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       59721   99%   97%          
- child   Ti (alpha)  622       1826    1.1%               
+ parent  Ti (BETA)   432       44445   99%   96%          
+ child   Ti (alpha)  622       1785    1.1%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 3.1°, 25°, 35°, 42° (quintiles)
-   c2c fit: 2.2°, 5°, 13°, 19° (quintiles)
+   p2c fit: 3.1°, 20°, 35°, 42° (quintiles)
+   c2c fit: 2.2°, 4.8°, 12°, 19° (quintiles)
  
- votes: 1826 x 1
+ votes: 1785 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <p>We observe that after this step more then 99 percent of the grains became parent grains. Lets visualize these reconstructed beta grains</p>
@@ -218,14 +219,14 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area  reconstructed
- parent  Ti (BETA)   432       122     99%   97%          
- child   Ti (alpha)  622       1786    1.1%               
+ parent  Ti (BETA)   432       123     99%   96%          
+ child   Ti (alpha)  622       1742    1.1%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 3.2°, 19°, 34°, 41° (quintiles)
-   c2c fit: 4.5°, 9.8°, 17°, 24° (quintiles)
+   p2c fit: 3.2°, 18°, 35°, 41° (quintiles)
+   c2c fit: 4.7°, 9.9°, 17°, 23° (quintiles)
  
- votes: 1826 x 1
+ votes: 1785 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
@@ -245,14 +246,14 @@ plot(job.parentGrains, color, 'figSize', 'large')
 ans = parentGrainReconstructor
  
  phase   mineral     symmetry  grains  area   reconstructed
- parent  Ti (BETA)   432       41      100%   100%         
- child   Ti (alpha)  622       271     0.22%               
+ parent  Ti (BETA)   432       42      100%   99%          
+ child   Ti (alpha)  622       228     0.21%               
  
  OR: (110) || (0001)   [11̅1] || [2̅110]
-   p2c fit: 3.3°, 6°, 18°, 32° (quintiles)
-   c2c fit: 4.8°, 8.3°, 15°, 20° (quintiles)
+   p2c fit: 3.3°, 5.6°, 16°, 31° (quintiles)
+   c2c fit: 4.9°, 9.8°, 15°, 20° (quintiles)
  
- votes: 1826 x 1
+ votes: 1785 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>

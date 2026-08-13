@@ -256,26 +256,23 @@ ans =
 <p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed according to the specific model and the specific material.</p>
 <p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p>
 <p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p>
-<p>\[ U_{\mathrm{edge}} = (1-\nu) U_{\mathrm{screw}} \]</p>
+<p>\[ U_{\mathrm{edge}} = \frac{1}{(1-\nu)} U_{\mathrm{screw}} \]</p>
 <p>where</p>
 <div>
 <ul>
 <li>
-<code class="language-plaintext highlighter-rouge">G</code> is</li>
+<code class="language-plaintext highlighter-rouge">G</code> is the shear modulus</li>
 <li>
 <code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li>
 <li>
 <code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li>
 <li>
-<code class="language-plaintext highlighter-rouge">R</code>
-</li>
+<code class="language-plaintext highlighter-rouge">R</code> is the outer cut off radius</li>
 <li>
-<code class="language-plaintext highlighter-rouge">r</code>
-</li>
+<code class="language-plaintext highlighter-rouge">r_0</code> is the radius of the dislocation core</li>
 </ul>
 </div>
-<p>In this example we assume</p>
-<p>R = r_0 = U = norm(dS.b).^2</p>
+<p>In this example we assume \[ U_{\mathrm{edge}} = 1 \] \[ U_{\mathrm{screw}} = 1-\nu \]</p>
 {% highlight matlab %}
 nu = 0.3;
 
@@ -283,14 +280,9 @@ nu = 0.3;
 dS(dS.isEdge).u = 1;
 
 % energy of the screw dislocations
-dS(dS.isScrew).u = 1 - 0.3;
-
-% Question to everybody: what is the best way to set the energy? I found
-% different formulae
-%
-% E = 1 - poisson ratio
-% E = c * G * |b|^2,  - G - Schubmodul / Shear Modulus Energy per (unit length)^2
+dS(dS.isScrew).u = 1 - nu;
 {% endhighlight %}
+<p>There is no single accepted way of setting these energies. Formulae in use include <code class="language-plaintext highlighter-rouge">U = 1 - nu</code> as above, and <code class="language-plaintext highlighter-rouge">U = c * G * |b</code>^2| with <code class="language-plaintext highlighter-rouge">G</code> the shear modulus, i.e. an energy per unit length squared. Which one is appropriate depends on the model you are comparing against, so <code class="language-plaintext highlighter-rouge">u</code> is left for you to set rather than being fixed by MTEX.</p>
 </div>
 </body>
 </html>

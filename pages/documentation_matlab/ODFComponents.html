@@ -47,13 +47,13 @@ mtexColorbar
 
 {% highlight plaintext %}
 value =
-  108.4283
+  110.3994
  
 ori = orientation (Quartz → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.204 34.1321 207.598
+  133.758 34.4328 206.931
 {% endhighlight %}
 <p>Note that, similarly as the MATLAB <a href="https://de.mathworks.com/help/matlab/ref/max.html"><code class="language-plaintext highlighter-rouge">max</code></a> command, the second output argument is the position where the maximum is attained. In our case we observe that the maximum value is about <code class="language-plaintext highlighter-rouge">121</code>. To visualize the corresponding preferred orientation we plot it into the sigma sections of the ODF.</p>
 {% highlight matlab %}
@@ -71,18 +71,18 @@ annotate(ori(2:end),'MarkerFaceColor','red')
 
 {% highlight plaintext %}
 value =
-  108.4283
-   48.8438
-   33.2109
+  110.3994
+   47.2245
+   31.9077
  
 ori = orientation (Quartz → y↑→x)
   size: 3 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.204 34.1321 207.598
-  139.227 37.9444 257.908
-  83.3053 32.7434 329.708
+  133.758 34.4328 206.931
+  136.719 36.8778 262.522
+   70.252 31.5819 284.547
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ODFComponents_03.png" %}
@@ -97,9 +97,9 @@ volume(odf,ori,delta) * 100
 
 {% highlight plaintext %}
 ans =
-   10.1315
-    5.2648
-    3.2115
+   11.3229
+    5.1668
+    4.0250
 {% endhighlight %}
 <p>We observe that the sum of all volume portions is far from \(100\) percent. This is very typical. The reason is that the portion of the full orientations space that is within the \(10\) degree disorientation distance from the preferred orientations is very small. More precisely, it represents only</p>
 {% highlight matlab %}
@@ -117,9 +117,9 @@ volume(odf,ori,delta) ./ volume(uniformODF(odf.CS),ori,delta)
 
 {% highlight plaintext %}
 ans =
-   59.9585
-   31.1571
-   19.0061
+   67.0094
+   30.5774
+   23.8202
 {% endhighlight %}
 <p>It is important to understand, that all these values above depend significantly from the chosen disorientation angle <code class="language-plaintext highlighter-rouge">delta</code>. If <code class="language-plaintext highlighter-rouge">delta</code> is chosen too large</p>
 {% highlight matlab %}
@@ -131,9 +131,9 @@ volume(odf,ori,delta)*100
 delta =
     0.6981
 ans =
-   54.3177
-   39.5791
-   38.0846
+   58.7745
+   35.2044
+   43.0778
 {% endhighlight %}
 <p>it may even happen that the components overlap and the sum of the volumes exceeds 100 percent.</p>
 <h2 id="11">Non circular components</h2>
@@ -146,26 +146,20 @@ vol * 100
 
 {% highlight plaintext %}
 ori = orientation (Quartz → y↑→x)
-  size: 7 x 1
+  size: 4 x 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  133.263 34.0487 207.753
-  139.372 37.8945 257.747
-  70.1584 27.4879 285.102
-  83.2561 32.9359 329.566
-  107.249 33.4936 205.753
-   156.66 34.8473 208.621
-  109.341 33.6203 205.912
+  133.849  34.384 206.936
+  136.563 36.7422 143.218
+  70.3299 31.2769 284.594
+  82.2988 29.9465 331.104
  
 ans =
-   36.2047
-   25.7115
-   21.5951
-    7.4944
-    3.1712
-    2.5363
-    2.0312
+   48.4320
+   22.0545
+   21.3252
+    7.2784
 {% endhighlight %}
 <p>These volumes always sums up to approximately 100 percent. While the preferred orientations should be the same as those computed by the <code class="language-plaintext highlighter-rouge">max</code> command.</p>
 {% highlight matlab %}

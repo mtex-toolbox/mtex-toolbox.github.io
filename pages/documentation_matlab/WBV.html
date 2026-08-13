@@ -34,40 +34,41 @@ mtexdata single
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDsquare (y↓→x)
  
  Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
      1  10201 (100%)       Al  LightSkyBlue      m-3m                         
  
+ Properties: oldId
  Scan unit : um
  X x Y x Z : [6, 16] x [4, 14] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :101 x 101
 {% endhighlight %}
 <p>We reconstruct grains because later on, we do not want to compute the WBV across grain boundaries</p>
 {% highlight matlab %}
 [grains,ebsd] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
 
 % we will use the noisy data later on
-ebsdN = ebsd.gridify;
+ebsdN = ebsd;
 
 % denoise the data
 F = halfQuadraticFilter;
 ebsd = smooth(ebsd,F,'fill',grains);
 {% endhighlight %}
 <h2 id="3">Computing the WBV</h2>
-<p>The default integral method is a moving window over the map, so it needs the data in matrix form and gridifies internally if it is not. Doing it explicitly here keeps <code class="language-plaintext highlighter-rouge">ebsd</code> and the results in the same shape for the plots below. The <code class="language-plaintext highlighter-rouge">'gradient'</code> method used at the end of this page has no such requirement - see there.</p>
+<p>The default integral method is a moving window over the map, so it needs the data in matrix form. Our map already is - that is how it was imported, see <a href="EBSDGrid.html">Square and Hex Grids</a> - and for a map that is not, <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> is called internally. The <code class="language-plaintext highlighter-rouge">'gradient'</code> method used at the end of this page has no such requirement, see there.</p>
 {% highlight matlab %}
-ebsd = ebsd.gridify;
 wbv = weightedBurgersVec(ebsd)
 {% endhighlight %}
 
 {% highlight plaintext %}
-wbv = vector3d (y↑→x)
+wbv = vector3d (y↓→x)
  size: 101 x 101
 {% endhighlight %}
 <p>The WBV is returned in specimen coordinates as a list of <a href="vector3d.vector3d.html">vector3d</a>. We can inspect its magnitude (in 1/scanunit) and direction.</p>
 {% highlight matlab %}
-plot(ebsd,wbv.norm)
+plot(ebsd,wbv.norm,'refFrame','on')
 mtexColorbar
 mtexTitle('norm of the WBV')
 {% endhighlight %}
