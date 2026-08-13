@@ -39,7 +39,7 @@ axis([313 353 140 156])
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    5 (0.0032%)  notIndexed          none                                   
@@ -75,7 +75,7 @@ fprintf(['simplifying at a tolerance of %.2f %s takes the boundary' ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-simplifying at a tolerance of 0.71 um takes the boundary from 21289 segments to 5263
+simplifying at a tolerance of 0.71 um takes the boundary from 21269 segments to 5229
 {% endhighlight %}
 <h2 id="4">Step 2: putting the sample points back</h2>
 <p>Smoothing the result of step 1 directly would be a mistake. A curved boundary is now a handful of long chords, and a Laplacian simply cuts the corners off the polygon they form - which shrinks it. A circle of 15 pixel radius loses 14% of its area over 25 iterations that way, against 0.4% with this step in place. <a href="grain2d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary</code></a> therefore resamples each chain at equal arc length. This does not change the shape at all, only how it is sampled, but it gives the smoothing evenly spaced degrees of freedom that are no longer tied to the grid.</p>
@@ -88,7 +88,7 @@ fprintf('resampling at %.2f %s puts them back: %d segments to %d\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-resampling at 1.00 um puts them back: 5263 segments to 18484
+resampling at 1.00 um puts them back: 5229 segments to 18452
 {% endhighlight %}
 <h2 id="5">Step 3: smoothing</h2>
 <p>Only now does the actual smoothing happen. Junctions stay where they are throughout.</p>
@@ -113,7 +113,7 @@ fprintf('resampling at %.2f %s instead leaves %d segments\n', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-resampling at 2.00 um instead leaves 9423 segments
+resampling at 2.00 um instead leaves 9396 segments
 {% endhighlight %}
 <h2 id="7">Choosing the algorithm</h2>
 <p>Which algorithm performs the third step is decided by a <a href="boundaryFilter.html"><code class="language-plaintext highlighter-rouge">boundaryFilter</code></a>. They fall into two groups. <code class="language-plaintext highlighter-rouge">laplaceFilter</code> and <code class="language-plaintext highlighter-rouge">taubinFilter</code> apply a local averaging step a fixed number of times, so how far they smooth depends on how densely the boundary is sampled. <code class="language-plaintext highlighter-rouge">curvatureFilter</code> and <code class="language-plaintext highlighter-rouge">huberFilter</code> instead define the smooth boundary as the solution of a minimization problem, stated in terms of a <b>length</b>, which does not change when the same sample is measured on a finer grid.</p>
@@ -143,8 +143,8 @@ fprintf(['  25 iterations %+6.2f%% on average,' ...
 
 {% highlight plaintext %}
 grain area, laplaceFilter
-   5 iterations  -0.66% on average,  -18.1% for the worst grain
-  25 iterations  -2.42% on average,  -59.0% for the worst grain
+   5 iterations  -0.67% on average,  -18.1% for the worst grain
+  25 iterations  -2.43% on average,  -59.0% for the worst grain
 {% endhighlight %}
 <p>The averaging includes a vertex with the weight of its own degree, which is how the adjacency comes out of the vertex-segment incidence matrix. For a vertex with two neighbours the mean is therefore <code class="language-plaintext highlighter-rouge">(2*V + Vl + Vr)/4</code>, so the documented default <code class="language-plaintext highlighter-rouge">lambda = 0.5</code> is in truth a rate of 0.25. The other kernels - <code class="language-plaintext highlighter-rouge">'gauss'</code>, <code class="language-plaintext highlighter-rouge">'exp'</code>, <code class="language-plaintext highlighter-rouge">'umbrella'</code> - reweight the same adjacency by the distance between neighbours.</p>
 <h2 id="10">The Taubin filter</h2>
@@ -228,7 +228,7 @@ fprintf('  %+6.2f%% on average, %+6.1f%% for the worst grain\n', ...
 
 {% highlight plaintext %}
 grain area, huberFilter at the same smoothing length
-   -0.15% on average,   -7.5% for the worst grain
+   -0.16% on average,   -7.5% for the worst grain
 {% endhighlight %}
 <p>Be aware of the trade this makes. On a map whose boundaries are really straight or really smooth, the corners it protects are the leftovers of the pixel grid. On a synthetic Voronoi map, where every boundary is exactly straight and the true answer is therefore known, it doubles the scatter of the boundary directions compared with <code class="language-plaintext highlighter-rouge">curvatureFilter</code>. Reach for it when the material is faceted, not by default.</p>
 <h2 id="15">Moving the triple points</h2>

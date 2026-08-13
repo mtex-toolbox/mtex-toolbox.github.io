@@ -82,7 +82,7 @@ ans = grain2d (y↑→x)
  triple points: 6
  
  Id   Phase   Pixels      meanRotation          GOS
- 35       1      323   (131°,64°,250°)   0.00795279
+ 47       1      323   (131°,64°,250°)   0.00795279
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_03.png" %}
@@ -123,9 +123,9 @@ grains_selected = grain2d (y↑→x)
  triple points: 13
  
  Id   Phase   Pixels      meanRotation     GOS
- 22       1      181   (131°,64°,245°)   0.007
- 35       1      323   (131°,64°,250°)   0.008
- 52       1       19   (144°,74°,250°)    0.01
+ 18       1       19   (144°,74°,250°)    0.01
+ 47       1      323   (131°,64°,250°)   0.008
+ 55       1      181   (131°,64°,245°)   0.007
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_05.png" %}
@@ -152,7 +152,7 @@ plot(grains,grain_area)
 max_area =
    4.1122e+06
 max_id =
-    84
+    28
 {% endhighlight %}
 <p>The number <code class="language-plaintext highlighter-rouge">max_id</code> is the position of the grain with a maximum area within the variable <code class="language-plaintext highlighter-rouge">grains</code>. We can access this specific grain by direct indexing</p>
 {% highlight matlab %}
@@ -170,7 +170,7 @@ ans = grain2d (y↑→x)
  triple points: 17
  
  Id   Phase   Pixels      meanRotation        GOS
- 84       1     1545   (167°,81°,251°)   0.012969
+ 28       1     1545   (167°,81°,251°)   0.012969
 {% endhighlight %}
 <p>and so we can plot it</p>
 {% highlight matlab %}
@@ -214,10 +214,10 @@ grains(1:5).phase
 {% highlight plaintext %}
 ans =
      1
+     3
+     2
      1
-     3
-     3
-     3
+     1
 {% endhighlight %}
 <p>Now we can access or grains of the first phase Forsterite by the condition</p>
 {% highlight matlab %}
@@ -236,9 +236,9 @@ grains('forsterite')
 ans = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1      62   14010  Forsterite       mmm  LightSkyBlue
+     1      61   14009  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 2833 (133223 µm)
+ boundary segments: 2825 (132934 µm)
  inner boundary segments: 12 (568 µm)
  triple points: 135
  
@@ -259,15 +259,15 @@ selected_grains = grain2d (y↑→x)
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       4    5248  Forsterite       mmm  LightSkyBlue
  
- boundary segments: 736 (34478 µm)
+ boundary segments: 737 (34466 µm)
  inner boundary segments: 0 (0 µm)
  triple points: 43
  
  Id   Phase   Pixels       meanRotation      GOS
- 39       1     1448   (166°,127°,259°)    0.014
- 48       1     1047     (89°,99°,224°)   0.0077
- 51       1     1208    (153°,68°,237°)   0.0081
- 84       1     1545    (167°,81°,251°)    0.013
+ 28       1     1545    (167°,81°,251°)    0.013
+ 60       1     1047     (89°,99°,224°)   0.0077
+ 82       1     1208    (153°,68°,237°)   0.0081
+ 84       1     1448   (166°,127°,259°)    0.014
 {% endhighlight %}
 <center>
 {% include inline_image.html file="SelectingGrains_11.png" %}
@@ -292,17 +292,16 @@ ebsd(grains(33))
 ans = EBSD (y↑→x)
  
  Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
-     3      6 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3      5 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
-    Id   Phase            orientation   bands    bc    bs   error   mad   grainId
- 59426       3   (165.2°,77.3°,18.2°)       7   135   208       0   0.5        33
- 60156       3   (165.4°,77.6°,18.5°)       7   111   185       0   0.6        33
- 60157       3   (164.9°,77.4°,18.2°)       7   131   220       0   0.9        33
- 60158       3     (165°,77.5°,18.5°)       7   120   193       0   0.5        33
- 60888       3   (165.3°,77.5°,18.1°)       7   110   189       0   0.6        33
- 60889       3   (165.5°,77.3°,18.2°)       7   140   242       0   0.6        33
+    Id   Phase              orientation   bands   bc    bs   error   mad   oldId   grainId
+ 54816       3     (178°,139.2°,130.8°)       7   85   142       0   0.7   34568        33
+ 55152       3   (178.8°,138.8°,130.9°)       7   97   140       0   0.6   34569        33
+ 55153       3   (178.5°,139.4°,130.5°)       7   76   163       0   0.4   35301        33
+ 55489       3     (178°,139.4°,130.4°)       7   90   170       0   0.4   35302        33
+ 55490       3   (177.7°,139.5°,130.1°)       7   84   166       0   0.3   36034        33
  Scan unit : um
- X x Y x Z : [6550, 6650] x [4050, 4150] x [0, 0]
+ X x Y x Z : [8150, 8250] x [2350, 2450] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>and is equivalent to the command</p>
@@ -314,17 +313,16 @@ ebsd(ebsd.grainId == 33)
 ans = EBSD (y↑→x)
  
  Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
-     3      6 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3      5 (100%)  Diopside  Goldenrod     12/m1       X||a*, Y||b*, Z||c
  
-    Id   Phase            orientation   bands    bc    bs   error   mad   grainId
- 59426       3   (165.2°,77.3°,18.2°)       7   135   208       0   0.5        33
- 60156       3   (165.4°,77.6°,18.5°)       7   111   185       0   0.6        33
- 60157       3   (164.9°,77.4°,18.2°)       7   131   220       0   0.9        33
- 60158       3     (165°,77.5°,18.5°)       7   120   193       0   0.5        33
- 60888       3   (165.3°,77.5°,18.1°)       7   110   189       0   0.6        33
- 60889       3   (165.5°,77.3°,18.2°)       7   140   242       0   0.6        33
+    Id   Phase              orientation   bands   bc    bs   error   mad   oldId   grainId
+ 54816       3     (178°,139.2°,130.8°)       7   85   142       0   0.7   34568        33
+ 55152       3   (178.8°,138.8°,130.9°)       7   97   140       0   0.6   34569        33
+ 55153       3   (178.5°,139.4°,130.5°)       7   76   163       0   0.4   35301        33
+ 55489       3     (178°,139.4°,130.4°)       7   90   170       0   0.4   35302        33
+ 55490       3   (177.7°,139.5°,130.1°)       7   84   166       0   0.3   36034        33
  Scan unit : um
- X x Y x Z : [6550, 6650] x [4050, 4150] x [0, 0]
+ X x Y x Z : [8150, 8250] x [2350, 2450] x [0, 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>The following picture plots the largest grains together with its individual orientation measurements.</p>

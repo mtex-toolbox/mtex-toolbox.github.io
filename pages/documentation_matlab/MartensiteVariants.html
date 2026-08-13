@@ -38,17 +38,20 @@ grains = smoothBoundary(grains,4);
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+saving data to /home/hielscher/mtex/master/data/emsland.mat
+ 
+ebsd = EBSDsquare (y↑→x)
  
  Phase  Orientations       Mineral         Color  Symmetry  Crystal reference frame
      0  18393 (6.8%)    notIndexed          none                                   
      1  215769 (80%)  Ferrite, bcc  LightSkyBlue      m-3m                         
      2   35838 (13%)     Austenite  DarkSeaGreen      m-3m                         
  
- Properties: bands, bc, bs, error, mad
+ Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
  X x Y x Z : [0, 604] x [0, 453] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :450 x 600
 {% endhighlight %}
 <p>The following lines plot bcc according to the crystallographic description of the selected reference direction (IPF coloring), whereas austenite is displayed as a phase in blue.</p>
 {% highlight matlab %}
@@ -67,7 +70,7 @@ plot(ebsd('Aus').orientations,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 35183 given orientations
+plot 2000 random orientations out of 34655 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_02.png" %}
@@ -85,10 +88,10 @@ parenOri = orientation (Austenite → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  266.273 163.626 245.482
+  266.294 163.623 245.508
  
 fit =
-    1.6417
+    1.4885
 {% endhighlight %}
 <p>Next, we display the bcc orientations (blue dots) in pole figures, and overlay the parent Taenite orientation (red dots) on top of them.</p>
 {% highlight matlab %}
@@ -117,7 +120,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 500 random orientations out of 5553 given orientations
+I'm plotting 500 random orientations out of 5225 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -155,7 +158,7 @@ mean(angle(mori, KS)) ./ degree
 
 {% highlight plaintext %}
 ans =
-    3.9485
+    3.9349
 {% endhighlight %}
 <h2 id="8">Estimating the parent-to-child orientation relationship</h2>
 <p>We could ask ourselves if there is another orientation relationship that better matches the measured misorientations than the KS orientation relationship. In this case, a canonical candidate would be the <a href="orientation.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> of all misorientations.</p>
@@ -176,14 +179,14 @@ mean(angle(mori, p2cMean)) ./ degree
 p2cMean = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
-     phi1     Phi    phi2
-  199.068 8.19018  116.79
+    phi1     Phi    phi2
+  109.08 8.19426 206.902
  
-  I'm plotting 500 random orientations out of 5553 given orientations
+  I'm plotting 500 random orientations out of 5225 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 ans =
-    2.5013
+    2.4910
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_05.png" %}
@@ -214,10 +217,10 @@ p2cIter = misorientation (Austenite → Ferrite, bcc)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  177.389 98.2127 46.4874
+  177.267 98.0392 43.6378
  
 ans =
-    3.5566
+    2.4937
 {% endhighlight %}
 <p>We observe that the parent-to-child orientation relationship computed solely from child-to-child misorientations fits the actual orientation relationship equally well.</p>
 <h2 id="11">Classification of child variants by variant Ids</h2>
@@ -234,7 +237,7 @@ plotPDF(childOri,color,h_bcc,'MarkerSize',5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 208 random orientations out of 5553 given orientations
+I'm plotting 208 random orientations out of 5225 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -247,7 +250,7 @@ plot(childOri,color,'axisAngle')
 {% endhighlight %}
 
 {% highlight plaintext %}
-plot 2000 random orientations out of 5553 given orientations
+plot 2000 random orientations out of 5225 given orientations
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MartensiteVariants_07.png" %}
@@ -281,7 +284,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 5553 given orientations
+I'm plotting 1000 random orientations out of 5225 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -323,7 +326,7 @@ drawNow(gcm)
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 1000 random orientations out of 5553 given orientations
+I'm plotting 1000 random orientations out of 5225 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}

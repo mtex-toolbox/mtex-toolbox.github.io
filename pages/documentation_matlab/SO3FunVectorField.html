@@ -42,15 +42,18 @@ G = SO3VectorFieldHarmonic (Quartz → y↓→x)
   bandwidth: 48
   tangent space: leftVector
  
+Warning: A 3 x 3 matrix of coordinates is ambiguous -
+it is read as three vectors given by its COLUMNS. Use
+vector3d.byXYZ(xyz) to read it by rows instead. 
  
 ans = SO3TangentVector (y↓→x)
  intern symmetries: Quartz → y↓→x
  size: 3 x 1
  TagentSpace: leftVector
-       x       y       z
-  -0.027   0.508 -0.0764
-   0.659  -0.375   0.825
-  -0.396    1.06   0.413
+        x       y       z
+    0.126   0.342  0.0146
+  0.00998 -0.0526  -0.074
+   -0.994    1.63   0.383
 {% endhighlight %}
 <p>Lets visualize the ODF together with its gradient in a sigma section plot</p>
 {% highlight matlab %}
@@ -143,24 +146,27 @@ GR = SO3VectorFieldHarmonic (1 → y↑→x)
   intern symmetries: Quartz → y↑→x
   intern tangent space: leftVector
  
+Warning: A 3 x 3 matrix of coordinates is ambiguous -
+it is read as three vectors given by its COLUMNS. Use
+vector3d.byXYZ(xyz) to read it by rows instead. 
  
 v = SO3TangentVector (y↑→x)
  intern symmetries: Quartz → y↑→x
  size: 3 x 1
  TagentSpace: rightVector
-      x      y      z
-  0.047  -0.22  0.463
-  -1.04 -0.251   0.34
-  0.718 -0.287  0.921
+      x        y        z
+  0.064 0.000435    0.359
+  0.043   0.0481   0.0647
+  0.807   -0.727     1.62
  
 v_right = SO3TangentVector (y↑→x)
  intern symmetries: Quartz → y↑→x
  size: 3 x 1
  TagentSpace: rightVector
-      x      y      z
-  0.047  -0.22  0.463
-  -1.04 -0.251   0.34
-  0.718 -0.287  0.921
+      x        y        z
+  0.064 0.000435    0.359
+  0.043   0.0481   0.0647
+  0.807   -0.727     1.62
 {% endhighlight %}
 <p>Note that MTEX cares about the tangent space representation. Hence if we try to compute with <code class="language-plaintext highlighter-rouge">@SO3VectorFields</code> MTEX automatically transform them into the same representation and applies the operation afterwards.</p>
 {% highlight matlab %}
@@ -195,25 +201,25 @@ ans = SO3TangentVector (y↑→x)
  intern symmetries: Quartz → y↑→x
  size: 6 x 1
  TagentSpace: leftVector
-      x     y     z
-  0.314 0.135 0.216
-  0.314 0.135 0.216
-  0.314 0.135 0.216
-  0.314 0.135 0.216
-  0.314 0.135 0.216
-  0.314 0.135 0.216
+      x      y      z
+  0.324  0.126 0.0582
+  0.324  0.126 0.0582
+  0.324  0.126 0.0582
+  0.324  0.126 0.0582
+  0.324  0.126 0.0582
+  0.324  0.126 0.0582
  
 ans = SO3TangentVector (y↑→x)
  intern symmetries: Quartz → y↑→x
  size: 6 x 1
  TagentSpace: rightVector
-        x       y       z
-   -0.123   -0.11   0.369
-   0.0339   0.162  -0.369
-  -0.0339   0.162   0.369
-    0.123   -0.11  -0.369
-    0.157 -0.0516   0.369
-   -0.157 -0.0516  -0.369
+         x        y        z
+    -0.085   0.0409    0.339
+   -0.0779   0.0531   -0.339
+    0.0779   0.0531    0.339
+     0.085   0.0409   -0.339
+   0.00706   -0.094    0.339
+  -0.00706   -0.094   -0.339
 {% endhighlight %}
 <p>To handle the fact that one of the symmetries "disappears" depending on the tangent space representation, we introduced two hidden symmetry properties. These track the original symmetries properly for the <code class="language-plaintext highlighter-rouge"><a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a></code>.</p>
 <p>Note that the symmetries of the internal SO3Fun depend on the internal tangent space, whereas the symmetries of the vector field depend on the external (desired) tangent space representation.</p>

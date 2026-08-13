@@ -40,15 +40,16 @@ drawNow(gcm,'final')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDhex (y↓→x)
  
  Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0   8100 (100%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
+     0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
  
- Properties: ci, grainid, iq, sem_signal
+ Properties: ci, grainid, iq, sem_signal, oldId
  Scan unit : um
- X x Y x Z : [0, 996] x [0, 998] x [0, 0]
+ X x Y x Z : [0, 1002] x [0, 998] x [0, 0]
  Normal vector: (0,0,1)
+ Hex grid     :97 x 84
  
  
 cS = crystalShape
@@ -116,8 +117,11 @@ plot(ebsd,ebsd.orientations)
 hold on
 scaling = 100; % scale the crystal shape to have a nice size
 
-% plot at position (500,500) the orientation of the corresponding crystal
-plot(500,500,50, ebsd(500,500).orientations * cS * scaling,'faceAlpha',0.5,'linewidth',2)
+% plot at position (500,500) the orientation of the corresponding crystal.
+% we have to choose z = -50 such that the crystal shape becomes visible
+% above the map
+plot(500,500,-50, ebsd('xy',500,500).orientations * cS * scaling,...
+  'faceAlpha',0.5,'linewidth',2)
 hold off
 drawNow(gcm,'final')
 {% endhighlight %}

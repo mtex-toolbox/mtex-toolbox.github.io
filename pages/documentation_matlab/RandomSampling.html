@@ -103,11 +103,16 @@ calcError(odf_rec,fibre_odf)
 
 {% highlight plaintext %}
 ori = orientation (321 → y↓→x)
-  size: 500 x 1
+  size: 497 x 1
 ans =
-    0.0492
+    0.0478
 {% endhighlight %}
-<h2 id="7">Exporting Random Orientations</h2>
+<p>By default all sampled orientations carry the same weight. Asking <code class="language-plaintext highlighter-rouge">optimalSample</code> for a second output</p>
+{% highlight matlab %}
+[ori,c] = odf.optimalSample(500)
+{% endhighlight %}
+<p>optimizes the weights alongside the orientations, i.e. the ODF is represented by a weighted sum of point masses. Since this adds one degree of freedom per orientation, fewer orientations are needed for the same accuracy. The weights are volume fractions and are passed on directly by <code class="language-plaintext highlighter-rouge">calcDensity(ori,'weights',c)</code>. Whether they pay off depends on the halfwidth you intend to use - see <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> for the details.</p>
+<h2 id="8">Exporting Random Orientations</h2>
 <p>In order to make use of the sampled orientations you probably want to <a href="OrientationExport.html">export</a> them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <code class="language-plaintext highlighter-rouge"><a href="quaternion.export.html">export</a></code> and <code class="language-plaintext highlighter-rouge"><a href="orientation.export_VPSC.html">export_VPSC</a></code>.</p>
 </div>
 </body>

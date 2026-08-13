@@ -82,7 +82,7 @@ hold off
 % define the denoising filter
 F = halfQuadraticFilter;
 
-ebsd = smooth(ebsd('indexed'),F,'fill',grains);
+ebsd = smooth(ebsd,F,'fill',grains);
 
 % plot the denoised data
 ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
@@ -95,18 +95,38 @@ hold off
 <center>
 {% include inline_image.html file="GND_04.png" %}
 </center>
-<h2 id="5">The incomplete curvature tensor</h2>
+<h2 id="5">The GND density in one command</h2>
+<p>Everything below is done for you by <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a>, which takes the EBSD data and a set of <a href="dislocationSystem.dislocationSystem.html">dislocation systems</a> and returns the total dislocation energy per pixel together with the density of each individual system.</p>
+{% highlight matlab %}
+% the dislocation systems of a body centered cubic material, with the
+% energies of edge and screw dislocations set as discussed further below
+dS = dislocationSystem.bcc(ebsd.CS);
+dS(dS.isEdge).u = 1;
+dS(dS.isScrew).u = 1 - 0.3;
+
+[gnd,rho] = calcGND(ebsd,dS);
+
+close all
+plot(ebsd,gnd,'micronbar','off')
+mtexColorMap('hot')
+mtexColorbar
+set(gca,'ColorScale','log');
+set(gca,'CLim',[1e11 5e14]);
+
+hold on
+plot(grains.boundary,'linewidth',2)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="GND_05.png" %}
+</center>
+<p>The remainder of this page walks through what <code class="language-plaintext highlighter-rouge">calcGND</code> does internally.</p>
+<h2 id="7">The incomplete curvature tensor</h2>
 <p>Starting point of any GND computation is the curvature tensor, which is a rank two tensor that is defined for every pixel in the EBSD map by the directional derivatives in x, y and z direction.</p>
 {% highlight matlab %}
-% consider only the Fe(alpha) phase
-ebsd = ebsd('indexed').gridify;
-
-% compute the curvature tensor
 kappa = ebsd.curvature
 
-% one can index the curvature tensors in the same way as the EBSD data.
-% E.g. the curvature in pixel (2,3) is
-kappa(2,3)
+kappa(32)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -119,12 +139,11 @@ ans = curvatureTensor (y↑→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
- *10^-4
-   4.591  -2.269     NaN
-  -0.379 -15.305     NaN
-  11.952 -17.293     NaN
+ *10^-5
+  -5.269 -15.795     NaN
+  -0.272  20.639     NaN
+ -16.924  25.818     NaN
 {% endhighlight %}
-<h2 id="6">The components of the curvature tensor</h2>
 <p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d-EBSD maps.</p>
 <p>We can access the different components of the curvature tensor with</p>
 {% highlight matlab %}
@@ -137,7 +156,7 @@ size(kappa12)
 ans =
    101    51
 {% endhighlight %}
-<p>which results in a variable of the same size as our EBSD map. This allows us to visualize the different components of the curvature tensor</p>
+<p>which results in a variable of the same size as our EBSD data. This allows us to visualize the different components of the curvature tensor</p>
 {% highlight matlab %}
 newMtexFigure('nrows',3,'ncols',3);
 
@@ -157,9 +176,25 @@ setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GND_05.png" %}
+{% include inline_image.html file="GND_06.png" %}
 </center>
-<h2 id="8">The incomplete dislocation density tensor</h2>
+<p>Our map is stored as a matrix - which is how it was imported, see <a href="EBSDGrid.html">Square and Hex Grids</a> - so the curvature tensor comes back in the shape of the map and may be addressed by pixel coordinates rather than by a linear index. <code class="language-plaintext highlighter-rouge">kappa(2,3)</code> is the curvature of the pixel in row 2, column 3.</p>
+{% highlight matlab %}
+kappa(2,3)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = curvatureTensor (y↑→x)
+  unit: 1/um     
+  rank: 2 (3 x 3)
+ 
+ *10^-4
+   4.591  -2.269     NaN
+  -0.379 -15.305     NaN
+  11.952 -17.293     NaN
+{% endhighlight %}
+<p>For a map that is kept as a plain list of pixels the curvature is a list as well; <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> the map first if you want the matrix form.</p>
+<h2 id="12">The incomplete dislocation density tensor</h2>
 <p>According to Kroener the curvature tensor is directly related to the dislocation density tensor.</p>
 {% highlight matlab %}
 alpha = kappa.dislocationDensity
@@ -173,7 +208,7 @@ alpha = dislocationDensityTensor (y↑→x)
 {% endhighlight %}
 <p>which has the same unit as the curvature tensor and is incomplete as well as we can see when looking at a particular one.</p>
 {% highlight matlab %}
-alpha(2,3)
+alpha(2)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -181,12 +216,12 @@ ans = dislocationDensityTensor (y↑→x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
- *10^-4
-     NaN  -0.379  11.952
-  -2.269     NaN -17.293
-     NaN     NaN  10.715
+ *10^-5
+    NaN   21.9  33.18
+ -12.99    NaN -32.27
+    NaN    NaN  39.54
 {% endhighlight %}
-<h2 id="10">Crystallographic Dislocations</h2>
+<h2 id="14">Crystallographic Dislocations</h2>
 <p>The central idea of Pantleon is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the atomic lattice different dislocation systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
 {% highlight matlab %}
 dS = dislocationSystem.bcc(ebsd.CS)
@@ -266,7 +301,7 @@ a = norm(ebsd.CS.aAxis);
 ans =
     2.4855    2.4855    2.4855
 {% endhighlight %}
-<h2 id="12">The Energy of Dislocations</h2>
+<h2 id="16">The Energy of Dislocations</h2>
 <p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed according to the specific model and the specific material.</p>
 <p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p>
 <p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p>
@@ -281,11 +316,9 @@ ans =
 <li>
 <code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li>
 <li>
-<code class="language-plaintext highlighter-rouge">R</code>
-</li>
+<code class="language-plaintext highlighter-rouge">R</code> is the outer cut off radius</li>
 <li>
-<code class="language-plaintext highlighter-rouge">r</code>
-</li>
+<code class="language-plaintext highlighter-rouge">r_0</code> is the radius of the dislocation core</li>
 </ul>
 </div>
 <p>In this example we assume \[ U_{\mathrm{edge}} = 1 \] \[ U_{\mathrm{screw}} = 1-\nu \]</p>
@@ -296,10 +329,9 @@ nu = 0.3;
 dS(dS.isEdge).u = 1;
 
 % energy of the screw dislocations
-dS(dS.isScrew).u = 1 - 0.3;
+dS(dS.isScrew).u = 1 - nu;
 {% endhighlight %}
-<p>Question to everybody: what is the best way to set the energy? I found different formulas</p>
-<p>E = 1 - poisson ratio E = c * G * |b|^2, - G - Schubmodul / Shear Modulus Energy per (unit length)^2</p>
+<p>There is no single accepted way of setting these energies. Formulae in use include <code class="language-plaintext highlighter-rouge">U = 1 - nu</code> as above, and <code class="language-plaintext highlighter-rouge">U = c * G * |b</code>^2| with <code class="language-plaintext highlighter-rouge">G</code> the shear modulus, i.e. an energy per unit length squared. Which one is appropriate depends on the model you are comparing against, so <code class="language-plaintext highlighter-rouge">u</code> is left for you to set rather than being fixed by MTEX.</p>
 <p>A single dislocation causes a deformation that can be represented by the rank one tensor</p>
 {% highlight matlab %}
 dS(1).tensor
@@ -324,7 +356,7 @@ dSRot = dislocationSystem
  edge dislocations : 5144 x 48
  screw dislocations: 5144 x 4
 {% endhighlight %}
-<h2 id="16">Fitting Dislocations to the incomplete dislocation density tensor</h2>
+<h2 id="20">Fitting Dislocations to the incomplete dislocation density tensor</h2>
 <p>Now we are ready for fitting the dislocation tensors to the dislocation density tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a>.</p>
 {% highlight matlab %}
 [rho,factor] = fitDislocationSystems(kappa,dSRot);
@@ -393,9 +425,9 @@ setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large');
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GND_06.png" %}
+{% include inline_image.html file="GND_07.png" %}
 </center>
-<h2 id="20">The total dislocation energy</h2>
+<h2 id="24">The total dislocation energy</h2>
 <p>The unit of the densities <code class="language-plaintext highlighter-rouge">h</code> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <code class="language-plaintext highlighter-rouge">h</code> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <code class="language-plaintext highlighter-rouge">factor</code> by the function <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a>.</p>
 {% highlight matlab %}
 factor
@@ -405,7 +437,7 @@ factor
 factor =
    1.0000e+16
 {% endhighlight %}
-<p>Multiplying the densities <code class="language-plaintext highlighter-rouge">rho</code> with this factor and the individual energies of the the dislocation systems we end up with the total dislocation energy. Lets plot this at a logarithmic scale</p>
+<p>Multiplying the densities <code class="language-plaintext highlighter-rouge">rho</code> with this factor and the individual energies of the the dislocation systems we end up with the total dislocation energy, which is what <code class="language-plaintext highlighter-rouge">calcGND</code> returned at the top of this page. Lets plot it at a logarithmic scale</p>
 {% highlight matlab %}
 close all
 plot(ebsd,factor*sum(abs(rho .* dSRot.u),2),'micronbar','off')
@@ -420,7 +452,7 @@ plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="GND_07.png" %}
+{% include inline_image.html file="GND_08.png" %}
 </center>
 </div>
 </body>

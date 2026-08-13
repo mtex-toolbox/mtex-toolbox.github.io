@@ -37,11 +37,12 @@ ebsd.prop
 ans = 
   struct with fields:
 
-    bands: [245952×1 double]
-       bc: [245952×1 double]
-       bs: [245952×1 double]
-    error: [245952×1 double]
-      mad: [245952×1 double]
+    bands: [336×732 double]
+       bc: [336×732 double]
+       bs: [336×732 double]
+    error: [336×732 double]
+      mad: [336×732 double]
+    oldId: [336×732 double]
 {% endhighlight %}
 <p>and each of them is at the same time accessible as if it was a regular field of the object</p>
 {% highlight matlab %}
@@ -50,11 +51,7 @@ ebsd.mad(1:5)
 
 {% highlight plaintext %}
 ans =
-    0.1000
-    0.1000
-    0.1000
-    0.3000
-    0.2000
+    0.1000    0.1000    0.3000    0.3000    0.2000
 {% endhighlight %}
 <p>The single most important thing about a property is that it is in lockstep with the list. Selecting a subset selects the corresponding property values</p>
 {% highlight matlab %}
@@ -88,12 +85,13 @@ ebsd.prop
 ans = 
   struct with fields:
 
-        bands: [245952×1 double]
-           bc: [245952×1 double]
-           bs: [245952×1 double]
-        error: [245952×1 double]
-          mad: [245952×1 double]
-    myQuality: [245952×1 double]
+        bands: [336×732 double]
+           bc: [336×732 double]
+           bs: [336×732 double]
+        error: [336×732 double]
+          mad: [336×732 double]
+        oldId: [336×732 double]
+    myQuality: [336×732 double]
 {% endhighlight %}
 <p>From now on <code class="language-plaintext highlighter-rouge">myQuality</code> behaves exactly like any built in property - it can be read and overwritten as <code class="language-plaintext highlighter-rouge">ebsd.myQuality</code> without the <code class="language-plaintext highlighter-rouge">prop</code>, and it survives indexing</p>
 {% highlight matlab %}
@@ -104,7 +102,7 @@ ebsd('Forsterite').myQuality(1:5)
 ans =
     0.9091
     0.9091
-    0.9091
+    0.7692
     0.7692
     0.8333
 {% endhighlight %}
@@ -133,6 +131,7 @@ ans =
            bs: [152345×1 double]
         error: [152345×1 double]
           mad: [152345×1 double]
+        oldId: [152345×1 double]
     myQuality: [152345×1 double]
        myAxis: [152345×1 vector3d]
 {% endhighlight %}

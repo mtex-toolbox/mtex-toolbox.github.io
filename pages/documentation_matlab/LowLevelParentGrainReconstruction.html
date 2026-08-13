@@ -36,17 +36,18 @@ plot(ebsd(alphaName),ebsd(alphaName).orientations,'figSize','large')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↓→x)
+ebsd = EBSDsquare (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0  10449 (5.3%)  notIndexed          none                                   
      1   437 (0.22%)   Ti (BETA)  LightSkyBlue       432                         
      2  185722 (94%)  Ti (alpha)  DarkSeaGreen       622        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, reliabilityindex
+ Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
  Scan unit : um
  X x Y x Z : [0, 1568] x [0, 1175] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :384 x 512
 {% endhighlight %}
 <center>
 {% include inline_image.html file="LowLevelParentGrainReconstruction_01.png" %}
@@ -98,7 +99,7 @@ tPori = grains(tP.grainId).meanOrientation;
 tP = triplePointList (y↓→x)
  
  points   mineral 1   mineral 2   mineral 3
-  99276  Ti (alpha)  Ti (alpha)  Ti (alpha)
+  85407  Ti (alpha)  Ti (alpha)  Ti (alpha)
 {% endhighlight %}
 <p>The command <code class="language-plaintext highlighter-rouge">calcParent</code> returns for each child orientation a <code class="language-plaintext highlighter-rouge">parentId</code> which allows us later to compute the parent orientation from the child orientation. Furthermore, the command return for each triple junction the misfit between the adjacent parent orientations in radiant. Finally, the option <code class="language-plaintext highlighter-rouge">'numFit',2</code> causes <code class="language-plaintext highlighter-rouge">calcParent</code> to return not only the best fit but also the second best fit. This will be used later. First we simple colorize the triple junctions according to the best fit.</p>
 {% highlight matlab %}
@@ -248,7 +249,7 @@ sum(hasVote)
 
 {% highlight plaintext %}
 ans =
-       16717
+       16205
 {% endhighlight %}
 <p>alpha grains into the already reconstructed beta grain. This reduces the amount of grains not yet reconstructed to</p>
 {% highlight matlab %}
@@ -257,7 +258,7 @@ sum(parentGrains(alphaName).numPixel) ./ sum(parentGrains.numPixel)*100
 
 {% highlight plaintext %}
 ans =
-    1.2685
+    1.2067
 {% endhighlight %}
 <p>percent. One way to proceed would be to repeat the steps of this section multiple time, maybe with increasing threshold, until the percentage of reconstructed beta grains is sufficiently high. Another approach in to consider the left over alpha grains as noise and use denoising techniques to replace them with beta orientations. This will be done in the last section.</p>
 <h2 id="20">Reconstruct beta orientations in EBSD map</h2>
@@ -266,8 +267,11 @@ ans =
 {% highlight matlab %}
 % consider only original alpha pixels that now belong to beta grains
 
-isNowBeta = parentGrains.phaseId(max(1,parentEBSD.grainId)) == ebsd.name2id(betaName) &...
-  parentEBSD.phaseId == ebsd.name2id(alphaName);
+% the (:) matter: on a gridded map every per pixel property has the shape of
+% the map, but phaseId is the storage and stays a column, so combining the
+% two without flattening compares an (r x c) against an (r*c x 1)
+isNowBeta = parentGrains.phaseId(max(1,parentEBSD.grainId(:))) == ebsd.name2id(betaName) &...
+  parentEBSD.phaseId(:) == ebsd.name2id(alphaName);
 {% endhighlight %}
 <p>Next we can use once again the function <a href="calcParent.html"><code class="language-plaintext highlighter-rouge">calcParent</code></a> to recover the original beta orientation from the measured alpha orientation giving the mean beta orientation of the grain.</p>
 {% highlight matlab %}

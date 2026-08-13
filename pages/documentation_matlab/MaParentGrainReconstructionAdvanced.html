@@ -33,7 +33,7 @@ csBCC = ebsd.CSList(2); % austenite bcc:
 csFCC = ebsd.CSList(3); % martensite fcc:
 
 % grain reconstruction
-[grains,ebsd] = calcGrains(ebsd,'angle',3*degree,'minPixel',5);
+[grains,ebsd] = calcGrains(ebsd,'angle',3*degree,'minPixel',2,'removeQuadruplePoints');
 
 % plot the data and the grain boundaries
 plot(ebsd('Iron bcc'),ebsd('Iron bcc').orientations,'figSize','large')
@@ -43,16 +43,17 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDsquare (y↑→x)
  
  Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
      0   92415 (27%)      notIndexed          none                                   
      1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
  
- Properties: bands, bc, bs, error, mad, reliabilityindex
+ Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
  Scan unit : um
  X x Y x Z : [0, 353] x [0, 242] x [0, 0]
  Normal vector: (0,0,1)
+ Square grid  :486 x 707
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstructionAdvanced_01.png" %}
@@ -240,7 +241,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-I'm plotting 416 random orientations out of 9517 given orientations
+I'm plotting 416 random orientations out of 9162 given orientations
   You can specify the the number points by the option "points".
   The option "all" ensures that all data are plotted
 {% endhighlight %}
@@ -249,8 +250,11 @@ I'm plotting 416 random orientations out of 9517 given orientations
 </center>
 <p>So far our analysis was at the grain level. However, once parent grain orientations have been computed we may also use them to compute parent orientations of each pixel in our original EBSD map. To this end we first find pixels that now belong to an austenite grain.</p>
 {% highlight matlab %}
-% consider only martensite pixels that now belong to austenite grains
-isNowFCC = parentGrains.phaseId(max(1,parentEBSD.grainId)) == 3 & parentEBSD.phaseId == 2;
+% consider only martensite pixels that now belong to austenite grains. The
+% (:) matter: on a gridded map every per pixel property has the shape of the
+% map, but phaseId is the storage and stays a column, so combining the two
+% without flattening compares an (r x c) against an (r*c x 1)
+isNowFCC = parentGrains.phaseId(max(1,parentEBSD.grainId(:))) == 3 & parentEBSD.phaseId(:) == 2;
 
 % compute parent orientation
 [parentEBSD(isNowFCC).orientations, fit] = calcParent(ebsd(isNowFCC).orientations,...
