@@ -99,7 +99,26 @@ hold off
 <center>
 {% include inline_image.html file="EBSDIndex_05.png" %}
 </center>
-<h2 id="7">Square Grids</h2>
+<p>A pixel may also be addressed by where it sits in the map, using the option <code class="language-plaintext highlighter-rouge">'xy'</code>
+</p>
+{% highlight matlab %}
+ebsd('xy',44.5,1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = EBSD (y↑→x)
+ 
+ Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
+     1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+    Id   Phase              orientation   bands    bc    bs   error   mad   oldId
+ 20280       1   (176.5°,104.1°,182.9°)      10   139   245       0   0.5     650
+ Scan unit : um
+ X x Y x Z : [44, 44] x [0.9, 0.9] x [0, 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<p>Note that <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> does NOT do this - it is an error. On a gridded map the very same expression is the pixel in row x and column y, see below, so one and the same line would mean two different pixels depending on whether the map happens to be stored as a matrix or as a list. <code class="language-plaintext highlighter-rouge">'xy'</code> means the same in both cases.</p>
+<h2 id="9">Square Grids</h2>
 <p>Our subset is a list, but the pixels in it do sit on a grid, so we may put it back into matrix form with <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>.</p>
 {% highlight matlab %}
 ebsd = ebsd.gridify;
@@ -131,7 +150,7 @@ text(ebsd,1:length(ebsd))
 <center>
 {% include inline_image.html file="EBSDIndex_08.png" %}
 </center>
-<h2 id="10">Hexagonal Grid</h2>
+<h2 id="12">Hexagonal Grid</h2>
 <p>Everything above applies to EBSD data measured on a hexagonal grid as well. Such data is imported as an <a href="EBSDhex.EBSDhex.html">EBSDhex</a>, i.e. it already is in matrix form</p>
 {% highlight matlab %}
 mtexdata titanium silent
@@ -147,7 +166,7 @@ ebsd = EBSDhex (y↓→x)
  
  Properties: ci, grainid, iq, sem_signal, oldId
  Scan unit : um
- X x Y x Z : [0, 1002] x [0, 998] x [0, 0]
+ X x Y x Z : [0, 996] x [0, 998] x [0, 0]
  Normal vector: (0,0,1)
  Hex grid     :97 x 84
 {% endhighlight %}
@@ -167,7 +186,7 @@ text(ebsd,str)
 <center>
 {% include inline_image.html file="EBSDIndex_09.png" %}
 </center>
-<h2 id="13">Cube Coordinates</h2>
+<h2 id="15">Cube Coordinates</h2>
 <p>In hexagonal grids it is sometimes advantageous to use three digit cube coordinates to index the cell. This can be done using the commands <a href="EBSDhex.hex2cube.html"><code class="language-plaintext highlighter-rouge">hex2cube</code></a> and <a href="EBSDhex.cube2hex.html"><code class="language-plaintext highlighter-rouge">cube2hex</code></a>. Much more details on indexing hex grids can be found at <a href="https://www.redblobgames.com/grids/hexagons/">here</a>.</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations,'edgeColor','k','micronbar','off','unitcell')

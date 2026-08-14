@@ -71,6 +71,11 @@ ebsd = EBSD.load(fname,'noGrid')     % this import
 setMTEXpref('gridifyOnImport',false) % every import
 {% endhighlight %}
 <p>Both representations are accepted everywhere, and <code class="language-plaintext highlighter-rouge">EBSD(ebsd)</code> and <code class="language-plaintext highlighter-rouge">gridify</code> convert between them at any time. Note that putting data on a grid <b>reorders</b> it - the matrix layout fixes the first dimension to y while a <code class="language-plaintext highlighter-rouge">.ctf</code> or <code class="language-plaintext highlighter-rouge">.ang</code> runs x fastest - so <code class="language-plaintext highlighter-rouge">ebsd(k)</code> is in general no longer line k of the file. The original ids are kept in <code class="language-plaintext highlighter-rouge">ebsd.oldId</code>. See <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
+<p>One syntax had to go for this: <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> used to be the measurement closest to the coordinate <code class="language-plaintext highlighter-rouge">(x,y)</code> on a list, while on a gridded map the very same expression is the pixel in row <code class="language-plaintext highlighter-rouge">x</code> and column <code class="language-plaintext highlighter-rouge">y</code>. Since almost every file now arrives gridded, that silent difference would decide itself by the data rather than by the script, so <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> is an error now. Ask for the coordinate by name</p>
+{% highlight matlab %}
+ebsd('xy',x,y)   % the measurement closest to (x,y), grid or list
+ebsd(i,j)        % the pixel in row i and column j, gridded map only
+{% endhighlight %}
 <p>
 <b>EBSD Analysis No Longer Needs a Grid</b>
 </p>
@@ -298,6 +303,8 @@ ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
 <li>
 <code class="language-plaintext highlighter-rouge">gB.V</code> returns the two end points of every boundary segment, the plain list of all vertices is <code class="language-plaintext highlighter-rouge">gB.allV</code>
 </li>
+<li>
+<code class="language-plaintext highlighter-rouge">multiplicity</code> now returns the number of symmetrically equivalent directions, fibres or misorientations - the multiplicity as the term is used crystallographically, e.g. <code class="language-plaintext highlighter-rouge">multiplicity(Miller(1,0,0,cs))</code> is 6 in <code class="language-plaintext highlighter-rouge">m-3m</code> and not 8. It used to return the reciprocal quantity, the number of symmetry operations fixing the input, which contradicted its own help line. The two multiply to the order of the group, so the old value is <code class="language-plaintext highlighter-rouge">numSym(cs) ./ multiplicity(m)</code>. This affects <a href="Miller.Miller.html">Miller</a>, <a href="orientation.orientation.html">orientation</a> and <a href="fibre.fibre.html">fibre</a> alike</li>
 </ul>
 </div>
 <p>
