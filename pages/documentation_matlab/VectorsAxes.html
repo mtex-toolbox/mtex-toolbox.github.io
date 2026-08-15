@@ -35,14 +35,14 @@ v2 = vector3d(1,1,-2);
 {% endhighlight %}
 <p>and plots them in a spherical projection</p>
 {% highlight matlab %}
-plot([v1,v2],'label',{'v_1','v_2'})
+plot([v1,v2],'label',{'v_1','v_2'},'grid','on')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsAxes_01.png" %}
 </center>
 <p>These vectors will appear either on the upper or on the lower hemisphere. In order to treat these vectors as axes, i.e. in order to assume antipodal symmetry - one has to use the keyword <code class="language-plaintext highlighter-rouge">'antipodal'</code>.</p>
 {% highlight matlab %}
-plot([v1,v2],'label',{'v_1','v_2'},'antipodal')
+plot([v1,v2],'label',{'v_1','v_2'},'antipodal','grid','on')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsAxes_02.png" %}
@@ -76,7 +76,7 @@ plot(density)
 {% endhighlight %}
 
 {% highlight plaintext %}
-v = vector3d (Y1↑→X1)
+v = vector3d (y↑→x)
  size: 100 x 1
 {% endhighlight %}
 <center>
@@ -89,7 +89,7 @@ plot(density,'complete')
 {% endhighlight %}
 
 {% highlight plaintext %}
-density = S2FunHarmonic (Y1↑→X1)
+density = S2FunHarmonic (y↑→x)
   bandwidth: 25
   antipodal: true
 {% endhighlight %}
@@ -110,22 +110,7 @@ annotate(vector3d(1,0,-1),'labeled','backgroundColor','w')
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
-Warning: While loading an object of class 'Miller':
-Unrecognized field name "framePrivate". 
- 
-pf = PoleFigure (Y1↑→X1)
+pf = PoleFigure (y↑→x)
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
  
   h = (022̅1), r = 72 x 19 points
@@ -164,14 +149,14 @@ plotPDF(odf,Miller(1,2,2,CS),'antipodal')
 <h2 id="13">Antipodal Symmetry in Inverse Pole Figures</h2>
 <p>The same reasoning as above holds true for inverse pole figures. If we look at complete, inverse pole figures they do not posses antipodal symmetry in general</p>
 {% highlight matlab %}
-plotIPDF(odf,[yvector,-yvector],'complete')
+plotIPDF(odf,[yvector,-yvector],'complete','noLabel')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsAxes_08.png" %}
 </center>
 <p>However, if we add the keyword antipodal, antipodal symmetry is enforced.</p>
 {% highlight matlab %}
-plotIPDF(odf,yvector,'antipodal','complete')
+plotIPDF(odf,yvector,'antipodal','complete','noLabel')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsAxes_09.png" %}
