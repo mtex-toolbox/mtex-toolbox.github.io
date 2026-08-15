@@ -24,18 +24,11 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <h2 id="1">Basic Settings</h2>
-<p>display pole figure plots with RD on top and ND west</p>
+<p>we work in the rolling frame - RD to the north, TD to the west and ND out of the page</p>
 {% highlight matlab %}
-plottingConvention.default("y←↑x");
+specimenFrame.rolling.makeDefault
 
-% store old annotation style
-storepfA = getMTEXpref('pfAnnotations');
-
-% set new annotation style to display RD and ND
-pfAnnotations = @(varargin) text(-[vector3d.X,vector3d.Y],{'RD','ND'},...
-  'BackgroundColor','w','tag','axesLabels',varargin{:});
-
-setMTEXpref('pfAnnotations',pfAnnotations);
+% the rolling frame also annotates the pole figures with RD, TD, ND
 {% endhighlight %}
 <h2 id="2">Slip in Body Centered Cubic Materials</h2>
 <p>In the following we consider crystallographic slip in bcc materials</p>
@@ -92,7 +85,7 @@ ori = orientation (432 → y←↑x)
 M =
     2.1208
  
-W = spinTensor (432)
+W = spinTensor (crystalFrame)
   rank: 2 (3 x 3)
  
  *10^-2
@@ -179,7 +172,7 @@ grains = smoothBoundary(grains,5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↓→x)
+ebsd = EBSD (TD↓→RD)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    5 (0.0032%)  notIndexed          none                                   
@@ -187,7 +180,7 @@ ebsd = EBSD (y↓→x)
  
  Properties: ci, error, iq
  Scan unit : um
- X x Y x Z : [0, 511] x [0, 300] x [0, 0]
+ X x Y x Z : [0 → 511] x [0 → 300] x [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>and apply the Taylor model to each grain of our data set</p>
@@ -246,10 +239,8 @@ text([xvector,yvector,zvector],'labeled','BackGroundcolor','w')
 </center>
 <h2 id="13">Texture evolution during rolling</h2>
 <p>Iterating the Taylor spin over small strain increments turns this into a simulation of how the texture of a whole polycrystal develops during deformation. This is the subject of its own chapter, <a href="TextureEvolution.html">Texture Evolution</a>.</p>
-<h2 id="14">restore MTEX preferences</h2>
 {% highlight matlab %}
 close all
-setMTEXpref('pfAnnotations',storepfA);
 {% endhighlight %}
 </div>
 </body>

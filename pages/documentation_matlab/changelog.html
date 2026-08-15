@@ -245,7 +245,7 @@ plot(ebsd,'Location','nw','SBBackgroundColor','k','SBLineColor','w','Length',50)
 <b>Reference Frame Annotations</b>
 </p>
 <p>On top of the micron bar a box indicates how the specimen reference frame is aligned on screen - an arrow for every axis with a component in the screen plane, a circled dot or cross for the one pointing out of or into it, exactly as in the string form of <a href="plottingConvention.html">plottingConvention</a>. It follows the data when the map is reoriented, e.g. by <a href="plottingConvention.setView.html"><code class="language-plaintext highlighter-rouge">setView</code></a>.</p>
-<p>What used to be reserved to pole figures now happens on every spherical plot that is not given in crystal coordinates as well - the axes of the reference frame are annotated with X, Y, Z. This includes <a href="vector3d.vector3d.html">vector3d</a> and <a href="S2Fun.S2Fun.html">S2Fun</a> plots, <a href="sigmaSections.html">sigmaSections</a> and <a href="pfSections.html">pfSections</a>, spherical densities as returned by <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> or <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>, and <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a>. Plots in crystal coordinates - <a href="Miller.Miller.html">Miller</a>, inverse pole figures, <a href="ipfSections.html">ipfSections</a>, color keys, single crystal tensors - keep their Miller indices at the vertices of the fundamental sector instead. Both are customized by the same <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference that pole figures always used, and switched off per plot or for the session</p>
+<p>What used to be reserved to pole figures now happens on every spherical plot that is not given in crystal coordinates as well - the axes of the reference frame are annotated with the axes names of the frame the data lives in: X, Y, Z by default, X1, Y1, Z1 for the measurement frame of the instrument, RD, TD, ND once the rolling frame rules the session (see <b>Named Reference Frames</b> below). This includes <a href="vector3d.vector3d.html">vector3d</a> and <a href="S2Fun.S2Fun.html">S2Fun</a> plots, <a href="sigmaSections.html">sigmaSections</a> and <a href="pfSections.html">pfSections</a>, spherical densities as returned by <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> or <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>, and <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a>. Plots in crystal coordinates - <a href="Miller.Miller.html">Miller</a>, inverse pole figures, <a href="ipfSections.html">ipfSections</a>, color keys, single crystal tensors - keep their Miller indices at the vertices of the fundamental sector instead. Both are customized by the same <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference that pole figures always used, and switched off per plot or for the session</p>
 {% highlight matlab %}
 pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y],{'RD','ND'},...
   'BackgroundColor','w','tag','axesLabels',varargin{:});
@@ -264,11 +264,31 @@ setMTEXpref('showRefFrame','off')
 {% highlight matlab %}
 ebsd.how2plot = 'y↑→x'            % also 'x←↑y', 'z⊙→x', ASCII 'y^->x'
 {% endhighlight %}
-<p>Data plotted the default way now refers to the one default convention instead of a copy of it, hence changing the default also turns data imported before. Since <a href="plottingConvention.html">plottingConvention</a> is a handle class this requires modifying the default in place - assigning to it installs a new default and detaches all data still referring to the old one</p>
+<p>Plotting conventions are carried by reference frames: data plotted the default way follows the session's default frame, hence changing the default convention also turns data imported before</p>
 {% highlight matlab %}
-pC = plottingConvention.default; pC.east = yvector;   % turns all data
-plottingConvention.default.east = yvector;            % does not
-plottingConvention.default('y↑→x')                    % a new default
+plotx2east                                             % turns all data
+plottingConvention.default('y↑→x')                     % the same by a string
+pC = plottingConvention.default; pC.east = yvector; pC.makeDefault
+{% endhighlight %}
+<p>A convention assigned to a single object becomes an own reference frame of that object and stays untouched by later changes of the default.</p>
+<p>
+<b>Named Reference Frames</b>
+</p>
+<p>Behind the conventions sits a new class <a href="referenceFrame.referenceFrame.html">referenceFrame</a> that answers "what coordinate system is this data expressed in". A frame carries an identity, named axes and the plotting convention its data is drawn in; <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> and <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> delegate their frame data (crystal axes, <code class="language-plaintext highlighter-rouge">how2plot</code>) to the frame they hold. Specimen frames come as named session instances</p>
+{% highlight matlab %}
+specimenFrame.specimen      % the generic frame, axes X, Y, Z - the default
+specimenFrame.measurement   % the instrument frame, axes X1, Y1, Z1
+specimenFrame.rolling       % RD, TD, ND - RD north, TD west
+specimenFrame.geological    % N, E, D
+{% endhighlight %}
+<p>and any of them can take over the session by</p>
+{% highlight matlab %}
+specimenFrame.rolling.makeDefault
+{% endhighlight %}
+<p>after which maps, pole figures and the micron bar annotate RD / TD / ND and plot in the rolling convention - no manual label definition needed. Every data class shows the frame it lives in at the top of its display, e.g. <code class="language-plaintext highlighter-rouge">EBSD (Y1&darr;&rarr;X1)</code> or <code class="language-plaintext highlighter-rouge">PoleFigure (TD&larr;RD&uarr;)</code>; a crystal frame displays its alignment (<code class="language-plaintext highlighter-rouge">X</code><code class="language-plaintext highlighter-rouge">a</code>) and the resulting convention in crystal directions (<code class="language-plaintext highlighter-rouge">⊙c&rarr;a</code>).</p>
+<p>Rotating data by an <a href="orientation.orientation.html">orientation</a> now moves it from the crystal to the specimen frame (or back): the result adopts the new frame but never claims the orientation's symmetry, and mixing frames raises an error instead of silently producing numbers in an undefined coordinate system. Conventions loaded from <code class="language-plaintext highlighter-rouge">.mat</code> files are decided by the container: an <a href="EBSD.EBSD.html">EBSD</a> or <a href="PoleFigure.PoleFigure.html">PoleFigure</a> applies the convention its positions were saved with to the whole session, individual vectors keep theirs private. Scripted environments that run many independent jobs in one session can restore the pristine state by</p>
+{% highlight matlab %}
+referenceFrame.reset
 {% endhighlight %}
 <p>
 <b>Approximation, Sampling and Clustering</b>

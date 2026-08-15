@@ -36,11 +36,11 @@ ebsd = EBSDsquare (y↑→x)
      0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
+ X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
  Normal vector: (0,0,1)
  Square grid  :336 x 732
 {% endhighlight %}
@@ -50,8 +50,9 @@ ebsd = EBSDsquare (y↑→x)
 {% highlight matlab %}
 ebsd = rotation.byAxisAngle(zvector,-90*degree) * ebsd;
 
-% we shall plot x to the north for a better screen fit
-ebsd.how2plot.north = xvector;
+% we shall plot x to the north for a better screen fit - session wide,
+% so the pole figures of the ODFs and tensors derived below follow suit
+plotx2north
 plot(ebsd,'micronbar','off')
 {% endhighlight %}
 <center>
@@ -203,7 +204,7 @@ CHill
 {% endhighlight %}
 
 {% highlight plaintext %}
-CHill = stiffnessTensor (x↑→y)
+CHill = stiffnessTensor (y←↑x)
   density: 3.3449           
   unit   : GPa              
   rank   : 4 (3 x 3 x 3 x 3)
