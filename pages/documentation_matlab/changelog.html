@@ -290,6 +290,16 @@ specimenFrame.rolling.makeDefault
 {% highlight matlab %}
 referenceFrame.reset
 {% endhighlight %}
+<p>Data without any symmetry can now state the frame it lives in: the trivial group carrying a frame is a first class citizen, obtained from a symmetry by <code class="language-plaintext highlighter-rouge">cs.stripSym</code> or directly from a frame by</p>
+{% highlight matlab %}
+crystalSymmetry(cF)    % the trivial group on the crystal frame cF
+specimenSymmetry(sF)
+{% endhighlight %}
+<p>Extrema and samples of a spherical function expressed in a crystal frame - for instance the deliberately unsymmetrised boundary normal distribution of <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> - therefore come back as <a href="Miller.Miller.html">Miller</a> with proper crystal indices</p>
+{% highlight matlab %}
+[value,pos] = max(gbnd)   % pos is a Miller now
+{% endhighlight %}
+<p>Along the same lines the compatibility checks behind orientation products and <a href="SO3Fun.SO3Fun.html">SO3Fun</a> arithmetic compare the reference frames the coordinates are expressed in, rather than the symmetry groups: aligned crystal frames combine even when the groups differ, a compatible frame transition is absorbed automatically, and a wrong sided product - an orientation applied to data in specimen coordinates - is an error now instead of a warning.</p>
 <p>
 <b>Approximation, Sampling and Clustering</b>
 </p>
