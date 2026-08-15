@@ -30,6 +30,10 @@ To make changes, update the MATLAB code and republish this document.
 CS = crystalSymmetry('cubic');
 SS = specimenSymmetry('222');
 
+% an orthotropic texture is a rolling type texture - so we work in the
+% rolling frame
+specimenFrame.rolling.makeDefault
+
 % some component center
 ori = [orientation.byEuler(135*degree,45*degree,120*degree,CS,SS) ...
   orientation.byEuler( 60*degree, 54.73*degree, 45*degree,CS,SS) ...
@@ -130,7 +134,7 @@ plotPDF(odf,h,'antipodal','silent')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (m3̅m → y↓→x)
+odf = SO3FunRBF (m3̅m → y←↑x)
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 5°
@@ -149,15 +153,15 @@ annotate([a1,a2,a3],'label',{'RD','TD','ND'},'backgroundcolor','w','MarkerSize',
 {% endhighlight %}
 
 {% highlight plaintext %}
-a1 = vector3d (y↓→x)
+a1 = vector3d (TD←RD↑)
      x       y       z
   0.05   0.999 0.00326
  
-a2 = vector3d (y↓→x)
+a2 = vector3d (TD←RD↑)
        x      y      z
   -0.999   0.05      0
  
-a3 = vector3d (y↓→x)
+a3 = vector3d (TD←RD↑)
           x         y         z
   -0.000163  -0.00325         1
 {% endhighlight %}

@@ -34,8 +34,8 @@ plottingConvention.default('y↑→x');
 <li>displaying orthogonal 2d EBSD sections</li>
 </ul>
 </div>
-<p>In MTEX each plottable variable has a property <code class="language-plaintext highlighter-rouge">how2plot</code>
-</p>
+<h2 id="3">Reference Frames Carry the Alignment</h2>
+<p>Every plottable quantity in MTEX lives in a reference frame - an instance of <a href="referenceFrame.referenceFrame.html"><code class="language-plaintext highlighter-rouge">&lt;referenceFrame.referenceFrame.html referenceFrame&gt;</code></a> - and it is the frame that knows how its data is aligned on screen. The alignment itself is described by a <code class="language-plaintext highlighter-rouge"><a href="plottingConvention.html">plottingConvention</a></code>, which can be read off any object via its <code class="language-plaintext highlighter-rouge">how2plot</code> property</p>
 {% highlight matlab %}
 v1 = vector3d(1,1,1);
 v2 = vector3d(-1,1,1);
@@ -49,73 +49,17 @@ ans = plottingConvention (y↑→x)
   north      : (0,1,0)
   east       : (1,0,0)
 {% endhighlight %}
-<p>The property <code class="language-plaintext highlighter-rouge">how2plot</code> is a handle class of type <code class="language-plaintext highlighter-rouge"><a href="plottingConvention.html">plottingConvention</a></code> and tells MTEX how to align the corresponding coordinate system on screen. Every spherical plot that is not in crystal coordinates is annotated with the axes of the reference frame, such that the alignment can be read off the plot directly.</p>
+<p>Freshly created data does not carry a frame of its own - it belongs to the session's default frame, <code class="language-plaintext highlighter-rouge">specimenFrame.default</code>. Every spherical plot that is not in crystal coordinates is annotated with the axes of that frame, such that the alignment can be read off the plot directly.</p>
 {% highlight matlab %}
 plot(v1,'label','v_1','figSize','small')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AxesAlignment_01.png" %}
 </center>
-<p>We can change it by setting <code class="language-plaintext highlighter-rouge">north</code>, <code class="language-plaintext highlighter-rouge">east</code> or <code class="language-plaintext highlighter-rouge">outOfScreen</code> to other directions.</p>
-{% highlight matlab %}
-v1.how2plot.outOfScreen = yvector
-plot(v1,'label','v_1','figSize','small')
-{% endhighlight %}
-
-{% highlight plaintext %}
-v1 = vector3d (z↓→x)
-  x y z
-  1 1 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AxesAlignment_02.png" %}
-</center>
-<p>Note that <code class="language-plaintext highlighter-rouge"><a href="plottingConvention.html">plottingConvention</a></code> is a handle class, i.e. changing <code class="language-plaintext highlighter-rouge">v1.how2plot</code> changes also <code class="language-plaintext highlighter-rouge">v2.how2plot</code>
-</p>
-{% highlight matlab %}
-v2.how2plot
-
-plot(v2,'label','v_2','figSize','small')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = plottingConvention (z↓→x)
- 
-  outOfScreen: (0,1,0) 
-  north      : (0,0,-1)
-  east       : (1,0,0)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AxesAlignment_03.png" %}
-</center>
-<p>In order to have different plotting axes alignments within one MTEX session we have to define a new <code class="language-plaintext highlighter-rouge"><a href="plottingConvention.html">plottingConvention</a></code> by</p>
-{% highlight matlab %}
-% instantiate a new plotting convention
-pC2 = plottingConvention('y↑→x')
-
-% assign this plottingConvention to v2
-v2.how2plot = pC2;
-
-% plot v1 and v2 in separate plots
-plot(v1,'upper','label','v_1')
-nextAxis
-plot(v2,'upper','label','v_2')
-{% endhighlight %}
-
-{% highlight plaintext %}
-pC2 = plottingConvention (y↑→x)
- 
-  outOfScreen: (0,0,1)
-  north      : (0,1,0)
-  east       : (1,0,0)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AxesAlignment_04.png" %}
-</center>
-<p>When initiating a new <code class="language-plaintext highlighter-rouge"><a href="vector3d.vector3d.html">vector3d</a></code> MTEX uses <code class="language-plaintext highlighter-rouge">plottingConvention.default</code> as default plotting convention. This default plotting convention can be changed by <code class="language-plaintext highlighter-rouge">plottingConvention.default('y&uarr;&rarr;x')</code> or by</p>
+<p>Changing the convention of the session frame changes the alignment of everything that belongs to it - <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">v2</code> and all plots to come</p>
 {% highlight matlab %}
 plottingConvention.default('y←↑x')
-plot(v1,'upper','label','v_1')
+plot(v1,'label','v_1','figSize','small')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -126,30 +70,72 @@ ans = plottingConvention (y←↑x)
   east       : (0,-1,0)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_05.png" %}
+{% include inline_image.html file="AxesAlignment_02.png" %}
 </center>
-<p>The labels of the reference frame are taken from the <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference, which allows to replace <code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">Y</code>, <code class="language-plaintext highlighter-rouge">Z</code> by the rolling directions or to switch them off for the entire session</p>
+<p>The commands <a href="plotx2east.html"><code class="language-plaintext highlighter-rouge">plotx2east</code></a>, <code class="language-plaintext highlighter-rouge">plotx2north</code>, <code class="language-plaintext highlighter-rouge">plotzIntoPlane</code>, ... do exactly this for the most common cases.</p>
 {% highlight matlab %}
-storepfA = getMTEXpref('pfAnnotations');
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="7">A Private Alignment for a Single Object</h2>
+<p>Assigning to the <code class="language-plaintext highlighter-rouge">how2plot</code> property of an object detaches it from the session frame: the object receives a private copy of the frame carrying the new convention. Other data is not affected - in particular <code class="language-plaintext highlighter-rouge">v2</code> keeps the session alignment</p>
+{% highlight matlab %}
+v1.how2plot = plottingConvention('z↑→x');
 
-pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y,vector3d.Z],...
-  {'RD','TD','ND'},'BackgroundColor','w','tag','axesLabels',varargin{:});
-setMTEXpref('pfAnnotations',pfAnnotations);
-
-plot(v1,'upper','label','v_1')
+% plot v1 and v2 in separate plots - both hemispheres are shown, labeled
+% upper / lower relative to the viewing direction of each object's own
+% convention
+plot(v1,'label','v_1')
+nextAxis
+plot(v2,'label','v_2')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_06.png" %}
+{% include inline_image.html file="AxesAlignment_03.png" %}
 </center>
+<p>This is a deliberate change compared to MTEX 6, where <code class="language-plaintext highlighter-rouge">how2plot</code> was a shared handle and changing it on one vector silently changed it on all others. If the intent is "change it everywhere", say so by changing the session frame via <code class="language-plaintext highlighter-rouge">plottingConvention.default</code> as above.</p>
+<h2 id="9">Named Reference Frames</h2>
+<p>Frames have an identity and named axes. The frame of the instrument is <a href="specimenFrame.measurement.html"><code class="language-plaintext highlighter-rouge">specimenFrame.measurement</code></a> with the axes <code class="language-plaintext highlighter-rouge">X1</code>, <code class="language-plaintext highlighter-rouge">Y1</code>, <code class="language-plaintext highlighter-rouge">Z1</code> in Oxford notation. For rolled sheets the frame <a href="specimenFrame.rolling.html"><code class="language-plaintext highlighter-rouge">specimenFrame.rolling</code></a> names its axes <code class="language-plaintext highlighter-rouge">RD</code>, <code class="language-plaintext highlighter-rouge">TD</code>, <code class="language-plaintext highlighter-rouge">ND</code> and comes with the typical rolling geometry convention, RD to the north and TD to the west</p>
+{% highlight matlab %}
+specimenFrame.rolling
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = specimenFrame
+  name: rolling
+  RD: 1,0,0
+  TD: 0,1,0
+  ND: 0,0,1
+  how2plot: TD←RD↑
+{% endhighlight %}
+<p>Any specimen frame can supply the session default. After</p>
+{% highlight matlab %}
+specimenFrame.rolling.makeDefault
+{% endhighlight %}
+<p>all frame-free data plots in the rolling convention and the spherical plots annotate RD / TD / ND instead of X / Y / Z - no manual label definition required</p>
+{% highlight matlab %}
+plot(v2,'upper','label','v_2')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="AxesAlignment_04.png" %}
+</center>
+<p>We return to the generic specimen frame for the rest of this section. Note that this does not affect <code class="language-plaintext highlighter-rouge">v1</code>, which still carries the private frame it received above - assigning <code class="language-plaintext highlighter-rouge">[]</code> to its <code class="language-plaintext highlighter-rouge">how2plot</code> releases the private frame, so <code class="language-plaintext highlighter-rouge">v1</code> follows the session default again</p>
+{% highlight matlab %}
+specimenFrame.specimen.makeDefault
+plottingConvention.default('y↑→x');
+v1.how2plot = [];
+{% endhighlight %}
+<p>The annotation of the spherical plots is a function handle stored in the <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference. By default it draws the axes of the session's frame with their names; it can be replaced by any custom annotation or switched off for the entire session by</p>
+{% highlight matlab %}
+setMTEXpref('pfAnnotations',@(varargin) []);
+{% endhighlight %}
 <p>For a single plot the flag <code class="language-plaintext highlighter-rouge">noLabel</code> does the same</p>
 {% highlight matlab %}
-setMTEXpref('pfAnnotations',storepfA);
 plot(v1,'upper','label','v_1','noLabel')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_07.png" %}
+{% include inline_image.html file="AxesAlignment_05.png" %}
 </center>
-<p>When importing data those might be associated with a plotting convention that is different to the default one</p>
+<h2 id="14">Imported Data</h2>
+<p>Imported data may come with its own idea how it wants to be plotted on screen. Such a convention applies to the whole session: the session frame adopts it and the imported data joins the session frame.</p>
 {% highlight matlab %}
 mtexdata dubna
 
@@ -176,32 +162,33 @@ ans = plottingConvention (y↑→x)
   east       : (1,0,0)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_08.png" %}
+{% include inline_image.html file="AxesAlignment_06.png" %}
 </center>
-<p>Note that all quantities derived from those data will inherit the stored plotting convention</p>
+<p>Consequently, all quantities derived from those data are plotted in the same alignment</p>
 {% highlight matlab %}
 odf = calcODF(pf,'silent');
 
 plotPDF(odf,pf.allH{1:4})
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_09.png" %}
+{% include inline_image.html file="AxesAlignment_07.png" %}
 </center>
-<p>We may also set the default plotting convention to the plotting convention of the imported data by</p>
+<h2 id="16">Crystal Frames</h2>
+<p>Data in crystal coordinates, e.g. <a href="Miller.Miller.html">Miller</a> directions, lives in the crystal frame of its symmetry. The alignment of a crystal frame is not a free choice - it is derived from the crystal axes, following the alignment options like <code class="language-plaintext highlighter-rouge">X</code><code class="language-plaintext highlighter-rouge">a</code> the symmetry was defined with. Its display states the alignment and the resulting convention in crystal directions, e.g. <code class="language-plaintext highlighter-rouge">⊙c&rarr;a</code> for "c out of screen, a to the east".</p>
 {% highlight matlab %}
-pf.how2plot.makeDefault
-plottingConvention.default
+cs = crystalSymmetry('321','X||a')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = plottingConvention (y↑→x)
+cs = crystalSymmetry
  
-  outOfScreen: (0,0,1)
-  north      : (0,1,0)
-  east       : (1,0,0)
+  symmetry       : 321              
+  elements       : 6                
+  a, b, c        : 1, 1, 1          
+  reference frame: X||a, Y||b*, Z||c
 {% endhighlight %}
-<h2 id="14">The Reference Frame on EBSD Maps</h2>
-<p>On an EBSD or grain map the alignment in use is indicated within the scale bar. Every axis with a component within the screen plane becomes an arrow, the axis along the viewing direction becomes a circled dot if it points out of the screen and a circled cross if it points into it.</p>
+<h2 id="17">The Reference Frame on EBSD Maps</h2>
+<p>On an EBSD or grain map the alignment in use is indicated within the scale bar, labeled with the axes names of the frame the map lives in. Every axis with a component within the screen plane becomes an arrow, the axis along the viewing direction becomes a circled dot if it points out of the screen and a circled cross if it points into it.</p>
 {% highlight matlab %}
 mtexdata titanium
 
@@ -217,12 +204,12 @@ ebsd = EBSDhex (y↓→x)
  
  Properties: ci, grainid, iq, sem_signal, oldId
  Scan unit : um
- X x Y x Z : [0, 1002] x [0, 998] x [0, 0]
+ X x Y x Z : [0 → 996] x [0 → 998] x [0 → 0]
  Normal vector: (0,0,1)
  Hex grid     :97 x 84
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_10.png" %}
+{% include inline_image.html file="AxesAlignment_08.png" %}
 </center>
 <p>Changing the plotting convention turns the indicator along with the map</p>
 {% highlight matlab %}
@@ -230,7 +217,7 @@ ebsd.how2plot = 'x←↑y';
 plot(ebsd,ebsd.orientations,'refFrame','on','figSize','small')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_11.png" %}
+{% include inline_image.html file="AxesAlignment_09.png" %}
 </center>
 <p>The indicator may be switched off for a single plot by the option <code class="language-plaintext highlighter-rouge">'refFrame','off'</code> or for the entire session by <code class="language-plaintext highlighter-rouge">setMTEXpref('showRefFrame','off')</code>
 </p>
@@ -239,7 +226,7 @@ ebsd.how2plot = 'y↑→x';
 plot(ebsd,ebsd.orientations,'refFrame','off','figSize','small')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="AxesAlignment_12.png" %}
+{% include inline_image.html file="AxesAlignment_10.png" %}
 </center>
 </div>
 </body>
