@@ -24,11 +24,9 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <h2 id="1">Basic Settings</h2>
-<p>we work in the rolling frame - RD to the north, TD to the west and ND out of the page</p>
+<p>We work in the rolling frame - RD to the north, TD to the west and ND out of the page</p>
 {% highlight matlab %}
 specimenFrame.rolling.makeDefault
-
-% the rolling frame also annotates the pole figures with RD, TD, ND
 {% endhighlight %}
 <h2 id="2">Slip in Body Centered Cubic Materials</h2>
 <p>In the following we consider crystallographic slip in bcc materials</p>
@@ -85,7 +83,7 @@ ori = orientation (432 → TD←RD↑)
 M =
     2.1208
  
-W = spinTensor (crystalFrame)
+W = spinTensor (crystal)
   rank: 2 (3 x 3)
  
  *10^-2
@@ -164,6 +162,8 @@ mtexColorbar
 <h2 id="9">Identification of the most active slip directions</h2>
 <p>Next we consider a real world data set</p>
 {% highlight matlab %}
+specimenFrame.specimen.makeDefault
+plottingConvention.default('y↓→x');
 mtexdata csl
 
 % compute grains
@@ -172,7 +172,7 @@ grains = smoothBoundary(grains,5);
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (TD↓→RD)
+ebsd = EBSD (y↓→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    5 (0.0032%)  notIndexed          none                                   
@@ -197,7 +197,7 @@ sS = symmetrise(slipSystem.fcc(grains.CS));
 {% endhighlight %}
 
 {% highlight plaintext %}
-epsilon = strainTensor (TD↓→RD)
+epsilon = strainTensor (y↓→x)
   type: Lagrange 
   rank: 2 (3 x 3)
  
