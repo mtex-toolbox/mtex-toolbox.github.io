@@ -301,6 +301,54 @@ specimenSymmetry(sF)
 {% endhighlight %}
 <p>Along the same lines the compatibility checks behind orientation products and <a href="SO3Fun.SO3Fun.html">SO3Fun</a> arithmetic compare the reference frames the coordinates are expressed in, rather than the symmetry groups: aligned crystal frames combine even when the groups differ, a compatible frame transition is absorbed automatically, and a wrong sided product - an orientation applied to data in specimen coordinates - is an error now instead of a warning.</p>
 <p>
+<b>Rotating a function drops a symmetry it destroys - now consistently</b>
+</p>
+<p>Rotating an <a href="SO3Fun.SO3Fun.html">SO3Fun</a> or an <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> by a rotation which is not one of its own symmetry elements destroys that symmetry, so the group is dropped and only the reference frame kept. The twelve <code class="language-plaintext highlighter-rouge">rotate</code> methods implementing this had drifted into three different tests for "is there a symmetry to lose", and they disagree for every non centrosymmetric point group of order two - <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">m</code>, <code class="language-plaintext highlighter-rouge">-4</code> and friends. Concretely</p>
+{% highlight matlab %}
+cs  = crystalSymmetry('2',[1 2 3],[90 100 90]*degree);
+odf = unimodalODF(orientation.rand(cs));
+rot = rotation.byAxisAngle(vector3d(1,2,3),37*degree);
+odf = rotate(odf,rot,'right');
+{% endhighlight %}
+<p>warned and dropped the symmetry in <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a>, and silently kept the - by then false - claim of <code class="language-plaintext highlighter-rouge">2</code> symmetry in <a href="SO3FunComposition.SO3FunComposition.html">SO3FunComposition</a> and the <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> classes. All of them now warn and drop, which is the correct behaviour: the rotated function really is no longer <code class="language-plaintext highlighter-rouge">2</code> symmetric. If you relied on the old silence, the symmetry was already wrong; a result that should keep its group has to be rotated by a symmetry element.</p>
+<p>
+<b>Orientation products follow the same rule</b>
+</p>
+<p>
+<code class="language-plaintext highlighter-rouge">rot * ori</code> acts in the specimen frame and so can only destroy the specimen symmetry; <code class="language-plaintext highlighter-rouge">ori * rot</code> acts in the crystal frame and destroys the crystal one. Both now drop the group and keep the frame, through the very same helper. Previously the product kept the group and merely warned, and the test for "is this a symmetry element" was a quaternion dot above 0.99 - which is a rotation angle of 16.2 degree, so any rotation up to sixteen degrees passed as a symmetry element and not even the warning fired.</p>
+<p>This was visible in <a href="DetectionOfSampleSymmetry.html">Detection of Sample Symmetry</a>, which rotates a sample by 15.6 degree in order to destroy its orthotropic symmetry deliberately. The claim of <code class="language-plaintext highlighter-rouge">222</code> survived the rotation, the ODF estimated from those orientations was symmetrised with it, and <a href="SO3Fun.centerSpecimen.html"><code class="language-plaintext highlighter-rouge">centerSpecimen</code></a> then had nothing left to find: it returned the identity, an error of the full 15.6 degree. It now recovers the rotation to 0.8 degree.</p>
+<p>
+<b>A plotting convention belongs to a reference frame</b>
+</p>
+<p>There are exactly three ways to say how something should be aligned on screen, and a plotting convention is now always a property of a reference frame rather than of a data object</p>
+{% highlight matlab %}
+plot(ebsd,'how2plot','y↑→x')       % this one plot
+plottingConvention.default('y↑→x') % the whole session
+ebsd.frame = specimenFrame.rolling % move the data to a named frame
+{% endhighlight %}
+<p>The first of these is new. Assigning a convention to the data itself, <code class="language-plaintext highlighter-rouge">ebsd.how2plot = 'y&uarr;&rarr;x'</code>, used to attach a private copy of the session frame to that one object - a frame that carried the session frame's name and axis labels, was indistinguishable from it in every display, and then silently stopped following it. <code class="language-plaintext highlighter-rouge">how2plot</code> is therefore read only on every class but <a href="referenceFrame.referenceFrame.html">referenceFrame</a>, where the convention actually lives. Reading it is unchanged, and <code class="language-plaintext highlighter-rouge">ebsd.frame = []</code> still means "follow the session again".</p>
+<p>
+<b>Importing data no longer changes how the session plots</b>
+</p>
+<p>A file describes its own data, not your screen. Loading an <code class="language-plaintext highlighter-rouge">.mat</code> file, and <a href="mtexdata.html"><code class="language-plaintext highlighter-rouge">mtexdata</code></a>, no longer repoint the session convention. An import may still state <b>which frame</b> the data lives in - Oxford data lands in <code class="language-plaintext highlighter-rouge">specimenFrame.measurement</code> with the axes <code class="language-plaintext highlighter-rouge">X1</code>, <code class="language-plaintext highlighter-rouge">Y1</code>, <code class="language-plaintext highlighter-rouge">Z1</code> - and a convention you pass yourself still applies, since that is your choice and not the file's.</p>
+<p>Documentation pages that want a particular alignment now say so, which they previously inherited invisibly from <code class="language-plaintext highlighter-rouge">mtexdata</code>.</p>
+<p>This also applies to <a href="S2Fun.smiley.html"><code class="language-plaintext highlighter-rouge">S2Fun.smiley</code></a>, which used to carry its own convention so the face always read right - a page that shows it now declares <code class="language-plaintext highlighter-rouge">plottingConvention.default('y&uarr;&rarr;x')</code> like any other.</p>
+<p>
+<b>Color Keys Say What They Are</b>
+</p>
+<p>Color keys used to display as MATLAB's dump of their properties, in which every interesting one read <code class="language-plaintext highlighter-rouge">[1x1 crystalSymmetry]</code>. They now show the pair of reference systems they map between in the header, the way an <a href="orientation.orientation.html">orientation</a> does, and below it only the settings that distinguish them from a default key</p>
+{% highlight matlab %}
+ipfKey = ipfColorKey (Titanium (Alpha) → y↓→x)
+{% endhighlight %}
+<pre>   ipfDirection : (0,0,1)
+   direction key: HSVDirectionKey</pre>
+<p>A directional color key additionally states which way round its colors run, written in the axes of its frame - <code class="language-plaintext highlighter-rouge">⊙c&rarr;a</code> for a crystal key. That layout belongs to the frame of the symmetry and not to the session.</p>
+<p>The property <code class="language-plaintext highlighter-rouge">inversePoleFigureDirection</code> is called <code class="language-plaintext highlighter-rouge">ipfDirection</code> now, and <code class="language-plaintext highlighter-rouge">'ipfDirection'</code> works as a plot option beside the old spelling</p>
+{% highlight matlab %}
+plot(ebsd,ebsd.orientations,'ipfDirection',vector3d.X)
+{% endhighlight %}
+<p>The long name keeps working as an alias, so existing scripts are unaffected.</p>
+<p>
 <b>Approximation, Sampling and Clustering</b>
 </p>
 <p>Moving least squares approximation supports vector valued data, outlier detection, smoothly varying support radii and Voronoi weights, and <a href="planarColorKey.planarColorKey.html">planarColorKey</a> turns any pair of scalar properties into a color</p>
