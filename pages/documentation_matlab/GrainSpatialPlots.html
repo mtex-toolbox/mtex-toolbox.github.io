@@ -26,6 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>We start by importing some EBSD data and reconstructing some grains</p>
 {% highlight matlab %}
 % import a demo data set
+plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
 % perform grain segmentation
@@ -77,7 +78,7 @@ ipfKey = ipfColorKey(grains('Fo'));
 {% endhighlight %}
 <p>we can set the inverse pole figure direction and many other properties</p>
 {% highlight matlab %}
-ipfKey.inversePoleFigureDirection = xvector;
+ipfKey.ipfDirection = xvector;
 
 % compute the color from the meanorientation
 color = ipfKey.orientation2color(grains('Fo').meanOrientation);
@@ -198,6 +199,7 @@ hold off
 <p>We may also visualize directions by arrows placed at the center of the grains using the command <a href="grain2d.quiver.html"><code class="language-plaintext highlighter-rouge">quiver</code></a>.</p>
 {% highlight matlab %}
 % load some single phase data set
+plottingConvention.default('y↓→x')
 mtexdata csl
 
 % compute and plot grains
@@ -219,6 +221,13 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
+ans = plottingConvention (y↓→x)
+ 
+  outOfScreen: (0,0,-1)
+  north      : (0,-1,0)
+  east       : (1,0,0) 
+ 
+ 
 ebsd = EBSD (y↓→x)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame

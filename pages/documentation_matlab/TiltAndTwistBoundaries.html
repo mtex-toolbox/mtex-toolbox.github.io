@@ -27,6 +27,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>In this chapter we discuss the computation of the misorientation axes at subgrain boundaries and discuss whether they vote for twist or tilt boundaries. We start by importing an sample EBSD data set and computing all subgrain boundaries as it is described in more detail in the chapter <a href="SubGrainBoundaries.html">Subgrain Boundaries</a>.</p>
 {% highlight matlab %}
 % load some test data
+plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
 % compute subgrain boundaries with 1 degree threshold angle
@@ -38,7 +39,7 @@ grains = smoothBoundary(grains,5,'noSimplify','noRefine');
 
 % set up the ipf coloring
 cKey = ipfColorKey(ebsd('fo').CS.properGroup);
-cKey.inversePoleFigureDirection = yvector;
+cKey.ipfDirection = yvector;
 color = cKey.orientation2color(ebsd('fo').orientations);
 
 % plot the forsterite phase
