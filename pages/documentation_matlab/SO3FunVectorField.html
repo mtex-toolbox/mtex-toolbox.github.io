@@ -28,6 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>Vector fields in orientation space model orientation dependent spin as it occurs for instance in the Taylor or Sachs model. Another typical example are gradients of orientation distribution functions.</p>
 <p>Lets consider the following ODF of a quartz specimen.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
 odf = SO3Fun.dubna;
 {% endhighlight %}
 <p>Then its gradient is computed by the command <a href="SO3Fun.grad.html"><code class="language-plaintext highlighter-rouge">odf.grad</code></a>
@@ -310,7 +311,7 @@ VF = SO3VectorFieldHandle (432 → 1)
   intern symmetries: 432 → 432
  
  
-ans = SO3TangentVector (crystalFrame)
+ans = SO3TangentVector (crystal)
  intern symmetries: 432 → 432
  TagentSpace: leftVector
   x y z
@@ -358,7 +359,7 @@ SO3VF1 = SO3VectorFieldHarmonic.approximate(nodes, y,'bandwidth',16)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3VF1 = SO3VectorFieldHarmonic (y↓→x → y↓→x)
+SO3VF1 = SO3VectorFieldHarmonic (y↑→x → y↑→x)
   bandwidth: 16
   tangent space: leftVector
 {% endhighlight %}
@@ -373,7 +374,7 @@ SO3VF2 = SO3VectorFieldHarmonic.quadrature(@(v) f(v))
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3VF2 = SO3VectorFieldHarmonic (y↓→x → y↓→x)
+SO3VF2 = SO3VectorFieldHarmonic (y↑→x → y↑→x)
   bandwidth: 64
   tangent space: leftVector
 {% endhighlight %}
@@ -387,14 +388,14 @@ SO3VF3 = SO3VectorFieldHarmonic(SO3F)
 {% endhighlight %}
 
 {% highlight plaintext %}
-SO3F = SO3FunHarmonic (y↓→x → y↓→x)
+SO3F = SO3FunHarmonic (y↑→x → y↑→x)
   isReal: false
   size: 3 x 1
   bandwidth: 9
   weights: [0.7 0.05 0.75]
  
  
-SO3VF3 = SO3VectorFieldHarmonic (y↓→x → y↓→x)
+SO3VF3 = SO3VectorFieldHarmonic (y↑→x → y↑→x)
   isReal: false
   bandwidth: 9
   tangent space: leftVector
@@ -423,7 +424,7 @@ sS = slipSystem (432)
   -1    1    1    2    1    1    1
   -1    1    1    3    2    1    1
  
-epsilon = strainTensor (y↓→x)
+epsilon = strainTensor (y↑→x)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -431,10 +432,10 @@ epsilon = strainTensor (y↓→x)
   0  0  0
   0  0 -1
  
-W = SO3VectorFieldHarmonic (1 → y↓→x)
+W = SO3VectorFieldHarmonic (1 → y↑→x)
   bandwidth: 32
   tangent space: rightSpinTensor
-  intern symmetries: 432 → y↓→x
+  intern symmetries: 432 → y↑→x
   intern tangent space: leftVector
 {% endhighlight %}
 <p>Lets visualize the spin tensor in Euler angle sections</p>
@@ -455,7 +456,7 @@ WCopper = W.eval(orientation.copper(cs))
 {% endhighlight %}
 
 {% highlight plaintext %}
-WCopper = spinTensor (y↓→x)
+WCopper = spinTensor (y↑→x)
   rank: 2 (3 x 3)
  
  *10^-2
@@ -484,7 +485,7 @@ annotate(oriMax)
 {% endhighlight %}
 
 {% highlight plaintext %}
-oriMax = orientation (432 → y↓→x)
+oriMax = orientation (432 → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -519,7 +520,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-flux = SO3FunHarmonic (432 → y↓→x)
+flux = SO3FunHarmonic (432 → y↑→x)
   bandwidth: 32
   weight: 0
 {% endhighlight %}
@@ -537,10 +538,10 @@ plot(c,sP,'resolution',7.5*degree,'layout',[2 2],'color','black')
 {% endhighlight %}
 
 {% highlight plaintext %}
-c = SO3VectorFieldHarmonic (1 → y↓→x)
+c = SO3VectorFieldHarmonic (1 → y↑→x)
   bandwidth: 32
   tangent space: rightSpinTensor
-  intern symmetries: 432 → y↓→x
+  intern symmetries: 432 → y↑→x
   intern tangent space: leftVector
 {% endhighlight %}
 <center>

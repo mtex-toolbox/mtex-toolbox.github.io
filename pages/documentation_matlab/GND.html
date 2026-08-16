@@ -30,8 +30,8 @@ To make changes, update the MATLAB code and republish this document.
 <p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and reconstructing the grain structure while removing all grains with less than 6 pixels</p>
 {% highlight matlab %}
 % import the EBSD data
+plottingConvention.default('y←↑x');
 ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'DC06_2uniax.ang'],'setting',2);
-ebsd.how2plot = "y←↑x";
 
 % reconstruct grains
 [grains,ebsd] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
@@ -41,7 +41,7 @@ grains = smoothBoundary(grains,5);
 
 % define the color key
 ipfKey = ipfHSVKey(ebsd);
-ipfKey.inversePoleFigureDirection = yvector;
+ipfKey.ipfDirection = yvector;
 
 % plot the orientation data
 plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'refFrame','on','figSize','medium')
@@ -128,12 +128,12 @@ kappa(3,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-kappa = curvatureTensor (y↓→x)
+kappa = curvatureTensor (y←↑x)
   size: 101 x 51 
   unit: 1/um     
   rank: 2 (3 x 3)
  
-ans = curvatureTensor (y↓→x)
+ans = curvatureTensor (y←↑x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
@@ -185,7 +185,7 @@ alpha = kappa.dislocationDensity
 {% endhighlight %}
 
 {% highlight plaintext %}
-alpha = dislocationDensityTensor (y↓→x)
+alpha = dislocationDensityTensor (y←↑x)
   size: 101 x 51 
   unit: 1/um     
   rank: 2 (3 x 3)
@@ -197,7 +197,7 @@ alpha(3,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = dislocationDensityTensor (y↓→x)
+ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
@@ -362,7 +362,7 @@ kappa(3,2).dislocationDensity
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = dislocationDensityTensor (y↓→x)
+ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
@@ -371,7 +371,7 @@ ans = dislocationDensityTensor (y↓→x)
  -27.46  -7.06 -30.84
   12.66  -9.03  57.63
  
-ans = dislocationDensityTensor (y↓→x)
+ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
   rank: 2 (3 x 3)
  
@@ -388,12 +388,12 @@ kappa(3,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-kappa = curvatureTensor (y↓→x)
+kappa = curvatureTensor (y←↑x)
   size: 101 x 51 
   unit: 1/um     
   rank: 2 (3 x 3)
  
-ans = curvatureTensor (y↓→x)
+ans = curvatureTensor (y←↑x)
   unit: 1/um     
   rank: 2 (3 x 3)
  

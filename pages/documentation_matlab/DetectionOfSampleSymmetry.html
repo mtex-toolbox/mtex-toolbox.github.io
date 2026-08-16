@@ -25,14 +25,11 @@ To make changes, update the MATLAB code and republish this document.
 <p>Here we describe how to detect sample symmetry in an arbitrarily rotated ODF.</p>
 <!--/introduction-->
 <h2 id="1">A synthetic example</h2>
-<p>We start by modeling a orthotropic ODF with cubic crystal symmetry.</p>
+<p>We start by modeling a orthotropic ODF with cubic crystal symmetry. an orthotropic texture is a rolling type texture - so we work in the rolling frame</p>
 {% highlight matlab %}
+specimenFrame.rolling.makeDefault
 CS = crystalSymmetry('cubic');
 SS = specimenSymmetry('222');
-
-% an orthotropic texture is a rolling type texture - so we work in the
-% rolling frame
-specimenFrame.rolling.makeDefault
 
 % some component center
 ori = [orientation.byEuler(135*degree,45*degree,120*degree,CS,SS) ...
@@ -48,11 +45,11 @@ odf = unimodalODF(ori(:),'weights',c,'halfwidth',12*degree)
 
 % lets plot some pole figures
 h = [Miller(1,1,1,CS),Miller(2,0,0,CS),Miller(2,2,0,CS)];
-plotPDF(odf,h,'antipodal','silent','complete')
+plotPDF(odf,h,'antipodal','silent','complete','upper')
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (m3̅m → y↓→x (222))
+odf = SO3FunRBF (m3̅m → TD←RD↑ (222))
  
   multimodal components
   kernel: de la Vallee Poussin, halfwidth 12°
@@ -74,7 +71,6 @@ odf = SO3FunRBF (m3̅m → y↓→x (222))
 % define a sample rotation
 rot = rotation.byEuler(15*degree,12*degree,-5*degree);
 
-
 % Simulate individual orientations and rotate them.
 % Note that we loose the sample symmetry by rotating the orientations
 ori = rot * discreteSample(odf,1000)
@@ -87,10 +83,13 @@ plotPDF(odf_est,h,'antipodal',8,'silent');
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (m3̅m → y↓→x (222))
+Warning: Rotating an orientation with specimen symmetry will remove the
+specimen symmetry 
+ 
+ori = orientation (m3̅m → TD←RD↑)
   size: 1 x 1000
  
-odf_est = SO3FunHarmonic (m3̅m → y↓→x (222))
+odf_est = SO3FunHarmonic (m3̅m → TD←RD↑)
   bandwidth: 25
   weight: 1
 {% endhighlight %}
@@ -110,7 +109,7 @@ angle(rot,inv(rot_inv)) / degree
 
 {% highlight plaintext %}
 ans =
-   15.6088
+    0.6279
 {% endhighlight %}
 <center>
 {% include inline_image.html file="DetectionOfSampleSymmetry_03.png" %}
@@ -130,7 +129,7 @@ plot(pf,'silent')
 {% highlight matlab %}
 odf = calcODF(pf,'silent')
 
-plotPDF(odf,h,'antipodal','silent')
+plotPDF(odf,h,'antipodal','silent','noLabel','grid','on')
 {% endhighlight %}
 
 {% highlight plaintext %}

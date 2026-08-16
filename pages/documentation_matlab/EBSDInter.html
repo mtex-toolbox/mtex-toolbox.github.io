@@ -26,6 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>In the section <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> we have discussed how to work with noisy EBSD data the contained non indexed pixels. Hereby, we made the assumption that the grid before and after the operations is the same.</p>
 <p>In this section we explain how to interpolate an EBSD map at positions that do not belong to the grid. Lets us consider a simple example</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
 mtexdata twins;
 
 [grains, ebsd] = calcGrains(ebsd);
@@ -131,6 +132,7 @@ ebsdNewGrid = EBSDsquare (y↑→x)
 <p>The new grid is generated from the cell to cell translations of the given unit cell, i.e. it is rotated by 45 degree as well. Since such a rotated grid can not fill a rectangular matrix, the corners of <code class="language-plaintext highlighter-rouge">ebsdNewGrid</code> stick out of the map and contain no data - this is why we have restricted the plot above to the indexed measurements.</p>
 <p>Another example is the change from a square to an hexagonal grid or vice versa. In this case the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> is implicitly called by the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>. In order to demonstrate this functionality we start by EBSD data on a hex grid</p>
 {% highlight matlab %}
+plottingConvention.default('y↓→x');
 mtexdata ferrite silent
 plot(ebsd(1:50,1:100),ebsd(1:50,1:100).orientations)
 {% endhighlight %}

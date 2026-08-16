@@ -26,6 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>This sections explains how to colorize orientation maps. The mathematics behind the default MTEX color key is explained in detail in the paper <a href="http://dx.doi.org/10.1107/S1600576716012942">Orientations - perfectly colored</a>.</p>
 <p>Let us first import some sample EBSD data. We shall do this at the example of olivine data.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
 mtexdata olivine
 ebsd('olivine').CS = ebsd('olivine').CS.Laue;
 {% endhighlight %}
@@ -113,10 +114,6 @@ plot(big_grains('o'),colors)
 <p>The interpretation of the colors becomes more simple if we plot the colored ball in stereographic projection and mark the crystallographic axes.</p>
 {% highlight matlab %}
 plot(ipfKey,'complete','upper')
-
-h = Miller({1,0,0},{0,1,0},{0,0,1},{1,1,0},{1,0,1},{0,1,1},{1,2,0},{0,2,1},...
-  ebsd('olivine').CS);
-annotate(h.symmetrise,'labeled','backgroundColor','w')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDIPFMap_06.png" %}
@@ -129,10 +126,10 @@ plotIPDF(big_grains('olivine').meanOrientation,colors,vector3d.Z,...
 <center>
 {% include inline_image.html file="EBSDIPFMap_07.png" %}
 </center>
-<p>Instead of colorizing which crystal axis is pointing out of the specimen surface we may also colorizing which crystal axis is pointing towards the rolling or foliation direction or any other specimen fixed direction. This reference direction is stored as the property <code class="language-plaintext highlighter-rouge">inversePoleFigureDirection</code> in the color key.</p>
+<p>Instead of colorizing which crystal axis is pointing out of the specimen surface we may also colorizing which crystal axis is pointing towards the rolling or foliation direction or any other specimen fixed direction. This reference direction is stored as the property <code class="language-plaintext highlighter-rouge">ipfDirection</code> in the color key.</p>
 {% highlight matlab %}
 % set the reference direction to X
-ipfKey.inversePoleFigureDirection = vector3d.X;
+ipfKey.ipfDirection = vector3d.X;
 
 % compute the colors
 colors = ipfKey.orientation2color(ebsd('olivine').orientations);
@@ -143,7 +140,7 @@ plot(ebsd('o'),colors)
 <center>
 {% include inline_image.html file="EBSDIPFMap_08.png" %}
 </center>
-<p>Note, that <code class="language-plaintext highlighter-rouge">ipfKey.inversePoleFigureDirection</code> may even be a vector of directions. Which is helpful for round specimen where one wants to consider the direction normal to the surface.</p>
+<p>Note, that <code class="language-plaintext highlighter-rouge">ipfKey.ipfDirection</code> may even be a vector of directions. Which is helpful for round specimen where one wants to consider the direction normal to the surface.</p>
 <h2 id="11">Customizing the Color Key</h2>
 <p>Orientation color keys usually provide several options to alter the alignment of colors. Let's give some examples</p>
 {% highlight matlab %}

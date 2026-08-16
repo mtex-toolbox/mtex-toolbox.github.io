@@ -45,6 +45,7 @@ To make changes, update the MATLAB code and republish this document.
 <h2 id="3">Convolution of two rotational functions</h2>
 <p>Let two <code class="language-plaintext highlighter-rouge">SO3Fun's</code> \(f \colon {}_{S_L } \backslash SO(3) /_{S_x} \to \mathbb{C}\) where \(S_L\) is the left symmetry and \(S_x\) is the right symmetry and \(g: {}_{S_x} \backslash SO(3) /_{S_R} \to \mathbb C\) where \(S_x\) is the left symmetry and \(S_R\) is the right symmetry be given.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
 g = SO3FunHarmonic.example
 
 ss1 = specimenSymmetry;
@@ -58,7 +59,7 @@ g = SO3FunHarmonic (Quartz → y↑→x)
   weight: 1
  
  
-f = SO3FunRBF (y↓→x → y↓→x (222))
+f = SO3FunRBF (y↑→x → y↑→x (222))
  
   unimodal component
   kernel: de la Vallee Poussin, halfwidth 10°
@@ -81,7 +82,7 @@ mean(SO3FunHandle(@(q) f.eval(q).*g.eval(inv(q).*r)))
 {% endhighlight %}
 
 {% highlight plaintext %}
-c = SO3FunHarmonic (Quartz → y↓→x (222))
+c = SO3FunHarmonic (Quartz → y↑→x (222))
   bandwidth: 25
   weight: 1
  
@@ -140,7 +141,7 @@ f = S2FunHarmonicSym (1)
   bandwidth: 128
  
  
-g = S2FunHarmonic (y↓→x)
+g = S2FunHarmonic (y↑→x)
   bandwidth: 25
 {% endhighlight %}
 <p>Then the spherical convolution yields a orientation dependent function \(f*g: {}_{S_L} \backslash SO(3) /_{S_R} \to \mathbb{C}\) with right symmetry \(S_R\) and left symmetry \(S_L\). The convolution is defined by</p>
@@ -158,7 +159,7 @@ mean(c2.eval(v))
 {% endhighlight %}
 
 {% highlight plaintext %}
-c = SO3FunHarmonic (1 → y↓→x)
+c = SO3FunHarmonic (1 → y↑→x)
   bandwidth: 25
   weight: 0.0064
  
@@ -180,7 +181,7 @@ f = SO3FunHarmonic (Quartz → y↑→x)
   weight: 1
  
  
-h = S2FunHarmonicSym (y↓→x)
+h = S2FunHarmonicSym (y↑→x)
   bandwidth: 128
 {% endhighlight %}
 <p>The convolution yields a <code class="language-plaintext highlighter-rouge">S2Fun</code> \(f*h \colon \mathbb S^2/_{S_R} \to \mathbb C\). In MTEX it is defined by</p>
