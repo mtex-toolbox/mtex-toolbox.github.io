@@ -24,6 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>class describing the alignment of a reference frame on the screen</p>
+<p>plottingConvention is a value class: assigning one always copies, so a convention can never be changed behind the back of the data holding it. What couples data to the session default is the shared referenceFrame - see <a href="specimenFrame.default.html">specimenFrame.default</a> - not a shared convention handle.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 % specify a custom plotting convention
@@ -41,10 +42,9 @@ pC = plottingConvention('y^->x') % same as 'y↑→x', ASCII arrows
 {% endhighlight %}
 
 {% highlight matlab %}
-% changing the default plotting convention - note that the default has
-% to be modified in place, plottingConvention.default.east = yvector
-% would replace it and detach all data that refers to it
-pC = plottingConvention.default; pC.east = yvector;
+% changing the default plotting convention - modify a copy and make
+% it the default (this is what plotx2east and friends do)
+pC = plottingConvention.default; pC.east = yvector; pC.makeDefault
 {% endhighlight %}
 
 {% highlight matlab %}

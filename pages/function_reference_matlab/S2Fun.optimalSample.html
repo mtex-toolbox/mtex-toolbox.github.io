@@ -26,15 +26,42 @@ To make changes, update the MATLAB code and republish this document.
 <p>optimal discrete sampling points of a spherical density function</p>
 <h2 id="3">Description</h2>
 <p>
-<code class="language-plaintext highlighter-rouge">optimalSample</code> behaves similarly as <code class="language-plaintext highlighter-rouge">discreteSample</code> with the difference, that the sampling points are optimized to reproduce the input density function as perfect as possible. The price you pay is time. <code class="language-plaintext highlighter-rouge">optimalSample</code> computes the sampling points by solving a minimization problem, which becomes harder the more points you want to generate.</p>
+<code class="language-plaintext highlighter-rouge">optimalSample</code> behaves similarly as <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> with the difference, that the sampling points are optimized to reproduce the input density function as perfect as possible. The price you pay is time. <code class="language-plaintext highlighter-rouge">optimalSample</code> computes the sampling points by solving a minimization problem, which becomes harder the more points you want to generate.</p>
+<p>The density function is represented by the discrete measure</p>
+<p>\[ \mu = \lambda \, \sum_{j=1}^M c_j \, \delta_{v_j}, \qquad \lambda = \int_{S^2} f(v) \,dv, \]</p>
+<p>and the directions \(v_j\) are moved such that the kernel discrepancy</p>
+<p>\[ J(v,c) = \| \mu - f \|_{\psi}^2 = \sum_{n=1}^N \frac{4\pi A_n}{2n+1} \sum_{k=-n}^{n} | \hat{\mu}_n^{k} - \hat{f}_n^{k} |^2 \]</p>
+<p>becomes small. Here \(A_n\) are the Legendre coefficients of the <a href="S2RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code>, i.e. only the harmonic degrees up to \(N\) are taken into account - choose it to match the intended use of the points. The minimization is done by gradient descent along the geodesics of the sphere together with an Armijo line search.</p>
+<p>Note that the sum above starts at degree 1. The restricted distance kernel is only conditionally positive definite, its Legendre coefficient of degree 0 being negative, \(A_0 = -\frac43 &lt; 0\). Since \(Y_0^0\) is constant, the degree 0 term of \(\mu - f\) equals \(\lambda (\sum_j c_j - 1)/\sqrt{4\pi}\) and hence vanishes for weights that sum up to 1 - which is why it is simply dropped.</p>
+<p>
+<b>Optimizing the weights.</b> By default the weights are fixed, \(c_j = 1/M\), and the directions are the only unknowns. If the weights are asked for as a second output</p>
+{% highlight matlab %}
+[v,c] = optimalSample(sF,n)
+{% endhighlight %}
+<p>they are optimized alongside the directions. Since a fixed set of directions gains an additional \(M\) degrees of freedom this way, far fewer points are needed to represent \(f\) up to a given accuracy. The resulting weights are volume fractions and may be passed on directly, e.g. by <code class="language-plaintext highlighter-rouge">calcDensity(v,'weights',c)</code>.</p>
+<p>The weights are then restricted to the probability simplex, i.e.</p>
+<p>\[ c_j \ge 0, \qquad \sum_{j=1}^M c_j = 1 . \]</p>
+<p>This is not merely a cosmetic normalization. Keeping the weights on the simplex removes the only degree with a negative kernel coefficient, see above - without the constraint \(\sum_j c_j = 1\) the functional would be unbounded from below and the iteration would simply inflate the weights.</p>
+<p>The problem is solved by alternating minimization. For fixed directions \(J\) is a convex least squares functional in \(c\) and is decreased with <a href="mlsq.html"><code class="language-plaintext highlighter-rouge">mlsq</code></a>, which preserves both \(\sum_j c_j\) and \(c_j \ge 0\). For fixed weights the directions are moved as described above.</p>
+<p>
+<b>The first <code class="language-plaintext highlighter-rouge">warmUp</code> iterations move the points only.</b> The update of <code class="language-plaintext highlighter-rouge">mlsq</code> is multiplicative, so a weight that reaches 0 stays 0 - and since the gradient with respect to \(v_j\) carries the factor \(c_j\), such a node is frozen in place as well and is lost for good. Started on a grid that ignores the density, e.g. <a href="equispacedS2Grid.html"><code class="language-plaintext highlighter-rouge">equispacedS2Grid</code></a>, the first weight step is drastic and kills a fifth of the nodes before the points ever had a chance to move: on the three Gaussian example below with 214 nodes and bandwidth 64, 16 weights drop below \(10^{-5}\) in iteration 1 alone, and the method then ends up <b>worse</b> than with fixed weights despite optimizing over a strictly larger set. Letting the points settle first avoids this - with the warm up no weight dies and \(J\) ends up about 10 percent below the unweighted optimum.</p>
+<p>
+<b>The weights help most where the points are far from optimal.</b> On <code class="language-plaintext highlighter-rouge">abs(S2Fun.smiley)</code> with 200 points and bandwidth 64 the weights alone reduce \(J\) by a factor of 16 on the raw <a href="S2Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> nodes, while on nodes that are already driven to convergence they only add a few percent - the points have then essentially solved the problem on their own. The benefit of the weights is therefore that a given accuracy is reached with fewer points and fewer iterations, not that the converged optimum is much lower.</p>
+<p>Note that the weights buy their accuracy up to <code class="language-plaintext highlighter-rouge">bandwidth</code> partly at the expense of the higher degrees, since concentrating the mass on fewer points makes the sample less uniform. Increasing <code class="language-plaintext highlighter-rouge">innerIter</code> beyond its default of 5 spends more work on the weights per outer iteration and does lower \(J\) noticeably, at the price of two additional transforms per inner iteration.</p>
 <p>For more details, see</p>
 <p>Gr&auml;f, Manuel; Potts, Daniel; Steidl, Gabriele (2012). Quadrature Errors, Discrepancies, and Their Relations to Halftoning on the Torus and the Sphere. SIAM Journal on Scientific Computing, 34(5), A2760&ndash;A2791. doi:10.1137/100814731</p>
+<p>Knezevic, Marko; Landry, Nicholas W. (2015). Procedures for reducing large datasets of crystal orientations using generalized spherical harmonics. Mechanics of Materials, 88, 73&ndash;86. doi:10.1016/j.mechmat.2015.04.014</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 v = optimalSample(sF,n)
 v = optimalSample(sF,v)
 v = optimalSample(sF,n,'bandwidth',128)
-v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
+v = optimalSample(sF,n,'maxIter',1000,'tol',0.005*degree)
+{% endhighlight %}
+
+{% highlight matlab %}
+[v,c] = optimalSample(sF,n)                   % optimize the weights, too
+[v,c] = optimalSample(sF,n,'minWeight',1e-4)
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -52,7 +79,7 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
             <tt>n</tt>
          </td>
          <td>
-            <tt>number of points</tt>
+            <tt>number of sampling points</tt>
          </td>
       </tr>
       <tr>
@@ -61,14 +88,6 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
          </td>
          <td>
             <tt><a href="vector3d.vector3d.html">vector3d</a> (starting nodes)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>psi</tt>
-         </td>
-         <td>
-            <tt><a href="S2Kernel.S2Kernel.html">S2Kernel</a> (Disposition-kernel)</tt>
          </td>
       </tr>
    </table>
@@ -84,6 +103,14 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
             <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>c</tt>
+         </td>
+         <td>
+            <tt>weights of the sampling points (non negative, sum up to 1)</tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="7">Options</h2>
@@ -94,7 +121,7 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
             <tt>bandwidth</tt>
          </td>
          <td>
-            <tt>harmonic degree to approximate (default = 128)</tt>
+            <tt>harmonic degree to approximate (default = 128), see above</tt>
          </td>
       </tr>
       <tr>
@@ -102,7 +129,7 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
             <tt>maxIter</tt>
          </td>
          <td>
-            <tt>for gradient descent (default = 5000)</tt>
+            <tt>number of (outer) iterations (default = 1000)</tt>
          </td>
       </tr>
       <tr>
@@ -110,7 +137,7 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
             <tt>tol</tt>
          </td>
          <td>
-            <tt>for gradient descent (default = 5e-4)</tt>
+            <tt>termination tolerance for the directions (default = 0.01*degree)</tt>
          </td>
       </tr>
       <tr>
@@ -118,10 +145,51 @@ v = optimalSample(sF,n,'itermax',1000,'tol',1e-4)
             <tt>weights</tt>
          </td>
          <td>
-            <tt>weights of points</tt>
+            <tt>starting weights, fixed if they are not optimized (default = ones(M,1)/M)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>The following options apply only if the weights are optimized</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>warmUp</tt>
+         </td>
+         <td>
+            <tt>outer iterations that move the points only (default = maxIter/5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>innerIter</tt>
+         </td>
+         <td>
+            <tt>mlsq iterations per weight step (default = 5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tolWeights</tt>
+         </td>
+         <td>
+            <tt>termination tolerance for the weights (default = 1e-3/M)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minWeight</tt>
+         </td>
+         <td>
+            <tt>discard directions with a smaller weight (default = 0, i.e. keep all)</tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="S2Fun.discreteSample.html">S2Fun.discreteSample</a> <a href="mlsq.html">mlsq</a> <a href="S2RestrictedDistanceKernel.html">S2RestrictedDistanceKernel</a>
 </p>
 </div>
 </body>

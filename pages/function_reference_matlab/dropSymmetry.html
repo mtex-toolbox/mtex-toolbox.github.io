@@ -1,0 +1,93 @@
+---
+title: "dropSymmetry"
+
+sidebar: function_reference_sidebar
+permalink: dropSymmetry.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>dropSymmetry</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_dropSymmetry.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/geometry_tools/dropSymmetry.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>drop a symmetry that a rotation does not respect, keeping its frame</p>
+<p>Rotating a function by a rotation which is not one of its own symmetry elements destroys that symmetry. The group is then dropped and the reference frame kept - the data still lives where it lived, it just no longer claims to be symmetric (ADR 0003, see symmetry/stripSym).</p>
+<h2 id="3">Description</h2>
+<p>This replaces twenty three copies of the same block that had drifted into three different guards. <code class="language-plaintext highlighter-rouge">numSym(sym.Laue) &gt; 2</code> is the correct one: it says the point group is neither <code class="language-plaintext highlighter-rouge">1</code> nor <code class="language-plaintext highlighter-rouge">-1</code>, hence claims something a rotation can destroy. The <code class="language-plaintext highlighter-rouge">length(sym.rot) &gt; 2</code> spelling some copies used is a different test - it under-warns for every non centrosymmetric group of order two, so an ODF with point group <code class="language-plaintext highlighter-rouge">2</code> kept a symmetry claim that the rotation had just invalidated.</p>
+<p>The membership test covers a single rotation and a list at once: <code class="language-plaintext highlighter-rouge">all(any(rot(:).' == sym.rot(:)))</code> reduces to <code class="language-plaintext highlighter-rouge">any(rot == sym.rot(:))</code> when <code class="language-plaintext highlighter-rouge">rot</code> is scalar, which is what rotate needs and rotate_outer generalises.</p>
+<p>It also gates the products in <a href="orientation.orientation.html">orientation</a>/private/ensureSym: a rotation applied on the left acts in the specimen frame and can destroy the specimen symmetry, on the right it acts in the crystal frame. That guard used to be a separate one testing dot_outer(sym.rot,rot) &gt; 0.99 - a quaternion dot of 0.99 is a rotation angle of 16.2 degree, so any rotation up to sixteen degrees counted as a symmetry element and the claim survived untouched.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+SO3F.CS = dropSymmetry(SO3F.CS,rot,'crystal','ODF')
+SO3F.SS = dropSymmetry(SO3F.SS,rot,'specimen','ODF')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sym</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rot</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a>, one or many</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>side</tt>
+         </td>
+         <td>
+            <tt>'crystal' or 'specimen', for the warning</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>what</tt>
+         </td>
+         <td>
+            <tt>what is being rotated, for the warning, e.g. 'ODF'</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sym</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a>, the trivial group on the same frame when it was dropped</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="symmetry.stripSym.html">symmetry.stripSym</a> <a href="SO3Fun.rotate.html">SO3Fun.rotate</a> <a href="SO3VectorField.rotate.html">SO3VectorField.rotate</a> <a href="orientation.mtimes.html">orientation.mtimes</a>
+</p>
+</div>
+</body>
+</html>

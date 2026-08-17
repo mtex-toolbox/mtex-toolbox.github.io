@@ -23,11 +23,54 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>define an MTEX colormap</p>
-<h2 id="3">Syntax</h2>
+<p>set the colormap of an MTEX plot</p>
+<h2 id="3">Description</h2>
+<p>Without a handle, or with a figure handle, the colormap is applied to <b>every</b> axes of that figure - an <a href="mtexFigure.mtexFigure.html">mtexFigure</a> holding e.g. several ODF sections is one figure, so all of its sections share the colour scale, which is what a common scale for one function should do. To give the subplots of a figure different colormaps - several different ODFs next to each other, say - pass the individual axes handle instead:</p>
 {% highlight matlab %}
-mtexColorMap(arg1,varargin)
+plot(odf1); ax1 = gca;
+nextAxis; plot(odf2); ax2 = gca;
+mtexColorMap(ax1,'hot'); mtexColorMap(ax2,'jet');
 {% endhighlight %}
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+mtexColorMap white2black       % every axes of the current figure
+mtexColorMap(gcf,'white2black')
+mtexColorMap(ax,'white2black') % one axes only
+mtexColorMap(ax,map)           % an n x 3 matrix of rgb values
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ax</tt>
+         </td>
+         <td>
+            <tt><a href="axis.axis.html">axis</a> or figure handle, defaults to the current figure</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>name</tt>
+         </td>
+         <td>
+            <tt>name of the colormap, with or without the |ColorMap| suffix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>map</tt>
+         </td>
+         <td>
+            <tt>n x 3 rgb, as returned by |colormap|</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="colormap.html">colormap</a> <a href="mtexColorbar.html">mtexColorbar</a>
+</p>
 </div>
 </body>
 </html>

@@ -26,11 +26,9 @@ To make changes, update the MATLAB code and republish this document.
 <p>Each page defines one weighted local least-squares problem. The columns of the weighted design matrix are normalized before diagnostics and regularization.</p>
 <p>input: W_book : nn x 1 x N local weights G_book : nn x dim x N local basis values f_book : nn x numf x N local function values</p>
 <p>output: c_book : dim x numf x N local coefficient vectors conds : N x 1 conditions of the solved normalized Gram systems info : struct additional regularization diagnostics</p>
-<p>options: regularize mincond normalized center amplification where activation starts maxcond normalized center amplification for full correction targetcond amplification approached at full correction eval_vector basis values at the evaluation point (dim x 1 x N) numerical_cond_max condition cap for the nuisance block (default 1e10)</p>
+<p>options: regularize mincond center amplification where activation starts maxcond center amplification where full correction is used targetcond inverse-amplification bound reached at full correction basis_degrees degree assigned to every basis column degree_laplace_shift shift in ell*(ell+shift); 1 on S2, 2 on S3 eval_vector basis values at the evaluation point (dim x 1 x N) numerical_cond_max condition cap for the nuisance block (default 1e10)</p>
 <p>flags: centered_evaluation the evaluation vector is the first basis direction</p>
-<p>The regularizer protects the evaluation direction and penalizes only its orthogonal complement in normalized coefficient coordinates. In a centered basis this is the constant-preserving block form</p>
-<pre>     H = [a b'; b C]  -&gt;  H_reg = [a b'; b (1+eta)(C+lambda_num I)].</pre>
-<p>Activation and correction strength are separate: mincond/maxcond determine where the smooth transition acts, while targetcond determines the final directional amplification. No pointwise parameter search is used.</p>
+<p>The evaluation direction is protected and only its orthogonal complement is regularized. In centered coordinates, the nuisance block C0 is whitened by its Cholesky factor and successive degree layers are penalized increasingly. One scalar parameter is chosen by bisection so that the same conservative inverse-amplification target as in the former equal-scaling method is reached.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 [c_book, conds, info] = ...

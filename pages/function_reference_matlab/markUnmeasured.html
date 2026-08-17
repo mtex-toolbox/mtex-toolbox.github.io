@@ -1,0 +1,62 @@
+---
+title: "markUnmeasured"
+
+sidebar: function_reference_sidebar
+permalink: markUnmeasured.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>markUnmeasured</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_markUnmeasured.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/interfaces/tools/markUnmeasured.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>mark pixels that were never measured as notIndexed</p>
+<h2 id="3">Description</h2>
+<p>Some indexing programs write a value for every pixel of the scan grid, including the ones a ROI mask kept out of the run, and flag only the patterns they genuinely failed to index. The masked pixels then arrive as a perfectly valid looking phase sitting at orientation (0,0,0) with every quality measure at zero - EMSphInx does exactly this. Left alone they fuse into one huge spurious grain.</p>
+<p>A zero orientation on its own is a legitimate measurement, so it is not enough on its own: a pixel is only taken as never measured when its orientation is the identity <b>and</b> every numeric per pixel property (image quality, fit metric, confidence index, ...) is exactly zero. That combination does not occur in real data.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+ebsd = markUnmeasured(ebsd)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a>, unmeasured pixels set to the notIndexed phase</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+</div>
+</body>
+</html>

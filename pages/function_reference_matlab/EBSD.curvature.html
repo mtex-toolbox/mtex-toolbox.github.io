@@ -24,9 +24,11 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>computes the incomplete curvature tensor</p>
+<p>The curvature is only ever known within the measurement plane: a 2d map says nothing about how the orientation changes along its normal. So the tensor is assembled from the two in-plane directions and left NaN along ebsd.N.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 kappa = curvature(ebsd)
+kappa = curvature(ebsd,'stencil','full')   % passed on to the gradient
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -53,6 +55,20 @@ kappa = curvature(ebsd)
          </td>
       </tr>
    </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td colspan="2">
+            <tt>passed straight to <a href="EBSD.gradient.html">gradient</a>, e.g. |'stencil'|</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="EBSD.gradient.html">EBSD.gradient</a> <a href="EBSD.calcGND.html">EBSD.calcGND</a>
 </p>
 </div>
 </body>

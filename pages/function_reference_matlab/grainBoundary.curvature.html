@@ -27,6 +27,11 @@ To make changes, update the MATLAB code and republish this document.
 <h2 id="3">Description</h2>
 <p>The Menger curvature through the midpoints of a segment and its two neighbours within the same chain, smoothed along the chain afterwards.</p>
 <p>The sign is meaningful: segments are stored in walk order with the grain gB.grainId(:,1) on the left, so a positive curvature means the boundary bulges into gB.grainId(:,2) and a negative one that it bulges into gB.grainId(:,1).</p>
+<p>Which of the two grains ends up in the first column is not a property of the segment, it is the direction it is walked in. To read the curvature as convex or concave with respect to one specific grain, put that grain into the first column everywhere first</p>
+{% highlight matlab %}
+gB = grains(k).boundary;
+gB = flip(gB, gB.grainId(:,2) == grains(k).id);
+{% endhighlight %}
 <p>Segments at the end of an open chain have no neighbour on one side and therefore no curvature - those are returned as NaN. A chain consisting of a single segment is NaN throughout. Closed chains wrap around and are defined everywhere.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
@@ -69,7 +74,7 @@ kappa = curvature(gB,2)
 </p>
 <h2 id="7">See also</h2>
 <p>
-<a href="grainBoundary.chainId.html">grainBoundary.chainId</a> <a href="grainBoundary.arcLength.html">grainBoundary.arcLength</a>
+<a href="grainBoundary.flip.html">grainBoundary.flip</a> <a href="grainBoundary.chainId.html">grainBoundary.chainId</a> <a href="grainBoundary.arcLength.html">grainBoundary.arcLength</a>
 </p>
 </div>
 </body>
