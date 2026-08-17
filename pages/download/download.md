@@ -26,6 +26,7 @@ features and syntax changes.
 
 File Name  |||  Release Date||| Comments ||| Downloads
 :-|-|-|:-|-|-|:-|-|-|-
+[**mtex-7.0.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.0.0/mtex-7.0.0.zip) ||| August 2026 ||| new grain reconstruction, EBSD import wizard ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-7.0.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-6.1.1.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.1/mtex-6.1.1.zip) ||| March 2026 ||| ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-6.1.1/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-6.1.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.0/mtex-6.1.0.zip) ||| October 2025 ||| ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-6.1.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;
 [**mtex-6.0.0.zip**](https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.0.0/mtex-6.0.0.zip) ||| November 2024 ||| 3d Grains ||| ![](https://img.shields.io/github/downloads/mtex-toolbox/mtex/mtex-6.0.0/total?color=%23FFFFFF&label=%20&logoColor=%23FFFFFF&style=flat-square)&nbsp;

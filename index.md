@@ -52,10 +52,16 @@ of material scientists, geologists and mathematicians.
 						for aligning EBSD and SEM images
                     </li> 
 					<li>
+                        08/26 &minus;
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.0.0/mtex-7.0.0.zip" content="MTEX 7.0.0" download=true %}
+                        released:
+                        {% include reference.html link="changelog#1" content="Release Notes" %}
+                    </li>
+					<li>
                         03/26 &minus;
 							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.1/mtex-6.1.1.zip" content="MTEX 6.1.1" download=true %}
                         released:
-                        {% include reference.html link="changelog#1" content="Release Notes" %}
+                        {% include reference.html link="changelog#3" content="Release Notes" %}
                     </li>
 					<li>
 						03/26 &minus;
