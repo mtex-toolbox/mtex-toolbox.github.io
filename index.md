@@ -35,6 +35,12 @@ of material scientists, geologists and mathematicians.
             <div class="panel-body">
                 <ul class="no_bullet">
 					<li>
+                        08/26 &minus;
+							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.0.0/mtex-7.0.0.zip" content="MTEX 7.0.0" download=true %}
+                        released:
+                        {% include reference.html link="changelog#1" content="Release Notes" %}
+                    </li>
+					<li>
                         04/26 &minus; new preprint:
 							{% include reference.html link="https://arxiv.org/abs/2604.17997" content="A unified framework for grain boundary
 							distributions in textured materials" pdf=true%}
@@ -51,12 +57,6 @@ of material scientists, geologists and mathematicians.
 						{% include reference.html link="https://www.github.com/vtvivian/mtex-trueEbsd" content="TrueEBSD" %}
 						for aligning EBSD and SEM images
                     </li> 
-					<li>
-                        08/26 &minus;
-							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-7.0.0/mtex-7.0.0.zip" content="MTEX 7.0.0" download=true %}
-                        released:
-                        {% include reference.html link="changelog#1" content="Release Notes" %}
-                    </li>
 					<li>
                         03/26 &minus;
 							{% include reference.html link="https://github.com/mtex-toolbox/mtex/releases/download/mtex-6.1.1/mtex-6.1.1.zip" content="MTEX 6.1.1" download=true %}
