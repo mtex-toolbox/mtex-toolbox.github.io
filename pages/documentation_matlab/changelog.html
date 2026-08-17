@@ -23,7 +23,7 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">MTEX 7.0 xx/2026 - New Features</h2>
+<h2 id="1">MTEX 7.0 08/2026 - New Features</h2>
 <p>This is the first release that uses AI. This allowed us to implement many long lasting ideas.</p>
 <p>
 <b>Grain Reconstruction</b>
@@ -50,60 +50,22 @@ To make changes, update the MATLAB code and republish this document.
 {% endhighlight %}
 <p>Along with grain reconstruction we also greatly improved grain boundary smoothing which is now done with the command</p>
 {% highlight matlab %}
-grains = smoothBoundary(grains)
+grains = smoothBoundary(grains,5)
 {% endhighlight %}
-<p>The command <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> allows for several backends which are explained in detail <a href="TODO.html">here</a>.</p>
+<p>The command <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> allows for several backends which are explained in detail <a href="GrainSmoothing.html">here</a> and <a href="GrainSmoothingAdvanced.html">here</a>.</p>
 <p>
 <b>Much Better EBSD Import</b>
 </p>
-<p>Eventually we now have a full functional import wizard for EBSD maps that allows to scroll through your data files, adjust reference system alignment by inspecting ipf maps and pole figures. We put a lot of effort in getting all the different conventions right for all the formats on the market, i.e. from Bruker, EDAX, Oxford, and ThermoFisher. In this process we changed the default plotting convention to <code class="language-plaintext highlighter-rouge">y&darr;&rarr;x</code>, i.e. the current standard among all vendors. This default can be easily changed by</p>
+<p>Eventually we now have a full functional import wizard for EBSD maps that allows to scroll through your data files, adjust reference system alignment by inspecting ipf maps and pole figures. We put a lot of effort in getting all the different conventions right for all the formats on the market, i.e. from Bruker, EDAX, Oxford, EMSphinx and ThermoFisher. In this process we changed the default plotting convention to <code class="language-plaintext highlighter-rouge">y&darr;&rarr;x</code>, i.e. the current standard among all vendors. This default can be easily changed by</p>
 {% highlight matlab %}
-ebsd.how2plot = 'y↑→x';
+plottingConvention.default('y↑→x');
 {% endhighlight %}
 <p>Additionally, we now support multiple data sets per file and allow to import all additional scans that might be present in your file.</p>
 <p>
 <b>Imported Data Comes on Its Grid</b>
 </p>
-<p> <a href="EBSD.load.html"><code class="language-plaintext highlighter-rouge">EBSD.load</code></a> now returns an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> or an <a href="EBSDhex.EBSDhex.html">EBSDhex</a> whenever the measurements sit on one lattice, instead of a plain list that had to be <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>ed by hand. Almost every scan is a complete raster, so this is what you get for almost every file: the map is stored as a matrix, <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> addresses a scan position, and plotting and denoising no longer rebuild the raster on every call.</p>
-<p>Data that would lose measurements by being gridded - two of them falling into the same lattice cell, or positions too irregular to span a raster - is never gridded and comes back as a list with a warning saying why. A plain list can also be asked for explicitly</p>
-{% highlight matlab %}
-ebsd = EBSD.load(fname,'noGrid')     % this import
-setMTEXpref('gridifyOnImport',false) % every import
-{% endhighlight %}
-<p>Both representations are accepted everywhere, and <code class="language-plaintext highlighter-rouge">EBSD(ebsd)</code> and <code class="language-plaintext highlighter-rouge">gridify</code> convert between them at any time. Note that putting data on a grid <b>reorders</b> it - the matrix layout fixes the first dimension to y while a <code class="language-plaintext highlighter-rouge">.ctf</code> or <code class="language-plaintext highlighter-rouge">.ang</code> runs x fastest - so <code class="language-plaintext highlighter-rouge">ebsd(k)</code> is in general no longer line k of the file. The original ids are kept in <code class="language-plaintext highlighter-rouge">ebsd.oldId</code>. See <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
-<p>One syntax had to go for this: <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> used to be the measurement closest to the coordinate <code class="language-plaintext highlighter-rouge">(x,y)</code> on a list, while on a gridded map the very same expression is the pixel in row <code class="language-plaintext highlighter-rouge">x</code> and column <code class="language-plaintext highlighter-rouge">y</code>. Since almost every file now arrives gridded, that silent difference would decide itself by the data rather than by the script, so <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> is an error now. Ask for the coordinate by name</p>
-{% highlight matlab %}
-ebsd('xy',x,y)   % the measurement closest to (x,y), grid or list
-ebsd(i,j)        % the pixel in row i and column j, gridded map only
-{% endhighlight %}
-<p>
-<b>EBSD Analysis No Longer Needs a Grid</b>
-</p>
-<p>Computations that used to require <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> now work on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, or a gridded map alike. This concerns the <a href="EBSD.gradientX.html">orientation gradient</a> and everything built on it: <a href="EBSD.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>, <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> and the gradient method of <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">weightedBurgersVec</code></a>.</p>
-{% highlight matlab %}
-kappa = curvature(ebsd)      % no ebsd.gridify needed
-gnd   = calcGND(ebsd,dS)
-{% endhighlight %}
-<p>They are computed on the virtual lattice MTEX derives from the unit cell, so they also work for grids that are rotated or sheared with respect to the x/y axes, which the previous matrix based implementation could not do at all - <code class="language-plaintext highlighter-rouge">ebsd.gradientX</code> raised an error unless a grid direction happened to lie along an axis. <code class="language-plaintext highlighter-rouge">calcGND</code> additionally exists for hexagonal grids now; there simply was no hexagonal implementation before.</p>
-<p> <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a>, <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> keep the class and shape they were given. Previously <code class="language-plaintext highlighter-rouge">fill</code> and <code class="language-plaintext highlighter-rouge">smooth</code> turned a plain <a href="EBSD.EBSD.html">EBSD</a> into an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> returned a result shaped like the grid rather than like the input.</p>
-<p>Both grid classes now also accept a <b>rotated</b> grid. <a href="EBSDhex.EBSDhex.html">EBSDhex</a> in particular no longer stores <code class="language-plaintext highlighter-rouge">dHex</code> and <code class="language-plaintext highlighter-rouge">isRowAlignment</code> - those could express only two orientations - but derives them, together with <code class="language-plaintext highlighter-rouge">offset</code>, <code class="language-plaintext highlighter-rouge">dx</code> and <code class="language-plaintext highlighter-rouge">dy</code>, from the unit cell and the pixel positions.</p>
-<p>
-<b>Corrections worth knowing</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">gradientX</code> on a row aligned hexagonal grid divided by <code class="language-plaintext highlighter-rouge">dHex</code> where the neighbour distance is <code class="language-plaintext highlighter-rouge">sqrt(3)*dHex</code>, so hexagonal <code class="language-plaintext highlighter-rouge">curvature</code>, <code class="language-plaintext highlighter-rouge">calcGND</code> and the gradient based <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> were wrong by a factor 1.732 in one column of the tensor. Values on hexagonal maps change accordingly; square grids are unaffected.</li>
-<li>
-<code class="language-plaintext highlighter-rouge">gridify</code> of a rotated hexagonal map silently placed several measurements on the same cell and kept only the last - 5.2% of a titanium map rotated by 20 degree. It now places cells by their lattice index and keeps the measured positions exactly.</li>
-<li>
-<code class="language-plaintext highlighter-rouge">calcGrains(...,'removeQuadruplePoints')</code> merged the wrong boundary segments and destroyed real grain boundary - 0.21% of a forsterite map.</li>
-<li>
-<code class="language-plaintext highlighter-rouge">export_ang</code> of a square grid failed in the header with an unrecognized <code class="language-plaintext highlighter-rouge">dx</code>. It works again, and refuses a rotated grid, whose spacings the ang format cannot express.</li>
-<li>
-<code class="language-plaintext highlighter-rouge">interp(ebsd,x,y)</code> with row vectors returned an object whose <code class="language-plaintext highlighter-rouge">length</code> reported 1, and dropped query points when the source was a gridded map.</li>
-</ul>
-</div>
+<p> <a href="EBSD.load.html"><code class="language-plaintext highlighter-rouge">EBSD.load</code></a> now returns an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> or an <a href="EBSDhex.EBSDhex.html">EBSDhex</a> whenever the measurements sit on one lattice, instead of a plain list that had to be <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>ed by hand. Almost every scan is a complete raster, so this is what you get for almost every file: the map is stored as a matrix, <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> addresses a scan position.</p>
+<p>Note that putting data on a grid <b>reorders</b> it - the matrix layout fixes the first dimension to y while a <code class="language-plaintext highlighter-rouge">.ctf</code> or <code class="language-plaintext highlighter-rouge">.ang</code> runs x fastest - so <code class="language-plaintext highlighter-rouge">ebsd(k)</code> is in general no longer line k of the file. The original ids are kept in <code class="language-plaintext highlighter-rouge">ebsd.oldId</code>. See <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
 <p>
 <b>Much Faster Plotting of EBSD Maps</b>
 </p>
@@ -117,8 +79,6 @@ gnd   = calcGND(ebsd,dS)
 <li> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> (formerly <code class="language-plaintext highlighter-rouge">compactify</code>) replaces random sampling by an almost perfectly equally distributed set of orientations or directions representing a given function. Asking for a second output optimizes the weights of the sampling points as well, which needs considerably fewer points for the same accuracy</li>
 <li> <a href="orientation.calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> uses by default the <a href="https://github.com/nla-group/classix">CLASSIX</a> algorithm, which is much faster than hierarchical clustering and needs no number of clusters</li>
 <li> <a href="PoleFigure.calcODFIterative.html"><code class="language-plaintext highlighter-rouge">calcODFIterative</code></a> inverts pole figure data by iteratively adjusting the kernel width, which is much more robust for irregularly sampled data</li>
-<li>
-<a href="planarColorKey.planarColorKey.html">planarColorKey</a> encodes two scalar properties at once, the first one as hue, the second one as saturation</li>
 </ul>
 </div>
 {% highlight matlab %}
@@ -136,7 +96,7 @@ odf  = calcODFIterative(pf,'halfwidth',5*degree)
 t = odf.grad(ori); right(t)   % t knows ori, no second argument needed
 {% endhighlight %}
 <p>What used to be a multivariate function is now a <a href="SO3FunVectorValued.html">vector valued</a> function and arrays of them are handled like any other MATLAB array.</p>
-<h2 id="2">MTEX 7.0 xx/2026 - Technical Changes</h2>
+<h2 id="2">MTEX 7.0 08/2026 - Technical Changes</h2>
 <p>
 <b>Grain Reconstruction</b>
 </p>
@@ -182,6 +142,12 @@ gB.chainV                      % vertex ids, chains separated by NaN
 <li> <a href="grain2d.isOuterBoundary.html"><code class="language-plaintext highlighter-rouge">isOuterBoundary(grains)</code></a> tells which grains border the map, no longer obvious once an alpha shape has traced it</li>
 </ul>
 </div>
+<p>The walk order is also what gives <a href="grainBoundary.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a> its sign: a segment is stored with the grain in <code class="language-plaintext highlighter-rouge">gB.grainId(:,1)</code> to its left, so a positive curvature bulges into <code class="language-plaintext highlighter-rouge">gB.grainId(:,2)</code> - for the whole map at once, not only for one grain at a time. Which of the two grains ends up in the first column is not decided by <code class="language-plaintext highlighter-rouge">grains(k).boundary</code>, so put the grain the sign is meant to refer to there</p>
+{% highlight matlab %}
+gB = flip(gB, gB.grainId(:,2) == grains(k).id)   % grain k to the left
+kappa = gB.curvature                             % positive = convex
+{% endhighlight %}
+<p>Grain maps saved before the walk order are turned the right way round when they are loaded - a grain whose segments enclose <code class="language-plaintext highlighter-rouge">-area</code> is reversed by <code class="language-plaintext highlighter-rouge">grain2d.loadobj</code>, which leaves a well formed file untouched. See <a href="BoundaryCurvature.html">Boundary Curvature</a>.</p>
 <p>What used to be <code class="language-plaintext highlighter-rouge">smooth(grains)</code> is called <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary(grains)</code></a> now - <code class="language-plaintext highlighter-rouge">smooth</code> on an <a href="EBSD.EBSD.html">EBSD</a> denoises orientations, something entirely different - and it performs all three steps by default: simplify at <code class="language-plaintext highlighter-rouge">d/sqrt(2)</code>, <code class="language-plaintext highlighter-rouge">d</code> the pixel spacing, which removes the grid and nothing else, refine, and only then the Laplacian smoothing it used to do on its own, which without the first two cuts the corners off a curve</p>
 {% highlight matlab %}
 grains = smoothBoundary(grains,5)
@@ -216,6 +182,7 @@ ebsd = EBSD.load('data.ctf','EulerCorrection',rotation.byEuler(pi,0,0))
 </li>
 <li>Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> files state the misalignment between the map and the Euler angle reference frame - AZtec shows the map in beam view but the orientations in camera view - as <code class="language-plaintext highlighter-rouge">Scanning Rotation Angle</code>. MTEX now reads it instead of assuming it, as it still has to for <code class="language-plaintext highlighter-rouge">ctf</code> and <code class="language-plaintext highlighter-rouge">crc</code>. Orientations imported from <code class="language-plaintext highlighter-rouge">h5oina</code> change by that angle, usually 180 degree, and now agree with the same map imported from a <code class="language-plaintext highlighter-rouge">ctf</code>
 </li>
+<li>EMSphInx writes the EDAX <code class="language-plaintext highlighter-rouge">ang</code> and HDF5 layouts, but counts the phases from 0 and flags a pattern it could not index by 255, where EDAX counts from 1 and keeps 0 for not indexed - so every phase used to come out shifted by one. Its <code class="language-plaintext highlighter-rouge">ang</code> carries no vendor marker at all and is recognized by its empty phase descriptions; <code class="language-plaintext highlighter-rouge">'EDAX'</code> and <code class="language-plaintext highlighter-rouge">'EMSphInx'</code> overrule that guess. Pixels an ROI mask kept out of the run - a valid looking phase at orientation (0,0,0) with every quality measure zero - are marked notIndexed instead of fusing into one huge spurious grain</li>
 <li>the file header is kept in <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code> and readable by <code class="language-plaintext highlighter-rouge">'headerOnly'</code> without importing the data at all, the SEM / PRIAS images an EDAX map comes with in <code class="language-plaintext highlighter-rouge">ebsd.opt.electron_image</code>, as the Oxford electron images already were</li>
 <li>faster import, automatic column and degree/radiant detection</li>
 </ul>
@@ -227,6 +194,49 @@ ebsd = EBSD.load('data.edaxh5','setting',3)  % not the assumed setting 2
 cs = crystalSymmetry('321',[4.9 4.9 5.4],'EDAX')   % x // a
 {% endhighlight %}
 <p>Phases of Bruker files keep their International Tables number and atomic basis in <code class="language-plaintext highlighter-rouge">cs.opt.spaceId</code> and <code class="language-plaintext highlighter-rouge">cs.opt.atoms</code>. Fixed along the way: <code class="language-plaintext highlighter-rouge">ang</code> files whose header contains a stray carriage return - as written by some EDAX exports - silently lost their first data point.</p>
+<p>
+<b>EBSD Grids</b>
+</p>
+<p>Both representations - the gridded map and the plain list - are accepted everywhere, and <code class="language-plaintext highlighter-rouge">EBSD(ebsd)</code> and <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> convert between them at any time. Data that would lose measurements by being gridded - two of them falling into the same lattice cell, or positions too irregular to span a raster - is never gridded and comes back as a list with a warning saying why. A plain list can also be asked for explicitly</p>
+{% highlight matlab %}
+ebsd = EBSD.load(fname,'noGrid')     % this import
+setMTEXpref('gridifyOnImport',false) % every import
+{% endhighlight %}
+<p>One syntax had to go for this: <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> used to be the measurement closest to the coordinate <code class="language-plaintext highlighter-rouge">(x,y)</code> on a list, while on a gridded map the very same expression is the pixel in row <code class="language-plaintext highlighter-rouge">x</code> and column <code class="language-plaintext highlighter-rouge">y</code>. Since almost every file now arrives gridded, that silent difference would decide itself by the data rather than by the script, so <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> is an error now. Ask for the coordinate by name</p>
+{% highlight matlab %}
+ebsd('xy',x,y)   % the measurement closest to (x,y), grid or list
+ebsd(i,j)        % the pixel in row i and column j, gridded map only
+{% endhighlight %}
+<p>Both grid classes accept a <b>rotated</b> grid now. <a href="EBSDhex.EBSDhex.html">EBSDhex</a> in particular no longer stores <code class="language-plaintext highlighter-rouge">dHex</code> and <code class="language-plaintext highlighter-rouge">isRowAlignment</code> - those could express only two orientations - but derives them, together with <code class="language-plaintext highlighter-rouge">offset</code>, <code class="language-plaintext highlighter-rouge">dx</code> and <code class="language-plaintext highlighter-rouge">dy</code>, from the unit cell and the pixel positions.</p>
+<p>
+<b>EBSD Analysis No Longer Needs a Grid</b>
+</p>
+<p>Computations that used to require <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> now work on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, or a gridded map alike. This concerns the <a href="EBSD.gradientX.html">orientation gradient</a> and everything built on it: <a href="EBSD.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>, <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> and the gradient method of <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">weightedBurgersVec</code></a>
+</p>
+{% highlight matlab %}
+kappa = curvature(ebsd)      % no ebsd.gridify needed
+gnd   = calcGND(ebsd,dS)
+{% endhighlight %}
+<p>They are computed on the virtual lattice MTEX derives from the unit cell, so they also work for grids that are rotated or sheared with respect to the x/y axes, which the previous matrix based implementation could not do at all - <code class="language-plaintext highlighter-rouge">ebsd.gradientX</code> raised an error unless a grid direction happened to lie along an axis. <code class="language-plaintext highlighter-rouge">calcGND</code> additionally exists for hexagonal grids now; there simply was no hexagonal implementation before.</p>
+<p> <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a>, <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> keep the class and the shape they were given. Previously <code class="language-plaintext highlighter-rouge">fill</code> and <code class="language-plaintext highlighter-rouge">smooth</code> turned a plain <a href="EBSD.EBSD.html">EBSD</a> into an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> returned a result shaped like the grid rather than like the input.</p>
+<p>
+<b>Corrections Worth Knowing</b>
+</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">gradientX</code> on a row aligned hexagonal grid divided by <code class="language-plaintext highlighter-rouge">dHex</code> where the neighbour distance is <code class="language-plaintext highlighter-rouge">sqrt(3)*dHex</code>, so hexagonal <code class="language-plaintext highlighter-rouge">curvature</code>, <code class="language-plaintext highlighter-rouge">calcGND</code> and the gradient based <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> were wrong by a factor 1.732 in one column of the tensor. Values on hexagonal maps change accordingly; square grids are unaffected</li>
+<li>
+<code class="language-plaintext highlighter-rouge">gridify</code> of a rotated hexagonal map silently placed several measurements on the same cell and kept only the last - 5.2% of a titanium map rotated by 20 degree. It now places cells by their lattice index and keeps the measured positions exactly</li>
+<li>
+<code class="language-plaintext highlighter-rouge">calcGrains(...,'removeQuadruplePoints')</code> merged the wrong boundary segments and destroyed real grain boundary - 0.21% of a forsterite map</li>
+<li> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge</code></a> assigned rather than added its merge matrix in two of the six branches collecting the criteria, so a call stating several of them applied only some, and which ones depended on the order they were written in - <code class="language-plaintext highlighter-rouge">merge(grains,twinBoundary,'inclusions','maxSize',5)</code> left the twins unmerged. Every criterion is applied now, and a numeric value following an option name is no longer mistaken for a list of grain pairs</li>
+<li>
+<code class="language-plaintext highlighter-rouge">export_ang</code> of a square grid failed in the header with an unrecognized <code class="language-plaintext highlighter-rouge">dx</code>. It works again, and refuses a rotated grid, whose spacings the ang format cannot express</li>
+<li>
+<code class="language-plaintext highlighter-rouge">interp(ebsd,x,y)</code> with row vectors returned an object whose <code class="language-plaintext highlighter-rouge">length</code> reported 1, and dropped query points when the source was a gridded map</li>
+</ul>
+</div>
 <p>
 <b>Plotting EBSD Maps</b>
 </p>
@@ -444,6 +454,8 @@ ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
 <code class="language-plaintext highlighter-rouge">.mat</code> files written by MTEX 5.11 load again - the vertex list of a <a href="triplePointList.triplePointList.html">triplePointList</a> and the <code class="language-plaintext highlighter-rouge">CSList</code> of a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> came back unusable</li>
 <li>
 <code class="language-plaintext highlighter-rouge">ebsd('phaseName').orientations</code> carries the plotting convention of the map, and a <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> displays the convention it holds - <code class="language-plaintext highlighter-rouge">specimenSymmetry.default</code> is where the session wide default lives</li>
+<li>a note about an assumption an import had to make - the Euler correction, the <code class="language-plaintext highlighter-rouge">setting</code> of an EDAX file - is emitted as a warning instead of being printed to the error stream, where the command window painted it in the red of a failed import. Such notes carry an id, so <code class="language-plaintext highlighter-rouge">warning('off','MTEX:eulerCorrectionAssumed')</code> silences them</li>
+<li>documentation links printed to the command window resolve against a local <code class="language-plaintext highlighter-rouge">doc/html</code> where it is installed and against <a href="https://mtex-toolbox.github.io">the online documentation</a> where it is not - a clone carries no generated html, and <code class="language-plaintext highlighter-rouge">web()</code> on a missing file did nothing at all, no page and no error. Line wrapping in the command window no longer breaks such a link apart, which it did for every link it ever touched</li>
 </ul>
 </div>
 <h2 id="3">MTEX 6.1 10/2025</h2>
