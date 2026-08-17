@@ -98,7 +98,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>delta</tt>
          </td>
          <td>
-            <tt>support radius of the weight function when searching for outliers</tt>
+            <tt>support radius of the weight function; delta = 0 uses KNN</tt>
          </td>
       </tr>
       <tr>
@@ -106,7 +106,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>monomials</tt>
          </td>
          <td>
-            <tt>use monomial basis if true, otherwise use spherical harmonics</tt>
+            <tt>ignored; the monomial basis is the only one implemented on SO(3) (the option exists for interface parity with S2FunMLS)</tt>
          </td>
       </tr>
       <tr>
@@ -127,15 +127,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
       </tr>
       <tr>
          <td width="100px">
-            <tt>(NOTE: 'centered' and 'tangent' trigger the monomial</tt>
-         </td>
-         <td>
-            <tt>option to be true)</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>w</tt>
+            <tt>weight</tt>
          </td>
          <td>
             <tt>@function_handle (weight function)</tt>
@@ -146,7 +138,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt/>
          </td>
          <td>
-            <tt>predefined weight function can be chosen via the following strings: 'C1hat', 'const', 'cos', 'hat', 'indicator', 'squared hat', 'wendland' (default)</tt>
+            <tt>predefined weight function can be chosen via the following strings: 'auto' (default, a degree-dependent Wendland C6 variant), 'C1hat', 'const', 'cos', 'hat', 'indicator', 'squared hat', 'wendland', 'wendlandC6', 'wendlandSquared', 'wendlandC6Squared'</tt>
          </td>
       </tr>
       <tr>
@@ -155,6 +147,14 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
          </td>
          <td>
             <tt>make the support radius delta(x) a smooth function with close to SO3F.nn neighbors at each center</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>candidateFactor</tt>
+         </td>
+         <td>
+            <tt>KNN candidates fetched per center as a multiple of nn (default 2, only used with use_smooth_delta)</tt>
          </td>
       </tr>
       <tr>
@@ -194,15 +194,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>regularize</tt>
          </td>
          <td>
-            <tt>use regularization for solving the lsq-systems</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>maxcond</tt>
-         </td>
-         <td>
-            <tt>max regularization threshold of condition of the gram matrix</tt>
+            <tt>use goal-oriented regularization of the local systems</tt>
          </td>
       </tr>
       <tr>
@@ -210,31 +202,23 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>mincond</tt>
          </td>
          <td>
-            <tt>start regularizing threshold of condition of the gram matrix</tt>
+            <tt>center-amplification threshold where regularization starts</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>basis_weights</tt>
+            <tt>maxcond</tt>
          </td>
          <td>
-            <tt>regularization weights of basis coefficients, should punish higher degrees (Sobolev-like)</tt>
+            <tt>center-amplification threshold where full correction is used</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>basis_weights_scale</tt>
+            <tt>targetcond</tt>
          </td>
          <td>
-            <tt>degree-selectivity of the regularization weights; values around 1 give a moderate preference for lower degrees</tt>
-         </td>
-      </tr>
-      <tr>
-         <td width="100px">
-            <tt>lambda_geom_rel</tt>
-         </td>
-         <td>
-            <tt>relative strength of geometric regularization; for a value of 1, geometryScore is used without additional scaling</tt>
+            <tt>inverse-amplification bound reached at full correction (The names are retained for compatibility; they do not denote the ordinary condition number of the Gram matrix.)</tt>
          </td>
       </tr>
       <tr>

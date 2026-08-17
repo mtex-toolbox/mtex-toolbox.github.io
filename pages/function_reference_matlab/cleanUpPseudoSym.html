@@ -31,6 +31,7 @@ To make changes, update the MATLAB code and republish this document.
 [ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori)
 [ebsd, grainsM, numChanged] = cleanUpPseudoSym(ebsd, grains, mori, 'threshold', 1.5)
 {% endhighlight %}
+<p>It is enough to pass one representative of each pseudo symmetry. A measurement is a fixed representative of an orientation, so the alternative indexing solution is <code class="language-plaintext highlighter-rouge">ori * s * mori</code> for some symmetry element <code class="language-plaintext highlighter-rouge">s</code> and not simply <code class="language-plaintext highlighter-rouge">ori * mori</code>. All these operators are generated internally, which is why passing a pseudo symmetry or its inverse or any symmetrically equivalent misorientation gives the same result.</p>
 <h2 id="4">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
@@ -55,7 +56,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>mori</tt>
          </td>
          <td>
-            <tt><a href="rotation.rotation.html">rotation</a> or <a href="orientation.orientation.html">orientation</a> (array of pseudo-symmetries, same CS and SS)</tt>
+            <tt><a href="orientation.orientation.html">orientation</a> (array of pseudo-symmetries, same CS and SS)</tt>
          </td>
       </tr>
    </table>
@@ -118,22 +119,23 @@ ebsd = ebsd('indexed');
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDsquare (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0   58485 (24%)  notIndexed          none                                   
      1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
      2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad
+ Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
+ X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
  Normal vector: (0,0,1)
+ Square grid  :336 x 732
 {% endhighlight %}
 <p>the pseudo hexagonal oxygen sublattice of olivine</p>
 {% highlight matlab %}
-psSym = orientation.byAxisAngle(Miller(1,0,0,ebsd('Fo').CS,'uvw'),[60 120]*degree);
+psSym = orientation.byAxisAngle(Miller(1,0,0,ebsd('Fo').CS,'uvw'),60*degree);
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -141,31 +143,31 @@ psSym = orientation.byAxisAngle(Miller(1,0,0,ebsd('Fo').CS,'uvw'),[60 120]*degre
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   876 (0.47%)  notIndexed          none                                   
-     1  152478 (81%)  Forsterite  LightSkyBlue       mmm                         
-     2   26336 (14%)   Enstatite  DarkSeaGreen       mmm                         
-     3   7777 (4.1%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     0    936 (0.5%)  notIndexed          none                                   
+     1  152499 (81%)  Forsterite  LightSkyBlue       mmm                         
+     2   26299 (14%)   Enstatite  DarkSeaGreen       mmm                         
+     3   7733 (4.1%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, grainId
+ Properties: bands, bc, bs, error, mad, oldId, grainId
  Scan unit : um
- X x Y x Z : [0, 36550] x [0, 16750] x [0, 0]
+ X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
  Normal vector: (0,0,1)
  
  
-grains = grain2d (y↑→x)
+grains = grain2d (y↓→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      0      14      19  notIndexed                    none
-     1     489  151516  Forsterite       mmm  LightSkyBlue
-     2     218   25725   Enstatite       mmm  DarkSeaGreen
-     3     187    7509    Diopside     12/m1     Goldenrod
+     1     481  151494  Forsterite       mmm  LightSkyBlue
+     2     209   25670   Enstatite       mmm  DarkSeaGreen
+     3     167    7420    Diopside     12/m1     Goldenrod
  
- boundary segments: 35640 (1.7e+06 µm)
- inner boundary segments: 190 (8818 µm)
- triple points: 1485
+ boundary segments: 35324 (1.6e+06 µm)
+ inner boundary segments: 190 (8809 µm)
+ triple points: 1473
  
  Properties: meanRotation, GOS
 {% endhighlight %}

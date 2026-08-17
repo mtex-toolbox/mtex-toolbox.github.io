@@ -85,7 +85,35 @@ hold off
 <center>
 {% include inline_image.html file="GrainMerge_03.png" %}
 </center>
-<h2 id="4">Grain relationships</h2>
+<p>Note that a boundary which ends up inside a merged grain is not lost - it becomes part of the <a href="grain2d.innerBoundary.html">inner boundary</a> of that grain, where <a href="grainBoundary.grainBoundary.html"><code class="language-plaintext highlighter-rouge">grainBoundary</code></a> keeps the subgrain boundaries of an ordinary reconstruction as well. The twin boundaries we have just merged along are therefore still there</p>
+{% highlight matlab %}
+length(mergedGrains.innerBoundary)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+        1422
+{% endhighlight %}
+<h2 id="5">Merge weakly separated grains</h2>
+<p>Which pairs to merge may also be decided by how strongly they are separated in the first place. The option <code class="language-plaintext highlighter-rouge">'weakBoundary'</code> joins two grains whenever the mean misorientation angle along their common boundary, weighted by the length of its segments, stays below a given value - see <a href="grain2d.boundaryMisorientation.html"><code class="language-plaintext highlighter-rouge">boundaryMisorientation</code></a> for the same quantity per grain. It is the natural second step after a segmentation that resolves the substructure of a deformed grain, where grains and dislocation cells come out side by side, see <a href="GrainReconstructionMCL.html">Markovian clustering</a>. On the twinned magnesium here it collects the weakly separated neighbours, 91 grains becoming 74.</p>
+{% highlight matlab %}
+merge(grains,'weakBoundary',20*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels    Mineral  Symmetry         Color
+     1      74   22794  Magnesium     6/mmm  LightSkyBlue
+ 
+ boundary segments: 3087 (839 µm)
+ inner boundary segments: 218 (61 µm)
+ triple points: 90
+ 
+ Properties: meanRotation, GOS
+{% endhighlight %}
+<p>Note the difference to passing the weak segments as a boundary: that merges a pair as soon as a single one of its segments is weak, while <code class="language-plaintext highlighter-rouge">'weakBoundary'</code> asks the boundary as a whole.</p>
+<h2 id="7">Grain relationships</h2>
 <p>The second output argument <code class="language-plaintext highlighter-rouge">paraentId</code> of <a href="grain2d.merge.html">merge</a> is a list with the same size as the child grains which indicates for each child grain into which parent grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p>
 {% highlight matlab %}
 mergedGrains(16).id
@@ -121,7 +149,7 @@ childs = grain2d (y↑→x)
  36       1      125    (30°,67°,224°)    0.015
  37       1      120   (67°,158°,185°)    0.018
 {% endhighlight %}
-<h2 id="6">Estimate twin area fraction</h2>
+<h2 id="9">Estimate twin area fraction</h2>
 <p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
 {% highlight matlab %}
 % extract grain area for faster access
@@ -205,7 +233,7 @@ plot(mergedGrains,mergedGrains.GOS  ./ degree)
 <center>
 {% include inline_image.html file="GrainMerge_06.png" %}
 </center>
-<h2 id="9">Setting Up the EBSD Data for the Merged Grains</h2>
+<h2 id="12">Setting Up the EBSD Data for the Merged Grains</h2>
 <p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p>
 {% highlight matlab %}
 close all

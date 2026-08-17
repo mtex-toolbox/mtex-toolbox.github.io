@@ -142,6 +142,45 @@ ebsd = EBSD.load(fname,'cs',cs,'ColumnNames',{'x','y','Euler1','Euler2','Euler3'
             <tt/>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>noGrid</tt>
+         </td>
+         <td>
+            <tt>keep the data as a list, do not put it on its grid</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>Note</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Imported data is put on its grid</tt>
+         </td>
+         <td>
+            <tt>i.e. returned as <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> or</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="EBSDhex.EBSDhex.html">EBSDhex</a> rather than as a plain list</tt>
+         </td>
+         <td>
+            <tt>whenever that can be done without losing measurements. Pass 'noGrid', or set</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>setMTEXpref('gridifyOnImport',false)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>to always get a plain list. Data that does not sit on a single lattice is never gridded; see EBSD/gridify.</tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="8">Example</h2>
@@ -159,17 +198,18 @@ ebsd = EBSD.load(fname,'CS',CS, 'ColumnNames', ...
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↓→x)
+ebsd = EBSDsquare (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0   11411 (19%)  notIndexed          none                                   
      1   48184 (79%)          Fe  LightSkyBlue      m-3m                         
      2   1180 (1.9%)          Mg  DarkSeaGreen      m-3m                         
  
- Properties: bands, bc, bs, error, index, mad, reliabilityindex
+ Properties: bands, bc, bs, error, index, mad, reliabilityindex, oldId
  Scan unit : um
- X x Y x Z : [0, 254] x [90, 175] x [0, 0]
+ X x Y x Z : [0 → 254] x [90 → 175] x [0 → 0]
  Normal vector: (0,0,1)
+ Square grid  :143 x 425
 {% endhighlight %}
 <h2 id="10">See also</h2>
 <p>

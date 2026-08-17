@@ -167,21 +167,24 @@ grains = smooth(calcGrains(ebsd,'minPixel',5))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed          none                                   
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad
+ Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [33000, 36000] x [4500, 7500] x [0, 0]
+ X x Y x Z : [33000 → 36000] x [4500 → 7500] x [0 → 0]
  Normal vector: (0,0,1)
  
+Warning: grains.smooth has been renamed to grains.smoothBoundary, which
+additionally removes the pixel staircase before smoothing it. You are getting
+the old behaviour - see the help of grain2d/smooth. 
  
-grains = grain2d (y↑→x)
+grains = grain2d (y↓→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1      12    1936  Forsterite       mmm  LightSkyBlue
@@ -193,23 +196,23 @@ grains = grain2d (y↑→x)
  triple points: 15
  
  Id   Phase   Pixels       meanRotation      GOS
-  1       2        9     (73°,36°,353°)    0.013
-  2       1       14   (128°,146°,231°)   0.0071
+  1       3       29    (155°,47°,299°)   0.0072
+  2       3      148    (32°,148°,241°)    0.023
   3       1      149   (177°,111°,285°)    0.011
-  4       1        8   (168°,101°,264°)   0.0062
-  5       1      123   (179°,128°,261°)    0.024
-  6       2       36    (125°,62°,331°)   0.0084
-  7       1      526     (19°,85°,256°)    0.038
-  8       1       38    (167°,97°,261°)     0.01
-  9       1       38    (155°,53°,302°)    0.059
- 10       2        1    (164°,35°,295°)        0
- 11       3       53    (142°,81°,317°)     0.02
- 12       3      148    (32°,148°,241°)    0.023
- 13       1      874   (162°,102°,268°)     0.13
- 14       3       29    (155°,47°,299°)   0.0072
- 15       1       93    (176°,93°,246°)    0.042
- 16       1       15     (56°,68°,280°)    0.033
- 17       1       22    (174°,82°,282°)   0.0098
+  4       3       53    (142°,81°,317°)     0.02
+  5       2        9     (73°,36°,353°)    0.013
+  6       1       93    (176°,93°,246°)    0.042
+  7       1       15     (56°,68°,280°)    0.033
+  8       1        8   (168°,101°,264°)   0.0062
+  9       1      526     (19°,85°,256°)    0.038
+ 10       1      874   (162°,102°,268°)     0.13
+ 11       1       38    (155°,53°,302°)    0.059
+ 12       1       22    (174°,82°,282°)   0.0098
+ 13       1       14   (128°,146°,231°)   0.0071
+ 14       2       36    (125°,62°,331°)   0.0084
+ 15       1      123   (179°,128°,261°)    0.024
+ 16       1       38    (167°,97°,261°)     0.01
+ 17       2        1    (164°,35°,295°)        0
  18       2      238    (164°,35°,295°)   0.0075
  19       1       36    (167°,98°,260°)   0.0083
 {% endhighlight %}
@@ -220,12 +223,12 @@ gB = grains.boundary('Diopside','Diopside')
 {% endhighlight %}
 
 {% highlight plaintext %}
-gB = grainBoundary (y↑→x)
+gB = grainBoundary (y↓→x)
  
  Segments  length  mineral 1  mineral 2
         7  283 µm   Diopside   Diopside
  
-grains_m = grain2d (y↑→x)
+grains_m = grain2d (y↓→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1      12    1936  Forsterite       mmm  LightSkyBlue
@@ -237,26 +240,28 @@ grains_m = grain2d (y↑→x)
  triple points: 14
  
  Id   Phase   Pixels       meanRotation      GOS
-  1       2        9     (73°,36°,353°)    0.013
-  2       1       14   (128°,146°,231°)   0.0071
-  3       1      149   (177°,111°,285°)    0.011
-  4       1        8   (168°,101°,264°)   0.0062
-  5       1      123   (179°,128°,261°)    0.024
-  6       2       36    (125°,62°,331°)   0.0084
+  1       1      149   (177°,111°,285°)    0.011
+  2       3       53    (142°,81°,317°)     0.02
+  3       2        9     (73°,36°,353°)    0.013
+  4       1       93    (176°,93°,246°)    0.042
+  5       1       15     (56°,68°,280°)    0.033
+  6       1        8   (168°,101°,264°)   0.0062
   7       1      526     (19°,85°,256°)    0.038
-  8       1       38    (167°,97°,261°)     0.01
+  8       1      874   (162°,102°,268°)     0.13
   9       1       38    (155°,53°,302°)    0.059
- 10       2        1    (164°,35°,295°)        0
- 11       3       53    (142°,81°,317°)     0.02
- 12       1      874   (162°,102°,268°)     0.13
- 13       1       93    (176°,93°,246°)    0.042
- 14       1       15     (56°,68°,280°)    0.033
- 15       1       22    (174°,82°,282°)   0.0098
+ 10       1       22    (174°,82°,282°)   0.0098
+ 11       1       14   (128°,146°,231°)   0.0071
+ 12       2       36    (125°,62°,331°)   0.0084
+ 13       1      123   (179°,128°,261°)    0.024
+ 14       1       38    (167°,97°,261°)     0.01
+ 15       2        1    (164°,35°,295°)        0
  16       2      238    (164°,35°,295°)   0.0075
  17       1       36    (167°,98°,260°)   0.0083
  18       3      177   (NaN°,NaN°,NaN°)      NaN
  
 parentId =
+    18
+    18
      1
      2
      3
@@ -268,9 +273,7 @@ parentId =
      9
     10
     11
-    18
     12
-    18
     13
     14
     15

@@ -26,15 +26,41 @@ To make changes, update the MATLAB code and republish this document.
 <p>optimal discrete sampling points of an orientation density function</p>
 <h2 id="3">Description</h2>
 <p>
-<code class="language-plaintext highlighter-rouge">optimalSample</code> behaves similarly as <code class="language-plaintext highlighter-rouge">discreteSample</code> with the difference, that the sampling points are optimized to reproduce the input density function as perfect as possible. The price you pay is time. <code class="language-plaintext highlighter-rouge">optimalSample</code> computes the sampling points by solving a minimization problem, which becomes harder the more points you want to generate.</p>
+<code class="language-plaintext highlighter-rouge">optimalSample</code> behaves similarly as <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> with the difference, that the sampling points are optimized to reproduce the input density function as perfect as possible. The price you pay is time. <code class="language-plaintext highlighter-rouge">optimalSample</code> computes the sampling points by solving a minimization problem, which becomes harder the more points you want to generate.</p>
+<p>The density function is represented by the discrete measure</p>
+<p>\[ \mu = \lambda \, \sum_{j=1}^M c_j \, \delta_{R_j}, \qquad \lambda = \int_{SO(3)} f&reg; \,dR, \]</p>
+<p>and the orientations \(R_j\) are moved such that the kernel discrepancy</p>
+<p>\[ J(R,c) = \| \mu - f \|_{\psi}^2 = \sum_{n=1}^N \frac{8\pi^2 A_n}{2n+1} \sum_{k,l=-n}^{n} | \hat{\mu}_n^{k,l} - \hat{f}_n^{k,l} |^2 \]</p>
+<p>becomes small. Here \(A_n\) are the Chebyshev coefficients of the <a href="SO3RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code>, i.e. only the harmonic degrees up to \(N\) are taken into account - choose it to match the intended use of the orientations. The minimization is done by gradient descent with Armijo line search.</p>
+<p>Note that the sum above starts at degree 1. The restricted distance kernel is only conditionally positive definite, its Chebyshev coefficient of degree 0 being negative, \(A_0 = -\frac{16\sqrt2}{3\pi} &lt; 0\). Since \(D_0\) is constant, the degree 0 term of \(\mu - f\) equals \(\lambda (\sum_j c_j - 1)/(\sqrt{8}\pi)\) and hence vanishes for weights that sum up to 1 - which is why it is simply dropped.</p>
+<p>
+<b>Optimizing the weights.</b> By default the weights are fixed, \(c_j = 1/M\), and the orientations are the only unknowns. If the weights are asked for as a second output</p>
+{% highlight matlab %}
+[ori,c] = optimalSample(f,n)
+{% endhighlight %}
+<p>they are optimized alongside the orientations. Since a fixed set of orientations gains an additional \(M\) degrees of freedom this way, far fewer orientations are needed to represent \(f\) up to a given accuracy. The resulting weights are volume fractions and may be passed on directly, e.g. by <code class="language-plaintext highlighter-rouge">calcDensity(ori,'weights',c)</code>.</p>
+<p>The weights are then restricted to the probability simplex, i.e.</p>
+<p>\[ c_j \ge 0, \qquad \sum_{j=1}^M c_j = 1 . \]</p>
+<p>This is not merely a cosmetic normalization. Keeping the weights on the simplex removes the only degree with a negative kernel coefficient, see above - without the constraint \(\sum_j c_j = 1\) the functional would be unbounded from below and the iteration would simply inflate the weights.</p>
+<p>The problem is solved by alternating minimization. For fixed orientations \(J\) is a convex least squares functional in \(c\) and is decreased with <a href="mlsq.html"><code class="language-plaintext highlighter-rouge">mlsq</code></a>, which preserves both \(\sum_j c_j\) and \(c_j \ge 0\). For fixed weights the orientations are moved as described above.</p>
+<p>
+<b>Choose the bandwidth to match the intended use.</b> The weights buy their accuracy up to <code class="language-plaintext highlighter-rouge">bandwidth</code> partly at the expense of the higher degrees, since concentrating the mass on fewer orientations makes the sample less uniform. On the <code class="language-plaintext highlighter-rouge">SO3Fun.dubna</code> ODF with 200-300 orientations the weighted sample beats the equally weighted one in the L1 error of the reconstructed density by 4-8 percent at every kernel halfwidth between 5 and 12 degree - but only if <code class="language-plaintext highlighter-rouge">bandwidth</code> is chosen large enough (64 in that test). With the default of 32 the advantage is present for halfwidth 10 degree and above and turns into a disadvantage below. Note also that the improvement is in the L1 error; measured in the L2 error, which punishes the deviation of the peaks much harder, the equally weighted sample can remain the better choice at halfwidths well below the optimized bandwidth.</p>
+<p>
+<b>Starting from a grid that ignores the density</b> - e.g. <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> instead of the default <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> - the first weight step is drastic and kills nodes before they ever had a chance to move. Since the update of <code class="language-plaintext highlighter-rouge">mlsq</code> is multiplicative, a weight that reaches 0 stays 0, and since the gradient with respect to \(R_j\) carries the factor \(c_j\), such a node is frozen in place as well and is lost for good. Use <code class="language-plaintext highlighter-rouge">warmUp</code> to move the orientations only for the first iterations in that case.</p>
 <p>For more details, see</p>
 <p>Gr&auml;f, Manuel; Potts, Daniel; Steidl, Gabriele (2012). Quadrature Errors, Discrepancies, and Their Relations to Halftoning on the Torus and the Sphere. SIAM Journal on Scientific Computing, 34(5), A2760&ndash;A2791. doi:10.1137/100814731</p>
+<p>Knezevic, Marko; Landry, Nicholas W. (2015). Procedures for reducing large datasets of crystal orientations using generalized spherical harmonics. Mechanics of Materials, 88, 73&ndash;86. doi:10.1016/j.mechmat.2015.04.014</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
-ori = optimalSample(f)
+ori = optimalSample(f,n)
 ori = optimalSample(f,ori)
 ori = optimalSample(f,n,'bandwidth',32)
 ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
+{% endhighlight %}
+
+{% highlight matlab %}
+[ori,c] = optimalSample(f,n)                    % optimize the weights, too
+[ori,c] = optimalSample(f,n,'minWeight',1e-4)
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -76,6 +102,14 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
             <tt><a href="rotation.rotation.html">rotation</a></tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>c</tt>
+         </td>
+         <td>
+            <tt>weights of the sampling points (non negative, sum up to 1)</tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="7">Options</h2>
@@ -86,7 +120,7 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
             <tt>bandwidth</tt>
          </td>
          <td>
-            <tt>harmonic degree to approximate (default = 32)</tt>
+            <tt>harmonic degree to approximate (default = 32), see above</tt>
          </td>
       </tr>
       <tr>
@@ -94,7 +128,7 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
             <tt>maxIter</tt>
          </td>
          <td>
-            <tt>for gradient descent (default = 100)</tt>
+            <tt>number of (outer) iterations (default = 100)</tt>
          </td>
       </tr>
       <tr>
@@ -102,7 +136,7 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
             <tt>tol</tt>
          </td>
          <td>
-            <tt>for gradient descent (default = 0.01*degree)</tt>
+            <tt>termination tolerance for the orientations (default = 0.1*degree)</tt>
          </td>
       </tr>
       <tr>
@@ -110,10 +144,51 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
             <tt>weights</tt>
          </td>
          <td>
-            <tt>weights of points</tt>
+            <tt>starting weights, fixed if they are not optimized (default = ones(M,1)/M)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>The following options apply only if the weights are optimized</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>warmUp</tt>
+         </td>
+         <td>
+            <tt>outer iterations that move the orientations only (default = 0)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>innerIter</tt>
+         </td>
+         <td>
+            <tt>mlsq iterations per weight step (default = 5)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tolWeights</tt>
+         </td>
+         <td>
+            <tt>termination tolerance for the weights (default = 1e-3/M)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minWeight</tt>
+         </td>
+         <td>
+            <tt>discard orientations with a smaller weight (default = 0, i.e. keep all)</tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="SO3Fun.discreteSample.html">SO3Fun.discreteSample</a> <a href="mlsq.html">mlsq</a> <a href="SO3RestrictedDistanceKernel.html">SO3RestrictedDistanceKernel</a>
 </p>
 </div>
 </body>

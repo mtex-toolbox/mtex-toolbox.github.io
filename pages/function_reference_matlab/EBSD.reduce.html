@@ -24,12 +24,15 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>reduce ebsd data by a factor</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>Keeps every fak-th site in both lattice directions. That sublattice is the same kind of lattice fak times coarser - square from a square grid, hexagonal from a hexagonal one - so the unit cell simply scales with fak.</p>
+<p>Selecting on the lattice index (see <a href="EBSD.lattice.html"><code class="language-plaintext highlighter-rouge">lattice</code></a>) rather than on positions or on matrix subscripts is what makes one implementation cover every case: a plain list and a gridded map, a square and a hexagonal grid, and a grid that is rotated or otherwise not axis aligned. <a href="EBSDhex.EBSDhex.html">EBSDhex</a> used to override this with a version written on the staggered matrix subscripts, which could only ever express fak = 2 and rejected the second argument outright.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
 ebsd = reduce(ebsd)   % take every second pixel horiz. and vert.
 ebsd = reduce(ebsd,3) % take every third pixel horiz. and vert.
 {% endhighlight %}
-<h2 id="4">Input</h2>
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -50,7 +53,7 @@ ebsd = reduce(ebsd,3) % take every third pixel horiz. and vert.
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -62,6 +65,10 @@ ebsd = reduce(ebsd,3) % take every third pixel horiz. and vert.
          </td>
       </tr>
    </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="EBSD.lattice.html">EBSD.lattice</a> <a href="EBSD.gridify.html">EBSD.gridify</a>
 </p>
 </div>
 </body>

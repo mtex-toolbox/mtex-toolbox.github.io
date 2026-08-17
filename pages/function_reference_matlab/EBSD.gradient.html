@@ -1,0 +1,121 @@
+---
+title: "EBSD.gradient"
+
+sidebar: function_reference_sidebar
+permalink: EBSD.gradient.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>EBSD.gradient</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSD__gradient.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSD/gradient.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>orientation gradient along the two lattice directions</p>
+<p>Works on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, a gridified map - by placing every pixel on the virtual lattice ebsd.lattice derives from the unit cell, so it needs neither a matrix layout nor an axis aligned grid. A rotated or sheared grid is handled by the same code.</p>
+<h2 id="3">Description</h2>
+<p>Three stencils are available. All of them skip a neighbour that is not comparable - outside the map, notIndexed, a different phase, or across a grain boundary where grainId is known.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">'oneSided'</code> (default) takes the neighbour at +a_k, and falls back to -a_k (negated) only where +a_k lies outside the map. A missing neighbour inside the map yields NaN and does NOT fall back, which is what the matrix based <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>/gradient1 does and what keeps existing GND / WBV numbers unchanged. This is why it stays the default: the other two move every number that depends on the gradient.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">'1hop'</code> is a least squares fit over the lattice's own neighbour stencil, <code class="language-plaintext highlighter-rouge">ebsd.lattice.stencil</code> - the 4 axial neighbours of a square grid, the 6 neighbours of a hex one. Symmetric, and in the interior of a square grid exactly the central difference.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">'full'</code> is the same fit over all eight offsets in {-1,0,1}^2, i.e. the 1-hop stencil plus the diagonals. On a square grid that is the full 8 neighbourhood; on a hex grid it adds the two second nearest neighbours along a1+a2. Still symmetric, and better conditioned - a pixel needs two independent directions to be solvable at all, so the wider stencil leaves far fewer pixels NaN (18 against 374 on forsterite). The fit uses each neighbour's true physical offset, so mixing the two distances is handled correctly, but note it does weight every neighbour equally rather than by distance.</p>
+<p>Before MTEX 7 <code class="language-plaintext highlighter-rouge">'leastSquares'</code> used a hardcoded six offset list on every grid. That is the hex stencil, and on a square grid it is 4 axial plus TWO of the four diagonals - an asymmetric neighbourhood which biased the fit along one diagonal, by up to 0.042 (mean 0.0009) on forsterite. Its comment claimed those offsets did not exist on a square lattice; they do.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+g = gradient(ebsd)                        % one sided (default)
+g = gradient(ebsd,'stencil','oneSided')   % the same, explicitly
+g = gradient(ebsd,'stencil','1hop')       % least squares, 1-hop stencil
+g = gradient(ebsd,'stencil','full')       % least squares, full stencil
+g = gradient(ebsd,'leastSquares')         % alias for 'stencil','1hop'
+g = gradient(ebsd,'basis',[a1 a2])        % use an explicit basis
+[g,A] = gradient(ebsd)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>g</tt>
+         </td>
+         <td>
+            <tt>length(ebsd) x 2 <a href="vector3d.vector3d.html">vector3d</a>, g(:,k) = d(orientation) / d(a_k), in the left tangent space, i.e. log(ori(p+a_k),ori(p))/|a_k|</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>A</tt>
+         </td>
+         <td>
+            <tt>2 x 2 basis actually used, columns a1, a2 (map plane components)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>stencil</tt>
+         </td>
+         <td>
+            <tt>which neighbours the gradient is computed from, see below</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>basis</tt>
+         </td>
+         <td>
+            <tt>1x2 <a href="vector3d.vector3d.html">vector3d</a>, use these as (a1,a2) instead of the ones derived from the unit cell</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>leastSquares</tt>
+         </td>
+         <td>
+            <tt>alias for |'stencil','1hop'|</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="EBSD.gradientX.html">EBSD.gradientX</a> <a href="EBSD.curvature.html">EBSD.curvature</a> <a href="EBSD.calcGND.html">EBSD.calcGND</a> <a href="EBSD.lattice.html">EBSD.lattice</a>
+</p>
+</div>
+</body>
+</html>
