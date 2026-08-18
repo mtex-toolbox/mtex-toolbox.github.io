@@ -1,0 +1,117 @@
+---
+title: "exportEBSD_h5"
+
+sidebar: function_reference_sidebar
+permalink: exportEBSD_h5.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>exportEBSD_h5</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_exportEBSD_h5.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/interfaces/exportEBSD_h5.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>export EBSD data to an HDF5 file</p>
+<h2 id="3">Description</h2>
+<p>There is no such thing as "the" EBSD HDF5 format - every vendor nests its data differently and stores far more than MTEX imports, from the raw patterns to the acquisition settings. Writing one from scratch therefore loses everything MTEX does not model. This function instead takes the file the data was imported from as a reference, copies it, and writes the changed data into the copy, so the result is still a file of the vendor's own format that its software reads.</p>
+<p>The reference file is the one the data came from - <code class="language-plaintext highlighter-rouge">EBSD.load</code> remembers it in <code class="language-plaintext highlighter-rouge">ebsd.opt.h5</code> together with the data sets it read - or one named explicitly. Only measurements that are still there are written, and only into the data sets the import resolved, so anything else in the file is passed through untouched.</p>
+<p>Without a reference file a self contained HDF5 file in MTEX's own layout is written instead - orientations, phases, coordinates and properties, and nothing else.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+% round trip - the reference is the file the data came from
+ebsd = EBSD.load('myfile.h5oina')
+ebsd = ebsd.denoise(halfQuadraticFilter)
+export(ebsd,'denoised.h5oina')
+{% endhighlight %}
+
+{% highlight matlab %}
+% name the reference explicitly
+exportEBSD_h5(ebsd,'denoised.h5oina','reference','myfile.h5oina')
+{% endhighlight %}
+
+{% highlight matlab %}
+% MTEX's own layout, no reference involved
+exportEBSD_h5(ebsd,'myfile.h5','standalone')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fName</tt>
+         </td>
+         <td>
+            <tt>file name of the file to be written</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>reference</tt>
+         </td>
+         <td>
+            <tt>file to copy and write the changed data into</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>compression</tt>
+         </td>
+         <td>
+            <tt>deflate level of the standalone layout, default 9</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>standalone</tt>
+         </td>
+         <td>
+            <tt>write MTEX's own layout instead of copying a reference</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noProp</tt>
+         </td>
+         <td>
+            <tt>write orientations and phases only, leave properties alone</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="EBSD.load.html">EBSD.load</a> <a href="exportEBSD_ctf.html">exportEBSD_ctf</a> <a href="exportEBSD_ang.html">exportEBSD_ang</a>
+</p>
+</div>
+</body>
+</html>

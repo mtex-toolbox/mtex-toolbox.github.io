@@ -1,0 +1,121 @@
+---
+title: "exportEBSD_ang"
+
+sidebar: function_reference_sidebar
+permalink: exportEBSD_ang.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>exportEBSD_ang</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_exportEBSD_ang.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/interfaces/exportEBSD_ang.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>export EBSD data to a TSL/EDAX text file (ang)</p>
+<h2 id="3">Description</h2>
+<p>The written file follows the layout EDAX documents as version 5, i.e. the columns</p>
+{% highlight matlab %}
+phi1 PHI phi2 x y IQ CI phase SEM fit
+{% endhighlight %}
+<p>and states so in the header, which is what makes it read back without guessing. Where the data was imported from an .ang file, the header values that MTEX does not model - the pattern center, the working distance, the operator - are taken over from <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code> instead of being written as zeros.</p>
+<p>Pixels MTEX holds as not indexed are written the way OIM writes them: phase 0 and a confidence index of -1.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+% import a ctf file
+ebsd = EBSD.load('myfile.ctf')
+{% endhighlight %}
+
+{% highlight matlab %}
+% export as ang
+export(ebsd,'myFile.ang')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fName</tt>
+         </td>
+         <td>
+            <tt>Filename, optionally including relative or absolute path</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>setting</tt>
+         </td>
+         <td>
+            <tt>alignment of the Euler angle and the map reference frame the file is written for, 1 to 4, 0 switches the correction off, default is 2 - the same convention loadEBSD_ang reads with</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>EulerCorrection</tt>
+         </td>
+         <td>
+            <tt>explicit correction <a href="rotation.rotation.html">rotation</a>, overrides setting</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>flipud</tt>
+         </td>
+         <td>
+            <tt>flip ebsd spatial data upside down (not the orientation data)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fliplr</tt>
+         </td>
+         <td>
+            <tt>flip ebsd spatial data left right (not the orientation data)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>silent</tt>
+         </td>
+         <td>
+            <tt>do not print what is being written</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="EBSD.export.html">EBSD.export</a> <a href="exportEBSD_ctf.html">exportEBSD_ctf</a> <a href="exportEBSD_h5.html">exportEBSD_h5</a>
+</p>
+</div>
+</body>
+</html>
