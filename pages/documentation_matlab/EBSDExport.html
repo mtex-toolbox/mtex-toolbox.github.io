@@ -23,12 +23,32 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>MTEX allows you to export EBSD data as <a href="EBSD.export_h5.html">h5</a>, <a href="EBSD.export_ctf.html">ctf</a>, <a href="EBSD.export_ang.html">ang</a> or <a href="EBSD.export_crc.html">cpr/crc</a> files. The syntax is</p>
+<p>MTEX allows you to export EBSD data as <a href="exportEBSD_h5.html">HDF5</a>, <a href="exportEBSD_ctf.html">ctf</a>, <a href="exportEBSD_ang.html">ang</a> or <a href="EBSD.export_crc.html">cpr/crc</a> files. The syntax is</p>
 {% highlight matlab %}
 ebsd.export('myFile.ctf')
 {% endhighlight %}
-<p>The file format is detected automatically from the the extension of the specified file name.</p>
-<p>Note that information may be lost during export into a format different then the import format as not all file formats support all properties.</p>
+<p>The file format is detected automatically from the extension of the specified file name.</p>
+<p>Note that information may be lost during export into a format different then the import format as not all file formats support all properties. The exporters take as much of it along as the format allows: whatever the header of the imported file stated is kept in <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code> and written back out, and the Euler angles are written in the reference frame the format states them in, so that importing the result reproduces the map rather than a rotated copy of it.</p>
+<h2 id="2">HDF5 - writing into a copy of the imported file</h2>
+<p>There is no such thing as <b>the</b> EBSD HDF5 format - every vendor nests its data differently and stores much more than MTEX imports, from the raw patterns to the acquisition settings. Writing one from scratch would lose all of that. Exporting to HDF5 therefore copies the file the data was imported from and writes the changed data into the copy, so the result is still a file of the vendor's own format.</p>
+{% highlight matlab %}
+ebsd = EBSD.load('myfile.h5oina')
+ebsd = ebsd.denoise(halfQuadraticFilter)
+{% endhighlight %}
+
+{% highlight matlab %}
+% writes a copy of myfile.h5oina with the denoised orientations in it
+export(ebsd,'denoised.h5oina')
+{% endhighlight %}
+<p>
+<code class="language-plaintext highlighter-rouge">EBSD.load</code> remembers the file and the data sets it read in <code class="language-plaintext highlighter-rouge">ebsd.opt.h5</code> - a different reference file can be named explicitly, and properties MTEX computed are added next to the ones the file brought along:</p>
+{% highlight matlab %}
+export(ebsd,'denoised.h5oina','reference','myfile.h5oina')
+{% endhighlight %}
+<p>Data that was not imported from an HDF5 file, or the flag <code class="language-plaintext highlighter-rouge">'standalone'</code>, gives MTEX's own flat layout instead - orientations, phases, coordinates and properties, and nothing else.</p>
+{% highlight matlab %}
+export(ebsd,'myFile.h5','standalone')
+{% endhighlight %}
 </div>
 </body>
 </html>
