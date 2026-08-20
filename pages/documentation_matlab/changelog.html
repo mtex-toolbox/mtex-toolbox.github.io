@@ -34,9 +34,19 @@ ebsd = ebsd.denoise(halfQuadraticFilter)
 export(ebsd,'denoised.h5oina')
 {% endhighlight %}
 <p>
-<code class="language-plaintext highlighter-rouge">EBSD.load</code> remembers the file and the data sets it read in <code class="language-plaintext highlighter-rouge">ebsd.opt.h5</code>; a different reference file may be named by <code class="language-plaintext highlighter-rouge">'reference'</code>, and MTEX's own flat layout is still available by <code class="language-plaintext highlighter-rouge">'standalone'</code>. Changes to the phase list - a renamed mineral, a corrected lattice parameter - are written back into the phase header as well. Verified against Bruker, EDAX (.oh5 and .edaxh5), EMSphInx, Oxford and ThermoFisher files.</p>
+<code class="language-plaintext highlighter-rouge">EBSD.load</code> remembers the file and the data sets it read in <code class="language-plaintext highlighter-rouge">ebsd.opt.h5</code>; a different reference file may be named by <code class="language-plaintext highlighter-rouge">'reference'</code>. MTEX's own flat layout, and the <code class="language-plaintext highlighter-rouge">'standalone'</code> flag that wrote it, are gone - nothing could read it back, so a <code class="language-plaintext highlighter-rouge">.mat</code> file is the way to carry a map between MTEX sessions. Changes to the phase list - a renamed mineral, a corrected lattice parameter - are written back into the phase header as well. Verified against Bruker, EDAX (.oh5 and .edaxh5), EMSphInx, Oxford and ThermoFisher files.</p>
 <p>The text exporters are now interfaces like the loaders they mirror - <a href="exportEBSD_ang.html"><code class="language-plaintext highlighter-rouge">exportEBSD_ang</code></a> and <a href="exportEBSD_ctf.html"><code class="language-plaintext highlighter-rouge">exportEBSD_ctf</code></a>, with <code class="language-plaintext highlighter-rouge">export_ang</code> and <code class="language-plaintext highlighter-rouge">export_ctf</code> kept as wrappers - and they take the header of the imported file along, so an import/export cycle no longer replaces the acquisition parameters by zeros.</p>
 <h2 id="2">MTEX develop - Technical Changes</h2>
+<p>
+<b>Reference Frames</b>
+</p>
+<div>
+<ul>
+<li>a <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> accepted any reference frame, including a <a href="specimenFrame.specimenFrame.html">specimenFrame</a> - and since the crystal axes are read straight off <code class="language-plaintext highlighter-rouge">frame.basis</code>, that replaced the lattice by the identity without a word. Such an assignment raises <code class="language-plaintext highlighter-rouge">MTEX:wrongFrameClass</code> now. To give a crystal symmetry a plotting convention of its own, fork its frame: <code class="language-plaintext highlighter-rouge">fr = crystalFrame(cs.axes,'name',cs.mineral)</code>, set <code class="language-plaintext highlighter-rouge">fr.how2plot</code> and assign that</li>
+<li> <a href="plotS2Grid.html"><code class="language-plaintext highlighter-rouge">plotS2Grid</code></a> takes a <a href="referenceFrame.referenceFrame.html">referenceFrame</a> and returns directions of that frame, e.g. <code class="language-plaintext highlighter-rouge">plotS2Grid('upper',cs.frame)</code> for a grid of crystal directions. Which hemisphere is the upper one is then decided by the crystal frame instead of the session convention, and the result needs no <code class="language-plaintext highlighter-rouge">Miller(v,cs)</code> cast to be used as a crystal direction</li>
+<li> <a href="slipSystem.SchmidFactor.html"><code class="language-plaintext highlighter-rouge">SchmidFactor</code></a> no longer warns about a tension direction that states no reference frame, such as <code class="language-plaintext highlighter-rouge">vector3d.Z</code> or a plain plotting grid - only a direction or stress tensor that names a frame contradicting the one of the slip systems does</li>
+</ul>
+</div>
 <p>
 <b>EBSD Export</b>
 </p>
@@ -49,6 +59,83 @@ export(ebsd,'denoised.h5oina')
 <li>the ang and ctf exporters state the column layout they write (<code class="language-plaintext highlighter-rouge">VERSION</code> for .ang), so the importer no longer has to guess it</li>
 </ul>
 </div>
+<p>
+<b>Plotting</b>
+</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">plotSection(mdf,'axisAngle','Sections',6)</code> is between one and a half and two times faster, the wider margin on an otherwise idle machine. The time went to three places, none of them the data: the bounding circles of a region were drawn with 8641 points each, purely so that clipping them would not visibly cut a corner - they are sampled at a degree now, all circles of a region at once, and the end of every arc is bisected onto the boundary, which is both cheaper and more accurate. <code class="language-plaintext highlighter-rouge">orientationRegion</code> rebuilt the sector of rotational axes for every candidate vertex, although it is needed only for the ones at 180 degree. And <a href="symmetry.fundamentalRegion.html"><code class="language-plaintext highlighter-rouge">fundamentalRegion</code></a> now remembers the regions it computed - keyed on the rotations, the lattice, the convention and the mineral of both symmetries, never on the point group id, so two differently aligned symmetries of the same class cannot be confused</li>
+<li>an axis angle section coloured area outside the sector it draws, and left area inside it white. The reason is that a spherical region is bounded by small circles, so the polar angles belonging to a fixed azimuth angle need not form a single interval - close to the maximum misorientation angle the axis sector is cut open at its corners and eventually falls apart into separate caps, for the point groups <code class="language-plaintext highlighter-rouge">m-3</code>, <code class="language-plaintext highlighter-rouge">23</code> and <code class="language-plaintext highlighter-rouge">mmm</code>. <a href="plotS2Grid.html"><code class="language-plaintext highlighter-rouge">plotS2Grid</code></a> kept the bounding box of such a region and punched NaN holes into it, which a surface survives but <code class="language-plaintext highlighter-rouge">contourf</code> does not - it draws straight across the gap. The grid is now assembled from strips that have one interval per grid line, swept along whichever of the two angles gives fewer of them, and each strip is contoured on its own. This is <a href="https://github.com/mtex-toolbox/mtex/issues/209">issue #209</a>. The two new methods <a href="sphericalRegion.thetaIntervals.html"><code class="language-plaintext highlighter-rouge">thetaIntervals</code></a> and <a href="sphericalRegion.rhoIntervals.html"><code class="language-plaintext highlighter-rouge">rhoIntervals</code></a> return the components, where <code class="language-plaintext highlighter-rouge">thetaRange</code> returns only their hull. Both solve for the crossings with the bounding circles in closed form, where <code class="language-plaintext highlighter-rouge">thetaRange</code> used to walk a discretisation of ten thousand polar angles per grid line - a spherical plotting grid is built about four times faster now, and its boundary is exact rather than snapped to that discretisation. As a further side effect the grid of a disconnected region is no longer padded out to the bounding box, so a narrow sector costs a fraction of the points it used to</li>
+<li>a three dimensional spherical plot, <code class="language-plaintext highlighter-rouge">plot(sF,'3d')</code> and friends, ignored the plotting convention it was given whenever that convention happened to equal the session default - the whole of the pristine x-east / y-down / z-into-screen alignment - and used its own tilted camera instead. It told a convention the caller had passed from the one its callers append for their own data by comparing values; the two are marked apart now, so a convention handed in is always honoured</li>
+<li>a small circle drawn on a plot that covers both hemispheres went into whichever of the two axes happened to be current - the lower one, even for a cone around an axis in the upper hemisphere - and the part of it that crossed the equator was clipped away at the rim instead of being continued in the other half. An upper and a lower hemisphere are two axes but one plot, and they know about each other now, so <code class="language-plaintext highlighter-rouge">circle</code>, markers, labels and everything else added with <code class="language-plaintext highlighter-rouge">hold on</code> reaches both of them, each showing the part that falls into its hemisphere. Drawing the two halves by hand, one <code class="language-plaintext highlighter-rouge">'upper'</code> and one <code class="language-plaintext highlighter-rouge">'lower'</code> plot per hemisphere, is no longer necessary. This is <a href="https://github.com/mtex-toolbox/mtex/issues/330">issue #330</a>. Passing <code class="language-plaintext highlighter-rouge">'upper'</code> and <code class="language-plaintext highlighter-rouge">'lower'</code> together gave a single hemisphere as well, fewer axes than passing neither - it now means the same as asking for both</li>
+</ul>
+</div>
+<p>
+<b>Orientation Gradients, Curvature and GND</b>
+</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">log(ori,ori_ref)</code> in the left tangent space did not reduce the pair by crystal symmetry, while <code class="language-plaintext highlighter-rouge">angle(ori,ori_ref)</code> always did. A left tangent vector is <code class="language-plaintext highlighter-rouge">ori * inv(ori_ref)</code>, and the symmetry acts between the two factors - the equally valid representatives are <code class="language-plaintext highlighter-rouge">ori * s * inv(ori_ref)</code> - so once the product is formed it can no longer be reduced, and the pair has to be reduced first. It was not, so two neighbouring pixels stored as different symmetric representatives of their orientations - which is a property of the file, not of the material - came back as a rotation of up to 180 degree instead of the fraction of a degree that really separates them. Every <code class="language-plaintext highlighter-rouge">EBSD.gradient</code>, <code class="language-plaintext highlighter-rouge">gradientX/Y/Z</code>, <code class="language-plaintext highlighter-rouge">curvature</code>, <code class="language-plaintext highlighter-rouge">calcGND</code> and <code class="language-plaintext highlighter-rouge">WBV</code> number inherited that. This is <a href="https://github.com/mtex-toolbox/mtex/issues/194">issue #194</a>, open since 2016; @ThomasChauve's reading of Pantleon 2005 was right all along.</li>
+</ul>
+</div>
+<p>
+<b>Numbers move.</b> The affected pixels are not rare: of the neighbour pairs in the shipped datasets 1.7 percent (forsterite), 5.8 percent (csl), 7.0 percent (twins) and 62 percent (titanium) were computed from an overstated misorientation. Denoising a map with <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> rewrites the orientations of a grain consistently and hides the effect, which is why the GND and WBV example sheets - both of which denoise before they compute - are unchanged, to 3e-6 percent and bit for bit respectively. Without denoising they are not: the weighted Burgers vector of the undenoised <code class="language-plaintext highlighter-rouge">single</code> dataset had a mean norm of 15.7 against the 0.127 it has now, on all three stencils.</p>
+<p>
+<b>Points On A Grain Boundary</b>
+</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">insidepoly</code>, the fast point in polygon engine MTEX uses in place of MATLAB's <code class="language-plaintext highlighter-rouge">inpolygon</code>, reported points sitting exactly on a grain boundary as off it - but only ever on one side of a map, the side with the largest x. The engine brackets each edge by a half open interval in x, which is what makes the crossing count right where two edges meet, and it used that same bracket for the on-boundary test. A vertex that is a local maximum in x is the excluded end of both edges meeting there, so no edge ever looked at a point sitting exactly on it. The bracket is closed for the on test now and stays half open for the crossing count. On the map of <a href="https://github.com/mtex-toolbox/mtex/issues/2527">issue #2527</a> this made 504 of the queried boundary points come back wrong, and <code class="language-plaintext highlighter-rouge">grains.isOuterBoundary</code> found 110 boundary grains instead of 147</li>
+</ul>
+</div>
+<div>
+<ul>
+<li> <a href="grain2d.isOuterBoundary.html"><code class="language-plaintext highlighter-rouge">isOuterBoundary</code></a> no longer asks that question at all. The envelope it lays around the map is spanned by vertices of the grains themselves, so which grain it touches is a matter of vertex identity and is read off the polygons directly - exact, faster, and independent of how a point lying on a boundary is classified</li>
+</ul>
+</div>
+<p>
+<b>Plasticity</b>
+</p>
+<div>
+<ul>
+<li>there is no <code class="language-plaintext highlighter-rouge">slipSystem.hcp</code> and there will not be one: which slip and twinning systems carry the deformation of a hexagonal material, and at which critical resolved shear stress, is a property of the material and the experiment rather than of the lattice. The placeholder that used to warn and then return nothing - which made <code class="language-plaintext highlighter-rouge">dislocationSystem.hcp</code> fail with "Output argument sS not assigned" - now raises an error that lists every predefined hexagonal family, <code class="language-plaintext highlighter-rouge">slipSystem.basal</code>, <code class="language-plaintext highlighter-rouge">slipSystem.prismaticA</code>, <code class="language-plaintext highlighter-rouge">slipSystem.pyramidalCA</code> and the rest, with the Miller indices of each, so the set can be put together on the spot</li>
+<li>
+<code class="language-plaintext highlighter-rouge">slipSystem/SchmidFactor</code> checked the reference frames in one direction only: it caught a specimen stress tensor against crystal slip systems, but not a crystal tensor against slip systems already rotated into specimen coordinates by <code class="language-plaintext highlighter-rouge">ori * sS</code> - that combination silently returned a Schmid factor computed across two frames. The tension direction syntax <code class="language-plaintext highlighter-rouge">sS.SchmidFactor(r)</code> checked nothing at all, so the very same computation warned or stayed silent depending on whether it was written as a direction or as a uniaxial stress tensor. Both branches now apply the same test, and the warning carries the identifier <code class="language-plaintext highlighter-rouge">MTEX:frameMismatch</code> so it can be switched off. A crystal direction has to be stated as a <a href="Miller.Miller.html">Miller</a>, since a plain <a href="vector3d.vector3d.html">vector3d</a> is taken to be a specimen direction</li>
+</ul>
+</div>
+<p>
+<b>VPSC Files</b>
+</p>
+<div>
+<ul>
+<li>a VPSC texture file is now recognised by its fourth header line - the Euler angle convention and the number of orientations - instead of by the string <code class="language-plaintext highlighter-rouge">TEXTURE AT STRAIN</code> on the first. Only VPSC <b>output</b> carries that marker, so the weight (<code class="language-plaintext highlighter-rouge">.wts</code>) files that are handed to VPSC, and the files <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> itself writes, were both rejected as "Interface VPSC does not fit file format!". Reading back what MTEX exported now works</li>
+<li>the convention letter is honoured rather than assumed: a file announcing Kocks (<code class="language-plaintext highlighter-rouge">K</code>) or Roe (<code class="language-plaintext highlighter-rouge">R</code>) angles is read in that convention instead of being silently treated as Bunge. <code class="language-plaintext highlighter-rouge">export_VPSC</code> likewise writes the letter that matches the angles it wrote, and defaults to Bunge rather than to the <code class="language-plaintext highlighter-rouge">EulerAngleConvention</code> preference, which may be one VPSC cannot express</li>
+</ul>
+</div>
+<p>
+<b>Fundamental Regions</b>
+</p>
+<div>
+<ul>
+<li>
+<code class="language-plaintext highlighter-rouge">orientationRegion/checkInside</code> tested whether its two symmetries are trivial by comparing them against a freshly constructed <code class="language-plaintext highlighter-rouge">crystalSymmetry</code>, i.e. it built a symmetry object on every call only to throw it away. <code class="language-plaintext highlighter-rouge">orientationRegion/cleanUp</code> calls it a few hundred times, so this was the bulk of <code class="language-plaintext highlighter-rouge">fundamentalRegion(cs,cs)</code> - and an axis angle section plot builds the fundamental region twice. The comparison object is built once now; <code class="language-plaintext highlighter-rouge">fundamentalRegion</code> is about three times faster and returns bit identical regions</li>
+</ul>
+</div>
+<p>
+<b>Axis Distributions</b>
+</p>
+<div>
+<ul>
+<li> <a href="SO3Fun.calcAxisDistribution.html"><code class="language-plaintext highlighter-rouge">calcAxisDistribution</code></a> takes <code class="language-plaintext highlighter-rouge">'minAngle'</code> and <code class="language-plaintext highlighter-rouge">'maxAngle'</code>, so the axis distribution can be restricted to the rotations an axis angle section shows rather than always covering the whole fundamental region. It works the same way on an ODF, on an MDF, on a <a href="symmetry.symmetry.html">symmetry</a> and on an <a href="orientationRegion.orientationRegion.html">orientationRegion</a>, and passes through <code class="language-plaintext highlighter-rouge">plotAxisDistribution</code> and <code class="language-plaintext highlighter-rouge">calcAxisVolume</code>
+</li>
+</ul>
+</div>
+{% highlight matlab %}
+adf = calcAxisDistribution(mdf,'minAngle',20*degree,'maxAngle',40*degree)
+{% endhighlight %}
 <h2 id="3">MTEX 7.0 08/2026 - New Features</h2>
 <p>This is the first release that uses AI. This allowed us to implement many long lasting ideas.</p>
 <p>
@@ -102,8 +189,7 @@ plottingConvention.default('y↑→x');
 <div>
 <ul>
 <li>the new classes <a href="S2FunMLS.S2FunMLS.html">S2FunMLS</a> and <a href="SO3FunMLS.SO3FunMLS.html">SO3FunMLS</a> approximate scattered data on the sphere and in orientation space by moving least squares</li>
-<li> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> (formerly <code class="language-plaintext highlighter-rouge">compactify</code>) replaces random sampling by an almost perfectly equally distributed set of orientations or directions representing a given function. Asking for a second output optimizes the weights of the sampling points as well, which needs considerably fewer points for the same accuracy. The sampling points are moved by a limited memory BFGS iteration, which copes with the bad conditioning of the underlying functional far better than plain gradient descent - roughly an order of magnitude in time to a given accuracy in orientation space, and a factor 3 to the same accuracy on the sphere. The plain gradient descent remains available as <code class="language-plaintext highlighter-rouge">optimalSample(f,n,'method','steepestDescent')</code>
-</li>
+<li> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> (formerly <code class="language-plaintext highlighter-rouge">compactify</code>) replaces random sampling by an almost perfectly equally distributed set of orientations or directions representing a given function. Asking for a second output optimizes the weights of the sampling points as well, which needs considerably fewer points for the same accuracy</li>
 <li> <a href="orientation.calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> uses by default the <a href="https://github.com/nla-group/classix">CLASSIX</a> algorithm, which is much faster than hierarchical clustering and needs no number of clusters</li>
 <li> <a href="PoleFigure.calcODFIterative.html"><code class="language-plaintext highlighter-rouge">calcODFIterative</code></a> inverts pole figure data by iteratively adjusting the kernel width, which is much more robust for irregularly sampled data</li>
 </ul>
