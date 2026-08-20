@@ -69,7 +69,7 @@ epsTotal = 0.6 * strainTensor(diag([1 -q -(1-q)]))
 {% endhighlight %}
 
 {% highlight plaintext %}
-epsTotal = strainTensor (TD←RD↑)
+epsTotal = strainTensor (y↓→x)
   type: Lagrange 
   rank: 2 (3 x 3)
  
@@ -86,16 +86,24 @@ eps1 = 0.01 * strainTensor(diag([1 -q -(1-q)]));
 
 [M,~,W] = calcTaylor(inv(ori) * eps1, sS);
 
-M
+M, W
 {% endhighlight %}
 
 {% highlight plaintext %}
 M =
     2.3153
+ 
+W = spinTensor (crystal)
+  rank: 2 (3 x 3)
+ 
+ *10^-4
+      0 -47.11 -68.65
+  47.11      0  24.65
+  68.65 -24.65      0
 {% endhighlight %}
 <p>and the updated orientation is obtained by applying it</p>
 {% highlight matlab %}
-oriNew = ori .* orientation(-W);
+oriNew = exp(ori,-W);
 
 angle(ori,oriNew) ./ degree
 {% endhighlight %}
@@ -140,11 +148,12 @@ ans =
 pC = progressCounter(numIter);
 for k = 1:numIter
 
-  % the spin experienced by each individual orientation
-  W = spinTensor(spin.eval(ori).').';
+  % the spin experienced by each individual orientation, in crystal
+  % coordinates - the field was set to return a right sided spin tensor
+  W = spin.eval(ori);
 
-  % rotate the orientations
-  ori = ori .* orientation(-W);
+  % update the orientations
+  ori = exp(ori,-W);
 
   pC.show(k);
 end

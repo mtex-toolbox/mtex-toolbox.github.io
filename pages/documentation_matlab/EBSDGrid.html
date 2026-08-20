@@ -93,21 +93,12 @@ ans = EBSD (y↑→x)
 <h2 id="6">Data That Can Not Be Put on a Grid</h2>
 <p>Gridding writes the measurements into a rectangular raster, which is faithful only if they really do sit on one lattice. Should two of them land in the same cell, one would be lost - so MTEX keeps such a data set as a plain list instead, and says why</p>
 {% highlight matlab %}
-ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'])
+ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'],...
+  'EulerCorrection', rotation.byAxisAngle(zvector,180*degree))
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: .ctf files usually come with different coordinate systems for the
-         Euler angles and the spatial coordinates. I assumed the relative
-         alignment of these coordinate systems to be a rotation about the
-         z-axis by 180 degree. You may want to verify this and specify the
-         correct alignment explicitely by
-
-         ebsd = EBSD.load(fileName,'EulerCorrection',
-         rotation.byAxisAngle(zvector,180*degree))
-
-         Click here for more information. 
-Warning: 48 of 613 indexed measurements share a lattice cell with another
+Warning: 92 of 613 indexed measurements share a lattice cell with another
 one, so gridding them would drop those measurements. Keeping the data as a
 list - call gridify explicitly if you want the raster anyway. 
  
@@ -191,14 +182,14 @@ plot(ebsdMg(50:100,5:100),ebsdMg(50:100,5:100).orientations)
 <p> <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> does not preserve the order in which the measurements arrive, and can not: the layout described above fixes the first matrix dimension to y, while a <code class="language-plaintext highlighter-rouge">.ctf</code> or <code class="language-plaintext highlighter-rouge">.ang</code> file is written with x varying fastest, so MATLAB's column major linear indexing runs down the map where the file runs across it. After gridding, <code class="language-plaintext highlighter-rouge">ebsd(k)</code> is therefore in general not the measurement in line k of the file any more.</p>
 <p>Nothing is lost by that. The original ids are kept as the property <code class="language-plaintext highlighter-rouge">oldId</code>, and looking at its top left corner shows the effect directly - consecutive ids run along a matrix row, i.e. across the map, while MATLAB's linear index runs down a column</p>
 {% highlight matlab %}
-ebsd.oldId(1:3,1:3)
+ebsd.oldId(1:3,1:4)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-     1     2     3
-   168   169   170
-   335   336   337
+     1     2     3     4
+   168   169   170   171
+   335   336   337   338
 {% endhighlight %}
 <p>and the second output of <code class="language-plaintext highlighter-rouge">gridify</code> is the translation in the other direction, i.e. <code class="language-plaintext highlighter-rouge">ebsdGrid.pos(newId)</code> are the positions of the list in the order of the list</p>
 {% highlight matlab %}
@@ -426,8 +417,9 @@ hold off
 grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
+     0       1       1  notIndexed                    none
      1      12    1936  Forsterite       mmm  LightSkyBlue
-     2       4     284   Enstatite       mmm  DarkSeaGreen
+     2       3     283   Enstatite       mmm  DarkSeaGreen
      3       3     230    Diopside     12/m1     Goldenrod
  
  boundary segments: 952 (37582 µm)
@@ -451,7 +443,7 @@ grains = grain2d (y↑→x)
  14       2       36    (125°,62°,331°)   0.0084
  15       1      123   (179°,128°,261°)    0.024
  16       1       38    (167°,97°,261°)     0.01
- 17       2        1    (164°,35°,295°)        0
+ 17       0        1    (164°,35°,295°)        0
  18       2      238    (164°,35°,295°)   0.0075
  19       1       36    (167°,98°,260°)   0.0083
 {% endhighlight %}

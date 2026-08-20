@@ -45,9 +45,11 @@ export(ebsd,'denoised.h5oina')
 {% highlight matlab %}
 export(ebsd,'denoised.h5oina','reference','myfile.h5oina')
 {% endhighlight %}
-<p>Data that was not imported from an HDF5 file, or the flag <code class="language-plaintext highlighter-rouge">'standalone'</code>, gives MTEX's own flat layout instead - orientations, phases, coordinates and properties, and nothing else.</p>
+<p>A reference file is therefore required, and exporting data that did not come from an HDF5 file raises an error saying so. Earlier versions wrote a flat layout of MTEX's own in that case, but nothing could read it back - not MTEX and no vendor tool - so it was removed.</p>
+<p>To carry a map between MTEX sessions, save it as a <code class="language-plaintext highlighter-rouge">.mat</code> file. That keeps everything an HDF5 export drops, the reference frames and the imported header included.</p>
 {% highlight matlab %}
-export(ebsd,'myFile.h5','standalone')
+save('myFile.mat','ebsd')
+load('myFile.mat')
 {% endhighlight %}
 </div>
 </body>

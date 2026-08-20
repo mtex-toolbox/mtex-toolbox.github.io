@@ -53,6 +53,7 @@ odf =
   Columns 7 through 9
     {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}    {1×1 SO3FunHarmonic}
 {% endhighlight %}
+<p>The same command reads the weight files (<code class="language-plaintext highlighter-rouge">.wts</code>) that are handed <b>to</b> VPSC, and files written by <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a>. Those carry no strain and no phase ellipsoid, so the corresponding entries in <code class="language-plaintext highlighter-rouge">odf.opt</code> are <code class="language-plaintext highlighter-rouge">NaN</code>. VPSC names the Euler angle convention on the fourth header line - <code class="language-plaintext highlighter-rouge">B</code> for Bunge, <code class="language-plaintext highlighter-rouge">K</code> for Kocks and <code class="language-plaintext highlighter-rouge">R</code> for Roe - and the file is read in whichever of them it announces.</p>
 <p>The individual ODFs can be accessed by <code class="language-plaintext highlighter-rouge">odf{id}</code>
 </p>
 {% highlight matlab %}
@@ -77,7 +78,7 @@ ans =
              orientations: [1000×1 orientation]
                      data: [1000×3 double]
 {% endhighlight %}
-<h2 id="6">Compare pole figures during deformation</h2>
+<h2 id="7">Compare pole figures during deformation</h2>
 <p>Next we examine the evaluation of the ODF during the deformation by plotting strain depended pole figures.</p>
 {% highlight matlab %}
 % define some crystal directions
@@ -99,7 +100,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="VPSCImport_02.png" %}
 </center>
-<h2 id="7">Visualize slip system activity</h2>
+<h2 id="8">Visualize slip system activity</h2>
 <p>Alongside with the orientation data VPSC also outputs a file <code class="language-plaintext highlighter-rouge">ACT_PH1.OUT</code> which contains the activity of the different slip systems during the deformation. Lets read this file as a table</p>
 {% highlight matlab %}
 ACT = readtable([path2file filesep 'ACT_PH1.OUT'],'FileType','text')
