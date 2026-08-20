@@ -1,16 +1,23 @@
 ---
-title: Installation Issues for Mac OSX
-keywords: installation issues, mac osx
-last_updated: January 8, 2018
+title: Installation and Compilation
+keywords: installation issues, mac osx, mex, nfft, mcc, matlab compiler, standalone, deployment
+last_updated: August 20, 2026
 hide_sidebar: true
 permalink: installation
 folder: download
 toc: false
 ---
 
-Since binaries are sometimes not compatible across different versions of
-macOS and due to increasing security measures of Apple, some extra work might be
-required to get MTEX running on macOS.
+This page collects what to do when the binaries do not simply work: the macOS
+security measures that block them, recompiling the mex files, and building the
+nfft from source. The last section covers a different kind of compiling -
+turning your own script into a standalone application with the MATLAB
+Compiler.
+
+The first section and the nfft instructions are written for macOS: binaries
+are sometimes not compatible across different versions of macOS, and with the
+increasing security measures of Apple some extra work might be required to get
+MTEX running there.
 
 ## library load disallowed by system policy
 
