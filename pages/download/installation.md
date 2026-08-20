@@ -218,3 +218,36 @@ or
 ```
 mtex/extern/nfft/
 ```
+
+## Compiling a script into a standalone application
+
+Everything above is about the **mex binaries** MTEX calls from inside MATLAB.
+A different kind of compiling is turning your own script into an executable
+that runs *without* a MATLAB licence, with the
+[MATLAB Compiler](https://www.mathworks.com/products/compiler.html) (`mcc`).
+That is what the `compile-mtex` script in the root of the MTEX folder does:
+
+``` bash
+MTEX_DIR=/path/to/mtex /path/to/mtex/compile-mtex my-script.m -o my-app
+```
+
+It puts every MTEX directory on the compiler's include path and bundles the
+files MTEX reads at run time. Two things are worth knowing:
+
+* **The dependency checker cannot see everything.** `data/`,
+  `plotting/plotting_tools/colors.mat` and `ciexyz31_1.csv` are located
+  through `mtex_path` at run time, not by a literal `load` the checker can
+  follow, so they have to be passed to `mcc` explicitly with `-a`.
+  `compile-mtex` does this for you; if you drive `mcc` yourself, or use the
+  Compiler app, add them by hand.
+* **The MTEX folder is bigger than your application needs.** `tests/`,
+  `userScripts/`, `templates/` and `doc/makeDoc/` are not part of a deployed
+  application, and some of them have been reported to make the dependency
+  checker itself fall over. `compile-mtex` leaves them out.
+
+If you prefer the graphical Compiler app, add the same three payload files
+under *Files required for your application to run*.
+
+Thanks to [gcapes](https://github.com/gcapes) and
+[vtvivian](https://github.com/vtvivian), who worked this out in
+[issue #2369](https://github.com/mtex-toolbox/mtex/issues/2369).
