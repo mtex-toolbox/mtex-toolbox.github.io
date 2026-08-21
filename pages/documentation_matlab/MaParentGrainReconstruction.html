@@ -39,8 +39,7 @@ plottingConvention.default('y↑→x');
 mtexdata martensite
 
 % grain reconstruction
-[grains,ebsd] = calcGrains(ebsd, 'angle', 3*degree, 'minPixel',2,'removeQuadruplePoints');
-grains = smoothBoundary(grains,5);
+[grains,ebsd] = calcGrains(ebsd, 'angle', 3*degree, 'minPixel',2,'alpha',12);
 
 % plot the data and the grain boundaries
 plot(ebsd('Iron bcc'),ebsd('Iron bcc').orientations,'figSize','large')
@@ -82,10 +81,10 @@ job = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10429   100%               
+ child   Iron bcc (old)  432       10645   100%               
  
  OR: (111) || (011)   [101̅] || [111̅]
-   c2c fit: 2.5°, 3.5°, 4.4°, 5.4° (quintiles)
+   c2c fit: 2.5°, 3.5°, 4.4°, 5.3° (quintiles)
 {% endhighlight %}
 <p>The output of the variable <code class="language-plaintext highlighter-rouge">job</code> tells us the amount of parent and child grains as well as the percentage of already recovered parent grains. Furthermore, it displays how well the current guess of the parent to child orientation relationship fits the child to child misorientations within our data. In our sample data set this fit is described by the 4 quintiles 2.5&deg;, 3.5&deg;, 4.5&deg; and 5.5&deg;.</p>
 <h2 id="5">Optimizing the parent child orientation relationship</h2>
@@ -103,16 +102,16 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10429   100%               
+ child   Iron bcc (old)  432       10645   100%               
  
- OR: (346.1°,9°,57.9°)
+ OR: (96.6°,45.7°,273°)
    c2c fit: 1.3°, 1.8°, 2.2°, 3° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.5°
+   closest ideal OR: (111) || (110)   [101̅] || [001̅] fit: 2.5°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_02.png" %}
 </center>
-<p>We observe that the optimized parent to child orientation relationship is 2.3&deg; off the initial Kurdjumov Sachs orientation relationship and reduced the first quintil of the misfit with the child to child misorientations to 1.5&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
+<p>We observe that the optimized parent to child orientation relationship is now more close to the Nishiyama&ndash;Wassermann orientation relationship (2.5&deg; off) and reduces the first quintil of the misfit with the child to child misorientations to 1.3&deg;. These misfits are stored by the command <a href="calcParent2Child.html"><code class="language-plaintext highlighter-rouge">calcParent2Child</code></a> in the variable <code class="language-plaintext highlighter-rouge">job.fit</code>. In fact, the algorithm assumes that the majority of all boundary misorientations are child to child misorientations and finds the parent to child orientations relationship by minimizing this misfit. The following histogram displays the distribution of the misfit over all grain to grain misorientations.</p>
 {% highlight matlab %}
 hold on
 histogram(job.calcGBFit./degree,'BinMethod','sqrt','EdgeColor','auto')
@@ -152,13 +151,13 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10429   100%               
+ child   Iron bcc (old)  432       10645   100%               
  
- OR: (346.1°,9°,57.9°)
+ OR: (96.6°,45.7°,273°)
    c2c fit: 1.3°, 1.8°, 2.2°, 3° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.5°
+   closest ideal OR: (111) || (110)   [101̅] || [001̅] fit: 2.5°
  
- variant graph: 541346 entries
+ variant graph: 544141 entries
 {% endhighlight %}
 <p>For large maps it can be useful to perform the segmentation in a two step process, where in the in the first step similarly oriented variants are reconstructed as one variants and only separated in a second step. This can be accomplished by the commands</p>
 {% highlight matlab %}
@@ -176,13 +175,13 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10429   100%               
+ child   Iron bcc (old)  432       10645   100%               
  
- OR: (346.1°,9°,57.9°)
-   c2c fit: 1.3°, 1.8°, 2.2°, 3° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.5°
+ OR: (96.6°,45.7°,273°)
+   c2c fit: 1.3°, 1.7°, 2.2°, 2.9° (quintiles)
+   closest ideal OR: (111) || (110)   [101̅] || [001̅] fit: 2.5°
  
- votes: 10429 x 1
+ votes: 10645 x 1
    probabilities: 100%, 99%, 98%, 97% (quintiles)
 {% endhighlight %}
 <p>As a result a table of votes <code class="language-plaintext highlighter-rouge">job.votes</code> is generated. More specifically, <code class="language-plaintext highlighter-rouge">job.votes.prob</code> is a matrix that contains in row <code class="language-plaintext highlighter-rouge">job.votes.prob(i,:)</code> the probabilities of the i-th child grain to have a specific parent orientation. Accordingly, we can plot the probability of the best fit for each grain by</p>
@@ -206,16 +205,16 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% highlight plaintext %}
 ans = parentGrainReconstructor
  
- phase   mineral         symmetry  grains  area   reconstructed
- parent  Iron fcc        432       10379   100%   100%         
- child   Iron bcc (old)  432       50      0.29%               
+ phase   mineral         symmetry  grains  area    reconstructed
+ parent  Iron fcc        432       10596   100%    100%         
+ child   Iron bcc (old)  432       49      0.089%               
  
- OR: (346.1°,9°,57.9°)
-   p2c fit: 4.7°, 8.4°, 17°, 22° (quintiles)
-   c2c fit: 2°, 2.4°, 3.1°, 5° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.5°
+ OR: (96.6°,45.7°,273°)
+   p2c fit: 9.1°, 16°, 19°, 23° (quintiles)
+   c2c fit: 2.1°, 2.8°, 3.1°, 5.4° (quintiles)
+   closest ideal OR: (111) || (110)   [101̅] || [001̅] fit: 2.5°
  
- votes: 50 x 1
+ votes: 49 x 1
    probabilities: 0%, 0%, 0%, 0% (quintiles)
 {% endhighlight %}
 <center>
@@ -240,29 +239,29 @@ plot(job.parentGrains,job.parentGrains.meanOrientation)
 {% highlight plaintext %}
 ans = parentGrainReconstructor
  
- phase   mineral         symmetry  grains  area   reconstructed
- parent  Iron fcc        432       10379   100%   100%         
- child   Iron bcc (old)  432       50      0.29%               
+ phase   mineral         symmetry  grains  area    reconstructed
+ parent  Iron fcc        432       10596   100%    100%         
+ child   Iron bcc (old)  432       49      0.089%               
  
- OR: (346.1°,9°,57.9°)
-   p2c fit: 4.7°, 8.4°, 17°, 22° (quintiles)
-   c2c fit: 2°, 2.4°, 3.1°, 5° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.5°
+ OR: (96.6°,45.7°,273°)
+   p2c fit: 9.1°, 16°, 19°, 23° (quintiles)
+   c2c fit: 2.1°, 2.8°, 3.1°, 5.4° (quintiles)
+   closest ideal OR: (111) || (110)   [101̅] || [001̅] fit: 2.5°
  
- votes: 10306 x 1
-   probabilities: 95%, 79%, 67%, 56% (quintiles)
+ votes: 10513 x 1
+   probabilities: 95%, 79%, 67%, 55% (quintiles)
  
  
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area    reconstructed
- parent  Iron fcc        432       10383   100%    100%         
- child   Iron bcc (old)  432       46      0.063%               
+ parent  Iron fcc        432       10597   100%    100%         
+ child   Iron bcc (old)  432       48      0.088%               
  
- OR: (346.1°,9°,57.9°)
-   p2c fit: 7.5°, 13°, 19°, 24° (quintiles)
-   c2c fit: 2°, 2.5°, 3.1°, 5.2° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.5°
+ OR: (96.6°,45.7°,273°)
+   p2c fit: 9.2°, 17°, 19°, 23° (quintiles)
+   c2c fit: 2.1°, 2.8°, 3.1°, 5.4° (quintiles)
+   closest ideal OR: (111) || (110)   [101̅] || [001̅] fit: 2.5°
 {% endhighlight %}
 <center>
 {% include inline_image.html file="MaParentGrainReconstruction_07.png" %}
@@ -273,6 +272,7 @@ ans = parentGrainReconstructor
 {% highlight matlab %}
 % merge grains with similar orientation
 job.mergeSimilar('threshold',7.5*degree);
+job.grains = smoothBoundary(job.grains,20);
 
 % plot the result
 plot(job.parentGrains,job.parentGrains.meanOrientation)
@@ -389,6 +389,7 @@ hold off
 <p>Finally, we may apply filtering to the parent map to fill non indexed or not reconstructed pixels. To this end we first run grain reconstruction on the parent map</p>
 {% highlight matlab %}
 [parentGrains, parentEBSD] = calcGrains(parentEBSD,'angle',3*degree,'minPixel',10);
+parentGrains = smoothBoundary(parentGrains,20);
 
 plot(ebsd,ebsd.orientations,'figSize','large')
 
