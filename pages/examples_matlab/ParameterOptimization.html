@@ -73,7 +73,7 @@ for ii = 1:length(thrsh_angles)
 
   % Calculate grains with defined angular threshold
   [grains,ebsd] = calcGrains(ebsd, 'angle',thrsh_angles(ii)*degree,'minPixel',3);
-    grains = smooth(grains,5);
+  grains = smoothBoundary(grains,5);
 
   % Plot the orientation data and overlay the grain boundaries
   plot(ebsd,ebsd.orientations);
@@ -86,29 +86,6 @@ for ii = 1:length(thrsh_angles)
   % Enable multiplot
   if ii < length(thrsh_angles), nextAxis; end
 end
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth. 
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth. 
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth. 
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth. 
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_02.png" %}
@@ -132,7 +109,7 @@ for ii = 1:length(thrsh_angles)
 
   % Calculate grains with defined angular threshold
   [grains,ebsd] = calcGrains(ebsd, 'angle',thrsh_angles(ii)*degree,'minPixel',3);
-    grains = smooth(grains,5);
+  grains = smoothBoundary(grains,5);
 
   % set up the PGR job
   job = parentGrainReconstructor(ebsd,grains);
@@ -161,21 +138,6 @@ for ii = 1:length(thrsh_angles)
   if ii < length(thrsh_angles), nextAxis; end
 end
 {% endhighlight %}
-
-{% highlight plaintext %}
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth. 
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth. 
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth.
-{% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_03.png" %}
 </center>
@@ -188,7 +150,7 @@ mtexdata martensite silent
 
 % Calculate grains with defined angular threshold
 [grains,ebsd] = calcGrains(ebsd('indexed'), 'angle',2*degree,'minPixel',3);
-grains = smooth(grains,5);
+grains = smoothBoundary(grains,5);
 
 % Initialize the parent grain reconstructor class
 job = parentGrainReconstructor(ebsd,grains);
@@ -254,13 +216,6 @@ end
 figure(fh);
 grid on
 legend(ORnames);
-{% endhighlight %}
-
-{% highlight plaintext %}
-Warning: grains.smooth has been renamed to
-grains.smoothBoundary, which additionally removes the
-pixel staircase before smoothing it. You are getting
-the old behaviour - see the help of grain2d/smooth.
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_04.png" %}
@@ -503,84 +458,81 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
+ child   Iron bcc (old)  432       9342    100%               
  
- OR: (347.4°,8.9°,56.5°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
+ OR: (100.5°,46.6°,258°)
+   c2c fit: 1.2°, 1.7°, 2.1°, 2.6° (quintiles)
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
  
- variant graph: 577177 entries
+ variant graph: 431081 entries
  
  
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
+ child   Iron bcc (old)  432       9342    100%               
  
- OR: (347.4°,8.9°,56.5°)
+ OR: (100.5°,46.6°,258°)
    c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
  
- variant graph: 577177 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
- 
- OR: (347.4°,8.9°,56.5°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.7° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
- 
- variant graph: 577177 entries
+ variant graph: 431081 entries
  
  
 ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
+ child   Iron bcc (old)  432       9342    100%               
  
- OR: (347.4°,8.9°,56.5°)
+ OR: (100.5°,46.6°,258°)
+   c2c fit: 1.2°, 1.7°, 2°, 2.7° (quintiles)
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
+ 
+ variant graph: 431081 entries
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       9342    100%               
+ 
+ OR: (100.5°,46.6°,258°)
+   c2c fit: 1.2°, 1.7°, 2°, 2.7° (quintiles)
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
+ 
+ variant graph: 431081 entries
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       9342    100%               
+ 
+ OR: (100.5°,46.6°,258°)
+   c2c fit: 1.2°, 1.6°, 2.1°, 2.7° (quintiles)
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
+ 
+ variant graph: 431081 entries
+ 
+ 
+ans = parentGrainReconstructor
+ 
+ phase   mineral         symmetry  grains  area  reconstructed
+ parent  Iron fcc        432       0       0%    0%           
+ child   Iron bcc (old)  432       9342    100%               
+ 
+ OR: (100.5°,46.6°,258°)
    c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
  
- variant graph: 577177 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
- 
- OR: (347.4°,8.9°,56.5°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
- 
- variant graph: 577177 entries
- 
- 
-ans = parentGrainReconstructor
- 
- phase   mineral         symmetry  grains  area  reconstructed
- parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
- 
- OR: (347.4°,8.9°,56.5°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
- 
- variant graph: 577177 entries
+ variant graph: 431081 entries
 {% endhighlight %}
 <center>
 {% include inline_image.html file="ParameterOptimization_11.png" %}
-</center>
-<center>
-{% include inline_image.html file="ParameterOptimization_12.png" %}
 </center>
 <p>It may not be entirely possible to judge the quality of the PGR without having access to a validation dataset (i.e. without knowing the actual parent microstructure), nevertheless some observations can be made: An inflation power of 1.2 seems to be too high, leading to large patches of material that have not been reconstructed. A good indicator for the present microstructure is to check in how far likely annealing twins have been resolved with a realistic morphology and how very small parent grains may become present that are unlikely to be associated with real parent grains. Based on this the choice of an inflation power of 1.05 and numIter of 10 seems to be a good choice, although it is hard to make an objective assessment. Note that an inflation power of 1 means that no clustering is enforced - with this setting the algorithm simply explores the local neighborhood up to the degree of neighbor defined by <code class="language-plaintext highlighter-rouge">numIter</code> and bases the most likely parent orientation on the overall probabilities within this region.</p>
 <h2 id="19">Final reconstruction</h2>
@@ -645,16 +597,16 @@ ans = parentGrainReconstructor
  
  phase   mineral         symmetry  grains  area  reconstructed
  parent  Iron fcc        432       0       0%    0%           
- child   Iron bcc (old)  432       10932   100%               
+ child   Iron bcc (old)  432       9342    100%               
  
- OR: (347.4°,8.9°,56.5°)
-   c2c fit: 1.2°, 1.6°, 2°, 2.6° (quintiles)
-   closest ideal OR: (111) || (011)   [11̅0] || [100] fit: 2.4°
+ OR: (100.5°,46.6°,258°)
+   c2c fit: 1.2°, 1.7°, 2.1°, 2.7° (quintiles)
+   closest ideal OR: (11̅1̅) || (01̅1̅)   [101] || [100] fit: 2.5°
  
- variant graph: 577177 entries
+ variant graph: 431081 entries
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_13.png" %}
+{% include inline_image.html file="ParameterOptimization_12.png" %}
 </center>
 <p>We are now finished with the PGR and can, as a last step, plot the child and reconstructed parent EBSD data overlayed with the outlines of the parent grains.</p>
 {% highlight matlab %}
@@ -677,7 +629,7 @@ plot(job.grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="ParameterOptimization_14.png" %}
+{% include inline_image.html file="ParameterOptimization_13.png" %}
 </center>
 </div>
 </body>
