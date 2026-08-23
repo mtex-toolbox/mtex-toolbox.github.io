@@ -116,7 +116,7 @@ job = trueEbsd2 (as imported)
  4   fsdT1      192 x 256         tilt      -         -
  5  fsdT10      192 x 256                   -         -
 {% endhighlight %}
-<p>Plot the sequence to check the images really do cover the same area. Note how different the contrasts look &mdash; that is why matching is done on edges rather than on grey values.</p>
+<p>Plot the sequence to check the images really do cover the same area. Note how different the contrasts look &mdash; that is why matching is done on edges rather than on the original values.</p>
 {% highlight matlab %}
 plot(imgList)
 {% endhighlight %}
@@ -198,37 +198,38 @@ job.calcDistortion('fitErr')
 {% endhighlight %}
 
 {% highlight plaintext %}
-measured settings, override with setOptions
-   edgeWidth  per map  4 4 5 5 5 px
-   roiSize    per hop  32 64 64 64 px   from shifts 5.0 2.2 3.3 3.5 px, features 4 7 7 7 px
+◆ measured settings, override with setOptions
+   ▸ edgeWidth  per map  4 4 5 5 5 px
+   ▸ roiSize    per hop  32 64 64 64 px   ← shifts 5.0 2.2 3.3 3.5 px, features 4 7 7 7 px
 
- distortion across 5 maps, 4 hops
+ ◆ distortion across 5 maps, 4 hops
 
-    distortion   stage            ROI     shift  residual
-  bcImg
-  | shift-drift  shift          32 px   4.19 px
-  |              drift          32 px   3.72 px
-  |              residual                         3.36 px
-  | residual over 2 px, retrying with a 64 px ROI
-  | shift-drift  shift          64 px   3.64 px
-  |              drift          64 px   2.04 px
-  |              residual                         1.53 px
-  v
-  fsdB3
-  | identity     -                  -   0.00 px
-  |              difference                       2.03 px
-  v
-  fsdT3
-  | shift        shift          64 px   3.25 px
-  |              residual                         0.27 px
-  v
-  fsdT1
-  | tilt         projective     64 px   3.61 px
-  |              poly11         64 px   0.27 px
-  |              poly22         64 px   0.27 px
-  |              residual                         0.26 px
-  v
-  fsdT10
+    distortion   stage              ROI     shift  residual
+    ──────────── ───────────── ──────── ───────── ─────────
+  ● bcImg
+  │ shift-drift  shift            32 px   4.19 px
+  │              drift            32 px   3.72 px
+  │              ↳ residual                         3.36 px
+  │ ↻ residual over 2 px, retrying with a 64 px ROI
+  │ shift-drift  shift            64 px   3.64 px
+  │              drift            64 px   2.04 px
+  │              ↳ residual                         1.53 px
+  ▼
+  ● fsdB3
+  │ identity     ·                    ·   0.00 px
+  │              ↳ difference                       2.03 px
+  ▼
+  ● fsdT3
+  │ shift        shift            64 px   3.25 px
+  │              ↳ residual                         0.27 px
+  ▼
+  ● fsdT1
+  │ tilt         projective       64 px   3.61 px
+  │              poly11           64 px   0.27 px
+  │              poly22           64 px   0.27 px
+  │              ↳ residual                         0.26 px
+  ▼
+  ● fsdT10
 
  
 ans = trueEbsd2 (shifts calculated)
