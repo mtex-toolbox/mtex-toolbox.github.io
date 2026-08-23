@@ -23,12 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>constructor</p>
-<p>
-<b>tensor</b> is the low level constructor for a <code class="language-plaintext highlighter-rouge">tensor</code> object. For importing real world data you might want to use the <b>import_wizard_old</b>.</p>
+<p>class representing a material tensor of arbitrary rank</p>
+<p>A tensor stores its coefficients in the array M, together with the <a href="referenceFrame.referenceFrame.html">referenceFrame</a>, respectively the crystal <a href="symmetry.symmetry.html">symmetry</a>, they are given with respect to. Rotating a tensor or an orientation acting on it transforms the coefficients accordingly, which is what makes calculations like the elastic properties of a textured aggregate possible.</p>
+<p>Tensors of rank 4 come in two flavours of Voigt matrix notation. The flag doubleConvention selects the one where the off diagonal entries carry a factor of two, as is usual for the compliance tensor.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-T = tensor(M,CS,'name',name,'unit',unit,'propertyname',property)
+T = tensor(M,CS)
+T = tensor(M,'rank',r)
+T = tensor(M,CS,'name',name,'unit',unit)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -78,11 +80,189 @@ T = tensor(M,CS,'name',name,'unit',unit,'propertyname',property)
             <tt>name of the tensor</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>doubleConvention</tt>
+         </td>
+         <td>
+            <tt>Voigt notation with a factor of two off the diagonal</tt>
+         </td>
+      </tr>
    </table>
 </p>
-<h2 id="6">See also</h2>
+<h2 id="6">Class Properties</h2>
 <p>
-<a href="SO3Fun.calcTensor.html">SO3Fun.calcTensor</a> <a href="EBSD.calcTensor.html">EBSD.calcTensor</a>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>tensor rank</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frame</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a> the tensor is expressed in</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>how2plot</tt>
+         </td>
+         <td>
+            <tt><a href="plottingConvention.html">plottingConvention</a>, read only</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>doubleConvention</tt>
+         </td>
+         <td>
+            <tt>Voigt convention of a rank 4 tensor</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isSymmetric</tt>
+         </td>
+         <td>
+            <tt>is the tensor symmetric</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isSkewSymmetric</tt>
+         </td>
+         <td>
+            <tt>is the tensor skew symmetric</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Derived Classes</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt><a href="stiffnessTensor.stiffnessTensor.html">stiffnessTensor</a></tt>
+         </td>
+         <td>
+            <tt>elastic stiffness</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="complianceTensor.complianceTensor.html">complianceTensor</a></tt>
+         </td>
+         <td>
+            <tt>elastic compliance</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="strainTensor.strainTensor.html">strainTensor</a></tt>
+         </td>
+         <td>
+            <tt>strain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="strainRateTensor.strainRateTensor.html">strainRateTensor</a></tt>
+         </td>
+         <td>
+            <tt>strain rate</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="stressTensor.stressTensor.html">stressTensor</a></tt>
+         </td>
+         <td>
+            <tt>stress</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="deformationGradientTensor.deformationGradientTensor.html">deformationGradientTensor</a></tt>
+         </td>
+         <td>
+            <tt>deformation gradient</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="velocityGradientTensor.velocityGradientTensor.html">velocityGradientTensor</a></tt>
+         </td>
+         <td>
+            <tt>velocity gradient</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="spinTensor.spinTensor.html">spinTensor</a></tt>
+         </td>
+         <td>
+            <tt>infinitesimal rotation</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="curvatureTensor.curvatureTensor.html">curvatureTensor</a></tt>
+         </td>
+         <td>
+            <tt>lattice curvature</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="dislocationDensityTensor.dislocationDensityTensor.html">dislocationDensityTensor</a></tt>
+         </td>
+         <td>
+            <tt>dislocation density, Nye tensor</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="ChristoffelTensor.ChristoffelTensor.html">ChristoffelTensor</a></tt>
+         </td>
+         <td>
+            <tt>Christoffel tensor of a wave direction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="refractiveIndexTensor.refractiveIndexTensor.html">refractiveIndexTensor</a></tt>
+         </td>
+         <td>
+            <tt>optical refractive index</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="TensorDefinition.html">TensorDefinition</a> <a href="stiffnessTensor.html">stiffnessTensor</a>
 </p>
 </div>
 </body>

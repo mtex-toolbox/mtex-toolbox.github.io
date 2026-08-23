@@ -23,7 +23,110 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>spherical function given by a function handle</p>
+<p>a class representing a function on the sphere by a function handle</p>
+<p>Since nothing is precomputed, evaluation is exact but every operation that needs coefficients - convolution, quadrature, plotting a smooth surface - converts to <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a> first.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+sF = S2FunHandle(fun)
+sF = S2FunHandle(fun,'antipodal')
+sF = S2FunHandle(fun,cs)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fun</tt>
+         </td>
+         <td>
+            <tt>@function_handle taking a <a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> or <a href="referenceFrame.referenceFrame.html">referenceFrame</a> the function is expressed in</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S2FunHandle.S2FunHandle.html">S2FunHandle</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>the function fulfills f(v) = f(-v)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fun</tt>
+         </td>
+         <td>
+            <tt>@function_handle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>f(v) = f(-v)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>bandwidth used when converting to <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isReal</tt>
+         </td>
+         <td>
+            <tt>the function takes only real values</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+sF = S2FunHandle(@(v) dot(v,vector3d.Z))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sF = S2FunHandle (y↓→x)
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="S2Fun.html">S2Fun</a> <a href="S2FunHarmonic.html">S2FunHarmonic</a>
+</p>
 </div>
 </body>
 </html>

@@ -23,11 +23,94 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>ChristoffelTensor is a class. sT = ChristoffelTensor(varargin)</p>
+<p>class representing the Christoffel tensor of a wave direction</p>
+<p>The Christoffel tensor E(n) = n * C * n is the rank 2 tensor a <a href="stiffnessTensor.stiffnessTensor.html">stiffnessTensor</a> C induces for a propagation direction n. Its eigenvalues give the elastic wave velocities in that direction, its eigenvectors the corresponding polarization directions.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-sT = ChristoffelTensor(varargin)
+E = ChristoffelTensor(M,cs)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>3x3 matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt>crystal <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>E</tt>
+         </td>
+         <td>
+            <tt><a href="ChristoffelTensor.ChristoffelTensor.html">ChristoffelTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>always 2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
+C = stiffnessTensor.load(fname);
+E = ChristoffelTensor(C,vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+E = ChristoffelTensor (y↓→x)
+  rank: 2 (3 x 3)
+ 
+ 320.5     0     0
+     0  78.7     0
+     0     0    77
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="tensor.html">tensor</a> <a href="stiffnessTensor.html">stiffnessTensor</a>
+</p>
 </div>
 </body>
 </html>

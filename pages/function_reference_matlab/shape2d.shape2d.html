@@ -23,11 +23,107 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>list of vertices [x y]</p>
+<p>class representing a single closed shape in the plane</p>
+<p>A shape2d is a <a href="grain2d.grain2d.html">grain2d</a> consisting of exactly one grain, which makes every grain shape method - long axis, aspect ratio, equivalent radius, paror and surfor - available for an outline that did not come from a segmentation. This is what the characteristic shape of a boundary length distribution is returned as.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-from a set of lines)
+shape = shape2d(V)
+shape = shape2d(V,cs)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>V</tt>
+         </td>
+         <td>
+            <tt>n x 2 list of vertices, or a <a href="grainBoundary.grainBoundary.html">grainBoundary</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt>crystal <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>shape</tt>
+         </td>
+         <td>
+            <tt><a href="shape2d.shape2d.html">shape2d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>Vs</tt>
+         </td>
+         <td>
+            <tt>list of vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rho</tt>
+         </td>
+         <td>
+            <tt>radius in polar coordinates</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>theta</tt>
+         </td>
+         <td>
+            <tt>angle in polar coordinates</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata forsterite
+grains = calcGrains(ebsd('indexed'));
+shape = characteristicShape(grains.boundary('f','f'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSDsquare (y↓→x, row↓→col)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0   58485 (24%)  notIndexed          none                                   
+     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
+ Normal vector: (0,0,1)
+ Square grid  :336 x 732
+ 
+ 
+shape = shape2d (y↓→x)
+ 
+ vertices: 1024
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="grain2d.html">grain2d</a> <a href="calcTDF.html">calcTDF</a> <a href="characteristicShape.html">characteristicShape</a>
+</p>
 </div>
 </body>
 </html>

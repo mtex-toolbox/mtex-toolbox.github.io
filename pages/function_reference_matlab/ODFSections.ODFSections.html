@@ -23,12 +23,139 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>ODFSECTIONS Summary of this class goes here Detailed explanation goes here</p>
-<h2 id="3">Syntax</h2>
-{% highlight matlab %}
-oS = ODFSections(CS1,varargin)
-{% endhighlight %}
-<h2 id="4">Example</h2>
+<p>an abstract class representing sections through orientation space</p>
+<p>Orientation space is three dimensional, so plotting an ODF means slicing it. A deriving class fixes how the slices are cut and how an orientation is projected into a slice; everything the plotting needs - the grid, the projection, the axes labels - is asked through this interface.</p>
+<h2 id="3">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>CS1, CS2</tt>
+         </td>
+         <td>
+            <tt>the two <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS, SS</tt>
+         </td>
+         <td>
+            <tt>crystal and specimen <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>tolerance an orientation may deviate from a section</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>plotGrid</tt>
+         </td>
+         <td>
+            <tt>the grid the section is evaluated on</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gridSize</tt>
+         </td>
+         <td>
+            <tt>number of points per section</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="4">Derived Classes</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt><a href="sigmaSections.html">sigmaSections</a></tt>
+         </td>
+         <td>
+            <tt>fixed phi1 - phi2, the MTEX default</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="phi1Sections.html">phi1Sections</a></tt>
+         </td>
+         <td>
+            <tt>fixed Euler angle phi1</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="PhiSections.html">PhiSections</a></tt>
+         </td>
+         <td>
+            <tt>fixed Euler angle Phi</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="phi2Sections.html">phi2Sections</a></tt>
+         </td>
+         <td>
+            <tt>fixed Euler angle phi2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="alphaSections.html">alphaSections</a></tt>
+         </td>
+         <td>
+            <tt>fixed Matthies Euler angle alpha</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="gammaSections.html">gammaSections</a></tt>
+         </td>
+         <td>
+            <tt>fixed Matthies Euler angle gamma</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="axisAngleSections.html">axisAngleSections</a></tt>
+         </td>
+         <td>
+            <tt>fixed misorientation angle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="omegaSections.html">omegaSections</a></tt>
+         </td>
+         <td>
+            <tt>rotations about a fixed axis</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="pfSections.html">pfSections</a></tt>
+         </td>
+         <td>
+            <tt>pole figure like sections</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="ipfSections.html">ipfSections</a></tt>
+         </td>
+         <td>
+            <tt>inverse pole figure like sections</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Example</h2>
 {% highlight matlab %}
 cs = crystalSymmetry('222')
 oS = axisAngleSections(cs,cs);
@@ -39,20 +166,20 @@ plot(oS,rgb,'surf')
 {% endhighlight %}
 
 {% highlight plaintext %}
-cs = crystalSymmetry
+cs = crystalSymmetry (⊙c→a)
  
   symmetry: 222    
   elements: 4      
   a, b, c : 1, 1, 1
  
-oM = 
-  PatalaColorKey with properties:
-
-          CS1: [1×1 crystalSymmetry]
-          CS2: [1×1 crystalSymmetry]
-    antipodal: 1
+ 
+oM = PatalaColorKey (222 → 222)
+ 
+  antipodal: true
 {% endhighlight %}
-
+<center>
+{% include inline_image.html file="ODFSections.ODFSections_01.png" %}
+</center>
 {% highlight matlab %}
 ori = orientation.rand(100,cs,cs)
 plot(oS,ori)
@@ -62,6 +189,13 @@ plot(oS,ori)
 ori = misorientation (222 → 222)
   size: 100 x 1
 {% endhighlight %}
+<center>
+{% include inline_image.html file="ODFSections.ODFSections_02.png" %}
+</center>
+<h2 id="7">See also</h2>
+<p>
+<a href="sigmaSections.html">sigmaSections</a> <a href="phi2Sections.html">phi2Sections</a> <a href="SO3Fun.plotSection.html">SO3Fun.plotSection</a>
+</p>
 </div>
 </body>
 </html>

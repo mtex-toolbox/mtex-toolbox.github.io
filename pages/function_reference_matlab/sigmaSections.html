@@ -23,11 +23,111 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>sigmaSections is a class. oS = sigmaSections(CS1, CS2, varargin)</p>
+<p>sigma sections for ODF and orientation plotting</p>
+<p>The MTEX default for plotting an ODF. Sigma sections are the pole figure of the c* axis, split up by sigma = phi1 - phi2. Unlike Euler angle sections they distort orientation space only mildly, so a component keeps its shape across the sections.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-oS = sigmaSections(CS1,CS2,varargin)
+oS = sigmaSections(cs1,cs2)
+oS = sigmaSections(cs1,cs2,'sections',5)
+oS = sigmaSections(cs1,cs2,'sigma',(0:15:90)*degree)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cs1, cs2</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>, <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sections</tt>
+         </td>
+         <td>
+            <tt>number of sections</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sigma</tt>
+         </td>
+         <td>
+            <tt>explicit section values</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>omega</tt>
+         </td>
+         <td>
+            <tt>the sigma value of each section</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>h1, h2</tt>
+         </td>
+         <td>
+            <tt>the <a href="Miller.Miller.html">Miller</a> the sections are built from</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sR</tt>
+         </td>
+         <td>
+            <tt><a href="sphericalRegion.sphericalRegion.html">sphericalRegion</a> each section is plotted on</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>referenceField</tt>
+         </td>
+         <td>
+            <tt><a href="S2VectorField.S2VectorField.html">S2VectorField</a> sigma is measured against</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata dubna
+odf = calcODF(pf,'silent');
+plotSection(odf,sigmaSections(odf.CS,odf.SS))
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (y↓→x)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
+ 
+  h = (022̅1), r = 72 x 19 points
+  h = (101̅0), r = 72 x 19 points
+  h = (101̅1)(011̅1), r = 72 x 19 points
+  h = (101̅2), r = 72 x 19 points
+  h = (112̅0), r = 72 x 19 points
+  h = (112̅1), r = 72 x 19 points
+  h = (112̅2), r = 72 x 19 points
+{% endhighlight %}
+<center>
+{% include inline_image.html file="sigmaSections_01.png" %}
+</center>
+<h2 id="8">See also</h2>
+<p>
+<a href="ODFSections.html">ODFSections</a> <a href="pfSections.html">pfSections</a> <a href="omegaSections.html">omegaSections</a> <a href="SO3Fun.plotSection.html">SO3Fun.plotSection</a>
+</p>
 </div>
 </body>
 </html>

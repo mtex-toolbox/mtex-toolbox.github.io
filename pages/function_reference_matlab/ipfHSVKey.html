@@ -23,11 +23,154 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>defines an orientation mapping based on a certain inverse pole figure</p>
+<p>converts orientations to rgb values by the MTEX inverse pole figure key</p>
+<p>The MTEX default inverse pole figure coloring: white in the center of the fundamental sector, the primary colors at its vertices. Its parameters are those of the underlying <a href="HSVDirectionKey.html">HSVDirectionKey</a> and are forwarded to it.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-oM = ipfHSVKey(varargin)
+oM = ipfHSVKey(cs)
+oM = ipfHSVKey(ebsd('phaseName'))
+rgb = oM.orientation2color(ori)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ori</tt>
+         </td>
+         <td>
+            <tt><a href="orientation.orientation.html">orientation</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>oM</tt>
+         </td>
+         <td>
+            <tt><a href="ipfHSVKey.html">ipfHSVKey</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rgb</tt>
+         </td>
+         <td>
+            <tt>list of RGB triplets</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ipfDirection</tt>
+         </td>
+         <td>
+            <tt>the specimen direction the inverse pole figure is of</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>whiteCenter</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a> that becomes white</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>colorStretching</tt>
+         </td>
+         <td>
+            <tt>saturation exponent</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grayValue</tt>
+         </td>
+         <td>
+            <tt>[min max] gray of the two subsectors</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grayGradient</tt>
+         </td>
+         <td>
+            <tt>how fast the gray fades away from the center</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxAngle</tt>
+         </td>
+         <td>
+            <tt>restrict the key to a ball around whiteCenter</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>colorPostRotation</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a> applied to the color space</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata titanium
+oM = ipfHSVKey(ebsd);
+plot(oM)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsd = EBSDhex (y↓→x)
+ 
+ Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
+     0    8100 (99%)  Titanium (Alpha)  LightSkyBlue       622        X||a, Y||b*, Z||c
+ 
+ Properties: ci, grainid, iq, sem_signal, oldId
+ Scan unit : um
+ X x Y x Z : [0 → 996] x [0 → 998] x [0 → 0]
+ Normal vector: (0,0,1)
+ Hex grid     :97 x 84
+{% endhighlight %}
+<center>
+{% include inline_image.html file="ipfHSVKey_01.png" %}
+</center>
+<h2 id="8">See also</h2>
+<p>
+<a href="ipfColorKey.html">ipfColorKey</a> <a href="HSVDirectionKey.html">HSVDirectionKey</a> <a href="ipfTSLKey.html">ipfTSLKey</a> <a href="EBSDColorCoding.html">EBSDColorCoding</a>
+</p>
+<p>
+<a href="defines.html">defines</a> <a href="an.html">an</a> <a href="orientation.html">orientation</a> <a href="mapping.html">mapping</a> <a href="based.html">based</a> <a href="on.html">on</a> <a href="a.html">a</a> <a href="certain.html">certain</a> <a href="inverse.html">inverse</a> <a href="pole.html">pole</a> <a href="figure.html">figure</a>
+</p>
 </div>
 </body>
 </html>

@@ -23,10 +23,12 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Constructor</p>
+<p>a class representing a grid of angles</p>
+<p>An S1Grid is a sorted list of angles within an interval [min,max], which may be periodic. Its point is the fast nearest neighbour search of <a href="S1Grid.find.html">find</a> and <a href="S1Grid.dist.html">dist</a>, which is what makes the tensor product grids <a href="S2Grid.S2Grid.html">S2Grid</a> and <a href="SO3Grid.SO3Grid.html">SO3Grid</a> work.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-G = S1Grid(arg1,min,max,varargin)
+S1G = S1Grid(points,min,max)
+S1G = S1Grid(points,min,max,'periodic')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -36,7 +38,7 @@ G = S1Grid(arg1,min,max,varargin)
             <tt>points</tt>
          </td>
          <td>
-            <tt>double</tt>
+            <tt>list of angles</tt>
          </td>
       </tr>
       <tr>
@@ -44,7 +46,7 @@ G = S1Grid(arg1,min,max,varargin)
             <tt>min</tt>
          </td>
          <td>
-            <tt>double</tt>
+            <tt>start of the fundamental region</tt>
          </td>
       </tr>
       <tr>
@@ -52,7 +54,7 @@ G = S1Grid(arg1,min,max,varargin)
             <tt>max</tt>
          </td>
          <td>
-            <tt>double</tt>
+            <tt>end of the fundamental region</tt>
          </td>
       </tr>
    </table>
@@ -75,13 +77,74 @@ G = S1Grid(arg1,min,max,varargin)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
-            <tt>PERIODIC</tt>
+            <tt>periodic</tt>
          </td>
          <td>
-            <tt>periodic <a href="S1Grid.S1Grid.html">S1Grid</a></tt>
+            <tt>identify min and max</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>matrix</tt>
+         </td>
+         <td>
+            <tt>one grid per column of points</tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>points</tt>
+         </td>
+         <td>
+            <tt>the angles</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>min, max</tt>
+         </td>
+         <td>
+            <tt>the fundamental region</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>periodic</tt>
+         </td>
+         <td>
+            <tt>are min and max identified</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>period</tt>
+         </td>
+         <td>
+            <tt>max - min if periodic, 0 otherwise</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+S1G = S1Grid(0:10*degree:350*degree,0,2*pi,'periodic')
+{% endhighlight %}
+
+{% highlight plaintext %}
+S1G = S1Grid
+ size: 36
+ min: 0
+ max: 6.2832
+ periodic: true
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="S2Grid.html">S2Grid</a> <a href="SO3Grid.html">SO3Grid</a>
 </p>
 </div>
 </body>

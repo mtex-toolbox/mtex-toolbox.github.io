@@ -24,10 +24,72 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>smoothes quaternions by projecting them into tangential space and performing there smoothing spline approximation</p>
+<p>The total variation penalty keeps sharp steps, so unlike a spline or halfquadratic filter this one does not smear a subgrain boundary out. The price is a cyclic proximal point iteration, which makes it the slowest of the <a href="EBSDFilter.html">EBSDFilter</a>.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
+F = l1TVFilter
 F = l1TVFilter(alpha)
+ebsd = smooth(ebsd,F)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>regularization parameter, larger means smoother</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt><a href="l1TVFilter.l1TVFilter.html">l1TVFilter</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>regularization parameter</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxit</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda</tt>
+         </td>
+         <td>
+            <tt>step sizes of the proximal point iteration</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="EBSDFilter.html">EBSDFilter</a> <a href="EBSD.smooth.html">EBSD.smooth</a>
+</p>
 </div>
 </body>
 </html>

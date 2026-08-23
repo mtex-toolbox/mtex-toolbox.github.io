@@ -23,11 +23,112 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>complianceTensor is a class. sT = complianceTensor(varargin)</p>
+<p>class representing the elastic compliance tensor</p>
+<p>The compliance tensor S is the inverse of the <a href="stiffnessTensor.stiffnessTensor.html">stiffnessTensor</a> and relates strain and stress by epsilon = S : sigma. It is given in 1/GPa and, unlike the stiffness tensor, in the double convention - the off diagonal entries of its Voigt matrix carry a factor of two.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-sT = complianceTensor(varargin)
+S = complianceTensor(M,cs)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>6x6 Voigt matrix or 3x3x3x3 array</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt>crystal <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>S</tt>
+         </td>
+         <td>
+            <tt><a href="complianceTensor.complianceTensor.html">complianceTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>unit</tt>
+         </td>
+         <td>
+            <tt>physical unit of the entries, 1/GPa by default</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>always 4</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+fname = fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa');
+S = inv(stiffnessTensor.load(fname))
+{% endhighlight %}
+
+{% highlight plaintext %}
+S = complianceTensor (y↓→x)
+  unit            : 1/GPa            
+  rank            : 4 (3 x 3 x 3 x 3)
+  doubleConvention: true             
+ 
+  tensor in Voigt matrix representation: *10^-4
+  34.85  -9.08   -7.7      0      0      0
+  -9.08  60.76  -17.2      0      0      0
+   -7.7  -17.2  50.85      0      0      0
+      0      0      0 156.25      0      0
+      0      0      0      0 129.87      0
+      0      0      0      0      0 127.06
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="tensor.html">tensor</a> <a href="stiffnessTensor.html">stiffnessTensor</a>
+</p>
 </div>
 </body>
 </html>

@@ -27,8 +27,115 @@ To make changes, update the MATLAB code and republish this document.
 <p>The deformation gradient F contains the full information about the local rotation and deformation of the material. It also shows, for example, how a small line segment in the undeformed body, dX, is rotated and stretched into a line segment in the deformed body, dx, since dx = F dX. As F is volume preserving this implies that det F = 1.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-F = deformationGradientTensor(varargin)
+F = deformationGradientTensor(M)
+F = deformationGradientTensor.uniaxial(d,rate)
+F = deformationGradientTensor.simpleShear(d,n,e)
+F = deformationGradientTensor.pureShear(exp,compr,lambda)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>3x3 matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>d, n</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rate, e</tt>
+         </td>
+         <td>
+            <tt>amount of deformation</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>exp, compr</tt>
+         </td>
+         <td>
+            <tt>extension and compression direction, <a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lambda</tt>
+         </td>
+         <td>
+            <tt>stretch</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt><a href="deformationGradientTensor.deformationGradientTensor.html">deformationGradientTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>always 2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+F = deformationGradientTensor.simpleShear(vector3d.X,vector3d.Z,0.2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+F = deformationGradientTensor (y↓→x)
+  rank: 2 (3 x 3)
+ 
+      1      0 0.2027
+      0      1      0
+      0      0      1
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="tensor.html">tensor</a> <a href="velocityGradientTensor.html">velocityGradientTensor</a> <a href="strainTensor.html">strainTensor</a>
+</p>
 </div>
 </body>
 </html>

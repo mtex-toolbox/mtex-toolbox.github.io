@@ -24,10 +24,146 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>a class representing a spherical triangulation</p>
+<p>The Delaunay triangulation of a set of directions, computed as the convex hull of the points. Besides the triangles it stores the adjacencies and the neighbour of every triangle, which is what the barycentric interpolation of <a href="S2FunTri.S2FunTri.html">S2FunTri</a> and the local search on it need.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-sT = S2Triangulation(n)
+sT = S2Triangulation(v)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>v</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the vertices</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sT</tt>
+         </td>
+         <td>
+            <tt><a href="S2Triangulation.S2Triangulation.html">S2Triangulation</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>vertices</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the nodes</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>edges</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the normals of the triangle edges</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt>list of triangles as indices into vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>midPoints</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the center of each triangle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>A_V</tt>
+         </td>
+         <td>
+            <tt>adjacency matrix of the vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>A_T</tt>
+         </td>
+         <td>
+            <tt>adjacency matrix of the triangles</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>neighbours</tt>
+         </td>
+         <td>
+            <tt>the three neighbours of each triangle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>identify v and -v</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frame</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a>, carried by the vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>how2plot</tt>
+         </td>
+         <td>
+            <tt><a href="plottingConvention.html">plottingConvention</a>, read only</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+sT = S2Triangulation(equispacedS2Grid('resolution',10*degree))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sT = 
+  S2Triangulation with properties:
+
+      vertices: [1×412 S2Grid]
+         edges: [820×3 vector3d]
+             T: [820×3 double]
+     midPoints: [820×1 vector3d]
+           A_V: [412×412 double]
+           A_T: []
+    neighbours: [3×820 double]
+     antipodal: 0
+         frame: []
+      how2plot: [1×1 plottingConvention]
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="S2FunTri.html">S2FunTri</a> <a href="S2VectorFieldTri.html">S2VectorFieldTri</a> <a href="vector3d.html">vector3d</a>
+</p>
 </div>
 </body>
 </html>

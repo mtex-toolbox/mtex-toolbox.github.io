@@ -23,15 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="2">Description</h2>
-<pre>defines a spherical Bingham distribution with shape parameters |Z|
-and principal axes |a|.
-Z(1)&gt;=Z(2)&gt;=Z(3), Z(3)&lt;0
-Z(1)=Z(2)  rotationally symmetric unimodal distribution
-Z(1)&lt;&lt;Z(2) partial girdle distribution</pre>
+<p>a class representing a spherical Bingham distribution</p>
+<p>The Bingham distribution is the antipodal analogue of a Gaussian on the sphere. Its shape parameters Z, sorted decreasingly with Z(3) &lt; 0, run from a rotationally symmetric unimodal distribution for Z(1) = Z(2) to a girdle distribution for Z(1) &lt;&lt; Z(2).</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
+BS2 = S2FunBingham(Z)
 BS2 = S2FunBingham(Z,a)
+BS2 = S2FunBingham(Z,a,cs)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -41,7 +39,7 @@ BS2 = S2FunBingham(Z,a)
             <tt>Z</tt>
          </td>
          <td>
-            <tt>shape parameters</tt>
+            <tt>shape parameters, Z(1) &gt;= Z(2) &gt;= Z(3), Z(3) &lt; 0</tt>
          </td>
       </tr>
       <tr>
@@ -49,7 +47,15 @@ BS2 = S2FunBingham(Z,a)
             <tt>a</tt>
          </td>
          <td>
-            <tt>principle axes <a href="vector3d.vector3d.html">vector3d</a></tt>
+            <tt>principal axes, <a href="vector3d.vector3d.html">vector3d</a>, default are the coordinate axes</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> or <a href="referenceFrame.referenceFrame.html">referenceFrame</a> the distribution is expressed in</tt>
          </td>
       </tr>
    </table>
@@ -62,10 +68,59 @@ BS2 = S2FunBingham(Z,a)
             <tt>BS2</tt>
          </td>
          <td>
-            <tt><a href="S2FunBingham.S2FunBingham.html">S2FunBingham</a> (spherical Bingham distribution)</tt>
+            <tt><a href="S2FunBingham.S2FunBingham.html">S2FunBingham</a></tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>a</tt>
+         </td>
+         <td>
+            <tt>principal axes, <a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Z</tt>
+         </td>
+         <td>
+            <tt>shape parameters</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>N</tt>
+         </td>
+         <td>
+            <tt>normalization constant</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>always true</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+BS2 = S2FunBingham([-10 -10 -20])
+{% endhighlight %}
+
+{% highlight plaintext %}
+BS2 = S2FunBingham (y↓→x)
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="S2Fun.html">S2Fun</a> <a href="S2FunHarmonic.html">S2FunHarmonic</a>
 </p>
 </div>
 </body>
