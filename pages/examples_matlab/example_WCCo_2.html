@@ -127,10 +127,9 @@ imgList = mapImage (y↓→x)
 imgList(2:end) = rescale(imboxfilt(imgList(2:end),3));
 {% endhighlight %}
 <p>The distortions are objects, one per <b>hop</b>, not names on the images. Five maps means four hops, and the reference has no entry of its own &mdash; where nothing separates a pair that is <code class="language-plaintext highlighter-rouge">spatialTransformId</code>, not a <code class="language-plaintext highlighter-rouge">'true'</code> label.</p>
-<p>
-<code class="language-plaintext highlighter-rouge">spatialTransformComposite</code> and not <code class="language-plaintext highlighter-rouge">*</code>: an unfitted prototype has zero coefficients, so it reports itself as the identity and <code class="language-plaintext highlighter-rouge">*</code> would absorb it.</p>
+<p>A multi-stage hop is <code class="language-plaintext highlighter-rouge">+</code> and not <code class="language-plaintext highlighter-rouge">*</code>: <code class="language-plaintext highlighter-rouge">+</code> reads left to right in the order the stages are applied and keeps both, where an unfitted prototype has zero coefficients, reports itself as the identity, and <code class="language-plaintext highlighter-rouge">*</code> would absorb it.</p>
 {% highlight matlab %}
-T = [spatialTransformComposite(spatialTransformShift,spatialTransformDrift), ...
+T = [spatialTransformShift + spatialTransformDrift, ...
      spatialTransformId, ...
      spatialTransformShift, ...
      spatialTransformTilt]
@@ -304,45 +303,46 @@ job.calcDistortion('fitErr')
 {% endhighlight %}
 
 {% highlight plaintext %}
-measured settings, override with setOptions
-   edgeWidth  per map  6 7 7 7 7 px
-   roiSize    per hop  - 128 - 128 px   from shifts - 2.4 - 14.3 px, features - 13 - 13 px
+◆ measured settings, override with setOptions
+   ▸ edgeWidth  per map  6 7 7 7 7 px
+   ▸ roiSize    per hop  · 128 · 128 px   ← shifts · 2.4 · 14.3 px, features · 13 · 13 px
 
- distortion across 5 maps, 4 hops
+ ◆ distortion across 5 maps, 4 hops
 
-    distortion   stage            ROI     shift  residual
-  bcImg
-  | shift-drift  shift          64 px  12.13 px
-  |              drift          32 px   6.40 px
-  |              residual                         5.71 px
-  | residual over 2 px, retrying with a 128 px ROI
-  | shift-drift  shift         128 px  14.41 px
-  |              drift          64 px   6.40 px
-  |              residual                         4.41 px
-  | residual over 2 px, retrying with a 256 px ROI
-  | shift-drift  shift         256 px  14.04 px
-  |              drift         128 px   5.54 px
-  |              residual                         2.39 px
-  | residual over 2 px, retrying with a 512 px ROI
-  | shift-drift  shift         512 px  12.13 px
-  |              drift         256 px   5.09 px
-  |              residual                         1.30 px
-  v
-  fsdB3
-  | identity     -                  -   0.00 px
-  |              difference                       3.70 px
-  v
-  fsdT3
-  | shift        shift         128 px  12.63 px
-  |              residual                         0.97 px
-  v
-  fsdT1
-  | tilt         projective    128 px  14.16 px
-  |              poly11        128 px   0.86 px
-  |              poly22        128 px   0.80 px
-  |              residual                         0.79 px
-  v
-  fsdT10
+    distortion   stage              ROI     shift  residual
+    ──────────── ───────────── ──────── ───────── ─────────
+  ● bcImg
+  │ shift-drift  shift            64 px  12.13 px
+  │              drift            32 px   6.40 px
+  │              ↳ residual                         5.71 px
+  │ ↻ residual over 2 px, retrying with a 128 px ROI
+  │ shift-drift  shift           128 px  14.41 px
+  │              drift            64 px   6.40 px
+  │              ↳ residual                         4.41 px
+  │ ↻ residual over 2 px, retrying with a 256 px ROI
+  │ shift-drift  shift           256 px  14.04 px
+  │              drift           128 px   5.54 px
+  │              ↳ residual                         2.39 px
+  │ ↻ residual over 2 px, retrying with a 512 px ROI
+  │ shift-drift  shift           512 px  12.13 px
+  │              drift           256 px   5.09 px
+  │              ↳ residual                         1.30 px
+  ▼
+  ● fsdB3
+  │ identity     ·                    ·   0.00 px
+  │              ↳ difference                       3.70 px
+  ▼
+  ● fsdT3
+  │ shift        shift           128 px  12.63 px
+  │              ↳ residual                         0.97 px
+  ▼
+  ● fsdT1
+  │ tilt         projective      128 px  14.16 px
+  │              poly11          128 px   0.86 px
+  │              poly22          128 px   0.80 px
+  │              ↳ residual                         0.79 px
+  ▼
+  ● fsdT10
 
  
 ans = trueEbsd2 (shifts calculated)
