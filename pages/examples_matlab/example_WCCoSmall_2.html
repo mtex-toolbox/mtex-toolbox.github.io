@@ -24,7 +24,7 @@ toc: false
 <div>
 <!--introduction-->
 <p>
-<b>This is the <a href="trueEbsd2.trueEbsd2.html">trueEbsd2</a> variant of <a href="example_WCCoSmall.html">the short page</a>.</b> Same data, same five maps, same four distortions and the same numbers &mdash; but built on MTEX's own <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> and <a href="spatialTransform.spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> rather than on TrueEBSD's <code class="language-plaintext highlighter-rouge"><a href="distortedImg.distortedImg.html">distortedImg</a></code> and its distortion-name strings. See <code class="language-plaintext highlighter-rouge">MIGRATION-mapImage.md</code> in the toolbox for why, and for what still differs.</p>
+<b>This is the <a href="trueEbsd2.trueEbsd2.html">trueEbsd2</a> variant of <a href="example_WCCoSmall.html">the short page</a>.</b> Same data, same five maps, same four distortions and the same numbers &mdash; but built on MTEX's own <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> and <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> rather than on TrueEBSD's <code class="language-plaintext highlighter-rouge"><a href="distortedImg.distortedImg.html">distortedImg</a></code> and its distortion-name strings. See <code class="language-plaintext highlighter-rouge">MIGRATION-mapImage.md</code> in the toolbox for why, and for what still differs.</p>
 <p>Authors: Vivian Tong; Stefan Olovsj&ouml;, Seco Tools AB, R&amp;D Materials and Technology, 737 82 Fagersta, Sweden. Contact: <a href="mailto:vivian.tong@extern.tu-freiberg.de">vivian.tong@extern.tu-freiberg.de</a>
 </p>
 <p>An EBSD map and an SEM image of the same area never quite line up: the beam drifts during the scan, the camera moves between acquisitions, the specimen is tilted. TrueEBSD corrects that, so every pixel of the map and every pixel of the images refer to the same point on the sample.</p>
@@ -94,9 +94,9 @@ imgList = [mapImage(ebsd.bc, ebsd,             'name','bcImg'), ...
 imgList(2:end) = rescale(imboxfilt(imgList(2:end),3));
 {% endhighlight %}
 <p>The distortions are objects, one per <b>hop</b>, not names on the images. There are five maps and so four hops, and the reference has no entry of its own &mdash; where nothing separates a pair, that is <code class="language-plaintext highlighter-rouge">spatialTransformId</code> rather than a <code class="language-plaintext highlighter-rouge">'true'</code> label.</p>
-<p>Building a multi-stage model uses <code class="language-plaintext highlighter-rouge">spatialTransformComposite</code> and not <code class="language-plaintext highlighter-rouge">*</code>. An unfitted prototype has zero coefficients, so it reports itself as the identity and <code class="language-plaintext highlighter-rouge">*</code> would absorb it away.</p>
+<p>A multi-stage model is built with <code class="language-plaintext highlighter-rouge">+</code> and not <code class="language-plaintext highlighter-rouge">*</code>. <code class="language-plaintext highlighter-rouge">+</code> reads left to right in the order the stages are applied and keeps both of them, where an unfitted prototype has zero coefficients, so it reports itself as the identity and <code class="language-plaintext highlighter-rouge">*</code> would absorb it away.</p>
 {% highlight matlab %}
-T = [spatialTransformComposite(spatialTransformShift,spatialTransformDrift), ...
+T = [spatialTransformShift + spatialTransformDrift, ...
      spatialTransformId, ...
      spatialTransformShift, ...
      spatialTransformTilt];
