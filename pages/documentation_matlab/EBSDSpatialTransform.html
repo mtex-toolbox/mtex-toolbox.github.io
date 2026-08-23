@@ -1,0 +1,251 @@
+---
+title: "Spatial Transforms"
+
+sidebar: documentation_sidebar
+permalink: EBSDSpatialTransform.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Spatial Transforms</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDSpatialTransform.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDSpatialTransform.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>A spatial transform is a map from position to position, as an object. It is what relates two coordinate frames of one physical piece of specimen - the distortion between an EBSD map and an SEM image of the same area, the drift a stage accumulates during a scan, the foreshortening of a tilted surface.</p>
+<p>A bare function handle does that much too. A <a href="spatialTransform.spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> also composes, inverts, displays itself, fits itself to measured data, and can be stored and applied to a second data set - which is what turns a one-off correction into something reusable.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+mtexdata twins silent
+{% endhighlight %}
+<h2 id="2">Direction Is the Contract</h2>
+<p>One rule fixes everything else: <code class="language-plaintext highlighter-rouge">T</code> maps a position in frame A to the position of the same physical point in frame B.</p>
+<p>From that follows the order in a product - <code class="language-plaintext highlighter-rouge">T2 * T1</code> reads in matrix order, so <code class="language-plaintext highlighter-rouge">T1</code> is applied first - and the fact that filling an output grid always uses <code class="language-plaintext highlighter-rouge">inv(T)</code> rather than <code class="language-plaintext highlighter-rouge">T</code>: for each target pixel you have to ask where it came from, not where it goes.</p>
+<p>Transforms are two dimensional. They act on x and y and leave z alone.</p>
+{% highlight matlab %}
+T = spatialTransformRigid(vector3d(5,-2,0))
+{% endhighlight %}
+
+{% highlight plaintext %}
+T = spatialTransformRigid
+ 
+  rigid  (5, -2)
+{% endhighlight %}
+<p>Applying one to positions is <code class="language-plaintext highlighter-rouge">*</code>, or <code class="language-plaintext highlighter-rouge">eval</code> written out</p>
+{% highlight matlab %}
+pos = ebsd.pos(1,1:3);
+posMoved = T * pos;
+
+[pos.x(:), posMoved.x(:)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+         0    5.0000
+    0.3000    5.3000
+    0.6000    5.6000
+{% endhighlight %}
+<h2 id="4">The Classes</h2>
+<p>Each class is named for the distortion it models, from the most rigid to the most free:</p>
+<div>
+<ul>
+<li> <a href="spatialTransformId.spatialTransformId.html"><code class="language-plaintext highlighter-rouge">spatialTransformId</code></a> - nothing separates the two frames</li>
+<li> <a href="spatialTransformRigid.spatialTransformRigid.html"><code class="language-plaintext highlighter-rouge">spatialTransformRigid</code></a> - one displacement, the same everywhere</li>
+<li> <a href="spatialTransformShift.spatialTransformShift.html"><code class="language-plaintext highlighter-rouge">spatialTransformShift</code></a> - a 2D affine as a homogeneous matrix, i.e. translation, rotation, scale and shear together</li>
+<li> <a href="spatialTransformProjective.spatialTransformProjective.html"><code class="language-plaintext highlighter-rouge">spatialTransformProjective</code></a> - a homography, what a tilted specimen does</li>
+<li> <a href="spatialTransformPoly.spatialTransformPoly.html"><code class="language-plaintext highlighter-rouge">spatialTransformPoly</code></a> - a displacement varying polynomially across the frame</li>
+<li> <a href="spatialTransformDrift.spatialTransformDrift.html"><code class="language-plaintext highlighter-rouge">spatialTransformDrift</code></a> - a displacement varying only along the slow scan direction, a rolling shutter rather than a smooth field</li>
+<li> <a href="spatialTransformField.spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> - no model at all, just where things moved, interpolated between the points it was measured at</li>
+<li> <a href="spatialTransformHandle.spatialTransformHandle.html"><code class="language-plaintext highlighter-rouge">spatialTransformHandle</code></a> - the escape hatch, a function handle</li>
+</ul>
+</div>
+<p>They share a base, so differently modelled hops may sit in one array rather than a cell array</p>
+{% highlight matlab %}
+[spatialTransformRigid(vector3d(1,0,0)), spatialTransformPoly(zeros(3,2),1)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = spatialTransform
+ size: 1 x 2
+ 
+  rigid  (1, 0)
+  poly11  |c| = 0
+{% endhighlight %}
+<h2 id="5">Fitting One From Two Point Sets</h2>
+<p>A transform is rarely written down. It is measured: the same features are located in both frames, and the class is asked for the member of its family that best takes one set onto the other. Every class does this through the same static <code class="language-plaintext highlighter-rouge">fit</code>.</p>
+<p>To have something with a known answer, take a projective distortion, push the map positions through it, and ask for it back</p>
+{% highlight matlab %}
+T0 = spatialTransformProjective([1 0.02 3; -0.01 1.05 -2; 1e-4 2e-4 1]);
+
+posA = ebsd.pos(1:50:end);
+posB = T0 * posA;
+
+T = spatialTransformProjective.fit(posA,posB)
+{% endhighlight %}
+
+{% highlight plaintext %}
+T = spatialTransformProjective
+ 
+  projective  perspective (0.0001, 0.0002)
+{% endhighlight %}
+<p>and it is recovered to rounding</p>
+{% highlight matlab %}
+max(norm(T*posA - posB))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   2.8422e-14
+{% endhighlight %}
+<p>Real measurements are not that clean. All fits go through one weighted bisquare solver, so a point that disagrees with the rest is outvoted rather than dragging the answer - here a tenth of the points are moved somewhere else entirely</p>
+{% highlight matlab %}
+posBad = posB;
+posBad(1:10:end) = posBad(1:10:end) + vector3d(30,-40,0);
+
+TBad = spatialTransformProjective.fit(posA,posBad);
+
+max(norm(TBad*posA - posB))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   2.1335e-14
+{% endhighlight %}
+<p>Where a confidence per point is available it should be passed as <code class="language-plaintext highlighter-rouge">'weights'</code> instead of being left to the solver to discover. Cross correlation returns exactly that - see <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a>.</p>
+<h2 id="9">Declaring a Model With + and Composing With *</h2>
+<p>There are two ways to put transforms together and they are <b>not</b> the same operation.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">*</code> composes and simplifies where it can. It decides by value: an operand that reports <code class="language-plaintext highlighter-rouge">isid</code> disappears. An unfitted prototype has zero coefficients and so reports exactly that, which makes the product below a bare drift with the shift silently gone</p>
+{% highlight matlab %}
+spatialTransformShift * spatialTransformDrift
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = spatialTransformDrift
+ 
+  drift  (no knots)
+{% endhighlight %}
+<p>
+<code class="language-plaintext highlighter-rouge">+</code> declares a model. It reads left to right in the order the stages are applied and keeps both, dropping only a literal <code class="language-plaintext highlighter-rouge">spatialTransformId</code> - the one class that <b>means</b> nothing separates the two frames</p>
+{% highlight matlab %}
+spatialTransformShift + spatialTransformDrift
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = spatialTransformComposite
+ 
+  composite  affine  [1 0; 0 1] + (0, 0) -> drift  (no knots)
+{% endhighlight %}
+<p>So <code class="language-plaintext highlighter-rouge">+</code> writes down a distortion that is about to be fitted, and <code class="language-plaintext highlighter-rouge">*</code> composes ones that already are. Note that <code class="language-plaintext highlighter-rouge">+</code> chains the maps, it does not add the displacements the way <code class="language-plaintext highlighter-rouge">+</code> on a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> would.</p>
+<p>Either way the order is the same, and both flatten rather than nest</p>
+{% highlight matlab %}
+R = spatialTransformRigid(vector3d(1,-2,0));
+S = spatialTransformShift([1 0.1 0; 0 1 0; 0 0 1]);
+
+max(norm((R + S)*posA - S*(R*posA)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<h2 id="12">Inverting</h2>
+<p>An affine and a homography have exact inverses, and <code class="language-plaintext highlighter-rouge">inv</code> returns one of the same kind</p>
+{% highlight matlab %}
+inv(T)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = spatialTransformProjective
+ 
+  projective  perspective (-0.000102, -0.000189)
+{% endhighlight %}
+<p>A polynomial, a spline or a scattered field maps positions perfectly well but cannot be solved backwards in closed form. Their inverse is a <a href="spatialTransformInverse.spatialTransformInverse.html"><code class="language-plaintext highlighter-rouge">spatialTransformInverse</code></a>, which iterates - and converges as long as the displacement field does not fold</p>
+{% highlight matlab %}
+P = spatialTransformPoly.fit(posA,posB,'degree',2);
+
+Pinv = inv(P)
+{% endhighlight %}
+
+{% highlight plaintext %}
+Pinv = spatialTransformInverse
+ 
+  inverse of  poly22  |c| = 3.606
+{% endhighlight %}
+
+{% highlight matlab %}
+max(norm(eval(Pinv,P*posA) - posA))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   6.5286e-11
+{% endhighlight %}
+<p>A field that does fold has no inverse to find, and the iteration says so rather than returning a wrong answer.</p>
+<h2 id="16">Collapsing a Chain</h2>
+<p>A composite evaluates every stage in turn, which is wasted work if it is about to be applied to a million pixels many times over. <a href="spatialTransform.discretize.html"><code class="language-plaintext highlighter-rouge">discretize</code></a> samples a chain of any length at given positions and returns the single <a href="spatialTransformField.spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> that reproduces it</p>
+{% highlight matlab %}
+F = discretize(R + S, posA)
+{% endhighlight %}
+
+{% highlight plaintext %}
+F = spatialTransformField
+ 
+  field  458 points, |u| <= 5.274
+{% endhighlight %}
+
+{% highlight matlab %}
+max(norm(F*posA - (R + S)*posA))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<h2 id="18">Applying One to a Map</h2>
+<p> <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">EBSD/transform</code></a> moves every pixel of a map, and the unit cell with it, leaving orientations, phase and every other property untouched. It takes a <code class="language-plaintext highlighter-rouge">spatialTransform</code> or a plain function handle</p>
+{% highlight matlab %}
+ebsdT = transform(ebsd,S);
+
+plot(ebsd,ebsd.bc,'micronbar','off','layout',[1,2]), mtexColorMap gray
+title('as imported')
+nextAxis
+plot(ebsdT,ebsdT.bc,'micronbar','off'), mtexColorMap gray
+title('sheared')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDSpatialTransform_01.png" %}
+</center>
+<p> <a href="grain2d.transform.html"><code class="language-plaintext highlighter-rouge">grain2d/transform</code></a> does the same to a grain map, by moving its vertices, so a map and the grains reconstructed from it can be put through one and the same distortion.</p>
+<p>Since the transform inverts, the distortion comes back out again</p>
+{% highlight matlab %}
+ebsdBack = transform(ebsdT,inv(S));
+
+max(norm(ebsdBack.pos - ebsd.pos),[],'all')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   7.1054e-15
+{% endhighlight %}
+<h2 id="20">Where the Point Pairs Come From</h2>
+<p>Nothing above measured anything - <code class="language-plaintext highlighter-rouge">posA</code> and <code class="language-plaintext highlighter-rouge">posB</code> were manufactured. In practice the pairs come from correlating two pictures of the same area: <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a> divides the region they share into tiles, phase correlates each against its counterpart, and returns a displacement per tile together with the height of the correlation peak that produced it. That height is the fit weight, not a diagnostic - a tile that landed on featureless background must not get an equal vote:</p>
+{% highlight matlab %}
+[u,peak,pos] = xcfShift(imRef,imTest);
+T = spatialTransformShift.fit(pos, pos + u, 'weights', peak);
+{% endhighlight %}
+<p>For that to mean anything the two pictures have to agree about where on the specimen they sit and about the order they are stored in, which is what <a href="EBSDMapsAndImages.html">Maps and Images</a> is about. The whole chain run on real data is <a href="example_WCCoSmall_2.html">what TrueEBSD does</a>.</p>
+</div>
+</body>
+</html>
