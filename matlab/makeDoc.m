@@ -15,7 +15,9 @@ function makeDoc(varargin)
 %  ref             - publish the function reference
 %  doc             - publish the documentation pages
 %  examples        - publish the examples
-%  force           - republish also pages that are not newer than their html
+%  force           - republish also pages whose source did not change
+%  markPublished   - do not publish, only record the pages as built from the
+%                    sources as they are now (asks back), see DocFile/markPublished
 %  clear           - remove all published pages and cached data first (asks back)
 %  skipDirtyImages - do not republish pages with uncommitted images
 %  keepImages      - do not revert images that were only re-rendered
@@ -127,8 +129,8 @@ doDoc = doAll || check_option(varargin,'doc');
 doExamples = doAll || check_option(varargin,'examples');
 
 % restricting the build to single pages implies 'force' - the point of naming
-% a page is to rebuild it, and it would otherwise be skipped whenever it is
-% not newer than its html. The sidebars are left untouched, since they can
+% a page is to rebuild it, and it would otherwise be skipped whenever its
+% source has not changed. The sidebars are left untouched, since they can
 % only be regenerated from the complete file list.
 restrictTo = ensurecell(get_option(varargin,'file',{}));
 doSidebars = isempty(restrictTo);
@@ -193,6 +195,29 @@ end
 %% announce what is going to happen
 
 nPages = dispPlan(parts,options,restrictTo,doSidebars,varargin{:});
+
+%% declare the pages as published instead of publishing them
+
+% for a working copy whose timestamps have been scrambled by branch switches:
+% the manifest of published content is empty at first, so the numbers above
+% come from the timestamp fallback and ask for a rebuild of nearly everything.
+% See DocFile/markPublished - this takes the html on disk to be current.
+if check_option(varargin,'markPublished')
+
+  if ~strcmpi(input(sprintf(['Really declare %d page(s) as published ' ...
+      'from the sources as they are? Y/N [N]:'],sum(cellfun(@numel,{parts.toPublish}))),'s'),'Y')
+    dispPerm('nothing marked')
+    return
+  end
+
+  for k = 1:numel(parts)
+    dispPerm(['  ' parts(k).name]);
+    opt = options; opt.outDir = parts(k).outDir;
+    markPublished(parts(k).toPublish,opt);
+  end
+  return
+
+end
 
 % anything beyond a handful of pages is a run of hours - long enough that a
 % mistyped 'file' or a forgotten 'force' should be caught here and not when
@@ -329,7 +354,7 @@ info = cell(0,2);
 if options.force
   info(end+1,:) = {'pages','all selected ones (force)'};
 else
-  info(end+1,:) = {'pages','only those newer than their html'};
+  info(end+1,:) = {'pages','only those whose source changed since publishing'};
 end
 
 if ~isempty(restrictTo)
