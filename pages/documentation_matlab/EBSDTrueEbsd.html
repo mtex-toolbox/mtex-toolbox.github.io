@@ -179,7 +179,6 @@ plot(job.resizedList,'edge')
 <code class="language-plaintext highlighter-rouge">'fitErr'</code> re-measures the shifts <b>after</b> each correction and reports what is left over. That residual is how you tell whether it worked: around a pixel or less is good.</p>
 <p>If a residual comes out above two pixels, TrueEBSD doubles the box size and tries again, repeating until it comes down or the box outgrows the image. The boxes set above are large enough that this does not happen here.</p>
 <p>Steps whose transform is <code class="language-plaintext highlighter-rouge">spatialTransformId</code> are skipped: nothing separates that pair, so their shift is taken as zero whatever the residual says.</p>
-<p>Afterwards <code class="language-plaintext highlighter-rouge">job.T</code> holds the <b>fitted</b> transforms rather than the prototypes it started from.</p>
 {% highlight matlab %}
 job.calcDistortion('fitErr')
 {% endhighlight %}
@@ -230,7 +229,27 @@ ans = trueEbsd2 (shifts calculated)
  
  common grid: 192 x 256 at 0.08 µm
 {% endhighlight %}
-<h2 id="12">Correct It</h2>
+<p>Afterwards <code class="language-plaintext highlighter-rouge">job.T</code> holds the <b>fitted</b> transforms rather than the prototypes it started from.</p>
+{% highlight matlab %}
+job.T
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = spatialTransform
+ size: 1 x 4
+ 
+    model        stage       parameters                                  
+ 1  shift-drift  shift       scale 1.002 x 0.9614, rotate -0.0207°, shear
+                             -1.26°, move (3.9, 5.528)                   
+                 drift       10 knots over 51 .. 146, |u| <= 0.8568      
+ 2  identity     ·           ·                                           
+ 3  shift        ·           scale 1.002 x 0.9998, rotate 0.0479°, shear 
+                             -0.0349°, move (-2.848, -1.895)             
+ 4  tilt         projective  perspective (-3.99e-06, 1.73e-05)           
+                 poly11      |c| = 0.1513                                
+                 poly22      |c| = 1.03
+{% endhighlight %}
+<h2 id="13">Correct It</h2>
 <p>Each map is now moved by the shifts of every step between it and the reference. The reference itself does not move.</p>
 <p>Resampling is nearest-neighbour throughout, so no orientation and no phase label is ever invented by averaging two real measurements.</p>
 {% highlight matlab %}
@@ -254,7 +273,7 @@ ans = trueEbsd2 (undistorted)
 <center>
 {% include inline_image.html file="EBSDTrueEbsd_03.png" %}
 </center>
-<h2 id="13">Use the Result</h2>
+<h2 id="14">Use the Result</h2>
 <p>Every image is now attached to the EBSD map as a per-pixel property, under the <code class="language-plaintext highlighter-rouge">'name'</code> given earlier. So <code class="language-plaintext highlighter-rouge">ebsd.fsdT1</code> is just another map property, and <code class="language-plaintext highlighter-rouge">plot(ebsd,ebsd.fsdT1)</code> works like any other plot - no conversion, and it stays with the map through cropping, gridding and indexing.</p>
 <p>Plotting them back onto the map is also the quickest check that nothing came out the wrong way round.</p>
 <p>
@@ -281,7 +300,7 @@ end
 <center>
 {% include inline_image.html file="EBSDTrueEbsd_04.png" %}
 </center>
-<h2 id="14">Finish</h2>
+<h2 id="15">Finish</h2>
 <p>The map and the images now overlay pixel for pixel, and <code class="language-plaintext highlighter-rouge">ebsdOut</code> is an ordinary EBSD map that happens to carry four SEM images as properties. Anything you would normally do with a map works from here - including turning a thresholded image into a phase.</p>
 <p>
 <code class="language-plaintext highlighter-rouge">trueEbsdWCCoSmall</code> is the centre half of the full WC-Co field of view coarsened by four: a 20.4 x 15.3 &micro;m area with WC grains about 12 px across, small enough to be quick and still large enough for every distortion to be measurable. The full dataset is <code class="language-plaintext highlighter-rouge">trueEbsdWCCo</code>, and the same script runs on it unchanged - it simply takes minutes rather than seconds.</p>
