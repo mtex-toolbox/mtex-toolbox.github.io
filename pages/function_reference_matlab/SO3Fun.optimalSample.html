@@ -31,7 +31,15 @@ To make changes, update the MATLAB code and republish this document.
 <p>\[ \mu = \lambda \, \sum_{j=1}^M c_j \, \delta_{R_j}, \qquad \lambda = \int_{SO(3)} f&reg; \,dR, \]</p>
 <p>and the orientations \(R_j\) are moved such that the kernel discrepancy</p>
 <p>\[ J(R,c) = \| \mu - f \|_{\psi}^2 = \sum_{n=1}^N \frac{8\pi^2 A_n}{2n+1} \sum_{k,l=-n}^{n} | \hat{\mu}_n^{k,l} - \hat{f}_n^{k,l} |^2 \]</p>
-<p>becomes small. Here \(A_n\) are the Chebyshev coefficients of the <a href="SO3RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code>, i.e. only the harmonic degrees up to \(N\) are taken into account - choose it to match the intended use of the orientations. The minimization is done by gradient descent with Armijo line search.</p>
+<p>becomes small. Here \(A_n\) are the Chebyshev coefficients of the <a href="SO3RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code>, i.e. only the harmonic degrees up to \(N\) are taken into account - choose it to match the intended use of the orientations. The minimization is done by a limited memory BFGS iteration with Armijo line search.</p>
+<p>
+<b>Why L-BFGS and not gradient descent.</b> \(J\) is badly conditioned - in a minimizer of a 92 point sample of the <code class="language-plaintext highlighter-rouge">SO3Fun.dubna</code> ODF the Hessian has a condition number of roughly 2000 - and the convergence rate of gradient descent degrades with exactly that number. Collecting curvature from the steps already taken costs nothing beyond a few vectors of memory and buys about an order of magnitude in time to a given discrepancy. A true Newton method does not pay on top of that: the Hessian couples every pair of orientations, so it is a dense \(3M \times 3M\) matrix, and in a measurement its iteration count was no better than the one of L-BFGS.</p>
+<p>Both descent methods are available and are selected by <code class="language-plaintext highlighter-rouge">method</code>,</p>
+{% highlight matlab %}
+ori = optimalSample(f,n,'method','lbfgs')            % the default
+ori = optimalSample(f,n,'method','steepestDescent')
+{% endhighlight %}
+<p>where <code class="language-plaintext highlighter-rouge">'steepestDescent'</code> is the plain gradient descent described above. It is kept because it is the method the cited literature uses and because it is the reference the L-BFGS iteration is compared against; there is no reason to prefer it in production.</p>
 <p>Note that the sum above starts at degree 1. The restricted distance kernel is only conditionally positive definite, its Chebyshev coefficient of degree 0 being negative, \(A_0 = -\frac{16\sqrt2}{3\pi} &lt; 0\). Since \(D_0\) is constant, the degree 0 term of \(\mu - f\) equals \(\lambda (\sum_j c_j - 1)/(\sqrt{8}\pi)\) and hence vanishes for weights that sum up to 1 - which is why it is simply dropped.</p>
 <p>
 <b>Optimizing the weights.</b> By default the weights are fixed, \(c_j = 1/M\), and the orientations are the only unknowns. If the weights are asked for as a second output</p>
@@ -55,6 +63,7 @@ To make changes, update the MATLAB code and republish this document.
 ori = optimalSample(f,n)
 ori = optimalSample(f,ori)
 ori = optimalSample(f,n,'bandwidth',32)
+ori = optimalSample(f,n,'method','steepestDescent')
 ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
 {% endhighlight %}
 
@@ -137,6 +146,22 @@ ori = optimalSample(f,n,'maxIter',1000,'tol',0.05*degree)
          </td>
          <td>
             <tt>termination tolerance for the orientations (default = 0.1*degree)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>method</tt>
+         </td>
+         <td>
+            <tt>'lbfgs' (default) or 'steepestDescent', see above</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>memory</tt>
+         </td>
+         <td>
+            <tt>secant pairs kept by the L-BFGS iteration (default = 5)</tt>
          </td>
       </tr>
       <tr>

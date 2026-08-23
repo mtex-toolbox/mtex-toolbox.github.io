@@ -26,6 +26,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>extend EBSD data to an grid</p>
 <h2 id="3">Description</h2>
 <p>In the default column major layout the first dimension of the resulting matrix is the grid direction closest to y and the second one the grid direction closest to x, both oriented such that the coordinates increase. Accordingly <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> is the j-th pixel of the i-th scan row and <code class="language-plaintext highlighter-rouge">ebsd(1,1)</code> is the corner with the smallest coordinates. Hexagonal grids are always stored this way, the flags apply to square grids only.</p>
+<p>The two flags are the two layouts a <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a> can state that are aligned with x and y, and any other axis aligned layout may be asked for by handing one over instead - which is how a map is put in the same order as an image it is to be compared with pixel by pixel. A grid that is rotated or sheared cannot land on the requested layout exactly and is put as close to it as a permutation can get.</p>
 <p>The layout is a property of the MAP, not of the file: it is the same whichever corner the acquisition started from and whichever direction it scanned in.</p>
 <p>Gridding therefore REORDERS the measurements <code class="language-plaintext highlighter-rouge">gridify</code> does not preserve the order the measurements arrive in, and cannot: the layout above fixes the first matrix dimension to y, while a .ctf or .ang is written with x varying fastest, so MATLAB's column major linear indexing runs down the map where the file runs across it. The two coincide only for a file that happens to scan y fastest. <code class="language-plaintext highlighter-rouge">newId</code> is the translation - <code class="language-plaintext highlighter-rouge">ebsdGrid.pos(newId) == ebsd.pos</code> - and <code class="language-plaintext highlighter-rouge">ebsdGrid.oldId</code> carries the original ids.</p>
 <p>Of the sample files shipped with MTEX, none keeps its order under the default layout and seven of eleven keep it under <code class="language-plaintext highlighter-rouge">'rowMajor'</code>; the rest cannot be matched by either flag, because they scan x descending (Emsland_plessite) or are hexagonal. Reordering is thus the normal case, and <code class="language-plaintext highlighter-rouge">'rowMajor'</code> is a layout choice, not a way to preserve the input order.</p>
@@ -35,6 +36,7 @@ To make changes, update the MATLAB code and republish this document.
 [ebsdGrid,newId] = gridify(ebsd)
 [ebsdGrid,newId] = gridify(ebsd,'unitCell',unitCell)
 [ebsdGrid,newId] = gridify(ebsd,'rowMajor')
+[ebsdGrid,newId] = gridify(ebsd,gridLayout(otherMap))
 {% endhighlight %}
 <h2 id="5">Input</h2>
 <p>
@@ -45,6 +47,14 @@ To make changes, update the MATLAB code and republish this document.
          </td>
          <td>
             <tt>an <a href="EBSD.EBSD.html">EBSD</a> data set with a non regular grid</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gL</tt>
+         </td>
+         <td>
+            <tt><a href="gridLayout.gridLayout.html">gridLayout</a>, any axis aligned layout</tt>
          </td>
       </tr>
    </table>
@@ -120,7 +130,7 @@ plot(ebsdMg, ebsdMg.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDsquare (y↓→x)
+ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed          none                                   
@@ -133,7 +143,7 @@ ebsd = EBSDsquare (y↓→x)
  Square grid  :137 x 167
  
  
-ebsdMg = EBSDsquare (y↓→x)
+ebsdMg = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c

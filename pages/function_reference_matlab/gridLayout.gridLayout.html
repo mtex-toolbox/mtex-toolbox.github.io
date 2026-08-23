@@ -1,0 +1,102 @@
+---
+title: "gridLayout.gridLayout"
+
+sidebar: function_reference_sidebar
+permalink: gridLayout.gridLayout.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>gridLayout.gridLayout</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_gridLayout__gridLayout.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@gridLayout/gridLayout.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>the order a grid is stored in - which directions the matrix indices run along</p>
+<p>An array is indexed (i,j). Which specimen directions those two indices advance along is not derivable from the array itself and has to be established. That is the layout, and the transition between two layouts is a signed permutation, applied by <a href="gridLayout.layoutIndex.html"><code class="language-plaintext highlighter-rouge">layoutIndex</code></a>.</p>
+<p>This is a relation between the array and a frame, and no screen enters it: a layout is what it is whether or not anything is ever plotted. Dimension 1 is the row index, dimension 2 the column index, in that order - the order <code class="language-plaintext highlighter-rouge">size(A)</code> and <code class="language-plaintext highlighter-rouge">A(i,j)</code> are written in. A direction may point either way, so a layout also says whether an index runs with the coordinate or against it.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+gL = gridLayout                       % row||Y, col||X
+gL = gridLayout(rowDir,colDir)        % stated directly
+gL = gridLayout(rowDir,colDir,'name','fsd')
+gL = gridLayout(ebsd)                 % the layout a gridded map is in
+{% endhighlight %}
+
+{% highlight matlab %}
+gL = gridLayout.columnMajor           % the two named layouts
+gL = gridLayout.rowMajor
+gL = gridLayout.fromOption(varargin)  % whichever a call asks for
+{% endhighlight %}
+
+{% highlight matlab %}
+gL = gridLayout.assumedFor(fr)        % the order a frame is drawn in
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>rowDir</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the direction the row index advances along</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>colDir</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the direction the column index advances along</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSDgrid.EBSDgrid.html">EBSDgrid</a>, read as row along d1 and col along d2</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>basis</tt>
+         </td>
+         <td>
+            <tt>1x3 <a href="vector3d.vector3d.html">vector3d</a>, [row, col, row x col]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>axesNames</tt>
+         </td>
+         <td>
+            <tt>{'row','col'}</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="referenceFrame.html">referenceFrame</a> <a href="specimenFrame.html">specimenFrame</a> <a href="gridLayout.layoutIndex.html">gridLayout.layoutIndex</a> <a href="EBSD.gridify.html">EBSD.gridify</a>
+</p>
+</div>
+</body>
+</html>

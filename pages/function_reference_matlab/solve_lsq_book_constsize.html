@@ -28,7 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>output: c_book : dim x numf x N local coefficient vectors conds : N x 1 conditions of the solved normalized Gram systems info : struct additional regularization diagnostics</p>
 <p>options: regularize mincond center amplification where activation starts maxcond center amplification where full correction is used targetcond inverse-amplification bound reached at full correction basis_degrees degree assigned to every basis column degree_laplace_shift shift in ell*(ell+shift); 1 on S2, 2 on S3 eval_vector basis values at the evaluation point (dim x 1 x N) numerical_cond_max condition cap for the nuisance block (default 1e10)</p>
 <p>flags: centered_evaluation the evaluation vector is the first basis direction</p>
-<p>The evaluation direction is protected and only its orthogonal complement is regularized. In centered coordinates, the nuisance block C0 is whitened by its Cholesky factor and successive degree layers are penalized increasingly. One scalar parameter is chosen by bisection so that the same conservative inverse-amplification target as in the former equal-scaling method is reached.</p>
+<p>The local systems are solved from the normalized normal equations, with one step of iterative refinement wherever no regularization is active. The evaluation direction is protected and only its orthogonal complement is regularized; one scalar parameter is chosen by bisection to reach the inverse-amplification target.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 [c_book, conds, info] = ...

@@ -24,13 +24,16 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>A class representing a function on the rotation group SO(3).</p>
+<p>The function is not stored by coefficients, but by nodes and values. It is evaluated by a moving least squares approximation: at every evaluation point a small weighted least squares problem over a local polynomial ansatz space is solved, using only the nodes in a compactly supported neighborhood of that point.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 SO3F = SO3FunMLS(nodes, values);
 SO3F = SO3FunMLS(nodes, values, 'degree', 3, 'oF', 4);
 SO3F = SO3FunMLS(nodes, values, 'delta', 5*degree, 'weight', @(t)(...));
-SO3F = SO3FunMLS(nodes, values, 'centered', true, 'monomials', true, 'subsample', 'tangent', true);
-SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth_delta');
+SO3F = SO3FunMLS(nodes, values, 'centered', true, 'monomials', true, ...
+  'subsample', 'tangent', true);
+SO3F = SO3FunMLS(nodes, values, 'detectOutliers', ...
+  'use_vor_weights', 'use_smooth_delta');
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -74,7 +77,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>degree</tt>
          </td>
          <td>
-            <tt>the polynomial degree used for approximation</tt>
+            <tt>polynomial degree used for approximation</tt>
          </td>
       </tr>
       <tr>
@@ -82,7 +85,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>oF</tt>
          </td>
          <td>
-            <tt>oversampling Factor. the number of neighbors nn (dependent) is the dimension of the ansatz space, times this factor</tt>
+            <tt>oversampling factor; nn is SO3F.dim times this factor</tt>
          </td>
       </tr>
       <tr>
@@ -90,7 +93,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>oF_max</tt>
          </td>
          <td>
-            <tt>maximum oversampling factor in case of range search. At most the closest SO3F.dim * SO3F.oF_max neighbors will be used.</tt>
+            <tt>maximal oversampling factor for range search</tt>
          </td>
       </tr>
       <tr>
@@ -114,7 +117,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>centered</tt>
          </td>
          <td>
-            <tt>evaluate the basis functions only around the identity, if true</tt>
+            <tt>evaluate the basis in local coordinates around the identity</tt>
          </td>
       </tr>
       <tr>
@@ -122,7 +125,15 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>tangent</tt>
          </td>
          <td>
-            <tt>use monomials on the tangent space (only if centered == true) (in this case the a-coordinate of the neighbors is ignored)</tt>
+            <tt>use monomials on the tangent space (requires centered = true)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>(NOTE: in this case the local a</tt>
+         </td>
+         <td>
+            <tt>coordinate of the neighbors is ignored)</tt>
          </td>
       </tr>
       <tr>
@@ -138,7 +149,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt/>
          </td>
          <td>
-            <tt>predefined weight function can be chosen via the following strings: 'auto' (default, a degree-dependent Wendland C6 variant), 'C1hat', 'const', 'cos', 'hat', 'indicator', 'squared hat', 'wendland', 'wendlandC6', 'wendlandSquared', 'wendlandC6Squared'</tt>
+            <tt>predefined choices are 'auto' (default, a degree-dependent Wendland C6 variant), 'C1hat', 'const', 'cos', 'hat', 'indicator', 'plateau', 'squared hat', 'wendland', 'wendlandC6', 'wendlandSquared', and 'wendlandC6Squared'</tt>
          </td>
       </tr>
       <tr>
@@ -146,7 +157,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>use_smooth_delta</tt>
          </td>
          <td>
-            <tt>make the support radius delta(x) a smooth function with close to SO3F.nn neighbors at each center</tt>
+            <tt>use a smooth local support radius with about SO3F.nn neighbors at each center</tt>
          </td>
       </tr>
       <tr>
@@ -162,7 +173,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>use_vor_weights</tt>
          </td>
          <td>
-            <tt>additionally multiply w(x,x_i) by the Voronoi Volumne of x_i, as in 'Stable Moving Least Squares Approximation'</tt>
+            <tt>multiply the local weights by Voronoi volumes, as in 'Stable Moving Least Squares Approximation'</tt>
          </td>
       </tr>
       <tr>
@@ -170,7 +181,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>distance</tt>
          </td>
          <td>
-            <tt>specify which metric to use (default: 'euclidean')</tt>
+            <tt>metric for neighbor search (default: 'euclidean')</tt>
          </td>
       </tr>
       <tr>
@@ -178,7 +189,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt/>
          </td>
          <td>
-            <tt>run 'help rangesearch' for available options</tt>
+            <tt>run 'help rangesearch' for the available options</tt>
          </td>
       </tr>
       <tr>
@@ -218,7 +229,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>targetcond</tt>
          </td>
          <td>
-            <tt>inverse-amplification bound reached at full correction (The names are retained for compatibility; they do not denote the ordinary condition number of the Gram matrix.)</tt>
+            <tt>inverse-amplification bound at full correction; one is the minimum-norm constant-preserving limit (The property names are retained for compatibility. They no longer refer to the ordinary condition number of the Gram matrix.)</tt>
          </td>
       </tr>
       <tr>
@@ -226,7 +237,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>outlierDetectionRange</tt>
          </td>
          <td>
-            <tt>specify how many neighbors are taken into account</tt>
+            <tt>number of neighbors used for outlier detection</tt>
          </td>
       </tr>
    </table>
@@ -239,7 +250,7 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>detectOutliers</tt>
          </td>
          <td>
-            <tt>find outliers in the data and reduce their weight in the local least squares problems depending on how bad they are</tt>
+            <tt>detect local outliers and reduce their MLS weights</tt>
          </td>
       </tr>
       <tr>
@@ -247,10 +258,14 @@ SO3F = SO3FunMLS(nodes, values, 'detectOutliers', 'use_vor_weights', 'use_smooth
             <tt>subsample</tt>
          </td>
          <td>
-            <tt>use subset of neighbors that minimizes the lebesgue constant</tt>
+            <tt>select a subset that minimizes the Lebesgue constant</tt>
          </td>
       </tr>
    </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="S2FunMLS.html">S2FunMLS</a> <a href="SO3FunHarmonic.html">SO3FunHarmonic</a> <a href="SO3FunRBF.html">SO3FunRBF</a> <a href="SO3FunMLS.eval.html">SO3FunMLS.eval</a> <a href="SO3FunMLS.approximate.html">SO3FunMLS.approximate</a>
 </p>
 </div>
 </body>

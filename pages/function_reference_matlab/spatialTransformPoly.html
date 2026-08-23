@@ -1,0 +1,112 @@
+---
+title: "spatialTransformPoly"
+
+sidebar: function_reference_sidebar
+permalink: spatialTransformPoly.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>spatialTransformPoly</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_spatialTransformPoly.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/spatialTransforms/spatialTransformPoly.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>a displacement that varies polynomially across the frame</p>
+<p>Degree 1 is an affine and could equally be a <a href="spatialTransformShift.spatialTransformShift.html"><code class="language-plaintext highlighter-rouge">spatialTransformShift</code></a> - inv converts to one, since a matrix has an exact inverse where a polynomial does not. Degree 2 is what mops up the residual curvature a projective stage leaves behind.</p>
+<p>The coefficients describe the DISPLACEMENT, not the mapped position, so the identity is c = 0.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+T = spatialTransformPoly(c,degree)
+T = spatialTransformPoly.fit(posA,posB,'degree',2)
+T = spatialTransformPoly.fit(posA,posB,'degree',2,'weights',w)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>c</tt>
+         </td>
+         <td>
+            <tt>m x 2 coefficients, one column per displacement component</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>degree</tt>
+         </td>
+         <td>
+            <tt>1 or 2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>posA, posB</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the same points in the two frames</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>w</tt>
+         </td>
+         <td>
+            <tt>double, one weight per point</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransformPoly.html">spatialTransformPoly</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>c</tt>
+         </td>
+         <td>
+            <tt>m x 2 coefficients against [1 x y] or [1 x y x^2 xy y^2]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>degree</tt>
+         </td>
+         <td>
+            <tt>1 or 2</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="spatialTransform.html">spatialTransform</a> <a href="spatialTransformShift.html">spatialTransformShift</a> <a href="spatialTransformTilt.html">spatialTransformTilt</a>
+</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+---
+title: "mapImage.imboxfilt"
+
+sidebar: function_reference_sidebar
+permalink: mapImage.imboxfilt.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>mapImage.imboxfilt</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_mapImage__imboxfilt.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@mapImage/imboxfilt.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>smooth one or more images with a box filter</p>
+<p>Cross correlation dislikes noise, so a light box filter before registration is the usual first step. This is the Image Processing Toolbox function of the same name, for <a href="mapImage.mapImage.html">mapImage</a> and without the toolbox: the box is separable, so it is two 1-D convolutions rather than one 2-D one.</p>
+<h2 id="3">Description</h2>
+<p>Edges are handled by replicating the border, as imboxfilt does, so the filtered image does not darken towards its frame. Every channel is filtered on its own.</p>
+<p>Non finite values are excluded rather than propagated: a NaN would otherwise spread over the whole box. Each output is the mean of the finite inputs under the box, and stays NaN only where none of them were finite. imboxfilt itself has no such behaviour - it would return NaN for the whole neighbourhood - which matters here because a resampled map is padded with NaN by construction.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+mg = imboxfilt(mg)        % 3 x 3
+mg = imboxfilt(mg,5)
+mg = imboxfilt(mg,[3 7])  % rows, columns
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a>, one or an array</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>k</tt>
+         </td>
+         <td>
+            <tt>box size in pixels, odd. Scalar, or [rows cols]</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt>the same images, filtered</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="mapImage.html">mapImage</a> <a href="mapImage.rescale.html">mapImage.rescale</a> <a href="mapImage.edgeMap.html">mapImage.edgeMap</a>
+</p>
+</div>
+</body>
+</html>

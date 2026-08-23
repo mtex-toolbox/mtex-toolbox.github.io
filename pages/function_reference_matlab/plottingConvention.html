@@ -39,6 +39,7 @@ pC = plottingConvention('y↑→x')  % y points up, x points to the right
 pC = plottingConvention('x←↑y')  % x points to the left, y points up
 pC = plottingConvention('z⊙→x')  % z points out of screen, x right
 pC = plottingConvention('y^->x') % same as 'y↑→x', ASCII arrows
+pC = plottingConvention('z(.)->x') % same as 'z⊙→x', (x) is ⊗
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -48,9 +49,10 @@ pC = plottingConvention.default; pC.east = yvector; pC.makeDefault
 {% endhighlight %}
 
 {% highlight matlab %}
-% changing the plotting convention for a dataset
-% to be used in all future plotting commands
-ebsd.how2plot = pC
+% a convention belongs to a reference frame, never to a data object, so
+% how2plot is read only everywhere but <referenceFrame.referenceFrame.html referenceFrame> - align data by
+% moving it into a frame that carries the convention
+ebsd.frame = specimenFrame.rolling
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>

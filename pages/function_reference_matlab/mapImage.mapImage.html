@@ -1,0 +1,198 @@
+---
+title: "mapImage.mapImage"
+
+sidebar: function_reference_sidebar
+permalink: mapImage.mapImage.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>mapImage.mapImage</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_mapImage__mapImage.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@mapImage/mapImage.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>an image that knows where on the specimen it sits</p>
+<p>A raster of values - a forescatter or backscatter image, a band contrast map, any per pixel quantity - together with the geometry that says which part of the specimen each pixel covers. That is what makes an image and an EBSD map comparable objects rather than an array plus a pixel size and a convention held in someone's head.</p>
+<p>The grid is REGULAR: an origin and two perpendicular step vectors, with pos derived rather than stored. This is the difference from <a href="EBSDgrid.EBSDgrid.html">EBSDgrid</a>, which stores pos per pixel so that a measured grid may be rotated, sheared or smoothly distorted. An image is none of those - a distortion is applied by resampling onto a new regular grid, never by moving grid points - so the general contract would only mean permitting states that cannot arise.</p>
+<p>An EBSD map joins a sequence of images as one of them, carrying the map along with whichever channel is to be registered on:</p>
+{% highlight matlab %}
+mapImage(ebsd.bc,ebsd)
+{% endhighlight %}
+<p>so a whole sequence is one <a href="mapImage.mapImage.html">mapImage</a> array rather than a list of two different things.</p>
+<p>An image pre-processed for registration - gamma compressed, filtered - is an entry of its own, with spatialTransformId as the transform between it and the image it was derived from. Nothing here declares what to register on: that is a fact about a comparison, so it belongs to the job.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+mg = mapImage(img)                        % unit step, its own frame
+mg = mapImage(img,'dxy',0.05)             % square pixels
+mg = mapImage(img,'dxy',[dx dy])
+mg = mapImage(ebsd.bc,ebsd)               % a channel of a gridded map
+mg = mapImage(img,ebsd)                   % an image already on the map's grid
+mg = mapImage(img,'dxy',0.05,'name','bse')
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>img</tt>
+         </td>
+         <td>
+            <tt>r x c x k numeric, integer types scaled to [0,1]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a>, gridded and square</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>dxy</tt>
+         </td>
+         <td>
+            <tt>pixel size, scalar or [dx dy]</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>name</tt>
+         </td>
+         <td>
+            <tt>a valid MATLAB identifier, the field an aligned image is written under</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>origin</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a> position of pixel (1,1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scanUnit</tt>
+         </td>
+         <td>
+            <tt>unit of the positions, default 'um' or the map's own</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>img</tt>
+         </td>
+         <td>
+            <tt>r x c x k values</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>name</tt>
+         </td>
+         <td>
+            <tt>what this image is called</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSD.EBSD.html">EBSD</a> on the same grid, empty if there is none</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>origin</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the position of pixel (1,1)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>d1, d2</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the step from row to row and column to column</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frame</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a> the geometry is expressed in</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scanUnit</tt>
+         </td>
+         <td>
+            <tt>unit of the positions, taken from the map. Default 'um'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt>r x c <a href="vector3d.vector3d.html">vector3d</a>, derived from origin, d1 and d2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>layout</tt>
+         </td>
+         <td>
+            <tt><a href="gridLayout.gridLayout.html">gridLayout</a> the array is stored in, derived from d1 and d2</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="EBSD.html">EBSD</a> <a href="EBSDsquare.html">EBSDsquare</a> <a href="gridLayout.html">gridLayout</a> <a href="mapImage.interp.html">mapImage.interp</a> <a href="mapImage.edgeMap.html">mapImage.edgeMap</a>
+</p>
+</div>
+</body>
+</html>

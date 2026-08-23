@@ -1,0 +1,143 @@
+---
+title: "spatialTransform"
+
+sidebar: function_reference_sidebar
+permalink: spatialTransform.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>spatialTransform</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_spatialTransform.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/spatialTransforms/spatialTransform.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>a map from position to position, as an object</p>
+<p>A spatial transform relates two coordinate frames of one physical object - the distortion between an EBSD map and an image of the same area, the drift accumulated during a scan, the projection of a tilted specimen. Unlike a bare function handle it composes, inverts, displays, and can be saved and applied to a second data set.</p>
+<p>Direction is fixed once and everything follows from it:</p>
+{% highlight matlab %}
+T maps a position in frame A to the same physical point's position in
+frame B. T2 * T1 composes in matrix order - T1 is applied first.
+Filling an output grid always uses inv(T), never T: for each target
+pixel, ask where it came from.
+{% endhighlight %}
+<p>Transforms are 2D - they act on x and y and leave z alone.</p>
+<p>Subclasses of one base may be collected in one array, so a chain of differently modelled hops is [T1 T2 T3] rather than a cell array.</p>
+<p>There are two ways to put two transforms together, and they are not the same operation:</p>
+{% highlight matlab %}
+T1 + T2   builds a MODEL. It reads left to right, T1 applied first, and
+          it keeps both as stages. Only a literal spatialTransformId is
+          dropped, since that is the class that MEANS nothing separates
+          the two frames.
+T2 * T1   COMPOSES. It reads in matrix order, T1 applied first, and it
+          simplifies where it can - two affines make a third, and an
+          operand that reports isid disappears.
+{% endhighlight %}
+<p>Use + to declare a distortion that is about to be fitted, * for transforms that already are. An unfitted prototype has zero coefficients and so reports isid, which is why the two differ where it matters: shift * drift is a bare drift with the shift silently gone, while shift + drift is the two stage model it looks like.</p>
+<p>Note that + is not the pointwise + of vector3d or S2Fun. It chains the maps, it does not add the displacements - though for displacements small against the scale they vary on the two agree to first order, which is why the notation reads the way it does.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+posB = eval(T,posA)
+posB = T * posA               % the same
+T    = T1 + T2                % chain as stages, T1 applied first
+T    = T2 * T1                % compose, T1 applied first
+Tinv = inv(T)
+tf   = isid(T)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransform.spatialTransform.html">spatialTransform</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>posA</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>posB</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Tinv</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransform.spatialTransform.html">spatialTransform</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Derived Classes</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>spatialTransformId</tt>
+         </td>
+         <td>
+            <tt>the identity</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>spatialTransformShift</tt>
+         </td>
+         <td>
+            <tt>2D affine, as a homogeneous matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>spatialTransformHandle</tt>
+         </td>
+         <td>
+            <tt>wraps a function handle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>spatialTransformComposite</tt>
+         </td>
+         <td>
+            <tt>an ordered list of stages</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="EBSD.transform.html">EBSD.transform</a> <a href="grain2d.transform.html">grain2d.transform</a>
+</p>
+</div>
+</body>
+</html>

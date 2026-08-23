@@ -1,0 +1,109 @@
+---
+title: "spatialTransformField"
+
+sidebar: function_reference_sidebar
+permalink: spatialTransformField.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>spatialTransformField</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_spatialTransformField.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/spatialTransforms/spatialTransformField.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>a displacement measured at scattered points and interpolated between them</p>
+<p>The free form transform: no model, just where things moved. Used to mop up whatever structure a fitted model leaves in its residual, and as the common currency any chain can be collapsed into by <a href="spatialTransform.discretize.html"><code class="language-plaintext highlighter-rouge">discretize</code></a>.</p>
+<p>The sample points need not lie on a grid and the query points need not either, so a field fitted on one data set can be evaluated on another. Interpolation is natural neighbour, extrapolation linear.</p>
+<p>Coordinates are normalised before interpolating, because natural neighbour weights come from a Delaunay triangulation and that is not scale invariant - a frame far wider than it is tall would otherwise get sliver triangles. The displacements themselves need no normalising: the weights do not depend on them.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+T = spatialTransformField(pos,u)
+T = spatialTransformField.fit(posA,posB)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, where the displacement was measured</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>u</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the displacement there</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>posA, posB</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the same points in the two frames</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransformField.html">spatialTransformField</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>There is deliberately no smooth: tools/math_tools/smoothn is for gridded data, and applying it to scattered samples in storage order smooths along the index rather than across the frame, which collapses the field to its mean. Smoothing a scattered field needs a regularised scattered fit.</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the sample points</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>u</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the displacement at each</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="spatialTransform.html">spatialTransform</a> <a href="spatialTransform.discretize.html">spatialTransform.discretize</a> <a href="spatialTransformDrift.html">spatialTransformDrift</a>
+</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+---
+title: "mapImage.interp"
+
+sidebar: function_reference_sidebar
+permalink: mapImage.interp.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>mapImage.interp</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_mapImage__interp.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@mapImage/interp.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>the image values at arbitrary positions</p>
+<p>This is the fast path a regular grid buys: the query reduces to fractional row and column coordinates, so it is a griddedInterpolant rather than the scatteredInterpolant <a href="EBSD.EBSD.html">EBSD</a>/interp has to use for grids that may be rotated or distorted.</p>
+<p>Resampling onto another grid is this plus a target position set, and correcting a distortion is the same call with inv(T):</p>
+{% highlight matlab %}
+v = interp(mg, eval(inv(T),target.pos))
+{% endhighlight %}
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+v = interp(mg,pos)
+v = interp(mg,pos,'nearest')
+v = interp(mg,pos,'extrapolationMethod','nearest')
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, where to sample</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>v</tt>
+         </td>
+         <td>
+            <tt>values, size(pos) by nChannel</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>linear, nearest, cubic, spline</tt>
+         </td>
+         <td>
+            <tt>interpolation method, default linear</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>extrapolationMethod</tt>
+         </td>
+         <td>
+            <tt>default 'none', i.e. NaN outside</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="mapImage.html">mapImage</a> <a href="mapImage.pos2ind.html">mapImage.pos2ind</a> <a href="EBSD.interp.html">EBSD.interp</a>
+</p>
+</div>
+</body>
+</html>

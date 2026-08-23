@@ -1,0 +1,125 @@
+---
+title: "mapImage.plot"
+
+sidebar: function_reference_sidebar
+permalink: mapImage.plot.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>mapImage.plot</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_mapImage__plot.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@mapImage/plot.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>plot one image, or a whole sequence, on its specimen coordinates</p>
+<p>Draws each image where it sits on the specimen, in micrometres rather than pixels, with the screen orientation taken from its frame. So an image and the map it is aligned to plot on top of each other without either being permuted first - MTEX moves the camera, not the data.</p>
+<p>Given an array, one axis per image, named by mg(k).name. That is the quick check that a sequence covers the same area and is stored the same way up.</p>
+<h2 id="3">Description</h2>
+<p>One channel is drawn as a scalar field through the current colormap; three are drawn as RGB. Any other channel count has no single meaning as a picture, so name a channel.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+plot(mg)
+plot(imgList)                      % one axis per image
+plot(imgList,'edge')               % the edge transform of each
+plot(mg,'channel',2)
+plot(mg,'micronbar','off')
+{% endhighlight %}
+
+{% highlight matlab %}
+plot(ebsd,ebsd.bc); hold on; plot(mg,'AlphaData',0.5)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a>, one or an array</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>h</tt>
+         </td>
+         <td>
+            <tt>handle to the graphics object, one per image</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mP</tt>
+         </td>
+         <td>
+            <tt><a href="mapPlot.html">mapPlot</a> of the last axis</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>channel</tt>
+         </td>
+         <td>
+            <tt>which channel to draw, default all of them</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>micronbar</tt>
+         </td>
+         <td>
+            <tt>'on'/'off'</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>figSize</tt>
+         </td>
+         <td>
+            <tt>'huge' (the default here), 'large', 'normal', 'small', 'tiny' or a fraction of the screen. A new figure is made full screen, because a sequence tiles one axis per image and the usual default leaves each too small to read</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>edge</tt>
+         </td>
+         <td>
+            <tt>draw edgeMap(mg) instead of the values, which is what a registration actually matches on. Contrast is stretched over the 2nd to 98th percentile rather than the full range, because an edge transform's bright tail would otherwise crush the picture to black</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="mapImage.html">mapImage</a> <a href="mapImage.edgeMap.html">mapImage.edgeMap</a> <a href="EBSD.plot.html">EBSD.plot</a>
+</p>
+</div>
+</body>
+</html>

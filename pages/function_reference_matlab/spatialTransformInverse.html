@@ -1,0 +1,100 @@
+---
+title: "spatialTransformInverse"
+
+sidebar: function_reference_sidebar
+permalink: spatialTransformInverse.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>spatialTransformInverse</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_spatialTransformInverse.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/spatialTransforms/spatialTransformInverse.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>the inverse of a transform that has no closed form one</p>
+<p>A polynomial, a spline or a scattered field maps position to position perfectly well but cannot be solved backwards in closed form. Since the displacement is smooth by construction - it was fitted through a smooth basis - the inverse is reached by iterating</p>
+{% highlight matlab %}
+q <- p - u(q),   u(q) = eval(T,q) - q
+{% endhighlight %}
+<p>which converges geometrically as long as the displacement gradient is below one, i.e. as long as the field does not fold. A field that does fold has no inverse to find and the iteration is refused rather than returning a wrong answer.</p>
+<p>inv of this returns the original transform, so a round trip costs nothing.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+Tinv = inv(T)                          % how one is normally made
+Tinv = spatialTransformInverse(T)
+Tinv = spatialTransformInverse(T,'tol',1e-10,'iterMax',100)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransform.spatialTransform.html">spatialTransform</a>, the forward map</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>Tinv</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransformInverse.html">spatialTransformInverse</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt>the forward transform</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>convergence tolerance, relative to the coordinate scale</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMax</tt>
+         </td>
+         <td>
+            <tt>iteration budget</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="spatialTransform.html">spatialTransform</a> <a href="spatialTransformField.html">spatialTransformField</a> <a href="spatialTransform.discretize.html">spatialTransform.discretize</a>
+</p>
+</div>
+</body>
+</html>
