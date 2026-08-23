@@ -164,10 +164,9 @@ imgList = [mapImage(ebsd.BandContrast, ebsd,     'name','bcImg'), ...
 imgList(2:3) = imboxfilt(imgList(2:3),5);
 {% endhighlight %}
 <p>The distortions go in a second list, one per <b>hop</b>. Four maps means three hops, and the reference has no entry of its own. <code class="language-plaintext highlighter-rouge">bse1a</code> and <code class="language-plaintext highlighter-rouge">bse1b</code> are the same physical frame filtered two ways &mdash; gamma compressed so that the grain boundaries are visible to the correlation, median filtered so the void edges survive for the analysis &mdash; so nothing separates them and that hop is <code class="language-plaintext highlighter-rouge">spatialTransformId</code>.</p>
-<p>
-<code class="language-plaintext highlighter-rouge">spatialTransformComposite</code> and not <code class="language-plaintext highlighter-rouge">*</code>: an unfitted prototype has zero coefficients, so it reports itself as the identity and <code class="language-plaintext highlighter-rouge">*</code> would absorb it.</p>
+<p>A multi-stage hop is <code class="language-plaintext highlighter-rouge">+</code> and not <code class="language-plaintext highlighter-rouge">*</code>: <code class="language-plaintext highlighter-rouge">+</code> reads left to right in the order the stages are applied and keeps both, where an unfitted prototype has zero coefficients, reports itself as the identity, and <code class="language-plaintext highlighter-rouge">*</code> would absorb it.</p>
 {% highlight matlab %}
-T = [spatialTransformComposite(spatialTransformShift,spatialTransformDrift), ...
+T = [spatialTransformShift + spatialTransformDrift, ...
      spatialTransformTilt, ...
      spatialTransformId];
 
@@ -228,29 +227,30 @@ job.calcDistortion('fitErr')
 {% endhighlight %}
 
 {% highlight plaintext %}
-measured settings, override with setOptions
-   edgeWidth  per map  6 7 7 6 px
-   roiSize    per hop  512 512 128 px   from shifts 67.2 76.0 0.1 px, features 10 12 10 px
+◆ measured settings, override with setOptions
+   ▸ edgeWidth  per map  6 7 7 6 px
+   ▸ roiSize    per hop  512 512 128 px   ← shifts 67.2 76.0 0.1 px, features 10 12 10 px
 
- distortion across 4 maps, 3 hops
+ ◆ distortion across 4 maps, 3 hops
 
-    distortion   stage            ROI     shift  residual
-  bcImg
-  | shift-drift  shift         512 px  67.82 px
-  |              drift         512 px   1.42 px
-  |              residual                         0.85 px
-  v
-  fsd1a
-  | tilt         projective    512 px 126.52 px
-  |              poly11        512 px   2.48 px
-  |              poly22        512 px   1.56 px
-  |              residual                         1.25 px
-  v
-  bse1a
-  | identity     -                  -   0.00 px
-  |              difference                       0.33 px
-  v
-  bse1b
+    distortion   stage              ROI     shift  residual
+    ──────────── ───────────── ──────── ───────── ─────────
+  ● bcImg
+  │ shift-drift  shift           512 px  67.82 px
+  │              drift           512 px   1.42 px
+  │              ↳ residual                         0.85 px
+  ▼
+  ● fsd1a
+  │ tilt         projective      512 px 126.52 px
+  │              poly11          512 px   2.48 px
+  │              poly22          512 px   1.56 px
+  │              ↳ residual                         1.25 px
+  ▼
+  ● bse1a
+  │ identity     ·                    ·   0.00 px
+  │              ↳ difference                       0.33 px
+  ▼
+  ● bse1b
 
  
 ans = trueEbsd2 (shifts calculated)
