@@ -168,9 +168,12 @@ ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'],...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: 92 of 613 indexed measurements share a lattice cell with another
-one, so gridding them would drop those measurements. Keeping the data as a
-list - call gridify explicitly if you want the raster anyway. 
+Warning: 92 of 613 indexed measurements
+share a lattice cell with another one, so
+gridding them would drop those
+measurements. Keeping the data as a list -
+call gridify explicitly if you want the
+raster anyway. 
  
 ebsd = EBSD (Y1↓→X1)
  
@@ -421,8 +424,8 @@ ans = EBSDhex (y↑→x)
  Normal vector: (0,0,1)
  Hex grid     :136 x 119
 {% endhighlight %}
-<h2 id="31">Robustness to Distorted (e.g. Trapezoidal) Grids</h2>
-<p>Real EBSD stages sometimes drift smoothly during a scan rather than rotating rigidly. A common signature is a trapezoidal distortion: each scan row is stretched or compressed about the map centre by an amount that grows with the row's y position, so the same nominally rectangular map ends up narrower at one edge than at the other. MTEX reconstructs the underlying grid indices of an <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a> object robustly under this kind of smooth, non-rigid distortion - which matters for <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> above, but also for any operation that needs the map's grid structure internally, such as <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> or the <code class="language-plaintext highlighter-rouge">surf</code> plotting backend.</p>
+<h2 id="31">Robustness to Distorted Grids</h2>
+<p>EBSD is measured on a tilted specimen, and a tilted surface is not imaged rigidly: seen from a finite working distance its far edge is further away and comes out smaller, so the scan positions no longer sit on a rigid lattice. MTEX reconstructs the underlying grid indices of an <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a> object robustly under this kind of smooth, non-rigid distortion - which matters for <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> above, but also for any operation that needs the map's grid structure internally, such as <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> or the <code class="language-plaintext highlighter-rouge">surf</code> plotting backend.</p>
 <p>We demonstrate this on a real map, rather than a small synthetic one, since the failure mode this guards against only becomes visible once the map is realistically wide - a small toy grid stays safe at distortion levels that already break a real, wide map.</p>
 {% highlight matlab %}
 mtexdata small
@@ -442,29 +445,36 @@ ebsd = EBSD (y↑→x)
  X x Y x Z : [33000 → 36000] x [4500 → 7500] x [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>The command <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform</code></a> applies an arbitrary function to the position of every pixel, leaving orientations and all other properties untouched. Here we scale the x-position of every pixel about the map's centre by an amount that grows linearly with y - a trapezoidal stage drift of up to <code class="language-plaintext highlighter-rouge">trapFrac</code> at the top and bottom edges. Note that the distortion is defined through the physical y position, not through a column of <a href="EBSD.lattice.html"><code class="language-plaintext highlighter-rouge">ebsd.lattice.ij</code></a> - which of its two columns happens to correspond to rows vs columns depends on an internal, unspecified choice of the lattice basis and is not something to rely on.</p>
+<p>The command <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform</code></a> moves every pixel of a map, and its unit cell with it, leaving orientations and all other properties untouched. It takes a <a href="spatialTransform.spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a>, so the distortion is written down as an object rather than as a closure - see <a href="EBSDSpatialTransform.html">Spatial Transforms</a>.</p>
+<p>A tilt is a projective transform: the surface is seen obliquely, so straight lines stay straight but parallel ones need not and the scale varies across the frame. Three things state it - how far the surface is tilted, how far away it is seen from, and the point it is tilted about. The tilt angle foreshortens along the tilt axis, the working distance sets how much the scale varies across the frame, and as it grows the perspective vanishes and only the foreshortening is left.</p>
+<p>This is the tilt one <b>knows</b>, written down to impose it. Recovering one that was only measured is the other direction, and is what <a href="spatialTransformTilt.spatialTransformTilt.html"><code class="language-plaintext highlighter-rouge">spatialTransformTilt</code></a> fits in stages from two images.</p>
 {% highlight matlab %}
-x = ebsd.pos.x; xCenter = (min(x)+max(x))/2;
-y = ebsd.pos.y; yCenter = (min(y)+max(y))/2; yHalf = (max(y)-min(y))/2;
-trapFrac = 0.05;
+theta  = 20*degree;                             % surface tilt
+wd     = 8*(max(ebsd.pos.y) - min(ebsd.pos.y)); % working distance
+centre = mean(ebsd.pos);                        % what the tilt leaves in place
 
-distort = @(pos) vector3d( ...
-  xCenter + (pos.x-xCenter) .* (1 + trapFrac*(pos.y-yCenter)/yHalf), ...
-  pos.y, pos.z);
+distort = spatialTransformProjective.byTilt(theta,wd,centre)
+{% endhighlight %}
 
+{% highlight plaintext %}
+distort = spatialTransformProjective
+ 
+  projective  perspective (0, -1.31e-05)
+{% endhighlight %}
+<p>The map is foreshortened along the tilt axis and tapers towards the edge that is further away</p>
+{% highlight matlab %}
 ebsdDistorted = transform(ebsd, distort);
 
 plot(ebsdDistorted('Fo'),ebsdDistorted('Fo').orientations)
 hold on
 plot(ebsdDistorted('En'),ebsdDistorted('En').orientations)
-hold on
 plot(ebsdDistorted('Di'),ebsdDistorted('Di').orientations)
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_09.png" %}
 </center>
-<p>Even though every row has now shifted by a different amount, MTEX recovers exactly the same grid indices as for the undistorted map</p>
+<p>Every pixel has moved, by up to two and a half cells and by a different amount at each end of the map. Most of that is the foreshortening, which is affine and which a lattice absorbs without noticing; what a grid reconstruction has to survive is the three quarters of a cell that is left once the best affine is taken out - more than enough to round a pixel onto its neighbour's site. Even so, MTEX recovers exactly the same grid indices as for the undistorted map</p>
 {% highlight matlab %}
 isequal(ebsdDistorted('Fo').lattice.ij, ebsd('Fo').lattice.ij)
 {% endhighlight %}
@@ -474,9 +484,21 @@ ans =
   logical
    1
 {% endhighlight %}
-
+<p>Drawing the pixels as their unit cells shows what that buys. The cells are those of one lattice, followed through the distortion: a mesh that closes up, with no cell sheared against its neighbour. A map indexed against a rigid lattice instead comes out visibly wavy here, and would hand <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> the wrong neighbours with it.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsdDistorted,'minPixel',5)
+plot(ebsdDistorted('Fo'),ebsdDistorted('Fo').orientations,'unitCell','EdgeColor','black')
+hold on
+plot(ebsdDistorted('En'),ebsdDistorted('En').orientations,'unitCell','EdgeColor','black')
+plot(ebsdDistorted('Di'),ebsdDistorted('Di').orientations,'unitCell','EdgeColor','black')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_10.png" %}
+</center>
+<p>so grain reconstruction runs on the distorted map as it would on the undistorted one</p>
+{% highlight matlab %}
+grains = calcGrains(ebsdDistorted,'minPixel',3)
+grains = smoothBoundary(grains,'noSimplify')
 
 hold on
 plot(grains.boundary,'lineWidth',2)
@@ -488,37 +510,33 @@ grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      0       1       1  notIndexed                    none
-     1      12    1936  Forsterite       mmm  LightSkyBlue
+     1      15    1943  Forsterite       mmm  LightSkyBlue
      2       3     283   Enstatite       mmm  DarkSeaGreen
-     3       3     230    Diopside     12/m1     Goldenrod
+     3       6     240    Diopside     12/m1     Goldenrod
  
- boundary segments: 952 (37582 µm)
- inner boundary segments: 28 (1092 µm)
- triple points: 15
+ boundary segments: 982 (38445 µm)
+ inner boundary segments: 26 (1058 µm)
+ triple points: 22
  
- Id   Phase   Pixels       meanRotation      GOS
-  1       3       29    (155°,47°,299°)   0.0072
-  2       3      148    (32°,148°,241°)    0.023
-  3       1      149   (177°,111°,285°)    0.011
-  4       3       53    (142°,81°,317°)     0.02
-  5       2        9     (73°,36°,353°)    0.013
-  6       1       93    (176°,93°,246°)    0.042
-  7       1       15     (56°,68°,280°)    0.033
-  8       1        8   (168°,101°,264°)   0.0062
-  9       1      526     (19°,85°,256°)    0.038
- 10       1      874   (162°,102°,268°)     0.13
- 11       1       38    (155°,53°,302°)    0.059
- 12       1       22    (174°,82°,282°)   0.0098
- 13       1       14   (128°,146°,231°)   0.0071
- 14       2       36    (125°,62°,331°)   0.0084
- 15       1      123   (179°,128°,261°)    0.024
- 16       1       38    (167°,97°,261°)     0.01
- 17       0        1    (164°,35°,295°)        0
- 18       2      238    (164°,35°,295°)   0.0075
- 19       1       36    (167°,98°,260°)   0.0083
+ Properties: meanRotation, GOS
+ 
+ 
+grains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     0       1       1  notIndexed                    none
+     1      15    1943  Forsterite       mmm  LightSkyBlue
+     2       3     283   Enstatite       mmm  DarkSeaGreen
+     3       6     240    Diopside     12/m1     Goldenrod
+ 
+ boundary segments: 864 (35929 µm)
+ inner boundary segments: 23 (960 µm)
+ triple points: 22
+ 
+ Properties: meanRotation, GOS
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_10.png" %}
+{% include inline_image.html file="EBSDGrid_11.png" %}
 </center>
 </div>
 </body>

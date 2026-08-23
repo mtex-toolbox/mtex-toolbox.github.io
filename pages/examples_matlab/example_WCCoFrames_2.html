@@ -103,6 +103,8 @@ plot(imgList)
 <p>All five now agree on screen, which is the assertion TrueEBSD needs, and <code class="language-plaintext highlighter-rouge">'byScreenAlignment'</code> restates it as a rotation.</p>
 {% highlight matlab %}
 imgList = transformReferenceFrame(imgList, ebsdFrame, 'byScreenAlignment')
+
+plot(imgList)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -115,14 +117,10 @@ imgList = mapImage (x↑→y)
  4      192 x 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
  5      192 x 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
 {% endhighlight %}
-
-{% highlight matlab %}
-plot(imgList)
-{% endhighlight %}
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_03.png" %}
 </center>
-<h2 id="8">Run the workflow</h2>
+<h2 id="7">Run the workflow</h2>
 <p>From here nothing is different. The sequence is in one frame, so the rest is the ordinary workflow &mdash; see <a href="example_WCCoSmall.html">the short page</a> for what each step does.</p>
 {% highlight matlab %}
 job = trueEbsd2(imgList,T);
@@ -241,7 +239,7 @@ ans = trueEbsd2 (undistorted)
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_04.png" %}
 </center>
-<h2 id="10">Check the result</h2>
+<h2 id="9">Check the result</h2>
 <p>The aligned images are properties of the map, exactly as on the short page.</p>
 <p>The map and the images come out the same way round and the same shape. That is the point of having said which frame everything is in: <code class="language-plaintext highlighter-rouge">gridify</code> takes a layout, so the map is rebuilt in the frame you asked for rather than in MTEX's standard one, and <code class="language-plaintext highlighter-rouge">ebsd.bc</code> can then be put beside an aligned image pixel for pixel with nothing in between.</p>
 {% highlight matlab %}
@@ -282,7 +280,7 @@ fprintf('corr(ebsd.bc, aligned image) = %.4f\n', r(1,2));
 {% highlight plaintext %}
 corr(ebsd.bc, aligned image) = 0.9305
 {% endhighlight %}
-<h2 id="12">Finish</h2>
+<h2 id="11">Finish</h2>
 <p>Everything this page added to <a href="example_WCCoSmall.html">the short workflow</a> was two lines: turning the map's frame until the plots agreed, and one call to <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> to say so. The sequence, the distortions, the box settings and the result are identical.</p>
 <p>If your map and images were collected the same way up you need none of it. Reach for this when the plots disagree, or when building the job stops with <code class="language-plaintext highlighter-rouge">trueEbsd:frameMismatch</code> &mdash; which is TrueEBSD telling you it has spotted the problem rather than guessing past it.</p>
 </div>
