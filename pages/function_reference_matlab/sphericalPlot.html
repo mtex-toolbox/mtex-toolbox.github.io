@@ -24,6 +24,155 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>sphericalPlot is responsible for visualizing spherical data</p>
+<p>One per axes, stored in its appdata. It owns everything around the data - the projection, the outer boundary, the grid, the tick and Miller labels and the X / Y / Z annotation of the reference frame - so that a second plot into the same axes reuses them instead of drawing them again.</p>
+<p>Note that plot(...,'3d') builds no sphericalPlot at all; annotateFrame is the seam the two paths share.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+sP = sphericalPlot(ax,proj)
+sP = getappdata(gca,'sphericalPlot')
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ax</tt>
+         </td>
+         <td>
+            <tt>the axes handle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>proj</tt>
+         </td>
+         <td>
+            <tt><a href="sphericalProjection.sphericalProjection.html">sphericalProjection</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>proj</tt>
+         </td>
+         <td>
+            <tt><a href="sphericalProjection.sphericalProjection.html">sphericalProjection</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sphericalRegion</tt>
+         </td>
+         <td>
+            <tt>the region being plotted</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>identify v and -v</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>boundary</tt>
+         </td>
+         <td>
+            <tt>the outer boundary</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bounds</tt>
+         </td>
+         <td>
+            <tt>[minx miny maxx maxy] of the projected region</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>grid</tt>
+         </td>
+         <td>
+            <tt>the spherical grid lines</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ticks</tt>
+         </td>
+         <td>
+            <tt>the tick labels</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>labels</tt>
+         </td>
+         <td>
+            <tt><a href="Miller.Miller.html">Miller</a> indices at the vertices of the region</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>axesLabels</tt>
+         </td>
+         <td>
+            <tt>X / Y / Z of the reference frame</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ax</tt>
+         </td>
+         <td>
+            <tt>the axes handle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>parent</tt>
+         </td>
+         <td>
+            <tt>the figure containing the plot</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>hemispheres</tt>
+         </td>
+         <td>
+            <tt>the halves this plot consists of</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>TL, TR, BL, BR</tt>
+         </td>
+         <td>
+            <tt>the four corner annotations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>minData, maxData</tt>
+         </td>
+         <td>
+            <tt>data range, shown if dispMinMax</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="sphericalProjection.html">sphericalProjection</a> <a href="newSphericalPlot.html">newSphericalPlot</a> <a href="mtexFigure.html">mtexFigure</a> <a href="vector3d.plot.html">vector3d.plot</a>
+</p>
 </div>
 </body>
 </html>
