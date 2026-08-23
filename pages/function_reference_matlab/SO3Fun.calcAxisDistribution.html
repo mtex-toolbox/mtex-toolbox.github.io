@@ -24,12 +24,20 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>axis distribution function</p>
-<h2 id="3">Syntax</h2>
+<h2 id="3">Description</h2>
+<p>By default the rotation angle is integrated over the full range the fundamental region allows for the axis in question. <code class="language-plaintext highlighter-rouge">minAngle</code> and <code class="language-plaintext highlighter-rouge">maxAngle</code> restrict that range, which is what the axis angle sections show: the distribution of the axes of those rotations whose angle falls into a given window. An axis for which the window lies entirely outside the fundamental region contributes zero.</p>
+<p>The quadrature keeps its step, not its number of points, so a narrow window is integrated with correspondingly few of them - lower <code class="language-plaintext highlighter-rouge">resolution</code> if the values it returns matter to better than a percent.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
 value = calcAxisDistribution(odf, a)
 adf = calcAxisDistribution(odf)
 {% endhighlight %}
-<h2 id="4">Input</h2>
+
+{% highlight matlab %}
+% only rotations by 20 to 40 degree
+adf = calcAxisDistribution(odf,'minAngle',20*degree,'maxAngle',40*degree)
+{% endhighlight %}
+<h2 id="5">Input</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -50,7 +58,7 @@ adf = calcAxisDistribution(odf)
       </tr>
    </table>
 </p>
-<h2 id="5">Output</h2>
+<h2 id="6">Output</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
@@ -71,7 +79,36 @@ adf = calcAxisDistribution(odf)
       </tr>
    </table>
 </p>
-<h2 id="6">See also</h2>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>minAngle</tt>
+         </td>
+         <td>
+            <tt>ignore rotations by less than this angle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxAngle</tt>
+         </td>
+         <td>
+            <tt>ignore rotations by more than this angle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>resolution</tt>
+         </td>
+         <td>
+            <tt>step of the angle quadrature, 2.5 degree by default</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
 <p>
 <a href="symmetry.calcAxisDistribution.html">symmetry.calcAxisDistribution</a>
 </p>

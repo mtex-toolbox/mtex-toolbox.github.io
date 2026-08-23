@@ -1,0 +1,153 @@
+---
+title: "xcfShift"
+
+sidebar: function_reference_sidebar
+permalink: xcfShift.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>xcfShift</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_xcfShift.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/registration_tools/xcfShift.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>measure how far each part of one image moved relative to another</p>
+<p>Divides the region the two images share into a grid of tiles and phase correlates each tile against the matching tile of the other image. The result is a displacement per tile, to sub pixel accuracy, and the height of the correlation peak that produced it.</p>
+<p>The peak height is not a diagnostic - it is the weight. A tile that landed on featureless background correlates weakly and must not get an equal vote when a transform is fitted through the displacements:</p>
+{% highlight matlab %}
+[u,peak,pos] = xcfShift(A,B);
+T = spatialTransformShift.fit(pos, pos + u, 'weights', peak);
+{% endhighlight %}
+<h2 id="3">Description</h2>
+<p>Only the region where both images are finite is tiled, so the padding an earlier resampling left behind is excluded rather than correlated against. A tile that still contains a non finite value, or that is flat, comes back with NaN in all three outputs - drop those before fitting, which every spatialTransform fit does for you.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+[u,peak,pos] = xcfShift(A,B)
+[u,peak,pos] = xcfShift(mgA,mgB)
+[u,peak,pos] = xcfShift(A,B,'ROISize',64,'numROI',[24 18])
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>A, B</tt>
+         </td>
+         <td>
+            <tt>r x c images, the same size</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>mgA, mgB</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a> on the same grid, in which case u and pos are in specimen units rather than pixels</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>u</tt>
+         </td>
+         <td>
+            <tt>n x 1 <a href="vector3d.vector3d.html">vector3d</a>, the displacement from A to B at each tile: the feature at pos in A is at pos + u in B</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>peak</tt>
+         </td>
+         <td>
+            <tt>n x 1 correlation peak height, the fit weight</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt>n x 1 <a href="vector3d.vector3d.html">vector3d</a>, the tile centres, in A</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ROISize</tt>
+         </td>
+         <td>
+            <tt>tile width in pixels, default 2^ceil(log2(rows/4))</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>numROI</tt>
+         </td>
+         <td>
+            <tt>tiles across, scalar or [nx ny]. A scalar is scaled by the aspect ratio to give ny. Default 24</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>XCFMesh</tt>
+         </td>
+         <td>
+            <tt>peak upsampling, default 250</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>coarseMesh</tt>
+         </td>
+         <td>
+            <tt>resolution of the first refinement pass, default 48</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>dedupeBand</tt>
+         </td>
+         <td>
+            <tt>drop the duplicated band pass indices, see xcfCorrelate</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">References</h2>
+<div>
+<ul>
+<li>M. Guizar-Sicairos, S. T. Thurman, J. R. Fienup, Efficient subpixel image registration algorithms, Optics Letters (2008), Vol. 33, 156.</li>
+</ul>
+</div>
+<h2 id="10">See also</h2>
+<p>
+<a href="spatialTransform.html">spatialTransform</a> <a href="mapImage.edgeMap.html">mapImage.edgeMap</a>
+</p>
+</div>
+</body>
+</html>

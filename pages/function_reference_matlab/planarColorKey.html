@@ -57,16 +57,17 @@ pK.periode = pi;
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
      0   92415 (27%)      notIndexed          none                                   
      1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
  
- Properties: bands, bc, bs, error, mad, reliabilityindex
+ Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
  Scan unit : um
- X x Y x Z : [0, 353] x [0, 242] x [0, 0]
+ X x Y x Z : [0 → 353] x [0 → 242] x [0 → 0]
  Normal vector: (0,0,1)
+ Square grid  :486 x 707
  
 pK = 
   planarColorKey with properties:
@@ -116,16 +117,24 @@ pK =
          label1: 'phi'
          label2: 'a/b'
 {% endhighlight %}
-
+<center>
+{% include inline_image.html file="planarColorKey_01.png" %}
+</center>
 {% highlight matlab %}
 figure
 plot(pK,mod(lax.rho,pi)/degree,asr)
 {% endhighlight %}
+<center>
+{% include inline_image.html file="planarColorKey_02.png" %}
+</center>
 <p>alternatively use radians</p>
 {% highlight matlab %}
 figure
 plot(pK,mod(lax.rho,pi),asr)
 {% endhighlight %}
+<center>
+{% include inline_image.html file="planarColorKey_03.png" %}
+</center>
 <p>example 2: highlight grains which are large AND have a large aspect ratio</p>
 {% highlight matlab %}
 v1 = grains('indexed').aspectRatio;
@@ -196,6 +205,9 @@ pK.quantileCap = 0.9;
 {% highlight matlab %}
 plot(grains('indexed'),pK.property2color(v1,v2))
 {% endhighlight %}
+<center>
+{% include inline_image.html file="planarColorKey_04.png" %}
+</center>
 <p>set labels</p>
 {% highlight matlab %}
 pK.label1 = 'asr'
@@ -230,6 +242,9 @@ pK =
          label1: 'asr'
          label2: 'area'
 {% endhighlight %}
+<center>
+{% include inline_image.html file="planarColorKey_05.png" %}
+</center>
 <h2 id="20">See also</h2>
 </div>
 </body>

@@ -1,0 +1,122 @@
+---
+title: "spatialTransformDrift"
+
+sidebar: function_reference_sidebar
+permalink: spatialTransformDrift.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>spatialTransformDrift</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_spatialTransformDrift.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/spatialTransforms/spatialTransformDrift.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>a displacement that varies only along the slow scan direction</p>
+<p>Temporal drift during a scan: the beam returns to the start of each line at a stage position slightly different from the last, so the whole line is displaced together and the displacement accumulates down the scan. Modelled as a linear spline in the slow scan coordinate alone - a rolling shutter, not a smooth field.</p>
+<p>Which direction is the slow scan is a fact about the acquisition, not about the data, so it is carried rather than inferred. After resampling or rotation it is no longer grid dimension 1.</p>
+<p>The spline is defined between its outermost knots and NOT beyond, so positions outside the measured band come back NaN rather than extrapolated. That is deliberate - it is what marks the region the correction is supported on. Pass 'extrapolate' to continue the end segments instead.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+T = spatialTransformDrift(s,u)
+T = spatialTransformDrift(s,u,'slowScan',xvector)
+T = spatialTransformDrift.fit(posA,posB)
+T = spatialTransformDrift.fit(posA,posB,'slowScan',xvector,'extrapolate')
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>s</tt>
+         </td>
+         <td>
+            <tt>n x 1 knot coordinates along the slow scan direction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>u</tt>
+         </td>
+         <td>
+            <tt>n x 2 displacement at each knot</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>posA, posB</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the same points in the two frames</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransformDrift.html">spatialTransformDrift</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>s</tt>
+         </td>
+         <td>
+            <tt>n x 1 knots, ascending</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>u</tt>
+         </td>
+         <td>
+            <tt>n x 2 displacement at the knots</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>slowScan</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the direction the spline runs along</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>extrapolate</tt>
+         </td>
+         <td>
+            <tt>continue the end segments instead of returning NaN</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="spatialTransform.html">spatialTransform</a> <a href="spatialTransformField.html">spatialTransformField</a>
+</p>
+</div>
+</body>
+</html>

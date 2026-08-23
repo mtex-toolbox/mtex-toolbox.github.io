@@ -25,16 +25,21 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <h2 id="2">Syntax</h2>
 {% highlight matlab %}
-p2c = calcParent(childOri,p2c0)
+p2c = calcParent2Child(childOri,p2c0)
 {% endhighlight %}
 
 {% highlight matlab %}
-p2c = calcParent(c2c,p2c0)
-p2c = calcParent(c2c,p2c0,'dampingFactor',alpha)
+p2c = calcParent2Child(c2c,p2c0)
+p2c = calcParent2Child(c2c,p2c0,'quantile',0.8)
 {% endhighlight %}
 
 {% highlight matlab %}
-[p2c, fit] = calcParent(c2c,p2c0)
+% start the iteration at p2c0 instead of searching the fundamental zone
+p2c = calcParent2Child(c2c,p2c0,'local')
+{% endhighlight %}
+
+{% highlight matlab %}
+[p2c, fit] = calcParent2Child(c2c,p2c0)
 {% endhighlight %}
 <h2 id="3">Input</h2>
 <p>
@@ -91,10 +96,18 @@ p2c = calcParent(c2c,p2c0,'dampingFactor',alpha)
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
       <tr>
          <td width="100px">
+            <tt>local</tt>
+         </td>
+         <td>
+            <tt>iterate from p2c0 only, skipping the fundamental zone scan</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
             <tt>maxIteration</tt>
          </td>
          <td>
-            <tt>maximum number of iterations (default - 100)</tt>
+            <tt>maximum number of iterations (default - 30)</tt>
          </td>
       </tr>
       <tr>
@@ -102,7 +115,7 @@ p2c = calcParent(c2c,p2c0,'dampingFactor',alpha)
             <tt>quantile</tt>
          </td>
          <td>
-            <tt>consider only misorientation within this quantile to the current p2c guess (default 0.9)</tt>
+            <tt>fraction of the misorientations the fit is based on (default 0.9)</tt>
          </td>
       </tr>
       <tr>
@@ -110,15 +123,31 @@ p2c = calcParent(c2c,p2c0,'dampingFactor',alpha)
             <tt>threshold</tt>
          </td>
          <td>
-            <tt>consider only misorientation within this threshold to the current p2c guess (default - 10*degree)</tt>
+            <tt>misorientations misfitting by more are treated as outliers (default - inf)</tt>
          </td>
       </tr>
       <tr>
          <td width="100px">
-            <tt>dampingFactor</tt>
+            <tt>maxSample</tt>
          </td>
          <td>
-            <tt>default - 1/numVariants</tt>
+            <tt>fit on at most this many misorientations (default - 50000)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>searchResolution</tt>
+         </td>
+         <td>
+            <tt>grid resolution of the global scan (default - 4*degree)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>scanSample</tt>
+         </td>
+         <td>
+            <tt>misorientations used to rank basins during the scan (default - 250)</tt>
          </td>
       </tr>
    </table>
@@ -128,6 +157,11 @@ p2c = calcParent(c2c,p2c0,'dampingFactor',alpha)
 <ul>
 <li>Tuomo Nyyss&ouml;nen, <a href="https://www.researchgate.net/deref/http%3A%2F%2Fdx.doi.org%2F10.1007%2Fs11661-018-4904-9?_sg%5B0%5D=gRJGzFvY4PyFk-FFoOIj2jDqqumCsy3e8TU6qDnJoVtZaeUoXjzpsGmpe3TDKsNukQYQX9AtKGniFzbdpymYvzYwhg.5jfOl5Ohgg7pW_6yACRXN3QiR-oTn8UsxZjTbJoS_XqwSaaB7r8NgifJyjSES2iXP6iOVx57sy8HC4q2XyZZaA">Crystallography, Morphology, and Martensite Transformation of Prior Austenite in Intercritically Annealed High-Aluminum Steel</a>
 </li>
+</ul>
+</div>
+<div>
+<ul>
+<li>objective, algorithm and convergence: docs/adr/0005-parent-to-child-fit.md</li>
 </ul>
 </div>
 </div>

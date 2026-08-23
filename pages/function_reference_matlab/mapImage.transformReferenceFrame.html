@@ -1,0 +1,109 @@
+---
+title: "mapImage.transformReferenceFrame"
+
+sidebar: function_reference_sidebar
+permalink: mapImage.transformReferenceFrame.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>mapImage.transformReferenceFrame</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_mapImage__transformReferenceFrame.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@mapImage/transformReferenceFrame.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>state which frame a sequence of images is in, and lay them out that way</p>
+<p>Where a raster array sits relative to a specimen is not derivable from the array, so two images are not comparable until they are stated in one frame. This is the step that states it. It is deliberately explicit: the relation is a fact about the experiment that only the person who ran it knows, and guessing it silently is how a mirrored map reaches the end of a workflow and returns nonsense.</p>
+<h2 id="3">Description</h2>
+<p>The relation may be given three ways, most certain first:</p>
+{% highlight matlab %}
+ori                  the rotation, when it is known outright
+'byScreenAlignment'  inferred from the assertion that the frames were
+                     plotted together and seen the same way up
+neither              read off the two bases, when both already carry one
+{% endhighlight %}
+<p>Like &lt;Miller.transformReferenceFrame.html the method of the same name on <a href="Miller.Miller.html">Miller</a>&gt; this changes the numbers, not the thing: nothing is resampled and no value changes, only the layout and the frame stamp. Only a signed permutation can be applied by reindexing, so a relation that is not axis aligned raises rather than silently resampling.</p>
+<p>A map travelling with an image is turned with it, so the two stay in one array order and ebsd.bc can sit beside img without a conversion.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+mg = transformReferenceFrame(mg,gL)                 % a layout
+mg = transformReferenceFrame(mg,other)              % that of another image
+mg = transformReferenceFrame(mg,fr,ori)             % the rotation, known
+mg = transformReferenceFrame(mg,fr,'byScreenAlignment')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a>, one or an array</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gL</tt>
+         </td>
+         <td>
+            <tt><a href="gridLayout.gridLayout.html">gridLayout</a> to lay the array out in</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>other</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a>, meaning its layout</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fr</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a> every entry is to end up in</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ori</tt>
+         </td>
+         <td>
+            <tt><a href="orientation.orientation.html">orientation</a> from an entry's frame to fr, when it is known</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mg</tt>
+         </td>
+         <td>
+            <tt>the same images, laid out in the target</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="mapImage.html">mapImage</a> <a href="gridLayout.html">gridLayout</a> <a href="orientation.byScreenAlignment.html">orientation.byScreenAlignment</a> <a href="EBSDsquare.transformReferenceFrame.html">EBSDsquare.transformReferenceFrame</a>
+</p>
+</div>
+</body>
+</html>

@@ -87,19 +87,22 @@ mtexTitle('original');  nextAxis
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ebsd = EBSD (y↓→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    1197 (32%)  notIndexed          none                                   
      1    1952 (52%)  Forsterite  LightSkyBlue       mmm                         
      2    290 (7.8%)   Enstatite  DarkSeaGreen       mmm                         
-     3    282 (7.6%)    Diopside     Goldenrod     12/m1       X||a*, Y||b*, Z||c
+     3    282 (7.6%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad
+ Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [33000, 36000] x [4500, 7500] x [0, 0]
+ X x Y x Z : [33000 → 36000] x [4500 → 7500] x [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
+<center>
+{% include inline_image.html file="erode_01.png" %}
+</center>
 <p>erode isolated, nonIndexed points</p>
 {% highlight matlab %}
 ebsd = erode(ebsd,0);
@@ -107,6 +110,9 @@ plot(ebsd); hold on
 plot(ebsd('n'),'FaceColor','k'); hold off;
 mtexTitle('no single nonIndexed pixels');  nextAxis
 {% endhighlight %}
+<center>
+{% include inline_image.html file="erode_02.png" %}
+</center>
 <p>erode isolated, nonIndexed points</p>
 {% highlight matlab %}
 for i=1:10
@@ -119,6 +125,9 @@ plot(ebsd); hold on
 plot(ebsd('n'),'FaceColor','k'); hold off;
 mtexTitle('no n,D,E \(\le\) 1 neighbors, 10 iter'); nextAxis
 {% endhighlight %}
+<center>
+{% include inline_image.html file="erode_03.png" %}
+</center>
 <p>erode isolated, nonIndexed points</p>
 {% highlight matlab %}
 for i=1:10
@@ -132,6 +141,9 @@ plot(ebsd); hold on
 plot(ebsd('n'),'FaceColor','k'); hold off;
 mtexTitle('no n,D,E \(\le\) 2 neighbors, filled,10 iter');
 {% endhighlight %}
+<center>
+{% include inline_image.html file="erode_04.png" %}
+</center>
 </div>
 </body>
 </html>

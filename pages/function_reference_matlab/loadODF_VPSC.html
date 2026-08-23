@@ -23,11 +23,46 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>loadODF_VPSC is a function. [odf, options] = loadODF_VPSC(fname, varargin)</p>
-<h2 id="3">Syntax</h2>
+<p>import a VPSC texture file</p>
+<h2 id="3">Description</h2>
+<p>A VPSC texture file consists of one or more blocks of four header lines followed by one line per orientation. The only line the format guarantees is the fourth: it carries the Euler angle convention - <code class="language-plaintext highlighter-rouge">B</code> for Bunge, <code class="language-plaintext highlighter-rouge">K</code> for Kocks, <code class="language-plaintext highlighter-rouge">R</code> for Roe - and the number of orientations in the block. The marker <code class="language-plaintext highlighter-rouge">TEXTURE AT STRAIN</code> that VPSC writes on the first line of an output file is absent from the weight (<code class="language-plaintext highlighter-rouge">.wts</code>) files that are fed into VPSC, so it is not what identifies the format here.</p>
+<p>Every block becomes one ODF. The strain, the phase ellipsoid and the orientations themselves are kept in <code class="language-plaintext highlighter-rouge">odf.opt</code>, together with any further columns the file may carry (von Mises strain and stress, accumulated plastic work, Taylor factor).</p>
+<p>Note that a VPSC file carries no symmetry, so the crystal symmetry has to be passed in.</p>
+<h2 id="4">Syntax</h2>
 {% highlight matlab %}
-[odf,options] = loadODF_VPSC(fname,varargin)
+odf = loadODF_VPSC('TEX_PH1.OUT','cs',cs)
+odf = loadODF_VPSC('TEX_PH1.OUT','cs',cs,'halfwidth',10*degree)
 {% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fname</tt>
+         </td>
+         <td>
+            <tt>name of the VPSC texture file</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>odf</tt>
+         </td>
+         <td>
+            <tt><a href="SO3Fun.SO3Fun.html">SO3Fun</a>, or a cell array of <a href="SO3Fun.SO3Fun.html">SO3Fun</a> if the file holds more than one deformation step</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="SO3Fun.load.html">SO3Fun.load</a> <a href="orientation.export_VPSC.html">orientation.export_VPSC</a> <a href="SO3Fun.export_VPSC.html">SO3Fun.export_VPSC</a>
+</p>
 </div>
 </body>
 </html>

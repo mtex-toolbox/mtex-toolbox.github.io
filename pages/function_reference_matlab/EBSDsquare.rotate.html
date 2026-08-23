@@ -1,0 +1,119 @@
+---
+title: "EBSDsquare.rotate"
+
+sidebar: function_reference_sidebar
+permalink: EBSDsquare.rotate.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>EBSDsquare.rotate</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_EBSDsquare__rotate.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@EBSDsquare/rotate.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>rotate a gridded EBSD map, keeping its matrix layout canonical</p>
+<h2 id="3">Description</h2>
+<p>Rotating the spatial data moves the positions but not the entries of the matrix, so the grid directions come out somewhere else than the layout rule puts them: <a href="EBSDGrid.html">gridify</a> orients a map so dimension 1 runs along the more vertical grid direction and dimension 2 along the more horizontal one, both with increasing coordinates. A quarter turn leaves that violated, and the map is then a grid whose stored order no longer says what its own d1 and d2 say - which defeats the point of the grid classes, whose reason to exist is handing a stable matrix to image registration tools.</p>
+<p>So the layout is restored here, by reindexing. Nothing is resampled and no value is invented: a transpose and two flips are all that is ever applied, and only when the rotation actually disturbed the layout. A rotation that leaves the grid axis aligned - any multiple of 90 degrees - always lands back on the rule exactly. One that does not, say 30 degrees, is put as close to it as a permutation can get, which is what gridify itself would do.</p>
+<p>NB this changes the SHAPE of the map for a quarter turn: an r x c map comes back c x r. That is the honest answer - the sample really did turn - and it is what keeps size(ebsd) meaning the same thing before and after.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+ebsd = rotate(ebsd,10*degree)
+ebsd = rotate(ebsd,rotation.byAxisAngle(xvector,180*degree))
+ebsd = rotate(ebsd,180*degree,'keepEuler')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>angle</tt>
+         </td>
+         <td>
+            <tt>double</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rot</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>center</tt>
+         </td>
+         <td>
+            <tt>[x,y] center of rotation, default is (0,0)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Flags</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>keepXY</tt>
+         </td>
+         <td>
+            <tt>rotate only the orientation data</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>keepEuler</tt>
+         </td>
+         <td>
+            <tt>rotate only the spatial data</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="9">See also</h2>
+<p>
+<a href="EBSD.rotate.html">EBSD.rotate</a> <a href="EBSD.gridify.html">EBSD.gridify</a> <a href="EBSDsquare.transformReferenceFrame.html">EBSDsquare.transformReferenceFrame</a>
+</p>
+</div>
+</body>
+</html>

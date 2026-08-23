@@ -27,6 +27,7 @@ toc: false
 </p>
 <p>Sometimes the EBSD map and the SEM images are not stored the same way round. Rotate the stage between two acquisitions, load a map from software that writes its scan lines in the other direction, or import images taken in a separate session, and the two no longer agree about which way the sample points.</p>
 <p>TrueEBSD will not guess at this, because guessing wrong does not fail loudly &mdash; the matching still runs, still fits, and hands back a finished-looking result that is quietly nonsense. So it asks, and this page shows how to answer.</p>
+<p>What a reference frame is, what a layout is and how <code class="language-plaintext highlighter-rouge">gridify</code> and <code class="language-plaintext highlighter-rouge">imageFrame</code> put a map in the order a picture is stored in is MTEX rather than TrueEBSD, and is explained on <a href="EBSDMapsAndImages.html">Maps and Images</a>. This page assumes it and gets on with the workflow.</p>
 <p>
 <a href="example_WCCoSmall.html">The short WC-Co page</a> is the ordinary case, where everything was collected in one session and there is nothing to say. Read that one first; this page is the same workflow with one extra step.</p>
 <p>This script needs the TrueEBSD toolbox, which is <b>not</b> part of MTEX and is distributed separately under Apache-2.0: <a href="https://github.com/vtvivian/mtex-trueebsd">https://github.com/vtvivian/mtex-trueebsd</a>
@@ -44,7 +45,7 @@ img = ebsd.opt.trueEbsdImgs;
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDsquare (y↓→x)
+ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    89 (0.72%)  notIndexed          none                                   
@@ -63,24 +64,21 @@ ebsd = EBSDsquare (y↓→x)
 <h2 id="2">Turn the map, to have something to fix</h2>
 <p>To get a map and images that disagree, turn the map through 90&deg;. This is what a stage rotation between acquisitions would leave you with: the map now shows the specimen at right angles to what the detectors saw.</p>
 {% highlight matlab %}
-rot90z = rotation.byAxisAngle(zvector,90*degree);
-ebsdRot = gridify(rotate(ebsd,rot90z),'force');
+ebsd = rotate(ebsd,90*degree);
 {% endhighlight %}
 <h2 id="3">Build the sequence</h2>
 <p>Exactly as on the short page. Nothing here mentions the rotation &mdash; as far as this code knows, these are just five pictures of one sample.</p>
 {% highlight matlab %}
-imgList = [mapImage(ebsdRot.bc, ebsdRot,           'name','bcImg'), ...
-           mapImage(img.fsdB3,  'dxy',img.pixSzImg, 'name','fsdB3'), ...
-           mapImage(img.fsdT3,  'dxy',img.pixSzImg, 'name','fsdT3'), ...
-           mapImage(img.fsdT1,  'dxy',img.pixSzImg, 'name','fsdT1'), ...
-           mapImage(img.fsdT10, 'dxy',img.pixSzImg, 'name','fsdT10')];
-{% endhighlight %}
-<p>A light box filter first &mdash; cross-correlation dislikes noise &mdash; and one common range, since the levels off different detectors mean nothing to each other. Both are methods of <code class="language-plaintext highlighter-rouge">mapImage</code> and both take the whole list at once. Neither needs the Image Processing Toolbox.</p>
-{% highlight matlab %}
+imgList = [mapImage(ebsd.bc, ebsd,         'name','bcImg'), ...
+  mapImage(img.fsdB3,  'dxy',img.pixSzImg, 'name','fsdB3'), ...
+  mapImage(img.fsdT3,  'dxy',img.pixSzImg, 'name','fsdT3'), ...
+  mapImage(img.fsdT1,  'dxy',img.pixSzImg, 'name','fsdT1'), ...
+  mapImage(img.fsdT10, 'dxy',img.pixSzImg, 'name','fsdT10')];
+
+% some simple filtering
 imgList(2:end) = rescale(imboxfilt(imgList(2:end),3));
-{% endhighlight %}
-<p>Four hops, the first of them a two-stage model. That is <code class="language-plaintext highlighter-rouge">+</code> and not <code class="language-plaintext highlighter-rouge">*</code>: <code class="language-plaintext highlighter-rouge">+</code> reads left to right in the order the stages are applied and keeps both, where an unfitted prototype reports itself as the identity and <code class="language-plaintext highlighter-rouge">*</code> would absorb one away.</p>
-{% highlight matlab %}
+
+% the deformation sequence we used already in the
 T = [spatialTransformShift + spatialTransformDrift, ...
      spatialTransformId, ...
      spatialTransformShift, ...
@@ -93,8 +91,7 @@ plot(imgList)
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_01.png" %}
 </center>
-<p>Fix it by telling TrueEBSD how the map is oriented. Each entry is drawn the way its own frame says it should be, so changing the map's frame changes what you see &mdash; turn it until the plots agree with each other. Here the map needs <code class="language-plaintext highlighter-rouge">'x&uarr;&rarr;y'</code>; the images keep the default.</p>
-<p>This is the part only you can supply. It is a fact about how the data was collected, and no amount of looking at the numbers will recover it.</p>
+<p>Fix it by turning the map's frame until the plots agree with each other &mdash; here the map needs <code class="language-plaintext highlighter-rouge">'x&uarr;&rarr;y'</code> and the images keep the default. This is the part only you can supply: it is a fact about how the data was collected, and no amount of looking at the numbers will recover it.</p>
 {% highlight matlab %}
 ebsdFrame = imgList(1).frame;
 ebsdFrame.how2plot = 'x↑→y';
@@ -103,7 +100,7 @@ plot(imgList)
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_02.png" %}
 </center>
-<p>All five now agree on screen, which is the assertion TrueEBSD needs. <code class="language-plaintext highlighter-rouge">'byScreenAlignment'</code> means exactly that: <b>I have plotted these and they are the same way up</b>. <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> takes that statement and restates all five in one frame, so they can be compared.</p>
+<p>All five now agree on screen, which is the assertion TrueEBSD needs, and <code class="language-plaintext highlighter-rouge">'byScreenAlignment'</code> restates it as a rotation.</p>
 {% highlight matlab %}
 imgList = transformReferenceFrame(imgList, ebsdFrame, 'byScreenAlignment')
 {% endhighlight %}
@@ -112,13 +109,20 @@ imgList = transformReferenceFrame(imgList, ebsdFrame, 'byScreenAlignment')
 imgList = mapImage (x↑→y)
  
             image    pixel  frame    layout    name                 EBSD
- 1       96 x 128  0.16 um   x↑→y  row←col↓   bcImg  W C, Co-fcc, Co-hcp
- 2  192 x 256 x 3  0.08 um   x↑→y  row←col↓   fsdB3                    -
- 3      192 x 256  0.08 um   x↑→y  row←col↓   fsdT3                    -
- 4      192 x 256  0.08 um   x↑→y  row←col↓   fsdT1                    -
- 5      192 x 256  0.08 um   x↑→y  row←col↓  fsdT10                    -
+ 1       96 x 128  0.16 um   x↑→y  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  192 x 256 x 3  0.08 um   x↑→y  row↓→col   fsdB3                    -
+ 3      192 x 256  0.08 um   x↑→y  row↓→col   fsdT3                    -
+ 4      192 x 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
+ 5      192 x 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
 {% endhighlight %}
-<h2 id="9">Run the workflow</h2>
+
+{% highlight matlab %}
+plot(imgList)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="example_WCCoFrames_2_03.png" %}
+</center>
+<h2 id="8">Run the workflow</h2>
 <p>From here nothing is different. The sequence is in one frame, so the rest is the ordinary workflow &mdash; see <a href="example_WCCoSmall.html">the short page</a> for what each step does.</p>
 {% highlight matlab %}
 job = trueEbsd2(imgList,T);
@@ -235,9 +239,9 @@ ans = trueEbsd2 (undistorted)
  common grid: 192 x 256 at 0.08 µm
 {% endhighlight %}
 <center>
-{% include inline_image.html file="example_WCCoFrames_2_03.png" %}
+{% include inline_image.html file="example_WCCoFrames_2_04.png" %}
 </center>
-<h2 id="11">Check the result</h2>
+<h2 id="10">Check the result</h2>
 <p>The aligned images are properties of the map, exactly as on the short page.</p>
 <p>The map and the images come out the same way round and the same shape. That is the point of having said which frame everything is in: <code class="language-plaintext highlighter-rouge">gridify</code> takes a layout, so the map is rebuilt in the frame you asked for rather than in MTEX's standard one, and <code class="language-plaintext highlighter-rouge">ebsd.bc</code> can then be put beside an aligned image pixel for pixel with nothing in between.</p>
 {% highlight matlab %}
@@ -264,7 +268,7 @@ aligned image: 192 x 256
 EBSD object  : 192 x 256
 {% endhighlight %}
 <center>
-{% include inline_image.html file="example_WCCoFrames_2_04.png" %}
+{% include inline_image.html file="example_WCCoFrames_2_05.png" %}
 </center>
 <p>The real test is whether the alignment worked. Compare the map's band contrast against the image aligned to it &mdash; they should track each other closely, and they do, just as well as on the short page where no rotation was involved. Saying which way round the map was cost nothing in quality; it only made an otherwise impossible case possible.</p>
 {% highlight matlab %}
@@ -278,7 +282,7 @@ fprintf('corr(ebsd.bc, aligned image) = %.4f\n', r(1,2));
 {% highlight plaintext %}
 corr(ebsd.bc, aligned image) = 0.9305
 {% endhighlight %}
-<h2 id="13">Finish</h2>
+<h2 id="12">Finish</h2>
 <p>Everything this page added to <a href="example_WCCoSmall.html">the short workflow</a> was two lines: turning the map's frame until the plots agreed, and one call to <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> to say so. The sequence, the distortions, the box settings and the result are identical.</p>
 <p>If your map and images were collected the same way up you need none of it. Reach for this when the plots disagree, or when building the job stops with <code class="language-plaintext highlighter-rouge">trueEbsd:frameMismatch</code> &mdash; which is TrueEBSD telling you it has spotted the problem rather than guessing past it.</p>
 </div>

@@ -30,7 +30,7 @@ mtexdata twins
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x)
+ebsd = EBSDsquare (y↑→x, row↑→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0     46 (0.2%)  notIndexed          none                                   
@@ -90,7 +90,77 @@ ans = EBSD (y↑→x)
 {% endhighlight %}
 <p>In the default layout the first matrix dimension is the grid direction closest to y and the second one the grid direction closest to x, both oriented such that the coordinates increase. Accordingly <code class="language-plaintext highlighter-rouge">ebsd(1,1)</code> is the corner with the smallest coordinates and <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> is the j-th pixel of the i-th scan row. This is a property of the map and not of the file - it is the same whichever corner the acquisition started from and whichever direction it scanned in. Pass <code class="language-plaintext highlighter-rouge">'rowMajor'</code> to <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> if you want the transposed layout.</p>
 <p>A grid is not required nearly as often as it used to be. The <a href="EBSD.gradientX.html">orientation gradient</a>, <a href="EBSD.curvature.html">curvature</a>, <a href="EBSD.calcGND.html">GND</a> and <a href="EBSD.fill.html">fill</a> are computed on the virtual lattice that <a href="EBSD.lattice.html"><code class="language-plaintext highlighter-rouge">lattice</code></a> derives from the unit cell, and therefore work on arbitrarily aligned data just as well.</p>
-<h2 id="6">Data That Can Not Be Put on a Grid</h2>
+<h2 id="6">Choosing the Layout</h2>
+<p>The first bullet above - hand the data to image processing as a matrix - only pays off if the matrix is the way round the picture is. A forescatter or BSE image of the same area is stored the way its detector wrote it, and that need not be the way MTEX stores a map. Correlating the two, or using one as a mask on the other, then needs the map in the image's layout - <a href="EBSDMapsAndImages.html">Maps and Images</a> does that with a real map and the SEM images taken of the same area.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">'columnMajor'</code> and <code class="language-plaintext highlighter-rouge">'rowMajor'</code> are the two layouts aligned with x and y, and they are <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a>s like any other. Hand <code class="language-plaintext highlighter-rouge">gridify</code> a different one and the map is stored that way instead. A layout names the row direction first, the order <code class="language-plaintext highlighter-rouge">size(A)</code> is written in. Say the picture's rows run against x and its columns along y - a detector mounted a quarter turn from the scan</p>
+{% highlight matlab %}
+gL = gridLayout(-xvector,yvector)
+{% endhighlight %}
+
+{% highlight plaintext %}
+gL = gridLayout (row||-x, col||y)
+{% endhighlight %}
+<p>Then the map goes into that layout, and its shape follows</p>
+{% highlight matlab %}
+ebsdI = gridify(ebsd,gL)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdI = EBSDsquare (y↑→x, row←col↑)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     0     46 (0.2%)  notIndexed          none                                   
+     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
+ Normal vector: (0,0,1)
+ Square grid  :167 x 137
+{% endhighlight %}
+<p>Nothing was resampled and no value invented: a transpose and two flips are all that is ever applied, which is why this is safe to do to orientation data. A map states the layout it is in, so it can be read back off</p>
+{% highlight matlab %}
+ebsdI.layout
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = gridLayout (row||-x, col||y)
+{% endhighlight %}
+<p>Every per pixel property comes out in that layout, so band contrast is now a matrix that can be put beside an image stored the same way with nothing in between. For this particular pair of layouts that is a quarter turn, and it really is only that - reindexed, not resampled</p>
+{% highlight matlab %}
+isequal(ebsdI.bc, rot90(ebsd.bc))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+  logical
+   1
+{% endhighlight %}
+<p>Putting it back is therefore exact. The two layouts are a conversion, not a transformation, and <code class="language-plaintext highlighter-rouge">ebsd.layout</code> names the one to come back to</p>
+{% highlight matlab %}
+isequal(gridify(ebsdI,ebsd.layout).bc, ebsd.bc)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+  logical
+   1
+{% endhighlight %}
+<p>Note what has <b>not</b> changed. The layout is how the measurements are stored, not where the specimen is, so the map still plots the same way up - MTEX moves the camera for the screen, never the data</p>
+{% highlight matlab %}
+nextAxis
+plot(ebsd,ebsd.bc), mtexColorMap gray
+title('columnMajor')
+nextAxis
+plot(ebsdI,ebsdI.bc), mtexColorMap gray
+title('row ||-x, col ||y')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDGrid_02.png" %}
+</center>
+<p>A grid that is rotated or sheared cannot land on an axis aligned layout exactly, and is put as close to it as a permutation can get - the same best effort <code class="language-plaintext highlighter-rouge">gridify</code> has always made for the two flags. <a href="EBSDsquare.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> is this step under its own name, for a map that is already gridded.</p>
+<h2 id="13">Data That Can Not Be Put on a Grid</h2>
 <p>Gridding writes the measurements into a rectangular raster, which is faithful only if they really do sit on one lattice. Should two of them land in the same cell, one would be lost - so MTEX keeps such a data set as a plain list instead, and says why</p>
 {% highlight matlab %}
 ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'],...
@@ -98,9 +168,9 @@ ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'],...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: 92 of 613 indexed measurements share a lattice cell with another one,
-so gridding them would drop those measurements. Keeping the data as a list -
-call gridify explicitly if you want the raster anyway. 
+Warning: 92 of 613 indexed measurements share a lattice cell with another
+one, so gridding them would drop those measurements. Keeping the data as a
+list - call gridify explicitly if you want the raster anyway. 
  
 ebsd = EBSD (Y1↓→X1)
  
@@ -125,7 +195,7 @@ ebsd = EBSD.load(fname,'noGrid')
 setMTEXpref('gridifyOnImport',false)
 {% endhighlight %}
 <p>and you may always change your mind afterwards: <code class="language-plaintext highlighter-rouge">EBSD(ebsd)</code> flattens a gridded map into a list, <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> puts a list onto its grid.</p>
-<h2 id="8">Selecting a Subset Drops the Matrix Shape</h2>
+<h2 id="15">Selecting a Subset Drops the Matrix Shape</h2>
 <p>It is important to understand that the property of being shaped as a matrix is lost as soon as we <a href="EBSDSelect.html">select</a> a subset of the data - a phase, a region, the indexed measurements - since what is left is in general not a rectangle any more</p>
 {% highlight matlab %}
 mtexdata twins silent
@@ -151,7 +221,7 @@ ebsdMg = ebsd('Magnesium').gridify
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdMg = EBSDsquare (y↑→x)
+ebsdMg = EBSDsquare (y↑→x, row↑→col)
  
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1  22833 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
@@ -176,9 +246,9 @@ ans =
 plot(ebsdMg(50:100,5:100),ebsdMg(50:100,5:100).orientations)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_02.png" %}
+{% include inline_image.html file="EBSDGrid_03.png" %}
 </center>
-<h2 id="12">Gridding Reorders the Measurements</h2>
+<h2 id="19">Gridding Reorders the Measurements</h2>
 <p> <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> does not preserve the order in which the measurements arrive, and can not: the layout described above fixes the first matrix dimension to y, while a <code class="language-plaintext highlighter-rouge">.ctf</code> or <code class="language-plaintext highlighter-rouge">.ang</code> file is written with x varying fastest, so MATLAB's column major linear indexing runs down the map where the file runs across it. After gridding, <code class="language-plaintext highlighter-rouge">ebsd(k)</code> is therefore in general not the measurement in line k of the file any more.</p>
 <p>Nothing is lost by that. The original ids are kept as the property <code class="language-plaintext highlighter-rouge">oldId</code>, and looking at its top left corner shows the effect directly - consecutive ids run along a matrix row, i.e. across the map, while MATLAB's linear index runs down a column</p>
 {% highlight matlab %}
@@ -204,7 +274,7 @@ ans =
    1
 {% endhighlight %}
 <p>This matters only for code that depends on the order of its input, and grain reconstruction does not - <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> returns the same grains whether it is handed the list or the map.</p>
-<h2 id="15">The Gradient</h2>
+<h2 id="22">The Gradient</h2>
 <p>The orientation gradient, the incomplete Nye tensor and the weighted Burgers vector are computed on the virtual lattice and therefore do not require a grid. A grid does not hurt either, so we simply continue with the map we already have - the result then comes back in the shape of the map.</p>
 {% highlight matlab %}
 gradX = ebsdMg.gradientX;
@@ -213,9 +283,9 @@ plot(ebsdMg,norm(gradX))
 setColorRange([0,4*degree])
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_03.png" %}
+{% include inline_image.html file="EBSDGrid_04.png" %}
 </center>
-<h2 id="16">Hexagonal Grids</h2>
+<h2 id="23">Hexagonal Grids</h2>
 <p>Nothing above is specific to square grids. Data measured on a hexagonal grid is imported as an <a href="EBSDhex.EBSDhex.html">EBSDhex</a> and indexed in exactly the same way</p>
 {% highlight matlab %}
 mtexdata copper silent
@@ -243,9 +313,9 @@ ebsd = EBSDhex (y↑→x)
 plot(ebsd(1:20,1:40),ebsd(1:20,1:40).orientations,'micronbar','off','edgeColor','black')
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_04.png" %}
+{% include inline_image.html file="EBSDGrid_05.png" %}
 </center>
-<h2 id="18">Switching from Hexagonal to Square Grid</h2>
+<h2 id="25">Switching from Hexagonal to Square Grid</h2>
 <p>Sometimes it is required to resample EBSD data measured on a hex grid onto a square grid. This can be accomplished by passing to the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> a square unit cell by the option <code class="language-plaintext highlighter-rouge">unitCell</code>.</p>
 {% highlight matlab %}
 % define a square unit cell
@@ -261,7 +331,7 @@ plot(ebsdS, ebsdS.orientations)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdS = EBSDsquare (y↑→x)
+ebsdS = EBSDsquare (y↑→x, row↑→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
     -1   137 (0.97%)  notIndexed          none                                   
@@ -274,7 +344,7 @@ ebsdS = EBSDsquare (y↑→x)
  Square grid  :118 x 120
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_05.png" %}
+{% include inline_image.html file="EBSDGrid_06.png" %}
 </center>
 <p>Note the difference to gridding a map onto its own lattice: a custom unit cell defines a grid the measurements do not lie on, so the values of the new pixels are interpolated from the nearest measurements - see <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a>. The resampled map is complete, but it can only be as good as its resolution allows. In the example above we have chosen the square unit cell to have approximately the same size as the hexagonal one, and since squares can not reproduce the shapes of hexagons the grain boundaries come out visibly stair cased. We reduce this by choosing the square unit cell significantly smaller than the hexagonal one.</p>
 {% highlight matlab %}
@@ -291,7 +361,7 @@ hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdS = EBSDsquare (y↑→x)
+ebsdS = EBSDsquare (y↑→x, row↑→col)
  
  Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
     -1   1311 (0.38%)  notIndexed          none                                   
@@ -304,10 +374,10 @@ ebsdS = EBSDsquare (y↑→x)
  Square grid  :586 x 594
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_06.png" %}
+{% include inline_image.html file="EBSDGrid_07.png" %}
 </center>
 <p>What is left not indexed in the resampled map are the pixels that were not indexed in the source map. Those may be interpolated as well, either by <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a>, which performs nearest neighbor interpolation, or by <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, which allows for more sophisticated methods - see <a href="EBSDFilling.html">Filling Missing Data</a>.</p>
-<h2 id="21">Rotated Grids</h2>
+<h2 id="28">Rotated Grids</h2>
 <p>Rotating a map rotates its unit cell along with the positions, so the grid survives the rotation and the map remains an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> or an <a href="EBSDhex.EBSDhex.html">EBSDhex</a>. There is nothing to repair and no data to interpolate.</p>
 {% highlight matlab %}
 ebsdR = rotate(ebsd,20*degree)
@@ -331,7 +401,7 @@ ebsdR = EBSDhex (y↑→x)
 plot(ebsdR,ebsdR.orientations)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_07.png" %}
+{% include inline_image.html file="EBSDGrid_08.png" %}
 </center>
 <p>The same holds if such data reaches MTEX as a plain list - <code class="language-plaintext highlighter-rouge">gridify</code> recovers the rotated lattice, it does not require an axis aligned one</p>
 {% highlight matlab %}
@@ -351,7 +421,7 @@ ans = EBSDhex (y↑→x)
  Normal vector: (0,0,1)
  Hex grid     :136 x 119
 {% endhighlight %}
-<h2 id="24">Robustness to Distorted (e.g. Trapezoidal) Grids</h2>
+<h2 id="31">Robustness to Distorted (e.g. Trapezoidal) Grids</h2>
 <p>Real EBSD stages sometimes drift smoothly during a scan rather than rotating rigidly. A common signature is a trapezoidal distortion: each scan row is stretched or compressed about the map centre by an amount that grows with the row's y position, so the same nominally rectangular map ends up narrower at one edge than at the other. MTEX reconstructs the underlying grid indices of an <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a> object robustly under this kind of smooth, non-rigid distortion - which matters for <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> above, but also for any operation that needs the map's grid structure internally, such as <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> or the <code class="language-plaintext highlighter-rouge">surf</code> plotting backend.</p>
 <p>We demonstrate this on a real map, rather than a small synthetic one, since the failure mode this guards against only becomes visible once the map is realistically wide - a small toy grid stays safe at distortion levels that already break a real, wide map.</p>
 {% highlight matlab %}
@@ -392,7 +462,7 @@ plot(ebsdDistorted('Di'),ebsdDistorted('Di').orientations)
 hold off
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_08.png" %}
+{% include inline_image.html file="EBSDGrid_09.png" %}
 </center>
 <p>Even though every row has now shifted by a different amount, MTEX recovers exactly the same grid indices as for the undistorted map</p>
 {% highlight matlab %}
@@ -448,7 +518,7 @@ grains = grain2d (y↑→x)
  19       1       36    (167°,98°,260°)   0.0083
 {% endhighlight %}
 <center>
-{% include inline_image.html file="EBSDGrid_09.png" %}
+{% include inline_image.html file="EBSDGrid_10.png" %}
 </center>
 </div>
 </body>

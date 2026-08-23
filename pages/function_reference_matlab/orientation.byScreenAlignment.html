@@ -1,0 +1,84 @@
+---
+title: "orientation.byScreenAlignment"
+
+sidebar: function_reference_sidebar
+permalink: orientation.byScreenAlignment.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>orientation.byScreenAlignment</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_orientation__byScreenAlignment.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/geometry/@orientation/byScreenAlignment.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>the orientation implied by two frames being aligned on screen</p>
+<p>Data in <code class="language-plaintext highlighter-rouge">frA</code> is drawn under <code class="language-plaintext highlighter-rouge">frA.how2plot</code> and data in <code class="language-plaintext highlighter-rouge">frB</code> under <code class="language-plaintext highlighter-rouge">frB.how2plot</code>. If the two were plotted and seen to coincide, that assertion pins the rotation between the frames: a point sitting at <code class="language-plaintext highlighter-rouge">v</code> in <code class="language-plaintext highlighter-rouge">frA</code> sits at <code class="language-plaintext highlighter-rouge">ori*v</code> in <code class="language-plaintext highlighter-rouge">frB</code>.</p>
+<p>This is an inference from a user assertion, not a geometric fact about the two bases. It reads <code class="language-plaintext highlighter-rouge">how2plot</code> and never touches <code class="language-plaintext highlighter-rouge">basis</code>, so it can be used to <b>establish</b> a basis - see <a href="gridLayout.assumedFor.html"><code class="language-plaintext highlighter-rouge">gridLayout.assumedFor</code></a>. Once a basis has been set from it, <a href="referenceFrame.transformationMatrix.html"><code class="language-plaintext highlighter-rouge">transformationMatrix</code></a> reproduces the same rotation from the bases alone, which is the invariant worth asserting in a test.</p>
+<h2 id="3">Description</h2>
+<p>A point at <code class="language-plaintext highlighter-rouge">v</code> renders at <code class="language-plaintext highlighter-rouge">inv(fr.how2plot.rot)*v</code> in screen coordinates. "Aligned on screen" is therefore</p>
+{% highlight matlab %}
+inv(frA.how2plot.rot) * vA == inv(frB.how2plot.rot) * vB
+{% endhighlight %}
+<p>which rearranges to <code class="language-plaintext highlighter-rouge">vB = frB.how2plot.rot * inv(frA.how2plot.rot) * vA</code>.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+ori = orientation.byScreenAlignment(imgFrame,specimenFrame.default)
+{% endhighlight %}
+
+{% highlight matlab %}
+ori.frameRight   % frA, the source
+ori.frameLeft    % frB, the target
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>frA</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a>, the source</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frB</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a>, the target</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ori</tt>
+         </td>
+         <td>
+            <tt><a href="orientation.orientation.html">orientation</a> taking coordinates in frA to coordinates in frB</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="gridLayout.html">gridLayout</a> <a href="referenceFrame.transformationMatrix.html">referenceFrame.transformationMatrix</a> <a href="plottingConvention.html">plottingConvention</a>
+</p>
+</div>
+</body>
+</html>
