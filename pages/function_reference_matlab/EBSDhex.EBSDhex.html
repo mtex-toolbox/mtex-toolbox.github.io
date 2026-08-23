@@ -24,10 +24,145 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>EBSD data on a hexagonal grid. In contrast to arbitrary EBSD data the values are stored in a matrix.</p>
+<p>Every second line of the matrix is staggered by half a step, so unlike on a square grid pos(i,j) is not an affine function of (i,j) and the conversion between matrix and lattice indices needs the parity.</p>
+<p>In practice this class is not constructed directly but by <a href="EBSD.gridify.html">gridify</a>.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-ebsd = EBSDhex(pos,rot,phaseId,phaseMap,CSList,dHex,isRowAlignment,varargin)
+ebsd = gridify(ebsd)
+ebsd = EBSDhex(pos,rot,phaseId,phaseMap,CSList,'unitCell',uC)
+ebsd = EBSDhex(pos,rot,phaseId,phaseMap,CSList,dHex,isRowAlignment)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, one per grid point</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rot</tt>
+         </td>
+         <td>
+            <tt><a href="rotation.rotation.html">rotation</a>, in matrix layout</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phaseId</tt>
+         </td>
+         <td>
+            <tt>phase as index to CSList</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phaseMap</tt>
+         </td>
+         <td>
+            <tt>convert between phase = phaseMap(phaseId)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CSList</tt>
+         </td>
+         <td>
+            <tt>cell list of <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>uC</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the measured unit cell</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dHex</tt>
+         </td>
+         <td>
+            <tt>circumradius of an axis aligned hexagonal cell</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isRowAlignment</tt>
+         </td>
+         <td>
+            <tt>do the matrix rows carry the stagger</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ebsd</tt>
+         </td>
+         <td>
+            <tt><a href="EBSDhex.EBSDhex.html">EBSDhex</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>dHex</tt>
+         </td>
+         <td>
+            <tt>circumradius of the hexagonal unit cell</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isRowAlignment</tt>
+         </td>
+         <td>
+            <tt>true if the matrix rows carry the parity stagger</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>offset</tt>
+         </td>
+         <td>
+            <tt>+/-1, which parity the first staggered line has</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dx</tt>
+         </td>
+         <td>
+            <tt>spacing along the dense direction</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>dy</tt>
+         </td>
+         <td>
+            <tt>spacing across it</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="EBSD.html">EBSD</a> <a href="EBSDgrid.html">EBSDgrid</a> <a href="EBSDsquare.html">EBSDsquare</a> <a href="EBSD.gridify.html">EBSD.gridify</a>
+</p>
 </div>
 </body>
 </html>

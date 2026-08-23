@@ -25,6 +25,126 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>a class representing a symmetric function on the sphere</p>
 <p>This is the one S2Fun that holds a symmetry - the abstract classes carry only a referenceFrame, which for a symmetrised function is the frame of its symmetry.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+sF = S2FunHarmonicSym(fhat,s)
+sF = S2FunHarmonicSym(fun,s)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fhat</tt>
+         </td>
+         <td>
+            <tt>harmonic coefficients, ordered by degree</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fun</tt>
+         </td>
+         <td>
+            <tt><a href="S2Fun.S2Fun.html">S2Fun</a> or <a href="S2Kernel.S2Kernel.html">S2Kernel</a> to be symmetrised</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>s</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> or <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>skipSymmetrise</tt>
+         </td>
+         <td>
+            <tt>take the coefficients as already symmetric</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>s</tt>
+         </td>
+         <td>
+            <tt>the <a href="symmetry.symmetry.html">symmetry</a>, and with it the <a href="referenceFrame.referenceFrame.html">referenceFrame</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS, SS</tt>
+         </td>
+         <td>
+            <tt>both refer to s</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fhat</tt>
+         </td>
+         <td>
+            <tt>harmonic coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>maximum harmonic degree</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>f(v) = f(-v)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+sF = S2FunHarmonic.quadrature(@(v) dot(v,vector3d.Z).^2);
+sF = S2FunHarmonicSym(sF,crystalSymmetry('432'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sF = S2FunHarmonicSym (432)
+  bandwidth: 128
+  antipodal: true
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="S2FunHarmonic.html">S2FunHarmonic</a> <a href="S2Fun.html">S2Fun</a>
+</p>
 </div>
 </body>
 </html>

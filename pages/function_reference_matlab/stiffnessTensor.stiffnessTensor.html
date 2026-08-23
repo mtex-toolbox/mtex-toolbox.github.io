@@ -23,11 +23,112 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>stiffnessTensor is a class. sT = stiffnessTensor(varargin)</p>
+<p>class representing the elastic stiffness tensor</p>
+<p>The stiffness tensor C is the rank 4 tensor relating stress and strain by sigma = C : epsilon. It is usually given as a 6x6 Voigt matrix, in GPa and without the factor of two of the double convention. The constructor warns if the matrix is not symmetric or not positive definite.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-sT = stiffnessTensor(varargin)
+C = stiffnessTensor(M,cs)
+C = stiffnessTensor(M,cs,'unit','GPa')
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>6x6 Voigt matrix or 3x3x3x3 array</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt>crystal <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>C</tt>
+         </td>
+         <td>
+            <tt><a href="stiffnessTensor.stiffnessTensor.html">stiffnessTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>unit</tt>
+         </td>
+         <td>
+            <tt>physical unit of the entries, GPa by default</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>always 4</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+cs = crystalSymmetry('m-3m');
+C = stiffnessTensor(diag([230 230 230 117 117 117]),cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+C = stiffnessTensor (crystal)
+  unit: GPa              
+  rank: 4 (3 x 3 x 3 x 3)
+ 
+  tensor in Voigt matrix representation:
+ 230   0   0   0   0   0
+   0 230   0   0   0   0
+   0   0 230   0   0   0
+   0   0   0 117   0   0
+   0   0   0   0 117   0
+   0   0   0   0   0 117
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="tensor.html">tensor</a> <a href="complianceTensor.html">complianceTensor</a>
+</p>
 </div>
 </body>
 </html>

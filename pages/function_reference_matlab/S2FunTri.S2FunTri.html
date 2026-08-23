@@ -23,7 +23,123 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>a class representing a function on the sphere</p>
+<p>a class representing a function on the sphere by values at grid points</p>
+<p>The function is given by its values at the vertices of a spherical triangulation and interpolated linearly in between. This is the representation used for measured data, e.g. a pole figure.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+sF = S2FunTri(nodes,values)
+sF = S2FunTri(nodes,values,s)
+sF = S2FunTri(fun)
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>nodes</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a> or <a href="S2Triangulation.S2Triangulation.html">S2Triangulation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>values</tt>
+         </td>
+         <td>
+            <tt>function value at each node</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>s</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the nodes are symmetrised with</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fun</tt>
+         </td>
+         <td>
+            <tt><a href="S2Fun.S2Fun.html">S2Fun</a> or @function_handle, sampled on an equispaced grid</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S2FunTri.S2FunTri.html">S2FunTri</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>tri</tt>
+         </td>
+         <td>
+            <tt><a href="S2Triangulation.S2Triangulation.html">S2Triangulation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>vertices</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the nodes of the triangulation</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>values</tt>
+         </td>
+         <td>
+            <tt>function value at each node</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>f(v) = f(-v)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isReal</tt>
+         </td>
+         <td>
+            <tt>the function takes only real values</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+v = equispacedS2Grid('resolution',5*degree);
+sF = S2FunTri(v,dot(v,vector3d.Z))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sF = S2FunTri (y↓→x)
+  vertices: 1652 x 1
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="S2Fun.html">S2Fun</a> <a href="S2FunHarmonic.html">S2FunHarmonic</a> <a href="S2Triangulation.html">S2Triangulation</a>
+</p>
 </div>
 </body>
 </html>

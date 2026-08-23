@@ -1,0 +1,123 @@
+---
+title: "remapShifted"
+
+sidebar: function_reference_sidebar
+permalink: remapShifted.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>remapShifted</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_remapShifted.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/tools/registration_tools/remapShifted.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>resample an image in the shifted frame of its registration partner</p>
+<h2 id="3">Description</h2>
+<p>Every pixel of img sits at pos and is measured to belong at pos + s, so the value at pos itself has to be interpolated from neighbours. The two backends answer that from opposite ends.</p>
+<p>'scattered' takes the forward route: it treats the displaced pixels as a point cloud, triangulates it, and asks for the nearest one to each grid point. That is O(n log n) to build and a tree search per query, and both halves get slower than linearly as the image grows.</p>
+<p>'inverse' takes the backward route. The displacement field is smooth by construction - it is whatever the distortion model fitted, an affine, a spline along the slow scan direction or a homography - so p -&gt; p + s(p) is invertible and its inverse can be found per pixel by the fixed point iteration q &lt;- p - s(q), evaluating s on the regular grid it is stored on. Three or four passes converge to well under a hundredth of a pixel for the displacement magnitudes registration deals with. Sampling img at q is then a plain index, so the whole thing is O(n) with no triangulation.</p>
+<p>The two agree on all but a few pixels in ten thousand - ties in the nearest neighbour lookup fall differently - and 'inverse' keeps a slightly wider border, because 'scattered' returns NaN outside the convex hull of the displaced points while 'inverse' returns NaN outside the image.</p>
+<p>If the fixed point iteration does not settle, the mapping is not invertible on this grid, which means the fitted distortion folds the image over itself. That is a broken registration rather than a hard case, so it warns and falls back to 'scattered' rather than returning a wrong answer.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+imgOut = remapShifted(pos,shifts,img,'test2ref')
+imgOut = remapShifted(pos,shifts,img,'ref2test','backend','scattered')
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>pos</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, position of every pixel, r*c</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>shifts</tt>
+         </td>
+         <td>
+            <tt><a href="pairShifts.pairShifts.html">pairShifts</a>, the displacement field to apply, in um. Anything with xShiftsMap and yShiftsMap fields will do, which is how undistort passes a displacement accumulated over several hops without having to fabricate a <a href="pairShifts.pairShifts.html">pairShifts</a> for it.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>img</tt>
+         </td>
+         <td>
+            <tt>r*c*z numeric, image values. Every channel is resampled through one mapping, so stacking things that travel together</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt/>
+         </td>
+         <td>
+            <tt>image channels and an <a href="EBSD.EBSD.html">EBSD</a> id map, say - is cheaper than calling this once each.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>shiftdir</tt>
+         </td>
+         <td>
+            <tt>'test2ref' to add the shifts, 'ref2test' to subtract them</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>imgOut</tt>
+         </td>
+         <td>
+            <tt>img resampled on pos, same r*c*z, NaN where pos falls outside the shifted image</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>'backend', 'inverse'</tt>
+         </td>
+         <td>
+            <tt>invert the displacement field and sample the image on a regular grid (default)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>'backend', 'scattered'</tt>
+         </td>
+         <td>
+            <tt>scatter the shifted pixels and rebuild with scatteredInterpolant, as TrueEBSD &lt;= 2.1.0 did</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="calcDistortion.html">calcDistortion</a> <a href="undistort.html">undistort</a> <a href="pairShifts.html">pairShifts</a>
+</p>
+</div>
+</body>
+</html>

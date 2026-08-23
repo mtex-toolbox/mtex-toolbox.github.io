@@ -25,16 +25,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>load pole figure data from (theta,rho,intensity) files</p>
 <h2 id="3">Description</h2>
-<p>
-<b>loadPoleFigure_generic</b> is a generic function that reads any txt files of diffraction intensities that are of the following format</p>
-<pre>theta_1 rho_1 intensity_1
-theta_2 rho_2 intensity_2
-theta_3 rho_3 intensity_3
-.      .       .
-.      .       .
-.      .       .
-theta_M rho_M intensity_M</pre>
-<p>The actual order of the columns in the file can be specified by the options <code class="language-plaintext highlighter-rouge">ColumnNames</code> and <code class="language-plaintext highlighter-rouge">Columns</code>. Furthermore, the files can be contain any number of header lines to be ignored using the option <code class="language-plaintext highlighter-rouge">HEADER</code>.</p>
+<p>Without <code class="language-plaintext highlighter-rouge">h</code> the crystal direction is guessed from the file name, which only works if the file is named after its reflection. A name that carries any other number, e.g. a measurement id as in <code class="language-plaintext highlighter-rouge">110F-Creuz426sym.sum</code>, may be read as a superposition of several crystal directions and give a pole figure that cannot be inverted. Pass the direction whenever the file name is not purely the reflection.</p>
 <h2 id="4">Syntax</h2>
 {% highlight matlab %}
 [pf,varargin] = loadPoleFigure_generic(fname,varargin)
@@ -48,6 +39,14 @@ theta_M rho_M intensity_M</pre>
          </td>
          <td>
             <tt>file name (text files only)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>h</tt>
+         </td>
+         <td>
+            <tt><a href="Miller.Miller.html">Miller</a> crystal direction (optional)</tt>
          </td>
       </tr>
    </table>
@@ -111,7 +110,21 @@ pf = PoleFigure (y↓→x)
  
   h = (111), r = 2120 x 1 points
 {% endhighlight %}
-<h2 id="8">See also</h2>
+<p>state the crystal direction instead of guessing it from the file name</p>
+{% highlight matlab %}
+cs = crystalSymmetry('m-3m');
+pf = loadPoleFigure_generic(fname,Miller(1,1,1,cs),'HEADER',21,'degree',...
+'ColumnNames',{'polar angle','azimuth angle','intensity'},...
+'Columns',[1 2 3])
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (y↓→x)
+  crystal symmetry : m-3m
+ 
+  h = (111), r = 2120 x 1 points
+{% endhighlight %}
+<h2 id="9">See also</h2>
 <p>
 <a href="ImportPoleFigureData.html">ImportPoleFigureData</a> <a href="loadPoleFigure.html">loadPoleFigure</a>
 </p>

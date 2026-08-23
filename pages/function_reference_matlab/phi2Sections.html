@@ -24,8 +24,10 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>phi2 sections for ODF and orientation plotting</p>
+<p>Sections of constant Bunge Euler angle phi2, with Phi and phi1 as the polar and azimuthal coordinate within a section. The classical way of presenting a rolling texture.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
+oS = phi2Sections(cs1,cs2)
 oS = phi2Sections(cs1,cs2,'sections',5)
 oS = phi2Sections(cs1,cs2,'phi2',(0:15:90)*degree)
 {% endhighlight %}
@@ -61,7 +63,86 @@ oS = phi2Sections(cs1,cs2,'phi2',(0:15:90)*degree)
             <tt>explicit section values</tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>secResolution</tt>
+         </td>
+         <td>
+            <tt>spacing between the sections</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxPhi</tt>
+         </td>
+         <td>
+            <tt>restrict the Phi range</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxphi1</tt>
+         </td>
+         <td>
+            <tt>restrict the phi1 range</tt>
+         </td>
+      </tr>
    </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>phi2</tt>
+         </td>
+         <td>
+            <tt>the value of each section</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>maxphi2</tt>
+         </td>
+         <td>
+            <tt>the phi2 period of the symmetry pair</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>sR</tt>
+         </td>
+         <td>
+            <tt><a href="sphericalRegion.sphericalRegion.html">sphericalRegion</a> each section is plotted on</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+mtexdata dubna
+odf = calcODF(pf,'silent');
+plotSection(odf,'phi2')
+{% endhighlight %}
+
+{% highlight plaintext %}
+pf = PoleFigure (y↓→x)
+  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
+ 
+  h = (022̅1), r = 72 x 19 points
+  h = (101̅0), r = 72 x 19 points
+  h = (101̅1)(011̅1), r = 72 x 19 points
+  h = (101̅2), r = 72 x 19 points
+  h = (112̅0), r = 72 x 19 points
+  h = (112̅1), r = 72 x 19 points
+  h = (112̅2), r = 72 x 19 points
+{% endhighlight %}
+<center>
+{% include inline_image.html file="phi2Sections_01.png" %}
+</center>
+<h2 id="8">See also</h2>
+<p>
+<a href="ODFSections.html">ODFSections</a> <a href="phi1Sections.html">phi1Sections</a> <a href="PhiSections.html">PhiSections</a> <a href="sigmaSections.html">sigmaSections</a>
 </p>
 </div>
 </body>

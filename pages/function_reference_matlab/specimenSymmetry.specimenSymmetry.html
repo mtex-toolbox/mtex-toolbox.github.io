@@ -24,11 +24,123 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>defines a specimen symmetry</p>
-<p>usually specimen symmetry is either triclinic or orthorhombic</p>
+<p>Usually specimen symmetry is either triclinic or orthorhombic - the latter for a rolled sheet, where the sample is symmetric with respect to the rolling and the transverse direction. Unlike a <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> it carries no lattice, only the group and the specimen <a href="referenceFrame.referenceFrame.html">referenceFrame</a>.</p>
+<p>Passing a reference frame gives the trivial group carrying that frame, which is how a plotting convention or a <a href="gridLayout.gridLayout.html">gridLayout</a> enters an <a href="orientation.orientation.html">orientation</a>, see ADR 0003.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-s = specimenSymmetry(varargin)
+ss = specimenSymmetry
+ss = specimenSymmetry('mmm')
+ss = specimenSymmetry('orthorhombic')
+ss = specimenSymmetry(pC)
+ss = specimenSymmetry(frame)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>name</tt>
+         </td>
+         <td>
+            <tt>Schoenflies or International notation of the point group</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pC</tt>
+         </td>
+         <td>
+            <tt><a href="plottingConvention.html">plottingConvention</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frame</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a> to be carried by the trivial group</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ss</tt>
+         </td>
+         <td>
+            <tt><a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>id</tt>
+         </td>
+         <td>
+            <tt>point group id</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pointGroup</tt>
+         </td>
+         <td>
+            <tt>international notation of the point group</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>lattice</tt>
+         </td>
+         <td>
+            <tt>lattice type</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rot</tt>
+         </td>
+         <td>
+            <tt>the symmetry elements as <a href="rotation.rotation.html">rotation</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frame</tt>
+         </td>
+         <td>
+            <tt>the specimen <a href="referenceFrame.referenceFrame.html">referenceFrame</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>how2plot</tt>
+         </td>
+         <td>
+            <tt><a href="plottingConvention.html">plottingConvention</a>, read only</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+ss = specimenSymmetry('mmm')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ss = orthorhombic specimenSymmetry (y↓→x)
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="symmetry.html">symmetry</a> <a href="crystalSymmetry.html">crystalSymmetry</a> <a href="specimenFrame.html">specimenFrame</a>
+</p>
 </div>
 </body>
 </html>

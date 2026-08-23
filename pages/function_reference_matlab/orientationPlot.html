@@ -23,28 +23,178 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>ODFSECTIONS</p>
-<h2 id="3">Example</h2>
+<p>an abstract class representing 3d plots of orientation space</p>
+<p>Where an <a href="ODFSections.ODFSections.html">ODFSections</a> slices orientation space, an orientationPlot maps all of it into one three dimensional axes. A deriving class only says how an orientation becomes a point - the fundamental region boundary, the axes and the labels are handled here.</p>
+<p>Such a plot is not constructed directly but selected by a flag of <a href="orientation.plot.html">plot</a>, see newOrientationPlot.</p>
+<h2 id="3">Syntax</h2>
 {% highlight matlab %}
-cs = crystalSymmetry('mmm');
-oS = axisAngleSections(cs,cs);
-ori = oS.makeGrid('resolution',2*degree);
-oM = PatalaColorKey(cs,cs);
-rgb = oM.orientation2color(ori);
-plot(oS,rgb,'surf')
-%
-hold on
-ori = orientation.rand(100,cs,cs)
-plot(oS,ori)
+plot(ori,'axisAngle')
+plot(ori,'Rodrigues')
+plot(ori,'Bunge','ignoreFundamentalRegion')
 {% endhighlight %}
-
-{% highlight plaintext %}
-ori = misorientation (mmm → mmm)
-  size: 100 x 1
-{% endhighlight %}
-<center>
-{% include inline_image.html file="orientationPlot_01.png" %}
-</center>
+<h2 id="4">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>ignoreFundamentalRegion</tt>
+         </td>
+         <td>
+            <tt>plot orientations as they are</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>project2FundamentalRegion</tt>
+         </td>
+         <td>
+            <tt>project into the fundamental region, default</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>restrict2FundamentalRegion</tt>
+         </td>
+         <td>
+            <tt>drop orientations outside it</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>noBoundary</tt>
+         </td>
+         <td>
+            <tt>do not plot the boundary</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>CS1, CS2</tt>
+         </td>
+         <td>
+            <tt>the two <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS, SS</tt>
+         </td>
+         <td>
+            <tt>crystal and specimen <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ax</tt>
+         </td>
+         <td>
+            <tt>the axes handle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>grain exchange symmetry</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fRMode</tt>
+         </td>
+         <td>
+            <tt>how orientations outside the fundamental region are treated</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>plotGrid</tt>
+         </td>
+         <td>
+            <tt>the grid the plot is evaluated on</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>gridSize</tt>
+         </td>
+         <td>
+            <tt>size of that grid</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Derived Classes</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt><a href="axisAnglePlot.html">axisAnglePlot</a></tt>
+         </td>
+         <td>
+            <tt>axis times angle</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="RodriguesPlot.html">RodriguesPlot</a></tt>
+         </td>
+         <td>
+            <tt>axis times tan(angle/2)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="homochoricPlot.html">homochoricPlot</a></tt>
+         </td>
+         <td>
+            <tt>volume preserving ball</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="cubochoricPlot.html">cubochoricPlot</a></tt>
+         </td>
+         <td>
+            <tt>volume preserving cube</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="quaternionPlot.html">quaternionPlot</a></tt>
+         </td>
+         <td>
+            <tt>axis times sin(angle/2)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="conformalPlot.html">conformalPlot</a></tt>
+         </td>
+         <td>
+            <tt>axis times 2*tan(angle/4)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt><a href="BungePlot.html">BungePlot</a></tt>
+         </td>
+         <td>
+            <tt>the Euler angle box</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="newOrientationPlot.html">newOrientationPlot</a> <a href="ODFSections.html">ODFSections</a> <a href="orientation.plot.html">orientation.plot</a>
+</p>
 </div>
 </body>
 </html>

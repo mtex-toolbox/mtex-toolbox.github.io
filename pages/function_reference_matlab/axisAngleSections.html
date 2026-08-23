@@ -23,11 +23,136 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>defines an axis angle section</p>
+<p>sections of constant rotational angle for ODF and orientation plotting</p>
+<p>Every section is the axis sector belonging to one misorientation angle, so an orientation is placed at its rotational axis. Since that sector shrinks with the angle, the axes are rescaled by default to keep equal orientation volumes comparable.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-oS = axisAngleSections(varargin)
+oS = axisAngleSections(cs1,cs2)
+oS = axisAngleSections(cs1,cs2,'sections',5)
+oS = axisAngleSections(cs1,cs2,'axisAngle',(10:20:180)*degree)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cs1, cs2</tt>
+         </td>
+         <td>
+            <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a>, <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sections</tt>
+         </td>
+         <td>
+            <tt>number of sections</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>axisAngle</tt>
+         </td>
+         <td>
+            <tt>explicit section values</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>volumeScaling</tt>
+         </td>
+         <td>
+            <tt>rescale the axes by the volume of the section</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>grain exchange symmetry</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>angles</tt>
+         </td>
+         <td>
+            <tt>the rotational angle of each section</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>axesSectors</tt>
+         </td>
+         <td>
+            <tt>the axis sector of each section</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>jointCS</tt>
+         </td>
+         <td>
+            <tt>the joint proper <a href="symmetry.symmetry.html">symmetry</a> of cs1 and cs2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>oR</tt>
+         </td>
+         <td>
+            <tt><a href="orientationRegion.orientationRegion.html">orientationRegion</a> of cs1 and cs2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>volumeScaling</tt>
+         </td>
+         <td>
+            <tt>rescale the axes by the volume of the section</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+cs = crystalSymmetry('432');
+oS = axisAngleSections(cs,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+oS = 
+  axisAngleSections with properties:
+
+           angles: [0.0873 0.2618 0.4363 0.6109 0.7854 0.9599]
+      axesSectors: {1×6 cell}
+          jointCS: [1×1 crystalSymmetry]
+               oR: [1×1 orientationRegion]
+    volumeScaling: 1
+              CS1: [1×1 crystalSymmetry]
+              CS2: [1×1 crystalSymmetry]
+              tol: 0.0831
+         plotGrid: []
+         gridSize: []
+               CS: [1×1 crystalSymmetry]
+               SS: [1×1 crystalSymmetry]
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="ODFSections.html">ODFSections</a> <a href="sigmaSections.html">sigmaSections</a> <a href="SO3Fun.plotSection.html">SO3Fun.plotSection</a>
+</p>
 </div>
 </body>
 </html>

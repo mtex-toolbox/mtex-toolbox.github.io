@@ -24,10 +24,199 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>class representing 3 dimensional grains</p>
+<p>A grain3d is a list of polyhedra, given by the incidence matrix I_GF between grains and the boundary faces of a <a href="grain3Boundary.grain3Boundary.html">grain3Boundary</a>. It is what <a href="EBSD3.calcGrains.html">calcGrains</a> returns for volume data, and the three dimensional counterpart of <a href="grain2d.grain2d.html">grain2d</a>.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-grains = grain3d(V, F, I_GF, ori, CSList, phaseList)
+grains = calcGrains(ebsd3)
+grains = grain3d(V,F,I_GF,ori,CSList,phaseList)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>V</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt>faces, as a cell array or an n x 3 array</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>I_GF</tt>
+         </td>
+         <td>
+            <tt>incidence matrix grains x faces, -1 for an inward normal</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ori</tt>
+         </td>
+         <td>
+            <tt>mean <a href="orientation.orientation.html">orientation</a> of each grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CSList</tt>
+         </td>
+         <td>
+            <tt>cell list of <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phaseList</tt>
+         </td>
+         <td>
+            <tt>phase of each grain</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>grains</tt>
+         </td>
+         <td>
+            <tt><a href="grain3d.grain3d.html">grain3d</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>id</tt>
+         </td>
+         <td>
+            <tt>unique identifier of each grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>boundary</tt>
+         </td>
+         <td>
+            <tt><a href="grain3Boundary.grain3Boundary.html">grain3Boundary</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>I_GF</tt>
+         </td>
+         <td>
+            <tt>incidence matrix grains x faces</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>numPixel</tt>
+         </td>
+         <td>
+            <tt>number of measurements per grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>numFaces</tt>
+         </td>
+         <td>
+            <tt>number of boundary faces per grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>V, allV</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt>the faces</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>meanOrientation</tt>
+         </td>
+         <td>
+            <tt>mean <a href="orientation.orientation.html">orientation</a> of each grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>extent</tt>
+         </td>
+         <td>
+            <tt>bounding box of each grain</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>midPoint</tt>
+         </td>
+         <td>
+            <tt>center of the bounding box</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CSList</tt>
+         </td>
+         <td>
+            <tt>cell list of <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phaseId</tt>
+         </td>
+         <td>
+            <tt>phase of each grain as entry of CSList</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>frame</tt>
+         </td>
+         <td>
+            <tt>the specimen <a href="referenceFrame.referenceFrame.html">referenceFrame</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>how2plot</tt>
+         </td>
+         <td>
+            <tt><a href="plottingConvention.html">plottingConvention</a>, read only</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="grain2d.html">grain2d</a> <a href="grain3Boundary.html">grain3Boundary</a> <a href="EBSD3.html">EBSD3</a> <a href="EBSD3.calcGrains.html">EBSD3.calcGrains</a>
+</p>
 </div>
 </body>
 </html>

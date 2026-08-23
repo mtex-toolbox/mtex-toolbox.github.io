@@ -23,11 +23,93 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>strainRateTensor is the symmetric part of a velocity gradient tensor</p>
+<p>class representing a strain rate tensor</p>
+<p>The strain rate tensor is the symmetric part of a <a href="velocityGradientTensor.velocityGradientTensor.html">velocityGradientTensor</a>. Whatever matrix is passed in, the constructor keeps only that symmetric part.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-E = strainRateTensor(varargin)
+E = strainRateTensor(M)
+E = strainRateTensor(L)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>3x3 matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>L</tt>
+         </td>
+         <td>
+            <tt><a href="velocityGradientTensor.velocityGradientTensor.html">velocityGradientTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>E</tt>
+         </td>
+         <td>
+            <tt><a href="strainRateTensor.strainRateTensor.html">strainRateTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>always 2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+E = strainRateTensor(velocityGradientTensor.uniaxial(vector3d.Z,1))
+{% endhighlight %}
+
+{% highlight plaintext %}
+E = strainRateTensor (y↓→x)
+  rank: 2 (3 x 3)
+ 
+  0  0  0
+  0 -1  0
+  0  0  1
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="tensor.html">tensor</a> <a href="velocityGradientTensor.html">velocityGradientTensor</a> <a href="strainTensor.html">strainTensor</a>
+</p>
 </div>
 </body>
 </html>

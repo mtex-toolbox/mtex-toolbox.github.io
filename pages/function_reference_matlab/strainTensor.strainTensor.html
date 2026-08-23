@@ -23,11 +23,116 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>strainTensor is a class. sT = strainTensor(varargin)</p>
+<p>class representing a strain tensor</p>
+<p>The strain tensor is the symmetric rank 2 tensor describing a finite deformation. Depending on whether it is referred to the undeformed or the deformed configuration it is of type Lagrange, the default, or of type Euler. The constructor warns if the matrix is not symmetric.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-sT = strainTensor(varargin)
+eps = strainTensor(M)
+eps = strainTensor(M,cs)
+eps = strainTensor(M,'type','Euler')
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>3x3 matrix</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>cs</tt>
+         </td>
+         <td>
+            <tt>crystal <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>eps</tt>
+         </td>
+         <td>
+            <tt><a href="strainTensor.strainTensor.html">strainTensor</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>type</tt>
+         </td>
+         <td>
+            <tt>'Lagrange' or 'Euler'</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>M</tt>
+         </td>
+         <td>
+            <tt>the tensor coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rank</tt>
+         </td>
+         <td>
+            <tt>always 2</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>type</tt>
+         </td>
+         <td>
+            <tt>'Lagrange' or 'Euler', read only</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt><a href="symmetry.symmetry.html">symmetry</a> the coefficients refer to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+eps = strainTensor(diag([1 0 -1]))
+{% endhighlight %}
+
+{% highlight plaintext %}
+eps = strainTensor (y↓→x)
+  type: Lagrange 
+  rank: 2 (3 x 3)
+ 
+  1  0  0
+  0  0  0
+  0  0 -1
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="tensor.html">tensor</a> <a href="strainRateTensor.html">strainRateTensor</a> <a href="stressTensor.html">stressTensor</a>
+</p>
 </div>
 </body>
 </html>

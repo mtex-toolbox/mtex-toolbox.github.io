@@ -23,11 +23,127 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>spectralTransmissionColorKey is a class. oM = spectralTransmissionColorKey(rI, thickness, varargin)</p>
+<p>computes the thin section color of an anisotropic crystal</p>
+<p>Simulates a polarization microscope: light of the given propagation direction passes polarizer, crystal and analyzer, and the transmitted spectrum is converted to RGB. That makes the color a function of the orientation, the sample thickness and the optical setup.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-oM = spectralTransmissionColorKey(rI,thickness,varargin)
+oM = spectralTransmissionColorKey(rI,thickness)
+oM.propagationDirection = vector3d.Z;
+rgb = oM.orientation2color(ori)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>rI</tt>
+         </td>
+         <td>
+            <tt><a href="refractiveIndexTensor.refractiveIndexTensor.html">refractiveIndexTensor</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>thickness</tt>
+         </td>
+         <td>
+            <tt>thickness of the sample in nm</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>ori</tt>
+         </td>
+         <td>
+            <tt><a href="orientation.orientation.html">orientation</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>oM</tt>
+         </td>
+         <td>
+            <tt><a href="spectralTransmissionColorKey.html">spectralTransmissionColorKey</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>rgb</tt>
+         </td>
+         <td>
+            <tt>list of RGB triplets</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>rI</tt>
+         </td>
+         <td>
+            <tt><a href="refractiveIndexTensor.refractiveIndexTensor.html">refractiveIndexTensor</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>thickness</tt>
+         </td>
+         <td>
+            <tt>thickness of the sample</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>propagationDirection</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, direction of the light</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>polarizer</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, direction of the polarizer</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>phi</tt>
+         </td>
+         <td>
+            <tt>angle between polarizer and analyzer</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
+{% highlight matlab %}
+rI = refractiveIndexTensor.calcite;
+oM = spectralTransmissionColorKey(rI,30000)
+{% endhighlight %}
+
+{% highlight plaintext %}
+oM = spectralTransmissionColorKey (Calcite → y↓→x)
+ 
+  thickness            : 30000  
+  propagation          : (0,0,1)
+  polarizer            : (1,0,0)
+  polarizer to analyzer: 90°
+{% endhighlight %}
+<h2 id="8">See also</h2>
+<p>
+<a href="orientationColorKey.html">orientationColorKey</a> <a href="refractiveIndexTensor.html">refractiveIndexTensor</a> <a href="tensor.spectralTransmission.html">tensor.spectralTransmission</a>
+</p>
 </div>
 </body>
 </html>

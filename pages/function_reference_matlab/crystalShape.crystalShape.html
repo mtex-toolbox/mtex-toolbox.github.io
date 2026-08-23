@@ -26,11 +26,149 @@ To make changes, update the MATLAB code and republish this document.
 <p>a class representing crystal shapes.</p>
 <p>The code of this class is based on the paper</p>
 <p>Enderlein, J., 1997. A package for displaying crystal morphology. Mathematica Journal, 7(1).</p>
+<p>A crystal shape is defined by a list of face normals. The faces are placed at a distance given by the length of their normal and the polyhedron is the intersection of the corresponding half spaces, so scaling a normal moves its face and can make it disappear entirely.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
+cS = crystalShape(N)
 cS = crystalShape(N,habitus,extension)
+cS = crystalShape.hex(cs)
 {% endhighlight %}
-<h2 id="4">Example</h2>
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>N</tt>
+         </td>
+         <td>
+            <tt><a href="Miller.Miller.html">Miller</a>, the face normals</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>habitus</tt>
+         </td>
+         <td>
+            <tt>how visible mixed hkl faces are, 0 switches it off</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>extension</tt>
+         </td>
+         <td>
+            <tt>[a b c], distance of the faces depending on hkl</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>cS</tt>
+         </td>
+         <td>
+            <tt><a href="crystalShape.crystalShape.html">crystalShape</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>N</tt>
+         </td>
+         <td>
+            <tt><a href="Miller.Miller.html">Miller</a>, the face normals</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>V</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>F</tt>
+         </td>
+         <td>
+            <tt>the faces as indices into V</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>E</tt>
+         </td>
+         <td>
+            <tt>the edges</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>habitus</tt>
+         </td>
+         <td>
+            <tt>how visible mixed hkl faces are</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>extension</tt>
+         </td>
+         <td>
+            <tt>distance of the faces depending on hkl</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>CS</tt>
+         </td>
+         <td>
+            <tt>crystal <a href="symmetry.symmetry.html">symmetry</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>diameter</tt>
+         </td>
+         <td>
+            <tt>largest distance between two vertices</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>faceArea</tt>
+         </td>
+         <td>
+            <tt>area of each face</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>faceCenter</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, center of each face</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>volume</tt>
+         </td>
+         <td>
+            <tt>volume of the polyhedron</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
 {% highlight matlab %}
 mtexdata titanium;
 cS = crystalShape.hex(ebsd.CS)
@@ -59,6 +197,10 @@ cS = crystalShape
 <center>
 {% include inline_image.html file="crystalShape.crystalShape_01.png" %}
 </center>
+<h2 id="8">See also</h2>
+<p>
+<a href="CrystalShapes.html">CrystalShapes</a> <a href="Miller.html">Miller</a>
+</p>
 </div>
 </body>
 </html>
