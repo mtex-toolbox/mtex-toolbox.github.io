@@ -23,7 +23,52 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>KuwaharaFilter is a class. F = KuwaharaFilter(varargin)</p>
+<p>edge preserving mean over the most homogeneous subwindow</p>
+<p>Of the four quadrants of the window around a pixel, the one with the smallest orientation spread wins and its mean is taken. That keeps a boundary sharp, since the quadrant across it is never the quietest one. Not yet fully supported on hexagonal grids.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+F = KuwaharaFilter
+F = KuwaharaFilter('neighbours',2)
+ebsd = smooth(ebsd,F)
+{% endhighlight %}
+<h2 id="4">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>neighbours</tt>
+         </td>
+         <td>
+            <tt>radius of the window in pixel, 1 by default</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>numNeighbours</tt>
+         </td>
+         <td>
+            <tt>radius of the window in pixel</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isHex</tt>
+         </td>
+         <td>
+            <tt>is the map on a hexagonal grid</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="EBSDFilter.html">EBSDFilter</a> <a href="EBSD.smooth.html">EBSD.smooth</a> <a href="medianFilter.html">medianFilter</a> <a href="halfQuadraticFilter.html">halfQuadraticFilter</a>
+</p>
 </div>
 </body>
 </html>

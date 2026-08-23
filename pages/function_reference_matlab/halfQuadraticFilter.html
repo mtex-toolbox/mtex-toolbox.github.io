@@ -24,6 +24,86 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>haldQuadraticFilter uses the techniques elaborated half-quadratic minimization on manifolds to denoise EBSD data. For further details of the algorithm see: R. Bergmann, R. H. Chan, R. Hielscher, J. Persch, G. Steidl Restoration of Manifold-Valued Images by Half-Quadratic Minimization. Preprint, ArXiv #1505.07029. (2015)</p>
+<p>With the l1 norms switched on the filter keeps sharp steps, so a subgrain boundary survives the smoothing instead of being blurred away.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+F = halfQuadraticFilter
+F.alpha = 0.5;
+ebsd = smooth(ebsd,F)
+{% endhighlight %}
+<h2 id="4">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>alpha</tt>
+         </td>
+         <td>
+            <tt>regularization parameter, larger means smoother</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>l1DataFit</tt>
+         </td>
+         <td>
+            <tt>use the l1 norm for data fitting</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>l1TV</tt>
+         </td>
+         <td>
+            <tt>use the l1 norm for regularization</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>iterMax</tt>
+         </td>
+         <td>
+            <tt>maximum number of iterations</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>tol</tt>
+         </td>
+         <td>
+            <tt>stopping criterion of the gradient descent</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>eps</tt>
+         </td>
+         <td>
+            <tt>l1 relaxation parameter</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>threshold</tt>
+         </td>
+         <td>
+            <tt>threshold for subgrain boundaries</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isHex</tt>
+         </td>
+         <td>
+            <tt>is the map on a hexagonal grid</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">See also</h2>
+<p>
+<a href="EBSDFilter.html">EBSDFilter</a> <a href="EBSD.smooth.html">EBSD.smooth</a> <a href="l1TVFilter.html">l1TVFilter</a> <a href="infimalConvolutionFilter.html">infimalConvolutionFilter</a>
+</p>
 </div>
 </body>
 </html>
