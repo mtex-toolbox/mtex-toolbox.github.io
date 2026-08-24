@@ -10,6 +10,15 @@ so the browser downloads it once and reuses it across pages.
 Takes the sidebar name as `sbname` -- site.data.sidebars[sbname]. No "active"
 class is emitted here: the fragment is shared by every page, so the current
 page is marked client side in sidebar.html instead.
+
+Folder and subfolder titles link to their own page rather than to "#". Those
+pages exist -- a chapter landing page, a class index page -- and the url is in
+the sidebar data, but it used to be discarded here, which left 17 of the 20
+documentation chapters reachable only by typing their address. navgoco does
+not need "#" to drive the accordion: it toggles only when the href is absent,
+empty or "#", and otherwise updates the accordion state and lets the browser
+follow the link (see _trigger in jquery.navgoco.min.js). Entries genuinely
+without a page still get "#" and still toggle.
 {% endcomment %}
 {% assign sidebar = site.data.sidebars[include.sbname].entries %}
 <li class="sidebarTitle">{{sidebar[0].product}} {{sidebar[0].version}}</li>
@@ -17,7 +26,7 @@ page is marked client side in sidebar.html instead.
 {% for folder in entry.folders %}
 {% if folder.output contains "web" %}
 <li>
-    <a class="no_icon" href="#">{{ folder.title }}</a>
+    <a class="no_icon" href="{% if folder.url %}{{ folder.url | remove: "/" }}{% else %}#{% endif %}">{{ folder.title }}</a>
     <ul>
         {% for folderitem in folder.folderitems %}
         {% if folderitem.output contains "web" %}
@@ -29,7 +38,7 @@ page is marked client side in sidebar.html instead.
         {% for subfolders in folderitem.subfolders %}
         {% if subfolders.output contains "web" %}
         <li class="subfolders">
-            <a class="no_icon" href="#">{{ subfolders.title }}</a>
+            <a class="no_icon" href="{% if subfolders.url %}{{ subfolders.url | remove: "/" }}{% else %}#{% endif %}">{{ subfolders.title }}</a>
             <ul>
                 {% for subfolderitem in subfolders.subfolderitems %}
                 {% if subfolderitem.output contains "web" %}
