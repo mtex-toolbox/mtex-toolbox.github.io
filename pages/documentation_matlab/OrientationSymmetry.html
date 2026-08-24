@@ -138,6 +138,16 @@ ans = orientation (6 → y↓→x (112))
   156.958 161.468 137.878
   336.958 161.468 137.878
 {% endhighlight %}
+<p>The consequence is visible in any pole figure. One orientation and one crystal direction give not one pole but a whole set of them, because the lattice cannot tell its symmetrically equivalent settings apart.</p>
+{% highlight matlab %}
+h = Miller(1,0,0,cs);
+
+plotPDF(ori,h,'MarkerSize',10,'figSize','small')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationSymmetry_01.png" %}
+</center>
+<p>Every dot is the same physical direction of the same crystal. Which of them you happen to compute is an accident of how the orientation was written down, which is why every comparison in MTEX takes all of them into account.</p>
 <p>For specific orientations, e.g. for the cube orientations, symmetrisation leads to multiple identical orientations. This can be prevented by passing the option <code class="language-plaintext highlighter-rouge">unique</code> to the command <a href="orientation.symmetrise.html">symmetrise</a>
 </p>
 {% highlight matlab %}
@@ -157,7 +167,7 @@ ans = orientation (6 → y↓→x (112))
     60    0    0
      0    0    0
 {% endhighlight %}
-<h2 id="7">Crystal symmetries in computations</h2>
+<h2 id="9">Crystal symmetries in computations</h2>
 <p>Note that all operation on orientations are preformed taking all symmetrically equivalent orientations into account. As an example consider the angle between a random orientation and all orientations symmetrically equivalent to the goss orientation</p>
 {% highlight matlab %}
 ori = orientation.rand(cs);

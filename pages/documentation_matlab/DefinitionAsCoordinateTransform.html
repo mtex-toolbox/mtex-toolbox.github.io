@@ -87,6 +87,19 @@ r = vector3d (y↓→x)
      x      y      z
   3.09  -2.59 -0.395
 {% endhighlight %}
+<p>This is the whole idea in one picture. The crystal is drawn where the orientation <code class="language-plaintext highlighter-rouge">ori</code> puts it, the black arrows are the specimen axes X, Y and Z, and the red arrow is the crystal direction <code class="language-plaintext highlighter-rouge">h</code> expressed in specimen coordinates. The direction is fixed in the lattice; what the orientation supplies is where the lattice is pointing.</p>
+{% highlight matlab %}
+cS = crystalShape.cube(cs);
+
+plot(ori * cS,'faceAlpha',0.35,'faceColor',[0.6 0.75 0.9])
+hold on
+arrow3d(1.3*normalize(vector3d(r)),'faceColor','red')
+arrow3d(1.6*[vector3d.X,vector3d.Y,vector3d.Z],'faceColor','black')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="DefinitionAsCoordinateTransform_01.png" %}
+</center>
 <p>Similarly, orientations transform tensors given with respect to the crystal reference frame, e.g., the following single crystal stiffness tensor</p>
 {% highlight matlab %}
 C = stiffnessTensor(...
@@ -152,7 +165,7 @@ ans = stiffnessTensor (y↓→x)
 </li>
 </ul>
 </div>
-<h2 id="10">Specimen coordinates into crystal coordinates</h2>
+<h2 id="11">Specimen coordinates into crystal coordinates</h2>
 <p>Conversely, we can go back from specimen coordinates to crystal coordinates by multiplying with the inverse orientation</p>
 {% highlight matlab %}
 inv(ori) * r
@@ -164,7 +177,7 @@ ans = Miller (Aluminum)
   16.3991       0       0
 {% endhighlight %}
 <p>Note, that in literature orientations are often defined to transform specimen coordinates into crystal coordinates, i.e., to coincide with the inverse orientations in MTEX. The consequences of this differences are exhaustively discussed in the topic <a href="MTEXvsBungeConvention.html">orientation conventions</a>.</p>
-<h2 id="12">Specimen Rotation</h2>
+<h2 id="13">Specimen Rotation</h2>
 <p>Rotations of the specimen ,i.e., changing the specimen reference frame, do also change the orientation. Assume the specimen is rotated about the X-axis about 60 degree. We may define this rotation by</p>
 {% highlight matlab %}
 rot = rotation.byAxisAngle(vector3d.X,60*degree);

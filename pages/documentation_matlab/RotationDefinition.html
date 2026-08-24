@@ -232,6 +232,20 @@ ans = vector3d (y↓→x)
 ans =
    30.0000
 {% endhighlight %}
+<p>Drawn, that is all a rotation is: an axis, and everything else swung about it. The blue arrow is the axis, the grey arrow a direction before the rotation and the red arrow the same direction afterwards.</p>
+{% highlight matlab %}
+v = normalize(vector3d(0.2,0.3,1));
+
+arrow3d(1.5*rot.axis,'faceColor','blue')
+hold on
+arrow3d(1.2*v,'faceColor',[.45 .45 .45])
+arrow3d(1.2*(rot*v),'faceColor','red')
+hold off
+axis off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RotationDefinition_01.png" %}
+</center>
 <p>Closely related to the axis angle parametrization of a rotation is the Rodriguez Frank vector.</p>
 {% highlight matlab %}
 R = rot.Rodrigues
@@ -263,7 +277,7 @@ ans = rotation
   phi1  Phi phi2
      0   30    0
 {% endhighlight %}
-<h2 id="10">Rotation Matrix</h2>
+<h2 id="11">Rotation Matrix</h2>
 <p>Another common way to represent rotations is by 3x3 matrices. The column of such a rotation matrix coincide with the new positions of the x, y and z vector after the rotation. For a given rotation we may compute the matrix by</p>
 {% highlight matlab %}
 M = rot.matrix
@@ -287,7 +301,7 @@ rot = rotation
   phi1  Phi phi2
      0   30    0
 {% endhighlight %}
-<h2 id="12">Four vectors defining a rotation</h2>
+<h2 id="13">Four vectors defining a rotation</h2>
 <p>Another useful method to define a rotation is by describing how in acts on two given directions. More precisely, given four vectors <code class="language-plaintext highlighter-rouge">u1</code>, <code class="language-plaintext highlighter-rouge">v1</code>, <code class="language-plaintext highlighter-rouge">u2</code>, <code class="language-plaintext highlighter-rouge">v2</code> there is a unique rotation <code class="language-plaintext highlighter-rouge">rot</code> such that <code class="language-plaintext highlighter-rouge">rot * u1 = v1</code> and <code class="language-plaintext highlighter-rouge">rot * u2 = v2</code>. E.g., to find the rotation the maps the x-axis onto the y-axis and keeps the z-axis we do</p>
 {% highlight matlab %}
 u1 = vector3d.X;
@@ -338,7 +352,7 @@ ans = rotation
      phi1     Phi    phi2
   182.717 92.0857 177.089
 {% endhighlight %}
-<h2 id="15">Random Rotations</h2>
+<h2 id="16">Random Rotations</h2>
 <p>MTEX offers several ways for generating random rotations. The most easiest way is to use the command <a href="rotation.rand.html"><code class="language-plaintext highlighter-rouge">rotation.rand</code></a> which generates an arbitrary number of random rotations</p>
 {% highlight matlab %}
 rotation.rand(100)
@@ -349,7 +363,7 @@ ans = rotation
   size: 100 x 1
 {% endhighlight %}
 <p>If you are interested in random rotations that follow a certain distribution have a look at <a href="RandomSampling.html">random sampling</a>.</p>
-<h2 id="17">Quaternions</h2>
+<h2 id="18">Quaternions</h2>
 <p>A last possibility to define a rotation is by <a href="quaternion.quaternion.html">quaternion coordinates</a> a, b, c, d.</p>
 {% highlight matlab %}
 q = quaternion(1,0,0,0)

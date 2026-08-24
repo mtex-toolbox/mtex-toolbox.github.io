@@ -72,18 +72,30 @@ ori = orientation (Copper → y↓→x)
 <h2 id="4">Miller indices</h2>
 <p>Another common way to specify an orientation is by the crystal directions point towards the specimen directions Z and X. This can be done by the command <a href="orientation.byMiller.html"><code class="language-plaintext highlighter-rouge">orientation.byMiller</code></a>. E.g. in order to define the GOSS orientation (011)[100] we can write</p>
 {% highlight matlab %}
-orientation.byMiller([0 1 1],[1 0 0],cs)
+ori = orientation.byMiller([0 1 1],[1 0 0],cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (Copper → y↓→x)
+ori = orientation (Copper → y↓→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
      0   45    0
 {% endhighlight %}
+<p>That definition says the (011) plane faces Z and the [100] direction points along X, and a pole figure shows exactly that: the (011) pole sits at the centre, where Z is, and the [100] pole on the X axis at the rim.</p>
+{% highlight matlab %}
+plotPDF(ori,[Miller(0,1,1,cs),Miller(1,0,0,cs,'uvw')],'MarkerSize',10,...
+  'figSize','small')
+{% endhighlight %}
+
+{% highlight plaintext %}
+Warning: Miller indices are converted to hkl
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationDefinition_01.png" %}
+</center>
 <p>Note that MTEX comes already with a long list of <a href="OrientationStandard.html">predefined orientations</a>.</p>
-<h2 id="6">Random Orientations</h2>
+<h2 id="7">Random Orientations</h2>
 <p>To simulate random orientations we may apply the same syntax as for rotations and write</p>
 {% highlight matlab %}
 ori = orientation.rand(100,cs)
@@ -93,7 +105,7 @@ ori = orientation.rand(100,cs)
 ori = orientation (Copper → y↓→x)
   size: 100 x 1
 {% endhighlight %}
-<h2 id="7">Specimen Symmetry</h2>
+<h2 id="8">Specimen Symmetry</h2>
 <p>If one needs to consider also specimen symmetry this can be defined as a variable of type <a href="specimenSymmetry.specimenSymmetry.html"><code class="language-plaintext highlighter-rouge">specimenSymmetry</code></a> and passed as an additional argument to all commands discussed above, e.g.,</p>
 {% highlight matlab %}
 % define orthotropic specimen symmetry

@@ -156,7 +156,16 @@ C = tensor (y↓→x)
    0   0   0   0   0  64
 {% endhighlight %}
 <p>Note the repetition in values in this matrix is related to crystal symmetry, in this case, a cubic example, where only \(C_{11}\), \(C_{12}\) and \(C_{44}\) are independent components.</p>
-<h2 id="9">Specific tensors</h2>
+<p>What those numbers mean is easier to see than to read. Interpreted as a stiffness, this tensor gives the stiffness of a rod cut from the crystal in every possible direction.</p>
+{% highlight matlab %}
+plot(stiffnessTensor(C).YoungsModulus,'complete','upper')
+mtexColorbar('title','Young''s modulus')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="TensorDefinition_01.png" %}
+</center>
+<p>Stiffest along the cube axes and softest along the body diagonals - 307 against 167 in whatever unit the matrix was given in - and the four-fold pattern is the cubic symmetry made visible. A tensor has to be invariant under every symmetry operation of its phase, which is what reduces the 81 components of a fourth rank tensor to the three independent ones above.</p>
+<h2 id="11">Specific tensors</h2>
 <p>MTEX includes specific classes for the following tensors.</p>
 <p>
    <table class="usertable">
@@ -398,7 +407,7 @@ e = stressTensor (y↓→x)
  0 0 1
 {% endhighlight %}
 <p>The advantage of using these specific tensor classes is that some tensor operations like <a href="stressTensor.calcShearStress.html"><code class="language-plaintext highlighter-rouge">calcShearStress(e)</code></a> are defined only for specific tensor classes.</p>
-<h2 id="12">Predefined tensors</h2>
+<h2 id="14">Predefined tensors</h2>
 <p>For certain applications, one may want to have a tensor where all the components are 1. In MTEX this is computed as</p>
 {% highlight matlab %}
 t = tensor.ones('rank',2)
