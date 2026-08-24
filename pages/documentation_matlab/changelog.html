@@ -22,121 +22,43 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>What is new in each release. The technical detail behind these changes - what was wrong, what it was measured against, which issue it closes - is in <code class="language-plaintext highlighter-rouge">CHANGELOG.md</code> in the MTEX folder.</p>
 <!--/introduction-->
-<h2 id="1">MTEX develop - New Features</h2>
+<h2 id="1">MTEX develop</h2>
+<p>
+<b>Aligning Maps and Images of the Same Area</b>
+</p>
+<p>An electron image and an EBSD map of the same area rarely overlay: the map is taken at a tilt and drifts as it scans. MTEX corrects that now. Hand the TrueEBSD workflow a sequence of pictures, the most distorted first and the undistorted image last, and it puts them all on one grid, so every image becomes a property of the map:</p>
+{% highlight matlab %}
+job = trueEbsd2([mapImage(ebsd.bc,ebsd), mapImage(bse,'dxy',0.05)]);
+job.pixelSizeMatch
+job.calcDistortion
+job.undistort
+{% endhighlight %}
+<p>The pieces it is built from are useful on their own. A <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> is a raster that knows which part of the specimen each pixel covers, a <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> is a distortion that composes and inverts like a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a>, <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a> cross correlates two images tile by tile, and <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> takes a <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a>, so a map can be stored in the same array order as the image it is to be compared with.</p>
+<p>See <a href="EBSDMapsAndImages.html">Maps and Images</a>, <a href="EBSDSpatialTransform.html">Spatial Transforms</a> and <a href="EBSDTrueEbsd.html">TrueEBSD</a>. The method is by Tong et al., <a href="https://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>.</p>
 <p>
 <b>EBSD Export That Keeps the File</b>
 </p>
-<p>Exporting to HDF5 no longer writes a bare MTEX layout that throws away everything a vendor stores. <a href="exportEBSD_h5.html"><code class="language-plaintext highlighter-rouge">exportEBSD_h5</code></a> copies the file the data was imported from and writes only the changed data into the copy, so the result is still a file of the vendor's own format - patterns, acquisition settings and all the rest are passed through untouched, and properties MTEX computed are added next to the ones the file brought along.</p>
+<p>Exporting to HDF5 copies the file the data was imported from and writes only the changed data into the copy, so the result is still a file of the vendor's own format - patterns, acquisition settings and all the rest are passed through untouched, and what MTEX computed is added beside them:</p>
 {% highlight matlab %}
 ebsd = EBSD.load('myfile.h5oina')
 ebsd = ebsd.denoise(halfQuadraticFilter)
 export(ebsd,'denoised.h5oina')
 {% endhighlight %}
 <p>
-<code class="language-plaintext highlighter-rouge">EBSD.load</code> remembers the file and the data sets it read in <code class="language-plaintext highlighter-rouge">ebsd.opt.h5</code>; a different reference file may be named by <code class="language-plaintext highlighter-rouge">'reference'</code>. MTEX's own flat layout, and the <code class="language-plaintext highlighter-rouge">'standalone'</code> flag that wrote it, are gone - nothing could read it back, so a <code class="language-plaintext highlighter-rouge">.mat</code> file is the way to carry a map between MTEX sessions. Changes to the phase list - a renamed mineral, a corrected lattice parameter - are written back into the phase header as well. Verified against Bruker, EDAX (.oh5 and .edaxh5), EMSphInx, Oxford and ThermoFisher files.</p>
-<p>The text exporters are now interfaces like the loaders they mirror - <a href="exportEBSD_ang.html"><code class="language-plaintext highlighter-rouge">exportEBSD_ang</code></a> and <a href="exportEBSD_ctf.html"><code class="language-plaintext highlighter-rouge">exportEBSD_ctf</code></a>, with <code class="language-plaintext highlighter-rouge">export_ang</code> and <code class="language-plaintext highlighter-rouge">export_ctf</code> kept as wrappers - and they take the header of the imported file along, so an import/export cycle no longer replaces the acquisition parameters by zeros.</p>
-<h2 id="2">MTEX develop - Technical Changes</h2>
-<p>
-<b>Reference Frames</b>
+<b>Edit a Phase While You Import It</b>
 </p>
-<div>
-<ul>
-<li>a <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> accepted any reference frame, including a <a href="specimenFrame.specimenFrame.html">specimenFrame</a> - and since the crystal axes are read straight off <code class="language-plaintext highlighter-rouge">frame.basis</code>, that replaced the lattice by the identity without a word. Such an assignment raises <code class="language-plaintext highlighter-rouge">MTEX:wrongFrameClass</code> now. To give a crystal symmetry a plotting convention of its own, fork its frame: <code class="language-plaintext highlighter-rouge">fr = crystalFrame(cs.axes,'name',cs.mineral)</code>, set <code class="language-plaintext highlighter-rouge">fr.how2plot</code> and assign that</li>
-<li> <a href="plotS2Grid.html"><code class="language-plaintext highlighter-rouge">plotS2Grid</code></a> takes a <a href="referenceFrame.referenceFrame.html">referenceFrame</a> and returns directions of that frame, e.g. <code class="language-plaintext highlighter-rouge">plotS2Grid('upper',cs.frame)</code> for a grid of crystal directions. Which hemisphere is the upper one is then decided by the crystal frame instead of the session convention, and the result needs no <code class="language-plaintext highlighter-rouge">Miller(v,cs)</code> cast to be used as a crystal direction</li>
-<li> <a href="slipSystem.SchmidFactor.html"><code class="language-plaintext highlighter-rouge">SchmidFactor</code></a> no longer warns about a tension direction that states no reference frame, such as <code class="language-plaintext highlighter-rouge">vector3d.Z</code> or a plain plotting grid - only a direction or stress tensor that names a frame contradicting the one of the slip systems does</li>
-</ul>
-</div>
+<p>The phase table of the <a href="matlab:import_wizard">import wizard</a> carries the whole crystal symmetry: point group, lattice parameters and the alignment of the crystal axes are edited in place, next to the mineral name and the colour, and the plots follow the edit. So a file that states an incomplete or a wrong crystallography is corrected before the map is imported rather than afterwards.</p>
 <p>
-<b>EBSD Export</b>
+<b>Fewer Orientations for the Same Accuracy</b>
 </p>
-<div>
-<ul>
-<li>neither the ang nor the ctf exporter undid the Euler angle correction its loader applies, so importing an exported map turned it by 180 degree. An import/export cycle now reproduces the angles of the original file</li>
-<li>the .ang phase block stated symmetry codes 132 to 137 for the monoclinic and orthorhombic alignment variants. EDAX numbers only 32 point groups, so those codes were read back as space group ids and a monoclinic phase came back as tetragonal, failing the import with "a and b must be equal". The Laue code and the point group id are written now</li>
-<li>exporting a hexagonal map to .ang dropped the last column of every scan row, whether or not it held measurements, and stated NCOLS_ODD/NCOLS_EVEN accordingly. The cells that carry no measurement are told apart from the ones that do now, and a full hexagonal map exports and imports unchanged</li>
-<li>the ctf exporter renumbered phases by a loop that tested phase 1 rather than the phase it was about to renumber, and derived the grid from <code class="language-plaintext highlighter-rouge">unique</code> of the coordinates. Phases are written as Channel numbers them, 1 to N in the order of the phase table with 0 for not indexed</li>
-<li>the ang and ctf exporters state the column layout they write (<code class="language-plaintext highlighter-rouge">VERSION</code> for .ang), so the importer no longer has to guess it</li>
-</ul>
-</div>
+<p> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> and its spherical sibling now move their points by L-BFGS rather than by gradient descent, which is about an order of magnitude faster to the same discrepancy, and optimize the weights in the same iteration. See <a href="S2FunSampling.html">Sampling a Spherical Function</a> and <a href="RandomSampling.html">Random Sampling</a>.</p>
 <p>
-<b>Plotting</b>
+<b>A Guided Documentation</b>
 </p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">plotSection(mdf,'axisAngle','Sections',6)</code> is between one and a half and two times faster, the wider margin on an otherwise idle machine. The time went to three places, none of them the data: the bounding circles of a region were drawn with 8641 points each, purely so that clipping them would not visibly cut a corner - they are sampled at a degree now, all circles of a region at once, and the end of every arc is bisected onto the boundary, which is both cheaper and more accurate. <code class="language-plaintext highlighter-rouge">orientationRegion</code> rebuilt the sector of rotational axes for every candidate vertex, although it is needed only for the ones at 180 degree. And <a href="symmetry.fundamentalRegion.html"><code class="language-plaintext highlighter-rouge">fundamentalRegion</code></a> now remembers the regions it computed - keyed on the rotations, the lattice, the convention and the mineral of both symmetries, never on the point group id, so two differently aligned symmetries of the same class cannot be confused</li>
-<li>an axis angle section coloured area outside the sector it draws, and left area inside it white. The reason is that a spherical region is bounded by small circles, so the polar angles belonging to a fixed azimuth angle need not form a single interval - close to the maximum misorientation angle the axis sector is cut open at its corners and eventually falls apart into separate caps, for the point groups <code class="language-plaintext highlighter-rouge">m-3</code>, <code class="language-plaintext highlighter-rouge">23</code> and <code class="language-plaintext highlighter-rouge">mmm</code>. <a href="plotS2Grid.html"><code class="language-plaintext highlighter-rouge">plotS2Grid</code></a> kept the bounding box of such a region and punched NaN holes into it, which a surface survives but <code class="language-plaintext highlighter-rouge">contourf</code> does not - it draws straight across the gap. The grid is now assembled from strips that have one interval per grid line, swept along whichever of the two angles gives fewer of them, and each strip is contoured on its own. This is <a href="https://github.com/mtex-toolbox/mtex/issues/209">issue #209</a>. The two new methods <a href="sphericalRegion.thetaIntervals.html"><code class="language-plaintext highlighter-rouge">thetaIntervals</code></a> and <a href="sphericalRegion.rhoIntervals.html"><code class="language-plaintext highlighter-rouge">rhoIntervals</code></a> return the components, where <code class="language-plaintext highlighter-rouge">thetaRange</code> returns only their hull. Both solve for the crossings with the bounding circles in closed form, where <code class="language-plaintext highlighter-rouge">thetaRange</code> used to walk a discretisation of ten thousand polar angles per grid line - a spherical plotting grid is built about four times faster now, and its boundary is exact rather than snapped to that discretisation. As a further side effect the grid of a disconnected region is no longer padded out to the bounding box, so a narrow sector costs a fraction of the points it used to</li>
-<li>a three dimensional spherical plot, <code class="language-plaintext highlighter-rouge">plot(sF,'3d')</code> and friends, ignored the plotting convention it was given whenever that convention happened to equal the session default - the whole of the pristine x-east / y-down / z-into-screen alignment - and used its own tilted camera instead. It told a convention the caller had passed from the one its callers append for their own data by comparing values; the two are marked apart now, so a convention handed in is always honoured</li>
-<li>a small circle drawn on a plot that covers both hemispheres went into whichever of the two axes happened to be current - the lower one, even for a cone around an axis in the upper hemisphere - and the part of it that crossed the equator was clipped away at the rim instead of being continued in the other half. An upper and a lower hemisphere are two axes but one plot, and they know about each other now, so <code class="language-plaintext highlighter-rouge">circle</code>, markers, labels and everything else added with <code class="language-plaintext highlighter-rouge">hold on</code> reaches both of them, each showing the part that falls into its hemisphere. Drawing the two halves by hand, one <code class="language-plaintext highlighter-rouge">'upper'</code> and one <code class="language-plaintext highlighter-rouge">'lower'</code> plot per hemisphere, is no longer necessary. This is <a href="https://github.com/mtex-toolbox/mtex/issues/330">issue #330</a>. Passing <code class="language-plaintext highlighter-rouge">'upper'</code> and <code class="language-plaintext highlighter-rouge">'lower'</code> together gave a single hemisphere as well, fewer axes than passing neither - it now means the same as asking for both</li>
-</ul>
-</div>
-<p>
-<b>Orientation Gradients, Curvature and GND</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">log(ori,ori_ref)</code> in the left tangent space did not reduce the pair by crystal symmetry, while <code class="language-plaintext highlighter-rouge">angle(ori,ori_ref)</code> always did. A left tangent vector is <code class="language-plaintext highlighter-rouge">ori * inv(ori_ref)</code>, and the symmetry acts between the two factors - the equally valid representatives are <code class="language-plaintext highlighter-rouge">ori * s * inv(ori_ref)</code> - so once the product is formed it can no longer be reduced, and the pair has to be reduced first. It was not, so two neighbouring pixels stored as different symmetric representatives of their orientations - which is a property of the file, not of the material - came back as a rotation of up to 180 degree instead of the fraction of a degree that really separates them. Every <code class="language-plaintext highlighter-rouge">EBSD.gradient</code>, <code class="language-plaintext highlighter-rouge">gradientX/Y/Z</code>, <code class="language-plaintext highlighter-rouge">curvature</code>, <code class="language-plaintext highlighter-rouge">calcGND</code> and <code class="language-plaintext highlighter-rouge">WBV</code> number inherited that. This is <a href="https://github.com/mtex-toolbox/mtex/issues/194">issue #194</a>, open since 2016; @ThomasChauve's reading of Pantleon 2005 was right all along.</li>
-</ul>
-</div>
-<p>
-<b>Numbers move.</b> The affected pixels are not rare: of the neighbour pairs in the shipped datasets 1.7 percent (forsterite), 5.8 percent (csl), 7.0 percent (twins) and 62 percent (titanium) were computed from an overstated misorientation. Denoising a map with <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a> rewrites the orientations of a grain consistently and hides the effect, which is why the GND and WBV example sheets - both of which denoise before they compute - are unchanged, to 3e-6 percent and bit for bit respectively. Without denoising they are not: the weighted Burgers vector of the undenoised <code class="language-plaintext highlighter-rouge">single</code> dataset had a mean norm of 15.7 against the 0.127 it has now, on all three stencils.</p>
-<p>
-<b>Points On A Grain Boundary</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">insidepoly</code>, the fast point in polygon engine MTEX uses in place of MATLAB's <code class="language-plaintext highlighter-rouge">inpolygon</code>, reported points sitting exactly on a grain boundary as off it - but only ever on one side of a map, the side with the largest x. The engine brackets each edge by a half open interval in x, which is what makes the crossing count right where two edges meet, and it used that same bracket for the on-boundary test. A vertex that is a local maximum in x is the excluded end of both edges meeting there, so no edge ever looked at a point sitting exactly on it. The bracket is closed for the on test now and stays half open for the crossing count. On the map of <a href="https://github.com/mtex-toolbox/mtex/issues/2527">issue #2527</a> this made 504 of the queried boundary points come back wrong, and <code class="language-plaintext highlighter-rouge">grains.isOuterBoundary</code> found 110 boundary grains instead of 147</li>
-</ul>
-</div>
-<div>
-<ul>
-<li> <a href="grain2d.isOuterBoundary.html"><code class="language-plaintext highlighter-rouge">isOuterBoundary</code></a> no longer asks that question at all. The envelope it lays around the map is spanned by vertices of the grains themselves, so which grain it touches is a matter of vertex identity and is read off the polygons directly - exact, faster, and independent of how a point lying on a boundary is classified</li>
-</ul>
-</div>
-<p>
-<b>Plasticity</b>
-</p>
-<div>
-<ul>
-<li>there is no <code class="language-plaintext highlighter-rouge">slipSystem.hcp</code> and there will not be one: which slip and twinning systems carry the deformation of a hexagonal material, and at which critical resolved shear stress, is a property of the material and the experiment rather than of the lattice. The placeholder that used to warn and then return nothing - which made <code class="language-plaintext highlighter-rouge">dislocationSystem.hcp</code> fail with "Output argument sS not assigned" - now raises an error that lists every predefined hexagonal family, <code class="language-plaintext highlighter-rouge">slipSystem.basal</code>, <code class="language-plaintext highlighter-rouge">slipSystem.prismaticA</code>, <code class="language-plaintext highlighter-rouge">slipSystem.pyramidalCA</code> and the rest, with the Miller indices of each, so the set can be put together on the spot</li>
-<li>
-<code class="language-plaintext highlighter-rouge">slipSystem/SchmidFactor</code> checked the reference frames in one direction only: it caught a specimen stress tensor against crystal slip systems, but not a crystal tensor against slip systems already rotated into specimen coordinates by <code class="language-plaintext highlighter-rouge">ori * sS</code> - that combination silently returned a Schmid factor computed across two frames. The tension direction syntax <code class="language-plaintext highlighter-rouge">sS.SchmidFactor(r)</code> checked nothing at all, so the very same computation warned or stayed silent depending on whether it was written as a direction or as a uniaxial stress tensor. Both branches now apply the same test, and the warning carries the identifier <code class="language-plaintext highlighter-rouge">MTEX:frameMismatch</code> so it can be switched off. A crystal direction has to be stated as a <a href="Miller.Miller.html">Miller</a>, since a plain <a href="vector3d.vector3d.html">vector3d</a> is taken to be a specimen direction</li>
-</ul>
-</div>
-<p>
-<b>VPSC Files</b>
-</p>
-<div>
-<ul>
-<li>a VPSC texture file is now recognised by its fourth header line - the Euler angle convention and the number of orientations - instead of by the string <code class="language-plaintext highlighter-rouge">TEXTURE AT STRAIN</code> on the first. Only VPSC <b>output</b> carries that marker, so the weight (<code class="language-plaintext highlighter-rouge">.wts</code>) files that are handed to VPSC, and the files <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> itself writes, were both rejected as "Interface VPSC does not fit file format!". Reading back what MTEX exported now works</li>
-<li>the convention letter is honoured rather than assumed: a file announcing Kocks (<code class="language-plaintext highlighter-rouge">K</code>) or Roe (<code class="language-plaintext highlighter-rouge">R</code>) angles is read in that convention instead of being silently treated as Bunge. <code class="language-plaintext highlighter-rouge">export_VPSC</code> likewise writes the letter that matches the angles it wrote, and defaults to Bunge rather than to the <code class="language-plaintext highlighter-rouge">EulerAngleConvention</code> preference, which may be one VPSC cannot express</li>
-</ul>
-</div>
-<p>
-<b>Fundamental Regions</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">orientationRegion/checkInside</code> tested whether its two symmetries are trivial by comparing them against a freshly constructed <code class="language-plaintext highlighter-rouge">crystalSymmetry</code>, i.e. it built a symmetry object on every call only to throw it away. <code class="language-plaintext highlighter-rouge">orientationRegion/cleanUp</code> calls it a few hundred times, so this was the bulk of <code class="language-plaintext highlighter-rouge">fundamentalRegion(cs,cs)</code> - and an axis angle section plot builds the fundamental region twice. The comparison object is built once now; <code class="language-plaintext highlighter-rouge">fundamentalRegion</code> is about three times faster and returns bit identical regions</li>
-</ul>
-</div>
-<p>
-<b>Axis Distributions</b>
-</p>
-<div>
-<ul>
-<li> <a href="SO3Fun.calcAxisDistribution.html"><code class="language-plaintext highlighter-rouge">calcAxisDistribution</code></a> takes <code class="language-plaintext highlighter-rouge">'minAngle'</code> and <code class="language-plaintext highlighter-rouge">'maxAngle'</code>, so the axis distribution can be restricted to the rotations an axis angle section shows rather than always covering the whole fundamental region. It works the same way on an ODF, on an MDF, on a <a href="symmetry.symmetry.html">symmetry</a> and on an <a href="orientationRegion.orientationRegion.html">orientationRegion</a>, and passes through <code class="language-plaintext highlighter-rouge">plotAxisDistribution</code> and <code class="language-plaintext highlighter-rouge">calcAxisVolume</code>
-</li>
-</ul>
-</div>
-{% highlight matlab %}
-adf = calcAxisDistribution(mdf,'minAngle',20*degree,'maxAngle',40*degree)
-{% endhighlight %}
-<h2 id="3">MTEX 7.0 08/2026 - New Features</h2>
+<p>Every chapter of the documentation opens with a page that says what the chapter is for and where to start, there is a <a href="Glossary.html">glossary</a> and a <a href="NotationAndConventions.html">notation page</a>, and the <a href="Documentation.html">front page</a> is a visual index. The class diagrams are generated from the sources now, so they cannot go stale.</p>
+<h2 id="2">MTEX 7.0 08/2026</h2>
 <p>This is the first release that uses AI. This allowed us to implement many long lasting ideas.</p>
 <p>
 <b>Grain Reconstruction</b>
@@ -210,369 +132,7 @@ odf  = calcODFIterative(pf,'halfwidth',5*degree)
 t = odf.grad(ori); right(t)   % t knows ori, no second argument needed
 {% endhighlight %}
 <p>What used to be a multivariate function is now a <a href="SO3FunVectorValued.html">vector valued</a> function and arrays of them are handled like any other MATLAB array.</p>
-<h2 id="4">MTEX 7.0 08/2026 - Technical Changes</h2>
-<p>
-<b>Grain Reconstruction</b>
-</p>
-<p> <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> covers small grain removal, alpha shapes and gridded as well as arbitrarily placed data in a single call. Its second output replaces the previous <code class="language-plaintext highlighter-rouge">ebsd.grainId = ...</code> assignment and marks pixels belonging to no grain - not indexed or removed by <code class="language-plaintext highlighter-rouge">'minPixel'</code> - by <code class="language-plaintext highlighter-rouge">grainId == 0</code>. All boundary criteria are objects of type <a href="grainBoundaryCriterion.html">grainBoundaryCriterion</a> (<code class="language-plaintext highlighter-rouge">gbcAngle</code>, <code class="language-plaintext highlighter-rouge">gbcSoft</code>, <code class="language-plaintext highlighter-rouge">gbcFMC</code>, <code class="language-plaintext highlighter-rouge">gbcVariants</code>, <code class="language-plaintext highlighter-rouge">gbcCustom</code>), so any per pixel property may be segmented and every phase may get a threshold of its own</p>
-{% highlight matlab %}
-grains = calcGrains(ebsd,'angle',{10*degree,15*degree}) % one per phase
-grains = calcGrains(ebsd,gbcCustom(ebsd.bc,10))  % segment by band contrast
-grains = calcGrains(ebsd,'soft')                 % a soft threshold
-{% endhighlight %}
-<p>Fast multiscale clustering <a href="gbcFMC.gbcFMC.html">gbcFMC</a> - the criterion for deformed material where no single threshold angle works - has been rewritten. It judges two clusters by their misorientation against their own internal spread, fits a lattice curvature so that a bent grain is not mistaken for a scattered one, and clusters each phase separately, which lifts the adjusted Rand index on a benchmark of deformed maps from 0.84 to 0.96 at a third of the runtime. Note that <code class="language-plaintext highlighter-rouge">calcGrains(ebsd,'fmc',cmaha)</code> used to fall back to angle thresholding without saying so</p>
-{% highlight matlab %}
-grains = calcGrains(ebsd,'fmc',0.5,'minPixel',10,'verbose')
-{% endhighlight %}
-<p>The new data set <code class="language-plaintext highlighter-rouge">mtexdata EMSphinx</code> illustrates this in <a href="GrainReconstruction.html">Grain Reconstruction</a>. <a href="GrainReconstructionAdvanced.html">Advanced Grain Reconstruction</a> shows how to write a criterion of your own, <a href="GrainReconstructionMCL.html">Markovian Clustering</a> the second way of turning one into grains. Two new commands complete the picture</p>
-<div>
-<ul>
-<li> <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> estimates the distribution of grain boundary normals, in specimen or in crystal coordinates, 2d and 3d</li>
-<li> <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> detects grains split by pseudo symmetric indexing - by the tortuosity of the separating boundary - and reassigns the affected pixels</li>
-</ul>
-</div>
-{% highlight matlab %}
-gbnd = calcGBND(grains.boundary('Fo','Fo'),ebsd('Fo'),'halfwidth',10*degree)
-gbcd = calcGBND(gB,grains('Fo'),moriRef)   % for a fixed misorientation
-gbnd = calcGBND(grains3.boundary)          % 3d, specimen coordinates
-[ebsd,grains] = cleanUpPseudoSym(ebsd,grains,mori,'threshold',1.5)
-{% endhighlight %}
-<p>
-<b>Grain Boundaries in Walk Order</b>
-</p>
-<p>The segments of a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> are not an unordered list anymore. They are sorted into chains - maximal runs of segments joined at vertices where exactly two segments meet - so that consecutive segments share a vertex. Any other vertex is a junction and terminates a chain. Each chain occupies a contiguous block of rows and is oriented such that the grain in <code class="language-plaintext highlighter-rouge">gB.grainId(:,1)</code> lies to the left of the walk direction</p>
-{% highlight matlab %}
-gB = grains.boundary
-gB.chainId, gB.chainSize, gB.isChainStart, gB.isChainEnd, gB.isClosed
-gB.arcLength, gB.chainLength   % length along and of the chain
-gB.chainV                      % vertex ids, chains separated by NaN
-{% endhighlight %}
-<p>This is what allows to coarsen or to refine a boundary as a curve instead of as a bag of segments. All of the following keep the junctions exactly where they are, so which grains touch, and where, is unchanged</p>
-<div>
-<ul>
-<li> <a href="grain2d.simplifyBoundary.html"><code class="language-plaintext highlighter-rouge">simplifyBoundary(grains,epsilon)</code></a> drops every vertex whose removal moves the boundary by less than <code class="language-plaintext highlighter-rouge">epsilon</code> - Douglas Peucker on each chain - which turns the pixel staircase into the straight line it approximates</li>
-<li> <a href="grain2d.reduceBoundary.html"><code class="language-plaintext highlighter-rouge">reduceBoundary(grains,n)</code></a> is the blunt alternative, keeping every n-th vertex regardless of shape</li>
-<li> <a href="grain2d.refineBoundary.html"><code class="language-plaintext highlighter-rouge">refineBoundary(grains,delta)</code></a> resamples each chain at equal arc length instead of subdividing its segments, which only made the staircase finer</li>
-<li> <a href="grain2d.isOuterBoundary.html"><code class="language-plaintext highlighter-rouge">isOuterBoundary(grains)</code></a> tells which grains border the map, no longer obvious once an alpha shape has traced it</li>
-</ul>
-</div>
-<p>The walk order is also what gives <a href="grainBoundary.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a> its sign: a segment is stored with the grain in <code class="language-plaintext highlighter-rouge">gB.grainId(:,1)</code> to its left, so a positive curvature bulges into <code class="language-plaintext highlighter-rouge">gB.grainId(:,2)</code> - for the whole map at once, not only for one grain at a time. Which of the two grains ends up in the first column is not decided by <code class="language-plaintext highlighter-rouge">grains(k).boundary</code>, so put the grain the sign is meant to refer to there</p>
-{% highlight matlab %}
-gB = flip(gB, gB.grainId(:,2) == grains(k).id)   % grain k to the left
-kappa = gB.curvature                             % positive = convex
-{% endhighlight %}
-<p>Grain maps saved before the walk order are turned the right way round when they are loaded - a grain whose segments enclose <code class="language-plaintext highlighter-rouge">-area</code> is reversed by <code class="language-plaintext highlighter-rouge">grain2d.loadobj</code>, which leaves a well formed file untouched. See <a href="BoundaryCurvature.html">Boundary Curvature</a>.</p>
-<p>What used to be <code class="language-plaintext highlighter-rouge">smooth(grains)</code> is called <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary(grains)</code></a> now - <code class="language-plaintext highlighter-rouge">smooth</code> on an <a href="EBSD.EBSD.html">EBSD</a> denoises orientations, something entirely different - and it performs all three steps by default: simplify at <code class="language-plaintext highlighter-rouge">d/sqrt(2)</code>, <code class="language-plaintext highlighter-rouge">d</code> the pixel spacing, which removes the grid and nothing else, refine, and only then the Laplacian smoothing it used to do on its own, which without the first two cuts the corners off a curve</p>
-{% highlight matlab %}
-grains = smoothBoundary(grains,5)
-grains = smoothBoundary(grains,5,'noSimplify','noRefine')   % as before
-{% endhighlight %}
-<p>The old name still works and still does the old thing, so a script written against it keeps its grain areas and its segment count. Since the first two steps change the number of segments, switch them off wherever <code class="language-plaintext highlighter-rouge">gB.ebsdId</code> is read per segment.</p>
-<p>Which algorithm smooths is a choice now, made by passing a <a href="boundaryFilter.html">boundaryFilter</a> - the same pattern as the <a href="EBSDFilter.html">EBSDFilter</a> of <code class="language-plaintext highlighter-rouge">smooth(ebsd,F)</code>
-</p>
-{% highlight matlab %}
-grains = smoothBoundary(grains,taubinFilter)
-grains = smoothBoundary(grains,curvatureFilter('smoothingLength',3))
-{% endhighlight %}
-<p>
-<code class="language-plaintext highlighter-rouge">laplaceFilter</code> is the default and unchanged, <code class="language-plaintext highlighter-rouge">taubinFilter</code> unshrinks after every pass where a Laplacian shrinks without bound, <code class="language-plaintext highlighter-rouge">curvatureFilter</code> replaces the iteration by a single sparse solve whose knob is a <b>length</b> rather than an iteration count, and <code class="language-plaintext highlighter-rouge">huberFilter</code> keeps a genuinely faceted boundary faceted. <a href="GrainSmoothingAdvanced.html">Advanced Grain Smoothing</a> compares them.</p>
-<p>
-<b>EBSD Import</b>
-</p>
-<p>All HDF5 flavours are handled by one json driven interface <a href="loadEBSD_h5.html"><code class="language-plaintext highlighter-rouge">loadEBSD_h5</code></a>, so no format has to be guessed and a new vendor is a matter of a json description rather than of a new interface. The <a href="matlab:import_wizard">import wizard</a> is started by <code class="language-plaintext highlighter-rouge">import_wizard</code> and exports the import as a script</p>
-{% highlight matlab %}
-ebsd = EBSD.load('data.h5')                  % no format guessing needed
-ebsd = EBSD.load('data.h5','dataSet',2)      % or 'dataSet','Area 2'
-ebsd = EBSD.load('data.h5oina','dataSet','EBSD') % not the post processed data
-ebsd = EBSD.load('data.h5','headerOnly')     % phases, header and data sets
-ebsd = EBSD.load('data.ctf','EulerCorrection',rotation.byEuler(pi,0,0))
-{% endhighlight %}
-<div>
-<ul>
-<li>a file holding several maps - EDAX areas, Oxford slices, EMSphInx scans - lists them on import and lets you pick one by <code class="language-plaintext highlighter-rouge">'dataSet'</code>, whose path is kept in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSet</code>. Previously only the first one was imported, without a word</li>
-<li>Oxford files may store the map as recorded and as cleaned up by the vendor software - both are offered as data sets of that file, the cleaned up one is imported by default and the recorded one by <code class="language-plaintext highlighter-rouge">'dataSet','EBSD'</code>
-</li>
-<li>reference frame corrections are unified across <code class="language-plaintext highlighter-rouge">ang</code>, <code class="language-plaintext highlighter-rouge">ctf</code>, <code class="language-plaintext highlighter-rouge">crc</code> and <code class="language-plaintext highlighter-rouge">h5</code> files and stored in <code class="language-plaintext highlighter-rouge">ebsd.EulerCorrection</code>
-</li>
-<li>Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> files state the misalignment between the map and the Euler angle reference frame - AZtec shows the map in beam view but the orientations in camera view - as <code class="language-plaintext highlighter-rouge">Scanning Rotation Angle</code>. MTEX now reads it instead of assuming it, as it still has to for <code class="language-plaintext highlighter-rouge">ctf</code> and <code class="language-plaintext highlighter-rouge">crc</code>. Orientations imported from <code class="language-plaintext highlighter-rouge">h5oina</code> change by that angle, usually 180 degree, and now agree with the same map imported from a <code class="language-plaintext highlighter-rouge">ctf</code>
-</li>
-<li>EMSphInx writes the EDAX <code class="language-plaintext highlighter-rouge">ang</code> and HDF5 layouts, but counts the phases from 0 and flags a pattern it could not index by 255, where EDAX counts from 1 and keeps 0 for not indexed - so every phase used to come out shifted by one. Its <code class="language-plaintext highlighter-rouge">ang</code> carries no vendor marker at all and is recognized by its empty phase descriptions; <code class="language-plaintext highlighter-rouge">'EDAX'</code> and <code class="language-plaintext highlighter-rouge">'EMSphInx'</code> overrule that guess. Pixels an ROI mask kept out of the run - a valid looking phase at orientation (0,0,0) with every quality measure zero - are marked notIndexed instead of fusing into one huge spurious grain</li>
-<li>the file header is kept in <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code> and readable by <code class="language-plaintext highlighter-rouge">'headerOnly'</code> without importing the data at all, the SEM / PRIAS images an EDAX map comes with in <code class="language-plaintext highlighter-rouge">ebsd.opt.electron_image</code>, as the Oxford electron images already were</li>
-<li>faster import, automatic column and degree/radiant detection</li>
-</ul>
-</div>
-<p>The formats <code class="language-plaintext highlighter-rouge">ang</code>, <code class="language-plaintext highlighter-rouge">osc</code>, <code class="language-plaintext highlighter-rouge">oh5</code> and <code class="language-plaintext highlighter-rouge">edaxh5</code> may all hold the very same map, but were interpreted differently. They now agree on the alignment between Euler angle and map reference frame, on the crystal axes alignment used by EDAX - x parallel to a for triclinic, trigonal and hexagonal lattices, now available for any symmetry by the option <code class="language-plaintext highlighter-rouge">'EDAX'</code> - and on the point group of the phases, where <code class="language-plaintext highlighter-rouge">ang</code> and <code class="language-plaintext highlighter-rouge">osc</code> used to report the Laue group <code class="language-plaintext highlighter-rouge">622</code> instead of <code class="language-plaintext highlighter-rouge">6/mmm</code> and <code class="language-plaintext highlighter-rouge">432</code> instead of <code class="language-plaintext highlighter-rouge">m-3m</code>. As the <code class="language-plaintext highlighter-rouge">setting</code> is not stored in the file, the most common setting 2 is assumed instead of leaving the Euler angles uncorrected - state one of <code class="language-plaintext highlighter-rouge">'setting',1</code> to <code class="language-plaintext highlighter-rouge">'setting',4</code> yourself, or switch the correction off by <code class="language-plaintext highlighter-rouge">'setting',0</code>
-</p>
-{% highlight matlab %}
-ebsd = EBSD.load('data.edaxh5','setting',3)  % not the assumed setting 2
-cs = crystalSymmetry('321',[4.9 4.9 5.4],'EDAX')   % x // a
-{% endhighlight %}
-<p>Phases of Bruker files keep their International Tables number and atomic basis in <code class="language-plaintext highlighter-rouge">cs.opt.spaceId</code> and <code class="language-plaintext highlighter-rouge">cs.opt.atoms</code>. Fixed along the way: <code class="language-plaintext highlighter-rouge">ang</code> files whose header contains a stray carriage return - as written by some EDAX exports - silently lost their first data point.</p>
-<p>
-<b>EBSD Grids</b>
-</p>
-<p>Both representations - the gridded map and the plain list - are accepted everywhere, and <code class="language-plaintext highlighter-rouge">EBSD(ebsd)</code> and <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> convert between them at any time. Data that would lose measurements by being gridded - two of them falling into the same lattice cell, or positions too irregular to span a raster - is never gridded and comes back as a list with a warning saying why. A plain list can also be asked for explicitly</p>
-{% highlight matlab %}
-ebsd = EBSD.load(fname,'noGrid')     % this import
-setMTEXpref('gridifyOnImport',false) % every import
-{% endhighlight %}
-<p>One syntax had to go for this: <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> used to be the measurement closest to the coordinate <code class="language-plaintext highlighter-rouge">(x,y)</code> on a list, while on a gridded map the very same expression is the pixel in row <code class="language-plaintext highlighter-rouge">x</code> and column <code class="language-plaintext highlighter-rouge">y</code>. Since almost every file now arrives gridded, that silent difference would decide itself by the data rather than by the script, so <code class="language-plaintext highlighter-rouge">ebsd(x,y)</code> is an error now. Ask for the coordinate by name</p>
-{% highlight matlab %}
-ebsd('xy',x,y)   % the measurement closest to (x,y), grid or list
-ebsd(i,j)        % the pixel in row i and column j, gridded map only
-{% endhighlight %}
-<p>Both grid classes accept a <b>rotated</b> grid now. <a href="EBSDhex.EBSDhex.html">EBSDhex</a> in particular no longer stores <code class="language-plaintext highlighter-rouge">dHex</code> and <code class="language-plaintext highlighter-rouge">isRowAlignment</code> - those could express only two orientations - but derives them, together with <code class="language-plaintext highlighter-rouge">offset</code>, <code class="language-plaintext highlighter-rouge">dx</code> and <code class="language-plaintext highlighter-rouge">dy</code>, from the unit cell and the pixel positions.</p>
-<p>
-<b>EBSD Analysis No Longer Needs a Grid</b>
-</p>
-<p>Computations that used to require <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> now work on any <a href="EBSD.EBSD.html">EBSD</a> - a plain list, a phase subset, or a gridded map alike. This concerns the <a href="EBSD.gradientX.html">orientation gradient</a> and everything built on it: <a href="EBSD.curvature.html"><code class="language-plaintext highlighter-rouge">curvature</code></a>, <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> and the gradient method of <a href="EBSD.weightedBurgersVec.html"><code class="language-plaintext highlighter-rouge">weightedBurgersVec</code></a>
-</p>
-{% highlight matlab %}
-kappa = curvature(ebsd)      % no ebsd.gridify needed
-gnd   = calcGND(ebsd,dS)
-{% endhighlight %}
-<p>They are computed on the virtual lattice MTEX derives from the unit cell, so they also work for grids that are rotated or sheared with respect to the x/y axes, which the previous matrix based implementation could not do at all - <code class="language-plaintext highlighter-rouge">ebsd.gradientX</code> raised an error unless a grid direction happened to lie along an axis. <code class="language-plaintext highlighter-rouge">calcGND</code> additionally exists for hexagonal grids now; there simply was no hexagonal implementation before.</p>
-<p> <a href="EBSD.fill.html"><code class="language-plaintext highlighter-rouge">fill</code></a>, <a href="EBSD.smooth.html"><code class="language-plaintext highlighter-rouge">smooth</code></a>, <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> keep the class and the shape they were given. Previously <code class="language-plaintext highlighter-rouge">fill</code> and <code class="language-plaintext highlighter-rouge">smooth</code> turned a plain <a href="EBSD.EBSD.html">EBSD</a> into an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, and <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> returned a result shaped like the grid rather than like the input.</p>
-<p>
-<b>Corrections Worth Knowing</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">gradientX</code> on a row aligned hexagonal grid divided by <code class="language-plaintext highlighter-rouge">dHex</code> where the neighbour distance is <code class="language-plaintext highlighter-rouge">sqrt(3)*dHex</code>, so hexagonal <code class="language-plaintext highlighter-rouge">curvature</code>, <code class="language-plaintext highlighter-rouge">calcGND</code> and the gradient based <code class="language-plaintext highlighter-rouge">weightedBurgersVec</code> were wrong by a factor 1.732 in one column of the tensor. Values on hexagonal maps change accordingly; square grids are unaffected</li>
-<li>
-<code class="language-plaintext highlighter-rouge">gridify</code> of a rotated hexagonal map silently placed several measurements on the same cell and kept only the last - 5.2% of a titanium map rotated by 20 degree. It now places cells by their lattice index and keeps the measured positions exactly</li>
-<li>
-<code class="language-plaintext highlighter-rouge">calcGrains(...,'removeQuadruplePoints')</code> merged the wrong boundary segments and destroyed real grain boundary - 0.21% of a forsterite map</li>
-<li> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge</code></a> assigned rather than added its merge matrix in two of the six branches collecting the criteria, so a call stating several of them applied only some, and which ones depended on the order they were written in - <code class="language-plaintext highlighter-rouge">merge(grains,twinBoundary,'inclusions','maxSize',5)</code> left the twins unmerged. Every criterion is applied now, and a numeric value following an option name is no longer mistaken for a list of grain pairs</li>
-<li>
-<code class="language-plaintext highlighter-rouge">export_ang</code> of a square grid failed in the header with an unrecognized <code class="language-plaintext highlighter-rouge">dx</code>. It works again, and refuses a rotated grid, whose spacings the ang format cannot express</li>
-<li>
-<code class="language-plaintext highlighter-rouge">interp(ebsd,x,y)</code> with row vectors returned an object whose <code class="language-plaintext highlighter-rouge">length</code> reported 1, and dropped query points when the source was a gridded map</li>
-</ul>
-</div>
-<p>
-<b>Plotting EBSD Maps</b>
-</p>
-<p>EBSD and grain maps are drawn through three backends - <code class="language-plaintext highlighter-rouge">imagesc</code>, <code class="language-plaintext highlighter-rouge">surf</code> and <code class="language-plaintext highlighter-rouge">patch</code>. An axis aligned square grid goes to <code class="language-plaintext highlighter-rouge">imagesc</code>, any other square grid to <code class="language-plaintext highlighter-rouge">surf</code>, a hexagonal grid to <code class="language-plaintext highlighter-rouge">patch</code>, and inverse pole figure colors are precomputed via spherical lookup tables. Only <code class="language-plaintext highlighter-rouge">patch</code> draws one unit cell per pixel, which is what made large maps slow, so the routing may be overruled by <code class="language-plaintext highlighter-rouge">'backend'</code> and the exact unit cells are still available by <code class="language-plaintext highlighter-rouge">'exact'</code>
-</p>
-{% highlight matlab %}
-plot(ebsd,ebsd.orientations)                 % fast, the new default
-plot(ebsd,ebsd.orientations,'exact')         % exact unit cells, as before
-plot(ebsd,ebsd.orientations,'backend','patch')
-{% endhighlight %}
-<p>The micron bar has been rewritten as a <a href="scaleBar.html">scaleBar</a> object - it follows the plotting convention, rescales while zooming and takes options</p>
-{% highlight matlab %}
-plot(ebsd,'Location','nw','SBBackgroundColor','k','SBLineColor','w','Length',50)
-{% endhighlight %}
-<p>
-<b>Reference Frame Annotations</b>
-</p>
-<p>On top of the micron bar a box indicates how the specimen reference frame is aligned on screen - an arrow for every axis with a component in the screen plane, a circled dot or cross for the one pointing out of or into it, exactly as in the string form of <a href="plottingConvention.html">plottingConvention</a>. It follows the data when the map is reoriented, e.g. by <a href="plottingConvention.setView.html"><code class="language-plaintext highlighter-rouge">setView</code></a>.</p>
-<p>What used to be reserved to pole figures now happens on every spherical plot that is not given in crystal coordinates as well - the axes of the reference frame are annotated with the axes names of the frame the data lives in: X, Y, Z by default, X1, Y1, Z1 for the measurement frame of the instrument, RD, TD, ND once the rolling frame rules the session (see <b>Named Reference Frames</b> below). This includes <a href="vector3d.vector3d.html">vector3d</a> and <a href="S2Fun.S2Fun.html">S2Fun</a> plots, <a href="sigmaSections.html">sigmaSections</a> and <a href="pfSections.html">pfSections</a>, spherical densities as returned by <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> or <a href="vector3d.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>, and <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a>. Plots in crystal coordinates - <a href="Miller.Miller.html">Miller</a>, inverse pole figures, <a href="ipfSections.html">ipfSections</a>, color keys, single crystal tensors - keep their Miller indices at the vertices of the fundamental sector instead. Both are customized by the same <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference that pole figures always used, and switched off per plot or for the session</p>
-{% highlight matlab %}
-pfAnnotations = @(varargin) text([vector3d.X,vector3d.Y],{'RD','ND'},...
-  'BackgroundColor','w','tag','axesLabels',varargin{:});
-setMTEXpref('pfAnnotations',pfAnnotations);
-{% endhighlight %}
-
-{% highlight matlab %}
-plot(vector3d.rand(100),'noLabel')
-plot(ebsd,ebsd.orientations,'refFrame','off')
-setMTEXpref('showRefFrame','off')
-{% endhighlight %}
-<p>
-<b>The Default Plotting Convention</b>
-</p>
-<p>The new default <code class="language-plaintext highlighter-rouge">y&darr;&rarr;x</code> is <a href="plottingConvention.ij.html"><code class="language-plaintext highlighter-rouge">plottingConvention.ij</code></a> - x to east, y to south and z into the screen - as SEM images are displayed and nearly every EBSD import states anyway. Pole figures are not affected, spherical plots align themselves with the hemisphere they show. A <a href="plottingConvention.html">plottingConvention</a> is stated as a string, each axis followed or preceded by the direction it points to on screen</p>
-{% highlight matlab %}
-ebsd.how2plot = 'y↑→x'            % also 'x←↑y', 'z⊙→x', ASCII 'y^->x'
-{% endhighlight %}
-<p>Plotting conventions are carried by reference frames: data plotted the default way follows the session's default frame, hence changing the default convention also turns data imported before</p>
-{% highlight matlab %}
-plotx2east                                             % turns all data
-plottingConvention.default('y↑→x')                     % the same by a string
-pC = plottingConvention.default; pC.east = yvector; pC.makeDefault
-{% endhighlight %}
-<p>A convention assigned to a single object becomes an own reference frame of that object and stays untouched by later changes of the default.</p>
-<p>
-<b>Named Reference Frames</b>
-</p>
-<p>Behind the conventions sits a new class <a href="referenceFrame.referenceFrame.html">referenceFrame</a> that answers "what coordinate system is this data expressed in". A frame carries an identity, named axes and the plotting convention its data is drawn in; <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> and <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> delegate their frame data (crystal axes, <code class="language-plaintext highlighter-rouge">how2plot</code>) to the frame they hold. Specimen frames come as named session instances</p>
-{% highlight matlab %}
-specimenFrame.specimen      % the generic frame, axes X, Y, Z - the default
-specimenFrame.measurement   % the instrument frame, axes X1, Y1, Z1
-specimenFrame.rolling       % RD, TD, ND - RD north, TD west
-specimenFrame.geological    % N, E, D
-{% endhighlight %}
-<p>and any of them can take over the session by</p>
-{% highlight matlab %}
-specimenFrame.rolling.makeDefault
-{% endhighlight %}
-<p>after which maps, pole figures and the micron bar annotate RD / TD / ND and plot in the rolling convention - no manual label definition needed. Every data class shows the frame it lives in at the top of its display, e.g. <code class="language-plaintext highlighter-rouge">EBSD (Y1&darr;&rarr;X1)</code> or <code class="language-plaintext highlighter-rouge">PoleFigure (TD&larr;RD&uarr;)</code>; a crystal frame displays its alignment (<code class="language-plaintext highlighter-rouge">X</code><code class="language-plaintext highlighter-rouge">a</code>) and the resulting convention in crystal directions (<code class="language-plaintext highlighter-rouge">⊙c&rarr;a</code>).</p>
-<p>Rotating data by an <a href="orientation.orientation.html">orientation</a> now moves it from the crystal to the specimen frame (or back): the result adopts the new frame but never claims the orientation's symmetry, and mixing frames raises an error instead of silently producing numbers in an undefined coordinate system. Conventions loaded from <code class="language-plaintext highlighter-rouge">.mat</code> files are decided by the container: an <a href="EBSD.EBSD.html">EBSD</a> or <a href="PoleFigure.PoleFigure.html">PoleFigure</a> applies the convention its positions were saved with to the whole session, individual vectors keep theirs private. Scripted environments that run many independent jobs in one session can restore the pristine state by</p>
-{% highlight matlab %}
-referenceFrame.reset
-{% endhighlight %}
-<p>Data without any symmetry can now state the frame it lives in: the trivial group carrying a frame is a first class citizen, obtained from a symmetry by <code class="language-plaintext highlighter-rouge">cs.stripSym</code> or directly from a frame by</p>
-{% highlight matlab %}
-crystalSymmetry(cF)    % the trivial group on the crystal frame cF
-specimenSymmetry(sF)
-{% endhighlight %}
-<p>Extrema and samples of a spherical function expressed in a crystal frame - for instance the deliberately unsymmetrised boundary normal distribution of <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a> - therefore come back as <a href="Miller.Miller.html">Miller</a> with proper crystal indices</p>
-{% highlight matlab %}
-[value,pos] = max(gbnd)   % pos is a Miller now
-{% endhighlight %}
-<p>Along the same lines the compatibility checks behind orientation products and <a href="SO3Fun.SO3Fun.html">SO3Fun</a> arithmetic compare the reference frames the coordinates are expressed in, rather than the symmetry groups: aligned crystal frames combine even when the groups differ, a compatible frame transition is absorbed automatically, and a wrong sided product - an orientation applied to data in specimen coordinates - is an error now instead of a warning.</p>
-<p>
-<b>Rotating a function drops a symmetry it destroys - now consistently</b>
-</p>
-<p>Rotating an <a href="SO3Fun.SO3Fun.html">SO3Fun</a> or an <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> by a rotation which is not one of its own symmetry elements destroys that symmetry, so the group is dropped and only the reference frame kept. The twelve <code class="language-plaintext highlighter-rouge">rotate</code> methods implementing this had drifted into three different tests for "is there a symmetry to lose", and they disagree for every non centrosymmetric point group of order two - <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">m</code>, <code class="language-plaintext highlighter-rouge">-4</code> and friends. Concretely</p>
-{% highlight matlab %}
-cs  = crystalSymmetry('2',[1 2 3],[90 100 90]*degree);
-odf = unimodalODF(orientation.rand(cs));
-rot = rotation.byAxisAngle(vector3d(1,2,3),37*degree);
-odf = rotate(odf,rot,'right');
-{% endhighlight %}
-<p>warned and dropped the symmetry in <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a>, and silently kept the - by then false - claim of <code class="language-plaintext highlighter-rouge">2</code> symmetry in <a href="SO3FunComposition.SO3FunComposition.html">SO3FunComposition</a> and the <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> classes. All of them now warn and drop, which is the correct behaviour: the rotated function really is no longer <code class="language-plaintext highlighter-rouge">2</code> symmetric. If you relied on the old silence, the symmetry was already wrong; a result that should keep its group has to be rotated by a symmetry element.</p>
-<p>
-<b>Orientation products follow the same rule</b>
-</p>
-<p>
-<code class="language-plaintext highlighter-rouge">rot * ori</code> acts in the specimen frame and so can only destroy the specimen symmetry; <code class="language-plaintext highlighter-rouge">ori * rot</code> acts in the crystal frame and destroys the crystal one. Both now drop the group and keep the frame, through the very same helper. Previously the product kept the group and merely warned, and the test for "is this a symmetry element" was a quaternion dot above 0.99 - which is a rotation angle of 16.2 degree, so any rotation up to sixteen degrees passed as a symmetry element and not even the warning fired.</p>
-<p>This was visible in <a href="DetectionOfSampleSymmetry.html">Detection of Sample Symmetry</a>, which rotates a sample by 15.6 degree in order to destroy its orthotropic symmetry deliberately. The claim of <code class="language-plaintext highlighter-rouge">222</code> survived the rotation, the ODF estimated from those orientations was symmetrised with it, and <a href="SO3Fun.centerSpecimen.html"><code class="language-plaintext highlighter-rouge">centerSpecimen</code></a> then had nothing left to find: it returned the identity, an error of the full 15.6 degree. It now recovers the rotation to 0.8 degree.</p>
-<p>
-<b>A plotting convention belongs to a reference frame</b>
-</p>
-<p>There are exactly three ways to say how something should be aligned on screen, and a plotting convention is now always a property of a reference frame rather than of a data object</p>
-{% highlight matlab %}
-plot(ebsd,'how2plot','y↑→x')       % this one plot
-plottingConvention.default('y↑→x') % the whole session
-ebsd.frame = specimenFrame.rolling % move the data to a named frame
-{% endhighlight %}
-<p>The first of these is new. Assigning a convention to the data itself, <code class="language-plaintext highlighter-rouge">ebsd.how2plot = 'y&uarr;&rarr;x'</code>, used to attach a private copy of the session frame to that one object - a frame that carried the session frame's name and axis labels, was indistinguishable from it in every display, and then silently stopped following it. <code class="language-plaintext highlighter-rouge">how2plot</code> is therefore read only on every class but <a href="referenceFrame.referenceFrame.html">referenceFrame</a>, where the convention actually lives. Reading it is unchanged, and <code class="language-plaintext highlighter-rouge">ebsd.frame = []</code> still means "follow the session again".</p>
-<p>
-<b>Importing data no longer changes how the session plots</b>
-</p>
-<p>A file describes its own data, not your screen. Loading an <code class="language-plaintext highlighter-rouge">.mat</code> file, and <a href="mtexdata.html"><code class="language-plaintext highlighter-rouge">mtexdata</code></a>, no longer repoint the session convention. An import may still state <b>which frame</b> the data lives in - Oxford data lands in <code class="language-plaintext highlighter-rouge">specimenFrame.measurement</code> with the axes <code class="language-plaintext highlighter-rouge">X1</code>, <code class="language-plaintext highlighter-rouge">Y1</code>, <code class="language-plaintext highlighter-rouge">Z1</code> - and a convention you pass yourself still applies, since that is your choice and not the file's.</p>
-<p>Documentation pages that want a particular alignment now say so, which they previously inherited invisibly from <code class="language-plaintext highlighter-rouge">mtexdata</code>.</p>
-<p>This also applies to <a href="S2Fun.smiley.html"><code class="language-plaintext highlighter-rouge">S2Fun.smiley</code></a>, which used to carry its own convention so the face always read right - a page that shows it now declares <code class="language-plaintext highlighter-rouge">plottingConvention.default('y&uarr;&rarr;x')</code> like any other.</p>
-<p>
-<b>Color Keys Say What They Are</b>
-</p>
-<p>Color keys used to display as MATLAB's dump of their properties, in which every interesting one read <code class="language-plaintext highlighter-rouge">[1x1 crystalSymmetry]</code>. They now show the pair of reference systems they map between in the header, the way an <a href="orientation.orientation.html">orientation</a> does, and below it only the settings that distinguish them from a default key</p>
-{% highlight matlab %}
-ipfKey = ipfColorKey (Titanium (Alpha) → y↓→x)
-{% endhighlight %}
-<pre>   ipfDirection : (0,0,1)
-   direction key: HSVDirectionKey</pre>
-<p>A directional color key additionally states which way round its colors run, written in the axes of its frame - <code class="language-plaintext highlighter-rouge">⊙c&rarr;a</code> for a crystal key. That layout belongs to the frame of the symmetry and not to the session.</p>
-<p>The property <code class="language-plaintext highlighter-rouge">inversePoleFigureDirection</code> is called <code class="language-plaintext highlighter-rouge">ipfDirection</code> now, and <code class="language-plaintext highlighter-rouge">'ipfDirection'</code> works as a plot option beside the old spelling</p>
-{% highlight matlab %}
-plot(ebsd,ebsd.orientations,'ipfDirection',vector3d.X)
-{% endhighlight %}
-<p>The long name keeps working as an alias, so existing scripts are unaffected.</p>
-<p>
-<b>Approximation, Sampling and Clustering</b>
-</p>
-<p>Moving least squares approximation supports vector valued data, outlier detection, smoothly varying support radii and Voronoi weights, and <a href="planarColorKey.planarColorKey.html">planarColorKey</a> turns any pair of scalar properties into a color</p>
-{% highlight matlab %}
-SO3F = SO3FunMLS(ori,values,'delta',5*degree,'detectOutliers')
-cK   = planarColorKey(winter,'colorModel','white');
-rgb  = cK.property2color(grains.longAxis,grains.aspectRatio);
-{% endhighlight %}
-<p>
-<b>Tangent Spaces and Vector Valued Functions</b>
-</p>
-<p>A <a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a> stores the symmetries along with the rotation it is attached to, and for <a href="SO3VectorFieldHarmonic.SO3VectorFieldHarmonic.html">SO3VectorFieldHarmonic</a> the switch between the left and the right representation is performed directly on the harmonic coefficients. Arrays of vector valued functions support <code class="language-plaintext highlighter-rouge">cat</code>, <code class="language-plaintext highlighter-rouge">reshape</code>, <code class="language-plaintext highlighter-rouge">permute</code>, <code class="language-plaintext highlighter-rouge">squeeze</code>, <code class="language-plaintext highlighter-rouge">transpose</code>, indexing and assignment - which worked for <a href="SO3FunHarmonic.SO3FunHarmonic.html">SO3FunHarmonic</a> only and now works for <a href="SO3FunHandle.SO3FunHandle.html">SO3FunHandle</a> and <a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a> as well. <a href="SO3VectorField.SO3VectorField.html">SO3VectorField</a> comes with the arithmetic <code class="language-plaintext highlighter-rouge">+,-,.*,./</code> together with <code class="language-plaintext highlighter-rouge">dot</code> and <code class="language-plaintext highlighter-rouge">normSquare</code>, and a <a href="SO3FunRBF.SO3FunRBF.html">SO3FunRBF</a> draws its pole figures, inverse pole figures and sections directly instead of through a harmonic approximation.</p>
-<p>
-<b>Syntax Changes</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">ebsd.CSList</code> is not a cell array anymore but an array of <a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a> and <a href="notIndexed.html">notIndexed</a> objects. In particular a not indexed phase can now carry a name and a color</li>
-</ul>
-</div>
-{% highlight matlab %}
-ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
-{% endhighlight %}
-<div>
-<ul>
-<li>the constructors <code class="language-plaintext highlighter-rouge">quaternion</code>, <code class="language-plaintext highlighter-rouge">rotation</code> and <code class="language-plaintext highlighter-rouge">orientation</code> only accept the syntax <code class="language-plaintext highlighter-rouge">quaternion(a,b,c,d)</code>, <code class="language-plaintext highlighter-rouge">orientation(a,b,c,d,CS,SS)</code>. Use the named constructors <code class="language-plaintext highlighter-rouge">vector3d.byPolar(theta,rho)</code>, <code class="language-plaintext highlighter-rouge">orientation.byMatrix(M,cs)</code>, ... instead. Newly available are <code class="language-plaintext highlighter-rouge">rotation.byHomochoric</code>, <code class="language-plaintext highlighter-rouge">rotation.id</code>, <code class="language-plaintext highlighter-rouge">rotation.nan</code>, <code class="language-plaintext highlighter-rouge">rotation.rand</code> and <code class="language-plaintext highlighter-rouge">rotation.inversion</code>
-</li>
-<li>symmetries are compared on three levels - <code class="language-plaintext highlighter-rouge">cs1 == cs2</code> checks for the same object, <code class="language-plaintext highlighter-rouge">eqTol(cs1,cs2)</code> for the same Laue group and axes, and <code class="language-plaintext highlighter-rouge">sim(cs1,cs2)</code> for the same lattice with possibly different alignment of x, y, z</li>
-<li>
-<code class="language-plaintext highlighter-rouge">gB.V</code> returns the two end points of every boundary segment, the plain list of all vertices is <code class="language-plaintext highlighter-rouge">gB.allV</code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge">multiplicity</code> now returns the number of symmetrically equivalent directions, fibres or misorientations - the multiplicity as the term is used crystallographically, e.g. <code class="language-plaintext highlighter-rouge">multiplicity(Miller(1,0,0,cs))</code> is 6 in <code class="language-plaintext highlighter-rouge">m-3m</code> and not 8. It used to return the reciprocal quantity, the number of symmetry operations fixing the input, which contradicted its own help line. The two multiply to the order of the group, so the old value is <code class="language-plaintext highlighter-rouge">numSym(cs) ./ multiplicity(m)</code>. This affects <a href="Miller.Miller.html">Miller</a>, <a href="orientation.orientation.html">orientation</a> and <a href="fibre.fibre.html">fibre</a> alike</li>
-</ul>
-</div>
-<p>
-<b>Renamed and Removed</b>
-</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">smooth(grains)</code> is <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary(grains)</code></a> now, the old name forwards to the old behaviour and warns</li>
-<li>the spherical Bingham distribution <code class="language-plaintext highlighter-rouge">BinghamS2</code> has been renamed <a href="S2FunBingham.S2FunBingham.html">S2FunBingham</a> and is fitted by <code class="language-plaintext highlighter-rouge">S2FunBingham.fit(v)</code>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge">calcGBPD</code> has been superseded by <a href="grainBoundary.calcGBND.html"><code class="language-plaintext highlighter-rouge">calcGBND</code></a>
-</li>
-<li>six EBSD interfaces have been retired to <code class="language-plaintext highlighter-rouge">obsolete/</code> - <code class="language-plaintext highlighter-rouge">loadEBSD_ACOM</code>, <code class="language-plaintext highlighter-rouge">loadEBSD_sor</code>, <code class="language-plaintext highlighter-rouge">loadEBSD_csv</code> and <code class="language-plaintext highlighter-rouge">loadEBSD_Oxfordcsv</code> as they were unused, <code class="language-plaintext highlighter-rouge">loadEBSD_hdf5</code> and <code class="language-plaintext highlighter-rouge">loadEBSD_h5oina</code> as they are covered by <a href="loadEBSD_h5.html"><code class="language-plaintext highlighter-rouge">loadEBSD_h5</code></a>
-</li>
-<li>
-<code class="language-plaintext highlighter-rouge">extern/kde</code> is called <code class="language-plaintext highlighter-rouge">kde1d</code> now as it used to shadow the <code class="language-plaintext highlighter-rouge">kde</code> of recent MATLAB versions</li>
-</ul>
-</div>
-<p>
-<b>Minor Additions</b>
-</p>
-<div>
-<ul>
-<li> <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform(ebsd,fun)</code></a> and <code class="language-plaintext highlighter-rouge">transform(grains,fun)</code> apply an arbitrary, not necessarily rigid, map to every position - to simulate an instrument distortion or to reproject a map</li>
-<li>
-<code class="language-plaintext highlighter-rouge">ebsd.lattice</code> is the one place that turns <code class="language-plaintext highlighter-rouge">ebsd.unitCell</code> and <code class="language-plaintext highlighter-rouge">ebsd.pos</code> into a lattice basis and a per pixel integer index, <code class="language-plaintext highlighter-rouge">ebsd.fixPos</code> repairs coordinates suffering from rounding, <code class="language-plaintext highlighter-rouge">gridify</code> takes <code class="language-plaintext highlighter-rouge">'rowMajor'</code> and <code class="language-plaintext highlighter-rouge">'columnMajor'</code> as well as <code class="language-plaintext highlighter-rouge">'unitCell'</code> to interpolate onto another grid, and a hexagonal grid is addressed in cube coordinates by <code class="language-plaintext highlighter-rouge">hex2cube</code> and <code class="language-plaintext highlighter-rouge">cube2hex</code>
-</li>
-<li> <a href="orientation.find.html"><code class="language-plaintext highlighter-rouge">find</code></a> on <a href="orientation.orientation.html">orientation</a>, <a href="quaternion.quaternion.html">quaternion</a> and <a href="vector3d.vector3d.html">vector3d</a> returns the closest point, the k closest points or all points within an epsilon neighborhood, together with their distances</li>
-<li>
-<code class="language-plaintext highlighter-rouge">sqrt</code>, <code class="language-plaintext highlighter-rouge">smooth</code> and <code class="language-plaintext highlighter-rouge">invRadon</code> on <a href="S2Fun.S2Fun.html">S2Fun</a>, the new class <a href="S2FunGrid.html">S2FunGrid</a>, and every <a href="S2Fun.S2Fun.html">S2Fun</a> carries a symmetry, hence a <code class="language-plaintext highlighter-rouge">CS</code>, a <code class="language-plaintext highlighter-rouge">SS</code> and a <code class="language-plaintext highlighter-rouge">how2plot</code>
-</li>
-<li>screw dislocations of a <a href="dislocationSystem.dislocationSystem.html">dislocationSystem</a> have proper Burgers vector lengths for hexagonal lattices</li>
-<li> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge(grains,...,'maxPixel')</code></a> takes the mean orientation of the largest grain involved instead of averaging</li>
-<li> <a href="doEulerStep.html"><code class="language-plaintext highlighter-rouge">doEulerStep(odf,vF,dt,'implicit')</code></a> provides an implicit Euler scheme for texture evolution</li>
-<li>new spherical Fourier transform based on the double Fourier sphere method, <code class="language-plaintext highlighter-rouge">NFSFT</code> is the default, bandwidths beyond 1023 are supported</li>
-<li>low level exponential and logarithm maps <code class="language-plaintext highlighter-rouge">expRight</code>, <code class="language-plaintext highlighter-rouge">logRight</code> on SO(3) and S2, arithmetic <code class="language-plaintext highlighter-rouge">+,-,.*,./</code> for <a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a> and <a href="S2Kernel.S2Kernel.html">S2Kernel</a>, derivatives of <a href="S1Fun.S1Fun.html">S1Fun</a>
-</li>
-<li>new class <a href="progressCounter.html">progressCounter</a> for progress display, <code class="language-plaintext highlighter-rouge">crystalSymmetry.default</code> for fast default symmetries, <code class="language-plaintext highlighter-rouge">colorcet</code> perceptually uniform color maps and the flag <code class="language-plaintext highlighter-rouge">'zero2white'</code> for color ranges</li>
-<li>use UTF8 to display (11̅0) instead of (1-10). Requires a suitable font like Julia Monospace.</li>
-</ul>
-</div>
-<p>
-<b>Under the Hood</b>
-</p>
-<div>
-<ul>
-<li>a legend placed outside the axes is laid out by <a href="mtexFigure.mtexFigure.html">mtexFigure</a>, not by MATLAB, which used to leave its distance to the plot depending on how many times the figure had been resized. The distance is <code class="language-plaintext highlighter-rouge">'legendSpacing'</code>, e.g. <code class="language-plaintext highlighter-rouge">plot(cS,'colored','legendSpacing',30)</code>, or <code class="language-plaintext highlighter-rouge">setMTEXpref('legendSpacing',30)</code>
-</li>
-<li>an axes is shaped like the shadow its plot box casts on the screen, so that a <a href="crystalShape.crystalShape.html">crystalShape</a> no longer sits in a much too wide axes</li>
-</ul>
-</div>
-<div>
-<ul>
-<li>markers are drawn as scatter objects throughout, which is faster than the patches used before and keeps marker transparency on <code class="language-plaintext highlighter-rouge">print</code> and <code class="language-plaintext highlighter-rouge">exportgraphics</code>, where it used to be lost in every file format. Lines, i.e. the option <code class="language-plaintext highlighter-rouge">'edgecolor'</code>, remain patches</li>
-<li>the mex files are compiled for every platform on our continuous integration and attached to the release, <code class="language-plaintext highlighter-rouge">check_mex</code> downloads them from there and grain reconstruction falls back to a MATLAB Voronoi wherever a mex file is missing. <code class="language-plaintext highlighter-rouge">mex_install</code> reports which source failed to compile rather than failing quietly</li>
-<li>
-<code class="language-plaintext highlighter-rouge">.mat</code> files written by MTEX 5.11 load again - the vertex list of a <a href="triplePointList.triplePointList.html">triplePointList</a> and the <code class="language-plaintext highlighter-rouge">CSList</code> of a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> came back unusable</li>
-<li>
-<code class="language-plaintext highlighter-rouge">ebsd('phaseName').orientations</code> carries the plotting convention of the map, and a <a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a> displays the convention it holds - <code class="language-plaintext highlighter-rouge">specimenSymmetry.default</code> is where the session wide default lives</li>
-<li>a note about an assumption an import had to make - the Euler correction, the <code class="language-plaintext highlighter-rouge">setting</code> of an EDAX file - is emitted as a warning instead of being printed to the error stream, where the command window painted it in the red of a failed import. Such notes carry an id, so <code class="language-plaintext highlighter-rouge">warning('off','MTEX:eulerCorrectionAssumed')</code> silences them</li>
-<li>documentation links printed to the command window resolve against a local <code class="language-plaintext highlighter-rouge">doc/html</code> where it is installed and against <a href="https://mtex-toolbox.github.io">the online documentation</a> where it is not - a clone carries no generated html, and <code class="language-plaintext highlighter-rouge">web()</code> on a missing file did nothing at all, no page and no error. Line wrapping in the command window no longer breaks such a link apart, which it did for every link it ever touched</li>
-</ul>
-</div>
-<h2 id="5">MTEX 6.1 10/2025</h2>
+<h2 id="3">MTEX 6.1 10/2025</h2>
 <p>MTEX 6.1 does not come with major new features but with tons of speed ups and bug fixes. A lot of effort has been put into increasing the stability of the provided mex files. On startup MTEX automatically checks whether all mex files are installed. If not it attempts to download them from Github. If this fails as well, i.e. because your antivirus program intervenes, it tries to compile those mex files from source. The relevant commands are</p>
 <div>
 <ul>
@@ -593,7 +153,7 @@ ebsd.CSList(1) = notIndexed('amorphous',[0.5 0.5 0.5])
 <code class="language-plaintext highlighter-rouge">how2plot.makeDefault</code> make a plotting convention the default convention for all new data.</li>
 </ul>
 </div>
-<h2 id="6">MTEX 6.0 10/2024</h2>
+<h2 id="4">MTEX 6.0 10/2024</h2>
 <p>MTEX 6.0 is major release that includes numerous new features and internal changes.</p>
 <p>
 <b>Full 3d-Grains</b>
@@ -650,7 +210,7 @@ ebsd.plottingConvention = how2plot
 </p>
 <div>
 <ul>
-<li>new option <code class="language-plaintext highlighter-rouge">'minPixel'</code> for the command <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> which allows to set a minimum grain size</li>
+<li>new option <code class="language-plaintext highlighter-rouge">'minPixel'</code> for the command <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> which allows to set a minimum grain size</li>
 <li>
 <a href="xxx">ipf-sections</a> are a novel way of representing the orientation space</li>
 <li>
@@ -660,7 +220,7 @@ ebsd.plottingConvention = how2plot
 <li>the option <code class="language-plaintext highlighter-rouge">'FaceColor'</code> now allows to <a href="CrystalShapes.html">colorize crystal shapes according to their orientation</a>
 </li>
 <li> <a href="mtexFigure.drawNow.html"><code class="language-plaintext highlighter-rouge">drawNow(gcm,'antiAliased')</code></a> generates anti-aliased images</li>
-<li> <a href="EBSD.transform2PolarReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transform2PolarReferenceFrame</code></a> transforms ebsd data into a polar reference frame</li>
+<li> <a href="EBSD.transform2PolarRefernceFrame.html"><code class="language-plaintext highlighter-rouge">transform2PolarReferenceFrame</code></a> transforms ebsd data into a polar reference frame</li>
 <li>support for area detectors in ODF reconstruction from pole figure data</li>
 <li>when computing parent EBSD data using <a href="parentGrainReconstructor.calcParentEBSD.html"><code class="language-plaintext highlighter-rouge">calcParentEBSD</code></a> the parent orientation will now be constant within the parent grains. In order to enforce the old behavior of a fixed OR but varying parent orientation use the new option <code class="language-plaintext highlighter-rouge">'exactOR'</code>.</li>
 <li>new interface to <a href="sht">files</a>
@@ -668,7 +228,7 @@ ebsd.plottingConvention = how2plot
 <li>new function <a href="stripStar.html"><code class="language-plaintext highlighter-rouge">stripStar</code></a> *</li>
 </ul>
 </div>
-<h2 id="7">MTEX 5.11.0 3/2024</h2>
+<h2 id="5">MTEX 5.11.0 3/2024</h2>
 <p>MTEX 5.11 will be the last release before MTEX 6.0. It significantly improves grain reconstruction from 2d EBSD data.</p>
 <p>
 <b>Much Faster Grain Reconstruction</b>
@@ -685,7 +245,7 @@ ebsd.plottingConvention = how2plot
 <p>
 <b>Lankford Parameter</b>
 </p>
-<p>The command <a href="orientation.calcLankford.html"><code class="language-plaintext highlighter-rouge">calcLankford</code></a> allows for the computation of the Lankford or R-value. A full discussion of the corresponding analysis can be found <a href="Lankford.html">here</a>.</p>
+<p>The command <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">calcLankford</code></a> allows for the computation of the Lankford or R-value. A full discussion of the corresponding analysis can be found <a href="Lankford.html">here</a>.</p>
 <p>
 <b>Transformation ODF</b>
 </p>
@@ -711,9 +271,9 @@ ebsd.plottingConvention = how2plot
 <li>many bug fixes</li>
 </ul>
 </div>
-<h2 id="8">MTEX 5.10.1 9/2023</h2>
+<h2 id="6">MTEX 5.10.1 9/2023</h2>
 <p>This is mainly a bug fix release.</p>
-<h2 id="9">MTEX 5.10.0 5/2023</h2>
+<h2 id="7">MTEX 5.10.0 5/2023</h2>
 <p>
 <b>Weighted Burgers Vector</b>
 </p>
@@ -729,7 +289,7 @@ ebsd.plottingConvention = how2plot
 <ul>
 <li>New option <code class="language-plaintext highlighter-rouge">'max'</code> to <a href="orientation.angle.html"><code class="language-plaintext highlighter-rouge">angle(mori)</code></a> to compute the largest misorientation angle. Helpful for identifying twinning.</li>
 <li>Added checks for symmetry and positive definiteness when defining stress, strain and elasticity tensors.</li>
-<li>Add morphological filter <a href="EBSD.erode.html"><code class="language-plaintext highlighter-rouge">erode(ebsd)</code></a> as a simple method for data cleaning in EBSD maps.</li>
+<li>Add morphological filter <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">erode(ebsd)</code></a> as a simple method for data cleaning in EBSD maps.</li>
 <li>Pseudosymmetries like 532 are now natively supported using the syntax <code class="language-plaintext highlighter-rouge">crystalSymmetry('532')</code>
 </li>
 <li>
@@ -741,7 +301,7 @@ ebsd.plottingConvention = how2plot
 <li>many more fixes and speed improvements</li>
 </ul>
 </div>
-<h2 id="10">MTEX 5.9.0 2/2023</h2>
+<h2 id="8">MTEX 5.9.0 2/2023</h2>
 <p>
 <b>Habit Plane Detection</b>
 </p>
@@ -767,16 +327,16 @@ ebsd.plottingConvention = how2plot
 </ul>
 </div>
 <p>While implementing these new features we also significantly speed up all operations related with ODF operations. A full documentation of these new features can be found <a href="SO3FunConcept.html">here</a>.</p>
-<h2 id="11">MTEX 5.8.2 11/2022</h2>
+<h2 id="9">MTEX 5.8.2 11/2022</h2>
 <p>This is mainly a bug fix release. New functionalities include</p>
 <div>
 <ul>
 <li> <a href="fibre.fit.html"><code class="language-plaintext highlighter-rouge">fibre.fit(ori)</code></a> and <a href="fibre.fit.html"><code class="language-plaintext highlighter-rouge">fibre.fit(odf)</code></a> robustly finds fibers in data sets of individual orientations and ODFs.</li>
 <li> <a href="fibre.angle.html"><code class="language-plaintext highlighter-rouge">angle(f1,f2)</code></a> computes the angle between two <a href="OrientationFibre.html">fibers</a>.</li>
-<li> <a href="S2Fun/calcSymAxis.html"><code class="language-plaintext highlighter-rouge">calcSymAxis(pf)</code></a> allows to find rotational symmetries in <a href="ODFPoleFigure.html">pole figures</a> or arbitrary <a href="S2FunConcept.html">spherical functions</a>.</li>
+<li> <a href="S2FunHarmonic.calcSymAxis.html"><code class="language-plaintext highlighter-rouge">calcSymAxis(pf)</code></a> allows to find rotational symmetries in <a href="ODFPoleFigure.html">pole figures</a> or arbitrary <a href="S2FunConcept.html">spherical functions</a>.</li>
 </ul>
 </div>
-<h2 id="12">MTEX 5.8.0 01/2022</h2>
+<h2 id="10">MTEX 5.8.0 01/2022</h2>
 <p>MTEX 5.8 improves further on parent grain reconstruction by implementing the novel <a href="https://arxiv.org/abs/2201.02103">variant graph algorithm</a> which is faster and more accurate than the previous grain graph algorithm.</p>
 <p>
 <b>Improved parent grain reconstruction</b>
@@ -800,7 +360,7 @@ ebsd.plottingConvention = how2plot
 <li>new option <code class="language-plaintext highlighter-rouge">'region'</code> for <code class="language-plaintext highlighter-rouge"><a href="EBSD.plot.html">plot(ebsd)</a></code> to plot only a rectangular subregion of the map</li>
 </ul>
 </div>
-<h2 id="13">MTEX 5.7.0 05/2021</h2>
+<h2 id="11">MTEX 5.7.0 05/2021</h2>
 <p>MTEX 5.7 improves on parent grain reconstruction. Changes include:</p>
 <p>
 <b>Improved parent grain reconstruction</b>
@@ -824,9 +384,9 @@ ebsd.plottingConvention = how2plot
 <li>The antipodal <code class="language-plaintext highlighter-rouge">axisAngleColorKey</code> allows for option <code class="language-plaintext highlighter-rouge">'antipodal'</code>.</li>
 </ul>
 </div>
-<h2 id="14">MTEX 5.6.1 03/2021</h2>
+<h2 id="12">MTEX 5.6.1 03/2021</h2>
 <p>This is mainly a bug fix release.</p>
-<h2 id="15">MTEX 5.6.0 01/2021</h2>
+<h2 id="13">MTEX 5.6.0 01/2021</h2>
 <p>MTEX 5.6 greatly simplifies parent grain reconstruction by introducing the class <a href="parentGrainReconstructor.parentGrainReconstructor.html"><code class="language-plaintext highlighter-rouge">parentGrainReconstructor</code></a>. During the reconstruction procedure this class keeps track of the correspondence between measured child grains and the reconstructed parent grains. It provides the following functions for recovering parent orientations which can be applied multiple times and in any order to achieve the best possible reconstruction.</p>
 <div>
 <ul>
@@ -845,7 +405,7 @@ ebsd.plottingConvention = how2plot
 <b>Compatibility fixes</b>
 </p>
 <p>MTEX 5.6 fixes several incompatibilities with MATLAB versions earlier then 2019b.</p>
-<h2 id="16">MTEX 5.5.0 11/2020</h2>
+<h2 id="14">MTEX 5.5.0 11/2020</h2>
 <p>
 <b>Orientation Embedding</b>
 </p>
@@ -874,7 +434,7 @@ grains = calcGrains(ebsd,'threshold',[10*degree 1*degree])
 <li> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge(grains,'inclusions')</code></a> merges inclusions into their hosts</li>
 <li> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge(grains,'threshold',delta)</code></a> merges grains with a certain misorientation angle</li>
 <li>interpolation of EBSD maps at arbitrary coordinates by the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> works now for hexagonal grids as well. In particular this allows to remap EBSD data from hexagonal to square grids and vice versa. Have a look at the chapter <a href="EBSDInter.html">Interpolation</a> for more details.</li>
-<li> <a href="EBSD.calcMis2Mean.html"><code class="language-plaintext highlighter-rouge">calcMis2Mean</code></a> computes the misorientation to a grain reference orientation, i.e., the <a href="EBSDGROD.html">grain reference orientation deviation (GROD)</a>.</li>
+<li> <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">calcMis2Mean</code></a> computes the misorientation to a grain reference orientation, i.e., the <a href="EBSDGROD.html">grain reference orientation deviation (GROD)</a>.</li>
 <li>KAM computation has been speed up significantly for hexagonal and square grids. Make sure to use the command <code class="language-plaintext highlighter-rouge">ebsd = ebsd.gridify</code> before the KAM computation.</li>
 <li>new option <code class="language-plaintext highlighter-rouge">'edgeAlpha'</code> to control the transparency of grain boundaries, e.g. in dependency of the misorientation angle.</li>
 <li>more easily add new / change phases in an EBSD map by one of the following commands</li>
@@ -917,7 +477,7 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 <li> <a href="slipSystem.symmetrise.html"><code class="language-plaintext highlighter-rouge">slipSystem.symmetrise</code></a> gave incorrect number of slipsystems due to a rounding error</li>
 </ul>
 </div>
-<h2 id="17">MTEX 5.4.0 7/2020</h2>
+<h2 id="15">MTEX 5.4.0 7/2020</h2>
 <p>
 <b>Parent Grain Reconstruction</b>
 </p>
@@ -944,8 +504,8 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 <li>harmonic approximation of spherical functions respecting symmetry</li>
 <li>
 <code class="language-plaintext highlighter-rouge">export(ebsd,'fileName.ang')</code> exports to .ang files</li>
-<li> <a href="grain2d.neighbours.html"><code class="language-plaintext highlighter-rouge">neighbours(grains)</code></a> now returns a list of pairs of neighboring grains</li>
-<li> <a href="grain2d.numNeighbours.html"><code class="language-plaintext highlighter-rouge">grains.numNeighbours</code></a> returns the number of neighboring grains</li>
+<li> <a href="grain2d.neighbors.html"><code class="language-plaintext highlighter-rouge">neighbours(grains)</code></a> now returns a list of pairs of neighboring grains</li>
+<li> <a href="grain2d.numNeighbors.html"><code class="language-plaintext highlighter-rouge">grains.numNeighbours</code></a> returns the number of neighboring grains</li>
 <li> <a href="grainBoundary.selectByGrainId.html"><code class="language-plaintext highlighter-rouge">selectByGrainId</code></a> allows to select boundary segments by pairs of grains</li>
 <li>new helper function <a href="majorityVote.html"><code class="language-plaintext highlighter-rouge">majorityVote</code></a>
 </li>
@@ -955,14 +515,14 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 </li>
 </ul>
 </div>
-<h2 id="18">MTEX 5.3.1 6/2020</h2>
+<h2 id="16">MTEX 5.3.1 6/2020</h2>
 <p>
 <b>New Functions</b>
 </p>
 <div>
 <ul>
 <li>
-<a href="EBSDSquare.interp.html">interp</a> to interpolate EBSD maps</li>
+<a href="EBSD.interp.html">interp</a> to interpolate EBSD maps</li>
 <li>grain properties <a href="grain2d.longAxis.html">longAxis</a>, <a href="grain2d.shortAxis.html">shortAxis</a>
 </li>
 <li>
@@ -994,7 +554,7 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 <li>new flag <code class="language-plaintext highlighter-rouge">noAntipodal</code> to suppress antipodal symmetry in calculations</li>
 </ul>
 </div>
-<h2 id="19">MTEX 5.3.0 4/2020</h2>
+<h2 id="17">MTEX 5.3.0 4/2020</h2>
 <p>MTEX 5.3 is a humble release without big shiny improvements. On the other hand is has seen some internal changes which lead to significant speed improvements in some functions. Technically speaking the class <a href="symmetry.symmetry.html">symmetry</a> is not derived from <a href="rotation.rotation.html">rotation</a> anymore but is a handle class. From the users perspective almost no change will be noticed. Developers should replace <code class="language-plaintext highlighter-rouge">length(cs)</code> by <code class="language-plaintext highlighter-rouge">numSym(cs)</code>.</p>
 <p>
 <b>Much Better and Faster Halfquadratic Filter</b>
@@ -1005,17 +565,17 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 </p>
 <div>
 <ul>
-<li> <a href="stiffnessTensor.plotWaveVelocities.html"><code class="language-plaintext highlighter-rouge">plotWaveVelocities</code></a> illustrates anisotropy of seismic waves</li>
+<li> <a href="stiffnessTensor.stiffnessTensor.html"><code class="language-plaintext highlighter-rouge">plotWaveVelocities</code></a> illustrates anisotropy of seismic waves</li>
 <li> <a href="EBSD.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a> grain averages of arbitrary properties</li>
-<li>shape functions <a href="grain2d.surfor.html"><code class="language-plaintext highlighter-rouge">surfor</code></a>, <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">paror</code></a>, <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a>
+<li>shape functions <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">surfor</code></a>, <a href="grain2d.paror.html"><code class="language-plaintext highlighter-rouge">paror</code></a>, <a href="grain2d.caliper.html"><code class="language-plaintext highlighter-rouge">caliper</code></a>
 </li>
 <li> <a href="Miller.multiplicity.html"><code class="language-plaintext highlighter-rouge">multiplicity</code></a> for Miller, orientation and fiber</li>
 </ul>
 </div>
-<h2 id="20">MTEX 5.2.3 11/2019</h2>
+<h2 id="18">MTEX 5.2.3 11/2019</h2>
 <div>
 <ul>
-<li>replaced <code class="language-plaintext highlighter-rouge">calcODF(ori)</code> by <code class="language-plaintext highlighter-rouge"><a href="orientation.calcDensity.html">calcDensity(ori)</a></code>
+<li>replaced <code class="language-plaintext highlighter-rouge">calcODF(ori)</code> by <code class="language-plaintext highlighter-rouge"><a href="rotation.calcDensity.html">calcDensity(ori)</a></code>
 </li>
 <li>bug fix in ODF reconstruction from XRD data</li>
 <li>bug fix in EBSD export to ctf</li>
@@ -1023,7 +583,7 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 <li>some more minor bug fixes</li>
 </ul>
 </div>
-<h2 id="21">MTEX 5.2.0 10/2019</h2>
+<h2 id="19">MTEX 5.2.0 10/2019</h2>
 <p>
 <b>New Documentation</b>
 </p>
@@ -1092,7 +652,7 @@ plot([vector3d.Z, vector3d.Z + 0.5 * vector3d.rand],'arrow')
 <p>
 <b>Spherical Bingham Distribution</b>
 </p>
-<p>Native support for spherical <a href="BinghamS2.BinghamS2.html">Bingham distributions</a>, including the ability to <a href="BinghamS2.fit.html">fit</a> them to directional distributions.</p>
+<p>Native support for spherical <a href="S2FunBingham.S2FunBingham.html">Bingham distributions</a>, including the ability to <a href="S2FunBingham.fit.html">fit</a> them to directional distributions.</p>
 <p>
 <b>Tensors</b>
 </p>
@@ -1143,7 +703,7 @@ grains{id}
 scatter(v,'numbered')               % plot vectors with numbers
 scatter(v,'MarkerFaceColor','none') % plot vectors with colored empty marks
 {% endhighlight %}
-<h2 id="22">MTEX 5.1.0 04/2018</h2>
+<h2 id="20">MTEX 5.1.0 04/2018</h2>
 <p>
 <b>Dislocation systems</b>
 </p>
@@ -1182,7 +742,7 @@ dS = dislocationSystem.fcc(cs)
 <p>
 <b>Tensor arithmetics</b>
 </p>
-<p> <a href="dyad.html"><code class="language-plaintext highlighter-rouge">dyad</code></a>, <a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a>, <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a>, <a href="tensor.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a>, <a href="tensor.diag.html"><code class="language-plaintext highlighter-rouge">diag</code></a>, <a href="tensor.eye.html"><code class="language-plaintext highlighter-rouge">eye</code></a>, <a href="tensor.sym.html"><code class="language-plaintext highlighter-rouge">sym</code></a>
+<p> <a href="dyad.html"><code class="language-plaintext highlighter-rouge">dyad</code></a>, <a href="tensor.trace.html"><code class="language-plaintext highlighter-rouge">trace</code></a>, <a href="tensor.det.html"><code class="language-plaintext highlighter-rouge">det</code></a>, <a href="tensor.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a>, <a href="tensor.diag.html"><code class="language-plaintext highlighter-rouge">diag</code></a>, <a href="tensor.tensor.html"><code class="language-plaintext highlighter-rouge">eye</code></a>, <a href="tensor.sym.html"><code class="language-plaintext highlighter-rouge">sym</code></a>
 </p>
 <p>
 <b>Birefringence</b>
@@ -1233,7 +793,7 @@ dS = dislocationSystem.fcc(cs)
 <li>EBSD hdf5 interface works now for Bruker data as well</li>
 </ul>
 </div>
-<h2 id="23">MTEX 5.0.0 03/2018</h2>
+<h2 id="21">MTEX 5.0.0 03/2018</h2>
 <p>
 <b>Replace all executables by two mex files</b>
 </p>
@@ -1434,7 +994,7 @@ plotSection(1./vp,vector3d.Y)
 <li>allow to change the length of the scaleBar in EBSD plots</li>
 </ul>
 </div>
-<h2 id="24">MTEX 4.5.2 11/2017</h2>
+<h2 id="22">MTEX 4.5.2 11/2017</h2>
 <p>This is mainly a bug fix release</p>
 <div>
 <ul>
@@ -1457,7 +1017,7 @@ gT = GreningerTrojano(csAlpha,csGamma)
 ori_children = ori_parent * inv(gT.variants)
 ori_parents = ori_child * gT.parents
 {% endhighlight %}
-<h2 id="25">MTEX 4.5.1 08/2017</h2>
+<h2 id="23">MTEX 4.5.1 08/2017</h2>
 <p>This is mainly a bug fix release</p>
 <div>
 <ul>
@@ -1469,7 +1029,7 @@ ori_parents = ori_child * gT.parents
 <li>grains.boundary('phase2','phase1') rearranges the misorientation to be from phase2 to phase 1</li>
 </ul>
 </div>
-<h2 id="26">MTEX 4.5 03/2017</h2>
+<h2 id="24">MTEX 4.5 03/2017</h2>
 <p>
 <b>3d orientation plots</b>
 </p>
@@ -1535,7 +1095,7 @@ mtexColorbar('Title','this is a title')
 {% endhighlight %}
 <p>
 <b>Bug Fix</b> This release contains several important bug fixes compare to MTEX 4.4.</p>
-<h2 id="27">MTEX 4.4 01/2017</h2>
+<h2 id="25">MTEX 4.4 01/2017</h2>
 <p>
 <b>Slip Systems</b>
 </p>
@@ -1658,7 +1218,7 @@ plot(center.project2FundamentalRegion,'MarkerSize',10,'MarkerFaceColor','k','Mar
 plot(centerRec.project2FundamentalRegion,'MarkerSize',10,'MarkerFaceColor','r','MarkerEdgeColor','k')
 hold off
 {% endhighlight %}
-<h2 id="28">MTEX 4.3.2 07/2016</h2>
+<h2 id="26">MTEX 4.3.2 07/2016</h2>
 <p>
 <b>Alignment of Miller plots</b>
 </p>
@@ -1668,7 +1228,7 @@ plota2north, plota2east, plota2south, plota2west
 plotb2north, plotb2east, plotb2south, plotb2west
 {% endhighlight %}
 <p>This might also be specify in <a href="matlab:edit">mtex_settings.m mtex_settings</a>.</p>
-<h2 id="29">MTEX 4.3 - 03/2016</h2>
+<h2 id="27">MTEX 4.3 - 03/2016</h2>
 <p>
 <b>Alignment of Miller plots</b>
 </p>
@@ -1719,7 +1279,7 @@ ebsd(50:100,:)
 ebsd.gradientX
 ebsd.gradientY
 {% endhighlight %}
-<p>as well as an estimate of the geometrically necessary dislocation density (GND) using the command <a href="EBSDsquare.calcGND.html">calcGND</a>
+<p>as well as an estimate of the geometrically necessary dislocation density (GND) using the command <a href="EBSD.calcGND.html">calcGND</a>
 </p>
 {% highlight matlab %}
 ebsd.calcGND
@@ -1735,7 +1295,7 @@ ebsd.calcGND
 <a href="EBSD.reduce.html">reduce</a> works now also for EBSD data on Hex grids</li>
 </ul>
 </div>
-<h2 id="30">MTEX 4.2 - 11/2015</h2>
+<h2 id="28">MTEX 4.2 - 11/2015</h2>
 <p>MTEX 4.2 introduces basic functionality for triple junction analysis in grain maps.</p>
 <p>
 <b>Triple points</b>
@@ -1824,7 +1384,7 @@ cs1 <= cs2
 {% endhighlight %}
 <p>Further, the largest proper subgroup of some crystal symmetry <code class="language-plaintext highlighter-rouge">cs</code> is now accessible by</p>
 <pre>cs.properSubGroup</pre>
-<h2 id="31">MTEX 4.1 - 09/2015</h2>
+<h2 id="29">MTEX 4.1 - 09/2015</h2>
 <p>MTEX 4.1 introduces new possibilities to the analysis of misorientations. For the first time, it covers all geometric aspects of misorientations between arbitrary crystal symmetries. Furthermore, MTEX 4.1 introduces filters to smooth EBSD data.</p>
 <p>
 <b>Smoothing of EBSD Data</b>
@@ -2082,7 +1642,7 @@ cs.AaxisRec
 <li>compute KAM with misorientation angle threshold or grain boundary threshold</li>
 </ul>
 </div>
-<h2 id="32">MTEX 4.0.0 - 10/2014</h2>
+<h2 id="30">MTEX 4.0.0 - 10/2014</h2>
 <p>MTEX 4 is a complete rewrite of the internal class system which was required to keep MTEX compatible with upcoming Matlab releases. Note that MTEX 3.5 will not work on Matlab versions later than 2014a. As a positive side effect, the syntax has been made more consistent and powerful. On the bad side MTEX 3.5. code will need some adaption to run on MTEX 4. There are two general principles to consider</p>
 <p>
 <b>Use dot indexing instead of getting and setting methods</b>
@@ -2297,7 +1857,7 @@ Miller(2,-1,-1,0,crystalSymmetry('-3m'),'UVTW')
 <li>write import wizard for orientations, vectors, tensors.</li>
 </ul>
 </div>
-<h2 id="33">MTEX 3.5.0 - 12/2013</h2>
+<h2 id="31">MTEX 3.5.0 - 12/2013</h2>
 <p>
 <b>Misorientation colorcoding</b>
 </p>
@@ -2373,7 +1933,7 @@ poly = selectPolygon
 <li>MTEX-3.5.0 should be compatible with Matlab 2008a</li>
 </ul>
 </div>
-<h2 id="34">MTEX 3.4.2 - 06/2013</h2>
+<h2 id="32">MTEX 3.4.2 - 06/2013</h2>
 <p>
 <b>bugfix release</b>
 </p>
@@ -2395,7 +1955,7 @@ poly = selectPolygon
 <li>improved ODF fibre plot</li>
 </ul>
 </div>
-<h2 id="35">MTEX 3.4.1 - 04/2013</h2>
+<h2 id="33">MTEX 3.4.1 - 04/2013</h2>
 <p>
 <b>bugfix release</b>
 </p>
@@ -2411,7 +1971,7 @@ poly = selectPolygon
 <li>fix: Rigaku csv interface</li>
 </ul>
 </div>
-<h2 id="36">MTEX 3.4.0 - 03/2013</h2>
+<h2 id="34">MTEX 3.4.0 - 03/2013</h2>
 <p>
 <b>New plotting engine</b>
 </p>
@@ -2596,7 +2156,7 @@ setpref('mtex','propertyName','propertyValue')
 {% highlight matlab %}
 setMTEXpref('propertyName','propertyValue')
 {% endhighlight %}
-<h2 id="37">MTEX 3.3.2 - 01/2013</h2>
+<h2 id="35">MTEX 3.3.2 - 01/2013</h2>
 <p>
 <b>bugfix release</b>
 </p>
@@ -2623,7 +2183,7 @@ setMTEXpref('propertyName','propertyValue')
 </li>
 </ul>
 </div>
-<h2 id="38">MTEX 3.3.1 - 07/2012</h2>
+<h2 id="36">MTEX 3.3.1 - 07/2012</h2>
 <p>
 <b>bugfix release</b>
 </p>
@@ -2636,14 +2196,15 @@ setMTEXpref('propertyName','propertyValue')
 <li>fix: respect rounding errors when importing pole figures and ODFs</li>
 </ul>
 </div>
-<h2 id="39">MTEX 3.3.0 - 06/2012</h2>
+<h2 id="37">MTEX 3.3.0 - 06/2012</h2>
 <p>
 <b>Grains: change of internal representation</b>
 </p>
 <p>Reimplementation of the whole <b>grain</b> part:</p>
 <div>
 <ul>
-<li>The classes @grain, @polygon, @polyeder do not exist any longer. The functionality of the classes is mainly replaced by the classes @GrainSet, @Grain2d and @Grain3d</li>
+<li>The classes @grain, @polygon, @polyeder do not exist any longer. The functionality of the classes is mainly replaced by the classes @GrainSet, <a href="Grain2d.html">Grain2d</a> and <a href="Grain3d.html">Grain3d</a>
+</li>
 <li>The class @GrainSet explicitly stores <a href="EBSD.EBSD.html">EBSD</a>. To access <a href="EBSD.EBSD.html">EBSD</a> data within a single grain or a set of grains use</li>
 </ul>
 </div>
@@ -2682,7 +2243,7 @@ CS = {'not indexed',...
 </li>
 </ul>
 </div>
-<h2 id="40">MTEX 3.2.3 - 03/2012</h2>
+<h2 id="38">MTEX 3.2.3 - 03/2012</h2>
 <p>
 <b>bugfix release</b>
 </p>
@@ -2699,7 +2260,7 @@ CS = {'not indexed',...
 <li>fix export odf</li>
 </ul>
 </div>
-<h2 id="41">MTEX 3.2.1 - 11/2011</h2>
+<h2 id="39">MTEX 3.2.1 - 11/2011</h2>
 <p>
 <b>New Features</b>
 </p>
@@ -2728,7 +2289,7 @@ CS = {'not indexed',...
 <li>import filter for uxd files should now work more reliable</li>
 </ul>
 </div>
-<h2 id="42">MTEX 3.2 - 05/2011</h2>
+<h2 id="40">MTEX 3.2 - 05/2011</h2>
 <p>
 <b>3d EBSD Analysis</b>
 </p>
@@ -2776,7 +2337,7 @@ CS = {'not indexed',...
 <li>many bug fixes</li>
 </ul>
 </div>
-<h2 id="43">MTEX 3.1 - 03/2011</h2>
+<h2 id="41">MTEX 3.1 - 03/2011</h2>
 <p>
 <b>Tensor Arithmetics</b> This release introduces tensor analysis into MTEX, this includes</p>
 <div>
@@ -2802,7 +2363,7 @@ CS = {'not indexed',...
 <li>many bug fixes</li>
 </ul>
 </div>
-<h2 id="44">MTEX 3.0 - 10/2010</h2>
+<h2 id="42">MTEX 3.0 - 10/2010</h2>
 <p>
 <b>Crystal Geometry</b>
 </p>
@@ -2830,7 +2391,7 @@ CS = {'not indexed',...
 <li>MTEX is now compatible with NFFT 3.1.3</li>
 </ul>
 </div>
-<h2 id="45">MTEX 2.0 - 10/2009</h2>
+<h2 id="43">MTEX 2.0 - 10/2009</h2>
 <p>
 <b>Grain Analysis for EBSD Data</b>
 </p>
@@ -2879,7 +2440,7 @@ CS = {'not indexed',...
 </li>
 </ul>
 </div>
-<h2 id="46">MTEX 1.2 - 05/2009</h2>
+<h2 id="44">MTEX 1.2 - 05/2009</h2>
 <p>
 <b>Improved EBSD import</b>
 </p>
@@ -2924,7 +2485,7 @@ CS = {'not indexed',...
 </li>
 </ul>
 </div>
-<h2 id="47">MTEX 1.1 - 12/2008</h2>
+<h2 id="45">MTEX 1.1 - 12/2008</h2>
 <p>
 <b>Improved Import Wizard</b>
 </p>
@@ -2978,7 +2539,7 @@ CS = {'not indexed',...
 <li>Fixed a bug in ODF estimation from EBSD data</li>
 </ul>
 </div>
-<h2 id="48">MTEX 1.0 - 06/2008</h2>
+<h2 id="46">MTEX 1.0 - 06/2008</h2>
 <p>
 <b>New Installer Including Binaries for Windows, Linux, and Max OSX</b>
 </p>
@@ -3039,7 +2600,7 @@ CS = {'not indexed',...
 <li>Many other bug fixes.</li>
 </ul>
 </div>
-<h2 id="49">MTEX 0.4 - 04/2008</h2>
+<h2 id="47">MTEX 0.4 - 04/2008</h2>
 <p>
 <b>Speed Improvements</b>
 </p>
@@ -3091,7 +2652,7 @@ CS = {'not indexed',...
 <li>Crystal symmetry <b>triclinic</b> is not called <b>tricline</b> anymore.</li>
 </ul>
 </div>
-<h2 id="50">MTEX 0.3 - 10/2007</h2>
+<h2 id="48">MTEX 0.3 - 10/2007</h2>
 <div>
 <ul>
 <li>new function <code class="language-plaintext highlighter-rouge">fourier</code> to calculate the Fourier coefficients of an arbitrary ODF</li>
@@ -3111,7 +2672,7 @@ CS = {'not indexed',...
 <li>many bugfixes</li>
 </ul>
 </div>
-<h2 id="51">MTEX 0.2 - 07/2007</h2>
+<h2 id="49">MTEX 0.2 - 07/2007</h2>
 <div>
 <ul>
 <li>new functions <a href="textureindex.html">texture index</a>, <a href="SO3Fun.entropy.html">entropy</a>, <a href="SO3Fun.volume.html">volume</a>
@@ -3122,7 +2683,7 @@ CS = {'not indexed',...
 <li>many bugfixes</li>
 </ul>
 </div>
-<h2 id="52">MTEX 0.1 - 03/2007</h2>
+<h2 id="50">MTEX 0.1 - 03/2007</h2>
 <div>
 <ul>
 <li>initial release</li>
