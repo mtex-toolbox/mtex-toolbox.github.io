@@ -19,12 +19,11 @@ toc: false
 </head>
 <body>
 <font size="2"><a href="https://github.com/mtex-toolbox/examples/blob/master/TrueEBSD/example_WCCoSmall_2.m">
-    edit page</a>
-    author: </font>
+    edit page</a></font>
 <div>
 <!--introduction-->
 <p>
-<b>This is the <a href="trueEbsd2.trueEbsd2.html">trueEbsd2</a> variant of <a href="example_WCCoSmall.html">the short page</a>.</b> Same data, same five maps, same four distortions and the same numbers &mdash; but built on MTEX's own <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> and <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> rather than on TrueEBSD's <code class="language-plaintext highlighter-rouge"><a href="distortedImg.distortedImg.html">distortedImg</a></code> and its distortion-name strings. See <code class="language-plaintext highlighter-rouge">MIGRATION-mapImage.md</code> in the toolbox for why, and for what still differs.</p>
+<b>This is the <a href="trueEbsd2.trueEbsd2.html">trueEbsd2</a> variant of <a href="example_WCCoSmall.html">the short page</a>.</b> Same data, same five maps, same four distortions and the same numbers &mdash; but built on MTEX's own <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> and <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> rather than on TrueEBSD's <code class="language-plaintext highlighter-rouge">@distortedImg</code> and its distortion-name strings. See <code class="language-plaintext highlighter-rouge">MIGRATION-mapImage.md</code> in the toolbox for why, and for what still differs.</p>
 <p>Authors: Vivian Tong; Stefan Olovsj&ouml;, Seco Tools AB, R&amp;D Materials and Technology, 737 82 Fagersta, Sweden. Contact: <a href="mailto:vivian.tong@extern.tu-freiberg.de">vivian.tong@extern.tu-freiberg.de</a>
 </p>
 <p>An EBSD map and an SEM image of the same area never quite line up: the beam drifts during the scan, the camera moves between acquisitions, the specimen is tilted. TrueEBSD corrects that, so every pixel of the map and every pixel of the images refer to the same point on the sample.</p>
@@ -51,7 +50,7 @@ display(ebsd.opt.trueEbsdImgs)
 {% highlight plaintext %}
 ans = plottingConvention (y↓→x)
  
-ebsd = EBSDsquare (y↓→x)
+ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    89 (0.72%)  notIndexed          none                                   
@@ -153,12 +152,12 @@ job.resizedList
 {% highlight plaintext %}
 ans = mapImage (y↓→x)
  
-            image    pixel     frame    layout    name                 EBSD
- 1      192 x 256  0.08 um      y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  192 x 256 x 3  0.08 um  row↓→col  row↓→col   fsdB3                    -
- 3      192 x 256  0.08 um  row↓→col  row↓→col   fsdT3                    -
- 4      192 x 256  0.08 um  row↓→col  row↓→col   fsdT1                    -
- 5      192 x 256  0.08 um  row↓→col  row↓→col  fsdT10                    -
+            image    pixel   frame    layout    name                 EBSD
+ 1      192 x 256  0.08 um    y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  192 x 256 x 3  0.08 um  iY↓→iX  row↓→col   fsdB3                    -
+ 3      192 x 256  0.08 um  iY↓→iX  row↓→col   fsdT3                    -
+ 4      192 x 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
+ 5      192 x 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
 {% endhighlight %}
 <h2 id="9">Adjust the matching windows</h2>
 <p>Distortions are measured by cutting both images of a pair into small boxes and cross-correlating each box with its partner. That gives a local shift at each box, and those shifts are fitted to the distortion model.</p>
@@ -297,7 +296,7 @@ end
 <h2 id="14">Finish</h2>
 <p>The map and the images now overlay pixel for pixel, and <code class="language-plaintext highlighter-rouge">ebsdOut</code> is an ordinary MTEX EBSD map that happens to carry four SEM images as properties. Anything you would normally do with a map works from here &mdash; including turning a thresholded image into a phase, which is what <a href="example_copper.html">the copper page</a> does with its voids.</p>
 <p>Run <a href="example_WCCo.html">the full page</a> for the same workflow at full resolution over the whole field of view.</p>
-<p>This page and <a href="example_WCCoSmall.html">the <code class="language-plaintext highlighter-rouge">&lt;trueEbsd.trueEbsd.html trueEbsd&gt;</code> one</a> are compared quantity by quantity by <code class="language-plaintext highlighter-rouge">tests_migrationAB</code> in the toolbox. The hop shifts agree; the residuals differ by less than a tenth of a pixel and <code class="language-plaintext highlighter-rouge">corr(bc,img)</code> to five significant figures.</p>
+<p>This page and <a href="example_WCCoSmall.html">the <code class="language-plaintext highlighter-rouge">@trueEbsd</code> one</a> are compared quantity by quantity by <code class="language-plaintext highlighter-rouge">tests_migrationAB</code> in the toolbox. The hop shifts agree; the residuals differ by less than a tenth of a pixel and <code class="language-plaintext highlighter-rouge">corr(bc,img)</code> to five significant figures.</p>
 </div>
 </body>
 </html>

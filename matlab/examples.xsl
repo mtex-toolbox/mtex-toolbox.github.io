@@ -129,7 +129,14 @@ toc: false
   <font size="2">
     <a><xsl:attribute name="href">https://github.com/mtex-toolbox/examples/blob/master<xsl:value-of select="$toolbox/pageSource"/></xsl:attribute>
     edit page</a>
+    <!-- only the examples that name an author in a '% Author:' line carry
+         one; without the test a page without an author gets a bare
+         'author:' label with nothing behind it -->
+    <!-- the indentation of the next line is the one that ends up in the
+         page, so it is kept as it was before the test was introduced -->
+    <xsl:if test="string($toolbox/author) != ''">
     author: <xsl:value-of select="$toolbox/author"/>
+    </xsl:if>
   </font>
 </xsl:template>
 
