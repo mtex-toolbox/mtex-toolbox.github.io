@@ -1,5 +1,5 @@
 ---
-title: "Pole Figure Analysis"
+title: "Pole Figures"
 
 sidebar: documentation_sidebar
 permalink: PoleFigureAnalysis.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Pole Figure Analysis</title>
+<title>Pole Figures</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_PoleFigureAnalysis.m">
 </head>
@@ -21,7 +21,37 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PoleFigureAnalysis/PoleFigureAnalysis.m">
     edit page</a></font>
 <div>
-<h1>Pole Figure Analysis</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>X-ray and neutron diffraction do not see individual crystals. They see the whole illuminated volume at once, and what they measure is how much of it happens to have a chosen lattice plane facing a chosen direction. Rotate the sample, record the intensity of one diffraction peak at every setting, and the result is a <b>pole figure</b>: the density of one crystal direction over all specimen directions.</p>
+<p>This is the older road into texture analysis and still the right one for many problems. It averages over a volume rather than a polished surface, it needs no vacuum and no conductive sample, and the counting statistics come from far more crystals than any map contains. What it cannot tell you is where anything is.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+mtexdata dubna silent
+
+plot(pf,'figSize','small')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigureAnalysis_01.png" %}
+</center>
+<p>Seven pole figures are shown because one is not enough, and that is the central difficulty of this chapter rather than an incidental detail.</p>
+<p>One of the seven is labelled with two lattice planes rather than one. Their diffraction peaks fall too close together to separate, so what was recorded is the sum of two pole figures. This is common, it is not an error, and a reconstruction has to be told about it rather than left to treat the measurement as a single plane.</p>
+<h2 id="3">Why one pole figure is not enough</h2>
+<p>Orientations live in a three-dimensional space; a pole figure is a two-dimensional picture. Each point of it collects every orientation that puts the chosen crystal direction along that specimen direction - a whole curve of orientations, added together and reported as one number. The information lost is exactly the position along that curve.</p>
+<p>Reconstructing an ODF therefore means combining several pole figures, measured for different lattice planes, and solving for the function consistent with all of them. That problem is solvable but it is not a simple inversion, and it does not have a unique answer.</p>
+<h2 id="4">The ghost effect</h2>
+<p>There is a further loss that no amount of extra measurement repairs. Diffraction cannot distinguish a lattice plane's two sides, so a pole figure is always centrosymmetric even when the material is not. Written as a series expansion, the measurement determines the even-order terms of the ODF and says nothing whatever about the odd-order ones.</p>
+<p>The missing part has to be supplied by an assumption, and different assumptions give visibly different ODFs - typically spurious peaks where the material has none, which is where the name <b>ghost</b> comes from. This is not a numerical artefact to be tuned away. It is a genuine gap in what the experiment can know, and the pages below are about making a defensible choice rather than a hidden one.</p>
+<h2 id="5">Where to start</h2>
+<p>
+<a href="PoleFigureImport.html">Import</a> and <a href="PoleFigurePlot.html">Plot</a> get data in and on screen. <a href="PoleFigureCorrection.html">Modify</a> covers the corrections that come before anything else - background, defocusing, normalisation, and removing points you have reason to distrust.</p>
+<p>
+<a href="PoleFigure2ODF.html">ODF Reconstruction</a> is the heart of the chapter, and <a href="PoleFigureRefinement.html">Iterative ODF Reconstruction</a> controls it in more detail. Read <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a> and <a href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a> alongside them rather than afterwards - they say what the reconstruction cannot do, which is the part that determines how far the result can be trusted.</p>
+<p>
+<a href="PoleFigureSimulation.html">Simulation</a> goes the other way, computing pole figures from a known ODF. This is the most reliable way to develop judgement here: reconstruct an ODF you already know and see what survives.</p>
+<p>Two worked examples follow the whole chain on real and standard data, <a href="PoleFigureSantaFe.html">Santa Fe Example</a> and <a href="PoleFigureDubna.html">Dubna Example</a>, and <a href="PoleFigureExport.html">Export</a> handles files.</p>
+<h2 id="6">Next</h2>
+<p>What a reconstruction produces is an <a href="ODFAnalysis.html">ODF</a>. The same quantity measured one crystal at a time is <a href="EBSDAnalysis.html">EBSD</a>. The mathematics of the inversion belongs to <a href="SphericalFunctions.html">Spherical Functions</a> and <a href="SO3Functions.html">Orientation Functions</a>.</p>
 </div>
 </body>
 </html>

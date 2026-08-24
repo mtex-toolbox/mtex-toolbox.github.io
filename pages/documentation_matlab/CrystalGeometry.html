@@ -21,7 +21,38 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/CrystalGeometry/CrystalGeometry.m">
     edit page</a></font>
 <div>
-<h1>Crystal Geometry</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>A crystal is a lattice repeated over and over, and a lattice looks the same from more than one point of view. Rotate a cubic crystal by ninety degrees about a cube axis and nothing has changed that any measurement could detect. The set of all such motions is the crystal's <b>symmetry</b>, and it is the single most consequential fact about working with crystal data.</p>
+<p>The consequence is this: inside a crystal there is no such thing as one direction. Ask for the [111] direction of a cubic crystal and you have named eight directions at once, because symmetry cannot tell them apart. Every angle, every average, every distance computed later has to respect that, or it computes something the crystal does not know about.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('m-3m');
+
+% the eight directions that the label (111) names in a cubic crystal
+plot(Miller(1,1,1,cs).symmetrise('unique'),'labeled','grid','backgroundColor','w')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="CrystalGeometry_01.png" %}
+</center>
+<p>Note the <code class="language-plaintext highlighter-rouge">'unique'</code> above. Without it <code class="language-plaintext highlighter-rouge">symmetrise</code> returns one entry per symmetry operation - 48 for this point group - and the eight distinct directions simply appear repeatedly.</p>
+<p>Symmetry is also why a direction in a crystal and a plane in a crystal are written differently and behave differently. In a cubic lattice the [111] direction happens to be perpendicular to the (111) plane, which makes cubic a bad place to learn the difference; in a monoclinic lattice they are not perpendicular at all, and confusing the two silently gives the wrong answer.</p>
+<h2 id="4">Point groups, space groups, Laue groups</h2>
+<p>Three classifications turn up constantly and are easy to mix up. The <b>point group</b> collects the symmetry operations that leave one point fixed - rotations, mirrors, inversion - and there are 32 of them. The <b>space group</b> additionally allows translations, screw axes and glide planes, giving 230. The <b>Laue group</b> is the point group with an inversion centre added, giving 11.</p>
+<p>Diffraction cannot distinguish a direction from its opposite, so what an EBSD or X-ray measurement actually determines is the Laue group. MTEX works with point groups, and accepts a space group name by reducing it to its point group.</p>
+<h2 id="5">Where to start</h2>
+<p>
+<a href="CrystalSymmetries.html">Crystal Symmetries</a> is the foundation - how to declare a phase, from a name, from lattice parameters or from a CIF file.</p>
+<p>
+<a href="CrystalDirections.html">Miller Indices</a> covers directions and planes in a crystal and the difference between them raised above. <a href="CrystalOperations.html">Operations</a> is the arithmetic - angles, symmetric equivalents, zone axes.</p>
+<p>Two pages then deal with something that causes more confusion than any other topic here. A point group says which operations exist; it does not say how the crystal's axes are laid onto Cartesian ones, and for everything but cubic there is a choice to make. <a href="CrystalReferenceSystem.html">Reference System</a> and <a href="SymmetryAlignment.html">Crystal Axes Alignment</a> are where that choice is made explicit. If data imported from two sources disagrees by a rotation that looks like nothing physical, this is almost always why.</p>
+<p>
+<a href="CrystalShapes.html">Crystal Shapes</a> and <a href="CrystalShapeSmorf.html">Advanced Crystal Shapes</a> build the little polyhedra used to draw a crystal in a map, which is the most direct way to see what an orientation means.</p>
+<p>
+<a href="FundamentalSector.html">Fundamental Sector</a> is the counterpart of the opening figure: since symmetry makes many directions equivalent, only a patch of the sphere is needed to hold every distinct one. That patch is what an inverse pole figure is drawn on.</p>
+<p>
+<a href="QuasiCrystals.html">Quasi Symmetries</a> covers symmetries that no periodic lattice can have.</p>
+<h2 id="6">Next</h2>
+<p>A crystal placed in a specimen is an <b>orientation</b>, <a href="CrystalOrientations.html">Orientations</a>. Directions without a crystal attached are <a href="Vectors.html">Vectors</a>. Physical properties that depend on crystal direction are <a href="Tensors.html">Tensors</a>.</p>
 </div>
 </body>
 </html>

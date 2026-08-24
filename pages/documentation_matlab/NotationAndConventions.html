@@ -1,0 +1,219 @@
+---
+title: "Notation and Conventions"
+
+sidebar: documentation_sidebar
+permalink: NotationAndConventions.html
+folder: documentation
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>Notation and Conventions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_NotationAndConventions.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/GeneralConcepts/NotationAndConventions.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>Texture analysis has more conventions than most subjects, and most of them are choices rather than facts. Two people can compute correctly from the same data and disagree, because they made different choices and neither said so. This page states the ones MTEX makes.</p>
+<p>The single most useful habit: when a result is rotated or mirrored from what you expected, the cause is almost always on this page.</p>
+<h2 id="2">Angles are radians, and <code class="language-plaintext highlighter-rouge">degree</code> converts</h2>
+<p>Every angle in MTEX is in radians. There is no option to change this and no automatic detection. The constant <code class="language-plaintext highlighter-rouge">degree</code> holds the conversion, and the convention throughout the documentation is to write angles by multiplying with it.</p>
+{% highlight matlab %}
+10*degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.1745
+{% endhighlight %}
+<p>A bare <code class="language-plaintext highlighter-rouge">10</code> passed where an angle is expected is not an error - it is 10 radians, which is a little over one and a half turns. This is a common cause of results that are wildly rather than subtly wrong.</p>
+<h2 id="4">Euler angles follow Bunge, and that has to be said</h2>
+<p>Three angles mean nothing until you say which axes they turn about and in which order. MTEX uses the <b>Bunge</b> convention by default: rotate about Z, then about the new X, then about the new Z, written as phi1, Phi, phi2.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('m-3m');
+ori = orientation.byEuler(30*degree,50*degree,10*degree,cs);
+
+% these two are the same call
+round(Euler(ori,'Bunge')./degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    30    50    10
+{% endhighlight %}
+<p>Other conventions exist and MTEX will use them if asked, so Euler angles arriving from elsewhere should be treated as unlabelled until their convention is known. See <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a> for where MTEX sits relative to the textbook statement of Bunge's convention, which is not quite the same question.</p>
+<h2 id="6">An orientation maps crystal to specimen</h2>
+<p>This is the choice that decides whether everything downstream is the relationship or its inverse. In MTEX an orientation applied to a crystal direction returns a specimen direction.</p>
+{% highlight matlab %}
+h = Miller(0,0,1,cs)   % a direction in the crystal
+
+r = ori * h            % where it points in the specimen
+{% endhighlight %}
+
+{% highlight plaintext %}
+h = Miller (m3̅m)
+  h k l
+  0 0 1
+ 
+r = vector3d (y↓→x)
+      x      y      z
+  0.383 -0.663  0.643
+{% endhighlight %}
+<p>So <code class="language-plaintext highlighter-rouge">ori * h</code> reads "where does crystal direction h point?", and <code class="language-plaintext highlighter-rouge">inv(ori) * r</code> reads "which crystal direction points along r?". The first is what a pole figure shows, the second an inverse pole figure.</p>
+<p>The <b>active</b> and <b>passive</b> readings of a rotation - turning the object, or turning the axes - are inverses of each other, which is the other place this ambiguity appears. See <a href="DefinitionAsCoordinateTransform.html">Theory</a>.</p>
+<h2 id="8">Planes and directions are different objects</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">Miller(1,0,0,cs)</code> is by default a <b>plane</b>, given by its Miller indices <code class="language-plaintext highlighter-rouge">(hkl)</code>. To mean a direction, say so with <code class="language-plaintext highlighter-rouge">'uvw'</code>. In a cubic lattice the two coincide, which makes cubic a poor place to learn the difference.</p>
+{% highlight matlab %}
+csQuartz = crystalSymmetry('321',[4.9 4.9 5.4],'mineral','Quartz');
+
+% the (100) plane normal and the [100] direction of quartz
+angle(Miller(1,0,0,csQuartz),Miller(1,0,0,csQuartz,'uvw')) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   30.0000
+{% endhighlight %}
+<p>Thirty degrees apart in the same crystal. For trigonal and hexagonal lattices MTEX displays four indices, <code class="language-plaintext highlighter-rouge">(hkil)</code>, where the third is redundant and equal to <code class="language-plaintext highlighter-rouge">-(h+k)</code>.</p>
+<h2 id="10">The crystal axes have to be aligned with Cartesian ones</h2>
+<p>A point group says which symmetry operations exist. It does not say how the crystal's own axes are laid onto a Cartesian frame, and for anything less symmetric than cubic there is a genuine choice. MTEX's default is <code class="language-plaintext highlighter-rouge">X</code><code class="language-plaintext highlighter-rouge">a*, Z</code><code class="language-plaintext highlighter-rouge">c</code>, and a phase can be given a different one.</p>
+<p>This is why two correctly published tensors for the same mineral can disagree, and why data imported from two vendors can differ by a rotation that corresponds to nothing physical. See <a href="SymmetryAlignment.html">Crystal Axes Alignment</a>.</p>
+<h2 id="11">The plotting convention is a session setting</h2>
+<p>Which specimen direction points east on the page, and which points out of it, is a property of the reference frame rather than of the data. It can be set for one plot, for a session, or carried by the frame the data lives in.</p>
+{% highlight matlab %}
+plot(x,'how2plot','y↑→x')       % this plot only
+plottingConvention.default(...)  % the whole session
+{% endhighlight %}
+<p>Because it is a session setting it can differ between your script and an example you copied, and the only symptom is a figure that is mirrored or rotated. The documentation pages set it explicitly for this reason. See <a href="AxesAlignment.html">Axes Alignment</a>.</p>
+<h2 id="12">Units</h2>
+<p>MTEX does not track units. Lengths in a map are whatever the file used, normally micrometres, and derived quantities inherit that silently - an area is in those units squared whether or not anything says so.</p>
+<p>Two cases need care because a formula divides one physical quantity by another. Elastic stiffness is conventionally in GPa and density in g/cm^3, and <a href="WaveVelocities.html">wave velocities</a> are only in km/s if both were supplied in those units - a stiffness tensor carrying no density yields a number that is not a velocity at all. ODF values are in multiples of a random distribution and are therefore dimensionless.</p>
+<h2 id="13">Names used in the examples</h2>
+<p>The documentation is consistent about variable names, and following the same habit makes scripts easier to read:</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <tt>cs</tt>
+               </p>
+         </td>
+         <td>
+               <p>crystal symmetry</p>
+         </td>
+         <td>
+               <p>
+                  <tt>ss</tt>
+               </p>
+         </td>
+         <td>
+               <p>specimen symmetry</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>ori</tt>
+               </p>
+         </td>
+         <td>
+               <p>orientation</p>
+         </td>
+         <td>
+               <p>
+                  <tt>mori</tt>
+               </p>
+         </td>
+         <td>
+               <p>misorientation</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>odf</tt>
+               </p>
+         </td>
+         <td>
+               <p>orientation distribution</p>
+         </td>
+         <td>
+               <p>
+                  <tt>pf</tt>
+               </p>
+         </td>
+         <td>
+               <p>pole figure</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>ebsd</tt>
+               </p>
+         </td>
+         <td>
+               <p>an orientation map</p>
+         </td>
+         <td>
+               <p>
+                  <tt>grains</tt>
+               </p>
+         </td>
+         <td>
+               <p>reconstructed grains</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>h</tt>
+               </p>
+         </td>
+         <td>
+               <p>a crystal direction</p>
+         </td>
+         <td>
+               <p>
+                  <tt>r</tt>
+               </p>
+         </td>
+         <td>
+               <p>a specimen direction</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>cS</tt>
+               </p>
+         </td>
+         <td>
+               <p>a crystal shape</p>
+         </td>
+         <td>
+               <p>
+                  <tt>sS</tt>
+               </p>
+         </td>
+         <td>
+               <p>a slip system</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="14">Next</h2>
+<p>The terms these conventions apply to are collected in <a href="Glossary.html">Glossary</a>. The habits of the toolbox itself - lists, indexing, options - are in <a href="GeneralConcepts.html">General Concepts</a>.</p>
+</div>
+</body>
+</html>

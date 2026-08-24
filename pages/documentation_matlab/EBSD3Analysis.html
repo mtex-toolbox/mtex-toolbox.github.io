@@ -1,5 +1,5 @@
 ---
-title: "3D-EBSD Analysis"
+title: "3D - EBSD"
 
 sidebar: documentation_sidebar
 permalink: EBSD3Analysis.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>3D-EBSD Analysis</title>
+<title>3D - EBSD</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_EBSD3Analysis.m">
 </head>
@@ -21,7 +21,42 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSD3Analysis/EBSD3Analysis.m">
     edit page</a></font>
 <div>
-<h1>3D-EBSD Analysis</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>Everything measured on a polished surface is a section through something three-dimensional, and a section is a biased witness. Cut a box of grains with a plane and the circles you see are almost never through the middle of a grain, so the sizes are systematically too small. Cut an elongated grain across rather than along and it looks equiaxed. The boundary you measure is a line where a surface met your section, and its inclination is simply gone.</p>
+<p>Three-dimensional data removes these compromises. It comes from serial sectioning - polish, map, repeat - from diffraction techniques that see into the volume, or from simulated microstructures generated for modelling.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+
+fname = fullfile(mtexDataPath,'EBSD','SmallIN100_MeshStats.dream3d');
+grains = grain3d.load(fname);
+
+plot(grains,grains.meanOrientation,'LineStyle','none','micronbar','off')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSD3Analysis_01.png" %}
+</center>
+<p>What is drawn is the outside of the volume. The grains behind it are present in the data, which is the point, and also the reason a three-dimensional data set takes more care to look at than a map.</p>
+<h2 id="3">What three dimensions actually buy</h2>
+<p>Three things, and they are worth separating because they need different amounts of data.</p>
+<p>
+<b>Volume instead of area.</b> A grain has a real size rather than a sectioned one, so the size distribution needs no stereological correction and no assumption about shape.</p>
+<p>
+<b>The whole boundary.</b> The interface between two grains is a surface, so the two numbers that a section could not give - the inclination of the boundary plane - are measured rather than inferred. All five parameters of a boundary become available at once, per boundary, which is the single biggest gain.</p>
+<p>
+<b>Real neighbourhood.</b> Two grains that appear to touch in a section may not, and two that do touch may not appear to. Only in three dimensions is the contact network of the grains the actual one.</p>
+<h2 id="4">The data is shaped differently</h2>
+<p>A 2D map is a list of measurements on a grid. A 3D grain structure is usually a <b>mesh</b>: grains bounded by faces, faces bounded by edges, with the geometry carried by vertices. It is not a stack of pixels, and code written for maps does not carry over unchanged.</p>
+<p>The practical consequences are that faces have an orientation which may need fixing on import, that plotting means deciding what to hide, and that everything is larger - which is why a subset is usually selected before anything expensive.</p>
+<h2 id="5">Where to start</h2>
+<p>
+<a href="Grains3D.html">3D-Grains</a> is the entry point: importing a volume, what the resulting <a href="grain3d.grain3d.html"><code class="language-plaintext highlighter-rouge">grain3d</code></a> object contains, and how to draw it.</p>
+<p>
+<a href="Grains3DProperties.html">Properties</a> and <a href="Grains3DOperations.html">Operations</a> are the three-dimensional counterparts of the measuring and selecting pages in <a href="Grains.html">Grains</a>. Not everything has a counterpart yet, and those pages say which.</p>
+<p>
+<a href="NeperInterface.html">Neper Interface</a> connects MTEX to Neper, which generates synthetic polycrystals. This is more useful than it may sound: a simulated microstructure has a known answer, which makes it the honest way to test whether an analysis does what you think.</p>
+<h2 id="6">Next</h2>
+<p>The two-dimensional case is <a href="EBSDAnalysis.html">EBSD</a>, <a href="Grains.html">Grains</a> and <a href="GrainBoundaries.html">Grain Boundaries</a>, and those chapters are where the concepts are introduced. The boundary character that three dimensions finally makes fully measurable is discussed under <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a>.</p>
 </div>
 </body>
 </html>
