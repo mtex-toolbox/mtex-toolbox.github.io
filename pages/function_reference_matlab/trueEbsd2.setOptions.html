@@ -1,0 +1,118 @@
+---
+title: "trueEbsd2.setOptions"
+
+sidebar: function_reference_sidebar
+permalink: trueEbsd2.setOptions.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>trueEbsd2.setOptions</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_trueEbsd2__setOptions.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@trueEbsd2/setOptions.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>set the registration settings, for every hop or for one</p>
+<p>These describe how the job should register rather than what an image is, which is why they live on the job and not on <a href="mapImage.mapImage.html">mapImage</a>.</p>
+<h2 id="3">Description</h2>
+<p>Lengths, not pixels. A pixel count means a different thing before and after pixelSizeMatch, which is what forces a settings block to sit wedged between that call and calcDistortion; a length does not, so this may be called at any point.</p>
+<p>Anything left at 'auto' is measured from a cheap coarse correlation when calcDistortion first needs it, and what it chose is printed. Anything set here is used untouched and nothing is measured for it.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+job.setOptions('roiSize',5,'numROI',24)   % 5 um tiles on every hop
+job.setOptions(3,'registerOn','raw')      % hop 3 only
+job.setOptions(1,'registerOn','edge')     % match hop 1 on edges
+job.setOptions(1,'roiSize',[4 8])         % per fit stage of hop 1
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>job</tt>
+         </td>
+         <td>
+            <tt><a href="trueEbsd2.trueEbsd2.html">trueEbsd2</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>n</tt>
+         </td>
+         <td>
+            <tt>which map the settings apply to, all of them if omitted</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>roiSize</tt>
+         </td>
+         <td>
+            <tt>correlation tile width, a LENGTH in the sequence's scanUnit. One value, or one per fit stage. Zero means this map correlates against nothing, as the reference does</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>numROI</tt>
+         </td>
+         <td>
+            <tt>tiles across the image; the number down follows from the aspect ratio</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>registerOn</tt>
+         </td>
+         <td>
+            <tt>'edge' to correlate the edge transform, 'raw' for the values as they are. Not measured: 'edge' is the method's premise and raw is the exception, for a pair that already shares contrast - which the person who collected them knows and no cheap proxy reliably does. See PARAMETERS.md</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>edgeWidth</tt>
+         </td>
+         <td>
+            <tt>neighbour distance of the edge transform, a LENGTH</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>highContrast</tt>
+         </td>
+         <td>
+            <tt>whether this image can be registered on directly. true, false, or 'auto' to measure it</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>pixelTime</tt>
+         </td>
+         <td>
+            <tt>dwell time per pixel, carried but not used</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="trueEbsd2.trueEbsd2.html">trueEbsd2</a> <a href="trueEbsd2.calcDistortion.html">trueEbsd2.calcDistortion</a> <a href="mapImage.edgeMap.html">mapImage.edgeMap</a>
+</p>
+</div>
+</body>
+</html>
