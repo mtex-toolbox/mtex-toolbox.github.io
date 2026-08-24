@@ -28,13 +28,10 @@ toc: false
 <p>TrueEBSD will not guess at this, because guessing wrong does not fail loudly &mdash; the matching still runs, still fits, and hands back a finished-looking result that is quietly nonsense. So it asks, and this page shows how to answer.</p>
 <p>What a reference frame is, what a layout is and how <code class="language-plaintext highlighter-rouge">gridify</code> and <code class="language-plaintext highlighter-rouge">imageFrame</code> put a map in the order a picture is stored in is MTEX rather than TrueEBSD, and is explained on <a href="EBSDMapsAndImages.html">Maps and Images</a>. This page assumes it and gets on with the workflow.</p>
 <p>
-<a href="example_WCCoSmall.html">The short WC-Co page</a> is the ordinary case, where everything was collected in one session and there is nothing to say. Read that one first; this page is the same workflow with one extra step.</p>
-<p>This script needs the TrueEBSD toolbox, which is <b>not</b> part of MTEX and is distributed separately under Apache-2.0: <a href="https://github.com/vtvivian/mtex-trueebsd">https://github.com/vtvivian/mtex-trueebsd</a>
-</p>
-{% highlight matlab %}
-addpath(genpath('<path to mtex-trueEbsd>'))
-{% endhighlight %}
-<!--/introduction--><h2 id="1">The data</h2>
+<a href="EBSDTrueEbsd.html">The short WC-Co page</a> is the ordinary case, where everything was collected in one session and there is nothing to say. Read that one first; this page is the same workflow with one extra step.</p>
+<p>Everything here is part of MTEX - nothing has to be installed alongside it.</p>
+<!--/introduction-->
+<h2 id="1">The data</h2>
 <p>The same cut-down WC-Co dataset as the short page: an EBSD map and four SEM images of the same area.</p>
 <p>No plotting convention is set here. A convention decides how things are <b>drawn</b>; it has no bearing on how they are stored, and it is the storage that matters when two pictures are compared pixel by pixel.</p>
 {% highlight matlab %}
@@ -54,9 +51,9 @@ ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Properties: bc, bs, bands, MAD, quality, oldId
  Scan unit : um
- X x Y x Z : [10 → 30] x [8 → 23] x [0 → 0]
+ X × Y × Z : [10 → 30] × [8 → 23] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :96 x 128
+ Square grid  :96 × 128
  source: trueEbsdWCCo, centre half of the field of view, coarsened 4x
  madeBy: trueEBSD tools/makeWCCoSmall.m
 {% endhighlight %}
@@ -77,7 +74,7 @@ imgList = [mapImage(ebsd.bc, ebsd,         'name','bcImg'), ...
 % some simple filtering
 imgList(2:end) = rescale(imboxfilt(imgList(2:end),3));
 
-% the deformation sequence we used already in the
+% the same four distortions as the short page, one per hop
 T = [spatialTransformShift + spatialTransformDrift, ...
      spatialTransformId, ...
      spatialTransformShift, ...
@@ -110,17 +107,17 @@ plot(imgList)
 imgList = mapImage (x↑→y)
  
             image    pixel  frame    layout    name                 EBSD
- 1       96 x 128  0.16 um   x↑→y  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  192 x 256 x 3  0.08 um   x↑→y  row↓→col   fsdB3                    -
- 3      192 x 256  0.08 um   x↑→y  row↓→col   fsdT3                    -
- 4      192 x 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
- 5      192 x 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
+ 1       96 × 128  0.16 um   x↑→y  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  192 × 256 × 3  0.08 um   x↑→y  row↓→col   fsdB3                    -
+ 3      192 × 256  0.08 um   x↑→y  row↓→col   fsdT3                    -
+ 4      192 × 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
+ 5      192 × 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
 {% endhighlight %}
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_03.png" %}
 </center>
 <h2 id="7">Run the workflow</h2>
-<p>From here nothing is different. The sequence is in one frame, so the rest is the ordinary workflow &mdash; see <a href="example_WCCoSmall.html">the short page</a> for what each step does.</p>
+<p>From here nothing is different. The sequence is in one frame, so the rest is the ordinary workflow &mdash; see <a href="EBSDTrueEbsd.html">the short page</a> for what each step does.</p>
 {% highlight matlab %}
 job = trueEbsd2(imgList,T);
 
@@ -137,38 +134,38 @@ using default pixel size of 0.079501 um, minimum from imgList
  
 ans = trueEbsd2 (pixel size matched)
  
-      name          image   distortion  shift  residual
- 1   bcImg      192 x 256  shift-drift      -         -
- 2   fsdB3  192 x 256 x 3     identity      -         -
- 3   fsdT3      192 x 256        shift      -         -
- 4   fsdT1      192 x 256         tilt      -         -
- 5  fsdT10      192 x 256                   -         -
+      name          image   distortion  shift, px  residual, px
+ 1   bcImg      192 × 256  shift-drift          -             -
+ 2   fsdB3  192 × 256 × 3     identity          -             -
+ 3   fsdT3      192 × 256        shift          -             -
+ 4   fsdT1      192 × 256         tilt          -             -
+ 5  fsdT10      192 × 256                       -             -
  
- common grid: 192 x 256 at 0.08 µm
- 
- 
-ans = trueEbsd2 (pixel size matched)
- 
-      name          image   distortion  shift  residual
- 1   bcImg      192 x 256  shift-drift      -         -
- 2   fsdB3  192 x 256 x 3     identity      -         -
- 3   fsdT3      192 x 256        shift      -         -
- 4   fsdT1      192 x 256         tilt      -         -
- 5  fsdT10      192 x 256                   -         -
- 
- common grid: 192 x 256 at 0.08 µm
+ common grid: 192 × 256 at 0.08 µm
  
  
 ans = trueEbsd2 (pixel size matched)
  
-      name          image   distortion  shift  residual
- 1   bcImg      192 x 256  shift-drift      -         -
- 2   fsdB3  192 x 256 x 3     identity      -         -
- 3   fsdT3      192 x 256        shift      -         -
- 4   fsdT1      192 x 256         tilt      -         -
- 5  fsdT10      192 x 256                   -         -
+      name          image   distortion  shift, px  residual, px
+ 1   bcImg      192 × 256  shift-drift          -             -
+ 2   fsdB3  192 × 256 × 3     identity          -             -
+ 3   fsdT3      192 × 256        shift          -             -
+ 4   fsdT1      192 × 256         tilt          -             -
+ 5  fsdT10      192 × 256                       -             -
  
- common grid: 192 x 256 at 0.08 µm
+ common grid: 192 × 256 at 0.08 µm
+ 
+ 
+ans = trueEbsd2 (pixel size matched)
+ 
+      name          image   distortion  shift, px  residual, px
+ 1   bcImg      192 × 256  shift-drift          -             -
+ 2   fsdB3  192 × 256 × 3     identity          -             -
+ 3   fsdT3      192 × 256        shift          -             -
+ 4   fsdT1      192 × 256         tilt          -             -
+ 5  fsdT10      192 × 256                       -             -
+ 
+ common grid: 192 × 256 at 0.08 µm
  
 
  ◆ measured settings, override with setOptions
@@ -177,44 +174,44 @@ ans = trueEbsd2 (pixel size matched)
 
  ◆ distortion across 5 maps, 4 hops
 
-    distortion   stage              ROI     shift  residual
-    ──────────── ───────────── ──────── ───────── ─────────
+    distortion   stage              ROI          shift, px       residual, px
+    ──────────── ───────────── ──────── ────────────────── ──────────────────
   ● bcImg
-  │ shift-drift  shift            32 px   4.19 px
-  │              drift            32 px   3.72 px
-  │              ↳ residual                         3.36 px
+  │ shift-drift  shift            32 px 4.19 (+0.99,+0.12)
+  │              drift            32 px 3.72 (+0.33,+0.34)
+  │              ↳ residual                                3.36 (+0.26,+0.19)
   │ ↻ residual over 2 px, retrying with a 64 px ROI
-  │ shift-drift  shift            64 px   3.64 px
-  │              drift            64 px   2.04 px
-  │              ↳ residual                         1.53 px
+  │ shift-drift  shift            64 px 3.64 (+2.20,+1.84)
+  │              drift            64 px 2.04 (+0.23,+0.49)
+  │              ↳ residual                                1.53 (+0.07,+0.09)
   ▼
   ● fsdB3
-  │ identity     ·                    ·   0.00 px
-  │              ↳ difference                       1.20 px
+  │ identity     ·                    · 0.00 (+0.00,+0.00)
+  │              ↳ difference                              1.20 (-0.11,-1.02)
   ▼
   ● fsdT3
-  │ shift        shift            64 px   3.18 px
-  │              ↳ residual                         0.33 px
+  │ shift        shift            64 px 3.18 (-2.67,-1.73)
+  │              ↳ residual                                0.33 (+0.12,+0.23)
   ▼
   ● fsdT1
-  │ tilt         projective       64 px   3.63 px
-  │              poly11           64 px   0.29 px
-  │              poly22           64 px   0.29 px
-  │              ↳ residual                         0.28 px
+  │ tilt         projective       64 px 3.63 (+2.84,-2.25)
+  │              poly11           64 px 0.29 (+0.07,-0.12)
+  │              poly22           64 px 0.29 (+0.07,-0.12)
+  │              ↳ residual                                0.28 (+0.06,-0.12)
   ▼
   ● fsdT10
 
  
 ans = trueEbsd2 (shifts calculated)
  
-      name          image   distortion    shift  residual
- 1   bcImg      192 x 256  shift-drift   1.1 px    1.5 px
- 2   fsdB3  192 x 256 x 3     identity     0 px    1.2 px
- 3   fsdT3      192 x 256        shift   3.2 px   0.33 px
- 4   fsdT1      192 x 256         tilt  0.35 px   0.28 px
- 5  fsdT10      192 x 256                     -         -
+      name          image   distortion           shift, px        residual, px
+ 1   bcImg      192 × 256  shift-drift  1.08 (+0.20,+0.08)  1.53 (+0.07,+0.09)
+ 2   fsdB3  192 × 256 × 3     identity  0.00 (+0.00,+0.00)  1.20 (-0.11,-1.02)
+ 3   fsdT3      192 × 256        shift  3.18 (-2.67,-1.73)  0.33 (+0.12,+0.23)
+ 4   fsdT1      192 × 256         tilt  0.35 (+0.16,-0.03)  0.28 (+0.06,-0.12)
+ 5  fsdT10      192 × 256                                -                   -
  
- common grid: 192 x 256 at 0.08 µm
+ common grid: 192 × 256 at 0.08 µm
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -226,14 +223,14 @@ plot(job.undistortedList)
 {% highlight plaintext %}
 ans = trueEbsd2 (undistorted)
  
-      name          image   distortion    shift  residual
- 1   bcImg      192 x 256  shift-drift   1.1 px    1.5 px
- 2   fsdB3  192 x 256 x 3     identity     0 px    1.2 px
- 3   fsdT3      192 x 256        shift   3.2 px   0.33 px
- 4   fsdT1      192 x 256         tilt  0.35 px   0.28 px
- 5  fsdT10      192 x 256                     -         -
+      name          image   distortion           shift, px        residual, px
+ 1   bcImg      192 × 256  shift-drift  1.08 (+0.20,+0.08)  1.53 (+0.07,+0.09)
+ 2   fsdB3  192 × 256 × 3     identity  0.00 (+0.00,+0.00)  1.20 (-0.11,-1.02)
+ 3   fsdT3      192 × 256        shift  3.18 (-2.67,-1.73)  0.33 (+0.12,+0.23)
+ 4   fsdT1      192 × 256         tilt  0.35 (+0.16,-0.03)  0.28 (+0.06,-0.12)
+ 5  fsdT10      192 × 256                                -                   -
  
- common grid: 192 x 256 at 0.08 µm
+ common grid: 192 × 256 at 0.08 µm
 {% endhighlight %}
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_04.png" %}
@@ -244,8 +241,8 @@ ans = trueEbsd2 (undistorted)
 {% highlight matlab %}
 ebsdOut = job.undistortedList(1).ebsd;
 
-fprintf('aligned image: %d x %d\n', size(job.undistortedList(1).img,1), size(job.undistortedList(1).img,2));
-fprintf('EBSD object  : %d x %d\n', size(ebsdOut,1), size(ebsdOut,2));
+fprintf('aligned image: %d × %d\n', size(job.undistortedList(1).img,1), size(job.undistortedList(1).img,2));
+fprintf('EBSD object  : %d × %d\n', size(ebsdOut,1), size(ebsdOut,2));
 
 figure
 nextAxis
@@ -261,8 +258,8 @@ title('Undistorted fsdT1','Color','k')
 {% endhighlight %}
 
 {% highlight plaintext %}
-aligned image: 192 x 256
-EBSD object  : 192 x 256
+aligned image: 192 × 256
+EBSD object  : 192 × 256
 {% endhighlight %}
 <center>
 {% include inline_image.html file="example_WCCoFrames_2_05.png" %}
@@ -280,7 +277,7 @@ fprintf('corr(ebsd.bc, aligned image) = %.4f\n', r(1,2));
 corr(ebsd.bc, aligned image) = 0.9305
 {% endhighlight %}
 <h2 id="11">Finish</h2>
-<p>Everything this page added to <a href="example_WCCoSmall.html">the short workflow</a> was two lines: turning the map's frame until the plots agreed, and one call to <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> to say so. The sequence, the distortions, the box settings and the result are identical.</p>
+<p>Everything this page added to <a href="EBSDTrueEbsd.html">the short workflow</a> was two lines: turning the map's frame until the plots agreed, and one call to <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> to say so. The sequence, the distortions, the box settings and the result are identical.</p>
 <p>If your map and images were collected the same way up you need none of it. Reach for this when the plots disagree, or when building the job stops with <code class="language-plaintext highlighter-rouge">trueEbsd:frameMismatch</code> &mdash; which is TrueEBSD telling you it has spotted the problem rather than guessing past it.</p>
 </div>
 </body>

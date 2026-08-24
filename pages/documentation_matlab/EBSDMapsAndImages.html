@@ -32,7 +32,7 @@ To make changes, update the MATLAB code and republish this document.
 </li>
 </ul>
 </div>
-<p>The first decides what is drawn where. The second decides what <code class="language-plaintext highlighter-rouge">img(i,j)</code> means. This page walks through both on one WC-Co dataset, an EBSD map and four forescatter images of the same 20 x 15 micron area.</p>
+<p>The first decides what is drawn where. The second decides what <code class="language-plaintext highlighter-rouge">img(i,j)</code> means. This page walks through both on one WC-Co dataset, an EBSD map and four forescatter images of the same 20 &times; 15 micron area.</p>
 {% highlight matlab %}
 plottingConvention.default('y↓→x');
 
@@ -52,9 +52,9 @@ ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Properties: bc, bs, bands, MAD, quality, oldId
  Scan unit : um
- X x Y x Z : [10 → 30] x [8 → 23] x [0 → 0]
+ X × Y × Z : [10 → 30] × [8 → 23] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :96 x 128
+ Square grid  :96 × 128
  source: trueEbsdWCCo, centre half of the field of view, coarsened 4x
  madeBy: trueEBSD tools/makeWCCoSmall.m
 {% endhighlight %}
@@ -69,9 +69,9 @@ imgList = [mapImage(ebsd.bc,ebsd,         'name','bcImg'), ...
 imgList = mapImage (y↓→x)
  
         image    pixel   frame    layout    name                 EBSD
- 1   96 x 128  0.16 um    y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  192 x 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
- 3  192 x 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
+ 1   96 × 128  0.16 um    y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  192 × 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
+ 3  192 × 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
 {% endhighlight %}
 <p>Plotting the sequence draws each entry where it sits, one axis per picture</p>
 {% highlight matlab %}
@@ -111,11 +111,11 @@ imgList = [mapImage(ebsd.bc, ebsd,         'name', 'bcImg'), ...
 imgList = mapImage (y↓→x)
  
         image    pixel   frame    layout    name                 EBSD
- 1   128 x 96  0.16 um    y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  192 x 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
- 3  192 x 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
+ 1   128 × 96  0.16 um    y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  192 × 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
+ 3  192 × 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
 {% endhighlight %}
-<p>The map's array is 128 x 96 now where the pictures are 192 x 256 - the two are transposed to each other. Plotting shows it at once: the map is on its side relative to the images, and somewhere else on the specimen</p>
+<p>The map's array is 128 &times; 96 now where the pictures are 192 &times; 256 - the two are transposed to each other. Plotting shows it at once: the map is on its side relative to the images, and somewhere else on the specimen</p>
 {% highlight matlab %}
 plot(imgList,'layout',[1,3],'refFrame','on')
 {% endhighlight %}
@@ -143,9 +143,9 @@ imgList = transformReferenceFrame(imgList,ebsdFrame,'byScreenAlignment')
 imgList = mapImage (x↑→y)
  
         image    pixel  frame    layout    name                 EBSD
- 1   96 x 128  0.16 um   x↑→y  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  192 x 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
- 3  192 x 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
+ 1   96 × 128  0.16 um   x↑→y  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  192 × 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
+ 3  192 × 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -155,7 +155,7 @@ plot(imgList,'layout',[1,3])
 {% include inline_image.html file="EBSDMapsAndImages_04.png" %}
 </center>
 <h2 id="11">How the Array Is Stored</h2>
-<p>Look at the <code class="language-plaintext highlighter-rouge">layout</code> column above. It changed too, and so did the shape of the map - a 128 x 96 array came back 96 x 128. That is the second question, and it has nothing to do with the specimen: it is the order the numbers sit in memory.</p>
+<p>Look at the <code class="language-plaintext highlighter-rouge">layout</code> column above. It changed too, and so did the shape of the map - a 128 &times; 96 array came back 96 &times; 128. That is the second question, and it has nothing to do with the specimen: it is the order the numbers sit in memory.</p>
 <p>The layout is a <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a>, and there is nothing more to it than two directions - the one the row index advances along, and the one the column index advances along, in that order</p>
 {% highlight matlab %}
 imgList(1).layout
@@ -200,9 +200,9 @@ ebsdI = EBSDsquare (y↓→x, row←col↓)
  
  Properties: bc, bs, bands, MAD, quality, oldId
  Scan unit : um
- X x Y x Z : [10 → 30] x [8 → 23] x [0 → 0]
+ X × Y × Z : [10 → 30] × [8 → 23] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :128 x 96
+ Square grid  :128 × 96
  source: trueEbsdWCCo, centre half of the field of view, coarsened 4x
  madeBy: trueEBSD tools/makeWCCoSmall.m
 {% endhighlight %}

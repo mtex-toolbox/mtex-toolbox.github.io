@@ -38,11 +38,11 @@ ebsd = EBSDsquare (y↑→x, row↑→col)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
+ X × Y × Z : [0 → 50] × [0 → 41] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :137 x 167
+ Square grid  :137 × 167
 {% endhighlight %}
-<p>This is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, i.e. the 22879 measurements are stored as a 137 x 167 matrix, one entry per scan position and arranged the way the map is. Apart from that it behaves like any other <a href="EBSD.EBSD.html">EBSD</a> variable</p>
+<p>This is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>, i.e. the 22879 measurements are stored as a 137 &times; 167 matrix, one entry per scan position and arranged the way the map is. Apart from that it behaves like any other <a href="EBSD.EBSD.html">EBSD</a> variable</p>
 {% highlight matlab %}
 plot(ebsd('Magnesium'),ebsd('Magnesium').orientations)
 {% endhighlight %}
@@ -56,7 +56,7 @@ ebsd.unitCell
 
 {% highlight plaintext %}
 ans = vector3d (y↑→x)
- size: 1 x 4
+ size: 1 × 4
       x     y     z
   -0.15 -0.15     0
   -0.15  0.15     0
@@ -85,7 +85,7 @@ ans = EBSD (y↑→x)
     Id   Phase              orientation   bands    bc    bs   error   mad   oldId
  13613       1   (155.8°,100.6°,239.3°)      10   149   133       0   0.7    8283
  Scan unit : um
- X x Y x Z : [30 → 30] x [15 → 15] x [0 → 0]
+ X × Y × Z : [30 → 30] × [15 → 15] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>In the default layout the first matrix dimension is the grid direction closest to y and the second one the grid direction closest to x, both oriented such that the coordinates increase. Accordingly <code class="language-plaintext highlighter-rouge">ebsd(1,1)</code> is the corner with the smallest coordinates and <code class="language-plaintext highlighter-rouge">ebsd(i,j)</code> is the j-th pixel of the i-th scan row. This is a property of the map and not of the file - it is the same whichever corner the acquisition started from and whichever direction it scanned in. Pass <code class="language-plaintext highlighter-rouge">'rowMajor'</code> to <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> if you want the transposed layout.</p>
@@ -115,9 +115,9 @@ ebsdI = EBSDsquare (y↑→x, row←col↑)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
+ X × Y × Z : [0 → 50] × [0 → 41] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :167 x 137
+ Square grid  :167 × 137
 {% endhighlight %}
 <p>Nothing was resampled and no value invented: a transpose and two flips are all that is ever applied, which is why this is safe to do to orientation data. A map states the layout it is in, so it can be read back off</p>
 {% highlight matlab %}
@@ -168,9 +168,9 @@ ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'],...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: 92 of 613 indexed measurements share a lattice cell with another one,
-so gridding them would drop those measurements. Keeping the data as a list -
-call gridify explicitly if you want the raster anyway. 
+Warning: 92 of 613 indexed measurements share a lattice cell with another
+one, so gridding them would drop those measurements. Keeping the data as a
+list - call gridify explicitly if you want the raster anyway. 
  
 ebsd = EBSD (Y1↓→X1)
  
@@ -183,7 +183,7 @@ ebsd = EBSD (Y1↓→X1)
  
  Properties: bands, bc, bs, error, mad
  Scan unit : um
- X x Y x Z : [2 → 716] x [2 → 623] x [0 → 0]
+ X × Y × Z : [2 → 716] × [2 → 623] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>The same happens for a scan whose positions are too irregular to span a sensible raster at all. Independently of the data you may always ask for a plain list, either for a single import</p>
@@ -211,7 +211,7 @@ ebsdMg = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
+ X × Y × Z : [0 → 50] × [0 → 41] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>We may always force it back into matrix form by reapplying the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>
@@ -228,9 +228,9 @@ ebsdMg = EBSDsquare (y↑→x, row↑→col)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
+ X × Y × Z : [0 → 50] × [0 → 41] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :137 x 167
+ Square grid  :137 × 167
 {% endhighlight %}
 <p>The two matrix shaped variables <code class="language-plaintext highlighter-rouge">ebsd</code> and <code class="language-plaintext highlighter-rouge">ebsdMg</code> differ in what sits at the 46 positions that were not indexed. In <code class="language-plaintext highlighter-rouge">ebsd</code> those are measurements like any other, belonging to the separate phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code>. In <code class="language-plaintext highlighter-rouge">ebsdMg</code> they were never part of the selection, so <code class="language-plaintext highlighter-rouge">gridify</code> had nothing to put there and left the lattice site empty - its orientation is <code class="language-plaintext highlighter-rouge">NaN</code> and it belongs to no phase at all, which is what an empty <code class="language-plaintext highlighter-rouge">phaseId</code> distinguishes</p>
 {% highlight matlab %}
@@ -304,9 +304,9 @@ ebsd = EBSDhex (y↑→x)
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, oldId, grainId
  Scan unit : um
- X x Y x Z : [0 → 592] x [0 → 585] x [0 → 0]
+ X × Y × Z : [0 → 592] × [0 → 585] × [0 → 0]
  Normal vector: (0,0,1)
- Hex grid     :136 x 119
+ Hex grid     :136 × 119
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -339,9 +339,9 @@ ebsdS = EBSDsquare (y↑→x, row↑→col)
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, oldId, grainId
  Scan unit : um
- X x Y x Z : [0 → 595] x [0 → 585] x [0 → 0]
+ X × Y × Z : [0 → 595] × [0 → 585] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :118 x 120
+ Square grid  :118 × 120
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_06.png" %}
@@ -369,9 +369,9 @@ ebsdS = EBSDsquare (y↑→x, row↑→col)
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, oldId, grainId
  Scan unit : um
- X x Y x Z : [0 → 593] x [0 → 585] x [0 → 0]
+ X × Y × Z : [0 → 593] × [0 → 585] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :586 x 594
+ Square grid  :586 × 594
 {% endhighlight %}
 <center>
 {% include inline_image.html file="EBSDGrid_07.png" %}
@@ -392,9 +392,9 @@ ebsdR = EBSDhex (y↑→x)
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, oldId, grainId
  Scan unit : um
- X x Y x Z : [-198 → 555] x [0 → 752] x [0 → 0]
+ X × Y × Z : [-198 → 555] × [0 → 752] × [0 → 0]
  Normal vector: (0,0,1)
- Hex grid     :136 x 119
+ Hex grid     :136 × 119
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -417,9 +417,9 @@ ans = EBSDhex (y↑→x)
  
  Properties: confidenceindex, fit, imagequality, semsignal, unknown_11, unknown_12, unknown_13, unknown_14, oldId, grainId
  Scan unit : um
- X x Y x Z : [-198 → 555] x [0 → 752] x [0 → 0]
+ X × Y × Z : [-198 → 555] × [0 → 752] × [0 → 0]
  Normal vector: (0,0,1)
- Hex grid     :136 x 119
+ Hex grid     :136 × 119
 {% endhighlight %}
 <h2 id="31">Robustness to Distorted Grids</h2>
 <p>EBSD is measured on a tilted specimen, and a tilted surface is not imaged rigidly: seen from a finite working distance its far edge is further away and comes out smaller, so the scan positions no longer sit on a rigid lattice. MTEX reconstructs the underlying grid indices of an <a href="EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a> object robustly under this kind of smooth, non-rigid distortion - which matters for <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> above, but also for any operation that needs the map's grid structure internally, such as <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> or the <code class="language-plaintext highlighter-rouge">surf</code> plotting backend.</p>
@@ -439,7 +439,7 @@ ebsd = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [33000 → 36000] x [4500 → 7500] x [0 → 0]
+ X × Y × Z : [33000 → 36000] × [4500 → 7500] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
 <p>The command <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform</code></a> moves every pixel of a map, and its unit cell with it, leaving orientations and all other properties untouched. It takes a <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a>, so the distortion is written down as an object rather than as a closure - see <a href="EBSDSpatialTransform.html">Spatial Transforms</a>.</p>

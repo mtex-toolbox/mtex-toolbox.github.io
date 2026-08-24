@@ -46,94 +46,30 @@ plot(cK, 'labeled')     % legend with labels according to data range
 <h2 id="4">Example</h2>
 <p>Example 1: long axis mapping, with saturation given by aspect ratio get the data</p>
 {% highlight matlab %}
-mtexdata martensite
+mtexdata martensite silent
 grains = ebsd('indexed').calcGrains('minPixel',5);
 asr  = grains('indexed').aspectRatio;
 lax  = grains('indexed').longAxis;
-% set up colormap
-pK = planarColorKey(colorcet('C2'))
+{% endhighlight %}
+<p>set up colormap</p>
+{% highlight matlab %}
+pK = planarColorKey(colorcet('C2'));
 % since long axis direction is periodic and antipodal (=pi)
 pK.periode = pi;
-{% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↓→x, row↓→col)
- 
- Phase  Orientations         Mineral         Color  Symmetry  Crystal reference frame
-     0   92415 (27%)      notIndexed          none                                   
-     1  251187 (73%)  Iron bcc (old)  LightSkyBlue       432                         
- 
- Properties: bands, bc, bs, error, mad, reliabilityindex, oldId
- Scan unit : um
- X x Y x Z : [0 → 353] x [0 → 242] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :486 x 707
- 
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'white'
-        periode: NaN
-    quantileCap: 0.9750
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'Property 1'
-         label2: 'Property 2'
-{% endhighlight %}
-
-{% highlight matlab %}
-pK.label1 = 'phi'
-pK.label2 = 'a/b'
-% plot a map
-plot(grains('indexed'),pK.property2color(mod(lax.rho,pi)/degree,asr))
-% and a colorbar
-{% endhighlight %}
-
-{% highlight plaintext %}
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'white'
-        periode: 3.1416
-    quantileCap: 0.9750
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'phi'
-         label2: 'Property 2'
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'white'
-        periode: 3.1416
-    quantileCap: 0.9750
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'phi'
-         label2: 'a/b'
+pK.label1 = 'phi';
+pK.label2 = 'a/b';
+% and plot it
+plot(pK,mod(lax.rho,pi)/degree,asr)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="planarColorKey_01.png" %}
 </center>
+<p>use the key to colorize the map</p>
 {% highlight matlab %}
-figure
-plot(pK,mod(lax.rho,pi)/degree,asr)
+plot(grains('indexed'),pK.property2color(mod(lax.rho,pi)/degree,asr))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="planarColorKey_02.png" %}
-</center>
-<p>alternatively use radians</p>
-{% highlight matlab %}
-figure
-plot(pK,mod(lax.rho,pi),asr)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="planarColorKey_03.png" %}
 </center>
 <p>example 2: highlight grains which are large AND have a large aspect ratio</p>
 {% highlight matlab %}
@@ -142,110 +78,35 @@ v2 = grains('indexed').area;
 {% endhighlight %}
 <p>set a colormap</p>
 {% highlight matlab %}
-pK = planarColorKey(inferno)
-{% endhighlight %}
-
-{% highlight plaintext %}
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'white'
-        periode: NaN
-    quantileCap: 0.9750
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'Property 1'
-         label2: 'Property 2'
+pK = planarColorKey(inferno);
 {% endhighlight %}
 <p>shade to black</p>
 {% highlight matlab %}
-pK.shading = 'black'
-{% endhighlight %}
-
-{% highlight plaintext %}
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'black'
-        periode: NaN
-    quantileCap: 0.9750
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'Property 1'
-         label2: 'Property 2'
+pK.shading = 'black';
 {% endhighlight %}
 <p>set the range1 for v1</p>
 {% highlight matlab %}
-pK.range1 = [1 4]
-{% endhighlight %}
-
-{% highlight plaintext %}
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'black'
-        periode: NaN
-    quantileCap: 0.9750
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'Property 1'
-         label2: 'Property 2'
+pK.range1 = [1 4];
 {% endhighlight %}
 <p>set the autoselection of v2 a little lower</p>
 {% highlight matlab %}
 pK.quantileCap = 0.9;
 {% endhighlight %}
-
+<p>set labels</p>
+{% highlight matlab %}
+pK.label1 = 'asr'; pK.label2 = 'area';
+close all; plot(pK,v1,v2)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="planarColorKey_03.png" %}
+</center>
 {% highlight matlab %}
 plot(grains('indexed'),pK.property2color(v1,v2))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="planarColorKey_04.png" %}
 </center>
-<p>set labels</p>
-{% highlight matlab %}
-pK.label1 = 'asr'
-pK.label2 = 'area'
-figure
-plot(pK,v1,v2)
-{% endhighlight %}
-
-{% highlight plaintext %}
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'black'
-        periode: NaN
-    quantileCap: 0.9000
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'asr'
-         label2: 'Property 2'
-pK = 
-  planarColorKey with properties:
-
-       colorMap: [256×3 double]
-       satRange: [2×1 double]
-        shading: 'black'
-        periode: NaN
-    quantileCap: 0.9000
-         range1: [2×1 double]
-         range2: [2×1 double]
-         label1: 'asr'
-         label2: 'area'
-{% endhighlight %}
-<center>
-{% include inline_image.html file="planarColorKey_05.png" %}
-</center>
-<h2 id="20">See also</h2>
+<h2 id="15">See also</h2>
 </div>
 </body>
 </html>
