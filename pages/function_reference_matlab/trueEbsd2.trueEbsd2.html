@@ -27,7 +27,7 @@ To make changes, update the MATLAB code and republish this document.
 <p>Two pictures of the same area rarely overlay: the EBSD map is taken at a tilt and drifts as it scans, the electron images do not, and no single distortion relates the extremes. TrueEBSD relates them through a CHAIN of intermediate maps instead, each pair separated by one distortion simple enough to fit, and composes the hops. What comes out is one common grid on which every pixel of every map is the same piece of specimen, so an image becomes a per pixel property of the map.</p>
 <p>The sequence is ordered from the most distorted map to the ground truth, and hop n separates imgList(n) from imgList(n+1). Three methods walk it: pixelSizeMatch puts every map on one grid, calcDistortion measures and fits each hop, undistort accumulates the hops and resamples.</p>
 <p>A handle class, as every class guiding a process in MTEX is - see <a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a>. The methods still return the job, so job = pixelSizeMatch(job,pixSz) reads as before, but the job is modified in place: a second variable holding it is an alias rather than a snapshot, and a method that errors part way leaves the job partly filled.</p>
-<p>THE MODEL IS THE CLASS. A hop's distortion is an unfitted <a href="spatialTransform.spatialTransform.html">spatialTransform</a> - the class names which distortion separates the pair and calcDistortion fills in the coefficients. A multi stage hop is written with + and never *, because mtimes absorbs an operand reporting isid and an unfitted prototype has zero coefficients, so * would silently drop a stage. There is no sentinel on the reference: where nothing separates a pair, the entry is spatialTransformId.</p>
+<p>THE MODEL IS THE CLASS. A hop's distortion is an unfitted <a href="spatialTransform.html">spatialTransform</a> - the class names which distortion separates the pair and calcDistortion fills in the coefficients. A multi stage hop is written with + and never *, because mtimes absorbs an operand reporting isid and an unfitted prototype has zero coefficients, so * would silently drop a stage. There is no sentinel on the reference: where nothing separates a pair, the entry is spatialTransformId.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 job = trueEbsd2(imgList)
@@ -57,7 +57,7 @@ job.undistort
             <tt>T</tt>
          </td>
          <td>
-            <tt><a href="spatialTransform.spatialTransform.html">spatialTransform</a> array, one per hop, numel(imgList)-1 of them. Unfitted prototypes. May also be set afterwards as job.T</tt>
+            <tt><a href="spatialTransform.html">spatialTransform</a> array, one per hop, numel(imgList)-1 of them. Unfitted prototypes. May also be set afterwards as job.T</tt>
          </td>
       </tr>
    </table>
@@ -91,7 +91,7 @@ job.undistort
             <tt>T</tt>
          </td>
          <td>
-            <tt><a href="spatialTransform.spatialTransform.html">spatialTransform</a> array, one per hop</tt>
+            <tt><a href="spatialTransform.html">spatialTransform</a> array, one per hop</tt>
          </td>
       </tr>
       <tr>
@@ -144,12 +144,12 @@ job.undistort
       </tr>
       <tr>
          <td colspan="2">
-            <tt>job.imgList(n)          % <a href="mapImage.mapImage.html">mapImage</a> job.T(n)                % <a href="spatialTransform.spatialTransform.html">spatialTransform</a>, hop n</tt>
+            <tt>job.imgList(n)          % <a href="mapImage.mapImage.html">mapImage</a> job.T(n)                % <a href="spatialTransform.html">spatialTransform</a>, hop n</tt>
          </td>
       </tr>
       <tr>
          <td colspan="2">
-            <tt>job.T is a sequence and every <a href="spatialTransform.spatialTransform.html">spatialTransform</a> method takes one transform,</tt>
+            <tt>job.T is a sequence and every <a href="spatialTransform.html">spatialTransform</a> method takes one transform,</tt>
          </td>
       </tr>
       <tr>
@@ -157,7 +157,7 @@ job.undistort
             <tt>so inv(job.T) and isid(job.T) do not work</tt>
          </td>
          <td>
-            <tt>index a hop, or fold the chain with *. See <a href="spatialTransform.spatialTransform.html">spatialTransform</a> and docs/adr/0007. job.opt(n)              % the settings for map n job.shifts{n}(m)        % hop n, fit stage m job.fitError(n)         % <a href="pairShifts.pairShifts.html">pairShifts</a></tt>
+            <tt>index a hop, or fold the chain with *. See <a href="spatialTransform.html">spatialTransform</a> and docs/adr/0007. job.opt(n)              % the settings for map n job.shifts{n}(m)        % hop n, fit stage m job.fitError(n)         % <a href="pairShifts.pairShifts.html">pairShifts</a></tt>
          </td>
       </tr>
    </table>
@@ -167,7 +167,7 @@ job.undistort
 </p>
 <h2 id="8">See also</h2>
 <p>
-<a href="mapImage.html">mapImage</a> <a href="spatialTransform.html">spatialTransform</a> <a href="pairShifts.html">pairShifts</a> <a href="trueEbsd2.pixelSizeMatch.html">trueEbsd2.pixelSizeMatch</a> <a href="trueEbsd2.calcDistortion.html">trueEbsd2.calcDistortion</a> <a href="trueEbsd2.undistort.html">trueEbsd2.undistort</a> <a href="trueEbsd2.setOptions.html">trueEbsd2.setOptions</a> <a href="parentGrainReconstructor.html">parentGrainReconstructor</a>
+<a href="mapImage.mapImage.html">mapImage</a> <a href="spatialTransform.html">spatialTransform</a> <a href="pairShifts.pairShifts.html">pairShifts</a> <a href="trueEbsd2.pixelSizeMatch.html">trueEbsd2.pixelSizeMatch</a> <a href="trueEbsd2.calcDistortion.html">trueEbsd2.calcDistortion</a> <a href="trueEbsd2.undistort.html">trueEbsd2.undistort</a> <a href="trueEbsd2.setOptions.html">trueEbsd2.setOptions</a> <a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a>
 </p>
 </div>
 </body>
