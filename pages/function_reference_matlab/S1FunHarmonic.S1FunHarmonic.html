@@ -23,11 +23,129 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>a class representing a function on the sphere</p>
+<p>a class representing a function on the circle by its Fourier series</p>
+<p>The function is stored by its Fourier coefficients fhat, running from degree -N to N. Accordingly fhat has an odd number of rows.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
-on the sphere
+sF = S1FunHarmonic(fhat)
+sF = S1FunHarmonic(fun)
+sF = S1FunHarmonic(fun,'bandwidth',N)
 {% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fhat</tt>
+         </td>
+         <td>
+            <tt>Fourier coefficients, from degree -N to N</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fun</tt>
+         </td>
+         <td>
+            <tt><a href="S1Fun.S1Fun.html">S1Fun</a> or @function_handle to be approximated</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S1FunHarmonic.S1FunHarmonic.html">S1FunHarmonic</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>maximum harmonic degree</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fhat</tt>
+         </td>
+         <td>
+            <tt>Fourier coefficients</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>maximum harmonic degree</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>antipodal</tt>
+         </td>
+         <td>
+            <tt>f(x) = f(x + pi)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>even</tt>
+         </td>
+         <td>
+            <tt>f(x) = f(-x)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>odd</tt>
+         </td>
+         <td>
+            <tt>f(x) = -f(-x)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>isReal</tt>
+         </td>
+         <td>
+            <tt>the function takes only real values</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">Example</h2>
+{% highlight matlab %}
+sF = S1FunHarmonic.quadrature(@(x) sin(2*x))
+{% endhighlight %}
+
+{% highlight plaintext %}
+sF = S1FunHarmonic
+  bandwidth: 1024
+  antipodal: true
+  odd: true
+{% endhighlight %}
+<h2 id="9">See also</h2>
+<p>
+<a href="S1Fun.S1Fun.html">S1Fun</a> <a href="S1FunHandle.S1FunHandle.html">S1FunHandle</a>
+</p>
 </div>
 </body>
 </html>
