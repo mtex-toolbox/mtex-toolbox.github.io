@@ -21,7 +21,46 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/PhaseTransitions/PhaseTransitions.m">
     edit page</a></font>
 <div>
-<h1>Phase Transitions</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>When a material changes phase in the solid state, the new crystals do not appear at random angles. The old lattice is still there while the new one forms, and the cheapest way to build it is to keep as many atomic planes as possible in place. The result is an <b>orientation relationship</b>: a fixed angular relation between parent and child lattices, the same at every place the transformation happened.</p>
+<p>Symmetry then does what it always does. If the parent lattice has 24 rotations that leave it unchanged, the one relationship can be satisfied in many distinct ways, and each way gives a differently oriented child crystal. These are the <b>variants</b>, and one parent grain typically transforms into several of them at once.</p>
+<p>Below are the child orientations that a single parent grain can produce under the Kurdjumov-Sachs relationship, in a pole figure.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+
+csParent = crystalSymmetry('m-3m',[3.65 3.65 3.65],'mineral','Austenite');
+csChild  = crystalSymmetry('m-3m',[2.87 2.87 2.87],'mineral','Ferrite');
+
+p2c = orientation.KurdjumovSachs(csParent,csChild);
+
+% one parent grain, and the child orientations it can produce
+oriParent = orientation.byEuler(0,0,0,csParent);
+oriChild = variants(p2c,oriParent);
+
+plotPDF(oriChild,Miller(0,0,1,csChild),'MarkerSize',8,'figSize','small')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="PhaseTransitions_01.png" %}
+</center>
+<p>Twenty-four variants from one parent, all from a single relationship. Kurdjumov-Sachs gives 24; the Nishiyama-Wassermann relationship gives 12. Which of them a real steel follows, and whether it follows one exactly, is a question the data has to answer rather than something to assume.</p>
+<h2 id="3">Reading the transformation backwards</h2>
+<p>The practical problem is usually the reverse of the picture above. What survives to be measured is the child phase - martensite, ferrite, alpha titanium - while the parent that produced it has gone. Yet the parent grain structure is what controls the properties, and it is what a metallurgist wants to know.</p>
+<p>
+<b>Parent grain reconstruction</b> recovers it. Because all the children of one parent are variants of a single orientation, a group of neighbouring child grains whose orientations are mutually consistent with the relationship can be traced back to a common parent. It works in two steps that are worth keeping distinct: each child grain is first <b>transformed</b> to a candidate parent orientation, and neighbouring candidates that agree are then <b>merged</b> into one parent grain.</p>
+<p>The difficulty is that the first step is ambiguous. A single child grain is consistent with several possible parents, and choosing between them requires looking at the neighbours - which is why the algorithms below are graph problems rather than per-grain calculations.</p>
+<h2 id="4">Variants, packets and Bain groups</h2>
+<p>Variants are often grouped, and two groupings are in common use. A <b>packet</b> collects variants sharing a habit plane - the parent plane the child lattice lines up with. A <b>Bain group</b> collects variants sharing a Bain correspondence, that is, which parent cube axis the child aligns to.</p>
+<p>These are two independent classifications of the same 24 variants, not two levels of one hierarchy. A variant belongs to a packet and to a Bain group, and neither is a subdivision of the other.</p>
+<h2 id="5">Where to start</h2>
+<p>
+<a href="ParentChildVariants.html">Parent Child Variants</a> and <a href="MartensiteVariants.html">Martensite Variants</a> introduce relationships and variants, and are the pages the rest depend on. <a href="OrientationRelationshipFit.html">Fitting the Orientation Relationship</a> comes next in practice: the relationship in your material is probably not exactly the textbook one, and fitting it to the data before reconstructing makes a visible difference.</p>
+<p>Two complete worked reconstructions follow, one for steel and one for titanium: <a href="MaParentGrainReconstruction.html">Parent Austenite Reconstruction</a> and <a href="TiBetaReconstruction.html">Parent Beta Reconstruction</a>. Start with whichever matches your material.</p>
+<p>The algorithms behind them are described separately. <a href="GrainGraphBasedReconstruction.html">Grain Graph Based Reconstruction</a> reasons about grain-to-grain compatibility; <a href="TriplePointBasedReconstruction.html">Triple Point Based Reconstruction</a> uses the extra constraint available where three grains meet. <a href="LowLevelParentGrainReconstruction.html">Low Level Reconstruction</a> and <a href="MaParentGrainReconstructionAdvanced.html">Low Level Reconstruction 2</a> open up the individual steps for cases the automatic route handles badly.</p>
+<p>
+<a href="TransformationTexture.html">Transformation Texture</a> asks the forward question instead: given a parent texture and a relationship, what texture does the product phase have?</p>
+<h2 id="6">Next</h2>
+<p>The relationships here are <a href="Misorientations.html">Misorientations</a> with extra structure. The grains being reconstructed come from <a href="Grains.html">Grains</a>, and the maps they come from are <a href="EBSDAnalysis.html">EBSD</a>.</p>
 </div>
 </body>
 </html>

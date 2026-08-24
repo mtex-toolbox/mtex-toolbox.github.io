@@ -34,6 +34,8 @@ pixel, ask where it came from.
 {% endhighlight %}
 <p>Transforms are 2D - they act on x and y and leave z alone.</p>
 <p>Subclasses of one base may be collected in one array, so a chain of differently modelled hops is [T1 T2 T3] rather than a cell array.</p>
+<p>AN ARRAY IS A CHAIN, not a collection of N transforms: [T1 T2 T3] means apply T1, then T2, then T3, and it is the composite T1 + T2 + T3 written out. So its inverse is [inv(T3) inv(T2) inv(T1)] - inverting REVERSES, as spatialTransformComposite/inv already does with its stages. This is the one place the class departs from the MTEX reading where an array is N entities and every method is elementwise. See docs/adr/0007.</p>
+<p>None of that is implemented yet. Every method here takes one transform, and an array is only a container: MATLAB dispatches a method on a heterogeneous array only if it is sealed, and only mtimes, plus and display are, so inv(T), isid(T) and char(T) all fail on a sequence. Until they are sealed, fold the chain with * - inv(T(3)*T(2)*T(1)) - or go hop by hop with arrayfun(@inv,T,'UniformOutput',false), which does not reverse.</p>
 <p>There are two ways to put two transforms together, and they are not the same operation:</p>
 {% highlight matlab %}
 T1 + T2   builds a MODEL. It reads left to right, T1 applied first, and

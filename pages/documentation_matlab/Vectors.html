@@ -23,6 +23,36 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>Almost everything in texture analysis is eventually a direction. A crystal axis, the normal of a lattice plane, the direction a rolling mill pushed the metal, the direction a diffracted beam left the sample - all of them are answers to the question "which way?", and none of them cares how long the arrow is.</p>
+<p>This is why directions here live on a sphere. Fix the length at one and a direction becomes a point on the unit sphere, so a collection of directions becomes a cloud of points and the natural way to look at it is a projection of that sphere onto the page. Every pole figure you will ever plot is exactly that.</p>
+{% highlight matlab %}
+% a hundred random directions and the three specimen axes
+v = vector3d.rand(100);
+
+plot(v,'upper','grid','MarkerSize',4)
+hold on
+plot([vector3d.X,vector3d.Y,vector3d.Z],'labeled','backgroundColor','w')
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Vectors_01.png" %}
+</center>
+<p>Only half the sphere is drawn above. That is not laziness - see the note on axes below.</p>
+<h2 id="3">Directions and axes are not the same thing</h2>
+<p>A <b>direction</b> distinguishes its two ends: north is not south. An <b>axis</b> does not. The normal of a lattice plane is an axis, because the plane has no preferred side, and so is the direction of a twofold rotation. In MTEX this distinction is the <code class="language-plaintext highlighter-rouge">antipodal</code> flag, and setting it changes real answers: the angle between two axes is never obtuse, the mean of a set of axes is not the mean of the same set read as directions, and a density estimated from axes is symmetric under inversion by construction.</p>
+<p>Forgetting the flag is one of the more common ways to get a plausible wrong number, because nothing complains. When a quantity is an axis, say so.</p>
+<h2 id="4">Where to start</h2>
+<p>
+<a href="VectorDefinition.html">Definition</a> shows the ways of building a direction - from Cartesian components, from spherical angles, from the specimen axes - and how to move between them.</p>
+<p>
+<a href="VectorsOperations.html">Operations</a> covers the arithmetic: angles, dot and cross products, rotations, projections. Read it before writing loops, since a <code class="language-plaintext highlighter-rouge">vector3d</code> variable holds a whole cloud of directions and the operations work on all of them at once.</p>
+<p>Then two pages about looking at many directions rather than one. <a href="VectorsAxes.html">Axes</a> is where the antipodal distinction above is treated properly, and <a href="VectorsDensityEstimation.html">Density Estimation</a> turns a cloud of directions into a smooth function on the sphere, which is the step from data to distribution.</p>
+<p>
+<a href="VectorGrids.html">Spherical Grids</a> matters when you need directions spread evenly over the sphere - for numerical integration, or for sampling a function. There is no perfectly even arrangement of points on a sphere, which is why several constructions exist and why they differ.</p>
+<p>
+<a href="VectorsImport.html">Import</a> and <a href="VectorsExport.html">Export</a> handle files.</p>
+<h2 id="5">Next</h2>
+<p>Directions attached to a crystal lattice, written as Miller indices, are the subject of <a href="CrystalGeometry.html">Crystal Geometry</a>. Functions defined on the sphere rather than points on it are <a href="SphericalFunctions.html">Spherical Functions</a>. Rotating a direction, and the objects that do the rotating, are <a href="Rotations.html">Rotations</a>.</p>
 </div>
 </body>
 </html>

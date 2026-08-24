@@ -21,7 +21,40 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Tensors/Tensors.m">
     edit page</a></font>
 <div>
-<h1>Tensors</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>Some properties of a material are the same whichever way you look - density, temperature, mass. Most interesting ones are not. Push on a crystal along one axis and it stiffens differently than along another; light travels through it at a speed that depends on direction; heat and electricity flow more easily one way than the next. A <b>tensor</b> is the object that carries such a direction-dependent property.</p>
+<p>The pattern is always the same. A physical law relates two quantities, and if both of them have directions then the constant between them must carry directions too. Stress and strain are each described by a 3x3 matrix, so the stiffness relating them needs four indices and 81 components. The rank of a tensor is simply how many directions it has to keep track of.</p>
+<p>Below is the stiffness of olivine, drawn as the stiffness a rod cut from the crystal would have, in every possible direction.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+
+cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivine');
+C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'),cs);
+
+plot(C.YoungsModulus,'complete','upper')
+mtexColorbar('title','Young''s modulus in GPa')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Tensors_01.png" %}
+</center>
+<p>Olivine is stiffest along one axis and softest along another, by roughly 165 to 287 GPa, and the plot is symmetric about each of the three perpendicular mirror planes of an orthorhombic crystal. A tensor must be invariant under every symmetry operation of its phase, and that requirement is what collapses those 81 stiffness components down to the nine independent ones an orthorhombic crystal actually has - and to three for a cubic one.</p>
+<h2 id="3">A tensor is only meaningful with its frame</h2>
+<p>The numbers in a tensor mean nothing without saying which coordinate axes they refer to. The very same physical property has different components in the crystal frame and in the specimen frame, and converting between them is a rotation applied to every index at once.</p>
+<p>This is the single most common source of wrong answers with tensors, and it is quiet: components in the wrong frame are still plausible numbers. It is worse for low-symmetry crystals, where there is a genuine choice in how the crystal axes are laid onto Cartesian ones, so two sources can publish correct tensors that disagree - see <a href="CrystalReferenceSystem.html">Reference System</a>. MTEX attaches the symmetry and its frame to every tensor for exactly this reason.</p>
+<h2 id="4">From one crystal to a polycrystal</h2>
+<p>A specimen is not one crystal. To predict how the aggregate behaves you need to combine the single-crystal tensor with the distribution of orientations - the ODF - and that combination is an <b>average</b>.</p>
+<p>There is no single right way to do it. Averaging the stiffnesses assumes every grain feels the same strain; averaging the compliances assumes every grain feels the same stress. Both assumptions are wrong in a real material, they bracket the truth from above and below, and the gap between them is a genuine statement about how much the answer is not determined by texture alone.</p>
+<h2 id="5">Where to start</h2>
+<p>
+<a href="TensorDefinition.html">Definition</a> builds tensors of each rank and introduces the specific classes - stress, strain, stiffness and the rest. <a href="TensorImport.html">Import</a> reads published tensors from file, which is how most real ones arrive.</p>
+<p>
+<a href="TensorArithmetics.html">Arithmetics</a> covers the operations, above all rotation into another frame and the contraction that applies a tensor to a vector or to another tensor. <a href="TensorVisualisation.html">Plotting</a> makes pictures like the one above.</p>
+<p>
+<a href="TensorAverage.html">Averages</a> is the polycrystal step described just now, and the page to read before quoting any bulk property.</p>
+<p>Three worked properties follow, each a different rank and a different physics: <a href="PiezoElectricity.html">Piezo Electricity</a>, <a href="BirefringenceDemo.html">Birefringence</a> and <a href="MagneticAnisotropy.html">Magnetic Anisotropy</a>.</p>
+<h2 id="6">Next</h2>
+<p>Elastic tensors have a chapter of their own, <a href="Elasticity.html">Elasticity</a>, including wave speeds. <a href="Plasticity.html">Plasticity</a> covers deformation past the elastic limit. The orientation distribution the averages need is <a href="ODFAnalysis.html">ODF</a>, and the crystal frames tensors live in are <a href="CrystalGeometry.html">Crystal Geometry</a>.</p>
 </div>
 </body>
 </html>

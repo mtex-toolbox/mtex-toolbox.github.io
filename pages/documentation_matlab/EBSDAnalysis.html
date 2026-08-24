@@ -21,7 +21,43 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/EBSDAnalysis/EBSDAnalysis.m">
     edit page</a></font>
 <div>
-<h1>EBSD</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>Electron backscatter diffraction measures one orientation at a time. The beam sits on a point of a polished surface, the pattern that comes back is indexed against a list of candidate phases, and the result is a phase and an orientation for that point. Step the beam across a grid and you have a map: hundreds of thousands of orientations, each with a position.</p>
+<p>That combination is what makes EBSD different from a diffraction experiment. A pole figure tells you which orientations are present in a volume; an EBSD map tells you which orientation is present <b>where</b>. Every question about microstructure - grain size, neighbourhood, gradients inside a grain, how a boundary is oriented - needs that "where", and this chapter is about getting it and trusting it.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+mtexdata forsterite silent
+
+% colour every Forsterite measurement by its orientation
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="EBSDAnalysis_01.png" %}
+</center>
+<p>The colour is not a measurement. It is a <b>colour key</b>, a choice of how to turn a three-parameter orientation into three numbers you can see, and different keys make the same map look quite different. Nothing here can be read quantitatively off the colours alone.</p>
+<h2 id="3">What the data actually is</h2>
+<p>A <code class="language-plaintext highlighter-rouge">ebsd</code> variable is a list, not an image. Each entry carries a position, a phase and an orientation, and the entries happen to sit on a grid because that is how they were measured. This matters more than it sounds: filtering the list to one phase leaves gaps rather than blanks, and any operation that needs neighbours has to reconstruct the grid first.</p>
+<p>Two kinds of entry are not ordinary measurements. Points whose pattern could not be indexed are given the <b>notIndexed</b> phase - they are recorded, not missing, and they matter, because a band of them along a boundary is information about the boundary rather than an inconvenience. Points outside the scanned region are not in the list at all.</p>
+<h2 id="4">The first thing to check is the reference frame</h2>
+<p>An EBSD file contains two coordinate systems that need not agree: the one the stage moved in, and the one the Euler angles were written in. Vendors differ, software versions differ, and nothing in the file forces them to be consistent.</p>
+<p>The failure mode is unkind. A map with the wrong convention still plots, still reconstructs into grains, and still produces pole figures - they are simply rotated or mirrored, and there is no way to tell from the numbers alone. <a href="EBSDReferenceFrame.html">Reference Frame</a> is therefore not an advanced topic to come back to later. Read it once, on your own data, before you trust anything downstream.</p>
+<h2 id="5">Where to start</h2>
+<p>
+<a href="EBSDImport.html">Import</a> then <a href="EBSDReferenceFrame.html">Reference Frame</a>, in that order and without skipping the second.</p>
+<p>
+<a href="EBSDPlotting.html">Plot</a> covers displaying a map, and <a href="EBSDIPFMap.html">IPF Maps</a> the colour keys behind the picture above. <a href="EBSDOrientationPlots.html">Orientation Plots</a> leaves the map behind and shows the same orientations in pole figures instead. <a href="EBSDSharpPlot.html">Sharp Color Keys</a> and <a href="EBSDAdvancedMaps.html">Advanced Plotting</a> are for when the default colouring hides what you are looking for.</p>
+<p>
+<a href="EBSDSelect.html">Select</a> and <a href="EBSDIndex.html">Select by Index</a> cut a map down - by phase, by region, by property, by condition. Most real analysis starts with one of these.</p>
+<p>
+<a href="GrainReconstruction.html">Grain Reconstruction</a> is the step from measurements to objects and the gateway to <a href="Grains.html">Grains</a>. <a href="EBSD2ODF.html">ODF Estimation</a> is the other way to summarise a map, as a density over orientations rather than as a set of regions.</p>
+<p>Real data is imperfect, and several pages address that. <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> repair it; <a href="EBSDPseudoSymmetry.html">Pseudo Symmetry</a> deals with phases whose patterns are nearly indistinguishable under more than one orientation, which is an indexing failure rather than a noise problem. <a href="EBSDGrid.html">Square and Hex Grids</a>, <a href="EBSDInter.html">Regridding and Interpolation</a>, <a href="EBSDMapsAndImages.html">Maps and Images</a> and <a href="EBSDSpatialTransform.html">Spatial Transforms</a> concern the geometry of the grid itself, and <a href="EBSDTrueEbsd.html">TrueEBSD Distortion Correction</a> corrects the distortion that comes from measuring a tilted sample.</p>
+<p>Three pages measure orientation change within grains rather than between them: <a href="EBSDKAM.html">KAM</a> compares each point with its neighbours, <a href="EBSDGROD.html">Mis2Mean / GROD</a> compares it with its grain's mean, and <a href="EBSDProfile.html">Profiles</a> follows a line across the map. <a href="EBSDOrientationAnalysis.html">Orientation Analysis</a> collects the rest.</p>
+<p>
+<a href="EBSDSimulation.html">Simulation</a> generates maps with known answers, which is the honest way to test a processing chain. <a href="EBSDInterfaceHDF5.html">HDF5 Interface</a> and <a href="EBSDExport.html">Export</a> handle files.</p>
+<h2 id="6">Next</h2>
+<p>
+<a href="Grains.html">Grains</a> and <a href="GrainBoundaries.html">Grain Boundaries</a> are what a map becomes once its regions are found. <a href="EBSD3Analysis.html">3D - EBSD</a> extends all of this to volumes. The orientations themselves are <a href="CrystalOrientations.html">Orientations</a>, and their distribution is <a href="ODFAnalysis.html">ODF</a>.</p>
 </div>
 </body>
 </html>

@@ -21,7 +21,51 @@ To make changes, update the MATLAB code and republish this document.
 <font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/doc/Grains/Grains.m">
     edit page</a></font>
 <div>
-<h1>Grains</h1>
+<!--introduction-->
+<!--/introduction-->
+<p>An orientation map tells you what the crystal lattice is doing at every measured point. It does not tell you where one crystal ends and the next one begins. Grain reconstruction draws those borders: neighbouring measurements whose lattices point in nearly the same direction are grouped into one region, and the result is a list of objects you can count, measure and compare.</p>
+<p>This changes the question you are able to ask. A map of a million measurements becomes a few thousand grains, each with a size, a shape, a mean orientation and a list of neighbours. "How large are the grains?", "are they elongated, and along which direction?", "which grain touches which?" only become answerable once the borders exist.</p>
+<p>Here is the whole idea in one picture. The colours are the measured orientations; the black lines are the borders that reconstruction found.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+mtexdata forsterite silent
+
+% restrict the map to a subregion of interest
+ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
+
+% group neighbouring measurements into grains
+grains = calcGrains(ebsd('indexed'),'threshold',10*degree);
+
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'micronbar','off')
+hold on
+plot(grains.boundary,'lineWidth',1.5)
+hold off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="Grains_01.png" %}
+</center>
+<p>Notice that the borders are not free-hand curves. Every one of them runs between two neighbouring measurement points, which is why they look stepped when you zoom in far enough, and why smoothing them is a separate decision rather than part of the reconstruction.</p>
+<h2 id="3">The words used in this chapter</h2>
+<p>
+<b>Grain</b> - a connected region of measurements that belong to one phase and whose orientations agree to within a threshold. A change of phase between two neighbouring pixels is always a border, so a grain never spans two phases.</p>
+<p>It is worth being honest about that definition: there is no canonical one. A grain in a textbook is a volume of material whose lattice is continuous, but a map gives you orientations sampled on a grid, and turning those into regions requires a rule that somebody has to choose. The threshold above is such a rule, and the value it takes is a convention rather than a measurement - 10 or 15 degrees by long habit, because that is roughly where boundary energy stops rising with misorientation. Deformed material is where the choice bites hardest: a bent crystal accumulates orientation change gradually, so whether it counts as one grain or several depends entirely on the threshold, and the literature has argued about it for decades. This is why <a href="GrainReconstructionAdvanced.html">Advanced Reconstruction</a> and <a href="GrainReconstructionMCL.html">Markovian Clustering</a> exist at all - they are different answers to the same unsettled question.</p>
+<p>
+<b>notIndexed</b> - the phase given to a measurement whose diffraction pattern could not be indexed. It behaves like any other phase, so a connected patch of it can form a grain of its own. It is not a hole in the data.</p>
+<p>
+<b>Grain boundary</b> - the segment between two neighbouring measurements that ended up in different grains. Boundaries are objects in their own right, with their own properties, and they have <a href="GrainBoundaries.html">a chapter of their own</a>.</p>
+<p>The same caution applies here. A real interface is a structure a few atoms thick, and describing it fully takes five numbers: three for the misorientation between the two crystals, and two more for the direction the interface plane faces. A map of a polished surface gives you the trace of that plane and not its inclination, so two of those five are only partly within reach - which is why boundary plane analysis needs either 3D data or an argument from many boundaries at once.</p>
+<p>
+<b>Hole</b> and <b>inclusion</b> - one grain lying entirely inside another. Seen from the outside the enclosing grain has a hole; seen from the inside the enclosed grain is an inclusion. These are one fact described from two sides, not two separate things.</p>
+<h2 id="4">Where to start</h2>
+<p>Read <a href="GrainReconstruction.html">Reconstruction</a> first. It explains the threshold that decides what counts as one grain, and what to do about measurements that were never indexed - the two choices that shape everything computed afterwards.</p>
+<p>With grains in hand, <a href="GrainSpatialPlots.html">Plot</a> covers how to display them and <a href="SelectingGrains.html">Select</a> how to pick out the ones you care about, by size, by phase, by position or by orientation.</p>
+<p>The measuring pages come next, and they differ in what they take a grain to be. <a href="ShapeParameters.html">Shape Parameters</a> covers the direct measurements - area, perimeter, diameter. The three that follow each fit a simpler object to the grain and measure that instead: <a href="EllipseBasedParameters.html">an ellipse</a>, <a href="HullBasedParameters.html">a convex hull</a>, or <a href="ProjectionBasedParameters.html">a set of projections</a>. Which one is right depends on the shape you expect. <a href="GrainOrientationParameters.html">Orientation Parameters</a> and <a href="Grain_dispersion_axes.html">Dispersion Axes</a> leave shape aside and describe the orientations inside a grain instead - its mean, and how far the measurements scatter around it.</p>
+<p>
+<a href="GrainNeighbours.html">Neighbours</a> and <a href="GrainMerge.html">Merge</a> treat the grains as a network rather than as a list, which is what you need when grains have to be combined - across a twin boundary, for instance.</p>
+<p>Two further reconstruction methods are described separately, for cases where the threshold approach struggles: <a href="GrainReconstructionAdvanced.html">Advanced Reconstruction</a> and <a href="GrainReconstructionMCL.html">Markovian Clustering</a>.</p>
+<p>Finally, <a href="GrainExport.html">Export</a> writes grains out for use elsewhere, and <a href="NeperInterface.html">Neper Interface</a> connects them to polycrystal generation.</p>
+<h2 id="5">Next</h2>
+<p>Grains come from an orientation map, so <a href="EBSDAnalysis.html">EBSD</a> is the chapter before this one. Their borders are the subject of <a href="GrainBoundaries.html">Grain Boundaries</a>, and the orientations they contain are described statistically in <a href="ODFAnalysis.html">ODF</a>.</p>
 </div>
 </body>
 </html>

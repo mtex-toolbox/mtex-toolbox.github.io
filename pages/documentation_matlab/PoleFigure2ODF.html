@@ -50,7 +50,7 @@ plot(pf)
 {% include inline_image.html file="PoleFigure2ODF_01.png" %}
 </center>
 <h2 id="3">ODF Estimation</h2>
-<p>ODF estimation from a pole figure object is done by the function <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a>. The most simplest syntax is</p>
+<p>ODF estimation from a pole figure object is done by the function <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a>. The simplest syntax is</p>
 {% highlight matlab %}
 odf = calcODF(pf)
 {% endhighlight %}
@@ -63,13 +63,16 @@ odf = SO3FunRBF (Quartz → y↑→x)
   center: 19848 orientations, resolution: 5°
   weight: 1
 {% endhighlight %}
+<center>
+{% include inline_image.html file="PoleFigure2ODF_02.png" %}
+</center>
 <p>There are a lot of options to the function <a href="PoleFigure.calcODF.html"><code class="language-plaintext highlighter-rouge">calcODF</code></a>. You can specify the discretization, the functional to minimize, the number of iteration or regularization to be applied. Furthermore, you can specify ghost correction or the zero range method to be applied. These options are discussed below.</p>
 <p>You may want to verify that the pole figures are reproduced. Here is a plot of the computed pole figures.</p>
 {% highlight matlab %}
 plotPDF(odf,pf.allH,'antipodal','silent','superposition',pf.c)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigure2ODF_02.png" %}
+{% include inline_image.html file="PoleFigure2ODF_03.png" %}
 </center>
 <h2 id="6">Error analysis</h2>
 <p>For a more quantitative description of the reconstruction quality, one can use the function <a href="PoleFigure.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> to compute the fit between the reconstructed ODF and the measured pole figure intensities. The following measured are available:</p>
@@ -93,7 +96,7 @@ ans =
 plotDiff(pf,odf)
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigure2ODF_03.png" %}
+{% include inline_image.html file="PoleFigure2ODF_04.png" %}
 </center>
 <p>Assuming you have driven two ODFs from different pole figure measurements or by ODF modeling. Then one can ask for the difference between both. This difference is computed by the command <a href="SO3Fun.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a>.</p>
 {% highlight matlab %}
@@ -123,7 +126,7 @@ ans =
     0.5868
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigure2ODF_04.png" %}
+{% include inline_image.html file="PoleFigure2ODF_05.png" %}
 </center>
 <h2 id="9">Discretization</h2>
 <p>In MTEX the ODF is approximated by a superposition of up to 10,000,000 unimodal components. By exact number and position of these components, as well as its shape can be specified by the user. By default, the positions are chosen equispaced in the orientation space with 1.5 times the resolution of the pole figures and the components are de la Vallee Poussin shaped with the same halfwidth as the resolution of the positions.</p>
@@ -142,7 +145,7 @@ odf = SO3FunRBF (Quartz → y↑→x)
   weight: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigure2ODF_05.png" %}
+{% include inline_image.html file="PoleFigure2ODF_06.png" %}
 </center>
 <p>Beside the resolution you can use the following options to change the default discretization:</p>
 <div>
@@ -170,7 +173,7 @@ odf = SO3FunRBF (Quartz → y↑→x)
   weight: 1
 {% endhighlight %}
 <center>
-{% include inline_image.html file="PoleFigure2ODF_06.png" %}
+{% include inline_image.html file="PoleFigure2ODF_07.png" %}
 </center>
 <h2 id="12">Ghost Corrections</h2>
 <p>
