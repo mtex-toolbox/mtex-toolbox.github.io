@@ -8,6 +8,12 @@ folder: documentation
 toc: false
 ---
 
+{% include note.html content="Looking for a specific command? The complete,
+generated reference for every class and function is at
+[Function Reference](FunctionReference.html), and the sidebar on the left
+browses it. This page is the short orientation to how MTEX is used at all - for
+the wider documentation start at [Documentation](Documentation.html)." %}
+
 Unlike most other texture analysis software MTEX does not have any graphical
 user interface. Instead the user is suposed to write scripts. Those scripts
 usually have the following structure
