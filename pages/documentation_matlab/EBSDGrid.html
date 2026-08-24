@@ -168,12 +168,9 @@ ebsd = EBSD.load([mtexEBSDPath filesep 'eclogite.ctf'],...
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: 92 of 613 indexed measurements
-share a lattice cell with another one, so
-gridding them would drop those
-measurements. Keeping the data as a list -
-call gridify explicitly if you want the
-raster anyway. 
+Warning: 92 of 613 indexed measurements share a lattice cell with another one,
+so gridding them would drop those measurements. Keeping the data as a list -
+call gridify explicitly if you want the raster anyway. 
  
 ebsd = EBSD (Y1↓→X1)
  
@@ -445,9 +442,9 @@ ebsd = EBSD (y↑→x)
  X x Y x Z : [33000 → 36000] x [4500 → 7500] x [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>The command <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform</code></a> moves every pixel of a map, and its unit cell with it, leaving orientations and all other properties untouched. It takes a <a href="spatialTransform.spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a>, so the distortion is written down as an object rather than as a closure - see <a href="EBSDSpatialTransform.html">Spatial Transforms</a>.</p>
+<p>The command <a href="EBSD.transform.html"><code class="language-plaintext highlighter-rouge">transform</code></a> moves every pixel of a map, and its unit cell with it, leaving orientations and all other properties untouched. It takes a <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a>, so the distortion is written down as an object rather than as a closure - see <a href="EBSDSpatialTransform.html">Spatial Transforms</a>.</p>
 <p>A tilt is a projective transform: the surface is seen obliquely, so straight lines stay straight but parallel ones need not and the scale varies across the frame. Three things state it - how far the surface is tilted, how far away it is seen from, and the point it is tilted about. The tilt angle foreshortens along the tilt axis, the working distance sets how much the scale varies across the frame, and as it grows the perspective vanishes and only the foreshortening is left.</p>
-<p>This is the tilt one <b>knows</b>, written down to impose it. Recovering one that was only measured is the other direction, and is what <a href="spatialTransformTilt.spatialTransformTilt.html"><code class="language-plaintext highlighter-rouge">spatialTransformTilt</code></a> fits in stages from two images.</p>
+<p>This is the tilt one <b>knows</b>, written down to impose it. Recovering one that was only measured is the other direction, and is what <a href="spatialTransformTilt.html"><code class="language-plaintext highlighter-rouge">spatialTransformTilt</code></a> fits in stages from two images.</p>
 {% highlight matlab %}
 theta  = 20*degree;                             % surface tilt
 wd     = 8*(max(ebsd.pos.y) - min(ebsd.pos.y)); % working distance
@@ -459,7 +456,8 @@ distort = spatialTransformProjective.byTilt(theta,wd,centre)
 {% highlight plaintext %}
 distort = spatialTransformProjective
  
-  projective  perspective (0, -1.31e-05)
+ model       stage  parameters                
+ projective  ·      perspective (0, -1.31e-05)
 {% endhighlight %}
 <p>The map is foreshortened along the tilt axis and tapers towards the edge that is further away</p>
 {% highlight matlab %}

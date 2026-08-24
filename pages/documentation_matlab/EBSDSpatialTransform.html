@@ -24,7 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>A spatial transform is a map from position to position, as an object. It is what relates two coordinate frames of one physical piece of specimen - the distortion between an EBSD map and an SEM image of the same area, the drift a stage accumulates during a scan, the foreshortening of a tilted surface.</p>
-<p>A bare function handle does that much too. A <a href="spatialTransform.spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> also composes, inverts, displays itself, fits itself to measured data, and can be stored and applied to a second data set - which is what turns a one-off correction into something reusable.</p>
+<p>A bare function handle does that much too. A <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> also composes, inverts, displays itself, fits itself to measured data, and can be stored and applied to a second data set - which is what turns a one-off correction into something reusable.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata twins silent
@@ -40,7 +40,8 @@ T = spatialTransformRigid(vector3d(5,-2,0))
 {% highlight plaintext %}
 T = spatialTransformRigid
  
-  rigid  (5, -2)
+ model  stage  parameters  
+ rigid  ·      move (5, -2)
 {% endhighlight %}
 <p>Applying one to positions is <code class="language-plaintext highlighter-rouge">*</code>, or <code class="language-plaintext highlighter-rouge">eval</code> written out</p>
 {% highlight matlab %}
@@ -60,14 +61,14 @@ ans =
 <p>Each class is named for the distortion it models, from the most rigid to the most free:</p>
 <div>
 <ul>
-<li> <a href="spatialTransformId.spatialTransformId.html"><code class="language-plaintext highlighter-rouge">spatialTransformId</code></a> - nothing separates the two frames</li>
-<li> <a href="spatialTransformRigid.spatialTransformRigid.html"><code class="language-plaintext highlighter-rouge">spatialTransformRigid</code></a> - one displacement, the same everywhere</li>
-<li> <a href="spatialTransformShift.spatialTransformShift.html"><code class="language-plaintext highlighter-rouge">spatialTransformShift</code></a> - a 2D affine as a homogeneous matrix, i.e. translation, rotation, scale and shear together</li>
-<li> <a href="spatialTransformProjective.spatialTransformProjective.html"><code class="language-plaintext highlighter-rouge">spatialTransformProjective</code></a> - a homography, what a tilted specimen does</li>
-<li> <a href="spatialTransformPoly.spatialTransformPoly.html"><code class="language-plaintext highlighter-rouge">spatialTransformPoly</code></a> - a displacement varying polynomially across the frame</li>
-<li> <a href="spatialTransformDrift.spatialTransformDrift.html"><code class="language-plaintext highlighter-rouge">spatialTransformDrift</code></a> - a displacement varying only along the slow scan direction, a rolling shutter rather than a smooth field</li>
-<li> <a href="spatialTransformField.spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> - no model at all, just where things moved, interpolated between the points it was measured at</li>
-<li> <a href="spatialTransformHandle.spatialTransformHandle.html"><code class="language-plaintext highlighter-rouge">spatialTransformHandle</code></a> - the escape hatch, a function handle</li>
+<li> <a href="spatialTransformId.html"><code class="language-plaintext highlighter-rouge">spatialTransformId</code></a> - nothing separates the two frames</li>
+<li> <a href="spatialTransformRigid.html"><code class="language-plaintext highlighter-rouge">spatialTransformRigid</code></a> - one displacement, the same everywhere</li>
+<li> <a href="spatialTransformShift.html"><code class="language-plaintext highlighter-rouge">spatialTransformShift</code></a> - a 2D affine as a homogeneous matrix, i.e. translation, rotation, scale and shear together</li>
+<li> <a href="spatialTransformProjective.html"><code class="language-plaintext highlighter-rouge">spatialTransformProjective</code></a> - a homography, what a tilted specimen does</li>
+<li> <a href="spatialTransformPoly.html"><code class="language-plaintext highlighter-rouge">spatialTransformPoly</code></a> - a displacement varying polynomially across the frame</li>
+<li> <a href="spatialTransformDrift.html"><code class="language-plaintext highlighter-rouge">spatialTransformDrift</code></a> - a displacement varying only along the slow scan direction, a rolling shutter rather than a smooth field</li>
+<li> <a href="spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> - no model at all, just where things moved, interpolated between the points it was measured at</li>
+<li> <a href="spatialTransformHandle.html"><code class="language-plaintext highlighter-rouge">spatialTransformHandle</code></a> - the escape hatch, a function handle</li>
 </ul>
 </div>
 <p>They share a base, so differently modelled hops may sit in one array rather than a cell array</p>
@@ -79,8 +80,9 @@ ans =
 ans = spatialTransform
  size: 1 x 2
  
-  rigid  (1, 0)
-  poly11  |c| = 0
+    model   stage  parameters 
+ 1  rigid   ·      move (1, 0)
+ 2  poly11  ·      |c| = 0
 {% endhighlight %}
 <h2 id="5">Fitting One From Two Point Sets</h2>
 <p>A transform is rarely written down. It is measured: the same features are located in both frames, and the class is asked for the member of its family that best takes one set onto the other. Every class does this through the same static <code class="language-plaintext highlighter-rouge">fit</code>.</p>
@@ -97,7 +99,8 @@ T = spatialTransformProjective.fit(posA,posB)
 {% highlight plaintext %}
 T = spatialTransformProjective
  
-  projective  perspective (0.0001, 0.0002)
+ model       stage  parameters                  
+ projective  ·      perspective (0.0001, 0.0002)
 {% endhighlight %}
 <p>and it is recovered to rounding</p>
 {% highlight matlab %}
@@ -134,7 +137,8 @@ spatialTransformShift * spatialTransformDrift
 {% highlight plaintext %}
 ans = spatialTransformDrift
  
-  drift  (no knots)
+ model  stage  parameters
+ drift  ·      (no knots)
 {% endhighlight %}
 <p>
 <code class="language-plaintext highlighter-rouge">+</code> declares a model. It reads left to right in the order the stages are applied and keeps both, dropping only a literal <code class="language-plaintext highlighter-rouge">spatialTransformId</code> - the one class that <b>means</b> nothing separates the two frames</p>
@@ -145,7 +149,9 @@ spatialTransformShift + spatialTransformDrift
 {% highlight plaintext %}
 ans = spatialTransformComposite
  
-  composite  affine  [1 0; 0 1] + (0, 0) -> drift  (no knots)
+ model        stage  parameters                                   
+ shift-drift  shift  scale 1 x 1, rotate 0°, shear 0°, move (0, 0)
+              drift  (no knots)
 {% endhighlight %}
 <p>So <code class="language-plaintext highlighter-rouge">+</code> writes down a distortion that is about to be fitted, and <code class="language-plaintext highlighter-rouge">*</code> composes ones that already are. Note that <code class="language-plaintext highlighter-rouge">+</code> chains the maps, it does not add the displacements the way <code class="language-plaintext highlighter-rouge">+</code> on a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> would.</p>
 <p>Either way the order is the same, and both flatten rather than nest</p>
@@ -169,9 +175,10 @@ inv(T)
 {% highlight plaintext %}
 ans = spatialTransformProjective
  
-  projective  perspective (-0.000102, -0.000189)
+ model       stage  parameters                        
+ projective  ·      perspective (-0.000102, -0.000189)
 {% endhighlight %}
-<p>A polynomial, a spline or a scattered field maps positions perfectly well but cannot be solved backwards in closed form. Their inverse is a <a href="spatialTransformInverse.spatialTransformInverse.html"><code class="language-plaintext highlighter-rouge">spatialTransformInverse</code></a>, which iterates - and converges as long as the displacement field does not fold</p>
+<p>A polynomial, a spline or a scattered field maps positions perfectly well but cannot be solved backwards in closed form. Their inverse is a <a href="spatialTransformInverse.html"><code class="language-plaintext highlighter-rouge">spatialTransformInverse</code></a>, which iterates - and converges as long as the displacement field does not fold</p>
 {% highlight matlab %}
 P = spatialTransformPoly.fit(posA,posB,'degree',2);
 
@@ -181,7 +188,8 @@ Pinv = inv(P)
 {% highlight plaintext %}
 Pinv = spatialTransformInverse
  
-  inverse of  poly22  |c| = 3.606
+ model       stage  parameters 
+ inv-poly22  ·      |c| = 3.606
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -194,7 +202,7 @@ ans =
 {% endhighlight %}
 <p>A field that does fold has no inverse to find, and the iteration says so rather than returning a wrong answer.</p>
 <h2 id="16">Collapsing a Chain</h2>
-<p>A composite evaluates every stage in turn, which is wasted work if it is about to be applied to a million pixels many times over. <a href="spatialTransform.discretize.html"><code class="language-plaintext highlighter-rouge">discretize</code></a> samples a chain of any length at given positions and returns the single <a href="spatialTransformField.spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> that reproduces it</p>
+<p>A composite evaluates every stage in turn, which is wasted work if it is about to be applied to a million pixels many times over. <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">discretize</code></a> samples a chain of any length at given positions and returns the single <a href="spatialTransformField.html"><code class="language-plaintext highlighter-rouge">spatialTransformField</code></a> that reproduces it</p>
 {% highlight matlab %}
 F = discretize(R + S, posA)
 {% endhighlight %}
@@ -202,7 +210,8 @@ F = discretize(R + S, posA)
 {% highlight plaintext %}
 F = spatialTransformField
  
-  field  458 points, |u| <= 5.274
+ model  stage  parameters              
+ field  ·      458 points, |u| <= 5.274
 {% endhighlight %}
 
 {% highlight matlab %}

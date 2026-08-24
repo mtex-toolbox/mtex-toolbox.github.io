@@ -57,8 +57,25 @@ D =
    0.1524 + 0.3582i  -1.6422 + 0.0000i   0.1524 - 0.3582i
    1.2748 - 1.1051i  -0.1195 - 0.3705i   0.0447 + 0.0040i
 {% endhighlight %}
+<p>The Wigner-d functions are ordinary functions of the single angle beta, so they can simply be drawn. Three entries of the degree one matrix:</p>
+{% highlight matlab %}
+beta = linspace(0,pi,181);
+d = zeros(numel(beta),3);
+for k = 1:numel(beta)
+  Dk = WignerD(beta(k),1);
+  d(k,:) = [Dk(1,1) Dk(2,2) Dk(1,3)];
+end
+
+plot(beta./degree,d,'linewidth',2)
+xlim([0 180]); xlabel('beta in degree')
+legend('d^1_{-1,-1}','d^1_{0,0}','d^1_{-1,1}','location','best')
+{% endhighlight %}
+<center>
+{% include inline_image.html file="WignerFunctions_01.png" %}
+</center>
+<p>They are polynomials in cos(beta/2) and sin(beta/2), which is why they are smooth and why a series in them converges quickly for smooth functions.</p>
 <p>Here the orders \(k\), \(l\) work as row and column indices.</p>
-<h2 id="4">Series Expansion</h2>
+<h2 id="6">Series Expansion</h2>
 <p>The Wigner-D functions form an orthonormal basis in \(L_2(SO(3))\). Hence, we can describe functions on the rotation group \(SO(3)\) by there harmonic representation using the class <a href="SO3FunHarmonicRepresentation.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p>
 <p>Hence we define the Wigner-D function \(D_1^{1,-1}\) by</p>
 {% highlight matlab %}
@@ -89,12 +106,12 @@ norm(D)
 ans =
      1
 {% endhighlight %}
-<h2 id="6">Some important formulas for Wigner-D functions</h2>
+<h2 id="8">Some important formulas for Wigner-D functions</h2>
 <p>The Wigner-D functions are the matrix elements of the representations \(D_n \colon SO(3) \to \mathbb C^{(2n+1)\times(2n+1)}\) on \(SO(3)\). Since representations are group homomorphisms, we have \(D_n( {\bf R} \, {\bf Q} ) = \frac1{\sqrt{2n+1}} \, D_n( {\bf Q} ) \, D_n( {\bf R} ).\) Hence we get</p>
 <p>\[ D_n^{k,l}( {\bf R} \, {\bf Q} ) = \frac1{\sqrt{2n+1}} \sum_{j=-n}^n D_n^{k,j}( {\bf Q} )\,D_n^{j,l}( {\bf R} ). \]</p>
 <p>Some symmetry properties of Wigner-D functions yields</p>
 <p>\[ D_n^{k,l}( {\bf R} ) = \overline{D_n^{l,k}( {\bf R}^{-1} )}. \]</p>
-<h2 id="8">Symmetry properties of Wigner-d functions</h2>
+<h2 id="10">Symmetry properties of Wigner-d functions</h2>
 <p>The Wigner-d functions by construction fulfill a lot of symmetry properties. The most important properties are</p>
 <p>\[ d_n^{k,l}(\beta) = d_n^{-k,-l}(\beta) = (-1)^{k+l}\, d_n^{l,k}(\beta) = (-1)^{k+l}\, d_n^{-l,-k}(\beta) \]</p>
 <p>\[ d_n^{k,l}(\beta) = (-1)^{n+k+l}\,d_n^{-k,l}(\pi-\beta) = (-1)^{n+k+l}\,d_n^{k,-l}(\pi-\beta) \]</p>

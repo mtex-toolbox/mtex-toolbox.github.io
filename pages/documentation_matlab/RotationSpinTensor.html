@@ -51,6 +51,24 @@ T_left =
     0.7530   -0.5816    0.1368
    -0.2648    0.1140    0.0122
 {% endhighlight %}
+<p>What such a derivative means is easier to see than to read. Turning a direction steadily about an axis sends it round a circle; the spin tensor is the velocity it sets off with. Below, the red arrow is the axis, the grey arrow a direction, the black circle the path it travels, and the blue arrow the velocity at the instant shown.</p>
+{% highlight matlab %}
+om = normalize(vector3d(1,2,3));
+v0 = normalize(vector3d(1,0,0));
+t = linspace(0,2*pi,300);
+tr = rotation.byAxisAngle(om,t) * v0;
+
+plot3(tr.x,tr.y,tr.z,'k','linewidth',1.5)
+hold on
+arrow3d(1.5*om,'faceColor','red')
+arrow3d(v0,'faceColor',[.45 .45 .45])
+arrow3d(v0 + 0.6*normalize(cross(om,v0)),'faceColor','blue')
+hold off
+axis equal off
+{% endhighlight %}
+<center>
+{% include inline_image.html file="RotationSpinTensor_01.png" %}
+</center>
 <p>Both matrices <code class="language-plaintext highlighter-rouge">T_right</code> and <code class="language-plaintext highlighter-rouge">T_left</code> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes skew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
 {% highlight matlab %}
 S_right_L =  matrix(inv(rot_ref)) * T_right
@@ -111,7 +129,7 @@ ans = vector3d (y↓→x)
   x y z
   1 2 3
 {% endhighlight %}
-<h2 id="7">The Functions Exp and Log</h2>
+<h2 id="8">The Functions Exp and Log</h2>
 <p>The above definition of the spin tensor works well only if the perturbation has small rotational angle. For large perturbations the matrix logarithm <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
 {% highlight matlab %}
 % define a large perturbation with rotational angle 1 radiant
@@ -161,7 +179,7 @@ ans = SO3TangentVector (y↓→x)
   x y z
   1 2 3
 {% endhighlight %}
-<h2 id="9">The other way round</h2>
+<h2 id="10">The other way round</h2>
 <p>Given a skew symmetric matrix <code class="language-plaintext highlighter-rouge">S</code> or a disorientation vector <code class="language-plaintext highlighter-rouge">v</code> we may use the command <a href="vector3d.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> to apply this rotational perturbation to a reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code>
 </p>
 {% highlight matlab %}
@@ -229,7 +247,7 @@ ans = rotation
      phi1     Phi    phi2
   74.5535 51.5051 9.61062
 {% endhighlight %}
-<h2 id="11">Disorientations under the presence of crystal symmetry</h2>
+<h2 id="12">Disorientations under the presence of crystal symmetry</h2>
 <p>Under the presence of crystal symmetry the order whether a rotational perturbation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321');
