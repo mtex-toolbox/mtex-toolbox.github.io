@@ -1,0 +1,102 @@
+---
+title: "S2Fun.discrepancy"
+
+sidebar: function_reference_sidebar
+permalink: S2Fun.discrepancy.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>S2Fun.discrepancy</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_S2Fun__discrepancy.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/S2Fun/@S2Fun/discrepancy.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>kernel discrepancy between a discrete sample and a spherical density</p>
+<h2 id="3">Description</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">discrepancy</code> measures how well a list of directions \(v_j\) with weights \(c_j\) represents the density function \(f\), by the squared distance</p>
+<p>\[ J(v,c) = \| \mu - f \|_{\psi}^2 = \sum_{n=1}^N \frac{4\pi A_n}{2n+1} \sum_{k=-n}^{n} | \hat{\mu}_n^{k} - \hat{f}_n^{k} |^2, \qquad \mu = \lambda \, \sum_{j=1}^M c_j \, \delta_{v_j}, \quad \lambda = \int_{S^2} f(v) \,dv, \]</p>
+<p>i.e. the functional <a href="S2Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> minimizes. Here \(A_n\) are the Legendre coefficients of the <a href="S2RestrictedDistanceKernel.html">restricted distance kernel</a> and \(N\) is the <code class="language-plaintext highlighter-rouge">bandwidth</code> - only the harmonic degrees up to \(N\) are compared, so state the one the sample is meant for.</p>
+<p>Degree 0 is left out. The restricted distance kernel is only conditionally positive definite, its coefficient of degree 0 being negative, and the weights are normalized to sum up to 1, which makes that degree vanish anyway.</p>
+<p>Scaling \(f\) multiplies the result by \(\lambda^2\), hence discrepancies are comparable only between samples of the same function.</p>
+<p>Give the same <code class="language-plaintext highlighter-rouge">bandwidth</code> the sample was optimized for. Above it nothing was optimized, and since a sample gains its accuracy up to <code class="language-plaintext highlighter-rouge">bandwidth</code> partly at the expense of the higher degrees, scoring beyond it ranks two samples by the part neither of them minimized.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+res = discrepancy(sF,v)
+res = discrepancy(sF,v,'weights',c)
+res = discrepancy(sF,v,'bandwidth',64)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>sF</tt>
+         </td>
+         <td>
+            <tt><a href="S2Fun.S2Fun.html">S2Fun</a></tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>v</tt>
+         </td>
+         <td>
+            <tt><a href="vector3d.vector3d.html">vector3d</a>, the sampling points</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>res</tt>
+         </td>
+         <td>
+            <tt>double</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>weights</tt>
+         </td>
+         <td>
+            <tt>weights of the sampling points (default = ones(M,1)/M)</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>bandwidth</tt>
+         </td>
+         <td>
+            <tt>harmonic degree to compare up to (default = the bandwidth of sF)</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="S2Fun.optimalSample.html">S2Fun.optimalSample</a> <a href="S2Fun.discreteSample.html">S2Fun.discreteSample</a> <a href="S2RestrictedDistanceKernel.html">S2RestrictedDistanceKernel</a>
+</p>
+</div>
+</body>
+</html>
