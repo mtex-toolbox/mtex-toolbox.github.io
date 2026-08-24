@@ -26,12 +26,9 @@ toc: false
 </p>
 <p>An EBSD map and an SEM image of the same area never quite line up. The beam drifts during the scan, the camera moves between acquisitions, the specimen is tilted. Overlay the two and features are out by tens of pixels, which is enough to ruin any measurement that needs both.</p>
 <p>TrueEBSD corrects that, so every pixel of the map and every pixel of the images refer to the same point on the sample. The method is described in Tong et al., <a href="http://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>.</p>
-<p>This script needs the TrueEBSD toolbox, which is <b>not</b> part of MTEX and is distributed separately under Apache-2.0: <a href="https://github.com/vtvivian/mtex-trueebsd">https://github.com/vtvivian/mtex-trueebsd</a>
-</p>
-{% highlight matlab %}
-addpath(genpath('<path to mtex-trueEbsd>'))
-{% endhighlight %}
-<p>Use the <code class="language-plaintext highlighter-rouge">mtex7-compat</code> branch with MTEX 7. It also needs MATLAB R2024a or newer and the Image Processing, Curve Fitting, and Statistics and Machine Learning toolboxes. Expect minutes, not seconds.</p>
+<p>This page uses <a href="trueEbsd2.trueEbsd2.html"><code class="language-plaintext highlighter-rouge">trueEbsd2</code></a>, which is part of MTEX - nothing has to be installed alongside it, and it asks for no toolbox that MTEX does not already require. Expect minutes rather than seconds: this is the full field of view.</p>
+<p>
+<a href="EBSDTrueEbsd.html">The short version</a> runs the same five maps and the same four distortions on a cut-down copy in well under a minute. Start there if you are new to it; this page is the full field of view, and adds the two things that dataset is too small to show - a map stored the other way round from its images, and a matching window set badly enough to need a retry.</p>
 <!--/introduction-->
 <h2 id="1">The data</h2>
 <p>An EBSD map of a WC-Co composite taken at 20 kV, and four SEM images of the same area, all in <code class="language-plaintext highlighter-rouge">ebsd.opt.trueEbsdImgs</code>:</p>
@@ -83,9 +80,9 @@ ebsd = EBSDsquare (y↓→x, col←row↓)
  
  Properties: bc, bs, bands, MAD, quality, oldId
  Scan unit : um
- X x Y x Z : [0 → 41] x [0 → 30] x [0 → 0]
+ X × Y × Z : [0 → 41] × [0 → 30] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :768 x 1024
+ Square grid  :768 × 1024
  
   struct with fields:
 
@@ -115,17 +112,17 @@ imgList = [mapImage(ebsd.bc, ebsd,             'name','bcImg'), ...
 imgList = mapImage (y↓→x)
  
               image    pixel   frame    layout    name                 EBSD
- 1       768 x 1024  0.04 um    y↓→x  col←row↓   bcImg  W C, Co-fcc, Co-hcp
- 2  1536 x 2048 x 3  0.02 um  iY↓→iX  row↓→col   fsdB3                    -
- 3      1536 x 2048  0.02 um  iY↓→iX  row↓→col   fsdT3                    -
- 4      1536 x 2048  0.02 um  iY↓→iX  row↓→col   fsdT1                    -
- 5      1536 x 2048  0.02 um  iY↓→iX  row↓→col  fsdT10                    -
+ 1       768 × 1024  0.04 um    y↓→x  col←row↓   bcImg  W C, Co-fcc, Co-hcp
+ 2  1536 × 2048 × 3  0.02 um  iY↓→iX  row↓→col   fsdB3                    -
+ 3      1536 × 2048  0.02 um  iY↓→iX  row↓→col   fsdT3                    -
+ 4      1536 × 2048  0.02 um  iY↓→iX  row↓→col   fsdT1                    -
+ 5      1536 × 2048  0.02 um  iY↓→iX  row↓→col  fsdT10                    -
 {% endhighlight %}
 <p>A light box filter first &mdash; cross-correlation dislikes noise &mdash; and one common range, since the levels off different detectors mean nothing to each other. Both are methods of <code class="language-plaintext highlighter-rouge">mapImage</code> and both take the whole list at once. Neither needs the Image Processing Toolbox.</p>
 {% highlight matlab %}
 imgList(2:end) = rescale(imboxfilt(imgList(2:end),3));
 {% endhighlight %}
-<p>The distortions are objects, one per <b>hop</b>, not names on the images. Five maps means four hops, and the reference has no entry of its own &mdash; where nothing separates a pair that is <code class="language-plaintext highlighter-rouge">spatialTransformId</code>, not a <code class="language-plaintext highlighter-rouge">'true'</code> label.</p>
+<p>The distortions are objects, one per <b>hop</b>, not names on the images. Five maps means four hops, and the reference has no entry of its own &mdash; where nothing separates a pair that is <code class="language-plaintext highlighter-rouge">spatialTransformId</code>.</p>
 <p>A multi-stage hop is <code class="language-plaintext highlighter-rouge">+</code> and not <code class="language-plaintext highlighter-rouge">*</code>: <code class="language-plaintext highlighter-rouge">+</code> reads left to right in the order the stages are applied and keeps both, where an unfitted prototype has zero coefficients, reports itself as the identity, and <code class="language-plaintext highlighter-rouge">*</code> would absorb it.</p>
 {% highlight matlab %}
 T = [spatialTransformShift + spatialTransformDrift, ...
@@ -136,13 +133,13 @@ T = [spatialTransformShift + spatialTransformDrift, ...
 
 {% highlight plaintext %}
 T = spatialTransform
- size: 1 x 4
+ size: 1 × 4
  
     model        stage       parameters                                   
- 1  shift-drift  shift       scale 1 x 1, rotate 0°, shear 0°, move (0, 0)
+ 1  shift-drift  shift       scale 1 × 1, rotate 0°, shear 0°, move (0, 0)
                  drift       (no knots)                                   
  2  identity     ·           ·                                            
- 3  shift        ·           scale 1 x 1, rotate 0°, shear 0°, move (0, 0)
+ 3  shift        ·           scale 1 × 1, rotate 0°, shear 0°, move (0, 0)
  4  tilt         projective  perspective (0, 0)                           
                  poly11      |c| = 0                                      
                  poly22      |c| = 0
@@ -158,7 +155,7 @@ plot(imgList)
 <p>Comparing two pictures pixel by pixel only means something if you know which way round each one is stored. TrueEBSD asks rather than guesses, because guessing wrong does not fail loudly &mdash; it returns a finished-looking result that is quietly nonsense.</p>
 <p>Usually there is nothing to do: a map and images collected in one session are stored the same way and TrueEBSD confirms it. This file is the exception. Its EBSD map was written with the columns in the opposite order from the images, so pixel (1,1) of the map and pixel (1,1) of an image are at opposite ends of the sample.</p>
 <p>You will not see this in the plot above. Every plot draws each entry the way that entry says it should be drawn, so on screen they already agree &mdash; the difference is in how the numbers are stored, and that is what matters when they are compared. <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code> puts them all in one frame, working the relation out from what the map and the images each already say about themselves.</p>
-<p>Where that is not enough &mdash; an image from a separate session, at an unknown rotation &mdash; you state the relation instead. See <a href="example_WCCoFrames.html">the frames page</a>.</p>
+<p>Where that is not enough &mdash; an image from a separate session, at an unknown rotation &mdash; you state the relation instead. See <a href="example_WCCoFrames_2.html">the frames page</a>.</p>
 {% highlight matlab %}
 imgList = imgList.transformReferenceFrame(imgList(1).frame)
 {% endhighlight %}
@@ -167,11 +164,11 @@ imgList = imgList.transformReferenceFrame(imgList(1).frame)
 imgList = mapImage (y↓→x)
  
               image    pixel  frame    layout    name                 EBSD
- 1       768 x 1024  0.04 um   y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  1536 x 2048 x 3  0.02 um   y↓→x  row↓→col   fsdB3                    -
- 3      1536 x 2048  0.02 um   y↓→x  row↓→col   fsdT3                    -
- 4      1536 x 2048  0.02 um   y↓→x  row↓→col   fsdT1                    -
- 5      1536 x 2048  0.02 um   y↓→x  row↓→col  fsdT10                    -
+ 1       768 × 1024  0.04 um   y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  1536 × 2048 × 3  0.02 um   y↓→x  row↓→col   fsdB3                    -
+ 3      1536 × 2048  0.02 um   y↓→x  row↓→col   fsdT3                    -
+ 4      1536 × 2048  0.02 um   y↓→x  row↓→col   fsdT1                    -
+ 5      1536 × 2048  0.02 um   y↓→x  row↓→col  fsdT10                    -
 {% endhighlight %}
 <p>Now the job can be built. It holds the whole workflow, and each step below adds to it. It also re-checks that the sequence is in one frame, and stops with <code class="language-plaintext highlighter-rouge">trueEbsd:frameMismatch</code> if not.</p>
 {% highlight matlab %}
@@ -181,12 +178,12 @@ job = trueEbsd2(imgList,T)
 {% highlight plaintext %}
 job = trueEbsd2 (as imported)
  
-      name            image   distortion  shift  residual
- 1   bcImg       768 x 1024  shift-drift      -         -
- 2   fsdB3  1536 x 2048 x 3     identity      -         -
- 3   fsdT3      1536 x 2048        shift      -         -
- 4   fsdT1      1536 x 2048         tilt      -         -
- 5  fsdT10      1536 x 2048                   -         -
+      name            image   distortion  shift, px  residual, px
+ 1   bcImg       768 × 1024  shift-drift          -             -
+ 2   fsdB3  1536 × 2048 × 3     identity          -             -
+ 3   fsdT3      1536 × 2048        shift          -             -
+ 4   fsdT1      1536 × 2048         tilt          -             -
+ 5  fsdT10      1536 × 2048                       -             -
 {% endhighlight %}
 <h2 id="8">Put everything on one pixel grid</h2>
 <p>The map and the images cover the same area at different pixel sizes. <code class="language-plaintext highlighter-rouge">pixelSizeMatch</code> resamples them all onto the finest one, so pixel (i,j) means roughly the same place in each.</p>
@@ -201,14 +198,14 @@ using default pixel size of 0.019875 um, minimum from imgList
  
 ans = trueEbsd2 (pixel size matched)
  
-      name            image   distortion  shift  residual
- 1   bcImg      1536 x 2048  shift-drift      -         -
- 2   fsdB3  1536 x 2048 x 3     identity      -         -
- 3   fsdT3      1536 x 2048        shift      -         -
- 4   fsdT1      1536 x 2048         tilt      -         -
- 5  fsdT10      1536 x 2048                   -         -
+      name            image   distortion  shift, px  residual, px
+ 1   bcImg      1536 × 2048  shift-drift          -             -
+ 2   fsdB3  1536 × 2048 × 3     identity          -             -
+ 3   fsdT3      1536 × 2048        shift          -             -
+ 4   fsdT1      1536 × 2048         tilt          -             -
+ 5  fsdT10      1536 × 2048                       -             -
  
- common grid: 1536 x 2048 at 0.02 µm
+ common grid: 1536 × 2048 at 0.02 µm
 {% endhighlight %}
 <p>The resampled sequence is in <code class="language-plaintext highlighter-rouge">job.resizedList</code>.</p>
 {% highlight matlab %}
@@ -219,11 +216,11 @@ job.resizedList
 ans = mapImage (y↓→x)
  
               image    pixel  frame    layout    name                 EBSD
- 1      1536 x 2048  0.02 um   y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
- 2  1536 x 2048 x 3  0.02 um   y↓→x  row↓→col   fsdB3                    -
- 3      1536 x 2048  0.02 um   y↓→x  row↓→col   fsdT3                    -
- 4      1536 x 2048  0.02 um   y↓→x  row↓→col   fsdT1                    -
- 5      1536 x 2048  0.02 um   y↓→x  row↓→col  fsdT10                    -
+ 1      1536 × 2048  0.02 um   y↓→x  row↓→col   bcImg  W C, Co-fcc, Co-hcp
+ 2  1536 × 2048 × 3  0.02 um   y↓→x  row↓→col   fsdB3                    -
+ 3      1536 × 2048  0.02 um   y↓→x  row↓→col   fsdT3                    -
+ 4      1536 × 2048  0.02 um   y↓→x  row↓→col   fsdT1                    -
+ 5      1536 × 2048  0.02 um   y↓→x  row↓→col  fsdT10                    -
 {% endhighlight %}
 <h2 id="10">[Optional] Adjust the matching windows</h2>
 <p>Distortions are measured by cutting both images of a pair into small boxes and cross-correlating each box with its partner. That gives a local shift at each box, and those shifts are fitted to the distortion model.</p>
@@ -244,50 +241,50 @@ job.setOptions(3:5,'registerOn','raw')
 {% highlight plaintext %}
 ans = trueEbsd2 (pixel size matched)
  
-      name            image   distortion  shift  residual
- 1   bcImg      1536 x 2048  shift-drift      -         -
- 2   fsdB3  1536 x 2048 x 3     identity      -         -
- 3   fsdT3      1536 x 2048        shift      -         -
- 4   fsdT1      1536 x 2048         tilt      -         -
- 5  fsdT10      1536 x 2048                   -         -
+      name            image   distortion  shift, px  residual, px
+ 1   bcImg      1536 × 2048  shift-drift          -             -
+ 2   fsdB3  1536 × 2048 × 3     identity          -             -
+ 3   fsdT3      1536 × 2048        shift          -             -
+ 4   fsdT1      1536 × 2048         tilt          -             -
+ 5  fsdT10      1536 × 2048                       -             -
  
- common grid: 1536 x 2048 at 0.02 µm
- 
- 
-ans = trueEbsd2 (pixel size matched)
- 
-      name            image   distortion  shift  residual
- 1   bcImg      1536 x 2048  shift-drift      -         -
- 2   fsdB3  1536 x 2048 x 3     identity      -         -
- 3   fsdT3      1536 x 2048        shift      -         -
- 4   fsdT1      1536 x 2048         tilt      -         -
- 5  fsdT10      1536 x 2048                   -         -
- 
- common grid: 1536 x 2048 at 0.02 µm
+ common grid: 1536 × 2048 at 0.02 µm
  
  
 ans = trueEbsd2 (pixel size matched)
  
-      name            image   distortion  shift  residual
- 1   bcImg      1536 x 2048  shift-drift      -         -
- 2   fsdB3  1536 x 2048 x 3     identity      -         -
- 3   fsdT3      1536 x 2048        shift      -         -
- 4   fsdT1      1536 x 2048         tilt      -         -
- 5  fsdT10      1536 x 2048                   -         -
+      name            image   distortion  shift, px  residual, px
+ 1   bcImg      1536 × 2048  shift-drift          -             -
+ 2   fsdB3  1536 × 2048 × 3     identity          -             -
+ 3   fsdT3      1536 × 2048        shift          -             -
+ 4   fsdT1      1536 × 2048         tilt          -             -
+ 5  fsdT10      1536 × 2048                       -             -
  
- common grid: 1536 x 2048 at 0.02 µm
+ common grid: 1536 × 2048 at 0.02 µm
  
  
 ans = trueEbsd2 (pixel size matched)
  
-      name            image   distortion  shift  residual
- 1   bcImg      1536 x 2048  shift-drift      -         -
- 2   fsdB3  1536 x 2048 x 3     identity      -         -
- 3   fsdT3      1536 x 2048        shift      -         -
- 4   fsdT1      1536 x 2048         tilt      -         -
- 5  fsdT10      1536 x 2048                   -         -
+      name            image   distortion  shift, px  residual, px
+ 1   bcImg      1536 × 2048  shift-drift          -             -
+ 2   fsdB3  1536 × 2048 × 3     identity          -             -
+ 3   fsdT3      1536 × 2048        shift          -             -
+ 4   fsdT1      1536 × 2048         tilt          -             -
+ 5  fsdT10      1536 × 2048                       -             -
  
- common grid: 1536 x 2048 at 0.02 µm
+ common grid: 1536 × 2048 at 0.02 µm
+ 
+ 
+ans = trueEbsd2 (pixel size matched)
+ 
+      name            image   distortion  shift, px  residual, px
+ 1   bcImg      1536 × 2048  shift-drift          -             -
+ 2   fsdB3  1536 × 2048 × 3     identity          -             -
+ 3   fsdT3      1536 × 2048        shift          -             -
+ 4   fsdT1      1536 × 2048         tilt          -             -
+ 5  fsdT10      1536 × 2048                       -             -
+ 
+ common grid: 1536 × 2048 at 0.02 µm
 {% endhighlight %}
 <h2 id="11">Measure the distortion</h2>
 <p>These are the pictures that will actually be matched: edge transforms where <code class="language-plaintext highlighter-rouge">registerOn</code> is <code class="language-plaintext highlighter-rouge">'edge'</code>, grey values where it is <code class="language-plaintext highlighter-rouge">'raw'</code>. A band contrast map and a backscatter image have nothing in common as grey values, but their grain boundaries fall in the same places &mdash; which is why edges are the default.</p>
@@ -299,7 +296,8 @@ plot(job.resizedList,'edge')
 </center>
 <p>
 <code class="language-plaintext highlighter-rouge">'fitErr'</code> re-measures the shifts <b>after</b> each correction and reports what is left over. That residual is how you tell whether it worked: around a pixel or less is good.</p>
-<p>Because the first box size was set too small, the EBSD map step leaves a residual above two pixels. TrueEBSD notices, doubles the box size and tries again, repeating until the residual comes down or the box outgrows the image. Watch the printed table.</p>
+<p>The shift and residual columns each read as a length followed by the signed x and y behind it, in pixels of the common grid: how far the step moved the map, and which way. A hop that is one coherent movement &mdash; a stage that drifted, a camera that was retracted &mdash; has a direction, and the pair says what it was. Where the pair falls to nearly zero against a large length, the boxes disagree among themselves and the correlation found no common direction, which is what a step that has not worked looks like.</p>
+<p>Because the first box size was set too small, the EBSD map step is exactly that, and leaves a residual above two pixels. TrueEBSD notices, doubles the box size and tries again, repeating until the residual comes down or the box outgrows the image. Watch the printed table.</p>
 <p>Steps whose transform is <code class="language-plaintext highlighter-rouge">spatialTransformId</code> are skipped &mdash; nothing separates that pair, so their shift is taken as zero whatever the residual says.</p>
 {% highlight matlab %}
 job.calcDistortion('fitErr')
@@ -312,52 +310,52 @@ job.calcDistortion('fitErr')
 
  ◆ distortion across 5 maps, 4 hops
 
-    distortion   stage              ROI     shift  residual
-    ──────────── ───────────── ──────── ───────── ─────────
+    distortion   stage              ROI          shift, px       residual, px
+    ──────────── ───────────── ──────── ────────────────── ──────────────────
   ● bcImg
-  │ shift-drift  shift            64 px  12.13 px
-  │              drift            32 px   6.40 px
-  │              ↳ residual                         5.71 px
+  │ shift-drift  shift            64 px 12.13 (+2.68,+1.52)
+  │              drift            32 px 6.40 (+0.44,+0.74)
+  │              ↳ residual                                5.71 (+0.52,+0.56)
   │ ↻ residual over 2 px, retrying with a 128 px ROI
-  │ shift-drift  shift           128 px  14.41 px
-  │              drift            64 px   6.40 px
-  │              ↳ residual                         4.41 px
+  │ shift-drift  shift           128 px 14.41 (+5.21,+1.76)
+  │              drift            64 px 6.40 (+0.38,-0.39)
+  │              ↳ residual                                4.41 (+0.12,-0.22)
   │ ↻ residual over 2 px, retrying with a 256 px ROI
-  │ shift-drift  shift           256 px  14.04 px
-  │              drift           128 px   5.54 px
-  │              ↳ residual                         2.39 px
+  │ shift-drift  shift           256 px 14.04 (+5.46,+2.66)
+  │              drift           128 px 5.54 (+0.07,-0.79)
+  │              ↳ residual                                2.39 (-0.03,+0.10)
   │ ↻ residual over 2 px, retrying with a 512 px ROI
-  │ shift-drift  shift           512 px  12.13 px
-  │              drift           256 px   5.09 px
-  │              ↳ residual                         1.30 px
+  │ shift-drift  shift           512 px 12.13 (+5.49,+4.79)
+  │              drift           256 px 5.09 (-0.01,-2.04)
+  │              ↳ residual                                1.30 (+0.08,-0.11)
   ▼
   ● fsdB3
-  │ identity     ·                    ·   0.00 px
-  │              ↳ difference                       3.70 px
+  │ identity     ·                    · 0.00 (+0.00,+0.00)
+  │              ↳ difference                              3.70 (+0.20,-1.74)
   ▼
   ● fsdT3
-  │ shift        shift           128 px  12.63 px
-  │              ↳ residual                         0.97 px
+  │ shift        shift           128 px 12.63 (-10.51,-6.63)
+  │              ↳ residual                                0.97 (-0.51,-0.45)
   ▼
   ● fsdT1
-  │ tilt         projective      128 px  14.16 px
-  │              poly11          128 px   0.86 px
-  │              poly22          128 px   0.80 px
-  │              ↳ residual                         0.79 px
+  │ tilt         projective      128 px 14.16 (+10.97,-8.12)
+  │              poly11          128 px 0.86 (+0.30,-0.43)
+  │              poly22          128 px 0.80 (+0.26,-0.07)
+  │              ↳ residual                                0.79 (+0.26,-0.01)
   ▼
   ● fsdT10
 
  
 ans = trueEbsd2 (shifts calculated)
  
-      name            image   distortion   shift  residual
- 1   bcImg      1536 x 2048  shift-drift  7.1 px    1.3 px
- 2   fsdB3  1536 x 2048 x 3     identity    0 px    3.7 px
- 3   fsdT3      1536 x 2048        shift   13 px   0.97 px
- 4   fsdT1      1536 x 2048         tilt  0.4 px   0.79 px
- 5  fsdT10      1536 x 2048                    -         -
+      name            image   distortion             shift, px        residual, px
+ 1   bcImg      1536 × 2048  shift-drift    7.06 (+0.33,-4.86)  1.30 (+0.08,-0.11)
+ 2   fsdB3  1536 × 2048 × 3     identity    0.00 (+0.00,+0.00)  3.70 (+0.20,-1.74)
+ 3   fsdT3      1536 × 2048        shift  12.57 (-10.60,-6.74)  0.97 (-0.51,-0.45)
+ 4   fsdT1      1536 × 2048         tilt    0.40 (+0.26,-0.09)  0.79 (+0.26,-0.01)
+ 5  fsdT10      1536 × 2048                                  -                   -
  
- common grid: 1536 x 2048 at 0.02 µm
+ common grid: 1536 × 2048 at 0.02 µm
 {% endhighlight %}
 <h2 id="13">Correct it</h2>
 <p>Each map is now moved by the shifts of every step between it and the reference. The reference itself does not move.</p>
@@ -371,14 +369,14 @@ plot(job.undistortedList)
 {% highlight plaintext %}
 ans = trueEbsd2 (undistorted)
  
-      name            image   distortion   shift  residual
- 1   bcImg      1536 x 2048  shift-drift  7.1 px    1.3 px
- 2   fsdB3  1536 x 2048 x 3     identity    0 px    3.7 px
- 3   fsdT3      1536 x 2048        shift   13 px   0.97 px
- 4   fsdT1      1536 x 2048         tilt  0.4 px   0.79 px
- 5  fsdT10      1536 x 2048                    -         -
+      name            image   distortion             shift, px        residual, px
+ 1   bcImg      1536 × 2048  shift-drift    7.06 (+0.33,-4.86)  1.30 (+0.08,-0.11)
+ 2   fsdB3  1536 × 2048 × 3     identity    0.00 (+0.00,+0.00)  3.70 (+0.20,-1.74)
+ 3   fsdT3      1536 × 2048        shift  12.57 (-10.60,-6.74)  0.97 (-0.51,-0.45)
+ 4   fsdT1      1536 × 2048         tilt    0.40 (+0.26,-0.09)  0.79 (+0.26,-0.01)
+ 5  fsdT10      1536 × 2048                                  -                   -
  
- common grid: 1536 x 2048 at 0.02 µm
+ common grid: 1536 × 2048 at 0.02 µm
 {% endhighlight %}
 <center>
 {% include inline_image.html file="example_WCCo_2_03.png" %}
@@ -411,7 +409,7 @@ end
 {% include inline_image.html file="example_WCCo_2_04.png" %}
 </center>
 <h2 id="15">Finish</h2>
-<p>The map and the images now overlay pixel for pixel, and <code class="language-plaintext highlighter-rouge">ebsdOut</code> is an ordinary MTEX EBSD map that happens to carry four SEM images as properties. Anything you would normally do with a map works from here &mdash; including turning a thresholded image into a phase, which is what <a href="example_copper.html">the copper page</a> does with its voids.</p>
+<p>The map and the images now overlay pixel for pixel, and <code class="language-plaintext highlighter-rouge">ebsdOut</code> is an ordinary MTEX EBSD map that happens to carry four SEM images as properties. Anything you would normally do with a map works from here &mdash; including turning a thresholded image into a phase, which is what <a href="example_copper_2.html">the copper page</a> does with its voids.</p>
 <p>For this sample the next step is measuring WC grain contiguity: which boundaries are WC against WC, and which are WC against binder. That needs the orientation data and the image contrast to agree pixel for pixel, which is what the last few minutes bought.</p>
 </div>
 </body>

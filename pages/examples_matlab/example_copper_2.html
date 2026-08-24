@@ -32,13 +32,8 @@ toc: false
 <li>are some boundary types more resistant to voiding than others?</li>
 </ol>
 </div>
-<p>The alignment half of the workflow is explained step by step in <a href="example_WCCo.html">TrueEBSD on a WC-Co composite</a> &mdash; read that one first if you are new to TrueEBSD. This page keeps the alignment brief and spends its time on the voids.</p>
-<p>It needs the TrueEBSD toolbox, which is <b>not</b> part of MTEX and is distributed separately under Apache-2.0: <a href="https://github.com/vtvivian/mtex-trueebsd">https://github.com/vtvivian/mtex-trueebsd</a>
-</p>
-{% highlight matlab %}
-addpath(genpath('<path to mtex-trueEbsd>'))
-{% endhighlight %}
-<p>Use the <code class="language-plaintext highlighter-rouge">mtex7-compat</code> branch with MTEX 7. Beyond MTEX it requires MATLAB R2024a or newer and the Image Processing, Curve Fitting, and Statistics and Machine Learning toolboxes. Runtime is minutes, not seconds.</p>
+<p>The alignment half of the workflow is explained step by step in <a href="example_WCCo_2.html">TrueEBSD on a WC-Co composite</a>, and in short form in <a href="EBSDTrueEbsd.html">the under-a-minute page</a> &mdash; read one of those first if you are new to TrueEBSD. This page keeps the alignment brief and spends its time on the voids.</p>
+<p> <a href="trueEbsd2.trueEbsd2.html"><code class="language-plaintext highlighter-rouge">trueEbsd2</code></a> is part of MTEX, so nothing has to be installed alongside it. The filtering below calls <code class="language-plaintext highlighter-rouge">medfilt2</code> and <code class="language-plaintext highlighter-rouge">im2double</code>, so this page does want the Image Processing Toolbox, and the voids analysis calls <code class="language-plaintext highlighter-rouge">calcGrains</code>, which wants Statistics and Machine Learning. Runtime is minutes, not seconds.</p>
 <!--/introduction-->
 <h2 id="1">Data Import</h2>
 <p>The data set is a single Oxford Instruments <code class="language-plaintext highlighter-rouge">.h5oina</code> file holding both the EBSD map and the SEM images of the same area. It is 164 MB and is not shipped with MTEX, so it is downloaded on first use from Zenodo: <a href="https://zenodo.org/records/16902083">zenodo.org/records/16902083</a>.</p>
@@ -49,7 +44,7 @@ if ~isfile(fName)
   websave(fName,'https://zenodo.org/records/16902083/files/copper29.h5oina');
 end
 {% endhighlight %}
-<p>Everything in this file came out of one acquisition, so the map and the images are stored the same way round and TrueEBSD works that out for itself. <a href="example_WCCoFrames.html">The frames page</a> is the case where they are not.</p>
+<p>Everything in this file came out of one acquisition, so the map and the images are stored the same way round and TrueEBSD works that out for itself. <a href="example_WCCoFrames_2.html">The frames page</a> is the case where they are not.</p>
 <p>The convention set here only decides which way up the figures come out. It has no effect on the correction.</p>
 {% highlight matlab %}
 plottingConvention.default('y↓→x')
@@ -76,9 +71,9 @@ ebsd = EBSDsquare (Y1↓→X1, row↓→col)
  
  Properties: BandContrast, BandSlope, Bands, BeamPositionX, BeamPositionY, DetectorDistance, Error, MeanAngularDeviation, PatternCenterX, PatternCenterY, PatternQuality, oldId
  Scan unit : um
- X x Y x Z : [0 → 103] x [0 → 55] x [0 → 0]
+ X × Y × Z : [0 → 103] × [0 → 55] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :547 x 1031
+ Square grid  :547 × 1031
  dataSet: /1/EBSD
  dataSets: /1/EBSD
 {% endhighlight %}
@@ -146,8 +141,8 @@ bse1a = bse1.^10;
 bse1b = medfilt2(bse1,[3 3],'symmetric');   % still Image Processing Toolbox
 {% endhighlight %}
 <h2 id="5">Build the sequence</h2>
-<p>TrueEBSD steps from the EBSD map to the reference image one pair at a time, correcting one kind of distortion at each step. The sequence runs from the <b>most</b> distorted to the one you trust, and each entry names the distortion between itself and the <b>next</b> one.</p>
-<p>Images 3 and 4 are the same backscatter image filtered two different ways, so nothing physically separates them and both are marked <code class="language-plaintext highlighter-rouge">'true'</code>. Image 4 is deliberately filtered to show voids rather than grain boundaries, which leaves it with almost no boundary contrast to match on &mdash; hence <code class="language-plaintext highlighter-rouge">'highContrast',false</code>, which tells TrueEBSD to borrow the previous image's contrast for that step instead.</p>
+<p>TrueEBSD steps from the EBSD map to the reference image one pair at a time, correcting one kind of distortion at each step. The sequence runs from the <b>most</b> distorted to the one you trust. The images say only what they are; the distortions go in a second list further down, one per <b>hop</b>.</p>
+<p>Images 3 and 4 are the same backscatter image filtered two different ways, so nothing physically separates them and the hop between them is <code class="language-plaintext highlighter-rouge">spatialTransformId</code>. Image 4 is deliberately filtered to show voids rather than grain boundaries, which leaves it with almost no boundary contrast to match on &mdash; hence <code class="language-plaintext highlighter-rouge">'highContrast',false</code>, which tells TrueEBSD to borrow the previous image's contrast for that step instead.</p>
 <p>
 <code class="language-plaintext highlighter-rouge">'name'</code> is what each image is called once it is attached to the map at the end, so everything below reads <code class="language-plaintext highlighter-rouge">ebsd.bse1b</code> rather than juggling separate arrays.</p>
 {% highlight matlab %}
@@ -181,20 +176,20 @@ job
 {% highlight plaintext %}
 ans = trueEbsd2 (as imported)
  
-     name            image   distortion  shift  residual
- 1  bcImg       547 x 1031  shift-drift      -         -
- 2  fsd1a  1280 x 2048 x 3         tilt      -         -
- 3  bse1a      1280 x 2048     identity      -         -
- 4  bse1b      1280 x 2048                   -         -
+     name            image   distortion  shift, px  residual, px
+ 1  bcImg       547 × 1031  shift-drift          -             -
+ 2  fsd1a  1280 × 2048 × 3         tilt          -             -
+ 3  bse1a      1280 × 2048     identity          -             -
+ 4  bse1b      1280 × 2048                       -             -
  
  
 job = trueEbsd2 (as imported)
  
-     name            image   distortion  shift  residual
- 1  bcImg       547 x 1031  shift-drift      -         -
- 2  fsd1a  1280 x 2048 x 3         tilt      -         -
- 3  bse1a      1280 x 2048     identity      -         -
- 4  bse1b      1280 x 2048                   -         -
+     name            image   distortion  shift, px  residual, px
+ 1  bcImg       547 × 1031  shift-drift          -             -
+ 2  fsd1a  1280 × 2048 × 3         tilt          -             -
+ 3  bse1a      1280 × 2048     identity          -             -
+ 4  bse1b      1280 × 2048                       -             -
 {% endhighlight %}
 <p>Plot the as-imported sequence to check that the maps cover similar regions of the sample.</p>
 {% highlight matlab %}
@@ -221,6 +216,7 @@ plot(job.resizedList,'edge')
 </center>
 <p>
 <code class="language-plaintext highlighter-rouge">'fitErr'</code> re-measures the shifts <b>after</b> each correction and reports what is left over. Around a pixel or less means it worked. Those residuals are kept in <code class="language-plaintext highlighter-rouge">job.fitError</code>, and they matter later on this page: they set how large a void has to be before its position can be trusted.</p>
+<p>Each column reads as a length followed by the signed x and y behind it, in pixels of the common grid. The length is what the check below is built on - how far a feature may still be off, whichever way it went.</p>
 {% highlight matlab %}
 job.calcDistortion('fitErr')
 {% endhighlight %}
@@ -232,35 +228,35 @@ job.calcDistortion('fitErr')
 
  ◆ distortion across 4 maps, 3 hops
 
-    distortion   stage              ROI     shift  residual
-    ──────────── ───────────── ──────── ───────── ─────────
+    distortion   stage              ROI          shift, px       residual, px
+    ──────────── ───────────── ──────── ────────────────── ──────────────────
   ● bcImg
-  │ shift-drift  shift           512 px  67.82 px
-  │              drift           512 px   1.42 px
-  │              ↳ residual                         0.85 px
+  │ shift-drift  shift           512 px 67.82 (-6.03,+67.55)
+  │              drift           512 px 1.42 (-0.06,+1.14)
+  │              ↳ residual                                0.85 (-0.05,+0.14)
   ▼
   ● fsd1a
-  │ tilt         projective      512 px 126.52 px
-  │              poly11          512 px   2.48 px
-  │              poly22          512 px   1.56 px
-  │              ↳ residual                         1.25 px
+  │ tilt         projective      512 px 126.52 (-35.33,+121.35)
+  │              poly11          512 px 2.48 (-0.73,+1.72)
+  │              poly22          512 px 1.56 (+0.15,+0.03)
+  │              ↳ residual                                1.25 (+0.16,+0.01)
   ▼
   ● bse1a
-  │ identity     ·                    ·   0.00 px
-  │              ↳ difference                       0.33 px
+  │ identity     ·                    · 0.00 (+0.00,+0.00)
+  │              ↳ difference                              0.33 (-0.02,-0.02)
   ▼
   ● bse1b
 
  
 ans = trueEbsd2 (shifts calculated)
  
-     name            image   distortion   shift  residual
- 1  bcImg      1280 x 2048  shift-drift  1.8 px   0.85 px
- 2  fsd1a  1280 x 2048 x 3         tilt  2.4 px    1.2 px
- 3  bse1a      1280 x 2048     identity    0 px   0.33 px
- 4  bse1b      1280 x 2048                    -         -
+     name            image   distortion           shift, px        residual, px
+ 1  bcImg      1280 × 2048  shift-drift  1.84 (-0.11,-0.16)  0.85 (-0.05,+0.14)
+ 2  fsd1a  1280 × 2048 × 3         tilt  2.45 (-0.16,+0.65)  1.25 (+0.16,+0.01)
+ 3  bse1a      1280 × 2048     identity  0.00 (+0.00,+0.00)  0.33 (-0.02,-0.02)
+ 4  bse1b      1280 × 2048                                -                   -
  
- common grid: 1280 x 2048 at 0.05 µm
+ common grid: 1280 × 2048 at 0.05 µm
 {% endhighlight %}
 
 {% highlight matlab %}
@@ -272,13 +268,13 @@ plot(job.undistortedList)
 {% highlight plaintext %}
 ans = trueEbsd2 (undistorted)
  
-     name            image   distortion   shift  residual
- 1  bcImg      1280 x 2048  shift-drift  1.8 px   0.85 px
- 2  fsd1a  1280 x 2048 x 3         tilt  2.4 px    1.2 px
- 3  bse1a      1280 x 2048     identity    0 px   0.33 px
- 4  bse1b      1280 x 2048                    -         -
+     name            image   distortion           shift, px        residual, px
+ 1  bcImg      1280 × 2048  shift-drift  1.84 (-0.11,-0.16)  0.85 (-0.05,+0.14)
+ 2  fsd1a  1280 × 2048 × 3         tilt  2.45 (-0.16,+0.65)  1.25 (+0.16,+0.01)
+ 3  bse1a      1280 × 2048     identity  0.00 (+0.00,+0.00)  0.33 (-0.02,-0.02)
+ 4  bse1b      1280 × 2048                                -                   -
  
- common grid: 1280 x 2048 at 0.05 µm
+ common grid: 1280 × 2048 at 0.05 µm
 {% endhighlight %}
 <center>
 {% include inline_image.html file="example_copper_2_03.png" %}
@@ -327,12 +323,12 @@ ebsd = EBSDsquare (Y1↓→X1, row↓→col)
  
  Properties: BandContrast, BandSlope, Bands, BeamPositionX, BeamPositionY, DetectorDistance, Error, MeanAngularDeviation, PatternCenterX, PatternCenterY, PatternQuality, oldId, bcImg, fsd1a, bse1a, bse1b
  Scan unit : um
- X x Y x Z : [-103 → -2] x [-54 → 0] x [0 → 0]
+ X × Y × Z : [-103 → -2] × [-54 → 0] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :1082 x 2018
+ Square grid  :1082 × 2018
 {% endhighlight %}
-<p>A void is a hole, so the aligned backscatter image is the only evidence of where it is. Thresholding that image gives a mask, and the mask becomes a phase of its own &mdash; which is what makes the voids available to <a href="ebsd.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a>, <code class="language-plaintext highlighter-rouge">grains.boundary</code> and every other MTEX tool below.</p>
-<p>The natural phase for a hole is a <b>named</b> not indexed one. A void carries no orientation, and <a href="notIndexed.notIndexed.html"><code class="language-plaintext highlighter-rouge">notIndexed</code></a> takes a name and a colour, so the voids stay selectable as <code class="language-plaintext highlighter-rouge">ebsd('voids')</code> and stay out of <code class="language-plaintext highlighter-rouge">ebsd('indexed')</code> without being given a fake symmetry and a fake identity orientation. Adding a phase means appending it to <code class="language-plaintext highlighter-rouge">ebsd.CSList</code> and <code class="language-plaintext highlighter-rouge">ebsd.phaseMap</code>; after that the pixels are labelled by name.</p>
+<p>A void is a hole, so the aligned backscatter image is the only evidence of where it is. Thresholding that image gives a mask, and the mask becomes a phase of its own &mdash; which is what makes the voids available to <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a>, <code class="language-plaintext highlighter-rouge">grains.boundary</code> and every other MTEX tool below.</p>
+<p>The natural phase for a hole is a <b>named</b> not indexed one. A void carries no orientation, and <a href="notIndexed.html"><code class="language-plaintext highlighter-rouge">notIndexed</code></a> takes a name and a colour, so the voids stay selectable as <code class="language-plaintext highlighter-rouge">ebsd('voids')</code> and stay out of <code class="language-plaintext highlighter-rouge">ebsd('indexed')</code> without being given a fake symmetry and a fake identity orientation. Adding a phase means appending it to <code class="language-plaintext highlighter-rouge">ebsd.CSList</code> and <code class="language-plaintext highlighter-rouge">ebsd.phaseMap</code>; after that the pixels are labelled by name.</p>
 <p>The threshold is asked of the uncovered corners as well, where the backscatter image is defined but the EBSD map never reached. A dark pixel there is missing data rather than a void, so the mask is restricted to the map's own coverage &mdash; which is exactly where the aligned band contrast is not NaN. Without that restriction 7% more pixels are called voids, in a region where no boundary was measured to attribute them to.</p>
 {% highlight matlab %}
 voidThreshold = 0.8;                % backscatter level below which a pixel is a void
@@ -356,9 +352,9 @@ ebsd = EBSDsquare (Y1↓→X1, row↓→col)
  
  Properties: BandContrast, BandSlope, Bands, BeamPositionX, BeamPositionY, DetectorDistance, Error, MeanAngularDeviation, PatternCenterX, PatternCenterY, PatternQuality, oldId, bcImg, fsd1a, bse1a, bse1b
  Scan unit : um
- X x Y x Z : [-103 → -2] x [-54 → 0] x [0 → 0]
+ X × Y × Z : [-103 → -2] × [-54 → 0] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :1082 x 2018
+ Square grid  :1082 × 2018
 {% endhighlight %}
 <h2 id="16">The voids as objects</h2>
 <p>The mask says which pixels are dark. To speak of <b>a void</b> we need the pixels grouped into connected objects, which is what <code class="language-plaintext highlighter-rouge">calcGrains</code> does for any phase, indexed or not.</p>
@@ -438,9 +434,9 @@ ebsd = EBSDsquare (Y1↓→X1, row↓→col)
  
  Properties: BandContrast, BandSlope, Bands, BeamPositionX, BeamPositionY, DetectorDistance, Error, MeanAngularDeviation, PatternCenterX, PatternCenterY, PatternQuality, oldId, bcImg, fsd1a, bse1a, bse1b, grainId
  Scan unit : um
- X x Y x Z : [-103 → -2] x [-54 → 0] x [0 → 0]
+ X × Y × Z : [-103 → -2] × [-54 → 0] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :1082 x 2018
+ Square grid  :1082 × 2018
 {% endhighlight %}
 <p>The voids are still a phase of the map &mdash; <code class="language-plaintext highlighter-rouge">calcGrains</code> assigned them to grains, it did not relabel the pixels &mdash; so they can be drawn straight onto the band contrast in their own phase colour.</p>
 {% highlight matlab %}
