@@ -23,17 +23,12 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A crystal orientation always appears as a class of symmetrically equivalent rotations which all transform the crystal reference frame into the specimen reference frame and are physically not distinguishable.</p>
-<p>Lets start by defining some random orientation</p>
+<p>An orientation never stands alone. Every symmetry operation of the crystal produces a rotation that maps the crystal frame onto the specimen frame just as well, and no measurement can tell them apart. The same is true for symmetry of the specimen. An orientation is therefore a whole class of rotations, and MTEX works with the class rather than with the representative that happened to be written down.</p>
 {% highlight matlab %}
-% trigonal crystal symmetry
+plottingConvention.default('y↑→x');
+
+% hexagonal crystal symmetry, 6 rotations about the c axis
 cs = crystalSymmetry('6')
-
-% monoclinic specimen symmetry with respect to the x-axis
-ss = specimenSymmetry('112')
-
-% a random orientation
-ori = orientation.rand(cs,ss)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -43,26 +38,39 @@ cs = crystalSymmetry (⊙c→a)
   elements       : 6                
   a, b, c        : 1, 1, 1          
   reference frame: X||a*, Y||b, Z||c
- 
- 
-ss = monoclinic specimenSymmetry (y↓→x)
- 
- 
-ori = orientation (6 → y↓→x (112))
+{% endhighlight %}
+
+{% highlight matlab %}
+% specimen symmetry with a twofold axis along z
+ss = specimenSymmetry('112')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ss = monoclinic specimenSymmetry (y↑→x)
+{% endhighlight %}
+
+{% highlight matlab %}
+% a random orientation
+ori = orientation.rand(cs,ss)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori = orientation (6 → y↑→x (112))
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   156.958 161.468 197.878
 {% endhighlight %}
-<p>Since orientations transform crystal coordinates into specimen coordinates crystal symmetries will act from the right and specimen symmetries from the left</p>
+<h2 id="4">Which Side Acts</h2>
+<p>An orientation takes crystal coordinates to specimen coordinates, so crystal symmetry acts on its input, from the right, and specimen symmetry on its output, from the left. The six crystal operations give</p>
 {% highlight matlab %}
 % symmetrically equivalent orientations with respect to crystal symmetry
 ori * cs
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 → y↓→x (112))
-  size: 1 x 6
+ans = orientation (6 → y↑→x (112))
+  size: 1 × 6
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -73,30 +81,30 @@ ans = orientation (6 → y↓→x (112))
   156.958 161.468 77.8785
   156.958 161.468 137.878
 {% endhighlight %}
-<p>We observe that only the third Euler angle phi2 changes as this Euler angle applies first to the crystal coordinates.</p>
+<p>Only the third Euler angle \(\varphi_2\) changes, in steps of \(60^\circ\), because \(\varphi_2\) is the rotation applied first, i.e. the one acting in crystal coordinates - which is exactly where the crystal symmetry sits.</p>
+<p>Specimen symmetry produces the other kind of equivalence.</p>
 {% highlight matlab %}
 % symmetrically equivalent orientations with respect to specimen symmetry
 ss * ori
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 → y↓→x (112))
-  size: 2 x 1
+ans = orientation (6 → y↑→x (112))
+  size: 2 × 1
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   156.958 161.468 197.878
   336.958 161.468 197.878
 {% endhighlight %}
-<p>Combining crystal and specimen symmetry we obtain 6 crystallographically equivalent orientations to <code class="language-plaintext highlighter-rouge">ori</code>
-</p>
+<p>Now \(\varphi_1\) moves instead, the angle applied last. Both together give the full class, \(2 \times 6 = 12\) orientations.</p>
 {% highlight matlab %}
 ss * ori * cs
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 → y↓→x (112))
-  size: 2 x 6
+ans = orientation (6 → y↑→x (112))
+  size: 2 × 6
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -113,32 +121,17 @@ ans = orientation (6 → y↓→x (112))
   156.958 161.468 137.878
   336.958 161.468 137.878
 {% endhighlight %}
-<p>A shortcut for this operation is the command <a href="orientation.symmetrise.html">symmetrise</a>
-</p>
+<p> <a href="orientation.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> is the shortcut for that product.</p>
 {% highlight matlab %}
-symmetrise(ori)
+length(symmetrise(ori))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 → y↓→x (112))
-  size: 12 x 1
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  156.958 161.468 197.878
-  336.958 161.468 197.878
-  156.958 161.468 257.878
-  336.958 161.468 257.878
-  156.958 161.468 317.878
-  336.958 161.468 317.878
-  156.958 161.468 17.8785
-  336.958 161.468 17.8785
-  156.958 161.468 77.8785
-  336.958 161.468 77.8785
-  156.958 161.468 137.878
-  336.958 161.468 137.878
+ans =
+    12
 {% endhighlight %}
-<p>The consequence is visible in any pole figure. One orientation and one crystal direction give not one pole but a whole set of them, because the lattice cannot tell its symmetrically equivalent settings apart.</p>
+<h2 id="8">What This Looks Like in a Pole Figure</h2>
+<p>One orientation and one crystal direction give not one pole but a whole set of them.</p>
 {% highlight matlab %}
 h = Miller(1,0,0,cs);
 
@@ -147,30 +140,22 @@ plotPDF(ori,h,'MarkerSize',10,'figSize','small')
 <center>
 {% include inline_image.html file="OrientationSymmetry_01.png" %}
 </center>
-<p>Every dot is the same physical direction of the same crystal. Which of them you happen to compute is an accident of how the orientation was written down, which is why every comparison in MTEX takes all of them into account.</p>
-<p>For specific orientations, e.g. for the cube orientations, symmetrisation leads to multiple identical orientations. This can be prevented by passing the option <code class="language-plaintext highlighter-rouge">unique</code> to the command <a href="orientation.symmetrise.html">symmetrise</a>
-</p>
+<p>The dots are distinct specimen directions, but each comes from a member of the same crystallographically equivalent direction family. Which member a calculation produces depends on the representative used for the orientation, so symmetry-aware comparisons take the full family into account.</p>
+<h2 id="10">Coincidences</h2>
+<p>For orientations that sit on a symmetry axis, several of the equivalent rotations coincide. The identity orientation is the extreme case: its class has 12 members but only 6 distinct ones, which the option <code class="language-plaintext highlighter-rouge">'unique'</code> removes.</p>
 {% highlight matlab %}
-symmetrise(orientation.id(cs,ss),'unique')
+length(symmetrise(orientation.id(cs,ss),'unique'))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (6 → y↓→x (112))
-  size: 6 x 1
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-   180    0    0
-   240    0    0
-   120    0    0
-   300    0    0
-    60    0    0
-     0    0    0
+ans =
+     6
 {% endhighlight %}
-<h2 id="9">Crystal symmetries in computations</h2>
-<p>Note that all operation on orientations are preformed taking all symmetrically equivalent orientations into account. As an example consider the angle between a random orientation and all orientations symmetrically equivalent to the goss orientation</p>
+<h2 id="11">Symmetry in Every Computation</h2>
+<p>Because the class is what matters, the angle between two orientations is the smallest angle over all equivalent pairs. Comparing a random orientation with each of the symmetric equivalents of the Goss orientation gives one and the same number.</p>
 {% highlight matlab %}
 ori = orientation.rand(cs);
+
 angle(ori,symmetrise(orientation.goss(cs))) ./ degree
 {% endhighlight %}
 
@@ -183,7 +168,7 @@ ans =
   138.9364
   138.9364
 {% endhighlight %}
-<p>The value is the same for all orientations and equal to the smallest angle to one of the symmetrically equivalent orientations. This can be verified by computing the rotational angle ignoring symmetry.</p>
+<p>Switching symmetry off shows what those rotations really are: six different angles, of which the number above is the smallest.</p>
 {% highlight matlab %}
 angle(ori,symmetrise(orientation.goss(cs)),'noSymmetry') ./ degree
 {% endhighlight %}
@@ -197,7 +182,9 @@ ans =
   138.9364
   145.1306
 {% endhighlight %}
-<p>Functions that respect crystal symmetry but allow to switch it off using the flag <code class="language-plaintext highlighter-rouge">noSymmetry</code> include <a href="orientation.dot.html">dot</a>, <a href="orientation.unique.html">unique</a>, <a href="orientation.calcCluster.html">calcCluster</a>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'noSymmetry'</code> flag is available wherever the distinction matters, among others for <a href="orientation.dot.html"><code class="language-plaintext highlighter-rouge">dot</code></a>, <a href="orientation.unique.html"><code class="language-plaintext highlighter-rouge">unique</code></a> and <a href="orientation.calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a>. Reach for it when a number comes out smaller than expected - and leave it alone otherwise, since the symmetry-aware answer is the physically meaningful one.</p>
+<h2 id="14">Next</h2>
+<p>The region of rotation space that holds exactly one member of each class is the <a href="OrientationFundamentalRegion.html">Fundamental Region</a>. Symmetry of the specimen, and when it should be imposed at all, is <a href="SpecimenSymmetry.html">Specimen Symmetry</a>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Fibers"
+title: "Fibres"
 
 sidebar: documentation_sidebar
 permalink: RotationFibre.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Fibers</title>
+<title>Fibres</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_RotationFibre.m">
 </head>
@@ -23,29 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A fibre in orientation space is the equivalent of straight lines in Euclidean space, it is the shortest path between any two orientations. In MTEX it is defined by the command <code class="language-plaintext highlighter-rouge"><a href="fibre.fibre.html">fibre</a></code>.</p>
+<p>A <a href="fibre.fibre.html"><code class="language-plaintext highlighter-rouge">&lt;fibre.fibre.html fibre&gt;</code></a> is to rotation space what a straight line is to Euclidean space: the shortest path between two rotations, and the set traced out by continuing along it. Fibres matter because many common textures are concentrated around such curves: all orientations that put one crystal direction along one specimen direction, with the rotation about that direction left free.</p>
 {% highlight matlab %}
 % consider cubic symmetry
 cs = crystalSymmetry('432');
 
 % two random orientations
 oriA = orientation.rand(cs)
-oriB = orientation.rand(cs)
-
-% this is important to have the pair of orientations with the smallest distance
-oriB = oriB.project2FundamentalRegion(oriA)
-
-% define the connecting fibre
-f = fibre(oriA,oriB)
-
-plot(oriA,'axisAngle','filled','MarkerSize',20)
-hold on
-plot(oriB,'axisAngle','filled','MarkerSize',20)
-
-hold on
-plot(f,'lineWidth',3,'lineColor','red')
-hold off
-axis off
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -54,22 +38,44 @@ oriA = orientation (432 → y↓→x)
   Bunge Euler angles in degree
      phi1     Phi    phi2
   156.958 161.468 197.878
- 
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+oriB = orientation.rand(cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
 oriB = orientation (432 → y↓→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   156.716 99.1642 118.921
- 
- 
+{% endhighlight %}
+<p>Under crystal symmetry an orientation stands for a whole set of equivalent ones, so "the path between A and B" is only well defined once the equivalent of <code class="language-plaintext highlighter-rouge">oriB</code> closest to <code class="language-plaintext highlighter-rouge">oriA</code> has been picked out.</p>
+{% highlight matlab %}
+oriB = oriB.project2FundamentalRegion(oriA)
+{% endhighlight %}
+
+{% highlight plaintext %}
 oriB = orientation (432 → y↓→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   262.796 149.782 288.448
- 
- 
+{% endhighlight %}
+<p>The connecting fibre is then</p>
+{% highlight matlab %}
+f = fibre(oriA,oriB)
+
+plot(oriA,'axisAngle','filled','MarkerSize',20)
+hold on
+plot(oriB,'axisAngle','filled','MarkerSize',20)
+plot(f,'lineWidth',3,'lineColor','red')
+hold off
+axis off
+{% endhighlight %}
+
+{% highlight plaintext %}
 f = fibre (432 → y↓→x)
  
   h || r: (9̅7̅3̅) || (-2,7,4)
@@ -78,7 +84,8 @@ f = fibre (432 → y↓→x)
 <center>
 {% include inline_image.html file="RotationFibre_01.png" %}
 </center>
-<p>Due to the curved nature of the orientation space it is better to understand fibers not as straight lines but as big circles on a sphere. That is, if we extend them they will form a loop of length <code class="language-plaintext highlighter-rouge">2*pi</code>. In MTEX this is done by the option <code class="language-plaintext highlighter-rouge">'full'</code>.</p>
+<h2 id="5">A Fibre is a Circle</h2>
+<p>Rotation space is curved, so a fibre is better thought of as a great circle on a sphere than as a straight line. Continued past its two endpoints it closes up, which the option <code class="language-plaintext highlighter-rouge">'full'</code> does.</p>
 {% highlight matlab %}
 f = fibre(oriA,oriB,'full')
 
@@ -95,54 +102,60 @@ f = fibre (432 → y↓→x)
 <center>
 {% include inline_image.html file="RotationFibre_02.png" %}
 </center>
-<p>The strange multiple lines in the above pictures are all from the same circle that has been projected into the fundamental zone by crystal symmetry. If we dismiss crystal symmetry and visualize the complete rotation space we observe that <code class="language-plaintext highlighter-rouge">f</code> is indeed a circle.</p>
+<p>The result looks like several disconnected arcs, but it is one circle: the plot shows the fundamental region only, and the circle leaves it and re-enters as a symmetrically equivalent piece. Drawn in the complete rotation space, without folding anything back, it is a single closed curve.</p>
 {% highlight matlab %}
 plot(oriA,'axisAngle','filled','MarkerSize',20,'complete')
 hold on
 plot(oriB,'axisAngle','filled','MarkerSize',20)
-
 plot(f,'axisAngle','lineWidth',3,'lineColor','red')
-axis off
 hold off
+axis off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RotationFibre_03.png" %}
 </center>
-<p>Another way of characterizing fibers is that they are the set of all orientations that that align a specific crystal direction <code class="language-plaintext highlighter-rouge">h</code> with a specific specimen direction <code class="language-plaintext highlighter-rouge">r</code>. Those directions can be read from the fiber <code class="language-plaintext highlighter-rouge">f</code> by</p>
+<h2 id="7">The Two Directions Behind a Fibre</h2>
+<p>The other way to describe the same set: a fibre is all rotations that take one crystal direction <code class="language-plaintext highlighter-rouge">h</code> onto one specimen direction <code class="language-plaintext highlighter-rouge">r</code>. Both are stored on the fibre and read back as properties.</p>
+{% highlight matlab %}
+f.h
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = Miller (432)
+      h       k       l
+  -0.77 -0.5887 -0.2461
+{% endhighlight %}
+
 {% highlight matlab %}
 f.r
-f.h
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = vector3d (y↓→x)
        x      y      z
   -0.243  0.839  0.487
- 
-ans = Miller (432)
-      h       k       l
-  -0.77 -0.5887 -0.2461
 {% endhighlight %}
-<p>Note that <code class="language-plaintext highlighter-rouge">f.h</code> and <code class="language-plaintext highlighter-rouge">f.r</code> are exactly the misorientation axes between the orientations <code class="language-plaintext highlighter-rouge">oriA</code> and <code class="language-plaintext highlighter-rouge">oriB</code>
-</p>
+<p>These are the axis of the rotation from <code class="language-plaintext highlighter-rouge">oriA</code> to <code class="language-plaintext highlighter-rouge">oriB</code>, written once in specimen coordinates and once in crystal coordinates. Nothing else could be left fixed by both orientations.</p>
 {% highlight matlab %}
-% the axis in specimen symmetry
 r = axis(oriB,oriA)
-
-% the axis in crystal symmetry
-h = inv(oriA) * axis(oriB,oriA)
 {% endhighlight %}
 
 {% highlight plaintext %}
 r = vector3d (y↓→x)
        x      y      z
   -0.243  0.839  0.487
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+h = inv(oriA) * axis(oriB,oriA)
+{% endhighlight %}
+
+{% highlight plaintext %}
 h = Miller (432)
       h       k       l
   -0.77 -0.5887 -0.2461
 {% endhighlight %}
-<p>We may use <code class="language-plaintext highlighter-rouge">h</code> and <code class="language-plaintext highlighter-rouge">r</code> directly to define a <a href="fibre.fibre.html">fibre</a> within MTEX by</p>
+<p>Given the pair, the fibre is defined directly, without reference to the two orientations it happened to come from.</p>
 {% highlight matlab %}
 f = fibre(h,r)
 {% endhighlight %}
@@ -152,12 +165,11 @@ f = fibre (432 → y↓→x)
  
   h || r: (9̅7̅3̅) || (-2,7,4)
 {% endhighlight %}
-<p>A discretization of such a fibre can be found using the command <a href="fibre.orientation.html"><code class="language-plaintext highlighter-rouge">orientation</code></a>
-</p>
+<h2 id="12">Sampling a Fibre</h2>
+<p> <a href="fibre.orientation.html"><code class="language-plaintext highlighter-rouge">orientation</code></a> discretises a fibre into a list of orientations, which is what a plot or a calculation along the fibre needs.</p>
 {% highlight matlab %}
 ori = orientation(f)
 
-% plot the rotations along the fibre
 hold on
 plot(ori)
 hold off
@@ -165,11 +177,13 @@ hold off
 
 {% highlight plaintext %}
 ori = orientation (432 → y↓→x)
-  size: 2000 x 1
+  size: 2000 × 1
 {% endhighlight %}
 <center>
 {% include inline_image.html file="RotationFibre_04.png" %}
 </center>
+<h2 id="13">Next</h2>
+<p>Fibres of the standard texture components, and the fibre ODFs built on them, are <a href="OrientationFibre.html">Fibres of Orientations</a> and <a href="FibreODFs.html">Fibre ODFs</a>.</p>
 </div>
 </body>
 </html>

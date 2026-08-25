@@ -90,7 +90,7 @@ plot(v2,'label','v_2')
 </div>
 <p>Assigning a convention to the data itself - <code class="language-plaintext highlighter-rouge">ebsd.how2plot = 'z&uarr;&rarr;x'</code> - is not one of them, and <code class="language-plaintext highlighter-rouge">how2plot</code> is read only on every class but <a href="referenceFrame.referenceFrame.html">referenceFrame</a>. It used to attach a private copy of the session frame to that one object, which then looked exactly like the session frame in every display while silently no longer following it.</p>
 <h2 id="9">Named Reference Frames</h2>
-<p>Frames have an identity and named axes. The frame of the instrument is <a href="specimenFrame.specimenFrame.html"><code class="language-plaintext highlighter-rouge">specimenFrame.measurement</code></a> with the axes <code class="language-plaintext highlighter-rouge">X1</code>, <code class="language-plaintext highlighter-rouge">Y1</code>, <code class="language-plaintext highlighter-rouge">Z1</code> in Oxford notation. For rolled sheets the frame <a href="specimenFrame.specimenFrame.html"><code class="language-plaintext highlighter-rouge">specimenFrame.rolling</code></a> names its axes <code class="language-plaintext highlighter-rouge">RD</code>, <code class="language-plaintext highlighter-rouge">TD</code>, <code class="language-plaintext highlighter-rouge">ND</code> and comes with the typical rolling geometry convention, RD to the north and TD to the west</p>
+<p>Frames have an identity and named axes. The frame an Oxford instrument states its Euler angles in is <a href="specimenFrame.specimenFrame.html"><code class="language-plaintext highlighter-rouge">specimenFrame.measurement</code></a> with the axes <code class="language-plaintext highlighter-rouge">X1</code>, <code class="language-plaintext highlighter-rouge">Y1</code>, <code class="language-plaintext highlighter-rouge">Z1</code> in Oxford notation - the sample surface CS1. For rolled sheets the frame <a href="specimenFrame.specimenFrame.html"><code class="language-plaintext highlighter-rouge">specimenFrame.rolling</code></a> names its axes <code class="language-plaintext highlighter-rouge">RD</code>, <code class="language-plaintext highlighter-rouge">TD</code>, <code class="language-plaintext highlighter-rouge">ND</code> and comes with the typical rolling geometry convention, RD to the north and TD to the west</p>
 {% highlight matlab %}
 specimenFrame.rolling
 {% endhighlight %}
@@ -126,7 +126,7 @@ plot(v1,'upper','label','v_1','noLabel')
 {% include inline_image.html file="AxesAlignment_05.png" %}
 </center>
 <h2 id="14">Imported Data</h2>
-<p>Imported data follows the session convention like everything else - a file does not decide how the rest of your session is drawn. What an import may do is state <b>which frame</b> the data lives in: data from an Oxford instrument lands in <code class="language-plaintext highlighter-rouge">specimenFrame.measurement</code>, whose axes appear as <code class="language-plaintext highlighter-rouge">X1</code>, <code class="language-plaintext highlighter-rouge">Y1</code>, <code class="language-plaintext highlighter-rouge">Z1</code> in the display of the object.</p>
+<p>Imported data follows the session convention like everything else - a file does not decide how the rest of your session is drawn, and no vendor gives the map a reference system of its own, so an import lands in the generic specimen frame with the axes <code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">Y</code>, <code class="language-plaintext highlighter-rouge">Z</code>. Move it into a frame that names its axes - <code class="language-plaintext highlighter-rouge">ebsd.frame = specimenFrame.rolling</code> - when you know what the directions of your specimen are.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata dubna
@@ -139,13 +139,13 @@ plot(pf{1:4})
 pf = PoleFigure (y↑→x)
   crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
  
-  h = (022̅1), r = 72 x 19 points
-  h = (101̅0), r = 72 x 19 points
-  h = (101̅1)(011̅1), r = 72 x 19 points
-  h = (101̅2), r = 72 x 19 points
-  h = (112̅0), r = 72 x 19 points
-  h = (112̅1), r = 72 x 19 points
-  h = (112̅2), r = 72 x 19 points
+  h = (022̅1), r = 72 × 19 points
+  h = (101̅0), r = 72 × 19 points
+  h = (101̅1)(011̅1), r = 72 × 19 points
+  h = (101̅2), r = 72 × 19 points
+  h = (112̅0), r = 72 × 19 points
+  h = (112̅1), r = 72 × 19 points
+  h = (112̅2), r = 72 × 19 points
  
 ans = plottingConvention (y↑→x)
 {% endhighlight %}
@@ -192,9 +192,9 @@ ebsd = EBSDhex (y↑→x)
  
  Properties: ci, grainid, iq, sem_signal, oldId
  Scan unit : um
- X x Y x Z : [0 → 996] x [0 → 998] x [0 → 0]
+ X × Y × Z : [0 → 996] × [0 → 998] × [0 → 0]
  Normal vector: (0,0,1)
- Hex grid     :97 x 84
+ Hex grid     :97 × 84
 {% endhighlight %}
 <center>
 {% include inline_image.html file="AxesAlignment_08.png" %}

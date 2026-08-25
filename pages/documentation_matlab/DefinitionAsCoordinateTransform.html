@@ -23,11 +23,15 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In MTEX a crystal orientation is defined as the rotation that transforms <a href="CrystalDirections.html">crystal coordinates</a>, i.e., a description of a vector or a tensor with respect to the <a href="CrystalReferenceSystem.html">crystal reference frame</a>, into specimen coordinates, i.e., a description of the same object with respect to a specimen fixed reference frame.</p>
-<p>In MTEX any orientation consists of two ingredients. A <a href="rotation.rotation.html">rotation</a>
+<p>An orientation in MTEX is the rotation that takes <a href="CrystalDirections.html">crystal coordinates</a> - a direction or a tensor written in the <a href="CrystalReferenceSystem.html">crystal reference frame</a> - to specimen coordinates, the description of the same object in the frame the sample sits in.</p>
+<p>Everything else on this page follows from that one sentence, including the side an orientation has to be multiplied on and what happens when the specimen is turned.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">The Two Ingredients</h2>
+<p>An orientation is a <a href="rotation.rotation.html">rotation</a>
 </p>
 {% highlight matlab %}
-% lets take a random one
 rot = rotation.rand
 {% endhighlight %}
 
@@ -38,10 +42,8 @@ rot = rotation
      phi1     Phi    phi2
   156.958 161.468 197.878
 {% endhighlight %}
-<p>and a description of the crystal lattice, which are represented in MTEX by variables of type <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a>
-</p>
+<p>together with a description of the crystal lattice, a <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a>.</p>
 {% highlight matlab %}
-% lets take cubic crystal symmetry
 cs = crystalSymmetry.load("Al-Aluminum.cif")
 {% endhighlight %}
 
@@ -53,21 +55,21 @@ cs = crystalSymmetry (⊙c→a)
   elements: 48      
   a, b, c : 4, 4, 4
 {% endhighlight %}
-<p>Combining both ingredients allows us to define an orientation</p>
+<p>Combined, they are an orientation.</p>
 {% highlight matlab %}
 ori = orientation(rot,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Aluminum → y↓→x)
+ori = orientation (Aluminum → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   156.958 161.468 197.878
 {% endhighlight %}
-<p>As a consequence a variable of type orientation is at the same time of type <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> and hence allows for all <a href="RotationOperations.html">operations</a> that are available for rotations.</p>
-<h2 id="5">Crystal coordinates to specimen coordinates</h2>
-<p>Let us consider the following crystal direction</p>
+<p>An orientation is therefore a rotation as well, and every <a href="RotationOperations.html">rotation operation</a> applies to it.</p>
+<h2 id="6">From Crystal Coordinates to Specimen Coordinates</h2>
+<p>Take a crystal direction.</p>
 {% highlight matlab %}
 h = Miller(1,0,0,cs,'uvw')
 {% endhighlight %}
@@ -77,13 +79,13 @@ h = Miller (Aluminum)
   u v w
   1 0 0
 {% endhighlight %}
-<p>In a grain with orientation <code class="language-plaintext highlighter-rouge">ori</code> this direction <code class="language-plaintext highlighter-rouge">h</code> has the specimen coordinates</p>
+<p>In a grain of orientation <code class="language-plaintext highlighter-rouge">ori</code> that direction points here, in specimen coordinates.</p>
 {% highlight matlab %}
 r = ori * h
 {% endhighlight %}
 
 {% highlight plaintext %}
-r = vector3d (y↓→x)
+r = vector3d (y↑→x)
      x      y      z
   3.09  -2.59 -0.395
 {% endhighlight %}
@@ -100,7 +102,7 @@ hold off
 <center>
 {% include inline_image.html file="DefinitionAsCoordinateTransform_01.png" %}
 </center>
-<p>Similarly, orientations transform tensors given with respect to the crystal reference frame, e.g., the following single crystal stiffness tensor</p>
+<p>Tensors transform the same way. A single crystal stiffness tensor given in the crystal frame</p>
 {% highlight matlab %}
 C = stiffnessTensor(...
   [[2 1 1 0 0 0];...
@@ -114,7 +116,7 @@ C = stiffnessTensor(...
 {% highlight plaintext %}
 C = stiffnessTensor (Aluminum)
   unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+  rank: 4 (3 × 3 × 3 × 3)
  
   tensor in Voigt matrix representation:
  2 1 1 0 0 0
@@ -124,15 +126,15 @@ C = stiffnessTensor (Aluminum)
  0 0 0 0 1 0
  0 0 0 0 0 1
 {% endhighlight %}
-<p>into a stiffness tensor with respect to the specimen reference frame</p>
+<p>becomes a stiffness tensor in the specimen frame.</p>
 {% highlight matlab %}
 ori * C
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = stiffnessTensor (y↓→x)
+ans = stiffnessTensor (y↑→x)
   unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+  rank: 4 (3 × 3 × 3 × 3)
  
   tensor in Voigt matrix representation:
   2.4996  0.5568  0.9436 -0.1188 -0.0327  0.1002
@@ -142,7 +144,7 @@ ans = stiffnessTensor (y↓→x)
  -0.0327 -0.0564  0.0891 -0.0694  0.9436 -0.1188
   0.1002 -0.0308 -0.0694 -0.0564 -0.1188  0.5568
 {% endhighlight %}
-<p>Objects that can be translated by orientations from crystal into specimen coordinates and vice versa include</p>
+<p>Everything that is defined in the crystal frame travels this way:</p>
 <div>
 <ul>
 <li>
@@ -165,36 +167,77 @@ ans = stiffnessTensor (y↓→x)
 </li>
 </ul>
 </div>
-<h2 id="11">Specimen coordinates into crystal coordinates</h2>
-<p>Conversely, we can go back from specimen coordinates to crystal coordinates by multiplying with the inverse orientation</p>
+<h2 id="12">And Back Again</h2>
+<p>The inverse orientation takes specimen coordinates to crystal coordinates, so applying it to <code class="language-plaintext highlighter-rouge">r</code> returns the direction we started from.</p>
 {% highlight matlab %}
-inv(ori) * r
+hBack = inv(ori) * r
+{% endhighlight %}
+
+{% highlight plaintext %}
+hBack = Miller (Aluminum)
+        h       k       l
+  16.3991       0       0
+{% endhighlight %}
+<p>The numbers look nothing like the \([100]\) we started from, because a <code class="language-plaintext highlighter-rouge">Miller</code> displays as \((hkl)\) unless told otherwise, and \([100]\) for aluminium is the vector of length \(a = 4.05\) Angstrom. Asking for the lattice direction notation gives it back.</p>
+{% highlight matlab %}
+hBack.dispStyle = 'uvw';
+round(hBack)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = Miller (Aluminum)
-        h       k       l
-  16.3991       0       0
+  u v w
+  1 0 0
 {% endhighlight %}
-<p>Note, that in literature orientations are often defined to transform specimen coordinates into crystal coordinates, i.e., to coincide with the inverse orientations in MTEX. The consequences of this differences are exhaustively discussed in the topic <a href="MTEXvsBungeConvention.html">orientation conventions</a>.</p>
-<h2 id="13">Specimen Rotation</h2>
-<p>Rotations of the specimen ,i.e., changing the specimen reference frame, do also change the orientation. Assume the specimen is rotated about the X-axis about 60 degree. We may define this rotation by</p>
+<p>Much of the literature defines an orientation the other way round, as the transformation from specimen to crystal coordinates - what MTEX calls <code class="language-plaintext highlighter-rouge">inv(ori)</code>. Both conventions are in use, and reading a table of Euler angles in the wrong one inverts every orientation in it. The consequences are spelled out in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</p>
+<h2 id="15">Turning the Specimen</h2>
+<p>Rotating the specimen - putting the sample on the stage the other way round - changes every orientation in it. Such a rotation acts in specimen coordinates, hence from the left.</p>
 {% highlight matlab %}
-rot = rotation.byAxisAngle(vector3d.X,60*degree);
-{% endhighlight %}
-<p>Then an orientation <code class="language-plaintext highlighter-rouge">ori</code> is updated to the rotated reference frame by</p>
-{% highlight matlab %}
-ori_new = rot * ori
+rotSpecimen = rotation.byAxisAngle(vector3d.X,60*degree);
+
+ori_new = rotSpecimen * ori
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori_new = orientation (Aluminum → y↓→x)
+ori_new = orientation (Aluminum → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   172.672 102.755 218.216
 {% endhighlight %}
-<p>It should also be noted, that orientations are sensitive with respect to the alignment of the Euclidean reference frame \(\vec X\), \(\vec Y\), \(\vec Z\) with respect to the crystal axes \(\vec a\), \(\vec b\) and \(\vec c\). This issue is discussed in more detail in the topic <a href="CrystalReferenceSystem.html">Crystal Reference Frames</a>.</p>
+<p>Every crystal direction moves with the specimen, which is what multiplying from the left means:</p>
+{% highlight matlab %}
+angle(ori_new * h, rotSpecimen * r) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<p>Zero - going through the new orientation and turning the old result give the same direction.</p>
+<p>The same rotation applied on the other side means something else. Used in crystal coordinates it turns the direction inside the lattice, before the orientation maps it out, and the result is a different specimen direction altogether.</p>
+{% highlight matlab %}
+angle(ori * (rotSpecimen * h), ori_new * h) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   37.7949
+{% endhighlight %}
+<p>Right multiplication is nonetheless the meaningful side for one purpose: multiplying by a symmetry operation of the crystal changes nothing at all, because the crystal cannot tell the two settings apart. That is precisely what <a href="orientation.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> does, and all 48 results are the same orientation - the largest angle between any of them and the original is zero up to rounding.</p>
+{% highlight matlab %}
+max(angle(ori.symmetrise,ori)) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   2.9576e-06
+{% endhighlight %}
+<p>Which side a rotation belongs on is decided by the frame it is given in, and the same question decides the order of a misorientation product, see <a href="MisorientationTheory.html">Misorientations</a>.</p>
+<p>Orientations also depend on how the Cartesian crystal frame \(\vec x\), \(\vec y\), \(\vec z\) is inscribed into the crystal axes \(\vec a\), \(\vec b\), \(\vec c\), which is <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>.</p>
+<h2 id="20">Next</h2>
+<p>
+<a href="OrientationSymmetry.html">Symmetry</a> adds the fact that an orientation stands for a whole set of equivalent rotations, and <a href="OrientationPoleFigure.html">Pole Figures</a> is the standard way of drawing what this page computes by hand.</p>
 </div>
 </body>
 </html>

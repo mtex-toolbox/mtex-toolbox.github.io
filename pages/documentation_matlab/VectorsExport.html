@@ -1,5 +1,5 @@
 ---
-title: "Importing and Exporting Vectors"
+title: "Exporting Vectors"
 
 sidebar: documentation_sidebar
 permalink: VectorsExport.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Importing and Exporting Vectors</title>
+<title>Exporting Vectors</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_VectorsExport.m">
 </head>
@@ -23,20 +23,82 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Large lists of vectors can be imported from a text file by the command</p>
+<p> <a href="vector3d.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> writes a list of directions to a text file, one direction per line, with a line of column headings on top. The file it produces is one that <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> reads back, so this is the way to hand directions to another program or to a later session.</p>
 {% highlight matlab %}
-fname = fullfile(mtexDataPath,'vector3d','vectors.txt');
-v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'})
+plottingConvention.default('y↑→x');
+
+v = vector3d.rand(5);
+
+fname = fullfile(tempdir,'vectors.txt');
+{% endhighlight %}
+<h2 id="2">Cartesian Coordinates</h2>
+<p>By default the three coordinates are written.</p>
+{% highlight matlab %}
+export(v,fname)
+
+type(fname)
 {% endhighlight %}
 
 {% highlight plaintext %}
-v = vector3d (y↓→x)
- size: 1000 x 1
+x         y         z
+-0.479618   0.86809  -0.12801
+0.0893455  0.305014 -0.948148
+-0.728476 -0.677832  0.099325
+-0.304374  0.943729 -0.129355
+-0.104185  0.981723 -0.159264
 {% endhighlight %}
-<p>and exported by the command</p>
+<h2 id="3">Spherical Angles</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'polar'</code> writes the polar and the azimuth angle instead, in degree, or in radians with the additional option <code class="language-plaintext highlighter-rouge">'radians'</code>.</p>
 {% highlight matlab %}
 export(v,fname,'polar')
+
+type(fname)
 {% endhighlight %}
+
+{% highlight plaintext %}
+polar angle azimuth angle
+    97.3546       118.921
+    161.468       73.6735
+    84.2997      -137.062
+    97.4323       107.876
+    99.1642       96.0578
+{% endhighlight %}
+<h2 id="4">Additional Columns</h2>
+<p>Values that belong to the directions - a measured intensity, a weight, a density - are written alongside them by passing a struct. Each field becomes one further column, named after the field.</p>
+{% highlight matlab %}
+S.weight = (1:5).'/15;
+
+export(v,fname,S)
+
+type(fname)
+{% endhighlight %}
+
+{% highlight plaintext %}
+x         y         z    weight
+-0.479618   0.86809  -0.12801 0.0666667
+0.0893455  0.305014 -0.948148  0.133333
+-0.728476 -0.677832  0.099325       0.2
+-0.304374  0.943729 -0.129355  0.266667
+-0.104185  0.981723 -0.159264  0.333333
+{% endhighlight %}
+<h2 id="5">Reading the File Back</h2>
+<p> <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> takes the coordinate columns by name and ignores the rest.</p>
+{% highlight matlab %}
+vNew = vector3d.load(fname,'ColumnNames',{'x','y','z'});
+
+max(angle(v,vNew)) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   2.9919e-05
+{% endhighlight %}
+<p>The directions come back to within a few \(10^{-5}\) degree. What limits the roundtrip is the six digits written to the file, not the export itself.</p>
+{% highlight matlab %}
+delete(fname)
+{% endhighlight %}
+<h2 id="7">Next</h2>
+<p>Reading directions from a file is <a href="VectorsImport.html">Import</a>. A whole figure, rather than the data behind it, is saved as described in <a href="PlottingExport.html">Exporting Figures</a>.</p>
 </div>
 </body>
 </html>

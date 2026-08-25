@@ -23,18 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">Sections of the orientations space</h2>
-<p>A third possibility are two dimensional sections through the Euler angle space. The most popular type of such sections are the so called phi2 sections.</p>
+<p>A three dimensional cloud of orientations is hard to read on paper, so the usual compromise is a stack of two dimensional slices through orientation space. Which slices, and how they are cut, is a matter of convention - each of them keeps some structure recognisable and hides other.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+
 cs = crystalSymmetry('432')
 ss = specimenSymmetry('222')
 
-
 ori = orientation.rand(100,cs,ss)
-
-% as phi2 sections
-plotSection(ori,'phi2')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -49,17 +45,38 @@ ss = orthorhombic specimenSymmetry (y↑→x)
  
  
 ori = orientation (432 → y↑→x (222))
-  size: 100 x 1
+  size: 100 × 1
+{% endhighlight %}
+<h2 id="2">phi2 Sections</h2>
+<p>The most common cut fixes the third Euler angle. Each plot is one value of \(\varphi_2\), with \(\varphi_1\) and \(\Phi\) spanning the plane.</p>
+{% highlight matlab %}
+plotSection(ori,'phi2')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationVisualizationSections_01.png" %}
 </center>
+<p>The points have no preferred orientation, but they are not uniform in the rectangular Euler coordinates: the volume element contains \(\sin\Phi\), so points thin out near \(\Phi=0\). Real textures add structure on top of that baseline, as spots or lines running through several sections. The classical rolling fibres of cubic metals are read this way, see <a href="EulerAngleSections.html">Euler Angle Sections</a>.</p>
+<h2 id="4">Sigma Sections</h2>
+<p>Sigma sections cut differently, along \(\sigma = \varphi_1 - \varphi_2\). They need fewer plots to cover the same region and keep a texture component together instead of splitting it across sections.</p>
 {% highlight matlab %}
 plotSection(ori,'sigma')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationVisualizationSections_02.png" %}
 </center>
+<p>Why they are the better default for cubic material, and how to read them, is <a href="SigmaSections.html">Sigma Sections</a>.</p>
+<h2 id="6">Further Section Types</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">plotSection</code> also takes <code class="language-plaintext highlighter-rouge">'phi1'</code> for sections of the first Euler angle and <code class="language-plaintext highlighter-rouge">'axisAngle'</code> for sections of constant rotational angle. The number of sections is set with the option <code class="language-plaintext highlighter-rouge">'sections'</code>.</p>
+{% highlight matlab %}
+plotSection(ori,'axisAngle','sections',6)
+{% endhighlight %}
+<center>
+{% include inline_image.html file="OrientationVisualizationSections_03.png" %}
+</center>
+<p>Sections of a <b>density</b> rather than of a list of orientations are the same plots applied to an ODF, which is what these views are mostly used for - see <a href="ODFPlot.html">Plotting an ODF</a>. Do not contour a scatter of orientations directly: computing an ODF first and plotting that is both faster and better founded, and MTEX warns when asked to do otherwise.</p>
+<h2 id="8">Next</h2>
+<p>The full three dimensional views these sections cut through are <a href="OrientationVisualization3d.html">3D Plots</a>.</p>
 </div>
 </body>
 </html>

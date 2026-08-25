@@ -23,13 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">Euler angle space</h2>
-<p>By default the function <a href="orientation.plot.html">plot</a> plots orientations in the three dimensional Bunge Euler angle space</p>
+<p>A <a href="OrientationPoleFigure.html">pole figure</a> shows one crystal direction and throws the rest away. The alternative is to give every orientation a point in a three dimensional space and draw them all - nothing is lost, at the price of a plot that has to be turned to be read.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+
 cs = crystalSymmetry('cubic')
 
 ori = orientation.rand(100,cs);
-plot(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -39,32 +39,39 @@ cs = crystalSymmetry (⊙c→a)
   elements: 48     
   a, b, c : 1, 1, 1
 {% endhighlight %}
+<h2 id="2">Euler Angle Space</h2>
+<p> <a href="orientation.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> places each orientation at its three Bunge Euler angles.</p>
+{% highlight matlab %}
+plot(ori)
+{% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationVisualization3d_01.png" %}
 </center>
-<p>Note that the orientations are automatically projected into the fundamental region. In the case of cubic symmetry this means that the Euler angles \(\Phi\) and \(\phi_2\) are restricted to 90 degrees. If the orientations should be plotted at their specified Euler angles the option <code class="language-plaintext highlighter-rouge">'ignoreFundamentalRegion'</code> has to be used.</p>
+<p>The box is smaller than the full range of the angles, because the orientations are projected into the fundamental region first - for cubic symmetry \(\Phi\) and \(\varphi_2\) run to \(90^\circ\) rather than to \(180^\circ\) and \(360^\circ\). Every orientation outside has an equivalent one inside, so nothing is hidden by this, see <a href="OrientationFundamentalRegion.html">Fundamental Region</a>.</p>
+<p>Drawing them where their Euler angles say instead is <code class="language-plaintext highlighter-rouge">'ignoreFundamentalRegion'</code>.</p>
 {% highlight matlab %}
 plot(ori,'ignoreFundamentalRegion')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationVisualization3d_02.png" %}
 </center>
-<h2 id="3">Axis angle space</h2>
-<p>Alternatively, orientations can be plotted in the three dimensional axis angle space.</p>
+<p>The cloud now fills the whole box. Note how the points thin out towards \(\Phi = 0\): Euler angle space distorts volume, so a cluster there is not as concentrated as it looks.</p>
+<h2 id="5">Axis Angle Space</h2>
+<p>The other choice places an orientation in the direction of its rotation axis, at a distance given by its rotation angle.</p>
 {% highlight matlab %}
 plot(ori,'AxisAngle','markerEdgeColor',[0 0 0.8],'markerSize',8)
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationVisualization3d_03.png" %}
 </center>
-<p>The orientations are automatically projected into its fundamental region. Again, this can be switched off with the option <code class="language-plaintext highlighter-rouge">'ignoreFundamentalRegion'</code>.</p>
+<p>Here the fundamental region is not a box but a polyhedron, and drawing it alongside the unprojected orientations shows what the projection does.</p>
 {% highlight matlab %}
 plot(ori,'axisAngle','ignoreFundamentalRegion','markerEdgeColor',[0 0 0.8],'markerSize',8)
 
 % visualize the fundamental region
 hold on
 oR = fundamentalRegion(ori.CS,ori.SS)
-plot(oR,'color',[1 0.5 0.5]),
+plot(oR,'color',[1 0.5 0.5])
 hold off
 {% endhighlight %}
 
@@ -79,6 +86,9 @@ oR = orientationRegion
 <center>
 {% include inline_image.html file="OrientationVisualization3d_04.png" %}
 </center>
+<p>The points outside the solid are the ones the previous plot moved inside. Axis angle space is the more faithful of the two - it distorts volume far less than Euler space - which is why it is the default for misorientations.</p>
+<h2 id="8">Next</h2>
+<p>Two dimensional cuts through these spaces, which is how dense data is usually read, are <a href="OrientationVisualizationSections.html">Section Plots</a>. The shape of the region itself is <a href="OrientationFundamentalRegion.html">Fundamental Region</a>, and the merits of the different parametrisations are compared in <a href="RotationRepresentations.html">Representations</a>.</p>
 </div>
 </body>
 </html>
