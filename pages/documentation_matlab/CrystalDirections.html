@@ -22,35 +22,55 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Miller indices are used to describe directions with respect to the crystal reference system.</p>
 <!--/introduction-->
-<h2 id="1">Crystal Lattice Directions</h2>
-<p>Since lattice directions are always subject to a certain crystal reference frame, the starting point for any crystal direction is the definition of a variable of type <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a>.</p>
+<p>A direction in the specimen is written in the specimen axes X, Y, Z. A direction in the <b>crystal</b> is written in the crystal axes \(\vec a\), \(\vec b\), \(\vec c\), and its coordinates are the Miller indices. Both are directions in the same three dimensional space - what differs is the frame the numbers refer to, and for a crystal that frame is in general neither orthogonal nor normalised.</p>
+<h2 id="2">The Crystal Reference Frame</h2>
+<p>Miller indices mean nothing without the lattice they are counted in, so the starting point is always a <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a>.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('triclinic',[5.29,9.18,9.42],[90.4,98.9,90.1]*degree,...
   'X||a*','Z||c','mineral','Talc');
 {% endhighlight %}
-<p>The variable <code class="language-plaintext highlighter-rouge">cs</code> contains the geometry of the crystal reference frame and, in particular, the alignment of the crystallographic \(\vec a\), \(\vec b\), and, \(\vec c\) axis.</p>
+<p>It carries the lengths and the angles of the unit cell, and hence the three lattice axes as directions in the Cartesian crystal frame.</p>
 {% highlight matlab %}
 a = cs.aAxis
-b = cs.bAxis
-c = cs.cAxis
 {% endhighlight %}
 
 {% highlight plaintext %}
 a = Miller (Talc)
   u v w
   1 0 0
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+b = cs.bAxis
+{% endhighlight %}
+
+{% highlight plaintext %}
 b = Miller (Talc)
   u v w
   0 1 0
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+c = cs.cAxis
+{% endhighlight %}
+
+{% highlight plaintext %}
 c = Miller (Talc)
   u v w
   0 0 1
 {% endhighlight %}
-<p>A lattice direction \(\vec m = u \cdot \vec a + v \cdot \vec b + w \cdot \vec c\) is a vector with coordinates \(u\), \(v\), \(w\) with respect to these crystallographic axes. Such a direction is commonly denoted by \([uvw]\) with coordinates \(u\), \(v\), \(w\) called Miller indices. In MTEX a lattice direction is represented by a variable of type <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">Miller</code></a> which is defined by</p>
+<p>Talc is triclinic, so these three are not at right angles - \(\vec a\) and \(\vec c\) enclose \(81^\circ\) here. Everything that follows is a consequence of that.</p>
+{% highlight matlab %}
+angle(a,c) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   81.1000
+{% endhighlight %}
+<h2 id="7">Lattice Directions</h2>
+<p>A lattice direction \(\vec m = u \cdot \vec a + v \cdot \vec b + w \cdot \vec c\) is the direction from one lattice point to another, written \([uvw]\). In MTEX it is a variable of type <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">Miller</code></a>.</p>
 {% highlight matlab %}
 m = Miller(1,0,1,cs,'uvw')
 {% endhighlight %}
@@ -60,7 +80,7 @@ m = Miller (Talc)
   u v w
   1 0 1
 {% endhighlight %}
-<p>for values \(u = 1\), \(v = 0\), and, \(w = 1\). To plot a crystal direction as a <a href="SphericalProjections.html">spherical projections</a> do</p>
+<p>Plotting it draws it as a point on the sphere, alongside the three crystal axes.</p>
 {% highlight matlab %}
 plot(m,'labeled','grid')
 
@@ -69,7 +89,7 @@ annotate([a,b,c],'label',{'a','b','c'},'backgroundcolor','w','textAboveMarker')
 <center>
 {% include inline_image.html file="CrystalDirections_01.png" %}
 </center>
-<p>Note that for triclinic and monoclinic symmetries MTEX aligns spherical projections of crystal directions such that the b-axis points towards east and c* points out of the plane. This behavior can be changed by altering the <a href="plottingConvention.html">plotting convention</a> of the crystal frame, <code class="language-plaintext highlighter-rouge">cs.frame.how2plot</code> - a convention always belongs to a reference frame. E.g. we might want to have the a-axis to point to east</p>
+<p>For triclinic and monoclinic symmetry MTEX draws the b-axis towards the east and c* out of the plane. That is a <a href="plottingConvention.html">plotting convention</a>, and a convention belongs to a reference frame - here to the frame of the crystal.</p>
 {% highlight matlab %}
 % change the plotting convention of the crystal frame
 cs.frame.how2plot.east = cs.aAxis;
@@ -81,62 +101,88 @@ annotate([a,b,c],'label',{'a','b','c'},'backgroundcolor','w','textAboveMarker')
 <center>
 {% include inline_image.html file="CrystalDirections_02.png" %}
 </center>
-<h2 id="6">Crystal Lattice Planes</h2>
-<p>A crystal lattice plane \((hkl)\) is commonly described by its normal vector \(\vec n = h \cdot \vec a^* + k \cdot \vec b^* + \ell \cdot \vec c^*\) where \(\vec a^*\), \(\vec b^*\) and \(\vec c^*\) describe the reciprocal crystal coordinate system. In MTEX a lattice plane is defined by</p>
+<p>The same direction, the same crystal, a different view: a now points east.</p>
+<h2 id="11">Lattice Planes</h2>
+<p>A lattice plane is named by its normal, \(\vec n = h \cdot \vec a^* + k \cdot \vec b^* + \ell \cdot \vec c^*\), written \((hkl)\). The starred axes are the reciprocal lattice, defined so that \(\vec a^*\) is perpendicular to both \(\vec b\) and \(\vec c\), and so on. Their construction from the lattice metric is explained in <a href="LatticeMetric.html">Lattice Metric and Plane Geometry</a>.</p>
+<p>The indices also describe where a plane cuts the direct axes. A member with plane equation \(\vec x\cdot\vec n=q\) has fractional intercepts \(q/h\), \(q/k\) and \(q/\ell\) along \(\vec a\), \(\vec b\) and \(\vec c\). A zero index means an infinite intercept, so the plane is parallel to that axis.</p>
+<p>In the schematic, the \((213)\) plane is drawn with \(q=6\). It therefore meets the axes at \(3\vec a\), \(6\vec b\) and \(2\vec c\), and its normal is \(2\vec a^*+\vec b^*+3\vec c^*\).</p>
+<p>
+<center>
+{% include inline_image.html file="latticePlaneNormal.png" %}
+</center>
+</p>
+<p>If only the plane orientation matters, multiplying all indices by a common factor leaves the normal direction unchanged. It does not leave the full lattice-plane family unchanged: \((200)\) has twice the reciprocal-vector length and half the spacing of \((100)\). This distinction matters for diffraction and for <a href="Miller.dspacing.html"><code class="language-plaintext highlighter-rouge">dspacing</code></a>.</p>
 {% highlight matlab %}
-m = Miller(1,0,1,cs,'hkl')
+n = Miller(1,0,1,cs,'hkl')
 {% endhighlight %}
 
 {% highlight plaintext %}
-m = Miller (Talc)
+n = Miller (Talc)
   h k l
   1 0 1
 {% endhighlight %}
-<p>By default lattice planes are plotted as normal directions. Using the option <code class="language-plaintext highlighter-rouge">'plane'</code> we may alternatively plot the trace of the lattice plane with the sphere.</p>
+<p>A plane is drawn as its normal by default, or as the great circle where it cuts the sphere, with the option <code class="language-plaintext highlighter-rouge">'plane'</code>.</p>
 {% highlight matlab %}
 hold on
+
 % the normal direction
-plot(m,'upper','labeled')
+plot(n,'upper','labeled')
 
 % the trace of the corresponding lattice plane
-plot(m,'plane','linecolor','r','linewidth',2,'add2all')
+plot(n,'plane','linecolor','r','linewidth',2,'add2all')
 hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalDirections_03.png" %}
 </center>
-<p>Note that for non Euclidean crystal frames uvw and hkl notations usually lead to different directions.</p>
-<h2 id="9">Trigonal and Hexagonal Convention</h2>
-<p>In the case of trigonal and hexagonal crystal symmetry often four digit Miller indices \([UVTW]\) and \((HKIL)\) are used, as they make it more easy to identify symmetrically equivalent directions. This notation is redundant as the first three Miller indices always sum up to zero, i.e., \(U + V + T = 0\) and \(H + K + I = 0\). The syntax is</p>
+<h2 id="13">Why \([101]\) and \((101)\) Are Not the Same Direction</h2>
+<p>The two directions defined above carry the same three numbers, and the plot shows them at different places. The angle between them is</p>
+{% highlight matlab %}
+angle(m,n) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   31.6762
+{% endhighlight %}
+<p>\(32^\circ\) apart. Direct and reciprocal axes are parallel in every orthogonal lattice, including orthorhombic, tetragonal and cubic lattices. In a non-orthogonal lattice they generally are not, so a plane normal need not be parallel to the lattice direction with the same indices. This is why <code class="language-plaintext highlighter-rouge">Miller</code> always records which of the two it represents.</p>
+<h2 id="15">Trigonal and Hexagonal Convention</h2>
+<p>Trigonal and hexagonal lattices are usually written with four indices, \([UVTW]\) and \((HKIL)\), because symmetrically equivalent directions are then easy to spot - they are permutations of the first three. The fourth index is redundant, as \(U + V + T = 0\) and \(H + K + I = 0\).</p>
 {% highlight matlab %}
 % import trigonal Quartz lattice structure
 cs = loadCIF('quartz');
 
 % a four digit lattice direction
 m = Miller(2,1,-3,1,cs,'UVTW')
-
-% a four digit plane normal
-n = Miller(1,1,-2,3,cs,'hkil')
-
-plot(m,'upper','labeled','backgroundColor','white','grid','on')
-hold on
-plot(n,'upper','labeled')
-hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
 m = Miller (Quartz)
   U  V  T  W
   2  1 -3  1
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+% a four digit plane normal
+n = Miller(1,1,-2,3,cs,'hkil')
+{% endhighlight %}
+
+{% highlight plaintext %}
 n = Miller (Quartz)
   h  k  i  l
   1  1 -2  3
 {% endhighlight %}
+
+{% highlight matlab %}
+plot(m,'upper','labeled','backgroundColor','white','grid','on')
+hold on
+plot(n,'upper','labeled')
+hold off
+{% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalDirections_04.png" %}
 </center>
-<p>In order to switch the output format, e.g. from UVTW to uvw do</p>
+<p>Which notation the indices are <b>displayed</b> in is set by <code class="language-plaintext highlighter-rouge">dispStyle</code>, and changing it changes nothing about the direction itself.</p>
 {% highlight matlab %}
 m.dispStyle = 'uvw';
 round(m)
@@ -147,7 +193,7 @@ ans = Miller (Quartz)
   u v w
   5 4 1
 {% endhighlight %}
-<p>or from reciprocal to direct coordinates</p>
+
 {% highlight matlab %}
 n.dispStyle = 'UVTW';
 round(n)
@@ -158,7 +204,10 @@ ans = Miller (Quartz)
   U  V  T  W
   3  3 -6 11
 {% endhighlight %}
-<p>Note, that this does not change the vector but only the display of the coefficients. Internally, all vectors are stored with respect to the cartesian coordinate system.</p>
+<p>Internally every <code class="language-plaintext highlighter-rouge">Miller</code> is stored in Cartesian coordinates, exactly as a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">&lt;vector3d.vector3d.html vector3d&gt;</code></a> is. The indices are a way of reading it, and <code class="language-plaintext highlighter-rouge">round</code> is needed above because converting between the notations leaves numbers that are integers only up to rounding.</p>
+<h2 id="21">Next</h2>
+<p>
+<a href="LatticeMetric.html">Lattice Metric and Plane Geometry</a> adds lengths and interplanar spacings to the directions introduced here. What crystal symmetry does to a direction - the equivalent directions it has, and how many - is <a href="CrystalOperations.html">Operations</a>. How the crystal axes are attached to the Cartesian frame is <a href="CrystalReferenceSystem.html">Reference System</a>.</p>
 </div>
 </body>
 </html>
