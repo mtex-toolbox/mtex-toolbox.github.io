@@ -1,5 +1,5 @@
 ---
-title: "Defining crystal shapes using Smorf"
+title: "Defining Crystal Shapes with Smorf"
 
 sidebar: documentation_sidebar
 permalink: CrystalShapeSmorf.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Defining crystal shapes using Smorf</title>
+<title>Defining Crystal Shapes with Smorf</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_CrystalShapeSmorf.m">
 </head>
@@ -22,23 +22,24 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>This guide demonstrates how to construct own crystal models and implement them in MTEX on the example of replicating the maolivine crystal shape published in Welsch et al. (2013, J. Pet.).</p>
+<!--/introduction-->
+<p>
+<a href="CrystalShapes.html">Crystal Shapes</a> shows how a shape is built from face normals and their distances from the origin. Finding those distances for a real mineral is fiddly work by hand, and it is much easier done with a drawing tool that redraws the crystal as the numbers change. This page walks through it on the olivine shape published by Welsch et al. (2013, J. Pet.).</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_1.png" %}
 </center>
 </p>
-<!--/introduction-->
-<h2 id="1">Open the smorf website</h2>
-<p>The crystal drawing tool of the <a href="https://smorf.nl/draw.php">Smorf website</a> is an alternative to commercial software packages for defining custom crystal shapes. This free tool is made available by Mark Holtkamp.</p>
-<h2 id="2">Select crystal parameters</h2>
-<p>Select the point group for crystal symmetry and update the cell parameters in celldata. (Hint: use cell parameters from your own EBSD file). For the interpretation of face distance, choose <code class="language-plaintext highlighter-rouge">Crystallographic (Kristall2000)</code>, because MTEX follows this convention.</p>
+<h2 id="2">The Drawing Tool</h2>
+<p>The crystal drawing tool of the <a href="https://smorf.nl/draw.php">Smorf website</a> is a free alternative to the commercial packages, made available by Mark Holtkamp.</p>
+<h2 id="3">Crystal Parameters</h2>
+<p>Select the point group and enter the cell parameters under celldata - the ones from your own EBSD file, if you have one. For the interpretation of the face distance choose <code class="language-plaintext highlighter-rouge">Crystallographic (Kristall2000)</code>, which is the convention MTEX follows; the other choices scale the distances differently and the numbers would not carry over.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_2.png" %}
 </center>
 </p>
-<p>In MTEX define the crystal symmetry accordingly</p>
+<p>The same symmetry in MTEX:</p>
 {% highlight matlab %}
 cs = crystalSymmetry('mmm', [4.756 10.207 5.98], 'mineral', 'Forsterite')
 {% endhighlight %}
@@ -51,22 +52,21 @@ cs = crystalSymmetry (⊙c→a)
   elements: 8         
   a, b, c : 4.8, 10, 6
 {% endhighlight %}
-<h2 id="3">Select the face normals</h2>
-<p>Depending on the complexity of the crystal shape, the drawing of crystal can be tedious. Start constructing the crystal shape as seen along the main crystallographic axes \(\vec a\), \(\vec b\) and \(\vec c\) and add all visible crystal faces from the Welsch et al. (2013) model with distance of 1.</p>
+<h2 id="4">The Face Normals</h2>
+<p>Building a complicated shape face by face is tedious, so start from the views along \(\vec a\), \(\vec b\) and \(\vec c\) and enter every face visible in the published model, each at distance 1.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_3.png" %}
 </center>
 </p>
-<p>Accordingly we define the face normals in MTEX as a variable of type <a href="Miller.Miller.html">Miller</a>
-</p>
+<p>In MTEX the same set of faces is a list of <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">&lt;Miller.Miller.html Miller&gt;</code></a> indices.</p>
 {% highlight matlab %}
 N = Miller({0,1,0},{0,0,1},{0,2,1},{1,1,0},{1,0,1},{1,2,0},cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
 N = Miller (Forsterite)
- size: 1 x 6
+ size: 1 × 6
   h k l
   0 1 0
   0 0 1
@@ -75,24 +75,21 @@ N = Miller (Forsterite)
   1 0 1
   1 2 0
 {% endhighlight %}
-<h2 id="4">Adapt the distances of the faces</h2>
-<p>Start modifying the morphology by changing distance values of a given crystal face. (Hint: d-step of 0.05 works quite well and is fast).</p>
+<h2 id="5">Adjusting the Distances</h2>
+<p>Now change the distance of one face at a time - steps of 0.05 work well. A larger distance moves the face away from the origin, reducing its influence on the shape until it may stop cutting the crystal altogether. Fix the largest faces first and keep the overall aspect ratio while moving the others. The drawing does not update by itself; press <i>Draw crystal</i> after each change, and compare against the published crystal until they match.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_4.png" %}
 </center>
 </p>
-<p>A higher distance value moves the crystal face farther from the origin, and vice versa. Fix first the largest crystal faces and maintain aspect ratio of the overall crystal shape by moving faces away or closer to origin. Note that the model in the crystal-drawing tool is not updated automatically, so you may need to click on <i>Draw crystal</i> button to apply changes. When ready, compare the original and replicate olivine and take a note on the hkl Miller indices and the corresponding distances in Smorf.</p>
+<p>Then note the indices and their distances.</p>
 {% highlight matlab %}
 dist = [0.4, 1.3, 1.4, 1.05, 1.85, 1.35];
 {% endhighlight %}
-<p>to define the corresponding crystal shape in MTEX use the command <a href="crystalShape.crystalShape.html">crystalShape</a> and provide as input the quotient between the face normals and the distances</p>
+<p> <a href="crystalShape.crystalShape.html"><code class="language-plaintext highlighter-rouge">crystalShape</code></a> takes normals whose length encodes the distance, so the two lists are combined by dividing.</p>
 {% highlight matlab %}
 % this defines the crystal shape in MTEX
 cS = crystalShape( N ./ dist)
-
-% plot the crystal shape
-plot(cS,'colored')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -101,10 +98,29 @@ cS = crystalShape
  vertices: 36
  faces: 20
 {% endhighlight %}
+
+{% highlight matlab %}
+% plot the crystal shape
+plot(cS,'colored')
+{% endhighlight %}
 <center>
 {% include inline_image.html file="CrystalShapeSmorf_01.png" %}
 </center>
-<p>Get inspired by the Smorf mineral database for more crystal morphologies!</p>
+<p>The habit of the published crystal is reproduced. <code class="language-plaintext highlighter-rouge">cS.faceArea</code> says how much of the surface each face got: the two \((010)\) faces are the largest individual ones at 0.139, which is what makes the crystal tabular, while \((001)\) came out as a small cap of 0.02 and the four faces each of \(\{021\}\) and \(\{110\}\) carry most of the total area.</p>
+{% highlight matlab %}
+max(cS.faceArea)
+
+%
+% The Smorf mineral database holds many more morphologies, and each of them
+% transfers to MTEX in exactly these two lines.
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.1390
+{% endhighlight %}
+<h2 id="9">Next</h2>
+<p>What the shapes are used for - orientations on a map, twinning, slip systems - is <a href="CrystalShapes.html">Crystal Shapes</a>.</p>
 </div>
 </body>
 </html>
