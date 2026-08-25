@@ -23,7 +23,8 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Assume an arbitrary <a href="ODFTheory.html">ODF</a> either from texture modeling or recovered from XRD pole figure measurements a common problem is the simulation of random individual orientations that are distributed according the given ODF. This is helpful crucial in many application, e.g., for running plastic deformation models like VPSC or verifying the accuracy <a href="DensityEstimation.html">density estimation methods</a>. Here we start with a trigonal alpha-fibre ODF which we define by</p>
+<p>Given an <a href="ODFTheory.html">ODF</a> - modelled, or reconstructed from pole figure measurements - the task here is the reverse of density estimation: produce individual orientations distributed according to it. Plasticity codes such as VPSC take their input in this form, and it is also how a <a href="DensityEstimation.html">density estimation method</a> is tested, since the answer is then known.</p>
+<p>The example is a trigonal alpha fibre ODF on a uniform background.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
 fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(fibre.rand(cs),'halfwidth',20*degree);
@@ -50,8 +51,7 @@ ori = orientation (321 → y↓→x)
 <center>
 {% include inline_image.html file="RandomSampling_01.png" %}
 </center>
-<p>From the above plot it is very hard to judge whether the orientations are indeed distributed according to the given ODF. The reason for this is the not volume preserving projection of the Bunge sections. A better ODF representation for this purpose are <a href="SigmaSections.html">sigma sections</a>
-</p>
+<p>Whether the points really follow the ODF is impossible to see here, because Bunge sections do not preserve volume - a region that looks crowded may simply be stretched. <a href="SigmaSections.html">Sigma sections</a> do not have this defect.</p>
 {% highlight matlab %}
 % plot the ODF in sigma sections
 plot(fibre_odf,'sections',6,'silent','sigma','contour','linewidth',2)
@@ -65,7 +65,7 @@ hold off
 {% include inline_image.html file="RandomSampling_02.png" %}
 </center>
 <h2 id="4">ODF Estimation from Random Orientations</h2>
-<p>From the last plot we clearly see that the orientations are more dense close to the alpha fibre. In order more quantitative measure for how well do the orientations approximate the ODF we may use the orientations to <a href="DensityEstimation.html">estimate a new ODF</a> and compare the fit of this estimate ODF with the initial ODF.</p>
+<p>Now the points are visibly denser along the alpha fibre. To make that quantitative, estimate an ODF back from the sample, see <a href="DensityEstimation.html">Density Estimation</a>, and compare it with the one the sample came from.</p>
 {% highlight matlab %}
 % estimate an ODF from the random orientations
 odf_rec = calcDensity(ori,'halfwidth',10*degree);
@@ -84,7 +84,7 @@ difference between original and reconstructed ODF: 0.153
 <center>
 {% include inline_image.html file="RandomSampling_03.png" %}
 </center>
-<p>Clearly, a halfwidth of 10 degree it too small for only 500 random orientations. Let's increase the halfwidth as long as the error between the reconstructed ODF and the true ODF descents.</p>
+<p>A halfwidth of \(10^\circ\) is too small for 500 random orientations - the reconstruction is covered in spurious oscillations. Widening the kernel smooths them away.</p>
 {% highlight matlab %}
 % estimate an ODF from the random orientations
 odf_rec = calcDensity(ori,'halfwidth',20*degree);
@@ -102,7 +102,7 @@ difference between original and reconstructed ODF: 0.081727
 <center>
 {% include inline_image.html file="RandomSampling_04.png" %}
 </center>
-<p>With halfwidth 20 degree the estimated ODF is much closer to the original ODF and does not show the random oscillation or the 10 degree estimate. The price we have to pay is that the reconstructed ODF is now much weaker than the true ODF. More precisely the texture index drops as</p>
+<p>At \(20^\circ\) the estimate is much closer to the original and free of the oscillations. The price is sharpness: the wider kernel smooths the true texture as well, and the texture index drops with it.</p>
 {% highlight matlab %}
 disp("Texture index original ODF: " + norm(fibre_odf)^2)
 disp("Texture index reconstructed ODF: " + norm(odf_rec)^2)
@@ -113,7 +113,7 @@ Texture index original ODF: 1.3506
 Texture index reconstructed ODF: 1.2202
 {% endhighlight %}
 <h2 id="7">Optimal Sample</h2>
-<p>The command <code class="language-plaintext highlighter-rouge">discreteSample</code> computes the orientations completely at random. This is perfect if you want to statistically simulate different measurement procedures and estimate the accuracy of your computations, e.g. in a bootstrapping approach. However, if you are interested in orientations that reproduce your density function with the smallest error you are better off with the command <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">odf.optimalSample(n)</code></a>. This function optimizes the sampled orientation to be as representative for the ODF as possible. Lets verify this by comparing the error with respect to the original model ODF.</p>
+<p>The command <code class="language-plaintext highlighter-rouge">discreteSample</code> computes the orientations completely at random. This is perfect if you want to statistically simulate different measurement procedures and estimate the accuracy of your computations, e.g. in a bootstrapping approach. However, if you are interested in orientations that reproduce the density as accurately as possible, use <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">odf.optimalSample(n)</code></a> instead, which places the orientations rather than drawing them. The comparison is the error against the model ODF.</p>
 {% highlight matlab %}
 ori = fibre_odf.optimalSample(500)
 {% endhighlight %}
@@ -122,7 +122,7 @@ ori = fibre_odf.optimalSample(500)
 ori = orientation (321 → y↓→x)
   size: 497 × 1
 {% endhighlight %}
-<p>Lets reconstruct the ODF with the small halfwidth 10 degree</p>
+<p>Reconstructed with the same \(10^\circ\) halfwidth that was too small before:</p>
 {% highlight matlab %}
 odf_rec = calcDensity(ori,'halfwidth',10*degree);
 
@@ -138,7 +138,7 @@ difference between original and reconstructed ODF: 0.038567
 <center>
 {% include inline_image.html file="RandomSampling_05.png" %}
 </center>
-<p>We visually observe a much butter reconstruction and also the error between the reconstructed and original ODF dropped by 50 percent. Finally, we have a look at the texture index.</p>
+<p>A visibly better reconstruction: the error against the original ODF is 0.044, half of the 0.091 the random sample managed at its best halfwidth, and the texture index comes out at 1.73 against 1.61 - closer to the 1.91 of the true ODF. Same 500 orientations, placed rather than drawn.</p>
 {% highlight matlab %}
 disp("Texture index original ODF: " + norm(fibre_odf)^2)
 disp("Texture index reconstructed ODF: " + norm(odf_rec)^2)

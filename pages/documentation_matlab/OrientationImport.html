@@ -23,27 +23,114 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In order to import orientation data from a text file we first need to defined the corresponding <a href="CrystalSymmetries.html">crystal symmetry</a>, e.g. by a cif file</p>
+<p>Lists of orientations usually arrive as a text file of Euler angles - one orientation per line, three columns. Reading it needs two things: the crystal symmetry the angles refer to, and a statement of what the columns contain.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+
+% the crystal symmetry, here from a cif file
 cs = crystalSymmetry.load('quartz.cif');
 {% endhighlight %}
-<p>In the second step we may use the command <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a> to load the data. This function requires that one specifies the meaning of the column of the import file by the option <code class="language-plaintext highlighter-rouge">'columnNames'</code>.</p>
+<p> <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a> then reads the file.</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'orientation','Tongue_Quartzite_Bunge_Euler');
+
 ori = orientation.load(fname,'columnNames',{'phi1','Phi','phi2'},cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Quartz → y↓→x)
-  size: 382 x 1
+ori = orientation (Quartz → y↑→x)
+  size: 382 × 1
 {% endhighlight %}
-<p>This creates a variable of type <a href="orientation.orientation.html">orientation</a> which can be used for further analysis, e.g. to plot pole figures</p>
+<p>The result is an ordinary <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">&lt;orientation.orientation.html orientation&gt;</code></a> list, ready for a pole figure.</p>
 {% highlight matlab %}
 plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs))
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationImport_01.png" %}
 </center>
+<h2 id="4">What the Options Are For</h2>
+<p>The three angles are the mandatory columns; further columns are named alongside them and come back as a struct of properties.</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <tt>'columnNames'</tt>
+               </p>
+         </td>
+         <td>
+               <p>what each column holds</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'columns'</tt>
+               </p>
+         </td>
+         <td>
+               <p>which column positions to read them from</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'radians'</tt>
+               </p>
+         </td>
+         <td>
+               <p>the file is in radians, not degree</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'header'</tt>
+               </p>
+         </td>
+         <td>
+               <p>number of header lines to skip</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'delimiter'</tt>
+               </p>
+         </td>
+         <td>
+               <p>what separates the numbers</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'passive'</tt>
+               </p>
+         </td>
+         <td>
+               <p>the angles describe passive rotations</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Two Conventions to Check Before Trusting the Result</h2>
+<p>A file of Euler angles does not say which convention produced it, and reading it in the wrong one fails silently: it produces valid-looking but different orientations. Two questions have to be answered from outside the file:</p>
+<div>
+<ul>
+<li>
+<b>Which Euler angle convention?</b> <code class="language-plaintext highlighter-rouge">orientation.load</code> reads Bunge angles. Other conventions are converted with <a href="orientation.byEuler.html"><code class="language-plaintext highlighter-rouge">orientation.byEuler</code></a>, see <a href="RotationDefinition.html">Defining Rotations</a>.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<b>Active or passive?</b> MTEX orientations map crystal coordinates to specimen coordinates. Much of the literature uses the opposite direction, which is the <code class="language-plaintext highlighter-rouge">'passive'</code> flag here and is discussed in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</li>
+</ul>
+</div>
+<p>A third question - which crystal axes the Cartesian frame is aligned with - is answered by the <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> the data is imported with, see <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>.</p>
+<h2 id="6">Next</h2>
+<p>Writing orientations back to a file is <a href="OrientationExport.html">Export</a>. Orientations measured on a grid across a specimen are imported as a map instead, see <a href="EBSDImport.html">Importing EBSD Data</a>.</p>
 </div>
 </body>
 </html>

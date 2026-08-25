@@ -24,7 +24,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>Almost everything in texture analysis is eventually a direction. A crystal axis, the normal of a lattice plane, the direction a rolling mill pushed the metal, the direction a diffracted beam left the sample - all of them are answers to the question "which way?", and none of them cares how long the arrow is.</p>
-<p>This is why directions here live on a sphere. Fix the length at one and a direction becomes a point on the unit sphere, so a collection of directions becomes a cloud of points and the natural way to look at it is a projection of that sphere onto the page. Every pole figure you will ever plot is exactly that.</p>
+<p>This is why directions here live on a sphere. Fix the length at one and a direction becomes a point on the unit sphere, so a collection of directions becomes a cloud of points. A spherical projection brings that cloud onto the page; pole figures use the same geometry for crystal directions.</p>
 {% highlight matlab %}
 % a hundred random directions and the three specimen axes
 v = vector3d.rand(100);
@@ -37,7 +37,7 @@ hold off
 <center>
 {% include inline_image.html file="Vectors_01.png" %}
 </center>
-<p>Only half the sphere is drawn above. That is not laziness - see the note on axes below.</p>
+<p>The option <code class="language-plaintext highlighter-rouge">'upper'</code> shows only the upper hemisphere. That is a viewing choice for these directed vectors. When the data represents axes, the lower hemisphere is genuinely redundant, as the next section explains.</p>
 <h2 id="3">Directions and axes are not the same thing</h2>
 <p>A <b>direction</b> distinguishes its two ends: north is not south. An <b>axis</b> does not. The normal of a lattice plane is an axis, because the plane has no preferred side, and so is the direction of a twofold rotation. In MTEX this distinction is the <code class="language-plaintext highlighter-rouge">antipodal</code> flag, and setting it changes real answers: the angle between two axes is never obtuse, the mean of a set of axes is not the mean of the same set read as directions, and a density estimated from axes is symmetric under inversion by construction.</p>
 <p>Forgetting the flag is one of the more common ways to get a plausible wrong number, because nothing complains. When a quantity is an axis, say so.</p>

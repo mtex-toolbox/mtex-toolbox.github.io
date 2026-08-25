@@ -1,5 +1,5 @@
 ---
-title: "Inverse Pole Figure"
+title: "Inverse Pole Figures"
 
 sidebar: documentation_sidebar
 permalink: OrientationInversePoleFigure.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Inverse Pole Figure</title>
+<title>Inverse Pole Figures</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_OrientationInversePoleFigure.m">
 </head>
@@ -23,28 +23,30 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Inverse pole figures are two dimensional representations of orientations. To illustrate this we define a random orientation with trigonal crystal symmetry</p>
+<p>An inverse pole figure answers the question a <a href="OrientationPoleFigure.html">pole figure</a> asks in reverse: given a direction in the specimen, which crystal direction points along it? It is the natural view when the specimen direction is the meaningful one - the normal of a rolled sheet, the axis a load was applied along, the sample surface normal of an EBSD map.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+
 cs = crystalSymmetry('321');
+
 ori = orientation.rand(cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (321 → y↓→x)
+ori = orientation (321 → y↑→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   156.958 161.468 197.878
 {% endhighlight %}
-<p>Starting point is a fixed specimen direction <code class="language-plaintext highlighter-rouge">r</code>, e.g.,</p>
+<h2 id="2">Building One by Hand</h2>
+<p>Fix a specimen direction.</p>
 {% highlight matlab %}
 r = vector3d.Z;
 {% endhighlight %}
-<p>Next the crystal direction that aligns with specimen direction <code class="language-plaintext highlighter-rouge">r</code> according to the orientation <code class="language-plaintext highlighter-rouge">ori</code> is computed and plotted in a spherical projection</p>
+<p>The inverse orientation takes it into crystal coordinates.</p>
 {% highlight matlab %}
 h = inv(ori) * r
-
-plot(h.symmetrise,'fundamentalRegion')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -52,20 +54,25 @@ h = Miller (321)
        h       k       i       l
   0.0667 -0.3025  0.2357 -0.9481
 {% endhighlight %}
+<p>Plotted with its symmetric equivalents, in the part of the sphere that holds one representative of each - the <a href="FundamentalSector.html">fundamental sector</a>.</p>
+{% highlight matlab %}
+plot(h.symmetrise,'fundamentalRegion')
+{% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_01.png" %}
 </center>
-<p>A shortcut for the above computations is the command <a href="orientation.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a> which takes as second argument an arbitrary list of specimen directions <code class="language-plaintext highlighter-rouge">r</code>
-</p>
+<p>A single point, because all six equivalents fall onto the same place once the sector is reduced. That is the whole purpose of the sector: it removes the ambiguity that symmetry introduces.</p>
+<h2 id="6">The Shortcut</h2>
+<p> <a href="orientation.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a> takes a list of specimen directions and does the above for each of them.</p>
 {% highlight matlab %}
-% a pole figure plot
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z])
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_02.png" %}
 </center>
-<h2 id="5">Contour plots</h2>
-<p>Using the option <code class="language-plaintext highlighter-rouge">'contourf'</code> we may turn those scatter plots into contour plots.</p>
+<p>Three sectors, one per specimen axis, and each shows where that axis lies within the crystal.</p>
+<h2 id="8">Contour Plots</h2>
+<p>As for pole figures, <code class="language-plaintext highlighter-rouge">'contourf'</code> turns the markers into filled contours, which is how a whole population of orientations is read.</p>
 {% highlight matlab %}
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],'contourf')
 mtexColorbar
@@ -73,7 +80,7 @@ mtexColorbar
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_03.png" %}
 </center>
-<p>Note that by default only the fundamental sector with respect to the crystal symmetry is plotted. In order to plot the entire sphere use the option <code class="language-plaintext highlighter-rouge">'complete'</code>.</p>
+<p>By default only the fundamental sector is drawn. The complete sphere shows what the reduction hid - the symmetric copies.</p>
 {% highlight matlab %}
 plotIPDF(ori,[vector3d.X,vector3d.Y,vector3d.Z],'contourf','complete','upper')
 mtexColorbar
@@ -81,6 +88,9 @@ mtexColorbar
 <center>
 {% include inline_image.html file="OrientationInversePoleFigure_04.png" %}
 </center>
+<p>Inverse pole figures are also where the colours of an EBSD map come from: an <a href="EBSDIPFMap.html">IPF map</a> gives every pixel the colour of the position its orientation occupies in this sector.</p>
+<h2 id="11">Next</h2>
+<p>The sector itself, and how symmetry determines its shape, is <a href="FundamentalSector.html">Fundamental Sector</a>. Its counterpart for whole orientations rather than directions is the <a href="OrientationFundamentalRegion.html">Fundamental Region</a>.</p>
 </div>
 </body>
 </html>

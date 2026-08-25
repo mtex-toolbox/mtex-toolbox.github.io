@@ -23,7 +23,8 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>This section displays some of the standard orientations that are build into MTEX. The full list of predefined orientations consists of</p>
+<p>Rolling, drawing and recrystallisation produce the same few orientations again and again, and those have names - Cube, Goss, Brass, Copper. Naming a component is how a texture is described in one sentence, and MTEX has the standard ones built in, so a measured texture can be compared against them directly.</p>
+<p>The predefined orientations are</p>
 <div>
 <ul>
 <li>Cube, CubeND22, CubeND45, CubeRD</li>
@@ -57,8 +58,9 @@ components = [...
   orientation.QLage(cs,ss),...
   ];
 {% endhighlight %}
-<h2 id="3">3d Euler angle space</h2>
-<p>Lets first visualize the orientations in the three dimensional Euler angle space</p>
+<p>Each component is named in the legends below by the lattice plane and direction it stands for, as \((hkl)[uvw]\) - the plane facing the sheet normal and the direction along the rolling direction, which is what <a href="orientation.byMiller.html"><code class="language-plaintext highlighter-rouge">orientation.byMiller</code></a> takes.</p>
+<h2 id="4">Three Dimensional Euler Angle Space</h2>
+<p>The first view puts every component at its three Bunge Euler angles.</p>
 {% highlight matlab %}
 close all
 for i = 1:length(components)
@@ -72,8 +74,8 @@ hold off
 <center>
 {% include inline_image.html file="OrientationStandard_01.png" %}
 </center>
-<h2 id="4">Two dimensional phi2 sections</h2>
-<p>A second common way of visualizing the orientation space are sections with fixed Euler angle phi2</p>
+<h2 id="5">Two Dimensional phi2 Sections</h2>
+<p>The classical way of showing the same thing on paper: sections of fixed \(\varphi_2\), in which the rolling components line up in recognisable patterns, see <a href="EulerAngleSections.html">Euler Angle Sections</a>.</p>
 {% highlight matlab %}
 close all
 for i = 1:length(components)
@@ -86,8 +88,8 @@ legend('show','interpreter','LaTeX','location','southeast','FontSize',1.2*getMTE
 <center>
 {% include inline_image.html file="OrientationStandard_02.png" %}
 </center>
-<h2 id="5">Three dimensional axis angle space</h2>
-<p>In the three dimensional axis angle space the orientation appear inside the fundamental sector</p>
+<h2 id="6">Three Dimensional Axis Angle Space</h2>
+<p>In axis angle space the components sit inside the fundamental region of the cubic-orthorhombic pair, see <a href="OrientationFundamentalRegion.html">Fundamental Region</a>.</p>
 {% highlight matlab %}
 close all
 for i = 1:length(components)
@@ -101,8 +103,8 @@ legend('show','interpreter','LaTeX','location','southoutside','numColumns',3,'Fo
 <center>
 {% include inline_image.html file="OrientationStandard_03.png" %}
 </center>
-<h2 id="6">pole figures</h2>
-<p>In the major pole figures the predefined orientations appear at the following spots</p>
+<h2 id="7">Pole Figures</h2>
+<p>Where each component puts the major lattice planes. This is the view a measured pole figure is compared against. For Goss, the \(\{110\}\) family has a pole in the centre because the \((011)\) plane faces the sheet normal. Cube puts \(\{100\}\) poles in the centre and on the two axes of the rim.</p>
 {% highlight matlab %}
 h = Miller({1,0,0},{1,1,0},{1,1,1},{3,1,1},cs);
 
@@ -119,8 +121,8 @@ legend('show','interpreter','LaTeX','location','northeast','numColumns',2,'FontS
 <center>
 {% include inline_image.html file="OrientationStandard_04.png" %}
 </center>
-<h2 id="7">inverse pole figures</h2>
-<p>For inverse pole figure the situation is as follows. Note that the different size of the markers has been chosen to avoid overprinting.</p>
+<h2 id="8">Inverse Pole Figures</h2>
+<p>The same components seen from the specimen side: which crystal direction lies along X, Y and Z. The markers are drawn in decreasing size so that components falling on the same spot stay visible.</p>
 {% highlight matlab %}
 r = [vector3d.X,vector3d.Y,vector3d.Z];
 
@@ -137,7 +139,8 @@ legend('show','interpreter','LaTeX','location','northeast','numColumns',2,'FontS
 <center>
 {% include inline_image.html file="OrientationStandard_05.png" %}
 </center>
-<h2 id="8">Defining an Model ODF</h2>
+<h2 id="9">From a Component to a Model Texture</h2>
+<p>A named component is a single orientation, and a real texture is a spread around one. Giving the component a halfwidth turns it into a model ODF, which is what the measured data is actually fitted against, see <a href="ODFModeling.html">Modeling ODFs</a>.</p>
 {% highlight matlab %}
 odf = unimodalODF(components(3),'halfwidth',7.5*degree)
 
@@ -161,6 +164,7 @@ odf = SO3FunRBF (m3̅m → y↓→x (mmm))
 <center>
 {% include inline_image.html file="OrientationStandard_06.png" %}
 </center>
+<p>What was a single point is now a spread about seven degrees wide. The same in the inverse pole figures,</p>
 {% highlight matlab %}
 plotIPDF(odf,r)
 hold on
@@ -170,6 +174,7 @@ hold off
 <center>
 {% include inline_image.html file="OrientationStandard_07.png" %}
 </center>
+<p>and in phi2 sections, with all the components drawn on top so it is visible which one the model was built around.</p>
 {% highlight matlab %}
 plotSection(odf)
 
@@ -187,6 +192,9 @@ hold off
 <center>
 {% include inline_image.html file="OrientationStandard_08.png" %}
 </center>
+<h2 id="12">Next</h2>
+<p>
+<a href="OrientationFibre.html">Fibres of Orientations</a> follows the named fibre components through orientation space. <a href="ODFModeling.html">Modeling ODFs</a> develops the model textures introduced above.</p>
 </div>
 </body>
 </html>

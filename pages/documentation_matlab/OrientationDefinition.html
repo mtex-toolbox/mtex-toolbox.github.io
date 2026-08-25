@@ -23,9 +23,11 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>This sections covers the definition of orientations as MTEX variables. The theoretical definition can be found in the section <a href="DefinitionAsCoordinateTransform.html">Theory</a> and <a href="MTEXvsBungeConvention.html">MTEX vs Bunge Convention</a>.</p>
-<p>Technically, a variable of type <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">orientation</code></a> is nothing but a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> that is accompanied by a crystal symmetry. Hence, all methods for defining rotations (<a href="RotationDefinition.html">as explained here</a>) are also applicable for orientations with the only difference that the crystal symmetry has to be specified in form of a variable of type <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a>.</p>
+<p>An <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">&lt;orientation.orientation.html orientation&gt;</code></a> is a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">&lt;rotation.rotation.html rotation&gt;</code></a> that knows which crystal it belongs to. Everything on <a href="RotationDefinition.html">Defining Rotations</a> therefore applies here as well - the same constructors, with a <a href="crystalSymmetry.crystalSymmetry.html"><code class="language-plaintext highlighter-rouge">crystalSymmetry</code></a> handed in as an extra argument.</p>
+<p>What the rotation <b>means</b> is a separate question, answered in <a href="DefinitionAsCoordinateTransform.html">Theory</a> and in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>. This page is about building one.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+
 % load copper cif file
 cs = crystalSymmetry.load('Cu-Copper.cif')
 {% endhighlight %}
@@ -38,23 +40,24 @@ cs = crystalSymmetry (⊙c→a)
   elements: 48           
   a, b, c : 3.6, 3.6, 3.6
 {% endhighlight %}
-<p>Most importantly we may use Euler angles to define orientations</p>
+<h2 id="2">Euler Angles</h2>
+<p>The most common input, and the one that needs its convention stated - MTEX reads and writes Bunge angles by default.</p>
 {% highlight matlab %}
 ori = orientation.byEuler(30*degree,50*degree,10*degree,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Copper → y↓→x)
+ori = orientation (Copper → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
     30   50   10
 {% endhighlight %}
-<p>or a 3x3 rotation matrix</p>
+<p>The display names the crystal symmetry alongside the angles. An orientation without a symmetry is just a rotation, and MTEX keeps the two apart for that reason.</p>
+<h2 id="4">Rotation Matrix</h2>
+<p>A \(3 \times 3\) matrix defines an orientation just as it defines a rotation.</p>
 {% highlight matlab %}
 M = eye(3)
-
-ori = orientation.byMatrix(M,cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -62,78 +65,125 @@ M =
      1     0     0
      0     1     0
      0     0     1
- 
-ori = orientation (Copper → y↓→x)
+{% endhighlight %}
+
+{% highlight matlab %}
+ori = orientation.byMatrix(M,cs)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori = orientation (Copper → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
      0    0    0
 {% endhighlight %}
-<h2 id="4">Miller indices</h2>
-<p>Another common way to specify an orientation is by the crystal directions point towards the specimen directions Z and X. This can be done by the command <a href="orientation.byMiller.html"><code class="language-plaintext highlighter-rouge">orientation.byMiller</code></a>. E.g. in order to define the GOSS orientation (011)[100] we can write</p>
+<p>The identity matrix gives the orientation in which the Cartesian crystal frame is aligned with the specimen frame - the reference setting from which the Euler angles of every other orientation are counted.</p>
+<h2 id="7">Miller Indices</h2>
+<p>Metallurgy usually names an orientation by two crystal directions: the lattice plane facing the specimen Z axis and the lattice direction pointing along X. That is what <a href="orientation.byMiller.html"><code class="language-plaintext highlighter-rouge">orientation.byMiller</code></a> takes, here for the Goss orientation \((011)[100]\).</p>
 {% highlight matlab %}
 ori = orientation.byMiller([0 1 1],[1 0 0],cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Copper → y↓→x)
+ori = orientation (Copper → y↑→x)
  
   Bunge Euler angles in degree
   phi1  Phi phi2
      0   45    0
 {% endhighlight %}
-<p>That definition says the (011) plane faces Z and the [100] direction points along X, and a pole figure shows exactly that: the (011) pole sits at the centre, where Z is, and the [100] pole on the X axis at the rim.</p>
+<p>A spherical plot confirms the reading: the \((011)\) pole sits at the centre, where Z is, and the \([100]\) direction on the X axis at the rim.</p>
 {% highlight matlab %}
-plotPDF(ori,[Miller(0,1,1,cs),Miller(1,0,0,cs,'uvw')],'MarkerSize',10,...
-  'figSize','small')
-{% endhighlight %}
+rPlane = ori * Miller(0,1,1,cs);
+rDirection = ori * Miller(1,0,0,cs,'uvw');
 
-{% highlight plaintext %}
-Warning: Miller indices are converted to hkl
+plot([rPlane,rDirection],'upper','grid','MarkerSize',10,...
+  'label',{'(011)','[100]'},'backgroundColor','w','figSize','small')
+hold on
+annotate([vector3d.X,vector3d.Z],'label',{'X','Z'},'backgroundColor','w')
+hold off
 {% endhighlight %}
 <center>
 {% include inline_image.html file="OrientationDefinition_01.png" %}
 </center>
-<p>Note that MTEX comes already with a long list of <a href="OrientationStandard.html">predefined orientations</a>.</p>
-<h2 id="7">Random Orientations</h2>
-<p>To simulate random orientations we may apply the same syntax as for rotations and write</p>
+<p>Goss and the other named textures are predefined, so this one is also <code class="language-plaintext highlighter-rouge">orientation.goss(cs)</code> - see <a href="OrientationStandard.html">Standard Orientations</a>.</p>
 {% highlight matlab %}
-ori = orientation.rand(100,cs)
+angle(ori,orientation.goss(cs)) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (Copper → y↓→x)
-  size: 100 x 1
+ans =
+     0
 {% endhighlight %}
-<h2 id="8">Specimen Symmetry</h2>
-<p>If one needs to consider also specimen symmetry this can be defined as a variable of type <a href="specimenSymmetry.specimenSymmetry.html"><code class="language-plaintext highlighter-rouge">specimenSymmetry</code></a> and passed as an additional argument to all commands discussed above, e.g.,</p>
+<h2 id="10">Random Orientations</h2>
+<p>As for rotations, uniformly distributed orientations come from <code class="language-plaintext highlighter-rouge">rand</code>, which needs the symmetry as well.</p>
+{% highlight matlab %}
+ori = orientation.rand(100,cs);
+
+length(ori)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+   100
+{% endhighlight %}
+<h2 id="11">Symmetrically Equivalent Orientations</h2>
+<p>A crystal cannot distinguish its symmetrically equivalent settings, so every orientation stands for a whole set of them. <a href="orientation.symmetrise.html"><code class="language-plaintext highlighter-rouge">symmetrise</code></a> lists that set.</p>
+{% highlight matlab %}
+ori = orientation.byEuler(30*degree,50*degree,10*degree,cs);
+
+length(ori.symmetrise)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    48
+{% endhighlight %}
+<p>Copper is m-3m, which has 48 elements, and 24 of them are improper.</p>
+{% highlight matlab %}
+nnz(ori.symmetrise.isImproper)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    24
+{% endhighlight %}
+<p>Only the 24 proper ones are settings a crystal can be physically turned into. The improper ones remain symmetries of the lattice and matter when a calculation treats opposite plane normals as equivalent, as conventional diffraction does under Friedel's law. This is why "the angle between two orientations" is always taken as the smallest over all equivalent pairs, see <a href="OrientationSymmetry.html">Symmetry</a>.</p>
+<h2 id="14">Specimen Symmetry</h2>
+<p>The specimen may have symmetry of its own - rolling, for instance, makes the sheet look the same under three mirror planes. It is given as a <a href="specimenSymmetry.specimenSymmetry.html"><code class="language-plaintext highlighter-rouge">specimenSymmetry</code></a> and passed alongside the crystal symmetry.</p>
 {% highlight matlab %}
 % define orthotropic specimen symmetry
 ss = specimenSymmetry('orthorhombic')
+{% endhighlight %}
 
-% define a corresponding orientation
+{% highlight plaintext %}
+ss = orthorhombic specimenSymmetry (y↑→x)
+{% endhighlight %}
+
+{% highlight matlab %}
 ori = orientation.byEuler(30*degree,50*degree,10*degree,cs,ss)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ss = orthorhombic specimenSymmetry (y↓→x)
- 
- 
-ori = orientation (Copper → y↓→x (mmm))
+ori = orientation (Copper → y↑→x (mmm))
  
   Bunge Euler angles in degree
   phi1  Phi phi2
     30   50   10
 {% endhighlight %}
-<p>Symmetrisation will now result in a very long list of symmetrically equivalent orientations</p>
+<p>Both symmetries now act, one from each side, and the set of equivalent orientations grows accordingly - the 48 crystal elements times the 8 specimen ones.</p>
 {% highlight matlab %}
-ori.symmetrise
+length(ori.symmetrise)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = orientation (Copper → y↓→x (mmm))
-  size: 384 x 1
+ans =
+   384
 {% endhighlight %}
+<p>Specimen symmetry is a statement about the sample, not about the measurement, and imposing one that is not there hides real texture components. <a href="SpecimenSymmetry.html">Specimen Symmetry</a> says when to use it.</p>
+<h2 id="18">Next</h2>
+<p>
+<a href="DefinitionAsCoordinateTransform.html">Theory</a> explains what an orientation does to coordinates, which is the definition the rest of MTEX rests on. <a href="OrientationPoleFigure.html">Pole Figures</a> and <a href="OrientationInversePoleFigure.html">Inverse Pole Figures</a> are the two ways of looking at one.</p>
 </div>
 </body>
 </html>

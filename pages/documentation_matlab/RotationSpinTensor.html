@@ -23,18 +23,19 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Spin tensors are skew symmetric tensors that can be used to describe small rotational changes. Let us consider an arbitrary reference rotation</p>
+<p>A spin tensor is a skew symmetric matrix, and it is how a <b>rate</b> of rotation is written: not where a body has turned to, but how fast and about which axis it is turning right now. This is the form in which rotation enters continuum mechanics - the antisymmetric part of a velocity gradient is a spin tensor - and it is the matrix side of the <a href="RotationTangentSpace.html">tangent space</a>.</p>
+<p>Start from a reference rotation.</p>
 {% highlight matlab %}
 rot_ref = rotation.byEuler(10*degree,20*degree,30*degree);
 {% endhighlight %}
-<p>and perturb it by a rotation about the axis (123) and angle delta=0.01 degree. Since multiplication of rotations is not commutative we have to distinguish between left and right perturbations</p>
+<p>Perturb it by a small rotation about the Cartesian direction \((1,2,3)\), by \(\delta = 0.01^\circ\). Rotations do not commute, so it matters whether the perturbation is applied before or after the reference rotation.</p>
 {% highlight matlab %}
 delta = 0.01*degree;
 rot_123 = rotation.byAxisAngle(vector3d(1,2,3),delta);
 rot_right = rot_123 * rot_ref;
 rot_left = rot_ref * rot_123;
 {% endhighlight %}
-<p>We may now ask for the first order Taylor coefficients of the perturbation as delta goes to zero which we find by the formula</p>
+<p>The first order Taylor coefficient of the perturbation, as \(\delta\) goes to zero, is</p>
 <p>\[ T = \lim_{\delta \to 0} \frac{\tilde R - R}{\delta} \]</p>
 {% highlight matlab %}
 T_right = (rot_right.matrix - rot_ref.matrix) ./ delta
@@ -69,7 +70,8 @@ axis equal off
 <center>
 {% include inline_image.html file="RotationSpinTensor_01.png" %}
 </center>
-<p>Both matrices <code class="language-plaintext highlighter-rouge">T_right</code> and <code class="language-plaintext highlighter-rouge">T_left</code> are elements of the tangential space attached to the reference rotation rot_ref. Those matrices are characterized by the fact that they becomes skew symmetric matrices when multiplied from the left or from the right with the inverse of the reference rotation</p>
+<p>
+<code class="language-plaintext highlighter-rouge">T_right</code> and <code class="language-plaintext highlighter-rouge">T_left</code> live in the tangent space at <code class="language-plaintext highlighter-rouge">rot_ref</code>. Neither is skew symmetric by itself - what makes them tangent vectors is that they become skew symmetric once the reference rotation is divided out, from the left or from the right.</p>
 {% highlight matlab %}
 S_right_L =  matrix(inv(rot_ref)) * T_right
 S_right_R = T_right * matrix(inv(rot_ref))
@@ -96,7 +98,8 @@ S_left_R =
     0.9575   -0.0001    0.0850
    -0.2758   -0.0850   -0.0000
 {% endhighlight %}
-<p>A skew symmetric 3x3 matrix <code class="language-plaintext highlighter-rouge">S</code> is essentially determined by its entries \(S_{21}\), \(S_{31}\) and \(S_{32}\). Writing these values as a vector \((S_32,-S_{31},S_{21})\) we obtain for the matrices <code class="language-plaintext highlighter-rouge">S_right_R</code> and <code class="language-plaintext highlighter-rouge">S_left_L</code> exactly the rotational axis of our perturbation</p>
+<p>Two of the four are skew symmetric, <code class="language-plaintext highlighter-rouge">S_right_R</code> and <code class="language-plaintext highlighter-rouge">S_left_L</code>.</p>
+<p>A skew symmetric \(3 \times 3\) matrix has only three independent entries, \(S_{21}\), \(S_{31}\) and \(S_{32}\), and read as the vector \((S_{32},-S_{31},S_{21})\) they are the axis of the perturbation, scaled by its angle. Undoing the normalisation of the axis returns \((1,2,3)\).</p>
 {% highlight matlab %}
 vector3d(spinTensor(S_right_R)) * sqrt(14)
 
@@ -112,8 +115,7 @@ ans = vector3d (y↓→x)
   x y z
   1 2 3
 {% endhighlight %}
-<p>For the other two matrices those vectors are related to the rotational axis by the reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code>
-</p>
+<p>The other two give the same axis seen in the other frame, i.e. turned by the reference rotation.</p>
 {% highlight matlab %}
 rot_ref * vector3d(spinTensor(S_right_L)) * sqrt(14)
 
@@ -130,9 +132,9 @@ ans = vector3d (y↓→x)
   1 2 3
 {% endhighlight %}
 <h2 id="8">The Functions Exp and Log</h2>
-<p>The above definition of the spin tensor works well only if the perturbation has small rotational angle. For large perturbations the matrix logarithm <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> provides the correct way to translate rotational changes into skew symmetric matrices</p>
+<p>Taking the difference of two rotation matrices is only meaningful while the perturbation is small. For a finite one the logarithm <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> maps the relative rotation to a skew-symmetric matrix without using a small-angle approximation. As with every rotation logarithm, the principal result is limited to angles up to \(180^\circ\).</p>
 {% highlight matlab %}
-% define a large perturbation with rotational angle 1 radiant
+% define a large perturbation with rotational angle 1 radian
 delta = 1;
 rot_123 = rotation.byAxisAngle(vector3d(1,2,3),1);
 
@@ -144,22 +146,21 @@ S = log(rot_123 * rot_ref,rot_ref, SO3TangentSpace.leftSpinTensor); S  * sqrt(14
 
 {% highlight plaintext %}
 ans = spinTensor (y↓→x)
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
   0 -3  2
   3  0 -1
  -2  1  0
  
 ans = spinTensor (y↓→x)
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
   0 -3  2
   3  0 -1
  -2  1  0
 {% endhighlight %}
-<p>Again the entries \(S_{21}\), \(S_{31}\) and \(S_{32}\) exactly coincide with the rotational axis multiplied with the rotational angle.</p>
-<p>More directly this disorientation vector may be computed from two rotations using the options <code class="language-plaintext highlighter-rouge">SO3TangentSpace.rightVector</code> and <code class="language-plaintext highlighter-rouge">SO3TangentSpace.leftVector</code>
-</p>
+<p>The three entries again give the axis times the angle, now for a perturbation of one radian rather than \(0.01^\circ\).</p>
+<p>The same is obtained as a vector directly, with <code class="language-plaintext highlighter-rouge">SO3TangentSpace.rightVector</code> and <code class="language-plaintext highlighter-rouge">SO3TangentSpace.leftVector</code>.</p>
 {% highlight matlab %}
 v = log(rot_ref * rot_123,rot_ref,SO3TangentSpace.rightVector); v * sqrt(14)
 
@@ -169,24 +170,23 @@ v = log(rot_123 * rot_ref,rot_ref,SO3TangentSpace.leftVector); v * sqrt(14)
 {% highlight plaintext %}
 ans = SO3TangentVector (crystal)
  intern symmetries: 1 → y↓→x
- TagentSpace: rightVector
+ tangentSpace: rightVector
   x y z
   1 2 3
  
 ans = SO3TangentVector (y↓→x)
  intern symmetries: 1 → y↓→x
- TagentSpace: leftVector
+ tangentSpace: leftVector
   x y z
   1 2 3
 {% endhighlight %}
-<h2 id="10">The other way round</h2>
-<p>Given a skew symmetric matrix <code class="language-plaintext highlighter-rouge">S</code> or a disorientation vector <code class="language-plaintext highlighter-rouge">v</code> we may use the command <a href="vector3d.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> to apply this rotational perturbation to a reference rotation <code class="language-plaintext highlighter-rouge">rot_ref</code>
-</p>
+<h2 id="10">The Other Way Round</h2>
+<p> <a href="vector3d.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a> goes back: given a spin tensor <code class="language-plaintext highlighter-rouge">S</code> or a rotation vector <code class="language-plaintext highlighter-rouge">v</code>, it applies that perturbation to the reference rotation. The first line of each block below is the rotation the perturbation came from, so all three results in a block have to agree.</p>
 {% highlight matlab %}
 % the truth
 rot_ref * rot_123
 
-% using a disorientation vector
+% using a rotation vector
 exp(vector3d(v),rot_ref,SO3TangentSpace.rightVector)
 
 % using a spin tensor
@@ -219,7 +219,7 @@ ans = rotation
 % the other truth
 rot_123 * rot_ref
 
-% using a disorientation vector
+% using a rotation vector
 exp(vector3d(v),rot_ref,SO3TangentSpace.leftVector)
 
 % using a spin tensor
@@ -247,8 +247,8 @@ ans = rotation
      phi1     Phi    phi2
   74.5535 51.5051 9.61062
 {% endhighlight %}
-<h2 id="12">Disorientations under the presence of crystal symmetry</h2>
-<p>Under the presence of crystal symmetry the order whether a rotational perturbation is applied from the left or from the right. Lets perform the above calculations step by step in the presence of trigonal crystal symmetry</p>
+<h2 id="12">Under Crystal Symmetry</h2>
+<p>For orientations the side on which a perturbation is applied is not a formality: multiplying from the right acts in crystal coordinates, multiplying from the left in specimen coordinates, see <a href="DefinitionAsCoordinateTransform.html">Theory</a>. The same calculation once more, now with trigonal crystal symmetry.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('321');
 
@@ -269,7 +269,7 @@ ori = orientation (321 → y↓→x)
      phi1     Phi    phi2
   79.3156 43.3785  9.9013
 {% endhighlight %}
-<p>Computing the right tangential vector gives us the disorientation vector in crystal coordinates</p>
+<p>The right tangent vector is the perturbation written in crystal coordinates, so it comes back as a <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">&lt;Miller.Miller.html Miller&gt;</code></a> - and it is the axis \((1,2,\bar3,3)\) the perturbation was defined with.</p>
 {% highlight matlab %}
 v = Miller(log(ori,ori_ref,SO3TangentSpace.rightVector),ori.CS); round(v)
 
@@ -287,34 +287,46 @@ ans = orientation (321 → y↓→x)
      phi1     Phi    phi2
   79.3156 43.3785  9.9013
 {% endhighlight %}
-<p>computing the left tangential vector gives us the disorientation vector in specimen coordinates</p>
+<p>The left tangent vector is the same perturbation in specimen coordinates - different numbers, same rotation, and <code class="language-plaintext highlighter-rouge">exp</code> returns the orientation either way.</p>
 {% highlight matlab %}
 v = log(ori,ori_ref,SO3TangentSpace.leftVector)
-S = log(ori,ori_ref,SO3TangentSpace.leftSpinTensor)
-exp(v,ori_ref,SO3TangentSpace.leftVector)
 {% endhighlight %}
 
 {% highlight plaintext %}
 v = SO3TangentVector (y↓→x)
  intern symmetries: 321 → y↓→x
- TagentSpace: leftVector
+ tangentSpace: leftVector
       x     y     z
   0.162 0.428 0.889
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+S = log(ori,ori_ref,SO3TangentSpace.leftSpinTensor)
+{% endhighlight %}
+
+{% highlight plaintext %}
 S = spinTensor (y↓→x)
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-2
       0  -88.9  42.85
    88.9      0 -16.16
  -42.85  16.16      0
- 
+{% endhighlight %}
+
+{% highlight matlab %}
+exp(v,ori_ref,SO3TangentSpace.leftVector)
+{% endhighlight %}
+
+{% highlight plaintext %}
 ans = orientation (321 → y↓→x)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
   79.3156 43.3785  9.9013
 {% endhighlight %}
+<h2 id="17">Next</h2>
+<p>The objects that carry a tangent vector together with its base point and its representation are <a href="RotationTangentSpace.html">SO3TangentVector</a>. Spin tensors are the antisymmetric part of a velocity gradient, which is where they meet the material description in <a href="TensorDefinition.html">Tensors</a>.</p>
 </div>
 </body>
 </html>

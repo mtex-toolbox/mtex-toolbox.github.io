@@ -23,9 +23,15 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Improper rotations are coordinate transformations from a left handed into a right handed coordinate system as, e.g. a mirroring or an inversion. In MTEX the inversion is defined as the negative identical rotation</p>
+<p>A rotation preserves handedness: a right handed set of axes stays right handed. An <b>improper rotation</b> does not - it turns the object into its mirror image. Inversions and reflections are of this kind, and crystal symmetry needs them, since most point groups contain a mirror plane or an inversion centre.</p>
+<p>MTEX stores improper rotations in the same <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">&lt;rotation.rotation.html rotation&gt;</code></a> class and marks them with a sign.</p>
 {% highlight matlab %}
-I = - rotation.byEuler(0,0,0)
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">The Inversion</h2>
+<p>The inversion sends every direction to its opposite. It is written as the negative identity.</p>
+{% highlight matlab %}
+I = - rotation.id
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -35,25 +41,30 @@ I = rotation
   phi1  Phi phi2 Inv.
      0    0    0    1
 {% endhighlight %}
-<p>Note that this is convenient as both groupings of the operations <code class="language-plaintext highlighter-rouge">-</code> and <code class="language-plaintext highlighter-rouge">*</code> should give the same result</p>
+<p>Directions come back negated, which is what the minus sign is for.</p>
 {% highlight matlab %}
-- (rotation.byEuler(0,0,0) * xvector)
-(- rotation.byEuler(0,0,0)) * xvector
+I * vector3d.X
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↓→x)
-   x  y  z
-  -1  0  0
- 
-ans = vector3d (y↓→x)
+ans = vector3d (y↑→x)
    x  y  z
   -1  0  0
 {% endhighlight %}
-<h2 id="3">Mirroring</h2>
-<p>As a mirroring is nothing else than a rotation of 180 degree about the normal of the mirroring plane followed by a inversion, we can defined a mirroring about the axis (111) by</p>
+<p>Writing it this way keeps the two ways of bracketing the same, which is the reason for the convention.</p>
 {% highlight matlab %}
-mir = -rotation.byAxisAngle(vector3d(1,1,1),180*degree)
+- (rotation.id * vector3d.X)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = vector3d (y↑→x)
+   x  y  z
+  -1  0  0
+{% endhighlight %}
+<h2 id="5">Reflections</h2>
+<p>A reflection at a plane is a rotation by \(180^\circ\) about the normal of that plane, followed by the inversion. Spelled out for the plane with normal \((111)\),</p>
+{% highlight matlab %}
+mir = - rotation.byAxisAngle(vector3d(1,1,1),180*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -63,7 +74,7 @@ mir = rotation
   phi1     Phi    phi2    Inv.
    135 109.471      45       1
 {% endhighlight %}
-<p>A convenient shortcut is the command</p>
+<p>and as a shortcut,</p>
 {% highlight matlab %}
 mir = reflection(vector3d(1,1,1))
 {% endhighlight %}
@@ -75,7 +86,28 @@ mir = rotation
   phi1     Phi    phi2    Inv.
    135 109.471      45       1
 {% endhighlight %}
-<p>To check whether a rotation is improper or not you can do</p>
+<p>A direction in the mirror plane is left where it is,</p>
+{% highlight matlab %}
+mir * vector3d(1,-1,0)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = vector3d (y↑→x)
+  x  y  z
+  1 -1  0
+{% endhighlight %}
+<p>while the normal of the plane is sent to its opposite.</p>
+{% highlight matlab %}
+mir * vector3d(1,1,1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = vector3d (y↑→x)
+   x  y  z
+  -1 -1 -1
+{% endhighlight %}
+<h2 id="9">Telling the Two Apart</h2>
+<p> <a href="rotation.isImproper.html"><code class="language-plaintext highlighter-rouge">isImproper</code></a> answers whether handedness is preserved.</p>
 {% highlight matlab %}
 mir.isImproper
 {% endhighlight %}
@@ -85,6 +117,10 @@ ans =
   logical
    1
 {% endhighlight %}
+<p>This matters when a symmetry group is used as a set of operations: only the proper elements are motions a crystal can actually be turned by, and the improper ones exist as symmetries of the lattice, not as rotations of the specimen. Which elements a group has is discussed in <a href="CrystalSymmetries.html">Crystal Symmetries</a>, and the proper subgroup is reached by <code class="language-plaintext highlighter-rouge">cs.properGroup</code>.</p>
+<h2 id="11">Next</h2>
+<p>
+<a href="RotationOperations.html">Operations</a> covers the arithmetic that applies to proper and improper rotations alike.</p>
 </div>
 </body>
 </html>

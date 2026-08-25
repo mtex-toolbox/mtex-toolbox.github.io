@@ -23,33 +23,80 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>Directional data usually arrives as a text file with one direction per line - a table of coordinates, or of the two spherical angles. <a href="vector3d.load.html"><code class="language-plaintext highlighter-rouge">vector3d.load</code></a> reads such a file once it is told what the columns hold.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>Large lists of vectors can be imported from a text file by the command</p>
+<h2 id="2">Reading a File</h2>
+<p>The example file below has two columns, the polar angle and the azimuth angle, both in degree, under a line of headings.</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'vector3d','vectors.txt');
+
 v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'})
 {% endhighlight %}
 
 {% highlight plaintext %}
 v = vector3d (y↑→x)
- size: 1000 x 1
+ size: 1000 × 1
 {% endhighlight %}
-<p>In order to visualize large lists of specimen directions scatter plots</p>
+<p>The column names are what makes the file readable, and they are what decides how the numbers are interpreted. The recognised names are</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <tt>x</tt>, <tt>y</tt>, <tt>z</tt>
+               </p>
+         </td>
+         <td>
+               <p>Cartesian coordinates</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>polar angle</tt>, <tt>azimuth angle</tt>
+               </p>
+         </td>
+         <td>
+               <p>the two spherical angles</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>latitude</tt>, <tt>longitude</tt>
+               </p>
+         </td>
+         <td>
+               <p>geographic coordinates</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>Angles are read as degree unless the option <code class="language-plaintext highlighter-rouge">'radians'</code> says otherwise. Columns in a different order, or extra columns that are not wanted, are handled by naming their positions.</p>
+{% highlight matlab %}
+v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'},...
+  'columns',[1 2]);
+{% endhighlight %}
+<h2 id="4">Looking at the Result</h2>
+<p>A thousand directions are too many to read off a table, so the first thing to do with them is a plot. A scatter plot shows the individual directions,</p>
 {% highlight matlab %}
 scatter(v,'upper')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsImport_01.png" %}
 </center>
-<p>or contour plots may be helpful</p>
+<p>and a contour plot shows where they accumulate.</p>
 {% highlight matlab %}
 contourf(v,'upper')
 {% endhighlight %}
 <center>
 {% include inline_image.html file="VectorsImport_02.png" %}
 </center>
+<p>The two views answer different questions: the scatter plot says where a measurement exists, the contour plot says where the data is dense. Turning the list into a proper function on the sphere is the subject of <a href="VectorsDensityEstimation.html">Density Estimation</a>.</p>
+<h2 id="7">Next</h2>
+<p>Writing directions back to a file is <a href="VectorsExport.html">Export</a>. Crystal directions read from a file carry a crystal symmetry as well and are imported as <a href="CrystalDirections.html">Miller indices</a>.</p>
 </div>
 </body>
 </html>
