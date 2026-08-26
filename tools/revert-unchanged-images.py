@@ -17,7 +17,9 @@ in `git status` is the real change set.
 
 The score is scale-invariant and tolerant of sub-pixel offsets, but stays
 sensitive to localised changes such as a moved marker or a relabelled axis; see
-`score_pair` for how it is built.  Only numpy and Pillow are needed.
+`score_pair` for how it is built.  A figure deliberately rendered at another
+resolution is the one thing that scale invariance cannot see, so it is caught
+before scoring - see `rescaled`.  Only numpy and Pillow are needed.
 """
 
 import argparse
@@ -45,6 +47,10 @@ CONTENT_LEVEL = 0.08
 
 # Fraction of content mass trimmed off each end when locating the content box.
 CONTENT_TRIM = 0.002
+
+# Relative difference in either dimension above which two images are taken to
+# be renderings at different resolutions rather than the same one twice.
+RESOLUTION_TOLERANCE = 0.10
 
 DEFAULT_THRESHOLD = 0.20
 
@@ -86,7 +92,23 @@ def normalise(source):
         source = io.BytesIO(source)
     image = Image.open(source).convert("RGB")
     box = content_box(np.asarray(image).astype(np.float32) / 255.0)
-    return image.crop(box).resize((GRID, GRID), Image.Resampling.LANCZOS)
+    grid = image.crop(box).resize((GRID, GRID), Image.Resampling.LANCZOS)
+    return grid, image.size
+
+
+def rescaled(new_size, old_size):
+    """Whether the two images are renderings at different resolutions.
+
+    A re-render jitters the canvas by a few percent, which is precisely what
+    the comparison grid is there to absorb.  A deliberate change of resolution
+    is a real change and must survive: the published page pairs the size of an
+    image with the CSS that scales it, so restoring the other half of that pair
+    leaves the figure displayed at the wrong size.
+    """
+    return any(
+        max(new, old) > (1 + RESOLUTION_TOLERANCE) * min(new, old)
+        for new, old in zip(new_size, old_size)
+    )
 
 
 def as_array(image):
@@ -150,8 +172,11 @@ def score_path(path):
     version while restoring another.
     """
     try:
-        stored = git("show", ":" + path, binary=True)
-        return path, score_pair(normalise(path), normalise(stored)), None
+        new_image, new_size = normalise(path)
+        old_image, old_size = normalise(git("show", ":" + path, binary=True))
+        if rescaled(new_size, old_size):
+            return path, float("inf"), None
+        return path, score_pair(new_image, old_image), None
     except Exception as error:  # unreadable, undecodable, or not in the index
         return path, None, str(error)
 
@@ -209,7 +234,8 @@ def main():
     if arguments.dry_run:
         for path, score in scored:
             mark = "revert" if score <= arguments.threshold else "keep  "
-            print(f"{mark}  {score:.4f}  {path}")
+            detail = "rescaled" if score == float("inf") else f"{score:.4f}"
+            print(f"{mark}  {detail:>8}  {path}")
 
     for path, error in failed:
         print(f"skipped {path}: {error}", file=sys.stderr)
