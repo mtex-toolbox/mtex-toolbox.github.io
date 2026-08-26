@@ -2,7 +2,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="description" content="{% if page.summary %}{{ page.summary | strip_html | strip_newlines | truncate: 160 }}{% endif %}">
 <meta name="keywords" content="{{page.tags}}{% if page.tags %}, {% endif %}{{page.keywords}}">
 
 {% if page.title %}
@@ -11,6 +10,11 @@
   {% assign title = page.keywords | split: ',' | first %}
 {% endif %}
 <title>{{ title }} | {{ site.site_title }}</title>
+
+<!-- canonical URL, description, licence and JSON-LD provenance; also emits the
+     <meta name="description"> that used to sit at the top of this file, because
+     it is derived from the same page abstract as the JSON-LD description. -->
+{% include custom/metadata.html %}
 
 <link rel="stylesheet" href="{{ "css/syntax.css" }}">
 
@@ -62,15 +66,37 @@
 
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.url }}">
 
-<!-- enable MathJax
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-          inlineMath: [['$','$']]
-      }
-  });
-</script>-->
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+{% comment %}
+     MathJax 3, pinned and loaded only where there is maths to typeset.
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/core.min.js" integrity="sha512-Vj8DsxZwse5LgmhPlIXhSr/+mwl8OajbZVCr4mX/TcDjwU1ijG6A15cnyRXqZd2mUOQqRk4YbQdc7XhvedWqMg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>-->
+     A Liquid comment, not an HTML one: this file is included by every page, so
+     an HTML comment would ship these twenty lines into all ~2800 of them.
+
+     The docs write inline maths as \( ... \) and display maths as \[ ... \]
+     and never as $ ... $ — those two are exactly MathJax 3's default
+     delimiters, so no configuration block is needed at all. (The v2 config
+     that used to sit here set inlineMath to $ ... $, which matches nothing in
+     these pages; it was commented out and is not carried over.)
+
+     Not v4, although 4.1.3 is current: cdnjs hosts v4's JavaScript but not its
+     font files — /4.1.3/output/chtml/fonts/... is a 404 and cdnjs carries no
+     separate mathjax-newcm package — so CHTML output would render in fallback
+     browser fonts. Moving to v4 means switching CDN to jsdelivr, or using the
+     SVG output, which embeds its glyphs and needs no font files. For 3.2.2 the
+     woff-v2 fonts are present on cdnjs and CHTML renders correctly.
+
+     Not es5/core.min.js, which is what the previous attempt here pointed at:
+     that is the core on its own, with no input or output jax, and it renders
+     nothing. A combined component like tex-chtml.js is what is wanted.
+
+     Previously this loaded cdn.mathjax.org/mathjax/latest/MathJax.js. That URL
+     still works, but only because MathJax kept a small shim there that rewrites
+     the script tag to MathJax 2.7.1 on cdnjs — an unpinned, end-of-life version
+     reached through a redirect host that could be retired at any time.
+{% endcomment %}
+{% if page.content contains "\(" or page.content contains "\[" %}
+<script id="MathJax-script" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.js"
+        integrity="sha512-dYOCdOl06012DI+59NDm+JDwE5nfEOHU3OSwP1ydeLK5/dUcUohVx2Ojd7kNqw711V8++78udRAZMOGoKYJgvw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endif %}

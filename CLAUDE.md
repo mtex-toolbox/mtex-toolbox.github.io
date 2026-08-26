@@ -59,7 +59,8 @@ Generated — never hand-edit, changes belong in the MTEX `.m` sources:
 
 Hand-written: `index.md`, `pages/{addons,download,people,publications,support,videos,workshops,scripts,search,examples,function_reference}/`,
 `_data/topnav.yml`, `_data/sidebars/workshops_sidebar.yml`, `_posts/`,
-`css/theme-mtex.css`, `_includes/custom/`.
+`css/theme-mtex.css`, `_includes/custom/`, `robots.txt`, `llms.txt`,
+`licenses/`.
 
 `images/` is **not** generated wholesale — only the numbered `<Page>_NN.png`
 figures are. Its subdirectories (`icons/`, `profiles/`, `thumbnails/`,
@@ -111,8 +112,9 @@ makeDoc                       % everything: function reference + doc + examples
 makeDoc('doc')                % only pages/documentation_matlab
 makeDoc('ref')                % only pages/function_reference_matlab
 makeDoc('examples')           % only pages/examples_matlab
-makeDoc('force')              % republish even when the source is not newer
+makeDoc('force')              % republish even when the source did not change
 makeDoc('checkLinks')         % dead-link scan over the generated HTML
+makeDoc('markPublished')      % interactive: declare the pages current, publish nothing
 makeDoc('clear')              % interactive: wipe generated pages + reload mtexdata
 makeDoc('keepImages')         % skip the image revert pass at the end (see below)
 makeDoc('skipDirtyImages')    % do not republish pages with uncommitted images (see below)
@@ -121,8 +123,11 @@ makeDoc('doc','file','Plotting')        % just this folder
 makeDoc('file',{'Multiplot','Legends'}) % several
 ```
 
-`'file'` matches its pattern as a substring of the full source path, so a page
-name, a folder or a full path all work. It implies `'force'` — naming a page
+`'file'` first takes its pattern as an exact name — a page name, a folder, a
+file name or a full path — and falls back to a substring match of the full
+source path only when nothing is named exactly, so `'EBSDTutorial'` rebuilds
+that page alone while an abbreviation still selects everything containing it.
+It implies `'force'` — naming a page
 means you want it rebuilt — and it leaves the sidebars alone, since those can
 only be regenerated from the complete file list. Selection is
 `@DocFile/select.m` in `../makeDoc`, the counterpart of `exclude`.
@@ -134,6 +139,25 @@ applies per file), followed by the options in effect. A full run takes hours,
 so a mistyped `'file'` or a forgotten `'force'` is worth catching in that block
 rather than at the end — more than 10 pages to publish asks back before
 starting, so a full rebuild has to be confirmed with `Y`.
+
+Whether a page is up to date is decided by the **content** of its source, not
+by its modification time: `matlab/tmp/publish_hashes.txt` (gitignored, written
+by `../makeDoc/@DocFile/private/writeHash.m`) records the hash of the source
+every page was published from. Working in `../master` means switching branches,
+rebasing and stashing all the time, and each of those hands a fresh timestamp to
+files whose content has not changed at all — which used to put hundreds of
+untouched pages into the rebuild list. Deleting that file is harmless: pages it
+does not know fall back to the timestamp comparison, and the next run fills it
+in again.
+
+That fallback is what a scrambled working copy defeats, so an empty manifest in
+such a tree still announces a rebuild of nearly everything.
+`makeDoc('markPublished')` is the way out: it records the current sources as the
+ones the pages were built from and publishes nothing, taking a second instead of
+hours. It asks back, because it takes that claim at face value — a page that
+genuinely did change is marked as current too and needs `'force'` afterwards.
+Use it when the pages on disk are known to be up to date; `'file'` narrows it
+the same way it narrows a build.
 
 The figures pop up on screen for the whole run and cannot be suppressed:
 `publish` only snapshots figures whose `Visible` is `'on'`, so hiding them
@@ -189,8 +213,9 @@ changed. `publish.m` would therefore skip that page forever, and its figure
 would keep whatever the earlier render produced instead of being re-tested
 against the toolbox of today.
 
-So `makeDoc` republishes a page when *either* its source is newer than its HTML
-*or* one of its images differs from the committed one — a union, which is why
+So `makeDoc` republishes a page when *either* its source content changed since
+the page was published *or* one of its images differs from the committed one — a
+union, which is why
 this cannot go through `select`/`'file'` (those narrow the file list rather than
 widen the rebuild set). `makeDoc.m` asks git for the modified images once,
 before any publishing, maps `<docName>_NN.png` back to the doc name, and hands
@@ -287,7 +312,50 @@ toc: false
 - Markdown is kramdown with GFM input; syntax highlighting is Rouge.
   Generated pages are raw HTML with front matter, which Jekyll still runs
   through Liquid.
+- Maths is `\( … \)` inline and `\[ … \]` display — MathJax 3's defaults, so
+  `head.html` loads `tex-chtml.js` with no config block, and only on the ~240
+  pages whose content actually contains those delimiters. The version is pinned
+  with an SRI hash; see the Liquid comment there for why not v4 (cdnjs does not
+  host v4's fonts) and why not `core.min.js` (renders nothing on its own).
 
 `./createtag <tag>` is a leftover theme script that scaffolds tag pages under
 `pages/tags/`; neither that directory nor `_data/tags.yml` exists here, so it
 will fail as-is.
+
+## Attribution and citation metadata
+
+Every page states who wrote it, under what licence it may be reused and which
+paper to cite, so that an assistant answering from this documentation has the
+citation in front of it. All the values live in one block in `_config.yml`
+(`citation:`, `doc_license_*`, `mtex_license_*`, `doc_author`, `mtex_repo`) and
+are read from there by four consumers:
+
+- `_includes/custom/metadata.html` — included from `head.html` on *every* page.
+  Emits `<link rel="canonical">`, `<link rel="license">`, the Dublin Core
+  `dcterms.*` tags and a schema.org JSON-LD `@graph`: an `Organization`, the
+  `ScholarlyArticle` for the reference paper, a `SoftwareApplication` node for
+  MTEX itself, the `WebSite`, and a per-page `TechArticle` (`WebPage` on the
+  hand-written pages) that points at the others by `@id`. It also emits the
+  page's `<meta name="description">`, extracted from the `<!--introduction-->`
+  abstract exactly as `search.json` does it — that is why the tag moved out of
+  `head.html`.
+- `_includes/custom/citation.html` — the visible block at the foot of the
+  generated pages, added by `_layouts/page.html` when `page.folder` is
+  `documentation`, `function_reference` or `examples`. Prose plus BibTeX,
+  because that is the form that survives being quoted by a retrieval system.
+  Styled by `.mtex-attribution*` at the end of `css/theme-mtex.css`.
+- `llms.txt` — a curated map of the site for language models, built from the
+  sidebar YAML so it follows the same reading order as the navigation and
+  cannot drift from it. Documentation and examples in full; the function
+  reference only down to its eight section indexes.
+- `robots.txt` — allows every crawler including the AI ones, and states the
+  licence terms in comments. Deliberately permissive: the aim is to be cited,
+  not to be excluded.
+
+Deliberately in the Jekyll layer, not in `matlab/web.xsl` — a wording change
+here takes effect on the next Pages build instead of costing a full MATLAB
+republish of ~2700 pages and the image diff that comes with it.
+
+Note that `site.url` is what makes all of this work (canonical URLs, `llms.txt`,
+`robots.txt`, and `sitemap.xml`, which was emitting host-less and therefore
+invalid `<loc>` entries while it was unset).

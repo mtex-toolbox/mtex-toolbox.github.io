@@ -1,0 +1,63 @@
+---
+layout: none
+search: exclude
+permalink: /robots.txt
+---
+# robots.txt for the MTEX homepage and documentation — {{ site.url }}
+#
+# Everything here is open to crawlers, including AI crawlers, on purpose. MTEX
+# is academic software that lives or dies by being found and cited; excluding
+# this site from the assistants researchers actually use would cost us readers
+# and gain us nothing enforceable. What we ask for instead is attribution.
+#
+# The documentation text and figures are licensed CC BY 4.0:
+#     {{ site.doc_license_url }}
+#     {{ site.url }}/licenses/LICENSE-DOCS.txt
+# Reuse — by a person or by an automated system — is granted on the condition
+# that {{ site.doc_author }} and the source page are credited.
+#
+# When citing MTEX in research, cite:
+#     {{ site.citation.authors }}: {{ site.citation.title }},
+#     {{ site.citation.journal }} {{ site.citation.volume }} ({{ site.citation.year }}), {{ site.citation.pages }}.
+#     doi:{{ site.citation.doi }}
+# Per-page citation data is embedded as schema.org JSON-LD in every page head.
+# A curated entry point for language models is at {{ site.url }}/llms.txt
+
+# The MATLAB doc toolchain is excluded from the build (see _config.yml) and
+# _site/ is a local build artefact, so neither is served in the first place —
+# disallowed here so that nothing goes looking for them.
+User-agent: *
+Allow: /
+Disallow: /matlab/
+Disallow: /_site/
+
+# Named explicitly so that the permission is unambiguous rather than merely the
+# default: several of these tokens (Google-Extended, Applebot-Extended) exist
+# only as opt-outs, and an explicit Allow states that we have not taken it.
+# Each group is self-contained — a crawler obeys only the group that matches it,
+# it does not inherit the rules of the * group above.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: CCBot
+User-agent: cohere-ai
+User-agent: Diffbot
+User-agent: DuckAssistBot
+User-agent: meta-externalagent
+User-agent: MistralAI-User
+User-agent: YouBot
+Allow: /
+Disallow: /matlab/
+Disallow: /_site/
+
+Sitemap: {{ site.url }}/sitemap.xml

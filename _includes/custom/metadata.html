@@ -1,0 +1,143 @@
+{%- comment -%}
+Machine-readable page metadata, included from _includes/head.html on every page:
+canonical URL, description, licence and a JSON-LD provenance graph.
+
+Purpose: make it unambiguous to a crawler -- and to the retrieval layer of an AI
+assistant, which is where citations to this site actually get produced -- who
+authored this page, what software it documents, under which licence it may be
+reused, and which paper to cite. The visible counterpart is
+_includes/custom/citation.html; the values for both live in _config.yml.
+
+Shape: a single @graph with stable @id anchors, so the MTEX software node, the
+developer node and the canonical paper are declared once and referenced by @id
+from the per-page node rather than being repeated inline. Every string goes
+through | jsonify, which quotes and escapes it -- do not hand-write quotes
+around a Liquid expression here, a stray " or newline in a page title would
+otherwise produce invalid JSON and the whole block gets dropped silently.
+{%- endcomment -%}
+{%- assign gen_folders = "documentation,function_reference,examples" | split: "," -%}
+{%- assign is_doc = false -%}
+{%- for f in gen_folders -%}
+  {%- if f == page.folder -%}{%- assign is_doc = true -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
+{%- assign canonical = page.url | absolute_url -%}
+{%- assign site_root = "/" | absolute_url -%}
+{%- comment -%}
+Description: the first paragraph after the <!--introduction--> marker MATLAB's
+publish emits -- the docstring purpose line on function reference pages, the
+abstract on documentation pages. Same extraction as search.json, including the
+guard against unrendered Liquid under --incremental; see the comments there
+before changing it.
+{%- endcomment -%}
+{%- assign desc = "" -%}
+{%- if is_doc -%}
+  {%- assign head = page.content | truncate: 4000, "" -%}
+  {%- if head contains "<!--introduction-->" -%}
+    {%- assign paras = head | split: "<!--introduction-->" | last | split: "<p>" -%}
+    {%- if paras.size > 1 -%}
+      {%- assign desc = paras[1] | split: "</p>" | first | strip_html | normalize_whitespace | strip | truncate: 300, "" -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign tag_open = "{" | append: "%" -%}
+  {%- assign var_open = "{" | append: "{" -%}
+  {%- if desc contains tag_open or desc contains var_open -%}{%- assign desc = "" -%}{%- endif -%}
+{%- endif -%}
+{%- if desc == "" and page.summary -%}
+  {%- assign desc = page.summary | strip_html | normalize_whitespace | strip | truncate: 300, "" -%}
+{%- endif -%}
+{%- if desc == "" -%}{%- assign desc = site.description -%}{%- endif -%}
+{%- assign credit = "MTEX documentation, " | append: canonical | append: " -- cite " | append: site.citation.authors | append: " (" | append: site.citation.year | append: "), doi:" | append: site.citation.doi -%}
+
+<meta name="description" content="{{ desc | escape }}">
+<link rel="canonical" href="{{ canonical }}">
+<link rel="license" href="{{ site.doc_license_url }}">
+<meta name="author" content="{{ site.doc_author }}">
+<meta name="dcterms.rightsHolder" content="{{ site.doc_author }}">
+<meta name="dcterms.license" content="{{ site.doc_license_url }}">
+{%- if is_doc %}
+<meta name="dcterms.bibliographicCitation" content="{{ site.citation.authors }}, {{ site.citation.title }}, {{ site.citation.journal }} {{ site.citation.volume }} ({{ site.citation.year }}), {{ site.citation.pages }}. doi:{{ site.citation.doi }}">
+{%- endif %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": {{ site_root | append: "#developers" | jsonify }},
+      "name": {{ site.doc_author | jsonify }},
+      "url": {{ site_root | jsonify }},
+      "sameAs": [{{ site.mtex_repo | jsonify }}]
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "@id": {{ site_root | append: "#citation" | jsonify }},
+      "name": {{ site.citation.title | jsonify }},
+      "headline": {{ site.citation.title | jsonify }},
+      "author": [
+        {%- assign authors = site.citation.authors | split: ", " -%}
+        {%- for a in authors %}
+        { "@type": "Person", "name": {{ a | jsonify }} }{% unless forloop.last %},{% endunless %}
+        {%- endfor %}
+      ],
+      "isPartOf": {
+        "@type": "PublicationVolume",
+        "volumeNumber": {{ site.citation.volume | jsonify }},
+        "isPartOf": { "@type": "Periodical", "name": {{ site.citation.journal | jsonify }} }
+      },
+      "pagination": {{ site.citation.pages | jsonify }},
+      "datePublished": {{ site.citation.year | jsonify }},
+      "identifier": {{ site.citation.doi | prepend: "doi:" | jsonify }},
+      "sameAs": {{ site.citation.url | jsonify }},
+      "url": {{ site.citation.url | jsonify }}
+    },
+    {
+      "@type": ["SoftwareApplication", "SoftwareSourceCode"],
+      "@id": {{ site_root | append: "#mtex" | jsonify }},
+      "name": "MTEX",
+      "alternateName": "MTEX Toolbox",
+      "description": {{ site.description | jsonify }},
+      "url": {{ site_root | jsonify }},
+      "applicationCategory": "ScientificApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "programmingLanguage": "MATLAB",
+      "codeRepository": {{ site.mtex_repo | jsonify }},
+      "license": {{ site.mtex_license_url | jsonify }},
+      "author": { "@id": {{ site_root | append: "#developers" | jsonify }} },
+      "citation": { "@id": {{ site_root | append: "#citation" | jsonify }} }
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ site_root | append: "#website" | jsonify }},
+      "name": "MTEX",
+      "url": {{ site_root | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "inLanguage": "en",
+      "publisher": { "@id": {{ site_root | append: "#developers" | jsonify }} },
+      "about": { "@id": {{ site_root | append: "#mtex" | jsonify }} }
+    },
+    {
+      "@type": {% if is_doc %}"TechArticle"{% else %}"WebPage"{% endif %},
+      "@id": {{ canonical | append: "#page" | jsonify }},
+      "name": {{ page.title | strip | jsonify }},
+      "headline": {{ page.title | strip | jsonify }},
+      "description": {{ desc | jsonify }},
+      "url": {{ canonical | jsonify }},
+      "mainEntityOfPage": {{ canonical | jsonify }},
+      "inLanguage": "en",
+      "isPartOf": { "@id": {{ site_root | append: "#website" | jsonify }} },
+      "about": { "@id": {{ site_root | append: "#mtex" | jsonify }} },
+      "author": { "@id": {{ site_root | append: "#developers" | jsonify }} },
+      "publisher": { "@id": {{ site_root | append: "#developers" | jsonify }} },
+      "copyrightHolder": { "@id": {{ site_root | append: "#developers" | jsonify }} },
+      "license": {{ site.doc_license_url | jsonify }},
+      "creditText": {{ credit | jsonify }},
+      "citation": { "@id": {{ site_root | append: "#citation" | jsonify }} }
+      {%- if is_doc %},
+      "isBasedOn": { "@id": {{ site_root | append: "#mtex" | jsonify }} },
+      "proficiencyLevel": "Expert"
+      {%- endif %}
+    }
+  ]
+}
+</script>

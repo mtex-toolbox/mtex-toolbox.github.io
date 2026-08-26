@@ -36,6 +36,17 @@ layout: default
 
     {{ content }}
 
+    {% comment %}
+      Attribution footer on the generated pages (documentation, function
+      reference, examples). The hand-written pages -- index, people, downloads,
+      workshops -- are about the project rather than reusable technical content,
+      so they are left alone.
+    {% endcomment %}
+    {% assign cite_folders = "documentation,function_reference,examples" | split: "," %}
+    {% if cite_folders contains page.folder %}
+        {% include custom/citation.html %}
+    {% endif %}
+
     <div class="tags">
         {% if page.tags %}
             <b>Tags: </b>
