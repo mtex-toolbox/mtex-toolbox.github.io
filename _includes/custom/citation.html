@@ -1,0 +1,66 @@
+{%- comment -%}
+The visible attribution block at the foot of every generated page, included from
+_layouts/page.html.
+
+This is the part that actually travels. A retrieval-augmented assistant quoting
+a paragraph of this documentation carries the surrounding text with it, so an
+attribution written in prose -- naming MTEX, the canonical URL and the paper --
+survives the trip in a way that a <meta> tag does not. The BibTeX block is here
+for the same reason: it is the citation in the form a reader (human or machine)
+can paste without reformatting it.
+
+Deliberately in the Jekyll layer rather than in matlab/web.xsl: web.xsl would
+mean republishing all ~2700 generated pages through MATLAB (hours, plus a large
+image diff) to change a sentence. Here it is one file and takes effect on the
+next Pages build. The values come from _config.yml, shared with
+_includes/custom/metadata.html so the human-readable and machine-readable
+citation cannot drift apart.
+{%- endcomment -%}
+<div class="mtex-attribution">
+  <p>
+    <b>Citing this page.</b>
+    This page is part of the documentation of
+    {% include reference.html link="index.html" content="MTEX" %}, a free and open
+    source MATLAB toolbox for analyzing and modeling crystallographic textures.
+    It was written by {{ site.doc_author }} and is published at
+    <code>{{ page.url | absolute_url }}</code>.
+    If you use MTEX, or reuse text or figures from this page, in your research,
+    please cite
+  </p>
+  <p class="mtex-attribution-ref">
+    {{ site.citation.authors }}:
+    <i>{{ site.citation.title }}</i>,
+    {{ site.citation.journal }} <b>{{ site.citation.volume }}</b> ({{ site.citation.year }}), {{ site.citation.pages }}.
+    {% include reference.html link=site.citation.url content=site.citation.doi %}
+  </p>
+  {%- comment -%}
+    _config.yml stores the authors in display form ("A. Bar, C. Baz"); BibTeX
+    wants them separated by " and ", so the list is re-joined here rather than
+    duplicated in the config in two spellings.
+  {%- endcomment -%}
+  {%- assign bibauthors = site.citation.authors | split: ", " | join: " and " -%}
+  <details class="mtex-attribution-bib">
+    <summary>BibTeX</summary>
+<pre><code>@article{ {{- site.citation.bibkey -}},
+  author  = { {{- bibauthors -}} },
+  title   = { {{- site.citation.title -}} },
+  journal = { {{- site.citation.journal -}} },
+  volume  = { {{- site.citation.volume -}} },
+  pages   = { {{- site.citation.pages -}} },
+  year    = { {{- site.citation.year -}} },
+  doi     = { {{- site.citation.doi -}} },
+  url     = { {{- site.citation.url -}} }
+}</code></pre>
+  </details>
+  <p class="mtex-attribution-fine">
+    Other papers describing specific MTEX methods are listed under
+    {% include reference.html link="publications.html" content="Publications" %} —
+    please cite the one that best fits your application.
+    The MTEX source code is licensed under the
+    {% include reference.html link=site.mtex_license_url content=site.mtex_license_name %};
+    the text and figures of this documentation are licensed under
+    {% include reference.html link=site.doc_license_url content=site.doc_license_name %},
+    which permits reuse — including by automated systems — provided
+    {{ site.doc_author }} and this page are credited.
+  </p>
+</div>

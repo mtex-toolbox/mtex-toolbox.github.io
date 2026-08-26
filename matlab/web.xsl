@@ -26,15 +26,33 @@ Use the XSLT command to perform the conversion.
   </xsl:variable>
   <xsl:include href="makelink.xsl"/>
 
-  <!-- quote the yaml title, otherwise headings containing a colon
-       (e.g. "Developer Guide: HDF5 ...") break the front matter -->
-  <xsl:variable name="dQuote">"</xsl:variable>
+  <!-- Quote the yaml title, otherwise headings containing a colon
+       (e.g. "Developer Guide: HDF5 ...") break the front matter.
+
+       Single quotes, not double: a double quoted YAML scalar interprets
+       backslash escapes, so a heading carrying LaTeX ("Slip System Analysis in
+       \(\alpha\)-Alumina") is an unknown escape sequence and YAML rejects the
+       scalar. Jekyll then fails soft the way it always does here: it drops
+       the entire front matter, and the page is published under its source path
+       (/pages/examples_matlab/Foo.html) with no permalink, no sidebar entry and
+       no canonical URL, while the build still reports success.
+
+       In a single quoted scalar the backslash is literal and the only escape is
+       '' for a literal quote, which is what globalReplace produces below. -->
   <xsl:variable name="sQuote">'</xsl:variable>
+  <xsl:variable name="ssQuote">''</xsl:variable>
+  <xsl:variable name="yamlTitle">
+    <xsl:call-template name="globalReplace">
+      <xsl:with-param name="outputString" select="$title"/>
+      <xsl:with-param name="target" select="$sQuote"/>
+      <xsl:with-param name="replacement" select="$ssQuote"/>
+    </xsl:call-template>
+  </xsl:variable>
 
   <!-- here everything starts -->
   <!--last_updated: <xsl:value-of select="$toolbox/lastUpdated"/>-->
   <xsl:template match="mscript">---
-title: "<xsl:value-of select="translate($title,$dQuote,$sQuote)"/>"
+title: '<xsl:value-of select="$yamlTitle"/>'
 
 sidebar: <xsl:value-of select="$toolbox/folder"/>_sidebar
 permalink: <xsl:value-of select="$toolbox/htmlTarget"/>
