@@ -76,9 +76,21 @@ setMTEXpref('figSize',0.5)
 % figure sizes are a fraction of the screen, so without this every figure
 % would come out at whatever size the monitor of the machine running the
 % build happens to imply - and the whole of ../images would change as soon
-% as the documentation is rebuilt elsewhere. 1920x1200 is what the images
-% currently in the repository were rendered at.
-setMTEXpref('screenSize',[1920 1200])
+% as the documentation is rebuilt elsewhere.
+%
+% The virtual screen is twice the 1920x1200 the figures are laid out for, so
+% that every figure is rendered at twice the size it is shown at and stays
+% sharp - .mtex-figure in ../css/customstyles.css halves it again. drawNow
+% subtracts a fixed 120 px from the screen height before applying figSize,
+% hence 2*(1200-120)+120 rather than 2*1200.
+setMTEXpref('screenSize',[3840 2280])
+
+% one height for every spherical plot, so that a single hemisphere, a row of
+% pole figures and a fundamental sector all come out the same size. The value
+% is paired with the image cap in ../css/customstyles.css: four plots in a row
+% render 1654 px wide and must stay under it, or the browser scales them down
+% and the row ends up shorter than every other spherical image again.
+setMTEXpref('sphericalAxisHeight',370)
 
 % the maps in the documentation do not carry the reference frame indicator
 % in their scale bar - the pages that are about the axes alignment ask for

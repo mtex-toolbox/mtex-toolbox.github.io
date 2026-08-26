@@ -229,6 +229,16 @@ To make changes, update the MATLAB code and republish this document.
   {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
 </xsl:template>
 
+<!-- A figure published from the code, as opposed to a static image a page
+     includes with <<file.png>> - those sit inside a text cell and fall to the
+     generic template below. Only published figures are rendered at twice
+     their display size, so only these carry the class that halves them. -->
+<xsl:template match="cell/img">
+<center class="mtex-figure">
+{% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
+</center>
+</xsl:template>
+
 <xsl:template match="img">
 <center>
 {% include inline_image.html file="<xsl:call-template name="backreplacelinkdot"><xsl:with-param name="string" select="@src"/></xsl:call-template>" %}
