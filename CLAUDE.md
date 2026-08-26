@@ -199,7 +199,17 @@ time; `makeDoc('keepImages')` skips it.
 The score is scale-invariant (both images are cropped to their content box and
 resized to a common grid) and ignores differences a nearby pixel of the other
 image can account for, so it is blind to rescaling and anti-aliasing but still
-catches a moved marker or a relabelled axis. It errs towards keeping: on the
+catches a moved marker or a relabelled axis.
+
+Scale invariance has one deliberate exception: an image whose pixel size differs
+from the committed one by more than 10% in either dimension is never reverted,
+because the published page pairs the size of a figure with the CSS that scales
+it — see `.mtex-figure` in `css/customstyles.css`. Restoring the image half of
+that pair would leave the figure displayed at the wrong size, and the score
+alone cannot see it. A re-render jitters the canvas by a few percent and is
+still reverted; `--dry-run` prints `rescaled` instead of a score for the rest.
+
+It errs towards keeping: on the
 Jul 2026 rebuild it reverted 272 of 573 modified images, and every pair
 inspected below the 0.20 threshold was visually identical. `--threshold` retunes
 it; `--dry-run` prints every score, sorted, so the band around the cut can be
