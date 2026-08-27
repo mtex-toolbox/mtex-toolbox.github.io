@@ -251,6 +251,31 @@ python3 tools/center-pngs.py in.png "400,300" "255,255,255,0" images/profiles/ou
 Args are positional: input, `"width,height"`, RGBA padding colour, output. The
 GIF variant does the same frame by frame.
 
+## Every edit reads as if the previous version never existed
+
+**Change the line, the number, the sentence — and stop.** What the previous
+version said, why it was wrong and how the new value was measured belong in the
+commit message or an issue, never in the file. This holds for page prose, for
+layout and template code, and for these notes themselves.
+
+It takes two shapes, and the second is harder to catch because it sounds like
+precision:
+
+- **A comment justifying the edit** — what the old rule did, which build
+  changed it, which page a number was measured on.
+- **Prose arguing with the text it replaced.** A doc page that said "the map
+  has turned by a quarter turn" was corrected to "The picture is mirrored
+  *rather than* turned" — the reader never saw the quarter turn, so the
+  sentence contradicts nobody and reads as a non sequitur. Same defect: "The
+  mismatch does *not simply* accumulate", "this figure has *no* single largest
+  grain to point at".
+
+**The test:** read the new text as someone who has never seen the old one. If a
+sentence only works for a reader who has, rewrite it as a plain statement of
+what is there. A negation is fine when it heads off a misreading available from
+what is in front of the reader ("it is not a percentage of the specimen") and
+wrong when its referent is a sentence you have just deleted.
+
 ## Editing documentation content (in `../master/doc/`)
 
 Doc sources are MATLAB cell-mode scripts: `%% Section title` starts a cell,
