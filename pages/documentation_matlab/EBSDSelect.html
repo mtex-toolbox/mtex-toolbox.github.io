@@ -1,5 +1,5 @@
 ---
-title: "Select EBSD data"
+title: 'Select EBSD data'
 
 sidebar: documentation_sidebar
 permalink: EBSDSelect.html
@@ -23,37 +23,21 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss how to select specific EBSD data by certain properties. Let us first import some example EBSD data using the command <a href="mtexdata.html"><code class="language-plaintext highlighter-rouge">mtexdata</code></a>.</p>
+<p>An EBSD variable is a list of measurements. Selecting part of the specimen, one phase, or measurements that satisfy a quality condition is therefore ordinary list indexing. The result is another EBSD variable, so the same phase, position, orientation, and plotting operations apply to it. This is the EBSD version of <a href="ListsAndIndexing.html">Lists and Indexing</a>.</p>
+<p>Each measurement may also carry a per-pixel <b>property</b>, such as mean angular deviation <code class="language-plaintext highlighter-rouge">mad</code> or band contrast <code class="language-plaintext highlighter-rouge">bc</code>. A property has one value per measurement and is selected in lockstep with the map; see <a href="Properties.html">Properties</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-mtexdata forsterite
-{% endhighlight %}
+mtexdata forsterite silent
 
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed          none                                   
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :336 x 732
-{% endhighlight %}
-<p>These data consist of three indexed phases, Forsterite, Enstatite and Diopside. The not indexed phase called <i>not Indexed</i>. The phases can be visualized by</p>
-{% highlight matlab %}
 close all;
-plot(ebsd)
+plot(ebsd);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDSelect_01.png" %}
 </center>
-<h2 id="3">Selecting a certain phase</h2>
-<p>After import the EBSD data are stored in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> which is essentially a long list of x and y values together with phase information and orientations. In order to restrict this list to a certain phase just use the mineral name as an index, i.e.</p>
+<p>The phase map contains three indexed phases. The white points belong to the <code class="language-plaintext highlighter-rouge">notIndexed</code> phase, where a diffraction pattern was recorded but could not be indexed.</p>
+<h2 id="3">Selecting a phase</h2>
+<p>A mineral name used as an index restricts the list to that phase.</p>
 {% highlight matlab %}
 ebsd('Forsterite')
 {% endhighlight %}
@@ -66,10 +50,12 @@ ans = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>contains only the Forsterite measurements. In order to extract a couple of phases, the mineral names have to be grouped in curled parenthesis.</p>
+<p>Two things in that display are worth noticing. The list is shorter: 152345 of the 245952 measurements are forsterite. Its class has also changed from <code class="language-plaintext highlighter-rouge">EBSDsquare</code> to <code class="language-plaintext highlighter-rouge">EBSD</code>. A selection is generally not a full rectangular grid, although every retained measurement still has its original position.</p>
+<p>Use <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> when later code explicitly needs a matrix-shaped map. Many spatial MTEX operations reconstruct the virtual lattice internally; <a href="EBSDGrid.html">Square and Hex Grids</a> explains when the stored grid shape matters.</p>
+<p>A prefix of a mineral name works as an abbreviation. MTEX does not check that a prefix is unique, so use the full name when two phase names begin alike. Several phases are selected by grouping their names in curly brackets.</p>
 {% highlight matlab %}
 ebsd({'Fo','En'})
 {% endhighlight %}
@@ -83,52 +69,62 @@ ans = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>As an example, let us plot the Forsterite data.</p>
+<p>Two names are available whatever the minerals are called. The name <code class="language-plaintext highlighter-rouge">'indexed'</code> selects every point matched to a phase. The degenerate phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> selects points whose diffraction pattern could not be indexed.</p>
 {% highlight matlab %}
-close all
-plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_02.png" %}
-</center>
-<p>The data is colorized according to its orientation. By default color of an orientation is determined by its position in the 001 inverse pole figure which itself is colored as</p>
-{% highlight matlab %}
-ipfKey = ipfColorKey(ebsd('Forsterite'));
-plot(ipfKey)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_03.png" %}
-</center>
-<h2 id="7">Restricting to a region of interest</h2>
-<p>If one is not interested in the whole data set but only in those measurements inside a certain polygon, the restriction can be constructed as follows:</p>
-<p>First define a region by <code class="language-plaintext highlighter-rouge">[xmin ymin xmax-xmin ymax-ymin]</code>
-</p>
-{% highlight matlab %}
-region = [5 2 10 5]*10^3;
-{% endhighlight %}
-<p>plot the ebsd data together with the region of interest</p>
-{% highlight matlab %}
-close all
-plot(ebsd)
-rectangle('position',region,'edgecolor','r','linewidth',2)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_04.png" %}
-</center>
-<p>The command <a href="EBSD.inpolygon.html"><code class="language-plaintext highlighter-rouge">inpolygon</code></a> checks for each EBSD data point whether it is inside a polygon or not, i.e.</p>
-{% highlight matlab %}
-condition = inpolygon(ebsd,region);
-{% endhighlight %}
-<p>results in a large vector of <code class="language-plaintext highlighter-rouge">TRUE</code> and <code class="language-plaintext highlighter-rouge">FALSE</code> stating which data points are inside the region. Restricting the EBSD data by this condition is done via</p>
-{% highlight matlab %}
-ebsd = ebsd(condition)
+ebsd('indexed')
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSD (y↑→x)
+ans = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1  152345 (81%)  Forsterite  LightSkyBlue       mmm                         
+     2   26058 (14%)   Enstatite  DarkSeaGreen       mmm                         
+     3   9064 (4.8%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<p>Plotting a phase selection uses the ordinary plot command.</p>
+{% highlight matlab %}
+close all;
+plot(ebsd('Forsterite'),ebsd('Forsterite').orientations, ...
+  'ipfDirection',zvector);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDSelect_02.png" %}
+</center>
+<p>Only the forsterite footprint remains. Its colour still varies with orientation because selection changes the list, not the plotting rule; see <a href="EBSDPlotting.html">Plot</a>.</p>
+<h2 id="8">Restricting to a region of interest</h2>
+<p>A rectangle is specified as <code class="language-plaintext highlighter-rouge">[xmin ymin width height]</code> in the map units, here microns.</p>
+{% highlight matlab %}
+region = [5 2 10 5] * 10^3;
+{% endhighlight %}
+<p>Draw the rectangle on the phase map before applying it.</p>
+{% highlight matlab %}
+close all;
+plot(ebsd);
+rectangle('Position',region,'EdgeColor','red','LineWidth',2);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDSelect_03.png" %}
+</center>
+<p>The red rectangle crosses all three indexed phases and many notIndexed points. <a href="EBSD.inpolygon.html"><code class="language-plaintext highlighter-rouge">inpolygon</code></a> tests every measurement and returns one <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code> for each point.</p>
+{% highlight matlab %}
+condition = inpolygon(ebsd,region);
+{% endhighlight %}
+<p>Logical indexing keeps the points for which the condition is <code class="language-plaintext highlighter-rouge">true</code>: 20301 of the 245952 measurements, about one twelfth of the map.</p>
+{% highlight matlab %}
+ebsdRegion = ebsd(condition)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ebsdRegion = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    4052 (20%)  notIndexed          none                                   
@@ -138,56 +134,51 @@ ebsd = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [5000 → 15000] x [2000 → 7000] x [0 → 0]
+ X × Y × Z : [5000 → 15000] × [2000 → 7000] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>plot</p>
+<p>Plot the selected region with the same phase colours.</p>
 {% highlight matlab %}
-close all
-plot(ebsd)
+close all;
+plot(ebsdRegion);
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_05.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDSelect_04.png" %}
 </center>
-<p>Note, that you can also select a polygon by mouse using the command</p>
+<p>The cropped map keeps its specimen coordinates rather than being moved to the origin. Only its extent and list membership have changed.</p>
+<p>A region need not be rectangular. <code class="language-plaintext highlighter-rouge">inpolygon</code> also accepts the vertices of any closed polygon. Draw those vertices with the mouse using</p>
 {% highlight matlab %}
 poly = selectPolygon
 {% endhighlight %}
-<h2 id="14">Remove Inaccurate Orientation Measurements</h2>
-<p>Most EBSD measurements contain quantities indicating inaccurate measurements, e.g. MAD (mean angular deviation) in the case of Oxford Channel programs, or CI (Confidence Index) in the case of OIM-TSL programs.</p>
+<h2 id="14">Screening measurements by fit quality</h2>
+<p>Indexing software stores quantities that describe the pattern solution. Oxford Channel maps commonly provide the mean angular deviation <code class="language-plaintext highlighter-rouge">mad</code>, for which lower values mean a closer angular fit. EDAX OIM maps commonly provide a confidence index <code class="language-plaintext highlighter-rouge">ci</code>, for which higher values mean that the winning indexed solution is better separated from the runner-up.</p>
+<p>These quantities are not interchangeable measures of orientation error. A threshold flags measurements for scrutiny; it does not prove that an orientation is wrong. Inspect the spatial map and the distribution before choosing a data-dependent threshold.</p>
 {% highlight matlab %}
-close all
-plot(ebsd,ebsd.mad)
-mtexColorbar
+close all;
+plot(ebsdRegion, ebsdRegion.mad);
+mtexColorbar('title','mean angular deviation (degree)');
+setColorRange([0 1.2]);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDSelect_05.png" %}
+</center>
+<p>Most of the map sits at about 0.4&deg;. The deep blue patches are the notIndexed points, which report 0. The yellow speckles are the worst fits in this map and lie mainly along grain boundaries, where the interaction volume can contain signal from two crystals. A histogram shows the populations more clearly.</p>
+{% highlight matlab %}
+close all;
+histogram(ebsdRegion.mad);
+xlabel('mean angular deviation (degree)');
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDSelect_06.png" %}
 </center>
-<p>or</p>
+<p>The tallest bar is at zero. It is not a population of perfect fits but the notIndexed points again. The indexed measurements run from 0.1&deg; to 1.2&deg;, with the bulk at 0.4&deg;. A cut at 0.8&deg; removes the tail and keeps 96% of all points in the region.</p>
 {% highlight matlab %}
-close all
-plot(ebsd,ebsd.bc)
-mtexColorbar
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_07.png" %}
-</center>
-<p>Here we will use the MAD to identify and eliminate inaccurate measurements.</p>
-{% highlight matlab %}
-% plot a histogram
-close all
-histogram(ebsd.mad)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_08.png" %}
-</center>
-{% highlight matlab %}
-% take only those measurements with MAD smaller then one
-ebsd_corrected = ebsd(ebsd.mad<0.8)
+% take measurements with MAD smaller than 0.8 degrees
+ebsdCorrected = ebsdRegion(ebsdRegion.mad < 0.8)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd_corrected = EBSD (y↑→x)
+ebsdCorrected = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0    4052 (21%)  notIndexed          none                                   
@@ -197,17 +188,73 @@ ebsd_corrected = EBSD (y↑→x)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [5000 → 15000] x [2000 → 7000] x [0 → 0]
+ X × Y × Z : [5000 → 15000] × [2000 → 7000] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-
+<p>Plot the screened map with the same property on the same colour scale, so that it can be compared with the map above.</p>
 {% highlight matlab %}
-close all
-plot(ebsd_corrected)
+close all;
+plot(ebsdCorrected, ebsdCorrected.mad);
+mtexColorbar('title','mean angular deviation (degree)');
+setColorRange([0 1.2]);
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDSelect_09.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDSelect_07.png" %}
 </center>
+<p>The yellow speckles have gone, because every measurement above 0.8&deg; was removed. Those 881 positions are now empty and render as background.</p>
+<p>The deep blue patches are still there, and that is the point to take from this figure. This threshold does <b>not</b> remove notIndexed points: they have no fit to report, so their <code class="language-plaintext highlighter-rouge">mad</code> is stored as 0 and passes every smaller-than test. All 4052 notIndexed points are still in the map above.</p>
+<p>Dropping them is a separate phase selection. The deliberate output below shows how many indexed measurements remain.</p>
+{% highlight matlab %}
+ebsdCorrected('indexed')
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1   13359 (87%)  Forsterite  LightSkyBlue       mmm                         
+     2   1333 (8.7%)   Enstatite  DarkSeaGreen       mmm                         
+     3    676 (4.4%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X × Y × Z : [5000 → 15000] × [2000 → 7000] × [0 → 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<h2 id="19">Combining selections</h2>
+<p>Conditions combine with MATLAB's elementwise AND and OR operators, or a phase name can narrow a logical selection. This example applies the region and MAD conditions together, then keeps only forsterite.</p>
+{% highlight matlab %}
+keep = inpolygon(ebsd,region) & ebsd.mad < 0.8;
+goodForsterite = ebsd(keep);
+goodForsterite = goodForsterite('Forsterite')
+{% endhighlight %}
+
+{% highlight plaintext %}
+goodForsterite = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
+     1  13359 (100%)  Forsterite  LightSkyBlue       mmm                         
+ 
+ Properties: bands, bc, bs, error, mad, oldId
+ Scan unit : um
+ X × Y × Z : [5000 → 15000] × [2000 → 7000] × [0 → 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<p>Whether notIndexed points should be dropped depends on the analysis that follows. Their locations often record cracks, poor surface preparation, unresolved phases, or difficult grain boundaries. Keep the raw variable and assign a selection to a new name so that this information is not overwritten. <a href="EBSDFilling.html">Filling Missing Data</a> explains how missing orientations can be treated without pretending they were measured.</p>
+<h2 id="21">Further reading</h2>
+<div>
+<ul>
+<li>A. J. Schwartz, M. Kumar, B. L. Adams and D. P. Field, editors, <a href="https://doi.org/10.1007/978-0-387-88136-2">Electron Backscatter Diffraction in Materials Science</a>, second edition, Springer, 2009, develops the experimental and analytical background to EBSD maps.</li>
+<li>V. Randle, <a href="https://doi.org/10.1016/j.matchar.2009.05.011">Electron backscatter diffraction: strategies for reliable data acquisition and processing</a>, <i>Materials Characterization</i> 60, 913-922, 2009, reviews acquisition, cleanup, and microstructure analysis choices.</li>
+<li>S. I. Wright et al., <a href="https://doi.org/10.1016/j.ultramic.2015.07.017">Introduction and comparison of new EBSD post-processing methodologies</a>, <i>Ultramicroscopy</i> 159, 81-94, 2015, compares indexing success criteria and shows why their threshold directions depend on the property.</li>
+<li>V. S. Tong et al., <a href="https://doi.org/10.1016/j.ultramic.2015.04.019">The effect of pattern overlap on the accuracy of high resolution electron backscatter diffraction measurements</a>, <i>Ultramicroscopy</i> 155, 62-73, 2015, measures the loss of accuracy caused by overlapping patterns near grain boundaries.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis - Guidelines for orientation measurement using electron backscatter diffraction</i>, gives current guidance for reliable and reproducible EBSD orientation measurements.</li>
+</ul>
+</div>
+<h2 id="22">Next</h2>
+<p>
+<a href="EBSDIndex.html">Select by Index</a> distinguishes list position, persistent measurement id, map coordinates, and grid indices. <a href="EBSDGrid.html">Square and Hex Grids</a> explains when to restore matrix shape. Continue with <a href="GrainReconstruction.html">Grain Reconstruction</a> before selecting whole grains rather than individual measurements.</p>
 </div>
 </body>
 </html>
