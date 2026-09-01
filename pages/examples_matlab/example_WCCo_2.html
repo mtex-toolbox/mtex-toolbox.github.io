@@ -1,5 +1,5 @@
 ---
-title: "TrueEBSD distortion correction on a WC-Co composite"
+title: 'TrueEBSD distortion correction on a WC-Co composite'
 
 sidebar: examples_sidebar
 permalink: example_WCCo_2.html
@@ -26,7 +26,7 @@ toc: false
 </p>
 <p>An EBSD map and an SEM image of the same area never quite line up. The beam drifts during the scan, the camera moves between acquisitions, the specimen is tilted. Overlay the two and features are out by tens of pixels, which is enough to ruin any measurement that needs both.</p>
 <p>TrueEBSD corrects that, so every pixel of the map and every pixel of the images refer to the same point on the sample. The method is described in Tong et al., <a href="http://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>.</p>
-<p>This page uses <a href="trueEbsd2.trueEbsd2.html"><code class="language-plaintext highlighter-rouge">trueEbsd2</code></a>, which is part of MTEX - nothing has to be installed alongside it, and it asks for no toolbox that MTEX does not already require. Expect minutes rather than seconds: this is the full field of view.</p>
+<p>This page uses <a href="trueEbsd.trueEbsd.html"><code class="language-plaintext highlighter-rouge">trueEbsd</code></a>, which is part of MTEX - nothing has to be installed alongside it, and it asks for no toolbox that MTEX does not already require. Expect minutes rather than seconds: this is the full field of view.</p>
 <p>
 <a href="EBSDTrueEbsd.html">The short version</a> runs the same five maps and the same four distortions on a cut-down copy in well under a minute. Start there if you are new to it; this page is the full field of view, and adds the two things that dataset is too small to show - a map stored the other way round from its images, and a matching window set badly enough to need a retry.</p>
 <!--/introduction-->
@@ -172,11 +172,11 @@ imgList = mapImage (y↓→x)
 {% endhighlight %}
 <p>Now the job can be built. It holds the whole workflow, and each step below adds to it. It also re-checks that the sequence is in one frame, and stops with <code class="language-plaintext highlighter-rouge">trueEbsd:frameMismatch</code> if not.</p>
 {% highlight matlab %}
-job = trueEbsd2(imgList,T)
+job = trueEbsd(imgList,T)
 {% endhighlight %}
 
 {% highlight plaintext %}
-job = trueEbsd2 (as imported)
+job = trueEbsd (as imported)
  
       name            image   distortion  shift, px  residual, px
  1   bcImg       768 × 1024  shift-drift          -             -
@@ -196,7 +196,7 @@ job.pixelSizeMatch
 {% highlight plaintext %}
 using default pixel size of 0.019875 um, minimum from imgList
  
-ans = trueEbsd2 (pixel size matched)
+ans = trueEbsd (pixel size matched)
  
       name            image   distortion  shift, px  residual, px
  1   bcImg      1536 × 2048  shift-drift          -             -
@@ -232,59 +232,10 @@ px = job.resizedList(1).dx;
 
 % deliberately far too small on the second stage of hop 1, to show the
 % retry - everything else is measured
-job.setOptions('numROI',40)
-job.setOptions(1,'roiSize',[64 32]*px)
-job.setOptions(3,'roiSize',128*px)
-job.setOptions(3:5,'registerOn','raw')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = trueEbsd2 (pixel size matched)
- 
-      name            image   distortion  shift, px  residual, px
- 1   bcImg      1536 × 2048  shift-drift          -             -
- 2   fsdB3  1536 × 2048 × 3     identity          -             -
- 3   fsdT3      1536 × 2048        shift          -             -
- 4   fsdT1      1536 × 2048         tilt          -             -
- 5  fsdT10      1536 × 2048                       -             -
- 
- common grid: 1536 × 2048 at 0.02 µm
- 
- 
-ans = trueEbsd2 (pixel size matched)
- 
-      name            image   distortion  shift, px  residual, px
- 1   bcImg      1536 × 2048  shift-drift          -             -
- 2   fsdB3  1536 × 2048 × 3     identity          -             -
- 3   fsdT3      1536 × 2048        shift          -             -
- 4   fsdT1      1536 × 2048         tilt          -             -
- 5  fsdT10      1536 × 2048                       -             -
- 
- common grid: 1536 × 2048 at 0.02 µm
- 
- 
-ans = trueEbsd2 (pixel size matched)
- 
-      name            image   distortion  shift, px  residual, px
- 1   bcImg      1536 × 2048  shift-drift          -             -
- 2   fsdB3  1536 × 2048 × 3     identity          -             -
- 3   fsdT3      1536 × 2048        shift          -             -
- 4   fsdT1      1536 × 2048         tilt          -             -
- 5  fsdT10      1536 × 2048                       -             -
- 
- common grid: 1536 × 2048 at 0.02 µm
- 
- 
-ans = trueEbsd2 (pixel size matched)
- 
-      name            image   distortion  shift, px  residual, px
- 1   bcImg      1536 × 2048  shift-drift          -             -
- 2   fsdB3  1536 × 2048 × 3     identity          -             -
- 3   fsdT3      1536 × 2048        shift          -             -
- 4   fsdT1      1536 × 2048         tilt          -             -
- 5  fsdT10      1536 × 2048                       -             -
- 
- common grid: 1536 × 2048 at 0.02 µm
+job.setOptions('numROI',40);
+job.setOptions(1,'roiSize',[64 32]*px);
+job.setOptions(3,'roiSize',128*px);
+job.setOptions(3:5,'registerOn','raw');
 {% endhighlight %}
 <h2 id="11">Measure the distortion</h2>
 <p>These are the pictures that will actually be matched: edge transforms where <code class="language-plaintext highlighter-rouge">registerOn</code> is <code class="language-plaintext highlighter-rouge">'edge'</code>, grey values where it is <code class="language-plaintext highlighter-rouge">'raw'</code>. A band contrast map and a backscatter image have nothing in common as grey values, but their grain boundaries fall in the same places &mdash; which is why edges are the default.</p>
@@ -346,7 +297,7 @@ job.calcDistortion('fitErr')
   ● fsdT10
 
  
-ans = trueEbsd2 (shifts calculated)
+ans = trueEbsd (shifts calculated)
  
       name            image   distortion             shift, px        residual, px
  1   bcImg      1536 × 2048  shift-drift    7.06 (+0.33,-4.86)  1.30 (+0.08,-0.11)
@@ -367,7 +318,7 @@ plot(job.undistortedList)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = trueEbsd2 (undistorted)
+ans = trueEbsd (undistorted)
  
       name            image   distortion             shift, px        residual, px
  1   bcImg      1536 × 2048  shift-drift    7.06 (+0.33,-4.86)  1.30 (+0.08,-0.11)
