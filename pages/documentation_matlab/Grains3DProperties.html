@@ -1,5 +1,5 @@
 ---
-title: "Properties of Three-Dimensional Grains"
+title: 'Properties of Three-Dimensional Grains'
 
 sidebar: documentation_sidebar
 permalink: Grains3DProperties.html
@@ -22,9 +22,19 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Three dimensional grain share many of the properties of two dimensional grains, e.g. <code class="language-plaintext highlighter-rouge">grains.meanOrientation</code>. However, the geometric properties are quite different. These are</p>
+<p>
+<a href="Grains3D.html">Three-Dimensional Grains</a> defines the <a href="grain3d.grain3d.html">grain3d</a> collection and its polyhedral representation. Three-dimensional grains retain material properties such as <code class="language-plaintext highlighter-rouge">meanOrientation</code>, but their size and shape require volume and surface measures rather than planar area and perimeter.</p>
+<p>The main whole-grain properties are</p>
 <p>
    <table class="usertable">
+      <tr>
+         <td>
+               <p>Property</p>
+         </td>
+         <td>
+               <p>Meaning</p>
+         </td>
+      </tr>
       <tr>
          <td>
                <p>
@@ -32,17 +42,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number of pixels per grain</p>
-         </td>
-         <td>
-               <p>
-                  <a href="grain3d.volume.html">
-                     <tt>volume</tt>
-                  </a>
-               </p>
-         </td>
-         <td>
-               <p>volume in µm³</p>
+               <p>number of measured volume elements assigned to the grain</p>
          </td>
       </tr>
       <tr>
@@ -52,8 +52,22 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number boundary elements per grain</p>
+               <p>number of boundary faces belonging to the grain</p>
          </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="grain3d.volume.html">
+                     <tt>volume</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>enclosed volume</p>
+         </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <a href="grain3d.surface.html">
@@ -62,7 +76,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>surface area in µm²</p>
+               <p>total area of all boundary faces</p>
          </td>
       </tr>
       <tr>
@@ -74,8 +88,10 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>diameter in µm</p>
+               <p>greatest distance between two grain vertices</p>
          </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <a href="grain3d.principalComponents.html">
@@ -84,7 +100,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>the principal axes</p>
+               <p>three principal half-axes of a volume-matched ellipsoid</p>
          </td>
       </tr>
       <tr>
@@ -96,8 +112,10 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number neighboring grains</p>
+               <p>number of neighbouring grains</p>
          </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <a href="grain3Boundary.grain3Boundary.html">
@@ -106,18 +124,20 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>list of boundary faces</p>
+               <p>boundary faces of the grain</p>
          </td>
       </tr>
       <tr>
          <td>
                <p>
-                  <tt>grains.V</tt>
+                  <tt>V</tt>
                </p>
          </td>
          <td>
-               <p>vertices</p>
+               <p>vertices used by the grain</p>
          </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <a href="grain3d.centroid.html">
@@ -126,25 +146,27 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>the geometric center</p>
+               <p>volume centroid of the grain</p>
          </td>
       </tr>
    </table>
 </p>
-<p>A couple of shape parameters that <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a> provides have no three dimensional counterpart yet, namely <code class="language-plaintext highlighter-rouge">caliper</code>, <code class="language-plaintext highlighter-rouge">equivalentRadius</code>, <code class="language-plaintext highlighter-rouge">equivalentPerimeter</code>, <code class="language-plaintext highlighter-rouge">shapeFactor</code>, <code class="language-plaintext highlighter-rouge">isBoundary</code>, <code class="language-plaintext highlighter-rouge">hasHole</code> and <code class="language-plaintext highlighter-rouge">isInclusion</code>.</p>
+<p>Several <a href="grain2d.grain2d.html">grain2d</a> shape properties do not yet have three-dimensional counterparts: <code class="language-plaintext highlighter-rouge">caliper</code>, <code class="language-plaintext highlighter-rouge">equivalentRadius</code>, <code class="language-plaintext highlighter-rouge">equivalentPerimeter</code>, <code class="language-plaintext highlighter-rouge">shapeFactor</code>, <code class="language-plaintext highlighter-rouge">isBoundary</code>, <code class="language-plaintext highlighter-rouge">hasHole</code>, and <code class="language-plaintext highlighter-rouge">isInclusion</code>.</p>
 <!--/introduction-->
-<p>We start our discussion by importing some sample data set of three dimensional grains</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Load the example microstructure</h2>
+<p>The bundled data set is a Neper tessellation. The previous <a href="NeperInterface.html">Neper Interface</a> page explains how such a collection is generated or imported.</p>
 {% highlight matlab %}
 mtexdata NeperGrain3d
 
 plot(grains,grains.meanOrientation,'micronbar','off')
-
-% set camera
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain3d (y↓→x)
+grains = grain3d (y↑→x)
  
  Phase  Grains   Volume  Mineral  Symmetry  Crystal reference frame
      2    1000  1000000   Quartz       321        X||a*, Y||b, Z||c
@@ -153,13 +175,18 @@ grains = grain3d (y↓→x)
  
  Properties: meanRotation
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DProperties_01.png" %}
 </center>
-<h2 id="2">Grain volume</h2>
-<p>The most basic properties are diameter, surface and volume. Those can be computed by</p>
+<p>Each colour represents one mean orientation. The faceted outlines are the boundary polygons from which the geometric properties are computed.</p>
+<h2 id="4">Compare size measures</h2>
+<p>Diameter, surface area, and volume answer different questions. The diameter spans the two most distant vertices. Surface sums the areas of all faces, while volume measures the enclosed polyhedron. Their units follow the mesh coordinates; for this data set they are micrometres, square micrometres, and cubic micrometres.</p>
+<p>Select by grain ID so the choice remains meaningful after subsetting.</p>
 {% highlight matlab %}
-grains(9).diameter
+grainId = 9;
+grain = grains('id',grainId);
+
+grain.diameter
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -168,7 +195,7 @@ ans =
 {% endhighlight %}
 
 {% highlight matlab %}
-grains(9).surface
+grain.surface
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -177,89 +204,121 @@ ans =
 {% endhighlight %}
 
 {% highlight matlab %}
-grains(9).volume
+grain.volume
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    1.4318e+03
 {% endhighlight %}
-<p>The units are &micro;m, &micro;m&sup2; and &micro;m&sup3;. We may analyze the distribution of grains by grain volume using a histogram.</p>
+<p>Grain 9 has diameter 19.456 micrometres, surface area 765.91 square micrometres, and volume 1431.84 cubic micrometres. The three values cannot be substituted for one another because grains with equal volume can have very different elongation and surface roughness.</p>
+<p>Face and neighbourhood counts provide complementary structural measures.</p>
 {% highlight matlab %}
-close all
-histogram(grains.volume,20,'FaceColor',grains.color)
-xlabel('grain volume in µm³')
-ylabel('number of grains')
+[grain.numFaces, grain.numNeighbors]
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+ans =
+  1×2 sparse double row vector (2 nonzeros)
+   (1,1)       18
+   (1,2)       17
+{% endhighlight %}
+<p>Grain 9 has 18 boundary faces and 17 neighbouring grains. Its face on the outside of the tessellated volume contributes to <code class="language-plaintext highlighter-rouge">numFaces</code> but does not introduce a neighbouring grain.</p>
+<h2 id="9">Number-weighted and volume-weighted distributions</h2>
+<p>MATLAB's numeric <a href="matlab:doc('histogram')"><code class="language-plaintext highlighter-rouge">histogram</code></a> gives every grain one count. This answers how many grains fall in a size interval. <a href="grain3d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains,...)</code></a> weights each grain by its volume and reports relative volume in percent. For questions about the fraction of material in an interval, this is the more realistic view.</p>
+{% highlight matlab %}
+volumeEdges = linspace(0,max(grains.volume)+eps,21);
+newMtexFigure('layout',[1,2]);
+histogram(grains.volume,volumeEdges,'FaceColor',grains.color)
+xlabel('grain volume (µm³)')
+ylabel('number of grains')
+mtexTitle('Number weighted')
+
+nextAxis
+histogram(grains,grains.volume,volumeEdges)
+mtexTitle('Volume weighted')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DProperties_02.png" %}
 </center>
-<p>Note that in the above histogram all grains contribute equally independently of their size. We obtain a more realistic histogram if we do not plot the number of grains at the y-axis but its total volume. This can be achieved with the command <a href="grain3d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a>.</p>
+<p>Large grains are relatively inconspicuous in the count histogram but gain weight in the second panel. Neither weighting is universally preferable; the denominator must match the scientific question.</p>
+<p>The same distinction applies to any other property. Here the horizontal coordinate is surface area, while the weight remains grain volume.</p>
 {% highlight matlab %}
-histogram(grains,20)
+surfaceEdges = linspace(0,max(grains.surface)+eps,16);
+newMtexFigure('layout',[1,2]);
+histogram(grains.surface,surfaceEdges,'FaceColor',grains.color)
+xlabel('surface area (µm²)')
+ylabel('number of grains')
+mtexTitle('Number weighted')
+
+nextAxis
+histogram(grains,grains.surface,surfaceEdges)
+xlabel('surface area (µm²)')
+mtexTitle('Volume weighted')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DProperties_03.png" %}
 </center>
-<p>Similarly, we can visualize the distribution of surface or diameter with respect to grain volume or number of grains.</p>
+<p>The right panel asks what fraction of the total material belongs to grains in each surface-area interval. It does not show a surface-area fraction.</p>
+<h2 id="12">Relate diameter and volume</h2>
+<p>A scatter plot tests how two measures covary. Taking the cube root of volume puts both axes in units of length. Similar grain shapes should lie near a common trend; elongated or irregular grains can depart from it.</p>
 {% highlight matlab %}
-histogram(grains.surface,'FaceColor',grains.color)
-xlabel('surface (µm²)')
-ylabel('number of grains')
-
-figure
-histogram(grains,grains.surface)
-xlabel('surface (µm²)')
+close all
+scatter(grains.volume.^(1/3),grains.diameter,18,grains.color,'filled')
+xlabel('cube root of volume (µm)')
+ylabel('diameter (µm)')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DProperties_04.png" %}
 </center>
-<center>
-{% include inline_image.html file="Grains3DProperties_05.png" %}
-</center>
-<p>We may also investigate the correlation between any properties using a scatter plot. Almost surely, we find a relationship between the grain diameter and the volume.</p>
-{% highlight matlab %}
-scatter(grains.volume.^(1/3), grains.diameter)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DProperties_06.png" %}
-</center>
-<h2 id="9">Ellipsoid Based Properties</h2>
-<p>Similarly as for two dimensional grains the command <a href="grain3d.principalComponents.html"><code class="language-plaintext highlighter-rouge">principalComponents</code></a> computes the principle axes <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code> and <code class="language-plaintext highlighter-rouge">c</code> of each grain. These can be interpreted as the half-axes of an ellipsoid fitted to the grain.</p>
+<p>The overall increase confirms that larger volumes usually have larger diameters. The vertical spread at a fixed cube-root volume records shape variation rather than a change of units.</p>
+<h2 id="14">Ellipsoid-based shape</h2>
+<p> <a href="grain3d.principalComponents.html"><code class="language-plaintext highlighter-rouge">principalComponents</code></a> computes three orthogonal vectors <code class="language-plaintext highlighter-rouge">a</code>, <code class="language-plaintext highlighter-rouge">b</code>, and <code class="language-plaintext highlighter-rouge">c</code> from the grain's volume moments. Their directions are the principal directions, and their lengths are the half-axes of an ellipsoid scaled to the same volume as the grain. <a href="plotEllipsoid.html"><code class="language-plaintext highlighter-rouge">plotEllipsoid</code></a> draws them.</p>
 {% highlight matlab %}
 [a,b,c] = principalComponents(grains);
-{% endhighlight %}
-<p>Let us use these half-axes to visualize the 3d-grains as ellipsoids colorized by the grain orientation. This is done using the command <a href="plotEllipsoid.html"><code class="language-plaintext highlighter-rouge">plotEllipsoid</code></a>
-</p>
-{% highlight matlab %}
-% compute the color for each ellipsoid
+
+% Compute one IPF colour for each ellipsoid.
 cKey = ipfColorKey(grains.CS);
 color = cKey.orientation2color(grains.meanOrientation);
 
-plotEllipsoid(grains.centroid,a,b,c,'faceColor',color);
-{% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DProperties_07.png" %}
-</center>
-<h2 id="11">Vertices, grain and surface centroids</h2>
-<p>Each grain has a set of vertices <code class="language-plaintext highlighter-rouge">grains.V</code> and a centroid <code class="language-plaintext highlighter-rouge">grains.centroid</code>. Furthermore, each grain boundary element has a centroid. Lets visualize those quantities.</p>
-{% highlight matlab %}
 close all
-plot(grains(5),'FaceAlpha',0.5,'linewidth',2)
-
-hold on
-plot(grains(5).centroid)
-plot(grains(5).V)
-plot(grains(5).boundary.centroid)
-hold off
+plotEllipsoid(grains.centroid,a,b,c,'faceColor',color);
+setCamera(plottingConvention.default3D)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DProperties_08.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DProperties_05.png" %}
 </center>
-<h2 id="12">Grain boundary properties</h2>
-<p>The grain boundary elements the have the following geometric properties</p>
+<p>The ellipsoids preserve centroid, principal directions, and volume, while discarding individual facets. Long thin ellipsoids therefore identify anisotropic shape without reproducing every boundary face.</p>
+<h2 id="16">Vertices and three kinds of centre</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">grain.V</code> contains the vertices used by the selected grain. Its <code class="language-plaintext highlighter-rouge">centroid</code> is the centre of the enclosed volume. Each entry of <code class="language-plaintext highlighter-rouge">grain.boundary</code> is one face, and <code class="language-plaintext highlighter-rouge">grain.boundary.centroid</code> contains one area centroid per face.</p>
+{% highlight matlab %}
+grain = grains('id',5);
+
+plot(grain,'FaceAlpha',0.5,'linewidth',2)
+hold on
+plot(grain.centroid)
+plot(grain.V)
+plot(grain.boundary.centroid)
+hold off
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DProperties_06.png" %}
+</center>
+<p>The single interior marker is the volume centroid. Vertex markers lie on polygon corners, while the face-centroid markers lie within the boundary faces. These point sets describe different levels of the same geometry.</p>
+<h2 id="18">Boundary-face properties</h2>
+<p>A three-dimensional grain boundary stores one entry per polygonal face. Its principal geometric and crystallographic properties are</p>
 <p>
    <table class="usertable">
+      <tr>
+         <td>
+               <p>Property</p>
+         </td>
+         <td>
+               <p>Meaning</p>
+         </td>
+      </tr>
       <tr>
          <td>
                <p>
@@ -267,15 +326,17 @@ hold off
                </p>
          </td>
          <td>
-               <p>area in µm²</p>
+               <p>face area in square micrometres</p>
          </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <tt>N</tt>
                </p>
          </td>
          <td>
-               <p>normal direction</p>
+               <p>stored face-normal direction</p>
          </td>
       </tr>
       <tr>
@@ -285,15 +346,17 @@ hold off
                </p>
          </td>
          <td>
-               <p>diameter in µm</p>
+               <p>greatest distance between two face vertices</p>
          </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <tt>perimeter</tt>
                </p>
          </td>
          <td>
-               <p>perimeter in µm</p>
+               <p>length around the face</p>
          </td>
       </tr>
       <tr>
@@ -303,15 +366,17 @@ hold off
                </p>
          </td>
          <td>
-               <p>the geometric center</p>
+               <p>area centroid of the face</p>
          </td>
+      </tr>
+      <tr>
          <td>
                <p>
                   <tt>grainId</tt>
                </p>
          </td>
          <td>
-               <p>neighboring grain ids</p>
+               <p>IDs of the neighbouring grains</p>
          </td>
       </tr>
       <tr>
@@ -321,36 +386,43 @@ hold off
                </p>
          </td>
          <td>
-               <p>misorientation across the face</p>
-         </td>
-         <td>
-               <p/>
+               <p>misorientation between their mean orientations</p>
          </td>
       </tr>
    </table>
 </p>
-<p>Let us first visualize the grain boundary normals</p>
+<p>The stored normal has one direction for a shared face. The <a href="Grains3D.html">outward-normal example</a> explains how <code class="language-plaintext highlighter-rouge">I_GF</code> changes that sign for one chosen grain. Here <code class="language-plaintext highlighter-rouge">'antipodal'</code> deliberately treats opposite normal directions as equivalent and emphasizes the boundary-plane axes.</p>
 {% highlight matlab %}
 hold on
-quiver(grains(5).boundary,grains(5).boundary.N,'antipodal','linewidth',2)
+quiver(grain.boundary,grain.boundary.N,'antipodal','linewidth',2)
 hold off
 {% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DProperties_09.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DProperties_07.png" %}
 </center>
-<p>In the next plot we colorize the boundary planes by the misorientation angle of the neighbouring grains.</p>
+<p>The arrows are normal to the faces on which they start. Because they are plotted antipodally, this figure does not claim that every arrow points outwards.</p>
+<h2 id="20">Misorientation across indexed faces</h2>
+<p>An indexed face separates two grains whose mean orientations are known. Filtering with <code class="language-plaintext highlighter-rouge">'indexed'</code> excludes faces for which that crystallographic comparison is unavailable. The colour below is the misorientation angle across each remaining face.</p>
 {% highlight matlab %}
-close all
-plot(grains.boundary('indexed'),...
-  grains.boundary('indexed').misorientation.angle./degree,'micronbar','off')
-
+indexedBoundary = grains.boundary('indexed');
+plot(indexedBoundary,indexedBoundary.misorientation.angle./degree, ...
+  'micronbar','off')
 setCamera(plottingConvention.default3D)
-colorbar('location','southoutside')
-%
+cb = colorbar('location','southoutside');
+cb.Label.String = 'misorientation angle (degrees)';
 {% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DProperties_10.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DProperties_08.png" %}
 </center>
+<p>Faces with similar colours separate grain pairs with similar misorientation angles. The colour does not encode face orientation or face area, which are the separate properties <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge">area</code>.</p>
+<h2 id="22">References</h2>
+<div>
+<ul>
+<li>R. Quey, P. R. Dawson and F. Barbe, <a href="https://doi.org/10.1016/j.cma.2011.01.002">Large-scale 3D random polycrystals for the finite element method: Generation, meshing and remeshing</a>, <i>Computer Methods in Applied Mechanics and Engineering</i> 200 (2011), 1729--1745, describes the synthetic polycrystal generation behind the example tessellation.</li>
+</ul>
+</div>
+<h2 id="23">Next</h2>
+<p>Continue with <a href="Grains3DOperations.html">Operations with Three-Dimensional Grains</a> to cut, triangulate, and rotate the grains whose properties were measured here.</p>
 </div>
 </body>
 </html>

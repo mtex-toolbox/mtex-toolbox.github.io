@@ -1,5 +1,5 @@
 ---
-title: "Axis Distribution Function"
+title: 'Axis Distribution Function'
 
 sidebar: documentation_sidebar
 permalink: AxisDistributionFunction.html
@@ -23,9 +23,11 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>The misorientation axis distribution is the counterpart of the <a href="AngleDistributionFunction.html">angle distribution</a> - it is what remains of a <a href="MisorientationDistributionFunction.html">misorientation distribution function</a> after integrating out the misorientation angle. It is a function on the sphere and is represented in MTEX by an <a href="S2FunConcept.html">S2Fun</a>.</p>
-<h2 id="2">The axis distribution of a uniform texture</h2>
-<p>As for the angle, the reference case of completely random orientations does <b>not</b> give a uniform distribution. The reason is that the maximum possible misorientation angle depends on the direction of the axis - an axis for which the <a href="MisorientationTheory.html">fundamental region</a> extends further contributes more misorientations. The command <a href="symmetry.calcAxisDistribution.html"><code class="language-plaintext highlighter-rouge">calcAxisDistribution</code></a> computes this reference distribution</p>
+<p>A misorientation has an axis and an angle. The <b>axis distribution function</b> (ADF) keeps the crystal direction about which the rotation occurs and integrates out the angle. It is the spherical counterpart of the <a href="AngleDistributionFunction.html">angle distribution</a> and a marginal of the <a href="MisorientationDistributionFunction.html">misorientation distribution function</a> (MDF).</p>
+<p>MTEX represents an ADF by an <a href="S2FunConcept.html">S2Fun</a>. Start with <a href="MisorientationTheory.html">Theory of Misorientations</a> if symmetry-equivalent rotations and the fundamental region are unfamiliar. The kernel smoothing used below is introduced in <a href="DensityEstimation.html">Density Estimation</a>.</p>
+<h2 id="2">The axis distribution of random orientations</h2>
+<p>Random crystal orientations do <b>not</b> produce a constant ADF. Crystal symmetry restricts every misorientation to a fundamental region. The largest permitted angle depends on the axis direction, so some axes represent more rotations than others.</p>
+<p> <a href="symmetry.calcAxisDistribution.html"><code class="language-plaintext highlighter-rouge">calcAxisDistribution</code></a> computes this symmetry-only reference. Point group <code class="language-plaintext highlighter-rouge">432</code> gives the cubic example.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('432');
 
@@ -37,116 +39,141 @@ adf = S2FunHarmonicSym (432)
   bandwidth: 256
   antipodal: true
 {% endhighlight %}
-<p>Being an <code class="language-plaintext highlighter-rouge">S2Fun</code> it can be plotted, evaluated and integrated like any other spherical function. Restricted to the <a href="CrystalSymmetries.html">fundamental sector</a> of the crystal symmetry it looks as follows</p>
+<p>Like any spherical function, <code class="language-plaintext highlighter-rouge">adf</code> can be plotted, evaluated, and integrated. The convenience command <a href="plotAxisDistribution.html"><code class="language-plaintext highlighter-rouge">plotAxisDistribution</code></a> draws the same density. Passing both symmetries describes a same-phase pair, while <code class="language-plaintext highlighter-rouge">antipodal</code> applies <a href="MisorientationGrainExchangeSym.html">grain exchange symmetry</a>.</p>
 {% highlight matlab %}
-plot(adf,'upper')
+plotAxisDistribution(cs,cs,'antipodal')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="AxisDistributionFunction_01.png" %}
 </center>
-<p>The same plot is produced directly by <a href="plotAxisDistribution.html"><code class="language-plaintext highlighter-rouge">plotAxisDistribution</code></a>
-</p>
+<p>The light \([001]\) corner is the minimum. The red band towards the \([101]\)-- \([111]\) edge is more probable because the fundamental region extends to larger angles there.</p>
+<p>MTEX normalizes a density to have mean one. The numerical range and its ratio quantify the variation visible in the colour scale.</p>
 {% highlight matlab %}
-plotAxisDistribution(cs)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AxisDistributionFunction_02.png" %}
-</center>
-<p>The variation is substantial - over the fundamental sector the density ranges between</p>
-{% highlight matlab %}
-[min(adf) max(adf)]
+uniformRange = [min(adf),max(adf)]
+uniformRatio = uniformRange(2) ./ uniformRange(1)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+uniformRange =
     0.5974    1.5652
+uniformRatio =
+    2.6198
 {% endhighlight %}
-<p>i.e. by a factor of more than two. Any interpretation of a measured axis distribution has to be made against this reference, not against a constant.</p>
-<h2 id="7">The axis distribution of measured misorientations</h2>
-<p>Let us again consider the Magnesium data set</p>
+<p>The density runs from 0.597 to 1.565 multiples of the mean, a factor of 2.620. A measured ADF must therefore be compared with this reference, not with a constant.</p>
+<h2 id="6">The axis distribution of boundary misorientations</h2>
+<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. A grain boundary is a segment between two neighbouring pixels that belong to different grains. Load the magnesium map, segment its indexed pixels at \(5^\circ\), and smooth the boundary geometry for five iterations. The plotting convention states the specimen frame used by this data set.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata twins silent
 
-grains = calcGrains(ebsd('indexed'),'threshold',5*degree);
+grains = calcGrains(ebsd('indexed'),'angle',5*degree);
 grains = smoothBoundary(grains,5);
 
-mori = grains.boundary('Magnesium','Magnesium').misorientation
+% retain boundaries between magnesium grains
+gB = grains.boundary('Magnesium','Magnesium');
+mori = gB.misorientation;
+{% endhighlight %}
+<p> <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> selects the smallest-angle symmetry-equivalent representative and returns its axis in the crystal frame. The summary reports one axis for each of the 2803 boundary segments.</p>
+{% highlight matlab %}
+axesCrystal = axis(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (Magnesium → Magnesium)
-  size: 2803 x 1
-  antipodal: true
+axesCrystal = Miller (Magnesium)
+ size: 2803 × 1
 {% endhighlight %}
-<p>The misorientation axes in crystal coordinates are returned by <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a>
-</p>
+<p>Each boundary segment contributes once by default. Passing its <code class="language-plaintext highlighter-rouge">segLength</code> as a weight instead estimates a distribution by boundary trace length. The \(5^\circ\) <code class="language-plaintext highlighter-rouge">halfwidth</code> controls the spherical kernel smoothing.</p>
 {% highlight matlab %}
-mori.axis
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = Miller (Magnesium)
- size: 2803 x 1
-{% endhighlight %}
-<p>and their distribution is displayed by <a href="plotAxisDistribution.html"><code class="language-plaintext highlighter-rouge">plotAxisDistribution</code></a>
-</p>
-{% highlight matlab %}
-plotAxisDistribution(mori,'contourf','halfwidth',5*degree)
+plotAxisDistribution(mori,'contourf','halfwidth',5*degree,...
+  'weights',gB.segLength)
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="AxisDistributionFunction_02.png" %}
+</center>
+<p>The isolated maximum is the extension-twin prism axis. Computing the underlying spherical density returns a peak of 30.8 multiples of the mean and prints the indexed direction at that peak.</p>
+{% highlight matlab %}
+[peakDensity,twinAxis] = max(calcDensity(axesCrystal,...
+  'halfwidth',5*degree,'weights',gB.segLength));
+
+peakDensity
+indexedTwinAxis = round(twinAxis)
+{% endhighlight %}
+
+{% highlight plaintext %}
+peakDensity =
+   30.8183
+ 
+indexedTwinAxis = Miller (Magnesium)
+ antipodal: true
+  h  k  i  l
+  2 -1 -1  0
+{% endhighlight %}
+<h2 id="10">The symmetry-only reference for magnesium</h2>
+<p>Use the two symmetries stored with the misorientation to plot the random reference for the same problem.</p>
+{% highlight matlab %}
+plotAxisDistribution(mori.CS,mori.SS,'antipodal')
+mtexColorbar
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="AxisDistributionFunction_03.png" %}
 </center>
-<p>The single sharp maximum is the twinning axis. Compare this against the uniform reference, which is essentially flat over the same sector</p>
+<p>This reference is not essentially flat. It has the broad variation caused by hexagonal symmetry, but it has no isolated peak at the twin axis. The comparison separates a preferred boundary relationship from the geometry of the misorientation fundamental region.</p>
+<p>An ADF has discarded the angle, so an axis peak alone does not identify a twin law. Confirm the complete misorientation against the ideal relation, as in <a href="Twinning.html">Twinning</a>.</p>
+<h2 id="12">Crystal versus specimen coordinates</h2>
+<p>A reference frame is the coordinate system in which data are expressed; it is distinct from the symmetry attached to it. The crystal frame is fixed to the lattice, whereas the specimen frame is fixed to the sample. The crystal-coordinate ADF above asks which lattice direction is the axis.</p>
+<p>Passing two orientations separately to <code class="language-plaintext highlighter-rouge">plotAxisDistribution</code> asks where that axis points in the specimen frame. The two EBSD ids stored for every segment recover the orientations on its two sides.</p>
 {% highlight matlab %}
-plotAxisDistribution(mori.CS,mori.SS)
+ori1 = ebsd(gB.ebsdId(:,1)).orientations;
+ori2 = ebsd(gB.ebsdId(:,2)).orientations;
+
+plotAxisDistribution(ori1,ori2,'contourf','halfwidth',5*degree,...
+  'weights',gB.segLength)
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="AxisDistributionFunction_04.png" %}
 </center>
-<h2 id="11">Crystal versus specimen coordinates</h2>
-<p>All of the above lives in <b>crystal</b> coordinates - the axis is expressed relative to the crystal lattice and is therefore subject to crystal symmetry. A misorientation axis can equally well be given in <b>specimen</b> coordinates, and this is a different question with a different answer. Passing the two orientations separately rather than the misorientation gives the specimen version</p>
+<p>The directed axes occupy the full sphere because the stored first and second sides fix an order and the specimen symmetry is trivial. The single crystal direction becomes several specimen-frame clusters because each grain carries that lattice direction into a different sample direction.</p>
+<p>For an unordered same-phase population, add <code class="language-plaintext highlighter-rouge">antipodal</code> to identify opposite specimen directions. <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a> uses the specimen-coordinate axis to classify boundaries.</p>
+<h2 id="14">The texture-dependent uncorrelated reference</h2>
+<p>There are three distinct comparisons. The measured boundary ADF is correlated because its grains touch. A symmetry-only ADF assumes random orientations. Between them lies the <b>uncorrelated</b> ADF predicted by the measured texture when grain orientations are paired independently.</p>
+<p>Estimate the magnesium ODF from grain mean orientations. Area weights make this a sampled-area texture rather than a one-grain-one-vote texture. The <code class="language-plaintext highlighter-rouge">Fourier</code> flag selects the harmonic representation used efficiently by <a href="SO3Fun.calcMDF.html"><code class="language-plaintext highlighter-rouge">calcMDF</code></a>.</p>
 {% highlight matlab %}
-ori1 = ebsd(grains.boundary('Magnesium','Magnesium').ebsdId(:,1)).orientations;
-ori2 = ebsd(grains.boundary('Magnesium','Magnesium').ebsdId(:,2)).orientations;
-
-plotAxisDistribution(ori1,ori2,'contourf','halfwidth',5*degree)
-mtexColorbar
-{% endhighlight %}
-<center>
-{% include inline_image.html file="AxisDistributionFunction_05.png" %}
-</center>
-<p>This is now a plot over the full sphere in specimen coordinates, with only the specimen symmetry imposed. The chapter <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a> uses exactly this distinction to classify boundaries.</p>
-<h2 id="13">The axis distribution of an ODF</h2>
-<p>Finally, the axis distribution can also be computed for a misorientation distribution function rather than for a list of misorientations. This gives the uncorrelated reference for the given texture</p>
-{% highlight matlab %}
-odf = calcDensity(grains('Magnesium').meanOrientation,'halfwidth',10*degree);
+mgGrains = grains('Magnesium');
+odf = calcDensity(mgGrains.meanOrientation,'weights',mgGrains.area,...
+  'halfwidth',10*degree,'Fourier');
 mdf = calcMDF(odf);
 
-adfMDF = calcAxisDistribution(mdf)
-{% endhighlight %}
+adfTexture = calcAxisDistribution(mdf);
 
-{% highlight plaintext %}
-Warning: The convolution of two SO3FunRBFs could be done fast by pure RBF
-method. For big center sizes this yields an SO3FunRBF with lots of
-centers, which is not manageable anymore. If you still want to generate an
-SO3FunRBF use 'noFourier'. 
- 
-adfMDF = S2FunHarmonicSym (Magnesium)
-  bandwidth: 64
-{% endhighlight %}
-
-{% highlight matlab %}
-plot(adfMDF,'upper')
+plot(adfTexture,'upper','antipodal')
 mtexColorbar
 {% endhighlight %}
-<center>
-{% include inline_image.html file="AxisDistributionFunction_06.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="AxisDistributionFunction_05.png" %}
 </center>
-<p>It differs markedly from the boundary distribution above, which is precisely the statement that the twin boundaries are not a consequence of the texture.</p>
+<p>The texture-dependent reference has broad symmetry-related maxima, but it lacks the boundary distribution's sharp twin-axis peak. Texture alone, under independent pairing, therefore does not explain that boundary population.</p>
+<h2 id="16">Axis and angle remain coupled in the MDF</h2>
+<p>The ADF and angle distribution are separate marginals. Peaks in the two plots need not belong to the same misorientations, and the two marginals cannot reconstruct the full MDF.</p>
+<p>For an MDF \(f(\mathbf{h},\omega)\), MTEX evaluates the full-angle ADF as</p>
+<p>\[A(\mathbf{h}) = \frac{2N}{\pi}\int_0^{\omega_{\max}(\mathbf{h})} f(\mathbf{h},\omega)\sin^2(\omega/2)\,\mathrm{d}\omega.\]</p>
+<p>Here \(\mathbf{h}\) is the axis, \(\omega\) is the angle, and \(N\) accounts for the symmetry copies represented by the fundamental region. The upper limit \(\omega_{\max}(\mathbf{h})\) is why a uniform MDF has a non-constant ADF.</p>
+<p> <a href="SO3Fun.calcAxisDistribution.html"><code class="language-plaintext highlighter-rouge">calcAxisDistribution</code></a> accepts <code class="language-plaintext highlighter-rouge">minAngle</code> and <code class="language-plaintext highlighter-rouge">maxAngle</code> to study an angle window. Its <code class="language-plaintext highlighter-rouge">resolution</code> option is the angular quadrature step; reduce it when a narrow window must be integrated to better than percent accuracy.</p>
+<p>The axis-angle description is singular at zero angle. Small orientation errors can therefore produce large axis errors for low-angle rotations. Restrict the angle range before interpreting a low-angle axis maximum.</p>
+<h2 id="17">References</h2>
+<div>
+<ul>
+<li>A. Morawiec, <a href="https://doi.org/10.1107/S0108767396015115">Distributions of Misorientation Angles and Misorientation Axes for Crystallites with Different Symmetries</a>, <i>Acta Crystallographica A</i> 53 (1997), 273--285.</li>
+<li>F. Basson, <a href="https://doi.org/10.1107/S002188989601045X">Probabilities of Random Disorientation Axes in Cubic Polycrystals</a>, <i>Journal of Applied Crystallography</i> 30 (1997), 102--106.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, chapter 7.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1107/S1600576724004692">On the Magnitude of Error in the Determination of Rotation Axes</a>, <i>Journal of Applied Crystallography</i> 57 (2024), 1059--1066.</li>
+</ul>
+</div>
+<h2 id="18">Next</h2>
+<p>
+<a href="AngleDistributionFunction.html">Angle Distribution</a> keeps the angle and integrates out the axis. Return to <a href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a> when the coupling between axis and angle matters. Continue to <a href="GrainBoundaries.html">Grain Boundaries</a> when the boundary plane and trace must be considered as well.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Glossary"
+title: 'Glossary'
 
 sidebar: documentation_sidebar
 permalink: Glossary.html
@@ -22,65 +22,151 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>This page gives short definitions of terms used throughout the MTEX documentation. Each link leads to the page that develops the idea and shows how to use it. Terms that are easily confused appear together rather than in strict alphabetical order.</p>
 <!--/introduction-->
-<p>Short definitions of the terms used throughout this documentation, with links to where each is developed properly. Terms that are easy to confuse with one another are defined next to each other rather than strictly alphabetically.</p>
-<h2 id="2">Directions and crystals</h2>
+<h2 id="1">Commands and stored data</h2>
 <p>
-<b>Antipodal</b> - the flag marking a quantity as an axis rather than a direction, so that it and its opposite are the same thing. It changes angles, means and densities, and nothing warns you if it is missing. See <a href="VectorsAxes.html">Axes</a>.</p>
+<b>Command option</b> and <b>flag</b> - controls appended to a command call. An option has a name and value, whereas a flag is switched on by its presence. See <a href="GeneralConceptsOptions.html">Options</a> for the full calling convention.</p>
 <p>
-<b>Miller indices</b> - the notation for planes and directions in a lattice. Round brackets <code class="language-plaintext highlighter-rouge">(hkl)</code> name a plane, square brackets <code class="language-plaintext highlighter-rouge">[uvw]</code> a direction; braces <code class="language-plaintext highlighter-rouge">{hkl}</code> and angle brackets <code class="language-plaintext highlighter-rouge"><a href="uvw">uvw</a></code> name the whole symmetric family. The two are not interchangeable: in quartz the plane (100) and the direction [100] are 30 degrees apart. See <a href="CrystalDirections.html">Miller Indices</a>.</p>
+<b>Property</b> and <b>scan option</b> - per-element data in <code class="language-plaintext highlighter-rouge">ebsd.prop</code> and whole-scan data in <code class="language-plaintext highlighter-rouge">ebsd.opt</code>, respectively. Only a property is indexed and subset in lockstep with the map. See <a href="Properties.html">Properties</a> for the definition, examples, and the rule for deciding where a value belongs.</p>
 <p>
-<b>Point group</b> - the symmetry operations that leave one point of the lattice fixed. There are 32. <b>Space group</b> - the same allowing translations as well, of which there are 230. <b>Laue group</b> - a point group with an inversion centre added, of which there are 11, and what a diffraction experiment can actually determine. See <a href="CrystalSymmetries.html">Crystal Symmetries</a>.</p>
+<b>Header</b> - scan-level information captured from a file's own preamble. It includes acquisition settings and vendor bookkeeping, but excludes phase and symmetry information already stored in <code class="language-plaintext highlighter-rouge">CSList</code>. It remains in the vendor's native shape, so field names are not normalised across file formats. See <a href="EBSDImport.html">EBSD Import</a>.</p>
 <p>
-<b>Crystal frame</b> - the Cartesian axes glued to the lattice. <b>Specimen frame</b> - the axes the sample is described in. Nearly every confusing result comes from a quantity being read in one when it was written in the other. See <a href="CrystalReferenceSystem.html">Reference System</a>.</p>
+<b><code class="language-plaintext highlighter-rouge">headerOnly</code></b> - an import option for inspecting a large file without reading its per-point data. It returns an <code class="language-plaintext highlighter-rouge">EBSD</code> object with empty positions, orientations, and phase ids, but populated <code class="language-plaintext highlighter-rouge">CSList</code>, <code class="language-plaintext highlighter-rouge">phaseMap</code>, and <code class="language-plaintext highlighter-rouge">opt.header</code>.</p>
+<h2 id="2">Directions, symmetry, and reference frames</h2>
 <p>
-<b>Fundamental sector</b> - the patch of the sphere holding exactly one of each symmetrically equivalent direction; what an inverse pole figure is drawn on. <b>Fundamental region</b> - the same idea for orientations. See <a href="FundamentalSector.html">Fundamental Sector</a> and <a href="OrientationFundamentalRegion.html">Fundamental Region</a>.</p>
-<h2 id="3">Orientations</h2>
+<b>Antipodal</b> - the flag marking a quantity as an axis rather than a direction, so it and its opposite are the same thing. It changes angles, means, and densities, and nothing warns you if it is missing. See <a href="VectorsAxes.html">Axes</a>.</p>
 <p>
-<b>Orientation</b> - the rotation relating the specimen frame to the crystal frame; how one crystal is placed in the sample. See <a href="CrystalOrientations.html">Orientations</a>.</p>
+<b>Miller indices</b> - the notation for planes and directions in a lattice. Round brackets <code class="language-plaintext highlighter-rouge">(hkl)</code> name a plane, and square brackets <code class="language-plaintext highlighter-rouge">[uvw]</code> name a direction. Braces <code class="language-plaintext highlighter-rouge">{hkl}</code> and angle brackets <code class="language-plaintext highlighter-rouge">&lt;uvw&gt;</code> name the corresponding symmetric families. Planes and directions are not interchangeable: in quartz, the plane <code class="language-plaintext highlighter-rouge">(100)</code> and direction <code class="language-plaintext highlighter-rouge">[100]</code> are 30 degrees apart. See <a href="CrystalDirections.html">Miller Indices</a>.</p>
 <p>
-<b>Misorientation</b> - the rotation relating two crystals to each other, independent of the specimen. <b>Disorientation</b> - the one representative of a misorientation with the smallest rotation angle, which is the number quoted when a boundary is called "a 60 degree boundary". Symmetry makes many rotations describe the same relationship; disorientation picks one. See <a href="MisorientationTheory.html">Theory</a>.</p>
+<b>Point group</b> - the symmetry operations that leave one point of a lattice fixed. There are 32 point groups.</p>
 <p>
-<b>Grain exchange symmetry</b> - the further ambiguity that a misorientation between two grains of the same phase has no natural direction, so a rotation and its inverse describe the same boundary.</p>
+<b>Space group</b> - a point group extended by translations. There are 230 space groups.</p>
 <p>
-<b>Variant</b> - one of the several child orientations a single parent orientation can produce under an orientation relationship. <b>Packet</b> - variants grouped by shared habit plane. <b>Bain group</b> - variants grouped by which parent cube axis the child aligns to. Packet and Bain group are independent classifications of the same variants, not two levels of one hierarchy. See <a href="PhaseTransitions.html">Phase Transitions</a>.</p>
+<b>Laue group</b> - a point group with an inversion centre added. There are 11 Laue groups, and a diffraction experiment can determine this symmetry. See <a href="CrystalSymmetries.html">Crystal Symmetries</a> for all three groups.</p>
 <p>
-<b>Fibre</b> - the set of all orientations that put one fixed crystal direction along one fixed specimen direction. A curve in orientation space, and the shape many real textures take. See <a href="OrientationFibre.html">Fibres</a>.</p>
+<b>Reference frame</b> - the frame in which data is expressed. It has an identity, a basis, and a default plotting convention. A reference frame is distinct from both the symmetry attached to it and the way it is drawn.</p>
+<p>
+<b>Crystal frame</b> - the Cartesian reference frame fixed to a phase's lattice basis. An alignment such as <code class="language-plaintext highlighter-rouge">X||a*, Z||c</code> belongs to this frame, not to its point group.</p>
+<p>
+<b>Specimen frame</b> - the frame in which the sample is expressed. Measurement, rolling, and geological frames are named specimen frames. Reading a quantity in the crystal frame when it was written in the specimen frame, or conversely, causes nearly every confusing result. See <a href="CrystalReferenceSystem.html">Reference System</a>.</p>
+<p>
+<b>Symmetry</b> - the point group under which data is invariant. It is attached to a reference frame but is not the frame itself. Two datasets may share a symmetry while using differently aligned frames, or share a frame while carrying different symmetries.</p>
+<p>
+<b>Plotting convention</b> - the layout of a reference frame on screen, such as which axis points east and which points out of the screen. The frame supplies a default, and a plot may override it. It is not merely a camera setting because import may also use its rotation as a frame relation. See <a href="AxesAlignment.html">Axes Alignment</a>.</p>
+<p>
+<b>Frame change</b> - re-expressing the same physical object in another reference frame with <code class="language-plaintext highlighter-rouge">transformReferenceFrame</code>. The object stays fixed. Rotating instead moves the physical object. See <a href="CrystalReferenceSystem.html">Reference System</a>.</p>
+<p>
+<b>Frame-free</b> - the state of a <code class="language-plaintext highlighter-rouge">vector3d</code>, <code class="language-plaintext highlighter-rouge">S2Fun</code>, or <code class="language-plaintext highlighter-rouge">tensor</code> whose frame is empty. Its frame is resolved against the session default when drawn. An object that points to the default frame is framed, not frame-free.</p>
+<p>
+<b>Fundamental sector</b> - the part of the sphere containing exactly one representative of every set of symmetrically equivalent directions. An inverse pole figure is drawn on it. See <a href="FundamentalSector.html">Fundamental Sector</a>.</p>
+<p>
+<b>Fundamental region</b> - the corresponding set of representatives for orientations. See <a href="OrientationFundamentalRegion.html">Fundamental Region</a>.</p>
+<h2 id="3">Orientations and parent reconstruction</h2>
+<p>
+<b>Orientation</b> - the rotation that maps the crystal frame to the specimen frame. It describes how one crystal is placed in the sample. See <a href="CrystalOrientations.html">Orientations</a>.</p>
+<p>
+<b>Misorientation</b> - the rotation relating two crystals, independent of the specimen frame.</p>
+<p>
+<b>Disorientation</b> - the representative of a misorientation with the smallest rotation angle. It supplies the number in a phrase such as a 60 degree boundary. Symmetry lets many rotations describe the same relationship; disorientation selects one. See <a href="MisorientationTheory.html">Theory</a>.</p>
+<p>
+<b>Grain exchange symmetry</b> - the additional ambiguity for two grains of the same phase. Their relationship has no natural direction, so a rotation and its inverse describe the same boundary.</p>
+<p>
+<b>Orientation relationship (OR)</b> - the crystallographic mapping between a parent phase and a child phase.</p>
+<p>
+<b>Variant</b> - one crystallographically equivalent child orientation predicted from one parent orientation by a known OR. It is the finest classification of a reconstructed child grain relative to its parent.</p>
+<p>
+<b>Packet</b> - a grouping of variants that share a habit plane. In the usual martensite classification, this is the parent {111} plane to which the child lattice aligns.</p>
+<p>
+<b>Bain group</b> - a grouping of variants by Bain correspondence. It records the parent {001} cube-axis plane to which the child lattice aligns. Packet and Bain group are independent classifications of the same variants, not two levels of one hierarchy. See <a href="PhaseTransitions.html">Phase Transitions</a>.</p>
+<p>
+<b>Transform</b> - the first parent-reconstruction step. Each child grain is assigned a candidate parent orientation through the OR and changed to the parent phase.</p>
+<p>
+<b>Merge</b> - the second parent-reconstruction step. Neighbouring transformed grains with compatible parent orientations are combined into one grain footprint.</p>
+<p>
+<b>Grain graph</b> - a reconstruction graph with one node per grain and edges for shared grain boundaries. It reasons directly about grain-to-grain compatibility.</p>
+<p>
+<b>Variant graph</b> - a reconstruction graph with one node for every grain-and-candidate-variant pair. Its edges describe compatible candidates in neighbouring grains, so it chooses variants before merging. See <a href="GrainGraphBasedReconstruction.html">Grain Graph Based Reconstruction</a>.</p>
+<p>
+<b>Fibre</b> - all orientations that place one fixed crystal direction along one fixed specimen direction. It is a curve in orientation space and a common shape for real textures. See <a href="OrientationFibre.html">Fibres</a>.</p>
 <h2 id="4">Distributions</h2>
 <p>
-<b>Texture</b> - the departure of a material's orientations from randomness.</p>
+<b>Texture</b> - a material's departure from a random orientation distribution.</p>
 <p>
-<b>ODF</b> - orientation distribution function, the density of material over orientations. Being a density, it gives no volume fraction to a single orientation, only to a region of them. See <a href="ODFAnalysis.html">ODF</a>.</p>
+<b>ODF</b> - orientation distribution function, the density of material over orientations. A single orientation has no volume fraction; a region of orientations does. See <a href="ODFAnalysis.html">ODF</a>.</p>
 <p>
-<b>MRD</b> - multiples of a random distribution, the unit an ODF is reported in. A value of 1 everywhere is no texture; a value of 20 means twenty times as much material near that orientation as chance would give.</p>
+<b>MRD</b> - multiples of a random distribution, the unit used for an ODF. A value of one everywhere means no texture. A value of 20 means that the material near that orientation is twenty times as frequent as randomness would predict.</p>
 <p>
-<b>Pole figure</b> - the density of one chosen crystal direction over all specimen directions. <b>Inverse pole figure</b> - the reverse, the density of one chosen specimen direction over crystal directions. Both are projections of an ODF and both lose information. See <a href="OrientationPoleFigure.html">Pole Figures</a>.</p>
+<b>Pole figure</b> - the density of one selected crystal direction over specimen directions.</p>
 <p>
-<b>Ghost effect</b> - the ODF error that follows from pole figures being blind to the odd part of the harmonic expansion. Not a numerical artefact but a genuine gap in what diffraction can know. See <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a>.</p>
+<b>Inverse pole figure</b> - the reverse density: one selected specimen direction over crystal directions. Both figures are projections of an ODF, and both lose information. See <a href="OrientationPoleFigure.html">Pole Figures</a>.</p>
 <p>
-<b>Halfwidth</b> - how far each measurement is spread when a density is estimated from discrete data. <b>Bandwidth</b> - the highest harmonic degree kept in a series representation. The two are the same trade-off between detail and noise, seen from opposite sides. See <a href="DensityEstimation.html">Density Estimation</a>.</p>
-<h2 id="5">Maps, grains and boundaries</h2>
+<b>Ghost effect</b> - the ODF error caused by pole figures being insensitive to the odd part of the harmonic expansion. It is a genuine gap in what diffraction can determine, not a numerical artefact. See <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a>.</p>
 <p>
-<b>notIndexed</b> - the phase given to a measurement whose pattern could not be indexed. A recorded value, not missing data, and a connected patch of it can form a grain of its own.</p>
+<b>Halfwidth</b> - the angular distance over which each discrete measurement is spread during density estimation.</p>
 <p>
-<b>Grain</b> - a connected, phase-homogeneous region of measurements whose orientations agree to within a threshold. There is no canonical definition; the threshold is a convention. See <a href="Grains.html">Grains</a>.</p>
+<b>Bandwidth</b> - the highest harmonic degree kept in a series representation. Halfwidth and bandwidth express the same trade-off between detail and noise from opposite sides. See <a href="DensityEstimation.html">Density Estimation</a>.</p>
+<h2 id="5">Maps, grains, and boundaries</h2>
 <p>
-<b>Grain boundary</b> - the segment between two neighbouring measurements that fell in different grains. <b>Phase boundary</b> - not a separate kind of object, just a grain boundary whose two grains differ in phase.</p>
+<b>notIndexed</b> - the phase assigned when a measured diffraction pattern cannot be indexed. It is a recorded measurement, not missing data. Like any phase, a connected notIndexed area can form a grain. A patch narrower than the <code class="language-plaintext highlighter-rouge">alpha</code> closing threshold is absorbed into a neighbouring grain. See <a href="EBSDFilling.html">Filling Missing Data</a>.</p>
 <p>
-<b>Hole</b> and <b>inclusion</b> - one grain lying entirely within another, seen from outside and from inside. The same fact, not two.</p>
+<b>Grain</b> - a phase-homogeneous, spatially connected region of EBSD points produced by segmentation. A phase change between neighbours is always a boundary. Orientation-based methods commonly require neighbouring orientations to agree within a threshold. There is no canonical grain definition, so that threshold is a convention. See <a href="Grains.html">Grains</a>.</p>
 <p>
-<b>Chain</b> - a run of boundary segments laid end to end between two junctions. <b>Junction</b> - a vertex where the number of meeting segments is anything other than two. <b>Triple point</b> - a junction where exactly three segments meet and they separate three distinct grains, so it is a strict subset of the junctions. See <a href="TriplePoints.html">Triple Points</a>.</p>
+<b>Grain boundary</b> - one segment between neighbouring EBSD points that belong to different grains. These atomic segments are stored in walk order.</p>
 <p>
-<b>KAM</b> - kernel average misorientation, the average orientation difference between a measurement and its neighbours. <b>GROD</b> - grain reference orientation deviation, the difference between a measurement and its own grain's mean. See <a href="EBSDKAM.html">KAM</a> and <a href="EBSDGROD.html">Mis2Mean / GROD</a>.</p>
+<b>Phase boundary</b> - a grain boundary whose two neighbouring grains have different phases. It is a query on grain boundaries, not a separate type.</p>
+<p>
+<b>Enclosure</b> - the relationship in which one grain lies entirely inside another. From outside, the containing grain has a hole; from inside, the contained grain is an inclusion. These are the same fact, and the hole is never empty because even a notIndexed patch is a grain.</p>
+<p>
+<b>Chain</b> - a maximal run of grain-boundary segments laid end to end. It runs from one junction to the next without passing through one. Every segment belongs to one chain, and the same two grains lie on its sides throughout.</p>
+<p>
+<b>Junction</b> - a vertex where the number of meeting boundary segments is not two. It includes outer-map endpoints and points where four segments cross.</p>
+<p>
+<b>Triple point</b> - a junction where exactly three segments meet and separate three distinct grains. It is a strict subset of junctions; three segments meeting at the scanned-area edge do not make a triple point. See <a href="TriplePoints.html">Triple Points</a>.</p>
+<p>
+<b>Closed chain</b> - a chain that ends where it began. A junction-free enclosed grain usually has one, but a chain may also leave a junction and return to that same junction. Closed therefore does not mean junction-free.</p>
+<p>
+<b>Gap</b> - a run of absent measurements within one scan line, often created by selecting one phase before rebuilding the grid. Grid assignment recovers its lattice positions; a gap is not a notIndexed measurement.</p>
+<p>
+<b>Hole in a scan grid</b> - a connected notIndexed area inside the region that was actually scanned. This is distinct from a gap and from a dummy cell.</p>
+<p>
+<b>Dummy cell</b> - a synthetic filler cell beyond the scanned edge that bounds the spatial decomposition. It has no id, never represents a measurement, and never becomes a grain.</p>
+<p>
+<b>Local deformation model</b> - the position correction used for gaps, holes, and dummy cells on a nonrigid scan grid. MTEX fits an ideal affine grid and interpolates measured local deviations into positions without measurements. See <a href="EBSDGrid.html">Scan Grids</a>.</p>
+<p>
+<b>KAM</b> - kernel average misorientation, the average orientation difference between a measurement and its neighbours. See <a href="EBSDKAM.html">KAM</a>.</p>
+<p>
+<b>GROD</b> - grain reference orientation deviation, the difference between a measurement and its grain's mean orientation. See <a href="EBSDGROD.html">Mis2Mean / GROD</a>.</p>
 <h2 id="6">Material response</h2>
 <p>
-<b>Slip system</b> - a lattice plane together with a direction in it, along which a crystal shears plastically. <b>Schmid factor</b> - the geometric factor relating applied stress to the shear stress resolved onto a slip system, between 0 and 0.5. See <a href="Plasticity.html">Plasticity</a>.</p>
+<b>Slip system</b> - a lattice plane together with a direction in that plane, along which a crystal shears plastically.</p>
 <p>
-<b>Taylor</b> and <b>Sachs</b> models - the assumptions that every grain undergoes the same strain, and that every grain feels the same stress. They bound the real behaviour from above and below, and are the plastic counterparts of the Voigt and Reuss bounds in <a href="Tensors.html">Tensors</a>.</p>
+<b>Schmid factor</b> - the geometric factor relating applied stress to the shear stress resolved onto a slip system. It lies between zero and 0.5. See <a href="Plasticity.html">Plasticity</a>.</p>
 <p>
-<b>GND</b> - geometrically necessary dislocations, the dislocation content implied by a gradient of orientation within a grain. See <a href="GND.html">GND</a>.</p>
-<h2 id="7">Next</h2>
-<p>The conventions behind these terms - Euler angles, frames, units and the direction a rotation acts in - are collected in <a href="NotationAndConventions.html">Notation and Conventions</a>.</p>
+<b>Taylor model</b> - the assumption that every grain undergoes the same strain. It is the plastic counterpart of the Voigt bound.</p>
+<p>
+<b>Sachs model</b> - the assumption that every grain feels the same stress. It is the plastic counterpart of the Reuss bound. Taylor and Sachs bound real behaviour from above and below. See <a href="Tensors.html">Tensors</a>.</p>
+<p>
+<b>GND</b> - geometrically necessary dislocations, the dislocation content required by a gradient of orientation within a grain. See <a href="GND.html">GND</a>.</p>
+<h2 id="7">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982, develops orientation distributions, crystallographic symmetry, and the standard texture terms.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data - Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733, derives the spatial cells, connectivity, grains, and boundaries used by MTEX.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>J. F. Nye, <a href="https://doi.org/10.1016/0001-6160(53)90054-6">Some Geometrical Relations in Dislocated Crystals</a>, <i>Acta Metallurgica</i> 1 (1953), 153--162, relates lattice curvature to the geometrically necessary dislocation tensor.</li>
+</ul>
+</div>
+<h2 id="8">Next</h2>
+<p>
+<a href="NotationAndConventions.html">Notation and Conventions</a> collects the choices behind these terms, including angle units, Euler conventions, frame direction, and the action of a rotation.</p>
 </div>
 </body>
 </html>

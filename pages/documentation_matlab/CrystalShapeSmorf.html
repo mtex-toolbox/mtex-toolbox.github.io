@@ -1,5 +1,5 @@
 ---
-title: "Defining Crystal Shapes with Smorf"
+title: 'Reconstructing a Crystal Habit with Smorf'
 
 sidebar: documentation_sidebar
 permalink: CrystalShapeSmorf.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Defining Crystal Shapes with Smorf</title>
+<title>Reconstructing a Crystal Habit with Smorf</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_CrystalShapeSmorf.m">
 </head>
@@ -24,72 +24,60 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>
-<a href="CrystalShapes.html">Crystal Shapes</a> shows how a shape is built from face normals and their distances from the origin. Finding those distances for a real mineral is fiddly work by hand, and it is much easier done with a drawing tool that redraws the crystal as the numbers change. This page walks through it on the olivine shape published by Welsch et al. (2013, J. Pet.).</p>
+<a href="CrystalShapes.html">Crystal Shapes</a> explains how MTEX builds a polyhedron from face normals. This page shows how to estimate the relative face distances from a published drawing with the <a href="https://www.smorf.nl/draw.php">Smorf crystal drawing tool</a>, then transfer the result to MTEX.</p>
+<p>The example reproduces the olivine growth form in <a href="https://doi.org/10.1093/petrology/egs077">Welsch et al. (2013)</a>.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_1.png" %}
 </center>
 </p>
-<h2 id="2">The Drawing Tool</h2>
-<p>The crystal drawing tool of the <a href="https://smorf.nl/draw.php">Smorf website</a> is a free alternative to the commercial packages, made available by Mark Holtkamp.</p>
-<h2 id="3">Crystal Parameters</h2>
-<p>Select the point group and enter the cell parameters under celldata - the ones from your own EBSD file, if you have one. For the interpretation of the face distance choose <code class="language-plaintext highlighter-rouge">Crystallographic (Kristall2000)</code>, which is the convention MTEX follows; the other choices scale the distances differently and the numbers would not carry over.</p>
+<p>Notice the broad (010) and (110) faces, the narrow (001) cap and the bevels formed by the other three crystal forms. These relative face sizes are the target of the reconstruction.</p>
+<p>A <b>crystal habit</b> is the characteristic external shape of a crystal and the development of its forms. The model reconstructed here is an idealized habit, not the measured three-dimensional morphology of an EBSD grain. Its fitted distances are geometric parameters, not growth rates or surface energies.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Match the Symmetry and Unit Cell</h2>
+<p>Smorf is a free browser-based drawing tool maintained by Mark Holtkamp. Select the point group and enter the unit-cell lengths and angles from the source you want to reproduce. For an imported phase, these values are available from its crystal symmetry.</p>
+<p>Choose <code class="language-plaintext highlighter-rouge">Crystallographic (Kristall2000)</code> for the face-distance interpretation. This is the convention that transfers to the MTEX construction below; the other choices scale the face normals differently.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_2.png" %}
 </center>
 </p>
-<p>The same symmetry in MTEX:</p>
+<p>The screenshot pairs point group <code class="language-plaintext highlighter-rouge">mmm</code> with the three forsterite lattice parameters and highlights the required distance convention. The same crystal symmetry in MTEX is</p>
 {% highlight matlab %}
-cs = crystalSymmetry('mmm', [4.756 10.207 5.98], 'mineral', 'Forsterite')
+cs = crystalSymmetry('mmm',[4.756 10.207 5.98], ...
+  'mineral','Forsterite');
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  mineral : Forsterite
-  symmetry: mmm       
-  elements: 8         
-  a, b, c : 4.8, 10, 6
-{% endhighlight %}
-<h2 id="4">The Face Normals</h2>
-<p>Building a complicated shape face by face is tedious, so start from the views along \(\vec a\), \(\vec b\) and \(\vec c\) and enter every face visible in the published model, each at distance 1.</p>
+<h2 id="3">Enter the Crystal Forms</h2>
+<p>A crystal form is the set of faces generated from one face by the point group. Enter one representative Miller index for every form visible in views along \(\vec a\), \(\vec b\) and \(\vec c\). Start every form at distance 1 so that differences in the first drawing come only from the lattice metric and symmetry.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_3.png" %}
 </center>
 </p>
-<p>In MTEX the same set of faces is a list of <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">&lt;Miller.Miller.html Miller&gt;</code></a> indices.</p>
+<p>The slide sets the published views along \(\vec a\), \(\vec b\) and \(\vec c\) beside the Smorf drawing of the same views, with the interfacial angles to compare against. The equal-distance drawing in the previous screenshot is only a starting block: at distance 1 the (010), (001) and (110) forms do not reach the surface at all. The same six plane normals are a list of <a href="Miller.Miller.html"><code class="language-plaintext highlighter-rouge">Miller</code></a> indices in MTEX.</p>
 {% highlight matlab %}
-N = Miller({0,1,0},{0,0,1},{0,2,1},{1,1,0},{1,0,1},{1,2,0},cs)
+N = Miller({0,1,0},{0,0,1},{0,2,1}, ...
+  {1,1,0},{1,0,1},{1,2,0},cs);
 {% endhighlight %}
-
-{% highlight plaintext %}
-N = Miller (Forsterite)
- size: 1 × 6
-  h k l
-  0 1 0
-  0 0 1
-  0 2 1
-  1 1 0
-  1 0 1
-  1 2 0
+<h2 id="4">Tune the Face Distances</h2>
+<p>Change one distance at a time and redraw the crystal. A larger distance moves that form away from the origin, so the neighbouring forms cut its faces back and they shrink, until the form can disappear from the polyhedron altogether. Steps of 0.05 are small enough for this example.</p>
+<p>Match the largest faces and the overall aspect ratio first. Then tune the smaller bevels. Smorf does not redraw automatically, so press <i>Draw crystal</i> after each change.</p>
+{% highlight matlab %}
+dist = [0.4, 1.3, 1.4, 1.05, 1.85, 1.35];
 {% endhighlight %}
-<h2 id="5">Adjusting the Distances</h2>
-<p>Now change the distance of one face at a time - steps of 0.05 work well. A larger distance moves the face away from the origin, reducing its influence on the shape until it may stop cutting the crystal altogether. Fix the largest faces first and keep the overall aspect ratio while moving the others. The drawing does not update by itself; press <i>Draw crystal</i> after each change, and compare against the published crystal until they match.</p>
 <p>
 <center>
 {% include inline_image.html file="smorf_4.png" %}
 </center>
 </p>
-<p>Then note the indices and their distances.</p>
+<p>The tuned drawing now has the broad (010) and (110) sides, the small (001) cap and the bevels of the other three forms seen in the source figure. Only relative distances matter: multiplying every entry of <code class="language-plaintext highlighter-rouge">dist</code> by the same number leaves the normalized shape unchanged.</p>
+<h2 id="6">Transfer the Distances to MTEX</h2>
+<p> <a href="crystalShape.crystalShape.html"><code class="language-plaintext highlighter-rouge">crystalShape</code></a> describes each limiting plane by a normal \(\mathbf{n}\) and the half-space \(\mathbf{x}\cdot\mathbf{n}\leq 1\). A longer normal therefore moves its plane inward. To preserve the distances entered in Smorf, divide each Miller normal by its corresponding distance:</p>
+<p>\[\mathbf{n}_{\mathrm{MTEX}} = \mathbf{n}_{hkl} / d_{\mathrm{Smorf}}.\]</p>
 {% highlight matlab %}
-dist = [0.4, 1.3, 1.4, 1.05, 1.85, 1.35];
-{% endhighlight %}
-<p> <a href="crystalShape.crystalShape.html"><code class="language-plaintext highlighter-rouge">crystalShape</code></a> takes normals whose length encodes the distance, so the two lists are combined by dividing.</p>
-{% highlight matlab %}
-% this defines the crystal shape in MTEX
-cS = crystalShape( N ./ dist)
+cS = crystalShape(N ./ dist)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -100,27 +88,53 @@ cS = crystalShape
 {% endhighlight %}
 
 {% highlight matlab %}
-% plot the crystal shape
-plot(cS,'colored')
+plot(cS,'colored');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="CrystalShapeSmorf_01.png" %}
 </center>
-<p>The habit of the published crystal is reproduced. <code class="language-plaintext highlighter-rouge">cS.faceArea</code> says how much of the surface each face got: the two \((010)\) faces are the largest individual ones at 0.139, which is what makes the crystal tabular, while \((001)\) came out as a small cap of 0.02 and the four faces each of \(\{021\}\) and \(\{110\}\) carry most of the total area.</p>
+<p>The MTEX figure reproduces the published habit. The (010) and (110) faces form the broad prism sides, the (021) faces terminate the ends around the small (001) caps, and the narrow (120) and (101) faces truncate the remaining edges and corners.</p>
+<h2 id="9">Check the Developed Faces</h2>
+<p>The constructor applies the point group to each input normal. The multiplicity is the number of symmetry-related faces in a form. The table separates the area of one face from the total area of its complete form.</p>
 {% highlight matlab %}
-max(cS.faceArea)
-
-%
-% The Smorf mineral database holds many more morphologies, and each of them
-% transfers to MTEX in exactly these two lines.
+multiplicity = N.multiplicity;
+areaPerFace = zeros(size(multiplicity));
+formArea = zeros(size(multiplicity));
+for k = 1:length(N)
+  areas = cS(N(k).symmetrise('unique')).faceArea;
+  areaPerFace(k) = mean(areas);
+  formArea(k) = sum(areas);
+end
+formName = ['(010)';'(001)';'(021)';'(110)';'(101)';'(120)'];
+formSummary = table(formName,dist(:),multiplicity,areaPerFace,formArea, ...
+  'VariableNames',{'Form','Distance','Multiplicity','AreaPerFace','FormArea'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.1390
+formSummary =
+  6×5 table
+    Form     Distance    Multiplicity    AreaPerFace    FormArea
+    _____    ________    ____________    ___________    ________
+    (010)       0.4           2            0.13897       0.27793
+    (001)       1.3           2           0.019766      0.039533
+    (021)       1.4           4             0.1384       0.55362
+    (110)      1.05           4             0.1346       0.53841
+    (101)      1.85           4           0.033199       0.13279
+    (120)      1.35           4           0.043238       0.17295
 {% endhighlight %}
-<h2 id="9">Next</h2>
-<p>What the shapes are used for - orientations on a map, twinning, slip systems - is <a href="CrystalShapes.html">Crystal Shapes</a>.</p>
+<p>The six input forms generate 20 faces. An individual (010) face is the largest at 0.13897, just above an individual (021) face at 0.13840. The four (021) and four (110) faces have the largest total form areas, 0.55362 and 0.53841. The two (001) caps are the smallest at 0.01977 each.</p>
+<p>These areas belong to MTEX's normalized polyhedron and have no physical unit. Use them to compare relative face development within this shape.</p>
+<h2 id="11">Further Reading</h2>
+<div>
+<ul>
+<li>
+<a href="https://dictionary.iucr.org/Habit">IUCr Online Dictionary of Crystallography: Habit</a> defines habit and distinguishes face development.</li>
+<li>B. Welsch, F. Faure, V. Famin, A. Baronnet and P. Bach&egrave;lery, <a href="https://doi.org/10.1093/petrology/egs077">Dendritic Crystallization: A Single Process for all the Textures of Olivine in Basalts?</a>, <i>Journal of Petrology</i> 54 (2013), 539--574, is the source of the target growth form.</li>
+<li>J. Enderlein, <a href="https://library.wolfram.com/infocenter/Articles/3279">A Package for Displaying Crystal Morphology</a>, <i>The Mathematica Journal</i> 7(1) (1997), 72--78, describes the geometric construction underlying <code class="language-plaintext highlighter-rouge">crystalShape</code>.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>Return to <a href="CrystalShapes.html">Crystal Shapes</a> to rotate, scale and place this idealized habit as an orientation glyph. See <a href="CrystalDirections.html">Miller Indices</a> for the distinction between plane normals and crystal directions, and <a href="CrystalSymmetries.html">Crystal Symmetries</a> for point groups and unit-cell definitions.</p>
 </div>
 </body>
 </html>

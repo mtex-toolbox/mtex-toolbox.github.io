@@ -1,5 +1,5 @@
 ---
-title: "Inverse Pole Figures"
+title: 'Inverse Pole Figures of an ODF'
 
 sidebar: documentation_sidebar
 permalink: ODFInversePoleFigure.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Inverse Pole Figures</title>
+<title>Inverse Pole Figures of an ODF</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_ODFInversePoleFigure.m">
 </head>
@@ -23,11 +23,18 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<h2 id="1">Theory</h2>
-<p>For an orientation distribution function (ODF) \(f \colon \mathrm{SO}(3) \to R\) the inverse pole density function \(P_{\vec r}\) with respect to a fixed specimen direction \(\vec r\) is spherical function defined as the integral</p>
-<p>\[ P_{\vec r}(\vec h) = \int_{g \vec h = \vec r} f(g) dg \]</p>
-<p>The pole density function \(P_{\vec r}(\vec h)\) evaluated at a crystal direction \(\vec h\) can be interpreted as the volume percentage of crystals with the crystal lattice planes \(\vec h\) being normal to the specimen direction \(\vec r\).</p>
-<p>In order to illustrate the concept of inverse pole figures at an example let us first define a model ODF to be plotted later on.</p>
+<p>A <a href="ODFPoleFigure.html">pole figure</a> fixes a crystal direction and asks where it points in the specimen. An <b>inverse pole figure</b> fixes a specimen direction \(\vec r\) and asks which crystal directions \(\vec h\) point along it.</p>
+<p>This page assumes the ODF and multiples-of-a-random-distribution (mrd) normalization from <a href="ODFTheory.html">ODF Theory</a>. Crystal directions are introduced in <a href="CrystalDirections.html">Crystal Directions</a>. The projection itself is introduced in <a href="SphericalProjections.html">Spherical Projections</a>. <a href="OrientationInversePoleFigure.html">Inverse Pole Figures</a> builds the same construction first for individual orientations rather than an ODF.</p>
+<p>Formally, the inverse pole density is the ODF integrated along every orientation that maps \(\vec h\) onto \(\vec r\),</p>
+<p>\[ P_{\vec r}(\vec h) = \int_{g \vec h = \vec r} f(g)\, \mathrm{d}g. \]</p>
+<p>These orientations form an <a href="OrientationFibre.html">orientation fibre</a>. The plot therefore loses the rotation about the aligned direction. Here <i>inverse</i> means that the specimen and crystal directions exchange roles; it does not mean reconstructing or numerically inverting the ODF.</p>
+<p>The result is a density in mrd, not a percentage at one point. Inverse pole figures are natural when one specimen direction carries the physical question: a sheet normal, a compression axis, or an EBSD map surface normal.</p>
+<p>A <b>plotting convention</b> states how a reference frame is laid out on screen. The following convention draws specimen Y upward and specimen X to the right. It does not rotate the specimen or change the ODF.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">A Model Texture to Look At</h2>
+<p>This is the same three-component texture as on the pole-figure page. It combines two localized components with a fibre component that aligns the crystal c-axis with specimen X.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
 mod1 = orientation.byEuler(90*degree,40*degree,110*degree,'ZYZ',cs);
@@ -35,67 +42,84 @@ mod2 = orientation.byEuler(50*degree,30*degree,-30*degree,'ZYZ',cs);
 
 odf = 0.2*unimodalODF(mod1) ...
   + 0.3*unimodalODF(mod2) ...
-  + 0.5*fibreODF(Miller(0,0,1,cs),vector3d(1,0,0),'halfwidth',10*degree)
+  + 0.5*fibreODF(Miller(0,0,1,cs),vector3d.X,...
+  'halfwidth',10*degree);
 
-%odf = 0.2*unimodalODF(mod2)
+% convert once so repeated Radon transforms reuse Fourier coefficients
+odf = SO3FunHarmonic(odf,'bandwidth',32);
+{% endhighlight %}
+<h2 id="3">Plotting Specimen Directions</h2>
+<p> <a href="SO3Fun.plotIPDF.html"><code class="language-plaintext highlighter-rouge">plotIPDF</code></a> works like <code class="language-plaintext highlighter-rouge">plotPDF</code>, except that its input directions belong to the specimen frame. The coordinates inside each panel are crystal directions. This frame reversal is the point of an inverse pole figure.</p>
+{% highlight matlab %}
+plotIPDF(odf,[vector3d.X,vector3d.Z]);
+mtexColorMap LaboTeX;
+mtexColorbar('title','mrd');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ODFInversePoleFigure_01.png" %}
+</center>
+<p>The fibre component puts the c-axis along X, so the \((0001)\) corner is the maximum of the X inverse pole figure. The same corner is almost empty for Z. One inverse pole figure still does not determine full orientations, because every value collects an entire orientation fibre.</p>
+<h2 id="5">Values Rather Than Colours</h2>
+<p> <a href="SO3Fun.calcPDF.html"><code class="language-plaintext highlighter-rouge">calcPDF</code></a> with an empty crystal-direction argument returns an inverse pole density function. Its printed summary identifies the returned spherical-function representation and crystal symmetry.</p>
+{% highlight matlab %}
+ipdfX = calcPDF(odf,[],vector3d.X)
+ipdfZ = calcPDF(odf,[],vector3d.Z);
+
+densitySummary = [ipdfX.eval(cs.cAxis),ipdfZ.eval(cs.cAxis); ...
+  max(ipdfX),max(ipdfZ)]
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunComposition (321 → y↓→x)
+ipdfX = S2FunHarmonicSym (321)
+  bandwidth: 25
  
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 2 orientations
- 
-  Bunge Euler angles in degree
-  phi1    Phi   phi2 weight
-   180     40     20    0.2
-   140     30    240    0.3
- 
-  fibre component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (0001) || 1,0,0
-  weight: 0.5
+densitySummary =
+   22.9596    0.0208
+   22.9596    5.1588
 {% endhighlight %}
-<p>and lets switch to the LaboTex colormap</p>
+<p>The first row is the density at \((0001)\): about 23 mrd for X and 0.021 mrd for Z. The second row contains the maxima. For X the c-axis corner is itself the maximum; for Z the maximum is about 5.2 mrd elsewhere in the sector. An inverse pole figure answers which crystal direction prefers one chosen specimen direction.</p>
+<h2 id="7">Antipodal Symmetry</h2>
+<p>The <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag identifies a crystal direction with its opposite. It replaces \(P_{\vec r}(\vec h)\) by the average of its values at \(\vec h\) and \(-\vec h\). This halves the region that has to be drawn, exactly as for <a href="VectorsAxes.html">axes</a>. This is a modelling choice, not a display option. Use it only when the measurement or model cannot distinguish the directions.</p>
 {% highlight matlab %}
-setMTEXpref('defaultColorMap',LaboTeXColorMap);
-
-% Plotting inverse pole figures is analogously to plotting pole figures
-% with the only difference that you have to use the command
-% <SO3Fun.plotIPDF.html plotIPDF> and you to specify specimen directions and
-% not crystal directions.
-
-plotIPDF(odf,[xvector,zvector])
+plotIPDF(odf,[vector3d.X,vector3d.Z],'antipodal');
+mtexColorMap LaboTeX;
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ODFInversePoleFigure_01.png" %}
-</center>
-<p>Imposing antipodal symmetry to the inverse pole figures halves the fundamental region</p>
-{% highlight matlab %}
-plotIPDF(odf,[xvector,zvector],'antipodal')
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFInversePoleFigure_02.png" %}
 </center>
-<p>By default MTEX always plots only the fundamental region with respect to the crystal symmetry. In order to plot the complete inverse pole figure you have to use the option <b>complete</b>.</p>
+<p>Notice both changes: the sector is smaller, and its colours can differ because opposite-direction densities have been averaged.</p>
+<h2 id="9">The Complete Sphere</h2>
+<p>By default MTEX draws only the <a href="FundamentalSector.html">fundamental sector</a>. Every point outside it is a symmetry-equivalent copy of one inside. The <code class="language-plaintext highlighter-rouge">'complete'</code> flag expands those copies, while <code class="language-plaintext highlighter-rouge">'upper'</code> retains only the upper hemisphere. Neither flag changes the density.</p>
 {% highlight matlab %}
-plotIPDF(odf,[xvector,zvector],'complete','upper')
+plotIPDF(odf,[vector3d.X,vector3d.Z],'complete','upper');
+mtexColorMap LaboTeX;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFInversePoleFigure_03.png" %}
 </center>
-<p>This illustrates also more clearly the effect of the antipodal symmetry</p>
+<p>The threefold symmetry of point group 32 is now visible as three repeats around the c-axis. They are symmetry-equivalent appearances of the same texture features, not three additional components.</p>
+<h2 id="11">Separating Symmetrization from the Displayed Region</h2>
+<p>Keep the same complete upper hemisphere and impose antipodal symmetry. This isolates the change in density from the change in plotted region.</p>
 {% highlight matlab %}
-plotIPDF(odf,[xvector,zvector],'complete','antipodal','upper')
+plotIPDF(odf,[vector3d.X,vector3d.Z],...
+  'complete','antipodal','upper');
+mtexColorMap LaboTeX;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFInversePoleFigure_04.png" %}
 </center>
-<p>Finally, lets set back the default colormap.</p>
-{% highlight matlab %}
-setMTEXpref('defaultColorMap',WhiteJetColorMap);
-{% endhighlight %}
+<p>The X plot gains three faint rim lobes from directions whose opposites were in the lower hemisphere. The localized Z lobes become broader averaged features. These changes come from the antipodal average, not from displaying a different part of the sphere.</p>
+<p>An inverse pole density of an ODF is not an EBSD colour key. A colour key assigns colours to the same crystal-direction sector but does not itself show how much material lies there.</p>
+<h2 id="13">Further Reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982. It develops pole figures, inverse pole figures, and ODFs together.</li>
+<li>D. Chateigner, L. Lutterotti, and M. Morales, <a href="https://doi.org/10.1107/97809553602060000968">Quantitative texture analysis and combined analysis</a>, <i>International Tables for Crystallography H</i>, ch. 5.3, 2019. It defines inverse pole densities and illustrates the symmetry-reduced sectors.</li>
+<li>ASTM International, <a href="https://doi.org/10.1520/E0081-96R24">ASTM E81-96(2024): Standard Test Method for Preparing Quantitative Pole Figures</a>. It distinguishes measured pole figures from calculated pole and inverse pole figures.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>Colouring an EBSD map by where each orientation falls in this sector is <a href="EBSDIPFMap.html">IPF Maps</a>. The other projection is <a href="ODFPoleFigure.html">Pole Figures</a>. Continue to the unprojected slices in <a href="EulerAngleSections.html">Euler Angle Sections</a> and <a href="SigmaSections.html">Sigma Sections</a>. If the ODF must first be reconstructed from diffraction data, continue to <a href="PoleFigure2ODF.html">ODF Reconstruction</a>.</p>
 </div>
 </body>
 </html>

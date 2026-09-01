@@ -1,5 +1,5 @@
 ---
-title: "Tensor Visualization"
+title: 'Tensor Visualization'
 
 sidebar: documentation_sidebar
 permalink: TensorVisualisation.html
@@ -22,21 +22,28 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A tensor stores a directional material property, but its component table rarely gives an immediate picture of the anisotropy. This page shows how MTEX turns a tensor into a scalar function on the sphere and how to read the resulting plots.</p>
+<p>This page assumes the tensor ranks and physical classes introduced in <a href="TensorDefinition.html">Defining Tensorial Properties</a>. Read <a href="TensorArithmetics.html">Tensor Arithmetic</a> first if tensor contraction or eigenvectors are new.</p>
+<p>A reference frame is the coordinate system in which the tensor is expressed. The plotting convention lays that frame out on screen; it does not rotate the tensor. See <a href="CrystalReferenceSystem.html">Crystal Reference System</a> for the relation between crystal axes and Cartesian axes.</p>
 <!--/introduction-->
-<p>A tensor of rank two or higher has too many components to be read off a list. What can be looked at instead is its <b>directional magnitude</b> - the scalar that the tensor produces when it is contracted with one and the same direction in all of its slots. For a tensor \(T\) of rank \(r\) this is</p>
-<p>\[ Q(\vec x) = T_{i_1 \ldots i_r}\, x_{i_1} \cdots x_{i_r}, \qquad <code class="language-plaintext highlighter-rouge">\vec x</code> = 1, \]</p>
-<p>a function on the sphere, i.e. an <a href="S2FunConcept.html">S2Fun</a>, and plotting it is what the <code class="language-plaintext highlighter-rouge">plot</code> command of a tensor does by default.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
 setMTEXpref('defaultColorMap',blue2redColorMap);
-
-cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],'mineral','Olivine');
-C = stiffnessTensor.load(fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'),cs)
+{% endhighlight %}
+<h2 id="2">Plotting the directional magnitude</h2>
+<p>The simplest tensor plot assigns one scalar to every unit direction. MTEX calls this scalar the <b>directional magnitude</b>. <a href="tensor.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> draws it as a spherical function.</p>
+<p>The example is the stiffness tensor of olivine measured by Abramson et al. (1997). Its printed summary records the rank, unit, crystal frame, and coefficients that the plot below represents.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('mmm',[4.7646 10.2296 5.9942],...
+  'mineral','Olivine');
+C = stiffnessTensor.load(...
+  fullfile(mtexDataPath,'tensor','Olivine1997PC.GPa'),cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
 C = stiffnessTensor (Olivine)
   unit: GPa              
-  rank: 4 (3 x 3 x 3 x 3)
+  rank: 4 (3 × 3 × 3 × 3)
  
   tensor in Voigt matrix representation:
  320.5  68.2  71.6     0     0     0
@@ -48,15 +55,16 @@ C = stiffnessTensor (Olivine)
 {% endhighlight %}
 
 {% highlight matlab %}
-plot(C,'complete','upper')
-
-mtexColorbar
+plot(C,'complete','upper');
+mtexColorbar('title','directional magnitude in GPa');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TensorVisualisation_01.png" %}
 </center>
-<p>In particular, all of the <a href="S2FunPlotting.html">spherical plotting options</a> apply - filled contours, contour lines, 3d plots, as well as any <a href="SphericalProjections.html">spherical projection</a>.</p>
-<p>Furthermore, we can access this directional function directly by</p>
+<p>The red maximum lies along \([100]\), while the blue minimum lies along \([010]\). The repeated pattern reflects the orthorhombic crystal symmetry. The options <code class="language-plaintext highlighter-rouge">'complete'</code> and <code class="language-plaintext highlighter-rouge">'upper'</code> show the complete upper hemisphere instead of only the symmetry-reduced sector.</p>
+<p>This plot shows the self-contraction of <code class="language-plaintext highlighter-rouge">C</code>. It is not Young's modulus or a complete picture of the stiffness tensor. Use <a href="stiffnessTensor.YoungsModulus.html"><code class="language-plaintext highlighter-rouge">YoungsModulus</code></a> when that physical property is the question.</p>
+<h2 id="5">Inspecting the spherical function</h2>
+<p> <a href="tensor.directionalMagnitude.html"><code class="language-plaintext highlighter-rouge">directionalMagnitude</code></a> returns the spherical function used by <code class="language-plaintext highlighter-rouge">plot</code>. The object display identifies its representation, symmetry, bandwidth, and antipodal character.</p>
 {% highlight matlab %}
 sF = C.directionalMagnitude
 {% endhighlight %}
@@ -66,70 +74,84 @@ sF = S2FunHarmonicSym (Olivine)
   bandwidth: 4
   antipodal: true
 {% endhighlight %}
-<p>and use it to derive e.g. the location of the maximum directional magnitude</p>
+<p>Spherical-function operations can now be applied directly. For example, <a href="S2Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> finds the largest value and its direction.</p>
 {% highlight matlab %}
-[v,pos] = max(sF)
+[maxValue,maxDirection] = max(sF);
+maxDirection = round(maxDirection);
+maxValue
+maxDirection
 {% endhighlight %}
 
 {% highlight plaintext %}
-v =
+maxValue =
   320.5000
  
-pos = Miller (Olivine)
+maxDirection = Miller (Olivine)
  antipodal: true
-       h      k      l
-  4.7646 0.0013 0.0011
+  h k l
+  1 0 0
 {% endhighlight %}
-<h2 id="5">Rank two tensors and their principal axes</h2>
-<p>For a symmetric rank two tensor the directional magnitude is the quadratic form \(\vec x^T T \vec x\), and its extrema are attained along the eigenvectors. Hence the plot shows the principal axes directly.</p>
+<p>The output gives a maximum of 320.5 GPa along \([100]\), which is the red direction in the first figure. The <a href="S2FunPlotting.html">spherical plotting options</a> and every <a href="SphericalProjections.html">spherical projection</a> also apply to <code class="language-plaintext highlighter-rouge">sF</code>.</p>
+<h2 id="8">Rank-two tensors and principal axes</h2>
+<p>For a symmetric rank-two tensor, the directional magnitude is a quadratic form. Its extrema lie along the principal axes, which are the eigenvectors returned by <a href="tensor.eig.html"><code class="language-plaintext highlighter-rouge">eig</code></a>.</p>
 {% highlight matlab %}
-T = tensor(diag([3 1 -1]),'rank',2,plottingConvention('y↑→x'))
+T = tensor(diag([3 1 -1]),'rank',2);
+[e,lambda] = eig(T)
+
+plot(T,'complete','upper');
+mtexColorbar('title','directional magnitude');
 {% endhighlight %}
 
 {% highlight plaintext %}
-T = tensor (y↑→x)
-  rank: 2 (3 x 3)
- 
-  3  0  0
-  0  1  0
-  0  0 -1
+e = vector3d (y↑→x)
+ size: 3 × 1
+ antipodal: true
+  x y z
+  0 0 1
+  0 1 0
+  1 0 0
+lambda =
+    -1
+     1
+     3
 {% endhighlight %}
-
-{% highlight matlab %}
-plot(T,'complete','upper')
-mtexColorbar
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TensorVisualisation_02.png" %}
 </center>
-<p>the principle axes of a symmetric rank two tensor are computed by the command <a href="tensor.eig.html"><code class="language-plaintext highlighter-rouge">eig</code></a>
-</p>
-{% highlight matlab %}
-[e,lambda] = eig(T);
-
-hold on
-plot(e,'plane','linewidth',2,'antipodal')
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TensorVisualisation_03.png" %}
-</center>
-<h2 id="8">Sections</h2>
-<p>Some derived quantities are not functions of a single direction. The Poisson ratio and the shear modulus, for instance, depend on two directions, and it is only meaningful to evaluate them for directions perpendicular to the first one. Such functions are best drawn as a <a href="S2Fun.plotSection.html">section</a> along the corresponding great circle - see <a href="AnisotropicTheory.html">the elasticity chapter</a>.</p>
+<p>The labelled z, y, and x directions are the extrema of the coloured quadratic form. Their printed order matches the eigenvalues -1, 1, and 3. Negative values are colours here, not negative radii, so their sign remains visible.</p>
+<h2 id="10">Properties that depend on two directions</h2>
+<p>Not every tensor-derived quantity is a function of one direction. Poisson's ratio depends on a loading direction and a transverse direction. The transverse direction must be perpendicular to the loading direction.</p>
+<p>Fix the loading direction <code class="language-plaintext highlighter-rouge">p</code> along z. The admissible transverse directions then form the great circle normal to <code class="language-plaintext highlighter-rouge">p</code>, so <a href="S2Fun.plotSection.html"><code class="language-plaintext highlighter-rouge">plotSection</code></a> is the natural display.</p>
 {% highlight matlab %}
 p = vector3d.Z;
+nu = C.PoissonRatio(p);
 
-plotSection(C.PoissonRatio(p),p,'color','interp','linewidth',5)
-axis off
-mtexColorbar
+plotSection(nu,p,'color','interp','linewidth',5);
+axis off;
+mtexColorbar('title','Poisson''s ratio');
 {% endhighlight %}
-<center>
-{% include inline_image.html file="TensorVisualisation_04.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="TensorVisualisation_03.png" %}
 </center>
-<h2 id="9">Specialized plots</h2>
-<p>Beyond the directional magnitude there are visualizations that only make sense for one particular kind of tensor - wave velocities and their polarizations for the <a href="WaveVelocities.html">elasticity tensor</a>, the <a href="BirefringenceDemo.html">birefringence</a> of the refractive index tensor, or the <a href="PiezoElectricity.html">piezoelectric</a> modulus. Each is described in its own chapter.</p>
+<p>The closed curve is only the admissible great circle, not the whole sphere. Its changing radius and colour show that the transverse response varies as the transverse direction turns around z. <a href="AnisotropicTheory.html">Anisotropic Elasticity</a> develops Poisson's ratio, shear modulus, and Young's modulus from the compliance tensor.</p>
+<h2 id="12">Specialized plots</h2>
+<p>Physical tensor classes provide plots tailored to the property they represent. <a href="WaveVelocities.html">Wave Velocities</a> plots elastic-wave speed and polarization. <a href="BirefringenceDemo.html">Birefringence</a> plots the optical response, and <a href="PiezoElectricity.html">Piezo Electricity</a> plots a signed third-rank response.</p>
+<p>Continue with <a href="TensorAverage.html">Tensor Averages</a> to combine a single-crystal tensor with measured orientations or an ODF.</p>
+<h2 id="13">The maths behind directional magnitude</h2>
+<p>For a rank-\(r\) tensor \(T\), MTEX contracts the same unit direction into every tensor slot:</p>
+<p>\[ Q(\vec x) = T_{i_1 \ldots i_r}\, x_{i_1} \cdots x_{i_r}, \qquad <code class="language-plaintext highlighter-rouge">\vec x</code> = 1. \]</p>
+<p>This produces an <a href="S2FunConcept.html">S2Fun</a>. Even-rank tensors satisfy \(Q(-\vec x)=Q(\vec x)\), while odd-rank tensors reverse sign.</p>
+<p>Repeating the same direction also means that <code class="language-plaintext highlighter-rouge">Q</code> contains only the fully symmetric part of a general tensor. It is therefore a useful view, but it cannot encode every component of a higher-rank tensor.</p>
+<h2 id="14">Further reading</h2>
+<div>
+<ul>
+<li>J. F. Nye, <a href="https://search.worldcat.org/title/11114089">Physical Properties of Crystals: Their Representation by Tensors and Matrices</a>, Oxford University Press, 1985, develops principal axes and tensor representation surfaces.</li>
+<li>A. Marmier et al., <a href="https://doi.org/10.1016/j.cpc.2010.08.033">ElAM: A computer program for the analysis and representation of anisotropic elastic properties</a>, <i>Computer Physics Communications</i> 181, 2102-2115, 2010, compares three-dimensional property surfaces with planar sections.</li>
+<li>E. H. Abramson et al., <a href="https://doi.org/10.1029/97JB00682">The elastic constants of San Carlos olivine to 17 GPa</a>, <i>Journal of Geophysical Research</i> 102, 12253-12263, 1997, is the source of the olivine example.</li>
+</ul>
+</div>
 {% highlight matlab %}
-setMTEXpref('defaultColorMap',WhiteJetColorMap)
+setMTEXpref('defaultColorMap',WhiteJetColorMap);
 {% endhighlight %}
 </div>
 </body>

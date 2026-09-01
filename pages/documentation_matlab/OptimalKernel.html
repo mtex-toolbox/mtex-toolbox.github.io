@@ -1,5 +1,5 @@
 ---
-title: "Optimal Kernel Selection"
+title: 'Optimal Kernel Selection'
 
 sidebar: documentation_sidebar
 permalink: OptimalKernel.html
@@ -23,120 +23,218 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>
+<a href="DensityEstimation.html">Density Estimation</a> showed that kernel width decides which features survive smoothing. A width that is too small leaves oscillations and sharp peaks at individual observations. A width that is too large erases genuine features of the unknown density.</p>
+<p>There is no universally optimal halfwidth. The useful value depends on both the number of independent observations and the smoothness of the unknown density. This page compares the three selection methods provided by <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> and shows how to check their choices against a known model.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>In the section <a href="DensityEstimation.html">density estimation</a> we have seen that the correct choice of the kernel halfwidth is essential for creating a good match between the true density function and the reconstructed density function. If the halfwidth is set too small the reconstructed density function is usually oscillating and the individual sampling points are visible as sharp peaks. If the halfwidth is too large the resulting density function is usually too smooth and does not reproduce the features of the original density function.</p>
-<p>Finding an optimal kernel halfwidth is a hard problem as the optimal kernel halfwidth depends not only on the number of sampling points but also on the smoothness of the true but unknown density function. MTEX offers several options set by flags during the kernel calculation operation. A very conservative choice for the kernel halfwidth that takes into account only the number of sampling points is implemented in MTEX with the flag <code class="language-plaintext highlighter-rouge">'magicRule'</code>. The flag <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> considers both the number of sampling points and the variance of the sampling points as an estimate of the smoothness of the true density function. The most advanced (and default) method for estimating the optimal kernel halfwidth is <a href="orientation.KLCV.html">Kullback Leibler cross validation</a>. This method tests different kernel half-widths on a subset of the random sample and selects the halfwidth which best reproduces the omitted points of the random sample.</p>
-<p>In order to demonstrate this functionality let's start with the following orientation density function</p>
+<h2 id="2">Build a model with several kinds of structure</h2>
+<p>The original example described the following crystal symmetry as cubic. Point group 321 is trigonal, so the code and its resulting fundamental region must be read as a trigonal example.</p>
 {% highlight matlab %}
-% cubic crystal symmetry
 cs = crystalSymmetry('321');
-
-% build a density function by combining a uniform texture with two
-% predefined texture components
-odf = 0.25*uniformODF(cs) + ...
-  0.25 * unimodalODF(orientation.byEuler([35,45,0]*degree,cs)) + ...
-  0.5 * fibreODF(Miller(7,-1,10,cs),vector3d(7,-5,11),'halfwidth',10*degree);
-
-% plot the density function as six sigma sections
-plot(odf,'sections',6,'silent','sigma')
-mtexColorbar
 {% endhighlight %}
-<center>
+<p>Combine a uniform background, one localized component, and one fibre. Their coefficients sum to one, so <code class="language-plaintext highlighter-rouge">modelODF</code> remains normalized.</p>
+{% highlight matlab %}
+modelODF = 0.25 * uniformODF(cs) + ...
+  0.25 * unimodalODF(...
+  orientation.byEuler([35,45,0]*degree,cs)) + ...
+  0.5 * fibreODF(Miller(7,-1,10,cs),vector3d(7,-5,11),...
+  'halfwidth',10*degree);
+
+plot(modelODF,'sections',6,'silent','sigma');
+mtexColorbar('title','mrd');
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="OptimalKernel_01.png" %}
 </center>
-<p>and compute \(10000\) random orientations representing this density function using the command <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.discreteSample.html">discreteSample</a></code>
-</p>
+<p>The sections contain a localized maximum and an elongated fibre feature above a non-zero background. A useful selected kernel should retain both shapes without turning finite-sample noise into new maxima.</p>
+<h2 id="5">Select a kernel from sampled orientations</h2>
+<p>Draw 10000 orientations from the model. The random seed makes the sample and every reported result reproducible.</p>
 {% highlight matlab %}
-ori = odf.discreteSample(10000)
+ori = discreteSample(modelODF,10000,'silent');
+sampleCount = length(ori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (321 → y↑→x)
-  size: 10000 x 1
+sampleCount =
+       10000
 {% endhighlight %}
-<p>Next we estimate the optimal <a href="ODFShapes.html">kernel function</a> using the command <code class="language-plaintext highlighter-rouge"><a href="orientation.calcKernel.html">calcKernel</a></code> with the default settings.</p>
+<p>With no method option, <code class="language-plaintext highlighter-rouge">calcKernel</code> uses Kullback--Leibler cross-validation (KLCV). It returns a de la Vall&eacute;e Poussin kernel rather than an ODF.</p>
 {% highlight matlab %}
-psi  = calcKernel(ori)
+psi = calcKernel(ori,'silent')
+selectedHalfwidth = psi.halfwidth ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
 psi = SO3DeLaValleePoussinKernel
   bandwidth: 43
   halfwidth: 5.7°
+ 
+selectedHalfwidth =
+    5.6653
 {% endhighlight %}
-<p>This kernel can now be used to reconstruct the original ODF from the sampled points using the command <a href="DensityEstimation.html">density estimation</a>
-</p>
+<p>Pass that kernel to <a href="rotation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>. The same <code class="language-plaintext highlighter-rouge">psi</code> can therefore be reused for another sample that represents the same population and sampling process.</p>
 {% highlight matlab %}
-odf_rec = calcDensity(ori,'kernel',psi)
+reconstructedODF = calcDensity(ori,'kernel',psi,'silent');
+reconstructionError = calcError(reconstructedODF,modelODF,...
+  'resolution',5*degree)
 
-% plot the reconstructed ODF and compare it to the plot of the original function.  The results are similar but not identical.
-figure;plot(odf_rec,'sections',6,'silent','sigma')
-mtexColorbar
+plot(reconstructedODF,'sections',6,'silent','sigma');
+mtexColorbar('title','mrd');
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf_rec = SO3FunHarmonic (321 → y↑→x)
-  bandwidth: 43
-  weight: 1
+reconstructionError =
+    0.0976
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OptimalKernel_02.png" %}
 </center>
-<h2 id="6">Exploration of the relationship between estimation error and number of single orientations</h2>
-<p>In this section we want to compare the different methods for estimating the optimal kernel halfwidth. To this end we simulate 10, 100, ..., 1000000 single orientations from the model ODF <code class="language-plaintext highlighter-rouge">odf</code>, compute optimal kernels according to the <code class="language-plaintext highlighter-rouge">'magicRule'</code>, the <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> and <a href="orientation.KLCV.html">Kullback Leibler cross validation</a> and then compute the fit between the reconstructed <code class="language-plaintext highlighter-rouge">odf_rec</code> and the original <code class="language-plaintext highlighter-rouge">odf</code>.</p>
+<p>Compare these sections with the model above. The localized maximum and the fibre remain in the same places, while their contours are not identical because only a finite random sample was reconstructed.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">reconstructionError</code> compares density values over orientation space. It is not an angular error and must not be labelled in degrees.</p>
+<h2 id="9">What the three methods use</h2>
+<p>The method names are sometimes described as flags in older material. The current interface passes each name as the value of <code class="language-plaintext highlighter-rouge">'method'</code>.</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>method</p>
+         </td>
+         <td>
+               <p>information used</p>
+         </td>
+         <td>
+               <p>practical reading</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'KLCV'</tt>
+               </p>
+         </td>
+         <td>
+               <p>leave-one-out likelihood on candidate kernels</p>
+         </td>
+         <td>
+               <p>default; data-adaptive</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'RuleOfThumb'</tt>
+               </p>
+         </td>
+         <td>
+               <p>nearest-neighbour resolution of the sample</p>
+         </td>
+         <td>
+               <p>quick scale estimate</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'magicRule'</tt>
+               </p>
+         </td>
+         <td>
+               <p>sample size and crystal/specimen symmetry</p>
+         </td>
+         <td>
+               <p>conservative asymptotic rule</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>Older descriptions say that <code class="language-plaintext highlighter-rouge">'RuleOfThumb'</code> uses the variance of the orientations to estimate smoothness. The current implementation instead uses a quantile of nearest-neighbour angular distances, with a lower halfwidth limit of 2 degrees.</p>
+<p>KLCV evaluates how well kernels centred on the other orientations predict each omitted orientation. The <code class="language-plaintext highlighter-rouge">'SamplingSize'</code> option limits how many observations contribute to that score. It reduces computation, but it does not create an independent validation dataset.</p>
+<h2 id="10">Compare the methods on the same samples</h2>
+<p>The full scaling experiment associated with this page uses 10, 100, ..., 1000000 orientations. That run is appropriate for an attended benchmark, not an executable documentation page. Uncomment the alternative <code class="language-plaintext highlighter-rouge">sampleSize</code> line when that full study is intended.</p>
 {% highlight matlab %}
-% define a variable to hold the calculated error values
-e = [];
-for i = 1:6
+sampleSize = [30 100 300 1000];
+% sampleSize = 10.^(1:6); % full study: 10 through 1000000
 
-  % calculate a sample of orientations from the model ODF
-  ori = discreteSample(odf,10^i,'silent');
+method = ["KLCV","RuleOfThumb","magicRule"];
+halfwidthInDegree = zeros(numel(sampleSize),numel(method));
+estimationError = zeros(numel(sampleSize),numel(method));
 
-  % calculate the kernel using the function defaults, reconstruct the odf, and calculate error between this and the original ODF
-  psi1 = calcKernel(ori,'SamplingSize',10000,'silent');
-  odf_rec = calcDensity(ori,'kernel',psi1,'silent');
-  e(i,1) = calcError(odf_rec,odf,'resolution',2.5*degree);
+for i = 1:numel(sampleSize)
 
-  % calculate the kernel using the RuleOfThumb, reconstruct the odf, and calculate error between this and the original ODF
-  psi2 = calcKernel(ori,'method','RuleOfThumb','silent');
-  odf_rec = calcDensity(ori,'kernel',psi2,'silent');
-  e(i,2) = calcError(odf_rec,odf,'resolution',2.5*degree);
+  oriTrial = discreteSample(modelODF,sampleSize(i),'silent');
 
-  % calculate the kernel using the magicRule, reconstruct the odf, and calculate error between this and the original ODF
-  psi3 = calcKernel(ori,'method','magicRule','silent');
-  odf_rec = calcDensity(ori,'kernel',psi3,'silent');
-  e(i,3) = calcError(odf_rec,odf,'resolution',2.5*degree);
+  for j = 1:numel(method)
 
-  % generate text showing the kernel size calculated with each method in each loop
-  disp(['RuleOfThumb: ' int2str(psi2.halfwidth/degree) mtexdegchar ...
-    ' KLCV: ' int2str(psi1.halfwidth/degree) mtexdegchar ...
-    ' magicRule: ' int2str(psi3.halfwidth/degree) mtexdegchar ...
-    ]);
+    psiTrial = calcKernel(oriTrial,'method',char(method(j)),...
+      'SamplingSize',1000,'silent');
+    trialODF = calcDensity(oriTrial,'kernel',psiTrial,'silent');
 
+    halfwidthInDegree(i,j) = psiTrial.halfwidth ./ degree;
+    estimationError(i,j) = calcError(trialODF,modelODF,...
+      'resolution',7.5*degree);
+
+  end
 end
 
-% Plot the error to the number of single orientations sampled from the original ODF.
-close all;
-loglog(10.^(1:length(e)),e,'LineWidth',2)
-legend('Default','RuleOfThumb','magicRule')
-xlabel('Number of orientations (log scale)')
-ylabel('Estimation Error in degrees')
-title('Error between original ODF model and the reconstructed ODF','FontWeight','bold')
+rowName = compose('N_%d',sampleSize);
+halfwidthTable = array2table(halfwidthInDegree,...
+  'VariableNames',cellstr(method),'RowNames',cellstr(rowName))
+
+errorTable = array2table(estimationError,...
+  'VariableNames',cellstr(method),'RowNames',cellstr(rowName))
 {% endhighlight %}
 
 {% highlight plaintext %}
-RuleOfThumb: 76° KLCV: 24° magicRule: 31°
-RuleOfThumb: 36° KLCV: 15° magicRule: 22°
-RuleOfThumb: 18° KLCV: 8° magicRule: 16°
-RuleOfThumb: 10° KLCV: 6° magicRule: 11°
-RuleOfThumb: 8° KLCV: 5° magicRule: 8°
-RuleOfThumb: 7° KLCV: 4° magicRule: 6°
+halfwidthTable =
+  4×3 table
+               KLCV     RuleOfThumb    magicRule
+              ______    ___________    _________
+    N_30          15      35.361        26.117  
+    N_100     11.906      36.493        22.018  
+    N_300     9.4494      22.379        18.836  
+    N_1000       7.5      17.726         15.87  
+errorTable =
+  4×3 table
+               KLCV      RuleOfThumb    magicRule
+              _______    ___________    _________
+    N_30      0.41223      0.46603        0.4362 
+    N_100     0.27855      0.48149        0.3864 
+    N_300     0.24292      0.39677       0.35625 
+    N_1000    0.17398      0.33499       0.30463
 {% endhighlight %}
-<center>
+<p>Read each row as one random sample tested three ways. This controls the sample-to-sample variation when comparing methods within a row. One draw at each size is a demonstration, not evidence that one method is always best.</p>
+{% highlight matlab %}
+figure;
+loglog(sampleSize,estimationError,'o-','LineWidth',2);
+legend(cellstr(method),'Location','best');
+xlabel('number of orientations');
+ylabel('ODF estimation error');
+grid on;
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="OptimalKernel_03.png" %}
 </center>
+<p>The curves compare density-space error, with smaller values indicating a closer reconstruction. Their differences show that kernel selection is part of the statistical model rather than a display preference.</p>
+<h2 id="13">Before trusting an automatic halfwidth</h2>
+<p>Automatic selection assumes that the input orientations represent the intended population. Neighbouring pixels in one EBSD grain are strongly correlated, so treating every pixel as independent can select a kernel that follows intragranular scatter. Use grain means to select the kernel when grains are the independent sampling units.</p>
+<p>Weighting answers a separate question. After selecting a kernel from grain means, an area-based ODF may still use pixels or grain-area weights. <a href="EBSD2ODF.html">ODF Estimation from EBSD Data</a> works through that choice.</p>
+<p>Also inspect the selected halfwidth and the reconstructed plots. A value at the edge of the tested candidate range, or peaks supported by only one or two observations, is a reason to test nearby kernels manually.</p>
+<h2 id="14">The maths behind the sample-size rule</h2>
+<p>For the de la Vall&eacute;e Poussin kernel, <code class="language-plaintext highlighter-rouge">'magicRule'</code> sets the concentration parameter \(\kappa\) proportional to \(N^{2/7}\). The kernel halfwidth then behaves approximately as</p>
+<p>\[ \delta \mathrel{\sim} \kappa^{-1/2} \mathrel{\sim} N^{-1/7}. \]</p>
+<p>The rule therefore narrows the kernel as the sample grows. It cannot use the unknown density's feature sizes, which is why it is conservative. Rule-of-thumb and cross-validation methods use the observations to add information about those scales.</p>
+<h2 id="15">References</h2>
+<div>
+<ul>
+<li>R. Hielscher, <a href="https://doi.org/10.1016/j.jmva.2013.03.014">Kernel density estimation on the rotation group and its application to crystallographic texture analysis</a>, <i>Journal of Multivariate Analysis</i> 119 (2013), 119--143, derives the orientation-space estimator, asymptotic halfwidth rules, and fast algorithms used for large orientation samples.</li>
+</ul>
+</div>
+<h2 id="16">Next</h2>
+<p>
+<a href="ClusterDemo.html">Clustering</a> replaces a continuous density by discrete groups of nearby orientations. Use it when group membership is the goal rather than estimating how probability varies through orientation space.</p>
 </div>
 </body>
 </html>

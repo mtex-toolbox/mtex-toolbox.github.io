@@ -1,5 +1,5 @@
 ---
-title: "Spherical Functions"
+title: 'Spherical Functions'
 
 sidebar: documentation_sidebar
 permalink: S2FunConcept.html
@@ -22,69 +22,74 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A <b>spherical function</b> assigns a value to every direction on the unit sphere. The input is a direction and the output may be a density, a speed, or another physical quantity.</p>
+<p>Pole density, inverse pole density, the directional magnitude of a tensor, and wave velocity are examples from texture analysis. MTEX gives them the common interface <a href="S2Fun.S2Fun.html">S2Fun</a>.</p>
 <!--/introduction-->
-<p>By a variable of type <code class="language-plaintext highlighter-rouge"><a href="S2Fun.S2Fun.html">S2Fun</a></code> it is possible to represent an entire function on the two dimensional sphere. A typical example of such a function is the pole density function of a given ODF with respect to a fixed crystal direction.</p>
+<h2 id="1">A function, not a sampled grid</h2>
+<p>The Santa Fe orientation distribution function (ODF) is a standard model texture. Fixing the crystal direction \((100)\) gives a <b>pole density function</b>. It measures how strongly that crystal direction points along each specimen direction.</p>
 {% highlight matlab %}
 % the famous Santa Fe orientation distribution function
 odf = SantaFe;
 
 % the (100) pole density function
-pdf = odf.calcPDF(Miller(1,0,0,odf.CS))
+pdf = odf.calcPDF(Miller(1,0,0,odf.CS));
 {% endhighlight %}
-
-{% highlight plaintext %}
-pdf = S2FunHarmonicSym (y↑→x (222))
-  bandwidth: 25
-  antipodal: true
-{% endhighlight %}
-<p>Since, the variable <code class="language-plaintext highlighter-rouge">pdf</code> stores all information about this function we may evaluate it for any direction <code class="language-plaintext highlighter-rouge">r</code>
-</p>
+<p>The resulting object represents the function itself, not a grid of stored values. It can be evaluated at any direction, including one that was not used to construct or display it.</p>
 {% highlight matlab %}
-% take a random direction
-r = vector3d.rand;
+% choose a direction by polar angle and azimuth
+r = vector3d.byPolar(35*degree,20*degree);
 
-% and evaluate the pdf at this direction
-pdf.eval(r)
+% evaluate the pole density at that direction
+valueAtR = pdf.eval(r);
+fprintf('Pole density at r: %.3f mrd\n',valueAtR)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.7302
+Pole density at r: 1.004 mrd
 {% endhighlight %}
-<p>We may also plot the function in any spherical projection</p>
+<p>The value is 1.004 multiples of a random distribution (mrd). Evaluation returns a number; the direction <code class="language-plaintext highlighter-rouge">r</code> remains available for plotting or for another calculation.</p>
+<h2 id="4">Draw the function</h2>
+<p>Plotting evaluates the function on the grid needed by the selected <a href="SphericalProjections.html">spherical projection</a>. The projection is chosen at plotting time and is not a property of the function.</p>
 {% highlight matlab %}
 plot(pdf)
+mtexColorbar('title','mrd')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunConcept_01.png" %}
 </center>
-<p>or find its local maxima</p>
+<p>The bright lobes are directions with high \((100)\) pole density. The colour bar uses mrd, where 1 mrd is the random reference value. The colours sample <code class="language-plaintext highlighter-rouge">pdf</code> for this plot, but they do not become its stored representation.</p>
+<h2 id="6">Find features on the function</h2>
+<p>An extremum search also acts on the function rather than on a display grid. Its result is therefore not limited by the plot resolution.</p>
 {% highlight matlab %}
-[~,localMax] = max(pdf,'numLocal',12)
+[~,localMax] = max(pdf,'numLocal',12);
+peakCount = length(localMax)
 
 annotate(localMax)
 {% endhighlight %}
 
 {% highlight plaintext %}
-localMax = vector3d (y↑→x)
- size: 6 x 1
- antipodal: true
-      x     y     z
-  0.665 0.339 0.665
-  0.665 0.665 0.339
-  0.338 0.665 0.665
-      1     0     0
-      0     1     0
-      0     0     1
+peakCount =
+     6
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunConcept_02.png" %}
 </center>
-<p>A complete list of operations that can be performed with spherical functions can be found in section <a href="S2FunOperations.html">Operations</a>.</p>
-<h2 id="6">Representation of Spherical Functions</h2>
-<p>In MTEX there exist different ways for representing spherical functions internally.</p>
+<p>Six maxima are returned although twelve were requested. The <code class="language-plaintext highlighter-rouge">'numLocal'</code> option is an upper limit. This pole density has six distinct local maxima after each pair of antipodal directions has been identified, as it is in a pole figure. The markers locate those maxima on the plot.</p>
+<h2 id="8">Reference frame and symmetry</h2>
+<p>A <b>reference frame</b> is the coordinate system in which the directions are expressed. It includes the frame identity, its basis, and its default plotting convention. It is distinct from symmetry, which states the transformations under which data is invariant.</p>
+<p>An ordinary <a href="S2Fun.S2Fun.html">S2Fun</a> may carry a reference frame but does not carry a symmetry. The class <a href="S2FunHarmonicSym.S2FunHarmonicSym.html">S2FunHarmonicSym</a> stores a symmetrised harmonic function together with its symmetry. The symmetry supplies that function's reference frame.</p>
+<h2 id="9">Representations</h2>
+<p>The common interface hides several representations that store a spherical function in different ways:</p>
 <p>
    <table class="usertable">
+      <tr>
+         <td>
+               <p>representation</p>
+         </td>
+         <td>
+               <p>MTEX class</p>
+         </td>
+      </tr>
       <tr>
          <td>
                <p>harmonic expansion</p>
@@ -127,13 +132,23 @@ localMax = vector3d (y↑→x)
       </tr>
    </table>
 </p>
-<p>All representations allow for the same operations which are specified for the abstract class <code class="language-plaintext highlighter-rouge"><a href="S2Fun.S2Fun.html">S2Fun</a></code>. In particular it is possible to calculate with spherical functions as with ordinary numbers, i.e., you can add, multiply arbitrary functions, take the mean, integrate them or compute gradients.</p>
-<h2 id="7">Generalizations of Spherical Functions</h2>
+<p>The representation affects speed and which calculations can be exact. A harmonic expansion supports cheap integration and convolution. A function handle evaluates its defining function exactly, but does little else quickly.</p>
+<p>The syntax remains the same across representations. Operations written for <a href="S2Fun.S2Fun.html">S2Fun</a> work with every representation, and arithmetic between two functions works as it does between numbers.</p>
+<h2 id="10">Generalisations</h2>
+<p>The same interface extends to functions with non-scalar values and to functions with symmetry built in:</p>
 <p>
    <table class="usertable">
       <tr>
          <td>
-               <p>spherical vector fields</p>
+               <p>kind of function</p>
+         </td>
+         <td>
+               <p>MTEX class</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>spherical vector field</p>
          </td>
          <td>
                <p>
@@ -143,7 +158,7 @@ localMax = vector3d (y↑→x)
       </tr>
       <tr>
          <td>
-               <p>spherical axis fields</p>
+               <p>spherical axis field</p>
          </td>
          <td>
                <p>
@@ -153,7 +168,7 @@ localMax = vector3d (y↑→x)
       </tr>
       <tr>
          <td>
-               <p>radial spherical functions</p>
+               <p>radial spherical function</p>
          </td>
          <td>
                <p>
@@ -163,7 +178,7 @@ localMax = vector3d (y↑→x)
       </tr>
       <tr>
          <td>
-               <p>symmetric spherical functions</p>
+               <p>symmetric spherical function</p>
          </td>
          <td>
                <p>
@@ -173,6 +188,18 @@ localMax = vector3d (y↑→x)
       </tr>
    </table>
 </p>
+<p>An axis field is not a vector field with a sign convention. Its values are axes, so a value and its negative represent the same axis. This is the appropriate model for a direction without a sense.</p>
+{% highlight matlab %}
+close all
+{% endhighlight %}
+<h2 id="11">References</h2>
+<div>
+<ul>
+<li>K. Pawlik, J. Pospiech and K. Luecke, <a href="https://labosoft.com.pl/download/adcmethod.htm">The development of a new direct method of ODF reproduction from pole figures and its testing with the help of model functions</a>, in J. S. Kallend and G. Gottstein (eds.), <i>ICOTOM 8</i>, The Metallurgical Society, 105--110, 1988. This work gives the Santa Fe model function used in the example.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>Continue with <a href="S2FunOperations.html">Operations</a> to evaluate, combine, differentiate, integrate and search spherical functions.</p>
 </div>
 </body>
 </html>

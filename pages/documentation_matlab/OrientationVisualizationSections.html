@@ -1,5 +1,5 @@
 ---
-title: "Orientation Sections"
+title: 'Orientation Sections'
 
 sidebar: documentation_sidebar
 permalink: OrientationVisualizationSections.html
@@ -23,60 +23,64 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A three dimensional cloud of orientations is hard to read on paper, so the usual compromise is a stack of two dimensional slices through orientation space. Which slices, and how they are cut, is a matter of convention - each of them keeps some structure recognisable and hides other.</p>
+<h2 id="1">Why Section Plots</h2>
+<p>A three-dimensional cloud of orientations is hard to read on paper. A <b>section plot</b> replaces it with a stack of two-dimensional slices through orientation space. The choice of slices is a convention: each one keeps some structure recognisable and hides something else.</p>
+<p>This page assumes the crystal-to-specimen map from <a href="DefinitionAsCoordinateTransform.html">Theory</a>, the symmetry-equivalent representatives from <a href="OrientationSymmetry.html">Symmetry</a>, and the rotation coordinates from <a href="RotationRepresentations.html">Rotation Representations</a>. <a href="OrientationVisualization3d.html">3D Plots</a> shows the spaces that are cut here.</p>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. A <b>plotting convention</b> states how that frame is laid out on screen. The convention below draws specimen Y upward and specimen X to the right. It does not rotate the orientations or change their reference frames.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-cs = crystalSymmetry('432')
-ss = specimenSymmetry('222')
+cs = crystalSymmetry('432');
+ss = specimenSymmetry('222');
 
-ori = orientation.rand(100,cs,ss)
+ori = orientation.rand(100,cs,ss);
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: 432    
-  elements: 24     
-  a, b, c : 1, 1, 1
- 
- 
-ss = orthorhombic specimenSymmetry (y↑→x)
- 
- 
-ori = orientation (432 → y↑→x (222))
-  size: 100 × 1
-{% endhighlight %}
-<h2 id="2">phi2 Sections</h2>
-<p>The most common cut fixes the third Euler angle. Each plot is one value of \(\varphi_2\), with \(\varphi_1\) and \(\Phi\) spanning the plane.</p>
+<h2 id="2">How a Point Enters a Section</h2>
+<p>A mathematical slice has zero thickness, so a finite random sample would almost never land on one exactly. <a href="orientation.plotSection.html"><code class="language-plaintext highlighter-rouge">plotSection</code></a> therefore draws an orientation when its section coordinate lies within a tolerance of the panel value. The <code class="language-plaintext highlighter-rouge">'tolerance'</code> option sets this half-width; its default is \(5^\circ\), and MTEX narrows it when the requested panels are closer together.</p>
+<p>These tolerance bands are not an exhaustive partition of the input. An orientation may miss every panel. In Euler and sigma sections, MTEX also tests proper symmetry-equivalent representatives, so one input orientation may give more than one visible point. Axis--angle sections instead place one symmetry-reduced representative in the fundamental region.</p>
+<h2 id="3">phi2 Sections</h2>
+<p>The classical cut fixes the third Bunge Euler angle \(\varphi_2\). Each panel is labelled by its value of \(\varphi_2\), while \(\varphi_1\) and \(\Phi\) span the rectangular plane.</p>
 {% highlight matlab %}
 plotSection(ori,'phi2')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualizationSections_01.png" %}
 </center>
-<p>The points have no preferred orientation, but they are not uniform in the rectangular Euler coordinates: the volume element contains \(\sin\Phi\), so points thin out near \(\Phi=0\). Real textures add structure on top of that baseline, as spots or lines running through several sections. The classical rolling fibres of cubic metals are read this way, see <a href="EulerAngleSections.html">Euler Angle Sections</a>.</p>
-<h2 id="4">Sigma Sections</h2>
-<p>Sigma sections cut differently, along \(\sigma = \varphi_1 - \varphi_2\). They need fewer plots to cover the same region and keep a texture component together instead of splitting it across sections.</p>
+<p>The points have no preferred orientation, but they are not uniform in these rectangular coordinates. The orientation-space volume element contains \(\sin\Phi\), so the cloud thins towards \(\Phi=0\) at the top of each panel. This is the baseline expected from a uniform orientation distribution, not evidence for a texture.</p>
+<p>A real texture adds spots or lines that continue through several panels. The classical rolling fibres of cubic metals are commonly read this way; see <a href="EulerAngleSections.html">Euler Angle Sections</a>.</p>
+<h2 id="5">Sigma Sections</h2>
+<p>Sigma sections reorganise the same three orientation coordinates around a selected crystal axis. MTEX uses the Matthies coordinate \(\sigma=\alpha+\gamma\). Do not identify it with the informal Bunge-angle expression \(\sigma=\varphi_1-\varphi_2\) sometimes attached to these plots; that is not the coordinate computed here.</p>
 {% highlight matlab %}
 plotSection(ori,'sigma')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualizationSections_02.png" %}
 </center>
-<p>Why they are the better default for cubic material, and how to read them, is <a href="SigmaSections.html">Sigma Sections</a>.</p>
-<h2 id="6">Further Section Types</h2>
-<p>
-<code class="language-plaintext highlighter-rouge">plotSection</code> also takes <code class="language-plaintext highlighter-rouge">'phi1'</code> for sections of the first Euler angle and <code class="language-plaintext highlighter-rouge">'axisAngle'</code> for sections of constant rotational angle. The number of sections is set with the option <code class="language-plaintext highlighter-rouge">'sections'</code>.</p>
+<p>Each half-disc is a pole-figure-like view of the crystal \(c^*\) axis. The grey arrows show the reference direction for the remaining rotation, and that field turns from one panel to the next. Repeated blue points are symmetry-equivalent representatives, not additional input orientations.</p>
+<p>Sigma sections can keep a texture component together instead of splitting it across several Euler sections. The rule of thumb that they need fewer panels does not hold for the defaults here: both commands make six. The claim that they are always the better default for cubic material is also too broad. Compare both views for the texture and symmetry at hand. <a href="SigmaSections.html">Sigma Sections</a> uses a structured ODF to show when their geometric reading is especially useful.</p>
+<h2 id="7">Axis--Angle Sections</h2>
+<p>Axis--angle sections fix the rotational angle \(\omega\). A point within a panel gives the corresponding rotation axis. The option <code class="language-plaintext highlighter-rouge">'sections'</code> sets the number of angle bands.</p>
 {% highlight matlab %}
 plotSection(ori,'axisAngle','sections',6)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualizationSections_03.png" %}
 </center>
-<p>Sections of a <b>density</b> rather than of a list of orientations are the same plots applied to an ODF, which is what these views are mostly used for - see <a href="ODFPlot.html">Plotting an ODF</a>. Do not contour a scatter of orientations directly: computing an ODF first and plotting that is both faster and better founded, and MTEX warns when asked to do otherwise.</p>
-<h2 id="8">Next</h2>
-<p>The full three dimensional views these sections cut through are <a href="OrientationVisualization3d.html">3D Plots</a>.</p>
+<p>Read the angle above each panel together with its outline. The outline is the allowed axis sector at that angle, and its changing shape is the effect of crystal and specimen symmetry on the fundamental region. MTEX volume-scales these panels by default, so their displayed diameters do not share one angular scale.</p>
+<h2 id="9">Further Section Types</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">plotSection</code> also accepts <code class="language-plaintext highlighter-rouge">'phi1'</code> and <code class="language-plaintext highlighter-rouge">'Phi'</code> for the other Bunge Euler angles, and <code class="language-plaintext highlighter-rouge">'alpha'</code> or <code class="language-plaintext highlighter-rouge">'gamma'</code> for Matthies Euler angles. The option <code class="language-plaintext highlighter-rouge">'sections'</code> chooses the number of panels. An explicit vector supplied with a section name chooses their values instead.</p>
+<p>An <b>orientation distribution function</b> (ODF) is a density on orientation space. The same section geometries can display an ODF, which is their main use in texture analysis; see <a href="ODFPlot.html">Plotting an ODF</a>. Do not contour a scatter of orientations directly. Computing an ODF first and plotting that density is both faster and better founded, and MTEX warns when asked to contour the scatter itself.</p>
+<h2 id="10">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops Euler orientation space and classical ODF sections.</li>
+<li>S. Matthies, K. Helming, and K. Kunze, <a href="https://doi.org/10.1002/pssb.2221570105">On the Representation of Orientation Distributions in Texture Analysis by Sigma-Sections. I. General Properties of Sigma-Sections</a>, <i>physica status solidi (b)</i> 157 (1990), 71-83, introduces the section family and compares its distortions.</li>
+<li>S. Matthies, K. Helming, and K. Kunze, <a href="https://doi.org/10.1002/pssb.2221570202">On the Representation of Orientation Distributions in Texture Analysis by Sigma-Sections. II. Consideration of Crystal and Sample Symmetry, Examples</a>, <i>physica status solidi (b)</i> 157 (1990), 489-507, develops the symmetry-dependent regions and their relation to pole and inverse pole figures.</li>
+</ul>
+</div>
+<h2 id="11">Next</h2>
+<p>Return to <a href="OrientationVisualization3d.html">3D Plots</a> when the connection between a section and its full space is unclear. Continue with <a href="OrientationFundamentalRegion.html">Fundamental Regions</a> to understand the symmetry-dependent outlines in the axis--angle panels. The next chapter, <a href="Misorientations.html">Misorientations</a>, makes axis--angle sections a central view of relative orientations.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Geometrically Necessary Dislocations"
+title: 'Geometrically Necessary Dislocations'
 
 sidebar: documentation_sidebar
 permalink: GND.html
@@ -22,349 +22,218 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>A spatial change in lattice orientation requires dislocations to preserve compatibility. These are <b>geometrically necessary dislocations</b> (GNDs). Conventional two-dimensional EBSD measures only the in-plane orientation gradient, so it cannot identify a unique three-dimensional dislocation population.</p>
+<p>The workflow on this page follows Pantleon (2008). It computes the measured lattice curvature and fits the least-energy combination of candidate dislocation systems that reproduces it. Read <a href="DislocationSystems.html">Dislocation Systems</a> first for the Burgers vector, line vector, tensor basis, and relative line-energy weights used here.</p>
 <!--/introduction-->
-<p>This example sheet describes how to estimate dislocation densities following the reference paper</p>
-<p>
-<a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon, Resolving the geometrically necessary dislocation content by conventional electron back-scattering diffraction, Scripta Materialia, 2008</a>
-</p>
-<p>Lets start by importing orientation data from 2 percent uniaxial deformed steel DC06 and reconstructing the grain structure while removing all grains with less than 6 pixels</p>
+<h2 id="1">Load and segment the map</h2>
+<p>The example is a ferritic steel map after two percent uniaxial deformation. The <code class="language-plaintext highlighter-rouge">'minPixel'</code> option marks indexed regions smaller than six pixels as <code class="language-plaintext highlighter-rouge">notIndexed</code> during segmentation. A 2.5 degree threshold separates the remaining grains.</p>
 {% highlight matlab %}
-% import the EBSD data
 plottingConvention.default('y←↑x');
-ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep 'DC06_2uniax.ang'],'setting',2);
+ebsd = EBSD.load([mtexDataPath filesep 'EBSD' filesep ...
+  'DC06_2uniax.ang'],'setting',2);
 
-% reconstruct grains
 [grains,ebsd] = calcGrains(ebsd,'angle',2.5*degree,'minPixel',6);
-
-% smooth grain boundaries
 grains = smoothBoundary(grains,5);
-
-% define the color key
+{% endhighlight %}
+<p>An inverse pole figure (IPF) key colors each indexed orientation by the crystal direction parallel to specimen \(y\). The boundaries provide the spatial context for the orientation changes used below.</p>
+{% highlight matlab %}
 ipfKey = ipfHSVKey(ebsd);
 ipfKey.ipfDirection = yvector;
 
-% plot the orientation data
-plot(ebsd,ipfKey.orientation2color(ebsd.orientations),'refFrame','on','figSize','medium')
-
-% and on top of it the grain boundaries
+plot(ebsd,ipfKey.orientation2color(ebsd.orientations), ...
+  'refFrame','on','figSize','medium')
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_01.png" %}
 </center>
-<h2 id="3">Data cleaning</h2>
-<p>The computation of geometrically necessary dislocations from EBSD maps depends on local orientation changes in the map. In order to make those visible we switch to a different color key that colorizes the misorientation of an pixel with respect to the grain meanorientation.</p>
+<p>Notice that each grain has a dominant color, while smaller color changes remain inside many grains. Those intragranular changes carry the curvature signal, together with measurement noise.</p>
+<h2 id="4">Denoise before differentiating</h2>
+<p>Differentiation amplifies point-to-point orientation noise and therefore overestimates GND density. An axis-angle color key makes local departures from each grain's mean orientation easier to see before filtering.</p>
 {% highlight matlab %}
-% a key the colorizes according to misorientation angle and axis
-ipfKey = axisAngleColorKey(ebsd);
+axisKey = axisAngleColorKey(ebsd);
+axisKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
 
-% set the grain mean orientations as reference orientations
-ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
-
-% plot the data
-plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'micronBar','off','figSize','medium')
-
+plot(ebsd('indexed'), ...
+  axisKey.orientation2color(ebsd('indexed').orientations), ...
+  'micronBar','off','figSize','medium')
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_02.png" %}
 </center>
-<p>We observe that the data are quite noisy. As noisy orientation data lead to overestimating the GND density we first have to denoise the orientation data.</p>
+<p>The pixel-scale color speckle is the symptom to notice. A <code class="language-plaintext highlighter-rouge">halfQuadraticFilter</code> reduces that noise while the <code class="language-plaintext highlighter-rouge">'fill'</code> option uses the grain partition to prevent smoothing across grain boundaries.</p>
 {% highlight matlab %}
-% define the denoising filter
 F = halfQuadraticFilter;
-
 ebsd = smooth(ebsd,F,'fill',grains);
 
-% plot the denoised data
-ipfKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
-plot(ebsd('indexed'),ipfKey.orientation2color(ebsd('indexed').orientations),'micronBar','off','figSize','medium')
-
+axisKey.oriRef = grains(ebsd('indexed').grainId).meanOrientation;
+plot(ebsd('indexed'), ...
+  axisKey.orientation2color(ebsd('indexed').orientations), ...
+  'micronBar','off','figSize','medium')
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_03.png" %}
 </center>
-<h2 id="5">The GND density in one command</h2>
-<p>Everything below is done for you by <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a>, which takes the EBSD data and a set of <a href="dislocationSystem.dislocationSystem.html">dislocation systems</a> and returns the total dislocation energy per pixel together with the density of each individual system.</p>
+<p>The denoised map retains broad color gradients inside grains but suppresses much of the isolated pixel-to-pixel variation. Filtering is therefore part of the measurement model, not merely cosmetic preparation for the plot.</p>
+<h2 id="7">Estimate GND content in one command</h2>
+<p>Ferrite is body-centred cubic, so this example uses the standard BCC set of 48 edge and 4 screw systems. Following the normalization on the preceding page, the edge weight is one and the screw weight is \(1-\nu\), with Poisson's ratio \(\nu=0.3\).</p>
+<p>There is no universally accepted set of line-energy weights. Replace these illustrative values with values appropriate to the material and model.</p>
 {% highlight matlab %}
-% the dislocation systems of a body centered cubic material, with the
-% energies of edge and screw dislocations set as discussed further below
 dS = dislocationSystem.bcc(ebsd.CS);
+nu = 0.3;
 dS(dS.isEdge).u = 1;
-dS(dS.isScrew).u = 1 - 0.3;
-
+dS(dS.isScrew).u = 1 - nu;
+{% endhighlight %}
+<p> <a href="EBSD.calcGND.html"><code class="language-plaintext highlighter-rouge">calcGND</code></a> returns an energy-weighted GND density for each pixel and the signed density assigned to each candidate system. The first output is often called the total dislocation energy. With the dimensionless weights above, it is an energy-weighted density rather than an absolute energy measurement.</p>
+{% highlight matlab %}
 [gnd,rho] = calcGND(ebsd,dS);
 
 close all
 plot(ebsd,gnd,'micronbar','off')
 mtexColorMap('hot')
 mtexColorbar
-set(gca,'ColorScale','log');
+set(gca,'ColorScale','log'); % requires MATLAB R2018a or newer
 set(gca,'CLim',[1e11 5e14]);
-
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_04.png" %}
 </center>
-<p>The remainder of this page walks through what <code class="language-plaintext highlighter-rouge">calcGND</code> does internally.</p>
-<h2 id="7">The incomplete curvature tensor</h2>
-<p>Starting point of any GND computation is the curvature tensor, which is a rank two tensor that is defined for every pixel in the EBSD map by the directional derivatives in x, y and z direction.</p>
+<p>Read the map on its logarithmic scale. Bright regions require a larger energy-weighted dislocation content to reproduce the measured curvature; dark regions require less. Grain boundaries are overlaid for location, but the fitted values belong to EBSD pixels rather than boundary segments.</p>
+<h2 id="10">The maths behind the workflow</h2>
+<p>The remainder of the page expands the operations performed by <code class="language-plaintext highlighter-rouge">calcGND</code>. This sequence is useful when you need to inspect tensor components, change the candidate systems, or retain their individual fitted densities.</p>
+<h2 id="11">Compute the incomplete curvature tensor</h2>
+<p>The curvature tensor \(\boldsymbol\kappa\) collects directional derivatives of lattice orientation. A two-dimensional map supplies derivatives along its two in-plane directions but not along the map normal.</p>
 {% highlight matlab %}
-% the curvature tensor for each pixel in the map
-kappa = ebsd.curvature
-
-% the curvature tensor in pixel (3,2)
-kappa(3,2)
+kappaMeasured = ebsd.curvature
 {% endhighlight %}
 
 {% highlight plaintext %}
-kappa = curvatureTensor (y←↑x)
-  size: 101 x 51 
+kappaMeasured = curvatureTensor (y←↑x)
+  size: 101 × 51 
   unit: 1/um     
-  rank: 2 (3 x 3)
- 
+  rank: 2 (3 × 3)
+{% endhighlight %}
+<p>Inspect one pixel and one component. Curly braces select a tensor component over the whole map, whereas parentheses select map positions.</p>
+{% highlight matlab %}
+kappaMeasured(3,2)
+kappa12 = kappaMeasured{1,2};
+size(kappa12)
+{% endhighlight %}
+
+{% highlight plaintext %}
 ans = curvatureTensor (y←↑x)
   unit: 1/um     
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-5
    4.28 -27.46    NaN
    7.96 -61.91    NaN
   57.48 -30.84    NaN
-{% endhighlight %}
-<p>As expected the curvature tensor is NaN in the third column as this column corresponds to the directional derivative in z-direction which is usually unknown for 2d-EBSD maps.</p>
-<p>We can access the different components of the curvature tensor with</p>
-{% highlight matlab %}
-kappa12 = kappa{1,2};
-
-size(kappa12)
-{% endhighlight %}
-
-{% highlight plaintext %}
 ans =
    101    51
 {% endhighlight %}
-<p>which results in a variable of the same size as our EBSD data. This allows us to visualize the different components of the curvature tensor</p>
+<p>The component array has the same size as the EBSD map. For this scan the unknown out-of-plane derivative occupies the third tensor column, so that column contains <code class="language-plaintext highlighter-rouge">NaN</code>.</p>
 {% highlight matlab %}
 newMtexFigure('nrows',3,'ncols',3);
-
-% cycle through all components of the tensor
 for i = 1:3
   for j = 1:3
-
     nextAxis(i,j)
-    plot(ebsd,kappa{i,j},'micronBar','off')
-    hold on; plot(grains.boundary,'linewidth',2); hold off
-
+    plot(ebsd,kappaMeasured{i,j},'micronBar','off')
+    hold on
+    plot(grains.boundary,'linewidth',2)
+    hold off
   end
 end
-
-% unify the color rage  - you may also use setColoRange equal
 setColorRange([-0.005,0.005])
 drawNow(gcm,'figSize','large')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_05.png" %}
 </center>
-<h2 id="10">The incomplete dislocation density tensor</h2>
-<p>The curvature tensor \(\kappa\) is directly related to the dislocation density tensor \(\alpha\) by</p>
-<p>\[ \alpha = \kappa^T - \mathrm{tr}(\kappa) \, I \]</p>
-<p>This is the relation <a href="https://doi.org/10.1016/0001-6160(53)90054-6">Nye, Some geometrical relations in dislocated crystals, Acta Metallurgica, 1953</a> derived for a crystal lattice, which is why \(\alpha\) is also called the Nye tensor. The continuum theory it belongs to is <a href="https://link.springer.com/book/9783540022619">Kr&ouml;ner, Kontinuumstheorie der Versetzungen und Eigenspannungen, Springer, 1958</a>, hence the relation is usually attributed to both.</p>
+<p>Read columns from left to right in each tensor row. The blank panels in the third column make the unmeasured out-of-plane derivative explicit; they are not zero-curvature components.</p>
+<h2 id="15">Convert curvature to the Nye tensor</h2>
+<p>Nye's dislocation-density tensor \(\boldsymbol\alpha\) is related to curvature by</p>
+<p>\[ \boldsymbol\alpha = \boldsymbol\kappa^{T} - \mathrm{tr}(\boldsymbol\kappa)\,\mathbf I. \]</p>
+<p>The method <a href="curvatureTensor.dislocationDensity.html"><code class="language-plaintext highlighter-rouge">dislocationDensity</code></a> applies this relation.</p>
 {% highlight matlab %}
-alpha = kappa.dislocationDensity
+alphaMeasured = kappaMeasured.dislocationDensity
+alphaMeasured(3,2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-alpha = dislocationDensityTensor (y←↑x)
-  size: 101 x 51 
+alphaMeasured = dislocationDensityTensor (y←↑x)
+  size: 101 × 51 
   unit: 1/um     
-  rank: 2 (3 x 3)
-{% endhighlight %}
-<p>which has the same unit as the curvature tensor and is incomplete as well as we can see when looking at a particular one.</p>
-{% highlight matlab %}
-% the incomplete dislocation density tensor for map position (3,2)
-alpha(3,2)
-{% endhighlight %}
-
-{% highlight plaintext %}
+  rank: 2 (3 × 3)
+ 
 ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-5
     NaN   7.96  57.48
  -27.46    NaN -30.84
     NaN    NaN  57.63
 {% endhighlight %}
-<h2 id="12">Crystallographic Dislocations</h2>
-<p>The central idea of <a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Pantleon (2008)</a> is that the dislocation density tensor is build up by single dislocations with different densities such that the total energy is minimum. Depending on the atomic lattice different dislocation systems have to be considered. In present case of a body centered cubic (bcc) material 48 edge dislocations and 4 screw dislocations have to be considered. Those principle dislocations are defined in MTEX either by their Burgers and line vectors or by</p>
-{% highlight matlab %}
-dS = dislocationSystem.bcc(ebsd.CS)
-{% endhighlight %}
-
-{% highlight plaintext %}
-dS = dislocationSystem
- mineral: Iron (Alpha) (m-3m)
- edge dislocations : 48 x 1
- Burgers vector  line vector  energy  length
-      [1 -1  1]   [-2 -1  1]       2    2.49
-      [1  1 -1]    [2 -1  1]       2    2.49
-      [1  1 -1]    [1 -2 -1]       2    2.49
-     [-1  1  1]    [1  2 -1]       2    2.49
-      [1 -1  1]   [-1  1  2]       2    2.49
-     [-1  1  1]   [-1  1 -2]       2    2.49
-      [1 -1  1]    [1  2  1]       2    2.49
-      [1  1  1]   [-1  2 -1]       2    2.49
-      [1  1 -1]    [1  1  2]       2    2.49
-      [1  1  1]   [-1 -1  2]       2    2.49
-     [-1  1  1]    [2  1  1]       2    2.49
-      [1  1  1]    [2 -1 -1]       2    2.49
-     [-1  1  1]    [0  1 -1]       2    2.49
-      [1 -1  1]   [-1  0  1]       2    2.49
-      [1  1 -1]    [1 -1  0]       2    2.49
-     [-1  1  1]   [-1  0 -1]       2    2.49
-      [1 -1  1]   [-1 -1  0]       2    2.49
-      [1  1 -1]    [0 -1 -1]       2    2.49
-      [1  1 -1]    [1  0  1]       2    2.49
-     [-1  1  1]    [1  1  0]       2    2.49
-      [1 -1  1]    [0  1  1]       2    2.49
-     [-1 -1 -1]    [0 -1  1]       2    2.49
-     [-1 -1 -1]    [1  0 -1]       2    2.49
-     [-1 -1 -1]   [-1  1  0]       2    2.49
-     [-1  1  1]   [-1  4 -5]       2    2.49
-      [1 -1  1]   [-5 -1  4]       2    2.49
-      [1  1 -1]    [4 -5 -1]       2    2.49
-     [-1  1  1]   [-4  1 -5]       2    2.49
-      [1 -1  1]   [-5 -4  1]       2    2.49
-      [1  1 -1]    [1 -5 -4]       2    2.49
-      [1  1 -1]    [4  1  5]       2    2.49
-     [-1  1  1]    [5  4  1]       2    2.49
-      [1 -1  1]    [1  5  4]       2    2.49
-     [-1 -1 -1]   [-1 -4  5]       2    2.49
-     [-1 -1 -1]    [5 -1 -4]       2    2.49
-     [-1 -1 -1]   [-4  5 -1]       2    2.49
-      [1 -1  1]    [1 -4 -5]       2    2.49
-      [1  1 -1]   [-5  1 -4]       2    2.49
-     [-1  1  1]   [-4 -5  1]       2    2.49
-      [1 -1  1]    [4 -1 -5]       2    2.49
-      [1  1 -1]   [-5  4 -1]       2    2.49
-     [-1  1  1]   [-1 -5  4]       2    2.49
-     [-1 -1 -1]   [-4 -1  5]       2    2.49
-     [-1 -1 -1]    [5 -4 -1]       2    2.49
-     [-1 -1 -1]   [-1  5 -4]       2    2.49
-      [1  1 -1]    [1  4  5]       2    2.49
-     [-1  1  1]    [5  1  4]       2    2.49
-      [1 -1  1]    [4  5  1]       2    2.49
- 
- screw dislocations: 4 x 1
- Burgers vector  energy  length
-      [1 -1  1]       1    2.49
-     [-1 -1 -1]       1    2.49
-     [-1  1  1]       1    2.49
-      [1  1 -1]       1    2.49
-{% endhighlight %}
-<p>Here the norm of the Burgers vectors is important</p>
-{% highlight matlab %}
-% size of the unit cell
-a = norm(ebsd.CS.aAxis);
-
-% in bcc and fcc the norm of the burgers vector is sqrt(3)/2 * a
-[norm(dS(1).b), norm(dS(end).b), sqrt(3)/2 * a]
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    2.4855    2.4855    2.4855
-{% endhighlight %}
-<h2 id="14">The Energy of Dislocations</h2>
-<p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed according to the specific model and the specific material.</p>
-<p>According to <a href="https://doi.org/10.1016/C2009-0-64358-0">Hull &amp; Bacon, Introduction to Dislocations, 5th edition, Butterworth-Heinemann, 2011</a> the energy U of edge and screw dislocations is given by the formulae</p>
-<p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p>
-<p>\[ U_{\mathrm{edge}} = \frac{1}{(1-\nu)} U_{\mathrm{screw}} \]</p>
-<p>where</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">G</code> is the shear modulus</li>
-<li>
-<code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li>
-<li>
-<code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li>
-<li>
-<code class="language-plaintext highlighter-rouge">R</code> is the outer cut off radius</li>
-<li>
-<code class="language-plaintext highlighter-rouge">r_0</code> is the radius of the dislocation core</li>
-</ul>
-</div>
-<p>In this example we assume \[ U_{\mathrm{edge}} = 1 \] \[ U_{\mathrm{screw}} = 1-\nu \]</p>
-{% highlight matlab %}
-nu = 0.3;
-
-% energy of the edge dislocations
-dS(dS.isEdge).u = 1;
-
-% energy of the screw dislocations
-dS(dS.isScrew).u = 1 - nu;
-{% endhighlight %}
-<p>There is no single accepted way of setting these energies. Formulae in use include <code class="language-plaintext highlighter-rouge">U = 1 - nu</code> as above, and <code class="language-plaintext highlighter-rouge">U = c * G * |b</code>^2| with <code class="language-plaintext highlighter-rouge">G</code> the shear modulus, i.e. an energy per unit length squared. Which one is appropriate depends on the model you are comparing against, so <code class="language-plaintext highlighter-rouge">u</code> is left for you to set rather than being fixed by MTEX.</p>
-<p>A single dislocation causes a deformation that can be represented by the rank one tensor</p>
+<p>This tensor remains incomplete because the map contains no derivative normal to its plane. MTEX can recover the \((3,3)\) entry from the two known diagonal curvature components, but the other missing entries remain <code class="language-plaintext highlighter-rouge">NaN</code>.</p>
+<h2 id="17">Rotate the candidate systems</h2>
+<p>Each tensor supplied by <code class="language-plaintext highlighter-rouge">dS.tensor</code> is the rank-two dyad \(\mathbf b\otimes\hat{\mathbf l}\). Its length unit is inherited from the unit cell, usually Angstrom and displayed as <code class="language-plaintext highlighter-rouge">au</code>.</p>
+<p>The tensors are initially expressed in the crystal frame. The measured curvature is expressed in the specimen frame, so each pixel orientation must rotate all candidate systems into that same frame.</p>
 {% highlight matlab %}
 dS(1).tensor
+dSRot = ebsd.orientations * dS;
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = dislocationDensityTensor (Iron (Alpha))
   unit: au       
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  -1.1717 -0.5858  0.5858
   1.1717  0.5858 -0.5858
  -1.1717 -0.5858  0.5858
 {% endhighlight %}
-<p>Note that the unit of this tensors is the same as the unit used for describing the length of the unit cell, which is in most cases Angstrom (au). Furthermore, we observe that the tensor is given with respect to the crystal reference frame while the dislocation density tensors are given with respect to the specimen reference frame. Hence, to make them compatible we have to rotate the dislocation tensors into the specimen reference frame as well. This is done by</p>
+<h2 id="18">Fit individual system densities</h2>
+<p> <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a> solves a linear program at every pixel. It reproduces the six measured curvature components while minimizing \(\sum_j u_j\lvert\rho_j\rvert\) over the candidate systems.</p>
+<p>The Optimization Toolbox function <code class="language-plaintext highlighter-rouge">linprog</code> is required. The result <code class="language-plaintext highlighter-rouge">rho</code> has one row per EBSD pixel and one column per dislocation system. Its signs distinguish the two line senses represented internally during the fit.</p>
 {% highlight matlab %}
-dSRot = ebsd.orientations * dS
+[rhoWorked,factor] = fitDislocationSystems(kappaMeasured,dSRot);
+size(rhoWorked)
+factor
 {% endhighlight %}
 
 {% highlight plaintext %}
-dSRot = dislocationSystem
- edge dislocations : 5144 x 48
- screw dislocations: 5144 x 4
+ans =
+        5151          52
+factor =
+   1.0000e+16
 {% endhighlight %}
-<h2 id="18">Fitting Dislocations to the incomplete dislocation density tensor</h2>
-<p>Now we are ready for fitting the dislocation tensors to the dislocation density tensor in each pixel of the map. This is done by the command <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a>.</p>
+<p>The scale factor converts the density coefficients from \(1/(\mathrm{\mu m}\,\mathrm{au})\) to \(1/\mathrm{m}^2\). With micrometre scan units and Angstrom lattice units it is \(10^{16}\).</p>
+<h2 id="20">Reconstruct the fitted tensors</h2>
+<p>Sum each rotated basis tensor multiplied by its fitted density. The numeric matrix <code class="language-plaintext highlighter-rouge">rhoWorked</code> does not retain units, so the tensor unit must be restored explicitly after this manual reconstruction.</p>
 {% highlight matlab %}
-[rho,factor] = fitDislocationSystems(kappa,dSRot);
-{% endhighlight %}
-<p>As result we obtain a matrix of densities <code class="language-plaintext highlighter-rouge">rho</code> such that the product with the dislocation systems yields the incomplete dislocation density tensors derived from the curvature, i.e.,</p>
-{% highlight matlab %}
-% the restored dislocation density tensors
-alpha = reshape(sum(dSRot.tensor .* rho,2),size(ebsd));
+alphaFitted = reshape(sum(dSRot.tensor .* rhoWorked,2),size(ebsd));
+alphaFitted.opt.unit = '1/um';
 
-% we have to set the unit manually since it is not stored in rho
-alpha.opt.unit = '1/um';
-
-% the restored dislocation density tensor for map position (3,2)
-alpha(3,2)
-
-% the dislocation density derived from the curvature for map position (3,2)
-kappa(3,2).dislocationDensity
+alphaFitted(3,2)
+kappaMeasured(3,2).dislocationDensity
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-5
   59.13   7.96  57.48
@@ -373,83 +242,88 @@ ans = dislocationDensityTensor (y←↑x)
  
 ans = dislocationDensityTensor (y←↑x)
   unit: 1/um     
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-5
     NaN   7.96  57.48
  -27.46    NaN -30.84
     NaN    NaN  57.63
 {% endhighlight %}
-<p>we may also restore the complete curvature tensor with</p>
+<p>The fitted tensor is complete because the chosen dislocation population supplies the components that EBSD cannot measure directly. Converting it back gives a complete fitted curvature tensor.</p>
 {% highlight matlab %}
-kappa = alpha.curvature
+kappaFitted = alphaFitted.curvature
+kappaFitted(3,2)
 
-kappa(3,2)
+newMtexFigure('nrows',3,'ncols',3);
+for i = 1:3
+  for j = 1:3
+    nextAxis(i,j)
+    plot(ebsd,kappaFitted{i,j},'micronBar','off')
+    hold on
+    plot(grains.boundary,'linewidth',2)
+    hold off
+  end
+end
+setColorRange([-0.005,0.005])
+drawNow(gcm,'figSize','large');
 {% endhighlight %}
 
 {% highlight plaintext %}
-kappa = curvatureTensor (y←↑x)
-  size: 101 x 51 
+kappaFitted = curvatureTensor (y←↑x)
+  size: 101 × 51 
   unit: 1/um     
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
 ans = curvatureTensor (y←↑x)
   unit: 1/um     
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-5
    4.28 -27.46  12.66
    7.96 -61.91  -9.03
   57.48 -30.84   2.78
 {% endhighlight %}
-<p>and plot it as we did before</p>
-{% highlight matlab %}
-newMtexFigure('nrows',3,'ncols',3);
-
-% cycle through all components of the tensor
-for i = 1:3
-  for j = 1:3
-
-    nextAxis(i,j)
-    plot(ebsd,kappa{i,j},'micronBar','off')
-    hold on; plot(grains.boundary,'linewidth',2); hold off
-
-  end
-end
-
-setColorRange([-0.005,0.005])
-drawNow(gcm,'figSize','large');
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_06.png" %}
 </center>
-<h2 id="22">The total dislocation energy</h2>
-<p>The unit of the densities <code class="language-plaintext highlighter-rouge">h</code> in our example is 1/um * 1/au where 1/um comes from the unit of the curvature tensor an 1/au from the unit of the Burgers vector. In order to transform <code class="language-plaintext highlighter-rouge">h</code> to SI units, i.e., 1/m^2 we have to multiply it with 10^16. This is exactly the values returned as the second output <code class="language-plaintext highlighter-rouge">factor</code> by the function <a href="curvatureTensor.fitDislocationSystems.html"><code class="language-plaintext highlighter-rouge">fitDislocationSystems</code></a>.</p>
+<p>Unlike the measured grid, this grid has values in all nine panels. The fitted in-plane columns reproduce the observations; the third column is a model-dependent completion, not an additional EBSD measurement.</p>
+<h2 id="23">Reproduce the one-command result</h2>
+<p>Multiplying the absolute fitted densities by their line-energy weights and by the unit factor gives the scalar returned by <code class="language-plaintext highlighter-rouge">calcGND</code>.</p>
 {% highlight matlab %}
-factor
+gndWorked = factor * sum(abs(rhoWorked .* dSRot.u),2);
+max(abs(gndWorked-gnd),[],'omitnan')
 {% endhighlight %}
 
 {% highlight plaintext %}
-factor =
-   1.0000e+16
+ans =
+     0
 {% endhighlight %}
-<p>Multiplying the densities <code class="language-plaintext highlighter-rouge">rho</code> with this factor and the individual energies of the the dislocation systems we end up with the total dislocation energy, which is what <code class="language-plaintext highlighter-rouge">calcGND</code> returned at the top of this page. Lets plot it at a logarithmic scale</p>
+<p>The zero difference verifies that the expanded sequence and <code class="language-plaintext highlighter-rouge">calcGND</code> use the same calculation. Plotting the worked result therefore reproduces the first GND map.</p>
 {% highlight matlab %}
 close all
-plot(ebsd,factor*sum(abs(rho .* dSRot.u),2),'micronbar','off')
+plot(ebsd,gndWorked,'micronbar','off')
 mtexColorMap('hot')
 mtexColorbar
-
-set(gca,'ColorScale','log'); % this works only starting with Matlab 2018a
+set(gca,'ColorScale','log'); % requires MATLAB R2018a or newer
 set(gca,'CLim',[1e11 5e14]);
-
 hold on
 plot(grains.boundary,'linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GND_07.png" %}
 </center>
+<h2 id="25">References</h2>
+<div>
+<ul>
+<li>W. Pantleon, <a href="https://doi.org/10.1016/j.scriptamat.2008.01.050">Resolving the geometrically necessary dislocation content by conventional electron backscattering diffraction</a>, <i>Scripta Materialia</i> 58 (2008), 994-997, gives the incomplete-curvature and least-energy fitting method used here.</li>
+<li>J. F. Nye, <a href="https://doi.org/10.1016/0001-6160(53)90054-6">Some geometrical relations in dislocated crystals</a>, <i>Acta Metallurgica</i> 1 (1953), 153-162, derives the dislocation-density tensor from lattice curvature.</li>
+<li>E. Kr&ouml;ner, <a href="https://link.springer.com/book/9783540022619">Kontinuumstheorie der Versetzungen und Eigenspannungen</a>, Springer, 1958, develops the continuum theory in which the curvature-dislocation relation is interpreted.</li>
+<li>D. Hull and D. J. Bacon, <a href="https://doi.org/10.1016/C2009-0-64358-0">Introduction to Dislocations</a>, fifth edition, Butterworth-Heinemann, 2011, derives the edge and screw line energies summarized on the preceding page.</li>
+</ul>
+</div>
+<h2 id="26">Next</h2>
+<p>Continue with <a href="WBV.html">Weighted Burgers Vector</a> for a boundary-based measure of lattice-curvature content that does not fit a complete population of crystallographic dislocation systems.</p>
 </div>
 </body>
 </html>

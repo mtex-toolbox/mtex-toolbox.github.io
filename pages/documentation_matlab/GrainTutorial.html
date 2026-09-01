@@ -1,5 +1,5 @@
 ---
-title: "Grain Tutorial"
+title: 'Grain Tutorial'
 
 sidebar: documentation_sidebar
 permalink: GrainTutorial.html
@@ -23,12 +23,16 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>The following script is a quick guide through the grain reconstruction capabilities of MTEX. It uses the same data set as in the corresponding publication <a href="https://www.researchgate.net/publication/51806709_Grain_detection_from_2d_and_3d_EBSD_data-Specification_of_the_MTEX_algorithm">Grain detection from 2d and 3d EBSD data</a>. Data courtesy of Daniel Rutte and Bret Hacker, Stanford.</p>
+<p>This tutorial starts with an EBSD map and turns its measurements into grains. It then compares pixel and grain orientations, selects grains by their properties, and previews the boundaries between two phases.</p>
+<p>Read <a href="EBSDTutorial.html">the EBSD tutorial</a> first if phase maps, orientation maps, or MTEX selections are new to you. <a href="GeneralConcepts.html">General Concepts</a> explains how one MTEX object holds a vectorized list of measurements or grains.</p>
+<p>The specimen is the mylonite used by Bachmann, Hielscher and Schaeben in <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain detection from 2d and 3d EBSD data</a>. The data are courtesy of Daniel Rutte and Bret Hacker, Stanford University.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+
+% load the example map and display its summary
 mtexdata mylonite
 
-% plot a phase map
+% plot the phases
 plot(ebsd)
 {% endhighlight %}
 
@@ -42,28 +46,30 @@ ebsd = EBSD (y↑→x)
      4    4781 (38%)  Orthoclase    LightCoral     12/m1        X||a*, Y||b, Z||c
  
  Scan unit : um
- X x Y x Z : [15000 → 24000] x [1020 → 3990] x [0 → 0]
+ X × Y × Z : [15000 → 24000] × [1020 → 3990] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_01.png" %}
 </center>
-<p>The phase map displays a multi-phase rock specimen with phases such as Andesine, Quartz, Biotite, and Orthoclase. We will now focus on a smaller rectangular region of interest defined by the coordinates <code class="language-plaintext highlighter-rouge">[xmin, ymin, xmax - xmin, ymax - ymin]</code>.</p>
+<p>The displayed <code class="language-plaintext highlighter-rouge">EBSD</code> summary reports four indexed phases and the scan extent. The phase map shows quartz ribbons between mixed feldspar layers, with smaller biotite regions.</p>
+<p>The full map is too large for the details below. We continue with a rectangle written as <code class="language-plaintext highlighter-rouge">[xmin, ymin, width, height]</code>.</p>
 {% highlight matlab %}
 region = [19000 1500 4000 1500];
-% overlay the selected region on the phase map
-rectangle('position',region,'edgecolor','k','linewidth',2)
+
+% mark the selected region on the phase map
+rectangle('Position',region,'EdgeColor','black','LineWidth',2)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_02.png" %}
 </center>
-<p>Now copy the EBSD data within the selected rectangle to a new variable</p>
+<p> <a href="EBSD.inpolygon.html"><code class="language-plaintext highlighter-rouge">inpolygon</code></a> selects the measurements inside the rectangle. Its displayed summary confirms the new extent and phase counts.</p>
 {% highlight matlab %}
-ebsd_region = ebsd(inpolygon(ebsd,region))
+ebsdRegion = ebsd(inpolygon(ebsd,region))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd_region = EBSD (y↑→x)
+ebsdRegion = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1     578 (20%)    Andesina  LightSkyBlue        -1              X||a*, Z||c
@@ -72,20 +78,27 @@ ebsd_region = EBSD (y↑→x)
      4    1066 (37%)  Orthoclase    LightCoral     12/m1        X||a*, Y||b, Z||c
  
  Scan unit : um
- X x Y x Z : [19020 → 22980] x [1500 → 3000] x [0 → 0]
+ X × Y × Z : [19020 → 22980] × [1500 → 3000] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<h2 id="4">Grain Reconstruction</h2>
-<p>Next we reconstruct the grains and grain boundaries in the region of interest, using a 15 degree orientation change threshold.</p>
+<h2 id="4">Grain reconstruction</h2>
+<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. A phase change between neighbouring pixels is always a grain boundary.</p>
+<p>MTEX gives each measurement a spatial cell and links neighbouring cells that meet the segmentation criterion. Grain outlines follow the cell interfaces left between different linked groups.</p>
+<p>For neighbours of the same phase, <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> draws a boundary when their minimum symmetry-equivalent misorientation reaches the chosen angle. The test is local between neighbours. Consequently, a gradual orientation gradient can connect two ends of one grain even when those ends differ by more than the threshold.</p>
+<p>The 15 degree value below is an example parameter, not a universal grain definition. <a href="GrainReconstruction.html">Grain Reconstruction</a> explains how <code class="language-plaintext highlighter-rouge">'angle'</code>, <code class="language-plaintext highlighter-rouge">'minPixel'</code>, and <code class="language-plaintext highlighter-rouge">'alpha'</code> change the result.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd_region,'angle',15*degree)
+% reconstruct grains and return the map with a grainId property
+[grains,ebsdRegion] = calcGrains(ebsdRegion,'angle',15*degree);
 
-% plot a phase map of the region of interest
-plot(ebsd_region)
+% display the grain summary
+grains
+
+% plot the phase map of the selected region
+plot(ebsdRegion)
 
 % overlay the grain boundaries
 hold on
-plot(grains.boundary,'color','k','linewidth',1.5)
+plot(grains.boundary,'LineColor','black','LineWidth',1.5)
 hold off
 {% endhighlight %}
 
@@ -104,73 +117,186 @@ grains = grain2d (y↑→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_03.png" %}
 </center>
-<p>We may also visualize the different quartz orientations together with the grain boundaries.</p>
+<p>The grain summary reports a count for each phase and the number of boundary segments. In the figure, every outline follows interfaces between measurement cells rather than a hand-drawn curve. Each segment lies between neighbouring pixels assigned to different grains.</p>
+<p>Notice the many tiny polygons. Their size makes segmentation choices and spatial resolution important before any grain-size result is reported.</p>
+<h2 id="6">Pixel orientations and grain mean orientations</h2>
+<p>A phase map says where quartz was indexed, but not how its lattice is oriented. We first colour every quartz measurement with an inverse pole figure key and draw the other phases pale.</p>
 {% highlight matlab %}
-% plot a phase map of three of the phases based on the grains data
+quartzEbsd = ebsdRegion('Quartz');
+quartzGrains = grains('Quartz');
+ipfKey = ipfColorKey(quartzEbsd);
+
+% plot the non-quartz grains as context
 plot(grains({'Andesina','Biotite','Orthoclase'}),'FaceAlpha',0.4)
 
+% add the quartz measurements using one explicit colour key
 hold on
-% add the quartz orientations as ipf map based on EBSD data
-plot(ebsd_region('Quartz'),ebsd_region('Quartz').orientations)
-
-% plot grain boundaries so that those in the Quartz are shown
-plot(grains.boundary,'color','black');
+plot(quartzEbsd,ipfKey.orientation2color(quartzEbsd.orientations))
+plot(grains.boundary,'LineColor','black')
 legend off
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_04.png" %}
 </center>
-<p>In this visualization most phases are displayed in uniform colors, while Quartz is colored according to the ipf color key</p>
+<p>Many boundaries coincide with abrupt colour changes. Colour variation also remains inside some grains, where it may represent orientation noise or a real lattice gradient.</p>
+<p>An IPF colour records where one specimen direction lies in the crystal. It is not a complete orientation-distance scale, so colour alone cannot validate a reconstruction. <a href="EBSDIPFMap.html">IPF Maps</a> explains the key.</p>
 {% highlight matlab %}
+% display the colour key used for both orientation maps
 close all
-ipfKey = ipfColorKey(ebsd_region('Quartz'));
 plot(ipfKey)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_05.png" %}
 </center>
-<p>Alternatively, we can display each quartz grain according to its mean orientation.</p>
+<p>The key identifies the crystal direction represented by each colour. The same key can now colour one mean orientation per quartz grain.</p>
 {% highlight matlab %}
+% plot the non-quartz grains as context
 plot(grains({'Andesina','Biotite','Orthoclase'}),'FaceAlpha',0.4)
-hold on
-plot(grains('Quartz'),grains('Quartz').meanOrientation)
-legend off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainTutorial_06.png" %}
-</center>
-<h2 id="8">Highlight specific boundaries</h2>
-<p>We can create a phase map with certain grain boundaries highlighted. In this phase map, we highlight grain boundaries where neighboring grains of Andesine and Orthoclase exhibit a misorientation with a rotational axis close to the c-axis.</p>
-{% highlight matlab %}
-close all
-% copy all boundaries between Andesina, Orthoclase to a new variable
-AOboundary = grains.boundary('Andesina','Orthoclase');
-% copy the misorientation angle of this boundary in radians to a new variable.
-angle = AOboundary.misorientation.angle;
 
-plot(grains,'FaceAlpha',0.4)
+% colour each quartz grain by its mean orientation
 hold on
-% highlight boundaries where the angle between the Andesina and Orthoclase phase is over 160 degrees
-plot(AOboundary(angle>160*degree),'linewidth',2,'linecolor','red')
+plot(quartzGrains,ipfKey.orientation2color(quartzGrains.meanOrientation))
+legend off
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="GrainTutorial_06.png" %}
+</center>
+<p>Compared with the pixel map, each quartz grain now has one flat colour. The mean suppresses intragranular variation rather than proving that the variation was noise. <a href="GrainOrientationParameters.html">Orientation Parameters</a> measures that variation explicitly.</p>
+<h2 id="10">Selecting and measuring grains</h2>
+<p>Grain properties are arrays with one value per grain. Here <code class="language-plaintext highlighter-rouge">numPixel</code> records the number of measurements assigned to a grain, while <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a> measures its sectional area in the scan unit.</p>
+<p>The next selection keeps quartz grains with at least ten measurements and removes grains cut by the edge of the map. The value ten only illustrates a logical selection; it is not a recommended quality criterion.</p>
+{% highlight matlab %}
+selectedQuartz = grains('Quartz',...
+  grains.numPixel >= 10 & ~grains.isBoundary)
+{% endhighlight %}
+
+{% highlight plaintext %}
+selectedQuartz = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels  Mineral  Symmetry         Color
+     2      13     451   Quartz      -3m1  DarkSeaGreen
+ 
+ boundary segments: 634 (20086 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 133
+ 
+  Id   Phase   Pixels      meanRotation      GOS
+  78       2       23    (3°,121°,115°)    0.038
+ 180       2       12      (3°,148°,3°)    0.029
+ 188       2       51    (171°,32°,65°)    0.055
+ 235       2       11     (1°,152°,53°)     0.05
+ 293       2       37    (1°,121°,113°)    0.025
+ 473       2       12    (153°,117°,8°)    0.057
+ 533       2       10    (1°,121°,114°)    0.012
+ 657       2       17    (2°,121°,117°)    0.016
+ 860       2       10   (161°,118°,27°)    0.012
+ 886       2       22   (161°,117°,87°)     0.01
+ 895       2      203   (165°,112°,44°)    0.018
+ 945       2       33   (161°,117°,88°)   0.0093
+ 958       2       10     (176°,60°,2°)    0.018
+{% endhighlight %}
+<p>The displayed <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a> summary reports what the selection retained. Because <code class="language-plaintext highlighter-rouge">calcGrains</code> returned <code class="language-plaintext highlighter-rouge">ebsdRegion</code> with a <code class="language-plaintext highlighter-rouge">grainId</code> property, the selection also leads back to its measurements.</p>
+{% highlight matlab %}
+selectedMeasurements = ebsdRegion(selectedQuartz)
+{% endhighlight %}
+
+{% highlight plaintext %}
+selectedMeasurements = EBSD (y↑→x)
+ 
+ Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
+     2    451 (100%)   Quartz  DarkSeaGreen      -3m1        X||a*, Y||b, Z||c
+ 
+ Properties: grainId
+ Scan unit : um
+ X × Y × Z : [19170 → 22830] × [1770 → 2640] × [0 → 0]
+ Normal vector: (0,0,1)
+{% endhighlight %}
+<p>The measurement summary contains only quartz pixels assigned to the selected grains. The grains themselves can be coloured by area.</p>
+{% highlight matlab %}
+close all
+plot(grains,'FaceColor','lightgray','FaceAlpha',0.3)
+hold on
+plot(selectedQuartz,selectedQuartz.area)
+hold off
+legend off
+mtexColorbar('title','sectional grain area')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_07.png" %}
 </center>
-<p>We can also represent the angular misorientation data between these two phases as a histogram.</p>
+<p>The coloured regions are the selected interior quartz grains, and their colour represents area rather than orientation. Removing edge grains avoids treating a clipped grain as if its full section had been measured.</p>
+<p>A two-dimensional section does not directly give three-dimensional grain volume. Step size, segmentation settings, and the treatment of small or notIndexed regions must also be fixed before specimens are compared. <code class="language-plaintext highlighter-rouge">notIndexed</code> is the phase for measurements whose diffraction patterns could not be indexed. <a href="ShapeParameters.html">Shape Parameters</a> develops these measurements.</p>
+<h2 id="14">Boundaries between two phases</h2>
+<p>A phase boundary is not a separate type of object. It is a grain boundary whose two neighbouring grains differ in phase, selected here by two names.</p>
+<p>Every segment between andesina and orthoclase carries a misorientation. Its angle is the minimum over the symmetries of both phases.</p>
 {% highlight matlab %}
-figure;histogram(angle./degree)
-xlabel('angle in degrees of boundary segment')
-ylabel('count of boundary segments')
-title('angular relationships between Andesina and Orthoclase')
+close all
+
+% select the boundary segments between two phases and display their summary
+aoBoundary = grains.boundary('Andesina','Orthoclase')
+
+% store one angle per boundary segment in radians
+boundaryAngle = aoBoundary.misorientation.angle;
+
+% highlight an illustrative part of the angular range
+plot(grains,'FaceAlpha',0.4)
+hold on
+plot(aoBoundary(boundaryAngle > 160*degree),...
+  'LineWidth',2,'LineColor','red')
+hold off
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+aoBoundary = grainBoundary (y↑→x)
+ 
+ Segments    length  mineral 1   mineral 2
+     1180  40120 µm   Andesina  Orthoclase
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="GrainTutorial_08.png" %}
 </center>
+<p>The red traces are the segments above the illustrative 160 degree filter. This filter is applied after reconstruction and did not define the grains. A phase change already made every andesina to orthoclase contact a boundary.</p>
+<p>One physical interface is represented by many connected segments. A segment count is therefore neither a count of interfaces nor a set of independent observations.</p>
+<p>Weighting by <a href="grainBoundary.segLength.html"><code class="language-plaintext highlighter-rouge">segLength</code></a> gives longer interfaces proportionally more influence. It avoids weighting every tessellation segment equally.</p>
+{% highlight matlab %}
+figure
+
+% bin the angles and sum the segment lengths falling into each bin
+[~,edges,binId] = histcounts(boundaryAngle./degree);
+traceLength = accumarray(binId,aoBoundary.segLength,[numel(edges)-1 1]);
+
+histogram('BinEdges',edges,'BinCounts',traceLength)
+xlabel('minimum misorientation angle (degrees)')
+ylabel('boundary trace length')
+title('Andesina to orthoclase orientation relationships')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainTutorial_09.png" %}
+</center>
+<p>Notice how the traced boundary length is distributed across the angular range. This plot is descriptive, not evidence that either phase pair is related more often than chance.</p>
+<p>Such a claim needs a stated reference distribution and consistent sampling weights. Continue with <a href="BoundaryTutorial.html">the grain boundary tutorial</a>, then <a href="BoundaryMisorientations.html">Boundary Misorientations</a> and <a href="MisorientationDistributionFunction.html">Misorientation Distribution Functions</a>.</p>
+<h2 id="18">Next</h2>
+<p>
+<a href="SelectingGrains.html">Selecting Grains</a> covers selection by position, phase, property, and orientation. <a href="GrainSpatialPlots.html">Grain Plots</a> and <a href="ShapeParameters.html">Shape Parameters</a> develop grain measurements.</p>
+<p>Grain mean orientations can also be used for pole figures and ODFs. Giving every grain one vote answers a different question from weighting pixels or grain area; <a href="EBSD2ODF.html">ODF Estimation</a> explains the choice.</p>
+<p>For your own data, read <a href="EBSDReferenceFrame.html">Reference Frame</a> before interpreting orientation-dependent results. The reconstructed regions continue into the <a href="Grains.html">Grains</a> chapter, while their interfaces continue into <a href="GrainBoundaries.html">Grain Boundaries</a>.</p>
+<h2 id="19">Further reading</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain detection from 2d and 3d EBSD data - Specification of the MTEX algorithm</a>, Ultramicroscopy 111 (2011), 1720-1733.</li>
+<li>F.J. Humphreys, <a href="https://doi.org/10.1023/A:1017973432592">Grain and subgrain characterisation by electron backscatter diffraction</a>, Journal of Materials Science 36 (2001), 3833-3854.</li>
+<li>A.J. Schwartz et al., editors, <a href="https://doi.org/10.1007/978-0-387-88136-2">Electron Backscatter Diffraction in Materials Science</a>, 2nd ed., Springer, 2009.</li>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a> specifies EBSD procedures for average grain size from two-dimensional sections and warns that highly deformed specimens require care.</li>
+<li>
+<a href="https://store.astm.org/e2627-13r19.html">ASTM E2627-13(2019)</a> covers EBSD grain-size measurement in fully recrystallized polycrystals. That scope does not include the deformed mylonite used on this page.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

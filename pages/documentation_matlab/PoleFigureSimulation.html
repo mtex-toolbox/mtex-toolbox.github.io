@@ -1,5 +1,5 @@
 ---
-title: "Simulating Pole Figure data"
+title: 'Simulating Pole Figure Data'
 
 sidebar: documentation_sidebar
 permalink: PoleFigureSimulation.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Simulating Pole Figure data</title>
+<title>Simulating Pole Figure Data</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_PoleFigureSimulation.m">
 </head>
@@ -23,9 +23,15 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Simulating pole figure data from a given ODF is useful to investigate pole figure to ODF reconstruction routines. Let us start with a model ODF given as the superposition of 6 components.</p>
+<p>With measured data the true orientation distribution function (ODF) is unknown. A reconstruction can therefore be judged by how well it reproduces the measurement, but that is also the data it was fitted to. Simulation removes this circularity. Start from a known ODF, compute the pole figures it would produce, add counting noise, reconstruct, and compare the result with the known model.</p>
+<p>This page runs that controlled experiment once. It then asks a practical question: how many pole figures does this particular reconstruction need? The model components are introduced in <a href="ODFModeling.html">ODF Modelling</a>, the forward projection in <a href="ODFPoleFigure.html">Pole Figures of an ODF</a>, and the inverse problem in <a href="PoleFigure2ODF.html">ODF Reconstruction</a>.</p>
+<p>A plotting convention states how a reference frame is laid out on screen. Here specimen Y points up and specimen X points right; the convention does not rotate the specimen or the ODF.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">A known test ODF</h2>
+<p>The orthorhombic model contains six components. Half of the volume is uniform, three fibre components contribute 0.05 each, and two unimodal components contribute 0.05 and 0.30. The large uniform portion makes the inversion deliberately difficult because independently scaled pole figures constrain that portion least.</p>
+{% highlight matlab %}
 cs = crystalSymmetry('orthorhombic');
 mod1 = orientation.byAxisAngle(xvector,45*degree,cs);
 mod2 = orientation.byAxisAngle(yvector,65*degree,cs);
@@ -35,38 +41,25 @@ model_odf = 0.5*uniformODF(cs) + ...
   0.05*fibreODF(Miller(0,0,1,cs),zvector,'halfwidth',10*degree) + ...
   0.05*unimodalODF(mod1,'halfwidth',15*degree) + ...
   0.3*unimodalODF(mod2,'halfwidth',25*degree);
-{% endhighlight %}
 
-{% highlight matlab %}
-plot(model_odf,'sections',6,'silent','sigma')
+plot(model_odf,'sections',6,'silent','sigma','minmax')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureSimulation_01.png" %}
 </center>
-<p>In order to simulate pole figure data, the following parameters have to be specified</p>
-<div>
-<ol>
-<li>an arbitrary <a href="SO3Fun.SO3Fun.html">ODF</a>
-</li>
-<li>a list of <a href="Miller.Miller.html">Miller indices</a>
-</li>
-<li>a grid of <a href="S2Grid.S2Grid.html">specimen directions</a>
-</li>
-<li>superposition coefficients (optional)</li>
-<li>the magnitude of error (optional)</li>
-</ol>
-</div>
-<p>The list of <a href="Miller.Miller.html">Miller indices</a>
-</p>
+<p>The sigma sections separate the compact maxima of the two unimodal components from the extended bands of the three fibres. The uniform half of the model is the common baseline beneath those features rather than a separate peak.</p>
+<h2 id="4">Simulating the measurement</h2>
+<p>Three choices determine the simulated measurement: which lattice planes are measured, which specimen directions are sampled, and how many counts are expected. Superposition coefficients may also be supplied when diffraction peaks from several lattice planes overlap.</p>
+<p>The seven lattice directions below are kept in a deliberate order. The final experiment adds their pole figures from left to right.</p>
 {% highlight matlab %}
 h = [Miller(1,1,1,cs),Miller(1,1,0,cs),Miller(1,0,1,cs),Miller(0,1,1,cs),...
   Miller(1,0,0,cs),Miller(0,1,0,cs),Miller(0,0,1,cs)];
 {% endhighlight %}
-<p>The <a href="regularS2Grid.html">grid</a> of specimen directions</p>
+<p>They are sampled on a <a href="regularS2Grid.html">regular grid</a> with 5 degree spacing.</p>
 {% highlight matlab %}
 r = regularS2Grid('resolution',5*degree);
 {% endhighlight %}
-<p>Now the pole figures can be simulated using the command <a href="SO3Fun.calcPoleFigure.html"><code class="language-plaintext highlighter-rouge">calcPoleFigure</code></a>.</p>
+<p> <a href="SO3Fun.calcPoleFigure.html"><code class="language-plaintext highlighter-rouge">calcPoleFigure</code></a> evaluates the ODF for every lattice direction and specimen direction. Its printed summary confirms the seven pole figures and their sampling grids.</p>
 {% highlight matlab %}
 pf = calcPoleFigure(model_odf,h,r)
 {% endhighlight %}
@@ -75,83 +68,107 @@ pf = calcPoleFigure(model_odf,h,r)
 pf = PoleFigure (y↑→x)
   crystal symmetry : mmm
  
-  h = (111), r = 72 x 37 points
-  h = (110), r = 72 x 37 points
-  h = (101), r = 72 x 37 points
-  h = (011), r = 72 x 37 points
-  h = (100), r = 72 x 37 points
-  h = (010), r = 72 x 37 points
-  h = (001), r = 72 x 37 points
+  h = (111), r = 72 × 37 points
+  h = (110), r = 72 × 37 points
+  h = (101), r = 72 × 37 points
+  h = (011), r = 72 × 37 points
+  h = (100), r = 72 × 37 points
+  h = (010), r = 72 × 37 points
+  h = (001), r = 72 × 37 points
 {% endhighlight %}
-<p>Add some noise to the data. Here we assume that the mean intensity is 1000.</p>
+<h2 id="7">Adding counting noise</h2>
+<p>The values above are exact pole densities. A diffraction measurement counts quanta, so its counting error is commonly modelled by a Poisson distribution. At a point with pole density \(P_h(r)\), the call below draws a count with mean \(1000 P_h(r)\). Thus 1000 is an intensity scale, not the same mean count at every point. No background is added in this example.</p>
+<p> <a href="PoleFigure.noisepf.html"><code class="language-plaintext highlighter-rouge">noisepf</code></a> makes the absolute fluctuations larger at bright points but their relative size smaller.</p>
 {% highlight matlab %}
 pf = noisepf(pf,1000);
-{% endhighlight %}
-<p>Plot the simulated pole figures.</p>
-{% highlight matlab %}
+
 plot(pf)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureSimulation_02.png" %}
 </center>
-<h2 id="9">ODF Estimation from Pole Figure Data</h2>
-<p>From these simulated pole figures we can now estimate an ODF</p>
+<p>The seven panels retain the smooth bands and maxima imposed by the model, but individual grid values now fluctuate. The fluctuations are most conspicuous relative to the signal in the darker parts of each panel.</p>
+<h2 id="9">Reconstructing and comparing</h2>
+<p>The simulated counts can be passed to the ordinary reconstruction. The scale of each pole figure is estimated as part of that inversion.</p>
 {% highlight matlab %}
-odf = calcODF(pf)
-{% endhighlight %}
+odf = calcODF(pf,'silent');
 
-{% highlight plaintext %}
-odf = SO3FunRBF (mmm → y↑→x)
- 
-  uniform component
-  weight: 0.47
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 29772 orientations, resolution: 5°
-  weight: 0.53
+plot(odf,'sections',6,'silent','sigma','minmax')
 {% endhighlight %}
-<p>which can be plotted,</p>
-{% highlight matlab %}
-plot(odf,'sections',6,'silent','sigma')
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureSimulation_03.png" %}
 </center>
-<p>and compared to the original model ODF.</p>
+<p>Compared with the model sections above, the compact maxima and fibre bands are in the same places and have similar shapes. The minimum and maximum labels expose differences in amplitude that independent colour scales could hide.</p>
+<p> <a href="SO3Fun.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> compares the two normalized ODFs on a 5 degree orientation grid. Its default ODF-to-ODF measure is the L1 distance divided by two, which is the minimum volume fraction that would have to be moved to turn one distribution into the other.</p>
 {% highlight matlab %}
-calcError(odf,model_odf,'resolution',5*degree)
+modelError = calcError(odf,model_odf,'resolution',5*degree);
+fprintf('L1 reconstruction error: %.4f\n',modelError)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.0836
+L1 reconstruction error: 0.0836
 {% endhighlight %}
-<h2 id="12">Exploration of the relationship between estimation error and number of pole figures</h2>
-<p>For a more systematic analysis of the estimation error, we vary the number of pole figures used for ODF estimation from 1 to 7 and calculate for any number of pole figures the approximation error. Furthermore, we also apply ghost correction and compare the approximation error to the previous reconstructions.</p>
+<p>The error is 8.3 percent of the volume. A real experiment has no known model ODF against which this number can be computed, which is the reason for simulating.</p>
+<h2 id="12">How many pole figures are needed</h2>
+<p>Each additional pole figure supplies more equations to an underdetermined inverse problem. The error may therefore fall as figures are added, then level off once the remaining ambiguity is not resolved by these data. Noise and regularisation mean that the decrease need not be monotonic.</p>
+<p>The following experiment reconstructs from the first pole figure, the first two, and so on. Each subset is reconstructed both without and with <a href="PoleFigure2ODFGhostCorrection.html">ghost correction</a>.</p>
 {% highlight matlab %}
-e = [];
+e = zeros(pf.numPF,2);
 for i = 1:pf.numPF
 
-  odf = calcODF(pf({1:i}),'silent','NoGhostCorrection');
+  odf = calcODF(pf({1:i}),'silent','noGhostCorrection');
   e(i,1) = calcError(odf,model_odf,'resolution',2.5*degree);
   odf = calcODF(pf({1:i}),'silent');
   e(i,2) = calcError(odf,model_odf,'resolution',2.5*degree);
 
 end
 
-% visualize the result
+errorByCount = table((1:pf.numPF)',e(:,1),e(:,2),...
+  'VariableNames',{'poleFigures','withoutGhostCorrection',...
+  'withGhostCorrection'})
 
 close all;
-plot(1:pf.numPF,e,'LineWidth',2)
-ylim([0.07 0.32])
-xlabel('Number of Pole Figures');
-ylabel('Reconstruction Error');
-legend({'Without Ghost Correction','With Ghost Correction'});
+plot(1:pf.numPF,e,'o-','LineWidth',2)
+xlabel('Number of pole figures');
+ylabel('L1 reconstruction error');
+xticks(1:pf.numPF);
+ylim([0 0.35]);
+grid on
+legend({'Without ghost correction','With ghost correction'});
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+errorByCount =
+  7×3 table
+    poleFigures    withoutGhostCorrection    withGhostCorrection
+    ___________    ______________________    ___________________
+         1                0.30164                  0.29932      
+         2                0.24801                  0.24076      
+         3                0.15056                  0.13944      
+         4                0.12724                  0.11106      
+         5                0.14523                  0.12812      
+         6                 0.1155                  0.10171      
+         7                 0.1027                 0.083678
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="PoleFigureSimulation_04.png" %}
 </center>
+<p>Both curves fall steeply from one pole figure to four: the error with ghost correction drops from 0.299 to 0.110. They then flatten, with a bump when the fifth pole figure is added. In this experiment, four pole figures capture most of the recoverable information, and which four are chosen matters more than simply increasing their number.</p>
+<p>The corrected curve is lower at every count, though not by much: 0.083 against 0.102 at seven pole figures, and almost no difference at one. Ghost correction addresses a specific defect by estimating the uniform portion. This model has a large uniform portion by construction; see <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a> for why it is difficult to recover.</p>
+<p>Four is not a general minimum. The result depends on this ODF, crystal symmetry, ordered set of lattice directions, full sampling grid, count scale, and reconstruction settings. The bump at five is a useful warning: the solver fits noisy pole figures, not the hidden model used to score it.</p>
+<h2 id="14">What this simulation leaves out</h2>
+<p>This controlled example isolates counting noise and the ambiguity of the inversion. Real pole figures may also have incomplete angular coverage, background, defocusing, uncertain normalization, outliers, and overlapping diffraction peaks. Simulation tests the reconstruction under the effects included in the model; it does not validate corrections that were omitted.</p>
+<h2 id="15">Further Reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982. This is the classical treatment of pole figures, ODF inversion, and reconstruction ambiguity.</li>
+<li>R. Hielscher and H. Schaeben, <a href="https://doi.org/10.1107/S0021889808030112">A novel pole figure inversion method: specification of the MTEX algorithm</a>, <i>Journal of Applied Crystallography</i> 41 (2008), 1024--1037. It derives the estimator used here from a Poisson model of diffraction counts.</li>
+<li>S. Matthies and G. W. Vinel, <a href="https://doi.org/10.1002/pssb.2221120254">On the reproduction of the orientation distribution function of textured samples from reduced pole figures using the conception of a conditional ghost correction</a>, <i>physica status solidi (b)</i> 112 (1982), K111--K114.</li>
+<li>ASTM International, <a href="https://doi.org/10.1520/E0081-96R24">ASTM E81-96(2024): Standard Test Method for Preparing Quantitative Pole Figures</a>. It covers experimental procedures for complete and partial quantitative X-ray pole figures.</li>
+</ul>
+</div>
+<h2 id="16">Next</h2>
+<p>The next page, <a href="PoleFigure2ODFAmbiguity.html">The Ghost Effect</a>, shows why distinct ODFs can produce identical pole figures. Continue with <a href="PoleFigure2ODFGhostCorrection.html">Ghost Correction</a> for the correction compared here, then <a href="PoleFigureSantaFe.html">the Santa Fe example</a> for the same comparison on a standard model ODF.</p>
 </div>
 </body>
 </html>

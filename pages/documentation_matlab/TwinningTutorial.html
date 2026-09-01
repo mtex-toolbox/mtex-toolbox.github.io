@@ -1,5 +1,5 @@
 ---
-title: "Twinning Tutorial"
+title: 'Deformation Twinning'
 
 sidebar: documentation_sidebar
 permalink: TwinningTutorial.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Twinning Tutorial</title>
+<title>Deformation Twinning</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_TwinningTutorial.m">
 </head>
@@ -22,8 +22,156 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Crystal slip moves dislocations without changing the lattice orientation discontinuously. <b>Deformation twinning</b> instead shears part of a crystal into a second orientation related to the parent by a twin law. The transformed region is the twin domain, and its interface with the parent is a twin boundary.</p>
+<p>A twin shear has a plane and a direction, much like a slip system. Its shear is polar: the forward sense creates or grows a twin, whereas the reverse sense can shrink an existing twin. This page uses Schmid factors to examine that loading geometry. It does not predict twin nucleation, twin volume fraction, or the full lattice reorientation.</p>
+<p>Read <a href="SlipSystems.html">Slip Systems</a> first for plane--direction geometry and CRSS. <a href="SchmidFactor.html">Schmid Factor</a> develops the stress projection used here for ordinary slip.</p>
 <!--/introduction-->
-<h2 id="1">TODO</h2>
+<h2 id="1">Define one magnesium extension-twin shear</h2>
+<p>Use a hexagonal magnesium lattice and the predefined first-order tensile twin family. The name <code class="language-plaintext highlighter-rouge">twinT1</code> refers to the common \(\{10\bar{1}2\}\langle10\bar{1}1\rangle\) extension-twin mode. MTEX stores its shear direction in <code class="language-plaintext highlighter-rouge">b</code>, its plane normal in <code class="language-plaintext highlighter-rouge">n</code>, and its critical resolved shear stress (CRSS) in <code class="language-plaintext highlighter-rouge">CRSS</code>.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('622',[3.2 3.2 5.2], ...
+  'mineral','Magnesium');
+sSTwin = slipSystem.twinT1(cs,1)
+{% endhighlight %}
+
+{% highlight plaintext %}
+sSTwin = slipSystem (Magnesium)
+ 
+  U    V    T    W  | H    K    I    L CRSS
+  1   -1    0    1   -1    1    0    2    1
+{% endhighlight %}
+<h2 id="2">See the shear geometry</h2>
+<p>Draw the representative system inside a hexagonal crystal. The coloured disk is the twin plane and the arrow is the stored positive shear direction.</p>
+{% highlight matlab %}
+cS = crystalShape.hex(cs);
+plot(cS,'faceAlpha',0.35,'faceColor',[0.72 0.82 0.94])
+hold on
+plot(cS,sSTwin,'faceColor',[0.9 0.25 0.2])
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="TwinningTutorial_01.png" %}
+</center>
+<p>The arrow lies in the disk because the shear direction is perpendicular to the plane normal. This picture describes the local shear geometry, not the shape or thickness of a twin domain.</p>
+<h2 id="4">Resolve a tensile stress onto the shear</h2>
+<p>Apply unit tension along the crystal c-axis. The signed Schmid factor is the resolved shear stress divided by the applied stress difference. A positive value drives the stored direction; a negative value drives the reverse direction.</p>
+{% highlight matlab %}
+cAxis = Miller(0,0,0,1,cs,'UVTW');
+sigmaTension = stressTensor.uniaxial(cAxis);
+mTension = sSTwin.SchmidFactor(sigmaTension)
+{% endhighlight %}
+
+{% highlight plaintext %}
+mTension =
+    0.4990
+{% endhighlight %}
+<p>Reverse the sign of the stress tensor to represent c-axis compression. Merely replacing <code class="language-plaintext highlighter-rouge">cAxis</code> by <code class="language-plaintext highlighter-rouge">-cAxis</code> would still construct the same uniaxial tensile tensor, because an axis has no positive end.</p>
+{% highlight matlab %}
+sigmaCompression = -sigmaTension;
+mCompression = sSTwin.SchmidFactor(sigmaCompression)
+{% endhighlight %}
+
+{% highlight plaintext %}
+mCompression =
+   -0.4990
+{% endhighlight %}
+<p>The two factors are 0.4990 and -0.4990. Their equal magnitude and opposite signs show the polarity directly. An ordinary slip analysis often compares absolute values because dislocations can move in either sense.</p>
+<h2 id="7">Map the loading directions</h2>
+<p>Omitting the load returns a spherical function of the tension direction. Plotting it shows where this representative receives positive and negative resolved shear.</p>
+{% highlight matlab %}
+SFTwin = sSTwin.SchmidFactor;
+plot(SFTwin,'upper')
+mtexColorbar
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="TwinningTutorial_02.png" %}
+</center>
+<p>Warm and cool lobes have equal shape but opposite sign. Directions on a zero contour do not resolve shear along this stored twin direction. A large absolute value gives favourable geometry, but activation still requires the resolved shear to reach the measured CRSS.</p>
+<h2 id="9">Generate symmetry-equivalent entries</h2>
+<p>A crystal offers symmetry-related planes and directions. By default, <code class="language-plaintext highlighter-rouge">symmetrise</code> also retains both signs of each shear direction because the <a href="slipSystem.slipSystem.html">slipSystem</a> class is shared with ordinary slip.</p>
+{% highlight matlab %}
+sSTwinAll = sSTwin.symmetrise
+numberOfEntries = length(sSTwinAll)
+{% endhighlight %}
+
+{% highlight plaintext %}
+sSTwinAll = slipSystem (Magnesium)
+ size: 12 × 1
+ 
+   U    V    T    W  | H    K    I    L CRSS
+   1   -1    0    1   -1    1    0    2    1
+  -1    1    0   -1   -1    1    0    2    1
+   1    0   -1   -1   -1    0    1   -2    1
+  -1    0    1    1   -1    0    1   -2    1
+   1    0   -1    1   -1    0    1    2    1
+  -1    0    1   -1   -1    0    1    2    1
+   1   -1    0   -1   -1    1    0   -2    1
+  -1    1    0    1   -1    1    0   -2    1
+   0    1   -1    1    0   -1    1    2    1
+   0   -1    1   -1    0   -1    1    2    1
+   0   -1    1    1    0    1   -1    2    1
+   0    1   -1   -1    0    1   -1    2    1
+numberOfEntries =
+    12
+{% endhighlight %}
+<p>The twelve entries are six geometric systems with two opposite shear directions each. This is convenient for reversible slip calculations, but it is not by itself a physical list of twelve extension-twin variants. The option <code class="language-plaintext highlighter-rouge">'antipodal'</code> collapses the two signs when only the geometric planes and directions are required.</p>
+{% highlight matlab %}
+sSTwinGeometry = sSTwin.symmetrise('antipodal');
+numberOfGeometricSystems = length(sSTwinGeometry)
+{% endhighlight %}
+
+{% highlight plaintext %}
+numberOfGeometricSystems =
+     6
+{% endhighlight %}
+<h2 id="11">A polarity trap</h2>
+<p>Do not automatically take <code class="language-plaintext highlighter-rouge">abs(SchmidFactor)</code> and call its maximum the active twin variant. That operation discards the forward shear sense. Conversely, the sign chosen for an antipodal geometric representative is only a storage convention and cannot restore the missing polarity.</p>
+<p>A physical activation model must supply the admissible signed variants, their CRSS values, and a kinetic rule for nucleation, growth, and possible detwinning. Temperature, strain rate, grain constraint, interfaces, and prior deformation can all change the observed activity. The Schmid factor is therefore a geometric screening quantity, not proof that a twin forms.</p>
+<h2 id="12">Move between crystal and specimen frames</h2>
+<p>In an experiment, the applied stress is expressed in the specimen frame. An orientation maps the crystal-frame twin shear into that frame. The two equivalent routes below either rotate the system forward or rotate the stress back into the crystal frame.</p>
+{% highlight matlab %}
+ori = orientation.byEuler(20*degree,35*degree,10*degree,cs);
+sigmaSpecimen = stressTensor.uniaxial(vector3d.Z);
+
+sSTwinSpecimen = ori * sSTwin;
+mSpecimenRoute = sSTwinSpecimen.SchmidFactor(sigmaSpecimen)
+
+sigmaCrystal = inv(ori) * sigmaSpecimen;
+mCrystalRoute = sSTwin.SchmidFactor(sigmaCrystal)
+{% endhighlight %}
+
+{% highlight plaintext %}
+mSpecimenRoute =
+    0.2156
+mCrystalRoute =
+    0.2156
+{% endhighlight %}
+<p>The two values agree to numerical roundoff. This equivalence is the useful check for a frame-correct EBSD calculation: rotate every candidate system by its grain orientation, or rotate the common specimen stress back into each grain's crystal frame, but do not mix the two frames.</p>
+{% highlight matlab %}
+frameRouteDifference = abs(mSpecimenRoute-mCrystalRoute)
+{% endhighlight %}
+
+{% highlight plaintext %}
+frameRouteDifference =
+   1.3878e-16
+{% endhighlight %}
+<p>The difference is \(1.3878\times10^{-16}\), which is numerical roundoff.</p>
+<h2 id="15">From shear activity to a twin boundary</h2>
+<p>The shear system and the twin law answer different questions. A shear system tests whether a load favours a deformation mode. A twin law is the discrete orientation relationship expected between the parent and the reoriented domain. <a href="Twinning.html">Twinning</a> constructs that relationship and explains its symmetry-equivalent rotation angles.</p>
+<p>Finding the same relationship across an EBSD boundary makes that boundary a candidate twin boundary. It does not prove the deformation mechanism or identify which side is the parent. <a href="TwinningBoundaries.html">Twinning Analysis</a> combines the full misorientation with boundary morphology and explains those limitations.</p>
+{% highlight matlab %}
+% Close generated figures before the closing sections.
+close all
+{% endhighlight %}
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>J. W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation Twinning</a>, <i>Progress in Materials Science</i> 39 (1995), 1--157, develops the shear geometry, polarity, crystallography, and mechanics of deformation twins.</li>
+<li>U. F. Kocks, C. N. Tom&eacute; and H.-R. Wenk, <a href="https://books.google.com/books?id=vkyU9KZBTioC">Texture and Anisotropy</a>, Cambridge University Press, 1998, relates resolved shear, CRSS, and deformation-system activity in textured polycrystals.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Continue with <a href="Twinning.html">Twinning</a> to turn a known twin law into an orientation relationship. For an EBSD-first workflow, use <a href="TwinningBoundaries.html">Twinning Analysis</a> to infer and map candidate twin boundaries from their measured misorientations.</p>
 </div>
 </body>
 </html>

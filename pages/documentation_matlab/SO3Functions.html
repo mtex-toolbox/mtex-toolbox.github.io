@@ -1,5 +1,5 @@
 ---
-title: "Orientation Functions"
+title: 'Orientation Functions'
 
 sidebar: documentation_sidebar
 permalink: SO3Functions.html
@@ -23,38 +23,60 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>An orientation density function is a function on the set of all rotations. So is a misorientation distribution, so is the Schmid factor of a slip system as the crystal turns, so is the stiffness of a grain along a fixed specimen direction. This chapter is about that set of functions in general - the machinery of which an <a href="ODFAnalysis.html">ODF</a> is the most familiar instance.</p>
-<p>Keeping the two apart is useful. The ODF chapter is about texture: what the function means, how to estimate it, how to read its plots. This chapter is about the function: how it is stored, what it costs to evaluate, how to approximate one from data, what happens when you convolve or rotate or differentiate it.</p>
-<p>Below is such a function, shown in sigma sections - one of the ways of slicing a three-dimensional curved domain into flat pictures.</p>
+<h2 id="1">What is a function on rotations?</h2>
+<p>A function on rotations assigns a value to every rotation in \(\mathrm{SO}(3)\). Its value may describe a density, a physical response, or another quantity that changes as a crystal turns.</p>
+<p>An <a href="ODFAnalysis.html">orientation density function</a> (ODF) is the most familiar example. A misorientation distribution is another. So are the Schmid factor of a slip system as the crystal turns and the stiffness of a grain along a fixed specimen direction.</p>
+<p>This chapter treats the machinery shared by all these functions. The ODF chapter instead treats texture: what a density means, how to estimate it, and how to read its plots. Keeping the physical interpretation separate from the function representation makes both easier to follow.</p>
+<p>Here the questions are how a function is stored, what evaluation costs, how samples can approximate it, and what rotation, differentiation, and convolution do to it.</p>
+<h2 id="2">A first picture</h2>
+<p>A function on rotations has a three-dimensional curved domain. A flat figure must therefore show cuts through it. The example below uses <a href="SigmaSections.html">sigma sections</a>, which hold the difference \(\sigma=\varphi_1-\varphi_2\) of the first and third Bunge angle fixed in each panel.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
 cs = crystalSymmetry('432');
-odf = unimodalODF(orientation.byEuler(30*degree,50*degree,10*degree,cs),'halfwidth',15*degree);
+mode = orientation.byEuler(30*degree,50*degree,10*degree,cs);
+odf = unimodalODF(mode,'halfwidth',15*degree);
 
 plot(odf,'sigma','sections',6,'figSize','medium')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SO3Functions_01.png" %}
 </center>
-<p>Six slices, and a single peak appearing in several of them. Rotations do not lie flat, and every plot in this chapter is a compromise of this kind.</p>
-<h2 id="3">Why rotations are harder than the sphere</h2>
-<p>Functions on a sphere are two-dimensional and functions on rotations are three-dimensional, so everything costs more - but the real difficulties are elsewhere.</p>
-<p>Rotation space closes up on itself in a way that has no two-dimensional analogue, so there is no picture of it without cuts, and quantities that look far apart in Euler angles can be neighbours. Symmetry then folds it further: a function of crystal orientations is invariant under the crystal symmetry acting on one side and, if the specimen has symmetry, under that acting on the other. The domain a texture actually lives on is a small folded piece of the whole, and its shape depends on the point groups involved.</p>
-<p>The basis functions are the <b>Wigner-D functions</b>, the rotational counterpart of spherical harmonics. Bandwidth means the same thing as it does there, and costs more: the number of coefficients grows with the cube of the bandwidth rather than the square.</p>
-<h2 id="4">Where to start</h2>
+<p>The six panels are slices through one function, not six different functions. A single peak appears in several panels because adjacent slices intersect the same three-dimensional feature. Every plot of a rotational function makes a comparable compromise.</p>
+<h2 id="4">Why rotations are harder than the sphere</h2>
+<p>A function on the sphere has a two-dimensional domain. A function on rotations has a three-dimensional domain, so its storage, evaluation, and visualization generally cost more.</p>
+<p>Rotation space also closes up on itself in a way that has no two-dimensional analogue. No single flat picture can show it without cuts, and rotations that look far apart in Euler angles can be neighbours.</p>
+<p>Symmetry folds the domain further. A function of crystal orientations is invariant under crystal symmetry acting on one side. If the specimen has symmetry, it is invariant under that symmetry acting on the other side. A texture therefore lives on a smaller, folded part of the rotation group, whose shape depends on both point groups.</p>
+<p>Harmonic representations use the <a href="WignerFunctions.html">Wigner-D functions</a>, defined on the closing page of this chapter. They are the rotational counterpart of spherical harmonics. Bandwidth has the same meaning in both settings, but the number of rotational coefficients grows with the cube of the bandwidth rather than the square.</p>
+<h2 id="5">Learn the common interface first</h2>
+<p>Begin with <a href="SO3FunConcept.html">Concept</a>, which explains the domain, symmetry, and available representations. Then use <a href="SO3FunDefinition.html">Definition</a> to construct harmonic, radial basis, fibre, and Bingham functions. <a href="SO3FunOperations.html">Operations</a> covers evaluation, arithmetic, rotation, differentiation, and integration.</p>
+<h2 id="6">See the function</h2>
 <p>
-<a href="SO3FunConcept.html">Concept</a> and <a href="SO3FunDefinition.html">Definition</a> introduce the representations - harmonic, radial basis function, fibre, Bingham - and how to build each. <a href="SO3FunOperations.html">Operations</a> is the arithmetic.</p>
-<p>For viewing, <a href="ODFPlot.html">Plotting</a> is the overview and <a href="SigmaSections.html">Sigma Sections</a> and <a href="EulerAngleSections.html">Euler Angle Sections</a> are the two families of slice. These pages are shared with the ODF chapter, since the plots are the same whatever the function means.</p>
-<p>Approximation from data is the longest thread here, and the pages differ in method rather than in aim. <a href="SO3FunApproximationTheory.html">Interpolation</a> is the overview; <a href="HarmonicApproximationTheory.html">Harmonic Interpolation</a> fits coefficients, <a href="RBFApproximationTheory.html">RBF-Kernel Interpolation</a> fits a sum of bumps, and <a href="SO3FunQuadrature.html">Approximation and Quadrature</a> covers the numerical integration all of it rests on - how to evaluate an integral over rotations from finitely many samples, which is not obvious and not cheap.</p>
-<p>The representations themselves have pages of their own: <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation</a>, <a href="RadialODFs.html">Radial Basis Functions</a>, <a href="FibreODFs.html">Fibre Functions</a> and <a href="BinghamODFs.html">Bingham ODF</a>. <a href="SO3Kernels.html">Rotational Kernel Functions</a> and <a href="WignerFunctions.html">Wigner-D Functions</a> are the building blocks underneath, and <a href="SO3FunConvolution.html">Convolution</a> the operation that joins them - smoothing, and the step from measurements to a density.</p>
+<a href="ODFPlot.html">Plotting</a> gives the overview. The two main families of slices are <a href="SigmaSections.html">Sigma Sections</a> and <a href="EulerAngleSections.html">Euler Angle Sections</a>. These pages are shared with the ODF chapter because plotting depends on the function, not on the physical meaning assigned to it.</p>
+<h2 id="7">Approximate a function from data</h2>
+<p>Approximation from data is the chapter's longest thread. Its pages share one aim but use different methods. <a href="SO3FunApproximationTheory.html">Interpolation</a> is the overview. <a href="HarmonicApproximationTheory.html">Harmonic Interpolation</a> fits harmonic coefficients, while <a href="RBFApproximationTheory.html">RBF-Kernel Interpolation</a> fits a sum of localized bumps.</p>
 <p>
-<a href="SO3FunSymmetricFunctions.html">Symmetry</a> makes the folding described above explicit.</p>
-<p>Functions whose values are not scalars are <a href="SO3FunVectorValued.html">Vector Valued Functions</a> and <a href="SO3FunVectorField.html">Rotational Vector Fields</a>. The latter is how a texture's response to deformation is expressed, since it assigns to every orientation the direction it is being turned.</p>
+<a href="SO3FunQuadrature.html">Approximation and Quadrature</a> develops the numerical integration behind these methods. It explains how finitely many samples can approximate an integral over rotations, which is neither obvious nor cheap.</p>
+<h2 id="8">Choose a representation</h2>
+<p>The representations have pages of their own: <a href="SO3FunHarmonicRepresentation.html">Harmonic Representation</a>, <a href="RadialODFs.html">Radial Basis Functions</a>, <a href="FibreODFs.html">Fibre Functions</a>, and <a href="BinghamODFs.html">Bingham ODF</a>.</p>
+<p>
+<a href="SO3Kernels.html">Rotational Kernel Functions</a> and <a href="WignerFunctions.html">Wigner-D Functions</a> are their building blocks. <a href="SO3FunConvolution.html">Convolution</a> joins functions for operations such as smoothing and the step from measurements to a density.</p>
+<h2 id="9">Symmetry, vector values, and files</h2>
+<p>
+<a href="SO3FunSymmetricFunctions.html">Symmetry</a> makes the folding of rotation space explicit.</p>
+<p>Not every rotational function is scalar-valued. <a href="SO3FunVectorValued.html">Vector Valued Functions</a> covers arrays of values, and <a href="SO3FunVectorField.html">Rotational Vector Fields</a> covers directions attached to the domain. A rotational vector field can express a texture's response to deformation by assigning each orientation the direction in which it is being turned.</p>
 <p>
 <a href="ODFImport.html">Import</a> and <a href="ODFExport.html">Export</a> handle files.</p>
-<h2 id="5">Next</h2>
-<p>What these functions mean when they describe a texture is <a href="ODFAnalysis.html">ODF</a>. The two-dimensional relatives are <a href="SphericalFunctions.html">Spherical Functions</a>, and the rotations underneath are <a href="Rotations.html">Rotations</a> and <a href="CrystalOrientations.html">Orientations</a>.</p>
+<h2 id="10">Related foundations</h2>
+<p>For the physical meaning of a texture density, see <a href="ODFAnalysis.html">ODF</a>. The two-dimensional relatives are introduced in <a href="SphericalFunctions.html">Spherical Functions</a>. The underlying geometry is developed under <a href="Rotations.html">Rotations</a> and <a href="CrystalOrientations.html">Orientations</a>.</p>
+<h2 id="11">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2"><i>Texture Analysis in Materials Science: Mathematical Methods</i></a>, Butterworths, 1982, develops the orientation-space, symmetry, and harmonic framework summarized here.</li>
+</ul>
+</div>
+<h2 id="12">Next</h2>
+<p>Continue with <a href="SO3FunConcept.html">Concept</a> to distinguish a rotational function's domain, values, symmetries, and numerical representation before constructing one.</p>
 </div>
 </body>
 </html>

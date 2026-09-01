@@ -1,5 +1,5 @@
 ---
-title: "Defining Three Dimensional Vectors"
+title: 'Defining Three-Dimensional Vectors'
 
 sidebar: documentation_sidebar
 permalink: VectorDefinition.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Defining Three Dimensional Vectors</title>
+<title>Defining Three-Dimensional Vectors</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_VectorDefinition.m">
 </head>
@@ -23,12 +23,14 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A direction in the specimen is a variable of type <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">&lt;vector3d.vector3d.html vector3d&gt;</code></a>. It is stored as the three Cartesian coordinates \(x\), \(y\), \(z\) of a point, and everything that follows - angles, rotations, pole figures - is computed from those three numbers.</p>
+<p>A <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> stores one or more vectors through their Cartesian components \(x\), \(y\) and \(z\). A reference frame identifies the coordinate system in which data are expressed. It includes an identity, basis and default plotting convention. The components are coordinates in that frame.</p>
+<p>A vector also has a length. When only its direction matters, dividing out that length gives a point on the unit sphere. This spherical view underlies specimen directions, pole figures and crystal directions throughout MTEX. Crystal directions add lattice information and are introduced in <a href="CrystalDirections.html">Miller Indices</a>.</p>
+<p>This page assumes basic MATLAB arrays and indexing. See <a href="ListsAndIndexing.html">Lists and Indexing</a> if those are new to you.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">Cartesian Coordinates</h2>
-<p>The direct way to define a direction is by its coordinates with respect to the specimen axes X, Y and Z.</p>
+<p>Define a vector directly from its three Cartesian components.</p>
 {% highlight matlab %}
 v = vector3d(1,2,3)
 {% endhighlight %}
@@ -38,14 +40,15 @@ v = vector3d (y↑→x)
   x y z
   1 2 3
 {% endhighlight %}
-<p>The output is a table with one row per vector, here a single one. Drawing it puts a point on the sphere, seen from above.</p>
+<p>The summary reports one vector and lists its \(x\), \(y\) and \(z\) components. A spherical plot uses its direction and therefore divides out its length.</p>
 {% highlight matlab %}
-plot(v,'grid','upper')
+plot(v,'grid','upper');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="VectorDefinition_01.png" %}
 </center>
-<p>The point sits in the upper right quadrant, because \(x\) and \(y\) are both positive, and away from the rim, because \(z\) is positive as well. Where it lands does not depend on how long the vector is - only on which way it points. The length is available as the <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>,</p>
+<p>The point lies in the upper-right quadrant because \(x\) and \(y\) are positive. It lies inside the rim because \(z\) is positive. Multiplying all three components by the same positive number would not move this point. <a href="SphericalProjections.html">Spherical Projections</a> explains how the sphere is mapped onto the page.</p>
+<p>The <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> is the stored vector's length.</p>
 {% highlight matlab %}
 norm(v)
 {% endhighlight %}
@@ -54,7 +57,7 @@ norm(v)
 ans =
     3.7417
 {% endhighlight %}
-<p>and <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a> scales it to one without moving the point.</p>
+<p>For \((1,2,3)\) the result is \(\sqrt{14}\), displayed here as 3.7417. <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a> divides each component by that length, so the result has length one without changing direction.</p>
 {% highlight matlab %}
 norm(normalize(v))
 {% endhighlight %}
@@ -63,7 +66,18 @@ norm(normalize(v))
 ans =
      1
 {% endhighlight %}
-<p>Single coordinates are read and written as properties.</p>
+<p>A zero vector has no direction, so its normalized components are undefined.</p>
+{% highlight matlab %}
+normalize(vector3d(0,0,0))
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = vector3d (y↑→x)
+    x   y   z
+  NaN NaN NaN
+{% endhighlight %}
+<p>The output contains three <code class="language-plaintext highlighter-rouge">NaN</code> values. Check for zero length before normalizing measured data.</p>
+<p>Individual coordinates can be read and changed as properties.</p>
 {% highlight matlab %}
 v.x
 {% endhighlight %}
@@ -82,8 +96,9 @@ v = vector3d (y↑→x)
   x y z
   0 2 3
 {% endhighlight %}
-<h2 id="8">Polar Coordinates</h2>
-<p>A direction is equally well described by two angles: the <b>polar angle</b> \(\theta\), measured away from the Z axis, and the <b>azimuth angle</b> \(\rho\), measured in the XY plane away from the X axis. This is what <a href="vector3d.byPolar.html"><code class="language-plaintext highlighter-rouge">vector3d.byPolar</code></a> takes.</p>
+<p>The displayed row is now \((0,2,3)\). Changing a component preserves neither the previous length nor the previous direction.</p>
+<h2 id="10">Polar Coordinates</h2>
+<p>A direction can also be described by two angles. The <b>polar angle</b> \(\theta\) is measured away from the Z axis. The <b>azimuth angle</b> \(\rho\) is measured in the XY plane away from the X axis. <a href="vector3d.byPolar.html"><code class="language-plaintext highlighter-rouge">vector3d.byPolar</code></a> takes the angles in that order and returns a unit vector.</p>
 {% highlight matlab %}
 v = vector3d.byPolar(60*degree,45*degree)
 {% endhighlight %}
@@ -93,15 +108,17 @@ v = vector3d (y↑→x)
       x     y     z
   0.612 0.612   0.5
 {% endhighlight %}
-<p>Angles are radians throughout MTEX, so an angle in degree is written as a multiple of <code class="language-plaintext highlighter-rouge">degree</code>. Both angles are also properties, and they read back in radians.</p>
+<p>MTEX stores angles in radians. Multiplying by <code class="language-plaintext highlighter-rouge">degree</code> converts a value in degrees to radians for input.</p>
 {% highlight matlab %}
-plot(v,'grid','upper')
+plot(v,'grid','upper');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="VectorDefinition_02.png" %}
 </center>
+<p>The point is \(60^\circ\) from Z and turns \(45^\circ\) from X towards Y. Thus \(\theta\) controls its distance from the centre of this spherical plot, while \(\rho\) controls the direction around the centre.</p>
+<p>The angle properties read back in radians. Divide by <code class="language-plaintext highlighter-rouge">degree</code> to display them in degrees.</p>
 {% highlight matlab %}
-v.rho ./ degree   % the azimuth angle in degree
+v.rho ./ degree   % azimuth angle in degrees
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -110,17 +127,17 @@ ans =
 {% endhighlight %}
 
 {% highlight matlab %}
-v.theta ./ degree % the polar angle in degree
+v.theta ./ degree % polar angle in degrees
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    60.0000
 {% endhighlight %}
-<h2 id="12">The Specimen Axes</h2>
-<p>The three specimen axes themselves are <code class="language-plaintext highlighter-rouge">vector3d.X</code>, <code class="language-plaintext highlighter-rouge">vector3d.Y</code> and <code class="language-plaintext highlighter-rouge">vector3d.Z</code>. They are the readable way to write down a direction that is tied to the specimen rather than to a measurement.</p>
+<h2 id="14">Basis Directions and Reference Frames</h2>
+<p>The constants <code class="language-plaintext highlighter-rouge">vector3d.X</code>, <code class="language-plaintext highlighter-rouge">vector3d.Y</code> and <code class="language-plaintext highlighter-rouge">vector3d.Z</code> spell the three Cartesian basis directions. They make combinations easier to read.</p>
 {% highlight matlab %}
-v = vector3d.X + 2 * vector3d.Y
+v = vector3d.X + 2*vector3d.Y
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -128,11 +145,11 @@ v = vector3d (y↑→x)
   x y z
   1 2 0
 {% endhighlight %}
-<p>Their names are a convention of the experiment: for rolled material X is usually the rolling direction, Y the transverse direction and Z the normal direction of the sheet.</p>
-<h2 id="14">Many Directions at Once</h2>
-<p>One <code class="language-plaintext highlighter-rouge">vector3d</code> variable holds an entire list of directions, and this is how directional data is handled in MTEX - not as a loop over single vectors. Passing arrays of coordinates gives one vector per entry.</p>
+<p>The summary shows the components \((1,2,0)\). Fresh <code class="language-plaintext highlighter-rouge">vector3d</code> data are frame-free. They are not tied to a named measurement, rolling or geological frame. At plotting time they follow the session's default specimen frame. <a href="AxesAlignment.html">Axes Alignment</a> explains named frames and their plotting conventions.</p>
+<h2 id="16">Many Directions at Once</h2>
+<p>One <code class="language-plaintext highlighter-rouge">vector3d</code> variable can hold a whole array of vectors. MTEX operations act on the array at once, so loops over individual vectors are usually unnecessary. Passing coordinate arrays creates one vector per entry.</p>
 {% highlight matlab %}
-v = vector3d((1:5),0,1)
+v = vector3d(1:5,0,1)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -145,7 +162,7 @@ v = vector3d (y↑→x)
   4 0 1
   5 0 1
 {% endhighlight %}
-<p>The list has a shape, just as a numeric array does, and it is indexed the same way.</p>
+<p>The displayed summary contains five rows. The array has a shape and uses the same indexing rules as a numeric MATLAB array.</p>
 {% highlight matlab %}
 size(v)
 {% endhighlight %}
@@ -164,7 +181,7 @@ ans = vector3d (y↑→x)
   x y z
   2 0 1
 {% endhighlight %}
-<p>Coordinates that already sit in a matrix are read row by row by <code class="language-plaintext highlighter-rouge">vector3d.byXYZ</code>, one vector per row.</p>
+<p>The second row, \((2,0,1)\), is returned as another <code class="language-plaintext highlighter-rouge">vector3d</code> object. When coordinates are already arranged in a matrix, <code class="language-plaintext highlighter-rouge">vector3d.byXYZ</code> reads one vector from each row.</p>
 {% highlight matlab %}
 xyz = [1 0 0; 0 1 0; 1 1 1];
 v = vector3d.byXYZ(xyz)
@@ -178,30 +195,41 @@ v = vector3d (y↑→x)
   0 1 0
   1 1 1
 {% endhighlight %}
-<p>Prefer <code class="language-plaintext highlighter-rouge">byXYZ</code> over passing the matrix to the constructor. The constructor accepts both readings - a \(3 \times N\) matrix by columns and an \(N \times 3\) matrix by rows - so for a \(3 \times 3\) matrix it has to guess, and it warns and reads by columns. <code class="language-plaintext highlighter-rouge">byXYZ</code> never guesses.</p>
-<p>Random directions are useful to try something out, and come from <a href="vector3d.rand.html"><code class="language-plaintext highlighter-rouge">vector3d.rand</code></a>.</p>
+<p>The three output rows match the three matrix rows. Prefer <code class="language-plaintext highlighter-rouge">byXYZ</code> when the row convention matters. The constructor also accepts coordinate matrices. A \(3 \times 3\) matrix could mean vectors by rows or by columns, so the constructor warns about that ambiguity and reads by columns.</p>
+<p> <a href="vector3d.rand.html"><code class="language-plaintext highlighter-rouge">vector3d.rand</code></a> creates uniformly distributed random unit directions. The following call creates 100 directions. Its long object summary is not useful here, so the semicolon keeps it out of the page.</p>
 {% highlight matlab %}
 v = vector3d.rand(100);
 
-plot(v,'upper','grid','MarkerSize',4)
+plot(v,'upper','grid','MarkerSize',4);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="VectorDefinition_03.png" %}
 </center>
-<h2 id="19">Plotting Conventions</h2>
-<p>Which way X points on the page is a property of the drawing, not of the data. Passing a different <a href="plottingConvention.html"><code class="language-plaintext highlighter-rouge">plottingConvention</code></a> redraws the same vector seen from somewhere else.</p>
+<p>The plot handles the complete array in one call. Only directions on the upper hemisphere appear because of <code class="language-plaintext highlighter-rouge">'upper'</code>; the option does not identify a direction with its negative.</p>
+<h2 id="22">Plotting Conventions</h2>
+<p>A <a href="plottingConvention.html">plotting convention</a> states how a reference frame is laid out on screen. It does not change the vector or re-express it in another frame. Pass <code class="language-plaintext highlighter-rouge">'how2plot'</code> to change one plot.</p>
 {% highlight matlab %}
 v = vector3d(1,2,3);
 
-plot(v,'how2plot',plottingConvention('z←↑y'),'grid')
+plot(v,'how2plot','z←↑y','grid');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="VectorDefinition_04.png" %}
 </center>
-<p>Nothing about <code class="language-plaintext highlighter-rouge">v</code> changed - only the camera did. To align every plot of a session the same way, set <code class="language-plaintext highlighter-rouge">plottingConvention.default</code>, as the first line of this page does. The alignment of the axes is treated in <a href="AxesAlignment.html">Axes Alignment</a>.</p>
-<h2 id="21">Next</h2>
+<p>The axis annotation now shows Z pointing left and Y pointing up. The components and length of <code class="language-plaintext highlighter-rouge">v</code> have not changed. To align subsequent plots, use the explicit string form of <code class="language-plaintext highlighter-rouge">plottingConvention.default</code> shown at the start of this page. <a href="AxesAlignment.html">Axes Alignment</a> develops frame changes and plotting conventions in full.</p>
+<h2 id="24">Directions and Axes</h2>
+<p>A direction distinguishes its two ends, so <code class="language-plaintext highlighter-rouge">v</code> and <code class="language-plaintext highlighter-rouge">-v</code> point in different directions. An axis treats those two signs as equivalent. The <code class="language-plaintext highlighter-rouge">'upper'</code> option only selects a hemisphere. It does not turn a direction into an axis. <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> explains how the <code class="language-plaintext highlighter-rouge">antipodal</code> flag changes angles, means and densities.</p>
+<h2 id="25">Further Reading</h2>
+<div>
+<ul>
+<li>
+<a href="https://www.iso.org/standard/64973.html">ISO 80000-2:2019, Quantities and units - Part 2: Mathematics</a> standardizes mathematical notation for vectors and their coordinates.</li>
+<li>K. V. Mardia and P. E. Jupp, <a href="https://doi.org/10.1002/9780470316979">Directional Statistics</a>, Wiley, 1999. This textbook develops the statistical treatment of directions and axes on the circle and sphere.</li>
+</ul>
+</div>
+<h2 id="26">Next</h2>
 <p>
-<a href="VectorsOperations.html">Operations</a> is the arithmetic: angles, dot and cross products, means over a list. <a href="VectorsAxes.html">Axes</a> explains when a direction is really an axis, i.e. when <code class="language-plaintext highlighter-rouge">v</code> and <code class="language-plaintext highlighter-rouge">-v</code> are the same thing, as for lattice-plane normals and conventional diffraction poles.</p>
+<a href="VectorsOperations.html">Operations</a> develops angles, dot and cross products, normalization and means over arrays. Read <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> next. It explains how to treat plane normals and conventional diffraction poles as axes.</p>
 </div>
 </body>
 </html>

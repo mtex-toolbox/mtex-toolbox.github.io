@@ -1,5 +1,5 @@
 ---
-title: "Plotting Rotations"
+title: 'Plotting Rotations'
 
 sidebar: documentation_sidebar
 permalink: RotationPlotting.html
@@ -23,64 +23,94 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A single rotation is best drawn by what it does, as the arrows on <a href="RotationDefinition.html">Definition</a> do. A whole set of rotations is drawn by giving each of them a point in a three dimensional space - one point per rotation, one space per parametrisation.</p>
+<p>A single rotation is best drawn by what it does, as in <a href="RotationDefinition.html">Defining Rotations</a>. A set of rotations needs a different picture. Each rotation becomes one point in a three-dimensional coordinate domain, with the domain determined by the parametrisation.</p>
+<p>This page assumes the axis--angle and Bunge Euler descriptions introduced in <a href="RotationDefinition.html">Defining Rotations</a>. The geometric trade-offs between coordinate systems are developed in <a href="RotationRepresentations.html">Rotation Representations</a>.</p>
+<p>The plotting convention controls how the reference frame is laid out on screen. This page uses y north and x east.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-% 500 uniformly distributed rotations
 rot = rotation.rand(500);
 {% endhighlight %}
 <h2 id="2">Euler Angle Space</h2>
-<p> <a href="quaternion.scatter.html"><code class="language-plaintext highlighter-rouge">scatter</code></a> puts each rotation at its three Bunge Euler angles. This is the default for rotations without a crystal symmetry, and the box is the range the angles run over: \(2\pi\) wide in \(\varphi_1\) and \(\varphi_2\), \(\pi\) deep in \(\Phi\).</p>
+<p> <a href="quaternion.scatter.html"><code class="language-plaintext highlighter-rouge">scatter</code></a> places each rotation at its three Bunge Euler angles. This is the default for rotations without crystal symmetry. The complete box spans \(0\leq\varphi_1,\varphi_2\leq2\pi\) and \(0\leq\Phi\leq\pi\).</p>
 {% highlight matlab %}
-scatter(rot)
+scatter(rot,'Bunge')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationPlotting_01.png" %}
 </center>
-<p>The points are not spread evenly, although the rotations are: they thin out towards the bottom of the box. Euler angle space distorts volume, by a factor \(\sin\Phi\) that vanishes at \(\Phi = 0\), so equal boxes there do not hold equal shares of rotations. This is why a texture that looks concentrated in an Euler angle plot need not be.</p>
-<h2 id="4">Axis Angle and Rodrigues Space</h2>
-<p>The same rotations placed by their axis and angle - the direction of the point is the rotation axis, the distance from the centre the rotation angle.</p>
+<p>The sample is uniform in rotation space, but its points are not uniform in this box. Notice how the cloud thins near both \(\Phi=0\) and \(\Phi=\pi\). Equal-sized boxes at different values of \(\Phi\) represent different volumes of rotation space. Point density in an Euler plot is therefore not itself a texture density.</p>
+<h2 id="4">Axis--Angle Space</h2>
+<p>Axis--angle coordinates place a rotation at \(\omega\vec n\). The direction \(\vec n\) is its rotation axis and the distance from the origin is its principal rotation angle \(\omega\).</p>
 {% highlight matlab %}
 scatter(rot,'axisAngle')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationPlotting_02.png" %}
 </center>
-<p>Now the cloud is a ball, and it is denser towards the rim: there are more rotations by a large angle than by a small one. Rodrigues space is the same construction with the distance scaled by \(\tan\omega/2\), which pushes the \(180^\circ\) rotations out to infinity.</p>
+<p>The identity is at the centre and half turns lie on the outer sphere. Most of the points lie beyond half the radius, because a uniform sample contains more large-angle rotations than small-angle rotations. Opposite points on the outer sphere describe the same \(180^\circ\) rotation.</p>
+<h2 id="6">Rodrigues--Frank Space</h2>
+<p>Rodrigues--Frank coordinates keep the direction \(\vec n\) but change the distance from the origin to \(\tan(\omega/2)\).</p>
 {% highlight matlab %}
-scatter(rot,'Rodrigues')
+scatter(rot,'Rodrigues','noBoundary')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationPlotting_03.png" %}
 </center>
-<p>The trade-offs between the three, and the two constructions that preserve volume instead, are collected in <a href="RotationRepresentations.html">Representations</a>.</p>
-<h2 id="7">Colour and Markers</h2>
-<p>
-<code class="language-plaintext highlighter-rouge">scatter</code> takes the usual options, so a subset is highlighted by drawing it on top.</p>
+<p>Rotations near \(180^\circ\) now lie far from the centre, so they stretch the plot and compress the appearance of the remaining cloud. Half turns themselves are at infinity. This domain makes fixed-axis rotations and symmetry boundaries simple, but it does not preserve volume.</p>
+<p>In all three plots, coordinate distance should not be read as the angular distance between arbitrary rotations. Use <a href="quaternion.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> for that comparison. Homochoric and cubochoric coordinates preserve volume instead; see <a href="RotationRepresentations.html">Rotation Representations</a>.</p>
+<h2 id="8">Highlighting a Subset</h2>
+<p>The usual marker options can distinguish a selected subset. Here the red points are rotations less than \(60^\circ\) from the identity.</p>
 {% highlight matlab %}
-small = rot(rot.angle < 60*degree);
+threshold = 60*degree;
+small = rot(rot.angle < threshold);
 
 scatter(rot,'axisAngle','MarkerFaceColor',[.7 .7 .7],'MarkerSize',4)
 hold on
 scatter(small,'axisAngle','MarkerFaceColor','r')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationPlotting_04.png" %}
 </center>
-<p>The red points sit in a small ball around the centre, and there are few of them.</p>
+<p>The red points form a ball around the identity. Count them and report the fraction rather than estimating either value from the figure.</p>
 {% highlight matlab %}
-length(small)
+numSmall = length(small)
+empiricalPercent = 100 * numSmall / length(rot)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+numSmall =
     24
+empiricalPercent =
+    4.8000
 {% endhighlight %}
-<p>Only \((\omega - \sin\omega)/\pi = 5.8\%\) of all rotations turn by less than \(\omega = 60^\circ\). What a texture calls nearly identical is a small minority among rotations in general.</p>
-<h2 id="10">Next</h2>
-<p>Once rotations carry a crystal symmetry the same plots are restricted to a <a href="OrientationFundamentalRegion.html">fundamental region</a>, and dense sets of orientations are better drawn as sections through it, see <a href="OrientationVisualizationSections.html">Section Plots</a>.</p>
+<p>This reproducible draw contains 20 of 500 rotations, or 4%. Sampling variation explains why it does not equal the population value below.</p>
+<h2 id="11">Why Uniform Rotations Look Nonuniform</h2>
+<p>Uniform means uniform with respect to the invariant, or Haar, measure on the rotation group. In Bunge Euler angles its normalized volume element is</p>
+<p>\[\mathrm{d}g = \frac{1}{8\pi^2}\sin\Phi\, \mathrm{d}\varphi_1\,\mathrm{d}\Phi\,\mathrm{d}\varphi_2.\]</p>
+<p>The factor \(\sin\Phi\) explains the emptying of the Euler box near its two \(\Phi\) faces. In axis--angle coordinates the fraction of all rotations with angle at most \(\omega\) is</p>
+<p>\[P(\Omega\leq\omega)=\frac{\omega-\sin\omega}{\pi}.\]</p>
+<p>At \(60^\circ\), this exact fraction is</p>
+{% highlight matlab %}
+exactPercent = 100 * (threshold - sin(threshold)) / pi
+{% endhighlight %}
+
+{% highlight plaintext %}
+exactPercent =
+    5.7669
+{% endhighlight %}
+<p>The result is 5.7669%. Even this broad \(60^\circ\) ball occupies only a small part of rotation space. A scatter plot shows sampled coordinates; estimating a continuous texture density requires <a href="rotation.calcDensity.html"><code class="language-plaintext highlighter-rouge">calcDensity</code></a>.</p>
+<h2 id="13">Further Reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982, develops the invariant measure in Euler space and its use for texture analysis.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops the geometry and parametrisations of rotation space.</li>
+<li>P.G. Callahan et al., <a href="https://doi.org/10.1107/S1600576717001157">Three-dimensional texture visualization approaches: theoretical analysis and examples</a>, Journal of Applied Crystallography 50 (2017), 430--440, compares three-dimensional coordinate domains for crystallographic orientation data.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>An orientation combines a rotation with crystal and specimen symmetry. Its scatter plot is restricted to a <a href="OrientationFundamentalRegion.html">fundamental region</a> by default. Dense orientation sets are usually clearer as sections through that region; see <a href="OrientationVisualizationSections.html">Section Plots</a>.</p>
 </div>
 </body>
 </html>

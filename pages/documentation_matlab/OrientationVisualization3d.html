@@ -1,5 +1,5 @@
 ---
-title: "3D Orientation Visualizations"
+title: '3D Orientation Visualizations'
 
 sidebar: documentation_sidebar
 permalink: OrientationVisualization3d.html
@@ -23,72 +23,74 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A <a href="OrientationPoleFigure.html">pole figure</a> shows one crystal direction and throws the rest away. The alternative is to give every orientation a point in a three dimensional space and draw them all - nothing is lost, at the price of a plot that has to be turned to be read.</p>
+<h2 id="1">What a Three-Dimensional Point Retains</h2>
+<p>A <a href="OrientationPoleFigure.html">pole figure</a> shows one crystal direction and discards the rest of the orientation. A three-dimensional orientation plot instead assigns one point to all three rotational degrees of freedom. Nothing is lost, but the plot has to be rotated to reveal occluded points.</p>
+<p>This page assumes the crystal-to-specimen map from <a href="DefinitionAsCoordinateTransform.html">Theory</a>, the symmetry-equivalent representatives from <a href="OrientationSymmetry.html">Symmetry</a>, and the rotation coordinates from <a href="RotationRepresentations.html">Rotation Representations</a>.</p>
+<p>A <b>plotting convention</b> states how a reference frame is laid out on screen. The convention below draws Y upward and X to the right. It changes the screen layout, not the orientations or their reference frames.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-cs = crystalSymmetry('cubic')
+cs = crystalSymmetry('cubic');
 
 ori = orientation.rand(100,cs);
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: m3̅m   
-  elements: 48     
-  a, b, c : 1, 1, 1
-{% endhighlight %}
 <h2 id="2">Euler Angle Space</h2>
-<p> <a href="orientation.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> places each orientation at its three Bunge Euler angles.</p>
+<p> <a href="orientation.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> with <code class="language-plaintext highlighter-rouge">'Bunge'</code> places each orientation at its three Bunge Euler angles \((\varphi_1,\Phi,\varphi_2)\).</p>
 {% highlight matlab %}
-plot(ori)
+plot(ori,'Bunge')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualization3d_01.png" %}
 </center>
-<p>The box is smaller than the full range of the angles, because the orientations are projected into the fundamental region first - for cubic symmetry \(\Phi\) and \(\varphi_2\) run to \(90^\circ\) rather than to \(180^\circ\) and \(360^\circ\). Every orientation outside has an equivalent one inside, so nothing is hidden by this, see <a href="OrientationFundamentalRegion.html">Fundamental Region</a>.</p>
-<p>Drawing them where their Euler angles say instead is <code class="language-plaintext highlighter-rouge">'ignoreFundamentalRegion'</code>.</p>
+<p>MTEX first selects one symmetry-equivalent representative in the fundamental region. For cubic crystal symmetry and identity specimen symmetry, \(\Phi\) and \(\varphi_2\) stop at \(90^\circ\), while \(\varphi_1\) still runs to \(360^\circ\). Every orientation outside this box has an equivalent representative inside, so the reduction hides no orientations. See <a href="OrientationFundamentalRegion.html">Fundamental Regions</a>.</p>
+<p>The flag <code class="language-plaintext highlighter-rouge">'ignoreFundamentalRegion'</code> instead draws the stored representatives at their unreduced Euler angles.</p>
 {% highlight matlab %}
-plot(ori,'ignoreFundamentalRegion')
+plot(ori,'Bunge','ignoreFundamentalRegion')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualization3d_02.png" %}
 </center>
-<p>The cloud now fills the whole box. Note how the points thin out towards \(\Phi = 0\): Euler angle space distorts volume, so a cluster there is not as concentrated as it looks.</p>
-<h2 id="5">Axis Angle Space</h2>
-<p>The other choice places an orientation in the direction of its rotation axis, at a distance given by its rotation angle.</p>
+<p>The same cloud now fills the full \(360^\circ\) by \(180^\circ\) by \(360^\circ\) Euler box. The points outside the smaller box are not new or invalid orientations; symmetry would move each one back inside.</p>
+<p>Notice how the points thin out towards \(\Phi=0\). A uniform orientation distribution is not uniform in these rectangular coordinates because its volume element contains \(\sin\Phi\). A cluster near \(\Phi=0\) is therefore not as concentrated as it looks.</p>
+<p>The rectangular geometry is only a coordinate chart. Do not use the Euclidean distance between two plotted points as their angular separation; use <a href="orientation.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> on the orientations themselves.</p>
+<h2 id="5">Axis--Angle Space</h2>
+<p>A second common view uses the scaled-axis vector</p>
+<p>\[ \mathbf{r}=\omega\mathbf{n}, \]</p>
+<p>where the direction \(\mathbf{n}\) is the rotation axis and the distance \(\omega\) from the origin is the rotation angle of the selected representative.</p>
 {% highlight matlab %}
-plot(ori,'AxisAngle','markerEdgeColor',[0 0 0.8],'markerSize',8)
+plot(ori,'axisAngle','markerEdgeColor',[0 0 0.8],'markerSize',8)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualization3d_03.png" %}
 </center>
-<p>Here the fundamental region is not a box but a polyhedron, and drawing it alongside the unprojected orientations shows what the projection does.</p>
+<p>All points lie inside the automatically drawn fundamental region. Unlike the Euler box, its boundary is a polyhedron-like surface whose radial distance depends on the rotation axis.</p>
+<p>Drawing the unreduced representatives together with the region makes the effect of symmetry reduction explicit.</p>
 {% highlight matlab %}
-plot(ori,'axisAngle','ignoreFundamentalRegion','markerEdgeColor',[0 0 0.8],'markerSize',8)
+plot(ori,'axisAngle','ignoreFundamentalRegion',...
+  'markerEdgeColor',[0 0 0.8],'markerSize',8)
 
 % visualize the fundamental region
 hold on
-oR = fundamentalRegion(ori.CS,ori.SS)
+oR = fundamentalRegion(ori.CS,ori.SS);
 plot(oR,'color',[1 0.5 0.5])
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-oR = orientationRegion
- 
- crystal symmetry:  432
- max angle: 62.7994°
- face normales: 14
- vertices: 24
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationVisualization3d_04.png" %}
 </center>
-<p>The points outside the solid are the ones the previous plot moved inside. Axis angle space is the more faithful of the two - it distorts volume far less than Euler space - which is why it is the default for misorientations.</p>
-<h2 id="8">Next</h2>
-<p>Two dimensional cuts through these spaces, which is how dense data is usually read, are <a href="OrientationVisualizationSections.html">Section Plots</a>. The shape of the region itself is <a href="OrientationFundamentalRegion.html">Fundamental Region</a>, and the merits of the different parametrisations are compared in <a href="RotationRepresentations.html">Representations</a>.</p>
+<p>The blue points outside the red solid are the representatives that the previous plot moved inside. They remain physically equivalent to points within the region.</p>
+<p>Axis--angle space is the more faithful of these two views: radial distance is a rotation angle, and it distorts volume far less than Euler space. It still does not preserve volume or make every Euclidean point distance an orientation angle. Its direct geometric reading is why it is the default three-dimensional view for misorientations.</p>
+<p>MTEX can also draw <code class="language-plaintext highlighter-rouge">'Rodrigues'</code>, <code class="language-plaintext highlighter-rouge">'homochoric'</code>, and <code class="language-plaintext highlighter-rouge">'cubochoric'</code> coordinates. Rodrigues coordinates make several symmetry boundaries planar, while homochoric and cubochoric coordinates preserve orientation volume. <a href="RotationRepresentations.html">Rotation Representations</a> compares these choices and their appropriate uses.</p>
+<h2 id="8">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops Bunge Euler space and orientation distributions.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, treats rotation-space geometry, parametrisations, and symmetry domains.</li>
+<li>D. Rowenhorst <i>et al.</i>, <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 23 (2015), 083501, compares the conventions and tradeoffs of common rotation representations.</li>
+</ul>
+</div>
+<h2 id="9">Next</h2>
+<p>Dense orientation data are usually read as two-dimensional cuts through these spaces; continue with <a href="OrientationVisualizationSections.html">Section Plots</a>. The shape and symmetry of the region are developed in <a href="OrientationFundamentalRegion.html">Fundamental Regions</a>. The next chapter applies the axis--angle view to relative orientations in <a href="Misorientations.html">Misorientations</a>.</p>
 </div>
 </body>
 </html>

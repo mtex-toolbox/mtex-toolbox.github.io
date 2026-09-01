@@ -1,5 +1,5 @@
 ---
-title: "Twinning Analysis"
+title: 'Inferring Twin Boundaries'
 
 sidebar: documentation_sidebar
 permalink: TwinningBoundaries.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Twinning Analysis</title>
+<title>Inferring Twin Boundaries</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_TwinningBoundaries.m">
 </head>
@@ -23,42 +23,35 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we consider the analysis of twining. Therefore lets start by importing some Magnesium data and reconstructing the grain structure.</p>
+<p>A twin is a part of a crystal whose lattice has a special mirrored orientation relative to its host. The crystallographic relation between the two orientations is the <b>twin law</b>.</p>
+<p>Deformation twins form in magnesium and other hexagonal metals when slip alone cannot accommodate the imposed strain. Their abundance and geometry can therefore help to reconstruct what happened to a specimen.</p>
+<p>This page infers a candidate twin law from a repeated misorientation in an EBSD map. It then selects the boundary segments that match the complete relationship. <a href="Twinning.html">Twinning</a> takes the complementary route and starts from a known crystallographic law.</p>
+<p>The example assumes familiarity with <a href="GrainReconstruction.html">grain reconstruction</a> and <a href="MisorientationTheory.html">misorientation symmetry</a>. <a href="BoundaryMisorientations.html">Misorientations at Grain Boundaries</a> introduces the boundary properties used below.</p>
 {% highlight matlab %}
-% load some example data
+close all;
+
+% load the example in its specimen plotting frame
 plottingConvention.default('y↑→x');
-mtexdata twins
+mtexdata twins silent
 
-% segment grains
+% reconstruct and smooth the grains
 [grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',3);
+grains = smoothBoundary(grains,5);
 
-% smooth them
-grains = grains.smoothBoundary(5);
+% compute the colours explicitly to keep the published output quiet
+colorKey = ipfColorKey(grains);
+grainColor = colorKey.orientation2color(grains.meanOrientation);
+plot(grains,grainColor)
 
-% visualize the grains
-plot(grains,grains.meanOrientation)
-
-% store crystal symmetry of Magnesium
+% store the crystal symmetry of magnesium
 CS = grains.CS;
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed          none                                   
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TwinningBoundaries_01.png" %}
 </center>
-<p>Next we extract the grain boundaries and save them to a separate variable</p>
+<p>The narrow lamellae cross several larger grains and have a contrasting mean orientation. That morphology suggests twinning, but it does not prove a twin mechanism. The following analysis identifies the repeated lattice relationship between each lamella and its host.</p>
+<h2 id="3">Select Same-Phase Boundaries</h2>
+<p>A grain boundary is one segment between neighboring EBSD measurements that belong to different grains. The summary splits the complete network by the phases on either side.</p>
 {% highlight matlab %}
 gB = grains.boundary
 {% endhighlight %}
@@ -70,7 +63,8 @@ gB = grainBoundary (y↑→x)
       607  182 µm  notIndexed  Magnesium
      2696  717 µm   Magnesium  Magnesium
 {% endhighlight %}
-<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
+<p>Of these segments, some are boundaries against the edge of the scan, where a grain is cut off and has no neighbour. MTEX reports the missing neighbour as <code class="language-plaintext highlighter-rouge">notIndexed</code>; this map contains no <code class="language-plaintext highlighter-rouge">notIndexed</code> grains of its own.</p>
+<p>Only segments with magnesium grains on both sides have the same-phase misorientations needed here. The object summary reports their number and total trace length. Segment count is controlled by boundary sampling and is not a count of physical twins.</p>
 {% highlight matlab %}
 gB_MgMg = gB('Magnesium','Magnesium')
 {% endhighlight %}
@@ -81,66 +75,64 @@ gB_MgMg = grainBoundary (y↑→x)
  Segments  length  mineral 1  mineral 2
      2696  717 µm  Magnesium  Magnesium
 {% endhighlight %}
-<h2 id="4">Properties of grain boundaries</h2>
-<p>A variable of type grain boundary contains the following properties</p>
-<div>
-<ul>
-<li>misorientation</li>
-<li>direction</li>
-<li>segLength</li>
-</ul>
-</div>
-<p>These can be used to colorize the grain boundaries. By the following command, we plot the grain boundaries colorized by the misorientation angle</p>
+<h2 id="5">Find the Repeated Misorientation</h2>
+<p>Colour each segment by its disorientation angle.</p>
 {% highlight matlab %}
+close all;
 plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,'linewidth',2)
-mtexColorbar
+mtexColorbar('title','misorientation angle in degree')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TwinningBoundaries_02.png" %}
 </center>
-<p>We observe that we have many grain boundaries with misorientation angle larger than 80 degree. In order to investigate the distribution of misorientation angles further we have the look at a misorientation angle histogram.</p>
+<p>The connected yellow traces near 86 degrees outline most of the narrow lamellae. Cooler colours mark boundaries spread over lower angles.</p>
+<p>The histogram makes the concentration explicit. The narrow peak just below 90 degrees dominates a background spread over many angles.</p>
 {% highlight matlab %}
-close all
+close all;
 histogram(gB_MgMg.misorientation.angle./degree,40)
 xlabel('misorientation angle (degree)')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="TwinningBoundaries_03.png" %}
 </center>
-<p>Lets analyze the misorientations corresponding to the peak around 86 degree in more detail. Therefore, we consider only those misorientations with misorientation angle between 85 and 87 degree</p>
+<p>Isolate the 85--87 degree peak and print its share of the boundary segments. About one third of all magnesium-to-magnesium segments lie in this two-degree interval. A concentration this sharp is not expected from a random population; it points to one relationship repeated across the map.</p>
 {% highlight matlab %}
-ind = gB_MgMg.misorientation.angle>85*degree & gB_MgMg.misorientation.angle<87*degree;
-mori = gB_MgMg.misorientation(ind);
-{% endhighlight %}
-<p>and observe that when plotted in axis angle domain they form a strong cluster close to one of the corners of the domain.</p>
-{% highlight matlab %}
-scatter(mori)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="TwinningBoundaries_04.png" %}
-</center>
-<p>We may determine the center of the cluster and check whether it is close to some special orientation relation ship</p>
-{% highlight matlab %}
-% determine the mean of the cluster
-mori_mean = mean(mori,'robust')
+inPeak = gB_MgMg.misorientation.angle > 85*degree & ...
+  gB_MgMg.misorientation.angle < 87*degree;
+mori = gB_MgMg.misorientation(inPeak);
 
-% determine the closest special orientation relation ship
-round2Miller(mori_mean)
+peakSummary = table(length(mori),100*length(mori)/length(gB_MgMg),...
+  'VariableNames',{'segments','percentOfMgMgSegments'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori_mean = misorientation (Magnesium → Magnesium)
-  antipodal: true
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  149.851 93.8781 149.603
- 
- 
-     plane parallel   direction parallel      fit
+peakSummary =
+  1×2 table
+    segments    percentOfMgMgSegments
+    ________    _____________________
+      917              34.013
+{% endhighlight %}
+<h2 id="8">Identify the Relationship</h2>
+<p>Angle alone does not identify a misorientation. Plot the peak in the full axis--angle space.</p>
+{% highlight matlab %}
+close all;
+scatter(mori)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="TwinningBoundaries_04.png" %}
+</center>
+<p>The points form one tight cluster rather than several clusters with similar angles. This compact cloud is the evidence for one complete relationship.</p>
+<p>The robust mean locates the centre without giving isolated measurements undue influence. <a href="orientation.round2Miller.html"><code class="language-plaintext highlighter-rouge">round2Miller</code></a> then finds low-index planes and directions that the measured mean makes parallel.</p>
+{% highlight matlab %}
+moriMean = mean(mori,'robust');
+round2Miller(moriMean)
+{% endhighlight %}
+
+{% highlight plaintext %}
+plane parallel   direction parallel      fit
 (011̅1) || (101̅1̅)   [11̅01] || [011̅1]      0.451°
 {% endhighlight %}
-<p>Bases on the output above we may now define the special orientation relationship as</p>
+<p>The fit is within half a degree. Use those low-index correspondences to define the ideal relationship without the small experimental deviation of the measured mean.</p>
 {% highlight matlab %}
 twinning = orientation.map(Miller(1,-1,0,1,CS),Miller(1,0,-1,-1,CS),...
   Miller(0,1,-1,1,CS,'uvw'),Miller(1,-1,0,1,CS,'uvw'))
@@ -151,55 +143,46 @@ twinning = misorientation (Magnesium → Magnesium)
  
  (101̅1̅) || (011̅1)   [011̅1] || [11̅01]
 {% endhighlight %}
-<p>Considering the disorientation angle we observe that it is 86.3 degree with respect to the axis (-1210)</p>
+<h2 id="11">Two Equivalent Descriptions</h2>
+<p>By default MTEX returns the <b>disorientation</b>: the symmetry-equivalent representative with the smallest rotation angle. For this magnesium twin law it is 86.3 degrees about the (11-20) crystal axis.</p>
 {% highlight matlab %}
-% the rotational axis
-round(twinning.axis)
-
-% the rotational angle
-twinning.angle / degree
+twinDisorientationAxis = round(twinning.axis)
+twinDisorientationAngle = twinning.angle ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = Miller (Magnesium)
+twinDisorientationAxis = Miller (Magnesium)
   h  k  i  l
   1  1 -2  0
-ans =
+twinDisorientationAngle =
    86.2992
 {% endhighlight %}
-<p>However, remembering that twinning refers to rotations about 180 degrees we may ask for the symmetrically equivalent misorientation with the maximum misorientation angle. This can be computed using the option <code class="language-plaintext highlighter-rouge">'max'</code>
-</p>
+<p>The same twin law also has a 180 degree representative about a twin axis. The <code class="language-plaintext highlighter-rouge">max</code> option of <a href="orientation.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> and <a href="orientation.axis.html"><code class="language-plaintext highlighter-rouge">axis</code></a> selects that representative.</p>
 {% highlight matlab %}
-angle(twinning,'max')/degree
+twinOperationAngle = angle(twinning,'max') ./ degree
+twinOperationAxis = round(Miller(axis(twinning,'max'),'UVTW'))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+twinOperationAngle =
    180
-{% endhighlight %}
-<p>The corresponding rotational axis is</p>
-{% highlight matlab %}
-v = round(Miller(axis(twinning,'max'),'UVTW'))
-{% endhighlight %}
-
-{% highlight plaintext %}
-v = Miller (Magnesium)
+ 
+twinOperationAxis = Miller (Magnesium)
   U  V  T  W
   2  0 -2  1
 {% endhighlight %}
-<p>Next, we check for each boundary segment whether it is a twinning boundary, i.e., whether boundary misorientation is close to the twinning.</p>
+<p>Both descriptions belong to the same misorientation under magnesium crystal symmetry. The 86.3 degrees reported for the disorientation and the 180 degrees quoted for the twin operation are therefore not in conflict. An angle and its axis must always be read from the same representative.</p>
+<h2 id="14">Select Candidate Twin Boundaries</h2>
+<p>Compare every boundary misorientation with the complete ideal law, not only with its 86.3 degree angle. A boundary has no intrinsic first side, so its misorientation carries grain-exchange symmetry: the law and its inverse are treated as the same relationship. See <a href="MisorientationGrainExchangeSym.html">Grain Exchange Symmetry</a>.</p>
+<p>A five-degree tolerance admits the experimental spread in this map. It is an analyst choice rather than a universal property of the twin law, and it should reflect orientation uncertainty and the purpose of the analysis.</p>
 {% highlight matlab %}
-% restrict to twinnings with threshold 5 degree
-isTwinning = angle(gB_MgMg.misorientation,twinning) < 5*degree;
+twinDeviation = angle(gB_MgMg.misorientation,twinning);
+isTwinning = twinDeviation < 5*degree;
 twinBoundary = gB_MgMg(isTwinning)
 
-% plot the twinning boundaries
-plot(grains,grains.meanOrientation)
-%plot(ebsd('indexed'),ebsd('indexed').orientations)
-hold on
-%plot(gB_MgMg,angle(gB_MgMg.misorientation,twinning),'linewidth',4)
-plot(twinBoundary,'linecolor','w','linewidth',4,'displayName','twin boundary')
-hold off
+% report the fraction of trace length rather than only segment count
+candidateTracePercent = 100 * sum(twinBoundary.segLength) ./ ...
+  sum(gB_MgMg.segLength)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -207,11 +190,36 @@ twinBoundary = grainBoundary (y↑→x)
  
  Segments  length  mineral 1  mineral 2
      1406  356 µm  Magnesium  Magnesium
+candidateTracePercent =
+   49.6556
 {% endhighlight %}
-<center>
+<p>The two object summaries show how many magnesium-to-magnesium segments pass the test. They account for about half of the total trace length.</p>
+{% highlight matlab %}
+close all;
+plot(grains,grainColor)
+hold on
+plot(twinBoundary,'linecolor','w','linewidth',4,...
+  'displayName','candidate twin boundary')
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="TwinningBoundaries_05.png" %}
 </center>
-<p>A common next step is to reconstruct the grain structure parent to twinning by merging the twinned grains. This is explained in detail in the section <a href="GrainMerge.html">Merging Grains</a>.</p>
+<p>The white traces follow the lamellae seen in the first figure. This spatial agreement checks that the relationship inferred from the peak is the one repeated in the map.</p>
+<h2 id="17">What the Selection Establishes</h2>
+<p>The selected objects are candidate twin-boundary segments, not a count of physical twins. Consecutive segments can belong to one lamella, and boundary smoothing changes their number. Trace length is less sensitive to resampling, but it still does not count twin domains.</p>
+<p>A misorientation match also does not identify which side is the parent or prove that deformation twinning produced the boundary. A two-dimensional EBSD map supplies the boundary trace, not the full interface-plane orientation; <a href="TiltAndTwistBoundaries.html">Tilt and Twist Boundaries</a> develops that limitation. Morphology, loading, and evidence for later slip, detwinning, or secondary twinning may be needed for a mechanistic interpretation.</p>
+<h2 id="18">References</h2>
+<div>
+<ul>
+<li>Th. Hahn and H. Klapper, <a href="https://doi.org/10.1107/97809553602060000917">Twinning of Crystals</a>, <i>International Tables for Crystallography</i>, Vol. D, ch. 3.3, pp. 413--487, 2013. This chapter defines twin laws, equivalent operations, and twin boundaries.</li>
+<li>J. W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation Twinning</a>, <i>Progress in Materials Science</i> 39 (1995), 1--157. This review covers deformation-twin crystallography and mechanisms.</li>
+<li>Y. Zhang <i>et al.</i>, <a href="https://doi.org/10.1107/S0021889810037180">A General Method to Determine Twinning Elements</a>, <i>Journal of Applied Crystallography</i> 43 (2010), 1426--1430. This paper connects an observed relationship with classical twinning elements.</li>
+<li>V. Randle, <a href="https://doi.org/10.1111/j.1365-2818.2008.02000.x">Application of EBSD to the Analysis of Interface Planes: Evolution over the Last Two Decades</a>, <i>Journal of Microscopy</i> 230 (2008), 406--413. This review explains what two-dimensional and stereological EBSD measurements reveal about boundary planes.</li>
+</ul>
+</div>
+<h2 id="19">Next</h2>
+<p>If the twin law is known in advance, <a href="Twinning.html">Twinning</a> shows how to construct it directly. The next reconstruction step is often to restore parent-grain footprints by merging across the selected boundaries; see <a href="GrainMerge.html">Merging Grains</a>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Grain Boundary Tutorial"
+title: 'Grain Boundary Tutorial'
 
 sidebar: documentation_sidebar
 permalink: BoundaryTutorial.html
@@ -22,64 +22,28 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>A quick guide to grain boundary analysis</p>
+<p>This tutorial starts with reconstructed grains and asks what lies between them. It selects one phase pair, maps the misorientation angle, and finds the dominant angle population in a magnesium specimen.</p>
+<p>Read <a href="GrainTutorial.html">the grain tutorial</a> first if grain reconstruction or inverse pole figure colours are new to you. <a href="GeneralConcepts.html">General Concepts</a> explains how one MTEX object holds a vectorized list of grains or boundary segments.</p>
+<p>A grain boundary is a segment between two neighbouring EBSD pixels that belong to different grains. MTEX stores the complete boundary network as a <a href="grainBoundary.grainBoundary.html">grainBoundary</a> object with one entry per segment.</p>
 <!--/introduction-->
-<h2 id="1">Grain boundaries generation</h2>
-<p>To work with grain boundaries we need some ebsd data and have to detect grains within the data set.</p>
 {% highlight matlab %}
-% load some example data
+close all;
 plottingConvention.default('y↑→x');
-mtexdata twins
 
-% detect grains
-[grains,ebsd] = calcGrains(ebsd)
+% load the magnesium example without displaying the full EBSD summary
+mtexdata twins silent
 
-% smooth them
-grains = grains.smoothBoundary
+% reconstruct grains using an explicit example threshold
+grains = calcGrains(ebsd,'angle',15*degree);
 
-% visualize the grains
-plot(grains,grains.meanOrientation)
+% smooth the pixel staircases before measuring boundary trace lengths
+grains = grains.smoothBoundary;
+
+% display the grain summary
+grains
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed          none                                   
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
- 
- 
-grains = grain2d (y↑→x)
- 
- Phase  Grains  Pixels    Mineral  Symmetry         Color
-     1     121   22833  Magnesium     6/mmm  LightSkyBlue
- 
- boundary segments: 3825 (1149 µm)
- inner boundary segments: 4 (1.2 µm)
- triple points: 114
- 
- Properties: meanRotation, GOS
- 
- 
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   14 (0.061%)  notIndexed          none                                   
-     1  22865 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId, grainId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
- 
- 
 grains = grain2d (y↑→x)
  
  Phase  Grains  Pixels    Mineral  Symmetry         Color
@@ -91,10 +55,24 @@ grains = grain2d (y↑→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<center>
+<h2 id="2">See the grains before measuring their boundaries</h2>
+<p>The displayed summary reports 121 magnesium grains. The 15 degree reconstruction threshold is an example parameter, not a universal grain definition. <a href="GrainReconstruction.html">Grain Reconstruction</a> explains how to choose and report it.</p>
+<p> <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> simplifies, refines, and smooths the pixel staircase by default. This improves trace geometry but changes the number and length of segments. <a href="GrainSmoothing.html">Grain Smoothing</a> develops that choice.</p>
+{% highlight matlab %}
+% create one explicit inverse pole figure colour key
+ipfKey = ipfColorKey(grains.CS);
+grainColor = ipfKey.orientation2color(grains.meanOrientation);
+
+% plot one mean orientation colour per grain
+plot(grains,grainColor)
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryTutorial_01.png" %}
 </center>
-<p>Now we can extract from the grains its boundary and save it to a separate variable</p>
+<h2 id="3">Reading the orientation map</h2>
+<p>The narrow lamellae crossing the larger grains have colours that differ abruptly from their surroundings. Their shape and orientation contrast make them candidates for twins, but the boundary relationship must still be measured.</p>
+<h2 id="4">The boundary list</h2>
+<p>The boundary network is a list in its own right. Displaying it groups the segments by the phases on their two sides.</p>
 {% highlight matlab %}
 gB = grains.boundary
 {% endhighlight %}
@@ -106,7 +84,10 @@ gB = grainBoundary (y↑→x)
       608  182 µm  notIndexed  Magnesium
      2751  772 µm   Magnesium  Magnesium
 {% endhighlight %}
-<p>The output tells us that we have 3219 Magnesium to Magnesium boundary segments and 606 boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
+<h2 id="5">Reading the boundary summary</h2>
+<p>The summary reports 3359 segments after smoothing. Of these, 2751 lie between two magnesium grains and 608 form the outer rim, which appears in the <code class="language-plaintext highlighter-rouge">notIndexed</code> row because there is no grain on its other side.</p>
+<p>In a general map the same row can also contain boundaries next to <code class="language-plaintext highlighter-rouge">notIndexed</code> measurements. <code class="language-plaintext highlighter-rouge">notIndexed</code> is the phase for measurements whose diffraction patterns could not be indexed.</p>
+<p>The outer-rim segments have no second indexed lattice and therefore no crystallographic misorientation. Two phase names select the segments that do have magnesium on both sides.</p>
 {% highlight matlab %}
 gB_MgMg = gB('Magnesium','Magnesium')
 {% endhighlight %}
@@ -117,23 +98,81 @@ gB_MgMg = grainBoundary (y↑→x)
  Segments  length  mineral 1  mineral 2
      2751  772 µm  Magnesium  Magnesium
 {% endhighlight %}
-<h2 id="4">Properties of grain boundaries</h2>
-<p>A variable of type grain boundary contains the following properties</p>
-<div>
-<ul>
-<li>misorientation</li>
-<li>direction</li>
-<li>segLength</li>
-</ul>
-</div>
-<p>These can be used to colorize the grain boundaries. By the following command we plot the grain boundaries colorized by the misorientation angle</p>
+<h2 id="6">Misorientation angle along the boundary</h2>
+<p>A misorientation is the rotation that carries one crystal lattice onto the other. Crystal symmetry gives many equivalent rotations for the same physical relationship. The <code class="language-plaintext highlighter-rouge">angle</code> property reports the smallest symmetry-equivalent rotation angle, also called the disorientation angle.</p>
+<p>A boundary has no preferred side. MTEX therefore gives same-phase boundary misorientations grain-exchange symmetry, so a rotation and its inverse represent the same relationship. See <a href="MisorientationGrainExchangeSym.html">Grain Exchange Symmetry</a>.</p>
 {% highlight matlab %}
-plot(gB_MgMg,gB_MgMg.misorientation.angle./degree,'linewidth',2)
-mtexColorbar
+% store one disorientation angle per magnesium boundary segment in degrees
+misorientationAngle = gB_MgMg.misorientation.angle ./ degree;
+
+% colour every selected segment by that angle
+figure
+plot(gB_MgMg,misorientationAngle,'linewidth',2)
+mtexColorbar('title','minimum misorientation angle (degree)')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundaryTutorial_02.png" %}
 </center>
+<h2 id="7">Reading the angle map</h2>
+<p>Long lamellar boundaries share nearly the same high-angle colour. Other interfaces cover a broader angular range, so the map already suggests one repeated orientation relationship.</p>
+<h2 id="8">Measure the dominant angle population</h2>
+<p>The next two displayed values summarize segments, not whole physical interfaces. The median angle is 84.7 degrees, and 58 percent of the segments have angles above 80 degrees.</p>
+{% highlight matlab %}
+medianAngle = median(misorientationAngle)
+fractionAbove80 = mean(misorientationAngle > 80)
+{% endhighlight %}
+
+{% highlight plaintext %}
+medianAngle =
+   84.6791
+fractionAbove80 =
+    0.5816
+{% endhighlight %}
+<h2 id="9">Reading the segment statistics</h2>
+<p>Segment counts depend on how a traced curve was sampled. For a boundary population it is usually more meaningful to weight every segment by its trace length. The histogram below sums trace length in 2 degree bins.</p>
+{% highlight matlab %}
+edges = 0:2:94;
+[~,~,binId] = histcounts(misorientationAngle,edges);
+traceLength = accumarray(binId,gB_MgMg.segLength,[numel(edges)-1 1]);
+
+% display the angular range containing the most boundary trace length
+[~,peakBin] = max(traceLength);
+peakRange = edges(peakBin:peakBin+1)
+
+% plot total boundary trace length in each angular bin
+figure
+histogram('BinEdges',edges,'BinCounts',traceLength)
+xlabel('minimum misorientation angle (degree)')
+ylabel('boundary trace length (micrometres)')
+title('Magnesium to magnesium boundaries')
+{% endhighlight %}
+
+{% highlight plaintext %}
+peakRange =
+    86    88
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundaryTutorial_03.png" %}
+</center>
+<h2 id="10">Reading the angle distribution</h2>
+<p>The dominant bin spans 86 to 88 degrees. Its position agrees with the 86.3 degree disorientation of the common magnesium extension-twin relationship, and the contributing traces are the lamellae seen above.</p>
+<p>An angle match alone does not identify a twin. A robust test compares the complete misorientation, including its axis, with the ideal relationship and checks where the selected boundaries occur. <a href="TwinningBoundaries.html">Twinning</a> performs that test and <a href="GrainMerge.html">Merging Grains</a> reconnects the twin with its host.</p>
+<h2 id="11">What a two-dimensional map leaves unknown</h2>
+<p>A macroscopic grain boundary has five degrees of freedom. Three describe the misorientation and two describe the boundary-plane normal. A polished two-dimensional section records only the line where that plane cuts the surface, called its trace; the plane inclination is not measured directly.</p>
+<p>The angle map therefore describes the lattice relationship across each trace, not the complete boundary character. Three-dimensional mapping or a stereological estimate over many traces is needed for the missing plane information. <a href="BoundaryNormalDistribution.html">Boundary Normal Distribution</a> explains the planar-section approach.</p>
+<h2 id="12">Next</h2>
+<p>Continue with <a href="GrainBoundaries.html">Grain Boundaries</a> for the boundary chapter. <a href="BoundarySelect.html">Selecting Boundaries</a> develops phase and property selections, while <a href="BoundaryProperties.html">Boundary Properties</a> explains the geometry and paired pixel information stored per segment.</p>
+<p>
+<a href="BoundaryMisorientations.html">Boundary Misorientations</a> develops angles and axes. <a href="MisorientationDistributionFunction.html">Misorientation Distribution Functions</a> explains the reference distributions needed before a boundary population is compared with random orientations.</p>
+<h2 id="13">Further reading</h2>
+<div>
+<ul>
+<li>A.P. Sutton and R.W. Balluffi, <a href="https://search.worldcat.org/title/31166519">Interfaces in Crystalline Materials</a>, Oxford University Press, 1995.</li>
+<li>A.P. Sutton, E.P. Banks and A.R. Warwick, <a href="https://doi.org/10.1098/rspa.2015.0442">The five-dimensional parameter space of grain boundaries</a>, Proceedings of the Royal Society A 471 (2015), 20150442.</li>
+<li>D.M. Saylor, B.S. El-Dasher, B.L. Adams and G.S. Rohrer, <a href="https://doi.org/10.1007/s11661-004-0147-z">Measuring the five-parameter grain-boundary distribution from observations of planar sections</a>, Metallurgical and Materials Transactions A 35 (2004), 1981-1989.</li>
+<li>J.W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation twinning</a>, Progress in Materials Science 39 (1995), 1-157.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

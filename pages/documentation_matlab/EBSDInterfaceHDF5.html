@@ -1,5 +1,5 @@
 ---
-title: "Developer Guide: HDF5 EBSD JSON Configurations"
+title: 'Developer Guide: HDF5 EBSD JSON Configurations'
 
 sidebar: documentation_sidebar
 permalink: EBSDInterfaceHDF5.html
@@ -22,122 +22,250 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>This interface dynamically translates manufacturer-specific HDF5 structures (Bruker, EDAX, Oxford, ThermoFisher) into a unified MTEX <code class="language-plaintext highlighter-rouge">EBSD</code> object. The <code class="language-plaintext highlighter-rouge">.json</code> configuration file acts as a precise roadmap, instructing the script where to look for metadata and how to format the extracted arrays.</p>
 <!--/introduction-->
-<h2 id="1">1. The Core Concept: Dynamic Tree Searching</h2>
-<p>The script processes the configuration file completely <b>recursively</b> % via the <code class="language-plaintext highlighter-rouge">readConf</code> function. It traverses the JSON layout while simultaneously navigating the metadata tree of the opened HDF5 file:</p>
-<div>
-<ul>
-<li>Every major category (<code class="language-plaintext highlighter-rouge">position</code>, <code class="language-plaintext highlighter-rouge">rotation</code>, <code class="language-plaintext highlighter-rouge">cs</code>, etc.) is evaluated relative to a <b><code class="language-plaintext highlighter-rouge">root</code></b> path (defaulting to the discovered main EBSD group).</li>
-<li>When the script encounters the <code class="language-plaintext highlighter-rouge">"value"</code> keyword, it invokes <code class="language-plaintext highlighter-rouge">get_hdf5_path</code> to resolve the actual target dataset or group path inside the file.</li>
-<li>When it finds the <code class="language-plaintext highlighter-rouge">"type"</code> keyword, it dynamically looks for a matching MATLAB formatting function named <code class="language-plaintext highlighter-rouge">[category]_[type]</code> (e.g., <code class="language-plaintext highlighter-rouge">position_direct</code> or <code class="language-plaintext highlighter-rouge">rotation_euler</code>) to convert the raw data into MTEX-compatible objects.</li>
-</ul>
-</div>
-<h2 id="2">2. The Three Search Modes (mode)</h2>
-<p>Any field responsible for fetching or defining data must explicitly state its operational mode using one of the following options:</p>
-<div>
-<ul>
-<li>
-<b><code class="language-plaintext highlighter-rouge">absolute</code></b> : Bypasses any search architecture and utilizes the exact string path provided. Highly recommended for rigid, unchanging standard file structures. <i>Example:</i> <code class="language-plaintext highlighter-rouge">"value": "/Site/Acquisition/StepSize"</code>
-</li>
-<li>
-<b><code class="language-plaintext highlighter-rouge">regex</code></b> : Executes a case-insensitive regular expression search within the current HDF5 subtree. Protects against minor naming variations across software versions. <i>Example:</i> <code class="language-plaintext highlighter-rouge">"value": "^X Position\("</code>
-</li>
-<li>
-<b><code class="language-plaintext highlighter-rouge">data</code></b> : Bypasses HDF5 file reading entirely and injects the hardcoded value straight from the JSON layout. Perfect for fixed units, formatting definitions, or static matrices. <i>Example:</i> <code class="language-plaintext highlighter-rouge">"value": "degree"</code>
-</li>
-</ul>
-</div>
-<h2 id="3">3. Main Category Specifications</h2>
-<p>The JSON configuration file must directly mirror the structure expected by the core MTEX <code class="language-plaintext highlighter-rouge">EBSD</code> constructor. The following formatters are natively supported:</p>
-<div>
-<ul>
-<li>Spatial Coordinates (position)*</li>
-</ul>
-</div>
+<p>HDF5 is a container, not a single EBSD file format. One vendor may store Euler angles at <code class="language-plaintext highlighter-rouge">/EBSD/Data/Euler</code> and another at <code class="language-plaintext highlighter-rouge">/Site/EBSD/EulerAngles</code>. Each may also store much that MTEX does not read.</p>
+<p>MTEX therefore uses one importer, <a href="loadEBSD_h5.html"><code class="language-plaintext highlighter-rouge">loadEBSD_h5</code></a>, and a JSON configuration for each supported layout. The configurations are in <code class="language-plaintext highlighter-rouge">interfaces/hdf5_config/</code>: Bruker, EDAX, EDAXh5, EMSphInx, Oxford and ThermoFisher. Supporting another HDF5 layout usually means adding a configuration, not another importer.</p>
+<p>This page is for developers writing or reviewing those configurations. For ordinary data import, begin with <a href="EBSDImport.html">Importing EBSD Data</a>. You should already understand HDF5 groups, data sets and attributes, JSON syntax and regular expressions. The <a href="https://support.hdfgroup.org/documentation/hdf5/latest/_h5_d_m__u_g.html">HDF5 data model</a> introduces the file-tree terminology.</p>
+<p>The configuration says where values live and how to turn them into an <a href="EBSD.EBSD.html">EBSD</a> variable. It does not settle whether the vendor's Euler-angle, crystal and specimen frames have been interpreted correctly. That separate check is taught in <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>.</p>
+<p>The reasoning behind the existing vendor files is recorded in <code class="language-plaintext highlighter-rouge">interfaces/hdf5_config/info.md</code> beside them. Keep format-specific decisions there, especially why a field must not be read or which reference frame a vendor states.</p>
+<h2 id="2">A development workflow</h2>
+<p>Start from the supported configuration whose tree most closely resembles the new file. Give the copy a new <code class="language-plaintext highlighter-rouge">settings.name</code>. The importer discovers every <code class="language-plaintext highlighter-rouge">.json</code> file in <code class="language-plaintext highlighter-rouge">interfaces/hdf5_config/</code>, so no separate registration step is needed for an extension that already uses the HDF5 interface.</p>
+<p>First inspect an unsupported file with MATLAB's <code class="language-plaintext highlighter-rouge">h5disp</code> or <code class="language-plaintext highlighter-rouge">h5info</code>. Define <code class="language-plaintext highlighter-rouge">settings</code> and the <code class="language-plaintext highlighter-rouge">ebsd.key</code> before asking MTEX to read it: <code class="language-plaintext highlighter-rouge">headerOnly</code> cannot select a configuration until <code class="language-plaintext highlighter-rouge">settings</code> matches.</p>
+<p>Once detection works, use <code class="language-plaintext highlighter-rouge">EBSD.load(fname,'headerOnly','debug',true)</code>. The debug trace shows which path each configuration entry resolved to. Then run a full import and inspect the phase ids, position and orientation counts, properties and reference frames. A formatter warning is a failed field, not a successful partial validation.</p>
+<h2 id="3">How the reader evaluates a configuration</h2>
+<p>The reader walks the JSON object and the HDF5 tree together. A normal leaf combines two decisions:</p>
 <div>
 <ul>
 <li>
-<b><code class="language-plaintext highlighter-rouge">type: "direct"</code></b> : Used when the HDF5 file stores explicit coordinate arrays for each individual measurement pixel. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>.</li>
+<b><code class="language-plaintext highlighter-rouge">value</code></b> says what path to match, while <b><code class="language-plaintext highlighter-rouge">mode</code></b> says where and how to search. The result is a path inside the HDF5 file.</li>
 <li>
-<b><code class="language-plaintext highlighter-rouge">type: "indirect"</code></b> : Used when explicit coordinates are omitted, requiring a grid generation (<code class="language-plaintext highlighter-rouge">meshgrid</code>) calculated from header metrics (step sizes and map dimensions). <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">step_size_x</code>, <code class="language-plaintext highlighter-rouge">step_size_y</code>, <code class="language-plaintext highlighter-rouge">grid_size_x</code>, <code class="language-plaintext highlighter-rouge">grid_size_y</code>.</li>
+<b><code class="language-plaintext highlighter-rouge">type</code></b> selects what to do with the value. It dispatches to a formatter named <code class="language-plaintext highlighter-rouge"><a href="category">category</a>_<a href="type">type</a></code>, such as <code class="language-plaintext highlighter-rouge">position_direct</code>, <code class="language-plaintext highlighter-rouge">rotation_euler</code> or <code class="language-plaintext highlighter-rouge">cs_default</code>. The formatter returns the MTEX object or array required by the <a href="EBSD.EBSD.html">EBSD</a> constructor.</li>
 </ul>
 </div>
+<p>Nested objects mirror the constructor categories. A node may instead use <code class="language-plaintext highlighter-rouge">group</code> to collect the data sets of a group, <code class="language-plaintext highlighter-rouge">data</code> to inject a constant, or <code class="language-plaintext highlighter-rouge">load</code> to reuse a value cached earlier. Those forms do not perform the usual <code class="language-plaintext highlighter-rouge">mode</code> and <code class="language-plaintext highlighter-rouge">value</code> leaf search.</p>
+<h2 id="4">Where an entry is searched</h2>
+<p>Every path expression has a <code class="language-plaintext highlighter-rouge">mode</code>. The four names below are copied from <code class="language-plaintext highlighter-rouge">loadEBSD_h5</code>.</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <b>mode</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>searched below</b>
+               </p>
+         </td>
+         <td>
+               <p>
+                  <b>matched against</b>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>absolute</tt>
+               </p>
+         </td>
+         <td>
+               <p>nothing; the value is the path</p>
+         </td>
+         <td>
+               <p>the full path, literally</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>search_root</tt>
+               </p>
+         </td>
+         <td>
+               <p>the enclosing <tt>key</tt>
+               </p>
+         </td>
+         <td>
+               <p>the full path</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>search_free</tt>
+               </p>
+         </td>
+         <td>
+               <p>the group containing the selected map</p>
+         </td>
+         <td>
+               <p>the full path</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>search_set</tt>
+               </p>
+         </td>
+         <td>
+               <p>the selected map itself</p>
+         </td>
+         <td>
+               <p>the path relative to it</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>
+<code class="language-plaintext highlighter-rouge">absolute</code> is a case-sensitive literal path. It is appropriate for a rigid layout that never moves. The three search modes use case-insensitive regular expressions, which can survive small renamings between software versions. Anchor a regular expression whenever an accidental longer match would be harmful.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">search_free</code> is the mode to use when a value sits beside the selected map instead of inside it. EDAX, for example, keeps the step size in a <code class="language-plaintext highlighter-rouge">Sample</code> group beside <code class="language-plaintext highlighter-rouge">EBSD</code>.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">search_set</code> is the only mode that distinguishes maps living in the same enclosing group. Oxford may store one map under <code class="language-plaintext highlighter-rouge">/1/EBSD</code> and a processed version under <code class="language-plaintext highlighter-rouge">/1/Data Processing</code>. A relative expression such as |^/Data/Phase\(| resolves against the selected one and cannot drift into its neighbour.</p>
+<p>Here, a <b>selected map</b> means the EBSD acquisition chosen by the <code class="language-plaintext highlighter-rouge">dataSet</code> import option. It is not an HDF5 data set in the narrower sense of an array stored at one HDF5 path.</p>
+<h2 id="5">Structural and control keywords</h2>
+<p>
+<b><code class="language-plaintext highlighter-rouge">key</code></b> shifts the root for a branch. The matching group becomes the root for every nested entry, so their expressions can stay short. The <code class="language-plaintext highlighter-rouge">ebsd.key</code> identifies candidate maps. It may contain alternatives in one regular expression; their order is the preference order.</p>
+<p>
+<b><code class="language-plaintext highlighter-rouge">multiple</code></b> turns one match into a list. The phase description uses it so that the <code class="language-plaintext highlighter-rouge">cs</code> block is evaluated once per phase. The number of phases is implied by the number of matches and is not read separately from the file. A regular expression that matches two data sets for one phase silently doubles the phase list and shifts every phase id in the map. Match exactly one data set per phase.</p>
+<p>
+<b><code class="language-plaintext highlighter-rouge">optional</code></b> allows a missing path or branch to be skipped. By contrast, <b><code class="language-plaintext highlighter-rouge">fallback</code></b> supplies a value when its path is missing and therefore also makes that lookup optional. Use a fallback only when the substituted value is valid for every file covered by the configuration.</p>
+<p>
+<b><code class="language-plaintext highlighter-rouge">data</code></b> supplies a constant from the JSON instead of reading the file. It is how a fixed angular unit, grid direction or crystal frame is stated. <b><code class="language-plaintext highlighter-rouge">group</code></b> reads all data sets directly below a matched group; additions also descend into subgroups.</p>
+<p>
+<b><code class="language-plaintext highlighter-rouge">safe</code></b> caches a value under its field name. A later <b><code class="language-plaintext highlighter-rouge">load</code></b> entry names that cached field, optionally followed by a subfield. This avoids reading the same compound data set twice, as in <code class="language-plaintext highlighter-rouge">EDAXh5.json</code>.</p>
+<h2 id="6">The categories</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">settings</code> identifies the vendor layout. Its <code class="language-plaintext highlighter-rouge">key_path</code> must resolve, and the value read there must contain one of the strings in <code class="language-plaintext highlighter-rouge">manufacturer_keys.data</code>. That field may be one string or a list.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">ebsd</code> holds the map itself:</p>
 <div>
 <ul>
-<li>Spatial Orientations (rotation)*</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">position</code></b> uses <code class="language-plaintext highlighter-rouge">type: "direct"</code> when the file stores an \)x\( and a \)y$ for every measurement. It uses <code class="language-plaintext highlighter-rouge">type: "indirect"</code> when step sizes and grid dimensions must be expanded into positions.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">rotation</code></b> uses <code class="language-plaintext highlighter-rouge">type: "euler"</code> for separate angle arrays, <code class="language-plaintext highlighter-rouge">type: "euler_stack"</code> for one stacked array, or <code class="language-plaintext highlighter-rouge">type: "byMatrix"</code> for orientation matrices. Euler input needs <code class="language-plaintext highlighter-rouge">format: "degree"</code> or <code class="language-plaintext highlighter-rouge">format: "radian"</code>.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">phase</code></b> is the per-measurement phase index. <code class="language-plaintext highlighter-rouge">type: "default"</code> preserves one-based ids, <code class="language-plaintext highlighter-rouge">type: "zeroBased"</code> converts the zero-based EMSphInx convention, and <code class="language-plaintext highlighter-rouge">type: "stack"</code> flattens a stacked phase array.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">cs</code></b> creates one crystal symmetry per phase and therefore normally has <code class="language-plaintext highlighter-rouge">"multiple": true</code>. Its fields are <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">space_group</code>, <code class="language-plaintext highlighter-rouge">lattice</code> and, when supplied by the format, <code class="language-plaintext highlighter-rouge">reference_frame</code> and <code class="language-plaintext highlighter-rouge">atoms</code>. The lattice may be one six-element array with <code class="language-plaintext highlighter-rouge">type: "all_together"</code>, an <code class="language-plaintext highlighter-rouge">angle</code> and a <code class="language-plaintext highlighter-rouge">dim</code> array, or six entries with <code class="language-plaintext highlighter-rouge">type: "separate"</code>.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">header</code></b> collects the scan-level header. A header contains acquisition settings and vendor bookkeeping in the file's native field layout. It becomes <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code> rather than a per-measurement property.</li>
+<li>
+<b><code class="language-plaintext highlighter-rouge">unitCell</code></b> can preserve the vendor's step-size hint. <b><code class="language-plaintext highlighter-rouge">map_correction</code></b> relates the Euler-angle and map reference frames, while <b><code class="language-plaintext highlighter-rouge">how2plot</code></b> states how the map frame is laid out on screen.</li>
 </ul>
 </div>
-<div>
-<ul>
-<li>
-<b><code class="language-plaintext highlighter-rouge">type: "euler"</code></b> : Handles classic three-angle orientation inputs. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">formate</code> (must resolve to <code class="language-plaintext highlighter-rouge">"degree"</code> or <code class="language-plaintext highlighter-rouge">"radiante"</code>) alongside either individualized axis entries (<code class="language-plaintext highlighter-rouge">phi1</code>, <code class="language-plaintext highlighter-rouge">Phi</code>, <code class="language-plaintext highlighter-rouge">phi2</code>) or a single bundled orientation matrix (<code class="language-plaintext highlighter-rouge">phi</code>).</li>
-<li>
-<b><code class="language-plaintext highlighter-rouge">type: "euler_stack"</code></b> : Handles single 3D data arrays where orientation angles are stacked sequentially along the first matrix dimension. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">formate</code> and <code class="language-plaintext highlighter-rouge">phi</code>.</li>
-<li>
-<b><code class="language-plaintext highlighter-rouge">type: "correctById"</code> / <code class="language-plaintext highlighter-rouge">type: "correctByAngle"</code></b> : Applies custom mathematical transformations or rotations to align the physical detector coordinate frame with the mapping system.</li>
-</ul>
-</div>
-<div>
-<ul>
-<li>Crystal Symmetry (cs)*</li>
-</ul>
-</div>
-<p>The parser dynamically accommodates multi-phase materials by tracking and creating independent cell array entries for each validated mineral phase group.</p>
-<div>
-<ul>
-<li>
-<b><code class="language-plaintext highlighter-rouge">type: "default"</code></b> : Feeds extracted properties directly into the MTEX <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> constructor. <i>Crucial flag:</i> Always include <code class="language-plaintext highlighter-rouge">"multiple": "true"</code> to instruct the script to collect all available phases sequentially. <i>Required subfields:</i> <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">group</code> (space group or point group matching <code class="language-plaintext highlighter-rouge">type: "space"</code>), and <code class="language-plaintext highlighter-rouge">lattice</code> parameters. Lattice properties can be parsed collectively as a compact 6-element array (<code class="language-plaintext highlighter-rouge">type: "all_together"</code>) or completely decoupled using <code class="language-plaintext highlighter-rouge">type: "seperate"</code>.</li>
-</ul>
-</div>
-<h2 id="7">4. Advanced Navigation: "key" &amp; "multiple"</h2>
-<p>Two structural JSON properties drive the core automation behaviors of the parser:</p>
-<div>
-<ul>
-<li>
-<b><code class="language-plaintext highlighter-rouge">"key"</code> (Contextual Root Shift)</b> : When an object container (such as <code class="language-plaintext highlighter-rouge">cs</code>) defines a <code class="language-plaintext highlighter-rouge">"key"</code> field, the script locates this group in the HDF5 tree and enforces it as the new localized <b><code class="language-plaintext highlighter-rouge">root</code></b> for all nested subfields. This keeps inner definitions like <code class="language-plaintext highlighter-rouge">name</code> or <code class="language-plaintext highlighter-rouge">lattice</code> modular, eliminating the need to provide absolute parent pathways.</li>
-<li>
-<b><code class="language-plaintext highlighter-rouge">"multiple": "true"</code></b> : Instructs the <code class="language-plaintext highlighter-rouge">readConf</code> loop not to abort after the first regex match, but to accumulate all matching nodes into a cell array. This forms the operational backbone for seamlessly indexing an arbitrary number of mineral phases.</li>
-</ul>
-</div>
-<h2 id="8">5. Minimal Integration Template</h2>
-<p>When extending support to a new vendor format, use this clean layout as your baseline and adjust the regex target patterns to match your manufacturer's specific naming conventions:</p>
+<p>A <b>property</b> has one value per measurement and is subset with the map. <code class="language-plaintext highlighter-rouge">additions</code> turns every remaining per-measurement data set of a group into a property, descending into subgroups and prefixing their names. Its <code class="language-plaintext highlighter-rouge">group</code> may be a list, so a second analysis of the same site, such as the EDS element maps in an Oxford file, can be imported too. An <code class="language-plaintext highlighter-rouge">exclude</code> list keeps out values already read as coordinates or another core category.</p>
+<p>An <b>option</b> is scan-level data and is not resized when the map is subset. Every further top-level category is stored under <code class="language-plaintext highlighter-rouge">ebsd.opt.&lt;category&gt;</code>; <code class="language-plaintext highlighter-rouge">eds</code> and <code class="language-plaintext highlighter-rouge">electron_image</code> use this path. Mark such a category optional when the vendor does not write it in every file.</p>
+<p>A crystal <code class="language-plaintext highlighter-rouge">reference_frame</code> entry fixes the Cartesian frame attached to a phase's lattice. It is distinct from the phase's point-group symmetry and from the specimen-frame correction in <code class="language-plaintext highlighter-rouge">map_correction</code>. Reading the right Euler numbers with the wrong one of these frames still gives a plausible but physically misaligned map.</p>
+<h2 id="7">A minimal configuration</h2>
+<p>The ThermoFisher configuration is the smallest of the six. It uses literal paths for its rigid outer tree, builds positions from the grid dimensions, reads stacked phases and Euler angles, and repeats the crystal symmetry branch once per phase.</p>
 <pre>{
   "settings": {
-    "ebsd_key": {"mode": "regex", "value": "Main_EBSD_Group_Name"}
+    "name": "ThermoFisher",
+    "key_path": { "mode": "absolute", "value": "/Info/SoftwareVersion" },
+    "manufacturer_keys": { "data": "xTalView" }
   },
-  "position": {
-    "type": "direct",
-    "direct": {
-      "x": { "mode": "regex", "value": "^X_Axis_Label\)" },
-      "y": { "mode": "regex", "value": "^Y_Axis_Label$" }
-    }
-  },
-  "phase": {"mode": "regex", "value": "Phase_Map_Dataset", "type": "default"},
-  "rotation": {
-    "type": "euler",
-    "euler": {
-      "formate": {"data": "degree"},
-      "phi1": { "mode": "regex", "value": "Euler_1" },
-      "Phi":  { "mode": "regex", "value": "Euler_2" },
-      "phi2": { "mode": "regex", "value": "Euler_3" }
-    }
-  },
-  "cs": {
+  "ebsd": {
     "type": "default",
-    "multiple": "true",
-    "key": { "mode": "regex", "value": "Phases_Metadata_Folder" },
-    "default": {
-      "group": { "mode": "regex", "value": "SpaceGroup_Field", "type": "space" },
-      "name": { "mode": "regex", "value": "MineralName_Field"},
-      "lattice": { "mode": "regex", "value": "Lattice_Array_Field", "type": "all_together"}
+    "key": { "mode": "absolute", "value": "/Site/EBSD" },
+    "position": {
+      "type": "indirect",
+      "indirect": {
+        "step_size_x": { "mode": "absolute", "value": "/Site/Acquisition/StepSize" },
+        "step_size_y": { "mode": "absolute", "value": "/Site/Acquisition/StepSize" },
+        "grid_size_x": { "mode": "absolute", "value": "/Site/Acquisition/MapWidth" },
+        "grid_size_y": { "mode": "absolute", "value": "/Site/Acquisition/MapHeight" },
+        "first": { "data": "x" }
+      }
+    },
+    "phase": { "mode": "search_root", "value": "Phase", "type": "stack" },
+    "rotation": {
+      "type": "euler_stack",
+      "euler_stack": {
+        "format": { "data": "degree" },
+        "phi": { "mode": "search_root", "value": "EulerAngles" }
+      }
+    },
+    "cs": {
+      "type": "default",
+      "multiple": true,
+      "key": { "mode": "search_root", "value": "/EBSD/Phase" },
+      "default": {
+        "reference_frame": { "data": "X||a*, Z||c" },
+        "space_group": { "mode": "search_root", "value": "SpaceGroupNumber", "type": "default" },
+        "name": { "mode": "search_root", "value": "Name" },
+        "lattice": {
+          "angle": { "mode": "search_root", "value": "LatticeAngles" },
+          "dim": { "mode": "search_root", "value": "LatticeParameters" }
+        }
+      }
     }
-  },
-  "additions": {
-    "type": "auto",
-    "key": { "mode": "regex", "value": "Additional_Metadata_Folder"}
   }
 }</pre>
+<p>The <code class="language-plaintext highlighter-rouge">data</code> entries in this example are constants. In particular, the crystal-frame string states X parallel to a-star and Z parallel to c; it is not a symmetry declaration.</p>
+<p>JSON permits neither comments nor trailing commas. Keep explanatory notes in <code class="language-plaintext highlighter-rouge">info.md</code> rather than in the configuration itself. The formal syntax is specified by <a href="https://www.rfc-editor.org/info/rfc8259">RFC 8259</a>.</p>
+<h2 id="8">Check the configuration without reading the map</h2>
+<p>This bundled EMSphInx file exercises configuration detection, map selection and header construction without reading the per-measurement arrays.</p>
+{% highlight matlab %}
+fname = [mtexEBSDPath filesep 'EMSphinx.h5'];
+ebsdHeader = EBSD.load(fname,'headerOnly');
+ebsdHeader.CSList
+ebsdHeader.phaseMap
+fieldnames(ebsdHeader.opt.header)
+{% endhighlight %}
+
+{% highlight plaintext %}
+════════════════════════════════════════════════════════════════════════════════
+HDF5 CONFIGURATION LOADED
+├── Manufacturer : EMSphInx
+├── Data sets    : 4
+│   ▸ [1] Scan 1/EBSD
+│     [2] Scan 2/EBSD
+│     [3] Scan 3/EBSD
+│     [4] Scan 4/EBSD
+└── Pick one by EBSD.load(fname,'dataSet',4) or 'dataSet','Scan 4/EBSD'
+════════════════════════════════════════════════════════════════════════════════
+ans = 
+          mineral         color  symmetry        a, b, c    reference frame
+       notIndexed          none                                            
+   Fe(alpha-iron)  LightSkyBlue      m-3m  2.9, 2.9, 2.9                   
+   Fe(gamma-iron)  DarkSeaGreen      m-3m  3.6, 3.6, 3.6                   
+ Co(alpha-cobalt)     Goldenrod     6/mmm  2.5, 2.5, 4.1  X||a, Y||b*, Z||c
+ans =
+     0
+     1
+     2
+     3
+ans =
+  11×1 cell array
+    {'GridType'       }
+    {'Notes'          }
+    {'Operator'       }
+    {'SampleID'       }
+    {'SampleTilt'     }
+    {'ScanID'         }
+    {'StepX'          }
+    {'StepY'          }
+    {'WorkingDistance'}
+    {'nColumns'       }
+    {'nRows'          }
+{% endhighlight %}
+<p>The output identifies EMSphInx, lists four maps and marks <code class="language-plaintext highlighter-rouge">Scan 1/EBSD</code> as selected. The phase list contains <code class="language-plaintext highlighter-rouge">notIndexed</code> and three indexed phases. The phase map and the native header-field names are also visible, while no per-measurement array has been read. These inventories are the purpose of the check, so they are deliberately displayed.</p>
+<p>Next perform a full import with the new configuration. Confirm that every property has one value per measurement and that phase ids address the intended crystal symmetries. Then apply the known-direction checks from <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a>. A map that looks ordinary is not evidence that its frames are correct.</p>
+<p>A full HDF5 import also records the resolved source paths in <code class="language-plaintext highlighter-rouge">ebsd.opt.h5</code>. <a href="EBSDExport.html">Exporting EBSD Data</a> uses that provenance to write changed values into a copy of the vendor file.</p>
+<h2 id="10">References</h2>
+<div>
+<ul>
+<li>The HDF Group, <a href="https://support.hdfgroup.org/documentation/hdf5/latest/_h5_d_m__u_g.html">HDF5 Data Model and File Structure</a>, defines groups, data sets, attributes and absolute paths.</li>
+<li>T. Bray, editor, <a href="https://www.rfc-editor.org/info/rfc8259">RFC 8259: The JavaScript Object Notation Data Interchange Format</a>, Internet Standard 90, 2017, defines the JSON syntax accepted by MATLAB's <code class="language-plaintext highlighter-rouge">jsondecode</code>.</li>
+<li>M. A. Jackson et al., <a href="https://doi.org/10.1186/2193-9772-3-4">h5ebsd: an archival data format for electron back-scatter diffraction data sets</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3, 44--55, 2014, distinguishes a vendor-neutral archival EBSD layout from workflow files.</li>
+<li>The <a href="https://github.com/oinanoanalysis/h5oina/blob/master/H5OINAFile.md">Oxford Instruments NanoAnalysis HDF5 File Specification</a> documents a public vendor layout, including units, required data sets and coordinate frames.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Importing Crystal Orientations"
+title: 'Importing Crystal Orientations'
 
 sidebar: documentation_sidebar
 permalink: OrientationImport.html
@@ -23,53 +23,58 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Lists of orientations usually arrive as a text file of Euler angles - one orientation per line, three columns. Reading it needs two things: the crystal symmetry the angles refer to, and a statement of what the columns contain.</p>
+<p>A list of crystal orientations usually arrives as a text file with one orientation per row. Unlike an EBSD map, the list has no spatial positions. Importing it requires the numeric representation, the crystal symmetry, and the reference frames in which the numbers were defined.</p>
+<p>This page assumes the orientation map introduced in <a href="OrientationDefinition.html">Defining Orientations</a> and the Euler-angle conventions from <a href="RotationDefinition.html">Defining Rotations</a>. It uses a three-column file of Bunge Euler angles in degrees.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-% the crystal symmetry, here from a cif file
+% load the quartz symmetry and its crystal reference frame from a CIF file
 cs = crystalSymmetry.load('quartz.cif');
 {% endhighlight %}
-<p> <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a> then reads the file.</p>
+<h2 id="2">Name the Columns</h2>
+<p>The file contains three numeric columns but no header. Their names tell <a href="orientation.load.html"><code class="language-plaintext highlighter-rouge">orientation.load</code></a> that the columns are the Bunge angles \((\varphi_1,\Phi,\varphi_2)\).</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'orientation','Tongue_Quartzite_Bunge_Euler');
 
-ori = orientation.load(fname,'columnNames',{'phi1','Phi','phi2'},cs)
+ori = orientation.load(fname,cs,'ColumnNames',{'phi1','Phi','phi2'})
 {% endhighlight %}
 
 {% highlight plaintext %}
 ori = orientation (Quartz → y↑→x)
   size: 382 × 1
 {% endhighlight %}
-<p>The result is an ordinary <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">&lt;orientation.orientation.html orientation&gt;</code></a> list, ready for a pole figure.</p>
+<p>The display reports a \(382 \times 1\) <a href="orientation.orientation.html"><code class="language-plaintext highlighter-rouge">orientation</code></a> array. It also identifies the quartz crystal symmetry and the specimen frame. MTEX stores all 382 orientations in this one vectorized object.</p>
+<h2 id="4">Check the Imported Texture</h2>
+<p>A pole figure is a useful first sanity check, although it cannot prove a convention by itself. Here the \((0001)\) and \((10\bar{1}0)\) poles should show the texture carried by the imported orientations.</p>
 {% highlight matlab %}
-plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs))
+plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs));
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationImport_01.png" %}
 </center>
-<h2 id="4">What the Options Are For</h2>
-<p>The three angles are the mandatory columns; further columns are named alongside them and come back as a struct of properties.</p>
+<p>Notice that the \((0001)\) poles concentrate around ND, whereas many \((10\bar{1}0)\) poles lie closer to the rim. The imported population is therefore textured rather than randomly distributed.</p>
+<h2 id="6">What the Options Are For</h2>
+<p>For Euler input, the three angle columns are mandatory. Further named columns are returned in a struct when a second output is requested, as in <code class="language-plaintext highlighter-rouge">[ori,properties] = orientation.load(...)</code>. The field names are converted to lower case and have whitespace removed.</p>
 <p>
    <table class="usertable">
       <tr>
          <td>
                <p>
-                  <tt>'columnNames'</tt>
+                  <tt>'ColumnNames'</tt>
                </p>
          </td>
          <td>
-               <p>what each column holds</p>
+               <p>what each imported column contains</p>
          </td>
       </tr>
       <tr>
          <td>
                <p>
-                  <tt>'columns'</tt>
+                  <tt>'Columns'</tt>
                </p>
          </td>
          <td>
-               <p>which column positions to read them from</p>
+               <p>positions of those columns in the file</p>
          </td>
       </tr>
       <tr>
@@ -79,7 +84,7 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs))
                </p>
          </td>
          <td>
-               <p>the file is in radians, not degree</p>
+               <p>angles are in radians rather than degrees; see the limitation below</p>
          </td>
       </tr>
       <tr>
@@ -99,7 +104,7 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs))
                </p>
          </td>
          <td>
-               <p>what separates the numbers</p>
+               <p>character that separates the numbers</p>
          </td>
       </tr>
       <tr>
@@ -109,28 +114,58 @@ plotPDF(ori,Miller({0,0,0,1},{1,0,-1,0},cs))
                </p>
          </td>
          <td>
-               <p>the angles describe passive rotations</p>
+               <p>request the inverse map; see the limitation below</p>
          </td>
       </tr>
    </table>
 </p>
-<h2 id="5">Two Conventions to Check Before Trusting the Result</h2>
-<p>A file of Euler angles does not say which convention produced it, and reading it in the wrong one fails silently: it produces valid-looking but different orientations. Two questions have to be answered from outside the file:</p>
+<p>The names and positions solve different problems. For example, <code class="language-plaintext highlighter-rouge">'Columns',[4 2 7]</code> selects physical columns 4, 2, and 7, while <code class="language-plaintext highlighter-rouge">'ColumnNames',{'phi1','Phi','phi2'}</code> assigns their meanings in that order.</p>
+<p>The generic importer advertises quaternion columns named <code class="language-plaintext highlighter-rouge">{'Quat real','Quat i','Quat j','Quat k'}</code>. In the current implementation, however, that path passes all four columns as one matrix to a constructor that expects four arrays and raises an error. Until it is fixed, read the numeric columns separately and construct <code class="language-plaintext highlighter-rouge">orientation(quaternion(a,b,c,d),cs)</code>. Quaternions avoid the Euler-angle sequence and angular-unit questions, but they do not identify the mapping direction or either reference frame.</p>
+<h2 id="7">Four Questions to Answer Before Trusting the Result</h2>
+<p>A plain numeric file does not contain enough information to distinguish several valid interpretations. All four questions below must be answered from its header, accompanying documentation, or a known physical feature.</p>
 <div>
 <ul>
 <li>
-<b>Which Euler angle convention?</b> <code class="language-plaintext highlighter-rouge">orientation.load</code> reads Bunge angles. Other conventions are converted with <a href="orientation.byEuler.html"><code class="language-plaintext highlighter-rouge">orientation.byEuler</code></a>, see <a href="RotationDefinition.html">Defining Rotations</a>.</li>
+<b>Which Euler-angle convention?</b> This example uses the Bunge column names. Equal angle triplets in other conventions describe different orientations. Import those numeric columns and pass them to <a href="orientation.byEuler.html"><code class="language-plaintext highlighter-rouge">orientation.byEuler</code></a> with the convention named explicitly; see <a href="RotationDefinition.html">Defining Rotations</a>.</li>
 </ul>
 </div>
 <div>
 <ul>
 <li>
-<b>Active or passive?</b> MTEX orientations map crystal coordinates to specimen coordinates. Much of the literature uses the opposite direction, which is the <code class="language-plaintext highlighter-rouge">'passive'</code> flag here and is discussed in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</li>
+<b>Degrees or radians?</b> The generic text importer ignores <code class="language-plaintext highlighter-rouge">'radians'</code> and decides the unit from the values instead: a file is read as degrees only when some angle exceeds 15, and as radians otherwise. A file of small angles in degrees is therefore read as radians, silently and with valid-looking results, so the values alone are not a reliable test.</li>
 </ul>
 </div>
-<p>A third question - which crystal axes the Cartesian frame is aligned with - is answered by the <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> the data is imported with, see <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>.</p>
-<h2 id="6">Next</h2>
-<p>Writing orientations back to a file is <a href="OrientationExport.html">Export</a>. Orientations measured on a grid across a specimen are imported as a map instead, see <a href="EBSDImport.html">Importing EBSD Data</a>.</p>
+<div>
+<ul>
+<li>
+<b>Active or passive?</b> MTEX orientations map coordinates from the crystal frame into the specimen frame. Do not select <code class="language-plaintext highlighter-rouge">'passive'</code> merely because a source calls its convention Bunge: reported Bunge Euler angles are copied directly when the frames agree. The distinction is developed in <a href="MTEXvsBungeConvention.html">MTEX vs. Bunge Convention</a>.</li>
+</ul>
+</div>
+{% highlight matlab %}
+The generic text importer currently applies |'passive'| twice, so the
+two inversions cancel and the option has no effect. Until that defect is
+fixed, import first and use |ori = inv(ori)| only when an independent
+convention check establishes that the stored map is the inverse.
+{% endhighlight %}
+<div>
+<ul>
+<li>
+<b>Which crystal and specimen frames?</b> The alignment between Cartesian crystal axes and lattice axes belongs to the <code class="language-plaintext highlighter-rouge">crystalSymmetry</code> loaded above; see <a href="CrystalReferenceSystem.html">The Crystal Reference System</a>. The file documentation must also say which physical specimen directions its axes denote. The explicit plotting convention on this page states TD upward and RD to the right; it does not infer those directions from the three columns.</li>
+</ul>
+</div>
+<p>A known direction provides the strongest check. Verify that one indexed crystal direction maps to the specimen direction observed in the experiment. A plausible pole figure alone cannot distinguish every wrong combination of convention and frame.</p>
+<h2 id="8">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, establishes the Euler-angle convention used in texture analysis.</li>
+<li>G. Nolze, <a href="https://doi.org/10.1002/crat.201400427">Euler angles and crystal symmetry</a>, <i>Crystal Research and Technology</i> 50, 188--201, 2015, explains why unit-cell settings and specimen axes can give different Euler triplets for the same orientation.</li>
+<li>D. Rowenhorst et al., <a href="https://doi.org/10.1088/0965-0393/23/8/083501">Consistent representations of and conversions between 3D rotations</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 23, 083501, 2015, gives reproducible conversion rules for Euler angles, matrices, axis--angle pairs, and quaternions.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis -- Guidelines for orientation measurement using electron backscatter diffraction</i>, covers reliable and reproducible orientation measurements when a list originates from EBSD.</li>
+</ul>
+</div>
+<h2 id="9">Next</h2>
+<p>Writing orientations back to a file is <a href="OrientationExport.html">Export</a>. Orientations measured on a grid across a specimen are imported as a map instead; see <a href="EBSDImport.html">Importing EBSD Data</a>.</p>
 </div>
 </body>
 </html>

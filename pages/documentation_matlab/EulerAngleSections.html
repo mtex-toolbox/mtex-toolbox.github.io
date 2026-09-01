@@ -1,5 +1,5 @@
 ---
-title: "Euler Angle Sections"
+title: 'Euler Angle Sections'
 
 sidebar: documentation_sidebar
 permalink: EulerAngleSections.html
@@ -22,114 +22,200 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>An orientation distribution function (ODF) is defined on the three-dimensional space of orientations. A section plot makes this space readable on a page by evaluating the ODF on several two-dimensional slices and placing the slices side by side. A section is not a projection: it does not integrate density from neighbouring orientations.</p>
+<p>This page assumes the ODF normalization introduced in <a href="ODFTheory.html">ODF Theory</a>. <a href="ODFPlot.html">Plotting an ODF</a> compares sections with three-dimensional plots, pole figures, and inverse pole figures. The Bunge and Matthies angle conventions are introduced in <a href="RotationRepresentations.html">Rotation Representations</a>.</p>
+<p>The plotting convention below draws specimen Y upward and X to the right. It changes only the screen layout, not the ODF or its reference frame.</p>
 <!--/introduction-->
 {% highlight matlab %}
-plottingConvention.default("y↑→x");
+plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>An ODF is a function on a three dimensional space and cannot be drawn directly. The classical way around this is to cut orientation space into a stack of two dimensional slices at constant Euler angle and to plot those side by side. This page shows the section types MTEX offers and what determines the region each of them covers.</p>
-<p>As an example we use a model ODF composed of two texture components and a fibre.</p>
+<h2 id="2">A Model with Known Features</h2>
+<p>The example combines the brass and copper components with the beta fibre. The coefficients 0.2, 0.3, and 0.5 are mixture fractions of normalized components. They are not the peak heights seen in a section.</p>
 {% highlight matlab %}
-cs = crystalSymmetry.load('Al-Aluminum.cif')
+cs = crystalSymmetry.load('Al-Aluminum.cif');
 
 ori1 = orientation.brass(cs);
 ori2 = orientation.copper(cs);
 f = fibre.beta(cs);
 
 odf = 0.2*unimodalODF(ori1) + ...
-      0.3*unimodalODF(ori2) + ...
-      0.5*fibreODF(f)
+  0.3*unimodalODF(ori2) + ...
+  0.5*fibreODF(f);
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  mineral : Aluminum
-  symmetry: m3̅m    
-  elements: 48      
-  a, b, c : 4, 4, 4 
- 
- 
-odf = SO3FunComposition (Aluminum → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 2 orientations
- 
-  Bunge Euler angles in degree
-  phi1     Phi    phi2  weight
-    35      45       0     0.2
-    90 35.2644      45     0.3
- 
-  fibre component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (6̅1̅2̅1̅1̅) || -1,1,-4
-  weight: 0.5
-{% endhighlight %}
-<p>Plotting an ODF in two dimensional sections through the orientation space is done using the command <a href="SO3Fun.plotSection.html">plot</a>. By default the sections are at constant angles of \(\varphi_2\). The number of sections can be specified by the option <code class="language-plaintext highlighter-rouge">'sections'</code>
-</p>
+<h2 id="3">Default Bunge Sections</h2>
+<p> <a href="SO3Fun.plotSection.html"><code class="language-plaintext highlighter-rouge">plotSection</code></a> uses sections at constant third Bunge angle \(\varphi_2\) by default. Here the explicit <code class="language-plaintext highlighter-rouge">'phi2'</code> flag makes that choice visible. The option <code class="language-plaintext highlighter-rouge">'sections'</code> sets the number of panels; it does not set the angular resolution within a panel.</p>
 {% highlight matlab %}
-plot(odf,'sections',9,'silent','layout',[5 2])
+close all;
+plotSection(odf,'phi2','sections',9,'silent','layout',[5 2],...
+  'figSize','large');
+
+annotate(ori1,'MarkerSize',15);
+annotate(ori2,'Marker','v','MarkerSize',15);
+plot(f,'LineWidth',2,'add2all');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EulerAngleSections_01.png" %}
 </center>
+<p>The square and triangle locate the brass and copper component centres. The line follows the beta fibre. A localized component is confined to nearby panels, whereas the fibre continues across a sequence of panels. The nine panels sample the available \(\varphi_2\) period without repeating its equivalent endpoint.</p>
+<h2 id="5">Choosing the Section Angles</h2>
+<p>Pass explicit angle values with an option named after the fixed coordinate. The following four panels restrict the display to \(\varphi_2=25^\circ\), \(30^\circ\), \(35^\circ\), and \(40^\circ\). Constructing <a href="phi2Sections.html"><code class="language-plaintext highlighter-rouge">phi2Sections</code></a> explicitly records this geometry so it can be reused for several ODFs or orientation sets.</p>
 {% highlight matlab %}
-annotate(ori1,'MarkerSize',15)
-annotate(ori2,'Marker','v','MarkerSize',15)
+sectionAngles = [25 30 35 40]*degree;
+oS = phi2Sections(odf.CS,odf.SS,'phi2',sectionAngles);
 
-plot(f,'linewidth',2,'add2all')
+close all;
+plotSection(odf,oS,'silent','figSize','large');
+annotate(ori1,'MarkerSize',15);
+annotate(ori2,'Marker','v','MarkerSize',15);
+plot(f,'LineWidth',2,'add2all');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EulerAngleSections_02.png" %}
 </center>
-<p>One can also specify the \(\varphi_2\) angles of the sections explicitly</p>
+<p>This restricted gallery resolves how the beta fibre passes through a narrow interval instead of spending space on the full period. Explicit values select slices; they do not average the ODF between those values.</p>
+<h2 id="7">Choosing a Section Family</h2>
+<p>MTEX can hold any Bunge or Matthies Euler coordinate constant. Each family uses its own option name for explicit section values.</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>flag</p>
+         </td>
+         <td>
+               <p>fixed coordinate</p>
+         </td>
+         <td>
+               <p>explicit values</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'phi2'</tt>
+               </p>
+         </td>
+         <td>
+               <p>third Bunge angle \(\varphi_2\)</p>
+         </td>
+         <td>
+               <p>
+                  <tt>'phi2',values</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'phi1'</tt>
+               </p>
+         </td>
+         <td>
+               <p>first Bunge angle \(\varphi_1\)</p>
+         </td>
+         <td>
+               <p>
+                  <tt>'phi1',values</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'Phi'</tt>
+               </p>
+         </td>
+         <td>
+               <p>second Bunge angle \(\Phi\)</p>
+         </td>
+         <td>
+               <p>
+                  <tt>'Phi',values</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'gamma'</tt>
+               </p>
+         </td>
+         <td>
+               <p>Matthies angle \(\gamma\)</p>
+         </td>
+         <td>
+               <p>
+                  <tt>'gamma',values</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'alpha'</tt>
+               </p>
+         </td>
+         <td>
+               <p>Matthies angle \(\alpha\)</p>
+         </td>
+         <td>
+               <p>
+                  <tt>'alpha',values</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'sigma'</tt>
+               </p>
+         </td>
+         <td>
+               <p>Matthies coordinate \(\sigma=\alpha+\gamma\)</p>
+         </td>
+         <td>
+               <p>
+                  <tt>'sigma',values</tt>
+               </p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>The corresponding classes are <a href="phi2Sections.html"><code class="language-plaintext highlighter-rouge">phi2Sections</code></a>, <a href="phi1Sections.html"><code class="language-plaintext highlighter-rouge">phi1Sections</code></a>, <a href="PhiSections.html"><code class="language-plaintext highlighter-rouge">PhiSections</code></a>, <a href="gammaSections.html"><code class="language-plaintext highlighter-rouge">gammaSections</code></a>, <a href="alphaSections.html"><code class="language-plaintext highlighter-rouge">alphaSections</code></a>, and <a href="sigmaSections.html"><code class="language-plaintext highlighter-rouge">sigmaSections</code></a>. They share layout, resolution, and the <a href="PlotTypes.html">plot-type</a> options. The <code class="language-plaintext highlighter-rouge">'secResolution'</code> option is specific to <code class="language-plaintext highlighter-rouge">phi2Sections</code> and sets the spacing between its section angles.</p>
+<h2 id="8">Sigma Sections</h2>
+<p>Sigma sections are special. For the usual choice of reference axes, a position within a \(\sigma\) section is the specimen direction of the crystal axis \(\vec c^*\). The section angle describes the remaining rotation about that direction. A panel can therefore be read much like a pole figure with one extra angular coordinate.</p>
+<p>MTEX defines the Matthies coordinate as \(\sigma=\alpha+\gamma\). Do not replace it by an informal expression in the Bunge angles; the coordinate conventions and reference fields matter.</p>
 {% highlight matlab %}
-plot(odf,'phi2',[25 30 35 40]*degree,'silent')
-
-annotate(ori1,'MarkerSize',15)
-annotate(ori2,'Marker','v','MarkerSize',15)
-
-plot(f,'linewidth',2,'add2all')
+close all;
+plotSection(odf,'sigma','silent',...
+  'figSize','large');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EulerAngleSections_03.png" %}
 </center>
-<p>Beside the standard phi2 sections MTEX supports also sections according to all other Euler angles.</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">'phi2'</code> (default) and <code class="language-plaintext highlighter-rouge">'phi1'</code>, the first and third Bunge angle</li>
-<li>
-<code class="language-plaintext highlighter-rouge">'Phi'</code>, the second Bunge angle</li>
-<li>
-<code class="language-plaintext highlighter-rouge">'gamma'</code> and <code class="language-plaintext highlighter-rouge">'alpha'</code>, the Matthies Euler angles</li>
-<li>
-<code class="language-plaintext highlighter-rouge">'sigma'</code>, i.e. \(\alpha + \gamma\)</li>
-</ul>
-</div>
-<p>The last one is special: along a \(\sigma\) section the crystal direction that points into the specimen \(\vec z\) direction stays fixed, so the sections are inverse pole figures of \(\vec z\) and no orientation is torn apart by the sectioning.</p>
+<p>The same brass, copper, and fibre contributions are now arranged by the specimen direction of the crystal axis \(\vec c^*\) and by rotation about it. No density has been added or removed; only the coordinates of the slices have changed. <a href="SigmaSections.html">Sigma Sections</a> develops this geometric reading for crystals with a distinguished axis.</p>
+<h2 id="10">Other Euler Coordinates</h2>
+<p>Sections at constant first Bunge angle \(\varphi_1\) put \(\varphi_2\) and \(\Phi\) within each panel.</p>
 {% highlight matlab %}
-plotSection(odf,'sigma')
+close all;
+plotSection(odf,'phi1','sections',6,'layout',[3 2],'silent',...
+  'figSize','large');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EulerAngleSections_04.png" %}
 </center>
-<p>The \(\varphi_1\) sections put the specimen direction of a fixed crystal direction in the plane instead</p>
+<p>Features that were split mainly along \(\varphi_1\) in the default view now remain within one panel, while features extended along \(\varphi_1\) pass through several panels. This is the same ODF sampled on a different family of slices.</p>
+<p>Sections at constant \(\gamma\) make the analogous choice in the Matthies convention.</p>
 {% highlight matlab %}
-plotSection(odf,'phi1','sections',9,'layout',[3 3],'silent')
+close all;
+plotSection(odf,'gamma','sections',6,'layout',[3 2],'silent',...
+  'figSize','large');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EulerAngleSections_05.png" %}
 </center>
-<p>and the \(\gamma\) sections of the Matthies convention are</p>
-{% highlight matlab %}
-plotSection(odf,'gamma','sections',9,'layout',[3 3],'silent')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EulerAngleSections_06.png" %}
-</center>
-<p>All of them accept the same options as the default sections - the number of sections, an explicit list of angles, the layout, and any of the <a href="PlotTypes.html">plot types</a>. The underlying classes are <a href="phi1Sections.html"><code class="language-plaintext highlighter-rouge">phi1Sections</code></a>, <a href="phi2Sections.html"><code class="language-plaintext highlighter-rouge">phi2Sections</code></a>, <a href="sigmaSections.html"><code class="language-plaintext highlighter-rouge">sigmaSections</code></a>, <a href="gammaSections.html"><code class="language-plaintext highlighter-rouge">gammaSections</code></a> and their siblings, and they can also be constructed explicitly if a section geometry is to be reused across several plots.</p>
-<p>By default this command represents the ODF in the Bunge Euler angle space \(\varphi_1\), \(\Phi\), \(\varphi_2\). The range of the Euler angles depends on the crystal symmetry according to the following table</p>
+<p>The panels again redistribute the same features. A useful family is the one that keeps the feature of interest compact and makes its relevant specimen or crystal direction easy to read. It is not a different ODF.</p>
+<h2 id="14">Euler Plotting Bounds and Crystal Symmetry</h2>
+<p>Bunge sections use the coordinates \(\varphi_1\), \(\Phi\), and \(\varphi_2\). With identity specimen symmetry, MTEX uses the following crystal-symmetry-dependent rectangular plotting bounds.</p>
 <p>
    <table class="usertable">
       <tr>
@@ -286,19 +372,43 @@ plotSection(odf,'gamma','sections',9,'layout',[3 3],'silent')
       </tr>
    </table>
 </p>
-<p>Note that for the last two symmetries the three fold axis is not taken into account, i.e., each orientation appears three times within the Euler angle region. The first Euler angle is not restricted by any crystal symmetry, but only by specimen symmetry. For an arbitrary symmetry the bounds of the fundamental region can be computed by the command <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a>
-</p>
-<h2 id="11">Specimen Symmetry</h2>
-<p>As we can see from the above table the first Euler angle \(\varphi_1\) ranges for all symmetries from zero to 360 degree. The only way to restrict this angle is to consider specimen symmetry. In the classical case of orthotropic specimen symmetry the range of the first Euler angle reduces to 90 degree and we obtain the common square shaped ODF section plots</p>
+<p>Crystal symmetry does not restrict the first Euler angle. With identity specimen symmetry, \(\varphi_1\) therefore spans \(0^\circ\) through \(360^\circ\) for every crystal symmetry in the table. For point groups 23 and 432, this rectangular box does not account for the threefold axis. Each orientation consequently appears three times within the box.</p>
+<p> <a href="symmetry.fundamentalRegionEuler.html"><code class="language-plaintext highlighter-rouge">fundamentalRegionEuler</code></a> returns these upper bounds for an arbitrary pair of crystal and specimen symmetries. They describe a plotting box, not necessarily a compact fundamental region with exactly one representative. The latter is introduced in <a href="OrientationFundamentalRegion.html">Fundamental Regions</a>.</p>
+<h2 id="15">Specimen Symmetry</h2>
+<p>Specimen symmetry can restrict the first Euler angle. Orthotropic specimen symmetry reduces it to \(90^\circ\) for this cubic example and produces the common square-shaped ODF panels. Assigning a specimen symmetry changes the symmetry used to represent the function; it does not rotate the texture or change its specimen reference frame. See <a href="SpecimenSymmetry.html">Specimen Symmetry</a> before applying such a symmetry to measured data. A classical gallery at \(5^\circ\) intervals can be requested with <code class="language-plaintext highlighter-rouge">'sections',18</code>. Six panels are sufficient here to show the changed bounds while keeping this executable page practical.</p>
 {% highlight matlab %}
-odf.SS = specimenSymmetry('222');
+odfOrtho = odf;
+odfOrtho.SS = specimenSymmetry('222');
 
-plot(odf,'sections',18,'layout',[5 4],...
-  'coordinates','off','xlabel','','ylabel','')
+[maxPhi1,maxPhi,maxPhi2] = ...
+  fundamentalRegionEuler(odfOrtho.CS,odfOrtho.SS);
+eulerBounds = [maxPhi1,maxPhi,maxPhi2] ./ degree
+
+close all;
+plotSection(odfOrtho,'phi2','sections',6,'layout',[3 2],...
+  'coordinates','off','xlabel','','ylabel','','silent',...
+  'figSize','large');
 {% endhighlight %}
-<center>
-{% include inline_image.html file="EulerAngleSections_07.png" %}
+
+{% highlight plaintext %}
+eulerBounds =
+    90    90    90
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EulerAngleSections_06.png" %}
 </center>
+<p>The displayed bounds are \(90^\circ\) by \(90^\circ\) by \(90^\circ\). Accordingly, every panel is square, whereas the panels above spanned \(360^\circ\) in \(\varphi_1\). Specimen symmetry has restricted \(\varphi_1\) only; the \(\varphi_2\) period is unchanged, so the six panels still sample it from \(0^\circ\) to \(90^\circ\).</p>
+<h2 id="17">Further Reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops the Bunge Euler convention, ODFs, and classical sections.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, treats rotation parametrizations and symmetry-reduced domains.</li>
+<li>S. Matthies, K. Helming, and K. Kunze, <a href="https://doi.org/10.1002/pssb.2221570105">On the Representation of Orientation Distributions in Texture Analysis by Sigma-Sections. I</a>, <i>physica status solidi (b)</i> 157 (1990), 71--83, introduces sigma sections. <a href="https://doi.org/10.1002/pssb.2221570202">Part II</a>, 489--507, develops crystal and specimen symmetry and worked examples.</li>
+</ul>
+</div>
+<h2 id="18">Next</h2>
+<p>
+<a href="SigmaSections.html">Sigma Sections</a> explains how to interpret and customize sigma sections. The projections that integrate an ODF are <a href="ODFPoleFigure.html">Pole Figures</a> and <a href="ODFInversePoleFigure.html">Inverse Pole Figures</a>.</p>
 </div>
 </body>
 </html>

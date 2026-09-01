@@ -1,5 +1,5 @@
 ---
-title: "Theory of Misorientations"
+title: 'Theory of Misorientations'
 
 sidebar: documentation_sidebar
 permalink: MisorientationTheory.html
@@ -23,24 +23,28 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Misorientation describe the relative orientation of two crystal with respect to each other. Those crystal may be of the same phase or of different phases. Misorientation are used to describe orientation relationships at grain boundaries, orientation relationships during phase transformations or twinning and orientation gradients within grains.</p>
-<h2 id="2">Misorientations within the same phase</h2>
-<p>Misorientation describes the relative orientation of two grains with respect to each other. Important concepts are twinning and CSL (coincidence site lattice) misorientations. To illustrate this concept at a practical example let us first import some Magnesium EBSD data.</p>
+<p>An <a href="OrientationDefinition.html">orientation</a> says how one crystal sits in the specimen. A <b>misorientation</b> says how two crystals sit relative to each other. It is a coordinate transform from one crystal frame into the other, so the specimen frame drops out.</p>
+<p>Misorientations describe grain boundaries, twins, phase transformations, and orientation gradients inside a deformed grain. The two crystals may belong to the same phase or to different phases.</p>
+<p>This page assumes that orientations map crystal coordinates to specimen coordinates. Review <a href="DefinitionAsCoordinateTransform.html">Orientations as Coordinate Transforms</a> if the order of composed transforms is unfamiliar.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Two Grains to Work With</h2>
+<p>The example is an EBSD map of magnesium containing extension twins. The map first has to be divided into <a href="GrainReconstruction.html">grains</a>.</p>
+{% highlight matlab %}
 mtexdata twins silent
 
-% use only proper symmetry operations
+% use only proper symmetry operations, which are rotations
 ebsd('M').CS = ebsd('M').CS.properGroup;
 
-% compute grains
+% compute and smooth the grains
 grains = calcGrains(ebsd,'threshold',5*degree,'minPixel',5);
 grains = smoothBoundary(grains,5);
-CS = grains.CS; % extract crystal symmetry
+CS = grains.CS;
 {% endhighlight %}
-<p>Next we plot the grains together with their mean orientation and highlight grain 43 and grain 52</p>
+<p>The two labelled grains share the white boundary. Their adjacency makes the relative orientation a grain-boundary misorientation.</p>
 {% highlight matlab %}
-plot(grains,grains.meanOrientation,'micronbar','off')
+plot(grains,grains.meanOrientation,'ipfDirection',zvector,'micronbar','off')
 
 hold on
 plot(grains([57,58]).boundary,'edgecolor','w','linewidth',2)
@@ -48,66 +52,47 @@ hold off
 
 text(grains([57,58]),{'1','2'})
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_01.png" %}
 </center>
-<p>After extracting the mean orientation of grain 43 and 52</p>
+<p>Their mean orientations are the two inputs used below.</p>
 {% highlight matlab %}
 ori1 = grains(57).meanOrientation;
 ori2 = grains(58).meanOrientation;
 {% endhighlight %}
-<p>we may compute the misorientation angle between both orientations by</p>
+<h2 id="5">Misorientation Angle and Disorientation</h2>
+<p>The smallest rotation angle separating the two crystal orientations is</p>
 {% highlight matlab %}
-angle(ori1, ori2) ./ degree
+disorientationAngle = angle(ori1,ori2) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+disorientationAngle =
    85.7299
 {% endhighlight %}
-<p>Note that the misorientation angle is computed by default modulo crystal symmetry, i.e., the angle is always the smallest angles between all possible pairs of symmetrically equivalent orientations. In our example this means that symmetrisation of one orientation has no impact on the angle</p>
+<p>A crystal orientation has many symmetrically equivalent descriptions. MTEX compares all proper-symmetry pairs and returns the smallest angle. This minimum is the <b>disorientation angle</b>.</p>
 {% highlight matlab %}
-angle(ori1, ori2.symmetrise) ./ degree
+ori2Equivalent = ori2.symmetrise('proper');
+symmetryAwareRange = [min(angle(ori1,ori2Equivalent)),...
+  max(angle(ori1,ori2Equivalent))] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
-   85.7299
+symmetryAwareRange =
+   85.7299   85.7299
 {% endhighlight %}
-<p>The misorientation angle neglecting crystal symmetry can be computed by</p>
+<p>Every symmetry-aware comparison therefore returns the same value. If symmetry is ignored, the same representatives span many rotation angles.</p>
 {% highlight matlab %}
-angle(ori1, ori2.symmetrise,'noSymmetry')./ degree
+rawAngleRange = [min(angle(ori1,ori2Equivalent,'noSymmetry')),...
+  max(angle(ori1,ori2Equivalent,'noSymmetry'))] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-  107.9164
-  100.9195
-   94.2719
-  136.6059
-  107.7043
-  179.5740
-  140.0724
-  137.3989
-  179.8286
-  101.4708
-  140.3882
-   85.7299
+rawAngleRange =
+   85.7299  179.8286
 {% endhighlight %}
-<p>We see that the smallest angle indeed coincides with the angle computed before.</p>
-<h2 id="9">Misorientations</h2>
-<p>Remember that both orientations <code class="language-plaintext highlighter-rouge">ori1</code> and <code class="language-plaintext highlighter-rouge">ori2</code> map crystal coordinates onto specimen coordinates. Hence, the product of an inverse orientation with another orientation transfers crystal coordinates from one crystal reference frame into crystal coordinates with respect to another crystal reference frame. This transformation is called misorientation</p>
+<h2 id="8">The Directed Misorientation</h2>
+<p>A full misorientation contains an axis as well as an angle, and it has a direction. Since <code class="language-plaintext highlighter-rouge">ori1</code> and <code class="language-plaintext highlighter-rouge">ori2</code> both map crystal coordinates to specimen coordinates, the product below maps coordinates of grain 2 into grain 1.</p>
 {% highlight matlab %}
 mori = inv(ori1) * ori2
 {% endhighlight %}
@@ -119,7 +104,27 @@ mori = misorientation (Magnesium → Magnesium)
      phi1     Phi    phi2
   149.583 94.2717 150.165
 {% endhighlight %}
-<p>In the present case the misorientation describes the coordinate transform from the reference frame of grain 52 into the reference frame of crystal 43. Take as an example the plane \(\{11\bar{2}0\}\) with respect to the grain 85. Then the plane in grain 43 which aligns parallel to this plane can be computed by</p>
+<p>The displayed object is one representative of all equivalent rotations. Its raw angle is not necessarily the disorientation angle.</p>
+{% highlight matlab %}
+rawRepresentativeAngle = angle(mori,'noSymmetry') ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+rawRepresentativeAngle =
+  107.9164
+{% endhighlight %}
+<p> <a href="orientation.project2FundamentalRegion.html"><code class="language-plaintext highlighter-rouge">project2FundamentalRegion</code></a> chooses the representative in the fundamental region, where each physical relationship appears once.</p>
+{% highlight matlab %}
+disori = project2FundamentalRegion(mori);
+fundamentalRegionAngle = angle(disori,'noSymmetry') ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+fundamentalRegionAngle =
+   85.7299
+{% endhighlight %}
+<p>The raw representative is about \(107.9^\circ\), whereas the representative in the fundamental region has the \(85.7^\circ\) disorientation angle.</p>
+<p>Applying <code class="language-plaintext highlighter-rouge">mori</code> to a plane normal expressed in grain 2 returns that normal expressed in grain 1. Here \(\{11\bar20\}\) of grain 2 is parallel to \(\{2\bar1\bar10\}\) of grain 1.</p>
 {% highlight matlab %}
 round(mori * Miller(1,1,-2,0,CS))
 {% endhighlight %}
@@ -129,7 +134,7 @@ ans = Miller (Magnesium)
   h  k  i  l
   2 -1 -1  0
 {% endhighlight %}
-<p>Conversely, the inverse of <code class="language-plaintext highlighter-rouge">mori</code> is the coordinate transform from crystal 43 to grain 52.</p>
+<p>The inverse misorientation maps from grain 1 back into grain 2.</p>
 {% highlight matlab %}
 round(inv(mori) * Miller(2,-1,-1,0,CS))
 {% endhighlight %}
@@ -139,161 +144,210 @@ ans = Miller (Magnesium)
   h  k  i  l
   1  1 -2  0
 {% endhighlight %}
-<h2 id="12">Coincident lattice planes</h2>
-<p>The coincidence between major lattice planes may suggest that the misorientation is a twinning misorientation. Lets analyze whether there are some more alignments between major lattice planes.</p>
+<h2 id="13">Coincident Lattice Planes</h2>
+<p>The relationship lies near several coincidences between major lattice planes. The large markers are planes of grain 2 mapped into grain 1. The small labelled markers are planes already expressed in grain 1.</p>
 {% highlight matlab %}
-%m = Miller({1,-1,0,0},{1,1,-2,0},{1,-1,0,1},{0,0,0,1},CS);
 m = Miller({1,-1,0,0},{1,1,-2,0},{-1,0,1,1},{0,0,0,1},CS);
 
-% cycle through all major lattice planes
+% plot the major planes of grain 2 in the frame of grain 1
 close all
 for im = 1:length(m)
-  % plot the lattice planes of grains 52 with respect to the
-  % reference frame of grain 43
   plot(mori * m(im).symmetrise,'MarkerSize',10,...
-    'DisplayName',char(m(im),'LaTex'),'figSize','large','noLabel','upper','textBelowMarker')
+    'DisplayName',char(m(im),'LaTex'),'figSize','large','noLabel',...
+    'upper','textBelowMarker')
   hold on
 end
 hold off
 
-% mark the corresponding lattice planes in the twin
+% label the corresponding planes of grain 1
 mm = round(unique(mori*m.symmetrise,'noSymmetry'),'maxHKL',6);
 annotate(mm,'labeled','MarkerSize',5,'figSize','large','textBelowMarker')
 
-% show legend
 legend({},'location','NorthEast','FontSize',13,'Interpreter','latex');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_02.png" %}
 </center>
-<p>we observe an almost perfect match for the lattice planes \(\{11\bar{2}0\}\) to \(\{\bar{2}110\}\) and \(\{1\bar{1}01\}\) to \(\{\bar1101\}\) and good coincidences for the lattice plane \(\{1\bar100\}\) to \(\{0001\}\) and \(\{0001\}\) to \(\{0\bar661\}\). Lets compute the angles explicitly</p>
+<p>Two pairs lie almost on top of each other: \(\{11\bar20\}\) on \(\{11\bar20\}\) and \(\{\bar1011\}\) on \(\{\bar1011\}\). Their angular separations are about half a degree and a fifth of a degree.</p>
 {% highlight matlab %}
-angle(mori * Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS)) / degree
-angle(mori * Miller(1,0,-1,-1,CS),Miller(1,-1,0,1,CS)) / degree
-angle(mori * Miller(0,0,0,1,CS) ,Miller(1,0,-1,0,CS),'noSymmetry') / degree
-angle(mori * Miller(1,1,-2,2,CS),Miller(1,0,-1,0,CS)) / degree
-angle(mori * Miller(1,0,-1,0,CS),Miller(1,1,-2,2,CS)) / degree
+nearCoincidenceError = [...
+  angle(mori*Miller(1,1,-2,0,CS),Miller(1,1,-2,0,CS));...
+  angle(mori*Miller(-1,0,1,1,CS),Miller(-1,0,1,1,CS))] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+nearCoincidenceError =
     0.4592
-ans =
     0.1766
-ans =
-   59.6768
-ans =
-    2.6341
-ans =
-    2.5686
 {% endhighlight %}
-<h2 id="14">Twinning misorientations</h2>
-<p>Lets define a misorientation that makes a perfect fit between the \(\{11\bar20\}\), \(\{2\bar1\bar10\}\) lattice planes and the \([0001]\), \([01\bar10]\) lattice directions.</p>
+<p>Two further pairs are close without coinciding. The prism plane \(\{1\bar100\}\) maps near the basal plane \((0001)\), and the basal plane maps near the prism plane. Both separations are about \(4.3^\circ\).</p>
 {% highlight matlab %}
-mori = orientation.map(Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS),...
-  Miller(0,0,0,1,CS,'uvw'),Miller(0,1,-1,0,CS,'uvw'))
-
-% the rotational axis
-round(mori.axis)
-
-% the rotational angle
-mori.angle / degree
+crossPlaneError = [...
+  angle(mori*Miller(1,-1,0,0,CS),Miller(0,0,0,1,CS));...
+  angle(mori*Miller(0,0,0,1,CS),Miller(1,-1,0,0,CS))] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-mori = misorientation (Magnesium → Magnesium)
+crossPlaneError =
+    4.2748
+    4.2919
+{% endhighlight %}
+<h2 id="16">A Useful 90 Degree Approximation</h2>
+<p>The exact relationship that forces the first two chosen correspondences is the transform taking \(\{11\bar20\}\) to \(\{2\bar1\bar10\}\) and \([0001]\) to \([01\bar10]\).</p>
+{% highlight matlab %}
+coincidenceMori = orientation.map(...
+  Miller(1,1,-2,0,CS),Miller(2,-1,-1,0,CS),...
+  Miller(0,0,0,1,CS,'uvw'),Miller(0,1,-1,0,CS,'uvw'))
+{% endhighlight %}
+
+{% highlight plaintext %}
+coincidenceMori = misorientation (Magnesium → Magnesium)
  
  (0001) || (011̅0)   [11̅00] || [0001]
- 
- 
+{% endhighlight %}
+<p>It is a rotation by exactly \(90^\circ\) about a prism axis.</p>
+{% highlight matlab %}
+round(coincidenceMori.axis)
+{% endhighlight %}
+
+{% highlight plaintext %}
 ans = Miller (Magnesium)
   h  k  i  l
   2 -1 -1  0
-ans =
+{% endhighlight %}
+
+{% highlight matlab %}
+coincidenceAngle = coincidenceMori.angle ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+coincidenceAngle =
     90
 {% endhighlight %}
-<p>and plot the same figure as before with the exact twinning misorientation.</p>
+<p>In the corresponding plot, the pairs forced by the construction now coincide exactly. This is a useful geometric approximation, but it is not the ideal magnesium extension-twin relationship.</p>
 {% highlight matlab %}
-% cycle through all major lattice planes
+% plot the approximation in place of the measured misorientation
 close all
 for im = 1:length(m)
-  % plot the lattice planes of grains 52 with respect to the
-  % reference frame of grain 43
-  plot(mori * m(im).symmetrise,'MarkerSize',10,...
-    'DisplayName',char(m(im),'Latex'),'figSize','large','noLabel','upper')
+  plot(coincidenceMori * m(im).symmetrise,'MarkerSize',10,...
+    'DisplayName',char(m(im),'LaTex'),'figSize','large','noLabel','upper')
   hold on
 end
 hold off
 
-% mark the corresponding lattice planes in the twin
-mm = round(unique(mori*m.symmetrise,'noSymmetry'),'maxHKL',6);
+% label the corresponding planes in the other crystal
+mm = round(unique(coincidenceMori*m.symmetrise,'noSymmetry'),'maxHKL',6);
 annotate(mm,'labeled','MarkerSize',5,'figSize','large')
 
-% show legend
-legend({},'location','NorthWest','FontSize',13,'Interpreter','LaTex');
+legend({},'location','NorthWest','FontSize',13,'Interpreter','latex');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_03.png" %}
 </center>
-<h2 id="16">Highlight twinning boundaries</h2>
-<p>It turns out that in the previous EBSD map many grain boundaries have a misorientation close to the twinning misorientation we just defined. Lets Lets highlight those twinning boundaries</p>
+<h2 id="20">The Magnesium Extension Twin</h2>
+<p>The physical twin relationship is defined by a twin plane and an in-plane direction. Its disorientation is \(86.3^\circ\) about a prism axis.</p>
 {% highlight matlab %}
-% consider only Magnesium to Magnesium grain boundaries
-gB = grains.boundary('Mag','Mag');
+twinning = orientation.map(...
+  Miller(1,-1,0,1,CS),Miller(1,0,-1,-1,CS),...
+  Miller(0,1,-1,1,CS,'uvw'),Miller(1,-1,0,1,CS,'uvw'))
+{% endhighlight %}
 
-% check for small deviation from the twinning misorientation
-isTwinning = angle(gB.misorientation,mori) < 7.5*degree;
+{% highlight plaintext %}
+twinning = misorientation (Magnesium → Magnesium)
+ 
+ (101̅1̅) || (011̅1)   [011̅1] || [11̅01]
+{% endhighlight %}
 
-% plot the grains and highlight the twinning boundaries
-plot(grains,grains.meanOrientation,'micronbar','off')
+{% highlight matlab %}
+twinAxis = round(twinning.axis)
+{% endhighlight %}
+
+{% highlight plaintext %}
+twinAxis = Miller (Magnesium)
+  h  k  i  l
+  1  1 -2  0
+{% endhighlight %}
+
+{% highlight matlab %}
+twinAngle = twinning.angle ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+twinAngle =
+   86.2992
+{% endhighlight %}
+<p>A textbook may instead describe this twin as a \(180^\circ\) rotation about the twin axis. That is a symmetrically equivalent representative of the same misorientation, obtained by asking for the largest rotation angle.</p>
+{% highlight matlab %}
+twinMaximumAngle = angle(twinning,'max') ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+twinMaximumAngle =
+   180
+{% endhighlight %}
+<p>The measured grain pair is \(0.7^\circ\) from the ideal twin. The 90 degree coincidence approximation is \(3.7^\circ\) from it.</p>
+{% highlight matlab %}
+twinDeviation = [angle(mori,twinning),...
+  angle(coincidenceMori,twinning)] ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+twinDeviation =
+    0.7322    3.7008
+{% endhighlight %}
+<h2 id="25">Finding the Twin Boundaries</h2>
+<p>A boundary close to the ideal relationship is a candidate twin boundary. The threshold is an analyst choice and compares the complete misorientation, including its axis, rather than the angle alone.</p>
+{% highlight matlab %}
+% select only magnesium to magnesium grain boundaries
+gB = grains.boundary('Magnesium','Magnesium');
+
+% test the complete misorientation against the ideal twin
+isTwinning = angle(gB.misorientation,twinning) < 5*degree;
+
+% plot the grains and highlight candidate twin boundaries
+plot(grains,grains.meanOrientation,'ipfDirection',zvector,'micronbar','off')
 hold on
 plot(gB(isTwinning),'edgecolor','w','linewidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_04.png" %}
 </center>
-<p>From this picture we see that large fraction of grain boundaries are twinning boundaries. To make this observation more evident we may plot the boundary misorientation angle distribution function. This is simply the angle distribution of all boundary misorientations and can be displayed with</p>
+<p>The white traces follow the thin lamellae visible in the orientation map. This spatial agreement supports the crystallographic classification, but a threshold match alone does not prove the deformation mechanism. <a href="TwinningBoundaries.html">Twinning Analysis</a> shows how to infer the ideal relationship from a boundary population instead of assuming it.</p>
+<p>Segment counts depend on how a boundary was sampled, so the fraction is weighted by trace length. Candidate twins make up about half the boundary length in this map.</p>
+{% highlight matlab %}
+twinLengthFraction = sum(gB(isTwinning).segLength) ./ sum(gB.segLength)
+{% endhighlight %}
+
+{% highlight plaintext %}
+twinLengthFraction =
+    0.4902
+{% endhighlight %}
+<h2 id="27">Reading a Population of Misorientations</h2>
+<p>The misorientations of all boundary segments can be reduced to an angle distribution. The sharp peak just below \(90^\circ\) is the twin population found above.</p>
 {% highlight matlab %}
 close all
 plotAngleDistribution(gB.misorientation)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_05.png" %}
 </center>
-<p>From this we observe that we have about 50 percent twinning boundaries. Analogously we may also plot the axis distribution</p>
+<p>This boundary distribution is correlated because only neighbouring grains are paired. <a href="AngleDistributionFunction.html">Angle Distribution</a> compares it with the uncorrelated distribution from the texture and with the distribution expected for uniformly random orientations.</p>
+<p>The same population can instead be reduced to its axes.</p>
 {% highlight matlab %}
-plotAxisDistribution(gB.misorientation,'contour')
+plotAxisDistribution(gB.misorientation,'contourf')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_06.png" %}
 </center>
-<p>which emphasizes a strong portion of rotations about the \((\bar12\bar10)\) axis.</p>
-<h2 id="20">Phase transitions</h2>
-<p>Misorientations may not only be defined between crystal frames of the same phase. Lets consider the phases Magnetite and Hematite.</p>
+<p>The axes concentrate on \(\left&lt;\bar12\bar10\right&gt;\), the prism-axis family of the ideal twin. These axes are expressed in crystal coordinates; <a href="AxisDistributionFunction.html">Axis Distribution</a> also explains axes in specimen coordinates and the random reference distribution.</p>
+<h2 id="30">Misorientations Between Two Phases</h2>
+<p>A phase transformation relates crystals with different symmetries. The first symmetry of the misorientation belongs to the parent phase and the second belongs to the child phase.</p>
 {% highlight matlab %}
-CS_Mag = loadCIF('Magnetite')
-CS_Hem = loadCIF('Hematite')
+CS_Mag = loadCIF('Magnetite');
+CS_Hem = loadCIF('Hematite');
 {% endhighlight %}
-
-{% highlight plaintext %}
-CS_Mag = crystalSymmetry (⊙c→a)
- 
-  mineral : Magnetite    
-  symmetry: m3̅m         
-  elements: 48           
-  a, b, c : 8.4, 8.4, 8.4
- 
- 
-CS_Hem = crystalSymmetry (⊙c→a)
- 
-  mineral        : Hematite         
-  symmetry       : 3̅m1             
-  elements       : 12               
-  a, b, c        : 5, 5, 14         
-  reference frame: X||a*, Y||b, Z||c
-{% endhighlight %}
-<p>The phase transition from Magnetite to Hematite is described in literature by \(\{111\}_m\) parallel \(\{0001\}_h\) and \{\bar101}_m\( parallel \)\{10\bar10\}_h$. The corresponding misorientation is defined in MTEX by</p>
+<p>A reported magnetite-to-hematite relationship has \(\{111\}_{m} \parallel \{0001\}_{h}\) and \(\{\bar101\}_{m} \parallel \{10\bar10\}_{h}\). These two parallelisms are exactly the input expected by <a href="orientation.map.html"><code class="language-plaintext highlighter-rouge">orientation.map</code></a>.</p>
 {% highlight matlab %}
 Mag2Hem = orientation.map(...
   Miller(1,1,1,CS_Mag),Miller(0,0,0,1,CS_Hem),...
@@ -305,35 +359,67 @@ Mag2Hem = misorientation (Magnetite → Hematite)
  
  (011̅) || (01̅10)   [111] || [0001]
 {% endhighlight %}
-<p>Assume a Magnetite grain with orientation</p>
+<p>Consider one magnetite parent orientation.</p>
 {% highlight matlab %}
-ori_Mag = orientation.byEuler(0,0,0,CS_Mag)
+ori_Mag = orientation.byEuler(0,0,0,CS_Mag);
+{% endhighlight %}
+<p>Applying every symmetrically equivalent parent description creates 48 child descriptions, but only 8 child orientations are distinct. The duplicates come from symmetry operations that leave the \(\{111\}\) axis in place and therefore do not create a new child orientation.</p>
+{% highlight matlab %}
+allChildDescriptions = symmetrise(ori_Mag) * inv(Mag2Hem);
+variantCounts = [length(allChildDescriptions),...
+  length(unique(allChildDescriptions))]
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori_Mag = orientation (Magnetite → y↑→x)
+variantCounts =
+    48     8
+{% endhighlight %}
+<p>A <b>variant</b> is one crystallographically equivalent child orientation predicted from a single parent orientation through a known orientation relationship. <a href="orientation.variants.html"><code class="language-plaintext highlighter-rouge">variants</code></a> removes duplicate descriptions directly.</p>
+{% highlight matlab %}
+childVariants = variants(Mag2Hem,ori_Mag)
+{% endhighlight %}
+
+{% highlight plaintext %}
+childVariants = orientation (Hematite → y↑→x)
+  size: 1 × 8
  
   Bunge Euler angles in degree
-  phi1  Phi phi2
-     0    0    0
+  phi1     Phi    phi2
+   135 54.7356      60
+   315 125.264     120
+    45 54.7356     300
+   225 125.264     240
+   225 54.7356      60
+    45 125.264     120
+   135 125.264       0
+   315 54.7356     180
 {% endhighlight %}
-<p>Then we can compute all variants of the phase transition by</p>
+<p>The pole figure contains eight discrete child orientations rather than one. A transformed parent grain may therefore contain several child orientations related by the same parent-to-child relationship.</p>
 {% highlight matlab %}
-symmetrise(ori_Mag) * inv(Mag2Hem)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = orientation (Hematite → y↑→x)
-  size: 48 x 1
-{% endhighlight %}
-<p>and the corresponding pole figures by</p>
-{% highlight matlab %}
-plotPDF(symmetrise(ori_Mag) * inv(Mag2Hem),...
+plotPDF(childVariants,...
   Miller({1,0,-1,0},{1,1,-2,0},{0,0,0,1},CS_Hem))
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MisorientationTheory_07.png" %}
 </center>
+<h2 id="36">The Maths Behind the Transform</h2>
+<p>Let \(\mathbf{G}_1\) and \(\mathbf{G}_2\) be the matrices of <code class="language-plaintext highlighter-rouge">ori1</code> and <code class="language-plaintext highlighter-rouge">ori2</code>. A direction with crystal-2 components \(\mathbf{h}_2\) has specimen components \(\mathbf{r}=\mathbf{G}_2\mathbf{h}_2\). Its components in the frame of crystal 1 are therefore</p>
+<p>\[ \mathbf{h}_1 = \mathbf{G}_1^{-1}\mathbf{r} = \mathbf{G}_1^{-1}\mathbf{G}_2\mathbf{h}_2. \]</p>
+<p>This is why <code class="language-plaintext highlighter-rouge">inv(ori1) * ori2</code> maps crystal 2 into crystal 1. Reversing the order gives the inverse map.</p>
+<p>Proper symmetry operations may multiply this transform from both sides without changing the physical crystal relationship. The fundamental region retains one representative from that equivalent set. For a same-phase grain boundary, swapping the two grains also replaces the transform by its inverse; <a href="MisorientationGrainExchangeSym.html">grain exchange symmetry</a> develops that additional equivalence.</p>
+<h2 id="37">References</h2>
+<div>
+<ul>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops rotation space, symmetry, and misorientation angle and axis distributions.</li>
+<li>J.K. Mackenzie, <a href="https://doi.org/10.1093/biomet/45.1-2.229">Second paper on statistics associated with the random disorientation of cubes</a>, <i>Biometrika</i> 45 (1958), 229-240, derives the cubic random-disorientation angle distribution.</li>
+<li>J.W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation twinning</a>, <i>Progress in Materials Science</i> 39 (1995), 1-157, reviews twin modes and their crystallography.</li>
+<li>L.A. Bursill and R.L. Withers, <a href="https://doi.org/10.1107/S0021889879012486">On the multiple orientation relationships between hematite and magnetite</a>, <i>Journal of Applied Crystallography</i> 12 (1979), 287-294, reports the iron-oxide orientation relationships used above.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis -- Guidelines for orientation measurement using electron backscatter diffraction</i>, gives guidance for reproducible EBSD orientation measurements.</li>
+</ul>
+</div>
+<h2 id="38">Next</h2>
+<p>The next page explains <a href="MisorientationGrainExchangeSym.html">Grain Exchange Symmetry</a>. A whole distribution of misorientations, represented as a density rather than a list, is the <a href="MisorientationDistributionFunction.html">Misorientation Distribution Function</a>. Applying a parent-to-child relationship throughout a map leads to <a href="MaParentGrainReconstruction.html">Parent Grain Reconstruction</a>.</p>
 </div>
 </body>
 </html>

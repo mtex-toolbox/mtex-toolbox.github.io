@@ -1,5 +1,5 @@
 ---
-title: "Improper Rotations"
+title: 'Improper Rotations'
 
 sidebar: documentation_sidebar
 permalink: RotationImproper.html
@@ -23,26 +23,17 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A rotation preserves handedness: a right handed set of axes stays right handed. An <b>improper rotation</b> does not - it turns the object into its mirror image. Inversions and reflections are of this kind, and crystal symmetry needs them, since most point groups contain a mirror plane or an inversion centre.</p>
-<p>MTEX stores improper rotations in the same <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">&lt;rotation.rotation.html rotation&gt;</code></a> class and marks them with a sign.</p>
+<p>A proper rotation preserves lengths, angles, and handedness. An <b>improper rotation</b> also preserves lengths and angles, but changes a right-handed object into its mirror image. The name is historical: improper does not mean invalid, and such a transformation cannot be made by physically turning a rigid object.</p>
+<p>This page assumes the active action <code class="language-plaintext highlighter-rouge">rot * v</code> and the matrix representation introduced in <a href="RotationDefinition.html">Defining Rotations</a>.</p>
+<p>Proper and improper transformations together form the orthogonal group O(3). Its proper part is the rotation group SO(3). MTEX stores both in the <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a> class and records which part an object belongs to with an inversion flag.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
 <h2 id="2">The Inversion</h2>
-<p>The inversion sends every direction to its opposite. It is written as the negative identity.</p>
+<p>The inversion sends every direction to its opposite. The named constructor is <a href="rotation.inversion.html"><code class="language-plaintext highlighter-rouge">rotation.inversion</code></a>.</p>
 {% highlight matlab %}
-I = - rotation.id
-{% endhighlight %}
+I = rotation.inversion;
 
-{% highlight plaintext %}
-I = rotation
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2 Inv.
-     0    0    0    1
-{% endhighlight %}
-<p>Directions come back negated, which is what the minus sign is for.</p>
-{% highlight matlab %}
 I * vector3d.X
 {% endhighlight %}
 
@@ -51,42 +42,45 @@ ans = vector3d (y↑→x)
    x  y  z
   -1  0  0
 {% endhighlight %}
-<p>Writing it this way keeps the two ways of bracketing the same, which is the reason for the convention.</p>
+<p>The result is \((-1,0,0)\). Unary minus on a <code class="language-plaintext highlighter-rouge">rotation</code> toggles its inversion flag, so the inversion can also be written as the negative identity.</p>
 {% highlight matlab %}
-- (rotation.id * vector3d.X)
+I == -rotation.id
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↑→x)
-   x  y  z
-  -1  0  0
+ans =
+  logical
+   1
 {% endhighlight %}
-<h2 id="5">Reflections</h2>
-<p>A reflection at a plane is a rotation by \(180^\circ\) about the normal of that plane, followed by the inversion. Spelled out for the plane with normal \((111)\),</p>
+<p>Do not confuse unary minus with <a href="quaternion.inv.html"><code class="language-plaintext highlighter-rouge">inv</code></a>. <code class="language-plaintext highlighter-rouge">inv(turn)</code> undoes a turn, whereas <code class="language-plaintext highlighter-rouge">-turn</code> combines the same proper part with the inversion. The first result below is proper and the second is improper.</p>
 {% highlight matlab %}
-mir = - rotation.byAxisAngle(vector3d(1,1,1),180*degree)
+turn = rotation.byAxisAngle(vector3d.Z,30*degree);
+
+isImproper([inv(turn),-turn])
 {% endhighlight %}
 
 {% highlight plaintext %}
-mir = rotation
- 
-  Bunge Euler angles in degree
-  phi1     Phi    phi2    Inv.
-   135 109.471      45       1
+ans =
+  1×2 logical array
+   0   1
 {% endhighlight %}
-<p>and as a shortcut,</p>
+<h2 id="5">Reflection in a Plane</h2>
+<p>A reflection leaves every direction in its mirror plane fixed and reverses the component normal to the plane. In MTEX, <a href="reflection.html"><code class="language-plaintext highlighter-rouge">reflection</code></a> takes the plane normal as its argument.</p>
 {% highlight matlab %}
-mir = reflection(vector3d(1,1,1))
+planeNormal = vector3d(1,1,1);
+mir = reflection(planeNormal);
+{% endhighlight %}
+<p>The same transformation is a half turn about the plane normal followed by the inversion.</p>
+{% highlight matlab %}
+mir == -rotation.byAxisAngle(planeNormal,180*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-mir = rotation
- 
-  Bunge Euler angles in degree
-  phi1     Phi    phi2    Inv.
-   135 109.471      45       1
+ans =
+  logical
+   1
 {% endhighlight %}
-<p>A direction in the mirror plane is left where it is,</p>
+<p>The direction \((1,-1,0)\) is perpendicular to the normal and therefore lies in the mirror plane. It is unchanged.</p>
 {% highlight matlab %}
 mir * vector3d(1,-1,0)
 {% endhighlight %}
@@ -96,9 +90,9 @@ ans = vector3d (y↑→x)
   x  y  z
   1 -1  0
 {% endhighlight %}
-<p>while the normal of the plane is sent to its opposite.</p>
+<p>The plane normal is perpendicular to the mirror and changes sign.</p>
 {% highlight matlab %}
-mir * vector3d(1,1,1)
+mir * planeNormal
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -106,21 +100,98 @@ ans = vector3d (y↑→x)
    x  y  z
   -1 -1 -1
 {% endhighlight %}
-<h2 id="9">Telling the Two Apart</h2>
-<p> <a href="rotation.isImproper.html"><code class="language-plaintext highlighter-rouge">isImproper</code></a> answers whether handedness is preserved.</p>
+<p>The grey patch below is the mirror plane. The black direction and its red image have equal components within the plane and opposite components along the blue normal.</p>
 {% highlight matlab %}
-mir.isImproper
+n = normalize(planeNormal);
+v = normalize(vector3d(1,-0.2,0.5));
+mirroredV = mir * v;
+
+axis([-1.3 1.3 -1.3 1.3 -1.3 1.3])
+plot(plane3d(n,0),'FaceColor',[0.75 0.75 0.75],'EdgeColor','none')
+hold on
+arrow3d(v,'FaceColor','black')
+arrow3d(mirroredV,'FaceColor','red')
+arrow3d(n,'FaceColor','blue')
+hold off
+axis equal off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="RotationImproper_01.png" %}
+</center>
+<h2 id="10">Parity under Composition</h2>
+<p> <a href="rotation.isImproper.html"><code class="language-plaintext highlighter-rouge">isImproper</code></a> reports whether a transformation reverses handedness. A single reflection is improper, whereas composing two reflections restores handedness.</p>
+{% highlight matlab %}
+mirrorX = reflection(vector3d.X);
+mirrorY = reflection(vector3d.Y);
+
+isImproper([mirrorX,mirrorX*mirrorY])
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-  logical
-   1
+  1×2 logical array
+   1   0
 {% endhighlight %}
-<p>This matters when a symmetry group is used as a set of operations: only the proper elements are motions a crystal can actually be turned by, and the improper ones exist as symmetries of the lattice, not as rotations of the specimen. Which elements a group has is discussed in <a href="CrystalSymmetries.html">Crystal Symmetries</a>, and the proper subgroup is reached by <code class="language-plaintext highlighter-rouge">cs.properGroup</code>.</p>
-<h2 id="11">Next</h2>
+<p>The two-reflection product is the proper half turn about Z. Their angular difference is zero degrees.</p>
+{% highlight matlab %}
+angle(mirrorX*mirrorY,...
+  rotation.byAxisAngle(vector3d.Z,180*degree)) ./ degree
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     0
+{% endhighlight %}
+<h2 id="12">Improper Operations in Crystal Symmetry</h2>
+<p>Crystal point groups may contain both kinds of operation. For the mixed point group \(\bar{4}m2\), the displayed values are the total number of operations, the number of proper operations, and the number of improper operations.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('-4m2');
+ops = rotation(cs);
+improperFlags = isImproper(ops);
+
+[length(ops),sum(~improperFlags(:)),sum(improperFlags(:))]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     8     4     4
+{% endhighlight %}
+<p>Only the proper operations are physical turns that superpose the crystal on itself. <a href="symmetry.properSubGroup.html"><code class="language-plaintext highlighter-rouge">properSubGroup</code></a> retains those four operations. Do not confuse it with <a href="symmetry.properGroup.html"><code class="language-plaintext highlighter-rouge">properGroup</code></a>, which returns the associated enantiomorphic group and has eight operations in this example.</p>
+{% highlight matlab %}
+[length(rotation(cs.properSubGroup)),...
+  length(rotation(cs.properGroup))]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     4     8
+{% endhighlight %}
+<h2 id="14">The Matrix Test</h2>
+<p>The matrix of every length-preserving linear transformation is orthogonal. Its determinant is \(+1\) for a proper rotation and \(-1\) for an improper transformation.</p>
+{% highlight matlab %}
+proper = rotation.id;
+improper = rotation.inversion;
+
+[det(matrix(proper)),det(matrix(improper))]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+     1    -1
+{% endhighlight %}
+<p>MTEX stores an improper transformation as a proper quaternion together with the inversion flag. Axis-angle and Euler values therefore describe only that stored proper part. Use <code class="language-plaintext highlighter-rouge">isImproper</code> or <a href="rotation.matrix.html"><code class="language-plaintext highlighter-rouge">matrix</code></a> when the handedness of the full transformation matters.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>The International Union of Crystallography, <a href="https://dictionary.iucr.org/Symmetry_operation">Symmetry operation</a>, classifies inversion, reflections, and rotoinversions as operations that relate enantiomorphous objects.</li>
+<li>G. Rigault, <a href="https://www.iucr.org/education/pamphlets/10/full-text">Metric tensor and symmetry operations in crystallography</a>, IUCr Teaching Pamphlet 10, derives the determinant classification and the crystallographic point groups.</li>
+<li>Z. Dauter and M. Jaskolski, <a href="https://doi.org/10.1107/S0021889810026956">How to read (and understand) Volume A of International Tables for Crystallography: an introduction for nonspecialists</a>, Journal of Applied Crystallography 43 (2010) 1150--1171, connects proper rotations and rotoinversions to Hermann--Mauguin notation.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops the rotation and symmetry framework used in texture analysis.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
 <p>
-<a href="RotationOperations.html">Operations</a> covers the arithmetic that applies to proper and improper rotations alike.</p>
+<a href="RotationOperations.html">Operations</a> covers composition, inversion, and action on directions. <a href="CrystalSymmetries.html">Crystal Symmetries</a> develops proper, Laue, and mixed point groups and explains the difference between <code class="language-plaintext highlighter-rouge">properSubGroup</code> and <code class="language-plaintext highlighter-rouge">properGroup</code>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "The Tangent Space on the Rotation Group"
+title: 'The Tangent Space on the Rotation Group'
 
 sidebar: documentation_sidebar
 permalink: RotationTangentSpace.html
@@ -23,204 +23,159 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>A tangent vector on the rotation group is a direction in which a rotation can be varied - the answer to "which way could this rotation move, and how fast?". Such a direction depends on the rotation it starts from, so it is a local object, not a global one, and the set of all of them at a given rotation is the <b>tangent space</b> there.</p>
-<p>This is the language in which gradients, velocities and derivatives on SO(3) are written. It is what makes optimisation and interpolation of rotations possible at all, since rotation space is curved and the usual "add a small vector" does not apply to it directly.</p>
-<h2 id="2">Left and Right Tangent Spaces</h2>
-<p>The matrix description uses <a href="spinTensor.spinTensor.html">spin tensors</a>, the skew-symmetric matrices that describe small rotational changes. The physical interpretation is developed on the <a href="RotationSpinTensor.html">Spin Tensors</a> page.</p>
-<p>The same tangent at a rotation \(R\) can be written in two ways: in a left or a right tangent-space representation.</p>
-<p>The left tangent space is defined by</p>
-<p>\[ T_R SO(3) = \{ S \cdot R | S=-S^T \} = \mathfrak{so}(3) \cdot R, \]</p>
-<p>where \(\mathfrak{so}(3)\) is the set of all skew-symmetric matrices - the spin tensors introduced above.</p>
+<p>A tangent vector describes an instantaneous change of a rotation: the direction in which the rotation changes and the rate of that change. It is attached to one rotation \(R\), called its base point. The collection of all tangent vectors attached to \(R\) is the <b>tangent space</b> at \(R\).</p>
+<p>This page assumes the active rotations introduced in <a href="RotationDefinition.html">Defining Rotations</a> and the multiplication order explained in <a href="RotationOperations.html">Calculating with Rotations</a>. <a href="RotationSpinTensor.html">Spin Tensors</a> develops the continuum-mechanics interpretation of an instantaneous rotation.</p>
+<p>Tangent vectors provide local, three-component coordinates for the curved rotation group SO(3). MTEX uses them for derivatives, gradients, and vector fields on SO(3), and for finite updates through the exponential map.</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Left and Right Representations</h2>
+<p>A tangent vector at \(R\) is a \(3 \times 3\) matrix, but it can be described by only three numbers. Those numbers form a skew-symmetric matrix \(S\). The skew-symmetric matrix can multiply \(R\) from the left or from the right:</p>
+<p>\[ T = S_{\rm left} R = R S_{\rm right}. \]</p>
+<p>These are two coordinate representations of the same tangent vector, not two different tangent spaces. In MTEX the left coordinates are expressed in the specimen frame and the right coordinates in the crystal frame.</p>
 {% highlight matlab %}
 R = rotation.byAxisAngle(vector3d.X,20*degree);
-S1 = spinTensor(vector3d(0,0,1))
+SLeft = spinTensor(vector3d(0,0,1));
+SRight = spinTensor(vector3d(0,sin(20*degree),cos(20*degree)));
 
-% left tangent vector at some Rotation R
-TV = matrix(S1) * matrix(R)
-{% endhighlight %}
+tangentLeft = matrix(SLeft) * matrix(R);
+tangentRight = matrix(R) * matrix(SRight);
 
-{% highlight plaintext %}
-S1 = spinTensor (y↓→x)
-  rank: 2 (3 × 3)
- 
-  0 -1  0
-  1  0  0
-  0  0  0
-TV =
-         0   -0.9397    0.3420
-    1.0000         0         0
-         0         0         0
-{% endhighlight %}
-<p>The right tangent space is defined analogously:</p>
-<p>\[ T_R SO(3) = \{ R \cdot S | S=-S^T \} = R \cdot \mathfrak{so}(3). \]</p>
-<p>Again, skew-symmetric matrices describe all possible infinitesimal rotations, but now applied on the right side of R.</p>
-{% highlight matlab %}
-S2 = spinTensor(vector3d(0,sin(20*degree),cos(20*degree)))
-% right tangent vector at some rotation R
-TV = matrix(R)*matrix(S2)
-{% endhighlight %}
-
-{% highlight plaintext %}
-S2 = spinTensor (y↓→x)
-  rank: 2 (3 × 3)
- 
- *10^-2
-      0 -93.97   34.2
-  93.97      0      0
-  -34.2      0      0
-TV =
-         0   -0.9397    0.3420
-    1.0000         0         0
-    0.0000         0         0
-{% endhighlight %}
-<p>The left and the right tangent space contain the same tangent vectors, written in different bases. <code class="language-plaintext highlighter-rouge">S1</code> and <code class="language-plaintext highlighter-rouge">S2</code> above are the two descriptions of one and the same tangent vector, which is why the two matrices agree.</p>
-{% highlight matlab %}
-max(abs(matrix(S1)*matrix(R) - matrix(R)*matrix(S2)),[],'all')
-
-%
+max(abs(tangentLeft-tangentRight),[],'all')
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
    5.5511e-17
 {% endhighlight %}
-<h2 id="5">Tangent Vectors in MTEX</h2>
-<p>MTEX represents a tangent vector by an <a href="SO3TangentVector.SO3TangentVector.html"><code class="language-plaintext highlighter-rouge">SO3TangentVector</code></a>. It stores the three independent entries of the spin tensor \(S\) as a <code class="language-plaintext highlighter-rouge">vector3d</code> together with the reference rotation.</p>
+<p>The residual is at round-off level, so both products describe the same tangent matrix. The coordinates in <code class="language-plaintext highlighter-rouge">SLeft</code> and <code class="language-plaintext highlighter-rouge">SRight</code> differ because their bases differ.</p>
+<h2 id="4">Tangent Vectors in MTEX</h2>
+<p>MTEX stores the coordinates, the base point, and the left or right representation in an <a href="SO3TangentVector.SO3TangentVector.html"><code class="language-plaintext highlighter-rouge">SO3TangentVector</code></a>. The base point is an orientation, so it is also the single source of any crystal and specimen symmetries carried by the tangent vector.</p>
 {% highlight matlab %}
-S = spinTensor(0.2*vector3d(1,2,3))
-v1 = SO3TangentVector(S,R)
+components = 0.2*vector3d(1,2,3);
+vLeft = SO3TangentVector(components,R)
 {% endhighlight %}
 
 {% highlight plaintext %}
-S = spinTensor (y↓→x)
-  rank: 2 (3 × 3)
- 
- *10^-2
-   0 -60  40
-  60   0 -20
- -40  20   0
- 
-v1 = SO3TangentVector (y↓→x)
- intern symmetries: 1 → y↓→x
+vLeft = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
  tangentSpace: leftVector
     x   y   z
   0.2 0.4 0.6
 {% endhighlight %}
-<p>Such a tangent vector is drawn as an arrow attached to its base point.</p>
+<p>The display identifies <code class="language-plaintext highlighter-rouge">vLeft</code> as a <code class="language-plaintext highlighter-rouge">leftVector</code> and prints its three specimen-frame coordinates. The default representation is left.</p>
+<p>A tangent vector is drawn as an arrow attached to its base point.</p>
 {% highlight matlab %}
-% plot the base point
 plot(R,'axisAngle','MarkerColor','red')
 axis off
-
-% plot the tangent vector
 hold on
-h = quiver3(v1,'LineWidth',3,'maxHeadSize',4);
+quiver3(vLeft,'LineWidth',3,'maxHeadSize',4)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RotationTangentSpace_01.png" %}
 </center>
-<p>The red marker is the rotation \(R\), the arrow the direction in which \(R\) is being varied. Attached at a different rotation the same three coordinates would mean a different variation - that is what "local" means here.</p>
-<p>A <code class="language-plaintext highlighter-rouge"><a href="SO3TangentVector.SO3TangentVector.html">SO3TangentVector</a></code> carries three pieces of information:</p>
-<div>
-<ul>
-<li>the rotation \(R\) (which defines the tangent space)</li>
-<li>the tangent space representation (left or right)</li>
-<li>underlying symmetries (relevant for orientations)</li>
-</ul>
-</div>
-<p>By default, the tangent space representation is left. A right tangent vector can be constructed as follows:</p>
+<p>The red marker is the base rotation \(R\). The blue arrow is a local direction at that point, not a second rotation in the surrounding space. Moving the same three coordinates to another base point would therefore define a different tangent vector.</p>
+<h2 id="7">Changing Representation</h2>
+<p>Giving the same coordinates to the right-vector constructor does not convert <code class="language-plaintext highlighter-rouge">vLeft</code>. It defines a different tangent vector whose coordinates happen to be the same numbers.</p>
 {% highlight matlab %}
-v2 = SO3TangentVector(vector3d(v1),R,SO3TangentSpace.rightVector)
+vSameCoordinates = SO3TangentVector(components,R,...
+  SO3TangentSpace.rightVector)
 {% endhighlight %}
 
 {% highlight plaintext %}
-v2 = SO3TangentVector (crystal)
- intern symmetries: 1 → y↓→x
+vSameCoordinates = SO3TangentVector (crystal)
+ intern symmetries: 1 → y↑→x
  tangentSpace: rightVector
     x   y   z
   0.2 0.4 0.6
 {% endhighlight %}
-<p>Here <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code> have the same coordinates in different bases (tangent space representations). Hence they describe different tangent vectors.</p>
-<p>Left and right tangent vectors can be easily transformed into each other:</p>
+<p>The <code class="language-plaintext highlighter-rouge">rightVector</code> label in the display is the essential difference. To express <code class="language-plaintext highlighter-rouge">vLeft</code> itself in right coordinates, use <a href="SO3TangentVector.right.html"><code class="language-plaintext highlighter-rouge">right</code></a>.</p>
 {% highlight matlab %}
-v1_right = right(v1)
-v1_left = left(v1_right)
+vRight = right(vLeft)
 {% endhighlight %}
 
 {% highlight plaintext %}
-v1_right = SO3TangentVector (crystal)
- intern symmetries: 1 → y↓→x
+vRight = SO3TangentVector (crystal)
+ intern symmetries: 1 → y↑→x
  tangentSpace: rightVector
     x     y     z
   0.2 0.581 0.427
- 
-v1_left = SO3TangentVector (y↓→x)
- intern symmetries: 1 → y↓→x
- tangentSpace: leftVector
-    x   y   z
-  0.2 0.4 0.6
 {% endhighlight %}
-<p>MTEX keeps track of which representation a vector is in, and converts before it computes, so mixing the two in one expression is safe. Adding a vector to itself in the other representation gives twice the vector, not something else.</p>
+<p>The transformed coordinates differ from those of <code class="language-plaintext highlighter-rouge">vLeft</code>, while the base point and the geometric tangent vector stay fixed. The inverse conversion returns to the original coordinates.</p>
 {% highlight matlab %}
-v1 + v1_right
+vLeftAgain = left(vRight);
+norm(vLeftAgain-vLeft)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = SO3TangentVector (y↓→x)
- intern symmetries: 1 → y↓→x
+ans =
+   5.5511e-17
+{% endhighlight %}
+<h2 id="10">Computing with Tangent Vectors</h2>
+<p>MTEX converts compatible tangent vectors to a common representation before performing arithmetic. Thus adding <code class="language-plaintext highlighter-rouge">vLeft</code> to its right-coordinate representation gives twice the original vector.</p>
+{% highlight matlab %}
+vLeft + vRight
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = SO3TangentVector (y↑→x)
+ intern symmetries: 1 → y↑→x
  tangentSpace: leftVector
     x   y   z
   0.4 0.8 1.2
 {% endhighlight %}
-<h2 id="12">Computing with Tangent Vectors</h2>
-<p>The following operations are defined for rotational tangent vectors <code class="language-plaintext highlighter-rouge">TV</code>, <code class="language-plaintext highlighter-rouge">TV1</code>, <code class="language-plaintext highlighter-rouge">TV2</code>
-</p>
+<p>The following operations are available for tangent vectors <code class="language-plaintext highlighter-rouge">v1</code> and <code class="language-plaintext highlighter-rouge">v2</code> at the same base point:</p>
 <div>
 <ul>
-<li>basic arithmetic operations: sum, difference, scaling, quotient</li>
-<li>inner product <a href="SO3TangentVector.dot.html"><code class="language-plaintext highlighter-rouge">dot(TV1,TV2)</code></a>
+<li>sums, differences, scaling, and division</li>
+<li>inner products with <a href="SO3TangentVector.dot.html"><code class="language-plaintext highlighter-rouge">dot(v1,v2)</code></a>
 </li>
-<li>cross product <a href="SO3TangentVector.cross.html"><code class="language-plaintext highlighter-rouge">cross(TV1,TV2)</code></a>
+<li>cross products with <a href="SO3TangentVector.cross.html"><code class="language-plaintext highlighter-rouge">cross(v1,v2)</code></a>
 </li>
-<li>norm <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm(TV)</code></a>
+<li>lengths with <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm(v1)</code></a>
 </li>
-<li>normalize <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize(TV)</code></a>
+<li>normalization with <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize(v1)</code></a>
 </li>
-<li>average <a href="SO3TangentVector.mean.html"><code class="language-plaintext highlighter-rouge">mean(TV)</code></a>
+<li>averages with <a href="SO3TangentVector.mean.html"><code class="language-plaintext highlighter-rouge">mean(v1)</code></a>
 </li>
 </ul>
 </div>
-<h2 id="13">Exponential and Logarithm Maps</h2>
-<p>In the context of the rotation group SO(3), the exponential and logarithm maps provide the link between tangent vectors and rotations.</p>
-<p>The exponential map takes a tangent vector (an infinitesimal rotation) and returns the corresponding finite rotation in SO(3). It is performed onto the tangent vector <code class="language-plaintext highlighter-rouge">v1</code> with the command <a href="SO3TangentVector.exp.html"><code class="language-plaintext highlighter-rouge">exp</code></a>.</p>
+<p>The last three operations use the vector operations inherited by <code class="language-plaintext highlighter-rouge">SO3TangentVector</code>. Arithmetic is defined only for tangent vectors at the same base point and with compatible symmetries.</p>
+<h2 id="12">Exponential and Logarithm Maps</h2>
+<p>The exponential map follows a tangent direction for the finite angular step stored in the vector norm. It returns the endpoint on SO(3).</p>
 {% highlight matlab %}
-rot = exp(v1)
+R2 = exp(vLeft);
+{% endhighlight %}
+<p>The logarithm map reverses this construction. Given the endpoint first and the base point second, <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a> returns the tangent vector at the base point that leads to the endpoint.</p>
+{% highlight matlab %}
+vBack = log(R2,R);
+norm(vBack-vLeft)
 {% endhighlight %}
 
 {% highlight plaintext %}
-rot = orientation (1 → y↓→x)
- 
-  Bunge Euler angles in degree
-     phi1     Phi    phi2
-  59.1419 41.5248 332.468
+ans =
+   1.8619e-16
 {% endhighlight %}
-<p>The logarithm map does the reverse: given two rotations it returns the tangent vector at the first that points towards the second. It is <a href="quaternion.log.html"><code class="language-plaintext highlighter-rouge">log</code></a>.</p>
-{% highlight matlab %}
-log(rot,R)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = SO3TangentVector (y↓→x)
- intern symmetries: 1 → y↓→x
- tangentSpace: leftVector
-    x   y   z
-  0.2 0.4 0.6
-{% endhighlight %}
-<p>The vector we started from, to the last digit - <code class="language-plaintext highlighter-rouge">log</code> and <code class="language-plaintext highlighter-rouge">exp</code> are inverse to each other.</p>
-<p>Together they connect the curved geometry of SO(3) with the flat structure of its tangent spaces, which is what interpolation, averaging and optimisation on rotations are built on.</p>
+<p>The displayed residual confirms the round trip to numerical precision. Rotation logarithms use a principal branch. At a relative angle of \(180^\circ\) the rotation axis, and therefore the logarithm, is not unique.</p>
+<p>Together, <code class="language-plaintext highlighter-rouge">log</code> and <code class="language-plaintext highlighter-rouge">exp</code> let an algorithm compute a local change in a flat tangent space and apply that change back on the curved rotation group. This is the pattern behind interpolation, averaging, and optimization of rotations.</p>
+<h2 id="15">The Maths Behind the Two Representations</h2>
+<p>The tangent space at \(R\) is</p>
+<p>\[ T_R SO(3) = \{S R \mid S=-S^T\} = \{R S \mid S=-S^T\}. \]</p>
+<p>The set of skew-symmetric matrices is the Lie algebra \(\mathfrak{so}(3)\). Therefore the two equal descriptions are also written \(\mathfrak{so}(3)R\) and \(R\mathfrak{so}(3)\). Equating the tangent matrices gives the coordinate change</p>
+<p>\[ S_{\rm right}=R^{-1}S_{\rm left}R. \]</p>
+<p>The methods <code class="language-plaintext highlighter-rouge">right</code> and <code class="language-plaintext highlighter-rouge">left</code> apply this change of basis. They do not move the base point or change the geometric tangent vector.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops the geometry of rotation space and small orientation changes for texture analysis.</li>
+<li>P.-A. Absil, R. Mahony, and R. Sepulchre, <a href="https://doi.org/10.1515/9781400830244">Optimization Algorithms on Matrix Manifolds</a>, Princeton University Press, 2008, introduces tangent-space methods and exponential updates for optimization on matrix manifolds.</li>
+<li>R. Hartley, J. Trumpf, Y. Dai, and H. Li, <a href="https://doi.org/10.1007/s11263-012-0601-0">Rotation Averaging</a>, International Journal of Computer Vision 103 (2013) 267--305, compares rotation-space metrics and averaging methods.</li>
+</ul>
+</div>
 <h2 id="17">Next</h2>
-<p>The skew symmetric matrices behind all of this, and their reading as a rate of rotation in a deforming material, are <a href="RotationSpinTensor.html">Spin Tensors</a>. The same construction with a crystal symmetry attached appears in <a href="SO3FunVectorField.html">vector fields on SO(3)</a>.</p>
+<p>
+<a href="RotationSpinTensor.html">Spin Tensors</a> develops the skew-symmetric matrix description as a rate of rotation in a deforming material. With crystal and specimen symmetries attached, tangent vectors become <a href="SO3FunVectorField.html">vector fields on SO(3)</a>.</p>
 </div>
 </body>
 </html>

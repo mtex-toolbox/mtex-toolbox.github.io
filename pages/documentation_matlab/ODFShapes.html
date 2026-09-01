@@ -1,5 +1,5 @@
 ---
-title: "Unimodal ODF Shapes"
+title: 'Unimodal ODF Shapes'
 
 sidebar: documentation_sidebar
 permalink: ODFShapes.html
@@ -23,10 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Also take a look at the page <a href="SO3Kernels.html">SO3Kernels</a>.</p>
-<p>In order to control the shape of unimodal ODF The classes <a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a> and <a href="S2Kernel.S2Kernel.html">S2Kernel</a> are needed in MTEX to define the specific form of unimodal and fibre symmetric ODFs. It has to be passed as an argument when calling the methods <a href="uniformODF.html">uniformODF</a> or <a href="fibreODF.html">fibreODF</a>.</p>
-<p>A kernel is defined by specifying its name and its free parameter. Alternatively one can also specify the halfwidth of the kernel. Below you find a list of some important SO3Kernel functions supported by MTEX.</p>
+<p>A <a href="RadialODFs.html">unimodal ODF</a> is a normalized peak around one orientation. Its <a href="SO3Kernels.html">SO(3) kernel</a> sets the profile of that peak: how the density falls with angular distance from the centre.</p>
+<p>The <b>halfwidth</b> is the distance at which a kernel has fallen to half its maximum. It is a spread parameter, not normally a cutoff. Matching halfwidths aligns one visible feature, but the tails and peak heights may still differ.</p>
+<p>Kernel choice matters when measured orientations are turned into a density; see <a href="DensityEstimation.html">Density Estimation</a>. It also controls how many harmonic degrees are needed to represent the resulting ODF. <a href="SO3FunHarmonicRepresentation.html">Series Expansion</a> introduces that representation and defines its bandwidth.</p>
+<p>This page compares kernels for point-centred radial components. Pass an <a href="SO3Kernel.SO3Kernel.html">SO3Kernel</a> object to <a href="unimodalODF.html"><code class="language-plaintext highlighter-rouge">unimodalODF</code></a>, or use its <code class="language-plaintext highlighter-rouge">'halfwidth'</code> option to select the default de la Vallee Poussin kernel. A <a href="FibreODFs.html">fibre ODF</a> is different: current <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a> accepts an <a href="S2Kernel.S2Kernel.html">S2Kernel</a> because its density decays across a curve rather than from one orientation.</p>
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+
 psi{1} = SO3AbelPoissonKernel(0.79);
 psi{2} = SO3DeLaValleePoussinKernel(13);
 psi{3} = SO3BumpKernel(35*degree);
@@ -35,51 +38,132 @@ psi{5} = SO3vonMisesFisherKernel(7.5);
 psi{6} = SO3GaussWeierstrassKernel(0.07);
 psi{7} = fibreVonMisesFisherKernel(7.2);
 psi{8} = SO3SquareSingularityKernel(0.72);
+
+kernelName = {'Abel-Poisson';'de la Vallee Poussin';'bump';'Dirichlet';...
+  'von Mises-Fisher';'Gauss-Weierstrass';'fibre von Mises-Fisher';...
+  'square singularity'};
 {% endhighlight %}
-<p>Lets visualize these kernel functions as one dimensional sections through the orientation space</p>
+<h2 id="2">Comparing Halfwidths</h2>
+<p>The positional arguments above are the native parameters of the eight families. The labelled output converts them to the common halfwidth scale. The values were chosen to span the comparable range from about \(15^\circ\) to \(37^\circ\). The plots below therefore show the difference in <b>shape</b> rather than in width.</p>
 {% highlight matlab %}
-% the kernel on SO(3)
+halfwidthInDegree = cellfun(@(kernel) kernel.halfwidth./degree,psi);
+halfwidthSummary = table(kernelName,halfwidthInDegree(:),...
+  'VariableNames',{'kernel','halfwidthInDegree'})
+{% endhighlight %}
+
+{% highlight plaintext %}
+halfwidthSummary =
+  8×2 table
+              kernel              halfwidthInDegree
+    __________________________    _________________
+    {'Abel-Poisson'          }          17.45      
+    {'de la Vallee Poussin'  }         26.343      
+    {'bump'                  }             35      
+    {'Dirichlet'             }         36.755      
+    {'von Mises-Fisher'      }         24.827      
+    {'Gauss-Weierstrass'     }           25.4      
+    {'fibre von Mises-Fisher'}          24.92      
+    {'square singularity'    }           14.9
+{% endhighlight %}
+<h2 id="3">Profiles in Orientation Space</h2>
+<p>Plot each kernel against angular distance from its centre. Every kernel is normalized to mean 1 on orientation space, not to have maximum 1. Narrower profiles can therefore have higher peaks.</p>
+{% highlight matlab %}
 close;
 figure('position',[100,100,1000,450])
 hold on
 for i = 1:numel(psi)
-  plot(psi{i},'DisplayName',class(psi{i}));
+  plot(psi{i},'DisplayName',kernelName{i});
 end
 hold off
+xlabel('angle from centre in degree');
+ylabel('kernel value');
 legend(gca,'show','Location','eastoutside')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFShapes_01.png" %}
 </center>
-<p>one dimensional sections through the corresponding PDF</p>
+<p>The bump kernel is constant inside its halfwidth and exactly zero outside it. This special cutoff should not be inferred from the meaning of halfwidth in the other families. The Dirichlet kernel oscillates through zero, whereas the smooth families decay with different tails.</p>
+<p>A negative kernel is useful for some harmonic calculations, but it is not a probability density. A radial ODF made directly from the Dirichlet kernel can therefore take negative values. The labelled output confirms that this example does.</p>
 {% highlight matlab %}
-close; figure('position',[100,100,1000,450])
+omega = linspace(0,pi,1000);
+dirichletMinimum = min(psi{4}.eval(cos(omega./2)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+dirichletMinimum =
+   -8.6660
+{% endhighlight %}
+<h2 id="5">Projected Profiles in a Pole Figure</h2>
+<p>A pole figure is the crystallographic Radon transform of an ODF; see <a href="ODFPoleFigure.html">Pole Figures of an ODF</a>. Applying that transform to a kernel gives the profile contributed by one radial component to a pole figure peak. This is the curve a measured pole figure peak is compared against.</p>
+{% highlight matlab %}
+close;
+figure('position',[100,100,1000,450])
 hold on
 for i = 1:numel(psi)
-  plot(psi{i}.radon,'symmetric','DisplayName',class(psi{i}),'linewidth',2);
+  plot(psi{i}.radon,'symmetric','DisplayName',kernelName{i},'linewidth',2);
 end
 hold off
-
 ylim([-5,20])
-
+xlabel('angular distance in degree');
+ylabel('projected kernel value');
 legend(gca,'show','Location','eastoutside')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFShapes_02.png" %}
 </center>
-<p>the Fourier coefficients of the kernels</p>
+<p>Projection changes the profiles but does not erase their main distinctions. The bump remains compactly supported, and the Dirichlet curve retains negative side lobes. The other curves stay nonnegative but differ in how broadly their pole-figure intensity is spread.</p>
+<h2 id="7">Harmonic Cost</h2>
+<p>A radial kernel stores one coefficient for every harmonic degree from zero through its bandwidth. Faster coefficient decay permits a lower bandwidth and makes harmonic computations cheaper.</p>
 {% highlight matlab %}
-close; figure('position',[100,100,500,450])
+close;
+figure('position',[100,100,500,450])
 hold on
 for i = 1:numel(psi)
-  plotSpektra(psi{i},'bandwidth',32,'linewidth',2,'DisplayName',class(psi{i}));
+  plotSpektra(psi{i},'bandwidth',32,'linewidth',2,...
+    'DisplayName',kernelName{i});
 end
 hold off
-legend(gca,'show')
+xlabel('harmonic degree');
+ylabel('radial coefficient');
+legend(gca,'show','Location','eastoutside')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFShapes_03.png" %}
 </center>
+<p>The plot shows only degrees 0 through 32 so that the low-degree decay can be compared. The table reports the full stored bandwidth of each kernel. Bandwidth 10 means degrees 0 through 10 and therefore 11 stored radial coefficients, not 10.</p>
+{% highlight matlab %}
+kernelBandwidth = cellfun(@(kernel) kernel.bandwidth,psi);
+bandwidthSummary = table(kernelName,kernelBandwidth(:),...
+  'VariableNames',{'kernel','bandwidth'})
+{% endhighlight %}
+
+{% highlight plaintext %}
+bandwidthSummary =
+  8×2 table
+              kernel              bandwidth
+    __________________________    _________
+    {'Abel-Poisson'          }        16   
+    {'de la Vallee Poussin'  }        10   
+    {'bump'                  }      1024   
+    {'Dirichlet'             }         3   
+    {'von Mises-Fisher'      }        11   
+    {'Gauss-Weierstrass'     }        11   
+    {'fibre von Mises-Fisher'}        11   
+    {'square singularity'    }        18
+{% endhighlight %}
+<p>The de la Vallee Poussin kernel ends at bandwidth 10. Both von Mises-Fisher variants and the Gauss-Weierstrass kernel end at 11, whereas the discontinuous bump kernel continues to bandwidth 1024. A sharp edge is expensive in a smooth harmonic basis.</p>
+<p>This combination of a finite exact expansion, nonnegative values, and smooth real-space shape is why MTEX uses the de la Vallee Poussin family by default for unimodal ODFs and orientation density estimation.</p>
+<h2 id="10">References</h2>
+<div>
+<ul>
+<li>
+<a href="https://doi.org/10.1155/TSM.33.365">Schaeben (1999)</a> derives the de la Vallee Poussin orientation density function and its finite harmonic expansion.</li>
+<li>
+<a href="https://doi.org/10.1016/j.jmva.2013.03.014">Hielscher (2013)</a> compares kernel families for density estimation on the rotation group.</li>
+</ul>
+</div>
+<h2 id="11">Next</h2>
+<p>Build point-centred peaks in <a href="RadialODFs.html">Radial ODFs</a> and tubular components in <a href="FibreODFs.html">Fibre ODFs</a>. The formulas and constructor details for every family are collected in <a href="SO3Kernels.html">SO(3) Kernels</a>.</p>
 </div>
 </body>
 </html>

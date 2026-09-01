@@ -1,5 +1,5 @@
 ---
-title: "Plot Types"
+title: 'Plot Types'
 
 sidebar: documentation_sidebar
 permalink: PlotTypes.html
@@ -23,53 +23,44 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
+<p>A plot type determines what the marks in a figure mean. A marker can stand for one sampled value, a contour can join equal values of a function, and a smooth plot can show the function between those levels. Choosing among them is therefore part of the analysis, not a cosmetic decision.</p>
+<p>This page compares five plot types used throughout MTEX: scatter, contour, filled contour, smooth and line plots. Start by deciding whether the object contains discrete samples or represents a function that may be evaluated between samples.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<h2 id="2">A Sample ODFs</h2>
-<p>Let us first define a model ODF to be plotted later on.</p>
+<h2 id="2">The example data</h2>
+<p>The examples use one model orientation distribution function (ODF), one pole figure evaluated from it on a discrete grid, and 100 orientations sampled from it. The ODF is a function. The other two objects contain discrete values derived from that function.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('-3m');
-odf = fibreODF(Miller(1,1,0,cs),zvector)
+odf = fibreODF(Miller(1,1,0,cs),zvector);
 pf = calcPoleFigure(odf,Miller(1,0,0,cs),equispacedS2Grid('antipodal'));
 {% endhighlight %}
 
-{% highlight plaintext %}
-odf = SO3FunCBF (3̅m1 → y↑→x)
- 
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (112̅0) || 0,0,1
-  weight: 1
-{% endhighlight %}
-<p>and simulate some EBSD data</p>
 {% highlight matlab %}
-ori = discreteSample(odf,100)
+ori = discreteSample(odf,100);
 {% endhighlight %}
-
-{% highlight plaintext %}
-ori = orientation (3̅m1 → y↑→x)
-  size: 100 x 1
-{% endhighlight %}
-<h2 id="4">Scatter Plots</h2>
-<p>In a scatter plots individual points are plotted. This plot is usually applied when individual orientations or pole figure measurements are visualized.</p>
+<h2 id="4">Scatter plots</h2>
+<p>A scatter plot draws one marker per data point and asserts nothing about the space between them. It is the direct choice for sampled orientations: the eye can see both clustering and unsampled parts of orientation space.</p>
 {% highlight matlab %}
 close all
 scatter(ori)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_01.png" %}
 </center>
-<p>Three-dimensional vectors, Miller indices, spherical grids are plotted as single markers in a spherical projection. The shape, size, and color of the markers can be adjusted using the following parameters (see also <a href="matlab:doc('scattergroupproperties')">scattergroup_properties</a>)</p>
+<p>Each marker in the figure is one of the 100 sampled orientations. No continuous density has been reconstructed from them.</p>
+<p>Vectors, Miller indices and spherical grids use the same marker idea in a spherical projection. The marker is controlled by the usual MATLAB <a href="https://www.mathworks.com/help/matlab/ref/matlab.graphics.chart.primitive.scatter-properties.html">Scatter properties</a>:</p>
 <p>
 <code class="language-plaintext highlighter-rouge">Marker</code>, <code class="language-plaintext highlighter-rouge">MarkerSize</code>, <code class="language-plaintext highlighter-rouge">MarkerFaceColor</code>, <code class="language-plaintext highlighter-rouge">MarkerEdgeColor</code>
 </p>
 {% highlight matlab %}
 plot(zvector,'Marker','p','MarkerSize',15,'MarkerFaceColor','red','MarkerEdgeColor','black')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_02.png" %}
 </center>
-<p>One can also assign a label to a marker. The main options controlling the label are (see <a href="matlab:doc('text_props')">text_properties</a>)</p>
+<p>The pentagon marks the specimen z direction. Changing its shape and colours changes only the annotation, not the direction it represents.</p>
+<p>A marker may carry a label, with the text properties of <a href="https://www.mathworks.com/help/matlab/ref/matlab.graphics.primitive.text-properties.html">Text properties</a>:</p>
 <p>
 <code class="language-plaintext highlighter-rouge">Label</code>, <code class="language-plaintext highlighter-rouge">Color</code>, <code class="language-plaintext highlighter-rouge">BackgroundColor</code>, <code class="language-plaintext highlighter-rouge">FontSize</code>
 </p>
@@ -78,50 +69,61 @@ plot([Miller(1,1,1,cs),Miller(-1,1,1,cs)],...
   'label',{'X','Y'},...
   'Color','blue','BackgroundColor','yellow','FontSize',20,'grid')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_03.png" %}
 </center>
-<p>A scatter plot is also used to draw raw pole figure data. In this case, each datapoint is represented by a single dot colored accordingly to the intensity.</p>
+<p>The two labels identify the projected crystal directions; the grid makes their positions on the sphere readable.</p>
+<p>A <a href="PoleFigure.PoleFigure.html">PoleFigure</a> also stores one intensity for each direction on a discrete grid. For measured data, each dot corresponds to a measurement direction. The synthetic pole figure below instead uses the grid supplied to <code class="language-plaintext highlighter-rouge">calcPoleFigure</code>, but the scatter plot exposes that grid in the same way.</p>
 {% highlight matlab %}
 plot(pf)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_04.png" %}
 </center>
-<h2 id="9">Contour Plots</h2>
-<p>Contour plots are plots consisting only of contour lines and are mainly used for pole figure and ODF plots. The number or exact location of the contour levels can be specified as an option. See <a href="https://de.mathworks.com/help/matlab/ref/matlab.graphics.chart.primitive.contour-properties.html">contourgroup properties</a> for more options!</p>
+<p>The dots reveal where values exist and how densely the pole figure was sampled. A smooth plot would hide this sampling pattern.</p>
+<h2 id="9">Contour plots</h2>
+<p>A contour joins positions at the same function value. Use contours when levels must be located or compared. MTEX can choose the levels, or they can be given explicitly. Here they run from 0 to 4 in steps of 0.5 multiples of a uniform orientation distribution:</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'contour',0:0.5:4,'antipodal')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_05.png" %}
 </center>
-<h2 id="10">Filled Contour Plots</h2>
-<p>Filled contour plots are obtained by the option <b>contourf</b>. Again you may pass as an option the number of contour lines or its exact location.</p>
+<p>The nested lines locate the peak without implying intermediate colour bands. Fixing the same levels in several figures makes their shapes and magnitudes comparable. Further options are the MATLAB <a href="https://www.mathworks.com/help/matlab/ref/matlab.graphics.chart.primitive.contour-properties.html">Contour properties</a>.</p>
+<h2 id="11">Filled contour plots</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">'contourf'</code> fills the bands between contour lines. The colour blocks are easy to scan, but they quantize the function: every value in one band gets the same colour, so a gentle gradient becomes a staircase.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'contourf','antipodal')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_06.png" %}
 </center>
-<h2 id="11">Smooth Interpolated Plots</h2>
-<p>The default plotting style for pole figures and ODFs is <b>smooth</b>. Which results in a colored plot without contour lines. Here one can specify the resolution of the plot using the option <code class="language-plaintext highlighter-rouge">resolution</code>.</p>
+<p>Compared with the line contours, the peak occupies a more obvious area. Its internal variation is hidden inside the filled bands.</p>
+<h2 id="13">Smooth plots</h2>
+<p>Smooth shading is the default when a function is plotted, as <code class="language-plaintext highlighter-rouge">plotPDF</code> does for an ODF here. Measured <a href="PoleFigure.PoleFigure.html">PoleFigure</a> data is drawn as a scatter instead, which is what the figure above shows. Smooth shading assigns a colour at every evaluation point, without contour boundaries. <code class="language-plaintext highlighter-rouge">'resolution'</code> controls the angular spacing of that evaluation grid; it does not increase the resolution of measured data.</p>
 {% highlight matlab %}
 plotPDF(odf,Miller(1,0,0,cs),'antipodal','resolution',10*degree)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_07.png" %}
 </center>
-<h2 id="12">Line Plots</h2>
-<p>Line plots are used by MTEX for one-dimensional ODF plots, plots of Fourier coefficients and plots of kernel functions. They can be customized by the standard MATLAB linespec options. See <a href="matlab:doc('linespec')">linespec</a>!</p>
+<p>The colour now changes continuously across the peak, while the coarse evaluation grid limits the detail. Compare this with the pole-figure scatter plot: this figure evaluates a function on a grid chosen for the drawing, whereas a measured pole figure has values only on the diffractometer's measurement grid. They may look similar but mean different things.</p>
+<h2 id="15">Line plots</h2>
+<p>A line plot shows a one-dimensional section through a function. Examples include values along an <a href="OrientationFibre.html">orientation fibre</a>, values over harmonic degrees, and a section through a kernel. The usual <a href="matlab:doc('linespec')">line specification</a> options apply.</p>
 {% highlight matlab %}
 f = fibre(Miller(1,0,0,cs),xvector);
 
 plot(odf,f,'linewidth',2,'linestyle','-.')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlotTypes_08.png" %}
 </center>
+<p>The horizontal coordinate follows the fibre and the vertical coordinate gives the ODF value. This makes the peak's height, width and any shoulder easier to judge than in a colour-coded spherical plot.</p>
+<h2 id="17">Choosing a plot type</h2>
+<p>Use scatter plots to preserve discrete samples and their gaps. Use line or contour plots when positions and values must be read against axes or levels. Use filled contours for a compact view of bands, and smooth shading for continuous variation. When figures will be compared, keep their contour levels or colour ranges fixed. <a href="ContourPlots.html">Contour Plots</a> develops the contour options, and <a href="CombinedPlots.html">Combined Plots</a> shows how to arrange related views.</p>
+<h2 id="18">Further reading</h2>
+<p>Cleveland and McGill, <a href="https://doi.org/10.1080/01621459.1984.10478080">Graphical Perception</a>, connects graphical choices with the accuracy of visual decoding. Wilke's <a href="https://clauswilke.com/dataviz/">Fundamentals of Data Visualization</a> organizes plot choice by the message a figure should convey.</p>
 </div>
 </body>
 </html>

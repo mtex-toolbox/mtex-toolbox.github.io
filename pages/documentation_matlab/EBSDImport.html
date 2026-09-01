@@ -1,5 +1,5 @@
 ---
-title: "Importing EBSD Data"
+title: 'Importing EBSD Data'
 
 sidebar: documentation_sidebar
 permalink: EBSDImport.html
@@ -23,9 +23,12 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>MTEX allows you to import EBSD data from a wide variety of file formats. In the simplest case import can be done by the command <a href="EBSD.load.html"><code class="language-plaintext highlighter-rouge">EBSD.load</code></a>
-</p>
+<p>An EBSD map represents a list of measurements, whatever layout the file uses on disk. Each measurement has a position, a phase and an orientation. Importing turns that list into an <a href="EBSD.EBSD.html">EBSD</a> variable and supplies the crystallography and reference frames needed to interpret it.</p>
+<p>Before starting, identify the specimen directions and check the phase names, lattice parameters and crystal-axis alignments reported by the acquisition software. <a href="OrientationDefinition.html">Orientations</a> explains how an orientation relates the crystal and specimen frames.</p>
+<p> <a href="EBSD.load.html"><code class="language-plaintext highlighter-rouge">EBSD.load</code></a> chooses the interface from the file extension. The first import needs only a filename.</p>
 {% highlight matlab %}
+plottingConvention.default('y↓→x');
+
 fileName = [mtexEBSDPath filesep 'EMSphinx.h5'];
 ebsd = EBSD.load(fileName)
 {% endhighlight %}
@@ -51,53 +54,53 @@ ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Properties: IQ, Metric, oldId
  Scan unit : um
- X x Y x Z : [0 → 382] x [0 → 203] x [0 → 0]
+ X × Y × Z : [0 → 382] × [0 → 203] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :508 x 955
+ Square grid  :508 × 955
  dataSet: /Scan 1/EBSD
  dataSets: Scan 1/EBSD Scan 2/EBSD Scan 3/EBSD Scan 4/EBSD
 {% endhighlight %}
-<p>This command automatically detects the file format and generates a variable of type <a href="EBSD.EBSD.html">EBSD</a> which contains all the information of the EBSD data set. Let us quickly do an orientation plot of the gamma phase</p>
+<p>Read this display once. It is the inventory for everything that follows. The file contains four scans, and the triangle in the data-set list marks the first as the one imported. Three indexed phases arrived with lattice parameters, and the cobalt phase states its crystal-axis alignment. Two phases are cubic, and 99% of the measurements are gamma iron. The square grid has 508 &times; 955 cells and covers about 382 &times; 203 microns.</p>
+<p>The display also lists <code class="language-plaintext highlighter-rouge">IQ</code>, <code class="language-plaintext highlighter-rouge">Metric</code> and <code class="language-plaintext highlighter-rouge">oldId</code> as <b>properties</b>. A property has one value per measurement and is subset together with the map. By contrast, the selected HDF5 path and the file header are scan-level <b>options</b> under <code class="language-plaintext highlighter-rouge">ebsd.opt</code>; they are not resized by a selection.</p>
+<p>A phase map is the quickest check that the scan footprint and phase inventory are plausible.</p>
 {% highlight matlab %}
-plot(ebsd('Fe(gamma'), ebsd('Fe(gamma').orientations)
+plot(ebsd)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDImport_01.png" %}
 </center>
-<p>The variable of type EBSD is the starting point for all further analysis, e.g., <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="EBSD2ODF.html">ODF reconstruction</a>, <a href="EBSDMisorientation">misorientation analysis</a>, etc.</p>
-<h2 id="4">Importing EBSD data using the import wizard</h2>
-<p>In many cases however, importing EBSD data is not that straightforward as suggested above. The reason is that during the measuring process different reference systems are involved and resulting coordinates, i.e., the spatial coordinates and the Euler angles, are often not stored in a consistent way by commercial software. Please read <a href="EBSDReferenceFrame.html">EBSD Reference Systems</a> for more information about how to set up reference frames correctly.</p>
-<p>In order to help the user to import EBSD data consistently to a fixed specimen reference frame (which the user should know), MTEX provides the <a href="matlab:import_wizard">import wizard</a> as a graphical user interface. The <code class="language-plaintext highlighter-rouge">import_wizard</code> is started by typing into the command line</p>
-{% highlight matlab %}
-import_wizard;
-{% endhighlight %}
+<p>Almost the entire map has the gamma-iron phase colour, as the 99% figure predicts. The sparse alpha-iron and cobalt measurements remain visible against it, so a wrong phase identifier would not be hidden by the total.</p>
+<p>This variable is the starting point for <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="EBSD2ODF.html">ODF estimation</a> and <a href="Misorientations.html">misorientation analysis</a>.</p>
+<h2 id="4">What Import Cannot Guess</h2>
+<p>A <b>reference frame</b> is the coordinate system in which data are expressed. Two reference frames can be involved in an EBSD measurement: the frame of the map coordinates and the frame used for the Euler angles. Vendors align them differently, and a file does not always record their relationship.</p>
+<p>The failure mode is quiet. A map imported with the wrong relationship still plots, still reconstructs into grains and still yields pole figures. Those results are simply rotated or mirrored with respect to the specimen, and no number in the data set reveals the mistake.</p>
+<p>A <b>plotting convention</b> only states how a reference frame is laid out on screen. Changing it can turn the displayed map, but it cannot repair an incorrect relationship between the two frames. Supply that relationship during import, then follow <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> to validate it against a known specimen direction or microstructural feature.</p>
+<h2 id="5">The Import Wizard</h2>
+<p>The wizard is the interactive route through those choices. Start it with <a href="matlab:import_wizard"><code class="language-plaintext highlighter-rouge">import_wizard</code></a>. It works with EBSD, pole figure and ODF data.</p>
 <p>
 <center>
 {% include inline_image.html file="importWizard.png" %}
 </center>
 </p>
-<p>The import wizard guides through the correct setup of:</p>
-<div>
-<ul>
-<li>
-<a href="CrystalSymmetries.html">crystal symmetries</a> associated with phases</li>
-<li>specimen symmetry and plotting conventions</li>
-</ul>
-</div>
-<p>The import wizard allows you to either create directly a workspace variable of type <a href="EBSD.EBSD.html">EBSD</a> or to generates a m-file, which contains all the customization and allows you to import the data in future sessions without the import wizard. This last option is highly recommended as the created script is also a good starting point for further analysis and data processing.</p>
+<p>Notice how the selected data set at lower left, the phase table across the top, and the map and Euler coordinate selectors at upper right are shown together. Changing an alignment redraws the map, so you can compare the result with the specimen rather than guess a vendor convention.</p>
+<p>The wizard can create the variable directly, but its more useful output is an import script. The script records every choice, runs without the wizard and provides a reproducible start for the rest of the analysis.</p>
 <h2 id="6">The Import Script</h2>
-<p>A script generated by the import wizard has approximately the following form:</p>
+<p>The essential part of a generated script is shown below. It records the phases, the screen alignment, the source file, the frame correction and a first plot.</p>
 {% highlight matlab %}
 % crystal symmetry
 csList = [
   notIndexed(), ...
-  crystalSymmetry('m-3m', [2.8665, 2.8665, 2.8665], 'mineral', 'Fe(alpha-iron)'), ...
-  crystalSymmetry('m-3m', [3.5910, 3.5910, 3.5910], 'mineral', 'Fe(gamma-iron)'), ...
-  crystalSymmetry('6/mmm', [2.5071, 2.5071, 4.0686], 'mineral', 'Co(alpha-cobalt)')
+  crystalSymmetry('m-3m', [2.8665 2.8665 2.8665], ...
+    'mineral', 'Fe(alpha-iron)', 'color', 'LightSkyBlue'), ...
+  crystalSymmetry('m-3m', [3.591 3.591 3.591], ...
+    'mineral', 'Fe(gamma-iron)', 'color', 'DarkSeaGreen'), ...
+  crystalSymmetry('6/mmm', [2.5071 2.5071 4.0686], ...
+    'mineral', 'Co(alpha-cobalt)', 'color', 'Goldenrod', ...
+    'X||a', 'Y||b*', 'Z||c')
 ];
 
-% plotting convention
-plottingConvention.default('y↓→x');
+% how the map is aligned on screen
+pC = plottingConvention('y↓→x');
 
 % path to files
 pname = mtexEBSDPath;
@@ -105,69 +108,30 @@ pname = mtexEBSDPath;
 % which files to be imported
 fname = [pname filesep 'EMSphinx.h5'];
 
-% Euler reference frame to map reference frame correction
-EulerCorrection = rotation.map(-yvector,xvector,zvector,-zvector);
+% rotates the Euler angle reference frame onto the map reference frame
+EulerCorrection = rotation.map(xvector,xvector,zvector,-zvector);
 
 % create an EBSD variable containing the data
-ebsd = EBSD.load(fname,csList, 'EulerCorrection', EulerCorrection)
-{% endhighlight %}
+ebsd = EBSD.load(fname,csList,'dataSet',1, ...
+  'EulerCorrection',EulerCorrection,pC,'silent');
 
-{% highlight plaintext %}
-════════════════════════════════════════════════════════════════════════════════
-HDF5 CONFIGURATION LOADED
-├── Manufacturer : EMSphInx
-├── Data sets    : 4
-│   ▸ [1] Scan 1/EBSD
-│     [2] Scan 2/EBSD
-│     [3] Scan 3/EBSD
-│     [4] Scan 4/EBSD
-└── Pick one by EBSD.load(fname,'dataSet',4) or 'dataSet','Scan 4/EBSD'
-════════════════════════════════════════════════════════════════════════════════
- 
-ebsd = EBSDsquare (y↓→x, row↓→col)
- 
- Phase  Orientations           Mineral         Color  Symmetry  Crystal reference frame
-     0  2148 (0.44%)    Fe(alpha-iron)  LightSkyBlue      m-3m                         
-     1  478052 (99%)    Fe(gamma-iron)  DarkSeaGreen      m-3m                         
-     2     4940 (1%)  Co(alpha-cobalt)     Goldenrod     6/mmm        X||a, Y||b*, Z||c
- 
- Properties: IQ, Metric, oldId
- Scan unit : um
- X x Y x Z : [0 → 382] x [0 → 203] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :508 x 955
- dataSet: /Scan 1/EBSD
- dataSets: Scan 1/EBSD Scan 2/EBSD Scan 3/EBSD Scan 4/EBSD
+% everything derived later that states no frame of its own follows this
+plottingConvention.default('y↓→x');
 {% endhighlight %}
-<p>Running this script imports the data into a variable named <code class="language-plaintext highlighter-rouge">ebsd</code>. From this point, the script can be extended to your needs, e.g:</p>
+<p>The crystal-symmetry calls state both a point group and a crystal frame. For cobalt, the X parallel a, Y parallel b-star and Z parallel c choices align the Cartesian crystal frame with the lattice basis; they are not part of the 6/mmm point group.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">EulerCorrection</code> is a frame change from the Euler-angle frame to the map frame. Here it maps Euler \(x\) onto map \(x\) and Euler \(z\) onto minus map \(z\). This is the correction for a map with \(y\) pointing down when the Euler angles were measured with \(y\) pointing up.</p>
+<p>The convention <code class="language-plaintext highlighter-rouge">pC</code> is also passed into the import. Data in a named specimen frame carries that frame's plotting convention and would not otherwise follow a later session default.</p>
+<p>The wizard ends with an orientation plot. Unlike the phase map above, this plot checks that orientations and positions have arrived together as a spatially coherent map.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd)
-
-plot(ebsd('Fe(gamma-iron)'),ebsd('Fe(gamma-iron)').orientations)
-hold on
-plot(grains.boundary,'LineWidth',2)
-hold off
+plot(ebsd('Fe(gamma-iron)'),ebsd('Fe(gamma-iron)').orientations, ...
+  'ipfDirection',zvector)
 {% endhighlight %}
-
-{% highlight plaintext %}
-grains = grain2d (y↓→x)
- 
- Phase  Grains  Pixels           Mineral  Symmetry         Color
-     0     268    2148    Fe(alpha-iron)      m-3m  LightSkyBlue
-     1     544  478052    Fe(gamma-iron)      m-3m  DarkSeaGreen
-     2     394    4940  Co(alpha-cobalt)     6/mmm     Goldenrod
- 
- boundary segments: 34170 (13668 µm)
- inner boundary segments: 3157 (1263 µm)
- triple points: 1067
- 
- Properties: meanRotation, GOS
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDImport_02.png" %}
 </center>
-<h2 id="8">Supported Data Formats</h2>
-<p>MTEX supports the following EBSD data formats:</p>
+<p>Coherent elongated domains and smooth colour changes inside them show that the orientations have not been scrambled across the scan. An equally coherent map can still be rotated or mirrored, so this picture alone does not validate the reference frame. Use the known-direction tests on <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> for that.</p>
+<h2 id="9">Supported Data Formats</h2>
 <p>
    <table class="usertable">
       <tr>
@@ -177,33 +141,7 @@ grains = grain2d (y↓→x)
                </p>
          </td>
          <td>
-               <p>EDAX ascii files.</p>
-         </td>
-         <td>
-               <p>
-                  <a href="loadEBSD_ang.DRex">.DRex</a>
-               </p>
-         </td>
-         <td>
-               <p>single orientation files.</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="loadEBSD_crc.html">.crc</a>
-               </p>
-         </td>
-         <td>
-               <p>Oxford binary files.</p>
-         </td>
-         <td>
-               <p>
-                  <a href="loadEBSD_osc.html">.osc</a>
-               </p>
-         </td>
-         <td>
-               <p>EDAX binary files.</p>
+               <p>EDAX and EMSphInx text files</p>
          </td>
       </tr>
       <tr>
@@ -213,63 +151,97 @@ grains = grain2d (y↓→x)
                </p>
          </td>
          <td>
-               <p>HKL single orientation files.</p>
-         </td>
-         <td>
-               <p>
-                  <a href="loadEBSD_generic.html">.txt</a>
-               </p>
-         </td>
-         <td>
-               <p>ASCII files with Euler angles as columns.</p>
+               <p>Oxford / HKL text files</p>
          </td>
       </tr>
       <tr>
          <td>
                <p>
-                  <a href="loadEBSD_h5.html">.h5, .hdf5, .oh5, .h5oina</a>
+                  <a href="loadEBSD_osc.html">.osc</a>
                </p>
          </td>
          <td>
-               <p>Bruker, EDAX, Oxford, ThermoFisher, EMsoft/EMsphinx binary files.</p>
+               <p>EDAX binary files</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="loadEBSD_crc.html">.crc, .cpr</a>
+               </p>
+         </td>
+         <td>
+               <p>Oxford binary files</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="loadEBSD_h5.html">HDF5</a>
+               </p>
+         </td>
+         <td>
+               <p>.h5, .hdf5, .oh5, .h5oina, .edaxh5 and .dream3d</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="loadEBSD_generic.html">generic text</a>
+               </p>
+         </td>
+         <td>
+               <p>columns in a user-defined order</p>
          </td>
       </tr>
    </table>
 </p>
-<p>If the data is recognized as an ASCII list of orientations, phase and spatial coordinates in the form</p>
+<p>The HDF5 interface reads Bruker, EDAX, Oxford, ThermoFisher, EMsoft and EMSphInx layouts. Prefer a documented, non-proprietary format when the acquisition software offers one. A published specification preserves the units, hierarchy and coordinate definitions needed to read the data later. Add a new HDF5 layout through the JSON configuration described in <a href="EBSDInterfaceHDF5.html">HDF5 Interface</a> rather than writing another HDF5 reader.</p>
+<p>The generic loader is the fallback for a text file that no vendor interface recognises. If it contains Euler angles, a phase and spatial coordinates as columns,</p>
 <pre>alpha_1 beta_1 gamma_1 phase_1 x_1 y_1
 alpha_2 beta_2 gamma_2 phase_2 x_2 y_2
 alpha_3 beta_3 gamma_3 phase_3 x_3 y_3
-.      .       .       .       .   .
-.      .       .       .       .   .
-.      .       .       .       .   .
-alpha_M beta_M gamma_M phase_m x_m y_m</pre>
-<p>an additional tool supports you to associated the columns with the corresponding properties.</p>
-<h2 id="9">HDF5 Files With Several Data Sets</h2>
-<p>HDF5 files are often project files holding more than one map - an EDAX project stores its maps as <code class="language-plaintext highlighter-rouge">Area N/OIM Map N</code>, an Oxford project its slices as <code class="language-plaintext highlighter-rouge">/1</code>, <code class="language-plaintext highlighter-rouge">/2</code>, ..., an EMSphInx file its scans as <code class="language-plaintext highlighter-rouge">Scan N</code>. Whenever a file contains more than one, the import lists them and states which one it took</p>
-<pre>├── Data sets    : 2
-│   ▸ [1] Area 1/OIM Map 1/EBSD
-│     [2] Area 2/OIM Map 7/EBSD</pre>
-<p>Pick another one by its number or by (part of) its name</p>
+.       .      .       .       .   .
+alpha_M beta_M gamma_M phase_M x_M y_M</pre>
+<p>then the wizard lets you assign each column. Orientations without spatial coordinates do not form a map; import them as described in <a href="OrientationImport.html">Importing Orientations</a>.</p>
+<h2 id="10">HDF5 Files With Several Data Sets</h2>
+<p>An HDF5 project file can hold more than one map. EDAX paths commonly contain <code class="language-plaintext highlighter-rouge">Area N/OIM Map N</code>, Oxford uses numbered slices, and EMSphInx uses <code class="language-plaintext highlighter-rouge">Scan N</code>. The opening import prints every available data set and marks the selected one. When no selection is supplied, the first entry is imported.</p>
+<p>Select another by its one-based number or by an unambiguous part of its name.</p>
 {% highlight matlab %}
 ebsd = EBSD.load(fname,'dataSet',2)
 ebsd = EBSD.load(fname,'dataSet','OIM Map 7')
 {% endhighlight %}
-<p>The data set that has been imported is recorded as its full HDF5 path in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSet</code>, the short names of all of them in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSets</code>. In order to see what a file contains without importing any data use</p>
+<p>The full imported HDF5 path is the scan-level option <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSet</code>. The short names of all choices are stored in <code class="language-plaintext highlighter-rouge">ebsd.opt.dataSets</code>.</p>
+<p>To inspect a large file without reading its per-pixel arrays, use</p>
 {% highlight matlab %}
 ebsd = EBSD.load(fname,'headerOnly')
 {% endhighlight %}
-<p>The import wizard lists everything a file offers below its file browser - selecting a row imports it.</p>
-<h2 id="10">Raw and Post Processed Data</h2>
-<p>An Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> file may store the map twice - as recorded by the detector under <code class="language-plaintext highlighter-rouge">EBSD</code> and as cleaned up by the vendor software under <code class="language-plaintext highlighter-rouge">Data Processing</code>. Both are simply data sets of that file, so they are listed and picked exactly like the maps above, the cleaned up one first</p>
+<p>This returns an empty measurement list but still fills the phase list, phase map and <code class="language-plaintext highlighter-rouge">ebsd.opt.header</code>. A header is the scan-level information from the file preamble, such as acquisition settings and vendor records. Its field names retain the vendor's native layout; MTEX does not impose a common header schema. The available HDF5 data sets are listed as well.</p>
+<p>The import wizard uses this lightweight preview below its file browser. Selecting a row then imports that data set.</p>
+<h2 id="11">Raw and Post-Processed Data</h2>
+<p>An Oxford <code class="language-plaintext highlighter-rouge">h5oina</code> file may store the same map twice: as recorded by the detector under <code class="language-plaintext highlighter-rouge">EBSD</code> and after vendor processing under <code class="language-plaintext highlighter-rouge">Data Processing</code>. They are two data sets of one file. MTEX lists them together and puts the processed version first.</p>
 {% highlight matlab %}
-ebsd = EBSD.load(fname)                        % post processed
+ebsd = EBSD.load(fname)                        % post-processed
 ebsd = EBSD.load(fname,'dataSet','EBSD')       % as recorded
 {% endhighlight %}
-<p>The recorded version comes with the full set of per pixel properties - band contrast, band slope, pattern quality, the pattern centre, ... - while the cleaned up one keeps only a few of them, but has its bad pixels cleaned up. Both refer to the same reference frame, so orientations may be compared between them directly.</p>
-<p>A file that was never processed holds the recorded version alone and simply lists one data set per map.</p>
-<h2 id="11">Writing your own interface</h2>
-<p>In the rare case of an EBSD format that is not supported, the user can write its own interface to import the data. Once you have successfully written that, you can integrate this method into MTEX by copying it into the folder <code class="language-plaintext highlighter-rouge">mtex/interfaces</code> and rename your function <code class="language-plaintext highlighter-rouge">loadEBSD_xxx</code>. Then it will be automatically recognized by the import wizard. Examples how to write such an interface can be found in the directory <code class="language-plaintext highlighter-rouge">mtex/interfaces</code>.</p>
+<p>The recorded version usually retains more per-pixel properties, such as band contrast, band slope, pattern quality and pattern-centre values. The processed version may retain fewer properties but includes the vendor's bad-pixel cleanup. Both refer to the same specimen frame, so their orientations can be compared directly.</p>
+<p>A file that was never processed contains the recorded version alone and lists one data set per map.</p>
+<h2 id="12">Writing Your Own Interface</h2>
+<p>A format not covered above needs a loader function. The established name is <code class="language-plaintext highlighter-rouge">loadEBSD_xxx.m</code>, and the loaders in <code class="language-plaintext highlighter-rouge">mtex/interfaces</code> are examples. Return an <a href="EBSD.EBSD.html">EBSD</a> variable and call the new function directly while developing it.</p>
+<p>Current <code class="language-plaintext highlighter-rouge">EBSD.load</code> dispatch is explicit: placing a function in that folder does not by itself register a new extension. Full integration also requires adding the extension to <code class="language-plaintext highlighter-rouge">EBSDExtensions</code> and a dispatch case to <code class="language-plaintext highlighter-rouge">EBSD.load</code>. The import wizard uses the same extension list to decide which files it offers as EBSD data.</p>
+<h2 id="13">References</h2>
+<div>
+<ul>
+<li>A. J. Schwartz, M. Kumar, B. L. Adams and D. P. Field, editors, <a href="https://doi.org/10.1007/978-0-387-88136-2">Electron Backscatter Diffraction in Materials Science</a>, second edition, Springer, 2009, develops EBSD measurement, calibration and orientation mapping.</li>
+<li>T. B. Britton et al., <a href="https://doi.org/10.1016/j.matchar.2016.04.008">Tutorial: Crystal orientations and EBSD -- Or which way is up?</a>, <i>Materials Characterization</i> 117, 113--126, 2016, gives a practical calibration chain between detector, scan, specimen and crystal frames.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis -- Guidelines for orientation measurement using electron backscatter diffraction</i>, specifies current guidance for reproducible orientation measurements, including specimen alignment and calibration.</li>
+<li>M. A. Jackson et al., <a href="https://doi.org/10.1186/2193-9772-3-4">h5ebsd: an archival data format for electron back-scatter diffraction data sets</a>, <i>Integrating Materials and Manufacturing Innovation</i> 3, 44--55, 2014, defines a vendor-neutral HDF5 archival layout.</li>
+<li>The <a href="https://github.com/oinanoanalysis/h5oina/blob/master/H5OINAFile.md">Oxford Instruments NanoAnalysis HDF5 File Specification</a> documents the public <code class="language-plaintext highlighter-rouge">h5oina</code> hierarchy, units and coordinate systems used by that format.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>Continue with <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> before trusting any specimen-relative result. Then use <a href="EBSDPlotting.html">Plotting</a> to inspect map quantities and <a href="EBSDSelect.html">Selecting EBSD Data</a> to restrict the measurement list. <a href="EBSDExport.html">Exporting EBSD Data</a> covers writing the checked map back to disk.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Plotting"
+title: 'Plotting'
 
 sidebar: documentation_sidebar
 permalink: Plotting.html
@@ -23,57 +23,73 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Nearly everything in texture analysis lives in three dimensions or more, and a page has two. Every figure in MTEX is therefore a projection, and every projection distorts something. Reading these plots well means knowing what each one has given up.</p>
-<p>The practical side is easier than that sounds. Apply <code class="language-plaintext highlighter-rouge">plot</code> to almost any MTEX variable and it will choose a sensible way to draw it - directions, Miller indices, orientations, pole figures, ODFs, maps, grains, tensors. This chapter is about the decisions that come after that: which projection, which plot type, which colours, and how to make several figures comparable with each other.</p>
-<p>Below is the same pole figure drawn in two different spherical projections.</p>
+<p>Nearly everything in texture analysis lives in three dimensions or more, while a page has two. In that broad sense, every figure in MTEX is a projection, and every projection gives up some information. Reading a plot starts with knowing what it preserves and what it hides.</p>
+<p>The practical side is easier than that sounds. Apply <code class="language-plaintext highlighter-rouge">plot</code> to almost any MTEX variable and it chooses a sensible representation. This works for directions, Miller indices, orientations, pole figures, ODFs, maps, grains, and tensors. This chapter addresses the decisions that follow: plot type, projection, screen alignment, colour, composition, and export.</p>
+<h2 id="2">One pole figure, two projections</h2>
+<p>A spherical projection maps directions on a sphere to points in a plane. The example below draws the same pole density in two projections. Both panels use the same colour range, so their colours remain comparable.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
 cs = crystalSymmetry('432');
-odf = unimodalODF(orientation.byEuler(30*degree,50*degree,10*degree,cs),'halfwidth',15*degree);
+odf = unimodalODF(...
+  orientation.byEuler(30*degree,50*degree,10*degree,cs),...
+  'halfwidth',15*degree);
 h = Miller(1,0,0,cs);
 
+newMtexFigure('layout',[1,2],'figSize','small')
+
 % equal area: areas are preserved, so densities can be compared by eye
-plotPDF(odf,h,'contourf','projection','earea','figSize','small')
+plotPDF(odf,h,'contourf','projection','earea')
 mtexTitle('equal area')
+
+nextAxis
+
+% stereographic, also called equal angle: angles are preserved, areas are not
+plotPDF(odf,h,'contourf','projection','stereo')
+mtexTitle('stereographic')
+
+setColorRange('equal')
+mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Plotting_01.png" %}
 </center>
-{% highlight matlab %}
-% stereographic, also called equal angle: angles are preserved, areas are not
-plotPDF(odf,h,'contourf','projection','stereo','figSize','small')
-mtexTitle('stereographic')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="Plotting_02.png" %}
-</center>
-<p>The same function, and the peak is a different size and in a different place on the page. Neither picture is wrong, but only one of them lets you judge how much material a peak represents: the equal area projection, because it is the one that preserves area. Densities plotted stereographically are systematically misleading towards the rim, which is why equal area is the default here and the convention in most of the texture literature.</p>
+<p>The panels show the same function, yet the peak has a different size and position on the page. Neither picture is wrong. Only the equal-area panel lets you judge how much material a peak represents from its plotted area. Stereographic areas become increasingly misleading towards the rim. Equal area is therefore the MTEX default and the usual texture convention.</p>
 <h2 id="4">Colour is a choice, not a measurement</h2>
-<p>A colour bar makes this obvious and an orientation map hides it. Turning a three-parameter orientation into a colour requires a <b>colour key</b>, and different keys give visibly different maps of identical data. Nothing can be read quantitatively off orientation colours alone.</p>
-<p>The related trap is comparison. Two maps or two pole figures drawn with independently chosen colour ranges cannot be compared by eye, because the same colour means a different number in each. Whenever two figures are meant to be looked at together, fix the range explicitly rather than letting each choose its own.</p>
+<p>A colour bar exposes a numerical colour mapping, while an orientation map can hide that a mapping was chosen. Turning a three-parameter orientation into a colour requires a <b>colour key</b>. Different keys give visibly different maps of identical data. Orientation colours alone do not provide a quantitative orientation value.</p>
+<p>The related trap is comparison. Two maps or pole figures with independently chosen colour ranges cannot be compared by eye. The same colour can mean a different number in each plot. Whenever figures belong in one comparison, fix a common range explicitly. The call to <code class="language-plaintext highlighter-rouge">setColorRange('equal')</code> above applies one range to both projection panels.</p>
 <h2 id="5">Figures are built up, not produced whole</h2>
-<p>MTEX figures are assembled: draw one thing, hold the axes, draw the next on top. Boundaries over a map, crystal directions over an inverse pole figure, a fitted fibre over the data it was fitted to - all follow the same pattern.</p>
+<p>MTEX figures are assembled one layer at a time. Draw one object, hold the axes, draw the next object on top, and release the axes. Boundaries over a map, crystal directions over an inverse pole figure, and a fitted fibre over its data all follow the same pattern.</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.orientations)
 hold on
 plot(grains.boundary)
 hold off
 {% endhighlight %}
-<p>Layout, colour bars and annotations are managed for you across however many axes a figure ends up with, which is why a pole figure command that produces seven sub-plots still comes out arranged sensibly.</p>
-<h2 id="6">Where to start</h2>
+<p>Plot order matters because each new layer can cover the previous layer. <a href="TransparencyDemo.html">Transparency</a> shows how alpha values reveal both layers when an opaque overlay would hide the background.</p>
+<p>MTEX manages layout, colour bars, and annotations across all axes in a figure. A pole-figure command that produces seven subplots therefore still arranges them as one figure.</p>
+<h2 id="6">Follow the chapter workflow</h2>
+<p>Start with <a href="PlotTypes.html">Plot Types</a>. It compares scatter plots, contour lines, filled contours, smooth shading, and line plots. Raw measurements usually need a scatter or smooth plot, while a density usually needs contours.</p>
+<p>Next, <a href="AxesAlignment.html">Axes Alignment</a> decides which specimen direction points where on the page. This session-wide setting affects every figure. Check it first when a plot is mirrored or rotated unexpectedly.</p>
 <p>
-<a href="PlotTypes.html">Plot Types</a> covers the ways of drawing the same data - contour lines, filled contours, smooth shading, scatter, line plots - and when each is appropriate. Raw measurements usually want a scatter or a smooth plot; a density usually wants contours. <a href="ContourPlots.html">Contour Plots</a> goes further into the contour family.</p>
+<a href="CombinedPlots.html">Combined Plots</a> and <a href="Multiplot.html">Multiplot</a> show more than one object. The first overlays objects in one axes, while the second places related axes side by side. <a href="Annotations.html">Annotations</a> then adds colour bars, labels, and marked directions.</p>
 <p>
-<a href="SphericalProjections.html">Spherical Projections</a> is the page behind the figures above, covering equal area, equal angle, equal distance, plain and three-dimensional views. <a href="AxesAlignment.html">Axes Alignment</a> decides which specimen direction points where on the page - a session-wide setting that silently affects every figure, and the first thing to check when a plot is mirrored or rotated from what you expected.</p>
+<a href="PlottingExport.html">Export</a> writes the finished figure. Vector formats keep text and lines sharp. A map of a million pixels is usually better exported as an image, and the page explains where that boundary lies.</p>
 <p>
-<a href="ColorMaps.html">Color Maps</a> covers colour coding and the consistent-range problem raised above. <a href="Annotations.html">Annotations</a> adds colour bars, labels, and marked directions, and <a href="Legends.html">Legends</a> handles phase and marker legends.</p>
+<a href="SphericalProjections.html">Spherical Projections</a> develops the comparison above. It covers equal-area, equal-angle, equal-distance, plain, and three-dimensional views. <a href="Legends.html">Legends</a> identifies phases and marker series.</p>
 <p>
-<a href="CombinedPlots.html">Combined Plots</a> and <a href="Multiplot.html">Multiplot</a> are the two ways of showing more than one thing: overlaid in one axes, or side by side in several. <a href="TransparencyDemo.html">Transparency</a> is useful when an overlay would otherwise hide what it sits on.</p>
-<p>
-<a href="PlottingExport.html">Export</a> writes figures out. Vector formats keep text and lines sharp; a map of a million pixels is usually better exported as an image, and the page explains where the boundary lies.</p>
-<h2 id="7">Next</h2>
-<p>What is being plotted is described in its own chapter - <a href="EBSDAnalysis.html">EBSD</a>, <a href="Grains.html">Grains</a>, <a href="ODFAnalysis.html">ODF</a>, <a href="PoleFigureAnalysis.html">Pole Figures</a>. The orientation colour keys are treated in detail under <a href="EBSDIPFMap.html">IPF Maps</a>.</p>
+<a href="ColorMaps.html">Color Maps</a> develops colour coding and consistent ranges. <a href="ContourPlots.html">Contour Plots</a> then shows how to choose, overlay, and label contour levels. Finally, <a href="TransparencyDemo.html">Transparency</a> uses alpha values for overlapping markers, superposed maps, boundaries, and three-dimensional surfaces.</p>
+<h2 id="7">Plot the object you are analysing</h2>
+<p>The chapter for each object explains what its plots mean. Continue with <a href="EBSDAnalysis.html">EBSD</a>, <a href="Grains.html">Grains</a>, <a href="ODFAnalysis.html">ODF</a>, or <a href="PoleFigureAnalysis.html">Pole Figures</a> when that is the object being analysed. <a href="EBSDIPFMap.html">IPF Maps</a> develops the orientation colour keys introduced above.</p>
+<h2 id="8">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops pole figures and the projections used in texture analysis.</li>
+<li>S. R. Midway, <a href="https://doi.org/10.1016/j.patter.2020.100141">Principles of Effective Data Visualization</a>, <i>Patterns</i> 1 (2020), 100141, explains how visual encodings and common scales support honest comparisons.</li>
+</ul>
+</div>
+<h2 id="9">Next</h2>
+<p>Continue with <a href="PlotTypes.html">Plot Types</a> to choose marks that match sampled data, continuous functions, and the comparison you need to make.</p>
 </div>
 </body>
 </html>

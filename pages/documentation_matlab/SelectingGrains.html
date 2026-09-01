@@ -1,5 +1,5 @@
 ---
-title: "Selecting Grains"
+title: 'Selecting Grains'
 
 sidebar: documentation_sidebar
 permalink: SelectingGrains.html
@@ -23,57 +23,62 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss how to select grains by properties. We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+<p>A <a href="grain2d.grain2d.html">grain2d</a> variable is a list of grains. Selecting grains means indexing that list by position, phase, property, spatial coordinates, or mean orientation. Every selection is another grain list, so selections can be applied one after another.</p>
+<p>This page assumes that you have reconstructed grains as described in <a href="GrainReconstruction.html">Grain Reconstruction</a>. It also assumes that you can draw them as in <a href="GrainSpatialPlots.html">Plotting Grains</a>.</p>
 {% highlight matlab %}
+close all;
+
 % load sample EBSD data set
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
-% restrict it to a subregion of interest.
+% restrict it to a subregion of interest
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-% reconstruct grains
-[grains, ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5,'alpha',6);
+% reconstruct grains and store their ids with the measurements
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5,'alpha',6);
 
-% smooth them
+% smooth the boundaries
 grains = smoothBoundary(grains,5);
 
-% plot the orientation data of the Forsterite phase
-plot(ebsd('fo'),ebsd('fo').orientations)
+% plot forsterite by orientation
+plot(ebsd('Fo'),ebsd('Fo').orientations,'ipfDirection',zvector)
 
-% plot the grain boundary on top of it
+% plot the other two phases in grey
 hold on
 plot(ebsd('En'),'FaceColor','lightgray')
 plot(ebsd('Di'),'FaceColor','darkgray')
 plot(grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_01.png" %}
 </center>
-<h2 id="2">Selecting grains by mouse</h2>
-<p>The most easiest way to select a grain is by using the mouse and the command <a href="grain2d.selectInteractive.html"><code class="language-plaintext highlighter-rouge">selectInteractive</code></a> which allows you to select an arbitrary amount of grains. The index of the selected grains appear as the global variable <code class="language-plaintext highlighter-rouge">indSelected</code> in your workspace</p>
+<p>The black network outlines every reconstructed grain. The forsterite measurements retain their orientation colours, while the two minor phases are grey so that later highlights remain easy to see.</p>
+<h2 id="3">By mouse</h2>
+<p> <a href="grain2d.selectInteractive.html"><code class="language-plaintext highlighter-rouge">selectInteractive</code></a> installs a mouse callback on the current figure. A click selects one grain, and additional clicks extend the selection. The global variable <code class="language-plaintext highlighter-rouge">indSelected</code> stores the selected positions in the current grain list.</p>
 {% highlight matlab %}
 selectInteractive(grains,'lineColor','gold')
 
 clear global indSelected
 global indSelected
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_02.png" %}
 </center>
-<p>As soon as you clicked a grain the global variable indSelected contains the index of the selected grain. Since we can not click when creating this help we set indSelected explicitly.</p>
+<p>Nobody clicks while this page is published. We therefore set <code class="language-plaintext highlighter-rouge">indSelected</code> to the list position of the grain at a known coordinate.</p>
 {% highlight matlab %}
-indSelected = grains(9000,3500).id;
+indSelected = grains.id2ind(grains(9000,3500).id);
 
-grains(indSelected)
+mouseGrains = grains(indSelected)
+
 hold on
-plot(grains(indSelected).boundary,'lineWidth',4,'lineColor','gold')
+plot(mouseGrains.boundary,'lineWidth',4,'lineColor','gold')
 hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = grain2d (y↑→x)
+mouseGrains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       1     323  Forsterite       mmm  LightSkyBlue
@@ -85,156 +90,34 @@ ans = grain2d (y↑→x)
  Id   Phase   Pixels      meanRotation          GOS
  47       1      323   (131°,64°,250°)   0.00795279
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_03.png" %}
 </center>
-<h2 id="4">Indexing by orientation or position</h2>
-<p>One can also to select a grain by spatial coordinates without user interaction. This is done using the syntax <code class="language-plaintext highlighter-rouge">grains(x,y)</code>, i.e.,</p>
+<p>The gold outline marks the selected grain. If several grains had been clicked, every selected outline would be gold and <code class="language-plaintext highlighter-rouge">mouseGrains</code> would contain all of them.</p>
+<h2 id="6">By position</h2>
+<p>The expression <code class="language-plaintext highlighter-rouge">grains(x,y)</code> returns the grain containing the point <code class="language-plaintext highlighter-rouge">(x,y)</code> in map coordinates. It needs neither a figure nor a mouse click.</p>
 {% highlight matlab %}
-x = 12000; y = 4000;
+x = 12000;
+y = 4000;
 
 hold on
-plot(grains(x,y).boundary,'linewidth',4,'linecolor','blue')
-
-plot(x,y,'marker','s','markerfacecolor','k',...
-  'markersize',10,'markeredgecolor','w','DisplayName','A')
+plot(grains(x,y).boundary,'lineWidth',4,'lineColor','blue')
+plot(x,y,'Marker','s','MarkerFaceColor','k','MarkerSize',10,...
+  'MarkerEdgeColor','w','DisplayName','A')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_04.png" %}
 </center>
-<p>Alternatively one can also select all grains with a certain orientation. Lets find all grains with a similar orientation as the one marked in gold. As threshold we shall use 20 degree</p>
+<p>Marker A lies inside the thick blue outline. The coordinate is used for the lookup; its location in the current axes does not affect the result.</p>
+<h2 id="8">By phase</h2>
+<p>A grain is phase-homogeneous. A mineral name therefore selects every grain of that phase, and the displayed summary reports what came back.</p>
 {% highlight matlab %}
-% select grains by orientation
-grains_selected = grains.findByOrientation(grains(indSelected).meanOrientation,20*degree)
-
-hold on
-plot(grains_selected.boundary,'linewidth',4,'linecolor','gold')
-hold off
+forsteriteGrains = grains('forsterite')
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains_selected = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1       3     523  Forsterite       mmm  LightSkyBlue
- 
- boundary segments: 164 (7766 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 13
- 
- Id   Phase   Pixels      meanRotation     GOS
- 18       1       19   (144°,74°,250°)    0.01
- 47       1      323   (131°,64°,250°)   0.008
- 55       1      181   (131°,64°,245°)   0.007
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_05.png" %}
-</center>
-<h2 id="6">Indexing by a Property</h2>
-<p>In order the generalize the above concept lets remember that the variable <code class="language-plaintext highlighter-rouge">grains</code> is essentially a large vector of grains. Thus when applying a function like <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a> to this variable we obtain a vector of the same length with numbers representing the area of each grain</p>
-{% highlight matlab %}
-grain_area = grains.area;
-{% endhighlight %}
-<p>As a first rather simple application we could colorize the grains according to their area, i.e., according to the numbers stored in <code class="language-plaintext highlighter-rouge">grain_area</code>
-</p>
-{% highlight matlab %}
-plot(grains,grain_area)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_06.png" %}
-</center>
-<p>As a second application, we can ask for the largest grain within our data set. The maximum value and its position within a vector are found by the MATLAB command <code class="language-plaintext highlighter-rouge">max</code>.</p>
-{% highlight matlab %}
-[max_area,max_id] = max(grain_area)
-{% endhighlight %}
-
-{% highlight plaintext %}
-max_area =
-   4.1122e+06
-max_id =
-    28
-{% endhighlight %}
-<p>The number <code class="language-plaintext highlighter-rouge">max_id</code> is the position of the grain with a maximum area within the variable <code class="language-plaintext highlighter-rouge">grains</code>. We can access this specific grain by direct indexing</p>
-{% highlight matlab %}
-grains(max_id)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     1       1    1545  Forsterite       mmm  LightSkyBlue
- 
- boundary segments: 237 (11059 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 17
- 
- Id   Phase   Pixels      meanRotation        GOS
- 28       1     1545   (167°,81°,251°)   0.012969
-{% endhighlight %}
-<p>and so we can plot it</p>
-{% highlight matlab %}
-hold on
-plot(grains(max_id).boundary,'linecolor','red','linewidth',4)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_07.png" %}
-</center>
-<p>Note that this way of addressing individual grains can be generalized to many grains. E.g. assume we are interested in the largest 5 grains. Then we can sort the vector <code class="language-plaintext highlighter-rouge">grain_area</code> and take the indices of the 5 largest grains.</p>
-{% highlight matlab %}
-[sorted_area,sorted_id] = sort(grain_area,'descend');
-
-large_grain_id = sorted_id(2:5);
-
-hold on
-plot(grains(large_grain_id).boundary,'linecolor','Orange','linewidth',4)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_08.png" %}
-</center>
-<h2 id="12">Indexing by a Condition</h2>
-<p>By the same syntax as above we can also single out grains that satisfy a certain condition. I.e., to access are grains that are at least one quarter as large as the largest grain we can do</p>
-{% highlight matlab %}
-condition = grain_area > max_area/4;
-
-hold on
-plot(grains(condition).boundary,'linecolor','Yellow','linewidth',4)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_09.png" %}
-</center>
-<p>This is a very powerful way of accessing grains as the condition can be build up using any grain property. As an example let us consider the phase. The phase of the first five grains we get by</p>
-{% highlight matlab %}
-grains(1:5).phase
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-     1
-     3
-     2
-     1
-     1
-{% endhighlight %}
-<p>Now we can access or grains of the first phase Forsterite by the condition</p>
-{% highlight matlab %}
-condition = grains.phase == 1;
-plot(grains(condition))
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_10.png" %}
-</center>
-<p>To make the above more directly you can use the mineral name for indexing</p>
-{% highlight matlab %}
-grains('forsterite')
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = grain2d (y↑→x)
+forsteriteGrains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1      61   14009  Forsterite       mmm  LightSkyBlue
@@ -245,17 +128,85 @@ ans = grain2d (y↑→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<p>Logical indexing allows also for more complex queries, e.g. selecting all grains perimeter larger than 6000 and at least 600 measurements within</p>
+<p>The mineral name is the readable form of a condition on <code class="language-plaintext highlighter-rouge">phase</code>. This property stores one imported phase number per grain.</p>
 {% highlight matlab %}
-condition = grains.perimeter>6000 & grains.numPixel >= 600;
-
-selected_grains = grains(condition)
-
-plot(selected_grains)
+firstFivePhase = grains(1:5).phase
 {% endhighlight %}
 
 {% highlight plaintext %}
-selected_grains = grain2d (y↑→x)
+firstFivePhase =
+     1
+     3
+     2
+     1
+     1
+{% endhighlight %}
+<h2 id="10">By a property</h2>
+<p>A grain property has one value per grain. MATLAB operations on numeric arrays can therefore build indices from any such property. We begin with <a href="grain2d.area.html"><code class="language-plaintext highlighter-rouge">area</code></a>.</p>
+{% highlight matlab %}
+grainArea = grains.area;
+
+plot(grains,grainArea)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_05.png" %}
+</center>
+<p>Large grains are bright and small grains are dark. This map shows where the extremes lie before any threshold is imposed.</p>
+<p> <a href="matlab:doc('max')"><code class="language-plaintext highlighter-rouge">max</code></a> returns the largest value and its position in the list. That position is an index, not a persistent grain ID.</p>
+{% highlight matlab %}
+[maxArea,maxIndex] = max(grainArea)
+
+hold on
+plot(grains(maxIndex).boundary,'lineColor','red','lineWidth',4)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+maxArea =
+   4.1122e+06
+maxIndex =
+    28
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_06.png" %}
+</center>
+<p>The red outline encloses the brightest grain in the area map. Sorting generalises this selection from one grain to the largest few.</p>
+{% highlight matlab %}
+[sortedArea,sortedIndex] = sort(grainArea,'descend');
+
+% select the second to fifth largest grains
+hold on
+plot(grains(sortedIndex(2:5)).boundary,'lineColor','orange','lineWidth',4)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_07.png" %}
+</center>
+<p>The orange outlines mark ranks two through five. The largest grain remains identifiable by its red outline from the preceding selection.</p>
+<h2 id="14">By a condition</h2>
+<p>A logical array with one value per grain can index the list directly. Here it selects every grain at least one quarter the size of the largest.</p>
+{% highlight matlab %}
+condition = grainArea > maxArea/4;
+
+hold on
+plot(grains(condition).boundary,'lineColor','yellow','lineWidth',4)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_08.png" %}
+</center>
+<p>The yellow outlines include more grains than the fixed rank selection. Their membership follows an area threshold rather than a chosen count.</p>
+<p>Conditions may be combined. The next selection requires a perimeter above 6000 map units and at least 600 measurements. The pixel-count condition excludes grains too small for their outline to support a useful shape interpretation.</p>
+{% highlight matlab %}
+condition = grains.perimeter > 6000 & grains.numPixel >= 600;
+
+selectedGrains = grains(condition)
+
+plot(selectedGrains)
+{% endhighlight %}
+
+{% highlight plaintext %}
+selectedGrains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       4    5248  Forsterite       mmm  LightSkyBlue
@@ -270,112 +221,170 @@ selected_grains = grain2d (y↑→x)
  82       1     1208    (153°,68°,237°)   0.0081
  84       1     1448   (166°,127°,259°)    0.014
 {% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_11.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_09.png" %}
 </center>
-<h2 id="17">The grainId and how to select EBSD inside specific grains</h2>
-<p>Besides, the list of grains the command <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> returns also two other output arguments.</p>
+<p>Only the grains satisfying both conditions remain in the plot. Empty spaces belong to grains excluded by at least one condition.</p>
+<h2 id="17">By orientation</h2>
+<p> <a href="grain2d.findByOrientation.html"><code class="language-plaintext highlighter-rouge">findByOrientation</code></a> selects grains whose mean orientation lies within a specified angle of a reference orientation. It accounts for crystal symmetry, so equivalent descriptions of the same lattice orientation are treated as the same orientation.</p>
+<p>We use the first gold grain from above as the reference and a threshold of 20 degrees.</p>
+{% highlight matlab %}
+referenceGrain = mouseGrains(1);
+similarGrains = grains.findByOrientation(referenceGrain.meanOrientation,20*degree)
+
+plot(ebsd('Fo'),ebsd('Fo').orientations,'ipfDirection',zvector)
+hold on
+plot(grains.boundary,'lineWidth',2)
+plot(similarGrains.boundary,'lineWidth',4,'lineColor','gold')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+similarGrains = grain2d (y↑→x)
+ 
+ Phase  Grains  Pixels     Mineral  Symmetry         Color
+     1       3     523  Forsterite       mmm  LightSkyBlue
+ 
+ boundary segments: 164 (7766 µm)
+ inner boundary segments: 0 (0 µm)
+ triple points: 13
+ 
+ Id   Phase   Pixels      meanRotation     GOS
+ 18       1       19   (144°,74°,250°)    0.01
+ 47       1      323   (131°,64°,250°)   0.008
+ 55       1      181   (131°,64°,245°)   0.007
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_10.png" %}
+</center>
+<p>Three grains are selected, and two share a boundary. Neighbours with mean orientations this close deserve a second look. The reconstruction may have split one grain, or the grains may have belonged together before another process separated them. <a href="GrainMerge.html">Merging Grains</a> develops this question.</p>
+<h2 id="19">List position and grain ID</h2>
+<p>A list position answers "which entry of this variable?" A grain ID answers "which reconstructed grain?" They are initially often equal, but a subset keeps the original IDs while its positions start again at one.</p>
 {% highlight matlab %}
 plot(grains)
 largeGrains = grains(grains.numPixel > 50);
-
 text(largeGrains,largeGrains.id)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="SelectingGrains_11.png" %}
+</center>
+<p>The labels are persistent grain IDs. They are not the positions of the labelled grains in <code class="language-plaintext highlighter-rouge">largeGrains</code>.</p>
+{% highlight matlab %}
+listPosition = 1;
+grainId = largeGrains.id(listPosition);
+fprintf('list position %d has grain ID %d\n',listPosition,grainId);
+
+grainByPosition = largeGrains(listPosition);
+grainById = largeGrains('id',grainId);
+sameGrain = grainByPosition.id == grainById.id
+{% endhighlight %}
+
+{% highlight plaintext %}
+list position 1 has grain ID 3
+sameGrain =
+  logical
+   1
+{% endhighlight %}
+<p>
+<code class="language-plaintext highlighter-rouge">largeGrains(1)</code> selects by position. The form <code class="language-plaintext highlighter-rouge">largeGrains('id',grainId)</code> searches the stored IDs. The printed logical value confirms that both expressions identify the same grain here.</p>
+<h2 id="22">From grains back to measurements</h2>
+<p>Every grain selection can be converted to the measurements it contains. This requires the <code class="language-plaintext highlighter-rouge">grainId</code> property that <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> returned with the map.</p>
+{% highlight matlab %}
+measurementsByGrain = ebsd(grainById)
+
+measurementsById = ebsd(ebsd.grainId == grainId);
+sameMeasurements = isequal(measurementsByGrain.id,measurementsById.id)
+{% endhighlight %}
+
+{% highlight plaintext %}
+measurementsByGrain = EBSD (y↑→x)
+ 
+ Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
+     2    346 (100%)  Enstatite  DarkSeaGreen       mmm                         
+ 
+ Properties: bands, bc, bs, error, mad, oldId, grainId
+ Scan unit : um
+ X × Y × Z : [5000 → 5550] × [3750 → 5850] × [0 → 0]
+ Normal vector: (0,0,1)
+ 
+sameMeasurements =
+  logical
+   1
+{% endhighlight %}
+<p>The first command displays the selected measurements. The printed logical value confirms that selecting by the grain object and matching the stored <code class="language-plaintext highlighter-rouge">ebsd.grainId</code> return the same subset.</p>
+<p>Applied to the largest grain, this relationship reveals the orientations measured inside one reconstructed grain.</p>
+{% highlight matlab %}
+largestGrain = grains(maxIndex);
+largestGrainEbsd = ebsd(largestGrain);
+
+plot(largestGrainEbsd,largestGrainEbsd.orientations,...
+  'ipfDirection',zvector)
+hold on
+plot(largestGrain.boundary,'lineWidth',2)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_12.png" %}
 </center>
-<p>The second output argument grainId is a list with the same size as the EBSD measurements that stores for each measurement the corresponding grainId. The above syntax stores this list directly inside the ebsd variable. This enables MTEX to select EBSD data by grains. The following command returns all the EBSD data that belong to grain number 33.</p>
+<p>The colours inside the black outline come from the individual measurements, not from one grain mean. On this grain the spread is small, under two and a half degrees, so the fill reads as a single shade and the unindexed white pixels are what stands out.</p>
+<p>A spread this size has to be measured rather than looked for. The mean and spread of the distribution are the subject of <a href="GrainOrientationParameters.html">Grain Orientation Parameters</a>.</p>
+<h2 id="25">Grains at the edge of the map</h2>
+<p>A grain touching the map edge continues outside the measured region. Its observed area and shape describe only the measured piece. Remove such grains before calculating per-grain size or shape statistics with <a href="grain2d.isBoundary.html"><code class="language-plaintext highlighter-rouge">isBoundary</code></a>.</p>
 {% highlight matlab %}
-ebsd(grains(33))
+interiorGrains = grains(~grains.isBoundary);
+plot(interiorGrains)
 {% endhighlight %}
-
-{% highlight plaintext %}
-ans = EBSD (y↑→x)
- 
- Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
-     3      5 (100%)  Diopside  Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
-    Id   Phase              orientation   bands   bc    bs   error   mad   oldId   grainId
- 54816       3     (178°,139.2°,130.8°)       7   85   142       0   0.7   34568        33
- 55152       3   (178.8°,138.8°,130.9°)       7   97   140       0   0.6   34569        33
- 55153       3   (178.5°,139.4°,130.5°)       7   76   163       0   0.4   35301        33
- 55489       3     (178°,139.4°,130.4°)       7   90   170       0   0.4   35302        33
- 55490       3   (177.7°,139.5°,130.1°)       7   84   166       0   0.3   36034        33
- Scan unit : um
- X x Y x Z : [8150 → 8250] x [2350 → 2450] x [0 → 0]
- Normal vector: (0,0,1)
-{% endhighlight %}
-<p>and is equivalent to the command</p>
-{% highlight matlab %}
-ebsd(ebsd.grainId == 33)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans = EBSD (y↑→x)
- 
- Phase  Orientations   Mineral      Color  Symmetry  Crystal reference frame
-     3      5 (100%)  Diopside  Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
-    Id   Phase              orientation   bands   bc    bs   error   mad   oldId   grainId
- 54816       3     (178°,139.2°,130.8°)       7   85   142       0   0.7   34568        33
- 55152       3   (178.8°,138.8°,130.9°)       7   97   140       0   0.6   34569        33
- 55153       3   (178.5°,139.4°,130.5°)       7   76   163       0   0.4   35301        33
- 55489       3     (178°,139.4°,130.4°)       7   90   170       0   0.4   35302        33
- 55490       3   (177.7°,139.5°,130.1°)       7   84   166       0   0.3   36034        33
- Scan unit : um
- X x Y x Z : [8150 → 8250] x [2350 → 2450] x [0 → 0]
- Normal vector: (0,0,1)
-{% endhighlight %}
-<p>The following picture plots the largest grains together with its individual orientation measurements.</p>
-{% highlight matlab %}
-plot(ebsd(grains(max_id)),ebsd(grains(max_id)).orientations)
-hold on
-plot(grains(max_id).boundary,'lineWidth',2)
-hold off
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_13.png" %}
 </center>
-<h2 id="21">Boundary grains</h2>
-<p>Sometimes it is desirable to remove all boundary grains as they might distort grain statistics. To do so one should remember that each grain boundary has a property <code class="language-plaintext highlighter-rouge">grainId</code> which stores the ids of the neighboring grains. In the case of an outer grain boundary, one of the neighboring grains has the id zero. We can filter out all these boundary segments by</p>
+<p>The white band around the plot is occupied by the omitted edge grains. This exclusion is appropriate for comparing complete observed shapes. A standardised average grain-size measurement may prescribe a different boundary-counting rule, so follow the selected standard when reporting one.</p>
+<p>The boundary network shows what <code class="language-plaintext highlighter-rouge">isBoundary</code> tests. Each grain boundary segment stores the IDs of the two grains it separates. A segment at the map edge has no grain on one side, so the corresponding ID is zero.</p>
 {% highlight matlab %}
-% ids of the outer boundary segment
-outerBoundary_id = any(grains.boundary.grainId==0,2);
+% find segments with zero on one side
+isOuterBoundary = any(grains.boundary.grainId == 0,2);
 
-% plot the outer boundary segments
 plot(grains)
 hold on
-plot(grains.boundary(outerBoundary_id),'linecolor','red','linewidth',2)
+plot(grains.boundary(isOuterBoundary),'lineColor','red','lineWidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_14.png" %}
 </center>
-<p>Now <code class="language-plaintext highlighter-rouge">grains.boundary(outerBoundary_id).grainId</code> is a list of grain ids where the first column is zero, indicating the outer boundary, and the second column contains the id of the boundary grain. Hence, it remains to remove all grains with these ids.</p>
+<p>The red segments form the outer rim of the measured region. Their nonzero IDs identify exactly the grains removed above.</p>
 {% highlight matlab %}
-% next we compute the corresponding grain_id
-grain_id = grains.boundary(outerBoundary_id).grainId;
+boundaryGrainId = grains.boundary(isOuterBoundary).grainId;
+boundaryGrainId(boundaryGrainId == 0) = [];
+boundaryGrainId = unique(boundaryGrainId);
 
-% remove all zeros
-grain_id(grain_id==0) = [];
-
-% and plot the boundary grains
-plot(grains(grain_id))
+plot(grains('id',boundaryGrainId))
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SelectingGrains_15.png" %}
 </center>
-<p>finally, we could remove the boundary grains by</p>
-{% highlight matlab %}
-grains(grain_id) = []
-{% endhighlight %}
-<p>However, boundary grains can be selected more easily by the command <a href="grain2d.isBoundary.html"><code class="language-plaintext highlighter-rouge">isBoundary</code></a>.</p>
-{% highlight matlab %}
-plot(grains(~grains.isBoundary))
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SelectingGrains_16.png" %}
-</center>
+<p>Only the edge grains remain. The explicit <code class="language-plaintext highlighter-rouge">'id'</code> lookup is required because the values came from <code class="language-plaintext highlighter-rouge">grainBoundary.grainId</code> rather than from list positions.</p>
+<h2 id="29">Next</h2>
+<p>
+<a href="ShapeParameters.html">Shape Parameters</a> defines the area, perimeter, and other geometric properties used to build selections. The ellipse, convex hull, and projection pages that follow it provide further shape measures. <a href="GrainOrientationParameters.html">Grain Orientation Parameters</a> develops selections based on the orientation distribution inside each grain.</p>
+<p>Grain selections also lead back to the boundary network. <a href="BoundarySelect.html">Selecting Grain Boundaries</a> selects its segments, and <a href="GrainMerge.html">Merging Grains</a> uses selected boundaries to join grains.</p>
+<h2 id="30">Further reading</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, "Grain detection from 2d and 3d EBSD data - Specification of the MTEX algorithm", <i>Ultramicroscopy</i> 111 (2011), 1720-1733, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">doi:10.1016/j.ultramic.2011.08.002</a>. This paper derives the Voronoi-cell grain model whose IDs connect the grain list to the EBSD measurements.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<a href="https://doi.org/10.1520/E2627-13R19">ASTM E2627-13(2019)</a>, <i>Standard Practice for Determining Average Grain Size Using Electron Backscatter Diffraction (EBSD) in Fully Recrystallized Polycrystalline Materials</i>.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a>, <i>Microbeam analysis - Electron backscatter diffraction - Measurement of average grain size</i>. It distinguishes measurements on a two-dimensional section from inferences about three-dimensional grain size.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

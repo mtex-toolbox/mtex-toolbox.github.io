@@ -1,5 +1,5 @@
 ---
-title: "Sigma Sections"
+title: 'Sigma Sections'
 
 sidebar: documentation_sidebar
 permalink: SigmaSections.html
@@ -22,177 +22,177 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Sigma sections are two-dimensional slices through orientation space. They separate the specimen direction of a chosen crystal axis from the remaining rotation about that axis. This makes them especially useful for trigonal, tetragonal, and hexagonal textures with one distinguished axis.</p>
+<p>This page assumes the distinction between sections and projections from <a href="ODFPlot.html">Visualizing ODFs</a>. The classical alternative is introduced in <a href="EulerAngleSections.html">Euler Angle Sections</a>, and crystal directions are introduced in <a href="CrystalDirections.html">Crystal Directions</a>.</p>
+<p>A <b>plotting convention</b> states how the specimen reference frame appears on screen. The convention below draws specimen Y upward and specimen X to the right. It does not rotate the ODF or change its reference frame.</p>
 <!--/introduction-->
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<p>Although \(\varphi_2\) sections are most common to represent orientation distribution functions they heavily suffer from geometrical distortions of the orientation space. Lets illustrate this at a simple example. The following \(\varphi_2\) sections represent a hexagonal ODF composed from several unimodal components</p>
+<h2 id="2">A Texture That Is Hard to Read in Euler Sections</h2>
+<p>The model ODF contains several localized components. Its definition is kept at the bottom of the script so that the first plot can be read as an unknown texture. The plot uses classical sections of constant third Bunge angle \(\varphi_2\).</p>
 {% highlight matlab %}
-% the ODF is defined at the bottom of this script to be secret during the first read :)
 cs = crystalSymmetry.load('Ti-Titanium-alpha.cif');
 odf = secretODF(cs);
 
-plotSection(odf)
+plotSection(odf);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_01.png" %}
 </center>
-<p>Try to answer the following questions:</p>
+<p>Try to answer three questions from the Euler sections.</p>
 <div>
 <ol>
-<li>What is the number of components the ODF is composed of?</li>
-<li>What would the c-axis pole figure look like?</li>
-<li>What would the a-axis pole figure look like?</li>
+<li>How many components make up the ODF?</li>
+<li>What would its c-axis pole figure look like?</li>
+<li>What would its a-axis pole figure look like?</li>
 </ol>
 </div>
-<p>Most people find it difficult to find the correct answer by looking at \(\varphi_2\) sections, while it is much more easy by looking at \(\sigma\)-sections.</p>
-<p>Lets consider an arbitrary orientation given by its Euler angles \((\varphi_1, \Phi, \varphi_2)\). Then its position in the c-axis pole figure is given by the polar coordinates \((\Phi,\varphi_1)\), i.e. it depends only on the first two Euler angles. The third Euler angle \(\varphi_2\) controls the rotation of the crystal around this new c-axis. This rotation around the new c-axis can be described by the angle between the a-axis with respect to some fixed reference direction. In the case of hexagonal symmetry this angle may vary between \(0\) and \(60\) degree.</p>
-<p>The idea of sigma sections is to make a reasonable choice of this reference direction.</p>
+<p>The components are spread across the Euler panels, so their number and pole-figure paths are difficult to recognize. Sigma sections reorganize the same orientation coordinates around the distinguished axis.</p>
+<h2 id="4">The Coordinates of a Sigma Section</h2>
+<p>Let an orientation \(g\) have Bunge Euler angles \((\varphi_1,\Phi,\varphi_2)\). For this hexagonal crystal, the polar coordinates \((\Phi,\varphi_1)\) locate \(g\vec c^*\) in the specimen pole figure. The third Euler angle controls the remaining rotation about this transformed axis.</p>
+<p> <a href="sigmaSections.html"><code class="language-plaintext highlighter-rouge">sigmaSections</code></a> uses \(\vec h_1=\vec c^*\) for the pole position and \(\vec h_2=\vec a\) for the remaining rotation. Direct \(\vec c\) and reciprocal \(\vec c^*\) are parallel in this example. The distinction matters for a general lattice.</p>
+<p>At each pole position \(\vec r=g\vec h_1\), MTEX supplies a tangent reference direction \(\mathbf{v}_{\mathrm{ref}}(\vec r)\). The section angle is the signed angle about \(\vec r\) from that reference direction to \(g\vec h_2\),</p>
+<p>\[ \sigma = \angle_{\vec r}\left(\mathbf{v}_{\mathrm{ref}}(\vec r), g\vec h_2\right). \]</p>
+<p>Hexagonal symmetry makes rotations separated by \(60^{\circ}\) equivalent for the default axes. MTEX therefore uses six sections spanning one \(60^{\circ}\) period. First inspect the section at \(\sigma=0^{\circ}\).</p>
 {% highlight matlab %}
-% define a sigma section
 oS = sigmaSections(odf.CS,odf.SS,'sigma',0);
 
-close all
-plot(oS)
+close all;
+plot(oS);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_02.png" %}
 </center>
-<p>In the above plot each pixel corresponds to a unique orientation. Which is specified by the position of the c-axis being in the position of the pixel and the a-axis being aligned with the small arrow at this position. As an example lets consider the orientation</p>
+<p>Each position in the disc gives the specimen direction of \(\vec c^*\). The small background arrow gives the local reference direction for \(\vec a\). Together, the position and arrow specify an orientation.</p>
+<p> <a href="orientation.map.html"><code class="language-plaintext highlighter-rouge">orientation.map</code></a> constructs two orientations with known axis alignments. The first maps \(\vec c\) to specimen Z and \(\vec a\) to specimen X.</p>
 {% highlight matlab %}
-ori1 = orientation.map(cs.cAxis,vector3d.Z,cs.aAxis,vector3d.X)
+ori1 = orientation.map(cs.cAxis,vector3d.Z,cs.aAxis,vector3d.X);
 {% endhighlight %}
-
-{% highlight plaintext %}
-ori1 = orientation (Titanium → y↑→x)
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    30    0    0
-{% endhighlight %}
-<p>that maps the c-axis parallel to the z-direction and the a-axis parallel to the x-direction and the orientation</p>
+<p>The second maps \(\vec c\) to specimen X and \(\vec a\) to specimen negative Z.</p>
 {% highlight matlab %}
-ori2 = orientation.map(cs.cAxis,vector3d.X,cs.aAxis,-vector3d.Z)
-{% endhighlight %}
+ori2 = orientation.map(cs.cAxis,vector3d.X,cs.aAxis,-vector3d.Z);
 
-{% highlight plaintext %}
-ori2 = orientation (Titanium → y↑→x)
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-    90   90  300
+hold on;
+quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis,...
+  'color','red','linewidth',2);
+quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis,...
+  'color','green','linewidth',2);
+hold off;
 {% endhighlight %}
-<p>that maps the c-axis parallel to the x-axis and the a-axis parallel to the z-axis.</p>
-{% highlight matlab %}
-hold on
-% visualize the a-axes directions of ori1
-quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis,'color','r','linewidth',2)
-
-% visualize the a-axes directions of ori2
-quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis,'color','green','linewidth',2)
-hold off
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_03.png" %}
 </center>
-<p>Accordingly, the first orientations appears right in the center while the second one appears at the position of the x-axis. The red and green arrows indicate the directions of the a-axes and align perfectly with the small background arrows.</p>
-<p>In order to visualize orientations with different a-axis alignments we need to additional sections with rotated small arrows.</p>
+<p>The first orientation lies at the centre because its c-axis points along Z. The second lies at specimen X and at specimen -X. <code class="language-plaintext highlighter-rouge">symmetrise</code> draws all six symmetry-equivalent a-axes at each position, so every marker is a six-pointed star; one ray of each star follows the small background arrow.</p>
+<h2 id="8">Following Orientations Through All Sections</h2>
+<p>Orientations whose a-axes make other angles with the reference field belong in other panels, each drawn with the background arrows rotated. Construct the default six-section geometry and add three orientations with their transformed a-axes.</p>
 {% highlight matlab %}
-% a full sigma section plot
 oS = sigmaSections(odf.CS,odf.SS);
-plot(oS)
+close all;
+plot(oS,'figSize','large');
 
-% some orientations
 ori1 = orientation.byEuler(60*degree,40*degree,60*degree,cs);
 ori2 = orientation.byEuler(200*degree,80*degree,110*degree,cs);
 ori3 = orientation.byEuler(40*degree,0*degree,0*degree,cs);
 
-hold on
-quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis, 'color','red','linewidth',2)
-
-quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis, 'color','green','linewidth',2)
-
-quiver(ori3.symmetrise,ori3.symmetrise*cs.aAxis, 'color','blue','linewidth',2)
-hold off
+hold on;
+quiver(ori1.symmetrise,ori1.symmetrise*cs.aAxis,...
+  'color','red','linewidth',2);
+quiver(ori2.symmetrise,ori2.symmetrise*cs.aAxis,...
+  'color','green','linewidth',2);
+quiver(ori3.symmetrise,ori3.symmetrise*cs.aAxis,...
+  'color','blue','linewidth',2);
+hold off;
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_04.png" %}
 </center>
-<p>Note how the a-axes of the three orientations align with the small background arrows. Instead of the a-axes we may also visualize the crystal orientations directly within these sigma sections</p>
+<p>Each coloured star of a-axes appears only in the panel that contains its orientation: blue at \(\sigma=10^{\circ}\), red at \(30^{\circ}\) and green at \(40^{\circ}\). The same orientations can be drawn as crystal shapes instead of arrows.</p>
 {% highlight matlab %}
-% define hexagonal crystal shape
 cS = crystalShape.hex(cs);
-
-% plot the crystal shape into the sigma sections
 ori = [ori1,ori2,ori3];
-plotSection(ori,0.5.*(ori*cS),oS)
+close all;
+plotSection(ori,0.5.*(ori*cS),oS,'figSize','large');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_05.png" %}
 </center>
-<p>Lets come back to our initial secret ODF and visualize it in sigma sections</p>
+<p>The crystal shapes make both parts of the coordinate visible. The crystal at the centre of the \(\sigma=10^{\circ}\) panel is seen down its c-axis and appears as a regular hexagon; the other two tilt with their c-axis, and their basal edges follow the rotation assigned to their panel.</p>
+<h2 id="11">Reading the Model ODF</h2>
+<p>Plot the model from the first section with the same sigma geometry.</p>
 {% highlight matlab %}
-plotSection(odf,oS)
+close all;
+plotSection(odf,oS,'figSize','large');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_06.png" %}
 </center>
-<p>First of all we observe clearly 4 distinct components with the first one having its maximum for the c-axis parallel to the z-axis and the a-axis parallel to the y-axis. With the other three components the c-axis rotates toward the x-axis while the a-axis rotates towards the z-axis. Hence, we would expect in the c-axis a girdle from \(z\) to \(x\) and in the a-axis pole figure ...</p>
+<p>Four compact maxima are now distinct, one to a panel. The maximum in the \(\sigma=30^{\circ}\) panel sits at the centre: its c-axis is parallel to specimen Z and its a-axis parallel to specimen Y. In the panels at \(40^{\circ}\), \(50^{\circ}\) and \(0^{\circ}\) the c-axis turns towards X in steps of \(30^{\circ}\) while the a-axis turns towards Z.</p>
+<p>This reading predicts a c-axis girdle from Z to X and a complementary a-axis girdle. The two pole figures confirm those paths.</p>
 {% highlight matlab %}
-plotPDF(odf,[cs.cAxis,cs.aAxis])
+close all;
+plotPDF(odf,[cs.cAxis,cs.aAxis]);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_07.png" %}
 </center>
+<p>The pole figures show the predicted girdles, but they give only the axis directions and not the rotation about them. A pole figure integrates the ODF along an <a href="OrientationFibre.html">orientation fibre</a>, whereas a sigma section evaluates the ODF on one slice. A section is therefore not a pole figure with some intensity removed.</p>
+<h2 id="14">Why the Pole Position Alone Is Not Enough</h2>
+<p>The c-axis pole figure has four maxima of about 11.5 mrd, at \(0^{\circ}\), \(30^{\circ}\), \(60^{\circ}\) and \(90^{\circ}\) from specimen Z. The last one lies on the rim and is drawn at both ends of it.</p>
 {% highlight matlab %}
-% They can be seen as the (001) pole figure split according to rotations
-% about the (001) axis. Lets have a look at the (001) pole figure
-
-plotPDF(odf,Miller(0,0,0,1,cs))
+close all;
+plotPDF(odf,Miller(0,0,0,1,cs));
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_08.png" %}
 </center>
-<p>We observe three spots. Two in the center and one at 100. When splitting the pole figure, i.e. plotting the odf as sigma sections</p>
-{% highlight matlab %}
-plot(odf,'sections',6,'silent','sigma')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SigmaSections_09.png" %}
-</center>
-<p>we can clearly distinguish the two spots in the middle indicating two radial symmetric portions. On the other hand the spots at (001) appear in every section indicating a fiber at position [001](100). Knowing that sigma sections are nothing but the split (001) pole figure they are much more simple to interpret than usual \(\phi_2\) sections.</p>
-<h2 id="14">Customization</h2>
+<p>The pole figure stops there. The earlier sigma plot puts each of the four maxima into a different panel, so each of them carries a different rotation about its c-axis.</p>
+<p>The rim maximum is one component, not a fibre. Along the rim the ODF density is 32 mrd at \(\sigma=0^{\circ}\), 23 mrd in the two neighbouring panels and 1.4 mrd at \(\sigma=30^{\circ}\); that spread is the \(10^{\circ}\) halfwidth of the model kernel. A fibre would keep the same rim density in every panel, because the rotation about that c-axis would be free. Confirm a fibre by evaluating the ODF along the corresponding orientation fibre as shown in <a href="ODFPlot.html">Visualizing ODFs</a>. The pole figure alone cannot make either distinction.</p>
+<h2 id="16">Customizing the Axes and Reference Field</h2>
+<p>Reusing a <code class="language-plaintext highlighter-rouge">sigmaSections</code> object keeps the same geometry across plots. Change <code class="language-plaintext highlighter-rouge">h2</code> to measure the section angle with the \((10\bar10)\) direction instead of the default a-axis.</p>
 {% highlight matlab %}
 oS = sigmaSections(odf.CS,odf.SS);
-
-% we may choose the crystal direction (10-10) as the reference direction
 oS.h2 = Miller(1,0,-1,0,cs);
 
-plotSection(odf,oS)
-
-% we may even change the reference vector field
-%oS.referenceField = S2VectorField.polar(xvector);
+close all;
+plotSection(odf,oS,'figSize','large');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="SigmaSections_09.png" %}
+</center>
+<p>The density represents the same ODF, but its features move between panels because the second direction now defines a different angular coordinate. The reference field itself can also be replaced, for example by</p>
+<p>
+<code class="language-plaintext highlighter-rouge">oS.referenceField = S2VectorField.polar(xvector);</code>
+</p>
+<p>The new field changes the zero of the section angle across the disc. It does not rotate the ODF.</p>
+<h2 id="18">Splitting a Different Pole Figure</h2>
+<p>The property <code class="language-plaintext highlighter-rouge">h1</code> chooses which crystal-direction pole figure supplies the positions in the panels. The second direction <code class="language-plaintext highlighter-rouge">h2</code> must be orthogonal to <code class="language-plaintext highlighter-rouge">h1</code> so that it can measure rotation about the pole direction.</p>
+{% highlight matlab %}
+oS.h1 = Miller(1,0,-1,1,'hkil',odf.CS);
+oS.h2 = Miller(-1,2,-1,0,odf.CS,'UVTW');
+{% endhighlight %}
+<p>The new <code class="language-plaintext highlighter-rouge">h1</code> is not a crystal symmetry axis. Its rotation has no reduced \(60^{\circ}\) period, so the sections must cover the full \(360^{\circ}\). Twelve panels keep that full range readable.</p>
+{% highlight matlab %}
+oS.omega = (0:30:330)*degree;
+
+close all;
+plot(odf,oS,'figSize','large');
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="SigmaSections_10.png" %}
 </center>
-<p>We may also change the pole figure we would like to split into sections.</p>
-{% highlight matlab %}
-% the pole figure we are going to split
-oS.h1 =  Miller(1,0,-1,1,'hkil',odf.CS);
-
-% the reference direction, needs to be orthogonal to h1
-oS.h2 = Miller(-1,2,-1,0,odf.CS,'UVTW');
-
-% since h1 is not a symmetry axis of the crystal we need to consider
-% all rotations up to 360 degree
-oS.omega = (0:20:340)*degree;
-
-plot(odf,oS)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="SigmaSections_11.png" %}
-</center>
+<p>The final gallery now places \(g\vec h_1\), rather than \(g\vec c^*\), in each panel. The background arrows show the chosen zero direction for \(g\vec h_2\), and the panel labels give its rotation about \(g\vec h_1\).</p>
+<h2 id="21">Further Reading</h2>
+<div>
+<ul>
+<li>S. Matthies, K. Helming, and K. Kunze, <a href="https://doi.org/10.1002/pssb.2221570105">On the Representation of Orientation Distributions in Texture Analysis by Sigma-Sections. I</a>, <i>physica status solidi (b)</i> 157 (1990), 71--83, develops the general geometry and interpretation of sigma sections.</li>
+<li>S. Matthies, K. Helming, and K. Kunze, <a href="https://doi.org/10.1002/pssb.2221570202">On the Representation of Orientation Distributions in Texture Analysis by Sigma-Sections. II</a>, <i>physica status solidi (b)</i> 157 (1990), 489--507, treats crystal and specimen symmetry and gives worked examples.</li>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops ODFs, pole figures, and classical Euler sections.</li>
+<li>D. Chateigner, L. Lutterotti, and M. Morales, <a href="https://doi.org/10.1107/97809553602060000968">Quantitative Texture Analysis and Combined Analysis</a>, <i>International Tables for Crystallography H</i>, ch. 5.3, 2019, relates Euler coordinates, ODFs, and pole-figure projections in a common reference-frame description.</li>
+</ul>
+</div>
+<h2 id="22">Next</h2>
+<p>Compare the other section families and their shared options in <a href="EulerAngleSections.html">Euler Angle Sections</a>. Continue with <a href="ODFPoleFigure.html">Pole Figures</a> to study the projection that a sigma section uses as its positional coordinate. Then use <a href="ODFComponents.html">Component Analysis</a> to quantify the maxima found in a section plot.</p>
 {% highlight matlab %}
 function odf = secretODF(cs)
 

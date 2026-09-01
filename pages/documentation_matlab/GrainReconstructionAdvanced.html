@@ -1,5 +1,5 @@
 ---
-title: "Advanced Grain Reconstruction"
+title: 'Advanced Grain Reconstruction'
 
 sidebar: documentation_sidebar
 permalink: GrainReconstructionAdvanced.html
@@ -24,74 +24,53 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>
-<a href="GrainReconstruction.html">Grain reconstruction</a> introduced the parameters of <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> - the threshold angle, <code class="language-plaintext highlighter-rouge">'alpha'</code> and <code class="language-plaintext highlighter-rouge">'minPixel'</code>. This page is about replacing its parts rather than tuning them. It helps to know that <code class="language-plaintext highlighter-rouge">calcGrains</code> does three things:</p>
+<a href="GrainReconstruction.html">Grain Reconstruction</a> introduced the threshold angle, <code class="language-plaintext highlighter-rouge">'alpha'</code>, and <code class="language-plaintext highlighter-rouge">'minPixel'</code>. This page shows how to replace parts of the reconstruction rather than tune those three settings.</p>
+<p>A <b>grain</b> is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. This page assumes that definition and the basic reconstruction workflow. If misorientation is new to you, first see <a href="MisorientationTheory.html">Misorientation Theory</a>.</p>
+<p>It helps to separate <code class="language-plaintext highlighter-rouge">calcGrains</code> into three operations:</p>
 <div>
 <ol>
-<li>it partitions the measured surface into cells, one per measurement</li>
-<li>it decides, for every pair of neighbouring cells, whether a grain boundary separates them</li>
-<li>it collects the cells that are not separated into grains</li>
+<li>partition the measured surface into cells</li>
+<li>assign a connectivity to each pair of neighbouring cells</li>
+<li>collect connected cells into grains</li>
 </ol>
 </div>
-<p>The following sections deal with the second step, then with the first. Two things that are often done <b>before</b> a reconstruction have pages of their own: <a href="EBSDDenoising.html">denoising</a> the orientation data and <a href="EBSDFilling.html">filling</a> missing pixels.</p>
-<p>Throughout this page we use the same subregion of the forsterite data set as the basic page.</p>
+<p>The first sections replace the second operation. The later sections compare two spatial decompositions used by the first. Denoising orientations and filling missing orientations are separate preprocessing decisions; see <a href="EBSDDenoising.html">Denoising Orientation Maps</a> and <a href="EBSDFilling.html">Fill Missing Data in Orientation Maps</a>.</p>
+<p>We use the same subregion of the forsterite data set as the basic page.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 {% endhighlight %}
 <h2 id="2">The grain boundary criterion</h2>
-<p>Whether a boundary runs between two neighbouring pixels is decided by an object of type <a href="grainBoundaryCriterion.html"><code class="language-plaintext highlighter-rouge">grainBoundaryCriterion</code></a>. It is asked for pairs of pixel indices at once and answers with one number per pair:</p>
+<p>A <a href="grainBoundaryCriterion.html"><code class="language-plaintext highlighter-rouge">grainBoundaryCriterion</code></a> evaluates arrays of neighbouring pixel indices at once. It returns one connectivity per pair, from <code class="language-plaintext highlighter-rouge">0</code> for separated to <code class="language-plaintext highlighter-rouge">1</code> for fully connected. The discrete angle criterion uses three values:</p>
 <div>
 <ul>
 <li>
-<code class="language-plaintext highlighter-rouge">1</code> - no boundary, the two pixels belong to the same grain</li>
+<code class="language-plaintext highlighter-rouge">1</code> means no boundary</li>
 <li>
-<code class="language-plaintext highlighter-rouge">0.5</code> - a low angle boundary, i.e. a boundary inside a grain</li>
+<code class="language-plaintext highlighter-rouge">0.5</code> means a boundary drawn inside a connected grain</li>
 <li>
-<code class="language-plaintext highlighter-rouge">0</code> - a grain boundary</li>
+<code class="language-plaintext highlighter-rouge">0</code> means a grain boundary that separates the cells</li>
 </ul>
 </div>
-<p>Normally <code class="language-plaintext highlighter-rouge">calcGrains</code> builds the criterion from its own options, but it also accepts one directly. The following two calls are the same reconstruction</p>
+<p>Without clustering, every positive connectivity joins the graph used to form grains. A connectivity at or below <code class="language-plaintext highlighter-rouge">0.5</code> is also drawn as a boundary. A continuous criterion can therefore draw a boundary between two cells that remain connected through the grain. The soft-threshold example below makes this distinction visible.</p>
+<p>Normally <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> constructs a criterion from its options. It also accepts a criterion object directly. These calls perform the same reconstruction, so their summaries would only repeat one another.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd,'angle',10*degree,'minPixel',5)
+[grainsUniform,ebsdUniform] = ...
+  calcGrains(ebsd,'angle',10*degree,'minPixel',5);
+[grainsFromObject,ebsdFromObject] = ...
+  calcGrains(ebsd,gbcAngle(10*degree),'minPixel',5);
 
-grains = calcGrains(ebsd,gbcAngle(10*degree),'minPixel',5)
+fprintf('Option and criterion object give identical grain ids: %d\n',...
+  isequal(ebsdUniform.grainId,ebsdFromObject.grainId));
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0       1     293  notIndexed                    none
-     1      55   14016  Forsterite       mmm  LightSkyBlue
-     2      13    1375   Enstatite       mmm  DarkSeaGreen
-     3      21     693    Diopside     12/m1     Goldenrod
- 
- boundary segments: 3404 (162304 µm)
- inner boundary segments: 1 (19 µm)
- triple points: 130
- 
- Properties: meanRotation, GOS
- 
- 
-grains = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0       1     293  notIndexed                    none
-     1      55   14016  Forsterite       mmm  LightSkyBlue
-     2      13    1375   Enstatite       mmm  DarkSeaGreen
-     3      21     693    Diopside     12/m1     Goldenrod
- 
- boundary segments: 3404 (162304 µm)
- inner boundary segments: 1 (19 µm)
- triple points: 130
- 
- Properties: meanRotation, GOS
+Option and criterion object give identical grain ids: 1
 {% endhighlight %}
-<p>MTEX ships the criteria <a href="gbcAngle.html"><code class="language-plaintext highlighter-rouge">gbcAngle</code></a> (the default), <a href="gbcSoft.html"><code class="language-plaintext highlighter-rouge">gbcSoft</code></a>, <a href="gbcCustom.html"><code class="language-plaintext highlighter-rouge">gbcCustom</code></a>, <a href="gbcVariants.html"><code class="language-plaintext highlighter-rouge">gbcVariants</code></a> and <a href="gbcFMC.gbcFMC.html"><code class="language-plaintext highlighter-rouge">gbcFMC</code></a>. The last of these is what deformed microstructures need and is covered on the <a href="GrainReconstruction.html">basic page</a>; <code class="language-plaintext highlighter-rouge">gbcVariants</code> separates pixels by their variant id and belongs to <a href="MaParentGrainReconstruction.html">parent grain reconstruction</a>. The three remaining ones are the subject of this section.</p>
-<h2 id="4">Phase dependent thresholds</h2>
-<p>What counts as a grain boundary need not be the same angle in every phase. Passing a cell array of thresholds instead of a single one gives each phase its own. The entries follow the order of <code class="language-plaintext highlighter-rouge">ebsd.CSList</code>
-</p>
+<p>MTEX supplies <a href="gbcAngle.html"><code class="language-plaintext highlighter-rouge">gbcAngle</code></a>, <a href="gbcSoft.html"><code class="language-plaintext highlighter-rouge">gbcSoft</code></a>, <a href="gbcCustom.html"><code class="language-plaintext highlighter-rouge">gbcCustom</code></a>, <a href="gbcVariants.html"><code class="language-plaintext highlighter-rouge">gbcVariants</code></a>, and <a href="gbcFMC.gbcFMC.html"><code class="language-plaintext highlighter-rouge">gbcFMC</code></a>. The default is <code class="language-plaintext highlighter-rouge">gbcAngle</code>. The <a href="GrainReconstruction.html">basic page</a> uses <code class="language-plaintext highlighter-rouge">gbcFMC</code> for deformed microstructures. The criterion <code class="language-plaintext highlighter-rouge">gbcVariants</code> separates variant ids during <a href="MaParentGrainReconstruction.html">parent grain reconstruction</a>. The three remaining alternatives are developed here.</p>
+<h2 id="4">Phase-dependent thresholds</h2>
+<p>Different phases may require different boundary angles. A cell array gives one threshold per phase, in the order of <code class="language-plaintext highlighter-rouge">ebsd.CSList</code>. Its displayed summary makes that order explicit.</p>
 {% highlight matlab %}
 ebsd.CSList
 {% endhighlight %}
@@ -105,7 +84,7 @@ ans =
    Diopside     Goldenrod     12/m1    9.7, 9, 5.3  X||a*, Y||b, Z||c
     Silicon    LightCoral      m-3m  5.4, 5.4, 5.4
 {% endhighlight %}
-<p>so the first entry belongs to the not indexed pixels - it is never used, but it has to be there - and the remaining four to the four minerals. Here we ask for the forsterite, the phase that carries the deformation in this specimen, to be separated already at 5 degrees, while the other phases keep the usual 10.</p>
+<p>The first entry is <code class="language-plaintext highlighter-rouge">notIndexed</code>. It is never used as an angular threshold, but it must be present. The other four entries belong to the four minerals. Here forsterite, the phase that carries the deformation in this specimen, is separated at 5 degrees. The other phases keep the 10 degree threshold.</p>
 {% highlight matlab %}
 threshold = {10*degree, ...  % notIndexed, never used
   5*degree, ...              % Forsterite
@@ -113,112 +92,79 @@ threshold = {10*degree, ...  % notIndexed, never used
   10*degree, ...             % Diopside
   10*degree};                % Silicon
 
-grains = calcGrains(ebsd,'angle',threshold,'minPixel',5)
+grainsPhase = calcGrains(ebsd,'angle',threshold,'minPixel',5);
+
+fprintf('Forsterite grains: uniform 10 degree = %d; phase-dependent = %d\n',...
+  length(grainsUniform('Forsterite')),length(grainsPhase('Forsterite')));
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0       1     293  notIndexed                    none
-     1      63   14009  Forsterite       mmm  LightSkyBlue
-     2      13    1375   Enstatite       mmm  DarkSeaGreen
-     3      21     693    Diopside     12/m1     Goldenrod
- 
- boundary segments: 3499 (166477 µm)
- inner boundary segments: 12 (516 µm)
- triple points: 143
- 
- Properties: meanRotation, GOS
+Forsterite grains: uniform 10 degree = 55; phase-dependent = 63
 {% endhighlight %}
-<p>This splits the forsterite into 65 grains instead of the 57 a uniform 10 degrees gives, and leaves the other phases as they were.</p>
-<p>Each entry may itself be a pair <code class="language-plaintext highlighter-rouge">[highAngle lowAngle]</code>, which is how <a href="SubGrainBoundaries.html">subgrain boundaries</a> are reconstructed.</p>
+<p>The printed counts show that the lower forsterite threshold splits that phase more finely. The other phases use exactly the same criterion as in the uniform reconstruction and are unchanged.</p>
+<p>An entry may itself be a pair <code class="language-plaintext highlighter-rouge">[highAngle lowAngle]</code>. The first angle separates grains; the second records internal boundaries. See <a href="SubGrainBoundaries.html">Subgrain Boundaries</a> for that distinction.</p>
 <h2 id="7">Soft thresholds</h2>
-<p>A threshold makes the reconstruction discontinuous in the data: two neighbouring pixels 9.9 degrees apart end up in the same grain, two pixels 10.1 degrees apart in different ones, although nothing distinguishes the two situations physically. <a href="gbcSoft.html"><code class="language-plaintext highlighter-rouge">gbcSoft</code></a> replaces the step by an error function of a given width, so that the connectivity between two pixels falls off gradually around the threshold</p>
+<p>A hard threshold is discontinuous in the data. Neighbouring pixels 9.9 degrees apart remain together, while pixels 10.1 degrees apart separate, although the physical distinction is unlikely to be that sharp.</p>
+<p> <a href="gbcSoft.html"><code class="language-plaintext highlighter-rouge">gbcSoft</code></a> replaces the step with an error function. Its two parameters are the centre angle and transition width. Connectivity then decreases gradually across the band.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd,gbcSoft([10*degree 2*degree]),'minPixel',5)
+grainsSoft = calcGrains(ebsd,gbcSoft([10 2]*degree),'minPixel',5);
+grainsHard14 = calcGrains(ebsd,'angle',14*degree,'minPixel',5);
+
+softPhaseCounts = accumarray(grainsSoft.phaseId,1,...
+  [length(ebsd.CSList),1]);
+hardPhaseCounts = accumarray(grainsHard14.phaseId,1,...
+  [length(ebsd.CSList),1]);
+
+fprintf('Soft [10 2] and hard 14 degree phase counts agree: %d\n',...
+  isequal(softPhaseCounts,hardPhaseCounts));
+fprintf('Soft-criterion boundary segments inside grains: %d\n',...
+  length(grainsSoft.innerBoundary));
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0       1     293  notIndexed                    none
-     1      53   14020  Forsterite       mmm  LightSkyBlue
-     2      13    1375   Enstatite       mmm  DarkSeaGreen
-     3      21     693    Diopside     12/m1     Goldenrod
- 
- boundary segments: 3383 (161059 µm)
- inner boundary segments: 28 (1530 µm)
- triple points: 126
- 
- Properties: meanRotation, GOS
+Soft [10 2] and hard 14 degree phase counts agree: 1
+Soft-criterion boundary segments inside grains: 28
 {% endhighlight %}
-<p>Be aware of what this does and what it does not do. Grains are the connected components of the pixel pairs with a nonzero connectivity, and a pair only reaches zero once the error function has saturated. So on its own a soft threshold merely moves the effective threshold up - this reconstruction returns phase for phase the same grain counts as a hard threshold of 14 degrees. What it does record is the transition band: a pair past the centre of the threshold but not yet past its saturation gets a boundary drawn, inside the grain it did not manage to split</p>
-{% highlight matlab %}
-length(grains.innerBoundary)
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
-    28
-{% endhighlight %}
-<p>The fractional connectivities become useful once the grains are not read off as connected components anymore, which is what <a href="GrainReconstructionMCL.html">Markovian clustering</a> does.</p>
-<h2 id="10">Segmenting by any property</h2>
-<p> <a href="gbcCustom.html"><code class="language-plaintext highlighter-rouge">gbcCustom</code></a> separates two pixels whenever a property you supply differs by more than a threshold. The property is one value per pixel and may be a number, a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a> or a <a href="quaternion.quaternion.html"><code class="language-plaintext highlighter-rouge">quaternion</code></a> - the latter two are compared by the angle between them.</p>
-<p>As an example we define grains by their c-axis alone, i.e. we consider two forsterite pixels to belong to the same grain whenever their c-axes point in the same direction, no matter how the lattice is rotated about it.</p>
+<p>On its own, the soft criterion still forms grains from positive graph connections. The error function reaches numerical zero only after its transition has saturated, so this example merely raises the effective splitting angle. Its phase counts match a hard 14 degree threshold.</p>
+<p>The fractional values still record the transition band. A pair past the centre can have a boundary drawn while remaining connected inside its grain. Those weights become useful when <a href="GrainReconstructionMCL.html">Markovian Clustering</a> replaces connected components with a weighted graph clustering.</p>
+<h2 id="9">Segmenting by another per-pixel property</h2>
+<p> <a href="gbcCustom.html"><code class="language-plaintext highlighter-rouge">gbcCustom</code></a> separates neighbouring pixels when a supplied per-pixel property differs by more than a threshold. The property may be numeric, a <a href="vector3d.vector3d.html"><code class="language-plaintext highlighter-rouge">vector3d</code></a>, or a <a href="quaternion.quaternion.html"><code class="language-plaintext highlighter-rouge">quaternion</code></a>. Vectors and quaternions are compared by their angle.</p>
+<p>The custom criterion compares only that property; it does not add a phase check. Subset a multiphase map to one phase, as below, or enforce phase separation in a criterion of your own. This keeps the resulting grains phase-homogeneous.</p>
+<p>Here grains are defined by their c-axis alone. Two forsterite pixels may belong to the same grain whenever their c-axes agree, regardless of the rotation about that axis.</p>
 {% highlight matlab %}
 fo = ebsd('Forsterite');
 cAxis = fo.orientations .* Miller(0,0,1,fo.CS);
 
-grainsC = calcGrains(fo,gbcCustom(cAxis,10*degree,'antipodal'),'minPixel',5)
+grainsC = calcGrains(fo,...
+  gbcCustom(cAxis,10*degree,'antipodal'),'minPixel',5);
+grainsA = calcGrains(fo,'angle',10*degree,'minPixel',5);
+
+fprintf('Full-orientation grains: %d; c-axis grains: %d\n',...
+  length(grainsA),length(grainsC));
 {% endhighlight %}
 
 {% highlight plaintext %}
-grainsC = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0      13      19  notIndexed                    none
-     1      53   14023  Forsterite       mmm  LightSkyBlue
- 
- boundary segments: 3113 (150383 µm)
- inner boundary segments: 3 (106 µm)
- triple points: 28
- 
- Properties: meanRotation, GOS
+Full-orientation grains: 69; c-axis grains: 66
 {% endhighlight %}
-<p>The flag <code class="language-plaintext highlighter-rouge">'antipodal'</code> is passed on to <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> and is what makes the c-axis an axis rather than a direction - without it two pixels whose c-axes are the same axis but point in opposite senses would count as a boundary.</p>
-<p>Plotting the ordinary reconstruction in black underneath and this one in red on top shows what the criterion is blind to: the segments left black are boundaries across which the c-axes agree and only the rotation about them differs.</p>
+<p>The flag <code class="language-plaintext highlighter-rouge">'antipodal'</code> is passed to <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a>. It makes the c-axis an axis rather than a direction. Without it, opposite senses of the same axis would be treated as different.</p>
+<p>Draw the ordinary reconstruction in black and the c-axis reconstruction in red. Black segments that remain visible mark boundaries across which the c-axes agree but the rotations about them differ.</p>
 {% highlight matlab %}
-grainsA = calcGrains(fo,'angle',10*degree,'minPixel',5)
+ipfKey = ipfColorKey(fo.CS);
+ipfColor = ipfKey.orientation2color(fo.orientations);
 
-plot(fo,fo.orientations,'micronbar','off')
+plot(fo,ipfColor,'micronbar','off')
 hold on
 plot(grainsA.boundary,'linewidth',3,'lineColor','black')
 plot(grainsC.boundary,'linewidth',1,'lineColor','red')
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-grainsA = grain2d (y↑→x)
- 
- Phase  Grains  Pixels     Mineral  Symmetry         Color
-     0      14      20  notIndexed                    none
-     1      55   14022  Forsterite       mmm  LightSkyBlue
- 
- boundary segments: 3148 (151890 µm)
- inner boundary segments: 4 (196 µm)
- triple points: 30
- 
- Properties: meanRotation, GOS
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionAdvanced_01.png" %}
 </center>
-<p>On this sample there are only a few of them - 57 forsterite grains become 55 - since grains that share a c-axis but not the rest of the lattice are rare here. In a material with a strong fibre texture there would be many more.</p>
-<h2 id="13">Writing your own criterion</h2>
-<p>A criterion of your own is a subclass of <a href="grainBoundaryCriterion.html"><code class="language-plaintext highlighter-rouge">grainBoundaryCriterion</code></a> with a single method <code class="language-plaintext highlighter-rouge">doEvaluate(obj,ebsd,i,j)</code>, where <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code> are equally sized lists of neighbouring pixel indices and the output has the same size.</p>
-<p>The following criterion asks for two things at once: that the misorientation stays below a threshold, <b>and</b> that the band contrast does not collapse - which keeps grains from leaking through a chain of poorly indexed pixels.</p>
+<p>Only a few black segments remain on this specimen. The printed counts show that 69 full-orientation grains become 66 c-axis grains. Such mergers would be more common in a material with a strong fibre texture.</p>
+<h2 id="12">Writing your own criterion</h2>
+<p>A custom criterion is a subclass of <a href="grainBoundaryCriterion.html"><code class="language-plaintext highlighter-rouge">grainBoundaryCriterion</code></a>. Implement the protected method <code class="language-plaintext highlighter-rouge">doEvaluate(obj,ebsd,i,j)</code>. The arrays <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code> list neighbouring pixel indices and the output must have the same size.</p>
+<p>This example requires both a small misorientation and adequate band contrast. The second condition stops a grain from leaking through a chain of poorly indexed pixels. The value <code class="language-plaintext highlighter-rouge">minBC = 50</code> is specific to the data and acquisition settings; inspect the band-contrast distribution before choosing it.</p>
 {% highlight matlab %}
 classdef gbcAngleAndBC < grainBoundaryCriterion
 {% endhighlight %}
@@ -236,41 +182,46 @@ methods (Access = protected)
 <pre>   function out = doEvaluate(obj,ebsd,i,j)</pre>
 <pre>     % delegate the misorientation part
      out = eval(gbcAngle(obj.threshold),ebsd,i,j);</pre>
-<pre>     % and veto across badly indexed pixels
+<pre>     % veto connections through low band contrast
      bad = ebsd.bc(i) &lt; obj.minBC | ebsd.bc(j) &lt; obj.minBC;
      out(bad) = 0;</pre>
 <pre>   end
  end
  end</pre>
-<p>Save this as <code class="language-plaintext highlighter-rouge">gbcAngleAndBC.m</code> anywhere on the search path and use it as any other criterion</p>
+<p>Save the class as <code class="language-plaintext highlighter-rouge">gbcAngleAndBC.m</code> on the MATLAB search path. It can then be passed like any other criterion:</p>
 {% highlight matlab %}
 grains = calcGrains(ebsd,gbcAngleAndBC,'minPixel',5)
 {% endhighlight %}
-<p>A criterion that needs to precompute something from the whole map may overload the method <code class="language-plaintext highlighter-rouge">prepare(obj,ebsd)</code>, which is called once before the pixel pairs are evaluated.</p>
-<h2 id="14">The spatial decomposition</h2>
-<p>The first of the three steps, partitioning the surface into cells, is where the parameter <code class="language-plaintext highlighter-rouge">'alpha'</code> acts. It is the radius, measured in pixels, of the disk by which the measured region is closed: a not indexed region narrower than <code class="language-plaintext highlighter-rouge">2*alpha</code> pixels is closed over and disappears, a wider one survives and becomes a not indexed grain. The default is <code class="language-plaintext highlighter-rouge">alpha = 3.1</code>.</p>
-<p>The cost of the closing grows with the area of that disk. The flag <code class="language-plaintext highlighter-rouge">'delaunay'</code> computes the partition from the Delaunay triangulation of the indexed pixels instead - a triangle is filled when its circumradius is at most <code class="language-plaintext highlighter-rouge">alpha</code> pixels. This is the exact alpha complex rather than a raster approximation of it, and its cost hardly grows with <code class="language-plaintext highlighter-rouge">'alpha'</code> at all. At the default <code class="language-plaintext highlighter-rouge">'alpha'</code> the closing is the faster of the two; the flag is for maps with gaps wide enough to need a large one</p>
+<p>The base class also defines <code class="language-plaintext highlighter-rouge">prepare(obj,ebsd)</code> for subclasses that need information from the whole map. At present, <code class="language-plaintext highlighter-rouge">calcGrains</code> does not call this hook automatically. Precompute that information before constructing the criterion, or call an overloaded <code class="language-plaintext highlighter-rouge">prepare</code> explicitly.</p>
+<h2 id="13">The spatial decomposition</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'alpha'</code> changes the first reconstruction operation: the spatial support from which cells are built. By default, MTEX closes the indexed region with a raster disk whose radius is <code class="language-plaintext highlighter-rouge">alpha</code> pixel spacings. A <code class="language-plaintext highlighter-rouge">notIndexed</code> region narrower than <code class="language-plaintext highlighter-rouge">2*alpha</code> is crossed by surrounding cells; a wider region remains a separate <code class="language-plaintext highlighter-rouge">notIndexed</code> grain. The default is <code class="language-plaintext highlighter-rouge">alpha = 3.1</code>.</p>
+<p>The work of raster closing grows with the area of the disk. The flag <code class="language-plaintext highlighter-rouge">'delaunay'</code> instead computes a Delaunay triangulation of the indexed pixels. A triangle is included when its circumradius is at most <code class="language-plaintext highlighter-rouge">alpha</code> pixel spacings. This is an exact alpha complex rather than a raster approximation, and its cost changes little as <code class="language-plaintext highlighter-rouge">'alpha'</code> grows. Raster closing is faster near the default; the Delaunay route is intended for maps with gaps wide enough to require a large value.</p>
 {% highlight matlab %}
-tic; grains = calcGrains(ebsd,'angle',10*degree,'minPixel',5,'alpha',60); toc
+tic
+grainsRaster = calcGrains(ebsd,'angle',10*degree,...
+  'minPixel',5,'alpha',60);
+toc
 
-tic; grains = calcGrains(ebsd,'angle',10*degree,'minPixel',5,'alpha',60,'delaunay'); toc
+tic
+grainsDelaunay = calcGrains(ebsd,'angle',10*degree,...
+  'minPixel',5,'alpha',60,'delaunay');
+toc
 {% endhighlight %}
 
 {% highlight plaintext %}
-Elapsed time is 4.684843 seconds.
-Elapsed time is 2.881479 seconds.
+Elapsed time is 4.580381 seconds.
+Elapsed time is 2.883650 seconds.
 {% endhighlight %}
-<p>Note that the two do not have to agree pixel for pixel at the same <code class="language-plaintext highlighter-rouge">'alpha'</code> - a closing radius and a circumradius are different quantities.</p>
-<h2 id="16">Not indexed regions are grains</h2>
-<p>
-<code class="language-plaintext highlighter-rouge">'alpha'</code> is a single number for the whole map, and picking it blindly is guesswork. It need not be, because <code class="language-plaintext highlighter-rouge">calcGrains</code> turns the not indexed regions into grains as well - so all of <a href="ShapeParameters.html">grain shape analysis</a> applies to them and one can simply look at what is there before deciding. Reconstructing with <code class="language-plaintext highlighter-rouge">alpha = 0</code> keeps every single not indexed pixel</p>
+<p>The elapsed times are machine-dependent; their contrast is the result to notice. The two decompositions also need not agree pixel for pixel at the same value because closing radius and circumradius are different geometric quantities.</p>
+<h2 id="15">Diagnose the <code class="language-plaintext highlighter-rouge">notIndexed</code> regions first</h2>
+<p>Choosing one <code class="language-plaintext highlighter-rouge">'alpha'</code> for a whole map need not be guesswork. <code class="language-plaintext highlighter-rouge">calcGrains</code> returns connected <code class="language-plaintext highlighter-rouge">notIndexed</code> areas as grains, so their size and shape can be inspected with the tools from <a href="ShapeParameters.html">Shape Parameters</a>. Setting <code class="language-plaintext highlighter-rouge">alpha = 0</code> closes nothing, so narrow <code class="language-plaintext highlighter-rouge">notIndexed</code> areas stay where they are instead of being absorbed into their neighbours.</p>
 {% highlight matlab %}
-[grains,ebsd] = calcGrains(ebsd,'angle',10*degree,'alpha',0);
-notIndexed = grains('notIndexed')
+[grainsOpen,ebsdOpen] = calcGrains(ebsd,'angle',10*degree,'alpha',0);
+notIndexedGrains = grainsOpen('notIndexed')
 {% endhighlight %}
 
 {% highlight plaintext %}
-notIndexed = grain2d (y↑→x)
+notIndexedGrains = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry  Color
      0    1064    3229  notIndexed             none
@@ -281,28 +232,45 @@ notIndexed = grain2d (y↑→x)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<p>Their sizes tell us what <code class="language-plaintext highlighter-rouge">'alpha'</code> has to deal with. A region of <code class="language-plaintext highlighter-rouge">n</code> pixels has a radius of about <code class="language-plaintext highlighter-rouge">sqrt(n/pi)</code> pixels, and <code class="language-plaintext highlighter-rouge">'alpha'</code> closes everything narrower than <code class="language-plaintext highlighter-rouge">2*alpha</code>
-</p>
+<p>Pixel counts give a first scale estimate. The equivalent-circle radius of a region with <code class="language-plaintext highlighter-rouge">n</code> pixels is <code class="language-plaintext highlighter-rouge">sqrt(n/pi)</code> pixel spacings.</p>
 {% highlight matlab %}
-numPixel = notIndexed.numPixel;
-
-[median(numPixel), quantile(numPixel,0.99), max(numPixel)]
+numPixel = notIndexedGrains.numPixel;
+sizeSummary = table(median(numPixel),quantile(numPixel,0.99),...
+  max(numPixel),sqrt(max(numPixel)/pi),...
+  'VariableNames',{'medianPixels','p99Pixels','maxPixels',...
+  'maxEquivalentRadiusPixels'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-     1    30   355
+sizeSummary =
+  1×4 table
+    medianPixels    p99Pixels    maxPixels    maxEquivalentRadiusPixels
+    ____________    _________    _________    _________________________
+         1             30           355                 10.63
 {% endhighlight %}
-<p>The overwhelming majority are single misindexed pixels, and only a handful are regions in their own right. It is those few that decide <code class="language-plaintext highlighter-rouge">'alpha'</code>: the largest has a radius of about <code class="language-plaintext highlighter-rouge">sqrt(355/pi) = 10</code> pixels, so any <code class="language-plaintext highlighter-rouge">'alpha'</code> below that keeps it.</p>
-<p>Their shape is just as informative. The ratio between the number of pixels of a region and the number of its boundary segments measures how compact it is - high for a blob that is really a hole in the specimen, low for a ragged scatter of bad indexing.</p>
+<p>The table shows that most areas are isolated failed measurements, while a few are regions in their own right. The largest contains 355 pixels and has an equivalent-circle radius of about 10.6 pixels. This radius suggests the scale to inspect; it does not predict the closing value by itself. Closing responds to the narrowest width and therefore also to shape.</p>
+<p>The ratio below is a quick size-and-compactness diagnostic. It is high for large, compact blobs and low for small or ragged areas. It is not a scale-free compactness measure because the numerator grows with area and the denominator counts boundary segments. Use <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> when shape must be compared apart from size.</p>
 {% highlight matlab %}
-plot(notIndexed,log(notIndexed.numPixel ./ notIndexed.boundarySize))
-mtexColorbar
+plot(notIndexedGrains,...
+  log(notIndexedGrains.numPixel ./ notIndexedGrains.boundarySize))
+mtexColorbar('title','log(pixels / boundary segments)')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainReconstructionAdvanced_02.png" %}
 </center>
-<p>Note that MTEX makes no distinction between a pixel that the indexing marked as not indexed and a grid position that does not occur in the data set at all - both are simply positions without a measurement, and <code class="language-plaintext highlighter-rouge">'alpha'</code> decides for both alike. Deleting the measurements in a region therefore does not fill it. To actually put orientations into the holes, see <a href="EBSDFilling.html">Filling Missing Data</a>.</p>
+<p>High colours identify the larger, more compact holes that can justify preservation. Low colours mark isolated pixels and ragged indexing failures that a closing may reasonably absorb. The map is a diagnostic, not an automatic choice of <code class="language-plaintext highlighter-rouge">'alpha'</code>.</p>
+<p>A <code class="language-plaintext highlighter-rouge">notIndexed</code> pixel and an absent grid position have different experimental meanings. The first is a real measurement whose pattern could not be indexed; the second has no retained measurement. The spatial decomposition treats both as positions without an indexed orientation, so <code class="language-plaintext highlighter-rouge">'alpha'</code> acts on both. Deleting measurements therefore creates a gap for segmentation; it does not assign orientations there. To reconstruct orientations, see <a href="EBSDFilling.html">Fill Missing Data in Orientation Maps</a>.</p>
+<h2 id="19">Choosing the next step</h2>
+<p>Use a custom criterion when the physical separator is another per-pixel quantity. Use the spatial options when the uncertainty is where the map has support. In either case, repeat the reconstruction over defensible nearby settings before treating a grain count or size distribution as measured.</p>
+<p>Continue with <a href="GrainReconstructionMCL.html">Markovian Clustering</a> when fractional criterion weights should influence the grouping itself. The resulting boundaries and their internal boundaries are developed in <a href="GrainBoundaries.html">Grain Boundaries</a> and <a href="SubGrainBoundaries.html">Subgrain Boundaries</a>. Standards for reporting EBSD grain size are listed on the <a href="GrainReconstruction.html">basic reconstruction page</a>.</p>
+<h2 id="20">References</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data---Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733. This paper derives the Voronoi reconstruction used by <code class="language-plaintext highlighter-rouge">calcGrains</code>.</li>
+<li>H. Edelsbrunner, D. G. Kirkpatrick, and R. Seidel, <a href="https://doi.org/10.1109/TIT.1983.1056714">On the Shape of a Set of Points in the Plane</a>, <i>IEEE Transactions on Information Theory</i> 29 (1983), 551--559. This paper introduces planar alpha shapes.</li>
+<li>P. Soille, <a href="https://doi.org/10.1007/978-3-662-05088-0"><i>Morphological Image Analysis: Principles and Applications</i></a>, 2nd ed., Springer, 2003. The chapters on dilation, erosion, opening, and closing provide the image-processing basis for the raster decomposition.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

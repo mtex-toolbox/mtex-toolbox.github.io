@@ -1,5 +1,5 @@
 ---
-title: "ODF Characteristics"
+title: 'ODF Characteristics'
 
 sidebar: documentation_sidebar
 permalink: ODFCharacteristics.html
@@ -23,146 +23,129 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Let us first begin with some constructed ODFs to be analyzed below</p>
-<p>A bimodal ODF:</p>
-{% highlight matlab %}
-cs = crystalSymmetry('mmm');
-odf1 = unimodalODF(orientation.byEuler(0,0,0,cs)) + ...
-  unimodalODF(orientation.byEuler(30*degree,0,0,cs))
-{% endhighlight %}
-
-{% highlight plaintext %}
-odf1 = SO3FunRBF (mmm → y↓→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 2 orientations
- 
-  Bunge Euler angles in degree
-  phi1    Phi   phi2 weight
-     0      0      0      1
-    30      0      0      1
-{% endhighlight %}
-<p>A fibre ODF:</p>
-{% highlight matlab %}
-f001_x = fibre(Miller(0,0,1,cs),xvector)
-
-odf2 = fibreODF(f001_x)
-{% endhighlight %}
-
-{% highlight plaintext %}
-f001_x = fibre (mmm → y↓→x)
- 
-  h || r: (001) || (1,0,0)
- 
-odf2 = SO3FunCBF (mmm → y↓→x)
- 
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (001) || 1,0,0
-  weight: 1
-{% endhighlight %}
-<p>An ODF estimated from diffraction data</p>
+<p>An orientation distribution function (ODF) lives on a three-dimensional space, so no single plot contains all of it. A handful of numbers can say where the texture is strongest, how concentrated it is, and what fraction of the material lies near a chosen component. These are the quantities commonly quoted when textures are compared.</p>
+<p>This page assumes the normalization and multiples of a random distribution (mrd) introduced in <a href="ODFTheory.html">ODF Theory</a>. The model constructions come from <a href="ODFModeling.html">ODF Modeling</a>. Every ODF below has mean 1, so its integrals can be read as material fractions.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-mtexdata dubna
-
-odf3 = calcODF(pf,'resolution',5*degree,'zero_Range')
 {% endhighlight %}
-
-{% highlight plaintext %}
-pf = PoleFigure (y↑→x)
-  crystal symmetry : Quartz (321, X||a*, Y||b, Z||c)
- 
-  h = (022̅1), r = 72 x 19 points
-  h = (101̅0), r = 72 x 19 points
-  h = (101̅1)(011̅1), r = 72 x 19 points
-  h = (101̅2), r = 72 x 19 points
-  h = (112̅0), r = 72 x 19 points
-  h = (112̅1), r = 72 x 19 points
-  h = (112̅2), r = 72 x 19 points
- 
-odf3 = SO3FunRBF (Quartz → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 5°
-  center: 19848 orientations, resolution: 5°
-  weight: 1
-{% endhighlight %}
-<h2 id="5">Modal Orientations</h2>
-<p>The modal orientation of an ODF is the crystallographic preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code> of the texture. It is characterized as the maximum of the ODF. In MTEX it is returned as the second output argument of the command <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a>
-</p>
+<h2 id="2">Three ODFs to Measure</h2>
+<p>The first example is a bimodal ODF. Its two normalized components have equal mixture weights, so the mixture also has mean 1.</p>
 {% highlight matlab %}
-[~,ori_pref] = max(odf3)
+cs = crystalSymmetry('mmm');
+odfBimodal = 0.5*unimodalODF(orientation.byEuler(0,0,0,cs)) + ...
+  0.5*unimodalODF(orientation.byEuler(30*degree,0,0,cs));
+{% endhighlight %}
+<p>The second example is a fibre ODF. It concentrates orientations around the fibre that aligns the crystal direction \((001)\) with specimen X.</p>
+{% highlight matlab %}
+f001X = fibre(Miller(0,0,1,cs),vector3d.X);
+odfFibre = fibreODF(f001X);
+{% endhighlight %}
+<p>The third example was estimated from neutron pole figures of quartz. <a href="PoleFigureDubna.html">The Dubna Example</a> reconstructs it from the measured files. Here the cached reconstruction keeps the focus on its characteristics, while the measured pole-figure directions remain available for the plot below.</p>
+{% highlight matlab %}
+mtexdata dubna silent
+odfMeasured = mtexdata('dubnaODF');
+{% endhighlight %}
+<h2 id="5">The Modal Orientation</h2>
+<p>A <b>mode</b> is a local maximum of the ODF. Its value is a density in mrd, not a percentage of material. <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max</code></a> returns the global maximum and the orientation where it is attained.</p>
+{% highlight matlab %}
+[peakValue,preferredOrientation] = max(odfMeasured)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori_pref = orientation (Quartz → y↑→x)
+peakValue =
+   93.9665
+ 
+preferredOrientation = orientation (Quartz → y↑→x)
  
   Bunge Euler angles in degree
     phi1     Phi    phi2
   134.38 35.5039 205.572
 {% endhighlight %}
-<p>Lets mark this preferred orientation in the pole figures</p>
+<p>The printed peak value is in mrd. The square markers show the poles of its orientation on pole figures calculated from the measured ODF.</p>
 {% highlight matlab %}
-plotPDF(odf3,pf.allH,'antipodal','superposition',pf.c);
-annotate(ori_pref,'marker','s','MarkerFaceColor','black')
+plotPDF(odfMeasured,pf.allH,'antipodal','superposition',pf.c);
+annotate(preferredOrientation,'marker','s','MarkerFaceColor','black');
+mtexColorbar('title','mrd');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ODFCharacteristics_01.png" %}
 </center>
-<h2 id="7">Texture Characteristics</h2>
-<p>Texture characteristics are used for a rough classification of ODFs into sharp and weak ones. The two most common texture characteristics are the entropy and the texture index. The texture index of an ODF \(f\) is defined as:</p>
-<p>\[ t = \int_{SO(3)} f({R})^2 dR\]</p>
-<p>We may either compute this integral using the command <a href="SO3Fun.sum.html"><code class="language-plaintext highlighter-rouge">sum</code></a> directly by</p>
+<p>In this example the markers lie in the strongest pole-density regions. That agreement is a useful visual check, but it is not an identity: a pole figure integrates the ODF along fibres, so its maximum need not be the projection of the ODF maximum.</p>
+<p>Peak values are especially sensitive to the halfwidth and resolution used to estimate an ODF. Compare them only when those choices are comparable. <a href="DensityEstimation.html">Density Estimation</a> explains the halfwidth choice. <a href="SO3Fun.max.html"><code class="language-plaintext highlighter-rouge">max(odf,'numLocal',n)</code></a> returns several local modes; <a href="ODFComponents.html">Component Analysis</a> explains how to interpret them.</p>
+<h2 id="8">Texture Index</h2>
+<p>The texture index, also called the J-index, is the mean square of a normalized ODF,</p>
+<p>\[ J(f) = \int_{SO(3)} f&reg;^2\,\mathrm{d}R. \]</p>
+<p>The orientation-space measure is normalized as in ODF Theory. The index is 1 for a uniform texture and grows without bound as a texture sharpens. A direct numerical integration gives</p>
 {% highlight matlab %}
-t = mean(odf1.*odf1)
+textureIndexByMean = mean(odfBimodal.*odfBimodal)
 {% endhighlight %}
 
 {% highlight plaintext %}
-t =
-  288.5696
+textureIndexByMean =
+   72.1424
 {% endhighlight %}
-<p>or, more efficiently, by the command <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>
-</p>
+<p>The same quantity is obtained faster and more accurately from harmonic coefficients by squaring the <a href="SO3Fun.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a>.</p>
 {% highlight matlab %}
-t = norm(odf1)^2
+textureIndexBimodal = norm(odfBimodal)^2
 {% endhighlight %}
 
 {% highlight plaintext %}
-t =
-  288.6802
+textureIndexBimodal =
+   72.1700
 {% endhighlight %}
-<p>The entropy of an ODF \(f\) is defined as:</p>
-<p>\[ H = - \int_{SO(3)} f({R}) \ln f({R}) dR\]</p>
+<p>The two printed values agree up to the quadrature error of the direct calculation. The measured ODF has a much smaller index, so its texture is much weaker than the model built from two sharp components.</p>
 {% highlight matlab %}
-H = entropy(odf2)
+textureIndexMeasured = norm(odfMeasured)^2
 {% endhighlight %}
 
 {% highlight plaintext %}
-H =
+textureIndexMeasured =
+   16.2135
+{% endhighlight %}
+<h2 id="11">Entropy</h2>
+<p>Entropy is another global measure of concentration,</p>
+<p>\[ H(f) = -\int_{SO(3)} f&reg;\ln f&reg;\,\mathrm{d}R. \]</p>
+<p>It runs in the opposite direction: it is 0 for the uniform ODF and is negative for every nonuniform ODF. A sharper distribution has a more negative entropy.</p>
+{% highlight matlab %}
+fibreEntropy = entropy(odfFibre)
+{% endhighlight %}
+
+{% highlight plaintext %}
+fibreEntropy =
    -2.8402
 {% endhighlight %}
-<h2 id="10">Volume Portions</h2>
-<p>Volume portions describes the relative volume of crystals having a certain orientation. The relative volume of crystals having a orientation close to a given orientation is computed by the command <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> and the relative volume of crystals having a orientation close to a given fibre is computed by the command <a href="SO3Fun.fibreVolume.html"><code class="language-plaintext highlighter-rouge">fibreVolume</code></a>
-</p>
-<p>The relative volume in percent of crystals with misorientation maximum 30 degree from the preferred orientation <code class="language-plaintext highlighter-rouge">ori_pref</code>:</p>
+<p>Texture index and entropy both summarize sharpness, but they are not interchangeable. Two ODFs can have the same texture index and different entropies. Like the maximum, both values change when smoothing changes; report the ODF estimation choices with them.</p>
+<h2 id="13">Volume Fractions</h2>
+<p>A volume fraction asks a more local question: what fraction of the material lies within a chosen disorientation angle of an orientation or a fibre? <a href="SO3Fun.volume.html"><code class="language-plaintext highlighter-rouge">volume</code></a> integrates the normalized ODF over either region.</p>
 {% highlight matlab %}
-V1 = volume(odf3, ori_pref, 30*degree) * 100
+preferredVolumePercent = ...
+  100 * volume(odfMeasured,preferredOrientation,30*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-V1 =
+preferredVolumePercent =
    37.9843
 {% endhighlight %}
-<p>The relative volume of crystals with misorientation maximum 20 degree from the preferred fibre in percent:</p>
+<p>The printed result is the percentage within \(30^\circ\) of the preferred orientation. Around a fibre, the same command integrates a tube in orientation space.</p>
 {% highlight matlab %}
-V2 = volume(odf2,f001_x,20*degree) * 100
+fibreVolumePercent = 100 * volume(odfFibre,f001X,20*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-V2 =
+fibreVolumePercent =
    95.1633
 {% endhighlight %}
+<p>The printed fibre fraction is large because this ODF is the chosen fibre spread with the default halfwidth. Integrated fractions are generally more stable than a peak value when the integration radius is broader than the smoothing scale.</p>
+<p>The radius remains part of the result and must be reported. Regions around different components can overlap, so their separately calculated volume fractions need not add to 100 percent. Volume fractions are what turn a density into a statement about the material, as explained in <a href="ODFTheory.html">ODF Theory</a>.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, English ed., 1982, develops the ODF normalization and texture index.</li>
+<li>R. Hielscher, H. Schaeben, and D. Chateigner, <a href="https://doi.org/10.1107/S0021889806055476">On the Entropy to Texture Index Relationship in Quantitative Texture Analysis</a>, <i>Journal of Applied Crystallography</i> 40 (2007), 371--375, proves bounds between the two measures without making them equivalent.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Locating and partitioning components is <a href="ODFComponents.html">Component Analysis</a>; constructing or fitting model components is <a href="ODFModeling.html">ODF Modeling</a>. Use <a href="ODFPlot.html">Visualizing ODFs</a> when the result should be a plot rather than a number. The next page, <a href="RadialODFs.html">Radial ODFs</a>, develops the localized model used in the bimodal example.</p>
 </div>
 </body>
 </html>

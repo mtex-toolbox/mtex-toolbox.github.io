@@ -1,5 +1,5 @@
 ---
-title: "Fiber ODFs"
+title: 'Fibre ODFs'
 
 sidebar: documentation_sidebar
 permalink: FibreODFs.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Fiber ODFs</title>
+<title>Fibre ODFs</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_FibreODFs.m">
 </head>
@@ -22,110 +22,171 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>A fibre ODF is an ODF that is constant along a <a href="RotationFibre.html">fibre</a> in orientation space and decays away from it. It is the natural model whenever one crystal direction is fixed in the specimen while the crystal is free to rotate about it - the classical example being wire drawing, where a \(\left&lt;111\right&gt;\) direction aligns with the drawing axis.</p>
 <!--/introduction-->
-<h2 id="1">Defining a fibre ODF</h2>
-<p>A fibre is represented in MTEX by a variable of type <a href="fibre.fibre.html">fibre</a>. Many of the named fibres of rolling textures are built in.</p>
+<p>A fibre ODF is a density concentrated around a one-dimensional <a href="OrientationFibre.html">orientation fibre</a>. Every orientation on it maps one fixed crystal direction onto one fixed specimen direction. Rotation about that aligned direction remains free, so the ODF is constant along the fibre and decays across it.</p>
+<p>Wire drawing gives the classical example. A crystal direction from the \(\langle111\rangle\) family aligns with the drawing axis. Rotation about that axis remains unconstrained. The ideal fibre has zero width. A fibre ODF replaces it by a normalized tube of finite angular width.</p>
+<p>This page assumes the ODF normalization introduced in <a href="ODFTheory.html">ODF Theory</a>. <a href="ODFModeling.html">ODF Modeling</a> introduces the model families. The geometry and named rolling-texture fibres are developed in <a href="OrientationFibre.html">Fibres of Orientations</a>.</p>
+<p>The plotting convention below draws specimen Y upward and specimen X to the right. It changes only the screen layout, not the ODF or its reference frames.</p>
 {% highlight matlab %}
-cs = crystalSymmetry('cubic')
+plottingConvention.default('y↑→x');
 {% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: m3̅m   
-  elements: 48     
-  a, b, c : 1, 1, 1
-{% endhighlight %}
-<p>define the fibre to be the beta fibre</p>
+<h2 id="2">Defining a Fibre ODF</h2>
+<p>A fibre is represented by an object of type <a href="fibre.fibre.html">fibre</a>. Many of the named fibres of rolling textures are built in. This example uses the built-in beta fibre for a cubic rolling texture. Its printed summary gives the endpoint orientations. It also gives the crystal and specimen directions that remain parallel.</p>
 {% highlight matlab %}
+cs = crystalSymmetry('432');
 f = fibre.beta(cs)
 {% endhighlight %}
 
 {% highlight plaintext %}
-f = fibre (m3̅m → y↓→x)
+f = fibre (432 → y↑→x)
  
   h || r: (12 6 11) || (-1,-1,4)
  o1 → o2: (180°,35.3°,45°) → (270°,62.8°,45°)
 {% endhighlight %}
-<p>The fibre ODF is then created by <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a>, with a halfwidth that controls how quickly the density decays away from the fibre.</p>
+<p>The displayed h parallel r row puts the two directions in different reference frames: <code class="language-plaintext highlighter-rouge">f.h</code> belongs to the crystal frame and <code class="language-plaintext highlighter-rouge">f.r</code> to the specimen frame. The beta object also has two endpoints. <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a> uses only the direction pair, so the density continues around the corresponding full fibre.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'halfwidth'</code> option controls how quickly the density decays away from that fibre. The returned summary identifies the <a href="SO3FunCBF.SO3FunCBF.html">SO3FunCBF</a> representation, its kernel, halfwidth, defining directions, and weight.</p>
 {% highlight matlab %}
 odf = fibreODF(f,'halfwidth',10*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunCBF (m3̅m → y↓→x)
+odf = SO3FunCBF (432 → y↑→x)
  
   kernel: de la Vallee Poussin, halfwidth 10°
   fibre : (12 6 11) || -1,-1,4
   weight: 1
 {% endhighlight %}
-<p>plot the odf in 3d</p>
+<h2 id="4">The Tube in Orientation Space</h2>
+<p>A three-dimensional contour plot shows surfaces of equal density around the fibre.</p>
 {% highlight matlab %}
-plot3d(odf)
+plot3d(odf);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="FibreODFs_01.png" %}
 </center>
-<h2 id="5">Plotting a fibre ODF</h2>
-<p>Along the fibre itself the ODF is constant, which is easiest to see in a <a href="SigmaSections.html">sigma section</a> plot - the fibre shows up as a curve of constant intensity</p>
+<p>The translucent branches are sections of one tubular ridge folded by cubic symmetry. They are symmetry-equivalent descriptions of the same fibre component, not additional physical components.</p>
+<h2 id="6">Sections Through the Tube</h2>
+<p>A <a href="SigmaSections.html">sigma-section</a> plot cuts through the same tube. The ridge passes from panel to panel because a section shows only a slice of the three-dimensional orientation space.</p>
 {% highlight matlab %}
-plotSection(odf,'sigma')
-mtexColorbar
+plotSection(odf,'sigma');
+mtexColorbar('title','mrd');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="FibreODFs_02.png" %}
 </center>
-<p>and in the pole figures of the directions defining the fibre it collapses to a point, while all other pole figures show a ring</p>
+<p>The brightest curves trace the fibre through the section panels. Their intensity stays constant along the centreline. The surrounding colour bands show the decay across it. Evaluate 25 orientations on the original beta segment to check that constancy directly.</p>
 {% highlight matlab %}
-plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs),'contourf')
-mtexColorbar
+oriOnFibre = orientation(f,'points',25);
+ridgeValueRange = [min(eval(odf,oriOnFibre)),max(eval(odf,oriOnFibre))]
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+ridgeValueRange =
+    3.9239    3.9239
+{% endhighlight %}
+<h2 id="8">Pole Figures of a Fibre ODF</h2>
+<p>A pole figure projects an ODF by integrating along orientation fibres. Plot the defining crystal direction first, followed by the standard \((100)\) and \((111)\) directions. <a href="ODFPoleFigure.html">Pole Figures of an ODF</a> develops this projection as the crystallographic Radon transform.</p>
+{% highlight matlab %}
+h = [f.h,Miller(1,0,0,cs),Miller(1,1,1,cs)];
+plotPDF(odf,h,'contourf');
+mtexColorbar('title','mrd');
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="FibreODFs_03.png" %}
 </center>
-<h2 id="7">The effect of the halfwidth</h2>
-<p>The halfwidth is the only shape parameter. Sharper fibres are stronger, which is directly visible in the texture index</p>
+<p>For the ideal fibre, its defining direction collapses to the specimen direction <code class="language-plaintext highlighter-rouge">f.r</code> and its symmetry-equivalent copies. The finite halfwidth broadens each point into a spot in the first panel. The other directions sweep rings or ring segments about <code class="language-plaintext highlighter-rouge">f.r</code>. A ring is therefore a projection of the fibre, not a second component.</p>
+<h2 id="10">The Effect of the Halfwidth</h2>
+<p>This example uses the default de la Vallee Poussin kernel. Its halfwidth is the angular distance at which density falls to half its ridge value. It is a spread parameter, not a cutoff: the density continues beyond that angle. <a href="fibreODF.html"><code class="language-plaintext highlighter-rouge">fibreODF</code></a> also accepts a custom <a href="S2Kernel.S2Kernel.html"><code class="language-plaintext highlighter-rouge">S2Kernel</code></a> when halfwidth alone does not describe the required shape. <a href="ODFShapes.html">ODF Shapes</a> compares the kernels.</p>
+<p>Each component below remains normalized with mean 1 mrd. Narrower fibres concentrate that same total volume into a smaller tube, so their maximum and texture index are larger. Neither number is a volume fraction.</p>
 {% highlight matlab %}
-for hw = [5 10 20]*degree
-  odfHw = fibreODF(f,'halfwidth',hw);
-  fprintf('halfwidth %4.1f degree : texture index %6.2f, maximum %6.2f\n',...
-    hw./degree, norm(odfHw)^2, max(odfHw));
+halfwidths = [5 10 20]*degree;
+odfByHalfwidth = cell(size(halfwidths));
+for i = 1:numel(halfwidths)
+  odfByHalfwidth{i} = fibreODF(f,'halfwidth',halfwidths(i));
+  fprintf(['halfwidth %4.1f degree : mean %4.2f, texture index %6.2f, ' ...
+    'maximum %6.2f\n'],halfwidths(i)./degree,mean(odfByHalfwidth{i}),...
+    norm(odfByHalfwidth{i})^2,max(odfByHalfwidth{i}));
 end
 {% endhighlight %}
 
 {% highlight plaintext %}
-halfwidth  5.0 degree : texture index   6.98, maximum  13.86
-halfwidth 10.0 degree : texture index   2.34, maximum   3.86
-halfwidth 20.0 degree : texture index   1.26, maximum   2.06
+halfwidth  5.0 degree : mean 1.00, texture index   7.62, maximum  15.21
+halfwidth 10.0 degree : mean 1.00, texture index   2.36, maximum   3.93
+halfwidth 20.0 degree : mean 1.00, texture index   1.26, maximum   2.06
 {% endhighlight %}
-<h2 id="8">Fitting a fibre to data</h2>
-<p>The inverse problem - given an ODF or a set of orientations, which fibre describes it best - is solved by <a href="fibre.fit.html"><code class="language-plaintext highlighter-rouge">fibre.fit</code></a>
-</p>
+<p>The pole density around the defining specimen direction broadens as the halfwidth increases. A shared colour range also makes the fall in peak density visible from left to right.</p>
 {% highlight matlab %}
-rng(0)
-ori = discreteSample(odf,1000);
-
-fFit = fibre.fit(ori)
+mtexFig = newMtexFigure('layout',[1,3],'figSize','large');
+for i = 1:numel(halfwidths)
+  plotPDF(odfByHalfwidth{i},f.h,'contourf','noTitle');
+  mtexTitle(['\(' xnum2str(halfwidths(i)./degree) '^{\circ}\)']);
+  if i < numel(halfwidths), nextAxis; end
+end
+setColorRange('equal');
+mtexColorbar('title','mrd');
+drawNow(mtexFig);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="FibreODFs_04.png" %}
+</center>
+<h2 id="12">Fitting a Fibre to Data</h2>
+<p>The inverse problem asks which fibre best describes an ODF or a set of orientations. <a href="fibre.fit.html"><code class="language-plaintext highlighter-rouge">fibre.fit</code></a> returns a candidate centreline. Start with a low-symmetry fibre so that every sampled orientation has one consistent representative. The <code class="language-plaintext highlighter-rouge">'local'</code> branch then reads the fibre from the orientation tensor without a global grid search. The sampling step is developed separately in <a href="RandomSampling.html">Random Sampling</a>.</p>
+{% highlight matlab %}
+csFit = crystalSymmetry('1');
+fTrue = fibre(Miller(1,1,1,csFit),vector3d.Z);
+odfFit = fibreODF(fTrue,'halfwidth',10*degree);
+ori = discreteSample(odfFit,1000);
+[fFit,lambda,fitDistance] = fibre.fit(ori,'local');
+fFit
 {% endhighlight %}
 
 {% highlight plaintext %}
-fFit = fibre (m3̅m → y↓→x)
+fFit = fibre (1 → y↑→x)
  
-  h || r: (41̅2̅) || (0,4,9)
- o1 → o2: (332.5°,95.7°,114.8°) → (332.5°,95.7°,114.8°)
+  h || r: (1̅1̅1̅) || (0,0,-1)
+ o1 → o2: (193.7°,54.5°,45.2°) → (193.7°,54.5°,45.2°)
 {% endhighlight %}
-<p>Two warnings are in order here. The first is that the fit always returns a fibre, whether the data follow one or not - on a unimodal ODF it will happily report the fibre through the mode. Section <a href="Grain_dispersion_axes.html">dispersion axes</a> shows how the eigenvalues returned by <code class="language-plaintext highlighter-rouge">fibre.fit</code> can be used to judge how fibre like the data really are.</p>
-<p>The second is that for highly symmetric groups the global search behind <code class="language-plaintext highlighter-rouge">fibre.fit</code> is not reliable. Comparing the mean angular distance of the sample to the true and to the fitted fibre shows that on this cubic example the fit is clearly worse than the fibre we started from</p>
+<p>The two printed distances are the sample's mean angular distance from the true fibre and from the fitted fibre. They should be similar for this synthetic low-symmetry example.</p>
 {% highlight matlab %}
-[mean(angle(ori,f)), mean(angle(ori,fFit))] ./ degree
+meanDistanceDegrees = ...
+  [mean(angle(ori,fTrue)),fitDistance] ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    6.6436   11.9363
+meanDistanceDegrees =
+    7.5823    7.5661
 {% endhighlight %}
-<p>For low symmetry, or when a good starting guess is available, the result is much better. Treat a cubic fibre fit as a starting point for a manual inspection rather than as an answer.</p>
+<p>The eigenvalues returned by the local branch test whether a fibre is a sensible model. The ratio below compares spread along the fibre with scatter away from it. A ratio near 1 describes a blob rather than a line; a larger ratio supports a fibre interpretation.</p>
+{% highlight matlab %}
+linearityRatio = lambda(3)./lambda(2)
+{% endhighlight %}
+
+{% highlight plaintext %}
+linearityRatio =
+  161.2818
+{% endhighlight %}
+<p>Two warnings are essential. First, the fit always returns a fibre even when the data do not follow one. Applied to a unimodal ODF, it can simply return a fibre through the mode. <a href="Grain_dispersion_axes.html">Dispersion Axes</a> develops the eigenvalue diagnostic with measured grain orientations.</p>
+<p>Second, the global search is not reliable for highly symmetric groups. On cubic data, compare the mean distance to the fitted fibre with the distance to any physically expected fibre. A larger fitted distance is the clear failure symptom seen in the original cubic example. Treat a cubic global fit as a starting point for manual inspection.</p>
+<p>The local branch is much faster, but it requires low symmetry. It can also use a good starting guess that has already put symmetry-equivalent observations into one locally consistent set. The API does not accept the starting guess itself.</p>
+<h2 id="16">The Maths Behind a Fibre ODF</h2>
+<p>For a crystal direction \(h\) and a specimen direction \(r\), the full fibre is</p>
+<p>\[F_{h,r}=\{g \in SO(3):g h=r\}.\]</p>
+<p>Away from symmetry equivalents, a single fibre component has the form</p>
+<p>\[f(g)=\psi(\angle(g h,r)),\]</p>
+<p>where \(\psi\) is the spherical kernel. Crystal and specimen symmetry make the construction invariant under equivalent descriptions. MTEX stores the object as an <a href="SO3FunCBF.SO3FunCBF.html">SO3FunCBF</a>. It still uses the evaluation, plotting, scaling, and addition interface shared by every <a href="SO3FunConcept.html"><code class="language-plaintext highlighter-rouge">SO3Fun</code></a>.</p>
+<h2 id="17">Further Reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://doi.org/10.1016/C2013-0-11769-2">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982. Chapter 5 develops fibre textures and their orientation distributions.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004, develops rotation-space geometry and symmetry-reduced regions.</li>
+<li>L. A. I. Kestens and H. Pirgazi, <a href="https://doi.org/10.1080/02670836.2016.1231746">Texture formation in metal alloys with cubic crystal structures</a>, <i>Materials Science and Technology</i> 32 (2016), 1303--1315. This review covers named cubic rolling fibres. It warns that the same Greek label can mean different fibres in FCC and BCC materials.</li>
+<li>H. Schaeben, <a href="https://doi.org/10.1155/TSM.33.365">The de la Vallee Poussin Standard Orientation Density Function</a>, <i>Textures and Microstructures</i> 33 (1999), 365--373. This paper relates the kernel halfwidth to its finite harmonic representation.</li>
+<li>
+<a href="https://www.iso.org/standard/82165.html">ISO 3785:2023</a>, <i>Metallic materials -- Designation of test specimen axes in relation to product texture</i>, standardises specimen-axis language for rolled products.</li>
+</ul>
+</div>
+<h2 id="18">Next</h2>
+<p>Continue with <a href="BinghamODFs.html">Bingham ODFs</a> for a compact parametric model with three independent spreads. The preceding model family is <a href="RadialODFs.html">Radial ODFs</a>, and the curves without a density around them are <a href="OrientationFibre.html">Fibres of Orientations</a>. <a href="ODFCharacteristics.html">ODF Properties</a> explains texture index and fibre volume. <a href="DensityEstimation.html">Density Estimation</a> estimates an ODF from measured orientations instead of fitting a single parametric centreline.</p>
 </div>
 </body>
 </html>

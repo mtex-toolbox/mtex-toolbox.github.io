@@ -1,5 +1,5 @@
 ---
-title: "Select Grain Boundaries"
+title: 'Select Grain Boundaries'
 
 sidebar: documentation_sidebar
 permalink: BoundarySelect.html
@@ -23,7 +23,8 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we explain how to extract specific grain boundaries. Therefore we start by importing some EBSD data and reconstructing the grain structure.</p>
+<p>A grain boundary is stored as a list of short segments. Each segment lies between two neighbouring measurements that belong to different grains. Selecting boundaries therefore means indexing this list, and every selection returns another <a href="grainBoundary.grainBoundary.html">grainBoundary</a> list.</p>
+<p>This page assumes that the map has already been divided into grains as in <a href="GrainReconstruction.html">Grain Reconstruction</a>. The <a href="GrainBoundaries.html">Grain Boundaries</a> overview explains how these segments represent an interface in a two-dimensional section.</p>
 {% highlight matlab %}
 close all;
 
@@ -31,31 +32,32 @@ close all;
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
-% restrict it to a sub-region of interest.
+% restrict it to a subregion of interest
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
 
-% and recompute grains
+% reconstruct and smooth the grains
 [grains,ebsd] = calcGrains(ebsd,'minPixel',5,'alpha',10);
-
-% smooth the grains a bit
 grains = smoothBoundary(grains,4);
 
-% visualize as a phase map
+% extract and plot the complete boundary list
+gB = grains.boundary;
 plot(ebsd)
 hold on
-plot(grains.boundary,'linewidth',2)
+plot(gB,'lineWidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundarySelect_01.png" %}
 </center>
-<p>The output of</p>
+<p>The black network contains every boundary segment in the cropped map. It includes boundaries between grains of one phase, boundaries between phases, and the outer rim of the scan.</p>
+<h2 id="3">What the list contains</h2>
+<p>Displaying <code class="language-plaintext highlighter-rouge">gB</code> reports the number and total length of the segments for every pair of phases that meets in the map.</p>
 {% highlight matlab %}
-grains.boundary
+gB
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = grainBoundary (y↑→x)
+gB = grainBoundary (y↑→x)
  
  Segments    length   mineral 1   mineral 2
       555  27532 µm  notIndexed  Forsterite
@@ -68,32 +70,44 @@ ans = grainBoundary (y↑→x)
       123   5723 µm   Enstatite    Diopside
        22    930 µm    Diopside    Diopside
 {% endhighlight %}
-<p>tells us the number of boundary segments between the different phases. Those segments with phase <code class="language-plaintext highlighter-rouge">'notIndexed'</code> include also those boundary segments where the grains are cut by the scanning boundary. To restrict the grain boundaries to a specific phase transition you shall do</p>
+<p>The rows involving <code class="language-plaintext highlighter-rouge">notIndexed</code> combine two situations. Some segments border a connected <code class="language-plaintext highlighter-rouge">notIndexed</code> area, whose diffraction patterns could not be indexed. Others lie on the outer rim, where a grain is cut off by the scan and has no neighbour on the other side. <a href="SelectingGrains.html">Selecting Grains</a> shows how to identify grains at that rim.</p>
+<h2 id="5">By the phases on either side</h2>
+<p>Two phase names select segments between those phases. The first selection contains forsterite to forsterite boundaries, which separate differently oriented grains of the dominant phase.</p>
 {% highlight matlab %}
+gB_FoFo = gB('Fo','Fo');
+
+plot(ebsd)
 hold on
-plot(grains.boundary('Fo','Fo'),'lineColor','blue','micronbar','off','lineWidth',4)
+plot(gB_FoFo,'lineColor','blue','micronbar','off','lineWidth',4)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundarySelect_02.png" %}
 </center>
-<p>Similarly, we may select all Forsterite to Enstatite boundary segments.</p>
+<p>The thick blue segments occur within the forsterite part of the phase map. They do not include its contacts with the other minerals.</p>
+<p>The next selection contains forsterite to enstatite boundaries. A phase boundary is not a separate object in MTEX. It is a grain boundary whose two neighbouring grains happen to differ in phase.</p>
 {% highlight matlab %}
+gB_FoEn = gB('Fo','En');
+
+plot(ebsd)
 hold on
-plot(grains.boundary('Fo','En'),'lineColor','darkgreen','micronbar','off','lineWidth',4)
+plot(gB_FoEn,'lineColor','darkgreen','micronbar','off','lineWidth',4)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="BoundarySelect_03.png" %}
 </center>
-<p>Note, that the order of the phase names matter when considering the corresponding misorientations</p>
+<p>The green segments follow only contacts between the forsterite and enstatite regions. They are two different crystals meeting, rather than two orientations of the same phase.</p>
+<h2 id="9">Why phase order matters</h2>
+<p>The order of the phase names matters for more than readability. A misorientation is a rotation <b>from</b> one crystal <b>to</b> another, so reversing the names gives inverse misorientations. A misorientation axis expressed in crystal coordinates therefore refers to whichever crystal was named first.</p>
 {% highlight matlab %}
-grains.boundary('Fo','En').misorientation(1)
-grains.boundary('En','Fo').misorientation(1)
+mori = gB('Fo','En').misorientation(1)
+
+inv(mori)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = misorientation (Forsterite → Enstatite)
+mori = misorientation (Forsterite → Enstatite)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
@@ -104,10 +118,89 @@ ans = misorientation (Enstatite → Forsterite)
  
   Bunge Euler angles in degree
      phi1     Phi    phi2
-  104.132 101.992  163.38
+  54.8624 51.5067 300.866
 {% endhighlight %}
-<p>In the fist case the misorientation returned is from Forsterite to Enstatite and in the second case its exactly the inverse</p>
-<p>The selection of grain boundaries according to specific misorientations according to twist / tilt character or twinning is explained in linked sections.</p>
+<p>The two phase orders select the same physical segments, but reversing the sides also reverses the walk along every boundary chain. The segments are consequently not returned in the same row order. Corresponding segments have exactly inverse misorientations, but <code class="language-plaintext highlighter-rouge">gB('En','Fo').misorientation(1)</code> is a different segment from the first one selected above.</p>
+<h2 id="11">By grain</h2>
+<p>A boundary list is also available from the grains it belongs to. This is how to ask for the boundary of one grain or of a grain selection. Here <code class="language-plaintext highlighter-rouge">grains(47)</code> means the 47th grain in the current list, not necessarily a grain whose ID is 47; <a href="SelectingGrains.html">Selecting Grains</a> explains the distinction between list position and grain ID.</p>
+{% highlight matlab %}
+grains(47).boundary
+
+plot(ebsd)
+hold on
+plot(grains(47).boundary,'lineWidth',4,'lineColor','DarkBlue')
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = grainBoundary (y↑→x)
+ 
+ Segments   length   mineral 1  mineral 2
+       23  1077 µm  Forsterite   Diopside
+        7   311 µm   Enstatite   Diopside
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundarySelect_04.png" %}
+</center>
+<p>The dark-blue outline includes every phase pair on the boundary of this grain. The displayed boundary summary names the phases on its far side.</p>
+<h2 id="13">Boundaries inside a grain</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">grains.innerBoundary</code> stores segments between two measurements <b>of the same grain</b>. They arise when the segmentation criterion separates two neighbouring pixels, but another path through the map still connects them into one phase-homogeneous grain. An orientation gradient that comes back around can produce exactly this situation.</p>
+{% highlight matlab %}
+grains.innerBoundary
+
+plot(ebsd)
+hold on
+plot(grains.innerBoundary,'lineColor','red','lineWidth',4)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans = grainBoundary (y↑→x)
+ 
+ Segments  length   mineral 1   mineral 2
+       11  482 µm  Forsterite  Forsterite
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundarySelect_05.png" %}
+</center>
+<p>The display reports 11 inner-boundary segments in this barely deformed rock. The red segments sit inside connected grains rather than tracing complete grain outlines. Deformed material may contain many more, and <a href="SubGrainBoundaries.html">Subgrain Boundaries</a> explains how a two-threshold reconstruction preserves a systematic low-angle population.</p>
+<h2 id="15">By misorientation or another property</h2>
+<p>Every segment carries its misorientation. A logical condition on the misorientation angle therefore selects segments in the same way as any MATLAB logical index. Here the eligible set is first restricted to forsterite to forsterite boundaries, so every angle has one consistent pair of crystal symmetries.</p>
+{% highlight matlab %}
+isHighAngle = gB_FoFo.misorientation.angle > 60*degree;
+gB_high = gB_FoFo(isHighAngle)
+
+plot(ebsd)
+hold on
+plot(gB_FoFo,'lineColor','lightgray','lineWidth',2)
+plot(gB_high,'lineColor','red','lineWidth',4)
+hold off
+{% endhighlight %}
+
+{% highlight plaintext %}
+gB_high = grainBoundary (y↑→x)
+ 
+ Segments    length   mineral 1   mineral 2
+      478  22160 µm  Forsterite  Forsterite
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="BoundarySelect_06.png" %}
+</center>
+<p>The grey segments are all eligible forsterite boundaries, while red marks only those above the chosen angle. The same pattern works with a condition on position, direction, length, or any other per-segment property; see <a href="BoundaryProperties.html">Grain Boundary Properties</a>.</p>
+<p>More specialised misorientation selections compare an axis, a complete rotation, or a coincidence site lattice relationship. They are developed in <a href="TiltAndTwistBoundaries.html">Twist and Tilt</a>, <a href="TwinningBoundaries.html">Twinning</a>, and <a href="CSLBoundaries.html">CSL</a>.</p>
+<h2 id="17">Next</h2>
+<p>
+<a href="BoundaryPlots.html">Boundary Plots</a> shows how to colour the selected segments by scalar, directional, and full-misorientation data. <a href="BoundaryProperties.html">Grain Boundary Properties</a> then develops the per-segment values from which more selections can be built.</p>
+<h2 id="18">Further reading</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain detection from 2d and 3d EBSD data - Specification of the MTEX algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720-1733.</li>
+<li>A. P. Sutton and R. W. Balluffi, <a href="https://obnb.uk/p11642002-interfaces-in-crystalline-materials">Interfaces in Crystalline Materials</a>, Clarendon Press, 1995. This is the standard reference for the crystallography and physics of interfaces.</li>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a>, <i>Microbeam analysis - Electron backscatter diffraction - Measurement of average grain size</i>. It defines EBSD grain-size measurements from two-dimensional sections and the cautions needed when interpreting them.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

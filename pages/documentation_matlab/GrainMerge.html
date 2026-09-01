@@ -1,5 +1,5 @@
 ---
-title: "Merging Grains"
+title: 'Merging Grains'
 
 sidebar: documentation_sidebar
 permalink: GrainMerge.html
@@ -23,42 +23,54 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Merging grains may be useful when reconstructing parent grain structures, i.e., before phase transition or before twinning. In this section we will use a twinning example for illustration. Lets start by importing some Magnesium data and reconstructing the grain structure:</p>
+<p>Grain segmentation correctly identifies a twin domain as a grain: it is a phase-homogeneous, spatially connected region of EBSD measurements. For an analysis of the grain before twinning, however, that domain belongs to its host. Merging removes the selected internal boundaries and reconstructs this parent-grain footprint.</p>
+<p>In parent-phase reconstruction, merging is the second of two distinct steps. The child grains are first transformed to candidate parent orientations and only then merged where those candidates are compatible. See <a href="GrainGraphBasedReconstruction.html">Grain Graph Based Reconstruction</a> for that complete workflow.</p>
+<p>This page uses deformation twins in magnesium. It assumes familiarity with <a href="GrainReconstruction.html">grain reconstruction</a>, <a href="SelectingGrains.html">grain IDs</a>, and <a href="BoundaryMisorientations.html">boundary misorientations</a>.</p>
 {% highlight matlab %}
-% load some example data
+close all;
+
+% load the example in its specimen plotting frame
 plottingConvention.default('y↑→x');
 mtexdata twins silent
 
-% segment grains
+% reconstruct and smooth the grains
 [grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',3);
-
-% smooth them
-grains = grains.smoothBoundary(5);
+grains = smoothBoundary(grains,5);
 grains = grains('indexed');
 
-% visualize the grains
-plot(grains,grains.meanOrientation)
+% compute the mean-orientation colours without printing a colour-key notice
+colorKey = ipfColorKey(grains);
+grainColor = colorKey.orientation2color(grains.meanOrientation);
+plot(grains,grainColor)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainMerge_01.png" %}
 </center>
-<p>Next we identify all twinning boundaries</p>
+<p>The narrow lamellae have mean-orientation colours unlike their surrounding grains. Their morphology suggests twins, but morphology alone does not establish a twin relationship.</p>
+<h2 id="3">Select candidate twin boundaries</h2>
+<p>A twin law maps two pairs of crystallographic directions onto each other. <a href="orientation.map.html"><code class="language-plaintext highlighter-rouge">orientation.map</code></a> constructs that complete relationship. Comparing complete misorientations is more selective than comparing their rotation angles alone.</p>
 {% highlight matlab %}
-% define twinning misorientation
+% define the ideal twinning misorientation
 CS = grains.CS;
 twinning = orientation.map(Miller(0,1,-1,-2,CS),Miller(0,-1,1,-2,CS),...
   Miller(2,-1,-1,0,CS),Miller(2,-1,-1,0,CS));
 
-% extract all Magnesium Magnesium grain boundaries
+% extract magnesium-to-magnesium grain boundaries
 gB = grains.boundary('Magnesium','Magnesium');
 
-% and check which of them are twinning boundaries with threshold 5 degree
+% select segments within 5 degrees of the twin law
 isTwinning = angle(gB.misorientation,twinning) < 5*degree;
 twinBoundary = gB(isTwinning)
 
-% plot the twinning boundaries
+% report how much of the sampled boundary network passed the test
+boundarySummary = table(length(gB),length(twinBoundary),...
+  100*length(twinBoundary)/length(gB),...
+  'VariableNames',{'MgMgSegments','candidateTwinSegments','percent'})
+
+% overlay the candidate twin boundaries
 hold on
-plot(twinBoundary,'linecolor','w','linewidth',4,'displayName','twin boundary')
+plot(twinBoundary,'linecolor','w','linewidth',4,...
+  'displayName','candidate twin boundary')
 hold off
 {% endhighlight %}
 
@@ -67,37 +79,55 @@ twinBoundary = grainBoundary (y↑→x)
  
  Segments  length  mineral 1  mineral 2
      1406  356 µm  Magnesium  Magnesium
+boundarySummary =
+  1×3 table
+    MgMgSegments    candidateTwinSegments    percent
+    ____________    _____________________    _______
+        2696                1406             52.151
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainMerge_02.png" %}
 </center>
-<h2 id="3">Merge grains along boundaries</h2>
-<p>The command <a href="grain2d.merge.html">merge</a> will merge grains together that have a common boundary which is specified as the second argument. In our example we want to merge all grains that have a common twinning boundary so we do</p>
+<p>The white traces follow the narrow lamellae. With this boundary sampling, 1406 of 2696 magnesium-to-magnesium segments pass the five-degree test. A segment count is not a count of physical twins, and smoothing or resampling the same traces can change it. The tolerance is also an analyst choice: these are candidate twin boundaries, not proof of the mechanism or of which side is the parent. <a href="TwinningBoundaries.html">Inferring Twin Boundaries</a> develops those limitations.</p>
+<h2 id="5">Merging along selected boundaries</h2>
+<p> <a href="grain2d.merge.html"><code class="language-plaintext highlighter-rouge">merge</code></a> joins the grains on both sides of every supplied boundary. It treats the selected boundaries as connections in a graph and merges each connected component. The operation is therefore transitive: if A is joined to B and B to C, all three become one grain. One false connecting boundary can consequently fuse a much larger parent than expected.</p>
 {% highlight matlab %}
 [mergedGrains,parentId] = merge(grains,twinBoundary);
 
-% plot the merged grains
+mergeSummary = table(length(grains),length(mergedGrains),...
+  'VariableNames',{'grainsBefore','grainsAfter'})
+
+% overlay the reconstructed parent-grain boundaries
 hold on
-plot(mergedGrains.boundary,'linecolor','k','linewidth',2.5,'linestyle','-',...
-  'displayName','merged grains')
+plot(mergedGrains.boundary,'linecolor','k','linewidth',2.5,...
+  'linestyle','-','displayName','merged grains')
 hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainMerge_03.png" %}
-</center>
-<h2 id="4">Grain relationships</h2>
-<p>The second output argument <code class="language-plaintext highlighter-rouge">paraentId</code> of <a href="grain2d.merge.html">merge</a> is a list with the same size as the child grains which indicates for each child grain into which parent grain it has been merged. The id of the common grain is usually different from the ids of the merged grains and can be found by</p>
-{% highlight matlab %}
-mergedGrains(16).id
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+mergeSummary =
+  1×2 table
+    grainsBefore    grainsAfter
+    ____________    ___________
+         91             28
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainMerge_03.png" %}
+</center>
+<p>The 91 segmented grains have become 28 merged grains. Black lines are the reconstructed parent-grain outlines. Each white trace that no longer has a black line on it is now internal to one merged grain.</p>
+<h2 id="7">Keeping track of the child grains</h2>
+<p>The second output, <code class="language-plaintext highlighter-rouge">parentId</code>, has one entry for every grain in <code class="language-plaintext highlighter-rouge">grains</code>. <code class="language-plaintext highlighter-rouge">parentId(k)</code> is the ID of the merged grain that contains <code class="language-plaintext highlighter-rouge">grains(k)</code>. This is the same kind of bookkeeping that <code class="language-plaintext highlighter-rouge">ebsd.grainId</code> provides between measurements and grains; it is a mapping of persistent IDs, not a list position.</p>
+{% highlight matlab %}
+selectedParentId = mergedGrains(16).id
+{% endhighlight %}
+
+{% highlight plaintext %}
+selectedParentId =
     16
 {% endhighlight %}
-<p>Hence, we can find all children of grain 16 by</p>
+<p>The following object summary lists the child grains assigned to merged grain 16.</p>
 {% highlight matlab %}
-childs = grains(parentId == mergedGrains(16).id)
+childs = grains(parentId == selectedParentId)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -121,134 +151,158 @@ childs = grain2d (y↑→x)
  36       1      125    (30°,67°,224°)    0.015
  37       1      120   (67°,158°,185°)    0.018
 {% endhighlight %}
-<h2 id="6">Estimate twin area fraction</h2>
-<p>Determining which of the measured grains are original grains and which are twins is a tough problem. Here we make a very simple assumption by labeling those areas as twins that make up less than half of the merged (original) parent grain</p>
+<h2 id="9">Which child domains are twins</h2>
+<p>Merging establishes which domains belong together. It does not identify the original host or the twin. One simple rule works while twins occupy less area than their host: cluster each parent's child orientations and label the largest orientation cluster by area as the original grain.</p>
 {% highlight matlab %}
-% extract grain area for faster access
+% cache the child-grain areas
 gArea = grains.area;
 
-% loop over mergedGrains and determine children that are not twins
+% classify the smaller orientation clusters as twin domains
 isTwin = true(grains.length,1);
 for i = 1:mergedGrains.length
 
-  % get child ids
-   childId = find(parentId==i);
+  % find the children of this merged-grain ID
+  parent = mergedGrains(i).id;
+  childInd = find(parentId == parent);
 
-   % cluster grains of similar orientations
-   [fId,center] = calcCluster(grains.meanOrientation(childId),'maxAngle',...
-       15*degree,'method','hierarchical','silent');
+  % cluster children with similar mean orientations
+  [fId,~] = calcCluster(grains.meanOrientation(childInd),'maxAngle',...
+    15*degree,'method','hierarchical','silent');
 
-   % compute area of each cluster
-   clusterArea = accumarray(fId,gArea(childId));
-
-   % label the grains of largest cluster as original grain
-   [~,fParent] = max(clusterArea);
-   isTwin(childId(fId==fParent)) = false;
+  % find the orientation cluster with the largest total area
+  clusterArea = accumarray(fId,gArea(childInd));
+  [~,fParent] = max(clusterArea);
+  isTwin(childInd(fId == fParent)) = false;
 end
 
-% compute the area fraction of twins
-sum(area(grains(isTwin)))/sum(area(grains)) * 100
+% report the mapped-area fraction assigned to twins
+twinAreaPercent = 100*sum(area(grains(isTwin)))/sum(area(grains))
 
-% visualize the result
+% visualize the classification
 close all
 plot(grains(~isTwin),'FaceColor','darkgray','displayName','not twin')
 hold on
 plot(grains(isTwin),'FaceColor','red','displayName','twin')
-hold on
-plot(mergedGrains.boundary,'linecolor','k','linewidth',2,'linestyle','-',...
-  'displayName','merged grains')
-mtexTitle('twin id')
+plot(mergedGrains.boundary,'linecolor','k','linewidth',2,...
+  'linestyle','-','displayName','merged grains')
+mtexTitle('twin classification')
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
+twinAreaPercent =
    16.6397
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainMerge_04.png" %}
 </center>
-<p>The <code class="language-plaintext highlighter-rouge">parentId</code> may also be used to compute properties of the parent grains by averaging over the corresponding child grain properties. This can be done with the MATLAB command <a href="mathworks.com/help/matlab/ref/accumarray.html">accumarray</a>
-</p>
+<p>The rule assigns 17 percent of the mapped area to twins. The red domains are lamellae inside the grey hosts, which is a useful spatial check on the classification. The rule fails if a twin consumes more than half of its host. This map alone cannot reveal that history.</p>
+<h2 id="11">Properties of the merged grains</h2>
+<p>A merged grain receives a new shape and the summed pixel count. Other grain properties have no universal merge rule. In particular, directly averaging host and twin orientations usually does not recover the host orientation, so the <code class="language-plaintext highlighter-rouge">'calcMeanOrientation'</code> option is not appropriate for this example. The intended physical quantity must determine how each property is carried from children to parents.</p>
+<p>For <a href="GrainOrientationParameters.html">grain orientation spread (GOS)</a>, <code class="language-plaintext highlighter-rouge">parentId</code> supplies the groups to <a href="matlab:doc('accumarray')"><code class="language-plaintext highlighter-rouge">accumarray</code></a>. An unweighted mean gives every child grain one vote.</p>
 {% highlight matlab %}
-% this averages the GOS of the child grains into the parent grains
-mergedGrains.prop.GOS = accumarray(parentId,grains.GOS,size(mergedGrains),@mean);
+% compute an unweighted child-grain mean for each parent
+unweightedGOS = accumarray(parentId,grains.GOS,size(mergedGrains),@mean);
+mergedGrains.prop.GOS = unweightedGOS;
 
-% visualize the result
+% compare child and unweighted parent values
 close all
-plot(grains,grains.GOS ./ degree)
+plot(grains,grains.GOS./degree)
 hold on
 plot(mergedGrains.boundary,'lineColor','white','lineWidth',2)
-mtexTitle('original GOS')
+mtexTitle('child-grain GOS')
 
 nextAxis(1,2)
-plot(mergedGrains,mergedGrains.GOS  ./ degree)
-mtexTitle('merged GOS')
-mtexColorbar
+plot(mergedGrains,unweightedGOS./degree)
+mtexTitle('unweighted merged GOS')
 setColorRange([0,1.5])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainMerge_05.png" %}
 </center>
-<p>The above result is a bit unrealistic since the averages are computed between the children ignoring their relative areas. A better approach is to compute a weighted average by the following lines.</p>
+<p>This mean counts a two-pixel twin as much as the grain that contains it. That is rarely the intended statistic. Weighting each child by area gives each measured part of the parent equal influence.</p>
 {% highlight matlab %}
-% extract GOS and area
+% cache GOS and area for the weighted accumulation
 childGOS = grains.GOS;
 childArea = grains.area;
 
-% compute the weighted averages
-mergedGrains.prop.GOS = accumarray(parentId,1:length(grains),size(mergedGrains),...
+% compute the area-weighted child-grain mean for each parent
+weightedGOS = accumarray(parentId,1:length(grains),size(mergedGrains),...
   @(id) nanmeanWeights(childGOS(id),childArea(id)));
+mergedGrains.prop.GOS = weightedGOS;
 
-nextAxis(1,3), hold on
-plot(mergedGrains,mergedGrains.GOS  ./ degree)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainMerge_06.png" %}
-</center>
-<h2 id="9">Setting Up the EBSD Data for the Merged Grains</h2>
-<p>Note that the Id's of the merged grains does not fit the grainIds stored in the initial ebsd variable. As a consequence, the following command will not give the right result</p>
-{% highlight matlab %}
-close all
-plot(mergedGrains(22).boundary,'linewidth',2)
-hold on
-plot(ebsd(mergedGrains(22)),ebsd(mergedGrains(22)).orientations)
-hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainMerge_07.png" %}
-</center>
-<p>In order to update the grainId in the ebsd variable to the merged grains, we proceed as follows.</p>
-{% highlight matlab %}
-% copy ebsd data into a new variable to not change the old data
-ebsd_merged = ebsd;
+nextAxis(1,3)
+plot(mergedGrains,weightedGOS./degree)
+mtexTitle('area-weighted merged GOS')
+mtexColorbar
+setColorRange([0,1.5])
 
-% update the grainIds to the parentIds
-ebsd_merged('indexed').grainId = parentId(grains.id2ind(ebsd('indexed').grainId))
+gosSummary = table(nnz(weightedGOS > unweightedGOS),length(mergedGrains),...
+  max(weightedGOS-unweightedGOS)./degree,...
+  'VariableNames',{'weightedValueHigher','parents','maximumIncreaseDegree'})
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd_merged = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   21 (0.092%)  notIndexed          none                                   
-     1  22858 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId, grainId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
+gosSummary =
+  1×3 table
+    weightedValueHigher    parents    maximumIncreaseDegree
+    ___________________    _______    _____________________
+            14               28              0.58077
 {% endhighlight %}
-<p>Now the variable <code class="language-plaintext highlighter-rouge">ebsd_merged</code> can be indexed by the merged grains, i.e.</p>
+<center class="mtex-figure">
+{% include inline_image.html file="GrainMerge_06.png" %}
+</center>
+<p>The two parent maps differ in both directions. The weighted value is larger in 14 of the 28 parents, by as much as 0.6 degrees. In those parents the larger children carry the higher GOS values, while small twins pull the unweighted mean down. More generally, orientation spread can depend on grain size, so the weighting rule must be reported.</p>
+<h2 id="14">Pointing EBSD measurements at the merged grains</h2>
+<p>The EBSD measurements still carry the <code class="language-plaintext highlighter-rouge">grainId</code> values from the original segmentation. Those IDs refer to a different grain list after merging. Indexing <code class="language-plaintext highlighter-rouge">ebsd</code> with a merged grain therefore selects the wrong measurements without raising an error.</p>
 {% highlight matlab %}
-plot(ebsd_merged(mergedGrains(22)),ebsd_merged(mergedGrains(22)).orientations)
+targetMergedGrain = mergedGrains('id',22);
+staleMeasurements = ebsd(targetMergedGrain);
+staleColor = colorKey.orientation2color(staleMeasurements.orientations);
+
+close all
+plot(targetMergedGrain.boundary,'linewidth',2)
 hold on
-plot(mergedGrains(22).boundary,'linewidth',3)
+plot(staleMeasurements,staleColor)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="GrainMerge_07.png" %}
+</center>
+<p>The coloured measurements do not fill the outlined merged grain. They are the measurements whose old <code class="language-plaintext highlighter-rouge">grainId</code> happens to equal the new ID 22. Replace every indexed measurement's old grain ID by the parent ID of its original grain.</p>
+{% highlight matlab %}
+% copy the EBSD data so the original mapping remains available
+ebsd_merged = ebsd;
+
+% map old grain IDs to indices in grains, then from children to parent IDs
+ebsd_merged('indexed').grainId = ...
+  parentId(grains.id2ind(ebsd('indexed').grainId));
+
+correctedMeasurements = ebsd_merged(targetMergedGrain);
+correctedColor = colorKey.orientation2color(correctedMeasurements.orientations);
+{% endhighlight %}
+<p>The same lookup now returns the measurements inside the outline. Updating <code class="language-plaintext highlighter-rouge">grainId</code> is essential whenever subsequent EBSD analysis uses the merged grains.</p>
+{% highlight matlab %}
+plot(correctedMeasurements,correctedColor)
+hold on
+plot(targetMergedGrain.boundary,'linewidth',3)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="GrainMerge_08.png" %}
 </center>
+<h2 id="17">References</h2>
+<div>
+<ul>
+<li>F. Bachmann, R. Hielscher, and H. Schaeben, <a href="https://doi.org/10.1016/j.ultramic.2011.08.002">Grain Detection from 2d and 3d EBSD Data--Specification of the MTEX Algorithm</a>, <i>Ultramicroscopy</i> 111 (2011), 1720--1733. This paper derives the grain and boundary network on which merging operates.</li>
+<li>J. W. Christian and S. Mahajan, <a href="https://doi.org/10.1016/0079-6425(94)00007-7">Deformation Twinning</a>, <i>Progress in Materials Science</i> 39 (1995), 1--157. This review develops the crystallography and mechanisms of deformation twins.</li>
+<li>W. Pantleon, W. He, T. O. Johansson, and C. Gundlach, <a href="https://doi.org/10.1016/j.msea.2006.08.139">Orientation Inhomogeneities within Individual Grains in Cold-Rolled Aluminium Resolved by Electron Backscatter Diffraction</a>, <i>Materials Science and Engineering A</i> 483--484 (2008), 668--671. This paper discusses orientation spread and its dependence on grain size.</li>
+<li>
+<a href="https://doi.org/10.1520/E2627-13R19">ASTM E2627-13(2019)</a>, <i>Standard Practice for Determining Average Grain Size Using Electron Backscatter Diffraction (EBSD) in Fully Recrystallized Polycrystalline Materials</i>. Its scope is fully recrystallized materials, but it shows why boundary and grain definitions must be stated when merged grains enter a size analysis.</li>
+</ul>
+</div>
+<h2 id="18">Next</h2>
+<p>Continue with <a href="TwinningBoundaries.html">Inferring Twin Boundaries</a> when the twin law must be inferred from the data. For a phase transformation, see <a href="GrainGraphBasedReconstruction.html">Grain Graph Based Reconstruction</a> for the transform-then-merge workflow.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Plotting"
+title: 'Plotting Grains'
 
 sidebar: documentation_sidebar
 permalink: GrainSpatialPlots.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Plotting</title>
+<title>Plotting Grains</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_GrainSpatialPlots.m">
 </head>
@@ -23,235 +23,282 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>We start by importing some EBSD data and reconstructing some grains</p>
+<p>MTEX represents a grain as a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. For plotting, its outline is a polygon whose fill colour can come from the phase, the mean orientation, or one number computed for that grain.</p>
+<p>This page assumes that you have reconstructed grains as described in <a href="GrainReconstruction.html">Grain Reconstruction</a>. If inverse pole figure colours are new to you, read <a href="EBSDIPFMap.html">IPF Maps</a> first.</p>
+<p>A grain map differs from an EBSD map in one important way. An EBSD map has one colour per measurement, whereas a grain map has one colour per grain. It therefore shows the result of the reconstruction and none of the orientation scatter or measurement-to-measurement noise inside a grain.</p>
 {% highlight matlab %}
 % import a demo data set
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
-% perform grain segmentation
+% perform grain segmentation and store the grain ids with the map
 [grains,ebsd] = calcGrains(ebsd,'minPixel',5);
 {% endhighlight %}
 <h2 id="2">Phase maps</h2>
-<p>When using the <a href="grain2d.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> command without additional argument the associated color is defined by color stored in the crystal symmetry for each phase</p>
+<p>Called with no second argument, <a href="grain2d.plot.html"><code class="language-plaintext highlighter-rouge">plot</code></a> colours each grain by its phase. The colour is stored with the crystal symmetry of that phase.</p>
 {% highlight matlab %}
 close all
 plot(grains)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_01.png" %}
 </center>
-<p>Accordingly, changing the color stored in the crystal symmetry changes the color in the map</p>
+<p>The phase colour can be changed, which is the simplest way to make one phase stand out. Only the forsterite grains change from blue to salmon; the enstatite and diopside colours stay as they were.</p>
 {% highlight matlab %}
 grains('Fo').CS.color = "salmon";
 plot(grains)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_02.png" %}
 </center>
-<p>The color can also been specified directly by using the option <code class="language-plaintext highlighter-rouge">FaceColor</code>.</p>
+<p>A single grain, or any subset, can instead be given its own colour with <code class="language-plaintext highlighter-rouge">'FaceColor'</code>. Here the largest grain is filled in grey and made partly transparent, so its boundary and the phase map below remain visible.</p>
 {% highlight matlab %}
 % detect the largest grain
 [~,id] = max(grains.area);
 
-% plot the grain in dark black with some transparency
 hold on
 plot(grains(id),'FaceColor','darkgray','FaceAlpha',0.7)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_03.png" %}
 </center>
-<h2 id="5">Orientation Maps</h2>
-<p>Coloring grains according to their mean orientations is very similar to EBSD maps colored by orientations. The most important thing is that the misorientation can only extracted from grains of the same phase.</p>
+<h2 id="5">Orientation maps</h2>
+<p>Passing the mean orientations as the second argument applies an inverse pole figure colour key. The key maps a chosen specimen direction into a crystal direction and assigns that crystal direction a colour. Each phase has its own symmetry and therefore needs its own key, so this is done one phase at a time.</p>
 {% highlight matlab %}
-% the implicit way
-plot(grains('Fo'),grains('fo').meanOrientation)
+plot(grains('Fo'),grains('Fo').meanOrientation)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_04.png" %}
 </center>
-<p>This implicit way gives no control about how the color is computed from the meanorientation. When using the explicit way by defining a orientation to color map</p>
+<p>MTEX chooses the specimen z direction for this implicit form and reports the standard colour key in an interactive session. To choose the direction yourself, construct an <a href="ipfColorKey.html"><code class="language-plaintext highlighter-rouge">ipfColorKey</code></a> and ask it for the colours explicitly.</p>
 {% highlight matlab %}
-% this defines a ipf color key
+% a colour key for the forsterite phase
 ipfKey = ipfColorKey(grains('Fo'));
-{% endhighlight %}
-<p>we can set the inverse pole figure direction and many other properties</p>
-{% highlight matlab %}
-ipfKey.ipfDirection = xvector;
 
-% compute the color from the meanorientation
+% colour by which crystal direction points along specimen x
+ipfKey.ipfDirection = vector3d.X;
+
 color = ipfKey.orientation2color(grains('Fo').meanOrientation);
-
-% and use them for plotting
-plot(grains('fo'),color)
+plot(grains('Fo'),color)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_05.png" %}
 </center>
-<h2 id="8">Plotting arbitrary properties</h2>
-<p>As we have seen in the previous section the <code class="language-plaintext highlighter-rouge">plot</code> command accepts as second argument any list of RGB values specifying a color. Instead of RGB values the second argument can also be a list of values which are then transformed by a colormap into color.</p>
-<p>As an example we colorize the grains according to their aspect ratio.</p>
+<p>The map has changed completely although the orientations have not. What the colours mean is stored in the key, which should accompany every such map.</p>
 {% highlight matlab %}
-plot(grains,grains.aspectRatio)
+figure
+plot(ipfKey)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_06.png" %}
 </center>
-<p>we see that we have a very elongated grain which makes it difficult to distinguish the aspect ration of the other grains. A solution for this is to specify the values of the aspect ration which should mapped to the top and bottom color of the colormap</p>
+<p>Red is [001], green is [100], and blue is [010]. A red grain in the map above therefore has its [001] axis close to specimen x. In the preceding map, where the implicit key used specimen z, red meant [001] close to z. A colour has no crystallographic meaning without the key that produced it.</p>
+<h2 id="9">Colouring by a grain property</h2>
+<p>A numeric second argument must contain one value per grain. The colormap turns those values into colours. Here the value is the <a href="grain2d.aspectRatio.html"><code class="language-plaintext highlighter-rouge">aspectRatio</code></a>, the length-to-width ratio of the moment-equivalent ellipse fitted to the grain in this two-dimensional section.</p>
 {% highlight matlab %}
-setColorRange([1 5])
+plot(grains,grains.aspectRatio)
+mtexColorbar('title','aspect ratio')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_07.png" %}
 </center>
-<h2 id="11">Colorizing circular properties</h2>
-<p>Sometimes the property we want to display is a circular, e.g., the direction of the grain elongation. In this case it is important to use a circular colormap which assign the same color to high values and low values. In the case of the direction of the grain elongation the angles 0 and 180 should get the same color since they represent the same direction.</p>
+<p>Almost the whole map sits at the bottom of the colour range because a few ribbon-shaped grains reach an aspect ratio of 13 and stretch it. Fixing the range to the interval of interest makes the other grains visible.</p>
 {% highlight matlab %}
-% consider only elongated grains
-elongated_grains = grains(grains.aspectRatio > 1.2);
+setColorRange([1 5])
 
-% angle of the long axis to (1 0 0)
-omega = angle(vector3d.X, elongated_grains.longAxis, grains.N);
+maxAspectRatio = max(grains.aspectRatio)
 
-% plot the direction
-plot(elongated_grains,omega ./ degree,'micronbar','off')
-
-% change the default colormap to a circular one
-mtexColorMap(colorcet('C2'))
-
-% display the colormap
-mtexColorbar
+numClipped = nnz(grains.aspectRatio > 5)
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+maxAspectRatio =
+   13.3424
+numClipped =
+     8
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_08.png" %}
 </center>
-<h2 id="12">Colorizing two scalar properties</h2>
-<p>Above we plotted the long axis of grains admitting that for low aspect ratio grains, also the long axis is poorly defined. Another way to overcome this situation is to desaturate the color as a function of aspect ratio.</p>
-<p>In order to do so, we first define a planar colorkey. Since we want to plot the grain long axis direction, we tell the colorkey that hue-encoded value is periodic. Also we can set ranges for the individual values.</p>
+<p>The printed maximum rounds to 13, and the count confirms that eight grains lie above the chosen range. They are no longer distinguishable from one another, so every fixed colour range trades detail in the extremes for contrast through the rest.</p>
+<p>These shape values describe the observed section, not the full grain in three dimensions. A grain cut by the map edge is truncated as well, so remove <a href="grain2d.isBoundary.html"><code class="language-plaintext highlighter-rouge">isBoundary</code></a> grains before calculating shape statistics. The map above keeps them because its purpose is display.</p>
+<h2 id="12">Averaging a measurement property over grains</h2>
+<p>An EBSD property has one value per measurement and cannot be passed directly to a grain plot. <a href="EBSD.grainMean.html"><code class="language-plaintext highlighter-rouge">grainMean</code></a> reduces it to one value per grain. Here it averages the band contrast, a measure of diffraction-pattern quality, over the measurements assigned to each grain.</p>
 {% highlight matlab %}
-% set up the color key
-pK = planarColorKey(colorcet('C2'));
+meanBandContrast = grainMean(ebsd,ebsd.bc,grains);
 
-% make it periodic in the first argument
-pK.periode  = pi;
-
-% specify range for the second argument
-pK.range2 = [1 3];
-
-% now we can derive color from the colorkey.
-prop1 = angle(vector3d.X, grains.longAxis, grains.N);
-prop2 = grains.aspectRatio;
-
-colors = pK.property2color(prop1, prop2);
-plot(grains,colors)
+plot(grains,meanBandContrast)
+mtexColorbar('title','mean band contrast')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_09.png" %}
 </center>
-<p>Lets visualize our colorkey.</p>
+<p>Every polygon now has a uniform fill. The pixel-scale variation of band contrast is gone, and each colour represents the mean for one reconstructed grain. Other reductions, such as <code class="language-plaintext highlighter-rouge">@max</code>, can be passed to <code class="language-plaintext highlighter-rouge">grainMean</code> when the mean is not the quantity of interest.</p>
+<h2 id="14">Colouring a direction</h2>
+<p>An angle needs a colormap that closes on itself. The long axis of a grain is an axis rather than a directed vector: 0 and 180 degrees describe the same alignment and must receive the same colour, or the map shows a seam where there is none.</p>
 {% highlight matlab %}
-% define axes labels
-pK.label1 = 'long axis';
+% consider only elongated grains away from the map edge
+elongatedGrains = grains(grains.aspectRatio > 1.2 & ~grains.isBoundary);
+
+% angle of the long axis to specimen x, measured about the section normal
+omega = angle(vector3d.X,elongatedGrains.longAxis,grains.N);
+
+plot(elongatedGrains,omega ./ degree,'micronbar','off')
+
+% use a cyclic colormap and show its scale
+mtexColorMap(colorcet('C2'))
+mtexColorbar('title','long-axis angle in degrees')
+
+fractionInBand = mean(omega >= 60*degree & omega <= 105*degree)
+{% endhighlight %}
+
+{% highlight plaintext %}
+fractionInBand =
+    0.5131
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainSpatialPlots_10.png" %}
+</center>
+<p>Grains of the same colour are aligned in the same way, and green dominates the map. The printed fraction is close to one half: that many elongated interior grains lie between 60 and 105 degrees from specimen x, which is close to vertical in this plotting convention. The shapes say the same thing at a glance, and this clustering is the visual signature of a shape preferred orientation.</p>
+<p>This map is a diagnostic rather than a complete fabric analysis. A quantitative analysis should also decide how grains are weighted and whether phases are compared separately; <a href="EllipseBasedParameters.html">Ellipse Based Shape Parameters</a> develops those choices.</p>
+<h2 id="16">Colouring by two properties at once</h2>
+<p>The long axis of a nearly round grain is arbitrary. The previous map gives the same visual weight to a direction that is well defined and to one that is not. A <a href="planarColorKey.html"><code class="language-plaintext highlighter-rouge">planarColorKey</code></a> maps one property to hue and a second one to saturation: direction becomes the colour, and aspect ratio controls how strongly that colour is shown.</p>
+{% highlight matlab %}
+% hue from a cyclic colormap, periodic because the long axis is an axis
+pK = planarColorKey(colorcet('C2'));
+pK.periode = pi;
+
+% aspect ratio 1 fades to white, which reads as pale grey beside the outlines
+% aspect ratio 3 and above is fully saturated
+pK.range2 = [1 3];
+
+prop1 = angle(vector3d.X,grains.longAxis,grains.N);
+prop2 = grains.aspectRatio;
+
+colors = pK.property2color(prop1,prop2);
+plot(grains,colors)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainSpatialPlots_11.png" %}
+</center>
+<p>The round grains have faded to nearly white, and only the elongated ones still carry a strong direction colour. The eye is no longer drawn to angles that have little meaning. The key itself can include the observed data range, so the reader can see which combinations occur.</p>
+{% highlight matlab %}
+pK.label1 = 'long-axis angle';
 pK.label2 = 'aspect ratio';
 
 figure
-plot(pK,prop1/degree,prop2)
+plot(pK,prop1 ./ degree,prop2)
 {% endhighlight %}
-<center>
-{% include inline_image.html file="GrainSpatialPlots_10.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainSpatialPlots_12.png" %}
 </center>
-<p>Similarly we can color code any combination of two scalar grain properties.</p>
-<h2 id="15">Plotting the orientation within a grain</h2>
-<p>In order to plot the orientations of EBSD data within certain grains one first has to extract the EBSD data that belong to the specific grains.</p>
+<p>Any pair of scalar grain properties can be combined in this way, provided the hue and saturation assignments are stated with the map.</p>
+<h2 id="19">The measurements inside a grain</h2>
+<p>A grain map hides the scatter within a grain by construction. To recover it, return to the measurements. The <code class="language-plaintext highlighter-rouge">grainId</code> property written into the map by <code class="language-plaintext highlighter-rouge">calcGrains</code> ties every measurement to a grain.</p>
 {% highlight matlab %}
-% let have a look at the biggest grain
-[~,id] = max(grains.area)
+% the largest grain
+[~,id] = max(grains.area);
 
-% and select the corresponding EBSD data
-ebsd_maxGrain = ebsd(ebsd.grainId == id);
+% the measurements inside it
+ebsdMaxGrain = ebsd(ebsd.grainId == id);
 
-% the previous command is equivalent to the more simpler
-ebsd_maxGrain = ebsd(grains(id));
+% the shorter form returns the same subset and displays its summary
+ebsdMaxGrain = ebsd(grains(id))
 {% endhighlight %}
 
 {% highlight plaintext %}
-id =
-   437
+ebsdMaxGrain = EBSD (y↑→x)
+ 
+ Phase  Orientations     Mineral   Color  Symmetry  Crystal reference frame
+     1   3193 (100%)  Forsterite  salmon       mmm                         
+ 
+ Properties: bands, bc, bs, error, mad, oldId, grainId
+ Scan unit : um
+ X × Y × Z : [16000 → 19350] × [1550 → 6800] × [0 → 0]
+ Normal vector: (0,0,1)
 {% endhighlight %}
-
+<p>Colouring the measurements with the same key puts them and the grain map on the same scale.</p>
 {% highlight matlab %}
-% compute the color out of the orientations
-color = ipfKey.orientation2color(ebsd_maxGrain.orientations);
+color = ipfKey.orientation2color(ebsdMaxGrain.orientations);
 
-% plot it
-plot(ebsd_maxGrain, color,'micronbar','off')
+plot(ebsdMaxGrain,color,'micronbar','off')
 
-% plot the grain boundary on top
 hold on
 plot(grains(id).boundary,'linewidth',2)
 hold off
-{% endhighlight %}
-<center>
-{% include inline_image.html file="GrainSpatialPlots_11.png" %}
-</center>
-<h2 id="17">Visualizing directions</h2>
-<p>We may also visualize directions by arrows placed at the center of the grains using the command <a href="grain2d.quiver.html"><code class="language-plaintext highlighter-rouge">quiver</code></a>.</p>
-{% highlight matlab %}
-% load some single phase data set
-plottingConvention.default('y↓→x')
-mtexdata csl
 
-% compute and plot grains
-[grains,ebsd] = calcGrains(ebsd,'minPixel',5);
-grains = smoothBoundary(grains,5);
-plot(grains,grains.meanOrientation,'micronbar','off','figSize','large','region',[50 300 100 250])
-
-% next we want to visualize the direction of the 100 axis
-dir = grains.meanOrientation * Miller(1,0,0,grains.CS);
-
-% the length of the vectors should depend on the grain diameter
-len = 0.25*grains.diameter;
-
-% arrows are plotted using the command quiver. We need to switch of auto
-% scaling of the arrow length
-hold on
-quiver(grains,len.*dir,'autoScale','off','color','black')
-hold off
+maxDeparture = max(angle(grains(id).meanOrientation,...
+  ebsdMaxGrain('indexed').orientations)) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = plottingConvention (y↓→x)
- 
-ebsd = EBSD (y↓→x)
- 
- Phase   Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    5 (0.0032%)  notIndexed          none                                   
-    -1  154107 (100%)        iron  LightSkyBlue      m-3m                         
- 
- Properties: ci, error, iq
- Scan unit : um
- X x Y x Z : [0 → 511] x [0 → 300] x [0 → 0]
- Normal vector: (0,0,1)
+maxDeparture =
+    6.0553
 {% endhighlight %}
-<center>
-{% include inline_image.html file="GrainSpatialPlots_12.png" %}
-</center>
-<h2 id="18">Labeling Grains</h2>
-<p>In the above example the vectors are centered at the centroids of the grains. We may also use the command <a href="grain2d.text.html"><code class="language-plaintext highlighter-rouge">text</code></a> to display an arbitrary text on top of each grain.</p>
-{% highlight matlab %}
-% plot them
-plot(grains,grains.meanOrientation,'micronbar','off','region',[50 300 100 250])
-
-% only the big grains
-big_grains = grains(grains.numPixel>100);
-
-% plot on top their ids
-text(big_grains,int2str(big_grains.id))
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="GrainSpatialPlots_13.png" %}
 </center>
+<p>Most of the 3193 measurements in the displayed summary have the same shade of blue. The narrow neck on the left is visibly lighter: its lattice is bent, and the printed maximum departure from the grain mean is 6 degrees. <a href="GrainOrientationParameters.html">Orientation Parameters</a> measures this variation rather than relying on the colour difference alone.</p>
+<p>Before reconstruction, the scattered white pixels had phase <code class="language-plaintext highlighter-rouge">notIndexed</code> because their diffraction patterns could not be indexed. The <code class="language-plaintext highlighter-rouge">'alpha'</code> closing absorbed them into the surrounding grain. In the returned map they carry the host phase but still have no orientation to draw. The white bay in the middle is different: the outline is one closed loop that bends around it, so the bay lies outside the grain. A neighbouring forsterite grain fills it and touches this grain from the outside.</p>
+<h2 id="22">Arrows on grains</h2>
+<p>A direction attached to each grain is often clearer as an arrow. <a href="grain2d.quiver.html"><code class="language-plaintext highlighter-rouge">quiver</code></a> places one at every grain centroid.</p>
+{% highlight matlab %}
+% load a single-phase data set
+plottingConvention.default('y↓→x');
+mtexdata csl silent
+
+[grains,ebsd] = calcGrains(ebsd,'minPixel',5);
+grains = smoothBoundary(grains,5);
+plot(grains,grains.meanOrientation,'micronbar','off','figSize','large',...
+  'region',[50 300 100 250],'ipfDirection',zvector)
+
+% where one representative of the [100] family points in each grain
+dir = grains.meanOrientation * Miller(1,0,0,grains.CS);
+
+hold on
+quiver(grains,dir,'color','black')
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainSpatialPlots_14.png" %}
+</center>
+<p>Each arrow is that [100] representative seen from above and is drawn one fifth of its grain's diameter long. In cubic iron, the [100]-type directions are symmetry-equivalent. This example therefore demonstrates the arrow geometry rather than identifying one unique material direction.</p>
+<p>Arrow length otherwise carries no information except projection. An arrow appears short when it points steeply out of the section plane. Pass <code class="language-plaintext highlighter-rouge">'noScaling'</code> when the vector magnitudes should set the lengths instead.</p>
+<p>An arrow pointing into the screen would be hidden below the map, so MTEX draws it tail first, ending at the grain centre. The small dot marks the centre to which it belongs.</p>
+<h2 id="24">Labelling grains</h2>
+<p> <a href="grain2d.text.html"><code class="language-plaintext highlighter-rouge">text</code></a> writes an arbitrary string at the same centroid. Labelling every grain is unreadable, so this is normally done for a selection. Here the grains larger than 100 pixels are labelled by id.</p>
+{% highlight matlab %}
+plot(grains,grains.meanOrientation,'micronbar','off',...
+  'region',[50 300 100 250],'ipfDirection',zvector)
+
+bigGrains = grains(grains.numPixel > 100);
+
+text(bigGrains,int2str(bigGrains.id))
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="GrainSpatialPlots_15.png" %}
+</center>
+<p>These ids are persistent grain identifiers, not necessarily positions in a subset. <a href="SelectingGrains.html">Selecting Grains</a> explains the distinction and uses them to recover individual grains and their measurements.</p>
+<h2 id="26">References</h2>
+<div>
+<ul>
+<li>G. Nolze and R. Hielscher, "Orientations - perfectly colored", <i>Journal of Applied Crystallography</i> 49 (2016), 1786-1802, <a href="https://doi.org/10.1107/S1600576716012942">doi:10.1107/S1600576716012942</a>. This paper explains IPF colour continuity, uniqueness, and why the key is part of the interpretation.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>P. Launeau, J.-L. Bouchez and K. Benn, "Shape preferred orientation of object populations: automatic analysis of digitized images", <i>Tectonophysics</i> 180 (1990), 201-211, <a href="https://doi.org/10.1016/0040-1951(90)90308-U">doi:10.1016/0040-1951(90)90308-U</a>.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a> distinguishes grain measurements made on a two-dimensional polished section from the three-dimensional grain size inferred from them.</li>
+</ul>
+</div>
+<h2 id="27">Next</h2>
+<p>Continue with <a href="SelectingGrains.html">Selecting Grains</a> to build subsets by id, phase, position, property, or orientation. Then <a href="ShapeParameters.html">Shape Parameters</a> and <a href="GrainOrientationParameters.html">Orientation Parameters</a> turn the spatial patterns introduced here into quantitative grain measurements.</p>
 </div>
 </body>
 </html>

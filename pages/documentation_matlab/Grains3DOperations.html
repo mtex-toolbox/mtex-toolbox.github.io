@@ -1,5 +1,5 @@
 ---
-title: "Operations with Three-Dimensional Grains"
+title: 'Operations with Three-Dimensional Grains'
 
 sidebar: documentation_sidebar
 permalink: Grains3DOperations.html
@@ -22,18 +22,22 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>The <a href="EBSD3Analysis.html">Three-Dimensional EBSD Analysis</a> overview distinguishes volume measurements from the <a href="grain3d.grain3d.html">grain3d</a> surface representation. This page shows how to cut those grains into a planar map, replace polygonal faces by triangles, and rotate geometry together with orientation.</p>
+<p>The examples use the synthetic tessellation introduced on the <a href="NeperInterface.html">Neper Interface</a> page. The preceding <a href="Grains3DProperties.html">Properties of Three-Dimensional Grains</a> page explains the volume, surface, and face properties used below.</p>
 <!--/introduction-->
-<p>On this page we explain some basic operations with three dimensional grains. Let us start by importing some example data set and plot it from a nice perspective</p>
+{% highlight matlab %}
+plottingConvention.default('y↑→x');
+{% endhighlight %}
+<h2 id="2">Load the example microstructure</h2>
 {% highlight matlab %}
 mtexdata NeperGrain3d
 
-% colorize by mean orientation
-plot(grains,grains.meanOrientation)
+plot(grains,grains.meanOrientation,'micronbar','off')
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain3d (y↓→x)
+grains = grain3d (y↑→x)
  
  Phase  Grains   Volume  Mineral  Symmetry  Crystal reference frame
      2    1000  1000000   Quartz       321        X||a*, Y||b, Z||c
@@ -42,28 +46,28 @@ grains = grain3d (y↓→x)
  
  Properties: meanRotation
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_01.png" %}
 </center>
-<h2 id="2">Slicing</h2>
-<p>We can extract from 3d grain data 2d grain data by slicing them along one or multiple planes. This is done using the command <a href="grain3d.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a>. This command requires two inputs to characterize a plane - the plane normal <code class="language-plaintext highlighter-rouge">N</code> and an arbitrary point <code class="language-plaintext highlighter-rouge">P0</code> within the plane.</p>
+<p>Each colour represents the mean orientation of one grain. The outer faces hide most of the grains inside the tessellated volume, which is why a planar section answers a different question from this surface view.</p>
+<h2 id="4">Cut one planar section</h2>
+<p>
+<a href="Grains3D.html">Three-Dimensional Grains</a> introduces planar sectioning and the <a href="grain2d.grain2d.html">grain2d</a> result. The direct form of <a href="grain3d.slice.html"><code class="language-plaintext highlighter-rouge">slice</code></a> used here specifies the plane by a normal <code class="language-plaintext highlighter-rouge">N</code> and any point <code class="language-plaintext highlighter-rouge">P0</code> in the plane.</p>
 {% highlight matlab %}
-% a point where the slice should pass through
+% Point through which the plane passes.
 P0 = vector3d(50,50,50);
 
-% the normal direction of the slice
+% Plane normal.
 N = vector3d(1,-1,1);
 
-% compute the slice
-grains1_10 = grains.slice(N,P0)
+grainSlice = grains.slice(N,P0)
 
-% visualize the slice
-plot(grains1_10,grains1_10.meanOrientation,'micronbar','off')
+plot(grainSlice,grainSlice.meanOrientation,'micronbar','off')
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains1_10 = grain2d (y↓→x)
+grainSlice = grain2d (y↑→x)
  
  Phase  Grains  Pixels  Mineral  Symmetry      Color
      2     183     183   Quartz       321  LightBlue
@@ -74,61 +78,73 @@ grains1_10 = grain2d (y↓→x)
  
  Properties: meanRotation, Id3d
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_02.png" %}
 </center>
-<p>We may adjust the <a href="plottingConvention.html">plottingConvention</a> such that the normal direction is perpendicular to the screen.</p>
+<p>The slice is still drawn in the three-dimensional scene. From the default viewpoint it is seen obliquely. A plotting convention with <code class="language-plaintext highlighter-rouge">N</code> pointing out of the screen gives the face-on view a microscope would have.</p>
 {% highlight matlab %}
-how2plot = plottingConvention;
-how2plot.outOfScreen = N;
-how2plot.north = zvector
-setCamera(how2plot)
+sectionView = plottingConvention;
+sectionView.outOfScreen = N;
+sectionView.north = zvector;
+setCamera(sectionView)
 {% endhighlight %}
-
-{% highlight plaintext %}
-how2plot = plottingConvention (xyz)
- 
-  outOfScreen: (4,-7,0)
-  north      : (0,0,1) 
-  east       : (7,4,0)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_03.png" %}
 </center>
-<p>We may use the exact same syntax to generate multiple slices.</p>
+<p>The polygons are cuts through grains, not complete grains. A grain that is large in this section may occupy little volume, and a large grain can be missed when the plane does not intersect it.</p>
+<p>The returned <code class="language-plaintext highlighter-rouge">Id3d</code> property records the array position of each parent grain in the original collection. Use it to recover the full polyhedra that produced selected section polygons.</p>
+{% highlight matlab %}
+parentIds = unique(grainSlice.Id3d);
+parentGrains = grains(parentIds);
+
+newMtexFigure('layout',[1,2]);
+plot(grainSlice,grainSlice.meanOrientation,'micronbar','off')
+setCamera(sectionView)
+mtexTitle('Planar sections')
+
+nextAxis
+plot(parentGrains,parentGrains.meanOrientation,'micronbar','off')
+setCamera(plottingConvention.default3D)
+mtexTitle('Parent grains')
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DOperations_04.png" %}
+</center>
+<p>The left panel contains only the section polygons. The right panel shows their parent polyhedra extending on both sides of the cutting plane.</p>
+<h2 id="8">Compare several parallel sections</h2>
+<p>Several slices require several calls to <code class="language-plaintext highlighter-rouge">slice</code>. Drawing horizontal cuts together shows how little of the volume any single section represents.</p>
 {% highlight matlab %}
 N = vector3d.Z;
 for k = 1:19:99
 
-  grainSlice = grains.slice(N, vector3d(0,0,k));
-
+  grainSlice = grains.slice(N,vector3d(0,0,k));
   plot(grainSlice,grainSlice.meanOrientation)
+  % Interactive selection cannot combine grain2d objects from different planes.
+  rmappdata(gca,'grains')
   hold on
 
 end
 hold off
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DOperations_05.png" %}
+</center>
+<p>Follow one colour from slice to slice. A grain that is large in one section may be absent from the next.</p>
+<h2 id="10">Triangulate polygonal faces</h2>
+<p>The faces of these grains are polygons with many vertices. Some computations are much faster on triangles. <a href="grain3d.triangulate.html"><code class="language-plaintext highlighter-rouge">triangulate</code></a> returns equivalent grains whose polygonal faces have been divided into triangles.</p>
+{% highlight matlab %}
+selectedGrains = grains(20:21);
+grainsTri = selectedGrains.triangulate
 
+full([sum(selectedGrains.numFaces), sum(grainsTri.numFaces)])
+
+plot(grainsTri,grainsTri.meanOrientation,'micronbar','off')
 setCamera(plottingConvention.default3D)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Warning: still can not concatenate grains on different slices 
-Warning: still can not concatenate grains on different slices 
-Warning: still can not concatenate grains on different slices
-{% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DOperations_04.png" %}
-</center>
-<h2 id="5">Triangulation</h2>
-<p>Some functions are much faster on triangulated meshes. Therefore you can triangulate your grains with the command <a href="grain3d.triangulate.html"><code class="language-plaintext highlighter-rouge">triangulate</code></a>.</p>
-{% highlight matlab %}
-grainsTri = grains(20:21).triangulate
-
-plot(grainsTri,grainsTri.meanOrientation)
-{% endhighlight %}
-
-{% highlight plaintext %}
-grainsTri = grain3d (y↓→x)
+grainsTri = grain3d (y↑→x)
  
  Phase  Grains  Volume  Mineral  Symmetry  Crystal reference frame
      2       2    2149   Quartz       321        X||a*, Y||b, Z||c
@@ -138,22 +154,87 @@ grainsTri = grain3d (y↓→x)
  Id   Phase   Pixels             meanRotation
  20       2        1   (305.6°,155.7°,215.9°)
  21       2        1   (330.4°,144.1°,350.9°)
+ 
+ans =
+    34   112
 {% endhighlight %}
-<center>
-{% include inline_image.html file="Grains3DOperations_05.png" %}
-</center>
-<h2 id="6">Rotation</h2>
-<p>Not surprisingly we can use the command <a href="grain3d.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> to apply any rotation to three dimensional grains. Note that a rotation changes the spatial coordinates as well as the orientation of the grains.</p>
-{% highlight matlab %}
-rot = rotation.byAxisAngle(vector3d(1,1,1),30*degree);
-grains_rot = rot * grains;   % or rotate(grains3,rot)
-
-% plotting
-plot(grains_rot,grains_rot.meanOrientation)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Grains3DOperations_06.png" %}
 </center>
+<p>The two grains have 34 polygonal faces before triangulation and 112 triangular faces afterwards. The displayed shape is unchanged because the new triangles cover the same boundary polygons. Triangulation changes the mesh representation, not the physical grains or their stored mean orientations.</p>
+<h2 id="12">Rotate geometry and orientation together</h2>
+<p> <a href="grain3d.rotate.html"><code class="language-plaintext highlighter-rouge">rotate</code></a> turns grains in space. By default it rotates both things a grain carries: its shape and its orientation. Rotating only one of them would describe a different specimen rather than the same specimen seen differently.</p>
+{% highlight matlab %}
+rot = rotation.byAxisAngle(vector3d(1,1,1),30*degree);
+grainsRotated = rot * grains;
+
+plot(grainsRotated,grainsRotated.meanOrientation,'micronbar','off')
+setCamera(plottingConvention.default3D)
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="Grains3DOperations_07.png" %}
+</center>
+<p>The shape has turned about the coordinate origin, and the colours change. An IPF colour says which crystal direction points along a fixed specimen axis. Every mean orientation now differs from its original by exactly the 30 degree rotation. A rigid rotation preserves the relation between the grains, not their relation to the coordinate axes.</p>
+<p>The method form provides a <code class="language-plaintext highlighter-rouge">'center'</code> option when the spatial rotation should use a point other than the origin.</p>
+{% highlight matlab %}
+rotationCenter = grains.midPoint;
+grainsAboutCenter = rotate(grains,rot,'center',rotationCenter);
+{% endhighlight %}
+<h2 id="14">Rotate only one part of the data</h2>
+<p>Two flags deliberately decouple geometry from orientation. The names say which values are kept fixed, not which values are rotated.</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>Flag</p>
+         </td>
+         <td>
+               <p>Geometry</p>
+         </td>
+         <td>
+               <p>Mean orientation</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'keepEuler'</tt>
+               </p>
+         </td>
+         <td>
+               <p>rotated</p>
+         </td>
+         <td>
+               <p>unchanged</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <tt>'keepXY'</tt>
+               </p>
+         </td>
+         <td>
+               <p>unchanged</p>
+         </td>
+         <td>
+               <p>rotated</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<p>For example, the first command below turns the vertices while retaining the orientation values. The second changes the orientations while retaining the vertices.</p>
+{% highlight matlab %}
+geometryOnly = rotate(grains,rot,'keepEuler');
+orientationOnly = rotate(grains,rot,'keepXY');
+{% endhighlight %}
+<p>These flags are useful when geometry and orientation require separate corrections. They do not represent a rigid rotation of the whole specimen. The <code class="language-plaintext highlighter-rouge">'center'</code> option affects only a spatial rotation, so it has no effect when <code class="language-plaintext highlighter-rouge">'keepXY'</code> leaves the geometry unchanged.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>R. Quey, P. R. Dawson and F. Barbe, <a href="https://doi.org/10.1016/j.cma.2011.01.002">Large-scale 3D random polycrystals for the finite element method: Generation, meshing and remeshing</a>, <i>Computer Methods in Applied Mechanics and Engineering</i> 200 (2011), 1729--1745, describes the synthetic polycrystal construction used for the example tessellation.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

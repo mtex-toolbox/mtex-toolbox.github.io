@@ -1,5 +1,5 @@
 ---
-title: "Interpolating EBSD Data"
+title: 'Regridding and Interpolating EBSD Data'
 
 sidebar: documentation_sidebar
 permalink: EBSDInter.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Interpolating EBSD Data</title>
+<title>Regridding and Interpolating EBSD Data</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_EBSDInter.m">
 </head>
@@ -23,39 +23,28 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In the section <a href="EBSDDenoising.html">Denoising</a> and <a href="EBSDFilling.html">Filling Missing Data</a> we have discussed how to work with noisy EBSD data the contained non indexed pixels. Hereby, we made the assumption that the grid before and after the operations is the same.</p>
-<p>In this section we explain how to interpolate an EBSD map at positions that do not belong to the grid. Let us consider a simple example</p>
+<p>An EBSD map stores one measurement at each acquired position. <a href="EBSDDenoising.html">Denoising</a> changes noisy orientations without moving those positions. <a href="EBSDFilling.html">Filling Missing Data</a> supplies values at missing positions while leaving the measurement grid unchanged.</p>
+<p>This page considers the other operation: reading the map at positions that were not measured, then sampling it on a different grid. MTEX uses nearest neighbours for this operation. It does not average orientations.</p>
+<p>The examples assume basic <a href="EBSDSelect.html">EBSD selection</a> and the distinction between a list and a <a href="EBSDGrid.html">gridded EBSD map</a>.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-mtexdata twins;
-
-[grains, ebsd] = calcGrains(ebsd);
-
-% this command here is important :)
-ebsd = ebsd.project2FundamentalRegion(grains);
-
-plot(ebsd,ebsd.orientations)
+mtexdata twins silent
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0     46 (0.2%)  notIndexed          none                                   
-     1  22833 (100%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 50] x [0 → 41] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :137 x 167
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDInter_01.png" %}
-</center>
-<p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> interpolates the orientation at arbitrary coordinates <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code>. It does not require the data to be on a grid - a plain <a href="EBSD.EBSD.html">EBSD</a>, a phase subset and a rotated or sheared map work just as well - but our map is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> anyway, since that is how it was imported, see <a href="EBSDGrid.html">Square and Hex Grids</a>.</p>
+<h2 id="2">Reading the Map at One Point</h2>
+<p> <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> evaluates a map at arbitrary coordinates. It works with a plain <a href="EBSD.EBSD.html">EBSD</a>, a phase subset, and a rotated or sheared map. The imported map in this example happens to be an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a>.</p>
 {% highlight matlab %}
 x = 30.5; y = 5.5;
+
+plot(ebsd,ebsd.orientations)
+hold on
+plot(x,y,'ko','MarkerFaceColor','w','MarkerSize',7)
+hold off
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDInter_01.png" %}
+</center>
+<p>The marker identifies the requested position. It lies between the centres of the coloured source pixels, so the result must be sampled from one of them.</p>
+{% highlight matlab %}
 e1 = interp(ebsd,x,y)
 {% endhighlight %}
 
@@ -65,13 +54,15 @@ e1 = EBSD (y↑→x)
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
- Id   Phase              orientation   bands    bc    bs   error   mad   oldId   grainId
-  1       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4    3109       110
+ Id   Phase              orientation   bands    bc    bs   error   mad   oldId
+  1       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4    3109
  Scan unit : um
- X x Y x Z : [30 → 30] x [5.5 → 5.5] x [0 → 0]
+ X × Y × Z : [30 → 30] × [5.5 → 5.5] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>By default the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> performs inverse distance interpolation. This is different to</p>
+<p>The summary shows a new, one-entry <a href="EBSD.EBSD.html">EBSD</a> variable at the requested position. MTEX finds the nearest source measurement and copies its phase, orientation, and per-pixel properties.</p>
+<p>The query is accepted only when the nearest measurement is no farther away than the furthest corner of <code class="language-plaintext highlighter-rouge">ebsd.unitCell</code>. This circular distance cutoff is not a polygon-containment test. A point beyond that reach returns as <code class="language-plaintext highlighter-rouge">notIndexed</code> instead of being extrapolated, whether it is outside the map or sufficiently far inside a hole.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'xy'</code> selector also finds the nearest source measurement.</p>
 {% highlight matlab %}
 e2 = ebsd('xy',x,y)
 {% endhighlight %}
@@ -82,13 +73,13 @@ e2 = EBSD (y↑→x)
  Phase  Orientations    Mineral         Color  Symmetry  Crystal reference frame
      1      1 (100%)  Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
-    Id   Phase              orientation   bands    bc    bs   error   mad   oldId   grainId
- 13993       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4    3109       110
+    Id   Phase              orientation   bands    bc    bs   error   mad   oldId
+ 13993       1   (162.8°,112.1°,186.1°)      10   160   255       0   0.4    3109
  Scan unit : um
- X x Y x Z : [31 → 31] x [5.4 → 5.4] x [0 → 0]
+ X × Y × Z : [31 → 31] × [5.4 → 5.4] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>which returns the nearest neighbor EBSD measurement. Lets have a look at the difference</p>
+<p>For this point, both commands therefore report the same orientation.</p>
 {% highlight matlab %}
 angle(e1.orientations,e2.orientations)./degree
 {% endhighlight %}
@@ -97,18 +88,19 @@ angle(e1.orientations,e2.orientations)./degree
 ans =
      0
 {% endhighlight %}
-<h2 id="5">Change of the measurement grid</h2>
-<p>The command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> can be used to evaluate the EBSD map on a different grid, which might have higher or lower resolution or might even be rotated. Lets demonstrate this</p>
+<p>The zero-degree result confirms the match. The two EBSD summaries expose the important difference: <code class="language-plaintext highlighter-rouge">e2</code> retains the source position and id, whereas <code class="language-plaintext highlighter-rouge">e1</code> sits at the requested position and receives a new id.</p>
+<p>With a list of query positions, <code class="language-plaintext highlighter-rouge">interp</code> returns one new entry per query in the same order. That behavior makes resampling possible; <code class="language-plaintext highlighter-rouge">'xy'</code> remains a selector for original measurements.</p>
+<h2 id="7">Resampling onto a Different Grid</h2>
+<p>A unit cell describes the shape and scale of a grid. <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> derives its cell-to-cell translations, builds a lattice over the map extent, and calls <code class="language-plaintext highlighter-rouge">interp</code> at the new positions. Here the unit cell is twice as large and rotated by 45 degrees.</p>
 {% highlight matlab %}
-% unit cell of twice the size, rotated by 45 degree
+% unit cell of twice the size, rotated by 45 degrees
 uC = rotate(2*ebsd.unitCell,45*degree);
 
-% define the EBSD data set on this new grid
+% resample the map on the new lattice
 ebsdNewGrid = gridify(ebsd,'unitCell',uC)
 
-% plot the regridded EBSD data set
+% plot only cells that received source data
 plot(ebsdNewGrid('indexed'),ebsdNewGrid('indexed').orientations)
-
 xlim(ebsd.extent(1:2)), ylim(ebsd.extent(3:4))
 {% endhighlight %}
 
@@ -119,40 +111,73 @@ ebsdNewGrid = EBSDsquare (y↑→x, y↑→x)
      0    6059 (51%)  notIndexed          none                                   
      1    5713 (49%)   Magnesium  LightSkyBlue     6/mmm        X||a*, Y||b, Z||c
  
- Properties: bands, bc, bs, error, mad, oldId, grainId
+ Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [-21 → 70] x [-25 → 66] x [0 → 0]
+ X × Y × Z : [-21 → 70] × [-25 → 66] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :108 x 109
+ Square grid  :108 × 109
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDInter_02.png" %}
 </center>
-<p>Note, that we have not rotated the EBSD data but only the grid. All orientations as well as the position of all grains remains unchanged.</p>
-<p>The new grid is generated from the cell to cell translations of the given unit cell, i.e. it is rotated by 45 degree as well. Since such a rotated grid can not fill a rectangular matrix, the corners of <code class="language-plaintext highlighter-rouge">ebsdNewGrid</code> stick out of the map and contain no data - this is why we have restricted the plot above to the indexed measurements.</p>
-<p>Another example is the change from a square to an hexagonal grid or vice versa. In this case the command <a href="EBSD.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> is implicitly called by the command <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a>. In order to demonstrate this functionality we start by EBSD data on a hex grid</p>
+<p>Compare this figure with the first map. The orientation regions occupy the same specimen positions, but their pixels are now coarser and tilted. The orientations themselves have not been rotated. The specimen's grains also occupy the same physical regions; only their rasterized outlines have changed.</p>
+<p>The summary reports a 108 by 109 matrix. A tilted lattice needs a larger rectangular matrix to cover the source extent, so its corner cells project beyond the map. Fewer than half of the cells are indexed, which is why the plot excludes <code class="language-plaintext highlighter-rouge">notIndexed</code> cells.</p>
+<h2 id="9">From a Hexagonal to a Square Grid</h2>
+<p>A custom unit cell can also change the grid type. The ferrite data was measured on a hexagonal grid.</p>
 {% highlight matlab %}
 plottingConvention.default('y↓→x');
 mtexdata ferrite silent
+
+hexGridSize = size(ebsd)
+
 plot(ebsd(1:50,1:100),ebsd(1:50,1:100).orientations)
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+hexGridSize =
+   270   234
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDInter_03.png" %}
 </center>
-<p>and resample the data on a square grid. To do so we first define a smaller square unit cell corresponding to the hexagonal unit cell</p>
+<p>The staggered pixel rows reveal the hexagonal sampling lattice. Their orientations are measurements; the next figure only redraws those values on a different lattice.</p>
+<p>A square cell with half the measurement spacing gives a drawing grid fine enough to distinguish neighbouring source positions in this example. This smaller cell does not improve the map's spatial resolution.</p>
 {% highlight matlab %}
 % define a square unit cell
-squnitCell = ebsd.dPos / 4 * vector3d([-1 -1 1 1],[-1 1 1 -1],0).';
+squnitCell = ebsd.dPos / 4 * ...
+  vector3d([-1 -1 1 1],[-1 1 1 -1],0).';
 
-% use the square unit cell for gridify
-
+% resample on the square lattice
 ebsdS = ebsd.gridify('unitCell',squnitCell);
+
+squareGridSize = size(ebsdS)
 
 plot(ebsdS(1:150,1:350),ebsdS(1:150,1:350).orientations)
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+squareGridSize =
+   808   809
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDInter_04.png" %}
 </center>
+<p>The result is an <a href="EBSDsquare.EBSDsquare.html">EBSDsquare</a> with 808 by 809 cells in place of the 270 by 234 hexagonal cells, about ten times as many. The stepped colour regions show that each new cell repeats its nearest hexagonal measurement. No orientation was invented on the way.</p>
+<h2 id="12">What Regridding Does Not Change</h2>
+<p>Resampling changes the array size and pixel outlines, not the acquisition step or the spatial resolution of the experiment. Repeated cells are not independent measurements. Keep the original map for quantitative counts, orientation statistics, and grain-size measurements unless the analysis explicitly requires a new raster.</p>
+<p>Every copied quality value still describes the original diffraction pattern. It is not evidence that a pattern was acquired at the new cell. Use <a href="EBSDFilling.html">Filling Missing Data</a> to recover orientations at missing positions, or <a href="EBSDDenoising.html">Denoising</a> to reduce orientation noise. Neither task is performed by <code class="language-plaintext highlighter-rouge">interp</code>.</p>
+<h2 id="13">Further Reading</h2>
+<div>
+<ul>
+<li>R. C. Staunton, <a href="https://doi.org/10.1016/S1076-5670(08)70188-5"><i>Hexagonal Sampling in Image Processing</i></a>, Advances in Imaging and Electron Physics 107, 231--307 (1999), reviews the geometric consequences of converting between hexagonal and square sampling lattices.</li>
+<li>F. J. Humphreys, <a href="https://doi.org/10.1023/A:1017973432592"><i>Review: Grain and subgrain characterisation by electron backscatter diffraction</i></a>, Journal of Materials Science 36, 3833--3854 (2001), quantifies how EBSD step size limits grain-size measurements.</li>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a>, <i>Microbeam analysis - Electron backscatter diffraction - Measurement of average grain size</i>, defines EBSD grain-size measurement on two-dimensional sections. Consult it before using a resampled raster for grain statistics.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>
+<a href="EBSD2ODF.html">ODF Estimation</a> turns measured map orientations into an orientation distribution function. Use the measured map rather than a densified copy so repeated cells do not acquire extra statistical weight.</p>
 </div>
 </body>
 </html>

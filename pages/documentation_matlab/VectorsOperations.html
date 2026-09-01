@@ -1,5 +1,5 @@
 ---
-title: "Vector Operations"
+title: 'Vector Operations'
 
 sidebar: documentation_sidebar
 permalink: VectorsOperations.html
@@ -23,12 +23,13 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Directions are added, scaled and multiplied like ordinary numbers, and every operation works on a whole list of directions at once. That is the reason a loop over vectors is almost never needed in MTEX.</p>
+<p>Three-dimensional vectors can be added, scaled, compared, and combined. Every operation works on a whole list at once, so a loop over vectors is usually unnecessary in MTEX.</p>
+<p>This page assumes the construction methods from <a href="VectorDefinition.html">Defining Three Dimensional Vectors</a>. A reference frame is the coordinate system in which the vectors are expressed. The plotting convention below only lays that frame out on screen; it does not change the vectors.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 {% endhighlight %}
-<h2 id="2">Building New Directions</h2>
-<p>Sums and multiples of the specimen axes <code class="language-plaintext highlighter-rouge">vector3d.X</code>, <code class="language-plaintext highlighter-rouge">vector3d.Y</code> and <code class="language-plaintext highlighter-rouge">vector3d.Z</code> are directions again.</p>
+<h2 id="2">Building New Vectors</h2>
+<p>Sums and multiples of the specimen axes <code class="language-plaintext highlighter-rouge">vector3d.X</code>, <code class="language-plaintext highlighter-rouge">vector3d.Y</code>, and <code class="language-plaintext highlighter-rouge">vector3d.Z</code> are <code class="language-plaintext highlighter-rouge">vector3d</code> objects again.</p>
 {% highlight matlab %}
 v = vector3d.X + 2*vector3d.Y
 {% endhighlight %}
@@ -38,7 +39,7 @@ v = vector3d (y↑→x)
   x y z
   1 2 0
 {% endhighlight %}
-<p> <a href="vector3d.plus.html"><code class="language-plaintext highlighter-rouge">+</code></a>, <a href="vector3d.minus.html"><code class="language-plaintext highlighter-rouge">-</code></a>, <a href="vector3d.times.html"><code class="language-plaintext highlighter-rouge">*</code></a>, the inner product <a href="vector3d.dot.html"><code class="language-plaintext highlighter-rouge">dot</code></a> and the cross product <a href="vector3d.cross.html"><code class="language-plaintext highlighter-rouge">cross</code></a> all behave as in linear algebra.</p>
+<p> <a href="vector3d.plus.html"><code class="language-plaintext highlighter-rouge">+</code></a> and <a href="vector3d.minus.html"><code class="language-plaintext highlighter-rouge">-</code></a> add or subtract Cartesian components. <a href="vector3d.mtimes.html"><code class="language-plaintext highlighter-rouge">*</code></a> scales a vector by a scalar. The inner product <a href="vector3d.dot.html"><code class="language-plaintext highlighter-rouge">dot</code></a> and cross product <a href="vector3d.cross.html"><code class="language-plaintext highlighter-rouge">cross</code></a> have their usual linear-algebra meanings. The order of the cross product matters.</p>
 {% highlight matlab %}
 u = dot(v,vector3d.Y) * vector3d.Y + 2 * cross(v,vector3d.Z)
 {% endhighlight %}
@@ -48,8 +49,20 @@ u = vector3d (y↑→x)
   x y z
   4 0 0
 {% endhighlight %}
-<h2 id="4">Angles</h2>
-<p>The <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> between two directions is a central measurement in texture analysis - for example, how far a lattice-plane normal is tilted away from the sheet normal. The angle between complete crystal orientations is a different operation, introduced in the <a href="MisorientationTheory.html">misorientation chapter</a>.</p>
+<p>The first term is \(2\vec Y\), while the second is \(4\vec X-2\vec Y\). Their Y components cancel, leaving \(\vec u=4\vec X\). The arrows show the original vector in the XY plane and the result along positive X.</p>
+{% highlight matlab %}
+newMtexFigure('newFigure');
+arrow3d(v,'label','v');
+hold on
+arrow3d(u,'label','u');
+hold off
+axis off;
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="VectorsOperations_01.png" %}
+</center>
+<h2 id="5">Angles</h2>
+<p>The <a href="vector3d.angle.html"><code class="language-plaintext highlighter-rouge">angle</code></a> between two directions is a central measurement in texture analysis. One example is the tilt of a lattice-plane normal away from the sheet normal. The angle between complete crystal orientations is a different operation, introduced in <a href="MisorientationTheory.html">Misorientations</a>.</p>
 {% highlight matlab %}
 angle(vector3d.X,vector3d.Y) ./ degree
 {% endhighlight %}
@@ -58,9 +71,9 @@ angle(vector3d.X,vector3d.Y) ./ degree
 ans =
     90
 {% endhighlight %}
-<p>The result is in radians, hence the division by <code class="language-plaintext highlighter-rouge">degree</code>, and it lies between \(0\) and \(180^\circ\). If the two directions are axes rather than directions the answer is never obtuse, which is the subject of <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
-<h2 id="6">Length</h2>
-<p> <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> is the length of a direction and <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a> divides it out.</p>
+<p>MTEX returns angles in radians, hence the division by <code class="language-plaintext highlighter-rouge">degree</code>. The angle between directed vectors lies between \(0\) and \(180^\circ\). If the data represent axes instead, the answer is never obtuse; see <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
+<h2 id="7">Length and Normalization</h2>
+<p> <a href="vector3d.norm.html"><code class="language-plaintext highlighter-rouge">norm</code></a> returns the length of each vector. <a href="vector3d.normalize.html"><code class="language-plaintext highlighter-rouge">normalize</code></a> divides each vector by its length.</p>
 {% highlight matlab %}
 norm(u)
 {% endhighlight %}
@@ -79,7 +92,7 @@ u = vector3d (y↑→x)
   x y z
   1 0 0
 {% endhighlight %}
-<p>Normalising changes nothing about where the direction points, so it changes nothing about a spherical plot either. It matters when the numbers themselves are used, for instance because <code class="language-plaintext highlighter-rouge">dot</code> of two unit vectors is the cosine of the angle between them.</p>
+<p>Normalization does not change where a vector points, so it does not move its position in a spherical plot. It matters in calculations: the <code class="language-plaintext highlighter-rouge">dot</code> of two unit vectors is the cosine of their angle.</p>
 {% highlight matlab %}
 dot(normalize(v),vector3d.Y)
 {% endhighlight %}
@@ -88,125 +101,9 @@ dot(normalize(v),vector3d.Y)
 ans =
     0.8944
 {% endhighlight %}
-<h2 id="9">The Available Operations</h2>
-<p>
-   <table class="usertable">
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.angle.html">angle(v1,v2)</a>
-               </p>
-         </td>
-         <td>
-               <p>angle between two directions</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.dot.html">dot(v1,v2)</a>
-               </p>
-         </td>
-         <td>
-               <p>inner product</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.cross.html">cross(v1,v2)</a>
-               </p>
-         </td>
-         <td>
-               <p>cross product</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.norm.html">norm(v)</a>
-               </p>
-         </td>
-         <td>
-               <p>length</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.normalize.html">normalize(v)</a>
-               </p>
-         </td>
-         <td>
-               <p>length scaled to one</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.orthProj.html">orthProj(v,N)</a>
-               </p>
-         </td>
-         <td>
-               <p>component orthogonal to <tt>N</tt>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.perp.html">perp(v)</a>
-               </p>
-         </td>
-         <td>
-               <p>a direction orthogonal to all of <tt>v</tt>
-               </p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.sum.html">sum(v)</a>
-               </p>
-         </td>
-         <td>
-               <p>sum over the list</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.mean.html">mean(v)</a>
-               </p>
-         </td>
-         <td>
-               <p>mean direction of the list</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.polar.html">polar(v)</a>
-               </p>
-         </td>
-         <td>
-               <p>the two spherical angles</p>
-         </td>
-      </tr>
-      <tr>
-         <td>
-               <p>
-                  <a href="vector3d.rotate.html">rotate(v,rot)</a>
-               </p>
-         </td>
-         <td>
-               <p>turn by a rotation</p>
-         </td>
-      </tr>
-   </table>
-</p>
-<h2 id="10">Lists of Directions</h2>
-<p>Square brackets join directions into one list, and the entries are read back by their index.</p>
+<p>A zero vector has no direction. Consequently, <code class="language-plaintext highlighter-rouge">normalize(vector3d(0,0,0))</code> has undefined, NaN components.</p>
+<h2 id="11">Lists of Vectors</h2>
+<p>Square brackets join vectors into one list, and an index selects an entry. The general rules are covered in <a href="ListsAndIndexing.html">Lists and Indexing</a>.</p>
 {% highlight matlab %}
 w = [v,u];
 w(1)
@@ -217,7 +114,7 @@ ans = vector3d (y↑→x)
   x y z
   1 2 0
 {% endhighlight %}
-<p>Arithmetic on a list is done entry by entry. Adding a single direction to a list of five adds it to each of them, so an operation that looks like it needs a loop usually does not.</p>
+<p>Arithmetic on a list is entry by entry. Adding the single vector <code class="language-plaintext highlighter-rouge">v</code> to the two-entry list <code class="language-plaintext highlighter-rouge">w</code> adds it to both entries.</p>
 {% highlight matlab %}
 w = w + v
 {% endhighlight %}
@@ -229,7 +126,9 @@ w = vector3d (y↑→x)
   2 4 0
   2 2 0
 {% endhighlight %}
-<p>Lists are indexed as numeric arrays are, by position or by a logical condition. Here a file of a thousand directions is loaded and only those with a polar angle below \(60^\circ\) are kept, see <a href="ListsAndIndexing.html">Lists and Indexing</a>.</p>
+<p>When both inputs are lists of the same size, binary operations pair their entries by position. Use <a href="vector3d.angle_outer.html"><code class="language-plaintext highlighter-rouge">angle_outer</code></a> or <a href="vector3d.dot_outer.html"><code class="language-plaintext highlighter-rouge">dot_outer</code></a> to compare every entry of one list with every entry of another.</p>
+<h2 id="14">Selecting from a List</h2>
+<p>The following file contains directions stored as polar and azimuth angles. Its displayed summary confirms that the resulting <code class="language-plaintext highlighter-rouge">vector3d</code> list has 1,000 entries.</p>
 {% highlight matlab %}
 fname = fullfile(mtexDataPath,'vector3d','vectors.txt');
 v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'})
@@ -239,28 +138,264 @@ v = vector3d.load(fname,'ColumnNames',{'polar angle','azimuth angle'})
 v = vector3d (y↑→x)
  size: 1000 × 1
 {% endhighlight %}
-
+<p>A logical condition retains only directions with a polar angle below \(60^\circ\).</p>
 {% highlight matlab %}
-scatter(v(v.theta < 60*degree),'grid','on')
+selected = v.theta < 60*degree;
+scatter(v(selected),'grid');
 {% endhighlight %}
-<center>
-{% include inline_image.html file="VectorsOperations_01.png" %}
+<center class="mtex-figure">
+{% include inline_image.html file="VectorsOperations_02.png" %}
 </center>
-<p>The outer ring of the projection is empty now. It held the 236 directions that lie more than \(60^\circ\) away from the Z axis.</p>
-<h2 id="15">Averaging a List</h2>
-<p> <a href="vector3d.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> averages the coordinates entry by entry, so it points into the middle of the list.</p>
+<p>The empty outer ring shows that every plotted direction lies within \(60^\circ\) of the Z axis. Count the omitted entries directly.</p>
 {% highlight matlab %}
-mean(v)
+numOmitted = sum(~selected)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = vector3d (y↑→x)
+numOmitted =
+   236
+{% endhighlight %}
+<p>Thus, 236 of the 1,000 directions lie at least \(60^\circ\) away from the Z axis.</p>
+<h2 id="18">Averaging a List</h2>
+<p> <a href="vector3d.mean.html"><code class="language-plaintext highlighter-rouge">mean</code></a> averages the Cartesian components. The result is a mean vector, which generally is not a unit vector.</p>
+{% highlight matlab %}
+m = mean(v)
+{% endhighlight %}
+
+{% highlight plaintext %}
+m = vector3d (y↑→x)
        x      y      z
   -0.137  0.198  0.677
 {% endhighlight %}
-<p>Its length says how tightly the list is clustered: unit directions all pointing the same way average to length one, a list spread over the sphere to something much shorter - here 0.72. Directions pointing opposite ways cancel outright. For axes, where <code class="language-plaintext highlighter-rouge">v</code> and <code class="language-plaintext highlighter-rouge">-v</code> mean the same thing, that cancellation is wrong and the mean has to be taken with the <code class="language-plaintext highlighter-rouge">'antipodal'</code> flag, see <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
-<h2 id="17">Next</h2>
-<p>Turning a direction into another one is the job of a <a href="Rotations.html">rotation</a>, and <a href="VectorsDensityEstimation.html">Density Estimation</a> replaces a long list of directions by a smooth function on the sphere.</p>
+<p>Normalizing it gives the mean direction.</p>
+{% highlight matlab %}
+meanDirection = normalize(m)
+{% endhighlight %}
+
+{% highlight plaintext %}
+meanDirection = vector3d (y↑→x)
+      x     y     z
+  -0.19 0.276 0.942
+{% endhighlight %}
+<p>Because every input vector has unit length, the length of <code class="language-plaintext highlighter-rouge">m</code> is the mean resultant length.</p>
+{% highlight matlab %}
+meanResultantLength = norm(m)
+{% endhighlight %}
+
+{% highlight plaintext %}
+meanResultantLength =
+    0.7186
+{% endhighlight %}
+<p>Here it is about 0.719. Identical unit directions give one; dispersed or mutually cancelling directions give a shorter result. Normalize unequal input vectors first when this directional statistic is intended.</p>
+<p>Opposite directed observations cancel. For axes, where <code class="language-plaintext highlighter-rouge">v</code> and <code class="language-plaintext highlighter-rouge">-v</code> mean the same thing, use <code class="language-plaintext highlighter-rouge">mean(v,'antipodal')</code> instead; see <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a>.</p>
+<h2 id="22">Operations at a Glance</h2>
+<p>These methods operate elementwise unless their description says otherwise.</p>
+<p>
+   <table class="usertable">
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.angle.html">
+                     <tt>angle(v1,v2)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>pointwise angle between vectors</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.angle_outer.html">
+                     <tt>angle_outer(v1,v2)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>all pairwise angles</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.dot.html">
+                     <tt>dot(v1,v2)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>pointwise inner product</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.dot_outer.html">
+                     <tt>dot_outer(v1,v2)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>all pairwise inner products</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.cross.html">
+                     <tt>cross(v1,v2)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>pointwise cross product</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.mtimes.html">
+                     <tt>a*v</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>multiplication by a scalar</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.times.html">
+                     <tt>a.*v</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>componentwise scaling or coordinate product</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.norm.html">
+                     <tt>norm(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>length of every vector</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.normalize.html">
+                     <tt>normalize(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>length scaled to one</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.orth.html">
+                     <tt>orth(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>an arbitrary orthogonal unit vector</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.orthProj.html">
+                     <tt>orthProj(v,N)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>component orthogonal to <tt>N</tt>
+               </p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.perp.html">
+                     <tt>perp(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>best-fit direction orthogonal to a list</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.sum.html">
+                     <tt>sum(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>componentwise sum over a list</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.mean.html">
+                     <tt>mean(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>mean vector, or mean axis for antipodal data</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.polar.html">
+                     <tt>polar(v)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>polar angle, azimuth, and length</p>
+         </td>
+      </tr>
+      <tr>
+         <td>
+               <p>
+                  <a href="vector3d.rotate.html">
+                     <tt>rotate(v,rot)</tt>
+                  </a>
+               </p>
+         </td>
+         <td>
+               <p>turn by a rotation</p>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="23">Further Reading</h2>
+<div>
+<ul>
+<li>N. I. Fisher, T. Lewis, and B. J. J. Embleton, <a href="https://doi.org/10.1017/CBO9780511623059.004">Descriptive and ancillary methods, and sampling problems</a>, in <i>Statistical Analysis of Spherical Data</i>, Cambridge University Press, 1987, treats mean directions, resultant lengths, and the difference between vectorial and axial data.</li>
+</ul>
+</div>
+<h2 id="24">Next</h2>
+<p>
+<a href="VectorsDensityEstimation.html">Density Estimation</a> replaces a long list of directions by a smooth function on the sphere. Read <a href="VectorsAxes.html">Axes and Antipodal Symmetry</a> before analysing data whose two signs are physically equivalent. Turning a direction into another one is the job of a <a href="Rotations.html">rotation</a>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Dislocations"
+title: 'Dislocation Systems'
 
 sidebar: documentation_sidebar
 permalink: DislocationSystems.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Dislocations</title>
+<title>Dislocation Systems</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_DislocationSystems.m">
 </head>
@@ -22,289 +22,166 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Plastic deformation in a crystal is carried by dislocations moving through its regular atomic lattice. A <b>dislocation</b> is a line defect rather than a microscopic displacement by itself.</p>
+<p>Two vectors describe its geometry. The Burgers vector \(\mathbf b\) gives the lattice translation accumulated around the defect. The line vector \(\mathbf l\) gives the direction of the defect line.</p>
+<p>MTEX represents a pure edge or screw geometry with a <a href="dislocationSystem.dislocationSystem.html"><code class="language-plaintext highlighter-rouge">dislocationSystem</code></a>. This page constructs both types and then prepares the systems used to estimate geometrically necessary dislocations from an EBSD map.</p>
 <!--/introduction-->
-<p>Dislocation are microscopic displacements within the regular atom lattice of a crystalline material usually as a result of plastic deformation. Dislocations are described by a Burgers vector describing the direction of the atomic shift and a line vector describing the direction of the displacements within the material. One distinguishes two cases:</p>
-<h2 id="2">Edge Dislocations</h2>
-<p>Here the directions of the atomic shifts are orthogonal to the direction the displacements spread within the material. In order to define a edge dislocation we proceed as follows</p>
+<h2 id="1">Edge dislocations</h2>
+<p>In a pure edge dislocation, the Burgers vector is perpendicular to the line vector. Start with a cubic crystal frame and two crystal directions.</p>
 {% highlight matlab %}
-% define a crystal symmetry
 cs = crystalSymmetry('432');
-
-% define a burgers vector in crystal coordinates
-b = Miller(1,1,0,cs,'uvw')
-
-% define a line vector in crystal coordinates
-l = Miller(1,-1,-2,cs,'uvw')
-
-% setup the dislocation system
-dS = dislocationSystem(b,l)
+bEdge = Miller(1,1,0,cs,'uvw')
+lEdge = Miller(1,-1,-2,cs,'uvw')
 {% endhighlight %}
 
 {% highlight plaintext %}
-b = Miller (432)
+bEdge = Miller (432)
   u v w
   1 1 0
  
-l = Miller (432)
+lEdge = Miller (432)
   u  v  w
   1 -1 -2
- 
-dS = dislocationSystem
+{% endhighlight %}
+<p>The constructor checks that the two vectors are perpendicular or parallel. A general mixed dislocation cannot be entered with this constructor.</p>
+{% highlight matlab %}
+dSEdge = dislocationSystem(bEdge,lEdge)
+{% endhighlight %}
+
+{% highlight plaintext %}
+dSEdge = dislocationSystem
  symmetry: 432
- edge dislocations : 1 x 1
+ edge dislocations : 1 × 1
  Burgers vector  line vector  energy  length
       [1  1  0]    [1 -1 -2]       1    1.41
 {% endhighlight %}
-<p>The grey arrow is the line vector, the direction the dislocation runs along, and the red arrow is the Burgers vector, the shift the lattice suffers across it. For an edge dislocation the two are at right angles.</p>
+<p>The grey arrow is the line vector, along which the defect runs. The red arrow is the Burgers vector, which gives the lattice shift across it.</p>
 {% highlight matlab %}
-arrow3d(1.3*normalize(vector3d(l)),'faceColor',[.45 .45 .45])
+arrow3d(1.3*normalize(vector3d(lEdge)), ...
+  'faceColor',[0.45 0.45 0.45])
 hold on
-arrow3d(0.9*normalize(vector3d(b)),'faceColor','red')
+arrow3d(0.9*normalize(vector3d(bEdge)),'faceColor','red')
 hold off
 axis off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="DislocationSystems_01.png" %}
 </center>
-<h2 id="4">Screw Dislocations</h2>
-<p>Screw dislocations are characterized by the fact that Burgers vector and line vector are parallel to each other.</p>
+<p>Notice that the two arrows meet at a right angle. This orthogonality is the defining geometric feature of the edge system.</p>
+<h2 id="5">Screw dislocations</h2>
+<p>In a pure screw dislocation, the Burgers vector and line vector are parallel. The same Burgers vector can therefore serve as both inputs.</p>
 {% highlight matlab %}
-% define a burgers vector in crystal coordinates
-b = Miller(1,1,0,cs,'uvw')
-
-% define a line vector in crystal coordinates
-l = Miller(1,1,0,cs,'uvw')
-
-% setup the dislocation system
-dS = dislocationSystem(b,l)
+bScrew = Miller(1,1,0,cs,'uvw')
+lScrew = Miller(1,1,0,cs,'uvw')
+dSScrew = dislocationSystem(bScrew,lScrew)
 {% endhighlight %}
 
 {% highlight plaintext %}
-b = Miller (432)
+bScrew = Miller (432)
   u v w
   1 1 0
  
-l = Miller (432)
+lScrew = Miller (432)
   u v w
   1 1 0
  
-dS = dislocationSystem
+dSScrew = dislocationSystem
  symmetry: 432
- screw dislocations: 1 x 1
+ screw dislocations: 1 × 1
  Burgers vector  energy  length
       [1  1  0]       1    1.41
 {% endhighlight %}
-<p>The same two arrows, now lying on top of one another: for a screw dislocation the lattice is shifted along the direction the dislocation runs, so the Burgers vector and the line vector point the same way.</p>
+<p>Draw the line vector longer so that both arrows remain visible when they lie on top of one another.</p>
 {% highlight matlab %}
-arrow3d(1.3*normalize(vector3d(l)),'faceColor',[.45 .45 .45])
+close all
+arrow3d(1.3*normalize(vector3d(lScrew)), ...
+  'faceColor',[0.45 0.45 0.45])
 hold on
-arrow3d(0.9*normalize(vector3d(b)),'faceColor','red')
+arrow3d(0.9*normalize(vector3d(bScrew)),'faceColor','red')
 hold off
 axis off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="DislocationSystems_02.png" %}
 </center>
-<h2 id="6">Relation to Slip Systems</h2>
-<p>Dislocation systems are tightly related to <a href="slipSystem.slipSystem.html">slip systems</a>. Given a set of slip systems the corresponding edge and screw dislocations can be computed by</p>
+<p>The coincident arrows show that the lattice shift is along the direction in which the defect runs. This parallelism distinguishes the screw system.</p>
+<h2 id="8">Build systems from slip systems</h2>
+<p>A <a href="SlipSystems.html">slip system</a> supplies a Burgers vector and a slip-plane normal. MTEX converts each slip system into an edge system with a line direction in the slip plane, and also adds the distinct screw systems.</p>
+<p>Here the 12 geometrically distinct FCC slip systems produce 12 edge and 6 screw systems. The <code class="language-plaintext highlighter-rouge">'antipodal'</code> option identifies opposite shear senses before the conversion.</p>
 {% highlight matlab %}
-% dominant slip systems in cubic fcc material
-sS = symmetrise(slipSystem.fcc(cs))
-
-% the corresponding edge and screw dislocation
-dS = dislocationSystem(sS)
+sSFcc = symmetrise(slipSystem.fcc(cs),'antipodal');
+dSFcc = dislocationSystem(sSFcc);
+[sum(dSFcc.isEdge), sum(dSFcc.isScrew)]
 {% endhighlight %}
 
 {% highlight plaintext %}
-sS = slipSystem (432)
- size: 24 x 1
- 
-   u    v    w  | h    k    l CRSS
-   0    1   -1    1    1    1    1
-  -1    0    1    1    1    1    1
-   1   -1    0    1    1    1    1
-   0   -1    1    1    1    1    1
-   1    0   -1    1    1    1    1
-  -1    1    0    1    1    1    1
-   1   -1    0    1    1   -1    1
-   1    0    1    1    1   -1    1
-   0    1    1    1    1   -1    1
-  -1    1    0    1    1   -1    1
-  -1    0   -1    1    1   -1    1
-   0   -1   -1    1    1   -1    1
-   0    1   -1   -1    1    1    1
-   1    0    1   -1    1    1    1
-   1    1    0   -1    1    1    1
-   0   -1    1   -1    1    1    1
-  -1    0   -1   -1    1    1    1
-  -1   -1    0   -1    1    1    1
-  -1    0    1    1   -1    1    1
-   1    1    0    1   -1    1    1
-   0    1    1    1   -1    1    1
-   1    0   -1    1   -1    1    1
-  -1   -1    0    1   -1    1    1
-   0   -1   -1    1   -1    1    1
- 
-dS = dislocationSystem
- symmetry: 432
- edge dislocations : 24 x 1
- Burgers vector  line vector  energy  length
-      [0  1 -1]    [2 -1 -1]       2    0.71
-     [-1  0  1]   [-1  2 -1]       2    0.71
-      [1 -1  0]   [-1 -1  2]       2    0.71
-      [0 -1  1]   [-2  1  1]       2    0.71
-      [1  0 -1]    [1 -2  1]       2    0.71
-     [-1  1  0]    [1  1 -2]       2    0.71
-      [1 -1  0]    [1  1  2]       2    0.71
-      [1  0  1]   [-1  2  1]       2    0.71
-      [0  1  1]   [-2  1 -1]       2    0.71
-     [-1  1  0]   [-1 -1 -2]       2    0.71
-     [-1  0 -1]    [1 -2 -1]       2    0.71
-      [0 -1 -1]    [2 -1  1]       2    0.71
-      [0  1 -1]    [2  1  1]       2    0.71
-      [1  0  1]   [-1 -2  1]       2    0.71
-      [1  1  0]    [1 -1  2]       2    0.71
-      [0 -1  1]   [-2 -1 -1]       2    0.71
-     [-1  0 -1]    [1  2 -1]       2    0.71
-     [-1 -1  0]   [-1  1 -2]       2    0.71
-     [-1  0  1]    [1  2  1]       2    0.71
-      [1  1  0]    [1 -1 -2]       2    0.71
-      [0  1  1]    [2  1 -1]       2    0.71
-      [1  0 -1]   [-1 -2 -1]       2    0.71
-     [-1 -1  0]   [-1  1  2]       2    0.71
-      [0 -1 -1]   [-2 -1  1]       2    0.71
- 
- screw dislocations: 6 x 1
- Burgers vector  energy  length
-      [0  1 -1]       1    0.71
-      [0  1  1]       1    0.71
-      [1  0  1]       1    0.71
-      [1 -1  0]       1    0.71
-     [-1  0  1]       1    0.71
-      [1  1  0]       1    0.71
+ans =
+    12     6
 {% endhighlight %}
-<p>A shortcut for the above lines is</p>
+<p>The named constructor performs the corresponding conversion for the standard BCC family. It is a shortcut for constructing and symmetrising <code class="language-plaintext highlighter-rouge">slipSystem.bcc(cs)</code>, not for the FCC lines above.</p>
 {% highlight matlab %}
-dS = dislocationSystem.bcc(cs)
+dSBcc = dislocationSystem.bcc(cs);
+[sum(dSBcc.isEdge), sum(dSBcc.isScrew)]
 {% endhighlight %}
 
 {% highlight plaintext %}
-dS = dislocationSystem
- symmetry: 432
- edge dislocations : 48 x 1
- Burgers vector  line vector  energy  length
-      [1 -1  1]   [-2 -1  1]       2    0.87
-      [1  1 -1]    [2 -1  1]       2    0.87
-      [1  1 -1]    [1 -2 -1]       2    0.87
-     [-1  1  1]    [1  2 -1]       2    0.87
-      [1 -1  1]   [-1  1  2]       2    0.87
-     [-1  1  1]   [-1  1 -2]       2    0.87
-      [1 -1  1]    [1  2  1]       2    0.87
-      [1  1  1]   [-1  2 -1]       2    0.87
-      [1  1 -1]    [1  1  2]       2    0.87
-      [1  1  1]   [-1 -1  2]       2    0.87
-     [-1  1  1]    [2  1  1]       2    0.87
-      [1  1  1]    [2 -1 -1]       2    0.87
-     [-1  1  1]    [0  1 -1]       2    0.87
-      [1 -1  1]   [-1  0  1]       2    0.87
-      [1  1 -1]    [1 -1  0]       2    0.87
-     [-1  1  1]   [-1  0 -1]       2    0.87
-      [1 -1  1]   [-1 -1  0]       2    0.87
-      [1  1 -1]    [0 -1 -1]       2    0.87
-      [1  1 -1]    [1  0  1]       2    0.87
-     [-1  1  1]    [1  1  0]       2    0.87
-      [1 -1  1]    [0  1  1]       2    0.87
-     [-1 -1 -1]    [0 -1  1]       2    0.87
-     [-1 -1 -1]    [1  0 -1]       2    0.87
-     [-1 -1 -1]   [-1  1  0]       2    0.87
-     [-1  1  1]   [-1  4 -5]       2    0.87
-      [1 -1  1]   [-5 -1  4]       2    0.87
-      [1  1 -1]    [4 -5 -1]       2    0.87
-     [-1  1  1]   [-4  1 -5]       2    0.87
-      [1 -1  1]   [-5 -4  1]       2    0.87
-      [1  1 -1]    [1 -5 -4]       2    0.87
-      [1  1 -1]    [4  1  5]       2    0.87
-     [-1  1  1]    [5  4  1]       2    0.87
-      [1 -1  1]    [1  5  4]       2    0.87
-     [-1 -1 -1]   [-1 -4  5]       2    0.87
-     [-1 -1 -1]    [5 -1 -4]       2    0.87
-     [-1 -1 -1]   [-4  5 -1]       2    0.87
-      [1 -1  1]    [1 -4 -5]       2    0.87
-      [1  1 -1]   [-5  1 -4]       2    0.87
-     [-1  1  1]   [-4 -5  1]       2    0.87
-      [1 -1  1]    [4 -1 -5]       2    0.87
-      [1  1 -1]   [-5  4 -1]       2    0.87
-     [-1  1  1]   [-1 -5  4]       2    0.87
-     [-1 -1 -1]   [-4 -1  5]       2    0.87
-     [-1 -1 -1]    [5 -4 -1]       2    0.87
-     [-1 -1 -1]   [-1  5 -4]       2    0.87
-      [1  1 -1]    [1  4  5]       2    0.87
-     [-1  1  1]    [5  1  4]       2    0.87
-      [1 -1  1]    [4  5  1]       2    0.87
- 
- screw dislocations: 4 x 1
- Burgers vector  energy  length
-     [-1 -1 -1]       1    0.87
-      [1 -1  1]       1    0.87
-      [1  1 -1]       1    0.87
-     [-1  1  1]       1    0.87
+ans =
+    48     4
 {% endhighlight %}
-<h2 id="8">The Dislocation Tensor</h2>
-<p>As each dislocation corresponds to an deformation of the atom lattice a dislocation can also be described by a deformation matrix. This matrix is the dyadic product between the Burgers vector and the line vector and can be computed by</p>
+<p>MTEX uses one half of the cubic slip direction as the Burgers vector during this conversion. It also uses one third of a hexagonal slip direction. Other lattices trigger a warning because the physical scale is ambiguous.</p>
+<h2 id="11">The dislocation tensor</h2>
+<p>A dislocation system contributes the dyadic tensor \(\mathbf b\otimes\hat{\mathbf l}\), where the hat denotes a unit line vector. This tensor is sometimes described informally as a deformation matrix. In MTEX it is a basis tensor for the dislocation-density tensor used on the next page.</p>
 {% highlight matlab %}
-dS.tensor
+dTBcc = dSBcc.tensor
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans = dislocationDensityTensor (crystal)
-  size: 52 x 1   
+dTBcc = dislocationDensityTensor (crystal)
+  size: 52 × 1   
   unit: au       
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
 {% endhighlight %}
-<p>Note that the unit of this tensors is the same as the unit used for describing the length of the unit cell, which is in most cases Angstrom (au). For amount of deformation the norm of the Burgers vectors is important</p>
+<p>The tensor has the same length unit as the unit-cell axes because the line vector is normalized. MTEX labels this unit <code class="language-plaintext highlighter-rouge">au</code>; for a lattice specified in Angstrom, its entries are therefore in Angstrom.</p>
+<p>The Burgers-vector norm sets the scale of each basis tensor. For the unit cubic cell used here, a BCC \(\langle111\rangle/2\) Burgers vector has length \(\sqrt{3}/2\).</p>
 {% highlight matlab %}
-% size of the unit cell
 a = norm(cs.aAxis);
-
-% in bcc and fcc the norm of the burgers vector is sqrt(3)/2 * a
-[norm(dS(1).b), norm(dS(end).b), sqrt(3)/2 * a]
+[norm(dSBcc(1).b), norm(dSBcc(end).b), sqrt(3)/2 * a]
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
     0.8660    0.8660    0.8660
 {% endhighlight %}
-<h2 id="10">The Energy of Dislocations</h2>
-<p>The energy of each dislocation system can be stored in the property <code class="language-plaintext highlighter-rouge">u</code>. By default this value it set to 1 but should be changed according to the specific model and the specific material.</p>
-<p>According to Hull &amp; Bacon the energy U of edge and screw dislocations is given by the formulae</p>
-<p>\[ U_{\mathrm{screw}} = \frac{Gb^2}{4\pi} \ln \frac{R}{r_0} \]</p>
-<p>\[ U_{\mathrm{edge}} = \frac{1}{(1-\nu)} U_{\mathrm{screw}} \]</p>
-<p>where</p>
-<div>
-<ul>
-<li>
-<code class="language-plaintext highlighter-rouge">G</code> is the shear modulus</li>
-<li>
-<code class="language-plaintext highlighter-rouge">b</code> is the length of the Burgers vector</li>
-<li>
-<code class="language-plaintext highlighter-rouge">nu</code> is the Poisson ratio</li>
-<li>
-<code class="language-plaintext highlighter-rouge">R</code> is the outer cut off radius</li>
-<li>
-<code class="language-plaintext highlighter-rouge">r_0</code> is the radius of the dislocation core</li>
-</ul>
-</div>
-<p>In this example we assume \[ U_{\mathrm{edge}} = 1 \] \[ U_{\mathrm{screw}} = 1-\nu \]</p>
+<p>The earlier statement that both BCC and FCC Burgers vectors have length \(\sqrt{3}a/2\) is not generally correct. An FCC \(\langle110\rangle/2\) Burgers vector has length \(a/\sqrt{2}\), as this check shows.</p>
+{% highlight matlab %}
+[norm(dSFcc(1).b), a/sqrt(2)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    0.7071    0.7071
+{% endhighlight %}
+<h2 id="14">Set relative line energies</h2>
+<p>The property <code class="language-plaintext highlighter-rouge">u</code> stores the relative line energy used when MTEX chooses a non-negative combination of systems. A directly constructed system has <code class="language-plaintext highlighter-rouge">u = 1</code> by default. Conversion from slip systems currently initializes <code class="language-plaintext highlighter-rouge">u = 2</code> for edge systems and <code class="language-plaintext highlighter-rouge">u = 1</code> for screw systems.</p>
+<p>Hull and Bacon give the elastic line energies</p>
+<p>\[ U_{\mathrm{screw}} = \frac{G b^2}{4\pi} \ln\left(\frac{R}{r_0}\right), \]</p>
+<p>\[ U_{\mathrm{edge}} = \frac{1}{1-\nu} U_{\mathrm{screw}}, \]</p>
+<p>where \(G\) is the shear modulus, \(b\) is the Burgers-vector length, \(\nu\) is Poisson's ratio, \(R\) is the outer cut-off radius, and \(r_0\) is the dislocation-core radius.</p>
+<p>If all systems share the other factors, one convenient normalization is \(U_{\mathrm{edge}}=1\) and \(U_{\mathrm{screw}}=1-\nu\).</p>
 {% highlight matlab %}
 nu = 0.3;
-
-% energy of the edge dislocations
-dS(dS.isEdge).u = 1;
-
-% energy of the screw dislocations
-dS(dS.isScrew).u = 1 - nu;
+dSBcc(dSBcc.isEdge).u = 1;
+dSBcc(dSBcc.isScrew).u = 1 - nu;
 {% endhighlight %}
-<p>There is no single accepted way of setting these energies. Formulae in use include <code class="language-plaintext highlighter-rouge">U = 1 - nu</code> as above, and <code class="language-plaintext highlighter-rouge">U = c * G * |b</code>^2| with <code class="language-plaintext highlighter-rouge">G</code> the shear modulus, i.e. an energy per unit length squared. Which one is appropriate depends on the model you are comparing against, so <code class="language-plaintext highlighter-rouge">u</code> is left for you to set rather than being fixed by MTEX.</p>
+<p>There is no single accepted way to set these weights. Another model may use <code class="language-plaintext highlighter-rouge">u = c * G * norm(b)^2</code>, with a model-dependent constant <code class="language-plaintext highlighter-rouge">c</code>. When \(G\) is a shear modulus, this expression has units of energy per unit length; earlier wording on this page called it energy per length squared. Choose <code class="language-plaintext highlighter-rouge">u</code> for the material and model being compared rather than treating an MTEX default as a measured energy.</p>
+<h2 id="16">References</h2>
+<div>
+<ul>
+<li>D. Hull and D. J. Bacon, <a href="https://doi.org/10.1016/C2009-0-64358-0">Introduction to Dislocations</a>, fifth edition, Butterworth-Heinemann, 2011, derives the edge and screw line energies used to motivate the relative weights above.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Continue with <a href="GND.html">Geometrically Necessary Dislocations</a> to turn an EBSD orientation gradient into densities of the systems defined here.</p>
 </div>
 </body>
 </html>

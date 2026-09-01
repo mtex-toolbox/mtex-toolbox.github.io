@@ -1,5 +1,5 @@
 ---
-title: "Line Profiles"
+title: 'Line Profiles'
 
 sidebar: documentation_sidebar
 permalink: EBSDProfile.html
@@ -23,29 +23,32 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>When analyzing texture gradients it is sometime helpful to look at the EBSD data restricted to a single line and plot profiles of certain properties along this line. In order to illustrate this at an example let us import some EBSD data, reconstruct grains and select the grain with the largest GOS (grain orientation spread) for further analysis.</p>
+<p>A map shows an orientation gradient as a change of colour, but colour is difficult to read quantitatively. A line profile turns the same change into a curve against distance. A steady lattice rotation then appears as a slope, whereas an abrupt change appears as a jump.</p>
+<p>This page assumes the grain segmentation introduced in <a href="GrainReconstruction.html">Grain Reconstruction</a> and the inverse pole figures introduced in <a href="EBSDOrientationPlots.html">Orientation Plots</a>. Check the specimen reference frame as described in <a href="EBSDReferenceFrame.html">Reference Frame</a> before interpreting a profile direction.</p>
+<p>The example uses the forsterite map. Its plotting convention draws specimen Y upward and specimen X to the right.</p>
 {% highlight matlab %}
-close all
+close all;
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
-
-% reconstruct grains
+{% endhighlight %}
+<h2 id="2">Select a grain with a large orientation spread</h2>
+<p>A grain is a phase-homogeneous, spatially connected region of EBSD pixels produced by segmentation. Reconstruct the grains with a 15&deg; boundary threshold, then select the grain with the largest grain orientation spread (GOS). GOS is the mean angular deviation from the grain's mean orientation; <a href="GrainOrientationParameters.html">Orientation Parameters</a> explains it in detail.</p>
+{% highlight matlab %}
 [grains,ebsd] = calcGrains(ebsd,'minPixel',5,'angle',15*degree);
-
-% find the grain with maximum grain orientation spread
 [~,id] = max(grains.GOS);
-grain_selected = grains(id)
+grainSelected = grains(id)
 
-% plot the grain with its orientations
-close all
-plot(grain_selected.boundary,'linewidth',2)
-hold on
-plot(ebsd(grain_selected),ebsd(grain_selected).orientations)
-hold off
+% plot the selected grain with its measured orientations
+close all;
+plot(grainSelected.boundary,'lineWidth',2);
+hold on;
+plot(ebsd(grainSelected),ebsd(grainSelected).orientations,...
+  'ipfDirection',zvector);
+hold off;
 {% endhighlight %}
 
 {% highlight plaintext %}
-grain_selected = grain2d (y↑→x)
+grainSelected = grain2d (y↑→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      1       1    2614  Forsterite       mmm  LightSkyBlue
@@ -57,68 +60,85 @@ grain_selected = grain2d (y↑→x)
   Id   Phase   Pixels       meanRotation       GOS
  431       1     2614   (153°,109°,246°)   0.17005
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDProfile_01.png" %}
 </center>
-<p>Next we specify a line segment through the grain</p>
+<p>Its spread is 9.7&deg;, which is large for a single grain. The orientation colours change visibly from one end to the other, so this grain is a useful place to compare gradual rotation with abrupt jumps.</p>
+<h2 id="4">Draw and extract the profile</h2>
+<p>Specify the segment by its two endpoint coordinates and draw it on the map. In interactive work, <code class="language-plaintext highlighter-rouge">lineSec = ginput(2)</code> lets you click those endpoints. Fixed coordinates keep this published example executable. They use the same units as the map.</p>
 {% highlight matlab %}
-% line segment
-lineSec =  [18826   6438; 18089 10599];
-
-% draw the line into the plot
-line(lineSec(:,1),lineSec(:,2),'linewidth',2)
+lineSec = [18826 6438; 18089 10599];
+line(lineSec(:,1),lineSec(:,2),'lineWidth',2);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDProfile_02.png" %}
 </center>
-<p>The command <a href="EBSD.spatialProfile.html">spatialProfile</a> restricts the EBSD data to this line</p>
+<p> <a href="EBSD.spatialProfile.html"><code class="language-plaintext highlighter-rouge">spatialProfile</code></a> returns the measurements near the segment in traversal order. Its second output is their projected distance from the first endpoint. The object summary shows that this profile contains 86 measurements.</p>
 {% highlight matlab %}
-ebsd_line = spatialProfile(ebsd(grain_selected),lineSec)
+[ebsdLine,profileDist] = spatialProfile(ebsd(grainSelected),lineSec);
+ebsdLine
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd_line = EBSD (y↑→x)
+ebsdLine = EBSD (y↑→x)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      1     86 (100%)  Forsterite  LightSkyBlue       mmm                         
  
  Properties: bands, bc, bs, error, mad, oldId, grainId
  Scan unit : um
- X x Y x Z : [18100 → 18800] x [6450 → 10600] x [0 → 0]
+ X × Y × Z : [18100 → 18800] × [6450 → 10600] × [0 → 0]
  Normal vector: (0,0,1)
 {% endhighlight %}
-<p>Next, we plot the misorientation angle to the first point of the line as well as the orientation gradient</p>
+<h2 id="6">Compare point-to-origin and point-to-point changes</h2>
+<p>The point-to-origin curve compares every orientation with the first one on the line. It shows the accumulated change, but its value depends on that chosen reference point. The point-to-point curve compares consecutive measurements and exposes local jumps.</p>
 {% highlight matlab %}
-close all % close previous plots
+oriLine = ebsdLine.orientations;
+toOrigin = angle(oriLine(1),oriLine) ./ degree;
+pointToPoint = angle(oriLine(1:end-1),oriLine(2:end)) ./ degree;
+midDist = 0.5 * (profileDist(1:end-1) + profileDist(2:end));
 
-% misorientation angle to the first orientation on the line
-plot(ebsd_line.y,...
-  angle(ebsd_line(1).orientations,ebsd_line.orientations)/degree)
+close all;
+plot(profileDist,toOrigin,'lineWidth',1.5);
+hold on;
+plot(midDist,pointToPoint,'lineWidth',1.5);
+hold off;
 
-% misorientation gradient
-hold on
-plot(0.5*(ebsd_line.y(1:end-1)+ebsd_line.y(2:end)),...
-  angle(ebsd_line(1:end-1).orientations,ebsd_line(2:end).orientations)/degree)
-hold off
-
-xlabel('y'); ylabel('misorientation angle in degree')
-
-legend('to reference orientation','orientation gradient')
+xlabel(['distance along profile (' ebsdLine.scanUnit ')']);
+ylabel('misorientation angle in degree');
+legend('point-to-origin','point-to-point');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDProfile_03.png" %}
 </center>
-<p>We can also plot the orientations along this line into inverse pole figures and colorize them according to their y-coordinate</p>
+<p>The point-to-origin curve climbs steadily to about 7&deg; over a little more than half the line, then jumps to 20&deg; and stays nearly flat. The point-to-point curve says the same thing locally. It remains at a few tenths of a degree almost everywhere, which reveals the steady bending, but contains three isolated spikes; the largest is 21&deg;.</p>
+<p>The point-to-point values are angular increments, not spatial gradients. Divide them by the corresponding distance increments to obtain an angle per unit length. Small increments are also sensitive to measurement noise and to the scan step size, so compare profiles acquired at a common spatial scale.</p>
+<p>A jump of 21&deg; inside one grain deserves attention because the grains were reconstructed with a threshold of 15&deg;. It is not a contradiction. Segmentation joins neighboring pixels whose disorientation is below the threshold, and the two parts of this grain are connected by a path that goes around the jump. The three gaps trace pixels that were notIndexed before reconstruction. They were absorbed into the grain footprint, but <code class="language-plaintext highlighter-rouge">calcGrains</code> did not invent orientations for them.</p>
+<h2 id="8">Track the full orientations in inverse pole figures</h2>
+<p>A misorientation angle discards the axis about which the crystal turns. Plotting the orientations in inverse pole figures retains that directional information. Colouring the markers by distance retains their order along the line.</p>
 {% highlight matlab %}
-close
-plotIPDF(ebsd_line.orientations,[xvector,yvector,zvector],...
-  'property',ebsd_line.y,'markersize',20,'antipodal')
-
-mtexColorbar
+close;
+plotIPDF(oriLine,[xvector,yvector,zvector],...
+  'property',profileDist,'MarkerSize',20,'antipodal');
+mtexColorbar('title',['distance along profile (' ebsdLine.scanUnit ')']);
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDProfile_04.png" %}
 </center>
+<p>Every panel holds the same two groups. The measurements before the jump, dark blue through teal, trace a short chain rather than a point: their directions spread by up to 7&deg; in the x and z panels and 4&deg; in y, which is the gradual bending seen in the curves above. The measurements after the jump are all yellow and lie within about 1&deg; of each other, so they merge into one marker.</p>
+<p>How far apart the two groups appear depends on the specimen direction. Their means are 17&deg; and 18&deg; apart in the y and z panels, but only 8&deg; apart in x, where the yellow marker touches the end of the chain. A jump that is unmistakable in one inverse pole figure can be inconspicuous in another, which is why all three are plotted. Inspecting both angle and direction helps distinguish a coherent lattice rotation from isolated indexing artefacts.</p>
+<h2 id="10">Further reading</h2>
+<div>
+<ul>
+<li>S. Van Boxel, M. Seefeldt, B. Verlinden and P. Van Houtte, <a href="https://doi.org/10.1111/j.1365-2818.2005.01467.x">Visualization of grain subdivision by analysing the misorientations within a grain using electron backscatter diffraction</a>, <i>Journal of Microscopy</i> 218 (2005), 104-114, compares point-to-point changes with grain-scale misorientation and shows why the misorientation axis matters.</li>
+<li>M. Kamaya, <a href="https://doi.org/10.1016/j.ultramic.2024.113928">Correction of step size dependency in local misorientation obtained by EBSD measurements: Introducing equidistant local misorientation</a>, <i>Ultramicroscopy</i> 259 (2024), 113928, examines how point spacing changes local misorientation.</li>
+<li>A. J. Schwartz, M. Kumar, B. L. Adams and D. P. Field, editors, <a href="https://doi.org/10.1007/978-0-387-88136-2">Electron Backscatter Diffraction in Materials Science</a>, second edition, Springer, 2009, provides the wider experimental and analytical background to EBSD maps.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis - Guidelines for orientation measurement using electron backscatter diffraction</i>, covers reliable and reproducible orientation measurements, including acquisition and calibration.</li>
+</ul>
+</div>
+<h2 id="11">Next</h2>
+<p>A profile answers a directional, path-dependent question. For a local map of neighboring orientation changes, continue with <a href="EBSDKAM.html">KAM</a>. For each point's deviation from its grain mean, use <a href="EBSDGROD.html">Mis2Mean / GROD</a>. <a href="EBSDDenoising.html">Denoising</a> explains how to reduce orientation noise before interpreting changes of only a few tenths of a degree.</p>
 </div>
 </body>
 </html>

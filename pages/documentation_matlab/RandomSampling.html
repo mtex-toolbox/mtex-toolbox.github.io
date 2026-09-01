@@ -1,5 +1,5 @@
 ---
-title: "Random Sampling"
+title: 'Random Sampling'
 
 sidebar: documentation_sidebar
 permalink: RandomSampling.html
@@ -23,219 +23,227 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Given an <a href="ODFTheory.html">ODF</a> - modelled, or reconstructed from pole figure measurements - the task here is the reverse of density estimation: produce individual orientations distributed according to it. Plasticity codes such as VPSC take their input in this form, and it is also how a <a href="DensityEstimation.html">density estimation method</a> is tested, since the answer is then known.</p>
-<p>The example is a trigonal alpha fibre ODF on a uniform background.</p>
+<p>An <a href="ODFTheory.html">orientation distribution function</a> describes a continuous population of orientations. This page solves the reverse problem to <a href="DensityEstimation.html">density estimation</a>: it turns an ODF into a finite list of orientations that represents that population. The ODF may have been built as a model or reconstructed from pole-figure measurements.</p>
+<p>There are two different reasons to do this. A random sample represents sampling variability, for example in a bootstrap or a synthetic measurement. An optimized sample represents the ODF with as few points as possible, for example as input to a crystal-plasticity calculation. These point sets may look similar, but they are not interchangeable. Sampling from a model also gives a known answer for testing a density estimation method. Crystal-plasticity codes such as VPSC also consume orientation lists in this form.</p>
+<p>The examples use a trigonal ODF made from a randomly chosen fibre on a uniform background.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('32');
-fibre_odf = 0.5*uniformODF(cs) + 0.5*fibreODF(fibre.rand(cs),'halfwidth',20*degree);
+fibre_odf = 0.5*uniformODF(cs) + ...
+  0.5*fibreODF(fibre.rand(cs),'halfwidth',20*degree);
 {% endhighlight %}
-<h2 id="2">Computing Random Orientations</h2>
-<p>In order to compute \(500\) random orientations from the ODF <code class="language-plaintext highlighter-rouge">fibre_odf</code> we use the command <code class="language-plaintext highlighter-rouge"><a href="SO3Fun.discreteSample.html">discreteSample</a></code>.</p>
+<h2 id="2">Draw a Random Sample</h2>
+<p> <a href="SO3Fun.discreteSample.html"><code class="language-plaintext highlighter-rouge">discreteSample</code></a> draws orientations with probability proportional to the ODF. Each orientation in the returned list has the same implicit weight, \(1/500\) in this example.</p>
 {% highlight matlab %}
-ori = fibre_odf.discreteSample(500)
+ori = fibre_odf.discreteSample(500);
 
-% plot the odf in Bunge sections
+% plot the ODF in Bunge sections
 plot(fibre_odf,'sections',6,'silent')
-mtexColorbar
+mtexColorbar('title','mrd')
 
-% and plot the orientations on top of them
+% plot the sampled orientations on top
 hold on
 plot(ori,'MarkerFaceColor','none','all','MarkerEdgeColor','k','MarkerSize',4)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-ori = orientation (321 → y↓→x)
-  size: 500 × 1
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_01.png" %}
 </center>
-<p>Whether the points really follow the ODF is impossible to see here, because Bunge sections do not preserve volume - a region that looks crowded may simply be stretched. <a href="SigmaSections.html">Sigma sections</a> do not have this defect.</p>
+<p>The black circles gather around the high-density parts of the coloured ODF. Their apparent crowding is not a statistical test, however. Section coordinates and projections distort area, while an ODF lives in a three-dimensional orientation space.</p>
+<p>Sigma sections organize this trigonal example more directly and make the fibre easier to follow. They provide a better visual comparison, but they do not remove the need for a quantitative error measure.</p>
 {% highlight matlab %}
 % plot the ODF in sigma sections
 plot(fibre_odf,'sections',6,'silent','sigma','contour','linewidth',2)
 
-% plot the orientations into the sigma sections
+% plot the sampled orientations in the same sections
 hold on
 plot(ori,'MarkerFaceColor','none','all','MarkerEdgeColor','k','MarkerSize',4)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_02.png" %}
 </center>
-<h2 id="4">ODF Estimation from Random Orientations</h2>
-<p>Now the points are visibly denser along the alpha fibre. To make that quantitative, estimate an ODF back from the sample, see <a href="DensityEstimation.html">Density Estimation</a>, and compare it with the one the sample came from.</p>
+<p>In the sigma sections, the black points trace the elongated high-density feature rather than filling orientation space uniformly. Random clusters and gaps remain because this is only one realization of 500 points.</p>
+<h2 id="5">Reconstruct the ODF from the Random Sample</h2>
+<p>A reconstruction converts the point set back to an ODF. Comparing it with the known model measures how well the sample represents the original. Here <a href="SO3Fun.calcError.html"><code class="language-plaintext highlighter-rouge">calcError</code></a> is asked explicitly for the \(L^1\) error. The sample-size experiment below uses relative \(L^2\) error because that norm is cheap for harmonic ODFs. Compare errors within each experiment, not across the two different norms.</p>
+<p>The reconstruction also introduces a kernel halfwidth. A small halfwidth retains sample-scale variation; a large one smooths that variation but also broadens real texture features.</p>
 {% highlight matlab %}
-% estimate an ODF from the random orientations
+% estimate an ODF with a narrow kernel
 odf_rec = calcDensity(ori,'halfwidth',10*degree);
 
-% plot the estimated ODF
 plot(odf_rec,'sigma','silent')
-mtexColorbar
+mtexColorbar('title','mrd')
 
-% the error between the true and the reconstructed ODF
-disp("difference between original and reconstructed ODF: " + calcError(odf_rec,fibre_odf))
+errRandom10 = calcError(odf_rec,fibre_odf,'L1');
+fprintf('L1 error, random sample, 10 degree: %.3f\n',errRandom10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-difference between original and reconstructed ODF: 0.153
+L1 error, random sample, 10 degree: 0.153
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_03.png" %}
 </center>
-<p>A halfwidth of \(10^\circ\) is too small for 500 random orientations - the reconstruction is covered in spurious oscillations. Widening the kernel smooths them away.</p>
+<p>At \(10^\circ\), individual clusters and gaps appear as narrow peaks and troughs. The reconstruction shows the finite sample at least as strongly as it shows the underlying fibre.</p>
 {% highlight matlab %}
-% estimate an ODF from the random orientations
+% reconstruct the same orientations with a wider kernel
 odf_rec = calcDensity(ori,'halfwidth',20*degree);
 
-% plot the estimated ODF
 plot(odf_rec,'sigma','silent')
-mtexColorbar
+mtexColorbar('title','mrd')
 
-disp("difference between original and reconstructed ODF: " + calcError(odf_rec,fibre_odf))
+errRandom20 = calcError(odf_rec,fibre_odf,'L1');
+fprintf('L1 error, random sample, 20 degree: %.3f\n',errRandom20)
 {% endhighlight %}
 
 {% highlight plaintext %}
-difference between original and reconstructed ODF: 0.081727
+L1 error, random sample, 20 degree: 0.082
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_04.png" %}
 </center>
-<p>At \(20^\circ\) the estimate is much closer to the original and free of the oscillations. The price is sharpness: the wider kernel smooths the true texture as well, and the texture index drops with it.</p>
+<p>At \(20^\circ\), the estimate is smoother and closer to the original for this realization. The price is sharpness: the wider kernel smooths the real fibre as well as the sampling noise. Compare both the error and the texture index rather than choosing the most visually pleasing plot.</p>
 {% highlight matlab %}
-disp("Texture index original ODF: " + norm(fibre_odf)^2)
-disp("Texture index reconstructed ODF: " + norm(odf_rec)^2)
+fprintf('texture index, original ODF: %.3f\n',norm(fibre_odf)^2)
+fprintf('texture index, random reconstruction: %.3f\n',norm(odf_rec)^2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Texture index original ODF: 1.3506
-Texture index reconstructed ODF: 1.2202
+texture index, original ODF: 1.351
+texture index, random reconstruction: 1.220
 {% endhighlight %}
-<h2 id="7">Optimal Sample</h2>
-<p>The command <code class="language-plaintext highlighter-rouge">discreteSample</code> computes the orientations completely at random. This is perfect if you want to statistically simulate different measurement procedures and estimate the accuracy of your computations, e.g. in a bootstrapping approach. However, if you are interested in orientations that reproduce the density as accurately as possible, use <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">odf.optimalSample(n)</code></a> instead, which places the orientations rather than drawing them. The comparison is the error against the model ODF.</p>
+<h2 id="8">Place an Optimized Sample</h2>
+<p>Random points are appropriate when the realization itself is part of the experiment, such as a bootstrap study of measurement accuracy. When the aim is instead a compact numerical representation, use <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a>. It moves the orientations to reduce their discrepancy from the ODF rather than drawing independent observations.</p>
 {% highlight matlab %}
-ori = fibre_odf.optimalSample(500)
+ori = fibre_odf.optimalSample(500);
 {% endhighlight %}
-
-{% highlight plaintext %}
-ori = orientation (321 → y↓→x)
-  size: 497 × 1
-{% endhighlight %}
-<p>Reconstructed with the same \(10^\circ\) halfwidth that was too small before:</p>
+<p>Reconstruct the optimized points with the same \(10^\circ\) halfwidth that left sample-scale peaks in the random reconstruction.</p>
 {% highlight matlab %}
 odf_rec = calcDensity(ori,'halfwidth',10*degree);
 
 plot(odf_rec,'sigma','silent')
-mtexColorbar
+mtexColorbar('title','mrd')
 
-disp("difference between original and reconstructed ODF: " + calcError(odf_rec,fibre_odf))
+errOptimal10 = calcError(odf_rec,fibre_odf,'L1');
+fprintf('L1 error, optimized sample, 10 degree: %.3f\n',errOptimal10)
 {% endhighlight %}
 
 {% highlight plaintext %}
-difference between original and reconstructed ODF: 0.038567
+L1 error, optimized sample, 10 degree: 0.039
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_05.png" %}
 </center>
-<p>A visibly better reconstruction: the error against the original ODF is 0.044, half of the 0.091 the random sample managed at its best halfwidth, and the texture index comes out at 1.73 against 1.61 - closer to the 1.91 of the true ODF. Same 500 orientations, placed rather than drawn.</p>
+<p>The optimized points cover the model more evenly and support a sharper reconstruction at the same sample size. This usually reduces the error, but it does not turn the points into random observations. Use random samples to model variability and optimized samples as compact numerical input.</p>
 {% highlight matlab %}
-disp("Texture index original ODF: " + norm(fibre_odf)^2)
-disp("Texture index reconstructed ODF: " + norm(odf_rec)^2)
+fprintf('texture index, original ODF: %.3f\n',norm(fibre_odf)^2)
+fprintf('texture index, optimized reconstruction: %.3f\n',norm(odf_rec)^2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-Texture index original ODF: 1.3506
-Texture index reconstructed ODF: 1.271
+texture index, original ODF: 1.351
+texture index, optimized reconstruction: 1.271
 {% endhighlight %}
-<p>By default all sampled orientations carry the same weight. Asking <code class="language-plaintext highlighter-rouge">optimalSample</code> for a second output</p>
+<h2 id="11">Optimizing the Weights Too</h2>
+<p>The sample above gives every orientation the same weight. Requesting a second output also optimizes the weights,</p>
 {% highlight matlab %}
 [ori,c] = odf.optimalSample(500)
 {% endhighlight %}
-<p>optimizes the weights alongside the orientations, i.e. the ODF is represented by a weighted sum of point masses. Since this adds one degree of freedom per orientation, fewer orientations are needed for the same accuracy. The weights are volume fractions and are passed on directly by <code class="language-plaintext highlighter-rouge">calcDensity(ori,'weights',c)</code>. Whether they pay off depends on the halfwidth you intend to use - see <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> for the details.</p>
-<h2 id="11">The Optimal Halfwidth as a Function of the Sample Size</h2>
-<p>All comparisons so far were made at one fixed sample size and one fixed halfwidth. Both samplers, however, ask for a different halfwidth, and the right halfwidth shrinks as the sample grows. In order to compare the two samplers fairly we therefore tune the halfwidth individually for every single sample, i.e. we give each sample the kernel it likes best, and only then compare the errors.</p>
+<p>The nonnegative weights sum to one and are volume fractions. Pass them to the reconstruction as <code class="language-plaintext highlighter-rouge">calcDensity(ori,'weights',c)</code>. The ODF is then represented by a weighted sum of point masses. Optimizing one weight per orientation adds degrees of freedom, so fewer orientations can represent the same ODF to a given accuracy.</p>
+<p>Whether weighted points help depends on the reconstruction halfwidth and on the harmonic <code class="language-plaintext highlighter-rouge">bandwidth</code> used by <code class="language-plaintext highlighter-rouge">optimalSample</code>. The bandwidth says which harmonic degrees the optimization controls. Choose it for the intended use of the points; the <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> reference gives the details.</p>
+<h2 id="12">How Sample Size Changes the Best Halfwidth</h2>
+<p>The comparison above fixed both the sample size and the reconstruction halfwidth. A fair comparison over several sizes must tune the halfwidth separately for every sample. The following controlled experiment gives each point set the kernel that minimizes its relative \(L^2\) error, then compares the resulting errors.</p>
+<p>The search bracket reaches to 80 degrees, well above the halfwidth any of these sample sizes calls for. A bracket that the smallest samples can reach would clip their optimum and bias the fitted laws.</p>
+<p>These fitted laws describe this model ODF over the tested sizes. They are not universal prescriptions for another texture.</p>
 {% highlight matlab %}
-% the harmonic representation makes the L2 error below cheap to evaluate
+% a harmonic representation makes repeated L2 errors cheap to evaluate
 odfH = SO3FunHarmonic(fibre_odf);
 
 M = 2.^(5:9);  % 32, 64, ... 512 orientations
-nRep = 5;      % repetitions, the random sample differs from run to run
+nRep = 5;      % independent random samples at each size
 
 hwRand = zeros(length(M),nRep); eRand = hwRand;
 hwOpt = zeros(length(M),1); eOpt = hwOpt;
 
 for i = 1:length(M)
 
-  % the random sample, repeated a couple of times
+  % repeat the random sample because each realization differs
   for j = 1:nRep
-    oriR = discreteSample(odfH,M(i),'silent');
-    err = @(hw) norm(odfH - calcDensity(oriR,'halfwidth',hw*degree))/norm(odfH);
-    [hwRand(i,j),eRand(i,j)] = fminbnd(err,2.5,30,optimset('TolX',0.1));
+    oriR = discreteSample(odfH,M(i));
+    err = @(hw) norm(odfH - ...
+      calcDensity(oriR,'halfwidth',hw*degree))/norm(odfH);
+    [hwRand(i,j),eRand(i,j)] = ...
+      fminbnd(err,2.5,80,optimset('TolX',0.1));
   end
 
-  % the optimal sample - deterministic, so a single run is enough
+  % the optimized sample is deterministic, so one run is enough
   oriO = optimalSample(odfH,M(i));
-  err = @(hw) norm(odfH - calcDensity(oriO,'halfwidth',hw*degree))/norm(odfH);
-  [hwOpt(i),eOpt(i)] = fminbnd(err,2.5,30,optimset('TolX',0.1));
+  err = @(hw) norm(odfH - ...
+    calcDensity(oriO,'halfwidth',hw*degree))/norm(odfH);
+  [hwOpt(i),eOpt(i)] = fminbnd(err,2.5,80,optimset('TolX',0.1));
 
 end
 {% endhighlight %}
-<p>Both halfwidths follow a power law \(\delta = a \, M^{b}\) which we recover by a linear fit in a double logarithmic scale</p>
+<h2 id="13">Fit the Halfwidth Laws</h2>
+<p>Both optimal halfwidths are fitted by a power law,</p>
+<p>\[\delta = a M^b,\]</p>
+<p>using a linear fit on logarithmic coordinates.</p>
 {% highlight matlab %}
 powerLaw = @(y) polyfit(log(M(:)),log(y(:)),1);
 
 pHwRand = powerLaw(mean(hwRand,2));
 pHwOpt = powerLaw(hwOpt);
 
-disp("halfwidth for discreteSample: " + round(exp(pHwRand(2)),1) + ...
-  " degree * M^" + round(pHwRand(1),3))
-disp("halfwidth for optimalSample: " + round(exp(pHwOpt(2)),1) + ...
-  " degree * M^" + round(pHwOpt(1),3))
+fprintf('halfwidth for discreteSample: %.1f degree * M^%.3f\n',...
+  exp(pHwRand(2)),pHwRand(1))
+fprintf('halfwidth for optimalSample: %.1f degree * M^%.3f\n',...
+  exp(pHwOpt(2)),pHwOpt(1))
 {% endhighlight %}
 
 {% highlight plaintext %}
-halfwidth for discreteSample: 63.4 degree * M^-0.21
+halfwidth for discreteSample: 92.9 degree * M^-0.279
 halfwidth for optimalSample: 51.7 degree * M^-0.271
 {% endhighlight %}
-<p>Let us display the measured halfwidths together with the fitted laws</p>
+<p>Plot the measured halfwidths with their fitted laws. The circles are the means of five random realizations, and the squares are the deterministic optimized samples.</p>
 {% highlight matlab %}
 Mf = logspace(log10(M(1)),log10(M(end)),100);
 evalLaw = @(p,x) exp(polyval(p,log(x)));
 cRand = ind2color(1); cOpt = ind2color(2);
 
-% a plain figure - plotting into a left over MTEX figure would hijack one of
-% its tiles
+% avoid adding this ordinary MATLAB plot to a leftover MTEX figure tile
 figure
 
 loglog(Mf,evalLaw(pHwRand,Mf),'LineWidth',1.5,'Color',cRand)
 hold on
 loglog(Mf,evalLaw(pHwOpt,Mf),'LineWidth',1.5,'Color',cOpt)
-loglog(M,mean(hwRand,2),'o','MarkerSize',8,'Color',cRand,'MarkerFaceColor',cRand)
-loglog(M,hwOpt,'s','MarkerSize',8,'Color',cOpt,'MarkerFaceColor',cOpt)
+loglog(M,mean(hwRand,2),'o','MarkerSize',8,'Color',cRand,...
+  'MarkerFaceColor',cRand)
+loglog(M,hwOpt,'s','MarkerSize',8,'Color',cOpt,...
+  'MarkerFaceColor',cOpt)
 hold off
 xlabel('number of orientations M')
 ylabel('optimal halfwidth in degree')
 legend('discreteSample','optimalSample','Location','southwest')
 grid on
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_06.png" %}
 </center>
-<p>The two exponents are of a similar size, i.e. the halfwidth of an optimal sample decays only slightly faster and most of the difference between the two samplers is a constant factor. This factor is the practical message of this section - an optimal sample tolerates a distinctly sharper kernel</p>
+<p>Both curves fall as the sample grows, and the optimized points lie below the random ones throughout. The random halfwidth falls the faster of the two, so the gap narrows: an optimized sample supports a much sharper kernel at the smallest size and a moderately sharper one at the largest.</p>
 {% highlight matlab %}
-disp("ratio of the halfwidths: " + round(hwOpt(1)/mean(hwRand(1,:)),2) + ...
-  " at M = " + M(1) + " and " + round(hwOpt(end)/mean(hwRand(end,:)),2) + ...
-  " at M = " + M(end))
+fprintf('ratio of optimized to random halfwidth: %.2f at M = %d and %.2f at M = %d\n',...
+  hwOpt(1)/mean(hwRand(1,:)),M(1),...
+  hwOpt(end)/mean(hwRand(end,:)),M(end))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ratio of the halfwidths: 0.67 at M = 32 and 0.57 at M = 512
+ratio of optimized to random halfwidth: 0.53 at M = 32 and 0.57 at M = 512
 {% endhighlight %}
-<p>For comparison, the <code class="language-plaintext highlighter-rouge">'magicRule'</code> implemented in <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> sets the kernel parameter to \(\kappa \sim M^{2/7}\), and since the halfwidth of a <a href="SO3DeLaValleePoussinKernel.html">de la Vallee Poussin kernel</a> behaves like \(\delta \sim \kappa^{-1/2}\), this corresponds to \(\delta \sim M^{-1/7} \approx M^{-0.14}\). That is the classical asymptotic rate for kernel density estimation on a three dimensional space. The exponents measured above are steeper, which is not a contradiction - the rate is an asymptotic statement, while the fit is taken over less than two decades of \(M\) and over a model ODF that is half uniform. What matters here is the comparison of the two samplers with each other, since both are measured in exactly the same way.</p>
-<p>Note also that all halfwidth rules of <code class="language-plaintext highlighter-rouge">calcKernel</code> are derived for random samples and will therefore oversmooth an optimal one.</p>
-<h2 id="16">The Approximation Error as a Function of the Sample Size</h2>
-<p>Once every sample is equipped with its own optimal halfwidth we may finally compare the errors themselves.</p>
+<h2 id="16">The Asymptotic Halfwidth Rule</h2>
+<p>For comparison, the <code class="language-plaintext highlighter-rouge">'magicRule'</code> in <a href="orientation.calcKernel.html"><code class="language-plaintext highlighter-rouge">calcKernel</code></a> sets the parameter of the <a href="SO3DeLaValleePoussinKernel.html">de la Vallee Poussin kernel</a> to \(\kappa \sim M^{2/7}\). Since its halfwidth behaves like \(\delta \sim \kappa^{-1/2}\), the rule corresponds to \(\delta \sim M^{-1/7} \approx M^{-0.14}\).</p>
+<p>This is the classical asymptotic kernel-density rate on a three-dimensional space. The fitted exponents above are steeper without contradicting that result: they cover less than two decades of \(M\) and a model ODF that is half uniform. The comparison between the samplers is the useful result because both were measured in the same way.</p>
+<p>The halfwidth rules in <code class="language-plaintext highlighter-rouge">calcKernel</code> are derived for random samples. They will therefore oversmooth an optimized sample.</p>
+<h2 id="17">Approximation Error versus Sample Size</h2>
+<p>Once every sample has its own optimal halfwidth, compare the minimum relative \(L^2\) errors and fit a power law to each sampler.</p>
 {% highlight matlab %}
 pERand = powerLaw(mean(eRand,2));
 pEOpt = powerLaw(eOpt);
@@ -245,46 +253,69 @@ figure
 loglog(Mf,evalLaw(pERand,Mf),'LineWidth',1.5,'Color',cRand)
 hold on
 loglog(Mf,evalLaw(pEOpt,Mf),'LineWidth',1.5,'Color',cOpt)
-loglog(M,mean(eRand,2),'o','MarkerSize',8,'Color',cRand,'MarkerFaceColor',cRand)
-loglog(M,eOpt,'s','MarkerSize',8,'Color',cOpt,'MarkerFaceColor',cOpt)
+loglog(M,mean(eRand,2),'o','MarkerSize',8,'Color',cRand,...
+  'MarkerFaceColor',cRand)
+loglog(M,eOpt,'s','MarkerSize',8,'Color',cOpt,...
+  'MarkerFaceColor',cOpt)
 hold off
 xlabel('number of orientations M')
 ylabel('relative L^2 error of the reconstruction')
 legend('discreteSample','optimalSample','Location','southwest')
 grid on
 
-disp("error for discreteSample: " + round(exp(pERand(2)),2) + ...
-  " * M^" + round(pERand(1),3))
-disp("error for optimalSample: " + round(exp(pEOpt(2)),2) + ...
-  " * M^" + round(pEOpt(1),3))
+fprintf('error for discreteSample: %.2f * M^%.3f\n',...
+  exp(pERand(2)),pERand(1))
+fprintf('error for optimalSample: %.2f * M^%.3f\n',...
+  exp(pEOpt(2)),pEOpt(1))
 {% endhighlight %}
 
 {% highlight plaintext %}
-error for discreteSample: 0.86 * M^-0.198
-error for optimalSample: 0.88 * M^-0.37
+error for discreteSample: 0.83 * M^-0.190
+error for optimalSample: 0.88 * M^-0.370
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="RandomSampling_07.png" %}
 </center>
-<p>In contrast to the halfwidth, the errors do not differ by a constant factor - the optimal sample converges at a genuinely faster rate. Equating the two laws answers the question a user actually cares about, namely how many random orientations are needed to reach the accuracy of an optimal sample of size \(M\)</p>
+<p>The optimized sample has the steeper fitted slope here too, and therefore converges faster over this tested range.</p>
+<p>Equating the fitted laws estimates how many random orientations are needed to match an optimized set of size \(M\).</p>
 {% highlight matlab %}
 nEquiv = @(m) exp((polyval(pEOpt,log(m)) - pERand(2))/pERand(1));
 
 for m = M
-  disp(m + " optimal orientations correspond to " + round(nEquiv(m)) + " random ones")
+  fprintf('%d optimized orientations correspond to %.0f random ones\n',...
+    m,nEquiv(m))
 end
 {% endhighlight %}
 
 {% highlight plaintext %}
-32 optimal orientations correspond to 597 random ones
-64 optimal orientations correspond to 2184 random ones
-128 optimal orientations correspond to 7988 random ones
-256 optimal orientations correspond to 29209 random ones
-512 optimal orientations correspond to 106810 random ones
+32 optimized orientations correspond to 618 random ones
+64 optimized orientations correspond to 2379 random ones
+128 optimized orientations correspond to 9163 random ones
+256 optimized orientations correspond to 35289 random ones
+512 optimized orientations correspond to 135899 random ones
 {% endhighlight %}
-<p>Two warnings about these numbers. They are measured for the specific model ODF of this page and neither the prefactors nor the exponents carry over unchanged to a different ODF - the prefactors scale with the halfwidth of the true ODF, and the exponents come out flatter for a sharper texture. What does carry over is the structure: two similar exponents, and an optimal sample that works with a kernel about a third sharper. And the advantage of the optimal sample is bounded by the <code class="language-plaintext highlighter-rouge">bandwidth</code> up to which it has been optimized, see <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a>. As soon as the halfwidth becomes small enough that the reconstruction depends on harmonic degrees beyond that bandwidth, the optimization no longer controls the error and the two curves start to approach each other again.</p>
-<h2 id="19">Exporting Random Orientations</h2>
-<p>In order to make use of the sampled orientations you probably want to <a href="OrientationExport.html">export</a> them as <a href="RotationDefinition.html">Euler angles</a> into a text files. This can be done using the commands <code class="language-plaintext highlighter-rouge"><a href="quaternion.export.html">export</a></code> and <code class="language-plaintext highlighter-rouge"><a href="orientation.export_VPSC.html">export_VPSC</a></code>.</p>
+<h2 id="19">Limits of the Comparison</h2>
+<p>These numbers belong to the model ODF on this page. Neither prefactors nor exponents carry over unchanged to another ODF. The prefactors scale with the halfwidth of the true ODF, and the fitted exponents become flatter for a sharper texture.</p>
+<p>The robust qualitative result is the structure of the comparison: the best halfwidths have similar exponents, while the optimized sample works with a kernel about one third sharper in this experiment. Its advantage is also limited by the harmonic <code class="language-plaintext highlighter-rouge">bandwidth</code> used during optimization. Once a reconstruction depends on degrees beyond that bandwidth, the optimization no longer controls its error and the curves approach each other again.</p>
+<h2 id="20">Exporting the Orientations</h2>
+<p>A sampled orientation list can be exported as <a href="RotationDefinition.html">Euler angles</a> with <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a>. Crystal-plasticity programs often require a particular convention and a weight in every row. Use <a href="orientation.export_VPSC.html"><code class="language-plaintext highlighter-rouge">export_VPSC</code></a> for the VPSC format.</p>
+<p>The broader choice between exact ODF storage, tabulated function values, and weighted orientation lists is covered in <a href="ODFExport.html">ODF Export</a>.</p>
+<h2 id="21">Further Reading</h2>
+<div>
+<ul>
+<li>
+<a href="https://doi.org/10.1201/9781315140919">Silverman, Density Estimation for Statistics and Data Analysis</a> develops kernel density estimation, bandwidth selection, and their asymptotic rates.</li>
+<li>
+<a href="https://doi.org/10.1137/100814731">Graf, Potts, and Steidl (2012)</a> relate discrepancy-minimizing point sets to quadrature error, the principle behind optimized sampling.</li>
+<li>
+<a href="https://doi.org/10.1016/j.mechmat.2015.04.014">Knezevic and Landry (2015)</a> reduce crystal-orientation data by matching generalized spherical-harmonic representations.</li>
+<li>
+<a href="https://doi.org/10.1016/0956-7151(93)90130-K">Lebensohn and Tome (1993)</a> introduce the VPSC formulation used as the motivating crystal-plasticity application.</li>
+</ul>
+</div>
+<h2 id="22">Next</h2>
+<p>
+<a href="ODFExport.html">ODF Export</a> writes an ODF or its finite representation to a file. <a href="DensityEstimation.html">Density Estimation</a> develops the inverse step from orientations to a density, while <a href="OptimalKernel.html">Optimal Kernel Selection</a> compares data-driven halfwidth rules for random measurements.</p>
 </div>
 </body>
 </html>

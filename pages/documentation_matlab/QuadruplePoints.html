@@ -1,5 +1,5 @@
 ---
-title: "Quadruple Points"
+title: 'Quadruple Points'
 
 sidebar: documentation_sidebar
 permalink: QuadruplePoints.html
@@ -23,9 +23,18 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>On a square grid four pixels meet in every interior vertex. If the two pixels on one diagonal belong to one grain and the two pixels on the other diagonal belong to a different grain, that vertex is a <b>quadruple point</b>: four boundary segments emanate from it and the boundary network is ambiguous there. Depending on which of the two grains is considered connected across the vertex one obtains a different number of grains. Since real grain boundary networks practically never contain quadruple points, MTEX offers the option <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> to <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a>, which splits every such vertex into two triple points.</p>
-<h2 id="2">A minimal example</h2>
-<p>Let us construct a small artificial map. The pixels marked by <code class="language-plaintext highlighter-rouge">1</code> form a ring which touches itself diagonally in its lower left corner.</p>
+<p>A <b>junction</b> is a boundary vertex where the number of meeting grain boundary segments is not two. On a square measurement grid, four pixels meet at every interior vertex. A checkerboard arrangement of two labels can therefore create a junction with four boundary segments - a <b>quadruple point</b>.</p>
+<p>The ambiguity is diagonal connectivity. Connecting one pair of like pixels separates the other pair, while connecting the other pair reverses that decision. The resulting grain count can depend on which diagonal is chosen because a grain is a spatially connected region.</p>
+<p>Exact four-way contacts in a two-dimensional physical network are usually unstable and split into three-segment junctions. The grid contact on this page is instead a digital-topology ambiguity introduced by sampling. In three dimensions, a physical quadruple point has a different meaning.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> option to <a href="EBSD.calcGrains.html"><code class="language-plaintext highlighter-rouge">calcGrains</code></a> resolves this ambiguity during reconstruction. This page assumes the reconstruction concepts introduced in <a href="GrainReconstruction.html">Grain Reconstruction</a>.</p>
+{% highlight matlab %}
+close all;
+
+% display matrix rows downwards and columns to the right
+plottingConvention.default('y↓→x');
+{% endhighlight %}
+<h2 id="2">Construct a diagonal contact</h2>
+<p>This artificial map contains one crystal phase and two orientations. The pixels selected by <code class="language-plaintext highlighter-rouge">id</code> form a ring whose ends touch diagonally at its lower corner.</p>
 {% highlight matlab %}
 cs = crystalSymmetry('1','mineral','test');
 
@@ -36,118 +45,110 @@ id = [...
   0 1 0 0 1 0; ...
   0 1 0 0 1 0; ...
   0 1 1 1 0 0; ...
-  0 0 0 0 0 0]==1;
-{% endhighlight %}
-<p>All pixels of the ring get one common orientation, all remaining pixels get the identity</p>
-{% highlight matlab %}
+  0 0 0 0 0 0] == 1;
+
+% assign one orientation to the ring and the identity to the background
 rot = rotation.id(size(id));
 rot(id) = rotation.byEuler(130*degree,120*degree,110*degree);
 
-ebsd = EBSDsquare([],rot,2*ones(size(rot)),1:2,{'not indexed',cs},'dxy',[1 1])
-{% endhighlight %}
+ebsd = EBSDsquare([],rot,2*ones(size(rot)),1:2,...
+  {'not indexed',cs},'dxy',[1 1]);
 
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↓→x, row↓→col)
- 
- Phase  Orientations  Mineral         Color  Symmetry  Crystal reference frame
-     2     42 (100%)     test  LightSkyBlue         1                         
- 
- Scan unit : um
- X x Y x Z : [0 → 5] x [0 → 6] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :7 x 6
+% compute orientation colours explicitly to keep the output focused
+colorKey = ipfColorKey(ebsd);
+ebsdColors = colorKey.orientation2color(ebsd.orientations);
+plot(ebsd,ebsdColors,'micronbar','off');
 {% endhighlight %}
-
-{% highlight matlab %}
-plot(ebsd,ebsd.orientations)
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="QuadruplePoints_01.png" %}
 </center>
-<h2 id="5">Grain reconstruction with quadruple points</h2>
-<p>Reconstructing grains in the usual way the interior of the ring is cut off from the exterior at the diagonal contact, and we end up with three grains instead of two</p>
+<p>The two colours meet in a checkerboard pattern at the lower contact. The picture alone cannot say which diagonal should be connected.</p>
+<h2 id="4">Reconstruct without resolving the junction</h2>
+<p>Ordinary reconstruction closes the oriented ring at the diagonal contact. It then treats the identity-oriented interior and exterior as separate grains, so the map contains three grains rather than two.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd)
+grainsWithQuadruple = calcGrains(ebsd,'angle',10*degree);
+
+fprintf('ordinary reconstruction: %d grains\n',length(grainsWithQuadruple))
+
+grainColors = colorKey.orientation2color(grainsWithQuadruple.meanOrientation);
+plot(grainsWithQuadruple,grainColors,'micronbar','off');
+hold on
+plot(grainsWithQuadruple.boundary,'lineWidth',2);
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↓→x)
- 
- Phase  Grains  Pixels  Mineral  Symmetry         Color
-     2       3      42     test         1  LightSkyBlue
- 
- boundary segments: 52 (52 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 0
- 
- Id   Phase   Pixels       meanRotation     GOS
-  1       2        4         (0°,0°,0°)       0
-  2       2       15   (130°,120°,110°)   3e-08
-  3       2       23         (0°,0°,0°)       0
+ordinary reconstruction: 3 grains
 {% endhighlight %}
-
-{% highlight matlab %}
-plot(grains,grains.meanOrientation)
-hold on
-plot(grains.boundary,'lineWidth',2)
-hold off
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="QuadruplePoints_02.png" %}
 </center>
-<h2 id="7">Removing the quadruple points</h2>
-<p>The option <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> splits the ambiguous vertex into two triple points and keeps the two like oriented pixels connected. Now we obtain the expected two grains</p>
+<p>The interior patch has its own outline. At the diagonal contact, four thick boundary segments end at the same vertex.</p>
+<h2 id="6">Resolve the junction during reconstruction</h2>
+<p>The <code class="language-plaintext highlighter-rouge">'removeQuadruplePoints'</code> option selects the other diagonal. It keeps the like-oriented interior and exterior connected; the ring pixels were already connected to each other elsewhere. The expected two grains remain.</p>
 {% highlight matlab %}
-grains = calcGrains(ebsd,'removeQuadruplePoints')
+grains = calcGrains(ebsd,'angle',10*degree,'removeQuadruplePoints');
+
+fprintf('resolved reconstruction: %d grains\n',length(grains))
+fprintf('total boundary length: %g before, %g after\n',...
+  sum(grainsWithQuadruple.boundary.segLength),...
+  sum(grains.boundary.segLength))
+fprintf('strict triple points: %d\n',length(grains.triplePoints))
+
+grainColors = colorKey.orientation2color(grains.meanOrientation);
+plot(grains,grainColors,'micronbar','off');
+hold on
+plot(grains.boundary,'lineWidth',2);
+hold off
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (y↓→x)
- 
- Phase  Grains  Pixels  Mineral  Symmetry         Color
-     2       2      42     test         1  LightSkyBlue
- 
- boundary segments: 52 (52 µm)
- inner boundary segments: 0 (0 µm)
- triple points: 0
- 
- Id   Phase   Pixels       meanRotation     GOS
-  1       2       15   (130°,120°,110°)   3e-08
-  2       2       27         (0°,0°,0°)       0
+resolved reconstruction: 2 grains
+total boundary length: 52.0014 before, 52.0014 after
+strict triple points: 0
 {% endhighlight %}
-
-{% highlight matlab %}
-plot(grains,grains.meanOrientation)
-hold on
-plot(grains.boundary,'lineWidth',2)
-hold off
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="QuadruplePoints_03.png" %}
 </center>
-<p>Note that the total boundary length is unchanged - only the connectivity at the critical vertex is different.</p>
-<h2 id="10">Smoothing at the critical vertex</h2>
-<p>The two triple points that replace the quadruple point sit on top of each other. Smoothing the boundary with the option <code class="language-plaintext highlighter-rouge">'moveTriplePoints'</code> pulls them apart</p>
+<p>The interior outline has joined the exterior network, while the boundary segments and their total length are unchanged. Only their connectivity at the critical vertex differs.</p>
+<p>The option replaces the four-segment vertex with two coincident three-segment junctions. In this two-grain example they are not strict <b>triple points</b>, because a triple point must separate three distinct real grains. See <a href="TriplePoints.html">Triple Points</a> for that distinction.</p>
+<h2 id="8">Separate the coincident junctions for display</h2>
+<p>The two replacement junctions initially have identical coordinates. <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a> normally fixes every junction. Its <code class="language-plaintext highlighter-rouge">'moveTriplePoints'</code> option releases every interior junction, despite the narrower name, and lets the two points move apart.</p>
+<p>A <a href="taubinFilter.html"><code class="language-plaintext highlighter-rouge">taubinFilter</code></a> suppresses the pixel staircase while limiting the systematic area loss of Laplacian smoothing.</p>
 {% highlight matlab %}
 grains = smoothBoundary(grains,taubinFilter,'moveTriplePoints');
 
-plot(grains,grains.meanOrientation, 'lineWidth',2)
+grainColors = colorKey.orientation2color(grains.meanOrientation);
+plot(grains,grainColors,'lineWidth',2,'micronbar','off');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="QuadruplePoints_04.png" %}
 </center>
-<p>and the <a href="grainBoundary.curvature.html">curvature</a> of the smoothed boundary shows the pinch as a pair of opposite extrema</p>
+<p>The coincident contact has opened into a narrow neck. Smoothing has moved the geometry for display; it did not perform the topological correction.</p>
+<h2 id="10">Curvature at the opened contact</h2>
+<p>Signed <a href="grainBoundary.curvature.html">curvature</a> makes the opened pinch visible as neighbouring bends in opposite directions.</p>
 {% highlight matlab %}
 gB = grains(1).boundary;
 
-plot(gB,gB.curvature(10),'linewidth',6)
-mtexColorMap blue2red
-setColorRange(0.5*[-1,1])
-mtexColorbar
+plot(gB,gB.curvature(10),'lineWidth',6,'micronbar','off');
+mtexColorMap('blue2red');
+setColorRange(0.5*[-1,1]);
+mtexColorbar('title','signed curvature in 1/grid unit');
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="QuadruplePoints_05.png" %}
 </center>
+<p>The blue and red extrema beside the pinch have opposite signs. The sign depends on the stored walk direction, so use <a href="BoundaryCurvature.html">Boundary Curvature</a> before interpreting it as convex or concave relative to a particular grain.</p>
+<h2 id="12">References</h2>
+<div>
+<ul>
+<li>T. Y. Kong and A. Rosenfeld, <a href="https://doi.org/10.1016/0734-189X(89)90147-3">Digital topology: Introduction and survey</a>, <i>Computer Vision, Graphics, and Image Processing</i> 48 (1989), 357--393, develops the adjacency choices behind diagonal connectivity on a digital grid.</li>
+<li>C. Herring, <a href="https://doi.org/10.1007/978-3-642-59938-5_2">Surface Tension as a Motivation for Sintering</a>, in <i>The Physics of Powder Metallurgy</i> (1951), 143--179, gives the classical capillary balance at physical junctions.</li>
+<li>P. R. Rios and M. E. Glicksman, <a href="https://doi.org/10.1080/14786435.2015.1050476">Grain boundary, triple junction and quadruple point mobility controlled normal grain growth</a>, <i>Philosophical Magazine</i> 95 (2015), 2092--2127, distinguishes the roles of boundaries, triple junctions, and quadruple points in grain-growth models.</li>
+</ul>
+</div>
+<h2 id="13">Next</h2>
+<p>Continue with <a href="BoundaryIntersections.html">Boundary Intersections</a> for geometric crossings between boundaries and other curves. For the two operations used here, see <a href="GrainSmoothing.html">Grain Boundary Smoothing</a> and <a href="BoundaryCurvature.html">Boundary Curvature</a>.</p>
 </div>
 </body>
 </html>

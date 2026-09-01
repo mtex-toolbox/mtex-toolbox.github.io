@@ -1,5 +1,5 @@
 ---
-title: "Correcting Pseudo Symmetry"
+title: 'Correcting Pseudo Symmetry'
 
 sidebar: documentation_sidebar
 permalink: EBSDPseudoSymmetry.html
@@ -22,17 +22,15 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>A pseudo symmetry is a rotation that is <b>not</b> a symmetry of the crystal but nevertheless maps the diffraction pattern almost onto itself. The indexing algorithm has then no reliable criterion to decide between the true orientation and the orientation rotated by the pseudo symmetry and picks essentially at random. As a consequence single grains appear in the orientation map as two or more grains that are separated by a boundary with exactly the pseudo symmetric misorientation.</p>
-<p>Such boundaries can be told apart from real grain boundaries by their shape. A real grain boundary is a physical interface and hence a reasonably smooth curve. A boundary that only separates the two indexing solutions follows the noise of the indexing and is therefore ragged. This is measured by the <b>tortuosity</b>
-</p>
-<p>\[ \tau = \frac{\textrm{length of the boundary}}{\textrm{distance between its end points}} \]</p>
-<p>which is close to one for a straight boundary and large for a ragged one. The command <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> uses exactly this criterion: it merges all grains that are separated by a tortuous boundary with a pseudo symmetric misorientation and rotates the orientations of the smaller part by the pseudo symmetry.</p>
+<p>A <b>pseudo symmetry</b> is a rotation that is not a symmetry of the crystal, but maps its diffraction pattern almost onto itself. An indexing algorithm may therefore alternate between the true orientation and a rotated alternative. One physical crystal region then appears as several reconstructed grains, separated by the pseudo-symmetric misorientation.</p>
+<p>This is an indexing failure, not ordinary orientation noise. It also is not proof of a physical domain or twin: a real boundary can have the same misorientation. The command <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> combines crystallography with a spatial heuristic to tell them apart.</p>
+<p>The page assumes the grain structure has been reconstructed as described in <a href="GrainReconstruction.html">grain reconstruction</a>. The pages on <a href="BoundaryMisorientations.html">boundary misorientations</a> and <a href="OrientationSymmetry.html">orientation symmetry</a> introduce the geometry used below.</p>
 <!--/introduction-->
-<h2 id="1">A Data Set With Pseudo Symmetry</h2>
-<p>Olivine is a classical example. Its oxygen sublattice is almost hexagonally close packed with the stacking axis along [100], i.e., rotations about [100] by multiples of 60 degree map the oxygen positions nearly onto themselves although the true symmetry <code class="language-plaintext highlighter-rouge">mmm</code> contains only the 180 degree rotation. Let us import a Forsterite data set and reconstruct the grains.</p>
+<h2 id="1">A Map With Pseudo Symmetry</h2>
+<p>Olivine is a classical example. Its oxygen sublattice is almost hexagonally close packed with the stacking axis along [100]. Rotations about [100] by multiples of 60 degrees therefore map the oxygen positions nearly onto themselves, although the true symmetry <code class="language-plaintext highlighter-rouge">mmm</code> contains only the 180 degree rotation.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
-mtexdata forsterite
+mtexdata forsterite silent
 
 % consider only indexed data
 ebsd = ebsd('indexed');
@@ -40,66 +38,49 @@ ebsd = ebsd('indexed');
 % reconstruct the grain structure
 [grains,ebsd] = calcGrains(ebsd,'angle',10*degree,'minPixel',5);
 
+% use one colour key for every orientation map on this page
+ipfKey = ipfColorKey(ebsd('Fo'));
+foColor = ipfKey.orientation2color(ebsd('Fo').orientations);
+
 % plot the orientation map of the Forsterite phase
-plot(ebsd('Fo'),ebsd('Fo').orientations)
+plot(ebsd('Fo'),foColor)
 
 hold on
 plot(grains.boundary,'linewidth',1.5)
 hold off
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↑→x, row↑→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0   58485 (24%)  notIndexed          none                                   
-     1  152345 (62%)  Forsterite  LightSkyBlue       mmm                         
-     2   26058 (11%)   Enstatite  DarkSeaGreen       mmm                         
-     3   9064 (3.7%)    Diopside     Goldenrod     12/m1        X||a*, Y||b, Z||c
- 
- Properties: bands, bc, bs, error, mad, oldId
- Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :336 x 732
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDPseudoSymmetry_01.png" %}
 </center>
-<p>Note that we did <b>not</b> smooth the grain boundaries. Since <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> decides by the raggedness of the boundaries, smoothing has to be applied after the correction and not before.</p>
+<p>The second output of <code class="language-plaintext highlighter-rouge">calcGrains</code> assigns the per-measurement property <code class="language-plaintext highlighter-rouge">ebsd.grainId</code>. The cleanup uses it to connect every orientation with its reconstructed grain.</p>
+<p>At this scale the pseudo symmetry is invisible. The correction at the end of this page moves 275 of the 152345 forsterite measurements, under two tenths of a percent, and it does so in patches of a few dozen pixels sitting inside much larger host grains. The rest of this page therefore finds those patches by their misorientation, and zooms into one of them once they are known.</p>
+<p>The boundaries have deliberately <b>not</b> been smoothed. Since <code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code> decides from their raggedness, smoothing must be applied after the correction and not before.</p>
 <h2 id="3">Detecting the Pseudo Symmetry</h2>
-<p>If we do not know the pseudo symmetry beforehand we may look for it in the distribution of the boundary misorientations. Since we expect a rotation about 60 degree we restrict ourselves to those boundaries and plot the distribution of the corresponding rotational axes.</p>
+<p>When the pseudo symmetry is not known beforehand, look for it in the distribution of boundary misorientations. Olivine suggests a rotation near 60 degrees, so select those boundaries and plot the distribution of their rotational axes.</p>
 {% highlight matlab %}
-% the misorientations at all Forsterite - Forsterite boundaries
+% misorientations at all Forsterite--Forsterite boundaries
 mori = grains.boundary('Fo','Fo').misorientation;
 
-% restrict to those with a rotational angle close to 60 degree
+% restrict to rotational angles close to 60 degrees
 mori = mori(mori.angle > 55*degree & mori.angle < 65*degree);
 
-% and plot the distribution of the rotational axes
+% plot the distribution of rotational axes
 plot(mori.axis,'contourf','fundamentalRegion','halfwidth',5*degree)
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDPseudoSymmetry_02.png" %}
 </center>
-<p>The sharp maximum at [100] confirms our expectation. Accordingly we define the pseudo symmetry as the rotation about [100] by 60 degree.</p>
+<p>The sharp maximum at [100] establishes both parts of the candidate: a rotation of about 60 degrees around [100]. Define that operation as a misorientation with <a href="orientation.byAxisAngle.html"><code class="language-plaintext highlighter-rouge">byAxisAngle</code></a>.</p>
 {% highlight matlab %}
 cs = ebsd('Fo').CS;
-psSym = orientation.byAxisAngle(Miller(1,0,0,cs,'uvw'),60*degree)
+psSym = orientation.byAxisAngle(Miller(1,0,0,cs,'uvw'),60*degree);
 {% endhighlight %}
-
-{% highlight plaintext %}
-psSym = misorientation (Forsterite → Forsterite)
- 
-  Bunge Euler angles in degree
-  phi1  Phi phi2
-     0   60    0
-{% endhighlight %}
-<p>Modulo the true symmetry <code class="language-plaintext highlighter-rouge">mmm</code> the rotations by 60 and by 120 degree are two different operations - the latter being the inverse of the former - and both occur in the map, since the indexing may have picked either solution. It is nevertheless enough to pass one of them. A measurement is a fixed representative of an orientation, so the alternative solution is not simply <code class="language-plaintext highlighter-rouge">ori * psSym</code> but <code class="language-plaintext highlighter-rouge">ori * s * psSym</code> for some symmetry element <code class="language-plaintext highlighter-rouge">s</code>, and <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> generates all these operators itself. Passing 60 degree, 120 degree or both gives the same result.</p>
-<p>Note also that the pseudo symmetry is a misorientation, i.e., it has the same crystal symmetry on both sides. This is required by <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> and at the same time tells the command which phase it should correct.</p>
-<h2 id="6">Pseudo Symmetric Grain Boundaries</h2>
-<p>Let us select all boundary segments whose misorientation is the pseudo symmetry and have a closer look at one of the affected regions. A grain boundary has no direction - its misorientation carries the grain exchange symmetry - so this catches the segments of both solutions at once.</p>
+<p>Modulo the true symmetry <code class="language-plaintext highlighter-rouge">mmm</code>, the rotations by 60 and 120 degrees are different operations. The latter is the inverse of the former, and both occur because the indexer may have chosen either solution. It is enough to pass one of them to <code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code>.</p>
+<p>A measurement stores a fixed representative of an orientation. Its alternative is therefore not simply <code class="language-plaintext highlighter-rouge">ori * psSym</code>, but <code class="language-plaintext highlighter-rouge">ori * s * psSym</code> for some true symmetry element <code class="language-plaintext highlighter-rouge">s</code>. The command generates all these operators itself, so passing 60 degrees, 120 degrees, or both gives the same result.</p>
+<p>The pseudo symmetry is a misorientation, so it has the same crystal symmetry on both sides. The condition <code class="language-plaintext highlighter-rouge">psSym.CS == psSym.SS</code> is required by <code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code> and tells the command which phase to correct.</p>
+<h2 id="6">Pseudo-Symmetric Grain Boundaries</h2>
+<p>Select all boundary segments whose misorientation matches the candidate. A grain boundary has no direction: its misorientation carries the grain exchange symmetry explained in <a href="MisorientationGrainExchangeSym.html">grain exchange symmetry</a>. The test therefore catches both indexing alternatives at once.</p>
 {% highlight matlab %}
 gB = grains.boundary('Fo','Fo');
 gB = gB(any(angle(gB.misorientation,psSym) < 2*degree,2))
@@ -113,91 +94,121 @@ gB = grainBoundary (y↑→x)
 {% endhighlight %}
 
 {% highlight matlab %}
-% a region containing one of the pseudo symmetric grains
+% a region containing one pseudo-symmetric patch
 region = [27300 1900 1000 700];
 
 % plot the orientation map of this region
 ebsdS = ebsd(inpolygon(ebsd,region));
-plot(ebsdS('Fo'),ebsdS('Fo').orientations)
+foColor = ipfKey.orientation2color(ebsdS('Fo').orientations);
+plot(ebsdS('Fo'),foColor)
 
-% and on top the grain boundaries
+% overlay all boundaries and highlight the matching ones
 hold on
 plot(grains.boundary,'linewidth',1.5)
 plot(gB,'linewidth',3,'linecolor','r')
 hold off
+
+% the boundary overlay covers the whole map, so keep the view on the region
+xlim([region(1) region(1)+region(3)]), ylim([region(2) region(2)+region(4)])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDPseudoSymmetry_03.png" %}
 </center>
-<p>The blue region has been indexed with the second solution. Note how the red boundary meanders around single pixels instead of following a smooth curve - this is the signature we are after.</p>
+<p>The blue patch has been indexed with the alternative solution. Its red boundary repeatedly detours around single pixels instead of following a stable interface. This is the spatial signature used by the cleanup.</p>
+<p>Raggedness is evidence, not proof. A physical interface can be tortuous, and a large, coherently misindexed domain can have a smooth outline. Where the distinction matters, inspect the original patterns or reindex them against both candidate orientations. This post-processing step cannot recover information that the orientation map no longer contains.</p>
 <h2 id="9">The Tortuosity Criterion</h2>
-<p>Internally <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a> splits the selected boundary segments into connected components and computes for each component its total length and the distance between its extreme points.</p>
+<p>The usual geometric intuition is boundary length divided by the distance between its endpoints. The implementation uses a closely related span: the diagonal of each component's axis-aligned bounding box. For boundary length \(L\) and box diagonal \(d_{\mathrm{box}}\), it computes</p>
+<p>\[ \tau = \frac{L}{d_{\mathrm{box}}}. \]</p>
+<p>A straight component has a value close to one, while detours increase its length without increasing its span. Because these are unsmoothed grid boundaries, even a physical straight interface has some staircase length; the threshold is therefore empirical rather than universal.</p>
 {% highlight matlab %}
-% the connected components of the pseudo symmetric boundaries
+% connected components of the matching boundary segments
 compId = gB.componentId;
 
-% the length of each component
+% total length of each component
 len = accumarray(compId,gB.segLength);
 
-% the extent of each component
+% diagonal of each component's axis-aligned bounding box
 xmin = accumarray(compId,gB.midPoint.x,[],@min);
 xmax = accumarray(compId,gB.midPoint.x,[],@max);
 ymin = accumarray(compId,gB.midPoint.y,[],@min);
 ymax = accumarray(compId,gB.midPoint.y,[],@max);
 dist = sqrt((xmax-xmin).^2 + (ymax-ymin).^2);
 
-% the tortuosity and the number of segments of each component
+% tortuosity and segment count of each component
 tortuosity = len ./ dist;
 numSeg = accumarray(compId,1);
 
-% components above the threshold are considered as pseudo symmetric
+% compare the components with the default threshold
 plot(numSeg,tortuosity,'o','MarkerFaceColor','b')
 hold on
 plot(xlim,[1.5 1.5],'r--')
 hold off
 xlabel('number of segments'), ylabel('tortuosity')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="EBSDPseudoSymmetry_04.png" %}
-</center>
-<p>Very short components are unreliable - a component consisting of a single segment has zero extent and hence infinite tortuosity, which is why two of the components are missing in the plot above. For this reason only components with more than four segments are taken into account.</p>
-<h2 id="11">Correcting the Map</h2>
-<p>All this is done by a single call to <a href="cleanUpPseudoSym.html"><code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code></a>. It returns the corrected EBSD data, the grains after merging and the number of pixels that have been rotated.</p>
-{% highlight matlab %}
-[ebsdC,grainsC,numChanged] = cleanUpPseudoSym(ebsd,grains,psSym);
 
-numChanged
+numNonFinite = nnz(~isfinite(tortuosity));
+fprintf('%d components have non-finite tortuosity\n',numNonFinite);
 {% endhighlight %}
 
 {% highlight plaintext %}
-numChanged =
-   275
+2 components have non-finite tortuosity
 {% endhighlight %}
-<p>Plotting the same region again we see that the two indexing solutions have been unified into a single grain.</p>
+<center class="mtex-figure">
+{% include inline_image.html file="EBSDPseudoSymmetry_04.png" %}
+</center>
+<p>Components above the red line are candidates for correction. Very short components are unreliable: a single segment has zero box diagonal and hence infinite tortuosity. The printed count is two for this map, which is why those components do not appear at a finite height in the plot. <code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code> considers only components with more than four segments.</p>
+<h2 id="11">Correcting the Map</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">cleanUpPseudoSym</code> merges grains separated by candidate boundaries and tests the available pseudo-symmetry operators at every affected measurement. It selects the operator closest to the mean orientation of the merged grain. The intended effect is to rotate the smaller alternative patch into the larger one, while the per-measurement test avoids assuming that every pixel in that patch chose the same representative.</p>
+<p>The command returns the corrected EBSD data, the merged grains, and the number of measurements whose orientation changed.</p>
+{% highlight matlab %}
+[ebsdC,grainsC,numChanged] = cleanUpPseudoSym(ebsd,grains,psSym);
+fprintf('%d measurements changed orientation\n',numChanged);
+{% endhighlight %}
+
+{% highlight plaintext %}
+275 measurements changed orientation
+{% endhighlight %}
+<p>Plot the same region again to check the correction spatially.</p>
 {% highlight matlab %}
 ebsdS = ebsdC(inpolygon(ebsdC,region));
-plot(ebsdS('Fo'),ebsdS('Fo').orientations)
+foColor = ipfKey.orientation2color(ebsdS('Fo').orientations);
+plot(ebsdS('Fo'),foColor)
 
 hold on
 plot(grainsC.boundary,'linewidth',1.5)
 hold off
+
+xlim([region(1) region(1)+region(3)]), ylim([region(2) region(2)+region(4)])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDPseudoSymmetry_05.png" %}
 </center>
-<p>Only now, with the pseudo symmetric boundaries removed, it makes sense to smooth the grain boundaries</p>
+<p>The blue alternative patch and its internal boundary have disappeared. The enclosing forsterite grain now has one consistent orientation colour, while unrelated grain boundaries remain.</p>
+<p>Only now, with the pseudo-symmetric boundaries removed, does it make sense to smooth the grain boundaries with <a href="grain2d.smoothBoundary.html"><code class="language-plaintext highlighter-rouge">smoothBoundary</code></a>.</p>
 {% highlight matlab %}
 grainsC = smoothBoundary(grainsC,5);
 {% endhighlight %}
-<h2 id="14">Options</h2>
-<p>The tolerance within which a boundary misorientation has to match the pseudo symmetry is controlled by the option <code class="language-plaintext highlighter-rouge">'delta'</code>, the tortuosity above which a component is considered as pseudo symmetric by the option <code class="language-plaintext highlighter-rouge">'threshold'</code>
-</p>
+<h2 id="14">Choosing the Options</h2>
+<p>The option <code class="language-plaintext highlighter-rouge">'delta'</code> is the angular tolerance within which a boundary misorientation must match the pseudo symmetry. The option <code class="language-plaintext highlighter-rouge">'threshold'</code> is the minimum tortuosity for correction. Their defaults are 2 degrees and 1.5, respectively.</p>
 {% highlight matlab %}
 [ebsdC,grainsC] = cleanUpPseudoSym(ebsd,grains,psSym,...
-  'delta',2*degree,'threshold',1.5)
+  'delta',2*degree,'threshold',1.5);
 {% endhighlight %}
-<p>Lowering the threshold corrects more boundaries but eventually starts to remove real grain boundaries as well. It is therefore a good idea to look at the tortuosity plot above before choosing it.</p>
-<p>Since the pseudo symmetry determines the phase that is corrected, only a single phase is treated per call. In order to clean up several phases simply call the command once for every phase, each time with the pseudo symmetries of that phase.</p>
+<p>Increasing <code class="language-plaintext highlighter-rouge">'delta'</code> admits more boundary segments, while lowering <code class="language-plaintext highlighter-rouge">'threshold'</code> accepts smoother components. Both changes make the cleanup more aggressive and can remove real grain boundaries. Inspect the axis distribution, the tortuosity plot, and representative regions before choosing either value.</p>
+<p>Since the pseudo symmetry determines the corrected phase, only one phase is treated per call. To clean several phases, call the command once for each phase with that phase's pseudo symmetries.</p>
+<h2 id="15">Further Reading</h2>
+<div>
+<ul>
+<li>M. M. Nowell and S. I. Wright, <a href="https://doi.org/10.1016/j.ultramic.2004.11.012">Orientation effects on indexing of electron backscatter diffraction patterns</a>, <i>Ultramicroscopy</i> 103 (2005), 41-58, explain how pattern similarity and acquisition choices produce ambiguous indexing solutions.</li>
+<li>W. Lenthe, S. Singh and M. De Graef, <a href="https://doi.org/10.1107/S1600576719011233">Prediction of potential pseudo-symmetry issues in the indexing of electron backscatter diffraction patterns</a>, <i>Journal of Applied Crystallography</i> 52 (2019), 1157-1168, include the olivine series among their systematic examples.</li>
+<li>A. J. Schwartz, M. Kumar, B. L. Adams and D. P. Field, editors, <a href="https://doi.org/10.1007/978-0-387-88136-2">Electron Backscatter Diffraction in Materials Science</a>, 2nd ed., Springer, 2009, gives the wider acquisition, indexing, and microstructure-analysis context.</li>
+<li>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <i>Microbeam analysis--Guidelines for orientation measurement using electron backscatter diffraction</i>, covers reliable and reproducible EBSD specimen preparation, calibration, and data acquisition.</li>
+</ul>
+</div>
+<h2 id="16">Next</h2>
+<p>
+<a href="GrainSmoothing.html">Grain Boundary Smoothing</a> continues with boundary geometry after the correction. <a href="EBSDDenoising.html">Denoising</a> treats random orientation scatter, which is a different failure mode.</p>
 </div>
 </body>
 </html>

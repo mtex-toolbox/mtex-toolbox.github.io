@@ -1,5 +1,5 @@
 ---
-title: "EBSD Maps and SEM Images"
+title: 'EBSD Maps and SEM Images'
 
 sidebar: documentation_sidebar
 permalink: EBSDMapsAndImages.html
@@ -23,42 +23,29 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>An EBSD map and a forescatter or BSE image of the same area are two rasters of the same piece of specimen. Putting them together needs two questions answered, and they are independent of each other:</p>
+<p>An EBSD map and a forescatter or backscattered-electron (BSE) image can record the same area of a specimen. Each is a raster: a rectangular array whose entries sample that area.</p>
+<p>Comparing the two requires two independent questions to be answered:</p>
 <div>
 <ul>
-<li>where on the specimen does each picture sit - its <a href="referenceFrame.referenceFrame.html">reference frame</a>
+<li>where on the specimen each raster sits - its <a href="referenceFrame.referenceFrame.html">reference frame</a>
 </li>
-<li>which way round is each array stored - its <a href="gridLayout.gridLayout.html">layout</a>
+<li>which specimen direction each array index follows - its <a href="gridLayout.gridLayout.html">layout</a>
 </li>
 </ul>
 </div>
-<p>The first decides what is drawn where. The second decides what <code class="language-plaintext highlighter-rouge">img(i,j)</code> means. This page walks through both on one WC-Co dataset, an EBSD map and four forescatter images of the same 20 &times; 15 micron area.</p>
+<p>A reference frame is the coordinate system in which data are expressed. Its identity, basis and plotting convention say what the axes mean and how they are drawn. A layout instead says what <code class="language-plaintext highlighter-rouge">img(i,j)</code> means: the direction in which the row index <code class="language-plaintext highlighter-rouge">i</code> and column index <code class="language-plaintext highlighter-rouge">j</code> increase.</p>
+<p>Read <a href="EBSDGrid.html">Gridded EBSD Data</a> first if matrix-shaped EBSD data is new to you. <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> explains how map coordinates and Euler angles are related.</p>
+<p>This page uses an EBSD map and four forescatter images of the same 20 &times; 15 micron WC-Co area. It first reconciles their frames, then their layouts, and finally their pixel grids.</p>
 {% highlight matlab %}
 plottingConvention.default('y↓→x');
 
-mtexdata trueEbsdWCCoSmall
+mtexdata trueEbsdWCCoSmall silent
 
 img = ebsd.opt.trueEbsdImgs;
 {% endhighlight %}
-
-{% highlight plaintext %}
-ebsd = EBSDsquare (y↓→x, row↓→col)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    89 (0.72%)  notIndexed          none                                   
-     1   11180 (91%)         W C  LightSkyBlue      -6m2        X||a*, Y||b, Z||c
-     2    991 (8.1%)      Co-fcc  DarkSeaGreen      m-3m                         
-     3    28 (0.23%)      Co-hcp     Goldenrod     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bc, bs, bands, MAD, quality, oldId
- Scan unit : um
- X × Y × Z : [10 → 30] × [8 → 23] × [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :96 × 128
- source: trueEbsdWCCo, centre half of the field of view, coarsened 4x
- madeBy: trueEBSD tools/makeWCCoSmall.m
-{% endhighlight %}
-<p> <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> is a picture together with the geometry that says where it sits: an origin, a pixel size and the frame those refer to. A channel of an EBSD map joins such a sequence as one entry of it, so a map and its images are one array rather than two different kinds of thing.</p>
+<h2 id="2">Put the Map and Images in One Sequence</h2>
+<p>A <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> combines a raster with the geometry that locates it. The geometry consists of the centre position of pixel <code class="language-plaintext highlighter-rouge">(1,1)</code>, one step vector for each array dimension and a reference frame.</p>
+<p>Passing an EBSD map supplies that geometry from the map. A plain image has only its pixel size here. MTEX initially gives it an independent frame. The map channel and the SEM images then form one <code class="language-plaintext highlighter-rouge">mapImage</code> array rather than two different container types.</p>
 {% highlight matlab %}
 imgList = [mapImage(ebsd.bc,ebsd,         'name','bcImg'), ...
   mapImage(img.fsdT1, 'dxy',img.pixSzImg, 'name','fsdT1'), ...
@@ -73,15 +60,16 @@ imgList = mapImage (y↓→x)
  2  192 × 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
  3  192 × 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
 {% endhighlight %}
-<p>Plotting the sequence draws each entry where it sits, one axis per picture</p>
+<p>The table reports image size, pixel size, frame and layout for every entry. The EBSD band-contrast channel is coarser than the two forescatter images, but all three initially have the same screen alignment.</p>
 {% highlight matlab %}
 plot(imgList,'layout',[1,3],'refFrame','on')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDMapsAndImages_01.png" %}
 </center>
-<h2 id="4">What an Image Does Not Know</h2>
-<p>The map entry brings the map's frame along, so it knows the specimen</p>
+<p>The same grain outlines appear upright and in the same part of all three panels. Their grey values need not match because the three imaging signals measure different contrast.</p>
+<h2 id="5">What an Image Does Not Know</h2>
+<p>The map entry brings the map's specimen frame with it. Its display names the specimen axes and states their screen directions.</p>
 {% highlight matlab %}
 imgList(1).frame
 {% endhighlight %}
@@ -89,7 +77,7 @@ imgList(1).frame
 {% highlight plaintext %}
 ans = specimenFrame (specimen, y↓→x)
 {% endhighlight %}
-<p>An image does not. Which specimen direction its x runs along is not in the array and cannot be computed from it - somebody has to say. Until they do, MTEX gives the image a frame of its own rather than assuming the map's, and names its axes <code class="language-plaintext highlighter-rouge">iX</code>, <code class="language-plaintext highlighter-rouge">iY</code>, <code class="language-plaintext highlighter-rouge">iZ</code> so that every plot and every display shows they are the image's own</p>
+<p>A plain image array cannot reveal which specimen direction its horizontal axis follows. Until that relation is supplied, MTEX uses a separate frame. Its axes <code class="language-plaintext highlighter-rouge">iX</code>, <code class="language-plaintext highlighter-rouge">iY</code> and <code class="language-plaintext highlighter-rouge">iZ</code> expose rather than hide that independence.</p>
 {% highlight matlab %}
 imgList(2).frame
 {% endhighlight %}
@@ -97,8 +85,8 @@ imgList(2).frame
 {% highlight plaintext %}
 ans = specimenFrame (image, iY↓→iX)
 {% endhighlight %}
-<h2 id="6">Two Pictures That Disagree</h2>
-<p>Here everything was collected in one session, which is why the plots above agree. To get the other case, turn the map through 90 degree - what a stage rotation between the two acquisitions would leave you with.</p>
+<h2 id="7">Two Pictures That Disagree</h2>
+<p>The original data were collected in one session, so the images above agree. To construct the other case, rotate the EBSD map through 90 degrees. This represents a stage rotation between the map and image acquisitions.</p>
 {% highlight matlab %}
 ebsd = rotate(ebsd,90*degree);
 
@@ -115,26 +103,28 @@ imgList = mapImage (y↓→x)
  2  192 × 256  0.08 um  iY↓→iX  row↓→col   fsdT1                    -
  3  192 × 256  0.08 um  iY↓→iX  row↓→col  fsdT10                    -
 {% endhighlight %}
-<p>The map's array is 128 &times; 96 now where the pictures are 192 &times; 256 - the two are transposed to each other. Plotting shows it at once: the map is on its side relative to the images, and somewhere else on the specimen</p>
+<p>The map is now a 128 &times; 96 array, whereas each image is 192 &times; 256. Their long and short dimensions are interchanged. Only the size column changed: the rotation moved the data, not the recorded convention, so both frame columns still read down-then-right and the table gives no sign that the three rasters have fallen out of step.</p>
 {% highlight matlab %}
 plot(imgList,'layout',[1,3],'refFrame','on')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDMapsAndImages_02.png" %}
 </center>
-<h2 id="8">Saying Which Way Round the Map Is</h2>
-<p>Each entry is drawn the way its own frame says it should be, so changing the map's frame changes what you see. Turn it until the plots agree with each other; here the map needs <code class="language-plaintext highlighter-rouge">'x&uarr;&rarr;y'</code> and the images keep the default.</p>
-<p>This is the part only you can supply. It is a fact about how the data was collected, and no amount of looking at the numbers will recover it.</p>
+<p>The pictures show what the table does not. The EBSD panel now stands upright beside two landscape images and occupies a different specimen extent, while the frame indicators in the corners still read the same arrangement in all three panels.</p>
+<h2 id="10">Establish the Frame Relation on Screen</h2>
+<p>A plotting convention states how a reference frame is laid out on screen. It never changes the data. Set the map frame so that its x axis points up and its y axis points right. The image frames keep their original setting.</p>
+<p>This alignment is experimental information. No inspection of the array values can recover it. Use acquisition metadata or a known specimen feature.</p>
 {% highlight matlab %}
 ebsdFrame = imgList(1).frame;
 ebsdFrame.how2plot = 'x↑→y';
 
 plot(imgList,'layout',[1,3])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDMapsAndImages_03.png" %}
 </center>
-<p>All three now agree on screen, and that is a statement about the specimen: <a href="orientation.byScreenAlignment.html"><code class="language-plaintext highlighter-rouge">byScreenAlignment</code></a> means exactly <b>I have plotted these and they are the same way up</b>. <a href="mapImage.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> takes that statement and restates every entry in one frame</p>
+<p>The corresponding grain outlines are now the same way up. Changing <code class="language-plaintext highlighter-rouge">how2plot</code> only established how the two frames appear on screen. It has not yet expressed the images in the map frame.</p>
+<p> <a href="orientation.byScreenAlignment.html"><code class="language-plaintext highlighter-rouge">byScreenAlignment</code></a> records the assertion that the plotted frames are physically aligned. <a href="mapImage.transformReferenceFrame.html"><code class="language-plaintext highlighter-rouge">transformReferenceFrame</code></a> then re-expresses every entry in the map frame.</p>
 {% highlight matlab %}
 imgList = transformReferenceFrame(imgList,ebsdFrame,'byScreenAlignment')
 {% endhighlight %}
@@ -147,16 +137,17 @@ imgList = mapImage (x↑→y)
  2  192 × 256  0.08 um   x↑→y  row↓→col   fsdT1                    -
  3  192 × 256  0.08 um   x↑→y  row↓→col  fsdT10                    -
 {% endhighlight %}
-
+<p>The new table shows one common frame and the corresponding layouts. This operation only transposes or flips the arrays and updates their geometry; it does not resample any values.</p>
 {% highlight matlab %}
 plot(imgList,'layout',[1,3])
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDMapsAndImages_04.png" %}
 </center>
-<h2 id="11">How the Array Is Stored</h2>
-<p>Look at the <code class="language-plaintext highlighter-rouge">layout</code> column above. It changed too, and so did the shape of the map - a 128 &times; 96 array came back 96 &times; 128. That is the second question, and it has nothing to do with the specimen: it is the order the numbers sit in memory.</p>
-<p>The layout is a <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a>, and there is nothing more to it than two directions - the one the row index advances along, and the one the column index advances along, in that order</p>
+<p>The panels remain the same way up after the frame change. That unchanged appearance is the point. The arrays and their frame labels changed together, while the physical pictures did not.</p>
+<h2 id="14">How the Array Is Stored</h2>
+<p>The transformed table also shows that the map changed from 128 &times; 96 back to 96 &times; 128. This is the second question, and it is independent of the specimen frame.</p>
+<p>A <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a> contains two directions. The first is the direction in which the row index advances, and the second is the direction in which the column index advances.</p>
 {% highlight matlab %}
 imgList(1).layout
 {% endhighlight %}
@@ -164,7 +155,7 @@ imgList(1).layout
 {% highlight plaintext %}
 ans = gridLayout (row||-x, col||y)
 {% endhighlight %}
-<p>Every <code class="language-plaintext highlighter-rouge">mapImage</code> states its own, and so does a gridded map</p>
+<p>Every <code class="language-plaintext highlighter-rouge">mapImage</code> states its layout, and so does every gridded EBSD map.</p>
 {% highlight matlab %}
 ebsd.layout
 {% endhighlight %}
@@ -172,9 +163,9 @@ ebsd.layout
 {% highlight plaintext %}
 ans = gridLayout (row||y, col||x)
 {% endhighlight %}
-<h2 id="13">Putting a Map in an Image's Layout</h2>
-<p>
-<code class="language-plaintext highlighter-rouge">gridify</code> takes such a layout, which is how a map is put in the same order as a picture it is to be compared with. <code class="language-plaintext highlighter-rouge">'columnMajor'</code> and <code class="language-plaintext highlighter-rouge">'rowMajor'</code> are the two it knows by name - see <a href="EBSDGrid.html">Square and Hex Grids</a> - and any other is stated as a <code class="language-plaintext highlighter-rouge">gridLayout</code>. Start again from the map as it was imported, and say the detector had been mounted a quarter turn from the scan, so its rows run against x and its columns along y</p>
+<h2 id="16">Put a Map in an Image Layout</h2>
+<p> <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> accepts a layout and stores a square-grid map in that order. <a href="EBSDGrid.html">Gridded EBSD Data</a> introduces the named layouts <code class="language-plaintext highlighter-rouge">'columnMajor'</code> and <code class="language-plaintext highlighter-rouge">'rowMajor'</code>. Give any other signed pair of axis directions as a <code class="language-plaintext highlighter-rouge">gridLayout</code>.</p>
+<p>Start again from the imported map. Suppose the detector was mounted a quarter turn from the scan. Its rows run against x and its columns along y.</p>
 {% highlight matlab %}
 mtexdata trueEbsdWCCoSmall silent
 
@@ -184,31 +175,20 @@ gL = gridLayout(-xvector,yvector)
 {% highlight plaintext %}
 gL = gridLayout (row||-x, col||y)
 {% endhighlight %}
-<p>Then the map goes into that layout and its shape follows</p>
+<p>Store the map in that layout and display its resulting matrix shape.</p>
 {% highlight matlab %}
-ebsdI = gridify(ebsd,gL)
+ebsdI = gridify(ebsd,gL);
+
+size(ebsdI)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsdI = EBSDsquare (y↓→x, row←col↓)
- 
- Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
-     0    89 (0.72%)  notIndexed          none                                   
-     1   11180 (91%)         W C  LightSkyBlue      -6m2        X||a*, Y||b, Z||c
-     2    991 (8.1%)      Co-fcc  DarkSeaGreen      m-3m                         
-     3    28 (0.23%)      Co-hcp     Goldenrod     6/mmm        X||a*, Y||b, Z||c
- 
- Properties: bc, bs, bands, MAD, quality, oldId
- Scan unit : um
- X × Y × Z : [10 → 30] × [8 → 23] × [0 → 0]
- Normal vector: (0,0,1)
- Square grid  :128 × 96
- source: trueEbsdWCCo, centre half of the field of view, coarsened 4x
- madeBy: trueEBSD tools/makeWCCoSmall.m
+ans =
+   128    96
 {% endhighlight %}
-<p>Nothing was resampled and no value invented - a transpose and two flips are all that is ever applied, which is why this is safe to do to orientation data. For this particular pair of layouts it is a quarter turn, and it really is only that</p>
+<p>No measurement was resampled or invented. On the same square lattice, a layout change applies only a transpose and two possible flips. It is safe for orientation data. For this pair the result is exactly a quarter turn.</p>
 {% highlight matlab %}
-isequal(ebsdI.bc, rot90(ebsd.bc))
+isequal(ebsdI.bc,rot90(ebsd.bc))
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -216,9 +196,9 @@ ans =
   logical
    1
 {% endhighlight %}
-<p>so putting it back is exact</p>
+<p>Returning to the original layout is exact as well.</p>
 {% highlight matlab %}
-isequal(gridify(ebsdI,ebsd.layout).bc, ebsd.bc)
+isequal(gridify(ebsdI,ebsd.layout).bc,ebsd.bc)
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -226,7 +206,7 @@ ans =
   logical
    1
 {% endhighlight %}
-<p>Note what has <b>not</b> changed. The layout is how the measurements are stored, not where the specimen is, so the map still plots the same way up - MTEX moves the camera for the screen, never the data</p>
+<p>The specimen has not moved. A layout changes how measurements are stored, not where they are. MTEX adjusts the screen mapping, so both maps still plot the same way up.</p>
 {% highlight matlab %}
 plot(ebsd,ebsd.bc,'micronbar','off','layout',[1,2]), mtexColorMap gray
 title('as imported')
@@ -234,27 +214,42 @@ nextAxis
 plot(ebsdI,ebsdI.bc,'micronbar','off'), mtexColorMap gray
 title('row ||-x, col ||y')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDMapsAndImages_05.png" %}
 </center>
-<h2 id="18">Comparing Them Pixel by Pixel</h2>
-<p>Once the frames agree and the layouts agree, the two rasters are ordinary matrices of the same thing and may be handed to any image processing tool side by side. What is still missing is a common pixel grid: the map here is on 0.159 micron and the images on 0.0795.</p>
-<p> <a href="mapImage.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> resamples an image at any positions, so the map's own are all it takes. The image has no origin of its own - that was the first question again - so state where its first pixel sits.</p>
+<p>The same WC grains occupy the same screen positions in both panels even though the two band-contrast matrices are quarter-turn permutations.</p>
+<h2 id="22">Compare the Rasters Pixel by Pixel</h2>
+<p>Agreeing frames and layouts makes the rasters geometrically comparable, but pixel-wise operations also require one common grid. The EBSD spacing is 0.159 micron here, whereas the image spacing is 0.0795 micron.</p>
+<p> <a href="mapImage.interp.html"><code class="language-plaintext highlighter-rouge">interp</code></a> samples an image at arbitrary positions. A bare array carries no physical origin, so state where the centre of its first pixel lies. The origin and pixel size must use the same length unit as the EBSD positions.</p>
 {% highlight matlab %}
 mgI = mapImage(img.fsdT1,'dxy',img.pixSzImg,'origin',ebsd.pos(1,1));
 
 ebsd.prop.fsdT1 = interp(mgI,ebsd.pos);
 {% endhighlight %}
-<p>From here the image is just another property of the map, and travels with it through cropping, gridding and indexing</p>
+<p>The image is now a per-pixel property: one value per measurement point, indexed and subset in lockstep with the map. It travels through cropping, gridding and indexing with the EBSD data. The two channels can now be passed side by side to image-processing tools.</p>
+<p>Image values are interpolated linearly by default, and positions outside the image return <code class="language-plaintext highlighter-rouge">NaN</code>. No EBSD orientation is interpolated in this step.</p>
 {% highlight matlab %}
-plot(ebsd,ebsd.fsdT1)
+plot(ebsd,ebsd.bc,'micronbar','off','layout',[1,2])
+title('band contrast')
+nextAxis
+plot(ebsd,ebsd.fsdT1,'micronbar','off')
+title('forescatter on EBSD grid')
 mtexColorMap gray
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="EBSDMapsAndImages_06.png" %}
 </center>
-<p>The two still do not overlay perfectly: the beam drifts during a scan, the camera moves between acquisitions, the specimen is tilted. Each of those is a <a href="EBSDSpatialTransform.html">spatial transform</a> that can be fitted from the two pictures and taken back out, which is <a href="EBSDTrueEbsd.html">what TrueEBSD does</a> - and it starts exactly here, with a sequence whose entries agree about the specimen and about the order they are stored in.</p>
-<p>See also <a href="EBSDGrid.html">Square and Hex Grids</a> for what a layout is good for, and <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> for the other frame question a map raises - whether its Euler angles and its coordinates refer to the same axes.</p>
+<p>The same grain-scale features occupy roughly the same places in both panels. Their edges do not overlay perfectly, which shows that matching frames, layouts, origins and pixel sizes is necessary but not sufficient.</p>
+<h2 id="25">From Bookkeeping to Registration</h2>
+<p>Beam drift during a scan, camera motion between acquisitions and specimen tilt all change positions continuously. They are not layout problems. Each is a <a href="EBSDSpatialTransform.html">spatial transform</a> that can be fitted from corresponding image features and then removed.</p>
+<p>
+<a href="EBSDTrueEbsd.html">TrueEBSD Distortion Correction</a> performs that workflow. It starts with exactly the sequence built here: entries that agree about the specimen frame, array order and pixel grid.</p>
+<h2 id="26">Further Reading</h2>
+<p>Britton et al., <a href="https://doi.org/10.1016/j.matchar.2016.04.008"><b>Tutorial: Crystal orientations and EBSD - or which way is up?</b></a>. <b>Materials Characterization</b> 117 (2016), 113-126. The paper gives a practical calibration of specimen, diffraction-pattern and crystal frames.</p>
+<p>
+<a href="https://www.iso.org/standard/82749.html">ISO 24173:2024</a>, <b>Microbeam analysis - Guidelines for orientation measurement using electron backscatter diffraction</b>. The standard covers specimen preparation, instrument configuration, calibration and acquisition.</p>
+<p>Tong and Britton, <a href="https://doi.org/10.1016/j.ultramic.2020.113130"><b>TrueEBSD: Correcting spatial distortions in electron backscatter diffraction maps</b></a>. <b>Ultramicroscopy</b> 221 (2021), 113130. The paper describes the method used by the next tutorial.</p>
+<p>Zitov&aacute; and Flusser, <a href="https://doi.org/10.1016/S0262-8856(03)00137-9"><b>Image registration methods: a survey</b></a>. <b>Image and Vision Computing</b> 21 (2003), 977-1000. The survey relates feature detection, matching, transform fitting and resampling.</p>
 </div>
 </body>
 </html>

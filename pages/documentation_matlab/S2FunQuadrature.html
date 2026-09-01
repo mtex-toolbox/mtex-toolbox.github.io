@@ -1,5 +1,5 @@
 ---
-title: "Qudarature"
+title: 'Quadrature of Spherical Functions'
 
 sidebar: documentation_sidebar
 permalink: S2FunQuadrature.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Qudarature</title>
+<title>Quadrature of Spherical Functions</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_S2FunQuadrature.m">
 </head>
@@ -22,23 +22,88 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Quadrature replaces an integral over the sphere by a weighted sum at selected directions. MTEX uses those sums to compute the spherical harmonic coefficients of a function that can be evaluated at arbitrary directions. The result is an <a href="S2FunHarmonic.S2FunHarmonic.html">S2FunHarmonic</a> that can be evaluated, plotted, and combined with other spherical functions.</p>
 <!--/introduction-->
 {% highlight matlab %}
+plottingConvention.default('y↑→x');
+close all
+{% endhighlight %}
+<h2 id="2">Construct a harmonic representation</h2>
+<p>Consider the scalar function \(f(\mathbf{v})=v_xv_y\). A MATLAB function handle expresses this rule for one or many <a href="vector3d.vector3d.html">vector3d</a> directions.</p>
+{% highlight matlab %}
 fun = @(v) v.x .* v.y;
-
-sF = S2FunHarmonic.quadrature(fun)
-
-surf(sF)
+{% endhighlight %}
+<p> <a href="S2FunHarmonic.quadrature.html"><code class="language-plaintext highlighter-rouge">S2FunHarmonic.quadrature</code></a> evaluates the handle on a quadrature grid and applies the corresponding weights. The <code class="language-plaintext highlighter-rouge">'bandwidth'</code> is the largest harmonic degree retained in the result. Because this example is a quadratic polynomial, degree 2 is sufficient.</p>
+{% highlight matlab %}
+sF = S2FunHarmonic.quadrature(fun,'bandwidth',2)
 {% endhighlight %}
 
 {% highlight plaintext %}
-sF = S2FunHarmonic (y↓→x)
-  bandwidth: 128
+sF = S2FunHarmonic (y↑→x)
+  bandwidth: 2
   antipodal: true
 {% endhighlight %}
-<center>
+<p>The surface radius and colour both show the function value.</p>
+{% highlight matlab %}
+surf(sF)
+mtexColorbar
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="S2FunQuadrature_01.png" %}
 </center>
+<p>Notice the four alternating lobes around the equator. The function is zero whenever either \(v_x\) or \(v_y\) is zero, and it changes sign across each of those two great circles.</p>
+<h2 id="6">Check the recovered function</h2>
+<p>Quadrature constructs coefficients rather than merely storing the sampled values. We can therefore evaluate the result at directions that were not chosen as quadrature nodes. The maximum error below tests a regular grid with a spacing of \(5\) degrees.</p>
+{% highlight matlab %}
+vTest = reshape(regularS2Grid('resolution',5*degree),[],1);
+maxError = max(abs(eval(sF,vTest) - fun(vTest)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+maxError =
+   6.6613e-16
+{% endhighlight %}
+<p>The error is at numerical round-off because the requested bandwidth contains every harmonic degree in this polynomial. For a general function, increase the bandwidth until the features or derived quantities of interest no longer change appreciably.</p>
+<h2 id="8">What bandwidth leaves out</h2>
+<p>Bandwidth 1 cannot represent the degree-2 variation of this example. The corresponding result is nearly zero, so its error remains large even though the quadrature itself has been carried out correctly.</p>
+{% highlight matlab %}
+sFLow = S2FunHarmonic.quadrature(fun,'bandwidth',1);
+lowBandwidthError = max(abs(eval(sFLow,vTest) - fun(vTest)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+lowBandwidthError =
+    0.6667
+{% endhighlight %}
+<p>This is truncation error, not evidence that more scattered data are needed. Quadrature assumes a callable function over the whole sphere. If only scattered directions and values are available, use interpolation or approximation instead.</p>
+<h2 id="10">Supplying a quadrature grid explicitly</h2>
+<p>The high-level call creates its own nodes and weights. The same operation can start from an explicit <a href="quadratureS2Grid.quadratureS2Grid.html">quadratureS2Grid</a> when the function values have already been evaluated there.</p>
+{% highlight matlab %}
+S2G = quadratureS2Grid(2);
+values = fun(S2G);
+sFGrid = S2FunHarmonic.quadrature(S2G,values);
+gridResultDifference = max(abs(eval(sFGrid,vTest) - eval(sF,vTest)))
+{% endhighlight %}
+
+{% highlight plaintext %}
+gridResultDifference =
+     0
+{% endhighlight %}
+<p>The grid carries its own weights, and the difference is at numerical round-off. Arbitrary scattered directions are not automatically a quadrature rule: their weights must represent area on the sphere. Without suitable weights, dense regions would contribute too much to the coefficients.</p>
+<h2 id="12">The maths behind quadrature</h2>
+<p>Let \(Y_n^k\) be an orthonormal spherical harmonic. Its coefficient in a function \(f\) is</p>
+<p>\[ \hat f_n^k = \int_{S^2} f(\mathbf{v})\, \overline{Y_n^k(\mathbf{v})}\,\mathrm{d}\mathbf{v}. \]</p>
+<p>A quadrature grid supplies nodes \(\mathbf{v}_m\) and area weights \(w_m\). MTEX approximates every coefficient through degree \(N\) by</p>
+<p>\[ \hat f_n^k \approx \sum_m w_m f(\mathbf{v}_m) \overline{Y_n^k(\mathbf{v}_m)}, \qquad 0\leq n\leq N. \]</p>
+<p>The <code class="language-plaintext highlighter-rouge">'bandwidth'</code> option sets \(N\). It controls both the finest variation retained in the harmonic representation and the quadrature grid required to compute its coefficients.</p>
+<h2 id="13">References</h2>
+<div>
+<ul>
+<li>S. Kunis and D. Potts, <a href="https://doi.org/10.1016/S0377-0427(03)00546-6">Fast spherical Fourier algorithms</a>, <i>Journal of Computational and Applied Mathematics</i> 161 (2003), 75--98, develops the fast transform for values at scattered directions used to compute spherical harmonic coefficients.</li>
+</ul>
+</div>
+<h2 id="14">Next</h2>
+<p>Continue with <a href="S2FunHarmonicRepresentation.html">Harmonic Representation</a> to inspect and truncate the coefficients produced by quadrature. If your starting point is scattered measurements, see <a href="S2FunApproximationInterpolation.html">Approximation and Interpolation</a>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "MTEX Scripts"
+title: 'MTEX Scripts'
 
 sidebar: documentation_sidebar
 permalink: MTEXScripts.html
@@ -22,26 +22,29 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<!--/introduction-->
-<p>Unlike most other texture analysis software MTEX does not have any graphical user interface. Instead the user is supposed to write scripts. Those scripts usually have the following structure</p>
+<p>MTEX has no graphical user interface. You work with MTEX by writing MATLAB scripts: text files that keep the commands for an analysis in a reproducible order.</p>
+<p>A typical script follows five steps.</p>
 <div>
 <ol>
-<li>import data</li>
-<li>inspect the data</li>
-<li>correct the data</li>
-<li>analyze the data</li>
-<li>plot and export the results of the analysis</li>
+<li>Import data.</li>
+<li>Inspect the imported data.</li>
+<li>Correct the data when necessary.</li>
+<li>Analyze the data.</li>
+<li>Plot and export the results.</li>
 </ol>
 </div>
-<p>During all these steps the data are stored as variables of different type. There are many different types of variables (called classes) for different objects, like <a href="vector3d.vector3d.html">vectors</a>, <a href="rotation.rotation.html">rotations</a>, <a href="EBSD.EBSD.html">EBSD data</a>, <a href="grain2d.grain2d.html">grains</a> or <a href="SO3Fun.SO3Fun.html">ODFs</a>. A complete list of all classes and all functions can be found in the <a href="FunctionReference.html">Function Reference</a>.</p>
-<p>Variables are generated automatically when data are imported. E.g., the commands</p>
+<p>During these steps, MATLAB stores data under names called variables. Each variable has a type, called its class, which determines the operations that can be applied to it. MTEX provides classes for objects such as <a href="vector3d.vector3d.html">vectors</a>, <a href="rotation.rotation.html">rotations</a>, <a href="EBSD.EBSD.html">EBSD data</a>, <a href="grain2d.grain2d.html">grains</a>, and <a href="SO3Fun.SO3Fun.html">orientation distribution functions (ODFs)</a>. The <a href="FunctionReference.html">Function Reference</a> lists all MTEX classes and functions.</p>
+<!--/introduction-->
+<h2 id="1">Import and inspect data</h2>
+<p>Import functions create variables automatically. Here, <code class="language-plaintext highlighter-rouge">fileName</code> stores the path to an example CTF file. The second command imports that file and stores the result in the variable <code class="language-plaintext highlighter-rouge">ebsd</code>.</p>
 {% highlight matlab %}
 fileName = [mtexEBSDPath filesep 'Forsterite.ctf'];
-ebsd = EBSD.load(fileName,'EulerCorrection',rotation.byAxisAngle(xvector,180*degree))
+ebsd = EBSD.load(fileName,'EulerCorrection', ...
+  rotation.byAxisAngle(xvector,180*degree))
 {% endhighlight %}
 
 {% highlight plaintext %}
-ebsd = EBSDsquare (Y1↓→X1, row↓→col)
+ebsd = EBSDsquare (y↓→x, row↓→col)
  
  Phase  Orientations     Mineral         Color  Symmetry  Crystal reference frame
      0   58485 (24%)  notIndexed          none                                   
@@ -51,25 +54,28 @@ ebsd = EBSDsquare (Y1↓→X1, row↓→col)
  
  Properties: bands, bc, bs, error, mad, oldId
  Scan unit : um
- X x Y x Z : [0 → 36550] x [0 → 16750] x [0 → 0]
+ X × Y × Z : [0 → 36550] × [0 → 16750] × [0 → 0]
  Normal vector: (0,0,1)
- Square grid  :336 x 732
+ Square grid  :336 × 732
 {% endhighlight %}
-<p>imports data from the file <code class="language-plaintext highlighter-rouge">fileName.ctf</code> and stores them in the variable <code class="language-plaintext highlighter-rouge">ebsd</code> of type <a href="https://mtex-toolbox.github.io/EBSD.EBSD.html"><code class="language-plaintext highlighter-rouge">EBSD</code></a>.</p>
-<p>Next one can pass the variable <code class="language-plaintext highlighter-rouge">ebsd</code> to different MTEX function. E.g. to plot a phase plot one simply does</p>
+<p>Leaving off the semicolon displays a summary of <code class="language-plaintext highlighter-rouge">ebsd</code> in the Command Window. This is a quick inspection step: the summary reports the phases, numbers of orientations, properties, map extent, and grid size. The <code class="language-plaintext highlighter-rouge">'EulerCorrection'</code> option also corrects the imported orientations by the specified rotation.</p>
+<h2 id="3">Plot the phase map</h2>
+<p>Pass a variable to an MTEX function to operate on its data. The command below passes <code class="language-plaintext highlighter-rouge">ebsd</code> to <code class="language-plaintext highlighter-rouge">plot</code> and colors every indexed measurement by its phase.</p>
 {% highlight matlab %}
 plot(ebsd)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MTEXScripts_01.png" %}
 </center>
-<p>The grain structure is reconstructed by the command</p>
+<p>Notice the large blue forsterite regions, the smaller green enstatite and yellow diopside regions, and the white notIndexed areas. A notIndexed measurement is one whose diffraction pattern could not be indexed.</p>
+<h2 id="5">Reconstruct and inspect grains</h2>
+<p>The next command segments the measurements into grains. A grain is a phase-homogeneous, spatially connected region of EBSD measurements produced by segmentation. The <code class="language-plaintext highlighter-rouge">'minPixel'</code> option excludes indexed grains with fewer than three measurements.</p>
 {% highlight matlab %}
 grains = calcGrains(ebsd,'minPixel',3)
 {% endhighlight %}
 
 {% highlight plaintext %}
-grains = grain2d (Y1↓→X1)
+grains = grain2d (y↓→x)
  
  Phase  Grains  Pixels     Mineral  Symmetry         Color
      0       8     811  notIndexed                    none
@@ -83,16 +89,29 @@ grains = grain2d (Y1↓→X1)
  
  Properties: meanRotation, GOS
 {% endhighlight %}
-<p>which returns a new variable of type <a href="grain2d.grain2d.html"><code class="language-plaintext highlighter-rouge">grain2d</code></a>, here called <code class="language-plaintext highlighter-rouge">grains</code>. This variable contains the entire grain structure. Finally, we my visualize this structure by</p>
+<p>The returned <a href="grain2d.grain2d.html">grain2d</a> object is stored in <code class="language-plaintext highlighter-rouge">grains</code>. Its Command Window summary reports the number of grains in each phase and information about their boundaries.</p>
+<h2 id="7">Add the grain boundaries</h2>
+<p>Plotting on the same axes connects the result of the analysis to the phase map. <a href="matlab:doc('hold')">hold on</a> preserves the existing map while the boundary is added, and <code class="language-plaintext highlighter-rouge">hold off</code> ends that plotting state.</p>
 {% highlight matlab %}
 hold on
-plot(grains.boundary,'linewidth',2)
+plot(grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="MTEXScripts_02.png" %}
 </center>
-<p>An MTEX script is a sequence of MTEX commands. Usually, these are accompanied by comments (lines starting with <code class="language-plaintext highlighter-rouge">%</code>), describing the purpose of each command and making the script understandable in the future. It is also good practice to subdivide MTEX scripts into sections by adding lines starting with <code class="language-plaintext highlighter-rouge">%%</code> and executing those scripts only section by section <code class="language-plaintext highlighter-rouge">Shift Strg Enter</code>.</p>
+<p>Notice that the dark lines trace changes between neighboring grains. Some lines lie within one color because grains of the same phase can still have different orientations.</p>
+<h2 id="9">Organize a script</h2>
+<p>An MTEX script is a sequence of MATLAB and MTEX commands. Add comments on lines beginning with <code class="language-plaintext highlighter-rouge">%</code> to record why each command is present. These explanations make the analysis understandable when the script is reopened.</p>
+<p>Divide a longer script into sections with lines beginning with <code class="language-plaintext highlighter-rouge">%%</code>. In the MATLAB Editor, Ctrl+Enter runs the current section, while Ctrl+Shift+Enter runs it and advances to the next section. Running one section at a time lets you inspect each intermediate variable before continuing.</p>
+<h2 id="10">References</h2>
+<div>
+<ul>
+<li>MathWorks, <a href="https://www.mathworks.com/help/matlab/matlab_prog/create-scripts.html">Create Scripts</a>, <i>MATLAB documentation</i>. It explains script files, comments, sections, and the Editor commands used on this page.</li>
+</ul>
+</div>
+<h2 id="11">Next</h2>
+<p>Continue with <a href="ListsAndIndexing.html">Lists and Indexing</a> to select parts of an MTEX variable and apply one operation to many stored objects.</p>
 </div>
 </body>
 </html>

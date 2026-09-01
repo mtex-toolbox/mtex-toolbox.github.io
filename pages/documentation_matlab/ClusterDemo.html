@@ -1,5 +1,5 @@
 ---
-title: "Cluster demo"
+title: 'Clustering directions and orientations'
 
 sidebar: documentation_sidebar
 permalink: ClusterDemo.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Cluster demo</title>
+<title>Clustering directions and orientations</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_ClusterDemo.m">
 </head>
@@ -22,106 +22,104 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Clustering allows to separate data, like orientations, directions, grain shapes, ... into groups by proximity. While MTEX supports several clustering algorithms, the currently best one is <a href="https://classix.readthedocs.io/en/stable/">classix</a>.</p>
+<p>A cluster is a group of observations that lie close together in the space of the data. Clustering assigns each observation to a group without requiring the groups to be named in advance.</p>
+<p>MTEX can cluster directions and orientations while respecting their geometry and symmetry. This is different from <a href="DensityEstimation.html">density estimation</a>, which constructs a continuous density from discrete observations. Here the result is one integer label per observation and one representative center per cluster.</p>
 <!--/introduction-->
-<p>Lets start by clustering some directional data which we sample from our smiley function</p>
+<h2 id="1">Cluster directional data</h2>
+<p>We start with directions sampled from a squared smiley function. Squaring the function concentrates the sample around its eyes and mouth while retaining points between those features.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
+rng default
 S2F = S2Fun.smiley.^2;
-
 v = S2F.discreteSample(10000);
 
 scatter(v,'MarkerAlpha',0.2,'MarkerSize',2)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ClusterDemo_01.png" %}
 </center>
+<h2 id="2">Read the cluster result</h2>
+<p>For directions, <a href="vector3d.calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> uses CLASSIX by default. The vector <code class="language-plaintext highlighter-rouge">cInd</code> has one integer cluster label for every input direction. The entries of <code class="language-plaintext highlighter-rouge">center</code> are the corresponding mean directions.</p>
+<p>Cluster labels are identifiers, not ranks: cluster 1 is not intrinsically more important than cluster 2. We use the labels only to assign colors and then mark each returned center.</p>
 {% highlight matlab %}
-[cInd,center] = calcCluster(v);
+[cInd,center] = calcCluster(v,'radius',0.12,'minPoints',100);
 
 plot(v,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
-
 annotate(center)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ClusterDemo_02.png" %}
 </center>
-<p>The output <code class="language-plaintext highlighter-rouge">cInd</code> is a list of integers that associates each data point with its cluster. For fine tuning the classix clustering algorithm has the options <code class="language-plaintext highlighter-rouge">'radius'</code> and <code class="language-plaintext highlighter-rouge">'minPoints'</code>.</p>
-<p>Note that MTEX automatically adapts the algorithm in presence of antipodals symmetry, i.e., the symmetrically equivalent points at the top and the bottom of the smiley are assigned to the same cluster.</p>
+<h2 id="3">Tune the grouping</h2>
+<p>The colored regions follow the separated strokes of the smiley, while the centers sit inside the densest parts of those regions. CLASSIX first forms local groups and then merges nearby groups into clusters.</p>
+<p>Two options control how readily this happens. Increasing <code class="language-plaintext highlighter-rouge">'radius'</code> makes the local groups coarser and usually produces fewer clusters. The <code class="language-plaintext highlighter-rouge">'minPoints'</code> option sets the size below which tiny groups are merged into neighboring clusters. If the automatic result is too fragmented, increase <code class="language-plaintext highlighter-rouge">'radius'</code>; if isolated specks survive, increase <code class="language-plaintext highlighter-rouge">'minPoints'</code>. This example supplies both values so that estimating the radius does not require the Statistics and Machine Learning Toolbox.</p>
+<h2 id="4">Respect antipodal symmetry</h2>
+<p>Antipodal directions identify a direction <code class="language-plaintext highlighter-rouge">v</code> with its opposite <code class="language-plaintext highlighter-rouge">-v</code>. Setting the <code class="language-plaintext highlighter-rouge">antipodal</code> property tells MTEX to measure proximity with this equivalence in mind.</p>
+<p>The smiley sample on its own cannot show this. No feature of it lies opposite another, so identifying <code class="language-plaintext highlighter-rouge">v</code> with <code class="language-plaintext highlighter-rouge">-v</code> has nothing to merge. Add the opposite of every sampled direction, and each feature gains one.</p>
 {% highlight matlab %}
-v.antipodal = true;
-[cInd,center] = calcCluster(v);
+vSym = [v(:); -v(:)];
 
-plot(v,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
+[cInd,center] = calcCluster(vSym,'radius',0.12,'minPoints',100);
 
+plot(vSym,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
 annotate(center)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ClusterDemo_03.png" %}
 </center>
-<p>Analogously to directions, we may also cluster orientations. In order to demonstrate this we first draw a random sample from a model ODF consisting of a fibre and a unimodal component.</p>
+<p>The two discs are the upper and the lower hemisphere. Read as ordinary directions, the sample falls into eight clusters. Every feature of the smiley and every one of their opposites carries a color of its own.</p>
 {% highlight matlab %}
-% define a cubic crystal symmetry
-cs  = crystalSymmetry('432');
+vSym.antipodal = true;
+[cInd,center] = calcCluster(vSym,'radius',0.12,'minPoints',100);
 
-% define an ODF with two radial peaks
-odf = 0.7*fibreODF(fibre.gamma(cs),'halfwidth',10*degree) + ...
-  0.3*unimodalODF(orientation.byEuler(30*degree,10*degree,60*degree,cs))
-
-% simulate 10k orientations from the ODF
-ori = odf.discreteSample(10000);
-{% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunComposition (432 → y↑→x)
- 
-  fibre component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  fibre : (111) || 0,0,1
-  weight: 0.7
- 
-  unimodal component
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 1 orientations
- 
-  Bunge Euler angles in degree
-  phi1    Phi   phi2 weight
-    30     10     60    0.3
-{% endhighlight %}
-<p>Lets visualize the ODF and the random sampling</p>
-{% highlight matlab %}
-% view the ODF
-plotSection(odf,'contourf')
-mtexColorMap white2black
-
-% together with the random sample
-plot(ori,'add2all','MarkerSize',3,'MarkerAlpha',0.25,'all')
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ClusterDemo_04.png" %}
-</center>
-<p>We again use the classix method for for clustering the orientations. Note that the algorithm separates the fibre from the unimodal portion. In particular, it correctly assigns all symmetrically equivalent orientations to the same cluster.</p>
-{% highlight matlab %}
-[cId,center] = calcCluster(ori,'method','classix');
-
-plotSection(ori,ind2color(cId),'markerSize',3,'MarkerAlpha',0.25,'all')
-
+plot(vSym,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
 annotate(center)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
+{% include inline_image.html file="ClusterDemo_04.png" %}
+</center>
+<p>One disc is left, and four clusters, each exactly twice the size of before. Every feature has been merged with the one opposite it. The two eyes stay apart, because one eye is not the opposite of the other.</p>
+<p>The blue cluster reaches the rim of the disc at the top and at the bottom. Those are opposite directions, and they now share a label. This is a change in the meaning of a direction, not merely a change in how the same labels are drawn.</p>
+<h2 id="7">Build an orientation example</h2>
+<p>The same idea applies in orientation space. We construct an orientation distribution function (ODF) with a broad fibre component and a compact unimodal component. <a href="OptimalKernel.html">Kernel selection</a> explains how the halfwidth controls smoothing when an ODF is estimated from observations.</p>
+{% highlight matlab %}
+cs = crystalSymmetry('432');
+odf = 0.7*fibreODF(fibre.gamma(cs),'halfwidth',10*degree) + ...
+  0.3*unimodalODF(orientation.byEuler(30*degree,10*degree,60*degree,cs));
+
+ori = odf.discreteSample(10000);
+{% endhighlight %}
+<h2 id="8">Compare the model with its sample</h2>
+<p>Filled contours show sections through the model ODF. The points are the sampled orientations drawn over every section.</p>
+{% highlight matlab %}
+plotSection(odf,'contourf')
+mtexColorMap white2black
+plot(ori,'add2all','MarkerSize',3,'MarkerAlpha',0.25,'all')
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="ClusterDemo_05.png" %}
 </center>
+<p>Notice the narrow concentration of points around the compact peak and the elongated concentration along the fibre. These are the two structures the clustering step should distinguish.</p>
+<h2 id="10">Cluster the orientations</h2>
+<p>Orientation clustering does not use CLASSIX unless it is selected explicitly. The embedding used by this method accounts for crystal symmetry, so symmetrically equivalent representations of an orientation receive the same cluster label.</p>
 {% highlight matlab %}
-function plotCluster(r,cId,varargin)
+[cId,center] = calcCluster(ori,'method','classix', ...
+  'radius',0.12,'minPoints',100);
 
-scatter(r(cId==1),'MarkerFaceColor',ind2color(1),varargin{:})
-hold on
-for i = 2:max(cId)
-  scatter(r(cId==i),'add2all','MarkerFaceColor',ind2color(i),varargin{:})
-end
-hold off
-end
+plotSection(ori,ind2color(cId),'markerSize',3, ...
+  'MarkerAlpha',0.25,'all')
+annotate(center)
 {% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ClusterDemo_06.png" %}
+</center>
+<p>The dominant color follows the fibre and another color collects the compact unimodal portion. The annotated centers summarize the returned groups; they do not replace the full within-cluster spread visible here.</p>
+<h2 id="12">References</h2>
+<div>
+<ul>
+<li>X. Chen and S. G&uuml;ttel, <a href="https://doi.org/10.1016/j.patcog.2024.110298">Fast and explainable clustering based on sorting</a>, <i>Pattern Recognition</i> 150 (2024), 110298, introduces the CLASSIX algorithm and its radius and minimum-size controls.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

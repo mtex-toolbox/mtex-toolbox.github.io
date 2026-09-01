@@ -1,5 +1,5 @@
 ---
-title: "Shape Parameters - Basic Properties"
+title: 'Grain Size and Basic Shape Parameters'
 
 sidebar: documentation_sidebar
 permalink: ShapeParameters.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Shape Parameters - Basic Properties</title>
+<title>Grain Size and Basic Shape Parameters</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_ShapeParameters.m">
 </head>
@@ -23,7 +23,10 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>In this section we discuss basic geometric properties of grains. Due to the huge amount of shape parameters we split them into different categories: basic properties (this page), <a href="EllipseBasedParameters.html">properties based on fitted ellipses</a>, <a href="HullBasedParameters.html">convex hull bases properties</a>, <a href="ProjectionBasedParameters.html">projection bases properties</a>. The table below summarizes the shape parameters discussed on this page.</p>
+<p>The outline of a grain is a polygon with hundreds of vertices. A shape parameter compresses that outline into a number that can be plotted, histogrammed, and compared between specimens. The price is that almost all other information about the outline is lost.</p>
+<p>This page covers direct measurements of a grain in a two-dimensional section. It assumes that the grains have been <a href="GrainReconstruction.html">reconstructed</a> and explains why their boundaries are <a href="GrainSmoothing.html">smoothed</a>. Use <a href="SelectingGrains.html">Selecting Grains</a> first if selecting complete grains away from the map edge is unfamiliar.</p>
+<p>A measured section is not a three-dimensional grain. Large grains are more likely to be cut, and most cuts miss the widest part of a grain. Quantities such as <code class="language-plaintext highlighter-rouge">area</code> and <code class="language-plaintext highlighter-rouge">equivalentRadius</code> therefore describe the observed section unless a stereological model or a standard says how to infer a three-dimensional size from them.</p>
+<p>The most useful scalar properties are listed below. Lengths are returned in the map's measurement unit and areas in its square.</p>
 <p>
    <table class="usertable">
       <tr>
@@ -33,7 +36,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number of pixels per grain</p>
+               <p>number of measurements in the grain</p>
          </td>
          <td>
                <p>
@@ -43,7 +46,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>grain area in µm²</p>
+               <p>area of the section</p>
          </td>
       </tr>
       <tr>
@@ -55,7 +58,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number of boundary segments</p>
+               <p>number of outline segments</p>
          </td>
          <td>
                <p>
@@ -65,7 +68,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>perimeter in µm</p>
+               <p>length of the outline</p>
          </td>
       </tr>
       <tr>
@@ -77,17 +80,17 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number of inner boundaries</p>
+               <p>number of subgrain boundary segments</p>
          </td>
          <td>
                <p>
-                  <a href="grain2d.subBoundarySize.html">
+                  <a href="grain2d.subBoundaryLength.html">
                      <tt>subBoundaryLength</tt>
                   </a>
                </p>
          </td>
          <td>
-               <p>length of inner boundaries in µm</p>
+               <p>length of subgrain boundaries</p>
          </td>
       </tr>
       <tr>
@@ -99,7 +102,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>diameter in µm</p>
+               <p>largest vertex-to-vertex distance</p>
          </td>
          <td>
                <p>
@@ -121,7 +124,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>perimeter of a circle with the same area</p>
+               <p>perimeter of the equal-area circle</p>
          </td>
          <td>
                <p>
@@ -131,7 +134,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>radius of a circle with the same area</p>
+               <p>radius of the equal-area circle</p>
          </td>
       </tr>
       <tr>
@@ -143,17 +146,17 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>perimeter / equivalent perimeter</p>
+               <p>perimeter divided by equivalent perimeter</p>
          </td>
          <td>
                <p>
-                  <a href="grain2d.isBoundary.html">
-                     <tt>isBoundary</tt>
+                  <a href="grain2d.paris.html">
+                     <tt>paris</tt>
                   </a>
                </p>
          </td>
          <td>
-               <p>is it a boundary grain</p>
+               <p>indentation relative to the convex hull</p>
          </td>
       </tr>
       <tr>
@@ -165,13 +168,17 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>irregularity of grain boundary</p>
+               <p>boundary irregularity in the ice-grain example</p>
          </td>
          <td>
-            <text/>
+               <p>
+                  <a href="grain2d.isBoundary.html">
+                     <tt>isBoundary</tt>
+                  </a>
+               </p>
          </td>
          <td>
-            <text/>
+               <p>does the grain touch the map edge?</p>
          </td>
       </tr>
       <tr>
@@ -183,7 +190,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>has inclusions</p>
+               <p>does the grain enclose another grain?</p>
          </td>
          <td>
                <p>
@@ -193,7 +200,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>is an inclusions</p>
+               <p>is the grain enclosed by another grain?</p>
          </td>
       </tr>
       <tr>
@@ -205,7 +212,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>number neighboring grains</p>
+               <p>number of neighbouring grains</p>
          </td>
          <td>
                <p>
@@ -227,7 +234,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>list of boundary segments</p>
+               <p>list of grain boundary segments</p>
          </td>
          <td>
                <p>
@@ -237,7 +244,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>subgrain boundaries</p>
+               <p>list of subgrain boundary segments</p>
          </td>
       </tr>
       <tr>
@@ -247,7 +254,7 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>coordinates of the vertices</p>
+               <p>coordinates of the outline vertices</p>
          </td>
          <td>
                <p>
@@ -257,42 +264,42 @@ To make changes, update the MATLAB code and republish this document.
                </p>
          </td>
          <td>
-               <p>x,y coordinates of the barycenter</p>
+               <p>area centroid</p>
          </td>
       </tr>
    </table>
 </p>
-<p>We start our discussion by reconstructing the grain structure from a sample EBSD data set.</p>
+<p>A hole and an inclusion are the same enclosure viewed from opposite sides. The containing grain has a hole, and the contained grain is an inclusion.</p>
 {% highlight matlab %}
-% load sample EBSD data set
+% load sample EBSD data in its specimen plotting frame
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
-% restrict it to a subregion of interest.
+% restrict the map to a region of interest and indexed measurements
 ebsd = ebsd(inpolygon(ebsd,[5 2 10 5]*10^3));
-
-% remove all not indexed pixels
 ebsd = ebsd('indexed');
 
-% reconstruct grains
-[grains, ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5);
-
-% smooth them
+% reconstruct and smooth the grains
+[grains,ebsd] = calcGrains(ebsd,'angle',5*degree,'minPixel',5);
 grains = smoothBoundary(grains,5);
+mapGrains = grains;
 
-% plot the orientation data of the Forsterite phase
-plot(ebsd('fo'),ebsd('fo').orientations)
-
-% plot the grain boundary on top of it
+% plot forsterite orientations and the reconstructed boundary network
+plot(ebsd('Fo'),ebsd('Fo').orientations,'ipfDirection',zvector)
 hold on
 plot(grains.boundary,'lineWidth',2)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ShapeParameters_01.png" %}
 </center>
-<h2 id="3">Grain size vs. grain area and boundary size vs. perimeter</h2>
-<p>The most basic properties are number of pixels and grain area. Those can be computed by</p>
+<p>The black network separates the reconstructed grains. Smoothing has removed the square-grid staircase while retaining the larger-scale turns of the boundaries. It is a measurement choice, not recovered sub-pixel detail.</p>
+<p>A grain touching the map edge continues beyond the measured field. Its visible area and outline are truncated, so we exclude such grains from the per-grain comparisons below. A standardised average grain-size method may prescribe a different edge-counting rule.</p>
+{% highlight matlab %}
+grains = grains(~grains.isBoundary);
+{% endhighlight %}
+<h2 id="3">Pixel count and area</h2>
+<p>Size comes in two forms: the number of measurements assigned to a grain and the area occupied by its observed section.</p>
 {% highlight matlab %}
 grains(9).numPixel
 grains(9).area
@@ -300,44 +307,54 @@ grains(9).area
 
 {% highlight plaintext %}
 ans =
-    24
+    19
 ans =
-   8.1751e+04
+   8.6813e+04
 {% endhighlight %}
-<p>Hereby <code class="language-plaintext highlighter-rouge">numPixel</code> refers to the number of pixels that belong to a certain grain while <code class="language-plaintext highlighter-rouge">area</code> represents the actual area measured in <code class="language-plaintext highlighter-rouge">(&micro;m)^2</code>. We may analyze the distribution of grains by grain area using a histogram.</p>
+<p>
+<code class="language-plaintext highlighter-rouge">numPixel</code> is a count, while <code class="language-plaintext highlighter-rouge">area</code> is in the square of the map unit. They are proportional only when one step size is used throughout the map. The count is useful during reconstruction because <code class="language-plaintext highlighter-rouge">'minPixel'</code> is expressed in it. Physical area is usually the quantity to report.</p>
+<p>The number-weighted area distribution is strongly skewed.</p>
 {% highlight matlab %}
 close all
 histogram(grains.area)
 xlabel('grain area')
 ylabel('number of grains')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ShapeParameters_02.png" %}
 </center>
-<p>Note the large amount of very small grains. A more realistic histogram we obtain if we do not plot the number of grains at the y-axis but its total area. This can be achieved with the command <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a> or <a href="grain2d.hist.html"><code class="language-plaintext highlighter-rouge">hist(grains)</code></a>
-</p>
+<p>Nearly every grain falls into the first bar. The plot answers how many grains have each area, so numerous small grains dominate even when they occupy little of the section.</p>
+<p>Weighting each grain by its area asks a different question: what fraction of the observed section belongs to grains in each size class? <a href="grain2d.hist.html"><code class="language-plaintext highlighter-rouge">hist(grains)</code></a> draws grouped bars, one colour per indexed phase.</p>
 {% highlight matlab %}
-hist(grains)
+hist(grains);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ShapeParameters_03.png" %}
+</center>
+<p>The small-grain bar is much less dominant after area weighting. Each bar height is now a percentage of the analysed section rather than a grain count. <a href="grain2d.histogram.html"><code class="language-plaintext highlighter-rouge">histogram(grains)</code></a> draws the same values as overlaid phase histograms instead of side-by-side bars.</p>
+{% highlight matlab %}
+histogram(grains);
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="ShapeParameters_04.png" %}
+</center>
+<p>The phase distributions overlap; they are not stacked and their heights should not be added by eye. The many tiny grains remain in the list, but they contribute little area. The largest forsterite grain and its fraction of the analysed interior-grain area are printed below.</p>
+{% highlight matlab %}
+forsteriteArea = grains('Fo').area;
+largestForsteriteArea = max(forsteriteArea)
+largestForsteriteFraction = largestForsteriteArea ./ sum(grains.area)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ans =
-    0.5294    0.8078    0.9804
-ans =
-    0.5608    0.7373    0.5608
-ans =
-    0.8549    0.6471    0.1255
+largestForsteriteArea =
+   2.8049e+06
+largestForsteriteFraction =
+    0.1531
 {% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_03.png" %}
-</center>
-{% highlight matlab %}
-histogram(grains)
-{% endhighlight %}
-<center>
-{% include inline_image.html file="ShapeParameters_04.png" %}
-</center>
-<p>Similarly as <code class="language-plaintext highlighter-rouge">numPixel</code> and <code class="language-plaintext highlighter-rouge">area</code>, the one-dimensional measures <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> give the length of the grain boundary as number of segments and in <code class="language-plaintext highlighter-rouge">&micro;m</code>, respectively.</p>
+<p>The largest forsterite section covers 2.805 mm&sup2; and accounts for 15.31 percent of the analysed interior-grain area. The many small grains have not gone away; area weighting has changed how much each one counts.</p>
+<h2 id="9">Boundary segments and perimeter</h2>
+<p>
+<code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code> are the same pair one dimension lower: a count of outline segments and their total length.</p>
 {% highlight matlab %}
 grains(9).boundarySize
 grains(9).perimeter
@@ -347,9 +364,9 @@ grains(9).perimeter
 ans =
     31
 ans =
-   1.3379e+03
+   1.4115e+03
 {% endhighlight %}
-<p>We may compute these quantities also explicitly from the grain boundary segments. In the following code the first command returns simply the number of boundary segments while the second one gives the total length of the boundary by summing up the length of each individual boundary segment</p>
+<p>Both are shortcuts for asking the grain boundary itself, which is a list of segments with one <a href="grainBoundary.segLength.html"><code class="language-plaintext highlighter-rouge">segLength</code></a> each.</p>
 {% highlight matlab %}
 length(grains(9).boundary)
 sum(grains(9).boundary.segLength)
@@ -359,20 +376,20 @@ sum(grains(9).boundary.segLength)
 ans =
     31
 ans =
-   1.3379e+03
+   1.4115e+03
 {% endhighlight %}
-<h2 id="9">Radius, diameter, equivalent radius, equivalent perimeter and shape factor</h2>
-<p>Another, one dimensional measure is the <code class="language-plaintext highlighter-rouge">diameter</code> which refers to the longest distance between any two boundary points and is given im <code class="language-plaintext highlighter-rouge">&micro;m</code> as well</p>
+<p>The two pairs react differently to processing. <code class="language-plaintext highlighter-rouge">numPixel</code> remains tied to the measurements, whereas smoothing resamples the outline and can change both <code class="language-plaintext highlighter-rouge">boundarySize</code> and <code class="language-plaintext highlighter-rouge">perimeter</code>. By default, <code class="language-plaintext highlighter-rouge">perimeter</code> measures only the outer loop. The option <code class="language-plaintext highlighter-rouge">'withInclusion'</code> adds the loops around grains enclosed inside it.</p>
+<h2 id="12">Diameter and the equivalent circle</h2>
+<p>The <a href="grain2d.diameter.html"><code class="language-plaintext highlighter-rouge">diameter</code></a> is the longest distance between any two vertices of the outline. It is one of the directional caliper or Feret measures developed in <a href="ProjectionBasedParameters.html">Projection Parameters</a>.</p>
 {% highlight matlab %}
 grains(9).diameter
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
-  476.7622
+  573.5035
 {% endhighlight %}
-<p>The diameter is a special case of the caliper or Feret diameter of a grain that is explained in detail in the section <a href="ProjectionBasedParameters.html">Projection based parameters</a>.</p>
-<p>In contrast the <a href="grain2d.equivalentRadius.html">equivalent radius</a> is the radius of a circle with the same area as the grain. Naturally, the equivalent radius is always smaller than the actual radius of the grains. Similarly, the <a href="grain2d.equivalentPerimeter">equivalent perimeter</a> is defined as the perimeter of the circle the same area and is always smaller then the actual perimeter.</p>
+<p>Another characteristic length comes from the circle with the same area. Its <a href="grain2d.equivalentRadius.html"><code class="language-plaintext highlighter-rouge">equivalentRadius</code></a> gives the diameter below. No shape of that area has a shorter perimeter than the circle, and no grain of that area has a smaller maximum diameter.</p>
 {% highlight matlab %}
 2*grains(9).equivalentRadius
 
@@ -381,79 +398,163 @@ grains(9).equivalentPerimeter
 
 {% highlight plaintext %}
 ans =
-  322.6271
+  332.4671
 ans =
-   1.0136e+03
+   1.0445e+03
 {% endhighlight %}
-<p>As a consequence, the ratio between between actual grain perimeter and the equivalent perimeter, the so called shape factor, is always larger then 1. The <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> and measures how different a certain shape is from a circle.</p>
+<h2 id="14">Departure from a circle</h2>
+<p>The <a href="grain2d.shapeFactor.html"><code class="language-plaintext highlighter-rouge">shapeFactor</code></a> is \(F=P/P_{\mathrm{eq}}\), where \(P\) is the perimeter and \(P_{\mathrm{eq}}\) is the equivalent perimeter. It is at least 1 and grows when a grain is elongated, indented, or ragged.</p>
+<p>Other literature sometimes calls \(4\pi A/P^2=1/F^2\) the circularity or even the shape factor. State the formula when comparing values between software or publications.</p>
 {% highlight matlab %}
+shapeFactorSummary = [min(grains.shapeFactor),...
+  median(grains.shapeFactor),max(grains.shapeFactor)]
+
 plot(grains,grains.shapeFactor)
 mtexColorbar('title','shape factor')
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+shapeFactorSummary =
+    1.0579    1.2208    1.6623
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="ShapeParameters_05.png" %}
 </center>
-<p>A second measure for the discrepancy between the actual shape and a circle is the relative difference between the <a href="grain2d.perimeter.html"><code class="language-plaintext highlighter-rouge">perimeter</code></a> and the <a href="grain2d.equivalentPerimeter.html"><code class="language-plaintext highlighter-rouge">equivalentPerimeter</code></a>
-</p>
+<p>The minimum, median, and maximum are 1.058, 1.221, and 1.662. In the map, the high-value yellow grains are visibly lobed or elongated, while compact grains are dark blue. The measure cannot tell those causes apart: a smooth ellipse and a round grain with a frayed boundary can have the same value.</p>
+<p>The same information can be scaled as the relative difference between the <a href="grain2d.perimeter.html"><code class="language-plaintext highlighter-rouge">perimeter</code></a> and the <a href="grain2d.equivalentPerimeter.html"><code class="language-plaintext highlighter-rouge">equivalentPerimeter</code></a>.</p>
 {% highlight matlab %}
-plot(grains,(grains.perimeter - grains.equivalentPerimeter)./grains.perimeter)
+relativePerimeter = (grains.perimeter - grains.equivalentPerimeter) ...
+  ./ grains.perimeter;
+plot(grains,relativePerimeter)
 setColorRange([0,0.5])
-mtexColorbar
+mtexColorbar('title','relative perimeter difference')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ShapeParameters_06.png" %}
 </center>
-<p>In this plot round shapes will have values close to zero while concave shapes will get values up to \(0.5\).</p>
-<p>A third measure is the <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a> which stands for Percentile Average Relative Indented Surface and gives the relative difference between the actual perimeter and the perimeter of the convex hull. It is explained in more detail in the section <a href="HullBasedParameters.html">convex hull parameters.</a>
-</p>
+<p>Round shapes are near zero in this map. The quantity equals \(1-1/F\) and is bounded above by 1 rather than being unbounded.</p>
+<p>A third measure compares the perimeter with the grain's own convex hull. <a href="grain2d.paris.html"><code class="language-plaintext highlighter-rouge">paris</code></a>, the Percentile Average Relative Indented Surface, is reported in percent. An elongated but smoothly bounded grain has a small <code class="language-plaintext highlighter-rouge">paris</code> because its hull follows it closely. Bays and inlets increase it. Inclusion loops are excluded from both <code class="language-plaintext highlighter-rouge">paris</code> and the default perimeter. <a href="HullBasedParameters.html">Convex Hull Parameters</a> develops this comparison.</p>
 {% highlight matlab %}
+parisSummary = [median(grains.paris),max(grains.paris)]
+C = corrcoef(grains.shapeFactor,grains.paris);
+shapeParisCorrelation = C(1,2)
+
+[~,shapeFactorExtreme] = max(grains.shapeFactor);
+[~,parisExtreme] = max(grains.paris);
+sameExtremeGrain = shapeFactorExtreme == parisExtreme
+
+[~,mapShapeFactorExtreme] = max(mapGrains.shapeFactor);
+[~,mapParisExtreme] = max(mapGrains.paris);
+sameExtremeWithEdgeGrains = mapShapeFactorExtreme == mapParisExtreme
+
 plot(grains,grains.paris)
 mtexColorbar('title','paris')
 {% endhighlight %}
-<center>
+
+{% highlight plaintext %}
+parisSummary =
+    2.7659   43.3003
+shapeParisCorrelation =
+    0.4715
+sameExtremeGrain =
+  logical
+   1
+sameExtremeWithEdgeGrains =
+  logical
+   0
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="ShapeParameters_07.png" %}
 </center>
-<h2 id="14">Fractal Dimension</h2>
-<p>The fractal dimension of grain boundaries has been used to characterize the conditions of dynamical recrystallization. One way to define the fractal dimension of grain boundaries is to look at the slope of the perimeter as a function of the <a href="grain2d.equivalentRadius.html">equivalent radius</a> of the grains. More precisely, we consider this relationship in a log log plot and fit a linear model.</p>
+<p>The median <code class="language-plaintext highlighter-rouge">paris</code> is 2.77 percent, its maximum is 43.30, and its correlation with <code class="language-plaintext highlighter-rouge">shapeFactor</code> is 0.472. Among the complete grains, both measures select the same extreme grain. In the full plotted map, including truncated edge grains, they select different extremes. Their partial agreement is the point: <code class="language-plaintext highlighter-rouge">shapeFactor</code> counts elongation as a departure from a circle, whereas <code class="language-plaintext highlighter-rouge">paris</code> does not. The changed selection also shows why the edge-grain rule belongs in a reported method.</p>
+<h2 id="18">Perimeter-area fractal dimension</h2>
+<p>Boundary length depends on the scale at which it is measured. This is the coastline problem. A perimeter-area fractal dimension describes how rapidly perimeter grows with grain size across a population and has been related to dynamic-recrystallisation conditions.</p>
+<p>This is a population estimator, not a box-counting dimension of one grain. It assumes that the grains are statistically self-similar over the fitted size range. If \(P\propto r^D\), a straight line fitted to \(\log(P)\) against \(\log(r)\) has slope \(D\). A family of geometrically similar smooth grains has \(D=1\); increasingly convoluted boundaries can give a slope between 1 and 2.</p>
 {% highlight matlab %}
-% consider the entire data set
+% reconstruct all indexed grains in the full data set once
 mtexdata forsterite silent
+rawGrains = calcGrains(ebsd('indexed'));
+rawGrains = rawGrains(~rawGrains.isBoundary);
 
-% reconstruct grains
-grains = calcGrains(ebsd);
-
-% smooth them
-grains = smoothBoundary(grains,5);
+% use five smoothing iterations for the main estimate
+grains = smoothBoundary(rawGrains,5);
 
 close all
 scatter(grains.equivalentRadius,grains.perimeter)
 xlabel('equivalent radius')
 ylabel('perimeter')
 
-% set axes to logarithmic
-logAxis(gca, [10,10^4],[10^2,10^5])
+% set both axes to logarithmic scales
+logAxis(gca,[10,10^4],[10^2,10^5])
 
-% fit a linear function in log space
+% fit and draw a straight line in log space
 ab = polyfit(log(grains.equivalentRadius),log(grains.perimeter),1);
-
-% plot it
+fitRadius = [10,10^4];
 hold on
-plot([10,10^4],exp(ab(2) + ab(1) * log([10,10^4])),'LineWidth',3)
+plot(fitRadius,exp(ab(2) + ab(1) * log(fitRadius)),'LineWidth',3)
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="ShapeParameters_08.png" %}
 </center>
-<p>The slope of the linear function is the fractal dimension.</p>
+<p>The points scatter around the fitted line because individual grains are not scaled copies of one shape. The fitted slope, 1.011, is the estimated perimeter-area fractal dimension.</p>
 {% highlight matlab %}
 fractalDimension = ab(1)
 {% endhighlight %}
 
 {% highlight plaintext %}
 fractalDimension =
-    1.0110
+    1.0106
 {% endhighlight %}
-<p>It is important to understand that the fractal dimension computed this way heavily depends on the smoothing applied to the grain boundaries.</p>
+<p>Treat the estimate with care. Pixel spacing sets the smallest visible feature, small grains provide very few boundary samples, and smoothing removes exactly the excursions that the measure is intended to count. The next comparison reuses one reconstruction so that only the boundary processing changes. The zero-iteration case is the actual pixel staircase; calling <code class="language-plaintext highlighter-rouge">smoothBoundary(rawGrains,0)</code> would still simplify and resample it.</p>
+{% highlight matlab %}
+for iter = [0 5 25]
+  if iter == 0
+    g = rawGrains;
+  else
+    g = smoothBoundary(rawGrains,iter);
+  end
+  ab = polyfit(log(g.equivalentRadius),log(g.perimeter),1);
+  fprintf('%2d smoothing iterations: fractal dimension %.3f\n',iter,ab(1));
+end
+{% endhighlight %}
+
+{% highlight plaintext %}
+0 smoothing iterations: fractal dimension 1.128
+ 5 smoothing iterations: fractal dimension 1.011
+25 smoothing iterations: fractal dimension 0.965
+{% endhighlight %}
+<p>The pixel staircase gives 1.128 because grid corners add artificial length. Five iterations give 1.011, while 25 iterations push the estimate to 0.965, below the range of a self-similar plane curve. That is a diagnostic that the estimator's assumptions have failed, not a physical property of the rock. Compare specimens only after matching the pixel resolution, grain-size cutoff, segmentation, and smoothing procedure.</p>
+<h2 id="22">Further reading</h2>
+<div>
+<ul>
+<li>
+<a href="https://www.iso.org/standard/74309.html">ISO 13067:2020</a>, <i>Microbeam analysis - Electron backscatter diffraction - Measurement of average grain size</i>. It distinguishes measurements on a two-dimensional section from inferences about three-dimensional grain size.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>R. Heilbronner and S. Barrett, <a href="https://doi.org/10.1007/978-3-642-10343-8">Image Analysis in Earth Sciences: Microstructures and Textures of Earth Materials</a>, Springer, 2014. The textbook develops two- and three-dimensional grain-size distributions together with particle and surface fabrics.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>B. B. Mandelbrot, <a href="https://doi.org/10.1126/science.156.3775.636">How Long Is the Coast of Britain? Statistical Self-Similarity and Fractional Dimension</a>, <i>Science</i> 156 (1967), 636-638. This paper explains why measured length depends on scale.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>M. Takahashi and H. Nagahama, <a href="https://doi.org/10.1016/S0169-4332(01)00417-2">The Sections' Fractal Dimension of Grain Boundary</a>, <i>Applied Surface Science</i> 182 (2001), 297-301. It gives the perimeter-diameter construction used above for dynamically recrystallised quartz.</li>
+</ul>
+</div>
+<div>
+<ul>
+<li>S. E. Johnson et al., <a href="https://doi.org/10.1029/2024JB030866">EBSD-Based Calibration of Differential Stress From Experimentally Deformed Black Hills Quartzite Using the Perimeter-Area Fractal Dimension</a>, <i>Journal of Geophysical Research: Solid Earth</i> 130 (2025), e2024JB030866. The study tests pixel spacing, minimum grain size, and MTEX smoothing before calibration.</li>
+</ul>
+</div>
+<h2 id="23">Next</h2>
+<p>
+<a href="EllipseBasedParameters.html">Ellipse Based Shape Parameters</a> replaces each grain by a moment-equivalent ellipse and introduces shape preferred orientation. <a href="HullBasedParameters.html">Convex Hull Parameters</a> isolates indentations, while <a href="ProjectionBasedParameters.html">Projection Parameters</a> measures directional widths. Continue to <a href="GrainBoundaries.html">Grain Boundaries</a> when the segments and junctions, rather than whole-grain outlines, are the subject.</p>
 </div>
 </body>
 </html>

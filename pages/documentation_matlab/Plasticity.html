@@ -1,5 +1,5 @@
 ---
-title: "Plasticity"
+title: 'Plasticity'
 
 sidebar: documentation_sidebar
 permalink: Plasticity.html
@@ -22,10 +22,12 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Below the elastic limit, removing a load lets a crystal recover its shape. Beyond that limit, some deformation remains. Plastic deformation is carried mainly by crystal slip and, in suitable materials and loading states, by <a href="TwinningTutorial.html">deformation twinning</a>.</p>
+<p>Crystal slip moves dislocations so that one part of the lattice shears past another on a particular plane and in a particular direction. A plane together with an in-plane shear direction is a <b>slip system</b>. Densely packed planes and directions are often easy slip paths because the atomic translation is short, but packing density alone does not define the active systems. Their resistance also depends on the material, temperature, strain rate, and microstructure.</p>
+<p>This is why plasticity belongs in a texture toolbox. Slip systems are fixed in the crystal frame, so the response of a grain depends on its orientation relative to the load. Plastic deformation is anisotropic for the same geometric reason as elasticity. Slip also rotates the lattice, so deformation changes the texture and therefore changes the later response.</p>
 <!--/introduction-->
-<p>Past the elastic limit a crystal does not spring back. It deforms by sliding: whole blocks of lattice shear over one another along particular planes and in particular directions. Which planes and which directions is not arbitrary - they are the most densely packed ones, where the atoms have least distance to travel - and a plane together with a direction in it is called a <b>slip system</b>.</p>
-<p>This is why plasticity belongs in a texture toolbox. Slip systems are fixed in the crystal, so how easily a grain deforms depends on how the grain is oriented relative to the load. Deformation is anisotropic for the same reason stiffness is, and it feeds back: sliding rotates the lattice, so deforming a material changes its texture, which changes how it deforms next.</p>
-<p>Below is a cubic crystal with its slip planes drawn inside it.</p>
+<h2 id="1">See one slip system</h2>
+<p>Use one representative of the fcc \(\{111\}\langle110\rangle\) family in aluminium. The red disk is the slip plane and the arrow in the disk is the Burgers vector, which supplies the shear direction.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
@@ -38,26 +40,53 @@ hold on
 plot(cS,sS,'faceColor','red')
 hold off
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="Plasticity_01.png" %}
 </center>
-<p>A face-centred cubic metal slips on the {111} planes along <a href="110">110</a> directions: four planes with three directions in each, so twelve slip systems - or twenty-four if the two senses of shear are counted separately, which is what <code class="language-plaintext highlighter-rouge">symmetrise</code> returns.</p>
-<h2 id="3">Which system slips</h2>
-<p>A slip system responds only to the part of the applied stress that shears it. Resolve the stress onto the slip plane and along the slip direction, and the result is the <b>resolved shear stress</b>; the factor relating it to the applied stress is the <b>Schmid factor</b>, which depends purely on geometry and ranges from zero to one half.</p>
-<p>Schmid's law says slip begins when the resolved shear stress reaches a critical value, so the system with the largest Schmid factor goes first. This is a good first answer and a poor last one: it treats each grain as though it were alone, when in reality a grain is wedged among neighbours that constrain it.</p>
-<h2 id="4">The same bounds as elasticity, for the same reason</h2>
-<p>Predicting how a polycrystal deforms means deciding what every grain has in common. The <b>Taylor</b> model assumes all grains undergo the same strain, which needs five independent slip systems per grain and generally overestimates the strength. The <b>Sachs</b> model assumes all grains feel the same stress, lets each slip on its best system alone, and underestimates it.</p>
-<p>These are the same two assumptions that bound elastic averages, in plastic dress, and neither is true. Real grains compromise, and the models below differ mainly in how they let them.</p>
-<h2 id="5">Where to start</h2>
+<p>The arrow lies in the plane, so the direction is perpendicular to the plane normal. Crystal symmetry expands this representative into four planes with three directions in each. There are twelve geometric systems, or twenty-four entries if the two shear senses are stored separately.</p>
+{% highlight matlab %}
+sSGeometric = sS.symmetrise('antipodal');
+sSSigned = sS.symmetrise;
+[length(sSGeometric),length(sSSigned)]
+{% endhighlight %}
+
+{% highlight plaintext %}
+ans =
+    12    24
+{% endhighlight %}
+<h2 id="3">Which system slips?</h2>
+<p>A slip system responds only to the part of the applied stress that shears its plane along its Burgers vector. This component is the <b>resolved shear stress</b>. The dimensionless <b>Schmid factor</b> relates it to a uniaxial applied stress, depends only on geometry, and ranges in magnitude from zero to one half.</p>
+<p>Schmid's law says that slip begins when the resolved shear stress reaches the critical resolved shear stress (CRSS). With equal CRSS values, the system with the largest suitably signed Schmid factor activates first. This is a useful first answer and a poor last one: an isolated-grain calculation ignores the neighbours that constrain the grain.</p>
+<h2 id="4">Polycrystal bounds</h2>
+<p>A polycrystal model must decide what all grains share. The <b>Taylor model</b> assumes that every grain undergoes the specimen strain. Reproducing a general deviatoric strain needs five independent shear systems and usually gives an upper bound on strength.</p>
+<p>The <b>Sachs model</b> makes the opposite assumption. Every grain feels the same stress and slips independently on its best system, so compatibility is not enforced and the predicted strength is a lower bound. These assumptions parallel the uniform-strain and uniform-stress bounds used in elasticity. Real grains compromise between them.</p>
+<p>The Sachs and single-slip models share an independent-grain premise, but they are not the same calculation. Sachs gives a strength bound under a common stress. The single-slip texture model follows the lattice rotation produced when one prescribed system carries the deformation.</p>
+<h2 id="5">Follow the chapter</h2>
+<p>Begin with <a href="SlipSystems.html">Slip Systems</a> to construct a plane, Burgers vector, symmetry-equivalent family, and CRSS values. Then use <a href="SchmidFactor.html">Schmid Factor</a> to resolve a crystal or specimen stress and apply the calculation to an EBSD grain map. The parallel <a href="TwinningTutorial.html">Deformation Twinning</a> branch explains why a signed shear factor needs extra care for a polar twin system.</p>
+<p>The polycrystal sequence starts with <a href="TaylorModel.html">Taylor Model</a>, the equal-strain limit. <a href="SachsModel.html">Sachs Model</a> then develops the equal-stress lower bound. <a href="SingleSlipModel.html">Single Slip Model</a> follows the texture evolution of independently slipping crystals, and <a href="SlipTransmission.html">Slip Transmission</a> tests whether selected systems can carry shear across a boundary between neighbouring grains.</p>
+<h2 id="6">Measure dislocation content</h2>
 <p>
-<a href="SlipSystems.html">Slip Systems</a> defines them for the common structures. <a href="SchmidFactor.html">Schmid Factor</a> covers the geometry above and is where most single-grain reasoning happens.</p>
-<p>Then the polycrystal models. <a href="TaylorModel.html">Taylor Model</a> is the equal-strain end, <a href="SingleSlipModel.html">Single Slip Model</a> the equal-stress end - it is also where the Sachs model is treated, since the physics is the same. <a href="TaylorHex.html">Taylor Hex</a> applies the Taylor model to hexagonal metals, where the slip systems have very different strengths and the model is more delicate. <a href="SlipTransmission.html">Slip Transmission</a> asks whether slip in one grain can continue into its neighbour, which is the constraint the models above approximate away.</p>
+<a href="DislocationSystems.html">Dislocation Systems</a> defines the Burgers vector, line direction, tensor basis, and energy weights of edge and screw dislocations. <a href="GND.html">GND</a> uses measured orientation gradients to fit densities of chosen geometrically necessary dislocation systems. <a href="WBV.html">WBV</a> instead estimates a net weighted Burgers vector without choosing those systems first.</p>
+<p>A gradient of orientation inside a grain requires a geometrically necessary dislocation content to preserve compatibility. This provides one of the few routes from an orientation map to a defect-density estimate, but the result is not a direct or unique measurement. Two-dimensional EBSD leaves tensor components unknown, and the inferred densities depend on the candidate systems, noise treatment, and energy assumptions.</p>
+<h2 id="7">Evolve and summarize a texture</h2>
 <p>
-<a href="DislocationSystems.html">Dislocation Systems</a>, <a href="GND.html">GND</a> and <a href="WBV.html">WBV</a> approach the same material from the other side. A gradient of orientation inside a grain cannot exist without dislocations of one sign left over, so measuring the gradient measures those <b>geometrically necessary</b> dislocations. This is one of the few places where an orientation map yields a defect density directly.</p>
-<p>
-<a href="TextureEvolution.html">Texture Evolution</a> closes the feedback loop described at the start, and <a href="Lankford.html">Lankford</a> computes the anisotropy coefficient that sheet forming is judged by. <a href="VPSCImport.html">VPSC</a> reads results from the widely used visco-plastic self-consistent code.</p>
-<h2 id="6">Next</h2>
-<p>Deformation that is recovered is <a href="Elasticity.html">Elasticity</a>, and the tensors both use are <a href="Tensors.html">Tensors</a>. The orientation changes inside grains that GND analysis needs are measured in <a href="EBSDAnalysis.html">EBSD</a>. Deformation twinning is a second mechanism besides slip and is treated with <a href="GrainBoundaries.html">Grain Boundaries</a>.</p>
+<a href="VPSCImport.html">VPSC</a> imports texture and slip-activity histories from the visco-plastic self-consistent code. <a href="TextureEvolution.html">Texture Evolution</a> computes an incremental Taylor history inside MTEX instead. <a href="TaylorHex.html">Taylor Hex</a> applies that model to magnesium, where the deformation families have unequal and temperature-dependent strengths.</p>
+<p>Finally, <a href="Lankford.html">Lankford</a> uses the Taylor model to predict the plastic strain ratio of a rolled sheet as the tensile direction changes. That page distinguishes the average resistance to thinning from the in-plane variation that promotes earing.</p>
+<h2 id="8">Related foundations</h2>
+<p>Recovered deformation is introduced in <a href="Elasticity.html">Elasticity</a>. Both elastic and plastic models use the objects developed in <a href="Tensors.html">Tensors</a>. The orientation gradients used for dislocation analysis come from <a href="EBSDAnalysis.html">EBSD</a>, while candidate twin boundaries are identified in <a href="TwinningBoundaries.html">Twinning Analysis</a>.</p>
+{% highlight matlab %}
+% Close the generated figure before the closing sections.
+close all
+{% endhighlight %}
+<h2 id="9">References</h2>
+<div>
+<ul>
+<li>G. I. Taylor, <i>Plastic Strain in Metals</i>, <i>Journal of the Institute of Metals</i> 62 (1938), 307--324, introduces the equal-strain polycrystal model and its minimum-work construction.</li>
+<li>U. F. Kocks, C. N. Tom&eacute; and H.-R. Wenk, <a href="https://books.google.com/books?id=vkyU9KZBTioC">Texture and Anisotropy</a>, Cambridge University Press, 1998, develops slip-system geometry, the Sachs and Taylor bounds, and deformation-induced texture evolution.</li>
+</ul>
+</div>
+<h2 id="10">Next</h2>
+<p>Continue with <a href="SlipSystems.html">Slip Systems</a> to turn the red plane and arrow above into MTEX objects, generate the complete crystallographic family, and assign its critical resolved shear stress.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Wigner-D functions"
+title: 'Wigner-D functions'
 
 sidebar: documentation_sidebar
 permalink: WignerFunctions.html
@@ -22,29 +22,14 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
+<p>Wigner-D functions play the role of sine and cosine waves for rotations. Weighted sums of them can represent any square-integrable function on the rotation group \(\mathrm{SO}(3)\).</p>
+<p>Each function has a non-negative <b>degree</b> \(n\) and two <b>orders</b> \(k\) and \(l\), both between \(-n\) and \(n\). The command <a href="WignerD.html"><code class="language-plaintext highlighter-rouge">WignerD</code></a> evaluates a complete matrix of orders at once.</p>
 <!--/introduction-->
-<h2 id="1">Theorie</h2>
-<p>The Wigner-D functions are special functions on the rotation group \(SO(3)\).</p>
-<p>In terms of Matthies (ZYZ-convention) Euler angles \({\bf R} = {\bf R}(\alpha,\beta,\gamma)\) the \(L_2\)-normalized Wigner-D function of degree \(n\) and orders \(k,l \in \{-n,\dots,n\}\) is defined by</p>
-<p>\[ D_n^{k,l}({\bf R}) = \sqrt{2n+1} \, \mathrm e^{-\mathrm i k\gamma} \mathrm d_n^{k,l}(\beta) \,e^{-\mathrm i l\alpha} \]</p>
-<p>where \(d_n^{k,l}\colon[0,\pi]\to\IR\), denote the real valued Wigner-d functions, which are defined in terms of Jacobi polynomial \(P_s^{a,b}\) by</p>
-<p>\[ d_n^{k,l}(\beta) = (-1)^{\nu} \binom{2n-s}{s+a}^{\frac12} \binom{s+b}{b}^{-\frac12} \left(\frac{\sin\beta}{2}\right)^{a} \left(\frac{\cos\beta}{2}\right)^{b} P_s^{a,b}(\cos\beta)\]</p>
-<p>using the constants \(a =|k-l|\), \(b =|k+l|\), \(s = n - \max\{|k|,|l|\}\) and</p>
-<p>\[ \nu = \begin{cases} \min\{0,k\}+\min\{0,l\} &amp; \text{if } l \geq k,\\ \min\{0,k\}+\min\{0,l\} + k+l &amp; \text{otherwise}. \end{cases}\]</p>
-<p>The above definition of the Wigner-D functions in MTEX is slightly different to other well known definitions from literature, they are defined compatible to the <a href="SphericalHarmonics.html">spherical harmonics</a> which form an orthonormal basis on the 2-sphere and therefore are use to build <a href="S2FunHarmonicRepresentation.html">S2FunHarmonics</a>.</p>
-<p>The differences of the Wigner-D functions to common definitions are: * In the definition of \(D_n^{k,l}\) the indices \(k,l\) are changed in the \(e^{i\cdot}\) functions. * \(D_n^{k,l}\) are normalized by the constant \(\sqrt{2n+1}\). * The sign of \(d_n^{k,l}\) is multiplied with \(\min\{0,k\}+\min\{0,l\}\). * The Wigner-d functions are parametrized by the second Euler angle \(\beta\). Thus, MTEX's \(d_n^{k,l}(\beta)\) corresponds to \(d_n^{k,l}(x)\) with \(x= \cos(\beta)\) in definitions that use \(x\) as the argument.</p>
-<p>Common definitions can be found in</p>
-<p>D. A. Varshalovich, A. N. Moskalev, and V. K. Khersonskii. Quantum theory of angular momentum. Irreducible tensors, spherical harmonics, vector coupling coefficients, 3nj symbols. World Scientific Publishing Co.,Inc., Teaneck, NJ, 1988. isbn: 9971-50-107-4. doi: 10.1142/0270.</p>
-<p>In MTEX the Wigner-D and Wigner-d functions are available through the command <a href="WignerD.html"><code class="language-plaintext highlighter-rouge">WignerD</code></a>
-</p>
+<h2 id="1">Evaluate one degree</h2>
+<p>A real number passed to <code class="language-plaintext highlighter-rouge">WignerD</code> is the second Euler angle \(\beta\). The result below contains all Wigner-d functions of degree one at \(\beta=90\) degrees.</p>
 {% highlight matlab %}
-% the Wigner-d functions of degree 1
-beta = pi/2;
+beta = 90 * degree;
 d = WignerD(beta,1)
-
-% the normalized Wigner-D functions of degree 1 evaluated in R
-R = rotation.rand;
-D = WignerD(R,1,'normalize')
 {% endhighlight %}
 
 {% highlight plaintext %}
@@ -52,70 +37,110 @@ d =
     0.5000   -0.7071   -0.5000
     0.7071   -0.0000    0.7071
    -0.5000   -0.7071    0.5000
-D =
-   0.0447 - 0.0040i  -0.1195 + 0.3705i   1.2748 + 1.1051i
-   0.1524 + 0.3582i  -1.6422 + 0.0000i   0.1524 - 0.3582i
-   1.2748 - 1.1051i  -0.1195 - 0.3705i   0.0447 + 0.0040i
 {% endhighlight %}
-<p>The Wigner-d functions are ordinary functions of the single angle beta, so they can simply be drawn. Three entries of the degree one matrix:</p>
+<p>The rows and columns correspond to \(k=-1,0,1\) and \(l=-1,0,1\), respectively. In particular, the central value is zero at 90 degrees, while the corner values have magnitude \(0.5\).</p>
+<p>Passing a rotation instead evaluates the generally complex Wigner-D functions. The <code class="language-plaintext highlighter-rouge">'normalize'</code> flag selects MTEX's \(L_2\) normalization.</p>
+{% highlight matlab %}
+R = rotation.byEuler(20*degree,40*degree,10*degree);
+W = WignerD(R,1,'normalize')
+{% endhighlight %}
+
+{% highlight plaintext %}
+W =
+   1.3245 + 0.7647i   0.1367 - 0.7753i   0.1995 - 0.0352i
+   0.2693 - 0.7398i   1.3268 + 0.0000i   0.2693 + 0.7398i
+   0.1995 + 0.0352i   0.1367 + 0.7753i   1.3245 - 0.7647i
+{% endhighlight %}
+<h2 id="3">Follow the Wigner-d curves</h2>
+<p>The Wigner-d functions are ordinary functions of the single angle \(\beta\), so they can be drawn directly. Here are three entries from the degree-one matrix.</p>
 {% highlight matlab %}
 beta = linspace(0,pi,181);
 d = zeros(numel(beta),3);
-for k = 1:numel(beta)
-  Dk = WignerD(beta(k),1);
-  d(k,:) = [Dk(1,1) Dk(2,2) Dk(1,3)];
+for j = 1:numel(beta)
+  Dj = WignerD(beta(j),1);
+  d(j,:) = [Dj(1,1) Dj(2,2) Dj(1,3)];
 end
 
 plot(beta./degree,d,'linewidth',2)
 xlim([0 180]); xlabel('beta in degree')
-legend('d^1_{-1,-1}','d^1_{0,0}','d^1_{-1,1}','location','best')
+legend('d^1_{-1,-1}','d^1_{0,0}','d^1_{-1,1}', ...
+  'location','best')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="WignerFunctions_01.png" %}
 </center>
-<p>They are polynomials in cos(beta/2) and sin(beta/2), which is why they are smooth and why a series in them converges quickly for smooth functions.</p>
-<p>Here the orders \(k\), \(l\) work as row and column indices.</p>
-<h2 id="6">Series Expansion</h2>
-<p>The Wigner-D functions form an orthonormal basis in \(L_2(SO(3))\). Hence, we can describe functions on the rotation group \(SO(3)\) by there harmonic representation using the class <a href="SO3FunHarmonicRepresentation.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a>.</p>
-<p>Hence we define the Wigner-D function \(D_1^{1,-1}\) by</p>
+<p>The first curve decreases from 1 to 0. The central curve crosses zero at 90 degrees, while the corner entry decreases from 0 to -1. These smooth shapes arise because the functions are polynomials in \(\cos(\beta/2)\) and \(\sin(\beta/2)\). Series in Wigner-d functions therefore converge quickly for smooth functions.</p>
+<h2 id="5">Build one basis function</h2>
+<p>The Wigner-D functions form an orthonormal basis of \(L_2(\mathrm{SO}(3))\). MTEX stores a weighted series in this basis as an <a href="SO3FunHarmonicRepresentation.html"><code class="language-plaintext highlighter-rouge">SO3FunHarmonic</code></a> object.</p>
+<p>Its coefficient vector starts with the degree-zero block. The next nine entries are the degree-one matrix, stored one column at a time. The vector below therefore selects \(D_1^{1,-1}\).</p>
 {% highlight matlab %}
-D = SO3FunHarmonic([0;0;0;1])
-D.eval(R)
+F = SO3FunHarmonic([0;0;0;1]);
+seriesValue = F.eval(R)
 {% endhighlight %}
 
 {% highlight plaintext %}
-D = SO3FunHarmonic (y↓→x → y↓→x)
-  antipodal: true
-  isReal: false
-  bandwidth: 1
-  weight: 0
- 
-ans =
-   1.2748 - 1.1051i
+seriesValue =
+   0.1995 + 0.0352i
 {% endhighlight %}
-<p>Various normalization for the Wigner-D functions are common in the literature.</p>
-<p>Here we define the \(L_2\)-norm by</p>
-<p>\[ \| f \|_2 = \left(\frac1{8\pi^2}\,\int_{SO(3)} \lvert f( {\bf R}) \rvert^2 \,\mathrm d {\bf R} \right)^{1/2} \]</p>
-<p>such that the norm of the constant function \(f=1\) is \(1\). Take a look on the section <a href="SO3FunOperations.html#6">Integration of SO3Fun's</a>.</p>
-<p>Using that definition the Wigner-D functions in MTEX are normalized, i.e. \(\| D_n^{k,l} \|_2 = 1\) for all \(n,k,l\).</p>
+<p>The selected coefficient is row 3 and column 1 of the normalized matrix <code class="language-plaintext highlighter-rouge">W</code> above. Both evaluations give approximately <code class="language-plaintext highlighter-rouge">0.1995 + 0.0352i</code>.</p>
 {% highlight matlab %}
-norm(D)
+directValue = W(3,1)
+comparisonError = abs(seriesValue-directValue)
+{% endhighlight %}
+
+{% highlight plaintext %}
+directValue =
+   0.1995 + 0.0352i
+comparisonError =
+   1.4913e-13
+{% endhighlight %}
+<h2 id="7">Normalization</h2>
+<p>Several normalizations of Wigner-D functions occur in the literature. MTEX defines the \(L_2\) norm by</p>
+<p>\[ \|f\|_2 = \left(\frac{1}{8\pi^2}\int_{\mathrm{SO}(3)} \lvert f(\mathbf{R})\rvert^2\,\mathrm{d}\mathbf{R}\right)^{1/2}. \]</p>
+<p>With this measure, the constant function \(f=1\) has norm 1. Every normalized Wigner-D function also has \(\|D_n^{k,l}\|_2=1\).</p>
+{% highlight matlab %}
+norm(F)
 {% endhighlight %}
 
 {% highlight plaintext %}
 ans =
      1
 {% endhighlight %}
-<h2 id="8">Some important formulas for Wigner-D functions</h2>
-<p>The Wigner-D functions are the matrix elements of the representations \(D_n \colon SO(3) \to \mathbb C^{(2n+1)\times(2n+1)}\) on \(SO(3)\). Since representations are group homomorphisms, we have \(D_n( {\bf R} \, {\bf Q} ) = \frac1{\sqrt{2n+1}} \, D_n( {\bf Q} ) \, D_n( {\bf R} ).\) Hence we get</p>
-<p>\[ D_n^{k,l}( {\bf R} \, {\bf Q} ) = \frac1{\sqrt{2n+1}} \sum_{j=-n}^n D_n^{k,j}( {\bf Q} )\,D_n^{j,l}( {\bf R} ). \]</p>
-<p>Some symmetry properties of Wigner-D functions yields</p>
-<p>\[ D_n^{k,l}( {\bf R} ) = \overline{D_n^{l,k}( {\bf R}^{-1} )}. \]</p>
-<h2 id="10">Symmetry properties of Wigner-d functions</h2>
-<p>The Wigner-d functions by construction fulfill a lot of symmetry properties. The most important properties are</p>
-<p>\[ d_n^{k,l}(\beta) = d_n^{-k,-l}(\beta) = (-1)^{k+l}\, d_n^{l,k}(\beta) = (-1)^{k+l}\, d_n^{-l,-k}(\beta) \]</p>
-<p>\[ d_n^{k,l}(\beta) = (-1)^{n+k+l}\,d_n^{-k,l}(\pi-\beta) = (-1)^{n+k+l}\,d_n^{k,-l}(\pi-\beta) \]</p>
-<p>\[ d_n^{k,l}(\beta) = (-1)^{k+l}\,d_n^{k,l}(-\beta) \]</p>
+<p>The section <a href="SO3FunOperations.html#13">Integration and Norms</a> explains integration and norms for rotational functions in more detail.</p>
+<h2 id="9">The maths behind Wigner-D functions</h2>
+<p>In the Matthies ZYZ convention, write a rotation as \(\mathbf{R}=\mathbf{R}(\alpha,\beta,\gamma)\). MTEX defines the \(L_2\)-normalized Wigner-D function by</p>
+<p>\[ D_n^{k,l}(\mathbf{R})=\sqrt{2n+1}\, \mathrm{e}^{-\mathrm{i}k\gamma}\,d_n^{k,l}(\beta)\, \mathrm{e}^{-\mathrm{i}l\alpha}. \]</p>
+<p>The real-valued Wigner-d function \(d_n^{k,l}\colon[0,\pi]\to\mathbb{R}\) is defined through the Jacobi polynomial \(P_s^{a,b}\) by</p>
+<p>\[ d_n^{k,l}(\beta)=(-1)^\nu \binom{2n-s}{s+a}^{\frac{1}{2}} \binom{s+b}{b}^{-\frac{1}{2}} \left(\frac{\sin\beta}{2}\right)^a \left(\frac{\cos\beta}{2}\right)^b P_s^{a,b}(\cos\beta), \]</p>
+<p>where \(a=|k-l|\), \(b=|k+l|\), and \(s=n-\max\{|k|,|l|\}\). The sign exponent is</p>
+<p>\[ \nu=\begin{cases} \min\{0,k\}+\min\{0,l\}, &amp; \text{if }l\geq k,\\ \min\{0,k\}+\min\{0,l\}+k+l, &amp; \text{otherwise}. \end{cases} \]</p>
+<h2 id="10">How the MTEX convention differs</h2>
+<p>MTEX's definition differs slightly from other common definitions. It is compatible with the <a href="SphericalHarmonics.html">spherical harmonics</a>, which form an orthonormal basis on the 2-sphere and are used to build <a href="S2FunHarmonicRepresentation.html">harmonic spherical functions</a>.</p>
+<div>
+<ul>
+<li>The orders \(k\) and \(l\) are interchanged in the exponential factors compared with common definitions.</li>
+<li>The factor \(\sqrt{2n+1}\) gives each \(D_n^{k,l}\) unit \(L_2\) norm.</li>
+<li>The sign of \(d_n^{k,l}\) includes the contribution \(\min\{0,k\}+\min\{0,l\}\) through \((-1)^\nu\).</li>
+<li>MTEX parametrizes a Wigner-d function by the second Euler angle \(\beta\). Thus MTEX's \(d_n^{k,l}(\beta)\) corresponds to \(d_n^{k,l}(x)\) with \(x=\cos(\beta)\) in definitions that use \(x\).</li>
+</ul>
+</div>
+<h2 id="11">Composition and symmetry</h2>
+<p>For each degree \(n\), the Wigner-D functions are the matrix elements of a representation \(D_n\colon\mathrm{SO}(3)\to \mathbb{C}^{(2n+1)\mathbin{\times}(2n+1)}\). The representation is a group homomorphism. With MTEX's order and normalization conventions,</p>
+<p>\[ D_n(\mathbf{R}\mathbf{Q})=\frac{1}{\sqrt{2n+1}} D_n(\mathbf{Q})D_n(\mathbf{R}), \]</p>
+<p>and hence</p>
+<p>\[ D_n^{k,l}(\mathbf{R}\mathbf{Q})= \frac{1}{\sqrt{2n+1}}\sum_{j=-n}^{n} D_n^{k,j}(\mathbf{Q})D_n^{j,l}(\mathbf{R}). \]</p>
+<p>Inversion exchanges the two orders and complex conjugates the value:</p>
+<p>\[ D_n^{k,l}(\mathbf{R})= \overline{D_n^{l,k}(\mathbf{R}^{-1})}. \]</p>
+<p>The Wigner-d functions also satisfy several useful symmetries:</p>
+<p>\[ d_n^{k,l}(\beta)=d_n^{-k,-l}(\beta) =(-1)^{k+l}d_n^{l,k}(\beta) =(-1)^{k+l}d_n^{-l,-k}(\beta), \]</p>
+<p>\[ d_n^{k,l}(\beta)=(-1)^{n+k+l}d_n^{-k,l}(\pi-\beta) =(-1)^{n+k+l}d_n^{k,-l}(\pi-\beta), \]</p>
+<p>\[ d_n^{k,l}(\beta)=(-1)^{k+l}d_n^{k,l}(-\beta). \]</p>
+<h2 id="12">References</h2>
+<div>
+<ul>
+<li>D. A. Varshalovich, A. N. Moskalev, and V. K. Khersonskii, <a href="https://doi.org/10.1142/0270"><i>Quantum Theory of Angular Momentum</i></a>, World Scientific, 1988, gives common Wigner-D definitions against which MTEX's order, sign, and normalization conventions can be compared.</li>
+</ul>
+</div>
 </div>
 </body>
 </html>

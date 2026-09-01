@@ -1,5 +1,5 @@
 ---
-title: "Grids of Orientations"
+title: 'Grids of Orientations'
 
 sidebar: documentation_sidebar
 permalink: OrientationGrid.html
@@ -23,126 +23,129 @@ To make changes, update the MATLAB code and republish this document.
 <div>
 <!--introduction-->
 <!--/introduction-->
-<p>Numerical work on the rotation group needs orientations spread as evenly as possible over it - to integrate an ODF, to sample one, or to search for a best fit. As on the sphere, there is no perfectly even arrangement, and the constructions on offer differ in how close they come.</p>
+<p>An orientation grid is a finite set of nodes in orientation space. Such grids are used to evaluate or approximate an ODF, to search for a best fit, and to provide orientations to another numerical method.</p>
+<p>Read <a href="OrientationDefinition.html">Orientations</a> and <a href="OrientationFundamentalRegion.html">Fundamental Regions</a> first. The spherical counterpart is <a href="VectorGrids.html">Spherical Grids</a>.</p>
+<p>The nodes should usually be spread uniformly with respect to volume on \(\mathrm{SO}(3)\), not with respect to the coordinates used to describe a rotation. No finite construction is perfectly uniform, and different grids preserve different useful structures.</p>
+<p>For these figures, the plotting convention lays out the specimen reference frame with y up and x to the right. It does not alter the grid.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 
-% define a crystal symmetry
-cs = crystalSymmetry('432')
-{% endhighlight %}
-
-{% highlight plaintext %}
-cs = crystalSymmetry (⊙c→a)
- 
-  symmetry: 432    
-  elements: 24     
-  a, b, c : 1, 1, 1
+% cubic crystal symmetry and trivial specimen symmetry
+cs = crystalSymmetry('432');
 {% endhighlight %}
 <h2 id="2">The Equispaced Grid</h2>
-<p> <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> covers the fundamental region of the given symmetry with a nearly constant spacing.</p>
+<p> <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> covers the fundamental region of the supplied crystal and specimen symmetries with nearly constant node spacing. Here the specimen symmetry is the trivial default. Both global constructors accept a second symmetry. For an orientation it is a specimen symmetry; for a <a href="Misorientations.html">misorientation</a> it is the crystal symmetry on the other side.</p>
+<p>The <code class="language-plaintext highlighter-rouge">'resolution'</code> is a target spacing. The construction adjusts the angular steps to fit the fundamental region, so it is not a promise that every pair of neighbouring nodes is exactly \(5^\circ\) apart.</p>
 {% highlight matlab %}
-ori = equispacedSO3Grid(cs,'resolution',5*degree)
+equiGrid = equispacedSO3Grid(cs,'resolution',5*degree)
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = SO3Grid (432 → y↑→x)
+equiGrid = SO3Grid (432 → y↑→x)
   grid: 4923 orientations, resolution: 5°
 {% endhighlight %}
-<p>Just under 5000 orientations at \(5^\circ\) for cubic symmetry. Seen in axis angle space they fill the fundamental region evenly.</p>
+<p>The summary reports 4923 orientations and identifies the result as an <code class="language-plaintext highlighter-rouge">SO3Grid</code> with \(5^\circ\) resolution. An axis--angle plot shows the nodes throughout the cubic fundamental region.</p>
 {% highlight matlab %}
-plot(ori,'axisAngle')
+plot(equiGrid,'axisAngle','all','MarkerSize',2);
 {% endhighlight %}
-
-{% highlight plaintext %}
-plot 2000 random orientations out of 4923 given orientations
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationGrid_01.png" %}
 </center>
-<h2 id="4">Checking for Equidistribution</h2>
-<p>Even spacing is easier to claim than to achieve, and the honest test is to treat the grid as a data set: an ODF built from it should be the uniform one, and the pole figures of a uniform ODF are flat at 1.</p>
+<p>The point cloud has no large empty patch or concentrated band. Its visual density still changes under axis--angle coordinates, so this plot alone cannot establish equal volume in orientation space.</p>
+<h2 id="5">The Regular Euler Grid</h2>
+<p> <a href="regularSO3Grid.html"><code class="language-plaintext highlighter-rouge">regularSO3Grid</code></a> instead takes regular steps in the three Euler angles. The same nominal resolution creates many more nodes.</p>
 {% highlight matlab %}
-odf = unimodalODF(ori)
+regularGrid = regularSO3Grid(cs,'resolution',5*degree);
 
-plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs))
-mtexColorbar
+gridCounts = [length(equiGrid),length(regularGrid)]
 {% endhighlight %}
 
 {% highlight plaintext %}
-odf = SO3FunRBF (432 → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 4923 orientations, resolution: 5°
-  weight: 1
+gridCounts =
+        4923       24624
 {% endhighlight %}
-<center>
+<p>The two entries are 4923 and 24624. Thus the regular grid has five times as many orientations at the same nominal resolution.</p>
+{% highlight matlab %}
+plot(regularGrid,'axisAngle','all','MarkerSize',1);
+{% endhighlight %}
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationGrid_02.png" %}
 </center>
-<p>Between 0.93 and 1.02 - flat to within a few percent, which is what a usable grid looks like.</p>
-<h2 id="6">The Regular Grid</h2>
-<p> <a href="regularSO3Grid.html"><code class="language-plaintext highlighter-rouge">regularSO3Grid</code></a> instead steps through the three Euler angles regularly.</p>
+<p>Lines and dense bands remain visible after transformation from Euler angles to axis--angle coordinates. They are the signature of regular coordinate steps, not extra resolution distributed uniformly over orientation space.</p>
+<h2 id="8">Why Regular Euler Steps Are Not Uniform</h2>
+<p>In Bunge Euler angles, the invariant volume element on rotation space is proportional to</p>
+<p>\[ \sin\Phi\,\mathrm{d}\varphi_1\,\mathrm{d}\Phi\,\mathrm{d}\varphi_2. \]</p>
+<p>Equal increments of \(\Phi\) therefore represent unequal volumes. A regular Euler grid places too many equal-weight nodes where the coordinate map is compressed. This is the three-dimensional counterpart of longitude lines meeting at the poles of a spherical grid.</p>
+<h2 id="9">An Equal-Weight Uniformity Diagnostic</h2>
+<p>A practical diagnostic treats every node as the centre of an equally weighted kernel. If the nodes represent the invariant volume uniformly, the resulting ODF should be close to the uniform value 1. Its pole figures should therefore also be nearly flat at 1.</p>
+<p>The result depends on the kernel halfwidth, which is made explicit here. It tests equal-weight node placement at that smoothing scale. It does not prove equidistribution, measure nearest-neighbour spacing, or turn the nodes into a quadrature rule.</p>
 {% highlight matlab %}
-ori = regularSO3Grid(cs,'resolution',5*degree)
-{% endhighlight %}
+h = Miller({1,0,0},{1,1,0},{1,1,1},cs);
+equiOdf = unimodalODF(equiGrid,'halfwidth',10*degree);
 
-{% highlight plaintext %}
-ori = orientation (432 → y↑→x)
-  size: 72 × 19 × 18
+plotPDF(equiOdf,h);
+setColorRange([0.7 2.7]);
+mtexColorbar;
 {% endhighlight %}
-<p>Five times as many orientations for the same nominal resolution, 24624 against 4923.</p>
-{% highlight matlab %}
-plot(ori,'axisAngle')
-{% endhighlight %}
-
-{% highlight plaintext %}
-plot 2000 random orientations out of 24624 given orientations
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationGrid_03.png" %}
 </center>
-<p>And the extra points do not buy uniformity. The same test now runs from 0.79 to 2.62 - the grid piles up wherever Euler angle space is compressed, exactly as the regular grid on the sphere piles up at the poles, see <a href="VectorGrids.html">Spherical Grids</a>.</p>
+<p>On the common colour range used for both constructions, all three pole figures appear flat. Their values span 0.93 to 1.02, so the equispaced grid stays within about 7 percent of 1 in this diagnostic. Flat to within a few percent is what a usable grid looks like.</p>
 {% highlight matlab %}
-odf = unimodalODF(ori)
+regularOdf = unimodalODF(regularGrid,'halfwidth',10*degree);
 
-plotPDF(odf,Miller({1,0,0},{1,1,0},{1,1,1},cs))
-mtexColorbar
+plotPDF(regularOdf,h);
+setColorRange([0.7 2.7]);
+mtexColorbar;
 {% endhighlight %}
-
-{% highlight plaintext %}
-odf = SO3FunRBF (432 → y↑→x)
- 
-  multimodal components
-  kernel: de la Vallee Poussin, halfwidth 10°
-  center: 24624 orientations
-{% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="OrientationGrid_04.png" %}
 </center>
-<p>Use the regular grid when the Euler angle raster itself is wanted, for instance to write an ODF to a file that expects one, and the equispaced grid for everything else.</p>
-<h2 id="10">Grids Around a Given Orientation</h2>
-<p> <a href="localOrientationGrid.html"><code class="language-plaintext highlighter-rouge">localOrientationGrid</code></a> covers a ball around one orientation rather than the whole region, which is what a local search or a perturbation study needs.</p>
+<p>The regular grid develops a strong peak. Its (100) pole figure spans 0.79 to 2.62, and the three pole figures together span 0.75 to 2.62. The extra points therefore do not buy equal-weight uniformity.</p>
+<h2 id="12">Choosing a Global Grid</h2>
+<p>Use a regular grid when values must lie on an Euler-angle raster, for example when <a href="ODFExport.html">exporting an ODF</a> to a format that expects one. Use an equispaced grid when approximately uniform equal-weight nodes matter more than rectangular Euler indexing.</p>
+<p>A nearly uniform point set is not automatically an integration rule. Exactness for a class of band-limited functions requires nodes together with their prescribed weights; see <a href="SO3FunQuadrature.html">Quadrature of Rotational Functions</a>.</p>
+<h2 id="13">Grids Around a Given Orientation</h2>
+<p> <a href="localOrientationGrid.html"><code class="language-plaintext highlighter-rouge">localOrientationGrid</code></a> covers a ball around one orientation rather than the full symmetry-reduced region. This is the useful construction for a local search or a perturbation study.</p>
 {% highlight matlab %}
 center = orientation.byEuler(10*degree,20*degree,30*degree,cs);
+localGrid = localOrientationGrid(center,10*degree, ...
+  'resolution',2.5*degree);
 
-ori = localOrientationGrid(center,10*degree,'resolution',2.5*degree)
+localCount = length(localGrid)
+maxLocalAngle = max(angle(localGrid,center)) ./ degree
 {% endhighlight %}
 
 {% highlight plaintext %}
-ori = orientation (432 → y↑→x)
-  size: 265 × 1
-{% endhighlight %}
-<p>265 orientations arranged in shells about the centre. The outermost shell sits at 8.75 degree, half a resolution step inside the radius that was asked for.</p>
-{% highlight matlab %}
-max(angle(ori,center)) ./ degree
-{% endhighlight %}
-
-{% highlight plaintext %}
-ans =
+localCount =
+   265
+maxLocalAngle =
     8.7500
 {% endhighlight %}
-<h2 id="12">Next</h2>
-<p>Sampling an ODF at random rather than on a grid is <a href="RandomSampling.html">Random Sampling</a>. Curves through orientation space, along which many real textures lie, are <a href="OrientationFibre.html">Fibres of Orientations</a>.</p>
+<p>The grid contains 265 orientations arranged in shells about the centre. Its outermost shell is \(8.75^\circ\) from the centre, half a resolution step inside the requested \(10^\circ\) radius.</p>
+{% highlight matlab %}
+plot(localGrid,angle(localGrid,center)./degree, ...
+  'axisAngle','all','MarkerSize',4);
+hold on
+plot(center,'MarkerFaceColor','r','MarkerSize',10);
+hold off
+mtexColorbar('title','angle to centre in degree');
+{% endhighlight %}
+<center class="mtex-figure">
+{% include inline_image.html file="OrientationGrid_05.png" %}
+</center>
+<p>The red point marks the centre, and colour records rotational distance from it. The ball appears as two patches because it crosses a boundary of the fundamental region and wraps to a symmetrically equivalent face. Despite that split in the plot, every node lies within the requested ball.</p>
+<h2 id="16">Further Reading</h2>
+<div>
+<ul>
+<li>H.-J. Bunge, <a href="https://shop.elsevier.com/books/texture-analysis-in-materials-science/bunge/978-0-408-10642-9">Texture Analysis in Materials Science: Mathematical Methods</a>, Butterworths, 1982. Sections on the invariant measure and Euler space give the texture-analysis foundation for the volume element above.</li>
+<li>A. Morawiec, <a href="https://doi.org/10.1007/978-3-662-09156-2">Orientations and Rotations: Computations in Crystallographic Textures</a>, Springer, 2004. This book develops rotation-space geometry and symmetry-reduced regions.</li>
+<li>A. Yershova, S. Jain, S. M. LaValle and J. C. Mitchell, <a href="https://doi.org/10.1177/0278364909352700">Generating Uniform Incremental Grids on SO(3) Using the Hopf Fibration</a>, <i>The International Journal of Robotics Research</i> 29(7), 801--812, 2010. The paper compares criteria for uniform deterministic grids on rotation space.</li>
+<li>D. Roşca, A. Morawiec and M. De Graef, <a href="https://doi.org/10.1088/0965-0393/22/7/075013">A New Method of Constructing a Grid in the Space of 3D Rotations and Its Applications to Texture Analysis</a>, <i>Modelling and Simulation in Materials Science and Engineering</i> 22, 075013, 2014. This paper develops a volume-preserving cubochoric construction for texture analysis.</li>
+</ul>
+</div>
+<h2 id="17">Next</h2>
+<p>Curves through orientation space, along which many real textures lie, are <a href="OrientationFibre.html">Fibres of Orientations</a>. Sampling an ODF statistically rather than placing a grid is <a href="RandomSampling.html">Random Sampling</a>.</p>
 </div>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ---
-title: "Export"
+title: 'Exporting figures'
 
 sidebar: documentation_sidebar
 permalink: PlottingExport.html
@@ -13,7 +13,7 @@ toc: false
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
     -->
-<title>Export</title>
+<title>Exporting figures</title>
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
 <meta name="DC.source" content="script_PlottingExport.m">
 </head>
@@ -22,85 +22,99 @@ To make changes, update the MATLAB code and republish this document.
     edit page</a></font>
 <div>
 <!--introduction-->
-<p>Every MTEX figure is an ordinary MATLAB figure and can therefore be exported with <b>File / Save As</b> from the figure menu, or with the MATLAB commands <code class="language-plaintext highlighter-rouge">print</code> and <code class="language-plaintext highlighter-rouge">exportgraphics</code>. Doing so, however, usually leaves a broad white margin around the plot, and for spatial EBSD maps it interpolates between neighbouring pixels, which invents colors that are not in the data. For this reason MTEX comes with its own command <a href="saveFigure.html"><code class="language-plaintext highlighter-rouge">saveFigure</code></a>, which is meant to produce cropped, publication ready files.</p>
+<p>Export is the last step of making a figure. Add its colour scale, labels, and other reading aids first, then choose a file type that suits the plotted objects. Dense spatial maps usually belong in a bitmap. Lines, markers, and text usually benefit from a vector format.</p>
+<p>Every MTEX figure is an ordinary MATLAB figure. You can export it through <b>File / Save As</b> or with MATLAB's <a href="matlab:doc('print')"><code class="language-plaintext highlighter-rouge">print</code></a> and <a href="matlab:doc('exportgraphics')"><code class="language-plaintext highlighter-rouge">exportgraphics</code></a> commands. These routes usually leave a broad white margin around an MTEX plot. On a spatial EBSD map, they may also interpolate between neighbouring pixels. That interpolation can invent colours which are absent from the data.</p>
+<p> <a href="saveFigure.html"><code class="language-plaintext highlighter-rouge">saveFigure</code></a> handles these details for MTEX figures and produces cropped, publication-ready files. Complete the workflow from <a href="Annotations.html">Annotations</a> before calling it.</p>
 <!--/introduction-->
-<h2 id="1">The command saveFigure</h2>
-<p>Let us start with any plot</p>
+<h2 id="1">A first export</h2>
+<p>Start with an orientation map. Each coloured cell is one measurement, so an exported bitmap must keep neighbouring cell colours discrete. This is a case where preserving the values matters more than making cell boundaries look smooth.</p>
 {% highlight matlab %}
 plottingConvention.default('y↑→x');
 mtexdata forsterite silent
 
-plot(ebsd('Forsterite'),ebsd('Forsterite').orientations)
+ebsdF = ebsd('Forsterite');
+plot(ebsdF,ebsdF.orientations)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlottingExport_01.png" %}
 </center>
-<p>The output format of <a href="saveFigure.html"><code class="language-plaintext highlighter-rouge">saveFigure</code></a> is determined entirely by the file extension. Everything MATLAB can print is allowed - <code class="language-plaintext highlighter-rouge">pdf</code>, <code class="language-plaintext highlighter-rouge">eps</code>, <code class="language-plaintext highlighter-rouge">ps</code> for vector graphics and <code class="language-plaintext highlighter-rouge">png</code>, <code class="language-plaintext highlighter-rouge">jpg</code>, <code class="language-plaintext highlighter-rouge">tif</code>, <code class="language-plaintext highlighter-rouge">gif</code>, <code class="language-plaintext highlighter-rouge">bmp</code> for bitmaps.</p>
+<p>Notice the sharp changes of colour between neighbouring measurements. The exported image should retain those changes rather than blend across them.</p>
+<p>The filename extension determines the output format. The vector formats are <code class="language-plaintext highlighter-rouge">pdf</code>, <code class="language-plaintext highlighter-rouge">eps</code>, and <code class="language-plaintext highlighter-rouge">ps</code>. The bitmap formats are <code class="language-plaintext highlighter-rouge">png</code>, <code class="language-plaintext highlighter-rouge">jpg</code>, <code class="language-plaintext highlighter-rouge">tif</code>, and <code class="language-plaintext highlighter-rouge">bmp</code>. <code class="language-plaintext highlighter-rouge">saveFigure</code> overwrites an existing file with the same name, so choose the output path deliberately. Check that the file you asked for exists before relying on it, as the next step does.</p>
 {% highlight matlab %}
-% we write into the temporary folder to not pollute the MTEX folder
-outFile = fullfile(tempdir,'forsterite.png');
+% write into a temporary folder rather than the MTEX folder
+outDir = fullfile(tempdir,'mtex-docrun','scratch');
+if ~isfolder(outDir), mkdir(outDir); end
+outMap = fullfile(outDir,'forsterite.png');
 
-saveFigure(outFile)
+saveFigure(outMap)
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlottingExport_02.png" %}
 </center>
-<p>and indeed the file has been written</p>
+<p>Confirm that the export produced a file before using it elsewhere. The assertion remains silent when it succeeds. It stops the page if exporting failed.</p>
 {% highlight matlab %}
-dir(outFile)
+assert(isfile(outMap),'The orientation-map export was not created.')
 {% endhighlight %}
-
-{% highlight plaintext %}
-forsterite.png
-{% endhighlight %}
-<h2 id="4">Vector graphics versus bitmaps</h2>
-<p>The two groups of formats are treated quite differently.</p>
+<h2 id="4">Vector graphics and bitmaps</h2>
+<p>A vector file stores drawn objects as paths and text. A bitmap stores a fixed grid of coloured pixels. <a href="saveFigure.html"><code class="language-plaintext highlighter-rouge">saveFigure</code></a> treats the two groups differently. Choose a vector file when paths and text should remain sharp at any magnification. Choose a bitmap when the figure contains many cells or patches and a compact, fixed-resolution image is preferable.</p>
 <p>
-<b>Vector formats</b> (<code class="language-plaintext highlighter-rouge">pdf</code>, <code class="language-plaintext highlighter-rouge">eps</code>, <code class="language-plaintext highlighter-rouge">ps</code>) are written by <code class="language-plaintext highlighter-rouge">print</code>. Before printing, <code class="language-plaintext highlighter-rouge">saveFigure</code> sets the paper size to the size of the figure, so that the resulting page is exactly as large as the plot and carries no margin. If the figure is not in painters mode it is switched over, since only painters mode produces true vector output. Note that a spatial EBSD map with one patch per pixel becomes a very large file in a vector format - for maps a bitmap is usually the better choice.</p>
+<b>Vector formats</b> are written by <code class="language-plaintext highlighter-rouge">print</code>. Before printing, <code class="language-plaintext highlighter-rouge">saveFigure</code> sets the paper size to the figure size. The resulting page is exactly as large as the plot and has no broad margin. When necessary, <code class="language-plaintext highlighter-rouge">saveFigure</code> switches the renderer to painters mode because painters produces true vector output. A spatial EBSD map contains one patch per measurement. It can therefore make a very large vector file, so a bitmap is usually the better choice for maps.</p>
 <p>
-<b>Bitmap formats</b> are written by <code class="language-plaintext highlighter-rouge">export_fig</code>, at 1.5 times the screen resolution. On a spatial map plot MTEX increases this to 2.5 and switches graphics smoothing off, so that no colors appear in the image that are not in the map itself. This matters as soon as the image is used to read back orientations by their color.</p>
-<p>Two options are passed on to the underlying tools</p>
+<b>Bitmap formats</b> are written by <code class="language-plaintext highlighter-rouge">export_fig</code> at 1.5 times the screen resolution. For a spatial map, MTEX increases the factor to 2.5 and turns graphics smoothing off. This prevents new colours from being introduced between map cells. It matters when orientations will be read back from their colour.</p>
+<p>Two options are passed to the underlying tools.</p>
 <div>
 <ul>
 <li>
-<code class="language-plaintext highlighter-rouge">'crop'</code> runs <code class="language-plaintext highlighter-rouge">pdfcrop</code> on the result, removing whatever margin is left</li>
+<code class="language-plaintext highlighter-rouge">'crop'</code> runs <code class="language-plaintext highlighter-rouge">pdfcrop</code> on the result and removes any remaining margin.</li>
 <li>
-<code class="language-plaintext highlighter-rouge">'pdf'</code> converts an <code class="language-plaintext highlighter-rouge">eps</code> file to <code class="language-plaintext highlighter-rouge">pdf</code> using <code class="language-plaintext highlighter-rouge">epstopdf</code> and crops it</li>
+<code class="language-plaintext highlighter-rouge">'pdf'</code> converts an <code class="language-plaintext highlighter-rouge">eps</code> file to <code class="language-plaintext highlighter-rouge">pdf</code> with <code class="language-plaintext highlighter-rouge">epstopdf</code> and crops it.</li>
 </ul>
 </div>
-<p>Both shell out to a TeX distribution and are therefore only available on Unix like systems.</p>
-<h2 id="5">Controlling the size of the output</h2>
-<p>The resolution of a bitmap follows the size of the figure on screen. Hence the way to obtain a larger or smaller image is to ask for a larger or smaller figure in the first place, using the option <code class="language-plaintext highlighter-rouge">'figSize'</code>
-</p>
+<p>Both options call programs from a TeX distribution. They are available only on Unix-like systems. Without those external programs, export directly to the required extension and omit the two options.</p>
+<h2 id="5">Controlling output size</h2>
+<p>Bitmap resolution follows the on-screen figure size. The output is enlarged internally by the factors above, but its proportions still come from that figure. To obtain a larger or smaller image, create a larger or smaller figure with <code class="language-plaintext highlighter-rouge">'figSize'</code> before exporting it.</p>
 {% highlight matlab %}
-plot(ebsd('Forsterite'),ebsd('Forsterite').orientations,'figSize','small')
+plot(ebsdF,ebsdF.orientations,'figSize','small')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlottingExport_03.png" %}
 </center>
-<p>The recognized values are <code class="language-plaintext highlighter-rouge">'tiny'</code>, <code class="language-plaintext highlighter-rouge">'small'</code>, <code class="language-plaintext highlighter-rouge">'normal'</code>, <code class="language-plaintext highlighter-rouge">'large'</code> and <code class="language-plaintext highlighter-rouge">'huge'</code>, and they are relative to the screen size. The default is stored as an <a href="GeneralConceptsConfiguration.html">MTEX preference</a> and can be changed permanently by <code class="language-plaintext highlighter-rouge">setMTEXpref('figSize','large')</code>.</p>
-<p>For a multi plot the size refers to the entire figure, not to the individual plots</p>
+<p>This map uses a smaller canvas than the first map. Saving it now would therefore produce a smaller bitmap with the same map content.</p>
+<p>The recognized values are <code class="language-plaintext highlighter-rouge">'tiny'</code>, <code class="language-plaintext highlighter-rouge">'small'</code>, <code class="language-plaintext highlighter-rouge">'normal'</code>, <code class="language-plaintext highlighter-rouge">'large'</code> and <code class="language-plaintext highlighter-rouge">'huge'</code>, and they are relative to the screen size. The default is stored as an <a href="GeneralConceptsConfiguration.html">MTEX preference</a> and can be changed permanently by <code class="language-plaintext highlighter-rouge">setMTEXpref('figSize','large')</code>. For a one-off export, passing <code class="language-plaintext highlighter-rouge">'figSize'</code> to the plot keeps the choice local to that figure.</p>
+<p>For a multi-plot, <code class="language-plaintext highlighter-rouge">'figSize'</code> refers to each panel rather than to the whole figure. Three pole figures at <code class="language-plaintext highlighter-rouge">'normal'</code> therefore give three panels the size of a single normal-sized plot.</p>
 {% highlight matlab %}
-plotPDF(ebsd('Forsterite').orientations,Miller({1,0,0},{0,1,0},{0,0,1},ebsd('Forsterite').CS),...
+plotPDF(ebsdF.orientations,...
+  Miller({1,0,0},{0,1,0},{0,0,1},ebsdF.CS),...
   'contourf','figSize','normal')
 mtexColorbar
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlottingExport_04.png" %}
 </center>
+<p>The figure is three times as wide as a single pole figure, while each panel keeps the size it would have on its own. Increasing <code class="language-plaintext highlighter-rouge">'figSize'</code> enlarges every panel and the figure with them. Export the complete figure as a bitmap and verify the file just as for the map.</p>
 {% highlight matlab %}
-saveFigure(fullfile(tempdir,'pdf.png'))
+outPole = fullfile(outDir,'poleFigures.png');
+saveFigure(outPole)
+assert(isfile(outPole),'The pole-figure export was not created.')
 {% endhighlight %}
-<center>
+<center class="mtex-figure">
 {% include inline_image.html file="PlottingExport_05.png" %}
 </center>
-<h2 id="9">Exporting the data instead of the picture</h2>
-<p>Quite often what is really wanted is not the picture but the numbers behind it. Most MTEX classes therefore have their own export command, e.g. <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> for orientations, <a href="PoleFigure.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> for pole figure data and <a href="SO3Fun.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> for ODFs. Those are described in the corresponding chapters.</p>
+<h2 id="9">Exporting data instead of a picture</h2>
+<p>A figure file stores the visual result, not the numerical values behind it. When those values are the required result, use a class-specific export method instead. Most MTEX classes provide one. Examples are <a href="quaternion.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> for orientations, <a href="PoleFigure.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> for pole-figure data, and <a href="SO3Fun.export.html"><code class="language-plaintext highlighter-rouge">export</code></a> for ODFs. Their corresponding chapters describe the data formats. This distinction avoids treating pixels in a saved picture as though they were the original measurements.</p>
 {% highlight matlab %}
 % clean up
-delete(fullfile(tempdir,'forsterite.png'))
-delete(fullfile(tempdir,'pdf.png'))
+delete(outMap)
+delete(outPole)
 {% endhighlight %}
+<h2 id="10">References</h2>
+<div>
+<ul>
+<li>O. Woodford and Y. Altman, <a href="https://github.com/altmany/export_fig"><code class="language-plaintext highlighter-rouge">export_fig</code></a>, open-source MATLAB software, 2008--present, provides the bitmap-export backend used by <code class="language-plaintext highlighter-rouge">saveFigure</code>.</li>
+</ul>
+</div>
+<h2 id="11">Next</h2>
+<p>Export completes the figure workflow. Continue with <a href="SphericalProjections.html">Spherical Projections</a> to understand how the projection itself changes the positions, shapes, and areas seen in pole figures and other spherical plots.</p>
 </div>
 </body>
 </html>
