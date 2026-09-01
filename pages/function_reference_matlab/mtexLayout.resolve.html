@@ -1,0 +1,54 @@
+---
+title: 'mtexLayout.resolve'
+
+sidebar: function_reference_sidebar
+permalink: mtexLayout.resolve.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>mtexLayout.resolve</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_mtexLayout__resolve.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/@mtexLayout/resolve.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>lay the figure out: measure, solve, apply, until the inset stops moving</p>
+<h2 id="3">Description</h2>
+<p>The decoration band depends on the size of the axes - a wider axes gets different tick labels - so the layout is a fixed point rather than a single pass. <a href="mtexFigure.mtexFigure.html">mtexFigure</a> used to settle that by running the whole layout twice unconditionally, whatever the figure held. This iterates instead: the usual case converges after one pass and stops, and a case that would oscillate stops too.</p>
+<p>Re-entrant calls return the plan in hand. Writing an axes Position while laying out can bring the figure resize callback straight back round here, and it must not restart the layout underneath the pass that is running.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+plan = lay.resolve(mtexFig)
+plan = lay.resolve(mtexFig,override)
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>override</tt>
+         </td>
+         <td>
+            <tt>spec fields to force, e.g. a pinned axis size, without writing them onto the <a href="mtexFigure.mtexFigure.html">mtexFigure</a> and having them outlive this call</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">See also</h2>
+<p>
+<a href="mtexLayout.measure.html">mtexLayout.measure</a> <a href="mtexLayout.apply.html">mtexLayout.apply</a> <a href="mtexLayout.solveLayout.html">mtexLayout.solveLayout</a>
+</p>
+</div>
+</body>
+</html>

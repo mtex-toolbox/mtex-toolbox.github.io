@@ -25,7 +25,7 @@ To make changes, update the MATLAB code and republish this document.
 <!--/introduction-->
 <p>An EBSD map and an SEM image of the same area never quite line up: the beam drifts during the scan, the camera moves between acquisitions, the specimen is tilted. TrueEBSD corrects that, so every pixel of the map and every pixel of the images refers to the same point on the specimen. What comes out is an ordinary EBSD map that carries the images as per-pixel properties.</p>
 <p>TrueEBSD was first published as a separate toolbox by Vivian Tong and Stefan Olovsj&ouml; of Seco Tools AB, R&amp;D Materials and Technology, Fagersta, Sweden. Tong et al. describe its MTEX implementation and correlative applications in <a href="https://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>.</p>
-<p>This page runs the whole workflow on a cut-down WC-Co dataset in well under a minute. First read <a href="EBSDMapsAndImages.html">Maps and Images</a> to prepare a common specimen frame, array layout and length unit. See <a href="EBSDSpatialTransform.html">Spatial Transforms</a> for choosing a distortion model, <a href="trueEbsd2.trueEbsd2.html"><code class="language-plaintext highlighter-rouge">trueEbsd2</code></a> for the workflow class and <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> for its image container.</p>
+<p>This page runs the whole workflow on a cut-down WC-Co dataset in well under a minute. First read <a href="EBSDMapsAndImages.html">Maps and Images</a> to prepare a common specimen frame, array layout and length unit. See <a href="EBSDSpatialTransform.html">Spatial Transforms</a> for choosing a distortion model, <a href="trueEbsd.trueEbsd.html"><code class="language-plaintext highlighter-rouge">trueEbsd</code></a> for the workflow class and <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> for its image container.</p>
 <p>TrueEBSD corrects map positions. It does not repair an incorrect relation between Euler angles and the specimen frame, and it does not correct an orientation error caused during acquisition. Use <a href="EBSDReferenceFrame.html">Reference Frame Alignment</a> for the first problem.</p>
 <p>The convention set here only decides which way up the figures come out. It has no effect on the correction: a map entry's array order is read off its own <code class="language-plaintext highlighter-rouge">d1</code> and <code class="language-plaintext highlighter-rouge">d2</code>, and no plotting convention is consulted anywhere in the workflow.</p>
 {% highlight matlab %}
@@ -74,11 +74,11 @@ T = [spatialTransformShift + spatialTransformDrift, ...
 {% endhighlight %}
 <p>The job holds the whole workflow, and each step below adds to it. Building it also checks that the sequence really is stored one consistent way round, and that every entry measures the sample in the same unit.</p>
 {% highlight matlab %}
-job = trueEbsd2(imgList,T)
+job = trueEbsd(imgList,T)
 {% endhighlight %}
 
 {% highlight plaintext %}
-job = trueEbsd2 (as imported)
+job = trueEbsd (as imported)
  
       name          image   distortion  shift, px  residual, px
  1   bcImg       96 × 128  shift-drift          -             -
