@@ -42,7 +42,7 @@ scatter(v,'MarkerAlpha',0.2,'MarkerSize',2)
 <p>For directions, <a href="vector3d.calcCluster.html"><code class="language-plaintext highlighter-rouge">calcCluster</code></a> uses CLASSIX by default. The vector <code class="language-plaintext highlighter-rouge">cInd</code> has one integer cluster label for every input direction. The entries of <code class="language-plaintext highlighter-rouge">center</code> are the corresponding mean directions.</p>
 <p>Cluster labels are identifiers, not ranks: cluster 1 is not intrinsically more important than cluster 2. We use the labels only to assign colors and then mark each returned center.</p>
 {% highlight matlab %}
-[cInd,center] = calcCluster(v,'radius',0.12,'minPoints',100);
+[cInd,center] = calcCluster(v);
 
 plot(v,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
 annotate(center)
@@ -59,9 +59,9 @@ annotate(center)
 {% highlight matlab %}
 vSym = [v(:); -v(:)];
 
-[cInd,center] = calcCluster(vSym,'radius',0.12,'minPoints',100);
+[cInd,center] = calcCluster(vSym);
 
-plot(vSym,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
+plot(vSym,ind2color(cInd))
 annotate(center)
 {% endhighlight %}
 <center class="mtex-figure">
@@ -70,7 +70,7 @@ annotate(center)
 <p>The two discs are the upper and the lower hemisphere. Read as ordinary directions, the sample falls into eight clusters. Every feature of the smiley and every one of their opposites carries a color of its own.</p>
 {% highlight matlab %}
 vSym.antipodal = true;
-[cInd,center] = calcCluster(vSym,'radius',0.12,'minPoints',100);
+[cInd,center] = calcCluster(vSym);
 
 plot(vSym,ind2color(cInd),'MarkerAlpha',0.2,'MarkerSize',2)
 annotate(center)
@@ -103,8 +103,7 @@ plot(ori,'add2all','MarkerSize',3,'MarkerAlpha',0.25,'all')
 <h2 id="10">Cluster the orientations</h2>
 <p>Orientation clustering does not use CLASSIX unless it is selected explicitly. The embedding used by this method accounts for crystal symmetry, so symmetrically equivalent representations of an orientation receive the same cluster label.</p>
 {% highlight matlab %}
-[cId,center] = calcCluster(ori,'method','classix', ...
-  'radius',0.12,'minPoints',100);
+[cId,center] = calcCluster(ori,'method','classix');
 
 plotSection(ori,ind2color(cId),'markerSize',3, ...
   'MarkerAlpha',0.25,'all')

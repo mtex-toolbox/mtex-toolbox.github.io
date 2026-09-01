@@ -26,6 +26,15 @@ To make changes, update the MATLAB code and republish this document.
 <p>The motivating tension experiments reached approximately 30 percent strain at room temperature and 70 percent at 250 degrees Celsius.</p>
 <!--/introduction-->
 <h2 id="1">Set the crystal and specimen frames</h2>
+<p>The sheet is orthotropic, so its specimen symmetry is the orthorhombic group 222. Expressing it in a rolling frame names the specimen axes rolling direction (RD), transverse direction (TD), and normal direction (ND), and every pole figure below is drawn and annotated in those axes. Here the tension axis is RD.</p>
+{% highlight matlab %}
+ss = specimenSymmetry('222');
+ss.frame = specimenFrame.rolling
+{% endhighlight %}
+
+{% highlight plaintext %}
+ss = orthorhombic specimenSymmetry (TD←RD↑)
+{% endhighlight %}
 <p>Load the lattice parameters and hexagonal symmetry from the magnesium crystal-information file. <code class="language-plaintext highlighter-rouge">properGroup</code> keeps the rotational part of the point group used to generate oriented slip and twinning systems.</p>
 {% highlight matlab %}
 cs = crystalSymmetry.load('Mg-Magnesium.cif')
@@ -41,20 +50,16 @@ cs = crystalSymmetry (⊙c→a)
   a, b, c        : 3.2, 3.2, 5.2    
   reference frame: X||a*, Y||b, Z||c
 {% endhighlight %}
-<p>A rolling frame names the specimen axes rolling direction (RD), transverse direction (TD), and normal direction (ND). Here the tension axis is RD. Save the incoming frame so the example can restore the session afterwards.</p>
-{% highlight matlab %}
-previousFrame = specimenFrame.default;
-specimenFrame.rolling.makeDefault
-{% endhighlight %}
 <h2 id="3">Build the initial basal fibre texture</h2>
 <p>In an ideal rolled magnesium sheet, the crystal c-axes are parallel to ND while rotations about that axis are random. A fibre ODF represents that basal fibre texture directly.</p>
 {% highlight matlab %}
-odf = fibreODF(cs.cAxis,vector3d.Z);
+odf = fibreODF(cs.cAxis,vector3d.Z,ss);
+odf = FourierODF(odf);
 {% endhighlight %}
 <p>Plot the basal pole, a prismatic pole, and a pyramidal pole. Pole figures are antipodal here, so opposite directions are drawn as the same pole.</p>
 {% highlight matlab %}
 h = Miller({0,0,0,1},{1,0,-1,0},{1,0,-1,1},cs);
-plotPDF(odf,h,'antipodal','contourf','figSize','small')
+plotPDF(odf,h,'contourf','complete','upper')
 mtexColorbar
 {% endhighlight %}
 <center class="mtex-figure">
@@ -89,7 +94,7 @@ epsWarm = 0.7 * strainTensor(diag([1 -0.5 -0.5]))
 {% endhighlight %}
 
 {% highlight plaintext %}
-epsCold = strainTensor (TD←RD↑)
+epsCold = strainTensor (y↓→x)
   type: Lagrange 
   rank: 2 (3 × 3)
  
@@ -98,7 +103,7 @@ epsCold = strainTensor (TD←RD↑)
    0 -18   0
    0   0 -12
  
-epsWarm = strainTensor (TD←RD↑)
+epsWarm = strainTensor (y↓→x)
   type: Lagrange 
   rank: 2 (3 × 3)
  
@@ -108,9 +113,14 @@ epsWarm = strainTensor (TD←RD↑)
    0   0 -35
 {% endhighlight %}
 <h2 id="9">Solve the Taylor model for the starting texture</h2>
-<p>Draw 100,000 orientations from the initial ODF. Both simulations start from this same synthetic polycrystal.</p>
+<p>Draw a synthetic polycrystal from the initial ODF. <code class="language-plaintext highlighter-rouge">optimalSample</code> places the orientations so that they reproduce the ODF as closely as possible, which needs far fewer of them than a random draw. Both simulations start from this same polycrystal.</p>
 {% highlight matlab %}
-ori = odf.discreteSample(100000);
+ori = odf.optimalSample(5000)
+{% endhighlight %}
+
+{% highlight plaintext %}
+ori = orientation (Mg → TD←RD↑ (222))
+  size: 5280 × 1
 {% endhighlight %}
 <p>Express each strain in each crystal frame and solve the Taylor problem. The columns of <code class="language-plaintext highlighter-rouge">bCold</code> and <code class="language-plaintext highlighter-rouge">bWarm</code> are slip or twin amounts for the symmetrized systems. The spin tensors describe the corresponding lattice rotations.</p>
 {% highlight matlab %}
@@ -128,29 +138,25 @@ meanRotation = [mean(angle(ori,oriCold)),...
 
 {% highlight plaintext %}
 meanRotation =
-    7.9041   17.9188
+    8.3179   15.4162
 {% endhighlight %}
-<p>The mean orientation changes are 7.9155 degrees at room temperature and 17.9343 degrees at 250 degrees Celsius. The larger warm value reflects both its larger imposed strain and its different CRSS ratios.</p>
+<p>The mean orientation changes are 8.3179 degrees at room temperature and 15.4162 degrees at 250 degrees Celsius. The larger warm value reflects both its larger imposed strain and its different CRSS ratios.</p>
 <h2 id="13">One-step approximation</h2>
 <p>This page evaluates the spin only at the starting orientations and applies the entire 30 or 70 percent strain in one update. It is therefore an illustrative one-step approximation, especially at the larger strain. <a href="TextureEvolution.html">Texture Evolution</a> shows the more accurate incremental calculation in which orientations are updated repeatedly.</p>
 <h2 id="14">Compare the pole figures</h2>
 <p>Add the room-temperature and 250-degree results beneath the initial pole figures, then arrange the three states as rows on common specimen axes.</p>
 {% highlight matlab %}
-nextAxis
-plotPDF(oriCold,h,'antipodal','contourf','grid',...
-  'grid_res',30*degree)
-mtexColorbar
+newMtexFigure('layout',[3,3])
+plotPDF(odf,h,'contourf','complete','upper','grid','grid_res',30*degree)
 
 nextAxis
-plotPDF(oriWarm,h,'antipodal','contourf','grid',...
-  'grid_res',30*degree)
-mtexColorbar
+plotPDF(oriCold,h,'contourf','upper','complete',...
+  'grid','grid_res',30*degree,'noLabel','noTitle')
 
-mtexFig = gcm;
-mtexFig.ncols = 3;
-mtexFig.nrows = 3;
-mtexFig.layoutMode = 'user';
-drawNow(mtexFig)
+nextAxis
+plotPDF(oriWarm,h,'contourf','upper','complete',...
+  'grid','grid_res',30*degree,'noLabel','noTitle')
+mtexColorbar
 {% endhighlight %}
 <center class="mtex-figure">
 {% include inline_image.html file="TaylorHex_02.png" %}
@@ -171,10 +177,10 @@ familyActivity = array2table([statSsCold.';statSsWarm.'],...
 {% highlight plaintext %}
 familyActivity =
   2×4 table
-                         Basal      Prismatic    Pyramidal    CompressionTwin
-                       _________    _________    _________    _______________
-    RoomTemperature    0.0089997     0.38954       0.2899       2.1671e-10   
-    250DegreesC         0.017442     0.75435      0.84551       4.9722e-11
+                        Basal      Prismatic    Pyramidal    CompressionTwin
+                       ________    _________    _________    _______________
+    RoomTemperature    0.021981     0.37224      0.29477       2.3338e-10   
+    250DegreesC        0.044826     0.72982      0.84239       4.9066e-11
 {% endhighlight %}
 <p>Use a logarithmic scale because the active family totals span several orders of magnitude.</p>
 {% highlight matlab %}
@@ -190,10 +196,6 @@ legend('boxoff')
 {% include inline_image.html file="TaylorHex_03.png" %}
 </center>
 <p>Prismatic and pyramidal slip carry almost all deformation in this example. The warm CRSS ratios favour pyramidal slip over prismatic slip, whereas the order is reversed at room temperature. Compression-twin activity is below \(3 \times 10^{-10}\) per crystal, nine to ten orders of magnitude under prismatic and pyramidal slip. Because the imposed total strains differ, compare the family ranking within a row rather than absolute bar heights between temperatures.</p>
-{% highlight matlab %}
-% Restore the session state before the closing sections.
-specimenFrame.default(previousFrame);
-{% endhighlight %}
 <h2 id="19">References</h2>
 <div>
 <ul>
