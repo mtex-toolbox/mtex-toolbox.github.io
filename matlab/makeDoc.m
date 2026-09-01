@@ -72,25 +72,41 @@ mtex_settings
 close all
 setMTEXpref('FontSize',13)
 setMTEXpref('figSize',0.5)
+setMTEXpref('axisBox',[1096 480])
+setMTEXpref('axisArea',368000)
+setMTEXpref('sphericalAxisHeight',370)
 
 % figure sizes are a fraction of the screen, so without this every figure
 % would come out at whatever size the monitor of the machine running the
 % build happens to imply - and the whole of ../images would change as soon
 % as the documentation is rebuilt elsewhere.
 %
-% The virtual screen is twice the 1920x1200 the figures are laid out for, so
-% that every figure is rendered at twice the size it is shown at and stays
-% sharp - .mtex-figure in ../css/customstyles.css halves it again. drawNow
-% subtracts a fixed 120 px from the screen height before applying figSize,
-% hence 2*(1200-120)+120 rather than 2*1200.
-setMTEXpref('screenSize',[3840 2280])
+% .mtex-figure in ../css/customstyles.css shows an image at half its pixel
+% size, so a figure is rendered at twice the size it is displayed at and stays
+% sharp. The halving belongs in the browser rather than in the screen: an axes
+% grows with the screen, but the font size, the marker size and the line widths
+% are in points and do not, so a larger screen would only make the type smaller
+% relative to the plot.
+%
+% The value is the area a window has, not the size of a monitor: it is also the
+% size a figure may not exceed, and a figure the screen cannot hold is one the
+% window manager shrinks - the snapshot then squeezes it into the wrong shape.
+% 1200 minus room for the title bar.
+setMTEXpref('screenSize',[1920 1080])
 
 % one height for every spherical plot, so that a single hemisphere, a row of
 % pole figures and a fundamental sector all come out the same size. The value
 % is paired with the image cap in ../css/customstyles.css: four plots in a row
 % render 1654 px wide and must stay under it, or the browser scales them down
 % and the row ends up shorter than every other spherical image again.
-setMTEXpref('sphericalAxisHeight',370)
+
+% everything that is not a spherical plot is sized by the box instead, keeping
+% its aspect ratio: a wide map is stopped by the width, a tall one by the
+% height, and one that is neither by the area, so that a wide map does not
+% carry more of the page than a square one. The height binds for any axes
+% taller than 0.63 of its width, which covers every plot in the documentation
+% bar the widest maps, so it is the value that sets the size of nearly all of
+% them.
 
 % the maps in the documentation do not carry the reference frame indicator
 % in their scale bar - the pages that are about the axes alignment ask for

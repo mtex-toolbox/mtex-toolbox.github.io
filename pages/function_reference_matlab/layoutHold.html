@@ -1,0 +1,68 @@
+---
+title: 'layoutHold'
+
+sidebar: function_reference_sidebar
+permalink: layoutHold.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>layoutHold</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_layoutHold.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/plotting/plotting_tools/layoutHold.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>suspend the layout of a figure while it is being built</p>
+<h2 id="3">Description</h2>
+<p>Every plot command ends by laying the figure out, so a command that builds one a plot at a time lays it out once per plot and throws all but the last away. plotPDF of three pole figures laid out four times and measured the axes seventeen times to produce one figure; holding the layout while it builds made that five measurements and took 46% off the wall time.</p>
+<p>Releasing lays the figure out, so it is safe to take the hold before any early return: whichever way the command leaves, the figure ends up laid out exactly once.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+release = layoutHold(mtexFig);
+...                              % many plot commands
+clear release                    % lays the figure out, once
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>mtexFig</tt>
+         </td>
+         <td>
+            <tt><a href="mtexFigure.mtexFigure.html">mtexFigure</a>, or the plain struct newMtexFigure falls back to</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>release</tt>
+         </td>
+         <td>
+            <tt>onCleanup; the layout resumes when it is cleared or goes out of scope, so an error on the way cannot leave a figure suspended</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">See also</h2>
+<p>
+<a href="mtexLayout.hold.html">mtexLayout.hold</a> <a href="mtexFigure.drawNow.html">mtexFigure.drawNow</a>
+</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,174 @@
+---
+title: 'trueEbsd.trueEbsd'
+
+sidebar: function_reference_sidebar
+permalink: trueEbsd.trueEbsd.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>trueEbsd.trueEbsd</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_trueEbsd__trueEbsd.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@trueEbsd/trueEbsd.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>align a sequence of images and EBSD maps of one specimen area</p>
+<p>Two pictures of the same area rarely overlay: the EBSD map is taken at a tilt and drifts as it scans, the electron images do not, and no single distortion relates the extremes. TrueEBSD relates them through a CHAIN of intermediate maps instead, each pair separated by one distortion simple enough to fit, and composes the hops. What comes out is one common grid on which every pixel of every map is the same piece of specimen, so an image becomes a per pixel property of the map.</p>
+<p>The sequence is ordered from the most distorted map to the ground truth, and hop n separates imgList(n) from imgList(n+1). Three methods walk it: pixelSizeMatch puts every map on one grid, calcDistortion measures and fits each hop, undistort accumulates the hops and resamples.</p>
+<p>A handle class, as every class guiding a process in MTEX is - see <a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a>. The methods still return the job, so job = pixelSizeMatch(job,pixSz) reads as before, but the job is modified in place: a second variable holding it is an alias rather than a snapshot, and a method that errors part way leaves the job partly filled.</p>
+<p>THE MODEL IS THE CLASS. A hop's distortion is an unfitted <a href="spatialTransform.html">spatialTransform</a> - the class names which distortion separates the pair and calcDistortion fills in the coefficients. A multi stage hop is written with + and never *, because mtimes absorbs an operand reporting isid and an unfitted prototype has zero coefficients, so * would silently drop a stage. There is no sentinel on the reference: where nothing separates a pair, the entry is spatialTransformId.</p>
+<h2 id="3">Syntax</h2>
+{% highlight matlab %}
+job = trueEbsd(imgList)
+job = trueEbsd(imgList,T)
+{% endhighlight %}
+
+{% highlight matlab %}
+imgList = [mapImage(ebsd.bc,ebsd), mapImage(img,'dxy',0.05)]
+job = trueEbsd(imgList, spatialTransformShift + spatialTransformDrift)
+job.pixelSizeMatch
+job.calcDistortion('fitErr')
+job.undistort
+{% endhighlight %}
+<h2 id="4">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>imgList</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a> array, most distorted first, ground truth last. One array, not one argument per map. An EBSD map joins the sequence as mapImage(ebsd.bc,ebsd) - an image, with the map riding along</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransform.html">spatialTransform</a> array, one per hop, numel(imgList)-1 of them. Unfitted prototypes. May also be set afterwards as job.T</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="5">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>job</tt>
+         </td>
+         <td>
+            <tt><a href="trueEbsd.trueEbsd.html">trueEbsd</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Class Properties</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>imgList</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a> array as imported, differing pixel sizes and extents</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>T</tt>
+         </td>
+         <td>
+            <tt><a href="spatialTransform.html">spatialTransform</a> array, one per hop</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>resizedList</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a> array on one common pixel grid, filled by pixelSizeMatch</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>shifts</tt>
+         </td>
+         <td>
+            <tt>cell, one entry per hop, each a <a href="pairShifts.pairShifts.html">pairShifts</a> array with one entry per fit stage, the last being the final fit</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>fitError</tt>
+         </td>
+         <td>
+            <tt><a href="pairShifts.pairShifts.html">pairShifts</a> array, one per hop: the residual shifts measured AFTER correction, which is what says whether registration worked. Needs the 'fitErr' flag</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>undistortedList</tt>
+         </td>
+         <td>
+            <tt><a href="mapImage.mapImage.html">mapImage</a> array, aligned, filled by undistort</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>opt</tt>
+         </td>
+         <td>
+            <tt>struct array, one per map, the registration settings. Set with setOptions rather than by hand</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>Indexing, with numel(job.T) == numel(job.imgList)</tt>
+         </td>
+         <td>
+            <tt>1</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>job.imgList(n)          % <a href="mapImage.mapImage.html">mapImage</a> job.T(n)                % <a href="spatialTransform.html">spatialTransform</a>, hop n</tt>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <tt>job.T is a sequence and every <a href="spatialTransform.html">spatialTransform</a> method takes one transform,</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>so inv(job.T) and isid(job.T) do not work</tt>
+         </td>
+         <td>
+            <tt>index a hop, or fold the chain with *. See <a href="spatialTransform.html">spatialTransform</a> and docs/adr/0007. job.opt(n)              % the settings for map n job.shifts{n}(m)        % hop n, fit stage m job.fitError(n)         % <a href="pairShifts.pairShifts.html">pairShifts</a></tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">References</h2>
+<p>Tong et al., TrueEBSD in MTEX: automatic image matching for correlative microscopy applications, <a href="https://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="mapImage.mapImage.html">mapImage</a> <a href="spatialTransform.html">spatialTransform</a> <a href="pairShifts.pairShifts.html">pairShifts</a> <a href="trueEbsd.pixelSizeMatch.html">trueEbsd.pixelSizeMatch</a> <a href="trueEbsd.calcDistortion.html">trueEbsd.calcDistortion</a> <a href="trueEbsd.undistort.html">trueEbsd.undistort</a> <a href="trueEbsd.setOptions.html">trueEbsd.setOptions</a> <a href="parentGrainReconstructor.parentGrainReconstructor.html">parentGrainReconstructor</a>
+</p>
+</div>
+</body>
+</html>

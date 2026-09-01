@@ -1,0 +1,120 @@
+---
+title: 'trueEbsd.calcDistortion'
+
+sidebar: function_reference_sidebar
+permalink: trueEbsd.calcDistortion.html
+folder: function_reference
+toc: false
+---
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+    -->
+<title>trueEbsd.calcDistortion</title>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.source" content="script_trueEbsd__calcDistortion.m">
+</head>
+<body>
+<font size="2"><a href="https://github.com/mtex-toolbox/mtex/blob/develop/EBSDAnalysis/@trueEbsd/calcDistortion.m">
+    edit page</a></font>
+<div>
+<!--introduction-->
+<!--/introduction-->
+<p>fit the distortion separating every consecutive pair of maps</p>
+<h2 id="3">Description</h2>
+<p>job.T(n) is the unfitted <a href="spatialTransform.html">spatialTransform</a> separating map n from map n+1, and stageList expands it into the sequence of stages to fit. For every consecutive pair this divides the images into ROIs, cross correlates them to get a local shift per ROI, and fits the stages to those shifts, each one fitted on what the previous left over. The per stage measurements land in job.shifts{n} as <a href="pairShifts.pairShifts.html">pairShifts</a>, and job.T(n) is replaced by the fitted transform - still of the class it was declared as.</p>
+<p>The pairs are not visited in index order. Traversal starts at the first map flagged highContrast, runs forward to the reference, then runs backward from there to map 1, so that one map in every correlated pair has usable edge contrast. Where the other map does not, its partner's intensities are remapped into its frame and that remapped image, not the original, is what the next hop correlates against.</p>
+<p>ROI size is optimised by retry: a hop whose residual exceeds 2 pixels is redone with the ROI width doubled, until it converges or the ROI no longer fits the image.</p>
+<p>Backends There is one cross correlation, MTEX's xcfShift. 'backend' now chooses only how the resampling is done, and the two ways are interchangeable:</p>
+<pre>'inverse'   - invert the fitted displacement field and sample on the
+              regular grid. About 30&times; faster at full map size, and the
+              default
+'scattered' - a forward scatteredInterpolant, what TrueEBSD 2.1.0 ran</pre>
+<p>They differ on a few hundredths of a percent of pixels, all of them nearest neighbour ties at a cell boundary.</p>
+<h2 id="4">Syntax</h2>
+{% highlight matlab %}
+job = calcDistortion(job)
+job = calcDistortion(job,'fitErr')
+job = calcDistortion(job,'fitErr','backend','legacy')   % old resampling
+{% endhighlight %}
+<h2 id="5">Input</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>job</tt>
+         </td>
+         <td>
+            <tt><a href="trueEbsd.trueEbsd.html">trueEbsd</a>, after pixelSizeMatch</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="6">Output</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>job</tt>
+         </td>
+         <td>
+            <tt>the same <a href="trueEbsd.trueEbsd.html">trueEbsd</a> (a handle), with shifts and job.T fitted and, under 'fitErr', fitError filled in</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>fitErr</tt>
+         </td>
+         <td>
+            <tt>measure the residual displacement left after each hop is fitted and print it. This is the number that says whether registration worked, and it is also what the ROI retry below tests against, so without it every hop gets exactly one pass. It costs one extra cross correlation per hop.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>silent</tt>
+         </td>
+         <td>
+            <tt>do not print the progress table</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>retryMax</tt>
+         </td>
+         <td>
+            <tt>maximum number of correlation attempts per hop (default 100, in practice unlimited). Each attempt after the first doubles the ROI width. Counts total attempts, not extra ones, so 1 means a single pass; values below 1 are clamped to 1.</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>backend</tt>
+         </td>
+         <td>
+            <tt>'fast' (default) or 'legacy', see below</tt>
+         </td>
+      </tr>
+      <tr>
+         <td width="100px">
+            <tt>remapBackend</tt>
+         </td>
+         <td>
+            <tt>'inverse' or 'scattered' for the resampling, overriding 'backend'. Picking the halves apart is how you tell which of the two a difference between runs came from.</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="8">See also</h2>
+<p>
+<a href="trueEbsd.pixelSizeMatch.html">trueEbsd.pixelSizeMatch</a> <a href="trueEbsd.undistort.html">trueEbsd.undistort</a> <a href="spatialTransform.html">spatialTransform</a> <a href="xcfShift.html">xcfShift</a>
+</p>
+</div>
+</body>
+</html>

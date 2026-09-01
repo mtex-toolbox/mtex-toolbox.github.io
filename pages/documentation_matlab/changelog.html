@@ -25,40 +25,52 @@ To make changes, update the MATLAB code and republish this document.
 <p>Releases appear newest first. The <code class="language-plaintext highlighter-rouge">develop</code> section records work intended for the next release; numbered sections record what changed in that release. Historical examples preserve the syntax of their release and may not be the current way to perform the operation. Follow the linked topic or function page when writing new code.</p>
 <p>The technical detail behind these changes--what was wrong, what it was measured against, and which issue it closes--is in <code class="language-plaintext highlighter-rouge">CHANGELOG.md</code> in the MTEX folder.</p>
 <!--/introduction-->
-<h2 id="1">Unreleased changes (develop)</h2>
+<h2 id="1">MTEX 7.1 09/2026</h2>
 <p>
-<b>Aligning Maps and Images of the Same Area</b>
+<b>True EBSD - Aligning EBSD Maps with SEM Images</b>
 </p>
-<p>An electron image and an EBSD map of the same area rarely overlay. The map is taken at a tilt and drifts as it scans. MTEX corrects that now. Hand the TrueEBSD workflow a sequence of pictures, the most distorted first and the undistorted image last, and it puts them all on one grid, so every image becomes a property of the map:</p>
+<p>Electron images and EBSD maps of the same area rarely overlay. The map is taken at a tilt and drifts as it scans. MTEX now includes trueEBSD to correct that. Hand the TrueEBSD workflow a sequence of pictures, the most distorted first and the undistorted image last, and it puts them all on one grid, so every image becomes a property of the map:</p>
 {% highlight matlab %}
-job = trueEbsd2([mapImage(ebsd.bc,ebsd), mapImage(bse,'dxy',0.05)]);
+job = trueEbsd([mapImage(ebsd.bc,ebsd), mapImage(bse,'dxy',0.05)]);
 job.pixelSizeMatch
 job.calcDistortion
 job.undistort
 {% endhighlight %}
-<p>The pieces it is built from are useful on their own. A <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> is a raster that knows which part of the specimen each pixel covers, a <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> is a distortion that composes and inverts like a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a>, <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a> cross correlates two images tile by tile, and <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> takes a <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a>, so a map can be stored in the same array order as the image it is to be compared with.</p>
+<p>The pieces it is built from are useful on their own. A <a href="mapImage.mapImage.html"><code class="language-plaintext highlighter-rouge">mapImage</code></a> is a raster that knows which part of the specimen each pixel covers, a <a href="spatialTransform.html"><code class="language-plaintext highlighter-rouge">spatialTransform</code></a> is a distortion that composes and inverts like a <a href="rotation.rotation.html"><code class="language-plaintext highlighter-rouge">rotation</code></a>, <a href="xcfShift.html"><code class="language-plaintext highlighter-rouge">xcfShift</code></a> cross correlates two images tile by tile, and <a href="EBSD.gridify.html"><code class="language-plaintext highlighter-rouge">gridify</code></a> takes a <a href="gridLayout.gridLayout.html"><code class="language-plaintext highlighter-rouge">gridLayout</code></a>, so a map can be stored in the array order of the image it is compared with.</p>
 <p>See <a href="EBSDMapsAndImages.html">Maps and Images</a>, <a href="EBSDSpatialTransform.html">Spatial Transforms</a> and <a href="EBSDTrueEbsd.html">TrueEBSD</a>. The method is by Tong et al., <a href="https://arxiv.org/abs/2605.00703">arXiv 2605.00703</a>.</p>
 <p>
 <b>EBSD Export That Keeps the File</b>
 </p>
-<p>Exporting to HDF5 copies the file the data was imported from and writes only the changed data into the copy, so the result is still a file of the vendor's own format - patterns, acquisition settings and all the rest are passed through untouched, and what MTEX computed is added beside them:</p>
+<p>Exporting to HDF5 copies the file the data was imported from and writes only the changed data into the copy. The result is still a file of the vendor's own format - patterns and acquisition settings pass through untouched, and what MTEX computed is added beside them:</p>
 {% highlight matlab %}
 ebsd = EBSD.load('myfile.h5oina')
 ebsd = ebsd.denoise(halfQuadraticFilter)
 export(ebsd,'denoised.h5oina')
 {% endhighlight %}
 <p>
-<b>Edit a Phase While You Import It</b>
+<b>Update Documentation</b>
 </p>
-<p>The phase table of the <a href="matlab:import_wizard">import wizard</a> carries the full crystal symmetry: point group, lattice parameters and the alignment of the crystal axes are edited in place, next to the mineral name and the colour, and the plots follow the edit. So a file that states an incomplete or a wrong crystallography is corrected before the map is imported rather than afterwards.</p>
+<p>We and AI put a lot of work in improving the documentation. It reads now more like a textbook in crystallographic texture analysis that uses MTEX to explain concepts and methods in a practical and illustrative way.</p>
 <p>
-<b>Fewer Orientations for the Same Accuracy</b>
+<b>Plastic Work in the Taylor Model</b>
 </p>
-<p> <a href="SO3Fun.optimalSample.html"><code class="language-plaintext highlighter-rouge">optimalSample</code></a> and its spherical sibling now move their points by L-BFGS rather than by gradient descent, which is about an order of magnitude faster to the same discrepancy, and optimize the weights in the same iteration. See <a href="S2FunSampling.html">Sampling a Spherical Function</a> and <a href="RandomSampling.html">Random Sampling</a>.</p>
+<p> <a href="strainTensor.calcTaylor.html"><code class="language-plaintext highlighter-rouge">calcTaylor</code></a> returns the plastic work, the slip amounts weighted by their critical resolved shear stresses:</p>
+{% highlight matlab %}
+work = calcTaylor(eps,sS,'plasticWork')
+{% endhighlight %}
+<p>The Taylor factor it returns beside it is the total slip activity, which equals the work only when every critical resolved shear stress is one - so with slip systems of differing strengths, compare the work. <a href="calcLankford.html"><code class="language-plaintext highlighter-rouge">calcLankford</code></a> chooses the contraction path by minimising it for that reason, and reports Rbar and deltaR under their own names. See <a href="Plasticity.html">Plasticity</a>.</p>
 <p>
-<b>A Guided Documentation</b>
+<b>Corrections Worth Knowing</b>
 </p>
-<p>Every chapter of the documentation opens with a page that says what the chapter is for and where to start, there is a <a href="Glossary.html">glossary</a> and a <a href="NotationAndConventions.html">notation page</a>, and the <a href="Documentation.html">front page</a> is a visual index. The class diagrams are generated from the sources now, so they cannot go stale.</p>
+<div>
+<ul>
+<li>the Radon transform of a fibre ODF averages over the specimen orbit as well as the crystal orbit. With a nontrivial specimen symmetry the pole densities of a <a href="SO3FunCBF.SO3FunCBF.html"><code class="language-plaintext highlighter-rouge">SO3FunCBF</code></a> came out too large - for 321 with 222, seven times</li>
+<li> <a href="equispacedSO3Grid.html"><code class="language-plaintext highlighter-rouge">equispacedSO3Grid</code></a> counts the range of the first Euler angle, which a specimen symmetry narrows. Under 222 or mmm it delivered a quarter of the points asked for, under a 432/432 misorientation grid an eighth - and now costs the work those points take</li>
+<li>the weights of an <a href="SO3FunRBF.SO3FunRBF.html"><code class="language-plaintext highlighter-rouge">SO3FunRBF</code></a> follow its symmetrised centers, where every center but the first was given another center's weight</li>
+<li>the <code class="language-plaintext highlighter-rouge">delta</code> of a <a href="Gaussian.html"><code class="language-plaintext highlighter-rouge">Gaussian</code></a> is the width of \(\exp(-(x-m)^2/\delta^2)\); the standard deviation is \(\delta/\sqrt{2}\)</li>
+<li>a not indexed phase can be given a colour - <code class="language-plaintext highlighter-rouge">ebsd('notIndexed').color = 'blue'</code> was refused with "There are no indexed data in this variable!"</li>
+</ul>
+</div>
 <h2 id="2">MTEX 7.0 08/2026</h2>
 <p>This is the first release developed with AI assistance. This allowed us to implement many long-standing ideas.</p>
 <p>

@@ -1,5 +1,5 @@
 ---
-title: "annotateFrame"
+title: 'annotateFrame'
 
 sidebar: function_reference_sidebar
 permalink: annotateFrame.html
@@ -24,13 +24,16 @@ To make changes, update the MATLAB code and republish this document.
 <!--introduction-->
 <!--/introduction-->
 <p>annotate a spherical plot with the axes of its reference frame</p>
-<p>Writes the axes names of the session's default specimen frame into a spherical plot - X / Y / Z, or RD / TD / ND for the rolling frame - the way pole figures have always been annotated. The <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference lets the user replace them or switch them off entirely.</p>
+<p>Writes the axes names of the reference frame the data lives in into a spherical plot - RD / TD / ND for a rolled sheet, a, b, c for a plain function living in a crystal frame. The frame reaches this function as an argument of its own, as the frame of a symmetry in the argument list, or as the <code class="language-plaintext highlighter-rouge">dataFrame</code> option that <a href="sphericalPlot.html">sphericalPlot</a> carries over from the data.</p>
+<p>A frame that names its axes the way the session frame does says nothing the session does not, and is annotated through the <code class="language-plaintext highlighter-rouge">pfAnnotations</code> preference instead - which is what lets the user replace the labels or switch them off for the whole session.</p>
 <p>A crystal symmetry in the argument list marks the plot as living in crystal coordinates, where X / Y / Z would be meaningless - there <a href="sphericalPlot.html">sphericalPlot</a> writes the Miller indices of the sector vertices instead. A crystal frame is not a crystal symmetry: a plain function living in one gets the a, b, c of that frame.</p>
 <p>On a three dimensional plot the labels are placed in space and each of them gets an arrow pointing along the direction it names, see vector3d/text.</p>
 <h2 id="3">Syntax</h2>
 {% highlight matlab %}
 h = annotateFrame(ax)
 h = annotateFrame(ax,cs)  % a crystal symmetry suppresses the labels
+h = annotateFrame(ax,ss)  % a symmetry names the frame of the data
+h = annotateFrame(ax,'dataFrame',specimenFrame.rolling)
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -51,6 +54,14 @@ h = annotateFrame(ax,cs)  % a crystal symmetry suppresses the labels
             <tt><a href="crystalSymmetry.crystalSymmetry.html">crystalSymmetry</a></tt>
          </td>
       </tr>
+      <tr>
+         <td width="100px">
+            <tt>ss</tt>
+         </td>
+         <td>
+            <tt><a href="specimenSymmetry.specimenSymmetry.html">specimenSymmetry</a></tt>
+         </td>
+      </tr>
    </table>
 </p>
 <h2 id="5">Output</h2>
@@ -69,6 +80,14 @@ h = annotateFrame(ax,cs)  % a crystal symmetry suppresses the labels
 <h2 id="6">Options</h2>
 <p>
    <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>dataFrame</tt>
+         </td>
+         <td>
+            <tt><a href="referenceFrame.referenceFrame.html">referenceFrame</a> the plotted data is expressed in</tt>
+         </td>
+      </tr>
       <tr>
          <td width="100px">
             <tt>noLabel</tt>

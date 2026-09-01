@@ -1,5 +1,5 @@
 ---
-title: "strainTensor.calcTaylor"
+title: 'strainTensor.calcTaylor'
 
 sidebar: function_reference_sidebar
 permalink: strainTensor.calcTaylor.html
@@ -28,6 +28,7 @@ To make changes, update the MATLAB code and republish this document.
 {% highlight matlab %}
 [MFun,~,spinFun] = calcTaylor(eps,sS,'SO3Fun','bandwidth',32)
 [M,b,W] = calcTaylor(eps,sS)
+work = calcTaylor(eps,sS,'plasticWork')
 {% endhighlight %}
 <h2 id="4">Input</h2>
 <p>
@@ -74,7 +75,7 @@ To make changes, update the MATLAB code and republish this document.
             <tt>M</tt>
          </td>
          <td>
-            <tt>taylor factor</tt>
+            <tt>Taylor factor</tt>
          </td>
       </tr>
       <tr>
@@ -95,7 +96,20 @@ To make changes, update the MATLAB code and republish this document.
       </tr>
    </table>
 </p>
-<h2 id="6">Example</h2>
+<h2 id="6">Options</h2>
+<p>
+   <table cellpadding="4" cellspacing="0" class="funcref" width="100%">
+      <tr>
+         <td width="100px">
+            <tt>plasticWork</tt>
+         </td>
+         <td>
+            <tt>return CRSS-weighted slip activity instead of geometric M</tt>
+         </td>
+      </tr>
+   </table>
+</p>
+<h2 id="7">Example</h2>
 <p>define 10 percent strain</p>
 {% highlight matlab %}
 eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
@@ -104,7 +118,7 @@ eps = 0.1 * strainTensor(diag([1 -0.75 -0.25]))
 {% highlight plaintext %}
 eps = strainTensor (y↓→x)
   type: Lagrange 
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-2
    10    0    0
@@ -161,7 +175,7 @@ b =
     0.1110    0.0000    0.0000
  
 W = spinTensor (crystal)
-  rank: 2 (3 x 3)
+  rank: 2 (3 × 3)
  
  *10^-3
       0 -20.77  31.63
